@@ -11,10 +11,13 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.hakkoShoriTimestamp;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.kofuShoShurui;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.lastUpdateTimestamp;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.rirekiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -211,5 +214,26 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
                         eq(hihokenshaNo, 被保険者番号)).
                 order(new OrderBy(hihokenshaNo, Order.DESC, NullsOrder.LAST)).
                 toList(DbT7037ShoKofuKaishuEntity.class);
+    }
+
+    /**
+     * 被保険者番号を取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return DbT1001HihokenshaDaichoEntity
+     * @throws 被保険者番号 被保険者番号
+     */
+    @Transaction
+    public DbT7037ShoKofuKaishuEntity selectHihokenshaNo(
+            ShikibetsuCode 識別コード) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return (DbT7037ShoKofuKaishuEntity) accessor.select().
+                table(DbT7037ShoKofuKaishu.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                order(new OrderBy(lastUpdateTimestamp, Order.DESC, NullsOrder.LAST)).
+                limit(1).
+                toObject(DbT7037ShoKofuKaishuEntity.class);
     }
 }

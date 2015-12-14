@@ -17,6 +17,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.jushochitokureiKaijoYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.jushochitokureiTekiyoJiyuCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.jushochitokureiTekiyoYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.lastUpdateTimestamp;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shikakuShutokuYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shikibetsuCode;
@@ -283,5 +284,26 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                         by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC),
                         by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者番号を取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return DbT1001HihokenshaDaichoEntity
+     * @throws 被保険者番号 被保険者番号
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity seletHihokenshaNo(
+            ShikibetsuCode 識別コード) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return (DbT1001HihokenshaDaichoEntity) accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                order(new OrderBy(lastUpdateTimestamp, Order.DESC, NullsOrder.LAST)).
+                limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
     }
 }
