@@ -9,7 +9,7 @@ and open the template in the editor.
 
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nyutaishoshakanri.INyutaishoshaKanriMapper">
 
-<!--介護保険施設情報件数を取得する-->
+<!--介護保険施設情報件数を取得します-->
     <select id="getHihokenshaDaichoCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
         SELECT  
         COUNT(*)
@@ -31,7 +31,7 @@ and open the template in the editor.
         AND      DbT1001."isDeleted" <![CDATA[<> ]]>  TRUE
     </select>
     
-    <!--適用除外施設情報件数を取得する-->
+    <!--適用除外施設情報件数を取得します-->
     <select id="getTekiyoJogaishaCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
         SELECT  
         COUNT(*)
@@ -53,7 +53,7 @@ and open the template in the editor.
         AND      DbT1002."isDeleted" <![CDATA[<> ]]> TRUE
     </select>
       
-    <!--住所地特例対象施設情報件数を取得する-->
+    <!--住所地特例対象施設情報件数を取得します-->
     <select id="getTashichosonJushochiTokureiCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
         SELECT  
         COUNT(*)
