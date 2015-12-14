@@ -22,10 +22,14 @@ public class TaShichosonJushochiTokureisyaIdoTeiseiParamter {
     
     private final List<TekiyouJouhou> 適用情報グリッド;
     
+    /**
+     * コンストラクタです。
+     * @param 識別コード 識別コード
+     * @param 適用情報グリッド 適用情報グリッド 
+     */
     public TaShichosonJushochiTokureisyaIdoTeiseiParamter(ShikibetsuCode 識別コード,
             List<TekiyouJouhou> 適用情報グリッド) {
         this.識別コード = 識別コード;
         this.適用情報グリッド = 適用情報グリッド;
     }
-    
 }
