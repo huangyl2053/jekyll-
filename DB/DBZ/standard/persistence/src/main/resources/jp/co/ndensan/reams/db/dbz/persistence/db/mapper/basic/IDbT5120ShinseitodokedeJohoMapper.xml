@@ -40,7 +40,7 @@
 
     <!--テーブルDbT5120ShinseitodokedeJohoの項目をDbT5120ShinseitodokedeJohoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT5120ShinseitodokedeJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity" autoMapping="true">
-        <!--<id property="shinseishoKanriNo" column="dbT5120ShinseitodokedeJoho_shinseishoKanriNo" />-->
+        <id property="shinseishoKanriNo" column="dbT5120ShinseitodokedeJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="insertDantaiCd" column="dbT5120ShinseitodokedeJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5120ShinseitodokedeJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT5120ShinseitodokedeJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -53,7 +53,7 @@
         <result property="shinseiTodokedeshaShimei" column="dbT5120ShinseitodokedeJoho_shinseiTodokedeshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="shinseiTodokedeshaKanaShimei" column="dbT5120ShinseitodokedeJoho_shinseiTodokedeshaKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="shinseiTodokedeshaTsuzukigaraCode" column="dbT5120ShinseitodokedeJoho_shinseiTodokedeshaTsuzukigaraCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <!--<result property="shinseiTodokedeDaikoJigyoshaNo" column="dbT5120ShinseitodokedeJoho_shinseiTodokedeDaikoJigyoshaNo" />-->
+        <result property="shinseiTodokedeDaikoJigyoshaNo" column="dbT5120ShinseitodokedeJoho_shinseiTodokedeDaikoJigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="jigyoshaKubun" column="dbT5120ShinseitodokedeJoho_jigyoshaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinseiTodokedeshaYubinNo" column="dbT5120ShinseitodokedeJoho_shinseiTodokedeshaYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="shinseiTodokedeshaJusho" column="dbT5120ShinseitodokedeJoho_shinseiTodokedeshaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>

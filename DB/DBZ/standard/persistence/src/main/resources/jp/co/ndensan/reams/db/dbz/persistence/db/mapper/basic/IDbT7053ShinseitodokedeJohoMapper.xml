@@ -44,8 +44,8 @@
 
     <!--テーブルDbT7053ShinseitodokedeJohoの項目をDbT7053ShinseitodokedeJohoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT7053ShinseitodokedeJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7053ShinseitodokedeJohoEntity" autoMapping="true">
-        <id property="shoKisaiHokenshaNo" column="dbT7053ShinseitodokedeJoho_shoKisaiHokenshaNo" />
-        <id property="hihokenshaNo" column="dbT7053ShinseitodokedeJoho_hihokenshaNo" />
+        <id property="shoKisaiHokenshaNo" column="dbT7053ShinseitodokedeJoho_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
+        <id property="hihokenshaNo" column="dbT7053ShinseitodokedeJoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="shinseiTodokedeYMD" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7053ShinseitodokedeJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT7053ShinseitodokedeJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
@@ -55,13 +55,13 @@
         <result property="updateCount" column="dbT7053ShinseitodokedeJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT7053ShinseitodokedeJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT7053ShinseitodokedeJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shinseishoKanriNo" column="dbT7053ShinseitodokedeJoho_shinseishoKanriNo" />
+        <result property="shinseishoKanriNo" column="dbT7053ShinseitodokedeJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="shinseiTodokedeShubetsuCode" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinseiTodokedeDaikoKubunCode" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeDaikoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="shinseiTodokedeshaShimei" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="shinseiTodokedeshaKanaShimei" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeshaKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="shinseiTodokedeshaTsuzukigaraCode" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeshaTsuzukigaraCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shinseiTodokedeDaikoJigyoshaNo" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeDaikoJigyoshaNo" />
+        <result property="shinseiTodokedeDaikoJigyoshaNo" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeDaikoJigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="jigyoshaKubun" column="dbT7053ShinseitodokedeJoho_jigyoshaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinseiTodokedeshaYubinNo" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeshaYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="shinseiTodokedeshaJusho" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeshaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>

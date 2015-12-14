@@ -56,7 +56,7 @@
         <result property="updateCount" column="dbT4910NinteichosaItakusakiJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT4910NinteichosaItakusakiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT4910NinteichosaItakusakiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <!--<result property="jigyoshaNo" column="dbT4910NinteichosaItakusakiJoho_jigyoshaNo" />-->
+        <result property="jigyoshaNo" column="dbT4910NinteichosaItakusakiJoho_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="jigyoshaMeisho" column="dbT4910NinteichosaItakusakiJoho_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jigyoshaMeishoKana" column="dbT4910NinteichosaItakusakiJoho_jigyoshaMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yubinNo" column="dbT4910NinteichosaItakusakiJoho_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>

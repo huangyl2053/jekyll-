@@ -57,8 +57,8 @@
 
     <!--テーブルDbT4202NinteichosahyoGaikyoChosaChildの項目をDbT4202NinteichosahyoGaikyoChosaChildEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT4202NinteichosahyoGaikyoChosaChildEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4202NinteichosahyoGaikyoChosaChildEntity" autoMapping="true">
-<!--        <id property="shinseishoKanriNo" column="dbT4202NinteichosahyoGaikyoChosaChild_shinseishoKanriNo" />
-        <id property="ninteichosaRirekiNo" column="dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaRirekiNo" />-->
+        <id property="shinseishoKanriNo" column="dbT4202NinteichosahyoGaikyoChosaChild_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="ninteichosaRirekiNo" column="dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaRirekiNo" />
         <result property="insertDantaiCd" column="dbT4202NinteichosahyoGaikyoChosaChild_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4202NinteichosahyoGaikyoChosaChild_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT4202NinteichosahyoGaikyoChosaChild_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

@@ -52,8 +52,8 @@
         <result property="shikibetsuCodeSochiMoto" column="dbT7033GappeiNaiJutokushaShinKyuNoHenkan_shikibetsuCodeSochiMoto" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="shichosonCode" column="dbT7033GappeiNaiJutokushaShinKyuNoHenkan_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="shichosonCodeSochiMoto" column="dbT7033GappeiNaiJutokushaShinKyuNoHenkan_shichosonCodeSochiMoto" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <result property="hihokenshaNo" column="dbT7033GappeiNaiJutokushaShinKyuNoHenkan_hihokenshaNo" />
-        <result property="hihokenshaNoSochiMoto" column="dbT7033GappeiNaiJutokushaShinKyuNoHenkan_hihokenshaNoSochiMoto" />
+        <result property="hihokenshaNo" column="dbT7033GappeiNaiJutokushaShinKyuNoHenkan_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="hihokenshaNoSochiMoto" column="dbT7033GappeiNaiJutokushaShinKyuNoHenkan_hihokenshaNoSochiMoto" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="kaishiYMD" column="dbT7033GappeiNaiJutokushaShinKyuNoHenkan_kaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shuryoYMD" column="dbT7033GappeiNaiJutokushaShinKyuNoHenkan_shuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>

@@ -40,7 +40,7 @@
     <!--テーブルDbT4205NinteichosahyoTokkijikoChildの項目をDbT4205NinteichosahyoTokkijikoChildEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT4205NinteichosahyoTokkijikoChildEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4205NinteichosahyoTokkijikoChildEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT4205NinteichosahyoTokkijikoChild_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <!--<id property="ninteichosaRirekiNo" column="dbT4205NinteichosahyoTokkijikoChild_ninteichosaRirekiNo" />-->
+        <id property="ninteichosaRirekiNo" column="dbT4205NinteichosahyoTokkijikoChild_ninteichosaRirekiNo" />
         <id property="ninteichosaTokkijikoNo" column="dbT4205NinteichosahyoTokkijikoChild_ninteichosaTokkijikoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="ninteichosaTokkijikoRenban" column="dbT4205NinteichosahyoTokkijikoChild_ninteichosaTokkijikoRenban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="tokkijikoTextImageKubun" column="dbT4205NinteichosahyoTokkijikoChild_tokkijikoTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

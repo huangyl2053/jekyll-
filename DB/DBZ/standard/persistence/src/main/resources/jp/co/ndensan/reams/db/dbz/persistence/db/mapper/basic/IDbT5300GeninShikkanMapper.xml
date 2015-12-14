@@ -34,7 +34,7 @@
 
     <!--テーブルDbT5300GeninShikkanの項目をDbT5300GeninShikkanEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT5300GeninShikkanEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5300GeninShikkanEntity" autoMapping="true">
-        <id property="shinseishoKanriNo" column="dbT5300GeninShikkan_shinseishoKanriNo" />
+        <id property="shinseishoKanriNo" column="dbT5300GeninShikkan_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id property="remban" column="dbT5300GeninShikkan_remban" />
         <result property="insertDantaiCd" column="dbT5300GeninShikkan_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5300GeninShikkan_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>

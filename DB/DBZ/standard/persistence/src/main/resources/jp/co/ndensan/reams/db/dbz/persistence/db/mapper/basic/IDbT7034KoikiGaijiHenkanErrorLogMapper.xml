@@ -71,7 +71,7 @@
         <result property="jukiShikibetsuCode" column="dbT7034KoikiGaijiHenkanErrorLog_jukiShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="kakuninKubun" column="dbT7034KoikiGaijiHenkanErrorLog_kakuninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shikibetsuCode" column="dbT7034KoikiGaijiHenkanErrorLog_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="hihokenshaNo" column="dbT7034KoikiGaijiHenkanErrorLog_hihokenshaNo" />
+        <result property="hihokenshaNo" column="dbT7034KoikiGaijiHenkanErrorLog_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="recoadNo" column="dbT7034KoikiGaijiHenkanErrorLog_recoadNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="errorKomokuMeisho" column="dbT7034KoikiGaijiHenkanErrorLog_errorKomokuMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="errorKomokuNo" column="dbT7034KoikiGaijiHenkanErrorLog_errorKomokuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

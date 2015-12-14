@@ -45,7 +45,7 @@
         <result property="lastUpdateTimestamp" column="dbT7005RojinHokenJukyushaJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT7005RojinHokenJukyushaJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonCode" column="dbT7005RojinHokenJukyushaJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <result property="hihokenshaNo" column="dbT7005RojinHokenJukyushaJoho_hihokenshaNo" />
+        <result property="hihokenshaNo" column="dbT7005RojinHokenJukyushaJoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="rojinHokenShichosonCode" column="dbT7005RojinHokenJukyushaJoho_rojinHokenShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="rojinHokenJukyushaNo" column="dbT7005RojinHokenJukyushaJoho_rojinHokenJukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>

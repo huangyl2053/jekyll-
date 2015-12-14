@@ -40,9 +40,9 @@
 
     <!--テーブルDbT7003BemmeishaJohoの項目をDbT7003BemmeishaJohoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT7003BemmeishaJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity" autoMapping="true">
-        <id property="shoKisaiHokenshaNo" column="dbT7003BemmeishaJoho_shoKisaiHokenshaNo" />
+        <id property="shoKisaiHokenshaNo" column="dbT7003BemmeishaJoho_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
         <id property="shikibetsuCode" column="dbT7003BemmeishaJoho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <id property="genshobunHihokenshaNo" column="dbT7003BemmeishaJoho_genshobunHihokenshaNo" />
+        <id property="genshobunHihokenshaNo" column="dbT7003BemmeishaJoho_genshobunHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="shinsaseikyuTodokedeYMD" column="dbT7003BemmeishaJoho_shinsaseikyuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <id property="bemmeishoSakuseiYMD" column="dbT7003BemmeishaJoho_bemmeishoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <id property="bemmeishaEdaban" column="dbT7003BemmeishaJoho_bemmeishaEdaban" />

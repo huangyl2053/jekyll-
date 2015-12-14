@@ -34,7 +34,7 @@
 
     <!--テーブルDbT7028KakushuShinKyuNoHenkanの項目をDbT7028KakushuShinKyuNoHenkanEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT7028KakushuShinKyuNoHenkanEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7028KakushuShinKyuNoHenkanEntity" autoMapping="true">
-        <id property="hihokenshaNo" column="dbT7028KakushuShinKyuNoHenkan_hihokenshaNo" />
+        <id property="hihokenshaNo" column="dbT7028KakushuShinKyuNoHenkan_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="noKubun" column="dbT7028KakushuShinKyuNoHenkan_noKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="kyuNo" column="dbT7028KakushuShinKyuNoHenkan_kyuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7028KakushuShinKyuNoHenkan_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

@@ -34,8 +34,8 @@
 
     <!--テーブルDbT7054KanrenHihokenshaNoの項目をDbT7054KanrenHihokenshaNoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT7054KanrenHihokenshaNoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7054KanrenHihokenshaNoEntity" autoMapping="true">
-        <id property="shoKisaiHokenshaNo" column="dbT7054KanrenHihokenshaNo_shoKisaiHokenshaNo" />
-        <id property="saishinHihokenshaNo" column="dbT7054KanrenHihokenshaNo_saishinHihokenshaNo" />
+        <id property="shoKisaiHokenshaNo" column="dbT7054KanrenHihokenshaNo_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
+        <id property="saishinHihokenshaNo" column="dbT7054KanrenHihokenshaNo_saishinHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7054KanrenHihokenshaNo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT7054KanrenHihokenshaNo_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT7054KanrenHihokenshaNo_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -44,7 +44,7 @@
         <result property="updateCount" column="dbT7054KanrenHihokenshaNo_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT7054KanrenHihokenshaNo_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT7054KanrenHihokenshaNo_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kyuuHihokenshaNo" column="dbT7054KanrenHihokenshaNo_kyuuHihokenshaNo" />
+        <result property="kyuuHihokenshaNo" column="dbT7054KanrenHihokenshaNo_kyuuHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="shikibetsuCode" column="dbT7054KanrenHihokenshaNo_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
     </resultMap>
     

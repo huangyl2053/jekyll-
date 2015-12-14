@@ -32,7 +32,7 @@
 
     <!--テーブルDbT4121ShinseiRirekiJohoの項目をDbT4121ShinseiRirekiJohoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT4121ShinseiRirekiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4121ShinseiRirekiJohoEntity" autoMapping="true">
-        <!--<id property="shinseishoKanriNo" column="dbT4121ShinseiRirekiJoho_shinseishoKanriNo" />-->
+        <id property="shinseishoKanriNo" column="dbT4121ShinseiRirekiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="insertDantaiCd" column="dbT4121ShinseiRirekiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4121ShinseiRirekiJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT4121ShinseiRirekiJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -41,7 +41,7 @@
         <result property="updateCount" column="dbT4121ShinseiRirekiJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT4121ShinseiRirekiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT4121ShinseiRirekiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <!--<result property="zenkaiShinseishoKanriNo" column="dbT4121ShinseiRirekiJoho_zenkaiShinseishoKanriNo" />-->
+        <result property="zenkaiShinseishoKanriNo" column="dbT4121ShinseiRirekiJoho_zenkaiShinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
     </resultMap>
     
         <select id="getEntity" resultMap="ResultMap_DbT4121ShinseiRirekiJohoEntity">

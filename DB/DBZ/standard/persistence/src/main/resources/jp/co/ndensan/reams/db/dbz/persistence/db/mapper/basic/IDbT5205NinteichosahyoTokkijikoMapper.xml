@@ -39,7 +39,7 @@
 
     <!--テーブルDbT5205NinteichosahyoTokkijikoの項目をDbT5205NinteichosahyoTokkijikoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT5205NinteichosahyoTokkijikoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity" autoMapping="true">
-        <id property="shinseishoKanriNo" column="dbT5205NinteichosahyoTokkijiko_shinseishoKanriNo" />
+        <id property="shinseishoKanriNo" column="dbT5205NinteichosahyoTokkijiko_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id property="ninteichosaRirekiNo" column="dbT5205NinteichosahyoTokkijiko_ninteichosaRirekiNo" />
         <id property="ninteichosaTokkijikoNo" column="dbT5205NinteichosahyoTokkijiko_ninteichosaTokkijikoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="ninteichosaTokkijikoRenban" column="dbT5205NinteichosahyoTokkijiko_ninteichosaTokkijikoRenban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

@@ -34,8 +34,8 @@
 
     <!--テーブルDbT4115Imageの項目をDbT4115ImageEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT4115ImageEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4115ImageEntity" autoMapping="true">
-        <!--<id property="shinseishoKanriNo" column="dbT4115Image_shinseishoKanriNo" />-->
-        <!--<id property="torikomiPageNo" column="dbT4115Image_torikomiPageNo" />-->
+        <id property="shinseishoKanriNo" column="dbT4115Image_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="torikomiPageNo" column="dbT4115Image_torikomiPageNo" />
         <id property="genponMaskKubun" column="dbT4115Image_genponMaskKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="insertDantaiCd" column="dbT4115Image_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4115Image_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>

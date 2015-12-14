@@ -36,7 +36,7 @@
 
     <!--テーブルDbT7014KaigoSetaiの項目をDbT7014KaigoSetaiEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT7014KaigoSetaiEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7014KaigoSetaiEntity" autoMapping="true">
-        <id property="hihokenshaNo" column="dbT7014KaigoSetai_hihokenshaNo" />
+        <id property="hihokenshaNo" column="dbT7014KaigoSetai_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="kanriShikibetsuKubun" column="dbT7014KaigoSetai_kanriShikibetsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="setaiHaakuKijunYMD" column="dbT7014KaigoSetai_setaiHaakuKijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <id property="setaiInkanriRenban" column="dbT7014KaigoSetai_setaiInkanriRenban" />

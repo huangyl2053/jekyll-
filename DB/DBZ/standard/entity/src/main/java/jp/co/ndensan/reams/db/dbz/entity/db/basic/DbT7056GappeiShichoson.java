@@ -1,11 +1,11 @@
-package jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei;
+package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 合併情報テーブルの項目定義クラスです。
+ * 合併市町村テーブルの項目定義クラスです。
  */
-public enum DbT7055GappeiJoho implements IColumnDefinition {
+public enum DbT7056GappeiShichoson implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     /**
@@ -49,32 +49,60 @@ public enum DbT7055GappeiJoho implements IColumnDefinition {
      */
     chiikiNo(2, 0),
     /**
-     * 市町村コード
+     * 旧市町村コード
      */
-    shichosonCode(2147483647, 0),
+    kyuShichosonCode(2147483647, 0),
     /**
-     * 合併種類
-     * <br/>1:対等合併 2:吸収合併
+     * 運用開始年月日
      */
-    gappeiShurui(1, 0),
+    unyoKaishiYMD(2147483647, 0),
     /**
-     * 保険者番号
+     * 運用終了年月日
      */
-    hokenshaNo(2147483647, 0),
+    unyoShuryoYMD(2147483647, 0),
     /**
-     * 旧市町村情報付与終了年月日
-     * <br/>旧市町村情報を合併日以降、いつまで管理するかを設定
+     * 旧保険者番号
      */
-    kyuJohoFuyoToYMD(2147483647, 0),
+    kyuHokenshaNo(2147483647, 0),
     /**
-     * 国保連データ連携開始年月日
+     * 旧市町村名称
      */
-    kokuhorenDataFromYMD(2147483647, 0);
+    kyuShichosonMeisho(10, 0),
+    /**
+     * 都道府県名称
+     */
+    todofukenMeisho(4, 0),
+    /**
+     * 郡名称
+     */
+    gunMeisho(8, 0),
+    /**
+     * 郵便番号
+     */
+    yubinNo(2147483647, 0),
+    /**
+     * 電話番号
+     */
+    telNo(2147483647, 0),
+    /**
+     * 老人保健市町村番号
+     */
+    rojinhokenShichosonNo(8, 0),
+    /**
+     * 老人保健受給者番号体系
+     * <br/>1:住民コード 2:医療給付サブシステム 3:市町村独自
+     */
+    rokenJukyushaNoTaikei(1, 0),
+    /**
+     * 表示有無
+     * <br/>1:表示対象とする 0:表示対象としない
+     */
+    hyojiUmu(1, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT7055GappeiJoho(int maxLength, int scale) {
+    private DbT7056GappeiShichoson(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

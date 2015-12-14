@@ -41,7 +41,7 @@
         <result property="updateCount" column="dbT7050KaigoHokensha_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT7050KaigoHokensha_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT7050KaigoHokensha_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="koikiHokenshaNo" column="dbT7050KaigoHokensha_koikiHokenshaNo" />
+        <result property="koikiHokenshaNo" column="dbT7050KaigoHokensha_koikiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
     </resultMap>
     
         <select id="getEntity" resultMap="ResultMap_DbT7050KaigoHokenshaEntity">

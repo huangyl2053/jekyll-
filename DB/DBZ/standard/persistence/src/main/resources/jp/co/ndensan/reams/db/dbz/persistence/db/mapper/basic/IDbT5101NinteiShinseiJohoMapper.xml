@@ -106,7 +106,7 @@
 
     <!--テーブルDbT5101NinteiShinseiJohoの項目をDbT5101NinteiShinseiJohoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT5101NinteiShinseiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity" autoMapping="true">
-        <!--<id property="shinseishoKanriNo" column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" />-->
+        <id property="shinseishoKanriNo" column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="insertDantaiCd" column="dbT5101NinteiShinseiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5101NinteiShinseiJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT5101NinteiShinseiJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

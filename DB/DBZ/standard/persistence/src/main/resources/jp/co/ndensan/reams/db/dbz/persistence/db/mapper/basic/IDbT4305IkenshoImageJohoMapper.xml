@@ -37,7 +37,7 @@
 
     <!--テーブルDbT4305IkenshoImageJohoの項目をDbT4305IkenshoImageJohoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT4305IkenshoImageJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4305IkenshoImageJohoEntity" autoMapping="true">
-        <!--<id property="shinseishoKanriNo" column="dbT4305IkenshoImageJoho_shinseishoKanriNo" />-->
+        <id property="shinseishoKanriNo" column="dbT4305IkenshoImageJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id property="iraiRirekiNo" column="dbT4305IkenshoImageJoho_iraiRirekiNo" />
         <id property="ChoyoID" column="dbT4305IkenshoImageJoho_ChoyoID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <id property="maskDataKubun" column="dbT4305IkenshoImageJoho_maskDataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

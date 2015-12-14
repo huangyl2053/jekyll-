@@ -6,11 +6,11 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7055GappeiJoho;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7055GappeiJoho.chiikiNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7055GappeiJoho.gappeiYMD;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7055GappeiJoho.shichosonCode;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7055GappeiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho.chiikiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho.gappeiYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho.shichosonCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;

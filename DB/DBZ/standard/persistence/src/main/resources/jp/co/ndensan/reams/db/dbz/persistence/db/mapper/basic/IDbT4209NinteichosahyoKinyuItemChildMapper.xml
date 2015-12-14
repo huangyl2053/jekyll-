@@ -36,7 +36,7 @@
 
     <!--テーブルDbT4209NinteichosahyoKinyuItemChildの項目をDbT4209NinteichosahyoKinyuItemChildEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT4209NinteichosahyoKinyuItemChildEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4209NinteichosahyoKinyuItemChildEntity" autoMapping="true">
-        <!--<id property="shinseishoKanriNo" column="dbT4209NinteichosahyoKinyuItemChild_shinseishoKanriNo" />-->
+        <id property="shinseishoKanriNo" column="dbT4209NinteichosahyoKinyuItemChild_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id property="ninteichosaRirekiNo" column="dbT4209NinteichosahyoKinyuItemChild_ninteichosaRirekiNo" />
         <id property="remban" column="dbT4209NinteichosahyoKinyuItemChild_remban" />
         <result property="insertDantaiCd" column="dbT4209NinteichosahyoKinyuItemChild_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

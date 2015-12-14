@@ -51,7 +51,7 @@
 
     <!--テーブルDbT4301ShujiiIkenshoIraiJohoの項目をDbT4301ShujiiIkenshoIraiJohoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT4301ShujiiIkenshoIraiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4301ShujiiIkenshoIraiJohoEntity" autoMapping="true">
-        <!--<id property="shinseishoKanriNo" column="dbT4301ShujiiIkenshoIraiJoho_shinseishoKanriNo" />-->
+        <id property="shinseishoKanriNo" column="dbT4301ShujiiIkenshoIraiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id property="ikenshoIraiRirekiNo" column="dbT4301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo" />
         <result property="insertDantaiCd" column="dbT4301ShujiiIkenshoIraiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4301ShujiiIkenshoIraiJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
