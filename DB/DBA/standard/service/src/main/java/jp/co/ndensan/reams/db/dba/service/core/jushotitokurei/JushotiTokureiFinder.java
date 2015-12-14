@@ -41,10 +41,10 @@ public class JushotiTokureiFinder {
      * @return List<DbT1001HihokenshaDaichoEntity> 住所地特例一覧
      */
     public List<JushotiTokureiBusiness> getJushotiTokureiJoho(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日) {
-        List<DbT1001HihokenshaDaichoEntity> jushotiTokurei = new ArrayList<>();
-        if (!被保険者番号.isEmpty()) {
+        List<DbT1001HihokenshaDaichoEntity> jushotiTokurei;
+        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
             jushotiTokurei = dbT1001HihokenshaDaichoDac.selectListHihokenshaNo(被保険者番号, 取得日);
-        } else if (被保険者番号.isEmpty()) {
+        } else {
             jushotiTokurei = dbT1001HihokenshaDaichoDac.selectListShikibetsuCode(識別コード, 取得日);
         }
         if (jushotiTokurei == null || jushotiTokurei.isEmpty()) {
