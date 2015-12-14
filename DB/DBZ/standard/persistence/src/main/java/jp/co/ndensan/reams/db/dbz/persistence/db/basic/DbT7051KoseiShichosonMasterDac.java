@@ -246,7 +246,6 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
     /**
      * 所在保険者リスト情報取得。
      *
-     * @param systemDate システム年月日
      * @return List<DbT7051KoseiShichosonMasterEntity> 市町村コードによる市町村Entityのリスト
      */
     @Transaction
