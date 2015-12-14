@@ -35,8 +35,8 @@ public class KoseiShichosonMasterMapperParameterTest extends DbzTestBase {
         public void 引数にNull以外を指定すると_パラメータが生成できる() {
             KoseiShichosonMasterMapperParameter sut = KoseiShichosonMasterMapperParameter.createSelectByKeyParam(shichonCode, usesshichonCode);
 
-            assertThat(sut.getShichonCode(), is(shichonCode));
-            assertThat(sut.isUsesshichonCode(), is(true));
+            assertThat(sut.getshichonCode(), is(shichonCode));
+            assertThat(sut.isusesshichonCode(), is(true));
         }
     }
 

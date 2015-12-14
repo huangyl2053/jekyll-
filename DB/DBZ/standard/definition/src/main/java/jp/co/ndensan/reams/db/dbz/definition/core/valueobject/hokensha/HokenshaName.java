@@ -16,14 +16,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class HokenshaName implements IValueObject<RString>, Comparable<HokenshaName> {
 
-    private static final int twenty = 20;
+    private static final int TWENTY = 20;
     /**
      * 最大長です。
      */
     public static final int MAX_LENGTH;
 
     static {
-        MAX_LENGTH = 20;
+        MAX_LENGTH = TWENTY;
     }
 
     private final RString theValue;

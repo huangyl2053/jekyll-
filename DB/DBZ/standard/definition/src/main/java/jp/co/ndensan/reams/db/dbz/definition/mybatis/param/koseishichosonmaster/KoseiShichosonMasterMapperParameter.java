@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
  * 構成市町村マスタを特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class KoseiShichosonMasterMapperParameter {
+public final class KoseiShichosonMasterMapperParameter {
 
     private final LasdecCode shichonCode;
 
@@ -46,4 +46,21 @@ public class KoseiShichosonMasterMapperParameter {
         return new KoseiShichosonMasterMapperParameter(shichonCode, usesshichonCode);
     }
 
+    /**
+     * getshichonCode
+     *
+     * @return shichonCode
+     */
+    public LasdecCode getshichonCode() {
+        return shichonCode;
+    }
+
+    /**
+     * getusesshichonCode
+     *
+     * @return shichonCode
+     */
+    public boolean isusesshichonCode() {
+        return usesshichonCode;
+    }
 }

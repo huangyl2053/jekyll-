@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 合併情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class GappeiJohoMapperParameter {
+public final class GappeiJohoMapperParameter {
 
     private final FlexibleDate gappeiYMD;
     private final RString chiikiNo;
@@ -48,6 +48,24 @@ public class GappeiJohoMapperParameter {
             FlexibleDate gappeiYMD,
             RString chiikiNo) {
         return new GappeiJohoMapperParameter(gappeiYMD, chiikiNo);
+    }
+
+    /**
+     * getgappeiYMD
+     *
+     * @return gappeiYMD
+     */
+    public FlexibleDate getgappeiYMD() {
+        return gappeiYMD;
+    }
+
+    /**
+     * getchiikiNo
+     *
+     * @return chiikiNo
+     */
+    public RString getchiikiNo() {
+        return chiikiNo;
     }
 
 }

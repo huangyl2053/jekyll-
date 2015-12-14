@@ -39,8 +39,8 @@ public class GappeiJohoMapperParameterTest extends DbzTestBase {
         public void 引数にNull以外を指定すると_パラメータが生成できる() {
             GappeiJohoMapperParameter sut = GappeiJohoMapperParameter.createSelectByKeyParam(gappeiYMD, chiikiNo);
 
-            assertThat(sut.getGappeiYMD(), is(gappeiYMD));
-            assertThat(sut.getChiikiNo(), is(chiikiNo));
+            assertThat(sut.getgappeiYMD(), is(gappeiYMD));
+            assertThat(sut.getchiikiNo(), is(chiikiNo));
         }
     }
 
