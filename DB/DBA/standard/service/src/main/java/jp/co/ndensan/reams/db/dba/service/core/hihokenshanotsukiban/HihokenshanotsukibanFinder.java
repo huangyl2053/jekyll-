@@ -67,15 +67,15 @@ public class HihokenshanotsukibanFinder {
     ) {
         HihokenshaNo 被保険者番号;
 
-        DbT1001HihokenshaDaichoEntity entity = dbT1001Dac.seletHihokenshaNo(識別コード);
-        if (entity == null) {
-            DbT7037ShoKofuKaishuEntity entitys = dbT7037Dac.selectHihokenshaNo(識別コード);
-            if (entitys == null) {
+        DbT1001HihokenshaDaichoEntity entityDbT1001 = dbT1001Dac.seletHihokenshaNo(識別コード);
+        if (entityDbT1001 == null) {
+            DbT7037ShoKofuKaishuEntity entityDbT7037 = dbT7037Dac.selectHihokenshaNo(識別コード);
+            if (entityDbT7037 == null) {
                 被保険者番号 = HihokenshanotsukibanFinder.getHubanHouhou(識別コード);
             }
-            被保険者番号 = entitys.getHihokenshaNo();
+            被保険者番号 = entityDbT7037.getHihokenshaNo();
         }
-        被保険者番号 = entity.getHihokenshaNo();
+        被保険者番号 = entityDbT1001.getHihokenshaNo();
         if (被保険者番号.getColumnValue().length() != 10) {
 
 //            throw new ApplicationException(
