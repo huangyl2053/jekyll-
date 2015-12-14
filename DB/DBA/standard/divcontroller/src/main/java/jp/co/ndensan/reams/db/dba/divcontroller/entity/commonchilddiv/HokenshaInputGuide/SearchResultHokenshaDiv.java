@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.HokenshaI
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -24,8 +23,6 @@ public class SearchResultHokenshaDiv extends Panel {
      */
     @JsonProperty("dgSearchResultHokensha")
     private DataGrid<dgSearchResultHokensha_Row> dgSearchResultHokensha;
-    @JsonProperty("HokenshaModel")
-    private RString HokenshaModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -49,24 +46,6 @@ public class SearchResultHokenshaDiv extends Panel {
     @JsonProperty("dgSearchResultHokensha")
     public void setDgSearchResultHokensha(DataGrid<dgSearchResultHokensha_Row> dgSearchResultHokensha) {
         this.dgSearchResultHokensha = dgSearchResultHokensha;
-    }
-
-    /*
-     * getHokenshaModel
-     * @return HokenshaModel
-     */
-    @JsonProperty("HokenshaModel")
-    public RString getHokenshaModel() {
-        return HokenshaModel;
-    }
-
-    /*
-     * setHokenshaModel
-     * @param HokenshaModel HokenshaModel
-     */
-    @JsonProperty("HokenshaModel")
-    public void setHokenshaModel(RString HokenshaModel) {
-        this.HokenshaModel = HokenshaModel;
     }
 
     // </editor-fold>

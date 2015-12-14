@@ -34,8 +34,6 @@ public class HokenshaInputGuideDiv extends Panel implements IHokenshaInputGuideD
     private RString hokenshaNo;
     @JsonProperty("hokenshaMeisho")
     private RString hokenshaMeisho;
-    @JsonProperty("HokenshaModel")
-    private RString HokenshaModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -149,24 +147,6 @@ public class HokenshaInputGuideDiv extends Panel implements IHokenshaInputGuideD
     @JsonProperty("hokenshaMeisho")
     public void setHokenshaMeisho(RString hokenshaMeisho) {
         this.hokenshaMeisho = hokenshaMeisho;
-    }
-
-    /*
-     * getHokenshaModel
-     * @return HokenshaModel
-     */
-    @JsonProperty("HokenshaModel")
-    public RString getHokenshaModel() {
-        return HokenshaModel;
-    }
-
-    /*
-     * setHokenshaModel
-     * @param HokenshaModel HokenshaModel
-     */
-    @JsonProperty("HokenshaModel")
-    public void setHokenshaModel(RString HokenshaModel) {
-        this.HokenshaModel = HokenshaModel;
     }
 
     // </editor-fold>

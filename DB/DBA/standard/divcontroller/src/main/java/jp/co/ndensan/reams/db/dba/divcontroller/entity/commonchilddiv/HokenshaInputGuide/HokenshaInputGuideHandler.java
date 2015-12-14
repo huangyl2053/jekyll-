@@ -9,16 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hokensha.Hokensha;
 import jp.co.ndensan.reams.db.dba.business.core.hokensha.KenCodeJigyoshaInputGuide;
-import jp.co.ndensan.reams.db.dba.business.core.hokensha.HokenshaModel;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hokensha.HokenshaMapperParameter;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.HokenshaJoho.HokenshaJohoDiv;
 import jp.co.ndensan.reams.db.dba.service.core.hokensha.HokenshaNyuryokuHojoFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  *
@@ -33,14 +29,10 @@ public class HokenshaInputGuideHandler {
         this.div = div;
     }
 
-    public ResponseData<HokenshaJohoDiv> on保険者検索(HokenshaInputGuideDiv div) {
-        ResponseData<HokenshaJohoDiv> responseData = new ResponseData<>();
-//        HokenshaModel serviceType = DataPassingConverter.deserialize(div.getHokenshaModel(), HokenshaModel.class);
+    public void on保険者検索(HokenshaInputGuideDiv div) {
         if (div.getHokenshaNo().isEmpty()) {
             Association association = AssociationFinderFactory.createInstance().getAssociation();
-            kenCode = new RString(association.get地方公共団体コード().toString());
-            kenCode = association.get市町村名();
-            kenCode = new RString("11");
+            kenCode = new RString(association.get地方公共団体コード().toString().substring(0, 2));
         } else {
             kenCode = new RString(div.getHokenshaNo().toString().substring(0, 2));
         }
@@ -54,24 +46,18 @@ public class HokenshaInputGuideHandler {
             DataSource.setValue(guide.get都道府県名());
             list.add(DataSource);
         }
-        return responseData;
+        div.getDdlHokenshaKenCode().setDataSource(list);
     }
 
-    public ResponseData<HokenshaJohoDiv> on保険者を表示する(HokenshaInputGuideDiv div) {
-        ResponseData<HokenshaJohoDiv> responseData = new ResponseData<>();
+    public void on保険者を表示する(HokenshaInputGuideDiv div) {
         kenCode = div.getDdlHokenshaKenCode().getSelectedKey();
         set保険者(div, kenCode);
-        return responseData;
     }
 
-    public ResponseData<HokenshaJohoDiv> on選択(HokenshaInputGuideDiv div) {
-        ResponseData<HokenshaJohoDiv> responseData = new ResponseData<>();
+    public void on選択(HokenshaInputGuideDiv div) {
         dgSearchResultHokensha_Row row = div.getSearchResultHokensha().getDgSearchResultHokensha().getActiveRow();
-        HokenshaModel serviceType = new HokenshaModel();
-        serviceType.set保険者コード(row.getHokenshaNo());
-        serviceType.set保険者名(row.getHokenshaMeisho());
-        div.setHokenshaModel(DataPassingConverter.serialize(serviceType));
-        return responseData;
+        div.setHokenshaMeisho(row.getHokenshaMeisho());
+        div.setHokenshaNo(row.getHokenshaNo());
     }
 
     private void set保険者(HokenshaInputGuideDiv div, RString kenCode) {
@@ -81,8 +67,9 @@ public class HokenshaInputGuideHandler {
         for (Hokensha guide : hokenjaList) {
             dgSearchResultHokensha_Row row = new dgSearchResultHokensha_Row();
             row.setHokenshaMeisho(guide.get保険者名());
+            //TODO 李　HokenjaNoTypeHandlerが存在しない。　2015/12/25
             row.setHokenshaNo(new RString("111111"));
-            row.setHokensha(new RString("111111"));
+            row.setHokensha(guide.get保険者名());
             list.add(row);
         }
         div.getSearchResultHokensha().getDgSearchResultHokensha().setDataSource(list);

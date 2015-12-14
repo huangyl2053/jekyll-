@@ -80,10 +80,10 @@
         WHERE
             HihokenshaDaicho."logicalDeletedFlag" = FALSE
             AND HihokenshaDaicho2.rank_number = 1
-        <if test="hihokenshaNoTflg">
+        <if test="isHihokenshaNoAri">
             AND HihokenshaDaicho."hihokenshaNo" = #{hihokenshaNo}
         </if>
-        <if test="hihokenshaNoFflg">
+        <if test="isHihokenshaNoNasi">
             AND HihokenshaDaicho."shikibetsuCode" = #{shikibetsuCode}
         </if>
     </select>
@@ -124,10 +124,10 @@
             rgdb."DbT1001HihokenshaDaicho" AS HihokenshaDaicho
         WHERE
             HihokenshaDaicho."logicalDeletedFlag" = FALSE
-        <if test="hihokenshaNoTflg">
+        <if test="isHihokenshaNoAri">
             AND HihokenshaDaicho."hihokenshaNo" = #{hihokenshaNo}
         </if>
-        <if test="hihokenshaNoFflg">
+        <if test="isHihokenshaNoNasi">
             AND HihokenshaDaicho."shikibetsuCode" = #{shikibetsuCode}
         </if>
         ORDER BY

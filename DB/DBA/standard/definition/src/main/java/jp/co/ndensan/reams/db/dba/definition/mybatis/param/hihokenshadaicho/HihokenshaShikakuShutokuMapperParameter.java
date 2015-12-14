@@ -19,8 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class HihokenshaShikakuShutokuMapperParameter {
 
     private final HihokenshaNo hihokenshaNo;
-    private final boolean hihokenshaNoTflg;
-    private final boolean hihokenshaNoFflg;
+    private final boolean isHihokenshaNoAri;
+    private final boolean isHihokenshaNoNasi;
     private final FlexibleDate idoYMD;
     private final RString edaNo;
     private final ShikibetsuCode shikibetsuCode;
@@ -35,15 +35,15 @@ public final class HihokenshaShikakuShutokuMapperParameter {
      */
     private HihokenshaShikakuShutokuMapperParameter(
             HihokenshaNo hihokenshaNo,
-            boolean hihokenshaNoTflg,
-            boolean hihokenshaNoFflg,
+            boolean isHihokenshaNoAri,
+            boolean isHihokenshaNoNasi,
             ShikibetsuCode shikibetsuCode,
             FlexibleDate idoYMD,
             RString edaNo
     ) {
         this.hihokenshaNo = requireNonNull(hihokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        this.hihokenshaNoTflg = requireNonNull(hihokenshaNoTflg, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号ある"));
-        this.hihokenshaNoFflg = requireNonNull(hihokenshaNoFflg, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号なし"));
+        this.isHihokenshaNoAri = requireNonNull(isHihokenshaNoAri, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号ある"));
+        this.isHihokenshaNoNasi = requireNonNull(isHihokenshaNoNasi, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号なし"));
         this.shikibetsuCode = requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         this.idoYMD = requireNonNull(idoYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         this.edaNo = requireNonNull(edaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
@@ -86,9 +86,9 @@ public final class HihokenshaShikakuShutokuMapperParameter {
      *
      * @param hihokenshaNo 被保険者番号
      * @param shikibetsuCode 識別コード
-     * @return 被保険者台帳管理（資格取得）情報検索パラメータ
+     * @return 被保険者台帳管理（資格取得）被保険者台帳管理のパラメータ
      */
-    public static HihokenshaShikakuShutokuMapperParameter createHokenjaNoParam(
+    public static HihokenshaShikakuShutokuMapperParameter createParam_HokenshaDaicho(//19
             HihokenshaNo hihokenshaNo,
             ShikibetsuCode shikibetsuCode) {
         return createParam_common(
@@ -104,9 +104,9 @@ public final class HihokenshaShikakuShutokuMapperParameter {
      *
      * @param hihokenshaNo 被保険者番号
      * @param idoYMD 異動日
-     * @return 最大枝番を取得検索パラメータ
+     * @return 被保険者台帳管理のパラメータ
      */
-    public static HihokenshaShikakuShutokuMapperParameter createHokenjaNoParam(
+    public static HihokenshaShikakuShutokuMapperParameter createParam_HokenshaEdaban(
             HihokenshaNo hihokenshaNo,
             FlexibleDate idoYMD) {
         return createParam_common(
@@ -150,7 +150,7 @@ public final class HihokenshaShikakuShutokuMapperParameter {
      * @return 被保険者番号ありフラグ
      */
     public boolean isHihokenshaNoTflg() {
-        return hihokenshaNoTflg;
+        return isHihokenshaNoAri;
     }
 
     /**
@@ -159,7 +159,7 @@ public final class HihokenshaShikakuShutokuMapperParameter {
      * @return 被保険者番号なしフラグ
      */
     public boolean isHihokenshaNoFflg() {
-        return hihokenshaNoFflg;
+        return isHihokenshaNoNasi;
     }
 
     /**

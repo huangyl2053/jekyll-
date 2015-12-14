@@ -19,14 +19,14 @@ public interface HihokenshaShikakuShutokuMapper {
      * 被保険者台帳管理（資格取得）情報を取得します。
      *
      * @param parameter 被保険者台帳管理（資格取得）検索条件
-     * @return DbT1001HihokenshaDaichoEntity
+     * @return List<DbT1001HihokenshaDaichoEntity> 被保険者台帳管理テーブルのエンティティリスト
      */
     List<DbT1001HihokenshaDaichoEntity> getHihokenshaShutokuJyoho(HihokenshaShikakuShutokuMapperParameter parameter);
 
     /**
      * 最大枝番を取得します。
      *
-     * @param parameter 最大枝番を取得検索条件
+     * @param parameter 被保険者台帳管理のパラメータ
      * @return DbT1001HihokenshaDaichoEntity
      */
     DbT1001HihokenshaDaichoEntity getSaidaiEdaban(HihokenshaShikakuShutokuMapperParameter parameter);
@@ -34,7 +34,7 @@ public interface HihokenshaShikakuShutokuMapper {
     /**
      * 最新データ情報を取得します。
      *
-     * @param parameter 最新データ情報を取得検索条件
+     * @param parameter 被保険者台帳管理のパラメータ
      * @return DbT1001HihokenshaDaichoEntity
      */
     DbT1001HihokenshaDaichoEntity getSaishinDeta(HihokenshaShikakuShutokuMapperParameter parameter);

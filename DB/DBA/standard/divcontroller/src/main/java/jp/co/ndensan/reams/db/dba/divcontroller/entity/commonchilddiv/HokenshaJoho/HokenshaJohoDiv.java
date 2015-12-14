@@ -5,13 +5,12 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.HokenshaJ
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * HokenshaJoho のクラスファイル 
- * 
+ * HokenshaJoho のクラスファイル
+ *
  * @author 自動生成
  */
 public class HokenshaJohoDiv extends Panel implements IHokenshaJohoDiv {
@@ -28,8 +27,6 @@ public class HokenshaJohoDiv extends Panel implements IHokenshaJohoDiv {
     private ButtonDialog btnHokenshaSelect;
     @JsonProperty("txtHokenshaMeisho")
     private TextBox txtHokenshaMeisho;
-    @JsonProperty("HokenshaModel")
-    private RString HokenshaModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -89,24 +86,6 @@ public class HokenshaJohoDiv extends Panel implements IHokenshaJohoDiv {
     @JsonProperty("txtHokenshaMeisho")
     public void setTxtHokenshaMeisho(TextBox txtHokenshaMeisho) {
         this.txtHokenshaMeisho = txtHokenshaMeisho;
-    }
-
-    /*
-     * getHokenshaModel
-     * @return HokenshaModel
-     */
-    @JsonProperty("HokenshaModel")
-    public RString getHokenshaModel() {
-        return HokenshaModel;
-    }
-
-    /*
-     * setHokenshaModel
-     * @param HokenshaModel HokenshaModel
-     */
-    @JsonProperty("HokenshaModel")
-    public void setHokenshaModel(RString HokenshaModel) {
-        this.HokenshaModel = HokenshaModel;
     }
 
     // </editor-fold>

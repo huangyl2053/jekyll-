@@ -17,11 +17,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class HokenshaJohoHandler {
 
-    private final HokenshaJohoDiv div;
-    private RString kenCode;
+    private final HokenshaJohoDiv DIV;
 
     public HokenshaJohoHandler(HokenshaJohoDiv div) {
-        this.div = div;
+        this.DIV = div;
     }
 
     public void onBlur_txtHokenshaNo(HokenshaJohoDiv div) {
