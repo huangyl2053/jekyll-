@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5204NinteichosahyoKihonChos
 public interface IDbT5204NinteichosahyoKihonChosaScoreMapper {
 
     /**
-     * {@link DbT5204NinteichosahyoKihonChosaScoreEntity}を取得します。
+     * {@link  DbT5204NinteichosahyoKihonChosaScoreEntity}を取得します。
      *
-     * @return {@link DbT5204NinteichosahyoKihonChosaScoreEntity}
+     * @return {@link  DbT5204NinteichosahyoKihonChosaScoreEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT5204NinteichosahyoKihonChosaScoreEntity getEntity();

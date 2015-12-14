@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2011RankJohoEntity;
  */
 public interface IDbT2011RankJohoMapper {
 
-    /* * {@linkDbT2011RankJohoEntity}を取得します。
+    /** {@link DbT2011RankJohoEntity}を取得します。
      *
-     * @return {@linkDbT2011RankJohoEntity}
+     * @return {@link DbT2011RankJohoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT2011RankJohoEntity getEntity();

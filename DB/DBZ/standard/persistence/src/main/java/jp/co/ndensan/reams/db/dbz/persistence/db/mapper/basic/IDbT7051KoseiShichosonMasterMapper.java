@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEnt
  */
 public interface IDbT7051KoseiShichosonMasterMapper {
 
-    /* * {@linkDbT7051KoseiShichosonMasterEntity}を取得します。
+    /** {@link DbT7051KoseiShichosonMasterEntity}を取得します。
      *
-     * @return {@linkDbT7051KoseiShichosonMasterEntity}
+     * @return {@link DbT7051KoseiShichosonMasterEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7051KoseiShichosonMasterEntity getEntity();

@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuEntity;
  */
 public interface IDbT2008ShotokuKanriMapper {
 
-    /* * {@linkDbT2008ShotokuKanriEntity}を取得します。
+    /** {@link DbT2008ShotokuKanriEntity}を取得します。
      *
-     * @return {@linkDbT2008ShotokuKanriEntity}
+     * @return {@link DbT2008ShotokuKanriEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT2008ShotokuEntity getEntity();

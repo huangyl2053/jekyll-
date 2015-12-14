@@ -83,18 +83,42 @@ public class DbT7055GappeiJohoDac implements ISaveable<DbT7055GappeiJohoEntity> 
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
+    /**
+     * DbT7055GappeiJohoEntityをInsertします。
+     *
+     * @param entity DbT7055GappeiJohoEntity
+     * @return 登録件数
+     */
     public int insert(DbT7055GappeiJohoEntity entity) {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * DbT7055GappeiJohoEntityをUpdateします。
+     *
+     * @param entity DbT7055GappeiJohoEntity
+     * @return 更新件数
+     */
     public int update(DbT7055GappeiJohoEntity entity) {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * DbT7055GappeiJohoEntityを削除します。
+     *
+     * @param entity DbT7055GappeiJohoEntity
+     * @return 削除件数
+     */
     public int delete(DbT7055GappeiJohoEntity entity) {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * DbT7055GappeiJohoEntityを物理削除します。
+     *
+     * @param entity DbT7055GappeiJohoEntity
+     * @return 削除件数
+     */
     public int deletePhysical(DbT7055GappeiJohoEntity entity) {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }

@@ -89,18 +89,42 @@ public class DbT7056GappeiShichosonDac implements ISaveable<DbT7056GappeiShichos
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
+    /**
+     * DbT7056GappeiShichosonEntityをInsertします。
+     *
+     * @param entity DbT7056GappeiShichosonEntity
+     * @return 登録件数
+     */
     public int insert(DbT7056GappeiShichosonEntity entity) {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * DbT7056GappeiShichosonEntityをUpdateします。
+     *
+     * @param entity DbT7056GappeiShichosonEntity
+     * @return 更新件数
+     */
     public int update(DbT7056GappeiShichosonEntity entity) {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * DbT7056GappeiShichosonEntityを削除します。
+     *
+     * @param entity DbT7056GappeiShichosonEntity
+     * @return 削除件数
+     */
     public int delete(DbT7056GappeiShichosonEntity entity) {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * DbT7056GappeiShichosonEntityを物理削除します。
+     *
+     * @param entity DbT7056GappeiShichosonEntity
+     * @return 削除件数
+     */
     public int deletePhysical(DbT7056GappeiShichosonEntity entity) {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
