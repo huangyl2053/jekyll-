@@ -55,7 +55,7 @@ public class HihousyosaiFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HihousyosaiFinder}のインスタンスを返します。
      *
-     * @return{@link InstanceProvider#create}にて生成した{@link HihousyosaiFinder}のインスタンス
+     * @return HihousyosaiFinder
      */
     public static HihousyosaiFinder createInstance() {
         return InstanceProvider.create(HihousyosaiFinder.class);
@@ -80,10 +80,11 @@ public class HihousyosaiFinder {
     /**
      * 旧保険者リスト情報取得します。
      *
+     * @param params 被保詳細パラメータ
      * @return List<Shichoson>
      */
     @Transaction
-    public List<ShichosonBusiness> getGappeiShichosonList(HihousyosaiFinderParameter parameter) {
+    public List<ShichosonBusiness> getGappeiShichosonList(HihousyosaiFinderParameter params) {
         List<ShichosonBusiness> kyuhokenshaList = new ArrayList<>();
         ShichosonBusiness business = new ShichosonBusiness();
         KyuShichosonCodeJoho kyuushichouson = new KyuShichosonCodeJoho();
@@ -106,15 +107,15 @@ public class HihousyosaiFinder {
     /**
      * 得喪情報取得です。
      *
-     * @param parameter 被保詳細パラメータ
+     * @param params 被保詳細パラメータ
      * @return 被保険者台帳管理オブジェクト HihokenshaDaicho
      */
     @Transaction
-    public HihokenshaDaicho getTokusouJoho(HihousyosaiFinderParameter parameter) {
+    public HihokenshaDaicho getTokusouJoho(HihousyosaiFinderParameter params) {
         DbT1001HihokenshaDaichoEntity entity = dbT1001Dac.selectByHihokenshaNo(
-                parameter.getHihokenshaNo(),
-                parameter.getIdoYMD(),
-                parameter.getEdaNo());
+                params.getHihokenshaNo(),
+                params.getIdoYMD(),
+                params.getEdaNo());
         if (entity == null) {
             return null;
         }
