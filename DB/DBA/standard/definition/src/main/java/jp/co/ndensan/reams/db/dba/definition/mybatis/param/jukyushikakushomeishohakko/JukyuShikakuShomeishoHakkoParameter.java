@@ -32,11 +32,13 @@ public final class JukyuShikakuShomeishoHakkoParameter {
      *　被保険者番号より、受給資格証明書発行情報の検索キーを作成します。
      * 
      * @param 被保険者番号 被保険者番号
+     * @param 有効無効区分_有効 有効無効区分_有効
      * @return JukyuShikakuShomeishoHakkoParameter
      */
-    public static JukyuShikakuShomeishoHakkoParameter createSelectBy被保険者番号(RString 被保険者番号) {
+    public static JukyuShikakuShomeishoHakkoParameter createSelectBy被保険者番号(RString 被保険者番号
+            ,RString 有効無効区分_有効) {
         return new JukyuShikakuShomeishoHakkoParameter(被保険者番号
-                , null, null,null);
+                , null, null,有効無効区分_有効);
     }
 
     /**
