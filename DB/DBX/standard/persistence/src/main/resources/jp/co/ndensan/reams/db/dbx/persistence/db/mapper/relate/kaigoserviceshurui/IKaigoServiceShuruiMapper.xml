@@ -38,7 +38,7 @@
         <!--<id column="dbT7130KaigoServiceShurui_serviceShuruiCd" />-->
         <id column="dbT7130KaigoServiceShurui_teikyoKaishiYM"/>
        <association property="介護サービス種類Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper.ResultMap_DbT7130KaigoServiceShuruiEntity"/>
-       <collection  property="介護サービス内容Entity" ofType="jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigoservice.DbT7131KaigoServiceNaiyouEntity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.ResultMap_DbT7131KaigoServiceNaiyouEntity"/>
+       <collection  property="介護サービス内容Entity" ofType="jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.ResultMap_DbT7131KaigoServiceNaiyouEntity"/>
     </resultMap>
 
 </mapper>
