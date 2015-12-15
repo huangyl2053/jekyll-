@@ -27,14 +27,14 @@
         LEFT JOIN
         (
         SELECT 
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.allColumns_DbT5910NinteichosaItakusakiJoho" />
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.allColumns_DbT5910NinteichosaItakusakiJoho" />
         FROM rgdb."DbT5910NinteichosaItakusakiJoho") AS DbT5910NinteichosaItakusakiJoho
         ON
         DbT5051KoseiShichosonMaster."dbT5051KoseiShichosonMaster_shichosonCode" = DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_shichosonCode"
         LEFT JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.allColumns_DbT5913ChosainJoho" />
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.allColumns_DbT5913ChosainJoho" />
         FROM rgdb."DbT5913ChosainJoho") AS DbT5913ChosainJoho
         ON
          DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_shichosonCode" = DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode"
@@ -51,8 +51,8 @@
     <resultMap id="resultMap_KoseiShichosonMasterEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.koseishichosonmaster.KoseiShichosonMasterRelateEntity" autoMapping="true">
         <id property="構成市町村マスタEntity.shichosonShokibetsuID" column="dbT5051KoseiShichosonMaster_shichosonShokibetsuID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="構成市町村マスタEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5051KoseiShichosonMasterMapper.ResultMap_DbT5051KoseiShichosonMasterEntity"/>
-        <collection property="認定調査委託先情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.ResultMap_DbT5910NinteichosaItakusakiJohoEntity"/>
-        <collection property="調査員情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.ResultMap_DbT5913ChosainJohoEntity"/>
+        <collection property="認定調査委託先情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.ResultMap_DbT5910NinteichosaItakusakiJohoEntity"/>
+        <collection property="調査員情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.ResultMap_DbT5913ChosainJohoEntity"/>
     </resultMap>
 
 </mapper>

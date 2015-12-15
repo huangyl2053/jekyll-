@@ -29,7 +29,7 @@
     LEFT JOIN
     (
     SELECT
-    <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.allColumns_DbT5911ShujiiIryoKikanJoho"/>
+    <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.allColumns_DbT5911ShujiiIryoKikanJoho"/>
     FROM
     rgdb."DbT5911ShujiiIryoKikanJoho"
     )AS DbT5911ShujiiIryoKikanJoho
@@ -38,7 +38,7 @@
     LEFT JOIN
     (
     SELECT
-    <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.allColumns_DbT5912ShujiiJoho"/>
+    <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.allColumns_DbT5912ShujiiJoho"/>
     FROM
     rgdb."DbT5912ShujiiJoho"
     )AS DbT5912ShujiiJoho

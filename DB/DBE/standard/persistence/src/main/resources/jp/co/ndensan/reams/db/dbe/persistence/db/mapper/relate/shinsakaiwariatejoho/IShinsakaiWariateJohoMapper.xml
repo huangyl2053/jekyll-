@@ -27,7 +27,7 @@
         LEFT JOIN
         (
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
         FROM
             rgdb."DbT5101NinteiShinseiJoho"     
         ) AS DbT5101NinteiShinseiJoho
@@ -40,7 +40,7 @@
         <id column="dbT5502ShinsakaiWariateJoho_shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id column="dbT5502ShinsakaiWariateJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <association property="介護認定審査会割当情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.ResultMap_DbT5502ShinsakaiWariateJohoEntity"/>
-        <collection property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
+        <collection property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
     </resultMap>
 
 </mapper>

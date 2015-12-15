@@ -5,14 +5,15 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosaschedule.INinteichosaScheduleMapper">
 
-      <resultMap id="resultMap_ChikuShichosonRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuShichoson.ChikuShichosonRelateEntity" autoMapping="true">
+<!--      <resultMap id="resultMap_ChikuShichosonRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuShichoson.ChikuShichosonRelateEntity" autoMapping="true">
             <id property="chosaChikuCode" column="DbT5224ChikuShichoson_chosaChikuCode" />
             <id property="shichosonCode" column="DbT5224ChikuShichoson_shichosonCode" />
     <association property="DbT5224ChikuShichosonEntity" 
              resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chikuShichoson.IDbT5224ChikuShichosonMapper.resultMap_DbT5224ChikuShichosonEntity"/>
     <collection property="DbT5225ChosaChikuGroupEntity" 
               resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosaChikuGroup.IDbT5225ChosaChikuGroupMapper.resultMap_DbT5225ChosaChikuGroupEntity"/>
-    <select id="getNinteichosaScheduleRelateEntity"            resultMap="resultMap_NinteichosaScheduleRelateEntity"
+      </resultMap>
+              <select id="getNinteichosaScheduleRelateEntity"            resultMap="resultMap_NinteichosaScheduleRelateEntity"
             parameterType=" " fetchSize="500">
      SELECT 
         dbT5221NinteichosaSchedule.*,
@@ -124,6 +125,5 @@
 
         
     </select>
-
-
+-->
 </mapper>

@@ -26,14 +26,14 @@
         FROM							
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho"/>
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho"/>
         FROM rgdb."DbT5101NinteiShinseiJoho"
         WHERE
         "shinseishoKanriNo"=#{shinseishoKanriNo} ) AS DbT5101NinteiShinseiJoho
         LEFT JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5102NinteiKekkaJohoMapper.allColumns_DbT5102NinteiKekkaJoho"/>
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5102NinteiKekkaJohoMapper.allColumns_DbT5102NinteiKekkaJoho"/>
         FROM rgdb."DbT5102NinteiKekkaJoho" ) AS DbT5102NinteiKekkaJoho
         ON 
         DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo" = DbT5102NinteiKekkaJoho."dbT5102NinteiKekkaJoho_shinseishoKanriNo"
@@ -47,7 +47,7 @@
         INNER JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5115ImageMapper.allColumns_DbT5115Image" />
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5115ImageMapper.allColumns_DbT5115Image" />
         FROM rgdb."DbT5115Image") AS DbT5115Image
         ON
         DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_shinseishoKanriNo" = DbT5115Image."dbT5115Image_shinseishoKanriNo"
@@ -112,11 +112,11 @@
     </select>
     <resultMap id="resultMap_NinteiKekkaJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity" autoMapping="true">
         <id column="dbT5101NinteiShinseiJoho_shinseishoKanriNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
-        <association property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
-        <collection property="要介護認定結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5102NinteiKekkaJohoMapper.ResultMap_DbT5102NinteiKekkaJohoEntity"/>
+        <association property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
+        <collection property="要介護認定結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5102NinteiKekkaJohoMapper.ResultMap_DbT5102NinteiKekkaJohoEntity"/>
         <collection  property="要介護認定一次判定結果情報Entity"  resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.ResultMap_DbT5116IchijiHanteiKekkaJohoEntity"/>
         <collection  property="要介護認定完了情報Entity"  resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.ResultMap_DbT5105NinteiKanryoJohoEntity"/>
-        <collection  property="イメージ情報Entity"  resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5115ImageMapper.ResultMap_DbT5115ImageEntity"/>
+        <collection  property="イメージ情報Entity"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5115ImageMapper.ResultMap_DbT5115ImageEntity"/>
         <collection  property="申請届出情報Entity"  resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5120ShinseitodokedeJohoMapper.ResultMap_DbT5120ShinseitodokedeJohoEntity"/>
         <collection  property="申請履歴情報Entity"  resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5121ShinseiRirekiJohoMapper.ResultMap_DbT5121ShinseiRirekiJohoEntity"/>
         <collection  property="通知書発行情報Entity"  resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5122TsuchishoHakkoJohoMapper.ResultMap_DbT5122TsuchishoHakkoJohoEntity"/>

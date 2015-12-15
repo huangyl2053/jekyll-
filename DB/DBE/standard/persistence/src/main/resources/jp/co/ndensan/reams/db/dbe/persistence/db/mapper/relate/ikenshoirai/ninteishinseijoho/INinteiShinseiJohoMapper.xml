@@ -17,7 +17,7 @@
         FROM
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
         FROM 
             rgdb."DbT5101NinteiShinseiJoho"
         WHERE
@@ -38,7 +38,7 @@
     <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
     <resultMap id="resultMap_NinteiShinseiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoirai.ninteishinseijoho.NinteiShinseiJohoRelateEntity" autoMapping="true">
         <id column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
-        <association property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
+        <association property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
         <collection property="主治医意見書作成依頼情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"/>
     </resultMap>
 

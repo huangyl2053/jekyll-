@@ -7,7 +7,7 @@ and open the template in the editor.
 -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.konicho.IKoNiChoRelateMapper">
     
-    <resultMap id="ResultMap_KoNiChoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.konicho.KoNiChoRelateEntity" autoMapping="true">
+<!--    <resultMap id="ResultMap_KoNiChoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.konicho.KoNiChoRelateEntity" autoMapping="true">
         <id property="ninteiChosainNo" column="DbT5913_ninteiChosainNo" typeHandler="jp.co.ndensan.reams.db.dbe.entity.typehandlers.ChosainCodeTypeHandler" />
         <id property="shichosonCode" column="DbT5913_shichosonCode" typeHandler="jp.co.ndensan.reams.db.dbe.entity.typehandlers.LasdecCodeTypeHandler" />
         <id property="shichosonMeisho" column="DbT7051_shichosonMeisho" typeHandler="jp.co.ndensan.reams.db.dbe.entity.typehandlers.RStringTypeHandler" />
@@ -27,7 +27,7 @@ and open the template in the editor.
         <result property="faxNo" column="DbT5913_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
    </resultMap>
    
-<!--認定調査員一覧の該当情報を取得します。-->
+認定調査員一覧の該当情報を取得します。
     <select id="getKoNiChoRelateEntity"
             resultMap="ResultMap_KoNiChoRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.konicho.KoNiChoRelateMapperParameter" fetchSize="500">
@@ -112,7 +112,7 @@ and open the template in the editor.
 		DbT5913."shichosonCode",						
 		DbT5913."ninteiChosainNo",						
 	        DbT5913."ninteichosaItakusakiCode"
-	<!--最大表示件数-->
+	最大表示件数
         LIMIT ${maxKensu};
     </select>
     
@@ -165,6 +165,6 @@ and open the template in the editor.
 	AND DbT4201."ninteichosaItakusakiCode" = #{ninteichosaItakusakiCode}
 	AND DbT4201."ninteiChosainCode" = #{ninteiChosainCode}												
     </select>
-    
+    -->
      
  </mapper>

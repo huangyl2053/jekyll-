@@ -17,7 +17,7 @@
         FROM
         (
         SELECT 
-            <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.allColumns_DbT5911ShujiiIryoKikanJoho" />
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.allColumns_DbT5911ShujiiIryoKikanJoho" />
         FROM 
             rgdb."DbT5911ShujiiIryoKikanJoho"
         WHERE
@@ -27,7 +27,7 @@
         LEFT JOIN
         (
          SELECT 
-            <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.allColumns_DbT5912ShujiiJoho" />
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.allColumns_DbT5912ShujiiJoho" />
          FROM 
             rgdb."DbT5912ShujiiJoho"
         ) AS DbT5912ShujiiJoho
@@ -40,8 +40,8 @@
     <resultMap id="resultMap_ShujiiIryoKikanJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoRelateEntity" autoMapping="true">
         <id column="dbT5911ShujiiIryoKikanJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <id column="dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <association property="主治医医療機関情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.ResultMap_DbT5911ShujiiIryoKikanJohoEntity"/>
-        <collection property="主治医情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.ResultMap_DbT5912ShujiiJohoEntity"/>
+        <association property="主治医医療機関情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.ResultMap_DbT5911ShujiiIryoKikanJohoEntity"/>
+        <collection property="主治医情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.ResultMap_DbT5912ShujiiJohoEntity"/>
     </resultMap>
 
 </mapper>

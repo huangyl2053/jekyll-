@@ -4,7 +4,7 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinjoho.IShinsakaiIinJohoMapper">
-
+<!--
 
     <select id="getShinsakaiIinJohoEntity"
             resultMap="resultMap_ShinsakaiIinJohoEntity"
@@ -116,6 +116,6 @@
         <collection property="介護認定審査会委員所属機関情報Entity"
                     resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoMapper.ResultMap_DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity">
         </collection>
-    </resultMap>
+    </resultMap>-->
 
 </mapper>

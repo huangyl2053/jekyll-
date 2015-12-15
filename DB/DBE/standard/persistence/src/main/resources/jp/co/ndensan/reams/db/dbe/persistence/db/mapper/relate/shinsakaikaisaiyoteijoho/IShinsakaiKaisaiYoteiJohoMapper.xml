@@ -64,7 +64,7 @@
         LEFT OUTER JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho"/>
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho"/>
         FROM
         rgdb."DbT5101NinteiShinseiJoho"
         ) AS  dbT5101NinteiShinseiJoho
@@ -81,7 +81,7 @@
         dbT5503ShinsakaiWariateIinJoho."dbT5503ShinsakaiWariateIinJoho_shinsakaiIinCode" = dbT5594ShinsakaiIinJoho."dbT5594ShinsakaiIinJoho_shinsakaiIinCode"
         ;
     </select>
-    <select id="getShinsakaiKaisaiYoteiJohoEntity"
+<!--    <select id="getShinsakaiKaisaiYoteiJohoEntity"
             resultMap="resultMap_ShinsakaiKaisaiYoteiJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter" fetchSize="500">
 
@@ -110,8 +110,8 @@
         DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" ='1'
         ORDER BY DbT5593GogitaiWariateIinJoho."gogitaichoKubunCode" asc, DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode" desc;
 
-    </select>
-    <select id="getShinsakaiKaisaiYoteiJohoEntity"
+    </select>-->
+<!--    <select id="getShinsakaiKaisaiYoteiJohoEntity"
             resultMap="resultMap_ShinsakaiKaisaiYoteiJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter" fetchSize="500">
         SELECT
@@ -139,7 +139,7 @@
         ON DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoCode" = DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiBashoCode"
         WHERE
         DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" = 遷移元.開催番号
-    </select>
+    </select>-->
     <resultMap id="resultMap_ShinsakaiKaisaiYoteiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoRelateEntity" autoMapping="true">
         <id  column="dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo"/>
         <association property="介護認定審査会開催予定情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.ResultMap_DbT5501ShinsakaiKaisaiYoteiJohoEntity"/>

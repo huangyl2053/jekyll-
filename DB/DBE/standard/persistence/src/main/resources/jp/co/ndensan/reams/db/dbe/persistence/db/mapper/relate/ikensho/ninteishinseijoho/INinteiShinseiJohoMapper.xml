@@ -24,25 +24,25 @@
         FROM
         (
         SELECT
-         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
      FROM rgdb."DbT5101NinteiShinseiJoho") AS DbT5101NinteiShinseiJoho
          LEFT JOIN
         (
          SELECT
-         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5300GeninShikkanMapper.allColumns_DbT5300GeninShikkan" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5300GeninShikkanMapper.allColumns_DbT5300GeninShikkan" />
      FROM rgdb."DbT5300GeninShikkan") AS DbT5300GeninShikkan
          ON
          DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo" = DbT5300GeninShikkan."dbT5300GeninShikkan_shinseishoKanriNo"
         INNER JOIN
          (
          SELECT
-         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />
      FROM rgdb."DbT5301ShujiiIkenshoIraiJoho") AS DbT5301ShujiiIkenshoIraiJoho
          ON 
          DbT5300GeninShikkan."dbT5300GeninShikkan_shinseishoKanriNo" = DbT5301ShujiiIkenshoIraiJoho."dbT5301ShujiiIkenshoIraiJoho_shinseishoKanriNo"
          LEFT JOIN
          (SELECT
-         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.allColumns_DbT5302ShujiiIkenshoJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.allColumns_DbT5302ShujiiIkenshoJoho" />
      FROM rgdb."DbT5302ShujiiIkenshoJoho") AS DbT5302ShujiiIkenshoJoho
          ON 
         DbT5301ShujiiIkenshoIraiJoho."dbT5301ShujiiIkenshoIraiJoho_shinseishoKanriNo" = DbT5302ShujiiIkenshoJoho."dbT5302ShujiiIkenshoJoho_shinseishoKanriNo"
@@ -50,7 +50,7 @@
          LEFT JOIN 
          (
          SELECT
-         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5303ShujiiIkenshoKinyuItemMapper.allColumns_DbT5303ShujiiIkenshoKinyuItem" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5303ShujiiIkenshoKinyuItemMapper.allColumns_DbT5303ShujiiIkenshoKinyuItem" />
      FROM rgdb."DbT5303ShujiiIkenshoKinyuItem") AS DbT5303ShujiiIkenshoKinyuItem
          ON 
          DbT5302ShujiiIkenshoJoho."dbT5302ShujiiIkenshoJoho_shinseishoKanriNo" = DbT5303ShujiiIkenshoKinyuItem."dbT5303ShujiiIkenshoKinyuItem_shinseishoKanriNo"
@@ -58,7 +58,7 @@
          INNER JOIN
          (
          SELECT
-         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5304ShujiiIkenshoIkenItemMapper.allColumns_DbT5304ShujiiIkenshoIkenItem" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5304ShujiiIkenshoIkenItemMapper.allColumns_DbT5304ShujiiIkenshoIkenItem" />
      FROM rgdb."DbT5304ShujiiIkenshoIkenItem") AS DbT5304ShujiiIkenshoIkenItem
          ON 
          DbT5303ShujiiIkenshoKinyuItem."dbT5303ShujiiIkenshoKinyuItem_shinseishoKanriNo" = DbT5304ShujiiIkenshoIkenItem."dbT5304ShujiiIkenshoIkenItem_shinseishoKanriNo"
@@ -73,9 +73,9 @@
 
     <resultMap id="resultMap_NinteiShinseiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.ninteishinseijoho.NinteiShinseiJohoEntity" autoMapping="true">
         <id property="要介護認定申請情報Entity.shinseishoKanriNo" column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
-        <association property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
-        <collection property="原因疾患Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5300GeninShikkanMapper.ResultMap_DbT5300GeninShikkanEntity"/>
-        <collection property="主治医意見書作成依頼情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"/>
+        <association property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
+        <collection property="原因疾患Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5300GeninShikkanMapper.ResultMap_DbT5300GeninShikkanEntity"/>
+        <collection property="主治医意見書作成依頼情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"/>
      </resultMap>
 
 </mapper>
