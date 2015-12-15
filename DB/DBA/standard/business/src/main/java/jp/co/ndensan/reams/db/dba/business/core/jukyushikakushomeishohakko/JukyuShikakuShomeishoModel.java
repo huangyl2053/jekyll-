@@ -11,13 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class JukyuShikakuShomeishoModel {
 
-    private JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoEntity;
-
-    /**
-     * コンストラクタです。
-     */
-    public JukyuShikakuShomeishoModel() {
-    }
+    private final JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoEntity;
 
     /**
      * コンストラクタです。
@@ -34,11 +28,7 @@ public class JukyuShikakuShomeishoModel {
      * @return 交付日
      */
     public RString get交付日() {
-        if (jukyuShikakuShomeishoHakkoEntity != null) {
-            return FlexibleDate.getNowDate().getYearMonth().wareki().toDateString();
-        } else {
-            return RString.EMPTY;
-        }
+        return FlexibleDate.getNowDate().getYearMonth().wareki().toDateString();
     }
 
     /**
@@ -47,7 +37,7 @@ public class JukyuShikakuShomeishoModel {
      * @return 異動予定日
      */
     public RString get異動予定日() {
-        if (jukyuShikakuShomeishoHakkoEntity != null && jukyuShikakuShomeishoHakkoEntity.getIdoYMD() != null
+        if (jukyuShikakuShomeishoHakkoEntity.getIdoYMD() != null
                 && !jukyuShikakuShomeishoHakkoEntity.getIdoYMD().isEmpty()) {
             return new FlexibleDate(jukyuShikakuShomeishoHakkoEntity.getIdoYMD()).wareki().toDateString();
         } else {
@@ -61,7 +51,7 @@ public class JukyuShikakuShomeishoModel {
      * @return 要介護状態区分
      */
     public RString get要介護状態区分() {
-        if (jukyuShikakuShomeishoHakkoEntity != null 
+        if (jukyuShikakuShomeishoHakkoEntity.getYokaigoJotaiKubunCode()!=null 
                 && !jukyuShikakuShomeishoHakkoEntity.getYokaigoJotaiKubunCode().isEmpty()) {
             return YokaigoJotaiKubun09.toValue(jukyuShikakuShomeishoHakkoEntity.getYokaigoJotaiKubunCode()).getName();
         } else {
@@ -76,7 +66,7 @@ public class JukyuShikakuShomeishoModel {
      * @return 有効期間開始日
      */
     public RString get有効期間開始日() {
-        if (jukyuShikakuShomeishoHakkoEntity != null 
+        if (jukyuShikakuShomeishoHakkoEntity.getNinteiYukoKikanKaishiYMD() != null 
                 && !jukyuShikakuShomeishoHakkoEntity.getNinteiYukoKikanKaishiYMD().isEmpty()) {
             return new FlexibleDate(jukyuShikakuShomeishoHakkoEntity
                     .getNinteiYukoKikanKaishiYMD()).wareki().toDateString();
@@ -92,7 +82,7 @@ public class JukyuShikakuShomeishoModel {
      * @return 受給申請年月日
      */
     public RString get受給申請年月日() {
-        if (jukyuShikakuShomeishoHakkoEntity != null 
+        if (jukyuShikakuShomeishoHakkoEntity.getJukyuShinseiYMD() !=null 
                 && !jukyuShikakuShomeishoHakkoEntity.getJukyuShinseiYMD().isEmpty()) {
             return new FlexibleDate(jukyuShikakuShomeishoHakkoEntity.getJukyuShinseiYMD()).wareki().toDateString();
         } else {
@@ -106,7 +96,7 @@ public class JukyuShikakuShomeishoModel {
      * @return 有効期間開始日
      */
     public RString get有効期間終了日() {
-        if (jukyuShikakuShomeishoHakkoEntity != null 
+        if (jukyuShikakuShomeishoHakkoEntity.getNinteiYukoKikanShuryoYMD() != null 
                 && !jukyuShikakuShomeishoHakkoEntity.getNinteiYukoKikanShuryoYMD().isEmpty()) {
             return new FlexibleDate(jukyuShikakuShomeishoHakkoEntity
                     .getNinteiYukoKikanShuryoYMD()).wareki().toDateString();
@@ -121,7 +111,7 @@ public class JukyuShikakuShomeishoModel {
      * @return 介護認定審査会意見
      */
     public RString get介護認定審査会意見() {
-        if (jukyuShikakuShomeishoHakkoEntity != null 
+        if (jukyuShikakuShomeishoHakkoEntity.getShinsakaiIken() != null 
                 && !jukyuShikakuShomeishoHakkoEntity.getShinsakaiIken().isEmpty()) {
             return jukyuShikakuShomeishoHakkoEntity.getShinsakaiIken();
         } else {
@@ -135,7 +125,8 @@ public class JukyuShikakuShomeishoModel {
      * @return 介護認定審査会意見
      */
     public RString get備考() {
-        if (jukyuShikakuShomeishoHakkoEntity != null && !jukyuShikakuShomeishoHakkoEntity.getBiko().isEmpty()) {
+        if (jukyuShikakuShomeishoHakkoEntity.getBiko() != null
+                && !jukyuShikakuShomeishoHakkoEntity.getBiko().isEmpty()) {
             return jukyuShikakuShomeishoHakkoEntity.getBiko();
         } else {
             return RString.EMPTY;
