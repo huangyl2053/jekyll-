@@ -28,11 +28,11 @@ public class JukyuSikakuShomeishoHakkoHandler {
      * @param 受給資格証明書発行情報の検索キー 受給資格証明書発行情報の検索キー
      */
     public void initialize(JukyuShikakuShomeishoHakkoParameter 受給資格証明書発行情報の検索キー) {
-        setGaMenKoMokuEidit(JukyuShikakuShomeishoHakkoFinder.createInstance()
+        editGaMenKoMoku(JukyuShikakuShomeishoHakkoFinder.createInstance()
                 .getJukyuShikakuShomeishoHakko(受給資格証明書発行情報の検索キー));
     }
 
-    private void setGaMenKoMokuEidit(JukyuShikakuShomeishoModel jukyuShikakuBusiness) {
+    private void editGaMenKoMoku(JukyuShikakuShomeishoModel jukyuShikakuBusiness) {
         if (jukyuShikakuBusiness != null) {
             jukyuSikakuShomeishoHakkoDiv.getTxtKofubi().setValue(jukyuShikakuBusiness.get交付日());
             jukyuSikakuShomeishoHakkoDiv.getTxtIdoYotebi().setValue(jukyuShikakuBusiness.get異動予定日());

@@ -88,7 +88,7 @@ public class JukyuShikakuShomeishoHakkoFinder {
                 jukyuShikakuShomeishoHakkoRelateEntity.setBiko(未設定);
             }
         } else {
-            set備考(jukyuShikakuShomeishoHakkoRelateEntity, 
+            jukyuShikakuShomeishoHakkoRelateEntity = edit備考(jukyuShikakuShomeishoHakkoRelateEntity, 
                     ninTeiShinSeiChuDataEntity, jukyuShikakuShomeishoHakkoMapper);
         }
         if (jukyuShikakuShomeishoHakkoRelateEntity == null) {
@@ -184,17 +184,15 @@ public class JukyuShikakuShomeishoHakkoFinder {
         }
     }
 
-    private void set備考(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRelate,
+    private JukyuShikakuShomeishoHakkoRelateEntity edit備考(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRelate,
             JukyuShikakuShomeishoHakkoRelateEntity ninTeiShinSeiChuDataEntity,
             IJukyuShikakuShomeishoHakkoRelateMapper jukyuShikakuShomeishoHakkoMapper) {
         JukyuShikakuShomeishoHakkoRelateEntity ninTeiChouSaJouEntity = jukyuShikakuShomeishoHakkoMapper
                 .getNinTeiChouSaJou(JukyuShikakuShomeishoHakkoParameter.
                         createSelectBy申請書管理番号(ninTeiShinSeiChuDataEntity.getShinseishoKanriNo()));
         RStringBuilder workBiko = new RStringBuilder(RString.EMPTY);
-        /*
-         * TODO 汪坤 QA38 DBD.Enum受給申請事由とDBD.Enum受給資格証明書申請種類文言のクラスが未提供ですので、
-         * とりあえず全てJuKyuShinSeiZiYuで仮定義しています
-         */
+         // TODO 汪坤 QA38 DBD.Enum受給申請事由とDBD.Enum受給資格証明書申請種類文言のクラスが未提供ですので、
+         // とりあえず全てJuKyuShinSeiZiYuで仮定義しています
         RString jukyuShinseiJiyu = ninTeiShinSeiChuDataEntity.getJukyuShinseiJiyu();
         if (JuKyuShinSeiZiYu.初回申請.getCode().equals(jukyuShinseiJiyu)
                 || JuKyuShinSeiZiYu.再申請_有効期限外.getCode().equals(jukyuShinseiJiyu)
@@ -229,8 +227,7 @@ public class JukyuShikakuShomeishoHakkoFinder {
         }
         if (JuKyuShinSeiZiYu.指定サービス種類変更申請.getCode()
                 .equals(jukyuShinseiJiyu)) {
-            jukyuShikakuShomeishoHakkoRelate = null;
-            return;
+            return  null;
         }
         if (new FlexibleDate(jukyuShikakuShomeishoHakkoRelate.getNinteiYukoKikanKaishiYMD())
                 .isBefore(new FlexibleDate(get制度改正施行管理_新予防給付_適用開始日()))) {
@@ -241,6 +238,7 @@ public class JukyuShikakuShomeishoHakkoFinder {
         } else {
             jukyuShikakuShomeishoHakkoRelate.setBiko(workBiko.toRString().substring(0, LENGTH_240));
         }
+        return jukyuShikakuShomeishoHakkoRelate;
     }
 
     private RString get制度改正施行管理_新予防給付_適用開始日() {
