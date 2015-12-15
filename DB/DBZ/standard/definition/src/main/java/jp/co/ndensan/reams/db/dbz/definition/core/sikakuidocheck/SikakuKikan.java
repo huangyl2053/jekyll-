@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 資格期間のデータアクセスクラスです。
@@ -19,21 +18,15 @@ public class SikakuKikan {
 
     private FlexibleDate kaishiYMD;
     private FlexibleDate shuryoYMD;
-    private FlexibleDate idoYMD;
-    private RString edaNo;
 
     /**
      * コンストラクタです。
      *
-     * @param kaishiYMD FlexibleDate
-     * @param shuryoYMD FlexibleDate
-     * @param idoYMD FlexibleDate
-     * @param edaNo RString
+     * @param kaishiYMD 取得日
+     * @param shuryoYMD 喪失日
      */
-    public SikakuKikan(FlexibleDate kaishiYMD, FlexibleDate shuryoYMD, FlexibleDate idoYMD, RString edaNo) {
+    public SikakuKikan(FlexibleDate kaishiYMD, FlexibleDate shuryoYMD) {
         this.kaishiYMD = kaishiYMD;
         this.shuryoYMD = shuryoYMD;
-        this.idoYMD = idoYMD;
-        this.edaNo = edaNo;
     }
 }
