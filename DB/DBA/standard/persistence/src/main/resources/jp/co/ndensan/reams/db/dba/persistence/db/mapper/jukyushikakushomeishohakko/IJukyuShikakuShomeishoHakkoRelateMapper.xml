@@ -117,7 +117,7 @@
             rgdb."DbT4001JukyushaDaicho" AS Jukyusha
         WHERE 
                 Jukyusha."hihokenshaNo" = #{hihokenshaNo}
-          AND   Jukyusha."yukoMukoKubun" = '1'
+          AND   Jukyusha."yukoMukoKubun" = #{yukoMukoKubun}
           AND   Jukyusha."isDeleted" = FALSE
         ORDER BY
                 Jukyusha."rirekiNo",

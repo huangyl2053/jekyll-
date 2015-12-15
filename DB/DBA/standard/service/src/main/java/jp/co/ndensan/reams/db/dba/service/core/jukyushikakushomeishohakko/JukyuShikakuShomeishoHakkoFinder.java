@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dba.business.core.jukyushikakushomeishohakko.Jukyu
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.JuKyuShinSeiZiYu;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysJukyuShikakuShomeishoHakko;
+import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.yukomukokubun.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.JukyuShikakuShomeishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.jukyushikakushomeishohakko.IJukyuShikakuShomeishoHakkoRelateMapper;
@@ -33,6 +34,8 @@ public class JukyuShikakuShomeishoHakkoFinder {
     public static final RString MIGIKAKO = new RString("）");
     public static final RString MATAHA = new RString("までは");
     public static final RString 未設定 = new RString("未設定");
+    public static final RString 読点 = new RString("、");
+    public static final int FIRST_INDEX = 0;
     public static final int LENGTH_150 = 150;
     public static final int LENGTH_240 = 240;
 
@@ -106,19 +109,18 @@ public class JukyuShikakuShomeishoHakkoFinder {
         List<RString> サービス種類名称リスト = new ArrayList<>();
         List<RString> サービス種類略称リスト = new ArrayList<>();
         for (RString code : サービス種類コードリスト) {
-            if (code != null && !code.isEmpty() ) {
-                JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoTemp = jukyuShikakuShomeishoHakkoMapper
-                        .getServiceMei(JukyuShikakuShomeishoHakkoParameter
-                                .createSelectByサービス種類コード(code.trimEnd()));
-                if (jukyuShikakuShomeishoHakkoTemp != null) {
-                    サービス種類名称リスト.add(jukyuShikakuShomeishoHakkoTemp.getServiceShuruiMeisho());
-                    サービス種類略称リスト.add(jukyuShikakuShomeishoHakkoTemp.getServiceShuruiRyakusho());
-                } else {
-                    サービス種類名称リスト.add(RString.EMPTY);
-                    サービス種類略称リスト.add(RString.EMPTY);
-                }
-            } else {
+            if (code == null || code.isEmpty() ) {
                 break;
+            } 
+            JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoTemp = jukyuShikakuShomeishoHakkoMapper
+                        .getServiceMei(JukyuShikakuShomeishoHakkoParameter
+                                .createSelectByサービス種類コード(code.trimEnd(),YukoMukoKubun.有効.getコード()));
+            if (jukyuShikakuShomeishoHakkoTemp != null) {
+                サービス種類名称リスト.add(jukyuShikakuShomeishoHakkoTemp.getServiceShuruiMeisho());
+                サービス種類略称リスト.add(jukyuShikakuShomeishoHakkoTemp.getServiceShuruiRyakusho());
+            } else {
+                サービス種類名称リスト.add(RString.EMPTY);
+                サービス種類略称リスト.add(RString.EMPTY);
             }
         }
         edit介護認定審査会意見(jukyuShikakuShomeishoHakkoRelateEntity, サービス種類名称リスト, サービス種類略称リスト);
@@ -168,13 +170,17 @@ public class JukyuShikakuShomeishoHakkoFinder {
             List<RString> サービス種類名称リスト, List<RString> サービス種類略称リスト) {
         RStringBuilder 介護認定審査会意見と名称 = new RStringBuilder(jukyuShikakuShomeishoHakkoRelate.getShinsakaiIken());
         介護認定審査会意見と名称.append(SPACE);
-        for (RString サービス種類名称 : サービス種類名称リスト) {
-            介護認定審査会意見と名称.append(サービス種類名称);
+        介護認定審査会意見と名称.append(サービス種類名称リスト.get(FIRST_INDEX));
+        for (int i =1; i <= サービス種類名称リスト.size(); i++) {
+            介護認定審査会意見と名称.append(読点);
+            介護認定審査会意見と名称.append(サービス種類名称リスト.get(i));
         }
         RStringBuilder 介護認定審査会意見と略称 = new RStringBuilder(jukyuShikakuShomeishoHakkoRelate.getShinsakaiIken());
         介護認定審査会意見と略称.append(SPACE);
-        for (RString サービス種類略称 : サービス種類略称リスト) {
-            介護認定審査会意見と略称.append(サービス種類略称);
+        介護認定審査会意見と略称.append(サービス種類略称リスト.get(FIRST_INDEX));
+        for (int j =1; j <= サービス種類略称リスト.size(); j++) {
+            介護認定審査会意見と略称.append(読点);
+            介護認定審査会意見と略称.append(サービス種類略称リスト.get(j));
         }
         if (介護認定審査会意見と名称.toRString().length() <= LENGTH_150) {
             jukyuShikakuShomeishoHakkoRelate.setShinsakaiIken(介護認定審査会意見と名称.toRString());
