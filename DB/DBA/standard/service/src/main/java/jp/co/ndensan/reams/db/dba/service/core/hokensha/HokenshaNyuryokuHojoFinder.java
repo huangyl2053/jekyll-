@@ -11,21 +11,29 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.hokensha.Hokensha;
 import jp.co.ndensan.reams.db.dba.business.core.hokensha.KenCodeJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hokensha.HokenshaMapperParameter;
-import jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.hokensha.HokenshaMapper;
-import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.ur.urz.business.core.hokenja.Hokenja;
+import jp.co.ndensan.reams.ur.urz.business.core.zenkokujusho.ZenkokuJushoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.core.zenkokujusho.ZenkokuJushoSearchShurui;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.entity.db.basic.hokenja.UrT0507HokenjaEntity;
 import jp.co.ndensan.reams.ur.urz.entity.db.basic.zenkokujusho.UrT0101ZenkokuJusho;
-import jp.co.ndensan.reams.ur.urz.entity.db.basic.zenkokujusho.UrT0101ZenkokuJushoEntity;
-import jp.co.ndensan.reams.ur.urz.persistence.db.basic.hokenja.UrT0507HokenjaDac;
-import jp.co.ndensan.reams.ur.urz.persistence.db.basic.zenkokujusho.UrT0101ZenkokuJushoDac;
+import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaSearchItem;
+import jp.co.ndensan.reams.ur.urz.service.core.hokenja.IHokenjaFinder;
+import jp.co.ndensan.reams.ur.urz.service.core.zenkokujusho.IZenkokuJushoFinder;
+import jp.co.ndensan.reams.ur.urz.service.core.zenkokujusho.ZenkokuJushoFinderFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.INewSearchCondition;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchConditionFactory;
+import static jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchConditionFactory.where;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
 
 /**
  *
@@ -33,17 +41,15 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class HokenshaNyuryokuHojoFinder {
 
-    private final UrT0101ZenkokuJushoDac urT0101Dac;
-    private final UrT0507HokenjaDac urT0507Dac;
-    private final MapperProvider mapperProvider;
+    private final IHokenjaFinder hokenshafinder;
+    private final IZenkokuJushoFinder kokuFinder;
 
     /**
      * コンストラクタです。
      */
     HokenshaNyuryokuHojoFinder() {
-        this.urT0101Dac = InstanceProvider.create(UrT0101ZenkokuJushoDac.class);
-        this.urT0507Dac = InstanceProvider.create(UrT0507HokenjaDac.class);
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.hokenshafinder = HokenjaFinderFactory.createInstance();
+        this.kokuFinder = ZenkokuJushoFinderFactory.createInstance();
     }
 
     /**
@@ -53,10 +59,9 @@ public class HokenshaNyuryokuHojoFinder {
      * @param UrT0507HokenjaDac urT0507Dac
      * @paramMapperProvider mapperProvider
      */
-    HokenshaNyuryokuHojoFinder(UrT0101ZenkokuJushoDac urT0101Dac, UrT0507HokenjaDac urT0507Dac, MapperProvider mapperProvider) {
-        this.urT0101Dac = urT0101Dac;
-        this.urT0507Dac = urT0507Dac;
-        this.mapperProvider = mapperProvider;
+    HokenshaNyuryokuHojoFinder(IHokenjaFinder hokenshafinder, IZenkokuJushoFinder kokuFinder) {
+        this.hokenshafinder = hokenshafinder;
+        this.kokuFinder = kokuFinder;
     }
 
     /**
@@ -75,12 +80,13 @@ public class HokenshaNyuryokuHojoFinder {
      * @param parameter 保険者情報のパラメータ
      * @return 保険者情報Entity（Hokensha）
      */
+    @Transaction
     public Hokensha getHokensha(HokenshaMapperParameter parameter) {
-        UrT0507HokenjaEntity entity = urT0507Dac.selectByKey(parameter.getHokenjaNo(), new HokenjaShubetsu(new RString("08")));
+        Hokenja entity = hokenshafinder.get保険者(parameter.getHokenjaNo(), new HokenjaShubetsu(new RString("08")));
         if (entity == null) {
             return null;
         }
-        return new Hokensha(entity);
+        return new Hokensha(entity.toEntity());
     }
 
     /**
@@ -88,15 +94,16 @@ public class HokenshaNyuryokuHojoFinder {
      *
      * @return List<KenCodeJigyoshaInputGuide> 県コード取得リスト
      */
+    @Transaction
     public List<KenCodeJigyoshaInputGuide> getKenCodeJigyoshaInputGuide() {
         List<KenCodeJigyoshaInputGuide> kenCodeList = new ArrayList<>();
-        List<UrT0101ZenkokuJushoEntity> urT0101List = urT0101Dac.select(
-                and(not(eq(UrT0101ZenkokuJusho.isDeleted, true)), eq(UrT0101ZenkokuJusho.dataKubun, ZenkokuJushoSearchShurui.都道府県.getDataKubun())));
-        if (urT0101List == null || urT0101List.isEmpty()) {
+        ITrueFalseCriteria result = and(not(eq(UrT0101ZenkokuJusho.isDeleted, true)), eq(UrT0101ZenkokuJusho.dataKubun, ZenkokuJushoSearchShurui.都道府県.getDataKubun()));
+        List<ZenkokuJushoItem> zenkoItem = kokuFinder.get全国住所(result);
+        if (zenkoItem == null || zenkoItem.isEmpty()) {
             return kenCodeList;
         }
-        for (UrT0101ZenkokuJushoEntity entity : urT0101List) {
-            kenCodeList.add(new KenCodeJigyoshaInputGuide(entity));
+        for (ZenkokuJushoItem Item : zenkoItem) {
+            kenCodeList.add(new KenCodeJigyoshaInputGuide(Item.toEntity()));
         }
         return kenCodeList;
     }
@@ -107,16 +114,19 @@ public class HokenshaNyuryokuHojoFinder {
      * @param parameter 保険者情報のパラメータ
      * @return List<Hokensha> 保険者情報リスト
      */
+    @Transaction
     public List<Hokensha> getHokenshaList(HokenshaMapperParameter parameter) {
         requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者情報のパラメータ"));
         List<Hokensha> hokenshaList = new ArrayList<>();
-        HokenshaMapper hokenshamapper = mapperProvider.create(HokenshaMapper.class);
-        List<UrT0507HokenjaEntity> entitylist = hokenshamapper.getHokenshaList(parameter);
-        if (entitylist == null || entitylist.isEmpty()) {
+        INewSearchCondition 保険者番号 = SearchConditionFactory.condition(HokenjaSearchItem.保険者番号, StringOperator.前方一致, parameter.getKenCode());
+        INewSearchCondition 保険者種別 = SearchConditionFactory.condition(HokenjaSearchItem.保険者種別, StringOperator.完全一致, new RString("08"));
+        ISearchCondition result = where(保険者番号).and(保険者種別);
+        List<Hokenja> hokenjaList = hokenshafinder.get保険者一覧(result);
+        if (hokenjaList == null || hokenjaList.isEmpty()) {
             return hokenshaList;
         }
-        for (UrT0507HokenjaEntity entity : entitylist) {
-            hokenshaList.add(new Hokensha(entity));
+        for (Hokenja hokenja : hokenjaList) {
+            hokenshaList.add(new Hokensha(hokenja.toEntity()));
         }
         return hokenshaList;
     }

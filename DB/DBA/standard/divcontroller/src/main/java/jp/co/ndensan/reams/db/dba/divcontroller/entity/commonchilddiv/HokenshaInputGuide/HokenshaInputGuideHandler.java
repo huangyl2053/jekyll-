@@ -67,20 +67,14 @@ public class HokenshaInputGuideHandler {
         for (Hokensha guide : hokenjaList) {
             dgSearchResultHokensha_Row row = new dgSearchResultHokensha_Row();
             row.setHokenshaMeisho(guide.get保険者名());
-            //TODO 李　HokenjaNoTypeHandlerが存在しない。　2015/12/25
-            row.setHokenshaNo(new RString("111111"));
+            row.setHokenshaNo(guide.get保険者番号().value());
             row.setHokensha(guide.get保険者名());
             list.add(row);
         }
         div.getSearchResultHokensha().getDgSearchResultHokensha().setDataSource(list);
     }
 
-    /**
-     *
-     * サービス種類検索初期化のデータを全てクリアします。
-     *
-     */
-    public void clear() {
+    private void clear() {
         div.getDdlHokenshaKenCode().getDataSource().clear();
     }
 }

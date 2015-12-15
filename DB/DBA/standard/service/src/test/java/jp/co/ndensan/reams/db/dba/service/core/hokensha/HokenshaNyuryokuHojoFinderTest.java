@@ -142,7 +142,7 @@ public class HokenshaNyuryokuHojoFinderTest extends DbaTestDacBase {
         @Test
         public void テーブルにレコードが存在する場合_保険者情報取得処理は_1件を返すこと() {
             insert_UrT0507Hokenja(保険者種別1, 保険者番号1);
-            HokenshaMapperParameter parameter = HokenshaMapperParameter.createKenCodeParam(new RString("101"));
+            HokenshaMapperParameter parameter = HokenshaMapperParameter.createKenCodeParam(new RString("10"));
             List<Hokensha> hokenjaNoList = sut.getHokenshaList(parameter);
             assertThat(hokenjaNoList.size(), is(1));
         }
