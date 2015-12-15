@@ -16,12 +16,9 @@ import jp.co.ndensan.reams.db.dba.business.core.hihokensha.jukyushadaicho.Jukyus
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.jukyushadaicho.JukyushaDaichoIdentifier;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaIdentifier;
-import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
-import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaIdentifier;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.shisetsunyutaisho.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.shisetsunyutaisho.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokensha.hihokenshadaicho.HihokenshaDaichoRelateEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
@@ -49,7 +46,6 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
     private final Models<IryohokenKanyuJokyoIdentifier, IryohokenKanyuJokyo> iryohokenKanyuJokyo;
     private final Models<JukyushaDaichoIdentifier, JukyushaDaicho> jukyushaDaicho;
     private final Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha;
-    private final Models<SeikatsuHogoJukyushaIdentifier, SeikatsuHogoJukyusha> seikatsuHogoJukyusha;
 
     /**
      * コンストラクタです。<br/>
@@ -78,7 +74,6 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
         this.iryohokenKanyuJokyo = Models.create(new ArrayList<IryohokenKanyuJokyo>());
         this.jukyushaDaicho = Models.create(new ArrayList<JukyushaDaicho>());
         this.roreiFukushiNenkinJukyusha = Models.create(new ArrayList<RoreiFukushiNenkinJukyusha>());
-        this.seikatsuHogoJukyusha = Models.create(new ArrayList<SeikatsuHogoJukyusha>());
     }
 
     /**
@@ -117,12 +112,6 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
             roreiFukushiNenkinJukyushaList.add(new RoreiFukushiNenkinJukyusha(jukyushaEntity));
         }
         this.roreiFukushiNenkinJukyusha = Models.create(roreiFukushiNenkinJukyushaList);
-
-        List<SeikatsuHogoJukyusha> seikatsuHogoJukyushaList = new ArrayList<>();
-        for (SeikatsuHogoJukyushaRelateEntity relateEntity : entity.get生活保護受給者Entity()) {
-            seikatsuHogoJukyushaList.add(new SeikatsuHogoJukyusha(relateEntity));
-        }
-        this.seikatsuHogoJukyusha = Models.create(seikatsuHogoJukyushaList);
     }
 
     /**
@@ -137,8 +126,7 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
             Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> shisetsuNyutaisho,
             Models<IryohokenKanyuJokyoIdentifier, IryohokenKanyuJokyo> iryohokenKanyuJokyo,
             Models<JukyushaDaichoIdentifier, JukyushaDaicho> jukyushaDaicho,
-            Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha,
-            Models<SeikatsuHogoJukyushaIdentifier, SeikatsuHogoJukyusha> seikatsuHogoJukyusha
+            Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha
     ) {
         this.entity = entity;
         this.id = id;
@@ -146,7 +134,6 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
         this.iryohokenKanyuJokyo = iryohokenKanyuJokyo;
         this.jukyushaDaicho = jukyushaDaicho;
         this.roreiFukushiNenkinJukyusha = roreiFukushiNenkinJukyusha;
-        this.seikatsuHogoJukyusha = seikatsuHogoJukyusha;
     }
 
     /**
@@ -424,8 +411,7 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
     /**
      * 被保険者台帳管理配下の要素を削除対象とします。<br/>
      * {@link DbT1001HihokenshaDaichoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 被保険者台帳管理配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link HihokenshaDaicho}を返します。
+     * 被保険者台帳管理配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link HihokenshaDaicho}を返します。
      *
      * @return 削除対象処理実施後の{@link HihokenshaDaicho}
      * @throws IllegalStateException DbT1001HihokenshaDaichoEntityのデータ状態が変更の場合
@@ -441,13 +427,13 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
         }
         return new HihokenshaDaicho(
                 deletedEntity, id, shisetsuNyutaisho.deleted(), iryohokenKanyuJokyo.deleted(),
-                jukyushaDaicho.deleted(), roreiFukushiNenkinJukyusha.deleted(), seikatsuHogoJukyusha.deleted());
+                jukyushaDaicho.deleted(), roreiFukushiNenkinJukyusha.deleted());
     }
 
     @Override
     public boolean hasChanged() {
         return hasChangedEntity() || shisetsuNyutaisho.hasAnyChanged() || iryohokenKanyuJokyo.hasAnyChanged()
-                || jukyushaDaicho.hasAnyChanged() || roreiFukushiNenkinJukyusha.hasAnyChanged() || seikatsuHogoJukyusha.hasAnyChanged();
+                || jukyushaDaicho.hasAnyChanged() || roreiFukushiNenkinJukyusha.hasAnyChanged();
     }
 
     /**
@@ -464,7 +450,7 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
         }
         return new HihokenshaDaicho(
                 modifiedEntity, id, shisetsuNyutaisho, iryohokenKanyuJokyo,
-                jukyushaDaicho, roreiFukushiNenkinJukyusha, seikatsuHogoJukyusha);
+                jukyushaDaicho, roreiFukushiNenkinJukyusha);
     }
 
     /**
@@ -565,37 +551,13 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
     }
 
     /**
-     * 被保険者台帳管理が保持する生活保護受給者情報に対して、指定の識別子に該当する生活保護受給者情報を返します。
-     *
-     * @param id 生活保護受給者情報の識別子
-     * @return 生活保護受給者情報
-     * @throws IllegalStateException 指定の識別子に該当する生活保護受給者情報がない場合
-     */
-    public SeikatsuHogoJukyusha getSeikatsuHogoJukyusha(SeikatsuHogoJukyushaIdentifier id) {
-        if (seikatsuHogoJukyusha.contains(id)) {
-            return seikatsuHogoJukyusha.clone().get(id);
-        }
-        //TODO メッセージの検討
-        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
-    }
-
-    /**
-     * 被保険者台帳管理が保持する生活保護受給者情報をリストで返します。
-     *
-     * @return 生活保護受給者情報リスト
-     */
-    public List<SeikatsuHogoJukyusha> getSeikatsuHogoJukyushaList() {
-        return new ArrayList<>(seikatsuHogoJukyusha.values());
-    }
-
-    /**
      * {@link HihokenshaDaicho}のシリアライズ形式を提供します。
      *
      * @return {@link HihokenshaDaicho}のシリアライズ形式
      */
     protected Object writeReplace() {
         return new _SerializationProxy(entity, id, shisetsuNyutaisho, iryohokenKanyuJokyo,
-                jukyushaDaicho, roreiFukushiNenkinJukyusha, seikatsuHogoJukyusha);
+                jukyushaDaicho, roreiFukushiNenkinJukyusha);
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -607,7 +569,6 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
         private final Models<IryohokenKanyuJokyoIdentifier, IryohokenKanyuJokyo> iryohokenKanyuJokyo;
         private final Models<JukyushaDaichoIdentifier, JukyushaDaicho> jukyushaDaicho;
         private final Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha;
-        private final Models<SeikatsuHogoJukyushaIdentifier, SeikatsuHogoJukyusha> seikatsuHogoJukyusha;
 
         private _SerializationProxy(
                 DbT1001HihokenshaDaichoEntity entity,
@@ -615,8 +576,7 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
                 Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> shisetsuNyutaisho,
                 Models<IryohokenKanyuJokyoIdentifier, IryohokenKanyuJokyo> iryohokenKanyuJokyo,
                 Models<JukyushaDaichoIdentifier, JukyushaDaicho> jukyushaDaicho,
-                Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha,
-                Models<SeikatsuHogoJukyushaIdentifier, SeikatsuHogoJukyusha> seikatsuHogoJukyusha
+                Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha
         ) {
             this.entity = entity;
             this.id = id;
@@ -624,12 +584,11 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
             this.iryohokenKanyuJokyo = iryohokenKanyuJokyo;
             this.jukyushaDaicho = jukyushaDaicho;
             this.roreiFukushiNenkinJukyusha = roreiFukushiNenkinJukyusha;
-            this.seikatsuHogoJukyusha = seikatsuHogoJukyusha;
         }
 
         private Object readResolve() {
             return new HihokenshaDaicho(this.entity, this.id, this.shisetsuNyutaisho, this.iryohokenKanyuJokyo,
-                    this.jukyushaDaicho, this.roreiFukushiNenkinJukyusha, this.seikatsuHogoJukyusha);
+                    this.jukyushaDaicho, this.roreiFukushiNenkinJukyusha);
         }
     }
 
@@ -641,7 +600,7 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
      */
     public HihokenshaDaichoBuilder createBuilderForEdit() {
         return new HihokenshaDaichoBuilder(entity, id, shisetsuNyutaisho, iryohokenKanyuJokyo,
-                jukyushaDaicho, roreiFukushiNenkinJukyusha, seikatsuHogoJukyusha);
+                jukyushaDaicho, roreiFukushiNenkinJukyusha);
     }
 
     @Override
