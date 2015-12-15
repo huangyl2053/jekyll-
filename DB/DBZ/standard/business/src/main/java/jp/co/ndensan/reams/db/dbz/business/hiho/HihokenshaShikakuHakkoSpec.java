@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.Hiho;
+package jp.co.ndensan.reams.db.dbz.business.hiho;
 
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.core.validation.PresenceValidator;
@@ -15,6 +15,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum HihokenshaShikakuHakkoSpec implements IPredicate<RString> {
 
+    /**
+     * 交付事由が選択されていること
+     */
     交付事由が選択されていること {
                 @Override
                 public boolean apply(RString 交付事由) {
