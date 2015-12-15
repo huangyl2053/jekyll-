@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.Shikaku;
+package jp.co.ndensan.reams.db.dbz.business.shikaku;
 
 import jp.co.ndensan.reams.db.dbz.business.core.ShikakuIdoBaseItem;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuHenkoJiyu;
