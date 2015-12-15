@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 構成市町村のエンティティです。
+ * 構成市町村のビジネスクラスです。
  */
 public class KoseiShichoson {
 

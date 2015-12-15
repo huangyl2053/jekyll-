@@ -124,7 +124,7 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
     /**
      * 合併前の旧市町村と最新の広域構成市町村を含む全部市町村情報を取得します。
      *
-     * @return List<DbT7051KoseiShichosonMasterEntity> 全部市町村情報
+     * @return List<DbT7051KoseiShichosonMasterEntity> 全部市町村情報リスト
      */
     @Transaction
     public List<DbT7051KoseiShichosonMasterEntity> zenShichosonJoho() {
@@ -141,7 +141,7 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
     /**
      * 最新の広域構成市町村を含む現市町村情報を取得します。
      *
-     * @return List<DbT7051KoseiShichosonMasterEntity> 現市町村情報
+     * @return List<DbT7051KoseiShichosonMasterEntity> 現市町村情報リスト
      */
     @Transaction
     public List<DbT7051KoseiShichosonMasterEntity> genShichosonJoho() {
@@ -156,7 +156,7 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
     /**
      * 構成市町村リスト情報を取得します。
      *
-     * @return List<DbT7051KoseiShichosonMasterEntity> 構成市町村リスト情報のリスト
+     * @return List<DbT7051KoseiShichosonMasterEntity> 構成市町村情報のリスト
      */
     @Transaction
     public List<DbT7051KoseiShichosonMasterEntity> koseiShichosonList() {
@@ -178,6 +178,7 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      */
     @Transaction
     public DbT7051KoseiShichosonMasterEntity shichosonUserHandan(RString 識別ID) {
+        requireNonNull(識別ID, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村識別ID"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.
                 select().
@@ -194,6 +195,7 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      */
     @Transaction
     public List<DbT7051KoseiShichosonMasterEntity> loginUserShichosonJoho(RString 識別ID) {
+        requireNonNull(識別ID, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村識別ID"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.
                 select().
@@ -210,10 +212,11 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      * 指定された市町村コードの市町村が広域内の構成市町村エンティティを取得します。
      *
      * @param 市町村コード 市町村コード
-     * @return entity 構成市町村マスタテーブルのエンティティ
+     * @return DbT7051KoseiShichosonMasterEntity 構成市町村マスタテーブルのエンティティ
      */
     @Transaction
     public DbT7051KoseiShichosonMasterEntity shichosonSonzaiHandan(RString 市町村コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.
                 select().
@@ -233,6 +236,7 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      */
     @Transaction
     public List<DbT7051KoseiShichosonMasterEntity> shichosonCodeYoriShichosonJoho(LasdecCode 市町村コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.
                 select().

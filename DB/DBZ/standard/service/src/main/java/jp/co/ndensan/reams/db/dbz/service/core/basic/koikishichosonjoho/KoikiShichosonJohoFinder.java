@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho;
 
 import java.util.ArrayList;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.kyot
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -69,7 +71,7 @@ public class KoikiShichosonJohoFinder {
     /**
      * 合併前の旧市町村と最新の広域構成市町村を含む全部市町村情報を取得します。
      *
-     * @return List<KoikiZenShichosonJoho> 全部市町村情報
+     * @return SearchResult<KoikiZenShichosonJoho> 全部市町村情報
      */
     @Transaction
     public SearchResult<KoikiZenShichosonJoho> getZenShichosonJoho() {
@@ -84,7 +86,7 @@ public class KoikiShichosonJohoFinder {
     /**
      * 現市町村情報取得を取得します。
      *
-     * @return List<KoikiZenShichosonJoho> 現市町村情報
+     * @return SearchResult<KoikiZenShichosonJoho> 現市町村情報
      */
     @Transaction
     public SearchResult<KoikiZenShichosonJoho> getGenShichosonJoho() {
@@ -100,7 +102,7 @@ public class KoikiShichosonJohoFinder {
     /**
      * 構成市町村リストを作成します。
      *
-     * @return List<KoseiShichoson> 構成市町村リスト
+     * @return SearchResult<KoseiShichoson> 構成市町村情報
      */
     @Transaction
     public SearchResult<KoseiShichoson> getKoseiShichosonList() {
@@ -121,6 +123,7 @@ public class KoikiShichosonJohoFinder {
      */
     @Transaction
     public boolean isShichosonUserHandan(RString 識別ID) {
+        requireNonNull(識別ID, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村識別ID"));
         DbT7051KoseiShichosonMasterEntity entity = dac.shichosonUserHandan(識別ID);
         return 市町村識別コード.equals(entity.getShichosonShokibetsuID())
                 || 合併旧市町村区分.equals(entity.getGappeiKyuShichosonKubun());
@@ -130,11 +133,12 @@ public class KoikiShichosonJohoFinder {
      * ログインユーザーの属する市町村情報を取得します。
      *
      * @param 識別ID 市町村識別ID
-     * @return List<ShichosonShikibetsuIDniYoruShichosonJoho>
-     * ログインユーザーの属する市町村のリスト
+     * @return SearchResult<ShichosonShikibetsuIDniYoruShichosonJoho>
+     * ログインユーザーの属する市町村の検索結果
      */
     @Transaction
     public SearchResult<ShichosonShikibetsuIDniYoruShichosonJoho> loginUserShichosonJoho(RString 識別ID) {
+        requireNonNull(識別ID, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村識別ID"));
         List<ShichosonShikibetsuIDniYoruShichosonJoho> shichosonList = new ArrayList<>();
         List<DbT7051KoseiShichosonMasterEntity> entityList = dac.loginUserShichosonJoho(識別ID);
         for (DbT7051KoseiShichosonMasterEntity entity : entityList) {
@@ -146,7 +150,7 @@ public class KoikiShichosonJohoFinder {
     /**
      * 市町村情報を取得します。
      *
-     * @return List<DbT7051KoseiShichosonMasterEntity>　広域市町村情報のリスと
+     * @return SearchResult<DbT7051KoseiShichosonMasterEntity>　市町村情報の検索結果
      */
     @Transaction
     public SearchResult<KoikiZenShichosonJoho> koseiShichosonJoho() {
@@ -175,11 +179,11 @@ public class KoikiShichosonJohoFinder {
                 ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告));
         entity.setTyohyoKatagakiHyojiUmu(BusinessConfig.get(
                 ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_住所編集_方書表示有無, SubGyomuCode.DBU介護統計報告));
-//         TODO 凌護行 Enum:ConfigNameDBUクラスに「老人保健情報_市町村番号」がありません。 QA39回答まち 2015/11/15
+//         TODO 凌護行 Enum:ConfigNameDBUクラスに「老人保健情報_市町村番号」がありません。 QA39回答まち 2015/12/15まで
 //        entity.setRojinhokenShichosonNo(BusinessConfig.get(ConfigNameDBU.老人保健情報_市町村番号, SubGyomuCode.DBU介護統計報告));
-//         TODO 凌護行 Enum:ConfigNameDBDクラスがありません。 QA39回答まち 2015/11/15
+//         TODO 凌護行 Enum:ConfigNameDBDクラスがありません。 QA39回答まち 2015/12/15まで
 //        entity.setRokenJukyushaNoTaikei(BusinessConfig.get(ConfigNameDBD.老人保健情報_管理体系, SubGyomuCode.DBD介護受給));
-//         TODO 凌護行 Enum:ConfigNameDBBクラスがありません。 QA39回答まち 2015/11/15
+//         TODO 凌護行 Enum:ConfigNameDBBクラスがありません。 QA39回答まち 2015/12/15まで
 //        entity.setTokuchoBunpaishuyaku(BusinessConfig.get(ConfigNameDBB.動作関連_特徴分配集約システム, SubGyomuCode.DBB介護賦課));
         entity.setIkoYMD(FlexibleDate.EMPTY);
         entity.setKanyuYMD(FlexibleDate.EMPTY);
@@ -203,6 +207,7 @@ public class KoikiShichosonJohoFinder {
      */
     @Transaction
     public boolean isShichosonSonzaiHandan(RString 市町村コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         DbT7051KoseiShichosonMasterEntity entity = dac.shichosonSonzaiHandan(市町村コード);
         return null != entity;
     }
@@ -211,10 +216,11 @@ public class KoikiShichosonJohoFinder {
      * 市町村コードによる市町村情報の検索します。
      *
      * @param 市町村コード 市町村コード
-     * @return List<ShichosonCodeYoriShichoson>　市町村コードによる市町村Entityのリスと
+     * @return SearchResult<ShichosonCodeYoriShichoson>　市町村情報の検索結果
      */
     @Transaction
     public SearchResult<ShichosonCodeYoriShichoson> shichosonCodeYoriShichosonJoho(LasdecCode 市町村コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         List<ShichosonCodeYoriShichoson> shichosonList = new ArrayList<>();
         List<DbT7051KoseiShichosonMasterEntity> entityList = dac.shichosonCodeYoriShichosonJoho(市町村コード);
         for (DbT7051KoseiShichosonMasterEntity entity : entityList) {

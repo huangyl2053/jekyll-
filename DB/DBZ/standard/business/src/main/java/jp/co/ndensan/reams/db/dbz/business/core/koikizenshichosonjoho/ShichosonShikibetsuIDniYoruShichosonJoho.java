@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * {@link ShichosonShikibetsuIDniYoruShichosonJoho}の実装です。
+ * 構成市町村のビジネスクラスです。
  */
 public class ShichosonShikibetsuIDniYoruShichosonJoho {
 
