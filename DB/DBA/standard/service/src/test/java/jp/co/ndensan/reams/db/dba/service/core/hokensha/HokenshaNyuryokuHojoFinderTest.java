@@ -105,14 +105,14 @@ public class HokenshaNyuryokuHojoFinderTest extends DbaTestDacBase {
         @Test
         public void テーブルにレコードが存在しない場合_県コード取得処理は_NULLを返すこと() {
             insert_UrT0101ZenkokuJusho(データ区分2, 都道府県住所コード1, 市町村住所コード1, 大字住所コード1, 字丁住所コード1);
-            List<KenCodeJigyoshaInputGuide> kenCodeList = sut.getKenCodeJigyoshaInputGuide();
+            List<KenCodeJigyoshaInputGuide> kenCodeList = sut.getKenCodeJigyoshaInputGuide().records();
             assertThat(kenCodeList.size(), is(0));
         }
 
         @Test
         public void テーブルにレコードが存在する場合_県コード取得処理は_1件を返すこと() {
             insert_UrT0101ZenkokuJusho(データ区分1, 都道府県住所コード1, 市町村住所コード1, 大字住所コード1, 字丁住所コード1);
-            List<KenCodeJigyoshaInputGuide> kenCodeList = sut.getKenCodeJigyoshaInputGuide();
+            List<KenCodeJigyoshaInputGuide> kenCodeList = sut.getKenCodeJigyoshaInputGuide().records();
             assertThat(kenCodeList.size(), is(1));
         }
 
@@ -120,7 +120,7 @@ public class HokenshaNyuryokuHojoFinderTest extends DbaTestDacBase {
         public void テーブルにレコードが存在する場合_県コード取得処理は_2件を返すこと() {
             insert_UrT0101ZenkokuJusho(データ区分1, 都道府県住所コード1, 市町村住所コード1, 大字住所コード1, 字丁住所コード1);
             insert_UrT0101ZenkokuJusho(データ区分1, 都道府県住所コード2, 市町村住所コード2, 大字住所コード2, 字丁住所コード2);
-            List<KenCodeJigyoshaInputGuide> kenCodeList = sut.getKenCodeJigyoshaInputGuide();
+            List<KenCodeJigyoshaInputGuide> kenCodeList = sut.getKenCodeJigyoshaInputGuide().records();
             assertThat(kenCodeList.size(), is(2));
         }
     }
@@ -135,7 +135,7 @@ public class HokenshaNyuryokuHojoFinderTest extends DbaTestDacBase {
         @Test
         public void テーブルにレコードが存在しない場合_保険者情報取得処理は_NULLを返すこと() {
             HokenshaMapperParameter parameter = HokenshaMapperParameter.createKenCodeParam(new RString("101"));
-            List<Hokensha> hokenjaNoList = sut.getHokenshaList(parameter);
+            List<Hokensha> hokenjaNoList = sut.getHokenshaList(parameter).records();
             assertThat(hokenjaNoList.size(), is(0));
         }
 
@@ -143,7 +143,7 @@ public class HokenshaNyuryokuHojoFinderTest extends DbaTestDacBase {
         public void テーブルにレコードが存在する場合_保険者情報取得処理は_1件を返すこと() {
             insert_UrT0507Hokenja(保険者種別1, 保険者番号1);
             HokenshaMapperParameter parameter = HokenshaMapperParameter.createKenCodeParam(new RString("10"));
-            List<Hokensha> hokenjaNoList = sut.getHokenshaList(parameter);
+            List<Hokensha> hokenjaNoList = sut.getHokenshaList(parameter).records();
             assertThat(hokenjaNoList.size(), is(1));
         }
 
@@ -152,7 +152,7 @@ public class HokenshaNyuryokuHojoFinderTest extends DbaTestDacBase {
             insert_UrT0507Hokenja(保険者種別2, 保険者番号1);
             insert_UrT0507Hokenja(保険者種別2, 保険者番号2);
             HokenshaMapperParameter parameter = HokenshaMapperParameter.createKenCodeParam(new RString("10"));
-            List<Hokensha> hokenjaNoList = sut.getHokenshaList(parameter);
+            List<Hokensha> hokenjaNoList = sut.getHokenshaList(parameter).records();
             assertThat(hokenjaNoList.size(), is(2));
         }
     }

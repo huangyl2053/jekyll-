@@ -76,7 +76,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
         @Test
         public void テーブルにレコードが存在しない場合_被保険者台帳管理情報取得処理は_NULLを返すこと() {
             HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaDaicho(HihokenshaNo.EMPTY, ShikibetsuCode.EMPTY);
-            List<HihokenshaShutokuJyoho> entitylist = manager.getHihokenshaShutokuJyoho(parameter);
+            List<HihokenshaShutokuJyoho> entitylist = manager.getHihokenshaShutokuJyoho(parameter).records();
             assertThat(entitylist.size(), is(0));
         }
 
@@ -84,7 +84,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
         public void 被保険者番号が存在する場合_被保険者台帳管理情報取得処理は_1件を返すこと() {
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日1, 枝番1, 資格取得年月日, 資格喪失年月日);
             HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaDaicho(被保険者番号1, ShikibetsuCode.EMPTY);
-            List<HihokenshaShutokuJyoho> entitylist = manager.getHihokenshaShutokuJyoho(parameter);
+            List<HihokenshaShutokuJyoho> entitylist = manager.getHihokenshaShutokuJyoho(parameter).records();
             assertThat(entitylist.size(), is(1));
         }
 
@@ -92,7 +92,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
         public void 被保険者番号が存在しない場合_被保険者台帳管理情報取得処理は_1件を返すこと() {
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日1, 枝番1, 資格取得年月日, 資格喪失年月日);
             HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaDaicho(HihokenshaNo.EMPTY, new ShikibetsuCode("012340123400001"));
-            List<HihokenshaShutokuJyoho> entitylist = manager.getHihokenshaShutokuJyoho(parameter);
+            List<HihokenshaShutokuJyoho> entitylist = manager.getHihokenshaShutokuJyoho(parameter).records();
             assertThat(entitylist.size(), is(1));
         }
 
@@ -101,7 +101,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日1, 枝番1, 資格取得年月日, 資格喪失年月日);
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日2, 枝番2, 資格取得年月日, 資格喪失年月日);
             HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaDaicho(被保険者番号1, ShikibetsuCode.EMPTY);
-            List<HihokenshaShutokuJyoho> entitylist = manager.getHihokenshaShutokuJyoho(parameter);
+            List<HihokenshaShutokuJyoho> entitylist = manager.getHihokenshaShutokuJyoho(parameter).records();
             assertThat(entitylist.size(), is(2));
         }
     }

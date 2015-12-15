@@ -6,12 +6,13 @@
 package jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.hihokenshadaicho.HihokenshaShikakuShutokuMapper;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
+//import jp.co.ndensan.reams.db.dba.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
@@ -24,6 +25,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -85,18 +87,18 @@ public class HihokenshaShikakuShutokuManager {
      * @return List<HihokenshaShutokuJyoho>　被保険者台帳管理リスト
      */
     @Transaction
-    public List<HihokenshaShutokuJyoho> getHihokenshaShutokuJyoho(HihokenshaShikakuShutokuMapperParameter parameter) {
+    public SearchResult<HihokenshaShutokuJyoho> getHihokenshaShutokuJyoho(HihokenshaShikakuShutokuMapperParameter parameter) {
         requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳管理のパラメータ"));
         List<HihokenshaShutokuJyoho> hihokenshaShutokuJyohoList = new ArrayList<>();
         HihokenshaShikakuShutokuMapper hokenshamapper = mapperProvider.create(HihokenshaShikakuShutokuMapper.class);
         List<DbT1001HihokenshaDaichoEntity> entitylist = hokenshamapper.getHihokenshaShutokuJyoho(parameter);
         if (entitylist == null || entitylist.isEmpty()) {
-            return new ArrayList<>();
+            return SearchResult.of(Collections.< HihokenshaShutokuJyoho>emptyList(), 0, false);
         }
         for (DbT1001HihokenshaDaichoEntity entity : entitylist) {
             hihokenshaShutokuJyohoList.add(new HihokenshaShutokuJyoho(entity));
         }
-        return hihokenshaShutokuJyohoList;
+        return SearchResult.of(hihokenshaShutokuJyohoList, 0, false);
     }
 
     /**
@@ -110,7 +112,7 @@ public class HihokenshaShikakuShutokuManager {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳管理（資格取得）Entity"));
         shikibetsuCode = entity.getShikibetsuCode();
         idoYMD = entity.getIdoYMD();
-        hihokenshaNo = HihokenshanotsukibanFinder.createInstance().getHihokenshanotsukiban(shikibetsuCode);
+//        hihokenshaNo = HihokenshanotsukibanFinder.createInstance().getHihokenshanotsukiban(shikibetsuCode);
         HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaEdaban(hihokenshaNo, idoYMD);
         edaNo = getSaidaiEdaban(parameter);
         shikakuShutokuYMD = entity.getShikakuShutokuYMD();

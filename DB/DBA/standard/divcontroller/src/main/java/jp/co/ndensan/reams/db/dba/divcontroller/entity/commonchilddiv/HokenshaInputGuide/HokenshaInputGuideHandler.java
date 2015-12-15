@@ -38,7 +38,7 @@ public class HokenshaInputGuideHandler {
         }
         set保険者(div, kenCode);
         clear();
-        List<KenCodeJigyoshaInputGuide> KenCodeList = HokenshaNyuryokuHojoFinder.createInstance().getKenCodeJigyoshaInputGuide();
+        List<KenCodeJigyoshaInputGuide> KenCodeList = HokenshaNyuryokuHojoFinder.createInstance().getKenCodeJigyoshaInputGuide().records();
         List<KeyValueDataSource> list = new ArrayList<>();
         for (KenCodeJigyoshaInputGuide guide : KenCodeList) {
             KeyValueDataSource DataSource = new KeyValueDataSource();
@@ -47,6 +47,7 @@ public class HokenshaInputGuideHandler {
             list.add(DataSource);
         }
         div.getDdlHokenshaKenCode().setDataSource(list);
+        div.getDdlHokenshaKenCode().setSelectedKey(kenCode);
     }
 
     public void on保険者を表示する(HokenshaInputGuideDiv div) {
@@ -62,7 +63,7 @@ public class HokenshaInputGuideHandler {
 
     private void set保険者(HokenshaInputGuideDiv div, RString kenCode) {
         HokenshaMapperParameter parameter = HokenshaMapperParameter.createKenCodeParam(kenCode);
-        List<Hokensha> hokenjaList = HokenshaNyuryokuHojoFinder.createInstance().getHokenshaList(parameter);
+        List<Hokensha> hokenjaList = HokenshaNyuryokuHojoFinder.createInstance().getHokenshaList(parameter).records();
         List<dgSearchResultHokensha_Row> list = new ArrayList<>();
         for (Hokensha guide : hokenjaList) {
             dgSearchResultHokensha_Row row = new dgSearchResultHokensha_Row();

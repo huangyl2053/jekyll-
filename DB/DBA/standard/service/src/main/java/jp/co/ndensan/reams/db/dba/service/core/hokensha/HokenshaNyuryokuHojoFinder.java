@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.service.core.hokensha;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.hokensha.Hokensha;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -95,17 +97,17 @@ public class HokenshaNyuryokuHojoFinder {
      * @return List<KenCodeJigyoshaInputGuide> 県コード取得リスト
      */
     @Transaction
-    public List<KenCodeJigyoshaInputGuide> getKenCodeJigyoshaInputGuide() {
+    public SearchResult<KenCodeJigyoshaInputGuide> getKenCodeJigyoshaInputGuide() {
         List<KenCodeJigyoshaInputGuide> kenCodeList = new ArrayList<>();
         ITrueFalseCriteria result = and(not(eq(UrT0101ZenkokuJusho.isDeleted, true)), eq(UrT0101ZenkokuJusho.dataKubun, ZenkokuJushoSearchShurui.都道府県.getDataKubun()));
         List<ZenkokuJushoItem> zenkoItem = kokuFinder.get全国住所(result);
         if (zenkoItem == null || zenkoItem.isEmpty()) {
-            return kenCodeList;
+            return SearchResult.of(Collections.< KenCodeJigyoshaInputGuide>emptyList(), 0, false);
         }
         for (ZenkokuJushoItem Item : zenkoItem) {
             kenCodeList.add(new KenCodeJigyoshaInputGuide(Item.toEntity()));
         }
-        return kenCodeList;
+        return SearchResult.of(kenCodeList, 0, false);
     }
 
     /**
@@ -115,7 +117,7 @@ public class HokenshaNyuryokuHojoFinder {
      * @return List<Hokensha> 保険者情報リスト
      */
     @Transaction
-    public List<Hokensha> getHokenshaList(HokenshaMapperParameter parameter) {
+    public SearchResult<Hokensha> getHokenshaList(HokenshaMapperParameter parameter) {
         requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者情報のパラメータ"));
         List<Hokensha> hokenshaList = new ArrayList<>();
         INewSearchCondition 保険者番号 = SearchConditionFactory.condition(HokenjaSearchItem.保険者番号, StringOperator.前方一致, parameter.getKenCode());
@@ -123,11 +125,11 @@ public class HokenshaNyuryokuHojoFinder {
         ISearchCondition result = where(保険者番号).and(保険者種別);
         List<Hokenja> hokenjaList = hokenshafinder.get保険者一覧(result);
         if (hokenjaList == null || hokenjaList.isEmpty()) {
-            return hokenshaList;
+            return SearchResult.of(Collections.< Hokensha>emptyList(), 0, false);
         }
         for (Hokenja hokenja : hokenjaList) {
             hokenshaList.add(new Hokensha(hokenja.toEntity()));
         }
-        return hokenshaList;
+        return SearchResult.of(hokenshaList, 0, false);
     }
 }
