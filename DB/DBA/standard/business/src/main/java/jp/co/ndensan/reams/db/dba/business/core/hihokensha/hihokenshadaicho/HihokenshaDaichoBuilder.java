@@ -12,8 +12,6 @@ import jp.co.ndensan.reams.db.dba.business.core.hihokensha.jukyushadaicho.Jukyus
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.jukyushadaicho.JukyushaDaichoIdentifier;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaIdentifier;
-import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
-import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaIdentifier;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.shisetsunyutaisho.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.shisetsunyutaisho.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -36,7 +34,6 @@ public class HihokenshaDaichoBuilder {
     private final Models<IryohokenKanyuJokyoIdentifier, IryohokenKanyuJokyo> iryohokenKanyuJokyo;
     private final Models<JukyushaDaichoIdentifier, JukyushaDaicho> jukyushaDaicho;
     private final Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha;
-    private final Models<SeikatsuHogoJukyushaIdentifier, SeikatsuHogoJukyusha> seikatsuHogoJukyusha;
 
     /**
      * {@link DbT1001HihokenshaDaichoEntity}より{@link HihokenshaDaicho}の編集用Builderクラスを生成します。
@@ -53,8 +50,7 @@ public class HihokenshaDaichoBuilder {
             Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> shisetsuNyutaisho,
             Models<IryohokenKanyuJokyoIdentifier, IryohokenKanyuJokyo> iryohokenKanyuJokyo,
             Models<JukyushaDaichoIdentifier, JukyushaDaicho> jukyushaDaicho,
-            Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha,
-            Models<SeikatsuHogoJukyushaIdentifier, SeikatsuHogoJukyusha> seikatsuHogoJukyusha
+            Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha
     ) {
         this.entity = entity.clone();
         this.id = id;
@@ -62,7 +58,6 @@ public class HihokenshaDaichoBuilder {
         this.iryohokenKanyuJokyo = iryohokenKanyuJokyo;
         this.jukyushaDaicho = jukyushaDaicho;
         this.roreiFukushiNenkinJukyusha = roreiFukushiNenkinJukyusha;
-        this.seikatsuHogoJukyusha = seikatsuHogoJukyusha;
     }
 
     /**
@@ -457,28 +452,6 @@ public class HihokenshaDaichoBuilder {
     }
 
     /**
-     * 生活保護受給者情報のキー情報について判定します。<br>
-     * 被保険者台帳管理情報に関連できる生活保護受給者情報である場合、下記の処理に遷移します。<br>
-     * キーが一致する場合は生活保護受給者情報リストに生活保護受給者情報{@link SeikatsuHogoJukyusha}をセットします。<br>
-     * キーが一致しない場合、新たに追加します。<br>
-     *
-     * @param 生活保護受給者情報 {@link SeikatsuHogoJukyusha}
-     * @return Builder
-     * @throws IllegalStateException キーが一致しない場合
-     */
-    public HihokenshaDaichoBuilder setTodokedesha(SeikatsuHogoJukyusha 生活保護受給者情報) {
-        if (hasSeikatsuHogoJukyushaIdentifier(生活保護受給者情報.identifier())) {
-            seikatsuHogoJukyusha.add(生活保護受給者情報);
-            return this;
-        }
-        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
-    }
-
-    private boolean hasSeikatsuHogoJukyushaIdentifier(SeikatsuHogoJukyushaIdentifier 生活保護受給者情報識別子) {
-        return (entity.getShikibetsuCode().equals(生活保護受給者情報識別子.get識別コード()));
-    }
-
-    /**
      * {@link HihokenshaDaicho}のインスタンスを生成します。
      *
      * @return {@link HihokenshaDaicho}のインスタンス
@@ -490,7 +463,7 @@ public class HihokenshaDaichoBuilder {
                 shisetsuNyutaisho,
                 iryohokenKanyuJokyo,
                 jukyushaDaicho,
-                roreiFukushiNenkinJukyusha,
-                seikatsuHogoJukyusha);
+                roreiFukushiNenkinJukyusha
+        );
     }
 }

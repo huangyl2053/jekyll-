@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dba.business.core.hihokensha.hihokenshadaicho.Hiho
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.iryohokenkanyujokyo.IryohokenKanyuJokyo;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.jukyushadaicho.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
-import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.shisetsunyutaisho.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokensha.hihokenshadaicho.HihokenshaDaichoMapperParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokensha.hihokenshadaicho.HihokenshaDaichoRelateEntity;
@@ -84,8 +83,7 @@ public class HihokenshaDaichoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoManager}のインスタンス
      */
     public static HihokenshaDaichoManager createInstance() {
         return InstanceProvider.create(HihokenshaDaichoManager.class);
@@ -129,7 +127,6 @@ public class HihokenshaDaichoManager {
         save介護保険施設入退所リスト(被保険者台帳管理.getShisetsuNyutaishoList());
         save介護保険医療保険加入状況リスト(被保険者台帳管理.getIryohokenKanyuJokyoList());
         save老齢福祉年金受給者リスト(被保険者台帳管理.getRoreiFukushiNenkinJukyushaList());
-        save生活保護受給者リスト(被保険者台帳管理.getSeikatsuHogoJukyushaList());
         return 1 == 被保険者台帳管理Dac.save(被保険者台帳管理.toEntity());
     }
 
@@ -154,12 +151,6 @@ public class HihokenshaDaichoManager {
     private void save老齢福祉年金受給者リスト(List<RoreiFukushiNenkinJukyusha> 老齢福祉年金受給者List) {
         for (RoreiFukushiNenkinJukyusha 老齢福祉年金受給者 : 老齢福祉年金受給者List) {
             老齢福祉年金受給者Manager.save老齢福祉年金受給者(老齢福祉年金受給者);
-        }
-    }
-
-    private void save生活保護受給者リスト(List<SeikatsuHogoJukyusha> 生活保護受給者List) {
-        for (SeikatsuHogoJukyusha 生活保護受給者 : 生活保護受給者List) {
-            生活保護受給者Manager.save(生活保護受給者);
         }
     }
 }
