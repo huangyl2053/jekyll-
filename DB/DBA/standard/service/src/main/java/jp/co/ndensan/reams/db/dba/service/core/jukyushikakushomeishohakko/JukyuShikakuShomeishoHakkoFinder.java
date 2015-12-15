@@ -61,7 +61,8 @@ public class JukyuShikakuShomeishoHakkoFinder {
      * @param 受給資格証明書発行情報の検索キー 受給資格証明書発行情報の検索キー。
      *
      * １、受給資格証明書発行情報を取得できない場合、NULLを返します。
-     * ２、「受給者台帳」テーブルに、認定申請中データ．受給申請事由がDBD.Enum受給申請事由.指定サービス種類変更申請である場合、NULLを返します。
+     * ２、「受給者台帳」テーブルに、認定申請中データ．受給申請事由がDBD.Enum受給申請事由.指定サービス種類変更申請である場合、
+     *      NULLを返します。
      * ３、受給資格証明書発行情報を取得して、被保険者証・資格者証発行を表すクラスを返します。
      * @return JukyuShikakuShomeisho 被保険者証・資格者証発行の表すクラスを返します。
      */
@@ -120,7 +121,7 @@ public class JukyuShikakuShomeishoHakkoFinder {
                 break;
             }
         }
-        set介護認定審査会意見(jukyuShikakuShomeishoHakkoRelateEntity, サービス種類名称リスト, サービス種類略称リスト);
+        edit介護認定審査会意見(jukyuShikakuShomeishoHakkoRelateEntity, サービス種類名称リスト, サービス種類略称リスト);
     }
 
     private List<RString> サービス種類コードリストを設定します(JukyuShikakuShomeishoHakkoRelateEntity 
@@ -163,7 +164,7 @@ public class JukyuShikakuShomeishoHakkoFinder {
         return サービス種類コードList;
     }
 
-    private void set介護認定審査会意見(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRelate,
+    private void edit介護認定審査会意見(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRelate,
             List<RString> サービス種類名称リスト, List<RString> サービス種類略称リスト) {
         RStringBuilder 介護認定審査会意見と名称 = new RStringBuilder(jukyuShikakuShomeishoHakkoRelate.getShinsakaiIken());
         介護認定審査会意見と名称.append(SPACE);
@@ -184,9 +185,11 @@ public class JukyuShikakuShomeishoHakkoFinder {
         }
     }
 
-    private JukyuShikakuShomeishoHakkoRelateEntity edit備考(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRelate,
+    private JukyuShikakuShomeishoHakkoRelateEntity edit備考(
+            JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRelate,
             JukyuShikakuShomeishoHakkoRelateEntity ninTeiShinSeiChuDataEntity,
             IJukyuShikakuShomeishoHakkoRelateMapper jukyuShikakuShomeishoHakkoMapper) {
+        
         JukyuShikakuShomeishoHakkoRelateEntity ninTeiChouSaJouEntity = jukyuShikakuShomeishoHakkoMapper
                 .getNinTeiChouSaJou(JukyuShikakuShomeishoHakkoParameter.
                         createSelectBy申請書管理番号(ninTeiShinSeiChuDataEntity.getShinseishoKanriNo()));

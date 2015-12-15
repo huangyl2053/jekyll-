@@ -20,7 +20,8 @@ public interface IJukyuShikakuShomeishoHakkoRelateMapper {
      * @param 受給資格証明書発行情報の検索キー 受給資格証明書発行情報の検索キー
      * @return JukyuShikakuShomeishoHakkoRelateEntity
      */
-    JukyuShikakuShomeishoHakkoRelateEntity getJukyuShikakuShomeishoHakko(JukyuShikakuShomeishoHakkoParameter 受給資格証明書発行情報の検索キー);
+    JukyuShikakuShomeishoHakkoRelateEntity getJukyuShikakuShomeishoHakko(JukyuShikakuShomeishoHakkoParameter
+            受給資格証明書発行情報の検索キー);
 
     /**
      * サービス種類情報検索結果を返します。
@@ -28,7 +29,8 @@ public interface IJukyuShikakuShomeishoHakkoRelateMapper {
      * @param 受給資格証明書発行情報の検索キー 受給資格証明書発行情報の検索キー
      * @return JukyuShikakuShomeishoHakkoRelateEntity
      */
-    JukyuShikakuShomeishoHakkoRelateEntity getServiceCode(JukyuShikakuShomeishoHakkoParameter 受給資格証明書発行情報の検索キー);
+    JukyuShikakuShomeishoHakkoRelateEntity getServiceCode(JukyuShikakuShomeishoHakkoParameter
+            受給資格証明書発行情報の検索キー);
 
     /**
      * フォーカスアウトのサービス種類検索結果を返します。
@@ -36,7 +38,8 @@ public interface IJukyuShikakuShomeishoHakkoRelateMapper {
      * @param 受給資格証明書発行情報の検索キー 受給資格証明書発行情報の検索キー
      * @return JukyuShikakuShomeishoHakkoRelateEntity
      */
-    JukyuShikakuShomeishoHakkoRelateEntity getServiceMei(JukyuShikakuShomeishoHakkoParameter 受給資格証明書発行情報の検索キー);
+    JukyuShikakuShomeishoHakkoRelateEntity getServiceMei(JukyuShikakuShomeishoHakkoParameter
+            受給資格証明書発行情報の検索キー);
 
     /**
      * 認定申請中データを取得します。
@@ -44,7 +47,8 @@ public interface IJukyuShikakuShomeishoHakkoRelateMapper {
      * @param 受給資格証明書発行情報の検索キー 受給資格証明書発行情報の検索キー
      * @return JukyuShikakuShomeishoHakkoRelateEntity
      */
-    JukyuShikakuShomeishoHakkoRelateEntity getNinTeiShinSeiChuData(JukyuShikakuShomeishoHakkoParameter 受給資格証明書発行情報の検索キー);
+    JukyuShikakuShomeishoHakkoRelateEntity getNinTeiShinSeiChuData(JukyuShikakuShomeishoHakkoParameter
+            受給資格証明書発行情報の検索キー);
 
     /**
      * 認定調査情報を取得します。
@@ -52,6 +56,7 @@ public interface IJukyuShikakuShomeishoHakkoRelateMapper {
      * @param 受給資格証明書発行情報の検索キー 受給資格証明書発行情報の検索キー
      * @return JukyuShikakuShomeishoHakkoRelateEntity
      */
-    JukyuShikakuShomeishoHakkoRelateEntity getNinTeiChouSaJou(JukyuShikakuShomeishoHakkoParameter 受給資格証明書発行情報の検索キー);
+    JukyuShikakuShomeishoHakkoRelateEntity getNinTeiChouSaJou(JukyuShikakuShomeishoHakkoParameter
+            受給資格証明書発行情報の検索キー);
 
 }
