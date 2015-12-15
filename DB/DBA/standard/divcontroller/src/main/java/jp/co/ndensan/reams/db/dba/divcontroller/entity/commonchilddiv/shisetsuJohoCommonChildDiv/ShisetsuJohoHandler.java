@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 施設情報のHandlerクラスです。
@@ -136,10 +137,10 @@ public class ShisetsuJohoHandler {
             div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
             ShisetsuJohoInputGuideFinder shisetsuJoho = new ShisetsuJohoInputGuideFinder();
-            List<KaigoJigyoshaInputGuide> kaigoJigyosha = shisetsuJoho.getKaigoJigyoshaInputGuide(new KaigoJigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()), FlexibleDate.getNowDate());
-            if (kaigoJigyosha != null && !kaigoJigyosha.isEmpty()) {
-                div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoJigyosha.get(0).get事業者名称().value());
-                div.getTxtNyuryokuShisetsuKodo().setValue(kaigoJigyosha.get(0).get事業者番号().value());
+            SearchResult<KaigoJigyoshaInputGuide> kaigoJigyosha = shisetsuJoho.getKaigoJigyoshaInputGuide(new KaigoJigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()), FlexibleDate.getNowDate());
+            if (!kaigoJigyosha.records().isEmpty()) {
+                div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoJigyosha.records().get(0).get事業者名称().value());
+                div.getTxtNyuryokuShisetsuKodo().setValue(kaigoJigyosha.records().get(0).get事業者番号().value());
             } else {
 
                 div.getTxtNyuryokuShisetsuMeisho().clearValue();
@@ -164,11 +165,11 @@ public class ShisetsuJohoHandler {
             div.getRadKaigoHokenShisetsu().getDisabledItem().clear();
             div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
             ShisetsuJohoInputGuideFinder shisetsuJoho = new ShisetsuJohoInputGuideFinder();
-            List<KaigoJogaiTokureiTaishoShisetsuInputGuide> kaigoJogaiTokureiTaishoShisetsu = shisetsuJoho.
+            SearchResult<KaigoJogaiTokureiTaishoShisetsuInputGuide> kaigoJogaiTokureiTaishoShisetsu = shisetsuJoho.
                     getKaigoJogaiTokureiTaishoShisetsuInputGuide(ShisetsuType.住所地特例対象施設.getCode(), new JigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()), FlexibleDate.getNowDate());
-            if (kaigoJogaiTokureiTaishoShisetsu != null && !kaigoJogaiTokureiTaishoShisetsu.isEmpty()) {
+            if (!kaigoJogaiTokureiTaishoShisetsu.records().isEmpty()) {
 
-                div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoJogaiTokureiTaishoShisetsu.get(0).get事業者名称().value());
+                div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoJogaiTokureiTaishoShisetsu.records().get(0).get事業者名称().value());
             } else {
 
                 div.getTxtNyuryokuShisetsuMeisho().clearValue();
@@ -187,11 +188,11 @@ public class ShisetsuJohoHandler {
             div.getRadKaigoHokenShisetsu().getDisabledItem().clear();
             div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             ShisetsuJohoInputGuideFinder shisetsuJoho = new ShisetsuJohoInputGuideFinder();
-            List<KaigoJogaiTokureiTaishoShisetsuInputGuide> kaigoJogaiTokureiTaishoShisetsu = shisetsuJoho.
+            SearchResult<KaigoJogaiTokureiTaishoShisetsuInputGuide> kaigoJogaiTokureiTaishoShisetsu = shisetsuJoho.
                     getKaigoJogaiTokureiTaishoShisetsuInputGuide(ShisetsuType.住所地特例対象施設.getCode(), new JigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()), FlexibleDate.getNowDate());
-            if (kaigoJogaiTokureiTaishoShisetsu != null && !kaigoJogaiTokureiTaishoShisetsu.isEmpty()) {
+            if (!kaigoJogaiTokureiTaishoShisetsu.records().isEmpty()) {
 
-                div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoJogaiTokureiTaishoShisetsu.get(0).get事業者名称().value());
+                div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoJogaiTokureiTaishoShisetsu.records().get(0).get事業者名称().value());
             } else {
 
                 div.getTxtNyuryokuShisetsuMeisho().clearValue();

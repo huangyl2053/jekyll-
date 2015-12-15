@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.service.core.shisetsu;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shisetujyoho.KaigoJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dba.business.core.shisetujyoho.KaigoJogaiTokureiTaishoShisetsuInputGuide;
@@ -17,7 +18,9 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1005KaigoJogaiTokureiT
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
@@ -57,17 +60,17 @@ public class ShisetsuJohoInputGuideFinder {
      * @param システム日付 FlexibleDate
      * @return List<KaigoJigyoshaInputGuide> 介護事業者取得リスト
      */
-    public List<KaigoJigyoshaInputGuide> getKaigoJigyoshaInputGuide(KaigoJigyoshaNo 事業者番号, FlexibleDate システム日付) {
+    @Transaction
+    public SearchResult<KaigoJigyoshaInputGuide> getKaigoJigyoshaInputGuide(KaigoJigyoshaNo 事業者番号, FlexibleDate システム日付) {
         List<KaigoJigyoshaInputGuide> kaigoJigyoshaList = new ArrayList<>();
         List<DbT7060KaigoJigyoshaEntity> dbT7060List = dbT7060Dac.select介護事業者(事業者番号, システム日付);
         if (dbT7060List == null || dbT7060List.isEmpty()) {
-            return new ArrayList<>();
+            return SearchResult.of(Collections.<KaigoJigyoshaInputGuide>emptyList(), 0, false);
         }
         for (DbT7060KaigoJigyoshaEntity entity : dbT7060List) {
             kaigoJigyoshaList.add(new KaigoJigyoshaInputGuide(entity));
         }
-        return kaigoJigyoshaList;
-
+        return SearchResult.of(kaigoJigyoshaList, 0, false);
     }
 
     /**
@@ -78,7 +81,8 @@ public class ShisetsuJohoInputGuideFinder {
      * @param 有効開始年月日 FlexibleDate
      * @return List<KaigoJogaiTokureiTaishoShisetsuInputGuide> 介護除外住所地特例対象施設リスト
      */
-    public List<KaigoJogaiTokureiTaishoShisetsuInputGuide> getKaigoJogaiTokureiTaishoShisetsuInputGuide(
+    @Transaction
+    public SearchResult<KaigoJogaiTokureiTaishoShisetsuInputGuide> getKaigoJogaiTokureiTaishoShisetsuInputGuide(
             RString 事業者種別,
             JigyoshaNo 事業者番号,
             FlexibleDate 有効開始年月日) {
@@ -86,11 +90,11 @@ public class ShisetsuJohoInputGuideFinder {
         List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> dbT1005List = dbT1005Dac.
                 select介護除外住所地特例対象施設(事業者種別, 事業者番号, 有効開始年月日);
         if (dbT1005List == null || dbT1005List.isEmpty()) {
-            return new ArrayList<>();
+            return SearchResult.of(Collections.<KaigoJogaiTokureiTaishoShisetsuInputGuide>emptyList(), 0, false);
         }
         for (DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity : dbT1005List) {
             kaigoJogaiTokureiTaishoShisetsuList.add(new KaigoJogaiTokureiTaishoShisetsuInputGuide(entity));
         }
-        return kaigoJogaiTokureiTaishoShisetsuList;
+        return SearchResult.of(kaigoJogaiTokureiTaishoShisetsuList, 0, false);
     }
 }
