@@ -32,6 +32,7 @@ public class JukyuShikakuShomeishoHakkoFinder {
     public static final RString SAKAKO = new RString("（");
     public static final RString MIGIKAKO = new RString("）");
     public static final RString MATAHA = new RString("までは");
+    public static final RString 未設定 = new RString("未設定");
     public static final int LENGTH_150 = 150;
     public static final int LENGTH_240 = 240;
 
@@ -80,11 +81,11 @@ public class JukyuShikakuShomeishoHakkoFinder {
         JukyuShikakuShomeishoHakkoRelateEntity ninTeiShinSeiChuDataEntity = jukyuShikakuShomeishoHakkoMapper
                 .getNinTeiShinSeiChuData(受給資格証明書発行情報の検索キー);
         if (ninTeiShinSeiChuDataEntity == null) {
-            if (new FlexibleDate(get制度改正施行管理_新予防給付_適用開始日())
-                    .isBefore(new FlexibleDate(jukyuShikakuShomeishoHakkoRelateEntity.getNinteiYukoKikanKaishiYMD()))) {
+            if (new FlexibleDate(jukyuShikakuShomeishoHakkoRelateEntity.getNinteiYukoKikanKaishiYMD())
+                    .isBefore(new FlexibleDate(get制度改正施行管理_新予防給付_適用開始日()))) {
                 jukyuShikakuShomeishoHakkoRelateEntity.setBiko(get受給資格証明書_備考項目文言());
             } else {
-                jukyuShikakuShomeishoHakkoRelateEntity.setBiko(RString.EMPTY);
+                jukyuShikakuShomeishoHakkoRelateEntity.setBiko(未設定);
             }
         } else {
             set備考(jukyuShikakuShomeishoHakkoRelateEntity, 
