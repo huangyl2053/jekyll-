@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shisetsuJohoCommonChildDiv;
+package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  */
 public class ShisetsuJohoHandler {
 
-    private final shisetsuJohoCommonChildDivDiv div;
+    private final ShisetsuJohoCommonChildDivDiv div;
     private static final RString 台帳種別表示有り = new RString("台帳種別表示有り");
     private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
     private static final RString 被保険者 = new RString("被保険者");
@@ -31,9 +31,9 @@ public class ShisetsuJohoHandler {
     /**
      * コンストラクタです。
      *
-     * @param div shisetsuJohoCommonChildDivDiv
+     * @param div ShisetsuJohoCommonChildDivDiv
      */
-    public ShisetsuJohoHandler(shisetsuJohoCommonChildDivDiv div) {
+    public ShisetsuJohoHandler(ShisetsuJohoCommonChildDivDiv div) {
         this.div = div;
     }
 

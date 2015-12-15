@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shisetsuJohoCommonChildDiv;
+package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * shisetsuJohoCommonChildDiv のクラスファイル 
+ * ShisetsuJohoCommonChildDiv のクラスファイル 
  * 
  * @author 自動生成
  */
-public class shisetsuJohoCommonChildDivDiv extends Panel implements IshisetsuJohoCommonChildDiv {
+public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJohoCommonChildDiv {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]

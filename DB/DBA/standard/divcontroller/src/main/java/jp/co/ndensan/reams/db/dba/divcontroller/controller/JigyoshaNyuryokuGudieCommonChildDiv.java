@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
+import jp.co.ndensan.reams.db.dba.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.JigyoshaNyuryokuGudieCommonChildDiv.JiGyoSyaHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.JigyoshaNyuryokuGudieCommonChildDiv.JigyoshaNyuryokuGudieCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.JigyoshaNyuryokuGudieCommonChildDiv.validationHandler;
-import jp.co.ndensan.reams.db.dba.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -52,7 +52,7 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
         if (requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue() != null
                 && requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue() != null) {
 
-            if (requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().
+            if (!requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().
                     isBefore(requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue())) {
 
                 ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();

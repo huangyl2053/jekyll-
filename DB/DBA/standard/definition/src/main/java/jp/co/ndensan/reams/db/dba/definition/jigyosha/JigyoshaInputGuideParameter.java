@@ -293,8 +293,8 @@ public final class JigyoshaInputGuideParameter {
                 zennpouitti,
                 RString.EMPTY,
                 systemdate,
-                jigyoshaShubetsu,
                 RString.EMPTY,
+                jigyoshaShubetsu,
                 RString.EMPTY,
                 limitCount);
     }
