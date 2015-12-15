@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
+ * 被保険者証・資格者証発行を表すクラスです。
  *
  */
 public class JukyuShikakuShomeishoModel {
@@ -134,5 +134,4 @@ public class JukyuShikakuShomeishoModel {
             return RString.EMPTY;
         }
     }
-
 }

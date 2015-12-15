@@ -11,7 +11,8 @@ import jp.co.ndensan.reams.db.dba.service.core.jukyushikakushomeishohakko.JukyuS
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
- *
+ * 被保険者証・資格者証発行を編集するクラスです。
+ * 
  */
 public class JukyuSikakuShomeishoHakkoHandler {
 
@@ -22,26 +23,31 @@ public class JukyuSikakuShomeishoHakkoHandler {
     }
 
     /**
-     * 
-     * 共通子DIVを初期化します。
-     * @param parameter JukyuShikakuShomeishoHakkoParameter
+     * 共通子DIVの初期化処理です。
+     *
+     * @param 受給資格証明書発行情報の検索キー 受給資格証明書発行情報の検索キー
      */
-    public void initialize(JukyuShikakuShomeishoHakkoParameter parameter) {
-        setgaMenkomokuEidit(JukyuShikakuShomeishoHakkoFinder.createInstance().getJukyuShikakuShomeishoHakko(parameter));
+    public void initialize(JukyuShikakuShomeishoHakkoParameter 受給資格証明書発行情報の検索キー) {
+        setGaMenKoMokuEidit(JukyuShikakuShomeishoHakkoFinder.createInstance()
+                .getJukyuShikakuShomeishoHakko(受給資格証明書発行情報の検索キー));
     }
 
-    private void setgaMenkomokuEidit(JukyuShikakuShomeishoModel jukyuShikakuBusiness) {
-        jukyuSikakuShomeishoHakkoDiv.getPnlJukyushaJoho1().getTxtKofubi().setValue(jukyuShikakuBusiness.get交付日());
-        jukyuSikakuShomeishoHakkoDiv.getPnlJukyushaJoho1().getTxtIdoYotebi().setValue(jukyuShikakuBusiness.get異動予定日());
-        jukyuSikakuShomeishoHakkoDiv.getPnlJukyushaJoho1().getTxtYokaigoJotaiKubun().setValue(jukyuShikakuBusiness.get要介護状態区分());
-        jukyuSikakuShomeishoHakkoDiv.getPnlJukyushaJoho1().getTxtShinsebi().setValue(jukyuShikakuBusiness.get受給申請年月日());
-        if (!jukyuShikakuBusiness.get有効期間開始日().isEmpty()) {
-            jukyuSikakuShomeishoHakkoDiv.getPnlJukyushaJoho1().getTxtdrYukokikan().setFromValue(new RDate(jukyuShikakuBusiness.get有効期間開始日().toString()));
+    private void setGaMenKoMokuEidit(JukyuShikakuShomeishoModel jukyuShikakuBusiness) {
+        if (jukyuShikakuBusiness != null) {
+            jukyuSikakuShomeishoHakkoDiv.getTxtKofubi().setValue(jukyuShikakuBusiness.get交付日());
+            jukyuSikakuShomeishoHakkoDiv.getTxtIdoYotebi().setValue(jukyuShikakuBusiness.get異動予定日());
+            jukyuSikakuShomeishoHakkoDiv.getTxtYokaigoJotaiKubun().setValue(jukyuShikakuBusiness.get要介護状態区分());
+            jukyuSikakuShomeishoHakkoDiv.getTxtShinsebi().setValue(jukyuShikakuBusiness.get受給申請年月日());
+            if (!jukyuShikakuBusiness.get有効期間開始日().isEmpty()) {
+                jukyuSikakuShomeishoHakkoDiv.getTxtdrYukokikan()
+                        .setFromValue(new RDate(jukyuShikakuBusiness.get有効期間開始日().toString()));
+            }
+            if (!jukyuShikakuBusiness.get有効期間終了日().isEmpty()) {
+                jukyuSikakuShomeishoHakkoDiv.getTxtdrYukokikan()
+                        .setToValue(new RDate(jukyuShikakuBusiness.get有効期間終了日().toString()));
+            }
+            jukyuSikakuShomeishoHakkoDiv.getTbmShinsakaiYikan().setValue(jukyuShikakuBusiness.get介護認定審査会意見());
+            jukyuSikakuShomeishoHakkoDiv.getTbmBiko().setValue(jukyuShikakuBusiness.get備考());
         }
-        if(!jukyuShikakuBusiness.get有効期間終了日().isEmpty()) {
-            jukyuSikakuShomeishoHakkoDiv.getPnlJukyushaJoho1().getTxtdrYukokikan().setToValue(new RDate(jukyuShikakuBusiness.get有効期間終了日().toString()));
-        }
-        jukyuSikakuShomeishoHakkoDiv.getTbmShinsakaiYikan().setValue(jukyuShikakuBusiness.get介護認定審査会意見());
-        jukyuSikakuShomeishoHakkoDiv.getTbmBiko().setValue(jukyuShikakuBusiness.get介護認定審査会意見());
     }
 }

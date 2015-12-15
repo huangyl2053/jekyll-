@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.jukyushikakushomeishohakko.IJukyuShikakuShomeishoHakkoRelateMapper">
- 
+
     <resultMap id="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.JukyuShikakuShomeishoHakkoRelateEntity" autoMapping="true">
         <result property="hihokenshaNo"           column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="idoYMD"                 column="idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -42,10 +42,8 @@
         <result property="shiteiServiceShurui28" column="shiteiServiceShurui28" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shiteiServiceShurui29" column="shiteiServiceShurui29" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shiteiServiceShurui30" column="shiteiServiceShurui30" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-
         <result property="serviceShuruiMeisho" column="serviceShuruiMeisho"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="serviceShuruiRyakusho" column="serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        
     </resultMap>
 
     <select id="getJukyuShikakuShomeishoHakko" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
@@ -78,11 +76,12 @@
             ) AS TB1
         LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS C
              ON   TB1."shinseishoKanriNo" = C."shinseishoKanriNo" 
+                 AND C."isDeleted" = FALSE
         LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',false,'',false,'','','','','','','','','','','',false,'','','','','','','',false,'','','','','','','','','','','',true,true,false,false,false,false,true,true,true,true,false,'','','','','','','','',false,'','',false,false,false) AS D
              ON   TB1."shinseishoKanriNo" = D."shikibetsuCode";
     </select>
     
-    <select id="getServiceCodeList" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+    <select id="getServiceCode" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
         SELECT 
             Jukyusha."shiteiServiceShurui01" AS "shiteiServiceShurui01",
             Jukyusha."shiteiServiceShurui02" AS "shiteiServiceShurui02",
@@ -126,7 +125,7 @@
         DESC LIMIT 1
     </select>
     
-    <select id="getServiceMeiList" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+    <select id="getServiceMei" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
         SELECT            
             DbT7130."serviceShuruiMeisho",
             DbT7130."serviceShuruiRyakusho"
@@ -134,6 +133,7 @@
             rgdb."DbT7130KaigoServiceShurui" AS DbT7130 
         WHERE
             DbT7130."serviceShuruiCd" = #{serviceShuruiCd}
+        AND  DbT7130."isDeleted" = FALSE
         AND  DbT7130."teikyoKaishiYM" <![CDATA[<=]]>  #{nowDateYearMonth}
         AND (DbT7130."teikyoshuryoYM" <![CDATA[>=]]> #{nowDateYearMonth}
                 OR DbT7130."serviceShuruiCd" IS NULL)

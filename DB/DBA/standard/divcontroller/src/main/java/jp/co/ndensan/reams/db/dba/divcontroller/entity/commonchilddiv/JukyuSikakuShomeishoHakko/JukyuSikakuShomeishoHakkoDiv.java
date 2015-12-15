@@ -182,8 +182,13 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
         return new JukyuSikakuShomeishoHakkoHandler(this);
     }
 
+    /**
+     * 共通子DIVの初期化処理です。
+     * 
+     * @param 被保険者番号 被保険者番号
+     */
     @Override
     public void initialize(RString 被保険者番号) {
-        getHandler().initialize(JukyuShikakuShomeishoHakkoParameter.createSearchParameter_受給資格証明書発行情報(被保険者番号));
+        getHandler().initialize(JukyuShikakuShomeishoHakkoParameter.createSelectBy被保険者番号(被保険者番号));
     }
 }

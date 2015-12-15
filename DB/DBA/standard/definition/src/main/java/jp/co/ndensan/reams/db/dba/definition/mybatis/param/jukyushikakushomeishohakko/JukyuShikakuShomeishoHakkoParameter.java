@@ -4,20 +4,20 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 受給資格証明書発行情報の検索キー。
  * 
- * 受給資格証明書発行情報をキー。
+ * @author wangkun
  */
+@lombok.Getter
 public final class JukyuShikakuShomeishoHakkoParameter {
 
     private RString hihokenshaNo;
     private RString serviceShuruiCd;
-    private RString nowDateYearMonth;
     private RString shinseishoKanriNo;
+    private final RString nowDateYearMonth;
 
-    private JukyuShikakuShomeishoHakkoParameter() {
-    }
-
-    private JukyuShikakuShomeishoHakkoParameter(RString hihokenshaNo, RString serviceShuruiCd, RString shinseishoKanriNo) {
+    private JukyuShikakuShomeishoHakkoParameter(RString hihokenshaNo
+            , RString serviceShuruiCd, RString shinseishoKanriNo) {
         if (serviceShuruiCd != null) {
             this.serviceShuruiCd = serviceShuruiCd;
         }
@@ -31,33 +31,38 @@ public final class JukyuShikakuShomeishoHakkoParameter {
     }
 
     /**
-     *
-     * @param hihokenshaNo hihokenshaNo
+     *　被保険者番号より、受給資格証明書発行情報の検索キーを作成します。
+     * 
+     * @param 被保険者番号 被保険者番号
      * @return JukyuShikakuShomeishoHakkoParameter
      */
-    public static JukyuShikakuShomeishoHakkoParameter createSearchParameter_受給資格証明書発行情報(RString hihokenshaNo) {
-        JukyuShikakuShomeishoHakkoParameter parameter = new JukyuShikakuShomeishoHakkoParameter(hihokenshaNo, null, null);
+    public static JukyuShikakuShomeishoHakkoParameter createSelectBy被保険者番号(RString 被保険者番号) {
+        JukyuShikakuShomeishoHakkoParameter parameter = new JukyuShikakuShomeishoHakkoParameter(被保険者番号
+                , null, null);
         return parameter;
     }
 
     /**
-     *
-     * @param serviceShuruiCd serviceShuruiCd
+     * サービス種類コードより、受給資格証明書発行情報の検索キーを作成します。
+     * 
+     * @param サービス種類コード サービス種類コード
      * @return JukyuShikakuShomeishoHakkoParameter
      */
-    public static JukyuShikakuShomeishoHakkoParameter createSearchParameter_サービス種類コード(RString serviceShuruiCd) {
-        JukyuShikakuShomeishoHakkoParameter parameter = new JukyuShikakuShomeishoHakkoParameter(null, serviceShuruiCd, null);
+    public static JukyuShikakuShomeishoHakkoParameter createSelectByサービス種類コード(RString サービス種類コード) {
+        JukyuShikakuShomeishoHakkoParameter parameter = new JukyuShikakuShomeishoHakkoParameter(null
+                , サービス種類コード, null);
         return parameter;
     }
 
     /**
-     *
-     * @param shinseishoKanriNo shinseishoKanriNo
+     * 申請書管理番号より、受給資格証明書発行情報の検索キーを作成します。
+     * 
+     * @param 申請書管理番号 申請書管理番号
      * @return JukyuShikakuShomeishoHakkoParameter
      */
-    public static JukyuShikakuShomeishoHakkoParameter createSearchParameter_認定申請中データ情報(RString shinseishoKanriNo) {
-        JukyuShikakuShomeishoHakkoParameter parameter = new JukyuShikakuShomeishoHakkoParameter(null, null, shinseishoKanriNo);
+    public static JukyuShikakuShomeishoHakkoParameter createSelectBy申請書管理番号(RString 申請書管理番号) {
+        JukyuShikakuShomeishoHakkoParameter parameter = new JukyuShikakuShomeishoHakkoParameter(null
+                , null, 申請書管理番号);
         return parameter;
     }
-
 }
