@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.Idokikan;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.SikakuKikan;
-import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.Tasichoson;
+import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.Tashichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.TokusoRireki;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -28,9 +28,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class SikakuIdoCheckManager {
 
+    //QA166 張紅麗　エラーコードの確認 QA回答まち
     private static final RString ERR_CODE_DBAE00004 = new RString("DBAE00004");
     private static final RString ERR_CODE_DBAE00005 = new RString("DBAE00005");
-
     private final DbT1001HihokenshaDaichoDac hihokenshaDaiRelateDac;
     private final DbT1002TekiyoJogaishaDac tekiyoJogaishaRelateDac;
     private final DbT1003TashichosonJushochiTokureiDac tashichosonJushochiRelateDac;
@@ -80,8 +80,6 @@ public class SikakuIdoCheckManager {
                 Idokikan idokikan = new Idokikan();
                 idokikan.setKaishiYMD(sikakuKikan.getKaishiYMD());
                 idokikan.setShuryoYMD(sikakuKikan.getShuryoYMD());
-                idokikan.setEdaNo(sikakuKikan.getEdaNo());
-                idokikan.setIdoYMD(sikakuKikan.getIdoYMD());
                 idokikanList.add(idokikan);
             }
             if (!chofukuCheck(idokikanList)) {
@@ -115,8 +113,6 @@ public class SikakuIdoCheckManager {
                     Idokikan idokikan = new Idokikan();
                     idokikan.setKaishiYMD(tokusoRireki.getKaishiYMD());
                     idokikan.setShuryoYMD(tokusoRireki.getShuryoYMD());
-                    idokikan.setIdoYMD(tokusoRireki.getIdoYMD());
-                    idokikan.setEdaNo(tokusoRireki.getEdaNo());
                     idokikanList.add(idokikan);
                 }
             }
@@ -151,8 +147,6 @@ public class SikakuIdoCheckManager {
                     Idokikan idokikan = new Idokikan();
                     idokikan.setKaishiYMD(tekiyoJogaisha.getKaishiYMD());
                     idokikan.setShuryoYMD(tekiyoJogaisha.getShuryoYMD());
-                    idokikan.setEdaNo(tekiyoJogaisha.getEdaNo());
-                    idokikan.setIdoYMD(tekiyoJogaisha.getIdoYMD());
                     idokikanList.add(idokikan);
                 }
             }
@@ -170,7 +164,7 @@ public class SikakuIdoCheckManager {
      * @param 識別コード ShikibetsuCode
      * @return RString
      */
-    public RString tasichosonTokureiChofukuCheck(List<Tasichoson> tasichosonList, ShikibetsuCode 識別コード) {
+    public RString tasichosonTokureiChofukuCheck(List<Tashichoson> tasichosonList, ShikibetsuCode 識別コード) {
         List<Idokikan> idokikanList = new ArrayList<>();
         List<DbT1001HihokenshaDaichoEntity> dbt1001List = hihokenshaDaiRelateDac.selectIdokikanByShikibetsuCode(識別コード);
         List<Idokikan> hihokenshaDaiList = getHihokenshaList(dbt1001List);
@@ -184,12 +178,10 @@ public class SikakuIdoCheckManager {
                 return RString.EMPTY;
             }
             if (tasichosonList != null && !tasichosonList.isEmpty()) {
-                for (Tasichoson tasichoson : tasichosonList) {
+                for (Tashichoson tasichoson : tasichosonList) {
                     Idokikan idokikan = new Idokikan();
                     idokikan.setKaishiYMD(tasichoson.getKaishiYMD());
                     idokikan.setShuryoYMD(tasichoson.getShuryoYMD());
-                    idokikan.setIdoYMD(tasichoson.getIdoYMD());
-                    idokikan.setEdaNo(tasichoson.getEdaNo());
                     idokikanList.add(idokikan);
                 }
             }
