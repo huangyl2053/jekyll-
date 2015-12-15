@@ -43,7 +43,7 @@
 
 
     <!--テーブルDbT7056GappeiShichosonの項目をDbT7056GappeiShichosonEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7056GappeiShichosonEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7056GappeiShichosonEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7056GappeiShichosonEntity" autoMapping="true">
         <id property="gappeiYMD" column="dbT7056GappeiShichoson_gappeiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <id property="chiikiNo" column="dbT7056GappeiShichoson_chiikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="kyuShichosonCode" column="dbT7056GappeiShichoson_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
