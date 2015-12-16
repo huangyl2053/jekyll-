@@ -84,14 +84,14 @@ public class DbT1008IryohokenKanyuJokyoDac implements ISaveable<DbT1008Iryohoken
     }
 
     /**
-     * 主キーで介護保険医療保険加入状況を取得します。
+     * 識別コードで介護保険医療保険加入状況を取得します。
      *
      * @param 識別コード 識別コード
-     * @return DbT1008IryohokenKanyuJokyoEntity
+     * @return DbT1008IryohokenKanyuJokyoEntity 介護保険医療保険加入状況情報
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT1008IryohokenKanyuJokyoEntity select(
+    public DbT1008IryohokenKanyuJokyoEntity selectByShikibetsuCode(
 	    ShikibetsuCode 識別コード) throws NullPointerException {
 	requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
 
@@ -102,5 +102,4 @@ public class DbT1008IryohokenKanyuJokyoDac implements ISaveable<DbT1008Iryohoken
 		where(eq(shikibetsuCode, 識別コード)).order(by(DbT1008IryohokenKanyuJokyo.iryoHokenKanyuYMD, Order.DESC))
 		.limit(1).toObject(DbT1008IryohokenKanyuJokyoEntity.class);
     }
-
 }
