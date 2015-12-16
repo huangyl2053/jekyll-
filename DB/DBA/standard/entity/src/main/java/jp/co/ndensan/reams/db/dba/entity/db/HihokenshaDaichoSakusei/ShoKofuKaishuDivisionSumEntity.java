@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 分割した証交付回収のエンティティクラスです。
+ *
  */
 @lombok.Getter
 @lombok.Setter
@@ -22,7 +22,6 @@ public class ShoKofuKaishuDivisionSumEntity {
     private List<FlexibleDate> 証履歴発行日1;
     private List<RString> 証履歴事由名称1;
     private List<FlexibleDate> 証履歴回収日1;
-
     private List<RString> 証履歴No2;
     private List<FlexibleDate> 証履歴発行日2;
     private List<RString> 証履歴事由名称2;

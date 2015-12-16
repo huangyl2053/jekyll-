@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
- *
  * 被保険者台帳のエンティティクラスです。
+ *
  */
 @lombok.Getter
 @lombok.Setter
@@ -58,7 +58,6 @@ public class HihokenshaDaichoSakuseiEntity {
     //QA 207
     private RString telephoneNo1;
     private RString telephoneNo2;
-
     @PrimaryKey
     private RString jigyoshaNo;
     private AtenaMeisho jigyoshaMeisho;
@@ -73,5 +72,4 @@ public class HihokenshaDaichoSakuseiEntity {
     private List<ShoKofuKaishuDivisionSumEntity> 証交付回収List;
     //世帯一覧Entityリスト
     //TODO
-
 }

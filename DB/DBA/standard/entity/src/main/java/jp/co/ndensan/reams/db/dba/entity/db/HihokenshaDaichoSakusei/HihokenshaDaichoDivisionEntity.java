@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 分割した被保険者台帳管理情報のエンティティクラスです。
+ *
  */
 @lombok.Getter
 @lombok.Setter
@@ -34,5 +34,4 @@ public class HihokenshaDaichoDivisionEntity {
     private List<RString> 住特解除日;
     private List<LasdecCode> 措置保険者;
     private List<LasdecCode> 旧保険者;
-
 }

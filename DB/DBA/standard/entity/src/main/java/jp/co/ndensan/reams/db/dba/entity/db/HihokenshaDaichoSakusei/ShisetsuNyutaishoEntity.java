@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
- *
  * 入所施設のエンティティクラスです。
+ *
  */
 @lombok.Getter
 @lombok.Setter

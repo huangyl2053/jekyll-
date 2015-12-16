@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 分割した老齢福祉受給のエンティティクラスです。
+ *
  */
 @lombok.Getter
 @lombok.Setter

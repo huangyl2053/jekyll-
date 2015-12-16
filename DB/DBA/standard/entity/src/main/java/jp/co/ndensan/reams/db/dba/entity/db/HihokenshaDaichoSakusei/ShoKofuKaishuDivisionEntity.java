@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 分割した証交付回収のエンティティクラスです。
+ *
  */
 @lombok.Getter
 @lombok.Setter

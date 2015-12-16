@@ -9,11 +9,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
+ * 被保険者台帳パラメータクラスです。
  *
- * @author soft863
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class HihokenshaDaichoSakuseiParameter {
 
     private ShikibetsuCode shikibetsuCode;
@@ -22,12 +23,11 @@ public class HihokenshaDaichoSakuseiParameter {
     /**
      * コンストラクタです。
      *
-     * @param shichonCode shichonCode
-     * @param usesshichonCode usesshichonCode
+     * @param shichonCode 識別コード
+     * @param hihokenshaNo 被保険者番号
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     private HihokenshaDaichoSakuseiParameter(ShikibetsuCode shikibetsuCode, HihokenshaNo hihokenshaNo) {
-
 	this.shikibetsuCode = shikibetsuCode;
 	this.hihokenshaNo = hihokenshaNo;
     }
@@ -35,16 +35,13 @@ public class HihokenshaDaichoSakuseiParameter {
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param shikibetsuCode
-     * @param hihokenshaNo
-     * @return 身体手帳検索パラメータ
+     * @param shikibetsuCode 識別コード
+     * @param hihokenshaNo 被保険者番号
+     * @return 被保険者台帳検索パラメータ
      */
     public static HihokenshaDaichoSakuseiParameter createSelectByKeyParam(
 	    ShikibetsuCode shikibetsuCode,
 	    HihokenshaNo hihokenshaNo) {
-
-	return new HihokenshaDaichoSakuseiParameter(shikibetsuCode,
-		hihokenshaNo
-	);
+	return new HihokenshaDaichoSakuseiParameter(shikibetsuCode, hihokenshaNo);
     }
 }
