@@ -31,32 +31,8 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbuPersistence</artifactId>
         </dependency>
-		<!-- DBA -->
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dba</groupId>
-            <artifactId>DbaService</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-		<!-- DBB -->
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbb</groupId>
-            <artifactId>DbbService</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-		<!-- DBC -->
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbc</groupId>
-            <artifactId>DbcService</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-		<!-- DBD -->
-		<!-- DBE -->
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbe</groupId>
-            <artifactId>DbeService</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-		<!-- DBX -->
+
+         <!-- DBX -->
          <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxService</artifactId>
