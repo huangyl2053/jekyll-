@@ -117,7 +117,7 @@ public class ServiceJigyoshaInputGuide implements Serializable {
      * @return 事業者住所カナ
      */
     public RString get介護除外住所地特例対象施設_事業者住所カナ() {
-        return entity.getJigyoshaJusho();
+        return entity.getJigyoshaKanaJusho();
     }
 
     /**

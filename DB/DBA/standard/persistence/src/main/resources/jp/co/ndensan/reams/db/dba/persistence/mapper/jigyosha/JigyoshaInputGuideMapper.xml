@@ -205,11 +205,11 @@
            <if test = "isAddress">
                <if test = "isZennpouitti">
                     AND 
-                         dbT1005Kaigo."jigyoshaJusho" = #{jigyoshaJusho}
+                         dbT1005Kaigo."jigyoshaJusho" = #{address}
                </if>
                <if test = "!isZennpouitti">
                     AND 
-                        dbT1005Kaigo."jigyoshaJusho" LIKE  #{jigyoshaJusho} || '%'
+                        dbT1005Kaigo."jigyoshaJusho" LIKE  #{address} || '%'
                </if>
            </if>
         </if>

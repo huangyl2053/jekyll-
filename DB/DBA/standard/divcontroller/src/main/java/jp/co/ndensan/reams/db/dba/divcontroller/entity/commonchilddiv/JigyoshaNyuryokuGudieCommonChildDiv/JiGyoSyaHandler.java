@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -196,11 +195,11 @@ public class JiGyoSyaHandler {
                     dgJigyoshaItiran.setTxtTelNo(jigyoshaInput.get電話番号() == null ? RString.EMPTY : jigyoshaInput.get電話番号().value());
                     dgJigyoshaItiranList.add(dgJigyoshaItiran);
                 }
-                DataGridSetting gridSetting = new DataGridSetting();
-                gridSetting.setLimitRowCount(div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue() == null ? 0
-                        : div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue().intValue());
-                gridSetting.setSelectedRowCount(dgJigyoshaItiranList.size());
-                div.getJigyoshaItirann().getDgJigyoshaItiran().setGridSetting(gridSetting);
+//                DataGridSetting gridSetting = new DataGridSetting();
+//                gridSetting.setLimitRowCount(div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue() == null ? 0
+//                        : div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue().intValue());
+//                gridSetting.setSelectedRowCount(dgJigyoshaItiranList.size());
+//                div.getJigyoshaItirann().getDgJigyoshaItiran().setGridSetting(gridSetting);
                 div.getJigyoshaItirann().getDgJigyoshaItiran().setDataSource(dgJigyoshaItiranList);
             } else {
 
