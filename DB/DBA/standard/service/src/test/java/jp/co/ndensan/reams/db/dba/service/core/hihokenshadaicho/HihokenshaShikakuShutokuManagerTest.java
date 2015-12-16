@@ -48,6 +48,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
     public static final RString 枝番2 = new RString("2");
     public static final FlexibleDate 資格取得年月日 = new FlexibleDate("19900101");
     public static final FlexibleDate 資格喪失年月日 = new FlexibleDate("19900101");
+    public static FlexibleDate date;
 
     @BeforeClass
     public static void setUpClass() {
@@ -202,6 +203,56 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
         }
     }
 
+    public static class shikakuShutokuTorokuCheckのテスト extends DbaTestDacBase {
+
+        @Before
+        public void setUp() {
+            dbT1001Dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
+        }
+
+        @Test
+        public void 引数の資格取得事由コードと年齢到達の事由コード等しいの場合_資格取得チェック処理は_チェックフラグがtrueを返すこと() {
+            date = new FlexibleDate("19011211");
+            boolean flg = manager.shikakuShutokuTorokuCheck(dateOfBirth, 資格取得年月日, new RString("02"));
+            assertThat(flg, is(true));
+        }
+
+        @Test
+        public void 取得された年齢65以上の場合の場合_資格取得チェック処理は_チェックフラグがtrueを返すこと() {
+            date = new FlexibleDate("19011211");
+            boolean flg = manager.shikakuShutokuTorokuCheck(dateOfBirth, 資格取得年月日, new RString("02"));
+            assertThat(flg, is(true));
+        }
+
+        @Test
+        public void 取得された年齢65以下の場合の場合_資格取得チェック処理は_チェックフラグがtrueを返すこと() {
+            date = new FlexibleDate("19311211");
+            boolean flg = manager.shikakuShutokuTorokuCheck(dateOfBirth, 資格取得年月日, new RString("02"));
+            assertThat(flg, is(false));
+        }
+
+        @Test
+        public void 引数の資格取得事由コードと年齢到達の事由コード等しないの場合_資格取得チェック処理は_チェックフラグがtrueを返すこと() {
+            date = new FlexibleDate("19011211");
+            boolean flg = manager.shikakuShutokuTorokuCheck(dateOfBirth, 資格取得年月日, new RString("03"));
+            assertThat(flg, is(true));
+        }
+
+        @Test
+        public void 取得された年齢40以上の場合の場合_資格取得チェック処理は_チェックフラグがtrueを返すこと() {
+            date = new FlexibleDate("19611211");
+            boolean flg = manager.shikakuShutokuTorokuCheck(dateOfBirth, 資格取得年月日, new RString("02"));
+            assertThat(flg, is(true));
+        }
+
+        @Test
+        public void 取得された年齢40以下の場合の場合_資格取得チェック処理は_チェックフラグがtrueを返すこと() {
+            date = new FlexibleDate("19811211");
+            boolean flg = manager.shikakuShutokuTorokuCheck(dateOfBirth, 資格取得年月日, new RString("02"));
+            assertThat(flg, is(false));
+        }
+    }
+
     public static class ShikakuShutokuCheckのテスト extends DbaTestDacBase {
 
         private static void clearTable() {
@@ -298,7 +349,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
 
         @Override
         public FlexibleDate toFlexibleDate() {
-            return new FlexibleDate("19011211");
+            return date;
         }
 
         @Override

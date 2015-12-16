@@ -12,7 +12,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.hihokenshadaicho.HihokenshaShikakuShutokuMapper;
-//import jp.co.ndensan.reams.db.dba.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
+import jp.co.ndensan.reams.db.dbu.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
@@ -44,6 +44,7 @@ public class HihokenshaShikakuShutokuManager {
     private static final RString HIHOKENNSHAKUBUNCODE_1 = new RString("1");
     private static final RString HIHOKENNSHAKUBUNCODE_2 = new RString("2");
     private static final RString 枝番 = new RString("0001");
+    private static RString 年齢到達_事由コード;
     private static boolean chickflg = false;
     private static HihokenshaNo hihokenshaNo;
     private static ShikibetsuCode shikibetsuCode;
@@ -112,7 +113,7 @@ public class HihokenshaShikakuShutokuManager {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳管理（資格取得）Entity"));
         shikibetsuCode = entity.getShikibetsuCode();
         idoYMD = entity.getIdoYMD();
-//        hihokenshaNo = HihokenshanotsukibanFinder.createInstance().getHihokenshanotsukiban(shikibetsuCode);
+        hihokenshaNo = HihokenshanotsukibanFinder.createInstance().getHihokenshanotsukiban(shikibetsuCode);
         HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaEdaban(hihokenshaNo, idoYMD);
         edaNo = getSaidaiEdaban(parameter);
         shikakuShutokuYMD = entity.getShikakuShutokuYMD();
@@ -175,8 +176,9 @@ public class HihokenshaShikakuShutokuManager {
     @Transaction
     public boolean shikakuShutokuTorokuCheck(IDateOfBirth 当該識別対象の生年月日, FlexibleDate 資格取得日, RString 資格取得事由コード) {
         RString age = get年齢(当該識別対象の生年月日, 資格取得日);
-        //TODO 李　QA152があります。　2015/12/15 まで
-        if (1 == 1) {
+        // TODO 李　QA152あります年齢到達_事由コード不明です。2015/12/17
+//        年齢到達_事由コード = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, new CodeShubetsu("0117")).get(0).getコード().value();
+        if (年齢到達_事由コード.equals(資格取得事由コード)) {
             return age.compareTo(AGE_65) >= 0;
         } else {
             return age.compareTo(AGE_40) >= 0;
