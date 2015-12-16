@@ -60,7 +60,7 @@ public class NyutaishoshaKanriFinder {
     public Boolean isRirekiKikanJufukuFlag(FlexibleDate 入所年月日, FlexibleDate 退所年月日, RString 入所施設種類) {
         int count = 0;
         INyutaishoshaKanriMapper mapper = mapperProvider.create(INyutaishoshaKanriMapper.class);
-        NyutaishoshaKanriMapperParameter parameter = null;
+        NyutaishoshaKanriMapperParameter parameter;
         switch (入所施設種類.toString()) {
             case "介護保険施設":
                 parameter = NyutaishoshaKanriMapperParameter.createSelectByKeyParam(入所年月日, 退所年月日, KAIGOHOHENSHISETSU_VALUE);
