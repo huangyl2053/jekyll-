@@ -6,10 +6,6 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.HokenshaJoho;
 
 import jp.co.ndensan.reams.db.dba.business.core.hokensha.Hokensha;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hokensha.HokenshaMapperParameter;
-import jp.co.ndensan.reams.db.dba.service.core.hokensha.HokenshaNyuryokuHojoFinder;
-import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -17,17 +13,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class HokenshaJohoHandler {
 
+    private final HokenshaJohoDiv div;
+
     public HokenshaJohoHandler(HokenshaJohoDiv div) {
+        this.div = div;
     }
 
-    public void onBlur_txtHokenshaNo(HokenshaJohoDiv div) {
-        HokenshaMapperParameter parameter = HokenshaMapperParameter.createHokenjaNoParam(
-                new HokenjaNo(div.getTxtHokenshaNo().getValue()));
-        Hokensha ent = HokenshaNyuryokuHojoFinder.createInstance().getHokensha(parameter);
-        if (ent == null) {
-            div.getTxtHokenshaMeisho().setValue(RString.EMPTY);
-        } else {
-            div.getTxtHokenshaMeisho().setValue(ent.get保険者名());
+    public void onBlur_txtHokenshaNo(Hokensha hokensha) {
+        if (hokensha != null) {
+            div.getTxtHokenshaMeisho().setValue(hokensha.get保険者名());
         }
     }
 }

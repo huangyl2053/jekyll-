@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hokensha.Hokensha;
 import jp.co.ndensan.reams.db.dba.business.core.hokensha.KenCodeJigyoshaInputGuide;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hokensha.HokenshaMapperParameter;
-import jp.co.ndensan.reams.db.dba.service.core.hokensha.HokenshaNyuryokuHojoFinder;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -23,24 +19,16 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class HokenshaInputGuideHandler {
 
     private final HokenshaInputGuideDiv div;
-    private RString kenCode;
 
     public HokenshaInputGuideHandler(HokenshaInputGuideDiv div) {
         this.div = div;
     }
 
-    public void on保険者検索(HokenshaInputGuideDiv div) {
-        if (div.getHokenshaNo().isEmpty()) {
-            Association association = AssociationFinderFactory.createInstance().getAssociation();
-            kenCode = new RString(association.get地方公共団体コード().toString().substring(0, 2));
-        } else {
-            kenCode = new RString(div.getHokenshaNo().toString().substring(0, 2));
-        }
-        set保険者(div, kenCode);
+    public void on保険者検索(List<Hokensha> hokenjaList, List<KenCodeJigyoshaInputGuide> kenCodeList, RString kenCode) {
+        set保険者(hokenjaList);
         clear();
-        List<KenCodeJigyoshaInputGuide> KenCodeList = HokenshaNyuryokuHojoFinder.createInstance().getKenCodeJigyoshaInputGuide().records();
         List<KeyValueDataSource> list = new ArrayList<>();
-        for (KenCodeJigyoshaInputGuide guide : KenCodeList) {
+        for (KenCodeJigyoshaInputGuide guide : kenCodeList) {
             KeyValueDataSource DataSource = new KeyValueDataSource();
             DataSource.setKey(guide.get都道府県住所コード());
             DataSource.setValue(guide.get都道府県名());
@@ -50,9 +38,9 @@ public class HokenshaInputGuideHandler {
         div.getDdlHokenshaKenCode().setSelectedKey(kenCode);
     }
 
-    public void on保険者を表示する(HokenshaInputGuideDiv div) {
-        kenCode = div.getDdlHokenshaKenCode().getSelectedKey();
-        set保険者(div, kenCode);
+    public void on保険者を表示する(List<Hokensha> hokenjaList) {
+
+        set保険者(hokenjaList);
     }
 
     public void on選択(HokenshaInputGuideDiv div) {
@@ -61,9 +49,8 @@ public class HokenshaInputGuideHandler {
         div.setHokenshaNo(row.getHokenshaNo());
     }
 
-    private void set保険者(HokenshaInputGuideDiv div, RString kenCode) {
-        HokenshaMapperParameter parameter = HokenshaMapperParameter.createKenCodeParam(kenCode);
-        List<Hokensha> hokenjaList = HokenshaNyuryokuHojoFinder.createInstance().getHokenshaList(parameter).records();
+    private void set保険者(List<Hokensha> hokenjaList) {
+
         List<dgSearchResultHokensha_Row> list = new ArrayList<>();
         for (Hokensha guide : hokenjaList) {
             dgSearchResultHokensha_Row row = new dgSearchResultHokensha_Row();

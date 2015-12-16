@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.hokensha;
 
-import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.entity.db.basic.hokenja.UrT0507HokenjaEntity;
@@ -13,9 +12,9 @@ import jp.co.ndensan.reams.ur.urz.entity.db.basic.zenkokujusho.UrT0101ZenkokuJus
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 保険者情報です。
+ * 県コードオブジェクトです。
  */
-public class KenCodeJigyoshaInputGuide implements Serializable {
+public class KenCodeJigyoshaInputGuide {
 
     private final UrT0101ZenkokuJushoEntity entity;
 

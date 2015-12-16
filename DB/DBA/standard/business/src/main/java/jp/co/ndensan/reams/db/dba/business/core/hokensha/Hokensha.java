@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.hokensha;
 
-import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -16,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 保険者情報です。
  *
  */
-public class Hokensha implements Serializable {
+public class Hokensha {
 
     private final UrT0507HokenjaEntity entity;
 

@@ -5,15 +5,25 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.HokenshaJoho;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.hokensha.Hokensha;
+import jp.co.ndensan.reams.db.dba.business.core.hokensha.KenCodeJigyoshaInputGuide;
+import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hokensha.HokenshaMapperParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.HokenshaInputGuide.HokenshaInputGuideDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.HokenshaInputGuide.HokenshaInputGuideHandler;
+import jp.co.ndensan.reams.db.dba.service.core.hokensha.HokenshaNyuryokuHojoFinder;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
  * 保険者入力補助のダイアログのDivControllerです
  */
 public class HokenshaInputGuide {
+
+    private static RString kenCode;
 
     /**
      * 「保険者検索」ボタンされます。<br/>
@@ -24,7 +34,16 @@ public class HokenshaInputGuide {
      */
     public ResponseData<HokenshaInputGuideDiv> click_btnHokenshaSelect(HokenshaInputGuideDiv div) {
         ResponseData<HokenshaInputGuideDiv> responseData = new ResponseData<>();
-        getHandler(div).on保険者検索(div);
+        if (div.getHokenshaNo().isEmpty()) {
+            Association association = AssociationFinderFactory.createInstance().getAssociation();
+            kenCode = new RString(association.get地方公共団体コード().toString().substring(0, 2));
+        } else {
+            kenCode = new RString(div.getHokenshaNo().toString().substring(0, 2));
+        }
+        HokenshaMapperParameter parameter = HokenshaMapperParameter.createKenCodeParam(kenCode);
+        List<Hokensha> hokenjaList = HokenshaNyuryokuHojoFinder.createInstance().getHokenshaList(parameter).records();
+        List<KenCodeJigyoshaInputGuide> kenCodeList = HokenshaNyuryokuHojoFinder.createInstance().getKenCodeJigyoshaInputGuide().records();
+        getHandler(div).on保険者検索(hokenjaList, kenCodeList, kenCode);
         responseData.data = div;
         return responseData;
     }
@@ -52,7 +71,10 @@ public class HokenshaInputGuide {
      */
     public ResponseData<HokenshaInputGuideDiv> click_btnSearchGaitoHokensha(HokenshaInputGuideDiv div) {
         ResponseData<HokenshaInputGuideDiv> responseData = new ResponseData<>();
-        getHandler(div).on保険者を表示する(div);
+        kenCode = div.getDdlHokenshaKenCode().getSelectedKey();
+        HokenshaMapperParameter parameter = HokenshaMapperParameter.createKenCodeParam(kenCode);
+        List<Hokensha> hokenjaList = HokenshaNyuryokuHojoFinder.createInstance().getHokenshaList(parameter).records();
+        getHandler(div).on保険者を表示する(hokenjaList);
         responseData.data = div;
         return responseData;
     }

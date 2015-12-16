@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
 
 /**
  *
- * 保険者情報を管理するサービスクラスです。
+ * 保険者入力補助サービスクラスです。
  */
 public class HokenshaNyuryokuHojoFinder {
 
@@ -80,7 +80,7 @@ public class HokenshaNyuryokuHojoFinder {
      * 保険者情報を特定して取得します。
      *
      * @param parameter 保険者情報のパラメータ
-     * @return 保険者情報Entity（Hokensha）
+     * @return　Hokensha　保険者情報
      */
     @Transaction
     public Hokensha getHokensha(HokenshaMapperParameter parameter) {
@@ -94,17 +94,17 @@ public class HokenshaNyuryokuHojoFinder {
     /**
      * 県コード取得リストを取得します。
      *
-     * @return List<KenCodeJigyoshaInputGuide> 県コード取得リスト
+     * @return SearchResult<KenCodeJigyoshaInputGuide>　県コードオブジェクトの検索結果
      */
     @Transaction
     public SearchResult<KenCodeJigyoshaInputGuide> getKenCodeJigyoshaInputGuide() {
         List<KenCodeJigyoshaInputGuide> kenCodeList = new ArrayList<>();
         ITrueFalseCriteria result = and(not(eq(UrT0101ZenkokuJusho.isDeleted, true)), eq(UrT0101ZenkokuJusho.dataKubun, ZenkokuJushoSearchShurui.都道府県.getDataKubun()));
-        List<ZenkokuJushoItem> zenkoItem = kokuFinder.get全国住所(result);
-        if (zenkoItem == null || zenkoItem.isEmpty()) {
+        List<ZenkokuJushoItem> zenkokuJushoItemList = kokuFinder.get全国住所(result);
+        if (zenkokuJushoItemList == null || zenkokuJushoItemList.isEmpty()) {
             return SearchResult.of(Collections.< KenCodeJigyoshaInputGuide>emptyList(), 0, false);
         }
-        for (ZenkokuJushoItem Item : zenkoItem) {
+        for (ZenkokuJushoItem Item : zenkokuJushoItemList) {
             kenCodeList.add(new KenCodeJigyoshaInputGuide(Item.toEntity()));
         }
         return SearchResult.of(kenCodeList, 0, false);
