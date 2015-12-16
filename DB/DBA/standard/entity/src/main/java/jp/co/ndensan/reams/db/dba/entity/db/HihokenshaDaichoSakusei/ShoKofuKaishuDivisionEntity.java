@@ -5,21 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei;
 
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import java.util.List;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  *
- * 入所施設のエンティティクラスです。
+ * 分割した証交付回収のエンティティクラスです。
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShisetsuNyutaishoEntity {
+public class ShoKofuKaishuDivisionEntity {
 
-    @PrimaryKey
-    private RString jigyoshaNo;
-    private AtenaMeisho jigyoshaMeisho;
-    private RString nyushoShisetsuShurui;
+    private List<RString> 証履歴No;
+    private List<FlexibleDate> 証履歴発行日;
+    private List<RString> 証履歴事由名称;
+    private List<FlexibleDate> 証履歴回収日;
 }
