@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.gappeijoho.IGappeiCityJyohoMapper">
+    
+    <resultMap id="tannitsuGappeiJyohoResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.GappeiCityJyohoRelateEntity" autoMapping="true">
+        <id property="gappeiYMD" column="DbT7055GappeiJoho_gappeiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="chiikiNo" column="DbT7055GappeiJoho_chiikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>        
+        <result property="gappeiShurui" column="DbT7055GappeiJoho_gappeiShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="DbT7055GappeiJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="hokenshaNo" column="DbT7055GappeiJoho_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="kyuJohoFuyoToYMD" column="DbT7055GappeiJoho_kyuJohoFuyoToYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kokuhorenDataFromYMD" column="DbT7055GappeiJoho_kokuhorenDataFromYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kyuShichosonCode" column="DbT7056GappeiShichoson_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="kanyuYMD" column="kanyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ridatsuYMD" column="ridatsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kyuHokenshaNo" column="DbT7056GappeiShichoson_kyuHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="shichosonMeisho" column="DbT7056GappeiShichoson_kyuShichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="todofukenMeisho" column="DbT7056GappeiShichoson_todofukenMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gunMeisho" column="DbT7056GappeiShichoson_gunMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="DbT7056GappeiShichoson_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="telNo" column="DbT7056GappeiShichoson_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="rojinhokenShichosonNo" column="DbT7056GappeiShichoson_rojinhokenShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="rokenJukyushaNoTaikei" column="DbT7056GappeiShichoson_rokenJukyushaNoTaikei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hyojiUmu" column="DbT7056GappeiShichoson_hyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="unyoKaishiYMD" column="DbT7056GappeiShichoson_unyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="unyoShuryoYMD" column="DbT7056GappeiShichoson_unyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="unyoKeitaiKubun" column="unyoKeitaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>        
+    </resultMap>
+    
+    <resultMap id="gappeiJyohoKouikiResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.GappeiCityJyohoRelateEntity" autoMapping="true">
+        <id property="gappeiYMD" column="DbT7055GappeiJoho_gappeiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="chiikiNo" column="DbT7055GappeiJoho_chiikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>        
+        <result property="gappeiShurui" column="DbT7055GappeiJoho_gappeiShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="DbT7055GappeiJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="hokenshaNo" column="DbT7055GappeiJoho_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="kyuJohoFuyoToYMD" column="DbT7055GappeiJoho_kyuJohoFuyoToYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kokuhorenDataFromYMD" column="DbT7055GappeiJoho_kokuhorenDataFromYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kyuShichosonCode" column="DbT7051KoseiShichosonMaster_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="kanyuYMD" column="DbT7051KoseiShichosonMaster_kanyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ridatsuYMD" column="DbT7051KoseiShichosonMaster_ridatsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kyuHokenshaNo" column="DbT7051KoseiShichosonMaster_kyuHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="shichosonMeisho" column="DbT7051KoseiShichosonMaster_kyuShichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="todofukenMeisho" column="DbT7051KoseiShichosonMaster_todofukenMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gunMeisho" column="DbT7051KoseiShichosonMaster_gunMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="DbT7051KoseiShichosonMaster_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="jusho" column="DbT7051KoseiShichosonMaster_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="telNo" column="DbT7051KoseiShichosonMaster_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="rojinhokenShichosonNo" column="DbT7051KoseiShichosonMaster_rojinhokenShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="rokenJukyushaNoTaikei" column="DbT7051KoseiShichosonMaster_rokenJukyushaNoTaikei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hyojiUmu" column="DbT7051KoseiShichosonMaster_hyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="unyoKaishiYMD" column="DbT7051KoseiShichosonMaster_unyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="unyoShuryoYMD" column="DbT7051KoseiShichosonMaster_unyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="unyoKeitaiKubun" column="DbT7051KoseiShichosonMaster_unyoKeitaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>        
+    </resultMap>                        
+
+    <resultMap id="KouikiGappeiJyohoResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.KouikiGappeiJyohoRelateEntity" autoMapping="true">
+        <id property="gappeiYMD" column="DbT7055GappeiJoho_gappeiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="chiikiNo" column="DbT7055GappeiJoho_chiikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>        
+        <result property="gappeiShurui" column="DbT7055GappeiJoho_gappeiShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gappeiShichosonCode" column="DbT7055GappeiJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="hokenshaNo" column="DbT7055GappeiJoho_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="kyuJohoFuyoToYMD" column="DbT7055GappeiJoho_kyuJohoFuyoToYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shichosonShokibetsuID" column="DbT7051Kosei_shichosonShokibetsuID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="DbT7051Kosei_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="shoKisaiHokenshaNo" column="DbT7051Kosei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="kokuhorenKoikiShichosonNo" column="DbT7051Kosei_kokuhorenKoikiShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonMeisho" column="DbT7051Kosei_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="todofukenMeisho" column="DbT7051Kosei_todofukenMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gunMeisho" column="DbT7051Kosei_gunMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="DbT7051Kosei_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="jusho" column="DbT7051Kosei_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="telNo" column="DbT7051Kosei_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="yusenChikuCode" column="DbT7051Kosei_yusenChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tyohyoTodoufukenHyojiUmu" column="DbT7051Kosei_tyohyoTodoufukenHyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tyohyoGunHyojiUmu" column="DbT7051Kosei_tyohyoGunHyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tyohyoShichosonHyojiUmu" column="DbT7051Kosei_tyohyoShichosonHyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tyohyoJushoHenshuHouhou" column="DbT7051Kosei_tyohyoJushoHenshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tyohyoKatagakiHyojiUmu" column="DbT7051Kosei_tyohyoKatagakiHyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gaikokujinHyojiHouhou" column="DbT7051Kosei_gaikokujinHyojiHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="rojinhokenShichosonNo" column="DbT7051Kosei_rojinhokenShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="rokenJukyushaNoTaikei" column="DbT7051Kosei_rokenJukyushaNoTaikei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuchoBunpaishuyaku" column="DbT7051Kosei_tokuchoBunpaishuyaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ikoYMD" column="DbT7051Kosei_ikoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kanyuYMD" column="DbT7051Kosei_kanyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ridatsuYMD" column="DbT7051Kosei_ridatsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="gappeiKyuShichosonKubun" column="DbT7051Kosei_gappeiKyuShichosonKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gappeiKyuShichosonHyojiUmu" column="DbT7051Kosei_gappeiKyuShichosonHyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gappeiChiikiNo" column="DbT7051Kosei_gappeiChiikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="unyoHokenshaNo" column="DbT7051Kosei_unyoHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="unyoKaishiYMD" column="DbT7051Kosei_unyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="unyoShuryoYMD" column="DbT7051Kosei_unyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="unyoKeitaiKubun" column="DbT7051Kosei_unyoKeitaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>    
+    
+    <sql id="allColumn_TannitsuSearch">
+        gappei."chiikiNo" AS "DbT7055GappeiJoho_chiikiNo",
+        gappei."gappeiShurui" AS "DbT7055GappeiJoho_gappeiShurui",
+        gappei."gappeiYMD" AS "DbT7055GappeiJoho_gappeiYMD",
+        gappei."shichosonCode" AS "DbT7055GappeiJoho_shichosonCode",
+        gappei."hokenshaNo" AS "DbT7055GappeiJoho_hokenshaNo",
+        gappei."kyuJohoFuyoToYMD" AS "DbT7055GappeiJoho_kyuJohoFuyoToYMD",
+        gappei."kokuhorenDataFromYMD" AS "DbT7055GappeiJoho_kokuhorenDataFromYMD",
+        shichoson."kyuShichosonCode" AS "DbT7056GappeiShichoson_kyuShichosonCode",
+        '' AS "kanyuYMD",
+        '' AS "ridatsuYMD",
+        shichoson."kyuHokenshaNo" AS "DbT7056GappeiShichoson_kyuHokenshaNo",
+        shichoson."kyuShichosonMeisho" AS "DbT7056GappeiShichoson_kyuShichosonMeisho",
+        shichoson."todofukenMeisho" AS "DbT7056GappeiShichoson_todofukenMeisho",
+        shichoson."gunMeisho" AS "DbT7056GappeiShichoson_gunMeisho",
+        shichoson."yubinNo" AS "DbT7056GappeiShichoson_yubinNo",
+        '' AS "jusho",
+        shichoson."telNo" AS "DbT7056GappeiShichoson_telNo",
+        shichoson."rojinhokenShichosonNo" AS "DbT7056GappeiShichoson_rojinhokenShichosonNo",
+        shichoson."rokenJukyushaNoTaikei" AS "DbT7056GappeiShichoson_rokenJukyushaNoTaikei",
+        shichoson."hyojiUmu" AS "DbT7056GappeiShichoson_hyojiUmu",
+        shichoson."unyoKaishiYMD" AS "DbT7056GappeiShichoson_unyoKaishiYMD",
+        shichoson."unyoShuryoYMD" AS "DbT7056GappeiShichoson_unyoShuryoYMD",
+        '' AS "unyoKeitaiKubun"        
+    </sql>
+    
+    <!-- 単一全合併市町村情報の取得処理 -->
+    <select id="getTannitsugappeijoho" resultMap="tannitsuGappeiJyohoResultMap" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+        SELECT 
+            <include refid="allColumn_TannitsuSearch"></include>
+        FROM 
+            rgdb."DbT7055GappeiJoho" AS gappei 
+        INNER JOIN
+            rgdb."DbT7056GappeiShichoson" AS shichoson
+        ON
+            gappei."gappeiYMD" = shichoson."gappeiYMD" 
+        AND
+            gappei."chiikiNo" = shichoson."chiikiNo" 
+        WHERE
+            1 = 1
+        <if test="useHyoujium">
+            AND 
+                shichoson."hyojiUmu" = '1'   
+        </if>
+    </select>
+    
+    <!-- 単一全合併市町村情報検索の取得処理 -->
+    <select id="getTannitsugappeijohokensaku" resultMap="tannitsuGappeiJyohoResultMap" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+        SELECT 
+            <include refid="allColumn_TannitsuSearch"></include>
+        FROM 
+            rgdb."DbT7055GappeiJoho" AS gappei 
+        INNER JOIN
+            rgdb."DbT7056GappeiShichoson" AS shichoson
+        ON
+            gappei."gappeiYMD" = shichoson."gappeiYMD" 
+        AND
+            gappei."chiikiNo" = shichoson."chiikiNo" 
+        WHERE
+            1 = 1
+        <if test="useHyoujium">
+            AND 
+                shichoson."hyojiUmu" = '1'   
+        </if>
+        <if test="useShichosonCode">
+            AND 
+                shichoson."kyuShichosonCode" = #{shichosonCode} 
+        </if>
+        <if test="!useShichosonCode">
+            <if test="useHokenshaNo">
+                AND 
+                    shichoson."kyuHokenshaNo" = #{hokenshaNo}
+            </if>        
+        </if> 
+    </select>
+    
+    <sql id="allColumn_KouikiSearch">
+        gappei."chiikiNo" AS "DbT7055GappeiJoho_chiikiNo",
+        gappei."gappeiShurui" AS "DbT7055GappeiJoho_gappeiShurui" ,
+        gappei."gappeiYMD" AS "DbT7055GappeiJoho_gappeiYMD" ,
+        gappei."shichosonCode" AS "DbT7055GappeiJoho_shichosonCode" ,
+        gappei."hokenshaNo" AS "DbT7055GappeiJoho_hokenshaNo" ,
+        gappei."kyuJohoFuyoToYMD" AS "DbT7055GappeiJoho_kyuJohoFuyoToYMD" ,
+        gappei."kokuhorenDataFromYMD" AS "DbT7055GappeiJoho_kokuhorenDataFromYMD" ,
+        kosei."shichosonCode" AS "DbT7051KoseiShichosonMaster_kyuShichosonCode" ,
+        kosei."kanyuYMD" AS "DbT7051KoseiShichosonMaster_kanyuYMD" ,
+        kosei."ridatsuYMD" AS "DbT7051KoseiShichosonMaster_ridatsuYMD" ,
+        kosei."shoKisaiHokenshaNo" AS "DbT7051KoseiShichosonMaster_kyuHokenshaNo",
+        kosei."shichosonMeisho" AS "DbT7051KoseiShichosonMaster_kyuShichosonMeisho" ,
+        kosei."todofukenMeisho" AS "DbT7051KoseiShichosonMaster_todofukenMeisho" ,
+        kosei."gunMeisho" AS "DbT7051KoseiShichosonMaster_gunMeisho" ,
+        kosei."yubinNo" AS "DbT7051KoseiShichosonMaster_yubinNo" ,
+        kosei."jusho" AS "DbT7051KoseiShichosonMaster_jusho" ,
+        kosei."telNo" AS "DbT7051KoseiShichosonMaster_telNo" ,
+        kosei."rojinhokenShichosonNo" AS "DbT7051KoseiShichosonMaster_rojinhokenShichosonNo" ,
+        kosei."rokenJukyushaNoTaikei" AS "DbT7051KoseiShichosonMaster_rokenJukyushaNoTaikei" ,
+        kosei."gappeiKyuShichosonHyojiUmu" AS "DbT7051KoseiShichosonMaster_hyojiUmu",
+        kosei."unyoKaishiYMD" AS "DbT7051KoseiShichosonMaster_unyoKaishiYMD" ,
+        kosei."unyoShuryoYMD" AS "DbT7051KoseiShichosonMaster_unyoShuryoYMD" ,
+        kosei."unyoKeitaiKubun" AS "DbT7051KoseiShichosonMaster_unyoKeitaiKubun" 
+    </sql>
+    
+    <!-- 広域全合併市町村情報の取得処理 -->
+    <select id="getKouikigappeijoho" resultMap="gappeiJyohoKouikiResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+        SELECT 
+            <include refid="allColumn_KouikiSearch"></include>
+        FROM 
+            rgdb."DbT7055GappeiJoho" AS gappei 
+        INNER JOIN
+            rgdb."DbT7051KoseiShichosonMaster" AS kosei
+        ON
+            gappei."chiikiNo" = kosei."gappeiChiikiNo" 
+        WHERE 
+            1 = 1
+        <if test="useHyoujium">
+            AND 
+                kosei."gappeiKyuShichosonHyojiUmu" = '1'   
+        </if>
+    </select>
+    
+    <!-- 広域全合併市町村情報検索の取得処理 -->
+    <select id="getKouikigappeijohokensaku" resultMap="gappeiJyohoKouikiResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+        SELECT 
+            <include refid="allColumn_KouikiSearch"></include>
+        FROM 
+            rgdb."DbT7055GappeiJoho" AS gappei 
+        INNER JOIN
+            rgdb."DbT7051KoseiShichosonMaster" AS kosei
+        ON
+            gappei."chiikiNo" = kosei."gappeiChiikiNo" 
+        WHERE 
+            1 = 1
+        <if test="useHyoujium">
+            AND 
+                kosei."gappeiKyuShichosonHyojiUmu" = '1'  
+        </if>
+        <if test="useShichosonCode">
+            AND 
+                kosei."shichosonCode" = #{shichosonCode} 
+        </if>
+        <if test="!useShichosonCode">
+            <if test="useHokenshaNo">
+                AND 
+                    kosei."shoKisaiHokenshaNo" = #{hokenshaNo}
+            </if>        
+        </if>                 
+    </select>            
+    
+    <!-- 最新単一合併市町村情報の取得処理 -->
+    <select id="getSaishintannitsugappeijoho" resultMap="tannitsuGappeiJyohoResultMap" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+        SELECT 
+            gappei."chiikiNo" AS "DbT7055GappeiJoho_chiikiNo",
+            gappei."gappeiShurui" AS "DbT7055GappeiJoho_gappeiShurui",
+            gappei."gappeiYMD" AS "DbT7055GappeiJoho_gappeiYMD",
+            gappei."shichosonCode" AS "DbT7055GappeiJoho_shichosonCode",
+            gappei."hokenshaNo" AS "DbT7055GappeiJoho_hokenshaNo",
+            gappei."kyuJohoFuyoToYMD" AS "DbT7055GappeiJoho_kyuJohoFuyoToYMD",
+            gappei."kokuhorenDataFromYMD" AS "DbT7055GappeiJoho_kokuhorenDataFromYMD"
+        FROM 
+            rgdb."DbT7055GappeiJoho" AS gappei 
+        INNER JOIN
+            rgdb."DbT7056GappeiShichoson" AS shichoson
+        ON
+            gappei."gappeiYMD" = shichoson."gappeiYMD" 
+        AND
+            gappei."chiikiNo" = shichoson."chiikiNo" 
+        WHERE
+            shichoson."hyojiUmu" = #{hyoujium} 
+        ORDER BY gappei."gappeiYMD"
+        LIMIT 1
+    </select>    
+    
+    <!-- 最新広域合併市町村情報の取得処理 -->
+    <select id="getKouikigappeijohokennsaku" resultMap="gappeiJyohoKouikiResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+        SELECT
+            info."DbT7055GappeiJoho_chiikiNo",
+            info."DbT7055GappeiJoho_gappeiShurui" ,
+            info."DbT7055GappeiJoho_gappeiYMD" ,
+            info."DbT7055GappeiJoho_shichosonCode" ,
+            info."DbT7055GappeiJoho_hokenshaNo" ,
+            info."DbT7055GappeiJoho_kyuJohoFuyoToYMD" ,
+            info."DbT7055GappeiJoho_kokuhorenDataFromYMD" ,
+            info."DbT7051KoseiShichosonMaster_kyuShichosonCode" ,
+            info."DbT7051KoseiShichosonMaster_kanyuYMD" ,
+            info."DbT7051KoseiShichosonMaster_ridatsuYMD" ,
+            info."DbT7051KoseiShichosonMaster_kyuHokenshaNo",
+            info."DbT7051KoseiShichosonMaster_kyuShichosonMeisho" ,
+            info."DbT7051KoseiShichosonMaster_todofukenMeisho" ,
+            info."DbT7051KoseiShichosonMaster_gunMeisho" ,
+            info."DbT7051KoseiShichosonMaster_yubinNo" ,
+            info."DbT7051KoseiShichosonMaster_jusho" ,
+            info."DbT7051KoseiShichosonMaster_telNo" ,
+            info."DbT7051KoseiShichosonMaster_rojinhokenShichosonNo" ,
+            info."DbT7051KoseiShichosonMaster_rokenJukyushaNoTaikei" ,
+            info."DbT7051KoseiShichosonMaster_hyojiUmu",
+            info."DbT7051KoseiShichosonMaster_unyoKaishiYMD" ,
+            info."DbT7051KoseiShichosonMaster_unyoShuryoYMD" ,
+            info."DbT7051KoseiShichosonMaster_unyoKeitaiKubun"
+        FROM
+            (
+                SELECT 
+                    gappei."chiikiNo" AS "DbT7055GappeiJoho_chiikiNo",
+                    gappei."gappeiShurui" AS "DbT7055GappeiJoho_gappeiShurui" ,
+                    gappei."gappeiYMD" AS "DbT7055GappeiJoho_gappeiYMD" ,
+                    gappei."shichosonCode" AS "DbT7055GappeiJoho_shichosonCode" ,
+                    gappei."hokenshaNo" AS "DbT7055GappeiJoho_hokenshaNo" ,
+                    gappei."kyuJohoFuyoToYMD" AS "DbT7055GappeiJoho_kyuJohoFuyoToYMD" ,
+                    gappei."kokuhorenDataFromYMD" AS "DbT7055GappeiJoho_kokuhorenDataFromYMD" ,
+                    kosei."shichosonCode" AS "DbT7051KoseiShichosonMaster_kyuShichosonCode" ,
+                    kosei."kanyuYMD" AS "DbT7051KoseiShichosonMaster_kanyuYMD" ,
+                    kosei."ridatsuYMD" AS "DbT7051KoseiShichosonMaster_ridatsuYMD" ,
+                    kosei."shoKisaiHokenshaNo" AS "DbT7051KoseiShichosonMaster_kyuHokenshaNo",
+                    kosei."shichosonMeisho" AS "DbT7051KoseiShichosonMaster_kyuShichosonMeisho" ,
+                    kosei."todofukenMeisho" AS "DbT7051KoseiShichosonMaster_todofukenMeisho" ,
+                    kosei."gunMeisho" AS "DbT7051KoseiShichosonMaster_gunMeisho" ,
+                    kosei."yubinNo" AS "DbT7051KoseiShichosonMaster_yubinNo" ,
+                    kosei."jusho" AS "DbT7051KoseiShichosonMaster_jusho" ,
+                    kosei."telNo" AS "DbT7051KoseiShichosonMaster_telNo" ,
+                    kosei."rojinhokenShichosonNo" AS "DbT7051KoseiShichosonMaster_rojinhokenShichosonNo" ,
+                    kosei."rokenJukyushaNoTaikei" AS "DbT7051KoseiShichosonMaster_rokenJukyushaNoTaikei" ,
+                    kosei."gappeiKyuShichosonHyojiUmu" AS "DbT7051KoseiShichosonMaster_hyojiUmu",
+                    kosei."unyoKaishiYMD" AS "DbT7051KoseiShichosonMaster_unyoKaishiYMD" ,
+                    kosei."unyoShuryoYMD" AS "DbT7051KoseiShichosonMaster_unyoShuryoYMD" ,
+                    kosei."unyoKeitaiKubun" AS "DbT7051KoseiShichosonMaster_unyoKeitaiKubun" ,
+                    row_number() over(partition by substr(gappei."chiikiNo",1,1) order by gappei."chiikiNo" desc, gappei."gappeiYMD" desc) as rank_number
+                FROM 
+                    rgdb."DbT7055GappeiJoho" AS gappei 
+                INNER JOIN
+                    rgdb."DbT7051KoseiShichosonMaster" AS kosei
+                ON
+                    gappei."chiikiNo" = kosei."gappeiChiikiNo" 
+                AND
+                    gappei."shichosonCode" = kosei."shichosonCode" 
+                WHERE 
+                    kosei."gappeiKyuShichosonHyojiUmu" = #{hyoujium}
+                AND
+                    kosei."gappeiKyuShichosonKubun" = '0'
+            ) AS info
+        WHERE
+            info.rank_number = 1
+    </select>
+    
+    <!-- 検索キーによる単一合併市町村情報の取得処理 -->
+    <select id="getKensakukitannitsugappeijoho" resultMap="tannitsuGappeiJyohoResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+        SELECT 
+            <include refid="allColumn_TannitsuSearch"></include>
+        FROM 
+            rgdb."DbT7055GappeiJoho" AS gappei 
+        INNER JOIN
+            rgdb."DbT7056GappeiShichoson" AS shichoson
+        ON
+            gappei."gappeiYMD" = shichoson."gappeiYMD" 
+        AND
+            gappei."chiikiNo" = shichoson."chiikiNo" 
+        WHERE
+            1 = 1
+        <if test="useShichosonCode">
+            AND 
+                shichoson."kyuShichosonCode" = #{shichosonCode}        
+        </if>
+        <if test="useHokenshaNo">
+            AND
+                shichoson."kyuHokenshaNo" = #{hokenshaNo}
+        </if>
+    </select> 
+    
+    <!-- 検索キーによる広域合併市町村情報の取得処理 -->
+    <select id="getKensakukikouikigappeijoho" resultMap="KouikiGappeiJyohoResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+        SELECT 
+            gappeiJoho."chiikiNo" AS "DbT7055GappeiJoho_chiikiNo",
+            gappeiJoho."gappeiShurui" AS "DbT7055GappeiJoho_gappeiShurui",
+            gappeiJoho."gappeiYMD" AS "DbT7055GappeiJoho_gappeiYMD",
+            gappeiJoho."shichosonCode" AS "DbT7055GappeiJoho_shichosonCode",
+            gappeiJoho."hokenshaNo" AS "DbT7055GappeiJoho_hokenshaNo",
+            gappeiJoho."kyuJohoFuyoToYMD" AS "DbT7055GappeiJoho_kyuJohoFuyoToYMD",
+            gappeiJoho."kokuhorenDataFromYMD" AS "DbT7055GappeiJoho_kokuhorenDataFromYMD",
+            koseiShichosonMaster."shichosonShokibetsuID" AS "DbT7051Kosei_shichosonShokibetsuID",
+            koseiShichosonMaster."shichosonCode" AS "DbT7051Kosei_shichosonCode",
+            koseiShichosonMaster."shoKisaiHokenshaNo" AS "DbT7051Kosei_shoKisaiHokenshaNo",
+            koseiShichosonMaster."kokuhorenKoikiShichosonNo" AS "DbT7051Kosei_kokuhorenKoikiShichosonNo",
+            koseiShichosonMaster."shichosonMeisho" AS "DbT7051Kosei_shichosonMeisho",
+            koseiShichosonMaster."todofukenMeisho" AS "DbT7051Kosei_todofukenMeisho",
+            koseiShichosonMaster."gunMeisho" AS "DbT7051Kosei_gunMeisho",
+            koseiShichosonMaster."yubinNo" AS "DbT7051Kosei_yubinNo",
+            koseiShichosonMaster."jusho" AS "DbT7051Kosei_jusho",
+            koseiShichosonMaster."telNo" AS "DbT7051Kosei_telNo",
+            koseiShichosonMaster."yusenChikuCode" AS "DbT7051Kosei_yusenChikuCode",
+            koseiShichosonMaster."tyohyoTodoufukenHyojiUmu" AS "DbT7051Kosei_tyohyoTodoufukenHyojiUmu",
+            koseiShichosonMaster."tyohyoGunHyojiUmu" AS "DbT7051Kosei_tyohyoGunHyojiUmu",
+            koseiShichosonMaster."tyohyoShichosonHyojiUmu" AS "DbT7051Kosei_tyohyoShichosonHyojiUmu",
+            koseiShichosonMaster."tyohyoJushoHenshuHouhou" AS "DbT7051Kosei_tyohyoJushoHenshuHouhou",
+            koseiShichosonMaster."tyohyoKatagakiHyojiUmu" AS "DbT7051Kosei_tyohyoKatagakiHyojiUmu",
+            koseiShichosonMaster."gaikokujinHyojiHouhou" AS "DbT7051Kosei_gaikokujinHyojiHouhou",
+            koseiShichosonMaster."rojinhokenShichosonNo" AS "DbT7051Kosei_rojinhokenShichosonNo",
+            koseiShichosonMaster."rokenJukyushaNoTaikei" AS "DbT7051Kosei_rokenJukyushaNoTaikei",
+            koseiShichosonMaster."tokuchoBunpaishuyaku" AS "DbT7051Kosei_tokuchoBunpaishuyaku",
+            koseiShichosonMaster."ikoYMD" AS "DbT7051Kosei_ikoYMD",
+            koseiShichosonMaster."kanyuYMD" AS "DbT7051Kosei_kanyuYMD",
+            koseiShichosonMaster."ridatsuYMD" AS "DbT7051Kosei_ridatsuYMD",
+            koseiShichosonMaster."gappeiKyuShichosonKubun" AS "DbT7051Kosei_gappeiKyuShichosonKubun",
+            koseiShichosonMaster."gappeiKyuShichosonHyojiUmu" AS "DbT7051Kosei_gappeiKyuShichosonHyojiUmu",
+            koseiShichosonMaster."gappeiChiikiNo" AS "DbT7051Kosei_gappeiChiikiNo",
+            koseiShichosonMaster."unyoHokenshaNo" AS "DbT7051Kosei_unyoHokenshaNo",
+            koseiShichosonMaster."unyoKaishiYMD" AS "DbT7051Kosei_unyoKaishiYMD",
+            koseiShichosonMaster."unyoShuryoYMD" AS "DbT7051Kosei_unyoShuryoYMD",
+            koseiShichosonMaster."unyoKeitaiKubun" AS "DbT7051Kosei_unyoKeitaiKubun"
+        FROM 
+            rgdb."DbT7055GappeiJoho" AS gappeiJoho
+        INNER JOIN
+            rgdb."DbT7051KoseiShichosonMaster" AS koseiShichosonMaster
+        ON
+            gappeiJoho."chiikiNo" = koseiShichosonMaster."gappeiChiikiNo" 
+        WHERE
+            1 = 1
+        <if test="useChiikiNo">
+            AND
+                gappeiJoho."chiikiNo" = #{chiikiNo}
+        </if>
+        <if test="useChiikiNoLike">
+            AND
+                gappeiJoho."chiikiNo" LIKE #{chiikiNo}            
+        </if>
+        <if test="useGappeiShurui">
+            AND
+                gappeiJoho."gappeiShurui" = #{gappeiShurui}            
+        </if>
+        <if test="useGappeiYMD">
+            AND
+                gappeiJoho."gappeiYMD" = #{gappeiYMD}            
+        </if>       
+        <if test="useShichosonCode">
+            AND
+                gappeiJoho."shichosonCode" = #{shichosonCode}            
+        </if>
+        <if test="useHokenshaNo">
+            AND
+                gappeiJoho."hokenshaNo" = #{hokenshaNo}            
+        </if>
+        <if test="useKyuJohoFuyoToYMD">
+            AND
+                gappeiJoho."kyuJohoFuyoToYMD" = #{kyuJohoFuyoToYMD}            
+        </if>
+        <if test="useKokuhorenDataFromYMD">
+            AND
+                gappeiJoho."kokuhorenDataFromYMD" = #{kokuhorenDataFromYMD}            
+        </if>
+        <if test="useKijyuYMD">
+            AND
+                #{kijyuYMD} between koseiShichosonMaster."kanyuYMD" and koseiShichosonMaster."ridatsuYMD"
+        </if>        
+    </select>
+</mapper>

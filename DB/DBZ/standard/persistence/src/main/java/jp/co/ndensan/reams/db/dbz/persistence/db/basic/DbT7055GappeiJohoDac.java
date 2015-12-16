@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.lt;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -122,5 +123,21 @@ public class DbT7055GappeiJohoDac implements ISaveable<DbT7055GappeiJohoEntity> 
                 where(lt(chiikiNo, 地域番号)).
                 order(new OrderBy(chiikiNo, Order.DESC, NullsOrder.LAST)).
                 toList(DbT7055GappeiJohoEntity.class);
+    }
+
+    /**
+     * 旧市町村コード付加終了年月日を返します。
+     *
+     * @return DbT7055GappeiJohoEntity
+     */
+    @Transaction
+    public DbT7055GappeiJohoEntity get旧市町村コード付加終了年月日() {
+        DbAccessorNormalType dbAcessor = new DbAccessorNormalType(session);
+
+        return dbAcessor.select().
+                table(DbT7055GappeiJoho.class).
+                order(by(DbT7055GappeiJoho.gappeiYMD, Order.DESC)).
+                limit(1).
+                toObject(DbT7055GappeiJohoEntity.class);
     }
 }

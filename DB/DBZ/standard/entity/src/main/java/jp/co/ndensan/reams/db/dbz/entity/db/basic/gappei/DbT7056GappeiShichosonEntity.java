@@ -24,7 +24,6 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7056GappeiShichoson");
-    private static final long serialVersionUID = 5066494311793636088L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -372,7 +371,8 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
      * このエンティティの主キーが他の{@literal DbT7056GappeiShichosonEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT7056GappeiShichosonEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT7056GappeiShichosonEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7056GappeiShichosonEntity other) {
