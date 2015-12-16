@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.SikakuKanrenIdoEntity;
 public interface ISikakuKanrenIdoMapper {
 
     /**
-     * 資格関連異動をキー検索で１件取得します。
+     * 資格関連異動を取得します。
      *
      * @param params params
      * @return SikakuKanrenIdoEntity

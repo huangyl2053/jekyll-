@@ -28,7 +28,7 @@ public final class ShikakuTokusoParameter {
     }
 
     /**
-     * 共通パラメータ設定
+     * パラメータ設定。
      *
      * @param hihokenshaNo 被保険者番号
      * @param shikibetsuCode 識別コー

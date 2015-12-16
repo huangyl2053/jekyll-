@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dba.definition.shikakutokuso.ShikakuTokusoParamete
 public interface IShikakuTokusoMapper {
 
     /**
-     * 資格得喪履歴をキー検索で１件取得します。
+     * 資格関連異動一覧ガイドにＤＢから検索するデータが表示する。
      *
      * @param params params
      * @return ServiceShikakuRelateEntity

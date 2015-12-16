@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.sikakukanrenido;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -79,7 +78,7 @@ public class SikakuKanrenIdo {
      *
      * @return 住所地特例適用事由コード
      */
-    public KaigoShikakuJutokuTekiyoJiyu get住所地特例適用事由コード() {
+    public RString get住所地特例適用事由コード() {
         return entity.getJushochitokureiTekiyoJiyuCode();
     }
 

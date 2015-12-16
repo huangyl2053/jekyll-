@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dba.business.core.shikakutokuso;
 
 import jp.co.ndensan.reams.db.dba.entity.db.relate.shikakutoku.shikakutokuso.ServiceShikakuRelateEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -14,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 資格情報一覧ガイドにＤＢから検索するデータが表示する
+ * 資格情報一覧ガイドにＤＢから検索するデータが表示する。
  */
 public class ShikakuTokuso {
 
@@ -79,7 +78,7 @@ public class ShikakuTokuso {
      *
      * @return 取得事由コード
      */
-    public KaigoShikakuJutokuTekiyoJiyu get取得事由コード() {
+    public RString get取得事由コード() {
         return entity.getJushochitokureiTekiyoJiyuCode();
     }
 
@@ -115,7 +114,7 @@ public class ShikakuTokuso {
      *
      * @return 資格喪失届出日
      */
-    public KaigoShikakuJutokuTekiyoJiyu get喪失届出日() {
+    public RString get喪失届出日() {
         return entity.getJushochitokureiKaijoJiyuCode();
     }
 
