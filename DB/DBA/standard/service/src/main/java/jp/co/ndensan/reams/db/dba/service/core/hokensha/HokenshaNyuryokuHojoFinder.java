@@ -29,13 +29,13 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
-import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.INewSearchCondition;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchConditionFactory;
 import static jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchConditionFactory.where;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
@@ -114,7 +114,7 @@ public class HokenshaNyuryokuHojoFinder {
      * 保険者情報リストを取得します。
      *
      * @param parameter 保険者情報のパラメータ
-     * @return List<Hokensha> 保険者情報リスト
+     * @return SearchResult<Hokensha> 保険者情報の検索結果
      */
     @Transaction
     public SearchResult<Hokensha> getHokenshaList(HokenshaMapperParameter parameter) {

@@ -15,10 +15,20 @@ public class HokenshaJohoHandler {
 
     private final HokenshaJohoDiv div;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param div
+     */
     public HokenshaJohoHandler(HokenshaJohoDiv div) {
         this.div = div;
     }
 
+    /**
+     * 保険者名の設定します。
+     *
+     * @param hokensha 保険者
+     */
     public void onBlur_txtHokenshaNo(Hokensha hokensha) {
         if (hokensha != null) {
             div.getTxtHokenshaMeisho().setValue(hokensha.get保険者名());

@@ -21,8 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class HokenshaJoho {
 
     /**
-     * 保険者コードを入れる。<br/>
-     * 保険者名を自動表示します。
+     * 保険者コードを入れる、保険者名を自動表示します。
      *
      * @param div {@link HokenshaJohoDiv 保険者入力補助Div}
      * @return 保険者入力補助Divを持つResponseData
@@ -40,7 +39,7 @@ public class HokenshaJoho {
     }
 
     /**
-     * 「検索」ボタンをクリック場合、保険者入力ダイアログ画面が表示します。
+     * 保険者入力ダイアログ画面開く前に処理します。
      *
      * @param div {@link HokenshaJohoDiv 保険者入力補助Div}
      * @return 保険者入力補助Divを持つResponseData
@@ -52,7 +51,7 @@ public class HokenshaJoho {
     }
 
     /**
-     * 「検索」ボタンをクリック場合、保険者入力ダイアログ画面が表示します。
+     * 保険者入力ダイアログ画面閉じる前に処理します。
      *
      * @param div {@link HokenshaJohoDiv 保険者入力補助Div}
      * @return 保険者入力補助Divを持つResponseData

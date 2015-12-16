@@ -26,8 +26,7 @@ public class HokenshaInputGuide {
     private static RString kenCode;
 
     /**
-     * 「保険者検索」ボタンされます。<br/>
-     * 選択行の情報を明細エリアに表示します。
+     * 「保険者検索」ボタン保険者一覧Grid更新します。
      *
      * @param div {@link HokenshaInputGuideDiv 保険者入力補助Div}
      * @return 保険者入力補助Divを持つResponseData
@@ -49,8 +48,7 @@ public class HokenshaInputGuide {
     }
 
     /**
-     * 証回収状況Listの1行を選択した際に実行されます。<br/>
-     * 選択行の情報を明細エリアに表示します。
+     * 「選択」ボタン保険者コードと保険者名がセットします。
      *
      * @param div {@link HokenshaInputGuideDiv 保険者入力補助Div}
      * @return 保険者入力補助Divを持つResponseData
@@ -63,8 +61,7 @@ public class HokenshaInputGuide {
     }
 
     /**
-     * 証回収状況Listの1行を選択した際に実行されます。<br/>
-     * 選択行の情報を明細エリアに表示します。
+     * 「保険者を表示する」ボタン保険者一覧Grid更新します。
      *
      * @param div {@link HokenshaInputGuideDiv 保険者入力補助Div}
      * @return 保険者入力補助Divを持つResponseData

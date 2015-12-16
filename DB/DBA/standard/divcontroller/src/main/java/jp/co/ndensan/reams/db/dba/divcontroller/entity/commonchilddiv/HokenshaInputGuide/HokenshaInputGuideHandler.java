@@ -20,13 +20,26 @@ public class HokenshaInputGuideHandler {
 
     private final HokenshaInputGuideDiv div;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param div
+     */
     public HokenshaInputGuideHandler(HokenshaInputGuideDiv div) {
         this.div = div;
     }
 
+    /**
+     *
+     * 「保険者検索」ボタンを設定します。
+     *
+     * @param hokenjaList
+     * @param kenCodeList
+     * @param kenCode
+     */
     public void on保険者検索(List<Hokensha> hokenjaList, List<KenCodeJigyoshaInputGuide> kenCodeList, RString kenCode) {
         set保険者(hokenjaList);
-        clear();
+        div.getDdlHokenshaKenCode().getDataSource().clear();
         List<KeyValueDataSource> list = new ArrayList<>();
         for (KenCodeJigyoshaInputGuide guide : kenCodeList) {
             KeyValueDataSource DataSource = new KeyValueDataSource();
@@ -38,11 +51,20 @@ public class HokenshaInputGuideHandler {
         div.getDdlHokenshaKenCode().setSelectedKey(kenCode);
     }
 
+    /**
+     * 「保険者を表示する」ボタンを設定します。
+     *
+     * @param hokenjaList
+     */
     public void on保険者を表示する(List<Hokensha> hokenjaList) {
-
         set保険者(hokenjaList);
     }
 
+    /**
+     * 「選択」ボタンを設定します。
+     *
+     * @param div
+     */
     public void on選択(HokenshaInputGuideDiv div) {
         dgSearchResultHokensha_Row row = div.getSearchResultHokensha().getDgSearchResultHokensha().getActiveRow();
         div.setHokenshaMeisho(row.getHokenshaMeisho());
@@ -60,9 +82,5 @@ public class HokenshaInputGuideHandler {
             list.add(row);
         }
         div.getSearchResultHokensha().getDgSearchResultHokensha().setDataSource(list);
-    }
-
-    private void clear() {
-        div.getDdlHokenshaKenCode().getDataSource().clear();
     }
 }
