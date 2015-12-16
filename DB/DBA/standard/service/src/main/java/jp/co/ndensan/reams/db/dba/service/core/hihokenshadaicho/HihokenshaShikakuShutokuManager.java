@@ -37,14 +37,14 @@ public class HihokenshaShikakuShutokuManager {
 
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
     private final MapperProvider mapperProvider;
-    private static final RString AGE_65 = new RString("65");
-    private static final RString AGE_64 = new RString("64");
-    private static final RString AGE_40 = new RString("40");
+    private static final int AGE_65 = 65;
+    private static final int AGE_64 = 64;
+    private static final int AGE_40 = 40;
     private static final FlexibleDate ICHIGOSHIKAKUSHUTOKUYMD = new FlexibleDate("");
     private static final RString HIHOKENNSHAKUBUNCODE_1 = new RString("1");
     private static final RString HIHOKENNSHAKUBUNCODE_2 = new RString("2");
     private static final RString 枝番 = new RString("0001");
-    private static RString 年齢到達_事由コード;
+    private static RString 年齢到達_事由コード = new RString("02");
     private static boolean chickflg = false;
     private static HihokenshaNo hihokenshaNo;
     private static ShikibetsuCode shikibetsuCode;
@@ -118,9 +118,9 @@ public class HihokenshaShikakuShutokuManager {
         edaNo = getSaidaiEdaban(parameter);
         shikakuShutokuYMD = entity.getShikakuShutokuYMD();
         RString age = get年齢(生年月日, shikakuShutokuYMD);
-        if (age.compareTo(AGE_65) >= 0) {
+        if (Integer.parseInt(age.toString()) >= AGE_65) {
             entity.setHihokennshaKubunCode(HIHOKENNSHAKUBUNCODE_1);
-        } else if (age.compareTo(AGE_64) <= 0 && age.compareTo(AGE_40) >= 0) {
+        } else if (Integer.parseInt(age.toString()) <= AGE_64 && Integer.parseInt(age.toString()) >= AGE_40) {
             entity.setHihokennshaKubunCode(HIHOKENNSHAKUBUNCODE_2);
             entity.setIchigoShikakuShutokuYMD(ICHIGOSHIKAKUSHUTOKUYMD);
         }
@@ -179,9 +179,9 @@ public class HihokenshaShikakuShutokuManager {
         // TODO 李　QA152あります年齢到達_事由コード不明です。2015/12/17
 //        年齢到達_事由コード = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, new CodeShubetsu("0117")).get(0).getコード().value();
         if (年齢到達_事由コード.equals(資格取得事由コード)) {
-            return age.compareTo(AGE_65) >= 0;
+            return Integer.parseInt(age.toString()) >= AGE_65;
         } else {
-            return age.compareTo(AGE_40) >= 0;
+            return Integer.parseInt(age.toString()) >= AGE_40;
         }
     }
 
