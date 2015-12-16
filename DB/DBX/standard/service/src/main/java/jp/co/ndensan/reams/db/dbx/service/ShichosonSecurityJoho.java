@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -43,6 +43,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class ShichosonSecurityJoho {
 
     private final static RString 権限項目種類 = new RString("koseiShichosonKengen");
@@ -70,7 +71,7 @@ public final class ShichosonSecurityJoho {
         requireNonNull(業務分類, DbzErrorMessages.対象データなし.getMessage().toString());
         介護導入形態Dac = InstanceProvider.create(DbT7908KaigoDonyuKeitaiDac.class);
         構成市町村マスタDac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
-        DbT7908KaigoDonyuKeitaiEntity 介護導入形態 = 介護導入形態Dac.selectByGyomuBunrui(業務分類.get名称());
+        DbT7908KaigoDonyuKeitaiEntity 介護導入形態 = 介護導入形態Dac.selectByGyomuBunrui(業務分類.getコード());
         if (null == 介護導入形態) {
             return get未導入市町村セキュリティ情報();
         } else {
@@ -85,7 +86,7 @@ public final class ShichosonSecurityJoho {
      * @return 構成市町村情報
      */
     public static KoseiShichosonJoho getKouseiShichosonJoho(RString 市町村識別ID) {
-        if (is市町村識別ID市町村識別IDが01から99である(市町村識別ID)) {
+        if (!is市町村識別ID市町村識別IDが01から99である(市町村識別ID)) {
             return null;
         }
         構成市町村マスタDac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
@@ -123,7 +124,6 @@ public final class ShichosonSecurityJoho {
     public static List<AuthorityItem> getShichosonShikibetsuId(RString reamsLoginId) {
         requireNonNull(reamsLoginId, DbzErrorMessages.対象データなし.getMessage().toString());
         return AuthItem.getAuthorities(reamsLoginId, new AuthType.Of().kinds(権限項目種類).create(), RDate.getNowDate());
-
     }
 
     private static ShichosonSecurityJoho get未導入市町村セキュリティ情報() {
@@ -164,6 +164,9 @@ public final class ShichosonSecurityJoho {
 
     private static boolean is市町村識別ID市町村識別IDが01から99である(RString 市町村識別ID) {
         int shichosonShokibetsuID;
+        if (null == 市町村識別ID) {
+            return Boolean.FALSE;
+        }
         try {
             shichosonShokibetsuID = Integer.valueOf(市町村識別ID.toString());
         } catch (NumberFormatException ex) {
@@ -223,7 +226,7 @@ public final class ShichosonSecurityJoho {
         市町村情報.set郵便番号(new YubinNo(BusinessConfig.get(HokenshaJoho.保険者情報_郵便番号, SubGyomuCode.DBU介護統計報告)));
         市町村情報.set住所(new AtenaJusho(BusinessConfig.get(HokenshaJoho.保険者情報_住所, SubGyomuCode.DBU介護統計報告)));
         市町村情報.set電話番号(new TelNo(BusinessConfig.get(HokenshaJoho.保険者情報_電話番号, SubGyomuCode.DBU介護統計報告)));
-
+        市町村情報.set最優先地区コード(BusinessConfig.get(HokenshaJoho.保険者情報_最優先地区コード, SubGyomuCode.DBU介護統計報告));
         市町村情報.set帳票用都道府県名称表示有無(BusinessConfig.get(
                 ChohyoKyotsuJushoHenshuHoho.KannaiJushoHenshu.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, SubGyomuCode.DBU介護統計報告));
         市町村情報.set帳票用郡名称表示有無(BusinessConfig.get(

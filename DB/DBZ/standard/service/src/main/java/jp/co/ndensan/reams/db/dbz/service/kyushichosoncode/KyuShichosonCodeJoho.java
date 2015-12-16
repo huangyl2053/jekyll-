@@ -15,6 +15,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KyuShichosonCodeJoho {
 
     private boolean 合併市町村有無フラグ;
