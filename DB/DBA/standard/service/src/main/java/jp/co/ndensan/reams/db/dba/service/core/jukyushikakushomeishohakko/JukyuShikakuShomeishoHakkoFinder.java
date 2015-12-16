@@ -33,7 +33,6 @@ public class JukyuShikakuShomeishoHakkoFinder {
     public static final RString SAKAKO = new RString("（");
     public static final RString MIGIKAKO = new RString("）");
     public static final RString MATAHA = new RString("までは");
-    public static final RString 未設定 = new RString("未設定");
     public static final RString 読点 = new RString("、");
     public static final int FIRST_INDEX = 0;
     public static final int LENGTH_150 = 150;
@@ -89,8 +88,9 @@ public class JukyuShikakuShomeishoHakkoFinder {
                     .isBefore(new FlexibleDate(get制度改正施行管理_新予防給付_適用開始日()))) {
                 jukyuShikakuShomeishoHakkoRelateEntity.setBiko(get受給資格証明書_備考項目文言());
             } else {
-                jukyuShikakuShomeishoHakkoRelateEntity.setBiko(未設定);
+                jukyuShikakuShomeishoHakkoRelateEntity.setBiko(RString.EMPTY);
             }
+            jukyuShikakuShomeishoHakkoRelateEntity.setJukyuShinseiYMD(RString.EMPTY);
         } else {
             jukyuShikakuShomeishoHakkoRelateEntity = edit備考(jukyuShikakuShomeishoHakkoRelateEntity, 
                     ninTeiShinSeiChuDataEntity, jukyuShikakuShomeishoHakkoMapper);
@@ -172,15 +172,19 @@ public class JukyuShikakuShomeishoHakkoFinder {
         介護認定審査会意見と名称.append(SPACE);
         介護認定審査会意見と名称.append(サービス種類名称リスト.get(FIRST_INDEX));
         for (int i =1; i < サービス種類名称リスト.size(); i++) {
-            介護認定審査会意見と名称.append(読点);
-            介護認定審査会意見と名称.append(サービス種類名称リスト.get(i));
+            if( サービス種類名称リスト.get(i)  != null &&! サービス種類名称リスト.get(i).trim().isEmpty()) {
+                介護認定審査会意見と名称.append(読点);
+                介護認定審査会意見と名称.append(サービス種類名称リスト.get(i));
+            }
         }
         RStringBuilder 介護認定審査会意見と略称 = new RStringBuilder(jukyuShikakuShomeishoHakkoRelate.getShinsakaiIken());
         介護認定審査会意見と略称.append(SPACE);
         介護認定審査会意見と略称.append(サービス種類略称リスト.get(FIRST_INDEX));
         for (int j =1; j < サービス種類略称リスト.size(); j++) {
-            介護認定審査会意見と略称.append(読点);
-            介護認定審査会意見と略称.append(サービス種類略称リスト.get(j));
+            if(サービス種類略称リスト.get(j) != null && !サービス種類略称リスト.get(j).trim().isEmpty()) {
+                介護認定審査会意見と略称.append(読点);
+                介護認定審査会意見と略称.append(サービス種類略称リスト.get(j));
+             }
         }
         if (介護認定審査会意見と名称.toRString().length() <= LENGTH_150) {
             jukyuShikakuShomeishoHakkoRelate.setShinsakaiIken(介護認定審査会意見と名称.toRString());
