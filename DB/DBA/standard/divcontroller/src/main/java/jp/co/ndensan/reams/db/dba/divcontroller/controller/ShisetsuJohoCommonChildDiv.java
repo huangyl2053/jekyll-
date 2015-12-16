@@ -45,7 +45,7 @@ public class ShisetsuJohoCommonChildDiv {
     }
 
     /**
-     * 施設情報に初期化を設定します。
+     * 施設情報に初期化を設定します
      *
      * @param requestDiv ShisetsuJohoCommonChildDivDiv
      * @return ResponseData<ShisetsuJohoCommonChildDivDiv>
