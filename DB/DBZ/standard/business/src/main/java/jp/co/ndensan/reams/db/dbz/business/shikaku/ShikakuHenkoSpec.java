@@ -18,6 +18,9 @@ import jp.co.ndensan.reams.uz.uza.core.validation.PresenceValidator;
  */
 public enum ShikakuHenkoSpec implements IPredicate<ShikakuHenko> {
 
+    /**
+     * 変更日が入力であること
+     */
     変更日が入力であること {
                 @Override
                 public boolean apply(ShikakuHenko nothing) {
@@ -28,6 +31,9 @@ public enum ShikakuHenkoSpec implements IPredicate<ShikakuHenko> {
                     return res;
                 }
             },
+    /**
+     * 変更事由が入力であること
+     */
     変更事由が入力であること {
                 @Override
                 public boolean apply(ShikakuHenko nothing) {
@@ -38,6 +44,9 @@ public enum ShikakuHenkoSpec implements IPredicate<ShikakuHenko> {
                     return res;
                 }
             },
+    /**
+     * 取得日が変更日より前
+     */
     取得日が変更日より前 {
                 @Override
                 public boolean apply(ShikakuHenko nothing) {
@@ -47,6 +56,9 @@ public enum ShikakuHenkoSpec implements IPredicate<ShikakuHenko> {
                     return nothing.get変更日().isBefore(nothing.get取得日());
                 }
             },
+    /**
+     * 喪失日が変更日より後
+     */
     喪失日が変更日より後 {
                 @Override
                 public boolean apply(ShikakuHenko nothing) {
@@ -56,6 +68,9 @@ public enum ShikakuHenkoSpec implements IPredicate<ShikakuHenko> {
                     return !nothing.get変更日().isBefore(nothing.get喪失日());
                 }
             },
+    /**
+     * 変更日が次の履歴データの変更日以降
+     */
     変更日が次の履歴データの変更日以降 {
                 @Override
                 public boolean apply(ShikakuHenko nothing) {
@@ -69,6 +84,9 @@ public enum ShikakuHenkoSpec implements IPredicate<ShikakuHenko> {
                     return 次履歴.getShikakuHenkoYMD().isBefore(nothing.get変更日());
                 }
             },
+    /**
+     * 変更日が前の履歴データの変更日以降
+     */
     変更日が前の履歴データの変更日以降 {
                 @Override
                 public boolean apply(ShikakuHenko nothing) {
@@ -82,6 +100,9 @@ public enum ShikakuHenkoSpec implements IPredicate<ShikakuHenko> {
                     return !前履歴.getShikakuHenkoYMD().isBefore(nothing.get変更日());
                 }
             },
+    /**
+     * has住所地特例履歴と期間が重複する履歴
+     */
     has住所地特例履歴と期間が重複する履歴 {
                 @Override
                 public boolean apply(ShikakuHenko nothing) {
@@ -103,6 +124,9 @@ public enum ShikakuHenkoSpec implements IPredicate<ShikakuHenko> {
                     return false;
                 }
             },
+    /**
+     * is最新の取得日として登録不可
+     */
     is最新の取得日として登録不可 {
                 @Override
                 public boolean apply(ShikakuHenko nothing) {
@@ -120,6 +144,9 @@ public enum ShikakuHenkoSpec implements IPredicate<ShikakuHenko> {
                     return nothing.get最新資格変更日().isBefore(nothing.get最新資格取得日());
                 }
             },
+    /**
+     * 変更事由が１号到達で年齢が65歳未満
+     */
     変更事由が１号到達で年齢が65歳未満 {
                 @Override
                 public boolean apply(ShikakuHenko nothing) {

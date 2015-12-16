@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.shisetsunyutaisho;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.business.shisetsunyutaisho.ShisetsuNyutaishoRirekiKanriContext;
+//import jp.co.ndensan.reams.db.dbz.business.shisetsunyutaisho.ShisetsuNyutaishoRirekiKanriContext;
 import jp.co.ndensan.reams.db.dbz.business.validation.ShisetsuNyutaishoValidationMessage;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+//import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -295,29 +295,37 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
 
         if (!PresenceValidator.isValid(this.get入所年月日())) {
-            messages.add(ShisetsuNyutaishoValidationMessage.入所日が未入力);//, "必須項目の入所日が未入力 ");
+            messages.add(ShisetsuNyutaishoValidationMessage.入所日が未入力);
+//, "必須項目の入所日が未入力 ");
         }
 
         if (!PresenceValidator.isValid(this.get入所施設コード())) {
-            messages.add(ShisetsuNyutaishoValidationMessage.入所施設コードが未入力);//, "必須項目の入所施設コードが未入力 ");
+            messages.add(ShisetsuNyutaishoValidationMessage.入所施設コードが未入力);
+//, "必須項目の入所施設コードが未入力 ");
         }
 
         if (!PresenceValidator.isValid(context.getJigyoshaMeisho())) {
-            messages.add(ShisetsuNyutaishoValidationMessage.入所施設名称が未入力);//, "必須項目の入所施設名称が未入力 ");
+            messages.add(ShisetsuNyutaishoValidationMessage.入所施設名称が未入力);
+//, "必須項目の入所施設名称が未入力 ");
         }
 
         if (is退所日が入所日より前()) {
-            messages.add(ShisetsuNyutaishoValidationMessage.入所年月日より前);//, "退所年月日" + this.get退所年月日() + "が入所年月日" + this.get入所年月日() + "以降でない");
+            messages.add(ShisetsuNyutaishoValidationMessage.入所年月日より前);
+//, "退所年月日" + this.get退所年月日() + "が入所年月日" + this.get入所年月日() + "以降でない");
         }
-        if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複)) {
-            if (is入所日が前の履歴データの退所日と重複(context.get前履歴())) {
-                messages.add(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複);//, "入所年月日" + this.get入所年月日() + "と前の履歴データの退所日と重複");
-            }
+        if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複)
+                && is入所日が前の履歴データの退所日と重複(context.get前履歴())) {
+//            if () {
+                messages.add(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複);
+//, "入所年月日" + this.get入所年月日() + "と前の履歴データの退所日と重複");
+//            }
         }
-        if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複)) {
-            if (is退所日が次の履歴データの入所日と重複(context.get次履歴())) {
-                messages.add(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複);//, "退所年月日" + this.get退所年月日() + "次の履歴データの入所日の期間が重複");
-            }
+        if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複)
+                && is退所日が次の履歴データの入所日と重複(context.get次履歴())) {
+//            if () {
+                messages.add(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複);
+//, "退所年月日" + this.get退所年月日() + "次の履歴データの入所日の期間が重複");
+//            }
         }
         if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.入所日と期間が重複する履歴がある)) {
 
@@ -331,20 +339,32 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
                 }
             }
 
-            if (!flg) {
-                if (has入所日と期間が重複する履歴In(context.get全履歴())) {
-                    messages.add(ShisetsuNyutaishoValidationMessage.入所日と期間が重複する履歴がある);//, "入所年月日" + this.get入所年月日() + "と期間が重複する履歴がある");
-
-                }
+//            if (!flg) {
+//                if (has入所日と期間が重複する履歴In(context.get全履歴())) {
+            if (入所日と期間が重複する履歴(flg, has入所日と期間が重複する履歴In(context.get全履歴()))) {
+                    messages.add(ShisetsuNyutaishoValidationMessage.入所日と期間が重複する履歴がある);
+//, "入所年月日" + this.get入所年月日() + "と期間が重複する履歴がある");
             }
+//                }
+//            }
         }
-        if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.退所日と期間が重複する履歴がある)) {
-            if (has退所日と期間が重複する履歴In(context.get全履歴())) {
-                messages.add(ShisetsuNyutaishoValidationMessage.退所日と期間が重複する履歴がある);//, "退所年月日" + this.get退所年月日() + "と期間が重複する履歴がある");
-            }
+        if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.退所日と期間が重複する履歴がある)
+                && has退所日と期間が重複する履歴In(context.get全履歴())) {
+//            if () {
+                messages.add(ShisetsuNyutaishoValidationMessage.退所日と期間が重複する履歴がある);
+//, "退所年月日" + this.get退所年月日() + "と期間が重複する履歴がある");
+//            }
         }
         return messages;
     }
+
+    private boolean 入所日と期間が重複する履歴(boolean flg, boolean has入所日と期間が重複する履歴In) {
+        if (flg) {
+            return false;
+        }
+        return has入所日と期間が重複する履歴In;
+    }
+
 
     private boolean is退所日が入所日より前() {
         if (get入所年月日().isEmpty() || get退所年月日().isEmpty()) {

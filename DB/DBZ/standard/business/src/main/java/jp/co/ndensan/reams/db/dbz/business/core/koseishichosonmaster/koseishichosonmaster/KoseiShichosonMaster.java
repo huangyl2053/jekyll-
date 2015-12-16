@@ -31,7 +31,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 構成市町村マスタを管理するクラスです。
  */
-public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterIdentifier, DbT7051KoseiShichosonMasterEntity, KoseiShichosonMaster> implements Serializable {
+public class KoseiShichosonMaster
+        extends ParentModelBase<KoseiShichosonMasterIdentifier, DbT7051KoseiShichosonMasterEntity, KoseiShichosonMaster>
+        implements Serializable {
 
     private static final long serialVersionUID = -7585494205375015808L;
 
@@ -428,6 +430,12 @@ public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterId
         return hasChangedEntity() || koseiShichosonShishoMaster.hasAnyChanged();
     }
 
+    /**
+     * getKoseiShichosonShishoMaster
+     *
+     * @param id KoseiShichosonShishoMasterIdentifier
+     * @return KoseiShichosonShishoMaster
+     */
     public KoseiShichosonShishoMaster getKoseiShichosonShishoMaster(KoseiShichosonShishoMasterIdentifier id) {
         if (koseiShichosonShishoMaster.contains(id)) {
             return koseiShichosonShishoMaster.clone().get(id);
@@ -436,10 +444,20 @@ public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterId
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * getKoseiShichosonShishoMasterList
+     *
+     * @return KoseiShichosonShishoMasterリスト
+     */
     public List<KoseiShichosonShishoMaster> getKoseiShichosonShishoMasterList() {
         return new ArrayList<>(koseiShichosonShishoMaster.values());
     }
 
+    /**
+     * modified
+     *
+     * @return KoseiShichosonMaster
+     */
     public KoseiShichosonMaster modified() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

@@ -25,8 +25,8 @@ public class JushochitokureiTekiyo extends ShikakuIdoBaseItem<JushochitokureiTek
         NOTHING = new JushochitokureiTekiyo(JushochitokureiTekiyoJiyu.EMPTY, FlexibleDate.MIN, FlexibleDate.MIN);
     }
 
-    private FlexibleDate tekiyoDate;
-    private HihokenshaDaicho newestHihokenshaDaicho;
+    private final FlexibleDate tekiyoDate = FlexibleDate.EMPTY;
+    private final HihokenshaDaicho newestHihokenshaDaicho = null;
 
     /**
      * 新しい住所地特例適用の事由、届出年月日、処理年月日を持ったインスタンスを生成します。

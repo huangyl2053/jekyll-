@@ -34,4 +34,31 @@ public class KaigoJogaiTokureiTaishoShisetsuIdentifier implements Serializable {
         this.事業者番号 = 事業者番号;
         this.有効開始年月日 = 有効開始年月日;
     }
+
+    /**
+     * get事業者種別
+     *
+     * @return 事業者種別
+     */
+    public RString get事業者種別() {
+        return 事業者種別;
+    }
+
+    /**
+     * get事業者番号
+     *
+     * @return 事業者番号
+     */
+    public RString get事業者番号() {
+        return 事業者番号;
+    }
+
+    /**
+     * get有効開始年月日
+     *
+     * @return 有効開始年月日
+     */
+    public FlexibleDate get有効開始年月日() {
+        return 有効開始年月日;
+    }
 }

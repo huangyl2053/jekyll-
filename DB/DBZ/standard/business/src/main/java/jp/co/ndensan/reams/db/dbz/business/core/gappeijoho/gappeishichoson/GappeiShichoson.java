@@ -23,7 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 合併市町村を管理するクラスです。
  */
-public class GappeiShichoson extends ParentModelBase<GappeiShichosonIdentifier, DbT7056GappeiShichosonEntity, GappeiShichoson> implements Serializable {
+public class GappeiShichoson extends ParentModelBase<GappeiShichosonIdentifier, DbT7056GappeiShichosonEntity, GappeiShichoson>
+        implements Serializable {
 
     private static final long serialVersionUID = 5427610772528976479L;
 

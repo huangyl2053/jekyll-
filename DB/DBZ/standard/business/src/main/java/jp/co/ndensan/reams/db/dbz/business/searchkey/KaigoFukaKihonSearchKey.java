@@ -74,6 +74,9 @@ public final class KaigoFukaKihonSearchKey {
         return 識別コード;
     }
 
+    /**
+     * Builder
+     */
     public static class Builder {
 
         private final TsuchishoNo 通知書番号;

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.hokensha;
 
-import java.io.Serializable;
+//import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.ForeignersNameOutput;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.GunNamePrint;
@@ -39,7 +39,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * @author LDNS 宋文娟
  * @author N3327 三浦 凌
  */
-public class KoseiShichosonMasterModel implements IKoikiKoseiShichosonMaster, Serializable {
+public class KoseiShichosonMasterModel implements IKoikiKoseiShichosonMaster {
+//    , Serializable {
 
     private DbT7051KoseiShichosonMasterEntity entity;
     private transient ShichosonShikibetsuID shichosonShikibetsuId;

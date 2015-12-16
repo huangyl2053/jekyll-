@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 構成市町村支所マスタを管理するクラスです。
  */
-public class KoseiShichosonShishoMaster extends ModelBase<KoseiShichosonShishoMasterIdentifier, DbT7052KoseiShichosonShishoMasterEntity, KoseiShichosonShishoMaster> implements Serializable {
+public class KoseiShichosonShishoMaster
+        extends ModelBase<KoseiShichosonShishoMasterIdentifier, DbT7052KoseiShichosonShishoMasterEntity, KoseiShichosonShishoMaster>
+        implements Serializable {
 
     private static final long serialVersionUID = -2057959266642078847L;
 

@@ -14,6 +14,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  */
 public enum JuchochiTokureiKaijoSpec implements IPredicate<JushochitokureiKaijo> {
 
+    /**
+     * 解除日が資格取得年月日より前
+     */
     解除日が資格取得年月日より前 {
                 @Override
                 public boolean apply(JushochitokureiKaijo nothing) {
@@ -25,6 +28,9 @@ public enum JuchochiTokureiKaijoSpec implements IPredicate<JushochitokureiKaijo>
                     return kaijoDate.isBefore(target);
                 }
             },
+    /**
+     * 最新の資格変更年月日がNullでないこと
+     */
     最新の資格変更年月日がNullでないこと {
 
                 @Override
@@ -37,6 +43,9 @@ public enum JuchochiTokureiKaijoSpec implements IPredicate<JushochitokureiKaijo>
                     return kaijoDate.isBefore(target);
                 }
             },
+    /**
+     * 最新の適用年月日がNullでないこと
+     */
     最新の適用年月日がNullでないこと {
 
                 @Override

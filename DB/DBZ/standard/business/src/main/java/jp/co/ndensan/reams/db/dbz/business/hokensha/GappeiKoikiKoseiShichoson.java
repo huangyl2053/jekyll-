@@ -43,6 +43,11 @@ public class GappeiKoikiKoseiShichoson implements IKoikiKoseiShichoson {
     private final IKoikiKoseiShichoson shichoson;
     private final Optional<FlexibleDate> kanyuYMD;
 
+    /**
+     * コンストラクタ
+     *
+     * @param shichosons IItemList
+     */
     public GappeiKoikiKoseiShichoson(IItemList<? extends IKoikiKoseiShichoson> shichosons) {
         Objects.requireNonNull(shichosons);
         IItemList<? extends IKoikiKoseiShichoson> sortedByKanyuYMD = shichosons.sorted(KoikiKoseiShichosonMasterComparator.orderBy加入日.asc());

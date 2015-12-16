@@ -26,6 +26,11 @@ public class ShikakuHenkoValidator {
 //    private final FlexibleDate 一号資格取得日;
 //    private final FlexibleDate 最新資格変更日;
 
+    /**
+     * ShikakuHenkoValidator
+     *
+     * @param shikakuHenko ShikakuHenko
+     */
     public ShikakuHenkoValidator(ShikakuHenko shikakuHenko) {
         this.nothing = shikakuHenko;
     }
@@ -33,7 +38,7 @@ public class ShikakuHenkoValidator {
     /**
      * コンストラクタです。
      *
-     * @return
+     * @return IValidationMessages
      */
 //    public ShikakuHenkoValidator(FlexibleDate 変更日, FlexibleDate 取得日, FlexibleDate 喪失日, RString 変更事由,
 //            FlexibleDate 最新資格取得日, FlexibleDate 最新資格喪失日, FlexibleDate 最新資格更新日, FlexibleDate 一号資格取得日) {

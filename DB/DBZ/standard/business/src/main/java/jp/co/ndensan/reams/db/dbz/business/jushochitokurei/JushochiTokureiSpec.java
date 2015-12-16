@@ -14,6 +14,9 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
  */
 public enum JushochiTokureiSpec implements IPredicate<HihokenshaDaicho> {
 
+    /**
+     * 住特適用日が資格取得日より前
+     */
     住特適用日が資格取得日より前 {
                 @Override
                 public boolean apply(HihokenshaDaicho jushochiTokureiData) {
@@ -24,6 +27,9 @@ public enum JushochiTokureiSpec implements IPredicate<HihokenshaDaicho> {
                     return res;
                 }
             },
+    /**
+     * 住特適用日が資格喪失日以降
+     */
     住特適用日が資格喪失日以降 {
                 @Override
                 public boolean apply(HihokenshaDaicho jushochiTokureiData) {
@@ -37,6 +43,9 @@ public enum JushochiTokureiSpec implements IPredicate<HihokenshaDaicho> {
                     return res;
                 }
             },
+    /**
+     * 住特解除日が資格取得日より前
+     */
     住特解除日が資格取得日より前 {
                 @Override
                 public boolean apply(HihokenshaDaicho jushochiTokureiData) {
@@ -50,6 +59,9 @@ public enum JushochiTokureiSpec implements IPredicate<HihokenshaDaicho> {
                     return res;
                 }
             },
+    /**
+     * 住特解除日が資格喪失日以降
+     */
     住特解除日が資格喪失日以降 {
                 @Override
                 public boolean apply(HihokenshaDaicho jushochiTokureiData) {
@@ -65,6 +77,9 @@ public enum JushochiTokureiSpec implements IPredicate<HihokenshaDaicho> {
                     return res;
                 }
             },
+    /**
+     * 住所地特例期間が不正_適用日が解除日の後
+     */
     住所地特例期間が不正_適用日が解除日の後 {
                 @Override
                 public boolean apply(HihokenshaDaicho jushochiTokureiData) {

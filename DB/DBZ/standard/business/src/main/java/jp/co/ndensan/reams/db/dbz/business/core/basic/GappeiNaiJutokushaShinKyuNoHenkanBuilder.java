@@ -67,7 +67,7 @@ public class GappeiNaiJutokushaShinKyuNoHenkanBuilder {
     /**
      * 識別コード_措置元）を設定します。
      *
-     * @param 識別コード_措置元） 識別コード_措置元）
+     * @param 識別コード_措置元 識別コード_措置元）
      * @return {@link GappeiNaiJutokushaShinKyuNoHenkanBuilder}
      */
     public GappeiNaiJutokushaShinKyuNoHenkanBuilder set識別コード_措置元(ShikibetsuCode 識別コード_措置元) {
@@ -91,7 +91,7 @@ public class GappeiNaiJutokushaShinKyuNoHenkanBuilder {
     /**
      * 市町村コード_措置元）を設定します。
      *
-     * @param 市町村コード_措置元） 市町村コード_措置元）
+     * @param 市町村コード_措置元 市町村コード_措置元）
      * @return {@link GappeiNaiJutokushaShinKyuNoHenkanBuilder}
      */
     public GappeiNaiJutokushaShinKyuNoHenkanBuilder set市町村コード_措置元(LasdecCode 市町村コード_措置元) {
@@ -115,7 +115,7 @@ public class GappeiNaiJutokushaShinKyuNoHenkanBuilder {
     /**
      * 被保険者番号_措置元）を設定します。
      *
-     * @param 被保険者番号_措置元） 被保険者番号_措置元）
+     * @param 被保険者番号_措置元 被保険者番号_措置元）
      * @return {@link GappeiNaiJutokushaShinKyuNoHenkanBuilder}
      */
     public GappeiNaiJutokushaShinKyuNoHenkanBuilder set被保険者番号_措置元(HihokenshaNo 被保険者番号_措置元) {

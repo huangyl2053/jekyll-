@@ -14,6 +14,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  */
 public enum NinteiInputSpec implements IPredicate<FlexibleDate> {
 
+    /**
+     * 入力がEmptyでないこと
+     */
     入力がEmptyでないこと {
                 @Override
                 public boolean apply(FlexibleDate 有効開始年月日) {

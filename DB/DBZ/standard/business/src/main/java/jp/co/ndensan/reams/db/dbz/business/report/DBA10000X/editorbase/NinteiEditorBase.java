@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+//import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
@@ -145,10 +145,10 @@ public class NinteiEditorBase {
         source.setRyui(hihokenshashoModel.getShikakuHakko().get審査会意見());
     }
 
-    private static RString toWarekiString(RDate date) {
-        return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-    }
+//    private static RString toWarekiString(RDate date) {
+//        return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+//                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+//    }
 
     private static RString toWarekiString(FlexibleDate date) {
         return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)

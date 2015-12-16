@@ -26,7 +26,8 @@ public final class JuchochiTokureiKaijoValidator {
      */
     //private final JushochitokureiKaijo nothing;
 
-   private JuchochiTokureiKaijoValidator(JushochitokureiKaijo jushochitokureiKaijo) {
+//   private JuchochiTokureiKaijoValidator(JushochitokureiKaijo jushochitokureiKaijo) {
+    private JuchochiTokureiKaijoValidator() {
         //this.nothing = jushochitokureiKaijo;
     }
 

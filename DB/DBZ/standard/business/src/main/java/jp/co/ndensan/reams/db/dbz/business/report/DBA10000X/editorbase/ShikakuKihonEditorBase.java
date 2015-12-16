@@ -101,6 +101,7 @@ public class ShikakuKihonEditorBase {
             case そのまま:
                 source.setHihokenshanno(hihoNo);
                 break;
+            default:
         }
     }
 

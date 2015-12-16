@@ -35,6 +35,7 @@ public class KyotakuKeikakuJigyoshaSakusei extends
      * コンストラクタです。<br/>
      * 居宅給付計画事業者作成の新規作成時に使用します。
      *
+     * @param 被保険者番号 被保険者番号
      * @param 対象年月 対象年月
      * @param 履歴番号 履歴番号
      */

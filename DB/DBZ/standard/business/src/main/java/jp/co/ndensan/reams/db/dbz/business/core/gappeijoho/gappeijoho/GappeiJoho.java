@@ -222,6 +222,12 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
         return hasChangedEntity() || gappeiShichoson.hasAnyChanged();
     }
 
+    /**
+     * getGappeiShichoson
+     *
+     * @param id GappeiShichosonIdentifier
+     * @return GappeiShichoson
+     */
     public GappeiShichoson getGappeiShichoson(GappeiShichosonIdentifier id) {
         if (gappeiShichoson.contains(id)) {
             return gappeiShichoson.clone().get(id);
@@ -230,6 +236,11 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * getGappeiShichosonList
+     *
+     * @return GappeiShichosonリスト
+     */
     public List<GappeiShichoson> getGappeiShichosonList() {
         return new ArrayList<>(gappeiShichoson.values());
     }

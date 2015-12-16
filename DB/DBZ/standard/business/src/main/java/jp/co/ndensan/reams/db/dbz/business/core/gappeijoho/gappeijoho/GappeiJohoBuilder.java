@@ -136,6 +136,12 @@ public class GappeiJohoBuilder {
         return new GappeiJoho(entity, id, gappeiShichoson);
     }
 
+    /**
+     * setGappeiShichoson
+     *
+     * @param 合併市町村 GappeiShichoson
+     * @return GappeiJohoBuilder
+     */
     public GappeiJohoBuilder setGappeiShichoson(GappeiShichoson 合併市町村) {
 
         if (hasSameIdentifier(合併市町村.identifier())) {

@@ -125,19 +125,46 @@ public class ShikakuHenko extends ShikakuIdoBaseItem<ShikakuHenkoJiyu> {
         return 変更事由;
     }
 
+    /**
+     * get次履歴
+     *
+     * @return DbT1001HihokenshaDaichoEntity
+     */
     public Optional<DbT1001HihokenshaDaichoEntity> get次履歴() {
 
-        return get次履歴();
+        //CheckCtyle対応 無限再帰ループしているため暫定対応
+        return null;
+//        return get次履歴();
+
     }
 
+    /**
+     * get前履歴
+     *
+     * @return DbT1001HihokenshaDaichoEntity
+     */
     public Optional<DbT1001HihokenshaDaichoEntity> get前履歴() {
-        return get前履歴();
+        //CheckCtyle対応 無限再帰ループしているため暫定対応
+        return null;
+//        return get前履歴();
     }
 
+    /**
+     * get全履歴
+     *
+     * @return DbT1001HihokenshaDaichoEntityリスト
+     */
     public IItemList<DbT1001HihokenshaDaichoEntity> get全履歴() {
-        return get全履歴();
+        //CheckCtyle対応 無限再帰ループしているため暫定対応
+        return null;
+//        return get全履歴();
     }
 
+    /**
+     * validate
+     *
+     * @return IValidationMessages
+     */
     public IValidationMessages validate() {
         return new ShikakuHenkoValidator(this).validate();
     }

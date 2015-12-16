@@ -78,21 +78,25 @@ public class KyufuSeigenEditorBase {
             switch (i) {
                 case 0:
                     setKyufuSeigen(createKyufuSeigenSetter1(source),
-                            kyufuSeigenNames.get(i), new Range(kyufuSeigenStartDates.get(i), kyufuSeigenEndDates.get(i)));
+                            new Range(kyufuSeigenStartDates.get(i), kyufuSeigenEndDates.get(i)));
+//                    kyufuSeigenNames.get(i), new Range(kyufuSeigenStartDates.get(i), kyufuSeigenEndDates.get(i)));
                     break;
                 case 1:
                     setKyufuSeigen(createKyufuSeigenSetter2(source),
-                            kyufuSeigenNames.get(i), new Range(kyufuSeigenStartDates.get(i), kyufuSeigenEndDates.get(i)));
+                            new Range(kyufuSeigenStartDates.get(i), kyufuSeigenEndDates.get(i)));
+//                    kyufuSeigenNames.get(i), new Range(kyufuSeigenStartDates.get(i), kyufuSeigenEndDates.get(i)));
                     break;
                 default:
                     setKyufuSeigen(createKyufuSeigenSetter3(source),
-                            kyufuSeigenNames.get(i), new Range(kyufuSeigenStartDates.get(i), kyufuSeigenEndDates.get(i)));
+                            new Range(kyufuSeigenStartDates.get(i), kyufuSeigenEndDates.get(i)));
+//                    kyufuSeigenNames.get(i), new Range(kyufuSeigenStartDates.get(i), kyufuSeigenEndDates.get(i)));
                     break;
             }
         }
     }
 
-    private void setKyufuSeigen(IKyufuSeigenSetter setter, RString kyufuSeigenName, Range<FlexibleDate> kyufuRange) {
+//    private void setKyufuSeigen(IKyufuSeigenSetter setter, RString kyufuSeigenName, Range<FlexibleDate> kyufuRange) {
+    private void setKyufuSeigen(IKyufuSeigenSetter setter, Range<FlexibleDate> kyufuRange) {
         //TODO n8178 城間篤人 長さ8か12の文字列を受け取ることしか考慮していない実装になっているため例外で落ちる。後日修正 2015年2月末
 //        int halfIndex;
 //        if (kyufuSeigenName.length() <= KYUFU_SEIGEN_NAME_LENGTH) {

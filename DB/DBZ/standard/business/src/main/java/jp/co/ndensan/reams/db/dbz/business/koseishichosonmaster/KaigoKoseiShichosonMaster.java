@@ -28,6 +28,8 @@ public class KaigoKoseiShichosonMaster implements IKoseiShichosonMaster {
 
     private DbT7051KoseiShichosonMasterEntity entity;
 
+    private static final RString NOTSUPPORTED = new RString("Not supported yet.");
+
     private KaigoKoseiShichosonMaster() {
         entity = new DbT7051KoseiShichosonMasterEntity();
     }
@@ -416,21 +418,36 @@ public class KaigoKoseiShichosonMaster implements IKoseiShichosonMaster {
         return new Builder();
     }
 
+    /**
+     * modifiedModel
+     *
+     * @return KaigoKoseiShichosonMaster
+     */
     public KaigoKoseiShichosonMaster modifiedModel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOTSUPPORTED.toString()); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * getKoseiShichosonShishoMasterList
+     *
+     * @return KaigoKoseiShichosonMasterリスト
+     */
     public List<KaigoKoseiShichosonMaster> getKoseiShichosonShishoMasterList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOTSUPPORTED.toString()); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * hasChanged
+     *
+     * @return boolean
+     */
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOTSUPPORTED.toString()); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public IKoseiShichosonMasterEntity getEntity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOTSUPPORTED.toString()); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

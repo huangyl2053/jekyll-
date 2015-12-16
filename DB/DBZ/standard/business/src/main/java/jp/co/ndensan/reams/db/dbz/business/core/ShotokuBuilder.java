@@ -78,7 +78,7 @@ public class ShotokuBuilder {
     /**
      * 非課税区分（住民税減免前）を設定します。
      *
-     * @param 非課税区分_住民税減免前） 非課税区分（住民税減免前）
+     * @param 非課税区分_住民税減免前 非課税区分（住民税減免前）
      * @return {@link ShotokuBuilder}
      */
     public ShotokuBuilder set非課税区分_住民税減免前(RString 非課税区分_住民税減免前) {

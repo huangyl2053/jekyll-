@@ -187,6 +187,11 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         serviceTaniEditor.set1月当たり(source);
     }
 
+    /**
+     * get印字位置
+     *
+     * @return HihokenshashoPrintPosition
+     */
     public HihokenshashoPrintPosition get印字位置() {
         return hihokenshashoModel.getPosition();
     }
