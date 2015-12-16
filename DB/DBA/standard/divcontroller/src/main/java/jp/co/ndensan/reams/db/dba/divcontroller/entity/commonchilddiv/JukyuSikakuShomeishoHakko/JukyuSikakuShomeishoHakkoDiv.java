@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.YukoMukoKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -189,6 +190,6 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
      */
     @Override
     public void initialize(RString 被保険者番号) {
-        getHandler().initialize(JukyuShikakuShomeishoHakkoParameter.createSelectBy被保険者番号(被保険者番号));
+        getHandler().initialize(JukyuShikakuShomeishoHakkoParameter.createSelectBy被保険者番号(被保険者番号,YukoMukoKubun.有効.getコード()));
     }
 }

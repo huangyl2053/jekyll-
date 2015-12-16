@@ -19,7 +19,7 @@
         <id property="jigyoshaNo" column="dbT1005Kaigo_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.KaigoJigyoshaNoTypeHandler" />
         <id property="yukoKaishiYMD" column="dbT1005Kaigo_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="yukoShuryoYMD" column="dbT1005Kaigo_yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="jigyoshaKanaMeisho" column="dbT1005Kaigo_jigyoshaKanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jigyoshaKanaMeisho" column="dbT1005Kaigo_jigyoshaKanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
         <result property="jigyoshaKanaJusho" column="dbT1005Kaigo_jigyoshaKanaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="telNo" column="dbT1005Kaigo_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
     </resultMap>
@@ -63,33 +63,33 @@
         AND 
             dbT7130Kaigo."isDeleted"  <![CDATA[<>]]> TRUE
         
-        <if test="isJigyoshaNoFlag == true" >
+        <if test="isJigyoshaNoFlag" >
            AND dbT7060Kaigo."jigyoshaNo" = #{jigyoshaNo}
         </if>
-        <if test = "isJigyoshaNoFlag  == false">
-           <if test = "isYukoKaishiYMDFromFlag == true and isYukoKaishiYMDToFlag == false">
+        <if test = "!isJigyoshaNoFlag">
+           <if test = "isYukoKaishiYMDFromFlag and !isYukoKaishiYMDToFlag">
                AND 
                     dbT7060Kaigo."yukoKaishiYMD"  <![CDATA[>=]]>   #{yukoKaishiYMDFrom}
                AND
                     dbT7063Kaigo."yukoKaishiYMD" <![CDATA[>=]]>  #{yukoKaishiYMDFrom}
            </if>
-           <if test = "isYukoKaishiYMDFromFlag == true and isYukoKaishiYMDToFlag == true">
+           <if test = "isYukoKaishiYMDFromFlag and isYukoKaishiYMDToFlag">
                AND 
                     dbT7060Kaigo."yukoKaishiYMD" <![CDATA[>=]]>  #{yukoKaishiYMDFrom}
                AND 
-                    dbT7063Kaigo."yukoKaishiYMD" <![CDATA[<=]]>  #{yukoKaishiYMDFrom}
+                    dbT7060Kaigo."yukoKaishiYMD" <![CDATA[<=]]>  #{yukoKaishiYMDTo}
                AND  
-                    dbT7063Kaigo."yukoKaishiYMD" <![CDATA[>=]]>  #{yukoKaishiYMDTo}
+                    dbT7063Kaigo."yukoKaishiYMD" <![CDATA[>=]]>  #{yukoKaishiYMDFrom}
                AND  
                     dbT7063Kaigo."yukoKaishiYMD" <![CDATA[<=]]>  #{yukoKaishiYMDTo}
            </if>
-           <if test = "isYukoKaishiYMDFromFlag == false and isYukoKaishiYMDToFlag == true">
+           <if test = "!isYukoKaishiYMDFromFlag and isYukoKaishiYMDToFlag">
                AND  
                     dbT7060Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{yukoKaishiYMDTo}
                AND 
                     dbT7063Kaigo."yukoKaishiYMD" <![CDATA[<=]]>  #{yukoKaishiYMDTo}
            </if>
-           <if test = "isYukoKaishiYMDFromFlag == false and isYukoKaishiYMDToFlag == false">
+           <if test = "!isYukoKaishiYMDFromFlag and !isYukoKaishiYMDToFlag">
                AND 
                     dbT7060Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{systemdate}
                AND  
@@ -99,47 +99,47 @@
                AND  
                     dbT7063Kaigo."yukoShuryoYMD" <![CDATA[>=]]> #{systemdate}
            </if>
-           <if test = "isJigyoshaName == true">
-               <if test = "isZennpouitti == false">
+           <if test = "isJigyoshaName">
+               <if test = "isZennpouitti">
                     AND 
                         dbT7060Kaigo."jigyoshaName" =  #{jigyoshaName}
                     OR  
                         dbT7060Kaigo."jigyoshaNameKana" =  #{jigyoshaName}
                </if>
-               <if test = "isZennpouitti == true">
+               <if test = "!isZennpouitti">
                     AND 
-                        dbT7060Kaigo."jigyoshaName" LIKE  #{jigyoshaName}' || '%'
+                        dbT7060Kaigo."jigyoshaName" LIKE  #{jigyoshaName} || '%'
                     OR  
-                        dbT7060Kaigo."jigyoshaNameKana" LIKE   '#{jigyoshaName}' || '%'
+                        dbT7060Kaigo."jigyoshaNameKana" LIKE   #{jigyoshaName} || '%'
                </if>
            </if>
-           <if test = "isYubinNo == true">
+           <if test = "isYubinNo">
                 AND
                     dbT7060Kaigo."yubinNo"  = #{yubinNo}
            </if>
-           <if test = "isAddress == true">
-               <if test = "isZennpouitti == false">
+           <if test = "isAddress">
+               <if test = "isZennpouitti">
                     AND
                         dbT7060Kaigo."jigyoshaAddress"  = #{address}
                </if>
-               <if test = "isZennpouitti == true">
+               <if test = "!isZennpouitti">
                     AND 
-                         dbT7060Kaigo."jigyoshaAddress" LIKE  '#{address} || '%'
+                         dbT7060Kaigo."jigyoshaAddress" LIKE  #{address} || '%'
                </if>
            </if>
-           <if test = "isServiceShuRui == true">
+           <if test = "isServiceShuRui">
                 AND 
                      dbT7063Kaigo."serviceShuruiCode" = #{serviceShuRui}
                 AND 
-                     SUBSTRING(dbT7060Kaigo."jigyoshaNo",0,2) = #{kenCode}
+                     SUBSTRING(dbT7060Kaigo."jigyoshaNo",1,2) = #{kenCode}
            </if>
-           <if test = "isJigyoshaKbn == true">
+           <if test = "isJigyoshaKbn">
                 AND 
-                    SUBSTRING(dbT7060Kaigo."jigyoshaNo",2,3) = #{jigyoshaKbn}
+                    SUBSTRING(dbT7060Kaigo."jigyoshaNo",3,2) = #{jigyoshaKbn}
            </if>
-           <if test = "isGunshiCode == true">
+           <if test = "isGunshiCode">
                 AND
-                     SUBSTRING(dbT7060Kaigo."jigyoshaNo",4,6) = #{gunshiCode}
+                     SUBSTRING(dbT7060Kaigo."jigyoshaNo",5,2) = #{gunshiCode}
            </if>
         </if>
         ORDER BY
@@ -160,56 +160,56 @@
               dbT1005Kaigo."isDeleted" <![CDATA[<>]]> TRUE
         AND   
               dbT1005Kaigo."jigyoshaShubetsu"= #{jigyoshaShubetsu}
-        <if test="isJigyoshaNoFlag == true" >
+        <if test="isJigyoshaNoFlag" >
              AND dbT1005Kaigo."jigyoshaNo"  = #{jigyoshaNo}
         </if>
-        <if test = "isJigyoshaNoFlag  == false">
-           <if test = "isYukoKaishiYMDFromFlag == true and isYukoKaishiYMDToFlag == false">
+        <if test = "!isJigyoshaNoFlag">
+           <if test = "isYukoKaishiYMDFromFlag and !isYukoKaishiYMDToFlag">
                AND 
                     dbT1005Kaigo."yukoKaishiYMD" <![CDATA[>=]]>  #{yukoKaishiYMDFrom}
            </if>
-           <if test = "isYukoKaishiYMDFromFlag == true and isYukoKaishiYMDToFlag == true">
+           <if test = "isYukoKaishiYMDFromFlag and isYukoKaishiYMDToFlag">
                AND 
                     dbT1005Kaigo."yukoKaishiYMD" <![CDATA[>=]]>  #{yukoKaishiYMDFrom}
                AND 
                     dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]>  #{yukoKaishiYMDTo}
            </if>
-           <if test = "isYukoKaishiYMDFromFlag == false and isYukoKaishiYMDToFlag == true">
+           <if test = "!isYukoKaishiYMDFromFlag and isYukoKaishiYMDToFlag">
                AND  
                    dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{yukoKaishiYMDTo}
            </if>
-           <if test = "isYukoKaishiYMDFromFlag == false and isYukoKaishiYMDToFlag == false">
+           <if test = "!isYukoKaishiYMDFromFlag and !isYukoKaishiYMDToFlag">
                AND 
                     dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{systemdate}
                AND  
                     dbT1005Kaigo."yukoShuryoYMD" <![CDATA[>=]]> #{systemdate}
            </if>
-           <if test = "isJigyoshaName == true">
-               <if test = "isZennpouitti == false">
+           <if test = "isJigyoshaName">
+               <if test = "isZennpouitti">
                     AND 
                         dbT1005Kaigo."jigyoshaMeisho" =  #{jigyoshaName}
                     OR  
                         dbT1005Kaigo."jigyoshaKanaMeisho" =  #{jigyoshaName}
                </if>
-               <if test = "isZennpouitti == true">
+               <if test = "!isZennpouitti">
                     AND 
-                        dbT1005Kaigo."jigyoshaMeisho" LIKE  '#{jigyoshaName}' || '%'
+                        dbT1005Kaigo."jigyoshaMeisho" LIKE  #{jigyoshaName} || '%'
                     OR  
-                        dbT1005Kaigo."jigyoshaKanaMeisho" LIKE   '#{jigyoshaName}' || '%'
+                        dbT1005Kaigo."jigyoshaKanaMeisho" LIKE   #{jigyoshaName} || '%'
                </if>
            </if>
-           <if test = "isYubinNo == true">
+           <if test = "isYubinNo">
                 AND
                     dbT1005Kaigo."yubinNo"  = #{yubinNo}
            </if>
-           <if test = "isAddress == true">
-               <if test = "isZennpouitti == false">
+           <if test = "isAddress">
+               <if test = "isZennpouitti">
                     AND 
                          dbT1005Kaigo."jigyoshaJusho" = #{jigyoshaJusho}
                </if>
-               <if test = "isZennpouitti == true">
+               <if test = "!isZennpouitti">
                     AND 
-                        dbT1005Kaigo."jigyoshaJusho" LIKE  '#{jigyoshaJusho}' || '%'
+                        dbT1005Kaigo."jigyoshaJusho" LIKE  #{jigyoshaJusho} || '%'
                </if>
            </if>
         </if>
@@ -233,56 +233,56 @@
               dbT1005Kaigo."kannaiKangaiKubun"= #{kannaiKangaiKubun}
         AND   
               dbT1005Kaigo."jigyoshaShubetsu"= #{jigyoshaShubetsu}
-        <if test="isJigyoshaNoFlag == true" >
+        <if test="isJigyoshaNoFlag" >
              AND dbT1005Kaigo."jigyoshaNo"  = #{jigyoshaNo}
         </if>
-        <if test = "isJigyoshaNoFlag  == false">
-           <if test = "isYukoKaishiYMDFromFlag == true and isYukoKaishiYMDToFlag == false">
+        <if test = "!isJigyoshaNoFlag">
+           <if test = "isYukoKaishiYMDFromFlag and !isYukoKaishiYMDToFlag">
                AND 
                     dbT1005Kaigo."yukoKaishiYMD" <![CDATA[>=]]>  #{yukoKaishiYMDFrom}
            </if>
-           <if test = "isYukoKaishiYMDFromFlag == true and isYukoKaishiYMDToFlag == true">
+           <if test = "isYukoKaishiYMDFromFlag and isYukoKaishiYMDToFlag">
                AND 
                     dbT1005Kaigo."yukoKaishiYMD" <![CDATA[>=]]>  #{yukoKaishiYMDFrom}
                AND 
                     dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]>  #{yukoKaishiYMDTo}
            </if>
-           <if test = "isYukoKaishiYMDFromFlag == false and isYukoKaishiYMDToFlag == true">
+           <if test = "!isYukoKaishiYMDFromFlag and isYukoKaishiYMDToFlag">
                AND  
                    dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{yukoKaishiYMDTo}
            </if>
-           <if test = "isYukoKaishiYMDFromFlag == false and isYukoKaishiYMDToFlag == false">
+           <if test = "!isYukoKaishiYMDFromFlag and !isYukoKaishiYMDToFlag">
                AND 
                     dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{systemdate}
                AND  
                     dbT1005Kaigo."yukoShuryoYMD" <![CDATA[>=]]> #{systemdate}
            </if>
-           <if test = "isJigyoshaName == true">
-               <if test = "isZennpouitti == false">
+           <if test = "isJigyoshaName">
+               <if test = "isZennpouitti">
                     AND 
                         dbT1005Kaigo."jigyoshaMeisho" =  #{jigyoshaName}
                     OR  
                         dbT1005Kaigo."jigyoshaKanaMeisho" =  #{jigyoshaName}
                </if>
-               <if test = "isZennpouitti == true">
+               <if test = "!isZennpouitti">
                     AND 
-                        dbT1005Kaigo."jigyoshaMeisho" LIKE  '#{jigyoshaName}' || '%'
+                        dbT1005Kaigo."jigyoshaMeisho" LIKE  #{jigyoshaName} || '%'
                     OR  
-                        dbT1005Kaigo."jigyoshaKanaMeisho" LIKE   '#{jigyoshaName}' || '%'
+                        dbT1005Kaigo."jigyoshaKanaMeisho" LIKE   #{jigyoshaName} || '%'
                </if>
            </if>
-           <if test = "isYubinNo == true">
+           <if test = "isYubinNo">
                 AND
                     dbT1005Kaigo."yubinNo"  = #{yubinNo}
            </if>
-           <if test = "isAddress == true">
-               <if test = "isZennpouitti == false">
+           <if test = "isAddress">
+               <if test = "isZennpouitti">
                     AND
                         dbT1005Kaigo."jigyoshaJusho"  = #{address}
                </if>
-               <if test = "isZennpouitti == true">
+               <if test = "!isZennpouitti">
                     AND 
-                        dbT1005Kaigo."jigyoshaJusho" LIKE  '#{address} || '%'
+                        dbT1005Kaigo."jigyoshaJusho" LIKE  #{address} || '%'
                </if>
            </if>
         </if>

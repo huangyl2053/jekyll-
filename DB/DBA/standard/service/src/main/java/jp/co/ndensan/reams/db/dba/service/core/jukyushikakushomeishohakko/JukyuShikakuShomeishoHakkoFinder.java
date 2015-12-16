@@ -11,10 +11,10 @@ import jp.co.ndensan.reams.db.dba.business.core.jukyushikakushomeishohakko.Jukyu
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.JuKyuShinSeiZiYu;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysJukyuShikakuShomeishoHakko;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.yukomukokubun.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.JukyuShikakuShomeishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.jukyushikakushomeishohakko.IJukyuShikakuShomeishoHakkoRelateMapper;
+import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -171,14 +171,14 @@ public class JukyuShikakuShomeishoHakkoFinder {
         RStringBuilder 介護認定審査会意見と名称 = new RStringBuilder(jukyuShikakuShomeishoHakkoRelate.getShinsakaiIken());
         介護認定審査会意見と名称.append(SPACE);
         介護認定審査会意見と名称.append(サービス種類名称リスト.get(FIRST_INDEX));
-        for (int i =1; i <= サービス種類名称リスト.size(); i++) {
+        for (int i =1; i < サービス種類名称リスト.size(); i++) {
             介護認定審査会意見と名称.append(読点);
             介護認定審査会意見と名称.append(サービス種類名称リスト.get(i));
         }
         RStringBuilder 介護認定審査会意見と略称 = new RStringBuilder(jukyuShikakuShomeishoHakkoRelate.getShinsakaiIken());
         介護認定審査会意見と略称.append(SPACE);
         介護認定審査会意見と略称.append(サービス種類略称リスト.get(FIRST_INDEX));
-        for (int j =1; j <= サービス種類略称リスト.size(); j++) {
+        for (int j =1; j < サービス種類略称リスト.size(); j++) {
             介護認定審査会意見と略称.append(読点);
             介護認定審査会意見と略称.append(サービス種類略称リスト.get(j));
         }
