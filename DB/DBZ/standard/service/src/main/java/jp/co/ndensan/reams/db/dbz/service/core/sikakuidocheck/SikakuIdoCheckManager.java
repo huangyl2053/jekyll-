@@ -70,7 +70,7 @@ public class SikakuIdoCheckManager {
     /**
      * 資格期間の履歴重複チェック処理です。
      *
-     * @param sikakuKikanList List<SikakuKikan>
+     * @param sikakuKikanList sikakuKikanList
      * @return RString
      */
     public RString sikakuKikanRirekiChofukuCheck(List<SikakuKikan> sikakuKikanList) {
@@ -92,8 +92,8 @@ public class SikakuIdoCheckManager {
     /**
      * 得喪履歴と他の期間の重複チェック処理です。
      *
-     * @param tokusoRirekiList List<TokusoRireki>
-     * @param 識別コード ShikibetsuCode
+     * @param tokusoRirekiList tokusoRirekiList
+     * @param 識別コード 識別コード
      * @return RString
      */
     public RString tokusouTanoKikanChofukuCheck(List<TokusoRireki> tokusoRirekiList, ShikibetsuCode 識別コード) {
@@ -126,8 +126,8 @@ public class SikakuIdoCheckManager {
     /**
      * 適用除外者適用解除履歴と他の期間の重複チェック処理です。
      *
-     * @param tekiyoJogaishaList List<TekiyoJogaisha>
-     * @param 識別コード ShikibetsuCode
+     * @param tekiyoJogaishaList tekiyoJogaishaList
+     * @param 識別コード 識別コード
      * @return RString
      */
     public RString tekiyoJogaishaChofukuCheck(List<TekiyoJogaisha> tekiyoJogaishaList, ShikibetsuCode 識別コード) {
@@ -160,8 +160,8 @@ public class SikakuIdoCheckManager {
     /**
      * 他市町村住所地特例適用解除履歴と他の期間の重複チェック処理です。
      *
-     * @param tasichosonList List<Tasichoson>
-     * @param 識別コード ShikibetsuCode
+     * @param tasichosonList tasichosonList
+     * @param 識別コード 識別コード
      * @return RString
      */
     public RString tasichosonTokureiChofukuCheck(List<Tashichoson> tasichosonList, ShikibetsuCode 識別コード) {
@@ -218,24 +218,33 @@ public class SikakuIdoCheckManager {
         return checkFlag;
     }
 
-    private List<Idokikan> checkIdokikanList(List<Idokikan> idokikanList) {
-        for (int i = 0; i < idokikanList.size(); i++) {
-            for (int j = i + 1; j < idokikanList.size(); j++) {
-                Idokikan idokikan1 = idokikanList.get(i);
-                Idokikan idokikan2 = idokikanList.get(j);
-                if (idokikan1.getKaishiYMD().equals(idokikan2.getKaishiYMD())) {
-                    if (idokikan1.getIdoYMD().equals(idokikan2.getIdoYMD())) {
-                        idokikanList = remove1(idokikanList, idokikan1, idokikan2);
-                    } else {
-                        idokikanList = remove2(idokikanList, idokikan1, idokikan2);
-                    }
-                }
+    private static List<Idokikan> checkIdokikanList(List<Idokikan> idokikanList) {
+        List<Idokikan> retIdokikanList = new ArrayList<>();
+        retIdokikanList.addAll(idokikanList);
+        Idokikan idokikan1 = null;
+        for (Idokikan idokikan : idokikanList) {
+            if (idokikan1 == null) {
+                idokikan1 = idokikan;
+            } else {
+                retIdokikanList = checkKaishiYMDList(retIdokikanList, idokikan1, idokikan);
+                idokikan1 = idokikan;
             }
         }
-        return idokikanList;
+        return retIdokikanList;
     }
 
-    private List<Idokikan> remove1(List<Idokikan> idokikanList, Idokikan idokikan1, Idokikan idokikan2) {
+    private static List<Idokikan> checkKaishiYMDList(List<Idokikan> retIdokikanList, Idokikan idokikan1, Idokikan idokikan) {
+        if (idokikan1.getKaishiYMD().equals(idokikan.getKaishiYMD())) {
+            if (idokikan1.getIdoYMD().equals(idokikan.getIdoYMD())) {
+                retIdokikanList = remove1(retIdokikanList, idokikan1, idokikan);
+            } else {
+                retIdokikanList = remove2(retIdokikanList, idokikan1, idokikan);
+            }
+        }
+        return retIdokikanList;
+    }
+
+    private static List<Idokikan> remove1(List<Idokikan> idokikanList, Idokikan idokikan1, Idokikan idokikan2) {
         if (idokikan1.getEdaNo().compareTo(idokikan2.getEdaNo()) > 0) {
             idokikanList.remove(idokikan2);
         } else {
@@ -244,7 +253,7 @@ public class SikakuIdoCheckManager {
         return idokikanList;
     }
 
-    private List<Idokikan> remove2(List<Idokikan> idokikanList, Idokikan idokikan1, Idokikan idokikan2) {
+    private static List<Idokikan> remove2(List<Idokikan> idokikanList, Idokikan idokikan1, Idokikan idokikan2) {
         if (idokikan2.getIdoYMD().isBefore(idokikan1.getIdoYMD())) {
             idokikanList.remove(idokikan2);
         } else {
