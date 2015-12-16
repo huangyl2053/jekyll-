@@ -35,8 +35,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class HihokenshaShikakuShutokuManager {
 
-    private final DbT1001HihokenshaDaichoDac dbT1001Dac;
-    private final MapperProvider mapperProvider;
     private static final int AGE_65 = 65;
     private static final int AGE_64 = 64;
     private static final int AGE_40 = 40;
@@ -44,6 +42,8 @@ public class HihokenshaShikakuShutokuManager {
     private static final RString HIHOKENNSHAKUBUNCODE_1 = new RString("1");
     private static final RString HIHOKENNSHAKUBUNCODE_2 = new RString("2");
     private static final RString 枝番 = new RString("0001");
+    private final DbT1001HihokenshaDaichoDac dbT1001Dac;
+    private final MapperProvider mapperProvider;
     private static RString 年齢到達_事由コード = new RString("02");
     private static boolean chickflg = false;
     private static HihokenshaNo hihokenshaNo;
