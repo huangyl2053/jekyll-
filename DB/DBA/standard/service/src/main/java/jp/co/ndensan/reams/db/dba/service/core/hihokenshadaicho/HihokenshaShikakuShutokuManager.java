@@ -85,7 +85,7 @@ public class HihokenshaShikakuShutokuManager {
      * 被保険者台帳管理リストを取得します。
      *
      * @param parameter　被保険者台帳管理のパラメータ
-     * @return List<HihokenshaShutokuJyoho>　被保険者台帳管理リスト
+     * @return SearchResult<HihokenshaShutokuJyoho>　被保険者台帳管理リスト
      */
     @Transaction
     public SearchResult<HihokenshaShutokuJyoho> getHihokenshaShutokuJyoho(HihokenshaShikakuShutokuMapperParameter parameter) {
