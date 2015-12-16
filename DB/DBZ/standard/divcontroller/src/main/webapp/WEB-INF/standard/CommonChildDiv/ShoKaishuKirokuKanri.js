@@ -53,6 +53,8 @@ var DBZ;
 
                     this.controls.btnCancel().disabled = true;
                     this.controls.btnConfirm().disabled = true;
+                    var gridSetting = this.controls.dgKoufuKaishu().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = false;
                 };
                 return ModeB;
             })();
