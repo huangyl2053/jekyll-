@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.controller;
+package jp.co.ndensan.reams.db.dba.divcontroller.controller.aa;
 
 import jp.co.ndensan.reams.db.dba.business.core.jigyosha.JigyoshaMode;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.aaa.ShisetsuJohoCommonChildDivDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.aaa.ShisetsuJohoHandler;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
