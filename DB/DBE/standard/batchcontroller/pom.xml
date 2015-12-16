@@ -17,6 +17,10 @@
 		<!-- DBE -->
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>DbeBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>DbeEntity</artifactId>
         </dependency>
 		<!-- DBX -->

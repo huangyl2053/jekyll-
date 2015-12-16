@@ -33,6 +33,10 @@
             <scope>runtime</scope>
         </dependency>
 		<!-- DBX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxService</artifactId>
+        </dependency>
 		<!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
