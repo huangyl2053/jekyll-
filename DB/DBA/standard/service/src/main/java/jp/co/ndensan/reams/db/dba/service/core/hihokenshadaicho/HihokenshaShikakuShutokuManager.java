@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -42,15 +41,10 @@ public class HihokenshaShikakuShutokuManager {
     private static final RString HIHOKENNSHAKUBUNCODE_1 = new RString("1");
     private static final RString HIHOKENNSHAKUBUNCODE_2 = new RString("2");
     private static final RString 枝番 = new RString("0001");
+    private static final RString 年齢到達_事由コード = new RString("02");
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
     private final MapperProvider mapperProvider;
-    private static RString 年齢到達_事由コード = new RString("02");
     private static boolean chickflg = false;
-    private static HihokenshaNo hihokenshaNo;
-    private static ShikibetsuCode shikibetsuCode;
-    private static FlexibleDate idoYMD;
-    private static RString edaNo;
-    private static FlexibleDate shikakuShutokuYMD;
 
     /**
      * コンストラクタです。
@@ -111,13 +105,10 @@ public class HihokenshaShikakuShutokuManager {
     @Transaction
     public void saveHihokenshaShutoku(DbT1001HihokenshaDaichoEntity entity, IDateOfBirth 生年月日) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳管理（資格取得）Entity"));
-        shikibetsuCode = entity.getShikibetsuCode();
-        idoYMD = entity.getIdoYMD();
-        hihokenshaNo = HihokenshanotsukibanFinder.createInstance().getHihokenshanotsukiban(shikibetsuCode);
-        HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaEdaban(hihokenshaNo, idoYMD);
-        edaNo = getSaidaiEdaban(parameter);
-        shikakuShutokuYMD = entity.getShikakuShutokuYMD();
-        RString age = get年齢(生年月日, shikakuShutokuYMD);
+        requireNonNull(生年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("当該識別対象の生年月日"));
+        HihokenshaNo hihokenshaNo = HihokenshanotsukibanFinder.createInstance().getHihokenshanotsukiban(entity.getShikibetsuCode());
+        HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaEdaban(hihokenshaNo, entity.getIdoYMD());
+        RString age = get年齢(生年月日, entity.getShikakuShutokuYMD());
         if (Integer.parseInt(age.toString()) >= AGE_65) {
             entity.setHihokennshaKubunCode(HIHOKENNSHAKUBUNCODE_1);
         } else if (Integer.parseInt(age.toString()) <= AGE_64 && Integer.parseInt(age.toString()) >= AGE_40) {
@@ -125,7 +116,7 @@ public class HihokenshaShikakuShutokuManager {
             entity.setIchigoShikakuShutokuYMD(ICHIGOSHIKAKUSHUTOKUYMD);
         }
         entity.setHihokenshaNo(hihokenshaNo);
-        entity.setEdaNo(edaNo);
+        entity.setEdaNo(getSaidaiEdaban(parameter));
         entity.setLogicalDeletedFlag(false);
         dbT1001Dac.save(entity);
     }
@@ -175,6 +166,7 @@ public class HihokenshaShikakuShutokuManager {
      */
     @Transaction
     public boolean shikakuShutokuTorokuCheck(IDateOfBirth 当該識別対象の生年月日, FlexibleDate 資格取得日, RString 資格取得事由コード) {
+        requireNonNull(当該識別対象の生年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("当該識別対象の生年月日"));
         RString age = get年齢(当該識別対象の生年月日, 資格取得日);
         // TODO 李　QA152あります年齢到達_事由コード不明です。2015/12/17
 //        年齢到達_事由コード = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, new CodeShubetsu("0117")).get(0).getコード().value();
