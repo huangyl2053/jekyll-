@@ -6,15 +6,12 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.shokaishukirokukanri;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shokaishukirokukanri.ShoKaishuKirokuKanri.ShoKaishuKirokuKanriDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shokaishukirokukanri.ShoKaishuKirokuKanri.ShoKaishuKirokuKanriHandler;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shokaishukirokukanri.ShoKaishuKirokuKanri.dgKoufuKaishu_Row;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ShoKaishuKirokuKanriDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ShoKaishuKirokuKanriHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.dgKoufuKaishu_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -55,14 +52,14 @@ public class ShoKaishuKirokuKanri {
         requestDiv.getDgKoufuKaishu().getGridSetting().selectedRowCount();
         dgKoufuKaishu_Row dgKoufuKaishuRow = requestDiv.getDgKoufuKaishu().getSelectedItems().get(0);
         //requestDiv.getPanelInput().getTxtKoufuType().setValue(dgKoufuKaishuRow.getKoufuType());
-        requestDiv.getPanelInput().getTxtKoufuDate().setValue(new RDate(dgKoufuKaishuRow.getKoufuDate().getValue().toString()));
+        requestDiv.getPanelInput().getTxtKoufuDate().setValue(new RDate(dgKoufuKaishuRow.getKoufuDate().toString()));
         requestDiv.getPanelInput().getTxtKoufuDate().setReadOnly(true);
         // TODO QA:96
         //requestDiv.getPanelInput().getTxtKoufuType().setValue(dgKoufuKaishuRow.getYukoKigen());
         //requestDiv.getPanelInput().getDdlKoufuJiyu().setSelectedValue(RString.EMPTY);
         requestDiv.getPanelInput().getTxaKoufuRiyu().setValue(dgKoufuKaishuRow.getKofuRiyu());
         requestDiv.getPanelInput().getTxaKoufuRiyu().setReadOnly(true);
-        requestDiv.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().getValue().toString()));
+        requestDiv.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().toString()));
         requestDiv.getPanelInput().getTxtKaisyuDate().setReadOnly(true);
         //requestDiv.getPanelInput().getDdlKaisyuJiyu().setSelectedValue(RString.EMPTY);
         requestDiv.getPanelInput().getTxaKaishuRiyu().setValue(dgKoufuKaishuRow.getKaishuRiyu());
@@ -80,12 +77,12 @@ public class ShoKaishuKirokuKanri {
         requestDiv.getPanelInput().setVisible(true);
         dgKoufuKaishu_Row dgKoufuKaishuRow = requestDiv.getDgKoufuKaishu().getSelectedItems().get(0);
         //requestDiv.getPanelInput().getTxtKoufuType().setValue(dgKoufuKaishuRow.getKoufuType());
-        requestDiv.getPanelInput().getTxtKoufuDate().setValue(new RDate(dgKoufuKaishuRow.getKoufuDate().getValue().toString()));
+        requestDiv.getPanelInput().getTxtKoufuDate().setValue(new RDate(dgKoufuKaishuRow.getKoufuDate().toString()));
         // TODO QA:96
         //requestDiv.getPanelInput().getTxtKoufuType().setValue(dgKoufuKaishuRow.getYukoKigen());
         //requestDiv.getPanelInput().getDdlKoufuJiyu().setSelectedValue(RString.EMPTY);
         requestDiv.getPanelInput().getTxaKoufuRiyu().setValue(dgKoufuKaishuRow.getKofuRiyu());
-        requestDiv.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().getValue().toString()));
+        requestDiv.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().toString()));
         //requestDiv.getPanelInput().getDdlKaisyuJiyu().setSelectedValue(RString.EMPTY);
         requestDiv.getPanelInput().getTxaKaishuRiyu().setValue(dgKoufuKaishuRow.getKaishuRiyu());
         return createResponseData(requestDiv);
@@ -101,14 +98,14 @@ public class ShoKaishuKirokuKanri {
         requestDiv.getPanelInput().setVisible(true);
         dgKoufuKaishu_Row dgKoufuKaishuRow = requestDiv.getDgKoufuKaishu().getSelectedItems().get(0);
         //requestDiv.getPanelInput().getTxtKoufuType().setValue(dgKoufuKaishuRow.getKoufuType());
-        requestDiv.getPanelInput().getTxtKoufuDate().setValue(new RDate(dgKoufuKaishuRow.getKoufuDate().getValue().toString()));
+        requestDiv.getPanelInput().getTxtKoufuDate().setValue(new RDate(dgKoufuKaishuRow.getKoufuDate().toString()));
         requestDiv.getPanelInput().getTxtKoufuDate().setReadOnly(true);
         // TODO QA:96
         //requestDiv.getPanelInput().getTxtKoufuType().setValue(dgKoufuKaishuRow.getYukoKigen());
         //requestDiv.getPanelInput().getDdlKoufuJiyu().setSelectedValue(RString.EMPTY);
         requestDiv.getPanelInput().getTxaKoufuRiyu().setValue(dgKoufuKaishuRow.getKofuRiyu());
         requestDiv.getPanelInput().getTxaKoufuRiyu().setReadOnly(true);
-        requestDiv.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().getValue().toString()));
+        requestDiv.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().toString()));
         requestDiv.getPanelInput().getTxtKaisyuDate().setReadOnly(true);
         //requestDiv.getPanelInput().getDdlKaisyuJiyu().setSelectedValue(RString.EMPTY);
         requestDiv.getPanelInput().getTxaKaishuRiyu().setValue(dgKoufuKaishuRow.getKaishuRiyu());
@@ -130,8 +127,8 @@ public class ShoKaishuKirokuKanri {
         dgKoufuKaishu_Row row = list.get(count);
         
         //row.setKoufuType(shoKaishuDiv.getPanelInput().getTxtKoufuType().getValue());
-        row.getKoufuDate().setValue(shoKaishuDiv.getPanelInput().getTxtKoufuDate().getValue());
-        row.getKaishuDate().setValue(shoKaishuDiv.getPanelInput().getTxtKaisyuDate().getValue());
+        row.setKoufuDate(shoKaishuDiv.getPanelInput().getTxtKoufuDate().getValue().toDateString());
+        row.setKaishuDate(shoKaishuDiv.getPanelInput().getTxtKaisyuDate().getValue().toDateString());
         row.setKofuRiyu(shoKaishuDiv.getPanelInput().getTxaKoufuRiyu().getValue());
         row.setKaishuRiyu(shoKaishuDiv.getPanelInput().getTxaKaishuRiyu().getValue());
         list.set(count, row);
@@ -147,13 +144,13 @@ public class ShoKaishuKirokuKanri {
         return response;
     }
     
-        private void setMsg(){
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        ValidationMessageControlPair message = new ValidationMessageControlPair(
-                        DbzErrorMessages.期間が不正_追加メッセージあり２);
-        message.getValidationMessage().getMessage().replace("有効期限","交付日");
-                validationMessages.add(message);
-    }
+//        private void setMsg(){
+//        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+//        ValidationMessageControlPair message = new ValidationMessageControlPair(
+//                        DbzErrorMessages.期間が不正_追加メッセージあり２);
+//        message.getValidationMessage().getMessage().replace("有効期限","交付日");
+//                validationMessages.add(message);
+//    }
     
     /**
      * 取消ボタンを押下の処理に実行されます。<br/>
