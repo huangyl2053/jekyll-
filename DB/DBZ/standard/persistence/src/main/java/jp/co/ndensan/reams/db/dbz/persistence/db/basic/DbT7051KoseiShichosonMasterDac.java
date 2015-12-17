@@ -28,7 +28,6 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -51,16 +50,16 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      */
     @Transaction
     public DbT7051KoseiShichosonMasterEntity selectByKey(
-	    RString 市町村識別ID) throws NullPointerException {
-	requireNonNull(市町村識別ID, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村識別ID"));
+            RString 市町村識別ID) throws NullPointerException {
+        requireNonNull(市町村識別ID, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村識別ID"));
 
-	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-	return accessor.select().
-		table(DbT7051KoseiShichosonMaster.class).
-		where(
-			eq(shichosonShokibetsuID, 市町村識別ID)).
-		toObject(DbT7051KoseiShichosonMasterEntity.class);
+        return accessor.select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(
+                        eq(shichosonShokibetsuID, 市町村識別ID)).
+                toObject(DbT7051KoseiShichosonMasterEntity.class);
     }
 
     /**
@@ -70,11 +69,11 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      */
     @Transaction
     public List<DbT7051KoseiShichosonMasterEntity> selectAll() {
-	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-	return accessor.select().
-		table(DbT7051KoseiShichosonMaster.class).
-		toList(DbT7051KoseiShichosonMasterEntity.class);
+        return accessor.select().
+                table(DbT7051KoseiShichosonMaster.class).
+                toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 
     /**
@@ -86,9 +85,9 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
     @Transaction
     @Override
     public int save(DbT7051KoseiShichosonMasterEntity entity) {
-	requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("構成市町村マスタエンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("構成市町村マスタエンティティ"));
 
-	return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
     /**
@@ -99,9 +98,9 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      */
     @Transaction
     public List<DbT7051KoseiShichosonMasterEntity> getKouikiKyuShichosonCodeJohoList(RString 地域番号の一桁目) {
-	requireNonNull(地域番号の一桁目, UrSystemErrorMessages.値がnull.getReplacedMessage("地域番号の一桁目"));
-	IDbT7051KoseiShichosonMasterMapper mapper = session.getMapper(IDbT7051KoseiShichosonMasterMapper.class);
-	return mapper.getKouikiKyuShichosonCodeJohoList(地域番号の一桁目);
+        requireNonNull(地域番号の一桁目, UrSystemErrorMessages.値がnull.getReplacedMessage("地域番号の一桁目"));
+        IDbT7051KoseiShichosonMasterMapper mapper = session.getMapper(IDbT7051KoseiShichosonMasterMapper.class);
+        return mapper.getKouikiKyuShichosonCodeJohoList(地域番号の一桁目);
     }
 
     /**
@@ -111,16 +110,16 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      * @return DbT7051KoseiShichosonMasterEntityの{@code list}
      */
     @Transaction
-    public List<DbT7051KoseiShichosonMasterEntity> selectByKoseiShichosonMasterList(RDate systemDate) {
-	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+    public List<DbT7051KoseiShichosonMasterEntity> selectByKoseiShichosonMasterList() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-	return accessor.select().
-		table(DbT7051KoseiShichosonMaster.class).
-		where(and(
-				eq(gappeiKyuShichosonKubun, '0'),
-				leq(kanyuYMD, systemDate),
-				not(isNULL(ridatsuYMD)))).
-		toList(DbT7051KoseiShichosonMasterEntity.class);
+        return accessor.select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(and(
+                                eq(gappeiKyuShichosonKubun, '0'),
+                                leq(kanyuYMD, RDate.getNowDate()),
+                                isNULL(ridatsuYMD))).
+                toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 
     /**
@@ -130,14 +129,14 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      */
     @Transaction
     public List<DbT7051KoseiShichosonMasterEntity> zenShichosonJoho() {
-	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-	return accessor.
-		select().
-		table(DbT7051KoseiShichosonMaster.class).
-		where(or(
-				eq(gappeiKyuShichosonKubun, '0'),
-				eq(gappeiKyuShichosonKubun, '1'))).
-		toList(DbT7051KoseiShichosonMasterEntity.class);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(or(
+                                eq(gappeiKyuShichosonKubun, '0'),
+                                eq(gappeiKyuShichosonKubun, '1'))).
+                toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 
     /**
@@ -147,12 +146,12 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      */
     @Transaction
     public List<DbT7051KoseiShichosonMasterEntity> genShichosonJoho() {
-	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-	return accessor.
-		select().
-		table(DbT7051KoseiShichosonMaster.class).
-		where(eq(gappeiKyuShichosonKubun, '0')).
-		toList(DbT7051KoseiShichosonMasterEntity.class);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(eq(gappeiKyuShichosonKubun, '0')).
+                toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 
     /**
@@ -162,13 +161,13 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      */
     @Transaction
     public List<DbT7051KoseiShichosonMasterEntity> koseiShichosonList() {
-	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-	return accessor.
-		select().
-		table(DbT7051KoseiShichosonMaster.class).
-		where(
-			eq(gappeiKyuShichosonKubun, '0')).
-		toList(DbT7051KoseiShichosonMasterEntity.class);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(
+                        eq(gappeiKyuShichosonKubun, '0')).
+                toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 
     /**
@@ -180,13 +179,13 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      */
     @Transaction
     public DbT7051KoseiShichosonMasterEntity shichosonUserHandan(RString 識別ID) {
-	requireNonNull(識別ID, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村識別ID"));
-	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-	return accessor.
-		select().
-		table(DbT7051KoseiShichosonMaster.class).
-		where(eq(shichosonShokibetsuID, 識別ID)).
-		toObject(DbT7051KoseiShichosonMasterEntity.class);
+        requireNonNull(識別ID, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村識別ID"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(eq(shichosonShokibetsuID, 識別ID)).
+                toObject(DbT7051KoseiShichosonMasterEntity.class);
     }
 
     /**
@@ -197,17 +196,17 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      */
     @Transaction
     public List<DbT7051KoseiShichosonMasterEntity> loginUserShichosonJoho(RString 識別ID) {
-	requireNonNull(識別ID, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村識別ID"));
-	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-	return accessor.
-		select().
-		table(DbT7051KoseiShichosonMaster.class).
-		where(or(
-				eq(shichosonShokibetsuID, "00"),
-				(and(eq(shichosonShokibetsuID, 識別ID),
-					eq(gappeiKyuShichosonKubun, "0")
-				)))).
-		toList(DbT7051KoseiShichosonMasterEntity.class);
+        requireNonNull(識別ID, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村識別ID"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(or(
+                                eq(shichosonShokibetsuID, "00"),
+                                (and(eq(shichosonShokibetsuID, 識別ID),
+                                        eq(gappeiKyuShichosonKubun, "0")
+                                )))).
+                toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 
     /**
@@ -218,15 +217,15 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      */
     @Transaction
     public DbT7051KoseiShichosonMasterEntity shichosonSonzaiHandan(RString 市町村コード) {
-	requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-	return accessor.
-		select().
-		table(DbT7051KoseiShichosonMaster.class).
-		where(and(
-				eq(shichosonShokibetsuID, 市町村コード),
-				eq(gappeiKyuShichosonKubun, "0"))).
-		toObject(DbT7051KoseiShichosonMasterEntity.class);
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(and(
+                                eq(shichosonShokibetsuID, 市町村コード),
+                                eq(gappeiKyuShichosonKubun, "0"))).
+                toObject(DbT7051KoseiShichosonMasterEntity.class);
 
     }
 
@@ -238,14 +237,14 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      */
     @Transaction
     public List<DbT7051KoseiShichosonMasterEntity> shichosonCodeYoriShichosonJoho(LasdecCode 市町村コード) {
-	requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-	return accessor.
-		select().
-		table(DbT7051KoseiShichosonMaster.class).
-		where(and(eq(shichosonCode, 市町村コード),
-				eq(gappeiKyuShichosonKubun, "0"))).
-		toList(DbT7051KoseiShichosonMasterEntity.class);
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(and(eq(shichosonCode, 市町村コード),
+                                eq(gappeiKyuShichosonKubun, "0"))).
+                toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 
     /**
@@ -256,13 +255,13 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
     @Transaction
     public List<DbT7051KoseiShichosonMasterEntity> selectByGappeiKyuShichosonKubun() {
 
-	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-	return accessor.select().table(DbT7051KoseiShichosonMaster.class).
-		where(and(eq(gappeiKyuShichosonKubun, "0"),
-				leq(kanyuYMD, RDate.getNowDate()),
-				leq(RDate.getNowDate(), ridatsuYMD))).
-		toList(DbT7051KoseiShichosonMasterEntity.class);
+        return accessor.select().table(DbT7051KoseiShichosonMaster.class).
+                where(and(eq(gappeiKyuShichosonKubun, "0"),
+                                leq(kanyuYMD, RDate.getNowDate()),
+                                leq(RDate.getNowDate(), ridatsuYMD))).
+                toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 
     /**
@@ -273,13 +272,13 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      */
     @Transaction
     public DbT7051KoseiShichosonMasterEntity shichosonCode(ShoKisaiHokenshaNo 証記載保険者番号) {
-	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-	return accessor.
-		select().
-		table(DbT7051KoseiShichosonMaster.class).
-		where(and(eq(shoKisaiHokenshaNo, 証記載保険者番号),
-				eq(gappeiKyuShichosonKubun, "0"))).
-		toObject(DbT7051KoseiShichosonMasterEntity.class);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(and(eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                                eq(gappeiKyuShichosonKubun, "0"))).
+                toObject(DbT7051KoseiShichosonMasterEntity.class);
     }
 
     /**
@@ -290,11 +289,11 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      */
     @Transaction
     public List<DbT7051KoseiShichosonMasterEntity> selectByshichosonCode(LasdecCode 市町村コード) {
-	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-	return accessor.
-		select().
-		table(DbT7051KoseiShichosonMaster.class).
-		where(eq(shichosonCode, 市町村コード)).order(by(DbT7051KoseiShichosonMaster.kanyuYMD, Order.DESC))
-		.toList(DbT7051KoseiShichosonMasterEntity.class);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(eq(shichosonCode, 市町村コード)).order(by(DbT7051KoseiShichosonMaster.kanyuYMD, Order.DESC))
+                .toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 }
