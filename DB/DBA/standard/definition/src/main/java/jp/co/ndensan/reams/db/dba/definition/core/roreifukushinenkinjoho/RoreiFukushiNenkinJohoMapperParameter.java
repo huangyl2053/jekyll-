@@ -100,5 +100,4 @@ public final class RoreiFukushiNenkinJohoMapperParameter {
     public FlexibleDate getJukyuShuryoYMD() {
         return jukyuShuryoYMD;
     }
-
 }

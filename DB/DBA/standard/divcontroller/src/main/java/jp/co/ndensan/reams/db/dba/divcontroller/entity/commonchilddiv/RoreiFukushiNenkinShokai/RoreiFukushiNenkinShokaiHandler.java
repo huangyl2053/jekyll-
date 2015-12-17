@@ -129,7 +129,7 @@ public class RoreiFukushiNenkinShokaiHandler {
             // throw new ApplicationException(UrErrorMessages.日付の前後関係逆転以降.getMessage());
         }
         List<datagridRireki_Row> list = div.getDatagridRireki().getDataSource();
-        List<RoreiFukushiNenkinJohoMapperParameter> kikancheck = new ArrayList();
+        List<RoreiFukushiNenkinJohoMapperParameter> kikancheck = new ArrayList<>();
         for (datagridRireki_Row row : list) {
             RDate startDate = new RDate(row.getStartDate().toString());
             RDate endDate = RDate.MIN;
