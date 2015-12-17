@@ -45,7 +45,7 @@ public class HihokenshaShikakuShutokuManager {
     private static final RString 年齢到達_事由コード = new RString("02");
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
     private final MapperProvider mapperProvider;
-    private static boolean checkflg = false;
+    private static boolean checkFlg = false;
 
     /**
      * コンストラクタです。
@@ -204,15 +204,15 @@ public class HihokenshaShikakuShutokuManager {
         requireNonNull(hihokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         HihokenshaShutokuJyoho hihokenshashutokujyoho = getSaishinDeta(shikibetsuCode, hihokenshaNo);
         if (hihokenshashutokujyoho == null) {
-            checkflg = true;
+            checkFlg = true;
         } else {
             if (!hihokenshashutokujyoho.get資格取得年月日().isEmpty() && !hihokenshashutokujyoho.get資格喪失年月日().isEmpty()) {
-                checkflg = true;
+                checkFlg = true;
             } else if (hihokenshashutokujyoho.get資格喪失年月日().isEmpty()) {
-                checkflg = HIHOKENNSHAKUBUNCODE_2.equals(hihokenshashutokujyoho.get被保険者区分コード());
+                checkFlg = HIHOKENNSHAKUBUNCODE_2.equals(hihokenshashutokujyoho.get被保険者区分コード());
             }
         }
-        return checkflg;
+        return checkFlg;
     }
 
     private RString get年齢(IDateOfBirth dateOfBirth, FlexibleDate shikakuShutokuYMD) {
