@@ -4,6 +4,10 @@ var DBA;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_daichoShubetsu = function () {
+                return "onChange_daichoShubetsu";
+            };
+
             Events.onBlur_nyuryokuShisetsuKodo = function () {
                 return "onBlur_nyuryokuShisetsuKodo";
             };

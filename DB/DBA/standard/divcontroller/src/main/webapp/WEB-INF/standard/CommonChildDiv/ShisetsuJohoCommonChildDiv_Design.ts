@@ -8,6 +8,10 @@ module DBA {
 
         export class Events {
 
+            public static onChange_daichoShubetsu(): string {
+                return "onChange_daichoShubetsu";
+            }
+
             public static onBlur_nyuryokuShisetsuKodo(): string {
                 return "onBlur_nyuryokuShisetsuKodo";
             }
