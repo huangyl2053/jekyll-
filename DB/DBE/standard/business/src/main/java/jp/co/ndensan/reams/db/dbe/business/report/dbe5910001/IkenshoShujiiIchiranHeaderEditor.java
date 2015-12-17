@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.dbe5910001;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.dokuji.ShujiiOutputSort;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiHateiJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiOutputPage1;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiOutputSort;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ShujiiIryokikanShujiiIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -72,14 +74,7 @@ class IkenshoShujiiIchiranHeaderEditor implements IkenshoShujiiIchiranEditor {
         source.shujiiCode = shujiiCodeBulider.toRString();
 
         // TODO 左涛 QA224　主治医の状況判定ENUMの確認
-        if (new RString("1").equals(item.getShujiiJokyo())) {
-            source.shujiiJokyo = new RString("有効のみ");
-        } else if (new RString("2").equals(item.getShujiiJokyo())) {
-            source.shujiiJokyo = new RString("無効のみ");
-        } else if (new RString("3").equals(item.getShujiiJokyo())) {
-            source.shujiiJokyo = new RString("全て");
-        }
-
+        source.shujiiJokyo = ShujiiHateiJokyo.toValue(item.getShujiiJokyo()).get名称();
         source.dataShubetsu = RString.EMPTY;
         source.cityCode = item.getCityCode();
         source.cityName = item.getCityName();
@@ -89,11 +84,7 @@ class IkenshoShujiiIchiranHeaderEditor implements IkenshoShujiiIchiranEditor {
         source.sort4 = RString.EMPTY;
         source.sort5 = RString.EMPTY;
         // TODO 左涛 QA224　改頁ENUMの確認
-        if (new RString("1").equals(item.getPage())) {
-            source.page1 = new RString("主治医医療機関コード毎");
-        } else if (new RString("1").equals(item.getPage())) {
-            source.page1 = RString.EMPTY;
-        }
+        source.page1 = ShujiiOutputPage1.toValue(item.getPage()).get名称();
         source.page2 = RString.EMPTY;
         source.page3 = RString.EMPTY;
         source.page4 = RString.EMPTY;

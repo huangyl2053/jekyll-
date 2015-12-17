@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.dokuji;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

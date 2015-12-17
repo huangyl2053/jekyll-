@@ -1,6 +1,5 @@
-package jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.dokuji;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji;
 
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
