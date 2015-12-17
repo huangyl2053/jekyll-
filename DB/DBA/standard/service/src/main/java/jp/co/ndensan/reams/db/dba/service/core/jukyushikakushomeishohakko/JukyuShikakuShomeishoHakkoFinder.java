@@ -110,18 +110,16 @@ public class JukyuShikakuShomeishoHakkoFinder {
         List<RString> サービス種類略称リスト = new ArrayList<>();
         for (RString code : サービス種類コードリスト) {
             if (code == null || code.isEmpty() ) {
-                break;
+                continue;
             } 
             JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoTemp = jukyuShikakuShomeishoHakkoMapper
                         .getServiceMei(JukyuShikakuShomeishoHakkoParameter
                                 .createSelectByサービス種類コード(code.trimEnd(),YukoMukoKubun.有効.getコード()));
-            if (jukyuShikakuShomeishoHakkoTemp != null) {
-                サービス種類名称リスト.add(jukyuShikakuShomeishoHakkoTemp.getServiceShuruiMeisho());
-                サービス種類略称リスト.add(jukyuShikakuShomeishoHakkoTemp.getServiceShuruiRyakusho());
-            } else {
-                サービス種類名称リスト.add(RString.EMPTY);
-                サービス種類略称リスト.add(RString.EMPTY);
+            if (jukyuShikakuShomeishoHakkoTemp == null) {
+                continue;
             }
+            サービス種類名称リスト.add(jukyuShikakuShomeishoHakkoTemp.getServiceShuruiMeisho());
+            サービス種類略称リスト.add(jukyuShikakuShomeishoHakkoTemp.getServiceShuruiRyakusho());
         }
         edit介護認定審査会意見(jukyuShikakuShomeishoHakkoRelateEntity, サービス種類名称リスト, サービス種類略称リスト);
     }
@@ -172,7 +170,7 @@ public class JukyuShikakuShomeishoHakkoFinder {
         介護認定審査会意見と名称.append(SPACE);
         介護認定審査会意見と名称.append(サービス種類名称リスト.get(FIRST_INDEX));
         for (int i =1; i < サービス種類名称リスト.size(); i++) {
-            if( サービス種類名称リスト.get(i)  != null &&! サービス種類名称リスト.get(i).trim().isEmpty()) {
+            if( サービス種類名称リスト.get(i)  != null && !サービス種類名称リスト.get(i).trim().isEmpty()) {
                 介護認定審査会意見と名称.append(読点);
                 介護認定審査会意見と名称.append(サービス種類名称リスト.get(i));
             }
