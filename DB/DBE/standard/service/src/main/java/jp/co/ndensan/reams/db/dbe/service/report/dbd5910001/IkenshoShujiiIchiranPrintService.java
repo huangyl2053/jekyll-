@@ -20,9 +20,9 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 public class IkenshoShujiiIchiranPrintService {
 
     /**
-     * 治医医療機関・主治医一覧表を印刷します。
+     * 医療機関・主治医一覧表を印刷します。
      *
-     * @param ichiranReportJoho 療機関・主治医一覧表作成_帳票クラスパラメータクラス
+     * @param ichiranReportJoho 医療機関・主治医一覧表作成_帳票クラスパラメータクラス
      * @return {@link SourceDataCollection}
      */
    public SourceDataCollection print(IkenshoShujiiIchiranReportJoho ichiranReportJoho) {
@@ -30,16 +30,11 @@ public class IkenshoShujiiIchiranPrintService {
         return new Printer<ShujiiIryokikanShujiiIchiranhyoReportSource>().spool(property, toReports(ichiranReportJoho));
     }
 
-    /**
-     * 主治医医療機関・主治医一覧表のReportを作成します。
-     * @param targets 治医医療機関・主治医一覧表のITEM
-     * @return 主治医医療機関・主治医一覧表のReport
-     */
-    private static List<IkenshoShujiiIchiranReport> toReports(IkenshoShujiiIchiranReportJoho targets) {
+    private static List<IkenshoShujiiIchiranReport> toReports(IkenshoShujiiIchiranReportJoho reportJoho) {
         List<IkenshoShujiiIchiranReport> list = new ArrayList<>();
-        list.add(IkenshoShujiiIchiranReport.
-                createFrom(targets.getHeadItem(),
-                        targets.getBodyItemList()));
+        list.add(IkenshoShujiiIchiranReport.createFrom(
+                reportJoho.getHeadItem(),
+                reportJoho.getBodyItemList()));
         return list;
     }
 }

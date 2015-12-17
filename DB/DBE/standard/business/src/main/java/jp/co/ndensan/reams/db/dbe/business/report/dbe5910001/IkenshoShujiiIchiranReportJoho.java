@@ -11,6 +11,7 @@ import java.util.List;
  * 医療機関・主治医一覧表作成_帳票クラスパラメータクラスです。
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class IkenshoShujiiIchiranReportJoho {
 
     private final IkenshoShujiiIchiranHeadItem headItem;

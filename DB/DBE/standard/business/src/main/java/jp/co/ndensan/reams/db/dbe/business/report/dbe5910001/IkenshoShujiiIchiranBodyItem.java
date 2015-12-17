@@ -20,11 +20,11 @@ public class IkenshoShujiiIchiranBodyItem {
     private final RString listIchiranhyoUpper_3;
     private final RString listIchiranhyoUpper_4;
     private final RString listIchiranhyoUpper_5;
-    private final RString listIchiranhyoUpper_6;
+    private final boolean listIchiranhyoUpper_6;
     private final RString listIchiranhyoUpper_7;
     private final RString listIchiranhyoUpper_8;
     private final RString listIchiranhyoUpper_9;
-    private final RString listIchiranhyoUpper_10;
+    private final boolean listIchiranhyoUpper_10;
     private final RString listIchiranhyoLower1_1;
     private final RString listIchiranhyoLower1_2;
     private final RString listIchiranhyoLower1_3;
@@ -40,8 +40,8 @@ public class IkenshoShujiiIchiranBodyItem {
      * @param listIchiranhyoUpper_4 郵便番号
      * @param listIchiranhyoUpper_5 連絡先
      * @param listIchiranhyoUpper_6 医療機関状況
-     * @param listIchiranhyoUpper_7 主治医ｺｰﾄﾞ(ｶﾅ)
-     * @param listIchiranhyoUpper_8 主治医ｺ氏名
+     * @param listIchiranhyoUpper_7 主治医ｺｰﾄﾞ
+     * @param listIchiranhyoUpper_8 主治医氏名(ｶﾅ)
      * @param listIchiranhyoUpper_9 性別
      * @param listIchiranhyoUpper_10 主治医状況
      * @param listIchiranhyoLower1_1 医療機関名称
@@ -56,11 +56,11 @@ public class IkenshoShujiiIchiranBodyItem {
             RString listIchiranhyoUpper_3,
             RString listIchiranhyoUpper_4,
             RString listIchiranhyoUpper_5,
-            RString listIchiranhyoUpper_6,
+            boolean listIchiranhyoUpper_6,
             RString listIchiranhyoUpper_7,
             RString listIchiranhyoUpper_8,
             RString listIchiranhyoUpper_9,
-            RString listIchiranhyoUpper_10,
+            boolean listIchiranhyoUpper_10,
             RString listIchiranhyoLower1_1,
             RString listIchiranhyoLower1_2,
             RString listIchiranhyoLower1_3,

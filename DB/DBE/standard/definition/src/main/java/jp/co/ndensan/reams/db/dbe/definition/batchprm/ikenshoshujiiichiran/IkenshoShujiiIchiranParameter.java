@@ -17,7 +17,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class IkenshoShujiiIchiranParameter extends BatchParameterBase {
+public class IkenshoShujiiIchiranParameter extends BatchParameterBase{
 
     /**
      * 市町村コード
@@ -55,7 +55,7 @@ public class IkenshoShujiiIchiranParameter extends BatchParameterBase {
     public static final String JYOKYO = "jyokyo";
 
     /**
-     * 並び順
+     *  並び順
      */
     public static final String OUTPUTSORT = "outputSort";
 
@@ -86,11 +86,10 @@ public class IkenshoShujiiIchiranParameter extends BatchParameterBase {
     /**
      * 医療機関・主治医一覧表作成プロセスパラメータークラス作成
      *
-     * @return HaishaMeigiHenkouIraiTuchiSakuseiProcessParameter
-     * 医療機関・主治医一覧表作成プロセスパラメータークラス
+     * @return 医療機関・主治医一覧表作成プロセスパラメータークラス
      */
     public IkenshoShujiiIchiranProcessParameter to主治医一覧情報プロセスparameter() {
-        return new IkenshoShujiiIchiranProcessParameter(
+        return IkenshoShujiiIchiranProcessParameter.to主治医一覧表作成ProcessParameter(
                 this.shichosonCode,
                 this.shichosonName,
                 this.iryoKikanCodeFrom,

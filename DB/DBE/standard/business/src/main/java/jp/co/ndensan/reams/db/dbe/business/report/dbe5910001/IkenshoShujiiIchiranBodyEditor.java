@@ -33,7 +33,6 @@ class IkenshoShujiiIchiranBodyEditor implements IkenshoShujiiIchiranEditor {
     private ShujiiIryokikanShujiiIchiranhyoReportSource editBody(ShujiiIryokikanShujiiIchiranhyoReportSource source) {
         source.listIchiranhyoLower1_1 = item.getListIchiranhyoLower1_1();
         source.listIchiranhyoLower1_2 = item.getListIchiranhyoLower1_2();
-
         source.listIchiranhyoLower1_3 = item.getListIchiranhyoLower1_3();
         source.listIchiranhyoLower2_1 = item.getListIchiranhyoLower2_1();
         source.listIchiranhyoLower2_2 = item.getListIchiranhyoLower2_2();
@@ -48,15 +47,15 @@ class IkenshoShujiiIchiranBodyEditor implements IkenshoShujiiIchiranEditor {
         source.listIchiranhyoUpper_9 = SeibetsuCodeType.toValue(item.getListIchiranhyoUpper_9()).toRString();
 
         // TODO 左涛 QA224　医療機関状況ENUMの確認
-        if (new RString("True").equals(item.getListIchiranhyoUpper_6())) {
+        if (item.isListIchiranhyoUpper_6()) {
             source.listIchiranhyoUpper_6 = new RString("有効");
-        } else if (new RString("False").equals(item.getListIchiranhyoUpper_6())) {
+        } else if (!item.isListIchiranhyoUpper_6()) {
             source.listIchiranhyoUpper_6 = new RString("無効");
         }
         // TODO 左涛 QA224　主治医状況ENUMの確認
-        if (new RString("True").equals(item.getListIchiranhyoUpper_10())) {
+        if (item.isListIchiranhyoUpper_10()) {
             source.listIchiranhyoUpper_10 = new RString("有効");
-        } else if (new RString("False").equals(item.getListIchiranhyoUpper_10())) {
+        } else if (!item.isListIchiranhyoUpper_10()) {
             source.listIchiranhyoUpper_10 = new RString("無効");
         }
         return source;
