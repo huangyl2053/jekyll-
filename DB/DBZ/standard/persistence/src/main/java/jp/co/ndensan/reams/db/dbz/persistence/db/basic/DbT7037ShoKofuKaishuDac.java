@@ -93,7 +93,7 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
     @Override
     public int save(DbT7037ShoKofuKaishuEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("証交付回収エンティティ"));
-	// TODO 物理削除であるかは業務ごとに検討してください。
+        // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
@@ -219,13 +219,12 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
     /**
      * 被保険者番号を取得します。
      *
-     * @param 識別コード ShikibetsuCode
-     * @return DbT1001HihokenshaDaichoEntity
-     * @throws 被保険者番号
+     * @param 識別コード 識別コード
+     * @return DbT7037ShoKofuKaishuEntity 証交付回収テーブルのエンティティク
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT7037ShoKofuKaishuEntity selectHihokenshaNo(
-            ShikibetsuCode 識別コード) throws NullPointerException {
+    public DbT7037ShoKofuKaishuEntity selectHihokenshaNo(ShikibetsuCode 識別コード) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 

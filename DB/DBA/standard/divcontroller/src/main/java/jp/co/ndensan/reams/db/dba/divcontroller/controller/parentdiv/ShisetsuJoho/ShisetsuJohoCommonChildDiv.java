@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.controller;
+package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.ShisetsuJoho;
 
 import jp.co.ndensan.reams.db.dba.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
@@ -45,7 +45,7 @@ public class ShisetsuJohoCommonChildDiv {
     }
 
     /**
-     * 施設情報に初期化を設定します
+     * 施設情報に初期化を設定します。
      *
      * @param requestDiv ShisetsuJohoCommonChildDivDiv
      * @return ResponseData<ShisetsuJohoCommonChildDivDiv>
@@ -57,7 +57,7 @@ public class ShisetsuJohoCommonChildDiv {
     }
 
     /**
-     * 入所施設検索。<br/>
+     * 入所施設を検索します。<br/>
      *
      * @param requestDiv ShisetsuJohoCommonChildDivDiv
      * @return ResponseData<ShisetsuJohoCommonChildDivDiv>
