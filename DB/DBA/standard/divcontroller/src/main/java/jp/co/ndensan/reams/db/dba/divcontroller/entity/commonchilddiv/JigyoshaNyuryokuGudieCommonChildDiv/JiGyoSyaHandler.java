@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dba.business.core.jigyosha.ServiceShuruiJigyoshaIn
 import jp.co.ndensan.reams.db.dba.definition.jigyosha.JigyoshaInputGuideParameter;
 import jp.co.ndensan.reams.db.dba.service.core.jigyosha.JigyoshaInputGuideFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigojigyoshano.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -269,32 +268,36 @@ public class JiGyoSyaHandler {
 
         List<KeyValueDataSource> dataSource = new ArrayList();
 
-        KeyValueDataSource KeyValue0 = new KeyValueDataSource();
         KeyValueDataSource KeyValue1 = new KeyValueDataSource();
-        KeyValueDataSource KeyValue2 = new KeyValueDataSource();
         KeyValueDataSource KeyValue3 = new KeyValueDataSource();
         KeyValueDataSource KeyValue4 = new KeyValueDataSource();
         KeyValueDataSource KeyValue5 = new KeyValueDataSource();
+        KeyValueDataSource KeyValue6 = new KeyValueDataSource();
+        KeyValueDataSource KeyValue7 = new KeyValueDataSource();
+        KeyValueDataSource KeyValue8 = new KeyValueDataSource();
 
-        KeyValue0.setKey(JigyoshaKubun.なし.getCode());
-        KeyValue1.setKey(JigyoshaKubun.介護老人保健施設.getCode());
-        KeyValue2.setKey(JigyoshaKubun.地域包括支援センター.getCode());
-        KeyValue3.setKey(JigyoshaKubun.居宅介護支援事業者.getCode());
-        KeyValue4.setKey(JigyoshaKubun.指定介護療養型医療施設.getCode());
-        KeyValue5.setKey(JigyoshaKubun.指定介護老人福祉施設.getCode());
-        KeyValue0.setValue(JigyoshaKubun.なし.toRString());
-        KeyValue1.setValue(JigyoshaKubun.介護老人保健施設.toRString());
-        KeyValue2.setValue(JigyoshaKubun.地域包括支援センター.toRString());
-        KeyValue3.setValue(JigyoshaKubun.居宅介護支援事業者.toRString());
-        KeyValue4.setValue(JigyoshaKubun.指定介護療養型医療施設.toRString());
-        KeyValue5.setValue(JigyoshaKubun.指定介護老人福祉施設.toRString());
+        KeyValue1.setKey(new RString("1"));
+        KeyValue3.setKey(new RString("3"));
+        KeyValue4.setKey(new RString("4"));
+        KeyValue5.setKey(new RString("5"));
+        KeyValue6.setKey(new RString("6"));
+        KeyValue7.setKey(new RString("7"));
+        KeyValue8.setKey(new RString("8"));
+        KeyValue1.setValue(new RString("医科"));
+        KeyValue3.setValue(new RString("歯科"));
+        KeyValue4.setValue(new RString("薬局"));
+        KeyValue5.setValue(new RString("老人保健施設"));
+        KeyValue6.setValue(new RString("訪問看護ステーション"));
+        KeyValue7.setValue(new RString("介護保険事業所"));
+        KeyValue8.setValue(new RString("基準該当事業所"));
 
-        dataSource.add(KeyValue0);
         dataSource.add(KeyValue1);
-        dataSource.add(KeyValue2);
         dataSource.add(KeyValue3);
         dataSource.add(KeyValue4);
         dataSource.add(KeyValue5);
+        dataSource.add(KeyValue6);
+        dataSource.add(KeyValue7);
+        dataSource.add(KeyValue8);
         return dataSource;
     }
 

@@ -70,8 +70,6 @@ public class ShisetsuJohoCommonChildDiv {
                 && !requestDiv.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty()) {
 
             mode.setJigyoshaShubetsu(requestDiv.getRadKaigoHokenShisetsu().getSelectedKey());
-            requestDiv.getRadOtherTokureiShisetsu().getDisabledItem().clear();
-            requestDiv.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
             requestDiv.getRadKaigoHokenShisetsu().getDisabledItem().clear();
         }
 
@@ -79,8 +77,6 @@ public class ShisetsuJohoCommonChildDiv {
                 && !requestDiv.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty()) {
 
             mode.setJigyoshaShubetsu(requestDiv.getRadOtherTokureiShisetsu().getSelectedKey());
-            requestDiv.getRadKaigoHokenShisetsu().getDisabledItem().clear();
-            requestDiv.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
             requestDiv.getRadOtherTokureiShisetsu().getDisabledItem().clear();
         }
 
@@ -88,8 +84,6 @@ public class ShisetsuJohoCommonChildDiv {
                 && !requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty()) {
 
             mode.setJigyoshaShubetsu(requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey());
-            requestDiv.getRadKaigoHokenShisetsu().getDisabledItem().clear();
-            requestDiv.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             requestDiv.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
         }
 
