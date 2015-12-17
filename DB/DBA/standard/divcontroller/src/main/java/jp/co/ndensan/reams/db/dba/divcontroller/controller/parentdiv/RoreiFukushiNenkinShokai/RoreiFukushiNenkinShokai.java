@@ -24,8 +24,8 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
- *
  * 老齢福祉年金受給情報共有子Divです。
+ *
  */
 public class RoreiFukushiNenkinShokai {
 
@@ -43,7 +43,7 @@ public class RoreiFukushiNenkinShokai {
     }
 
     /**
-     * 老齢福祉年金情報共通子DIVを初期化します.
+     * 老齢福祉年金情報共通子DIVを初期化します。
      *
      * @param div 老齢福祉年金Div
      * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
@@ -59,7 +59,7 @@ public class RoreiFukushiNenkinShokai {
     }
 
     /**
-     * 老齢福祉年金情報の「情報を追加する」ボタン処理です.
+     * 老齢福祉年金情報の「情報を追加する」ボタン処理です。
      *
      * @param div 老齢福祉年金Div
      * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
@@ -71,7 +71,7 @@ public class RoreiFukushiNenkinShokai {
     }
 
     /**
-     * 老齢福祉年金情報の「修正」ボタン処理です.
+     * 老齢福祉年金情報の「修正」ボタン処理です。
      *
      * @param div 老齢福祉年金情報Div
      * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
@@ -83,7 +83,7 @@ public class RoreiFukushiNenkinShokai {
     }
 
     /**
-     * 老齢福祉年金情報の「削除」ボタン処理です.
+     * 老齢福祉年金情報の「削除」ボタン処理です。
      *
      * @param div 老齢福祉年金情報Div
      * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
@@ -95,7 +95,7 @@ public class RoreiFukushiNenkinShokai {
     }
 
     /**
-     * 老齢福祉年金情報の「入力を取消」ボタンです.
+     * 老齢福祉年金情報の「入力を取消」ボタンです。
      *
      * @param div 老齢福祉年金情報Div
      * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
@@ -106,7 +106,7 @@ public class RoreiFukushiNenkinShokai {
     }
 
     /**
-     * 老齢福祉年金情報の「保存する」ボタン処理です.
+     * 老齢福祉年金情報の「保存する」ボタン処理です。
      *
      * @param div 老齢福祉年金情報Div
      * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
@@ -144,7 +144,7 @@ public class RoreiFukushiNenkinShokai {
             RoreiFukushiNenkinJukyusha busiRoreiFukushiNenkin = new RoreiFukushiNenkinJukyusha(
                     new ShikibetsuCode(div.getShikibetsuCode()),
                     new FlexibleDate(div.getTxtStartDate().getValue().toDateString()));
-            busiRoreiFukushiNenkin = getHandler(div).set老齢福祉年金保存ボタン押下の追加処理(busiRoreiFukushiNenkin);
+            busiRoreiFukushiNenkin = getHandler(div).set年金保存ボタン押下の追加(busiRoreiFukushiNenkin);
             if (service.save老齢福祉年金受給者(busiRoreiFukushiNenkin)) {
                 return onLoad(div);
             }
