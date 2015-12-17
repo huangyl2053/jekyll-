@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho;
 
 import java.util.ArrayList;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.GappeiCityJyoho;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.KouikiGappeiJyoho;
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7055GappeiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.gappeijoho.IGappeiCityJyohoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -101,6 +103,7 @@ public class GappeiCityJohoBFinder {
      */
     @Transaction
     public SearchResult<GappeiCityJyoho> getTannitsugappeijoho(RString hyoujiUmu) {
+        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage("表示有無区分"));
         IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForTannitsugappeijoho(hyoujiUmu);
         List<GappeiCityJyohoRelateEntity> 合併情報検索結果Entityリスト = gappeiJyohoMapper.getTannitsugappeijoho(params);
@@ -122,7 +125,10 @@ public class GappeiCityJohoBFinder {
     @Transaction
     public SearchResult<GappeiCityJyoho> getTannitsugappeijohokensaku(RString hyoujiUmu,
             LasdecCode 旧市町村コード, HokenshaNo 旧保険者番号) {
-        if (旧市町村コード.isEmpty() && 旧保険者番号.isEmpty()) {
+        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage("表示有無区分"));
+        requireNonNull(旧市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("旧市町村コード"));
+        requireNonNull(旧保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("旧保険者番号"));
+        if ((旧市町村コード == null || 旧市町村コード.isEmpty()) && (旧保険者番号 == null || 旧保険者番号.isEmpty())) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage());
         }
         IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
@@ -144,6 +150,7 @@ public class GappeiCityJohoBFinder {
      */
     @Transaction
     public SearchResult<GappeiCityJyoho> getKouikigappeijoho(RString hyoujiUmu) {
+        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage("表示有無区分"));
         IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForKouikigappeijoho(hyoujiUmu);
         List<GappeiCityJyohoRelateEntity> 合併情報検索結果Entityリスト = gappeiJyohoMapper.getKouikigappeijoho(params);
@@ -165,7 +172,10 @@ public class GappeiCityJohoBFinder {
     @Transaction
     public SearchResult<GappeiCityJyoho> getKouikigappeijohokensaku(RString hyoujiUmu,
             LasdecCode 旧市町村コード, HokenshaNo 旧保険者番号) {
-        if (旧市町村コード.isEmpty() && 旧保険者番号.isEmpty()) {
+        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage("表示有無区分"));
+        requireNonNull(旧市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("旧市町村コード"));
+        requireNonNull(旧保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("旧保険者番号"));
+        if ((旧市町村コード == null || 旧市町村コード.isEmpty()) && (旧保険者番号 == null || 旧保険者番号.isEmpty())) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage());
         }
         IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
@@ -188,6 +198,8 @@ public class GappeiCityJohoBFinder {
      */
     @Transaction
     public SearchResult<GappeiCityJyoho> getSennyoukouikigappeijohokensaku(RString hyoujiUmu, RString 導入形態コード) {
+        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage("表示有無区分"));
+        requireNonNull(導入形態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("導入形態コード"));
         List<GappeiCityJyoho> gappeiCityJyohoList = new ArrayList<>();
         if (((合併区分_あり).equals(getGappeijohokubun())) && (!導入形態コード.isEmpty() && 導入形態コード.length() >= 2)) {
             if (単一.equals(導入形態コード.substringEmptyOnError(1, 2))) {
@@ -207,6 +219,7 @@ public class GappeiCityJohoBFinder {
      */
     @Transaction
     public SearchResult<GappeiCityJyoho> getSaishintannitsugappeijoho(RString hyoujiUmu) {
+        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage("表示有無区分"));
         IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForSaishintannitsugappeijoho(hyoujiUmu);
         List<GappeiCityJyohoRelateEntity> 合併情報検索結果Entityリスト = gappeiJyohoMapper.getSaishintannitsugappeijoho(params);
@@ -225,6 +238,7 @@ public class GappeiCityJohoBFinder {
      */
     @Transaction
     public SearchResult<GappeiCityJyoho> getKouikigappeijohokennsaku(RString hyoujium) {
+        requireNonNull(hyoujium, UrSystemErrorMessages.値がnull.getReplacedMessage("表示有無区分"));
         IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForKouikigappeijohokennsaku(hyoujium);
         List<GappeiCityJyohoRelateEntity> 合併情報検索結果Entityリスト = gappeiJyohoMapper.getKouikigappeijohokennsaku(params);
@@ -244,6 +258,8 @@ public class GappeiCityJohoBFinder {
      */
     @Transaction
     public SearchResult<GappeiCityJyoho> getKensakukitannitsugappeijoho(LasdecCode shichosonCode, HokenshaNo hokenshaNo) {
+        requireNonNull(shichosonCode, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(hokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
         IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForKouikigappeijohokennsaku(shichosonCode, hokenshaNo);
         List<GappeiCityJyohoRelateEntity> 合併情報検索結果Entityリスト = gappeiJyohoMapper.getKensakukitannitsugappeijoho(params);
@@ -272,6 +288,14 @@ public class GappeiCityJohoBFinder {
             FlexibleDate gappeiYMD, LasdecCode shichosonCode,
             HokenshaNo hokenshaNo, FlexibleDate kyuJohoFuyoToYMD,
             FlexibleDate kokuhorenDataFromYMD, FlexibleDate kijyuYMD) {
+        requireNonNull(chiikiNo, UrSystemErrorMessages.値がnull.getReplacedMessage("地域番号"));
+        requireNonNull(gappeiShurui, UrSystemErrorMessages.値がnull.getReplacedMessage("合併種類"));
+        requireNonNull(gappeiYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("合併年月日"));
+        requireNonNull(shichosonCode, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(hokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
+        requireNonNull(kyuJohoFuyoToYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("旧市町村情報付与終了年月日"));
+        requireNonNull(kokuhorenDataFromYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("国保連データ連携開始年月日"));
+        requireNonNull(kijyuYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("基準日"));
         IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.
                 createParamForKensakukikouikigappeijoho(chiikiNo, gappeiShurui, gappeiYMD, shichosonCode,
