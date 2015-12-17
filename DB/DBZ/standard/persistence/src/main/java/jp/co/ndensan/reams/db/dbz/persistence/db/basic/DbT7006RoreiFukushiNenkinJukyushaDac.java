@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyusha;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyusha.jukyuKaishiYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyusha.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -78,7 +78,7 @@ public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006Ro
     @Override
     public int save(DbT7006RoreiFukushiNenkinJukyushaEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("老齢福祉年金受給者エンティティ"));
-	// TODO 物理削除であるかは業務ごとに検討してください。
+        // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
@@ -93,7 +93,6 @@ public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006Ro
     @Transaction
     public List<DbT7006RoreiFukushiNenkinJukyushaEntity> selectByShikibetsuCode(ShikibetsuCode 識別コード) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -103,7 +102,7 @@ public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006Ro
     }
 
     /**
-     * 老齢福祉年金履歴情報を登録前重複チェックするです.
+     * 老齢福祉年金履歴情報を登録前重複チェックするです。
      *
      * @param 識別コード ShikibetsuCode
      * @param 受給開始年月日 JukyuKaishiYMD
@@ -116,7 +115,6 @@ public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006Ro
             FlexibleDate 受給開始年月日) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(受給開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受給開始年月日"));
-
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -138,10 +136,10 @@ public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006Ro
             ShikibetsuCode 識別コード) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
         return accessor.select().
                 table(DbT7006RoreiFukushiNenkinJukyusha.class).
                 where(eq(shikibetsuCode, 識別コード)).
                 toList(DbT7006RoreiFukushiNenkinJukyushaEntity.class);
     }
-
 }
