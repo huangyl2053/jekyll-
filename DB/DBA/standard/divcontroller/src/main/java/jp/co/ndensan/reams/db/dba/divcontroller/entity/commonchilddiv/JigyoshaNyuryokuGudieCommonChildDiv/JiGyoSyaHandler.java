@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dba.definition.jigyosha.JigyoshaInputGuideParamete
 import jp.co.ndensan.reams.db.dba.service.core.jigyosha.JigyoshaInputGuideFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigojigyoshano.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyoshaKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
@@ -276,20 +277,20 @@ public class JiGyoSyaHandler {
         KeyValueDataSource KeyValue7 = new KeyValueDataSource();
         KeyValueDataSource KeyValue8 = new KeyValueDataSource();
 
-        KeyValue1.setKey(new RString("1"));
-        KeyValue3.setKey(new RString("3"));
-        KeyValue4.setKey(new RString("4"));
-        KeyValue5.setKey(new RString("5"));
-        KeyValue6.setKey(new RString("6"));
-        KeyValue7.setKey(new RString("7"));
-        KeyValue8.setKey(new RString("8"));
-        KeyValue1.setValue(new RString("医科"));
-        KeyValue3.setValue(new RString("歯科"));
-        KeyValue4.setValue(new RString("薬局"));
-        KeyValue5.setValue(new RString("老人保健施設"));
-        KeyValue6.setValue(new RString("訪問看護ステーション"));
-        KeyValue7.setValue(new RString("介護保険事業所"));
-        KeyValue8.setValue(new RString("基準該当事業所"));
+        KeyValue1.setKey(JigyoshaKubun.医科.getコード());
+        KeyValue3.setKey(JigyoshaKubun.歯科.getコード());
+        KeyValue4.setKey(JigyoshaKubun.薬局.getコード());
+        KeyValue5.setKey(JigyoshaKubun.老人保健施設.getコード());
+        KeyValue6.setKey(JigyoshaKubun.訪問看護ステーション.getコード());
+        KeyValue7.setKey(JigyoshaKubun.介護保険事業所.getコード());
+        KeyValue8.setKey(JigyoshaKubun.基準該当事業所.getコード());
+        KeyValue1.setValue(JigyoshaKubun.医科.get名称());
+        KeyValue3.setValue(JigyoshaKubun.歯科.get名称());
+        KeyValue4.setValue(JigyoshaKubun.薬局.get名称());
+        KeyValue5.setValue(JigyoshaKubun.老人保健施設.get名称());
+        KeyValue6.setValue(JigyoshaKubun.訪問看護ステーション.get名称());
+        KeyValue7.setValue(JigyoshaKubun.介護保険事業所.get名称());
+        KeyValue8.setValue(JigyoshaKubun.基準該当事業所.get名称());
 
         dataSource.add(KeyValue1);
         dataSource.add(KeyValue3);
