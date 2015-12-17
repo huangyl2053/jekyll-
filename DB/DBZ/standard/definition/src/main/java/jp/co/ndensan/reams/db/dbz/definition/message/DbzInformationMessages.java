@@ -18,8 +18,8 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum DbzInformationMessages implements IMessageGettable {
 
     // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    更新終了(4, "更新は正常に終了しました。"),
-    削除終了(5, "削除は正常に終了しました。");
+    不整合解消済み(1, "不整合はすでに解消されています。"),
+    不整合内容相違(2, "以前と不整合の内容が異なります。以前：％1 現在：％2");
 
     private final Message message;
 
@@ -30,7 +30,7 @@ public enum DbzInformationMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbzInformationMessages(int no, String message) {
-        this.message = new InformationMessage(toCode("I", no), message);
+        this.message = new InformationMessage(toCode("DBZI", no), message);
     }
 
     @Override

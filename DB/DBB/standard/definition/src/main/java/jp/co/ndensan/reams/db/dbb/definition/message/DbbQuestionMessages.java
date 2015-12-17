@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.message;
 
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 
 /**
  * DBBの質問メッセージ定義列挙型です。
@@ -17,8 +17,10 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
  */
 public enum DbbQuestionMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    変更途中の内容破棄確認(1, "変更途中の内容を破棄しますが、よろしいですか？"),
+    打分け方法名称の上書き確認(2, "同じ名称で既に打分け方法が登録されています。上書きしてよろしいですか？"),
+    賦課データ削除確認(3, "選択した賦課データを削除します。よろしいですか。"),
+    賦課データ確定確認(4, "一覧に表示した賦課データを確定します。よろしいですか。");
 
     private final Message message;
 
@@ -29,7 +31,7 @@ public enum DbbQuestionMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbbQuestionMessages(int no, String message) {
-        this.message = new QuestionMessage(toCode("Q", no), message);
+        this.message = new QuestionMessage(toCode("DBBQ", no), message);
     }
 
     @Override

@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.message;
 
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
-import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 
 /**
  * DBBの警告メッセージ定義列挙型です。
@@ -17,8 +17,8 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
  */
 public enum DbbWarningMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    特徴期割額端数不整合(1, "特別徴収%1は、%2円未満が0ではありません。必要に応じて見直してください。"),
+    普徴期割額端数不整合(2, "普通徴収%1は、%2円未満が0ではありません。必要に応じて見直してください。");
 
     private final Message message;
 
@@ -29,7 +29,7 @@ public enum DbbWarningMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbbWarningMessages(int no, String message) {
-        this.message = new WarningMessage(toCode("W", no), message);
+        this.message = new WarningMessage(toCode("DBBW", no), message);
     }
 
     @Override

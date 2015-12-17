@@ -17,12 +17,7 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
  */
 public enum DbzQuestionMessages implements IMessageGettable {
 
-    保存の確認(1, "保存します。よろしいですか？"),
-    メニュー遷移の確認(2, "編集されています。メニューへ遷移してもよろしいですか？"),
-    検索画面遷移の確認(3, "編集されています。検索画面へ遷移してもよろしいですか？"),
-    画面遷移の確認(4, "編集されています。画面遷移してもよろしいですか？"),
-    処理実行の確認(5, "処理を実行してもよろしいですか？"),
-    削除の確認(6, "削除します。よろしいですか？");
+    最大表示件数超過確認(1, "検索された件数は入力された最大表示件数より大きいです、画面に表示しますか。");
 
     private final Message message;
 
@@ -33,7 +28,7 @@ public enum DbzQuestionMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbzQuestionMessages(int no, String message) {
-        this.message = new QuestionMessage(toCode("Q", no), message);
+        this.message = new QuestionMessage(toCode("DBZQ", no), message);
     }
 
     @Override
