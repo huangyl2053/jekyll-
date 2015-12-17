@@ -345,102 +345,227 @@ public final class JigyoshaInputGuideParameter {
                 limitCount);
     }
 
+    /**
+     * 事業者番号を返します。
+     *
+     * @return 事業者番号
+     */
     public KaigoJigyoshaNo getJigyoshaNo() {
         return jigyoshaNo;
     }
 
+    /**
+     * 事業者番号フラグを返します。
+     *
+     * @return 事業者番号フラグ
+     */
     public boolean isIsJigyoshaNoFlag() {
         return isJigyoshaNoFlag;
     }
 
+    /**
+     * 有効開始日Fromを返します。
+     *
+     * @return 有効開始日From
+     */
     public FlexibleDate getYukoKaishiYMDFrom() {
         return yukoKaishiYMDFrom;
     }
 
+    /**
+     * 有効開始日Fromフラグを返します。
+     *
+     * @return 有効開始日Fromフラグ
+     */
     public boolean isIsYukoKaishiYMDFromFlag() {
         return isYukoKaishiYMDFromFlag;
     }
 
+    /**
+     * 有効開始日Toを返します。
+     *
+     * @return 有効開始日To
+     */
     public FlexibleDate getYukoKaishiYMDTo() {
         return yukoKaishiYMDTo;
     }
 
+    /**
+     * 有効開始日Toフラグを返します。
+     *
+     * @return 有効開始日Toフラグ
+     */
     public boolean isIsYukoKaishiYMDToFlag() {
         return isYukoKaishiYMDToFlag;
     }
 
+    /**
+     * 事業者名称を返します。
+     *
+     * @return 事業者名称
+     */
     public AtenaMeisho getJigyoshaName() {
         return jigyoshaName;
     }
 
+    /**
+     * 事業者名称フラグを返します。
+     *
+     * @return 事業者名称フラグ
+     */
     public boolean isIsJigyoshaName() {
         return isJigyoshaName;
     }
 
+    /**
+     * 郵便番号を返します。
+     *
+     * @return 郵便番号
+     */
     public YubinNo getYubinNo() {
         return yubinNo;
     }
 
+    /**
+     * 郵便番号フラグを返します。
+     *
+     * @return 郵便番号フラグ
+     */
     public boolean isIsYubinNo() {
         return isYubinNo;
     }
 
+    /**
+     * 住所を返します。
+     *
+     * @return 住所
+     */
     public RString getAddress() {
         return address;
     }
 
+    /**
+     * 住所フラグを返します。
+     *
+     * @return 住所フラグ
+     */
     public boolean isIsAddress() {
         return isAddress;
     }
 
+    /**
+     * サービス種類を返します。
+     *
+     * @return サービス種類
+     */
     public RString getServiceShuRui() {
         return serviceShuRui;
     }
 
+    /**
+     * サービス種類フラグを返します。
+     *
+     * @return サービス種類フラグ
+     */
     public boolean isIsServiceShuRui() {
         return isServiceShuRui;
     }
 
+    /**
+     * 事業者区分を返します。
+     *
+     * @return 事業者区分
+     */
     public RString getJigyoshaKbn() {
         return jigyoshaKbn;
     }
 
+    /**
+     * 事業者区分フラグを返します。
+     *
+     * @return 事業者区分フラグ
+     */
     public boolean isIsJigyoshaKbn() {
         return isJigyoshaKbn;
     }
 
+    /**
+     * 検索条件区分を返します。
+     *
+     * @return 検索条件区分
+     */
     public RString getZennpouitti() {
         return zennpouitti;
     }
 
+    /**
+     * 検索条件区分フラグを返します。
+     *
+     * @return 検索条件区分フラグ
+     */
     public boolean isIsZennpouitti() {
         return isZennpouitti;
     }
 
+    /**
+     * 郡市コードを返します。
+     *
+     * @return 郡市コード
+     */
     public RString getGunshiCode() {
         return gunshiCode;
     }
 
+    /**
+     * 郡市コードフラグを返します。
+     *
+     * @return 郡市コードフラグ
+     */
     public boolean isIsGunshiCode() {
         return isGunshiCode;
     }
 
+    /**
+     * システム日付を返します。
+     *
+     * @return システム日付
+     */
     public FlexibleDate getSystemdate() {
         return systemdate;
     }
 
+    /**
+     * 県コードを返します。
+     *
+     * @return 県コード
+     */
     public RString getKenCode() {
         return kenCode;
     }
 
+    /**
+     * 事業者種別を返します。
+     *
+     * @return 事業者種別
+     */
     public RString getJigyoshaShubetsu() {
         return jigyoshaShubetsu;
     }
 
+    /**
+     * 管内・管外区分を返します。
+     *
+     * @return 管内・管外区分
+     */
     public RString getKannaiKangaiKubun() {
         return kannaiKangaiKubun;
     }
 
+    /**
+     * 表示件数を返します。
+     *
+     * @return 表示件数
+     */
     public int getLimitCount() {
         return limitCount;
     }

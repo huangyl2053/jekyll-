@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dba.business.core.jigyosha;
 
 import java.io.Serializable;
@@ -14,10 +13,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 郡市コードオブジェクトの項目定義クラスです。
  */
-public class GunshiCodeJigyoshaInputGuide  implements Serializable {
-     private final UrT0529GunshikuEntity entity;
-/**
-     * コンストラクタです.
+public class GunshiCodeJigyoshaInputGuide implements Serializable {
+
+    private final UrT0529GunshikuEntity entity;
+
+    /**
+     * コンストラクタです。
      *
      * @param entity 郡市区Entity
      */
@@ -42,7 +43,7 @@ public class GunshiCodeJigyoshaInputGuide  implements Serializable {
     public RString get郡市区コード() {
         return entity.getGunshikuCode();
     }
-    
+
     /**
      * 郡市区名称を取得します。
      *
@@ -51,5 +52,4 @@ public class GunshiCodeJigyoshaInputGuide  implements Serializable {
     public RString get郡市区名称() {
         return entity.getGunshikuMeisho();
     }
-    
 }

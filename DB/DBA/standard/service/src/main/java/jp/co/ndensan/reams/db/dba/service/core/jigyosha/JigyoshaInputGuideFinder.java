@@ -81,7 +81,7 @@ public class JigyoshaInputGuideFinder {
     /**
      * 県コード取得リストを取得します。
      *
-     * @return List<KenCodeJigyoshaInputGuide> 県コード取得リスト
+     * @return 県コード取得リスト
      */
     public SearchResult<KenCodeJigyoshaInputGuide> getKenCodeJigyoshaInputGuide() {
         List<KenCodeJigyoshaInputGuide> kenCodeList = new ArrayList<>();
@@ -99,7 +99,7 @@ public class JigyoshaInputGuideFinder {
     /**
      * 郡市コード取得リストを取得する。
      *
-     * @return List<GunshiCodeJigyoshaInputGuide>郡市コード取得リスト
+     * @return 郡市コード取得リスト
      */
     public SearchResult<GunshiCodeJigyoshaInputGuide> getGunshiCodeJigyoshaInputGuide() {
         List<GunshiCodeJigyoshaInputGuide> gunshiCodeList = new ArrayList<>();
@@ -117,7 +117,7 @@ public class JigyoshaInputGuideFinder {
      * サービス種類取得リストを取得する。
      *
      * @param systemDate システム日付
-     * @return List<ServiceShuruiJigyoshaInputGuide> サービス種類取得リスト
+     * @return サービス種類取得リスト
      */
     public SearchResult<ServiceShuruiJigyoshaInputGuide> getServiceShuruiJigyoshaInputGuidea(RYearMonth systemDate) {
         List<ServiceShuruiJigyoshaInputGuide> serviceShuruiList = new ArrayList<>();
@@ -136,7 +136,7 @@ public class JigyoshaInputGuideFinder {
      * サービス事業者取得リストを取得する。
      *
      * @param params JigyoshaInputGuideParameter
-     * @return List<ServiceJigyoshaInputGuide> サービス事業者取得リスト
+     * @return サービス事業者取得リスト
      */
     public SearchResult<ServiceJigyoshaInputGuide> getServiceJigyoshaInputGuide(JigyoshaInputGuideParameter params) {
         JigyoshaInputGuideMapper jigyoshaInputGuideMapper = this.mapperProvider.create(JigyoshaInputGuideMapper.class);
@@ -156,7 +156,7 @@ public class JigyoshaInputGuideFinder {
      * 適用除外施設取得リストを取得する。
      *
      * @param params JigyoshaInputGuideParameter
-     * @return List<ServiceJigyoshaInputGuide> 適用除外施設取得リスト
+     * @return 適用除外施設取得リスト
      */
     public SearchResult<ServiceJigyoshaInputGuide> getTekiyoJogaiInputGuide(JigyoshaInputGuideParameter params) {
         JigyoshaInputGuideMapper jigyoshaInputGuideMapper = this.mapperProvider.create(JigyoshaInputGuideMapper.class);
@@ -175,7 +175,7 @@ public class JigyoshaInputGuideFinder {
      * その他特例施設取得リストを取得する。
      *
      * @param params JigyoshaInputGuideParameter
-     * @return List<ServiceJigyoshaInputGuide> その他特例施設取得リスト
+     * @return その他特例施設取得リスト
      */
     public SearchResult<ServiceJigyoshaInputGuide> getOtherTokureiInputGuide(JigyoshaInputGuideParameter params) {
         JigyoshaInputGuideMapper jigyoshaInputGuideMapper = this.mapperProvider.create(JigyoshaInputGuideMapper.class);

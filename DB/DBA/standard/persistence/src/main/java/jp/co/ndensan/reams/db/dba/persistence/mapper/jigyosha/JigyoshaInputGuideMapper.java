@@ -11,12 +11,12 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.ServiceJigyoshaInputGuideRela
 
 /**
  *
- * @author zll
+ * 対象事業者取得のクラス。
  */
 public interface JigyoshaInputGuideMapper {
 
     /**
-     * サービス事業者取得。
+     * サービス事業者を取得します。
      *
      * @param params 介護事業者施設オブジェクトパラメータクラス
      * @return List<ServiceJigyoshaInputGuideRelateEntity>
@@ -24,7 +24,7 @@ public interface JigyoshaInputGuideMapper {
     List<ServiceJigyoshaInputGuideRelateEntity> getServiceJigyoshaInputGuide(JigyoshaInputGuideParameter params);
 
     /**
-     * 適用除外施設取得。
+     * 適用除外施設を取得します。
      *
      * @param params 介護事業者施設オブジェクトパラメータクラス
      * @return List<ServiceJigyoshaInputGuideRelateEntity>
@@ -38,5 +38,4 @@ public interface JigyoshaInputGuideMapper {
      * @return List<ServiceJigyoshaInputGuideRelateEntity>
      */
     List<ServiceJigyoshaInputGuideRelateEntity> getOtherTokureiInputGuide(JigyoshaInputGuideParameter params);
-
 }
