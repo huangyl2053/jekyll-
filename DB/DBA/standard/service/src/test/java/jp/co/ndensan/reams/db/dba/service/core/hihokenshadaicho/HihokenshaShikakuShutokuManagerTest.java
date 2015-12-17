@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.testhelper.helper.CSVDataUtilForUseSession;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -71,29 +70,26 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
 
         @Test(expected = NullPointerException.class)
         public void 引数にnullを指定した場合_NullPointerExceptionが発生する() {
-            manager.getHihokenshaShutokuJyoho(null);
+            manager.getHihokenshaShutokuJyoho(null, null);
         }
 
         @Test
         public void テーブルにレコードが存在しない場合_被保険者台帳管理情報取得処理は_NULLを返すこと() {
-            HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaDaicho(HihokenshaNo.EMPTY, ShikibetsuCode.EMPTY);
-            List<HihokenshaShutokuJyoho> entitylist = manager.getHihokenshaShutokuJyoho(parameter).records();
+            List<HihokenshaShutokuJyoho> entitylist = manager.getHihokenshaShutokuJyoho(ShikibetsuCode.EMPTY, HihokenshaNo.EMPTY).records();
             assertThat(entitylist.size(), is(0));
         }
 
         @Test
         public void 被保険者番号が存在する場合_被保険者台帳管理情報取得処理は_1件を返すこと() {
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日1, 枝番1, 資格取得年月日, 資格喪失年月日);
-            HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaDaicho(被保険者番号1, ShikibetsuCode.EMPTY);
-            List<HihokenshaShutokuJyoho> entitylist = manager.getHihokenshaShutokuJyoho(parameter).records();
+            List<HihokenshaShutokuJyoho> entitylist = manager.getHihokenshaShutokuJyoho(ShikibetsuCode.EMPTY, 被保険者番号1).records();
             assertThat(entitylist.size(), is(1));
         }
 
         @Test
         public void 被保険者番号が存在しない場合_被保険者台帳管理情報取得処理は_1件を返すこと() {
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日1, 枝番1, 資格取得年月日, 資格喪失年月日);
-            HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaDaicho(HihokenshaNo.EMPTY, new ShikibetsuCode("012340123400001"));
-            List<HihokenshaShutokuJyoho> entitylist = manager.getHihokenshaShutokuJyoho(parameter).records();
+            List<HihokenshaShutokuJyoho> entitylist = manager.getHihokenshaShutokuJyoho(new ShikibetsuCode("012340123400001"), HihokenshaNo.EMPTY).records();
             assertThat(entitylist.size(), is(1));
         }
 
@@ -101,8 +97,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
         public void 被保険者番号が存在する場合_被保険者台帳管理情報取得処理は_2件を返すこと() {
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日1, 枝番1, 資格取得年月日, 資格喪失年月日);
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日2, 枝番2, 資格取得年月日, 資格喪失年月日);
-            HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaDaicho(被保険者番号1, ShikibetsuCode.EMPTY);
-            List<HihokenshaShutokuJyoho> entitylist = manager.getHihokenshaShutokuJyoho(parameter).records();
+            List<HihokenshaShutokuJyoho> entitylist = manager.getHihokenshaShutokuJyoho(ShikibetsuCode.EMPTY, 被保険者番号1).records();
             assertThat(entitylist.size(), is(2));
         }
     }
@@ -148,13 +143,12 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
 
         @Test(expected = NullPointerException.class)
         public void 引数にnullを指定した場合_NullPointerExceptionが発生する() {
-            manager.getSaidaiEdaban(null);
+            manager.getSaidaiEdaban(null, null);
         }
 
         @Test
         public void テーブルにレコードが存在しない場合_最大枝番取得処理は_0001を返すこと() {
-            HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaEdaban(被保険者番号1, 異動日1);
-            RString edano = manager.getSaidaiEdaban(parameter);
+            RString edano = manager.getSaidaiEdaban(被保険者番号1, 異動日1);
             assertThat(edano, is(new RString("0001")));
         }
 
@@ -162,8 +156,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
         public void テーブルにレコードが存在する場合_最大枝番取得処理は_取得するデータを返すこと() {
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日1, 枝番1, 資格取得年月日, 資格喪失年月日);
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日1, 枝番2, 資格取得年月日, 資格喪失年月日);
-            HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaEdaban(被保険者番号1, 異動日1);
-            RString edano = manager.getSaidaiEdaban(parameter);
+            RString edano = manager.getSaidaiEdaban(被保険者番号1, 異動日1);
             assertThat(edano, is(new RString("3")));
         }
     }
@@ -183,13 +176,12 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
 
         @Test(expected = NullPointerException.class)
         public void 引数にnullを指定した場合_NullPointerExceptionが発生する() {
-            manager.getSaidaiEdaban(null);
+            manager.getSaidaiEdaban(null, null);
         }
 
         @Test
         public void テーブルにレコードが存在しない場合_最新データ情報取得処理は_NULLを返すこと() {
-            HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaDaicho(被保険者番号1, ShikibetsuCode.EMPTY);
-            HihokenshaShutokuJyoho edano = manager.getSaishinDeta(parameter);
+            HihokenshaShutokuJyoho edano = manager.getSaishinDeta(ShikibetsuCode.EMPTY, 被保険者番号1);
             assertThat(edano, is(nullValue()));
         }
 
@@ -197,8 +189,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
         public void テーブルにレコードが存在する場合_最新データ情報取得処理は_1件を返すこと() {
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日1, 枝番1, 資格取得年月日, 資格喪失年月日);
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日2, 枝番2, 資格取得年月日, 資格喪失年月日);
-            HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaDaicho(被保険者番号1, ShikibetsuCode.EMPTY);
-            HihokenshaShutokuJyoho edano = manager.getSaishinDeta(parameter);
+            HihokenshaShutokuJyoho edano = manager.getSaishinDeta(ShikibetsuCode.EMPTY, 被保険者番号1);
             assertThat(edano.get異動日(), is(異動日2));
         }
     }
@@ -225,7 +216,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
         }
 
         @Test
-        public void 取得された年齢65以下の場合の場合_資格取得チェック処理は_チェックフラグがtrueを返すこと() {
+        public void 取得された年齢65以下の場合の場合_資格取得チェック処理は_チェックフラグがfalseを返すこと() {
             date = new FlexibleDate("19311211");
             boolean flg = manager.shikakuShutokuTorokuCheck(dateOfBirth, 資格取得年月日, new RString("02"));
             assertThat(flg, is(false));
@@ -240,15 +231,15 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
 
         @Test
         public void 取得された年齢40以上の場合の場合_資格取得チェック処理は_チェックフラグがtrueを返すこと() {
-            date = new FlexibleDate("19611211");
-            boolean flg = manager.shikakuShutokuTorokuCheck(dateOfBirth, 資格取得年月日, new RString("02"));
+            date = new FlexibleDate("19401211");
+            boolean flg = manager.shikakuShutokuTorokuCheck(dateOfBirth, 資格取得年月日, new RString("03"));
             assertThat(flg, is(true));
         }
 
         @Test
-        public void 取得された年齢40以下の場合の場合_資格取得チェック処理は_チェックフラグがtrueを返すこと() {
+        public void 取得された年齢40以下の場合の場合_資格取得チェック処理は_チェックフラグがfalseを返すこと() {
             date = new FlexibleDate("19811211");
-            boolean flg = manager.shikakuShutokuTorokuCheck(dateOfBirth, 資格取得年月日, new RString("02"));
+            boolean flg = manager.shikakuShutokuTorokuCheck(dateOfBirth, 資格取得年月日, new RString("03"));
             assertThat(flg, is(false));
         }
     }
@@ -268,13 +259,12 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
 
         @Test(expected = NullPointerException.class)
         public void 引数にnullを指定した場合_NullPointerExceptionが発生する() {
-            manager.getSaidaiEdaban(null);
+            manager.getSaidaiEdaban(null, null);
         }
 
         @Test
         public void 取得したデータがない場合_資格取得チェック処理は_チェックフラグがtrueを返すこと() {
-            HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaDaicho(被保険者番号1, ShikibetsuCode.EMPTY);
-            boolean flg = manager.shikakuShutokuCheck(parameter);
+            boolean flg = manager.shikakuShutokuCheck(ShikibetsuCode.EMPTY, 被保険者番号1);
             assertThat(flg, is(true));
         }
 
@@ -282,8 +272,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
         public void 取得したデータの資格取得年月日と資格喪失年月日がある場合_資格取得チェック処理は_チェックフラグがtrueを返すこと() {
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日1, 枝番1, 資格取得年月日, 資格喪失年月日);
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日2, 枝番2, 資格取得年月日, 資格喪失年月日);
-            HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaDaicho(被保険者番号1, ShikibetsuCode.EMPTY);
-            boolean flg = manager.shikakuShutokuCheck(parameter);
+            boolean flg = manager.shikakuShutokuCheck(ShikibetsuCode.EMPTY, 被保険者番号1);
             assertThat(flg, is(true));
         }
 
@@ -291,8 +280,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
         public void 取得したデータの資格喪失年月日がないと被保険者区分コードは2場合_資格取得チェック処理は_チェックフラグがtrueを返すこと() {
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日1, 枝番1, 資格取得年月日, 資格喪失年月日);
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日2, 枝番2, 資格取得年月日, 資格喪失年月日);
-            HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaDaicho(被保険者番号1, ShikibetsuCode.EMPTY);
-            boolean flg = manager.shikakuShutokuCheck(parameter);
+            boolean flg = manager.shikakuShutokuCheck(ShikibetsuCode.EMPTY, 被保険者番号1);
             assertThat(flg, is(true));
         }
 
@@ -300,8 +288,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
         public void 上記以外の場合_資格取得チェック処理は_チェックフラグがfalseを返すこと() {
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日1, 枝番1, 資格取得年月日, FlexibleDate.EMPTY);
             insert_DbT1001HihokenshaDaicho(被保険者番号1, 異動日2, 枝番2, 資格取得年月日, FlexibleDate.EMPTY);
-            HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaDaicho(被保険者番号1, ShikibetsuCode.EMPTY);
-            boolean flg = manager.shikakuShutokuCheck(parameter);
+            boolean flg = manager.shikakuShutokuCheck(ShikibetsuCode.EMPTY, 被保険者番号1);
             assertThat(flg, is(false));
         }
     }
