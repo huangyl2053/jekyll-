@@ -40,10 +40,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class KoikiShichosonJohoFinder {
 
-    private final DbT7051KoseiShichosonMasterDac dac;
     private static final RString SHOKIBETSUID = new RString("00");
     private static final RString 市町村識別コード = new RString("00");
     private static final RString 合併旧市町村区分 = new RString("0");
+    private final DbT7051KoseiShichosonMasterDac dac;
 
     /**
      * コンストラクタです。
@@ -164,7 +164,6 @@ public class KoikiShichosonJohoFinder {
         entity.setShichosonCode(new LasdecCode(association.get地方公共団体コード().value()));
         entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(BusinessConfig.get(HokenshaJoho.保険者情報_保険者番号,
                 SubGyomuCode.DBU介護統計報告)));
-        entity.setKokuhorenKoikiShichosonNo(RString.EMPTY);
         entity.setShichosonMeisho(BusinessConfig.get(HokenshaJoho.保険者情報_保険者名称, SubGyomuCode.DBU介護統計報告));
         entity.setTodofukenMeisho(association.get都道府県名());
         entity.setGunMeisho(association.get郡名());
@@ -185,6 +184,7 @@ public class KoikiShichosonJohoFinder {
         entity.setRojinhokenShichosonNo(BusinessConfig.get(ConfigNameDBU.老人保健情報_市町村番号, SubGyomuCode.DBU介護統計報告));
         entity.setRokenJukyushaNoTaikei(BusinessConfig.get(ConfigNameDBD.老人保健情報_管理体系, SubGyomuCode.DBD介護受給));
         entity.setTokuchoBunpaishuyaku(BusinessConfig.get(ConfigNameDBB.動作関連_特徴分配集約システム, SubGyomuCode.DBB介護賦課));
+        entity.setKokuhorenKoikiShichosonNo(RString.EMPTY);
         entity.setIkoYMD(FlexibleDate.EMPTY);
         entity.setKanyuYMD(FlexibleDate.EMPTY);
         entity.setRidatsuYMD(FlexibleDate.EMPTY);

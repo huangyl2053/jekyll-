@@ -33,12 +33,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class GappeiCityJohoBFinder {
 
-    private final MapperProvider mapperProvider;
-    private final DbT7055GappeiJohoDac dac;
     private static final RString 広域 = new RString("1");
     private static final RString 単一 = new RString("2");
     private static final RString 合併区分_あり = new RString("1");
     private static final RString 表示有無区分_有 = new RString("1");
+    private final MapperProvider mapperProvider;
+    private final DbT7055GappeiJohoDac dac;
 
     /**
      * コンストラクタです。
@@ -88,11 +88,8 @@ public class GappeiCityJohoBFinder {
 
         FlexibleDate kyuJohoFuyoToYMD = FlexibleDate.EMPTY;
         if ((合併区分_あり).equals(getGappeijohokubun())) {
-            FlexibleDate result = dac.get旧市町村コード付加終了年月日().getKyuJohoFuyoToYMD();
-            if (!result.isEmpty()) {
-                return result;
-            } else {
-                return kyuJohoFuyoToYMD;
+            if (dac.get旧市町村コード付加終了年月日() != null) {
+                kyuJohoFuyoToYMD = dac.get旧市町村コード付加終了年月日().getKyuJohoFuyoToYMD();
             }
         }
         return kyuJohoFuyoToYMD;

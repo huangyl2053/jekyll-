@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * {@link ShichosonCodeYoriShichoson}の実装です。
+ * 市町村コードによる市町村クラスです。
  */
 public class ShichosonCodeYoriShichoson {
 
