@@ -20,9 +20,13 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
     private final RString shichosonCode;
     private final RString shichosonName;
     private final RString iryoKikanCodeFrom;
+    private final boolean isIryoKikanCodeFromEmpty;
     private final RString iryoKikanCodeTo;
+    private final boolean isIryoKikanCodeToEmpty;
     private final RString shujiiCodeFrom;
+    private final boolean isShujiiCodeFromEmpty;
     private final RString shujiiCodeTo;
+    private final boolean isShujiiCodeToEmpty;
     private final boolean isJyoukyouYukoFlag;
     private final boolean isJyoukyouMukoFlag;
     private final boolean isIryoKikanCodeShujiiCodeFlag;
@@ -36,31 +40,31 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
      * @param shichosonCode 市町村コード
      * @param shichosonName 市町村名
      * @param iryoKikanCodeFrom 主治医医療機関コードFrom
+     * @param isIryoKikanCodeFromEmpty 主治医医療機関コードFrom有無
      * @param iryoKikanCodeTo 主治医医療機関コードTo
+     * @param isIryoKikanCodeToEmpty 主治医医療機関コードTo有無
      * @param shujiiCodeFrom 主治医コードFrom
      * @param shujiiCodeTo 主治医コードTo
+     * @param isShujiiCodeFromEmpty 主治医コードFrom有無
      * @param isJyoukyouYukoFlag 有効状況フラグ
+     * @param isShujiiCodeToEmpty 主治医コードFrom有無
      * @param isJyoukyouMukoFlag 無効状況フラグ
      * @param isIryoKikanCodeShujiiCodeFlag 並び順(主治医医療機関コード+主治医コード)
      * @param isIryoKikanCodeShujiiNameFlag 並び順(主治医医療機関コード+主治医名称)
      * @param isIryoKikanNameShujiiCodeFlag 並び順(主治医医療機関名称+主治医コード)
      * @param isIryoKikanNameShujiiNameFlag 並び順(主治医医療機関名称+主治医名称)
      */
-    public IkenshoShujiiIchiranMybatisParameter(RString shichosonCode,
-            RString shichosonName, RString iryoKikanCodeFrom,
-            RString iryoKikanCodeTo, RString shujiiCodeFrom,
-            RString shujiiCodeTo, boolean isJyoukyouYukoFlag,
-            boolean isJyoukyouMukoFlag, boolean isIryoKikanCodeShujiiCodeFlag,
-            boolean isIryoKikanCodeShujiiNameFlag,
-            boolean isIryoKikanNameShujiiCodeFlag,
-            boolean isIryoKikanNameShujiiNameFlag) {
-
+    public IkenshoShujiiIchiranMybatisParameter(RString shichosonCode, RString shichosonName, RString iryoKikanCodeFrom, boolean isIryoKikanCodeFromEmpty, RString iryoKikanCodeTo, boolean isIryoKikanCodeToEmpty, RString shujiiCodeFrom, boolean isShujiiCodeFromEmpty, RString shujiiCodeTo, boolean isShujiiCodeToEmpty, boolean isJyoukyouYukoFlag, boolean isJyoukyouMukoFlag, boolean isIryoKikanCodeShujiiCodeFlag, boolean isIryoKikanCodeShujiiNameFlag, boolean isIryoKikanNameShujiiCodeFlag, boolean isIryoKikanNameShujiiNameFlag) {
         this.shichosonCode = shichosonCode;
         this.shichosonName = shichosonName;
         this.iryoKikanCodeFrom = iryoKikanCodeFrom;
+        this.isIryoKikanCodeFromEmpty = isIryoKikanCodeFromEmpty;
         this.iryoKikanCodeTo = iryoKikanCodeTo;
+        this.isIryoKikanCodeToEmpty = isIryoKikanCodeToEmpty;
         this.shujiiCodeFrom = shujiiCodeFrom;
+        this.isShujiiCodeFromEmpty = isShujiiCodeFromEmpty;
         this.shujiiCodeTo = shujiiCodeTo;
+        this.isShujiiCodeToEmpty = isShujiiCodeToEmpty;
         this.isJyoukyouYukoFlag = isJyoukyouYukoFlag;
         this.isJyoukyouMukoFlag = isJyoukyouMukoFlag;
         this.isIryoKikanCodeShujiiCodeFlag = isIryoKikanCodeShujiiCodeFlag;
@@ -95,6 +99,11 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
         boolean isOutputSortIryoKikanCodeShujiiNameFlag = false;
         boolean isOutputSortIryoKikanNameShujiiCodeFlag = false;
         boolean isOutputSortIryoKikanNameShujiiNameFlag = false;
+        boolean isIryoKikanCodeFromFlag = false;
+        boolean isIryoKikanCodeToFlag = false;
+        boolean isShujiiCodeFromFlag = false;
+        boolean isShujiiCodeToFlag = false;
+
         if (new RString("1").equals(jyokyo)) {
             isYukoFlag = true;
         } else if (new RString("2").equals(jyokyo)) {
@@ -110,10 +119,23 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
         } else {
             isOutputSortIryoKikanNameShujiiNameFlag = true;
         }
+        
+        if (iryoKikanCodeFrom == null) {
+            isIryoKikanCodeFromFlag = true;
+        }
+        if (iryoKikanCodeTo == null) {
+            isIryoKikanCodeToFlag = true;
+        }
+          if (shujiiCodeFrom == null) {
+            isShujiiCodeFromFlag = true;
+        }
+        if (shujiiCodeTo == null) {
+            isShujiiCodeToFlag = true;
+        }
 
         return new IkenshoShujiiIchiranMybatisParameter(shichosonCode,
-                shichosonName, iryoKikanCodeFrom, iryoKikanCodeTo,
-                shujiiCodeFrom, shujiiCodeTo, isYukoFlag, isMokuFlag,
+                shichosonName, iryoKikanCodeFrom, isIryoKikanCodeFromFlag, iryoKikanCodeTo,
+                isIryoKikanCodeToFlag, shujiiCodeFrom, isShujiiCodeFromFlag, shujiiCodeTo, isShujiiCodeToFlag, isYukoFlag, isMokuFlag,
                 isOutPutSortIryoKikanCodeShujiiCodeFlag, isOutputSortIryoKikanCodeShujiiNameFlag,
                 isOutputSortIryoKikanNameShujiiCodeFlag, isOutputSortIryoKikanNameShujiiNameFlag);
     }

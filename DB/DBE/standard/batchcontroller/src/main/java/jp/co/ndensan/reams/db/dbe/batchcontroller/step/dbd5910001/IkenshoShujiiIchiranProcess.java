@@ -15,12 +15,10 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.IkenshoShujiiIchiran.Ik
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ShujiiIryokikanShujiiIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -31,8 +29,6 @@ public class IkenshoShujiiIchiranProcess extends BatchProcessBase<IkenshoShujiiI
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.IkenshoShujiiIchiran.IkenshoShujiiIchiranRelateMapper.getIkenshoShujiiIchiranRelateEntity");
-
-    private static final ReportId ID = new ReportId("DBD5910001");
 
     List<IkenshoShujiiIchiranBodyItem> bodyItemList = new ArrayList<>();
 
@@ -49,8 +45,6 @@ public class IkenshoShujiiIchiranProcess extends BatchProcessBase<IkenshoShujiiI
 
     @Override
     protected IBatchReader createReader() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value()).create();
-        reportSourceWriter = new ReportSourceWriter(batchReportWriter);
         return new BatchDbReader(MYBATIS_SELECT_ID,
                 IkenshoShujiiIchiranProcessParameter.to主治医一覧表作成MybatisParameter(parameterClass.getValue()));
     }

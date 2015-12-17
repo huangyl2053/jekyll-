@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.IkenshoShujiiIchiran;
 
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;

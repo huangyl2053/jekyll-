@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 合議体情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.IkenshoShujiiIchiran.IkenshoShujiiIchiranRelateMapper">
+
+<!-- IkenshoShujiiIchiranRelateEntityの項目にマッピングします。-->
+    <resultMap id="resultMap_getIkenshoShujiiIchiranRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.IkenshoShujiiIchiran.IkenshoShujiiIchiranRelateEntity" autoMapping="true">
+        <result property="iryokikanCode" column="iryokikanCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.IryoKikanCodeTypeHandler" />
+        <result property="iryoKikanMeishoKana" column="iryoKikanMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="iryoKikanMeisho" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="daihyoshaNameKana" column="daihyoshaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="daihyoshaName" column="daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="telNo" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+        <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="iryokikanJokyoFlag" column="iryokikanJokyoFlag" />
+        <!--<result property="shujiiCode" column="shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShujiiCodeTypeHandler" />-->
+        <result property="shujiiKana" column="shujiiKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <result property="shujiiName" column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="seibetsu" column="seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="shinryokaName" column="shinryokaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiJokyoFlag" column="shujiiJokyoFlag" />
+    </resultMap>
+    <select id="getIkenshoShujiiIchiranRelateEntity"
+              resultMap="resultMap_getIkenshoShujiiIchiranRelateEntity" 
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ikenshoshujiiichiran.IkenshoShujiiIchiranMybatisParameter"
+              fetchSize="500">
+        SELECT 
+            DbT5911ShujiiIryoKikanJoho."iryokikanCode",
+            DbT5911ShujiiIryoKikanJoho."iryoKikanMeishoKana",
+            DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho",
+            DbT5911ShujiiIryoKikanJoho."daihyoshaNameKana",
+            DbT5911ShujiiIryoKikanJoho."daihyoshaName",
+            DbT5911ShujiiIryoKikanJoho."yubinNo",
+            DbT5911ShujiiIryoKikanJoho."telNo",
+            DbT5911ShujiiIryoKikanJoho."jusho",
+            DbT5911ShujiiIryoKikanJoho."jokyoFlag"  AS iryokikanJokyoFlag,
+            --DbT5912ShujiiJoho."shujiiCode",
+            DbT5912ShujiiJoho."shujiiKana",
+            DbT5912ShujiiJoho."shujiiName",
+            DbT5912ShujiiJoho."seibetsu",
+            DbT5912ShujiiJoho."shinryokaName",
+            DbT5912ShujiiJoho."jokyoFlag"  AS shujiiJokyoFlag
+        FROM 
+            rgdb."DbT5911ShujiiIryoKikanJoho"   AS DbT5911ShujiiIryoKikanJoho,
+            rgdb."DbT5912ShujiiJoho"            AS DbT5912ShujiiJoho
+        WHERE
+                DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" = DbT5912ShujiiJoho."shujiiIryokikanCode"
+            AND DbT5911ShujiiIryoKikanJoho."shichosonCode" = DbT5912ShujiiJoho."shichosonCode" 
+            AND DbT5912ShujiiJoho."shichosonCode" = #{shichosonCode}
+            <if test="!isIryoKikanCodeFromEmpty">
+                AND DbT5912ShujiiJoho."shujiiIryokikanCode" <![CDATA[>=]]> #{iryoKikanCodeFrom}
+            </if>
+            <if test="!isIryoKikanCodeToEmpty">
+                AND DbT5912ShujiiJoho."shujiiIryokikanCode" <![CDATA[<=]]> #{iryoKikanCodeTo}
+            </if>
+            <if test="!isShujiiCodeFromEmpty">
+                AND DbT5912ShujiiJoho."shujiiCode" <![CDATA[>=]]> #{shujiiCodeFrom}
+            </if>
+            <if test="!isShujiiCodeToEmpty">
+                AND DbT5912ShujiiJoho."shujiiCode" <![CDATA[<=]]> #{shujiiCodeTo}
+            </if>
+            <if test="isJyoukyouYukoFlag">
+                AND DbT5911ShujiiIryoKikanJoho."jokyoFlag" = true
+                AND DbT5912ShujiiJoho."jokyoFlag" = true
+            </if>
+            <if test="isJyoukyouMukoFlag">
+                AND DbT5911ShujiiIryoKikanJoho."jokyoFlag" = false
+                AND DbT5912ShujiiJoho."jokyoFlag" = false
+            </if>
+            <if test="isIryoKikanCodeShujiiCodeFlag">
+                ORDER BY
+                    DbT5911ShujiiIryoKikanJoho."iryokikanCode",
+                    DbT5912ShujiiJoho."shujiiCode"
+            </if>
+            <if test="isIryoKikanCodeShujiiNameFlag">
+                ORDER BY
+                    DbT5911ShujiiIryoKikanJoho."iryokikanCode",
+                    DbT5912ShujiiJoho."shujiiName"
+            </if>
+            <if test="isIryoKikanNameShujiiCodeFlag">
+                ORDER BY
+                    DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho",
+                    DbT5912ShujiiJoho."shujiiCode"
+            </if>
+            <if test="isIryoKikanNameShujiiNameFlag">
+                ORDER BY
+                    DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho",
+                    DbT5912ShujiiJoho."shujiiName"
+            </if>
+    </select>
+</mapper>
