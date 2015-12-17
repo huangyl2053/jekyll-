@@ -38,7 +38,7 @@ public class ShisetsuJohoHandler {
     }
 
     /**
-     * 施設情報に初期化を設定する
+     * 施設情報に初期化を設定する。
      *
      */
     public void load() {

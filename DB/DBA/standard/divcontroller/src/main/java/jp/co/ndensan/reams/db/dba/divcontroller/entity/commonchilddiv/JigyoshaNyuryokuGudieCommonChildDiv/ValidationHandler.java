@@ -5,9 +5,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- * 事業者・施設選択入力ガイドDivのHandlerクラスです。
+ * 事業者・施設選択入力ガイドのチェッククラスです。
  */
-public class validationHandler {
+public class ValidationHandler {
 
     public static ValidationMessageControlPairs 終了日が開始日以前のチェック() {
 
