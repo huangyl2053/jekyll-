@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
  */
 public enum DbbWarningMessages implements IMessageGettable {
 
-    特徴期割額端数不整合(1, "特別徴収%1は、%2円未満が0ではありません。必要に応じて見直してください。"),
-    普徴期割額端数不整合(2, "普通徴収%1は、%2円未満が0ではありません。必要に応じて見直してください。");
+    特徴期割額端数不整合(1, "特別徴収?は、?円未満が0ではありません。必要に応じて見直してください。"),
+    普徴期割額端数不整合(2, "普通徴収?は、?円未満が0ではありません。必要に応じて見直してください。");
 
     private final Message message;
 
