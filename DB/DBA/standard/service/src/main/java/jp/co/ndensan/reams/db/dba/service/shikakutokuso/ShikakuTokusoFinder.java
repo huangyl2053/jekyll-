@@ -97,13 +97,14 @@ public class ShikakuTokusoFinder {
         List<UzT0007CodeEntity> codeList = CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格, CHIKU_CODE_SHUBETSU);
         List<ShikakuTokuSoa> serviceShuruiList = new ArrayList<>();
         if (codeList == null || codeList.isEmpty()) {
-            return SearchResult.of(Collections.<ShikakuTokuso>emptyList(), 0, false);
+            return SearchResult.of(Collections.<ShikakuTokuSoa>emptyList(), 0, false);
         }
+        serviceShuruiList.add(new ShikakuTokuSoa());
         for (UzT0007CodeEntity entity : codeList) {
-            ShikakuTokuSoa List = new ShikakuTokuSoa();
-            List.setCode(entity.getコード());
-            List.setCodeRyakusho(entity.getコード略称());
-            serviceShuruiList.add(List);
+            ShikakuTokuSoa shikakuTokuSoa = new ShikakuTokuSoa();
+            shikakuTokuSoa.setCode(entity.getコード());
+            shikakuTokuSoa.setCodeRyakusho(entity.getコード略称());
+            serviceShuruiList.add(shikakuTokuSoa);
         }
         return SearchResult.of(serviceShuruiList, 0, false);
     }
@@ -119,8 +120,9 @@ public class ShikakuTokusoFinder {
         List<UzT0007CodeEntity> codeList = CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格, CHIKU_CODE_SHUBETSu);
         List<ShikakuTokuSoa> serviceShuruiList = new ArrayList<>();
         if (codeList.isEmpty()) {
-            return SearchResult.of(Collections.<ShikakuTokuso>emptyList(), 0, false);
+            return SearchResult.of(Collections.<ShikakuTokuSoa>emptyList(), 0, false);
         }
+        serviceShuruiList.add(new ShikakuTokuSoa());
         for (UzT0007CodeEntity entity : codeList) {
             ShikakuTokuSoa List = new ShikakuTokuSoa();
             List.setCode(entity.getコード());
