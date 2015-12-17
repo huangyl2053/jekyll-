@@ -189,7 +189,7 @@ public class ShisetsuJohoHandler {
             div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             ShisetsuJohoInputGuideFinder shisetsuJoho = new ShisetsuJohoInputGuideFinder();
             SearchResult<KaigoJogaiTokureiTaishoShisetsuInputGuide> kaigoJogaiTokureiTaishoShisetsu = shisetsuJoho.
-                    getKaigoJogaiTokureiTaishoShisetsuInputGuide(ShisetsuType.住所地特例対象施設.getCode(), new JigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()), FlexibleDate.getNowDate());
+                    getKaigoJogaiTokureiTaishoShisetsuInputGuide(ShisetsuType.適用除外施設.getCode(), new JigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()), FlexibleDate.getNowDate());
             if (!kaigoJogaiTokureiTaishoShisetsu.records().isEmpty()) {
 
                 div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoJogaiTokureiTaishoShisetsu.records().get(0).get事業者名称().value());
