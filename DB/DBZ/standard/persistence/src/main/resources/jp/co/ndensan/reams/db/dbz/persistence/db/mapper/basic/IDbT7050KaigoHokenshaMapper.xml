@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7050KaigoHokenshaマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7050KaigoHokenshaMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7050KaigoHokensha">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7050KaigoHokenshaMapper.allColumns_DbT7050KaigoHokensha" />
+     FROM
+         rgdb."DbT7050KaigoHokensha"
+     WHERE
+         rgdb."DbT7050KaigoHokensha"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7050KaigoHokensha">
+         "DbT7050KaigoHokensha"."koikiHokenshaShichosonCode" as "dbT7050KaigoHokensha_koikiHokenshaShichosonCode",
+         "DbT7050KaigoHokensha"."insertDantaiCd" as "dbT7050KaigoHokensha_insertDantaiCd",
+         "DbT7050KaigoHokensha"."insertTimestamp" as "dbT7050KaigoHokensha_insertTimestamp",
+         "DbT7050KaigoHokensha"."insertReamsLoginId" as "dbT7050KaigoHokensha_insertReamsLoginId",
+         "DbT7050KaigoHokensha"."insertContextId" as "dbT7050KaigoHokensha_insertContextId",
+         "DbT7050KaigoHokensha"."isDeleted" as "dbT7050KaigoHokensha_isDeleted",
+         "DbT7050KaigoHokensha"."updateCount" as "dbT7050KaigoHokensha_updateCount",
+         "DbT7050KaigoHokensha"."lastUpdateTimestamp" as "dbT7050KaigoHokensha_lastUpdateTimestamp",
+         "DbT7050KaigoHokensha"."lastUpdateReamsLoginId" as "dbT7050KaigoHokensha_lastUpdateReamsLoginId",
+         "DbT7050KaigoHokensha"."koikiHokenshaNo" as "dbT7050KaigoHokensha_koikiHokenshaNo"
+    </sql>
+
+
+    <!--テーブルDbT7050KaigoHokenshaの項目をDbT7050KaigoHokenshaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7050KaigoHokenshaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7050KaigoHokenshaEntity" autoMapping="true">
+        <id property="koikiHokenshaShichosonCode" column="dbT7050KaigoHokensha_koikiHokenshaShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7050KaigoHokensha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7050KaigoHokensha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7050KaigoHokensha_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7050KaigoHokensha_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7050KaigoHokensha_isDeleted" />
+        <result property="updateCount" column="dbT7050KaigoHokensha_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7050KaigoHokensha_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7050KaigoHokensha_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koikiHokenshaNo" column="dbT7050KaigoHokensha_koikiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+    </resultMap>
+    
+        <select id="getEntity" resultMap="ResultMap_DbT7050KaigoHokenshaEntity">
+	SELECT
+	<include refid="allColumns_DbT7050KaigoHokensha"/>
+	FROM
+	rgdb."DbT7050KaigoHokensha"
+	</select>
+
+</mapper>

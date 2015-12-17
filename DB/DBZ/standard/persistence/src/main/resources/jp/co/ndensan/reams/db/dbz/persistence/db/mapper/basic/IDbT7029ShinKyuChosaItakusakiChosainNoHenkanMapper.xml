@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7029ShinKyuChosaItakusakiChosainNoHenkanマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7029ShinKyuChosaItakusakiChosainNoHenkanMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7029ShinKyuChosaItakusakiChosainNoHenkan">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7029ShinKyuChosaItakusakiChosainNoHenkanMapper.allColumns_DbT7029ShinKyuChosaItakusakiChosainNoHenkan" />
+     FROM
+         rgdb."DbT7029ShinKyuChosaItakusakiChosainNoHenkan"
+     WHERE
+         rgdb."DbT7029ShinKyuChosaItakusakiChosainNoHenkan"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7029ShinKyuChosaItakusakiChosainNoHenkan">
+         "DbT7029ShinKyuChosaItakusakiChosainNoHenkan"."shichosonCode" as "dbT7029ShinKyuChosaItakusakiChosainNoHenkan_shichosonCode",
+         "DbT7029ShinKyuChosaItakusakiChosainNoHenkan"."kyuChosaItakusakiNo" as "dbT7029ShinKyuChosaItakusakiChosainNoHenkan_kyuChosaItakusakiNo",
+         "DbT7029ShinKyuChosaItakusakiChosainNoHenkan"."kyuChosainNo" as "dbT7029ShinKyuChosaItakusakiChosainNoHenkan_kyuChosainNo",
+         "DbT7029ShinKyuChosaItakusakiChosainNoHenkan"."insertDantaiCd" as "dbT7029ShinKyuChosaItakusakiChosainNoHenkan_insertDantaiCd",
+         "DbT7029ShinKyuChosaItakusakiChosainNoHenkan"."insertTimestamp" as "dbT7029ShinKyuChosaItakusakiChosainNoHenkan_insertTimestamp",
+         "DbT7029ShinKyuChosaItakusakiChosainNoHenkan"."insertReamsLoginId" as "dbT7029ShinKyuChosaItakusakiChosainNoHenkan_insertReamsLoginId",
+         "DbT7029ShinKyuChosaItakusakiChosainNoHenkan"."insertContextId" as "dbT7029ShinKyuChosaItakusakiChosainNoHenkan_insertContextId",
+         "DbT7029ShinKyuChosaItakusakiChosainNoHenkan"."isDeleted" as "dbT7029ShinKyuChosaItakusakiChosainNoHenkan_isDeleted",
+         "DbT7029ShinKyuChosaItakusakiChosainNoHenkan"."updateCount" as "dbT7029ShinKyuChosaItakusakiChosainNoHenkan_updateCount",
+         "DbT7029ShinKyuChosaItakusakiChosainNoHenkan"."lastUpdateTimestamp" as "dbT7029ShinKyuChosaItakusakiChosainNoHenkan_lastUpdateTimestamp",
+         "DbT7029ShinKyuChosaItakusakiChosainNoHenkan"."lastUpdateReamsLoginId" as "dbT7029ShinKyuChosaItakusakiChosainNoHenkan_lastUpdateReamsLoginId",
+         "DbT7029ShinKyuChosaItakusakiChosainNoHenkan"."shinChosaItakusakiNo" as "dbT7029ShinKyuChosaItakusakiChosainNoHenkan_shinChosaItakusakiNo",
+         "DbT7029ShinKyuChosaItakusakiChosainNoHenkan"."shinChosainNo" as "dbT7029ShinKyuChosaItakusakiChosainNoHenkan_shinChosainNo",
+         "DbT7029ShinKyuChosaItakusakiChosainNoHenkan"."shichosonCode2" as "dbT7029ShinKyuChosaItakusakiChosainNoHenkan_shichosonCode2",
+         "DbT7029ShinKyuChosaItakusakiChosainNoHenkan"."kyuChosaItakusakiNo2" as "dbT7029ShinKyuChosaItakusakiChosainNoHenkan_kyuChosaItakusakiNo2",
+         "DbT7029ShinKyuChosaItakusakiChosainNoHenkan"."kyuChosainNo2" as "dbT7029ShinKyuChosaItakusakiChosainNoHenkan_kyuChosainNo2"
+    </sql>
+
+
+    <!--テーブルDbT7029ShinKyuChosaItakusakiChosainNoHenkanの項目をDbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntity" autoMapping="true">
+        <id property="shichosonCode" column="dbT7029ShinKyuChosaItakusakiChosainNoHenkan_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="kyuChosaItakusakiNo" column="dbT7029ShinKyuChosaItakusakiChosainNoHenkan_kyuChosaItakusakiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="kyuChosainNo" column="dbT7029ShinKyuChosaItakusakiChosainNoHenkan_kyuChosainNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7029ShinKyuChosaItakusakiChosainNoHenkan_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7029ShinKyuChosaItakusakiChosainNoHenkan_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7029ShinKyuChosaItakusakiChosainNoHenkan_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7029ShinKyuChosaItakusakiChosainNoHenkan_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7029ShinKyuChosaItakusakiChosainNoHenkan_isDeleted" />
+        <result property="updateCount" column="dbT7029ShinKyuChosaItakusakiChosainNoHenkan_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7029ShinKyuChosaItakusakiChosainNoHenkan_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7029ShinKyuChosaItakusakiChosainNoHenkan_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinChosaItakusakiNo" column="dbT7029ShinKyuChosaItakusakiChosainNoHenkan_shinChosaItakusakiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinChosainNo" column="dbT7029ShinKyuChosaItakusakiChosainNoHenkan_shinChosainNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode2" column="dbT7029ShinKyuChosaItakusakiChosainNoHenkan_shichosonCode2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="kyuChosaItakusakiNo2" column="dbT7029ShinKyuChosaItakusakiChosainNoHenkan_kyuChosaItakusakiNo2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyuChosainNo2" column="dbT7029ShinKyuChosaItakusakiChosainNoHenkan_kyuChosainNo2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+<select id="getEntity" resultMap="ResultMap_DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntity">
+    SELECT
+    <include refid="allColumns_DbT7029ShinKyuChosaItakusakiChosainNoHenkan"/>
+    FROM
+    rgdb."DbT7029ShinKyuChosaItakusakiChosainNoHenkan"
+</select>
+</mapper>

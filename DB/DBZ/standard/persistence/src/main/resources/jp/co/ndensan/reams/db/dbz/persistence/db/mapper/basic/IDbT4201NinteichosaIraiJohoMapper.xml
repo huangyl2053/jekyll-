@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4201NinteichosaIraiJohoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4201NinteichosaIraiJohoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4201NinteichosaIraiJoho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4201NinteichosaIraiJohoMapper.allColumns_DbT4201NinteichosaIraiJoho" />
+     FROM
+         rgdb."DbT4201NinteichosaIraiJoho"
+     WHERE
+         rgdb."DbT4201NinteichosaIraiJoho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4201NinteichosaIraiJoho">
+         "DbT4201NinteichosaIraiJoho"."shinseishoKanriNo" as "dbT4201NinteichosaIraiJoho_shinseishoKanriNo",
+         "DbT4201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" as "dbT4201NinteichosaIraiJoho_ninteichosaIraiRirekiNo",
+         "DbT4201NinteichosaIraiJoho"."insertDantaiCd" as "dbT4201NinteichosaIraiJoho_insertDantaiCd",
+         "DbT4201NinteichosaIraiJoho"."insertTimestamp" as "dbT4201NinteichosaIraiJoho_insertTimestamp",
+         "DbT4201NinteichosaIraiJoho"."insertReamsLoginId" as "dbT4201NinteichosaIraiJoho_insertReamsLoginId",
+         "DbT4201NinteichosaIraiJoho"."insertContextId" as "dbT4201NinteichosaIraiJoho_insertContextId",
+         "DbT4201NinteichosaIraiJoho"."isDeleted" as "dbT4201NinteichosaIraiJoho_isDeleted",
+         "DbT4201NinteichosaIraiJoho"."updateCount" as "dbT4201NinteichosaIraiJoho_updateCount",
+         "DbT4201NinteichosaIraiJoho"."lastUpdateTimestamp" as "dbT4201NinteichosaIraiJoho_lastUpdateTimestamp",
+         "DbT4201NinteichosaIraiJoho"."lastUpdateReamsLoginId" as "dbT4201NinteichosaIraiJoho_lastUpdateReamsLoginId",
+         "DbT4201NinteichosaIraiJoho"."koroshoIfShikibetsuCode" as "dbT4201NinteichosaIraiJoho_koroshoIfShikibetsuCode",
+         "DbT4201NinteichosaIraiJoho"."ninteichosaItakusakiCode" as "dbT4201NinteichosaIraiJoho_ninteichosaItakusakiCode",
+         "DbT4201NinteichosaIraiJoho"."ninteiChosainCode" as "dbT4201NinteichosaIraiJoho_ninteiChosainCode",
+         "DbT4201NinteichosaIraiJoho"."ninteichosaIraiKubunCode" as "dbT4201NinteichosaIraiJoho_ninteichosaIraiKubunCode",
+         "DbT4201NinteichosaIraiJoho"."ninteichosaIraiKaisu" as "dbT4201NinteichosaIraiJoho_ninteichosaIraiKaisu",
+         "DbT4201NinteichosaIraiJoho"."ninteichosaIraiYMD" as "dbT4201NinteichosaIraiJoho_ninteichosaIraiYMD",
+         "DbT4201NinteichosaIraiJoho"."ninteichosaKigenYMD" as "dbT4201NinteichosaIraiJoho_ninteichosaKigenYMD",
+         "DbT4201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" as "dbT4201NinteichosaIraiJoho_iraishoShutsuryokuYMD",
+         "DbT4201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" as "dbT4201NinteichosaIraiJoho_chosahyoTouShutsuryokuYMD",
+         "DbT4201NinteichosaIraiJoho"."mobileDataShutsuryokuZumiFlag" as "dbT4201NinteichosaIraiJoho_mobileDataShutsuryokuZumiFlag",
+         "DbT4201NinteichosaIraiJoho"."jizenChosaFlag" as "dbT4201NinteichosaIraiJoho_jizenChosaFlag",
+         "DbT4201NinteichosaIraiJoho"."ninteichosaTokusokuYMD" as "dbT4201NinteichosaIraiJoho_ninteichosaTokusokuYMD",
+         "DbT4201NinteichosaIraiJoho"."ninteichosaTokusokuHoho" as "dbT4201NinteichosaIraiJoho_ninteichosaTokusokuHoho",
+         "DbT4201NinteichosaIraiJoho"."ninteichosaTokusokuKaisu" as "dbT4201NinteichosaIraiJoho_ninteichosaTokusokuKaisu",
+         "DbT4201NinteichosaIraiJoho"."ninteichosaTokusokuMemo" as "dbT4201NinteichosaIraiJoho_ninteichosaTokusokuMemo",
+         "DbT4201NinteichosaIraiJoho"."logicalDeletedFlag" as "dbT4201NinteichosaIraiJoho_logicalDeletedFlag"
+    </sql>
+
+
+    <!--テーブルDbT4201NinteichosaIraiJohoの項目をDbT4201NinteichosaIraiJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4201NinteichosaIraiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4201NinteichosaIraiJohoEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT4201NinteichosaIraiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="ninteichosaIraiRirekiNo" column="dbT4201NinteichosaIraiJoho_ninteichosaIraiRirekiNo" />
+        <result property="insertDantaiCd" column="dbT4201NinteichosaIraiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4201NinteichosaIraiJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4201NinteichosaIraiJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4201NinteichosaIraiJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4201NinteichosaIraiJoho_isDeleted" />
+        <result property="updateCount" column="dbT4201NinteichosaIraiJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4201NinteichosaIraiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4201NinteichosaIraiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koroshoIfShikibetsuCode" column="dbT4201NinteichosaIraiJoho_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <!--<result property="ninteichosaItakusakiCode" column="dbT4201NinteichosaIraiJoho_ninteichosaItakusakiCode" />-->
+        <result property="ninteiChosainCode" column="dbT4201NinteichosaIraiJoho_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteichosaIraiKubunCode" column="dbT4201NinteichosaIraiJoho_ninteichosaIraiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <!--<result property="ninteichosaIraiKaisu" column="dbT4201NinteichosaIraiJoho_ninteichosaIraiKaisu" />-->
+        <result property="ninteichosaIraiYMD" column="dbT4201NinteichosaIraiJoho_ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteichosaKigenYMD" column="dbT4201NinteichosaIraiJoho_ninteichosaKigenYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="iraishoShutsuryokuYMD" column="dbT4201NinteichosaIraiJoho_iraishoShutsuryokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="chosahyoTouShutsuryokuYMD" column="dbT4201NinteichosaIraiJoho_chosahyoTouShutsuryokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="mobileDataShutsuryokuZumiFlag" column="dbT4201NinteichosaIraiJoho_mobileDataShutsuryokuZumiFlag" />
+        <result property="jizenChosaFlag" column="dbT4201NinteichosaIraiJoho_jizenChosaFlag" />
+        <result property="ninteichosaTokusokuYMD" column="dbT4201NinteichosaIraiJoho_ninteichosaTokusokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteichosaTokusokuHoho" column="dbT4201NinteichosaIraiJoho_ninteichosaTokusokuHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <!--<result property="ninteichosaTokusokuKaisu" column="dbT4201NinteichosaIraiJoho_ninteichosaTokusokuKaisu" />-->
+        <result property="ninteichosaTokusokuMemo" column="dbT4201NinteichosaIraiJoho_ninteichosaTokusokuMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="logicalDeletedFlag" column="dbT4201NinteichosaIraiJoho_logicalDeletedFlag" />
+    </resultMap>
+    
+        <select id="getEntity" resultMap="ResultMap_DbT4201NinteichosaIraiJohoEntity">
+<!--	SELECT
+	<include refid="allColumns_DbT4201NinteichosaIraiJoho"/>
+	FROM
+	rgdb."DbT4201NinteichosaIraiJoho"-->
+	</select>
+
+</mapper>

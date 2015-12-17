@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5221NinteichosaScheduleマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5221NinteichosaScheduleMapper">
+
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5221NinteichosaSchedule">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5221NinteichosaScheduleMapper.allColumns_DbT5221NinteichosaSchedule" />
+        FROM
+        rgdb."DbT5221NinteichosaSchedule"
+        WHERE
+        rgdb."DbT5221NinteichosaSchedule"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5221NinteichosaSchedule">
+        "DbT5221NinteichosaSchedule"."ninteiChosaYoteiYMD" as "dbT5221NinteichosaSchedule_ninteiChosaYoteiYMD",
+        "DbT5221NinteichosaSchedule"."ninteiChosaYoteiKaishiTime" as "dbT5221NinteichosaSchedule_ninteiChosaYoteiKaishiTime",
+        "DbT5221NinteichosaSchedule"."ninteiChosaYoteiShuryoTime" as "dbT5221NinteichosaSchedule_ninteiChosaYoteiShuryoTime",
+        "DbT5221NinteichosaSchedule"."ninteiChosaJikanWaku" as "dbT5221NinteichosaSchedule_ninteiChosaJikanWaku",
+        "DbT5221NinteichosaSchedule"."chosaChikuCode" as "dbT5221NinteichosaSchedule_chosaChikuCode",
+        "DbT5221NinteichosaSchedule"."ninteichosaItakusakiCode" as "dbT5221NinteichosaSchedule_ninteichosaItakusakiCode",
+        "DbT5221NinteichosaSchedule"."ninteiChosainNo" as "dbT5221NinteichosaSchedule_ninteiChosainNo",
+        "DbT5221NinteichosaSchedule"."shichosonCode" as "dbT5221NinteichosaSchedule_shichosonCode",
+        "DbT5221NinteichosaSchedule"."insertDantaiCd" as "dbT5221NinteichosaSchedule_insertDantaiCd",
+        "DbT5221NinteichosaSchedule"."insertTimestamp" as "dbT5221NinteichosaSchedule_insertTimestamp",
+        "DbT5221NinteichosaSchedule"."insertReamsLoginId" as "dbT5221NinteichosaSchedule_insertReamsLoginId",
+        "DbT5221NinteichosaSchedule"."insertContextId" as "dbT5221NinteichosaSchedule_insertContextId",
+        "DbT5221NinteichosaSchedule"."isDeleted" as "dbT5221NinteichosaSchedule_isDeleted",
+        "DbT5221NinteichosaSchedule"."updateCount" as "dbT5221NinteichosaSchedule_updateCount",
+        "DbT5221NinteichosaSchedule"."lastUpdateTimestamp" as "dbT5221NinteichosaSchedule_lastUpdateTimestamp",
+        "DbT5221NinteichosaSchedule"."lastUpdateReamsLoginId" as "dbT5221NinteichosaSchedule_lastUpdateReamsLoginId",
+        "DbT5221NinteichosaSchedule"."shinseishoKanriNo" as "dbT5221NinteichosaSchedule_shinseishoKanriNo",
+        "DbT5221NinteichosaSchedule"."yoyakuJokyo" as "dbT5221NinteichosaSchedule_yoyakuJokyo",
+        "DbT5221NinteichosaSchedule"."yoyakuKaoFlag" as "dbT5221NinteichosaSchedule_yoyakuKaoFlag",
+        "DbT5221NinteichosaSchedule"."biko" as "dbT5221NinteichosaSchedule_biko",
+        "DbT5221NinteichosaSchedule"."basho" as "dbT5221NinteichosaSchedule_basho",
+        "DbT5221NinteichosaSchedule"."chushajo" as "dbT5221NinteichosaSchedule_chushajo",
+        "DbT5221NinteichosaSchedule"."tachiainin1" as "dbT5221NinteichosaSchedule_tachiainin1",
+        "DbT5221NinteichosaSchedule"."renrakusaki1" as "dbT5221NinteichosaSchedule_renrakusaki1",
+        "DbT5221NinteichosaSchedule"."tachiainin2" as "dbT5221NinteichosaSchedule_tachiainin2",
+        "DbT5221NinteichosaSchedule"."renrakusaki2" as "dbT5221NinteichosaSchedule_renrakusaki2",
+        "DbT5221NinteichosaSchedule"."taishoshaMemo" as "dbT5221NinteichosaSchedule_taishoshaMemo"
+    </sql>
+
+
+    <!--テーブルDbT5221NinteichosaScheduleの項目をDbT5221NinteichosaScheduleEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5221NinteichosaScheduleEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity" autoMapping="true">
+        <id property="ninteiChosaYoteiYMD" column="dbT5221NinteichosaSchedule_ninteiChosaYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="ninteiChosaYoteiKaishiTime" column="dbT5221NinteichosaSchedule_ninteiChosaYoteiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="ninteiChosaYoteiShuryoTime" column="dbT5221NinteichosaSchedule_ninteiChosaYoteiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="ninteiChosaJikanWaku" column="dbT5221NinteichosaSchedule_ninteiChosaJikanWaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <id property="chosaChikuCode" column="dbT5221NinteichosaSchedule_chosaChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <id property="ninteichosaItakusakiCode" column="dbT5221NinteichosaSchedule_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="ninteiChosainNo" column="dbT5221NinteichosaSchedule_ninteiChosainNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shichosonCode" column="dbT5221NinteichosaSchedule_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT5221NinteichosaSchedule_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5221NinteichosaSchedule_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5221NinteichosaSchedule_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5221NinteichosaSchedule_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5221NinteichosaSchedule_isDeleted" />
+        <result property="updateCount" column="dbT5221NinteichosaSchedule_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5221NinteichosaSchedule_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5221NinteichosaSchedule_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseishoKanriNo" column="dbT5221NinteichosaSchedule_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="yoyakuJokyo" column="dbT5221NinteichosaSchedule_yoyakuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="yoyakuKaoFlag" column="dbT5221NinteichosaSchedule_yoyakuKaoFlag" />
+        <result property="biko" column="dbT5221NinteichosaSchedule_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="basho" column="dbT5221NinteichosaSchedule_basho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chushajo" column="dbT5221NinteichosaSchedule_chushajo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tachiainin1" column="dbT5221NinteichosaSchedule_tachiainin1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="renrakusaki1" column="dbT5221NinteichosaSchedule_renrakusaki1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="tachiainin2" column="dbT5221NinteichosaSchedule_tachiainin2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="renrakusaki2" column="dbT5221NinteichosaSchedule_renrakusaki2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="taishoshaMemo" column="dbT5221NinteichosaSchedule_taishoshaMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select id="getEntity" resultMap="ResultMap_DbT5221NinteichosaScheduleEntity">
+<!--        SELECT
+        <include refid="allColumns_DbT5221NinteichosaSchedule" />
+        FROM
+        rgdb."DbT5221NinteichosaSchedule"-->
+    </select>
+</mapper>

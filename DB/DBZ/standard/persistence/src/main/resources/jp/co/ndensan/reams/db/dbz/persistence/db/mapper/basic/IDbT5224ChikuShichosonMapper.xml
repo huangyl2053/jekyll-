@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5224ChikuShichosonマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5224ChikuShichosonMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5224ChikuShichoson">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5224ChikuShichosonMapper.allColumns_DbT5224ChikuShichoson" />
+     FROM
+         rgdb."DbT5224ChikuShichoson"
+     WHERE
+         rgdb."DbT5224ChikuShichoson"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5224ChikuShichoson">
+         "DbT5224ChikuShichoson"."chosaChikuCode" as "dbT5224ChikuShichoson_chosaChikuCode",
+         "DbT5224ChikuShichoson"."shichosonCode" as "dbT5224ChikuShichoson_shichosonCode",
+         "DbT5224ChikuShichoson"."insertDantaiCd" as "dbT5224ChikuShichoson_insertDantaiCd",
+         "DbT5224ChikuShichoson"."insertTimestamp" as "dbT5224ChikuShichoson_insertTimestamp",
+         "DbT5224ChikuShichoson"."insertReamsLoginId" as "dbT5224ChikuShichoson_insertReamsLoginId",
+         "DbT5224ChikuShichoson"."insertContextId" as "dbT5224ChikuShichoson_insertContextId",
+         "DbT5224ChikuShichoson"."isDeleted" as "dbT5224ChikuShichoson_isDeleted",
+         "DbT5224ChikuShichoson"."updateCount" as "dbT5224ChikuShichoson_updateCount",
+         "DbT5224ChikuShichoson"."lastUpdateTimestamp" as "dbT5224ChikuShichoson_lastUpdateTimestamp",
+         "DbT5224ChikuShichoson"."lastUpdateReamsLoginId" as "dbT5224ChikuShichoson_lastUpdateReamsLoginId",
+         "DbT5224ChikuShichoson"."yusenNo" as "dbT5224ChikuShichoson_yusenNo",
+         "DbT5224ChikuShichoson"."jiChikuFlag" as "dbT5224ChikuShichoson_jiChikuFlag"
+    </sql>
+
+
+    <!--テーブルDbT5224ChikuShichosonの項目をDbT5224ChikuShichosonEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5224ChikuShichosonEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity" autoMapping="true">
+        <id property="chosaChikuCode" column="dbT5224ChikuShichoson_chosaChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <id property="shichosonCode" column="dbT5224ChikuShichoson_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT5224ChikuShichoson_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5224ChikuShichoson_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5224ChikuShichoson_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5224ChikuShichoson_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5224ChikuShichoson_isDeleted" />
+        <result property="updateCount" column="dbT5224ChikuShichoson_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5224ChikuShichoson_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5224ChikuShichoson_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yusenNo" column="dbT5224ChikuShichoson_yusenNo" />
+        <result property="jiChikuFlag" column="dbT5224ChikuShichoson_jiChikuFlag" />
+    </resultMap>
+<select id="getEntity" resultMap="ResultMap_DbT5224ChikuShichosonEntity">
+    SELECT
+    <include refid="allColumns_DbT5224ChikuShichoson" />
+    FROM
+    rgdb."DbT5224ChikuShichoson"
+</select>
+</mapper>

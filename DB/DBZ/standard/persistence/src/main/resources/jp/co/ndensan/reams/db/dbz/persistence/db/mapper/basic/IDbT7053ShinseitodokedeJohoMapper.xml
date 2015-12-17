@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7053ShinseitodokedeJohoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7053ShinseitodokedeJohoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7053ShinseitodokedeJoho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7053ShinseitodokedeJohoMapper.allColumns_DbT7053ShinseitodokedeJoho" />
+     FROM
+         rgdb."DbT7053ShinseitodokedeJoho"
+     WHERE
+         rgdb."DbT7053ShinseitodokedeJoho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7053ShinseitodokedeJoho">
+         "DbT7053ShinseitodokedeJoho"."shoKisaiHokenshaNo" as "dbT7053ShinseitodokedeJoho_shoKisaiHokenshaNo",
+         "DbT7053ShinseitodokedeJoho"."hihokenshaNo" as "dbT7053ShinseitodokedeJoho_hihokenshaNo",
+         "DbT7053ShinseitodokedeJoho"."shinseiTodokedeYMD" as "dbT7053ShinseitodokedeJoho_shinseiTodokedeYMD",
+         "DbT7053ShinseitodokedeJoho"."insertDantaiCd" as "dbT7053ShinseitodokedeJoho_insertDantaiCd",
+         "DbT7053ShinseitodokedeJoho"."insertTimestamp" as "dbT7053ShinseitodokedeJoho_insertTimestamp",
+         "DbT7053ShinseitodokedeJoho"."insertReamsLoginId" as "dbT7053ShinseitodokedeJoho_insertReamsLoginId",
+         "DbT7053ShinseitodokedeJoho"."insertContextId" as "dbT7053ShinseitodokedeJoho_insertContextId",
+         "DbT7053ShinseitodokedeJoho"."isDeleted" as "dbT7053ShinseitodokedeJoho_isDeleted",
+         "DbT7053ShinseitodokedeJoho"."updateCount" as "dbT7053ShinseitodokedeJoho_updateCount",
+         "DbT7053ShinseitodokedeJoho"."lastUpdateTimestamp" as "dbT7053ShinseitodokedeJoho_lastUpdateTimestamp",
+         "DbT7053ShinseitodokedeJoho"."lastUpdateReamsLoginId" as "dbT7053ShinseitodokedeJoho_lastUpdateReamsLoginId",
+         "DbT7053ShinseitodokedeJoho"."shinseishoKanriNo" as "dbT7053ShinseitodokedeJoho_shinseishoKanriNo",
+         "DbT7053ShinseitodokedeJoho"."shinseiTodokedeShubetsuCode" as "dbT7053ShinseitodokedeJoho_shinseiTodokedeShubetsuCode",
+         "DbT7053ShinseitodokedeJoho"."shinseiTodokedeDaikoKubunCode" as "dbT7053ShinseitodokedeJoho_shinseiTodokedeDaikoKubunCode",
+         "DbT7053ShinseitodokedeJoho"."shinseiTodokedeshaShimei" as "dbT7053ShinseitodokedeJoho_shinseiTodokedeshaShimei",
+         "DbT7053ShinseitodokedeJoho"."shinseiTodokedeshaKanaShimei" as "dbT7053ShinseitodokedeJoho_shinseiTodokedeshaKanaShimei",
+         "DbT7053ShinseitodokedeJoho"."shinseiTodokedeshaTsuzukigaraCode" as "dbT7053ShinseitodokedeJoho_shinseiTodokedeshaTsuzukigaraCode",
+         "DbT7053ShinseitodokedeJoho"."shinseiTodokedeDaikoJigyoshaNo" as "dbT7053ShinseitodokedeJoho_shinseiTodokedeDaikoJigyoshaNo",
+         "DbT7053ShinseitodokedeJoho"."jigyoshaKubun" as "dbT7053ShinseitodokedeJoho_jigyoshaKubun",
+         "DbT7053ShinseitodokedeJoho"."shinseiTodokedeshaYubinNo" as "dbT7053ShinseitodokedeJoho_shinseiTodokedeshaYubinNo",
+         "DbT7053ShinseitodokedeJoho"."shinseiTodokedeshaJusho" as "dbT7053ShinseitodokedeJoho_shinseiTodokedeshaJusho",
+         "DbT7053ShinseitodokedeJoho"."shinseiTodokedeshaTelNo" as "dbT7053ShinseitodokedeJoho_shinseiTodokedeshaTelNo"
+    </sql>
+
+
+    <!--テーブルDbT7053ShinseitodokedeJohoの項目をDbT7053ShinseitodokedeJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7053ShinseitodokedeJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7053ShinseitodokedeJohoEntity" autoMapping="true">
+        <id property="shoKisaiHokenshaNo" column="dbT7053ShinseitodokedeJoho_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
+        <id property="hihokenshaNo" column="dbT7053ShinseitodokedeJoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="shinseiTodokedeYMD" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7053ShinseitodokedeJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7053ShinseitodokedeJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7053ShinseitodokedeJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7053ShinseitodokedeJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7053ShinseitodokedeJoho_isDeleted" />
+        <result property="updateCount" column="dbT7053ShinseitodokedeJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7053ShinseitodokedeJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7053ShinseitodokedeJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseishoKanriNo" column="dbT7053ShinseitodokedeJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="shinseiTodokedeShubetsuCode" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiTodokedeDaikoKubunCode" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeDaikoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shinseiTodokedeshaShimei" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="shinseiTodokedeshaKanaShimei" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeshaKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="shinseiTodokedeshaTsuzukigaraCode" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeshaTsuzukigaraCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiTodokedeDaikoJigyoshaNo" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeDaikoJigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="jigyoshaKubun" column="dbT7053ShinseitodokedeJoho_jigyoshaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiTodokedeshaYubinNo" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeshaYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="shinseiTodokedeshaJusho" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeshaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="shinseiTodokedeshaTelNo" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeshaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+    </resultMap>
+    
+    <select id="getEntity" resultMap="ResultMap_DbT7053ShinseitodokedeJohoEntity">
+<!--	SELECT
+	<include refid="allColumns_DbT7053ShinseitodokedeJoho"/>
+	FROM
+	rgdb."DbT7053ShinseitodokedeJoho"-->
+	</select>
+
+</mapper>

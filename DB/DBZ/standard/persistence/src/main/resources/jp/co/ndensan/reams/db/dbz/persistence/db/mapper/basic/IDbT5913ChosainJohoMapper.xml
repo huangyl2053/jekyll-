@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5913ChosainJohoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5913ChosainJoho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.allColumns_DbT5913ChosainJoho" />
+     FROM
+         rgdb."DbT5913ChosainJoho"
+     WHERE
+         rgdb."DbT5913ChosainJoho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5913ChosainJoho">
+         "DbT5913ChosainJoho"."shichosonCode" as "dbT5913ChosainJoho_shichosonCode",
+         "DbT5913ChosainJoho"."ninteichosaItakusakiCode" as "dbT5913ChosainJoho_ninteichosaItakusakiCode",
+         "DbT5913ChosainJoho"."ninteiChosainNo" as "dbT5913ChosainJoho_ninteiChosainNo",
+         "DbT5913ChosainJoho"."insertDantaiCd" as "dbT5913ChosainJoho_insertDantaiCd",
+         "DbT5913ChosainJoho"."insertTimestamp" as "dbT5913ChosainJoho_insertTimestamp",
+         "DbT5913ChosainJoho"."insertReamsLoginId" as "dbT5913ChosainJoho_insertReamsLoginId",
+         "DbT5913ChosainJoho"."insertContextId" as "dbT5913ChosainJoho_insertContextId",
+         "DbT5913ChosainJoho"."isDeleted" as "dbT5913ChosainJoho_isDeleted",
+         "DbT5913ChosainJoho"."updateCount" as "dbT5913ChosainJoho_updateCount",
+         "DbT5913ChosainJoho"."lastUpdateTimestamp" as "dbT5913ChosainJoho_lastUpdateTimestamp",
+         "DbT5913ChosainJoho"."lastUpdateReamsLoginId" as "dbT5913ChosainJoho_lastUpdateReamsLoginId",
+         "DbT5913ChosainJoho"."chosainShimei" as "dbT5913ChosainJoho_chosainShimei",
+         "DbT5913ChosainJoho"."chosainKanaShimei" as "dbT5913ChosainJoho_chosainKanaShimei",
+         "DbT5913ChosainJoho"."seibetsu" as "dbT5913ChosainJoho_seibetsu",
+         "DbT5913ChosainJoho"."chosainShikaku" as "dbT5913ChosainJoho_chosainShikaku",
+         "DbT5913ChosainJoho"."chikuCode" as "dbT5913ChosainJoho_chikuCode",
+         "DbT5913ChosainJoho"."chosaKanoNinzuPerMonth" as "dbT5913ChosainJoho_chosaKanoNinzuPerMonth",
+         "DbT5913ChosainJoho"."yubinNo" as "dbT5913ChosainJoho_yubinNo",
+         "DbT5913ChosainJoho"."jusho" as "dbT5913ChosainJoho_jusho",
+         "DbT5913ChosainJoho"."telNo" as "dbT5913ChosainJoho_telNo",
+         "DbT5913ChosainJoho"."faxNo" as "dbT5913ChosainJoho_faxNo",
+         "DbT5913ChosainJoho"."shozokuKikanName" as "dbT5913ChosainJoho_shozokuKikanName",
+         "DbT5913ChosainJoho"."jokyoFlag" as "dbT5913ChosainJoho_jokyoFlag"
+    </sql>
+
+
+    <!--テーブルDbT5913ChosainJohoの項目をDbT5913ChosainJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5913ChosainJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity" autoMapping="true">
+        <id property="shichosonCode" column="dbT5913ChosainJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <!--<id property="ninteichosaItakusakiCode" column="dbT5913ChosainJoho_ninteichosaItakusakiCode" />-->
+        <!--<id property="ninteiChosainNo" column="dbT5913ChosainJoho_ninteiChosainNo" />-->
+        <result property="insertDantaiCd" column="dbT5913ChosainJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5913ChosainJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5913ChosainJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5913ChosainJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5913ChosainJoho_isDeleted" />
+        <result property="updateCount" column="dbT5913ChosainJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5913ChosainJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5913ChosainJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosainShimei" column="dbT5913ChosainJoho_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosainKanaShimei" column="dbT5913ChosainJoho_chosainKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seibetsu" column="dbT5913ChosainJoho_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosainShikaku" column="dbT5913ChosainJoho_chosainShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chikuCode" column="dbT5913ChosainJoho_chikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosaKanoNinzuPerMonth" column="dbT5913ChosainJoho_chosaKanoNinzuPerMonth" />
+        <result property="yubinNo" column="dbT5913ChosainJoho_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="jusho" column="dbT5913ChosainJoho_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="telNo" column="dbT5913ChosainJoho_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="faxNo" column="dbT5913ChosainJoho_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="shozokuKikanName" column="dbT5913ChosainJoho_shozokuKikanName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jokyoFlag" column="dbT5913ChosainJoho_jokyoFlag" />
+    </resultMap>
+<select id="getEntity" resultMap="ResultMap_DbT5913ChosainJohoEntity">
+    SELECT
+    <include refid="allColumns_DbT5913ChosainJoho" />
+    FROM
+    rgdb."DbT5913ChosainJoho"
+</select>
+</mapper>

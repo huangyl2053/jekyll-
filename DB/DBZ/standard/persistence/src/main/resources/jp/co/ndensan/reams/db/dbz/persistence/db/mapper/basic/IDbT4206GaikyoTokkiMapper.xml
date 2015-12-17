@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4206GaikyoTokkiマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4206GaikyoTokkiMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4206GaikyoTokki">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4206GaikyoTokkiMapper.allColumns_DbT4206GaikyoTokki" />
+        FROM
+        rgdb."DbT4206GaikyoTokki"
+        WHERE
+        rgdb."DbT4206GaikyoTokki"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4206GaikyoTokki">
+        "DbT4206GaikyoTokki"."shinseishoKanriNo" as "dbT4206GaikyoTokki_shinseishoKanriNo",
+        "DbT4206GaikyoTokki"."ninteichosaRirekiNo" as "dbT4206GaikyoTokki_ninteichosaRirekiNo",
+        "DbT4206GaikyoTokki"."insertDantaiCd" as "dbT4206GaikyoTokki_insertDantaiCd",
+        "DbT4206GaikyoTokki"."insertTimestamp" as "dbT4206GaikyoTokki_insertTimestamp",
+        "DbT4206GaikyoTokki"."insertReamsLoginId" as "dbT4206GaikyoTokki_insertReamsLoginId",
+        "DbT4206GaikyoTokki"."insertContextId" as "dbT4206GaikyoTokki_insertContextId",
+        "DbT4206GaikyoTokki"."isDeleted" as "dbT4206GaikyoTokki_isDeleted",
+        "DbT4206GaikyoTokki"."updateCount" as "dbT4206GaikyoTokki_updateCount",
+        "DbT4206GaikyoTokki"."lastUpdateTimestamp" as "dbT4206GaikyoTokki_lastUpdateTimestamp",
+        "DbT4206GaikyoTokki"."lastUpdateReamsLoginId" as "dbT4206GaikyoTokki_lastUpdateReamsLoginId",
+        "DbT4206GaikyoTokki"."shuso" as "dbT4206GaikyoTokki_shuso",
+        "DbT4206GaikyoTokki"."shusoImageSharedFileId" as "dbT4206GaikyoTokki_shusoImageSharedFileId",
+        "DbT4206GaikyoTokki"."shusoMaskingImageSharedFileId" as "dbT4206GaikyoTokki_shusoMaskingImageSharedFileId",
+        "DbT4206GaikyoTokki"."kazokuJokyo" as "dbT4206GaikyoTokki_kazokuJokyo",
+        "DbT4206GaikyoTokki"."kazokuJokyoImageSharedFileId" as "dbT4206GaikyoTokki_kazokuJokyoImageSharedFileId",
+        "DbT4206GaikyoTokki"."kazokuJokyoMaskingImageSharedFileId" as "dbT4206GaikyoTokki_kazokuJokyoMaskingImageSharedFileId",
+        "DbT4206GaikyoTokki"."kyojuKankyo" as "dbT4206GaikyoTokki_kyojuKankyo",
+        "DbT4206GaikyoTokki"."kyojuKankyoImageSharedFileId" as "dbT4206GaikyoTokki_kyojuKankyoImageSharedFileId",
+        "DbT4206GaikyoTokki"."kyojuKankyoMaskingImageSharedFileId" as "dbT4206GaikyoTokki_kyojuKankyoMaskingImageSharedFileId",
+        "DbT4206GaikyoTokki"."kikaiKiki" as "dbT4206GaikyoTokki_kikaiKiki",
+        "DbT4206GaikyoTokki"."kikaiKikiImageSharedFileId" as "dbT4206GaikyoTokki_kikaiKikiImageSharedFileId",
+        "DbT4206GaikyoTokki"."kikaiKikiMaskingImageSharedFileId" as "dbT4206GaikyoTokki_kikaiKikiMaskingImageSharedFileId"
+    </sql>
+
+
+    <!--テーブルDbT4206GaikyoTokkiの項目をDbT4206GaikyoTokkiEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4206GaikyoTokkiEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4206GaikyoTokkiEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT4206GaikyoTokki_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="ninteichosaRirekiNo" column="dbT4206GaikyoTokki_ninteichosaRirekiNo" />
+        <result property="insertDantaiCd" column="dbT4206GaikyoTokki_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4206GaikyoTokki_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4206GaikyoTokki_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4206GaikyoTokki_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4206GaikyoTokki_isDeleted" />
+        <result property="updateCount" column="dbT4206GaikyoTokki_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4206GaikyoTokki_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4206GaikyoTokki_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shuso" column="dbT4206GaikyoTokki_shuso" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shusoImageSharedFileId" column="dbT4206GaikyoTokki_shusoImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="shusoMaskingImageSharedFileId" column="dbT4206GaikyoTokki_shusoMaskingImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="kazokuJokyo" column="dbT4206GaikyoTokki_kazokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazokuJokyoImageSharedFileId" column="dbT4206GaikyoTokki_kazokuJokyoImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="kazokuJokyoMaskingImageSharedFileId" column="dbT4206GaikyoTokki_kazokuJokyoMaskingImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="kyojuKankyo" column="dbT4206GaikyoTokki_kyojuKankyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyojuKankyoImageSharedFileId" column="dbT4206GaikyoTokki_kyojuKankyoImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="kyojuKankyoMaskingImageSharedFileId" column="dbT4206GaikyoTokki_kyojuKankyoMaskingImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="kikaiKiki" column="dbT4206GaikyoTokki_kikaiKiki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kikaiKikiImageSharedFileId" column="dbT4206GaikyoTokki_kikaiKikiImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="kikaiKikiMaskingImageSharedFileId" column="dbT4206GaikyoTokki_kikaiKikiMaskingImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+    </resultMap>
+    
+    <select id="getEntity" resultMap="ResultMap_DbT4206GaikyoTokkiEntity">
+        SELECT
+        <include refid="allColumns_DbT4206GaikyoTokki"/>
+        FROM
+        rgdb."DbT4206GaikyoTokki"
+    </select>
+
+</mapper>

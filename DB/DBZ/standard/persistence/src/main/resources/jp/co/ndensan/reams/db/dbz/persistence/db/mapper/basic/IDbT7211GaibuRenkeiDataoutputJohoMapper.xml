@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7211GaibuRenkeiDataoutputJohoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7211GaibuRenkeiDataoutputJohoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7211GaibuRenkeiDataoutputJoho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7211GaibuRenkeiDataoutputJohoMapper.allColumns_DbT7211GaibuRenkeiDataoutputJoho" />
+     FROM
+         rgdb."DbT7211GaibuRenkeiDataoutputJoho"
+     WHERE
+         rgdb."DbT7211GaibuRenkeiDataoutputJoho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7211GaibuRenkeiDataoutputJoho">
+         "DbT7211GaibuRenkeiDataoutputJoho"."shinseishoKanriNo" as "dbT7211GaibuRenkeiDataoutputJoho_shinseishoKanriNo",
+         "DbT7211GaibuRenkeiDataoutputJoho"."insertDantaiCd" as "dbT7211GaibuRenkeiDataoutputJoho_insertDantaiCd",
+         "DbT7211GaibuRenkeiDataoutputJoho"."insertTimestamp" as "dbT7211GaibuRenkeiDataoutputJoho_insertTimestamp",
+         "DbT7211GaibuRenkeiDataoutputJoho"."insertReamsLoginId" as "dbT7211GaibuRenkeiDataoutputJoho_insertReamsLoginId",
+         "DbT7211GaibuRenkeiDataoutputJoho"."insertContextId" as "dbT7211GaibuRenkeiDataoutputJoho_insertContextId",
+         "DbT7211GaibuRenkeiDataoutputJoho"."isDeleted" as "dbT7211GaibuRenkeiDataoutputJoho_isDeleted",
+         "DbT7211GaibuRenkeiDataoutputJoho"."updateCount" as "dbT7211GaibuRenkeiDataoutputJoho_updateCount",
+         "DbT7211GaibuRenkeiDataoutputJoho"."lastUpdateTimestamp" as "dbT7211GaibuRenkeiDataoutputJoho_lastUpdateTimestamp",
+         "DbT7211GaibuRenkeiDataoutputJoho"."lastUpdateReamsLoginId" as "dbT7211GaibuRenkeiDataoutputJoho_lastUpdateReamsLoginId",
+         "DbT7211GaibuRenkeiDataoutputJoho"."ninteiShinseiJohoChushutsuYMD" as "dbT7211GaibuRenkeiDataoutputJoho_ninteiShinseiJohoChushutsuYMD",
+         "DbT7211GaibuRenkeiDataoutputJoho"."ninteiChosaKekkaJohoChushutsuYMD" as "dbT7211GaibuRenkeiDataoutputJoho_ninteiChosaKekkaJohoChushutsuYMD",
+         "DbT7211GaibuRenkeiDataoutputJoho"."ninteiChosaIkenshoKekkaJohoChushutsuYMD" as "dbT7211GaibuRenkeiDataoutputJoho_ninteiChosaIkenshoKekkaJohoChushutsuYMD",
+         "DbT7211GaibuRenkeiDataoutputJoho"."ichijihanteiChushutsuYMD" as "dbT7211GaibuRenkeiDataoutputJoho_ichijihanteiChushutsuYMD",
+         "DbT7211GaibuRenkeiDataoutputJoho"."shinsakaiKekkaJohoChushutsuYMD" as "dbT7211GaibuRenkeiDataoutputJoho_shinsakaiKekkaJohoChushutsuYMD"
+    </sql>
+
+
+    <!--テーブルDbT7211GaibuRenkeiDataoutputJohoの項目をDbT7211GaibuRenkeiDataoutputJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7211GaibuRenkeiDataoutputJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7211GaibuRenkeiDataoutputJohoEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT7211GaibuRenkeiDataoutputJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7211GaibuRenkeiDataoutputJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7211GaibuRenkeiDataoutputJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7211GaibuRenkeiDataoutputJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7211GaibuRenkeiDataoutputJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7211GaibuRenkeiDataoutputJoho_isDeleted" />
+        <result property="updateCount" column="dbT7211GaibuRenkeiDataoutputJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7211GaibuRenkeiDataoutputJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7211GaibuRenkeiDataoutputJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiShinseiJohoChushutsuYMD" column="dbT7211GaibuRenkeiDataoutputJoho_ninteiShinseiJohoChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiChosaKekkaJohoChushutsuYMD" column="dbT7211GaibuRenkeiDataoutputJoho_ninteiChosaKekkaJohoChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiChosaIkenshoKekkaJohoChushutsuYMD" column="dbT7211GaibuRenkeiDataoutputJoho_ninteiChosaIkenshoKekkaJohoChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ichijihanteiChushutsuYMD" column="dbT7211GaibuRenkeiDataoutputJoho_ichijihanteiChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsakaiKekkaJohoChushutsuYMD" column="dbT7211GaibuRenkeiDataoutputJoho_shinsakaiKekkaJohoChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    
+    <select id="getEntity" resultMap="ResultMap_DbT7211GaibuRenkeiDataoutputJohoEntity">
+	SELECT
+	<include refid="allColumns_DbT7211GaibuRenkeiDataoutputJoho"/>
+	FROM
+	rgdb."DbT7211GaibuRenkeiDataoutputJoho"
+	</select>
+
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT1006KyokaisoGaitoshaマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT1006KyokaisoGaitosha">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.allColumns_DbT1006KyokaisoGaitosha" />
+     FROM
+         rgdb."DbT1006KyokaisoGaitosha"
+     WHERE
+         rgdb."DbT1006KyokaisoGaitosha"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT1006KyokaisoGaitosha">
+         "DbT1006KyokaisoGaitosha"."hihokenshaNo" as "dbT1006KyokaisoGaitosha_hihokenshaNo",
+         "DbT1006KyokaisoGaitosha"."rirekiNo" as "dbT1006KyokaisoGaitosha_rirekiNo",
+         "DbT1006KyokaisoGaitosha"."insertDantaiCd" as "dbT1006KyokaisoGaitosha_insertDantaiCd",
+         "DbT1006KyokaisoGaitosha"."insertTimestamp" as "dbT1006KyokaisoGaitosha_insertTimestamp",
+         "DbT1006KyokaisoGaitosha"."insertReamsLoginId" as "dbT1006KyokaisoGaitosha_insertReamsLoginId",
+         "DbT1006KyokaisoGaitosha"."insertContextId" as "dbT1006KyokaisoGaitosha_insertContextId",
+         "DbT1006KyokaisoGaitosha"."isDeleted" as "dbT1006KyokaisoGaitosha_isDeleted",
+         "DbT1006KyokaisoGaitosha"."updateCount" as "dbT1006KyokaisoGaitosha_updateCount",
+         "DbT1006KyokaisoGaitosha"."lastUpdateTimestamp" as "dbT1006KyokaisoGaitosha_lastUpdateTimestamp",
+         "DbT1006KyokaisoGaitosha"."lastUpdateReamsLoginId" as "dbT1006KyokaisoGaitosha_lastUpdateReamsLoginId",
+         "DbT1006KyokaisoGaitosha"."tekiyoKaishiYMD" as "dbT1006KyokaisoGaitosha_tekiyoKaishiYMD",
+         "DbT1006KyokaisoGaitosha"."tekiyoShuryoYMD" as "dbT1006KyokaisoGaitosha_tekiyoShuryoYMD",
+         "DbT1006KyokaisoGaitosha"."kyokaisoSochiKetteiYMD" as "dbT1006KyokaisoGaitosha_kyokaisoSochiKetteiYMD",
+         "DbT1006KyokaisoGaitosha"."kyuufugakuGengakuKisaiKiajoFlag" as "dbT1006KyokaisoGaitosha_kyuufugakuGengakuKisaiKiajoFlag",
+         "DbT1006KyokaisoGaitosha"."hyojunFutanGengakuGaitoFlag" as "dbT1006KyokaisoGaitosha_hyojunFutanGengakuGaitoFlag",
+         "DbT1006KyokaisoGaitosha"."hyojunFutanKeigengoFutangaku" as "dbT1006KyokaisoGaitosha_hyojunFutanKeigengoFutangaku",
+         "DbT1006KyokaisoGaitosha"."kyojuhinadoFutangakugengakuGaitoFlag" as "dbT1006KyokaisoGaitosha_kyojuhinadoFutangakugengakuGaitoFlag",
+         "DbT1006KyokaisoGaitosha"."kyojuhiKeigengoKyoshitsuShuruiCode" as "dbT1006KyokaisoGaitosha_kyojuhiKeigengoKyoshitsuShuruiCode",
+         "DbT1006KyokaisoGaitosha"."kyojuhiKeigengoHutangaku" as "dbT1006KyokaisoGaitosha_kyojuhiKeigengoHutangaku",
+         "DbT1006KyokaisoGaitosha"."shokuhiKeigengoHutangakuGaitoFlag" as "dbT1006KyokaisoGaitosha_shokuhiKeigengoHutangakuGaitoFlag",
+         "DbT1006KyokaisoGaitosha"."shokuhiKeigengoHutangaku" as "dbT1006KyokaisoGaitosha_shokuhiKeigengoHutangaku",
+         "DbT1006KyokaisoGaitosha"."kogakuServicehiJogengakuGengakuGaitoFlag" as "dbT1006KyokaisoGaitosha_kogakuServicehiJogengakuGengakuGaitoFlag",
+         "DbT1006KyokaisoGaitosha"."kogakuServicehiJogengakuGengakugoJogengaku" as "dbT1006KyokaisoGaitosha_kogakuServicehiJogengakuGengakugoJogengaku",
+         "DbT1006KyokaisoGaitosha"."hokenryoNofuGengakuFlag" as "dbT1006KyokaisoGaitosha_hokenryoNofuGengakuFlag"
+    </sql>
+
+
+    <!--テーブルDbT1006KyokaisoGaitoshaの項目をDbT1006KyokaisoGaitoshaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT1006KyokaisoGaitoshaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT1006KyokaisoGaitosha_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="rirekiNo" column="dbT1006KyokaisoGaitosha_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT1006KyokaisoGaitosha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT1006KyokaisoGaitosha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT1006KyokaisoGaitosha_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT1006KyokaisoGaitosha_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT1006KyokaisoGaitosha_isDeleted" />
+        <result property="updateCount" column="dbT1006KyokaisoGaitosha_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT1006KyokaisoGaitosha_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT1006KyokaisoGaitosha_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tekiyoKaishiYMD" column="dbT1006KyokaisoGaitosha_tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tekiyoShuryoYMD" column="dbT1006KyokaisoGaitosha_tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kyokaisoSochiKetteiYMD" column="dbT1006KyokaisoGaitosha_kyokaisoSochiKetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kyuufugakuGengakuKisaiKiajoFlag" column="dbT1006KyokaisoGaitosha_kyuufugakuGengakuKisaiKiajoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hyojunFutanGengakuGaitoFlag" column="dbT1006KyokaisoGaitosha_hyojunFutanGengakuGaitoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hyojunFutanKeigengoFutangaku" column="dbT1006KyokaisoGaitosha_hyojunFutanKeigengoFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kyojuhinadoFutangakugengakuGaitoFlag" column="dbT1006KyokaisoGaitosha_kyojuhinadoFutangakugengakuGaitoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyojuhiKeigengoKyoshitsuShuruiCode" column="dbT1006KyokaisoGaitosha_kyojuhiKeigengoKyoshitsuShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyojuhiKeigengoHutangaku" column="dbT1006KyokaisoGaitosha_kyojuhiKeigengoHutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shokuhiKeigengoHutangakuGaitoFlag" column="dbT1006KyokaisoGaitosha_shokuhiKeigengoHutangakuGaitoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shokuhiKeigengoHutangaku" column="dbT1006KyokaisoGaitosha_shokuhiKeigengoHutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kogakuServicehiJogengakuGengakuGaitoFlag" column="dbT1006KyokaisoGaitosha_kogakuServicehiJogengakuGengakuGaitoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kogakuServicehiJogengakuGengakugoJogengaku" column="dbT1006KyokaisoGaitosha_kogakuServicehiJogengakuGengakugoJogengaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="hokenryoNofuGengakuFlag" column="dbT1006KyokaisoGaitosha_hokenryoNofuGengakuFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+        <select id="getEntity" resultMap="ResultMap_DbT1006KyokaisoGaitoshaEntity">
+	SELECT
+	<include refid="allColumns_DbT1006KyokaisoGaitosha"/>
+	FROM
+	rgdb."DbT1006KyokaisoGaitosha"
+	</select>
+        
+</mapper>

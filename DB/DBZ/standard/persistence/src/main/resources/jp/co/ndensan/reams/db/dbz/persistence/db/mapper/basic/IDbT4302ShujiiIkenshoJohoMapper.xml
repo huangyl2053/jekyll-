@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4302ShujiiIkenshoJohoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4302ShujiiIkenshoJohoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4302ShujiiIkenshoJoho">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4302ShujiiIkenshoJohoMapper.allColumns_DbT4302ShujiiIkenshoJoho" />
+        FROM
+        rgdb."DbT4302ShujiiIkenshoJoho"
+        WHERE
+        rgdb."DbT4302ShujiiIkenshoJoho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4302ShujiiIkenshoJoho">
+        "DbT4302ShujiiIkenshoJoho"."shinseishoKanriNo" as "dbT4302ShujiiIkenshoJoho_shinseishoKanriNo",
+        "DbT4302ShujiiIkenshoJoho"."ikenshoIraiRirekiNo" as "dbT4302ShujiiIkenshoJoho_ikenshoIraiRirekiNo",
+        "DbT4302ShujiiIkenshoJoho"."insertDantaiCd" as "dbT4302ShujiiIkenshoJoho_insertDantaiCd",
+        "DbT4302ShujiiIkenshoJoho"."insertTimestamp" as "dbT4302ShujiiIkenshoJoho_insertTimestamp",
+        "DbT4302ShujiiIkenshoJoho"."insertReamsLoginId" as "dbT4302ShujiiIkenshoJoho_insertReamsLoginId",
+        "DbT4302ShujiiIkenshoJoho"."insertContextId" as "dbT4302ShujiiIkenshoJoho_insertContextId",
+        "DbT4302ShujiiIkenshoJoho"."isDeleted" as "dbT4302ShujiiIkenshoJoho_isDeleted",
+        "DbT4302ShujiiIkenshoJoho"."updateCount" as "dbT4302ShujiiIkenshoJoho_updateCount",
+        "DbT4302ShujiiIkenshoJoho"."lastUpdateTimestamp" as "dbT4302ShujiiIkenshoJoho_lastUpdateTimestamp",
+        "DbT4302ShujiiIkenshoJoho"."lastUpdateReamsLoginId" as "dbT4302ShujiiIkenshoJoho_lastUpdateReamsLoginId",
+        "DbT4302ShujiiIkenshoJoho"."koroshoIfShikibetsuCode" as "dbT4302ShujiiIkenshoJoho_koroshoIfShikibetsuCode",
+        "DbT4302ShujiiIkenshoJoho"."ikenshoIraiKubun" as "dbT4302ShujiiIkenshoJoho_ikenshoIraiKubun",
+        "DbT4302ShujiiIkenshoJoho"."shujiiIryoKikanCode" as "dbT4302ShujiiIkenshoJoho_shujiiIryoKikanCode",
+        "DbT4302ShujiiIkenshoJoho"."shujiiCode" as "dbT4302ShujiiIkenshoJoho_shujiiCode",
+        "DbT4302ShujiiIkenshoJoho"."ikenshoJuryoYMD" as "dbT4302ShujiiIkenshoJoho_ikenshoJuryoYMD",
+        "DbT4302ShujiiIkenshoJoho"."ikenshoKinyuYMD" as "dbT4302ShujiiIkenshoJoho_ikenshoKinyuYMD",
+        "DbT4302ShujiiIkenshoJoho"."ikenshoSakuseiKaisuKubun" as "dbT4302ShujiiIkenshoJoho_ikenshoSakuseiKaisuKubun",
+        "DbT4302ShujiiIkenshoJoho"."zaitakuShisetsuKubun" as "dbT4302ShujiiIkenshoJoho_zaitakuShisetsuKubun",
+        "DbT4302ShujiiIkenshoJoho"."ikenshoDoiFlag" as "dbT4302ShujiiIkenshoJoho_ikenshoDoiFlag",
+        "DbT4302ShujiiIkenshoJoho"."saishuShinryoYMD" as "dbT4302ShujiiIkenshoJoho_saishuShinryoYMD",
+        "DbT4302ShujiiIkenshoJoho"."existTakaJushinFlag" as "dbT4302ShujiiIkenshoJoho_existTakaJushinFlag",
+        "DbT4302ShujiiIkenshoJoho"."existNaikaJushinFlag" as "dbT4302ShujiiIkenshoJoho_existNaikaJushinFlag",
+        "DbT4302ShujiiIkenshoJoho"."existSeishinkaJushinFlag" as "dbT4302ShujiiIkenshoJoho_existSeishinkaJushinFlag",
+        "DbT4302ShujiiIkenshoJoho"."existGekaJushinFlag" as "dbT4302ShujiiIkenshoJoho_existGekaJushinFlag",
+        "DbT4302ShujiiIkenshoJoho"."existSeikeigekaJushinFlag" as "dbT4302ShujiiIkenshoJoho_existSeikeigekaJushinFlag",
+        "DbT4302ShujiiIkenshoJoho"."existNoshinkeigekaJushinFlag" as "dbT4302ShujiiIkenshoJoho_existNoshinkeigekaJushinFlag",
+        "DbT4302ShujiiIkenshoJoho"."existHifukaJushinFlag" as "dbT4302ShujiiIkenshoJoho_existHifukaJushinFlag",
+        "DbT4302ShujiiIkenshoJoho"."existHinyokikaJushinFlag" as "dbT4302ShujiiIkenshoJoho_existHinyokikaJushinFlag",
+        "DbT4302ShujiiIkenshoJoho"."existFujinkaJushinFlag" as "dbT4302ShujiiIkenshoJoho_existFujinkaJushinFlag",
+        "DbT4302ShujiiIkenshoJoho"."existJibiinkokaJushinFlag" as "dbT4302ShujiiIkenshoJoho_existJibiinkokaJushinFlag",
+        "DbT4302ShujiiIkenshoJoho"."existRehabilitationkaJushinFlag" as "dbT4302ShujiiIkenshoJoho_existRehabilitationkaJushinFlag",
+        "DbT4302ShujiiIkenshoJoho"."existShikaJushinFlag" as "dbT4302ShujiiIkenshoJoho_existShikaJushinFlag",
+        "DbT4302ShujiiIkenshoJoho"."existGankaJushinFlag" as "dbT4302ShujiiIkenshoJoho_existGankaJushinFlag",
+        "DbT4302ShujiiIkenshoJoho"."existSonotaJushinkaFlag" as "dbT4302ShujiiIkenshoJoho_existSonotaJushinkaFlag",
+        "DbT4302ShujiiIkenshoJoho"."sonotaJushinKaShimei" as "dbT4302ShujiiIkenshoJoho_sonotaJushinKaShimei",
+        "DbT4302ShujiiIkenshoJoho"."shindamMei1" as "dbT4302ShujiiIkenshoJoho_shindamMei1",
+        "DbT4302ShujiiIkenshoJoho"."hasshoYMD1" as "dbT4302ShujiiIkenshoJoho_hasshoYMD1",
+        "DbT4302ShujiiIkenshoJoho"."shindamMei2" as "dbT4302ShujiiIkenshoJoho_shindamMei2",
+        "DbT4302ShujiiIkenshoJoho"."hasshoYMD2" as "dbT4302ShujiiIkenshoJoho_hasshoYMD2",
+        "DbT4302ShujiiIkenshoJoho"."shindamMei3" as "dbT4302ShujiiIkenshoJoho_shindamMei3",
+        "DbT4302ShujiiIkenshoJoho"."hasshoYMD3" as "dbT4302ShujiiIkenshoJoho_hasshoYMD3",
+        "DbT4302ShujiiIkenshoJoho"."anteisei" as "dbT4302ShujiiIkenshoJoho_anteisei",
+        "DbT4302ShujiiIkenshoJoho"."fuanteiJokyo" as "dbT4302ShujiiIkenshoJoho_fuanteiJokyo",
+        "DbT4302ShujiiIkenshoJoho"."chiryoNaiyo" as "dbT4302ShujiiIkenshoJoho_chiryoNaiyo",
+        "DbT4302ShujiiIkenshoJoho"."tokkiJiko" as "dbT4302ShujiiIkenshoJoho_tokkiJiko",
+        "DbT4302ShujiiIkenshoJoho"."tokkiJikoImageSharedFileId" as "dbT4302ShujiiIkenshoJoho_tokkiJikoImageSharedFileId",
+        "DbT4302ShujiiIkenshoJoho"."nijiHanteiKekkaRenrakuFlag" as "dbT4302ShujiiIkenshoJoho_nijiHanteiKekkaRenrakuFlag",
+        "DbT4302ShujiiIkenshoJoho"."ikenshoMemo" as "dbT4302ShujiiIkenshoJoho_ikenshoMemo"
+    </sql>
+
+
+    <!--テーブルDbT4302ShujiiIkenshoJohoの項目をDbT4302ShujiiIkenshoJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4302ShujiiIkenshoJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4302ShujiiIkenshoJohoEntity" autoMapping="true">
+        <!--<id property="ikenshoIraiRirekiNo" column="dbT4302ShujiiIkenshoJoho_ikenshoIraiRirekiNo" />-->
+        <result property="insertDantaiCd" column="dbT4302ShujiiIkenshoJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4302ShujiiIkenshoJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4302ShujiiIkenshoJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4302ShujiiIkenshoJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4302ShujiiIkenshoJoho_isDeleted" />
+        <result property="updateCount" column="dbT4302ShujiiIkenshoJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4302ShujiiIkenshoJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4302ShujiiIkenshoJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koroshoIfShikibetsuCode" column="dbT4302ShujiiIkenshoJoho_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ikenshoIraiKubun" column="dbT4302ShujiiIkenshoJoho_ikenshoIraiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shujiiIryoKikanCode" column="dbT4302ShujiiIkenshoJoho_shujiiIryoKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shujiiCode" column="dbT4302ShujiiIkenshoJoho_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ikenshoJuryoYMD" column="dbT4302ShujiiIkenshoJoho_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ikenshoKinyuYMD" column="dbT4302ShujiiIkenshoJoho_ikenshoKinyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ikenshoSakuseiKaisuKubun" column="dbT4302ShujiiIkenshoJoho_ikenshoSakuseiKaisuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="zaitakuShisetsuKubun" column="dbT4302ShujiiIkenshoJoho_zaitakuShisetsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ikenshoDoiFlag" column="dbT4302ShujiiIkenshoJoho_ikenshoDoiFlag" />
+        <result property="saishuShinryoYMD" column="dbT4302ShujiiIkenshoJoho_saishuShinryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="existTakaJushinFlag" column="dbT4302ShujiiIkenshoJoho_existTakaJushinFlag" />
+        <result property="existNaikaJushinFlag" column="dbT4302ShujiiIkenshoJoho_existNaikaJushinFlag" />
+        <result property="existSeishinkaJushinFlag" column="dbT4302ShujiiIkenshoJoho_existSeishinkaJushinFlag" />
+        <result property="existGekaJushinFlag" column="dbT4302ShujiiIkenshoJoho_existGekaJushinFlag" />
+        <result property="existSeikeigekaJushinFlag" column="dbT4302ShujiiIkenshoJoho_existSeikeigekaJushinFlag" />
+        <result property="existNoshinkeigekaJushinFlag" column="dbT4302ShujiiIkenshoJoho_existNoshinkeigekaJushinFlag" />
+        <result property="existHifukaJushinFlag" column="dbT4302ShujiiIkenshoJoho_existHifukaJushinFlag" />
+        <result property="existHinyokikaJushinFlag" column="dbT4302ShujiiIkenshoJoho_existHinyokikaJushinFlag" />
+        <result property="existFujinkaJushinFlag" column="dbT4302ShujiiIkenshoJoho_existFujinkaJushinFlag" />
+        <result property="existJibiinkokaJushinFlag" column="dbT4302ShujiiIkenshoJoho_existJibiinkokaJushinFlag" />
+        <result property="existRehabilitationkaJushinFlag" column="dbT4302ShujiiIkenshoJoho_existRehabilitationkaJushinFlag" />
+        <result property="existShikaJushinFlag" column="dbT4302ShujiiIkenshoJoho_existShikaJushinFlag" />
+        <result property="existGankaJushinFlag" column="dbT4302ShujiiIkenshoJoho_existGankaJushinFlag" />
+        <result property="existSonotaJushinkaFlag" column="dbT4302ShujiiIkenshoJoho_existSonotaJushinkaFlag" />
+        <result property="sonotaJushinKaShimei" column="dbT4302ShujiiIkenshoJoho_sonotaJushinKaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shindamMei1" column="dbT4302ShujiiIkenshoJoho_shindamMei1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hasshoYMD1" column="dbT4302ShujiiIkenshoJoho_hasshoYMD1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shindamMei2" column="dbT4302ShujiiIkenshoJoho_shindamMei2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hasshoYMD2" column="dbT4302ShujiiIkenshoJoho_hasshoYMD2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shindamMei3" column="dbT4302ShujiiIkenshoJoho_shindamMei3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hasshoYMD3" column="dbT4302ShujiiIkenshoJoho_hasshoYMD3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="anteisei" column="dbT4302ShujiiIkenshoJoho_anteisei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fuanteiJokyo" column="dbT4302ShujiiIkenshoJoho_fuanteiJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chiryoNaiyo" column="dbT4302ShujiiIkenshoJoho_chiryoNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokkiJiko" column="dbT4302ShujiiIkenshoJoho_tokkiJiko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokkiJikoImageSharedFileId" column="dbT4302ShujiiIkenshoJoho_tokkiJikoImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="nijiHanteiKekkaRenrakuFlag" column="dbT4302ShujiiIkenshoJoho_nijiHanteiKekkaRenrakuFlag" />
+        <result property="ikenshoMemo" column="dbT4302ShujiiIkenshoJoho_ikenshoMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select id="getEntity" resultMap="ResultMap_DbT4302ShujiiIkenshoJohoEntity">
+        SELECT
+        <include refid="allColumns_DbT4302ShujiiIkenshoJoho"/>
+        FROM
+        rgdb."DbT4302ShujiiIkenshoJoho"
+    </select>
+</mapper>

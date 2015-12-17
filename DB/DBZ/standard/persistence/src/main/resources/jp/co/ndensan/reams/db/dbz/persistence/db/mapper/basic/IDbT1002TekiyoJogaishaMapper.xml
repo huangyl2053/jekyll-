@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT1002TekiyoJogaishaマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1002TekiyoJogaishaMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT1002TekiyoJogaisha">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1002TekiyoJogaishaMapper.allColumns_DbT1002TekiyoJogaisha" />
+     FROM
+         rgdb."DbT1002TekiyoJogaisha"
+     WHERE
+         rgdb."DbT1002TekiyoJogaisha"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT1002TekiyoJogaisha">
+         "DbT1002TekiyoJogaisha"."shikibetsuCode" as "dbT1002TekiyoJogaisha_shikibetsuCode",
+         "DbT1002TekiyoJogaisha"."idoYMD" as "dbT1002TekiyoJogaisha_idoYMD",
+         "DbT1002TekiyoJogaisha"."edaNo" as "dbT1002TekiyoJogaisha_edaNo",
+         "DbT1002TekiyoJogaisha"."shichosonCode" as "dbT1002TekiyoJogaisha_shichosonCode",
+         "DbT1002TekiyoJogaisha"."insertDantaiCd" as "dbT1002TekiyoJogaisha_insertDantaiCd",
+         "DbT1002TekiyoJogaisha"."insertTimestamp" as "dbT1002TekiyoJogaisha_insertTimestamp",
+         "DbT1002TekiyoJogaisha"."insertReamsLoginId" as "dbT1002TekiyoJogaisha_insertReamsLoginId",
+         "DbT1002TekiyoJogaisha"."insertContextId" as "dbT1002TekiyoJogaisha_insertContextId",
+         "DbT1002TekiyoJogaisha"."isDeleted" as "dbT1002TekiyoJogaisha_isDeleted",
+         "DbT1002TekiyoJogaisha"."updateCount" as "dbT1002TekiyoJogaisha_updateCount",
+         "DbT1002TekiyoJogaisha"."lastUpdateTimestamp" as "dbT1002TekiyoJogaisha_lastUpdateTimestamp",
+         "DbT1002TekiyoJogaisha"."lastUpdateReamsLoginId" as "dbT1002TekiyoJogaisha_lastUpdateReamsLoginId",
+         "DbT1002TekiyoJogaisha"."idoJiyuCode" as "dbT1002TekiyoJogaisha_idoJiyuCode",
+         "DbT1002TekiyoJogaisha"."tekiyoJogaiTekiyoJiyuCode" as "dbT1002TekiyoJogaisha_tekiyoJogaiTekiyoJiyuCode",
+         "DbT1002TekiyoJogaisha"."tekiyoYMD" as "dbT1002TekiyoJogaisha_tekiyoYMD",
+         "DbT1002TekiyoJogaisha"."tekiyoTodokedeYMD" as "dbT1002TekiyoJogaisha_tekiyoTodokedeYMD",
+         "DbT1002TekiyoJogaisha"."tekiyoUketsukeYMD" as "dbT1002TekiyoJogaisha_tekiyoUketsukeYMD",
+         "DbT1002TekiyoJogaisha"."tekiyoJogaikaijokaijoJiyuCode" as "dbT1002TekiyoJogaisha_tekiyoJogaikaijokaijoJiyuCode",
+         "DbT1002TekiyoJogaisha"."kaijoYMD" as "dbT1002TekiyoJogaisha_kaijoYMD",
+         "DbT1002TekiyoJogaisha"."kaijoTodokedeYMD" as "dbT1002TekiyoJogaisha_kaijoTodokedeYMD",
+         "DbT1002TekiyoJogaisha"."kaijoUketsukeYMD" as "dbT1002TekiyoJogaisha_kaijoUketsukeYMD",
+         "DbT1002TekiyoJogaisha"."nyushoTsuchiHakkoYMD" as "dbT1002TekiyoJogaisha_nyushoTsuchiHakkoYMD",
+         "DbT1002TekiyoJogaisha"."taishoTsuchiHakkoYMD" as "dbT1002TekiyoJogaisha_taishoTsuchiHakkoYMD",
+         "DbT1002TekiyoJogaisha"."henkoTsuchiHakkoYMD" as "dbT1002TekiyoJogaisha_henkoTsuchiHakkoYMD",
+         "DbT1002TekiyoJogaisha"."logicalDeletedFlag" as "dbT1002TekiyoJogaisha_logicalDeletedFlag"
+    </sql>
+
+
+    <!--テーブルDbT1002TekiyoJogaishaの項目をDbT1002TekiyoJogaishaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT1002TekiyoJogaishaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity" autoMapping="true">
+        <id property="shikibetsuCode" column="dbT1002TekiyoJogaisha_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <id property="idoYMD" column="dbT1002TekiyoJogaisha_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="edaNo" column="dbT1002TekiyoJogaisha_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shichosonCode" column="dbT1002TekiyoJogaisha_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT1002TekiyoJogaisha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT1002TekiyoJogaisha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT1002TekiyoJogaisha_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT1002TekiyoJogaisha_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT1002TekiyoJogaisha_isDeleted" />
+        <result property="updateCount" column="dbT1002TekiyoJogaisha_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT1002TekiyoJogaisha_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT1002TekiyoJogaisha_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="idoJiyuCode" column="dbT1002TekiyoJogaisha_idoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <!--<result property="tekiyoJogaiTekiyoJiyuCode" column="dbT1002TekiyoJogaisha_tekiyoJogaiTekiyoJiyuCode" />-->
+        <result property="tekiyoYMD" column="dbT1002TekiyoJogaisha_tekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tekiyoTodokedeYMD" column="dbT1002TekiyoJogaisha_tekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tekiyoUketsukeYMD" column="dbT1002TekiyoJogaisha_tekiyoUketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <!--<result property="tekiyoJogaikaijokaijoJiyuCode" column="dbT1002TekiyoJogaisha_tekiyoJogaikaijokaijoJiyuCode" />-->
+        <result property="kaijoYMD" column="dbT1002TekiyoJogaisha_kaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kaijoTodokedeYMD" column="dbT1002TekiyoJogaisha_kaijoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kaijoUketsukeYMD" column="dbT1002TekiyoJogaisha_kaijoUketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nyushoTsuchiHakkoYMD" column="dbT1002TekiyoJogaisha_nyushoTsuchiHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="taishoTsuchiHakkoYMD" column="dbT1002TekiyoJogaisha_taishoTsuchiHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="henkoTsuchiHakkoYMD" column="dbT1002TekiyoJogaisha_henkoTsuchiHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="logicalDeletedFlag" column="dbT1002TekiyoJogaisha_logicalDeletedFlag" />
+    </resultMap>
+    
+        <select id="getEntity" resultMap="ResultMap_DbT1002TekiyoJogaishaEntity">
+	SELECT
+	<include refid="allColumns_DbT1002TekiyoJogaisha"/>
+	FROM
+	rgdb."DbT1002TekiyoJogaisha"
+	</select>
+</mapper>

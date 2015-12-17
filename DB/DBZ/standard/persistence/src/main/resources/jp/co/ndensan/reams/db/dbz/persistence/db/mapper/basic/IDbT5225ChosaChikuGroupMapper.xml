@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5225ChosaChikuGroupマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5225ChosaChikuGroupMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5225ChosaChikuGroup">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5225ChosaChikuGroupMapper.allColumns_DbT5225ChosaChikuGroup" />
+     FROM
+         rgdb."DbT5225ChosaChikuGroup"
+     WHERE
+         rgdb."DbT5225ChosaChikuGroup"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5225ChosaChikuGroup">
+         "DbT5225ChosaChikuGroup"."chosaChikuGroupCode" as "dbT5225ChosaChikuGroup_chosaChikuGroupCode",
+         "DbT5225ChosaChikuGroup"."chosaChikuCode" as "dbT5225ChosaChikuGroup_chosaChikuCode",
+         "DbT5225ChosaChikuGroup"."shichosonCode" as "dbT5225ChosaChikuGroup_shichosonCode",
+         "DbT5225ChosaChikuGroup"."insertDantaiCd" as "dbT5225ChosaChikuGroup_insertDantaiCd",
+         "DbT5225ChosaChikuGroup"."insertTimestamp" as "dbT5225ChosaChikuGroup_insertTimestamp",
+         "DbT5225ChosaChikuGroup"."insertReamsLoginId" as "dbT5225ChosaChikuGroup_insertReamsLoginId",
+         "DbT5225ChosaChikuGroup"."insertContextId" as "dbT5225ChosaChikuGroup_insertContextId",
+         "DbT5225ChosaChikuGroup"."isDeleted" as "dbT5225ChosaChikuGroup_isDeleted",
+         "DbT5225ChosaChikuGroup"."updateCount" as "dbT5225ChosaChikuGroup_updateCount",
+         "DbT5225ChosaChikuGroup"."lastUpdateTimestamp" as "dbT5225ChosaChikuGroup_lastUpdateTimestamp",
+         "DbT5225ChosaChikuGroup"."lastUpdateReamsLoginId" as "dbT5225ChosaChikuGroup_lastUpdateReamsLoginId",
+         "DbT5225ChosaChikuGroup"."chosaChikuGroupName" as "dbT5225ChosaChikuGroup_chosaChikuGroupName",
+         "DbT5225ChosaChikuGroup"."yusenNo" as "dbT5225ChosaChikuGroup_yusenNo"
+    </sql>
+
+
+    <!--テーブルDbT5225ChosaChikuGroupの項目をDbT5225ChosaChikuGroupEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5225ChosaChikuGroupEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroupEntity" autoMapping="true">
+        <id property="chosaChikuGroupCode" column="dbT5225ChosaChikuGroup_chosaChikuGroupCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <id property="chosaChikuCode" column="dbT5225ChosaChikuGroup_chosaChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <id property="shichosonCode" column="dbT5225ChosaChikuGroup_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT5225ChosaChikuGroup_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5225ChosaChikuGroup_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5225ChosaChikuGroup_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5225ChosaChikuGroup_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5225ChosaChikuGroup_isDeleted" />
+        <result property="updateCount" column="dbT5225ChosaChikuGroup_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5225ChosaChikuGroup_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5225ChosaChikuGroup_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosaChikuGroupName" column="dbT5225ChosaChikuGroup_chosaChikuGroupName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yusenNo" column="dbT5225ChosaChikuGroup_yusenNo" />
+    </resultMap>
+<select id="getEntity" resultMap="ResultMap_DbT5225ChosaChikuGroupEntity">
+<!--    SELECT
+    <include refid="allColumns_DbT5225ChosaChikuGroup" />
+    FROM
+    rgdb."DbT5225ChosaChikuGroup"-->
+</select>
+</mapper>

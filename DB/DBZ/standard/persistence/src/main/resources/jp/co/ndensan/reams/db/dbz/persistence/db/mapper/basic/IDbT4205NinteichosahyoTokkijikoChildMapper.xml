@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4205NinteichosahyoTokkijikoChildマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4205NinteichosahyoTokkijikoChildMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4205NinteichosahyoTokkijikoChild">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4205NinteichosahyoTokkijikoChildMapper.allColumns_DbT4205NinteichosahyoTokkijikoChild" />
+     FROM
+         rgdb."DbT4205NinteichosahyoTokkijikoChild"
+     WHERE
+         rgdb."DbT4205NinteichosahyoTokkijikoChild"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4205NinteichosahyoTokkijikoChild">
+         "DbT4205NinteichosahyoTokkijikoChild"."shinseishoKanriNo" as "dbT4205NinteichosahyoTokkijikoChild_shinseishoKanriNo",
+         "DbT4205NinteichosahyoTokkijikoChild"."ninteichosaRirekiNo" as "dbT4205NinteichosahyoTokkijikoChild_ninteichosaRirekiNo",
+         "DbT4205NinteichosahyoTokkijikoChild"."ninteichosaTokkijikoNo" as "dbT4205NinteichosahyoTokkijikoChild_ninteichosaTokkijikoNo",
+         "DbT4205NinteichosahyoTokkijikoChild"."ninteichosaTokkijikoRenban" as "dbT4205NinteichosahyoTokkijikoChild_ninteichosaTokkijikoRenban",
+         "DbT4205NinteichosahyoTokkijikoChild"."tokkijikoTextImageKubun" as "dbT4205NinteichosahyoTokkijikoChild_tokkijikoTextImageKubun",
+         "DbT4205NinteichosahyoTokkijikoChild"."genponMaskKubun" as "dbT4205NinteichosahyoTokkijikoChild_genponMaskKubun",
+         "DbT4205NinteichosahyoTokkijikoChild"."insertDantaiCd" as "dbT4205NinteichosahyoTokkijikoChild_insertDantaiCd",
+         "DbT4205NinteichosahyoTokkijikoChild"."insertTimestamp" as "dbT4205NinteichosahyoTokkijikoChild_insertTimestamp",
+         "DbT4205NinteichosahyoTokkijikoChild"."insertReamsLoginId" as "dbT4205NinteichosahyoTokkijikoChild_insertReamsLoginId",
+         "DbT4205NinteichosahyoTokkijikoChild"."insertContextId" as "dbT4205NinteichosahyoTokkijikoChild_insertContextId",
+         "DbT4205NinteichosahyoTokkijikoChild"."isDeleted" as "dbT4205NinteichosahyoTokkijikoChild_isDeleted",
+         "DbT4205NinteichosahyoTokkijikoChild"."updateCount" as "dbT4205NinteichosahyoTokkijikoChild_updateCount",
+         "DbT4205NinteichosahyoTokkijikoChild"."lastUpdateTimestamp" as "dbT4205NinteichosahyoTokkijikoChild_lastUpdateTimestamp",
+         "DbT4205NinteichosahyoTokkijikoChild"."lastUpdateReamsLoginId" as "dbT4205NinteichosahyoTokkijikoChild_lastUpdateReamsLoginId",
+         "DbT4205NinteichosahyoTokkijikoChild"."tokkiJiko" as "dbT4205NinteichosahyoTokkijikoChild_tokkiJiko",
+         "DbT4205NinteichosahyoTokkijikoChild"."tokkiJikoImageSharedFileId" as "dbT4205NinteichosahyoTokkijikoChild_tokkiJikoImageSharedFileId",
+         "DbT4205NinteichosahyoTokkijikoChild"."tokkiJikoMaskingImageSharedFileId" as "dbT4205NinteichosahyoTokkijikoChild_tokkiJikoMaskingImageSharedFileId"
+    </sql>
+
+
+    <!--テーブルDbT4205NinteichosahyoTokkijikoChildの項目をDbT4205NinteichosahyoTokkijikoChildEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4205NinteichosahyoTokkijikoChildEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4205NinteichosahyoTokkijikoChildEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT4205NinteichosahyoTokkijikoChild_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="ninteichosaRirekiNo" column="dbT4205NinteichosahyoTokkijikoChild_ninteichosaRirekiNo" />
+        <id property="ninteichosaTokkijikoNo" column="dbT4205NinteichosahyoTokkijikoChild_ninteichosaTokkijikoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="ninteichosaTokkijikoRenban" column="dbT4205NinteichosahyoTokkijikoChild_ninteichosaTokkijikoRenban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="tokkijikoTextImageKubun" column="dbT4205NinteichosahyoTokkijikoChild_tokkijikoTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="genponMaskKubun" column="dbT4205NinteichosahyoTokkijikoChild_genponMaskKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT4205NinteichosahyoTokkijikoChild_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4205NinteichosahyoTokkijikoChild_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4205NinteichosahyoTokkijikoChild_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4205NinteichosahyoTokkijikoChild_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4205NinteichosahyoTokkijikoChild_isDeleted" />
+        <result property="updateCount" column="dbT4205NinteichosahyoTokkijikoChild_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4205NinteichosahyoTokkijikoChild_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4205NinteichosahyoTokkijikoChild_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokkiJiko" column="dbT4205NinteichosahyoTokkijikoChild_tokkiJiko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokkiJikoImageSharedFileId" column="dbT4205NinteichosahyoTokkijikoChild_tokkiJikoImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="tokkiJikoMaskingImageSharedFileId" column="dbT4205NinteichosahyoTokkijikoChild_tokkiJikoMaskingImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+    </resultMap>
+    
+        <select id="getEntity" resultMap="ResultMap_DbT4205NinteichosahyoTokkijikoChildEntity">
+	SELECT
+	<include refid="allColumns_DbT4205NinteichosahyoTokkijikoChild"/>
+	FROM
+	rgdb."DbT4205NinteichosahyoTokkijikoChild"
+	</select>
+
+</mapper>

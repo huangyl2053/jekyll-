@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7065ChohyoSeigyoKyotsuマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7065ChohyoSeigyoKyotsuMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7065ChohyoSeigyoKyotsu">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7065ChohyoSeigyoKyotsuMapper.allColumns_DbT7065ChohyoSeigyoKyotsu" />
+     FROM
+         rgdb."DbT7065ChohyoSeigyoKyotsu"
+     WHERE
+         rgdb."DbT7065ChohyoSeigyoKyotsu"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7065ChohyoSeigyoKyotsu">
+         "DbT7065ChohyoSeigyoKyotsu"."subGyomuCode" as "dbT7065ChohyoSeigyoKyotsu_subGyomuCode",
+         "DbT7065ChohyoSeigyoKyotsu"."chohyoBunruiID" as "dbT7065ChohyoSeigyoKyotsu_chohyoBunruiID",
+         "DbT7065ChohyoSeigyoKyotsu"."insertDantaiCd" as "dbT7065ChohyoSeigyoKyotsu_insertDantaiCd",
+         "DbT7065ChohyoSeigyoKyotsu"."insertTimestamp" as "dbT7065ChohyoSeigyoKyotsu_insertTimestamp",
+         "DbT7065ChohyoSeigyoKyotsu"."insertReamsLoginId" as "dbT7065ChohyoSeigyoKyotsu_insertReamsLoginId",
+         "DbT7065ChohyoSeigyoKyotsu"."insertContextId" as "dbT7065ChohyoSeigyoKyotsu_insertContextId",
+         "DbT7065ChohyoSeigyoKyotsu"."isDeleted" as "dbT7065ChohyoSeigyoKyotsu_isDeleted",
+         "DbT7065ChohyoSeigyoKyotsu"."updateCount" as "dbT7065ChohyoSeigyoKyotsu_updateCount",
+         "DbT7065ChohyoSeigyoKyotsu"."lastUpdateTimestamp" as "dbT7065ChohyoSeigyoKyotsu_lastUpdateTimestamp",
+         "DbT7065ChohyoSeigyoKyotsu"."lastUpdateReamsLoginId" as "dbT7065ChohyoSeigyoKyotsu_lastUpdateReamsLoginId",
+         "DbT7065ChohyoSeigyoKyotsu"."chohyoBunruiMeisho" as "dbT7065ChohyoSeigyoKyotsu_chohyoBunruiMeisho",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuKubun" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuKubun",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuTodoufukenMeiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuTodoufukenMeiHyojiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuGunMeiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuGunMeiHyojiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuShichosonMeiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuShichosonMeiHyojiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuChoikiHenshuHoho" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuChoikiHenshuHoho",
+         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuKatagakiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuKatagakiHyojiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."SetainushiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_SetainushiHyojiUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."customerBarCodeShiyoUmu" as "dbT7065ChohyoSeigyoKyotsu_customerBarCodeShiyoUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."customerBarCodeHenkanErrHenshuHoho" as "dbT7065ChohyoSeigyoKyotsu_customerBarCodeHenkanErrHenshuHoho",
+         "DbT7065ChohyoSeigyoKyotsu"."gaibuChohyoMojigireSeigyo" as "dbT7065ChohyoSeigyoKyotsu_gaibuChohyoMojigireSeigyo",
+         "DbT7065ChohyoSeigyoKyotsu"."naibuChohyoMojigireSeigyo" as "dbT7065ChohyoSeigyoKyotsu_naibuChohyoMojigireSeigyo",
+         "DbT7065ChohyoSeigyoKyotsu"."mojigireBunriSeigyo" as "dbT7065ChohyoSeigyoKyotsu_mojigireBunriSeigyo",
+         "DbT7065ChohyoSeigyoKyotsu"."teikeibunMojiSize" as "dbT7065ChohyoSeigyoKyotsu_teikeibunMojiSize",
+         "DbT7065ChohyoSeigyoKyotsu"."kozaMaskUmu" as "dbT7065ChohyoSeigyoKyotsu_kozaMaskUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."kozaMeigininKanaYusenKubun" as "dbT7065ChohyoSeigyoKyotsu_kozaMeigininKanaYusenKubun",
+         "DbT7065ChohyoSeigyoKyotsu"."daikoPrintUmu" as "dbT7065ChohyoSeigyoKyotsu_daikoPrintUmu",
+         "DbT7065ChohyoSeigyoKyotsu"."chikuHyoji1" as "dbT7065ChohyoSeigyoKyotsu_chikuHyoji1",
+         "DbT7065ChohyoSeigyoKyotsu"."chikuHyoji2" as "dbT7065ChohyoSeigyoKyotsu_chikuHyoji2",
+         "DbT7065ChohyoSeigyoKyotsu"."chikuHyoji3" as "dbT7065ChohyoSeigyoKyotsu_chikuHyoji3"
+    </sql>
+
+
+    <!--テーブルDbT7065ChohyoSeigyoKyotsuの項目をDbT7065ChohyoSeigyoKyotsuEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7065ChohyoSeigyoKyotsuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity" autoMapping="true">
+        <id property="subGyomuCode" column="dbT7065ChohyoSeigyoKyotsu_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
+        <id property="chohyoBunruiID" column="dbT7065ChohyoSeigyoKyotsu_chohyoBunruiID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ReportIdTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7065ChohyoSeigyoKyotsu_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7065ChohyoSeigyoKyotsu_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7065ChohyoSeigyoKyotsu_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7065ChohyoSeigyoKyotsu_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7065ChohyoSeigyoKyotsu_isDeleted" />
+        <result property="updateCount" column="dbT7065ChohyoSeigyoKyotsu_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7065ChohyoSeigyoKyotsu_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7065ChohyoSeigyoKyotsu_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chohyoBunruiMeisho" column="dbT7065ChohyoSeigyoKyotsu_chohyoBunruiMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushoHenshuKubun" column="dbT7065ChohyoSeigyoKyotsu_jushoHenshuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushoHenshuTodoufukenMeiHyojiUmu" column="dbT7065ChohyoSeigyoKyotsu_jushoHenshuTodoufukenMeiHyojiUmu" />
+        <result property="jushoHenshuGunMeiHyojiUmu" column="dbT7065ChohyoSeigyoKyotsu_jushoHenshuGunMeiHyojiUmu" />
+        <result property="jushoHenshuShichosonMeiHyojiUmu" column="dbT7065ChohyoSeigyoKyotsu_jushoHenshuShichosonMeiHyojiUmu" />
+        <result property="jushoHenshuChoikiHenshuHoho" column="dbT7065ChohyoSeigyoKyotsu_jushoHenshuChoikiHenshuHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushoHenshuKatagakiHyojiUmu" column="dbT7065ChohyoSeigyoKyotsu_jushoHenshuKatagakiHyojiUmu" />
+        <result property="SetainushiHyojiUmu" column="dbT7065ChohyoSeigyoKyotsu_SetainushiHyojiUmu" />
+        <result property="customerBarCodeShiyoUmu" column="dbT7065ChohyoSeigyoKyotsu_customerBarCodeShiyoUmu" />
+        <result property="customerBarCodeHenkanErrHenshuHoho" column="dbT7065ChohyoSeigyoKyotsu_customerBarCodeHenkanErrHenshuHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gaibuChohyoMojigireSeigyo" column="dbT7065ChohyoSeigyoKyotsu_gaibuChohyoMojigireSeigyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="naibuChohyoMojigireSeigyo" column="dbT7065ChohyoSeigyoKyotsu_naibuChohyoMojigireSeigyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="mojigireBunriSeigyo" column="dbT7065ChohyoSeigyoKyotsu_mojigireBunriSeigyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teikeibunMojiSize" column="dbT7065ChohyoSeigyoKyotsu_teikeibunMojiSize" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaMaskUmu" column="dbT7065ChohyoSeigyoKyotsu_kozaMaskUmu" />
+        <result property="kozaMeigininKanaYusenKubun" column="dbT7065ChohyoSeigyoKyotsu_kozaMeigininKanaYusenKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="daikoPrintUmu" column="dbT7065ChohyoSeigyoKyotsu_daikoPrintUmu" />
+        <result property="chikuHyoji1" column="dbT7065ChohyoSeigyoKyotsu_chikuHyoji1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chikuHyoji2" column="dbT7065ChohyoSeigyoKyotsu_chikuHyoji2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chikuHyoji3" column="dbT7065ChohyoSeigyoKyotsu_chikuHyoji3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+        <select id="getEntity" resultMap="ResultMap_DbT7065ChohyoSeigyoKyotsuEntity">
+	SELECT
+	<include refid="allColumns_DbT7065ChohyoSeigyoKyotsu"/>
+	FROM
+	rgdb."DbT7065ChohyoSeigyoKyotsu"
+	</select>
+
+</mapper>

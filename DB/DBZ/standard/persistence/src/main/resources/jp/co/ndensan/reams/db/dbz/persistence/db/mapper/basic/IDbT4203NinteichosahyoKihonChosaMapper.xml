@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4203NinteichosahyoKihonChosaマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4203NinteichosahyoKihonChosaMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4203NinteichosahyoKihonChosa">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4203NinteichosahyoKihonChosaMapper.allColumns_DbT4203NinteichosahyoKihonChosa" />
+     FROM
+         rgdb."DbT4203NinteichosahyoKihonChosa"
+     WHERE
+         rgdb."DbT4203NinteichosahyoKihonChosa"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4203NinteichosahyoKihonChosa">
+         "DbT4203NinteichosahyoKihonChosa"."shinseishoKanriNo" as "dbT4203NinteichosahyoKihonChosa_shinseishoKanriNo",
+         "DbT4203NinteichosahyoKihonChosa"."ninteichosaRirekiNo" as "dbT4203NinteichosahyoKihonChosa_ninteichosaRirekiNo",
+         "DbT4203NinteichosahyoKihonChosa"."insertDantaiCd" as "dbT4203NinteichosahyoKihonChosa_insertDantaiCd",
+         "DbT4203NinteichosahyoKihonChosa"."insertTimestamp" as "dbT4203NinteichosahyoKihonChosa_insertTimestamp",
+         "DbT4203NinteichosahyoKihonChosa"."insertReamsLoginId" as "dbT4203NinteichosahyoKihonChosa_insertReamsLoginId",
+         "DbT4203NinteichosahyoKihonChosa"."insertContextId" as "dbT4203NinteichosahyoKihonChosa_insertContextId",
+         "DbT4203NinteichosahyoKihonChosa"."isDeleted" as "dbT4203NinteichosahyoKihonChosa_isDeleted",
+         "DbT4203NinteichosahyoKihonChosa"."updateCount" as "dbT4203NinteichosahyoKihonChosa_updateCount",
+         "DbT4203NinteichosahyoKihonChosa"."lastUpdateTimestamp" as "dbT4203NinteichosahyoKihonChosa_lastUpdateTimestamp",
+         "DbT4203NinteichosahyoKihonChosa"."lastUpdateReamsLoginId" as "dbT4203NinteichosahyoKihonChosa_lastUpdateReamsLoginId",
+         "DbT4203NinteichosahyoKihonChosa"."koroshoIfShikibetsuCode" as "dbT4203NinteichosahyoKihonChosa_koroshoIfShikibetsuCode",
+         "DbT4203NinteichosahyoKihonChosa"."ninchishoNichijoSeikatsuJiritsudoCode" as "dbT4203NinteichosahyoKihonChosa_ninchishoNichijoSeikatsuJiritsudoCode",
+         "DbT4203NinteichosahyoKihonChosa"."shogaiNichijoSeikatsuJiritsudoCode" as "dbT4203NinteichosahyoKihonChosa_shogaiNichijoSeikatsuJiritsudoCode"
+    </sql>
+
+
+    <!--テーブルDbT4203NinteichosahyoKihonChosaの項目をDbT4203NinteichosahyoKihonChosaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4203NinteichosahyoKihonChosaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4203NinteichosahyoKihonChosaEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT4203NinteichosahyoKihonChosa_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="ninteichosaRirekiNo" column="dbT4203NinteichosahyoKihonChosa_ninteichosaRirekiNo" />
+        <result property="insertDantaiCd" column="dbT4203NinteichosahyoKihonChosa_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4203NinteichosahyoKihonChosa_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4203NinteichosahyoKihonChosa_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4203NinteichosahyoKihonChosa_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4203NinteichosahyoKihonChosa_isDeleted" />
+        <result property="updateCount" column="dbT4203NinteichosahyoKihonChosa_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4203NinteichosahyoKihonChosa_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4203NinteichosahyoKihonChosa_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koroshoIfShikibetsuCode" column="dbT4203NinteichosahyoKihonChosa_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ninchishoNichijoSeikatsuJiritsudoCode" column="dbT4203NinteichosahyoKihonChosa_ninchishoNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shogaiNichijoSeikatsuJiritsudoCode" column="dbT4203NinteichosahyoKihonChosa_shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+    </resultMap>
+    
+        <select id="getEntity" resultMap="ResultMap_DbT4203NinteichosahyoKihonChosaEntity">
+	SELECT
+	<include refid="allColumns_DbT4203NinteichosahyoKihonChosa"/>
+	FROM
+	rgdb."DbT4203NinteichosahyoKihonChosa"
+	</select>
+
+</mapper>

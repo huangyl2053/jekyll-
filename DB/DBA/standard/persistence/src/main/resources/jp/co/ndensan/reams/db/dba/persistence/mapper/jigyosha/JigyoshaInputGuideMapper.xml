@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.mapper.jigyosha.JigyoshaInputGuideMapper">
+ 
+    <resultMap id="resultMap_serviceJigyoshaInputGuideEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity" autoMapping="true">
+        <id property="jigyoshaNo" column="dbT7060Kaigo_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.KaigoJigyoshaNoTypeHandler" />
+        <id property="yukoKaishiYMD" column="dbT7060Kaigo_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="yukoShuryoYMD" column="dbT7060Kaigo_yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="jigyoshaName" column="dbT7060Kaigo_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="jigyoshaNameKana" column="dbT7060Kaigo_jigyoshaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <result property="jigyoshaKanaAddress" column="dbT7060Kaigo_jigyoshaKanaAddress" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="telNo" column="dbT7060Kaigo_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+        <result property="serviceShuruiCode" column="dbT7063Kaigo_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="serviceShuruiRyakusho" column="dbT7130Kaigo_serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+   </resultMap>
+         
+    <resultMap id="resultMap_tekiyoJogaiInputGuideEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity" autoMapping="true">
+        <id property="jigyoshaNo" column="dbT1005Kaigo_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.KaigoJigyoshaNoTypeHandler" />
+        <id property="yukoKaishiYMD" column="dbT1005Kaigo_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="yukoShuryoYMD" column="dbT1005Kaigo_yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="jigyoshaKanaMeisho" column="dbT1005Kaigo_jigyoshaKanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <result property="jigyoshaKanaJusho" column="dbT1005Kaigo_jigyoshaKanaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="telNo" column="dbT1005Kaigo_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+    </resultMap>
+    
+   <resultMap id="resultMap_otherTokureiInputGuideEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity" autoMapping="true">
+        <id property="jigyoshaNo" column="dbT1005Kaigo_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.KaigoJigyoshaNoTypeHandler" />
+        <id property="yukoKaishiYMD" column="dbT1005Kaigo_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="yukoShuryoYMD" column="dbT1005Kaigo_yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="jigyoshaKanaMeisho" column="dbT1005Kaigo_jigyoshaKanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jigyoshaKanaJusho" column="dbT1005Kaigo_jigyoshaKanaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="telNo" column="dbT1005Kaigo_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+    </resultMap>
+
+    
+    <select id="getServiceJigyoshaInputGuide" resultMap="resultMap_serviceJigyoshaInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
+        SELECT                                                                                                     
+            dbT7060Kaigo."jigyoshaNo" AS "dbT7060Kaigo_jigyoshaNo",
+            dbT7060Kaigo."yukoKaishiYMD" AS "dbT7060Kaigo_yukoKaishiYMD",
+            dbT7060Kaigo."yukoShuryoYMD" AS "dbT7060Kaigo_yukoShuryoYMD",
+            dbT7060Kaigo."jigyoshaName" AS "dbT7060Kaigo_jigyoshaName",
+            dbT7060Kaigo."jigyoshaNameKana" AS "dbT7060Kaigo_jigyoshaNameKana",
+            dbT7060Kaigo."jigyoshaKanaAddress" AS "dbT7060Kaigo_jigyoshaKanaAddress",
+            dbT7060Kaigo."telNo" AS "dbT7060Kaigo_telNo",
+            dbT7063Kaigo."serviceShuruiCode" AS "dbT7063Kaigo_serviceShuruiCode",
+            dbT7130Kaigo."serviceShuruiRyakusho" AS "dbT7130Kaigo_serviceShuruiRyakusho"
+        FROM 
+            rgdb."DbT7060KaigoJigyosha" AS dbT7060Kaigo
+        LEFT JOIN 
+            rgdb."DbT7063KaigoJigyoshaShiteiService" AS dbT7063Kaigo
+        ON 
+            dbT7060Kaigo."jigyoshaNo" =  dbT7063Kaigo."jigyoshaNo"
+        LEFT JOIN
+            rgdb."DbT7130KaigoServiceShurui" AS dbT7130Kaigo
+        ON 
+            dbT7063Kaigo."serviceShuruiCode" = dbT7130Kaigo."serviceShuruiCd"
+        
+        WHERE 
+            dbT7060Kaigo."isDeleted" <![CDATA[<>]]> TRUE
+        AND
+            dbT7063Kaigo."isDeleted"  <![CDATA[<>]]> TRUE
+        AND 
+            dbT7130Kaigo."isDeleted"  <![CDATA[<>]]> TRUE
+        
+        <if test="isJigyoshaNoFlag" >
+           AND dbT7060Kaigo."jigyoshaNo" = #{jigyoshaNo}
+        </if>
+        <if test = "!isJigyoshaNoFlag">
+           <if test = "isYukoKaishiYMDFromFlag and !isYukoKaishiYMDToFlag">
+               AND 
+                    dbT7060Kaigo."yukoKaishiYMD"  <![CDATA[>=]]>   #{yukoKaishiYMDFrom}
+               AND
+                    dbT7063Kaigo."yukoKaishiYMD" <![CDATA[>=]]>  #{yukoKaishiYMDFrom}
+           </if>
+           <if test = "isYukoKaishiYMDFromFlag and isYukoKaishiYMDToFlag">
+               AND 
+                    dbT7060Kaigo."yukoKaishiYMD" <![CDATA[>=]]>  #{yukoKaishiYMDFrom}
+               AND 
+                    dbT7060Kaigo."yukoKaishiYMD" <![CDATA[<=]]>  #{yukoKaishiYMDTo}
+               AND  
+                    dbT7063Kaigo."yukoKaishiYMD" <![CDATA[>=]]>  #{yukoKaishiYMDFrom}
+               AND  
+                    dbT7063Kaigo."yukoKaishiYMD" <![CDATA[<=]]>  #{yukoKaishiYMDTo}
+           </if>
+           <if test = "!isYukoKaishiYMDFromFlag and isYukoKaishiYMDToFlag">
+               AND  
+                    dbT7060Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{yukoKaishiYMDTo}
+               AND 
+                    dbT7063Kaigo."yukoKaishiYMD" <![CDATA[<=]]>  #{yukoKaishiYMDTo}
+           </if>
+           <if test = "!isYukoKaishiYMDFromFlag and !isYukoKaishiYMDToFlag">
+               AND 
+                    dbT7060Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{systemdate}
+               AND  
+                    dbT7060Kaigo."yukoShuryoYMD" <![CDATA[>=]]> #{systemdate}
+               AND 
+                    dbT7063Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{systemdate}
+               AND  
+                    dbT7063Kaigo."yukoShuryoYMD" <![CDATA[>=]]> #{systemdate}
+           </if>
+           <if test = "isJigyoshaName">
+               <if test = "isZennpouitti">
+                    AND 
+                        dbT7060Kaigo."jigyoshaName" =  #{jigyoshaName}
+                    OR  
+                        dbT7060Kaigo."jigyoshaNameKana" =  #{jigyoshaName}
+               </if>
+               <if test = "!isZennpouitti">
+                    AND 
+                        dbT7060Kaigo."jigyoshaName" LIKE  #{jigyoshaName} || '%'
+                    OR  
+                        dbT7060Kaigo."jigyoshaNameKana" LIKE   #{jigyoshaName} || '%'
+               </if>
+           </if>
+           <if test = "isYubinNo">
+                AND
+                    dbT7060Kaigo."yubinNo"  = #{yubinNo}
+           </if>
+           <if test = "isAddress">
+               <if test = "isZennpouitti">
+                    AND
+                        dbT7060Kaigo."jigyoshaAddress"  = #{address}
+               </if>
+               <if test = "!isZennpouitti">
+                    AND 
+                         dbT7060Kaigo."jigyoshaAddress" LIKE  #{address} || '%'
+               </if>
+           </if>
+           <if test = "isServiceShuRui">
+                AND 
+                     dbT7063Kaigo."serviceShuruiCode" = #{serviceShuRui}
+                AND 
+                     SUBSTRING(dbT7060Kaigo."jigyoshaNo",1,2) = #{kenCode}
+           </if>
+           <if test = "isJigyoshaKbn">
+                AND 
+                    SUBSTRING(dbT7060Kaigo."jigyoshaNo",3,2) = #{jigyoshaKbn}
+           </if>
+           <if test = "isGunshiCode">
+                AND
+                     SUBSTRING(dbT7060Kaigo."jigyoshaNo",5,2) = #{gunshiCode}
+           </if>
+        </if>
+        ORDER BY
+	    dbT7060Kaigo."jigyoshaNo" limit #{limitCount}
+    </select>
+    
+    <select id="getTekiyoJogaiInputGuide" resultMap="resultMap_tekiyoJogaiInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
+        SELECT                                                                                                     
+            dbT1005Kaigo."jigyoshaNo" AS "dbT1005Kaigo_jigyoshaNo",
+            dbT1005Kaigo."yukoKaishiYMD" AS "dbT1005Kaigo_yukoKaishiYMD",
+            dbT1005Kaigo."yukoShuryoYMD" AS "dbT1005Kaigo_yukoShuryoYMD",
+            dbT1005Kaigo."jigyoshaKanaMeisho" AS "dbT1005Kaigo_jigyoshaKanaMeisho",
+            dbT1005Kaigo."jigyoshaKanaJusho" AS "dbT1005Kaigo_jigyoshaKanaJusho",
+            dbT1005Kaigo."telNo" AS "dbT1005Kaigo_telNo" 
+        FROM 
+              rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS dbT1005Kaigo
+        WHERE 
+              dbT1005Kaigo."isDeleted" <![CDATA[<>]]> TRUE
+        AND   
+              dbT1005Kaigo."jigyoshaShubetsu"= #{jigyoshaShubetsu}
+        <if test="isJigyoshaNoFlag" >
+             AND dbT1005Kaigo."jigyoshaNo"  = #{jigyoshaNo}
+        </if>
+        <if test = "!isJigyoshaNoFlag">
+           <if test = "isYukoKaishiYMDFromFlag and !isYukoKaishiYMDToFlag">
+               AND 
+                    dbT1005Kaigo."yukoKaishiYMD" <![CDATA[>=]]>  #{yukoKaishiYMDFrom}
+           </if>
+           <if test = "isYukoKaishiYMDFromFlag and isYukoKaishiYMDToFlag">
+               AND 
+                    dbT1005Kaigo."yukoKaishiYMD" <![CDATA[>=]]>  #{yukoKaishiYMDFrom}
+               AND 
+                    dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]>  #{yukoKaishiYMDTo}
+           </if>
+           <if test = "!isYukoKaishiYMDFromFlag and isYukoKaishiYMDToFlag">
+               AND  
+                   dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{yukoKaishiYMDTo}
+           </if>
+           <if test = "!isYukoKaishiYMDFromFlag and !isYukoKaishiYMDToFlag">
+               AND 
+                    dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{systemdate}
+               AND  
+                    dbT1005Kaigo."yukoShuryoYMD" <![CDATA[>=]]> #{systemdate}
+           </if>
+           <if test = "isJigyoshaName">
+               <if test = "isZennpouitti">
+                    AND 
+                        dbT1005Kaigo."jigyoshaMeisho" =  #{jigyoshaName}
+                    OR  
+                        dbT1005Kaigo."jigyoshaKanaMeisho" =  #{jigyoshaName}
+               </if>
+               <if test = "!isZennpouitti">
+                    AND 
+                        dbT1005Kaigo."jigyoshaMeisho" LIKE  #{jigyoshaName} || '%'
+                    OR  
+                        dbT1005Kaigo."jigyoshaKanaMeisho" LIKE   #{jigyoshaName} || '%'
+               </if>
+           </if>
+           <if test = "isYubinNo">
+                AND
+                    dbT1005Kaigo."yubinNo"  = #{yubinNo}
+           </if>
+           <if test = "isAddress">
+               <if test = "isZennpouitti">
+                    AND 
+                         dbT1005Kaigo."jigyoshaJusho" = #{address}
+               </if>
+               <if test = "!isZennpouitti">
+                    AND 
+                        dbT1005Kaigo."jigyoshaJusho" LIKE  #{address} || '%'
+               </if>
+           </if>
+        </if>
+        
+        ORDER BY
+              dbT1005Kaigo."jigyoshaNo" limit #{limitCount}
+    </select>
+   <select id="getOtherTokureiInputGuide" resultMap="resultMap_otherTokureiInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
+      SELECT                                                                                                     
+        dbT1005Kaigo."jigyoshaNo" AS "dbT1005Kaigo_jigyoshaNo",
+        dbT1005Kaigo."yukoKaishiYMD" AS "dbT1005Kaigo_yukoKaishiYMD",
+        dbT1005Kaigo."yukoShuryoYMD" AS "dbT1005Kaigo_yukoShuryoYMD",
+        dbT1005Kaigo."jigyoshaKanaMeisho" AS "dbT1005Kaigo_jigyoshaKanaMeisho",
+        dbT1005Kaigo."jigyoshaKanaJusho" AS "dbT1005Kaigo_jigyoshaKanaJusho",
+        dbT1005Kaigo."telNo" AS "dbT1005Kaigo_telNo"
+        FROM 
+              rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS dbT1005Kaigo
+        WHERE 
+              dbT1005Kaigo."isDeleted" <![CDATA[<>]]> TRUE
+        AND 
+              dbT1005Kaigo."kannaiKangaiKubun"= #{kannaiKangaiKubun}
+        AND   
+              dbT1005Kaigo."jigyoshaShubetsu"= #{jigyoshaShubetsu}
+        <if test="isJigyoshaNoFlag" >
+             AND dbT1005Kaigo."jigyoshaNo"  = #{jigyoshaNo}
+        </if>
+        <if test = "!isJigyoshaNoFlag">
+           <if test = "isYukoKaishiYMDFromFlag and !isYukoKaishiYMDToFlag">
+               AND 
+                    dbT1005Kaigo."yukoKaishiYMD" <![CDATA[>=]]>  #{yukoKaishiYMDFrom}
+           </if>
+           <if test = "isYukoKaishiYMDFromFlag and isYukoKaishiYMDToFlag">
+               AND 
+                    dbT1005Kaigo."yukoKaishiYMD" <![CDATA[>=]]>  #{yukoKaishiYMDFrom}
+               AND 
+                    dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]>  #{yukoKaishiYMDTo}
+           </if>
+           <if test = "!isYukoKaishiYMDFromFlag and isYukoKaishiYMDToFlag">
+               AND  
+                   dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{yukoKaishiYMDTo}
+           </if>
+           <if test = "!isYukoKaishiYMDFromFlag and !isYukoKaishiYMDToFlag">
+               AND 
+                    dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{systemdate}
+               AND  
+                    dbT1005Kaigo."yukoShuryoYMD" <![CDATA[>=]]> #{systemdate}
+           </if>
+           <if test = "isJigyoshaName">
+               <if test = "isZennpouitti">
+                    AND 
+                        dbT1005Kaigo."jigyoshaMeisho" =  #{jigyoshaName}
+                    OR  
+                        dbT1005Kaigo."jigyoshaKanaMeisho" =  #{jigyoshaName}
+               </if>
+               <if test = "!isZennpouitti">
+                    AND 
+                        dbT1005Kaigo."jigyoshaMeisho" LIKE  #{jigyoshaName} || '%'
+                    OR  
+                        dbT1005Kaigo."jigyoshaKanaMeisho" LIKE   #{jigyoshaName} || '%'
+               </if>
+           </if>
+           <if test = "isYubinNo">
+                AND
+                    dbT1005Kaigo."yubinNo"  = #{yubinNo}
+           </if>
+           <if test = "isAddress">
+               <if test = "isZennpouitti">
+                    AND
+                        dbT1005Kaigo."jigyoshaJusho"  = #{address}
+               </if>
+               <if test = "!isZennpouitti">
+                    AND 
+                        dbT1005Kaigo."jigyoshaJusho" LIKE  #{address} || '%'
+               </if>
+           </if>
+        </if>
+        ORDER BY
+              dbT1005Kaigo."jigyoshaNo" limit #{limitCount}
+    </select>
+</mapper>

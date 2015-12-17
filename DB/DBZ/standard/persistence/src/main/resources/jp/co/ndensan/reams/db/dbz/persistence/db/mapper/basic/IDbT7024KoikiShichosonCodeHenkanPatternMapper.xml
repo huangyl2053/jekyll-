@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7024KoikiShichosonCodeHenkanPatternマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7024KoikiShichosonCodeHenkanPatternMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7024KoikiShichosonCodeHenkanPattern">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7024KoikiShichosonCodeHenkanPatternMapper.allColumns_DbT7024KoikiShichosonCodeHenkanPattern" />
+     FROM
+         rgdb."DbT7024KoikiShichosonCodeHenkanPattern"
+     WHERE
+         rgdb."DbT7024KoikiShichosonCodeHenkanPattern"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7024KoikiShichosonCodeHenkanPattern">
+         "DbT7024KoikiShichosonCodeHenkanPattern"."koikiShichosonNo" as "dbT7024KoikiShichosonCodeHenkanPattern_koikiShichosonNo",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."shichosonCode" as "dbT7024KoikiShichosonCodeHenkanPattern_shichosonCode",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."codeKubun" as "dbT7024KoikiShichosonCodeHenkanPattern_codeKubun",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."insertDantaiCd" as "dbT7024KoikiShichosonCodeHenkanPattern_insertDantaiCd",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."insertTimestamp" as "dbT7024KoikiShichosonCodeHenkanPattern_insertTimestamp",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."insertReamsLoginId" as "dbT7024KoikiShichosonCodeHenkanPattern_insertReamsLoginId",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."insertContextId" as "dbT7024KoikiShichosonCodeHenkanPattern_insertContextId",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."isDeleted" as "dbT7024KoikiShichosonCodeHenkanPattern_isDeleted",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."updateCount" as "dbT7024KoikiShichosonCodeHenkanPattern_updateCount",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."lastUpdateTimestamp" as "dbT7024KoikiShichosonCodeHenkanPattern_lastUpdateTimestamp",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."lastUpdateReamsLoginId" as "dbT7024KoikiShichosonCodeHenkanPattern_lastUpdateReamsLoginId",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."codeHenkanTableShiyoUmu" as "dbT7024KoikiShichosonCodeHenkanPattern_codeHenkanTableShiyoUmu",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."jidoSaibanKubun" as "dbT7024KoikiShichosonCodeHenkanPattern_jidoSaibanKubun",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."shichosonCodeKetasu" as "dbT7024KoikiShichosonCodeHenkanPattern_shichosonCodeKetasu",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."shichosonCodeKaishiIchi" as "dbT7024KoikiShichosonCodeHenkanPattern_shichosonCodeKaishiIchi",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."shichosonCodeShiyoKetasu" as "dbT7024KoikiShichosonCodeHenkanPattern_shichosonCodeShiyoKetasu",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."shichosonNinshoNoUmu" as "dbT7024KoikiShichosonCodeHenkanPattern_shichosonNinshoNoUmu",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."koikiCodeKetasu" as "dbT7024KoikiShichosonCodeHenkanPattern_koikiCodeKetasu",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."koikiCodeKaishiIchi" as "dbT7024KoikiShichosonCodeHenkanPattern_koikiCodeKaishiIchi",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."koikiCodeShiyoKetasu" as "dbT7024KoikiShichosonCodeHenkanPattern_koikiCodeShiyoKetasu",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."koikiNinshoNoUmu" as "dbT7024KoikiShichosonCodeHenkanPattern_koikiNinshoNoUmu",
+         "DbT7024KoikiShichosonCodeHenkanPattern"."shichosonNoFukaKubun" as "dbT7024KoikiShichosonCodeHenkanPattern_shichosonNoFukaKubun"
+    </sql>
+
+
+    <!--テーブルDbT7024KoikiShichosonCodeHenkanPatternの項目をDbT7024KoikiShichosonCodeHenkanPatternEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7024KoikiShichosonCodeHenkanPatternEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7024KoikiShichosonCodeHenkanPatternEntity" autoMapping="true">
+        <id property="koikiShichosonNo" column="dbT7024KoikiShichosonCodeHenkanPattern_koikiShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shichosonCode" column="dbT7024KoikiShichosonCodeHenkanPattern_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="codeKubun" column="dbT7024KoikiShichosonCodeHenkanPattern_codeKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7024KoikiShichosonCodeHenkanPattern_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7024KoikiShichosonCodeHenkanPattern_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7024KoikiShichosonCodeHenkanPattern_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7024KoikiShichosonCodeHenkanPattern_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7024KoikiShichosonCodeHenkanPattern_isDeleted" />
+        <result property="updateCount" column="dbT7024KoikiShichosonCodeHenkanPattern_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7024KoikiShichosonCodeHenkanPattern_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7024KoikiShichosonCodeHenkanPattern_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="codeHenkanTableShiyoUmu" column="dbT7024KoikiShichosonCodeHenkanPattern_codeHenkanTableShiyoUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jidoSaibanKubun" column="dbT7024KoikiShichosonCodeHenkanPattern_jidoSaibanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCodeKetasu" column="dbT7024KoikiShichosonCodeHenkanPattern_shichosonCodeKetasu" />
+        <result property="shichosonCodeKaishiIchi" column="dbT7024KoikiShichosonCodeHenkanPattern_shichosonCodeKaishiIchi" />
+        <result property="shichosonCodeShiyoKetasu" column="dbT7024KoikiShichosonCodeHenkanPattern_shichosonCodeShiyoKetasu" />
+        <result property="shichosonNinshoNoUmu" column="dbT7024KoikiShichosonCodeHenkanPattern_shichosonNinshoNoUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koikiCodeKetasu" column="dbT7024KoikiShichosonCodeHenkanPattern_koikiCodeKetasu" />
+        <result property="koikiCodeKaishiIchi" column="dbT7024KoikiShichosonCodeHenkanPattern_koikiCodeKaishiIchi" />
+        <result property="koikiCodeShiyoKetasu" column="dbT7024KoikiShichosonCodeHenkanPattern_koikiCodeShiyoKetasu" />
+        <result property="koikiNinshoNoUmu" column="dbT7024KoikiShichosonCodeHenkanPattern_koikiNinshoNoUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonNoFukaKubun" column="dbT7024KoikiShichosonCodeHenkanPattern_shichosonNoFukaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+<select id="getEntity" resultMap="ResultMap_DbT7024KoikiShichosonCodeHenkanPatternEntity">
+    SELECT
+    <include refid="allColumns_DbT7024KoikiShichosonCodeHenkanPattern" />
+    FROM
+    rgdb."DbT7024KoikiShichosonCodeHenkanPattern"
+</select>
+</mapper>

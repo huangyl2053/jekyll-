@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7034KoikiGaijiHenkanErrorLogマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7034KoikiGaijiHenkanErrorLogMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7034KoikiGaijiHenkanErrorLog">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7034KoikiGaijiHenkanErrorLogMapper.allColumns_DbT7034KoikiGaijiHenkanErrorLog" />
+     FROM
+         rgdb."DbT7034KoikiGaijiHenkanErrorLog"
+     WHERE
+         rgdb."DbT7034KoikiGaijiHenkanErrorLog"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7034KoikiGaijiHenkanErrorLog">
+         "DbT7034KoikiGaijiHenkanErrorLog"."shoriNo" as "dbT7034KoikiGaijiHenkanErrorLog_shoriNo",
+         "DbT7034KoikiGaijiHenkanErrorLog"."renNo" as "dbT7034KoikiGaijiHenkanErrorLog_renNo",
+         "DbT7034KoikiGaijiHenkanErrorLog"."errorHyojiRenban" as "dbT7034KoikiGaijiHenkanErrorLog_errorHyojiRenban",
+         "DbT7034KoikiGaijiHenkanErrorLog"."insertDantaiCd" as "dbT7034KoikiGaijiHenkanErrorLog_insertDantaiCd",
+         "DbT7034KoikiGaijiHenkanErrorLog"."insertTimestamp" as "dbT7034KoikiGaijiHenkanErrorLog_insertTimestamp",
+         "DbT7034KoikiGaijiHenkanErrorLog"."insertReamsLoginId" as "dbT7034KoikiGaijiHenkanErrorLog_insertReamsLoginId",
+         "DbT7034KoikiGaijiHenkanErrorLog"."insertContextId" as "dbT7034KoikiGaijiHenkanErrorLog_insertContextId",
+         "DbT7034KoikiGaijiHenkanErrorLog"."isDeleted" as "dbT7034KoikiGaijiHenkanErrorLog_isDeleted",
+         "DbT7034KoikiGaijiHenkanErrorLog"."updateCount" as "dbT7034KoikiGaijiHenkanErrorLog_updateCount",
+         "DbT7034KoikiGaijiHenkanErrorLog"."lastUpdateTimestamp" as "dbT7034KoikiGaijiHenkanErrorLog_lastUpdateTimestamp",
+         "DbT7034KoikiGaijiHenkanErrorLog"."lastUpdateReamsLoginId" as "dbT7034KoikiGaijiHenkanErrorLog_lastUpdateReamsLoginId",
+         "DbT7034KoikiGaijiHenkanErrorLog"."shichosonCode" as "dbT7034KoikiGaijiHenkanErrorLog_shichosonCode",
+         "DbT7034KoikiGaijiHenkanErrorLog"."shubetsu" as "dbT7034KoikiGaijiHenkanErrorLog_shubetsu",
+         "DbT7034KoikiGaijiHenkanErrorLog"."rirekiNo" as "dbT7034KoikiGaijiHenkanErrorLog_rirekiNo",
+         "DbT7034KoikiGaijiHenkanErrorLog"."motoShichosonCode" as "dbT7034KoikiGaijiHenkanErrorLog_motoShichosonCode",
+         "DbT7034KoikiGaijiHenkanErrorLog"."motoShichosonMeisho" as "dbT7034KoikiGaijiHenkanErrorLog_motoShichosonMeisho",
+         "DbT7034KoikiGaijiHenkanErrorLog"."sakiShichosonCode" as "dbT7034KoikiGaijiHenkanErrorLog_sakiShichosonCode",
+         "DbT7034KoikiGaijiHenkanErrorLog"."sakiShichosonMeisho" as "dbT7034KoikiGaijiHenkanErrorLog_sakiShichosonMeisho",
+         "DbT7034KoikiGaijiHenkanErrorLog"."jukiShikibetsuCode" as "dbT7034KoikiGaijiHenkanErrorLog_jukiShikibetsuCode",
+         "DbT7034KoikiGaijiHenkanErrorLog"."kakuninKubun" as "dbT7034KoikiGaijiHenkanErrorLog_kakuninKubun",
+         "DbT7034KoikiGaijiHenkanErrorLog"."shikibetsuCode" as "dbT7034KoikiGaijiHenkanErrorLog_shikibetsuCode",
+         "DbT7034KoikiGaijiHenkanErrorLog"."hihokenshaNo" as "dbT7034KoikiGaijiHenkanErrorLog_hihokenshaNo",
+         "DbT7034KoikiGaijiHenkanErrorLog"."recoadNo" as "dbT7034KoikiGaijiHenkanErrorLog_recoadNo",
+         "DbT7034KoikiGaijiHenkanErrorLog"."errorKomokuMeisho" as "dbT7034KoikiGaijiHenkanErrorLog_errorKomokuMeisho",
+         "DbT7034KoikiGaijiHenkanErrorLog"."errorKomokuNo" as "dbT7034KoikiGaijiHenkanErrorLog_errorKomokuNo",
+         "DbT7034KoikiGaijiHenkanErrorLog"."errorCode" as "dbT7034KoikiGaijiHenkanErrorLog_errorCode",
+         "DbT7034KoikiGaijiHenkanErrorLog"."errorHyojiKomokuMeisho" as "dbT7034KoikiGaijiHenkanErrorLog_errorHyojiKomokuMeisho",
+         "DbT7034KoikiGaijiHenkanErrorLog"."errorHyojiKomoku" as "dbT7034KoikiGaijiHenkanErrorLog_errorHyojiKomoku"
+    </sql>
+
+
+    <!--テーブルDbT7034KoikiGaijiHenkanErrorLogの項目をDbT7034KoikiGaijiHenkanErrorLogEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7034KoikiGaijiHenkanErrorLogEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7034KoikiGaijiHenkanErrorLogEntity" autoMapping="true">
+        <id property="shoriNo" column="dbT7034KoikiGaijiHenkanErrorLog_shoriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="renNo" column="dbT7034KoikiGaijiHenkanErrorLog_renNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="errorHyojiRenban" column="dbT7034KoikiGaijiHenkanErrorLog_errorHyojiRenban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7034KoikiGaijiHenkanErrorLog_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7034KoikiGaijiHenkanErrorLog_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7034KoikiGaijiHenkanErrorLog_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7034KoikiGaijiHenkanErrorLog_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7034KoikiGaijiHenkanErrorLog_isDeleted" />
+        <result property="updateCount" column="dbT7034KoikiGaijiHenkanErrorLog_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7034KoikiGaijiHenkanErrorLog_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7034KoikiGaijiHenkanErrorLog_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="dbT7034KoikiGaijiHenkanErrorLog_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="shubetsu" column="dbT7034KoikiGaijiHenkanErrorLog_shubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="rirekiNo" column="dbT7034KoikiGaijiHenkanErrorLog_rirekiNo" />
+        <result property="motoShichosonCode" column="dbT7034KoikiGaijiHenkanErrorLog_motoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="motoShichosonMeisho" column="dbT7034KoikiGaijiHenkanErrorLog_motoShichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sakiShichosonCode" column="dbT7034KoikiGaijiHenkanErrorLog_sakiShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="sakiShichosonMeisho" column="dbT7034KoikiGaijiHenkanErrorLog_sakiShichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jukiShikibetsuCode" column="dbT7034KoikiGaijiHenkanErrorLog_jukiShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="kakuninKubun" column="dbT7034KoikiGaijiHenkanErrorLog_kakuninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikibetsuCode" column="dbT7034KoikiGaijiHenkanErrorLog_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="hihokenshaNo" column="dbT7034KoikiGaijiHenkanErrorLog_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="recoadNo" column="dbT7034KoikiGaijiHenkanErrorLog_recoadNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="errorKomokuMeisho" column="dbT7034KoikiGaijiHenkanErrorLog_errorKomokuMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="errorKomokuNo" column="dbT7034KoikiGaijiHenkanErrorLog_errorKomokuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="errorCode" column="dbT7034KoikiGaijiHenkanErrorLog_errorCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="errorHyojiKomokuMeisho" column="dbT7034KoikiGaijiHenkanErrorLog_errorHyojiKomokuMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="errorHyojiKomoku" column="dbT7034KoikiGaijiHenkanErrorLog_errorHyojiKomoku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+<select id="getEntity" resultMap="ResultMap_DbT7034KoikiGaijiHenkanErrorLogEntity">
+    SELECT
+    <include refid="allColumns_DbT7034KoikiGaijiHenkanErrorLog"/>
+    FROM
+    rgdb."DbT7034KoikiGaijiHenkanErrorLog"
+</select>
+</mapper>

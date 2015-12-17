@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4129TennyuShiboマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4129TennyuShiboMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4129TennyuShibo">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4129TennyuShiboMapper.allColumns_DbT4129TennyuShibo" />
+     FROM
+         rgdb."DbT4129TennyuShibo"
+     WHERE
+         rgdb."DbT4129TennyuShibo"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4129TennyuShibo">
+         "DbT4129TennyuShibo"."shinseishoKanriNo" as "dbT4129TennyuShibo_shinseishoKanriNo",
+         "DbT4129TennyuShibo"."insertDantaiCd" as "dbT4129TennyuShibo_insertDantaiCd",
+         "DbT4129TennyuShibo"."insertTimestamp" as "dbT4129TennyuShibo_insertTimestamp",
+         "DbT4129TennyuShibo"."insertReamsLoginId" as "dbT4129TennyuShibo_insertReamsLoginId",
+         "DbT4129TennyuShibo"."insertContextId" as "dbT4129TennyuShibo_insertContextId",
+         "DbT4129TennyuShibo"."isDeleted" as "dbT4129TennyuShibo_isDeleted",
+         "DbT4129TennyuShibo"."updateCount" as "dbT4129TennyuShibo_updateCount",
+         "DbT4129TennyuShibo"."lastUpdateTimestamp" as "dbT4129TennyuShibo_lastUpdateTimestamp",
+         "DbT4129TennyuShibo"."lastUpdateReamsLoginId" as "dbT4129TennyuShibo_lastUpdateReamsLoginId",
+         "DbT4129TennyuShibo"."nijiHanteiYMD" as "dbT4129TennyuShibo_nijiHanteiYMD",
+         "DbT4129TennyuShibo"."nijiHanteiYokaigoJotaiKubunCode" as "dbT4129TennyuShibo_nijiHanteiYokaigoJotaiKubunCode",
+         "DbT4129TennyuShibo"."nijiHanteiNinteiYukoKikan" as "dbT4129TennyuShibo_nijiHanteiNinteiYukoKikan",
+         "DbT4129TennyuShibo"."nijiHanteiNinteiYukoKaishiYMD" as "dbT4129TennyuShibo_nijiHanteiNinteiYukoKaishiYMD",
+         "DbT4129TennyuShibo"."nijiHanteiNinteiYukoShuryoYMD" as "dbT4129TennyuShibo_nijiHanteiNinteiYukoShuryoYMD",
+         "DbT4129TennyuShibo"."shinsakaiShiryoSakuseiYMD" as "dbT4129TennyuShibo_shinsakaiShiryoSakuseiYMD",
+         "DbT4129TennyuShibo"."shinsakaiKaisaiNo" as "dbT4129TennyuShibo_shinsakaiKaisaiNo",
+         "DbT4129TennyuShibo"."shinsakaiIken" as "dbT4129TennyuShibo_shinsakaiIken",
+         "DbT4129TennyuShibo"."ichijiHnateiKekkaHenkoRiyu" as "dbT4129TennyuShibo_ichijiHnateiKekkaHenkoRiyu",
+         "DbT4129TennyuShibo"."yokaigoJotaizoReiCode" as "dbT4129TennyuShibo_yokaigoJotaizoReiCode",
+         "DbT4129TennyuShibo"."ninteishinsakaiIkenShurui" as "dbT4129TennyuShibo_ninteishinsakaiIkenShurui",
+         "DbT4129TennyuShibo"."shinsakaiMemo" as "dbT4129TennyuShibo_shinsakaiMemo",
+         "DbT4129TennyuShibo"."nijiHanteiKekkaInputHoho" as "dbT4129TennyuShibo_nijiHanteiKekkaInputHoho",
+         "DbT4129TennyuShibo"."niniHanteiKekkaInputYMD" as "dbT4129TennyuShibo_niniHanteiKekkaInputYMD"
+    </sql>
+
+
+    <!--テーブルDbT4129TennyuShiboの項目をDbT4129TennyuShiboEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4129TennyuShiboEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4129TennyuShiboEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT4129TennyuShibo_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT4129TennyuShibo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4129TennyuShibo_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4129TennyuShibo_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4129TennyuShibo_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4129TennyuShibo_isDeleted" />
+        <result property="updateCount" column="dbT4129TennyuShibo_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4129TennyuShibo_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4129TennyuShibo_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiHanteiYMD" column="dbT4129TennyuShibo_nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nijiHanteiYokaigoJotaiKubunCode" column="dbT4129TennyuShibo_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <!--<result property="nijiHanteiNinteiYukoKikan" column="dbT4129TennyuShibo_nijiHanteiNinteiYukoKikan" />-->
+        <result property="nijiHanteiNinteiYukoKaishiYMD" column="dbT4129TennyuShibo_nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nijiHanteiNinteiYukoShuryoYMD" column="dbT4129TennyuShibo_nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsakaiShiryoSakuseiYMD" column="dbT4129TennyuShibo_shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <!--<result property="shinsakaiKaisaiNo" column="dbT4129TennyuShibo_shinsakaiKaisaiNo" />-->
+        <result property="shinsakaiIken" column="dbT4129TennyuShibo_shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijiHnateiKekkaHenkoRiyu" column="dbT4129TennyuShibo_ichijiHnateiKekkaHenkoRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokaigoJotaizoReiCode" column="dbT4129TennyuShibo_yokaigoJotaizoReiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ninteishinsakaiIkenShurui" column="dbT4129TennyuShibo_ninteishinsakaiIkenShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiMemo" column="dbT4129TennyuShibo_shinsakaiMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiHanteiKekkaInputHoho" column="dbT4129TennyuShibo_nijiHanteiKekkaInputHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="niniHanteiKekkaInputYMD" column="dbT4129TennyuShibo_niniHanteiKekkaInputYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    
+        <select id="getEntity" resultMap="ResultMap_DbT4129TennyuShiboEntity">
+<!--	SELECT
+	<include refid="allColumns_DbT4129TennyuShibo"/>
+	FROM
+	rgdb."DbT4129TennyuShibo"-->
+	</select>
+
+</mapper>

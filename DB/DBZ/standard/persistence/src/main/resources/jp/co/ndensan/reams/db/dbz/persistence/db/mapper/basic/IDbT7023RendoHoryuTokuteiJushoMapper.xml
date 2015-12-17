@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7023RendoHoryuTokuteiJushoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7023RendoHoryuTokuteiJushoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7023RendoHoryuTokuteiJusho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7023RendoHoryuTokuteiJushoMapper.allColumns_DbT7023RendoHoryuTokuteiJusho" />
+     FROM
+         rgdb."DbT7023RendoHoryuTokuteiJusho"
+     WHERE
+         rgdb."DbT7023RendoHoryuTokuteiJusho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7023RendoHoryuTokuteiJusho">
+         "DbT7023RendoHoryuTokuteiJusho"."kanriNo" as "dbT7023RendoHoryuTokuteiJusho_kanriNo",
+         "DbT7023RendoHoryuTokuteiJusho"."shichosonCode" as "dbT7023RendoHoryuTokuteiJusho_shichosonCode",
+         "DbT7023RendoHoryuTokuteiJusho"."insertDantaiCd" as "dbT7023RendoHoryuTokuteiJusho_insertDantaiCd",
+         "DbT7023RendoHoryuTokuteiJusho"."insertTimestamp" as "dbT7023RendoHoryuTokuteiJusho_insertTimestamp",
+         "DbT7023RendoHoryuTokuteiJusho"."insertReamsLoginId" as "dbT7023RendoHoryuTokuteiJusho_insertReamsLoginId",
+         "DbT7023RendoHoryuTokuteiJusho"."insertContextId" as "dbT7023RendoHoryuTokuteiJusho_insertContextId",
+         "DbT7023RendoHoryuTokuteiJusho"."isDeleted" as "dbT7023RendoHoryuTokuteiJusho_isDeleted",
+         "DbT7023RendoHoryuTokuteiJusho"."updateCount" as "dbT7023RendoHoryuTokuteiJusho_updateCount",
+         "DbT7023RendoHoryuTokuteiJusho"."lastUpdateTimestamp" as "dbT7023RendoHoryuTokuteiJusho_lastUpdateTimestamp",
+         "DbT7023RendoHoryuTokuteiJusho"."lastUpdateReamsLoginId" as "dbT7023RendoHoryuTokuteiJusho_lastUpdateReamsLoginId",
+         "DbT7023RendoHoryuTokuteiJusho"."jushoCode" as "dbT7023RendoHoryuTokuteiJusho_jushoCode",
+         "DbT7023RendoHoryuTokuteiJusho"."jusho" as "dbT7023RendoHoryuTokuteiJusho_jusho",
+         "DbT7023RendoHoryuTokuteiJusho"."banchiCode1" as "dbT7023RendoHoryuTokuteiJusho_banchiCode1",
+         "DbT7023RendoHoryuTokuteiJusho"."banchiCode2" as "dbT7023RendoHoryuTokuteiJusho_banchiCode2",
+         "DbT7023RendoHoryuTokuteiJusho"."banchiCode3" as "dbT7023RendoHoryuTokuteiJusho_banchiCode3",
+         "DbT7023RendoHoryuTokuteiJusho"."banchi" as "dbT7023RendoHoryuTokuteiJusho_banchi",
+         "DbT7023RendoHoryuTokuteiJusho"."shisetsuShurui" as "dbT7023RendoHoryuTokuteiJusho_shisetsuShurui",
+         "DbT7023RendoHoryuTokuteiJusho"."shisetsuCode" as "dbT7023RendoHoryuTokuteiJusho_shisetsuCode"
+    </sql>
+
+
+    <!--テーブルDbT7023RendoHoryuTokuteiJushoの項目をDbT7023RendoHoryuTokuteiJushoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7023RendoHoryuTokuteiJushoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJushoEntity" autoMapping="true">
+        <id property="kanriNo" column="dbT7023RendoHoryuTokuteiJusho_kanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shichosonCode" column="dbT7023RendoHoryuTokuteiJusho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7023RendoHoryuTokuteiJusho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7023RendoHoryuTokuteiJusho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7023RendoHoryuTokuteiJusho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7023RendoHoryuTokuteiJusho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7023RendoHoryuTokuteiJusho_isDeleted" />
+        <result property="updateCount" column="dbT7023RendoHoryuTokuteiJusho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7023RendoHoryuTokuteiJusho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7023RendoHoryuTokuteiJusho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushoCode" column="dbT7023RendoHoryuTokuteiJusho_jushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler"/>
+        <result property="jusho" column="dbT7023RendoHoryuTokuteiJusho_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="banchiCode1" column="dbT7023RendoHoryuTokuteiJusho_banchiCode1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.BanchiCodeTypeHandler"/>
+        <result property="banchiCode2" column="dbT7023RendoHoryuTokuteiJusho_banchiCode2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.BanchiCodeTypeHandler"/>
+        <result property="banchiCode3" column="dbT7023RendoHoryuTokuteiJusho_banchiCode3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.BanchiCodeTypeHandler"/>
+        <result property="banchi" column="dbT7023RendoHoryuTokuteiJusho_banchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaBanchiTypeHandler"/>
+        <result property="shisetsuShurui" column="dbT7023RendoHoryuTokuteiJusho_shisetsuShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shisetsuCode" column="dbT7023RendoHoryuTokuteiJusho_shisetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+<select id="getEntity" resultMap="ResultMap_DbT7023RendoHoryuTokuteiJushoEntity">
+    SELECT
+    <include refid="allColumns_DbT7023RendoHoryuTokuteiJusho" />
+    FROM
+    rgdb."DbT7023RendoHoryuTokuteiJusho"
+</select>
+</mapper>

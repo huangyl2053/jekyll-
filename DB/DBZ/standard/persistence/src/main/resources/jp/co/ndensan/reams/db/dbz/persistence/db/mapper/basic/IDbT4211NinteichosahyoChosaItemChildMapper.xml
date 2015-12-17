@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4211NinteichosahyoChosaItemChildマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4211NinteichosahyoChosaItemChildMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4211NinteichosahyoChosaItemChild">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4211NinteichosahyoChosaItemChildMapper.allColumns_DbT4211NinteichosahyoChosaItemChild" />
+        FROM
+        rgdb."DbT4211NinteichosahyoChosaItemChild"
+        WHERE
+        rgdb."DbT4211NinteichosahyoChosaItemChild"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4211NinteichosahyoChosaItemChild">
+        "DbT4211NinteichosahyoChosaItemChild"."shinseishoKanriNo" as "dbT4211NinteichosahyoChosaItemChild_shinseishoKanriNo",
+        "DbT4211NinteichosahyoChosaItemChild"."ninteichosaRirekiNo" as "dbT4211NinteichosahyoChosaItemChild_ninteichosaRirekiNo",
+        "DbT4211NinteichosahyoChosaItemChild"."remban" as "dbT4211NinteichosahyoChosaItemChild_remban",
+        "DbT4211NinteichosahyoChosaItemChild"."insertDantaiCd" as "dbT4211NinteichosahyoChosaItemChild_insertDantaiCd",
+        "DbT4211NinteichosahyoChosaItemChild"."insertTimestamp" as "dbT4211NinteichosahyoChosaItemChild_insertTimestamp",
+        "DbT4211NinteichosahyoChosaItemChild"."insertReamsLoginId" as "dbT4211NinteichosahyoChosaItemChild_insertReamsLoginId",
+        "DbT4211NinteichosahyoChosaItemChild"."insertContextId" as "dbT4211NinteichosahyoChosaItemChild_insertContextId",
+        "DbT4211NinteichosahyoChosaItemChild"."isDeleted" as "dbT4211NinteichosahyoChosaItemChild_isDeleted",
+        "DbT4211NinteichosahyoChosaItemChild"."updateCount" as "dbT4211NinteichosahyoChosaItemChild_updateCount",
+        "DbT4211NinteichosahyoChosaItemChild"."lastUpdateTimestamp" as "dbT4211NinteichosahyoChosaItemChild_lastUpdateTimestamp",
+        "DbT4211NinteichosahyoChosaItemChild"."lastUpdateReamsLoginId" as "dbT4211NinteichosahyoChosaItemChild_lastUpdateReamsLoginId",
+        "DbT4211NinteichosahyoChosaItemChild"."koroshoIfShikibetsuCode" as "dbT4211NinteichosahyoChosaItemChild_koroshoIfShikibetsuCode",
+        "DbT4211NinteichosahyoChosaItemChild"."reserchItem" as "dbT4211NinteichosahyoChosaItemChild_reserchItem"
+    </sql>
+
+
+    <!--テーブルDbT4211NinteichosahyoChosaItemChildの項目をDbT4211NinteichosahyoChosaItemChildEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4211NinteichosahyoChosaItemChildEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4211NinteichosahyoChosaItemChildEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT4211NinteichosahyoChosaItemChild_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="ninteichosaRirekiNo" column="dbT4211NinteichosahyoChosaItemChild_ninteichosaRirekiNo" />
+        <id property="remban" column="dbT4211NinteichosahyoChosaItemChild_remban" />
+        <result property="insertDantaiCd" column="dbT4211NinteichosahyoChosaItemChild_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4211NinteichosahyoChosaItemChild_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4211NinteichosahyoChosaItemChild_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4211NinteichosahyoChosaItemChild_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4211NinteichosahyoChosaItemChild_isDeleted" />
+        <result property="updateCount" column="dbT4211NinteichosahyoChosaItemChild_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4211NinteichosahyoChosaItemChild_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4211NinteichosahyoChosaItemChild_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koroshoIfShikibetsuCode" column="dbT4211NinteichosahyoChosaItemChild_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="reserchItem" column="dbT4211NinteichosahyoChosaItemChild_reserchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <select id="getEntity" resultMap="ResultMap_DbT4211NinteichosahyoChosaItemChildEntity">
+        SELECT
+        <include refid="allColumns_DbT4211NinteichosahyoChosaItemChild"/>
+        FROM
+        rgdb."DbT4211NinteichosahyoChosaItemChild"
+    </select>
+
+</mapper>

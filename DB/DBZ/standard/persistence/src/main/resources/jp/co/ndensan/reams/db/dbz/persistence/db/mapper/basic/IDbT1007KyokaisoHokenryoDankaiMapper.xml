@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT1007KyokaisoHokenryoDankaiマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1007KyokaisoHokenryoDankaiMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT1007KyokaisoHokenryoDankai">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1007KyokaisoHokenryoDankaiMapper.allColumns_DbT1007KyokaisoHokenryoDankai" />
+     FROM
+         rgdb."DbT1007KyokaisoHokenryoDankai"
+     WHERE
+         rgdb."DbT1007KyokaisoHokenryoDankai"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT1007KyokaisoHokenryoDankai">
+         "DbT1007KyokaisoHokenryoDankai"."hihokenshaNo" as "dbT1007KyokaisoHokenryoDankai_hihokenshaNo",
+         "DbT1007KyokaisoHokenryoDankai"."rirekiNo" as "dbT1007KyokaisoHokenryoDankai_rirekiNo",
+         "DbT1007KyokaisoHokenryoDankai"."tekiyoKaishiYM" as "dbT1007KyokaisoHokenryoDankai_tekiyoKaishiYM",
+         "DbT1007KyokaisoHokenryoDankai"."insertDantaiCd" as "dbT1007KyokaisoHokenryoDankai_insertDantaiCd",
+         "DbT1007KyokaisoHokenryoDankai"."insertTimestamp" as "dbT1007KyokaisoHokenryoDankai_insertTimestamp",
+         "DbT1007KyokaisoHokenryoDankai"."insertReamsLoginId" as "dbT1007KyokaisoHokenryoDankai_insertReamsLoginId",
+         "DbT1007KyokaisoHokenryoDankai"."insertContextId" as "dbT1007KyokaisoHokenryoDankai_insertContextId",
+         "DbT1007KyokaisoHokenryoDankai"."isDeleted" as "dbT1007KyokaisoHokenryoDankai_isDeleted",
+         "DbT1007KyokaisoHokenryoDankai"."updateCount" as "dbT1007KyokaisoHokenryoDankai_updateCount",
+         "DbT1007KyokaisoHokenryoDankai"."lastUpdateTimestamp" as "dbT1007KyokaisoHokenryoDankai_lastUpdateTimestamp",
+         "DbT1007KyokaisoHokenryoDankai"."lastUpdateReamsLoginId" as "dbT1007KyokaisoHokenryoDankai_lastUpdateReamsLoginId",
+         "DbT1007KyokaisoHokenryoDankai"."tekiyoShuryoYM" as "dbT1007KyokaisoHokenryoDankai_tekiyoShuryoYM",
+         "DbT1007KyokaisoHokenryoDankai"."gengakuGoHokenryoDankai" as "dbT1007KyokaisoHokenryoDankai_gengakuGoHokenryoDankai"
+    </sql>
+
+
+    <!--テーブルDbT1007KyokaisoHokenryoDankaiの項目をDbT1007KyokaisoHokenryoDankaiEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT1007KyokaisoHokenryoDankaiEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1007KyokaisoHokenryoDankaiEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT1007KyokaisoHokenryoDankai_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="rirekiNo" column="dbT1007KyokaisoHokenryoDankai_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="tekiyoKaishiYM" column="dbT1007KyokaisoHokenryoDankai_tekiyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT1007KyokaisoHokenryoDankai_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT1007KyokaisoHokenryoDankai_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT1007KyokaisoHokenryoDankai_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT1007KyokaisoHokenryoDankai_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT1007KyokaisoHokenryoDankai_isDeleted" />
+        <result property="updateCount" column="dbT1007KyokaisoHokenryoDankai_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT1007KyokaisoHokenryoDankai_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT1007KyokaisoHokenryoDankai_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tekiyoShuryoYM" column="dbT1007KyokaisoHokenryoDankai_tekiyoShuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="gengakuGoHokenryoDankai" column="dbT1007KyokaisoHokenryoDankai_gengakuGoHokenryoDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+        <select id="getEntity" resultMap="ResultMap_DbT1007KyokaisoHokenryoDankaiEntity">
+	SELECT
+	<include refid="allColumns_DbT1007KyokaisoHokenryoDankai"/>
+	FROM
+	rgdb."DbT1007KyokaisoHokenryoDankai"
+	</select>
+
+</mapper>

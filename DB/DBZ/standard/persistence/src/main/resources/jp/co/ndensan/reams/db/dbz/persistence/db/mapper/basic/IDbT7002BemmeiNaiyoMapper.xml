@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7002BemmeiNaiyoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7002BemmeiNaiyoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7002BemmeiNaiyo">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7002BemmeiNaiyoMapper.allColumns_DbT7002BemmeiNaiyo" />
+     FROM
+         rgdb."DbT7002BemmeiNaiyo"
+     WHERE
+         rgdb."DbT7002BemmeiNaiyo"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7002BemmeiNaiyo">
+         "DbT7002BemmeiNaiyo"."shoKisaiHokenshaNo" as "dbT7002BemmeiNaiyo_shoKisaiHokenshaNo",
+         "DbT7002BemmeiNaiyo"."shikibetsuCode" as "dbT7002BemmeiNaiyo_shikibetsuCode",
+         "DbT7002BemmeiNaiyo"."genshobunHihokenshaNo" as "dbT7002BemmeiNaiyo_genshobunHihokenshaNo",
+         "DbT7002BemmeiNaiyo"."shinsaseikyuTodokedeYMD" as "dbT7002BemmeiNaiyo_shinsaseikyuTodokedeYMD",
+         "DbT7002BemmeiNaiyo"."bemmeishoSakuseiYMD" as "dbT7002BemmeiNaiyo_bemmeishoSakuseiYMD",
+         "DbT7002BemmeiNaiyo"."insertDantaiCd" as "dbT7002BemmeiNaiyo_insertDantaiCd",
+         "DbT7002BemmeiNaiyo"."insertTimestamp" as "dbT7002BemmeiNaiyo_insertTimestamp",
+         "DbT7002BemmeiNaiyo"."insertReamsLoginId" as "dbT7002BemmeiNaiyo_insertReamsLoginId",
+         "DbT7002BemmeiNaiyo"."insertContextId" as "dbT7002BemmeiNaiyo_insertContextId",
+         "DbT7002BemmeiNaiyo"."isDeleted" as "dbT7002BemmeiNaiyo_isDeleted",
+         "DbT7002BemmeiNaiyo"."updateCount" as "dbT7002BemmeiNaiyo_updateCount",
+         "DbT7002BemmeiNaiyo"."lastUpdateTimestamp" as "dbT7002BemmeiNaiyo_lastUpdateTimestamp",
+         "DbT7002BemmeiNaiyo"."lastUpdateReamsLoginId" as "dbT7002BemmeiNaiyo_lastUpdateReamsLoginId",
+         "DbT7002BemmeiNaiyo"."shinsaseikyuKankeiShobunNaiyo" as "dbT7002BemmeiNaiyo_shinsaseikyuKankeiShobunNaiyo",
+         "DbT7002BemmeiNaiyo"."bemmeiNaiyo" as "dbT7002BemmeiNaiyo_bemmeiNaiyo",
+         "DbT7002BemmeiNaiyo"."bemmeishoSakuseiTeishutsuYMD" as "dbT7002BemmeiNaiyo_bemmeishoSakuseiTeishutsuYMD"
+    </sql>
+
+
+    <!--テーブルDbT7002BemmeiNaiyoの項目をDbT7002BemmeiNaiyoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7002BemmeiNaiyoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity" autoMapping="true">
+        <id property="shoKisaiHokenshaNo" column="dbT7002BemmeiNaiyo_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
+        <id property="shikibetsuCode" column="dbT7002BemmeiNaiyo_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <id property="genshobunHihokenshaNo" column="dbT7002BemmeiNaiyo_genshobunHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="shinsaseikyuTodokedeYMD" column="dbT7002BemmeiNaiyo_shinsaseikyuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="bemmeishoSakuseiYMD" column="dbT7002BemmeiNaiyo_bemmeishoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7002BemmeiNaiyo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7002BemmeiNaiyo_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7002BemmeiNaiyo_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7002BemmeiNaiyo_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7002BemmeiNaiyo_isDeleted" />
+        <result property="updateCount" column="dbT7002BemmeiNaiyo_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7002BemmeiNaiyo_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7002BemmeiNaiyo_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsaseikyuKankeiShobunNaiyo" column="dbT7002BemmeiNaiyo_shinsaseikyuKankeiShobunNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="bemmeiNaiyo" column="dbT7002BemmeiNaiyo_bemmeiNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="bemmeishoSakuseiTeishutsuYMD" column="dbT7002BemmeiNaiyo_bemmeishoSakuseiTeishutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+<select id="getEntity" resultMap="ResultMap_DbT7002BemmeiNaiyoEntity">
+<!--    SELECT
+    <include refid="allColumns_DbT7002BemmeiNaiyo" />
+    FROM
+    rgdb."DbT7002BemmeiNaiyo"-->
+</select>
+</mapper>

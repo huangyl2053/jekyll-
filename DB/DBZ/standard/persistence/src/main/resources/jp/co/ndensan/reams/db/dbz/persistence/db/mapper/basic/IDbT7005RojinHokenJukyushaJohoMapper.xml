@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7005RojinHokenJukyushaJohoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7005RojinHokenJukyushaJohoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7005RojinHokenJukyushaJoho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7005RojinHokenJukyushaJohoMapper.allColumns_DbT7005RojinHokenJukyushaJoho" />
+     FROM
+         rgdb."DbT7005RojinHokenJukyushaJoho"
+     WHERE
+         rgdb."DbT7005RojinHokenJukyushaJoho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7005RojinHokenJukyushaJoho">
+         "DbT7005RojinHokenJukyushaJoho"."shikibetsuCode" as "dbT7005RojinHokenJukyushaJoho_shikibetsuCode",
+         "DbT7005RojinHokenJukyushaJoho"."insertDantaiCd" as "dbT7005RojinHokenJukyushaJoho_insertDantaiCd",
+         "DbT7005RojinHokenJukyushaJoho"."insertTimestamp" as "dbT7005RojinHokenJukyushaJoho_insertTimestamp",
+         "DbT7005RojinHokenJukyushaJoho"."insertReamsLoginId" as "dbT7005RojinHokenJukyushaJoho_insertReamsLoginId",
+         "DbT7005RojinHokenJukyushaJoho"."insertContextId" as "dbT7005RojinHokenJukyushaJoho_insertContextId",
+         "DbT7005RojinHokenJukyushaJoho"."isDeleted" as "dbT7005RojinHokenJukyushaJoho_isDeleted",
+         "DbT7005RojinHokenJukyushaJoho"."updateCount" as "dbT7005RojinHokenJukyushaJoho_updateCount",
+         "DbT7005RojinHokenJukyushaJoho"."lastUpdateTimestamp" as "dbT7005RojinHokenJukyushaJoho_lastUpdateTimestamp",
+         "DbT7005RojinHokenJukyushaJoho"."lastUpdateReamsLoginId" as "dbT7005RojinHokenJukyushaJoho_lastUpdateReamsLoginId",
+         "DbT7005RojinHokenJukyushaJoho"."shichosonCode" as "dbT7005RojinHokenJukyushaJoho_shichosonCode",
+         "DbT7005RojinHokenJukyushaJoho"."hihokenshaNo" as "dbT7005RojinHokenJukyushaJoho_hihokenshaNo",
+         "DbT7005RojinHokenJukyushaJoho"."rojinHokenShichosonCode" as "dbT7005RojinHokenJukyushaJoho_rojinHokenShichosonCode",
+         "DbT7005RojinHokenJukyushaJoho"."rojinHokenJukyushaNo" as "dbT7005RojinHokenJukyushaJoho_rojinHokenJukyushaNo"
+    </sql>
+
+
+    <!--テーブルDbT7005RojinHokenJukyushaJohoの項目をDbT7005RojinHokenJukyushaJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7005RojinHokenJukyushaJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7005RojinHokenJukyushaJohoEntity" autoMapping="true">
+        <id property="shikibetsuCode" column="dbT7005RojinHokenJukyushaJoho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7005RojinHokenJukyushaJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7005RojinHokenJukyushaJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7005RojinHokenJukyushaJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7005RojinHokenJukyushaJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7005RojinHokenJukyushaJoho_isDeleted" />
+        <result property="updateCount" column="dbT7005RojinHokenJukyushaJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7005RojinHokenJukyushaJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7005RojinHokenJukyushaJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="dbT7005RojinHokenJukyushaJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="hihokenshaNo" column="dbT7005RojinHokenJukyushaJoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="rojinHokenShichosonCode" column="dbT7005RojinHokenJukyushaJoho_rojinHokenShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="rojinHokenJukyushaNo" column="dbT7005RojinHokenJukyushaJoho_rojinHokenJukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+<select id="getEntity" resultMap="ResultMap_DbT7005RojinHokenJukyushaJohoEntity">
+    SELECT
+    <include refid="allColumns_DbT7005RojinHokenJukyushaJoho" />
+    FROM
+    rgdb."DbT7005RojinHokenJukyushaJoho"
+</select>
+</mapper>

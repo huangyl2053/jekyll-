@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5300GeninShikkanマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5300GeninShikkanMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5300GeninShikkan">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5300GeninShikkanMapper.allColumns_DbT5300GeninShikkan" />
+     FROM
+         rgdb."DbT5300GeninShikkan"
+     WHERE
+         rgdb."DbT5300GeninShikkan"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5300GeninShikkan">
+         "DbT5300GeninShikkan"."shinseishoKanriNo" as "dbT5300GeninShikkan_shinseishoKanriNo",
+         "DbT5300GeninShikkan"."remban" as "dbT5300GeninShikkan_remban",
+         "DbT5300GeninShikkan"."insertDantaiCd" as "dbT5300GeninShikkan_insertDantaiCd",
+         "DbT5300GeninShikkan"."insertTimestamp" as "dbT5300GeninShikkan_insertTimestamp",
+         "DbT5300GeninShikkan"."insertReamsLoginId" as "dbT5300GeninShikkan_insertReamsLoginId",
+         "DbT5300GeninShikkan"."insertContextId" as "dbT5300GeninShikkan_insertContextId",
+         "DbT5300GeninShikkan"."isDeleted" as "dbT5300GeninShikkan_isDeleted",
+         "DbT5300GeninShikkan"."updateCount" as "dbT5300GeninShikkan_updateCount",
+         "DbT5300GeninShikkan"."lastUpdateTimestamp" as "dbT5300GeninShikkan_lastUpdateTimestamp",
+         "DbT5300GeninShikkan"."lastUpdateReamsLoginId" as "dbT5300GeninShikkan_lastUpdateReamsLoginId",
+         "DbT5300GeninShikkan"."isShutaruGeninShikkan" as "dbT5300GeninShikkan_isShutaruGeninShikkan",
+         "DbT5300GeninShikkan"."geninShikkanCode" as "dbT5300GeninShikkan_geninShikkanCode"
+    </sql>
+
+
+    <!--テーブルDbT5300GeninShikkanの項目をDbT5300GeninShikkanEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5300GeninShikkanEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5300GeninShikkanEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT5300GeninShikkan_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="remban" column="dbT5300GeninShikkan_remban" />
+        <result property="insertDantaiCd" column="dbT5300GeninShikkan_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5300GeninShikkan_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5300GeninShikkan_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5300GeninShikkan_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5300GeninShikkan_isDeleted" />
+        <result property="updateCount" column="dbT5300GeninShikkan_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5300GeninShikkan_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5300GeninShikkan_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="isShutaruGeninShikkan" column="dbT5300GeninShikkan_isShutaruGeninShikkan" />
+        <result property="geninShikkanCode" column="dbT5300GeninShikkan_geninShikkanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+    </resultMap>
+<select id="getEntity" resultMap="ResultMap_DbT5300GeninShikkanEntity">
+    SELECT
+    <include refid="allColumns_DbT5300GeninShikkan" />
+    FROM
+    rgdb."DbT5300GeninShikkan"
+</select>
+</mapper>

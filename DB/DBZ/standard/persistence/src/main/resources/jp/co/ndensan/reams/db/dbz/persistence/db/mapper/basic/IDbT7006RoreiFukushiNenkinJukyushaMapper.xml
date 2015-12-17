@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7006RoreiFukushiNenkinJukyushaマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7006RoreiFukushiNenkinJukyusha">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper.allColumns_DbT7006RoreiFukushiNenkinJukyusha" />
+     FROM
+         rgdb."DbT7006RoreiFukushiNenkinJukyusha"
+     WHERE
+         rgdb."DbT7006RoreiFukushiNenkinJukyusha"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7006RoreiFukushiNenkinJukyusha">
+         "DbT7006RoreiFukushiNenkinJukyusha"."shikibetsuCode" as "dbT7006RoreiFukushiNenkinJukyusha_shikibetsuCode",
+         "DbT7006RoreiFukushiNenkinJukyusha"."jukyuKaishiYMD" as "dbT7006RoreiFukushiNenkinJukyusha_jukyuKaishiYMD",
+         "DbT7006RoreiFukushiNenkinJukyusha"."insertDantaiCd" as "dbT7006RoreiFukushiNenkinJukyusha_insertDantaiCd",
+         "DbT7006RoreiFukushiNenkinJukyusha"."insertTimestamp" as "dbT7006RoreiFukushiNenkinJukyusha_insertTimestamp",
+         "DbT7006RoreiFukushiNenkinJukyusha"."insertReamsLoginId" as "dbT7006RoreiFukushiNenkinJukyusha_insertReamsLoginId",
+         "DbT7006RoreiFukushiNenkinJukyusha"."insertContextId" as "dbT7006RoreiFukushiNenkinJukyusha_insertContextId",
+         "DbT7006RoreiFukushiNenkinJukyusha"."isDeleted" as "dbT7006RoreiFukushiNenkinJukyusha_isDeleted",
+         "DbT7006RoreiFukushiNenkinJukyusha"."updateCount" as "dbT7006RoreiFukushiNenkinJukyusha_updateCount",
+         "DbT7006RoreiFukushiNenkinJukyusha"."lastUpdateTimestamp" as "dbT7006RoreiFukushiNenkinJukyusha_lastUpdateTimestamp",
+         "DbT7006RoreiFukushiNenkinJukyusha"."lastUpdateReamsLoginId" as "dbT7006RoreiFukushiNenkinJukyusha_lastUpdateReamsLoginId",
+         "DbT7006RoreiFukushiNenkinJukyusha"."jukyuShuryoYMD" as "dbT7006RoreiFukushiNenkinJukyusha_jukyuShuryoYMD",
+         "DbT7006RoreiFukushiNenkinJukyusha"."hihokenshaNo" as "dbT7006RoreiFukushiNenkinJukyusha_hihokenshaNo"
+    </sql>
+
+
+    <!--テーブルDbT7006RoreiFukushiNenkinJukyushaの項目をDbT7006RoreiFukushiNenkinJukyushaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity" autoMapping="true">
+        <id property="shikibetsuCode" column="dbT7006RoreiFukushiNenkinJukyusha_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <id property="jukyuKaishiYMD" column="dbT7006RoreiFukushiNenkinJukyusha_jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7006RoreiFukushiNenkinJukyusha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7006RoreiFukushiNenkinJukyusha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7006RoreiFukushiNenkinJukyusha_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7006RoreiFukushiNenkinJukyusha_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7006RoreiFukushiNenkinJukyusha_isDeleted" />
+        <result property="updateCount" column="dbT7006RoreiFukushiNenkinJukyusha_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7006RoreiFukushiNenkinJukyusha_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7006RoreiFukushiNenkinJukyusha_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jukyuShuryoYMD" column="dbT7006RoreiFukushiNenkinJukyusha_jukyuShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hihokenshaNo" column="dbT7006RoreiFukushiNenkinJukyusha_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+    </resultMap>
+<select id="getEntity" resultMap="ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity">
+    SELECT
+    <include refid="allColumns_DbT7006RoreiFukushiNenkinJukyusha" />
+    FROM
+    rgdb."DbT7006RoreiFukushiNenkinJukyusha"
+</select>
+</mapper>
