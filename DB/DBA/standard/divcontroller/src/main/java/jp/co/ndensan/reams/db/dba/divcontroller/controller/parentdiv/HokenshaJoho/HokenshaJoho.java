@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.HokenshaJoho;
 
 import jp.co.ndensan.reams.db.dba.business.core.hokensha.Hokensha;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hokensha.HokenshaMapperParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.HokenshaJoho.HokenshaJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.HokenshaJoho.HokenshaJohoHandler;
 import jp.co.ndensan.reams.db.dba.service.core.hokensha.HokenshaNyuryokuHojoFinder;
@@ -31,9 +30,7 @@ public class HokenshaJoho {
             div.getTxtHokenshaMeisho().setValue(RString.EMPTY);
             return ResponseData.of(div).respond();
         }
-        HokenshaMapperParameter parameter = HokenshaMapperParameter.createHokenjaNoParam(
-                new HokenjaNo(div.getTxtHokenshaNo().getValue()));
-        Hokensha hokensha = HokenshaNyuryokuHojoFinder.createInstance().getHokensha(parameter);
+        Hokensha hokensha = HokenshaNyuryokuHojoFinder.createInstance().getHokensha(new HokenjaNo(div.getTxtHokenshaNo().getValue()));
         getHandler(div).onBlur_txtHokenshaNo(hokensha);
         return ResponseData.of(div).respond();
     }

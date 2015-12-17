@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.HokenshaJo
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hokensha.Hokensha;
 import jp.co.ndensan.reams.db.dba.business.core.hokensha.KenCodeJigyoshaInputGuide;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hokensha.HokenshaMapperParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.HokenshaInputGuide.HokenshaInputGuideDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.HokenshaInputGuide.HokenshaInputGuideHandler;
 import jp.co.ndensan.reams.db.dba.service.core.hokensha.HokenshaNyuryokuHojoFinder;
@@ -23,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class HokenshaInputGuide {
 
-    private static RString kenCode;
+    private RString kenCode;
 
     /**
      * 「保険者検索」ボタン保険者一覧Grid更新します。
@@ -39,10 +38,9 @@ public class HokenshaInputGuide {
         } else {
             kenCode = new RString(div.getHokenshaNo().toString().substring(0, 2));
         }
-        HokenshaMapperParameter parameter = HokenshaMapperParameter.createKenCodeParam(kenCode);
-        List<Hokensha> hokenjaList = HokenshaNyuryokuHojoFinder.createInstance().getHokenshaList(parameter).records();
+        List<Hokensha> hokenshaList = HokenshaNyuryokuHojoFinder.createInstance().getHokenshaList(kenCode).records();
         List<KenCodeJigyoshaInputGuide> kenCodeList = HokenshaNyuryokuHojoFinder.createInstance().getKenCodeJigyoshaInputGuide().records();
-        getHandler(div).on保険者検索(hokenjaList, kenCodeList, kenCode);
+        getHandler(div).on保険者検索(hokenshaList, kenCodeList, kenCode);
         responseData.data = div;
         return responseData;
     }
@@ -69,9 +67,8 @@ public class HokenshaInputGuide {
     public ResponseData<HokenshaInputGuideDiv> click_btnSearchGaitoHokensha(HokenshaInputGuideDiv div) {
         ResponseData<HokenshaInputGuideDiv> responseData = new ResponseData<>();
         kenCode = div.getDdlHokenshaKenCode().getSelectedKey();
-        HokenshaMapperParameter parameter = HokenshaMapperParameter.createKenCodeParam(kenCode);
-        List<Hokensha> hokenjaList = HokenshaNyuryokuHojoFinder.createInstance().getHokenshaList(parameter).records();
-        getHandler(div).on保険者を表示する(hokenjaList);
+        List<Hokensha> hokenshaList = HokenshaNyuryokuHojoFinder.createInstance().getHokenshaList(kenCode).records();
+        getHandler(div).on保険者を表示する(hokenshaList);
         responseData.data = div;
         return responseData;
     }

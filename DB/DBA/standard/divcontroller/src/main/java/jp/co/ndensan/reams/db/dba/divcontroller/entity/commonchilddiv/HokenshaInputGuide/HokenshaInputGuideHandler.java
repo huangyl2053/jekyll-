@@ -33,31 +33,35 @@ public class HokenshaInputGuideHandler {
      *
      * 「保険者検索」ボタンを設定します。
      *
-     * @param hokenjaList
+     * @param hokenshaList
      * @param kenCodeList
      * @param kenCode
      */
-    public void on保険者検索(List<Hokensha> hokenjaList, List<KenCodeJigyoshaInputGuide> kenCodeList, RString kenCode) {
-        set保険者(hokenjaList);
+    public void on保険者検索(List<Hokensha> hokenshaList, List<KenCodeJigyoshaInputGuide> kenCodeList, RString kenCode) {
+        set保険者(hokenshaList);
         div.getDdlHokenshaKenCode().getDataSource().clear();
-        List<KeyValueDataSource> list = new ArrayList<>();
+        List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (KenCodeJigyoshaInputGuide guide : kenCodeList) {
             KeyValueDataSource DataSource = new KeyValueDataSource();
             DataSource.setKey(guide.get都道府県住所コード());
             DataSource.setValue(guide.get都道府県名());
-            list.add(DataSource);
+            dataSourceList.add(DataSource);
         }
-        div.getDdlHokenshaKenCode().setDataSource(list);
-        div.getDdlHokenshaKenCode().setSelectedKey(kenCode);
+        div.getDdlHokenshaKenCode().setDataSource(dataSourceList);
+        for (KenCodeJigyoshaInputGuide guide : kenCodeList) {
+            if (guide.get都道府県住所コード().equals(kenCode)) {
+                div.getDdlHokenshaKenCode().setSelectedKey(kenCode);
+            }
+        }
     }
 
     /**
      * 「保険者を表示する」ボタンを設定します。
      *
-     * @param hokenjaList
+     * @param hokenshaList
      */
-    public void on保険者を表示する(List<Hokensha> hokenjaList) {
-        set保険者(hokenjaList);
+    public void on保険者を表示する(List<Hokensha> hokenshaList) {
+        set保険者(hokenshaList);
     }
 
     /**
@@ -71,16 +75,16 @@ public class HokenshaInputGuideHandler {
         div.setHokenshaNo(row.getHokenshaNo());
     }
 
-    private void set保険者(List<Hokensha> hokenjaList) {
+    private void set保険者(List<Hokensha> hokenshaList) {
 
-        List<dgSearchResultHokensha_Row> list = new ArrayList<>();
-        for (Hokensha guide : hokenjaList) {
+        List<dgSearchResultHokensha_Row> rowList = new ArrayList<>();
+        for (Hokensha guide : hokenshaList) {
             dgSearchResultHokensha_Row row = new dgSearchResultHokensha_Row();
             row.setHokenshaMeisho(guide.get保険者名());
             row.setHokenshaNo(guide.get保険者番号().value());
             row.setHokensha(guide.get保険者名());
-            list.add(row);
+            rowList.add(row);
         }
-        div.getSearchResultHokensha().getDgSearchResultHokensha().setDataSource(list);
+        div.getSearchResultHokensha().getDgSearchResultHokensha().setDataSource(rowList);
     }
 }
