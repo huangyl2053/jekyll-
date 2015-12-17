@@ -76,8 +76,8 @@ public class SikakuKanrenIdoFinder {
      * @return SikakuKanrenIdo 一覧データ取得取得リスト
      */
     public SearchResult<SikakuKanrenIdo> getSikakuKanrenIdo(SikakuKanrenIdoParameter params) {
-        if (params.getHihokenshaNo().isEmpty() && params.getHihokenshaNo() != null
-                || params.getshikibetsuCode() != null && params.getshikibetsuCode().isEmpty()) {
+        if (params.getHihokenshaNo().isEmpty() && params.getHihokenshaNo() == null
+                || params.getshikibetsuCode() == null && params.getshikibetsuCode().isEmpty()) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage().toString());
         }
         ISikakuKanrenIdoMapper shikakuTokusoMappers = mapperProvider.create(ISikakuKanrenIdoMapper.class);
@@ -104,7 +104,7 @@ public class SikakuKanrenIdoFinder {
 
         List<KoseiShichosonMaster> serviceShuruiList = new ArrayList<>();
         List<DbT7051KoseiShichosonMasterEntity> 所在保険者リスト = db7051Dac.selectByKoseiShichosonMasterList();
-        if (所在保険者リスト != null && 所在保険者リスト.isEmpty()) {
+        if (所在保険者リスト == null || 所在保険者リスト.isEmpty()) {
             return SearchResult.of(Collections.<KoseiShichosonMaster>emptyList(), 0, false);
         }
         for (DbT7051KoseiShichosonMasterEntity entity : 所在保険者リスト) {
@@ -118,8 +118,8 @@ public class SikakuKanrenIdoFinder {
      *
      * @return List<GappeiShichoson>
      */
-    public List<HenkoJiyu> getHenkoJiyuList() {
-        List<HenkoJiyu> 変更事由List = new ArrayList<>();
+    public SearchResult<HenkoJiyu> getHenkoJiyuList() {
+        List<HenkoJiyu> serviceShuruiList = new ArrayList<>();
         ShichosonSecurityJoho 市町村セキュリティ = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         List<ShikakuJiyuShutoku> 資格事由取得List = sikaku.
                 shikakuJiyuShutoku(new CodeShubetsu(new RString("コード種別_0126")),
@@ -129,9 +129,9 @@ public class SikakuKanrenIdoFinder {
             HenkoJiyu list = new HenkoJiyu();
             list.setCode(entity.getCode());
             list.setCodeRyakusho(entity.getCodeRyakusho());
-            変更事由List.add(list);
+            serviceShuruiList.add(list);
         }
-        return 変更事由List;
+        return SearchResult.of(serviceShuruiList, 0, true);
     }
 
     /**
