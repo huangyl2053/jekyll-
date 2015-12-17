@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.business.core.hokensha;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.entity.db.basic.hokenja.UrT0507HokenjaEntity;
 import jp.co.ndensan.reams.ur.urz.entity.db.basic.zenkokujusho.UrT0101ZenkokuJushoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
