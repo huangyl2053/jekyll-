@@ -1,0 +1,161 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBA&quot;,&quot;controlName&quot;:&quot;RoreiFukushiNenkinShokai&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBA.RoreiFukushiNenkinShokai"><div class="StateChangable UzPanel JSControl FloatLeft UzCommonChildDivPanel Panel-Shadow Width-G1 UzCompositeChild" id="RoreiFukushiNenkinShokai" style="margin: 0px; width: auto;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;RoreiFukushiNenkinShokai&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;RoreiFukushiNenkinShokai&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;RoreiFukushiNenkinShokai&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dba/db/dba/RoreiFukushiNenkinShokai/onLoad&quot;},{&quot;eventName&quot;:&quot;onActive&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;btnSave&quot;,&quot;requestUrl&quot;:&quot;dba/db/dba/RoreiFukushiNenkinShokai/onClick_btnSave&quot;},{&quot;eventName&quot;:&quot;Update&quot;,&quot;requestUrl&quot;:&quot;dba/db/dba/RoreiFukushiNenkinShokai/onChange_btnUpdate&quot;},{&quot;eventName&quot;:&quot;Delete&quot;,&quot;requestUrl&quot;:&quot;dba/db/dba/RoreiFukushiNenkinShokai/onClick_btnDelete&quot;},{&quot;eventName&quot;:&quot;Add&quot;,&quot;requestUrl&quot;:&quot;dba/db/dba/RoreiFukushiNenkinShokai/onClick_btnAdd&quot;},{&quot;eventName&quot;:&quot;Cancel&quot;,&quot;requestUrl&quot;:&quot;dba/db/dba/RoreiFukushiNenkinShokai/onClick_btnCancel&quot;}],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;hihokenshaNo&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;shikibetsuCode&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;model&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="RoreiFukushiNenkinShokai_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content ui-droppable ui-sortable panelPadding-M" id="RoreiFukushiNenkinShokai_panel_body_area"><div class="StateChangable UzPanel JSControl FloatLeft marginLeft-XS marginRight-XS UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M Panel-Shadow Width-G1 UzCompositeChild" id="panelRireki" style="width: auto; margin-top: 0px; margin-bottom: 0px; position: relative;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;panelRireki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;selectControlID&quot;:&quot;panelRireki&quot;,&quot;title&quot;:&quot;老齢福祉年金履歴&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="panelRireki_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">老齢福祉年金履歴</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="panelRireki_panel_body_area"><button class="UzButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="btnAdd" style="width: 200px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnAdd&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;200px&quot;,&quot;selectControlID&quot;:&quot;btnAdd&quot;,&quot;onClick&quot;:&quot;Add&quot;,&quot;text&quot;:&quot;情報を追加する&quot;}"><span>情報を追加する</span></button><div class="UzDataGrid JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M Height-S ClearFloat UzCompositeChild" id="datagridRireki" style="width: 350px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;datagridRireki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;350px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;datagridRireki&quot;,&quot;height&quot;:&quot;S&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowClearSortButton&quot;:false,&quot;isShowSelectedRowCount&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowRowState&quot;:false,&quot;columns&quot;:[{&quot;columnName&quot;:&quot;開始日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;startDate&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;startDate&quot;},{&quot;columnName&quot;:&quot;廃止日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;endDate&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;endDate&quot;}],&quot;header&quot;:{&quot;combineColumns&quot;:[{&quot;combineColumnName&quot;:&quot;受給&quot;,&quot;combineHeaderHtml&quot;:&quot;&quot;,&quot;combineItem&quot;:[&quot;startDate&quot;,&quot;endDate&quot;]}],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0,&quot;groupHeaderHeight&quot;:0},&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:true,&quot;isShowDeleteButtonColumn&quot;:true,&quot;isShowCancelButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;cancelButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;onSelectByModifyButton&quot;:&quot;Update&quot;,&quot;onSelectByDeleteButton&quot;:&quot;Delete&quot;,&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="datagridRireki_grid_table" role="" style="width: 350px; height: 176px; position: relative;"></div><div id="datagridRireki_footer" style="width: 350px; height: 25px;"></div></div></div></div><div class="StateChangable UzPanel JSControl FloatLeft marginLeft-XS marginRight-XS UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M Panel-Shadow ClearFloat Width-G1 UzCompositeChild" id="panelInput" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;panelInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;panelInput&quot;,&quot;title&quot;:&quot;老齢福祉年金情報入力&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="panelInput_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">老齢福祉年金情報入力</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="panelInput_panel_body_area"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtStartDate" style="width: 172px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtStartDate&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtStartDate_core&quot;,&quot;required&quot;:true,&quot;labelLText&quot;:&quot;受給開始日&quot;,&quot;labelLWidth&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-" id="txtStartDate_labelL"><span class="requireMark">*</span><span>受給開始日</span></span><input class="UzTextBox CoreElement required" id="txtStartDate_core" style="width: 80px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginRight-XS controlMargin-M marginLeft-XS UzCompositeChild" id="txtEndDate" style="width: 167px; height: 20px; position: relative; opacity: 1;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtEndDate&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtEndDate_core&quot;,&quot;labelLText&quot;:&quot;受給廃止日&quot;,&quot;labelLWidth&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-" id="txtEndDate_labelL"><span>受給廃止日</span></span><input class="UzTextBox CoreElement" id="txtEndDate_core" style="width: 80px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div><button class="UzButton JSControl controlMargin-M Width-S ClearFloat FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnSave" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnSave&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnSave&quot;,&quot;onClick&quot;:&quot;btnSave&quot;,&quot;text&quot;:&quot;保存する&quot;}"><span>保存する</span></button><button class="UzButton JSControl controlMargin-M Width-S FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnCancel" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnCancel&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnCancel&quot;,&quot;onClick&quot;:&quot;Cancel&quot;,&quot;text&quot;:&quot;入力をやめる&quot;}"><span>入力をやめる</span></button></div></div></div></div>  
+   
+     
+   
+     
+   
+     
+   
+     
+   
+   
+       
+   
+       
+       
+             
+   
+   
+   
+   
+   
+   
+     
+     
+   
+     
+   <script class="RamlConvert" type="text/javascript">
+var DBA= DBA? DBA: {};
+DBA['ROREIFUKUSHINENKINSHOKAI'] = {};
+DBA['ROREIFUKUSHINENKINSHOKAI'].RoreiFukushiNenkinShokaiRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_RoreiFukushiNenkinShokai').getProperty();parameter0.panelRireki = Uz.JSControlUtil.getJSControl(parentFieldName + '_panelRireki').getProperty();parameter0.panelRireki.btnAdd = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnAdd').getProperty();parameter0.panelRireki.datagridRireki = Uz.JSControlUtil.getJSControl(parentFieldName + '_datagridRireki').getProperty();parameter0.panelInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_panelInput').getProperty();parameter0.panelInput.txtStartDate = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtStartDate').getProperty();parameter0.panelInput.txtEndDate = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtEndDate').getProperty();parameter0.panelInput.btnSave = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnSave').getProperty();parameter0.panelInput.btnCancel = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnCancel').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBA;
+(function (DBA) {
+    (function (RoreiFukushiNenkinShokai) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.Add = function () {
+                return "Add";
+            };
+
+            Events.Update = function () {
+                return "Update";
+            };
+
+            Events.Delete = function () {
+                return "Delete";
+            };
+
+            Events.btnSave = function () {
+                return "btnSave";
+            };
+
+            Events.Cancel = function () {
+                return "Cancel";
+            };
+            return Events;
+        })();
+        RoreiFukushiNenkinShokai.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "RoreiFukushiNenkinShokai";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBA.RoreiFukushiNenkinShokai.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBA.RoreiFukushiNenkinShokai.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.RoreiFukushiNenkinShokai = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.panelRireki = function () {
+                return new UZA.Panel(this.convFiledName("panelRireki"));
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.datagridRireki = function () {
+                return new UZA.DataGrid(this.convFiledName("datagridRireki"));
+            };
+
+            Controls.prototype.panelInput = function () {
+                return new UZA.Panel(this.convFiledName("panelInput"));
+            };
+
+            Controls.prototype.txtStartDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtStartDate"));
+            };
+
+            Controls.prototype.txtEndDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtEndDate"));
+            };
+
+            Controls.prototype.btnSave = function () {
+                return new UZA.Button(this.convFiledName("btnSave"));
+            };
+
+            Controls.prototype.btnCancel = function () {
+                return new UZA.Button(this.convFiledName("btnCancel"));
+            };
+            return Controls;
+        })();
+        RoreiFukushiNenkinShokai.Controls = Controls;
+    })(DBA.RoreiFukushiNenkinShokai || (DBA.RoreiFukushiNenkinShokai = {}));
+    var RoreiFukushiNenkinShokai = DBA.RoreiFukushiNenkinShokai;
+})(DBA || (DBA = {}));
+var DBA;
+(function (DBA) {
+    (function (RoreiFukushiNenkinShokai) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new RoreiFukushiNenkinShokai.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new RoreiFukushiNenkinShokai.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        RoreiFukushiNenkinShokai.ModeController = ModeController;
+    })(DBA.RoreiFukushiNenkinShokai || (DBA.RoreiFukushiNenkinShokai = {}));
+    var RoreiFukushiNenkinShokai = DBA.RoreiFukushiNenkinShokai;
+})(DBA || (DBA = {}));
+
+var DBA;
+(function (DBA) {
+    (function (RoreiFukushiNenkinShokai) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new RoreiFukushiNenkinShokai.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        RoreiFukushiNenkinShokai.PublicProperties = PublicProperties;
+    })(DBA.RoreiFukushiNenkinShokai || (DBA.RoreiFukushiNenkinShokai = {}));
+    var RoreiFukushiNenkinShokai = DBA.RoreiFukushiNenkinShokai;
+})(DBA || (DBA = {}));
+</script></div>

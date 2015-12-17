@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RoreiFuku
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -26,6 +27,12 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     private panelRirekiDiv panelRireki;
     @JsonProperty("panelInput")
     private panelInputDiv panelInput;
+    @JsonProperty("hihokenshaNo")
+    private RString hihokenshaNo;
+    @JsonProperty("shikibetsuCode")
+    private RString shikibetsuCode;
+    @JsonProperty("model")
+    private RString model;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -67,6 +74,60 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     @JsonProperty("panelInput")
     public void setPanelInput(panelInputDiv panelInput) {
         this.panelInput = panelInput;
+    }
+
+    /*
+     * gethihokenshaNo
+     * @return hihokenshaNo
+     */
+    @JsonProperty("hihokenshaNo")
+    public RString getHihokenshaNo() {
+        return hihokenshaNo;
+    }
+
+    /*
+     * sethihokenshaNo
+     * @param hihokenshaNo hihokenshaNo
+     */
+    @JsonProperty("hihokenshaNo")
+    public void setHihokenshaNo(RString hihokenshaNo) {
+        this.hihokenshaNo = hihokenshaNo;
+    }
+
+    /*
+     * getshikibetsuCode
+     * @return shikibetsuCode
+     */
+    @JsonProperty("shikibetsuCode")
+    public RString getShikibetsuCode() {
+        return shikibetsuCode;
+    }
+
+    /*
+     * setshikibetsuCode
+     * @param shikibetsuCode shikibetsuCode
+     */
+    @JsonProperty("shikibetsuCode")
+    public void setShikibetsuCode(RString shikibetsuCode) {
+        this.shikibetsuCode = shikibetsuCode;
+    }
+
+    /*
+     * getmodel
+     * @return model
+     */
+    @JsonProperty("model")
+    public RString getModel() {
+        return model;
+    }
+
+    /*
+     * setmodel
+     * @param model model
+     */
+    @JsonProperty("model")
+    public void setModel(RString model) {
+        this.model = model;
     }
 
     /*

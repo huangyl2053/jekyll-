@@ -5,19 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.RoreiFukushiNenkinShokai;
 
-import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dba.definition.core.roreifukushinenkinjoho.RoreiFukushiNenkinJohoMapperParameter;
-import jp.co.ndensan.reams.db.dba.divcontroentity.DbT7006DivControEntity;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RoreiFukushiNenkinShokaiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RoreiFukushiNenkinShokaiHandler;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.datagridRireki_Row;
-import jp.co.ndensan.reams.db.dba.service.core.roreifukushinenkinjoho.RoreiFukushiNenkinJohoManagers;
+import jp.co.ndensan.reams.db.dba.service.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -25,8 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  *
@@ -34,172 +29,105 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class RoreiFukushiNenkinShokai {
 
-    private final RoreiFukushiNenkinJohoManagers service;
-    private Code モード;
-    DbT7006DivControEntity dbT7006DivContro;
-    Code addflag;
-    Code updateflag;
+    private final RoreiFukushiNenkinJukyushaManager service;
+    private static final RString 追加 = new RString("追加");
+    private static final RString 更新 = new RString("更新");
+    private static final RString 削除 = new RString("削除");
 
     /**
      * コンストラクタです。
      *
      */
     public RoreiFukushiNenkinShokai() {
-        service = RoreiFukushiNenkinJohoManagers.createInstance();
-        dbT7006DivContro = new DbT7006DivControEntity();
+        service = RoreiFukushiNenkinJukyushaManager.createInstance();
     }
 
     /**
-     * 共通子DIVを初期化します.
+     * 老齢福祉年金情報共通子DIVを初期化します.
      *
-     * @param div
-     * @return
+     * @param div 老齢福祉年金Div
+     * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
      */
     public ResponseData<RoreiFukushiNenkinShokaiDiv> onLoad(RoreiFukushiNenkinShokaiDiv div) {
-
-        dbT7006DivContro.setShikibetsuCode(new ShikibetsuCode("000001234567890"));
-        RoreiFukushiNenkinJohoMapperParameter param = RoreiFukushiNenkinJohoMapperParameter.createRoreiFukushiParam(dbT7006DivContro.getShikibetsuCode(),
-                FlexibleDate.EMPTY,
-                HihokenshaNo.EMPTY,
-                FlexibleDate.EMPTY);
-        getHandler(div).set老齢福祉年金情報一覧表示グリッド(service.getRoreiFukushiNenkinJoho(param));
+        div.setHihokenshaNo(new RString("12"));
+        div.setShikibetsuCode(new RString("123456789000001"));
+        RoreiFukushiNenkinJohoMapperParameter param = RoreiFukushiNenkinJohoMapperParameter.createRoreiFukushiParam(
+                new ShikibetsuCode(div.getShikibetsuCode()), FlexibleDate.EMPTY, HihokenshaNo.EMPTY, FlexibleDate.EMPTY);
+        List<RoreiFukushiNenkinJukyusha> 一覧情報 = service.getRoreiFukushiNenkinJoho(param);
+        getHandler(div).set老齢福祉年金情報一覧表示グリッド(一覧情報);
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 老齢福祉年金情報の登録処理です.
+     * 老齢福祉年金情報の「情報を追加する」ボタン処理です.
      *
-     * @param div
-     * @return
+     * @param div 老齢福祉年金Div
+     * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
      */
-    public ResponseData<RoreiFukushiNenkinShokaiDiv> btnAdd(RoreiFukushiNenkinShokaiDiv div) {
-
-        addflag = new Code("1");
-        getHandler(div).set老齢福祉年金情報画面表示();
+    public ResponseData<RoreiFukushiNenkinShokaiDiv> onClick_btnAdd(RoreiFukushiNenkinShokaiDiv div) {
+        div.setModel(追加);
+        getHandler(div).set老齢福祉年金追加ボタン画面表示();
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 老齢福祉年金情報の修正処理です.
+     * 老齢福祉年金情報の「修正」ボタン処理です.
      *
-     * @param div
-     * @return
+     * @param div 老齢福祉年金情報Div
+     * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
      */
-    public ResponseData<RoreiFukushiNenkinShokaiDiv> btnUpdate(RoreiFukushiNenkinShokaiDiv div) {
-        updateflag = new Code("2");
-        div.getPanelRireki().setDisplayNone(true);
-        div.getPanelInput().setDisplayNone(false);
+    public ResponseData<RoreiFukushiNenkinShokaiDiv> onChange_btnUpdate(RoreiFukushiNenkinShokaiDiv div) {
+        div.setModel(更新);
+        getHandler(div).set老齢福祉年金修正ボタン画面表示();
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 老齢福祉年金情報の削除処理です.
+     * 老齢福祉年金情報の「削除」ボタン処理です.
      *
-     * @param div
-     * @return
+     * @param div 老齢福祉年金情報Div
+     * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
      */
-    public ResponseData<RoreiFukushiNenkinShokaiDiv> btnDelete(RoreiFukushiNenkinShokaiDiv div) {
-
-        div.getPanelRireki().setDisplayNone(true);
-        div.getPanelInput().setDisplayNone(false);
-        div.getPanelInput().getTxtStartDate().setDisabled(true);
-        div.getPanelInput().getTxtEndDate().setDisabled(true);
-
+    public ResponseData<RoreiFukushiNenkinShokaiDiv> onClick_btnDelete(RoreiFukushiNenkinShokaiDiv div) {
+        div.setModel(削除);
+        getHandler(div).set老齢福祉年金削除ボタン画面表示();
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 老齢福祉年金情報の取消処理です.
+     * 老齢福祉年金情報の「入力を取消」ボタンです.
      *
-     * @param div
-     * @return
+     * @param div 老齢福祉年金情報Div
+     * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
      */
-    public ResponseData<RoreiFukushiNenkinShokaiDiv> btnCancel(RoreiFukushiNenkinShokaiDiv div) {
-
-        div.getPanelInput().getTxtStartDate().setDisabled(false);
-        div.getPanelInput().getTxtEndDate().setDisabled(false);
-
-        div.getPanelRireki().setDisplayNone(false);
-        div.getPanelInput().setDisplayNone(true);
-        div.getPanelInput().getTxtStartDate().clearValue();
-        div.getPanelInput().getTxtEndDate().clearValue();
+    public ResponseData<RoreiFukushiNenkinShokaiDiv> onClick_btnCancel(RoreiFukushiNenkinShokaiDiv div) {
+        getHandler(div).set老齢福祉年金取消ボタン画面表示();
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 老齢福祉年金情報の保存処理です.
+     * 老齢福祉年金情報の「保存する」ボタン処理です.
      *
-     * @param div
-     * @return
+     * @param div 老齢福祉年金情報Div
+     * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
      */
-    public ResponseData<RoreiFukushiNenkinShokaiDiv> btnSave(RoreiFukushiNenkinShokaiDiv div) {
-
-        dbT7006DivContro.setHihokenshaNo(new HihokenshaNo("19"));
-        dbT7006DivContro.setShikibetsuCode(new ShikibetsuCode("000001234567890"));
-
-        if ("1".equals(モード)) {
-
-            List<datagridRireki_Row> list = div.getDatagridRireki().getDataSource();
-            List<RoreiFukushiNenkinJohoMapperParameter> checkKikanParam = new ArrayList();
-            for (datagridRireki_Row row : list) {
-                RoreiFukushiNenkinJohoMapperParameter pa = RoreiFukushiNenkinJohoMapperParameter.createRoreiFukushiParam(
-                        ShikibetsuCode.EMPTY,
-                        new FlexibleDate(row.getStartDate()),
-                        HihokenshaNo.EMPTY,
-                        new FlexibleDate(row.getStartDate()));
-                checkKikanParam.add(pa);
-            }
-            if (service.checkKikanJuku(checkKikanParam) == false) {
-                ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-                validationMessages.add(new ValidationMessageControlPair(
-                        DbzErrorMessages.期間が不正_追加メッセージあり２));
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-
-            }
-
-            RoreiFukushiNenkinJohoMapperParameter checkParam = RoreiFukushiNenkinJohoMapperParameter.createRoreiFukushiParam(dbT7006DivContro.getShikibetsuCode(),
-                    new FlexibleDate(div.getPanelInput().getTxtStartDate().getValue().toDateString()),
-                    HihokenshaNo.EMPTY,
-                    FlexibleDate.EMPTY);
-            if (service.checkSameJukyuKaishibi(checkParam) != null) {
-                throw new ApplicationException(UrErrorMessages.既に登録済.getMessage());
-            }
+    public ResponseData<RoreiFukushiNenkinShokaiDiv> onClick_btnSave(RoreiFukushiNenkinShokaiDiv div) {
+        if (追加.equals(div.getModel())) {
+            get老齢福祉年金追加チェック(div);
+        }
+        List<RoreiFukushiNenkinJohoMapperParameter> kikancheck = getHandler(div).set老齢福祉年金入力チェック();
+        if (service.checkKikanJuku(kikancheck)) {
+            throw new ApplicationException(DbzErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace(
+                    div.getPanelInput().getTxtStartDate().toString(), div.getPanelInput().getTxtEndDate().toString()));
         }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode())) {
-
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                if ("1".equals(モード)) {
-                    RoreiFukushiNenkinJohoMapperParameter addParam = RoreiFukushiNenkinJohoMapperParameter.createRoreiFukushiParam(dbT7006DivContro.getShikibetsuCode(),
-                            new FlexibleDate(div.getPanelInput().getTxtStartDate().getValue().toDateString()),
-                            dbT7006DivContro.getHihokenshaNo(),
-                            new FlexibleDate(div.getPanelInput().getTxtEndDate().getValue().toDateString()));
-                    if (1 == service.regRoreiFukushiNenkinJoho(addParam)) {
-                        return onLoad(div);
-                    }
-                }
-                if ("2".equals(モード)) {
-                    RoreiFukushiNenkinJohoMapperParameter updateParam = RoreiFukushiNenkinJohoMapperParameter.createRoreiFukushiParam(dbT7006DivContro.getShikibetsuCode(),
-                            new FlexibleDate(div.getPanelInput().getTxtStartDate().getValue().toDateString()),
-                            HihokenshaNo.EMPTY,
-                            new FlexibleDate(div.getPanelInput().getTxtEndDate().getValue().toDateString()));
-                    if (1 == service.updRoreiFukushiNenkinJoho(updateParam)) {
-                        return onLoad(div);
-                    }
-                }
-                RoreiFukushiNenkinJohoMapperParameter deleteParam = RoreiFukushiNenkinJohoMapperParameter.createRoreiFukushiParam(dbT7006DivContro.getShikibetsuCode(),
-                        new FlexibleDate(div.getPanelInput().getTxtStartDate().getValue().toDateString()),
-                        HihokenshaNo.EMPTY,
-                        FlexibleDate.EMPTY);
-                if (1 == service.delRoreiFukushiNenkinJoho(deleteParam)) {
-                    return onLoad(div);
-                }
-
+                onClick_はい(div);
             }
-
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                 return ResponseData.of(div).respond();
             }
@@ -209,5 +137,41 @@ public class RoreiFukushiNenkinShokai {
 
     private RoreiFukushiNenkinShokaiHandler getHandler(RoreiFukushiNenkinShokaiDiv div) {
         return new RoreiFukushiNenkinShokaiHandler(div);
+    }
+
+    private ResponseData<RoreiFukushiNenkinShokaiDiv> onClick_はい(RoreiFukushiNenkinShokaiDiv div) {
+        if (追加.equals(div.getModel())) {
+            RoreiFukushiNenkinJukyusha busiRoreiFukushiNenkin = new RoreiFukushiNenkinJukyusha(
+                    new ShikibetsuCode(div.getShikibetsuCode()),
+                    new FlexibleDate(div.getTxtStartDate().getValue().toDateString()));
+            busiRoreiFukushiNenkin = getHandler(div).set老齢福祉年金保存ボタン押下の追加処理(busiRoreiFukushiNenkin);
+            if (service.save老齢福祉年金受給者(busiRoreiFukushiNenkin)) {
+                return onLoad(div);
+            }
+        }
+        if (更新.equals(div.getModel())) {
+            RoreiFukushiNenkinJukyusha busiRoreiFukushiNenkin = getHandler(div).set老齢福祉年金保存ボタン押下の更新処理();
+            if (service.save老齢福祉年金受給者(busiRoreiFukushiNenkin)) {
+                return onLoad(div);
+            }
+        }
+        if (削除.equals(div.getModel())) {
+            RoreiFukushiNenkinJukyusha busiRoreiFukushiNenkin = getHandler(div).set老齢福祉年金保存ボタン押下の削除処理();
+            if (service.save老齢福祉年金受給者(busiRoreiFukushiNenkin)) {
+                return onLoad(div);
+            }
+        }
+        return onLoad(div);
+    }
+
+    private void get老齢福祉年金追加チェック(RoreiFukushiNenkinShokaiDiv div) {
+        RoreiFukushiNenkinJohoMapperParameter addCheck = RoreiFukushiNenkinJohoMapperParameter.createRoreiFukushiParam(
+                new ShikibetsuCode(div.getShikibetsuCode()),
+                new FlexibleDate(div.getPanelInput().getTxtStartDate().getValue().toDateString()),
+                HihokenshaNo.EMPTY,
+                FlexibleDate.EMPTY);
+        if (service.checkSameJukyuKaishibi(addCheck) > 0) {
+            throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace("受給開始年月日"));
+        }
     }
 }
