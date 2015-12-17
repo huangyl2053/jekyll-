@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
+import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.hihokenshadaicho.IHihokenshaShikakuShutokuMapper;
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
@@ -42,7 +43,6 @@ public class HihokenshaShikakuShutokuManager {
     private static final RString HIHOKENNSHAKUBUNCODE_1 = new RString("1");
     private static final RString HIHOKENNSHAKUBUNCODE_2 = new RString("2");
     private static final RString 枝番 = new RString("0001");
-    private static final RString 年齢到達_事由コード = new RString("02");
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
     private final MapperProvider mapperProvider;
     private static boolean checkFlg = false;
@@ -180,11 +180,8 @@ public class HihokenshaShikakuShutokuManager {
         requireNonNull(当該識別対象の生年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("当該識別対象の生年月日"));
         requireNonNull(資格取得日, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得日"));
         requireNonNull(資格取得事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得事由コード"));
-
         RString age = get年齢(当該識別対象の生年月日, 資格取得日);
-        // TODO 李　QA152あります、年齢到達_事由コード不明です。2015/12/17
-//        年齢到達_事由コード = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, new CodeShubetsu("0117")).get(0).getコード().value();
-        if (年齢到達_事由コード.equals(資格取得事由コード)) {
+        if (ShikakuShutokuJiyu.年齢到達.getコード().equals(資格取得事由コード)) {
             return Integer.parseInt(age.toString()) >= AGE_65;
         } else {
             return Integer.parseInt(age.toString()) >= AGE_40;
