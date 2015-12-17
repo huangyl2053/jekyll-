@@ -66,7 +66,7 @@ public class GappeiCityJohoBFinder {
      *
      * @return　GappeiCityJohoBFinder
      */
-    static GappeiCityJohoBFinder createInstance() {
+    public static GappeiCityJohoBFinder createInstance() {
         return InstanceProvider.create(GappeiCityJohoBFinder.class);
     }
 
@@ -87,10 +87,8 @@ public class GappeiCityJohoBFinder {
     public FlexibleDate getfukatoYMD() {
 
         FlexibleDate kyuJohoFuyoToYMD = FlexibleDate.EMPTY;
-        if ((合併区分_あり).equals(getGappeijohokubun())) {
-            if (dac.get旧市町村コード付加終了年月日() != null) {
-                kyuJohoFuyoToYMD = dac.get旧市町村コード付加終了年月日().getKyuJohoFuyoToYMD();
-            }
+        if ((合併区分_あり).equals(getGappeijohokubun()) && dac.get旧市町村コード付加終了年月日() != null) {
+            kyuJohoFuyoToYMD = dac.get旧市町村コード付加終了年月日().getKyuJohoFuyoToYMD();
         }
         return kyuJohoFuyoToYMD;
     }
