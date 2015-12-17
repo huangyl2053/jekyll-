@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 構成市町村のビジネスクラスです。
+ * 広域全市町村クラスです。
  */
 public class KoikiZenShichosonJoho {
 
