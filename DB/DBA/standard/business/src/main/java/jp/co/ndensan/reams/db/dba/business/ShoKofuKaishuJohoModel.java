@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -28,6 +29,8 @@ public class ShoKofuKaishuJohoModel {
         this.entity = entity;
     }
 
+    
+
     /**
      * 交付証種類を返します。
      *
@@ -35,6 +38,15 @@ public class ShoKofuKaishuJohoModel {
      */
     public RString get交付証種類コード() {
         return entity.getKofuShoShurui();
+    }
+    
+     /**
+     * 被保険者番号を返します。
+     *
+     * @return 被保険者番号
+     */
+    public HihokenshaNo get被保険者番号() {
+        return entity.getHihokenshaNo();
     }
 
     /**
