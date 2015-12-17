@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 public final class RoreiFukushiNenkinJohoMapperParameter {
 
     /**
-     *
      * 老齢福祉年金情報パラメータです。
+     *
      */
     private final ShikibetsuCode shikibetsuCode;
     private final HihokenshaNo hihokenshaNo;

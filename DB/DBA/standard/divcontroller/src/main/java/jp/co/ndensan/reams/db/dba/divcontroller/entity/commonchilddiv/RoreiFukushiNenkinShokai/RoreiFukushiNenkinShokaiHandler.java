@@ -22,18 +22,19 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
+ * 老齢福祉年金情報です。
  *
- * 老齢福祉年金情報です.
  *
  */
 public class RoreiFukushiNenkinShokaiHandler {
 
     private final RoreiFukushiNenkinShokaiDiv div;
-    public static final ShikibetsuCode shikibetsuCode = new ShikibetsuCode("000001234567890");
-    public static final FlexibleDate jukyuKaishiYMD = new FlexibleDate("20140401");
-    public static final FlexibleDate jukyuShuryoYMD = new FlexibleDate("20140401");
-    public static final HihokenshaNo hihokenshaNo = new HihokenshaNo("20140401");
 
+    /**
+     * コンストラクタです。
+     *
+     * @param div
+     */
     public RoreiFukushiNenkinShokaiHandler(RoreiFukushiNenkinShokaiDiv div) {
         this.div = div;
     }
@@ -41,7 +42,7 @@ public class RoreiFukushiNenkinShokaiHandler {
     /**
      * 共通子DIVを初期化します。
      *
-     * @param 一覧情報 List<RoreiFukushiNenkinJukyusha>
+     * @param 一覧情報
      */
     public void set老齢福祉年金情報一覧表示グリッド(List<RoreiFukushiNenkinJukyusha> 一覧情報) {
         List<datagridRireki_Row> rowList = new ArrayList<>();
@@ -64,7 +65,8 @@ public class RoreiFukushiNenkinShokaiHandler {
     }
 
     /**
-     * 老齢福祉年金情報の「情報を追加する」ボタン処理です.
+     * 老齢福祉年金情報の「情報を追加する」ボタン処理です。
+     *
      */
     public void set老齢福祉年金追加ボタン画面表示() {
         div.getPanelRireki().setDisplayNone(true);
@@ -72,7 +74,8 @@ public class RoreiFukushiNenkinShokaiHandler {
     }
 
     /**
-     * 老齢福祉年金情報の「修正」ボタン処理です.
+     * 老齢福祉年金情報の「修正」ボタン処理です。
+     *
      */
     public void set老齢福祉年金修正ボタン画面表示() {
         div.getPanelInput().getTxtStartDate().setValue(new RDate(div.getDatagridRireki().getClickedItem().getStartDate()
@@ -86,7 +89,8 @@ public class RoreiFukushiNenkinShokaiHandler {
     }
 
     /**
-     * 老齢福祉年金情報の「削除」ボタン処理です.
+     * 老齢福祉年金情報の「削除」ボタン処理です。
+     *
      */
     public void set老齢福祉年金削除ボタン画面表示() {
         div.getPanelInput().getTxtStartDate().setValue(new RDate(div.getDatagridRireki().getClickedItem().getStartDate()
@@ -102,7 +106,8 @@ public class RoreiFukushiNenkinShokaiHandler {
     }
 
     /**
-     * 老齢福祉年金情報の「入力を取消」ボタンです.
+     * 老齢福祉年金情報の「入力を取消」ボタンです。
+     *
      */
     public void set老齢福祉年金取消ボタン画面表示() {
         div.getPanelInput().getTxtStartDate().setDisabled(false);
@@ -114,7 +119,7 @@ public class RoreiFukushiNenkinShokaiHandler {
     }
 
     /**
-     * 老齢福祉年金情報の「保存する」ボタン入力チェックです.
+     * 老齢福祉年金情報の「保存する」ボタン入力チェックです。
      *
      * @return List<RoreiFukushiNenkinJohoMapperParameter> 老齢福祉年金情報パラメータ
      */
@@ -142,7 +147,7 @@ public class RoreiFukushiNenkinShokaiHandler {
     }
 
     /**
-     * 老齢福祉年金「更新モード」の場合、保存ボタン押下の更新処理です.
+     * 老齢福祉年金「更新モード」の場合、保存ボタン押下の更新処理です。
      *
      * @return RoreiFukushiNenkinJukyusha 老齢福祉年金受給者を管理
      */
@@ -163,9 +168,9 @@ public class RoreiFukushiNenkinShokaiHandler {
     }
 
     /**
-     * 老齢福祉年金「削除モード」の場合、保存ボタン押下の削除処理です.
+     * 老齢福祉年金「削除モード」の場合、保存ボタン押下の削除処理です。
      *
-     * @return
+     * @return RoreiFukushiNenkinJukyusha 老齢福祉年金受給者を管理
      */
     public RoreiFukushiNenkinJukyusha set老齢福祉年金保存ボタン押下の削除処理() {
         Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyushaList
@@ -182,7 +187,7 @@ public class RoreiFukushiNenkinShokaiHandler {
     }
 
     /**
-     * 老齢福祉年金「追加モード」の場合、「受給開始日の重複チェック」です.
+     * 老齢福祉年金「追加モード」の場合、「受給開始日の重複チェック」です。
      *
      */
     public void set老齢福祉年金追加チェック() {
@@ -197,12 +202,12 @@ public class RoreiFukushiNenkinShokaiHandler {
     }
 
     /**
-     * 老齢福祉年金「追加モード」の場合、保存ボタン押下の追加処理です.
+     * 老齢福祉年金「追加モード」の場合、保存ボタン押下の追加処理です。
      *
      * @param busiRoreiFukushiNenkin 老齢福祉年金受給者を管理
      * @return RoreiFukushiNenkinJukyusha 老齢福祉年金受給者を管理
      */
-    public RoreiFukushiNenkinJukyusha set老齢福祉年金保存ボタン押下の追加処理(RoreiFukushiNenkinJukyusha busiRoreiFukushiNenkin) {
+    public RoreiFukushiNenkinJukyusha set年金保存ボタン押下の追加(RoreiFukushiNenkinJukyusha busiRoreiFukushiNenkin) {
         busiRoreiFukushiNenkin = busiRoreiFukushiNenkin.createBuilderForEdit().set受給廃止年月日(
                 new FlexibleDate(div.getPanelInput().getTxtEndDate().getValue().toDateString())).build();
         busiRoreiFukushiNenkin = busiRoreiFukushiNenkin.createBuilderForEdit().set被保険者番号(

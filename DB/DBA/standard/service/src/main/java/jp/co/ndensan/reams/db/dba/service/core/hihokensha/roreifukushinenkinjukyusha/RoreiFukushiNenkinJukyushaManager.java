@@ -64,7 +64,7 @@ public class RoreiFukushiNenkinJukyushaManager {
     }
 
     /**
-     * 老齢福祉年金情報の取得処理です.
+     * 老齢福祉年金情報の取得処理です。
      *
      * @param param RoreiFukushiNenkinJohoMapperParameter 老齢福祉年金情報パラメータ
      * @return List<BRoreiFukushiNenkinJoho> 老齢福祉年金受給者を管理
@@ -85,7 +85,7 @@ public class RoreiFukushiNenkinJukyushaManager {
     }
 
     /**
-     * 老齢福祉年金履歴情報を登録前重複チェックするです.
+     * 老齢福祉年金履歴情報を登録前重複チェックするです。
      *
      * @param addCheck 老齢福祉年金情報パラメータ
      * @return
