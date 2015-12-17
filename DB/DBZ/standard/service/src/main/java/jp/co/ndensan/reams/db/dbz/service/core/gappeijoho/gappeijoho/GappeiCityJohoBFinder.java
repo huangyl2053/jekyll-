@@ -123,7 +123,7 @@ public class GappeiCityJohoBFinder {
     public SearchResult<GappeiCityJyoho> getTannitsugappeijohokensaku(RString hyoujiUmu,
             LasdecCode 旧市町村コード, HokenshaNo 旧保険者番号) {
         if (旧市町村コード.isEmpty() && 旧保険者番号.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage().toString());
+            throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage());
         }
         IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForTannitsugappeijohokensaku(hyoujiUmu,
@@ -166,7 +166,7 @@ public class GappeiCityJohoBFinder {
     public SearchResult<GappeiCityJyoho> getKouikigappeijohokensaku(RString hyoujiUmu,
             LasdecCode 旧市町村コード, HokenshaNo 旧保険者番号) {
         if (旧市町村コード.isEmpty() && 旧保険者番号.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage().toString());
+            throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage());
         }
         IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForKouikigappeijohokensaku(hyoujiUmu,
