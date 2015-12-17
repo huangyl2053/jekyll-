@@ -62,15 +62,15 @@ public class NyutaishoshaKanriFinder {
         INyutaishoshaKanriMapper mapper = mapperProvider.create(INyutaishoshaKanriMapper.class);
         NyutaishoshaKanriMapperParameter parameter;
         switch (入所施設種類.toString()) {
-            case "介護保険施設":
+            case "11":
                 parameter = NyutaishoshaKanriMapperParameter.createSelectByKeyParam(入所年月日, 退所年月日, KAIGOHOHENSHISETSU_VALUE);
                 count = mapper.getHihokenshaDaichoCount(parameter);
                 break;
-            case "適用除外施設":
+            case "12":
                 parameter = NyutaishoshaKanriMapperParameter.createSelectByKeyParam(入所年月日, 退所年月日, JUSHOCHITOKUREITAISHOSHISETSU_VALUE);
                 count = mapper.getTekiyoJogaishaCount(parameter);
                 break;
-            case "住所地特例対象施設":
+            case "21":
                 parameter = NyutaishoshaKanriMapperParameter.createSelectByKeyParam(入所年月日, 退所年月日, TEKIYOJOGAISHISETSU_VALUE);
                 count = mapper.getTashichosonJushochiTokureiCount(parameter);
                 break;
