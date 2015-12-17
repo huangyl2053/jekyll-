@@ -31,6 +31,7 @@ public class HihokenshanotsukibanFinder {
     private static final RString HANTEIYOU_GO = new RString("5");
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
     private final DbT7037ShoKofuKaishuDac dbT7037Dac;
+    private static HihokenshaNo 被保険者番号;
 
     /**
      * コンストラクタです。
@@ -65,17 +66,16 @@ public class HihokenshanotsukibanFinder {
     /**
      * 識別コードによって被保険者番号を得ます。
      *
-     * @param 識別コード 識別コード
-     * @return HihokenshaNo HihokenshaNo
+     * @param shikibetsuCode 識別コード
+     * @return HihokenshaNo 被保険者番号
      */
     @Transaction
-    public HihokenshaNo getHihokenshanotsukiban(ShikibetsuCode 識別コード) {
-        HihokenshaNo 被保険者番号;
-        DbT1001HihokenshaDaichoEntity entityDbT1001 = dbT1001Dac.selectHihokenshaNo(識別コード);
+    public HihokenshaNo getHihokenshanotsukiban(ShikibetsuCode shikibetsuCode) {
+        DbT1001HihokenshaDaichoEntity entityDbT1001 = dbT1001Dac.selectHihokenshaNo(shikibetsuCode);
         if (entityDbT1001 == null) {
-            DbT7037ShoKofuKaishuEntity entityDbT7037 = dbT7037Dac.selectHihokenshaNo(識別コード);
+            DbT7037ShoKofuKaishuEntity entityDbT7037 = dbT7037Dac.selectHihokenshaNo(shikibetsuCode);
             if (entityDbT7037 == null) {
-                被保険者番号 = HihokenshanotsukibanFinder.getHubanHouhou(識別コード);
+                被保険者番号 = getHubanHouhou(shikibetsuCode);
             } else {
                 被保険者番号 = entityDbT7037.getHihokenshaNo();
             }
@@ -89,7 +89,6 @@ public class HihokenshanotsukibanFinder {
     }
 
     private static HihokenshaNo getHubanHouhou(ShikibetsuCode 識別コード) {
-        HihokenshaNo 被保険者番号 = null;
         // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「付番方法」がない 2015/12/15。
         RString 付番方法 = new RString("");
         // RString 付番方法 = BusinessConfig.get(HihokenshaNoFubanHoho.付番方法, SubGyomuCode.DBA介護資格);
@@ -106,78 +105,73 @@ public class HihokenshanotsukibanFinder {
             被保険者番号 = new HihokenshaNo("");
         }
         if (HANTEIYOU_YONN.equals(付番方法)) {
-            // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_付番元情報」がない 2015/12/15。
-            RString 付番元 = new RString("");
-            // RString 付番元 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_付番元情報,SubGyomuCode.DBA介護資格);
-            // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_付番元情報_開始位置」がない 2015/12/15。
-            RString 開始位置 = new RString("");
-            // RString 開始位置 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_付番元情報_開始位置,SubGyomuCode.DBA介護資格);
-            // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_付番元情報_有効桁数」がない 2015/12/15。
-            RString 有効桁数 = new RString("");
-            // RString 有効桁数 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_付番元情報_有効桁数,SubGyomuCode.DBA介護資格);
-            // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_前付与番号_桁数」がない 2015/12/15。
-            RString 前付与番号桁数 = new RString("");
-            // RString 前付与番号桁数 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_前付与番号_桁数,SubGyomuCode.DBA介護資格);
-            // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_前付与番号」がない 2015/12/15。
-            RString 前付与番号 = new RString("");
-            // RString 前付与番号 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_前付与番号,SubGyomuCode.DBA介護資格);
-            // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_後付与番号_桁数」がない 2015/12/15。
-            RString 後付与番号桁数 = new RString("");
-            // RString 後付与番号桁数 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_後付与番号_桁数,SubGyomuCode.DBA介護資格);
-            // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_後付与番号」がない 2015/12/15。
-            RString 後付与番号 = new RString("");
-            // RString 後付与番号 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_後付与番号,SubGyomuCode.DBA介護資格);
-
-            int 付番元情報開始位置 = Integer.parseInt(開始位置.toString());
-            int 付番元情報有効桁数 = Integer.parseInt(有効桁数.toString());
-
-            if (HANTEIYOU_ICHI.equals(付番元)) {
-                付番元 = 付番元.substring(付番元.length() - HANTEIYOU_10, 付番元.length()).trim();
-            }
-            if (HANTEIYOU_NI.equals(付番元)) {
-                // TODO 袁献輝 EnumクラスSaibanHanyokeyNameがない、 2015/12/15。
-                // 被保険者番号 = Saiban.get(SubGyomuCode.DBA介護資格,SaibanHanyokeyName.被保険者番号自動採番).nextString();
-            }
-            if (開始位置.isEmpty() && 有効桁数.isEmpty() && 前付与番号桁数.isEmpty() && 後付与番号桁数.isEmpty()) {
-                if ((前付与番号.length() != 前付与番号桁数.length()) || (後付与番号.length() != 後付与番号桁数.length())) {
-                    throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage());
-                } else {
-                    StringBuilder hihokenshaNo = new StringBuilder();
-                    hihokenshaNo.append(前付与番号);
-                    hihokenshaNo.append(付番元.substring(付番元情報開始位置, 付番元情報有効桁数));
-                    hihokenshaNo.append(後付与番号);
-                    被保険者番号 = new HihokenshaNo(hihokenshaNo.toString());
-                }
-            } else if (開始位置.isEmpty() && 有効桁数.isEmpty() && 前付与番号桁数.isEmpty()) {
-                if (前付与番号.length() != 前付与番号桁数.length()) {
-                    throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage());
-                } else {
-                    StringBuilder hihokenshaNo = new StringBuilder();
-                    hihokenshaNo.append(前付与番号);
-                    hihokenshaNo.append(付番元.substring(付番元情報開始位置, 付番元情報有効桁数));
-                    被保険者番号 = new HihokenshaNo(hihokenshaNo.toString());
-                }
-            } else if (開始位置.isEmpty() && 有効桁数.isEmpty() && 後付与番号.isEmpty()) {
-                if (後付与番号.length() != 後付与番号桁数.length()) {
-                    throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage());
-                } else {
-                    StringBuilder hihokenshaNo = new StringBuilder();
-                    hihokenshaNo.append(付番元.substring(付番元情報開始位置, 付番元情報有効桁数));
-                    hihokenshaNo.append(後付与番号);
-                    被保険者番号 = new HihokenshaNo(hihokenshaNo.toString());
-                }
-            } else if (開始位置.isEmpty() && 有効桁数.isEmpty()) {
-
-                被保険者番号 = new HihokenshaNo(付番元.substring(付番元情報開始位置, 付番元情報有効桁数));
-            }
-
-            if (!開始位置.isEmpty() && !有効桁数.isEmpty() && !前付与番号桁数.isEmpty() && !後付与番号桁数.isEmpty()) {
-                被保険者番号 = new HihokenshaNo(付番元);
-            }
+            getHubanHouhouHanteiYonn();
         }
         if (HANTEIYOU_GO.equals(付番方法)) {
             // TODO 袁献輝 EnumクラスSaibanHanyokeyNameがない 2015/12/15。
             // 被保険者番号 = Saiban.get(SubGyomuCode.DBA介護資格,SaibanHanyokeyName.被保険者番号自動MCD).nextString();
+        }
+        return 被保険者番号;
+    }
+
+    private static HihokenshaNo getHubanHouhouHanteiYonn() {
+        // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_付番元情報」がない 2015/12/15。
+        RString 付番元 = new RString("");
+        // RString 付番元 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_付番元情報,SubGyomuCode.DBA介護資格);
+        // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_付番元情報_開始位置」がない 2015/12/15。
+        RString 開始位置 = new RString("");
+        // RString 開始位置 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_付番元情報_開始位置,SubGyomuCode.DBA介護資格);
+        // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_付番元情報_有効桁数」がない 2015/12/15。
+        RString 有効桁数 = new RString("");
+        // RString 有効桁数 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_付番元情報_有効桁数,SubGyomuCode.DBA介護資格);
+        // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_前付与番号_桁数」がない 2015/12/15。
+        RString 前付与番号桁数 = new RString("");
+        // RString 前付与番号桁数 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_前付与番号_桁数,SubGyomuCode.DBA介護資格);
+        // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_前付与番号」がない 2015/12/15。
+        RString 前付与番号 = new RString("");
+        // RString 前付与番号 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_前付与番号,SubGyomuCode.DBA介護資格);
+        // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_後付与番号_桁数」がない 2015/12/15。
+        RString 後付与番号桁数 = new RString("");
+        // RString 後付与番号桁数 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_後付与番号_桁数,SubGyomuCode.DBA介護資格);
+        // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_後付与番号」がない 2015/12/15。
+        RString 後付与番号 = new RString("");
+        // RString 後付与番号 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_後付与番号,SubGyomuCode.DBA介護資格);
+
+        int 付番元情報開始位置 = Integer.parseInt(開始位置.toString());
+        int 付番元情報有効桁数 = Integer.parseInt(有効桁数.toString());
+
+        if (HANTEIYOU_ICHI.equals(付番元)) {
+            付番元 = 付番元.substring(付番元.length() - HANTEIYOU_10, 付番元.length()).trim();
+        }
+        if (HANTEIYOU_NI.equals(付番元)) {
+            // TODO 袁献輝 EnumクラスSaibanHanyokeyNameがない、 2015/12/15。
+            // 被保険者番号 = Saiban.get(SubGyomuCode.DBA介護資格,SaibanHanyokeyName.被保険者番号自動採番).nextString();
+        }
+        if ((開始位置.isEmpty() && 有効桁数.isEmpty() && 前付与番号桁数.isEmpty() && 後付与番号桁数.isEmpty())
+                && (前付与番号.length() != 前付与番号桁数.length()) || (後付与番号.length() != 後付与番号桁数.length())) {
+            StringBuilder hihokenshaNo = new StringBuilder();
+            hihokenshaNo.append(前付与番号);
+            hihokenshaNo.append(付番元.substring(付番元情報開始位置, 付番元情報有効桁数));
+            hihokenshaNo.append(後付与番号);
+            被保険者番号 = new HihokenshaNo(hihokenshaNo.toString());
+        } else if ((開始位置.isEmpty() && 有効桁数.isEmpty() && 前付与番号桁数.isEmpty())
+                && (前付与番号.length() != 前付与番号桁数.length())) {
+            StringBuilder hihokenshaNo = new StringBuilder();
+            hihokenshaNo.append(前付与番号);
+            hihokenshaNo.append(付番元.substring(付番元情報開始位置, 付番元情報有効桁数));
+            被保険者番号 = new HihokenshaNo(hihokenshaNo.toString());
+        } else if ((開始位置.isEmpty() && 有効桁数.isEmpty() && 後付与番号.isEmpty())
+                && (後付与番号.length() != 後付与番号桁数.length())) {
+            StringBuilder hihokenshaNo = new StringBuilder();
+            hihokenshaNo.append(付番元.substring(付番元情報開始位置, 付番元情報有効桁数));
+            hihokenshaNo.append(後付与番号);
+            被保険者番号 = new HihokenshaNo(hihokenshaNo.toString());
+        } else if (開始位置.isEmpty() && 有効桁数.isEmpty()) {
+            被保険者番号 = new HihokenshaNo(付番元.substring(付番元情報開始位置, 付番元情報有効桁数));
+        } else if (!開始位置.isEmpty() && !有効桁数.isEmpty() && !前付与番号桁数.isEmpty() && !後付与番号桁数.isEmpty()) {
+            被保険者番号 = new HihokenshaNo(付番元);
+        } else {
+            throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage());
         }
         return 被保険者番号;
     }
