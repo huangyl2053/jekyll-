@@ -28,8 +28,8 @@ public final class HihokenshaDaichoSakuseiParameter {
      *
      */
     private HihokenshaDaichoSakuseiParameter(ShikibetsuCode shikibetsuCode, HihokenshaNo hihokenshaNo) {
-	this.shikibetsuCode = shikibetsuCode;
-	this.hihokenshaNo = hihokenshaNo;
+        this.shikibetsuCode = shikibetsuCode;
+        this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
@@ -40,8 +40,8 @@ public final class HihokenshaDaichoSakuseiParameter {
      * @return 被保険者台帳検索パラメータ
      */
     public static HihokenshaDaichoSakuseiParameter createSelectByKeyParam(
-	    ShikibetsuCode shikibetsuCode,
-	    HihokenshaNo hihokenshaNo) {
-	return new HihokenshaDaichoSakuseiParameter(shikibetsuCode, hihokenshaNo);
+            ShikibetsuCode shikibetsuCode,
+            HihokenshaNo hihokenshaNo) {
+        return new HihokenshaDaichoSakuseiParameter(shikibetsuCode, hihokenshaNo);
     }
 }
