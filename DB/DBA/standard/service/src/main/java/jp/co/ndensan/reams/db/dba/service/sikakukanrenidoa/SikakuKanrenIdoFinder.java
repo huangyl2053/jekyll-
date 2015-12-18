@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.HenkoJiyu;
+import jp.co.ndensan.reams.db.dba.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dba.business.core.sikakukanrenido.SikakuKanrenIdo;
 import jp.co.ndensan.reams.db.dba.definition.param.sikakukanrenido.SikakuKanrenIdoParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.SikakuKanrenIdoEntity;
@@ -17,11 +18,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
-import jp.co.ndensan.reams.db.dba.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.sikakujiyushutoku.SikakuJiyuShutoku;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7056GappeiShichosonEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakujiyushutoku.ShikakuJiyuShutoku;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.service.KyuShichosonCode;
@@ -40,30 +40,31 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
- * 資格関連異動一覧クラスです。
+ * 資格関連異動クラスです。
  */
 public class SikakuKanrenIdoFinder {
 
     private final MapperProvider mapperProvider;
     private final DbT7051KoseiShichosonMasterDac db7051Dac;
     private final SikakuJiyuShutoku sikaku;
-    private static final RString コード種別_0126 = new RString("0126");
 
     /**
-     * コンストラクタ。
+     * 単体テスト用のコンストラクタです。
      *
+     * @param mapperProvider mapperProvider
+     * @param dac dac
+     * @param sikaku　SikakuJiyuShutoku
      */
     public SikakuKanrenIdoFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.db7051Dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
         this.sikaku = InstanceProvider.create(SikakuJiyuShutoku.class);
-
     }
 
     /**
-     * クラスをcreateメソッドです。
+     * {@link InstanceProvider#create}にて生成した{@link SikakuKanrenIdoFinder}のインスタンスを返します。
      *
-     * @return 資格関連異動一覧の取得処理するクラス
+     * @return {@link InstanceProvider#create}にて生成した{@link SikakuKanrenIdoFinder}のインスタンス
      */
     public static SikakuKanrenIdoFinder createInstance() {
         return InstanceProvider.create(SikakuKanrenIdoFinder.class);
@@ -73,11 +74,11 @@ public class SikakuKanrenIdoFinder {
      * 一覧データ取得リストを取得する。
      *
      * @param params ShikakuTokusoInputGuideParameter
-     * @return SikakuKanrenIdo 一覧データ取得取得リスト
+     * @return 一覧データ取得取得リスト
      */
     public SearchResult<SikakuKanrenIdo> getSikakuKanrenIdo(SikakuKanrenIdoParameter params) {
-        if (params.getHihokenshaNo().isEmpty() && params.getHihokenshaNo() == null
-                || params.getshikibetsuCode() == null && params.getshikibetsuCode().isEmpty()) {
+        if ((params.getHihokenshaNo().isEmpty() && params.getHihokenshaNo() == null)
+                || (params.getshikibetsuCode() == null && params.getshikibetsuCode().isEmpty())) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage().toString());
         }
         ISikakuKanrenIdoMapper shikakuTokusoMappers = mapperProvider.create(ISikakuKanrenIdoMapper.class);
@@ -88,7 +89,6 @@ public class SikakuKanrenIdoFinder {
         List<SikakuKanrenIdo> serviceShuruiList = new ArrayList<>();
         for (SikakuKanrenIdoEntity entity : 一覧データ取得リスト) {
             serviceShuruiList.add(new SikakuKanrenIdo(entity));
-
         }
         return SearchResult.of(serviceShuruiList, 0, false);
     }
@@ -96,8 +96,7 @@ public class SikakuKanrenIdoFinder {
     /**
      * 所在保険者リスト情報取得。
      *
-     * @param systemDate RDate
-     * @return List<DbT7051KoseiShichosonMasterEntity>
+     * @return　所在保険者リスト
      */
     @Transaction
     public SearchResult<KoseiShichosonMaster> selectByKoseiShichosonMasterList() {
@@ -116,8 +115,9 @@ public class SikakuKanrenIdoFinder {
     /**
      * 変更事由リスト情報を取得。
      *
-     * @return List<GappeiShichoson>
+     * @return 変更事由リスト
      */
+    @Transaction
     public SearchResult<HenkoJiyu> getHenkoJiyuList() {
         List<HenkoJiyu> serviceShuruiList = new ArrayList<>();
         ShichosonSecurityJoho 市町村セキュリティ = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
@@ -135,10 +135,11 @@ public class SikakuKanrenIdoFinder {
     }
 
     /**
-     * 市町村セキュリティ取得。 旧市町村コード情報を取得NULL戻るを
+     * 市町村セキュリティ取得。
      *
-     * @return List<GappeiShichoson>
+     * @return 旧市町村コード情報List
      */
+    @Transaction
     public SearchResult<GappeiShichoson> getGappeiShichosonList() {
         List<GappeiShichoson> 旧市町村コード情報List = new ArrayList<>();
         ShichosonSecurityJoho 市町村セキュリティ = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
@@ -147,7 +148,7 @@ public class SikakuKanrenIdoFinder {
                         DonyukeitaiCode.toValue(市町村セキュリティ.get導入形態コード().getKey()));
         if (旧市町村コード情報 == null) {
 
-            return null;
+            return SearchResult.of(Collections.<GappeiShichoson>emptyList(), 0, false);
         } else {
             for (KyuShichosonCode entity : 旧市町村コード情報.get旧市町村コード情報List()) {
                 DbT7056GappeiShichosonEntity list = new DbT7056GappeiShichosonEntity();
