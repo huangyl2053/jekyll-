@@ -10,18 +10,21 @@ import jp.co.ndensan.reams.db.dba.business.core.jigyosha.ServiceShuruiJigyoshaIn
 import jp.co.ndensan.reams.db.dba.definition.jigyosha.JigyoshaInputGuideParameter;
 import jp.co.ndensan.reams.db.dba.service.core.jigyosha.JigyoshaInputGuideFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigojigyoshano.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyoshaKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -31,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class JiGyoSyaHandler {
 
     private final JigyoshaNyuryokuGudieCommonChildDivDiv div;
-    private final Decimal 最大表示件数_100 = new Decimal(100);
 
     /**
      * コンストラクタです。
@@ -210,7 +212,8 @@ public class JiGyoSyaHandler {
 
             IAssociationFinder finder = AssociationFinderFactory.createInstance();
             div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(true);
-            div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(最大表示件数_100);
+            div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(BusinessConfig.
+                    get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
             div.getTaishoJigyoshaKensaku().getDdlKennCode().setDataSource(get県コード());
             div.getTaishoJigyoshaKensaku().getDdlGunshiCode().setDataSource(get郡市コード(mode));
             div.getTaishoJigyoshaKensaku().getDdlServiceShurui().setDataSource(getサービス種類());
@@ -229,7 +232,8 @@ public class JiGyoSyaHandler {
 
             div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(false);
             div.getOtherTokureiShisetsu().getRadKannaiKanngaiKubun().setSelectedKey(new RString("0"));
-            div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(最大表示件数_100);
+            div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(BusinessConfig.
+                    get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
             div.getKennsakuJyokenn().setVisible(true);
             div.getKennsakuJyokenn().getServiceJigyosha().setVisible(false);
             div.getOtherTokureiShisetsu().setVisible(true);
@@ -238,7 +242,8 @@ public class JiGyoSyaHandler {
         if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.適用除外施設.toRString())) {
 
             div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(false);
-            div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(最大表示件数_100);
+            div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(BusinessConfig.
+                    get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
             div.getKennsakuJyokenn().setVisible(true);
             div.getKennsakuJyokenn().getServiceJigyosha().setVisible(false);
             div.getOtherTokureiShisetsu().setVisible(false);
