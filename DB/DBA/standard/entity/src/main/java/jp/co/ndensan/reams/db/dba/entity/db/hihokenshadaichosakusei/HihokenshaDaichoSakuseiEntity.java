@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
@@ -52,7 +52,7 @@ public class HihokenshaDaichoSakuseiEntity {
     private RString telephoneNo1;
     private RString telephoneNo2;
     private RString jushoTitle;
-    private IJusho jusho;
+    private AtenaJusho jusho;
     private ZenkokuJushoCode zenkokuJushoCode;
     private RString gyoseikuTitle;
     private GyoseikuCode gyoseikuCode;
@@ -62,12 +62,9 @@ public class HihokenshaDaichoSakuseiEntity {
     private RString iryoHokenshaMeisho;
     private RString iryoHokenKigoNo;
     private RString orderNo;
-
     private List<HihokenshaDaichoDivisionEntity> 資格異動情報List;
-    //生活保護受給者Entityリスト
-    // TODO
+    // TODO 蘇広俊 生活保護受給者取得方針不明、QA149提出中
     private List<RoreiFukushiNenkinJukyushaDivisionEntity> 老齢福祉情報List;
     private List<ShoKofuKaishuDivisionSumEntity> 証交付回収List;
-    //世帯一覧Entityリスト
-    //TODO
+    // TODO 蘇広俊 世帯情報取得方針不明、QA170提出中
 }

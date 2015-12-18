@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 資格情報一覧ガイドにＤＢから検索するデータが表示する。
+ * 資格情報一覧ガイドにＤＢから検索するデータが表示するクラスです。
  */
 public class ShikakuTokuso {
 

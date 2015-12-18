@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  *
- * 資格得喪履歴補助のParameterクラスです。
+ * 資格得喪履歴のParameterクラスです。
  */
 public final class ShikakuTokusoParameter {
 

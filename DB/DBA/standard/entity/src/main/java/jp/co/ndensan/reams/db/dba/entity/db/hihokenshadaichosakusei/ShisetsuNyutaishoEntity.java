@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei;
 
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  * 入所施設のエンティティクラスです。
@@ -18,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShisetsuNyutaishoEntity {
 
-    @PrimaryKey
     private RString jigyoshaNo;
     private AtenaMeisho jigyoshaMeisho;
     private RString nyushoShisetsuShurui;

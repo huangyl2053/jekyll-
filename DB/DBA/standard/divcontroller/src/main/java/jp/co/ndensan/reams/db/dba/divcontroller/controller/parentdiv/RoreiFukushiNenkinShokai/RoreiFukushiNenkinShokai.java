@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RoreiFukus
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RoreiFukushiNenkinShokaiHandler;
 import jp.co.ndensan.reams.db.dba.service.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -29,10 +28,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
  */
 public class RoreiFukushiNenkinShokai {
 
-    private final RoreiFukushiNenkinJukyushaManager service;
     private static final RString 追加 = new RString("追加");
     private static final RString 更新 = new RString("更新");
     private static final RString 削除 = new RString("削除");
+
+    private final RoreiFukushiNenkinJukyushaManager service;
 
     /**
      * コンストラクタです。
@@ -112,20 +112,16 @@ public class RoreiFukushiNenkinShokai {
      * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
      */
     public ResponseData<RoreiFukushiNenkinShokaiDiv> onClick_btnSave(RoreiFukushiNenkinShokaiDiv div) {
-        if (追加.equals(div.getModel())) {
-            get老齢福祉年金追加チェック(div);
-        }
-        List<RoreiFukushiNenkinJohoMapperParameter> kikancheck = getHandler(div).set老齢福祉年金入力チェック();
-        if (service.checkKikanJuku(kikancheck)) {
-            throw new ApplicationException(DbzErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace(
-                    div.getPanelInput().getTxtStartDate().toString(), div.getPanelInput().getTxtEndDate().toString()));
-        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode())) {
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                if (追加.equals(div.getModel())) {
+                    get老齢福祉年金追加チェック(div);
+                }
+                getHandler(div).set老齢福祉年金入力チェック();
                 onClick_はい(div);
             }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {

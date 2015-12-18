@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
-import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
@@ -55,7 +55,7 @@ public class HihokenshaEntity {
     private RString telephoneNo1;
     private RString telephoneNo2;
     private RString jushoTitle;
-    private IJusho jusho;
+    private AtenaJusho jusho;
     private ZenkokuJushoCode zenkokuJushoCode;
     private RString gyoseikuTitle;
     private GyoseikuCode gyoseikuCode;
@@ -65,12 +65,9 @@ public class HihokenshaEntity {
     private RString iryoHokenshaMeisho;
     private RString iryoHokenKigoNo;
     private RString orderNo;
-
     private List<DbT1001HihokenshaDaichoEntity> dbT1001HihokenshaDaichoEntityList;
-    //生活保護受給者Entityリスト
-    // TODO
+    // TODO 蘇広俊 生活保護受給者取得方針不明、QA149提出中
     private List<DbT7006RoreiFukushiNenkinJukyushaEntity> dbT7006RoreiFukushiNenkinJukyushaEntityList;
     private List<DbT7037ShoKofuKaishuEntity> dbT7037ShoKofuKaishuEntityList;
-    //世帯一覧Entityリスト
-    //TODO
+    // TODO 蘇広俊 世帯情報取得方針不明、QA170提出中
 }
