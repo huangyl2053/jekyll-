@@ -32,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -55,7 +54,7 @@ public class SikakuKanrenIdoFinder {
      * @param dac dac
      * @param sikaku　SikakuJiyuShutoku
      */
-    public SikakuKanrenIdoFinder() {
+    public SikakuKanrenIdoFinder(MapperProvider mapperProvider) {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.db7051Dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
         this.sikaku = InstanceProvider.create(SikakuJiyuShutoku.class);
@@ -83,7 +82,7 @@ public class SikakuKanrenIdoFinder {
         }
         ISikakuKanrenIdoMapper shikakuTokusoMappers = mapperProvider.create(ISikakuKanrenIdoMapper.class);
         List<SikakuKanrenIdoEntity> 一覧データ取得リスト = shikakuTokusoMappers.getSikakuKanrenIdo(params);
-        if (一覧データ取得リスト != null && 一覧データ取得リスト.isEmpty()) {
+        if (一覧データ取得リスト == null || 一覧データ取得リスト.isEmpty()) {
             return SearchResult.of(Collections.<SikakuKanrenIdo>emptyList(), 0, false);
         }
         List<SikakuKanrenIdo> serviceShuruiList = new ArrayList<>();
@@ -122,7 +121,7 @@ public class SikakuKanrenIdoFinder {
         List<HenkoJiyu> serviceShuruiList = new ArrayList<>();
         ShichosonSecurityJoho 市町村セキュリティ = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         List<ShikakuJiyuShutoku> 資格事由取得List = sikaku.
-                shikakuJiyuShutoku(new CodeShubetsu(new RString("コード種別_0126")),
+                shikakuJiyuShutoku(new CodeShubetsu("0126"),
                         FlexibleDate.getNowDate(), 市町村セキュリティ.get導入形態コード().getKey(),
                         BusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告));
         for (ShikakuJiyuShutoku entity : 資格事由取得List) {
@@ -139,7 +138,6 @@ public class SikakuKanrenIdoFinder {
      *
      * @return 旧市町村コード情報List
      */
-    @Transaction
     public SearchResult<GappeiShichoson> getGappeiShichosonList() {
         List<GappeiShichoson> 旧市町村コード情報List = new ArrayList<>();
         ShichosonSecurityJoho 市町村セキュリティ = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);

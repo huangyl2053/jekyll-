@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShikakuTokuSoa {
+public class ShutokuJiyuDDL {
 
     private Code code;
 
