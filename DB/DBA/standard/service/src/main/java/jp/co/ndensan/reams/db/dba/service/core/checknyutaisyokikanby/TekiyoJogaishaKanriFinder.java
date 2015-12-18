@@ -31,19 +31,10 @@ public class TekiyoJogaishaKanriFinder {
     /**
      * 単体テスト用のコンストラクタです。
      *
-     * @param mapperProvider mapperProvider
+     * @param DbT1002TekiyoJogaishaDac dac
      */
     TekiyoJogaishaKanriFinder(DbT1002TekiyoJogaishaDac dac) {
         this.dac = dac;
-    }
-
-    /**
-     * {@link InstanceProvider#create}にて生成した{@link TaShichosonJushochiTokureisyaIdoTeisei}のインスタンスを返します。
-     *
-     * @return {@link InstanceProvider#create}にて生成した{@link TaShichosonJushochiTokureisyaIdoTeisei}のインスタンス
-     */
-    public static TekiyoJogaishaKanriFinder createInstance() {
-        return InstanceProvider.create(TekiyoJogaishaKanriFinder.class);
     }
 
     /**
