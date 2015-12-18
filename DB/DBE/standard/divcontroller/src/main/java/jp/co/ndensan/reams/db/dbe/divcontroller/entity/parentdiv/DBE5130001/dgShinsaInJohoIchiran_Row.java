@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Dec 01 14:21:49 CST 2015 
+ * Wed Dec 16 14:27:45 CST 2015 
  */
 
 
@@ -33,11 +33,12 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
     private RString shikakuCode;
     private RString biko;
     private RString jokyo;
+    private RString shinsakaiChikuCode;
     private RString yubinNo;
     private RString yusoKubun;
     private RString jusho;
     private TextBoxDate haishiYMD;
-    private RString telNo;
+    private RString telNo1;
     private RString faxNo;
 
     public dgShinsaInJohoIchiran_Row() {
@@ -53,11 +54,12 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.shikakuCode = RString.EMPTY;
         this.biko = RString.EMPTY;
         this.jokyo = RString.EMPTY;
+        this.shinsakaiChikuCode = RString.EMPTY;
         this.yubinNo = RString.EMPTY;
         this.yusoKubun = RString.EMPTY;
         this.jusho = RString.EMPTY;
         this.haishiYMD = new TextBoxDate();
-        this.telNo = RString.EMPTY;
+        this.telNo1 = RString.EMPTY;
         this.faxNo = RString.EMPTY;
         this.setOriginalData("status", status);
         this.setOriginalData("shinsainCode", shinsainCode);
@@ -70,15 +72,16 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.setOriginalData("shikakuCode", shikakuCode);
         this.setOriginalData("biko", biko);
         this.setOriginalData("jokyo", jokyo);
+        this.setOriginalData("shinsakaiChikuCode", shinsakaiChikuCode);
         this.setOriginalData("yubinNo", yubinNo);
         this.setOriginalData("yusoKubun", yusoKubun);
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("haishiYMD", haishiYMD);
-        this.setOriginalData("telNo", telNo);
+        this.setOriginalData("telNo1", telNo1);
         this.setOriginalData("faxNo", faxNo);
     }
 
-    public dgShinsaInJohoIchiran_Row(RString status, RString shinsainCode, TextBoxDate shinsakaiIinKaishiYMD, TextBoxDate shinsakaiIinShuryoYMD, RString shimei, RString kanaShimei, RString seibetsu, TextBoxDate barthYMD, RString shikakuCode, RString biko, RString jokyo, RString yubinNo, RString yusoKubun, RString jusho, TextBoxDate haishiYMD, RString telNo, RString faxNo) {
+    public dgShinsaInJohoIchiran_Row(RString status, RString shinsainCode, TextBoxDate shinsakaiIinKaishiYMD, TextBoxDate shinsakaiIinShuryoYMD, RString shimei, RString kanaShimei, RString seibetsu, TextBoxDate barthYMD, RString shikakuCode, RString biko, RString jokyo, RString shinsakaiChikuCode, RString yubinNo, RString yusoKubun, RString jusho, TextBoxDate haishiYMD, RString telNo1, RString faxNo) {
         super();
         this.setOriginalData("status", status);
         this.setOriginalData("shinsainCode", shinsainCode);
@@ -91,11 +94,12 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.setOriginalData("shikakuCode", shikakuCode);
         this.setOriginalData("biko", biko);
         this.setOriginalData("jokyo", jokyo);
+        this.setOriginalData("shinsakaiChikuCode", shinsakaiChikuCode);
         this.setOriginalData("yubinNo", yubinNo);
         this.setOriginalData("yusoKubun", yusoKubun);
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("haishiYMD", haishiYMD);
-        this.setOriginalData("telNo", telNo);
+        this.setOriginalData("telNo1", telNo1);
         this.setOriginalData("faxNo", faxNo);
         this.status = status;
         this.shinsainCode = shinsainCode;
@@ -108,11 +112,12 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.shikakuCode = shikakuCode;
         this.biko = biko;
         this.jokyo = jokyo;
+        this.shinsakaiChikuCode = shinsakaiChikuCode;
         this.yubinNo = yubinNo;
         this.yusoKubun = yusoKubun;
         this.jusho = jusho;
         this.haishiYMD = haishiYMD;
-        this.telNo = telNo;
+        this.telNo1 = telNo1;
         this.faxNo = faxNo;
     }
 
@@ -160,6 +165,10 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         return jokyo;
     }
 
+    public RString getShinsakaiChikuCode() {
+        return shinsakaiChikuCode;
+    }
+
     public RString getYubinNo() {
         return yubinNo;
     }
@@ -176,8 +185,8 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         return haishiYMD;
     }
 
-    public RString getTelNo() {
-        return telNo;
+    public RString getTelNo1() {
+        return telNo1;
     }
 
     public RString getFaxNo() {
@@ -239,6 +248,11 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.jokyo = jokyo;
     }
 
+    public void setShinsakaiChikuCode(RString shinsakaiChikuCode) {
+        this.setOriginalData("shinsakaiChikuCode", shinsakaiChikuCode);
+        this.shinsakaiChikuCode = shinsakaiChikuCode;
+    }
+
     public void setYubinNo(RString yubinNo) {
         this.setOriginalData("yubinNo", yubinNo);
         this.yubinNo = yubinNo;
@@ -259,9 +273,9 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.haishiYMD = haishiYMD;
     }
 
-    public void setTelNo(RString telNo) {
-        this.setOriginalData("telNo", telNo);
-        this.telNo = telNo;
+    public void setTelNo1(RString telNo1) {
+        this.setOriginalData("telNo1", telNo1);
+        this.telNo1 = telNo1;
     }
 
     public void setFaxNo(RString faxNo) {

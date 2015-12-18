@@ -29,15 +29,15 @@ public interface IShinsakaiIinJohoMapper {
      * @param boolean 廃止フラグ
      * @return List<ShinsakaiIinJohoEntity>
      */
-    List<ShinsakaiIinJohoEntity> get審査会委員情報ByHaishiFlag(@Param(value = "haishiFlag") boolean haishiFlag);
+    List<ShinsakaiIinJohoEntity> get審査会委員情報By表示条件(@Param(value = "is全ての審査会委員") boolean is全ての審査会委員);
 
     /**
      * 所属機関一覧情報をUserInfo．市町村コード、選択行の審査会委員コードでList取得します。
      *
-     * @param 介護認定審査会委員情報検索条件 介護認定審査会委員情報検索条件
+     * @param shinsakaiIinCode 介護認定審査会委員情報検索条件
      * @return List<ShozokuKikanIchiranEntity>
      */
-    List<ShozokuKikanIchiranEntity> get所属機関一覧ByParameter(ShinsakaiIinJohoMapperParameter parameter);
+    List<ShozokuKikanIchiranEntity> get所属機関一覧情報(ShinsakaiIinJohoMapperParameter shinsakaiIinCode);
 
     /**
      * 審査会委員コードで件数を取得します。

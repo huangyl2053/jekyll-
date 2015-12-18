@@ -176,6 +176,26 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
+    public Button getBtnKensaku() {
+        return this.getKensakuJoken().getBtnKensaku();
+    }
+
+    @JsonIgnore
+    public void  setBtnKensaku(Button btnKensaku) {
+        this.getKensakuJoken().setBtnKensaku(btnKensaku);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadHyojiJoken() {
+        return this.getKensakuJoken().getRadHyojiJoken();
+    }
+
+    @JsonIgnore
+    public void  setRadHyojiJoken(RadioButton radHyojiJoken) {
+        this.getKensakuJoken().setRadHyojiJoken(radHyojiJoken);
+    }
+
+    @JsonIgnore
     public Button getBtnShinsakaiIinAdd() {
         return this.getShinsakaiIinJohoIchiran().getBtnShinsakaiIinAdd();
     }
