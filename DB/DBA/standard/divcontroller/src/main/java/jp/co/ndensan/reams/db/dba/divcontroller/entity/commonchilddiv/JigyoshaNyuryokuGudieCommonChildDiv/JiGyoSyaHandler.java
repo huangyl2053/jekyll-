@@ -35,6 +35,11 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class JiGyoSyaHandler {
 
     private final JigyoshaNyuryokuGudieCommonChildDivDiv div;
+    private final RString 前方一致 = new RString("前方一致");
+    private final RString 完全一致 = new RString("完全一致");
+    private final RString 前方一致_コード = new RString("key0");
+    private final RString 完全一致_コード = new RString("key1");
+    private final RString 管内管外区分_全て = new RString("0");
 
     /**
      * コンストラクタです。
@@ -154,7 +159,8 @@ public class JiGyoSyaHandler {
                     dgJigyoshaItiran.setTxtJigyoshaNo(jigyoshaInput.get事業者番号().value());
                     dgJigyoshaItiran.getTxtYukoKaishibiYMD().setValue(new RDate(jigyoshaInput.get有効開始日().toString()));
                     dgJigyoshaItiran.getTxtYukoShuryobiYMD().setValue(new RDate(jigyoshaInput.get有効終了日().toString()));
-                    dgJigyoshaItiran.setTxtMeisho(jigyoshaInput.get介護除外住所地特例対象施設_事業者名称カナ() == null ? RString.EMPTY : jigyoshaInput.get介護除外住所地特例対象施設_事業者名称カナ().value());
+                    dgJigyoshaItiran.setTxtMeisho(jigyoshaInput.get介護除外住所地特例対象施設_事業者名称カナ() == null
+                            ? RString.EMPTY : jigyoshaInput.get介護除外住所地特例対象施設_事業者名称カナ().value());
                     dgJigyoshaItiran.setTxtJusho(jigyoshaInput.get介護除外住所地特例対象施設_事業者住所カナ());
                     dgJigyoshaItiran.setTxtTelNo(jigyoshaInput.get電話番号() == null ? RString.EMPTY : jigyoshaInput.get電話番号().value());
                     dgJigyoshaItiranList.add(dgJigyoshaItiran);
@@ -163,7 +169,6 @@ public class JiGyoSyaHandler {
                 dataGrid.setLimitRowCount(div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue().intValue());
                 dataGrid.setSelectedRowCount(Jigyosha.totalCount());
                 div.getJigyoshaItirann().getDgJigyoshaItiran().setGridSetting(dataGrid);
-                div.getJigyoshaItirann().getDgJigyoshaItiran().setDataSource(dgJigyoshaItiranList);
                 div.getJigyoshaItirann().getDgJigyoshaItiran().setDataSource(dgJigyoshaItiranList);
             } else {
 
@@ -198,7 +203,8 @@ public class JiGyoSyaHandler {
                     dgJigyoshaItiran.setTxtJigyoshaNo(jigyoshaInput.get事業者番号().value());
                     dgJigyoshaItiran.getTxtYukoKaishibiYMD().setValue(new RDate(jigyoshaInput.get有効開始日().toString()));
                     dgJigyoshaItiran.getTxtYukoShuryobiYMD().setValue(new RDate(jigyoshaInput.get有効終了日().toString()));
-                    dgJigyoshaItiran.setTxtMeisho(jigyoshaInput.get介護除外住所地特例対象施設_事業者名称カナ() == null ? RString.EMPTY : jigyoshaInput.get介護除外住所地特例対象施設_事業者名称カナ().value());
+                    dgJigyoshaItiran.setTxtMeisho(jigyoshaInput.get介護除外住所地特例対象施設_事業者名称カナ() == null
+                            ? RString.EMPTY : jigyoshaInput.get介護除外住所地特例対象施設_事業者名称カナ().value());
                     dgJigyoshaItiran.setTxtJusho(jigyoshaInput.get介護除外住所地特例対象施設_事業者住所カナ());
                     dgJigyoshaItiran.setTxtTelNo(jigyoshaInput.get電話番号() == null ? RString.EMPTY : jigyoshaInput.get電話番号().value());
                     dgJigyoshaItiranList.add(dgJigyoshaItiran);
@@ -207,8 +213,6 @@ public class JiGyoSyaHandler {
                 dataGrid.setLimitRowCount(div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue().intValue());
                 dataGrid.setSelectedRowCount(Jigyosha.totalCount());
                 div.getJigyoshaItirann().getDgJigyoshaItiran().setGridSetting(dataGrid);
-                div.getJigyoshaItirann().getDgJigyoshaItiran().setDataSource(dgJigyoshaItiranList);
-                div.getJigyoshaItirann().getDgJigyoshaItiran().setDataSource(dgJigyoshaItiranList);
                 div.getJigyoshaItirann().getDgJigyoshaItiran().setDataSource(dgJigyoshaItiranList);
             } else {
 
@@ -235,19 +239,20 @@ public class JiGyoSyaHandler {
             div.getTaishoJigyoshaKensaku().getDdlServiceShurui().setDataSource(getサービス種類());
             div.getTaishoJigyoshaKensaku().getDdlJigyoshaKubun().setDataSource(get事業者区分());
             div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setDataSource(get検索条件区分());
-            div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setSelectedKey(new RString("key0"));
+            div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setSelectedKey(前方一致_コード);
             div.getKennsakuJyokenn().setVisible(true);
             div.getKennsakuJyokenn().getServiceJigyosha().setVisible(true);
             div.getOtherTokureiShisetsu().setVisible(false);
             Association association = finder.getAssociation();
-            div.getTaishoJigyoshaKensaku().getDdlKennCode().setSelectedKey(association.get地方公共団体コード() == null ? RString.EMPTY : association.get地方公共団体コード().value().substring(0, 2));
+            div.getTaishoJigyoshaKensaku().getDdlKennCode().setSelectedKey(association.get地方公共団体コード() == null
+                    ? RString.EMPTY : association.get地方公共団体コード().value().substring(0, 2));
             search_GunshiCode(mode);
         }
 
         if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.住所地特例対象施設.toRString())) {
 
             div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(false);
-            div.getOtherTokureiShisetsu().getRadKannaiKanngaiKubun().setSelectedKey(new RString("0"));
+            div.getOtherTokureiShisetsu().getRadKannaiKanngaiKubun().setSelectedKey(管内管外区分_全て);
             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(BusinessConfig.
                     get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
             div.getKennsakuJyokenn().setVisible(true);
@@ -285,7 +290,7 @@ public class JiGyoSyaHandler {
             div.getKennsakuJyokenn().getTxtJigyoshamei().clearValue();
             div.getKennsakuJyokenn().getTxtYubinNo().clearValue();
             div.getKennsakuJyokenn().getTxtJusho().clearDomain();
-            div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setSelectedKey(new RString("key0"));
+            div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setSelectedKey(前方一致_コード);
             div.getTaishoJigyoshaKensaku().getDdlGunshiCode().setSelectedKey(RString.EMPTY);
             div.getTaishoJigyoshaKensaku().getDdlServiceShurui().setSelectedKey(RString.EMPTY);
             div.getTaishoJigyoshaKensaku().getDdlJigyoshaKubun().setSelectedKey(RString.EMPTY);
@@ -294,14 +299,15 @@ public class JiGyoSyaHandler {
             div.getKennsakuJyokenn().getServiceJigyosha().setVisible(true);
             div.getOtherTokureiShisetsu().setVisible(false);
             Association association = finder.getAssociation();
-            div.getTaishoJigyoshaKensaku().getDdlKennCode().setSelectedKey(association.get地方公共団体コード() == null ? RString.EMPTY : association.get地方公共団体コード().value().substring(0, 2));
+            div.getTaishoJigyoshaKensaku().getDdlKennCode().setSelectedKey(association.get地方公共団体コード() == null
+                    ? RString.EMPTY : association.get地方公共団体コード().value().substring(0, 2));
             search_GunshiCode(mode);
         }
 
         if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.住所地特例対象施設.toRString())) {
 
             div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(false);
-            div.getOtherTokureiShisetsu().getRadKannaiKanngaiKubun().setSelectedKey(new RString("0"));
+            div.getOtherTokureiShisetsu().getRadKannaiKanngaiKubun().setSelectedKey(管内管外区分_全て);
             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(BusinessConfig.
                     get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
             div.getKennsakuJyokenn().getTxtJIgyoshaNo().clearValue();
@@ -311,7 +317,7 @@ public class JiGyoSyaHandler {
             div.getKennsakuJyokenn().getTxtYubinNo().clearValue();
             div.getKennsakuJyokenn().getTxtJusho().clearDomain();
             div.getJigyoshaItirann().getDgJigyoshaItiran().getDataSource().clear();
-            div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setSelectedKey(new RString("key0"));
+            div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setSelectedKey(前方一致_コード);
             div.getKennsakuJyokenn().setVisible(true);
             div.getKennsakuJyokenn().getServiceJigyosha().setVisible(false);
             div.getOtherTokureiShisetsu().setVisible(true);
@@ -329,7 +335,7 @@ public class JiGyoSyaHandler {
             div.getKennsakuJyokenn().getTxtYubinNo().clearValue();
             div.getKennsakuJyokenn().getTxtJusho().clearDomain();
             div.getJigyoshaItirann().getDgJigyoshaItiran().getDataSource().clear();
-            div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setSelectedKey(new RString("key0"));
+            div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setSelectedKey(前方一致_コード);
             div.getKennsakuJyokenn().setVisible(true);
             div.getKennsakuJyokenn().getServiceJigyosha().setVisible(false);
             div.getOtherTokureiShisetsu().setVisible(false);
@@ -399,10 +405,10 @@ public class JiGyoSyaHandler {
 
         KeyValueDataSource KeyValue1 = new KeyValueDataSource();
         KeyValueDataSource KeyValue2 = new KeyValueDataSource();
-        KeyValue1.setKey(new RString("key0"));
-        KeyValue2.setKey(new RString("key1"));
-        KeyValue1.setValue(new RString("前方一致"));
-        KeyValue2.setValue(new RString("完全一致"));
+        KeyValue1.setKey(前方一致_コード);
+        KeyValue2.setKey(完全一致_コード);
+        KeyValue1.setValue(前方一致);
+        KeyValue2.setValue(完全一致);
 
         dataSource.add(KeyValue1);
         dataSource.add(KeyValue2);
