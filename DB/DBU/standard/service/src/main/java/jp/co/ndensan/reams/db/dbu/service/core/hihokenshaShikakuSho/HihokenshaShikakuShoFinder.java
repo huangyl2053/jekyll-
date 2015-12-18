@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
@@ -45,11 +46,24 @@ public class HihokenshaShikakuShoFinder {
     }
 
     /**
+     * テスト用コンストラクタです。
+     *
+     * @param dbT7037ShoKofuKaishuDac DbT7037ShoKofuKaishuDac
+     * @param dbT7051KoseiShichosonMasterDac DbT7051KoseiShichosonMasterDac
+     */
+    HihokenshaShikakuShoFinder(DbT7037ShoKofuKaishuDac dbT7037ShoKofuKaishuDac,
+            DbT7051KoseiShichosonMasterDac DbT7051KoseiShichosonMasterDac) {
+        this.dbT7037ShoKofuKaishuDac = dbT7037ShoKofuKaishuDac;
+        this.dbT7051KoseiShichosonMasterDac = DbT7051KoseiShichosonMasterDac;
+    }
+
+    /**
      * 資格者証発行画面データ取得です。
      *
-     * @param hihokenshaShikakuShoDataParameter
-     * @return HihokenshaShikakuShoDataEntity INSERT用データEntity
+     * @param hihokenshaShikakuShoDataParameter HihokenshaShikakuShoDataParameter
+     * @return HihokenshaShikakuShoDataEntity insert用データEntity
      */
+    @Transaction
     public HihokenshaShikakuShoDataEntity insertShoKofuKaishu(HihokenshaShikakuShoDataParameter hihokenshaShikakuShoDataParameter) {
         HihokenshaShikakuShoDataEntity hihokenshaShikakuShoDataEntity = insert用データEntity(hihokenshaShikakuShoDataParameter);
         if (hihokenshaShikakuShoDataEntity == null) {

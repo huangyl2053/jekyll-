@@ -15,6 +15,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 被保険者証・資格者証データ取得項目クラスです。
  */
+@lombok.Getter
+@lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class HihokenshaShikakuShoDataEntity {
 
     private HihokenshaNo hihokenshaNo;
@@ -34,141 +37,5 @@ public class HihokenshaShikakuShoDataEntity {
     private RString shinYoshikiSumiKubunCode;
     private RString shoYoshikiKubunCode;
     private boolean logicalDeletedFlag;
-
-    public HihokenshaNo getHihokenshaNo() {
-        return hihokenshaNo;
-    }
-
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
-        this.hihokenshaNo = hihokenshaNo;
-    }
-
-    public RString getKofuShoShurui() {
-        return kofuShoShurui;
-    }
-
-    public void setKofuShoShurui(RString kofuShoShurui) {
-        this.kofuShoShurui = kofuShoShurui;
-    }
-
-    public int getRirekiNo() {
-        return rirekiNo;
-    }
-
-    public void setRirekiNo(int rirekiNo) {
-        this.rirekiNo = rirekiNo;
-    }
-
-    public LasdecCode getShichosonCode() {
-        return shichosonCode;
-    }
-
-    public void setShichosonCode(LasdecCode shichosonCode) {
-        this.shichosonCode = shichosonCode;
-    }
-
-    public ShikibetsuCode getShikibetsuCode() {
-        return shikibetsuCode;
-    }
-
-    public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
-        this.shikibetsuCode = shikibetsuCode;
-    }
-
-    public FlexibleDate getKofuYMD() {
-        return kofuYMD;
-    }
-
-    public void setKofuYMD(FlexibleDate kofuYMD) {
-        this.kofuYMD = kofuYMD;
-    }
-
-    public FlexibleDate getYukoKigenYMD() {
-        return yukoKigenYMD;
-    }
-
-    public void setYukoKigenYMD(FlexibleDate yukoKigenYMD) {
-        this.yukoKigenYMD = yukoKigenYMD;
-    }
-
-    public RString getKofuJiyu() {
-        return kofuJiyu;
-    }
-
-    public void setKofuJiyu(RString kofuJiyu) {
-        this.kofuJiyu = kofuJiyu;
-    }
-
-    public RString getKofuRiyu() {
-        return kofuRiyu;
-    }
-
-    public void setKofuRiyu(RString kofuRiyu) {
-        this.kofuRiyu = kofuRiyu;
-    }
-
-    public FlexibleDate getKaishuYMD() {
-        return kaishuYMD;
-    }
-
-    public void setKaishuYMD(FlexibleDate kaishuYMD) {
-        this.kaishuYMD = kaishuYMD;
-    }
-
-    public RString getKaishuJiyu() {
-        return kaishuJiyu;
-    }
-
-    public void setKaishuJiyu(RString kaishuJiyu) {
-        this.kaishuJiyu = kaishuJiyu;
-    }
-
-    public RString getKaishuRiyu() {
-        return kaishuRiyu;
-    }
-
-    public void setKaishuRiyu(RString kaishuRiyu) {
-        this.kaishuRiyu = kaishuRiyu;
-    }
-
-    public boolean isTanpyoHakkoUmuFlag() {
-        return tanpyoHakkoUmuFlag;
-    }
-
-    public void setTanpyoHakkoUmuFlag(boolean tanpyoHakkoUmuFlag) {
-        this.tanpyoHakkoUmuFlag = tanpyoHakkoUmuFlag;
-    }
-
-    public YMDHMS getHakkoShoriTimestamp() {
-        return hakkoShoriTimestamp;
-    }
-
-    public void setHakkoShoriTimestamp(YMDHMS hakkoShoriTimestamp) {
-        this.hakkoShoriTimestamp = hakkoShoriTimestamp;
-    }
-
-    public RString getShinYoshikiSumiKubunCode() {
-        return shinYoshikiSumiKubunCode;
-    }
-
-    public void setShinYoshikiSumiKubunCode(RString shinYoshikiSumiKubunCode) {
-        this.shinYoshikiSumiKubunCode = shinYoshikiSumiKubunCode;
-    }
-
-    public RString getShoYoshikiKubunCode() {
-        return shoYoshikiKubunCode;
-    }
-
-    public void setShoYoshikiKubunCode(RString shoYoshikiKubunCode) {
-        this.shoYoshikiKubunCode = shoYoshikiKubunCode;
-    }
-
-    public boolean isLogicalDeletedFlag() {
-        return logicalDeletedFlag;
-    }
-
-    public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
-        this.logicalDeletedFlag = logicalDeletedFlag;
-    }
 
 }
