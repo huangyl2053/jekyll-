@@ -37,5 +37,4 @@ public class ServiceShikakuRelateEntity implements IDbAccessable {
     private RString shichosonMeisho2;
     private LasdecCode kyuShichosonCode;
     private RString kyuShichosonMeisho;
-
 }

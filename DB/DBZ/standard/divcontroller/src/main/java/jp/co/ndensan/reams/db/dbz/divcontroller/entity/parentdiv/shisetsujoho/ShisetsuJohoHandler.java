@@ -10,12 +10,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsujoho.ShisetsuJohoDiv.入力補助;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsujoho.ShisetsuJohoDiv.利用機能;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsujoho.ShisetsuJohoDiv.台帳種別;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsujoho.ShisetsuJohoDiv.施設種類;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsujoho.ShisetsuJohoDiv.表示モード;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -190,7 +190,7 @@ public class ShisetsuJohoHandler {
             case 除外施設を表示する:
                 return ShisetsuType.適用除外施設;
             default:
-                throw new ApplicationException(DbzErrorMessages.選択されていない.getMessage().replace("施設種類").evaluate());
+                throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace("施設種類").evaluate());
         }
     }
 

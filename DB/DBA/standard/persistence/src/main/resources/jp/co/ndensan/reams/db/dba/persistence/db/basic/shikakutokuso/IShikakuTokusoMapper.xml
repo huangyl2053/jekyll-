@@ -6,7 +6,7 @@
     <!--テーブルDbT1001HihokenshaDaichoの項目をDbT1001HihokenshaDaichoEntityの項目にマッピングします。-->
     <resultMap id="resultMap_getShikakuJohoEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.shikakutoku.shikakutokuso.ServiceShikakuRelateEntity" autoMapping="true">
      <result property="hihokenshaNo" column="DbT1001Hiho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-     <result property="idoYMD" column="DbT1001Hiho_idoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+     <result property="idoYMD" column="DbT1001Hiho_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
      <result property="edaNo" column="DbT1001Hiho_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
      <result property="shikakuShutokuYMD" column="DbT1001Hiho_shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
      <result property="shikakuShutokuTodokedeYMD" column="DbT1001Hiho_shikakuShutokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -72,7 +72,7 @@
             AND
               DbT1001Hiho."logicalDeletedFlag"<![CDATA[<>]]> true
             ORDER BY
-              DbT1001Hiho."shikakuShutokuYMD",DbT1001Hiho."idoYMD", DbT1001Hiho."edaNo"  desc
+              DbT1001Hiho."shikakuShutokuYMD" desc,DbT1001Hiho."idoYMD" desc, DbT1001Hiho."edaNo"  desc
 	</select>
         
 </mapper>

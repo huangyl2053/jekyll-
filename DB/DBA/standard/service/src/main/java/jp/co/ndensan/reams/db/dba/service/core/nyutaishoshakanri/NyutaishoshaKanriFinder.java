@@ -66,12 +66,12 @@ public class NyutaishoshaKanriFinder {
                 parameter = NyutaishoshaKanriMapperParameter.createSelectByKeyParam(入所年月日, 退所年月日, KAIGOHOHENSHISETSU_VALUE);
                 count = mapper.getHihokenshaDaichoCount(parameter);
                 break;
-            case "12":
-                parameter = NyutaishoshaKanriMapperParameter.createSelectByKeyParam(入所年月日, 退所年月日, JUSHOCHITOKUREITAISHOSHISETSU_VALUE);
-                count = mapper.getTekiyoJogaishaCount(parameter);
-                break;
             case "21":
                 parameter = NyutaishoshaKanriMapperParameter.createSelectByKeyParam(入所年月日, 退所年月日, TEKIYOJOGAISHISETSU_VALUE);
+                count = mapper.getTekiyoJogaishaCount(parameter);
+                break;
+            case "12":
+                parameter = NyutaishoshaKanriMapperParameter.createSelectByKeyParam(入所年月日, 退所年月日, JUSHOCHITOKUREITAISHOSHISETSU_VALUE);
                 count = mapper.getTashichosonJushochiTokureiCount(parameter);
                 break;
             default:

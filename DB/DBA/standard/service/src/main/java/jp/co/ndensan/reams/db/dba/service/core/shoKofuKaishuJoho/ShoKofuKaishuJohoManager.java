@@ -9,14 +9,11 @@ import jp.co.ndensan.reams.db.dba.persistence.mapper.shoKofuKaishuJoho.ShoKofuKa
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.ShoKofuKaishuJohoModel;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.shokofukaishujoho.ShoKofuKaishuJohoParameter;
 import jp.co.ndensan.reams.db.dba.entity.ShoKofuKaishuJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7037ShoKofuKaishuDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -31,15 +28,15 @@ public class ShoKofuKaishuJohoManager {
     private final MapperProvider mapperProvider;
     private final DbT7037ShoKofuKaishuDac dac;
 
-     /**
+    /**
      * コンストラクタ
      */
-    ShoKofuKaishuJohoManager(){
-    this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-    this.dac = InstanceProvider.create(DbT7037ShoKofuKaishuDac.class);
+    ShoKofuKaishuJohoManager() {
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.dac = InstanceProvider.create(DbT7037ShoKofuKaishuDac.class);
     }
-    
-     /**
+
+    /**
      * 単体テスト用のコンストラクタです。
      *
      * @param mapperProvider mapperProvider
@@ -53,7 +50,7 @@ public class ShoKofuKaishuJohoManager {
         this.dac = dac;
     }
 
-     /**
+    /**
      * {@link InstanceProvider#create}にて生成した{@link ShoKofuKaishuJohoManager}のインスタンスを返します。
      *
      * @return
@@ -79,77 +76,65 @@ public class ShoKofuKaishuJohoManager {
 
         return SearchResult.of(businessList, 0, false);
     }
-    
-     /**
+
+    /**
      * 証交付回収の更新処理します。
      *
-     * @param model
+     * @param kaishuJohoEntity
      * @return count
      */
     @Transaction
-    public int updShoKofuKaishuJoho(ShoKofuKaishuJohoModel model) {
+    public int updShoKofuKaishuJoho(ShoKofuKaishuJohoEntity kaishuJohoEntity) {
         ShoKofuKaishuJohoMapper mapper = mapperProvider.create(ShoKofuKaishuJohoMapper.class);
         ShoKofuKaishuJohoEntity entity = new ShoKofuKaishuJohoEntity();
-        entity.setHihokenshaNo(model.get被保険者番号());
-        entity.setHakkoShoriTimestamp(model.get処理日時());
-        entity.setKaishuJiyu(model.get回収事由コード());
-        entity.setKaishuRiyu(model.get回収理由());
-        entity.setKaishuYMD(model.get回収年月日());
-        entity.setKofuJiyu(model.get交付事由コード());
-        entity.setKofuRiyu(model.get交付理由());
-        entity.setKofuShoShurui(model.get交付証種類コード());
-        entity.setKofuYMD(model.get交付年月日());
-        entity.setYukoKigenYMD(model.get有効期限());
+        entity.setHihokenshaNo(kaishuJohoEntity.getHihokenshaNo());
+        entity.setHakkoShoriTimestamp(kaishuJohoEntity.getHakkoShoriTimestamp());
+        entity.setKaishuJiyu(kaishuJohoEntity.getKaishuJiyu());
+        entity.setKaishuRiyu(kaishuJohoEntity.getKaishuRiyu());
+        entity.setKaishuYMD(kaishuJohoEntity.getKaishuYMD());
+        entity.setKofuJiyu(kaishuJohoEntity.getKofuJiyu());
+        entity.setKofuRiyu(kaishuJohoEntity.getKofuRiyu());
+        entity.setKofuShoShurui(kaishuJohoEntity.getKofuShoShurui());
+        entity.setKofuYMD(kaishuJohoEntity.getKofuYMD());
+        entity.setYukoKigenYMD(kaishuJohoEntity.getYukoKigenYMD());
         int count = mapper.updShoKofuKaishuJoho(entity);
+        return count;
+    }
+
+    /**
+     * 証交付回収情報を削除します
+     *
+     * @param kaishuJohoEntity
+     * @return count
+     */
+    @Transaction
+    public int delShoKofuKaishuJoho(ShoKofuKaishuJohoEntity kaishuJohoEntity) {
+        ShoKofuKaishuJohoMapper mapper = mapperProvider.create(ShoKofuKaishuJohoMapper.class);
+        ShoKofuKaishuJohoEntity entity = new ShoKofuKaishuJohoEntity();
+        entity.setHihokenshaNo(kaishuJohoEntity.getHihokenshaNo());
+        entity.setHakkoShoriTimestamp(kaishuJohoEntity.getHakkoShoriTimestamp());
+        entity.setKofuShoShurui(kaishuJohoEntity.getKofuShoShurui());
+        int count = mapper.delShoKofuKaishuJoho(entity);
         return count;
     }
 
     /**
      * 証交付回収の保存処理結果を返します。
      *
-     * @param shokoparameter
-     * @return 証交付回収の保存処理結果
-     */
-    public int saveShoKofuKaishuJoho(ShoKofuKaishuJohoParameter shokoparameter) {
-        if (shokoparameter.getState() == new RString("")) {
-            return updShoKofuKaishuJoho(shokoparameter);
-        } else {
-            return delShoKofuKaishuJoho(shokoparameter);
-        }
-
-    }
-
-    /**
-     * キーに合致する更新件数を返します。
-     *
-     * @param div 証交付回収情報共有子DIVのDivController内のグリッドレコード
-     * @return 更新件数
-     */
-    private int updShoKofuKaishuJoho(ShoKofuKaishuJohoParameter shokoparameter) {
-        DbT7037ShoKofuKaishuEntity entity = dac.select更新処理(RString.EMPTY, HihokenshaNo.EMPTY, null);
-        entity.setKofuYMD(new FlexibleDate("20151112"));// 引数．証交付回収情報共有子DIVのDivController．入力された交付日
-        entity.setYukoKigenYMD(new FlexibleDate("20151112"));//引数．証交付回収情報共有子DIVのDivController．入力された有効期限
-        entity.setKofuJiyu(new RString(""));//引数．証交付回収情報共有子DIVのDivController．選択された交付事由
-        entity.setKofuRiyu(new RString(""));//引数．証交付回収情報共有子DIVのDivController．入力された交付理由
-        entity.setKaishuYMD(new FlexibleDate("20151112"));//引数．証交付回収情報共有子DIVのDivController．入力された回収日
-        entity.setKaishuJiyu(new RString(""));//引数．証交付回収情報共有子DIVのDivController．選択された回収事由
-        entity.setKaishuRiyu(new RString(""));//引数．証交付回収情報共有子DIVのDivController．入力された回収理由
-        return dac.save(entity);
-    }
-
-    /**
-     * 証交付回収情報を削除します
-     *
-     * @param 交付証種類 RString
-     * @param 被保険者番号 HihokenshaNo
-     * @param 処理日時 RDateTime
-     *
-     * @return 削除件数
+     * @param entity
      */
     @Transaction
-    private int delShoKofuKaishuJoho(ShoKofuKaishuJohoParameter shokoparameter) {
-        DbT7037ShoKofuKaishuEntity updateRecord = dac.select更新処理(RString.EMPTY, HihokenshaNo.EMPTY, RDateTime.MAX);
-        updateRecord.setIsDeleted(true);
-        return dac.save(updateRecord);
+    public void saveShoKofuKaishuJoho(List<ShoKofuKaishuJohoEntity> entity) {
+        for (ShoKofuKaishuJohoEntity johoEntity : entity) {
+            if (johoEntity.getStatus() == null || johoEntity.getStatus().isEmpty()) {
+                continue;
+            }
+            if (new RString("更新").equals(johoEntity.getStatus())) {
+                updShoKofuKaishuJoho(johoEntity);
+            } 
+            if (new RString("削除").equals(johoEntity.getStatus())) {
+                delShoKofuKaishuJoho(johoEntity);
+            }
+        }
     }
 }
