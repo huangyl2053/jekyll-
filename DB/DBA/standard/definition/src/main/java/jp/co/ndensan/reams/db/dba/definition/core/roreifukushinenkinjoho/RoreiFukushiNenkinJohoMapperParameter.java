@@ -57,7 +57,8 @@ public final class RoreiFukushiNenkinJohoMapperParameter {
             ShikibetsuCode shikibetsuCode,
             FlexibleDate jukyuKaishiYMD,
             HihokenshaNo hihokenshaNo,
-            FlexibleDate jukyuShuryoYMD) {
+            FlexibleDate jukyuShuryoYMD
+    ) {
         return new RoreiFukushiNenkinJohoMapperParameter(
                 shikibetsuCode,
                 jukyuKaishiYMD,
