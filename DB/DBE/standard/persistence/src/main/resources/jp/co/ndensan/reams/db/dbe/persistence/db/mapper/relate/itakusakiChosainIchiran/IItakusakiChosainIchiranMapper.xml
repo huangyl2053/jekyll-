@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.itakusakiChosainIchiran.IItakusakiChosainIchiranMapper">
+    
+    <resultMap id="haishameigihenkouiraiResult" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ItakusakiChosainIchiran.ItakusakiChosainIchiranRelateEntity">
+        <result property="dbT5910_NinteichosaItakusakiCode" column="調査委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dbT5910_JigyoshaMeishoKana" column="名称_ｶﾅ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dbT5910_JigyoshaMeisho" column="名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dbT5910_DaihyoshaNameKana" column="代表者名_ｶﾅ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dbT5910_DaihyoshaName" column="代表者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dbT5910_YubinNo" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="dbT5910_TelNo" column="連絡先" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+        <result property="dbT5910_Jusho" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dbT5910_JokyoFlag" column="委託先状況" />
+        <result property="dbT5913_NinteiChosainNo" column="調査員コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dbT5913_ChosainKanaShimei" column="調査員氏名_ｶﾅ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dbT5913_ChosainShimei" column="調査員氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dbT5913_ChosainShikaku" column="資格コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dbT5913_Seibetsu" column="性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dbT5913_ShozokuKikanName" column="所属機関名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dbT5913_JokyoFlag" column="調査員状況" />
+    </resultMap>
+     
+    <select id="getNinteiChoSain" parameterType="java.util.Map" resultMap="haishameigihenkouiraiResult" fetchSize="500">
+        SELECT
+            DbT5910."ninteichosaItakusakiCode" AS "調査委託先コード",
+            DbT5910."jigyoshaMeishoKana" AS "名称_ｶﾅ",
+            DbT5910."jigyoshaMeisho" AS "名称",
+            DbT5910."daihyoshaNameKana" AS "代表者名_ｶﾅ",
+            DbT5910."daihyoshaName" AS "代表者名",
+            DbT5910."yubinNo" AS "郵便番号",
+            DbT5910."telNo" AS "連絡先",
+            DbT5910."jusho" AS "住所",
+            DbT5910."jokyoFlag" AS "委託先状況",
+            DbT5913."ninteiChosainNo" AS "調査員コード",
+            DbT5913."chosainKanaShimei" AS "調査員氏名_ｶﾅ",
+            DbT5913."chosainShimei" AS "調査員氏名",
+            DbT5913."chosainShikaku" AS "資格コード",
+            DbT5913."seibetsu" AS "性別",
+            DbT5913."shozokuKikanName" AS "所属機関名",
+            DbT5913."jokyoFlag" AS "調査員状況"
+        FROM
+            rgdb."DbT5913ChosainJoho" AS DbT5913,
+            rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
+        WHERE
+            DbT5910."shichosonCode" = DbT5913."shichosonCode"
+            AND DbT5910."ninteichosaItakusakiCode" = DbT5913."ninteichosaItakusakiCode"
+            AND DbT5913."shichosonCode" = #{shichosonCode}
+            <if test="itakusakiCodeFromFlag">
+                AND DbT5913."ninteichosaItakusakiCode" <![CDATA[>=]]> #{itakusakiCodeFrom}
+            </if>
+            <if test="itakusakiCodeToFlag">
+                AND DbT5913."ninteichosaItakusakiCode" <![CDATA[<=]]> #{itakusakiCodeTo}
+            </if>
+            <if test="chosainNoFromFlag">
+                AND DbT5913."ninteiChosainNo" <![CDATA[>=]]> #{chosainNoFrom}
+            </if>
+            <if test="chosainNoToFlag">
+                AND DbT5913."ninteiChosainNo" <![CDATA[<=]]> #{chosainNoTo}
+            </if>
+            <if test="jyoukyou1Flag">
+                AND DbT5910."jokyoFlag" = true 
+                AND DbT5913."jokyoFlag" = true
+            </if>
+            <if test="jyoukyou2Flag">
+                AND DbT5910."jokyoFlag" = false 
+                AND DbT5913."jokyoFlag" = false
+            </if>
+            <if test="narabiJun1Flag">
+                order by DbT5910."ninteichosaItakusakiCode",
+                DbT5913."ninteiChosainNo"
+            </if>
+            <if test="narabiJun2Flag">
+                order by DbT5910."ninteichosaItakusakiCode",
+                DbT5913."chosainShimei"
+            </if>
+            <if test="narabiJun3Flag">
+                order by DbT5910."ninteichosaItakusakiCode",
+                DbT5913."chosainKanaShimei"
+            </if>
+            <if test="narabiJun4Flag">
+                order by DbT5910."jigyoshaMeisho",
+                DbT5913."ninteiChosainNo"
+            </if>
+            <if test="narabiJun5Flag">
+                order by DbT5910."jigyoshaMeisho",
+                DbT5913."chosainShimei"
+            </if>
+            <if test="narabiJun6Flag">
+                order by DbT5910."jigyoshaMeisho",
+                DbT5913."chosainKanaShimei"
+            </if>
+    </select>
+         
+</mapper>
