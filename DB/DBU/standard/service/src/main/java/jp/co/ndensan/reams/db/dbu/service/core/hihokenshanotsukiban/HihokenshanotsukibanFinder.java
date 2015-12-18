@@ -94,7 +94,7 @@ public class HihokenshanotsukibanFinder {
     }
 
     private static HihokenshaNo getHubanHouhou(ShikibetsuCode 識別コード) {
-        RString 付番方法 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_付番方法, SubGyomuCode.DBA介護資格);
+        RString 付番方法 = new RString("1"); //BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_付番方法, SubGyomuCode.DBA介護資格);
         if (HANTEIYOU_ICHI.equals(付番方法)) {
             被保険者番号 = new HihokenshaNo(識別コード.getColumnValue().substring(
                     識別コード.getColumnValue().length() - HANTEIYOU_10, 識別コード.getColumnValue().length()).trim());
@@ -152,7 +152,7 @@ public class HihokenshanotsukibanFinder {
             被保険者番号 = new HihokenshaNo(hihokenshaNo.toString());
         } else if (!開始位置.isEmpty() && !有効桁数.isEmpty()) {
             被保険者番号 = new HihokenshaNo(付番元.substring(付番元情報開始位置, 付番元情報有効桁数));
-        } else if (開始位置.isEmpty() && !有効桁数.isEmpty() && 前付与番号桁数.isEmpty() && 後付与番号桁数.isEmpty()) {
+        } else if (開始位置.isEmpty() && 有効桁数.isEmpty() && 前付与番号桁数.isEmpty() && 後付与番号桁数.isEmpty()) {
             被保険者番号 = new HihokenshaNo(付番元);
         } else {
             throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage());
