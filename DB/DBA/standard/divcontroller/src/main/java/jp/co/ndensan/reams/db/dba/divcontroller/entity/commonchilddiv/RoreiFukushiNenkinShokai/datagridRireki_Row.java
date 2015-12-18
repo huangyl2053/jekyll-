@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RoreiFuku
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Dec 16 11:12:05 CST 2015 
+ * Fri Dec 18 13:48:39 CST 2015 
  */
 
 
