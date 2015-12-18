@@ -54,8 +54,7 @@ public class SikakuKanrenIdoFinder {
      * @param DbT7051KoseiShichosonMasterDac db7051Dac
      * @param SikakuJiyuShutoku sikaku
      */
-    public SikakuKanrenIdoFinder(
-            MapperProvider mapperProvider,
+    public SikakuKanrenIdoFinder(MapperProvider mapperProvider,
             DbT7051KoseiShichosonMasterDac db7051Dac,
             SikakuJiyuShutoku sikaku) {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
