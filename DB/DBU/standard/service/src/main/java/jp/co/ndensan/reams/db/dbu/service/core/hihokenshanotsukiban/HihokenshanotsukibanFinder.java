@@ -132,7 +132,7 @@ public class HihokenshanotsukibanFinder {
         }
         if (((開始位置 != null && !開始位置.isEmpty()) && (有効桁数 != null && !有効桁数.isEmpty())
                 && (前付与番号桁数 != null && !前付与番号桁数.isEmpty()) && (後付与番号桁数 != null && !後付与番号桁数.isEmpty()))
-                && (前付与番号.length() == 前付与番号桁数.length()) || (後付与番号.length() == 後付与番号桁数.length())) {
+                && (前付与番号.length() == 前付与番号桁数.length()) && (後付与番号.length() == 後付与番号桁数.length())) {
             StringBuilder hihokenshaNo = new StringBuilder();
             hihokenshaNo.append(前付与番号);
             hihokenshaNo.append(付番元.substring(付番元情報開始位置, 付番元情報有効桁数));
