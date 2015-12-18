@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class HihokenshanotsukibanFinder {
 
+    private static final HihokenshaNo 空白 = new HihokenshaNo("          ");
     private static final int HANTEIYOU_10 = 10;
     private static final RString HANTEIYOU_ICHI = new RString("1");
     private static final RString HANTEIYOU_NI = new RString("2");
@@ -102,7 +103,7 @@ public class HihokenshanotsukibanFinder {
             被保険者番号 = new HihokenshaNo(Saiban.get(SubGyomuCode.DBA介護資格, SaibanHanyokeyName.被保険者番号自動採番.getコード()).nextString().trim());
         }
         if (HANTEIYOU_SAN.equals(付番方法)) {
-            被保険者番号 = new HihokenshaNo("          ");
+            被保険者番号 = 空白;
         }
         if (HANTEIYOU_YONN.equals(付番方法)) {
             getHubanHouhouHanteiYonn(識別コード);
