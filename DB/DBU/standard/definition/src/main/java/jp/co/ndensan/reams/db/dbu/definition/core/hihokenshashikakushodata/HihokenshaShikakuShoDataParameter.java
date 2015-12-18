@@ -16,6 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 被保険者証・資格者証パラメタクラスです。
  */
+@lombok.Getter
+@lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class HihokenshaShikakuShoDataParameter {
 
     private RString menuId;
@@ -37,81 +40,5 @@ public class HihokenshaShikakuShoDataParameter {
     private RString shoYoshikiKubunCode;
     private boolean logicalDeletedFlag;
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
-
-    public HihokenshaNo getHihokenshaNo() {
-        return hihokenshaNo;
-    }
-
-    public RString getKofuShoShurui() {
-        return kofuShoShurui;
-    }
-
-    public int getRirekiNo() {
-        return rirekiNo;
-    }
-
-    public LasdecCode getShichosonCode() {
-        return shichosonCode;
-    }
-
-    public ShikibetsuCode getShikibetsuCode() {
-        return shikibetsuCode;
-    }
-
-    public FlexibleDate getKofuYMD() {
-        return kofuYMD;
-    }
-
-    public FlexibleDate getYukoKigenYMD() {
-        return yukoKigenYMD;
-    }
-
-    public RString getKofuJiyu() {
-        return kofuJiyu;
-    }
-
-    public RString getKofuRiyu() {
-        return kofuRiyu;
-    }
-
-    public FlexibleDate getKaishuYMD() {
-        return kaishuYMD;
-    }
-
-    public RString getKaishuJiyu() {
-        return kaishuJiyu;
-    }
-
-    public RString getKaishuRiyu() {
-        return kaishuRiyu;
-    }
-
-    public boolean isTanpyoHakkoUmuFlag() {
-        return tanpyoHakkoUmuFlag;
-    }
-
-    public YMDHMS getHakkoShoriTimestamp() {
-        return hakkoShoriTimestamp;
-    }
-
-    public RString getShinYoshikiSumiKubunCode() {
-        return shinYoshikiSumiKubunCode;
-    }
-
-    public RString getShoYoshikiKubunCode() {
-        return shoYoshikiKubunCode;
-    }
-
-    public boolean isLogicalDeletedFlag() {
-        return logicalDeletedFlag;
-    }
-
-    public RString getMenuId() {
-        return menuId;
-    }
-
-    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
-        return shoKisaiHokenshaNo;
-    }
 
 }
