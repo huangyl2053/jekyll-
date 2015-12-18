@@ -139,7 +139,7 @@
            </if>
            <if test = "isGunshiCode">
                 AND
-                     SUBSTRING(dbT7060Kaigo."jigyoshaNo",4,3) = #{gunshiCode}
+                     SUBSTRING(dbT7060Kaigo."jigyoshaNo",4,2) = #{gunshiCode}
            </if>
         </if>
         ORDER BY
