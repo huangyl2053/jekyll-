@@ -51,10 +51,13 @@ public class SikakuKanrenIdoFinder {
      * 単体テスト用のコンストラクタです。
      *
      * @param mapperProvider mapperProvider
-     * @param dac dac
-     * @param sikaku　SikakuJiyuShutoku
+     * @param DbT7051KoseiShichosonMasterDac db7051Dac
+     * @param SikakuJiyuShutoku sikaku
      */
-    public SikakuKanrenIdoFinder(MapperProvider mapperProvider) {
+    public SikakuKanrenIdoFinder(
+            MapperProvider mapperProvider,
+            DbT7051KoseiShichosonMasterDac db7051Dac,
+            SikakuJiyuShutoku sikaku) {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.db7051Dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
         this.sikaku = InstanceProvider.create(SikakuJiyuShutoku.class);
@@ -72,13 +75,13 @@ public class SikakuKanrenIdoFinder {
     /**
      * 一覧データ取得リストを取得する。
      *
-     * @param params ShikakuTokusoInputGuideParameter
+     * @param params SikakuKanrenIdoParameter
      * @return 一覧データ取得取得リスト
      */
     public SearchResult<SikakuKanrenIdo> getSikakuKanrenIdo(SikakuKanrenIdoParameter params) {
-        if ((params.getHihokenshaNo().isEmpty() && params.getHihokenshaNo() == null)
+        if ((params.getHihokenshaNo() == null && params.getHihokenshaNo().isEmpty())
                 || (params.getshikibetsuCode() == null && params.getshikibetsuCode().isEmpty())) {
-            throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage().toString());
+            throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage());
         }
         ISikakuKanrenIdoMapper shikakuTokusoMappers = mapperProvider.create(ISikakuKanrenIdoMapper.class);
         List<SikakuKanrenIdoEntity> 一覧データ取得リスト = shikakuTokusoMappers.getSikakuKanrenIdo(params);
@@ -149,11 +152,11 @@ public class SikakuKanrenIdoFinder {
             return SearchResult.of(Collections.<GappeiShichoson>emptyList(), 0, false);
         } else {
             for (KyuShichosonCode entity : 旧市町村コード情報.get旧市町村コード情報List()) {
-                DbT7056GappeiShichosonEntity list = new DbT7056GappeiShichosonEntity();
-                list.setKyuShichosonCode(entity.get旧市町村コード());
-                list.setKyuHokenshaNo(entity.get旧保険者番号());
-                list.setKyuShichosonMeisho(entity.get旧市町村名称());
-                旧市町村コード情報List.add(new GappeiShichoson(list));
+                DbT7056GappeiShichosonEntity dbT7056GappeiShichosonEntity = new DbT7056GappeiShichosonEntity();
+                dbT7056GappeiShichosonEntity.setKyuShichosonCode(entity.get旧市町村コード());
+                dbT7056GappeiShichosonEntity.setKyuHokenshaNo(entity.get旧保険者番号());
+                dbT7056GappeiShichosonEntity.setKyuShichosonMeisho(entity.get旧市町村名称());
+                旧市町村コード情報List.add(new GappeiShichoson(dbT7056GappeiShichosonEntity));
             }
             return SearchResult.of(旧市町村コード情報List, 0, false);
         }

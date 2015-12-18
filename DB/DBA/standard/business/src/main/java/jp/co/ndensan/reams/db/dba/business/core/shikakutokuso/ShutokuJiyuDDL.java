@@ -18,6 +18,5 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShutokuJiyuDDL {
 
     private Code code;
-
     private RString codeRyakusho;
 }

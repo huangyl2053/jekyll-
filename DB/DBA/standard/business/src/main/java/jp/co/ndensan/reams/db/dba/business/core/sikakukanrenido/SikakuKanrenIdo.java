@@ -5,15 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.sikakukanrenido;
 
+import jp.co.ndensan.reams.db.dba.entity.db.relate.SikakuKanrenIdoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.SikakuKanrenIdoEntity;
 
 /**
  *
- * @author soft863
+ * 資格関連異動一覧ガイドにＤＢから検索するデータが表示するクラス。
  */
 public class SikakuKanrenIdo {
 

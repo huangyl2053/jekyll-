@@ -17,6 +17,5 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class HenkoJiyu {
 
     private Code code;
-
     private RString codeRyakusho;
 }
