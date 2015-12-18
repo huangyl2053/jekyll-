@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.JushochiTokurei;
 
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -37,7 +36,7 @@ public enum JushochiTokureiValidatorMessage implements IValidationMessage {
     /**
      * 住所地特例期間が不正になっている（適用日が解除日の後日になっている）
      */
-    住所地特例期間が不正_適用日が解除日の後(DbzErrorMessages.期間が不正_追加メッセージあり２, "適用日", "解除日");
+    住所地特例期間が不正_適用日が解除日の後(UrErrorMessages.期間が不正_追加メッセージあり２, "適用日", "解除日");
 
     private final Message message;
 
