@@ -103,7 +103,7 @@ public class HihokenshaShikakuShutokuManager {
     }
 
     /**
-     * 保険者情報リストを取得します。
+     * 被保険者台帳管理（資格取得）登録処理します。
      *
      * @param entity　被保険者台帳管理（資格取得）
      * @param 生年月日　当該識別対象の生年月日
@@ -123,6 +123,7 @@ public class HihokenshaShikakuShutokuManager {
         entity.setHihokenshaNo(hihokenshaNo);
         entity.setEdaNo(getSaidaiEdaban(hihokenshaNo, entity.getIdoYMD()));
         entity.setLogicalDeletedFlag(false);
+        // TODO １．５　前排他制御 QA:152回復時、2015/10/29仕様書の変更仕様です。2015/12/18納品にしばらく対応しない
         dbT1001Dac.save(entity);
     }
 
