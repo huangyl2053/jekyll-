@@ -80,5 +80,22 @@
 	FROM
 	rgdb."DbT7037ShoKofuKaishu"
 	</select>
+        
+        <update id="updateShoKaishuKanri" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity">
+        UPDATE
+        rgdb."DbT7037ShoKofuKaishu"
+        SET
+        "kofuYMD"=#{kofuYMD},
+        "yukoKigenYMD"=#{yukoKigenYMD},
+        "kofuJiyu"=#{kofuJiyu},
+        "kofuRiyu"=#{kofuRiyu},
+        "kaishuYMD"=#{kaishuYMD},
+        "kaishuJiyu"=#{kaishuJiyu},
+        "kaishuRiyu"=#{kaishuRiyu},
+        "hakkoShoriTimestamp"=#{hakkoShoriTimestamp}
+        WHERE
+        "hihokenshaNo"=#{hihokenshaNo}											
+        AND "kofuShoShurui"=#{kofuShoShurui}
+        </update>
 
 </mapper>
