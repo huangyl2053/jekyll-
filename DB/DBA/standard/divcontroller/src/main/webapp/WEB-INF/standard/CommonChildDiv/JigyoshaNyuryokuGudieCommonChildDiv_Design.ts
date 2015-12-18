@@ -16,6 +16,10 @@ module DBA {
                 return "search_Jigyosya";
             }
 
+            public static onclick_BtnClear(): string {
+                return "onclick_BtnClear";
+            }
+
             public static close_Dialog(): string {
                 return "close_Dialog";
             }
@@ -115,6 +119,10 @@ module DBA {
 
             public btnTaishoJigyoshaKensaku(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnTaishoJigyoshaKensaku"));
+            }
+
+            public btnClear(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnClear"));
             }
 
             public btnYameru(): UZA.Button {

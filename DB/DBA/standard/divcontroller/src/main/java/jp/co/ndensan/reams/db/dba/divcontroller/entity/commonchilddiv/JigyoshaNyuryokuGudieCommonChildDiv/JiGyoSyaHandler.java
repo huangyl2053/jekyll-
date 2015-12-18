@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -113,6 +114,10 @@ public class JiGyoSyaHandler {
                     dgJigyoshaItiran.setTxtTelNo(jigyoshaInput.get電話番号() == null ? RString.EMPTY : jigyoshaInput.get電話番号().value());
                     dgJigyoshaItiranList.add(dgJigyoshaItiran);
                 }
+                DataGridSetting dataGrid = new DataGridSetting();
+                dataGrid.setLimitRowCount(div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue().intValue());
+                dataGrid.setSelectedRowCount(Jigyosha.totalCount());
+                div.getJigyoshaItirann().getDgJigyoshaItiran().setGridSetting(dataGrid);
                 div.getJigyoshaItirann().getDgJigyoshaItiran().setDataSource(dgJigyoshaItiranList);
             } else {
 
@@ -154,6 +159,11 @@ public class JiGyoSyaHandler {
                     dgJigyoshaItiran.setTxtTelNo(jigyoshaInput.get電話番号() == null ? RString.EMPTY : jigyoshaInput.get電話番号().value());
                     dgJigyoshaItiranList.add(dgJigyoshaItiran);
                 }
+                DataGridSetting dataGrid = new DataGridSetting();
+                dataGrid.setLimitRowCount(div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue().intValue());
+                dataGrid.setSelectedRowCount(Jigyosha.totalCount());
+                div.getJigyoshaItirann().getDgJigyoshaItiran().setGridSetting(dataGrid);
+                div.getJigyoshaItirann().getDgJigyoshaItiran().setDataSource(dgJigyoshaItiranList);
                 div.getJigyoshaItirann().getDgJigyoshaItiran().setDataSource(dgJigyoshaItiranList);
             } else {
 
@@ -193,6 +203,12 @@ public class JiGyoSyaHandler {
                     dgJigyoshaItiran.setTxtTelNo(jigyoshaInput.get電話番号() == null ? RString.EMPTY : jigyoshaInput.get電話番号().value());
                     dgJigyoshaItiranList.add(dgJigyoshaItiran);
                 }
+                DataGridSetting dataGrid = new DataGridSetting();
+                dataGrid.setLimitRowCount(div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue().intValue());
+                dataGrid.setSelectedRowCount(Jigyosha.totalCount());
+                div.getJigyoshaItirann().getDgJigyoshaItiran().setGridSetting(dataGrid);
+                div.getJigyoshaItirann().getDgJigyoshaItiran().setDataSource(dgJigyoshaItiranList);
+                div.getJigyoshaItirann().getDgJigyoshaItiran().setDataSource(dgJigyoshaItiranList);
                 div.getJigyoshaItirann().getDgJigyoshaItiran().setDataSource(dgJigyoshaItiranList);
             } else {
 
@@ -206,7 +222,7 @@ public class JiGyoSyaHandler {
      *
      * @param mode JigyoshaMode
      */
-    public void load(JigyoshaMode mode) {
+    public void initialize(JigyoshaMode mode) {
 
         if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.介護保険施設.toRString())) {
 
@@ -244,6 +260,76 @@ public class JiGyoSyaHandler {
             div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(false);
             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(BusinessConfig.
                     get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
+            div.getKennsakuJyokenn().setVisible(true);
+            div.getKennsakuJyokenn().getServiceJigyosha().setVisible(false);
+            div.getOtherTokureiShisetsu().setVisible(false);
+        }
+    }
+
+    /**
+     * クリアボタンを実行します。
+     *
+     * @param mode JigyoshaMode
+     */
+    public void clear(JigyoshaMode mode) {
+
+        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.介護保険施設.toRString())) {
+
+            IAssociationFinder finder = AssociationFinderFactory.createInstance();
+            div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(true);
+            div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(BusinessConfig.
+                    get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
+            div.getKennsakuJyokenn().getTxtJIgyoshaNo().clearValue();
+            div.getKennsakuJyokenn().getTxtYukouKaishibi().clearFromValue();
+            div.getKennsakuJyokenn().getTxtYukouKaishibi().clearToValue();
+            div.getKennsakuJyokenn().getTxtJigyoshamei().clearValue();
+            div.getKennsakuJyokenn().getTxtYubinNo().clearValue();
+            div.getKennsakuJyokenn().getTxtJusho().clearDomain();
+            div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setSelectedKey(new RString("key0"));
+            div.getTaishoJigyoshaKensaku().getDdlGunshiCode().setSelectedKey(RString.EMPTY);
+            div.getTaishoJigyoshaKensaku().getDdlServiceShurui().setSelectedKey(RString.EMPTY);
+            div.getTaishoJigyoshaKensaku().getDdlJigyoshaKubun().setSelectedKey(RString.EMPTY);
+            div.getJigyoshaItirann().getDgJigyoshaItiran().getDataSource().clear();
+            div.getKennsakuJyokenn().setVisible(true);
+            div.getKennsakuJyokenn().getServiceJigyosha().setVisible(true);
+            div.getOtherTokureiShisetsu().setVisible(false);
+            Association association = finder.getAssociation();
+            div.getTaishoJigyoshaKensaku().getDdlKennCode().setSelectedKey(association.get地方公共団体コード() == null ? RString.EMPTY : association.get地方公共団体コード().value().substring(0, 2));
+            search_GunshiCode(mode);
+        }
+
+        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.住所地特例対象施設.toRString())) {
+
+            div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(false);
+            div.getOtherTokureiShisetsu().getRadKannaiKanngaiKubun().setSelectedKey(new RString("0"));
+            div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(BusinessConfig.
+                    get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
+            div.getKennsakuJyokenn().getTxtJIgyoshaNo().clearValue();
+            div.getKennsakuJyokenn().getTxtYukouKaishibi().clearFromValue();
+            div.getKennsakuJyokenn().getTxtYukouKaishibi().clearToValue();
+            div.getKennsakuJyokenn().getTxtJigyoshamei().clearValue();
+            div.getKennsakuJyokenn().getTxtYubinNo().clearValue();
+            div.getKennsakuJyokenn().getTxtJusho().clearDomain();
+            div.getJigyoshaItirann().getDgJigyoshaItiran().getDataSource().clear();
+            div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setSelectedKey(new RString("key0"));
+            div.getKennsakuJyokenn().setVisible(true);
+            div.getKennsakuJyokenn().getServiceJigyosha().setVisible(false);
+            div.getOtherTokureiShisetsu().setVisible(true);
+        }
+
+        if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.適用除外施設.toRString())) {
+
+            div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(false);
+            div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(BusinessConfig.
+                    get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
+            div.getKennsakuJyokenn().getTxtJIgyoshaNo().clearValue();
+            div.getKennsakuJyokenn().getTxtYukouKaishibi().clearFromValue();
+            div.getKennsakuJyokenn().getTxtYukouKaishibi().clearToValue();
+            div.getKennsakuJyokenn().getTxtJigyoshamei().clearValue();
+            div.getKennsakuJyokenn().getTxtYubinNo().clearValue();
+            div.getKennsakuJyokenn().getTxtJusho().clearDomain();
+            div.getJigyoshaItirann().getDgJigyoshaItiran().getDataSource().clear();
+            div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setSelectedKey(new RString("key0"));
             div.getKennsakuJyokenn().setVisible(true);
             div.getKennsakuJyokenn().getServiceJigyosha().setVisible(false);
             div.getOtherTokureiShisetsu().setVisible(false);
