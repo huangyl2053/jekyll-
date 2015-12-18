@@ -199,9 +199,9 @@ public class GappeiCityJohoBFinder {
         List<GappeiCityJyoho> gappeiCityJyohoList = new ArrayList<>();
         if (((合併区分_あり).equals(getGappeijohokubun())) && (!導入形態コード.isEmpty() && 導入形態コード.length() >= 2)) {
             if (単一.equals(導入形態コード.substringEmptyOnError(1, 2))) {
-                gappeiCityJyohoList = getTannitsugappeijoho(表示有無区分_有).records();
+                gappeiCityJyohoList = getTannitsugappeijoho(hyoujiUmu).records();
             } else if (広域.equals(導入形態コード.substringEmptyOnError(1, 2))) {
-                gappeiCityJyohoList = getKouikigappeijoho(表示有無区分_有).records();
+                gappeiCityJyohoList = getKouikigappeijoho(hyoujiUmu).records();
             }
         }
         return SearchResult.of(gappeiCityJyohoList, 0, false);
