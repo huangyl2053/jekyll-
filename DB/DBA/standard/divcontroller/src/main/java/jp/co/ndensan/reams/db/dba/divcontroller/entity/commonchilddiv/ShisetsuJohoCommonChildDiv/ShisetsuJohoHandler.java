@@ -73,7 +73,7 @@ public class ShisetsuJohoHandler {
 
                 div.getRadTekiyoJyogaiShisetsu().setVisible(false);
                 div.getDdlDaichoShubetsu().setVisible(false);
-                div.getRadOtherTokureiShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getCode());
+                div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getCode());
             }
             if (適用除外者.equals(ViewStateHolder.get(ViewStateKeys.適用除外者, RString.class))) {
 
