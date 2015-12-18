@@ -96,6 +96,7 @@
         WHERE
         "hihokenshaNo"=#{hihokenshaNo}											
         AND "kofuShoShurui"=#{kofuShoShurui}
+        AND "logicalDeletedFlag"= false
         </update>
 
 </mapper>
