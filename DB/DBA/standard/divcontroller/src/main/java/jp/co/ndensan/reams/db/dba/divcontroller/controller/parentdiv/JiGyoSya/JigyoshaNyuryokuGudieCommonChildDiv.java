@@ -52,7 +52,7 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
                 && requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue() != null) {
 
             if (!requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().
-                    isBefore(requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue())) {
+                    isBeforeOrEquals(requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue())) {
 
                 ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
                 validationMessages.add(ValidationHandler.終了日が開始日以前のチェック());
