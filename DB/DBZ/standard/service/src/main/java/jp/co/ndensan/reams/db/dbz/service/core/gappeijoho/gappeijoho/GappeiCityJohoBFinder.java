@@ -38,7 +38,6 @@ public class GappeiCityJohoBFinder {
     private static final RString 広域 = new RString("1");
     private static final RString 単一 = new RString("2");
     private static final RString 合併区分_あり = new RString("1");
-    private static final RString 表示有無区分_有 = new RString("1");
     private final MapperProvider mapperProvider;
     private final DbT7055GappeiJohoDac dac;
 
