@@ -116,18 +116,14 @@ public class RoreiFukushiNenkinShokai {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
-                ResponseHolder.getMessageCode())) {
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                if (追加.equals(div.getModel())) {
-                    get老齢福祉年金追加チェック(div);
-                }
-                getHandler(div).set老齢福祉年金入力チェック();
-                onClick_はい(div);
+                ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            if (追加.equals(div.getModel())) {
+                get老齢福祉年金追加チェック(div);
             }
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                return ResponseData.of(div).respond();
-            }
+            getHandler(div).set老齢福祉年金入力チェック();
+            onClick_はい(div);
         }
+
         return ResponseData.of(div).respond();
     }
 
