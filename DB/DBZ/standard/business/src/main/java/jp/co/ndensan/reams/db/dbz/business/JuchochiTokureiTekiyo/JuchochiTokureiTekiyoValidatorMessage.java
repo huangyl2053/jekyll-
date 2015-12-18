@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.JuchochiTokureiTekiyo;
 
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -21,7 +21,7 @@ public enum JuchochiTokureiTekiyoValidatorMessage implements IValidationMessage 
      * 住所地特例適用日が、最新履歴の取得日・変更日・住所地特例解除日より前します。
      */
     //TODO n8178 欲しいエラーがDBAのため見れない（DBAE00002）。対応を相談する。
-    住所地特例適用日が_最新履歴の取得日_変更日_住所地特例解除日より前(DbzErrorMessages.不正, "住所地特例適用日");
+    住所地特例適用日が_最新履歴の取得日_変更日_住所地特例解除日より前(UrErrorMessages.不正, "住所地特例適用日");
 
     private final Message message;
 

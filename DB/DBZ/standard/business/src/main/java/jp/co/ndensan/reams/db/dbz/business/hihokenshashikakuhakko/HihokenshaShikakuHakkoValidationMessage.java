@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko;
 
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -20,7 +20,7 @@ public enum HihokenshaShikakuHakkoValidationMessage implements IValidationMessag
     /**
      * 交付事由が未選択します。
      */
-    交付事由が未選択(DbzErrorMessages.必須項目を入力);
+    交付事由が未選択(UrErrorMessages.必須項目);
 
     private final Message message;
 
