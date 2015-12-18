@@ -132,20 +132,20 @@ public class HihokenshanotsukibanFinder {
             被保険者番号 = new HihokenshaNo(Saiban.get(SubGyomuCode.DBA介護資格, SaibanHanyokeyName.被保険者番号自動採番.getコード()).nextString());
         }
         if ((開始位置.isEmpty() && 有効桁数.isEmpty() && 前付与番号桁数.isEmpty() && 後付与番号桁数.isEmpty())
-                && (前付与番号.length() != 前付与番号桁数.length()) || (後付与番号.length() != 後付与番号桁数.length())) {
+                && (前付与番号.length() == 前付与番号桁数.length()) || (後付与番号.length() == 後付与番号桁数.length())) {
             StringBuilder hihokenshaNo = new StringBuilder();
             hihokenshaNo.append(前付与番号);
             hihokenshaNo.append(付番元.substring(付番元情報開始位置, 付番元情報有効桁数));
             hihokenshaNo.append(後付与番号);
             被保険者番号 = new HihokenshaNo(hihokenshaNo.toString());
         } else if ((開始位置.isEmpty() && 有効桁数.isEmpty() && 前付与番号桁数.isEmpty())
-                && (前付与番号.length() != 前付与番号桁数.length())) {
+                && (前付与番号.length() == 前付与番号桁数.length())) {
             StringBuilder hihokenshaNo = new StringBuilder();
             hihokenshaNo.append(前付与番号);
             hihokenshaNo.append(付番元.substring(付番元情報開始位置, 付番元情報有効桁数));
             被保険者番号 = new HihokenshaNo(hihokenshaNo.toString());
         } else if ((開始位置.isEmpty() && 有効桁数.isEmpty() && 後付与番号.isEmpty())
-                && (後付与番号.length() != 後付与番号桁数.length())) {
+                && (後付与番号.length() == 後付与番号桁数.length())) {
             StringBuilder hihokenshaNo = new StringBuilder();
             hihokenshaNo.append(付番元.substring(付番元情報開始位置, 付番元情報有効桁数));
             hihokenshaNo.append(後付与番号);
