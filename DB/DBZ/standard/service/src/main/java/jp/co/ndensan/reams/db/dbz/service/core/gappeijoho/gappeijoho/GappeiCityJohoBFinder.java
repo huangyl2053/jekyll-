@@ -126,8 +126,6 @@ public class GappeiCityJohoBFinder {
     public SearchResult<GappeiCityJyoho> getTannitsugappeijohokensaku(RString hyoujiUmu,
             LasdecCode 旧市町村コード, HokenshaNo 旧保険者番号) {
         requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage("表示有無区分"));
-        requireNonNull(旧市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("旧市町村コード"));
-        requireNonNull(旧保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("旧保険者番号"));
         if ((旧市町村コード == null || 旧市町村コード.isEmpty()) && (旧保険者番号 == null || 旧保険者番号.isEmpty())) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage());
         }
@@ -173,8 +171,6 @@ public class GappeiCityJohoBFinder {
     public SearchResult<GappeiCityJyoho> getKouikigappeijohokensaku(RString hyoujiUmu,
             LasdecCode 旧市町村コード, HokenshaNo 旧保険者番号) {
         requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage("表示有無区分"));
-        requireNonNull(旧市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("旧市町村コード"));
-        requireNonNull(旧保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("旧保険者番号"));
         if ((旧市町村コード == null || 旧市町村コード.isEmpty()) && (旧保険者番号 == null || 旧保険者番号.isEmpty())) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage());
         }
