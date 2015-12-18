@@ -105,7 +105,7 @@ public class HihokenshaShikakuShutokuManager {
     /**
      * 被保険者台帳管理（資格取得）登録処理します。
      *
-     * @param entity　被保険者台帳管理（資格取得）
+     * @param entity　被保険者台帳管理テーブルのエンティティ
      * @param 生年月日　当該識別対象の生年月日
      */
     @Transaction
@@ -169,7 +169,7 @@ public class HihokenshaShikakuShutokuManager {
     }
 
     /**
-     * 資格取得登録チェック処理。
+     * 資格取得登録チェック処理します。
      *
      * @param 当該識別対象の生年月日　当該識別対象の生年月日
      * @param 資格取得日　資格取得日
@@ -190,7 +190,7 @@ public class HihokenshaShikakuShutokuManager {
     }
 
     /**
-     * 資格取得チェック処理。
+     * 資格取得チェック処理します。
      *
      * @param shikibetsuCode　識別コード
      * @param hihokenshaNo　被保険者番号
