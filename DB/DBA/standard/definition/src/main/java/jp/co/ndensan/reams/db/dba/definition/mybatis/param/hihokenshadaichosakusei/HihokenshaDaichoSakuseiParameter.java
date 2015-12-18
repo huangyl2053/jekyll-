@@ -15,17 +15,17 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HihokenshaDaichoSakuseiParameter {
+public final class HihokenshaDaichoSakuseiParameter {
 
-    private ShikibetsuCode shikibetsuCode;
-    private HihokenshaNo hihokenshaNo;
+    private final ShikibetsuCode shikibetsuCode;
+    private final HihokenshaNo hihokenshaNo;
 
     /**
      * コンストラクタです。
      *
      * @param shichonCode 識別コード
      * @param hihokenshaNo 被保険者番号
-     * @throws NullPointerException 引数のいずれかが{@code null}の場合
+     *
      */
     private HihokenshaDaichoSakuseiParameter(ShikibetsuCode shikibetsuCode, HihokenshaNo hihokenshaNo) {
 	this.shikibetsuCode = shikibetsuCode;

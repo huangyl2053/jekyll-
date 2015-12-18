@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigy
  * 被保険者台帳のマッパーインタフェースです。
  *
  */
-public interface HihokenshaDaichoSakuseiMapper {
+public interface IHihokenshaDaichoSakuseiMapper {
 
     /**
      * ShisetsuNyutaishoEntity 入所施設のエンティティ
