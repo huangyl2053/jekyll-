@@ -137,7 +137,7 @@
             1 = 1
         <if test="useHyoujium">
             AND 
-                shichoson."hyojiUmu" = '1'   
+                shichoson."hyojiUmu" = #{hyoujium} 
         </if>
     </select>
     
@@ -213,7 +213,7 @@
             1 = 1
         <if test="useHyoujium">
             AND 
-                kosei."gappeiKyuShichosonHyojiUmu" = '1'   
+                kosei."gappeiKyuShichosonHyojiUmu" = #{hyoujium}  
         </if>
     </select>
     
