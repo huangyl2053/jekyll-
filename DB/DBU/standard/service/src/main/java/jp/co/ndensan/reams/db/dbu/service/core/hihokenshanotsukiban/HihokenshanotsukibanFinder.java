@@ -150,7 +150,7 @@ public class HihokenshanotsukibanFinder {
             hihokenshaNo.append(付番元.substring(付番元情報開始位置, 付番元情報有効桁数));
             hihokenshaNo.append(後付与番号);
             被保険者番号 = new HihokenshaNo(hihokenshaNo.toString());
-        } else if (開始位置.isEmpty() && 有効桁数.isEmpty()) {
+        } else if (!開始位置.isEmpty() && !有効桁数.isEmpty()) {
             被保険者番号 = new HihokenshaNo(付番元.substring(付番元情報開始位置, 付番元情報有効桁数));
         } else if (!開始位置.isEmpty() && !有効桁数.isEmpty() && !前付与番号桁数.isEmpty() && !後付与番号桁数.isEmpty()) {
             被保険者番号 = new HihokenshaNo(付番元);
