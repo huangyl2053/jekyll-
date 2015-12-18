@@ -85,11 +85,11 @@ public class HokenshaNyuryokuHojoFinder {
     @Transaction
     public Hokensha getHokensha(HokenjaNo hokenjaNo) {
         requireNonNull(hokenjaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
-        Hokenja entity = hokenshafinder.get保険者(hokenjaNo, new HokenjaShubetsu(new RString("08")));
-        if (entity == null) {
+        Hokenja hokenja = hokenshafinder.get保険者(hokenjaNo, new HokenjaShubetsu(new RString("08")));
+        if (hokenja == null) {
             return null;
         }
-        return new Hokensha(entity.toEntity());
+        return new Hokensha(hokenja.toEntity());
     }
 
     /**
