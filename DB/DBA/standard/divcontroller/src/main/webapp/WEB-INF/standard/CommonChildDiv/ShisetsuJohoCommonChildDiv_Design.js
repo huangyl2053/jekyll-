@@ -12,6 +12,10 @@ var DBA;
                 return "onBlur_nyuryokuShisetsuKodo";
             };
 
+            Events.onOkClose_btnSenTaKu = function () {
+                return "onOkClose_btnSenTaKu";
+            };
+
             Events.onBeforeOpenDialog_shisetsu = function () {
                 return "onBeforeOpenDialog_shisetsu";
             };

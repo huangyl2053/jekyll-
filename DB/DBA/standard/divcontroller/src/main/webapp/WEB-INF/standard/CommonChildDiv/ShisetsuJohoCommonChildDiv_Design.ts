@@ -16,6 +16,10 @@ module DBA {
                 return "onBlur_nyuryokuShisetsuKodo";
             }
 
+            public static onOkClose_btnSenTaKu(): string {
+                return "onOkClose_btnSenTaKu";
+            }
+
             public static onBeforeOpenDialog_shisetsu(): string {
                 return "onBeforeOpenDialog_shisetsu";
             }
