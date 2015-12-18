@@ -35,11 +35,8 @@ public final class KyuShichosonCode {
 
     private static final RString 合併あり = new RString("1");
     private static final RString 合併なし = new RString("0");
-    @SuppressWarnings("PMD.UnusedPrivateField")
     private LasdecCode 旧市町村コード;
-    @SuppressWarnings("PMD.UnusedPrivateField")
     private HokenshaNo 旧保険者番号;
-    @SuppressWarnings("PMD.UnusedPrivateField")
     private RString 旧市町村名称;
     private static DbT7051KoseiShichosonMasterDac 構成市町村マスタDac;
     private static DbT7055GappeiJohoDac 合併情報Dac;

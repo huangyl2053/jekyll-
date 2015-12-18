@@ -17,10 +17,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.config.ChohyoKy
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.config.DousaKanren;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.config.HokenshaJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.config.RojinHokenJoho;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.auth.AuthItem;
 import jp.co.ndensan.reams.uz.uza.auth.AuthType;
@@ -68,7 +68,7 @@ public final class ShichosonSecurityJoho {
     }
 
     public static ShichosonSecurityJoho getShichosonSecurityJoho(GyomuBunrui 業務分類) {
-        requireNonNull(業務分類, DbzErrorMessages.対象データなし.getMessage().toString());
+        requireNonNull(業務分類, UrErrorMessages.対象データなし.getMessage().toString());
         介護導入形態Dac = InstanceProvider.create(DbT7908KaigoDonyuKeitaiDac.class);
         構成市町村マスタDac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
         DbT7908KaigoDonyuKeitaiEntity 介護導入形態 = 介護導入形態Dac.selectByGyomuBunrui(業務分類.getコード());
@@ -105,7 +105,7 @@ public final class ShichosonSecurityJoho {
      * @return 管理情報
      */
     public static KanriJoho getKanriJoho(DbT7908KaigoDonyuKeitaiEntity 介護導入形態) {
-        requireNonNull(介護導入形態, DbzErrorMessages.対象データなし.getMessage().toString());
+        requireNonNull(介護導入形態, UrErrorMessages.対象データなし.getMessage().toString());
         KanriJoho 管理情報 = new KanriJoho();
         管理情報.set導入形態コード(介護導入形態.getDonyuKeitaiCode());
         管理情報.set支所管理有無フラグ(介護導入形態.getShishoKanriUmuFlag());
@@ -122,7 +122,7 @@ public final class ShichosonSecurityJoho {
      * @return 市町村識別ID
      */
     public static List<AuthorityItem> getShichosonShikibetsuId(RString reamsLoginId) {
-        requireNonNull(reamsLoginId, DbzErrorMessages.対象データなし.getMessage().toString());
+        requireNonNull(reamsLoginId, UrErrorMessages.対象データなし.getMessage().toString());
         return AuthItem.getAuthorities(reamsLoginId, new AuthType.Of().kinds(権限項目種類).create(), RDate.getNowDate());
     }
 
