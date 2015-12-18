@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.HokenshaJoho;
 
 import jp.co.ndensan.reams.db.dba.business.core.hokensha.Hokensha;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -32,6 +33,8 @@ public class HokenshaJohoHandler {
     public void onBlur_txtHokenshaNo(Hokensha hokensha) {
         if (hokensha != null) {
             div.getTxtHokenshaMeisho().setValue(hokensha.get保険者名());
+        } else {
+            div.getTxtHokenshaMeisho().setValue(new RString(""));
         }
     }
 }
