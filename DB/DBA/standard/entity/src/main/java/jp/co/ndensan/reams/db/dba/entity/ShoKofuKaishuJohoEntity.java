@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShoKofuKaishuJohoEntity {
     
+    private RString status;
     private FlexibleDate kofuYMD;
     private FlexibleDate yukoKigenYMD;
     private RString kofuJiyu;
