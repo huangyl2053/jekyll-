@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.SikakuKanrenIdoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -134,5 +135,14 @@ public class SikakuKanrenIdo {
      */
     public RString get旧市町村名称() {
         return entity.getKyuShichosonMeisho();
+    }
+
+    /**
+     * 処理日時を取得します。
+     *
+     * @return 処理日時
+     */
+    public RDateTime get処理日時() {
+        return entity.getLastUpdateTimestamp();
     }
 }

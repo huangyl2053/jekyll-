@@ -17,7 +17,8 @@
     <result property="shichosonCode" column="DbT7051Kosei_koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
     <result property="shichosonMeisho" column="DbT7051Kosei_shichosonMeisho2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" /> 
     <result property="kyuShichosonCode" column="DbT7056Gappei_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" /> 
-    <result property="kyuShichosonMeisho" column="DbT7056Gappei_kyuShichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
+    <result property="kyuShichosonMeisho" column="DbT7056Gappei_kyuShichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="lastUpdateTimestamp" column="DbT1001Hiho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandlerTypeHandler" />  
     </resultMap>
       <select id="getSikakuKanrenIdo" resultMap="resultMap_getSikakuKanrenIdo" parameterType="jp.co.ndensan.reams.db.dba.definition.param.sikakukanrenido.SikakuKanrenIdoParameter" fetchSize="500">
 	SELECT
@@ -32,7 +33,8 @@
             DbT7051Kosei."shichosonCode" as "DbT7051Kosei_koikinaiTokureiSochimotoShichosonCode",
             DbT7051Kosei."shichosonMeisho" as "DbT7051Kosei_shichosonMeisho2",
             DbT7056Gappei."kyuShichosonCode" as "DbT7056Gappei_kyuShichosonCode",
-            DbT7056Gappei."kyuShichosonMeisho" as "DbT7056Gappei_kyuShichosonMeisho"
+            DbT7056Gappei."kyuShichosonMeisho" as "DbT7056Gappei_kyuShichosonMeisho",
+            DbT1001Hiho."lastUpdateTimestamp" as  "DbT1001Hiho_lastUpdateTimestamp"
 
             FROM
                   rgdb."DbT1001HihokenshaDaicho" as DbT1001Hiho
