@@ -18,7 +18,7 @@
     <result property="shichosonMeisho" column="DbT7051Kosei_shichosonMeisho2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" /> 
     <result property="kyuShichosonCode" column="DbT7056Gappei_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" /> 
     <result property="kyuShichosonMeisho" column="DbT7056Gappei_kyuShichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-    <result property="lastUpdateTimestamp" column="DbT1001Hiho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandlerTypeHandler" />  
+    <result property="lastUpdateTimestamp" column="DbT1001Hiho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />  
     </resultMap>
       <select id="getSikakuKanrenIdo" resultMap="resultMap_getSikakuKanrenIdo" parameterType="jp.co.ndensan.reams.db.dba.definition.param.sikakukanrenido.SikakuKanrenIdoParameter" fetchSize="500">
 	SELECT
