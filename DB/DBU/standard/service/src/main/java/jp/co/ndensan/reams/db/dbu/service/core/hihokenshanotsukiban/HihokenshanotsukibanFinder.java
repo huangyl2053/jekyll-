@@ -5,15 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbu.service.core.hihokenshanotsukiban;
 
+import jp.co.ndensan.reams.db.dbu.definition.core.configkeys.ConfigNameDBA;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7037ShoKofuKaishuDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.Saiban;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -89,17 +94,13 @@ public class HihokenshanotsukibanFinder {
     }
 
     private static HihokenshaNo getHubanHouhou(ShikibetsuCode 識別コード) {
-        // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「付番方法」がない 2015/12/15。
-        RString 付番方法 = new RString("");
-        // RString 付番方法 = BusinessConfig.get(HihokenshaNoFubanHoho.付番方法, SubGyomuCode.DBA介護資格);
+        RString 付番方法 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_付番方法, SubGyomuCode.DBA介護資格);
         if (HANTEIYOU_ICHI.equals(付番方法)) {
             被保険者番号 = new HihokenshaNo(識別コード.getColumnValue().substring(
                     識別コード.getColumnValue().length() - HANTEIYOU_10, 識別コード.getColumnValue().length()).trim());
         }
         if (HANTEIYOU_NI.equals(付番方法)) {
-            //TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「被保険者番号自動採番」がない 2015/12/15。
-//            RString hubanNo = Saiban.get(SubGyomuCode.DBA介護資格,HihokenshaNoFubanHoho.被保険者番号自動採番).nextString();
-//            被保険者番号 = SaibanHanyokeyName.被保険者番号自動採番;
+            被保険者番号 = new HihokenshaNo(Saiban.get(SubGyomuCode.DBA介護資格, SaibanHanyokeyName.被保険者番号自動採番.getコード()).nextString());
         }
         if (HANTEIYOU_SAN.equals(付番方法)) {
             被保険者番号 = new HihokenshaNo("");
@@ -108,35 +109,19 @@ public class HihokenshanotsukibanFinder {
             getHubanHouhouHanteiYonn();
         }
         if (HANTEIYOU_GO.equals(付番方法)) {
-            // TODO 袁献輝 EnumクラスSaibanHanyokeyNameがない 2015/12/15。
-            // 被保険者番号 = Saiban.get(SubGyomuCode.DBA介護資格,SaibanHanyokeyName.被保険者番号自動MCD).nextString();
+            被保険者番号 = new HihokenshaNo(Saiban.get(SubGyomuCode.DBA介護資格, SaibanHanyokeyName.被保険者番号自動MCD.getコード()).nextString());
         }
         return 被保険者番号;
     }
 
     private static HihokenshaNo getHubanHouhouHanteiYonn() {
-        // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_付番元情報」がない 2015/12/15。
-        RString 付番元 = new RString("");
-        // RString 付番元 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_付番元情報,SubGyomuCode.DBA介護資格);
-        // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_付番元情報_開始位置」がない 2015/12/15。
-        RString 開始位置 = new RString("");
-        // RString 開始位置 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_付番元情報_開始位置,SubGyomuCode.DBA介護資格);
-        // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_付番元情報_有効桁数」がない 2015/12/15。
-        RString 有効桁数 = new RString("");
-        // RString 有効桁数 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_付番元情報_有効桁数,SubGyomuCode.DBA介護資格);
-        // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_前付与番号_桁数」がない 2015/12/15。
-        RString 前付与番号桁数 = new RString("");
-        // RString 前付与番号桁数 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_前付与番号_桁数,SubGyomuCode.DBA介護資格);
-        // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_前付与番号」がない 2015/12/15。
-        RString 前付与番号 = new RString("");
-        // RString 前付与番号 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_前付与番号,SubGyomuCode.DBA介護資格);
-        // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_後付与番号_桁数」がない 2015/12/15。
-        RString 後付与番号桁数 = new RString("");
-        // RString 後付与番号桁数 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_後付与番号_桁数,SubGyomuCode.DBA介護資格);
-        // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「カスタマイズ付番_後付与番号」がない 2015/12/15。
-        RString 後付与番号 = new RString("");
-        // RString 後付与番号 = BusinessConfig.get(HihokenshaNoFubanHoho.カスタマイズ付番_後付与番号,SubGyomuCode.DBA介護資格);
-
+        RString 付番元 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報, SubGyomuCode.DBA介護資格);
+        RString 開始位置 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_開始位置, SubGyomuCode.DBA介護資格);
+        RString 有効桁数 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_有効桁数, SubGyomuCode.DBA介護資格);
+        RString 前付与番号桁数 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号_桁数, SubGyomuCode.DBA介護資格);
+        RString 前付与番号 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号, SubGyomuCode.DBA介護資格);
+        RString 後付与番号桁数 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号_桁数, SubGyomuCode.DBA介護資格);
+        RString 後付与番号 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号, SubGyomuCode.DBA介護資格);
         int 付番元情報開始位置 = Integer.parseInt(開始位置.toString());
         int 付番元情報有効桁数 = Integer.parseInt(有効桁数.toString());
 
@@ -144,8 +129,7 @@ public class HihokenshanotsukibanFinder {
             付番元 = 付番元.substring(付番元.length() - HANTEIYOU_10, 付番元.length()).trim();
         }
         if (HANTEIYOU_NI.equals(付番元)) {
-            // TODO 袁献輝 EnumクラスSaibanHanyokeyNameがない、 2015/12/15。
-            // 被保険者番号 = Saiban.get(SubGyomuCode.DBA介護資格,SaibanHanyokeyName.被保険者番号自動採番).nextString();
+            被保険者番号 = new HihokenshaNo(Saiban.get(SubGyomuCode.DBA介護資格, SaibanHanyokeyName.被保険者番号自動採番.getコード()).nextString());
         }
         if ((開始位置.isEmpty() && 有効桁数.isEmpty() && 前付与番号桁数.isEmpty() && 後付与番号桁数.isEmpty())
                 && (前付与番号.length() != 前付与番号桁数.length()) || (後付与番号.length() != 後付与番号桁数.length())) {
