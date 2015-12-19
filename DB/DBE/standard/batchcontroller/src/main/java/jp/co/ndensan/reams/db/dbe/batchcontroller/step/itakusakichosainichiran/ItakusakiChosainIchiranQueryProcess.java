@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -30,12 +31,12 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class ItakusakiChosainIchiranQueryProcess extends BatchProcessBase<ItakusakiChosainIchiranRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.itakusakiChosainIchiran."
+            = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.itakusakichosainichiran."
                     + "IItakusakiChosainIchiranMapper.getNinteiChoSain");
     private static final ReportId REPORT_ID = new ReportId("DBE592001");
     List<ItakusakiChosainIchiranBodyItem> bodyItem = new ArrayList<>();
     InputParameter<ItakusakiChosainIchiranQueryProcessParemeter> parameterClass;
-//    @BatchWriter
+    @BatchWriter
     private BatchReportWriter<ItakusakiChosainIchiranReportSource> batchWrite;
     private ReportSourceWriter<ItakusakiChosainIchiranReportSource> retortWrite;
 

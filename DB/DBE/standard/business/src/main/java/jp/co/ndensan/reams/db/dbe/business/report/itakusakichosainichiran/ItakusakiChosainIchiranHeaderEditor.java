@@ -94,19 +94,6 @@ public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchi
         source.cityCode = item.getCityCode();
         source.cityName = item.getCityName();
         NarabiJunType.toValue(item.getSort()).toRString();
-//        if (NarabiJunType.委託先コード_調査員カナ氏名.code().equals(item.getSort())) {
-//            source.sort1 = NarabiJunType.委託先コード_調査員カナ氏名.toRString();
-//        } else if (NarabiJunType.委託先コード_調査員氏名.code().equals(item.getSort())) {
-//            source.sort1 = NarabiJunType.委託先コード_調査員氏名.code();
-//        } else if (NarabiJunType.委託先コード_調査員カナ氏名.code().equals(item.getSort())) {
-//            source.sort1 = NarabiJunType.委託先コード_調査員カナ氏名.code();
-//        } else if (NarabiJunType.委託先名称_調査員コード.code().equals(item.getSort())) {
-//            source.sort1 = NarabiJunType.委託先名称_調査員コード.code();
-//        } else if (NarabiJunType.委託先名称_調査員氏名.code().equals(item.getSort())) {
-//            source.sort1 = NarabiJunType.委託先名称_調査員氏名.code();
-//        } else {
-//            source.sort1 = NarabiJunType.委託先名称_調査員カナ氏名.code();
-//        }
         source.sort2 = RString.EMPTY;
         source.sort3 = RString.EMPTY;
         source.sort2 = RString.EMPTY;

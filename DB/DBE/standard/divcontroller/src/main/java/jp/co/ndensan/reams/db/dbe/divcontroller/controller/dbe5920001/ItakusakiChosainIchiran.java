@@ -18,7 +18,7 @@ public class ItakusakiChosainIchiran {
     /**
      * 画面初期化処理実行します。
      *
-     * @param div ItakusakiChosainIchiranDiv
+     * @param div 画面情報DIV
      * @return ResponseData<ItakusakiChosainIchiranDiv>
      */
     public ResponseData<ItakusakiChosainIchiranDiv> onload(ItakusakiChosainIchiranDiv div) {

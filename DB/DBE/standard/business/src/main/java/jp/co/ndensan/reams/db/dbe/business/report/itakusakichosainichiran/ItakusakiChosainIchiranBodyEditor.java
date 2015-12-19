@@ -16,10 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ItakusakiChosainIchiranBodyEditor implements ItakusakiChosainIchiranEditor {
 
-    private final ItakusakiChosainIchiranBodyItem item;
-
     private static final RString 有効_VALUE = new RString("有効");
     private static final RString 無効_VALUE = new RString("無効");
+    private final ItakusakiChosainIchiranBodyItem item;
 
     /**
      * インスタンスを生成します。

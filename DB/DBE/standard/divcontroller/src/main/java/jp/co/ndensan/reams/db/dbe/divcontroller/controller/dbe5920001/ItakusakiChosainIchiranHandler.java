@@ -32,7 +32,7 @@ public class ItakusakiChosainIchiranHandler {
     /**
      * コンストラクタです。
      *
-     * @param div
+     * @param div 画面情報DIV
      */
     public ItakusakiChosainIchiranHandler(ItakusakiChosainIchiranDiv div) {
         this.div = div;
