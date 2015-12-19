@@ -98,5 +98,16 @@
         AND "kofuShoShurui"=#{kofuShoShurui}
         AND "logicalDeletedFlag"= false
         </update>
-
+        
+        <update id="updateShokaishuKanriRnlisakuju" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity">
+        UPDATE
+        rgdb."DbT7037ShoKofuKaishu"
+        SET
+        "logicalDeletedFlag"= true,
+        "hakkoShoriTimestamp"=#{hakkoShoriTimestamp}
+        WHERE
+        "hihokenshaNo"=#{hihokenshaNo}											
+        AND "kofuShoShurui"=#{kofuShoShurui}
+        AND "logicalDeletedFlag"= false    
+        </update>
 </mapper>

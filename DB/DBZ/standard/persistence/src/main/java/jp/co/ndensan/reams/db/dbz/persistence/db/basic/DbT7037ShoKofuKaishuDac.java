@@ -247,5 +247,7 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
         return session.getMapper(IDbT7037ShoKofuKaishuMapper.class).updateShoKaishuKanri(entity);
     }
     
-    
+    public int updateShokaishuKanriRnlisakuju(DbT7037ShoKofuKaishuEntity entity) {
+        return session.getMapper(IDbT7037ShoKofuKaishuMapper.class).updateShokaishuKanriRnlisakuju(entity);
+    }
 }
