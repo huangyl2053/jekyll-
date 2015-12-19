@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5910001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe5910001;
 
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshoshujiiichiran.IkenshoShujiiIchiranParameter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5910001.IkenshoShujiiIchiranDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
@@ -27,9 +28,9 @@ public class IkenshoShujiiIchiran {
     public ResponseData<IkenshoShujiiIchiranDiv> onLoad(IkenshoShujiiIchiranDiv div) {
         IkenshoShujiiIchiranHandler handler = createHandlerOf(div);
         ResponseData<IkenshoShujiiIchiranDiv> response = new ResponseData<>();
-        ShichosonSecurityJoho 市町村セキュリティ情報
-                = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-        handler.onLoad(市町村セキュリティ情報.get導入形態コード().getKey());
+//        ShichosonSecurityJoho 市町村セキュリティ情報
+//                = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        handler.onLoad(new RString("1"));
         response.data = div;
         return response;
     }
@@ -60,14 +61,14 @@ public class IkenshoShujiiIchiran {
         RString iryoKikanCodeTo = div.getTxtIryoKikanCodeTo().getValue();
         if (0 < iryoKikanCodeFrom.compareTo(iryoKikanCodeTo)) {
             throw new ApplicationException(
-                    UrErrorMessages.大小関係が不正.getMessage());
+                    UrErrorMessages.大小関係が不正.getMessage().replace("医療機関コード"));
         }
 
         RString shujiiCodeFrom = div.getTxtShujiiCodeFrom().getValue();
         RString shujiiCodeTo = div.getTxtShujiiCodeTo().getValue();
         if (0 < shujiiCodeFrom.compareTo(shujiiCodeTo)) {
             throw new ApplicationException(
-                    UrErrorMessages.大小関係が不正.getMessage());
+                    UrErrorMessages.大小関係が不正.getMessage().replace("主治医コード"));
         }
 
         return ResponseData.of(createHandlerOf(div).onClick_btnReportPublish()).respond();

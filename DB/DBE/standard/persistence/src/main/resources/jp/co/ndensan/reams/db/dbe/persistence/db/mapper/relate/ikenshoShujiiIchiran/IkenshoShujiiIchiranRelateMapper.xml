@@ -3,10 +3,10 @@
 <!-- 概要： 合議体情報のマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.IkenshoShujiiIchiran.IkenshoShujiiIchiranRelateMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoShujiiIchiran.IkenshoShujiiIchiranRelateMapper">
 
 <!-- IkenshoShujiiIchiranRelateEntityの項目にマッピングします。-->
-    <resultMap id="resultMap_getIkenshoShujiiIchiranRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.IkenshoShujiiIchiran.IkenshoShujiiIchiranRelateEntity" autoMapping="true">
+    <resultMap id="resultMap_getIkenshoShujiiIchiranRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.ikenshoShujiiIchiran.IkenshoShujiiIchiranRelateEntity" autoMapping="true">
         <result property="iryokikanCode" column="iryokikanCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.IryoKikanCodeTypeHandler" />
         <result property="iryoKikanMeishoKana" column="iryoKikanMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="iryoKikanMeisho" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -25,7 +25,7 @@
     </resultMap>
     <select id="getIkenshoShujiiIchiranRelateEntity"
               resultMap="resultMap_getIkenshoShujiiIchiranRelateEntity" 
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ikenshoshujiiichiran.IkenshoShujiiIchiranMybatisParameter"
+              parameterType="java.util.Map"
               fetchSize="500">
         SELECT 
             DbT5911ShujiiIryoKikanJoho."iryokikanCode",

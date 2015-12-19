@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.processprm;
 
+import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbe.definition.core.ikenshoshujiiichiran.IkenshoShujiiIchiranMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
