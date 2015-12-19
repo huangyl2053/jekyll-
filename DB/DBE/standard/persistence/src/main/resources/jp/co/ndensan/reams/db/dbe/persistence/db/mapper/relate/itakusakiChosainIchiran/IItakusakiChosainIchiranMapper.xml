@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.itakusakiChosainIchiran.IItakusakiChosainIchiranMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.itakusakichosainichiran.IItakusakiChosainIchiranMapper">
     
-    <resultMap id="haishameigihenkouiraiResult" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ItakusakiChosainIchiran.ItakusakiChosainIchiranRelateEntity">
+    <resultMap id="haishameigihenkouiraiResult" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.itakusakichosainichiran.ItakusakiChosainIchiranRelateEntity">
         <result property="dbT5910_NinteichosaItakusakiCode" column="調査委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dbT5910_JigyoshaMeishoKana" column="名称_ｶﾅ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dbT5910_JigyoshaMeisho" column="名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
