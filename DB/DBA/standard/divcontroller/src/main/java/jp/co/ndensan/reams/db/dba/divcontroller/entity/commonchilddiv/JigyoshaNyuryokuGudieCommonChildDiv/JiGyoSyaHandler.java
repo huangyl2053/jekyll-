@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dba.definition.jigyosha.JigyoshaInputGuideParamete
 import jp.co.ndensan.reams.db.dba.service.core.jigyosha.JigyoshaInputGuideFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigojigyoshano.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyoshaKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -145,7 +146,7 @@ public class JiGyoSyaHandler {
                             div.getKennsakuJyokenn().getDdlKennsakuKubun().getSelectedKey(),
                             FlexibleDate.getNowDate(),
                             div.getOtherTokureiShisetsu().getRadKannaiKanngaiKubun().getSelectedKey(),
-                            ShisetsuType.住所地特例対象施設.code(),
+                            JigyosyaType.住所地特例対象施設.getコード(),
                             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue() == null ? 0
                             : div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue().intValue()));
 
@@ -190,7 +191,7 @@ public class JiGyoSyaHandler {
                             div.getKennsakuJyokenn().getTxtJusho().getDomain().value(),
                             div.getKennsakuJyokenn().getDdlKennsakuKubun().getSelectedKey(),
                             FlexibleDate.getNowDate(),
-                            ShisetsuType.適用除外施設.code(),
+                            JigyosyaType.適用除外施設.getコード(),
                             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue() == null ? 0
                             : div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue().intValue()));
             List<dgJigyoshaItiran_Row> dgJigyoshaItiranList = new ArrayList();
