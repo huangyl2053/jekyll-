@@ -119,7 +119,7 @@ public class JigyoshaInputGuideFinder {
      * @param systemDate システム日付
      * @return サービス種類取得リスト
      */
-    public SearchResult<ServiceShuruiJigyoshaInputGuide> getServiceShuruiJigyoshaInputGuidea(RYearMonth systemDate) {
+    public SearchResult<ServiceShuruiJigyoshaInputGuide> getServiceShuruiJigyoshaInputGuide(RYearMonth systemDate) {
         List<ServiceShuruiJigyoshaInputGuide> serviceShuruiList = new ArrayList<>();
 
         List<DbT7130KaigoServiceShuruiEntity> dbt7130List = dbT7130Dac.selectServiceShurui(systemDate);
