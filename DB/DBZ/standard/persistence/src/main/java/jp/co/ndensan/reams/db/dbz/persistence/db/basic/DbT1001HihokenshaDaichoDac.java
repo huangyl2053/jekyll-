@@ -221,7 +221,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return (DbT1001HihokenshaDaichoEntity) accessor.select().
+        return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(eq(hihokenshaNo, 被保険者番号),
                                 eq(idoYMD, 異動日),
