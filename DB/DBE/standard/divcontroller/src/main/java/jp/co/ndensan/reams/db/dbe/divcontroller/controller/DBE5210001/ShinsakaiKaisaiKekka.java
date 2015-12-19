@@ -12,8 +12,6 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoManager;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -56,12 +54,12 @@ public class ShinsakaiKaisaiKekka {
     /**
      * 審査会委員一覧Gridの「削除」ボタンを押下 ＤＢ介護認定審査会割当委員情報」より物理削除する
      *
-     * @param ShinsakaiKaisaiKekkaDiv div
+     * @param div
      * @return responseData
      */
     public ResponseData onClick_ShowDeleteButton(ShinsakaiKaisaiKekkaDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(DbzQuestionMessages.削除の確認.getMessage()).respond();
+            return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
 //            boolean gera = new RString(DbzQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode());
 //            ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes;
         }
@@ -99,7 +97,7 @@ public class ShinsakaiKaisaiKekka {
         for (dgShinsakaiIinIchiran_Row shinsakaiIinIchiran_Row : row) {
             dgShinsakaiIinIchiran_Row ShinsakaiIinIchiran_Row = new dgShinsakaiIinIchiran_Row();
             if (div.getTxtYoteiStartTime().getValue().isAfter(div.getTxtKaisaiEndTime().getValue())) {
-                throw new ApplicationException(DbzErrorMessages.期間が不正_追加メッセージあり２
+                throw new ApplicationException(UrErrorMessages.期間が不正_追加メッセージあり２
                         .getMessage().replace(div.getTxtYoteiStartTime().getValue().toString(),
                                 div.getTxtKaisaiEndTime().getValue().toString()));
             }
