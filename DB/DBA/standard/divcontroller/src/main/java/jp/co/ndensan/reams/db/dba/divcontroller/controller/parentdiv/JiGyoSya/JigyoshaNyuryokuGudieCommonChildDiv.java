@@ -34,7 +34,7 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
         ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> responseData = new ResponseData<>();
 
         mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
-        createHandlerOf(requestDiv).load(mode);
+        createHandlerOf(requestDiv).initialize(mode);
         responseData.data = requestDiv;
 
         return responseData;
@@ -60,6 +60,19 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
             }
         }
         createHandlerOf(requestDiv).search_Jigyosya(DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class));
+        return createResponseData(requestDiv);
+    }
+
+    /**
+     * クリアボタン。<br/>
+     *
+     * @param requestDiv JigyoshaNyuryokuGudieCommonChildDivDiv
+     * @return ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv>
+     */
+    public ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> onclick_BtnClear(JigyoshaNyuryokuGudieCommonChildDivDiv requestDiv) {
+
+        mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
+        createHandlerOf(requestDiv).clear(mode);
         return createResponseData(requestDiv);
     }
 

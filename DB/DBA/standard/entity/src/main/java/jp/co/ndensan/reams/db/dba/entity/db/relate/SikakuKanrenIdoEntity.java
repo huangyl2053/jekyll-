@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.entity.db.relate;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
@@ -32,5 +33,5 @@ public class SikakuKanrenIdoEntity implements IDbAccessable {
     private RString shichosonMeisho2;
     private LasdecCode kyuShichosonCode;
     private RString kyuShichosonMeisho;
-
+    private RDateTime lastUpdateTimestamp;
 }

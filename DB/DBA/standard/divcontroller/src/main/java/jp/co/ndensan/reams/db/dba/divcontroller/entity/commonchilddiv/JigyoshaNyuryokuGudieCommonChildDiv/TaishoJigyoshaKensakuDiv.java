@@ -30,6 +30,8 @@ public class TaishoJigyoshaKensakuDiv extends Panel {
     private TextBoxNum txtMaxHyojiKensu;
     @JsonProperty("btnTaishoJigyoshaKensaku")
     private Button btnTaishoJigyoshaKensaku;
+    @JsonProperty("btnClear")
+    private Button btnClear;
     @JsonProperty("btnYameru")
     private Button btnYameru;
 
@@ -109,6 +111,24 @@ public class TaishoJigyoshaKensakuDiv extends Panel {
     @JsonProperty("btnTaishoJigyoshaKensaku")
     public void setBtnTaishoJigyoshaKensaku(Button btnTaishoJigyoshaKensaku) {
         this.btnTaishoJigyoshaKensaku = btnTaishoJigyoshaKensaku;
+    }
+
+    /*
+     * getbtnClear
+     * @return btnClear
+     */
+    @JsonProperty("btnClear")
+    public Button getBtnClear() {
+        return btnClear;
+    }
+
+    /*
+     * setbtnClear
+     * @param btnClear btnClear
+     */
+    @JsonProperty("btnClear")
+    public void setBtnClear(Button btnClear) {
+        this.btnClear = btnClear;
     }
 
     /*

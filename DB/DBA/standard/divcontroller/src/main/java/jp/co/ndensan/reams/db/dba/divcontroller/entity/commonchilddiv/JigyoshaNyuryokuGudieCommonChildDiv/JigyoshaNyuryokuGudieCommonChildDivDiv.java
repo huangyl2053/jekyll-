@@ -145,6 +145,16 @@ public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJi
     }
 
     @JsonIgnore
+    public Button getBtnClear() {
+        return this.getTaishoJigyoshaKensaku().getBtnClear();
+    }
+
+    @JsonIgnore
+    public void  setBtnClear(Button btnClear) {
+        this.getTaishoJigyoshaKensaku().setBtnClear(btnClear);
+    }
+
+    @JsonIgnore
     public Button getBtnYameru() {
         return this.getTaishoJigyoshaKensaku().getBtnYameru();
     }

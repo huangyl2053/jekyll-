@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -55,10 +56,10 @@ public class KaigoAtenaKihonFinder {
      * 介護資格系基本情報取得する。
      *
      * @param 識別コード ShikibetsuCode
-     * @return List<KaigoAtenaKihonBusiness>
+     * @return SearchResult<KaigoAtenaKihonBusiness>
      */
     @Transaction
-    public List<KaigoAtenaKihonBusiness> getKaigoShikakuKihon(ShikibetsuCode 識別コード) {
+    public SearchResult<KaigoAtenaKihonBusiness> getKaigoShikakuKihon(ShikibetsuCode 識別コード) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         IKaigoAtenaKihonMapper mapper = mapperProvider.create(IKaigoAtenaKihonMapper.class);
         List<KaigoAtenaKihonEntity> kaigoAtenaKihonList = mapper.selectKaigoShikakuKihonByShikibetsuCode(識別コード);
@@ -74,6 +75,6 @@ public class KaigoAtenaKihonFinder {
             介護資格基本情報.add(new KaigoAtenaKihonBusiness(entity));
             被保険者番号 = entity.getHihokenshaNo();
         }
-        return 介護資格基本情報;
+        return SearchResult.of(介護資格基本情報, 0, false);
     }
 }

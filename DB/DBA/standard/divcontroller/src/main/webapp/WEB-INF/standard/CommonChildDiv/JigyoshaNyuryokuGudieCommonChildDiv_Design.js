@@ -12,6 +12,10 @@ var DBA;
                 return "search_Jigyosya";
             };
 
+            Events.onclick_BtnClear = function () {
+                return "onclick_BtnClear";
+            };
+
             Events.close_Dialog = function () {
                 return "close_Dialog";
             };
@@ -109,6 +113,10 @@ var DBA;
 
             Controls.prototype.btnTaishoJigyoshaKensaku = function () {
                 return new UZA.Button(this.convFiledName("btnTaishoJigyoshaKensaku"));
+            };
+
+            Controls.prototype.btnClear = function () {
+                return new UZA.Button(this.convFiledName("btnClear"));
             };
 
             Controls.prototype.btnYameru = function () {

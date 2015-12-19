@@ -135,15 +135,15 @@
            </if>
            <if test = "isJigyoshaKbn">
                 AND 
-                    SUBSTRING(dbT7060Kaigo."jigyoshaNo",3,2) = #{jigyoshaKbn}
+                    SUBSTRING(dbT7060Kaigo."jigyoshaNo",3,1) = #{jigyoshaKbn}
            </if>
            <if test = "isGunshiCode">
                 AND
-                     SUBSTRING(dbT7060Kaigo."jigyoshaNo",5,2) = #{gunshiCode}
+                     SUBSTRING(dbT7060Kaigo."jigyoshaNo",4,2) = #{gunshiCode}
            </if>
         </if>
         ORDER BY
-	    dbT7060Kaigo."jigyoshaNo" limit #{limitCount}
+	    dbT7060Kaigo."jigyoshaNo"
     </select>
     
     <select id="getTekiyoJogaiInputGuide" resultMap="resultMap_tekiyoJogaiInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
@@ -215,7 +215,7 @@
         </if>
         
         ORDER BY
-              dbT1005Kaigo."jigyoshaNo" limit #{limitCount}
+              dbT1005Kaigo."jigyoshaNo"
     </select>
    <select id="getOtherTokureiInputGuide" resultMap="resultMap_otherTokureiInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
       SELECT                                                                                                     
@@ -287,6 +287,6 @@
            </if>
         </if>
         ORDER BY
-              dbT1005Kaigo."jigyoshaNo" limit #{limitCount}
+              dbT1005Kaigo."jigyoshaNo"
     </select>
 </mapper>

@@ -54,8 +54,7 @@ public class SikakuKanrenIdoFinder {
      * @param DbT7051KoseiShichosonMasterDac db7051Dac
      * @param SikakuJiyuShutoku sikaku
      */
-    public SikakuKanrenIdoFinder(
-            MapperProvider mapperProvider,
+    public SikakuKanrenIdoFinder(MapperProvider mapperProvider,
             DbT7051KoseiShichosonMasterDac db7051Dac,
             SikakuJiyuShutoku sikaku) {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
@@ -79,8 +78,8 @@ public class SikakuKanrenIdoFinder {
      * @return 一覧データ取得取得リスト
      */
     public SearchResult<SikakuKanrenIdo> getSikakuKanrenIdo(SikakuKanrenIdoParameter params) {
-        if ((params.getHihokenshaNo() == null && params.getHihokenshaNo().isEmpty())
-                || (params.getshikibetsuCode() == null && params.getshikibetsuCode().isEmpty())) {
+        if ((params.getHihokenshaNo() == null || params.getHihokenshaNo().isEmpty())
+                && (params.getshikibetsuCode() == null || params.getshikibetsuCode().isEmpty())) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage());
         }
         ISikakuKanrenIdoMapper shikakuTokusoMappers = mapperProvider.create(ISikakuKanrenIdoMapper.class);

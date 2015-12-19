@@ -95,20 +95,4 @@ public class RoreiFukushiNenkinJukyushaManager {
         return dac.countfor老齢福祉年金履歴情報を取得(
                 addCheck.getShikibetsuCode(), addCheck.getJukyuKaishiYMD());
     }
-
-    /**
-     * 受給期間の重複チェックします。
-     *
-     * @param kikancheck 老齢福祉年金情報共有子DIVのDivController
-     * @return チェック結果
-     */
-    @Transaction
-    public boolean checkKikanJuku(List<RoreiFukushiNenkinJohoMapperParameter> kikancheck) {
-        for (int i = 0; i < kikancheck.size() - 1; i++) {
-            if (kikancheck.get(i + 1).getJukyuKaishiYMD().isBefore(kikancheck.get(i).getJukyuShuryoYMD())) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
