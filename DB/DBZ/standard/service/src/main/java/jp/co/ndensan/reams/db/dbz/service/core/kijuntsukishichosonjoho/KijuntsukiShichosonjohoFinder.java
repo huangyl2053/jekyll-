@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 基準月市町村情報の取得します
  */
-public class KijuntsukiShichosonjoho {
+public class KijuntsukiShichosonjohoFinder {
 
     private final MapperProvider mapperProvider;
     private static final RString 合併なし = new RString("0");
@@ -45,14 +45,14 @@ public class KijuntsukiShichosonjoho {
     /**
      * コンストラクタです。
      */
-    KijuntsukiShichosonjoho(MapperProvider mapperProvider) {
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+    KijuntsukiShichosonjohoFinder(MapperProvider mapperProvider) {
+        this.mapperProvider = mapperProvider;
     }
 
     /**
      * コンストラクタです。
      */
-    KijuntsukiShichosonjoho() {
+    public KijuntsukiShichosonjohoFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
@@ -61,8 +61,8 @@ public class KijuntsukiShichosonjoho {
      *
      * @return JushotiTokureiFinder
      */
-    public static KijuntsukiShichosonjoho createInstance() {
-        return InstanceProvider.create(KijuntsukiShichosonjoho.class);
+    public static KijuntsukiShichosonjohoFinder createInstance() {
+        return InstanceProvider.create(KijuntsukiShichosonjohoFinder.class);
     }
 
     /**
@@ -166,7 +166,7 @@ public class KijuntsukiShichosonjoho {
         List<IKoseiShichosonMaster> koseiShiList = new ArrayList<>();
         IKijuntsukiShichosonjohoMapper mapper = mapperProvider.create(IKijuntsukiShichosonjohoMapper.class);
         List<KoseiShichosonMasterEntity> koseiList = mapper.get広域の旧合併市町村情報を取得(基準年月);
-        if (koseiList == null) {
+        if (koseiList.isEmpty()) {
             for (KoseiShichosonMasterEntity entity : koseiList) {
                 if (entity.getGappeiYMD().getDayValue() != 1) {
                     if (entity.getKokuhorenDataFromYMD().getYearMonth() == entity.getGappeiYMD().getYearMonth()
