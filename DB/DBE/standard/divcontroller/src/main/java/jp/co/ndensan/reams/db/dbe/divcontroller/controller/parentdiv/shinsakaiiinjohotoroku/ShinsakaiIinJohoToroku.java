@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -236,9 +235,9 @@ public class ShinsakaiIinJohoToroku {
     public ResponseData onClick_btnDeleteShozokuKikanIchiran(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
         if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(DbzQuestionMessages.削除の確認.getMessage()).respond();
+            return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
-        if (new RString(DbzQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 div.getDgShozokuKikanIchiran().getDataSource().remove(div.getDgShozokuKikanIchiran().getClickedItem());
             }
@@ -438,7 +437,6 @@ public class ShinsakaiIinJohoToroku {
                 Iterator<ShinsakaiIinJoho> 審査会委員情報 = 介護認定審査会委員情報更新.iterator();
                 while (審査会委員情報.hasNext()) {
                     ShinsakaiIinJoho shinsakaiIinJoho = 審査会委員情報.next();
-                    System.out.println(shinsakaiIinJoho.toEntity().getState());
                     if (EntityDataState.Modified.equals(shinsakaiIinJoho.toEntity().getState())) {
                         manager.update(shinsakaiIinJoho);
                     } else {
