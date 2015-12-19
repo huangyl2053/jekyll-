@@ -47,7 +47,7 @@
     <!--テーブルDbT5910NinteichosaItakusakiJohoの項目をDbT5910NinteichosaItakusakiJohoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT5910NinteichosaItakusakiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity" autoMapping="true">
         <id property="shichosonCode" column="dbT5910NinteichosaItakusakiJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <!--<id property="ninteichosaItakusakiCode" column="dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" />-->
+        <id property="ninteichosaItakusakiCode" column="dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertDantaiCd" column="dbT5910NinteichosaItakusakiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5910NinteichosaItakusakiJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT5910NinteichosaItakusakiJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -63,7 +63,7 @@
         <result property="jusho" column="dbT5910NinteichosaItakusakiJoho_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="telNo" column="dbT5910NinteichosaItakusakiJoho_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="faxNo" column="dbT5910NinteichosaItakusakiJoho_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
-        <result property="daihyoshaName" column="dbT5910NinteichosaItakusakiJoho_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="daihyoshaName" column="dbT5910NinteichosaItakusakiJoho_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chosaItakuKubun" column="dbT5910NinteichosaItakusakiJoho_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="waritsukeTeiin" column="dbT5910NinteichosaItakusakiJoho_waritsukeTeiin" />
         <result property="waritsukeChiku" column="dbT5910NinteichosaItakusakiJoho_waritsukeChiku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler"/>
