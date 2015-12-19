@@ -3,22 +3,24 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Nov 24 10:18:45 CST 2015
+ * Sat Dec 19 14:54:54 CST 2015 
  */
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
+
 /**
- * DataGrid1_Row のクラスファイル
- *
+ * dgChosainIchiran_Row のクラスファイル 
+ * 
  * @author 自動生成
  */
-public class DataGrid1_Row extends DataRow {
+
+public class dgChosainIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
 
     private RString jotai;
@@ -37,8 +39,12 @@ public class DataGrid1_Row extends DataRow {
     private RString jusho;
     private RString telNo;
     private RString faxNo;
+    private RString shichosonCode;
+    private RString chikuCode;
+    private RString shozokuKikanName;
+    private RString chosainShikakuCode;
 
-    public DataGrid1_Row() {
+    public dgChosainIchiran_Row() {
         super();
         this.jotai = RString.EMPTY;
         this.shichoson = RString.EMPTY;
@@ -56,6 +62,10 @@ public class DataGrid1_Row extends DataRow {
         this.jusho = RString.EMPTY;
         this.telNo = RString.EMPTY;
         this.faxNo = RString.EMPTY;
+        this.shichosonCode = RString.EMPTY;
+        this.chikuCode = RString.EMPTY;
+        this.shozokuKikanName = RString.EMPTY;
+        this.chosainShikakuCode = RString.EMPTY;
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("shichoson", shichoson);
         this.setOriginalData("chosainCode", chosainCode);
@@ -72,9 +82,13 @@ public class DataGrid1_Row extends DataRow {
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("telNo", telNo);
         this.setOriginalData("faxNo", faxNo);
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("chikuCode", chikuCode);
+        this.setOriginalData("shozokuKikanName", shozokuKikanName);
+        this.setOriginalData("chosainShikakuCode", chosainShikakuCode);
     }
 
-    public DataGrid1_Row(RString jotai, RString shichoson, TextBoxCode chosainCode, RString chosainShimei, RString chosainKanaShimei, TextBoxCode chosaItakusakiCode, RString chosaItakusakiMeisho, RString seibetsu, RString chiku, RString chosainShikaku, TextBoxNum chosaKanoNinzu, RString jokyoFlag, RString yubinNo, RString jusho, RString telNo, RString faxNo) {
+    public dgChosainIchiran_Row(RString jotai, RString shichoson, TextBoxCode chosainCode, RString chosainShimei, RString chosainKanaShimei, TextBoxCode chosaItakusakiCode, RString chosaItakusakiMeisho, RString seibetsu, RString chiku, RString chosainShikaku, TextBoxNum chosaKanoNinzu, RString jokyoFlag, RString yubinNo, RString jusho, RString telNo, RString faxNo, RString shichosonCode, RString chikuCode, RString shozokuKikanName, RString chosainShikakuCode) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("shichoson", shichoson);
@@ -92,6 +106,10 @@ public class DataGrid1_Row extends DataRow {
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("telNo", telNo);
         this.setOriginalData("faxNo", faxNo);
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("chikuCode", chikuCode);
+        this.setOriginalData("shozokuKikanName", shozokuKikanName);
+        this.setOriginalData("chosainShikakuCode", chosainShikakuCode);
         this.jotai = jotai;
         this.shichoson = shichoson;
         this.chosainCode = chosainCode;
@@ -108,6 +126,10 @@ public class DataGrid1_Row extends DataRow {
         this.jusho = jusho;
         this.telNo = telNo;
         this.faxNo = faxNo;
+        this.shichosonCode = shichosonCode;
+        this.chikuCode = chikuCode;
+        this.shozokuKikanName = shozokuKikanName;
+        this.chosainShikakuCode = chosainShikakuCode;
     }
 
     public RString getJotai() {
@@ -172,6 +194,22 @@ public class DataGrid1_Row extends DataRow {
 
     public RString getFaxNo() {
         return faxNo;
+    }
+
+    public RString getShichosonCode() {
+        return shichosonCode;
+    }
+
+    public RString getChikuCode() {
+        return chikuCode;
+    }
+
+    public RString getShozokuKikanName() {
+        return shozokuKikanName;
+    }
+
+    public RString getChosainShikakuCode() {
+        return chosainShikakuCode;
     }
 
     public void setJotai(RString jotai) {
@@ -254,36 +292,25 @@ public class DataGrid1_Row extends DataRow {
         this.faxNo = faxNo;
     }
 
+    public void setShichosonCode(RString shichosonCode) {
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.shichosonCode = shichosonCode;
+    }
+
+    public void setChikuCode(RString chikuCode) {
+        this.setOriginalData("chikuCode", chikuCode);
+        this.chikuCode = chikuCode;
+    }
+
+    public void setShozokuKikanName(RString shozokuKikanName) {
+        this.setOriginalData("shozokuKikanName", shozokuKikanName);
+        this.shozokuKikanName = shozokuKikanName;
+    }
+
+    public void setChosainShikakuCode(RString chosainShikakuCode) {
+        this.setOriginalData("chosainShikakuCode", chosainShikakuCode);
+        this.chosainShikakuCode = chosainShikakuCode;
+    }
+
     // </editor-fold>
-    void setChikuCode(RString rString) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void setJigyoshaMeisho(RString rString) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void setNinteichosaItakusakiCode(RString rString) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void getTelNo(TelNo telNo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void getFaxNo(TelNo telNo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void setChosaKanoNinzuPerMonth(RString rString) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void setShichosonMeisho(RString rString) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void setNinteiChosainNo(ChosainCode chosainCode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
