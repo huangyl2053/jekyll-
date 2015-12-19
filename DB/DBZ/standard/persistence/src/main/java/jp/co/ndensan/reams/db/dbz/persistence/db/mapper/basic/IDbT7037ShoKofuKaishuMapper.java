@@ -26,6 +26,8 @@ public interface IDbT7037ShoKofuKaishuMapper {
      * @return 
      */
     int updateShoKaishuKanri(DbT7037ShoKofuKaishuEntity entity);
+
+    int updateShokaishuKanriRnlisakuju(DbT7037ShoKofuKaishuEntity entity);
     
     
 }

@@ -182,6 +182,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
      * @return 該当する被保険者台帳情報
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
+    @Transaction
     public List<DbT1001HihokenshaDaichoEntity> selectListShikibetsuCode(ShikibetsuCode 識別コード,
             FlexibleDate 取得日) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));

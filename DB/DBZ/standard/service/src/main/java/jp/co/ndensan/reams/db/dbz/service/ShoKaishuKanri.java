@@ -55,7 +55,7 @@ public class ShoKaishuKanri {
                 (削除.equals(syokofukaisyuzyohouEntity.get更新_削除区分())) {
                 dbT7037ShoKofuKaishuEntity.setIsDeleted(true);
                 dbT7037ShoKofuKaishuEntity.setHakkoShoriTimestamp(new YMDHMS(RDate.getNowDateTime()));
-                dac.update(dbT7037ShoKofuKaishuEntity);
+                dac.updateShokaishuKanriRnlisakuju(dbT7037ShoKofuKaishuEntity);
             }           
         }
     }
