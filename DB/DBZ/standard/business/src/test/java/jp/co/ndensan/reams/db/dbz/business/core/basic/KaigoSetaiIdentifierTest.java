@@ -53,7 +53,8 @@ public class KaigoSetaiIdentifierTest extends DbzTestBase {
 
         @Test
         public void シリアライズできる() {
-            KaigoSetaiIdentifier sut = new KaigoSetaiIdentifier(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分, 課税年度, 課税非課税区分);
+//            KaigoSetaiIdentifier sut = new KaigoSetaiIdentifier(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分, 課税年度, 課税非課税区分);
+            KaigoSetaiIdentifier sut = new KaigoSetaiIdentifier(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分);
             assertThat(sut, is(serializable()));
         }
     }

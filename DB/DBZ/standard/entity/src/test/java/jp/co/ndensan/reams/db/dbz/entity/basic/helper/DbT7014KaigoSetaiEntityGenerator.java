@@ -42,10 +42,10 @@ public final class DbT7014KaigoSetaiEntityGenerator {
         entity.setSetaiInkanriRenban(DEFAULT_世帯員管理連番);
         entity.setSetaiInshikibetsuCode(DEFAULT_世帯員識別コード);
         entity.setHonninKubun(DEFAULT_本人区分);
-        entity.setKazeiNendo(DEFAULT_課税年度);
-        entity.setKazeiHikazeiKubun(DEFAULT_課税非課税区分);
-        entity.setGokeiShotokuKingaku(DEFAULT_合計所得金額);
-        entity.setKazeiNenkinShunyugaku(DEFAULT_課税年金収入額);
+//        entity.setKazeiNendo(DEFAULT_課税年度);
+//        entity.setKazeiHikazeiKubun(DEFAULT_課税非課税区分);
+//        entity.setGokeiShotokuKingaku(DEFAULT_合計所得金額);
+//        entity.setKazeiNenkinShunyugaku(DEFAULT_課税年金収入額);
         return entity;
     }
 }

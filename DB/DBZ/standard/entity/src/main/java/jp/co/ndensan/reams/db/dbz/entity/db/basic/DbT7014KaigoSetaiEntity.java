@@ -42,10 +42,6 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
     private int setaiInkanriRenban;
     private ShikibetsuCode setaiInshikibetsuCode;
     private RString honninKubun;
-    private FlexibleYear kazeiNendo;
-    private RString kazeiHikazeiKubun;
-    private Decimal gokeiShotokuKingaku;
-    private Decimal kazeiNenkinShunyugaku;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -209,86 +205,11 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
     }
 
     /**
-     * 課税年度のgetメソッドです。
-     *
-     * @return 課税年度
-     */
-    public FlexibleYear getKazeiNendo() {
-        return kazeiNendo;
-    }
-
-    /**
-     * 課税年度のsetメソッドです。
-     *
-     * @param kazeiNendo 課税年度
-     */
-    public void setKazeiNendo(FlexibleYear kazeiNendo) {
-        this.kazeiNendo = kazeiNendo;
-    }
-
-    /**
-     * 課税非課税区分のgetメソッドです。
-     * <br/>
-     * <br/>1:課税　2:非課税　3:未申告　4:所得調査中
-     *
-     * @return 課税非課税区分
-     */
-    public RString getKazeiHikazeiKubun() {
-        return kazeiHikazeiKubun;
-    }
-
-    /**
-     * 課税非課税区分のsetメソッドです。
-     * <br/>
-     * <br/>1:課税　2:非課税　3:未申告　4:所得調査中
-     *
-     * @param kazeiHikazeiKubun 課税非課税区分
-     */
-    public void setKazeiHikazeiKubun(RString kazeiHikazeiKubun) {
-        this.kazeiHikazeiKubun = kazeiHikazeiKubun;
-    }
-
-    /**
-     * 合計所得金額のgetメソッドです。
-     *
-     * @return 合計所得金額
-     */
-    public Decimal getGokeiShotokuKingaku() {
-        return gokeiShotokuKingaku;
-    }
-
-    /**
-     * 合計所得金額のsetメソッドです。
-     *
-     * @param gokeiShotokuKingaku 合計所得金額
-     */
-    public void setGokeiShotokuKingaku(Decimal gokeiShotokuKingaku) {
-        this.gokeiShotokuKingaku = gokeiShotokuKingaku;
-    }
-
-    /**
-     * 課税年金収入額のgetメソッドです。
-     *
-     * @return 課税年金収入額
-     */
-    public Decimal getKazeiNenkinShunyugaku() {
-        return kazeiNenkinShunyugaku;
-    }
-
-    /**
-     * 課税年金収入額のsetメソッドです。
-     *
-     * @param kazeiNenkinShunyugaku 課税年金収入額
-     */
-    public void setKazeiNenkinShunyugaku(Decimal kazeiNenkinShunyugaku) {
-        this.kazeiNenkinShunyugaku = kazeiNenkinShunyugaku;
-    }
-
-    /**
      * このエンティティの主キーが他の{@literal DbT7014KaigoSetaiEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT7014KaigoSetaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT7014KaigoSetaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7014KaigoSetaiEntity other) {
@@ -321,10 +242,6 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
         this.setaiInkanriRenban = entity.setaiInkanriRenban;
         this.setaiInshikibetsuCode = entity.setaiInshikibetsuCode;
         this.honninKubun = entity.honninKubun;
-        this.kazeiNendo = entity.kazeiNendo;
-        this.kazeiHikazeiKubun = entity.kazeiHikazeiKubun;
-        this.gokeiShotokuKingaku = entity.gokeiShotokuKingaku;
-        this.kazeiNenkinShunyugaku = entity.kazeiNenkinShunyugaku;
     }
 
     /**
@@ -334,7 +251,7 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hihokenshaNo, kanriShikibetsuKubun, setaiHaakuKijunYMD, setaiInkanriRenban, setaiInshikibetsuCode, honninKubun, kazeiNendo, kazeiHikazeiKubun, gokeiShotokuKingaku, kazeiNenkinShunyugaku);
+        return super.toMd5(hihokenshaNo, kanriShikibetsuKubun, setaiHaakuKijunYMD, setaiInkanriRenban, setaiInshikibetsuCode, honninKubun);
     }
 
 // </editor-fold>

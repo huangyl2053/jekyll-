@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7014KaigoSetaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+//import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+//import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KaigoSetai}の編集を行うビルダークラスです。
@@ -110,54 +110,6 @@ public class KaigoSetaiBuilder {
     public KaigoSetaiBuilder set本人区分(RString 本人区分) {
         requireNonNull(本人区分, UrSystemErrorMessages.値がnull.getReplacedMessage("本人区分"));
         entity.setHonninKubun(本人区分);
-        return this;
-    }
-
-    /**
-     * 課税年度を設定します。
-     *
-     * @param 課税年度 課税年度
-     * @return {@link KaigoSetaiBuilder}
-     */
-    public KaigoSetaiBuilder set課税年度(FlexibleYear 課税年度) {
-        requireNonNull(課税年度, UrSystemErrorMessages.値がnull.getReplacedMessage("課税年度"));
-        entity.setKazeiNendo(課税年度);
-        return this;
-    }
-
-    /**
-     * 課税非課税区分を設定します。
-     *
-     * @param 課税非課税区分 課税非課税区分
-     * @return {@link KaigoSetaiBuilder}
-     */
-    public KaigoSetaiBuilder set課税非課税区分(RString 課税非課税区分) {
-        requireNonNull(課税非課税区分, UrSystemErrorMessages.値がnull.getReplacedMessage("課税非課税区分"));
-        entity.setKazeiHikazeiKubun(課税非課税区分);
-        return this;
-    }
-
-    /**
-     * 合計所得金額を設定します。
-     *
-     * @param 合計所得金額 合計所得金額
-     * @return {@link KaigoSetaiBuilder}
-     */
-    public KaigoSetaiBuilder set合計所得金額(Decimal 合計所得金額) {
-        requireNonNull(合計所得金額, UrSystemErrorMessages.値がnull.getReplacedMessage("合計所得金額"));
-        entity.setGokeiShotokuKingaku(合計所得金額);
-        return this;
-    }
-
-    /**
-     * 課税年金収入額を設定します。
-     *
-     * @param 課税年金収入額 課税年金収入額
-     * @return {@link KaigoSetaiBuilder}
-     */
-    public KaigoSetaiBuilder set課税年金収入額(Decimal 課税年金収入額) {
-        requireNonNull(課税年金収入額, UrSystemErrorMessages.値がnull.getReplacedMessage("課税年金収入額"));
-        entity.setKazeiNenkinShunyugaku(課税年金収入額);
         return this;
     }
 
