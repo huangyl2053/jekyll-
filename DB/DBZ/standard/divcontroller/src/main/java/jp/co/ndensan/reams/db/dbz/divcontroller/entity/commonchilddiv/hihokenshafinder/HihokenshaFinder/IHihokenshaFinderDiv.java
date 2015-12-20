@@ -64,13 +64,6 @@ public interface IHihokenshaFinderDiv extends ICommonChildDivBaseProperties {
     boolean is住所地特例者();
 
     /**
-     * みなし２号を含むかどうかを返します。
-     *
-     * @return true:含む、false:含まない
-     */
-    boolean isみなし２号含む();
-
-    /**
      * 最大表示件数を返します。
      *
      * @return 最大表示件数
