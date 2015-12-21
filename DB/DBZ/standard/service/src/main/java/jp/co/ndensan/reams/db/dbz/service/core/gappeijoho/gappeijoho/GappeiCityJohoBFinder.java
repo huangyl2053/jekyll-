@@ -195,13 +195,19 @@ public class GappeiCityJohoBFinder {
     public SearchResult<GappeiCityJyoho> getSennyoukouikigappeijohokensaku(RString hyoujiUmu, RString 導入形態コード) {
         requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage("表示有無区分"));
         requireNonNull(導入形態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("導入形態コード"));
+        IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
+        GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForTannitsugappeijoho(hyoujiUmu);
         List<GappeiCityJyoho> gappeiCityJyohoList = new ArrayList<>();
+        List<GappeiCityJyohoRelateEntity> 合併情報検索結果Entityリスト = new ArrayList<>();
         if (((合併区分_あり).equals(getGappeijohokubun())) && (!導入形態コード.isEmpty() && 導入形態コード.length() >= 2)) {
             if (単一.equals(導入形態コード.substringEmptyOnError(1, 2))) {
-                gappeiCityJyohoList = getTannitsugappeijoho(hyoujiUmu).records();
+                合併情報検索結果Entityリスト = gappeiJyohoMapper.getSennyoukouikigappeijohokensaku単一(params);
             } else if (広域.equals(導入形態コード.substringEmptyOnError(1, 2))) {
-                gappeiCityJyohoList = getKouikigappeijoho(hyoujiUmu).records();
+                合併情報検索結果Entityリスト = gappeiJyohoMapper.getSennyoukouikigappeijohokensaku広域(params);
             }
+        }
+        for (GappeiCityJyohoRelateEntity entity : 合併情報検索結果Entityリスト) {
+            gappeiCityJyohoList.add(new GappeiCityJyoho(entity));
         }
         return SearchResult.of(gappeiCityJyohoList, 0, false);
     }

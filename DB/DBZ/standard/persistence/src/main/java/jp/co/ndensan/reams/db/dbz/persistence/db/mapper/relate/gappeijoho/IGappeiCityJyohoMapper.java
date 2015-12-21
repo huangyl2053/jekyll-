@@ -64,6 +64,22 @@ public interface IGappeiCityJyohoMapper {
     List<GappeiCityJyohoRelateEntity> getKouikigappeijohokennsaku(GappeiJyohoSpecificParameter params);
 
     /**
+     * 合併市町村情報検索の取得処理します。
+     *
+     * @param params 合併市町村情報取得用パラメータクラス
+     * @return List<GappeiCityJyohoRelateEntity>
+     */
+    List<GappeiCityJyohoRelateEntity> getSennyoukouikigappeijohokensaku単一(GappeiJyohoSpecificParameter params);
+
+    /**
+     * 合併市町村情報検索の取得処理します。
+     *
+     * @param params 合併市町村情報取得用パラメータクラス
+     * @return List<GappeiCityJyohoRelateEntity>
+     */
+    List<GappeiCityJyohoRelateEntity> getSennyoukouikigappeijohokensaku広域(GappeiJyohoSpecificParameter params);
+
+    /**
      * 検索キーによる単一合併市町村情報の取得処理します。
      *
      * @param params 合併市町村情報取得用パラメータクラス
