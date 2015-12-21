@@ -96,7 +96,7 @@ public class HihokenshanotsukibanFinder {
     }
 
     private static HihokenshaNo getHubanHouhou(ShikibetsuCode 識別コード) {
-        HihokenshaNo 被保険者番号 = null;
+        HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
         RString 付番方法 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_付番方法, SubGyomuCode.DBA介護資格);
         if (HANTEIYOU_ICHI.equals(付番方法)) {
             被保険者番号 = new HihokenshaNo(new RString(識別コード.toString()).
@@ -118,7 +118,7 @@ public class HihokenshanotsukibanFinder {
     }
 
     private static HihokenshaNo getHubanHouhouHanteiYonn(ShikibetsuCode 識別コード) {
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("");
+        HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
         RString 付番元 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報, SubGyomuCode.DBA介護資格);
         RString 開始位置 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_開始位置, SubGyomuCode.DBA介護資格);
         RString 有効桁数 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_有効桁数, SubGyomuCode.DBA介護資格);
