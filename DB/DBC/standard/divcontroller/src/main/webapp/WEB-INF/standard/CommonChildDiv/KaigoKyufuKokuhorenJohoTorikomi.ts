@@ -19,9 +19,45 @@ module DBC
             public PublicProperties() {
                 return new PublicProperties(this.fieldName);
             }
+            
+            public priorities(): Array {
+                return [
+                    "表示モード"
+                ];
+            }
+
+            public 表示モード() {
+                return new Modes.表示モード(this.controls);
+            }
         }
 
         export module Modes {
+        
+        	export class 表示モード {
+                private controls: Controls;
+
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                public Mode1(): void {
+                    this.controls.ShoriTaishoJoho().displayNone = true;
+                    this.controls.KakuninJikoMsg().displayNone = true;
+                    this.controls.ShutsuRyokujun().displayNone = true;
+                }
+                
+                public ModeShutsuryokujunJoken2(): void {
+                    this.controls.ShoriTaishoJoho().displayNone = true;
+                    this.controls.KakuninJikoMsg().displayNone = true;
+                    this.controls.ShutsuRyokujun().displayNone = false;
+                }
+                
+                public ModeKakuninMsgJoken3(): void {
+                    this.controls.ShoriTaishoJoho().displayNone = false;
+                    this.controls.KakuninJikoMsg().displayNone = false;
+                    this.controls.ShutsuRyokujun().displayNone = false;
+                }
+            }
         }
     }
 }
