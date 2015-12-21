@@ -39,6 +39,15 @@ public class ChosainJohoManager {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link ChosainJohoManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link ChosainJohoManager}のインスタンス
+     */
+    public static ChosainJohoManager createInstance() {
+        return InstanceProvider.create(ChosainJohoManager.class);
+    }
+
+    /**
      * 調査員情報を全件返します。
      *
      * @return ChosainJohoの{@code list}
@@ -68,5 +77,21 @@ public class ChosainJohoManager {
             return false;
         }
         return 1 == dac.save(調査員情報.toEntity());
+    }
+
+    /**
+     * 調査員情報{@link ChosainJoho}を保存します。
+     *
+     * @param 調査員情報 {@link ChosainJoho}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean saveOrDelete調査員情報(ChosainJoho 調査員情報) {
+        requireNonNull(調査員情報, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員情報"));
+        if (!調査員情報.hasChanged()) {
+            return false;
+        }
+
+        return 1 == dac.saveOrDelete(調査員情報.toEntity());
     }
 }

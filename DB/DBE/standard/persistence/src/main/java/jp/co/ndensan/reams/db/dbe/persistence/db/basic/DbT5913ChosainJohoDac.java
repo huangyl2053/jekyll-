@@ -87,4 +87,17 @@ public class DbT5913ChosainJohoDac implements ISaveable<DbT5913ChosainJohoEntity
 
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * DbT5913ChosainJohoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 件数
+     */
+    @Transaction
+    public int saveOrDelete(DbT5913ChosainJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員情報エンティティ"));
+
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
 }

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 調査員情報検索用RelateEntityクラスです
+ * 調査員情報検索用RelateEntityクラスです。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

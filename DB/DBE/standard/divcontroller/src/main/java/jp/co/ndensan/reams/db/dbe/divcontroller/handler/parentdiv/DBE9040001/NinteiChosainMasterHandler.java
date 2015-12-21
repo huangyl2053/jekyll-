@@ -269,18 +269,47 @@ public class NinteiChosainMasterHandler {
     }
 
     public ChosainJoho editChosainJoho(ChosainJoho chosainJoho) {
+        Decimal chosaKanoNinzu = div.getChosainJohoInput().getTxtChosaKanoNinzu().getValue();
+        int 調査可能人数_月 = 0;
+        if (chosaKanoNinzu != null) {
+            調査可能人数_月 = chosaKanoNinzu.intValue();
+        }
         return chosainJoho.createBuilderForEdit().set調査員氏名(div.getChosainJohoInput().getTxtChosainShimei().getValue())
                 .set調査員氏名カナ(div.getChosainJohoInput().getTxtChosainKanaShimei().getValue())
                 .set性別(div.getChosainJohoInput().getRadSeibetsu().getSelectedKey())
                 .set調査員資格(div.getChosainJohoInput().getDdlChosainShikaku().getSelectedKey())
                 .set地区コード(div.getChosainJohoInput().getTxtChiku().getValue())
-                .set調査可能人数_月(div.getChosainJohoInput().getTxtChosaKanoNinzu().getValue().intValue())
+                .set調査可能人数_月(調査可能人数_月)
                 .set郵便番号(div.getChosainJohoInput().getTxtYubinNo().getValue())
                 .set住所(div.getChosainJohoInput().getTxtJusho().getDomain())
                 .set電話番号(div.getChosainJohoInput().getTxtTelNo().getDomain())
                 .setFAX番号(div.getChosainJohoInput().getTxtFaxNo().getDomain())
                 .set所属機関名称(div.getChosainJohoInput().getTextBoxShozokuKikan().getDomain().value())
                 .set状況フラグ(CODE_有効.equals(div.getChosainJohoInput().getRadChosainJokyo().getSelectedKey())).build();
+    }
+
+    public void setTxtShichosonmei() {
+        UzT0007CodeEntity code = CodeMaster.getCode(
+                SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(div.getChosainJohoInput().getTxtShichoson().getValue()));
+        if (code != null) {
+            div.getChosainJohoInput().getTxtShichosonmei().setValue(code.getコード名称());
+        }
+    }
+
+    public void setTxtChosaItakusakiMeisho() {
+        UzT0007CodeEntity code = CodeMaster.getCode(
+                SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()));
+        if (code != null) {
+            div.getChosainJohoInput().getTxtChosaItakusakiMeisho().setValue(code.getコード名称());
+        }
+    }
+
+    public void setTxtChikuMei() {
+        UzT0007CodeEntity code = CodeMaster.getCode(
+                SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(div.getChosainJohoInput().getTxtChiku().getValue()));
+        if (code != null) {
+            div.getChosainJohoInput().getTxtChikuMei().setValue(code.getコード名称());
+        }
     }
 
     public void setDisabledChosainJohoToMeisai() {

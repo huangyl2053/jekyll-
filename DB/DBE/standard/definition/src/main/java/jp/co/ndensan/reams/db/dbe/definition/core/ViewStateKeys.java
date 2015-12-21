@@ -11,5 +11,6 @@ package jp.co.ndensan.reams.db.dbe.definition.core;
 public enum ViewStateKeys {
 
     状態,
+    認定調査委託先コード,
     認定調査員マスタ検索結果
 }

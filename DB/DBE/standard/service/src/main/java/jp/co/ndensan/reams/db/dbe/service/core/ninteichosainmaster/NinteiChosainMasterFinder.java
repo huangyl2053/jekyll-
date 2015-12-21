@@ -12,6 +12,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosainmaster.NinteiChosainMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterSearchParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosainmaster.NinteiChosainMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosainmaster.INinteiChosainMasterMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
@@ -94,5 +95,41 @@ public class NinteiChosainMasterFinder {
             businessList.add(new ChosainJoho(entity));
         }
         return SearchResult.of(businessList, 0, false);
+    }
+
+    /**
+     * 検索条件に従い、調査員情報の件数を検索します。
+     *
+     * @param 調査員情報検索条件 調査員情報検索条件
+     * @return 調査員情報の件数
+     */
+    @Transaction
+    public int getChosainJohoCount(NinteiChosainMasterSearchParameter 調査員情報検索条件) {
+        INinteiChosainMasterMapper mapper = mapperProvider.create(INinteiChosainMasterMapper.class);
+        return mapper.selectChosainJohoCount(調査員情報検索条件);
+    }
+
+    /**
+     * 検索条件に従い、要介護認定申請情報の件数を検索します。
+     *
+     * @param 調査員情報検索条件 調査員情報検索条件
+     * @return 要介護認定申請情報の件数
+     */
+    @Transaction
+    public int getNinteiShinseiJohoCount(NinteiChosainMasterSearchParameter 調査員情報検索条件) {
+        INinteiChosainMasterMapper mapper = mapperProvider.create(INinteiChosainMasterMapper.class);
+        return mapper.selectNinteiShinseiJohoCount(調査員情報検索条件);
+    }
+
+    /**
+     * 検索条件に従い、認定調査依頼情報の件数を検索します。
+     *
+     * @param 調査員情報検索条件 調査員情報検索条件
+     * @return 認定調査依頼情報の件数
+     */
+    @Transaction
+    public int getNinteichosaIraiJohoCount(NinteiChosainMasterSearchParameter 調査員情報検索条件) {
+        INinteiChosainMasterMapper mapper = mapperProvider.create(INinteiChosainMasterMapper.class);
+        return mapper.selectNinteichosaIraiJohoCount(調査員情報検索条件);
     }
 }
