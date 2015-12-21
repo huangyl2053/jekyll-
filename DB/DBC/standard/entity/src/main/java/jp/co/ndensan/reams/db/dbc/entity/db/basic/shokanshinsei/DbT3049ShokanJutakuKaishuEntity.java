@@ -1,25 +1,26 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.Objects;
 import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 償還払請求住宅改修テーブルのエンティティクラスです。
  */
 public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049ShokanJutakuKaishuEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3049ShokanJutakuKaishu");
@@ -43,17 +44,20 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
     @PrimaryKey
     private RString yoshikiNo;
     @PrimaryKey
-    private RString junjiNo;
+    private RString meisaiNo;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private RString renban;
     private ServiceCode serviceCode;
     private FlexibleDate jutakuKaishuChakkoYMD;
+    private RString jutakuKaishuNaiyo;
     private RString jutakuKaishuJigyoshaName;
     private RString jutakuKaishuJutakuAddress;
     private int kaishuKingaku;
     private RString shinsaHohoKubunCode;
     private FlexibleDate jutakuKaishuKanseiYMD;
     private int sagakuKingaku;
+    private FlexibleYearMonth jizenServiceTeikyoYM;
+    private RString jizenSeiriNo;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -114,7 +118,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      *
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
@@ -132,7 +136,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      *
      * @param serviceTeikyoYM サービス提供年月
      */
-    public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
+    public void setServiceTeikyoYM(@Nonnull FlexibleYearMonth serviceTeikyoYM) {
         this.serviceTeikyoYM = serviceTeikyoYM;
     }
 
@@ -150,7 +154,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      *
      * @param seiriNo 整理番号
      */
-    public void setSeiriNo(RString seiriNo) {
+    public void setSeiriNo(@Nonnull RString seiriNo) {
         this.seiriNo = seiriNo;
     }
 
@@ -168,7 +172,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      *
      * @param jigyoshaNo 事業者番号
      */
-    public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(@Nonnull JigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
@@ -186,48 +190,48 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      *
      * @param yoshikiNo 様式番号
      */
-    public void setYoshikiNo(RString yoshikiNo) {
+    public void setYoshikiNo(@Nonnull RString yoshikiNo) {
         this.yoshikiNo = yoshikiNo;
     }
 
     /**
-     * 順次番号のgetメソッドです。
+     * 明細番号のgetメソッドです。
      * <br/>
      * <br/>複数レコード対応のため
      *
-     * @return 順次番号
+     * @return 明細番号
      */
-    public RString getJunjiNo() {
-        return junjiNo;
+    public RString getMeisaiNo() {
+        return meisaiNo;
     }
 
     /**
-     * 順次番号のsetメソッドです。
+     * 明細番号のsetメソッドです。
      * <br/>
      * <br/>複数レコード対応のため
      *
-     * @param junjiNo 順次番号
+     * @param meisaiNo 明細番号
      */
-    public void setJunjiNo(RString junjiNo) {
-        this.junjiNo = junjiNo;
+    public void setMeisaiNo(@Nonnull RString meisaiNo) {
+        this.meisaiNo = meisaiNo;
     }
 
     /**
-     * 履歴番号のgetメソッドです。
+     * 連番のgetメソッドです。
      *
-     * @return 履歴番号
+     * @return 連番
      */
-    public Decimal getRirekiNo() {
-        return rirekiNo;
+    public RString getRenban() {
+        return renban;
     }
 
     /**
-     * 履歴番号のsetメソッドです。
+     * 連番のsetメソッドです。
      *
-     * @param rirekiNo 履歴番号
+     * @param renban 連番
      */
-    public void setRirekiNo(Decimal rirekiNo) {
-        this.rirekiNo = rirekiNo;
+    public void setRenban(@Nonnull RString renban) {
+        this.renban = renban;
     }
 
     /**
@@ -235,6 +239,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      *
      * @return サービスコード
      */
+    @CheckForNull
     public ServiceCode getServiceCode() {
         return serviceCode;
     }
@@ -253,6 +258,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      *
      * @return 住宅改修着工年月日
      */
+    @CheckForNull
     public FlexibleDate getJutakuKaishuChakkoYMD() {
         return jutakuKaishuChakkoYMD;
     }
@@ -267,10 +273,30 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
     }
 
     /**
+     * 住宅改修内容のgetメソッドです。
+     *
+     * @return 住宅改修内容
+     */
+    @CheckForNull
+    public RString getJutakuKaishuNaiyo() {
+        return jutakuKaishuNaiyo;
+    }
+
+    /**
+     * 住宅改修内容のsetメソッドです。
+     *
+     * @param jutakuKaishuNaiyo 住宅改修内容
+     */
+    public void setJutakuKaishuNaiyo(RString jutakuKaishuNaiyo) {
+        this.jutakuKaishuNaiyo = jutakuKaishuNaiyo;
+    }
+
+    /**
      * 住宅改修事業者名のgetメソッドです。
      *
      * @return 住宅改修事業者名
      */
+    @CheckForNull
     public RString getJutakuKaishuJigyoshaName() {
         return jutakuKaishuJigyoshaName;
     }
@@ -289,6 +315,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      *
      * @return 住宅改修住宅住所
      */
+    @CheckForNull
     public RString getJutakuKaishuJutakuAddress() {
         return jutakuKaishuJutakuAddress;
     }
@@ -307,6 +334,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      *
      * @return 改修金額
      */
+    @CheckForNull
     public int getKaishuKingaku() {
         return kaishuKingaku;
     }
@@ -325,6 +353,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      *
      * @return 審査方法区分コード
      */
+    @CheckForNull
     public RString getShinsaHohoKubunCode() {
         return shinsaHohoKubunCode;
     }
@@ -343,6 +372,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      *
      * @return 住宅改修完成年月日
      */
+    @CheckForNull
     public FlexibleDate getJutakuKaishuKanseiYMD() {
         return jutakuKaishuKanseiYMD;
     }
@@ -361,6 +391,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      *
      * @return 差額金額
      */
+    @CheckForNull
     public int getSagakuKingaku() {
         return sagakuKingaku;
     }
@@ -375,11 +406,48 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
     }
 
     /**
+     * 事前申請サービス提供年月のgetメソッドです。
+     *
+     * @return 事前申請サービス提供年月
+     */
+    @CheckForNull
+    public FlexibleYearMonth getJizenServiceTeikyoYM() {
+        return jizenServiceTeikyoYM;
+    }
+
+    /**
+     * 事前申請サービス提供年月のsetメソッドです。
+     *
+     * @param jizenServiceTeikyoYM 事前申請サービス提供年月
+     */
+    public void setJizenServiceTeikyoYM(FlexibleYearMonth jizenServiceTeikyoYM) {
+        this.jizenServiceTeikyoYM = jizenServiceTeikyoYM;
+    }
+
+    /**
+     * 事前申請整理番号のgetメソッドです。
+     *
+     * @return 事前申請整理番号
+     */
+    @CheckForNull
+    public RString getJizenSeiriNo() {
+        return jizenSeiriNo;
+    }
+
+    /**
+     * 事前申請整理番号のsetメソッドです。
+     *
+     * @param jizenSeiriNo 事前申請整理番号
+     */
+    public void setJizenSeiriNo(RString jizenSeiriNo) {
+        this.jizenSeiriNo = jizenSeiriNo;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT3049ShokanJutakuKaishuEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT3049ShokanJutakuKaishuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT3049ShokanJutakuKaishuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3049ShokanJutakuKaishuEntity other) {
@@ -401,10 +469,10 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
         if (!Objects.equals(this.yoshikiNo, other.yoshikiNo)) {
             return false;
         }
-        if (!Objects.equals(this.junjiNo, other.junjiNo)) {
+        if (!Objects.equals(this.meisaiNo, other.meisaiNo)) {
             return false;
         }
-        if (this.rirekiNo != other.rirekiNo) {
+        if (!Objects.equals(this.renban, other.renban)) {
             return false;
         }
         return true;
@@ -420,16 +488,19 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
         this.seiriNo = entity.seiriNo;
         this.jigyoshaNo = entity.jigyoshaNo;
         this.yoshikiNo = entity.yoshikiNo;
-        this.junjiNo = entity.junjiNo;
-        this.rirekiNo = entity.rirekiNo;
+        this.meisaiNo = entity.meisaiNo;
+        this.renban = entity.renban;
         this.serviceCode = entity.serviceCode;
         this.jutakuKaishuChakkoYMD = entity.jutakuKaishuChakkoYMD;
+        this.jutakuKaishuNaiyo = entity.jutakuKaishuNaiyo;
         this.jutakuKaishuJigyoshaName = entity.jutakuKaishuJigyoshaName;
         this.jutakuKaishuJutakuAddress = entity.jutakuKaishuJutakuAddress;
         this.kaishuKingaku = entity.kaishuKingaku;
         this.shinsaHohoKubunCode = entity.shinsaHohoKubunCode;
         this.jutakuKaishuKanseiYMD = entity.jutakuKaishuKanseiYMD;
         this.sagakuKingaku = entity.sagakuKingaku;
+        this.jizenServiceTeikyoYM = entity.jizenServiceTeikyoYM;
+        this.jizenSeiriNo = entity.jizenSeiriNo;
     }
 
     /**
@@ -439,7 +510,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, jigyoshaNo, yoshikiNo, junjiNo, rirekiNo, serviceCode, jutakuKaishuChakkoYMD, jutakuKaishuJigyoshaName, jutakuKaishuJutakuAddress, kaishuKingaku, shinsaHohoKubunCode, jutakuKaishuKanseiYMD, sagakuKingaku);
+        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, jigyoshaNo, yoshikiNo, meisaiNo, renban, serviceCode, jutakuKaishuChakkoYMD, jutakuKaishuNaiyo, jutakuKaishuJigyoshaName, jutakuKaishuJutakuAddress, kaishuKingaku, shinsaHohoKubunCode, jutakuKaishuKanseiYMD, sagakuKingaku, jizenServiceTeikyoYM, jizenSeiriNo);
     }
 
 // </editor-fold>
