@@ -35,6 +35,8 @@ public class HihokenshanotsukibanFinder {
     private static final RString 付番方法_任意手入力付番 = new RString("3");
     private static final RString 付番方法_カスタマイズ付番 = new RString("4");
     private static final RString 付番方法_自動連番_MCD10付番 = new RString("5");
+    private static final RString 付番元情報_住民コード = new RString("1");
+    private static final RString 付番元情報_自動連番 = new RString("2");
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
     private final DbT7037ShoKofuKaishuDac dbT7037Dac;
 
@@ -126,10 +128,10 @@ public class HihokenshanotsukibanFinder {
         RString 後付与番号桁数 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号_桁数, SubGyomuCode.DBA介護資格);
         RString 後付与番号 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号, SubGyomuCode.DBA介護資格);
 
-        if (付番方法_住民コード付番.equals(付番元)) {
+        if (付番元情報_住民コード.equals(付番元)) {
             付番元 = new RString(識別コード.toString()).substring(識別コード_LENGTH).trim();
         }
-        if (付番方法_自動連番付番.equals(付番元)) {
+        if (付番元情報_自動連番.equals(付番元)) {
             付番元 = Saiban.get(SubGyomuCode.DBA介護資格, SaibanHanyokeyName.被保険者番号自動採番.getコード()).nextString().trim();
         }
         if (((開始位置 != null && !開始位置.isEmpty() && 0 != Integer.parseInt(開始位置.toString()))
