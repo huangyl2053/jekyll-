@@ -96,7 +96,7 @@
         WHERE
         "hihokenshaNo"=#{hihokenshaNo}											
         AND "kofuShoShurui"=#{kofuShoShurui}
-        AND "logicalDeletedFlag"= false
+        AND "isDeleted"= false
         </update>
         
         <update id="updateShokaishuKanriRnlisakuju" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity">
@@ -108,6 +108,6 @@
         WHERE
         "hihokenshaNo"=#{hihokenshaNo}											
         AND "kofuShoShurui"=#{kofuShoShurui}
-        AND "logicalDeletedFlag"= false    
+        AND "isDeleted"= false    
         </update>
 </mapper>

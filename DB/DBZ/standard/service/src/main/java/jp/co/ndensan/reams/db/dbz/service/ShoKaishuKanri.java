@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 証交付回収の更新処理クラスです。
  * 
- * @author x_wangxs2
+ * 
  */
 public class ShoKaishuKanri {
     private static final RString 修正 = new RString("1");
