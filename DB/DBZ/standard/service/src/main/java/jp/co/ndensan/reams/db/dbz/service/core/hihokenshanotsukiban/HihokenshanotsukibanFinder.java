@@ -28,13 +28,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class HihokenshanotsukibanFinder {
 
-    private static final HihokenshaNo 空白 = new HihokenshaNo("");
-    private static final int HANTEIYOU_10 = 10;
-    private static final RString HANTEIYOU_ICHI = new RString("1");
-    private static final RString HANTEIYOU_NI = new RString("2");
-    private static final RString HANTEIYOU_SAN = new RString("3");
-    private static final RString HANTEIYOU_YONN = new RString("4");
-    private static final RString HANTEIYOU_GO = new RString("5");
+    private static final int 付番方法_LENGTH = 10;
+    private static final int 識別コード_LENGTH = 4;
+    private static final RString 付番方法_住民コード付番 = new RString("1");
+    private static final RString 付番方法_自動連番付番 = new RString("2");
+    private static final RString 付番方法_任意手入力付番 = new RString("3");
+    private static final RString 付番方法_カスタマイズ付番 = new RString("4");
+    private static final RString 付番方法_自動連番_MCD10付番 = new RString("5");
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
     private final DbT7037ShoKofuKaishuDac dbT7037Dac;
 
@@ -88,7 +88,7 @@ public class HihokenshanotsukibanFinder {
         } else {
             被保険者番号 = entityDbT1001.getHihokenshaNo();
         }
-        if (被保険者番号.getColumnValue().length() != HANTEIYOU_10) {
+        if (被保険者番号.getColumnValue().length() != 付番方法_LENGTH) {
             throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage());
         } else {
             return 被保険者番号;
@@ -98,20 +98,19 @@ public class HihokenshanotsukibanFinder {
     private static HihokenshaNo getHubanHouhou(ShikibetsuCode 識別コード) {
         HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
         RString 付番方法 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_付番方法, SubGyomuCode.DBA介護資格);
-        if (HANTEIYOU_ICHI.equals(付番方法)) {
-            被保険者番号 = new HihokenshaNo(new RString(識別コード.toString()).
-                    substring(識別コード.toString().length() - HANTEIYOU_10, 識別コード.toString().length()).trim());
+        if (付番方法_住民コード付番.equals(付番方法)) {
+            被保険者番号 = new HihokenshaNo(new RString(識別コード.toString()).substring(識別コード_LENGTH).trim());
         }
-        if (HANTEIYOU_NI.equals(付番方法)) {
+        if (付番方法_自動連番付番.equals(付番方法)) {
             被保険者番号 = new HihokenshaNo(Saiban.get(SubGyomuCode.DBA介護資格, SaibanHanyokeyName.被保険者番号自動採番.getコード()).nextString().trim());
         }
-        if (HANTEIYOU_SAN.equals(付番方法)) {
-            被保険者番号 = 空白;
+        if (付番方法_任意手入力付番.equals(付番方法)) {
+            return 被保険者番号;
         }
-        if (HANTEIYOU_YONN.equals(付番方法)) {
+        if (付番方法_カスタマイズ付番.equals(付番方法)) {
             被保険者番号 = getHubanHouhouHanteiYonn(識別コード);
         }
-        if (HANTEIYOU_GO.equals(付番方法)) {
+        if (付番方法_自動連番_MCD10付番.equals(付番方法)) {
             被保険者番号 = new HihokenshaNo(Saiban.get(SubGyomuCode.DBA介護資格, SaibanHanyokeyName.被保険者番号自動MCD.getコード()).nextString().trim());
         }
         return 被保険者番号;
@@ -127,11 +126,10 @@ public class HihokenshanotsukibanFinder {
         RString 後付与番号桁数 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号_桁数, SubGyomuCode.DBA介護資格);
         RString 後付与番号 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号, SubGyomuCode.DBA介護資格);
 
-        if (HANTEIYOU_ICHI.equals(付番元)) {
-            付番元 = new RString(識別コード.toString()).
-                    substring(識別コード.toString().length() - HANTEIYOU_10, 識別コード.toString().length()).trim();
+        if (付番方法_住民コード付番.equals(付番元)) {
+            付番元 = new RString(識別コード.toString()).substring(識別コード_LENGTH).trim();
         }
-        if (HANTEIYOU_NI.equals(付番元)) {
+        if (付番方法_自動連番付番.equals(付番元)) {
             付番元 = Saiban.get(SubGyomuCode.DBA介護資格, SaibanHanyokeyName.被保険者番号自動採番.getコード()).nextString().trim();
         }
         if (((開始位置 != null && !開始位置.isEmpty() && 0 != Integer.parseInt(開始位置.toString()))
