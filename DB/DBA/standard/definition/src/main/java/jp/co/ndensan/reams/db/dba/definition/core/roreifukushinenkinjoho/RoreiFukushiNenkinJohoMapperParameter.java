@@ -25,14 +25,6 @@ public final class RoreiFukushiNenkinJohoMapperParameter {
     private final FlexibleDate jukyuKaishiYMD;
     private final FlexibleDate jukyuShuryoYMD;
 
-    /**
-     * 老齢福祉年金情報取得処理のパラメータです。
-     *
-     * @param shikibetsuCode 識別コード
-     * @param jukyuKaishiYMD 受給開始年月日
-     * @param hihokenshaNo 被保険者番号
-     * @param jukyuShuryoYMD 受給終了年月日
-     */
     private RoreiFukushiNenkinJohoMapperParameter(
             ShikibetsuCode shikibetsuCode,
             FlexibleDate jukyuKaishiYMD,
