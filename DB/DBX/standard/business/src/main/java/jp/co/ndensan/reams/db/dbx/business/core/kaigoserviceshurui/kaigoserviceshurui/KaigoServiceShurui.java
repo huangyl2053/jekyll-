@@ -28,7 +28,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護サービス種類を管理するクラスです。
  */
-public class KaigoServiceShurui extends ParentModelBase<KaigoServiceShuruiIdentifier, DbT7130KaigoServiceShuruiEntity, KaigoServiceShurui> implements Serializable {
+public class KaigoServiceShurui
+        extends ParentModelBase<KaigoServiceShuruiIdentifier, DbT7130KaigoServiceShuruiEntity, KaigoServiceShurui>
+        implements Serializable {
 
     private final DbT7130KaigoServiceShuruiEntity entity;
     private final KaigoServiceShuruiIdentifier id;
@@ -42,16 +44,16 @@ public class KaigoServiceShurui extends ParentModelBase<KaigoServiceShuruiIdenti
      * @param 提供開始年月 提供開始年月
      */
     public KaigoServiceShurui(KaigoServiceShuruiCode サービス種類コード,
-FlexibleYearMonth 提供開始年月) {
+                              FlexibleYearMonth 提供開始年月) {
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         requireNonNull(提供開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("提供開始年月"));
         this.entity = new DbT7130KaigoServiceShuruiEntity();
         this.entity.setServiceShuruiCd(サービス種類コード);
         this.entity.setTeikyoKaishiYM(提供開始年月);
         this.id = new KaigoServiceShuruiIdentifier(
-        サービス種類コード,
-        提供開始年月
-                );
+                サービス種類コード,
+                提供開始年月
+        );
         this.kaigoServiceNaiyou = Models.create(new ArrayList<KaigoServiceNaiyou>());
     }
 
@@ -61,7 +63,6 @@ FlexibleYearMonth 提供開始年月) {
      *
      * @param entity DBより取得した{@link DbT7130KaigoServiceShuruiEntity}
      */
-
     public KaigoServiceShurui(KaigoServiceShuruiEntity entity) {
         this.entity = requireNonNull(entity.get介護サービス種類Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("介護サービス種類"));
         this.id = new KaigoServiceShuruiIdentifier(
@@ -73,7 +74,6 @@ FlexibleYearMonth 提供開始年月) {
         }
         this.kaigoServiceNaiyou = Models.create(kaigoServiceNaiyouList);
     }
-
 
     /**
      * シリアライズ、ビルダー用コンストラクタです。

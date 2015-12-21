@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyosha;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyosha.*;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -24,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護事業者代表者のデータアクセスクラスです。
  */
-public class DbT7062KaigoJigyoshaDaihyoshaDac implements ISaveable<DbT7062KaigoJigyoshaDaihyoshaEntity> {
+public class DbT7062KaigoJigyoshaDaihyoshaDac {
 
     @InjectSession
     private SqlSession session;
@@ -75,7 +74,6 @@ public class DbT7062KaigoJigyoshaDaihyoshaDac implements ISaveable<DbT7062KaigoJ
      * @return 登録件数
      */
     @Transaction
-    @Override
     public int save(DbT7062KaigoJigyoshaDaihyoshaEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護事業者代表者エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。

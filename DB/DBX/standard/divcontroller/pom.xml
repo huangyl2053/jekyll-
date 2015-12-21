@@ -22,6 +22,10 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>DbxService</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>DbxPersistence</artifactId>
             <scope>runtime</scope>
         </dependency>

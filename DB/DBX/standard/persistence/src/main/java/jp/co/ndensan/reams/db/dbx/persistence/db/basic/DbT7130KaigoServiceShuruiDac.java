@@ -11,7 +11,6 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShur
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui.teikyoKaishiYM;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -25,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護サービス種類のデータアクセスクラスです。
  */
-public class DbT7130KaigoServiceShuruiDac implements ISaveable<DbT7130KaigoServiceShuruiEntity> {
+public class DbT7130KaigoServiceShuruiDac {
 
     @InjectSession
     private SqlSession session;
@@ -50,8 +49,8 @@ public class DbT7130KaigoServiceShuruiDac implements ISaveable<DbT7130KaigoServi
         return accessor.select().
                 table(DbT7130KaigoServiceShurui.class).
                 where(and(
-                eq(serviceShuruiCd, サービス種類コード),
-                eq(teikyoKaishiYM, 提供開始年月))).
+                                eq(serviceShuruiCd, サービス種類コード),
+                                eq(teikyoKaishiYM, 提供開始年月))).
                 toObject(DbT7130KaigoServiceShuruiEntity.class);
     }
 
@@ -76,7 +75,6 @@ public class DbT7130KaigoServiceShuruiDac implements ISaveable<DbT7130KaigoServi
      * @return 登録件数
      */
     @Transaction
-    @Override
     public int save(DbT7130KaigoServiceShuruiEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護サービス種類エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。

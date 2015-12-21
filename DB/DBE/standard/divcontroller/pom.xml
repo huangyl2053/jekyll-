@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-		<!-- DBE -->
+        <!-- DBE -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbeDefinition</artifactId>
@@ -32,8 +32,13 @@
             <artifactId>DbePersistence</artifactId>
             <scope>runtime</scope>
         </dependency>
-		<!-- DBX -->
-		<!-- DBZ -->
+        <!-- DBX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxDivController</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
+        <!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzDefinition</artifactId>
@@ -42,7 +47,7 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzBusiness</artifactId>
         </dependency>
-	    <dependency>
+        <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzService</artifactId>
         </dependency>
@@ -51,19 +56,19 @@
             <artifactId>DbzDivController</artifactId>
             <classifier>classes</classifier>
         </dependency>
-		<!-- 公開系 -->
-		<dependency>
-			<groupId>jp.co.ndensan.reams.ur.urz</groupId>
-			<artifactId>UrzDivController</artifactId>
-			<classifier>classes</classifier>
-		</dependency>
-	    <dependency>
-			<groupId>jp.co.ndensan.reams.ua.uax</groupId>
-			<artifactId>UaxDivController</artifactId>
-			<classifier>classes</classifier>
-		</dependency>
-		<!-- テスト -->
-		<!-- ツール -->
+        <!-- 公開系 -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzDivController</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxDivController</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
+        <!-- テスト -->
+        <!-- ツール -->
         <dependency>
             <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
             <artifactId>requestSettings-maven-plugin</artifactId>

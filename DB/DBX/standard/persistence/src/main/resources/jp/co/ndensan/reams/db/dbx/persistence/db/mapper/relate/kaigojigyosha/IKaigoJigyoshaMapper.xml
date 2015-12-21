@@ -11,9 +11,9 @@
         <association property="手帳情報Entity" resultMap="jp.co.ndensan.reams.fd.fdz.persistence.db.mapper.basic.fda.IFdT1301SeishinTechoMapper.resultMap_FdT1301SeishinTechoEntity"/>
         <collection property="任意項目情報Entity" resultMap="jp.co.ndensan.reams.fd.fdz.persistence.db.mapper.basic.fda.IFdT1309SeishinTechoNiniMapper.resultMap_FdT1309SeishinTechoNiniEntity"/>
     </resultMap>
-     <select id="getEntity" 
-            resultMap="resultMap_DbT7060KaigoJigyoshaEntity"
-            parameterType="">
+    <select id="getEntity"
+             resultMap="resultMap_DbT7060KaigoJigyoshaEntity"
+             parameterType="">
         SELECT
         <include refid="allColumns_DbT7060KaigoJigyosha"/>
         FROM
@@ -22,14 +22,14 @@
         "jigyoshaNo" = #{JigyoshaNo}
         AND
         "yukoKaishiYMD"=#{yukoKaishiYMD}
-         AS dbT7060KaigoJigyosha
+        AS dbT7060KaigoJigyosha
         INNER JOIN
         (SELECT
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7062KaigoJigyoshaDaihyoshaMapper.allColumns_DbT7062KaigoJigyoshaDaihyosha"/>
         FROM
         rgba."DbT7062KaigoJigyoshaDaihyosha"
         )AS  dbT7062KaigoJigyoshaDaihyosha
-        ON 
+        ON
         dbT7060KaigoJigyosha."dbT7060KaigoJigyosha_jigyoshaNo"=dbT7062KaigoJigyoshaDaihyosha."dbT7062KaigoJigyoshaDaihyosha_jigyoshaNo"
         AND
         dbT7060KaigoJigyosha."dbT7060KaigoJigyosha_yukoKaishiYMD"=dbT7062KaigoJigyoshaDaihyosha."dbT7062KaigoJigyoshaDaihyosha_yukoKaishiYMD"
@@ -44,6 +44,6 @@
         AN
         dbT7060KaigoJigyosha."dbT7060KaigoJigyosha_yukoKaishiYMD"=dbT7063KaigoJigyoshaShiteiService."dbT7063KaigoJigyoshaShiteiService_yukoKaishiYMD"
         ;
-     </select>
+    </select>
 
 </mapper>

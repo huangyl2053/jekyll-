@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihy
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyoshaBuilder;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiServiceBuilder;
-import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.KaigoJigyosha.KaigoJigyoshaMapperParameter;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigojigyosha.KaigoJigyoshaMapperParameter;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
@@ -53,7 +53,7 @@ public class KaigoJigyoshaManagerTest {
 //    private static KaigoJigyoshaDac relateDac;
     private static MapperProvider provider;
     private static IKaigoJigyoshaMapper mapper;
-  // 介護事業者
+    // 介護事業者
     private static DbT7060KaigoJigyoshaDac dac;
     private static KaigoJigyoshaManager sut;
     private static KaigoJigyoshaDaihyoshaManager 介護事業者代表者Manager;
@@ -70,23 +70,22 @@ public class KaigoJigyoshaManagerTest {
         dac = mock(DbT7060KaigoJigyoshaDac.class);
         介護事業者代表者Manager = mock(KaigoJigyoshaDaihyoshaManager.class);
         介護事業者指定サービスManager = mock(KaigoJigyoshaShiteiServiceManager.class);
-        sut = new KaigoJigyoshaManager(provider, dac, 
-介護事業者代表者Manager,
-介護事業者指定サービスManager);
+        sut = new KaigoJigyoshaManager(provider, dac,
+                                       介護事業者代表者Manager,
+                                       介護事業者指定サービスManager);
         事業者番号 = DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_事業者番号;
         サービス種類コード = DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_サービス種類コード;
         有効開始日 = DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_有効開始日;
     }
-    
-    
+
     public static class createInstanceのテスト {
-    
+
         @Test
         public void createInstanceのテスト_戻り値はnullでない() {
             KaigoJigyoshaManager result = KaigoJigyoshaManager.createInstance();
             assertNotNull(result);
         }
-        
+
         @Test
         public void createInstanceのテスト_クラスのインスタンスが取得できる() {
             KaigoJigyoshaManager result = KaigoJigyoshaManager.createInstance();
@@ -107,7 +106,6 @@ public class KaigoJigyoshaManagerTest {
 
             when(provider.create(any(Class.class))).thenReturn(mapper);
 
-            
             KaigoJigyoshaMapperParameter 介護事業者検索条件 = KaigoJigyoshaMapperParameter.createSelectByKeyParam(事業者番号, 有効開始日);
             KaigoJigyosha result = sut.get介護事業者(介護事業者検索条件);
 
@@ -125,7 +123,6 @@ public class KaigoJigyoshaManagerTest {
             KaigoJigyoshaMapperParameter 介護事業者検索条件 = KaigoJigyoshaMapperParameter.createSelectByKeyParam(事業者番号, 有効開始日);
             KaigoJigyosha result = sut.get介護事業者(介護事業者検索条件);
 
-
             assertThat(result.get事業者番号().value(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_事業者番号.value()));
         }
     }
@@ -140,8 +137,7 @@ public class KaigoJigyoshaManagerTest {
             when(介護事業者指定サービスManager.save介護事業者指定サービス(any(KaigoJigyoshaShiteiService.class))).thenReturn(true);
             KaigoJigyosha 介護事業者 = TestSupport.createKaigoJigyosha(事業者番号, サービス種類コード, 有効開始日);
 
-            assertThat(sut.save(介護事業者)
-                    , is(true));
+            assertThat(sut.save(介護事業者), is(true));
         }
 
         @Test
@@ -152,8 +148,7 @@ public class KaigoJigyoshaManagerTest {
             when(介護事業者指定サービスManager.save介護事業者指定サービス(any(KaigoJigyoshaShiteiService.class))).thenReturn(false);
             KaigoJigyosha 介護事業者 = TestSupport.createKaigoJigyosha(事業者番号, サービス種類コード, 有効開始日);
 
-            assertThat(sut.save(介護事業者)
-                    , is(false));
+            assertThat(sut.save(介護事業者), is(false));
         }
 
         @Test
@@ -167,8 +162,7 @@ public class KaigoJigyoshaManagerTest {
             介護事業者 = TestSupport.initializeKaigoJigyosha(介護事業者);
             介護事業者 = TestSupport.modifiedKaigoJigyosha(介護事業者);
 
-            assertThat(sut.save(介護事業者)
-                    , is(true));
+            assertThat(sut.save(介護事業者), is(true));
         }
 
         @Test
@@ -182,8 +176,7 @@ public class KaigoJigyoshaManagerTest {
             介護事業者 = TestSupport.initializeKaigoJigyosha(介護事業者);
             介護事業者 = TestSupport.modifiedKaigoJigyosha(介護事業者);
 
-            assertThat(sut.save(介護事業者)
-                    , is(false));
+            assertThat(sut.save(介護事業者), is(false));
         }
 
         @Test
@@ -197,8 +190,7 @@ public class KaigoJigyoshaManagerTest {
             介護事業者 = TestSupport.initializeKaigoJigyosha(介護事業者);
             介護事業者 = 介護事業者.deleted();
 
-            assertThat(sut.save(介護事業者)
-                    , is(true));
+            assertThat(sut.save(介護事業者), is(true));
         }
 
         @Test
@@ -212,8 +204,7 @@ public class KaigoJigyoshaManagerTest {
             介護事業者 = TestSupport.initializeKaigoJigyosha(介護事業者);
             介護事業者 = 介護事業者.deleted();
 
-            assertThat(sut.save(介護事業者)
-                    , is(false));
+            assertThat(sut.save(介護事業者), is(false));
         }
 
         @Test
@@ -226,37 +217,37 @@ public class KaigoJigyoshaManagerTest {
             KaigoJigyosha 介護事業者 = TestSupport.createKaigoJigyosha(事業者番号, サービス種類コード, 有効開始日);
             介護事業者 = TestSupport.initializeKaigoJigyosha(介護事業者);
 
-            assertThat(sut.save(介護事業者)
-                    , is(false));
+            assertThat(sut.save(介護事業者), is(false));
         }
     }
 
     private static class TestSupport {
 
         public static KaigoJigyosha createKaigoJigyosha(KaigoJigyoshaNo 事業者番号,
-            KaigoServiceShuruiCode サービス種類コード,
-            FlexibleDate 有効開始日) {
+                                                        KaigoServiceShuruiCode サービス種類コード,
+                                                        FlexibleDate 有効開始日) {
             KaigoJigyosha 介護事業者 = new KaigoJigyosha(事業者番号, 有効開始日);
             return 介護事業者.createBuilderForEdit()
-// 介護事業者代表者
-                    .setKaigoJigyoshaDaihyosha(createKaigoJigyoshaDaihyosha(事業者番号, 
-                    有効開始日))
-// 介護事業者指定サービス
+                    // 介護事業者代表者
+                    .setKaigoJigyoshaDaihyosha(createKaigoJigyoshaDaihyosha(事業者番号,
+                                                                            有効開始日))
+                    // 介護事業者指定サービス
                     .setKaigoJigyoshaShiteiService(createKaigoJigyoshaShiteiService(事業者番号, サービス種類コード, 有効開始日))
                     .build();
         }
 
 // 介護事業者代表者
         private static KaigoJigyoshaDaihyosha createKaigoJigyoshaDaihyosha(KaigoJigyoshaNo 事業者番号,
-            FlexibleDate 有効開始日) {
+                                                                           FlexibleDate 有効開始日) {
             return new KaigoJigyoshaDaihyosha(
-                    事業者番号, 
+                    事業者番号,
                     有効開始日);
         }
 // 介護事業者指定サービス
+
         private static KaigoJigyoshaShiteiService createKaigoJigyoshaShiteiService(KaigoJigyoshaNo 事業者番号,
-            KaigoServiceShuruiCode サービス種類コード,
-            FlexibleDate 有効開始日) {
+                                                                                   KaigoServiceShuruiCode サービス種類コード,
+                                                                                   FlexibleDate 有効開始日) {
             return new KaigoJigyoshaShiteiService(
                     事業者番号, サービス種類コード, 有効開始日);
         }
@@ -297,9 +288,9 @@ public class KaigoJigyoshaManagerTest {
 // TODO 下記のXXX部は本メソッドの引数名に変更してください。
             介護事業者 = 介護事業者.createBuilderForEdit()
                     .set事業者住所カナ(new RString("交付備考を変更"))
-// 介護事業者代表者
+                    // 介護事業者代表者
                     .setKaigoJigyoshaDaihyosha(KaigoJigyoshaDaihyosha)
-// 介護事業者指定サービス
+                    // 介護事業者指定サービス
                     .setKaigoJigyoshaShiteiService(KaigoJigyoshaShiteiService)
                     .build();
             return 介護事業者.modifiedModel();

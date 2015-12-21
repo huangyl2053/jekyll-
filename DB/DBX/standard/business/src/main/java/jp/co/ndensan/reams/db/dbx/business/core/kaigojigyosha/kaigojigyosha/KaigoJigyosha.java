@@ -51,7 +51,7 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
      * @param 有効開始日 有効開始日
      */
     public KaigoJigyosha(KaigoJigyoshaNo 事業者番号,
-            FlexibleDate 有効開始日) {
+                         FlexibleDate 有効開始日) {
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(有効開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始日"));
         this.entity = new DbT7060KaigoJigyoshaEntity();
@@ -78,14 +78,14 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
                 entity.get介護事業者Entity().getYukoKaishiYMD());
 
         List<KaigoJigyoshaDaihyosha> kaigoJigyoshaDaihyoshaList = new ArrayList<>();
-        for (DbT7062KaigoJigyoshaDaihyoshaEntity KaigoJigyoshaDaihyoshaEntity : entity.get介護事業者代表者Entity()) {
-            kaigoJigyoshaDaihyoshaList.add(new KaigoJigyoshaDaihyosha(KaigoJigyoshaDaihyoshaEntity));
+        for (DbT7062KaigoJigyoshaDaihyoshaEntity daihyosha : entity.get介護事業者代表者Entity()) {
+            kaigoJigyoshaDaihyoshaList.add(new KaigoJigyoshaDaihyosha(daihyosha));
         }
         this.kaigoJigyoshaDaihyosha = Models.create(kaigoJigyoshaDaihyoshaList);
 
         List<KaigoJigyoshaShiteiService> kaigoJigyoshaShiteiServiceList = new ArrayList<>();
-        for (DbT7063KaigoJigyoshaShiteiServiceEntity KaigoJigyoshaShiteiServiceEntity : entity.get介護事業者指定サービスEntity()) {
-            kaigoJigyoshaShiteiServiceList.add(new KaigoJigyoshaShiteiService(KaigoJigyoshaShiteiServiceEntity));
+        for (DbT7063KaigoJigyoshaShiteiServiceEntity service : entity.get介護事業者指定サービスEntity()) {
+            kaigoJigyoshaShiteiServiceList.add(new KaigoJigyoshaShiteiService(service));
         }
         this.kaigoJigyoshaShiteiService = Models.create(kaigoJigyoshaShiteiServiceList);
     }
@@ -412,6 +412,12 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
         return new KaigoJigyosha(modifiedEntity, id, kaigoJigyoshaDaihyosha, kaigoJigyoshaShiteiService);
     }
 
+    /**
+     * 指定のキーに該当する介護事業者代表者を返します。
+     *
+     * @param id キー
+     * @return キーに該当する介護事業者代表者
+     */
     public KaigoJigyoshaDaihyosha getKaigoJigyoshaDaihyoshaList(KaigoJigyoshaDaihyoshaIdentifier id) {
         if (kaigoJigyoshaDaihyosha.contains(id)) {
             return kaigoJigyoshaDaihyosha.clone().get(id);
@@ -419,10 +425,21 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 介護事業者代表者のリストを返します。
+     *
+     * @return 介護事業者代表者のリスト
+     */
     public List<KaigoJigyoshaDaihyosha> getKaigoJigyoshaDaihyoshaList() {
         return new ArrayList<>(kaigoJigyoshaDaihyosha.values());
     }
 
+    /**
+     * 指定のキーに該当する介護事業者指定サービスを返します。
+     *
+     * @param id キー
+     * @return キーに該当する介護事業者指定サービス
+     */
     public KaigoJigyoshaShiteiService getKaigoJigyoshaShiteiServiceList(KaigoJigyoshaShiteiServiceIdentifier id) {
         if (kaigoJigyoshaShiteiService.contains(id)) {
             return kaigoJigyoshaShiteiService.clone().get(id);
@@ -430,6 +447,11 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 介護事業者指定サービスのリストを返します。
+     *
+     * @return 介護事業者指定サービスのリスト
+     */
     public List<KaigoJigyoshaShiteiService> getKaigoJigyoshaShiteiServiceList() {
         return new ArrayList<>(kaigoJigyoshaShiteiService.values());
     }
@@ -485,10 +507,7 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
             return false;
         }
         final KaigoJigyosha other = (KaigoJigyosha) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, other.id);
     }
 
 }
