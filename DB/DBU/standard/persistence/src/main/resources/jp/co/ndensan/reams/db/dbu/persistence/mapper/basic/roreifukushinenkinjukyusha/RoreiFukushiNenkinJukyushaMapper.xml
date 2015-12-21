@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.mapper.basic.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaMapper">
+         
+    <select id="jukyuKikanJufukuCheck" parameterType="jp.co.ndensan.reams.db.dbu.definition.core.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaMapperParameter"
+            resultType="int" fetchSize="500">
+        SELECT
+        COUNT(*)
+        FROM
+        rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS DbT7006
+        WHERE 
+        DbT7006."shikibetsuCode" = #{shikibetsuCode} 
+        AND 
+        DbT7006."hihokenshaNo" = #{hihokenshaNo}
+        AND 
+        DbT7006."isDeleted" <![CDATA[<>]]> TRUE
+        AND ((
+        DbT7006."jukyuShuryoYMD"<![CDATA[>]]> #{jukyuKaishiYMD}
+        AND
+        DbT7006."jukyuShuryoYMD"<![CDATA[<=]]> #{jukyuShuryoYMD}
+        )
+        OR
+        DbT7006."jukyuKaishiYMD"<![CDATA[>=]]> #{jukyuKaishiYMD}
+        AND
+        DbT7006."jukyuKaishiYMD"<![CDATA[<]]> #{jukyuShuryoYMD}
+        )
+        OR
+        DbT7006."jukyuKaishiYMD"<![CDATA[<=]]> #{jukyuKaishiYMD}
+        AND
+        DbT7006."jukyuShuryoYMD"<![CDATA[>=]]> #{jukyuShuryoYMD}
+    </select>
+</mapper>

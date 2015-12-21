@@ -67,7 +67,7 @@ public class RoreiFukushiNenkinJukyushaManager {
      * 老齢福祉年金情報の取得処理です。
      *
      * @param param RoreiFukushiNenkinJohoMapperParameter 老齢福祉年金情報パラメータ
-     * @return List<BRoreiFukushiNenkinJoho> 老齢福祉年金受給者を管理
+     * @return List<RoreiFukushiNenkinJukyusha> 老齢福祉年金受給者を管理
      */
     @Transaction
     public List<RoreiFukushiNenkinJukyusha> getRoreiFukushiNenkinJoho(RoreiFukushiNenkinJohoMapperParameter param) {
