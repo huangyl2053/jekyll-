@@ -13,11 +13,11 @@ import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShuto
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.hihokenshadaicho.IHihokenshaShikakuShutokuMapper;
-import jp.co.ndensan.reams.db.dbu.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
