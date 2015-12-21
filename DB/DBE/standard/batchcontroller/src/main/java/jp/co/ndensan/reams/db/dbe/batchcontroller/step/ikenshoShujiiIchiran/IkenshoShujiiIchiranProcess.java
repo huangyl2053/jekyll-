@@ -82,7 +82,7 @@ public class IkenshoShujiiIchiranProcess extends BatchProcessBase<IkenshoShujiiI
                 entity.getIryokikanCode().value(),
                 entity.getIryoKikanMeishoKana(),
                 entity.getDaihyoshaNameKana(),
-                entity.getTelNo() == null ? RString.EMPTY : entity.getTelNo().value(),
+                entity.getYubinNo() == null ? RString.EMPTY : entity.getYubinNo().value(),
                 entity.getTelNo() == null ? RString.EMPTY : entity.getTelNo().value(),
                 entity.isIryokikanJokyoFlag(),
                 entity.getShujiiCode() == null ? RString.EMPTY : entity.getShujiiCode().value(),
