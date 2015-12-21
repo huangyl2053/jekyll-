@@ -108,7 +108,7 @@ public final class GappeiJyohoSpecificParameter {
             useHokenshaNo = true;
         }
         if (chiikiNo != null && !chiikiNo.isEmpty()) {
-            if (chiikiNo.indexOf("%") > 0) {
+            if (chiikiNo.indexOf("%") >= 0) {
                 useChiikiNoLike = true;
             } else {
                 useChiikiNo = true;
