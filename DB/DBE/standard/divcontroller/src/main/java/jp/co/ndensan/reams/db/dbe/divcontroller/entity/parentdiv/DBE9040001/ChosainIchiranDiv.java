@@ -24,7 +24,7 @@ public class ChosainIchiranDiv extends Panel {
     @JsonProperty("btnInsert")
     private Button btnInsert;
     @JsonProperty("btnOutputCsv")
-    private ButtonDownLoad btnOutputCsv;
+    private Button btnOutputCsv;
     @JsonProperty("dgChosainIchiran")
     private DataGrid<dgChosainIchiran_Row> dgChosainIchiran;
 
@@ -57,7 +57,7 @@ public class ChosainIchiranDiv extends Panel {
      * @return btnOutputCsv
      */
     @JsonProperty("btnOutputCsv")
-    public ButtonDownLoad getBtnOutputCsv() {
+    public Button getBtnOutputCsv() {
         return btnOutputCsv;
     }
 
@@ -66,7 +66,7 @@ public class ChosainIchiranDiv extends Panel {
      * @param btnOutputCsv btnOutputCsv
      */
     @JsonProperty("btnOutputCsv")
-    public void setBtnOutputCsv(ButtonDownLoad btnOutputCsv) {
+    public void setBtnOutputCsv(Button btnOutputCsv) {
         this.btnOutputCsv = btnOutputCsv;
     }
 

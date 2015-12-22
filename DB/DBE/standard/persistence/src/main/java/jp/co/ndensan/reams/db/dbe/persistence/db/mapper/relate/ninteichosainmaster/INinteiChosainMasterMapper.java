@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.N
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterSearchParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosainmaster.NinteiChosainMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 調査員情報のマッパーインタフェースです。
@@ -54,4 +55,12 @@ public interface INinteiChosainMasterMapper {
      * @return KoseiShichosonMasterEntityの{@code list}
      */
     List<DbT5913ChosainJohoEntity> selectChosainJohoList(NinteiChosainMasterMapperParameter 検索条件);
+
+    /**
+     * 調査委託先名検索処理。
+     *
+     * @param 検索条件 検索条件
+     * @return 調査委託先名
+     */
+    RString selectNinteichosaItakusakiJoho(NinteiChosainMasterSearchParameter 検索条件);
 }

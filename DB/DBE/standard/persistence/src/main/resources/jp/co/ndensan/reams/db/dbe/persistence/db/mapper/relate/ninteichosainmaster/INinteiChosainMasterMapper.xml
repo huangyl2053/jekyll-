@@ -4,7 +4,18 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosainmaster.INinteiChosainMasterMapper">
-
+      <select id="selectNinteichosaItakusakiJoho"  
+              resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterSearchParameter">
+      SELECT
+          "DbT5910NinteichosaItakusakiJoho"."jigyoshaMeisho"
+       FROM
+         rgdb."DbT5910NinteichosaItakusakiJoho"
+      WHERE
+         "DbT5910NinteichosaItakusakiJoho"."isDeleted" = FALSE
+       AND  "DbT5910NinteichosaItakusakiJoho"."shichosonCode" = #{市町村コード}
+       AND  "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" = #{調査委託先コード}
+     </select>
      <select id="selectNinteichosaIraiJohoCount"  
               resultType="int"
               parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterSearchParameter">
@@ -22,7 +33,6 @@
         AND "DbT5051KoseiShichosonMaster"."isDeleted" = FALSE
         WHERE 
             "DbT4201NinteichosaIraiJoho"."isDeleted" = FALSE
-        AND "DbT4201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = (SELECT  MAX("ninteichosaIraiRirekiNo") FROM rgdb."DbT4201NinteichosaIraiJoho")
         AND "DbT5051KoseiShichosonMaster"."shichosonCode" = #{市町村コード}
         AND "DbT5101NinteiShinseiJoho"."ninteiChosaItakusakiCode" = #{調査委託先コード}
         AND "DbT5101NinteiShinseiJoho"."ninteiChosainCode" = #{調査員コード}
@@ -131,7 +141,10 @@
         DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode",
         DbT5913ChosainJoho."dbT5913ChosainJoho_ninteichosaItakusakiCode",
         DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainNo"
-        LIMIT #{saidaiHyojiKensu}
+        <if test="usesSaidaiHyojiKensu">
+                LIMIT #{saidaiHyojiKensu}
+        </if>
+       
     </select>
      <select id="selectChosainJohoList"  
         parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterMapperParameter" 
@@ -192,7 +205,9 @@
            DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode",
            DbT5913ChosainJoho."dbT5913ChosainJoho_ninteichosaItakusakiCode",
            DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainNo"
-        LIMIT #{saidaiHyojiKensu}
+         <if test="usesSaidaiHyojiKensu">
+                LIMIT #{saidaiHyojiKensu}
+         </if>
     </select>
     <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
     <resultMap id="resultMap_NinteiChosainMasterEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosainmaster.NinteiChosainMasterRelateEntity" autoMapping="true">

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Chos
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 調査員情報を特定するためのMyBatis用パラメータクラスです。
@@ -29,7 +30,7 @@ public class NinteiChosainMasterMapperParameter {
     private final RString 調査員氏名;
     private final RString 調査員カナ氏名;
     private final RString 地区コード;
-    private final int saidaiHyojiKensu;
+    private final Decimal saidaiHyojiKensu;
     private final boolean uses市町村コード;
     private final boolean uses調査委託先コードFrom;
     private final boolean uses調査委託先コードTo;
@@ -40,6 +41,7 @@ public class NinteiChosainMasterMapperParameter {
     private final boolean uses調査員氏名;
     private final boolean uses調査員カナ氏名;
     private final boolean uses地区コード;
+    private final boolean usesSaidaiHyojiKensu;
 
     private NinteiChosainMasterMapperParameter(
             boolean 状況フラグ,
@@ -53,6 +55,7 @@ public class NinteiChosainMasterMapperParameter {
             RString 調査員氏名,
             RString 調査員カナ氏名,
             RString 地区コード,
+            Decimal saidaiHyojiKensu,
             boolean uses市町村コード,
             boolean uses調査委託先コードFrom,
             boolean uses調査委託先コードTo,
@@ -63,7 +66,7 @@ public class NinteiChosainMasterMapperParameter {
             boolean uses調査員氏名,
             boolean uses調査員カナ氏名,
             boolean uses地区コード,
-            int saidaiHyojiKensu) {
+            boolean usesSaidaiHyojiKensu) {
 
         this.状況フラグ = 状況フラグ;
         this.市町村コード = 市町村コード;
@@ -87,6 +90,7 @@ public class NinteiChosainMasterMapperParameter {
         this.uses調査員カナ氏名 = uses調査員カナ氏名;
         this.uses地区コード = uses地区コード;
         this.saidaiHyojiKensu = saidaiHyojiKensu;
+        this.usesSaidaiHyojiKensu = usesSaidaiHyojiKensu;
     }
 
     /**
@@ -119,7 +123,7 @@ public class NinteiChosainMasterMapperParameter {
             RString 調査員氏名,
             RString 調査員カナ氏名,
             RString 地区コード,
-            int 最大表示件数
+            Decimal 最大表示件数
     ) {
         boolean uses市町村コード = false;
         if (市町村コード != null && !市町村コード.isEmpty()) {
@@ -161,6 +165,10 @@ public class NinteiChosainMasterMapperParameter {
         if (地区コード != null && !地区コード.isEmpty()) {
             uses地区コード = true;
         }
+        boolean usesSaidaiHyojiKensu = false;
+        if (最大表示件数 != null) {
+            usesSaidaiHyojiKensu = true;
+        }
         return new NinteiChosainMasterMapperParameter(
                 状況フラグ,
                 市町村コード,
@@ -173,6 +181,7 @@ public class NinteiChosainMasterMapperParameter {
                 調査員氏名,
                 調査員カナ氏名,
                 地区コード,
+                最大表示件数,
                 uses市町村コード,
                 uses調査委託先コードFrom,
                 uses調査委託先コードTo,
@@ -183,6 +192,6 @@ public class NinteiChosainMasterMapperParameter {
                 uses調査員氏名,
                 uses調査員カナ氏名,
                 uses地区コード,
-                最大表示件数);
+                usesSaidaiHyojiKensu);
     }
 }

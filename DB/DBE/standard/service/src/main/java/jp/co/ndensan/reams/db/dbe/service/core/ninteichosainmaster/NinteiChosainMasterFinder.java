@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosainmast
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -131,5 +132,17 @@ public class NinteiChosainMasterFinder {
     public int getNinteichosaIraiJohoCount(NinteiChosainMasterSearchParameter 調査員情報検索条件) {
         INinteiChosainMasterMapper mapper = mapperProvider.create(INinteiChosainMasterMapper.class);
         return mapper.selectNinteichosaIraiJohoCount(調査員情報検索条件);
+    }
+
+    /**
+     * 検索条件に従い、調査員情報の件数を検索します。
+     *
+     * @param 調査員情報検索条件 調査員情報検索条件
+     * @return 調査員情報の件数
+     */
+    @Transaction
+    public RString getNinteichosaItakusakiMeisho(NinteiChosainMasterSearchParameter 調査員情報検索条件) {
+        INinteiChosainMasterMapper mapper = mapperProvider.create(INinteiChosainMasterMapper.class);
+        return mapper.selectNinteichosaItakusakiJoho(調査員情報検索条件);
     }
 }
