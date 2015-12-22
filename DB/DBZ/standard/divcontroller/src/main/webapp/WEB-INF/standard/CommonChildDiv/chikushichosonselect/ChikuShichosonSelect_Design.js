@@ -1,30 +1,37 @@
 var DBZ;
 (function (DBZ) {
-    (function (ChikuJohoSelect) {
+    (function (ChikuShichosonSelect) {
         var Events = (function () {
             function Events() {
             }
+            Events.onOkClose_btnChoikiGuide = function () {
+                return "onOkClose_btnChoikiGuide";
+            };
+
+            Events.onOkClose_btnChikuNyuryokuGuide = function () {
+                return "onOkClose_btnChikuNyuryokuGuide";
+            };
             return Events;
         })();
-        ChikuJohoSelect.Events = Events;
+        ChikuShichosonSelect.Events = Events;
 
         var Controls = (function () {
             function Controls(fieldName) {
                 this._myName = fieldName;
             }
             Controls.myType = function () {
-                return "ChikuJohoSelect";
+                return "ChikuShichosonSelect";
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBZ.ChikuJohoSelect.Controls.myType();
+                return this._myName + "_" + DBZ.ChikuShichosonSelect.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBZ.ChikuJohoSelect.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.ChikuShichosonSelect.Controls.myType() + "_" + fieldName;
             };
 
-            Controls.prototype.ChikuJohoSelect = function () {
+            Controls.prototype.ChikuShichosonSelect = function () {
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
@@ -40,8 +47,12 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlChiku"));
             };
 
-            Controls.prototype.btnSelect = function () {
-                return new UZA.Button(this.convFiledName("btnSelect"));
+            Controls.prototype.btnChoikiGuide = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnChoikiGuide"));
+            };
+
+            Controls.prototype.btnChikuNyuryokuGuide = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnChikuNyuryokuGuide"));
             };
 
             Controls.prototype.SelectedResult = function () {
@@ -65,7 +76,7 @@ var DBZ;
             };
             return Controls;
         })();
-        ChikuJohoSelect.Controls = Controls;
-    })(DBZ.ChikuJohoSelect || (DBZ.ChikuJohoSelect = {}));
-    var ChikuJohoSelect = DBZ.ChikuJohoSelect;
+        ChikuShichosonSelect.Controls = Controls;
+    })(DBZ.ChikuShichosonSelect || (DBZ.ChikuShichosonSelect = {}));
+    var ChikuShichosonSelect = DBZ.ChikuShichosonSelect;
 })(DBZ || (DBZ = {}));
