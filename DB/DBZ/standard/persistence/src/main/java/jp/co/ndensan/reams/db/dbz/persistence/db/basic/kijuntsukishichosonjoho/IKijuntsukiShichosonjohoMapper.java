@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic.kijuntsukishichosonjoho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.KijuntsukiShichosonjoh.KijuntsukiShichosonjohMapperParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.shichosonjoh.KijuntsukiShichosonjohMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.kijuntsu.GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.kijuntsu.KoseiShichosonMasterEntity;
@@ -20,15 +20,15 @@ public interface IKijuntsukiShichosonjohoMapper {
     /**
      * 新合併市町村の取得します。
      *
-     * @param parameter
-     * @return DbT7055GappeiJohoEntity
+     * @param parameter KijuntsukiShichosonjohMapperParameter
+     * @return List <DbT7055GappeiJohoEntity>
      */
-    DbT7055GappeiJohoEntity get新合併市町村の取得(KijuntsukiShichosonjohMapperParameter parameter);
+    List<DbT7055GappeiJohoEntity> get新合併市町村の取得(KijuntsukiShichosonjohMapperParameter parameter);
 
     /**
      * 旧市町村情報を取得します。
      *
-     * @param 基準年月
+     * @param 基準年月 KijuntsukiShichosonjohMapperParameter
      * @return List<GappeiShichosonEntity>
      */
     List<GappeiShichosonEntity> get旧市町村情報を取得(KijuntsukiShichosonjohMapperParameter 基準年月);
@@ -36,7 +36,7 @@ public interface IKijuntsukiShichosonjohoMapper {
     /**
      * 広域の旧合併市町村情報の取得します。
      *
-     * @param 基準年月
+     * @param 基準年月 KijuntsukiShichosonjohMapperParameter
      * @return List<KoseiShichosonMasterEntity>
      */
     List<KoseiShichosonMasterEntity> get広域の旧合併市町村情報を取得(KijuntsukiShichosonjohMapperParameter 基準年月);
@@ -44,7 +44,7 @@ public interface IKijuntsukiShichosonjohoMapper {
     /**
      * 最新の広域構成市町村の取得します。
      *
-     * @param 基準年月
+     * @param 基準年月 KijuntsukiShichosonjohMapperParameter
      * @return List<KoseiShichosonMasterEntity>
      */
     List<KoseiShichosonMasterEntity> get最新の広域構成市町村の取得(KijuntsukiShichosonjohMapperParameter 基準年月);

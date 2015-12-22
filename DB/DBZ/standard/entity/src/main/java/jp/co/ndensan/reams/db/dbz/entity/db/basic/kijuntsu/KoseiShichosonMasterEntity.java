@@ -53,6 +53,7 @@ public class KoseiShichosonMasterEntity implements IDbAccessable {
     private RString unyoKeitaiKubun;
     private FlexibleDate gappeiYMD;
     private FlexibleDate kokuhorenDataFromYMD;
+    private LasdecCode dbt7055_shichosonCode;
 
     /**
      * 市町村識別IDのgetメソッドです。
@@ -637,5 +638,23 @@ public class KoseiShichosonMasterEntity implements IDbAccessable {
      */
     public void setGappeiYMD(@Nonnull FlexibleDate gappeiYMD) {
         this.gappeiYMD = gappeiYMD;
+    }
+
+    /**
+     * 市町村コードのgetメソッドです。
+     *
+     * @return 市町村コード
+     */
+    public LasdecCode getDbt7055_shichosonCode() {
+        return dbt7055_shichosonCode;
+    }
+
+    /**
+     * 市町村コードのsetメソッドです。
+     *
+     * @param dbt7055_shichosonCode 市町村コード
+     */
+    public void setDbt7055_shichosonCode(LasdecCode dbt7055_shichosonCode) {
+        this.dbt7055_shichosonCode = dbt7055_shichosonCode;
     }
 }
