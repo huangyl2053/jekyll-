@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbu.persistence.mapper.basic.rorenfukushinenkinjo
 import jp.co.ndensan.reams.db.dbu.definition.core.rorenfukushinenkinjohokanri.RorenFukushiNenkinJohoKanriParameter;
 
 /**
- * 老齢福祉年金受給者台帳管理です。
+ * 老齢福祉年金受給者台帳管理のマッパーインタフェースです。
  *
  */
 public interface IRorenFukushiNenkinJohoKanriMapper {
@@ -16,9 +16,9 @@ public interface IRorenFukushiNenkinJohoKanriMapper {
     /**
      * 老齢福祉年金受給者台帳管理受給期間重複チェック。
      *
-     * @param param 老齢福祉年金受給者台帳管理パラメータ
-     * @return DbT7006RoreiFukushiNenkinJukyushaEntity 受給期間重複チェック結果
+     * @param parameter 老齢福祉年金受給者台帳管理パラメータ
+     * @return 受給期間重複チェック結果
      */
-    int jukyuKikanJufukuCheck(RorenFukushiNenkinJohoKanriParameter param);
+    int jukyuKikanJufukuCheck(RorenFukushiNenkinJohoKanriParameter parameter);
 
 }

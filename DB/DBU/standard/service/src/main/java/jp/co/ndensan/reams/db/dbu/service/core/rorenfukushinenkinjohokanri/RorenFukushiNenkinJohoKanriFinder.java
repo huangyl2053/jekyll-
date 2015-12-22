@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.service.core.rorenfukushinenkinjohokanri;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbu.definition.core.rorenfukushinenkinjohokanri.RorenFukushiNenkinJohoKanriParameter;
-import jp.co.ndensan.reams.db.dbu.persistence.mapper.basic.rorenfukushinenkinjohokanri.RorenFukushiNenkinJohoKanriMapper;
+import jp.co.ndensan.reams.db.dbu.persistence.mapper.basic.rorenfukushinenkinjohokanri.IRorenFukushiNenkinJohoKanriMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 老齢福祉年金受給者台帳管理です。
+ * 老齢福祉年金受給者台帳管理するクラスです。
  *
  */
 public class RorenFukushiNenkinJohoKanriFinder {
@@ -58,7 +58,7 @@ public class RorenFukushiNenkinJohoKanriFinder {
         requireNonNull(jukyuKaishiYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("受給開始年月日"));
         requireNonNull(hihokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(jukyuShuryoYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("受給終了年月日"));
-        RorenFukushiNenkinJohoKanriMapper mapper = mapperProvider.create(RorenFukushiNenkinJohoKanriMapper.class);
+        IRorenFukushiNenkinJohoKanriMapper mapper = mapperProvider.create(IRorenFukushiNenkinJohoKanriMapper.class);
         RorenFukushiNenkinJohoKanriParameter param = RorenFukushiNenkinJohoKanriParameter.createParam_RoreiFukushi(
                 shikibetsuCode, jukyuKaishiYMD, hihokenshaNo, jukyuShuryoYMD);
         int count = mapper.jukyuKikanJufukuCheck(param);

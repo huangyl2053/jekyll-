@@ -10,15 +10,11 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
- * 老齢福祉年金受給者台帳管理です。
+ * 老齢福祉年金受給者台帳管理パラメタクラスです。
  *
  */
 public class RorenFukushiNenkinJohoKanriParameter {
 
-    /**
-     * 老齢福祉年金受給者台帳管理パラメータです。
-     *
-     */
     private final ShikibetsuCode shikibetsuCode;
     private final HihokenshaNo hihokenshaNo;
     private final FlexibleDate jukyuKaishiYMD;
@@ -55,8 +51,7 @@ public class RorenFukushiNenkinJohoKanriParameter {
                 shikibetsuCode,
                 jukyuKaishiYMD,
                 hihokenshaNo,
-                jukyuShuryoYMD
-        );
+                jukyuShuryoYMD);
     }
 
     /**
