@@ -54,12 +54,12 @@ public class KaigoNinteiShinsakaiIinShozokuKikanJohoManager {
      * 介護認定審査会委員所属機関情報{@link KaigoNinteiShinsakaiIinShozokuKikanJoho}を削除します。
      *
      * @param 介護認定審査会委員所属機関情報 {@link KaigoNinteiShinsakaiIinShozokuKikanJoho}
-     * @return 削除件数 削除結果の件数を返します。
+     * @return 物理削除件数 物理削除結果の件数を返します。
      */
     @Transaction
-    public boolean delete介護認定審査会委員所属機関情報(KaigoNinteiShinsakaiIinShozokuKikanJoho 介護認定審査会委員所属機関情報) {
+    public boolean deletePhysical介護認定審査会委員所属機関情報(KaigoNinteiShinsakaiIinShozokuKikanJoho 介護認定審査会委員所属機関情報) {
         requireNonNull(介護認定審査会委員所属機関情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員所属機関情報"));
 
-        return 1 == dac.delete(介護認定審査会委員所属機関情報.toEntity());
+        return 1 == dac.deletePhysical(介護認定審査会委員所属機関情報.toEntity());
     }
 }

@@ -3,7 +3,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.shinsakaii
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoho.ShozokuKikanIchiranFinderBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.IsHaishi;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.Sikaku;
@@ -12,6 +11,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.dgSh
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.dgShozokuKikanIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -118,9 +120,7 @@ public class ShinsakaiIinJohoTorokuHandler {
                 new FlexibleDate(div.getDgShinsaInJohoIchiran().getClickedItem().getBarthYMD().getValue().toDateString().toString()));
         div.getRadSeibetsu().setSelectedValue(new RString(div.getDgShinsaInJohoIchiran().getClickedItem().getSeibetsu() + "性"));
         div.getDdlShikakuCode().setSelectedValue(div.getDgShinsaInJohoIchiran().getClickedItem().getShikakuCode());
-//        div.getCcdshinsakaiChikuCode().load(
-//                SubGyomuCode.DBE認定支援, new CodeShubetsu("5002"),
-//                new Code(div.getDgShinsaInJohoIchiran().getClickedItem().getShinsakaiChikuCode()));
+        div.getCcdshinsakaiChikuCode().load(SubGyomuCode.DBE認定支援, new CodeShubetsu("5002"), new Code(div.getDgShinsaInJohoIchiran().getClickedItem().getShinsakaiChikuCode()));
         div.getTxtBiko().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getBiko());
     }
 
@@ -201,7 +201,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getTxtShimei().clearValue();
         div.getTxtKanaShimei().clearValue();
         div.getTxtBirthYMD().clearValue();
-        div.getRadSeibetsu().setSelectedKey(new RString("0"));
+        div.getRadSeibetsu().setSelectedKey(new RString("1"));
         div.getDdlShikakuCode().setSelectedIndex(0);
         div.getCcdshinsakaiChikuCode().clearDisplayedValues();
         div.getTxtBiko().clearValue();
@@ -269,21 +269,6 @@ public class ShinsakaiIinJohoTorokuHandler {
             return true;
         }
         return false;
-    }
-
-    /**
-     * 画面で格納される審査会委員情報はＤＢ格納用型に転換します。
-     *
-     * @return List<dgShinsaInJohoIchiran_Row>
-     */
-    public List<dgShinsaInJohoIchiran_Row> set審査会委員一覧情報ToService() {
-        for (dgShinsaInJohoIchiran_Row row : div.getDgShinsaInJohoIchiran().getDataSource()) {
-            ShinsakaiIinJohoBuilder builder = new ShinsakaiIinJoho(row.getShinsainCode()).createBuilderForEdit();
-
-//            builder.setKaigoNinteiShinsakaiIinShozokuKikanJoho(new());
-            row.getStatus();
-        };
-        return null;
     }
 
     /**

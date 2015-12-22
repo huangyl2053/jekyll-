@@ -89,7 +89,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoDac implements ISavea
      * @return 削除件数
      */
     @Transaction
-    public int delete(DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity entity) {
+    public int deletePhysical(DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員所属機関情報エンティティ"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
