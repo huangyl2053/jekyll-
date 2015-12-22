@@ -66,7 +66,7 @@ public class HihokenshaEntity {
     private RString iryoHokenKigoNo;
     private RString orderNo;
     private List<DbT1001HihokenshaDaichoEntity> dbT1001HihokenshaDaichoEntityList;
-    // TODO 蘇広俊 生活保護受給者取得方針不明、QA149提出中
+    private List<ShisetsuNyutaishoEntity> shisetsuNyutaishoEntityList;
     private List<DbT7006RoreiFukushiNenkinJukyushaEntity> dbT7006RoreiFukushiNenkinJukyushaEntityList;
     private List<DbT7037ShoKofuKaishuEntity> dbT7037ShoKofuKaishuEntityList;
     // TODO 蘇広俊 世帯情報取得方針不明、QA170提出中

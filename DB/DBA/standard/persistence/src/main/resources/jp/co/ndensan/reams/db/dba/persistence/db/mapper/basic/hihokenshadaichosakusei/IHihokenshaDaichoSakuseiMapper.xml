@@ -4,8 +4,20 @@
 
     <resultMap id="resultMap_ShisetsuNyutaishoEntity" type="jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.ShisetsuNyutaishoEntity" autoMapping="true">
         <id property="jigyoshaNo"                  column="DbT1005Kaigo_jigyoshaNo"		typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <!--<result property="jigyoshaMeisho"          column="DbT1005Kaigo_jigyoshaMeisho"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />-->
+	<result property="jigyoshaMeisho"    column="DbT1005Kaigo_jigyoshaMeisho"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
 	<result property="nyushoShisetsuShurui"    column="DbT1004Shise_nyushoShisetsuShurui"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="shikibetsuCode"    column="UrT0508Sei_shikibetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="jukyuKaishiYMD"    column="UrT0508Sei_jukyuKaishiYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="jukyuHaishiYMD"    column="UrT0508Sei_jukyuHaishiYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="jukyushaNo"    column="UrT0508Sei_jukyushaNo"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="kaigoRyoDairiNofuKubun"    column="UrT0508Sei_kaigoRyoDairiNofuKubun"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="kaigoRyoDairiNofuYM"    column="UrT0508Sei_kaigoRyoDairiNofuYM"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="kaigoRyoDairiNofuKubun"    column="UrT0508Sei_kaigoRyoDairiNofuKubun"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="kyugoShisetsuNyuTaishoKubun"    column="UrT0508Sei_kyugoShisetsuNyuTaishoKubun"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="kyugoShisetsuNyutaishoYMD"    column="UrT0508Sei_kyugoShisetsuNyutaishoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="fujoShuruiCode"    column="UrT0526Sei_fujoShuruiCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="jukyuTeishiKaishiYMD"    column="UrT0528Sei_jukyuTeishiKaishiYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="jukyuTeishiShuryoYMD"    column="UrT0528Sei_jukyuTeishiShuryoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
     <select id="getShisetsuNyutaisho"
@@ -32,8 +44,8 @@
     </select>
     
     <resultMap id="resultMap_DbT7060KaigoJigyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyoshaEntity" autoMapping="true">
-        <!--<id property="jigyoshaNo"                  column="DbT7060Kaigo_jigyoshaNo"	    typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KaigoJigyoshaNoTypeHandler" />
-        <result property="jigyoshaName"          column="DbT7060Kaigo_jigyoshaName"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />-->
+        <id property="jigyoshaNo"                  column="DbT7060Kaigo_jigyoshaNo"	    typeHandler="jp.co.ndensan.reams.db.dba.entity.typehandlers.KaigoJigyoshaNoTypeHandler" />
+	 <result property="jigyoshaName"                  column="DbT7060Kaigo_jigyoshaName"	    typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
     <select id="getKaigoJigyosha"
@@ -56,6 +68,57 @@
 	    DbT1004Shise."taishoYMD" IS NULL								
 	ORDER BY DbT7060Kaigo."yukoKaishiYMD" DESC									
 	LIMIT 1												
+    </select>
+    
+    <select id="getSeikatsuHogoJukyusha"
+            resultMap="resultMap_ShisetsuNyutaishoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter" fetchSize="500">
+	SELECT										
+		A."shikibetsuCode" AS "UrT0508Sei_shikibetsuCode",						
+		A."jukyuKaishiYMD" AS "UrT0508Sei_jukyuKaishiYMD",						
+		A."jukyuHaishiYMD" AS "UrT0508Sei_jukyuHaishiYMD",						
+		A."jukyushaNo" AS "UrT0508Sei_jukyushaNo",					
+		A."kaigoRyoDairiNofuKubun" AS "UrT0508Sei_kaigoRyoDairiNofuKubun",			
+		A."kaigoRyoDairiNofuYM" AS "UrT0508Sei_kaigoRyoDairiNofuYM",			
+		A."kyugoShisetsuNyuTaishoKubun" AS "UrT0508Sei_kyugoShisetsuNyuTaishoKubun", 				
+		A."kyugoShisetsuNyutaishoYMD" AS "UrT0508Sei_kyugoShisetsuNyutaishoYMD",					
+		B."fujoShuruiCode" AS "UrT0526Sei_fujoShuruiCode",					
+		C."jukyuTeishiKaishiYMD" AS "UrT0528Sei_jukyuTeishiKaishiYMD",					
+		C."jukyuTeishiShuryoYMD" AS "UrT0528Sei_jukyuTeishiShuryoYMD"					
+	FROM										
+		rgur."UrT0508SeikatsuHogoJukyusha" A					
+	INNER JOIN 									
+	    (									
+		SELECT								
+			"shikibetsuCode",						
+			"gyomuCode",						
+			"jukyuKaishiYMD",						
+			string_agg("fujoShuruiCode",'/') AS "fujoShuruiCode"	
+		FROM 								
+			rgur."UrT0526SeikatsuHogoFujoShurui" 							
+		GROUP BY 								
+			"shikibetsuCode",						
+			"gyomuCode",						
+			"jukyuKaishiYMD"							
+	    )B									
+	ON										
+		A."shikibetsuCode"  =  B."shikibetsuCode"								
+	AND										
+		A."gyomuCode" =  B."gyomuCode"								
+	AND										
+		A."jukyuKaishiYMD"  =  B."jukyuKaishiYMD"								
+	LEFT JOIN										
+		rgur."UrT0528SeikatsuHogoTeishikikan" C								
+	ON										
+		A."shikibetsuCode"  =  C."shikibetsuCode"									
+	AND										
+		A."gyomuCode" =  C."gyomuCode"									
+	AND										
+		A."jukyuKaishiYMD"  =  C."jukyuKaishiYMD"									
+	WHERE										
+		A."shikibetsuCode"  =  #{shikibetsuCode}									
+	AND										
+		A."gyomuCode" =  'DB'									
     </select>
     
 </mapper>

@@ -63,7 +63,7 @@ public class HihokenshaDaichoSakuseiEntity {
     private RString iryoHokenKigoNo;
     private RString orderNo;
     private List<HihokenshaDaichoDivisionEntity> 資格異動情報List;
-    // TODO 蘇広俊 生活保護受給者取得方針不明、QA149提出中
+    private List<SeikatsuHogoJukyushaDivisionEntity> 生活保護情報List;
     private List<RoreiFukushiNenkinJukyushaDivisionEntity> 老齢福祉情報List;
     private List<ShoKofuKaishuDivisionSumEntity> 証交付回収List;
     // TODO 蘇広俊 世帯情報取得方針不明、QA170提出中
