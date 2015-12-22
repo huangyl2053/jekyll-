@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.ikenshoShujiiIchiran;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -31,8 +30,8 @@ public class IkenshoShujiiIchiranRelateEntity {
     private TelNo telNo;
     private RString jusho;
     private boolean iryokikanJokyoFlag;
-    
-    private ShujiiCode shujiiCode;
+
+    private RString shujiiCode;
     private AtenaKanaMeisho shujiiKana;
     private AtenaMeisho shujiiName;
     private Code seibetsu;
