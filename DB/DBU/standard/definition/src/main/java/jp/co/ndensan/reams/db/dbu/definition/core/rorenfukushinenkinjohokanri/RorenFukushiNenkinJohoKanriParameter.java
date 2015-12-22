@@ -45,7 +45,7 @@ public class RorenFukushiNenkinJohoKanriParameter {
      * @param jukyuShuryoYMD 受給終了年月日
      * @return RoreiFukushiNenkinJohoMapperParameter 老齢福祉年金受給者台帳管理情報パラメータ
      */
-    public static RorenFukushiNenkinJohoKanriParameter createRoreiFukushiParam(
+    public static RorenFukushiNenkinJohoKanriParameter createParam_RoreiFukushi(
             ShikibetsuCode shikibetsuCode,
             FlexibleDate jukyuKaishiYMD,
             HihokenshaNo hihokenshaNo,
