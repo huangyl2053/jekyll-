@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dba.entity;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -19,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShoKofuKaishuJohoEntity {
-    
+
     private RString status;
     private FlexibleDate kofuYMD;
     private FlexibleDate yukoKigenYMD;
@@ -32,5 +31,5 @@ public class ShoKofuKaishuJohoEntity {
     private HihokenshaNo hihokenshaNo;
     private YMDHMS hakkoShoriTimestamp;
     private ShikibetsuCode shikibetsuCode;
-    
+
 }

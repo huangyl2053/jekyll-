@@ -19,8 +19,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7037ShoKofuKaishuMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
@@ -134,10 +134,10 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT7037ShoKofuKaishuEntity select更新処理(
+    public List<DbT7037ShoKofuKaishuEntity> select更新処理(
             RString 交付証種類,
             HihokenshaNo 被保険者番号,
-            RDateTime 処理日時) throws NullPointerException {
+            YMDHMS 処理日時) throws NullPointerException {
         requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage("交付証種類"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
@@ -150,7 +150,7 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
                                 eq(kofuShoShurui, 交付証種類),
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(hakkoShoriTimestamp, 処理日時))).
-                toObject(DbT7037ShoKofuKaishuEntity.class);
+                toList(DbT7037ShoKofuKaishuEntity.class);
     }
 
     /**
@@ -236,17 +236,17 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
                 limit(1).
                 toObject(DbT7037ShoKofuKaishuEntity.class);
     }
-    
-     /**
+
+    /**
      * DbT7037ShoKofuKaishuEntityを更新します。状態によってinsert/update/delete処理に振り分けられます。
-     * 
+     *
      * @param entity entity
      * @return 更新件数
      */
     public int updateShoKaishuKanri(DbT7037ShoKofuKaishuEntity entity) {
         return session.getMapper(IDbT7037ShoKofuKaishuMapper.class).updateShoKaishuKanri(entity);
     }
-    
+
     public int updateShokaishuKanriRnlisakuju(DbT7037ShoKofuKaishuEntity entity) {
         return session.getMapper(IDbT7037ShoKofuKaishuMapper.class).updateShokaishuKanriRnlisakuju(entity);
     }
