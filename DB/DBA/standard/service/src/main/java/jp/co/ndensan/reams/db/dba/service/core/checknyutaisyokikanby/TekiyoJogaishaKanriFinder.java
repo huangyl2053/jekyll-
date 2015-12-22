@@ -73,28 +73,19 @@ public class TekiyoJogaishaKanriFinder {
             }
         }
         for (int i = 1; i < 適用除外情報リスト.size(); i++) {
-            if (適用除外情報リスト.get(i).getNyushoTsuchiHakkoYMD() == null) {
-                if (FlexibleDate.MIN.equals(saidaiNyushoTsuchiHakkoYMD)) {
-                    if (適用除外情報リスト.get(i).getTaishoTsuchiHakkoYMD() == null) {
-                        return false;
-                    }
-                }
-            } else {
-                if (適用除外情報リスト.get(i).getNyushoTsuchiHakkoYMD().equals(saidaiNyushoTsuchiHakkoYMD)) {
-                    if (適用除外情報リスト.get(i).getTaishoTsuchiHakkoYMD() == null) {
-                        return false;
-                    }
-                }
+            if ((適用除外情報リスト.get(i).getNyushoTsuchiHakkoYMD() == null && FlexibleDate.MIN.equals(saidaiNyushoTsuchiHakkoYMD)
+                    && 適用除外情報リスト.get(i).getTaishoTsuchiHakkoYMD() == null)
+                    || (適用除外情報リスト.get(i).getNyushoTsuchiHakkoYMD() != null
+                    && 適用除外情報リスト.get(i).getNyushoTsuchiHakkoYMD().equals(saidaiNyushoTsuchiHakkoYMD)
+                    && 適用除外情報リスト.get(i).getTaishoTsuchiHakkoYMD() == null)) {
+                return false;
             }
         }
-        if (適用除外情報リスト.get(0).getNyushoTsuchiHakkoYMD() == null) {
-            if (FlexibleDate.MIN.isBefore(saidaiTaishoTsuchiHakkoYMD)) {
-                return false;
-            }
-        } else {
-            if (適用除外情報リスト.get(0).getNyushoTsuchiHakkoYMD().isBefore(saidaiTaishoTsuchiHakkoYMD)) {
-                return false;
-            }
+        if (適用除外情報リスト.get(0).getNyushoTsuchiHakkoYMD() == null && FlexibleDate.MIN.isBefore(saidaiTaishoTsuchiHakkoYMD)) {
+            return false;
+        } else if (適用除外情報リスト.get(0).getNyushoTsuchiHakkoYMD() != null
+                && 適用除外情報リスト.get(0).getNyushoTsuchiHakkoYMD().isBefore(saidaiTaishoTsuchiHakkoYMD)) {
+            return false;
         }
         return true;
     }
@@ -114,12 +105,10 @@ public class TekiyoJogaishaKanriFinder {
         if (適用除外情報リスト == null || 適用除外情報リスト.isEmpty()) {
             return false;
         }
-        FlexibleDate saidaiNyushoTsuchiHakkoYMD = 適用除外情報リスト.get(0).getNyushoTsuchiHakkoYMD();
-        FlexibleDate taishoTsuchiHakkoYMD = 適用除外情報リスト.get(0).getTaishoTsuchiHakkoYMD();
         if (適用除外情報リスト.get(0).getNyushoTsuchiHakkoYMD() == null) {
-            saidaiNyushoTsuchiHakkoYMD = FlexibleDate.MIN;
-        }
-        if (taishoTsuchiHakkoYMD != null && taishoTsuchiHakkoYMD.isBefore(saidaiNyushoTsuchiHakkoYMD)) {
+            return true;
+        } else if (適用除外情報リスト.get(0).getTaishoTsuchiHakkoYMD() != null
+                && 適用除外情報リスト.get(0).getTaishoTsuchiHakkoYMD().isBefore(適用除外情報リスト.get(0).getNyushoTsuchiHakkoYMD())) {
             return false;
         }
         return true;
@@ -147,9 +136,7 @@ public class TekiyoJogaishaKanriFinder {
                 }
             }
             int count = dac.getCount(shisetsuJouHouList.getNyushoTsuchiHakkoYMD(), shisetsuJouHouList.getTaishoTsuchiHakkoYMD());
-            if (count > 1) {
-                return false;
-            } else if (count == 0) {
+            if (count > 1 || count == 0) {
                 return false;
             }
         }
