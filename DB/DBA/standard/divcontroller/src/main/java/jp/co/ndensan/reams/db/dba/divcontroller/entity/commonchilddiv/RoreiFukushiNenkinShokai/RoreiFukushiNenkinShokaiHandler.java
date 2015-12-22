@@ -67,9 +67,9 @@ public class RoreiFukushiNenkinShokaiHandler {
                 = Models.create(一覧情報);
         ViewStateHolder.put(ViewStateKeys.老齢福祉年金情報一覧, roreiFukushiNenkinJukyusha);
         div.getDatagridRireki().setDataSource(rowList);
-        div.setDisplayNone(true);
+        div.getPanelInput().setDisplayNone(true);
         div.getPanelRireki().setDisplayNone(false);
-        div.getTxtStartDate().setDisabled(false);
+        div.getTxtStartDate().setDisabled(false); 
         div.getTxtEndDate().setDisabled(false);
     }
 
@@ -81,7 +81,7 @@ public class RoreiFukushiNenkinShokaiHandler {
         div.getTxtStartDate().clearValue();
         div.getTxtEndDate().clearValue();
         div.getPanelRireki().setDisplayNone(true);
-        div.setDisplayNone(false);
+        div.getPanelInput().setDisplayNone(false);
     }
 
     /**
@@ -97,7 +97,7 @@ public class RoreiFukushiNenkinShokaiHandler {
         }
         div.getPanelRireki().setDisplayNone(true);
         div.getTxtStartDate().setReadOnly(true);
-        div.setDisplayNone(false);
+        div.getPanelInput().setDisplayNone(false);
     }
 
     /**
@@ -112,7 +112,7 @@ public class RoreiFukushiNenkinShokaiHandler {
                     .toString()));
         }
         div.getPanelRireki().setDisplayNone(true);
-        div.setDisplayNone(false);
+        div.getPanelInput().setDisplayNone(false);
         div.getTxtStartDate().setDisabled(true);
         div.getTxtEndDate().setDisabled(true);
     }
@@ -125,7 +125,7 @@ public class RoreiFukushiNenkinShokaiHandler {
         div.getTxtStartDate().setDisabled(false);
         div.getTxtEndDate().setDisabled(false);
         div.getPanelRireki().setDisplayNone(false);
-        div.setDisplayNone(true);
+        div.getPanelInput().setDisplayNone(true);
         div.getTxtStartDate().clearValue();
         div.getTxtEndDate().clearValue();
     }
