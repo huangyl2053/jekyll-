@@ -68,7 +68,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  * 被保険者台帳のクラスです。
  *
  */
-public class HihokenshaDaichoSakusei {
+public class HihokenshaDaichoSakuseiManager {
 
     private static final RString TITLE = new RString("介護保険　被保険者台帳");
     private static final RString HIHOKENSHANO_TITLE = new RString("被保険者番号");
@@ -106,7 +106,7 @@ public class HihokenshaDaichoSakusei {
     /**
      * コンストラクタです。
      */
-    HihokenshaDaichoSakusei() {
+    HihokenshaDaichoSakuseiManager() {
 	this.mapperProvider = InstanceProvider.create(MapperProvider.class);
 	this.被保険者台帳管理Dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
 	this.老齢福祉年金受給者Dac = InstanceProvider.create(DbT7006RoreiFukushiNenkinJukyushaDac.class);
@@ -125,7 +125,7 @@ public class HihokenshaDaichoSakusei {
      * @param 構成市町村マスタDac 構成市町村マスタDac
      * @param MapperProvider mapperProvider
      */
-    HihokenshaDaichoSakusei(DbT1001HihokenshaDaichoDac 被保険者台帳管理Dac,
+    HihokenshaDaichoSakuseiManager(DbT1001HihokenshaDaichoDac 被保険者台帳管理Dac,
 	    DbT7006RoreiFukushiNenkinJukyushaDac 老齢福祉年金受給者Dac,
 	    DbT7037ShoKofuKaishuDac 証交付回収Dac,
 	    DbT1008IryohokenKanyuJokyoDac 介護保険医療保険加入状況Dac,
@@ -140,12 +140,12 @@ public class HihokenshaDaichoSakusei {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoSakusei}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoSakuseiManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoSakusei}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoSakuseiManager}のインスタンス
      */
-    public static HihokenshaDaichoSakusei createInstance() {
-	return InstanceProvider.create(HihokenshaDaichoSakusei.class);
+    public static HihokenshaDaichoSakuseiManager createInstance() {
+	return InstanceProvider.create(HihokenshaDaichoSakuseiManager.class);
     }
 
     /**
