@@ -60,7 +60,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -354,12 +353,12 @@ public class HihokenshaDaichoSakuseiManager {
 	ITrueFalseCriteria makeShuruiConditions;
 	if (parameter.getHihokenshaNo() == null || parameter.getHihokenshaNo().isEmpty()) {
 	    makeShuruiConditions = and(
-		    leq(DbT1001HihokenshaDaicho.logicalDeletedFlag, false),
-		    leq(parameter.getShikibetsuCode(), DbT1001HihokenshaDaicho.shikibetsuCode));
+		    eq(DbT1001HihokenshaDaicho.logicalDeletedFlag, false),
+		    eq(parameter.getShikibetsuCode(), DbT1001HihokenshaDaicho.shikibetsuCode));
 	} else {
 	    makeShuruiConditions = and(
 		    eq(DbT1001HihokenshaDaicho.logicalDeletedFlag, false),
-		    leq(DbT1001HihokenshaDaicho.hihokenshaNo, parameter.getHihokenshaNo()));
+		    eq(DbT1001HihokenshaDaicho.hihokenshaNo, parameter.getHihokenshaNo()));
 	}
 	List<DbT1001HihokenshaDaichoEntity> entityList = 被保険者台帳管理Dac.select(makeShuruiConditions);
 	if (entityList.isEmpty()) {
@@ -394,12 +393,12 @@ public class HihokenshaDaichoSakuseiManager {
 	ITrueFalseCriteria makeShuruiConditions;
 	if (parameter.getHihokenshaNo() == null || parameter.getHihokenshaNo().isEmpty()) {
 	    makeShuruiConditions = and(
-		    leq(DbT7037ShoKofuKaishu.logicalDeletedFlag, false),
-		    leq(parameter.getShikibetsuCode(), DbT7037ShoKofuKaishu.shikibetsuCode));
+		    eq(DbT7037ShoKofuKaishu.logicalDeletedFlag, false),
+		    eq(parameter.getShikibetsuCode(), DbT7037ShoKofuKaishu.shikibetsuCode));
 	} else {
 	    makeShuruiConditions = and(
 		    eq(DbT7037ShoKofuKaishu.logicalDeletedFlag, false),
-		    leq(DbT7037ShoKofuKaishu.hihokenshaNo, parameter.getHihokenshaNo()));
+		    eq(DbT7037ShoKofuKaishu.hihokenshaNo, parameter.getHihokenshaNo()));
 	}
 	List<DbT7037ShoKofuKaishuEntity> entityList = 証交付回収Dac.select(makeShuruiConditions);
 	if (entityList != null) {
