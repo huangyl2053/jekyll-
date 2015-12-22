@@ -11,13 +11,11 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NarabiJunType;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  *
  * 調査委託先・調査員一覧表のMybatisパラメータクラスです。
  */
-@Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class ItakusakiChosainIchiranMybitisParamter implements IMyBatisParameter {
@@ -152,11 +150,11 @@ public final class ItakusakiChosainIchiranMybitisParamter implements IMyBatisPar
         } else if (NarabiJunType.委託先コード_調査員氏名.code().equals(narabiJun)) {
             並び順_委託先コード_調査員氏名 = true;
         } else if (NarabiJunType.委託先コード_調査員カナ氏名.code().equals(narabiJun)) {
-            並び順_委託先コード_調査員氏名 = true;
+            並び順_委託先コード_調査員カナ氏名 = true;
         } else if (NarabiJunType.委託先名称_調査員コード.code().equals(narabiJun)) {
-            並び順_委託先コード_調査員氏名 = true;
+            並び順_委託先名称_調査員コード = true;
         } else if (NarabiJunType.委託先名称_調査員氏名.code().equals(narabiJun)) {
-            並び順_委託先コード_調査員氏名 = true;
+            並び順_委託先名称_調査員氏名 = true;
         } else {
             並び順_委託先名称_調査員カナ氏名 = true;
         }
