@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hokensha.Hokensha;
 import jp.co.ndensan.reams.db.dba.business.core.hokensha.KenCodeJigyoshaInputGuide;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
@@ -43,8 +44,12 @@ public class HokenshaInputGuideHandler {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (KenCodeJigyoshaInputGuide guide : kenCodeList) {
             KeyValueDataSource DataSource = new KeyValueDataSource();
+            RStringBuilder 県コード = new RStringBuilder();
             DataSource.setKey(guide.get都道府県住所コード());
-            DataSource.setValue(guide.get都道府県名());
+            県コード.append(guide.get都道府県住所コード());
+            県コード.append(RString.HALF_SPACE);
+            県コード.append(guide.get都道府県名());
+            DataSource.setValue(県コード.toRString());
             dataSourceList.add(DataSource);
         }
         div.getDdlHokenshaKenCode().setDataSource(dataSourceList);
