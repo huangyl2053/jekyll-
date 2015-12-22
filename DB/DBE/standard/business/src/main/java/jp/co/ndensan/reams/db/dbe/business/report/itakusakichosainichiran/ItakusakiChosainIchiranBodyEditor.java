@@ -48,8 +48,8 @@ public class ItakusakiChosainIchiranBodyEditor implements ItakusakiChosainIchira
         source.listIchiranhyoUpper_7 = item.getShujiiCode();
         source.listIchiranhyoUpper_8 = item.getShujiiKana();
         source.listIchiranhyoUpper_9 = item.getChosainShikaku();
-        if (item.getChosainShikakuName() != null) {
-            source.listIchiranhyoUpper_10 = Sikaku.toValue(item.getChosainShikakuName()).get名称();
+        if (item.getChosainShikaku() != null) {
+            source.listIchiranhyoUpper_10 = Sikaku.toValue(item.getChosainShikaku()).get名称();
         }
         if (item.isShujiiJokyoFlag()) {
             source.listIchiranhyoUpper_11 = 有効_VALUE;
@@ -60,7 +60,9 @@ public class ItakusakiChosainIchiranBodyEditor implements ItakusakiChosainIchira
         source.listIchiranhyoLower1_2 = item.getDaihyoshaName();
         source.listIchiranhyoLower1_3 = item.getJusho();
         source.listIchiranhyoLower2_1 = item.getShujiiName();
-        source.listIchiranhyoLower2_2 = Seibetsu.toValue(item.getSeibetsu()).get名称();
+        if (!item.getSeibetsu().trim().isEmpty()) {
+            source.listIchiranhyoLower2_2 = Seibetsu.toValue(item.getSeibetsu()).get名称();
+        }
         source.listIchiranhyoLower2_3 = item.getShinryokaName();
         return source;
     }
