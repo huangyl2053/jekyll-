@@ -51,7 +51,6 @@ public class ShisetsuJohoHandler {
             div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
         }
-
         if (台帳種別表示無し.equals(ViewStateHolder.get(ViewStateKeys.台帳種別表示, RString.class))
                 && !被保険者.equals(ViewStateHolder.get(ViewStateKeys.被保険者, RString.class))
                 && !他市町村住所地特例者.equals(ViewStateHolder.get(ViewStateKeys.他市町村住所地特例者, RString.class))
@@ -74,7 +73,6 @@ public class ShisetsuJohoHandler {
                 div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
                 div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
             }
-
             if (他市町村住所地特例者.equals(ViewStateHolder.get(ViewStateKeys.他市町村住所地特例者, RString.class))) {
 
                 div.getRadTekiyoJyogaiShisetsu().setVisible(false);
@@ -107,7 +105,6 @@ public class ShisetsuJohoHandler {
             div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
         }
-
         if (DaichoType.他市町村住所地特例者.getCode().equals(div.getDdlDaichoShubetsu().getSelectedKey())) {
             div.getRadKaigoHokenShisetsu().setVisible(true);
             div.getRadOtherTokureiShisetsu().setVisible(true);
@@ -116,7 +113,6 @@ public class ShisetsuJohoHandler {
             div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
         }
-
         if (DaichoType.適用除外者.getCode().equals(div.getDdlDaichoShubetsu().getSelectedKey())) {
             div.getRadKaigoHokenShisetsu().setVisible(false);
             div.getRadOtherTokureiShisetsu().setVisible(false);
@@ -158,7 +154,6 @@ public class ShisetsuJohoHandler {
                 div.getTxtNyuryokuShisetsuMeisho().clearValue();
             }
         }
-
         if ((台帳種別表示有り.equals(ViewStateHolder.get(ViewStateKeys.台帳種別表示, RString.class))
                 && div.getRadOtherTokureiShisetsu().getSelectedKey() != null
                 && !div.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty())
@@ -188,7 +183,6 @@ public class ShisetsuJohoHandler {
                 div.getTxtNyuryokuShisetsuMeisho().clearValue();
             }
         }
-
         if ((台帳種別表示有り.equals(ViewStateHolder.get(ViewStateKeys.台帳種別表示, RString.class))
                 && div.getRadTekiyoJyogaiShisetsu().getSelectedKey() != null
                 && !div.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty())
