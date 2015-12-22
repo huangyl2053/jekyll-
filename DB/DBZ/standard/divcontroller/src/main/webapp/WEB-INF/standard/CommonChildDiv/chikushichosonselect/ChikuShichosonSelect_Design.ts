@@ -4,9 +4,17 @@
 
 module DBZ {
 
-     export module ChikuJohoSelect {
+     export module ChikuShichosonSelect {
 
         export class Events {
+
+            public static onOkClose_btnChoikiGuide(): string {
+                return "onOkClose_btnChoikiGuide";
+            }
+
+            public static onOkClose_btnChikuNyuryokuGuide(): string {
+                return "onOkClose_btnChikuNyuryokuGuide";
+            }
 
         }
 
@@ -14,7 +22,7 @@ module DBZ {
             private _myName: string;
 
             public static myType(): string {
-                return "ChikuJohoSelect";
+                return "ChikuShichosonSelect";
             }
 
             constructor(fieldName: string) {
@@ -22,14 +30,14 @@ module DBZ {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBZ.ChikuJohoSelect.Controls.myType();
+                return this._myName + "_" + DBZ.ChikuShichosonSelect.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBZ.ChikuJohoSelect.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.ChikuShichosonSelect.Controls.myType() + "_" + fieldName;
             }
 
-            public ChikuJohoSelect(): UZA.Panel {
+            public ChikuShichosonSelect(): UZA.Panel {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
@@ -45,8 +53,12 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlChiku"));
             }
 
-            public btnSelect(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnSelect"));
+            public btnChoikiGuide(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnChoikiGuide"));
+            }
+
+            public btnChikuNyuryokuGuide(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnChikuNyuryokuGuide"));
             }
 
             public SelectedResult(): UZA.Panel {
