@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.service.core.rorenfukushinenkinjohokanrifind;
+package jp.co.ndensan.reams.db.dbu.service.core.rorenfukushinenkinjohokanri;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbu.definition.core.rorenfukushinenkinjohokanri.RorenFukushiNenkinJohoKanriParameter;
