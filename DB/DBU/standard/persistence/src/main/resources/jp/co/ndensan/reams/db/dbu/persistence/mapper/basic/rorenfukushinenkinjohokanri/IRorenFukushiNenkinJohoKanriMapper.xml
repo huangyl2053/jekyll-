@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.mapper.basic.rorenfukushinenkinjohokanri.RorenFukushiNenkinJohoKanriMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.mapper.basic.rorenfukushinenkinjohokanri.IRorenFukushiNenkinJohoKanriMapper">
          
     <select id="jukyuKikanJufukuCheck" parameterType="jp.co.ndensan.reams.db.dbu.definition.core.roreifukushinenkinjukyusha.RorenFukushiNenkinJohoKanriParameter"
             resultType="int" fetchSize="500">
