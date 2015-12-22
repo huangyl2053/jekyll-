@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.persistence.mapper.basic.roreifukushinenkinjukyusha;
+package jp.co.ndensan.reams.db.dbu.persistence.mapper.basic.rorenfukushinenkinjohokanri;
 
-import jp.co.ndensan.reams.db.dbu.definition.core.roreifukushinenkinjukyusha.RorenFukushiNenkinJohoKanriParameter;
+import jp.co.ndensan.reams.db.dbu.definition.core.rorenfukushinenkinjohokanri.RorenFukushiNenkinJohoKanriParameter;
 
 /**
  * 老齢福祉年金受給者台帳管理です。

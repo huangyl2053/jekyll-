@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.definition.core.roreifukushinenkinjukyusha;
+package jp.co.ndensan.reams.db.dbu.definition.core.rorenfukushinenkinjohokanri;
 
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
@@ -25,19 +23,17 @@ public class RorenFukushiNenkinJohoKanriParameter {
     private final HihokenshaNo hihokenshaNo;
     private final FlexibleDate jukyuKaishiYMD;
     private final FlexibleDate jukyuShuryoYMD;
-    private final boolean isDeleted;
 
     private RorenFukushiNenkinJohoKanriParameter(
             ShikibetsuCode shikibetsuCode,
             FlexibleDate jukyuKaishiYMD,
             HihokenshaNo hihokenshaNo,
-            FlexibleDate jukyuShuryoYMD,
-            boolean isDeleted) {
-        this.shikibetsuCode = requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        this.jukyuKaishiYMD = requireNonNull(jukyuKaishiYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("受給開始年月日"));
+            FlexibleDate jukyuShuryoYMD
+    ) {
+        this.shikibetsuCode = shikibetsuCode;
+        this.jukyuKaishiYMD = jukyuKaishiYMD;
         this.hihokenshaNo = hihokenshaNo;
         this.jukyuShuryoYMD = jukyuShuryoYMD;
-        this.isDeleted = isDeleted;
     }
 
     /**
@@ -47,21 +43,20 @@ public class RorenFukushiNenkinJohoKanriParameter {
      * @param jukyuKaishiYMD 受給開始年月日
      * @param hihokenshaNo 被保険者番号
      * @param jukyuShuryoYMD 受給終了年月日
-     * @param isDeleted 論理削除行であればtrue
      * @return RoreiFukushiNenkinJohoMapperParameter 老齢福祉年金受給者台帳管理情報パラメータ
      */
     public static RorenFukushiNenkinJohoKanriParameter createRoreiFukushiParam(
             ShikibetsuCode shikibetsuCode,
             FlexibleDate jukyuKaishiYMD,
             HihokenshaNo hihokenshaNo,
-            FlexibleDate jukyuShuryoYMD,
-            boolean isDeleted) {
+            FlexibleDate jukyuShuryoYMD
+    ) {
         return new RorenFukushiNenkinJohoKanriParameter(
                 shikibetsuCode,
                 jukyuKaishiYMD,
                 hihokenshaNo,
-                jukyuShuryoYMD,
-                false);
+                jukyuShuryoYMD
+        );
     }
 
     /**
@@ -98,14 +93,5 @@ public class RorenFukushiNenkinJohoKanriParameter {
      */
     public FlexibleDate getJukyuShuryoYMD() {
         return jukyuShuryoYMD;
-    }
-
-    /**
-     * 論理削除行ばtrueを返します。
-     *
-     * @return 論理削除行ばtrue
-     */
-    public boolean getisDeleted() {
-        return isDeleted;
     }
 }
