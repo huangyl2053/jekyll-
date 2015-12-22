@@ -5,21 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.config.kyotsu.rojinhokenjoho;
 
-import jp.co.ndensan.reams.db.dbx.business.config.util.ConfigLoader;
-import jp.co.ndensan.reams.db.dbx.business.config.util.Configs;
+import jp.co.ndensan.reams.db.dbx.business.config.util.ConfigLoaderByConfigKeys;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 業務コンフィグ「老人保健情報」を扱います。
  */
-public class RokenJohoConfig extends ConfigLoader<ConfigKeysRokenJoho> {
+public class RokenJohoConfig extends ConfigLoaderByConfigKeys<ConfigKeysRokenJoho> {
 
     /**
      * 現在有効な「老人保健情報」をあつかうインスタンスを生成します。
      */
     public RokenJohoConfig() {
-        super(Configs.loadConfigsByConfigKeys(ConfigKeysRokenJoho.class, RDate.getNowDate()));
+        super(ConfigKeysRokenJoho.class, RDate.getNowDate());
     }
 
     /**

@@ -5,38 +5,28 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.config.util;
 
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
- * コンフィグに関連する機能を提供します。
+ * {@link IConfigKeys}を実装したEnumによりキーが管理されるコンフィグを扱います。
+ *
+ * @param <T> IConfigKeysを実装したEnumの型(コンフィグのキーを管理する物)
  */
-public final class Configs {
-
-    private Configs() {
-    }
+public abstract class ConfigLoaderByConfigKeys<T extends Enum<T> & IConfigKeys> extends ConfigLoader<T> {
 
     /**
-     * 指定のEnumで管理される業務コンフィグを、指定の有効日・サブ業務コードより取得してmapで返却します。
-     * mapのキーは指定のEnum、値がコンフィグの値になります。
+     * コンフィグのキーを管理するEnumの型、有効日を指定して、
+     * 該当のコンフィグを一括取得して管理します。
      *
-     * @param <E> Enumの型
-     * @param configKeys Enumのclass
+     * @param clazz コンフィグのキ―を管理するEnumの型
      * @param rDate 有効日
-     * @param subGyomuCode サブ業務コード
-     * @return Map … キーはEnum、値はキーに対応するコンフィグの設定値
      */
-    public static <E extends Enum<E>> Map<E, RString> loadConfigsByEnum(Class<E> configKeys, RDate rDate, SubGyomuCode subGyomuCode) {
-        Map<E, RString> map = new EnumMap<>(configKeys);
-        for (E key : configKeys.getEnumConstants()) {
-            map.put(key, BusinessConfig.get(key, rDate, subGyomuCode));
-        }
-        return map;
+    protected ConfigLoaderByConfigKeys(Class<T> clazz, RDate rDate) {
+        super(loadConfigsByConfigKeys(clazz, RDate.getNowDate()));
     }
 
     /**
@@ -48,7 +38,7 @@ public final class Configs {
      * @param rDate 有効日
      * @return Map … キーはEnum、値はキーに対応するコンフィグの設定値
      */
-    public static <T extends Enum<T> & IConfigKeys> Map<T, RString> loadConfigsByConfigKeys(Class<T> configKeys, RDate rDate) {
+    private static <T extends Enum<T> & IConfigKeys> Map<T, RString> loadConfigsByConfigKeys(Class<T> configKeys, RDate rDate) {
         Map<T, RString> map = new HashMap<>();
         for (T key : configKeys.getEnumConstants()) {
             map.put(key, BusinessConfig.get(key, rDate, key.subGyomuCode()));

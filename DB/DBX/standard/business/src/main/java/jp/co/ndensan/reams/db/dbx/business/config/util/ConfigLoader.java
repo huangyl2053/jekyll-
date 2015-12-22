@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @param <E> Enumの型
  */
-public abstract class ConfigLoader<E extends Enum<E>> {
+public abstract class ConfigLoader<E> {
 
     private final Map<E, RString> map;
 
@@ -24,7 +24,7 @@ public abstract class ConfigLoader<E extends Enum<E>> {
      *
      * @param map Map(キーはコンフィグのキー、値はキーに該当するコンフィグの設定値)
      */
-    protected ConfigLoader(Map<? extends E, RString> map) {
+    ConfigLoader(Map<? extends E, RString> map) {
         this.map = Collections.unmodifiableMap(map);
     }
 

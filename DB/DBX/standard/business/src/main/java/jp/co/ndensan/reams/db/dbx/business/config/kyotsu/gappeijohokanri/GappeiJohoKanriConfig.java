@@ -5,14 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.config.kyotsu.gappeijohokanri;
 
-import jp.co.ndensan.reams.db.dbx.business.config.util.ConfigLoader;
-import jp.co.ndensan.reams.db.dbx.business.config.util.Configs;
+import jp.co.ndensan.reams.db.dbx.business.config.util.ConfigLoaderByConfigKeys;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 業務コンフィグ「合併情報管理」を扱います。
  */
-public class GappeiJohoKanriConfig extends ConfigLoader<ConfigKeysGappeiJohoKanri> {
+public class GappeiJohoKanriConfig extends ConfigLoaderByConfigKeys<ConfigKeysGappeiJohoKanri> {
 
     private GappeiJohoKubun 合併情報区分;
 
@@ -20,7 +19,7 @@ public class GappeiJohoKanriConfig extends ConfigLoader<ConfigKeysGappeiJohoKanr
      * 現時点の業務コンフィグ「合併情報管理」の設定値を持つインスタンスを生成します。
      */
     public GappeiJohoKanriConfig() {
-        super(Configs.loadConfigsByConfigKeys(ConfigKeysGappeiJohoKanri.class, RDate.getNowDate()));
+        super(ConfigKeysGappeiJohoKanri.class, RDate.getNowDate());
     }
 
     /**

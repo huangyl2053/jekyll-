@@ -5,15 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.config.fuka;
 
-import jp.co.ndensan.reams.db.dbx.business.config.util.ConfigLoader;
-import jp.co.ndensan.reams.db.dbx.business.config.util.Configs;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.db.dbx.business.config.util.ConfigLoaderByConfigKeys;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 業務コンフィグ「動作関連」を扱います。
  */
-public class DosaKanrenConfig extends ConfigLoader<ConfigKeysDosaKanren> {
+public class DosaKanrenConfig extends ConfigLoaderByConfigKeys<ConfigKeysDosaKanren> {
 
     private TokuchoBumpaiShuyakuSystem 特徴分配集約システム;
 
@@ -21,7 +19,7 @@ public class DosaKanrenConfig extends ConfigLoader<ConfigKeysDosaKanren> {
      * 現在有効な業務コンフィグ「動作関連」を扱うインスタンスを生成します。
      */
     public DosaKanrenConfig() {
-        super(Configs.loadConfigsByEnum(ConfigKeysDosaKanren.class, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        super(ConfigKeysDosaKanren.class, RDate.getNowDate());
     }
 
     /**
