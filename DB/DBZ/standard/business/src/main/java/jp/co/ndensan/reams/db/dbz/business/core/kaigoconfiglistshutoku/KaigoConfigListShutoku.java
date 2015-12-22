@@ -21,33 +21,33 @@ public class KaigoConfigListShutoku {
     /**
      * 介護Configリスト取得処理。
      *
-     * @param コンフィグキー コンフィグキー
+     * @param コンフィグ コンフィグ
      * @return Map (コンフィグ名,コンフィグ値)
      */
-    public Map<Enum, Object> getKaigoConfigList(Enum コンフィグキー) {
-
+    public Map<Enum, Object> getKaigoConfigList(Class コンフィグ) {
         Map<Enum, Object> KaigoConfigMap = new HashMap();
-        RString コンフィグ名称 = BusinessConfig.get(コンフィグキー);
+        for (Enum コンフィグキー : ((Class<Enum>) コンフィグ).getEnumConstants()) {
+            RString コンフィグ名称 = BusinessConfig.get(コンフィグキー);
 
-        KaigoConfigMap.put(コンフィグキー, コンフィグ名称);
-
+            KaigoConfigMap.put(コンフィグキー, コンフィグ名称);
+        }
         return KaigoConfigMap;
     }
 
     /**
      * 介護Config取得処理（サブ業務指定）。
      *
-     * @param コンフィグキー コンフィグキー
+     * @param コンフィグ コンフィグ
      * @param サブ業務コード サブ業務コード
      * @return Map (コンフィグ名,コンフィグ値)
      */
-    public Map<Enum, Object> getKaigoConfigSbuList(Enum コンフィグキー, SubGyomuCode サブ業務コード) {
+    public Map<Enum, Object> getKaigoConfigSbuList(Class コンフィグ, SubGyomuCode サブ業務コード) {
 
         Map<Enum, Object> KaigoConfigMap = new HashMap();
-        RString コンフィグ名称 = BusinessConfig.get(コンフィグキー, サブ業務コード);
-
-        KaigoConfigMap.put(コンフィグキー, コンフィグ名称);
-
+        for (Enum コンフィグキー : ((Class<Enum>) コンフィグ).getEnumConstants()) {
+            RString コンフィグ名称 = BusinessConfig.get(コンフィグキー, サブ業務コード);
+            KaigoConfigMap.put(コンフィグキー, コンフィグ名称);
+        }
         return KaigoConfigMap;
     }
 }
