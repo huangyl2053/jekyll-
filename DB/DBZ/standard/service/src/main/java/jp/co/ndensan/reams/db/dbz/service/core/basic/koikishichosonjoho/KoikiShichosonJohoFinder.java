@@ -48,7 +48,7 @@ public class KoikiShichosonJohoFinder {
     /**
      * コンストラクタです。
      */
-    public KoikiShichosonJohoFinder() {
+    KoikiShichosonJohoFinder() {
         dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
     }
 

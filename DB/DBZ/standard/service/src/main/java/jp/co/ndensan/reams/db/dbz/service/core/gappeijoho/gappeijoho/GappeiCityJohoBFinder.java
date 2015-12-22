@@ -44,7 +44,7 @@ public class GappeiCityJohoBFinder {
     /**
      * コンストラクタです。
      */
-    public GappeiCityJohoBFinder() {
+    GappeiCityJohoBFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dac = InstanceProvider.create(DbT7055GappeiJohoDac.class);
     }
