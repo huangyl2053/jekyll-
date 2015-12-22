@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.JiGyoSya;
+package jp.co.ndensan.reams.db.dba.divcontroller.controller.commonchilddiv.JigyoshaNyuryokuGudieCommonChildDiv;
 
 import jp.co.ndensan.reams.db.dba.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.JigyoshaNyuryokuGudieCommonChildDiv.JiGyoSyaHandler;

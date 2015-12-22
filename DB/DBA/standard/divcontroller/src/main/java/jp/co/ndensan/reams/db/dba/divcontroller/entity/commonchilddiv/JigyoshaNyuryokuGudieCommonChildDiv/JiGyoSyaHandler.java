@@ -365,39 +365,16 @@ public class JiGyoSyaHandler {
 
     private List<KeyValueDataSource> get事業者区分() {
 
-        List<KeyValueDataSource> dataSource = new ArrayList();
+        List<KeyValueDataSource> dataSourceList = new ArrayList();
 
-        KeyValueDataSource KeyValue1 = new KeyValueDataSource();
-        KeyValueDataSource KeyValue3 = new KeyValueDataSource();
-        KeyValueDataSource KeyValue4 = new KeyValueDataSource();
-        KeyValueDataSource KeyValue5 = new KeyValueDataSource();
-        KeyValueDataSource KeyValue6 = new KeyValueDataSource();
-        KeyValueDataSource KeyValue7 = new KeyValueDataSource();
-        KeyValueDataSource KeyValue8 = new KeyValueDataSource();
+        for (JigyoshaKubun type : JigyoshaKubun.values()) {
 
-        KeyValue1.setKey(JigyoshaKubun.医科.getコード());
-        KeyValue3.setKey(JigyoshaKubun.歯科.getコード());
-        KeyValue4.setKey(JigyoshaKubun.薬局.getコード());
-        KeyValue5.setKey(JigyoshaKubun.老人保健施設.getコード());
-        KeyValue6.setKey(JigyoshaKubun.訪問看護ステーション.getコード());
-        KeyValue7.setKey(JigyoshaKubun.介護保険事業所.getコード());
-        KeyValue8.setKey(JigyoshaKubun.基準該当事業所.getコード());
-        KeyValue1.setValue(JigyoshaKubun.医科.get名称());
-        KeyValue3.setValue(JigyoshaKubun.歯科.get名称());
-        KeyValue4.setValue(JigyoshaKubun.薬局.get名称());
-        KeyValue5.setValue(JigyoshaKubun.老人保健施設.get名称());
-        KeyValue6.setValue(JigyoshaKubun.訪問看護ステーション.get名称());
-        KeyValue7.setValue(JigyoshaKubun.介護保険事業所.get名称());
-        KeyValue8.setValue(JigyoshaKubun.基準該当事業所.get名称());
-
-        dataSource.add(KeyValue1);
-        dataSource.add(KeyValue3);
-        dataSource.add(KeyValue4);
-        dataSource.add(KeyValue5);
-        dataSource.add(KeyValue6);
-        dataSource.add(KeyValue7);
-        dataSource.add(KeyValue8);
-        return dataSource;
+            KeyValueDataSource dataSource = new KeyValueDataSource();
+            dataSource.setKey(type.getコード());
+            dataSource.setValue(type.get名称());
+            dataSourceList.add(dataSource);
+        }
+        return dataSourceList;
     }
 
     private List<KeyValueDataSource> get検索条件区分() {
