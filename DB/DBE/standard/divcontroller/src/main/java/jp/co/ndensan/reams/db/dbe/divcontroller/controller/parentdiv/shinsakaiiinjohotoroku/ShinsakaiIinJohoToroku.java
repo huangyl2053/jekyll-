@@ -502,7 +502,7 @@ public class ShinsakaiIinJohoToroku {
                 Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> 介護認定審査会委員情報
                         = (Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho>) ViewStateHolder.get(
                                 ViewStateKeys.介護認定審査会委員情報, Models.class);
-                manager.delete介護認定審査会委員所属機関情報(介護認定審査会委員情報.get(
+                manager.deletePhysical介護認定審査会委員所属機関情報(介護認定審査会委員情報.get(
                         shinsakaiIinJoho.identifier()).getKaigoNinteiShinsakaiIinShozokuKikanJohoList());
             }
             manager.save(shinsakaiIinJoho);
