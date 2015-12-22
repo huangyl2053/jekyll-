@@ -1,7 +1,7 @@
-/// <reference path='ChikuJohoSelect_Design.ts' />
+/// <reference path='ChikuShichosonSelect_Design.ts' />
 module DBZ
 {
-    export module ChikuJohoSelect
+    export module ChikuShichosonSelect
     {
         export class ModeController {
             private controls: Controls;
@@ -28,7 +28,7 @@ module DBZ
 
 module DBZ
 {
-    export module ChikuJohoSelect
+    export module ChikuShichosonSelect
     {
         export class PublicProperties {
             private controls: Controls;
