@@ -12,11 +12,11 @@ public enum GyomuBunrui {
     /**
      * コード:無し 名称:介護事務 略称:定義なし
      */
-    介護事務("無し", "介護事務"),
+    介護事務("1", "介護事務"),
     /**
      * コード:無し 名称:介護事務 略称:定義なし
      */
-    介護認定("無し", "介護認定");
+    介護認定("2", "介護認定");
 
     private final RString code;
     private final RString fullName;
