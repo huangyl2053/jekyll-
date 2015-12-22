@@ -11,13 +11,13 @@ import jp.co.ndensan.reams.db.dbu.definition.core.rorenfukushinenkinjohokanri.Ro
  * 老齢福祉年金受給者台帳管理です。
  *
  */
-public interface RorenFukushiNenkinJohoKanriMapper {
+public interface IRorenFukushiNenkinJohoKanriMapper {
 
     /**
      * 老齢福祉年金受給者台帳管理受給期間重複チェック。
      *
      * @param param 老齢福祉年金受給者台帳管理パラメータ
-     * @return DbT7006RoreiFukushiNenkinJukyushaEntity 老齢福祉年金受給者テーブルのエンティティ
+     * @return DbT7006RoreiFukushiNenkinJukyushaEntity 受給期間重複チェック結果
      */
     int jukyuKikanJufukuCheck(RorenFukushiNenkinJohoKanriParameter param);
 
