@@ -307,4 +307,27 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
+
+    /**
+     * 被保険者番号、資格取得年月日、論理削除フラグで被保険者台帳を取得します。
+     *
+     * @param 被保険者番号
+     * @param 取得日
+     * @return List<DbT1001HihokenshaDaichoEntity>
+     * @throws NullPointerException
+     */
+    @Transaction
+    public List<DbT1001HihokenshaDaichoEntity> selectByHihokenshaNo(HihokenshaNo 被保険者番号, FlexibleDate 取得日)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(取得日, UrSystemErrorMessages.値がnull.getReplacedMessage("取得日"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(shikakuShutokuYMD, 取得日),
+                                eq(logicalDeletedFlag, false))).
+                toList(DbT1001HihokenshaDaichoEntity.class);
+    }
 }
