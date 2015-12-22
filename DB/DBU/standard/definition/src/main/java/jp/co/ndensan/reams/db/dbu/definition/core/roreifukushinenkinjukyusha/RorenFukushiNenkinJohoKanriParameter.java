@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  * 老齢福祉年金受給者台帳管理です。
  *
  */
-public class RoreiFukushiNenkinJukyushaMapperParameter {
+public class RorenFukushiNenkinJohoKanriParameter {
 
     /**
      * 老齢福祉年金受給者台帳管理パラメータです。
@@ -27,7 +27,7 @@ public class RoreiFukushiNenkinJukyushaMapperParameter {
     private final FlexibleDate jukyuShuryoYMD;
     private final boolean isDeleted;
 
-    private RoreiFukushiNenkinJukyushaMapperParameter(
+    private RorenFukushiNenkinJohoKanriParameter(
             ShikibetsuCode shikibetsuCode,
             FlexibleDate jukyuKaishiYMD,
             HihokenshaNo hihokenshaNo,
@@ -50,13 +50,13 @@ public class RoreiFukushiNenkinJukyushaMapperParameter {
      * @param isDeleted 論理削除行であればtrue
      * @return RoreiFukushiNenkinJohoMapperParameter 老齢福祉年金受給者台帳管理情報パラメータ
      */
-    public static RoreiFukushiNenkinJukyushaMapperParameter createRoreiFukushiParam(
+    public static RorenFukushiNenkinJohoKanriParameter createRoreiFukushiParam(
             ShikibetsuCode shikibetsuCode,
             FlexibleDate jukyuKaishiYMD,
             HihokenshaNo hihokenshaNo,
             FlexibleDate jukyuShuryoYMD,
             boolean isDeleted) {
-        return new RoreiFukushiNenkinJukyushaMapperParameter(
+        return new RorenFukushiNenkinJohoKanriParameter(
                 shikibetsuCode,
                 jukyuKaishiYMD,
                 hihokenshaNo,

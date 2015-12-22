@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbu.service.core.roreifukushinenkinjukyusha;
 
-import jp.co.ndensan.reams.db.dbu.definition.core.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaMapperParameter;
-import jp.co.ndensan.reams.db.dbu.service.core.roreifukushinenkinjukyushajohn.RorenFukushiNenkinJohoKanrishi;
+import jp.co.ndensan.reams.db.dbu.definition.core.roreifukushinenkinjukyusha.RorenFukushiNenkinJohoKanriParameter;
+import jp.co.ndensan.reams.db.dbu.service.core.roreifukushinenkinjukyushajohn.RorenFukushiNenkinJohoKanriFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7006RoreiFukushiNenkinJukyushaDac;
@@ -25,13 +25,13 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * {@link jp.co.ndensan.reams.db.dbu.service.core.roreifukushinenkinjukyushajohn.RorenFukushiNenkinJohoKanrishi}のテストです。
+ * {@link jp.co.ndensan.reams.db.dbu.service.core.roreifukushinenkinjukyushajohn.RorenFukushiNenkinJohoKanriFinder}のテストです。
  *
  */
 @RunWith(Enclosed.class)
-public class RorenFukushiNenkinJohoKanriTest extends DbaTestBase {
+public class RorenFukushiNenkinJohoKanriFinderTest extends DbaTestBase {
 
-    private static RorenFukushiNenkinJohoKanrishi service;
+    private static RorenFukushiNenkinJohoKanriFinder service;
     private static DbT7006RoreiFukushiNenkinJukyushaDac dbT7006dac;
     public static final ShikibetsuCode 識別コード = new ShikibetsuCode("123456789000001");
     public static final FlexibleDate 受給開始年月日1 = new FlexibleDate("20010410");
@@ -47,7 +47,7 @@ public class RorenFukushiNenkinJohoKanriTest extends DbaTestBase {
     @BeforeClass
     public static void setUpClass() {
         dbT7006dac = InstanceProvider.create(DbT7006RoreiFukushiNenkinJukyushaDac.class);
-        service = InstanceProvider.create(RorenFukushiNenkinJohoKanrishi.class);
+        service = InstanceProvider.create(RorenFukushiNenkinJohoKanriFinder.class);
     }
 
     public static class JukyuKikanJufukuCheckTest extends DbaTestDacBase {
@@ -71,7 +71,7 @@ public class RorenFukushiNenkinJohoKanriTest extends DbaTestBase {
         @Test
         public void 老齢福祉年金受給者台帳管理重複情報1する場合_jukyuKikanJufukuCheckTestは_trueを返すこと() {
             insert1_DbT7006RoreiFukushiNenkinJukyushaEntity();
-            RoreiFukushiNenkinJukyushaMapperParameter param = RoreiFukushiNenkinJukyushaMapperParameter.createRoreiFukushiParam(識別コード, 受給開始年月日1, 被保険者番号, 受給終了年月日1, false);
+            RorenFukushiNenkinJohoKanriParameter param = RorenFukushiNenkinJohoKanriParameter.createRoreiFukushiParam(識別コード, 受給開始年月日1, 被保険者番号, 受給終了年月日1, false);
             Boolean flag = service.jukyuKikanJufukuCheck(param);
             assertEquals(true, flag);
         }
@@ -79,7 +79,7 @@ public class RorenFukushiNenkinJohoKanriTest extends DbaTestBase {
         @Test
         public void 老齢福祉年金受給者台帳管理重複情報2する場合_jukyuKikanJufukuCheckTestは_trueを返すこと() {
             insert2_DbT7006RoreiFukushiNenkinJukyushaEntity();
-            RoreiFukushiNenkinJukyushaMapperParameter param = RoreiFukushiNenkinJukyushaMapperParameter.createRoreiFukushiParam(識別コード, 受給開始年月日2, 被保険者番号, 受給終了年月日2, false);
+            RorenFukushiNenkinJohoKanriParameter param = RorenFukushiNenkinJohoKanriParameter.createRoreiFukushiParam(識別コード, 受給開始年月日2, 被保険者番号, 受給終了年月日2, false);
             Boolean flag = service.jukyuKikanJufukuCheck(param);
             assertEquals(true, flag);
         }
@@ -87,7 +87,7 @@ public class RorenFukushiNenkinJohoKanriTest extends DbaTestBase {
         @Test
         public void 老齢福祉年金受給者台帳管理重複情報3する場合_jukyuKikanJufukuCheckTestは_trueを返すこと() {
             insert3_DbT7006RoreiFukushiNenkinJukyushaEntity();
-            RoreiFukushiNenkinJukyushaMapperParameter param = RoreiFukushiNenkinJukyushaMapperParameter.createRoreiFukushiParam(識別コード, 受給開始年月日3, 被保険者番号, 受給終了年月日3, false);
+            RorenFukushiNenkinJohoKanriParameter param = RorenFukushiNenkinJohoKanriParameter.createRoreiFukushiParam(識別コード, 受給開始年月日3, 被保険者番号, 受給終了年月日3, false);
             Boolean flag = service.jukyuKikanJufukuCheck(param);
             assertEquals(true, flag);
         }
@@ -95,7 +95,7 @@ public class RorenFukushiNenkinJohoKanriTest extends DbaTestBase {
         @Test
         public void 老齢福祉年金受給者台帳管理情報重複しない場合_jukyuKikanJufukuCheckTestは_falseを返すこと() {
             insert3_DbT7006RoreiFukushiNenkinJukyushaEntity();
-            RoreiFukushiNenkinJukyushaMapperParameter param = RoreiFukushiNenkinJukyushaMapperParameter.createRoreiFukushiParam(識別コード, 受給開始年月日4, 被保険者番号, 受給終了年月日4, false);
+            RorenFukushiNenkinJohoKanriParameter param = RorenFukushiNenkinJohoKanriParameter.createRoreiFukushiParam(識別コード, 受給開始年月日4, 被保険者番号, 受給終了年月日4, false);
             Boolean flag = service.jukyuKikanJufukuCheck(param);
             assertEquals(false, flag);
         }

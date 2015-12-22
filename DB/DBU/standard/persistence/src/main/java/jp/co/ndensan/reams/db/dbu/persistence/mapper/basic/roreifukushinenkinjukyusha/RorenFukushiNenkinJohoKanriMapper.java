@@ -5,13 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbu.persistence.mapper.basic.roreifukushinenkinjukyusha;
 
-import jp.co.ndensan.reams.db.dbu.definition.core.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaMapperParameter;
+import jp.co.ndensan.reams.db.dbu.definition.core.roreifukushinenkinjukyusha.RorenFukushiNenkinJohoKanriParameter;
 
 /**
  * 老齢福祉年金受給者台帳管理です。
  *
  */
-public interface RoreiFukushiNenkinJukyushaMapper {
+public interface RorenFukushiNenkinJohoKanriMapper {
 
     /**
      * 老齢福祉年金受給者台帳管理受給期間重複チェック。
@@ -19,6 +19,6 @@ public interface RoreiFukushiNenkinJukyushaMapper {
      * @param param 老齢福祉年金受給者台帳管理パラメータ
      * @return DbT7006RoreiFukushiNenkinJukyushaEntity 老齢福祉年金受給者テーブルのエンティティ
      */
-    int jukyuKikanJufukuCheck(RoreiFukushiNenkinJukyushaMapperParameter param);
+    int jukyuKikanJufukuCheck(RorenFukushiNenkinJohoKanriParameter param);
 
 }
