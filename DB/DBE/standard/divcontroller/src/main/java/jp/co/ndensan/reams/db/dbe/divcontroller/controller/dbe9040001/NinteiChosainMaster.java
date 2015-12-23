@@ -62,7 +62,9 @@ public class NinteiChosainMaster {
     public ResponseData<NinteiChosainMasterDiv> onLoad(NinteiChosainMasterDiv div) {
         getHandler(div).load();
         getHandler(div).clearKensakuJoken();
-        RString 認定調査委託先コード = RString.EMPTY; //ViewStateHolder.get(ViewStateKeys.認定調査委託先コード, RString.class);
+        // ViewStateHolder.get(ViewStateKeys.認定調査委託先コード, RString.class);
+        // TODO 遷移元_調査委託先マスタ「DBE9030001」は未作成ですので、TODOとします。
+        RString 認定調査委託先コード = RString.EMPTY;
         if (認定調査委託先コード != null && !認定調査委託先コード.isEmpty()) {
             div.getChosainSearch().getTxtSearchChosaItakusakiCodeFrom().setValue(認定調査委託先コード);
             onClick_btnSearchShujii(div);
@@ -365,7 +367,7 @@ public class NinteiChosainMaster {
         dgChosainIchiran_Row row = div.getChosainIchiran().getDgChosainIchiran().getActiveRow();
         getHandler(div).setChosainJohoToMeisai(row);
         getHandler(div).setDisabledTrueToChosainJohoToMeisai();
-        div.getChosainJohoInput().getBtnTorikeshi().setDisabled(false);
+        div.getChosainJohoInput().getBtnKakutei().setDisabled(false);
         div.getChosainIchiran().setDisabled(true);
         return ResponseData.of(div).respond();
     }

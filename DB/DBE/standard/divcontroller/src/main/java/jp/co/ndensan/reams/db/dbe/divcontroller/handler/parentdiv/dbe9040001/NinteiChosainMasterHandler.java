@@ -53,7 +53,7 @@ public class NinteiChosainMasterHandler {
      * 画面初期化処理です。
      */
     public void load() {
-        // TODO 市町村　ドロップダウンリスト
+        // TODO 市町村　ドロップダウンリスト 共通部品
 //        IUrControlData controlData = UrControlDataFactory.createInstance();
 //        IAssociationFinder associationFinder = AssociationFinderFactory.createInstance();
 //        Association association = associationFinder.getAssociation();
@@ -70,11 +70,6 @@ public class NinteiChosainMasterHandler {
         for (UzT0007CodeEntity codeEntity : codeList) {
             chikuDataSource.add(new KeyValueDataSource(codeEntity.getコード().getKey(), codeEntity.getコード名称()));
         }
-//        List<ChosaChikuCode> codeList = CodeMasterNoOptionHelper.getCode(DBECodeShubetsu.調査地区コード);
-//        List<KeyValueDataSource> dataSource = new ArrayList<>();
-//        for (ChosaChikuCode code : codeList) {
-//            dataSource.add(new KeyValueDataSource(code.getColumnValue(), code.getMeisho()));
-//        }
         div.getDdlChikuCode().setDataSource(chikuDataSource);
     }
 
@@ -146,7 +141,7 @@ public class NinteiChosainMasterHandler {
             RString shozokuKikanName) {
         dgChosainIchiran_Row row = new dgChosainIchiran_Row();
         row.setJotai(jotai);
-        // TODO
+        // TODO　共通部品
         row.setShichoson(new RString("市町村名"));
         row.setShichosonCode(nullToEmpty(shichoson.value()));
         TextBoxCode chosainCode = new TextBoxCode();
@@ -164,7 +159,6 @@ public class NinteiChosainMasterHandler {
             row.setSeibetsu(表示値_女);
         }
         row.setChikuCode(nullToEmpty(chiku));
-        // TODO
         List<UzT0007CodeEntity> codeList = CodeMaster.getCodeRireki(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(chiku));
         if (codeList != null && 0 < codeList.size()) {
             row.setChiku(codeList.get(0).getコード名称());
@@ -313,7 +307,7 @@ public class NinteiChosainMasterHandler {
      * 市町村名を設定します。
      */
     public void setTxtShichosonmei() {
-        // TODO QA253
+        // TODO QA253　共通部品
 //        UzT0007CodeEntity code = CodeMaster.getCode(
 //                SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(div.getChosainJohoInput().getTxtShichoson().getValue()));
 //        if (code != null) {
