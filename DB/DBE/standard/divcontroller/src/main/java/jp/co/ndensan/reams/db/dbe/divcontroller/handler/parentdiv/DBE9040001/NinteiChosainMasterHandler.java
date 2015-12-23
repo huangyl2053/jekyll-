@@ -5,8 +5,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosainmaster.NinteiChosainMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.Sikaku;
+import static jp.co.ndensan.reams.db.dbe.divcontroller.controller.DBE9040001.NinteiChosainMaster.追加;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.NinteiChosainMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.dgChosainIchiran_Row;
+import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.削除;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -231,12 +233,14 @@ public class NinteiChosainMasterHandler {
     /**
      * 調査員情報を設定します。
      *
-     * @param jotai 状態
-     * @return 調査員一覧情報
+     * @param eventJotai 状態
      */
-    public dgChosainIchiran_Row setChosainJohoToIchiran(RString jotai) {
+    public void setChosainJohoToIchiran(RString eventJotai) {
         dgChosainIchiran_Row row = new dgChosainIchiran_Row();
-        row.setJotai(jotai);
+        if (!追加.equals(eventJotai)) {
+            row = div.getChosainIchiran().getDgChosainIchiran().getActiveRow();
+        }
+
         row.setShichoson(nullToEmpty(div.getChosainJohoInput().getTxtShichosonmei().getValue()));
         row.setShichosonCode(nullToEmpty(div.getChosainJohoInput().getTxtShichoson().getValue()));
         row.setChosainCode(div.getChosainJohoInput().getTxtChosainCode());
@@ -262,7 +266,15 @@ public class NinteiChosainMasterHandler {
         row.setTelNo(nullToEmpty(div.getChosainJohoInput().getTxtTelNo().getDomain().value()));
         row.setFaxNo(nullToEmpty(div.getChosainJohoInput().getTxtFaxNo().getDomain().value()));
         row.setShozokuKikanName(nullToEmpty(div.getChosainJohoInput().getTextBoxShozokuKikan().getDomain().value()));
-        return row;
+        int index = div.getChosainIchiran().getDgChosainIchiran().getClickedRowId();
+        if (追加.equals(eventJotai)) {
+            row.setJotai(追加);
+            div.getChosainIchiran().getDgChosainIchiran().getDataSource().add(row);
+        } else if (削除.equals(eventJotai) && 追加.equals(row.getJotai())) {
+            div.getChosainIchiran().getDgChosainIchiran().getDataSource().remove(index);
+        } else {
+            div.getChosainIchiran().getDgChosainIchiran().getDataSource().set(index, row);
+        }
     }
 
     /**
@@ -371,12 +383,15 @@ public class NinteiChosainMasterHandler {
      */
     public void clearChosainJohoToMeisai() {
         div.getChosainJohoInput().getTxtShichoson().clearValue();
-        div.getChosainJohoInput().getTxtChosaItakusaki().setValue(RString.EMPTY);
+        div.getChosainJohoInput().getTxtShichosonmei().clearValue();
+        div.getChosainJohoInput().getTxtChosaItakusaki().clearValue();
+        div.getChosainJohoInput().getTxtChosaItakusakiMeisho().clearValue();
         div.getChosainJohoInput().getTxtChosainCode().clearValue();
-        div.getChosainJohoInput().getTxtChosainShimei().setValue(RString.EMPTY);
+        div.getChosainJohoInput().getTxtChosainShimei().clearValue();
         div.getChosainJohoInput().getTxtChosainKanaShimei().clearValue();
         div.getChosainJohoInput().getRadSeibetsu().setSelectedIndex(0);
-        div.getChosainJohoInput().getTxtChiku().setValue(RString.EMPTY);
+        div.getChosainJohoInput().getTxtChiku().clearValue();
+        div.getChosainJohoInput().getTxtChikuMei().clearValue();
         setDdlChosainShikaku();
         div.getChosainJohoInput().getDdlChosainShikaku().setSelectedIndex(0);
         div.getChosainJohoInput().getTxtChosaKanoNinzu().clearValue();
