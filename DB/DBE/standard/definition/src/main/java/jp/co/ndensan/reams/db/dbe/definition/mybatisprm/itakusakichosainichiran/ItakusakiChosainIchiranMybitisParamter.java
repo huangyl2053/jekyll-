@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itakusakichosainichiran;
 
-import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.JyoukyouType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NarabiJunType;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
@@ -33,15 +32,14 @@ public final class ItakusakiChosainIchiranMybitisParamter implements IMyBatisPar
     private final boolean itakusakiCodeToFlag;
     private final boolean chosainNoFromFlag;
     private final boolean chosainNoToFlag;
-    private final boolean 状況_有効のみ;
-    private final boolean 状況_無効のみ;
-    private final boolean 状況_全て;
-    private final boolean 並び順_委託先コード_調査員コード;
-    private final boolean 並び順_委託先コード_調査員氏名;
-    private final boolean 並び順_委託先コード_調査員カナ氏名;
-    private final boolean 並び順_委託先名称_調査員コード;
-    private final boolean 並び順_委託先名称_調査員氏名;
-    private final boolean 並び順_委託先名称_調査員カナ氏名;
+    private final boolean jyoukyouYuukouFlag;
+    private final boolean jyoukyouMukouFlag;
+    private final boolean narabiJunItakusakiCodeFlag;
+    private final boolean narabiJunItakusakiCodeName;
+    private final boolean narabiJunItakusakiCodeKanaName;
+    private final boolean narabiJunChosainCodeFlag;
+    private final boolean narabiJunChosainCodeName;
+    private final boolean narabiJunChosainCodeKanaName;
 
     private ItakusakiChosainIchiranMybitisParamter(RString shichosonCode,
             RString shichosonMeisho,
@@ -56,15 +54,14 @@ public final class ItakusakiChosainIchiranMybitisParamter implements IMyBatisPar
             boolean itakusakiCodeToFlag,
             boolean chosainNoFromFlag,
             boolean chosainNoToFlag,
-            boolean 状況_有効のみ,
-            boolean 状況_無効のみ,
-            boolean 状況_全て,
-            boolean 並び順_委託先コード_調査員コード,
-            boolean 並び順_委託先コード_調査員氏名,
-            boolean 並び順_委託先コード_調査員カナ氏名,
-            boolean 並び順_委託先名称_調査員コード,
-            boolean 並び順_委託先名称_調査員氏名,
-            boolean 並び順_委託先名称_調査員カナ氏名) {
+            boolean jyoukyouYuukouFlag,
+            boolean jyoukyouMukouFlag,
+            boolean narabiJunItakusakiCodeFlag,
+            boolean narabiJunItakusakiCodeName,
+            boolean narabiJunItakusakiCodeKanaName,
+            boolean narabiJunChosainCodeFlag,
+            boolean narabiJunChosainCodeName,
+            boolean narabiJunChosainCodeKanaName) {
         this.shichosonCode = shichosonCode;
         this.shichosonMeisho = shichosonMeisho;
         this.itakusakiCodeFrom = itakusakiCodeFrom;
@@ -78,15 +75,14 @@ public final class ItakusakiChosainIchiranMybitisParamter implements IMyBatisPar
         this.itakusakiCodeToFlag = itakusakiCodeToFlag;
         this.chosainNoFromFlag = chosainNoFromFlag;
         this.chosainNoToFlag = chosainNoToFlag;
-        this.状況_有効のみ = 状況_有効のみ;
-        this.状況_無効のみ = 状況_無効のみ;
-        this.状況_全て = 状況_全て;
-        this.並び順_委託先コード_調査員コード = 並び順_委託先コード_調査員コード;
-        this.並び順_委託先コード_調査員氏名 = 並び順_委託先コード_調査員氏名;
-        this.並び順_委託先コード_調査員カナ氏名 = 並び順_委託先コード_調査員カナ氏名;
-        this.並び順_委託先名称_調査員コード = 並び順_委託先名称_調査員コード;
-        this.並び順_委託先名称_調査員氏名 = 並び順_委託先名称_調査員氏名;
-        this.並び順_委託先名称_調査員カナ氏名 = 並び順_委託先名称_調査員カナ氏名;
+        this.jyoukyouYuukouFlag = jyoukyouYuukouFlag;
+        this.jyoukyouMukouFlag = jyoukyouMukouFlag;
+        this.narabiJunItakusakiCodeFlag = narabiJunItakusakiCodeFlag;
+        this.narabiJunItakusakiCodeName = narabiJunItakusakiCodeName;
+        this.narabiJunItakusakiCodeKanaName = narabiJunItakusakiCodeKanaName;
+        this.narabiJunChosainCodeFlag = narabiJunChosainCodeFlag;
+        this.narabiJunChosainCodeName = narabiJunChosainCodeName;
+        this.narabiJunChosainCodeKanaName = narabiJunChosainCodeKanaName;
 
     }
 
@@ -131,13 +127,10 @@ public final class ItakusakiChosainIchiranMybitisParamter implements IMyBatisPar
         }
         boolean 状況_有効のみ = false;
         boolean 状況_無効のみ = false;
-        boolean 状況_全て = false;
         if (JyoukyouType.有効のみ.code().equals(jyoukyou)) {
             状況_有効のみ = true;
         } else if (JyoukyouType.無効のみ.code().equals(jyoukyou)) {
             状況_無効のみ = true;
-        } else {
-            状況_全て = true;
         }
         boolean 並び順_委託先コード_調査員コード = false;
         boolean 並び順_委託先コード_調査員氏名 = false;
@@ -174,45 +167,11 @@ public final class ItakusakiChosainIchiranMybitisParamter implements IMyBatisPar
                 chosainNoToFlag,
                 状況_有効のみ,
                 状況_無効のみ,
-                状況_全て,
                 並び順_委託先コード_調査員コード,
                 並び順_委託先コード_調査員氏名,
                 並び順_委託先コード_調査員カナ氏名,
                 並び順_委託先名称_調査員コード,
                 並び順_委託先名称_調査員氏名,
                 並び順_委託先名称_調査員カナ氏名);
-    }
-
-    /**
-     * パラメータをHashMapに変換して返します。
-     *
-     * @return MyBatis引き渡し用HashMap
-     */
-    public HashMap<String, Object> toHashMap() {
-        HashMap<String, Object> parameter = new HashMap<>();
-        parameter.put("shichosonCode", this.shichosonCode);
-        parameter.put("shichosonMeisho", this.shichosonMeisho);
-        parameter.put("itakusakiCodeFrom", this.itakusakiCodeFrom);
-        parameter.put("itakusakiCodeTo", this.itakusakiCodeTo);
-        parameter.put("chosainNoFrom", this.chosainNoFrom);
-        parameter.put("chosainNoTo", this.chosainNoTo);
-        parameter.put("jyoukyou", this.jyoukyou);
-        parameter.put("narabiJun", this.narabiJun);
-        parameter.put("nextPage", this.nextPage);
-        parameter.put("itakusakiCodeFromFlag", this.itakusakiCodeFromFlag);
-        parameter.put("itakusakiCodeToFlag", this.itakusakiCodeToFlag);
-        parameter.put("chosainNoFromFlag", this.chosainNoFromFlag);
-        parameter.put("chosainNoToFlag", this.chosainNoToFlag);
-        parameter.put("状況_有効のみ", this.状況_有効のみ);
-        parameter.put("状況_無効のみ", this.状況_無効のみ);
-        parameter.put("状況_全て", this.状況_全て);
-        parameter.put("並び順_委託先コード_調査員コード", this.並び順_委託先コード_調査員コード);
-        parameter.put("並び順_委託先コード_調査員氏名", this.並び順_委託先コード_調査員氏名);
-        parameter.put("並び順_委託先コード_調査員カナ氏名", this.並び順_委託先コード_調査員カナ氏名);
-        parameter.put("並び順_委託先名称_調査員コード", this.並び順_委託先名称_調査員コード);
-        parameter.put("並び順_委託先名称_調査員氏名", this.並び順_委託先名称_調査員氏名);
-        parameter.put("並び順_委託先名称_調査員カナ氏名", this.並び順_委託先名称_調査員カナ氏名);
-
-        return parameter;
     }
 }

@@ -34,6 +34,7 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchProcessBase<Itakus
             = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.itakusakichosainichiran."
                     + "IItakusakiChosainIchiranMapper.getNinteiChoSain");
     private static final ReportId REPORT_ID = new ReportId("DBE592001");
+    private ItakusakiChosainIchiranQueryProcessParemeter paramter;
     List<ItakusakiChosainIchiranBodyItem> bodyItem = new ArrayList<>();
     InputParameter<ItakusakiChosainIchiranQueryProcessParemeter> parameterClass;
     @BatchWriter
@@ -41,16 +42,10 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchProcessBase<Itakus
     private ReportSourceWriter<ItakusakiChosainIchiranReportSource> retortWrite;
 
     @Override
-    protected void initialize() {
-        super.initialize();
-        super.sqlParameter = parameterClass.getValue().toMybitisParameter().toHashMap();
-    }
-
-    @Override
     protected IBatchReader createReader() {
         batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
         retortWrite = new ReportSourceWriter(batchWrite);
-        return new BatchDbReader(MYBATIS_SELECT_ID, super.sqlParameter);
+        return new BatchDbReader(MYBATIS_SELECT_ID, paramter.toMybitisParameter());
     }
 
     @Override
@@ -61,7 +56,6 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchProcessBase<Itakus
 
     @Override
     protected void afterExecute() {
-        ItakusakiChosainIchiranQueryProcessParemeter paramter = parameterClass.getValue();
         ItakusakiChosainIchiranHeadItem headItem = new ItakusakiChosainIchiranHeadItem(paramter.getItakusakiCodeFrom(),
                 paramter.getItakusakiCodeTo(),
                 paramter.getChosainNoFrom(),
