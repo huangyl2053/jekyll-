@@ -120,7 +120,10 @@ public class ShinsakaiIinJohoTorokuHandler {
                 new FlexibleDate(div.getDgShinsaInJohoIchiran().getClickedItem().getBarthYMD().getValue().toDateString().toString()));
         div.getRadSeibetsu().setSelectedValue(new RString(div.getDgShinsaInJohoIchiran().getClickedItem().getSeibetsu() + "性"));
         div.getDdlShikakuCode().setSelectedValue(div.getDgShinsaInJohoIchiran().getClickedItem().getShikakuCode());
-        div.getCcdshinsakaiChikuCode().load(SubGyomuCode.DBE認定支援, new CodeShubetsu("5002"), new Code(div.getDgShinsaInJohoIchiran().getClickedItem().getShinsakaiChikuCode()));
+        div.getCcdshinsakaiChikuCode().load(SubGyomuCode.DBE認定支援, new CodeShubetsu("5001"), new Code(div.getDgShinsaInJohoIchiran().getClickedItem().getShinsakaiChikuCode()));
+        div.setHdnTxtSchemaName(new RString("rgdb"));
+        div.setHdnTxtSubGyomuCode(new RString("DBE"));
+        div.setHdnTxtCodeShubetsu(new RString("5001"));
         div.getTxtBiko().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getBiko());
     }
 
