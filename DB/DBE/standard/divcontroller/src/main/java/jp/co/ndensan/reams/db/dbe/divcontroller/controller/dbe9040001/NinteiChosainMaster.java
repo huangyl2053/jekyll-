@@ -250,6 +250,12 @@ public class NinteiChosainMaster {
                 return ResponseData.of(div).setState(DBE9040001StateName.一覧);
             }
         }
+        if ((状態_削除.equals(div.getChosainJohoInput().getState())
+                || RString.EMPTY.equals(div.getChosainJohoInput().getState()))) {
+            div.getChosainIchiran().setDisabled(false);
+            return ResponseData.of(div).setState(DBE9040001StateName.一覧);
+        }
+
         return ResponseData.of(div).respond();
     }
 
@@ -359,6 +365,7 @@ public class NinteiChosainMaster {
         dgChosainIchiran_Row row = div.getChosainIchiran().getDgChosainIchiran().getActiveRow();
         getHandler(div).setChosainJohoToMeisai(row);
         getHandler(div).setDisabledTrueToChosainJohoToMeisai();
+        div.getChosainJohoInput().getBtnTorikeshi().setDisabled(false);
         div.getChosainIchiran().setDisabled(true);
         return ResponseData.of(div).respond();
     }
