@@ -114,7 +114,7 @@ public class NinteiChosainMaster {
                 if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                     searchChosainInfo(div);
-                    return ResponseData.of(div).setState(DBE9040001StateName.検索);
+                    return ResponseData.of(div).setState(DBE9040001StateName.一覧);
                 }
             }
         }
