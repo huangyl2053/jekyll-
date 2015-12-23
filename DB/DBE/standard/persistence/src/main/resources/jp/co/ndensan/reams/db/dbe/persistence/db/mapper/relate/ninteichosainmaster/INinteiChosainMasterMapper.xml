@@ -28,12 +28,12 @@
         ON "DbT4201NinteichosaIraiJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
         AND "DbT5101NinteiShinseiJoho"."isDeleted" = FALSE
         INNER JOIN
-            rgdb."DbT5051KoseiShichosonMaster"
-        ON "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" = "DbT5051KoseiShichosonMaster"."shoKisaiHokenshaNo"
-        AND "DbT5051KoseiShichosonMaster"."isDeleted" = FALSE
+            rgdb."DbT7051KoseiShichosonMaster"
+        ON "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" = "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"
+        AND "DbT7051KoseiShichosonMaster"."isDeleted" = FALSE
         WHERE 
             "DbT4201NinteichosaIraiJoho"."isDeleted" = FALSE
-        AND "DbT5051KoseiShichosonMaster"."shichosonCode" = #{市町村コード}
+        AND "DbT7051KoseiShichosonMaster"."shichosonCode" = #{市町村コード}
         AND "DbT5101NinteiShinseiJoho"."ninteiChosaItakusakiCode" = #{調査委託先コード}
         AND "DbT5101NinteiShinseiJoho"."ninteiChosainCode" = #{調査員コード}
     </select>
@@ -45,12 +45,12 @@
         FROM        
             rgdb."DbT5101NinteiShinseiJoho"
         INNER JOIN
-            rgdb."DbT5051KoseiShichosonMaster"
-        ON "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" = "DbT5051KoseiShichosonMaster"."shoKisaiHokenshaNo"
-        AND "DbT5051KoseiShichosonMaster"."isDeleted" = FALSE
+            rgdb."DbT7051KoseiShichosonMaster"
+        ON "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" = "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"
+        AND "DbT7051KoseiShichosonMaster"."isDeleted" = FALSE
         WHERE 
             "DbT5101NinteiShinseiJoho"."isDeleted" = FALSE
-        AND "DbT5051KoseiShichosonMaster"."shichosonCode" = #{市町村コード}
+        AND "DbT7051KoseiShichosonMaster"."shichosonCode" = #{市町村コード}
         AND "DbT5101NinteiShinseiJoho"."ninteiChosaItakusakiCode" = #{調査委託先コード}
         AND "DbT5101NinteiShinseiJoho"."ninteiChosainCode" = #{調査員コード}
     </select>
@@ -86,13 +86,13 @@
         DbT5913ChosainJoho."dbT5913ChosainJoho_jokyoFlag",
         DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode",
         DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho",
-        DbT5051KoseiShichosonMaster."dbT5051KoseiShichosonMaster_shichosonMeisho"
+        DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonMeisho"
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.noDeleted_DbT5913ChosainJoho" />) AS DbT5913ChosainJoho
         INNER JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5051KoseiShichosonMasterMapper.noDeleted_DbT5051KoseiShichosonMaster" />) AS DbT5051KoseiShichosonMaster
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.noDeleted_DbT7051KoseiShichosonMaster" />) AS DbT7051KoseiShichosonMaster
         ON
-        DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode"  =  DbT5051KoseiShichosonMaster."dbT5051KoseiShichosonMaster_shichosonCode" 
+        DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode"  =  DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonCode" 
         INNER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.noDeleted_DbT5910NinteichosaItakusakiJoho" />) AS DbT5910NinteichosaItakusakiJoho
         ON
@@ -154,9 +154,9 @@
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.noDeleted_DbT5913ChosainJoho" />) AS DbT5913ChosainJoho
         INNER JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5051KoseiShichosonMasterMapper.noDeleted_DbT5051KoseiShichosonMaster" />) AS DbT5051KoseiShichosonMaster
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.noDeleted_DbT7051KoseiShichosonMaster" />) AS DbT7051KoseiShichosonMaster
         ON
-        DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode"  =  DbT5051KoseiShichosonMaster."dbT5051KoseiShichosonMaster_shichosonCode" 
+        DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode"  =  DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonCode" 
         INNER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.noDeleted_DbT5910NinteichosaItakusakiJoho" />) AS DbT5910NinteichosaItakusakiJoho
         ON
@@ -226,7 +226,7 @@
         <result property="jokyoFlag" column="dbT5913ChosainJoho_jokyoFlag" />
         <result property="ninteichosaItakusakiCode" column="dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jigyoshaMeisho" column="dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shichosonMeisho" column="dbT5051KoseiShichosonMaster_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonMeisho" column="dbT7051KoseiShichosonMaster_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
 </mapper>

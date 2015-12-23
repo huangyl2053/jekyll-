@@ -96,7 +96,7 @@ public class NinteiChosainMasterValidationHandler {
             if (0 < count) {
                 validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                         UrErrorMessages.既に登録済, String.valueOf(chosainCode)),
-                        div.getChosainJohoInput().getTxtChosaItakusaki()));
+                        div.getChosainJohoInput().getTxtChosainCode()));
             }
         }
         return validPairs;
