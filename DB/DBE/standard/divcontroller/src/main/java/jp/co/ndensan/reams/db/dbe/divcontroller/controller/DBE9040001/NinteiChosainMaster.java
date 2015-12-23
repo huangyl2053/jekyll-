@@ -104,19 +104,26 @@ public class NinteiChosainMaster {
 
         List<dgChosainIchiran_Row> ichiranList = div.getChosainIchiran().getDgChosainIchiran().getDataSource();
 
+        boolean isUpdate = false;
         for (dgChosainIchiran_Row row : ichiranList) {
             if (!RString.EMPTY.equals(row.getJotai())) {
-                if (!ResponseHolder.isReRequest()) {
-                    QuestionMessage message = new QuestionMessage(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode(),
-                            UrQuestionMessages.検索画面遷移の確認.getMessage().evaluate());
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-                if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    searchChosainInfo(div);
-                    return ResponseData.of(div).setState(DBE9040001StateName.一覧);
-                }
+                isUpdate = true;
+                break;
             }
+        }
+        if (isUpdate) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode(),
+                        UrQuestionMessages.検索画面遷移の確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                div.getChosainSearch().setDisabled(false);
+                return ResponseData.of(div).setState(DBE9040001StateName.検索);
+            }
+        } else {
+            return ResponseData.of(div).setState(DBE9040001StateName.検索);
         }
         return ResponseData.of(div).respond();
     }
@@ -227,7 +234,7 @@ public class NinteiChosainMaster {
      * @return ResponseData<NinteiChosainMasterDiv>
      */
     public ResponseData<NinteiChosainMasterDiv> onClick_btnTorikeshi(NinteiChosainMasterDiv div) {
-        if (!div.getChosainJohoInput().isDisabled() && getValidationHandler(div).isUpdate()) {
+        if (!削除.equals(div.getChosainJohoInput().getState()) && getValidationHandler(div).isUpdate()) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -391,35 +398,47 @@ public class NinteiChosainMaster {
      * @return ResponseData<NinteiChosainMasterDiv>
      */
     public ResponseData<NinteiChosainMasterDiv> onClick_btnUpdate(NinteiChosainMasterDiv div) {
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForUpdate();
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
 
-        List<dgChosainIchiran_Row> dataList = div.getChosainIchiran().getDgChosainIchiran().getDataSource();
-        NinteiChosainMasterFinder ninteiChosainMasterFinder = NinteiChosainMasterFinder.createInstance();
-        for (dgChosainIchiran_Row row : dataList) {
-            if (削除.equals(row.getJotai())) {
-                NinteiChosainMasterSearchParameter parameter = NinteiChosainMasterSearchParameter.createParamForSelectChosainJoho(
-                        new LasdecCode(row.getShichosonCode()),
-                        new ChosaItakusakiCode(row.getChosaItakusakiCode().getValue()),
-                        new ChosainCode(row.getChosainCode().getValue()));
-                validPairs = getValidationHandler(div).validateForUpdate(
-                        ninteiChosainMasterFinder.getNinteiShinseiJohoCount(parameter),
-                        ninteiChosainMasterFinder.getNinteichosaIraiJohoCount(parameter));
-                if (validPairs.iterator().hasNext()) {
-                    return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+
+            ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForUpdate();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+
+            List<dgChosainIchiran_Row> dataList = div.getChosainIchiran().getDgChosainIchiran().getDataSource();
+            NinteiChosainMasterFinder ninteiChosainMasterFinder = NinteiChosainMasterFinder.createInstance();
+            for (dgChosainIchiran_Row row : dataList) {
+                if (削除.equals(row.getJotai())) {
+                    NinteiChosainMasterSearchParameter parameter = NinteiChosainMasterSearchParameter.createParamForSelectChosainJoho(
+                            new LasdecCode(row.getShichosonCode()),
+                            new ChosaItakusakiCode(row.getChosaItakusakiCode().getValue()),
+                            new ChosainCode(row.getChosainCode().getValue()));
+                    validPairs = getValidationHandler(div).validateForUpdate(
+                            ninteiChosainMasterFinder.getNinteiShinseiJohoCount(parameter),
+                            ninteiChosainMasterFinder.getNinteichosaIraiJohoCount(parameter));
+                    if (validPairs.iterator().hasNext()) {
+                        return ResponseData.of(div).addValidationMessages(validPairs).respond();
+                    }
                 }
             }
+            Models<ChosainJohoIdentifier, ChosainJoho> models = ViewStateHolder.get(ViewStateKeys.認定調査員マスタ検索結果, Models.class);
+            ChosainJohoManager chosainJohoManager = ChosainJohoManager.createInstance();
+            for (ChosainJoho chosainJoho : models) {
+                chosainJohoManager.saveOrDelete調査員情報(chosainJoho);
+            }
+            div.getCcdKanryoMessage().setSuccessMessage(
+                    new RString(UrInformationMessages.保存終了.getMessage().toString()), RString.EMPTY, RString.EMPTY);
+            return ResponseData.of(div).setState(DBE9040001StateName.完了);
         }
-        Models<ChosainJohoIdentifier, ChosainJoho> models = ViewStateHolder.get(ViewStateKeys.認定調査員マスタ検索結果, Models.class);
-        ChosainJohoManager chosainJohoManager = ChosainJohoManager.createInstance();
-        for (ChosainJoho chosainJoho : models) {
-            chosainJohoManager.saveOrDelete調査員情報(chosainJoho);
-        }
-
-        return ResponseData.of(div).addMessage(
-                UrInformationMessages.正常終了.getMessage().replace("保存")).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**
