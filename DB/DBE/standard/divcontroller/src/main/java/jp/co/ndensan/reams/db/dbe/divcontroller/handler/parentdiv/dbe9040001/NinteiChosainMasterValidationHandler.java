@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9040001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe9040001;
 
 import java.util.List;
-import static jp.co.ndensan.reams.db.dbe.divcontroller.controller.DBE9040001.NinteiChosainMaster.修正;
-import static jp.co.ndensan.reams.db.dbe.divcontroller.controller.DBE9040001.NinteiChosainMaster.追加;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.ChosainJohoInputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.NinteiChosainMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.dgChosainIchiran_Row;
-import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9040001.NinteiChosainMasterHandler.CODE_有効;
-import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9040001.NinteiChosainMasterHandler.MAN;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -28,6 +24,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class NinteiChosainMasterValidationHandler {
 
     private final NinteiChosainMasterDiv div;
+    private static final RString 追加 = new RString("追加");
+    private static final RString 修正 = new RString("修正");
+    private final static RString MAN = new RString("1");
+    private final static RString CODE_有効 = new RString("1");
 
     /**
      * コンストラクタです。

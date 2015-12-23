@@ -1,14 +1,12 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9040001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe9040001;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosainmaster.NinteiChosainMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.Sikaku;
-import static jp.co.ndensan.reams.db.dbe.divcontroller.controller.DBE9040001.NinteiChosainMaster.追加;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.NinteiChosainMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.dgChosainIchiran_Row;
-import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.削除;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -32,13 +30,15 @@ public class NinteiChosainMasterHandler {
     private final static CodeShubetsu CHIKU_CODE_SHUBETSU = new CodeShubetsu("5002");
     private final static RString 有効 = new RString("有効");
     private final static RString 無効 = new RString("無効");
-    public final static RString CODE_有効 = new RString("1");
-    public final static RString CODE_無効 = new RString("2");
+    private final static RString CODE_有効 = new RString("1");
+    private final static RString CODE_無効 = new RString("2");
     private final static RString 男 = new RString("男");
     private final static RString 女 = new RString("女");
-    public final static RString MAN = new RString("1");
-    public final static RString WOMAN = new RString("2");
+    private final static RString MAN = new RString("1");
+    private final static RString WOMAN = new RString("2");
     private final NinteiChosainMasterDiv div;
+    private static final RString 追加 = new RString("追加");
+    private static final RString 削除 = new RString("削除");
 
     /**
      * コンストラクタです。

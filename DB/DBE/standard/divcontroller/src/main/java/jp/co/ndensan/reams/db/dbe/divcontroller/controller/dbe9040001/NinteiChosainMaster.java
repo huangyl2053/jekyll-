@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.controller.DBE9040001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe9040001;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +16,8 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.N
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.DBE9040001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.NinteiChosainMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.dgChosainIchiran_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9040001.NinteiChosainMasterHandler;
-import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9040001.NinteiChosainMasterValidationHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe9040001.NinteiChosainMasterHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe9040001.NinteiChosainMasterValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosainmaster.NinteiChosainMasterFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosainmaster.NinteiChosainMasterManager;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.chosainjoho.ChosainJohoManager;
@@ -42,9 +42,9 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class NinteiChosainMaster {
 
-    public static final RString 追加 = new RString("追加");
-    public static final RString 修正 = new RString("修正");
-    public static final RString 削除 = new RString("削除");
+    private static final RString 追加 = new RString("追加");
+    private static final RString 修正 = new RString("修正");
+    private static final RString 削除 = new RString("削除");
 
     /**
      * コンストラクタです。
@@ -62,7 +62,7 @@ public class NinteiChosainMaster {
     public ResponseData<NinteiChosainMasterDiv> onLoad(NinteiChosainMasterDiv div) {
         getHandler(div).load();
         getHandler(div).clearKensakuJoken();
-        RString 認定調査委託先コード = RString.EMPTY;//ViewStateHolder.get(ViewStateKeys.認定調査委託先コード, RString.class);
+        RString 認定調査委託先コード = RString.EMPTY; //ViewStateHolder.get(ViewStateKeys.認定調査委託先コード, RString.class);
         if (認定調査委託先コード != null && !認定調査委託先コード.isEmpty()) {
             div.getChosainSearch().getTxtSearchChosaItakusakiCodeFrom().setValue(認定調査委託先コード);
             onClick_btnSearchShujii(div);
