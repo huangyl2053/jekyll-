@@ -235,7 +235,9 @@ public class NinteiChosainMaster {
      * @return ResponseData<NinteiChosainMasterDiv>
      */
     public ResponseData<NinteiChosainMasterDiv> onClick_btnTorikeshi(NinteiChosainMasterDiv div) {
-        if (!状態_削除.equals(div.getChosainJohoInput().getState()) && getValidationHandler(div).isUpdate()) {
+        if ((状態_追加.equals(div.getChosainJohoInput().getState())
+                || 状態_修正.equals(div.getChosainJohoInput().getState()))
+                && getValidationHandler(div).isUpdate()) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -338,7 +340,9 @@ public class NinteiChosainMaster {
         dgChosainIchiran_Row row = div.getChosainIchiran().getDgChosainIchiran().getClickedItem();
         getHandler(div).setChosainJohoToMeisai(row);
         div.getChosainJohoInput().getTxtShichoson().setDisabled(true);
+        div.getChosainJohoInput().getBtnToSearchShichoson().setDisabled(true);
         div.getChosainJohoInput().getTxtChosaItakusaki().setDisabled(true);
+        div.getChosainJohoInput().getBtnToSearchChosaItakusaki().setDisabled(true);
         div.getChosainJohoInput().getTxtChosainCode().setDisabled(true);
         div.getChosainIchiran().setDisabled(true);
         return ResponseData.of(div).respond();

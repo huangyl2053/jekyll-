@@ -361,6 +361,9 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getTxtFaxNo().setDisabled(true);
         div.getChosainJohoInput().getTextBoxShozokuKikan().setDisabled(true);
         div.getChosainJohoInput().getRadChosainJokyo().setDisabled(true);
+        div.getChosainJohoInput().getBtnToSearchShichoson().setDisabled(true);
+        div.getChosainJohoInput().getBtnToSearchChosaItakusaki().setDisabled(true);
+        div.getChosainJohoInput().getBtnToSearchChiku().setDisabled(true);
     }
 
     /**
@@ -382,6 +385,11 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getTxtFaxNo().setDisabled(false);
         div.getChosainJohoInput().getTextBoxShozokuKikan().setDisabled(false);
         div.getChosainJohoInput().getRadChosainJokyo().setDisabled(false);
+        div.getChosainJohoInput().getBtnKakutei().setDisabled(false);
+        div.getChosainJohoInput().getBtnTorikeshi().setDisabled(false);
+        div.getChosainJohoInput().getBtnToSearchShichoson().setDisabled(false);
+        div.getChosainJohoInput().getBtnToSearchChosaItakusaki().setDisabled(false);
+        div.getChosainJohoInput().getBtnToSearchChiku().setDisabled(false);
     }
 
     /**
