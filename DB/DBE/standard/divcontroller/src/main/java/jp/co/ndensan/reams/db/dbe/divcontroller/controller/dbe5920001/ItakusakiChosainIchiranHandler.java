@@ -22,11 +22,11 @@ public class ItakusakiChosainIchiranHandler {
 
     private static final RString 状況_有効のみ = new RString("key0");
     private static final RString 状況_無効のみ = new RString("key1");
-    private static final RString 委託先コード_調査員カナ氏名 = new RString("key0");
-    private static final RString 委託先コード_調査員コード = new RString("key2");
-    private static final RString 委託先コード_調査員氏名 = new RString("key3");
+    private static final RString 委託先コード_調査員コード = new RString("key0");
+    private static final RString 委託先コード_調査員氏名 = new RString("key1");
+    private static final RString 委託先コード_調査員カナ氏名 = new RString("key2");
+    private static final RString 委託先名称_調査員コード = new RString("key3");
     private static final RString 委託先名称_調査員氏名 = new RString("key4");
-    private static final RString 委託先名称_調査員コード = new RString("key5");
     private final ItakusakiChosainIchiranDiv div;
 
     /**
