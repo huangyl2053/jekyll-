@@ -93,9 +93,9 @@ public class ItakusakiChosainIchiranHandler {
 
     private void setパラメータ改頁(ItakusakiChosainIchiranBatchParamter param) {
         if (状況_有効のみ.equals(div.getDdlNextpage().getSelectedKey())) {
-            param.setShichosonCode(NextPageType.委託先コード.code());
+            param.setNextPage(NextPageType.委託先コード.code());
         } else {
-            param.setShichosonCode(NextPageType.なし.code());
+            param.setNextPage(NextPageType.なし.code());
         }
     }
 }

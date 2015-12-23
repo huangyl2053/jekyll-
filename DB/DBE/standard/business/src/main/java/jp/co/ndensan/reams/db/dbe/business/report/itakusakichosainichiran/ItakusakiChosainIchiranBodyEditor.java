@@ -53,7 +53,7 @@ public class ItakusakiChosainIchiranBodyEditor implements ItakusakiChosainIchira
         }
         if (item.isShujiiJokyoFlag()) {
             source.listIchiranhyoUpper_11 = 有効_VALUE;
-        } else if (item.isShujiiJokyoFlag()) {
+        } else if (!item.isShujiiJokyoFlag()) {
             source.listIchiranhyoUpper_11 = 無効_VALUE;
         }
         source.listIchiranhyoLower1_1 = item.getIryoKikanMeisho();

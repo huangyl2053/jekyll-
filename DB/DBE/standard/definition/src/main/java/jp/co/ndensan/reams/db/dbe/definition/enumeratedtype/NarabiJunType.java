@@ -18,27 +18,27 @@ public enum NarabiJunType implements ICodeValueEnumeratedType {
     /**
      * 委託先コード+調査員コードを表す列挙体です。
      */
-    委託先コード_調査員コード("0"),
+    委託先コード_調査員コード("1"),
     /**
      * 委託先コード+調査員氏名を表す列挙体です。
      */
-    委託先コード_調査員氏名("1"),
+    委託先コード_調査員氏名("2"),
     /**
      * 委託先コード+調査員カナ氏名を表す列挙体です。
      */
-    委託先コード_調査員カナ氏名("2"),
+    委託先コード_調査員カナ氏名("3"),
     /**
      * 委託先名称+調査員コードを表す列挙体です。
      */
-    委託先名称_調査員コード("3"),
+    委託先名称_調査員コード("4"),
     /**
      * 委託先名称+調査員氏名を表す列挙体です。
      */
-    委託先名称_調査員氏名("4"),
+    委託先名称_調査員氏名("5"),
     /**
      * 委託先名称+調査員カナ氏名を表す列挙体です。
      */
-    委託先名称_調査員カナ氏名("5");
+    委託先名称_調査員カナ氏名("6");
 
     private final RString code;
 
@@ -65,8 +65,8 @@ public enum NarabiJunType implements ICodeValueEnumeratedType {
      * @param code 検索対象のコード
      * @return コードに該当する列挙型
      */
-    public static JyoukyouType toValue(RString code) {
-        for (JyoukyouType target : JyoukyouType.values()) {
+    public static NarabiJunType toValue(RString code) {
+        for (NarabiJunType target : NarabiJunType.values()) {
             if (target.code().compareTo(code) == 0) {
                 return target;
             }
