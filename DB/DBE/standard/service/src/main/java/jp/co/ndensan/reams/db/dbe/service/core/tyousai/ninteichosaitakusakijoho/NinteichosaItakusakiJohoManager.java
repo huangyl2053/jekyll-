@@ -11,7 +11,10 @@ import jp.co.ndensan.reams.db.dbe.business.core.tyousai.ninteichosaitakusakijoho
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5910NinteichosaItakusakiJohoDac;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.chosainjoho.ChosainJohoManager;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -53,8 +56,7 @@ public class NinteichosaItakusakiJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NinteichosaItakusakiJohoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link NinteichosaItakusakiJohoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link NinteichosaItakusakiJohoManager}のインスタンス
      */
     public static NinteichosaItakusakiJohoManager createInstance() {
         return InstanceProvider.create(NinteichosaItakusakiJohoManager.class);
@@ -83,5 +85,28 @@ public class NinteichosaItakusakiJohoManager {
         for (ChosainJoho 調査員情報 : 調査員情報List) {
             調査員情報Manager.save調査員情報(調査員情報);
         }
+    }
+
+    /**
+     * 主キーで認定調査委託先情報件数を取得します。
+     *
+     * @param 市町村コード ShichosonCode
+     * @param 認定調査委託先コード NinteichosaItakusakiCode
+     * @return 認定調査委託先情報件数
+     */
+    public int countByKey(LasdecCode 市町村コード, RString 認定調査委託先コード) {
+        return 認定調査委託先情報Dac.countByKey(市町村コード, 認定調査委託先コード);
+    }
+
+    /**
+     * DbT5910NinteichosaItakusakiJohoEntityを物理削除。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int deletePhysical(DbT5910NinteichosaItakusakiJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先情報エンティティ"));
+        return 認定調査委託先情報Dac.deletePhysical(entity);
     }
 }

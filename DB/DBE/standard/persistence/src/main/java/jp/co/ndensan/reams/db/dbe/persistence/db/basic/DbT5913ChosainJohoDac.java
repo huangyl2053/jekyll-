@@ -100,4 +100,25 @@ public class DbT5913ChosainJohoDac implements ISaveable<DbT5913ChosainJohoEntity
 
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 市町村コードと認定調査委託先コードで、調査員情報の件数を取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 認定調査委託先コード 認定調査委託先コード
+     * @return 件数
+     */
+    @Transaction
+    public int countByShichosonCodeAndNinteichosaItakusakiCode(LasdecCode 市町村コード, RString 認定調査委託先コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5913ChosainJoho.class).
+                where(and(
+                                eq(DbT5913ChosainJoho.shichosonCode, 市町村コード),
+                                eq(DbT5913ChosainJoho.ninteichosaItakusakiCode, 認定調査委託先コード)))
+                .getCount();
+    }
 }

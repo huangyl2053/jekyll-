@@ -21,12 +21,12 @@
         DbT5913ChosainJoho.*
         FROM
         (
-        SELECT 
+        SELECT
         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5051KoseiShichosonMasterMapper.allColumns_DbT5051KoseiShichosonMaster" />
         FROM rgdb."DbT5051KoseiShichosonMaster") AS DbT5051KoseiShichosonMaster
         LEFT JOIN
         (
-        SELECT 
+        SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.allColumns_DbT5910NinteichosaItakusakiJoho" />
         FROM rgdb."DbT5910NinteichosaItakusakiJoho") AS DbT5910NinteichosaItakusakiJoho
         ON
@@ -37,7 +37,7 @@
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.allColumns_DbT5913ChosainJoho" />
         FROM rgdb."DbT5913ChosainJoho") AS DbT5913ChosainJoho
         ON
-         DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_shichosonCode" = DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode"
+        DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_shichosonCode" = DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode"
         AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" = DbT5913ChosainJoho."dbT5913ChosainJoho_ninteichosaItakusakiCode"
         <where>
             1 = 1
@@ -53,4 +53,64 @@
         <collection property="認定調査委託先情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.tyousai.ninteichosaitakusakijoho.INinteichosaItakusakiJohoMapper.resultMap_NinteichosaItakusakiJohoEntity"/>
         <collection property="調査員情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.ResultMap_DbT5913ChosainJohoEntity"/>
     </resultMap>
+
+    <select id="ninteichosaItakusakiSearch" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosaitakusaki.NinteichosaItakusakiKensakuParameter" resultMap="resultMap_KoseiShichosonMasterEntity" fetchSize="500">
+        SELECT
+        dbt5910."shichosonCode",
+        dbt5051."shichosonMeisho",
+        dbt5910."ninteichosaItakusakiCode",
+        dbt5910."jigyoshaNo",
+        dbt5910."jigyoshaMeisho",
+        dbt5910."jigyoshaMeishoKana",
+        dbt5910."yubinNo",
+        dbt5910."jusho",
+        dbt5910."telNo",
+        dbt5910."faxNo",
+        dbt5910."daihyoshaName",
+        dbt5910."waritsukeTeiin",
+        dbt5910."autoWaritsukeFlag",
+        dbt5910."waritsukeChiku",
+        dbt5910."chosaItakuKubun",
+        dbt5910."kikanKubun",
+        dbt5910."jokyoFlag"
+        FROM
+        rgdb."DbT5910NinteichosaItakusakiJoho" AS dbt5910
+        INNER JOIN rgdb."DbT5051KoseiShichosonMaster" AS dbt5051
+        ON dbt5051."shichosonCode" = dbt5910."shichosonCode"
+        WHERE
+        1 = 1
+        <if test="jokyoFlag == true">
+            AND dbt5910."jokyoFlag" = true
+        </if>
+        <if test="jokyoFlag == false">
+            AND dbt5910."jokyoFlag" = false
+        </if>
+        <if test="shichosonCode != null">
+            AND dbt5051."shichosonCode" = #{shichosonCode}
+        </if>
+        <if test="searchChosaItakusakiCodeFrom!=null">
+            AND #{searchChosaItakusakiCodeFrom} &lt;= dbt5910."ninteichosaItakusakiCode"
+        </if>
+        <if test="searchChosaItakusakiCodeTo!=null">
+            AND dbt5910."ninteichosaItakusakiCode" &lt;= #{searchChosaItakusakiCodeTo}
+        </if>
+        <if test="jigyoshaMeisho!=null">
+            AND dbt5910."jigyoshaMeisho" LIKE '%#{jigyoshaMeisho}%'
+        </if>
+        <if test="jigyoshaMeishoKana!=null">
+            AND dbt5910."jigyoshaMeishoKana" LIKE '%#{jigyoshaMeishoKana}%'
+        </if>
+        <if test="chosaItakuKubun!=null">
+            AND dbt5910."chosaItakuKubun" = #{chosaItakuKubun}
+        </if>
+        <if test="kikanKubun!=null">
+            AND dbt5910."kikanKubun" = #{kikanKubun}
+        </if>
+        ORDER BY
+        dbt5910."shichosonCode",
+        dbt5910."ninteichosaItakusakiCode"
+        <if test="limit!=null and limit!=''">
+            limit #{limit}
+        </if>
+    </select>
 </mapper>

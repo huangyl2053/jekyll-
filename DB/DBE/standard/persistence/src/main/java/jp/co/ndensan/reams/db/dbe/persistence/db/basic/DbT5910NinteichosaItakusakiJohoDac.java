@@ -82,4 +82,38 @@ public class DbT5910NinteichosaItakusakiJohoDac implements ISaveable<DbT5910Nint
 
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * DbT5910NinteichosaItakusakiJohoEntityを物理削除。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int deletePhysical(DbT5910NinteichosaItakusakiJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先情報エンティティ"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.deletePhysical(entity).execute();
+    }
+
+    /**
+     * 主キーで認定調査委託先情報件数を取得します。
+     *
+     * @param 市町村コード ShichosonCode
+     * @param 認定調査委託先コード NinteichosaItakusakiCode
+     * @return 認定調査委託先情報件数
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int countByKey(LasdecCode 市町村コード, RString 認定調査委託先コード) throws NullPointerException {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5910NinteichosaItakusakiJoho.class).
+                where(and(
+                                eq(shichosonCode, 市町村コード),
+                                eq(ninteichosaItakusakiCode, 認定調査委託先コード))).getCount();
+    }
 }

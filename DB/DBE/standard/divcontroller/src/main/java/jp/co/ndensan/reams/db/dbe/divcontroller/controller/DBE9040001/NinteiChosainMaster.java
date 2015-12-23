@@ -265,24 +265,25 @@ public class NinteiChosainMaster {
         Models<ChosainJohoIdentifier, ChosainJoho> models = ViewStateHolder.get(ViewStateKeys.認定調査員マスタ検索結果, Models.class);
 
         if (追加.equals(状態)) {
-            ChosainJoho chosainJoho = new ChosainJoho(new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()), div.getChosainJohoInput().getTxtChosaItakusaki().getValue(),
-                    div.getChosainJohoInput().getTxtChosainCode().getValue());
+            ChosainJoho chosainJoho = new ChosainJoho(new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
+                    new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
+                    new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue()));
             chosainJoho = getHandler(div).editChosainJoho(chosainJoho);
             models.add(chosainJoho);
             div.getChosainIchiran().getDgChosainIchiran().getDataSource().add(getHandler(div).setChosainJohoToIchiran(状態));
         } else if (修正.equals(状態)) {
             ChosainJohoIdentifier key = new ChosainJohoIdentifier(
                     new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
-                    div.getChosainJohoInput().getTxtChosaItakusaki().getValue(),
-                    div.getChosainJohoInput().getTxtChosainCode().getValue());
+                    new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
+                    new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue()));
             getHandler(div).editChosainJoho(models.get(key).modifiedModel());
             int index = div.getChosainIchiran().getDgChosainIchiran().getGridSetting().selectedRowCount();
             div.getChosainIchiran().getDgChosainIchiran().getDataSource().set(index, getHandler(div).setChosainJohoToIchiran(状態));
         } else if (削除.equals(状態)) {
             ChosainJohoIdentifier key = new ChosainJohoIdentifier(
                     new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
-                    div.getChosainJohoInput().getTxtChosaItakusaki().getValue(),
-                    div.getChosainJohoInput().getTxtChosainCode().getValue());
+                    new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
+                    new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue()));
             getHandler(div).editChosainJoho(models.get(key).deleted());
             int index = div.getChosainIchiran().getDgChosainIchiran().getGridSetting().selectedRowCount();
             div.getChosainIchiran().getDgChosainIchiran().getDataSource().set(index, getHandler(div).setChosainJohoToIchiran(状態));
