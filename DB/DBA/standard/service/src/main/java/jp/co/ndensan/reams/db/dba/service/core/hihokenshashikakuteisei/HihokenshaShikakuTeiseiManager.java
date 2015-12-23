@@ -83,7 +83,6 @@ public class HihokenshaShikakuTeiseiManager {
     private static final Code CODE_112 = new Code("112");
     private static final Code CODE_120 = new Code("120");
     private static final Code CODE_111 = new Code("111");
-    private RString ERR_CODE = new RString("");
     private final DbT1001HihokenshaDaichoDac dac;
     private final HihokenshaShikakuShutokuManager getShutokuManager;
     private final KoikiShichosonJohoFinder 市町村情報取得Finder;
@@ -193,15 +192,16 @@ public class HihokenshaShikakuTeiseiManager {
      * @return ERR_CODE エラーコード
      */
     @SuppressWarnings("NM_METHOD_NAMING_CONVENTION")
-    public RString ShikakuTorukuListCheck(List<HihokenshaShutokuJyoho> 資格訂正登録リスト, IDateOfBirth 当該識別対象の生年月日) {
+    public RString shikakuTorukuListCheck(List<HihokenshaShutokuJyoho> 資格訂正登録リスト, IDateOfBirth 当該識別対象の生年月日) {
         //TODO 引数の資格訂正登録リスト．異動日より、引数の資格訂正登録リストのデータは異動日昇順を配列する。未実現　2015/12/23まで
+        RString errorCode = new RString("");
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         for (HihokenshaShutokuJyoho hihokenshaShutokuJyoho : 資格訂正登録リスト) {
             if (!hihokenshaShutokuJyoho.get資格取得事由コード().isEmpty()) {
-                ERR_CODE = this.資格取得チェック処理(hihokenshaShutokuJyoho.get資格取得年月日(), hihokenshaShutokuJyoho.get資格取得事由コード(),
+                errorCode = this.資格取得チェック処理(hihokenshaShutokuJyoho.get資格取得年月日(), hihokenshaShutokuJyoho.get資格取得事由コード(),
                         hihokenshaShutokuJyoho.get被保険者区分コード(), hihokenshaShutokuJyoho.get第1号資格取得年月日(), 当該識別対象の生年月日);
-                if (!ERR_CODE.isEmpty()) {
-                    return ERR_CODE;
+                if (!errorCode.isEmpty()) {
+                    return errorCode;
                 }
             }
             if (entity.getHihokenshaNo() != null) {
@@ -211,39 +211,39 @@ public class HihokenshaShikakuTeiseiManager {
                     }
                     List<TokusoRireki> tokusoRirekiList = new ArrayList<>();
                     tokusoRirekiList.add(tokusoRireki);
-                    ERR_CODE = this.資格喪失チェック処理(entity, hihokenshaShutokuJyoho.get資格喪失年月日(), 当該識別対象の生年月日, tokusoRirekiList);
-                    if (!ERR_CODE.isEmpty()) {
-                        return ERR_CODE;
+                    errorCode = this.資格喪失チェック処理(entity, hihokenshaShutokuJyoho.get資格喪失年月日(), 当該識別対象の生年月日, tokusoRirekiList);
+                    if (!errorCode.isEmpty()) {
+                        return errorCode;
                     }
                 }
                 if (!hihokenshaShutokuJyoho.get資格変更事由コード().isEmpty()) {
-                    ERR_CODE = this.資格変更チェック処理(entity, hihokenshaShutokuJyoho.get資格変更年月日(),
+                    errorCode = this.資格変更チェック処理(entity, hihokenshaShutokuJyoho.get資格変更年月日(),
                             hihokenshaShutokuJyoho.get資格変更事由コード(), 当該識別対象の生年月日);
-                    if (!ERR_CODE.isEmpty()) {
-                        return ERR_CODE;
+                    if (!errorCode.isEmpty()) {
+                        return errorCode;
                     }
                 }
 
                 if (!hihokenshaShutokuJyoho.get住所地特例適用事由コード().isEmpty()) {
-                    ERR_CODE = this.住所地特例チェック処理(entity, hihokenshaShutokuJyoho.get適用年月日(),
+                    errorCode = this.住所地特例チェック処理(entity, hihokenshaShutokuJyoho.get適用年月日(),
                             hihokenshaShutokuJyoho.get住所地特例適用事由コード(), hihokenshaShutokuJyoho.get解除年月日(),
                             hihokenshaShutokuJyoho.get住所地特例解除事由コード());
-                    if (!ERR_CODE.isEmpty()) {
-                        return ERR_CODE;
+                    if (!errorCode.isEmpty()) {
+                        return errorCode;
                     }
                 }
                 if (!hihokenshaShutokuJyoho.get住所地特例解除事由コード().isEmpty()) {
-                    ERR_CODE = this.住所地特例チェック処理(entity, hihokenshaShutokuJyoho.get適用年月日(),
+                    errorCode = this.住所地特例チェック処理(entity, hihokenshaShutokuJyoho.get適用年月日(),
                             hihokenshaShutokuJyoho.get住所地特例適用事由コード(), hihokenshaShutokuJyoho.get解除年月日(),
                             hihokenshaShutokuJyoho.get住所地特例解除事由コード());
-                    if (!ERR_CODE.isEmpty()) {
-                        return ERR_CODE;
+                    if (!errorCode.isEmpty()) {
+                        return errorCode;
                     }
                 }
             }
             entity = this.getListToEntity(hihokenshaShutokuJyoho, entity);
         }
-        return ERR_CODE;
+        return errorCode;
     }
 
     /**
@@ -260,6 +260,7 @@ public class HihokenshaShikakuTeiseiManager {
     @SuppressWarnings("UWF_UNWRITTEN_FIELD")
     private RString 資格取得チェック処理(FlexibleDate 取得日, RString 取得事由コード, RString 被保区分コード, FlexibleDate 第1号資格取得年月日,
             IDateOfBirth 当該識別対象の生年月日) {
+        RString errorCode = new RString("");
         int age = Integer.valueOf(get年齢(当該識別対象の生年月日, 取得日).toString());
         if (取得事由コード.equals(ShikakuShutokuJiyu.年齢到達.getコード())) {
             FlexibleDate 年齢到達日 = getAge.get年齢到達日(AGE_65);
@@ -269,16 +270,12 @@ public class HihokenshaShikakuTeiseiManager {
         } else if (age < AGE_40) {
             return ERR_CODE_DBAE00021;
         }
-        if (被保区分コード.equals(RSTRING_1)) {
-            if (age < AGE_65) {
-                return ERR_CODE_DBAE00022;
-            }
-        } else if (被保区分コード.equals(RSTRING_2)) {
-            if (age < AGE_65) {
-                return ERR_CODE_DBAE00023;
-            }
+        if (被保区分コード.equals(RSTRING_1) && age < AGE_65) {
+            return ERR_CODE_DBAE00022;
+        } else if (被保区分コード.equals(RSTRING_2) && age < AGE_65) {
+            return ERR_CODE_DBAE00023;
         }
-        return ERR_CODE;
+        return errorCode;
     }
 
     /**
@@ -294,6 +291,7 @@ public class HihokenshaShikakuTeiseiManager {
     @java.lang.SuppressWarnings("null")
     private RString 資格喪失チェック処理(DbT1001HihokenshaDaichoEntity 最新データ, FlexibleDate 喪失年月日, IDateOfBirth 当該識別対象の生年月日,
             List<TokusoRireki> tokusoRirekiList) {
+        RString errorCode = new RString("");
         if (最新データ.getHihokenshaNo() != null && !最新データ.getHihokenshaNo().isEmpty()) {
             if (最新データ.getIchigoShikakuShutokuYMD() == null || 最新データ.getIchigoShikakuShutokuYMD().isEmpty()) {
                 int age = Integer.valueOf(get年齢(当該識別対象の生年月日, 喪失年月日).toString());
@@ -308,19 +306,19 @@ public class HihokenshaShikakuTeiseiManager {
                 }
                 List<SikakuKikan> sikakuKikanList = new ArrayList<>();
                 sikakuKikanList.add(sikakuKikan);
-                ERR_CODE = getIdoCheckManager.sikakuKikanRirekiChofukuCheck(sikakuKikanList);
-                if (!ERR_CODE.isEmpty()) {
-                    return ERR_CODE;
+                errorCode = getIdoCheckManager.sikakuKikanRirekiChofukuCheck(sikakuKikanList);
+                if (!errorCode.isEmpty()) {
+                    return errorCode;
                 }
-                ERR_CODE = getIdoCheckManager.tokusouTanoKikanChofukuCheck(tokusoRirekiList, 最新データ.getShikibetsuCode());
-                if (!ERR_CODE.isEmpty()) {
-                    return ERR_CODE;
+                errorCode = getIdoCheckManager.tokusouTanoKikanChofukuCheck(tokusoRirekiList, 最新データ.getShikibetsuCode());
+                if (!errorCode.isEmpty()) {
+                    return errorCode;
                 }
             }
         } else if (最新データ.getHihokenshaNo() == null || 最新データ.getHihokenshaNo().isEmpty()) {
             return ERR_CODE_DBAE00008;
         }
-        return ERR_CODE;
+        return errorCode;
     }
 
     /**
@@ -334,6 +332,7 @@ public class HihokenshaShikakuTeiseiManager {
      */
     private RString 資格変更チェック処理(DbT1001HihokenshaDaichoEntity 最新データ, FlexibleDate 変更日, RString 変更事由コード,
             IDateOfBirth 当該識別対象の生年月日) {
+        RString errorCode = new RString("");
         if (最新データ.getHihokenshaNo() != null && !最新データ.getHihokenshaNo().isEmpty()) {
             if (変更日.isBefore(最新データ.getIdoYMD())) {
                 return ERR_CODE_DBAE00010;
@@ -348,11 +347,12 @@ public class HihokenshaShikakuTeiseiManager {
                 }
             }
             if (最新データ.getHihokennshaKubunCode().equals(RSTRING_2)) {
-                if (age >= AGE_65 && !変更事由コード.equals(new RString(ShikakuHenkoJiyu._１号到達.getコード().toString()))) {
-                    return ERR_CODE_DBAE00013;
-                }
-                if (age >= AGE_65 && 変更事由コード.equals(new RString(ShikakuHenkoJiyu._１号到達.getコード().toString()))) {
-                    if (変更日.isBefore(getAge.get年齢到達日(65)) || getAge.get年齢到達日(65).isBefore(変更日)) {
+                if (age >= AGE_65) {
+                    if (!変更事由コード.equals(new RString(ShikakuHenkoJiyu._１号到達.getコード().toString()))) {
+                        return ERR_CODE_DBAE00013;
+                    }
+                    if (変更事由コード.equals(new RString(ShikakuHenkoJiyu._１号到達.getコード().toString()))
+                            && 変更日.isBefore(getAge.get年齢到達日(AGE_65)) || getAge.get年齢到達日(AGE_65).isBefore(変更日)) {
                         return ERR_CODE_DBAE00014;
                     }
                 }
@@ -370,7 +370,7 @@ public class HihokenshaShikakuTeiseiManager {
                 return ERR_CODE_DBAE00024;
             }
         }
-        return ERR_CODE;
+        return errorCode;
     }
 
     /**
@@ -388,34 +388,28 @@ public class HihokenshaShikakuTeiseiManager {
     @java.lang.SuppressWarnings("null")
     private RString 住所地特例チェック処理(DbT1001HihokenshaDaichoEntity 最新データ, FlexibleDate 適用日, RString 適用事由コード,
             FlexibleDate 解除日, RString 解除事由コード) {
-        if (最新データ.getJushochitokureiTekiyoJiyuCode() != null && 最新データ.getJushochitokureiKaijoJiyuCode() == null) {
-            if (!最新データ.getJushochitokureiTekiyoJiyuCode().isEmpty()) {
-                this.getERRCODE(適用事由コード, 解除事由コード);
-            }
-        } else if (最新データ.getJushochitokureiTekiyoJiyuCode() != null && 最新データ.getJushochitokureiKaijoJiyuCode() != null) {
-            if (!最新データ.getJushochitokureiTekiyoJiyuCode().isEmpty() && 最新データ.getJushochitokureiKaijoJiyuCode().isEmpty()) {
-                this.getERRCODE(適用事由コード, 解除事由コード);
-            }
+        RString errorCode = new RString("");
+        if (最新データ.getJushochitokureiTekiyoJiyuCode() != null && 最新データ.getJushochitokureiKaijoJiyuCode() == null
+                && !最新データ.getJushochitokureiTekiyoJiyuCode().isEmpty()) {
+            this.getERRCODE(適用事由コード, 解除事由コード);
+        } else if (最新データ.getJushochitokureiTekiyoJiyuCode() != null && 最新データ.getJushochitokureiKaijoJiyuCode() != null
+                && !最新データ.getJushochitokureiTekiyoJiyuCode().isEmpty() && 最新データ.getJushochitokureiKaijoJiyuCode().isEmpty()) {
+            this.getERRCODE(適用事由コード, 解除事由コード);
         }
-        if (適用事由コード != null && 解除事由コード != null) {
-            if (!適用事由コード.isEmpty() && !解除事由コード.isEmpty()) {
-                if (最新データ.getJushochitokureiTekiyoJiyuCode() != null && 最新データ.getJushochitokureiKaijoJiyuCode() != null) {
-                    if (!最新データ.getJushochitokureiTekiyoJiyuCode().isEmpty() && !最新データ.getJushochitokureiKaijoJiyuCode().isEmpty()) {
-                        return ERR_CODE_DBAE00019;
-                    }
-                }
-            }
+        if (適用事由コード != null && 解除事由コード != null && !適用事由コード.isEmpty() && !解除事由コード.isEmpty()
+                && 最新データ.getJushochitokureiTekiyoJiyuCode() != null && !最新データ.getJushochitokureiTekiyoJiyuCode().isEmpty()
+                && 最新データ.getJushochitokureiKaijoJiyuCode() != null && !最新データ.getJushochitokureiKaijoJiyuCode().isEmpty()) {
+            return ERR_CODE_DBAE00019;
         }
-        return ERR_CODE;
+        return errorCode;
     }
 
     private RString getERRCODE(RString 適用事由コード, RString 解除事由コード) {
-        if (適用事由コード != null && !適用事由コード.isEmpty()) {
-            if (解除事由コード == null || 解除事由コード.isEmpty()) {
-                return ERR_CODE_DBAE00018;
-            }
+        RString errorCode = new RString("");
+        if ((適用事由コード != null && !適用事由コード.isEmpty()) && (解除事由コード == null || 解除事由コード.isEmpty())) {
+            return ERR_CODE_DBAE00018;
         }
-        return ERR_CODE;
+        return errorCode;
     }
 
     /**
@@ -423,17 +417,18 @@ public class HihokenshaShikakuTeiseiManager {
      *
      * @param 識別コード 識別コード
      * @param 被保険者番号 被保険者番号
-     * @return ERR_CODE エラーコード
+     * @return errorCode エラーコード
      */
     @SuppressWarnings("NM_METHOD_NAMING_CONVENTION")
-    public RString TeiseiCheck(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+    public RString teiseiCheck(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+        RString errorCode = new RString("");
         HihokenshaShutokuJyoho hihokenshaShutokuJyoho = getShutokuManager.getSaishinDeta(識別コード, 被保険者番号);
         List<HihokenshaShutokuJyoho> saishin = new ArrayList<>();
         saishin.add(hihokenshaShutokuJyoho);
         if (saishin.isEmpty()) {
             return ERR_CODE_DBAE00025;
         }
-        return ERR_CODE;
+        return errorCode;
     }
 
     private boolean getListVsEntity(HihokenshaShutokuJyoho hihokenshaShutokuJyoho, DbT1001HihokenshaDaichoEntity entity) {
@@ -620,117 +615,117 @@ public class HihokenshaShikakuTeiseiManager {
 
     private DbT1001HihokenshaDaichoEntity getList取得事由コード(ShikakuTeyiseyiEntity entity, HihokenshaNo 被保番号, ShikibetsuCode 識別コード,
             LasdecCode 市町村コード, LasdecCode 広住特措置元市町村コード, LasdecCode 旧市町村コード) {
-        DbT1001HihokenshaDaichoEntity DbT1001 = new DbT1001HihokenshaDaichoEntity();
-        DbT1001.setHihokenshaNo(被保番号);
-        DbT1001.setIdoYMD(entity.get異動日());
-        DbT1001.setIdoJiyuCode(entity.get取得事由コード());
-        DbT1001.setShichosonCode(市町村コード);
-        DbT1001.setShikibetsuCode(識別コード);
-        DbT1001.setShikakuShutokuJiyuCode(entity.get取得事由コード());
-        DbT1001.setShikakuShutokuYMD(entity.get取得日());
-        DbT1001.setShikakuShutokuTodokedeYMD(entity.get取得届出日());
+        DbT1001HihokenshaDaichoEntity dbt1001Entity = new DbT1001HihokenshaDaichoEntity();
+        dbt1001Entity.setHihokenshaNo(被保番号);
+        dbt1001Entity.setIdoYMD(entity.get異動日());
+        dbt1001Entity.setIdoJiyuCode(entity.get取得事由コード());
+        dbt1001Entity.setShichosonCode(市町村コード);
+        dbt1001Entity.setShikibetsuCode(識別コード);
+        dbt1001Entity.setShikakuShutokuJiyuCode(entity.get取得事由コード());
+        dbt1001Entity.setShikakuShutokuYMD(entity.get取得日());
+        dbt1001Entity.setShikakuShutokuTodokedeYMD(entity.get取得届出日());
         if (entity.get被保区分コード().equals(RSTRING_1)) {
-            DbT1001.setIchigoShikakuShutokuYMD(entity.get異動日());
+            dbt1001Entity.setIchigoShikakuShutokuYMD(entity.get異動日());
         }
-        DbT1001.setHihokennshaKubunCode(entity.get被保区分コード());
-        DbT1001.setKoikinaiTokureiSochimotoShichosonCode(広住特措置元市町村コード);
-        DbT1001.setKyuShichosonCode(旧市町村コード);
-        DbT1001.setLogicalDeletedFlag(false);
-        return DbT1001;
+        dbt1001Entity.setHihokennshaKubunCode(entity.get被保区分コード());
+        dbt1001Entity.setKoikinaiTokureiSochimotoShichosonCode(広住特措置元市町村コード);
+        dbt1001Entity.setKyuShichosonCode(旧市町村コード);
+        dbt1001Entity.setLogicalDeletedFlag(false);
+        return dbt1001Entity;
     }
 
     private DbT1001HihokenshaDaichoEntity getList喪失事由コード(List<HihokenshaShutokuJyoho> 資格訂正登録リスト, ShikakuTeyiseyiEntity entity) {
-        DbT1001HihokenshaDaichoEntity DbT1001 = new DbT1001HihokenshaDaichoEntity();
+        DbT1001HihokenshaDaichoEntity dbt1001Entity = new DbT1001HihokenshaDaichoEntity();
         for (HihokenshaShutokuJyoho hihokenshaShutokuJyoho : 資格訂正登録リスト) {
-            DbT1001.setHihokenshaNo(hihokenshaShutokuJyoho.get被保険者番号());
-            DbT1001.setIdoYMD(entity.get異動日());
-            DbT1001.setIdoJiyuCode(entity.get喪失事由コード());
-            DbT1001.setShichosonCode(hihokenshaShutokuJyoho.get市町村コード());
-            DbT1001.setShikibetsuCode(hihokenshaShutokuJyoho.get識別コード());
-            DbT1001.setShikakuShutokuJiyuCode(hihokenshaShutokuJyoho.get資格取得事由コード());
-            DbT1001.setShikakuShutokuYMD(hihokenshaShutokuJyoho.get資格取得年月日());
-            DbT1001.setShikakuShutokuTodokedeYMD(hihokenshaShutokuJyoho.get資格取得届出年月日());
-            DbT1001.setIchigoShikakuShutokuYMD(hihokenshaShutokuJyoho.get第1号資格取得年月日());
-            DbT1001.setHihokennshaKubunCode(hihokenshaShutokuJyoho.get被保険者区分コード());
-            DbT1001.setShikakuSoshitsuJiyuCode(entity.get喪失事由コード());
-            DbT1001.setShikakuSoshitsuYMD(entity.get喪失日());
-            DbT1001.setShikakuSoshitsuTodokedeYMD(entity.get喪失届出日());
-            DbT1001.setShikakuHenkoJiyuCode(hihokenshaShutokuJyoho.get資格変更事由コード());
-            DbT1001.setShikakuHenkoYMD(hihokenshaShutokuJyoho.get資格変更年月日());
-            DbT1001.setShikakuHenkoTodokedeYMD(hihokenshaShutokuJyoho.get資格変更届出年月日());
-            DbT1001.setJushochitokureiTekiyoJiyuCode(hihokenshaShutokuJyoho.get住所地特例適用事由コード());
-            DbT1001.setJushochitokureiTekiyoYMD(hihokenshaShutokuJyoho.get適用年月日());
-            DbT1001.setJushochitokureiTekiyoTodokedeYMD(hihokenshaShutokuJyoho.get適用届出年月日());
-            DbT1001.setJushochitokureiKaijoJiyuCode(hihokenshaShutokuJyoho.get住所地特例解除事由コード());
-            DbT1001.setJushochitokureiKaijoYMD(hihokenshaShutokuJyoho.get解除年月日());
-            DbT1001.setJushochitokureiKaijoTodokedeYMD(hihokenshaShutokuJyoho.get解除届出年月日());
-            DbT1001.setJushochiTokureiFlag(hihokenshaShutokuJyoho.get住所地特例フラグ());
-            DbT1001.setKoikinaiJushochiTokureiFlag(hihokenshaShutokuJyoho.get広域内住所地特例フラグ());
-            DbT1001.setKoikinaiTokureiSochimotoShichosonCode(hihokenshaShutokuJyoho.get広住特措置元市町村コード());
-            DbT1001.setKyuShichosonCode(hihokenshaShutokuJyoho.get旧市町村コード());
-            DbT1001.setLogicalDeletedFlag(hihokenshaShutokuJyoho.is論理削除フラグ());
+            dbt1001Entity.setHihokenshaNo(hihokenshaShutokuJyoho.get被保険者番号());
+            dbt1001Entity.setIdoYMD(entity.get異動日());
+            dbt1001Entity.setIdoJiyuCode(entity.get喪失事由コード());
+            dbt1001Entity.setShichosonCode(hihokenshaShutokuJyoho.get市町村コード());
+            dbt1001Entity.setShikibetsuCode(hihokenshaShutokuJyoho.get識別コード());
+            dbt1001Entity.setShikakuShutokuJiyuCode(hihokenshaShutokuJyoho.get資格取得事由コード());
+            dbt1001Entity.setShikakuShutokuYMD(hihokenshaShutokuJyoho.get資格取得年月日());
+            dbt1001Entity.setShikakuShutokuTodokedeYMD(hihokenshaShutokuJyoho.get資格取得届出年月日());
+            dbt1001Entity.setIchigoShikakuShutokuYMD(hihokenshaShutokuJyoho.get第1号資格取得年月日());
+            dbt1001Entity.setHihokennshaKubunCode(hihokenshaShutokuJyoho.get被保険者区分コード());
+            dbt1001Entity.setShikakuSoshitsuJiyuCode(entity.get喪失事由コード());
+            dbt1001Entity.setShikakuSoshitsuYMD(entity.get喪失日());
+            dbt1001Entity.setShikakuSoshitsuTodokedeYMD(entity.get喪失届出日());
+            dbt1001Entity.setShikakuHenkoJiyuCode(hihokenshaShutokuJyoho.get資格変更事由コード());
+            dbt1001Entity.setShikakuHenkoYMD(hihokenshaShutokuJyoho.get資格変更年月日());
+            dbt1001Entity.setShikakuHenkoTodokedeYMD(hihokenshaShutokuJyoho.get資格変更届出年月日());
+            dbt1001Entity.setJushochitokureiTekiyoJiyuCode(hihokenshaShutokuJyoho.get住所地特例適用事由コード());
+            dbt1001Entity.setJushochitokureiTekiyoYMD(hihokenshaShutokuJyoho.get適用年月日());
+            dbt1001Entity.setJushochitokureiTekiyoTodokedeYMD(hihokenshaShutokuJyoho.get適用届出年月日());
+            dbt1001Entity.setJushochitokureiKaijoJiyuCode(hihokenshaShutokuJyoho.get住所地特例解除事由コード());
+            dbt1001Entity.setJushochitokureiKaijoYMD(hihokenshaShutokuJyoho.get解除年月日());
+            dbt1001Entity.setJushochitokureiKaijoTodokedeYMD(hihokenshaShutokuJyoho.get解除届出年月日());
+            dbt1001Entity.setJushochiTokureiFlag(hihokenshaShutokuJyoho.get住所地特例フラグ());
+            dbt1001Entity.setKoikinaiJushochiTokureiFlag(hihokenshaShutokuJyoho.get広域内住所地特例フラグ());
+            dbt1001Entity.setKoikinaiTokureiSochimotoShichosonCode(hihokenshaShutokuJyoho.get広住特措置元市町村コード());
+            dbt1001Entity.setKyuShichosonCode(hihokenshaShutokuJyoho.get旧市町村コード());
+            dbt1001Entity.setLogicalDeletedFlag(hihokenshaShutokuJyoho.is論理削除フラグ());
         }
-        return DbT1001;
+        return dbt1001Entity;
     }
 
     private SearchResult<HihokenshaShutokuJyoho> getList変更事由コード(List<HihokenshaShutokuJyoho> 資格訂正登録リスト, ShikakuTeyiseyiEntity entity,
             ShikibetsuCode 識別コード, LasdecCode 市町村コード, LasdecCode 広特措置元市町村コード, LasdecCode 旧市町村コード) {
-        DbT1001HihokenshaDaichoEntity DbT1001 = new DbT1001HihokenshaDaichoEntity();
+        DbT1001HihokenshaDaichoEntity dbt1001Entity = new DbT1001HihokenshaDaichoEntity();
         for (HihokenshaShutokuJyoho hihokenshaShutokuJyoho : 資格訂正登録リスト) {
-            DbT1001.setHihokenshaNo(hihokenshaShutokuJyoho.get被保険者番号());
-            DbT1001.setIdoYMD(entity.get異動日());
-            DbT1001.setIdoJiyuCode(entity.get変更事由コード());
-            DbT1001.setShichosonCode(hihokenshaShutokuJyoho.get市町村コード());
-            DbT1001.setShikibetsuCode(hihokenshaShutokuJyoho.get識別コード());
-            DbT1001.setShikakuShutokuJiyuCode(hihokenshaShutokuJyoho.get資格取得事由コード());
-            DbT1001.setShikakuShutokuYMD(hihokenshaShutokuJyoho.get資格取得年月日());
-            DbT1001.setShikakuShutokuTodokedeYMD(hihokenshaShutokuJyoho.get資格取得届出年月日());
-            DbT1001.setIchigoShikakuShutokuYMD(hihokenshaShutokuJyoho.get第1号資格取得年月日());
-            DbT1001.setHihokennshaKubunCode(hihokenshaShutokuJyoho.get被保険者区分コード());
-            DbT1001.setShikakuSoshitsuJiyuCode(hihokenshaShutokuJyoho.get資格喪失事由コード());
-            DbT1001.setShikakuSoshitsuYMD(hihokenshaShutokuJyoho.get資格喪失年月日());
-            DbT1001.setShikakuSoshitsuTodokedeYMD(hihokenshaShutokuJyoho.get資格喪失届出年月日());
-            DbT1001.setShikakuHenkoJiyuCode(entity.get変更事由コード());
-            DbT1001.setShikakuHenkoYMD(entity.get変更日());
-            DbT1001.setShikakuHenkoTodokedeYMD(entity.get変更届出日());
-            DbT1001.setJushochiTokureiFlag(hihokenshaShutokuJyoho.get住所地特例フラグ());
-            DbT1001.setKoikinaiJushochiTokureiFlag(hihokenshaShutokuJyoho.get広域内住所地特例フラグ());
-            DbT1001.setKoikinaiTokureiSochimotoShichosonCode(hihokenshaShutokuJyoho.get広住特措置元市町村コード());
-            DbT1001.setKyuShichosonCode(hihokenshaShutokuJyoho.get旧市町村コード());
-            DbT1001.setLogicalDeletedFlag(hihokenshaShutokuJyoho.is論理削除フラグ());
+            dbt1001Entity.setHihokenshaNo(hihokenshaShutokuJyoho.get被保険者番号());
+            dbt1001Entity.setIdoYMD(entity.get異動日());
+            dbt1001Entity.setIdoJiyuCode(entity.get変更事由コード());
+            dbt1001Entity.setShichosonCode(hihokenshaShutokuJyoho.get市町村コード());
+            dbt1001Entity.setShikibetsuCode(hihokenshaShutokuJyoho.get識別コード());
+            dbt1001Entity.setShikakuShutokuJiyuCode(hihokenshaShutokuJyoho.get資格取得事由コード());
+            dbt1001Entity.setShikakuShutokuYMD(hihokenshaShutokuJyoho.get資格取得年月日());
+            dbt1001Entity.setShikakuShutokuTodokedeYMD(hihokenshaShutokuJyoho.get資格取得届出年月日());
+            dbt1001Entity.setIchigoShikakuShutokuYMD(hihokenshaShutokuJyoho.get第1号資格取得年月日());
+            dbt1001Entity.setHihokennshaKubunCode(hihokenshaShutokuJyoho.get被保険者区分コード());
+            dbt1001Entity.setShikakuSoshitsuJiyuCode(hihokenshaShutokuJyoho.get資格喪失事由コード());
+            dbt1001Entity.setShikakuSoshitsuYMD(hihokenshaShutokuJyoho.get資格喪失年月日());
+            dbt1001Entity.setShikakuSoshitsuTodokedeYMD(hihokenshaShutokuJyoho.get資格喪失届出年月日());
+            dbt1001Entity.setShikakuHenkoJiyuCode(entity.get変更事由コード());
+            dbt1001Entity.setShikakuHenkoYMD(entity.get変更日());
+            dbt1001Entity.setShikakuHenkoTodokedeYMD(entity.get変更届出日());
+            dbt1001Entity.setJushochiTokureiFlag(hihokenshaShutokuJyoho.get住所地特例フラグ());
+            dbt1001Entity.setKoikinaiJushochiTokureiFlag(hihokenshaShutokuJyoho.get広域内住所地特例フラグ());
+            dbt1001Entity.setKoikinaiTokureiSochimotoShichosonCode(hihokenshaShutokuJyoho.get広住特措置元市町村コード());
+            dbt1001Entity.setKyuShichosonCode(hihokenshaShutokuJyoho.get旧市町村コード());
+            dbt1001Entity.setLogicalDeletedFlag(hihokenshaShutokuJyoho.is論理削除フラグ());
             if (entity.get変更事由コード().equals(ShikakuHenkoJiyu.広域内転居.getコード())) {
-                DbT1001.setShichosonCode(市町村コード);
-                DbT1001.setShikibetsuCode(識別コード);
+                dbt1001Entity.setShichosonCode(市町村コード);
+                dbt1001Entity.setShikibetsuCode(識別コード);
             }
             if (entity.get変更事由コード().equals(ShikakuHenkoJiyu.広住特適用.getコード())) {
-                DbT1001.setShichosonCode(市町村コード);
-                DbT1001.setShikibetsuCode(識別コード);
-                DbT1001.setKoikinaiTokureiSochimotoShichosonCode(広特措置元市町村コード);
-                DbT1001.setKoikinaiJushochiTokureiFlag(RSTRING_1);
+                dbt1001Entity.setShichosonCode(市町村コード);
+                dbt1001Entity.setShikibetsuCode(識別コード);
+                dbt1001Entity.setKoikinaiTokureiSochimotoShichosonCode(広特措置元市町村コード);
+                dbt1001Entity.setKoikinaiJushochiTokureiFlag(RSTRING_1);
             }
             if (entity.get変更事由コード().equals(ShikakuHenkoJiyu.広住特転入.getコード())) {
-                DbT1001.setShichosonCode(市町村コード);
-                DbT1001.setShikibetsuCode(識別コード);
-                DbT1001.setKoikinaiTokureiSochimotoShichosonCode(コード);
-                DbT1001.setKoikinaiJushochiTokureiFlag(RSTRING_SPACE);
+                dbt1001Entity.setShichosonCode(市町村コード);
+                dbt1001Entity.setShikibetsuCode(識別コード);
+                dbt1001Entity.setKoikinaiTokureiSochimotoShichosonCode(コード);
+                dbt1001Entity.setKoikinaiJushochiTokureiFlag(RSTRING_SPACE);
             }
             if (entity.get変更事由コード().equals(ShikakuHenkoJiyu.広住特居住.getコード())) {
-                DbT1001.setKoikinaiTokureiSochimotoShichosonCode(コード);
-                DbT1001.setKoikinaiJushochiTokureiFlag(RSTRING_SPACE);
+                dbt1001Entity.setKoikinaiTokureiSochimotoShichosonCode(コード);
+                dbt1001Entity.setKoikinaiJushochiTokureiFlag(RSTRING_SPACE);
             }
             //TODO QA262 ●確認事項１ 「DBA介護資格_Enum設定表」の資格変更事由に「合併旧市町村間転居」が存在しない　2015/12/23まで
             if (entity.get変更事由コード().equals(ShikakuHenkoJiyu.合併内転居.getコード())) {
-                DbT1001.setShichosonCode(旧市町村コード);
+                dbt1001Entity.setShichosonCode(旧市町村コード);
             }
             if (entity.get変更事由コード().equals(ShikakuHenkoJiyu._１号到達.getコード())) {
-                DbT1001.setIchigoShikakuShutokuYMD(entity.get変更日());
-                DbT1001.setHihokennshaKubunCode(RSTRING_1);
+                dbt1001Entity.setIchigoShikakuShutokuYMD(entity.get変更日());
+                dbt1001Entity.setHihokennshaKubunCode(RSTRING_1);
             }
             if (entity.get変更事由コード().equals(ShikakuHenkoJiyu.一本化.getコード())
                     && hihokenshaShutokuJyoho.get住所地特例適用事由コード().equals(ShikakuJutokuTekiyoJiyu.自特例適用.getコード())) {
-                HihokenshaShutokuJyoho shaShutokuJyoho1 = new HihokenshaShutokuJyoho(this.get資格訂正登録1(DbT1001, hihokenshaShutokuJyoho, entity));
-                HihokenshaShutokuJyoho shaShutokuJyoho2 = new HihokenshaShutokuJyoho(this.get資格訂正登録2(DbT1001, hihokenshaShutokuJyoho, entity));
-                HihokenshaShutokuJyoho shaShutokuJyoho3 = new HihokenshaShutokuJyoho(this.get資格訂正登録3(DbT1001, hihokenshaShutokuJyoho, entity,
+                HihokenshaShutokuJyoho shaShutokuJyoho1 = new HihokenshaShutokuJyoho(this.get資格訂正登録1(dbt1001Entity, hihokenshaShutokuJyoho, entity));
+                HihokenshaShutokuJyoho shaShutokuJyoho2 = new HihokenshaShutokuJyoho(this.get資格訂正登録2(dbt1001Entity, hihokenshaShutokuJyoho, entity));
+                HihokenshaShutokuJyoho shaShutokuJyoho3 = new HihokenshaShutokuJyoho(this.get資格訂正登録3(dbt1001Entity, hihokenshaShutokuJyoho, entity,
                         識別コード, 広特措置元市町村コード));
                 資格訂正登録リスト.add(shaShutokuJyoho1);
                 資格訂正登録リスト.add(shaShutokuJyoho2);
@@ -739,168 +734,168 @@ public class HihokenshaShikakuTeiseiManager {
             }
             if (entity.get変更事由コード().equals(ShikakuHenkoJiyu.合併.getコード())
                     && hihokenshaShutokuJyoho.get住所地特例適用事由コード().equals(ShikakuJutokuTekiyoJiyu.自特例適用.getコード())) {
-                HihokenshaShutokuJyoho shaShutokuJyoho1 = new HihokenshaShutokuJyoho(this.get資格訂正登録1(DbT1001, hihokenshaShutokuJyoho, entity));
-                HihokenshaShutokuJyoho shaShutokuJyoho2 = new HihokenshaShutokuJyoho(this.get資格訂正登録2(DbT1001, hihokenshaShutokuJyoho, entity));
+                HihokenshaShutokuJyoho shaShutokuJyoho1 = new HihokenshaShutokuJyoho(this.get資格訂正登録1(dbt1001Entity, hihokenshaShutokuJyoho, entity));
+                HihokenshaShutokuJyoho shaShutokuJyoho2 = new HihokenshaShutokuJyoho(this.get資格訂正登録2(dbt1001Entity, hihokenshaShutokuJyoho, entity));
                 資格訂正登録リスト.add(shaShutokuJyoho1);
                 資格訂正登録リスト.add(shaShutokuJyoho2);
                 return SearchResult.of(資格訂正登録リスト, 0, false);
             }
         }
-        HihokenshaShutokuJyoho 資格訂正登録 = new HihokenshaShutokuJyoho(DbT1001);
+        HihokenshaShutokuJyoho 資格訂正登録 = new HihokenshaShutokuJyoho(dbt1001Entity);
         資格訂正登録リスト.add(資格訂正登録);
         return SearchResult.of(資格訂正登録リスト, 0, false);
     }
 
     private DbT1001HihokenshaDaichoEntity getList適用事由コード(List<HihokenshaShutokuJyoho> 資格訂正登録リスト, ShikakuTeyiseyiEntity entity) {
-        DbT1001HihokenshaDaichoEntity DbT1001 = new DbT1001HihokenshaDaichoEntity();
+        DbT1001HihokenshaDaichoEntity dbt1001Entity = new DbT1001HihokenshaDaichoEntity();
         for (HihokenshaShutokuJyoho hihokenshaShutokuJyoho : 資格訂正登録リスト) {
-            DbT1001.setHihokenshaNo(hihokenshaShutokuJyoho.get被保険者番号());
-            DbT1001.setIdoYMD(entity.get異動日());
-            DbT1001.setIdoJiyuCode(entity.get喪失事由コード());
-            DbT1001.setShichosonCode(hihokenshaShutokuJyoho.get市町村コード());
-            DbT1001.setShikibetsuCode(hihokenshaShutokuJyoho.get識別コード());
-            DbT1001.setShikakuShutokuJiyuCode(hihokenshaShutokuJyoho.get資格取得事由コード());
-            DbT1001.setShikakuShutokuYMD(hihokenshaShutokuJyoho.get資格取得年月日());
-            DbT1001.setShikakuShutokuTodokedeYMD(hihokenshaShutokuJyoho.get資格取得届出年月日());
-            DbT1001.setIchigoShikakuShutokuYMD(hihokenshaShutokuJyoho.get第1号資格取得年月日());
-            DbT1001.setHihokennshaKubunCode(hihokenshaShutokuJyoho.get被保険者区分コード());
-            DbT1001.setShikakuSoshitsuJiyuCode(hihokenshaShutokuJyoho.get資格喪失事由コード());
-            DbT1001.setShikakuSoshitsuYMD(hihokenshaShutokuJyoho.get資格喪失年月日());
-            DbT1001.setShikakuSoshitsuTodokedeYMD(hihokenshaShutokuJyoho.get資格喪失届出年月日());
-            DbT1001.setShikakuHenkoJiyuCode(hihokenshaShutokuJyoho.get資格変更事由コード());
-            DbT1001.setShikakuHenkoYMD(hihokenshaShutokuJyoho.get資格変更年月日());
-            DbT1001.setShikakuHenkoTodokedeYMD(hihokenshaShutokuJyoho.get資格変更届出年月日());
-            DbT1001.setJushochitokureiTekiyoJiyuCode(entity.get適用事由コード());
-            DbT1001.setJushochitokureiTekiyoYMD(entity.get適用日());
-            DbT1001.setJushochitokureiTekiyoTodokedeYMD(entity.get適用届出日());
-            DbT1001.setJushochitokureiKaijoJiyuCode(hihokenshaShutokuJyoho.get住所地特例解除事由コード());
-            DbT1001.setJushochitokureiKaijoYMD(hihokenshaShutokuJyoho.get解除年月日());
-            DbT1001.setJushochitokureiKaijoTodokedeYMD(hihokenshaShutokuJyoho.get解除届出年月日());
-            DbT1001.setJushochiTokureiFlag(RSTRING_1);
-            DbT1001.setKoikinaiJushochiTokureiFlag(hihokenshaShutokuJyoho.get広域内住所地特例フラグ());
-            DbT1001.setKoikinaiTokureiSochimotoShichosonCode(hihokenshaShutokuJyoho.get広住特措置元市町村コード());
-            DbT1001.setKyuShichosonCode(hihokenshaShutokuJyoho.get旧市町村コード());
-            DbT1001.setLogicalDeletedFlag(hihokenshaShutokuJyoho.is論理削除フラグ());
+            dbt1001Entity.setHihokenshaNo(hihokenshaShutokuJyoho.get被保険者番号());
+            dbt1001Entity.setIdoYMD(entity.get異動日());
+            dbt1001Entity.setIdoJiyuCode(entity.get喪失事由コード());
+            dbt1001Entity.setShichosonCode(hihokenshaShutokuJyoho.get市町村コード());
+            dbt1001Entity.setShikibetsuCode(hihokenshaShutokuJyoho.get識別コード());
+            dbt1001Entity.setShikakuShutokuJiyuCode(hihokenshaShutokuJyoho.get資格取得事由コード());
+            dbt1001Entity.setShikakuShutokuYMD(hihokenshaShutokuJyoho.get資格取得年月日());
+            dbt1001Entity.setShikakuShutokuTodokedeYMD(hihokenshaShutokuJyoho.get資格取得届出年月日());
+            dbt1001Entity.setIchigoShikakuShutokuYMD(hihokenshaShutokuJyoho.get第1号資格取得年月日());
+            dbt1001Entity.setHihokennshaKubunCode(hihokenshaShutokuJyoho.get被保険者区分コード());
+            dbt1001Entity.setShikakuSoshitsuJiyuCode(hihokenshaShutokuJyoho.get資格喪失事由コード());
+            dbt1001Entity.setShikakuSoshitsuYMD(hihokenshaShutokuJyoho.get資格喪失年月日());
+            dbt1001Entity.setShikakuSoshitsuTodokedeYMD(hihokenshaShutokuJyoho.get資格喪失届出年月日());
+            dbt1001Entity.setShikakuHenkoJiyuCode(hihokenshaShutokuJyoho.get資格変更事由コード());
+            dbt1001Entity.setShikakuHenkoYMD(hihokenshaShutokuJyoho.get資格変更年月日());
+            dbt1001Entity.setShikakuHenkoTodokedeYMD(hihokenshaShutokuJyoho.get資格変更届出年月日());
+            dbt1001Entity.setJushochitokureiTekiyoJiyuCode(entity.get適用事由コード());
+            dbt1001Entity.setJushochitokureiTekiyoYMD(entity.get適用日());
+            dbt1001Entity.setJushochitokureiTekiyoTodokedeYMD(entity.get適用届出日());
+            dbt1001Entity.setJushochitokureiKaijoJiyuCode(hihokenshaShutokuJyoho.get住所地特例解除事由コード());
+            dbt1001Entity.setJushochitokureiKaijoYMD(hihokenshaShutokuJyoho.get解除年月日());
+            dbt1001Entity.setJushochitokureiKaijoTodokedeYMD(hihokenshaShutokuJyoho.get解除届出年月日());
+            dbt1001Entity.setJushochiTokureiFlag(RSTRING_1);
+            dbt1001Entity.setKoikinaiJushochiTokureiFlag(hihokenshaShutokuJyoho.get広域内住所地特例フラグ());
+            dbt1001Entity.setKoikinaiTokureiSochimotoShichosonCode(hihokenshaShutokuJyoho.get広住特措置元市町村コード());
+            dbt1001Entity.setKyuShichosonCode(hihokenshaShutokuJyoho.get旧市町村コード());
+            dbt1001Entity.setLogicalDeletedFlag(hihokenshaShutokuJyoho.is論理削除フラグ());
         }
-        return DbT1001;
+        return dbt1001Entity;
     }
 
     private DbT1001HihokenshaDaichoEntity getList解除事由コード(List<HihokenshaShutokuJyoho> 資格訂正登録リスト, ShikakuTeyiseyiEntity entity) {
-        DbT1001HihokenshaDaichoEntity DbT1001 = new DbT1001HihokenshaDaichoEntity();
+        DbT1001HihokenshaDaichoEntity dbt1001Entity = new DbT1001HihokenshaDaichoEntity();
         for (HihokenshaShutokuJyoho hihokenshaShutokuJyoho : 資格訂正登録リスト) {
-            DbT1001.setHihokenshaNo(hihokenshaShutokuJyoho.get被保険者番号());
-            DbT1001.setIdoYMD(entity.get異動日());
-            DbT1001.setIdoJiyuCode(entity.get解除事由コード());
-            DbT1001.setShichosonCode(hihokenshaShutokuJyoho.get市町村コード());
-            DbT1001.setShikibetsuCode(hihokenshaShutokuJyoho.get識別コード());
-            DbT1001.setShikakuShutokuJiyuCode(hihokenshaShutokuJyoho.get資格取得事由コード());
-            DbT1001.setShikakuShutokuYMD(hihokenshaShutokuJyoho.get資格取得年月日());
-            DbT1001.setShikakuShutokuTodokedeYMD(hihokenshaShutokuJyoho.get資格取得届出年月日());
-            DbT1001.setIchigoShikakuShutokuYMD(hihokenshaShutokuJyoho.get第1号資格取得年月日());
-            DbT1001.setHihokennshaKubunCode(hihokenshaShutokuJyoho.get被保険者区分コード());
-            DbT1001.setShikakuSoshitsuJiyuCode(hihokenshaShutokuJyoho.get資格喪失事由コード());
-            DbT1001.setShikakuSoshitsuYMD(hihokenshaShutokuJyoho.get資格喪失年月日());
-            DbT1001.setShikakuSoshitsuTodokedeYMD(hihokenshaShutokuJyoho.get資格喪失届出年月日());
-            DbT1001.setShikakuHenkoJiyuCode(hihokenshaShutokuJyoho.get資格変更事由コード());
-            DbT1001.setShikakuHenkoYMD(hihokenshaShutokuJyoho.get資格変更年月日());
-            DbT1001.setShikakuHenkoTodokedeYMD(hihokenshaShutokuJyoho.get資格変更届出年月日());
-            DbT1001.setJushochitokureiTekiyoJiyuCode(hihokenshaShutokuJyoho.get住所地特例適用事由コード());
-            DbT1001.setJushochitokureiTekiyoYMD(hihokenshaShutokuJyoho.get適用年月日());
-            DbT1001.setJushochitokureiTekiyoTodokedeYMD(hihokenshaShutokuJyoho.get適用届出年月日());
-            DbT1001.setJushochitokureiKaijoJiyuCode(entity.get解除事由コード());
-            DbT1001.setJushochitokureiKaijoYMD(entity.get解除日());
-            DbT1001.setJushochitokureiKaijoTodokedeYMD(entity.get解除届出日());
-            DbT1001.setJushochiTokureiFlag(RSTRING_SPACE);
-            DbT1001.setKoikinaiJushochiTokureiFlag(hihokenshaShutokuJyoho.get広域内住所地特例フラグ());
-            DbT1001.setKoikinaiTokureiSochimotoShichosonCode(hihokenshaShutokuJyoho.get広住特措置元市町村コード());
-            DbT1001.setKyuShichosonCode(hihokenshaShutokuJyoho.get旧市町村コード());
-            DbT1001.setLogicalDeletedFlag(hihokenshaShutokuJyoho.is論理削除フラグ());
+            dbt1001Entity.setHihokenshaNo(hihokenshaShutokuJyoho.get被保険者番号());
+            dbt1001Entity.setIdoYMD(entity.get異動日());
+            dbt1001Entity.setIdoJiyuCode(entity.get解除事由コード());
+            dbt1001Entity.setShichosonCode(hihokenshaShutokuJyoho.get市町村コード());
+            dbt1001Entity.setShikibetsuCode(hihokenshaShutokuJyoho.get識別コード());
+            dbt1001Entity.setShikakuShutokuJiyuCode(hihokenshaShutokuJyoho.get資格取得事由コード());
+            dbt1001Entity.setShikakuShutokuYMD(hihokenshaShutokuJyoho.get資格取得年月日());
+            dbt1001Entity.setShikakuShutokuTodokedeYMD(hihokenshaShutokuJyoho.get資格取得届出年月日());
+            dbt1001Entity.setIchigoShikakuShutokuYMD(hihokenshaShutokuJyoho.get第1号資格取得年月日());
+            dbt1001Entity.setHihokennshaKubunCode(hihokenshaShutokuJyoho.get被保険者区分コード());
+            dbt1001Entity.setShikakuSoshitsuJiyuCode(hihokenshaShutokuJyoho.get資格喪失事由コード());
+            dbt1001Entity.setShikakuSoshitsuYMD(hihokenshaShutokuJyoho.get資格喪失年月日());
+            dbt1001Entity.setShikakuSoshitsuTodokedeYMD(hihokenshaShutokuJyoho.get資格喪失届出年月日());
+            dbt1001Entity.setShikakuHenkoJiyuCode(hihokenshaShutokuJyoho.get資格変更事由コード());
+            dbt1001Entity.setShikakuHenkoYMD(hihokenshaShutokuJyoho.get資格変更年月日());
+            dbt1001Entity.setShikakuHenkoTodokedeYMD(hihokenshaShutokuJyoho.get資格変更届出年月日());
+            dbt1001Entity.setJushochitokureiTekiyoJiyuCode(hihokenshaShutokuJyoho.get住所地特例適用事由コード());
+            dbt1001Entity.setJushochitokureiTekiyoYMD(hihokenshaShutokuJyoho.get適用年月日());
+            dbt1001Entity.setJushochitokureiTekiyoTodokedeYMD(hihokenshaShutokuJyoho.get適用届出年月日());
+            dbt1001Entity.setJushochitokureiKaijoJiyuCode(entity.get解除事由コード());
+            dbt1001Entity.setJushochitokureiKaijoYMD(entity.get解除日());
+            dbt1001Entity.setJushochitokureiKaijoTodokedeYMD(entity.get解除届出日());
+            dbt1001Entity.setJushochiTokureiFlag(RSTRING_SPACE);
+            dbt1001Entity.setKoikinaiJushochiTokureiFlag(hihokenshaShutokuJyoho.get広域内住所地特例フラグ());
+            dbt1001Entity.setKoikinaiTokureiSochimotoShichosonCode(hihokenshaShutokuJyoho.get広住特措置元市町村コード());
+            dbt1001Entity.setKyuShichosonCode(hihokenshaShutokuJyoho.get旧市町村コード());
+            dbt1001Entity.setLogicalDeletedFlag(hihokenshaShutokuJyoho.is論理削除フラグ());
         }
-        return DbT1001;
+        return dbt1001Entity;
     }
 
-    private DbT1001HihokenshaDaichoEntity get資格訂正登録1(DbT1001HihokenshaDaichoEntity DbT1001, HihokenshaShutokuJyoho hihokenshaShutokuJyoho,
+    private DbT1001HihokenshaDaichoEntity get資格訂正登録1(DbT1001HihokenshaDaichoEntity dbt1001Entity, HihokenshaShutokuJyoho hihokenshaShutokuJyoho,
             ShikakuTeyiseyiEntity entity) {
-        DbT1001.setHihokenshaNo(hihokenshaShutokuJyoho.get被保険者番号());
-        DbT1001.setIdoYMD(entity.get異動日());
-        DbT1001.setIdoJiyuCode(RSTRING_02);
-        DbT1001.setShichosonCode(hihokenshaShutokuJyoho.get市町村コード());
-        DbT1001.setShikibetsuCode(hihokenshaShutokuJyoho.get識別コード());
-        DbT1001.setShikakuShutokuJiyuCode(hihokenshaShutokuJyoho.get資格取得事由コード());
-        DbT1001.setShikakuShutokuYMD(hihokenshaShutokuJyoho.get資格取得年月日());
-        DbT1001.setShikakuShutokuTodokedeYMD(hihokenshaShutokuJyoho.get資格取得届出年月日());
-        DbT1001.setIchigoShikakuShutokuYMD(hihokenshaShutokuJyoho.get第1号資格取得年月日());
-        DbT1001.setHihokennshaKubunCode(hihokenshaShutokuJyoho.get被保険者区分コード());
-        DbT1001.setShikakuSoshitsuJiyuCode(hihokenshaShutokuJyoho.get資格喪失事由コード());
-        DbT1001.setShikakuSoshitsuYMD(hihokenshaShutokuJyoho.get資格喪失年月日());
-        DbT1001.setShikakuSoshitsuTodokedeYMD(hihokenshaShutokuJyoho.get資格喪失届出年月日());
-        DbT1001.setShikakuHenkoJiyuCode(hihokenshaShutokuJyoho.get資格変更事由コード());
-        DbT1001.setShikakuHenkoYMD(hihokenshaShutokuJyoho.get資格変更年月日());
-        DbT1001.setShikakuHenkoTodokedeYMD(hihokenshaShutokuJyoho.get資格変更届出年月日());
-        DbT1001.setJushochitokureiTekiyoJiyuCode(hihokenshaShutokuJyoho.get住所地特例適用事由コード());
-        DbT1001.setJushochitokureiTekiyoYMD(hihokenshaShutokuJyoho.get適用年月日());
-        DbT1001.setJushochitokureiTekiyoTodokedeYMD(hihokenshaShutokuJyoho.get適用届出年月日());
-        DbT1001.setJushochitokureiKaijoJiyuCode(RSTRING_02);
-        DbT1001.setJushochitokureiKaijoYMD(entity.get変更日());
-        DbT1001.setJushochitokureiKaijoTodokedeYMD(entity.get解除届出日());
-        DbT1001.setJushochiTokureiFlag(RSTRING_SPACE);
-        DbT1001.setKoikinaiJushochiTokureiFlag(hihokenshaShutokuJyoho.get広域内住所地特例フラグ());
-        DbT1001.setKoikinaiTokureiSochimotoShichosonCode(hihokenshaShutokuJyoho.get広住特措置元市町村コード());
-        DbT1001.setKyuShichosonCode(hihokenshaShutokuJyoho.get旧市町村コード());
-        DbT1001.setLogicalDeletedFlag(hihokenshaShutokuJyoho.is論理削除フラグ());
-        return DbT1001;
+        dbt1001Entity.setHihokenshaNo(hihokenshaShutokuJyoho.get被保険者番号());
+        dbt1001Entity.setIdoYMD(entity.get異動日());
+        dbt1001Entity.setIdoJiyuCode(RSTRING_02);
+        dbt1001Entity.setShichosonCode(hihokenshaShutokuJyoho.get市町村コード());
+        dbt1001Entity.setShikibetsuCode(hihokenshaShutokuJyoho.get識別コード());
+        dbt1001Entity.setShikakuShutokuJiyuCode(hihokenshaShutokuJyoho.get資格取得事由コード());
+        dbt1001Entity.setShikakuShutokuYMD(hihokenshaShutokuJyoho.get資格取得年月日());
+        dbt1001Entity.setShikakuShutokuTodokedeYMD(hihokenshaShutokuJyoho.get資格取得届出年月日());
+        dbt1001Entity.setIchigoShikakuShutokuYMD(hihokenshaShutokuJyoho.get第1号資格取得年月日());
+        dbt1001Entity.setHihokennshaKubunCode(hihokenshaShutokuJyoho.get被保険者区分コード());
+        dbt1001Entity.setShikakuSoshitsuJiyuCode(hihokenshaShutokuJyoho.get資格喪失事由コード());
+        dbt1001Entity.setShikakuSoshitsuYMD(hihokenshaShutokuJyoho.get資格喪失年月日());
+        dbt1001Entity.setShikakuSoshitsuTodokedeYMD(hihokenshaShutokuJyoho.get資格喪失届出年月日());
+        dbt1001Entity.setShikakuHenkoJiyuCode(hihokenshaShutokuJyoho.get資格変更事由コード());
+        dbt1001Entity.setShikakuHenkoYMD(hihokenshaShutokuJyoho.get資格変更年月日());
+        dbt1001Entity.setShikakuHenkoTodokedeYMD(hihokenshaShutokuJyoho.get資格変更届出年月日());
+        dbt1001Entity.setJushochitokureiTekiyoJiyuCode(hihokenshaShutokuJyoho.get住所地特例適用事由コード());
+        dbt1001Entity.setJushochitokureiTekiyoYMD(hihokenshaShutokuJyoho.get適用年月日());
+        dbt1001Entity.setJushochitokureiTekiyoTodokedeYMD(hihokenshaShutokuJyoho.get適用届出年月日());
+        dbt1001Entity.setJushochitokureiKaijoJiyuCode(RSTRING_02);
+        dbt1001Entity.setJushochitokureiKaijoYMD(entity.get変更日());
+        dbt1001Entity.setJushochitokureiKaijoTodokedeYMD(entity.get解除届出日());
+        dbt1001Entity.setJushochiTokureiFlag(RSTRING_SPACE);
+        dbt1001Entity.setKoikinaiJushochiTokureiFlag(hihokenshaShutokuJyoho.get広域内住所地特例フラグ());
+        dbt1001Entity.setKoikinaiTokureiSochimotoShichosonCode(hihokenshaShutokuJyoho.get広住特措置元市町村コード());
+        dbt1001Entity.setKyuShichosonCode(hihokenshaShutokuJyoho.get旧市町村コード());
+        dbt1001Entity.setLogicalDeletedFlag(hihokenshaShutokuJyoho.is論理削除フラグ());
+        return dbt1001Entity;
     }
 
-    private DbT1001HihokenshaDaichoEntity get資格訂正登録2(DbT1001HihokenshaDaichoEntity DbT1001, HihokenshaShutokuJyoho hihokenshaShutokuJyoho,
+    private DbT1001HihokenshaDaichoEntity get資格訂正登録2(DbT1001HihokenshaDaichoEntity dbt1001Entity, HihokenshaShutokuJyoho hihokenshaShutokuJyoho,
             ShikakuTeyiseyiEntity entity) {
-        DbT1001.setHihokenshaNo(hihokenshaShutokuJyoho.get被保険者番号());
-        DbT1001.setIdoYMD(entity.get異動日());
-        DbT1001.setIdoJiyuCode(entity.get変更事由コード());
-        DbT1001.setShichosonCode(hihokenshaShutokuJyoho.get市町村コード());
-        DbT1001.setShikibetsuCode(hihokenshaShutokuJyoho.get識別コード());
-        DbT1001.setShikakuShutokuJiyuCode(hihokenshaShutokuJyoho.get資格取得事由コード());
-        DbT1001.setShikakuShutokuYMD(hihokenshaShutokuJyoho.get資格取得年月日());
-        DbT1001.setShikakuShutokuTodokedeYMD(hihokenshaShutokuJyoho.get資格取得届出年月日());
-        DbT1001.setIchigoShikakuShutokuYMD(hihokenshaShutokuJyoho.get第1号資格取得年月日());
-        DbT1001.setHihokennshaKubunCode(hihokenshaShutokuJyoho.get被保険者区分コード());
-        DbT1001.setShikakuSoshitsuJiyuCode(hihokenshaShutokuJyoho.get資格喪失事由コード());
-        DbT1001.setShikakuSoshitsuYMD(hihokenshaShutokuJyoho.get資格喪失年月日());
-        DbT1001.setShikakuSoshitsuTodokedeYMD(hihokenshaShutokuJyoho.get資格喪失届出年月日());
-        DbT1001.setShikakuHenkoJiyuCode(entity.get変更事由コード());
-        DbT1001.setShikakuHenkoYMD(entity.get変更日());
-        DbT1001.setShikakuHenkoTodokedeYMD(entity.get変更届出日());
-        DbT1001.setJushochiTokureiFlag(hihokenshaShutokuJyoho.get住所地特例フラグ());
-        DbT1001.setKoikinaiJushochiTokureiFlag(hihokenshaShutokuJyoho.get広域内住所地特例フラグ());
-        DbT1001.setKoikinaiTokureiSochimotoShichosonCode(hihokenshaShutokuJyoho.get広住特措置元市町村コード());
-        DbT1001.setKyuShichosonCode(hihokenshaShutokuJyoho.get旧市町村コード());
-        DbT1001.setLogicalDeletedFlag(hihokenshaShutokuJyoho.is論理削除フラグ());
-        return DbT1001;
+        dbt1001Entity.setHihokenshaNo(hihokenshaShutokuJyoho.get被保険者番号());
+        dbt1001Entity.setIdoYMD(entity.get異動日());
+        dbt1001Entity.setIdoJiyuCode(entity.get変更事由コード());
+        dbt1001Entity.setShichosonCode(hihokenshaShutokuJyoho.get市町村コード());
+        dbt1001Entity.setShikibetsuCode(hihokenshaShutokuJyoho.get識別コード());
+        dbt1001Entity.setShikakuShutokuJiyuCode(hihokenshaShutokuJyoho.get資格取得事由コード());
+        dbt1001Entity.setShikakuShutokuYMD(hihokenshaShutokuJyoho.get資格取得年月日());
+        dbt1001Entity.setShikakuShutokuTodokedeYMD(hihokenshaShutokuJyoho.get資格取得届出年月日());
+        dbt1001Entity.setIchigoShikakuShutokuYMD(hihokenshaShutokuJyoho.get第1号資格取得年月日());
+        dbt1001Entity.setHihokennshaKubunCode(hihokenshaShutokuJyoho.get被保険者区分コード());
+        dbt1001Entity.setShikakuSoshitsuJiyuCode(hihokenshaShutokuJyoho.get資格喪失事由コード());
+        dbt1001Entity.setShikakuSoshitsuYMD(hihokenshaShutokuJyoho.get資格喪失年月日());
+        dbt1001Entity.setShikakuSoshitsuTodokedeYMD(hihokenshaShutokuJyoho.get資格喪失届出年月日());
+        dbt1001Entity.setShikakuHenkoJiyuCode(entity.get変更事由コード());
+        dbt1001Entity.setShikakuHenkoYMD(entity.get変更日());
+        dbt1001Entity.setShikakuHenkoTodokedeYMD(entity.get変更届出日());
+        dbt1001Entity.setJushochiTokureiFlag(hihokenshaShutokuJyoho.get住所地特例フラグ());
+        dbt1001Entity.setKoikinaiJushochiTokureiFlag(hihokenshaShutokuJyoho.get広域内住所地特例フラグ());
+        dbt1001Entity.setKoikinaiTokureiSochimotoShichosonCode(hihokenshaShutokuJyoho.get広住特措置元市町村コード());
+        dbt1001Entity.setKyuShichosonCode(hihokenshaShutokuJyoho.get旧市町村コード());
+        dbt1001Entity.setLogicalDeletedFlag(hihokenshaShutokuJyoho.is論理削除フラグ());
+        return dbt1001Entity;
     }
 
-    private DbT1001HihokenshaDaichoEntity get資格訂正登録3(DbT1001HihokenshaDaichoEntity DbT1001, HihokenshaShutokuJyoho hihokenshaShutokuJyoho,
+    private DbT1001HihokenshaDaichoEntity get資格訂正登録3(DbT1001HihokenshaDaichoEntity dbt1001Entity, HihokenshaShutokuJyoho hihokenshaShutokuJyoho,
             ShikakuTeyiseyiEntity entity, ShikibetsuCode 識別コード, LasdecCode 広住特措置元市町村コード) {
-        DbT1001.setHihokenshaNo(hihokenshaShutokuJyoho.get被保険者番号());
-        DbT1001.setIdoYMD(entity.get異動日());
-        DbT1001.setIdoJiyuCode(RSTRING_04);
-        DbT1001.setShichosonCode(hihokenshaShutokuJyoho.get市町村コード());
-        DbT1001.setShikibetsuCode(識別コード);
-        DbT1001.setShikakuShutokuJiyuCode(hihokenshaShutokuJyoho.get資格取得事由コード());
-        DbT1001.setShikakuShutokuYMD(hihokenshaShutokuJyoho.get資格取得年月日());
-        DbT1001.setShikakuShutokuTodokedeYMD(hihokenshaShutokuJyoho.get資格取得届出年月日());
-        DbT1001.setIchigoShikakuShutokuYMD(hihokenshaShutokuJyoho.get第1号資格取得年月日());
-        DbT1001.setHihokennshaKubunCode(hihokenshaShutokuJyoho.get被保険者区分コード());
-        DbT1001.setShikakuSoshitsuJiyuCode(hihokenshaShutokuJyoho.get資格喪失事由コード());
-        DbT1001.setShikakuSoshitsuYMD(hihokenshaShutokuJyoho.get資格喪失年月日());
-        DbT1001.setShikakuSoshitsuTodokedeYMD(hihokenshaShutokuJyoho.get資格喪失届出年月日());
-        DbT1001.setShikakuHenkoJiyuCode(RSTRING_04);
-        DbT1001.setShikakuHenkoYMD(entity.get変更日());
-        DbT1001.setShikakuHenkoTodokedeYMD(entity.get変更届出日());
-        DbT1001.setJushochiTokureiFlag(hihokenshaShutokuJyoho.get住所地特例フラグ());
-        DbT1001.setKoikinaiJushochiTokureiFlag(RSTRING_1);
-        DbT1001.setKoikinaiTokureiSochimotoShichosonCode(広住特措置元市町村コード);
-        DbT1001.setKyuShichosonCode(hihokenshaShutokuJyoho.get旧市町村コード());
-        DbT1001.setLogicalDeletedFlag(hihokenshaShutokuJyoho.is論理削除フラグ());
-        return DbT1001;
+        dbt1001Entity.setHihokenshaNo(hihokenshaShutokuJyoho.get被保険者番号());
+        dbt1001Entity.setIdoYMD(entity.get異動日());
+        dbt1001Entity.setIdoJiyuCode(RSTRING_04);
+        dbt1001Entity.setShichosonCode(hihokenshaShutokuJyoho.get市町村コード());
+        dbt1001Entity.setShikibetsuCode(識別コード);
+        dbt1001Entity.setShikakuShutokuJiyuCode(hihokenshaShutokuJyoho.get資格取得事由コード());
+        dbt1001Entity.setShikakuShutokuYMD(hihokenshaShutokuJyoho.get資格取得年月日());
+        dbt1001Entity.setShikakuShutokuTodokedeYMD(hihokenshaShutokuJyoho.get資格取得届出年月日());
+        dbt1001Entity.setIchigoShikakuShutokuYMD(hihokenshaShutokuJyoho.get第1号資格取得年月日());
+        dbt1001Entity.setHihokennshaKubunCode(hihokenshaShutokuJyoho.get被保険者区分コード());
+        dbt1001Entity.setShikakuSoshitsuJiyuCode(hihokenshaShutokuJyoho.get資格喪失事由コード());
+        dbt1001Entity.setShikakuSoshitsuYMD(hihokenshaShutokuJyoho.get資格喪失年月日());
+        dbt1001Entity.setShikakuSoshitsuTodokedeYMD(hihokenshaShutokuJyoho.get資格喪失届出年月日());
+        dbt1001Entity.setShikakuHenkoJiyuCode(RSTRING_04);
+        dbt1001Entity.setShikakuHenkoYMD(entity.get変更日());
+        dbt1001Entity.setShikakuHenkoTodokedeYMD(entity.get変更届出日());
+        dbt1001Entity.setJushochiTokureiFlag(hihokenshaShutokuJyoho.get住所地特例フラグ());
+        dbt1001Entity.setKoikinaiJushochiTokureiFlag(RSTRING_1);
+        dbt1001Entity.setKoikinaiTokureiSochimotoShichosonCode(広住特措置元市町村コード);
+        dbt1001Entity.setKyuShichosonCode(hihokenshaShutokuJyoho.get旧市町村コード());
+        dbt1001Entity.setLogicalDeletedFlag(hihokenshaShutokuJyoho.is論理削除フラグ());
+        return dbt1001Entity;
     }
 
     private LasdecCode get旧市町村コード(ShikakuTeyiseyiEntity entity, LasdecCode 旧市町村コード) {
@@ -918,58 +913,58 @@ public class HihokenshaShikakuTeiseiManager {
         List<ShikakuSyousayiEntity> 資格詳細List = new ArrayList<>();
         資格詳細List.add(資格詳細情報);
         for (ShikakuSyousayiEntity 資格詳細 : 資格詳細List) {
-            ShikakuTeyiseyiEntity ShikakuTeyiseyi = new ShikakuTeyiseyiEntity();
-            ShikakuTeyiseyi.set状態(FLG_無);
-            ShikakuTeyiseyi.set異動日(資格詳細.get取得日());
-            ShikakuTeyiseyi.set取得日(資格詳細.get取得日());
-            ShikakuTeyiseyi.set取得届出日(資格詳細.get取得届出日());
-            ShikakuTeyiseyi.set取得事由コード(資格詳細.get取得事由コード());
-            ShikakuTeyiseyi.set被保区分コード(資格詳細.get被保区分コード());
-            ShikakuTeyiseyi.set所在保険者(資格詳細.get所在保険者());
-            ShikakuTeyiseyi.set措置元保険者(資格詳細.get措置元保険者());
-            ShikakuTeyiseyi.set旧保険者(資格詳細.get旧保険者());
-            資格訂正情報List.add(ShikakuTeyiseyi);
+            ShikakuTeyiseyiEntity shikakuteyiseyi = new ShikakuTeyiseyiEntity();
+            shikakuteyiseyi.set状態(FLG_無);
+            shikakuteyiseyi.set異動日(資格詳細.get取得日());
+            shikakuteyiseyi.set取得日(資格詳細.get取得日());
+            shikakuteyiseyi.set取得届出日(資格詳細.get取得届出日());
+            shikakuteyiseyi.set取得事由コード(資格詳細.get取得事由コード());
+            shikakuteyiseyi.set被保区分コード(資格詳細.get被保区分コード());
+            shikakuteyiseyi.set所在保険者(資格詳細.get所在保険者());
+            shikakuteyiseyi.set措置元保険者(資格詳細.get措置元保険者());
+            shikakuteyiseyi.set旧保険者(資格詳細.get旧保険者());
+            資格訂正情報List.add(shikakuteyiseyi);
         }
         for (ShikakuSyousayiEntity 資格詳細 : 資格詳細List) {
-            ShikakuTeyiseyiEntity ShikakuTeyiseyi = new ShikakuTeyiseyiEntity();
-            ShikakuTeyiseyi.set状態(FLG_無);
-            ShikakuTeyiseyi.set異動日(資格詳細.get取得日());
-            ShikakuTeyiseyi.set喪失日(資格詳細.get喪失日());
-            ShikakuTeyiseyi.set喪失届出日(資格詳細.get喪失届出日());
-            ShikakuTeyiseyi.set喪失事由コード(資格詳細.get喪失事由コード());
-            資格訂正情報List.add(ShikakuTeyiseyi);
+            ShikakuTeyiseyiEntity shikakuseyiseyi = new ShikakuTeyiseyiEntity();
+            shikakuseyiseyi.set状態(FLG_無);
+            shikakuseyiseyi.set異動日(資格詳細.get取得日());
+            shikakuseyiseyi.set喪失日(資格詳細.get喪失日());
+            shikakuseyiseyi.set喪失届出日(資格詳細.get喪失届出日());
+            shikakuseyiseyi.set喪失事由コード(資格詳細.get喪失事由コード());
+            資格訂正情報List.add(shikakuseyiseyi);
         }
         for (JushochiTokureiEntity 住所地特例 : 住所地特例List) {
-            if (住所地特例.get適用事由コード() != null || !住所地特例.get適用事由コード().isEmpty()) {
-                ShikakuTeyiseyiEntity ShikakuTeyiseyi = new ShikakuTeyiseyiEntity();
-                ShikakuTeyiseyi.set状態(住所地特例.get状態());
-                ShikakuTeyiseyi.set異動日(住所地特例.get適用日());
-                ShikakuTeyiseyi.set適用日(住所地特例.get適用日());
-                ShikakuTeyiseyi.set適用届出日(住所地特例.get適用届出日());
-                ShikakuTeyiseyi.set適用事由コード(住所地特例.get適用事由コード());
-                資格訂正情報List.add(ShikakuTeyiseyi);
+            if (住所地特例.get適用事由コード() != null && !住所地特例.get適用事由コード().isEmpty()) {
+                ShikakuTeyiseyiEntity shikakuseyiseyi = new ShikakuTeyiseyiEntity();
+                shikakuseyiseyi.set状態(住所地特例.get状態());
+                shikakuseyiseyi.set異動日(住所地特例.get適用日());
+                shikakuseyiseyi.set適用日(住所地特例.get適用日());
+                shikakuseyiseyi.set適用届出日(住所地特例.get適用届出日());
+                shikakuseyiseyi.set適用事由コード(住所地特例.get適用事由コード());
+                資格訂正情報List.add(shikakuseyiseyi);
             }
         }
         for (JushochiTokureiEntity 住所地特例 : 住所地特例List) {
-            if (!住所地特例.get解除事由コード().isEmpty() || 住所地特例.get解除事由コード() != null) {
-                ShikakuTeyiseyiEntity ShikakuTeyiseyi = new ShikakuTeyiseyiEntity();
-                ShikakuTeyiseyi.set状態(住所地特例.get状態());
-                ShikakuTeyiseyi.set異動日(住所地特例.get解除日());
-                ShikakuTeyiseyi.set解除日(住所地特例.get解除日());
-                ShikakuTeyiseyi.set解除届出日(住所地特例.get解除届出日());
-                ShikakuTeyiseyi.set解除事由コード(住所地特例.get解除事由コード());
-                資格訂正情報List.add(ShikakuTeyiseyi);
+            if (!住所地特例.get解除事由コード().isEmpty() && 住所地特例.get解除事由コード() != null) {
+                ShikakuTeyiseyiEntity shikakuseyiseyi = new ShikakuTeyiseyiEntity();
+                shikakuseyiseyi.set状態(住所地特例.get状態());
+                shikakuseyiseyi.set異動日(住所地特例.get解除日());
+                shikakuseyiseyi.set解除日(住所地特例.get解除日());
+                shikakuseyiseyi.set解除届出日(住所地特例.get解除届出日());
+                shikakuseyiseyi.set解除事由コード(住所地特例.get解除事由コード());
+                資格訂正情報List.add(shikakuseyiseyi);
             } else {
             }
         }
         for (ShikakuKanrenYidouEntity 資格関連異動 : 資格関連異動List) {
-            ShikakuTeyiseyiEntity ShikakuTeyiseyi = new ShikakuTeyiseyiEntity();
-            ShikakuTeyiseyi.set状態(資格関連異動.get状態());
-            ShikakuTeyiseyi.set異動日(資格関連異動.get変更日());
-            ShikakuTeyiseyi.set変更日(資格関連異動.get変更日());
-            ShikakuTeyiseyi.set変更届出日(資格関連異動.get変更届出日());
-            ShikakuTeyiseyi.set変更事由コード(資格関連異動.get変更事由コード());
-            資格訂正情報List.add(ShikakuTeyiseyi);
+            ShikakuTeyiseyiEntity shikakuseyiseyi = new ShikakuTeyiseyiEntity();
+            shikakuseyiseyi.set状態(資格関連異動.get状態());
+            shikakuseyiseyi.set異動日(資格関連異動.get変更日());
+            shikakuseyiseyi.set変更日(資格関連異動.get変更日());
+            shikakuseyiseyi.set変更届出日(資格関連異動.get変更届出日());
+            shikakuseyiseyi.set変更事由コード(資格関連異動.get変更事由コード());
+            資格訂正情報List.add(shikakuseyiseyi);
         }
         return SearchResult.of(資格訂正情報List, 0, false);
     }
@@ -980,54 +975,54 @@ public class HihokenshaShikakuTeiseiManager {
         List<ShikakuSyousayiEntity> 資格詳細List = new ArrayList<>();
         資格詳細List.add(資格詳細情報);
         for (ShikakuSyousayiEntity 資格詳細 : 資格詳細List) {
-            ShikakuTeyiseyiEntity ShikakuTeyiseyi = new ShikakuTeyiseyiEntity();
-            ShikakuTeyiseyi.set状態(FLG_無);
-            ShikakuTeyiseyi.set異動日(資格詳細.get取得日());
-            ShikakuTeyiseyi.set取得日(資格詳細.get取得日());
-            ShikakuTeyiseyi.set取得届出日(資格詳細.get取得届出日());
-            ShikakuTeyiseyi.set取得事由コード(資格詳細.get取得事由コード());
-            資格訂正情報List.add(ShikakuTeyiseyi);
+            ShikakuTeyiseyiEntity shikakuseyiseyi = new ShikakuTeyiseyiEntity();
+            shikakuseyiseyi.set状態(FLG_無);
+            shikakuseyiseyi.set異動日(資格詳細.get取得日());
+            shikakuseyiseyi.set取得日(資格詳細.get取得日());
+            shikakuseyiseyi.set取得届出日(資格詳細.get取得届出日());
+            shikakuseyiseyi.set取得事由コード(資格詳細.get取得事由コード());
+            資格訂正情報List.add(shikakuseyiseyi);
         }
         for (ShikakuSyousayiEntity 資格詳細 : 資格詳細List) {
-            ShikakuTeyiseyiEntity ShikakuTeyiseyi = new ShikakuTeyiseyiEntity();
-            ShikakuTeyiseyi.set状態(FLG_無);
-            ShikakuTeyiseyi.set異動日(資格詳細.get取得日());
-            ShikakuTeyiseyi.set喪失日(資格詳細.get喪失日());
-            ShikakuTeyiseyi.set喪失届出日(資格詳細.get喪失届出日());
-            ShikakuTeyiseyi.set喪失事由コード(資格詳細.get喪失事由コード());
-            資格訂正情報List.add(ShikakuTeyiseyi);
+            ShikakuTeyiseyiEntity shikakuseyiseyi = new ShikakuTeyiseyiEntity();
+            shikakuseyiseyi.set状態(FLG_無);
+            shikakuseyiseyi.set異動日(資格詳細.get取得日());
+            shikakuseyiseyi.set喪失日(資格詳細.get喪失日());
+            shikakuseyiseyi.set喪失届出日(資格詳細.get喪失届出日());
+            shikakuseyiseyi.set喪失事由コード(資格詳細.get喪失事由コード());
+            資格訂正情報List.add(shikakuseyiseyi);
         }
         for (JushochiTokureiEntity 住所地特例 : 住所地特例List) {
             if (!住所地特例.get適用事由コード().isEmpty()) {
-                ShikakuTeyiseyiEntity ShikakuTeyiseyi = new ShikakuTeyiseyiEntity();
-                ShikakuTeyiseyi.set状態(住所地特例.get状態());
-                ShikakuTeyiseyi.set異動日(住所地特例.get適用日());
-                ShikakuTeyiseyi.set適用日(住所地特例.get適用日());
-                ShikakuTeyiseyi.set適用届出日(住所地特例.get適用届出日());
-                ShikakuTeyiseyi.set適用事由コード(住所地特例.get適用事由コード());
-                資格訂正情報List.add(ShikakuTeyiseyi);
+                ShikakuTeyiseyiEntity shikakuseyiseyi = new ShikakuTeyiseyiEntity();
+                shikakuseyiseyi.set状態(住所地特例.get状態());
+                shikakuseyiseyi.set異動日(住所地特例.get適用日());
+                shikakuseyiseyi.set適用日(住所地特例.get適用日());
+                shikakuseyiseyi.set適用届出日(住所地特例.get適用届出日());
+                shikakuseyiseyi.set適用事由コード(住所地特例.get適用事由コード());
+                資格訂正情報List.add(shikakuseyiseyi);
             }
         }
         for (JushochiTokureiEntity 住所地特例 : 住所地特例List) {
             if (!住所地特例.get解除事由コード().isEmpty()) {
-                ShikakuTeyiseyiEntity ShikakuTeyiseyi = new ShikakuTeyiseyiEntity();
-                ShikakuTeyiseyi.set状態(住所地特例.get状態());
-                ShikakuTeyiseyi.set異動日(住所地特例.get解除日());
-                ShikakuTeyiseyi.set解除日(住所地特例.get解除日());
-                ShikakuTeyiseyi.set解除届出日(住所地特例.get解除届出日());
-                ShikakuTeyiseyi.set解除事由コード(住所地特例.get解除事由コード());
-                資格訂正情報List.add(ShikakuTeyiseyi);
+                ShikakuTeyiseyiEntity shikakuseyiseyi = new ShikakuTeyiseyiEntity();
+                shikakuseyiseyi.set状態(住所地特例.get状態());
+                shikakuseyiseyi.set異動日(住所地特例.get解除日());
+                shikakuseyiseyi.set解除日(住所地特例.get解除日());
+                shikakuseyiseyi.set解除届出日(住所地特例.get解除届出日());
+                shikakuseyiseyi.set解除事由コード(住所地特例.get解除事由コード());
+                資格訂正情報List.add(shikakuseyiseyi);
             }
         }
         for (ShikakuKanrenYidouEntity 資格関連異動 : 資格関連異動List) {
             if (!資格関連異動.get状態().equals(FLG_削除)) {
-                ShikakuTeyiseyiEntity ShikakuTeyiseyi = new ShikakuTeyiseyiEntity();
-                ShikakuTeyiseyi.set状態(資格関連異動.get状態());
-                ShikakuTeyiseyi.set異動日(資格関連異動.get変更日());
-                ShikakuTeyiseyi.set変更日(資格関連異動.get変更日());
-                ShikakuTeyiseyi.set変更届出日(資格関連異動.get変更届出日());
-                ShikakuTeyiseyi.set変更事由コード(資格関連異動.get変更事由コード());
-                資格訂正情報List.add(ShikakuTeyiseyi);
+                ShikakuTeyiseyiEntity shikakuseyiseyi = new ShikakuTeyiseyiEntity();
+                shikakuseyiseyi.set状態(資格関連異動.get状態());
+                shikakuseyiseyi.set異動日(資格関連異動.get変更日());
+                shikakuseyiseyi.set変更日(資格関連異動.get変更日());
+                shikakuseyiseyi.set変更届出日(資格関連異動.get変更届出日());
+                shikakuseyiseyi.set変更事由コード(資格関連異動.get変更事由コード());
+                資格訂正情報List.add(shikakuseyiseyi);
             }
         }
         return SearchResult.of(資格訂正情報List, 0, false);
