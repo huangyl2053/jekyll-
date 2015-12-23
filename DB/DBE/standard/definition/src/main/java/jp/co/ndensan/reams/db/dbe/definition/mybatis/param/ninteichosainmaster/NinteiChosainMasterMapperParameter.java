@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
-public class NinteiChosainMasterMapperParameter {
+public final class NinteiChosainMasterMapperParameter {
 
     private final boolean 状況フラグ;
     private final LasdecCode 市町村コード;
@@ -125,50 +125,6 @@ public class NinteiChosainMasterMapperParameter {
             RString 地区コード,
             Decimal 最大表示件数
     ) {
-        boolean uses市町村コード = false;
-        if (市町村コード != null && !市町村コード.isEmpty()) {
-            uses市町村コード = true;
-        }
-        boolean uses調査委託先コードFrom = false;
-        if (調査委託先コードFrom != null && !調査委託先コードFrom.value().isEmpty()) {
-            uses調査委託先コードFrom = true;
-        }
-        boolean uses調査委託先コードTo = false;
-        if (調査委託先コードTo != null && !調査委託先コードTo.value().isEmpty()) {
-            uses調査委託先コードTo = true;
-        }
-        boolean uses調査委託先名称 = false;
-        if (調査委託先名称 != null && !調査委託先名称.isEmpty()) {
-            uses調査委託先名称 = true;
-        }
-        boolean uses調査委託先カナ名称 = false;
-        if (調査委託先カナ名称 != null && !調査委託先カナ名称.isEmpty()) {
-            uses調査委託先カナ名称 = true;
-        }
-        boolean uses調査員コードFrom = false;
-        if (調査員コードFrom != null && !調査員コードFrom.value().isEmpty()) {
-            uses調査員コードFrom = true;
-        }
-        boolean uses調査員コードTo = false;
-        if (調査員コードTo != null && !調査員コードTo.value().isEmpty()) {
-            uses調査員コードTo = true;
-        }
-        boolean uses調査員氏名 = false;
-        if (調査員氏名 != null && !調査員氏名.isEmpty()) {
-            uses調査員氏名 = true;
-        }
-        boolean uses調査員カナ氏名 = false;
-        if (調査員カナ氏名 != null && !調査員カナ氏名.isEmpty()) {
-            uses調査員カナ氏名 = true;
-        }
-        boolean uses地区コード = false;
-        if (地区コード != null && !地区コード.isEmpty()) {
-            uses地区コード = true;
-        }
-        boolean usesSaidaiHyojiKensu = false;
-        if (最大表示件数 != null) {
-            usesSaidaiHyojiKensu = true;
-        }
         return new NinteiChosainMasterMapperParameter(
                 状況フラグ,
                 市町村コード,
@@ -182,16 +138,16 @@ public class NinteiChosainMasterMapperParameter {
                 調査員カナ氏名,
                 地区コード,
                 最大表示件数,
-                uses市町村コード,
-                uses調査委託先コードFrom,
-                uses調査委託先コードTo,
-                uses調査委託先名称,
-                uses調査委託先カナ名称,
-                uses調査員コードFrom,
-                uses調査員コードTo,
-                uses調査員氏名,
-                uses調査員カナ氏名,
-                uses地区コード,
-                usesSaidaiHyojiKensu);
+                市町村コード != null && !市町村コード.isEmpty(),
+                調査委託先コードFrom != null && !調査委託先コードFrom.value().isEmpty(),
+                調査委託先コードTo != null && !調査委託先コードTo.value().isEmpty(),
+                調査委託先名称 != null && !調査委託先名称.isEmpty(),
+                調査委託先カナ名称 != null && !調査委託先カナ名称.isEmpty(),
+                調査員コードFrom != null && !調査員コードFrom.value().isEmpty(),
+                調査員コードTo != null && !調査員コードTo.value().isEmpty(),
+                調査員氏名 != null && !調査員氏名.isEmpty(),
+                調査員カナ氏名 != null && !調査員カナ氏名.isEmpty(),
+                地区コード != null && !地区コード.isEmpty(),
+                最大表示件数 != null);
     }
 }

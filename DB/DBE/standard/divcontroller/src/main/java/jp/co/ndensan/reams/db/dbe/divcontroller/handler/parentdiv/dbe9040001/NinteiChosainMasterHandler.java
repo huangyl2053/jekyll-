@@ -27,18 +27,18 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
  */
 public class NinteiChosainMasterHandler {
 
-    private final static CodeShubetsu CHIKU_CODE_SHUBETSU = new CodeShubetsu("5002");
-    private final static RString 有効 = new RString("有効");
-    private final static RString 無効 = new RString("無効");
-    private final static RString CODE_有効 = new RString("1");
-    private final static RString CODE_無効 = new RString("2");
-    private final static RString 男 = new RString("男");
-    private final static RString 女 = new RString("女");
-    private final static RString MAN = new RString("1");
-    private final static RString WOMAN = new RString("2");
+    private static final CodeShubetsu CHIKU_CODE_SHUBETSU = new CodeShubetsu("5002");
+    private static final RString 表示値_有効 = new RString("有効");
+    private static final RString 表示値_無効 = new RString("無効");
+    private static final RString CODE_有効 = new RString("1");
+    private static final RString CODE_無効 = new RString("2");
+    private static final RString 表示値_男 = new RString("男");
+    private static final RString 表示値_女 = new RString("女");
+    private static final RString MAN = new RString("1");
+    private static final RString WOMAN = new RString("2");
+    private static final RString 状態_追加 = new RString("追加");
+    private static final RString 状態_削除 = new RString("削除");
     private final NinteiChosainMasterDiv div;
-    private static final RString 追加 = new RString("追加");
-    private static final RString 削除 = new RString("削除");
 
     /**
      * コンストラクタです。
@@ -159,9 +159,9 @@ public class NinteiChosainMasterHandler {
         row.setChosaItakusakiCode(chosaItakusakiCode);
         row.setChosaItakusakiMeisho(nullToEmpty(chosaItakusakiMeisho));
         if (MAN.equals(seibetsu)) {
-            row.setSeibetsu(男);
+            row.setSeibetsu(表示値_男);
         } else if (WOMAN.equals(seibetsu)) {
-            row.setSeibetsu(女);
+            row.setSeibetsu(表示値_女);
         }
         row.setChikuCode(nullToEmpty(chiku));
         // TODO
@@ -170,10 +170,11 @@ public class NinteiChosainMasterHandler {
             row.setChiku(codeList.get(0).getコード名称());
         }
         row.setChosainShikaku(Sikaku.toValue(chosainShikaku).get名称());
+        row.setChosainShikakuCode(chosainShikaku);
         TextBoxNum chosaKanoNinzu = new TextBoxNum();
         chosaKanoNinzu.setValue(new Decimal(chosaKanoNinzuPerMonth));
         row.setChosaKanoNinzu(chosaKanoNinzu);
-        row.setJokyoFlag(jokyoFlag ? 有効 : 無効);
+        row.setJokyoFlag(jokyoFlag ? 表示値_有効 : 表示値_無効);
         row.setYubinNo(yubinNo != null ? yubinNo.value() : RString.EMPTY);
         row.setJusho(jusho != null ? jusho.value() : RString.EMPTY);
         row.setTelNo(telNo != null ? telNo.value() : RString.EMPTY);
@@ -210,11 +211,15 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getTextBoxShozokuKikan().setDomain(
                 new AtenaJusho(RString.isNullOrEmpty(row.getShozokuKikanName()) ? RString.EMPTY : row.getShozokuKikanName()));
         div.getChosainJohoInput().getRadChosainJokyo().setSelectedKey(
-                有効.equals(row.getJokyoFlag()) ? CODE_有効 : CODE_無効);
+                表示値_有効.equals(row.getJokyoFlag()) ? CODE_有効 : CODE_無効);
         div.getChosainJohoInput().getRadSeibetsu().setSelectedKey(
-                男.equals(row.getSeibetsu()) ? MAN : WOMAN);
+                表示値_男.equals(row.getSeibetsu()) ? MAN : WOMAN);
     }
 
+    /**
+     * 調査員資格ドロップダウンリストを設定します。
+     *
+     */
     public void setDdlChosainShikaku() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         for (Sikaku sikaku : Sikaku.values()) {
@@ -237,7 +242,7 @@ public class NinteiChosainMasterHandler {
      */
     public void setChosainJohoToIchiran(RString eventJotai) {
         dgChosainIchiran_Row row = new dgChosainIchiran_Row();
-        if (!追加.equals(eventJotai)) {
+        if (!状態_追加.equals(eventJotai)) {
             row = div.getChosainIchiran().getDgChosainIchiran().getActiveRow();
         }
 
@@ -250,9 +255,9 @@ public class NinteiChosainMasterHandler {
         row.setChosaItakusakiMeisho(nullToEmpty(div.getChosainJohoInput().getTxtChosaItakusakiMeisho().getValue()));
         RString seibetsu = div.getChosainJohoInput().getRadSeibetsu().getSelectedKey();
         if (MAN.equals(seibetsu)) {
-            row.setSeibetsu(男);
+            row.setSeibetsu(表示値_男);
         } else if (WOMAN.equals(seibetsu)) {
-            row.setSeibetsu(女);
+            row.setSeibetsu(表示値_女);
         }
         row.setChikuCode(nullToEmpty(div.getChosainJohoInput().getTxtChiku().getValue()));
         row.setChiku(nullToEmpty(div.getChosainJohoInput().getTxtChikuMei().getValue()));
@@ -260,17 +265,17 @@ public class NinteiChosainMasterHandler {
         row.setChosainShikaku(nullToEmpty(div.getChosainJohoInput().getDdlChosainShikaku().getSelectedValue()));
         row.setChosaKanoNinzu(div.getChosainJohoInput().getTxtChosaKanoNinzu());
         RString jokyoFlag = div.getChosainJohoInput().getRadChosainJokyo().getSelectedKey();
-        row.setJokyoFlag(CODE_有効.equals(jokyoFlag) ? 有効 : 無効);
+        row.setJokyoFlag(CODE_有効.equals(jokyoFlag) ? 表示値_有効 : 表示値_無効);
         row.setYubinNo(nullToEmpty(div.getChosainJohoInput().getTxtYubinNo().getValue().value()));
         row.setJusho(nullToEmpty(div.getChosainJohoInput().getTxtJusho().getDomain().value()));
         row.setTelNo(nullToEmpty(div.getChosainJohoInput().getTxtTelNo().getDomain().value()));
         row.setFaxNo(nullToEmpty(div.getChosainJohoInput().getTxtFaxNo().getDomain().value()));
         row.setShozokuKikanName(nullToEmpty(div.getChosainJohoInput().getTextBoxShozokuKikan().getDomain().value()));
         int index = div.getChosainIchiran().getDgChosainIchiran().getClickedRowId();
-        if (追加.equals(eventJotai)) {
+        if (状態_追加.equals(eventJotai)) {
             row.setJotai(eventJotai);
             div.getChosainIchiran().getDgChosainIchiran().getDataSource().add(row);
-        } else if (削除.equals(eventJotai) && 追加.equals(row.getJotai())) {
+        } else if (状態_削除.equals(eventJotai) && 状態_追加.equals(row.getJotai())) {
             div.getChosainIchiran().getDgChosainIchiran().getDataSource().remove(index);
         } else {
             row.setJotai(eventJotai);

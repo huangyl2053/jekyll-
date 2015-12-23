@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteichosainmaster;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosainmaster.NinteiChosainMasterRelateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -24,7 +23,7 @@ public class NinteiChosainMaster {
 
     /**
      * コンストラクタです。<br/>
-     * DBより取得した{@link NinteiChosainMasterRelateEntity}より{@link ChosainJoho}を生成します。
+     * DBより取得した{@link NinteiChosainMasterRelateEntity}より{@link NinteiChosainMaster}を生成します。
      *
      * @param entity DBより取得した{@link NinteiChosainMasterRelateEntity}
      */

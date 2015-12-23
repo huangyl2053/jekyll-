@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
-public class NinteiChosainMasterSearchParameter {
+public final class NinteiChosainMasterSearchParameter {
 
     private final LasdecCode 市町村コード;
     private final ChosaItakusakiCode 調査委託先コード;

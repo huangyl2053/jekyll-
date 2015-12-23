@@ -24,10 +24,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class NinteiChosainMasterValidationHandler {
 
     private final NinteiChosainMasterDiv div;
-    private static final RString 追加 = new RString("追加");
-    private static final RString 修正 = new RString("修正");
-    private final static RString MAN = new RString("1");
-    private final static RString CODE_有効 = new RString("1");
+    private static final RString 状態_追加 = new RString("追加");
+    private static final RString 状態_修正 = new RString("修正");
+    private static final RString MAN = new RString("1");
+    private static final RString CODE_有効 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -62,15 +62,15 @@ public class NinteiChosainMasterValidationHandler {
     /**
      * 確定するボタンを押下するとき、バリデーションチェックを行う。
      *
-     * @param 状態
+     * @param 状態 状態
      * @param count 調査員情報件数
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs validateForKakutei(RString 状態, int count) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
 
-        if (追加.equals(状態) || 修正.equals(状態)) {
-            if (修正.equals(状態) && !isUpdateForKakutei()) {
+        if (状態_追加.equals(状態) || 状態_修正.equals(状態)) {
+            if (状態_修正.equals(状態) && !isUpdateForKakutei()) {
                 validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.編集なしで更新不可)));
             }
             if (!RString.isNullOrEmpty(div.getChosainJohoInput().getTxtChiku().getValue())
@@ -80,7 +80,7 @@ public class NinteiChosainMasterValidationHandler {
                         div.getChosainJohoInput().getTxtChiku()));
             }
         }
-        if (追加.equals(状態)) {
+        if (状態_追加.equals(状態)) {
             if (!RString.isNullOrEmpty(div.getChosainJohoInput().getTxtShichoson().getValue())
                     && RString.isNullOrEmpty(div.getChosainJohoInput().getTxtShichosonmei().getValue())) {
                 validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
@@ -200,7 +200,6 @@ public class NinteiChosainMasterValidationHandler {
     /**
      * 調査員情報登録エリアの編集チェック処理です。
      *
-     * @param 状態 状態
      * @return 判定結果(true:変更あり,false:変更なし)
      */
     public boolean isUpdate() {
