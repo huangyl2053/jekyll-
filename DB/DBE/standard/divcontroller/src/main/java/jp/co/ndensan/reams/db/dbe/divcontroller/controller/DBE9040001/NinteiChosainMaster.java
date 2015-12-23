@@ -264,22 +264,23 @@ public class NinteiChosainMaster {
         Models<ChosainJohoIdentifier, ChosainJoho> models = ViewStateHolder.get(ViewStateKeys.認定調査員マスタ検索結果, Models.class);
 
         if (追加.equals(イベント状態)) {
-            ChosainJoho chosainJoho = new ChosainJoho(new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()), div.getChosainJohoInput().getTxtChosaItakusaki().getValue(),
-                    div.getChosainJohoInput().getTxtChosainCode().getValue());
+            ChosainJoho chosainJoho = new ChosainJoho(new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
+                    new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
+                    new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue()));
             chosainJoho = getHandler(div).editChosainJoho(chosainJoho);
             models.add(chosainJoho);
         } else if (修正.equals(イベント状態)) {
             ChosainJohoIdentifier key = new ChosainJohoIdentifier(
                     new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
-                    div.getChosainJohoInput().getTxtChosaItakusaki().getValue(),
-                    div.getChosainJohoInput().getTxtChosainCode().getValue());
+                    new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
+                    new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue()));
             getHandler(div).editChosainJoho(models.get(key).modifiedModel());
         } else if (削除.equals(イベント状態)) {
             if (!追加.equals(div.getChosainIchiran().getDgChosainIchiran().getActiveRow().getJotai())) {
                 ChosainJohoIdentifier key = new ChosainJohoIdentifier(
                         new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
-                        div.getChosainJohoInput().getTxtChosaItakusaki().getValue(),
-                        div.getChosainJohoInput().getTxtChosainCode().getValue());
+                        new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
+                        new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue()));
                 getHandler(div).editChosainJoho(models.get(key).deleted());
             }
         }
