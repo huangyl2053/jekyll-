@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -39,6 +40,14 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     private Button btnToroku;
     @JsonProperty("btnDelete")
     private Button btnDelete;
+    @JsonProperty("hdnTxtSchemaName")
+    private RString hdnTxtSchemaName;
+    @JsonProperty("hdnTxtSubGyomuCode")
+    private RString hdnTxtSubGyomuCode;
+    @JsonProperty("hdnTxtCodeShubetsu")
+    private RString hdnTxtCodeShubetsu;
+    @JsonProperty("hdnTxtCode")
+    private RString hdnTxtCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -170,6 +179,78 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     @JsonProperty("btnDelete")
     public void setBtnDelete(Button btnDelete) {
         this.btnDelete = btnDelete;
+    }
+
+    /*
+     * gethdnTxtSchemaName
+     * @return hdnTxtSchemaName
+     */
+    @JsonProperty("hdnTxtSchemaName")
+    public RString getHdnTxtSchemaName() {
+        return hdnTxtSchemaName;
+    }
+
+    /*
+     * sethdnTxtSchemaName
+     * @param hdnTxtSchemaName hdnTxtSchemaName
+     */
+    @JsonProperty("hdnTxtSchemaName")
+    public void setHdnTxtSchemaName(RString hdnTxtSchemaName) {
+        this.hdnTxtSchemaName = hdnTxtSchemaName;
+    }
+
+    /*
+     * gethdnTxtSubGyomuCode
+     * @return hdnTxtSubGyomuCode
+     */
+    @JsonProperty("hdnTxtSubGyomuCode")
+    public RString getHdnTxtSubGyomuCode() {
+        return hdnTxtSubGyomuCode;
+    }
+
+    /*
+     * sethdnTxtSubGyomuCode
+     * @param hdnTxtSubGyomuCode hdnTxtSubGyomuCode
+     */
+    @JsonProperty("hdnTxtSubGyomuCode")
+    public void setHdnTxtSubGyomuCode(RString hdnTxtSubGyomuCode) {
+        this.hdnTxtSubGyomuCode = hdnTxtSubGyomuCode;
+    }
+
+    /*
+     * gethdnTxtCodeShubetsu
+     * @return hdnTxtCodeShubetsu
+     */
+    @JsonProperty("hdnTxtCodeShubetsu")
+    public RString getHdnTxtCodeShubetsu() {
+        return hdnTxtCodeShubetsu;
+    }
+
+    /*
+     * sethdnTxtCodeShubetsu
+     * @param hdnTxtCodeShubetsu hdnTxtCodeShubetsu
+     */
+    @JsonProperty("hdnTxtCodeShubetsu")
+    public void setHdnTxtCodeShubetsu(RString hdnTxtCodeShubetsu) {
+        this.hdnTxtCodeShubetsu = hdnTxtCodeShubetsu;
+    }
+
+    /*
+     * gethdnTxtCode
+     * @return hdnTxtCode
+     */
+    @JsonProperty("hdnTxtCode")
+    public RString getHdnTxtCode() {
+        return hdnTxtCode;
+    }
+
+    /*
+     * sethdnTxtCode
+     * @param hdnTxtCode hdnTxtCode
+     */
+    @JsonProperty("hdnTxtCode")
+    public void setHdnTxtCode(RString hdnTxtCode) {
+        this.hdnTxtCode = hdnTxtCode;
     }
 
     /*

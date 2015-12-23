@@ -6,8 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 調査員情報の識別子です。
@@ -19,8 +20,8 @@ public class ChosainJohoIdentifier implements Serializable {
     private static final long serialVersionUID = 6597672801122640695L;
 
     private final LasdecCode 市町村コード;
-    private final RString 認定調査委託先コード;
-    private final RString 認定調査員コード;
+    private final ChosaItakusakiCode 認定調査委託先コード;
+    private final ChosainCode 認定調査員コード;
 
     /**
      * コンストラクタです。
@@ -30,8 +31,8 @@ public class ChosainJohoIdentifier implements Serializable {
      * @param 認定調査員コード 認定調査員コード
      */
     public ChosainJohoIdentifier(LasdecCode 市町村コード,
-            RString 認定調査委託先コード,
-            RString 認定調査員コード) {
+            ChosaItakusakiCode 認定調査委託先コード,
+            ChosainCode 認定調査員コード) {
         this.市町村コード = 市町村コード;
         this.認定調査委託先コード = 認定調査委託先コード;
         this.認定調査員コード = 認定調査員コード;

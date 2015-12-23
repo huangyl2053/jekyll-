@@ -13,11 +13,15 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -107,6 +111,150 @@ public class NinteichosaItakusakiJoho extends ModelBase<NinteichosaItakusakiJoho
      */
     public RString get認定調査委託先コード() {
         return entity.getNinteichosaItakusakiCode();
+    }
+
+    /**
+     * 事業者番号を返します。
+     *
+     * @return 事業者番号
+     */
+    public JigyoshaNo get事業者番号() {
+        return entity.getJigyoshaNo();
+    }
+
+    /**
+     * 事業者名称を返します。
+     *
+     * @return 事業者名称
+     */
+    public RString get事業者名称() {
+        return entity.getJigyoshaMeisho();
+    }
+
+    /**
+     * 事業者名称を返します。
+     *
+     * @return 事業者名称
+     */
+    public RString get事業者カナ名称() {
+        return entity.getJigyoshaMeishoKana();
+    }
+
+    /**
+     * 郵便番号を返します。
+     *
+     * @return 郵便番号
+     */
+    public YubinNo get郵便番号() {
+        return entity.getYubinNo();
+    }
+
+    /**
+     * 住所を返します。
+     *
+     * @return 住所
+     */
+    public RString get住所() {
+        return entity.getJusho();
+    }
+
+    /**
+     * 電話番号を返します。
+     *
+     * @return 電話番号
+     */
+    public TelNo get電話番号() {
+        return entity.getTelNo();
+    }
+
+    /**
+     * FAX番号を返します。
+     *
+     * @return FAX番号
+     */
+    public TelNo getFAX番号() {
+        return entity.getFaxNo();
+    }
+
+    /**
+     * 代表者氏名を返します。
+     *
+     * @return 代表者氏名
+     */
+    public RString get代表者氏名() {
+        return entity.getDaihyoshaName();
+    }
+
+    /**
+     * 代表者カナ氏名を返します。
+     *
+     * @return 代表者カナ氏名
+     */
+    public RString get代表者カナ氏名() {
+        return entity.getDaihyoshaNameKana();
+    }
+
+    /**
+     * 調査委託区分を返します。
+     *
+     * @return 調査委託区分
+     */
+    public RString get調査委託区分() {
+        return entity.getChosaItakuKubun();
+    }
+
+    /**
+     * 特定調査員表示フラグを返します。
+     *
+     * @return 特定調査員表示フラグ
+     */
+    public Boolean get特定調査員表示フラグ() {
+        return entity.getTokuteiChosainDisplayFlag();
+    }
+
+    /**
+     * 割付定員を返します。
+     *
+     * @return 割付定員
+     */
+    public Integer get割付定員() {
+        return entity.getWaritsukeTeiin();
+    }
+
+    /**
+     * 割付地区を返します。
+     *
+     * @return 割付地区
+     */
+    public ChikuCode get割付地区() {
+        return entity.getWaritsukeChiku();
+    }
+
+    /**
+     * 自動割付フラグを返します。
+     *
+     * @return 自動割付フラグ
+     */
+    public boolean get自動割付フラグ() {
+        return entity.getAutoWaritsukeFlag();
+    }
+
+    /**
+     * 機関の区分を返します。
+     *
+     * @return 機関の区分
+     */
+    public RString get機関の区分() {
+        return entity.getKikanKubun();
+    }
+
+    /**
+     * 状況フラグを返します。
+     *
+     * @return 状況フラグ
+     */
+    public boolean get状況フラグ() {
+        return entity.getJokyoFlag();
     }
 
     /**

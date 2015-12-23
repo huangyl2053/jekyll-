@@ -1,0 +1,301 @@
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001;
+/*
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
+ */
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+
+/**
+ * NinteichosaItakusakiMaster のクラスファイル
+ *
+ * @author 自動生成
+ */
+public class NinteichosaItakusakiMasterDiv extends Panel {
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    /*
+     * [ private の作成 ]
+     * クライアント側から取得した情報を元にを検索を行い
+     * コントロール名とフィールド名を取得する
+     * private + コントロール名 + フィールド名 の文字列を作成
+     */
+    @JsonProperty("ChosainSearch")
+    private ChosainSearchDiv ChosainSearch;
+    @JsonProperty("Chosaitakusakichiran")
+    private ChosaitakusakichiranDiv Chosaitakusakichiran;
+    @JsonProperty("ChosaitakusakiJohoInput")
+    private ChosaitakusakiJohoInputDiv ChosaitakusakiJohoInput;
+    @JsonProperty("ccdKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKanryoMessage;
+
+    /*
+     * [ GetterとSetterの作成 ]
+     * クライアント側から取得した情報を元に検索を行い
+     * コントロール名とフィールド名を取得する
+     * フィールド名のGetterとSetter を作成
+     */
+    /*
+     * getChosainSearch
+     * @return ChosainSearch
+     */
+    @JsonProperty("ChosainSearch")
+    public ChosainSearchDiv getChosainSearch() {
+        return ChosainSearch;
+    }
+
+    /*
+     * setChosainSearch
+     * @param ChosainSearch ChosainSearch
+     */
+    @JsonProperty("ChosainSearch")
+    public void setChosainSearch(ChosainSearchDiv ChosainSearch) {
+        this.ChosainSearch = ChosainSearch;
+    }
+
+    /*
+     * getChosaitakusakichiran
+     * @return Chosaitakusakichiran
+     */
+    @JsonProperty("Chosaitakusakichiran")
+    public ChosaitakusakichiranDiv getChosaitakusakichiran() {
+        return Chosaitakusakichiran;
+    }
+
+    /*
+     * setChosaitakusakichiran
+     * @param Chosaitakusakichiran Chosaitakusakichiran
+     */
+    @JsonProperty("Chosaitakusakichiran")
+    public void setChosaitakusakichiran(ChosaitakusakichiranDiv Chosaitakusakichiran) {
+        this.Chosaitakusakichiran = Chosaitakusakichiran;
+    }
+
+    /*
+     * getChosaitakusakiJohoInput
+     * @return ChosaitakusakiJohoInput
+     */
+    @JsonProperty("ChosaitakusakiJohoInput")
+    public ChosaitakusakiJohoInputDiv getChosaitakusakiJohoInput() {
+        return ChosaitakusakiJohoInput;
+    }
+
+    /*
+     * setChosaitakusakiJohoInput
+     * @param ChosaitakusakiJohoInput ChosaitakusakiJohoInput
+     */
+    @JsonProperty("ChosaitakusakiJohoInput")
+    public void setChosaitakusakiJohoInput(ChosaitakusakiJohoInputDiv ChosaitakusakiJohoInput) {
+        this.ChosaitakusakiJohoInput = ChosaitakusakiJohoInput;
+    }
+
+    /*
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
+     */
+    @JsonProperty("ccdKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public DropDownList getDdlSearchShichoson() {
+        return this.getChosainSearch().getDdlSearchShichoson();
+    }
+
+    @JsonIgnore
+    public void setDdlSearchShichoson(DropDownList ddlSearchShichoson) {
+        this.getChosainSearch().setDdlSearchShichoson(ddlSearchShichoson);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadSearchChosainJokyo() {
+        return this.getChosainSearch().getRadSearchChosainJokyo();
+    }
+
+    @JsonIgnore
+    public void setRadSearchChosainJokyo(RadioButton radSearchChosainJokyo) {
+        this.getChosainSearch().setRadSearchChosainJokyo(radSearchChosainJokyo);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtSearchChosaItakusakiCodeFrom() {
+        return this.getChosainSearch().getTxtSearchChosaItakusakiCodeFrom();
+    }
+
+    @JsonIgnore
+    public void setTxtSearchChosaItakusakiCodeFrom(TextBoxCode txtSearchChosaItakusakiCodeFrom) {
+        this.getChosainSearch().setTxtSearchChosaItakusakiCodeFrom(txtSearchChosaItakusakiCodeFrom);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtSearchChosaItakusakiCodeTo() {
+        return this.getChosainSearch().getTxtSearchChosaItakusakiCodeTo();
+    }
+
+    @JsonIgnore
+    public void setTxtSearchChosaItakusakiCodeTo(TextBoxCode txtSearchChosaItakusakiCodeTo) {
+        this.getChosainSearch().setTxtSearchChosaItakusakiCodeTo(txtSearchChosaItakusakiCodeTo);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtSearchChosaItakusakiMeisho() {
+        return this.getChosainSearch().getTxtSearchChosaItakusakiMeisho();
+    }
+
+    @JsonIgnore
+    public void setTxtSearchChosaItakusakiMeisho(TextBox txtSearchChosaItakusakiMeisho) {
+        this.getChosainSearch().setTxtSearchChosaItakusakiMeisho(txtSearchChosaItakusakiMeisho);
+    }
+
+    @JsonIgnore
+    public TextBoxKana getTxtSearchChosaItakusakiKanaMeisho() {
+        return this.getChosainSearch().getTxtSearchChosaItakusakiKanaMeisho();
+    }
+
+    @JsonIgnore
+    public void setTxtSearchChosaItakusakiKanaMeisho(TextBoxKana txtSearchChosaItakusakiKanaMeisho) {
+        this.getChosainSearch().setTxtSearchChosaItakusakiKanaMeisho(txtSearchChosaItakusakiKanaMeisho);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlitakukubun() {
+        return this.getChosainSearch().getDdlitakukubun();
+    }
+
+    @JsonIgnore
+    public void setDdlitakukubun(DropDownList ddlitakukubun) {
+        this.getChosainSearch().setDdlitakukubun(ddlitakukubun);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlkikankubun() {
+        return this.getChosainSearch().getDdlkikankubun();
+    }
+
+    @JsonIgnore
+    public void setDdlkikankubun(DropDownList ddlkikankubun) {
+        this.getChosainSearch().setDdlkikankubun(ddlkikankubun);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtSaidaiHyojiKensu() {
+        return this.getChosainSearch().getTxtSaidaiHyojiKensu();
+    }
+
+    @JsonIgnore
+    public void setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
+        this.getChosainSearch().setTxtSaidaiHyojiKensu(txtSaidaiHyojiKensu);
+    }
+
+    @JsonIgnore
+    public Button getBtnSearchShujii() {
+        return this.getChosainSearch().getBtnSearchShujii();
+    }
+
+    @JsonIgnore
+    public void setBtnSearchShujii(Button btnSearchShujii) {
+        this.getChosainSearch().setBtnSearchShujii(btnSearchShujii);
+    }
+
+    @JsonIgnore
+    public Button getBtnClearKensakuJoken() {
+        return this.getChosainSearch().getBtnClearKensakuJoken();
+    }
+
+    @JsonIgnore
+    public void setBtnClearKensakuJoken(Button btnClearKensakuJoken) {
+        this.getChosainSearch().setBtnClearKensakuJoken(btnClearKensakuJoken);
+    }
+
+    // </editor-fold>
+    @JsonProperty("状態")
+    private int 状態;
+    @JsonProperty("hdnTxtCode")
+    private RString hdnTxtCode;
+    @JsonProperty("hdnTxtCodeMeisho")
+    private RString hdnTxtCodeMeisho;
+    @JsonProperty("hdnInputDiv")
+    private ChosaitakusakiJohoInputDiv hdnInputDiv;
+
+    /**
+     * @return the hdnTxtCodeMeisho
+     */
+    @JsonProperty("hdnTxtCodeMeisho")
+    public RString getHdnTxtCodeMeisho() {
+        return hdnTxtCodeMeisho;
+    }
+
+    /**
+     * @param hdnTxtCodeMeisho the hdnTxtCodeMeisho to set
+     */
+    @JsonProperty("hdnTxtCodeMeisho")
+    public void setHdnTxtCodeMeisho(RString hdnTxtCodeMeisho) {
+        this.hdnTxtCodeMeisho = hdnTxtCodeMeisho;
+    }
+
+    /**
+     * @return the 状態
+     */
+    @JsonProperty("状態")
+    public int get状態() {
+        return 状態;
+    }
+
+    /**
+     * @param 状態 the 状態 to set
+     */
+    @JsonProperty("状態")
+    public void set状態(int 状態) {
+        this.状態 = 状態;
+    }
+
+    /**
+     * @return the hdnTxtCode
+     */
+    @JsonProperty("hdnTxtCode")
+    public RString getHdnTxtCode() {
+        return hdnTxtCode;
+    }
+
+    /**
+     * @param hdnTxtCode the hdnTxtCode to set
+     */
+    @JsonProperty("hdnTxtCode")
+    public void setHdnTxtCode(RString hdnTxtCode) {
+        this.hdnTxtCode = hdnTxtCode;
+    }
+
+    /**
+     * @return the hdnInputDiv
+     */
+    @JsonProperty("hdnInputDiv")
+    public ChosaitakusakiJohoInputDiv getHdnInputDiv() {
+        return hdnInputDiv;
+    }
+
+    /**
+     * @param hdnInputDiv the hdnInputDiv to set
+     */
+    @JsonProperty("hdnInputDiv")
+    public void setHdnInputDiv(ChosaitakusakiJohoInputDiv hdnInputDiv) {
+        this.hdnInputDiv = hdnInputDiv;
+    }
+
+}

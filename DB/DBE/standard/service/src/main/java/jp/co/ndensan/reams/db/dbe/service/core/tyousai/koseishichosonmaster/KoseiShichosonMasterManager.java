@@ -9,6 +9,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJoho;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosaitakusaki.NinteichosaItakusakiKensakuParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.tyousai.koseishichosonmaster.KoseiShichosonMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
@@ -57,8 +58,7 @@ public class KoseiShichosonMasterManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KoseiShichosonMasterManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KoseiShichosonMasterManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KoseiShichosonMasterManager}のインスタンス
      */
     public static KoseiShichosonMasterManager createInstance() {
         return InstanceProvider.create(KoseiShichosonMasterManager.class);
@@ -68,8 +68,7 @@ public class KoseiShichosonMasterManager {
      * 主キーに合致する構成市町村マスタを返します。
      *
      * @param 構成市町村マスタ検索条件 構成市町村マスタ検索条件
-     * @return KoseiShichosonMaster 【　※ツールの都合上、このカッコ部は手動で削除して下さい 構成市町村マスタ】
-     * nullが返る可能性があります。
+     * @return KoseiShichosonMaster 【　※ツールの都合上、このカッコ部は手動で削除して下さい 構成市町村マスタ】 nullが返る可能性があります。
      */
     @Transaction
     public KoseiShichosonMaster get構成市町村マスタ(KoseiShichosonMasterMapperParameter 構成市町村マスタ検索条件) {
@@ -129,5 +128,21 @@ public class KoseiShichosonMasterManager {
         for (NinteichosaItakusakiJoho 認定調査委託先情報 : 認定調査委託先情報List) {
             認定調査委託先情報Manager.save(認定調査委託先情報);
         }
+    }
+
+    /**
+     * 認定調査委託先マスタ検索のリストを取得します。
+     *
+     * @param 構成市町村マスタ検索条件 構成市町村マスタ検索条件
+     * @return KoseiShichosonMasterEntityの{@code list}
+     */
+    public List<KoseiShichosonMaster> ninteichosaItakusakiSearch(NinteichosaItakusakiKensakuParameter 構成市町村マスタ検索条件) {
+        IKoseiShichosonMasterMapper mapper = mapperProvider.create(IKoseiShichosonMasterMapper.class);
+        List<KoseiShichosonMasterRelateEntity> entitys = mapper.ninteichosaItakusakiSearch(構成市町村マスタ検索条件);
+        List<KoseiShichosonMaster> list = new ArrayList<>();
+        for (KoseiShichosonMasterRelateEntity relateEntity : entitys) {
+            list.add(new KoseiShichosonMaster(relateEntity));
+        }
+        return list;
     }
 }
