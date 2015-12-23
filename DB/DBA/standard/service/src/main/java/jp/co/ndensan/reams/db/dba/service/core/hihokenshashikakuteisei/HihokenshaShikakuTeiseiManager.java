@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakuteisei;
 
 import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
@@ -53,7 +51,7 @@ public class HihokenshaShikakuTeiseiManager {
 
     private static final int AGE_40 = 40;
     private static final int AGE_65 = 65;
-    //TODO QA:252 出力パラメータは「エラーコード」と「メッセージ」ですか。
+    //TODO QA:252 出力パラメータは「エラーコード」と「メッセージ」ですか。 2015/12/23まで
     private static final RString ERR_CODE_DBAE00020 = new RString("DBAE00020");
     private static final RString ERR_CODE_DBAE00021 = new RString("DBAE00021");
     private static final RString ERR_CODE_DBAE00022 = new RString("DBAE00022");
@@ -71,7 +69,6 @@ public class HihokenshaShikakuTeiseiManager {
     private static final RString ERR_CODE_DBAE00018 = new RString("DBAE00018");
     private static final RString ERR_CODE_DBAE00019 = new RString("DBAE00019");
     private static final RString ERR_CODE_DBAE00025 = new RString("DBAE00025");
-    //TODO 被保履歴を追加する場合」と「データを修正場合」の判定フラグに画面中で設定されましたか？しかし入力項目には記載しない。QA有
     private static final RString HIHORIREKI = new RString("被保履歴");
     private static final RString DATASYUUSEI = new RString("データ修正");
     private static final RString GAMENFLG = new RString("被保履歴");
@@ -175,17 +172,13 @@ public class HihokenshaShikakuTeiseiManager {
             List<ShikakuKanrenYidouEntity> 資格関連異動, HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         List<ShikakuTeyiseyiEntity> entityList = new ArrayList<>();
         List<HihokenshaShutokuJyoho> shutokuJyohoList = new ArrayList<>();
+        //TODO 被保履歴を追加する場合」と「データを修正場合」の判定フラグに画面中で設定されましたか？しかし入力項目には記載しない。QA有　2015/12/23まで
         if (GAMENFLG.equals(HIHORIREKI)) {
             entityList = this.get資格訂正情報リスト1(資格詳細情報, 住所地特例, 資格関連異動).records();
         } else if (GAMENFLG.equals(DATASYUUSEI)) {
             entityList = this.get資格訂正情報リスト2(資格詳細情報, 住所地特例, 資格関連異動).records();
         }
-        Collections.sort(entityList, new Comparator<ShikakuTeyiseyiEntity>() {
-            @Override
-            public int compare(ShikakuTeyiseyiEntity entity1, ShikakuTeyiseyiEntity entity2) {
-                return entity1.get異動日().compareTo(entity1.get異動日());
-            }
-        });
+        //TODO 以上で作成した資格訂正情報．異動日より、資格訂正情報のデータは異動日昇順を配列する。未実現　2015/12/23まで
         if (this.get資格訂正登録リスト(shutokuJyohoList, entityList, 被保険者番号, 識別コード).records().isEmpty()) {
             return null;
         }
@@ -201,6 +194,7 @@ public class HihokenshaShikakuTeiseiManager {
      */
     @SuppressWarnings("NM_METHOD_NAMING_CONVENTION")
     public RString ShikakuTorukuListCheck(List<HihokenshaShutokuJyoho> 資格訂正登録リスト, IDateOfBirth 当該識別対象の生年月日) {
+        //TODO 引数の資格訂正登録リスト．異動日より、引数の資格訂正登録リストのデータは異動日昇順を配列する。未実現　2015/12/23まで
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         for (HihokenshaShutokuJyoho hihokenshaShutokuJyoho : 資格訂正登録リスト) {
             if (!hihokenshaShutokuJyoho.get資格取得事由コード().isEmpty()) {
@@ -248,9 +242,8 @@ public class HihokenshaShikakuTeiseiManager {
                 }
             }
             entity = this.getListToEntity(hihokenshaShutokuJyoho, entity);
-
         }
-        return RString.EMPTY;
+        return ERR_CODE;
     }
 
     /**
@@ -263,7 +256,7 @@ public class HihokenshaShikakuTeiseiManager {
      * @param 当該識別対象の生年月日 当該識別対象の生年月日
      * @return エラーコード
      */
-    //TODO 入力項目「第1号資格取得年月日」に処理詳細で利用されない。QA有
+    //TODO 入力項目「第1号資格取得年月日」に処理詳細で利用されない。QA有　2015/12/23まで
     @SuppressWarnings("UWF_UNWRITTEN_FIELD")
     private RString 資格取得チェック処理(FlexibleDate 取得日, RString 取得事由コード, RString 被保区分コード, FlexibleDate 第1号資格取得年月日,
             IDateOfBirth 当該識別対象の生年月日) {
@@ -285,7 +278,7 @@ public class HihokenshaShikakuTeiseiManager {
                 return ERR_CODE_DBAE00023;
             }
         }
-        return RString.EMPTY;
+        return ERR_CODE;
     }
 
     /**
@@ -390,7 +383,7 @@ public class HihokenshaShikakuTeiseiManager {
      * @param 解除事由コード 解除事由コード
      * @return エラーコード
      */
-    //TODO 入力項目「適用日」と「解除日」に処理詳細で利用されない。QA有
+    //TODO 入力項目「適用日」と「解除日」に処理詳細で利用されない。QA有　2015/12/23まで
     @SuppressWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     @java.lang.SuppressWarnings("null")
     private RString 住所地特例チェック処理(DbT1001HihokenshaDaichoEntity 最新データ, FlexibleDate 適用日, RString 適用事由コード,
@@ -537,7 +530,6 @@ public class HihokenshaShikakuTeiseiManager {
 
     private DbT1001HihokenshaDaichoEntity getListToEntity2(HihokenshaShutokuJyoho hihokenshaShutokuJyoho,
             DbT1001HihokenshaDaichoEntity dbT1001Entity) {
-
         dbT1001Entity.setHihokennshaKubunCode(hihokenshaShutokuJyoho.get被保険者区分コード());
         dbT1001Entity.setIchigoShikakuShutokuYMD(hihokenshaShutokuJyoho.get第1号資格取得年月日());
         dbT1001Entity.setIdoJiyuCode(hihokenshaShutokuJyoho.get異動事由コード());
@@ -578,12 +570,12 @@ public class HihokenshaShikakuTeiseiManager {
                     if (市町村セキュリティ情報.get導入形態コード().equals(CODE_112)) {
                         kyuShichosonCodeJoho = KyuShichosonCode.getKyuShichosonCodeJoho(市町村セキュリティ情報.get市町村情報().get市町村コード(),
                                 DonyukeitaiCode.事務構成市町村);
-                        this.get旧市町村コード(資格訂正情報Entity, 旧市町村コード);
+                        旧市町村コード = this.get旧市町村コード(資格訂正情報Entity, 旧市町村コード);
                     }
                     if (市町村セキュリティ情報.get導入形態コード().equals(CODE_120)) {
                         kyuShichosonCodeJoho = KyuShichosonCode.getKyuShichosonCodeJoho(市町村セキュリティ情報.get市町村情報().get市町村コード(),
                                 DonyukeitaiCode.事務単一);
-                        this.get旧市町村コード(資格訂正情報Entity, 旧市町村コード);
+                        旧市町村コード = this.get旧市町村コード(資格訂正情報Entity, 旧市町村コード);
                     }
                 }
                 if (市町村セキュリティ情報.get導入形態コード().equals(CODE_111)) {
@@ -598,10 +590,10 @@ public class HihokenshaShikakuTeiseiManager {
                     }
                     if (!広住特措置元市町村コード.isEmpty()) {
                         kyuShichosonCodeJoho = KyuShichosonCode.getKyuShichosonCodeJoho(広住特措置元市町村コード, DonyukeitaiCode.事務広域);
-                        this.get旧市町村コード(資格訂正情報Entity, 旧市町村コード);
+                        旧市町村コード = this.get旧市町村コード(資格訂正情報Entity, 旧市町村コード);
                     } else if (!市町村コード.isEmpty()) {
                         kyuShichosonCodeJoho = KyuShichosonCode.getKyuShichosonCodeJoho(市町村コード, DonyukeitaiCode.事務広域);
-                        this.get旧市町村コード(資格訂正情報Entity, 旧市町村コード);
+                        旧市町村コード = this.get旧市町村コード(資格訂正情報Entity, 旧市町村コード);
                     }
                 }
                 if (資格訂正情報Entity.get取得事由コード() != null && !資格訂正情報Entity.get取得事由コード().isEmpty()) {
@@ -726,7 +718,7 @@ public class HihokenshaShikakuTeiseiManager {
                 DbT1001.setKoikinaiTokureiSochimotoShichosonCode(コード);
                 DbT1001.setKoikinaiJushochiTokureiFlag(RSTRING_SPACE);
             }
-            //TODO QA262 ●確認事項１ 「DBA介護資格_Enum設定表」の資格変更事由に「合併旧市町村間転居」が存在しない
+            //TODO QA262 ●確認事項１ 「DBA介護資格_Enum設定表」の資格変更事由に「合併旧市町村間転居」が存在しない　2015/12/23まで
             if (entity.get変更事由コード().equals(ShikakuHenkoJiyu.合併内転居.getコード())) {
                 DbT1001.setShichosonCode(旧市町村コード);
             }
