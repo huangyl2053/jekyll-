@@ -384,7 +384,7 @@ public class NinteiChosainMaster {
      */
     public ResponseData<NinteiChosainMasterDiv> onBlur_txtChosaItakusaki(NinteiChosainMasterDiv div) {
         RString ninteichosaItakusakiMeisho = NinteiChosainMasterFinder.createInstance().getNinteichosaItakusakiMeisho(NinteiChosainMasterSearchParameter.createParamForSelectChosainJoho(
-                new LasdecCode(div.getChosainJohoInput().getTxtChiku().getValue()),
+                new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
                 new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
                 new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue())));
         div.getChosainJohoInput().getTxtChosaItakusakiMeisho().setValue(ninteichosaItakusakiMeisho);

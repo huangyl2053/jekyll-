@@ -7,12 +7,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.Sikaku;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.NinteiChosainMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.dgChosainIchiran_Row;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.chihokokyodantai.ShichosonAtesaki;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
-import jp.co.ndensan.reams.ur.urz.service.core.chihokokyodantai.CityAtesakiService;
-import jp.co.ndensan.reams.ur.urz.service.core.chihokokyodantai.ICityAtesakiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -59,22 +53,27 @@ public class NinteiChosainMasterHandler {
     public void load() {
         // TODO 市町村　ドロップダウンリスト
 //        IUrControlData controlData = UrControlDataFactory.createInstance();
-        IAssociationFinder associationFinder = AssociationFinderFactory.createInstance();
-        Association association = associationFinder.getAssociation();
-        ICityAtesakiFinder cityAtesakiFinder = CityAtesakiService.createCityAtesakiFinder();
-        ShichosonAtesaki shichosonAtesaki = cityAtesakiFinder.get市町村宛先(association.get地方公共団体コード());
+//        IAssociationFinder associationFinder = AssociationFinderFactory.createInstance();
+//        Association association = associationFinder.getAssociation();
+//        ICityAtesakiFinder cityAtesakiFinder = CityAtesakiService.createCityAtesakiFinder();
+//        ShichosonAtesaki shichosonAtesaki = cityAtesakiFinder.get市町村宛先(association.get地方公共団体コード());
 
+        List<KeyValueDataSource> shichosonDataSource = new ArrayList<>();
+        shichosonDataSource.add(new KeyValueDataSource(new RString("000001"), new RString("市町村一")));
+        shichosonDataSource.add(new KeyValueDataSource(new RString("000002"), new RString("市町村二")));
+        shichosonDataSource.add(new KeyValueDataSource(new RString("000003"), new RString("市町村三")));
+        div.getDdlSearchShichoson().setDataSource(shichosonDataSource);
         List<UzT0007CodeEntity> codeList = CodeMaster.getCodeRireki(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU);
-        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        List<KeyValueDataSource> chikuDataSource = new ArrayList<>();
         for (UzT0007CodeEntity codeEntity : codeList) {
-            dataSource.add(new KeyValueDataSource(codeEntity.getコード().getKey(), codeEntity.getコード名称()));
+            chikuDataSource.add(new KeyValueDataSource(codeEntity.getコード().getKey(), codeEntity.getコード名称()));
         }
 //        List<ChosaChikuCode> codeList = CodeMasterNoOptionHelper.getCode(DBECodeShubetsu.調査地区コード);
 //        List<KeyValueDataSource> dataSource = new ArrayList<>();
 //        for (ChosaChikuCode code : codeList) {
 //            dataSource.add(new KeyValueDataSource(code.getColumnValue(), code.getMeisho()));
 //        }
-        div.getDdlChikuCode().setDataSource(dataSource);
+        div.getDdlChikuCode().setDataSource(chikuDataSource);
     }
 
     /**
@@ -297,10 +296,20 @@ public class NinteiChosainMasterHandler {
      */
     public void setTxtShichosonmei() {
         // TODO QA253
-        UzT0007CodeEntity code = CodeMaster.getCode(
-                SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(div.getChosainJohoInput().getTxtShichoson().getValue()));
-        if (code != null) {
-            div.getChosainJohoInput().getTxtShichosonmei().setValue(code.getコード名称());
+//        UzT0007CodeEntity code = CodeMaster.getCode(
+//                SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(div.getChosainJohoInput().getTxtShichoson().getValue()));
+//        if (code != null) {
+//            div.getChosainJohoInput().getTxtShichosonmei().setValue(code.getコード名称());
+//        }
+        RString shichoson = div.getChosainJohoInput().getTxtShichoson().getValue();
+        if (new RString("000001").equals(shichoson)) {
+            div.getChosainJohoInput().getTxtShichosonmei().setValue(new RString("市町村一"));
+        } else if (new RString("000002").equals(shichoson)) {
+            div.getChosainJohoInput().getTxtShichosonmei().setValue(new RString("市町村二"));
+        } else if (new RString("000003").equals(shichoson)) {
+            div.getChosainJohoInput().getTxtShichosonmei().setValue(new RString("市町村三"));
+        } else if (new RString("000004").equals(shichoson)) {
+            div.getChosainJohoInput().getTxtShichosonmei().setValue(new RString("市町村四"));
         }
     }
 
