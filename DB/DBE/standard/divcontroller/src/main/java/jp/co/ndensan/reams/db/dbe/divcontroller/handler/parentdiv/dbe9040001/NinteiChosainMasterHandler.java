@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
@@ -38,6 +39,9 @@ public class NinteiChosainMasterHandler {
     private static final RString WOMAN = new RString("2");
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_削除 = new RString("削除");
+    private static final RString ハイフン = new RString("-");
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
     private final NinteiChosainMasterDiv div;
 
     /**
@@ -169,7 +173,7 @@ public class NinteiChosainMasterHandler {
         chosaKanoNinzu.setValue(new Decimal(chosaKanoNinzuPerMonth));
         row.setChosaKanoNinzu(chosaKanoNinzu);
         row.setJokyoFlag(jokyoFlag ? 表示値_有効 : 表示値_無効);
-        row.setYubinNo(yubinNo != null ? yubinNo.value() : RString.EMPTY);
+        row.setYubinNo(editYubinNoToIchiran(yubinNo != null ? yubinNo.value() : RString.EMPTY));
         row.setJusho(jusho != null ? jusho.value() : RString.EMPTY);
         row.setTelNo(telNo != null ? telNo.value() : RString.EMPTY);
         row.setFaxNo(faxNo != null ? faxNo.value() : RString.EMPTY);
@@ -197,7 +201,7 @@ public class NinteiChosainMasterHandler {
             div.getChosainJohoInput().getDdlChosainShikaku().setSelectedKey(row.getChosainShikakuCode());
         }
         div.getChosainJohoInput().getTxtChosaKanoNinzu().setValue(row.getChosaKanoNinzu().getValue());
-        div.getChosainJohoInput().getTxtYubinNo().setValue(new YubinNo(row.getYubinNo()));
+        div.getChosainJohoInput().getTxtYubinNo().setValue(new YubinNo(editYubinNo(row.getYubinNo())));
         div.getChosainJohoInput().getTxtJusho().setDomain(new AtenaJusho(row.getJusho()));
         div.getChosainJohoInput().getTxtTelNo().setDomain(new TelNo(row.getTelNo()));
 
@@ -260,7 +264,7 @@ public class NinteiChosainMasterHandler {
         row.setChosaKanoNinzu(div.getChosainJohoInput().getTxtChosaKanoNinzu());
         RString jokyoFlag = div.getChosainJohoInput().getRadChosainJokyo().getSelectedKey();
         row.setJokyoFlag(CODE_有効.equals(jokyoFlag) ? 表示値_有効 : 表示値_無効);
-        row.setYubinNo(nullToEmpty(div.getChosainJohoInput().getTxtYubinNo().getValue().value()));
+        row.setYubinNo(editYubinNoToIchiran(nullToEmpty(div.getChosainJohoInput().getTxtYubinNo().getValue().value())));
         row.setJusho(nullToEmpty(div.getChosainJohoInput().getTxtJusho().getDomain().value()));
         row.setTelNo(nullToEmpty(div.getChosainJohoInput().getTxtTelNo().getDomain().value()));
         row.setFaxNo(nullToEmpty(div.getChosainJohoInput().getTxtFaxNo().getDomain().value()));
@@ -275,6 +279,29 @@ public class NinteiChosainMasterHandler {
             row.setJotai(eventJotai);
             div.getChosainIchiran().getDgChosainIchiran().getDataSource().set(index, row);
         }
+    }
+
+    private RString editYubinNoToIchiran(RString yubinNo) {
+        RStringBuilder yubinNoSb = new RStringBuilder();
+        if (INDEX_3 <= yubinNo.length()) {
+            yubinNoSb.append(yubinNo.substring(0, INDEX_3));
+            yubinNoSb.append(ハイフン);
+            yubinNoSb.append(yubinNo.substring(INDEX_3));
+        } else {
+            yubinNoSb.append(yubinNo);
+        }
+        return yubinNoSb.toRString();
+    }
+
+    private RString editYubinNo(RString yubinNo) {
+        RStringBuilder yubinNoSb = new RStringBuilder();
+        if (yubinNo.contains(ハイフン)) {
+            yubinNoSb.append(yubinNo.substring(0, INDEX_4));
+            yubinNoSb.append(yubinNo.substring(INDEX_4));
+        } else {
+            yubinNoSb.append(yubinNo);
+        }
+        return yubinNoSb.toRString();
     }
 
     /**
