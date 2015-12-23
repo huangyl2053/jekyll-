@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.tyousai.koseishichosonmaster;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosaitakusaki.NinteichosaItakusakiKensakuParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.tyousai.koseishichosonmaster.KoseiShichosonMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
 
@@ -36,5 +35,5 @@ public interface IKoseiShichosonMasterMapper {
      * @param 構成市町村マスタ検索条件 構成市町村マスタ検索条件
      * @return KoseiShichosonMasterEntityの{@code list}
      */
-    List<KoseiShichosonMasterRelateEntity> ninteichosaItakusakiSearch(NinteichosaItakusakiKensakuParameter 構成市町村マスタ検索条件);
+//    List<KoseiShichosonMasterRelateEntity> ninteichosaItakusakiSearch(NinteichosaItakusakiKensakuParameter 構成市町村マスタ検索条件);
 }

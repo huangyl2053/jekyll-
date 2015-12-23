@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.ikenshoshujiiichiran;
 
-import java.util.HashMap;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiOutputSort;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -140,31 +138,5 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
                 isIryoKikanCodeToFlag, shujiiCodeFrom, isShujiiCodeFromFlag, shujiiCodeTo, isShujiiCodeToFlag, isYukoFlag, isMokuFlag,
                 isOutPutSortIryoKikanCodeShujiiCodeFlag, isOutputSortIryoKikanCodeShujiiNameFlag,
                 isOutputSortIryoKikanNameShujiiCodeFlag, isOutputSortIryoKikanNameShujiiNameFlag);
-    }
-
-    /**
-     * パラメータをHashMapに変換して返します。
-     *
-     * @return MyBatis引き渡し用HashMap
-     */
-    public Map<String, Object> toHashMap() {
-        Map<String, Object> parameter = new HashMap<>();
-        parameter.put("shichosonCode", this.shichosonCode);
-        parameter.put("shichosonName", this.shichosonName);
-        parameter.put("iryoKikanCodeFrom", this.iryoKikanCodeFrom);
-        parameter.put("isIryoKikanCodeFromEmpty", this.isIryoKikanCodeFromEmpty);
-        parameter.put("iryoKikanCodeTo", this.iryoKikanCodeTo);
-        parameter.put("isIryoKikanCodeToEmpty", this.isIryoKikanCodeToEmpty);
-        parameter.put("shujiiCodeFrom", this.shujiiCodeFrom);
-        parameter.put("isShujiiCodeFromEmpty", this.isShujiiCodeFromEmpty);
-        parameter.put("shujiiCodeTo", this.shujiiCodeTo);
-        parameter.put("isShujiiCodeToEmpty", this.isShujiiCodeToEmpty);
-        parameter.put("isJyoukyouYukoFlag", this.isJyoukyouYukoFlag);
-        parameter.put("isJyoukyouMukoFlag", this.isJyoukyouMukoFlag);
-        parameter.put("isIryoKikanCodeShujiiCodeFlag", this.isIryoKikanCodeShujiiCodeFlag);
-        parameter.put("isIryoKikanCodeShujiiNameFlag", this.isIryoKikanCodeShujiiNameFlag);
-        parameter.put("isIryoKikanNameShujiiCodeFlag", this.isIryoKikanNameShujiiCodeFlag);
-        parameter.put("isIryoKikanNameShujiiNameFlag", this.isIryoKikanNameShujiiNameFlag);
-        return parameter;
     }
 }

@@ -29,10 +29,10 @@ public class IkenshoShujiiIchiranFlow extends BatchFlowBase<IkenshoShujiiIchiran
     @Step(REPORT_PROCESS)
     private IBatchFlowCommand reportProcess() {
         return loopBatch(IkenshoShujiiIchiranProcess.class)
-                .arguments(createProcessParameter())
+                .arguments(getParameter().to主治医一覧情報プロセスparameter())
                 .define();
     }
-    
+
     private Map<RString, Object> createProcessParameter() {
         Map<RString, Object> processParameter = new HashMap<>();
         processParameter.put(new RString("parameterClass"), getParameter().to主治医一覧情報プロセスparameter());

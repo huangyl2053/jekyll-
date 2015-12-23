@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -37,22 +36,21 @@ public class IkenshoShujiiIchiranProcess extends BatchProcessBase<IkenshoShujiiI
     private static final ReportId REPORT_ID = new ReportId("DBE591001");
     @BatchWriter
     private BatchReportWriter<ItakusakiChosainIchiranReportSource> batchWrite;
-    InputParameter<IkenshoShujiiIchiranProcessParameter> parameterClass;
+    IkenshoShujiiIchiranProcessParameter processParameter;
     private ReportSourceWriter<ShujiiIryokikanShujiiIchiranhyoReportSource> reportSourceWriter;
 
     @Override
     protected void initialize() {
 
         super.initialize();
-        super.sqlParameter = IkenshoShujiiIchiranProcessParameter.
-                to主治医一覧表作成MybatisParameter(parameterClass.getValue()).toHashMap();
     }
 
     @Override
     protected IBatchReader createReader() {
         batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
         reportSourceWriter = new ReportSourceWriter(batchWrite);
-        return new BatchDbReader(MYBATIS_SELECT_ID, super.sqlParameter);
+        return new BatchDbReader(MYBATIS_SELECT_ID, IkenshoShujiiIchiranProcessParameter.
+                to主治医一覧表作成MybatisParameter(processParameter));
     }
 
     @Override
@@ -62,7 +60,6 @@ public class IkenshoShujiiIchiranProcess extends BatchProcessBase<IkenshoShujiiI
 
     @Override
     protected void afterExecute() {
-        IkenshoShujiiIchiranProcessParameter processParameter = parameterClass.getValue();
         IkenshoShujiiIchiranHeadItem headItem = new IkenshoShujiiIchiranHeadItem(
                 processParameter.getShichosonCode(),
                 processParameter.getShichosonName(),
