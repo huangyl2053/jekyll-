@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Nov 24 13:56:03 CST 2015 
+ * Tue Dec 22 17:10:13 CST 2015 
  */
 
 
@@ -14,12 +14,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 
 
 /**
- * DataGrid1_Row のクラスファイル 
+ * dgShujiiIchiran_Row のクラスファイル 
  * 
  * @author 自動生成
  */
 
-public class DataGrid1_Row extends DataRow {
+public class dgShujiiIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
 
     private RString jotai;
@@ -37,7 +37,7 @@ public class DataGrid1_Row extends DataRow {
     private RString telNo;
     private RString faxNo;
 
-    public DataGrid1_Row() {
+    public dgShujiiIchiran_Row() {
         super();
         this.jotai = RString.EMPTY;
         this.shichoson = RString.EMPTY;
@@ -69,7 +69,7 @@ public class DataGrid1_Row extends DataRow {
         this.setOriginalData("faxNo", faxNo);
     }
 
-    public DataGrid1_Row(RString jotai, RString shichoson, RString shujiiShimei, RString shujiiKanaShimei, TextBoxCode shujiiCode, TextBoxCode shujiiIryoKikanCode, RString shujiiIryoKikan, RString shinryoka, RString shiteii, RString jokyoFlag, RString yubinNo, RString jusho, RString telNo, RString faxNo) {
+    public dgShujiiIchiran_Row(RString jotai, RString shichoson, RString shujiiShimei, RString shujiiKanaShimei, TextBoxCode shujiiCode, TextBoxCode shujiiIryoKikanCode, RString shujiiIryoKikan, RString shinryoka, RString shiteii, RString jokyoFlag, RString yubinNo, RString jusho, RString telNo, RString faxNo) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("shichoson", shichoson);

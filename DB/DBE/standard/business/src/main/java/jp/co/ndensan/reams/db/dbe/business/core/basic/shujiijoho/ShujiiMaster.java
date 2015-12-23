@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.basic.shujiijoho;
 
-import jp.co.ndensan.reams.db.dbe.entity.basic.shujiijoho.ShujiiJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.entity.basic.shujiijoho.ShujiiMasterRelateEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -17,19 +17,20 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 主治医情報クラスです。
+ * 主治医情報を管理するクラスです。
  */
-public class ShujiiJoho {
+public class ShujiiMaster {
 
-    private final ShujiiJohoRelateEntity entity;
+    private final ShujiiMasterRelateEntity entity;
 
     /**
-     * コンストラクタです.
+     * コンストラクタです。<br/>
+     * DBより取得した{@link ShujiiMasterRelateEntity}より{@link ShujiiJoho}を生成します。
      *
-     * @param entity 主治医情報Entity
+     * @param entity DBより取得した{@link ShujiiMasterRelateEntity}
      */
-    public ShujiiJoho(ShujiiJohoRelateEntity entity) {
-	this.entity = entity;
+    public ShujiiMaster(ShujiiMasterRelateEntity entity) {
+	this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医情報"));
     }
 
     public LasdecCode getShichosonCode() {
@@ -44,7 +45,7 @@ public class ShujiiJoho {
 	return entity.getShujiiKana();
     }
 
-    public ShujiiCode getShujiiCode() {
+    public RString getShujiiCode() {
 	return entity.getShujiiCode();
     }
 
@@ -84,7 +85,7 @@ public class ShujiiJoho {
 	return entity.getShichosonMeisho();
     }
 
-    public ShujiiIryokikanCode getShujiiIryokikanCode() {
+    public RString getShujiiIryokikanCode() {
 	return entity.getShujiiIryokikanCode();
     }
 

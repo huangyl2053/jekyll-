@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
 /**
- * PanelBatchParameter1 のクラスファイル 
+ * PanelShujiiIchiranBatchParameter のクラスファイル 
  * 
  * @author 自動生成
  */
-public class PanelBatchParameter1Div extends PanelBatchParameter {
+public class PanelShujiiIchiranBatchParameterDiv extends PanelBatchParameter {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -21,8 +21,8 @@ public class PanelBatchParameter1Div extends PanelBatchParameter {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("DataGrid1")
-    private DataGrid<DataGrid1_Row> DataGrid1;
+    @JsonProperty("dgShujiiIchiran")
+    private DataGrid<dgShujiiIchiran_Row> dgShujiiIchiran;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +31,21 @@ public class PanelBatchParameter1Div extends PanelBatchParameter {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getDataGrid1
-     * @return DataGrid1
+     * getdgShujiiIchiran
+     * @return dgShujiiIchiran
      */
-    @JsonProperty("DataGrid1")
-    public DataGrid<DataGrid1_Row> getDataGrid1() {
-        return DataGrid1;
+    @JsonProperty("dgShujiiIchiran")
+    public DataGrid<dgShujiiIchiran_Row> getDgShujiiIchiran() {
+        return dgShujiiIchiran;
     }
 
     /*
-     * setDataGrid1
-     * @param DataGrid1 DataGrid1
+     * setdgShujiiIchiran
+     * @param dgShujiiIchiran dgShujiiIchiran
      */
-    @JsonProperty("DataGrid1")
-    public void setDataGrid1(DataGrid<DataGrid1_Row> DataGrid1) {
-        this.DataGrid1 = DataGrid1;
+    @JsonProperty("dgShujiiIchiran")
+    public void setDgShujiiIchiran(DataGrid<dgShujiiIchiran_Row> dgShujiiIchiran) {
+        this.dgShujiiIchiran = dgShujiiIchiran;
     }
 
     // </editor-fold>

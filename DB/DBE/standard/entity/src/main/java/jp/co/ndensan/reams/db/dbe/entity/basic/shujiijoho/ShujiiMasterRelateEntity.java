@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.basic.shujiijoho;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -23,14 +21,14 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
  */
 @lombok.Getter
 @lombok.Setter
-public class ShujiiJohoRelateEntity implements IDbAccessable {
+public class ShujiiMasterRelateEntity implements IDbAccessable {
 
     @PrimaryKey
     private LasdecCode shichosonCode;
     private AtenaMeisho shujiiName;
     private AtenaKanaMeisho shujiiKana;
     @PrimaryKey
-    private ShujiiCode shujiiCode;
+    private RString shujiiCode;
     private RString shinryokaName;
     private boolean shiteiiFlag;
     private boolean jokyoFlag;
@@ -41,7 +39,7 @@ public class ShujiiJohoRelateEntity implements IDbAccessable {
     private Code seibetsu;
     private RString shichosonMeisho;
     @PrimaryKey
-    private ShujiiIryokikanCode shujiiIryokikanCode;
+    private RString shujiiIryokikanCode;
     private RString iryoKikanMeisho;
 
 }
