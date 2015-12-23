@@ -268,11 +268,12 @@ public class NinteiChosainMasterHandler {
         row.setShozokuKikanName(nullToEmpty(div.getChosainJohoInput().getTextBoxShozokuKikan().getDomain().value()));
         int index = div.getChosainIchiran().getDgChosainIchiran().getClickedRowId();
         if (追加.equals(eventJotai)) {
-            row.setJotai(追加);
+            row.setJotai(eventJotai);
             div.getChosainIchiran().getDgChosainIchiran().getDataSource().add(row);
         } else if (削除.equals(eventJotai) && 追加.equals(row.getJotai())) {
             div.getChosainIchiran().getDgChosainIchiran().getDataSource().remove(index);
         } else {
+            row.setJotai(eventJotai);
             div.getChosainIchiran().getDgChosainIchiran().getDataSource().set(index, row);
         }
     }
