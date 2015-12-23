@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMast
 import jp.co.ndensan.reams.db.dbz.service.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.kyushichosoncode.KyuShichosonCodeJoho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -67,14 +68,14 @@ public class HihousyosaiFinder {
      * @return List<KoseiShichosonMaster> 構成市町村マスタリスト
      */
     @Transaction
-    public List<KoseiShichosonMaster> getKoseiShichosonMasterList() {
+    public SearchResult<KoseiShichosonMaster> getKoseiShichosonMasterList() {
         List<KoseiShichosonMaster> businessList = new ArrayList<>();
         List<DbT7051KoseiShichosonMasterEntity> entityList = dbT7051Dac.selectByGappeiKyuShichosonKubun();
         for (DbT7051KoseiShichosonMasterEntity entity : entityList) {
             businessList.add(new KoseiShichosonMaster(entity));
         }
 
-        return businessList;
+        return SearchResult.of(businessList, 0, false);
     }
 
     /**
@@ -84,7 +85,7 @@ public class HihousyosaiFinder {
      * @return List<Shichoson>
      */
     @Transaction
-    public List<ShichosonBusiness> getGappeiShichosonList(HihousyosaiFinderParameter params) {
+    public SearchResult<ShichosonBusiness> getGappeiShichosonList(HihousyosaiFinderParameter params) {
         List<ShichosonBusiness> kyuhokenshaList = new ArrayList<>();
         ShichosonBusiness business = new ShichosonBusiness();
         KyuShichosonCodeJoho kyuushichouson = new KyuShichosonCodeJoho();
@@ -101,7 +102,7 @@ public class HihousyosaiFinder {
                 kyuhokenshaList.add(business);
             }
         }
-        return kyuhokenshaList;
+        return SearchResult.of(kyuhokenshaList, 0, false);
     }
 
     /**
@@ -131,10 +132,10 @@ public class HihousyosaiFinder {
      * @return List<ShikakuKubun> 資格区分リスト
      */
     @Transaction
-    public List<ShikakuKubun> getHihokubunList(RString code) {
+    public SearchResult<ShikakuKubun> getHihokubunList(RString code) {
         List<ShikakuKubun> list = new ArrayList<>();
         ShikakuKubun enumList = ShikakuKubun.toValue(code);
         list.add(enumList);
-        return list;
+        return SearchResult.of(list, 0, false);
     }
 }
