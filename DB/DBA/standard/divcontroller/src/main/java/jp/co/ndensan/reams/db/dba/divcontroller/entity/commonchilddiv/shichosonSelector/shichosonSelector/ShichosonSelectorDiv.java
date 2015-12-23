@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonSelector.ShichosonSelector;
+package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonSelector.shichosonSelector;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
