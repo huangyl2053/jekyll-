@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
  * サービスコード検索一覧のコントローラです。
  */
 public class ServiceCodeCommonChildDiv {
-    
+
     private final KaigoServiceNaiyouManager service;
 
     /**
@@ -32,7 +32,7 @@ public class ServiceCodeCommonChildDiv {
     public ServiceCodeCommonChildDiv() {
         service = KaigoServiceNaiyouManager.createInstance();
     }
-    
+
     /**
      * サービスコード検索一覧初期化の設定します。
      *
@@ -43,7 +43,7 @@ public class ServiceCodeCommonChildDiv {
         getHandler(div).onLoad();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 「サービスコードを検索する」ボタンをクリックの設定します。
      *
@@ -62,7 +62,7 @@ public class ServiceCodeCommonChildDiv {
         getHandler(div).initialize(list);
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 「やめる」ボタンをクリック場合、画面が閉じるします。
      *
@@ -72,7 +72,6 @@ public class ServiceCodeCommonChildDiv {
     public ResponseData<ServiceCodeCommonChildDivDiv> onClick_btnYameru(ServiceCodeCommonChildDivDiv div) {
         return ResponseData.of(div).respond();
     }
-    
     /**
      * 「確定する」ボタンをクリック場合、画面遷移が表示します。
      *
@@ -86,7 +85,7 @@ public class ServiceCodeCommonChildDiv {
         getHandler(div).onClick_btnKakutei();
         return ResponseData.of(div).respond();
     }
-    
+
     private ServiceCodeCommonChildDivHandler getHandler(ServiceCodeCommonChildDivDiv div) {
         return new ServiceCodeCommonChildDivHandler(div);
     }

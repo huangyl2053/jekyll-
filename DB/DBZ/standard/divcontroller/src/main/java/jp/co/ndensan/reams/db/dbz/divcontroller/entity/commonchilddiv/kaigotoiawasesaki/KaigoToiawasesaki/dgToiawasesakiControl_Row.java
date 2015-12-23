@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigotoia
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Nov 27 14:50:19 JST 2015 
+ * Thu Dec 10 13:52:40 JST 2015 
  */
 
 

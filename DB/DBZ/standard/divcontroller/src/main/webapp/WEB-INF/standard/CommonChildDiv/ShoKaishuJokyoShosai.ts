@@ -56,6 +56,7 @@ module DBZ
                     this.controls.ShoKaishuJokyoShosai().readOnly = true;
                     this.controls.ShoKaishuJokyoShosai().displayNone = true;
                 }
+				
             }
 
         }

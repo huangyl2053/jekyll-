@@ -1,35 +1,35 @@
 var DBZ;
 (function (DBZ) {
-    (function (IryohokenRireki) {
+    (function (IryoHokenRireki) {
         var Events = (function () {
             function Events() {
             }
             return Events;
         })();
-        IryohokenRireki.Events = Events;
+        IryoHokenRireki.Events = Events;
 
         var Controls = (function () {
             function Controls(fieldName) {
                 this._myName = fieldName;
             }
             Controls.myType = function () {
-                return "IryohokenRireki";
+                return "IryoHokenRireki";
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBZ.IryohokenRireki.Controls.myType();
+                return this._myName + "_" + DBZ.IryoHokenRireki.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBZ.IryohokenRireki.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.IryoHokenRireki.Controls.myType() + "_" + fieldName;
             };
 
-            Controls.prototype.IryohokenRireki = function () {
+            Controls.prototype.IryoHokenRireki = function () {
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.plIryohokenRireki = function () {
-                return new UZA.Panel(this.convFiledName("plIryohokenRireki"));
+            Controls.prototype.plIryoHokenRireki = function () {
+                return new UZA.Panel(this.convFiledName("plIryoHokenRireki"));
             };
 
             Controls.prototype.btnIryohokenTsuika = function () {
@@ -77,7 +77,7 @@ var DBZ;
             };
             return Controls;
         })();
-        IryohokenRireki.Controls = Controls;
-    })(DBZ.IryohokenRireki || (DBZ.IryohokenRireki = {}));
-    var IryohokenRireki = DBZ.IryohokenRireki;
+        IryoHokenRireki.Controls = Controls;
+    })(DBZ.IryoHokenRireki || (DBZ.IryoHokenRireki = {}));
+    var IryoHokenRireki = DBZ.IryoHokenRireki;
 })(DBZ || (DBZ = {}));

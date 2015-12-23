@@ -104,7 +104,7 @@ public class DbT7131KaigoServiceNaiyouDac implements ISaveable<DbT7131KaigoServi
      * @param サービス項目コード サービス項目コード
      * @param 提供開始年月 提供開始年月
      * @return DbT7131KaigoServiceNaiyouEntity
-     * @throws NullPointerException
+     * @throws NullPointerException NullPointerException
      */
     public List<DbT7131KaigoServiceNaiyouEntity> getサービス内容(KaigoServiceShuruiCode サービス種類コード,
             RString サービス項目コード, FlexibleYearMonth 提供開始年月) throws NullPointerException {

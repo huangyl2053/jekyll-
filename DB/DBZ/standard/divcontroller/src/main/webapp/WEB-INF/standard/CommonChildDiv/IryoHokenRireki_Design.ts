@@ -4,7 +4,7 @@
 
 module DBZ {
 
-     export module IryohokenRireki {
+     export module IryoHokenRireki {
 
         export class Events {
 
@@ -14,7 +14,7 @@ module DBZ {
             private _myName: string;
 
             public static myType(): string {
-                return "IryohokenRireki";
+                return "IryoHokenRireki";
             }
 
             constructor(fieldName: string) {
@@ -22,19 +22,19 @@ module DBZ {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBZ.IryohokenRireki.Controls.myType();
+                return this._myName + "_" + DBZ.IryoHokenRireki.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBZ.IryohokenRireki.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.IryoHokenRireki.Controls.myType() + "_" + fieldName;
             }
 
-            public IryohokenRireki(): UZA.Panel {
+            public IryoHokenRireki(): UZA.Panel {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public plIryohokenRireki(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("plIryohokenRireki"));
+            public plIryoHokenRireki(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("plIryoHokenRireki"));
             }
 
             public btnIryohokenTsuika(): UZA.Button {

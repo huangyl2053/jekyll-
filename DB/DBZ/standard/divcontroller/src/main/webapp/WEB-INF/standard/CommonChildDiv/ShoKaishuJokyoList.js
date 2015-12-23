@@ -9,7 +9,8 @@
             ModeController.prototype.priorities = function () {
                 return [
                     "グリッド表示モード",
-                    "一覧パネル高さ"
+                    "一覧パネル高さ",
+                    "明細表示モード"
                 ];
             };
 
@@ -27,6 +28,9 @@
 
             ModeController.prototype.一覧パネル高さ = function () {
                 return new Modes.一覧パネル高さ(this.controls);
+            };
+            ModeController.prototype.明細表示モード = function () {
+                return new Modes.明細表示モード(this.controls);
             };
             return ModeController;
         })();
@@ -46,6 +50,8 @@
                     this.controls.dgShoKaishuJokyo().gridSetting = gridSetting;
 
                     this.controls.dgShoKaishuJokyo()._control.afterPropertiesSet();
+                    this.controls.ShoKaishuJokyoShosai().readOnly = true;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = false;
                 };
 
                 グリッド表示モード.prototype.toroku = function () {
@@ -107,6 +113,27 @@
                 return 一覧パネル高さ;
             })();
             Modes.一覧パネル高さ = 一覧パネル高さ;
+            var 明細表示モード = (function () {
+                function 明細表示モード(controls) {
+                    this.controls = controls;
+                }
+                明細表示モード.prototype.照会 = function () {
+                    this.controls.ShoKaishuJokyoShosai().readOnly = true;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = false;
+                };
+
+                明細表示モード.prototype.入力 = function () {
+                    this.controls.ShoKaishuJokyoShosai().readOnly = false;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = false;
+                };
+
+                明細表示モード.prototype.非表示 = function () {
+                    this.controls.ShoKaishuJokyoShosai().readOnly = true;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = true;
+                };
+                return 明細表示モード;
+            })();
+            Modes.明細表示モード = 明細表示モード;
         })(ShoKaishuJokyoList.Modes || (ShoKaishuJokyoList.Modes = {}));
         var Modes = ShoKaishuJokyoList.Modes;
     })(DBZ.ShoKaishuJokyoList || (DBZ.ShoKaishuJokyoList = {}));

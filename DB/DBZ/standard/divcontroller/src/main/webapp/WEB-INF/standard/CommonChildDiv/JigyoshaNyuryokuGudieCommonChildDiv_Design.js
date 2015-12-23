@@ -96,6 +96,10 @@ var DBZ;
                 return new UZA.Button(this.convFiledName("btnTaishoJigyoshaKensaku"));
             };
 
+            Controls.prototype.btnClear = function () {
+                return new UZA.Button(this.convFiledName("btnClear"));
+            };
+
             Controls.prototype.btnYameru = function () {
                 return new UZA.Button(this.convFiledName("btnYameru"));
             };

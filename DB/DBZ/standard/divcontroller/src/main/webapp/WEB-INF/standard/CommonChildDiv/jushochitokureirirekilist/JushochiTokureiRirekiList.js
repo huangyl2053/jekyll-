@@ -19,7 +19,6 @@ var DBZ;
                     "DisplayType",
                     "ShoriNichijiDisplayMode",
                     "MeisaiDisplayMode",
-                    "HokenshaJohoDisplayMode",
                     "BtnDisplayMode",
                     "DataGridWidth",
                     "DataGridHeight"
@@ -32,10 +31,6 @@ var DBZ;
 
             ModeController.prototype.BtnDisplayMode = function () {
                 return new Modes.BtnDisplayMode(this.controls);
-            };
-
-            ModeController.prototype.HokenshaJohoDisplayMode = function () {
-                return new Modes.HokenshaJohoDisplayMode(this.controls);
             };
 
             ModeController.prototype.ShoriNichijiDisplayMode = function () {
@@ -76,14 +71,28 @@ var DBZ;
                     this.controls.dgJutoku()._control.afterPropertiesSet();
                 };
 
-                DisplayType.prototype.toroku = function () {
+                DisplayType.prototype.tekiyo = function () {
                     this.controls.dgJutoku().readOnly = false;
 
                     var gridSetting = this.controls.dgJutoku().gridSetting;
 
                     gridSetting.columns[0].visible = true;
-                    gridSetting.isShowModifyButtonColumn = false;
-                    gridSetting.isShowDeleteButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
+
+                    this.controls.dgJutoku().gridSetting = gridSetting;
+
+                    this.controls.dgJutoku()._control.afterPropertiesSet();
+                };
+
+                DisplayType.prototype.kaijo = function () {
+                    this.controls.dgJutoku().readOnly = false;
+
+                    var gridSetting = this.controls.dgJutoku().gridSetting;
+
+                    gridSetting.columns[0].visible = true;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
 
                     this.controls.dgJutoku().gridSetting = gridSetting;
 
@@ -120,12 +129,7 @@ var DBZ;
                     this.controls.txtTekiyoDate().readOnly = true;
                     this.controls.txtTekiyoTodokedeDate().readOnly = true;
 
-                    this.controls.TekiyojiHokenshaJoho().readOnly = true;
-
                     this.controls.ddlTekiyoJiyu().readOnly = true;
-                    this.controls.ddlTekiyojiSochimotoHokensha().readOnly = true;
-                    this.controls.ddlTekiyojiKyuHokensha().readOnly = true;
-                    this.controls.ddlTekiyojiJuminJoho().readOnly = true;
 
                     this.controls.JutokuKaijoInput().displayNone = true;
 
@@ -144,12 +148,7 @@ var DBZ;
                     this.controls.txtKaijoDate().readOnly = true;
                     this.controls.txtKaijoTodokedeDate().readOnly = true;
 
-                    this.controls.KaijojiHokenshaJoho().readOnly = true;
-
                     this.controls.ddlKaijoJiyu().readOnly = true;
-                    this.controls.ddlKaijojiSochimotoHokensha().readOnly = true;
-                    this.controls.ddlKaijojiKyuHokensha().readOnly = true;
-                    this.controls.ddlKaijojiJuminJono().readOnly = true;
 
                     this.controls.btnJutokuKakutei().displayNone = true;
                     this.controls.btnJutokuTorikeshi().displayNone = true;
@@ -164,12 +163,7 @@ var DBZ;
                     this.controls.txtTekiyoDate().readOnly = false;
                     this.controls.txtTekiyoTodokedeDate().readOnly = false;
 
-                    this.controls.TekiyojiHokenshaJoho().readOnly = false;
-
                     this.controls.ddlTekiyoJiyu().readOnly = false;
-                    this.controls.ddlTekiyojiSochimotoHokensha().readOnly = false;
-                    this.controls.ddlTekiyojiKyuHokensha().readOnly = false;
-                    this.controls.ddlTekiyojiJuminJoho().readOnly = false;
 
                     this.controls.JutokuKaijoInput().displayNone = true;
 
@@ -188,12 +182,7 @@ var DBZ;
                     this.controls.txtKaijoDate().readOnly = false;
                     this.controls.txtKaijoTodokedeDate().readOnly = false;
 
-                    this.controls.KaijojiHokenshaJoho().readOnly = false;
-
                     this.controls.ddlKaijoJiyu().readOnly = false;
-                    this.controls.ddlKaijojiSochimotoHokensha().readOnly = false;
-                    this.controls.ddlKaijojiKyuHokensha().readOnly = false;
-                    this.controls.ddlKaijojiJuminJono().readOnly = false;
 
                     this.controls.btnJutokuKakutei().displayNone = false;
                     this.controls.btnJutokuTorikeshi().displayNone = false;
@@ -208,24 +197,14 @@ var DBZ;
                     this.controls.txtTekiyoDate().readOnly = false;
                     this.controls.txtTekiyoTodokedeDate().readOnly = false;
 
-                    this.controls.TekiyojiHokenshaJoho().readOnly = false;
-
                     this.controls.ddlTekiyoJiyu().readOnly = false;
-                    this.controls.ddlTekiyojiSochimotoHokensha().readOnly = false;
-                    this.controls.ddlTekiyojiKyuHokensha().readOnly = false;
-                    this.controls.ddlTekiyojiJuminJoho().readOnly = false;
 
                     this.controls.JutokuKaijoInput().readOnly = false;
                     this.controls.JutokuKaijoInput().displayNone = false;
                     this.controls.txtKaijoDate().readOnly = false;
                     this.controls.txtKaijoTodokedeDate().readOnly = false;
 
-                    this.controls.KaijojiHokenshaJoho().readOnly = false;
-
                     this.controls.ddlKaijoJiyu().readOnly = false;
-                    this.controls.ddlKaijojiSochimotoHokensha().readOnly = false;
-                    this.controls.ddlKaijojiKyuHokensha().readOnly = false;
-                    this.controls.ddlKaijojiJuminJono().readOnly = false;
 
                     this.controls.btnJutokuKakutei().displayNone = false;
                     this.controls.btnJutokuTorikeshi().displayNone = false;
@@ -240,24 +219,14 @@ var DBZ;
                     this.controls.txtTekiyoDate().readOnly = true;
                     this.controls.txtTekiyoTodokedeDate().readOnly = true;
 
-                    this.controls.TekiyojiHokenshaJoho().readOnly = true;
-
                     this.controls.ddlTekiyoJiyu().readOnly = true;
-                    this.controls.ddlTekiyojiSochimotoHokensha().readOnly = true;
-                    this.controls.ddlTekiyojiKyuHokensha().readOnly = true;
-                    this.controls.ddlTekiyojiJuminJoho().readOnly = true;
 
                     this.controls.JutokuKaijoInput().readOnly = true;
                     this.controls.JutokuKaijoInput().displayNone = false;
                     this.controls.txtKaijoDate().readOnly = true;
                     this.controls.txtKaijoTodokedeDate().readOnly = true;
 
-                    this.controls.KaijojiHokenshaJoho().readOnly = true;
-
                     this.controls.ddlKaijoJiyu().readOnly = true;
-                    this.controls.ddlKaijojiSochimotoHokensha().readOnly = true;
-                    this.controls.ddlKaijojiKyuHokensha().readOnly = true;
-                    this.controls.ddlKaijojiJuminJono().readOnly = true;
 
                     this.controls.btnJutokuKakutei().displayNone = true;
                     this.controls.btnJutokuTorikeshi().displayNone = true;
@@ -269,122 +238,6 @@ var DBZ;
                 return MeisaiDisplayMode;
             })();
             Modes.MeisaiDisplayMode = MeisaiDisplayMode;
-
-            var HokenshaJohoDisplayMode = (function () {
-                function HokenshaJohoDisplayMode(controls) {
-                    this.controls = controls;
-                }
-                HokenshaJohoDisplayMode.prototype.TanitsuGappeiNashi = function () {
-                    var gridSetting = this.controls.dgJutoku().gridSetting;
-
-                    for (var i = 0; i < gridSetting.columns.length; i++) {
-                        if (gridSetting.columns[i].dataName == 'sochimotoHokensha') {
-                            gridSetting.columns[i].visible = false;
-                        } else if (gridSetting.columns[i].dataName == 'kyuHokensha') {
-                            gridSetting.columns[i].visible = false;
-                        }
-                    }
-
-                    this.controls.dgJutoku().gridSetting = gridSetting;
-
-                    this.controls.TekiyojiHokenshaJoho().displayNone = true;
-                    this.controls.KaijojiHokenshaJoho().displayNone = true;
-
-                    this.controls.dgJutoku()._control.afterPropertiesSet();
-                };
-
-                HokenshaJohoDisplayMode.prototype.TanitsuGappeiAri = function () {
-                    var gridSetting = this.controls.dgJutoku().gridSetting;
-
-                    for (var i = 0; i < gridSetting.columns.length; i++) {
-                        if (gridSetting.columns[i].dataName == 'sochimotoHokensha') {
-                            gridSetting.columns[i].visible = false;
-                        } else if (gridSetting.columns[i].dataName == 'kyuHokensha') {
-                            gridSetting.columns[i].visible = true;
-                        }
-                    }
-
-                    this.controls.dgJutoku().gridSetting = gridSetting;
-
-                    this.controls.TekiyojiHokenshaJoho().displayNone = false;
-                    this.controls.ddlTekiyojiSochimotoHokensha().displayNone = true;
-                    this.controls.ddlTekiyojiKyuHokensha().displayNone = false;
-                    this.controls.ddlTekiyojiKyuHokensha().readOnly = false;
-                    this.controls.ddlTekiyojiJuminJoho().displayNone = true;
-
-                    this.controls.KaijojiHokenshaJoho().displayNone = false;
-                    this.controls.ddlKaijojiSochimotoHokensha().displayNone = true;
-                    this.controls.ddlKaijojiKyuHokensha().displayNone = false;
-                    this.controls.ddlKaijojiKyuHokensha().readOnly = false;
-                    this.controls.ddlKaijojiJuminJono().displayNone = true;
-
-                    this.controls.dgJutoku()._control.afterPropertiesSet();
-                };
-
-                HokenshaJohoDisplayMode.prototype.KoikiGappeiNashi = function () {
-                    var gridSetting = this.controls.dgJutoku().gridSetting;
-
-                    for (var i = 0; i < gridSetting.columns.length; i++) {
-                        if (gridSetting.columns[i].dataName == 'sochimotoHokensha') {
-                            gridSetting.columns[i].visible = true;
-                        } else if (gridSetting.columns[i].dataName == 'kyuHokensha') {
-                            gridSetting.columns[i].visible = false;
-                        }
-                    }
-
-                    this.controls.dgJutoku().gridSetting = gridSetting;
-
-                    this.controls.TekiyojiHokenshaJoho().displayNone = false;
-                    this.controls.ddlTekiyojiSochimotoHokensha().readOnly = false;
-                    this.controls.ddlTekiyojiSochimotoHokensha().displayNone = false;
-                    this.controls.ddlTekiyojiKyuHokensha().displayNone = true;
-                    this.controls.ddlTekiyojiJuminJoho().readOnly = false;
-                    this.controls.ddlTekiyojiJuminJoho().displayNone = false;
-
-                    this.controls.KaijojiHokenshaJoho().displayNone = false;
-                    this.controls.ddlKaijojiSochimotoHokensha().readOnly = false;
-                    this.controls.ddlKaijojiSochimotoHokensha().displayNone = false;
-                    this.controls.ddlKaijojiKyuHokensha().displayNone = true;
-                    this.controls.ddlKaijojiJuminJono().readOnly = false;
-                    this.controls.ddlKaijojiJuminJono().displayNone = false;
-
-                    this.controls.dgJutoku()._control.afterPropertiesSet();
-                };
-
-                HokenshaJohoDisplayMode.prototype.KoikiGappeiAri = function () {
-                    var gridSetting = this.controls.dgJutoku().gridSetting;
-
-                    for (var i = 0; i < gridSetting.columns.length; i++) {
-                        if (gridSetting.columns[i].dataName == 'sochimotoHokensha') {
-                            gridSetting.columns[i].visible = true;
-                        } else if (gridSetting.columns[i].dataName == 'kyuHokensha') {
-                            gridSetting.columns[i].visible = true;
-                        }
-                    }
-
-                    this.controls.dgJutoku().gridSetting = gridSetting;
-
-                    this.controls.TekiyojiHokenshaJoho().displayNone = false;
-                    this.controls.ddlTekiyojiSochimotoHokensha().readOnly = false;
-                    this.controls.ddlTekiyojiSochimotoHokensha().displayNone = false;
-                    this.controls.ddlTekiyojiKyuHokensha().readOnly = false;
-                    this.controls.ddlTekiyojiKyuHokensha().displayNone = false;
-                    this.controls.ddlTekiyojiJuminJoho().readOnly = false;
-                    this.controls.ddlTekiyojiJuminJoho().displayNone = false;
-
-                    this.controls.KaijojiHokenshaJoho().displayNone = false;
-                    this.controls.ddlKaijojiSochimotoHokensha().readOnly = false;
-                    this.controls.ddlKaijojiSochimotoHokensha().displayNone = false;
-                    this.controls.ddlKaijojiKyuHokensha().readOnly = false;
-                    this.controls.ddlKaijojiKyuHokensha().displayNone = false;
-                    this.controls.ddlKaijojiJuminJono().readOnly = false;
-                    this.controls.ddlKaijojiJuminJono().displayNone = false;
-
-                    this.controls.dgJutoku()._control.afterPropertiesSet();
-                };
-                return HokenshaJohoDisplayMode;
-            })();
-            Modes.HokenshaJohoDisplayMode = HokenshaJohoDisplayMode;
 
             var ShoriNichijiDisplayMode = (function () {
                 function ShoriNichijiDisplayMode(controls) {
@@ -572,8 +425,6 @@ var DBZ;
                 editTypes.addEditType("dgJutoku_height", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("btnAdd_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 editTypes.addEditType("btnAdd_disabled", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("ddlTekiyojiSochimotoHokensha_readOnly", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("ddlKaijojiSochimotoHokenshsa_readOnly", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 return editTypes;
             };
 
@@ -599,22 +450,6 @@ var DBZ;
 
             PublicProperties.prototype.setBtnAdd_disabled = function (value) {
                 this.controls.btnAdd().disabled = value;
-            };
-
-            PublicProperties.prototype.getDdlTekiyoSochimotoHokensha_readOnly = function () {
-                return this.controls.ddlTekiyojiSochimotoHokensha().readOnly;
-            };
-
-            PublicProperties.prototype.setDdlTekiyoSochimotoHokensha_readOnly = function (value) {
-                this.controls.ddlTekiyojiSochimotoHokensha().readOnly = value;
-            };
-
-            PublicProperties.prototype.getDdlKaijoSochimotoHokenshsa_readOnly = function () {
-                return this.controls.ddlKaijojiSochimotoHokensha().readOnly;
-            };
-
-            PublicProperties.prototype.setDdlKaijoSochimotoHokenshsa_readOnly = function (value) {
-                this.controls.ddlKaijojiSochimotoHokensha().readOnly = value;
             };
             return PublicProperties;
         })();

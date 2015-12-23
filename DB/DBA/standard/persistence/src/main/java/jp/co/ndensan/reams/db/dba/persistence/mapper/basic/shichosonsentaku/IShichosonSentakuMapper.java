@@ -15,6 +15,7 @@ public interface IShichosonSentakuMapper {
      *
      * @param 基準日 基準日
      * @return {@link DbT7051KoseiShichosonMasterEntity}
+     * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     List<DbT7051KoseiShichosonMasterEntity> getEntity(FlexibleDate 基準日);
 

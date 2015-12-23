@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorResult;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonselector.shichosonSelector.ShichosonSelectorDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonselector.shichosonSelector.ShichosonSelectorHandler;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonselector.shichosonSelector.dgShichoson_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonSelector.shichosonSelector.ShichosonSelectorDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonSelector.shichosonSelector.ShichosonSelectorHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonSelector.shichosonSelector.dgShichoson_Row;
 import jp.co.ndensan.reams.db.dba.service.core.shichosonsentaku.ShichosonSentakuFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -20,9 +20,10 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class ShichosonSelector {
 
+    private final ShichosonSentakuFinder service;
+    //TODO 張紅麗　QA57　市町村選択モードの確認　2015/12/02まで
     private static final RString KOUSEI_MODO_KOUSEI = new RString("1");
     private static final RString KOUSEI_MODO_KYU = new RString("0");
-    private final ShichosonSentakuFinder service;
 
     /**
      * コンストラクタです。
