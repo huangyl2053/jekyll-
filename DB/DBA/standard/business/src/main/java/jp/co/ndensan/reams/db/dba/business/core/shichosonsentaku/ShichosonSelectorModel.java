@@ -5,7 +5,7 @@ import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 市町村選択ShichosonSelectorModelクラスです。
+ * 市町村選択ShichosonSelectorModelの作成する。
  *
  */
 public class ShichosonSelectorModel implements Serializable {

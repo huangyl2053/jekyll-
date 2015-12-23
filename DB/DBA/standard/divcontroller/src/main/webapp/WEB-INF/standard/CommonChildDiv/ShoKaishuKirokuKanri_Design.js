@@ -67,6 +67,10 @@ var DBA;
                 return new UZA.TextBoxDate(this.convFiledName("txtKoufuDate"));
             };
 
+            Controls.prototype.txtYukouKigen = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtYukouKigen"));
+            };
+
             Controls.prototype.ddlKoufuJiyu = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlKoufuJiyu"));
             };
@@ -75,16 +79,16 @@ var DBA;
                 return new UZA.TextBoxMultiLine(this.convFiledName("txaKoufuRiyu"));
             };
 
-            Controls.prototype.txaKaishuRiyu = function () {
-                return new UZA.TextBoxMultiLine(this.convFiledName("txaKaishuRiyu"));
+            Controls.prototype.txtKaisyuDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKaisyuDate"));
             };
 
             Controls.prototype.ddlKaisyuJiyu = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlKaisyuJiyu"));
             };
 
-            Controls.prototype.txtKaisyuDate = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtKaisyuDate"));
+            Controls.prototype.txaKaishuRiyu = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txaKaishuRiyu"));
             };
 
             Controls.prototype.btnConfirm = function () {

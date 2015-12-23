@@ -1,6 +1,6 @@
-/// <reference path="../../d.ts/jquery.d.ts" />
-/// <reference path="../../d.ts/UzViewControls.d.ts" />
-/// <reference path="../../d.ts/UzaConverter.d.ts" />
+/// <reference path="../d.ts/jquery.d.ts" />
+/// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
 
 module DBA {
 
@@ -73,6 +73,10 @@ module DBA {
                 return new UZA.TextBoxDate(this.convFiledName("txtKoufuDate"));
             }
 
+            public txtYukouKigen(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtYukouKigen"));
+            }
+
             public ddlKoufuJiyu(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlKoufuJiyu"));
             }
@@ -81,16 +85,16 @@ module DBA {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txaKoufuRiyu"));
             }
 
-            public txaKaishuRiyu(): UZA.TextBoxMultiLine {
-                return new UZA.TextBoxMultiLine(this.convFiledName("txaKaishuRiyu"));
+            public txtKaisyuDate(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtKaisyuDate"));
             }
 
             public ddlKaisyuJiyu(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlKaisyuJiyu"));
             }
 
-            public txtKaisyuDate(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtKaisyuDate"));
+            public txaKaishuRiyu(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txaKaishuRiyu"));
             }
 
             public btnConfirm(): UZA.Button {

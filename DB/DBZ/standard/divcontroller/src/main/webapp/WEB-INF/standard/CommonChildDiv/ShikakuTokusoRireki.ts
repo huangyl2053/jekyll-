@@ -69,9 +69,11 @@ module DBZ
 
                     public shokai(): void {
                         this.controls.dgShikakuShutokuRireki().readOnly = false;
+                        this.controls.btnAddShikakuShutoku().displayNone = true;
                         
                         var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
                         gridSetting.columns[0].visible = false;
+                        gridSetting.columns[18].visible = true;
                         gridSetting.isShowModifyButtonColumn = false;
                         gridSetting.isShowDeleteButtonColumn = false;
 
@@ -83,14 +85,16 @@ module DBZ
                         this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                     }
 
-                    public toroku(): void {
+                    public shutoku(): void {
                         this.controls.dgShikakuShutokuRireki().readOnly = false;
+                        this.controls.btnAddShikakuShutoku().displayNone = false;
 
                         var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
                         
                         gridSetting.columns[0].visible = true;
-                        gridSetting.isShowModifyButtonColumn = false;
-                        gridSetting.isShowDeleteButtonColumn = false;
+                        gridSetting.columns[18].visible = false;
+                        gridSetting.isShowModifyButtonColumn = true;
+                        gridSetting.isShowDeleteButtonColumn = true;
                         //TODO 幅の設定をどのようにするか
                         this.controls.dgShikakuShutokuRireki().width;
 
@@ -99,12 +103,31 @@ module DBZ
                         this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                     }
 
+                    public soshitsu(): void {
+                        this.controls.dgShikakuShutokuRireki().readOnly = false;
+                        this.controls.btnAddShikakuShutoku().displayNone = true;
+
+                        var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
+                        
+                        gridSetting.columns[0].visible = true;
+                        gridSetting.columns[18].visible = false;
+                        gridSetting.isShowModifyButtonColumn = true;
+                        gridSetting.isShowDeleteButtonColumn = true;
+                        //TODO 幅の設定をどのようにするか
+                        this.controls.dgShikakuShutokuRireki().width;
+
+                        this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
+
+                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                    }
                     public teiseitoroku(): void {
                         this.controls.dgShikakuShutokuRireki().readOnly = false;
+                        this.controls.btnAddShikakuShutoku().displayNone = false;
 
                         var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
 
                         gridSetting.columns[0].visible = true;
+                        gridSetting.columns[18].visible = false;
                         gridSetting.isShowModifyButtonColumn = true;
                         gridSetting.isShowDeleteButtonColumn = true;
                         //TODO 幅の設定

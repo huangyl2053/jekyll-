@@ -59,35 +59,35 @@
             <if test="chosainNoToFlag">
                 AND DbT5913."ninteiChosainNo" <![CDATA[<=]]> #{chosainNoTo}
             </if>
-            <if test="jyoukyou1Flag">
+            <if test="jyoukyouYuukouFlag">
                 AND DbT5910."jokyoFlag" = true 
                 AND DbT5913."jokyoFlag" = true
             </if>
-            <if test="jyoukyou2Flag">
+            <if test="jyoukyouMukouFlag">
                 AND DbT5910."jokyoFlag" = false 
                 AND DbT5913."jokyoFlag" = false
             </if>
-            <if test="narabiJun1Flag">
+            <if test="narabiJunItakusakiCodeFlag">
                 order by DbT5910."ninteichosaItakusakiCode",
                 DbT5913."ninteiChosainNo"
             </if>
-            <if test="narabiJun2Flag">
+            <if test="narabiJunItakusakiCodeName">
                 order by DbT5910."ninteichosaItakusakiCode",
                 DbT5913."chosainShimei"
             </if>
-            <if test="narabiJun3Flag">
+            <if test="narabiJunItakusakiCodeKanaName">
                 order by DbT5910."ninteichosaItakusakiCode",
                 DbT5913."chosainKanaShimei"
             </if>
-            <if test="narabiJun4Flag">
+            <if test="narabiJunChosainCodeFlag">
                 order by DbT5910."jigyoshaMeisho",
                 DbT5913."ninteiChosainNo"
             </if>
-            <if test="narabiJun5Flag">
+            <if test="narabiJunChosainCodeName">
                 order by DbT5910."jigyoshaMeisho",
                 DbT5913."chosainShimei"
             </if>
-            <if test="narabiJun6Flag">
+            <if test="narabiJunChosainCodeKanaName">
                 order by DbT5910."jigyoshaMeisho",
                 DbT5913."chosainKanaShimei"
             </if>

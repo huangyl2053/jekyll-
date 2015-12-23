@@ -58,7 +58,7 @@ public class NinteichosaItakusakiJohoBuilder {
 
     private boolean hasSameIdentifier(ChosainJohoIdentifier 調査員情報の識別子) {
         return (id.get市町村コード().equals(調査員情報の識別子.get市町村コード())
-                && id.get認定調査委託先コード() == 調査員情報の識別子.get認定調査委託先コード());
+                && id.get認定調査委託先コード() == 調査員情報の識別子.get認定調査委託先コード().getColumnValue());
     }
 
     /**

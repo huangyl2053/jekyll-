@@ -79,5 +79,4 @@ public class ItakusakiChosainIchiranQueryProcessParemeter implements IBatchProce
                 narabiJun,
                 nextPage);
     }
-
 }

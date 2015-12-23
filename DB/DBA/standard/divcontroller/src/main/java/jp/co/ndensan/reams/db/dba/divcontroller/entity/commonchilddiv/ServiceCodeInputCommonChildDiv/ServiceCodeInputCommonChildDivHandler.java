@@ -35,6 +35,7 @@ public class ServiceCodeInputCommonChildDivHandler {
      * @param focusServiceCodeList
      */
     public void initialize(List<KaigoServiceNaiyou> focusServiceCodeList) {
+        // TODO QA:93 
         if (!focusServiceCodeList.isEmpty()) {
             div.getTxtServiceCodeName().setValue(focusServiceCodeList.get(0).getサービス名称());
         } else {

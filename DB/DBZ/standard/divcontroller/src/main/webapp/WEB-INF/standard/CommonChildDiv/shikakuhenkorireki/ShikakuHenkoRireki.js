@@ -68,8 +68,9 @@ var DBZ;
                     var gridSetting = this.controls.dgHenko().gridSetting;
 
                     gridSetting.columns[0].visible = false;
-                    gridSetting.isShowModifyButtonColumn = false;
-                    gridSetting.isShowDeleteButtonColumn = false;
+                    gridSetting.columns[8].visible = true;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
 
                     this.controls.dgHenko().gridSetting = gridSetting;
 
@@ -82,8 +83,9 @@ var DBZ;
                     var gridSetting = this.controls.dgHenko().gridSetting;
 
                     gridSetting.columns[0].visible = true;
-                    gridSetting.isShowModifyButtonColumn = false;
-                    gridSetting.isShowDeleteButtonColumn = false;
+                    gridSetting.columns[8].visible = false;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
 
                     this.controls.dgHenko().gridSetting = gridSetting;
 
@@ -96,6 +98,7 @@ var DBZ;
                     var gridSetting = this.controls.dgHenko().gridSetting;
 
                     gridSetting.columns[0].visible = true;
+                    gridSetting.columns[8].visible = false;
                     gridSetting.isShowModifyButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = true;
 

@@ -5,14 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.itakusakichosainichiran;
 
-import java.util.HashMap;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.itakusakichosainichiran.ItakusakiChosainIchiranQueryProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.itakusakichosainichiran.ItakusakiChosainIchiranBatchParamter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -30,15 +27,8 @@ public class ItakusakiChosainIchiranFlow extends BatchFlowBase<ItakusakiChosainI
     @Step(CHOSAIN_ITIRAN)
     private IBatchFlowCommand chosainItiran() {
         return loopBatch(ItakusakiChosainIchiranQueryProcess.class)
-                .arguments(createProcessParameter())
+                .arguments(getParameter().toProcessParameter())
                 .define();
-
-    }
-
-    private Map<RString, Object> createProcessParameter() {
-        Map<RString, Object> processParameter = new HashMap<>();
-        processParameter.put(new RString("parameterClass"), getParameter().toProcessParameter());
-        return processParameter;
 
     }
 

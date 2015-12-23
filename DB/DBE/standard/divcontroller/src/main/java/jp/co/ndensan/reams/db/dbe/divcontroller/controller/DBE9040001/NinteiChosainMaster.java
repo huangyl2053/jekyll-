@@ -113,11 +113,11 @@ public class NinteiChosainMaster {
                 }
                 if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    return ResponseData.of(div).setState(DBE9040001StateName.検索);
+                    searchChosainInfo(div);
+                    return ResponseData.of(div).setState(DBE9040001StateName.一覧);
                 }
             }
         }
-        searchChosainInfo(div);
         return ResponseData.of(div).respond();
     }
 
@@ -159,7 +159,7 @@ public class NinteiChosainMaster {
      * @return ResponseData<NinteiChosainMasterDiv>
      */
     public ResponseData<NinteiChosainMasterDiv> onClick_btnInsert(NinteiChosainMasterDiv div) {
-        ViewStateHolder.put(ViewStateKeys.状態, 追加);
+        div.getChosainJohoInput().setState(追加);
         div.getChosainIchiran().setDisabled(true);
         getHandler(div).setDisabledFalseToChosainJohoToMeisai();
         getHandler(div).clearChosainJohoToMeisai();
@@ -236,7 +236,6 @@ public class NinteiChosainMaster {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
                 div.getChosainIchiran().setDisabled(false);
                 return ResponseData.of(div).setState(DBE9040001StateName.一覧);
             }
@@ -252,46 +251,43 @@ public class NinteiChosainMaster {
      */
     public ResponseData<NinteiChosainMasterDiv> onClick_btnKakutei(NinteiChosainMasterDiv div) {
 
-        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        RString イベント状態 = div.getChosainJohoInput().getState();
         int chosainJohoCount = NinteiChosainMasterFinder.createInstance().getChosainJohoCount(NinteiChosainMasterSearchParameter.createParamForSelectChosainJoho(
-                new LasdecCode(div.getChosainJohoInput().getTxtChiku().getValue()),
+                new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
                 new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
                 new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue())));
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakutei(状態, chosainJohoCount);
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakutei(イベント状態, chosainJohoCount);
 
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         Models<ChosainJohoIdentifier, ChosainJoho> models = ViewStateHolder.get(ViewStateKeys.認定調査員マスタ検索結果, Models.class);
 
-        if (追加.equals(状態)) {
-            ChosainJoho chosainJoho = new ChosainJoho(new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()), div.getChosainJohoInput().getTxtChosaItakusaki().getValue(),
-                    div.getChosainJohoInput().getTxtChosainCode().getValue());
+        if (追加.equals(イベント状態)) {
+            ChosainJoho chosainJoho = new ChosainJoho(new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
+                    new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
+                    new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue()));
             chosainJoho = getHandler(div).editChosainJoho(chosainJoho);
             models.add(chosainJoho);
-            div.getChosainIchiran().getDgChosainIchiran().getDataSource().add(getHandler(div).setChosainJohoToIchiran(状態));
-        } else if (修正.equals(状態)) {
+        } else if (修正.equals(イベント状態)) {
             ChosainJohoIdentifier key = new ChosainJohoIdentifier(
                     new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
-                    div.getChosainJohoInput().getTxtChosaItakusaki().getValue(),
-                    div.getChosainJohoInput().getTxtChosainCode().getValue());
+                    new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
+                    new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue()));
             getHandler(div).editChosainJoho(models.get(key).modifiedModel());
-            int index = div.getChosainIchiran().getDgChosainIchiran().getGridSetting().selectedRowCount();
-            div.getChosainIchiran().getDgChosainIchiran().getDataSource().set(index, getHandler(div).setChosainJohoToIchiran(状態));
-        } else if (削除.equals(状態)) {
-            ChosainJohoIdentifier key = new ChosainJohoIdentifier(
-                    new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
-                    div.getChosainJohoInput().getTxtChosaItakusaki().getValue(),
-                    div.getChosainJohoInput().getTxtChosainCode().getValue());
-            getHandler(div).editChosainJoho(models.get(key).deleted());
-            int index = div.getChosainIchiran().getDgChosainIchiran().getGridSetting().selectedRowCount();
-            div.getChosainIchiran().getDgChosainIchiran().getDataSource().set(index, getHandler(div).setChosainJohoToIchiran(状態));
+        } else if (削除.equals(イベント状態)) {
+            if (!追加.equals(div.getChosainIchiran().getDgChosainIchiran().getActiveRow().getJotai())) {
+                ChosainJohoIdentifier key = new ChosainJohoIdentifier(
+                        new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
+                        new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
+                        new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue()));
+                getHandler(div).editChosainJoho(models.get(key).deleted());
+            }
         }
 
         ViewStateHolder.put(ViewStateKeys.認定調査員マスタ検索結果, models);
         div.getChosainIchiran().setDisabled(false);
-        ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
-
+        getHandler(div).setChosainJohoToIchiran(イベント状態);
         return ResponseData.of(div).respond();
     }
 
@@ -302,7 +298,7 @@ public class NinteiChosainMaster {
      * @return ResponseData<NinteiChosainMasterDiv>
      */
     public ResponseData<NinteiChosainMasterDiv> onSelectByDlbClick_dgChosainIchiran(NinteiChosainMasterDiv div) {
-
+        div.getChosainJohoInput().setState(RString.EMPTY);
         dgChosainIchiran_Row row = div.getChosainIchiran().getDgChosainIchiran().getActiveRow();
         getHandler(div).setChosainJohoToMeisai(row);
         if (修正.equals(row.getJotai())) {
@@ -315,7 +311,6 @@ public class NinteiChosainMaster {
             getHandler(div).setDisabledTrueToChosainJohoToMeisai();
             div.getChosainJohoInput().getBtnKakutei().setDisabled(true);
         }
-        ViewStateHolder.put(ViewStateKeys.状態, row.getJotai());
         div.getChosainIchiran().setDisabled(true);
         return ResponseData.of(div).respond();
     }
@@ -327,16 +322,8 @@ public class NinteiChosainMaster {
      * @return ResponseData<NinteiChosainMasterDiv>
      */
     public ResponseData<NinteiChosainMasterDiv> onSelectByModifyButton_dgChosainIchiran(NinteiChosainMasterDiv div) {
+        div.getChosainJohoInput().setState(修正);
         dgChosainIchiran_Row row = div.getChosainIchiran().getDgChosainIchiran().getClickedItem();
-        RString 状態 = row.getJotai();
-
-        if (RString.EMPTY.equals(状態) || 修正.equals(状態)) {
-            ViewStateHolder.put(ViewStateKeys.状態, 修正);
-        } else if (追加.equals(状態)) {
-            ViewStateHolder.put(ViewStateKeys.状態, 追加);
-        } else if (削除.equals(状態)) {
-            ViewStateHolder.put(ViewStateKeys.状態, 削除);
-        }
         getHandler(div).setChosainJohoToMeisai(row);
         div.getChosainJohoInput().getTxtShichoson().setDisabled(true);
         div.getChosainJohoInput().getTxtChosaItakusaki().setDisabled(true);
@@ -352,13 +339,8 @@ public class NinteiChosainMaster {
      * @return ResponseData<NinteiChosainMasterDiv>
      */
     public ResponseData<NinteiChosainMasterDiv> onSelectByDeleteButton_dgChosainIchiran(NinteiChosainMasterDiv div) {
+        div.getChosainJohoInput().setState(削除);
         dgChosainIchiran_Row row = div.getChosainIchiran().getDgChosainIchiran().getActiveRow();
-        RString 状態 = row.getJotai();
-        if (追加.equals(状態)) {
-            ViewStateHolder.put(ViewStateKeys.状態, 追加);
-        } else if (削除.equals(状態)) {
-            ViewStateHolder.put(ViewStateKeys.状態, 削除);
-        }
         getHandler(div).setChosainJohoToMeisai(row);
         getHandler(div).setDisabledTrueToChosainJohoToMeisai();
         div.getChosainIchiran().setDisabled(true);
@@ -384,7 +366,7 @@ public class NinteiChosainMaster {
      */
     public ResponseData<NinteiChosainMasterDiv> onBlur_txtChosaItakusaki(NinteiChosainMasterDiv div) {
         RString ninteichosaItakusakiMeisho = NinteiChosainMasterFinder.createInstance().getNinteichosaItakusakiMeisho(NinteiChosainMasterSearchParameter.createParamForSelectChosainJoho(
-                new LasdecCode(div.getChosainJohoInput().getTxtChiku().getValue()),
+                new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
                 new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
                 new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue())));
         div.getChosainJohoInput().getTxtChosaItakusakiMeisho().setValue(ninteichosaItakusakiMeisho);

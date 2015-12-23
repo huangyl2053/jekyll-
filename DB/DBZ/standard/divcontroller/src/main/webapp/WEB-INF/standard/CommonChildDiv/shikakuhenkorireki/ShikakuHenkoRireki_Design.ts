@@ -28,10 +28,6 @@ module DBZ {
                 return "onSelectByDeleteButton_dgHenko";
             }
 
-            public static onBeforeClick_btnHenkoKakutei(): string {
-                return "onBeforeClick_btnHenkoKakutei";
-            }
-
             public static onClick_btnHenkoKakutei(): string {
                 return "onClick_btnHenkoKakutei";
             }
@@ -90,7 +86,7 @@ module DBZ {
             }
 
             public HenkoHokenshaJoho(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("HenkoInput_HenkoHokenshaJoho"));
+                return new UZA.Panel(this.convFiledName("HenkoHokenshaJoho"));
             }
 
             public ddlHenkoSochimotoHokensha(): UZA.DropDownList {

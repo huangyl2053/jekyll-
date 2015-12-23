@@ -24,10 +24,6 @@ var DBZ;
                 return "onSelectByDeleteButton_dgHenko";
             };
 
-            Events.onBeforeClick_btnHenkoKakutei = function () {
-                return "onBeforeClick_btnHenkoKakutei";
-            };
-
             Events.onClick_btnHenkoKakutei = function () {
                 return "onClick_btnHenkoKakutei";
             };
@@ -84,7 +80,7 @@ var DBZ;
             };
 
             Controls.prototype.HenkoHokenshaJoho = function () {
-                return new UZA.Panel(this.convFiledName("HenkoInput_HenkoHokenshaJoho"));
+                return new UZA.Panel(this.convFiledName("HenkoHokenshaJoho"));
             };
 
             Controls.prototype.ddlHenkoSochimotoHokensha = function () {

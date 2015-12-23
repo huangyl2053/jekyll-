@@ -33,15 +33,67 @@ var DBZ;
                 State.prototype.ServiceJigyoshaMode = function () {
                     this.controls.ServiceJigyosha().displayNone = false;
                     this.controls.OtherTokureiShisetsu().displayNone = true;
+                    var gridSetting = this.controls.dgJigyoshaItiran().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowDeleteButtonColumn = false;
+                    this.controls.dgJigyoshaItiran().gridSetting = gridSetting;
+                    this.controls.dgJigyoshaItiran()._control.afterPropertiesSet();
                 };
 
                 State.prototype.OtherTokureiShisetsuMode = function () {
                     this.controls.ServiceJigyosha().displayNone = true;
                     this.controls.OtherTokureiShisetsu().displayNone = false;
+                    var gridSetting = this.controls.dgJigyoshaItiran().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowDeleteButtonColumn = false;
+                    this.controls.dgJigyoshaItiran().gridSetting = gridSetting;
+                    this.controls.dgJigyoshaItiran()._control.afterPropertiesSet();
                 };
+
                 State.prototype.ShitekiJogaiShisetsuMode = function () {
                     this.controls.ServiceJigyosha().displayNone = true;
                     this.controls.OtherTokureiShisetsu().displayNone = true;
+                    var gridSetting = this.controls.dgJigyoshaItiran().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowDeleteButtonColumn = false;
+                    this.controls.dgJigyoshaItiran().gridSetting = gridSetting;
+                    this.controls.dgJigyoshaItiran()._control.afterPropertiesSet();
+                };
+
+                State.prototype.サービス事業者修正削除モード = function () {
+                    this.controls.ServiceJigyosha().displayNone = false;
+                    this.controls.OtherTokureiShisetsu().displayNone = true;
+                    var gridSetting = this.controls.dgJigyoshaItiran().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
+                    this.controls.dgJigyoshaItiran().gridSetting = gridSetting;
+                    this.controls.dgJigyoshaItiran()._control.afterPropertiesSet();
+                };
+
+                State.prototype.その他特例施設修正削除モード = function () {
+                    this.controls.ServiceJigyosha().displayNone = true;
+                    this.controls.OtherTokureiShisetsu().displayNone = false;
+                    var gridSetting = this.controls.dgJigyoshaItiran().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
+                    this.controls.dgJigyoshaItiran().gridSetting = gridSetting;
+                    this.controls.dgJigyoshaItiran()._control.afterPropertiesSet();
+                };
+
+                State.prototype.適用除外施設修正削除モード = function () {
+                    this.controls.ServiceJigyosha().displayNone = true;
+                    this.controls.OtherTokureiShisetsu().displayNone = true;
+                    var gridSetting = this.controls.dgJigyoshaItiran().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
+                    this.controls.dgJigyoshaItiran().gridSetting = gridSetting;
+                    this.controls.dgJigyoshaItiran()._control.afterPropertiesSet();
                 };
                 return State;
             })();

@@ -25,7 +25,7 @@
     </resultMap>
     <select id="getIkenshoShujiiIchiranRelateEntity"
               resultMap="resultMap_getIkenshoShujiiIchiranRelateEntity" 
-              parameterType="java.util.Map"
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ikenshoshujiiichiran.IkenshoShujiiIchiranMybatisParameter"
               fetchSize="500">
         SELECT 
             DbT5911ShujiiIryoKikanJoho."iryokikanCode",

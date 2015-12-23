@@ -24,10 +24,6 @@ var DBZ;
                 return "onSelectByDeleteButton_dgJutoku";
             };
 
-            Events.onBeforeClick_btnJutokuKakutei = function () {
-                return "onBeforeClick_btnJutokuKakutei";
-            };
-
             Events.onClick_btnJutokuKakutei = function () {
                 return "onClick_btnJutokuKakutei";
             };
@@ -87,22 +83,6 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlTekiyoJiyu"));
             };
 
-            Controls.prototype.TekiyojiHokenshaJoho = function () {
-                return new UZA.Panel(this.convFiledName("TekiyojiHokenshaJoho"));
-            };
-
-            Controls.prototype.ddlTekiyojiSochimotoHokensha = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiSochimotoHokensha"));
-            };
-
-            Controls.prototype.ddlTekiyojiKyuHokensha = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiKyuHokensha"));
-            };
-
-            Controls.prototype.ddlTekiyojiJuminJoho = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiJuminJoho"));
-            };
-
             Controls.prototype.JutokuKaijoInput = function () {
                 return new UZA.Panel(this.convFiledName("JutokuKaijoInput"));
             };
@@ -117,22 +97,6 @@ var DBZ;
 
             Controls.prototype.ddlKaijoJiyu = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlKaijoJiyu"));
-            };
-
-            Controls.prototype.KaijojiHokenshaJoho = function () {
-                return new UZA.Panel(this.convFiledName("KaijojiHokenshaJoho"));
-            };
-
-            Controls.prototype.ddlKaijojiSochimotoHokensha = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlKaijojiSochimotoHokensha"));
-            };
-
-            Controls.prototype.ddlKaijojiKyuHokensha = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlKaijojiKyuHokensha"));
-            };
-
-            Controls.prototype.ddlKaijojiJuminJono = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlKaijojiJuminJono"));
             };
 
             Controls.prototype.btnJutokuKakutei = function () {

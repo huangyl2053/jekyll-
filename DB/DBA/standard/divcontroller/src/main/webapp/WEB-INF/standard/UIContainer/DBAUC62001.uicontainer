@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBAUC62001",
+ "displayWizard": false,
+ "subGyomuCode": "DBA",
+ "steps": [
+  {
+   "id": 1,
+   "name": "被保険者台帳発行",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA6020011",
+     "toLayoutTitle": "被保険者台帳一括発行",
+     "toState": "初期表示"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA6020011",
+     "layoutTitle": "被保険者台帳一括発行",
+     "eventName": "完了する",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

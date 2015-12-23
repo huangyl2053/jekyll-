@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBAUC12001",
+ "displayWizard": false,
+ "subGyomuCode": "DBA",
+ "steps": [
+  {
+   "id": 1,
+   "name": "年齢到達取得",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1020011",
+     "toLayoutTitle": "年齢到達条件入力",
+     "toState": "初期表示"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1020011",
+     "layoutTitle": "年齢到達条件入力",
+     "eventName": "完了する",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

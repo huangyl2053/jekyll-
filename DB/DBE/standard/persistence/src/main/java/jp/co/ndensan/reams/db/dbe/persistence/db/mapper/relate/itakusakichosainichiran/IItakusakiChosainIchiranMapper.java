@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.itakusakichosainichiran;
 
 import java.util.List;
-import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itakusakichosainichiran.ItakusakiChosainIchiranMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.itakusakichosainichiran.ItakusakiChosainIchiranRelateEntity;
 
 /**
@@ -18,8 +18,8 @@ public interface IItakusakiChosainIchiranMapper {
     /**
      * 調査員一覧情報の取得します。
      *
-     * @param parameter データアクセスパラメータマップ
+     * @param paramter 調査委託先・調査員一覧表のMybatisパラメータクラス
      * @return List<ItakusakiChosainIchiranRelateEntity>
      */
-    public List<ItakusakiChosainIchiranRelateEntity> getNinteiChoSain(Map<String, Object> parameter);
+    public List<ItakusakiChosainIchiranRelateEntity> getNinteiChoSain(ItakusakiChosainIchiranMybitisParamter paramter);
 }

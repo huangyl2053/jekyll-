@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -75,4 +76,13 @@ public class KaigoShikakuKihonHandler {
 //            div.getTxtNinteiShuryoYmd().setValue(jukyu.get認定有効終了日());
 //        }
     }
+
+    /**
+     * 被保険者番号からデータを取得し、Divに設定します。
+     *
+     * @param 被保険者番号 被保険者番号
+     */
+    void initialize(HihokenshaNo 被保険者番号) {
+    }
+
 }

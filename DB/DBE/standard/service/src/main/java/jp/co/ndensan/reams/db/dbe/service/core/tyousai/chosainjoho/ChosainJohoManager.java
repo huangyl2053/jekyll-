@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5913ChosainJohoDac;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -93,5 +95,19 @@ public class ChosainJohoManager {
         }
 
         return 1 == dac.saveOrDelete(調査員情報.toEntity());
+    }
+
+    /**
+     * 市町村コードと認定調査委託先コードで、調査員情報の件数を取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 認定調査委託先コード 認定調査委託先コード
+     * @return 件数
+     */
+    @Transaction
+    public int countByShichosonCodeAndNinteichosaItakusakiCode(LasdecCode 市町村コード, RString 認定調査委託先コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
+        return dac.countByShichosonCodeAndNinteichosaItakusakiCode(市町村コード, 認定調査委託先コード);
     }
 }

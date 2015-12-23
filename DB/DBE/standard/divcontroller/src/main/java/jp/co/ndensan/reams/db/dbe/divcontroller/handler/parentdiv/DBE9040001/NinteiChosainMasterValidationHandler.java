@@ -173,7 +173,7 @@ public class NinteiChosainMasterValidationHandler {
         if (!row.getChosainShikaku().equals(chosainJohoInputDiv.getDdlChosainShikaku().getSelectedValue())) {
             update = true;
         }
-        if (!row.getChosaKanoNinzu().getValue().equals(chosainJohoInputDiv.getTxtChosaKanoNinzu().getValue())) {
+        if (row.getChosaKanoNinzu().getValue() != chosainJohoInputDiv.getTxtChosaKanoNinzu().getValue()) {
             update = true;
         }
         if (!row.getYubinNo().equals(chosainJohoInputDiv.getTxtYubinNo().getValue().value())) {
