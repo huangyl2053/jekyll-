@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -41,7 +42,6 @@ public class IryohokenRirekiCommonChildDiv {
 
         ResponseData<IryohokenRirekiCommonChildDivDiv> responseData = new ResponseData<>();
 
-        IryohokenRirekiHandler handler = createHandlerOf(requestDiv);
         List<UzT0007CodeEntity> entityList = CodeMaster.getCode(new CodeShubetsu(new RString("0001")));
         List<KeyValueDataSource> keyvalueList = new ArrayList<>();
 
@@ -50,7 +50,7 @@ public class IryohokenRirekiCommonChildDiv {
         }
 
         requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().setDataSource(keyvalueList);
-        handler.initialize(new RString("登録"), new RString("0001"));
+        createHandlerOf(requestDiv).initialize(new RString("登録"), new RString("0001"));
         responseData.data = requestDiv;
         return responseData;
     }
@@ -128,21 +128,32 @@ public class IryohokenRirekiCommonChildDiv {
      * @return 医療保険情報Divを持つResponseData
      */
     public ResponseData<IryohokenRirekiCommonChildDivDiv> onClick_btnIryohokenKakute(IryohokenRirekiCommonChildDivDiv requestDiv) {
-        ResponseData<IryohokenRirekiCommonChildDivDiv> response = new ResponseData<>();
 
         List<dgIryohokenIchiran_Row> list = requestDiv.getDgIryohokenIchiran().getDataSource();
+
         dgIryohokenIchiran_Row ichiran_Row;
         int count = 0;
         if (new RString("追加").equals(requestDiv.getPnlIryohokenJoho().getStatus())) {
             ichiran_Row = new dgIryohokenIchiran_Row();
             ichiran_Row.setDefaultDataName3(requestDiv.getPnlIryohokenJoho().getTbdKanyubi().getValue().wareki().toDateString());
-            ichiran_Row.setDefaultDataName4(requestDiv.getPnlIryohokenJoho().getTbdDattabi().getValue().wareki().toDateString());
+            if (requestDiv.getPnlIryohokenJoho().getTbdDattabi().getValue() == null) {
+                ichiran_Row.setDefaultDataName4(RString.EMPTY);
+            } else {
+                ichiran_Row.setDefaultDataName4(requestDiv.getPnlIryohokenJoho().getTbdDattabi().getValue().wareki().toDateString());
+            }
             ichiran_Row.setDefaultDataName5(requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().getSelectedValue());
             ichiran_Row.setDefaultDataName8(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
             ichiran_Row.setDefaultDataName6(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
             ichiran_Row.setDefaultDataName7(requestDiv.getPnlIryohokenJoho().getTxtKigoBango().getValue());
+            RStringBuilder 保険者名 = new RStringBuilder();
+            保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
+            保険者名.append(new RString(":"));
+            保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
+            ichiran_Row.setDefaultDataName10(保険者名.toRString());
             ichiran_Row.setDefaultDataName2(new RString("追加"));
             list.add(count, ichiran_Row);
+            加入日と脱退日の有効性チェック(list, count);
+
         } else {
             requestDiv.getDgIryohokenIchiran().getGridSetting().selectedRowCount();
             ichiran_Row = requestDiv.getDgIryohokenIchiran().getSelectedItems().get(0);
@@ -154,14 +165,23 @@ public class IryohokenRirekiCommonChildDiv {
                 }
             }
 
-            if (!new RString("追加").equals(ichiran_Row.getDefaultDataName2())) {
+            if (!new RString("削除").equals(ichiran_Row.getDefaultDataName2())) {
 
                 ichiran_Row.setDefaultDataName3(requestDiv.getPnlIryohokenJoho().getTbdKanyubi().getValue().wareki().toDateString());
-                ichiran_Row.setDefaultDataName4(requestDiv.getPnlIryohokenJoho().getTbdDattabi().getValue().wareki().toDateString());
+                if (requestDiv.getPnlIryohokenJoho().getTbdDattabi().getValue() == null) {
+                    ichiran_Row.setDefaultDataName4(RString.EMPTY);
+                } else {
+                    ichiran_Row.setDefaultDataName4(requestDiv.getPnlIryohokenJoho().getTbdDattabi().getValue().wareki().toDateString());
+                }
                 ichiran_Row.setDefaultDataName5(requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().getSelectedValue());
                 ichiran_Row.setDefaultDataName8(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
                 ichiran_Row.setDefaultDataName6(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
                 ichiran_Row.setDefaultDataName7(requestDiv.getPnlIryohokenJoho().getTxtKigoBango().getValue());
+                RStringBuilder 保険者名 = new RStringBuilder();
+                保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
+                保険者名.append(new RString(":"));
+                保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
+                ichiran_Row.setDefaultDataName10(保険者名.toRString());
 
                 if (new RString("修正").equals(requestDiv.getPnlIryohokenJoho().getStatus())) {
                     if (!new RString("追加").equals(ichiran_Row.getDefaultDataName2())) {
@@ -174,7 +194,6 @@ public class IryohokenRirekiCommonChildDiv {
                         ichiran_Row.setDefaultDataName2(new RString("削除"));
                     }
                 }
-
             }
             if (new RString("削除").equals(requestDiv.getPnlIryohokenJoho().getStatus()) && new RString("追加").equals(ichiran_Row.getDefaultDataName2())) {
                 list.remove(count);
@@ -213,7 +232,7 @@ public class IryohokenRirekiCommonChildDiv {
             iryohokenRireki.setDefaultDataName4(gridIndexData.getDefaultDataName4());
 
             if (!new RString("削除").equals(gridIndexData.getDefaultDataName2())) {
-                if (gridIndexData.getDefaultDataName4() == null) {
+                if (gridIndexData.getDefaultDataName4() == null || RString.EMPTY.equals(gridIndexData.getDefaultDataName4())) {
                     iryohokenRireki.setDefaultDataName4(RDate.MAX.toDateString());
                 }
                 childDivDate.add(iryohokenRireki);
@@ -225,7 +244,7 @@ public class IryohokenRirekiCommonChildDiv {
 
             iryohokenRirekiDate.setDefaultDataName3(ichiran_Row.getDefaultDataName3());
             iryohokenRirekiDate.setDefaultDataName4(ichiran_Row.getDefaultDataName4());
-            if (ichiran_Row.getDefaultDataName4() == null) {
+            if (ichiran_Row.getDefaultDataName4() == null || RString.EMPTY.equals(ichiran_Row.getDefaultDataName4())) {
                 iryohokenRirekiDate.setDefaultDataName4(RDate.MAX.toDateString());
             }
             childDivDate.add(iryohokenRirekiDate);
@@ -254,12 +273,20 @@ public class IryohokenRirekiCommonChildDiv {
                                 commonChildDivDate.getDefaultDataName4().toString(), ichiran_Row.getDefaultDataName3().toString()));
             }
         } else {
-            IryohokenRirekiCommonChildDivDate commonChildDivDateNext = childDivDate.get(sortIndex + 1);
+
             IryohokenRirekiCommonChildDivDate commonChildDivDateOn = childDivDate.get(sortIndex - 1);
-            if (ichiran_Row.getDefaultDataName3().compareTo(commonChildDivDateOn.getDefaultDataName4()) < 0 || commonChildDivDateNext.getDefaultDataName3().compareTo(ichiran_Row.getDefaultDataName4()) < 0) {
+            if (ichiran_Row.getDefaultDataName3().compareTo(commonChildDivDateOn.getDefaultDataName4()) < 0) {
                 throw new ApplicationException(
                         DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace(
-                                commonChildDivDateOn.getDefaultDataName4().toString(), ichiran_Row.getDefaultDataName4().toString(), commonChildDivDateNext.getDefaultDataName3().toString()));
+                                commonChildDivDateOn.getDefaultDataName4().toString(), ichiran_Row.getDefaultDataName4().toString()));
+            } else {
+                IryohokenRirekiCommonChildDivDate commonChildDivDateNext = childDivDate.get(sortIndex + 1);
+
+                if (commonChildDivDateNext.getDefaultDataName3().compareTo(ichiran_Row.getDefaultDataName4()) < 0) {
+                    throw new ApplicationException(
+                            DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace(
+                                    ichiran_Row.getDefaultDataName4().toString(), commonChildDivDateNext.getDefaultDataName3().toString()));
+                }
             }
         }
     }
@@ -293,7 +320,12 @@ public class IryohokenRirekiCommonChildDiv {
         requestDiv.getDgIryohokenIchiran().getGridSetting().selectedRowCount();
         dgIryohokenIchiran_Row dgIryohokenIchiranRow = requestDiv.getDgIryohokenIchiran().getSelectedItems().get(0);
         requestDiv.getPnlIryohokenJoho().getTbdKanyubi().setValue(new RDate(dgIryohokenIchiranRow.getDefaultDataName3().toString()));
-        requestDiv.getPnlIryohokenJoho().getTbdDattabi().setValue(new RDate(dgIryohokenIchiranRow.getDefaultDataName4().toString()));
+        if (dgIryohokenIchiranRow.getDefaultDataName4() != null && !RString.EMPTY.equals(dgIryohokenIchiranRow.getDefaultDataName4())) {
+            requestDiv.getPnlIryohokenJoho().getTbdDattabi().setValue(new RDate(dgIryohokenIchiranRow.getDefaultDataName4().toString()));
+        } else {
+            requestDiv.getPnlIryohokenJoho().getTbdDattabi().clearValue();
+        }
+
         requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().setSelectedValue(dgIryohokenIchiranRow.getDefaultDataName5());
         requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().setValue(dgIryohokenIchiranRow.getDefaultDataName8());
         requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().setValue(dgIryohokenIchiranRow.getDefaultDataName6());
@@ -353,8 +385,15 @@ public class IryohokenRirekiCommonChildDiv {
 
     private boolean checkDataChangedError(dgIryohokenIchiran_Row ichiran_Row, pnlIryohokenJohoDiv pnlIryohokenJoho) {
 
+        RString dattabi;
+        if (pnlIryohokenJoho.getTbdDattabi().getValue() == null || RString.EMPTY.equals(pnlIryohokenJoho.getTbdDattabi().getValue().toDateString())) {
+            dattabi = RString.EMPTY;
+        } else {
+            dattabi = pnlIryohokenJoho.getTbdDattabi().getValue().wareki().toDateString();
+        }
+
         return ichiran_Row.getDefaultDataName3().equals(pnlIryohokenJoho.getTbdKanyubi().getValue().wareki().toDateString())
-                && ichiran_Row.getDefaultDataName4().equals(pnlIryohokenJoho.getTbdDattabi().getValue().wareki().toDateString())
+                && ichiran_Row.getDefaultDataName4().equals(dattabi)
                 && ichiran_Row.getDefaultDataName5().equals(pnlIryohokenJoho.getDdlSyubetsu().getSelectedValue())
                 && ichiran_Row.getDefaultDataName6().equals(pnlIryohokenJoho.getTxtHokensyaMeisho().getValue())
                 && ichiran_Row.getDefaultDataName7().equals(pnlIryohokenJoho.getTxtKigoBango().getValue())

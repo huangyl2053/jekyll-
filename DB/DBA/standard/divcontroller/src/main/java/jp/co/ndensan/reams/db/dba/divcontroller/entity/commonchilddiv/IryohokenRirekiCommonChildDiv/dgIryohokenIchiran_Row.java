@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.Iryohoken
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Dec 22 20:47:58 CST 2015 
+ * Wed Dec 23 23:17:42 CST 2015 
  */
 
 
@@ -28,9 +28,10 @@ public class dgIryohokenIchiran_Row extends DataRow {
     private RString defaultDataName3;
     private RString defaultDataName4;
     private RString defaultDataName5;
+    private RString defaultDataName10;
     private RString defaultDataName6;
-    private RString defaultDataName7;
     private RString defaultDataName8;
+    private RString defaultDataName7;
     private TextBoxNum defaultDataName9;
 
     public dgIryohokenIchiran_Row() {
@@ -41,9 +42,10 @@ public class dgIryohokenIchiran_Row extends DataRow {
         this.defaultDataName3 = RString.EMPTY;
         this.defaultDataName4 = RString.EMPTY;
         this.defaultDataName5 = RString.EMPTY;
+        this.defaultDataName10 = RString.EMPTY;
         this.defaultDataName6 = RString.EMPTY;
-        this.defaultDataName7 = RString.EMPTY;
         this.defaultDataName8 = RString.EMPTY;
+        this.defaultDataName7 = RString.EMPTY;
         this.defaultDataName9 = new TextBoxNum();
         this.setOriginalData("defaultDataName0", defaultDataName0);
         this.setOriginalData("defaultDataName1", defaultDataName1);
@@ -51,13 +53,14 @@ public class dgIryohokenIchiran_Row extends DataRow {
         this.setOriginalData("defaultDataName3", defaultDataName3);
         this.setOriginalData("defaultDataName4", defaultDataName4);
         this.setOriginalData("defaultDataName5", defaultDataName5);
+        this.setOriginalData("defaultDataName10", defaultDataName10);
         this.setOriginalData("defaultDataName6", defaultDataName6);
-        this.setOriginalData("defaultDataName7", defaultDataName7);
         this.setOriginalData("defaultDataName8", defaultDataName8);
+        this.setOriginalData("defaultDataName7", defaultDataName7);
         this.setOriginalData("defaultDataName9", defaultDataName9);
     }
 
-    public dgIryohokenIchiran_Row(RString defaultDataName0, RString defaultDataName1, RString defaultDataName2, RString defaultDataName3, RString defaultDataName4, RString defaultDataName5, RString defaultDataName6, RString defaultDataName7, RString defaultDataName8, TextBoxNum defaultDataName9) {
+    public dgIryohokenIchiran_Row(RString defaultDataName0, RString defaultDataName1, RString defaultDataName2, RString defaultDataName3, RString defaultDataName4, RString defaultDataName5, RString defaultDataName10, RString defaultDataName6, RString defaultDataName8, RString defaultDataName7, TextBoxNum defaultDataName9) {
         super();
         this.setOriginalData("defaultDataName0", defaultDataName0);
         this.setOriginalData("defaultDataName1", defaultDataName1);
@@ -65,9 +68,10 @@ public class dgIryohokenIchiran_Row extends DataRow {
         this.setOriginalData("defaultDataName3", defaultDataName3);
         this.setOriginalData("defaultDataName4", defaultDataName4);
         this.setOriginalData("defaultDataName5", defaultDataName5);
+        this.setOriginalData("defaultDataName10", defaultDataName10);
         this.setOriginalData("defaultDataName6", defaultDataName6);
-        this.setOriginalData("defaultDataName7", defaultDataName7);
         this.setOriginalData("defaultDataName8", defaultDataName8);
+        this.setOriginalData("defaultDataName7", defaultDataName7);
         this.setOriginalData("defaultDataName9", defaultDataName9);
         this.defaultDataName0 = defaultDataName0;
         this.defaultDataName1 = defaultDataName1;
@@ -75,9 +79,10 @@ public class dgIryohokenIchiran_Row extends DataRow {
         this.defaultDataName3 = defaultDataName3;
         this.defaultDataName4 = defaultDataName4;
         this.defaultDataName5 = defaultDataName5;
+        this.defaultDataName10 = defaultDataName10;
         this.defaultDataName6 = defaultDataName6;
-        this.defaultDataName7 = defaultDataName7;
         this.defaultDataName8 = defaultDataName8;
+        this.defaultDataName7 = defaultDataName7;
         this.defaultDataName9 = defaultDataName9;
     }
 
@@ -105,16 +110,20 @@ public class dgIryohokenIchiran_Row extends DataRow {
         return defaultDataName5;
     }
 
+    public RString getDefaultDataName10() {
+        return defaultDataName10;
+    }
+
     public RString getDefaultDataName6() {
         return defaultDataName6;
     }
 
-    public RString getDefaultDataName7() {
-        return defaultDataName7;
-    }
-
     public RString getDefaultDataName8() {
         return defaultDataName8;
+    }
+
+    public RString getDefaultDataName7() {
+        return defaultDataName7;
     }
 
     public TextBoxNum getDefaultDataName9() {
@@ -151,19 +160,24 @@ public class dgIryohokenIchiran_Row extends DataRow {
         this.defaultDataName5 = defaultDataName5;
     }
 
+    public void setDefaultDataName10(RString defaultDataName10) {
+        this.setOriginalData("defaultDataName10", defaultDataName10);
+        this.defaultDataName10 = defaultDataName10;
+    }
+
     public void setDefaultDataName6(RString defaultDataName6) {
         this.setOriginalData("defaultDataName6", defaultDataName6);
         this.defaultDataName6 = defaultDataName6;
     }
 
-    public void setDefaultDataName7(RString defaultDataName7) {
-        this.setOriginalData("defaultDataName7", defaultDataName7);
-        this.defaultDataName7 = defaultDataName7;
-    }
-
     public void setDefaultDataName8(RString defaultDataName8) {
         this.setOriginalData("defaultDataName8", defaultDataName8);
         this.defaultDataName8 = defaultDataName8;
+    }
+
+    public void setDefaultDataName7(RString defaultDataName7) {
+        this.setOriginalData("defaultDataName7", defaultDataName7);
+        this.defaultDataName7 = defaultDataName7;
     }
 
     public void setDefaultDataName9(TextBoxNum defaultDataName9) {
