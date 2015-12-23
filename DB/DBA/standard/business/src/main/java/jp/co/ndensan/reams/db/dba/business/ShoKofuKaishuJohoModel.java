@@ -29,8 +29,6 @@ public class ShoKofuKaishuJohoModel {
         this.entity = entity;
     }
 
-    
-
     /**
      * 交付証種類を返します。
      *
@@ -39,8 +37,8 @@ public class ShoKofuKaishuJohoModel {
     public RString get交付証種類コード() {
         return entity.getKofuShoShurui();
     }
-    
-     /**
+
+    /**
      * 被保険者番号を返します。
      *
      * @return 被保険者番号
@@ -73,7 +71,7 @@ public class ShoKofuKaishuJohoModel {
      * @return 有効期限
      */
     public FlexibleDate get有効期限() {
-        return entity.getKofuYMD();
+        return entity.getYukoKigenYMD();
     }
 
     /**

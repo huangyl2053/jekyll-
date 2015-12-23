@@ -26,6 +26,11 @@ public class ShoKaishuKirokuKanriHandler {
 
     private final ShoKaishuKirokuKanriDiv div;
     private boolean False;
+    private static final RString 状態_照会 = new RString("照会");
+    private static final RString 状態_更新 = new RString("更新");
+    private static final RString CODESHUBETSU_0014 = new RString("0014");
+    private static final RString CODESHUBETSU_0015 = new RString("0015");
+    private static final RString CODESHUBETSU_0116 = new RString("0116");
 
     /**
      * コンストラクタです。
@@ -37,60 +42,53 @@ public class ShoKaishuKirokuKanriHandler {
     }
 
     /**
-     * 対象事業者を検索する。
+     * 証交付回収情報を検索する。
      */
     public void initialize() {
 
-        List<UzT0007CodeEntity> 交付事由CodeValueList = CodeMaster.getCode(new CodeShubetsu("0014"));
-        List<KeyValueDataSource> 交付事由 = new ArrayList<>();
-        for (UzT0007CodeEntity codeValueObject : 交付事由CodeValueList) {
-            交付事由.add(new KeyValueDataSource(codeValueObject.getコード().getKey(), codeValueObject.getコード名称()));
-        }
-        div.getPanelInput().getDdlKoufuJiyu().setDataSource(交付事由);
-        List<UzT0007CodeEntity> 回収事由CodeValueList = CodeMaster.getCode(new CodeShubetsu("0015"));
-        List<KeyValueDataSource> 回収事由 = new ArrayList<>();
-        for (UzT0007CodeEntity codeValueObject : 回収事由CodeValueList) {
-            回収事由.add(new KeyValueDataSource(codeValueObject.getコード().getKey(), codeValueObject.getコード名称()));
-        }
-        div.getPanelInput().getDdlKaisyuJiyu().setDataSource(回収事由);
-        if (new RString("照会").equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            List<ShoKofuKaishuJohoModel> businessList = ShoKofuKaishuJohoManager.createInstance().getShoKofuKaishuJohoList(new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class)), False).records();
+        div.getPanelInput().getDdlKoufuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0116)));
+        div.getPanelInput().getDdlKaisyuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0015)));
+        if (状態_照会.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            List<ShoKofuKaishuJohoModel> businessList = ShoKofuKaishuJohoManager.createInstance()
+                    .getShoKofuKaishuJohoList(new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class)), False).records();
             List<dgKoufuKaishu_Row> dgKoufuKaishuList = new ArrayList();
             if (businessList != null && !businessList.isEmpty()) {
 
                 for (ShoKofuKaishuJohoModel jigyoshaInput : businessList) {
                     dgKoufuKaishu_Row dgJigyoshaItiran = new dgKoufuKaishu_Row();
-                    dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu("0014"), new Code(jigyoshaInput.get交付証種類コード())));
-                    dgJigyoshaItiran.setKoufuDate(new RString(jigyoshaInput.get交付年月日().toString()));
-                    dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu("0116"), new Code(jigyoshaInput.get交付事由コード())));
+                    dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0014), new Code(jigyoshaInput.get交付証種類コード())));
+                    dgJigyoshaItiran.setKoufuDate(jigyoshaInput.get交付年月日().wareki().toDateString());
+                    dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0116), new Code(jigyoshaInput.get交付事由コード())));
                     dgJigyoshaItiran.setKofuRiyu(jigyoshaInput.get交付理由());
-                    dgJigyoshaItiran.setKaishuDate(new RString(jigyoshaInput.get回収年月日().toString()));
-                    dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu("0015"), new Code(jigyoshaInput.get回収事由コード())));
-                    dgJigyoshaItiran.setYukoKigen(new RString(jigyoshaInput.get有効期限().toString()));
+                    dgJigyoshaItiran.setKaishuDate((jigyoshaInput.get回収年月日().wareki().toDateString()));
+                    dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0015), new Code(jigyoshaInput.get回収事由コード())));
+                    dgJigyoshaItiran.setYukoKigen((jigyoshaInput.get有効期限().wareki().toDateString()));
                     dgJigyoshaItiran.setKaishuRiyu(jigyoshaInput.get回収理由());
                     dgKoufuKaishuList.add(dgJigyoshaItiran);
                 }
                 div.getDgKoufuKaishu().setDataSource(dgKoufuKaishuList);
             }
             div.getPanelInput().setVisible(False);
+            div.getDgKoufuKaishu().getGridSetting().getColumn(new RString("status")).setVisible(False);
             div.getDgKoufuKaishu().getGridSetting().setIsShowDeleteButtonColumn(False);
             div.getDgKoufuKaishu().getGridSetting().setIsShowModifyButtonColumn(False);
             div.getDgKoufuKaishu().getGridSetting().setIsShowRowState(False);
         }
-        if (new RString("更新").equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            List<ShoKofuKaishuJohoModel> businessList = ShoKofuKaishuJohoManager.createInstance().getShoKofuKaishuJohoList(new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class)), False).records();
+        if (状態_更新.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            List<ShoKofuKaishuJohoModel> businessList = ShoKofuKaishuJohoManager.createInstance().
+                    getShoKofuKaishuJohoList(new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class)), False).records();
             List<dgKoufuKaishu_Row> dgKoufuKaishuList = new ArrayList();
             if (businessList != null && !businessList.isEmpty()) {
 
                 for (ShoKofuKaishuJohoModel jigyoshaInput : businessList) {
                     dgKoufuKaishu_Row dgJigyoshaItiran = new dgKoufuKaishu_Row();
-                    dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu("0014"), new Code(jigyoshaInput.get交付証種類コード())));
-                    dgJigyoshaItiran.setKoufuDate(new RString(jigyoshaInput.get交付年月日().toString()));
-                    dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu("0116"), new Code(jigyoshaInput.get交付事由コード())));
+                    dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0014), new Code(jigyoshaInput.get交付証種類コード())));
+                    dgJigyoshaItiran.setKoufuDate(jigyoshaInput.get交付年月日().wareki().toDateString());
+                    dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0116), new Code(jigyoshaInput.get交付事由コード())));
                     dgJigyoshaItiran.setKofuRiyu(jigyoshaInput.get交付理由());
-                    dgJigyoshaItiran.setKaishuDate(new RString(jigyoshaInput.get回収年月日().toString()));
-                    dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu("0015"), new Code(jigyoshaInput.get回収事由コード())));
-                    dgJigyoshaItiran.setYukoKigen(new RString(jigyoshaInput.get有効期限().toString()));
+                    dgJigyoshaItiran.setKaishuDate((jigyoshaInput.get回収年月日().wareki().toDateString()));
+                    dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0015), new Code(jigyoshaInput.get回収事由コード())));
+                    dgJigyoshaItiran.setYukoKigen((jigyoshaInput.get有効期限().wareki().toDateString()));
                     dgJigyoshaItiran.setKaishuRiyu(jigyoshaInput.get回収理由());
                     dgKoufuKaishuList.add(dgJigyoshaItiran);
                 }
@@ -100,5 +98,15 @@ public class ShoKaishuKirokuKanriHandler {
             div.getPanelInput().getBtnCancel().setDisabled(true);
             div.getPanelInput().getBtnConfirm().setDisabled(true);
         }
+    }
+
+    private List<KeyValueDataSource> getCode(CodeShubetsu codeShubetsu) {
+
+        List<UzT0007CodeEntity> codeValueList = CodeMaster.getCode(codeShubetsu);
+        List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        for (UzT0007CodeEntity codeValueObject : codeValueList) {
+            dataSourceList.add(new KeyValueDataSource(codeValueObject.getコード().getKey(), codeValueObject.getコード名称()));
+        }
+        return dataSourceList;
     }
 }
