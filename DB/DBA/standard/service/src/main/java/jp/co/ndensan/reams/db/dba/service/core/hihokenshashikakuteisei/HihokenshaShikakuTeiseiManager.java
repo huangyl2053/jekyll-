@@ -165,7 +165,7 @@ public class HihokenshaShikakuTeiseiManager {
      * @param 資格関連異動 住所地特例
      * @param 被保険者番号 被保険者番号
      * @param 識別コード 識別コード
-     * @return 資格訂正登録リストを返して、資格訂正登録リストのデータがない場合、NULLを返して
+     * @return SearchResult<HihokenshaShutokuJyoho> 資格訂正登録リスト
      */
     @SuppressWarnings("SIC_INNER_SHOULD_BE_STATIC_ANON")
     public SearchResult<HihokenshaShutokuJyoho> getShikakuTorukuList(ShikakuSyousayiEntity 資格詳細情報, List<JushochiTokureiEntity> 住所地特例,
@@ -254,7 +254,7 @@ public class HihokenshaShikakuTeiseiManager {
      * @param 被保区分コード 被保区分コード
      * @param 第1号資格取得年月日 第1号資格取得年月日
      * @param 当該識別対象の生年月日 当該識別対象の生年月日
-     * @return エラーコード
+     * @return ERR_CODE エラーコード
      */
     //TODO 入力項目「第1号資格取得年月日」に処理詳細で利用されない。QA有　2015/12/23まで
     @SuppressWarnings("UWF_UNWRITTEN_FIELD")
@@ -288,7 +288,7 @@ public class HihokenshaShikakuTeiseiManager {
      * @param 喪失年月日 喪失年月日
      * @param 当該識別対象の生年月日 当該識別対象の生年月日
      * @param tokusoRirekiList List<TokusoRireki>
-     * @return エラーコード
+     * @return ERR_CODE エラーコード
      */
     @SuppressWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     @java.lang.SuppressWarnings("null")
@@ -330,7 +330,7 @@ public class HihokenshaShikakuTeiseiManager {
      * @param 変更日 変更日
      * @param 変更事由コード 変更事由コード
      * @param 当該識別対象の生年月日 当該識別対象の生年月日
-     * @return エラーコード
+     * @return ERR_CODE エラーコード
      */
     private RString 資格変更チェック処理(DbT1001HihokenshaDaichoEntity 最新データ, FlexibleDate 変更日, RString 変更事由コード,
             IDateOfBirth 当該識別対象の生年月日) {
@@ -381,7 +381,7 @@ public class HihokenshaShikakuTeiseiManager {
      * @param 適用事由コード 適用事由コード
      * @param 解除日 解除日
      * @param 解除事由コード 解除事由コード
-     * @return エラーコード
+     * @return ERR_CODE エラーコード
      */
     //TODO 入力項目「適用日」と「解除日」に処理詳細で利用されない。QA有　2015/12/23まで
     @SuppressWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
@@ -423,7 +423,7 @@ public class HihokenshaShikakuTeiseiManager {
      *
      * @param 識別コード 識別コード
      * @param 被保険者番号 被保険者番号
-     * @return エラーコード
+     * @return ERR_CODE エラーコード
      */
     @SuppressWarnings("NM_METHOD_NAMING_CONVENTION")
     public RString TeiseiCheck(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
