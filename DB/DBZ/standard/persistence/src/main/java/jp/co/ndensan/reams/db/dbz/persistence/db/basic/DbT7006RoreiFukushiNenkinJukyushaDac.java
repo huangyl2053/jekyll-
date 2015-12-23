@@ -133,7 +133,7 @@ public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006Ro
      */
     @Transaction
     public List<DbT7006RoreiFukushiNenkinJukyushaEntity> selectfor老齢福祉年金履歴情報を取得(
-            ShikibetsuCode 識別コード) throws NullPointerException {
+            ShikibetsuCode 識別コード) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
