@@ -242,10 +242,9 @@ public class TekiyoJogaishaDaichoJohoFinder {
             導入形態コード = 市町村セキュリティ情報.get導入形態コード();
         }
         if (導入形態コード != null && !導入形態コード.isEmpty()
-                && 導入形態コード.getColumnValue().length() >= 導入形態コード_LENGTH_4) {
-            if (広域.equals(導入形態コード.getColumnValue().substringEmptyOnError(導入形態コード_LENGTH_1, 導入形態コード_LENGTH_3))) {
-                現市町村情報 = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho();
-            }
+                && 導入形態コード.getColumnValue().length() >= 導入形態コード_LENGTH_4
+                && (広域.equals(導入形態コード.getColumnValue().substringEmptyOnError(導入形態コード_LENGTH_1, 導入形態コード_LENGTH_3)))) {
+            現市町村情報 = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho();
 //TODO 凌護行 「QA #70076」回答により、機能「市町村情報取得_単一」いらないです、 QA259回答まち、2015/12/28まで
 //            else {
 //                現市町村情報 = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho();
