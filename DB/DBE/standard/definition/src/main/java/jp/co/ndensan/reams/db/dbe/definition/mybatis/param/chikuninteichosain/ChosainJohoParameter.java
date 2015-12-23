@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ChosainJohoParameter {
 
     private final FlexibleDate Temp_設定日;
-//    private final RString 対象地区;
     private final boolean Temp_調査員状況02;
     private final Code chosaChikuCode;
     private final LasdecCode shichosonCode;
@@ -52,9 +51,9 @@ public class ChosainJohoParameter {
         this.ninteiChosaYoteiShuryoTime = requireNonNull(ninteiChosaYoteiShuryoTime, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定終了時間"));
         this.ninteiChosaJikanWaku = requireNonNull(ninteiChosaJikanWaku, UrSystemErrorMessages.値がnull.getReplacedMessage("選択された時間枠"));
     }
-//メモ情報件数を取得する
 
-    public static ChosainJohoParameter createSelectByKeyParam(Code chosaChikuCode) {
+//メモ情報件数を取得する
+    public static ChosainJohoParameter createParam_メモ情報件数(FlexibleDate Temp_設定日, Code chosaChikuCode) {
         return new ChosainJohoParameter(
                 FlexibleDate.MAX,
                 true,
@@ -70,7 +69,7 @@ public class ChosainJohoParameter {
     }
 
     //認定調査スケジュール詳細情報を取得する
-    public static ChosainJohoParameter createSelectByKeyParam(
+    public static ChosainJohoParameter createParam_認定調査スケジュール詳細情報(
             FlexibleDate Temp_設定日,
             boolean Temp_調査員状況02,
             Code chosaChikuCode,
@@ -91,7 +90,7 @@ public class ChosainJohoParameter {
     }
 
     //「対象地区」DDLのonselectイベント
-    public static ChosainJohoParameter createSelectByKeyParam1(
+    public static ChosainJohoParameter createParam_保険者名(
             Code chosaChikuCode) {
         return new ChosainJohoParameter(
                 FlexibleDate.MAX,
@@ -108,7 +107,7 @@ public class ChosainJohoParameter {
     }
 
     //「保険者」DDLのonselectイベント
-    public static ChosainJohoParameter createSelectByKeyParam(
+    public static ChosainJohoParameter createParam_認定調査委託先名称(
             Code chosaChikuCode,
             LasdecCode shichosonCode) {
         return new ChosainJohoParameter(
@@ -125,28 +124,8 @@ public class ChosainJohoParameter {
         );
     }
 
-    public static ChosainJohoParameter createSelectByKeyParam2(
-            FlexibleDate Temp_設定日,
-            boolean Temp_調査員状況02,
-            Code chosaChikuCode,
-            LasdecCode shichosonCode,
-            RString ninteiChosaItakusakiCode) {
-        return new ChosainJohoParameter(
-                Temp_設定日,
-                Temp_調査員状況02,
-                chosaChikuCode,
-                shichosonCode,
-                ninteiChosaItakusakiCode,
-                RString.EMPTY,
-                FlexibleDate.MAX,
-                RString.EMPTY,
-                RString.EMPTY,
-                Code.EMPTY
-        );
-    }
-
     //「検索する」ボタンのonclickイベント
-    public static ChosainJohoParameter createSelectByKeyParam(
+    public static ChosainJohoParameter createParam_申請書管理番号(
             Code chosaChikuCode,
             LasdecCode shichosonCode,
             RString ninteiChosaItakusakiCode,
