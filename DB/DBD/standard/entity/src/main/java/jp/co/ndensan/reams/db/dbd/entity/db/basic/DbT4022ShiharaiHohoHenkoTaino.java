@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 支払方法変更滞納テーブルの項目定義クラスです。
  */
 public enum DbT4022ShiharaiHohoHenkoTaino implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -53,10 +53,18 @@ public enum DbT4022ShiharaiHohoHenkoTaino implements IColumnDefinition {
      */
     kanriKubun(1, 0),
     /**
+     * 履歴番号
+     */
+    rirekiNo(5, 0),
+    /**
      * 滞納判定区分
      * <br/>1:予告登録,2:償還払化登録,3:差止登録,4:控除登録,5:給付額減額登録
      */
     tainoHanteiKubun(1, 0),
+    /**
+     * 連番
+     */
+    renNo(5, 0),
     /**
      * 調定年度
      */
@@ -78,10 +86,6 @@ public enum DbT4022ShiharaiHohoHenkoTaino implements IColumnDefinition {
      * 収納期・月
      */
     shuno_Ki_Tsuki(3, 0),
-    /**
-     * 履歴番号
-     */
-    rirekiNo(5, 0),
     /**
      * 滞納判定年月日
      */
@@ -117,8 +121,29 @@ public enum DbT4022ShiharaiHohoHenkoTaino implements IColumnDefinition {
     jikoAtoShunyuKubun(1, 0),
     /**
      * 対象管理区分
+     * <br/>1：今回対象、2：前回対象
      */
-    taishoKanriKubun(1, 0);
+    taishoKanriKubun(1, 0),
+    /**
+     * 調定額
+     */
+    choteigaku(11, 0),
+    /**
+     * 納期限
+     */
+    nokigen(2147483647, 0),
+    /**
+     * 滞納額
+     */
+    tainoGaku(11, 0),
+    /**
+     * 控除額
+     */
+    kojoGaku(11, 0),
+    /**
+     * 論理削除フラグ
+     */
+    logicalDeletedFlag(1, 0);
 
     private final int maxLength;
     private final int scale;
