@@ -18,9 +18,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.KouikiGappeiJyohoE
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7055GappeiJohoDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.gappeijoho.IGappeiJyohoMapper;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -116,8 +114,8 @@ public class GappeiCityJohoFinder {
      * 単一全合併市町村情報検索を取得します。
      *
      * @param hyoujiUmu 表示有無区分
-     * @param 旧市町村コード
-     * @param 旧保険者番号
+     * @param 旧市町村コード 旧市町村コード
+     * @param 旧保険者番号 旧保険者番号
      * @return List<GappeiJyoho> 合併市町村情報Entityリスト
      */
     public List<GappeiJyoho> getTannitsugappeijohokensaku(RString hyoujiUmu,
@@ -163,8 +161,8 @@ public class GappeiCityJohoFinder {
      * 広域全合併市町村情報検索を取得します。
      *
      * @param hyoujiUmu 表示有無区分
-     * @param 旧市町村コード
-     * @param 旧保険者番号
+     * @param 旧市町村コード 旧市町村コード
+     * @param 旧保険者番号 旧保険者番号
      * @return List<GappeiJyoho> 合併市町村情報Entityリスト
      */
     public List<GappeiJyoho> getKouikigappeijohokensaku(RString hyoujiUmu,
@@ -190,7 +188,7 @@ public class GappeiCityJohoFinder {
      * 合併市町村情報検索を取得します。
      *
      * @param hyoujiUmu 表示有無区分
-     * @param 導入形態コード
+     * @param 導入形態コード 導入形態コード
      * @return List<GappeiJyoho> 合併市町村情報Entityリスト
      */
     public List<GappeiJyoho> getSennyoukouikigappeijohokensaku(RString hyoujiUmu, RString 導入形態コード) {
@@ -223,7 +221,6 @@ public class GappeiCityJohoFinder {
         // 検索処理実施
         List<GappeiJyohoEntity> 合併情報検索結果Entityリスト = gappeiJyohoMapper.getSaishintannitsugappeijoho(params);
         // BusinessClass生成
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
         List<GappeiJyoho> businessList = new ArrayList<>();
         for (GappeiJyohoEntity entity : 合併情報検索結果Entityリスト) {
             GappeiJyoho gappeiJyohoResult = new GappeiJyoho(entity);

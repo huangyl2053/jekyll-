@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.rojinhokenjoho.RokenJoh
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.KoseiShichosonJohoEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.ValueObjects;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
@@ -63,6 +65,11 @@ public class ShichosonSecurityJohoFinder {
         this.kaigoDonyuKeitaiDac = InstanceProvider.create(DbT7908KaigoDonyuKeitaiDac.class);
     }
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @return {@link ShichosonSecurityJohoFinder}
+     */
     public static ShichosonSecurityJohoFinder createInstance() {
         return InstanceProvider.create(ShichosonSecurityJohoFinder.class);
     }
@@ -251,21 +258,9 @@ public class ShichosonSecurityJohoFinder {
         koseiShichosonJohoEntity.setShichosonMeisho(koseiShichosonMasterEntity.getShichosonMeisho());
         koseiShichosonJohoEntity.setTodofukenMeisho(koseiShichosonMasterEntity.getTodofukenMeisho());
         koseiShichosonJohoEntity.setGunMeisho(koseiShichosonMasterEntity.getGunMeisho());
-        if (koseiShichosonMasterEntity.getYubinNo() != null) {
-            koseiShichosonJohoEntity.setYubinNo(koseiShichosonMasterEntity.getYubinNo().value());
-        } else {
-            koseiShichosonJohoEntity.setYubinNo(RString.EMPTY);
-        }
-        if (koseiShichosonMasterEntity.getJusho() != null) {
-            koseiShichosonJohoEntity.setJusho(koseiShichosonMasterEntity.getJusho().value());
-        } else {
-            koseiShichosonJohoEntity.setJusho(RString.EMPTY);
-        }
-        if (koseiShichosonMasterEntity.getTelNo() != null) {
-            koseiShichosonJohoEntity.setTelNo(koseiShichosonMasterEntity.getTelNo().value());
-        } else {
-            koseiShichosonJohoEntity.setTelNo(RString.EMPTY);
-        }
+        koseiShichosonJohoEntity.setYubinNo(ValueObjects.valueOrRStringEMPTY(koseiShichosonMasterEntity.getYubinNo()));
+        koseiShichosonJohoEntity.setJusho(ValueObjects.valueOrRStringEMPTY(koseiShichosonMasterEntity.getJusho()));
+        koseiShichosonJohoEntity.setTelNo(ValueObjects.valueOrRStringEMPTY(koseiShichosonMasterEntity.getTelNo()));
         koseiShichosonJohoEntity.setYusenChikuCode(koseiShichosonMasterEntity.getYusenChikuCode());
         koseiShichosonJohoEntity.setTyohyoTodoufukenHyojiUmu(koseiShichosonMasterEntity.getTyohyoTodoufukenHyojiUmu());
         koseiShichosonJohoEntity.setTyohyoGunHyojiUmu(koseiShichosonMasterEntity.getTyohyoGunHyojiUmu());
@@ -291,11 +286,7 @@ public class ShichosonSecurityJohoFinder {
 
     private RString getLoginUser() {
         RString loginUser = UrControlDataFactory.createInstance().getLoginInfo().getUserName();
-        if (null == loginUser) {
-            return RString.EMPTY;
-        }
-        return loginUser;
-
+        return ObjectUtil.defaultIfNull(loginUser, RString.EMPTY);
     }
 
     private int dispatchFlowByKaigoDonyuKeitai(RString 業務分類, RString 導入形態コード) {

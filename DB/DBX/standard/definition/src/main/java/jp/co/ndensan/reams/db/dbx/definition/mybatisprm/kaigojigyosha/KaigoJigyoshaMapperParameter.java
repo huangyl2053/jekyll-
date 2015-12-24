@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KaigoJigyoshaMapperParameter {
+public final class KaigoJigyoshaMapperParameter {
 
     private final KaigoJigyoshaNo jigyoshaNo;
     private final FlexibleDate yukoKaishiYMD;

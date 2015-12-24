@@ -24,6 +24,6 @@ enum ConfigKeysRokenJoho implements IConfigKeys {
 
     @Override
     public SubGyomuCode subGyomuCode() {
-        return this.subGyomuCode();
+        return this.aSubGyomuCode;
     }
 }

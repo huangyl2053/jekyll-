@@ -26,7 +26,7 @@ public abstract class ConfigLoaderByConfigKeys<T extends Enum<T> & IConfigKeys> 
      * @param rDate 有効日
      */
     protected ConfigLoaderByConfigKeys(Class<T> clazz, RDate rDate) {
-        super(loadConfigsByConfigKeys(clazz, RDate.getNowDate()));
+        super(loadConfigsByConfigKeys(clazz, rDate));
     }
 
     /**

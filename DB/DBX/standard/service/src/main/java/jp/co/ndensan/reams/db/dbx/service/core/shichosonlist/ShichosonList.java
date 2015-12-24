@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecur
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
@@ -154,7 +155,8 @@ public class ShichosonList {
         for (DbT7056GappeiShichosonEntity gappeiShichosonEntity : gappeiShichosonEntityList) {
             市町村コード = gappeiShichosonEntity.getKyuShichosonCode();
             市町村名称 = gappeiShichosonEntity.getKyuShichosonMeisho();
-            保険者コード = new ShoKisaiHokenshaNo(gappeiShichosonEntity.getKyuHokenshaNo().value());
+            HokenshaNo hokenshaNo = gappeiShichosonEntity.getKyuHokenshaNo();
+            保険者コード = hokenshaNo == null ? ShoKisaiHokenshaNo.EMPTY : new ShoKisaiHokenshaNo(hokenshaNo.value());
             保険者区分 = TokeiTaishoKubun.旧市町村分;
             出力市町村情報リスト.add(new ShichosonCodeNameResult(市町村コード, 市町村名称, 保険者コード, 保険者区分));
         }

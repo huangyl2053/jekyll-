@@ -55,7 +55,7 @@ public class KyuShichosonCodeFinder {
      * 市町村コードと導入形態コードより、旧市町村コード情報を対象とします。
      *
      * @param 市町村コード 市町村コード
-     * @param 導入形態コード 導入形態コード
+     * @param 導入形態 導入形態
      * @return KyuShichosonCodeJohoRelateEntityクラス
      */
     public KyuShichosonCodeJohoRelateEntity getKyuShichosonCodeJoho(LasdecCode 市町村コード, DonyuKeitaiCode 導入形態) {

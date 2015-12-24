@@ -30,8 +30,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class KoikiShichosonJohoFinder {
 
     private static final RString DEFAULT_SHICHOSON_SHOKIBETSUID = new RString("00");
-    public static final RString DEFAULT_市町村識別コード = new RString("00");
-    public static final RString DEFAULT_合併旧市町村区分 = new RString("0");
+    private static final RString DEFAULT_市町村識別コード = new RString("00");
+    private static final RString DEFAULT_合併旧市町村区分 = new RString("0");
 
     private final DbT7051KoseiShichosonMasterDac koseiShichosonMasterDac;
 
