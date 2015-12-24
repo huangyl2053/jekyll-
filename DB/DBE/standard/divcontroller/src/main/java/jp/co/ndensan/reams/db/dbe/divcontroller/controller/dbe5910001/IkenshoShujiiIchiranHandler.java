@@ -94,7 +94,9 @@ public class IkenshoShujiiIchiranHandler {
         batchParameter.setIryoKikanCodeTo(div.getTxtIryoKikanCodeTo().getValue());
         batchParameter.setShujiiCodeFrom(div.getTxtShujiiCodeFrom().getValue());
         batchParameter.setShujiiCodeTo(div.getTxtShujiiCodeTo().getValue());
-        batchParameter.setJyokyo(div.getTxtShujiiCodeTo().getValue());
+        batchParameter.setJyokyo(div.getRadJyokyo().getSelectedKey());
+        batchParameter.setOutputSort(div.getDdlOutputSort().getSelectedKey());
+        batchParameter.setNextpage(div.getDdlNextpage().getSelectedKey());
         return batchParameter;
     }
 }

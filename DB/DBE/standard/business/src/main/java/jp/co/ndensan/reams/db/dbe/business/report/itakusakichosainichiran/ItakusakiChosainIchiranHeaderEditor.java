@@ -93,7 +93,7 @@ public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchi
         source.dataShubetsu = RString.EMPTY;
         source.cityCode = item.getCityCode();
         source.cityName = item.getCityName();
-        NarabiJunType.toValue(item.getSort()).toRString();
+        source.sort1 = NarabiJunType.toValue(item.getSort()).toRString();
         source.sort2 = RString.EMPTY;
         source.sort3 = RString.EMPTY;
         source.sort2 = RString.EMPTY;

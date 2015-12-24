@@ -45,14 +45,6 @@ public class ItakusakiChosainIchiranHandler {
      */
     public ItakusakiChosainIchiranBatchParamter onclick_一覧表を発行する() {
         ItakusakiChosainIchiranBatchParamter param = new ItakusakiChosainIchiranBatchParamter();
-        if (div.getTxtIryoKikanCodeFrom().getValue().compareTo(
-                div.getTxtIryoKikanCodeTo().getValue()) > 0) {
-            throw new ApplicationException(UrErrorMessages.大小関係が不正.getMessage().replace("委託先コード"));
-        }
-        if (div.getTxtShujiiCodeFrom().getValue().compareTo(
-                div.getTxtShujiiCodeTo().getValue()) > 0) {
-            throw new ApplicationException(UrErrorMessages.大小関係が不正.getMessage().replace("調査員コード"));
-        }
         param.setShichosonCode(div.getDdlShichosonCode().getSelectedKey());
         param.setShichosonMeisho(div.getDdlShichosonCode().getSelectedValue());
         param.setItakusakiCodeFrom(div.getTxtIryoKikanCodeFrom().getValue());

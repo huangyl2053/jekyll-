@@ -120,16 +120,16 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
             isOutputSortIryoKikanNameShujiiNameFlag = true;
         }
 
-        if (iryoKikanCodeFrom == null) {
+        if (isNullOrempty(iryoKikanCodeFrom)) {
             isIryoKikanCodeFromFlag = true;
         }
-        if (iryoKikanCodeTo == null) {
+        if (isNullOrempty(iryoKikanCodeTo)) {
             isIryoKikanCodeToFlag = true;
         }
-        if (shujiiCodeFrom == null) {
+        if (isNullOrempty(shujiiCodeFrom)) {
             isShujiiCodeFromFlag = true;
         }
-        if (shujiiCodeTo == null) {
+        if (isNullOrempty(shujiiCodeTo)) {
             isShujiiCodeToFlag = true;
         }
 
@@ -138,5 +138,9 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
                 isIryoKikanCodeToFlag, shujiiCodeFrom, isShujiiCodeFromFlag, shujiiCodeTo, isShujiiCodeToFlag, isYukoFlag, isMokuFlag,
                 isOutPutSortIryoKikanCodeShujiiCodeFlag, isOutputSortIryoKikanCodeShujiiNameFlag,
                 isOutputSortIryoKikanNameShujiiCodeFlag, isOutputSortIryoKikanNameShujiiNameFlag);
+    }
+
+    private static boolean isNullOrempty(RString obj) {
+        return obj == null || RString.EMPTY.equals(obj);
     }
 }
