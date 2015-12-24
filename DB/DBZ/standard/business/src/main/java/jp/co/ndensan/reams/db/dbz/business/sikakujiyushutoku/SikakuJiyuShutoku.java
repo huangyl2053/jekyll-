@@ -7,10 +7,11 @@ package jp.co.ndensan.reams.db.dbz.business.sikakujiyushutoku;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakujiyushutoku.ShikakuJiyuShutoku;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
 import jp.co.ndensan.reams.db.dbz.business.config.ConfigValueBoolean;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakujiyushutoku.ShikakuJiyuShutoku;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -38,10 +39,21 @@ public class SikakuJiyuShutoku {
             RString dounyuKeitaiCode, RString gappeiJohoKubun) {
 
         List<ShikakuJiyuShutoku> 資格事由取得List = new ArrayList<>();
+        List<UzT0007CodeEntity> codeMasterlist;
+        if (new CodeShubetsu(コード種別_0126).equals(codeShubetsu)) {
+            codeMasterlist = CodeMaster.getCode(SubGyomuCode.DBA介護資格, codeShubetsu, kijunbi);
+            if (codeMasterlist != null && !codeMasterlist.isEmpty()) {
+                for (UzT0007CodeEntity list : codeMasterlist) {
 
-        if (!new CodeShubetsu(コード種別_0126).equals(codeShubetsu)) {
+                    ShikakuJiyuShutoku 資格事由 = 資格事由取得(list, dounyuKeitaiCode, gappeiJohoKubun);
+                    資格事由取得List.add(資格事由);
+                }
+            } else {
+                return 資格事由取得List;
+            }
 
-            List<UzT0007CodeEntity> codeMasterlist = CodeMaster.getCode(codeShubetsu, kijunbi);
+        } else {
+            codeMasterlist = CodeMaster.getCode(SubGyomuCode.DBA介護資格, codeShubetsu, kijunbi);
             if (codeMasterlist != null && !codeMasterlist.isEmpty()) {
                 for (UzT0007CodeEntity list : codeMasterlist) {
                     ShikakuJiyuShutoku shikakuJiyuShutoku = new ShikakuJiyuShutoku();
@@ -49,18 +61,6 @@ public class SikakuJiyuShutoku {
                     shikakuJiyuShutoku.setCodeRyakusho(list.getコード略称());
                     資格事由取得List.add(shikakuJiyuShutoku);
 
-                }
-            } else {
-                return 資格事由取得List;
-            }
-        } else {
-
-            List<UzT0007CodeEntity> codeMasterlist = CodeMaster.getCode(codeShubetsu, kijunbi);
-            if (codeMasterlist != null && !codeMasterlist.isEmpty()) {
-                for (UzT0007CodeEntity list : codeMasterlist) {
-
-                    ShikakuJiyuShutoku 資格事由 = 資格事由取得(list, dounyuKeitaiCode, gappeiJohoKubun);
-                    資格事由取得List.add(資格事由);
                 }
             } else {
                 return 資格事由取得List;
