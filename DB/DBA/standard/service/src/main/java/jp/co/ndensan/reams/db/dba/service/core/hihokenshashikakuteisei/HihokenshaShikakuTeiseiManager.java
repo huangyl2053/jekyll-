@@ -52,7 +52,6 @@ public class HihokenshaShikakuTeiseiManager {
 
     private static final int AGE_40 = 40;
     private static final int AGE_65 = 65;
-    //TODO QA:252 出力パラメータは「エラーコード」と「メッセージ」ですか。 2015/12/23まで
     private static final RString ERR_CODE_DBAE00020 = new RString("DBAE00020");
     private static final RString ERR_CODE_DBAE00021 = new RString("DBAE00021");
     private static final RString ERR_CODE_DBAE00022 = new RString("DBAE00022");
@@ -717,7 +716,6 @@ public class HihokenshaShikakuTeiseiManager {
                 dbt1001Entity.setKoikinaiTokureiSochimotoShichosonCode(コード);
                 dbt1001Entity.setKoikinaiJushochiTokureiFlag(RSTRING_SPACE);
             }
-            //TODO QA262 「DBA介護資格_Enum設定表」の資格変更事由に「合併旧市町村間転居」が存在しない　2015/12/23まで
             if (entity.get変更事由コード().equals(ShikakuHenkoJiyu.合併内転居.getコード())) {
                 dbt1001Entity.setShichosonCode(旧市町村コード);
             }
