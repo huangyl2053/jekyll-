@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.hokensha;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.GunNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.HowToEditJusho;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.KatagakiPrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.ShichosonNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.TodofukenNamePrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.GunNamePrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HowToEditJusho;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.KatagakiPrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.ShichosonNamePrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TodofukenNamePrint;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;

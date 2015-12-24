@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.ShichosonShikibetsuID;
+import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class ShichosonShikibetsuIDTypeHandler extends BaseTypeHandler<ShichosonShikibetsuID> {

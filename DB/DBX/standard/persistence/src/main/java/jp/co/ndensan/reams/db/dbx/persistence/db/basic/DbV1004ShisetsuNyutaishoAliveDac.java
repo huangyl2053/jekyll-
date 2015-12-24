@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaisho;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaisho.*;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -24,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護保険施設入退所Aliveのデータアクセスクラスです。
  */
-public class DbV1004ShisetsuNyutaishoAliveDac implements ISaveable<DbV1004ShisetsuNyutaishoEntity> {
+public class DbV1004ShisetsuNyutaishoAliveDac {
 
     @InjectSession
     private SqlSession session;
@@ -75,7 +74,6 @@ public class DbV1004ShisetsuNyutaishoAliveDac implements ISaveable<DbV1004Shiset
      * @return 登録件数
      */
     @Transaction
-    @Override
     public int save(DbV1004ShisetsuNyutaishoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護保険施設入退所Aliveエンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。

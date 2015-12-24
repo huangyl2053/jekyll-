@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護サービス内容を管理するクラスです。
  */
-public class KaigoServiceNaiyou extends ModelBase<KaigoServiceNaiyouIdentifier, DbT7131KaigoServiceNaiyouEntity, KaigoServiceNaiyou> implements Serializable {
+public class KaigoServiceNaiyou
+        extends ModelBase<KaigoServiceNaiyouIdentifier, DbT7131KaigoServiceNaiyouEntity, KaigoServiceNaiyou>
+        implements Serializable {
 
     private final DbT7131KaigoServiceNaiyouEntity entity;
     private final KaigoServiceNaiyouIdentifier id;
@@ -36,9 +38,9 @@ public class KaigoServiceNaiyou extends ModelBase<KaigoServiceNaiyouIdentifier, 
      * @param 履歴番号 履歴番号
      */
     public KaigoServiceNaiyou(KaigoServiceShuruiCode サービス種類コード,
-RString サービス項目コード,
-FlexibleYearMonth 提供開始年月,
-Decimal 履歴番号) {
+                              RString サービス項目コード,
+                              FlexibleYearMonth 提供開始年月,
+                              Decimal 履歴番号) {
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         requireNonNull(サービス項目コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス項目コード"));
         requireNonNull(提供開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("提供開始年月"));
@@ -49,11 +51,11 @@ Decimal 履歴番号) {
         this.entity.setTeikyoKaishiYM(提供開始年月);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KaigoServiceNaiyouIdentifier(
-        サービス種類コード,
-        サービス項目コード,
-        提供開始年月,
-        履歴番号
-                );
+                サービス種類コード,
+                サービス項目コード,
+                提供開始年月,
+                履歴番号
+        );
     }
 
     /**
@@ -319,7 +321,6 @@ Decimal 履歴番号) {
 //    public RString get総合事業サービス区分() {
 //        return entity.getSogoJigyoServiceKubun();
 //    }
-
     /**
      * {@link DbT7131KaigoServiceNaiyouEntity}のクローンを返します。
      *
@@ -372,6 +373,7 @@ Decimal 履歴番号) {
         }
         return new KaigoServiceNaiyou(deletedEntity, id);
     }
+
     /**
      * {@link KaigoServiceNaiyou}のシリアライズ形式を提供します。
      *
@@ -388,12 +390,13 @@ Decimal 履歴番号) {
     }
 
     private static final class _SerializationProxy implements Serializable {
+
         private static final long serialVersionUID = 2702026391207130486L;
 
         private final DbT7131KaigoServiceNaiyouEntity entity;
         private final KaigoServiceNaiyouIdentifier id;
 
-        private _SerializationProxy(DbT7131KaigoServiceNaiyouEntity entity,KaigoServiceNaiyouIdentifier id) {
+        private _SerializationProxy(DbT7131KaigoServiceNaiyouEntity entity, KaigoServiceNaiyouIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

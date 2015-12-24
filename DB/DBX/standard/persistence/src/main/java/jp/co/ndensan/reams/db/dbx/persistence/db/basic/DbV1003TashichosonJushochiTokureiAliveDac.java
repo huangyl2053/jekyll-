@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJushochiToku
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJushochiTokurei.*;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -25,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 他市町村住所地特例者台帳管理Aliveのデータアクセスクラスです。
  */
-public class DbV1003TashichosonJushochiTokureiAliveDac implements ISaveable<DbV1003TashichosonJushochiTokureiEntity> {
+public class DbV1003TashichosonJushochiTokureiAliveDac {
 
     @InjectSession
     private SqlSession session;
@@ -80,7 +79,6 @@ public class DbV1003TashichosonJushochiTokureiAliveDac implements ISaveable<DbV1
      * @return 登録件数
      */
     @Transaction
-    @Override
     public int save(DbV1003TashichosonJushochiTokureiEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("他市町村住所地特例者台帳管理Aliveエンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
