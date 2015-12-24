@@ -16,11 +16,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
+ * 主治医マスタ用Entityクラスです。
  *
- * @author soft863
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShujiiMasterRelateEntity implements IDbAccessable {
 
     @PrimaryKey
@@ -41,5 +42,4 @@ public class ShujiiMasterRelateEntity implements IDbAccessable {
     @PrimaryKey
     private RString shujiiIryokikanCode;
     private RString iryoKikanMeisho;
-
 }

@@ -22,7 +22,7 @@ public class ShujiiMasterHandler {
      * @param div 主治医マスタDiv
      */
     public ShujiiMasterHandler(ShujiiMasterDiv div) {
-	this.div = div;
+        this.div = div;
     }
 
     /**
@@ -36,23 +36,23 @@ public class ShujiiMasterHandler {
      * 検索条件入力項目をクリアします。
      */
     public void clearKensakuJoken() {
-	div.getDdlSearchShichoson().setSelectedIndex(0);
-	div.getTxtSearchShujiiIryokikanCodeFrom().clearValue();
-	div.getTxtSearchShujiiIryokikanCodeTo().clearValue();
-	div.getTxtSearchShujiiIryokikanMeisho().clearValue();
-	div.getTxtSearchShujiiIryokikanKanaMeisho().clearValue();
-	div.getTxtSearchShujiiCodeFrom().clearValue();
-	div.getTxtSearchShujiiCodeTo().clearValue();
-	div.getTxtSearchShujiiShimei().clearValue();
-	div.getTxtSearchShujiiKanaShimei().clearValue();
-	div.getRadSearchJokyoFlag().setSelectedIndex(0);
+        div.getDdlSearchShichoson().setSelectedIndex(0);
+        div.getTxtSearchShujiiIryokikanCodeFrom().clearValue();
+        div.getTxtSearchShujiiIryokikanCodeTo().clearValue();
+        div.getTxtSearchShujiiIryokikanMeisho().clearValue();
+        div.getTxtSearchShujiiIryokikanKanaMeisho().clearValue();
+        div.getTxtSearchShujiiCodeFrom().clearValue();
+        div.getTxtSearchShujiiCodeTo().clearValue();
+        div.getTxtSearchShujiiShimei().clearValue();
+        div.getTxtSearchShujiiKanaShimei().clearValue();
+        div.getRadSearchJokyoFlag().setSelectedIndex(0);
 
     }
 
     /**
      * 検索処理です。
      *
-     * @param param
+     * @param param 主治医マスタ用パラメータ
      */
     public void btnSearchShujii(ShujiiMasterMapperParameter param) {
 
