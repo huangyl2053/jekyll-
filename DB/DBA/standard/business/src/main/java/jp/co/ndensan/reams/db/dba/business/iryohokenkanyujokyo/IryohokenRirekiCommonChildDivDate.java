@@ -99,6 +99,6 @@ public class IryohokenRirekiCommonChildDivDate implements Comparable<IryohokenRi
      */
     @Override
     public int compareTo(IryohokenRirekiCommonChildDivDate iryohoken) {
-        return this.defaultDataName3.compareTo(iryohoken.defaultDataName4);
+        return this.defaultDataName3.compareTo(iryohoken.defaultDataName3);
     }
 }
