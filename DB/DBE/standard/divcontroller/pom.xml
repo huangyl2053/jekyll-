@@ -33,11 +33,6 @@
             <scope>runtime</scope>
         </dependency>
         <!-- DBX -->
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-            <artifactId>DbxDivController</artifactId>
-            <classifier>classes</classifier>
-        </dependency>
         <!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>

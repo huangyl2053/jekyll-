@@ -2,7 +2,7 @@
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
 
-module DBX {
+module DBZ {
 
      export module HokenshaList {
 
@@ -22,11 +22,11 @@ module DBX {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBX.HokenshaList.Controls.myType();
+                return this._myName + "_" + DBZ.HokenshaList.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBX.HokenshaList.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.HokenshaList.Controls.myType() + "_" + fieldName;
             }
 
             public HokenshaList(): UZA.Panel {

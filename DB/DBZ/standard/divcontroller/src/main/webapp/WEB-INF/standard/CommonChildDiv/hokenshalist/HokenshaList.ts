@@ -1,5 +1,5 @@
 /// <reference path='HokenshaList_Design.ts' />
-module DBX
+module DBZ
 {
     export module HokenshaList
     {
@@ -26,7 +26,7 @@ module DBX
     }
 }
 
-module DBX
+module DBZ
 {
     export module HokenshaList
     {

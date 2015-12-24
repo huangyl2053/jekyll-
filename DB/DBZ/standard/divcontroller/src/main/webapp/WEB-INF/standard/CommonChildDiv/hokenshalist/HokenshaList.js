@@ -1,5 +1,5 @@
-var DBX;
-(function (DBX) {
+var DBZ;
+(function (DBZ) {
     (function (HokenshaList) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -16,12 +16,12 @@ var DBX;
             return ModeController;
         })();
         HokenshaList.ModeController = ModeController;
-    })(DBX.HokenshaList || (DBX.HokenshaList = {}));
-    var HokenshaList = DBX.HokenshaList;
-})(DBX || (DBX = {}));
+    })(DBZ.HokenshaList || (DBZ.HokenshaList = {}));
+    var HokenshaList = DBZ.HokenshaList;
+})(DBZ || (DBZ = {}));
 
-var DBX;
-(function (DBX) {
+var DBZ;
+(function (DBZ) {
     (function (HokenshaList) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -36,6 +36,6 @@ var DBX;
             return PublicProperties;
         })();
         HokenshaList.PublicProperties = PublicProperties;
-    })(DBX.HokenshaList || (DBX.HokenshaList = {}));
-    var HokenshaList = DBX.HokenshaList;
-})(DBX || (DBX = {}));
+    })(DBZ.HokenshaList || (DBZ.HokenshaList = {}));
+    var HokenshaList = DBZ.HokenshaList;
+})(DBZ || (DBZ = {}));

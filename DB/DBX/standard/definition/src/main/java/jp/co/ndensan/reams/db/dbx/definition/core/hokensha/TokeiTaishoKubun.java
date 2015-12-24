@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 統計対象区分を表す列挙型です。
- *
  */
 public enum TokeiTaishoKubun {
 
@@ -25,7 +24,11 @@ public enum TokeiTaishoKubun {
     /**
      * コード:3 名称:旧市町村分 略称:定義なし
      */
-    旧市町村分("3", "旧市町村分");
+    旧市町村分("3", "旧市町村分"),
+    /**
+     * コード:"" 名称:"" 略称:定義なし
+     */
+    空;
 
     private final RString code;
     private final RString fullName;
@@ -33,6 +36,11 @@ public enum TokeiTaishoKubun {
     private TokeiTaishoKubun(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+    }
+
+    private TokeiTaishoKubun() {
+        this.code = RString.EMPTY;
+        this.fullName = RString.EMPTY;
     }
 
     /**

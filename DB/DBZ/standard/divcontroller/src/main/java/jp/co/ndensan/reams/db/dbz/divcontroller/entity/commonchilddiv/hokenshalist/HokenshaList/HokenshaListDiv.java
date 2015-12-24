@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbx.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbx.divcontroller.entity.commonchilddiv.hokenshal
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonlist.ShichosonCodeNameResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -54,7 +55,15 @@ public class HokenshaListDiv extends Panel implements IHokenshaListDiv {
     //--------------- この行より下にコードを追加してください -------------------
     @Override
     public void loadHokenshaList() {
-        this.createHandler().load保険者リスト();
+        this.createHandler().loadAndHoldHokenshaList();
+        if (!this.ddlHokenshaList.getDataSource().isEmpty()) {
+            this.ddlHokenshaList.setSelectedIndex(0);
+        }
+    }
+
+    @Override
+    public ShichosonCodeNameResult getSelectedItem() {
+        return this.createHandler().getSelectedItemAsShichosonCodeNameResult();
     }
 
     private HokenshaListDivHandler createHandler() {
