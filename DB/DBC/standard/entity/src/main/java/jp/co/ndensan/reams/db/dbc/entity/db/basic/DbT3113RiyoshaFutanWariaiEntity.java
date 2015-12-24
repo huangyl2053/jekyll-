@@ -2,13 +2,14 @@ package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
@@ -18,8 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  * 利用者負担割合テーブルのエンティティクラスです。
  */
 public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113RiyoshaFutanWariaiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3113RiyoshaFutanWariai");
 
@@ -36,7 +36,7 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     private boolean hakoFuyoFlag;
     private boolean shokenFlag;
     private FlexibleDate hanteiYMD;
@@ -45,10 +45,11 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
     private RString hakoKubun;
     private FlexibleDate hakoYMD;
     private FlexibleDate kofuYMD;
+    private boolean logicalDeletedFlag;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -57,7 +58,7 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -66,7 +67,7 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -75,16 +76,17 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -93,7 +95,7 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
 
     /**
      * 年度のgetメソッドです。
-     *
+     * 
      * @return 年度
      */
     public FlexibleYear getNendo() {
@@ -102,16 +104,16 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
 
     /**
      * 年度のsetメソッドです。
-     *
+     * 
      * @param nendo 年度
      */
-    public void setNendo(FlexibleYear nendo) {
+    public void setNendo(@Nonnull FlexibleYear nendo) {
         this.nendo = nendo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -120,34 +122,34 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
 
     /**
      * 被保険者番号のsetメソッドです。
-     *
+     * 
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     *
+     * 
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     *
+     * 
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(@Nonnull int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * 発行不要フラグのgetメソッドです。
-     *
+     * 
      * @return 発行不要フラグ
      */
     public boolean getHakoFuyoFlag() {
@@ -156,16 +158,16 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
 
     /**
      * 発行不要フラグのsetメソッドです。
-     *
+     * 
      * @param hakoFuyoFlag 発行不要フラグ
      */
-    public void setHakoFuyoFlag(boolean hakoFuyoFlag) {
+    public void setHakoFuyoFlag(@Nonnull boolean hakoFuyoFlag) {
         this.hakoFuyoFlag = hakoFuyoFlag;
     }
 
     /**
      * 職権変更フラグのgetメソッドです。
-     *
+     * 
      * @return 職権変更フラグ
      */
     public boolean getShokenFlag() {
@@ -174,25 +176,26 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
 
     /**
      * 職権変更フラグのsetメソッドです。
-     *
+     * 
      * @param shokenFlag 職権変更フラグ
      */
-    public void setShokenFlag(boolean shokenFlag) {
+    public void setShokenFlag(@Nonnull boolean shokenFlag) {
         this.shokenFlag = shokenFlag;
     }
 
     /**
      * 判定日のgetメソッドです。
-     *
+     * 
      * @return 判定日
      */
+    @CheckForNull
     public FlexibleDate getHanteiYMD() {
         return hanteiYMD;
     }
 
     /**
      * 判定日のsetメソッドです。
-     *
+     * 
      * @param hanteiYMD 判定日
      */
     public void setHanteiYMD(FlexibleDate hanteiYMD) {
@@ -202,10 +205,11 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
     /**
      * 判定区分のgetメソッドです。
      * <br/>
-     * <br/>1：年次判定　2：異動分判定　3：過年度分判定　3：即時更正
-     *
+     * <br/>1：年次判定　2：異動分判定　3：過年度分判定　4：即時更正
+     * 
      * @return 判定区分
      */
+    @CheckForNull
     public RString getHanteiKubun() {
         return hanteiKubun;
     }
@@ -213,8 +217,8 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
     /**
      * 判定区分のsetメソッドです。
      * <br/>
-     * <br/>1：年次判定　2：異動分判定　3：過年度分判定　3：即時更正
-     *
+     * <br/>1：年次判定　2：異動分判定　3：過年度分判定　4：即時更正
+     * 
      * @param hanteiKubun 判定区分
      */
     public void setHanteiKubun(RString hanteiKubun) {
@@ -225,19 +229,20 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
      * 更正事由のgetメソッドです。
      * <br/>
      * <br/>コードマスタ（DBD　種別=999）
-     *
+
      * <br/>00：当初（継続、新規認定）
-     *
+
      * <br/>10：本人所得更正
-     *
+
      * <br/>20：世帯員所得更正
-     *
+
      * <br/>30：世帯構成変更
-     *
+
      * <br/>40: その他（即時判定など）
-     *
+     * 
      * @return 更正事由
      */
+    @CheckForNull
     public Code getKoseiJiyu() {
         return koseiJiyu;
     }
@@ -246,17 +251,17 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
      * 更正事由のsetメソッドです。
      * <br/>
      * <br/>コードマスタ（DBD　種別=999）
-     *
+
      * <br/>00：当初（継続、新規認定）
-     *
+
      * <br/>10：本人所得更正
-     *
+
      * <br/>20：世帯員所得更正
-     *
+
      * <br/>30：世帯構成変更
-     *
+
      * <br/>40: その他（即時判定など）
-     *
+     * 
      * @param koseiJiyu 更正事由
      */
     public void setKoseiJiyu(Code koseiJiyu) {
@@ -267,13 +272,14 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
      * 発行区分のgetメソッドです。
      * <br/>
      * <br/>0：未発行
-     *
+
      * <br/>1：一括発行で発行済み。
-     *
+
      * <br/>2：単票発行で発行済み。
-     *
+     * 
      * @return 発行区分
      */
+    @CheckForNull
     public RString getHakoKubun() {
         return hakoKubun;
     }
@@ -282,11 +288,11 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
      * 発行区分のsetメソッドです。
      * <br/>
      * <br/>0：未発行
-     *
+
      * <br/>1：一括発行で発行済み。
-     *
+
      * <br/>2：単票発行で発行済み。
-     *
+     * 
      * @param hakoKubun 発行区分
      */
     public void setHakoKubun(RString hakoKubun) {
@@ -295,16 +301,17 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
 
     /**
      * 発行日のgetメソッドです。
-     *
+     * 
      * @return 発行日
      */
+    @CheckForNull
     public FlexibleDate getHakoYMD() {
         return hakoYMD;
     }
 
     /**
      * 発行日のsetメソッドです。
-     *
+     * 
      * @param hakoYMD 発行日
      */
     public void setHakoYMD(FlexibleDate hakoYMD) {
@@ -313,16 +320,17 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
 
     /**
      * 交付日のgetメソッドです。
-     *
+     * 
      * @return 交付日
      */
+    @CheckForNull
     public FlexibleDate getKofuYMD() {
         return kofuYMD;
     }
 
     /**
      * 交付日のsetメソッドです。
-     *
+     * 
      * @param kofuYMD 交付日
      */
     public void setKofuYMD(FlexibleDate kofuYMD) {
@@ -330,10 +338,29 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
     }
 
     /**
+     * 論理削除フラグのgetメソッドです。
+     * 
+     * @return 論理削除フラグ
+     */
+    @CheckForNull
+    public boolean getLogicalDeletedFlag() {
+        return logicalDeletedFlag;
+    }
+
+    /**
+     * 論理削除フラグのsetメソッドです。
+     * 
+     * @param logicalDeletedFlag 論理削除フラグ
+     */
+    public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
+        this.logicalDeletedFlag = logicalDeletedFlag;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT3113RiyoshaFutanWariaiEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3113RiyoshaFutanWariaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -369,17 +396,18 @@ public class DbT3113RiyoshaFutanWariaiEntity extends DbTableEntityBase<DbT3113Ri
         this.hakoKubun = entity.hakoKubun;
         this.hakoYMD = entity.hakoYMD;
         this.kofuYMD = entity.kofuYMD;
+        this.logicalDeletedFlag = entity.logicalDeletedFlag;
     }
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(nendo, hihokenshaNo, rirekiNo, hakoFuyoFlag, shokenFlag, hanteiYMD, hanteiKubun, koseiJiyu, hakoKubun, hakoYMD, kofuYMD);
+        return super.toMd5(nendo, hihokenshaNo, rirekiNo, hakoFuyoFlag, shokenFlag, hanteiYMD, hanteiKubun, koseiJiyu, hakoKubun, hakoYMD, kofuYMD, logicalDeletedFlag);
     }
 
 // </editor-fold>
+
 }

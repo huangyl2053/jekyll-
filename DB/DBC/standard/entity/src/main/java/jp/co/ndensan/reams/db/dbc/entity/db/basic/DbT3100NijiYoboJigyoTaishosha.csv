@@ -1,8 +1,7 @@
-﻿shoKisaiHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,証記載保険者番号,A
-hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 rirekiNo,int2,int,,,,,履歴番号,A
 tekiyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,適用開始年月日,A
 tekiyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,適用終了年月日,A
-shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
 uketsukeYMD,UDD015YMD,FlexibleDate,,,,,受付年月日,A
 ketteiYMD,UDD015YMD,FlexibleDate,,,,,決定年月日,A
+chosaJisshiYMD,UDD015YMD,FlexibleDate,,,,,調査実施日,A

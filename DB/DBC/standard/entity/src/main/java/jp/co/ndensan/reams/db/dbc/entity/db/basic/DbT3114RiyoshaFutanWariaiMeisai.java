@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * <br/> 利用者負担割合の明細
  */
 public enum DbT3114RiyoshaFutanWariaiMeisai implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -58,8 +58,8 @@ public enum DbT3114RiyoshaFutanWariaiMeisai implements IColumnDefinition {
     edaNo(5, 0),
     /**
      * 資格区分
-     * <br/>01：1号被保険者
-     * <br/>02：2号被保険者
+     * <br/>01：1号被保険者
+     * <br/>02：2号被保険者
      * <br/>03：2号被保険者（基準日時点1号被保険者）
      */
     shikakuKubun(2, 0),
@@ -83,7 +83,7 @@ public enum DbT3114RiyoshaFutanWariaiMeisai implements IColumnDefinition {
     /**
      * 世帯１号被保険者数
      */
-    setaiIchigouHihoknehsaSu(5, 0),
+    setaiIchigouHihokenshaSu(5, 0),
     /**
      * 年金収入合計
      */
@@ -99,7 +99,11 @@ public enum DbT3114RiyoshaFutanWariaiMeisai implements IColumnDefinition {
     /**
      * 世帯コード
      */
-    setaiCd(2147483647, 0);
+    setaiCd(2147483647, 0),
+    /**
+     * 論理削除フラグ
+     */
+    logicalDeletedFlag(1, 0);
 
     private final int maxLength;
     private final int scale;

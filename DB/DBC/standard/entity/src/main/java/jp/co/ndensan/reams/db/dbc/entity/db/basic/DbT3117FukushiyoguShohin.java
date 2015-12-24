@@ -3,9 +3,9 @@ package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 償還払請求食事費用差額支給テーブルの項目定義クラスです。
+ * 福祉用具商品テーブルの項目定義クラスです。
  */
-public enum DbT3044ShokanShokujiHiyoSagakuShikyu implements IColumnDefinition {
+public enum DbT3117FukushiyoguShohin implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
@@ -40,58 +40,34 @@ public enum DbT3044ShokanShokujiHiyoSagakuShikyu implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * 被保険者番号
+     * 商品番号
      */
-    hiHokenshaNo(2147483647, 0),
+    shohinNo(4, 0),
     /**
-     * サービス提供年月
+     * 管理開始年月日
      */
-    serviceTeikyoYM(2147483647, 0),
+    kanriKaishiYMD(2147483647, 0),
     /**
-     * 整理番号
+     * 管理終了年月日
      */
-    seiriNp(10, 0),
+    kanriShuryoYMD(2147483647, 0),
     /**
-     * 事業者番号
+     * 商品名
      */
-    jigyoshaNo(2147483647, 0),
+    shohinmei(20, 0),
     /**
-     * 様式番号
+     * 製造事業者名
      */
-    yoshikiNo(4, 0),
+    seizoJigyoshamei(20, 0),
     /**
-     * 明細番号
+     * 品目コード
      */
-    meisaiNo(4, 0),
-    /**
-     * 連番
-     */
-    renban(2, 0),
-    /**
-     * 差額金額
-     */
-    sagakuKingaku(10, 0),
-    /**
-     * 支給区分コード
-     */
-    shikyuKubunCode(1, 0),
-    /**
-     * 点数／金額
-     */
-    tensuKingaku(10, 0),
-    /**
-     * 支給金額
-     */
-    shikyuKingaku(10, 0),
-    /**
-     * 支給・不支給理由
-     */
-    shikyuFushikyuRiyu(76, 0);
+    hinmokuCode(20, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT3044ShokanShokujiHiyoSagakuShikyu(int maxLength, int scale) {
+    private DbT3117FukushiyoguShohin(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

@@ -2,8 +2,8 @@
 taishoNendo,UDD012YSeireki,FlexibleYear,,,,,対象年度,A
 hokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,保険者番号,A
 shikyuShinseishoSeiriNo,varchar,RString,,,,,支給申請書整理番号,A
-taishoM,varchar,RString,,,,,対象月,A
 rirekiNo,int2,int,,,,,履歴番号,A
+taishoM,varchar,RString,,,,,対象月,A
 jikoFutanGaku,numeric,Decimal,,,,,自己負担額,A
 uchisu_70_74JikoFutanGaku,numeric,Decimal,,,,,70-74自己負担額（内数）,A
 under_70KogakuShikyuGaku,numeric,Decimal,,,,,70未満高額支給額,A
