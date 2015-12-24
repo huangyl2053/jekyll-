@@ -4,8 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -90,45 +88,6 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 toList(DbT1001HihokenshaDaichoEntity.class);
-    }
-
-    /**
-     * 被保険者台帳管理テーブルに資格取得年月日と資格喪失年月日を取得する
-     *
-     * @param 識別コード ShikibetsuCode
-     * @return List<DbT1001HihokenshaDaichoEntity>
-     * @throws NullPointerException 引数のいずれかがnullの場合
-     */
-    @Transaction
-    public List<DbT1001HihokenshaDaichoEntity> selectIdokikanByShikibetsuCode(ShikibetsuCode 識別コード) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        List<DbT1001HihokenshaDaichoEntity> entityList = accessor.select().
-                table(DbT1001HihokenshaDaicho.class).
-                where(and(
-                                eq(shikibetsuCode, 識別コード),
-                                not(eq(logicalDeletedFlag, true)))).
-                toList(DbT1001HihokenshaDaichoEntity.class);
-        if (entityList.isEmpty()) {
-            return Collections.emptyList();
-        } else {
-            List<DbT1001HihokenshaDaichoEntity> hihokenshaList = new ArrayList<>();
-            RString 被保険者番号 = RString.EMPTY;
-            for (DbT1001HihokenshaDaichoEntity entity : entityList) {
-                if (被保険者番号.equals(entity.getHihokenshaNo().getColumnValue())) {
-                    continue;
-                }
-                List<DbT1001HihokenshaDaichoEntity> hihokenshaDaichoEntityList = accessor.select().
-                        table(DbT1001HihokenshaDaicho.class).
-                        where(eq(hihokenshaNo, entity.getHihokenshaNo().getColumnValue())).
-                        toList(DbT1001HihokenshaDaichoEntity.class);
-                hihokenshaList.addAll(hihokenshaDaichoEntityList);
-                被保険者番号 = entity.getHihokenshaNo().getColumnValue();
-            }
-            return hihokenshaList;
-        }
     }
 
     /**

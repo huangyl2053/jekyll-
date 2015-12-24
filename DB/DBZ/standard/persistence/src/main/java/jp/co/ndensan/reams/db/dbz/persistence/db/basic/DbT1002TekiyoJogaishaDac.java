@@ -9,7 +9,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.edaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.idoYMD;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -20,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -60,28 +58,6 @@ public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaisha
                                 eq(idoYMD, 異動日),
                                 eq(edaNo, 枝番))).
                 toObject(DbT1002TekiyoJogaishaEntity.class);
-    }
-
-    /**
-     * 適用除外者テーブルに適用年月日と解除年月日を取得する。
-     *
-     * @param 識別コード ShikibetsuCode
-     * @return List<DbT1002TekiyoJogaishaEntity>
-     * @throws NullPointerException 引数のいずれかがnullの場合
-     */
-    @Transaction
-    public List<DbT1002TekiyoJogaishaEntity> selectIdokikanByShikibetsuCode(ShikibetsuCode 識別コード) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        List<DbT1002TekiyoJogaishaEntity> tekiyoJogaishaEntityList = accessor.select().
-                table(DbT1002TekiyoJogaisha.class).
-                where(and(
-                                eq(shikibetsuCode, 識別コード),
-                                not(eq(logicalDeletedFlag, true)))).
-                toList(DbT1002TekiyoJogaishaEntity.class);
-        return tekiyoJogaishaEntityList;
     }
 
     /**

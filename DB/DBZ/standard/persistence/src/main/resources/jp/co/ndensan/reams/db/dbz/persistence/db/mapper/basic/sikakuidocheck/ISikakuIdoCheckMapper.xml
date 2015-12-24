@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.sikakuidocheck.ISikakuIdoCheckMapper">
+	<select id="getDbT1001HihokenshaDaicho" parameterType= "jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity" fetchSize="500">
+           SELECT
+              DbT1001."hihokenshaNo"
+           FROM
+              (SELECT
+                 DbT1001Hihokensha."hihokenshaNo"
+                 ,row_number() over (partition by DbT1001Hihokensha."hihokenshaNo" ORDER BY DbT1001Hihokensha."idoYMD" DESC
+                 ,DbT1001Hihokensha."edaNo" DESC
+              ) AS rank_number
+              FROM
+                rgdb."DbT1001HihokenshaDaicho" AS DbT1001Hihokensha 
+             WHERE
+                DbT1001Hihokensha."shikibetsuCode" = #{識別コード}
+             AND DbT1001Hihokensha."logicalDeletedFlag" <![CDATA[<>]]> TRUE
+             ) AS DbT1001 
+          WHERE
+            rank_number = 1
+	</select>
+        <select id="getDbT1003TashichosonJushochiTokurei" parameterType= "jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity" fetchSize="500">  
+           SELECT
+              DbT1003Tashi."tekiyoYMD"
+             ,DbT1003Tashi."kaijoYMD" 
+          FROM
+             rgdb."DbT1003TashichosonJushochiTokurei" DbT1003Tashi 
+         WHERE
+             DbT1003Tashi."shikibetsuCode" = #{識別コード}
+             AND DbT1003Tashi."logicalDeletedFlag" <![CDATA[<>]]> TRUE 
+        ORDER BY
+            DbT1003Tashi."tekiyoYMD" DESC
+            ,DbT1003Tashi."kaijoYMD" DESC 
+         LIMIT 1
+       </select>
+       <select id="getDbT1002TekiyoJogaisha" parameterType= "jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity" fetchSize="500">
+	 SELECT
+            DbT1002."tekiyoYMD"
+            ,DbT1002."kaijoYMD" 
+        FROM
+            rgdb."DbT1002TekiyoJogaisha" DbT1002 
+        WHERE
+            DbT1002."shikibetsuCode" = #{識別コード}
+        AND DbT1002."logicalDeletedFlag" <![CDATA[<>]]> TRUE 
+        ORDER BY
+            DbT1002."tekiyoYMD" DESC
+            ,DbT1002."kaijoYMD" DESC 
+            LIMIT 1	    
+	</select>
+	<select id="getDbT1001Hihokensha" parameterType= "jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo"
+                resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity" fetchSize="500">
+           SELECT
+                DbT1001."shikakuShutokuYMD",
+	        DbT1001."shikakuSoshitsuYMD"
+            FROM(
+             SELECT
+	        DbT1001Hihokensha."shikakuShutokuYMD",
+	        DbT1001Hihokensha."shikakuSoshitsuYMD",
+	        row_number() over(partition by DbT1001Hihokensha."shikakuShutokuYMD" order by DbT1001Hihokensha."idoYMD" desc,DbT1001Hihokensha."edaNo" desc) as rank_number	
+	      FROM
+	        rgdb."DbT1001HihokenshaDaicho" AS DbT1001Hihokensha
+              WHERE
+                DbT1001Hihokensha."hihokenshaNo" = #{被保険者番号}
+              ) AS DbT1001
+          WHERE
+            rank_number = 1;
+	</select>
+</mapper>
