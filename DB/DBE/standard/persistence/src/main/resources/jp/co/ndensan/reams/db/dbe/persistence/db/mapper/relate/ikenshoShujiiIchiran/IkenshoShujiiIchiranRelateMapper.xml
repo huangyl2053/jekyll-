@@ -37,7 +37,7 @@
             DbT5911ShujiiIryoKikanJoho."telNo",
             DbT5911ShujiiIryoKikanJoho."jusho",
             DbT5911ShujiiIryoKikanJoho."jokyoFlag"  AS iryokikanJokyoFlag,
-            --DbT5912ShujiiJoho."shujiiCode",
+            DbT5912ShujiiJoho."shujiiCode",
             DbT5912ShujiiJoho."shujiiKana",
             DbT5912ShujiiJoho."shujiiName",
             DbT5912ShujiiJoho."seibetsu",
