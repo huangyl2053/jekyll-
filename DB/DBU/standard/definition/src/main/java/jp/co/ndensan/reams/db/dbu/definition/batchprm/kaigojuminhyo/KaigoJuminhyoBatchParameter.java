@@ -5,12 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyo;
 
+import jp.co.ndensan.reams.db.dbu.definition.processprm.KaigoJuminhyo.KaigoJuminhyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 
 /**
- * 介護住民票個別事項連携情報作成【他社住基】のバッチのパラメータ
+ * 介護住民票個別事項連携情報作成【他社住基】のバッチのパラメータです。
  *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -29,11 +30,11 @@ public class KaigoJuminhyoBatchParameter extends BatchParameterBase {
     private static final String KEY_TAISHOSHURYO_YMDHMS = "taishoShuryoYMDHMS";
 
     @BatchParameter(key = KEY_TAISHOKAISHI_YMDHMS, name = "対象開始年月日日時")
-    private YMDHMS taishoKaishiYMDHMS;
+    private RDateTime taishoKaishiYMDHMS;
     @BatchParameter(key = KEY_TAISHOSHURYO_YMDHMS, name = "対象終了年月日日時")
-    private YMDHMS taishoShuryoYMDHMS;
+    private RDateTime taishoShuryoYMDHMS;
 
-//    public KaigoJuminhyoMybatisParameter toSampleMybatisParameter() {
-//        //return new KaigoJuminhyoMybatisParameter(KaigoJuminhyo.valueOf(KaigoJuminhyo));
-//    }
+    public KaigoJuminhyoProcessParameter toKaigoJuminhyoProcessParameter() {
+        return new KaigoJuminhyoProcessParameter(taishoKaishiYMDHMS, taishoShuryoYMDHMS);
+    }
 }
