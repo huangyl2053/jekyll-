@@ -198,7 +198,7 @@ public class HihokenshaShikakuTeiseiManager {
         RString errorCode = new RString("");
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         for (HihokenshaShutokuJyoho hihokenshaShutokuJyoho : 資格訂正登録リスト) {
-            if (!hihokenshaShutokuJyoho.get資格取得事由コード().isEmpty()) {
+            if (hihokenshaShutokuJyoho.get資格取得事由コード() != null && !hihokenshaShutokuJyoho.get資格取得事由コード().isEmpty()) {
                 errorCode = this.資格取得チェック処理(hihokenshaShutokuJyoho.get資格取得年月日(), hihokenshaShutokuJyoho.get資格取得事由コード(),
                         hihokenshaShutokuJyoho.get被保険者区分コード(), hihokenshaShutokuJyoho.get第1号資格取得年月日(), 当該識別対象の生年月日);
                 if (!errorCode.isEmpty()) {
@@ -206,7 +206,7 @@ public class HihokenshaShikakuTeiseiManager {
                 }
             }
             if (entity.getHihokenshaNo() != null) {
-                if (!hihokenshaShutokuJyoho.get資格喪失事由コード().isEmpty()) {
+                if (hihokenshaShutokuJyoho.get資格喪失事由コード() != null && !hihokenshaShutokuJyoho.get資格喪失事由コード().isEmpty()) {
                     for (HihokenshaShutokuJyoho kujyoho : 資格訂正登録リスト) {
                         tokusoRireki = new TokusoRireki(kujyoho.get資格取得年月日(), kujyoho.get資格喪失年月日());
                     }
@@ -217,7 +217,7 @@ public class HihokenshaShikakuTeiseiManager {
                         return errorCode;
                     }
                 }
-                if (!hihokenshaShutokuJyoho.get資格変更事由コード().isEmpty()) {
+                if (hihokenshaShutokuJyoho.get資格変更事由コード() != null && !hihokenshaShutokuJyoho.get資格変更事由コード().isEmpty()) {
                     errorCode = this.資格変更チェック処理(entity, hihokenshaShutokuJyoho.get資格変更年月日(),
                             hihokenshaShutokuJyoho.get資格変更事由コード(), 当該識別対象の生年月日);
                     if (!errorCode.isEmpty()) {
@@ -225,7 +225,7 @@ public class HihokenshaShikakuTeiseiManager {
                     }
                 }
 
-                if (!hihokenshaShutokuJyoho.get住所地特例適用事由コード().isEmpty()) {
+                if (hihokenshaShutokuJyoho.get住所地特例適用事由コード() != null && !hihokenshaShutokuJyoho.get住所地特例適用事由コード().isEmpty()) {
                     errorCode = this.住所地特例チェック処理(entity, hihokenshaShutokuJyoho.get適用年月日(),
                             hihokenshaShutokuJyoho.get住所地特例適用事由コード(), hihokenshaShutokuJyoho.get解除年月日(),
                             hihokenshaShutokuJyoho.get住所地特例解除事由コード());
@@ -233,7 +233,7 @@ public class HihokenshaShikakuTeiseiManager {
                         return errorCode;
                     }
                 }
-                if (!hihokenshaShutokuJyoho.get住所地特例解除事由コード().isEmpty()) {
+                if (hihokenshaShutokuJyoho.get住所地特例解除事由コード() != null && !hihokenshaShutokuJyoho.get住所地特例解除事由コード().isEmpty()) {
                     errorCode = this.住所地特例チェック処理(entity, hihokenshaShutokuJyoho.get適用年月日(),
                             hihokenshaShutokuJyoho.get住所地特例適用事由コード(), hihokenshaShutokuJyoho.get解除年月日(),
                             hihokenshaShutokuJyoho.get住所地特例解除事由コード());
