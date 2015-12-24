@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShikakuTeyiseyiEntity {
+public class ShikakuTeyiseyiEntity implements Comparable<ShikakuTeyiseyiEntity> {
 
     private RString 状態;
     private FlexibleDate 異動日;
@@ -38,4 +38,9 @@ public class ShikakuTeyiseyiEntity {
     private FlexibleDate 解除日;
     private FlexibleDate 解除届出日;
     private RString 解除事由コード;
+
+    @Override
+    public int compareTo(ShikakuTeyiseyiEntity entity) {
+        return this.get異動日().compareTo(entity.get異動日());
+    }
 }

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakuteisei;
 
 import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
@@ -125,7 +126,7 @@ public class HihokenshaShikakuTeiseiManager {
      * @param 喪失日 喪失日
      * @param 資格訂正登録リスト 資格訂正登録リスト
      */
-    //TODO 入力項目「喪失日」に処理詳細で利用されない、QA有
+    //TODO 入力項目「喪失日」に処理詳細で利用されない、QA301 2015/12/24まで
     public void saveHihokenshaShikakuTeisei(HihokenshaNo 被保険者番号, FlexibleDate 取得日, FlexibleDate 喪失日,
             List<HihokenshaShutokuJyoho> 資格訂正登録リスト) {
         List<DbT1001HihokenshaDaichoEntity> dbT1001List = dac.selectByHihokenshaNo(被保険者番号, 取得日);
@@ -171,13 +172,13 @@ public class HihokenshaShikakuTeiseiManager {
             List<ShikakuKanrenYidouEntity> 資格関連異動, HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         List<ShikakuTeyiseyiEntity> entityList = new ArrayList<>();
         List<HihokenshaShutokuJyoho> shutokuJyohoList = new ArrayList<>();
-        //TODO 「被保履歴を追加する場合」と「データを修正場合」の判定フラグに画面中で設定されましたか？しかし入力項目には記載しない。QA有　2015/12/23まで
+        //TODO 「被保履歴を追加する場合」と「データを修正場合」の判定フラグに画面中で設定されましたか？しかし入力項目には記載しない。QA301　2015/12/23まで
         if (GAMENFLG.equals(HIHORIREKI)) {
             entityList = this.get資格訂正情報リスト1(資格詳細情報, 住所地特例, 資格関連異動).records();
         } else if (GAMENFLG.equals(DATASYUUSEI)) {
             entityList = this.get資格訂正情報リスト2(資格詳細情報, 住所地特例, 資格関連異動).records();
         }
-        //TODO 以上で作成した資格訂正情報．異動日より、資格訂正情報のデータは異動日昇順を配列する。未実現　2015/12/23まで
+        Collections.sort(entityList);
         if (this.get資格訂正登録リスト(shutokuJyohoList, entityList, 被保険者番号, 識別コード).records().isEmpty()) {
             return SearchResult.of(shutokuJyohoList, 0, false);
         }
@@ -193,7 +194,8 @@ public class HihokenshaShikakuTeiseiManager {
      */
     @SuppressWarnings("NM_METHOD_NAMING_CONVENTION")
     public RString shikakuTorukuListCheck(List<HihokenshaShutokuJyoho> 資格訂正登録リスト, IDateOfBirth 当該識別対象の生年月日) {
-        //TODO 引数の資格訂正登録リスト．異動日より、引数の資格訂正登録リストのデータは異動日昇順を配列する。未実現　2015/12/23まで
+        //TODO 引数の資格訂正登録リストのデータは異動日昇順を配列する。 QA301　2015/12/24まで
+        //Collections.sort(資格訂正登録リスト);
         RString errorCode = new RString("");
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         for (HihokenshaShutokuJyoho hihokenshaShutokuJyoho : 資格訂正登録リスト) {
@@ -256,7 +258,7 @@ public class HihokenshaShikakuTeiseiManager {
      * @param 当該識別対象の生年月日 当該識別対象の生年月日
      * @return ERR_CODE エラーコード
      */
-    //TODO 入力項目「第1号資格取得年月日」に処理詳細で利用されない。QA有　2015/12/23まで
+    //TODO 入力項目「第1号資格取得年月日」に処理詳細で利用されない。QA301　2015/12/23まで
     @SuppressWarnings("UWF_UNWRITTEN_FIELD")
     private RString 資格取得チェック処理(FlexibleDate 取得日, RString 取得事由コード, RString 被保区分コード, FlexibleDate 第1号資格取得年月日,
             IDateOfBirth 当該識別対象の生年月日) {
@@ -385,7 +387,7 @@ public class HihokenshaShikakuTeiseiManager {
      * @param 解除事由コード 解除事由コード
      * @return ERR_CODE エラーコード
      */
-    //TODO 入力項目「適用日」と「解除日」に処理詳細で利用されない。QA有　2015/12/23まで
+    //TODO 入力項目「適用日」と「解除日」に処理詳細で利用されない。QA301　2015/12/23まで
     @SuppressWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     @java.lang.SuppressWarnings("null")
     private RString 住所地特例チェック処理(DbT1001HihokenshaDaichoEntity 最新データ, FlexibleDate 適用日, RString 適用事由コード,
@@ -715,7 +717,7 @@ public class HihokenshaShikakuTeiseiManager {
                 dbt1001Entity.setKoikinaiTokureiSochimotoShichosonCode(コード);
                 dbt1001Entity.setKoikinaiJushochiTokureiFlag(RSTRING_SPACE);
             }
-            //TODO QA262 ●確認事項１ 「DBA介護資格_Enum設定表」の資格変更事由に「合併旧市町村間転居」が存在しない　2015/12/23まで
+            //TODO QA262 「DBA介護資格_Enum設定表」の資格変更事由に「合併旧市町村間転居」が存在しない　2015/12/23まで
             if (entity.get変更事由コード().equals(ShikakuHenkoJiyu.合併内転居.getコード())) {
                 dbt1001Entity.setShichosonCode(旧市町村コード);
             }
