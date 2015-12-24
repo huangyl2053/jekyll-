@@ -49,15 +49,52 @@
     <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
     <resultMap id="resultMap_KoseiShichosonMasterEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.koseishichosonmaster.KoseiShichosonMasterRelateEntity" autoMapping="true">
         <id property="構成市町村マスタEntity.shichosonShokibetsuID" column="dbT5051KoseiShichosonMaster_shichosonShokibetsuID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <association property="構成市町村マスタEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5051KoseiShichosonMasterMapper.ResultMap_DbT5051KoseiShichosonMasterEntity"/>
+        <result property="構成市町村マスタEntity.insertDantaiCd" column="dbT5051KoseiShichosonMaster_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.insertTimestamp" column="dbT5051KoseiShichosonMaster_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="構成市町村マスタEntity.insertReamsLoginId" column="dbT5051KoseiShichosonMaster_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.insertContextId" column="dbT5051KoseiShichosonMaster_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="構成市町村マスタEntity.isDeleted" column="dbT5051KoseiShichosonMaster_isDeleted" />
+        <result property="構成市町村マスタEntity.updateCount" column="dbT5051KoseiShichosonMaster_updateCount" />
+        <result property="構成市町村マスタEntity.lastUpdateTimestamp" column="dbT5051KoseiShichosonMaster_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="構成市町村マスタEntity.lastUpdateReamsLoginId" column="dbT5051KoseiShichosonMaster_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.shichosonCode" column="dbT5051KoseiShichosonMaster_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="構成市町村マスタEntity.shoKisaiHokenshaNo" column="dbT5051KoseiShichosonMaster_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="構成市町村マスタEntity.kokuhorenKoikiShichosonNo" column="dbT5051KoseiShichosonMaster_kokuhorenKoikiShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.shichosonMeisho" column="dbT5051KoseiShichosonMaster_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.todofukenMeisho" column="dbT5051KoseiShichosonMaster_todofukenMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.gunMeisho" column="dbT5051KoseiShichosonMaster_gunMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.yubinNo" column="dbT5051KoseiShichosonMaster_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="構成市町村マスタEntity.jusho" column="dbT5051KoseiShichosonMaster_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="構成市町村マスタEntity.telNo" column="dbT5051KoseiShichosonMaster_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="構成市町村マスタEntity.yusenChikuCode" column="dbT5051KoseiShichosonMaster_yusenChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.tyohyoTodoufukenHyojiUmu" column="dbT5051KoseiShichosonMaster_tyohyoTodoufukenHyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.tyohyoGunHyojiUmu" column="dbT5051KoseiShichosonMaster_tyohyoGunHyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.tyohyoShichosonHyojiUmu" column="dbT5051KoseiShichosonMaster_tyohyoShichosonHyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.tyohyoJushoHenshuHouhou" column="dbT5051KoseiShichosonMaster_tyohyoJushoHenshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.tyohyoKatagakiHyojiUmu" column="dbT5051KoseiShichosonMaster_tyohyoKatagakiHyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.gaikokujinHyojiHouhou" column="dbT5051KoseiShichosonMaster_gaikokujinHyojiHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.rojinhokenShichosonNo" column="dbT5051KoseiShichosonMaster_rojinhokenShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.rokenJukyushaNoTaikei" column="dbT5051KoseiShichosonMaster_rokenJukyushaNoTaikei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.tokuchoBunpaishuyaku" column="dbT5051KoseiShichosonMaster_tokuchoBunpaishuyaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.ikoYMD" column="dbT5051KoseiShichosonMaster_ikoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="構成市町村マスタEntity.kanyuYMD" column="dbT5051KoseiShichosonMaster_kanyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="構成市町村マスタEntity.ridatsuYMD" column="dbT5051KoseiShichosonMaster_ridatsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="構成市町村マスタEntity.gappeiKyuShichosonKubun" column="dbT5051KoseiShichosonMaster_gappeiKyuShichosonKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.gappeiKyuShichosonHyojiUmu" column="dbT5051KoseiShichosonMaster_gappeiKyuShichosonHyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.gappeiChiikiNo" column="dbT5051KoseiShichosonMaster_gappeiChiikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="構成市町村マスタEntity.unyoHokenshaNo" column="dbT5051KoseiShichosonMaster_unyoHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="構成市町村マスタEntity.unyoKaishiYMD" column="dbT5051KoseiShichosonMaster_unyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="構成市町村マスタEntity.unyoShuryoYMD" column="dbT5051KoseiShichosonMaster_unyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="構成市町村マスタEntity.unyoKeitaiKubun" column="dbT5051KoseiShichosonMaster_unyoKeitaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <collection property="認定調査委託先情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.tyousai.ninteichosaitakusakijoho.INinteichosaItakusakiJohoMapper.resultMap_NinteichosaItakusakiJohoEntity"/>
         <collection property="調査員情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.ResultMap_DbT5913ChosainJohoEntity"/>
     </resultMap>
 
     <select id="ninteichosaItakusakiSearch" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosaitakusaki.NinteichosaItakusakiKensakuParameter" resultMap="resultMap_KoseiShichosonMasterEntity" fetchSize="500">
         SELECT
+        dbt5051."shichosonShokibetsuID" dbT5051KoseiShichosonMaster_shichosonShokibetsuID,
         dbt5910."shichosonCode",
-        dbt5051."shichosonMeisho",
+        dbt5051."shichosonMeisho" dbT5051KoseiShichosonMaster_shichosonMeisho,
         dbt5910."ninteichosaItakusakiCode",
         dbt5910."jigyoshaNo",
         dbt5910."jigyoshaMeisho",
@@ -67,10 +104,12 @@
         dbt5910."telNo",
         dbt5910."faxNo",
         dbt5910."daihyoshaName",
+        dbt5910."daihyoshaNameKana",
         dbt5910."waritsukeTeiin",
         dbt5910."autoWaritsukeFlag",
         dbt5910."waritsukeChiku",
         dbt5910."chosaItakuKubun",
+        dbt5910."tokuteiChosainDisplayFlag",
         dbt5910."kikanKubun",
         dbt5910."jokyoFlag"
         FROM

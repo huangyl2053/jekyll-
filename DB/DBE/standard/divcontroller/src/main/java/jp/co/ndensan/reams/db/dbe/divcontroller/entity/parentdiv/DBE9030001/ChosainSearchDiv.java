@@ -4,16 +4,26 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * ChosainSearch のクラスファイル 
- * 
+ * ChosainSearch のクラスファイル
+ *
  * @author 自動生成
  */
 public class ChosainSearchDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -21,8 +31,6 @@ public class ChosainSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlSearchShichoson")
-    private DropDownList ddlSearchShichoson;
     @JsonProperty("radSearchChosainJokyo")
     private RadioButton radSearchChosainJokyo;
     @JsonProperty("txtSearchChosaItakusakiCodeFrom")
@@ -43,6 +51,8 @@ public class ChosainSearchDiv extends Panel {
     private Button btnSearchShujii;
     @JsonProperty("btnClearKensakuJoken")
     private Button btnClearKensakuJoken;
+    @JsonProperty("ccdHokenshaList")
+    private HokenshaListDiv ccdHokenshaList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,24 +60,6 @@ public class ChosainSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getddlSearchShichoson
-     * @return ddlSearchShichoson
-     */
-    @JsonProperty("ddlSearchShichoson")
-    public DropDownList getDdlSearchShichoson() {
-        return ddlSearchShichoson;
-    }
-
-    /*
-     * setddlSearchShichoson
-     * @param ddlSearchShichoson ddlSearchShichoson
-     */
-    @JsonProperty("ddlSearchShichoson")
-    public void setDdlSearchShichoson(DropDownList ddlSearchShichoson) {
-        this.ddlSearchShichoson = ddlSearchShichoson;
-    }
-
     /*
      * getradSearchChosainJokyo
      * @return radSearchChosainJokyo
@@ -248,5 +240,24 @@ public class ChosainSearchDiv extends Panel {
         this.btnClearKensakuJoken = btnClearKensakuJoken;
     }
 
+    /*
+     * getccdHokenshaList
+     * @return ccdHokenshaList
+     */
+    @JsonProperty("ccdHokenshaList")
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return ccdHokenshaList;
+    }
+
     // </editor-fold>
+    public void clear() {
+        this.getRadSearchChosainJokyo().setSelectedIndex(0);
+        this.getTxtSearchChosaItakusakiCodeFrom().clearValue();
+        this.getTxtSearchChosaItakusakiCodeTo().clearValue();
+        this.getTxtSearchChosaItakusakiMeisho().clearValue();
+        this.getTxtSearchChosaItakusakiKanaMeisho().clearValue();
+        this.getDdlitakukubun().setSelectedIndex(0);
+        this.getDdlkikankubun().setSelectedIndex(0);
+        this.getTxtSaidaiHyojiKensu().clearValue();
+    }
 }

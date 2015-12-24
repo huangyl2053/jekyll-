@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoManager;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -70,7 +71,7 @@ public enum NinteichosaItakusakiMasterDivSpec implements IPredicate<NinteichosaI
                  */
                 @Override
                 public boolean apply(NinteichosaItakusakiMasterDiv div) {
-                    return 0 != div.get状態();
+                    return div.get状態().equals(new RString("その他"));
                 }
             },
     市町村の合法性チェック {

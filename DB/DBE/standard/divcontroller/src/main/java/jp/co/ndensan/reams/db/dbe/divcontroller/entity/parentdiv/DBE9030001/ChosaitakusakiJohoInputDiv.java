@@ -582,6 +582,8 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     }
 
     // </editor-fold>
+    private static final RString selectKey空白 = new RString("blank");
+
     public void clear() {
         this.txtShichoson.clearValue();
         this.txtShichosonmei.clearValue();
@@ -595,12 +597,12 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
         this.txtFaxNo.clearDomain();
         this.txtdaihyoshaname.clearDomain();
         this.txtdaihyoshakananame.clearDomain();
-        this.ddlItakusakikubun.setSelectedIndex(0);
-        this.ddltokuteichosain.setSelectedIndex(0);
+        this.ddlItakusakikubun.setSelectedKey(selectKey空白);
+        this.ddltokuteichosain.setSelectedKey(selectKey空白);
         this.txtteiin.clearValue();
         this.txtChiku.clearValue();
         this.txtChikuMei.clearValue();
         this.radautowatitsuke.setSelectedKey(new RString("key0"));
-        this.ddlKikankubun.setSelectedIndex(0);
+        this.ddlKikankubun.setSelectedKey(selectKey空白);
     }
 }

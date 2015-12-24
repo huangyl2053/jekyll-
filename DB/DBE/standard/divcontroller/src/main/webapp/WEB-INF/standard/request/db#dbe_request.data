@@ -46,6 +46,11 @@ dbe/db/dbe/KojinJokyoShokaiTaishoshaKensaku/onClick_btnToSearch
 dbe/db/dbe/KojinJokyoShokaiTaishoshaKensaku/onLoad
 dbe/db/dbe/NinteiChosaTokusokujoHakko/hakkou
 dbe/db/dbe/NinteiChosaTokusokujoHakko/onLoad
+dbe/db/dbe/NinteiChosainMaster/onBlur_txtChiku
+dbe/db/dbe/NinteiChosainMaster/onBlur_txtChosaItakusaki
+dbe/db/dbe/NinteiChosainMaster/onBlur_txtShichoson
+dbe/db/dbe/NinteiChosainMaster/onClick_btnBackIchiran
+dbe/db/dbe/NinteiChosainMaster/onClick_btnBackSearch
 dbe/db/dbe/NinteiChosainMaster/onClick_btnClearKensakuJoken
 dbe/db/dbe/NinteiChosainMaster/onClick_btnInsert
 dbe/db/dbe/NinteiChosainMaster/onClick_btnKakutei
@@ -53,6 +58,7 @@ dbe/db/dbe/NinteiChosainMaster/onClick_btnOutputCsv
 dbe/db/dbe/NinteiChosainMaster/onClick_btnReSearch
 dbe/db/dbe/NinteiChosainMaster/onClick_btnSearchShujii
 dbe/db/dbe/NinteiChosainMaster/onClick_btnTorikeshi
+dbe/db/dbe/NinteiChosainMaster/onClick_btnUpdate
 dbe/db/dbe/NinteiChosainMaster/onLoad
 dbe/db/dbe/NinteiChosainMaster/onSelectByDeleteButton_dgChosainIchiran
 dbe/db/dbe/NinteiChosainMaster/onSelectByDlbClick_dgChosainIchiran

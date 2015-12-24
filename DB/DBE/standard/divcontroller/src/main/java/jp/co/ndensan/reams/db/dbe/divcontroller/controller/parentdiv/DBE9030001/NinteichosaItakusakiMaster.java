@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -70,7 +71,7 @@ public class NinteichosaItakusakiMaster {
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnSearchShujii(NinteichosaItakusakiMasterDiv div) {
         List<KoseiShichosonMaster> list = getHandler(div).searchShujii();
         if (list.isEmpty()) {
-            return ResponseData.of(div).addMessage(UrErrorMessages.該当データなし.getMessage()).respond();
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         getHandler(div).setDataSource(list);
         return ResponseData.of(div).setState(DBE9030001StateName.一覧);
@@ -261,11 +262,9 @@ public class NinteichosaItakusakiMaster {
             if (getHandler(div).is調査委託先情報登録エリア編集有り()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.検索画面遷移の確認.getMessage()).respond();
             } else {
-                div.getChosaitakusakiJohoInput().clear();
                 return onLoad(div);
             }
         } else {
-            div.getChosaitakusakiJohoInput().clear();
             return onLoad(div);
         }
     }
@@ -295,7 +294,7 @@ public class NinteichosaItakusakiMaster {
                 if (削除状態.equals(row.getJotai())) {
                     if (!getHandler(div).削除行データの整合性チェック(
                             new LasdecCode(row.getShichosonCode().getColumnValue()), row.getChosaItakusakiCode().getValue())) {
-                        return ResponseData.of(div).addMessage(DbeErrorMessages.他の情報で使用している為削除不可.getMessage()).respond();
+                        throw new ApplicationException(DbeErrorMessages.他の情報で使用している為削除不可.getMessage());
                     }
                 }
             }

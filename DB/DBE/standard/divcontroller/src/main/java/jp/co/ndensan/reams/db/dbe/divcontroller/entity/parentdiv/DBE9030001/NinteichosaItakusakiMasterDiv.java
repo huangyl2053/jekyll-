@@ -8,16 +8,11 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * NinteichosaItakusakiMaster のクラスファイル
@@ -41,6 +36,14 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     private ChosaitakusakiJohoInputDiv ChosaitakusakiJohoInput;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
+    @JsonProperty("状態")
+    private RString 状態;
+    @JsonProperty("hdnTxtCode")
+    private RString hdnTxtCode;
+    @JsonProperty("hdnTxtCodeMeisho")
+    private RString hdnTxtCodeMeisho;
+    @JsonProperty("hdnInputDiv")
+    private RString hdnInputDiv;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -112,18 +115,80 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     }
 
     /*
+     * get状態
+     * @return 状態
+     */
+    @JsonProperty("状態")
+    public RString get状態() {
+        return 状態;
+    }
+
+    /*
+     * set状態
+     * @param 状態 状態
+     */
+    @JsonProperty("状態")
+    public void set状態(RString 状態) {
+        this.状態 = 状態;
+    }
+
+    /*
+     * gethdnTxtCode
+     * @return hdnTxtCode
+     */
+    @JsonProperty("hdnTxtCode")
+    public RString getHdnTxtCode() {
+        return hdnTxtCode;
+    }
+
+    /*
+     * sethdnTxtCode
+     * @param hdnTxtCode hdnTxtCode
+     */
+    @JsonProperty("hdnTxtCode")
+    public void setHdnTxtCode(RString hdnTxtCode) {
+        this.hdnTxtCode = hdnTxtCode;
+    }
+
+    /*
+     * gethdnTxtCodeMeisho
+     * @return hdnTxtCodeMeisho
+     */
+    @JsonProperty("hdnTxtCodeMeisho")
+    public RString getHdnTxtCodeMeisho() {
+        return hdnTxtCodeMeisho;
+    }
+
+    /*
+     * sethdnTxtCodeMeisho
+     * @param hdnTxtCodeMeisho hdnTxtCodeMeisho
+     */
+    @JsonProperty("hdnTxtCodeMeisho")
+    public void setHdnTxtCodeMeisho(RString hdnTxtCodeMeisho) {
+        this.hdnTxtCodeMeisho = hdnTxtCodeMeisho;
+    }
+
+    /*
+     * gethdnInputDiv
+     * @return hdnInputDiv
+     */
+    @JsonProperty("hdnInputDiv")
+    public RString getHdnInputDiv() {
+        return hdnInputDiv;
+    }
+
+    /*
+     * sethdnInputDiv
+     * @param hdnInputDiv hdnInputDiv
+     */
+    @JsonProperty("hdnInputDiv")
+    public void setHdnInputDiv(RString hdnInputDiv) {
+        this.hdnInputDiv = hdnInputDiv;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
-    @JsonIgnore
-    public DropDownList getDdlSearchShichoson() {
-        return this.getChosainSearch().getDdlSearchShichoson();
-    }
-
-    @JsonIgnore
-    public void setDdlSearchShichoson(DropDownList ddlSearchShichoson) {
-        this.getChosainSearch().setDdlSearchShichoson(ddlSearchShichoson);
-    }
-
     @JsonIgnore
     public RadioButton getRadSearchChosainJokyo() {
         return this.getChosainSearch().getRadSearchChosainJokyo();
@@ -224,78 +289,10 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
         this.getChosainSearch().setBtnClearKensakuJoken(btnClearKensakuJoken);
     }
 
+    @JsonIgnore
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getChosainSearch().getCcdHokenshaList();
+    }
+
     // </editor-fold>
-    @JsonProperty("状態")
-    private int 状態;
-    @JsonProperty("hdnTxtCode")
-    private RString hdnTxtCode;
-    @JsonProperty("hdnTxtCodeMeisho")
-    private RString hdnTxtCodeMeisho;
-    @JsonProperty("hdnInputDiv")
-    private ChosaitakusakiJohoInputDiv hdnInputDiv;
-
-    /**
-     * @return the hdnTxtCodeMeisho
-     */
-    @JsonProperty("hdnTxtCodeMeisho")
-    public RString getHdnTxtCodeMeisho() {
-        return hdnTxtCodeMeisho;
-    }
-
-    /**
-     * @param hdnTxtCodeMeisho the hdnTxtCodeMeisho to set
-     */
-    @JsonProperty("hdnTxtCodeMeisho")
-    public void setHdnTxtCodeMeisho(RString hdnTxtCodeMeisho) {
-        this.hdnTxtCodeMeisho = hdnTxtCodeMeisho;
-    }
-
-    /**
-     * @return the 状態
-     */
-    @JsonProperty("状態")
-    public int get状態() {
-        return 状態;
-    }
-
-    /**
-     * @param 状態 the 状態 to set
-     */
-    @JsonProperty("状態")
-    public void set状態(int 状態) {
-        this.状態 = 状態;
-    }
-
-    /**
-     * @return the hdnTxtCode
-     */
-    @JsonProperty("hdnTxtCode")
-    public RString getHdnTxtCode() {
-        return hdnTxtCode;
-    }
-
-    /**
-     * @param hdnTxtCode the hdnTxtCode to set
-     */
-    @JsonProperty("hdnTxtCode")
-    public void setHdnTxtCode(RString hdnTxtCode) {
-        this.hdnTxtCode = hdnTxtCode;
-    }
-
-    /**
-     * @return the hdnInputDiv
-     */
-    @JsonProperty("hdnInputDiv")
-    public ChosaitakusakiJohoInputDiv getHdnInputDiv() {
-        return hdnInputDiv;
-    }
-
-    /**
-     * @param hdnInputDiv the hdnInputDiv to set
-     */
-    @JsonProperty("hdnInputDiv")
-    public void setHdnInputDiv(ChosaitakusakiJohoInputDiv hdnInputDiv) {
-        this.hdnInputDiv = hdnInputDiv;
-    }
-
 }
