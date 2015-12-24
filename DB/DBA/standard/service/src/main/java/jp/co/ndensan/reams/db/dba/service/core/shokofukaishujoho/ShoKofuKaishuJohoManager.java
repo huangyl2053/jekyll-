@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dba.entity.ShoKofuKaishuJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7037ShoKofuKaishuDac;
-import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -24,14 +23,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class ShoKofuKaishuJohoManager {
 
-    private final MapperProvider mapperProvider;
     private final DbT7037ShoKofuKaishuDac 証交付回収情報dac;
 
     /**
      * コンストラクタ
      */
     ShoKofuKaishuJohoManager() {
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.証交付回収情報dac = InstanceProvider.create(DbT7037ShoKofuKaishuDac.class);
     }
 
@@ -42,10 +39,8 @@ public class ShoKofuKaishuJohoManager {
      * @param 証交付回収情報dac 証交付回収情報dac
      */
     ShoKofuKaishuJohoManager(
-            MapperProvider mapperProvider,
             DbT7037ShoKofuKaishuDac 証交付回収情報dac
     ) {
-        this.mapperProvider = mapperProvider;
         this.証交付回収情報dac = 証交付回収情報dac;
     }
 
@@ -79,7 +74,7 @@ public class ShoKofuKaishuJohoManager {
     /**
      * 証交付回収の更新処理します。
      *
-     * @param kaishuJohoEntity
+     * @param kaishuJohoEntity ShoKofuKaishuJohoEntity
      * @return count
      */
     @Transaction
@@ -108,7 +103,7 @@ public class ShoKofuKaishuJohoManager {
     /**
      * 証交付回収情報を削除します
      *
-     * @param kaishuJohoEntity
+     * @param kaishuJohoEntity ShoKofuKaishuJohoEntity
      * @return count
      */
     @Transaction
@@ -128,7 +123,7 @@ public class ShoKofuKaishuJohoManager {
     /**
      * 証交付回収の保存処理結果を返します。
      *
-     * @param entityList
+     * @param entityList List<ShoKofuKaishuJohoEntity>
      */
     @Transaction
     public void saveShoKofuKaishuJoho(List<ShoKofuKaishuJohoEntity> entityList
