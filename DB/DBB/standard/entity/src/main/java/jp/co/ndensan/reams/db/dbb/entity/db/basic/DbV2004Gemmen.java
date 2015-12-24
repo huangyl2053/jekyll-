@@ -3,10 +3,9 @@ package jp.co.ndensan.reams.db.dbb.entity.db.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * DbT2010FukaErrorListの項目定義クラスです
- *
+ * 賦課減免Newestテーブルの項目定義クラスです。
  */
-public enum DbT2010FukaErrorList implements IColumnDefinition {
+public enum DbV2004Gemmen implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
@@ -41,70 +40,78 @@ public enum DbT2010FukaErrorList implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * サブ業務コード
+     * choteiNendo
      */
-    subGyomuCode(2147483647, 0),
+    choteiNendo(2147483647, 0),
     /**
-     * 内部帳票ID
-     */
-    internalReportId(128, 0),
-    /**
-     * 賦課年度
+     * fukaNendo
      */
     fukaNendo(2147483647, 0),
     /**
-     * 通知書番号
+     * tsuchishoNo
      */
     tsuchishoNo(2147483647, 0),
     /**
-     * 内部帳票作成日時
+     * rirekiNo
      */
-    internalReportCreationDateTime(2147483647, 0),
+    rirekiNo(5, 0),
     /**
-     * バッチID
+     * shinseiYMD
      */
-    batchId(255, 0),
+    shinseiYMD(2147483647, 0),
     /**
-     * バッチ起動日時
+     * ketteiYMD
      */
-    batchStartingDateTime(2147483647, 0),
+    ketteiYMD(2147483647, 0),
     /**
-     * エラーコード
+     * torikeshiYMD
      */
-    errorCode(2147483647, 0),
+    torikeshiYMD(2147483647, 0),
     /**
-     * 被保険者番号
+     * jotaiKubun
      */
-    hihokenshaNo(2147483647, 0),
+    jotaiKubun(1, 0),
     /**
-     * 識別コード
+     * sakuseiKubun
      */
-    shikibetsuCode(2147483647, 0),
+    sakuseiKubun(1, 0),
     /**
-     * 処理区分コード
+     * shinseiJiyu
      */
-    shoriKubunCode(2147483647, 0),
+    shinseiJiyu(2147483647, 0),
     /**
-     * 資格取得日
+     * gemmenJiyuCode
      */
-    shikakuShutokuYMD(2147483647, 0),
+    gemmenJiyuCode(2147483647, 0),
     /**
-     * 資格取得事由
+     * gemmenJiyu
      */
-    shikakuShutokuJiyu(2, 0),
+    gemmenJiyu(2147483647, 0),
     /**
-     * 資格喪失日
+     * gemmenTorikeshiJiyuCode
      */
-    shikakuSoshitsuYMD(2147483647, 0),
+    gemmenTorikeshiJiyuCode(2147483647, 0),
     /**
-     * 資格喪失事由
+     * gemmenTorikeshiJiyu
      */
-    shikakuSoshitsuJiyu(2, 0);
+    gemmenTorikeshiJiyu(2147483647, 0),
+    /**
+     * shinseiGemmenGaku
+     */
+    shinseiGemmenGaku(131089, 0),
+    /**
+     * ketteiGemmenGaku
+     */
+    ketteiGemmenGaku(131089, 0),
+    /**
+     * torikeshiGemmenGaku
+     */
+    torikeshiGemmenGaku(131089, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT2010FukaErrorList(int maxLength, int scale) {
+    private DbV2004Gemmen(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

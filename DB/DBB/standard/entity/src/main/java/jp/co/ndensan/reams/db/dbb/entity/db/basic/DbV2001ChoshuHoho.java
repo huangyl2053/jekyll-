@@ -3,9 +3,9 @@ package jp.co.ndensan.reams.db.dbb.entity.db.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 介護徴収方法テーブルの項目定義クラスです。
+ * 徴収方法Aliveテーブルの項目定義クラスです。
  */
-public enum DbT2001ChoshuHoho implements IColumnDefinition {
+public enum DbV2001ChoshuHoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
@@ -40,146 +40,146 @@ public enum DbT2001ChoshuHoho implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * 賦課年度
+     * fukaNendo
      */
     fukaNendo(2147483647, 0),
     /**
-     * 被保険者番号
+     * hihokenshaNo
      */
     hihokenshaNo(2147483647, 0),
     /**
-     * 履歴番号
+     * rirekiNo
      */
     rirekiNo(5, 0),
     /**
-     * 徴収方法4月
+     * choshuHoho4gatsu
      */
     choshuHoho4gatsu(1, 0),
     /**
-     * 徴収方法5月
+     * choshuHoho5gatsu
      */
     choshuHoho5gatsu(1, 0),
     /**
-     * 徴収方法6月
+     * choshuHoho6gatsu
      */
     choshuHoho6gatsu(1, 0),
     /**
-     * 徴収方法7月
+     * choshuHoho7gatsu
      */
     choshuHoho7gatsu(1, 0),
     /**
-     * 徴収方法8月
+     * choshuHoho8gatsu
      */
     choshuHoho8gatsu(1, 0),
     /**
-     * 徴収方法9月
+     * choshuHoho9gatsu
      */
     choshuHoho9gatsu(1, 0),
     /**
-     * 徴収方法10月
+     * choshuHoho10gatsu
      */
     choshuHoho10gatsu(1, 0),
     /**
-     * 徴収方法11月
+     * choshuHoho11gatsu
      */
     choshuHoho11gatsu(1, 0),
     /**
-     * 徴収方法12月
+     * choshuHoho12gatsu
      */
     choshuHoho12gatsu(1, 0),
     /**
-     * 徴収方法1月
+     * choshuHoho1gatsu
      */
     choshuHoho1gatsu(1, 0),
     /**
-     * 徴収方法2月
+     * choshuHoho2gatsu
      */
     choshuHoho2gatsu(1, 0),
     /**
-     * 徴収方法3月
+     * choshuHoho3gatsu
      */
     choshuHoho3gatsu(1, 0),
     /**
-     * 徴収方法翌4月
+     * choshuHohoYoku4gatsu
      */
     choshuHohoYoku4gatsu(1, 0),
     /**
-     * 徴収方法翌5月
+     * choshuHohoYoku5gatsu
      */
     choshuHohoYoku5gatsu(1, 0),
     /**
-     * 徴収方法翌6月
+     * choshuHohoYoku6gatsu
      */
     choshuHohoYoku6gatsu(1, 0),
     /**
-     * 徴収方法翌7月
+     * choshuHohoYoku7gatsu
      */
     choshuHohoYoku7gatsu(1, 0),
     /**
-     * 徴収方法翌8月
+     * choshuHohoYoku8gatsu
      */
     choshuHohoYoku8gatsu(1, 0),
     /**
-     * 徴収方法翌9月
+     * choshuHohoYoku9gatsu
      */
     choshuHohoYoku9gatsu(1, 0),
     /**
-     * 仮徴収・基礎年金番号
+     * kariNenkinNo
      */
     kariNenkinNo(10, 0),
     /**
-     * 仮徴収・年金コード
+     * kariNenkinCode
      */
     kariNenkinCode(4, 0),
     /**
-     * 仮徴収・捕捉月
+     * kariHosokuM
      */
     kariHosokuM(2, 0),
     /**
-     * 本徴収・基礎年金番号
+     * honNenkinNo
      */
     honNenkinNo(10, 0),
     /**
-     * 本徴収・年金コード
+     * honNenkinCode
      */
     honNenkinCode(4, 0),
     /**
-     * 本徴収・捕捉月
+     * honHosokuM
      */
     honHosokuM(2, 0),
     /**
-     * 翌年度仮徴収・基礎年金番号
+     * yokunendoKariNenkinNo
      */
     yokunendoKariNenkinNo(10, 0),
     /**
-     * 翌年度仮徴収・年金コード
+     * yokunendoKariNenkinCode
      */
     yokunendoKariNenkinCode(4, 0),
     /**
-     * 翌年度仮徴収・捕捉月
+     * yokunendoKariHosokuM
      */
     yokunendoKariHosokuM(2, 0),
     /**
-     * 依頼情報送付済みフラグ
+     * iraiSohuzumiFlag
      */
     iraiSohuzumiFlag(1, 0),
     /**
-     * 追加依頼情報送付済みフラグ
+     * tsuikaIraiSohuzumiFlag
      */
     tsuikaIraiSohuzumiFlag(1, 0),
     /**
-     * 特別徴収停止日時
+     * tokuchoTeishiNichiji
      */
     tokuchoTeishiNichiji(2147483647, 0),
     /**
-     * 特別徴収停止事由コード
+     * tokuchoTeishiJiyuCode
      */
     tokuchoTeishiJiyuCode(2, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT2001ChoshuHoho(int maxLength, int scale) {
+    private DbV2001ChoshuHoho(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

@@ -3,10 +3,10 @@ package jp.co.ndensan.reams.db.dbb.entity.db.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * DbT2010FukaErrorListの項目定義クラスです
- *
+ * 不均一納期管理テーブルの項目定義クラスです。
+ * <br/> 不均一納期を実施する市町村を管理します
  */
-public enum DbT2010FukaErrorList implements IColumnDefinition {
+public enum DbT2016FukinitsuNokiKanri implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
@@ -41,70 +41,18 @@ public enum DbT2010FukaErrorList implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * サブ業務コード
+     * 調定年度
      */
-    subGyomuCode(2147483647, 0),
+    choteiNendo(2147483647, 0),
     /**
-     * 内部帳票ID
+     * 市町村コード
      */
-    internalReportId(128, 0),
-    /**
-     * 賦課年度
-     */
-    fukaNendo(2147483647, 0),
-    /**
-     * 通知書番号
-     */
-    tsuchishoNo(2147483647, 0),
-    /**
-     * 内部帳票作成日時
-     */
-    internalReportCreationDateTime(2147483647, 0),
-    /**
-     * バッチID
-     */
-    batchId(255, 0),
-    /**
-     * バッチ起動日時
-     */
-    batchStartingDateTime(2147483647, 0),
-    /**
-     * エラーコード
-     */
-    errorCode(2147483647, 0),
-    /**
-     * 被保険者番号
-     */
-    hihokenshaNo(2147483647, 0),
-    /**
-     * 識別コード
-     */
-    shikibetsuCode(2147483647, 0),
-    /**
-     * 処理区分コード
-     */
-    shoriKubunCode(2147483647, 0),
-    /**
-     * 資格取得日
-     */
-    shikakuShutokuYMD(2147483647, 0),
-    /**
-     * 資格取得事由
-     */
-    shikakuShutokuJiyu(2, 0),
-    /**
-     * 資格喪失日
-     */
-    shikakuSoshitsuYMD(2147483647, 0),
-    /**
-     * 資格喪失事由
-     */
-    shikakuSoshitsuJiyu(2, 0);
+    shichosonCode(2147483647, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT2010FukaErrorList(int maxLength, int scale) {
+    private DbT2016FukinitsuNokiKanri(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }
