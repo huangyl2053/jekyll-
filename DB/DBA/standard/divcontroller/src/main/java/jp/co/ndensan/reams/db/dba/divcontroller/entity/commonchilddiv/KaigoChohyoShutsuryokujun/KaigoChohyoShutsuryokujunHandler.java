@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoChohyoShutsuryokujun;
+package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.KaigoChohyoShutsuryokujun;
 
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dba.service.kaigochohyoshutsuryokujun.KaigoChohyoShutsuryokujun;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv.DisplayNone;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -48,17 +47,10 @@ public class KaigoChohyoShutsuryokujunHandler {
      * 入力データチェックです。
      */
     public void checkInput() {
-        if (this.div.getCcdChohyoShutsuryokujun().getTxtSort().getValue() == null
-                || this.div.getCcdChohyoShutsuryokujun().getTxtSort().getValue().isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage().replace(出力順.toString()));
-        }
-        if ((this.div.getCcdChohyoShutsuryokujun().getMode_DisplayNone().equals(ChohyoShutsuryokujunDiv.DisplayNone.ALL)
-                || this.div.getCcdChohyoShutsuryokujun().getMode_DisplayNone().equals(ChohyoShutsuryokujunDiv.DisplayNone.SHUKEI_NONE))
-                && ((this.div.getCcdChohyoShutsuryokujun().getTxtKaiPage().getValue() == null
-                || this.div.getCcdChohyoShutsuryokujun().getTxtKaiPage().getValue().isEmpty())
-                && (this.div.getCcdChohyoShutsuryokujun().getTxtShukeiNoneKaiPage().getValue() == null
-                || this.div.getCcdChohyoShutsuryokujun().getTxtShukeiNoneKaiPage().getValue().isEmpty()))) {
-            throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage().replace(改頁.toString()));
-        }
+        KaigoChohyoShutsuryokujun shutsuryokujun = new KaigoChohyoShutsuryokujun();
+        shutsuryokujun.checkInput(div.getCcdChohyoShutsuryokujun().getTxtSort().getValue(),
+                new RString(div.getCcdChohyoShutsuryokujun().getMode_DisplayNone().toString()),
+                div.getCcdChohyoShutsuryokujun().getTxtKaiPage().getValue(),
+                div.getCcdChohyoShutsuryokujun().getTxtShukeiNoneKaiPage().getValue());
     }
 }
