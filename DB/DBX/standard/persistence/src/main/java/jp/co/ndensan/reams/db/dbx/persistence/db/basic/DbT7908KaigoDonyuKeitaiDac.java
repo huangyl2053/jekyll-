@@ -12,7 +12,6 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitai
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitai.shishoKanriUmuFlag;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

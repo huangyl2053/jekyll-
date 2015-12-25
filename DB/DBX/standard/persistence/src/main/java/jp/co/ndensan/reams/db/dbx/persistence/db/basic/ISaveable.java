@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
