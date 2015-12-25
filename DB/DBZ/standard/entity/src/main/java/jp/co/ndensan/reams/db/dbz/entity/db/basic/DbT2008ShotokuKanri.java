@@ -3,10 +3,10 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * DbT7035RendoPatternの項目定義クラスです
- *
+ * 介護所得管理テーブルの項目定義クラスです。
+ * <br/> 住民税課税対象者以外の所得情報を管理します。
  */
-public enum DbT7035RendoPattern implements IColumnDefinition {
+public enum DbT2008ShotokuKanri implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
@@ -41,74 +41,62 @@ public enum DbT7035RendoPattern implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * 送信元市町村コード
+     * 所得年度
      */
-    motoShichosonCode(2147483647, 0),
+    shotokuNendo(2147483647, 0),
     /**
-     * 送信先市町村コード
+     * 識別コード
      */
-    sakiShichosonCode(2147483647, 0),
+    shikibetsuCode(2147483647, 0),
     /**
-     * 種別
+     * 履歴番号
      */
-    shubetsu(2, 0),
+    rirekiNo(5, 0),
     /**
-     * 有効開始年月日
+     * 課税区分（住民税減免前）
+     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消　
+     * <br/>※保険料賦課の際に参照する
      */
-    yukoKaishiYMD(2147483647, 0),
+    kazeiKubun(1, 0),
     /**
-     * 有効終了年月日
+     * 課税区分（住民税減免後）
+     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消　
+     * <br/>※給付（高額等）で参照する
      */
-    yukoShuryoYMD(2147483647, 0),
+    kazeiKubunGemmenGo(1, 0),
     /**
-     * 連動形態コード
+     * 合計所得金額
      */
-    rendoKeitaiCode(2, 0),
+    gokeiShotokuGaku(12, 0),
     /**
-     * 送信元フォーマットバージョン
+     * 公的年金収入額
      */
-    motoFormatVersion(20, 0),
+    nenkiniShunyuGaku(12, 0),
     /**
-     * 送信元エンコーディング
+     * 公的年金所得額
      */
-    motoEncodeKeitai(20, 0),
+    nenkiniShotokuGaku(12, 0),
     /**
-     * 送信先フォーマットバージョン
+     * 課税所得額
      */
-    sakiFormatVersion(20, 0),
+    kazeiShotokuGaku(12, 0),
     /**
-     * 送信先エンコーディング
+     * 激変緩和措置区分
      */
-    sakiEncodeKeitai(20, 0),
+    gekihenKanwaKubun(1, 0),
     /**
-     * コード変換区分
+     * 優先区分
      */
-    codeHenkanKubun(1, 0),
+    yusenKubun(1, 0),
     /**
-     * 外字変換区分
+     * 処理日時
      */
-    gaijiHenkanKubun(1, 0),
-    /**
-     * 全件連動区分
-     */
-    zenkenRendoKubun(1, 0),
-    /**
-     * 連携区分
-     */
-    rendoKubun(1, 0),
-    /**
-     * 連携ファイル名
-     * <br/>連携するファイル名称を拡張子付きで定義する。
-     * <br/>編集書式：
-     * <br/> @日時@　・・・ 年月日時分秒（14桁）
-     * <br/> @市町村コード@　・・・　市町村コード（6桁）
-     */
-    renkeiFileName(128, 0);
+    shoriTimeStamp(2147483647, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT7035RendoPattern(int maxLength, int scale) {
+    private DbT2008ShotokuKanri(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

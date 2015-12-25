@@ -1,8 +1,8 @@
 ﻿choteiNendo,UDD012YSeireki,FlexibleYear,,,,,choteiNendo,A
 fukaNendo,UDD012YSeireki,FlexibleYear,,,,,fukaNendo,A
-tsuchishoNo,DbUDD008TsuchishoNo,DbUDD008TsuchishoNo,,,,,tsuchishoNo,A
+tsuchishoNo,DbUDD008TsuchishoNo,TsuchishoNo,,,,,tsuchishoNo,A
 rirekiNo,int2,int,,,,,rirekiNo,A
-hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,hihokenshaNo,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,hihokenshaNo,A
 shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,shikibetsuCode,A
 setaiCode,UDD051SetaiCode,SetaiCode,,,,,setaiCode,A
 setaiInsu,int2,int,,,,,setaiInsu,A
@@ -29,7 +29,7 @@ hokenryoDankai2,varchar,RString,,,,,hokenryoDankai2,A
 nengakuHokenryo2,numeric,Decimal,,,,,nengakuHokenryo2,A
 tsukiwariStartYM2,UDD014YM,FlexibleYearMonth,,,,,tsukiwariStartYM2,A
 tsukiwariEndYM2,UDD014YM,FlexibleYearMonth,,,,,tsukiwariEndYM2,A
-choteiTimestamp,UDD019Timestamp,RDateTime,,,,,choteiTimestamp,A
+choteiNichiji,UDD018YMDHMS,YMDHMS,,,,,choteiNichiji,A
 choteiJiyu1,varchar,RString,,,,,choteiJiyu1,A
 choteiJiyu2,varchar,RString,,,,,choteiJiyu2,A
 choteiJiyu3,varchar,RString,,,,,choteiJiyu3,A
@@ -40,8 +40,10 @@ gemmenGaku,numeric,Decimal,,,,,gemmenGaku,A
 kakuteiHokenryo,numeric,Decimal,,,,,kakuteiHokenryo,A
 hokenryoDankaiKarisanntei,varchar,RString,,,,,hokenryoDankaiKarisanntei,A
 choshuHohoRirekiNo,int2,int,,,,,choshuHohoRirekiNo,A
-idoKijunTimestamp,UDD019Timestamp,RDateTime,,,,,idoKijunTimestamp,A
+idoKijunNichiji,UDD018YMDHMS,YMDHMS,,,,,idoKijunNichiji,A
 kozaKubun,varchar,RString,,,,,kozaKubun,A
 kyokaisoKubun,varchar,RString,,,,,kyokaisoKubun,A
 shokkenKubun,varchar,RString,,,,,shokkenKubun,A
 fukaShichosonCode,UDD023LasdecCode,LasdecCode,,,,,fukaShichosonCode,A
+tkSaishutsuKampuGaku,numeric,Decimal,,,,,tkSaishutsuKampuGaku,A
+fuSaishutsuKampuGaku,numeric,Decimal,,,,,fuSaishutsuKampuGaku,A
