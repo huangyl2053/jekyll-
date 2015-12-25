@@ -5,28 +5,35 @@
  */
 package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.gappeijoho;
 
-import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.gappeijoho.GappeiJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.GappeiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
+import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.BeforeClass;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 /**
- *
+ * {@link  IGappeiJohoMapper}のテストです。
  */
+@RunWith(Enclosed.class)
 public class IGappeiJohoMapperTest {
 
     public IGappeiJohoMapperTest() {
     }
 
-    @Test
-    public void testGetGappeiJohoRelateEntity() {
-    }
+    public static class canCreateInstance extends DbxTestDacBase {
 
-    public class IGappeiJohoMapperImpl implements IGappeiJohoMapper {
+        private static DbTestHelper dbTestHelper;
 
-        public GappeiJohoRelateEntity getGappeiJohoRelateEntity(GappeiJohoMapperParameter 合併情報検索条件) {
-            return null;
+        @BeforeClass
+        public static void setUpClass() {
+            dbTestHelper = new DbTestHelper();
+            DbxTestDacBase.setUpClassInternal();
+        }
+
+        @Test
+        public void インスタンスが生成できる() {
+            sqlSession.getMapper(IGappeiJohoMapper.class);
         }
     }
-
 }

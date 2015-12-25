@@ -13,8 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonlist.ShichosonCodeNameResult;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.Comparators;
-import jp.co.ndensan.reams.db.dbx.service.core.shichosonlist.ShichosonList;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+//import jp.co.ndensan.reams.db.dbx.service.core.shichosonlist.ShichosonList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -37,7 +39,7 @@ class HokenshaListDivHandler {
      * また、共有子Div内に、取得した保険者のリストを保持します。
      */
     void loadAndHoldHokenshaList() {
-        List<ShichosonCodeNameResult> shichosonList = ShichosonList.createInstance().getShichosonCodeNameList();
+        List<ShichosonCodeNameResult> shichosonList = getShichosonCodeNameList();
         Collections.sort(shichosonList, new Comparator<ShichosonCodeNameResult>() {
             @Override
             public int compare(ShichosonCodeNameResult o1, ShichosonCodeNameResult o2) {
@@ -59,6 +61,21 @@ class HokenshaListDivHandler {
 
         div.getDdlHokenshaList().setDataSource(list);
         ShichosonListHolder.putTo(div, map);
+    }
+
+    private List<ShichosonCodeNameResult> getShichosonCodeNameList() {
+        //return ShichosonList.createInstance().getShichosonCodeNameList();
+        return new ArrayList<ShichosonCodeNameResult>() {
+            {
+                add(new ShichosonCodeNameResult(
+                        //市町村コード、市町村名、証記載保険者番号、統計対象区分（任意）の順で指定してください。
+                        new LasdecCode("123456"), new RString("電算市"), new ShoKisaiHokenshaNo("123455"), TokeiTaishoKubun.構成市町村分)
+                );
+                add(new ShichosonCodeNameResult(
+                        new LasdecCode("123456"), new RString("電算市"), new ShoKisaiHokenshaNo("123455"), TokeiTaishoKubun.構成市町村分)
+                );
+            }
+        };
     }
 
     /**

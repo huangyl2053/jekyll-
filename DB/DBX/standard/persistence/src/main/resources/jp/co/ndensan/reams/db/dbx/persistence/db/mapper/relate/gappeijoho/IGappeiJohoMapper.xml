@@ -5,8 +5,8 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.gappeijoho.IGappeiJohoMapper">
 
-    <select id="getGappeiJohoEntity"
-            resultMap="resultMap_GappeiJohoEntity"
+    <select id="getGappeiJohoRelateEntity"
+            resultMap="resultMap_GappeiJohoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatisprm.gappeijoho.GappeiJohoMapperParameter" fetchSize="500">
         SELECT
         dbT7055GappeiJoho.*,
@@ -34,13 +34,13 @@
 
     </select>
 
-    <resultMap id="resultMap_GappeiJohoEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.GappeiJohoEntity" autoMapping="true">
-        <id  column="dbT7055GappeiJoho_gappeiYMD"/>
-        <id  column="dbT7055GappeiJoho_chiikiNo" />
-        <association property="gappeEntity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7055GappeiJohoMapper.resultMap_DbT7055GappeiJohoEntity"/>
-        <collection property="gappeiJohoEntity"
-                    resultMap="resultMap_GappeiJohoEntity"
-                    ofType="jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.GappeiJohoEntity"/>
+    <resultMap id="resultMap_GappeiJohoRelateEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.GappeiJohoRelateEntity" autoMapping="false">
+        <id  property="gappeiYMD" column="dbT7055GappeiJoho_gappeiYMD"/>
+        <id  property="chiikiNo" column="dbT7055GappeiJoho_chiikiNo" />
+        <association property="合併情報Entity"
+                     resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7055GappeiJohoMapper.resultMap_DbT7055GappeiJohoEntity" />
+        <collection property="合併市町村Entity"
+                    resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7056GappeiShichosonMapper.resultMap_DbT7056GappeiShichosonEntity"
+                    ofType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity"/>
     </resultMap>
-
 </mapper>
