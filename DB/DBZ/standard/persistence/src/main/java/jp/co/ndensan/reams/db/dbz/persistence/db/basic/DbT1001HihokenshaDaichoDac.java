@@ -167,7 +167,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
      * @param 被保険者番号 被保険者番号
      * @param 異動日 異動日
      * @param 枝番 枝番
-     * @return
+     * @return DbT1001HihokenshaDaichoEntity
      * @throws NullPointerException
      */
     public DbT1001HihokenshaDaichoEntity selectByHihokenshaNo(
@@ -270,10 +270,10 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
     /**
      * 被保険者番号、資格取得年月日、論理削除フラグで被保険者台帳を取得します。
      *
-     * @param 被保険者番号
-     * @param 取得日
+     * @param 被保険者番号 被保険者番号
+     * @param 取得日 取得日
      * @return List<DbT1001HihokenshaDaichoEntity>
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public List<DbT1001HihokenshaDaichoEntity> selectByHihokenshaNo(HihokenshaNo 被保険者番号, FlexibleDate 取得日)
