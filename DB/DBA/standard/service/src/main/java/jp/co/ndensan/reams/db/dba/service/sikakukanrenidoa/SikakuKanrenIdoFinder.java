@@ -51,8 +51,8 @@ public class SikakuKanrenIdoFinder {
      * 単体テスト用のコンストラクタです。
      *
      * @param mapperProvider mapperProvider
-     * @param DbT7051KoseiShichosonMasterDac db7051Dac
-     * @param SikakuJiyuShutoku sikaku
+     * @param db7051Dac DbT7051KoseiShichosonMasterDac
+     * @param sikaku SikakuJiyuShutoku
      */
     public SikakuKanrenIdoFinder(MapperProvider mapperProvider,
             DbT7051KoseiShichosonMasterDac db7051Dac,
@@ -97,7 +97,7 @@ public class SikakuKanrenIdoFinder {
     /**
      * 所在保険者リスト情報取得。
      *
-     * @return　所在保険者リスト
+     * @return 所在保険者リスト
      */
     @Transaction
     public SearchResult<KoseiShichosonMaster> selectByKoseiShichosonMasterList() {

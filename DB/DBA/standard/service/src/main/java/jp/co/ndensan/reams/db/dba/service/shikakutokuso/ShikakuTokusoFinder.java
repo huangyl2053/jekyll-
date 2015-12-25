@@ -32,8 +32,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class ShikakuTokusoFinder {
 
     private final MapperProvider mapperProvider;
-    private final CodeShubetsu CHIKU_CODE_SHUBETSU_0007 = new CodeShubetsu("0007");
-    private final CodeShubetsu CHIKU_CODE_SHUBETSU_0010 = new CodeShubetsu("0010");
+    private static final CodeShubetsu CHIKU_CODE_SHUBETSU_0007 = new CodeShubetsu("0007");
+    private static final CodeShubetsu CHIKU_CODE_SHUBETSU_0010 = new CodeShubetsu("0010");
 
     /**
      * 単体テスト用のコンストラクタです。
@@ -57,7 +57,7 @@ public class ShikakuTokusoFinder {
     /**
      * 資格得喪履歴の一覧データ取得リストを取得する。
      *
-     * @param ShikakuTokusoInputGuideParameter
+     * @param params ShikakuTokusoInputGuideParameter
      * @return 一覧データ取得取得リスト
      */
     public SearchResult<ShikakuTokuso> getShikakuTokuso(ShikakuTokusoParameter params) {
@@ -123,10 +123,10 @@ public class ShikakuTokusoFinder {
         }
         serviceShuruiList.add(new ShutokuJiyuDDL());
         for (UzT0007CodeEntity entity : codeList) {
-            ShutokuJiyuDDL List = new ShutokuJiyuDDL();
-            List.setCode(entity.getコード());
-            List.setCodeRyakusho(entity.getコード略称());
-            serviceShuruiList.add(List);
+            ShutokuJiyuDDL list = new ShutokuJiyuDDL();
+            list.setCode(entity.getコード());
+            list.setCodeRyakusho(entity.getコード略称());
+            serviceShuruiList.add(list);
         }
         return SearchResult.of(serviceShuruiList, 0, false);
     }

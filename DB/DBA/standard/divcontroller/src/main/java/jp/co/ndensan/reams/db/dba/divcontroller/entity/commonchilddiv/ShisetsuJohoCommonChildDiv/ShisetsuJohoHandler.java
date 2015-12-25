@@ -172,12 +172,12 @@ public class ShisetsuJohoHandler {
             div.getRadKaigoHokenShisetsu().getDisabledItem().clear();
             div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
             ShisetsuJohoInputGuideFinder shisetsuJoho = new ShisetsuJohoInputGuideFinder();
-            SearchResult<KaigoJogaiTokureiTaishoShisetsuInputGuide> kaigoJogaiTokureiTaishoShisetsu = shisetsuJoho.
+            SearchResult<KaigoJogaiTokureiTaishoShisetsuInputGuide> kaigoJogaiTokureiTaisho = shisetsuJoho.
                     getKaigoJogaiTokureiTaishoShisetsuInputGuide(ShisetsuType.住所地特例対象施設.getCode(),
                             new JigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()), FlexibleDate.getNowDate());
-            if (!kaigoJogaiTokureiTaishoShisetsu.records().isEmpty()) {
+            if (!kaigoJogaiTokureiTaisho.records().isEmpty()) {
 
-                div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoJogaiTokureiTaishoShisetsu.records().get(0).get事業者名称().value());
+                div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoJogaiTokureiTaisho.records().get(0).get事業者名称().value());
             } else {
 
                 div.getTxtNyuryokuShisetsuMeisho().clearValue();
@@ -195,12 +195,12 @@ public class ShisetsuJohoHandler {
             div.getRadKaigoHokenShisetsu().getDisabledItem().clear();
             div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             ShisetsuJohoInputGuideFinder shisetsuJoho = new ShisetsuJohoInputGuideFinder();
-            SearchResult<KaigoJogaiTokureiTaishoShisetsuInputGuide> kaigoJogaiTokureiTaishoShisetsu = shisetsuJoho.
+            SearchResult<KaigoJogaiTokureiTaishoShisetsuInputGuide> kaigoJogaiTokureiTaisho = shisetsuJoho.
                     getKaigoJogaiTokureiTaishoShisetsuInputGuide(ShisetsuType.適用除外施設.getCode(),
                             new JigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()), FlexibleDate.getNowDate());
-            if (!kaigoJogaiTokureiTaishoShisetsu.records().isEmpty()) {
+            if (!kaigoJogaiTokureiTaisho.records().isEmpty()) {
 
-                div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoJogaiTokureiTaishoShisetsu.records().get(0).get事業者名称().value());
+                div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoJogaiTokureiTaisho.records().get(0).get事業者名称().value());
             } else {
 
                 div.getTxtNyuryokuShisetsuMeisho().clearValue();

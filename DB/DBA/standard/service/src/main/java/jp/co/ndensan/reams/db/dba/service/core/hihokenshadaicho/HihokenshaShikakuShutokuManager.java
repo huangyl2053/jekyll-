@@ -71,8 +71,7 @@ public class HihokenshaShikakuShutokuManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShutokuManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShutokuManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShutokuManager}のインスタンス
      */
     public static HihokenshaShikakuShutokuManager createInstance() {
         return InstanceProvider.create(HihokenshaShikakuShutokuManager.class);
@@ -81,8 +80,8 @@ public class HihokenshaShikakuShutokuManager {
     /**
      * 被保険者台帳管理リストを取得します。
      *
-     * @param shikibetsuCode　識別コード
-     * @param hihokenshaNo　被保険者番号
+     * @param shikibetsuCode 識別コード
+     * @param hihokenshaNo 被保険者番号
      * @return SearchResult<HihokenshaShutokuJyoho>　被保険者台帳管理リスト
      */
     @Transaction
@@ -91,10 +90,11 @@ public class HihokenshaShikakuShutokuManager {
         requireNonNull(hihokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         List<HihokenshaShutokuJyoho> hihokenshaShutokuJyohoList = new ArrayList<>();
         IHihokenshaShikakuShutokuMapper hokenshamapper = mapperProvider.create(IHihokenshaShikakuShutokuMapper.class);
-        HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaDaicho(hihokenshaNo, shikibetsuCode);
+        HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.
+                createParam_HokenshaDaicho(hihokenshaNo, shikibetsuCode);
         List<DbT1001HihokenshaDaichoEntity> entitylist = hokenshamapper.getHihokenshaShutokuJyoho(parameter);
         if (entitylist == null || entitylist.isEmpty()) {
-            return SearchResult.of(Collections.< HihokenshaShutokuJyoho>emptyList(), 0, false);
+            return SearchResult.of(Collections.<HihokenshaShutokuJyoho>emptyList(), 0, false);
         }
         for (DbT1001HihokenshaDaichoEntity entity : entitylist) {
             hihokenshaShutokuJyohoList.add(new HihokenshaShutokuJyoho(entity));
@@ -105,8 +105,8 @@ public class HihokenshaShikakuShutokuManager {
     /**
      * 被保険者台帳管理（資格取得）登録処理します。
      *
-     * @param entity　被保険者台帳管理テーブルのエンティティ
-     * @param 生年月日　当該識別対象の生年月日
+     * @param entity 被保険者台帳管理テーブルのエンティティ
+     * @param 生年月日 当該識別対象の生年月日
      */
     @Transaction
     public void saveHihokenshaShutoku(DbT1001HihokenshaDaichoEntity entity, IDateOfBirth 生年月日) {
@@ -130,8 +130,8 @@ public class HihokenshaShikakuShutokuManager {
     /**
      * 最大枝番を取得します。
      *
-     * @param hihokenshaNo　被保険者番号
-     * @param idoYMD　異動日
+     * @param hihokenshaNo 被保険者番号
+     * @param idoYMD 異動日
      * @return RString 最大枝番
      */
     @Transaction
@@ -151,8 +151,8 @@ public class HihokenshaShikakuShutokuManager {
     /**
      * 最新データ情報を取得します。
      *
-     * @param shikibetsuCode　識別コード
-     * @param hihokenshaNo　被保険者番号
+     * @param shikibetsuCode 識別コード
+     * @param hihokenshaNo 被保険者番号
      * @return HihokenshaShutokuJyoho 被保険者台帳管理（資格取得）情報
      */
     @Transaction
@@ -160,7 +160,8 @@ public class HihokenshaShikakuShutokuManager {
         requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(hihokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         IHihokenshaShikakuShutokuMapper hokenshamapper = mapperProvider.create(IHihokenshaShikakuShutokuMapper.class);
-        HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaDaicho(hihokenshaNo, shikibetsuCode);
+        HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter
+                .createParam_HokenshaDaicho(hihokenshaNo, shikibetsuCode);
         DbT1001HihokenshaDaichoEntity entity = hokenshamapper.getSaishinDeta(parameter);
         if (entity == null) {
             return null;
@@ -171,10 +172,10 @@ public class HihokenshaShikakuShutokuManager {
     /**
      * 資格取得登録チェック処理します。
      *
-     * @param 当該識別対象の生年月日　当該識別対象の生年月日
-     * @param 資格取得日　資格取得日
-     * @param 資格取得事由コード　資格取得事由コード
-     * @return boolean　チェックフラグ　（資格取得登録ならtrue、対象外ならfalse）
+     * @param 当該識別対象の生年月日 当該識別対象の生年月日
+     * @param 資格取得日 資格取得日
+     * @param 資格取得事由コード 資格取得事由コード
+     * @return boolean チェックフラグ （資格取得登録ならtrue、対象外ならfalse）
      */
     @Transaction
     public boolean shikakuShutokuTorokuCheck(IDateOfBirth 当該識別対象の生年月日, FlexibleDate 資格取得日, RString 資格取得事由コード) {
@@ -192,9 +193,9 @@ public class HihokenshaShikakuShutokuManager {
     /**
      * 資格取得チェック処理します。
      *
-     * @param shikibetsuCode　識別コード
-     * @param hihokenshaNo　被保険者番号
-     * @return boolean　チェックフラグ　（資格取得ならtrue、対象外ならfalse）
+     * @param shikibetsuCode 識別コード
+     * @param hihokenshaNo 被保険者番号
+     * @return boolean チェックフラグ （資格取得ならtrue、対象外ならfalse）
      */
     @Transaction
     public boolean shikakuShutokuCheck(ShikibetsuCode shikibetsuCode, HihokenshaNo hihokenshaNo) {
