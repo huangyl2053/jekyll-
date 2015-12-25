@@ -7,11 +7,14 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.JukyuSika
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.YukoMukoKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
  * JukyuSikakuShomeishoHakko のクラスファイル
@@ -182,14 +185,15 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     private JukyuSikakuShomeishoHakkoHandler getHandler() {
         return new JukyuSikakuShomeishoHakkoHandler(this);
     }
+    private static final RString 有効区分 = new RString("1");
 
     /**
      * 共通子DIVの初期化処理です。
-     * 
+     *
      * @param 被保険者番号 被保険者番号
      */
     @Override
     public void initialize(RString 被保険者番号) {
-        getHandler().initialize(JukyuShikakuShomeishoHakkoParameter.createSelectBy被保険者番号(被保険者番号,YukoMukoKubun.有効.getコード()));
+        getHandler().initialize(JukyuShikakuShomeishoHakkoParameter.createSelectBy被保険者番号(被保険者番号, 有効区分));
     }
 }
