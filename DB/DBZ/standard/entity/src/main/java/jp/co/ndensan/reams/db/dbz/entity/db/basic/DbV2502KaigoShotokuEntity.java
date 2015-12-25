@@ -1,7 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import javax.annotation.CheckForNull;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -16,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  */
 public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoShotokuEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV2502KaigoShotoku");
 
@@ -32,11 +32,11 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
     private RString yusenKubun;
     private YMDHMS shoriTimeStamp;
     private int motoRirekiNo;
-    private GyomuCode torokuGyomu;
+    private int torokuGyomu;
 
     /**
      * shotokuNendoのgetメソッドです。
-     * 
+     *
      * @return shotokuNendo
      */
     @CheckForNull
@@ -46,7 +46,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * shotokuNendoのsetメソッドです。
-     * 
+     *
      * @param shotokuNendo shotokuNendo
      */
     public void setShotokuNendo(FlexibleYear shotokuNendo) {
@@ -55,7 +55,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * shikibetsuCodeのgetメソッドです。
-     * 
+     *
      * @return shikibetsuCode
      */
     @CheckForNull
@@ -65,7 +65,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * shikibetsuCodeのsetメソッドです。
-     * 
+     *
      * @param shikibetsuCode shikibetsuCode
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -74,7 +74,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * rirekinoのgetメソッドです。
-     * 
+     *
      * @return rirekino
      */
     @CheckForNull
@@ -84,7 +84,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * rirekinoのsetメソッドです。
-     * 
+     *
      * @param rirekino rirekino
      */
     public void setRirekino(long rirekino) {
@@ -93,7 +93,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * kazeiKubunのgetメソッドです。
-     * 
+     *
      * @return kazeiKubun
      */
     @CheckForNull
@@ -103,7 +103,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * kazeiKubunのsetメソッドです。
-     * 
+     *
      * @param kazeiKubun kazeiKubun
      */
     public void setKazeiKubun(RString kazeiKubun) {
@@ -112,7 +112,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * kazeiKubunGemmenGoのgetメソッドです。
-     * 
+     *
      * @return kazeiKubunGemmenGo
      */
     @CheckForNull
@@ -122,7 +122,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * kazeiKubunGemmenGoのsetメソッドです。
-     * 
+     *
      * @param kazeiKubunGemmenGo kazeiKubunGemmenGo
      */
     public void setKazeiKubunGemmenGo(RString kazeiKubunGemmenGo) {
@@ -131,7 +131,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * gokeiShotokuGakuのgetメソッドです。
-     * 
+     *
      * @return gokeiShotokuGaku
      */
     @CheckForNull
@@ -141,7 +141,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * gokeiShotokuGakuのsetメソッドです。
-     * 
+     *
      * @param gokeiShotokuGaku gokeiShotokuGaku
      */
     public void setGokeiShotokuGaku(Decimal gokeiShotokuGaku) {
@@ -150,7 +150,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * nenkiniShunyuGakuのgetメソッドです。
-     * 
+     *
      * @return nenkiniShunyuGaku
      */
     @CheckForNull
@@ -160,7 +160,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * nenkiniShunyuGakuのsetメソッドです。
-     * 
+     *
      * @param nenkiniShunyuGaku nenkiniShunyuGaku
      */
     public void setNenkiniShunyuGaku(Decimal nenkiniShunyuGaku) {
@@ -169,7 +169,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * nenkiniShotokuGakuのgetメソッドです。
-     * 
+     *
      * @return nenkiniShotokuGaku
      */
     @CheckForNull
@@ -179,7 +179,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * nenkiniShotokuGakuのsetメソッドです。
-     * 
+     *
      * @param nenkiniShotokuGaku nenkiniShotokuGaku
      */
     public void setNenkiniShotokuGaku(Decimal nenkiniShotokuGaku) {
@@ -188,7 +188,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * kazeiShotokuGakuのgetメソッドです。
-     * 
+     *
      * @return kazeiShotokuGaku
      */
     @CheckForNull
@@ -198,7 +198,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * kazeiShotokuGakuのsetメソッドです。
-     * 
+     *
      * @param kazeiShotokuGaku kazeiShotokuGaku
      */
     public void setKazeiShotokuGaku(Decimal kazeiShotokuGaku) {
@@ -207,7 +207,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * gekihenKanwaKubunのgetメソッドです。
-     * 
+     *
      * @return gekihenKanwaKubun
      */
     @CheckForNull
@@ -217,7 +217,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * gekihenKanwaKubunのsetメソッドです。
-     * 
+     *
      * @param gekihenKanwaKubun gekihenKanwaKubun
      */
     public void setGekihenKanwaKubun(RString gekihenKanwaKubun) {
@@ -226,7 +226,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * yusenKubunのgetメソッドです。
-     * 
+     *
      * @return yusenKubun
      */
     @CheckForNull
@@ -236,7 +236,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * yusenKubunのsetメソッドです。
-     * 
+     *
      * @param yusenKubun yusenKubun
      */
     public void setYusenKubun(RString yusenKubun) {
@@ -245,7 +245,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * shoriTimeStampのgetメソッドです。
-     * 
+     *
      * @return shoriTimeStamp
      */
     @CheckForNull
@@ -255,7 +255,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * shoriTimeStampのsetメソッドです。
-     * 
+     *
      * @param shoriTimeStamp shoriTimeStamp
      */
     public void setShoriTimeStamp(YMDHMS shoriTimeStamp) {
@@ -264,7 +264,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * motoRirekiNoのgetメソッドです。
-     * 
+     *
      * @return motoRirekiNo
      */
     @CheckForNull
@@ -274,7 +274,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * motoRirekiNoのsetメソッドです。
-     * 
+     *
      * @param motoRirekiNo motoRirekiNo
      */
     public void setMotoRirekiNo(int motoRirekiNo) {
@@ -283,29 +283,28 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * torokuGyomuのgetメソッドです。
-     * 
+     *
      * @return torokuGyomu
      */
     @CheckForNull
-    public GyomuCode getTorokuGyomu() {
+    public int getTorokuGyomu() {
         return torokuGyomu;
     }
 
     /**
      * torokuGyomuのsetメソッドです。
-     * 
+     *
      * @param torokuGyomu torokuGyomu
      */
-    public void setTorokuGyomu(GyomuCode torokuGyomu) {
+    public void setTorokuGyomu(int torokuGyomu) {
         this.torokuGyomu = torokuGyomu;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbV2502KaigoShotokuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbV2502KaigoShotokuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbV2502KaigoShotokuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbV2502KaigoShotokuEntity other) {
@@ -338,6 +337,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
