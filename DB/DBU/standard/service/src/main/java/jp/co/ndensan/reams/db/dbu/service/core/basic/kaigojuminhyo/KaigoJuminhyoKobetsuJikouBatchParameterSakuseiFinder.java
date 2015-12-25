@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.service.core.basic.kaigojuminhyo;
 
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyo.KaigoJuminhyoBatchParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -57,6 +58,19 @@ public class KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder {
             kaigoJuminhyoBatchParameter.setTaishoShuryoYMDHMS(RDate.getNowDateTime());
         }
         return kaigoJuminhyoBatchParameter;
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから、抽出期間情報を取得です。
+     *
+     * @return ChushutsuKikanJohoEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity getChushutsukikanJoho() {
+
+        DbT7022ShoriDateKanriEntity dbT7022Entity = dbT7022ShoriDateKanriDac.selectTaishoYMD();
+
+        return dbT7022Entity;
     }
 
     /**

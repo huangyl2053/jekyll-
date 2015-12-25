@@ -43,49 +43,49 @@ public class IkkatsuHakkoProcessParameter implements IBatchProcessParameter {
     /**
      * コンストラクタ
      *
-     * @param shutsuryokuJokenCode 出力条件コード
-     * @param konkaiFromYMD 今回の開始日
-     * @param konkaiFromHMS 今回の時分秒_以上
-     * @param konkaiToYMD 今回の終了日
-     * @param konkaiToHMS 今回の時分秒_未満
-     * @param konkaikijunYMD 今回の基準日
-     * @param konkaiKijunHMS 今回の時分秒
-     * @param kofuYMD 交付日
-     * @param testShutsuryokuFlag テスト出力するフラグ
-     * @param saihakkoFlag 再発行するフラグ
-     * @param hakkouYMD 発行日時の発行日
-     * @param hakkouHMS 発行日時の時分秒
-     * @param shutsuryokujunId 出力順ID
-     * @param shohyojiType 証表示タイプ
+     * @param 出力条件コード 出力条件コード
+     * @param 今回の開始日 今回の開始日
+     * @param 今回の時分秒_以上 今回の時分秒_以上
+     * @param 今回の終了日 今回の終了日
+     * @param 今回の時分秒_未満 今回の時分秒_未満
+     * @param 今回の基準日 今回の基準日
+     * @param 今回の時分秒 今回の時分秒
+     * @param 交付日 交付日
+     * @param テスト出力するフラグ テスト出力するフラグ
+     * @param 再発行するフラグ 再発行するフラグ
+     * @param 発行日時の発行日 発行日時の発行日
+     * @param 発行日時の時分秒 発行日時の時分秒
+     * @param 出力順ID 出力順ID
+     * @param 証表示タイプ 証表示タイプ
      */
-    public IkkatsuHakkoProcessParameter(RString shutsuryokuJokenCode,
-            FlexibleDate konkaiFromYMD,
-            Time konkaiFromHMS,
-            FlexibleDate konkaiToYMD,
-            Time konkaiToHMS,
-            FlexibleDate konkaikijunYMD,
-            Time konkaiKijunHMS,
-            FlexibleDate kofuYMD,
-            Boolean testShutsuryokuFlag,
-            Boolean saihakkoFlag,
-            FlexibleDate hakkouYMD,
-            Time hakkouHMS,
-            RString shutsuryokujunId,
-            RString shohyojiType) {
-        this.shutsuryokuJokenCode = shutsuryokuJokenCode;
-        this.konkaiFromYMD = konkaiFromYMD;
-        this.konkaiFromHMS = konkaiFromHMS;
-        this.konkaiToYMD = konkaiToYMD;
-        this.konkaiToHMS = konkaiToHMS;
-        this.konkaiKijunHMS = konkaiKijunHMS;
-        this.konkaikijunYMD = konkaikijunYMD;
-        this.kofuYMD = kofuYMD;
-        this.testShutsuryokuFlag = testShutsuryokuFlag;
-        this.saihakkoFlag = saihakkoFlag;
-        this.hakkouYMD = hakkouYMD;
-        this.hakkouHMS = hakkouHMS;
-        this.shutsuryokujunId = shutsuryokujunId;
-        this.shohyojiType = shohyojiType;
+    public IkkatsuHakkoProcessParameter(RString 出力条件コード,
+            FlexibleDate 今回の開始日,
+            Time 今回の時分秒_以上,
+            FlexibleDate 今回の終了日,
+            Time 今回の時分秒_未満,
+            FlexibleDate 今回の基準日,
+            Time 今回の時分秒,
+            FlexibleDate 交付日,
+            Boolean テスト出力するフラグ,
+            Boolean 再発行するフラグ,
+            FlexibleDate 発行日時の発行日,
+            Time 発行日時の時分秒,
+            RString 出力順ID,
+            RString 証表示タイプ) {
+        this.shutsuryokuJokenCode = 出力条件コード;
+        this.konkaiFromYMD = 今回の開始日;
+        this.konkaiFromHMS = 今回の時分秒_以上;
+        this.konkaiToYMD = 今回の終了日;
+        this.konkaiToHMS = 今回の時分秒_未満;
+        this.konkaiKijunHMS = 今回の時分秒;
+        this.konkaikijunYMD = 今回の基準日;
+        this.kofuYMD = 交付日;
+        this.testShutsuryokuFlag = テスト出力するフラグ;
+        this.saihakkoFlag = 再発行するフラグ;
+        this.hakkouYMD = 発行日時の発行日;
+        this.hakkouHMS = 発行日時の時分秒;
+        this.shutsuryokujunId = 出力順ID;
+        this.shohyojiType = 証表示タイプ;
     }
 
     /**

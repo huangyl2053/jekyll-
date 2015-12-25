@@ -11,6 +11,9 @@ package jp.co.ndensan.reams.db.dbu.business.loiki;
  */
 public enum KoikiJushochiTokureishaEnum {
 
+    /**
+     * DBU("DBU", "広域内住所地特例者検索制御_措置元_措置先区分_介護共通");
+     */
     広域内住所地特例者検索制御_措置元_措置先区分_介護共通;
 
 //    DBU("DBU", "広域内住所地特例者検索制御_措置元_措置先区分_介護共通");

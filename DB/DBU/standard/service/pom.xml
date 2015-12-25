@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-		<!-- DBU -->
+        <!-- DBU -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbuDefinition</artifactId>
@@ -32,18 +32,18 @@
             <artifactId>DbuPersistence</artifactId>
         </dependency>
 
-         <!-- DBX -->
-         <dependency>
+        <!-- DBX -->
+        <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxService</artifactId>
         </dependency>
-		<!-- DBZ -->
+        <!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzService</artifactId>
         </dependency>
-		<!-- 公開系 -->
-		<!-- テスト -->
+        <!-- 公開系 -->
+        <!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -52,6 +52,11 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbuEntity</artifactId>
             <type>test-jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxPersistence</artifactId>
+            <version>1.1.2</version>
         </dependency>
     </dependencies>
 </project>

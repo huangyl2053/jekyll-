@@ -184,7 +184,7 @@ public class SinsaSeikyusyoJohoModel {
     public RString get処分種類名() {
         return entity.getShobunShuruiCode();
     }
-    
+
     /**
      * 処分があったことを知った日を返します。
      *
@@ -217,7 +217,7 @@ public class SinsaSeikyusyoJohoModel {
      *
      * @return 添付書類等
      */
-    public boolean get添付書類等() {
+    public boolean is添付書類等() {
         return entity.getTempuShoruiTo();
     }
 
@@ -235,7 +235,7 @@ public class SinsaSeikyusyoJohoModel {
      *
      * @return 弁明書登録フラグ
      */
-    public boolean get弁明書登録フラグ() {
+    public boolean is弁明書登録フラグ() {
         return entity.getBemmeishoTorokuFlag();
     }
 

@@ -52,51 +52,47 @@ public class HihokenshaShikakuShoFinder {
      * @param dbT7051KoseiShichosonMasterDac DbT7051KoseiShichosonMasterDac
      */
     HihokenshaShikakuShoFinder(DbT7037ShoKofuKaishuDac dbT7037ShoKofuKaishuDac,
-            DbT7051KoseiShichosonMasterDac DbT7051KoseiShichosonMasterDac) {
+            DbT7051KoseiShichosonMasterDac dbT7051KoseiShichosonMasterDac) {
         this.dbT7037ShoKofuKaishuDac = dbT7037ShoKofuKaishuDac;
-        this.dbT7051KoseiShichosonMasterDac = DbT7051KoseiShichosonMasterDac;
+        this.dbT7051KoseiShichosonMasterDac = dbT7051KoseiShichosonMasterDac;
     }
 
     /**
      * 資格者証発行画面データ取得です。
      *
-     * @param hihokenshaShikakuShoDataParameter HihokenshaShikakuShoDataParameter
+     * @param dataParameter HihokenshaShikakuShoDataParameter
      * @return HihokenshaShikakuShoDataEntity insert用データEntity
      */
     @Transaction
-    public HihokenshaShikakuShoDataEntity insertShoKofuKaishu(HihokenshaShikakuShoDataParameter hihokenshaShikakuShoDataParameter) {
-        HihokenshaShikakuShoDataEntity hihokenshaShikakuShoDataEntity = insert用データEntity(hihokenshaShikakuShoDataParameter);
-        if (hihokenshaShikakuShoDataEntity == null) {
-            return null;
-        }
-        return hihokenshaShikakuShoDataEntity;
+    public HihokenshaShikakuShoDataEntity insertShoKofuKaishu(HihokenshaShikakuShoDataParameter dataParameter) {
+        return insert用データEntity(dataParameter);
     }
 
-    private HihokenshaShikakuShoDataEntity insert用データEntity(HihokenshaShikakuShoDataParameter hihokenshaShikakuShoDataParameter) {
+    private HihokenshaShikakuShoDataEntity insert用データEntity(HihokenshaShikakuShoDataParameter shikakuShoDataParameter) {
         HihokenshaShikakuShoDataEntity hihokenshaShikakuShoDataEntity = new HihokenshaShikakuShoDataEntity();
-        hihokenshaShikakuShoDataEntity.setHihokenshaNo(hihokenshaShikakuShoDataParameter.getHihokenshaNo());
-        if (hihokenshaShikakuShoDataParameter.getMenuId().equals(new RString("DBUMN120001"))) {
+        hihokenshaShikakuShoDataEntity.setHihokenshaNo(shikakuShoDataParameter.getHihokenshaNo());
+        if (shikakuShoDataParameter.getMenuId().equals(new RString("DBUMN120001"))) {
             hihokenshaShikakuShoDataEntity.setKofuShoShurui(new RString("0001"));
             hihokenshaShikakuShoDataEntity.setYukoKigenYMD(FlexibleDate.EMPTY);
             hihokenshaShikakuShoDataEntity.setShinYoshikiSumiKubunCode(new RString("01"));
             hihokenshaShikakuShoDataEntity.setShoYoshikiKubunCode(new RString("02"));
         }
-        if (hihokenshaShikakuShoDataParameter.getMenuId().equals(new RString("DBUMN120002"))) {
+        if (shikakuShoDataParameter.getMenuId().equals(new RString("DBUMN120002"))) {
             hihokenshaShikakuShoDataEntity.setKofuShoShurui(new RString("0002"));
-            hihokenshaShikakuShoDataEntity.setYukoKigenYMD(hihokenshaShikakuShoDataParameter.getYukoKigenYMD());
+            hihokenshaShikakuShoDataEntity.setYukoKigenYMD(shikakuShoDataParameter.getYukoKigenYMD());
             hihokenshaShikakuShoDataEntity.setShinYoshikiSumiKubunCode(RString.EMPTY);
             hihokenshaShikakuShoDataEntity.setShoYoshikiKubunCode(RString.EMPTY);
         }
-        List<DbT7037ShoKofuKaishuEntity> rirekiNo = dbT7037ShoKofuKaishuDac.getRirekiNo(hihokenshaShikakuShoDataParameter.getHihokenshaNo());
+        List<DbT7037ShoKofuKaishuEntity> rirekiNo = dbT7037ShoKofuKaishuDac.getRirekiNo(shikakuShoDataParameter.getHihokenshaNo());
         if (rirekiNo == null || rirekiNo.isEmpty()) {
             hihokenshaShikakuShoDataEntity.setRirekiNo(1);
         } else {
             hihokenshaShikakuShoDataEntity.setRirekiNo(rirekiNo.get(0).getRirekiNo() + 1);
         }
-        hihokenshaShikakuShoDataEntity.setShikibetsuCode(hihokenshaShikakuShoDataParameter.getShikibetsuCode());
-        hihokenshaShikakuShoDataEntity.setKofuYMD(hihokenshaShikakuShoDataParameter.getKofuYMD());
-        hihokenshaShikakuShoDataEntity.setKofuJiyu(hihokenshaShikakuShoDataParameter.getKofuJiyu());
-        hihokenshaShikakuShoDataEntity.setKofuRiyu(hihokenshaShikakuShoDataParameter.getKofuRiyu());
+        hihokenshaShikakuShoDataEntity.setShikibetsuCode(shikakuShoDataParameter.getShikibetsuCode());
+        hihokenshaShikakuShoDataEntity.setKofuYMD(shikakuShoDataParameter.getKofuYMD());
+        hihokenshaShikakuShoDataEntity.setKofuJiyu(shikakuShoDataParameter.getKofuJiyu());
+        hihokenshaShikakuShoDataEntity.setKofuRiyu(shikakuShoDataParameter.getKofuRiyu());
         hihokenshaShikakuShoDataEntity.setKaishuYMD(FlexibleDate.EMPTY);
         hihokenshaShikakuShoDataEntity.setKaishuJiyu(RString.EMPTY);
         hihokenshaShikakuShoDataEntity.setKaishuRiyu(RString.EMPTY);
@@ -106,7 +102,7 @@ public class HihokenshaShikakuShoFinder {
         if (DonyukeitaiCode.事務広域.getコード().equals(導入形態コード.getKey()) || DonyukeitaiCode.事務構成市町村.getコード().
                 equals(導入形態コード.getKey()) || DonyukeitaiCode.認定広域.getコード().equals(導入形態コード.getKey())) {
             DbT7051KoseiShichosonMasterEntity 市町村コード = dbT7051KoseiShichosonMasterDac.
-                    shichosonCode(hihokenshaShikakuShoDataParameter.getShoKisaiHokenshaNo());
+                    shichosonCode(shikakuShoDataParameter.getShoKisaiHokenshaNo());
             hihokenshaShikakuShoDataEntity.setShichosonCode(市町村コード.getShichosonCode());
         } else if (DonyukeitaiCode.事務単一.getコード().equals(導入形態コード.getKey())
                 || DonyukeitaiCode.認定単一.getコード().equals(導入形態コード.getKey())) {

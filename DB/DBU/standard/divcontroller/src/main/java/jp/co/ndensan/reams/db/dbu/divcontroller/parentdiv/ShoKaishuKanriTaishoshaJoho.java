@@ -28,7 +28,7 @@ public class ShoKaishuKanriTaishoshaJoho {
      * 処理対象者の詳細情報を表示します。
      *
      * @param taishoshaJohoDiv 対象者情報Div
-     * @param searchDiv　証回収状況検索Div
+     * @param searchDiv 証回収状況検索Div
      * @return レスポンス
      */
     public ResponseData onSelectBySelectButton_SearchResultShoKaishuJokyoList(ShoKaishuKanriTaishoshaJohoDiv taishoshaJohoDiv,
