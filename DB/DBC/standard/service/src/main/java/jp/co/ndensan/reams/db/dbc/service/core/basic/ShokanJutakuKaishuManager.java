@@ -77,9 +77,9 @@ public class ShokanJutakuKaishuManager {
                 サービス提供年月,
                 整理番号,
                 事業者番号,
-                様式番号,
-                順次番号,
-                履歴番号);
+                様式番号);
+//                順次番号,
+//                履歴番号);
         if (entity == null) {
             return null;
         }

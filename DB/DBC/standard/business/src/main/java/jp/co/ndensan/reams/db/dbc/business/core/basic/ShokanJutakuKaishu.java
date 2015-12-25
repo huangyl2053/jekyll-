@@ -8,25 +8,23 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3049ShokanJutakuKaishuEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求住宅改修を管理するクラスです。
  */
 public class ShokanJutakuKaishu
-extends ModelBase<ShokanJutakuKaishuIdentifier,
-        DbT3049ShokanJutakuKaishuEntity, 
-        ShokanJutakuKaishu> implements Serializable {
+        extends ModelBase<ShokanJutakuKaishuIdentifier, DbT3049ShokanJutakuKaishuEntity, ShokanJutakuKaishu> implements Serializable {
 
     private final DbT3049ShokanJutakuKaishuEntity entity;
     private final ShokanJutakuKaishuIdentifier id;
@@ -63,16 +61,16 @@ extends ModelBase<ShokanJutakuKaishuIdentifier,
         this.entity.setSeiriNo(整理番号);
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
-        this.entity.setJunjiNo(順次番号);
-        this.entity.setRirekiNo(履歴番号);
+//        this.entity.setJunjiNo(順次番号);
+//        this.entity.setRirekiNo(履歴番号);
         this.id = new ShokanJutakuKaishuIdentifier(
                 被保険者番号,
                 サービス提供年月,
                 整理番号,
                 事業者番号,
-                様式番号,
-                順次番号,
-                履歴番号
+                様式番号
+        //                順次番号,
+        //                履歴番号
         );
     }
 
@@ -89,9 +87,9 @@ extends ModelBase<ShokanJutakuKaishuIdentifier,
                 entity.getServiceTeikyoYM(),
                 entity.getSeiriNo(),
                 entity.getJigyoshaNo(),
-                entity.getYoshikiNo(),
-                entity.getJunjiNo(),
-                entity.getRirekiNo());
+                entity.getYoshikiNo());
+//                entity.getJunjiNo(),
+//                entity.getRirekiNo());
     }
 
     /**
@@ -154,24 +152,23 @@ extends ModelBase<ShokanJutakuKaishuIdentifier,
         return entity.getYoshikiNo();
     }
 
-    /**
-     * 順次番号を返します。
-     *
-     * @return 順次番号
-     */
-    public RString get順次番号() {
-        return entity.getJunjiNo();
-    }
-
-    /**
-     * 履歴番号を返します。
-     *
-     * @return 履歴番号
-     */
-    public Decimal get履歴番号() {
-        return entity.getRirekiNo();
-    }
-
+//    /**
+//     * 順次番号を返します。
+//     *
+//     * @return 順次番号
+//     */
+//    public RString get順次番号() {
+//        return entity.getJunjiNo();
+//    }
+//
+//    /**
+//     * 履歴番号を返します。
+//     *
+//     * @return 履歴番号
+//     */
+//    public Decimal get履歴番号() {
+//        return entity.getRirekiNo();
+//    }
     /**
      * サービスコードを返します。
      *
@@ -265,8 +262,7 @@ extends ModelBase<ShokanJutakuKaishuIdentifier,
     }
 
     /**
-     * 保持する償還払請求住宅改修を削除対象とします。<br/>
-     * {@link DbT3049ShokanJutakuKaishuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する償還払請求住宅改修を削除対象とします。<br/> {@link DbT3049ShokanJutakuKaishuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShokanJutakuKaishu}
      */
