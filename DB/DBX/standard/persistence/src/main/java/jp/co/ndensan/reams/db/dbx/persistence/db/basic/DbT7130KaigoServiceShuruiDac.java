@@ -11,7 +11,6 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130Ka
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShurui.teikyoKaishiYM;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -88,10 +87,6 @@ public class DbT7130KaigoServiceShuruiDac implements ISaveable<DbT7130KaigoServi
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
-    }
-
-    public List<DbT7130KaigoServiceShuruiEntity> selectList(ITrueFalseCriteria makeShuruiConditions) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

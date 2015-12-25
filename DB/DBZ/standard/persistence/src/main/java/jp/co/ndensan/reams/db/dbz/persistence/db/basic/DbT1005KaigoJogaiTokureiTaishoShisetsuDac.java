@@ -45,7 +45,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
      */
     @Transaction
     public DbT1005KaigoJogaiTokureiTaishoShisetsuEntity selectByKey(
-	    RString 事業者種別,
+            RString 事業者種別,
 	    RString 事業者番号,
 	    FlexibleDate 有効開始年月日) throws NullPointerException {
 	requireNonNull(事業者種別, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者種別"));

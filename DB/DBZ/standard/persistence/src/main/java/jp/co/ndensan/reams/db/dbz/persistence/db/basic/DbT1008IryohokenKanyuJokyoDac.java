@@ -115,7 +115,8 @@ public class DbT1008IryohokenKanyuJokyoDac implements ISaveable<DbT1008Iryohoken
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
-                table(DbT1008IryohokenKanyuJokyo.class).where(eq(shikibetsuCode, 識別コード)).order(new OrderBy(iryoHokenKanyuYMD, Order.DESC, NullsOrder.LAST)).
+                table(DbT1008IryohokenKanyuJokyo.class).where(eq(shikibetsuCode, 識別コード))
+                .order(new OrderBy(iryoHokenKanyuYMD, Order.DESC, NullsOrder.LAST)).
                 toList(DbT1008IryohokenKanyuJokyoEntity.class);
     }
 
