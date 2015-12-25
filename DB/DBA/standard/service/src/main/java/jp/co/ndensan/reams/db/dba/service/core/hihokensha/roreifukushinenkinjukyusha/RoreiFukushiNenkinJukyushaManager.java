@@ -88,7 +88,7 @@ public class RoreiFukushiNenkinJukyushaManager {
      * 老齢福祉年金履歴情報を登録前重複チェックするです。
      *
      * @param addCheck 老齢福祉年金情報パラメータ
-     * @return
+     * @return 老齢福祉年金履歴情報件数
      */
     @Transaction
     public int checkSameJukyuKaishibi(RoreiFukushiNenkinJohoMapperParameter addCheck) {
