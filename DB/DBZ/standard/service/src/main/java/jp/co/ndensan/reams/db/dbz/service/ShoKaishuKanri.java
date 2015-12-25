@@ -23,8 +23,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class ShoKaishuKanri {
     private static final RString 修正 = new RString("1");
     private static final RString 削除 = new RString("0");
-    DbT7037ShoKofuKaishuDac dac = new DbT7037ShoKofuKaishuDac();
     
+    /**
+     * コンストラクタです。
+     */
     public ShoKaishuKanri() {
     }
     
@@ -60,5 +62,3 @@ public class ShoKaishuKanri {
         }
     }
 }
-
- 

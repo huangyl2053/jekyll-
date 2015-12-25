@@ -127,63 +127,78 @@ public class HihokenshanotsukibanFinder {
         RString 前付与番号 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号, SubGyomuCode.DBA介護資格);
         RString 後付与番号桁数 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号_桁数, SubGyomuCode.DBA介護資格);
         RString 後付与番号 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号, SubGyomuCode.DBA介護資格);
+        付番元 = check付番元(付番元, 識別コード);
 
-        if (付番元情報_住民コード.equals(付番元)) {
-            付番元 = new RString(識別コード.toString()).substring(識別コード_LENGTH).trim();
-        }
-        if (付番元情報_自動連番.equals(付番元)) {
-            付番元 = Saiban.get(SubGyomuCode.DBA介護資格, SaibanHanyokeyName.被保険者番号自動採番.getコード()).nextString().trim();
-        }
-        if (((開始位置 != null && !開始位置.isEmpty() && 0 != Integer.parseInt(開始位置.toString()))
-                && (有効桁数 != null && !有効桁数.isEmpty() && 0 != Integer.parseInt(有効桁数.toString()))
-                && (前付与番号桁数 != null && !前付与番号桁数.isEmpty() && 0 != Integer.parseInt(前付与番号桁数.toString()))
-                && (後付与番号桁数 != null && !後付与番号桁数.isEmpty()))) {
+        if (!開始位置.trim().isEmpty()
+                && !有効桁数.trim().isEmpty()
+                && !前付与番号桁数.trim().isEmpty()
+                && !後付与番号桁数.trim().isEmpty()) {
 
-            if ((前付与番号.length() == Integer.parseInt(前付与番号桁数.toString()))
-                    && (後付与番号.length() == Integer.parseInt(後付与番号桁数.toString()))) {
-                StringBuilder hihokenshaNo = new StringBuilder();
-                hihokenshaNo.append(前付与番号);
-                hihokenshaNo.append(付番元.substring(Integer.parseInt(開始位置.toString()),
-                        Integer.parseInt(有効桁数.toString()) + Integer.parseInt(開始位置.toString())));
-                hihokenshaNo.append(後付与番号);
-                被保険者番号 = new HihokenshaNo(hihokenshaNo.toString());
-            } else {
-                throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage());
-            }
-        } else if (((開始位置 != null && !開始位置.isEmpty() && 0 != Integer.parseInt(開始位置.toString()))
-                && (有効桁数 != null && !有効桁数.isEmpty() && 0 != Integer.parseInt(有効桁数.toString()))
-                && (前付与番号桁数 != null && !前付与番号桁数.isEmpty() && 0 != Integer.parseInt(前付与番号桁数.toString())))) {
-            if (前付与番号.length() == Integer.parseInt(前付与番号桁数.toString())) {
-                StringBuilder hihokenshaNo = new StringBuilder();
-                hihokenshaNo.append(前付与番号);
-                hihokenshaNo.append(付番元.substring(Integer.parseInt(開始位置.toString()),
-                        Integer.parseInt(有効桁数.toString()) + Integer.parseInt(開始位置.toString())));
-                被保険者番号 = new HihokenshaNo(hihokenshaNo.toString());
-            } else {
-                throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage());
-            }
-        } else if (((開始位置 != null && !開始位置.isEmpty() && 0 != Integer.parseInt(開始位置.toString()))
-                && (有効桁数 != null && !有効桁数.isEmpty() && 0 != Integer.parseInt(有効桁数.toString()))
-                && (後付与番号桁数 != null && !後付与番号桁数.isEmpty() && 0 != Integer.parseInt(後付与番号桁数.toString())))) {
-            if (後付与番号.length() == Integer.parseInt(後付与番号桁数.toString())) {
-                StringBuilder hihokenshaNo = new StringBuilder();
-                hihokenshaNo.append(付番元.substring(Integer.parseInt(開始位置.toString()),
-                        Integer.parseInt(有効桁数.toString()) + Integer.parseInt(開始位置.toString())));
-                hihokenshaNo.append(後付与番号);
-                被保険者番号 = new HihokenshaNo(hihokenshaNo.toString());
-            } else {
-                throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage());
-            }
-        } else if ((開始位置 != null && !開始位置.isEmpty() && 0 != Integer.parseInt(開始位置.toString()))
-                && (有効桁数 != null && !有効桁数.isEmpty()) && 0 != Integer.parseInt(有効桁数.toString())) {
-            被保険者番号 = new HihokenshaNo(付番元.substring(Integer.parseInt(開始位置.toString()),
+            check前後番号与前後桁数(前付与番号, 前付与番号桁数, 後付与番号, 後付与番号桁数);
+            StringBuilder hihokenshaNo = new StringBuilder(前付与番号);
+            hihokenshaNo.append(付番元.substring(Integer.parseInt(開始位置.toString()),
                     Integer.parseInt(有効桁数.toString()) + Integer.parseInt(開始位置.toString())));
-        } else if (((開始位置 == null || 開始位置.isEmpty()) || 0 == Integer.parseInt(開始位置.toString()))
-                && ((有効桁数 == null || 有効桁数.isEmpty()) || 0 == Integer.parseInt(有効桁数.toString()))
-                && ((前付与番号桁数 == null || 前付与番号桁数.isEmpty()) || 0 == Integer.parseInt(前付与番号桁数.toString()))
-                && ((後付与番号桁数 == null || 後付与番号桁数.isEmpty()) || 0 == Integer.parseInt(後付与番号桁数.toString()))) {
-            被保険者番号 = new HihokenshaNo(付番元);
+            hihokenshaNo.append(後付与番号);
+            return new HihokenshaNo(hihokenshaNo.toString());
+        }
+
+        if ((!開始位置.trim().isEmpty())
+                && (!有効桁数.trim().isEmpty())
+                && (!前付与番号桁数.trim().isEmpty())) {
+            check番号与桁数(前付与番号, 前付与番号桁数);
+            StringBuilder hihokenshaNo = new StringBuilder(前付与番号);
+            hihokenshaNo.append(付番元.substring(Integer.parseInt(開始位置.toString()),
+                    Integer.parseInt(有効桁数.toString()) + Integer.parseInt(開始位置.toString())));
+
+            return new HihokenshaNo(hihokenshaNo.toString());
+        }
+
+        if (!開始位置.trim().isEmpty()
+                && !有効桁数.trim().isEmpty()
+                && !後付与番号桁数.trim().isEmpty()) {
+            check番号与桁数(後付与番号, 後付与番号桁数);
+            StringBuilder hihokenshaNo = new StringBuilder();
+            hihokenshaNo.append(付番元.substring(Integer.parseInt(開始位置.toString()),
+                    Integer.parseInt(有効桁数.toString()) + Integer.parseInt(開始位置.toString())));
+            hihokenshaNo.append(後付与番号);
+            return new HihokenshaNo(hihokenshaNo.toString());
+        }
+
+        if (!開始位置.trim().isEmpty()
+                && !有効桁数.trim().isEmpty()) {
+            return new HihokenshaNo(付番元.substring(Integer.parseInt(開始位置.toString()),
+                    Integer.parseInt(有効桁数.toString()) + Integer.parseInt(開始位置.toString())));
+        }
+        if ((開始位置.trim().isEmpty())
+                && (有効桁数.trim().isEmpty())
+                && (前付与番号桁数.trim().isEmpty())
+                && (後付与番号桁数.trim().isEmpty())) {
+            return new HihokenshaNo(付番元);
         }
         return 被保険者番号;
+    }
+
+    private static RString check付番元(RString 付番元, ShikibetsuCode 識別コード) {
+        RString 付番 = RString.EMPTY;
+        if (付番元情報_住民コード.equals(付番元)) {
+            付番 = new RString(識別コード.toString()).substring(識別コード_LENGTH).trim();
+        }
+        if (付番元情報_自動連番.equals(付番元)) {
+            付番 = Saiban.get(SubGyomuCode.DBA介護資格, SaibanHanyokeyName.被保険者番号自動採番.getコード()).nextString().trim();
+        }
+        return 付番;
+    }
+
+    private static void check前後番号与前後桁数(RString 前付与番号, RString 前付与番号桁数, RString 後付与番号, RString 後付与番号桁数) {
+        if (前付与番号.length() != Integer.parseInt(前付与番号桁数.toString())
+                || 後付与番号.length() != Integer.parseInt(後付与番号桁数.toString())) {
+            throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage());
+        }
+    }
+
+    private static void check番号与桁数(RString 番号, RString 桁数) {
+        if (番号.length() != Integer.parseInt(桁数.toString())) {
+            throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage());
+        }
     }
 }

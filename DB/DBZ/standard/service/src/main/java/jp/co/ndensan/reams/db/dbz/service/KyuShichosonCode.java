@@ -45,7 +45,7 @@ public final class KyuShichosonCode {
     /**
      * コンストラクタです。
      */
-    public KyuShichosonCode() {
+    private KyuShichosonCode() {
     }
 
     /**
