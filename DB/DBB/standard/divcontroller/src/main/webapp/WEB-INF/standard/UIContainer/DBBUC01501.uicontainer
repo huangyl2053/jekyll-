@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC01501",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "仮算定異動通知書一括発行",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0150001",
+     "toLayoutTitle": "仮算定異動賦課",
+     "toState": "通知書一括発行"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0150001",
+     "layoutTitle": "仮算定異動賦課",
+     "eventName": "終了する",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
