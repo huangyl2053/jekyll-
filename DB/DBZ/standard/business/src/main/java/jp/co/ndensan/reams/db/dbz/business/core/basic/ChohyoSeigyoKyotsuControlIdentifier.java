@@ -30,4 +30,22 @@ public class ChohyoSeigyoKyotsuControlIdentifier implements Serializable {
         this.サブ業務コード = サブ業務コード;
         this.帳票分類ID = 帳票分類ID;
     }
+
+    /**
+     * getサブ業務コード
+     *
+     * @return サブ業務コード
+     */
+    public SubGyomuCode getサブ業務コード() {
+        return サブ業務コード;
+    }
+
+    /**
+     * get帳票分類ID
+     *
+     * @return 帳票分類ID
+     */
+    public ReportId get帳票分類ID() {
+        return 帳票分類ID;
+    }
 }

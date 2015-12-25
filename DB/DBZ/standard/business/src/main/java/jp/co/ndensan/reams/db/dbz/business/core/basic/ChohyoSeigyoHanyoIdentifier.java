@@ -35,4 +35,31 @@ public class ChohyoSeigyoHanyoIdentifier implements Serializable {
         this.帳票分類ID = 帳票分類ID;
         this.項目名 = 項目名;
     }
+
+    /**
+     * getサブ業務コード
+     *
+     * @return サブ業務コード
+     */
+    public SubGyomuCode getサブ業務コード() {
+        return サブ業務コード;
+    }
+
+    /**
+     * get帳票分類ID
+     *
+     * @return 帳票分類ID
+     */
+    public ReportId get帳票分類ID() {
+        return 帳票分類ID;
+    }
+
+    /**
+     * get項目名
+     *
+     * @return 項目名
+     */
+    public RString get項目名() {
+        return 項目名;
+    }
 }

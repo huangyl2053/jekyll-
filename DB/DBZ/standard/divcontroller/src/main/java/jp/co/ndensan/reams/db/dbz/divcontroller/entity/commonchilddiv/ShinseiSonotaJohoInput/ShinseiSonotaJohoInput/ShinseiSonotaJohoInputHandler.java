@@ -61,21 +61,21 @@ public class ShinseiSonotaJohoInputHandler {
 //        }
     }
 
-    private void setChokkinJukyushaJoho(Optional<JukyushaDaicho> 直近受給者台帳) {
-        div.getDdlIdoJiyu().setSelectedKey(直近受給者台帳.get().getデータ区分().value());
-
-        if (div.getMode_ShoriType().equals(ShinseiSonotaJohoInputDiv.ShoriType.TokushuSakujoMode)) {
-            div.getDdlSakujoJiyu().setSelectedKey(直近受給者台帳.get().get削除事由コード().value());
-        }
-
-        div.getTxtRiyu().setValue(直近受給者台帳.get().get異動理由());
-        div.getTxtSoshitsuDay().setValue(直近受給者台帳.get().get喪失年月日());
-        div.getTxtTorisageDay().setValue(直近受給者台帳.get().get認定取消通知書発行年月日());
-        div.getTxtToshoNinteiKikanFrom().setValue(直近受給者台帳.get().get当初認定有効開始年月日());
-        div.getTxtToshoNinteiKikanTo().setValue(直近受給者台帳.get().get当初認定有効終了年月日());
-        div.getTxtJukyuShikakuHakkoDay1().setValue(直近受給者台帳.get().get受給資格証明書発行年月日１());
-        div.getTxtJukyuShikakuHakkoDay2().setValue(直近受給者台帳.get().get受給資格証明書発行年月日２());
-    }
+//    private void setChokkinJukyushaJoho(Optional<JukyushaDaicho> 直近受給者台帳) {
+//        div.getDdlIdoJiyu().setSelectedKey(直近受給者台帳.get().getデータ区分().value());
+//
+//        if (div.getMode_ShoriType().equals(ShinseiSonotaJohoInputDiv.ShoriType.TokushuSakujoMode)) {
+//            div.getDdlSakujoJiyu().setSelectedKey(直近受給者台帳.get().get削除事由コード().value());
+//        }
+//
+//        div.getTxtRiyu().setValue(直近受給者台帳.get().get異動理由());
+//        div.getTxtSoshitsuDay().setValue(直近受給者台帳.get().get喪失年月日());
+//        div.getTxtTorisageDay().setValue(直近受給者台帳.get().get認定取消通知書発行年月日());
+//        div.getTxtToshoNinteiKikanFrom().setValue(直近受給者台帳.get().get当初認定有効開始年月日());
+//        div.getTxtToshoNinteiKikanTo().setValue(直近受給者台帳.get().get当初認定有効終了年月日());
+//        div.getTxtJukyuShikakuHakkoDay1().setValue(直近受給者台帳.get().get受給資格証明書発行年月日１());
+//        div.getTxtJukyuShikakuHakkoDay2().setValue(直近受給者台帳.get().get受給資格証明書発行年月日２());
+//    }
 
     /**
      * 入力値をクリアします。

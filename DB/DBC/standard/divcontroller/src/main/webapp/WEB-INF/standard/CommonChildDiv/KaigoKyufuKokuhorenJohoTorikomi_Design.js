@@ -71,6 +71,10 @@ var DBC;
             Controls.prototype.ShutsuRyokujun = function () {
                 return new UZA.Panel(this.convFiledName("ShutsuRyokujun"));
             };
+
+            Controls.prototype.ccdChohyoShutsuryokujun = function () {
+                return new URZ.ChohyoShutsuryokujun.ModeController(this.convFiledName("ccdChohyoShutsuryokujun"));
+            };
             return Controls;
         })();
         KaigoKyufuKokuhorenJohoTorikomi.Controls = Controls;

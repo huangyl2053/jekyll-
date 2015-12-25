@@ -29,7 +29,11 @@ public enum ShisetsuNyutaishoValidationMessageMapping {
     /**
      *
      */
-    入所施設が未入力(ShisetsuNyutaishoValidationMessage.入所施設が未入力, new RString("txtShisetsuCode")),
+    入所施設コードが未入力(ShisetsuNyutaishoValidationMessage.入所施設コードが未入力, new RString("txtShisetsuCode")),
+    /**
+     *
+     */
+    入所施設名称が未入力(ShisetsuNyutaishoValidationMessage.入所施設名称が未入力, new RString("txtShisetsuCode")),
     /**
      *
      */
@@ -58,15 +62,29 @@ public enum ShisetsuNyutaishoValidationMessageMapping {
         this.message = message;
         this.fieldName = fieldName;
     }
-
+    /**
+     * バリデーションメッセージを取得します
+     *
+     * @return IValidationMessage
+     */
     public IValidationMessage getValidationMessage() {
         return (IValidationMessage) message;
     }
 
+    /**
+     * メッセージを取得します
+     *
+     * @return Message
+     */
     public Message getMessage() {
         return message.getMessage();
     }
 
+    /**
+     * フィールド名称を取得します
+     *
+     * @return fieldName
+     */
     public RString getFieldName() {
         return fieldName;
     }

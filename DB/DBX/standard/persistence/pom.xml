@@ -25,10 +25,6 @@
         </dependency>
         <!-- 公開系 -->
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzPersistence</artifactId>
-        </dependency>
-        <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxEntity</artifactId>
         </dependency>

@@ -4,8 +4,8 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4030011;
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoChohyoShutsuryokujun.KaigoChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.printcontentssetting.PrintContentsSettingDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -24,7 +24,7 @@ public class ShogaishaKojoNinteishoOutputDiv extends Panel {
     @JsonProperty("PrintContentsSetting")
     private PrintContentsSettingDiv PrintContentsSetting;
     @JsonProperty("OutputOrder")
-    private KaigoChohyoShutsuryokujunDiv OutputOrder;
+    private ChohyoShutsuryokujunDiv OutputOrder;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -43,12 +43,12 @@ public class ShogaishaKojoNinteishoOutputDiv extends Panel {
     }
 
     @JsonProperty("OutputOrder")
-    public KaigoChohyoShutsuryokujunDiv getOutputOrder() {
+    public ChohyoShutsuryokujunDiv getOutputOrder() {
         return OutputOrder;
     }
 
     @JsonProperty("OutputOrder")
-    public void setOutputOrder(KaigoChohyoShutsuryokujunDiv OutputOrder) {
+    public void setOutputOrder(ChohyoShutsuryokujunDiv OutputOrder) {
         this.OutputOrder = OutputOrder;
     }
 

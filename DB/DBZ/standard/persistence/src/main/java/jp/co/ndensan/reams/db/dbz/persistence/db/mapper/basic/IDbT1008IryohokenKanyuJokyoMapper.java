@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEnti
  */
 public interface IDbT1008IryohokenKanyuJokyoMapper {
 
-    /* * {@linkDbT1008IryohokenKanyuJokyoEntity}を取得します。
+    /** {@link DbT1008IryohokenKanyuJokyoEntity}を取得します。
      *
-     * @return {@linkDbT1008IryohokenKanyuJokyoEntity}
+     * @return {@link DbT1008IryohokenKanyuJokyoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT1008IryohokenKanyuJokyoEntity getEntity();

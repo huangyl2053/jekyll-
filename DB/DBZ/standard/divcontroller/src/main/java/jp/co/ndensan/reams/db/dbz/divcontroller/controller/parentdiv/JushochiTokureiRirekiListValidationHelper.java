@@ -31,6 +31,17 @@ public final class JushochiTokureiRirekiListValidationHelper {
     private JushochiTokureiRirekiListValidationHelper() {
     }
 
+    /**
+     * 住所地特例のバリデーションを行います
+     *
+     * @param target target
+     * @param daichoList daichoList
+     * @param 適用日 適用日
+     * @param 解除日 解除日
+     * @param 住所地特例grid 住所地特例grid
+     * @param status status
+     * @return ValidationMessageControlPairs
+     */
     public static ValidationMessageControlPairs validate住所地特例(HihokenshaDaicho target, IItemList<HihokenshaDaicho> daichoList,
             TextBoxFlexibleDate 適用日, TextBoxFlexibleDate 解除日, DataGrid<dgJutoku_Row> 住所地特例grid, JushochiTokureiExecutionStatus status) {
         ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionary(

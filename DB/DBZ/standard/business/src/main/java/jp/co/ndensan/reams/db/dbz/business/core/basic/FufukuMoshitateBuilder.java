@@ -426,6 +426,12 @@ public class FufukuMoshitateBuilder {
         return new FufukuMoshitate(entity, id);
     }
 
+    /**
+     * setBemmeiNaiyo
+     *
+     * @param createBemmeiNaiyo BemmeiNaiyo
+     * @return FufukuMoshitateBuilder
+     */
     public FufukuMoshitateBuilder setBemmeiNaiyo(BemmeiNaiyo createBemmeiNaiyo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

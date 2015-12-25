@@ -30,4 +30,23 @@ public class ChohyoBunruiKanriIdentifier implements Serializable {
         this.サブ業務コード = サブ業務コード;
         this.帳票ID = 帳票ID;
     }
+
+    /**
+     * getサブ業務コード
+     *
+     * @return サブ業務コード
+     */
+    public SubGyomuCode getサブ業務コード() {
+        return サブ業務コード;
+    }
+
+    /**
+     * get帳票ID
+     *
+     * @return 帳票ID
+     */
+    public ReportId get帳票ID() {
+        return 帳票ID;
+    }
+
 }

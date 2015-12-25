@@ -40,4 +40,40 @@ public class FufukuMoshitateIdentifier implements Serializable {
         this.原処分被保険者番号 = 原処分被保険者番号;
         this.審査請求届出日 = 審査請求届出日;
     }
+
+    /**
+     * get証記載保険者番号
+     *
+     * @return 証記載保険者番号
+     */
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
+        return 証記載保険者番号;
+    }
+
+    /**
+     * get識別コード
+     *
+     * @return 識別コード
+     */
+    public ShikibetsuCode get識別コード() {
+        return 識別コード;
+    }
+
+    /**
+     * get原処分被保険者番号
+     *
+     * @return 原処分被保険者番号
+     */
+    public HihokenshaNo get原処分被保険者番号() {
+        return 原処分被保険者番号;
+    }
+
+    /**
+     * get審査請求届出日
+     *
+     * @return 審査請求届出日
+     */
+    public FlexibleDate get審査請求届出日() {
+        return 審査請求届出日;
+    }
 }

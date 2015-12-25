@@ -145,6 +145,12 @@ public class BemmeiNaiyoBuilder {
         return new BemmeiNaiyo(entity, id);
     }
 
+    /**
+     * setBemmeishaJoho
+     *
+     * @param createBemmeishaJoho BemmeishaJoho
+     * @return BemmeiNaiyoBuilder
+     */
     public BemmeiNaiyoBuilder setBemmeishaJoho(BemmeishaJoho createBemmeishaJoho) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

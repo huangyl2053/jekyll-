@@ -6,12 +6,12 @@ package jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.GappeiJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.GappeiJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7055GappeiJohoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.gappeijoho.IGappeiJohoMapper;
+import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.GappeiJoho;
+import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.gappeijoho.GappeiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.GappeiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7055GappeiJohoDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.gappeijoho.IGappeiJohoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeishichoson.GappeiShichosonManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
