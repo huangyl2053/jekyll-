@@ -91,7 +91,7 @@ public final class DbT2001ChoshuHohoEntityGenerator {
         entity.setYokunendoKariHosokuM(DEFAULT_翌年度仮徴収捕捉月);
         entity.setIraiSohuzumiFlag(DEFAULT_依頼情報送付済みフラグ);
         entity.setTsuikaIraiSohuzumiFlag(DEFAULT_追加依頼情報送付済みフラグ);
-        entity.setTokuchoTeishiTimestamp(DEFAULT_特別徴収停止日時);
+        entity.setTokuchoTeishiNichiji(DEFAULT_特別徴収停止日時);
         entity.setTokuchoTeishiJiyuCode(DEFAULT_特別徴収停止事由コード);
         return entity;
     }
