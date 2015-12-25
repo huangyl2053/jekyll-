@@ -5,8 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbu.service.core.basic.kaigojuminhyo;
 
-import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyo.ChushutsuKikanJohoData;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyo.KaigoJuminhyoBatchParameter;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -41,30 +44,30 @@ public class KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder {
      * @param kaishiTimestamp 今回開始時分秒
      * @return KaigoJuminhyoBatchParameter 介護住民票個別事項連携情報作成【他社住基】のバッチのパラメータ
      */
-//    @Transaction
-//    public KaigoJuminhyoBatchParameter getKaigoJuminhyoKobetsuJikouBatchParameter(RString kaishiYMD, RString kaishiTimestamp) {
-//        KaigoJuminhyoBatchParameter kaigoJuminhyoBatchParameter = new KaigoJuminhyoBatchParameter();
-//        if (kaishiYMD != null) {
-//            StringBuilder strTaishoKaishiYMDHMS = new StringBuilder();
-//            strTaishoKaishiYMDHMS.append(kaishiYMD);
-//            strTaishoKaishiYMDHMS.append(kaishiTimestamp);
-//            YMDHMS taishoKaishiYMDHMS = new YMDHMS(strTaishoKaishiYMDHMS.toString());
-//
-//            kaigoJuminhyoBatchParameter.setTaishoKaishiYMDHMS(taishoKaishiYMDHMS.getRDateTime());
-//            kaigoJuminhyoBatchParameter.setTaishoShuryoYMDHMS(RDate.getNowDateTime());
-//        }
-//        return kaigoJuminhyoBatchParameter;
-//    }
+    @Transaction
+    public KaigoJuminhyoBatchParameter getKaigoJuminhyoKobetsuJikouBatchParameter(RString kaishiYMD, RString kaishiTimestamp) {
+        KaigoJuminhyoBatchParameter kaigoJuminhyoBatchParameter = new KaigoJuminhyoBatchParameter();
+        if (kaishiYMD != null) {
+            StringBuilder strTaishoKaishiYMDHMS = new StringBuilder();
+            strTaishoKaishiYMDHMS.append(kaishiYMD);
+            strTaishoKaishiYMDHMS.append(kaishiTimestamp);
+            YMDHMS taishoKaishiYMDHMS = new YMDHMS(strTaishoKaishiYMDHMS.toString());
+
+            kaigoJuminhyoBatchParameter.setTaishoKaishiYMDHMS(taishoKaishiYMDHMS.getRDateTime());
+            kaigoJuminhyoBatchParameter.setTaishoShuryoYMDHMS(RDate.getNowDateTime());
+        }
+        return kaigoJuminhyoBatchParameter;
+    }
+
     /**
      * 処理日付管理マスタテーブルから、抽出期間情報を取得です。
      *
      * @return ChushutsuKikanJohoEntity
      */
-    @Transaction
-    public ChushutsuKikanJohoData getChushutsukikanJoho() {
-        //List<DbT7022ShoriDateKanriEntity> shoriDateKanriEntity = dbT7022ShoriDateKanriDac.selectTaishoYMD();
-        ChushutsuKikanJohoData chushutsuKikanJohoData = new ChushutsuKikanJohoData();
-
+   // @Transaction
+    // public ChushutsuKikanJohoData getChushutsukikanJoho() {
+    //List<DbT7022ShoriDateKanriEntity> shoriDateKanriEntity = dbT7022ShoriDateKanriDac.selectTaishoYMD();
+    //    ChushutsuKikanJohoData chushutsuKikanJohoData = new ChushutsuKikanJohoData();
 //        YMDHMS TaishoShuryoTimestamp = new YMDHMS("19000101010101");
 //        if (shoriDateKanriEntity != null) {
 //            for (DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanriEntity : shoriDateKanriEntity) {
@@ -79,6 +82,6 @@ public class KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder {
 //                }
 //            }
 //        }
-        return chushutsuKikanJohoData;
-    }
+    //      return chushutsuKikanJohoData;
+    //  }
 }
