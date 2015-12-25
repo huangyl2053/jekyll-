@@ -40,17 +40,17 @@ class HokenshaListDivHandler {
      */
     void loadAndHoldHokenshaList() {
         List<ShichosonCodeNameResult> shichosonList = getShichosonCodeNameList();
-        Collections.sort(shichosonList, new Comparator<ShichosonCodeNameResult>() {
-            @Override
-            public int compare(ShichosonCodeNameResult o1, ShichosonCodeNameResult o2) {
-                return Objects.compare(o1.get市町村コード(), o2.get市町村コード(), Comparators.<LasdecCode>naturalOrder());
-            }
-        });
+//        Collections.sort(shichosonList, new Comparator<ShichosonCodeNameResult>() {
+//            @Override
+//            public int compare(ShichosonCodeNameResult o1, ShichosonCodeNameResult o2) {
+//                return Objects.compare(o1.get市町村コード(), o2.get市町村コード(), Comparators.<LasdecCode>naturalOrder());
+//            }
+//        });
 
         List<KeyValueDataSource> list = new ArrayList<>();
-        if (1 < shichosonList.size()) {
-            list.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
-        }
+//        if (1 < shichosonList.size()) {
+        list.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+//        }
 
         Map<RString, ShichosonCodeNameResult> map = new HashMap<>();
         for (ShichosonCodeNameResult s : shichosonList) {
@@ -68,11 +68,7 @@ class HokenshaListDivHandler {
         return new ArrayList<ShichosonCodeNameResult>() {
             {
                 add(new ShichosonCodeNameResult(
-                        //市町村コード、市町村名、証記載保険者番号、統計対象区分（任意）の順で指定してください。
-                        new LasdecCode("123456"), new RString("電算市"), new ShoKisaiHokenshaNo("123455"), TokeiTaishoKubun.構成市町村分)
-                );
-                add(new ShichosonCodeNameResult(
-                        new LasdecCode("123456"), new RString("電算市"), new ShoKisaiHokenshaNo("123455"), TokeiTaishoKubun.構成市町村分)
+                        new LasdecCode("010102"), new RString("電算市"), new ShoKisaiHokenshaNo("010103"), TokeiTaishoKubun.構成市町村分)
                 );
             }
         };
