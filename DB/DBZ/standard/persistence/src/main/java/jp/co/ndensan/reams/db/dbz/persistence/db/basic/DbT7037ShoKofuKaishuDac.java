@@ -250,7 +250,7 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
     /**
      * DbT7037ShoKofuKaishuEntityを更新します。
      * 
-     * @param entity　証交付回収テーブルのエンティティクラスです
+     * @param entity 証交付回収テーブルのエンティティクラスです
      * @return 更新件数
      */
     public int updateShokaishuKanriRnlisakuju(DbT7037ShoKofuKaishuEntity entity) {
