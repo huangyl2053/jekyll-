@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.gappeijohokanri.GappeiJ
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonlist.ShichosonCodeNameResult;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.KoseiShichosonJohoEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyukeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
@@ -69,11 +69,11 @@ public class ShichosonList {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("市町村セキュリティ情報"));
         }
 
-        DonyuKeitaiCode 導入形態 = shichosonJohoEntity.get導入形態();
+        DonyukeitaiCode 導入形態 = shichosonJohoEntity.get導入形態();
         KoseiShichosonJohoEntity 市町村情報 = shichosonJohoEntity.get市町村情報();
         GappeiJohoKubun 合併情報区分 = new GappeiJohoKanriConfig().get合併情報区分();
 
-        if (導入形態 == DonyuKeitaiCode.事務広域 || 導入形態 == DonyuKeitaiCode.認定広域) {
+        if (導入形態 == DonyukeitaiCode.事務広域 || 導入形態 == DonyukeitaiCode.認定広域) {
             return get市町村情報リストBy導入形態コードは事務広域と認定広域の場合(合併情報区分, 市町村情報);
         } else {
             return get市町村情報リストBy導入形態コード以外の場合(合併情報区分, 市町村情報, 導入形態);
@@ -96,7 +96,7 @@ public class ShichosonList {
     private List<ShichosonCodeNameResult> get市町村情報リストBy導入形態コード以外の場合(
             GappeiJohoKubun 合併情報区分,
             KoseiShichosonJohoEntity 市町村情報,
-            DonyuKeitaiCode 導入形態) {
+            DonyukeitaiCode 導入形態) {
         switch (合併情報区分) {
             case 合併あり:
                 return get市町村情報リストBy導入形態コード以外と合併あり(市町村情報, 導入形態);
@@ -131,7 +131,8 @@ public class ShichosonList {
         }
     }
 
-    private List<ShichosonCodeNameResult> get市町村情報リストBy導入形態コード以外と合併あり(KoseiShichosonJohoEntity 市町村情報, DonyuKeitaiCode 導入形態) {
+    private List<ShichosonCodeNameResult> get市町村情報リストBy導入形態コード以外と合併あり(
+            KoseiShichosonJohoEntity 市町村情報, DonyukeitaiCode 導入形態) {
         List<ShichosonCodeNameResult> 出力市町村情報リスト = new ArrayList<>();
         LasdecCode 市町村コード;
         RString 市町村名称;

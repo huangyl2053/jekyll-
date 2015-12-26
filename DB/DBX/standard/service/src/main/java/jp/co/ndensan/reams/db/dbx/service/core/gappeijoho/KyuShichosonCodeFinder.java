@@ -2,7 +2,7 @@ package jp.co.ndensan.reams.db.dbx.service.core.gappeijoho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.gappeijohokanri.GappeiJohoKanriConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyukeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7055GappeiJohoEntity;
@@ -58,13 +58,16 @@ public class KyuShichosonCodeFinder {
      * @param 導入形態 導入形態
      * @return KyuShichosonCodeJohoRelateEntityクラス
      */
-    public KyuShichosonCodeJohoRelateEntity getKyuShichosonCodeJoho(LasdecCode 市町村コード, DonyuKeitaiCode 導入形態) {
+    public KyuShichosonCodeJohoRelateEntity getKyuShichosonCodeJoho(LasdecCode 市町村コード, DonyukeitaiCode 導入形態) {
         KyuShichosonCodeJohoRelateEntity entity = new KyuShichosonCodeJohoRelateEntity();
 
-        if (導入形態.is単一()) {
+        if (DonyukeitaiCode.事務単一.equals(導入形態)
+                || DonyukeitaiCode.事務構成市町村.equals(導入形態)
+                || DonyukeitaiCode.認定単一.equals(導入形態)) {
             entity = get単一市町村KyuShichosonCodeJoho(市町村コード, entity);
 
-        } else if (導入形態.is広域()) {
+        } else if (DonyukeitaiCode.事務広域.equals(導入形態)
+                || DonyukeitaiCode.認定広域.equals(導入形態)) {
             entity = get広域構成市町村KyuShichosonCodeJoho(市町村コード, entity);
         }
         return entity;
@@ -112,8 +115,8 @@ public class KyuShichosonCodeFinder {
     }
 
     private void set単一市町村By合併情報List(List<DbT7055GappeiJohoEntity> dbT7055GappeiJohoEntitys,
-                                    List<DbT7056GappeiShichosonEntity> dbT7056GappeiShichosonEntitys,
-                                    KyuShichosonCodeJohoRelateEntity entity) {
+            List<DbT7056GappeiShichosonEntity> dbT7056GappeiShichosonEntitys,
+            KyuShichosonCodeJohoRelateEntity entity) {
         // 1.1.6.１.1　上記1.1.4で取得された旧市町村コード情報Listを繰り返す。
         for (DbT7055GappeiJohoEntity gappeiJohoEntity : dbT7055GappeiJohoEntitys) {
             for (DbT7056GappeiShichosonEntity gappeiShichosonEntity : dbT7056GappeiShichosonEntitys) {

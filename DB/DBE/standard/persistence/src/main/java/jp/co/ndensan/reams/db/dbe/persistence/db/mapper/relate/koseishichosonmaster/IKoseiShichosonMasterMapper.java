@@ -5,19 +5,19 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.koseishichosonmaster;
 
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.koseishichosonmaster.KoseiShichosonMasterMapperParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
 
 /**
- * 認定調査委託先情報のマッパーインタフェースです。
+ * 構成市町村マスタのマッパーインタフェースです。
  */
 public interface IKoseiShichosonMasterMapper {
 
     /**
-     * 認定調査委託先情報をキー検索で１件取得します。
+     * 構成市町村マスタをキー検索で１件取得します。
      *
-     * @param 認定調査委託先情報検索条件 認定調査委託先情報検索条件
-     * @return KoseiShichosonMasterEntity
+     * @param 構成市町村マスタ検索条件 構成市町村マスタ検索条件
+     * @return KoseiShichosonMasterRelateEntity
      */
-    NinteichosaItakusakiJohoRelateEntity getChosaItakusakiChosainRelateEntity(KoseiShichosonMasterMapperParameter 認定調査委託先情報検索条件);
+    KoseiShichosonMasterRelateEntity getKoseiShichosonMasterRelateEntity(KoseiShichosonMasterMapperParameter 構成市町村マスタ検索条件);
 
 }

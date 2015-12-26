@@ -89,7 +89,7 @@ public class ChosaChikuGroup extends
      * @return 調査地区コード
      */
     public Code get調査地区コード() {
-        return entity.getChosaChikuCode();
+        return entity.getChosachikucode();
     }
 
     /**
@@ -107,7 +107,7 @@ public class ChosaChikuGroup extends
      * @return 調査地区グループ名称
      */
     public RString get調査地区グループ名称() {
-        return entity.getChosaChikuGroupName();
+        return entity.getChosachikugroupname();
     }
 
     /**

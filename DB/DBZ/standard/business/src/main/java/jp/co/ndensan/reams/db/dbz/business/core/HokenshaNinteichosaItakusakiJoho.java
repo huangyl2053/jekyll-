@@ -6,17 +6,17 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4910NinteichosaItakusakiJohoEntity;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 認定調査委託先情報のビジネスクラスです。
@@ -64,10 +64,10 @@ public class HokenshaNinteichosaItakusakiJoho implements Serializable, INinteich
      *
      * @return 認定調査委託先コード
      */
-    @Override
-    public ChosaItakusakiCode get認定調査委託先コード() {
-        return entity.getNinteichosaItakusakiCode();
-    }
+//    @Override
+//    public ChosaItakusakiCode get認定調査委託先コード() {
+//        return entity.getNinteichosaItakusakiCode();
+//    }
 
     /**
      * 事業者番号を返します。
@@ -144,10 +144,10 @@ public class HokenshaNinteichosaItakusakiJoho implements Serializable, INinteich
      *
      * @return 代表者名
      */
-    @Override
-    public AtenaMeisho get代表者名() {
-        return entity.getDaihyoshaName();
-    }
+//    @Override
+//    public AtenaMeisho get代表者名() {
+//        return entity.getDaihyoshaName();
+//    }
 
     /**
      * 調査委託区分を返します。

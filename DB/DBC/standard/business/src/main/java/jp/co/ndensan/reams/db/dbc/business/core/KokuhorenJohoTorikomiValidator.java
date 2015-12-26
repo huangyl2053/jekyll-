@@ -5,10 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core;
 
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
 import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 
 /**
@@ -32,10 +35,30 @@ public class KokuhorenJohoTorikomiValidator implements IValidatable {
         IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
 
         if (同月過誤分.getSelectedItems().isEmpty() && 通常分.getSelectedItems().isEmpty()) {
-            validationMessages.add(DbzErrorMessages.選択されていない);
+            validationMessages.add(KokuhorenJohoTorikomiValidationMessages.選択されていない);
         }
 
         return validationMessages;
     }
 
+    private enum KokuhorenJohoTorikomiValidationMessages implements IValidationMessage {
+
+        選択されていない(UrErrorMessages.選択されていない.getMessage());
+        private final Message message;
+
+        /**
+         * コンストラクタです。
+         *
+         * @param no 番号
+         * @param message メッセージ
+         */
+        private KokuhorenJohoTorikomiValidationMessages(Message message) {
+            this.message = new ErrorMessage(message.getCode(), message.evaluate());
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+    }
 }

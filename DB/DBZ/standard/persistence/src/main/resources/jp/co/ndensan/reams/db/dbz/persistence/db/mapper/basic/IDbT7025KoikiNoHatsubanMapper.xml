@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7025KoikiNoHatsubanMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7025KoikiNoHatsubanMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7025KoikiNoHatsuban">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7025KoikiNoHatsubanMapper.allColumns_DbT7025KoikiNoHatsuban" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7025KoikiNoHatsubanMapper.allColumns_DbT7025KoikiNoHatsuban" />
      FROM
-         rg."DbT7025KoikiNoHatsuban"
+         rgdb."DbT7025KoikiNoHatsuban"
      WHERE
-         rg."DbT7025KoikiNoHatsuban"."isDeleted" = FALSE
+         rgdb."DbT7025KoikiNoHatsuban"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7025KoikiNoHatsuban">
@@ -32,7 +32,7 @@
 
 
     <!--テーブルDbT7025KoikiNoHatsubanの項目をDbT7025KoikiNoHatsubanEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7025KoikiNoHatsubanEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT7025KoikiNoHatsubanEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7025KoikiNoHatsubanEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7025KoikiNoHatsubanEntity" autoMapping="true">
         <id property="shichosonCode" column="dbT7025KoikiNoHatsuban_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <id property="codeKubun" column="dbT7025KoikiNoHatsuban_codeKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7025KoikiNoHatsuban_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -45,11 +45,10 @@
         <result property="lastUpdateReamsLoginId" column="dbT7025KoikiNoHatsuban_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="no" column="dbT7025KoikiNoHatsuban_no" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT7025KoikiNoHatsubanEntity">
+<select id="getEntity" resultMap="ResultMap_DbT7025KoikiNoHatsubanEntity">
     SELECT
-    <include refid="allColumns_DbT7025KoikiNoHatsuban">
-         FROM
-         rg."DbT7025KoikiNoHatsuban"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT7025KoikiNoHatsuban"/>
+    FROM
+    rgdb."DbT7025KoikiNoHatsuban"
+</select>
 </mapper>

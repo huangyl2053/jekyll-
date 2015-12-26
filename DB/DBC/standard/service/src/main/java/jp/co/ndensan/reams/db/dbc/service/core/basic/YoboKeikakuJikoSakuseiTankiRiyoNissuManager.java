@@ -58,15 +58,15 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManager {
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
-        DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = dac.selectByKey(
-                被保険者番号,
-                対象年月,
-                履歴番号);
-        if (entity == null) {
-            return null;
-        }
-        entity.initializeMd5();
-        return new YoboKeikakuJikoSakuseiTankiRiyoNissu(entity);
+//        DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = dac.selectByKey(
+//                被保険者番号,
+//                対象年月,
+//                履歴番号);
+//        if (entity == null) {
+//            return null;
+//        }
+//        entity.initializeMd5();
+        return new YoboKeikakuJikoSakuseiTankiRiyoNissu(new DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity());
     }
 
     /**
@@ -78,10 +78,10 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManager {
     public List<YoboKeikakuJikoSakuseiTankiRiyoNissu> get予防給付計画自己作成短期利用日数一覧() {
         List<YoboKeikakuJikoSakuseiTankiRiyoNissu> businessList = new ArrayList<>();
 
-        for (DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity : dac.selectAll()) {
-            entity.initializeMd5();
-            businessList.add(new YoboKeikakuJikoSakuseiTankiRiyoNissu(entity));
-        }
+//        for (DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity : dac.selectAll()) {
+//            entity.initializeMd5();
+//            businessList.add(new YoboKeikakuJikoSakuseiTankiRiyoNissu(entity));
+//        }
 
         return businessList;
     }
@@ -98,6 +98,7 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManager {
         if (!予防給付計画自己作成短期利用日数.hasChanged()) {
             return false;
         }
-        return 1 == dac.save(予防給付計画自己作成短期利用日数.toEntity());
+//        return 1 == dac.save(予防給付計画自己作成短期利用日数.toEntity());
+         return false;
     }
 }

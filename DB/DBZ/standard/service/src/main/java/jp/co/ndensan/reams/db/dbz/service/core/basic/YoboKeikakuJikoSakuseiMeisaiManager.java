@@ -8,11 +8,11 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.YoboKeikakuJikoSakuseiMeisai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.YoboKeikakuJikoSakuseiMeisai;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3011YoboKeikakuJikoSakuseiMeisaiDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -74,19 +74,19 @@ public class YoboKeikakuJikoSakuseiMeisaiManager {
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         requireNonNull(サービス項目コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス項目コード"));
 
-        DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity = dac.selectByKey(
-                被保険者番号,
-                対象年月,
-                履歴番号,
-                居宅サービス区分,
-                サービス提供事業者番号,
-                サービス種類コード,
-                サービス項目コード);
-        if (entity == null) {
-            return null;
-        }
-        entity.initializeMd5();
-        return new YoboKeikakuJikoSakuseiMeisai(entity);
+//        DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity = dac.selectByKey(
+//                被保険者番号,
+//                対象年月,
+//                履歴番号,
+//                居宅サービス区分,
+//                サービス提供事業者番号,
+//                サービス種類コード,
+//                サービス項目コード);
+//        if (entity == null) {
+//            return null;
+//        }
+//        entity.initializeMd5();
+        return new YoboKeikakuJikoSakuseiMeisai(new DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity());
     }
 
     /**
@@ -98,10 +98,10 @@ public class YoboKeikakuJikoSakuseiMeisaiManager {
     public List<YoboKeikakuJikoSakuseiMeisai> get予防給付計画自己作成明細一覧() {
         List<YoboKeikakuJikoSakuseiMeisai> businessList = new ArrayList<>();
 
-        for (DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity : dac.selectAll()) {
-            entity.initializeMd5();
-            businessList.add(new YoboKeikakuJikoSakuseiMeisai(entity));
-        }
+//        for (DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity : dac.selectAll()) {
+//            entity.initializeMd5();
+//            businessList.add(new YoboKeikakuJikoSakuseiMeisai(entity));
+//        }
 
         return businessList;
     }
@@ -118,6 +118,7 @@ public class YoboKeikakuJikoSakuseiMeisaiManager {
         if (!予防給付計画自己作成明細.hasChanged()) {
             return false;
         }
-        return 1 == dac.save(予防給付計画自己作成明細.toEntity());
+//        return 1 == dac.save(予防給付計画自己作成明細.toEntity());
+         return false;
     }
 }

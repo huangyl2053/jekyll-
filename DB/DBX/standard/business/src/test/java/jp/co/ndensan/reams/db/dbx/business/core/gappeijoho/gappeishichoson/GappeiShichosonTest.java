@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson;
+package jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson;
 
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7056GappeiShichosonEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
  * {@link GappeiShichoson}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-public class GappeiShichosonTest extends DbxTestBase {
+public class GappeiShichosonTest extends DbzTestBase {
 
     private static DbT7056GappeiShichosonEntity GappeiShichosonEntity;
 
@@ -41,7 +41,7 @@ public class GappeiShichosonTest extends DbxTestBase {
         旧市町村コード = DbT7056GappeiShichosonEntityGenerator.DEFAULT_旧市町村コード;
     }
 
-    public static class 主キーコンストラクタテスト extends DbxTestBase {
+    public static class 主キーコンストラクタテスト extends DbzTestBase {
 
         private static GappeiShichoson sut;
 
@@ -85,7 +85,7 @@ public class GappeiShichosonTest extends DbxTestBase {
         }
     }
 
-    public static class Entityコンストラクタテスト extends DbxTestBase {
+    public static class Entityコンストラクタテスト extends DbzTestBase {
 
         private static GappeiShichoson sut;
 
@@ -113,7 +113,7 @@ public class GappeiShichosonTest extends DbxTestBase {
         }
     }
 
-    public static class getterテスト extends DbxTestBase {
+    public static class getterテスト extends DbzTestBase {
 
         private static GappeiShichoson sut;
 
@@ -197,7 +197,7 @@ public class GappeiShichosonTest extends DbxTestBase {
         }
     }
 
-    public static class toEntityテスト extends DbxTestBase {
+    public static class toEntityテスト extends DbzTestBase {
 
         private static GappeiShichoson sut;
 
@@ -216,7 +216,7 @@ public class GappeiShichosonTest extends DbxTestBase {
         }
     }
 
-    public static class SerializationProxyテスト extends DbxTestBase {
+    public static class SerializationProxyテスト extends DbzTestBase {
 
         private static GappeiShichoson sut;
 
@@ -235,7 +235,7 @@ public class GappeiShichosonTest extends DbxTestBase {
         }
     }
 
-    public static class deletedテスト extends DbxTestBase {
+    public static class deletedテスト extends DbzTestBase {
 
         private static GappeiShichoson sut;
         private static GappeiShichoson result;

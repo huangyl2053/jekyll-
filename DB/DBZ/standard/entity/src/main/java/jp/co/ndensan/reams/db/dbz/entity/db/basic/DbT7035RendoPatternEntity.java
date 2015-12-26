@@ -1,23 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
- * DbT7035RendoPatternの項目定義クラスです
- *
+ * 連動パターンテーブルのエンティティクラスです。
  */
 public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPatternEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7035RendoPattern");
 
@@ -48,10 +48,11 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
     private RString gaijiHenkanKubun;
     private RString zenkenRendoKubun;
     private RString rendoKubun;
+    private RString renkeiFileName;
 
     /**
-     * getInsertDantaiCd
-     *
+     * insertDantaiCdのgetメソッドです。
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -59,8 +60,8 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
     }
 
     /**
-     * setInsertDantaiCd
-     *
+     * insertDantaiCdのsetメソッドです。
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -68,8 +69,8 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
     }
 
     /**
-     * getIsDeleted
-     *
+     * isDeletedのgetメソッドです。
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -77,17 +78,18 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
     }
 
     /**
-     * setIsDeleted
-     *
+     * isDeletedのsetメソッドです。
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
-     * setLastUpdateReamsLoginId
-     *
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -95,262 +97,300 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
     }
 
     /**
-     * getMotoShichosonCode
-     *
-     * @return motoShichosonCode
+     * 送信元市町村コードのgetメソッドです。
+     * 
+     * @return 送信元市町村コード
      */
     public LasdecCode getMotoShichosonCode() {
         return motoShichosonCode;
     }
 
     /**
-     * setMotoShichosonCode
-     *
-     * @param motoShichosonCode motoShichosonCode
+     * 送信元市町村コードのsetメソッドです。
+     * 
+     * @param motoShichosonCode 送信元市町村コード
      */
-    public void setMotoShichosonCode(LasdecCode motoShichosonCode) {
+    public void setMotoShichosonCode(@Nonnull LasdecCode motoShichosonCode) {
         this.motoShichosonCode = motoShichosonCode;
     }
 
     /**
-     * getSakiShichosonCode
-     *
-     * @return sakiShichosonCode
+     * 送信先市町村コードのgetメソッドです。
+     * 
+     * @return 送信先市町村コード
      */
     public LasdecCode getSakiShichosonCode() {
         return sakiShichosonCode;
     }
 
     /**
-     * setSakiShichosonCode
-     *
-     * @param sakiShichosonCode sakiShichosonCode
+     * 送信先市町村コードのsetメソッドです。
+     * 
+     * @param sakiShichosonCode 送信先市町村コード
      */
-    public void setSakiShichosonCode(LasdecCode sakiShichosonCode) {
+    public void setSakiShichosonCode(@Nonnull LasdecCode sakiShichosonCode) {
         this.sakiShichosonCode = sakiShichosonCode;
     }
 
     /**
-     * getShubetsu
-     *
-     * @return shubetsu
+     * 種別のgetメソッドです。
+     * 
+     * @return 種別
      */
     public RString getShubetsu() {
         return shubetsu;
     }
 
     /**
-     * setShubetsu
-     *
-     * @param shubetsu shubetsu
+     * 種別のsetメソッドです。
+     * 
+     * @param shubetsu 種別
      */
-    public void setShubetsu(RString shubetsu) {
+    public void setShubetsu(@Nonnull RString shubetsu) {
         this.shubetsu = shubetsu;
     }
 
     /**
-     * getYukoKaishiYMD
-     *
-     * @return yukoKaishiYMD
+     * 有効開始年月日のgetメソッドです。
+     * 
+     * @return 有効開始年月日
      */
     public FlexibleDate getYukoKaishiYMD() {
         return yukoKaishiYMD;
     }
 
     /**
-     * setYukoKaishiYMD
-     *
-     * @param yukoKaishiYMD yukoKaishiYMD
+     * 有効開始年月日のsetメソッドです。
+     * 
+     * @param yukoKaishiYMD 有効開始年月日
      */
-    public void setYukoKaishiYMD(FlexibleDate yukoKaishiYMD) {
+    public void setYukoKaishiYMD(@Nonnull FlexibleDate yukoKaishiYMD) {
         this.yukoKaishiYMD = yukoKaishiYMD;
     }
 
     /**
-     * getYukoShuryoYMD
-     *
-     * @return yukoShuryoYMD
+     * 有効終了年月日のgetメソッドです。
+     * 
+     * @return 有効終了年月日
      */
     public FlexibleDate getYukoShuryoYMD() {
         return yukoShuryoYMD;
     }
 
     /**
-     * setYukoShuryoYMD
-     *
-     * @param yukoShuryoYMD yukoShuryoYMD
+     * 有効終了年月日のsetメソッドです。
+     * 
+     * @param yukoShuryoYMD 有効終了年月日
      */
-    public void setYukoShuryoYMD(FlexibleDate yukoShuryoYMD) {
+    public void setYukoShuryoYMD(@Nonnull FlexibleDate yukoShuryoYMD) {
         this.yukoShuryoYMD = yukoShuryoYMD;
     }
 
     /**
-     * getRendoKeitaiCode
-     *
-     * @return rendoKeitaiCode
+     * 連動形態コードのgetメソッドです。
+     * 
+     * @return 連動形態コード
      */
     public RString getRendoKeitaiCode() {
         return rendoKeitaiCode;
     }
 
     /**
-     * setRendoKeitaiCode
-     *
-     * @param rendoKeitaiCode rendoKeitaiCode
+     * 連動形態コードのsetメソッドです。
+     * 
+     * @param rendoKeitaiCode 連動形態コード
      */
-    public void setRendoKeitaiCode(RString rendoKeitaiCode) {
+    public void setRendoKeitaiCode(@Nonnull RString rendoKeitaiCode) {
         this.rendoKeitaiCode = rendoKeitaiCode;
     }
 
     /**
-     * getMotoFormatVersion
-     *
-     * @return motoFormatVersion
+     * 送信元フォーマットバージョンのgetメソッドです。
+     * 
+     * @return 送信元フォーマットバージョン
      */
+    @CheckForNull
     public RString getMotoFormatVersion() {
         return motoFormatVersion;
     }
 
     /**
-     * setMotoFormatVersion
-     *
-     * @param motoFormatVersion motoFormatVersion
+     * 送信元フォーマットバージョンのsetメソッドです。
+     * 
+     * @param motoFormatVersion 送信元フォーマットバージョン
      */
     public void setMotoFormatVersion(RString motoFormatVersion) {
         this.motoFormatVersion = motoFormatVersion;
     }
 
     /**
-     * getMotoEncodeKeitai
-     *
-     * @return motoEncodeKeitai
+     * 送信元エンコーディングのgetメソッドです。
+     * 
+     * @return 送信元エンコーディング
      */
+    @CheckForNull
     public RString getMotoEncodeKeitai() {
         return motoEncodeKeitai;
     }
 
     /**
-     * setMotoEncodeKeitai
-     *
-     * @param motoEncodeKeitai motoEncodeKeitai
+     * 送信元エンコーディングのsetメソッドです。
+     * 
+     * @param motoEncodeKeitai 送信元エンコーディング
      */
     public void setMotoEncodeKeitai(RString motoEncodeKeitai) {
         this.motoEncodeKeitai = motoEncodeKeitai;
     }
 
     /**
-     * getSakiFormatVersion
-     *
-     * @return sakiFormatVersion
+     * 送信先フォーマットバージョンのgetメソッドです。
+     * 
+     * @return 送信先フォーマットバージョン
      */
+    @CheckForNull
     public RString getSakiFormatVersion() {
         return sakiFormatVersion;
     }
 
     /**
-     * setSakiFormatVersion
-     *
-     * @param sakiFormatVersion sakiFormatVersion
+     * 送信先フォーマットバージョンのsetメソッドです。
+     * 
+     * @param sakiFormatVersion 送信先フォーマットバージョン
      */
     public void setSakiFormatVersion(RString sakiFormatVersion) {
         this.sakiFormatVersion = sakiFormatVersion;
     }
 
     /**
-     * getSakiEncodeKeitai
-     *
-     * @return sakiEncodeKeitai
+     * 送信先エンコーディングのgetメソッドです。
+     * 
+     * @return 送信先エンコーディング
      */
+    @CheckForNull
     public RString getSakiEncodeKeitai() {
         return sakiEncodeKeitai;
     }
 
     /**
-     * setSakiEncodeKeitai
-     *
-     * @param sakiEncodeKeitai sakiEncodeKeitai
+     * 送信先エンコーディングのsetメソッドです。
+     * 
+     * @param sakiEncodeKeitai 送信先エンコーディング
      */
     public void setSakiEncodeKeitai(RString sakiEncodeKeitai) {
         this.sakiEncodeKeitai = sakiEncodeKeitai;
     }
 
     /**
-     * getCodeHenkanKubun
-     *
-     * @return codeHenkanKubun
+     * コード変換区分のgetメソッドです。
+     * 
+     * @return コード変換区分
      */
+    @CheckForNull
     public RString getCodeHenkanKubun() {
         return codeHenkanKubun;
     }
 
     /**
-     * setCodeHenkanKubun
-     *
-     * @param codeHenkanKubun codeHenkanKubun
+     * コード変換区分のsetメソッドです。
+     * 
+     * @param codeHenkanKubun コード変換区分
      */
     public void setCodeHenkanKubun(RString codeHenkanKubun) {
         this.codeHenkanKubun = codeHenkanKubun;
     }
 
     /**
-     * getGaijiHenkanKubun
-     *
-     * @return gaijiHenkanKubun
+     * 外字変換区分のgetメソッドです。
+     * 
+     * @return 外字変換区分
      */
+    @CheckForNull
     public RString getGaijiHenkanKubun() {
         return gaijiHenkanKubun;
     }
 
     /**
-     * setGaijiHenkanKubun
-     *
-     * @param gaijiHenkanKubun gaijiHenkanKubun
+     * 外字変換区分のsetメソッドです。
+     * 
+     * @param gaijiHenkanKubun 外字変換区分
      */
     public void setGaijiHenkanKubun(RString gaijiHenkanKubun) {
         this.gaijiHenkanKubun = gaijiHenkanKubun;
     }
 
     /**
-     * getZenkenRendoKubun
-     *
-     * @return zenkenRendoKubun
+     * 全件連動区分のgetメソッドです。
+     * 
+     * @return 全件連動区分
      */
+    @CheckForNull
     public RString getZenkenRendoKubun() {
         return zenkenRendoKubun;
     }
 
     /**
-     * setZenkenRendoKubun
-     *
-     * @param zenkenRendoKubun zenkenRendoKubun
+     * 全件連動区分のsetメソッドです。
+     * 
+     * @param zenkenRendoKubun 全件連動区分
      */
     public void setZenkenRendoKubun(RString zenkenRendoKubun) {
         this.zenkenRendoKubun = zenkenRendoKubun;
     }
 
     /**
-     * getRendoKubun
-     *
-     * @return rendoKubun
+     * 連携区分のgetメソッドです。
+     * 
+     * @return 連携区分
      */
+    @CheckForNull
     public RString getRendoKubun() {
         return rendoKubun;
     }
 
     /**
-     * setRendoKubun
-     *
-     * @param rendoKubun rendoKubun
+     * 連携区分のsetメソッドです。
+     * 
+     * @param rendoKubun 連携区分
      */
     public void setRendoKubun(RString rendoKubun) {
         this.rendoKubun = rendoKubun;
     }
 
     /**
+     * 連携ファイル名のgetメソッドです。
+     * <br/>
+     * <br/>連携するファイル名称を拡張子付きで定義する。
+     * <br/>編集書式：
+     * <br/> @日時@　・・・ 年月日時分秒（14桁）
+     * <br/> @市町村コード@　・・・　市町村コード（6桁）
+     * 
+     * @return 連携ファイル名
+     */
+    @CheckForNull
+    public RString getRenkeiFileName() {
+        return renkeiFileName;
+    }
+
+    /**
+     * 連携ファイル名のsetメソッドです。
+     * <br/>
+     * <br/>連携するファイル名称を拡張子付きで定義する。
+     * <br/>編集書式：
+     * <br/> @日時@　・・・ 年月日時分秒（14桁）
+     * <br/> @市町村コード@　・・・　市町村コード（6桁）
+     * 
+     * @param renkeiFileName 連携ファイル名
+     */
+    public void setRenkeiFileName(RString renkeiFileName) {
+        this.renkeiFileName = renkeiFileName;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT7035RendoPatternEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT7035RendoPatternEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT7035RendoPatternEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7035RendoPatternEntity other) {
@@ -394,16 +434,16 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
         this.gaijiHenkanKubun = entity.gaijiHenkanKubun;
         this.zenkenRendoKubun = entity.zenkenRendoKubun;
         this.rendoKubun = entity.rendoKubun;
+        this.renkeiFileName = entity.renkeiFileName;
     }
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(motoShichosonCode, sakiShichosonCode, shubetsu, yukoKaishiYMD, yukoShuryoYMD, rendoKeitaiCode, motoFormatVersion, motoEncodeKeitai, sakiFormatVersion, sakiEncodeKeitai, codeHenkanKubun, gaijiHenkanKubun, zenkenRendoKubun, rendoKubun);
+        return super.toMd5(motoShichosonCode, sakiShichosonCode, shubetsu, yukoKaishiYMD, yukoShuryoYMD, rendoKeitaiCode, motoFormatVersion, motoEncodeKeitai, sakiFormatVersion, sakiEncodeKeitai, codeHenkanKubun, gaijiHenkanKubun, zenkenRendoKubun, rendoKubun, renkeiFileName);
     }
 
 // </editor-fold>

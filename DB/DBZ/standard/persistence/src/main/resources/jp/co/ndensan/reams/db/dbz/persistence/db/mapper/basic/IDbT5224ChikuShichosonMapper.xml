@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5224ChikuShichosonMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5224ChikuShichosonMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5224ChikuShichoson">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5224ChikuShichosonMapper.allColumns_DbT5224ChikuShichoson" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5224ChikuShichosonMapper.allColumns_DbT5224ChikuShichoson" />
      FROM
-         rg."DbT5224ChikuShichoson"
+         rgdb."DbT5224ChikuShichoson"
      WHERE
-         rg."DbT5224ChikuShichoson"."isDeleted" = FALSE
+         rgdb."DbT5224ChikuShichoson"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5224ChikuShichoson">
@@ -33,7 +33,7 @@
 
 
     <!--テーブルDbT5224ChikuShichosonの項目をDbT5224ChikuShichosonEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5224ChikuShichosonEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5224ChikuShichosonEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5224ChikuShichosonEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity" autoMapping="true">
         <id property="chosaChikuCode" column="dbT5224ChikuShichoson_chosaChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <id property="shichosonCode" column="dbT5224ChikuShichoson_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="insertDantaiCd" column="dbT5224ChikuShichoson_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -47,11 +47,10 @@
         <result property="yusenNo" column="dbT5224ChikuShichoson_yusenNo" />
         <result property="jiChikuFlag" column="dbT5224ChikuShichoson_jiChikuFlag" />
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5224ChikuShichosonEntity">
+<select id="getEntity" resultMap="ResultMap_DbT5224ChikuShichosonEntity">
     SELECT
-    <include refid="allColumns_DbT5224ChikuShichoson">
-         FROM
-         rg."DbT5224ChikuShichoson"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT5224ChikuShichoson" />
+    FROM
+    rgdb."DbT5224ChikuShichoson"
+</select>
 </mapper>

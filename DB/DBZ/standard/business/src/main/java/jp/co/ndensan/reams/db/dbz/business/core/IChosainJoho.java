@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.IChosainJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -27,7 +26,7 @@ public interface IChosainJoho {
      *
      * @return 調査員情報エンティティの情報
      */
-    IChosainJohoEntity getEntity();
+   // IChosainJohoEntity getEntity();
 
     /**
      * 市町村コードを返します。

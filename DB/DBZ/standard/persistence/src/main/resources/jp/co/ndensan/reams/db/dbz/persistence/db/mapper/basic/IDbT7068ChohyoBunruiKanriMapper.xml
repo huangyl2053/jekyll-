@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7068ChohyoBunruiKanriMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7068ChohyoBunruiKanriMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7068ChohyoBunruiKanri">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7068ChohyoBunruiKanriMapper.allColumns_DbT7068ChohyoBunruiKanri" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7068ChohyoBunruiKanriMapper.allColumns_DbT7068ChohyoBunruiKanri" />
      FROM
-         rg."DbT7068ChohyoBunruiKanri"
+         rgdb."DbT7068ChohyoBunruiKanri"
      WHERE
-         rg."DbT7068ChohyoBunruiKanri"."isDeleted" = FALSE
+         rgdb."DbT7068ChohyoBunruiKanri"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7068ChohyoBunruiKanri">
@@ -32,7 +32,7 @@
 
 
     <!--テーブルDbT7068ChohyoBunruiKanriの項目をDbT7068ChohyoBunruiKanriEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7068ChohyoBunruiKanriEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT7068ChohyoBunruiKanriEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7068ChohyoBunruiKanriEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7068ChohyoBunruiKanriEntity" autoMapping="true">
         <id property="subGyomuCode" column="dbT7068ChohyoBunruiKanri_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
         <id property="reportID" column="dbT7068ChohyoBunruiKanri_reportID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ReportIdTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7068ChohyoBunruiKanri_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -50,7 +50,7 @@
 	SELECT
 	<include refid="allColumns_DbT7068ChohyoBunruiKanri"/>
 	FROM
-	rgba."DbT7068ChohyoBunruiKanri"
+	rgdb."DbT7068ChohyoBunruiKanri"
 	</select>
 
 </mapper>

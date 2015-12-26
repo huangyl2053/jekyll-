@@ -1,56 +1,61 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity;
 
-import java.util.Objects;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 業務分類です
+ * 業務分類を表す列挙型です。
+ *
  */
 public enum GyomuBunrui {
 
     /**
-     * 介護事務
+     * コード:無し 名称:介護事務 略称:定義なし
      */
-    介護事務("1"),
+    介護事務("1", "介護事務"),
     /**
-     * 介護認定
+     * コード:無し 名称:介護事務 略称:定義なし
      */
-    介護認定("2");
-    private final RString aCode;
+    介護認定("2", "介護認定");
 
-    private GyomuBunrui(String code) {
-        this.aCode = new RString(code);
+    private final RString code;
+    private final RString fullName;
+
+    private GyomuBunrui(String code, String fullname) {
+        this.code = new RString(code);
+        this.fullName = new RString(fullname);
     }
 
     /**
-     * コードを取得します。
+     * 業務分類のコードを返します。
      *
-     * @return コード
+     * @return 業務分類のコード
      */
-    public RString code() {
-        return aCode;
+    public RString getコード() {
+        return code;
     }
 
     /**
-     * 指定したコードに対応する業務分類を取得します。
+     * 業務分類の名称を返します。
      *
-     * @param コード コード
-     * @return 対応する業務分類
-     * @throws IllegalArgumentException 指定された名前を持つ定数を持っていない場合
+     * @return 業務分類の名称
      */
-    public static GyomuBunrui toValue(String コード) throws IllegalArgumentException {
+    public RString get名称() {
+        return fullName;
+    }
+
+    /**
+     * 業務分類のコードと一致する内容を探します。
+     *
+     * @param code 業務分類のコード
+     * @return {@code code} に対応する業務分類
+     */
+    public static GyomuBunrui toValue(RString code) {
         for (GyomuBunrui gyomuBunrui : GyomuBunrui.values()) {
-            if (Objects.equals(gyomuBunrui.aCode, コード)) {
+            if (gyomuBunrui.code.equals(code)) {
                 return gyomuBunrui;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("\"" + コード + "\"に対応する業務分類"));
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("業務分類"));
     }
-
 }

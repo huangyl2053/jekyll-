@@ -2,19 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business.core.koseishichoson;
+package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
-import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.koseishichosonshisho.KoseiShichosonShishoMaster;
-import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.koseishichosonshisho.KoseiShichosonShishoMasterIdentifier;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7052KoseiShichosonShishoMasterEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7052KoseiShichosonShishoMasterEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
-import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
+import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonshishomaster.KoseiShichosonShishoMaster;
+import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonshishomaster.KoseiShichosonShishoMasterIdentifier;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7052KoseiShichosonShishoMasterEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7052KoseiShichosonShishoMasterEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static jp.co.ndensan.reams.uz.uza.testhelper.ByteArraySerializations.canBeCopiedBySerialization;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -32,7 +32,7 @@ import org.junit.runner.RunWith;
  * {@link KoseiShichosonMaster}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-public class KoseiShichosonMasterTest extends DbxTestBase {
+public class KoseiShichosonMasterTest extends DbzTestBase {
 
     private static DbT7051KoseiShichosonMasterEntity KoseiShichosonMasterEntity;
 
@@ -44,7 +44,7 @@ public class KoseiShichosonMasterTest extends DbxTestBase {
         市町村識別ID = DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_市町村識別ID;
     }
 
-    public static class 主キーコンストラクタテスト extends DbxTestBase {
+    public static class 主キーコンストラクタテスト extends DbzTestBase {
 
         private static KoseiShichosonMaster sut;
 
@@ -78,7 +78,7 @@ public class KoseiShichosonMasterTest extends DbxTestBase {
         }
     }
 
-    public static class Entityコンストラクタテスト extends DbxTestBase {
+    public static class Entityコンストラクタテスト extends DbzTestBase {
 
         private static KoseiShichosonMaster sut;
 
@@ -104,7 +104,7 @@ public class KoseiShichosonMasterTest extends DbxTestBase {
         }
     }
 
-    public static class getterテスト extends DbxTestBase {
+    public static class getterテスト extends DbzTestBase {
 
         private static KoseiShichosonMaster sut;
 
@@ -269,7 +269,7 @@ public class KoseiShichosonMasterTest extends DbxTestBase {
         }
     }
 
-    public static class toEntityテスト extends DbxTestBase {
+    public static class toEntityテスト extends DbzTestBase {
 
         private static KoseiShichosonMaster sut;
 
@@ -289,7 +289,7 @@ public class KoseiShichosonMasterTest extends DbxTestBase {
         }
     }
 
-    public static class SerializationProxyテスト extends DbxTestBase {
+    public static class SerializationProxyテスト extends DbzTestBase {
 
         private static KoseiShichosonMaster sut;
 
@@ -309,7 +309,7 @@ public class KoseiShichosonMasterTest extends DbxTestBase {
         }
     }
 
-    public static class deletedテスト extends DbxTestBase {
+    public static class deletedテスト extends DbzTestBase {
 
         private static KoseiShichosonMaster sut;
         private static KoseiShichosonMaster result;
@@ -359,7 +359,7 @@ public class KoseiShichosonMasterTest extends DbxTestBase {
     }
 
     @Ignore
-    public static class getKoseiShichosonShishoMasterテスト extends DbxTestBase {
+    public static class getKoseiShichosonShishoMasterテスト extends DbzTestBase {
 
         private static KoseiShichosonMaster sut;
         private static KoseiShichosonShishoMaster resultKoseiShichosonShishoMaster;

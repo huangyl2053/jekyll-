@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
 import java.util.List;
@@ -71,7 +72,6 @@ public class ServiceCodeCommonChildDiv {
     public ResponseData<ServiceCodeCommonChildDivDiv> onClick_btnYameru(ServiceCodeCommonChildDivDiv div) {
         return ResponseData.of(div).respond();
     }
-
     /**
      * 「確定する」ボタンをクリック場合、画面遷移が表示します。
      *

@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC52301",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "介護認定審査会結果登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5230001",
+     "toLayoutTitle": "介護認定審査会結果登録",
+     "toState": "審査会一覧"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5230001",
+     "layoutTitle": "介護認定審査会結果登録",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

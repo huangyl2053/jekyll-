@@ -97,7 +97,7 @@ public class ShichosonSecurityJohoFinder {
     public ShichosonSecurityJoho getShichosonSecurityJoho(GyomuBunrui gyomuBunrui) {
         ShichosonSecurityJoho shichosonSecurityJoho = new ShichosonSecurityJoho();
         List<DbT7908KaigoDonyuKeitaiEntity> kaigoDonyuKeitaiEntityList
-                = this.kaigoDonyuKeitaiDac.selectByGyomuBunrui(gyomuBunrui.code());
+                = this.kaigoDonyuKeitaiDac.selectByGyomuBunrui(gyomuBunrui.getコード());
         if (kaigoDonyuKeitaiEntityList == null || kaigoDonyuKeitaiEntityList.isEmpty()) {
             shichosonSecurityJoho.set介護導入区分(介護導入区分_未導入);
             shichosonSecurityJoho.set導入形態コード(null);
@@ -290,12 +290,12 @@ public class ShichosonSecurityJohoFinder {
     }
 
     private int dispatchFlowByKaigoDonyuKeitai(RString 業務分類, RString 導入形態コード) {
-        if ((業務分類.equals(GyomuBunrui.介護事務.code()) && 導入形態コード.equals(介護事務_120))
-            || (業務分類.equals(GyomuBunrui.介護事務.code()) && 導入形態コード.equals(介護事務_112))
-            || (業務分類.equals(GyomuBunrui.介護認定.code()) && 導入形態コード.equals(介護認定_220))) {
+        if ((業務分類.equals(GyomuBunrui.介護事務.getコード()) && 導入形態コード.equals(介護事務_120))
+                || (業務分類.equals(GyomuBunrui.介護事務.getコード()) && 導入形態コード.equals(介護事務_112))
+                || (業務分類.equals(GyomuBunrui.介護認定.getコード()) && 導入形態コード.equals(介護認定_220))) {
             return WORKFLOW_管理情報から;
-        } else if ((業務分類.equals(GyomuBunrui.介護事務.code()) && 導入形態コード.equals(介護事務_111))
-                   || ((業務分類.equals(GyomuBunrui.介護認定.code()) && 導入形態コード.equals(介護認定_211)))) {
+        } else if ((業務分類.equals(GyomuBunrui.介護事務.getコード()) && 導入形態コード.equals(介護事務_111))
+                || ((業務分類.equals(GyomuBunrui.介護認定.getコード()) && 導入形態コード.equals(介護認定_211)))) {
             return WORKFLOW_市町村識別IDから;
         } else {
             return WORKFLOW_NULL;

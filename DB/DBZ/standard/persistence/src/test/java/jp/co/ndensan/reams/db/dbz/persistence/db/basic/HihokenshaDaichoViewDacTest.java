@@ -5,9 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.HihokenshaDaichoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.HihokenshaDaichoViewDac;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
@@ -213,7 +210,7 @@ public class HihokenshaDaichoViewDacTest extends DbzTestDacBase {
         entity.setShichosonCode(new LasdecCode(市町村コード));
         entity.setHihokenshaNo(new HihokenshaNo(new RString(被保険者番号)));
         entity.setShikibetsuCode(new ShikibetsuCode("000000000000001"));
-        entity.setShikakuShutokuJiyuCode(new KaigoShikakuShutokuJiyu(new RString("01")));
+        entity.setShikakuShutokuJiyuCode(new RString("01"));
         entity.setShikakuShutokuYMD(FlexibleDate.MIN);
         entity.setHihokennshaKubunCode(new RString("1"));
         entity.setKoikinaiTokureiSochimotoShichosonCode(new LasdecCode((措置元市町村コード)));

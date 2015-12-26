@@ -19,4 +19,15 @@ public interface IDbT7037ShoKofuKaishuMapper {
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7037ShoKofuKaishuEntity getEntity();
+      
+    /**
+     * 
+     * @param entity
+     * @return 
+     */
+    int updateShoKaishuKanri(DbT7037ShoKofuKaishuEntity entity);
+
+    int updateShokaishuKanriRnlisakuju(DbT7037ShoKofuKaishuEntity entity);
+    
+    
 }

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -116,7 +116,7 @@ public class NinteiKekkaJohoBuilder {
      */
     public NinteiKekkaJohoBuilder set介護認定審査会開催番号(RString 介護認定審査会開催番号) {
         requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
-        entity.setShinsakaiKaisaiNo(介護認定審査会開催番号);
+        entity.setShinsakaiKaisaiNo(Integer.valueOf(介護認定審査会開催番号.toString()));
         return this;
     }
 
@@ -140,7 +140,7 @@ public class NinteiKekkaJohoBuilder {
      */
     public NinteiKekkaJohoBuilder set一次判定結果変更理由(RString 一次判定結果変更理由) {
         requireNonNull(一次判定結果変更理由, UrSystemErrorMessages.値がnull.getReplacedMessage("一次判定結果変更理由"));
-        entity.setIchijiHanteiKekkaHenkoRiyu(一次判定結果変更理由);
+        entity.setIchijiHnateiKekkaHenkoRiyu(一次判定結果変更理由);
         return this;
     }
 
@@ -200,7 +200,7 @@ public class NinteiKekkaJohoBuilder {
      */
     public NinteiKekkaJohoBuilder set二次判定結果入力年月日(FlexibleDate 二次判定結果入力年月日) {
         requireNonNull(二次判定結果入力年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("二次判定結果入力年月日"));
-        entity.setNijiHanteiKekkaInputYMD(二次判定結果入力年月日);
+        entity.setNijiHanteiYMD(二次判定結果入力年月日);
         return this;
     }
 

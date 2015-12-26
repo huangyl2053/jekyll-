@@ -15,7 +15,7 @@
         (SELECT
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7055GappeiJohoMapper.allColumns_DbT7055GappeiJoho" />
         FROM
-        rgba."DbT7055GappeiJoho"
+        rgdb."DbT7055GappeiJoho"
         WHERE
         "gappeiYMD"=#{gappeiYMD}
         AND
@@ -25,10 +25,10 @@
         (SELECT
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7056GappeiShichosonMapper.allColumns_DbT7056GappeiShichoson" />
         FROM
-        rgba."DbT7056GappeiShichoson"
+        rgdb."DbT7056GappeiShichoson"
         ) AS dbT7056GappeiShichoson
         ON
-        dbT7055GappeiJoho."dbT7055GappeiJoho_gappeiYMD" = dbT7056GappeiShichoson."dbT7056GappeiShichosoni_gappeiYMD"
+        dbT7055GappeiJoho."dbT7055GappeiJoho_gappeiYMD" = dbT7056GappeiShichoson."dbT7056GappeiShichoson_gappeiYMD" 
         AND
         dbT7055GappeiJoho."dbT7055GappeiJoho_chiikiNo" = dbT7056GappeiShichoson."dbT7056GappeiShichoson_chiikiNo"
 

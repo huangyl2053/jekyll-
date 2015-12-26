@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 予防給付計画自己作成明細のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyotakukeika.yobokeikakujikosakuseimeisai.IYoboKeikakuJikoSakuseiMeisaiMapper">
+
+    <select id="select予防給付計画自己作成明細ByKey" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyotakukeika.yobokeikakujikosakuseimeisai.YoboKeikakuJikoSakuseiMeisaiMapperParameter" 
+            resultMap="resultMap_YoboKeikakuJikoSakuseiMeisaiEntity" fetchSize="500">
+        <include refid="selectYoboKeikakuJikoSakuseiMeisaiEntity" />
+    </select>
+
+    <sql id="selectYoboKeikakuJikoSakuseiMeisaiEntity">
+        SELECT
+        DbT3011YoboKeikakuJikoSakuseiMeisai.*,
+        DbT3012YoboKeikakuJikoSakuseiGokei.*,
+        DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3011YoboKeikakuJikoSakuseiMeisaiMapper.noDeleted_DbT3011YoboKeikakuJikoSakuseiMeisai" />) AS DbT3011YoboKeikakuJikoSakuseiMeisai
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3012YoboKeikakuJikoSakuseiGokeiMapper.noDeleted_DbT3012YoboKeikakuJikoSakuseiGokei" />) AS DbT3012YoboKeikakuJikoSakuseiGokei
+        ON
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_hihokenshaNo" = DbT3012YoboKeikakuJikoSakuseiGokei."dbT3012YoboKeikakuJikoSakuseiGokei_hihokenshaNo"
+        AND
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_taishoYM" = DbT3012YoboKeikakuJikoSakuseiGokei."dbT3012YoboKeikakuJikoSakuseiGokei_taishoYM"
+        AND
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_rirekiNo" = DbT3012YoboKeikakuJikoSakuseiGokei."dbT3012YoboKeikakuJikoSakuseiGokei_rirekiNo"
+        AND
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_kyotakuServiceKubun" = DbT3012YoboKeikakuJikoSakuseiGokei."dbT3012YoboKeikakuJikoSakuseiGokei_kyotakuServiceKubun"
+        AND
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_serviceTeikyoJigyoshaNo" = DbT3012YoboKeikakuJikoSakuseiGokei."dbT3012YoboKeikakuJikoSakuseiGokei_serviceTeikyoJigyoshaNo"
+        AND
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_serviceShuruiCode" = DbT3012YoboKeikakuJikoSakuseiGokei."dbT3012YoboKeikakuJikoSakuseiGokei_serviceShuruiCode"
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuMapper.noDeleted_DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu" />) AS DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu
+        ON
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_hihokenshaNo" = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu."dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_hihokenshaNo"
+        AND
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_taishoYM" = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu."dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_taishoYM"
+        AND
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_rirekiNo" = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu."dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_rirekiNo"
+        <where>
+            <if test="uses被保険者番号">
+                AND DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_hihokenshaNo" = #{被保険者番号}
+            </if>
+            <if test="uses対象年月">
+                AND DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_taishoYM" = #{対象年月}
+            </if>
+            <if test="uses履歴番号">
+                AND DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_rirekiNo" = #{履歴番号}
+            </if>
+            <if test="uses居宅サービス区分">
+                AND DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_kyotakuServiceKubun" = #{居宅サービス区分}
+            </if>
+            <if test="usesサービス提供事業者番号">
+                AND DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_serviceTeikyoJigyoshaNo" = #{サービス提供事業者番号}
+            </if>
+            <if test="usesサービス種類コード">
+                AND DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_serviceShuruiCode" = #{サービス種類コード}
+            </if>
+            <if test="usesサービス項目コード">
+                AND DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_serviceKomokuCode" = #{サービス項目コード}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="resultMap_YoboKeikakuJikoSakuseiMeisaiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyotakukeika.yobokeikakujikosakuseimeisai.YoboKeikakuJikoSakuseiMeisaiEntity" autoMapping="true">
+        <id column="dbT3011YoboKeikakuJikoSakuseiMeisai_hihokenshaNo"/>
+        <id column="dbT3011YoboKeikakuJikoSakuseiMeisai_taishoYM" />
+        <id column="dbT3011YoboKeikakuJikoSakuseiMeisai_rirekiNo" />
+        <id column="dbT3011YoboKeikakuJikoSakuseiMeisai_kyotakuServiceKubun"/>
+        <id column="dbT3011YoboKeikakuJikoSakuseiMeisai_serviceTeikyoJigyoshaNo"/>
+        <id column="dbT3011YoboKeikakuJikoSakuseiMeisai_serviceShuruiCode"/>
+        <id column="dbT3011YoboKeikakuJikoSakuseiMeisai_serviceKomokuCode"/>
+        <association property="予防給付計画自己作成明細Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3011YoboKeikakuJikoSakuseiMeisaiMapper.ResultMap_DbT3011YoboKeikakuJikoSakuseiMeisaiEntity"/>
+        <collection property="予防給付計画自己作成合計Entity" 
+                    ofType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3012YoboKeikakuJikoSakuseiGokeiEntity" 
+                    resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3012YoboKeikakuJikoSakuseiGokeiMapper.ResultMap_DbT3012YoboKeikakuJikoSakuseiGokeiEntity"/>
+        <collection property="予防給付計画自己作成短期利用日数Entity" 
+                    ofType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity"
+                    resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuMapper.ResultMap_DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity"/>
+    </resultMap>
+</mapper>

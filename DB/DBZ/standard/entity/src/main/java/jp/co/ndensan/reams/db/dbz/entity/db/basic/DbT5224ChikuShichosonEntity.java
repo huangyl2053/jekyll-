@@ -1,21 +1,22 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.Objects;
 import java.util.UUID;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 地区市町村テーブルのエンティティクラスです。
  */
 public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuShichosonEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5224ChikuShichoson");
 
@@ -98,7 +99,7 @@ public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuS
      * 
      * @param chosaChikuCode 調査地区コード
      */
-    public void setChosaChikuCode(Code chosaChikuCode) {
+    public void setChosaChikuCode(@Nonnull Code chosaChikuCode) {
         this.chosaChikuCode = chosaChikuCode;
     }
 
@@ -116,7 +117,7 @@ public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuS
      * 
      * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(LasdecCode shichosonCode) {
+    public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
@@ -134,7 +135,7 @@ public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuS
      * 
      * @param yusenNo 優先番号
      */
-    public void setYusenNo(int yusenNo) {
+    public void setYusenNo(@Nonnull int yusenNo) {
         this.yusenNo = yusenNo;
     }
 
@@ -156,7 +157,7 @@ public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuS
      * 
      * @param jiChikuFlag 自地区フラグ
      */
-    public void setJiChikuFlag(boolean jiChikuFlag) {
+    public void setJiChikuFlag(@Nonnull boolean jiChikuFlag) {
         this.jiChikuFlag = jiChikuFlag;
     }
 
@@ -164,7 +165,7 @@ public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuS
      * このエンティティの主キーが他の{@literal DbT5224ChikuShichosonEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5224ChikuShichosonEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override

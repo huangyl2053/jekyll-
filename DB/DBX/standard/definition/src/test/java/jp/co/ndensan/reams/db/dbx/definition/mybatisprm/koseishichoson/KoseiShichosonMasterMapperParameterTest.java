@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.definition.mybatisprm.koseishichoson;
+package jp.co.ndensan.reams.db.dbz.definition.mybatis.param.koseishichosonmaster;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.ShichosonShikibetsuID;
-import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -18,9 +17,11 @@ import org.junit.runner.RunWith;
  * {@link KoseiShichosonMasterMapperParameter}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-public class KoseiShichosonMasterMapperParameterTest extends DbxTestBase {
+public class KoseiShichosonMasterMapperParameterTest extends DbzTestBase {
 
-    public static class createSelectByKeyParamテスト extends DbxTestBase {
+    private static final RString shichonCode = new RString("302302");
+
+    public static class createSelectByKeyParamテスト extends DbzTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 主キー1にNullを指定すると_NullPointerExceptionが発生する() {
@@ -29,9 +30,9 @@ public class KoseiShichosonMasterMapperParameterTest extends DbxTestBase {
 
         @Test
         public void 引数にNull以外を指定すると_パラメータが生成できる() {
-            RString 識別ID = new RString("02");
-            KoseiShichosonMasterMapperParameter sut = KoseiShichosonMasterMapperParameter.createSelectByKeyParam(識別ID);
-            assertThat(sut.getShichosonShikibetsuId(), is(new ShichosonShikibetsuID(識別ID)));
+            KoseiShichosonMasterMapperParameter sut = KoseiShichosonMasterMapperParameter.createSelectByKeyParam(shichonCode);
+            assertThat(sut.isUseShichosonShokibetsuID(), is(true));
         }
     }
+
 }

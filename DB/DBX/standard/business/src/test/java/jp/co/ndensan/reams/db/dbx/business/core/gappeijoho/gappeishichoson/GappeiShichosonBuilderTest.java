@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson;
+package jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson;
 
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7056GappeiShichosonEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
  * {@link GappeiShichosonBuilder}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-public class GappeiShichosonBuilderTest extends DbxTestBase {
+public class GappeiShichosonBuilderTest extends DbzTestBase {
 
     private static DbT7056GappeiShichosonEntity GappeiShichosonEntity;
     private static FlexibleDate 合併年月日;
@@ -37,7 +37,7 @@ public class GappeiShichosonBuilderTest extends DbxTestBase {
         旧市町村コード = DbT7056GappeiShichosonEntityGenerator.DEFAULT_旧市町村コード;
     }
 
-    public static class getterSetterTest extends DbxTestBase {
+    public static class getterSetterTest extends DbzTestBase {
 
         private static GappeiShichosonBuilder sut;
         private static GappeiShichoson business;

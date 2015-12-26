@@ -9,9 +9,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -59,7 +56,7 @@ public class ShinseitodokedeJohoBuilder {
      * @param 申請届出者氏名 申請届出者氏名
      * @return {@link ShinseitodokedeJohoBuilder}
      */
-    public ShinseitodokedeJohoBuilder set申請届出者氏名(AtenaMeisho 申請届出者氏名) {
+    public ShinseitodokedeJohoBuilder set申請届出者氏名(RString 申請届出者氏名) {
         requireNonNull(申請届出者氏名, UrSystemErrorMessages.値がnull.getReplacedMessage("申請届出者氏名"));
         entity.setShinseiTodokedeshaShimei(申請届出者氏名);
         return this;
@@ -71,7 +68,7 @@ public class ShinseitodokedeJohoBuilder {
      * @param 申請届出者氏名カナ 申請届出者氏名カナ
      * @return {@link ShinseitodokedeJohoBuilder}
      */
-    public ShinseitodokedeJohoBuilder set申請届出者氏名カナ(AtenaKanaMeisho 申請届出者氏名カナ) {
+    public ShinseitodokedeJohoBuilder set申請届出者氏名カナ(RString 申請届出者氏名カナ) {
         requireNonNull(申請届出者氏名カナ, UrSystemErrorMessages.値がnull.getReplacedMessage("申請届出者氏名カナ"));
         entity.setShinseiTodokedeshaKanaShimei(申請届出者氏名カナ);
         return this;
@@ -85,7 +82,7 @@ public class ShinseitodokedeJohoBuilder {
      */
     public ShinseitodokedeJohoBuilder set申請届出者続柄コード(RString 申請届出者続柄コード) {
         requireNonNull(申請届出者続柄コード, UrSystemErrorMessages.値がnull.getReplacedMessage("申請届出者続柄コード"));
-        entity.setShinseiTodokedeshaTsuzukigaraCode(申請届出者続柄コード);
+        entity.setShinseiTodokedeshaTsuzukigara(申請届出者続柄コード);
         return this;
     }
 
@@ -131,7 +128,7 @@ public class ShinseitodokedeJohoBuilder {
      * @param 申請届出者住所 申請届出者住所
      * @return {@link ShinseitodokedeJohoBuilder}
      */
-    public ShinseitodokedeJohoBuilder set申請届出者住所(AtenaJusho 申請届出者住所) {
+    public ShinseitodokedeJohoBuilder set申請届出者住所(RString 申請届出者住所) {
         requireNonNull(申請届出者住所, UrSystemErrorMessages.値がnull.getReplacedMessage("申請届出者住所"));
         entity.setShinseiTodokedeshaJusho(申請届出者住所);
         return this;

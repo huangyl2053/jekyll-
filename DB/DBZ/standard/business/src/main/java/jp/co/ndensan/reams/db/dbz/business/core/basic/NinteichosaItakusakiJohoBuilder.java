@@ -63,7 +63,7 @@ public class NinteichosaItakusakiJohoBuilder {
      */
     public NinteichosaItakusakiJohoBuilder set認定調査委託先コード(ChosaItakusakiCode 認定調査委託先コード) {
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
-        entity.setNinteichosaItakusakiCode(認定調査委託先コード);
+      //  entity.setNinteichosaItakusakiCode(認定調査委託先コード);
         return this;
     }
 
@@ -159,7 +159,7 @@ public class NinteichosaItakusakiJohoBuilder {
      */
     public NinteichosaItakusakiJohoBuilder set代表者名(AtenaMeisho 代表者名) {
         requireNonNull(代表者名, UrSystemErrorMessages.値がnull.getReplacedMessage("代表者名"));
-        entity.setDaihyoshaName(代表者名);
+       // entity.setDaihyoshaName(代表者名);
         return this;
     }
 

@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC23301",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "主治医意見書督促状発行",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2330001",
+     "toLayoutTitle": "主治医意見書督促状発行",
+     "toState": "督促状発行"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2330001",
+     "layoutTitle": "主治医意見書督促状発行",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

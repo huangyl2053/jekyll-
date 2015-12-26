@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * <br/> 申請届出情報を一元管理する
  */
 public enum DbT5120ShinseitodokedeJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -42,6 +42,7 @@ public enum DbT5120ShinseitodokedeJoho implements IColumnDefinition {
     lastUpdateReamsLoginId(2147483647, 0),
     /**
      * 申請書管理番号
+     * <br/>要介護認定申請情報
      */
     shinseishoKanriNo(2147483647, 0),
     /**
@@ -52,16 +53,15 @@ public enum DbT5120ShinseitodokedeJoho implements IColumnDefinition {
     /**
      * 申請届出者氏名
      */
-    shinseiTodokedeshaShimei(2147483647, 0),
+    shinseiTodokedeshaShimei(512, 0),
     /**
      * 申請届出者氏名カナ
      */
-    shinseiTodokedeshaKanaShimei(2147483647, 0),
+    shinseiTodokedeshaKanaShimei(512, 0),
     /**
-     * 申請届出者続柄コード
-     * <br/>コード
+     * 申請届出者続柄
      */
-    shinseiTodokedeshaTsuzukigaraCode(2, 0),
+    shinseiTodokedeshaTsuzukigara(10, 0),
     /**
      * 申請届出代行事業者番号
      */
@@ -78,7 +78,7 @@ public enum DbT5120ShinseitodokedeJoho implements IColumnDefinition {
     /**
      * 申請届出者住所
      */
-    shinseiTodokedeshaJusho(2147483647, 0),
+    shinseiTodokedeshaJusho(512, 0),
     /**
      * 申請届出者電話番号
      */

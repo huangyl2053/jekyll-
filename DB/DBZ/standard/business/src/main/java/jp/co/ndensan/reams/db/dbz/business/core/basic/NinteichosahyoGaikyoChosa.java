@@ -25,9 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 認定調査票（概況調査）（子）を管理するクラスです。
  */
-public class NinteichosahyoGaikyoChosa extends 
-        ParentModelBase<NinteichosahyoGaikyoChosaIdentifier, 
-        DbT5202NinteichosahyoGaikyoChosaEntity, NinteichosahyoGaikyoChosa> implements Serializable {
+public class NinteichosahyoGaikyoChosa extends
+        ParentModelBase<NinteichosahyoGaikyoChosaIdentifier, DbT5202NinteichosahyoGaikyoChosaEntity, NinteichosahyoGaikyoChosa> implements Serializable {
 
     private final DbT5202NinteichosahyoGaikyoChosaEntity entity;
     private final NinteichosahyoGaikyoChosaIdentifier id;
@@ -204,15 +203,6 @@ public class NinteichosahyoGaikyoChosa extends
      */
     public RDateTime get実施場所イメージ共有ファイルID() {
         return entity.getJisshiBashoImageSharedFileId();
-    }
-
-    /**
-     * 認定調査_現在の状況コードを返します。
-     *
-     * @return 認定調査_現在の状況コード
-     */
-    public Code get認定調査_現在の状況コード() {
-        return entity.getGenzainoJokyoCode();
     }
 
     /**

@@ -2,6 +2,8 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -18,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  * 介護保険施設入退所テーブルのエンティティクラスです。
  */
 public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004ShisetsuNyutaishoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1004ShisetsuNyutaisho");
@@ -105,7 +107,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
      *
      * @param shikibetsuCode 識別コード
      */
-    public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
+    public void setShikibetsuCode(@Nonnull ShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
     }
 
@@ -141,7 +143,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
      *
      * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(LasdecCode shichosonCode) {
+    public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
@@ -163,7 +165,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
      *
      * @param daichoShubetsu 台帳種別
      */
-    public void setDaichoShubetsu(RString daichoShubetsu) {
+    public void setDaichoShubetsu(@Nonnull RString daichoShubetsu) {
         this.daichoShubetsu = daichoShubetsu;
     }
 
@@ -185,7 +187,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
      *
      * @param nyushoShisetsuShurui 入所施設種類
      */
-    public void setNyushoShisetsuShurui(RString nyushoShisetsuShurui) {
+    public void setNyushoShisetsuShurui(@Nonnull RString nyushoShisetsuShurui) {
         this.nyushoShisetsuShurui = nyushoShisetsuShurui;
     }
 
@@ -203,7 +205,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
      *
      * @param nyushoShisetsuCode 入所施設コード
      */
-    public void setNyushoShisetsuCode(JigyoshaNo nyushoShisetsuCode) {
+    public void setNyushoShisetsuCode(@Nonnull JigyoshaNo nyushoShisetsuCode) {
         this.nyushoShisetsuCode = nyushoShisetsuCode;
     }
 
@@ -212,6 +214,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
      *
      * @return 入所処理年月日
      */
+    @CheckForNull
     public FlexibleDate getNyushoShoriYMD() {
         return nyushoShoriYMD;
     }
@@ -239,7 +242,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
      *
      * @param nyushoYMD 入所年月日
      */
-    public void setNyushoYMD(FlexibleDate nyushoYMD) {
+    public void setNyushoYMD(@Nonnull FlexibleDate nyushoYMD) {
         this.nyushoYMD = nyushoYMD;
     }
 
@@ -248,6 +251,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
      *
      * @return 退所処理年月日
      */
+    @CheckForNull
     public FlexibleDate getTaishoShoriYMD() {
         return taishoShoriYMD;
     }
@@ -266,6 +270,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
      *
      * @return 退所年月日
      */
+    @CheckForNull
     public FlexibleDate getTaishoYMD() {
         return taishoYMD;
     }
@@ -286,6 +291,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
      *
      * @return 部屋記号番号
      */
+    @CheckForNull
     public RString getRoomKigoNo() {
         return roomKigoNo;
     }
@@ -305,9 +311,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
      * このエンティティの主キーが他の{@literal DbT1004ShisetsuNyutaishoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT1004ShisetsuNyutaishoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
-     *
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT1004ShisetsuNyutaishoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT1004ShisetsuNyutaishoEntity other) {
@@ -318,9 +322,6 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
             return false;
         }
         if (this.rirekiNo != other.rirekiNo) {
-            return false;
-        }
-        if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
             return false;
         }
         return true;

@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 認定調査票（概況調査）（子）テーブルの項目定義クラスです。
  */
 public enum DbT5202NinteichosahyoGaikyoChosa implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -104,11 +104,6 @@ public enum DbT5202NinteichosahyoGaikyoChosa implements IColumnDefinition {
      * 実施場所イメージ共有ファイルID
      */
     jisshiBashoImageSharedFileId(29, 0),
-    /**
-     * 認定調査・現在の状況コード
-     * <br/>Enum（DBE：現在の状況コード）
-     */
-    genzainoJokyoCode(2147483647, 0),
     /**
      * 認定調査・サービス区分コード
      * <br/>Enum（DBE：現在のサービス区分コード）

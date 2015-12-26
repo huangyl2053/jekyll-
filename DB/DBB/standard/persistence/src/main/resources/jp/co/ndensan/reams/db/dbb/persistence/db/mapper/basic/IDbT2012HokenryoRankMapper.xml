@@ -33,7 +33,7 @@
 
 
     <!--テーブルDbT2012HokenryoRankの項目をDbT2012HokenryoRankEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT2012HokenryoRankEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2012HokenryoRankEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT2012HokenryoRankEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank.DbT2012HokenryoRankEntity" autoMapping="true">
         <id property="fukaNendo" column="dbT2012HokenryoRank_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="shichosonCode" column="dbT2012HokenryoRank_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="insertDantaiCd" column="dbT2012HokenryoRank_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

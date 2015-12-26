@@ -2,15 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntityGenerator.DEFAULT_旧市町村コード;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator.DEFAULT_合併年月日;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7056GappeiShichosonEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator.DEFAULT_合併年月日;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator.DEFAULT_地域番号;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator.DEFAULT_旧市町村コード;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -32,7 +32,7 @@ import org.junit.Ignore;
  */
 @Ignore
 @RunWith(Enclosed.class)
-public class DbT7056GappeiShichosonDacTest extends DbxTestDacBase {
+public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
 
     private static final FlexibleDate キー_01 = new FlexibleDate("20150101");
     private static final FlexibleDate キー_02 = new FlexibleDate("20150202");
@@ -44,7 +44,7 @@ public class DbT7056GappeiShichosonDacTest extends DbxTestDacBase {
         sut = InstanceProvider.create(DbT7056GappeiShichosonDac.class);
     }
 
-    public static class selectByKeyのテスト extends DbxTestDacBase {
+    public static class selectByKeyのテスト extends DbzTestDacBase {
 
         @Before
         public void setUp() {
@@ -101,7 +101,7 @@ public class DbT7056GappeiShichosonDacTest extends DbxTestDacBase {
         }
     }
 
-    public static class selectAllのテスト extends DbxTestDacBase {
+    public static class selectAllのテスト extends DbzTestDacBase {
 
         @Test
         public void 合併市町村が存在する場合_selectAllは_全件を返す() {
@@ -122,7 +122,7 @@ public class DbT7056GappeiShichosonDacTest extends DbxTestDacBase {
         }
     }
 
-    public static class insertのテスト extends DbxTestDacBase {
+    public static class insertのテスト extends DbzTestDacBase {
 
         @Test
         public void 合併市町村エンティティを渡すと_insertは_合併市町村を追加する() {
@@ -138,7 +138,7 @@ public class DbT7056GappeiShichosonDacTest extends DbxTestDacBase {
         }
     }
 
-    public static class updateのテスト extends DbxTestDacBase {
+    public static class updateのテスト extends DbzTestDacBase {
 
         @Before
         public void setUp() {
@@ -168,7 +168,7 @@ public class DbT7056GappeiShichosonDacTest extends DbxTestDacBase {
         }
     }
 
-    public static class deleteのテスト extends DbxTestDacBase {
+    public static class deleteのテスト extends DbzTestDacBase {
 
         @Before
         public void setUp() {

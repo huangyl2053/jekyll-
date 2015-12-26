@@ -382,8 +382,7 @@ public class KoseiShichosonMaster
     }
 
     /**
-     * 構成市町村マスタのみを変更対象とします。<br/>
-     * {@link DbT7051KoseiShichosonMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 構成市町村マスタのみを変更対象とします。<br/> {@link DbT7051KoseiShichosonMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KoseiShichosonMaster}
      */
@@ -398,8 +397,7 @@ public class KoseiShichosonMaster
     }
 
     /**
-     * 保持する構成市町村マスタを削除対象とします。<br/>
-     * {@link DbT7051KoseiShichosonMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する構成市町村マスタを削除対象とします。<br/> {@link DbT7051KoseiShichosonMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KoseiShichosonMaster}
      */

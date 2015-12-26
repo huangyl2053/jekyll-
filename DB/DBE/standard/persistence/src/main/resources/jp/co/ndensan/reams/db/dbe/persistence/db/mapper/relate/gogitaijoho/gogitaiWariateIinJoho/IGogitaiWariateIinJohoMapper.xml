@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 合議体割当委員情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaiWariateIinJoho.IGogitaiWariateIinJohoMapper">
+
+    <select id="select合議体割当委員情報ByKey" resultMap="resultMap_GogitaiWariateIinJohoRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJohoMapperParameter" fetchSize="500">
+        <include refid="selectGogitaiWariateIinJohoRelateEntity" />
+    </select>
+
+    <select id="select合議体割当委員情報リストBy主キー1" resultMap="resultMap_GogitaiWariateIinJohoRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJohoMapperParameter" fetchSize="500">
+        <include refid="selectGogitaiWariateIinJohoRelateEntity" />
+    </select>
+
+    <sql id="selectGogitaiWariateIinJohoRelateEntity">
+        SELECT
+        DbT5593GogitaiWariateIinJoho.*,
+        DbT5594ShinsakaiIinJoho.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5593GogitaiWariateIinJohoMapper.noDeleted_DbT5593GogitaiWariateIinJoho" />) AS DbT5593GogitaiWariateIinJoho
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.noDeleted_DbT5594ShinsakaiIinJoho" />) AS DbT5594ShinsakaiIinJoho
+        ON
+        DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" = DbT5594ShinsakaiIinJoho."dbT5594ShinsakaiIinJoho_shinsakaiIinCode"
+        <where>
+            <if test="uses合議体番号">
+                AND DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_gogitaiNo" = #{合議体番号}
+            </if>
+            <if test="uses合議体有効期間開始年月日">
+                AND DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_gogitaiYukoKikanKaishiYMD" = #{合議体有効期間開始年月日}
+            </if>
+            <if test="uses介護認定審査会委員コード">
+                AND DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" = #{介護認定審査会委員コード}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="resultMap_GogitaiWariateIinJohoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJohoRelateEntity" autoMapping="true">
+        <id column="dbT5593GogitaiWariateIinJoho_gogitaiNo"/>
+        <id column="dbT5593GogitaiWariateIinJoho_gogitaiYukoKikanKaishiYMD"/>
+        <id column="dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" />
+        <association property="合議体割当委員情報Entity"  resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5593GogitaiWariateIinJohoMapper.ResultMap_DbT5593GogitaiWariateIinJohoEntity"/>
+        <collection property="介護認定審査会委員情報Entity" ofType="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5594ShinsakaiIinJohoEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.ResultMap_DbT5594ShinsakaiIinJohoEntity"/>
+    </resultMap>
+
+</mapper>

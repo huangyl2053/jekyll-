@@ -17,14 +17,14 @@ public final class DbT5302ShujiiIkenshoJohoEntityGenerator {
 
     public static final ShinseishoKanriNo DEFAULT_申請書管理番号 = new ShinseishoKanriNo("900001");
     public static final int DEFAULT_主治医意見書作成依頼履歴番号 = 1;
-    public static final RString DEFAULT_厚労省IF識別コード = new RString("名称");
-    public static final RString DEFAULT_主治医意見書依頼区分 = new RString("名称");
-    public static final RString DEFAULT_主治医医療機関コード = new RString("名称");
-    public static final RString DEFAULT_主治医コード = new RString("名称");
+    public static final RString DEFAULT_厚労省IF識別コード = new RString("1");
+    public static final RString DEFAULT_主治医意見書依頼区分 = new RString("1");
+    public static final RString DEFAULT_主治医医療機関コード = new RString("1");
+    public static final RString DEFAULT_主治医コード = new RString("1");
     public static final FlexibleDate DEFAULT_主治医意見書受領年月日 = new FlexibleDate("20141030");
     public static final FlexibleDate DEFAULT_主治医意見書記入年月日 = new FlexibleDate("20141030");
-    public static final Code DEFAULT_意見書作成回数区分 = new Code("01");
-    public static final Code DEFAULT_在宅_施設区分 = new Code("01");
+    public static final Code DEFAULT_意見書作成回数区分 = new Code("1");
+    public static final Code DEFAULT_在宅_施設区分 = new Code("1");
     public static final boolean DEFAULT_意見書同意フラグ = false;
     public static final FlexibleDate DEFAULT_最終診療日 = new FlexibleDate("20141030");
     public static final boolean DEFAULT_他科受診の有無 = false;

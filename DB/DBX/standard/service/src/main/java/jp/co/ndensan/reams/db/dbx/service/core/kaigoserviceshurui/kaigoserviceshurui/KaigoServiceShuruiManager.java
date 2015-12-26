@@ -10,8 +10,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShurui;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui.KaigoServiceShuruiMapperParameter;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigoserviceshurui.KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.kaigoserviceshurui.IKaigoServiceShuruiMapper;
@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -63,8 +64,7 @@ public class KaigoServiceShuruiManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoServiceShuruiManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KaigoServiceShuruiManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KaigoServiceShuruiManager}のインスタンス
      */
     public static KaigoServiceShuruiManager createInstance() {
         return InstanceProvider.create(KaigoServiceShuruiManager.class);
@@ -121,7 +121,7 @@ public class KaigoServiceShuruiManager {
      * @return KaigoServiceShuruiの{@code list}
      */
     @Transaction
-    public List<KaigoServiceShurui> getServiceTypeList(KaigoServiceShuruiMapperParameter 介護サービス種類検索条件) {
+    public SearchResult<KaigoServiceShurui> getServiceTypeList(KaigoServiceShuruiMapperParameter 介護サービス種類検索条件) {
         ITrueFalseCriteria makeShuruiConditions;
         if (介護サービス種類検索条件.getServiceShuruiCd() == null || 介護サービス種類検索条件.getServiceShuruiCd().isEmpty()) {
             makeShuruiConditions = and(
@@ -140,7 +140,7 @@ public class KaigoServiceShuruiManager {
             kaigoServiceShuruiEntity.set介護サービス種類Entity(entity);
             介護サービス種類List.add(new KaigoServiceShurui(kaigoServiceShuruiEntity));
         }
-        return 介護サービス種類List;
+        return SearchResult.of(介護サービス種類List, 0, false);
     }
 
     /**
@@ -150,7 +150,7 @@ public class KaigoServiceShuruiManager {
      * @return KaigoServiceShuruiの{@code list}
      */
     @Transaction
-    public List<KaigoServiceShurui> getFocusServiceTypeList(KaigoServiceShuruiMapperParameter 介護サービス種類検索条件) {
+    public SearchResult<KaigoServiceShurui> getFocusServiceTypeList(KaigoServiceShuruiMapperParameter 介護サービス種類検索条件) {
         List<DbT7130KaigoServiceShuruiEntity> サービス種類情報リスト = 介護サービス種類Dac.selectByDate(
                 介護サービス種類検索条件.getServiceShuruiCd(),
                 介護サービス種類検索条件.getTeikyoKaishiYM());
@@ -160,6 +160,6 @@ public class KaigoServiceShuruiManager {
             kaigoServiceShuruiEntity.set介護サービス種類Entity(entity);
             介護サービス種類List.add(new KaigoServiceShurui(kaigoServiceShuruiEntity));
         }
-        return 介護サービス種類List;
+        return SearchResult.of(介護サービス種類List, 0, false);
     }
 }

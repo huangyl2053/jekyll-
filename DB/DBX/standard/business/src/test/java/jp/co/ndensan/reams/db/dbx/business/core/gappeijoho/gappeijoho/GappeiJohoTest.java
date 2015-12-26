@@ -2,19 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeijoho;
+package jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho;
 
-import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.GappeiJoho;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
-import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.GappeiShichosonIdentifier;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7055GappeiJohoEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.GappeiJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
+import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
+import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichosonIdentifier;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7055GappeiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7056GappeiShichosonEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.GappeiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -33,7 +32,7 @@ import org.junit.runner.RunWith;
  * {@link GappeiJoho}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-public class GappeiJohoTest extends DbxTestBase {
+public class GappeiJohoTest extends DbzTestBase {
 
     private static DbT7055GappeiJohoEntity gappeiJohoEntity;
     private static FlexibleDate 合併年月日;
@@ -45,7 +44,7 @@ public class GappeiJohoTest extends DbxTestBase {
         地域番号 = DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号;
     }
 
-    public static class 主キーコンストラクタテスト extends DbxTestBase {
+    public static class 主キーコンストラクタテスト extends DbzTestBase {
 
         private static GappeiJoho sut;
 
@@ -81,7 +80,7 @@ public class GappeiJohoTest extends DbxTestBase {
         }
     }
 
-    public static class Entityコンストラクタテスト extends DbxTestBase {
+    public static class Entityコンストラクタテスト extends DbzTestBase {
 
         private static GappeiJoho sut;
 
@@ -109,7 +108,7 @@ public class GappeiJohoTest extends DbxTestBase {
         }
     }
 
-    public static class getterテスト extends DbxTestBase {
+    public static class getterテスト extends DbzTestBase {
 
         private static GappeiJoho sut;
 
@@ -160,7 +159,7 @@ public class GappeiJohoTest extends DbxTestBase {
         }
     }
 
-    public static class toEntityテスト extends DbxTestBase {
+    public static class toEntityテスト extends DbzTestBase {
 
         private static GappeiJoho sut;
 
@@ -181,7 +180,7 @@ public class GappeiJohoTest extends DbxTestBase {
         }
     }
 
-    public static class SerializationProxyテスト extends DbxTestBase {
+    public static class SerializationProxyテスト extends DbzTestBase {
 
         private static GappeiJoho sut;
 
@@ -202,7 +201,7 @@ public class GappeiJohoTest extends DbxTestBase {
         }
     }
 
-    public static class deletedテスト extends DbxTestBase {
+    public static class deletedテスト extends DbzTestBase {
 
         private static GappeiJoho sut;
         private static GappeiJoho result;
@@ -252,7 +251,7 @@ public class GappeiJohoTest extends DbxTestBase {
         }
     }
 
-    public static class getGappeiShichosonテスト extends DbxTestBase {
+    public static class getGappeiShichosonテスト extends DbzTestBase {
 
         private static GappeiJoho sut;
         private static GappeiShichoson resultGappeiShichoson;

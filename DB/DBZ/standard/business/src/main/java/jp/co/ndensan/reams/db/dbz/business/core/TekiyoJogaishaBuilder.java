@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoJogaiKaijoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoJogaiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -109,7 +107,7 @@ public class TekiyoJogaishaBuilder {
      */
     public TekiyoJogaishaBuilder set適用除外適用事由コード(RString 適用除外適用事由コード) {
         requireNonNull(適用除外適用事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("適用除外適用事由コード"));
-        entity.setTekiyoJogaiTekiyoJiyuCode(new KaigoJogaiTekiyoJiyu(適用除外適用事由コード));
+        entity.setTekiyoJogaiTekiyoJiyuCode(適用除外適用事由コード);
         return this;
     }
 
@@ -157,7 +155,7 @@ public class TekiyoJogaishaBuilder {
      */
     public TekiyoJogaishaBuilder set適用除外解除事由コード(RString 適用除外解除事由コード) {
         requireNonNull(適用除外解除事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("適用除外解除事由コード"));
-        entity.setTekiyoJogaikaijokaijoJiyuCode(new KaigoJogaiKaijoJiyu(適用除外解除事由コード));
+        entity.setTekiyoJogaikaijokaijoJiyuCode(適用除外解除事由コード);
         return this;
     }
 

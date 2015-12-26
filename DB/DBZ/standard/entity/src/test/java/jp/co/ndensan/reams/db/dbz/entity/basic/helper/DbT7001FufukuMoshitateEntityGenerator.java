@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -34,14 +33,14 @@ public final class DbT7001FufukuMoshitateEntityGenerator {
     public static final AtenaJusho DEFAULT_審査請求人住所 = new AtenaJusho("");
     public static final AtenaMeisho DEFAULT_審査請求人氏名 = new AtenaMeisho("");
     public static final TelNo DEFAULT_審査請求人電話番号 = new TelNo("08011112222");
-    public static final Code DEFAULT_被保険者との関係コード = new Code();
+    public static final RString DEFAULT_被保険者との関係コード = new RString("");
     public static final YubinNo DEFAULT_代理人郵便番号 = new YubinNo("0010001");
     public static final AtenaJusho DEFAULT_代理人住所 = new AtenaJusho("");
     public static final AtenaMeisho DEFAULT_代理人氏名 = new AtenaMeisho("");
     public static final TelNo DEFAULT_代理人電話番号 = new TelNo("08011112222");
     public static final RString DEFAULT_処分庁 = new RString("Data");
     public static final FlexibleDate DEFAULT_処分日 = new FlexibleDate("19900101");
-    public static final Code DEFAULT_処分種類コード = new Code();
+    public static final RString DEFAULT_処分種類コード = new RString("");
     public static final FlexibleDate DEFAULT_処分があったことを知った日 = new FlexibleDate("19900101");
     public static final RString DEFAULT_審査請求の理由 = new RString("Data");
     public static final RString DEFAULT_処分庁教示の有無及び教示の内容 = new RString("Data");
@@ -61,15 +60,9 @@ public final class DbT7001FufukuMoshitateEntityGenerator {
 
     public static DbT7001FufukuMoshitateEntity createDbT7001FufukuMoshitateEntity() {
         DbT7001FufukuMoshitateEntity entity = new DbT7001FufukuMoshitateEntity();
-        entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);
         entity.setShikibetsuCode(DEFAULT_識別コード);
         entity.setGenshobunsHihokennshaNo(DEFAULT_原処分被保険者番号);
         entity.setShinsaSeikyuTodokedeYMD(DEFAULT_審査請求届出日);
-        entity.setGenshobunHihokenshaYubinNo(DEFAULT_原処分被保険者郵便番号);
-        entity.setGenshobunHihokenshaJusho(DEFAULT_原処分被保険者住所);
-        entity.setGenshobunHihokenshaShimei(DEFAULT_原処分被保険者氏名);
-        entity.setGenshobunHihokenshaTelNo(DEFAULT_原処分被保険者電話番号);
-        entity.setGenshobunHihokenshaBirthYMD(DEFAULT_原処分被保険者生年月日);
         entity.setShinsaSeikyuninYubinNo(DEFAULT_審査請求人郵便番号);
         entity.setShinsaSeikyuninJusho(DEFAULT_審査請求人住所);
         entity.setShinsaSeikyuninShimei(DEFAULT_審査請求人氏名);
