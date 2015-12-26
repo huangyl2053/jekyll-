@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity;
 public interface IDbT7002BemmeiNaiyoMapper {
 
     /**
-     * {@link DbT7002BemmeiNaiyoEntity}を取得します。
+     * {@link  DbT7002BemmeiNaiyoEntity}を取得します。
      *
-     * @return {@link DbT7002BemmeiNaiyoEntity}
+     * @return {@link  DbT7002BemmeiNaiyoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7002BemmeiNaiyoEntity getEntity();

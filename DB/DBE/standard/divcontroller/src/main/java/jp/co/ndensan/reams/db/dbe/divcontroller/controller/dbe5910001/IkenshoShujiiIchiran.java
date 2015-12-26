@@ -47,13 +47,14 @@ public class IkenshoShujiiIchiran {
         response.data = div;
         return response;
     }
-    
+
     /**
      * 医療機関コードと主治医コードの大小関係を比較です。
+     *
      * @param div IchijiHanteiKekkaInfoDiv
      * @return ResponseData<IkenshoShujiiIchiranDiv>
      */
-    public  ResponseData<IkenshoShujiiIchiranDiv> onClick_Check(IkenshoShujiiIchiranDiv div) {
+    public ResponseData<IkenshoShujiiIchiranDiv> onClick_Check(IkenshoShujiiIchiranDiv div) {
         if (0 < div.getTxtIryoKikanCodeFrom().getValue()
                 .compareTo(div.getTxtIryoKikanCodeTo().getValue())) {
             throw new ApplicationException(

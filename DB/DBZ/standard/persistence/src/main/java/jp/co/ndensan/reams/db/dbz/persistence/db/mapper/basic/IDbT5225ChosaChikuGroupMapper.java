@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroupEntity;
 public interface IDbT5225ChosaChikuGroupMapper {
 
     /**
-     * {@link DbT5225ChosaChikuGroupEntity}を取得します。
+     * {@link  DbT5225ChosaChikuGroupEntity}を取得します。
      *
-     * @return {@link DbT5225ChosaChikuGroupEntity}
+     * @return {@link  DbT5225ChosaChikuGroupEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT5225ChosaChikuGroupEntity getEntity();

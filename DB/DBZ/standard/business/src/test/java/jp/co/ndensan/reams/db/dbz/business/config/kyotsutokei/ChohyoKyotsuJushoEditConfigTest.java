@@ -5,12 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config.kyotsutokei;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.kyotsutokei.ConfigKeysChohyoKyotsuJushoEdit;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.GunNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.HowToEditJusho;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.KatagakiPrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.ShichosonNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.TodofukenNamePrint;
+import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.jushohenshu.ChohyoKyotsuJushoEditConfig;
+import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.jushohenshu.ConfigKeysChohyoKyotsuJushoEdit;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.GunNamePrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HowToEditJusho;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.KatagakiPrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.ShichosonNamePrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TodofukenNamePrint;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbuTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

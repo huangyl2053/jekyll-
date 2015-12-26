@@ -49,4 +49,58 @@ public class BemmeishaJohoIdentifier implements Serializable {
         this.弁明書作成日 = 弁明書作成日;
         this.弁明者枝番 = 弁明者枝番;
     }
+
+    /**
+     * get証記載保険者番号
+     *
+     * @return 証記載保険者番号
+     */
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
+        return 証記載保険者番号;
+    }
+
+    /**
+     * get識別コード
+     *
+     * @return 識別コード
+     */
+    public ShikibetsuCode get識別コード() {
+        return 識別コード;
+    }
+
+    /**
+     * get原処分被保険者番号
+     *
+     * @return 原処分被保険者番号
+     */
+    public HihokenshaNo get原処分被保険者番号() {
+        return 原処分被保険者番号;
+    }
+
+    /**
+     * get審査請求届出日
+     *
+     * @return 審査請求届出日
+     */
+    public FlexibleDate get審査請求届出日() {
+        return 審査請求届出日;
+    }
+
+    /**
+     * get弁明書作成日
+     *
+     * @return 弁明書作成日
+     */
+    public FlexibleDate get弁明書作成日() {
+        return 弁明書作成日;
+    }
+
+    /**
+     * get弁明者枝番
+     *
+     * @return 弁明者枝番
+     */
+    public Decimal get弁明者枝番() {
+        return 弁明者枝番;
+    }
 }

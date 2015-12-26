@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJushoE
 public interface IDbT7023RendoHoryuTokuteiJushoMapper {
 
     /**
-     * {@link DbT7023RendoHoryuTokuteiJushoEntity}を取得します。
+     * {@link  DbT7023RendoHoryuTokuteiJushoEntity}を取得します。
      *
-     * @return {@link DbT7023RendoHoryuTokuteiJushoEntity}
+     * @return {@link  DbT7023RendoHoryuTokuteiJushoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7023RendoHoryuTokuteiJushoEntity getEntity();

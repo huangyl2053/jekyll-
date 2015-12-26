@@ -311,10 +311,22 @@ public class ChohyoSeigyoKyotsuBuilder {
         return new ChohyoSeigyoKyotsu(entity, id);
     }
 
+    /**
+     * setChohyoSeigyoKyotsu
+     *
+     * @param createChohyoSeigyoKyotsu ChohyoSeigyoKyotsuControl
+     * @return ChohyoSeigyoKyotsuBuilder
+     */
     public ChohyoSeigyoKyotsuBuilder setChohyoSeigyoKyotsu(ChohyoSeigyoKyotsuControl createChohyoSeigyoKyotsu) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * setChohyoSeigyoHanyo
+     *
+     * @param createChohyoSeigyoHanyo ChohyoSeigyoHanyo
+     * @return ChohyoSeigyoKyotsuBuilder
+     */
     public ChohyoSeigyoKyotsuBuilder setChohyoSeigyoHanyo(ChohyoSeigyoHanyo createChohyoSeigyoHanyo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

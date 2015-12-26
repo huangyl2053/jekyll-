@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJo
 public interface IDbT5208NinteichosahyoServiceJokyoFlagMapper {
 
     /**
-     * {@link DbT5208NinteichosahyoServiceJokyoFlagEntity}を取得します。
+     * {@link  DbT5208NinteichosahyoServiceJokyoFlagEntity}を取得します。
      *
-     * @return {@link DbT5208NinteichosahyoServiceJokyoFlagEntity}
+     * @return {@link  DbT5208NinteichosahyoServiceJokyoFlagEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT5208NinteichosahyoServiceJokyoFlagEntity getEntity();

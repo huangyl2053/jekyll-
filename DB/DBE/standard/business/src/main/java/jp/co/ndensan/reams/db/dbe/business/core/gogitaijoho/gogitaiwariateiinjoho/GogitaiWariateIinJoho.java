@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiWariateIinJoho;
+package jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -168,10 +168,8 @@ public class GogitaiWariateIinJoho extends ModelBase<GogitaiWariateIinJohoIdenti
     }
 
     /**
-     * 合議体割当委員情報配下の要素を削除対象とします。<br/>
-     * {@link DbT5593GogitaiWariateIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 合議体割当委員情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link GogitaiWariateIinJoho}を返します。
+     * 合議体割当委員情報配下の要素を削除対象とします。<br/> {@link DbT5593GogitaiWariateIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 合議体割当委員情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link GogitaiWariateIinJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link GogitaiWariateIinJoho}
      * @throws IllegalStateException DbT5593GogitaiWariateIinJohoEntityのデータ状態が変更の場合
@@ -194,8 +192,7 @@ public class GogitaiWariateIinJoho extends ModelBase<GogitaiWariateIinJohoIdenti
     }
 
     /**
-     * 合議体割当委員情報のみを変更対象とします。<br/>
-     * {@link DbT5593GogitaiWariateIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 合議体割当委員情報のみを変更対象とします。<br/> {@link DbT5593GogitaiWariateIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link GogitaiWariateIinJoho}
      */
@@ -275,8 +272,8 @@ public class GogitaiWariateIinJoho extends ModelBase<GogitaiWariateIinJohoIdenti
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.id);
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.id);
         return hash;
     }
 

@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho;
+import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.jushohenshu.ConfigKeysChohyoKyotsuJushoEdit;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
@@ -16,8 +18,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonS
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.config.HokenshaJoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.kyotsutokei.ConfigKeysChohyoKyotsuJushoEdit;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -64,8 +64,7 @@ public class KoikiShichosonJohoFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KoikiShichosonJohoFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KoikiShichosonJohoFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KoikiShichosonJohoFinder}のインスタンス
      */
     public static KoikiShichosonJohoFinder createInstance() {
         return InstanceProvider.create(KoikiShichosonJohoFinder.class);
@@ -121,8 +120,7 @@ public class KoikiShichosonJohoFinder {
      * 構成市町村ユーザ判定します。
      *
      * @param 識別ID 市町村識別ID
-     * @return ユーザ判定フラグ ( 市町村識別コードは’00’の合併旧市町村区分　＝'0'の場合true,
-     * 合併旧市町村区分＝'0'以外の場合false)
+     * @return ユーザ判定フラグ ( 市町村識別コードは’00’の合併旧市町村区分　＝'0'の場合true, 合併旧市町村区分＝'0'以外の場合false)
      */
     @Transaction
     public boolean isShichosonUserHandan(RString 識別ID) {
@@ -162,15 +160,15 @@ public class KoikiShichosonJohoFinder {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         entity.setShichosonShokibetsuID(SHOKIBETSUID);
         entity.setShichosonCode(new LasdecCode(association.get地方公共団体コード().value()));
-        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(BusinessConfig.get(HokenshaJoho.保険者情報_保険者番号,
+        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号,
                 SubGyomuCode.DBU介護統計報告)));
-        entity.setShichosonMeisho(BusinessConfig.get(HokenshaJoho.保険者情報_保険者名称, SubGyomuCode.DBU介護統計報告));
+        entity.setShichosonMeisho(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者名称, SubGyomuCode.DBU介護統計報告));
         entity.setTodofukenMeisho(association.get都道府県名());
         entity.setGunMeisho(association.get郡名());
-        entity.setYubinNo(new YubinNo(BusinessConfig.get(HokenshaJoho.保険者情報_郵便番号, SubGyomuCode.DBU介護統計報告)));
-        entity.setJusho(new AtenaJusho(BusinessConfig.get(HokenshaJoho.保険者情報_住所, SubGyomuCode.DBU介護統計報告)));
-        entity.setTelNo(new TelNo(BusinessConfig.get(HokenshaJoho.保険者情報_電話番号, SubGyomuCode.DBU介護統計報告)));
-        entity.setYusenChikuCode(BusinessConfig.get(HokenshaJoho.保険者情報_最優先地区コード, SubGyomuCode.DBU介護統計報告));
+        entity.setYubinNo(new YubinNo(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_郵便番号, SubGyomuCode.DBU介護統計報告)));
+        entity.setJusho(new AtenaJusho(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_住所, SubGyomuCode.DBU介護統計報告)));
+        entity.setTelNo(new TelNo(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_電話番号, SubGyomuCode.DBU介護統計報告)));
+        entity.setYusenChikuCode(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_最優先地区コード, SubGyomuCode.DBU介護統計報告));
         entity.setTyohyoTodoufukenHyojiUmu(BusinessConfig.get(
                 ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, SubGyomuCode.DBU介護統計報告));
         entity.setTyohyoGunHyojiUmu(BusinessConfig.get(

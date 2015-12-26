@@ -9,7 +9,9 @@ package jp.co.ndensan.reams.db.dbz.business.config;
  * 業務Configを取得するためのの機能を持つことを表します。
  *
  * @author N3327 三浦 凌
+ * @deprecated 不要のため削除する。
  */
+@Deprecated
 public interface IBusinessConfigLoader {
 
     /**

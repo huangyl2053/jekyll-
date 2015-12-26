@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItem
 public interface IDbT5211NinteichosahyoChosaItemMapper {
 
     /**
-     * {@link DbT5211NinteichosahyoChosaItemEntity}を取得します。
+     * {@link  DbT5211NinteichosahyoChosaItemEntity}を取得します。
      *
-     * @return {@link DbT5211NinteichosahyoChosaItemEntity}
+     * @return {@link  DbT5211NinteichosahyoChosaItemEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT5211NinteichosahyoChosaItemEntity getEntity();

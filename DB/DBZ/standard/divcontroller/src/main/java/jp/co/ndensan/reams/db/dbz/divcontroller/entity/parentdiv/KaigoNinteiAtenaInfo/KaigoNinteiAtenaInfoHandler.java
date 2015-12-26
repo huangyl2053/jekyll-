@@ -5,8 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiAtenaInfo;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei;
+import static jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei.単一市町村;
+import static jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei.広域保険者;
+import static jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei.広域審査会;
+import static jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei.広域市町村;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.HdnShoriTypeStatus;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv.AtenaType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv.ShoriType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.testdriver.TestKaigoNinteiAtenaInfo.TestKaigoNinteiAtenaInfoDiv;
@@ -87,7 +91,7 @@ public class KaigoNinteiAtenaInfoHandler {
         set介護認定宛名情報(testKaigoNinteiAtenaInfoDiv);
     }
 
-    //テスト用  
+    //テスト用
     private void set介護認定宛名情報(TestKaigoNinteiAtenaInfoDiv testKaigoNinteiAtenaInfoDiv) {
         div.getTxtShimei().setValue(testKaigoNinteiAtenaInfoDiv.getTxtShimei().getValue());
         div.getTxtBirthYMD().setValue(testKaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue());
@@ -105,12 +109,12 @@ public class KaigoNinteiAtenaInfoHandler {
         setImgJuminShubetsu();
     }
 
-    //テスト用     
+    //テスト用
     private void setImgJuminShubetsu() {
         //JuminShubetsu 日本人("1", "日本人"), 外国人("2", "外国人"),住登外個人_日本人("3", "住登外（日本人）"),法人("5", "法人"),  共有者("6", "共有者");
         // 親画面：div.getTxtJuminShubetsu().getValue()
         if (!div.getMode_AtenaType().equals(RString.EMPTY)
-                && div.getMode_AtenaType().equals(AtenaType.AtenaMode)) {
+            && div.getMode_AtenaType().equals(AtenaType.AtenaMode)) {
             switch (JuminShubetsu.toValue(div.getTxtJuminShubetsu().getValue())) {
                 //住登内
                 case 日本人:
@@ -119,7 +123,7 @@ public class KaigoNinteiAtenaInfoHandler {
                 case 共有者:
                     div.getImgJuminShubetsu().setSrc(JUTONAI_IMAGE_PATH);
                     break;
-                //住登外    
+                //住登外
                 case 住登外個人_日本人:
                 case 住登外個人_外国人:
                     div.getImgJuminShubetsu().setSrc(JUTOGAI_IMAGE_PATH);

@@ -9,13 +9,13 @@ import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.ForeignersNameOutput;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.GappeiKyuShichosonHyoji;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.GappeiKyuShichosonKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.GunNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.HowToEditJusho;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.KatagakiPrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.GunNamePrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HowToEditJusho;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.KatagakiPrint;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.RokenJukyushaNoTaikei;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.ShichosonNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.TodofukenNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.TopPriorityArea;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.ShichosonNamePrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TodofukenNamePrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TopPriorityArea;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.UnyoKeitaiKubun;
 import static jp.co.ndensan.reams.db.dbz.definition.core.util.function.ExceptionSuppliers.applicationException;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IFunction;
@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.GappeiChiikiNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.KokuhorenKoikiShichosonNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.RokenShichosonNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.ShichosonShikibetsuID;
+import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -43,6 +43,11 @@ public class GappeiKoikiKoseiShichoson implements IKoikiKoseiShichoson {
     private final IKoikiKoseiShichoson shichoson;
     private final Optional<FlexibleDate> kanyuYMD;
 
+    /**
+     * コンストラクタ
+     *
+     * @param shichosons IItemList
+     */
     public GappeiKoikiKoseiShichoson(IItemList<? extends IKoikiKoseiShichoson> shichosons) {
         Objects.requireNonNull(shichosons);
         IItemList<? extends IKoikiKoseiShichoson> sortedByKanyuYMD = shichosons.sorted(KoikiKoseiShichosonMasterComparator.orderBy加入日.asc());

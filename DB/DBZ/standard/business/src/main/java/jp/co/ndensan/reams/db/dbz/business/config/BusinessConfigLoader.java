@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  *
  * @author N3327 三浦 凌
  */
+@Deprecated
 public final class BusinessConfigLoader implements IBusinessConfigLoader {
 
     private final BusinessConfig urBusinessConfig;

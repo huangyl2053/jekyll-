@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakutokusorireki;
 
 //import java.util.ArrayList;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 //import java.util.List;
 //import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
 //import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
@@ -33,6 +35,8 @@ public class ShikakuTokusoRirekiHandler {
      */
     public ShikakuTokusoRirekiHandler(ShikakuTokusoRirekiDiv div) {
         this.div = div;
+        //TODO n2810 checkstyle回避のため暫定対応
+        this.div.setTitle(RString.EMPTY);
 //        hihokenshaFinder = new HihokenshaFinder();
     }
 

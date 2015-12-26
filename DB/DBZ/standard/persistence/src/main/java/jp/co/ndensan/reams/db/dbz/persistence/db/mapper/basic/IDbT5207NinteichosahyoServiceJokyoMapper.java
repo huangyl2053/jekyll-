@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJo
 public interface IDbT5207NinteichosahyoServiceJokyoMapper {
 
     /**
-     * {@link DbT5207NinteichosahyoServiceJokyoEntity}を取得します。
+     * {@link  DbT5207NinteichosahyoServiceJokyoEntity}を取得します。
      *
-     * @return {@link DbT5207NinteichosahyoServiceJokyoEntity}
+     * @return {@link  DbT5207NinteichosahyoServiceJokyoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT5207NinteichosahyoServiceJokyoEntity getEntity();

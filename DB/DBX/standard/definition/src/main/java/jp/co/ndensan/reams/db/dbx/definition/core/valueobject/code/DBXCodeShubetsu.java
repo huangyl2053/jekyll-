@@ -1015,15 +1015,30 @@ public enum DBXCodeShubetsu {
         this.returnType = returnType;
     }
 
+    /**
+     * コード種別を返します。
+     *
+     * @return コード種別
+     */
     public CodeShubetsu getCodeShubetsu() {
         return codeShubetsu;
     }
 
+    /**
+     * サブ業務コードを返します。
+     *
+     * @return サブ業務コード
+     */
     public SubGyomuCode getSubGyomuCode() {
         return subGyomuCode;
     }
 
-    public Class getReturnType() {
+    /**
+     * 型を返します。
+     *
+     * @return 型
+     */
+    public Class<?> getReturnType() {
         return returnType;
     }
 }

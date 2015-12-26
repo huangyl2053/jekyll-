@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7203JukyuNinteiUmyoEntity;
  */
 public interface IDbT7203JukyuNinteiUmyoMapper {
 
-    /* * {@linkDbT7203JukyuNinteiUmyoEntity}を取得します。
+    /** {@link DbT7203JukyuNinteiUmyoEntity}を取得します。
      *
-     * @return {@linkDbT7203JukyuNinteiUmyolEntity}
+     * @return {@link DbT7203JukyuNinteiUmyolEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7203JukyuNinteiUmyoEntity getEntity();

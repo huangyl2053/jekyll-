@@ -35,4 +35,31 @@ public class ShotokuIdentifier implements Serializable {
         this.識別コード = 識別コード;
         this.履歴番号 = 履歴番号;
     }
+
+    /**
+     * get所得年度
+     *
+     * @return 所得年度
+     */
+    public FlexibleYear get所得年度() {
+        return 所得年度;
+    }
+
+    /**
+     * get識別コード
+     *
+     * @return 識別コード
+     */
+    public ShikibetsuCode get識別コード() {
+        return 識別コード;
+    }
+
+    /**
+     * get履歴番号
+     *
+     * @return 履歴番号
+     */
+    public Decimal get履歴番号() {
+        return 履歴番号;
+    }
 }

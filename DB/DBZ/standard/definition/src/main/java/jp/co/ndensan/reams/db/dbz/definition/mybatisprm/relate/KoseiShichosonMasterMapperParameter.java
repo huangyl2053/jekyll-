@@ -12,6 +12,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class KoseiShichosonMasterMapperParameter {
 
+    /**
+     * @param rString rString
+     * @return KoseiShichosonMasterMapperParameter
+     */
     public static KoseiShichosonMasterMapperParameter createXXXParam(RString rString) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

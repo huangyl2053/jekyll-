@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7054KanrenHihokenshaNoEntit
  */
 public interface IDbT7054KanrenHihokenshaNoMapper {
 
-    /* * {@linkDbT7054KanrenHihokenshaNoEntity}を取得します。
+    /** {@link DbT7054KanrenHihokenshaNoEntity}を取得します。
      *
-     * @return {@linkDbT7054KanrenHihokenshaNoEntity}
+     * @return {@link DbT7054KanrenHihokenshaNoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7054KanrenHihokenshaNoEntity getEntity();

@@ -9,6 +9,8 @@ package jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.config;
  * 業務Configのkeyであることを表します。
  *
  * @author N3327 三浦 凌
+ * @deprecated 不要のため削除する。
  */
+@Deprecated
 public interface IConfigKey {
 }

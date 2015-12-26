@@ -18,7 +18,7 @@ public enum HihokenshaKubunCodeSpec implements IPredicate<HihokenshaKubunCode> {
     コードがNullでないこと {
                 /**
                  *
-                 * @param hihokenshaKubunCode 保険者区分コード
+                 * @param hihokenshakubuncode 保険者区分コード
                  * @return true：仕様を満たす、false：仕様を満たさない
                  */
                 @Override

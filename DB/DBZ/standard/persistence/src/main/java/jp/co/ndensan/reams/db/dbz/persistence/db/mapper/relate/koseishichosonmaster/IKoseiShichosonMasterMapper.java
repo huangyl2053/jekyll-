@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.koseishichosonmaster;
 
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.koseishichosonmaster.KoseiShichosonMasterMapperParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
 
 /**
  * 構成市町村マスタのマッパーインタフェースです。

@@ -57,7 +57,7 @@ public class KoikiKoseiShichosonData {
 
     }
 
-    private final class Shichosons implements IShichosons {
+    private final static class Shichosons implements IShichosons {
 
         private final List<HashMap> dataFromYaml;
 

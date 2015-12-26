@@ -1,0 +1,3 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+shishoCode,DbUDD014ShishoCode,DbUDD014ShishoCode,,,,,支所コード,A
+shishoMei,varchar,RString,,,,,支所名,A

@@ -440,10 +440,20 @@ public class FufukuMoshitate extends
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * getBemmeiNaiyoList
+     *
+     * @return BemmeiNaiyoリスト
+     */
     public List<BemmeiNaiyo> getBemmeiNaiyoList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * modified
+     *
+     * @return FufukuMoshitate
+     */
     public FufukuMoshitate modified() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

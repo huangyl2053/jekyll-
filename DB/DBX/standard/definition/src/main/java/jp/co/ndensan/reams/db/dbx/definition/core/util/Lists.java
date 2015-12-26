@@ -12,8 +12,6 @@ import java.util.Objects;
 
 /**
  * {@link List List}を扱うユーティリティです。
- *
- * @author N3327 三浦 凌
  */
 public final class Lists {
 

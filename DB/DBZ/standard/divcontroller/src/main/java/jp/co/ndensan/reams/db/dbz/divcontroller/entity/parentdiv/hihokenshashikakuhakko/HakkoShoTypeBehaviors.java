@@ -35,9 +35,9 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMasterHelper;
 final class HakkoShoTypeBehaviors {
 
     // TODO N8187 久保田 審査会意見の最大長(被保険者証の場合198文字)は被保険者証のソースデータクラスから取得するよう修正する。 2015/03/31。
-    private static final int SHINSAKAIIKEN_MAX_HIHOKENSHASHO = 198;
+    private static final int MAX_HIHOKENSHASHO = 198;
     // TODO N8187 久保田 審査会意見の最大長(資格者証の場合175文字)は資格者証のソースデータクラスから取得するよう修正する。 2015/03/31。
-    private static final int SHINSAKAIIKEN_MAX_SHIKAKUSHASHO = 175;
+    private static final int MAX_SHIKAKUSHASHO = 175;
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -110,7 +110,7 @@ final class HakkoShoTypeBehaviors {
 
         @Override
         public int get審査会意見最大長() {
-            return SHINSAKAIIKEN_MAX_HIHOKENSHASHO;
+            return MAX_HIHOKENSHASHO;
         }
 
         @Override
@@ -169,7 +169,7 @@ final class HakkoShoTypeBehaviors {
 
         @Override
         public int get審査会意見最大長() {
-            return SHINSAKAIIKEN_MAX_SHIKAKUSHASHO;
+            return MAX_SHIKAKUSHASHO;
         }
 
         @Override

@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4129TennyuShiboEntity;
  */
 public interface IDbT4129TennyuShiboMapper {
 
-    /* * {@linkDbT4129TennyuShiboEntity}を取得します。
+    /** {@link DbT4129TennyuShiboEntity}を取得します。
      *
-     * @return {@linkDbT4129TennyuShiboEntity}
+     * @return {@link DbT4129TennyuShiboEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT4129TennyuShiboEntity getEntity();

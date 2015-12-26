@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4305IkenshoImageJohoEntity;
 public interface IDbT4305IkenshoImageJohoMapper {
 
     /**
-     * {@link DbT4305IkenshoImageJohoEntity}を取得します。
+     * {@link  DbT4305IkenshoImageJohoEntity}を取得します。
      *
-     * @return {@link DbT4305IkenshoImageJohoEntity}
+     * @return {@link  DbT4305IkenshoImageJohoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT4305IkenshoImageJohoEntity getEntity();

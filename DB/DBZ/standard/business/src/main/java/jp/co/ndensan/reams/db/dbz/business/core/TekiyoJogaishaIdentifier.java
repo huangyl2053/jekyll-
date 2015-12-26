@@ -35,4 +35,31 @@ public class TekiyoJogaishaIdentifier implements Serializable {
         this.異動日 = 異動日;
         this.枝番 = 枝番;
     }
+
+    /**
+     * get識別コード
+     *
+     * @return 識別コード
+     */
+    public ShikibetsuCode get識別コード() {
+        return 識別コード;
+    }
+
+    /**
+     * get異動日
+     *
+     * @return 異動日
+     */
+    public FlexibleDate get異動日() {
+        return 異動日;
+    }
+
+    /**
+     * get枝番
+     *
+     * @return 枝番
+     */
+    public RString get枝番() {
+        return 枝番;
+    }
 }

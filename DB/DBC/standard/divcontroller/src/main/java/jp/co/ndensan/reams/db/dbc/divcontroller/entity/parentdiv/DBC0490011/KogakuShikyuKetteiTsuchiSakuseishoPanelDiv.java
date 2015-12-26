@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0490011;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.PaymentDateDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoChohyoShutsuryokujun.KaigoChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.printcontentssetting.PrintContentsSettingDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 
@@ -30,7 +30,7 @@ public class KogakuShikyuKetteiTsuchiSakuseishoPanelDiv extends PanelPublish {
     @JsonProperty("KogakuShikyuKetteiTsuchiSakuseishoPaymentMethod")
     private PaymentDateDiv KogakuShikyuKetteiTsuchiSakuseishoPaymentMethod;
     @JsonProperty("CommonKariChildDiv2")
-    private KaigoChohyoShutsuryokujunDiv CommonKariChildDiv2;
+    private ChohyoShutsuryokujunDiv CommonKariChildDiv2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -69,12 +69,12 @@ public class KogakuShikyuKetteiTsuchiSakuseishoPanelDiv extends PanelPublish {
     }
 
     @JsonProperty("CommonKariChildDiv2")
-    public KaigoChohyoShutsuryokujunDiv getCommonKariChildDiv2() {
+    public ChohyoShutsuryokujunDiv getCommonKariChildDiv2() {
         return CommonKariChildDiv2;
     }
 
     @JsonProperty("CommonKariChildDiv2")
-    public void setCommonKariChildDiv2(KaigoChohyoShutsuryokujunDiv CommonKariChildDiv2) {
+    public void setCommonKariChildDiv2(ChohyoShutsuryokujunDiv CommonKariChildDiv2) {
         this.CommonKariChildDiv2 = CommonKariChildDiv2;
     }
 

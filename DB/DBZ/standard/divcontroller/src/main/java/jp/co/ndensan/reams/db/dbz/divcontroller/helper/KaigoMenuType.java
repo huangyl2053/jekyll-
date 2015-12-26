@@ -1961,28 +1961,22 @@ public enum KaigoMenuType {
         this.flowId = new RString(flowId);
         this.title = new RString(title);
     }
-
     /**
      * フローIDを返します。
-     *
      * @return フローID
      */
     public RString getFlowId() {
         return flowId;
     }
-
     /**
      * 親Divに表示するタイトルを返します。
-     *
      * @return タイトル
      */
     public RString getTitle() {
         return title;
     }
-
     /**
      * 指定したフローIDに対応する要素を返します。
-     *
      * @param flowId フローIDを表すRString
      * @return フローIDに対応するKaigoMenuType
      */
@@ -1994,15 +1988,12 @@ public enum KaigoMenuType {
         }
         return RString.EMPTY;
     }
-
     /**
      * 指定したフローIDに対応する要素を返します。
-     *
      * @param flowId フローIDを表すString
      * @return フローIDに対応するKaigoMenuType
      */
     public static RString getRootTitle(String flowId) {
         return getRootTitle(new RString(flowId));
     }
-
 }

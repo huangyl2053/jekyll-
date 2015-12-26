@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+//import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+//import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 不服審査申立情報を特定するためのMyBatis用パラメータクラスです。
@@ -19,8 +19,8 @@ public final class FufukuMoshitateMapperParameter {
 // TODO 主キーの数が足りない場合、処理を追加してください。
     private final ShoKisaiHokenshaNo 主キー1;
     private final ShikibetsuCode 主キー2;
-    private HihokenshaNo 主キー3;
-    private FlexibleDate 主キー4;
+//    private HihokenshaNo 主キー3;
+//    private FlexibleDate 主キー4;
 
     private final boolean uses主キー1;
     private final boolean uses主キー2;
@@ -90,24 +90,24 @@ public final class FufukuMoshitateMapperParameter {
     public ShikibetsuCode get主キー2() {
         return 主キー2;
     }
-
-    /**
-     * get主キー3を取得します。
-     *
-     * @return 主キー3
-     */
-    public HihokenshaNo get主キー3() {
-        return 主キー3;
-    }
-
-    /**
-     * get主キー4を取得します。
-     *
-     * @return 主キー4
-     */
-    public FlexibleDate get主キー4() {
-        return 主キー4;
-    }
+//
+//    /**
+//     * get主キー3を取得します。
+//     *
+//     * @return 主キー3
+//     */
+//    public HihokenshaNo get主キー3() {
+//        return 主キー3;
+//    }
+//
+//    /**
+//     * get主キー4を取得します。
+//     *
+//     * @return 主キー4
+//     */
+//    public FlexibleDate get主キー4() {
+//        return 主キー4;
+//    }
 
     /**
      * isUses主キー1を取得します。

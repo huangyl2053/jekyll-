@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7033GappeiNaiJutokushaShinK
 public interface IDbT7033GappeiNaiJutokushaShinKyuNoHenkanMapper {
 
     /**
-     * {@link DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity}を取得します。
+     * {@link  DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity}を取得します。
      *
-     * @return {@link DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity}
+     * @return {@link  DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity getEntity();

@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 被保険者台帳管理Aliveのデータアクセスクラスです。
  */
-public class DbV1001HihokenshaDaichoAliveDac implements ISaveable<DbV1001HihokenshaDaichoEntity> {
+public class DbV1001HihokenshaDaichoAliveDac {
 
     @InjectSession
     private SqlSession session;
@@ -81,7 +81,6 @@ public class DbV1001HihokenshaDaichoAliveDac implements ISaveable<DbV1001Hihoken
      * @return 登録件数
      */
     @Transaction
-    @Override
     public int save(DbV1001HihokenshaDaichoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳管理Aliveエンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。

@@ -60,8 +60,9 @@ public class HihokenshaFinderHandler {
      */
     RString get保険者() {
 //        DropDownList item = div.getKaigoFinder().getDdlHokensha();
-        DropDownList item = null;
-        return (item != null && item.isVisible()) ? item.getSelectedKey() : RString.EMPTY;
+//        DropDownList item = null;
+//        return (item != null && item.isVisible()) ? item.getSelectedKey() : RString.EMPTY;
+        return RString.EMPTY;
     }
 
     /**
@@ -71,8 +72,9 @@ public class HihokenshaFinderHandler {
      */
     RString get被保険者番号() {
 //        TextBoxCode item = div.getKaigoFinder().getTxtHihokenshaNo();
-        TextBoxCode item = null;
-        return (item != null && !item.getValue().trim().isEmpty()) ? item.getValue() : RString.EMPTY;
+//        TextBoxCode item = null;
+//        return (item != null && !item.getValue().trim().isEmpty()) ? item.getValue() : RString.EMPTY;
+        return RString.EMPTY;
     }
 
     /**
@@ -82,8 +84,9 @@ public class HihokenshaFinderHandler {
      */
     RString get通知書番号() {
 //        TextBoxCode item = div.getKaigoFinder().getTxtTuchishoNo();
-        TextBoxCode item = null;
-        return (item != null && !item.getValue().trim().isEmpty()) ? item.getValue() : RString.EMPTY;
+//        TextBoxCode item = null;
+//        return (item != null && !item.getValue().trim().isEmpty()) ? item.getValue() : RString.EMPTY;
+        return RString.EMPTY;
     }
 
     /**
@@ -93,9 +96,10 @@ public class HihokenshaFinderHandler {
      */
     FlexibleYear get賦課年度() {
 //        DropDownList item = div.getKaigoFinder().getDdlFukaNendo();
-        DropDownList item = null;
-        return (item != null && item.getSelectedKey() != null && !item.getSelectedKey().equals(FlexibleYear.MAX.toDateString()))
-                ? new FlexibleYear(item.getSelectedKey().toString()) : FlexibleYear.MAX;
+//        DropDownList item = null;
+//        return (item != null && item.getSelectedKey() != null && !item.getSelectedKey().equals(FlexibleYear.MAX.toDateString()))
+//                ? new FlexibleYear(item.getSelectedKey().toString()) : FlexibleYear.MAX;
+        return FlexibleYear.MAX;
     }
 
     /**
@@ -173,7 +177,7 @@ public class HihokenshaFinderHandler {
      * @param 名称 名称
      */
     void save最近処理者(ShikibetsuCode 識別コード, AtenaMeisho 名称) {
-        IUrControlData controlData = UrControlDataFactory.createInstance();
+//        IUrControlData controlData = UrControlDataFactory.createInstance();
 //        saikinShorishaManager.save(controlData, new ScopeCode(ScopeCodeType.識別対象.getCode()), 識別コード.value(), 名称.value());
     }
 

@@ -34,25 +34,39 @@ public class ChosainJohoDac {
     @InjectSession
     private SqlSession session;
 
+    /**
+     * @param 介護調査員番号 介護調査員番号
+     * @return ChosainJohoEntity
+     */
     public ChosainJohoEntity selectByNumber(RString 介護調査員番号) {
         ITrueFalseCriteria 条件 = eq(ChosainJoho.介護調査員番号, 介護調査員番号);
         List<ChosainJohoEntity> result = select(条件);
         return result.size() == 1 ? result.get(0) : null;
     }
 
+    /**
+     * @param 介護事業者番号 介護事業者番号
+     * @return ChosainJohoEntity list
+     */
     public List<ChosainJohoEntity> selectByJigyoshaCode(KaigoJigyoshaNo 介護事業者番号) {
         ITrueFalseCriteria 条件 = eq(ChosainJoho.介護事業者番号, 介護事業者番号);
         return select(条件);
     }
 
+    /**
+     * @param 市町村コード 市町村コード
+     * @param 介護事業者番号 介護事業者番号
+     * @param 介護調査員番号 介護調査員番号
+     * @return ChosainJohoEntity
+     */
     public ChosainJohoEntity selectByAllKey(RString 市町村コード, KaigoJigyoshaNo 介護事業者番号, RString 介護調査員番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(ChosainJoho.class).
                 where(and(eq(ChosainJoho.市町村コード, 市町村コード),
-                                eq(ChosainJoho.介護事業者番号, 介護事業者番号),
-                                eq(ChosainJoho.介護調査員番号, 介護調査員番号))).
+                          eq(ChosainJoho.介護事業者番号, 介護事業者番号),
+                          eq(ChosainJoho.介護調査員番号, 介護調査員番号))).
                 toObject(ChosainJohoEntity.class);
     }
 

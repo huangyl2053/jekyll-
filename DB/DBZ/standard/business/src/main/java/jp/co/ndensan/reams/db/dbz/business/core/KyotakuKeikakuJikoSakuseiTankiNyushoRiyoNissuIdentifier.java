@@ -35,4 +35,31 @@ public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier implements 
         this.対象年月 = 対象年月;
         this.履歴番号 = 履歴番号;
     }
+
+    /**
+     * get被保険者番号
+     *
+     * @return 被保険者番号
+     */
+    public HihokenshaNo get被保険者番号() {
+        return 被保険者番号;
+    }
+
+    /**
+     * get対象年月
+     *
+     * @return 対象年月
+     */
+    public FlexibleYearMonth get対象年月() {
+        return 対象年月;
+    }
+
+    /**
+     * get履歴番号
+     *
+     * @return 履歴番号
+     */
+    public Decimal get履歴番号() {
+        return 履歴番号;
+    }
 }

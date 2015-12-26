@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyu
 public interface IDbT7006RoreiFukushiNenkinJukyushaMapper {
 
     /**
-     * {@link DbT7006RoreiFukushiNenkinJukyushaEntity}を取得します。
+     * {@link  DbT7006RoreiFukushiNenkinJukyushaEntity}を取得します。
      *
-     * @return {@link DbT7006RoreiFukushiNenkinJukyushaEntity}
+     * @return {@link  DbT7006RoreiFukushiNenkinJukyushaEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7006RoreiFukushiNenkinJukyushaEntity getEntity();

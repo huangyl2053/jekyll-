@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaE
  */
 public interface IDbT1009ShikakuShutokuJogaishaMapper {
 
-    /* * {@linkDbT1009ShikakuShutokuJogaishaEntity}を取得します。
+    /** {@link DbT1009ShikakuShutokuJogaishaEntity}を取得します。
      *
-     * @return {@linkDbT1009ShikakuShutokuJogaishaEntity}
+     * @return {@link DbT1009ShikakuShutokuJogaishaEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT1009ShikakuShutokuJogaishaEntity getEntity();

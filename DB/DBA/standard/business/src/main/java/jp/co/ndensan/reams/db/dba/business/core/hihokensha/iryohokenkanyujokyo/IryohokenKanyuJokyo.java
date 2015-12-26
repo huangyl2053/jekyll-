@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -35,7 +36,7 @@ public class IryohokenKanyuJokyo extends ModelBase<IryohokenKanyuJokyoIdentifier
      * @param 履歴番号 履歴番号
      */
     public IryohokenKanyuJokyo(ShikibetsuCode 識別コード,
-            int 履歴番号) {
+            Decimal 履歴番号) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT1008IryohokenKanyuJokyoEntity();
@@ -88,7 +89,7 @@ public class IryohokenKanyuJokyo extends ModelBase<IryohokenKanyuJokyoIdentifier
      *
      * @return 履歴番号
      */
-    public int get履歴番号() {
+    public Decimal get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -185,8 +186,7 @@ public class IryohokenKanyuJokyo extends ModelBase<IryohokenKanyuJokyoIdentifier
     }
 
     /**
-     * 介護保険医療保険加入状況のみを変更対象とします。<br/>
-     * {@link DbT1008IryohokenKanyuJokyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護保険医療保険加入状況のみを変更対象とします。<br/> {@link DbT1008IryohokenKanyuJokyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link IryohokenKanyuJokyo}
      */
@@ -200,8 +200,7 @@ public class IryohokenKanyuJokyo extends ModelBase<IryohokenKanyuJokyoIdentifier
     }
 
     /**
-     * 保持する介護保険医療保険加入状況を削除対象とします。<br/>
-     * {@link DbT1008IryohokenKanyuJokyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護保険医療保険加入状況を削除対象とします。<br/> {@link DbT1008IryohokenKanyuJokyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link IryohokenKanyuJokyo}
      */

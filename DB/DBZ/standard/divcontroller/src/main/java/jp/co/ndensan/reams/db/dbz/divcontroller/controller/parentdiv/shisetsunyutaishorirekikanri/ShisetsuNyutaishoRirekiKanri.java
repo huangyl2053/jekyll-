@@ -5,14 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.shisetsunyutaishorirekikanri;
 
-import jp.co.ndensan.reams.db.dbz.business.shisetsunyutaisho.ShisetsuNyutaishoModel;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+//import jp.co.ndensan.reams.db.dbz.business.shisetsunyutaisho.ShisetsuNyutaishoModel;
+//import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
+//import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
+//import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 //import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationHelper;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -39,6 +39,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * 共有子Divのロード時に行う処理です。
      *
      * @param shisetsuNyutaishoRirekiDiv
+     * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return レスポンス
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onLoad(ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
@@ -213,54 +214,54 @@ public class ShisetsuNyutaishoRirekiKanri {
         //DbT1004ShisetsuNyutaishoEntity model = ShisetsuNyutaishoMapper.toDbT1004ShisetsuNyutaishoEntity(shisetsuNyutaishoRirekiDiv);
         RString rowState = shisetsuNyutaishoRirekiDiv.getInputMode();
 
-        Optional<ShisetsuNyutaishoModel> 前履歴;
-        Optional<ShisetsuNyutaishoModel> 次履歴;
-        IItemList<ShisetsuNyutaishoModel> 全履歴;
+//        Optional<ShisetsuNyutaishoModel> 前履歴;
+//        Optional<ShisetsuNyutaishoModel> 次履歴;
+//        IItemList<ShisetsuNyutaishoModel> 全履歴;
 
         switch (ViewExecutionStatus.toValue(rowState)) {
 
             case Add:
-                前履歴 = Optional.empty();
-                次履歴 = Optional.empty();
+//                前履歴 = Optional.empty();
+//                次履歴 = Optional.empty();
 
                 //TODO n3331 modelパッケージ廃止に伴うエラーの解消のためコメントアウト
-                全履歴 = ItemList.empty();
+//                全履歴 = ItemList.empty();
                 //全履歴 = createHandlerOf(shisetsuNyutaishoRirekiDiv).get施設入退所履歴().map(toShisetsuNyutaishoModel());
                 break;
             case Modify:
                 int rowIndex = Integer.valueOf(shisetsuNyutaishoRirekiDiv.getSelectRow().toString()).intValue();
 
-                if (rowIndex != 0) {
-                    int rdx = rowIndex - 1;
+//                if (rowIndex != 0) {
+//                    int rdx = rowIndex - 1;
                     // dgShisetsuNyutaishoRireki_Row row = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rdx);
                     //TODO n3331 modelパッケージ廃止に伴うエラーの解消のためコメントアウト
-                    次履歴 = Optional.empty();
+//                    次履歴 = Optional.empty();
 //                    次履歴 = createHandlerOf(shisetsuNyutaishoRirekiDiv).get施設入退所履歴()
 //                            .filter(ShisetsuNyutaishoMapper.createKey(row))
 //                            .findJustOne().map(toShisetsuNyutaishoModel());
-                } else {
-                    次履歴 = Optional.empty();
-                }
+//                } else {
+//                    次履歴 = Optional.empty();
+//                }
 
-                if (rowIndex + 1 <= shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().size() - 1) {
-                    int rdx = rowIndex + 1;
+//                if (rowIndex + 1 <= shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().size() - 1) {
+//                    int rdx = rowIndex + 1;
                     //dgShisetsuNyutaishoRireki_Row row = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rdx);
                     //TODO n3331 modelパッケージ廃止に伴うエラーの解消のためコメントアウト
-                    前履歴 = Optional.empty();
+//                    前履歴 = Optional.empty();
 //                    前履歴 = createHandlerOf(shisetsuNyutaishoRirekiDiv).get施設入退所履歴()
 //                            .filter(ShisetsuNyutaishoMapper.createKey(row))
 //                            .findJustOne().map(toShisetsuNyutaishoModel());
-                } else {
-                    前履歴 = Optional.empty();
-                }
+//                } else {
+//                    前履歴 = Optional.empty();
+//                }
 
-                全履歴 = ItemList.empty();
+//                全履歴 = ItemList.empty();
                 break;
             case Delete:
             default:
-                前履歴 = Optional.empty();
-                次履歴 = Optional.empty();
-                全履歴 = ItemList.empty();
+//                前履歴 = Optional.empty();
+//                次履歴 = Optional.empty();
+//                全履歴 = ItemList.empty();
                 break;
         }
         //ShisetsuNyutaishoRirekiKanriContext context = new ShisetsuNyutaishoRirekiKanriContext(ViewExecutionStatus.toValue(rowState), 前履歴, 次履歴, 全履歴);

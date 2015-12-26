@@ -37,6 +37,11 @@ public class NinteiAndKyotakuShienOutputChecker {
         this.printConfig = printConfig;
     }
 
+    /**
+     * is居宅支援事業者表示
+     *
+     * @return boolean
+     */
     public boolean is居宅支援事業者表示() {
         HihokenshaShikakuHakkoModel shikakuHakko = hihokenshashoModel.getShikakuHakko();
         FlexibleDate kofuDate = shikakuHakko.get交付日();
@@ -51,6 +56,11 @@ public class NinteiAndKyotakuShienOutputChecker {
         return printConfig.is居宅支援事業者適用切れ表示有り() || is居宅適用継続中;
     }
 
+    /**
+     * is認定情報表示
+     *
+     * @return boolean
+     */
     public boolean is認定情報表示() {
         HihokenshaShikakuHakkoModel shikakuHakko = hihokenshashoModel.getShikakuHakko();
         FlexibleDate kofuDate = shikakuHakko.get交付日();

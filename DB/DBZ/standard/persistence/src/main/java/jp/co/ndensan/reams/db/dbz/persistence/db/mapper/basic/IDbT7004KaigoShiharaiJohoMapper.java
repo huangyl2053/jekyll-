@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7004KaigoShiharaiJohoEntity
 public interface IDbT7004KaigoShiharaiJohoMapper {
 
     /**
-     * {@link DbT7004KaigoShiharaiJohoEntity}を取得します。
+     * {@link  DbT7004KaigoShiharaiJohoEntity}を取得します。
      *
-     * @return {@link DbT7004KaigoShiharaiJohoEntity}
+     * @return {@link  DbT7004KaigoShiharaiJohoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7004KaigoShiharaiJohoEntity getEntity();

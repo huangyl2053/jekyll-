@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyosha;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
-import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.KaigoJigyosha.KaigoJigyoshaMapperParameter;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigojigyosha.KaigoJigyoshaMapperParameter;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigojigyosha.kaigojigyosha.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.kaigojigyosha.IKaigoJigyoshaMapper;
@@ -42,7 +42,7 @@ public class KaigoJigyoshaManager {
 
     /**
      * 単体テスト用のコンストラクタです。
-     * 
+     *
      * @param mapperProvider mapperProvider
      * @param 介護事業者Dac 介護事業者Dac
      * @param 介護事業者代表者Manager 介護事業者代表者Manager
@@ -108,13 +108,13 @@ public class KaigoJigyoshaManager {
         return 1 == 介護事業者Dac.save(介護事業者.toEntity());
     }
 
-    private void save介護事業者代表者リスト(List<KaigoJigyoshaDaihyosha> 介護事業者代表者List) {    
+    private void save介護事業者代表者リスト(List<KaigoJigyoshaDaihyosha> 介護事業者代表者List) {
         for (KaigoJigyoshaDaihyosha 介護事業者代表者 : 介護事業者代表者List) {
             介護事業者代表者Manager.save介護事業者代表者(介護事業者代表者);
         }
     }
 
-    private void save介護事業者指定サービスリスト(List<KaigoJigyoshaShiteiService> 介護事業者指定サービスList) {    
+    private void save介護事業者指定サービスリスト(List<KaigoJigyoshaShiteiService> 介護事業者指定サービスList) {
         for (KaigoJigyoshaShiteiService 介護事業者指定サービス : 介護事業者指定サービスList) {
             介護事業者指定サービスManager.save介護事業者指定サービス(介護事業者指定サービス);
         }

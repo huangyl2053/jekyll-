@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3005KyotakuK
  */
 public interface IDbT3005KyotakuKeikakuTodokedeMapper {
 
-    /* * {@linkDbT3005KyotakuKeikakuTodokedeEntity}を取得します。
+    /** {@link DbT3005KyotakuKeikakuTodokedeEntity}を取得します。
      *
-     * @return {@linkDbT3005KyotakuKeikakuTodokedeEntity}
+     * @return {@link DbT3005KyotakuKeikakuTodokedeEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT3005KyotakuKeikakuTodokedeEntity getEntity();

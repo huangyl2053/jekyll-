@@ -257,7 +257,7 @@ public class ShikakuHenkoRireki {
 //        Optional<HihokenshaDaicho> 前履歴;
 //        Optional<HihokenshaDaicho> 次履歴;
 //        IItemList<HihokenshaDaicho> 全履歴;
-        HihokenshaDaicho select最終更新被保険者 = null;
+//        HihokenshaDaicho select最終更新被保険者 = null;
         //TODO n3331 modelパッケージ廃止に伴うエラー解消のためコメントアウト
 //        HihokenshaDaicho select最終更新被保険者 = new HihokenshaDaicho();
 //        FlexibleDate selected資格取得日 = FlexibleDate.EMPTY;
@@ -274,7 +274,7 @@ public class ShikakuHenkoRireki {
                 int rowIndex = Integer.valueOf(henkoRirekiDiv.getSelectRow().toString()).intValue();
 
                 if (rowIndex != 0) {
-                    int rdx = rowIndex - 1;
+//                    int rdx = rowIndex - 1;
                     //dgHenko_Row row = henkoRirekiDiv.getDgHenko().getDataSource().get(rdx);
                     Optional.empty();
 //                    次履歴 = createHandlerOf(henkoRirekiDiv).get被保険者台帳情報()
@@ -285,7 +285,7 @@ public class ShikakuHenkoRireki {
                 }
 
                 if (rowIndex + 1 <= henkoRirekiDiv.getDgHenko().getDataSource().size() - 1) {
-                    int rdx = rowIndex + 1;
+//                    int rdx = rowIndex + 1;
                     //dgHenko_Row row = henkoRirekiDiv.getDgHenko().getDataSource().get(rdx);
                     Optional.empty();
 //                    前履歴 = createHandlerOf(henkoRirekiDiv).get被保険者台帳情報()
@@ -297,8 +297,8 @@ public class ShikakuHenkoRireki {
 
                 ItemList.empty();
 //                select最終更新被保険者 = createHandlerOf(henkoRirekiDiv).get更新前選択被保険者台帳();
-                select最終更新被保険者.get資格取得年月日();
-                select最終更新被保険者.get資格喪失年月日();
+//                select最終更新被保険者.get資格取得年月日();
+//                select最終更新被保険者.get資格喪失年月日();
 
                 break;
             case Delete:

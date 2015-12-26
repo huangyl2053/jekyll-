@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4121ShinseiRirekiJohoEntity
  */
 public interface IDbT4121ShinseiRirekiJohoMapper {
 
-    /* * {@linkDbT4121ShinseiRirekiJohoEntity}を取得します。
+    /** {@link DbT4121ShinseiRirekiJohoEntity}を取得します。
      *
-     * @return {@linkDbT4121ShinseiRirekiJohoEntity}
+     * @return {@link DbT4121ShinseiRirekiJohoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT4121ShinseiRirekiJohoEntity getEntity();

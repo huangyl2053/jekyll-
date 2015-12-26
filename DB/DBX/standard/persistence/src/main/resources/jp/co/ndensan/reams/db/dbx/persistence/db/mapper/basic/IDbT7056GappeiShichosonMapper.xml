@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7056GappeiShichosonマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7056GappeiShichosonMapper">
+
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7056GappeiShichoson">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7056GappeiShichosonMapper.allColumns_DbT7056GappeiShichoson" />
+        FROM
+         rgdb."DbT7056GappeiShichoson"
+        WHERE
+         rgdb."DbT7056GappeiShichoson"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7056GappeiShichoson">
+        "DbT7056GappeiShichoson"."gappeiYMD" as "dbT7056GappeiShichoson_gappeiYMD",
+        "DbT7056GappeiShichoson"."chiikiNo" as "dbT7056GappeiShichoson_chiikiNo",
+        "DbT7056GappeiShichoson"."kyuShichosonCode" as "dbT7056GappeiShichoson_kyuShichosonCode",
+        "DbT7056GappeiShichoson"."insertDantaiCd" as "dbT7056GappeiShichoson_insertDantaiCd",
+        "DbT7056GappeiShichoson"."insertTimestamp" as "dbT7056GappeiShichoson_insertTimestamp",
+        "DbT7056GappeiShichoson"."insertReamsLoginId" as "dbT7056GappeiShichoson_insertReamsLoginId",
+        "DbT7056GappeiShichoson"."insertContextId" as "dbT7056GappeiShichoson_insertContextId",
+        "DbT7056GappeiShichoson"."isDeleted" as "dbT7056GappeiShichoson_isDeleted",
+        "DbT7056GappeiShichoson"."updateCount" as "dbT7056GappeiShichoson_updateCount",
+        "DbT7056GappeiShichoson"."lastUpdateTimestamp" as "dbT7056GappeiShichoson_lastUpdateTimestamp",
+        "DbT7056GappeiShichoson"."lastUpdateReamsLoginId" as "dbT7056GappeiShichoson_lastUpdateReamsLoginId",
+        "DbT7056GappeiShichoson"."unyoKaishiYMD" as "dbT7056GappeiShichoson_unyoKaishiYMD",
+        "DbT7056GappeiShichoson"."unyoShuryoYMD" as "dbT7056GappeiShichoson_unyoShuryoYMD",
+        "DbT7056GappeiShichoson"."kyuHokenshaNo" as "dbT7056GappeiShichoson_kyuHokenshaNo",
+        "DbT7056GappeiShichoson"."kyuShichosonMeisho" as "dbT7056GappeiShichoson_kyuShichosonMeisho",
+        "DbT7056GappeiShichoson"."todofukenMeisho" as "dbT7056GappeiShichoson_todofukenMeisho",
+        "DbT7056GappeiShichoson"."gunMeisho" as "dbT7056GappeiShichoson_gunMeisho",
+        "DbT7056GappeiShichoson"."yubinNo" as "dbT7056GappeiShichoson_yubinNo",
+        "DbT7056GappeiShichoson"."telNo" as "dbT7056GappeiShichoson_telNo",
+        "DbT7056GappeiShichoson"."rojinhokenShichosonNo" as "dbT7056GappeiShichoson_rojinhokenShichosonNo",
+        "DbT7056GappeiShichoson"."rokenJukyushaNoTaikei" as "dbT7056GappeiShichoson_rokenJukyushaNoTaikei",
+        "DbT7056GappeiShichoson"."hyojiUmu" as "dbT7056GappeiShichoson_hyojiUmu"
+    </sql>
+
+
+    <!--テーブルDbT7056GappeiShichosonの項目をDbT7056GappeiShichosonEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7056GappeiShichosonEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7056GappeiShichosonEntity" autoMapping="true">
+        <id property="gappeiYMD" column="dbT7056GappeiShichoson_gappeiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="chiikiNo" column="dbT7056GappeiShichoson_chiikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="kyuShichosonCode" column="dbT7056GappeiShichoson_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7056GappeiShichoson_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7056GappeiShichoson_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7056GappeiShichoson_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7056GappeiShichoson_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7056GappeiShichoson_isDeleted" />
+        <result property="updateCount" column="dbT7056GappeiShichoson_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7056GappeiShichoson_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7056GappeiShichoson_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="unyoKaishiYMD" column="dbT7056GappeiShichoson_unyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="unyoShuryoYMD" column="dbT7056GappeiShichoson_unyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kyuHokenshaNo" column="dbT7056GappeiShichoson_kyuHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler" />
+        <result property="kyuShichosonMeisho" column="dbT7056GappeiShichoson_kyuShichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="todofukenMeisho" column="dbT7056GappeiShichoson_todofukenMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gunMeisho" column="dbT7056GappeiShichoson_gunMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="dbT7056GappeiShichoson_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="telNo" column="dbT7056GappeiShichoson_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="rojinhokenShichosonNo" column="dbT7056GappeiShichoson_rojinhokenShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="rokenJukyushaNoTaikei" column="dbT7056GappeiShichoson_rokenJukyushaNoTaikei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hyojiUmu" column="dbT7056GappeiShichoson_hyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <select id="getEntity" resultMap="ResultMap_DbT7056GappeiShichosonEntity">
+        SELECT
+        <include refid="allColumns_DbT7056GappeiShichoson"/>
+        FROM
+	rgdb."DbT7056GappeiShichoson"
+    </select>
+
+</mapper>

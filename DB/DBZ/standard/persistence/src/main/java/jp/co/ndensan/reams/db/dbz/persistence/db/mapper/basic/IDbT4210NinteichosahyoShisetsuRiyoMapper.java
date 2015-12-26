@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4210NinteichosahyoShisetsuR
  */
 public interface IDbT4210NinteichosahyoShisetsuRiyoMapper {
 
-    /* * {@linkDbT4210NinteichosahyoShisetsuRiyoEntity}を取得します。
+    /** {@link DbT4210NinteichosahyoShisetsuRiyoEntity}を取得します。
      *
-     * @return {@linkDbT4210NinteichosahyoShisetsuRiyoEntity}
+     * @return {@link DbT4210NinteichosahyoShisetsuRiyoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT4210NinteichosahyoShisetsuRiyoEntity getEntity();

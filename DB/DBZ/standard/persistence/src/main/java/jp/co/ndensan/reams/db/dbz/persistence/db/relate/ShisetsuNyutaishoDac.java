@@ -149,6 +149,12 @@ public class ShisetsuNyutaishoDac implements IModifiable<DbT1004ShisetsuNyutaish
         return 介護保険施設入退所Dac.save(data);
     }
 
+    /**
+     * DbT1004ShisetsuNyutaishoEntityのデータを物理削除します。
+     *
+     * @param data data
+     * @return 削除件数
+     */
     public int deletePhysical(DbT1004ShisetsuNyutaishoEntity data) {
         int result = 0;
 

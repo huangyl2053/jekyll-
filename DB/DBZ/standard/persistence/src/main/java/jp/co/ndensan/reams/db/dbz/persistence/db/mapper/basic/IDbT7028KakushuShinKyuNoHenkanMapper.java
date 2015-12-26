@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7028KakushuShinKyuNoHenkanE
 public interface IDbT7028KakushuShinKyuNoHenkanMapper {
 
     /**
-     * {@link DbT7028KakushuShinKyuNoHenkanEntity}を取得します。
+     * {@link  DbT7028KakushuShinKyuNoHenkanEntity}を取得します。
      *
-     * @return {@link DbT7028KakushuShinKyuNoHenkanEntity}
+     * @return {@link  DbT7028KakushuShinKyuNoHenkanEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7028KakushuShinKyuNoHenkanEntity getEntity();

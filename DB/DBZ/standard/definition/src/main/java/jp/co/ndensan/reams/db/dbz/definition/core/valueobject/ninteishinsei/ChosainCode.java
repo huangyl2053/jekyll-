@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class ChosainCode implements IValueObject<RString>, Comparable<ChosainCode>, IDbColumnMappable, Serializable {
 
-    private static final int eight = 8;
+    private static final int EIGHT = 8;
     /**
      * 空の{@link ChosainCode}です。
      */
@@ -30,7 +30,7 @@ public class ChosainCode implements IValueObject<RString>, Comparable<ChosainCod
 
     static {
         EMPTY = new ChosainCode(RString.EMPTY);
-        MAX_LENGTH = 8;
+        MAX_LENGTH = EIGHT;
     }
 
     private final RString theValue;

@@ -12,7 +12,13 @@ package jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype;
  */
 public enum ConfigNameDBU {
 
+    /**
+     * コンフィグの保険者情報_保険者構成を表します
+     */
     保険者情報_保険者構成,
+    /**
+     * コンフィグの合併情報管理_合併情報区分を表します
+     */
     合併情報管理_合併情報区分;
 
 }

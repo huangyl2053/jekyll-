@@ -326,18 +326,38 @@ public class ChohyoSeigyoKyotsu extends
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * modifiedModel
+     *
+     * @return ChohyoSeigyoKyotsu
+     */
     public ChohyoSeigyoKyotsu modifiedModel() {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * getChohyoSeigyoKyotsuControlList
+     *
+     * @return ChohyoSeigyoKyotsuControlリスト
+     */
     public List<ChohyoSeigyoKyotsuControl> getChohyoSeigyoKyotsuControlList() {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * getChohyoSeigyoHanyoList
+     *
+     * @return ChohyoSeigyoHanyoリスト
+     */
     public List<ChohyoSeigyoHanyo> getChohyoSeigyoHanyoList() {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * modified
+     *
+     * @return ChohyoSeigyoKyotsu
+     */
     public ChohyoSeigyoKyotsu modified() {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }

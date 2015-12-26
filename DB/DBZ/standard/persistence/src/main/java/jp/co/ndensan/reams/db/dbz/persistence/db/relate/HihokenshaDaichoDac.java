@@ -37,8 +37,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class HihokenshaDaichoDac implements IModifiable<DbT1001HihokenshaDaichoEntity> {
 
-    private final RString SHICHOUSON_CODE = new RString("市町村コード");
-    private final RString HIHOKENSHA_NO = new RString("被保険者番号");
+    private static final RString SHICHOUSON_CODE = new RString("市町村コード");
+    private static final RString HIHOKENSHA_NO = new RString("被保険者番号");
     @InjectSession
     private SqlSession session;
     private final DbT1001HihokenshaDaichoDac 被保険者台帳Dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);

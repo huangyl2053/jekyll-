@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -74,7 +73,7 @@ public class IryohokenRirekiHandler {
                 Ichiran_Row.setDefaultDataName8(jigyoshaInput.get医療保険者番号());
                 Ichiran_Row.setDefaultDataName6(jigyoshaInput.get医療保険者名称());
                 Ichiran_Row.setDefaultDataName7(jigyoshaInput.get医療保険記号番号());
-                Ichiran_Row.getDefaultDataName9().setValue(Decimal.valueOf(jigyoshaInput.get履歴番号()));
+                Ichiran_Row.getDefaultDataName9().setValue(jigyoshaInput.get履歴番号());
                 RStringBuilder 保険者名 = new RStringBuilder();
                 保険者名.append(jigyoshaInput.get医療保険者番号());
                 保険者名.append(コロン);
@@ -132,7 +131,8 @@ public class IryohokenRirekiHandler {
 
         List<IryohokenKanyuJokyo> 医療保険情報更新List = new ArrayList<>();
         for (dgIryohokenIchiran_Row row : 医療保険情報List) {
-            IryohokenKanyuJokyo kanyuJokyo = 医療保険情報.get(new IryohokenKanyuJokyoIdentifier(new ShikibetsuCode(row.getDefaultDataName1()), row.getDefaultDataName9().getValue().intValue()));
+            IryohokenKanyuJokyo kanyuJokyo = 医療保険情報.get(new IryohokenKanyuJokyoIdentifier(new ShikibetsuCode(row.getDefaultDataName1()),
+                    row.getDefaultDataName9().getValue()));
             IryohokenKanyuJokyoBuilder builder = kanyuJokyo.createBuilderForEdit();
             if (状態_追加.equals(row.getDefaultDataName2())) {
                 builder.set医療保険加入年月日(new FlexibleDate(row.getDefaultDataName3()));

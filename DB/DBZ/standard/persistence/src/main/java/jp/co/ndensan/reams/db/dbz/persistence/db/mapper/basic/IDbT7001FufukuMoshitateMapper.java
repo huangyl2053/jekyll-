@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitateEntity;
 public interface IDbT7001FufukuMoshitateMapper {
 
     /**
-     * {@link DbT7001FufukuMoshitateEntity}を取得します。
+     * {@link  DbT7001FufukuMoshitateEntity}を取得します。
      *
-     * @return {@link DbT7001FufukuMoshitateEntity}
+     * @return {@link  DbT7001FufukuMoshitateEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7001FufukuMoshitateEntity getEntity();

@@ -48,9 +48,9 @@ public class JutakuKaishuhiShikyuKetteiTsuchishoPanel {
         //　出力順序・改頁の情の初期値を設定する。
 //        panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder().getKaigoChohyoShutsuryokujun().getTxtSortName()
 //                .setValue(new RString(ymlData.get(yamlNo).get("出力順名").toString()));
-        panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder().getKaigoChohyoShutsuryokujun().getTxtKaiPage()
+        panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder().getTxtKaiPage()
                 .setValue(new RString(ymlData.get(yamlNo).get("改頁").toString()));
-        panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder().getKaigoChohyoShutsuryokujun().getTxtSort()
+        panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder().getTxtSort()
                 .setValue(new RString(ymlData.get(yamlNo).get("出力順").toString()));
     }
 
@@ -80,7 +80,6 @@ public class JutakuKaishuhiShikyuKetteiTsuchishoPanel {
 //        panel.getJutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod().getPayToMadoguchi().getTxtShiharaiShuryoTime()
 //                .setValue(RTime.of(hour, minute));
 //    }
-
     private List<HashMap> ymlData(String ymlDataName) {
         return YamlLoader.DBZ.loadAsList(new RString(ymlDataName));
     }

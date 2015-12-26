@@ -16,7 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 任意の型へ変換して取得する場合は{@link #as(jp.co.ndensan.reams.db.dbz.model.util.function.IFunction) as()}を使用してください。
  *
  * @author N3327 三浦 凌
+ * @deprecated 不要のため削除する。
  */
+@Deprecated
 public final class _ConfigValue implements IConfigValue {
 
     private final Optional<RString> rawValue;

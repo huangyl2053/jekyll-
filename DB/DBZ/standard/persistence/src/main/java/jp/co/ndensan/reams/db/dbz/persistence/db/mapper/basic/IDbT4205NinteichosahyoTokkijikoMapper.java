@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4205NinteichosahyoTokkijiko
  */
 public interface IDbT4205NinteichosahyoTokkijikoMapper {
 
-    /* * {@linkDbT4205NinteichosahyoTokkijikoEntity}を取得します。
+    /** {@link DbT4205NinteichosahyoTokkijikoEntity}を取得します。
      *
-     * @return {@linkDbT4205NinteichosahyoTokkijikoEntity}
+     * @return {@link DbT4205NinteichosahyoTokkijikoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT4205NinteichosahyoTokkijikoEntity getEntity();

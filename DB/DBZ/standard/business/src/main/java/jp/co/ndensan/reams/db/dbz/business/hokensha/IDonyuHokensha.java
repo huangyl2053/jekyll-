@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.hokensha;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.HokenshaKosei;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.HokenshaName;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaName;
 
 /**
  * Reams導入保険者であることを表します。

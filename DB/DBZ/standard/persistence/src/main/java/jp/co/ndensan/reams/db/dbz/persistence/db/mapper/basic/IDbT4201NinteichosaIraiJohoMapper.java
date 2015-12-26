@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4201NinteichosaIraiJohoEnti
  */
 public interface IDbT4201NinteichosaIraiJohoMapper {
 
-    /* * {@linkDbT4201NinteichosaIraiJohoEntity}を取得します。
+    /** {@link DbT4201NinteichosaIraiJohoEntity}を取得します。
      *
-     * @return {@linkDbT4201NinteichosaIraiJohoEntity}
+     * @return {@link DbT4201NinteichosaIraiJohoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT4201NinteichosaIraiJohoEntity getEntity();

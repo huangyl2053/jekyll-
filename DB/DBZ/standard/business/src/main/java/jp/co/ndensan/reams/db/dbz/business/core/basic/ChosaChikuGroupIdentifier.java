@@ -30,4 +30,22 @@ public class ChosaChikuGroupIdentifier implements Serializable {
         this.調査地区グループコード = 調査地区グループコード;
         this.市町村コード = 市町村コード;
     }
+
+    /**
+     * get調査地区グループコード
+     *
+     * @return 調査地区グループコード
+     */
+    public Code get調査地区グループコード() {
+        return 調査地区グループコード;
+    }
+
+    /**
+     * get市町村コード
+     *
+     * @return 市町村コード
+     */
+    public LasdecCode get市町村コード() {
+        return 市町村コード;
+    }
 }

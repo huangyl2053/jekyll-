@@ -39,7 +39,10 @@ public class KaigoTeikeibunSelector {
         div.getDdlTeikenbunShubetsu().setSelectedIndex(0);
 
         List<KaigoTeikeibun> list = new ArrayList<>();
-        if (div.getTeikeiShubetsu().isEmpty()) {
+        if (!div.getTeikeiShubetsu().isEmpty()) {
+            div.getDdlTeikenbunShubetsu().setDisabled(true);
+        }
+//        if (div.getTeikeiShubetsu().isEmpty()) {
             //定型区分、種別"001"をキーにして定型文情報を検索
 //            list = new KaigoTeikeibunFinder().getTeikeibunList(
 //                    div.getTeikeiKbn(),
@@ -48,14 +51,14 @@ public class KaigoTeikeibunSelector {
 //            //定型区分をキーにして定型文情報を検索
 //            list = new KaigoTeikeibunFinder().getTeikeibunList(
 //                    div.getTeikeiKbn());
-        } else {
+//        } else {
             //定型区分、種別をキーにして定型文情報を検索
 //            list = new KaigoTeikeibunFinder().getTeikeibunList(
 //                    div.getTeikeiKbn(),
 //                    div.getTeikeiShubetsu());
 
-            div.getDdlTeikenbunShubetsu().setDisabled(true);
-        }
+//            div.getDdlTeikenbunShubetsu().setDisabled(true);
+//        }
 
         //定型文データグリッドの設定
         List<dgTeikeibun_Row> teikeibunList = getDgTeikeibunList(list);

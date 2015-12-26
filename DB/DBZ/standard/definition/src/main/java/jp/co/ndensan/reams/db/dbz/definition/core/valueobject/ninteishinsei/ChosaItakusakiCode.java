@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class ChosaItakusakiCode implements IValueObject<RString>, Comparable<ChosaItakusakiCode>, IDbColumnMappable, Serializable {
 
-    private static final int ten = 10;
+    private static final int TEN = 10;
     /**
      * 空の{@link ChosaItakusakiCode}です。
      */
@@ -30,7 +30,7 @@ public class ChosaItakusakiCode implements IValueObject<RString>, Comparable<Cho
 
     static {
         EMPTY = new ChosaItakusakiCode(RString.EMPTY);
-        MAX_LENGTH = 10;
+        MAX_LENGTH = TEN;
     }
 
     private final RString theValue;

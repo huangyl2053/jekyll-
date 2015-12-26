@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7025KoikiNoHatsubanEntity;
 public interface IDbT7025KoikiNoHatsubanMapper {
 
     /**
-     * {@link DbT7025KoikiNoHatsubanEntity}を取得します。
+     * {@link  DbT7025KoikiNoHatsubanEntity}を取得します。
      *
-     * @return {@link DbT7025KoikiNoHatsubanEntity}
+     * @return {@link  DbT7025KoikiNoHatsubanEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7025KoikiNoHatsubanEntity getEntity();

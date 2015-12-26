@@ -27,7 +27,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護事業者指定サービスを管理するクラスです。
  */
-public class KaigoJigyoshaShiteiService extends ModelBase<KaigoJigyoshaShiteiServiceIdentifier, DbT7063KaigoJigyoshaShiteiServiceEntity, KaigoJigyoshaShiteiService> implements Serializable {
+public class KaigoJigyoshaShiteiService
+        extends ModelBase<KaigoJigyoshaShiteiServiceIdentifier, DbT7063KaigoJigyoshaShiteiServiceEntity, KaigoJigyoshaShiteiService>
+        implements Serializable {
 
     private final DbT7063KaigoJigyoshaShiteiServiceEntity entity;
     private final KaigoJigyoshaShiteiServiceIdentifier id;
@@ -41,8 +43,8 @@ public class KaigoJigyoshaShiteiService extends ModelBase<KaigoJigyoshaShiteiSer
      * @param 有効開始日 有効開始日
      */
     public KaigoJigyoshaShiteiService(KaigoJigyoshaNo 事業者番号,
-            KaigoServiceShuruiCode サービス種類コード,
-            FlexibleDate 有効開始日) {
+                                      KaigoServiceShuruiCode サービス種類コード,
+                                      FlexibleDate 有効開始日) {
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         requireNonNull(有効開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始日"));

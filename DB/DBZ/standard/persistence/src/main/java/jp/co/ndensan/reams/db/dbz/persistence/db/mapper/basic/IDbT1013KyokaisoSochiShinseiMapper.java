@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1013KyokaisoSochiShinseiEnt
  */
 public interface IDbT1013KyokaisoSochiShinseiMapper {
 
-    /* * {@linkDbT1013KyokaisoSochiShinseiEntity}を取得します。
+    /** {@link DbT1013KyokaisoSochiShinseiEntity}を取得します。
      *
-     * @return {@linkDbT1013KyokaisoSochiShinseiEntity}
+     * @return {@link DbT1013KyokaisoSochiShinseiEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT1013KyokaisoSochiShinseiEntity getEntity();

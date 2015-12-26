@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.business.core.hihokensha.shisetsunyutaisho;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護保険施設入退所の識別子です。
@@ -17,7 +18,7 @@ public class ShisetsuNyutaishoIdentifier implements Serializable {
 
     private static final long serialVersionUID = -1729947044781903093L;
     private final ShikibetsuCode 識別コード;
-    private final int 履歴番号;
+    private final Decimal 履歴番号;
 
     /**
      * コンストラクタです。
@@ -26,7 +27,7 @@ public class ShisetsuNyutaishoIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public ShisetsuNyutaishoIdentifier(ShikibetsuCode 識別コード,
-            int 履歴番号) {
+            Decimal 履歴番号) {
         this.識別コード = 識別コード;
         this.履歴番号 = 履歴番号;
     }

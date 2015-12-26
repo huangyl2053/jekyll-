@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4202NinteichosahyoGaikyoCho
  */
 public interface IDbT4202NinteichosahyoGaikyoChosaMapper {
 
-    /* * {@linkDbT4202NinteichosahyoGaikyoChosaEntity}を取得します。
+    /** {@link DbT4202NinteichosahyoGaikyoChosaEntity}を取得します。
      *
-     * @return {@linkDbT4202NinteichosahyoGaikyoChosaEntity}
+     * @return {@link DbT4202NinteichosahyoGaikyoChosaEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT4202NinteichosahyoGaikyoChosaEntity getEntity();

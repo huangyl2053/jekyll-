@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5300GeninShikkanEntity;
 public interface IDbT5300GeninShikkanMapper {
 
     /**
-     * {@link DbT5300GeninShikkanEntity}を取得します。
+     * {@link  DbT5300GeninShikkanEntity}を取得します。
      *
-     * @return {@link DbT5300GeninShikkanEntity}
+     * @return {@link  DbT5300GeninShikkanEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT5300GeninShikkanEntity getEntity();

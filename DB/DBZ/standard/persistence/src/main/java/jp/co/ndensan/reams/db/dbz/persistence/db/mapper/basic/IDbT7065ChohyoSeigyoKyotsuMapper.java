@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntit
  */
 public interface IDbT7065ChohyoSeigyoKyotsuMapper {
 
-    /* * {@linkDbT7065ChohyoSeigyoKyotsuEntity}を取得します。
+    /** {@link DbT7065ChohyoSeigyoKyotsuEntity}を取得します。
      *
-     * @return {@linkDbT7065ChohyoSeigyoKyotsuEntity}
+     * @return {@link DbT7065ChohyoSeigyoKyotsuEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7065ChohyoSeigyoKyotsuEntity getEntity();

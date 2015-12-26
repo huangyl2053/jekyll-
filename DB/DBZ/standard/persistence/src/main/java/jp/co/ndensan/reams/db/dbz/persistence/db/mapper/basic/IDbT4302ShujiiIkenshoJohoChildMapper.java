@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4302ShujiiIkenshoJohoChildE
 public interface IDbT4302ShujiiIkenshoJohoChildMapper {
 
     /**
-     * {@link DbT4302ShujiiIkenshoJohoChildEntity}を取得します。
+     * {@link  DbT4302ShujiiIkenshoJohoChildEntity}を取得します。
      *
-     * @return {@link DbT4302ShujiiIkenshoJohoChildEntity}
+     * @return {@link  DbT4302ShujiiIkenshoJohoChildEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT4302ShujiiIkenshoJohoChildEntity getEntity();

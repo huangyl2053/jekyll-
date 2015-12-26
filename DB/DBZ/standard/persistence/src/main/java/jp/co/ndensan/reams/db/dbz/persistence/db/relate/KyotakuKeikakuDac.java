@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3005KyotakuKeikakuTodokedeEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+//import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -27,9 +27,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class KyotakuKeikakuDac {
 
-    private final KyotakuKeikakuTodokedeDac 居宅給付計画届出Dac = InstanceProvider.create(KyotakuKeikakuTodokedeDac.class);
-    private final KyotakuKeikakuJigyoshaSakuseiDac 居宅給付計画事業者作成Dac = InstanceProvider.create(KyotakuKeikakuJigyoshaSakuseiDac.class);
-    private final KyotakuKeikakuJikoSakuseiDac 居宅給付計画自己作成Dac = InstanceProvider.create(KyotakuKeikakuJikoSakuseiDac.class);
+//    private final KyotakuKeikakuTodokedeDac 居宅給付計画届出Dac = InstanceProvider.create(KyotakuKeikakuTodokedeDac.class);
+//    private final KyotakuKeikakuJigyoshaSakuseiDac 居宅給付計画事業者作成Dac = InstanceProvider.create(KyotakuKeikakuJigyoshaSakuseiDac.class);
+//    private final KyotakuKeikakuJikoSakuseiDac 居宅給付計画自己作成Dac = InstanceProvider.create(KyotakuKeikakuJikoSakuseiDac.class);
 
     /**
      * 被保険者番号に合致する居宅給付計画履歴のリストを返します。
@@ -42,16 +42,18 @@ public class KyotakuKeikakuDac {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
 
-        IItemList<DbT3005KyotakuKeikakuTodokedeEntity> 居宅給付計画届出List = 居宅給付計画届出Dac.select居宅給付計画届出一覧By被保険者番号(被保険者番号);
+//        IItemList<DbT3005KyotakuKeikakuTodokedeEntity> 居宅給付計画届出List = 居宅給付計画届出Dac.select居宅給付計画届出一覧By被保険者番号(被保険者番号);
         //List<DbT3005KyotakuKeikakuTodokedeEntity> list = new ArrayList<>();
 
-        List<DbT3005KyotakuKeikakuTodokedeEntity> sortList = sort適用開始年月日(居宅給付計画届出List);
+//        List<DbT3005KyotakuKeikakuTodokedeEntity> sortList = sort適用開始年月日(居宅給付計画届出List);
+        List<DbT3005KyotakuKeikakuTodokedeEntity> sortList = sort適用開始年月日();
         IItemList<DbT3005KyotakuKeikakuTodokedeEntity> 台帳リスト = ItemList.of(sortList);
 
         return 台帳リスト;
     }
 
-    private List<DbT3005KyotakuKeikakuTodokedeEntity> sort適用開始年月日(IItemList<DbT3005KyotakuKeikakuTodokedeEntity> list) {
+//    private List<DbT3005KyotakuKeikakuTodokedeEntity> sort適用開始年月日(IItemList<DbT3005KyotakuKeikakuTodokedeEntity> list) {
+    private List<DbT3005KyotakuKeikakuTodokedeEntity> sort適用開始年月日() {
         List<DbT3005KyotakuKeikakuTodokedeEntity> result = new ArrayList<>();
         Map<FlexibleDate, DbT3005KyotakuKeikakuTodokedeEntity> map = new HashMap();
 

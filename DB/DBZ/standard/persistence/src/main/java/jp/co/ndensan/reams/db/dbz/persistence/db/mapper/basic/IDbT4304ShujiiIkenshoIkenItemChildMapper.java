@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4304ShujiiIkenshoIkenItemCh
 public interface IDbT4304ShujiiIkenshoIkenItemChildMapper {
 
     /**
-     * {@link DbT4304ShujiiIkenshoIkenItemChildEntity}を取得します。
+     * {@link  DbT4304ShujiiIkenshoIkenItemChildEntity}を取得します。
      *
-     * @return {@link DbT4304ShujiiIkenshoIkenItemChildEntity}
+     * @return {@link  DbT4304ShujiiIkenshoIkenItemChildEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT4304ShujiiIkenshoIkenItemChildEntity getEntity();

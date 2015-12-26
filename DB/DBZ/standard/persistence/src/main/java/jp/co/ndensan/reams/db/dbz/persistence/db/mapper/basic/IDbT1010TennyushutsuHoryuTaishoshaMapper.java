@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaisho
  */
 public interface IDbT1010TennyushutsuHoryuTaishoshaMapper {
 
-    /* * {@linkDbT1010TennyushutsuHoryuTaishoshaEntity}を取得します。
+    /** {@link DbT1010TennyushutsuHoryuTaishoshaEntity}を取得します。
      *
-     * @return {@linkDbT1010TennyushutsuHoryuTaishoshaEntity}
+     * @return {@link DbT1010TennyushutsuHoryuTaishoshaEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT1010TennyushutsuHoryuTaishoshaEntity getEntity();

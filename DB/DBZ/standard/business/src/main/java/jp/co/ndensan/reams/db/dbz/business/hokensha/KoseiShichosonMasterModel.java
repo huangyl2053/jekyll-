@@ -5,25 +5,25 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.hokensha;
 
-import java.io.Serializable;
+//import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.GunNamePrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HowToEditJusho;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.KatagakiPrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.ShichosonNamePrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TodofukenNamePrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TopPriorityArea;
+import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.ShichosonShikibetsuID;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.ForeignersNameOutput;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.GunNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.KatagakiPrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.ShichosonNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.TodofukenNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.TopPriorityArea;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.GappeiKyuShichosonHyoji;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.GappeiKyuShichosonKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.HowToEditJusho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.RokenJukyushaNoTaikei;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.UnyoKeitaiKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.GappeiChiikiNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.KokuhorenKoikiShichosonNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.RokenShichosonNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.ShichosonShikibetsuID;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -39,7 +39,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * @author LDNS 宋文娟
  * @author N3327 三浦 凌
  */
-public class KoseiShichosonMasterModel implements IKoikiKoseiShichosonMaster, Serializable {
+public class KoseiShichosonMasterModel implements IKoikiKoseiShichosonMaster {
+//    , Serializable {
 
     private DbT7051KoseiShichosonMasterEntity entity;
     private transient ShichosonShikibetsuID shichosonShikibetsuId;

@@ -50,17 +50,18 @@ public class ServiceInputGuide {
         ResponseData<ServiceInputGuideDiv> response = new ResponseData<>();
 
         DataGrid<dgSearchResultService_Row> grid = div.getSearchResultService().getDgSearchResultService();
-        RString 条件 = div.getTxtServiceShuruiCode().getValue();
-        setServiceList(grid, 条件);
+//        RString 条件 = div.getTxtServiceShuruiCode().getValue();
+//        setServiceList(grid, 条件);
+        setServiceList(grid);
 
         response.data = div;
         return response;
     }
 
-    private void setServiceList(DataGrid<dgSearchResultService_Row> grid, RString 条件) {
+//    private void setServiceList(DataGrid<dgSearchResultService_Row> grid, RString 条件) {
+    private void setServiceList(DataGrid<dgSearchResultService_Row> grid) {
         List<HashMap> jigyoshaList = YamlLoader.DBZ.loadAsList(SERVICE_DATA_SOURCE);
         List<dgSearchResultService_Row> searchResultJigyoshaList = new ArrayList<>();
-
         for (HashMap jigyosha : jigyoshaList) {
             searchResultJigyoshaList.add(createJigyoshaGridRow(jigyosha));
         }

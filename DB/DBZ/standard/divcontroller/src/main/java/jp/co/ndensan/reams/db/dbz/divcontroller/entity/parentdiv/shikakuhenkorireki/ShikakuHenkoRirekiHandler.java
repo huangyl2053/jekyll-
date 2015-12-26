@@ -12,24 +12,24 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IConsumer;
+//import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ShoriTimestamp;
+//import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+//import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+//import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+//import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
-import jp.co.ndensan.reams.uz.uza.util.code.ICodeValueObject;
+//import jp.co.ndensan.reams.uz.uza.util.code.ICodeValueObject;
 
 /**
  * 資格変更履歴共有子Divのエンティティに対する操作を行うクラスです。
@@ -41,8 +41,8 @@ public class ShikakuHenkoRirekiHandler {
     private final ShikakuHenkoRirekiDiv shikakuHenkoRirekiDiv;
     private static final RString SESSION_ACCESSOR_KEY = new RString("shikakuHenkouRireki");
     private static final RString SESSION_ACCESSOR_EDITING_KEY = new RString("shikakuHenkouRireki_Editing");
-    private static final RString SESSION_KYU_HOKENSHA = new RString("kyuHokensha");
-    private static final int ONE_SECONDS = 1;
+//    private static final RString SESSION_KYU_HOKENSHA = new RString("kyuHokensha");
+//    private static final int ONE_SECONDS = 1;
 
     /**
      * コンストラクタです。
@@ -93,7 +93,7 @@ public class ShikakuHenkoRirekiHandler {
         setHenkoJiyuDataSource();
     }
 
-    private void setKyuHokensya(LasdecCode lasdecCode) {
+//    private void setKyuHokensya(LasdecCode lasdecCode) {
 
 //        KijunTsukiShichosonFinder finder = new KijunTsukiShichosonFinder();
 //        Optional<GappeiShichoson> gappeiInfo = finder.get基準月市町村情報(FlexibleDate.getNowDate().getYearMonth(), lasdecCode);
@@ -103,9 +103,10 @@ public class ShikakuHenkoRirekiHandler {
 //        } else {
 //            PanelSessionAccessor.put(shikakuHenkoRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.empty());
 //        }
-    }
+//    }
 
-    private RString getKyuHokenshaName(final LasdecCode lasdecCode) {
+//    private RString getKyuHokenshaName(final LasdecCode lasdecCode) {
+    private RString getKyuHokenshaName() {
 
         switch (shikakuHenkoRirekiDiv.getMode_HokenshaJohoDisplayMode()) {
             case KoikiGappeiNashi:
@@ -145,14 +146,14 @@ public class ShikakuHenkoRirekiHandler {
         shikakuHenkoRirekiDiv.getDgHenko().setDataSource(被保険者台帳List.map(ShikakuHenkoMapper.toGridRow()).toList());
     }
 
-    private <T extends ICodeValueObject> List<KeyValueDataSource> createCodeMasterKeyValue(List<T> dataSource) {
-        List<KeyValueDataSource> keyValueDataSourceList = new ArrayList<>();
-        for (T data : dataSource) {
-            KeyValueDataSource keyValueDataSource = new KeyValueDataSource(data.toRString(), data.getMeisho());
-            keyValueDataSourceList.add(keyValueDataSource);
-        }
-        return keyValueDataSourceList;
-    }
+//    private <T extends ICodeValueObject> List<KeyValueDataSource> createCodeMasterKeyValue(List<T> dataSource) {
+//        List<KeyValueDataSource> keyValueDataSourceList = new ArrayList<>();
+//        for (T data : dataSource) {
+//            KeyValueDataSource keyValueDataSource = new KeyValueDataSource(data.toRString(), data.getMeisho());
+//            keyValueDataSourceList.add(keyValueDataSource);
+//        }
+//        return keyValueDataSourceList;
+//    }
 
     private void setHenkoJiyuDataSource() {
         //TODO n8235　船山洋介 DBXCodeShubetsuがICodeShubetsuに適応できないため、コメントアウト。　使用できるようになったら修正。
@@ -196,7 +197,8 @@ public class ShikakuHenkoRirekiHandler {
         row.getHenkoDate().setValue(model.getShikakuHenkoYMD());
         row.getHenkoTodokedeDate().setValue(model.getShikakuHenkoTodokedeYMD());
         row.setSochimotoHokensha(model.getKoikinaiTokureiSochimotoShichosonCode().getColumnValue());
-        row.setKyuHokensha(getKyuHokenshaName(model.getKyuShichosonCode()));
+//        row.setKyuHokensha(getKyuHokenshaName(model.getKyuShichosonCode()));
+        row.setKyuHokensha(getKyuHokenshaName());
         if (model.getLastUpdateTimestamp() != null) {
             row.getShoriDate().setValue(new FlexibleDate(model.getLastUpdateTimestamp().getDate().toDateString()));
         } else {
@@ -277,13 +279,13 @@ public class ShikakuHenkoRirekiHandler {
         return model;
     }
 
-    private static final int BEGININDEX = 0;
-    private static final int ENDINDEX = 14;
+//    private static final int BEGININDEX = 0;
+//    private static final int ENDINDEX = 14;
 
-    private RString toGYYMMDDHHMMSS(RDateTime dateTime) {
-        return (dateTime == null || dateTime.toString().isEmpty()) ? RString.EMPTY : new RStringBuilder(dateTime.getDate().toDateString()).
-                append(new RString("".concat(dateTime.getTime().toString()))).replace(":", "").replace(".", "").replace(" ", "").substring(BEGININDEX, ENDINDEX);
-    }
+//    private RString toGYYMMDDHHMMSS(RDateTime dateTime) {
+//        return (dateTime == null || dateTime.toString().isEmpty()) ? RString.EMPTY : new RStringBuilder(dateTime.getDate().toDateString()).
+//                append(new RString("".concat(dateTime.getTime().toString()))).replace(":", "").replace(".", "").replace(" ", "").substring(BEGININDEX, ENDINDEX);
+//    }
 
     public void update資格変更履歴(DbT1001HihokenshaDaichoEntity model) {
         RString rowState = new RString(shikakuHenkoRirekiDiv.getExecutionStatus().toString());
@@ -296,19 +298,22 @@ public class ShikakuHenkoRirekiHandler {
                 list = list.added(model);
                 break;
             case Modify:
-                list = update履歴(shikakuHenkoRirekiDiv, ShikakuHenkoMapper.merge(model));
+//                list = update履歴(shikakuHenkoRirekiDiv, ShikakuHenkoMapper.merge(model));
+                list = update履歴();
                 break;
             case Delete:
-                list = update履歴(shikakuHenkoRirekiDiv, ShikakuHenkoMapper.delete());
+//                list = update履歴(shikakuHenkoRirekiDiv, ShikakuHenkoMapper.delete());
+                list = update履歴();
             default:
                 break;
         }
         set被保険者台帳情報(list);
     }
 
-    private IItemList<DbT1001HihokenshaDaichoEntity> update履歴(final ShikakuHenkoRirekiDiv d, IConsumer<DbT1001HihokenshaDaichoEntity> consumer) {
-        int rowIndex = Integer.valueOf(d.getSelectRow().toString()).intValue();
-        dgHenko_Row 更新行 = shikakuHenkoRirekiDiv.getDgHenko().getDataSource().get(rowIndex);
+//    private IItemList<DbT1001HihokenshaDaichoEntity> update履歴(final ShikakuHenkoRirekiDiv d, IConsumer<DbT1001HihokenshaDaichoEntity> consumer) {
+    private IItemList<DbT1001HihokenshaDaichoEntity> update履歴() {
+//        int rowIndex = Integer.valueOf(d.getSelectRow().toString()).intValue();
+//        dgHenko_Row 更新行 = shikakuHenkoRirekiDiv.getDgHenko().getDataSource().get(rowIndex);
 
         // TODO n8300姜　ビルドエラー回避のために暫定対応
 //        IItemList<HihokenshaDaicho> models = get被保険者台帳情報();
@@ -354,21 +359,21 @@ public class ShikakuHenkoRirekiHandler {
         return list;
     }
 
-    private void setTanitsuGappeiAri(HihokenshaDaichoList 被保険者List) {
+//    private void setTanitsuGappeiAri(HihokenshaDaichoList 被保険者List) {
+//
+//        shikakuHenkoRirekiDiv.getDdlHenkoKyuHokensha().setDataSource(createKyuhokenshaDataSource(被保険者List));
+//    }
 
-        shikakuHenkoRirekiDiv.getDdlHenkoKyuHokensha().setDataSource(createKyuhokenshaDataSource(被保険者List));
-    }
+//    private void setKoikiGappeiNashi(HihokenshaDaichoList 被保険者List) {
+//
+//        shikakuHenkoRirekiDiv.getDdlHenkoSochimotoHokensha().setDataSource(createSochimotoDataSource(被保険者List));
+//    }
 
-    private void setKoikiGappeiNashi(HihokenshaDaichoList 被保険者List) {
-
-        shikakuHenkoRirekiDiv.getDdlHenkoSochimotoHokensha().setDataSource(createSochimotoDataSource(被保険者List));
-    }
-
-    private void setKoikiGappeiAri(HihokenshaDaichoList 被保険者List) {
-
-        shikakuHenkoRirekiDiv.getDdlHenkoSochimotoHokensha().setDataSource(createSochimotoDataSource(被保険者List));
-        shikakuHenkoRirekiDiv.getDdlHenkoKyuHokensha().setDataSource(createKyuhokenshaDataSource(被保険者List));
-    }
+//    private void setKoikiGappeiAri(HihokenshaDaichoList 被保険者List) {
+//
+//        shikakuHenkoRirekiDiv.getDdlHenkoSochimotoHokensha().setDataSource(createSochimotoDataSource(被保険者List));
+//        shikakuHenkoRirekiDiv.getDdlHenkoKyuHokensha().setDataSource(createKyuhokenshaDataSource(被保険者List));
+//    }
 
     /**
      * グリッド上で選択した資格異動の情報を、明細エリアに表示します。
@@ -450,19 +455,19 @@ public class ShikakuHenkoRirekiHandler {
         return ItemList.of(mergedList);
     }
 
-    private YMDHMS plusOneSeconds(YMDHMS 処理日時) {
-        RDateTime dateTime処理日時 = 処理日時.getRDateTime().plusSeconds(ONE_SECONDS);
-        RString dateStr = dateTime処理日時.getDate().toDateString();
-
-        int hour = dateTime処理日時.getTime().getHour();
-        RString hourStr = new RString(Integer.toString(hour)).padZeroToLeft(2);
-        int minute = dateTime処理日時.getTime().getMinute();
-        RString minuteStr = new RString(Integer.toString(minute)).padZeroToLeft(2);
-        int second = dateTime処理日時.getTime().getSecond();
-        RString secondStr = new RString(Integer.toString(second)).padZeroToLeft(2);
-
-        return new YMDHMS(dateStr.concat(hourStr).concat(minuteStr).concat(secondStr));
-    }
+//    private YMDHMS plusOneSeconds(YMDHMS 処理日時) {
+//        RDateTime dateTime処理日時 = 処理日時.getRDateTime().plusSeconds(ONE_SECONDS);
+//        RString dateStr = dateTime処理日時.getDate().toDateString();
+//
+//        int hour = dateTime処理日時.getTime().getHour();
+//        RString hourStr = new RString(Integer.toString(hour)).padZeroToLeft(2);
+//        int minute = dateTime処理日時.getTime().getMinute();
+//        RString minuteStr = new RString(Integer.toString(minute)).padZeroToLeft(2);
+//        int second = dateTime処理日時.getTime().getSecond();
+//        RString secondStr = new RString(Integer.toString(second)).padZeroToLeft(2);
+//
+//        return new YMDHMS(dateStr.concat(hourStr).concat(minuteStr).concat(secondStr));
+//    }
 
     /**
      * 明細パネルが変更されたかどうかを判定します。 <br/>
@@ -528,10 +533,10 @@ public class ShikakuHenkoRirekiHandler {
     }
 
     private DbT1001HihokenshaDaichoEntity findHenkoMeisaiOriginModel() {
-        LasdecCode 市町村コード = new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiHihokenshaNo());
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiHihokenshaNo());
+//        LasdecCode 市町村コード = new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiHihokenshaNo());
+//        HihokenshaNo 被保険者番号 = new HihokenshaNo(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiHihokenshaNo());
 
-        ShoriTimestamp 処理日時 = ShoriTimestamp.of(new YMDHMS(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiShoriDatetime()));
+//        ShoriTimestamp 処理日時 = ShoriTimestamp.of(new YMDHMS(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiShoriDatetime()));
         // TODO n8300姜　ビルドエラー回避のために暫定対応
 //        IPredicate<HihokenshaDaichoModel> condition = new HihokendhaDaichoKey(市町村コード, 被保険者番号, 処理日時);
 //        return get被保険者台帳情報().filter(condition).findJustOne().get();
@@ -572,46 +577,47 @@ public class ShikakuHenkoRirekiHandler {
     }
 
     //TODO n8178 被保険者ではなく、旧保険者情報を参照するように修正する必要がある。 2015年2月末
-    private List<KeyValueDataSource> createSochimotoDataSource(HihokenshaDaichoList 被保険者List) {
+//    private List<KeyValueDataSource> createSochimotoDataSource(HihokenshaDaichoList 被保険者List) {
+//
+//        List<KeyValueDataSource> dataSource = new ArrayList<>();
+//        for (HihokenshaDaicho hihokensha : 被保険者List) {
+//            KeyValueDataSource keyValueDataSource = new KeyValueDataSource();
+//            keyValueDataSource.setKey(hihokensha.get広住特措置元市町村コード().getColumnValue());
+//            //TODO n8235 船山洋介 広住特措置元市町村コードより名称を取得できるようになったら修正。
+//            keyValueDataSource.setValue(get構成市町村名称(hihokensha.get広住特措置元市町村コード()));
+//
+//            dataSource.add(keyValueDataSource);
+//        }
+//        return dataSource;
+//    }
 
-        List<KeyValueDataSource> dataSource = new ArrayList<>();
-        for (HihokenshaDaicho hihokensha : 被保険者List) {
-            KeyValueDataSource keyValueDataSource = new KeyValueDataSource();
-            keyValueDataSource.setKey(hihokensha.get広住特措置元市町村コード().getColumnValue());
-            //TODO n8235 船山洋介 広住特措置元市町村コードより名称を取得できるようになったら修正。
-            keyValueDataSource.setValue(get構成市町村名称(hihokensha.get広住特措置元市町村コード()));
-
-            dataSource.add(keyValueDataSource);
-        }
-        return dataSource;
-    }
-
-    private RString get構成市町村名称(LasdecCode 構成市町村コード) {
-        //TODO n8235 船山洋介 構成市町村コードより名称を取得できるようになったら修正。
-        return RString.EMPTY;
-    }
+//    private RString get構成市町村名称(LasdecCode 構成市町村コード) {
+//        //TODO n8235 船山洋介 構成市町村コードより名称を取得できるようになったら修正。
+//        return RString.EMPTY;
+//    }
 
     //TODO n8178 被保険者ではなく、旧保険者情報を参照するように修正する必要がある。 2015年2月末
-    private List<KeyValueDataSource> createKyuhokenshaDataSource(HihokenshaDaichoList 被保険者List) {
-        List<KeyValueDataSource> dataSource = new ArrayList<>();
-        for (HihokenshaDaicho hihokensha : 被保険者List) {
-            KeyValueDataSource keyValueDataSource = new KeyValueDataSource();
-            keyValueDataSource.setKey(hihokensha.get旧市町村コード().getColumnValue());
-            //TODO n8235 船山洋介 KyuShichosonCode取得マネージャーができたら修正する
-            //keyValueDataSource.setValue(get旧市町村名称(hihokensha.getKyuShichosonCode()));
-            keyValueDataSource.setValue(get旧市町村名称(hihokensha.get旧市町村コード()));
-            dataSource.add(keyValueDataSource);
-        }
-        return dataSource;
-    }
+//    private List<KeyValueDataSource> createKyuhokenshaDataSource(HihokenshaDaichoList 被保険者List) {
+//        List<KeyValueDataSource> dataSource = new ArrayList<>();
+//        for (HihokenshaDaicho hihokensha : 被保険者List) {
+//            KeyValueDataSource keyValueDataSource = new KeyValueDataSource();
+//            keyValueDataSource.setKey(hihokensha.get旧市町村コード().getColumnValue());
+//            //TODO n8235 船山洋介 KyuShichosonCode取得マネージャーができたら修正する
+//            //keyValueDataSource.setValue(get旧市町村名称(hihokensha.getKyuShichosonCode()));
+//            keyValueDataSource.setValue(get旧市町村名称(hihokensha.get旧市町村コード()));
+//            dataSource.add(keyValueDataSource);
+//        }
+//        return dataSource;
+//    }
 
-    private RString get旧市町村名称(LasdecCode 旧保険者コード) {
-        //TODO n8235 船山洋介 KyuShichosonCodeより名称を取得できるようになったら修正。
-        if (!旧保険者コード.isEmpty()) {
-            return getKyuHokenshaName(旧保険者コード);
-        }
-        return RString.EMPTY;
-    }
+//    private RString get旧市町村名称(LasdecCode 旧保険者コード) {
+//        //TODO n8235 船山洋介 KyuShichosonCodeより名称を取得できるようになったら修正。
+//        if (!旧保険者コード.isEmpty()) {
+////            return getKyuHokenshaName(旧保険者コード);
+//            return getKyuHokenshaName();
+//        }
+//        return RString.EMPTY;
+//    }
 
     public DbT1001HihokenshaDaichoEntity
             get更新前選択被保険者台帳() {

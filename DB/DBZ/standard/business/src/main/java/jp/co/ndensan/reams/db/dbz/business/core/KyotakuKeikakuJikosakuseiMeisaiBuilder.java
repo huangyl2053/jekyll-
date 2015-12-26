@@ -166,7 +166,7 @@ public class KyotakuKeikakuJikosakuseiMeisaiBuilder {
     /**
      * 種類限度超過単位数・日数を設定します。
      *
-     * @param 種類限度超過単位数・日数 種類限度超過単位数・日数
+     * @param 種類限度超過単位数_日数 種類限度超過単位数・日数
      * @return {@link KyotakuKeikakuJikosakuseiMeisaiBuilder}
      */
     public KyotakuKeikakuJikosakuseiMeisaiBuilder set種類限度超過単位数_日数(Decimal 種類限度超過単位数_日数) {

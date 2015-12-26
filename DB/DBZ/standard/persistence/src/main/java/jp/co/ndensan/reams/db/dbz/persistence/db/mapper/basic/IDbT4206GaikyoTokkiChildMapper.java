@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4206GaikyoTokkiChildEntity;
  */
 public interface IDbT4206GaikyoTokkiChildMapper {
 
-    /* * {@linkDbT4206GaikyoTokkiChildEntity}を取得します。
+    /** {@link DbT4206GaikyoTokkiChildEntity}を取得します。
      *
-     * @return {@linkDbT4206GaikyoTokkiChildEntity}
+     * @return {@link DbT4206GaikyoTokkiChildEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT4206GaikyoTokkiChildEntity getEntity();

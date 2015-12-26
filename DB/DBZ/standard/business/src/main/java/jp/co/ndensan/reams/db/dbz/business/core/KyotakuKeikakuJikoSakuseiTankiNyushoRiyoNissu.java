@@ -190,7 +190,7 @@ public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu extends
         private final DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity;
         private final KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier id;
 
-        private _SerializationProxy (DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity, 
+        private _SerializationProxy(DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity, 
                 KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier id) {
             this.entity = entity;
             this.id = id;

@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護サービス種類のデータアクセスクラスです。
  */
-public class DbT7130KaigoServiceShuruiDac implements ISaveable<DbT7130KaigoServiceShuruiEntity> {
+public class DbT7130KaigoServiceShuruiDac {
 
     @InjectSession
     private SqlSession session;
@@ -81,7 +81,6 @@ public class DbT7130KaigoServiceShuruiDac implements ISaveable<DbT7130KaigoServi
      * @return 登録件数
      */
     @Transaction
-    @Override
     public int save(DbT7130KaigoServiceShuruiEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護サービス種類エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+//import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 居宅給付計画自己作成を特定するためのMyBatis用パラメータクラスです。
@@ -18,7 +18,7 @@ public final class KyotakuKeikakuJikoSakuseiMapperParameter {
 // TODO 主キーの数が足りない場合、処理を追加してください。
     private final HihokenshaNo 主キー1;
     private final FlexibleYearMonth 主キー2;
-    private Decimal 主キー3;
+//    private Decimal 主キー3;
 
     private final boolean uses主キー1;
     private final boolean uses主キー2;
@@ -89,14 +89,14 @@ public final class KyotakuKeikakuJikoSakuseiMapperParameter {
         return 主キー2;
     }
 
-    /**
-     * get主キー3を取得します。
-     *
-     * @return 主キー3
-     */
-    public Decimal get主キー3() {
-        return 主キー3;
-    }
+//    /**
+//     * get主キー3を取得します。
+//     *
+//     * @return 主キー3
+//     */
+//    public Decimal get主キー3() {
+//        return 主キー3;
+//    }
 
     /**
      * isUses主キー1を取得します。

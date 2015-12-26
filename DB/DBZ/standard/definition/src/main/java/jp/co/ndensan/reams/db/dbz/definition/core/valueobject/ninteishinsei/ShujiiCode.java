@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class ShujiiCode implements IValueObject<RString>, Comparable<ShujiiCode>, IDbColumnMappable, Serializable {
 
-    private static final int eight = 8;
+    private static final int EIGHT = 8;
     /**
      * 空の{@link ShujiiCode}です。
      */
@@ -30,7 +30,7 @@ public class ShujiiCode implements IValueObject<RString>, Comparable<ShujiiCode>
 
     static {
         EMPTY = new ShujiiCode(RString.EMPTY);
-        MAX_LENGTH = 8;
+        MAX_LENGTH = EIGHT;
     }
 
     private final RString theValue;

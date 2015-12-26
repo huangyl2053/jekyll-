@@ -12,8 +12,6 @@ import java.util.Objects;
 
 /**
  * 汎用的なComparatorを生成する機能を持ったユーティリティです。
- *
- * @author N3327 三浦 凌
  */
 public final class Comparators {
 
@@ -45,7 +43,7 @@ public final class Comparators {
      * @param <T> {@link Comparable Comparable}なオブジェクト
      * @return 自然順序に並び替えるComparator
      */
-    public static <T extends Comparable> Comparator<T> naturalOrder() {
+    public static <T extends Comparable<?>> Comparator<T> naturalOrder() {
         return (Comparator<T>) NaturalOrderComparator.INSTANCE;
     }
 
@@ -55,7 +53,7 @@ public final class Comparators {
      * @param <T> {@link Comparable Comparable}なオブジェクト
      * @return 自然順序の逆順に並び替えるComparator
      */
-    public static <T extends Comparable> Comparator<T> reverseOrder() {
+    public static <T extends Comparable<?>> Comparator<T> reverseOrder() {
         return (Comparator<T>) NaturalOrderComparator.INSTANCE.reversed();
     }
 
@@ -98,7 +96,7 @@ public final class Comparators {
         private final boolean nullsFirst;
         private final Comparator<? super T> comparator;
 
-        public _NullComparator(boolean nullsFirst, Comparator<? super T> comparator) {
+        private _NullComparator(boolean nullsFirst, Comparator<? super T> comparator) {
             this.nullsFirst = nullsFirst;
             this.comparator = comparator;
         }
@@ -113,5 +111,6 @@ public final class Comparators {
             }
             return (comparator == null) ? 0 : comparator.compare(o1, o2);
         }
+        private static final long serialVersionUID = -5878509314366025338L;
     }
 }

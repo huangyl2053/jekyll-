@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
  */
 public interface IDbT7037ShoKofuKaishuMapper {
 
-    /* * {@linkDbT7037ShoKofuKaishuEntity}を取得します。
+    /** {@link DbT7037ShoKofuKaishuEntity}を取得します。
      *
-     * @return {@linkDbT7037ShoKofuKaishuEntity}
+     * @return {@link DbT7037ShoKofuKaishuEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7037ShoKofuKaishuEntity getEntity();

@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity
  */
 public interface IDbT1004ShisetsuNyutaishoMapper {
 
-    /* * {@linkDbT1003TashichosonJushochiTokureiEntity}を取得します。
+    /** {@link DbT1003TashichosonJushochiTokureiEntity}を取得します。
      *
-     * @return {@linkDbT1003TashichosonJushochiTokureiEntity}
+     * @return {@link DbT1003TashichosonJushochiTokureiEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT1004ShisetsuNyutaishoEntity getEntity();

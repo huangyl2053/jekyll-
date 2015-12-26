@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -36,7 +37,7 @@ public class ShisetsuNyutaisho extends
      * @param 履歴番号 履歴番号
      */
     public ShisetsuNyutaisho(ShikibetsuCode 識別コード,
-            int 履歴番号) {
+            Decimal 履歴番号) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT1004ShisetsuNyutaishoEntity();
@@ -89,7 +90,7 @@ public class ShisetsuNyutaisho extends
      *
      * @return 履歴番号
      */
-    public int get履歴番号() {
+    public Decimal get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -195,8 +196,7 @@ public class ShisetsuNyutaisho extends
     }
 
     /**
-     * 介護保険施設入退所のみを変更対象とします。<br/>
-     * {@link DbT1004ShisetsuNyutaishoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護保険施設入退所のみを変更対象とします。<br/> {@link DbT1004ShisetsuNyutaishoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShisetsuNyutaisho}
      */
@@ -210,8 +210,7 @@ public class ShisetsuNyutaisho extends
     }
 
     /**
-     * 保持する介護保険施設入退所を削除対象とします。<br/>
-     * {@link DbT1004ShisetsuNyutaishoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護保険施設入退所を削除対象とします。<br/> {@link DbT1004ShisetsuNyutaishoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShisetsuNyutaisho}
      */

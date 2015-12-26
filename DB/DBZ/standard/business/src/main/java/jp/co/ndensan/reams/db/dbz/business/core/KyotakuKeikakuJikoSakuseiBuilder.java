@@ -170,11 +170,23 @@ public class KyotakuKeikakuJikoSakuseiBuilder {
         return new KyotakuKeikakuJikoSakusei(entity, id);
     }
 
+    /**
+     * setKyotakuKeikaku
+     *
+     * @param createKyotakuKeikaku createKyotakuKeikaku
+     * @return KyotakuKeikakuJikoSakuseiBuilder
+     */
     public KyotakuKeikakuJikoSakuseiBuilder
             setKyotakuKeikaku(KyotakuKeikakuJikosakuseiMeisai createKyotakuKeikaku) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * setYoboKeikaku
+     *
+     * @param createKyotakuKeikaku createKyotakuKeikaku
+     * @return KyotakuKeikakuJikoSakuseiBuilder
+     */
     public KyotakuKeikakuJikoSakuseiBuilder
             setYoboKeikaku(YoboKeikakuJikoSakuseiMeisai createKyotakuKeikaku) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -100,8 +101,7 @@ public class TekiyoJogaishaManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaManager}のインスタンス
      */
     public static TekiyoJogaishaManager createInstance() {
         return InstanceProvider.create(TekiyoJogaishaManager.class);
@@ -276,10 +276,10 @@ public class TekiyoJogaishaManager {
         TekiyoJogaishaMapperParameter parameter = TekiyoJogaishaMapperParameter.createParam_getMax履歴番号(shisetsuNyutaisho.get識別コード());
         ITekiyoJogaishaMapper mapper = mapperProvider.create(ITekiyoJogaishaMapper.class);
         DbT1004ShisetsuNyutaishoEntity 履歴番号 = mapper.getMax履歴番号(parameter);
-        if (履歴番号 == null || 履歴番号.getRirekiNo() == 0) {
-            entity.setRirekiNo(1);
+        if (履歴番号 == null || 履歴番号.getRirekiNo().intValue() == 0) {
+            entity.setRirekiNo(new Decimal(1));
         } else {
-            entity.setRirekiNo(履歴番号.getRirekiNo() + 1);
+            entity.setRirekiNo(履歴番号.getRirekiNo().add(1));
         }
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         entity.setShichosonCode(association.get地方公共団体コード());
@@ -303,7 +303,8 @@ public class TekiyoJogaishaManager {
     @Transaction
     public int updateKaigoJogaiTokureiTaishoShisetsu(ShisetsuNyutaisho shisetsuNyutaisho) {
         requireNonNull(shisetsuNyutaisho, UrSystemErrorMessages.値がnull.getReplacedMessage("介護保険施設入退所"));
-        DbT1004ShisetsuNyutaishoEntity 介護保険施設入退所 = 介護保険施設入退所dac.selectByKey(shisetsuNyutaisho.get識別コード(), shisetsuNyutaisho.get履歴番号());
+        DbT1004ShisetsuNyutaishoEntity 介護保険施設入退所
+                = 介護保険施設入退所dac.selectByKey(shisetsuNyutaisho.get識別コード(), shisetsuNyutaisho.get履歴番号());
         if (介護保険施設入退所 == null) {
             return count;
         }

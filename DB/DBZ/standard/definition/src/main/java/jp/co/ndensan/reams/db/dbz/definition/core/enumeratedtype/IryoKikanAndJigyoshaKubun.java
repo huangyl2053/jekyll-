@@ -104,10 +104,10 @@ public enum IryoKikanAndJigyoshaKubun {
      * @throws IllegalArgumentException 引数の事業者番号が、医療機関_事業者区分に変換できないとき
      */
     public static IryoKikanAndJigyoshaKubun toValue(RString jigyoshaNo) throws IllegalArgumentException {
-        int five = 5;
-        int nine = 9;
-        int fivethousand = 5000;
-        int fivethousandone = 5001;
+        final int five = 5;
+        final int nine = 9;
+        final int fivethousand = 5000;
+        final int fivethousandone = 5001;
         for (IryoKikanAndJigyoshaKubun kubun : values()) {
             if (!kubun.kubunCode.equals(jigyoshaNo.stringAt(2))) {
                 continue;

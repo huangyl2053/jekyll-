@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo
 public interface IDbT5222NinteiChosaScheduleMemoMapper {
 
     /**
-     * {@link DbT5222NinteiChosaScheduleMemoEntity}を取得します。
+     * {@link  DbT5222NinteiChosaScheduleMemoEntity}を取得します。
      *
-     * @return {@link DbT5222NinteiChosaScheduleMemoEntity}
+     * @return {@link  DbT5222NinteiChosaScheduleMemoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT5222NinteiChosaScheduleMemoEntity getEntity();

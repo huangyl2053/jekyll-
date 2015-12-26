@@ -35,6 +35,11 @@ public final class HihokenshashoB4SourceBuilder implements IHihokenshashoB4Sourc
         return hihokenshashoEditor.edit(new HihokenshashoB4());
     }
 
+    /**
+     * get印字位置
+     *
+     * @return HihokenshashoPrintPosition
+     */
     public HihokenshashoPrintPosition get印字位置() {
         return hihokenshashoEditor.get印字位置();
     }

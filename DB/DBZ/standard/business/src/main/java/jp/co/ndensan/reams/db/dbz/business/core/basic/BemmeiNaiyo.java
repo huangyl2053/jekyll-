@@ -234,10 +234,20 @@ public class BemmeiNaiyo extends ParentModelBase<BemmeiNaiyoIdentifier, DbT7002B
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * getBemmeishaJohoList
+     *
+     * @return BemmeishaJohoリスト
+     */
     public List<BemmeishaJoho> getBemmeishaJohoList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * modified
+     *
+     * @return BemmeiNaiyo
+     */
     public BemmeiNaiyo modified() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

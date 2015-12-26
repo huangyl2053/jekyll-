@@ -9,7 +9,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitai;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitai.donyuKeitaiCode;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitai.gyomuBunrui;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitai.shishoKanriUmuFlag;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -87,21 +86,15 @@ public class DbT7908KaigoDonyuKeitaiDac implements ISaveable<DbT7908KaigoDonyuKe
     /**
      * 業務分類で介護導入形態を取得します。
      *
-     * @param 業務分類 GyomuBunrui
-     * @return List<DbT7908KaigoDonyuKeitaiEntity>
-     * @throws NullPointerException 引数のいずれかがnullの場合
+     * @param gyomuBunrui 業務分類
+     * @return DbT7908KaigoDonyuKeitaiEntity 介護導入形態Entity
      */
     @Transaction
-    public DbT7908KaigoDonyuKeitaiEntity selectByGyomuBunrui(
-            RString 業務分類) throws NullPointerException {
-        requireNonNull(業務分類, UrSystemErrorMessages.値がnull.getReplacedMessage("業務分類"));
-
+    public List<DbT7908KaigoDonyuKeitaiEntity> selectByGyomuBunrui(RString gyomuBunrui) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.selectSpecific(gyomuBunrui, donyuKeitaiCode, shishoKanriUmuFlag).
-                table(DbT7908KaigoDonyuKeitai.class).
-                where(eq(gyomuBunrui, 業務分類)).
-                toObject(DbT7908KaigoDonyuKeitaiEntity.class);
+        return accessor.select().
+                table(DbT7908KaigoDonyuKeitai.class).where(eq(DbT7908KaigoDonyuKeitai.gyomuBunrui, gyomuBunrui)).
+                toList(DbT7908KaigoDonyuKeitaiEntity.class);
     }
-
 }
