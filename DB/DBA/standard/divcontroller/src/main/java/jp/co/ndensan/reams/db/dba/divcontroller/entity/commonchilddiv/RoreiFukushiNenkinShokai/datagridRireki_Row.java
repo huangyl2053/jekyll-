@@ -3,13 +3,14 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RoreiFuku
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Dec 18 13:48:39 CST 2015 
+ * Thu Dec 24 18:23:56 CST 2015 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
 /**
@@ -21,39 +22,53 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class datagridRireki_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
 
-    private RString startDate;
-    private RString endDate;
+    private RString jotai;
+    private TextBoxDate startDate;
+    private TextBoxDate endDate;
 
     public datagridRireki_Row() {
         super();
-        this.startDate = RString.EMPTY;
-        this.endDate = RString.EMPTY;
+        this.jotai = RString.EMPTY;
+        this.startDate = new TextBoxDate();
+        this.endDate = new TextBoxDate();
+        this.setOriginalData("jotai", jotai);
         this.setOriginalData("startDate", startDate);
         this.setOriginalData("endDate", endDate);
     }
 
-    public datagridRireki_Row(RString startDate, RString endDate) {
+    public datagridRireki_Row(RString jotai, TextBoxDate startDate, TextBoxDate endDate) {
         super();
+        this.setOriginalData("jotai", jotai);
         this.setOriginalData("startDate", startDate);
         this.setOriginalData("endDate", endDate);
+        this.jotai = jotai;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public RString getStartDate() {
+    public RString getJotai() {
+        return jotai;
+    }
+
+    public TextBoxDate getStartDate() {
         return startDate;
     }
 
-    public RString getEndDate() {
+    public TextBoxDate getEndDate() {
         return endDate;
     }
 
-    public void setStartDate(RString startDate) {
+    public void setJotai(RString jotai) {
+        this.setOriginalData("jotai", jotai);
+        this.jotai = jotai;
+    }
+
+    public void setStartDate(TextBoxDate startDate) {
         this.setOriginalData("startDate", startDate);
         this.startDate = startDate;
     }
 
-    public void setEndDate(RString endDate) {
+    public void setEndDate(TextBoxDate endDate) {
         this.setOriginalData("endDate", endDate);
         this.endDate = endDate;
     }
