@@ -50,14 +50,10 @@ public class TekiyoJogaishaDaichoJohoFinder {
 
     private static final int ページ目 = 1;
     private static final int 住所_LENGTH_40 = 40;
-    private static final int 住所_LENGTH_41 = 41;
     private static final int 住所_LENGTH_80 = 80;
-    private static final int 住所_LENGTH_81 = 81;
     private static final int 住所_LENGTH_120 = 120;
-    private static final int 住所_LENGTH_121 = 121;
     private static final int 導入形態コード_LENGTH_1 = 1;
     private static final int 導入形態コード_LENGTH_3 = 3;
-    private static final int 導入形態コード_LENGTH_4 = 4;
     private static final RString 広域 = new RString("11");
     private static final RString 改行 = new RString("\r\n");
     private static final RString 状態 = new RString("適用除外者");
@@ -114,7 +110,7 @@ public class TekiyoJogaishaDaichoJohoFinder {
         ShikibetsuTaishoRelateEntity 宛名情報PSM = daichoJohoMapper.select宛名情報(parameter);
         if (宛名情報PSM == null) {
             TekiyoJogaishaDaichoJohoRelateEntity 適用除外者台帳情報Entity = new TekiyoJogaishaDaichoJohoRelateEntity();
-            適用除外者台帳情報Entity.set印刷日時(set印刷日時());
+            適用除外者台帳情報Entity.set印刷日時(get印刷日時());
             適用除外者台帳情報Entity.setページ目(ページ目);
             適用除外者台帳情報Entity.set状態(状態);
             daichoJohoList.add(new TekiyoJogaishaDaichoJoho(適用除外者台帳情報Entity));
@@ -196,10 +192,10 @@ public class TekiyoJogaishaDaichoJohoFinder {
             entity.set適用除外適用事由名称(RString.EMPTY);
             entity.set適用除外解除事由名称(RString.EMPTY);
             if (適用除外適用事由名称 != null && !適用除外適用事由名称.isEmpty()) {
-                entity.set適用除外適用事由名称(CodeMaster.getCodeMeisho(new CodeShubetsu("0119"), new Code(entity.get適用除外適用事由コード())));
+                entity.set適用除外適用事由名称(適用除外適用事由名称);
             }
             if (適用除外解除事由名称 != null && !適用除外解除事由名称.isEmpty()) {
-                entity.set適用除外解除事由名称(CodeMaster.getCodeMeisho(new CodeShubetsu("0123"), new Code(entity.get適用除外解除事由コード())));
+                entity.set適用除外解除事由名称(適用除外解除事由名称);
             }
         }
         return SearchResult.of(relateEntityList, 0, false);
@@ -209,7 +205,7 @@ public class TekiyoJogaishaDaichoJohoFinder {
             TekiyoJogaishaDaichoJohoRelateEntity 適用除外者台帳情報Entity,
             ShikibetsuTaishoRelateEntity 宛名情報PSM) {
         List<TekiyoJogaishaDaichoJoho> daichoJohoList = new ArrayList<>();
-        適用除外者台帳情報Entity.set印刷日時(set印刷日時());
+        適用除外者台帳情報Entity.set印刷日時(get印刷日時());
         適用除外者台帳情報Entity.set状態(状態);
         適用除外者台帳情報Entity.set生年月日(new RString(宛名情報PSM.get生年月日().toString()));
         if (性別_男.equals(宛名情報PSM.get性別コード())) {
@@ -234,7 +230,7 @@ public class TekiyoJogaishaDaichoJohoFinder {
         適用除外者台帳情報Entity.set行政区コード(宛名情報PSM.get行政区コード().getColumnValue());
         // TODO 凌護行 項目「住所」の編集処理が無し、 QA282回答まち、2015/12/28まで、
 //        適用除外者台帳情報Entity.set住所2(宛名情報PSM.get転入前住所().getColumnValue());
-        適用除外者台帳情報Entity.set住所1(get住所の編集(宛名情報PSM.get転入前住所().getColumnValue(), 宛名情報PSM.get転入前住所().getColumnValue().length()));
+        適用除外者台帳情報Entity.set住所2(get住所の編集(宛名情報PSM.get転入前住所().getColumnValue(), 宛名情報PSM.get転入前住所().getColumnValue().length()));
         適用除外者台帳情報Entity.set住所タイトル2(転入前住所);
         適用除外者台帳情報Entity.set住所コード2(宛名情報PSM.get転入前全国住所コード().getColumnValue());
         daichoJohoList.add(new TekiyoJogaishaDaichoJoho(適用除外者台帳情報Entity));
@@ -244,22 +240,22 @@ public class TekiyoJogaishaDaichoJohoFinder {
     private RString get市町村名称(LasdecCode 市町村コード) {
         RString 市町村名称 = RString.EMPTY;
         Code 導入形態コード = Code.EMPTY;
-        SearchResult<KoikiZenShichosonJoho> 現市町村情報 = null;
+        List<KoikiZenShichosonJoho> 現市町村情報リスト = new ArrayList<>();
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (市町村セキュリティ情報 != null) {
             導入形態コード = 市町村セキュリティ情報.get導入形態コード();
         }
         if (導入形態コード != null && !導入形態コード.isEmpty()
-                && 導入形態コード.getColumnValue().length() >= 導入形態コード_LENGTH_4
+                && 導入形態コード.getColumnValue().length() >= 導入形態コード_LENGTH_3
                 && (広域.equals(導入形態コード.getColumnValue().substringEmptyOnError(導入形態コード_LENGTH_1, 導入形態コード_LENGTH_3)))) {
-            現市町村情報 = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho();
+            現市町村情報リスト = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho().records();
 //TODO 凌護行 「QA #70076」回答により、機能「市町村情報取得_単一」いらないです、 QA259回答まち、2015/12/28まで
 //            else {
 //                現市町村情報 = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho();
 //            }
         }
-        if (現市町村情報 != null) {
-            for (KoikiZenShichosonJoho 市町村情報 : 現市町村情報.records()) {
+        if (現市町村情報リスト != null && !現市町村情報リスト.isEmpty()) {
+            for (KoikiZenShichosonJoho 市町村情報 : 現市町村情報リスト) {
                 if (市町村情報.get市町村コード() == null || 市町村情報.get市町村コード().isEmpty()) {
                     break;
                 }
@@ -274,33 +270,33 @@ public class TekiyoJogaishaDaichoJohoFinder {
     private RString get住所の編集(RString 住所, int 住所_LENGTH) {
         if (住所_LENGTH_40 < 住所_LENGTH && 住所_LENGTH <= 住所_LENGTH_80) {
             RStringBuilder stringBuffer = new RStringBuilder();
-            stringBuffer.append(住所.substringEmptyOnError(0, 住所_LENGTH_41))
+            stringBuffer.append(住所.substringEmptyOnError(0, 住所_LENGTH_40))
                     .append(改行)
-                    .append(住所.substringEmptyOnError(住所_LENGTH_41));
+                    .append(住所.substringEmptyOnError(住所_LENGTH_40, 住所_LENGTH));
             return stringBuffer.toRString();
         }
         if (住所_LENGTH_80 < 住所_LENGTH && 住所_LENGTH <= 住所_LENGTH_120) {
             RStringBuilder stringBuffer = new RStringBuilder();
-            stringBuffer.append(住所.substringEmptyOnError(0, 住所_LENGTH_41))
+            stringBuffer.append(住所.substringEmptyOnError(0, 住所_LENGTH_40))
                     .append(改行)
-                    .append(住所.substringEmptyOnError(住所_LENGTH_41, 住所_LENGTH_81))
+                    .append(住所.substringEmptyOnError(住所_LENGTH_40, 住所_LENGTH_80))
                     .append(改行)
-                    .append(住所.substringEmptyOnError(住所_LENGTH_81));
+                    .append(住所.substringEmptyOnError(住所_LENGTH_80, 住所_LENGTH));
             return stringBuffer.toRString();
         }
         if (住所_LENGTH_120 < 住所_LENGTH) {
             RStringBuilder stringBuffer = new RStringBuilder();
-            stringBuffer.append(住所.substringEmptyOnError(0, 住所_LENGTH_41))
+            stringBuffer.append(住所.substringEmptyOnError(0, 住所_LENGTH_40))
                     .append(改行)
-                    .append(住所.substringEmptyOnError(住所_LENGTH_41, 住所_LENGTH_81))
+                    .append(住所.substringEmptyOnError(住所_LENGTH_40, 住所_LENGTH_80))
                     .append(改行)
-                    .append(住所.substringEmptyOnError(住所_LENGTH_81, 住所_LENGTH_121));
+                    .append(住所.substringEmptyOnError(住所_LENGTH_80, 住所_LENGTH_120));
             return stringBuffer.toRString();
         }
         return 住所;
     }
 
-    private RString set印刷日時() {
+    private RString get印刷日時() {
         RStringBuilder systemDateTime = new RStringBuilder();
         RDateTime datetime = RDate.getNowDateTime();
         systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
@@ -319,7 +315,7 @@ public class TekiyoJogaishaDaichoJohoFinder {
         return systemDateTime.toRString();
     }
 
-    private FlexibleDate 日付フォーマット(FlexibleDate 日付) {
-        return new FlexibleDate(日付.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString());
+    private RString 日付フォーマット(FlexibleDate 日付) {
+        return 日付.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 }
