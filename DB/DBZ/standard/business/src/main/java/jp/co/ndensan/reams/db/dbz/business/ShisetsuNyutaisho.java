@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 施設入退所情報を表すクラスです。
@@ -23,7 +24,7 @@ public class ShisetsuNyutaisho {
 
     private final LasdecCode 市町村コード;
     private final ShikibetsuCode 個人識別コード;
-    private final int 履歴番号;
+    private final Decimal 履歴番号;
     private final DaichoType 台帳種別;
     private final Range<FlexibleDate> 入所期間;
     private final NyushoShisetsu 入所施設;
@@ -43,7 +44,7 @@ public class ShisetsuNyutaisho {
      * @param 退所処理年月日 退所処理年月日
      */
     public ShisetsuNyutaisho(LasdecCode 市町村コード,
-            ShikibetsuCode 個人識別コード, int 履歴番号,
+            ShikibetsuCode 個人識別コード, Decimal 履歴番号,
             DaichoType 台帳種別, Range<FlexibleDate> 入所期間,
             NyushoShisetsu 入所施設, FlexibleDate 入所処理年月日, FlexibleDate 退所処理年月日) {
 
@@ -80,7 +81,7 @@ public class ShisetsuNyutaisho {
      *
      * @return 処理日時
      */
-    public int get履歴番号() {
+    public Decimal get履歴番号() {
         return 履歴番号;
     }
 
