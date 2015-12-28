@@ -51,6 +51,9 @@ public class ShinsakaiIinJohoToroku {
 
     /**
      * 画面初期化表示、画面項目に設定されている値をクリアする。
+     *
+     * @param div 介護認定審査会委員情報
+     * @return レスポンス
      */
     public ResponseData onLoad(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
@@ -77,7 +80,7 @@ public class ShinsakaiIinJohoToroku {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
 
         ShinsakaiIinJohoManager service = ShinsakaiIinJohoManager.createInstance();
-        List<ShinsakaiIinJoho> 審査会委員一覧情報 = service.get審査会委員一覧(div.getRadHyojiJoken().getSelectedKey());
+        List<ShinsakaiIinJoho> 審査会委員一覧情報 = service.get審査会委員一覧(div.getRadHyojiJoken().getSelectedKey()).records();
 
         Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> 介護認定審査会委員情報 = Models.create(審査会委員一覧情報);
         ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報, 介護認定審査会委員情報);
@@ -138,21 +141,10 @@ public class ShinsakaiIinJohoToroku {
 
         if (新規モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class))
                 || 更新モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class))) {
-            boolean hasChanged合議体詳細情報 = createHandOf(div).hasChanged合議体詳細情報();
-            if (hasChanged合議体詳細情報) {
-                if (!ResponseHolder.isReRequest()) {
-                    return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
-                }
-                if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-                    if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                        審査会委員一覧修正ボタンHandler(div);
-                    }
-                }
-            }
+            return 合議体詳細情報変更確認(div);
         } else {
             審査会委員一覧修正ボタンHandler(div);
         }
-
         response.data = div;
         return response;
     }
@@ -169,24 +161,23 @@ public class ShinsakaiIinJohoToroku {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
-        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> 介護認定審査会委員情報更新
-                        = (Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho>) ViewStateHolder.get(
-                                ViewStateKeys.介護認定審査会委員情報更新, Models.class);
-                ShinsakaiIinJohoIdentifier identifier
-                        = new ShinsakaiIinJohoIdentifier(div.getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode());
-                if (状態_追加.equals(div.getDgShinsaInJohoIchiran().getClickedItem().getStatus())) {
-                    div.getDgShinsaInJohoIchiran().getDataSource().remove(div.getDgShinsaInJohoIchiran().getClickedItem());
-                    介護認定審査会委員情報更新.deleteOrRemove(identifier);
-                    ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報更新, 介護認定審査会委員情報更新);
-                } else {
-                    div.getDgShinsaInJohoIchiran().getClickedItem().setStatus(状態_削除);
-                    Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> 介護認定審査会委員情報
-                            = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員情報, Models.class);
-                    介護認定審査会委員情報更新.add(介護認定審査会委員情報.get(identifier));
-                    ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報更新, 介護認定審査会委員情報更新);
-                }
+        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> 介護認定審査会委員情報更新
+                    = (Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho>) ViewStateHolder.get(
+                            ViewStateKeys.介護認定審査会委員情報更新, Models.class);
+            ShinsakaiIinJohoIdentifier identifier
+                    = new ShinsakaiIinJohoIdentifier(div.getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode());
+            if (状態_追加.equals(div.getDgShinsaInJohoIchiran().getClickedItem().getStatus())) {
+                div.getDgShinsaInJohoIchiran().getDataSource().remove(div.getDgShinsaInJohoIchiran().getClickedItem());
+                介護認定審査会委員情報更新.deleteOrRemove(identifier);
+                ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報更新, 介護認定審査会委員情報更新);
+            } else {
+                div.getDgShinsaInJohoIchiran().getClickedItem().setStatus(状態_削除);
+                Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> 介護認定審査会委員情報
+                        = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員情報, Models.class);
+                介護認定審査会委員情報更新.add(介護認定審査会委員情報.get(identifier));
+                ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報更新, 介護認定審査会委員情報更新);
             }
         }
         response.data = div;
@@ -206,10 +197,9 @@ public class ShinsakaiIinJohoToroku {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
             }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-                if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    審査会委員追加ボタンHandler(div);
-                }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                審査会委員追加ボタンHandler(div);
             }
         } else {
             審査会委員追加ボタンHandler(div);
@@ -254,10 +244,8 @@ public class ShinsakaiIinJohoToroku {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
-        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                div.getDgShozokuKikanIchiran().getDataSource().remove(div.getDgShozokuKikanIchiran().getClickedItem());
-            }
+        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getDgShozokuKikanIchiran().getDataSource().remove(div.getDgShozokuKikanIchiran().getClickedItem());
         }
         response.data = div;
         return response;
@@ -356,13 +344,12 @@ public class ShinsakaiIinJohoToroku {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                ShinsakaiIinJohoTorokuHandler handler = createHandOf(div);
-                handler.clear審査会委員詳細情報();
-                handler.shozokuKikanIchiranDiv_init();
-                handler.renrakusakiKinyuKikanDiv_init();
-            }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            ShinsakaiIinJohoTorokuHandler handler = createHandOf(div);
+            handler.clear審査会委員詳細情報();
+            handler.shozokuKikanIchiranDiv_init();
+            handler.renrakusakiKinyuKikanDiv_init();
         }
         response.data = div;
         return response;
@@ -394,14 +381,27 @@ public class ShinsakaiIinJohoToroku {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                審査会委員情報更新();
-                onClick_btnSave状態設定(div);
-            }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            審査会委員情報更新();
+            onClick_btnSave状態設定(div);
         }
         response.data = div;
         return response;
+    }
+
+    private ResponseData 合議体詳細情報変更確認(ShinsakaiIinJohoTorokuDiv div) {
+        boolean hasChanged合議体詳細情報 = createHandOf(div).hasChanged合議体詳細情報();
+        if (hasChanged合議体詳細情報) {
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                審査会委員一覧修正ボタンHandler(div);
+            }
+        }
+        return ResponseData.of(div).respond();
     }
 
     private void 審査会委員情報入力チェック(ShinsakaiIinJohoTorokuDiv div) {
@@ -411,11 +411,7 @@ public class ShinsakaiIinJohoToroku {
             if (is重複コード) {
                 throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace("審査会委員コード"));
             } else {
-                int count = ShinsakaiIinJohoManager.createInstance().get審査会委員カウント(
-                        new ShinsakaiIinJohoMapperParameter(div.getTxtShinsainCode().getValue()));
-                if (0 < count) {
-                    throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace("審査会委員コード"));
-                }
+                審査会委員重複チェック(div);
             }
         }
         if (div.getTxtShinsaIinYMDTo().getValue().isBefore(div.getTxtShinsaIinYMDTo().getValue())) {
@@ -424,6 +420,15 @@ public class ShinsakaiIinJohoToroku {
         UzT0007CodeEntity 地区コード = CodeMaster.getCode(new CodeShubetsu("5001"), div.getCcdshinsakaiChikuCode().getCode());
         if (地区コード == null) {
             throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage().replace("審査会委員コード"));
+        }
+    }
+
+    private void 審査会委員重複チェック(ShinsakaiIinJohoTorokuDiv div) {
+
+        int count = ShinsakaiIinJohoManager.createInstance().get審査会委員カウント(
+                new ShinsakaiIinJohoMapperParameter(div.getTxtShinsainCode().getValue()));
+        if (0 < count) {
+            throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace("審査会委員コード"));
         }
     }
 
@@ -583,7 +588,7 @@ public class ShinsakaiIinJohoToroku {
     private void set所属機関一覧情報(ShinsakaiIinJohoTorokuDiv div) {
         List<ShozokuKikanIchiranFinderBusiness> 所属機関一覧 = ShozokuKikanIchiranFinder.createInstance()
                 .get所属機関一覧情報(new ShinsakaiIinJohoMapperParameter(
-                                div.getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode()));
+                                div.getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode())).records();
         div.getDgShozokuKikanIchiran().setDataSource(createHandOf(div).setShozokuKikanIchiranDiv(所属機関一覧));
     }
 

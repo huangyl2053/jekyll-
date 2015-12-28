@@ -226,7 +226,7 @@ public class ShinsakaiIinJohoTorokuHandler {
     /**
      * 審査会委員詳細情報入力されだ審査会委員コードが重複コードを判断する。
      *
-     * @return　boolean
+     * @return is重複コード
      */
     public boolean is重複コード() {
         for (dgShinsaInJohoIchiran_Row row : div.getDgShinsaInJohoIchiran().getDataSource()) {
@@ -240,7 +240,7 @@ public class ShinsakaiIinJohoTorokuHandler {
     /**
      * 審査会委員詳細情報変更を判断します。
      *
-     * @return　boolean hasChanged合議体詳細情報
+     * @return hasChanged合議体詳細情報
      */
     public boolean hasChanged合議体詳細情報() {
         dgShinsaInJohoIchiran_Row row = div.getDgShinsaInJohoIchiran().getClickedItem();
@@ -277,7 +277,7 @@ public class ShinsakaiIinJohoTorokuHandler {
     /**
      * 表示条件をselectedKeyでセットする。
      *
-     * @param selectedKey
+     * @param selectedKey RString
      */
     public void kensakuJokenDiv_init(RString selectedKey) {
         div.getRadHyojiJoken().setSelectedKey(selectedKey);
