@@ -1,29 +1,38 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoBuilder;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.dgKaisaibashoIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler;
+import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.デフォルト検索条件;
 import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.全て;
+import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.削除;
 import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.削除モード;
 import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.更新モード;
 import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.有効;
 import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.追加モード;
+import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.通常;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoManager;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 介護認定審査会開催場所登録Divを制御します。
@@ -80,6 +89,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
             }
         }else {
             getHandler(div).set開催場所一覧の追加();
+            response.data = div;
         }
         return response;
     }
@@ -129,6 +139,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
             }
         }else {
            getHandler(div).set修正の場合開催場所編集エリア();
+           response.data = div;
         }
         return response;
     }
@@ -189,25 +200,37 @@ public class NinteiShinsakaiKaisaibashoToroku {
      */
     public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> btnUpdate_onClick(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> response = new ResponseData<>();
+          Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList 
+                  = ViewStateHolder.get(ViewStateKeys.開催場所情報一覧, Models.class );
         List<dgKaisaibashoIchiran_Row> rowList = div.getDgKaisaibashoIchiran().getDataSource();
-        for (dgKaisaibashoIchiran_Row row : rowList) {
+        ShinsakaiKaisaiBashoJohoManager manager = ShinsakaiKaisaiBashoJohoManager.createInstance();
+         for (dgKaisaibashoIchiran_Row row : rowList) {
+            for (ShinsakaiKaisaiBashoJoho shinsakaiKaisaiBashoJoho : shinsakaiKaisaiBashoJohoList) {
+                if (shinsakaiKaisaiBashoJoho.identifier().get介護認定審査会開催場所コード().equals(row.getKaisaibashoCode())) {
+                    shinsakaiKaisaiBashoJoho = edit介護認定審査会開催場所情報(row, shinsakaiKaisaiBashoJoho);
+                    if (更新モード.equals(row.getJyotai())) {
+                        manager.介護認定審査会開催場所情報の更新(shinsakaiKaisaiBashoJoho);
+                        break;
+                    } else if (削除モード.equals(row.getJyotai())) {
+                        manager.介護認定審査会開催場所情報の削除(shinsakaiKaisaiBashoJoho);
+                        break;
+                    }
+                }
+            }
             if (追加モード.equals(row.getJyotai())) {
-            
-            } else if (更新モード.equals(row.getJyotai())) {
-            
-            } else if (削除モード.equals(row.getJyotai())) {
-            
+                manager.介護認定審査会開催場所情報の追加(edit介護認定審査会開催場所情報(row,
+                        new ShinsakaiKaisaiBashoJoho(row.getKaisaibashoCode())));
             }
         }
-        
+        onLoad(div);
         response.data = div;
         return response;
     }
     
     private List<ShinsakaiKaisaiBashoJoho> get開催場所一覧(NinteiShinsakaiKaisaibashoTorokuDiv div) {
-        List<ShinsakaiKaisaiBashoJoho> businessList = new ArrayList<>();
+        List<ShinsakaiKaisaiBashoJoho> businessList;
         ShinsakaiKaisaiBashoJohoManager manager = ShinsakaiKaisaiBashoJohoManager.createInstance();
-        if (new RString("yuuKo").equals(div.getRadHyojiJoken().getSelectedKey())) {
+        if (デフォルト検索条件.equals(div.getRadHyojiJoken().getSelectedKey())) {
            businessList =  manager.
                     get介護認定審査会開催場所情報一覧(GogitaiJohoMapperParameter.
                             createSelectBy審査会開催場所状況(有効));
@@ -216,7 +239,25 @@ public class NinteiShinsakaiKaisaibashoToroku {
                     get介護認定審査会開催場所情報一覧(GogitaiJohoMapperParameter.
                             createSelectBy審査会開催場所状況(全て));
         }
+        Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho>  shinsakaiKaisaiBashoJohoList
+                = Models.create(businessList);
+        ViewStateHolder.put(ViewStateKeys.開催場所情報一覧, shinsakaiKaisaiBashoJohoList);
         return businessList;
+    }
+    
+    private  ShinsakaiKaisaiBashoJoho edit介護認定審査会開催場所情報(dgKaisaibashoIchiran_Row row,
+            ShinsakaiKaisaiBashoJoho shinsakaiKaisaiBashoJoho) {
+        ShinsakaiKaisaiBashoJohoBuilder builder = shinsakaiKaisaiBashoJoho.createBuilderForEdit();
+        builder.set介護認定審査会開催地区コード(new Code(row.getKaisaibashoCode()));
+        builder.set介護認定審査会開催場所住所(row.getKaisaibashoJusho());
+        builder.set介護認定審査会開催場所名称(row.getKaisaibashoMeisho());
+        builder.set介護認定審査会開催場所電話番号(new TelNo(row.getKaisaibashoTelNo()));
+        if (通常.equals(row.getKaisaibashoCode())) {
+            builder.set介護認定審査会開催場所状況(有効);
+        }else if (削除.equals(row.getKaisaibashoCode())) {
+            builder.set介護認定審査会開催場所状況(全て);
+        }
+        return builder.build();
     }
     
     private NinteiShinsakaiKaisaibashoTorokuHandler getHandler(NinteiShinsakaiKaisaibashoTorokuDiv div) {

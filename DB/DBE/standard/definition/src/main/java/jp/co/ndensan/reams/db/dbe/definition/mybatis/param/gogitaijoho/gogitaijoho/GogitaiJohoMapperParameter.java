@@ -79,18 +79,4 @@ public class GogitaiJohoMapperParameter {
             審査会開催場所状況) {
         return new GogitaiJohoMapperParameter(0, FlexibleDate.EMPTY, true, false,審査会開催場所状況);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

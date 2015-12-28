@@ -35,12 +35,12 @@ public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
     private TextBoxTelNo txtTelNumber;
     @JsonProperty("ddlKaisaiBashoJokyo")
     private DropDownList ddlKaisaiBashoJokyo;
-    @JsonProperty("ccdKaisaiChikuCode")
-    private CodeInputDiv ccdKaisaiChikuCode;
     @JsonProperty("btnupdate")
     private Button btnupdate;
     @JsonProperty("btnback")
     private Button btnback;
+    @JsonProperty("ccdKaisaiChikuCode")
+    private CodeInputDiv ccdKaisaiChikuCode;
     @JsonProperty("jyotai")
     private RString jyotai;
 
@@ -141,15 +141,6 @@ public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
     }
 
     /*
-     * getccdKaisaiChikuCode
-     * @return ccdKaisaiChikuCode
-     */
-    @JsonProperty("ccdKaisaiChikuCode")
-    public ICodeInputDiv getCcdKaisaiChikuCode() {
-        return ccdKaisaiChikuCode;
-    }
-
-    /*
      * getbtnupdate
      * @return btnupdate
      */
@@ -183,6 +174,15 @@ public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
     @JsonProperty("btnback")
     public void setBtnback(Button btnback) {
         this.btnback = btnback;
+    }
+
+    /*
+     * getccdKaisaiChikuCode
+     * @return ccdKaisaiChikuCode
+     */
+    @JsonProperty("ccdKaisaiChikuCode")
+    public ICodeInputDiv getCcdKaisaiChikuCode() {
+        return ccdKaisaiChikuCode;
     }
 
     /*
