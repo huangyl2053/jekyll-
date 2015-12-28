@@ -195,7 +195,7 @@ public class KijuntsukiShichosonjohoFinder {
             }
             if ((new RString("2")).equals(内部開始日フラグ) && 1 != 運用開始日) {
                 内部開始日フラグ = RString.EMPTY;
-                if (基準年月.getYearMonth().equals(運用開始年月日)) {
+                if (基準年月.getYearMonth().equals(運用開始年月)) {
                     continue;
                 }
                 koseiShiList.add(new GappeiShichoson(entity));
