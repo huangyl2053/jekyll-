@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.ikenshoShujiiIchiran.Ik
 import jp.co.ndensan.reams.db.dbe.entity.report.itakusakichosainichiran.ItakusakiChosainIchiranReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ShujiiIryokikanShujiiIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 医療機関・主治医一覧表_バッチフ処理クラスです
  */
-public class IkenshoShujiiIchiranProcess extends BatchProcessBase<IkenshoShujiiIchiranRelateEntity> {
+public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujiiIchiranRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoShujiiIchiran.IkenshoShujiiIchiranRelateMapper.getIkenshoShujiiIchiranRelateEntity");
@@ -38,11 +38,22 @@ public class IkenshoShujiiIchiranProcess extends BatchProcessBase<IkenshoShujiiI
     private BatchReportWriter<ItakusakiChosainIchiranReportSource> batchWrite;
     IkenshoShujiiIchiranProcessParameter processParameter;
     private ReportSourceWriter<ShujiiIryokikanShujiiIchiranhyoReportSource> reportSourceWriter;
+    IkenshoShujiiIchiranHeadItem headItem;
 
     @Override
     protected void initialize() {
 
         super.initialize();
+        headItem = new IkenshoShujiiIchiranHeadItem(
+                processParameter.getShichosonCode(),
+                processParameter.getShichosonName(),
+                processParameter.getIryoKikanCodeFrom(),
+                processParameter.getIryoKikanCodeTo(),
+                processParameter.getShujiiCodeFrom(),
+                processParameter.getShujiiCodeTo(),
+                processParameter.getJyokyo(),
+                processParameter.getOutputSort(),
+                processParameter.getNextpage());
     }
 
     @Override
@@ -54,22 +65,22 @@ public class IkenshoShujiiIchiranProcess extends BatchProcessBase<IkenshoShujiiI
     }
 
     @Override
-    protected void process(IkenshoShujiiIchiranRelateEntity entity) {
+    protected void usualProcess(IkenshoShujiiIchiranRelateEntity entity) {
         bodyItemList.add(setBodyItem(entity));
     }
 
     @Override
+    protected void keyBreakProcess(IkenshoShujiiIchiranRelateEntity current) {
+        if (hasBrek(getBefore(), current)) {
+            IkenshoShujiiIchiranReport report = IkenshoShujiiIchiranReport.createFrom(headItem, bodyItemList);
+            report.writeBy(reportSourceWriter);
+            bodyItemList = new ArrayList<>();
+        }
+    }
+
+    @Override
     protected void afterExecute() {
-        IkenshoShujiiIchiranHeadItem headItem = new IkenshoShujiiIchiranHeadItem(
-                processParameter.getShichosonCode(),
-                processParameter.getShichosonName(),
-                processParameter.getIryoKikanCodeFrom(),
-                processParameter.getIryoKikanCodeTo(),
-                processParameter.getShujiiCodeFrom(),
-                processParameter.getShujiiCodeTo(),
-                processParameter.getJyokyo(),
-                processParameter.getOutputSort(),
-                processParameter.getNextpage());
+
         IkenshoShujiiIchiranReport report = IkenshoShujiiIchiranReport.createFrom(headItem, bodyItemList);
         report.writeBy(reportSourceWriter);
     }
@@ -91,5 +102,9 @@ public class IkenshoShujiiIchiranProcess extends BatchProcessBase<IkenshoShujiiI
                 entity.getJusho(),
                 entity.getShujiiName() == null ? RString.EMPTY : entity.getShujiiName().value(),
                 entity.getShinryokaName());
+    }
+
+    private boolean hasBrek(IkenshoShujiiIchiranRelateEntity before, IkenshoShujiiIchiranRelateEntity current) {
+        return !before.getShujiiCode().equals(current.getShujiiCode());
     }
 }

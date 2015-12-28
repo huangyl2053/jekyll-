@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe5910001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshoshujiiichiran.IkenshoShujiiIchiranParameter;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiHateiJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiOutputPage;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiOutputSort;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5910001.IkenshoShujiiIchiranDiv;
@@ -40,21 +41,15 @@ public class IkenshoShujiiIchiranHandler {
 
         // TODO 左涛 QA153　「市町村ドロップダウンリスト」の表示内容および設定方法の確認　12/25まで
         //div.getDdlShichosonCode().setSelectedValue(RString.EMPTY);
-        div.getRadJyokyo().setSelectedKey(new RString("1"));
+        div.getRadJyokyo().setSelectedKey(ShujiiHateiJokyo.有効のみ.getコード());
         if (DonyukeitaiCode.事務広域.getコード().equals(導入形態コード) || DonyukeitaiCode.事務構成市町村.getコード().equals(導入形態コード)
                 || DonyukeitaiCode.認定広域.getコード().equals(導入形態コード)) {
             // div.getDdlShichosonCode().setSelectedValue(RString.EMPTY);
         } else if (DonyukeitaiCode.事務単一.getコード().equals(導入形態コード) || DonyukeitaiCode.認定単一.getコード().equals(導入形態コード)) {
-            div.getDdlShichosonCode().setSelectedValue(RString.EMPTY);
+            // div.getCcdHokenshaList().getSelectedItem().setSelectedValue(RString.EMPTY);
         }
 
-        List<KeyValueDataSource> 出力順 = new ArrayList();
-        出力順.add(new KeyValueDataSource(ShujiiOutputSort.医療機関コード主治医コード.getコード(), ShujiiOutputSort.医療機関コード主治医コード.get名称()));
-        出力順.add(new KeyValueDataSource(ShujiiOutputSort.医療機関コード主治医名称.getコード(), ShujiiOutputSort.医療機関コード主治医名称.get名称()));
-        出力順.add(new KeyValueDataSource(ShujiiOutputSort.医療機関名称主治医コード.getコード(), ShujiiOutputSort.医療機関名称主治医コード.get名称()));
-        出力順.add(new KeyValueDataSource(ShujiiOutputSort.医療機関名称主治医名称.getコード(), ShujiiOutputSort.医療機関名称主治医名称.get名称()));
-        div.getDdlOutputSort().setDataSource(出力順);
-
+        div.getDdlOutputSort().setDataSource(set出力順());
         List<KeyValueDataSource> 改頁 = new ArrayList();
         改頁.add(new KeyValueDataSource(ShujiiOutputPage.医療機関コード.getコード(), ShujiiOutputPage.医療機関コード.get名称()));
         改頁.add(new KeyValueDataSource(ShujiiOutputPage.なし.getコード(), ShujiiOutputPage.なし.get名称()));
@@ -87,9 +82,10 @@ public class IkenshoShujiiIchiranHandler {
      * @return 医療機関・主治医一覧表作成_バッチフロークラスパラメータ
      */
     public IkenshoShujiiIchiranParameter onClick_btnReportPublish() {
+
         IkenshoShujiiIchiranParameter batchParameter = new IkenshoShujiiIchiranParameter();
-        batchParameter.setShichosonCode(div.getDdlShichosonCode().getSelectedKey());
-        batchParameter.setShichosonName(div.getDdlShichosonCode().getSelectedValue());
+        batchParameter.setShichosonCode(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
+        batchParameter.setShichosonName(div.getCcdHokenshaList().getSelectedItem().get市町村名称());
         batchParameter.setIryoKikanCodeFrom(div.getTxtIryoKikanCodeFrom().getValue());
         batchParameter.setIryoKikanCodeTo(div.getTxtIryoKikanCodeTo().getValue());
         batchParameter.setShujiiCodeFrom(div.getTxtShujiiCodeFrom().getValue());
@@ -98,5 +94,19 @@ public class IkenshoShujiiIchiranHandler {
         batchParameter.setOutputSort(div.getDdlOutputSort().getSelectedKey());
         batchParameter.setNextpage(div.getDdlNextpage().getSelectedKey());
         return batchParameter;
+    }
+
+    private List<KeyValueDataSource> set出力順() {
+
+        List<KeyValueDataSource> 出力順 = new ArrayList();
+        出力順.add(new KeyValueDataSource(ShujiiOutputSort.医療機関コード主治医コード.getコード(),
+                ShujiiOutputSort.医療機関コード主治医コード.get名称()));
+        出力順.add(new KeyValueDataSource(ShujiiOutputSort.医療機関コード主治医名称.getコード(),
+                ShujiiOutputSort.医療機関コード主治医名称.get名称()));
+        出力順.add(new KeyValueDataSource(ShujiiOutputSort.医療機関名称主治医コード.getコード(),
+                ShujiiOutputSort.医療機関名称主治医コード.get名称()));
+        出力順.add(new KeyValueDataSource(ShujiiOutputSort.医療機関名称主治医名称.getコード(),
+                ShujiiOutputSort.医療機関名称主治医名称.get名称()));
+        return 出力順;
     }
 }

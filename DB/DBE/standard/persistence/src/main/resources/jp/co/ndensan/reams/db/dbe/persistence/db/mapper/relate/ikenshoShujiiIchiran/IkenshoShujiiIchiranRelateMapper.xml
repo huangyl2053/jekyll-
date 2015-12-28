@@ -28,7 +28,7 @@
               parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ikenshoshujiiichiran.IkenshoShujiiIchiranMybatisParameter"
               fetchSize="500">
         SELECT 
-            DbT5911ShujiiIryoKikanJoho."iryokikanCode",
+            DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode"  AS iryokikanCode,
             DbT5911ShujiiIryoKikanJoho."iryoKikanMeishoKana",
             DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho",
             DbT5911ShujiiIryoKikanJoho."daihyoshaNameKana",
@@ -72,12 +72,12 @@
             </if>
             <if test="isIryoKikanCodeShujiiCodeFlag">
                 ORDER BY
-                    DbT5911ShujiiIryoKikanJoho."iryokikanCode",
+                    DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode",
                     DbT5912ShujiiJoho."shujiiCode"
             </if>
             <if test="isIryoKikanCodeShujiiNameFlag">
                 ORDER BY
-                    DbT5911ShujiiIryoKikanJoho."iryokikanCode",
+                    DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode",
                     DbT5912ShujiiJoho."shujiiName"
             </if>
             <if test="isIryoKikanNameShujiiCodeFlag">

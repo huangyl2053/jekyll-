@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 public class IkenshoShujiiIchiranProperty extends ReportPropertyBase<ShujiiIryokikanShujiiIchiranhyoReportSource> {
 
     private static final ReportId ID = new ReportId("DBE591001");
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("title")));
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("listIchiranhyoUpper_1")));
 
     public IkenshoShujiiIchiranProperty() {
         super(SubGyomuCode.DBE認定支援, ID);
@@ -32,9 +32,10 @@ public class IkenshoShujiiIchiranProperty extends ReportPropertyBase<ShujiiIryok
 
     @Override
     public Breakers<ShujiiIryokikanShujiiIchiranhyoReportSource> defineBreakers(
-            Breakers<ShujiiIryokikanShujiiIchiranhyoReportSource> breakers, 
+            Breakers<ShujiiIryokikanShujiiIchiranhyoReportSource> breakers,
             BreakerCatalog<ShujiiIryokikanShujiiIchiranhyoReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
             PAGE_BREAK_KEYS) {
             @Override
             public ReportLineRecord<ShujiiIryokikanShujiiIchiranhyoReportSource> occuredBreak(
