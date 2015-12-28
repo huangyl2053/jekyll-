@@ -54,7 +54,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
     private RString sashitome_ShokanSeiriNo;
     private FlexibleDate kojo_KetteiYMD;
     private FlexibleDate kojo_TsuchiHakkoYMD;
-    private boolean kojo_TsuchiSaiHakkoYMD;
+    private boolean kojo_TsuchiSaiHakkoFlag;
     private FlexibleDate kojo_ShoTeishutsuYMD;
     private boolean logicalDeletedFlag;
 
@@ -453,8 +453,8 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      * @return 控除通知書再発行フラグ
      */
     @CheckForNull
-    public boolean getKojo_TsuchiSaiHakkoYMD() {
-        return kojo_TsuchiSaiHakkoYMD;
+    public boolean getKojo_TsuchiSaiHakkoFlag() {
+        return kojo_TsuchiSaiHakkoFlag;
     }
 
     /**
@@ -462,10 +462,10 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      * <br/>
      * <br/>1：再発行対象,0：再発行対象外
      * 
-     * @param kojo_TsuchiSaiHakkoYMD 控除通知書再発行フラグ
+     * @param kojo_TsuchiSaiHakkoFlag 控除通知書再発行フラグ
      */
-    public void setKojo_TsuchiSaiHakkoYMD(boolean kojo_TsuchiSaiHakkoYMD) {
-        this.kojo_TsuchiSaiHakkoYMD = kojo_TsuchiSaiHakkoYMD;
+    public void setKojo_TsuchiSaiHakkoFlag(boolean kojo_TsuchiSaiHakkoFlag) {
+        this.kojo_TsuchiSaiHakkoFlag = kojo_TsuchiSaiHakkoFlag;
     }
 
     /**
@@ -561,7 +561,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
         this.sashitome_ShokanSeiriNo = entity.sashitome_ShokanSeiriNo;
         this.kojo_KetteiYMD = entity.kojo_KetteiYMD;
         this.kojo_TsuchiHakkoYMD = entity.kojo_TsuchiHakkoYMD;
-        this.kojo_TsuchiSaiHakkoYMD = entity.kojo_TsuchiSaiHakkoYMD;
+        this.kojo_TsuchiSaiHakkoFlag = entity.kojo_TsuchiSaiHakkoFlag;
         this.kojo_ShoTeishutsuYMD = entity.kojo_ShoTeishutsuYMD;
         this.logicalDeletedFlag = entity.logicalDeletedFlag;
     }
@@ -572,9 +572,10 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shoKisaiHokenshaNo, hihokenshaNo, kanriKubun, rirekiNo, johoBunruiKubun, renNo, sashitomeKojoJotaiKubun, sashitome_KetteiYMD, sashitome_TsuchiHakkoYMD, sashitome_TsuchiSaiHakkoFlag, sashitomeKojoNo, sashitome_NofuYMD, sashitome_KaijoYMD, sashitome_ServiceTeikyoYM, sashitome_ShokanSeiriNo, kojo_KetteiYMD, kojo_TsuchiHakkoYMD, kojo_TsuchiSaiHakkoYMD, kojo_ShoTeishutsuYMD, logicalDeletedFlag);
+        return super.toMd5(shoKisaiHokenshaNo, hihokenshaNo, kanriKubun, rirekiNo, johoBunruiKubun, renNo, sashitomeKojoJotaiKubun, sashitome_KetteiYMD, sashitome_TsuchiHakkoYMD, sashitome_TsuchiSaiHakkoFlag, sashitomeKojoNo, sashitome_NofuYMD, sashitome_KaijoYMD, sashitome_ServiceTeikyoYM, sashitome_ShokanSeiriNo, kojo_KetteiYMD, kojo_TsuchiHakkoYMD, kojo_TsuchiSaiHakkoFlag, kojo_ShoTeishutsuYMD, logicalDeletedFlag);
     }
 
 // </editor-fold>
+
 
 }

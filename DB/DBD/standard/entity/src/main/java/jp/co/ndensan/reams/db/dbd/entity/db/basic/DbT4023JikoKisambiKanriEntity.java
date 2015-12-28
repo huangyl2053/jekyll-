@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
@@ -36,9 +37,9 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private FlexibleDate choteiNendo;
+    private RYear choteiNendo;
     @PrimaryKey
-    private FlexibleDate fukaNendo;
+    private RYear fukaNendo;
     @PrimaryKey
     private RString tokucho_FuchoKubun;
     @PrimaryKey
@@ -138,7 +139,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
      * 
      * @return 調定年度
      */
-    public FlexibleDate getChoteiNendo() {
+    public RYear getChoteiNendo() {
         return choteiNendo;
     }
 
@@ -147,7 +148,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
      * 
      * @param choteiNendo 調定年度
      */
-    public void setChoteiNendo(@Nonnull FlexibleDate choteiNendo) {
+    public void setChoteiNendo(@Nonnull RYear choteiNendo) {
         this.choteiNendo = choteiNendo;
     }
 
@@ -156,7 +157,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
      * 
      * @return 賦課年度
      */
-    public FlexibleDate getFukaNendo() {
+    public RYear getFukaNendo() {
         return fukaNendo;
     }
 
@@ -165,7 +166,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
      * 
      * @param fukaNendo 賦課年度
      */
-    public void setFukaNendo(@Nonnull FlexibleDate fukaNendo) {
+    public void setFukaNendo(@Nonnull RYear fukaNendo) {
         this.fukaNendo = fukaNendo;
     }
 
@@ -375,5 +376,6 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
     }
 
 // </editor-fold>
+
 
 }

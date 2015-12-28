@@ -117,7 +117,7 @@ public enum DbT4024ShiharaiHohoHenkoSashitome implements IColumnDefinition {
      * 控除通知書再発行フラグ
      * <br/>1：再発行対象,0：再発行対象外
      */
-    kojo_TsuchiSaiHakkoYMD(1, 0),
+    kojo_TsuchiSaiHakkoFlag(1, 0),
     /**
      * 控除被保険者証提出期限
      */
