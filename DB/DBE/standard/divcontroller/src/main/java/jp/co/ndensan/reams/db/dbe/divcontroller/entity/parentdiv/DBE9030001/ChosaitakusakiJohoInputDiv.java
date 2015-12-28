@@ -583,6 +583,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
 
     // </editor-fold>
     private static final RString selectKey空白 = new RString("blank");
+    private static final RString 有効 = new RString("yuko");
 
     public void clear() {
         this.txtShichoson.clearValue();
@@ -602,7 +603,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
         this.txtteiin.clearValue();
         this.txtChiku.clearValue();
         this.txtChikuMei.clearValue();
-        this.radautowatitsuke.setSelectedKey(new RString("key0"));
+        this.radautowatitsuke.setSelectedKey(有効);
         this.ddlKikankubun.setSelectedKey(selectKey空白);
     }
 }

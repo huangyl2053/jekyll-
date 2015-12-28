@@ -88,7 +88,7 @@ public class NinteichosaItakusakiMasterHandler {
      *
      */
     public void onLoad() {
-
+        div.getChosainSearch().getCcdHokenshaList().loadHokenshaList();
         div.getChosainSearch().getRadSearchChosainJokyo().setSelectedKey(new RString("key0"));
         List<KeyValueDataSource> chosaItakuKubunCodes = createListFromChosaItakuKubunCodeASC();
         div.getChosainSearch().getDdlitakukubun().getDataSource().clear();
@@ -115,7 +115,6 @@ public class NinteichosaItakusakiMasterHandler {
      *
      */
     public void clearKensakuJoken() {
-        //TODO 市町村DDLですが保険者DDLに変更します QA71783
         div.getChosainSearch().getRadSearchChosainJokyo().setSelectedIndex(DROPDOWNLIST_BLANK);
         div.getChosainSearch().getTxtSearchChosaItakusakiCodeFrom().clearValue();
         div.getChosainSearch().getTxtSearchChosaItakusakiCodeTo().clearValue();
@@ -134,10 +133,9 @@ public class NinteichosaItakusakiMasterHandler {
     public List<KoseiShichosonMaster> searchShujii() {
         NinteichosaItakusakiKensakuParameter 構成市町村マスタ検索条件 = NinteichosaItakusakiKensakuParameter.createParam(
                 状況フラグ有効.equals(div.getChosainSearch().getRadSearchChosainJokyo().getSelectedValue()),
-                //TODO QA #71783
-                //                div.getChosainSearch().getCcdHokenshaList()
-                //                ? null : new LasdecCode(div.getChosainSearch().getDdlSearchShichoson().getSelectedKey()),
-                null,
+                div.getChosainSearch().getCcdHokenshaList().getSelectedItem() == null
+                || div.getChosainSearch().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()
+                ? null : div.getChosainSearch().getCcdHokenshaList().getSelectedItem().get市町村コード(),
                 div.getChosainSearch().getTxtSearchChosaItakusakiCodeFrom().getValue().isEmpty()
                 ? null : div.getChosainSearch().getTxtSearchChosaItakusakiCodeFrom().getValue(),
                 div.getChosainSearch().getTxtSearchChosaItakusakiCodeTo().getValue().isEmpty()
@@ -456,9 +454,9 @@ public class NinteichosaItakusakiMasterHandler {
     }
 
     private void setChosaitakusakiJohoInput(dgChosainIchiran_Row row) {
-        div.getChosaitakusakiJohoInput().getTxtShichoson().setValue(row.getShichoson());
-        div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(row.getShichosonCode() == null
+        div.getChosaitakusakiJohoInput().getTxtShichoson().setValue(row.getShichosonCode() == null
                 ? RString.EMPTY : row.getShichosonCode().getColumnValue());
+        div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(row.getShichoson());
         div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().setValue(row.getChosaItakusakiCode() == null
                 ? RString.EMPTY : row.getChosaItakusakiCode().getValue());
         div.getChosaitakusakiJohoInput().getTxtjigyoshano().setValue(
@@ -493,7 +491,6 @@ public class NinteichosaItakusakiMasterHandler {
     private void setChosaitakusakiJohoInputDisabled(Boolean isDisabled) {
         div.getChosaitakusakiJohoInput().getTxtShichoson().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getBtnToSearchShichoson().setDisabled(isDisabled);
-        div.getChosaitakusakiJohoInput().getTxtShichosonmei().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getTxtjigyoshano().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getBtnToSearchjigyosha().setDisabled(isDisabled);
@@ -509,7 +506,6 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getTxtteiin().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getTxtChiku().setDisabled(isDisabled);
-        div.getChosaitakusakiJohoInput().getTxtChikuMei().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getBtnToSearchchiku().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getRadautowatitsuke().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getDdlKikankubun().setDisabled(isDisabled);
