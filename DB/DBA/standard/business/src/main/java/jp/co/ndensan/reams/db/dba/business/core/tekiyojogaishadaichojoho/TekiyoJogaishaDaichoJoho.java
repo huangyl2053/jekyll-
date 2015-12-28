@@ -286,8 +286,8 @@ public class TekiyoJogaishaDaichoJoho {
      *
      * @return NO
      */
-    public int getNO() {
-        return entity.getNO();
+    public int get連番() {
+        return entity.get連番();
     }
 
     /**

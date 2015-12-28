@@ -137,7 +137,7 @@ public class TekiyoJogaishaDaichoJohoFinder {
             //TODO 凌護行 「宛名情報」の戻り値一覧に「連絡先」が無い、 QA274回答まち、2015/12/28まで
 //            適用除外者台帳情報Entity.set電話番号１(宛名情報PSM.get連絡先());
             適用除外者台帳情報Entity.set電話番号２(RString.EMPTY);
-            適用除外者台帳情報Entity.setNO(entity.getNO());
+            適用除外者台帳情報Entity.set連番(entity.get連番());
             適用除外者台帳情報Entity.set適用年月日(日付フォーマット(entity.get適用年月日()));
             適用除外者台帳情報Entity.set適用届出年月日(日付フォーマット(entity.get適用届出年月日()));
             適用除外者台帳情報Entity.set適用除外適用事由コード(entity.get適用除外適用事由コード());
@@ -190,9 +190,17 @@ public class TekiyoJogaishaDaichoJohoFinder {
         List<TekiyoJogaiShisetuJyohoRelateEntity> relateEntityList = new ArrayList<>();
         for (int i = 0; i < shisetuJyohoList.size(); i++) {
             TekiyoJogaiShisetuJyohoRelateEntity entity = shisetuJyohoList.get(i);
-            entity.setNO(i + 1);
-            entity.set適用除外適用事由名称(CodeMaster.getCodeMeisho(new CodeShubetsu("0119"), new Code(entity.get適用除外適用事由コード())));
-            entity.set適用除外解除事由名称(CodeMaster.getCodeMeisho(new CodeShubetsu("0123"), new Code(entity.get適用除外解除事由コード())));
+            entity.set連番(i + 1);
+            RString 適用除外適用事由名称 = CodeMaster.getCodeMeisho(new CodeShubetsu("0119"), new Code(entity.get適用除外適用事由コード()));
+            RString 適用除外解除事由名称 = CodeMaster.getCodeMeisho(new CodeShubetsu("0123"), new Code(entity.get適用除外解除事由コード()));
+            entity.set適用除外適用事由名称(RString.EMPTY);
+            entity.set適用除外解除事由名称(RString.EMPTY);
+            if (適用除外適用事由名称 != null && !適用除外適用事由名称.isEmpty()) {
+                entity.set適用除外適用事由名称(CodeMaster.getCodeMeisho(new CodeShubetsu("0119"), new Code(entity.get適用除外適用事由コード())));
+            }
+            if (適用除外解除事由名称 != null && !適用除外解除事由名称.isEmpty()) {
+                entity.set適用除外解除事由名称(CodeMaster.getCodeMeisho(new CodeShubetsu("0123"), new Code(entity.get適用除外解除事由コード())));
+            }
         }
         return SearchResult.of(relateEntityList, 0, false);
     }
