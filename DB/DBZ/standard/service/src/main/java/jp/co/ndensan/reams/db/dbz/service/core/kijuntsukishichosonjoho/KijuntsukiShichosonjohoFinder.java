@@ -10,11 +10,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.kijunt.GappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.kijunt.IKoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.kijunt.KoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.kijuntsu.GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.kijuntsu.KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.kijuntsukishichosonjoho.IKijuntsukiShichosonjohoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho.GappeiCityJohoBFinder;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -76,8 +78,7 @@ public class KijuntsukiShichosonjohoFinder {
                 // TODO 市町村情報取得_単一
                 return koseiShiList;
             } else if (事務広域.equals(導入形態コード) || 認定広域.equals(導入形態コード)) {
-                // TODO 市町村情報取得_広域
-                return koseiShiList;
+                koseiShiList.addAll(get市町村情報を取得());
             }
         } else if (合併あり.equals(gappeijohokubun)) {
             if (事務構成市町村.equals(導入形態コード) || 事務単一.equals(導入形態コード)
@@ -87,6 +88,51 @@ public class KijuntsukiShichosonjohoFinder {
                 koseiShiList.addAll(get広域の旧合併市町村情報(基準年月));
                 koseiShiList.addAll(get最新の広域構成市町村(基準年月));
             }
+        }
+        return koseiShiList;
+    }
+
+    /**
+     * 市町村情報を取得します。
+     *
+     * @return SearchResult<DbT7051KoseiShichosonMasterEntity>　市町村情報の検索結果
+     */
+    @Transaction
+    private List<IKoseiShichosonMaster> get市町村情報を取得() {
+        List<IKoseiShichosonMaster> koseiShiList = new ArrayList<>();
+        List<KoikiZenShichosonJoho> searchResult = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records();
+        for (KoikiZenShichosonJoho koikiZenShichosonJoho : searchResult) {
+            KoseiShichosonMasterEntity entity = new KoseiShichosonMasterEntity();
+            entity.setShichosonShokibetsuID(koikiZenShichosonJoho.get市町村識別ID());
+            entity.setShichosonCode(koikiZenShichosonJoho.get市町村コード());
+            entity.setShoKisaiHokenshaNo(koikiZenShichosonJoho.get証記載保険者番号());
+            entity.setKokuhorenKoikiShichosonNo(koikiZenShichosonJoho.get国保連広域内市町村番号());
+            entity.setShichosonMeisho(koikiZenShichosonJoho.get市町村名称());
+            entity.setTodofukenMeisho(koikiZenShichosonJoho.get都道府県名称());
+            entity.setGunMeisho(koikiZenShichosonJoho.get郡名称());
+            entity.setYubinNo(koikiZenShichosonJoho.get郵便番号());
+            entity.setJusho(koikiZenShichosonJoho.get住所());
+            entity.setTelNo(koikiZenShichosonJoho.get電話番号());
+            entity.setYusenChikuCode(koikiZenShichosonJoho.get最優先地区コード());
+            entity.setTyohyoTodoufukenHyojiUmu(koikiZenShichosonJoho.get帳票用都道府県名称表示有無());
+            entity.setTyohyoGunHyojiUmu(koikiZenShichosonJoho.get帳票用郡名称表示有無());
+            entity.setTyohyoShichosonHyojiUmu(koikiZenShichosonJoho.get帳票用市町村名称表示有無());
+            entity.setTyohyoJushoHenshuHouhou(koikiZenShichosonJoho.get帳票用住所編集方法());
+            entity.setTyohyoKatagakiHyojiUmu(koikiZenShichosonJoho.get帳票用方書表示有無());
+            entity.setRojinhokenShichosonNo(koikiZenShichosonJoho.get老人保健市町村番号());
+            entity.setRokenJukyushaNoTaikei(koikiZenShichosonJoho.get老人保健受給者番号体系());
+            entity.setTokuchoBunpaishuyaku(koikiZenShichosonJoho.get特徴分配集約());
+            entity.setIkoYMD(koikiZenShichosonJoho.get移行日());
+            entity.setKanyuYMD(koikiZenShichosonJoho.get加入日());
+            entity.setRidatsuYMD(koikiZenShichosonJoho.get離脱日());
+            entity.setGappeiKyuShichosonKubun(koikiZenShichosonJoho.get合併旧市町村区分());
+            entity.setGappeiKyuShichosonHyojiUmu(koikiZenShichosonJoho.get合併旧市町村表示有無());
+            entity.setGappeiChiikiNo(koikiZenShichosonJoho.get合併情報地域番号());
+            entity.setUnyoHokenshaNo(koikiZenShichosonJoho.get運用保険者番号());
+            entity.setUnyoKaishiYMD(koikiZenShichosonJoho.get運用開始日());
+            entity.setUnyoShuryoYMD(koikiZenShichosonJoho.get運用終了日());
+            entity.setUnyoKeitaiKubun(koikiZenShichosonJoho.get運用形態区分());
+            koseiShiList.add(new KoseiShichosonMaster(entity));
         }
         return koseiShiList;
     }
@@ -143,12 +189,16 @@ public class KijuntsukiShichosonjohoFinder {
             if (運用開始年月日 != null) {
                 運用開始日 = 運用開始年月日.getDayValue();
             }
+            FlexibleYearMonth 運用開始年月 = null;
+            if (運用開始年月日 != null) {
+                運用開始年月 = 運用開始年月日.getYearMonth();
+            }
             if ((new RString("2")).equals(内部開始日フラグ) && 1 != 運用開始日) {
                 内部開始日フラグ = RString.EMPTY;
-//                TODO QA-234
-//                if (基準年月.getYearMonth().equals(運用開始年月日.getYearMonth())) {
-//                    continue;
-//                }
+                if (基準年月.getYearMonth().equals(運用開始年月日)) {
+                    continue;
+                }
+                koseiShiList.add(new GappeiShichoson(entity));
             }
         }
         return koseiShiList;
