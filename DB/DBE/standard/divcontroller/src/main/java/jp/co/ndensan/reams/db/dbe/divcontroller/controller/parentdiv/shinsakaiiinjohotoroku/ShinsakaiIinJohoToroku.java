@@ -26,13 +26,18 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -299,6 +304,7 @@ public class ShinsakaiIinJohoToroku {
     public ResponseData onClick_btnToroku(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
 
+        // TOD QA-263
         審査会委員情報入力チェック(div);
         RString 状態 = RString.EMPTY;
         if (新規モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class))) {
@@ -404,32 +410,42 @@ public class ShinsakaiIinJohoToroku {
         return ResponseData.of(div).respond();
     }
 
-    private void 審査会委員情報入力チェック(ShinsakaiIinJohoTorokuDiv div) {
+    private ResponseData 審査会委員情報入力チェック(ShinsakaiIinJohoTorokuDiv div) {
 
         if (!更新モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class))) {
             boolean is重複コード = createHandOf(div).is重複コード();
             if (is重複コード) {
-                throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace("審査会委員コード"));
+                ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+                validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.既に登録済));
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             } else {
                 審査会委員重複チェック(div);
             }
         }
         if (div.getTxtShinsaIinYMDTo().getValue().isBefore(div.getTxtShinsaIinYMDTo().getValue())) {
-            throw new ApplicationException(UrErrorMessages.終了日が開始日以前.getMessage());
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.終了日が開始日以前));
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        UzT0007CodeEntity 地区コード = CodeMaster.getCode(new CodeShubetsu("5001"), div.getCcdshinsakaiChikuCode().getCode());
+        UzT0007CodeEntity 地区コード = CodeMaster.getCode(SubGyomuCode.DBE認定支援, new CodeShubetsu("5001"), div.getCcdshinsakaiChikuCode().getCode());
         if (地区コード == null) {
-            throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage().replace("審査会委員コード"));
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.コードマスタなし));
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
+        return ResponseData.of(div).respond();
     }
 
-    private void 審査会委員重複チェック(ShinsakaiIinJohoTorokuDiv div) {
+    private ResponseData 審査会委員重複チェック(ShinsakaiIinJohoTorokuDiv div) {
 
         int count = ShinsakaiIinJohoManager.createInstance().get審査会委員カウント(
                 new ShinsakaiIinJohoMapperParameter(div.getTxtShinsainCode().getValue()));
         if (0 < count) {
-            throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace("審査会委員コード"));
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.既に登録済));
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
+        return ResponseData.of(div).respond();
     }
 
     private ShinsakaiIinJoho setViewStateBy審査会委員情報(ShinsakaiIinJohoTorokuDiv div) {
@@ -616,5 +632,23 @@ public class ShinsakaiIinJohoToroku {
 
     private ShinsakaiIinJohoTorokuHandler createHandOf(ShinsakaiIinJohoTorokuDiv div) {
         return new ShinsakaiIinJohoTorokuHandler(div);
+    }
+
+    private enum ShinsakaiIinJohoTorokuValidationMessage implements IValidationMessage {
+
+        既に登録済(UrErrorMessages.既に登録済, "審査会委員コード"),
+        終了日が開始日以前(UrErrorMessages.終了日が開始日以前),
+        コードマスタなし(UrErrorMessages.コードマスタなし, "開催地区コード");
+
+        private final Message message;
+
+        private ShinsakaiIinJohoTorokuValidationMessage(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }
