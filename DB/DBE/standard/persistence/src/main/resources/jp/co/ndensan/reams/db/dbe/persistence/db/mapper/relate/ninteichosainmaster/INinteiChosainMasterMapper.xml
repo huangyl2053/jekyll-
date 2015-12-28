@@ -130,7 +130,7 @@
             <if test="uses調査員氏名">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainShimei" LIKE '%' || #{調査員氏名} || '%'
             </if>
-            <if test="uses調査委託先カナ名称">
+            <if test="uses調査員カナ氏名">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainKanaShimei" LIKE '%' || #{調査員カナ氏名} || '%'
             </if>
             <if test="uses地区コード">
@@ -194,7 +194,7 @@
             <if test="uses調査員氏名">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainShimei" LIKE '%' || #{調査員氏名} || '%'
             </if>
-            <if test="uses調査委託先カナ名称">
+            <if test="uses調査員カナ氏名">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainKanaShimei" LIKE '%' || #{調査員カナ氏名} || '%'
             </if>
              <if test="uses地区コード">
