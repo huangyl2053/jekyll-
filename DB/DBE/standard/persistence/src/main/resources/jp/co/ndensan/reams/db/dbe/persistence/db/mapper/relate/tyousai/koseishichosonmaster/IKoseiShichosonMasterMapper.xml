@@ -134,10 +134,10 @@
             AND dbt5910."ninteichosaItakusakiCode" &lt;= #{searchChosaItakusakiCodeTo}
         </if>
         <if test="jigyoshaMeisho!=null">
-            AND dbt5910."jigyoshaMeisho" LIKE "%"#{jigyoshaMeisho}"%"
+            AND dbt5910."jigyoshaMeisho" LIKE '%'||#{jigyoshaMeisho}||'%'
         </if>
         <if test="jigyoshaMeishoKana!=null">
-            AND dbt5910."jigyoshaMeishoKana" LIKE "%"#{jigyoshaMeishoKana}"%"
+            AND dbt5910."jigyoshaMeishoKana" LIKE '%'||#{jigyoshaMeishoKana}||'%'
         </if>
         <if test="chosaItakuKubun!=null">
             AND dbt5910."chosaItakuKubun" = #{chosaItakuKubun}

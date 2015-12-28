@@ -290,6 +290,9 @@ public class NinteichosaItakusakiMasterHandler {
      * @return is調査委託先情報登録エリア編集有り
      */
     public boolean is調査委託先情報登録エリア編集有り() {
+        if (div.getHdnInputDiv() == null) {
+            return true;
+        }
         return !div.getChosaitakusakiJohoInput().toString().equals(div.getHdnInputDiv().toString());
     }
 
