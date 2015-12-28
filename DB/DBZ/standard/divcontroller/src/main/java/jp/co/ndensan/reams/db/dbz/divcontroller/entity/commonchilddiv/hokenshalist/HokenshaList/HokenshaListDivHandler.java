@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.shichosonlist.ShichosonCodeNameR
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.Comparators;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-//import jp.co.ndensan.reams.db.dbx.service.core.shichosonlist.ShichosonList;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonlist.ShichosonList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;

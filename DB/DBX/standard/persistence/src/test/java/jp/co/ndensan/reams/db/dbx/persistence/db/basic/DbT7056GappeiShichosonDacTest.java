@@ -30,7 +30,6 @@ import org.junit.Ignore;
 /**
  * {@link DbT7056GappeiShichosonDac}のテストです。
  */
-@Ignore
 @RunWith(Enclosed.class)
 public class DbT7056GappeiShichosonDacTest extends DbxTestDacBase {
 
@@ -85,7 +84,7 @@ public class DbT7056GappeiShichosonDacTest extends DbxTestDacBase {
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT7056GappeiShichosonEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_合併年月日,
+                    キー_01,
                     DEFAULT_地域番号,
                     DEFAULT_旧市町村コード);
             assertThat(insertedRecord, is(notNullValue()));
@@ -94,7 +93,7 @@ public class DbT7056GappeiShichosonDacTest extends DbxTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7056GappeiShichosonEntity insertedRecord = sut.selectByKey(
-                    キー_01,
+                    キー_03,
                     DEFAULT_地域番号,
                     DEFAULT_旧市町村コード);
             assertThat(insertedRecord, is(nullValue()));
@@ -125,7 +124,7 @@ public class DbT7056GappeiShichosonDacTest extends DbxTestDacBase {
     public static class insertのテスト extends DbxTestDacBase {
 
         @Test
-        public void 合併市町村エンティティを渡すと_insertは_合併市町村を追加する() {
+        public void 合併市町村エンティティを渡すと_saveは_合併市町村を追加する() {
             TestSupport.insert(
                     DEFAULT_合併年月日,
                     DEFAULT_地域番号,
@@ -149,13 +148,13 @@ public class DbT7056GappeiShichosonDacTest extends DbxTestDacBase {
         }
 
         @Test
-        public void 合併市町村エンティティを渡すと_updateは_合併市町村を更新する() {
+        public void 合併市町村エンティティを渡すと_saveは_合併市町村を更新する() {
             DbT7056GappeiShichosonEntity updateRecord = sut.selectByKey(
                     DEFAULT_合併年月日,
                     DEFAULT_地域番号,
                     DEFAULT_旧市町村コード);
 
-            updateRecord.setHyojiUmu(new RString("0001"));
+            updateRecord.setHyojiUmu(new RString("1"));
 
             sut.save(updateRecord);
 
@@ -179,7 +178,7 @@ public class DbT7056GappeiShichosonDacTest extends DbxTestDacBase {
         }
 
         @Test
-        public void 合併市町村エンティティを渡すと_deleteは_合併市町村を削除する() {
+        public void 合併市町村エンティティを渡すと_saveは_合併市町村を削除する() {
             DbT7056GappeiShichosonEntity deletedEntity = sut.selectByKey(
                     DEFAULT_合併年月日,
                     DEFAULT_地域番号,
@@ -195,6 +194,30 @@ public class DbT7056GappeiShichosonDacTest extends DbxTestDacBase {
         }
     }
 
+    public static class selectAllOrderbyChikiNoDescのテスト extends DbxTestDacBase {
+
+        @Before
+        public void setUp() {
+            DbT7056GappeiShichosonEntity entity = DbT7056GappeiShichosonEntityGenerator.createDbT7056GappeiShichosonEntity();
+            entity.setChiikiNo(new RString("01"));
+            TestSupport.save(entity);
+            entity.setChiikiNo(new RString("02"));
+            TestSupport.save(entity);
+            entity.setChiikiNo(new RString("03"));
+            TestSupport.save(entity);
+        }
+
+        @Test
+        public void selectAllOrderbyChikiNoDescは_全件返す() {
+            assertThat(sut.selectAllOrderbyChikiNoDesc().size(), is(3));
+        }
+
+        @Test
+        public void selectAllOrderbyChikiNoDescは_先頭の要素のChikiNoが一番大きい() {
+            assertThat(sut.selectAllOrderbyChikiNoDesc().get(0).getChiikiNo(), is(new RString("03")));
+        }
+    }
+
     private static class TestSupport {
 
         public static void insert(
@@ -206,6 +229,13 @@ public class DbT7056GappeiShichosonDacTest extends DbxTestDacBase {
             entity.setChiikiNo(地域番号);
             entity.setKyuShichosonCode(旧市町村コード);
             sut.save(entity);
+        }
+
+        public static void save(DbT7056GappeiShichosonEntity entity) {
+            sut.save(entity);
+        }
+
+        private TestSupport() {
         }
     }
 }

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbx.business.core.koseishichoson;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
@@ -73,6 +74,13 @@ public class KoseiShichosonMaster
             koseiShichosonShishoMasterList.add(new KoseiShichosonShishoMaster(niniEntity));
         }
         this.koseiShichosonShishoMaster = Models.create(koseiShichosonShishoMasterList);
+    }
+
+    public KoseiShichosonMaster(DbT7051KoseiShichosonMasterEntity entity) {
+        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("構成市町村マスタ"));
+        this.id = new KoseiShichosonMasterIdentifier(
+                entity.getShichosonShokibetsuID());
+        this.koseiShichosonShishoMaster = Models.create(Collections.<KoseiShichosonShishoMaster>emptyList());
     }
 
     /**
