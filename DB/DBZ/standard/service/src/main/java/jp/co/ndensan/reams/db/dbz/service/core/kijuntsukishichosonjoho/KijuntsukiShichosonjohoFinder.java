@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.service.core.kijuntsukishichosonjoho;
 
 import java.util.ArrayList;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.kijunt.GappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.kijunt.IKoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.kijunt.KoseiShichosonMaster;
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.kijuntsu.KoseiShichosonMasterE
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.kijuntsukishichosonjoho.IKijuntsukiShichosonjohoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
-import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho.GappeiCityJohoBFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -64,12 +65,14 @@ public class KijuntsukiShichosonjohoFinder {
     /**
      * 基準月市町村情報の取得します
      *
-     * @param 基準年月 FlexibleDate
+     * @param 基準年月 FlexibleYearMonth
      * @param 導入形態コード RString
      * @return List<IKoseiShichosonMaster>
      */
     @Transaction
-    public List<IKoseiShichosonMaster> getKijuntsukiShichosonjohos(FlexibleDate 基準年月, RString 導入形態コード) {
+    public List<IKoseiShichosonMaster> getKijuntsukiShichosonjohos(FlexibleYearMonth 基準年月, RString 導入形態コード) {
+        requireNonNull(基準年月, UrSystemErrorMessages.値がnull.getReplacedMessage("基準年月"));
+        requireNonNull(導入形態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("導入形態コード"));
         List<IKoseiShichosonMaster> koseiShiList = new ArrayList<>();
         RString gappeijohokubun = GappeiCityJohoBFinder.createInstance().getGappeijohokubun();
         if (合併なし.equals(gappeijohokubun)) {
@@ -140,10 +143,10 @@ public class KijuntsukiShichosonjohoFinder {
     /**
      * 単一全合併市町村情報の取得します
      *
-     * @param 基準年月 FlexibleDate
+     * @param 基準年月 FlexibleYearMonth
      * @return List<IKoseiShichosonMaster>
      */
-    private List<IKoseiShichosonMaster> get新合併市町村の取得(FlexibleDate 基準年月) {
+    private List<IKoseiShichosonMaster> get新合併市町村の取得(FlexibleYearMonth 基準年月) {
         IKijuntsukiShichosonjohoMapper mapper = mapperProvider.create(IKijuntsukiShichosonjohoMapper.class);
         List<DbT7055GappeiJohoEntity> dbt7055Entity = mapper.get新合併市町村の取得(基準年月);
         if (dbt7055Entity == null || dbt7055Entity.isEmpty()) {
@@ -158,10 +161,10 @@ public class KijuntsukiShichosonjohoFinder {
     /**
      * 旧市町村情報の取得します
      *
-     * @param 基準年月 FlexibleDate
+     * @param 基準年月 FlexibleYearMonth
      * @return List<IKoseiShichosonMaster>
      */
-    private List<IKoseiShichosonMaster> get単一全合併市町村情報(FlexibleDate 基準年月) {
+    private List<IKoseiShichosonMaster> get単一全合併市町村情報(FlexibleYearMonth 基準年月) {
         RString 内部開始日フラグ = RString.EMPTY;
         List<IKoseiShichosonMaster> koseiShiList = new ArrayList<>();
         IKijuntsukiShichosonjohoMapper mapper = mapperProvider.create(IKijuntsukiShichosonjohoMapper.class);
@@ -174,11 +177,11 @@ public class KijuntsukiShichosonjohoFinder {
                     運用終了年月 = 運用終了年月日.getYearMonth();
                 }
                 if (entity.getKokuhorenDataFromYMD().getYearMonth().equals(entity.getGappeiYMD().getYearMonth())
-                        && 基準年月.getYearMonth().equals(運用終了年月)) {
+                        && 基準年月.equals(運用終了年月)) {
                     continue;
                 }
                 if (entity.getGappeiYMD().getYearMonth().isBefore(entity.getKokuhorenDataFromYMD().getYearMonth())
-                        && 基準年月.getYearMonth().equals(運用終了年月)) {
+                        && 基準年月.equals(運用終了年月)) {
                     koseiShiList.add(new GappeiShichoson(entity));
                     内部開始日フラグ = new RString("2");
                     continue;
@@ -195,7 +198,7 @@ public class KijuntsukiShichosonjohoFinder {
             }
             if ((new RString("2")).equals(内部開始日フラグ) && 1 != 運用開始日) {
                 内部開始日フラグ = RString.EMPTY;
-                if (基準年月.getYearMonth().equals(運用開始年月)) {
+                if (基準年月.equals(運用開始年月)) {
                     continue;
                 }
                 koseiShiList.add(new GappeiShichoson(entity));
@@ -210,7 +213,7 @@ public class KijuntsukiShichosonjohoFinder {
      * @param 基準年月 FlexibleDate
      * @return List<IKoseiShichosonMaster>
      */
-    private List<IKoseiShichosonMaster> get広域の旧合併市町村情報(FlexibleDate 基準年月) {
+    private List<IKoseiShichosonMaster> get広域の旧合併市町村情報(FlexibleYearMonth 基準年月) {
         List<IKoseiShichosonMaster> koseiShiList = new ArrayList<>();
         IKijuntsukiShichosonjohoMapper mapper = mapperProvider.create(IKijuntsukiShichosonjohoMapper.class);
         List<KoseiShichosonMasterEntity> koseiList = mapper.get広域の旧合併市町村情報を取得(基準年月);
@@ -222,11 +225,11 @@ public class KijuntsukiShichosonjohoFinder {
                     離脱年月 = 離脱日.getYearMonth();
                 }
                 if (entity.getKokuhorenDataFromYMD().getYearMonth().equals(entity.getGappeiYMD().getYearMonth())
-                        && 基準年月.getYearMonth().equals(離脱年月)) {
+                        && 基準年月.equals(離脱年月)) {
                     continue;
                 }
                 if (entity.getGappeiYMD().getYearMonth().isBefore(entity.getKokuhorenDataFromYMD().getYearMonth())
-                        && 基準年月.getYearMonth().equals(entity.getKanyuYMD().getYearMonth())) {
+                        && 基準年月.equals(entity.getKanyuYMD().getYearMonth())) {
                     continue;
                 }
             }
@@ -238,17 +241,17 @@ public class KijuntsukiShichosonjohoFinder {
     /**
      * 最新の広域構成市町村の取得します
      *
-     * @param 基準年月 FlexibleDate
+     * @param 基準年月 FlexibleYearMonth
      * @return List<IKoseiShichosonMaster>
      */
-    private List<IKoseiShichosonMaster> get最新の広域構成市町村(FlexibleDate 基準年月) {
+    private List<IKoseiShichosonMaster> get最新の広域構成市町村(FlexibleYearMonth 基準年月) {
         List<IKoseiShichosonMaster> koseiShiList = new ArrayList<>();
         IKijuntsukiShichosonjohoMapper mapper = mapperProvider.create(IKijuntsukiShichosonjohoMapper.class);
         List<KoseiShichosonMasterEntity> koseishiList = mapper.get最新の広域構成市町村の取得(基準年月);
         for (KoseiShichosonMasterEntity entity : koseishiList) {
             if (1 != entity.getGappeiYMD().getDayValue()
                     && (entity.getGappeiYMD().getYearMonth().isBefore(entity.getKokuhorenDataFromYMD().getYearMonth())
-                    && 基準年月.getYearMonth().equals(entity.getKanyuYMD().getYearMonth()))) {
+                    && 基準年月.equals(entity.getKanyuYMD().getYearMonth()))) {
                 continue;
             }
             koseiShiList.add(new KoseiShichosonMaster(entity));
