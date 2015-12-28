@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5591GogitaiJohoEntity;

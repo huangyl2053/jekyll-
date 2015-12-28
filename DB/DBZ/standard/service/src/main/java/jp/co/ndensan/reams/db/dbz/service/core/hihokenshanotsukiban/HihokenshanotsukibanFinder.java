@@ -37,6 +37,7 @@ public class HihokenshanotsukibanFinder {
     private static final RString 付番方法_自動連番_MCD10付番 = new RString("5");
     private static final RString 付番元情報_住民コード = new RString("1");
     private static final RString 付番元情報_自動連番 = new RString("2");
+    private static final HihokenshaNo 被保険者番号_空白 = new HihokenshaNo("          ");
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
     private final DbT7037ShoKofuKaishuDac dbT7037Dac;
 
@@ -107,7 +108,7 @@ public class HihokenshanotsukibanFinder {
             被保険者番号 = new HihokenshaNo(Saiban.get(SubGyomuCode.DBA介護資格, SaibanHanyokeyName.被保険者番号自動採番.getコード()).nextString().trim());
         }
         if (付番方法_任意手入力付番.equals(付番方法)) {
-            return 被保険者番号;
+            return 被保険者番号_空白;
         }
         if (付番方法_カスタマイズ付番.equals(付番方法)) {
             被保険者番号 = getHubanHouhouHanteiYonn(識別コード);
