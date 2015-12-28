@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran.IkenshoSh
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran.IkenshoShujiiIchiranReport;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.IkenshoShujiiIchiranProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.ikenshoShujiiIchiran.IkenshoShujiiIchiranRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.itakusakichosainichiran.ItakusakiChosainIchiranReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ShujiiIryokikanShujiiIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
@@ -32,18 +31,17 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoShujiiIchiran.IkenshoShujiiIchiranRelateMapper.getIkenshoShujiiIchiranRelateEntity");
 
-    List<IkenshoShujiiIchiranBodyItem> bodyItemList = new ArrayList<>();
+    List<IkenshoShujiiIchiranBodyItem> bodyItemList;
     private static final ReportId REPORT_ID = new ReportId("DBE591001");
     @BatchWriter
-    private BatchReportWriter<ItakusakiChosainIchiranReportSource> batchWrite;
+    private BatchReportWriter<ShujiiIryokikanShujiiIchiranhyoReportSource> batchWrite;
     IkenshoShujiiIchiranProcessParameter processParameter;
     private ReportSourceWriter<ShujiiIryokikanShujiiIchiranhyoReportSource> reportSourceWriter;
     IkenshoShujiiIchiranHeadItem headItem;
 
     @Override
     protected void initialize() {
-
-        super.initialize();
+        bodyItemList = new ArrayList<>();
         headItem = new IkenshoShujiiIchiranHeadItem(
                 processParameter.getShichosonCode(),
                 processParameter.getShichosonName(),
@@ -58,10 +56,14 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
 
     @Override
     protected IBatchReader createReader() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
-        reportSourceWriter = new ReportSourceWriter(batchWrite);
         return new BatchDbReader(MYBATIS_SELECT_ID, IkenshoShujiiIchiranProcessParameter.
                 to主治医一覧表作成MybatisParameter(processParameter));
+    }
+
+    @Override
+    protected void createWriter() {
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
     @Override
