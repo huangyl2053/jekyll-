@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 介護認定審査会開催場所登録Divを制御します。
@@ -53,6 +54,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
     public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onLoad(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> response = new ResponseData<>();
         getHandler(div).set介護認定審査会開催場所一覧(get開催場所一覧(div));
+        div.getBtnTsuika().setDisabled(false);
         response.data = div;
         return response;
     }
@@ -67,6 +69,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
         btnKensaku_onClick(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> response = new ResponseData<>();
         getHandler(div).set介護認定審査会開催場所一覧(get開催場所一覧(div));
+        div.getBtnTsuika().setDisabled(false);
         response.data = div;
         return response;
     }
@@ -81,7 +84,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
         btnTsuiKa_onClick(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> response = new ResponseData<>();
         if (更新モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai())
-                && 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai())) {
+                || 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai())) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -132,7 +135,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
         dataGrid_onSelectByModifyButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> response = new ResponseData<>();
         if (更新モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai())
-                && 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai())) {
+                || 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai())) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -148,6 +151,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
             getHandler(div).set修正の場合開催場所編集エリア();
             response.data = div;
         }
+        div.getTxtKaisaibashoCode().setReadOnly(true);
         return response;
     }
 
@@ -184,6 +188,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
             getHandler(div).set開催場所編集エリアを初期化処理();
             response.data = div;
         }
+        
         return response;
     }
 
@@ -199,6 +204,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
         開催場所コードの重複チェック(div);
         開催地区コードの存在チェック(div);
         getHandler(div).開催場所一覧の更新();
+        div.getBtnTsuika().setDisabled(false);
         response.data = div;
         return response;
     }
@@ -261,13 +267,13 @@ public class NinteiShinsakaiKaisaibashoToroku {
     private ShinsakaiKaisaiBashoJoho edit介護認定審査会開催場所情報(dgKaisaibashoIchiran_Row row,
             ShinsakaiKaisaiBashoJoho shinsakaiKaisaiBashoJoho) {
         ShinsakaiKaisaiBashoJohoBuilder builder = shinsakaiKaisaiBashoJoho.createBuilderForEdit();
-        builder.set介護認定審査会開催地区コード(new Code(row.getKaisaibashoCode()));
+        builder.set介護認定審査会開催地区コード(new Code(row.getKaisaiChikuCode()));
         builder.set介護認定審査会開催場所住所(row.getKaisaibashoJusho());
         builder.set介護認定審査会開催場所名称(row.getKaisaibashoMeisho());
         builder.set介護認定審査会開催場所電話番号(new TelNo(row.getKaisaibashoTelNo()));
-        if (通常.equals(row.getKaisaibashoCode())) {
+        if (通常.equals(row.getKaisaibashoJokyo())) {
             builder.set介護認定審査会開催場所状況(有効);
-        } else if (削除.equals(row.getKaisaibashoCode())) {
+        } else if (削除.equals(row.getKaisaibashoJokyo())) {
             builder.set介護認定審査会開催場所状況(全て);
         }
         return builder.build();
@@ -278,7 +284,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
         List<dgKaisaibashoIchiran_Row> rowList = div.getDgKaisaibashoIchiran().getDataSource();
         if (追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai())) {
             for (dgKaisaibashoIchiran_Row row : rowList) {
-                if (kaisaibashoCode.equals(row.getKaisaiChikuCode())) {
+                if (kaisaibashoCode.equals(row.getKaisaibashoCode())) {
                     throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(
                             kaisaibashoCode.toString()));
                 }
@@ -290,15 +296,36 @@ public class NinteiShinsakaiKaisaibashoToroku {
                 throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(
                         kaisaibashoCode.toString()));
             }
+        } else if (更新モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai())){
+            int selectId = div.getDgKaisaibashoIchiran().getClickedRowId();
+            for (int i = 0; i < rowList.size(); i++) {
+                if(i==selectId){
+                    continue;
+                }
+                if (kaisaibashoCode.equals(rowList.get(i).getKaisaibashoCode())) {
+                    throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(
+                            kaisaibashoCode.toString()));
+                }
+            }
         }
     }
 
     private void 開催地区コードの存在チェック(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if(!div.getCcdKaisaiChikuCode().getCode().isEmpty()){
-            RString code = CodeMaster.getCodeMeisho(コード種別, div.getCcdKaisaiChikuCode().getCode());
-            if (code.trim().isEmpty()) {
+            List<UzT0007CodeEntity> codeList = CodeMaster.getCode();
+            if ( codeList == null || codeList.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage().replace(
                         div.getCcdKaisaiChikuCode().getCode().getColumnValue().toString()));
+            }
+            boolean isNotExits = true;
+            for(UzT0007CodeEntity entity : codeList){
+                if (コード種別.equals(entity.getコード種別())
+                     && div.getCcdKaisaiChikuCode().getCode().equals(entity.getコード())){
+                    isNotExits = false;
+                }
+            }
+            if(isNotExits){
+                throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage());
             }
         }
     }

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -70,7 +71,6 @@ public class DbT5592ShinsakaiKaisaiBashoJohoDac implements ISaveable<DbT5592Shin
     public int save(DbT5592ShinsakaiKaisaiBashoJohoEntity entity) {
         requireNonNull(entity, 
                 UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所情報エンティティ"));
-         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 }

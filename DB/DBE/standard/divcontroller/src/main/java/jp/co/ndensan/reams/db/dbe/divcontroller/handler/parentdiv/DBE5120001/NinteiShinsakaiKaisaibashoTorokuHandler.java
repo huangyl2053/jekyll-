@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class NinteiShinsakaiKaisaibashoTorokuHandler {
 
-    public static final RString 更新モード = new RString("更新");
+    public static final RString 更新モード = new RString("修正");
     public static final RString 追加モード = new RString("追加");
     public static final RString 削除モード = new RString("削除");
     public static final RString 通常 = new RString("通常");
@@ -160,8 +160,7 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         clickedItem.setKaisaibashoJusho(div.getTxtKaisaibashoJusho().getValue());
         clickedItem.setKaisaibashoTelNo(div.getTxtTelNumber().getDomain().getColumnValue());
         clickedItem.setKaisaibashoJusho(div.getTxtKaisaibashoJusho().getValue());
-        div.getCcdKaisaiChikuCode().getCode();
-        div.getCcdKaisaiChikuCode().getCodeMeisho();
+        clickedItem.setKaisaiChikuCode(div.getCcdKaisaiChikuCode().getCode().getColumnValue());
         if (div.getDdlKaisaiBashoJokyo().getSelectedIndex() == 0) {
             clickedItem.setKaisaibashoJokyo(通常);
         } else if (div.getDdlKaisaiBashoJokyo().getSelectedIndex() == 1) {
@@ -189,9 +188,10 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         div.getTxtKaisaibashoJusho().setReadOnly(true);
         div.getTxtTelNumber().setReadOnly(true);
         div.getDdlKaisaiBashoJokyo().setReadOnly(true);
+        div.getCcdKaisaiChikuCode().setReadOnly(true);
         div.getBtnback().setDisabled(true);
         div.getBtnupdate().setDisabled(true);
-        div.getBtnTsuika().setDisabled(false);
+        div.getBtnTsuika().setDisabled(true);
     }
 
     private void set開催場所編集エリア活性() {
@@ -200,9 +200,10 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         div.getTxtKaisaibashoJusho().setReadOnly(false);
         div.getTxtTelNumber().setReadOnly(false);
         div.getDdlKaisaiBashoJokyo().setReadOnly(false);
+        div.getCcdKaisaiChikuCode().setReadOnly(false);
         div.getBtnback().setDisabled(false);
         div.getBtnupdate().setDisabled(false);
-        div.getBtnTsuika().setDisabled(true);
+        div.getBtnTsuika().setDisabled(false);
     }
 
     private void clear開催場所編集エリア() {
