@@ -252,13 +252,9 @@ public class NinteiChosainMaster {
                 return ResponseData.of(div).setState(DBE9040001StateName.一覧);
             }
         }
-        if ((状態_削除.equals(div.getChosainJohoInput().getState())
-                || RString.EMPTY.equals(div.getChosainJohoInput().getState()))) {
-            div.getChosainIchiran().setDisabled(false);
-            return ResponseData.of(div).setState(DBE9040001StateName.一覧);
-        }
 
-        return ResponseData.of(div).respond();
+        div.getChosainIchiran().setDisabled(false);
+        return ResponseData.of(div).setState(DBE9040001StateName.一覧);
     }
 
     /**
@@ -415,7 +411,10 @@ public class NinteiChosainMaster {
      * @return ResponseData<NinteiChosainMasterDiv>
      */
     public ResponseData<NinteiChosainMasterDiv> onClick_btnUpdate(NinteiChosainMasterDiv div) {
-
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForUpdate();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
@@ -425,10 +424,6 @@ public class NinteiChosainMaster {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForUpdate();
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
-            }
             if (validateForDelete(div).iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }

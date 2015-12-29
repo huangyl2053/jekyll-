@@ -39,6 +39,7 @@ public class NinteiChosainMasterHandler {
     private static final RString WOMAN = new RString("2");
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_削除 = new RString("削除");
+    private static final RString 状態_修正 = new RString("修正");
     private static final RString ハイフン = new RString("-");
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
@@ -71,6 +72,7 @@ public class NinteiChosainMasterHandler {
         div.getDdlSearchShichoson().setDataSource(shichosonDataSource);
         List<UzT0007CodeEntity> codeList = CodeMaster.getCodeRireki(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU);
         List<KeyValueDataSource> chikuDataSource = new ArrayList<>();
+        chikuDataSource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (UzT0007CodeEntity codeEntity : codeList) {
             chikuDataSource.add(new KeyValueDataSource(codeEntity.getコード().getKey(), codeEntity.getコード名称()));
         }
@@ -275,6 +277,8 @@ public class NinteiChosainMasterHandler {
             div.getChosainIchiran().getDgChosainIchiran().getDataSource().add(row);
         } else if (状態_削除.equals(eventJotai) && 状態_追加.equals(row.getJotai())) {
             div.getChosainIchiran().getDgChosainIchiran().getDataSource().remove(index);
+        } else if (状態_修正.equals(eventJotai) && 状態_追加.equals(row.getJotai())) {
+            div.getChosainIchiran().getDgChosainIchiran().getDataSource().set(index, row);
         } else {
             row.setJotai(eventJotai);
             div.getChosainIchiran().getDgChosainIchiran().getDataSource().set(index, row);
@@ -296,7 +300,7 @@ public class NinteiChosainMasterHandler {
     private RString editYubinNo(RString yubinNo) {
         RStringBuilder yubinNoSb = new RStringBuilder();
         if (yubinNo.contains(ハイフン)) {
-            yubinNoSb.append(yubinNo.substring(0, INDEX_4));
+            yubinNoSb.append(yubinNo.substring(0, INDEX_3));
             yubinNoSb.append(yubinNo.substring(INDEX_4));
         } else {
             yubinNoSb.append(yubinNo);
@@ -356,10 +360,12 @@ public class NinteiChosainMasterHandler {
      * 地区名を設定します。
      */
     public void setTxtChikuMei() {
-        UzT0007CodeEntity code = CodeMaster.getCode(
-                SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(div.getChosainJohoInput().getTxtChiku().getValue()));
-        if (code != null) {
-            div.getChosainJohoInput().getTxtChikuMei().setValue(code.getコード名称());
+        List<UzT0007CodeEntity> codeList = CodeMaster.getCodeRireki(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU);
+        for (UzT0007CodeEntity uzT0007CodeEntity : codeList) {
+            if (uzT0007CodeEntity.getコード().value().equals(div.getChosainJohoInput().getTxtChiku().getValue())) {
+                div.getChosainJohoInput().getTxtChikuMei().setValue(codeList.get(0).getコード名称());
+                break;
+            }
         }
     }
 

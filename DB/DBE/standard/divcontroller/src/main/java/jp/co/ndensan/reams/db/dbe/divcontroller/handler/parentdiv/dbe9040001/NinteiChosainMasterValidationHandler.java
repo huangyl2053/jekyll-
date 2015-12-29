@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.dgCh
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -28,6 +29,9 @@ public class NinteiChosainMasterValidationHandler {
     private static final RString 状態_修正 = new RString("修正");
     private static final RString MAN = new RString("1");
     private static final RString CODE_有効 = new RString("1");
+    private static final RString ハイフン = new RString("-");
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
 
     /**
      * コンストラクタです。
@@ -113,14 +117,15 @@ public class NinteiChosainMasterValidationHandler {
         List<dgChosainIchiran_Row> ichiranList = div.getChosainIchiran().getDgChosainIchiran().getDataSource();
         boolean notUpdate = true;
         for (dgChosainIchiran_Row row : ichiranList) {
-            if (!RString.EMPTY.equals(row.getJokyoFlag())) {
+            if (!RString.EMPTY.equals(row.getJotai())) {
                 notUpdate = false;
                 break;
             }
         }
         if (notUpdate) {
             validPairs.add(new ValidationMessageControlPair(
-                    new IdocheckMessages(UrErrorMessages.編集なしで更新不可)));
+                    new IdocheckMessages(UrErrorMessages.編集なしで更新不可),
+                    div.getChosainIchiran().getDgChosainIchiran()));
         }
 
         return validPairs;
@@ -152,10 +157,16 @@ public class NinteiChosainMasterValidationHandler {
         if (!row.getShichosonCode().equals(chosainJohoInputDiv.getTxtShichoson().getValue())) {
             update = true;
         }
+        if (!row.getShichoson().equals(chosainJohoInputDiv.getTxtShichosonmei().getValue())) {
+            update = true;
+        }
         if (!row.getChosainCode().getValue().equals(chosainJohoInputDiv.getTxtChosainCode().getValue())) {
             update = true;
         }
         if (!row.getChosaItakusakiCode().getValue().equals(chosainJohoInputDiv.getTxtChosaItakusaki().getValue())) {
+            update = true;
+        }
+        if (!row.getChosaItakusakiMeisho().equals(chosainJohoInputDiv.getTxtChosaItakusakiMeisho().getValue())) {
             update = true;
         }
         if (!row.getChosainShimei().equals(chosainJohoInputDiv.getTxtChosainShimei().getValue())) {
@@ -164,19 +175,22 @@ public class NinteiChosainMasterValidationHandler {
         if (!row.getChosainKanaShimei().equals(chosainJohoInputDiv.getTxtChosainKanaShimei().getValue())) {
             update = true;
         }
-        if (!row.getSeibetsu().equals(chosainJohoInputDiv.getRadSeibetsu().getSelectedKey())) {
+        if (!row.getSeibetsu().equals(chosainJohoInputDiv.getRadSeibetsu().getSelectedValue())) {
             update = true;
         }
-        if (!row.getChiku().equals(chosainJohoInputDiv.getTxtChiku().getValue())) {
+        if (!row.getChikuCode().equals(chosainJohoInputDiv.getTxtChiku().getValue())) {
+            update = true;
+        }
+        if (!row.getChiku().equals(chosainJohoInputDiv.getTxtChikuMei().getValue())) {
             update = true;
         }
         if (!row.getChosainShikaku().equals(chosainJohoInputDiv.getDdlChosainShikaku().getSelectedValue())) {
             update = true;
         }
-        if (row.getChosaKanoNinzu().getValue() != chosainJohoInputDiv.getTxtChosaKanoNinzu().getValue()) {
+        if (!row.getChosaKanoNinzu().getValue().equals(chosainJohoInputDiv.getTxtChosaKanoNinzu().getValue())) {
             update = true;
         }
-        if (!row.getYubinNo().equals(chosainJohoInputDiv.getTxtYubinNo().getValue().value())) {
+        if (!editYubinNo(row.getYubinNo()).equals(chosainJohoInputDiv.getTxtYubinNo().getValue().value())) {
             update = true;
         }
         if (!row.getJusho().equals(chosainJohoInputDiv.getTxtJusho().getDomain().value())) {
@@ -195,6 +209,17 @@ public class NinteiChosainMasterValidationHandler {
             update = true;
         }
         return update;
+    }
+
+    private RString editYubinNo(RString yubinNo) {
+        RStringBuilder yubinNoSb = new RStringBuilder();
+        if (yubinNo.contains(ハイフン)) {
+            yubinNoSb.append(yubinNo.substring(0, INDEX_3));
+            yubinNoSb.append(yubinNo.substring(INDEX_4));
+        } else {
+            yubinNoSb.append(yubinNo);
+        }
+        return yubinNoSb.toRString();
     }
 
     /**
@@ -247,7 +272,7 @@ public class NinteiChosainMasterValidationHandler {
         if (!RString.isNullOrEmpty(chosainJohoInputDiv.getTextBoxShozokuKikan().getDomain().value())) {
             update = true;
         }
-        if (!CODE_有効.equals((chosainJohoInputDiv.getRadChosainJokyo().getSelectedValue()))) {
+        if (!CODE_有効.equals((chosainJohoInputDiv.getRadChosainJokyo().getSelectedKey()))) {
             update = true;
         }
         return update;
