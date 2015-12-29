@@ -48,18 +48,28 @@ public class SikakuKanrenIdoFinder {
     private final SikakuJiyuShutoku sikaku;
 
     /**
+     * コンストラクタです。
+     *
+     */
+    public SikakuKanrenIdoFinder() {
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.db7051Dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
+        this.sikaku = InstanceProvider.create(SikakuJiyuShutoku.class);
+    }
+
+    /**
      * 単体テスト用のコンストラクタです。
      *
      * @param mapperProvider mapperProvider
      * @param db7051Dac DbT7051KoseiShichosonMasterDac
      * @param sikaku SikakuJiyuShutoku
      */
-    public SikakuKanrenIdoFinder(MapperProvider mapperProvider,
+    SikakuKanrenIdoFinder(MapperProvider mapperProvider,
             DbT7051KoseiShichosonMasterDac db7051Dac,
             SikakuJiyuShutoku sikaku) {
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.db7051Dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
-        this.sikaku = InstanceProvider.create(SikakuJiyuShutoku.class);
+        this.mapperProvider = mapperProvider;
+        this.db7051Dac = db7051Dac;
+        this.sikaku = sikaku;
     }
 
     /**
