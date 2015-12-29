@@ -6,18 +6,23 @@
 package jp.co.ndensan.reams.db.dba.service.core.hihousyosai;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dba.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dba.business.shichoson.ShichosonBusiness;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakukubun.ShikakuKubun;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihousyosai.HihousyosaiFinderParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.service.KyuShichosonCode;
-import jp.co.ndensan.reams.db.dbz.service.kyushichosoncode.KyuShichosonCodeJoho;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -63,9 +68,9 @@ public class HihousyosaiFinder {
     }
 
     /**
-     * 所在保険者リスト情報取得です。
+     * 所在保険者リスト情報取得します
      *
-     * @return List<KoseiShichosonMaster> 構成市町村マスタリスト
+     * @return SearchResult<KoseiShichosonMaster> 構成市町村マスタリスト
      */
     @Transaction
     public SearchResult<KoseiShichosonMaster> getKoseiShichosonMasterList() {
@@ -81,42 +86,46 @@ public class HihousyosaiFinder {
     /**
      * 旧保険者リスト情報取得します。
      *
-     * @param params 被保詳細パラメータ
-     * @return List<Shichoson>
+     * @param LasdecCode 市町村コード
+     * @param DonyukeitaiCode 導入形態コード
+     * @return SearchResult<ShichosonBusiness>
      */
     @Transaction
-    public SearchResult<ShichosonBusiness> getGappeiShichosonList(HihousyosaiFinderParameter params) {
-        List<ShichosonBusiness> kyuhokenshaList = new ArrayList<>();
-        ShichosonBusiness business = new ShichosonBusiness();
-        KyuShichosonCodeJoho kyuushichouson = new KyuShichosonCodeJoho();
+    public SearchResult<ShichosonBusiness> getGappeiShichosonList(
+            LasdecCode 市町村コード,
+            DonyukeitaiCode 導入形態コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(導入形態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("導入形態コード"));
+        List<ShichosonBusiness> 旧保険者List = new ArrayList<>();
         //TODO 方法のパラメータ数が一緻しない QA回答まち。
-//        KyuShichosonCode.getKyuShichosonCodeJoho(LasdecCode.EMPTY, DonyukeitaiCode.事務広域);
-        List<KyuShichosonCode> kyuushichousonList = kyuushichouson.get旧市町村コード情報List();
-        if (kyuushichousonList == null) {
-            return null;
+        List<KyuShichosonCode> 旧市町村コード情報List
+                = KyuShichosonCode.getKyuShichosonCodeJoho(市町村コード, 導入形態コード).get旧市町村コード情報List();
+        if (旧市町村コード情報List.isEmpty()) {
+            return SearchResult.of(Collections.<ShichosonBusiness>emptyList(), 0, false);
         }
-        if (kyuushichousonList != null) {
-            for (KyuShichosonCode hokenshaList : kyuushichousonList) {
-                business.set旧市町村コード(hokenshaList.get旧市町村コード());
-                business.set旧市町村名称(hokenshaList.get旧市町村名称());
-                kyuhokenshaList.add(business);
-            }
+        for (KyuShichosonCode 旧市町村コード : 旧市町村コード情報List) {
+            ShichosonBusiness shichosonBusiness = new ShichosonBusiness();
+            shichosonBusiness.set旧市町村コード(旧市町村コード.get旧市町村コード());
+            shichosonBusiness.set旧市町村名称(旧市町村コード.get旧市町村名称());
+            旧保険者List.add(shichosonBusiness);
         }
-        return SearchResult.of(kyuhokenshaList, 0, false);
+        return SearchResult.of(旧保険者List, 0, false);
     }
 
     /**
      * 得喪情報取得です。
      *
-     * @param params 被保詳細パラメータ
+     * @param HihokenshaNo 被保険者番号
+     * @param FlexibleDate 異動日
+     * @param RString 枝番
      * @return 被保険者台帳管理オブジェクト HihokenshaDaicho
      */
     @Transaction
-    public HihokenshaDaicho getTokusouJoho(HihousyosaiFinderParameter params) {
-        DbT1001HihokenshaDaichoEntity entity = dbT1001Dac.selectByHihokenshaNo(
-                params.getHihokenshaNo(),
-                params.getIdoYMD(),
-                params.getEdaNo());
+    public HihokenshaDaicho getTokusouJoho(HihokenshaNo 被保険者番号, FlexibleDate 異動日, RString 枝番) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
+        DbT1001HihokenshaDaichoEntity entity = dbT1001Dac.selectByHihokenshaNo(被保険者番号, 異動日, 枝番);
         if (entity == null) {
             return null;
         }
@@ -129,13 +138,13 @@ public class HihousyosaiFinder {
      *
      * @param code Code
      *
-     * @return List<ShikakuKubun> 資格区分リスト
+     * @return SearchResult<ShikakuKubun> 資格区分リスト
      */
     @Transaction
     public SearchResult<ShikakuKubun> getHihokubunList(RString code) {
-        List<ShikakuKubun> list = new ArrayList<>();
-        ShikakuKubun enumList = ShikakuKubun.toValue(code);
-        list.add(enumList);
-        return SearchResult.of(list, 0, false);
+        List<ShikakuKubun> shikakuKubunList = new ArrayList<>();
+        ShikakuKubun shikakuKubun = ShikakuKubun.toValue(code);
+        shikakuKubunList.add(shikakuKubun);
+        return SearchResult.of(shikakuKubunList, 0, false);
     }
 }
