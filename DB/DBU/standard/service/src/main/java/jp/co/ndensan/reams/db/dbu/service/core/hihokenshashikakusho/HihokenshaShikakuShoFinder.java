@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.hihokenshashikakushodataentity.Hihok
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyukeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.ShoYoshikiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7037ShoKofuKaishuDac;
@@ -34,6 +35,8 @@ public class HihokenshaShikakuShoFinder {
 
     private final DbT7037ShoKofuKaishuDac dbT7037ShoKofuKaishuDac;
     private final DbT7051KoseiShichosonMasterDac dbT7051KoseiShichosonMasterDac;
+    private static final RString MENUID1_VALUE = new RString("DBUMN120001");
+    private static final RString MENUID2_VALUE = new RString("DBUMN120002");
 
     /**
      * コンストラクタ。
@@ -58,41 +61,50 @@ public class HihokenshaShikakuShoFinder {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShoFinder}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShoFinder}のインスタンス
+     */
+    public static HihokenshaShikakuShoFinder createInstance() {
+        return InstanceProvider.create(HihokenshaShikakuShoFinder.class);
+    }
+
+    /**
      * 資格者証発行画面データ取得です。
      *
-     * @param dataParameter HihokenshaShikakuShoDataParameter
+     * @param hihokenshaShikakuParameter HihokenshaShikakuShoDataParameter
      * @return HihokenshaShikakuShoDataEntity insert用データEntity
      */
     @Transaction
-    public HihokenshaShikakuShoDataEntity insertShoKofuKaishu(HihokenshaShikakuShoDataParameter dataParameter) {
-        return insert用データEntity(dataParameter);
+    public HihokenshaShikakuShoDataEntity insertShoKofuKaishu(HihokenshaShikakuShoDataParameter hihokenshaShikakuParameter) {
+        return insert用データEntity(hihokenshaShikakuParameter);
     }
 
-    private HihokenshaShikakuShoDataEntity insert用データEntity(HihokenshaShikakuShoDataParameter shikakuShoDataParameter) {
+    private HihokenshaShikakuShoDataEntity insert用データEntity(HihokenshaShikakuShoDataParameter hihokenshaShikakuParameter) {
         HihokenshaShikakuShoDataEntity hihokenshaShikakuShoDataEntity = new HihokenshaShikakuShoDataEntity();
-        hihokenshaShikakuShoDataEntity.setHihokenshaNo(shikakuShoDataParameter.getHihokenshaNo());
-        if (shikakuShoDataParameter.getMenuId().equals(new RString("DBUMN120001"))) {
+        hihokenshaShikakuShoDataEntity.setHihokenshaNo(hihokenshaShikakuParameter.getHihokenshaNo());
+        if (hihokenshaShikakuParameter.getMenuId().equals(MENUID1_VALUE)) {
             hihokenshaShikakuShoDataEntity.setKofuShoShurui(new RString("0001"));
             hihokenshaShikakuShoDataEntity.setYukoKigenYMD(FlexibleDate.EMPTY);
-            hihokenshaShikakuShoDataEntity.setShinYoshikiSumiKubunCode(new RString("01"));
-            hihokenshaShikakuShoDataEntity.setShoYoshikiKubunCode(new RString("02"));
+            hihokenshaShikakuShoDataEntity.setShinYoshikiSumiKubunCode(ShoYoshikiKubun.新様式.getコード());
+            hihokenshaShikakuShoDataEntity.setShoYoshikiKubunCode(ShoYoshikiKubun.新様式２.getコード());
         }
-        if (shikakuShoDataParameter.getMenuId().equals(new RString("DBUMN120002"))) {
+        if (hihokenshaShikakuParameter.getMenuId().equals(MENUID2_VALUE)) {
             hihokenshaShikakuShoDataEntity.setKofuShoShurui(new RString("0002"));
-            hihokenshaShikakuShoDataEntity.setYukoKigenYMD(shikakuShoDataParameter.getYukoKigenYMD());
+            hihokenshaShikakuShoDataEntity.setYukoKigenYMD(hihokenshaShikakuParameter.getYukoKigenYMD());
             hihokenshaShikakuShoDataEntity.setShinYoshikiSumiKubunCode(RString.EMPTY);
             hihokenshaShikakuShoDataEntity.setShoYoshikiKubunCode(RString.EMPTY);
         }
-        List<DbT7037ShoKofuKaishuEntity> rirekiNo = dbT7037ShoKofuKaishuDac.getRirekiNo(shikakuShoDataParameter.getHihokenshaNo());
+        List<DbT7037ShoKofuKaishuEntity> rirekiNo = dbT7037ShoKofuKaishuDac.getRirekiNo(hihokenshaShikakuParameter.getHihokenshaNo());
         if (rirekiNo == null || rirekiNo.isEmpty()) {
             hihokenshaShikakuShoDataEntity.setRirekiNo(1);
         } else {
             hihokenshaShikakuShoDataEntity.setRirekiNo(rirekiNo.get(0).getRirekiNo() + 1);
         }
-        hihokenshaShikakuShoDataEntity.setShikibetsuCode(shikakuShoDataParameter.getShikibetsuCode());
-        hihokenshaShikakuShoDataEntity.setKofuYMD(shikakuShoDataParameter.getKofuYMD());
-        hihokenshaShikakuShoDataEntity.setKofuJiyu(shikakuShoDataParameter.getKofuJiyu());
-        hihokenshaShikakuShoDataEntity.setKofuRiyu(shikakuShoDataParameter.getKofuRiyu());
+        hihokenshaShikakuShoDataEntity.setShikibetsuCode(hihokenshaShikakuParameter.getShikibetsuCode());
+        hihokenshaShikakuShoDataEntity.setKofuYMD(hihokenshaShikakuParameter.getKofuYMD());
+        hihokenshaShikakuShoDataEntity.setKofuJiyu(hihokenshaShikakuParameter.getKofuJiyu());
+        hihokenshaShikakuShoDataEntity.setKofuRiyu(hihokenshaShikakuParameter.getKofuRiyu());
         hihokenshaShikakuShoDataEntity.setKaishuYMD(FlexibleDate.EMPTY);
         hihokenshaShikakuShoDataEntity.setKaishuJiyu(RString.EMPTY);
         hihokenshaShikakuShoDataEntity.setKaishuRiyu(RString.EMPTY);
@@ -102,7 +114,7 @@ public class HihokenshaShikakuShoFinder {
         if (DonyukeitaiCode.事務広域.getコード().equals(導入形態コード.getKey()) || DonyukeitaiCode.事務構成市町村.getコード().
                 equals(導入形態コード.getKey()) || DonyukeitaiCode.認定広域.getコード().equals(導入形態コード.getKey())) {
             DbT7051KoseiShichosonMasterEntity 市町村コード = dbT7051KoseiShichosonMasterDac.
-                    shichosonCode(shikakuShoDataParameter.getShoKisaiHokenshaNo());
+                    shichosonCode(hihokenshaShikakuParameter.getShoKisaiHokenshaNo());
             hihokenshaShikakuShoDataEntity.setShichosonCode(市町村コード.getShichosonCode());
         } else if (DonyukeitaiCode.事務単一.getコード().equals(導入形態コード.getKey())
                 || DonyukeitaiCode.認定単一.getコード().equals(導入形態コード.getKey())) {
