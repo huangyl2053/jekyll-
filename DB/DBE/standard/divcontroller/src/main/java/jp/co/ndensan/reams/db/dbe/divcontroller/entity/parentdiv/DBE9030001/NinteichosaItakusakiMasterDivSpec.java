@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001;
 
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9030001.NinteichosaItakusakiMasterHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoManager;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
@@ -71,7 +72,7 @@ public enum NinteichosaItakusakiMasterDivSpec implements IPredicate<NinteichosaI
                  */
                 @Override
                 public boolean apply(NinteichosaItakusakiMasterDiv div) {
-                    return !div.get状態().equals(new RString("その他"));
+                    return getHandler(div).is調査委託先情報登録エリア編集有り();
                 }
             },
     市町村の合法性チェック {
@@ -106,4 +107,8 @@ public enum NinteichosaItakusakiMasterDivSpec implements IPredicate<NinteichosaI
                     return true;
                 }
             };
+
+    private static NinteichosaItakusakiMasterHandler getHandler(NinteichosaItakusakiMasterDiv div) {
+        return new NinteichosaItakusakiMasterHandler(div);
+    }
 }
