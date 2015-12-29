@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HihokenshaDaichoSakuseiEntity {
 
-    private FlexibleDate printDate;
+    private RString printDate;
     private RString page;
     private RString title;
     private LasdecCode shichosonCode;

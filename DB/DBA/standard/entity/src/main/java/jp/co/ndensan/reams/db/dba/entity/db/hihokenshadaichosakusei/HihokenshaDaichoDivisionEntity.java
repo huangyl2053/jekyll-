@@ -22,7 +22,7 @@ public class HihokenshaDaichoDivisionEntity {
     private List<RString> 取得日;
     private List<RString> 取得事由コード;
     private List<RString> 取得事由名称;
-    private List<RString> 号取得日;
+    private List<RString> 一号取得日;
     private List<RString> 喪失日;
     private List<RString> 喪失事由コード;
     private List<RString> 喪失事由名称;
