@@ -91,6 +91,21 @@ public class DbT5594ShinsakaiIinJohoDac implements ISaveable<DbT5594ShinsakaiIin
     }
 
     /**
+     * 介護認定審査会委員情報deletePhysical件数を返します。
+     *
+     * @param entity 介護認定審査会委員情報テーブルのエンティティ
+     * @return int 物理削除件数
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int deletePhysical(DbT5594ShinsakaiIinJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報エンティティ"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.deletePhysical(entity).execute();
+    }
+
+    /**
      * 介護認定審査会委員情報更新件数を返します。
      *
      * @param entity 介護認定審査会委員情報テーブルのエンティティ

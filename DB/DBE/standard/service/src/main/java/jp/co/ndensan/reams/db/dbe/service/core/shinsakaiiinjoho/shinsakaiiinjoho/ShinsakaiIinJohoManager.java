@@ -62,7 +62,8 @@ public class ShinsakaiIinJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsakaiIinJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiIinJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiIinJohoManager}のインスタンス
      */
     public static ShinsakaiIinJohoManager createInstance() {
         return InstanceProvider.create(ShinsakaiIinJohoManager.class);
@@ -182,6 +183,21 @@ public class ShinsakaiIinJohoManager {
         介護認定審査会委員情報 = 介護認定審査会委員情報.modifiedModel();
         save介護認定審査会委員所属機関情報リスト(介護認定審査会委員情報.getKaigoNinteiShinsakaiIinShozokuKikanJohoList());
         return 1 == 介護認定審査会委員情報Dac.save(介護認定審査会委員情報.toEntity());
+    }
+
+    /**
+     * 介護認定審査会委員情報{@link ShinsakaiIinJoho}を物理削除します。
+     *
+     * @param 介護認定審査会委員情報 介護認定審査会委員情報
+     * @return 削除あり:true、削除なし:false <br>
+     * いずれかのテーブルに削除があればtrueを返す
+     */
+    @Transaction
+    public boolean deletePhysical(ShinsakaiIinJoho 介護認定審査会委員情報) {
+        requireNonNull(介護認定審査会委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報"));
+
+        deletePhysical介護認定審査会委員所属機関情報(介護認定審査会委員情報.getKaigoNinteiShinsakaiIinShozokuKikanJohoList());
+        return 1 == 介護認定審査会委員情報Dac.deletePhysical(介護認定審査会委員情報.toEntity());
     }
 
     /**

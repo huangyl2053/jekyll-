@@ -181,7 +181,7 @@ public class ShinsakaiIinJohoToroku {
                 div.getDgShinsaInJohoIchiran().getClickedItem().setStatus(状態_削除);
                 Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> 介護認定審査会委員情報
                         = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員情報, Models.class);
-                介護認定審査会委員情報更新.add(介護認定審査会委員情報.get(identifier));
+                介護認定審査会委員情報更新.add(介護認定審査会委員情報.get(identifier).deleted());
                 ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報更新, 介護認定審査会委員情報更新);
             }
         }
@@ -519,12 +519,18 @@ public class ShinsakaiIinJohoToroku {
         Iterator<ShinsakaiIinJoho> 審査会委員情報 = 介護認定審査会委員情報更新.iterator();
         while (審査会委員情報.hasNext()) {
             ShinsakaiIinJoho shinsakaiIinJoho = 審査会委員情報.next();
+            if (EntityDataState.Deleted.equals(shinsakaiIinJoho.toEntity().getState())) {
+                manager.deletePhysical(shinsakaiIinJoho);
+                continue;
+            }
             if (EntityDataState.Modified.equals(shinsakaiIinJoho.toEntity().getState())) {
                 Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> 介護認定審査会委員情報
                         = (Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho>) ViewStateHolder.get(
                                 ViewStateKeys.介護認定審査会委員情報, Models.class);
                 manager.deletePhysical介護認定審査会委員所属機関情報(介護認定審査会委員情報.get(
                         shinsakaiIinJoho.identifier()).getKaigoNinteiShinsakaiIinShozokuKikanJohoList());
+                manager.save(shinsakaiIinJoho);
+                continue;
             }
             manager.save(shinsakaiIinJoho);
         }
