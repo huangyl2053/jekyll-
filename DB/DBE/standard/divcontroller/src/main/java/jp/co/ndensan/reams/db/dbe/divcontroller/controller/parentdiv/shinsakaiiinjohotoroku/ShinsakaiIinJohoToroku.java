@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -427,12 +426,13 @@ public class ShinsakaiIinJohoToroku {
             validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.終了日が開始日以前));
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        UzT0007CodeEntity 地区コード = CodeMaster.getCode(SubGyomuCode.DBE認定支援, new CodeShubetsu("5001"), div.getCcdshinsakaiChikuCode().getCode());
-        if (地区コード == null) {
-            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.コードマスタなし));
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-        }
+//        TODO QA-383
+//        UzT0007CodeEntity 地区コード = CodeMaster.getCode(new CodeShubetsu("5001"), div.getCcdshinsakaiChikuCode().getCode());
+//        if (地区コード == null) {
+//            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+//            validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.コードマスタなし));
+//            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+//        }
         return ResponseData.of(div).respond();
     }
 
