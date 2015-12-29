@@ -353,6 +353,8 @@ public class NinteiChosainMasterHandler {
             div.getChosainJohoInput().getTxtShichosonmei().setValue(new RString("市町村三"));
         } else if (new RString("000004").equals(shichoson)) {
             div.getChosainJohoInput().getTxtShichosonmei().setValue(new RString("市町村四"));
+        } else {
+            div.getChosainJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
         }
     }
 
@@ -366,6 +368,9 @@ public class NinteiChosainMasterHandler {
                 div.getChosainJohoInput().getTxtChikuMei().setValue(codeList.get(0).getコード名称());
                 break;
             }
+        }
+        if (codeList.isEmpty()) {
+            div.getChosainJohoInput().getTxtChikuMei().setValue(RString.EMPTY);
         }
     }
 
