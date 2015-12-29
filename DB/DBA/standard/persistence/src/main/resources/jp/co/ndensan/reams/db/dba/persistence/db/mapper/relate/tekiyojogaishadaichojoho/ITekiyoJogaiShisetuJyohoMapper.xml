@@ -13,8 +13,6 @@
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
             AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
         WHERE 
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."gyomuCode" = 'DB'
-        AND
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = #{shikibetsuCode}
     </select>
     
