@@ -42,7 +42,7 @@ public class IkenshoShujiiIchiranHandler {
         改頁.add(new KeyValueDataSource(ShujiiOutputPage.なし.getコード(), ShujiiOutputPage.なし.get名称()));
         div.getDdlNextpage().setDataSource(改頁);
 
-        div.getDdlOutputSort().setSelectedKey(ShujiiOutputPage.医療機関コード.getコード());
+        div.getDdlOutputSort().setSelectedKey(ShujiiOutputSort.医療機関コード主治医コード.getコード());
         div.getDdlNextpage().setSelectedKey(ShujiiOutputPage.医療機関コード.getコード());
         div.getDdlNextpage().setReadOnly(false);
     }
