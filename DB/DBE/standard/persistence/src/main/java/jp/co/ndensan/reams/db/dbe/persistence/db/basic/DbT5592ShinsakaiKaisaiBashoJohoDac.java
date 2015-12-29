@@ -11,11 +11,11 @@ import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiB
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.persistence.util.DbAccessorMethodSelector;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
-import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -37,10 +37,9 @@ public class DbT5592ShinsakaiKaisaiBashoJohoDac implements ISaveable<DbT5592Shin
     @Transaction
     public DbT5592ShinsakaiKaisaiBashoJohoEntity selectByKey(
             RString 介護認定審査会開催場所コード) throws NullPointerException {
-        requireNonNull(介護認定審査会開催場所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所コード"));
-
+        requireNonNull(介護認定審査会開催場所コード, 
+                UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所コード"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
         return accessor.select().
                 table(DbT5592ShinsakaiKaisaiBashoJoho.class).
                 where(eq(shinsakaiKaisaiBashoCode, 介護認定審査会開催場所コード)).
@@ -70,7 +69,8 @@ public class DbT5592ShinsakaiKaisaiBashoJohoDac implements ISaveable<DbT5592Shin
     @Transaction
     @Override
     public int save(DbT5592ShinsakaiKaisaiBashoJohoEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所情報エンティティ"));
-        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+        requireNonNull(entity, 
+                UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所情報エンティティ"));
+        return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
     }
 }
