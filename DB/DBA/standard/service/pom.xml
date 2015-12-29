@@ -34,12 +34,6 @@
             <artifactId>DbaPersistence</artifactId>
         </dependency>
         <!-- DBU -->
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbu</groupId>
-            <artifactId>DbuService</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
         <!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
