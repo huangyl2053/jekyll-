@@ -10,8 +10,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.JyoukyouType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NarabiJunType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NextPageType;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5920001.ItakusakiChosainIchiranDiv;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -45,8 +43,8 @@ public class ItakusakiChosainIchiranHandler {
      */
     public ItakusakiChosainIchiranBatchParamter onclick_一覧表を発行する() {
         ItakusakiChosainIchiranBatchParamter param = new ItakusakiChosainIchiranBatchParamter();
-        param.setShichosonCode(div.getDdlShichosonCode().getSelectedKey());
-        param.setShichosonMeisho(div.getDdlShichosonCode().getSelectedValue());
+        param.setShichosonCode(div.getHokensha().getSelectedItem().get市町村コード().getColumnValue());
+        param.setShichosonMeisho(div.getHokensha().getSelectedItem().get市町村名称());
         param.setItakusakiCodeFrom(div.getTxtIryoKikanCodeFrom().getValue());
         param.setItakusakiCodeTo(div.getTxtIryoKikanCodeTo().getValue());
         param.setChosainNoFrom(div.getTxtShujiiCodeFrom().getValue());
