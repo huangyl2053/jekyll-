@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictio
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -39,6 +40,8 @@ public class NinteichosaItakusakiMaster {
 
     private static final RString CSV出力完了 = new RString("CSV出力");
     private static final RString 削除状態 = new RString("削除");
+    private static final RString 追加状態コード = new RString("追加");
+    private static final RString 修正状態コード = new RString("修正");
 
     /**
      * 画面初期化表示、画面項目に設定されている値をクリアする。
@@ -207,17 +210,21 @@ public class NinteichosaItakusakiMaster {
      * @return
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnTorikeshi(NinteichosaItakusakiMasterDiv div) {
-        if (!ResponseHolder.isReRequest()) {
+        if (!ResponseHolder.isReRequest()
+                && (div.get状態().equals(追加状態コード) || div.get状態().equals(修正状態コード))) {
             if (getHandler(div).is調査委託先情報登録エリア編集有り()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
-            } else {
-                div.getChosaitakusakiJohoInput().clear();
-                return ResponseData.of(div).setState(DBE9030001StateName.一覧);
             }
-        } else {
             div.getChosaitakusakiJohoInput().clear();
             return ResponseData.of(div).setState(DBE9030001StateName.一覧);
         }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+            div.getChosaitakusakiJohoInput().clear();
+            return ResponseData.of(div).setState(DBE9030001StateName.一覧);
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**

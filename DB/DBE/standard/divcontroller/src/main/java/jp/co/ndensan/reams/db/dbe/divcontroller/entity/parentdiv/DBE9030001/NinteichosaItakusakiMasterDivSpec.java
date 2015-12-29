@@ -71,7 +71,7 @@ public enum NinteichosaItakusakiMasterDivSpec implements IPredicate<NinteichosaI
                  */
                 @Override
                 public boolean apply(NinteichosaItakusakiMasterDiv div) {
-                    return div.get状態().equals(new RString("その他"));
+                    return !div.get状態().equals(new RString("その他"));
                 }
             },
     市町村の合法性チェック {
