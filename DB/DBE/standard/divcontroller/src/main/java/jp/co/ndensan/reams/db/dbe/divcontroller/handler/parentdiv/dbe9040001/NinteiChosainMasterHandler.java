@@ -5,6 +5,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosainmaster.NinteiChosainMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.Sikaku;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.ChosainJohoInputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.NinteiChosainMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.dgChosainIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -447,5 +448,34 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getTxtFaxNo().clearDomain();
         div.getChosainJohoInput().getTextBoxShozokuKikan().clearDomain();
         div.getChosainJohoInput().getRadChosainJokyo().setSelectedIndex(0);
+    }
+
+    /**
+     * 調査員情報登録エリアを編集します。
+     *
+     * @return 編集結果
+     */
+    public RString getInputDiv() {
+        RStringBuilder inputDiv = new RStringBuilder();
+        ChosainJohoInputDiv chosainJohoInputDiv = div.getChosainJohoInput();
+        inputDiv.append(chosainJohoInputDiv.getTxtShichoson().getValue());
+        inputDiv.append(chosainJohoInputDiv.getTxtShichosonmei().getValue());
+        inputDiv.append(chosainJohoInputDiv.getTxtChosainCode().getValue());
+        inputDiv.append(chosainJohoInputDiv.getTxtChosaItakusaki().getValue());
+        inputDiv.append(chosainJohoInputDiv.getTxtChosaItakusakiMeisho().getValue());
+        inputDiv.append(chosainJohoInputDiv.getTxtChosainShimei().getValue());
+        inputDiv.append(chosainJohoInputDiv.getTxtChosainKanaShimei().getValue());
+        inputDiv.append(chosainJohoInputDiv.getRadSeibetsu().getSelectedKey());
+        inputDiv.append(chosainJohoInputDiv.getTxtChiku().getValue());
+        inputDiv.append(chosainJohoInputDiv.getDdlChosainShikaku().getSelectedKey());
+        Decimal chosaKanoNinzu = chosainJohoInputDiv.getTxtChosaKanoNinzu().getValue();
+        inputDiv.append(chosaKanoNinzu == null ? RString.EMPTY : chosaKanoNinzu);
+        inputDiv.append(chosainJohoInputDiv.getTxtYubinNo().getValue().value());
+        inputDiv.append(chosainJohoInputDiv.getTxtJusho().getDomain().value());
+        inputDiv.append(chosainJohoInputDiv.getTxtTelNo().getDomain().value());
+        inputDiv.append(chosainJohoInputDiv.getTxtFaxNo().getDomain().value());
+        inputDiv.append(chosainJohoInputDiv.getTextBoxShozokuKikan().getDomain().value());
+        inputDiv.append((chosainJohoInputDiv.getRadChosainJokyo().getSelectedKey()));
+        return inputDiv.toRString();
     }
 }

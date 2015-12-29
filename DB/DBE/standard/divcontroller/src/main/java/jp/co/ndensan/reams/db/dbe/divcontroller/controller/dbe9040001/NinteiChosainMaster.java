@@ -173,6 +173,7 @@ public class NinteiChosainMaster {
         div.getChosainIchiran().setDisabled(true);
         getHandler(div).setDisabledFalseToChosainJohoToMeisai();
         getHandler(div).clearChosainJohoToMeisai();
+        div.getChosainJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
         return ResponseData.of(div).respond();
     }
 
@@ -348,6 +349,7 @@ public class NinteiChosainMaster {
         div.getChosainJohoInput().getBtnToSearchChosaItakusaki().setDisabled(true);
         div.getChosainJohoInput().getTxtChosainCode().setDisabled(true);
         div.getChosainIchiran().setDisabled(true);
+        div.getChosainJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
         return ResponseData.of(div).respond();
     }
 
@@ -423,8 +425,8 @@ public class NinteiChosainMaster {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-            if (validateForDelete(div).iterator().hasNext()) {
+            validPairs = validateForDelete(div);
+            if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
             Models<ChosainJohoIdentifier, ChosainJoho> models = ViewStateHolder.get(ViewStateKeys.認定調査員マスタ検索結果, Models.class);
