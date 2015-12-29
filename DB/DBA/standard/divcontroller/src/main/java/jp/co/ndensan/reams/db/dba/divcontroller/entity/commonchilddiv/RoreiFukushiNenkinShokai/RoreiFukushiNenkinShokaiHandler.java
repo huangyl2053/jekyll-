@@ -141,8 +141,8 @@ public class RoreiFukushiNenkinShokaiHandler {
      * @param roreifukushinenkinjukyusha 老齢福祉年金受給者を管理
      * @return RoreiFukushiNenkinJukyusha 老齢福祉年金受給者を管理
      */
-    public RoreiFukushiNenkinJukyusha set老齢福祉年金確定ボタン押下の更新処理(RoreiFukushiNenkinJukyusha roreifukushinenkinjukyusha) {
-
+    public RoreiFukushiNenkinJukyusha set老齢福祉年金確定ボタン押下の更新処理(
+            RoreiFukushiNenkinJukyusha roreifukushinenkinjukyusha) {
         return roreifukushinenkinjukyusha.createBuilderForEdit().set受給廃止年月日(new FlexibleDate(
                 div.getPanelInput().getTxtEndDate().getValue().toDateString())).build();
     }
@@ -153,10 +153,11 @@ public class RoreiFukushiNenkinShokaiHandler {
      * @param roreifukushinenkinjukyusha 老齢福祉年金受給者を管理
      * @return RoreiFukushiNenkinJukyusha 老齢福祉年金受給者を管理
      */
-    public RoreiFukushiNenkinJukyusha set老齢福祉年金確定ボタン押下の削除処理(RoreiFukushiNenkinJukyusha roreifukushinenkinjukyusha) {
-
+    public RoreiFukushiNenkinJukyusha set老齢福祉年金確定ボタン押下の削除処理(
+            RoreiFukushiNenkinJukyusha roreifukushinenkinjukyusha) {
         return roreifukushinenkinjukyusha.createBuilderForEdit()
-                .set受給廃止年月日(new FlexibleDate(div.getPanelInput().getTxtEndDate().getValue().toDateString())).build();
+                .set受給廃止年月日(new FlexibleDate(div.getPanelInput().getTxtEndDate().getValue().toDateString()))
+                .build();
     }
 
     /**
@@ -165,11 +166,12 @@ public class RoreiFukushiNenkinShokaiHandler {
      * @param roreifukushinenkinjukyusha 老齢福祉年金受給者を管理
      * @return RoreiFukushiNenkinJukyusha 老齢福祉年金受給者を管理
      */
-    public RoreiFukushiNenkinJukyusha set年金確定ボタン押下の追加(RoreiFukushiNenkinJukyusha roreifukushinenkinjukyusha) {
-
+    public RoreiFukushiNenkinJukyusha set年金確定ボタン押下の追加(
+            RoreiFukushiNenkinJukyusha roreifukushinenkinjukyusha) {
         return roreifukushinenkinjukyusha.createBuilderForEdit()
                 .set被保険者番号(new HihokenshaNo(div.getHihokenshaNo().toString()))
-                .set受給廃止年月日(new FlexibleDate(div.getPanelInput().getTxtEndDate().getValue().toDateString())).build();
+                .set受給廃止年月日(new FlexibleDate(div.getPanelInput().getTxtEndDate().getValue().toDateString()))
+                .build();
     }
 
     /**
@@ -248,7 +250,8 @@ public class RoreiFukushiNenkinShokaiHandler {
             if (!list.get(i).getEndDate().getValue()
                     .isBefore(list.get(i + 1).getStartDate().getValue())) {
                 throw new ApplicationException(UrErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace(
-                        list.get(i).getEndDate().getValue().toString(), list.get(i + 1).getStartDate().getValue().toString()));
+                        list.get(i).getEndDate().getValue().toString(), list.get(i + 1).getStartDate().getValue()
+                        .toString()));
             }
         }
     }

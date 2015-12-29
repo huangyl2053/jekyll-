@@ -55,7 +55,9 @@ public class RoreiFukushiNenkinShokai {
         div.setHihokenshaNo(new RString("12"));
         div.setShikibetsuCode(new RString("123456789000001"));
         RoreiFukushiNenkinJohoMapperParameter param = RoreiFukushiNenkinJohoMapperParameter.createRoreiFukushiParam(
-                new ShikibetsuCode(div.getShikibetsuCode()), FlexibleDate.EMPTY, HihokenshaNo.EMPTY, FlexibleDate.EMPTY);
+                new ShikibetsuCode(div.getShikibetsuCode()),
+                FlexibleDate.EMPTY, HihokenshaNo.EMPTY,
+                FlexibleDate.EMPTY);
         List<RoreiFukushiNenkinJukyusha> 一覧情報 = service.getRoreiFukushiNenkinJoho(param);
         getHandler(div).set老齢福祉年金情報一覧表示グリッド(一覧情報);
         Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha
