@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE9030001
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.DBE9030001ErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.DBE9030001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.DBE9030001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.NinteichosaItakusakiMasterDiv;
@@ -27,7 +26,10 @@ import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -42,6 +44,8 @@ public class NinteichosaItakusakiMaster {
     private static final RString 削除状態 = new RString("削除");
     private static final RString 追加状態コード = new RString("追加");
     private static final RString 修正状態コード = new RString("修正");
+    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString 市町村の合法性チェックreplace = new RString("市町村コード");
 
     /**
      * 画面初期化表示、画面項目に設定されている値をクリアする。
@@ -135,11 +139,11 @@ public class NinteichosaItakusakiMaster {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
             messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先一覧データの存在チェック)
-                    .thenAdd(DBE9030001ErrorMessages.対象データなし).messages());
+                    .thenAdd(new DBE9030001ErrorMessage(UrErrorMessages.対象データなし)).messages());
             messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先一覧データの編集しないチェック)
                     .thenAdd(DbzErrorMessages.編集後更新指示).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                    DBE9030001ErrorMessages.対象データなし,
+                    new DBE9030001ErrorMessage(UrErrorMessages.対象データなし),
                     div.getChosaitakusakiJohoInput()).build().check(messages));
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                     DbzErrorMessages.編集後更新指示,
@@ -150,7 +154,9 @@ public class NinteichosaItakusakiMaster {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         } else {
             getHandler(div).outputCsv();
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(CSV出力完了.toString())).respond();
+            div.getCcdKanryoMessage().setSuccessMessage(
+                    new RString(UrInformationMessages.正常終了.getMessage().toString()), CSV出力完了, RString.EMPTY);
+            return ResponseData.of(div).setState(DBE9030001StateName.完了);
         }
     }
 
@@ -237,19 +243,21 @@ public class NinteichosaItakusakiMaster {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先情報登録エリアの編集状態チェック)
-                .thenAdd(DBE9030001ErrorMessages.編集なしで更新不可).messages());
+                .thenAdd(new DBE9030001ErrorMessage(UrErrorMessages.編集なしで更新不可)).messages());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.市町村の合法性チェック)
-                .thenAdd(DBE9030001ErrorMessages.入力値が不正_追加メッセージあり).messages());
+                .thenAdd(new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 市町村の合法性チェックreplace.toString()))
+                .messages());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先コードの重複チェック)
-                .thenAdd(DBE9030001ErrorMessages.既に登録済).messages());
+                .thenAdd(new DBE9030001ErrorMessage(
+                                UrErrorMessages.既に登録済, div.getChosaitakusakiJohoInput().getTxtjigyoshano().getValue().toString())).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                DBE9030001ErrorMessages.編集なしで更新不可,
+                new DBE9030001ErrorMessage(UrErrorMessages.編集なしで更新不可),
                 div.getChosaitakusakiJohoInput()).build().check(messages));
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                DBE9030001ErrorMessages.入力値が不正_追加メッセージあり,
+                new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 市町村の合法性チェックreplace.toString()),
                 div.getChosaitakusakiJohoInput().getTxtShichoson()).build().check(messages));
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                DBE9030001ErrorMessages.既に登録済,
+                new DBE9030001ErrorMessage(UrErrorMessages.既に登録済),
                 div.getChosaitakusakiJohoInput().getTxtChosaItakusaki()).build().check(messages));
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -266,13 +274,18 @@ public class NinteichosaItakusakiMaster {
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnReSearch(NinteichosaItakusakiMasterDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            if (getHandler(div).is調査委託先情報登録エリア編集有り()) {
+            if (is一覧エリア編集有り(div)) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.検索画面遷移の確認.getMessage()).respond();
             } else {
                 return onLoad(div);
             }
         } else {
-            return onLoad(div);
+            if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+                return onLoad(div);
+            }
+            return ResponseData.of(div).respond();
         }
     }
 
@@ -287,9 +300,9 @@ public class NinteichosaItakusakiMaster {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
             messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先一覧データの編集中チェック)
-                    .thenAdd(DBE9030001ErrorMessages.編集なしで更新不可).messages());
+                    .thenAdd(new DBE9030001ErrorMessage(UrErrorMessages.編集なしで更新不可)).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                    DBE9030001ErrorMessages.編集なしで更新不可,
+                    new DBE9030001ErrorMessage(UrErrorMessages.編集なしで更新不可),
                     div.getChosaitakusakiJohoInput()).build().check(messages));
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -300,17 +313,43 @@ public class NinteichosaItakusakiMaster {
             for (dgChosainIchiran_Row row : div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource()) {
                 if (削除状態.equals(row.getJotai())) {
                     if (!getHandler(div).削除行データの整合性チェック(
-                            new LasdecCode(row.getShichosonCode().getColumnValue()), row.getChosaItakusakiCode().getValue())) {
+                            new LasdecCode(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString())
+                                    .get(Integer.valueOf(div.getHdnSelectID().toString()))), row.getChosaItakusakiCode().getValue())) {
                         throw new ApplicationException(DbeErrorMessages.他の情報で使用している為削除不可.getMessage());
                     }
                 }
             }
             getHandler(div).save調査委託先一覧データ();
-            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+            div.getCcdKanryoMessage().setSuccessMessage(
+                    new RString(UrInformationMessages.保存終了.getMessage().toString()), RString.EMPTY, RString.EMPTY);
+            return ResponseData.of(div).setState(DBE9030001StateName.完了);
         }
     }
 
     private NinteichosaItakusakiMasterHandler getHandler(NinteichosaItakusakiMasterDiv div) {
         return new NinteichosaItakusakiMasterHandler(div);
+    }
+
+    private boolean is一覧エリア編集有り(NinteichosaItakusakiMasterDiv div) {
+        for (dgChosainIchiran_Row row : div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource()) {
+            if (!row.getJotai().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static class DBE9030001ErrorMessage implements IMessageGettable, IValidationMessage {
+
+        private final Message message;
+
+        public DBE9030001ErrorMessage(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }

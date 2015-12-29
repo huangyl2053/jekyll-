@@ -97,11 +97,13 @@ public enum NinteichosaItakusakiMasterDivSpec implements IPredicate<NinteichosaI
                  */
                 @Override
                 public boolean apply(NinteichosaItakusakiMasterDiv div) {
-                    NinteichosaItakusakiJohoManager manager = NinteichosaItakusakiJohoManager.createInstance();
-                    int 件数 = manager.countByKey(new LasdecCode(div.getChosaitakusakiJohoInput().getTxtShichoson().getValue()),
-                            div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue());
-                    return 0 == 件数;
-
+                    if (div.get状態().equals(new RString("追加"))) {
+                        NinteichosaItakusakiJohoManager manager = NinteichosaItakusakiJohoManager.createInstance();
+                        int 件数 = manager.countByKey(new LasdecCode(div.getChosaitakusakiJohoInput().getTxtShichoson().getValue()),
+                                div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue());
+                        return 0 == 件数;
+                    }
+                    return true;
                 }
             };
 }

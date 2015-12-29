@@ -3,20 +3,23 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Dec 24 15:57:41 CST 2015
+ * Tue Dec 29 17:19:58 CST 2015 
  */
 
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
+
 /**
- * dgChosainIchiran_Row のクラスファイル
- *
+ * dgChosainIchiran_Row のクラスファイル 
+ * 
  * @author 自動生成
  */
+
 public class dgChosainIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
 
@@ -296,30 +299,4 @@ public class dgChosainIchiran_Row extends DataRow {
     }
 
     // </editor-fold>
-    private LasdecCode shichosonCode;
-
-    /**
-     * @return the shichosonCode
-     */
-    public LasdecCode getShichosonCode() {
-        return shichosonCode;
-    }
-
-    /**
-     * @param shichosonCode the shichosonCode to set
-     */
-    public void setShichosonCode(LasdecCode shichosonCode) {
-        this.shichosonCode = shichosonCode;
-    }
-
-    public dgChosainIchiran_Row(LasdecCode shichosonCode, RString jotai, RString shichoson, TextBoxCode chosaItakusakiCode, RString jigyoshaNo,
-            RString chosaItakusakiMeisho, RString chosaItakusakiKana, RString yubinNo, RString jusho, RString telNo, RString faxNo,
-            RString kikanDaihyoshaName, RString kikanDaihyoshaKanaName, RString chosaItakuKubun, RString tokuteiChosainDispFlag,
-            TextBoxNum waritsukeTeiin, RString chiku, RString autoWaritsukeFlag, RString kikanKubun, RString jokyoFlag) {
-
-        this(jotai, shichoson, chosaItakusakiCode, jigyoshaNo, chosaItakusakiMeisho, chosaItakusakiKana, yubinNo, jusho, telNo, faxNo,
-                kikanDaihyoshaName, kikanDaihyoshaKanaName, chosaItakuKubun, tokuteiChosainDispFlag, waritsukeTeiin, chiku, autoWaritsukeFlag,
-                kikanKubun, jokyoFlag);
-        this.shichosonCode = shichosonCode;
-    }
 }
