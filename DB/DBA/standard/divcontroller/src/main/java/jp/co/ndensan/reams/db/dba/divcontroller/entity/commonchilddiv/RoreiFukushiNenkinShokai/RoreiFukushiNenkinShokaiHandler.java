@@ -11,7 +11,6 @@ import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dba.definition.core.roreifukushinenkinjoho.RoreiFukushiNenkinJohoMapperParameter;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.message.Dbamn00000ErrorMessages;
 import jp.co.ndensan.reams.db.dba.service.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -20,8 +19,6 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 老齢福祉年金画面のハンドラークラスです。
@@ -118,7 +115,7 @@ public class RoreiFukushiNenkinShokaiHandler {
      *
      */
     public void set老齢福祉年金取消ボタン画面表示() {
-        div.getPanelRireki().setDisplayNone(false);
+        div.getPanelRireki().setDisabled(false);
         div.getPanelInput().setDisplayNone(true);
         div.getTxtStartDate().clearValue();
         div.getTxtEndDate().clearValue();
@@ -190,7 +187,7 @@ public class RoreiFukushiNenkinShokaiHandler {
         if (状態_追加.equals(eventJotai)) {
             row.setJotai(eventJotai);
             div.getDatagridRireki().getDataSource().add(row);
-        } else if (状態_削除.equals(eventJotai) && 状態_追加.equals(row.getJotai())) {
+        } else if (状態_削除.equals(eventJotai)) {
             div.getDatagridRireki().getDataSource().remove(index);
         } else {
             row.setJotai(eventJotai);
@@ -211,17 +208,6 @@ public class RoreiFukushiNenkinShokaiHandler {
             throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(
                     div.getTxtStartDate().getValue().toString()));
         }
-    }
-
-    /**
-     * 終了日が開始日以前の場合、メッセージを表示します。
-     *
-     * @return ValidationMessageControlPairs ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 終了日が開始日以前のチェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(Dbamn00000ErrorMessages.終了日が開始日以前));
-        return validationMessages;
     }
 
     /**

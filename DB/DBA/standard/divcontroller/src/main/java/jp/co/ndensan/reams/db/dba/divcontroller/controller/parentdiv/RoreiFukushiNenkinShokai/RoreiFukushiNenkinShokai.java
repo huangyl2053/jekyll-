@@ -15,13 +15,13 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RoreiFukus
 import jp.co.ndensan.reams.db.dba.service.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
@@ -125,29 +125,27 @@ public class RoreiFukushiNenkinShokai {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            if (div.getTxtStartDate().getValue() != null
+                    && div.getTxtEndDate().getValue() != null
+                    && !div.getTxtStartDate().getValue().isBefore(div.getTxtEndDate().getValue())) {
+                return ResponseData.of(div).addMessage(UrWarningMessages.日付の前後関係逆転以降.getMessage().replace(
+                        div.getTxtStartDate().getValue().toString(), div.getTxtEndDate().getValue().toString())).
+                        respond();
+            }
             this.onClick_はい(div);
         }
         return ResponseData.of(div).respond();
     }
 
-    private RoreiFukushiNenkinShokaiHandler getHandler(RoreiFukushiNenkinShokaiDiv div) {
-        return new RoreiFukushiNenkinShokaiHandler(div);
-    }
-
     private ResponseData<RoreiFukushiNenkinShokaiDiv> onClick_はい(RoreiFukushiNenkinShokaiDiv div) {
         RString イベント状態 = div.getPanelInput().getState();
+        if (状態_追加.equals(イベント状態)) {
+            getHandler(div).set受給開始日の重複チェック();
+        }
         getHandler(div).set受給期間の重複チェック(イベント状態);
         Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> models
                 = ViewStateHolder.get(ViewStateKeys.老齢福祉年金情報検索結果一覧, Models.class);
         if (状態_追加.equals(イベント状態)) {
-            getHandler(div).set受給開始日の重複チェック();
-            if (div.getTxtEndDate().getValue() == null
-                    || div.getTxtEndDate().getValue().toDateString().trim().length() == 0
-                    || !div.getTxtStartDate().getValue().isBefore(div.getTxtEndDate().getValue())) {
-                ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-                validationMessages.add(getHandler(div).終了日が開始日以前のチェック());
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
             RoreiFukushiNenkinJukyusha busiRoreiFukushiNenkin = new RoreiFukushiNenkinJukyusha(
                     new ShikibetsuCode(div.getShikibetsuCode()),
                     new FlexibleDate(div.getTxtStartDate().getValue().toDateString()));
@@ -163,19 +161,24 @@ public class RoreiFukushiNenkinShokai {
             models.deleteOrRemove(key);
             models.add(busiRoreiFukushiNenkin);
         }
-        if (状態_削除.equals(イベント状態)
-                && !状態_追加.equals(div.getDatagridRireki().getActiveRow().getJotai())) {
-            RoreiFukushiNenkinJukyushaIdentifier key = new RoreiFukushiNenkinJukyushaIdentifier(
-                    new ShikibetsuCode(div.getShikibetsuCode()),
-                    new FlexibleDate(div.getPanelInput().getTxtStartDate().getValue().toString()));
-            RoreiFukushiNenkinJukyusha roreifukushinenkinjukyusha
-                    = getHandler(div).set老齢福祉年金確定ボタン押下の削除処理(models.get(key).deleted());
-            models.deleteOrRemove(key);
-            models.add(roreifukushinenkinjukyusha);
-        }
+//        if (状態_削除.equals(イベント状態)
+//                && !状態_追加.equals(div.getDatagridRireki().getActiveRow().getJotai())) {
+//            RoreiFukushiNenkinJukyushaIdentifier key = new RoreiFukushiNenkinJukyushaIdentifier(
+//                    new ShikibetsuCode(div.getShikibetsuCode()),
+//                    new FlexibleDate(div.getPanelInput().getTxtStartDate().getValue().toString()));
+//            RoreiFukushiNenkinJukyusha roreifukushinenkinjukyusha
+//                    = getHandler(div).set老齢福祉年金確定ボタン押下の削除処理(models.get(key).deleted());
+//            models.deleteOrRemove(key);
+//            models.add(roreifukushinenkinjukyusha);
+//        }
         ViewStateHolder.put(ViewStateKeys.老齢福祉年金情報検索結果一覧, models);
         getHandler(div).setDatagridRirekichiran(イベント状態);
         getHandler(div).set確定ボタン画面表示();
         return ResponseData.of(div).respond();
     }
+
+    private RoreiFukushiNenkinShokaiHandler getHandler(RoreiFukushiNenkinShokaiDiv div) {
+        return new RoreiFukushiNenkinShokaiHandler(div);
+    }
+
 }
