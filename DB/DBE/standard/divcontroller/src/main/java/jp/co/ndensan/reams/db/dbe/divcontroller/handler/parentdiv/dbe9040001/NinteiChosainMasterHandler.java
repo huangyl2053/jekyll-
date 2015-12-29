@@ -365,7 +365,7 @@ public class NinteiChosainMasterHandler {
         List<UzT0007CodeEntity> codeList = CodeMaster.getCodeRireki(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU);
         for (UzT0007CodeEntity uzT0007CodeEntity : codeList) {
             if (uzT0007CodeEntity.getコード().value().equals(div.getChosainJohoInput().getTxtChiku().getValue())) {
-                div.getChosainJohoInput().getTxtChikuMei().setValue(codeList.get(0).getコード名称());
+                div.getChosainJohoInput().getTxtChikuMei().setValue(uzT0007CodeEntity.getコード名称());
                 break;
             }
         }
