@@ -138,13 +138,13 @@ public class NinteichosaItakusakiMaster {
         if (!ResponseHolder.isReRequest()) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
+            DBE9030001ErrorMessage 対象データなし = new DBE9030001ErrorMessage(UrErrorMessages.対象データなし);
             messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先一覧データの存在チェック)
-                    .thenAdd(new DBE9030001ErrorMessage(UrErrorMessages.対象データなし)).messages());
+                    .thenAdd(対象データなし).messages());
             messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先一覧データの編集しないチェック)
                     .thenAdd(DbzErrorMessages.編集後更新指示).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                    new DBE9030001ErrorMessage(UrErrorMessages.対象データなし),
-                    div.getChosaitakusakiJohoInput()).build().check(messages));
+                    対象データなし, div.getChosaitakusakiJohoInput()).build().check(messages));
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                     DbzErrorMessages.編集後更新指示,
                     div.getChosaitakusakiJohoInput()).build().check(messages));
@@ -242,23 +242,23 @@ public class NinteichosaItakusakiMaster {
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnKakutei(NinteichosaItakusakiMasterDiv div) {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        DBE9030001ErrorMessage 編集なしで更新不可 = new DBE9030001ErrorMessage(UrErrorMessages.編集なしで更新不可);
+        DBE9030001ErrorMessage 入力値が不正_追加メッセージあり
+                = new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 市町村の合法性チェックreplace.toString());
+        DBE9030001ErrorMessage 既に登録済 = new DBE9030001ErrorMessage(
+                UrErrorMessages.既に登録済, div.getChosaitakusakiJohoInput().getTxtjigyoshano().getValue().toString());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先情報登録エリアの編集状態チェック)
-                .thenAdd(new DBE9030001ErrorMessage(UrErrorMessages.編集なしで更新不可)).messages());
+                .thenAdd(編集なしで更新不可).messages());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.市町村の合法性チェック)
-                .thenAdd(new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 市町村の合法性チェックreplace.toString()))
-                .messages());
+                .thenAdd(入力値が不正_追加メッセージあり).messages());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先コードの重複チェック)
-                .thenAdd(new DBE9030001ErrorMessage(
-                                UrErrorMessages.既に登録済, div.getChosaitakusakiJohoInput().getTxtjigyoshano().getValue().toString())).messages());
+                .thenAdd(既に登録済).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                new DBE9030001ErrorMessage(UrErrorMessages.編集なしで更新不可),
-                div.getChosaitakusakiJohoInput()).build().check(messages));
+                編集なしで更新不可, div.getChosaitakusakiJohoInput()).build().check(messages));
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 市町村の合法性チェックreplace.toString()),
-                div.getChosaitakusakiJohoInput().getTxtShichoson()).build().check(messages));
+                入力値が不正_追加メッセージあり, div.getChosaitakusakiJohoInput().getTxtShichoson()).build().check(messages));
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                new DBE9030001ErrorMessage(UrErrorMessages.既に登録済),
-                div.getChosaitakusakiJohoInput().getTxtChosaItakusaki()).build().check(messages));
+                既に登録済, div.getChosaitakusakiJohoInput().getTxtChosaItakusaki()).build().check(messages));
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
@@ -299,11 +299,11 @@ public class NinteichosaItakusakiMaster {
         if (!ResponseHolder.isReRequest()) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
+            DBE9030001ErrorMessage 編集なしで更新不可 = new DBE9030001ErrorMessage(UrErrorMessages.編集なしで更新不可);
             messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先一覧データの編集中チェック)
-                    .thenAdd(new DBE9030001ErrorMessage(UrErrorMessages.編集なしで更新不可)).messages());
+                    .thenAdd(編集なしで更新不可).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                    new DBE9030001ErrorMessage(UrErrorMessages.編集なしで更新不可),
-                    div.getChosaitakusakiJohoInput()).build().check(messages));
+                    編集なしで更新不可, div.getChosaitakusakiJohoInput()).build().check(messages));
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             } else {
