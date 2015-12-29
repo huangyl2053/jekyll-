@@ -46,7 +46,7 @@ public class IkenshoShujiiIchiranHandler {
                 || DonyukeitaiCode.認定広域.getコード().equals(導入形態コード)) {
             // div.getDdlShichosonCode().setSelectedValue(RString.EMPTY);
         } else if (DonyukeitaiCode.事務単一.getコード().equals(導入形態コード) || DonyukeitaiCode.認定単一.getコード().equals(導入形態コード)) {
-            // div.getCcdHokenshaList().getSelectedItem().setSelectedValue(RString.EMPTY);
+            div.getDdlShichosonCode().setSelectedValue(RString.EMPTY);
         }
 
         div.getDdlOutputSort().setDataSource(set出力順());
@@ -84,8 +84,8 @@ public class IkenshoShujiiIchiranHandler {
     public IkenshoShujiiIchiranParameter onClick_btnReportPublish() {
 
         IkenshoShujiiIchiranParameter batchParameter = new IkenshoShujiiIchiranParameter();
-        batchParameter.setShichosonCode(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
-        batchParameter.setShichosonName(div.getCcdHokenshaList().getSelectedItem().get市町村名称());
+        batchParameter.setShichosonCode(div.getDdlShichosonCode().getSelectedKey());
+        batchParameter.setShichosonName(div.getDdlShichosonCode().getSelectedValue());
         batchParameter.setIryoKikanCodeFrom(div.getTxtIryoKikanCodeFrom().getValue());
         batchParameter.setIryoKikanCodeTo(div.getTxtIryoKikanCodeTo().getValue());
         batchParameter.setShujiiCodeFrom(div.getTxtShujiiCodeFrom().getValue());
