@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijo
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.dgKaisaibashoIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler;
+import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.コード種別;
 import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.デフォルト検索条件;
 import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.全て;
 import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.削除;
@@ -26,7 +27,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -276,27 +276,30 @@ public class NinteiShinsakaiKaisaibashoToroku {
     private void 開催場所コードの重複チェック(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         RString kaisaibashoCode = div.getTxtKaisaibashoCode().getValue();
         List<dgKaisaibashoIchiran_Row> rowList = div.getDgKaisaibashoIchiran().getDataSource();
-        for (dgKaisaibashoIchiran_Row row : rowList) {
-            if (kaisaibashoCode.equals(row.getKaisaiChikuCode())) {
+        if (追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai())) {
+            for (dgKaisaibashoIchiran_Row row : rowList) {
+                if (kaisaibashoCode.equals(row.getKaisaiChikuCode())) {
+                    throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(
+                            kaisaibashoCode.toString()));
+                }
+            }
+            ShinsakaiKaisaiBashoJoho shinsakaiKaisaiBashoJoho = ShinsakaiKaisaiBashoJohoManager
+                    .createInstance()
+                    .get介護認定審査会開催場所情報(kaisaibashoCode);
+            if (shinsakaiKaisaiBashoJoho != null) {
                 throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(
                         kaisaibashoCode.toString()));
             }
         }
-        ShinsakaiKaisaiBashoJoho shinsakaiKaisaiBashoJoho = ShinsakaiKaisaiBashoJohoManager
-                .createInstance()
-                .get介護認定審査会開催場所情報(kaisaibashoCode);
-        if (shinsakaiKaisaiBashoJoho != null) {
-            throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(
-                    kaisaibashoCode.toString()));
-        }
     }
 
     private void 開催地区コードの存在チェック(NinteiShinsakaiKaisaibashoTorokuDiv div) {
-
-        RString code = CodeMaster.getCodeMeisho(new CodeShubetsu("5001"), div.getCcdKaisaiChikuCode().getCode());
-        if (code.trim().isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage().replace(
-                    div.getCcdKaisaiChikuCode().getCode().getColumnValue().toString()));
+        if(!div.getCcdKaisaiChikuCode().getCode().isEmpty()){
+            RString code = CodeMaster.getCodeMeisho(コード種別, div.getCcdKaisaiChikuCode().getCode());
+            if (code.trim().isEmpty()) {
+                throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage().replace(
+                        div.getCcdKaisaiChikuCode().getCode().getColumnValue().toString()));
+            }
         }
     }
 
