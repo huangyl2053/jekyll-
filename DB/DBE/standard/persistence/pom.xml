@@ -45,5 +45,10 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzPersistence</artifactId>
+            <version>1.4.2</version>
+        </dependency>
     </dependencies>
 </project>

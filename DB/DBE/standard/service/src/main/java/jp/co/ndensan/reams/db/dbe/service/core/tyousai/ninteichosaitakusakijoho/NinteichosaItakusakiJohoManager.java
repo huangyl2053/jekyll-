@@ -63,6 +63,21 @@ public class NinteichosaItakusakiJohoManager {
     }
 
     /**
+     * 主キーで認定調査委託先情報を取得します。
+     *
+     * @param 市町村コード ShichosonCode
+     * @param 認定調査委託先コード NinteichosaItakusakiCode
+     * @return DbT5910NinteichosaItakusakiJohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT5910NinteichosaItakusakiJohoEntity selectByKey(
+            LasdecCode 市町村コード,
+            RString 認定調査委託先コード) {
+        return 認定調査委託先情報Dac.selectByKey(市町村コード, 認定調査委託先コード);
+    }
+
+    /**
      * 認定調査委託先情報{@link NinteichosaItakusakiJoho}を保存します。
      *
      * @param 認定調査委託先情報 認定調査委託先情報

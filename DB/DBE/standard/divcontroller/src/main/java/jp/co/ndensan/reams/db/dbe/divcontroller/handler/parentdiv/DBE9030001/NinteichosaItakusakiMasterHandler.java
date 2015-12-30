@@ -88,10 +88,14 @@ public class NinteichosaItakusakiMasterHandler {
     public void onLoad() {
         div.getChosainSearch().getCcdHokenshaList().loadHokenshaList();
         div.getChosainSearch().getRadSearchChosainJokyo().setSelectedKey(new RString("key0"));
-        List<KeyValueDataSource> chosaItakuKubunCodes = createListFromChosaItakuKubunCodeASC();
+        List<KeyValueDataSource> chosaItakuKubunCodes = new ArrayList<>();
+        chosaItakuKubunCodes.add(new KeyValueDataSource(selectKey空白, RString.EMPTY));
+        chosaItakuKubunCodes.addAll(createListFromChosaItakuKubunCodeASC());
         div.getChosainSearch().getDdlitakukubun().getDataSource().clear();
         div.getChosainSearch().getDdlitakukubun().getDataSource().addAll(chosaItakuKubunCodes);
-        List<KeyValueDataSource> chosaKikanKubunCodes = createListFromChosaKikanKubunASC();
+        List<KeyValueDataSource> chosaKikanKubunCodes = new ArrayList<>();
+        chosaKikanKubunCodes.add(new KeyValueDataSource(selectKey空白, RString.EMPTY));
+        chosaKikanKubunCodes.addAll(createListFromChosaKikanKubunASC());
         div.getChosainSearch().getDdlkikankubun().getDataSource().clear();
         div.getChosainSearch().getDdlkikankubun().getDataSource().addAll(chosaKikanKubunCodes);
         div.getChosainSearch().clear();
@@ -156,17 +160,20 @@ public class NinteichosaItakusakiMasterHandler {
      */
     public void set追加状態() {
         div.set状態(追加状態コード);
-        div.getChosaitakusakiJohoInput().clear();
         setChosaitakusakiJohoInputDisabled(Boolean.FALSE);
+        div.setHdnSelectID(RString.EMPTY);
         div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(Boolean.FALSE);
-        div.setHdnInputDiv(getChosaitakusakiJohoInputValue());
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().clear();
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().addAll(createListFromChosaItakuKubunCodeASC());
         div.getChosaitakusakiJohoInput().getDdlKikankubun().getDataSource().clear();
         div.getChosaitakusakiJohoInput().getDdlKikankubun().getDataSource().addAll(createListFromChosaKikanKubunASC());
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().clear();
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
-                new KeyValueDataSource(selectKey空白, RString.EMPTY));
+                new KeyValueDataSource(new RString("TRUE"), 特定調査員表示フラグ表示));
+        div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
+                new KeyValueDataSource(new RString("FALSE"), 特定調査員表示フラグ非表示));
+        div.getChosaitakusakiJohoInput().clear();
+        div.setHdnInputDiv(getChosaitakusakiJohoInputValue());
     }
 
     /**
@@ -175,6 +182,15 @@ public class NinteichosaItakusakiMasterHandler {
      */
     public void set修正状態() {
         div.set状態(修正状態コード);
+        div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().clear();
+        div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().addAll(createListFromChosaItakuKubunCodeASC());
+        div.getChosaitakusakiJohoInput().getDdlKikankubun().getDataSource().clear();
+        div.getChosaitakusakiJohoInput().getDdlKikankubun().getDataSource().addAll(createListFromChosaKikanKubunASC());
+        div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().clear();
+        div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
+                new KeyValueDataSource(new RString("TRUE"), 特定調査員表示フラグ表示));
+        div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
+                new KeyValueDataSource(new RString("FALSE"), 特定調査員表示フラグ非表示));
         div.setHdnSelectID(new RString(String.valueOf(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedRowId())));
         setChosaitakusakiJohoInputDisabled(Boolean.FALSE);
         div.getChosaitakusakiJohoInput().getTxtShichoson().setDisabled(Boolean.TRUE);
@@ -192,6 +208,15 @@ public class NinteichosaItakusakiMasterHandler {
      */
     public void set削除状態() {
         div.set状態(削除状態コード);
+        div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().clear();
+        div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().addAll(createListFromChosaItakuKubunCodeASC());
+        div.getChosaitakusakiJohoInput().getDdlKikankubun().getDataSource().clear();
+        div.getChosaitakusakiJohoInput().getDdlKikankubun().getDataSource().addAll(createListFromChosaKikanKubunASC());
+        div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().clear();
+        div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
+                new KeyValueDataSource(new RString("TRUE"), 特定調査員表示フラグ表示));
+        div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
+                new KeyValueDataSource(new RString("FALSE"), 特定調査員表示フラグ非表示));
         div.setHdnSelectID(new RString(String.valueOf(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedRowId())));
         setChosaitakusakiJohoInputDisabled(Boolean.TRUE);
         setChosaitakusakiJohoInput(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedItem());
@@ -264,7 +289,8 @@ public class NinteichosaItakusakiMasterHandler {
                 状態,
                 div.getChosaitakusakiJohoInput().getTxtShichosonmei().getValue(),
                 認定調査委託先コード,
-                new RString(div.getChosaitakusakiJohoInput().getTxtjigyoshano().getValue().toString()),
+                div.getChosaitakusakiJohoInput().getTxtjigyoshano().getValue() == null
+                ? RString.EMPTY : new RString(div.getChosaitakusakiJohoInput().getTxtjigyoshano().getValue().toString()),
                 div.getChosaitakusakiJohoInput().getTxtChosaitakusakiname().getValue(),
                 div.getChosaitakusakiJohoInput().getTxtChosaitakusakiKananame().getValue(),
                 div.getChosaitakusakiJohoInput().getTxtYubinNo().getValue().getEditedYubinNo(),
@@ -281,6 +307,8 @@ public class NinteichosaItakusakiMasterHandler {
                 div.getChosaitakusakiJohoInput().getDdlKikankubun().getSelectedValue(),
                 div.getChosaitakusakiJohoInput().getRadChosainJokyo().getSelectedValue());
         if (selectID == -1) {
+            div.setHdnShichosonCodeList(div.getHdnShichosonCodeList().concat(
+                    div.getChosaitakusakiJohoInput().getTxtShichoson().getValue()).concat(CSV_WRITER_DELIMITER));
             div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().add(row);
         } else {
             div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().set(selectID, row);
@@ -304,17 +332,19 @@ public class NinteichosaItakusakiMasterHandler {
      *
      */
     public void save調査委託先一覧データ() {
+        int rowIndex = 0;
         for (dgChosainIchiran_Row row : div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource()) {
             if (追加状態コード.equals(row.getJotai())) {
-                NinteichosaItakusakiJoho joho = converterDataSourceFromKoseiShichosonMaster(row, EntityDataState.Added);
+                NinteichosaItakusakiJoho joho = converterDataSourceFromKoseiShichosonMaster(row, EntityDataState.Added, rowIndex);
                 johoManager.save(joho);
             } else if (修正状態コード.equals(row.getJotai())) {
-                NinteichosaItakusakiJoho joho = converterDataSourceFromKoseiShichosonMaster(row, EntityDataState.Modified);
+                NinteichosaItakusakiJoho joho = converterDataSourceFromKoseiShichosonMaster(row, EntityDataState.Modified, rowIndex);
                 johoManager.save(joho);
             } else if (削除状態コード.equals(row.getJotai())) {
-                NinteichosaItakusakiJoho joho = converterDataSourceFromKoseiShichosonMaster(row, EntityDataState.Deleted);
+                NinteichosaItakusakiJoho joho = converterDataSourceFromKoseiShichosonMaster(row, EntityDataState.Deleted, rowIndex);
                 johoManager.deletePhysical(joho.toEntity());
             }
+            rowIndex++;
         }
     }
 
@@ -332,6 +362,15 @@ public class NinteichosaItakusakiMasterHandler {
 
     private void set明細照会状態() {
         div.set状態(その他状態コード);
+        div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().clear();
+        div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().addAll(createListFromChosaItakuKubunCodeASC());
+        div.getChosaitakusakiJohoInput().getDdlKikankubun().getDataSource().clear();
+        div.getChosaitakusakiJohoInput().getDdlKikankubun().getDataSource().addAll(createListFromChosaKikanKubunASC());
+        div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().clear();
+        div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
+                new KeyValueDataSource(new RString("TRUE"), 特定調査員表示フラグ表示));
+        div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
+                new KeyValueDataSource(new RString("FALSE"), 特定調査員表示フラグ非表示));
         div.setHdnSelectID(new RString(String.valueOf(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedRowId())));
         setChosaitakusakiJohoInputDisabled(Boolean.TRUE);
         setChosaitakusakiJohoInput(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedItem());
@@ -387,11 +426,11 @@ public class NinteichosaItakusakiMasterHandler {
         return dataSources;
     }
 
-    private NinteichosaItakusakiJoho converterDataSourceFromKoseiShichosonMaster(dgChosainIchiran_Row row, EntityDataState state) {
-        DbT5910NinteichosaItakusakiJohoEntity entity = new DbT5910NinteichosaItakusakiJohoEntity();
+    private NinteichosaItakusakiJoho converterDataSourceFromKoseiShichosonMaster(dgChosainIchiran_Row row, EntityDataState state, int rowIndex) {
+        LasdecCode shichosonCode = new LasdecCode(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString()).get(rowIndex));
+        DbT5910NinteichosaItakusakiJohoEntity entity = johoManager.selectByKey(shichosonCode, row.getChosaItakusakiCode().getValue());
 
-        entity.setShichosonCode(new LasdecCode(
-                div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString()).get(Integer.valueOf(div.getHdnSelectID().toString()))));
+        entity.setShichosonCode(shichosonCode);
         entity.setNinteichosaItakusakiCode(row.getChosaItakusakiCode().getValue());
         entity.setState(state);
         RString chosaItakuKubunCode;
@@ -434,7 +473,6 @@ public class NinteichosaItakusakiMasterHandler {
     private List<KeyValueDataSource> createListFromChosaItakuKubunCodeASC() {
         List<KeyValueDataSource> list = new ArrayList<>();
         List<RString> codes = new ArrayList<>();
-        list.add(new KeyValueDataSource(selectKey空白, RString.EMPTY));
         for (ChosaItakuKubunCode code : ChosaItakuKubunCode.values()) {
             codes.add(code.getコード());
         }
@@ -450,7 +488,6 @@ public class NinteichosaItakusakiMasterHandler {
     private List<KeyValueDataSource> createListFromChosaKikanKubunASC() {
         List<KeyValueDataSource> list = new ArrayList<>();
         List<RString> codes = new ArrayList<>();
-        list.add(new KeyValueDataSource(selectKey空白, RString.EMPTY));
         for (ChosaKikanKubun code : ChosaKikanKubun.values()) {
             codes.add(code.getコード());
         }
@@ -469,8 +506,6 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getDdlKikankubun().getDataSource().clear();
         div.getChosaitakusakiJohoInput().getDdlKikankubun().getDataSource().addAll(createListFromChosaKikanKubunASC());
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().clear();
-        div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
-                new KeyValueDataSource(selectKey空白, RString.EMPTY));
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
                 new KeyValueDataSource(new RString("TRUE"), 特定調査員表示フラグ表示));
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
@@ -497,8 +532,12 @@ public class NinteichosaItakusakiMasterHandler {
                 row.getKikanDaihyoshaName() == null ? RString.EMPTY : row.getKikanDaihyoshaName()));
         div.getChosaitakusakiJohoInput().getTxtdaihyoshakananame().setDomain(new AtenaJusho(
                 row.getKikanDaihyoshaKanaName() == null ? RString.EMPTY : row.getKikanDaihyoshaKanaName()));
-        div.getChosaitakusakiJohoInput().getDdlItakusakikubun().setSelectedValue(row.getChosaItakuKubun());
-        div.getChosaitakusakiJohoInput().getDdltokuteichosain().setSelectedValue(row.getTokuteiChosainDispFlag());
+        if (!RString.isNullOrEmpty(row.getChosaItakuKubun())) {
+            div.getChosaitakusakiJohoInput().getDdlItakusakikubun().setSelectedValue(row.getChosaItakuKubun());
+        }
+        if (!RString.isNullOrEmpty(row.getTokuteiChosainDispFlag())) {
+            div.getChosaitakusakiJohoInput().getDdltokuteichosain().setSelectedValue(row.getTokuteiChosainDispFlag());
+        }
         //TODO 割付定員 TextBoxYubinNo?
         div.getChosaitakusakiJohoInput().getTxtteiin().setValue(YubinNo.EMPTY);
 //        div.getChosaitakusakiJohoInput().getTxtteiin().setValue(new YubinNo(row.getWaritsukeTeiin() == null
@@ -507,7 +546,9 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getTxtChikuMei().setValue(
                 CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, 割付地区名称コード種別, new Code(row.getChiku())));
         div.getChosaitakusakiJohoInput().getRadautowatitsuke().setSelectedValue(row.getAutoWaritsukeFlag());
-        div.getChosaitakusakiJohoInput().getDdlKikankubun().setSelectedValue(row.getKikanKubun());
+        if (!RString.isNullOrEmpty(row.getKikanKubun())) {
+            div.getChosaitakusakiJohoInput().getDdlKikankubun().setSelectedValue(row.getKikanKubun());
+        }
         div.getChosaitakusakiJohoInput().getRadChosainJokyo().setSelectedValue(row.getJokyoFlag());
     }
 
@@ -587,9 +628,9 @@ public class NinteichosaItakusakiMasterHandler {
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getTxtdaihyoshaname().getDomain().getColumnValue());
         builder.append(div.getChosaitakusakiJohoInput().getTxtdaihyoshakananame().getDomain() == null
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getTxtdaihyoshakananame().getDomain().getColumnValue());
-        builder.append(div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getSelectedValue() == null
+        builder.append(RString.isNullOrEmpty(div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getSelectedKey())
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getSelectedValue());
-        builder.append(div.getChosaitakusakiJohoInput().getDdltokuteichosain().getSelectedValue() == null
+        builder.append(RString.isNullOrEmpty(div.getChosaitakusakiJohoInput().getDdltokuteichosain().getSelectedKey())
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getDdltokuteichosain().getSelectedValue());
         builder.append(div.getChosaitakusakiJohoInput().getTxtteiin().getValue() == null
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getTxtteiin().getValue().getYubinNo());
@@ -599,11 +640,10 @@ public class NinteichosaItakusakiMasterHandler {
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getTxtChikuMei().getValue());
         builder.append(div.getChosaitakusakiJohoInput().getRadautowatitsuke().getSelectedValue() == null
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getRadautowatitsuke().getSelectedValue());
-        builder.append(div.getChosaitakusakiJohoInput().getDdlKikankubun().getSelectedValue() == null
+        builder.append(RString.isNullOrEmpty(div.getChosaitakusakiJohoInput().getDdlKikankubun().getSelectedKey())
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getDdlKikankubun().getSelectedValue());
         builder.append(div.getChosaitakusakiJohoInput().getRadChosainJokyo().getSelectedValue() == null
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getRadChosainJokyo().getSelectedValue());
         return builder.toRString();
     }
-
 }

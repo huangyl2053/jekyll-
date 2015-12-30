@@ -46,6 +46,7 @@ public class NinteichosaItakusakiMaster {
     private static final RString 修正状態コード = new RString("修正");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString 市町村の合法性チェックreplace = new RString("市町村コード");
+    private static final RString その他状態コード = new RString("その他");
 
     /**
      * 画面初期化表示、画面項目に設定されている値をクリアする。
@@ -155,7 +156,7 @@ public class NinteichosaItakusakiMaster {
         } else {
             getHandler(div).outputCsv();
             div.getCcdKanryoMessage().setSuccessMessage(
-                    new RString(UrInformationMessages.正常終了.getMessage().toString()), CSV出力完了, RString.EMPTY);
+                    new RString(UrInformationMessages.正常終了.getMessage().evaluate()), CSV出力完了, RString.EMPTY);
             return ResponseData.of(div).setState(DBE9030001StateName.完了);
         }
     }
@@ -230,6 +231,9 @@ public class NinteichosaItakusakiMaster {
             div.getChosaitakusakiJohoInput().clear();
             return ResponseData.of(div).setState(DBE9030001StateName.一覧);
         }
+        if (div.get状態().equals(その他状態コード)) {
+            return ResponseData.of(div).setState(DBE9030001StateName.一覧);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -246,7 +250,8 @@ public class NinteichosaItakusakiMaster {
         DBE9030001ErrorMessage 入力値が不正_追加メッセージあり
                 = new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 市町村の合法性チェックreplace.toString());
         DBE9030001ErrorMessage 既に登録済 = new DBE9030001ErrorMessage(
-                UrErrorMessages.既に登録済, div.getChosaitakusakiJohoInput().getTxtjigyoshano().getValue().toString());
+                UrErrorMessages.既に登録済, div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue() == null
+                ? RString.EMPTY.toString() : div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue().toString());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先情報登録エリアの編集状態チェック)
                 .thenAdd(編集なしで更新不可).messages());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.市町村の合法性チェック)
@@ -309,21 +314,27 @@ public class NinteichosaItakusakiMaster {
             } else {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
-        } else {
+        }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+            int rowIndex = 0;
             for (dgChosainIchiran_Row row : div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource()) {
                 if (削除状態.equals(row.getJotai())) {
                     if (!getHandler(div).削除行データの整合性チェック(
                             new LasdecCode(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString())
-                                    .get(Integer.valueOf(div.getHdnSelectID().toString()))), row.getChosaItakusakiCode().getValue())) {
+                                    .get(rowIndex)), row.getChosaItakusakiCode().getValue())) {
                         throw new ApplicationException(DbeErrorMessages.他の情報で使用している為削除不可.getMessage());
                     }
                 }
+                rowIndex++;
             }
             getHandler(div).save調査委託先一覧データ();
             div.getCcdKanryoMessage().setSuccessMessage(
-                    new RString(UrInformationMessages.保存終了.getMessage().toString()), RString.EMPTY, RString.EMPTY);
+                    new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
             return ResponseData.of(div).setState(DBE9030001StateName.完了);
         }
+        return ResponseData.of(div).respond();
     }
 
     private NinteichosaItakusakiMasterHandler getHandler(NinteichosaItakusakiMasterDiv div) {
