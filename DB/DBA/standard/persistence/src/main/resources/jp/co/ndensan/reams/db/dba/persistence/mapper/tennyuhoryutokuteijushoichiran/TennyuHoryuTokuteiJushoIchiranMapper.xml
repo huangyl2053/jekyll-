@@ -18,34 +18,34 @@
     </resultMap>
     <select id="getTennyuHoryuTokuteiJushoIchiran" resultMap="resultMap_TennyuHoryuTokuteiJushoIchiranEntity" fetchSize="500">
         SELECT    
-            DbT7023RendoHoryu."kanriNo" as "DbT7023RendoHoryu_kanriNo",
-            DbT7023RendoHoryu."shichosonCode" as "DbT7023RendoHoryu_shichosonCode",
-            DbT7023RendoHoryu."shichosonMeisho" as "DbT7023RendoHoryu_shichosonMeisho",
-            DbT7023RendoHoryu."jushoCode" as "DbT7023RendoHoryu_jushoCode",
-            DbT7023RendoHoryu."jusho" as "DbT7023RendoHoryu_jusho",
-            DbT7023RendoHoryu."banchiCode1" as "DbT7023RendoHoryu_banchiCode1",
-            DbT7023RendoHoryu."banchiCode2" as "DbT7023RendoHoryu_banchiCode2",
-            DbT7023RendoHoryu."banchiCode3" as "DbT7023RendoHoryu_banchiCode3",
-            DbT7023RendoHoryu."banchi" as "DbT7023RendoHoryu_banchi",
-            DbT7023RendoHoryu."shisetsuShurui" as "DbT7023RendoHoryu_shisetsuShurui",
-            DbT7023RendoHoryu."shisetsuCode" as "DbT7023RendoHoryu_shisetsuCode",
-            DbT7023RendoHoryu."jigyoshaName" as "DbT7023RendoHoryu_jigyoshaName"
+            DbT7023RendoHoryu."kanriNo" AS "DbT7023RendoHoryu_kanriNo",
+            DbT7023RendoHoryu."shichosonCode" AS "DbT7023RendoHoryu_shichosonCode",
+            DbT7023RendoHoryu."shichosonMeisho" AS "DbT7023RendoHoryu_shichosonMeisho",
+            DbT7023RendoHoryu."jushoCode" AS "DbT7023RendoHoryu_jushoCode",
+            DbT7023RendoHoryu."jusho" AS "DbT7023RendoHoryu_jusho",
+            DbT7023RendoHoryu."banchiCode1" AS "DbT7023RendoHoryu_banchiCode1",
+            DbT7023RendoHoryu."banchiCode2" AS "DbT7023RendoHoryu_banchiCode2",
+            DbT7023RendoHoryu."banchiCode3" AS "DbT7023RendoHoryu_banchiCode3",
+            DbT7023RendoHoryu."banchi" AS "DbT7023RendoHoryu_banchi",
+            DbT7023RendoHoryu."shisetsuShurui" AS "DbT7023RendoHoryu_shisetsuShurui",
+            DbT7023RendoHoryu."shisetsuCode" AS "DbT7023RendoHoryu_shisetsuCode",
+            DbT7023RendoHoryu."jigyoshaName" AS "DbT7023RendoHoryu_jigyoshaName"
          FROM
             (SELECT
-                 DbT7023Rendo."kanriNo" as "kanriNo",
-                 DbT7023Rendo."shichosonCode" as "shichosonCode",
-                 DbT7051Kosei."shichosonMeisho" as "shichosonMeisho",
-                 DbT7023Rendo."jushoCode" as "jushoCode",
-                 DbT7023Rendo."jusho" as "jusho",
-                 DbT7023Rendo."banchiCode1" as "banchiCode1", 
-                 DbT7023Rendo."banchiCode2" as "banchiCode2", 
-                 DbT7023Rendo."banchiCode3" as "banchiCode3", 
-                 DbT7023Rendo."banchi" as "banchi",
-                 DbT7023Rendo."shisetsuShurui" as "shisetsuShurui",
-                 DbT7023Rendo."shisetsuCode" as "shisetsuCode",
-                 DbT7060Kai."jigyoshaName" as "jigyoshaName",
-                 row_number() over(partition by (DbT7051Kosei."shichosonCode") order by DbT7051Kosei."shichosonCode" desc,DbT7051Kosei."kanyuYMD" desc) as rank_number1,
-                 row_number() over(partition by (DbT7060Kai."jigyoshaNo") order by DbT7060Kai."jigyoshaNo" desc,DbT7060Kai."yukoKaishiYMD") as rank_number2
+                 DbT7023Rendo."kanriNo" AS "kanriNo",
+                 DbT7023Rendo."shichosonCode" AS "shichosonCode",
+                 DbT7051Kosei."shichosonMeisho" AS "shichosonMeisho",
+                 DbT7023Rendo."jushoCode" AS "jushoCode",
+                 DbT7023Rendo."jusho" AS "jusho",
+                 DbT7023Rendo."banchiCode1" AS "banchiCode1", 
+                 DbT7023Rendo."banchiCode2" AS "banchiCode2", 
+                 DbT7023Rendo."banchiCode3" AS "banchiCode3", 
+                 DbT7023Rendo."banchi" AS "banchi",
+                 DbT7023Rendo."shisetsuShurui" AS "shisetsuShurui",
+                 DbT7023Rendo."shisetsuCode" AS "shisetsuCode",
+                 DbT7060Kai."jigyoshaName" AS "jigyoshaName",
+                 ROW_NUMBER() over(partition by (DbT7051Kosei."shichosonCode") order by DbT7051Kosei."shichosonCode" desc,DbT7051Kosei."kanyuYMD" desc) AS rank_number1,
+                 ROW_NUMBER() over(partition by (DbT7060Kai."jigyoshaNo") order by DbT7060Kai."jigyoshaNo" desc,DbT7060Kai."yukoKaishiYMD") AS rank_number2
              FROM				
                  rgdb."DbT7023RendoHoryuTokuteiJusho" AS DbT7023Rendo
              LEFT JOIN 
