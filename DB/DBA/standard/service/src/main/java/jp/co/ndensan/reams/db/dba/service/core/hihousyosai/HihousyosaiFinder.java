@@ -39,7 +39,7 @@ public class HihousyosaiFinder {
     /**
      * コンストラクタです。
      */
-    public HihousyosaiFinder() {
+    HihousyosaiFinder() {
         dbT7051Dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
         dbT1001Dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
     }
@@ -50,10 +50,8 @@ public class HihousyosaiFinder {
      * @param dbT7051Dac DbT7051KoseiShichosonMasterDac
      * @param dbT1001dac DbT1001HihokenshaDaichoDac
      */
-    HihousyosaiFinder(
-            DbT7051KoseiShichosonMasterDac dbT7051Dac,
-            DbT1001HihokenshaDaichoDac dbT1001dac
-    ) {
+    HihousyosaiFinder(DbT7051KoseiShichosonMasterDac dbT7051Dac,
+            DbT1001HihokenshaDaichoDac dbT1001dac) {
         this.dbT7051Dac = dbT7051Dac;
         this.dbT1001Dac = dbT1001dac;
     }
@@ -97,7 +95,6 @@ public class HihousyosaiFinder {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(導入形態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("導入形態コード"));
         List<ShichosonBusiness> 旧保険者List = new ArrayList<>();
-        //TODO 方法のパラメータ数が一緻しない QA回答まち。
         List<KyuShichosonCode> 旧市町村コード情報List
                 = KyuShichosonCode.getKyuShichosonCodeJoho(市町村コード, 導入形態コード).get旧市町村コード情報List();
         if (旧市町村コード情報List.isEmpty()) {
@@ -115,10 +112,10 @@ public class HihousyosaiFinder {
     /**
      * 得喪情報取得です。
      *
-     * @param HihokenshaNo 被保険者番号
-     * @param FlexibleDate 異動日
-     * @param RString 枝番
-     * @return 被保険者台帳管理オブジェクト HihokenshaDaicho
+     * @param 被保険者番号 被保険者番号
+     * @param 異動日 異動日
+     * @param 枝番 枝番
+     * @return HihokenshaDaicho 被保険者台帳管理オブジェクト
      */
     @Transaction
     public HihokenshaDaicho getTokusouJoho(HihokenshaNo 被保険者番号, FlexibleDate 異動日, RString 枝番) {
@@ -129,7 +126,6 @@ public class HihousyosaiFinder {
         if (entity == null) {
             return null;
         }
-
         return new HihokenshaDaicho(entity);
     }
 
@@ -137,7 +133,6 @@ public class HihousyosaiFinder {
      * 被保区分リスト情報取得です。
      *
      * @param code Code
-     *
      * @return SearchResult<ShikakuKubun> 資格区分リスト
      */
     @Transaction
