@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.tyousai.ninteichosaitakusakijoho
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Chosa.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Chosa.ChosaKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosaitakusaki.NinteichosaItakusakiKensakuParameter;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.NinteichosaItakusakiJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.NinteichosaItakusakiMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.dgChosainIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoRelateEntity;
@@ -30,10 +29,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.NewLine;
-import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -62,7 +57,6 @@ public class NinteichosaItakusakiMasterHandler {
     private static final RString 特定調査員表示フラグ非表示 = new RString("非表示");
     private static final CodeShubetsu 割付地区名称コード種別 = new CodeShubetsu("5002");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString CSVファイル名 = new RString("認定調査委託先情報.csv");
     private static final RString selectKey空白 = new RString("blank");
     private static final RString 追加状態コード = new RString("追加");
     private static final RString 修正状態コード = new RString("修正");
@@ -241,20 +235,6 @@ public class NinteichosaItakusakiMasterHandler {
     }
 
     /**
-     * ＣＳＶを出力する
-     *
-     */
-    public void outputCsv() {
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
-        CsvWriter<NinteichosaItakusakiJohoCsvEntity> csvWriter = new CsvWriter.InstanceBuilder(filePath).canAppend(true).
-                setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).setNewLine(NewLine.CRLF).hasHeader(true).build();
-        for (dgChosainIchiran_Row row : div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource()) {
-            csvWriter.writeLine(converterDataSourceFromToCsvEntity(row));
-        }
-        csvWriter.close();
-    }
-
-    /**
      * 入力明細エリアの入力内容を調査委託先一覧に反映させる。
      *
      */
@@ -399,6 +379,10 @@ public class NinteichosaItakusakiMasterHandler {
                 } catch (IllegalArgumentException e) {
                     chosaKikanKubun = RString.EMPTY;
                 }
+                RString 特定調査員表示フラグ = RString.EMPTY;
+                if (joho.get特定調査員表示フラグ() != null) {
+                    特定調査員表示フラグ = joho.get特定調査員表示フラグ() ? 特定調査員表示フラグ表示 : 特定調査員表示フラグ非表示;
+                }
                 dgChosainIchiran_Row row = new dgChosainIchiran_Row(
                         RString.EMPTY,
                         master.get市町村名称() == null ? RString.EMPTY : master.get市町村名称(),
@@ -413,7 +397,7 @@ public class NinteichosaItakusakiMasterHandler {
                         joho.get代表者氏名() == null ? RString.EMPTY : joho.get代表者氏名(),
                         joho.get代表者カナ氏名() == null ? RString.EMPTY : joho.get代表者カナ氏名(),
                         chosaItakuKubunCode,
-                        joho.get特定調査員表示フラグ() ? 特定調査員表示フラグ表示 : 特定調査員表示フラグ非表示,
+                        特定調査員表示フラグ,
                         割付定員,
                         joho.get割付地区() == null ? RString.EMPTY : joho.get割付地区().getColumnValue(),
                         joho.get自動割付フラグ() ? 自動割付フラグ有効 : 自動割付フラグ無効,
@@ -429,7 +413,9 @@ public class NinteichosaItakusakiMasterHandler {
     private NinteichosaItakusakiJoho converterDataSourceFromKoseiShichosonMaster(dgChosainIchiran_Row row, EntityDataState state, int rowIndex) {
         LasdecCode shichosonCode = new LasdecCode(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString()).get(rowIndex));
         DbT5910NinteichosaItakusakiJohoEntity entity = johoManager.selectByKey(shichosonCode, row.getChosaItakusakiCode().getValue());
-
+        if (entity == null) {
+            entity = new DbT5910NinteichosaItakusakiJohoEntity();
+        }
         entity.setShichosonCode(shichosonCode);
         entity.setNinteichosaItakusakiCode(row.getChosaItakusakiCode().getValue());
         entity.setState(state);
@@ -576,32 +562,6 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getRadChosainJokyo().setDisabled(isDisabled);
     }
 
-    private NinteichosaItakusakiJohoCsvEntity converterDataSourceFromToCsvEntity(dgChosainIchiran_Row row) {
-        NinteichosaItakusakiJohoCsvEntity csvEntity = new NinteichosaItakusakiJohoCsvEntity();
-        csvEntity.set市町村コード(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString())
-                .get(Integer.valueOf(div.getHdnSelectID().toString())));
-        csvEntity.set市町村(row.getShichoson());
-        csvEntity.set調査委託先コード(row.getChosaItakusakiCode().getValue());
-        csvEntity.set事業者番号(row.getJigyoshaNo());
-        csvEntity.set調査委託先名称(row.getChosaItakusakiMeisho());
-        csvEntity.set調査委託先カナ名称(row.getChosaItakusakiKana());
-        csvEntity.set郵便番号(row.getYubinNo());
-        csvEntity.set住所(row.getJusho());
-        csvEntity.set電話番号(row.getTelNo());
-        csvEntity.setＦＡＸ番号(row.getFaxNo());
-        csvEntity.set機関代表者氏名(row.getKikanDaihyoshaName());
-        csvEntity.set機関代表者カナ氏名(row.getKikanDaihyoshaKanaName());
-        csvEntity.set調査委託区分(row.getChosaItakuKubun());
-        csvEntity.set特定調査員表示フラグ(row.getTokuteiChosainDispFlag());
-        csvEntity.set割付定員(new RString(row.getWaritsukeTeiin().getValue().toString()));
-        csvEntity.set割付地区コード(row.getChiku());
-        csvEntity.set割付地区名称(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, 割付地区名称コード種別, new Code(row.getChiku())));
-        csvEntity.set自動割付フラグ(row.getAutoWaritsukeFlag());
-        csvEntity.set機関の区分(row.getKikanKubun());
-        csvEntity.set状況フラグ(row.getJokyoFlag());
-        return csvEntity;
-    }
-
     private RString getChosaitakusakiJohoInputValue() {
         RStringBuilder builder = new RStringBuilder();
         builder.append(div.getChosaitakusakiJohoInput().getTxtShichoson().getValue() == null
@@ -645,5 +605,11 @@ public class NinteichosaItakusakiMasterHandler {
         builder.append(div.getChosaitakusakiJohoInput().getRadChosainJokyo().getSelectedValue() == null
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getRadChosainJokyo().getSelectedValue());
         return builder.toRString();
+    }
+
+    private enum ViewStateHolderEnum {
+
+        listHold;
+
     }
 }
