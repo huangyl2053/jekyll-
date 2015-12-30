@@ -364,13 +364,15 @@ public class NinteiChosainMasterHandler {
      */
     public void setTxtChikuMei() {
         List<UzT0007CodeEntity> codeList = CodeMaster.getCodeRireki(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU);
+        boolean isEmpty = true;
         for (UzT0007CodeEntity uzT0007CodeEntity : codeList) {
             if (uzT0007CodeEntity.getコード().value().equals(div.getChosainJohoInput().getTxtChiku().getValue())) {
                 div.getChosainJohoInput().getTxtChikuMei().setValue(uzT0007CodeEntity.getコード名称());
+                isEmpty = false;
                 break;
             }
         }
-        if (codeList.isEmpty()) {
+        if (isEmpty) {
             div.getChosainJohoInput().getTxtChikuMei().setValue(RString.EMPTY);
         }
     }

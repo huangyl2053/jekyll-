@@ -25,11 +25,6 @@ public class NinteiChosainMasterValidationHandler {
     private final NinteiChosainMasterDiv div;
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
-    private static final RString MAN = new RString("1");
-    private static final RString CODE_有効 = new RString("1");
-    private static final RString ハイフン = new RString("-");
-    private static final int INDEX_3 = 3;
-    private static final int INDEX_4 = 4;
 
     /**
      * コンストラクタです。
