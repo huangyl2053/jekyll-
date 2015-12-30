@@ -59,18 +59,8 @@ public class NinteiChosainMasterHandler {
      * 画面初期化処理です。
      */
     public void load() {
-        // TODO 市町村　ドロップダウンリスト 共通部品
-//        IUrControlData controlData = UrControlDataFactory.createInstance();
-//        IAssociationFinder associationFinder = AssociationFinderFactory.createInstance();
-//        Association association = associationFinder.getAssociation();
-//        ICityAtesakiFinder cityAtesakiFinder = CityAtesakiService.createCityAtesakiFinder();
-//        ShichosonAtesaki shichosonAtesaki = cityAtesakiFinder.get市町村宛先(association.get地方公共団体コード());
 
-        List<KeyValueDataSource> shichosonDataSource = new ArrayList<>();
-        shichosonDataSource.add(new KeyValueDataSource(new RString("000001"), new RString("市町村一")));
-        shichosonDataSource.add(new KeyValueDataSource(new RString("000002"), new RString("市町村二")));
-        shichosonDataSource.add(new KeyValueDataSource(new RString("000003"), new RString("市町村三")));
-        div.getDdlSearchShichoson().setDataSource(shichosonDataSource);
+        div.getHokenshaList().loadHokenshaList();
         List<UzT0007CodeEntity> codeList = CodeMaster.getCodeRireki(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU);
         List<KeyValueDataSource> chikuDataSource = new ArrayList<>();
         chikuDataSource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
@@ -84,7 +74,7 @@ public class NinteiChosainMasterHandler {
      * 検索条件入力項目をクリアします。
      */
     public void clearKensakuJoken() {
-        div.getDdlSearchShichoson().setSelectedIndex(0);
+        div.getHokenshaList().loadHokenshaList();
         div.getTxtSearchChosaItakusakiCodeFrom().clearValue();
         div.getTxtSearchChosaItakusakiCodeTo().clearValue();
         div.getTxtSearchChosaItakusakiMeisho().clearValue();

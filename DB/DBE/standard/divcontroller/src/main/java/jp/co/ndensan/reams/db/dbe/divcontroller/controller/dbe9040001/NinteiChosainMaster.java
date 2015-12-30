@@ -138,7 +138,7 @@ public class NinteiChosainMaster {
             chosainJokyo = true;
         }
         NinteiChosainMasterMapperParameter parameter = NinteiChosainMasterMapperParameter.createParamForSelectChosainJohoList(chosainJokyo,
-                new LasdecCode(div.getDdlSearchShichoson().getSelectedKey()),
+                div.getHokenshaList().getSelectedItem().get市町村コード(),
                 new ChosaItakusakiCode(div.getTxtSearchChosaItakusakiCodeFrom().getValue()),
                 new ChosaItakusakiCode(div.getTxtSearchChosaItakusakiCodeTo().getValue()),
                 div.getTxtSearchChosaItakusakiMeisho().getValue(),
