@@ -530,7 +530,9 @@ public class NinteiChosainMaster {
                 break;
             }
         }
-        if (!ResponseHolder.isReRequest() && isUpdate) {
+        if (!isUpdate) {
+            return ResponseData.of(div).forwardWithEventName(DBE9040001TransitionEventName.認定調査委託先マスタに戻る).respond();
+        } else if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
                     UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
