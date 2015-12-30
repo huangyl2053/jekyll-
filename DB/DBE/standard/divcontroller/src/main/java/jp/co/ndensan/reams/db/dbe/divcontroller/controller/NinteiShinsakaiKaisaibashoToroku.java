@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -37,13 +37,13 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
- * 介護認定審査会開催場所登録Divを制御します。
+ * 介護認定審査会開催場所登録Divを制御クラスです。
  *
  */
 public class NinteiShinsakaiKaisaibashoToroku {
 
     /**
-     * 介護認定審査会開催場所登録の初期処理を表します。
+     * 介護認定審査会開催場所登録の初期処理を表示します。
      *
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
@@ -239,7 +239,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
             }
             ShinsakaiKaisaiBashoJoho shinsakaiKaisaiBashoJoho = ShinsakaiKaisaiBashoJohoManager
                     .createInstance()
-                    .get介護認定審査会開催場所情報(kaisaibashoCode);
+                    .get介護認定審査会開催場所情報(kaisaibashoCode).records().get(0);
             if (shinsakaiKaisaiBashoJoho != null) {
                 throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(
                         kaisaibashoCode.toString()));
@@ -258,15 +258,14 @@ public class NinteiShinsakaiKaisaibashoToroku {
         }
     }
 
-    
     private boolean isUpdateHasChange(NinteiShinsakaiKaisaibashoTorokuDiv div) {
-        RStringBuilder r = new RStringBuilder(div.getTxtKaisaibashoCode().getValue());
-        r.append(div.getTxtKaisaibashoMeisho().getValue())
+        RStringBuilder stringBuilder = new RStringBuilder(div.getTxtKaisaibashoCode().getValue());
+        stringBuilder.append(div.getTxtKaisaibashoMeisho().getValue())
          .append(div.getTxtKaisaibashoJusho().getValue())
          .append(div.getTxtTelNumber().getDomain().value())
          .append(div.getDdlKaisaiBashoJokyo().getSelectedValue())
          .append(div.getCcdKaisaiChikuCode().getCode().value());
-        return !div.getShinakaiKaisaIbashoShosai().getSelectItem().equals(r.toRString());
+        return !div.getShinakaiKaisaIbashoShosai().getSelectItem().equals(stringBuilder.toRString());
     }
 
     private boolean isAddHasChange(NinteiShinsakaiKaisaibashoTorokuDiv div) {
@@ -280,6 +279,8 @@ public class NinteiShinsakaiKaisaibashoToroku {
     }
     
     private void 開催地区コードの存在チェック(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+        // CodeMaster.getCode(コード種別,div.getCcdKaisaiChikuCode().getCode());
+        // QA292は同様の問題があります、暫定以下の方式を実現。
         if (!div.getCcdKaisaiChikuCode().getCode().isEmpty()) {
             List<UzT0007CodeEntity> codeList = CodeMaster.getCode();
             if (codeList == null || codeList.isEmpty()) {

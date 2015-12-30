@@ -63,17 +63,19 @@ public class ShinsakaiKaisaiBashoJohoManager {
      * @return ShinsakaiKaisaiBashoJoho
      */
     @Transaction
-    public ShinsakaiKaisaiBashoJoho get介護認定審査会開催場所情報(
+    public SearchResult<ShinsakaiKaisaiBashoJoho> get介護認定審査会開催場所情報(
             RString 介護認定審査会開催場所コード) {
         requireNonNull(介護認定審査会開催場所コード
                 , UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所コード"));
+         List<ShinsakaiKaisaiBashoJoho> businessList = new ArrayList<>();
         DbT5592ShinsakaiKaisaiBashoJohoEntity entity = dac.selectByKey(
                 介護認定審査会開催場所コード);
         if (entity == null) {
             return null;
         }
+        businessList.add(new ShinsakaiKaisaiBashoJoho(entity));
         entity.initializeMd5();
-        return new ShinsakaiKaisaiBashoJoho(entity);
+        return SearchResult.of(businessList, businessList.size(), true);
     }
 
     /**
@@ -82,15 +84,14 @@ public class ShinsakaiKaisaiBashoJohoManager {
      * @return ShinsakaiKaisaiBashoJohoの{@code list}
      */
     @Transaction
-    public List<ShinsakaiKaisaiBashoJoho> get介護認定審査会開催場所情報一覧() {
+    public SearchResult<ShinsakaiKaisaiBashoJoho> get介護認定審査会開催場所情報一覧() {
         List<ShinsakaiKaisaiBashoJoho> businessList = new ArrayList<>();
-
         for (DbT5592ShinsakaiKaisaiBashoJohoEntity entity : dac.selectAll()) {
             entity.initializeMd5();
             businessList.add(new ShinsakaiKaisaiBashoJoho(entity));
         }
 
-        return businessList;
+        return SearchResult.of(businessList, businessList.size(), true);
     }
 
     /**

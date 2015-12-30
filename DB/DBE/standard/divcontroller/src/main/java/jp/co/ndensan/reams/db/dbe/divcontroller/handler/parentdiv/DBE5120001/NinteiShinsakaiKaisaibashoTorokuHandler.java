@@ -120,13 +120,13 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
     public void set修正の場合開催場所編集エリア() {
         div.getShinakaiKaisaIbashoShosai().setJyotai(更新モード);
         dgKaisaibashoIchiran_Row clickedItem = div.getDgKaisaibashoIchiran().getClickedItem();
-        RStringBuilder r = new RStringBuilder(clickedItem.getKaisaibashoCode());
-        r.append(clickedItem.getKaisaibashoMeisho())
+        RStringBuilder selectedItem = new RStringBuilder(clickedItem.getKaisaibashoCode());
+        selectedItem.append(clickedItem.getKaisaibashoMeisho())
          .append(clickedItem.getKaisaibashoJusho())
          .append(clickedItem.getKaisaibashoTelNo())
          .append(clickedItem.getKaisaibashoJokyo())
          .append(clickedItem.getKaisaiChikuCode());
-        div.getShinakaiKaisaIbashoShosai().setSelectItem(r.toRString());
+        div.getShinakaiKaisaIbashoShosai().setSelectItem(selectedItem.toRString());
         setSelectItem(clickedItem);
         set開催場所編集エリア活性();
     }
