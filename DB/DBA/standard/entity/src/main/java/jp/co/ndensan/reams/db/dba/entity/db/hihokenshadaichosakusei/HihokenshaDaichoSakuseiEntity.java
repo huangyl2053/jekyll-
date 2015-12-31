@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
@@ -16,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -36,7 +34,7 @@ public class HihokenshaDaichoSakuseiEntity {
     private RString hihokenshaNoTitle;
     private HihokenshaNo hihokenshaNo;
     private AtenaKanaMeisho kanaMeisho;
-    private FlexibleDate seinengappiYMD;
+    private RString seinengappiYMD;
     private RString seibetsuCode;
     private SetaiCode setaiCode;
     private ShikibetsuCode shikibetsuCode;
@@ -52,7 +50,7 @@ public class HihokenshaDaichoSakuseiEntity {
     private RString telephoneNo1;
     private RString telephoneNo2;
     private RString jushoTitle;
-    private AtenaJusho jusho;
+    private RString jusho;
     private ZenkokuJushoCode zenkokuJushoCode;
     private RString gyoseikuTitle;
     private GyoseikuCode gyoseikuCode;

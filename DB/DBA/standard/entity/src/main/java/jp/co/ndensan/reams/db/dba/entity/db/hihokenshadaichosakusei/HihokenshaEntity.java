@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
@@ -55,7 +54,7 @@ public class HihokenshaEntity {
     private RString telephoneNo1;
     private RString telephoneNo2;
     private RString jushoTitle;
-    private AtenaJusho jusho;
+    private RString jusho;
     private ZenkokuJushoCode zenkokuJushoCode;
     private RString gyoseikuTitle;
     private GyoseikuCode gyoseikuCode;
