@@ -154,15 +154,18 @@ public class NinteichosaItakusakiMaster {
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(NinteichosaItakusakiMasterDiv div, IDownLoadServletResponse response) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
-        CsvWriter<NinteichosaItakusakiJohoCsvEntity> csvWriter = new CsvWriter.InstanceBuilder(filePath).canAppend(true).
-                setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).setNewLine(NewLine.CRLF).hasHeader(true).build();
-        for (dgChosainIchiran_Row row : div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource()) {
-            csvWriter.writeLine(converterDataSourceFromToCsvEntity(div, row));
+        try (CsvWriter<NinteichosaItakusakiJohoCsvEntity> csvWriter = new CsvWriter.InstanceBuilder(filePath).canAppend(true).
+                setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+            int rowIndex = 0;
+            for (dgChosainIchiran_Row row : div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource()) {
+                csvWriter.writeLine(converterDataSourceFromToCsvEntity(div, row, rowIndex));
+                rowIndex++;
+            }
         }
-        csvWriter.close();
         FilesystemName sharedFileName = new FilesystemName(CSVファイル名);
         RDateTime sharedFileId = SharedFile.copyToSharedFile(new FilesystemPath(filePath), sharedFileName);
-
+        div.getCcdKanryoMessage().setSuccessMessage(
+                new RString(UrInformationMessages.正常終了.getMessage().evaluate()), CSV出力完了, RString.EMPTY);
         return SharedFileDirectAccessDownload.directAccessDownload(sharedFileName, sharedFileId, CSVファイル名, response);
 //        TODO QA #72362
 //        if (!ResponseHolder.isReRequest()) {
@@ -379,10 +382,10 @@ public class NinteichosaItakusakiMaster {
         return false;
     }
 
-    private NinteichosaItakusakiJohoCsvEntity converterDataSourceFromToCsvEntity(NinteichosaItakusakiMasterDiv div, dgChosainIchiran_Row row) {
+    private NinteichosaItakusakiJohoCsvEntity converterDataSourceFromToCsvEntity(
+            NinteichosaItakusakiMasterDiv div, dgChosainIchiran_Row row, int rowIndex) {
         NinteichosaItakusakiJohoCsvEntity csvEntity = new NinteichosaItakusakiJohoCsvEntity();
-        csvEntity.set市町村コード(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString())
-                .get(Integer.valueOf(div.getHdnSelectID().toString())));
+        csvEntity.set市町村コード(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString()).get(rowIndex));
         csvEntity.set市町村(row.getShichoson());
         csvEntity.set調査委託先コード(row.getChosaItakusakiCode().getValue());
         csvEntity.set事業者番号(row.getJigyoshaNo());
