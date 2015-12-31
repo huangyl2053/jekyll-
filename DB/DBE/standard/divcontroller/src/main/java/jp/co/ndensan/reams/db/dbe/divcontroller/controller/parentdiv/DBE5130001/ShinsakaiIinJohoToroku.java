@@ -61,7 +61,7 @@ public class ShinsakaiIinJohoToroku {
      * 画面初期化表示、画面項目に設定されている値をクリアします。。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     public ResponseData onLoad(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
@@ -81,7 +81,7 @@ public class ShinsakaiIinJohoToroku {
      * 「検索する」ボタンを押下、審査会委員情報を取得します。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     public ResponseData onClick_btnKensaku(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
@@ -98,7 +98,7 @@ public class ShinsakaiIinJohoToroku {
      * 審査会委員一覧Gridの行クリックの処理です。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     public ResponseData onClick_shinsaInJohoIchiranGyo(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
@@ -116,7 +116,7 @@ public class ShinsakaiIinJohoToroku {
      * 廃止フラグを選択変更処理です。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     // TODO QA-68
     public ResponseData onChange_haishiFlag(ShinsakaiIinJohoTorokuDiv div) {
@@ -129,7 +129,7 @@ public class ShinsakaiIinJohoToroku {
      * 審査会委員一覧Gridの行ダブルクリック処理です。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     public ResponseData onDoubleClick_shinsaInJohoIchiranGyo(ShinsakaiIinJohoTorokuDiv div) {
         return onClick_btnModifyShinsaInJohoIchiran(div);
@@ -139,7 +139,7 @@ public class ShinsakaiIinJohoToroku {
      * 審査会委員一覧Gridの「修正」ボタン処理です。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     public ResponseData onClick_btnModifyShinsaInJohoIchiran(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
@@ -157,7 +157,7 @@ public class ShinsakaiIinJohoToroku {
      * 「審査会委員一覧の削除」アイコンをクリック処理です。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     public ResponseData onClick_btnDeleteShinsaInJohoIchiran(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
@@ -192,7 +192,7 @@ public class ShinsakaiIinJohoToroku {
      * 「審査会委員を追加する」ボタンを押下します。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     public ResponseData onClick_btnShinsakaiIinAdd(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
@@ -216,7 +216,7 @@ public class ShinsakaiIinJohoToroku {
      * 「補助入力ボタン」ボタン押下します。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     public ResponseData onClick_btnShinsakaiChikuCode(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
@@ -228,7 +228,7 @@ public class ShinsakaiIinJohoToroku {
      * 「所属機関を追加する」ボタンを押下します。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     public ResponseData onClick_btnShozokuKikanAdd(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
@@ -241,7 +241,7 @@ public class ShinsakaiIinJohoToroku {
      * 所属機関一覧Gridの削除ボタンを押下します。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     public ResponseData onClick_btnDeleteShozokuKikanIchiran(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
@@ -259,7 +259,7 @@ public class ShinsakaiIinJohoToroku {
      * 認定調査委託先コード補助入力ボタンを押下します。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     public ResponseData onClick_btnNiteiChosaItakusakiGuide(ShinsakaiIinJohoTorokuDiv div) {
         // TODO ダイアログを表示する.
@@ -272,7 +272,7 @@ public class ShinsakaiIinJohoToroku {
      * 主治医医療機関コード補助入力ボタンを押下します。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     public ResponseData onClick_btnShujiiIryoKikanGuide(ShinsakaiIinJohoTorokuDiv div) {
         // TODO ダイアログを表示する.
@@ -285,7 +285,7 @@ public class ShinsakaiIinJohoToroku {
      * その他機関コード補助入力ボタンを押下します。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     public ResponseData onClick_btnSonotaKikanGuide(ShinsakaiIinJohoTorokuDiv div) {
         // TODO ダイアログを表示する.
@@ -298,7 +298,7 @@ public class ShinsakaiIinJohoToroku {
      * 「入力内容を更新する」ボタンを押下します。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     public ResponseData onClick_btnToroku(ShinsakaiIinJohoTorokuDiv div) {
         ValidationMessageControlPairs validationMessages
@@ -344,7 +344,7 @@ public class ShinsakaiIinJohoToroku {
      * 「入力内容を取消する」ボタンを押下します。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     public ResponseData onClick_btnDelete(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
@@ -367,7 +367,7 @@ public class ShinsakaiIinJohoToroku {
      * 「口座情報を登録する」ボタンを押下します。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     public ResponseData onClick_btnKozaJohoToroku(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
@@ -381,7 +381,7 @@ public class ShinsakaiIinJohoToroku {
      * 「保存する」ボタンを押下します。
      *
      * @param div 介護認定審査会委員情報
-     * @return レスポンス
+     * @return ResponseData
      */
     public ResponseData onClick_btnSave(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
