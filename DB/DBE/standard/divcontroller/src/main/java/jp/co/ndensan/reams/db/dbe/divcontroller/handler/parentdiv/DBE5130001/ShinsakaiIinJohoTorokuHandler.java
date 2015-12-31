@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * ShinsakaiIinJohoToroku のクラスファイル 介護認定審査会委員情報を登録・修正・削除する機能、 削除の場合は論理削除を行う。
+ * 介護認定審査会委員情報のハンドラークラスです。
  */
 public class ShinsakaiIinJohoTorokuHandler {
 
@@ -66,15 +66,21 @@ public class ShinsakaiIinJohoTorokuHandler {
             row.setShimei(shinsakaiIinJoho.get介護認定審査会委員氏名().value());
             row.setKanaShimei(shinsakaiIinJoho.get介護認定審査会委員氏名カナ().value());
             row.setSeibetsu(Seibetsu.toValue(shinsakaiIinJoho.get性別()).get名称());
-            row.getBarthYMD().setValue(new RDate(shinsakaiIinJoho.get生年月日().toString()));
+            if (!shinsakaiIinJoho.get生年月日().isEmpty()) {
+                row.getBarthYMD().setValue(new RDate(shinsakaiIinJoho.get生年月日().toString()));
+            }
             row.setShikakuCode(Sikaku.toValue(shinsakaiIinJoho.get介護認定審査員資格コード().value()).get名称());
             row.setBiko(shinsakaiIinJoho.get備考());
-            row.setJokyo(IsHaishi.toValue(shinsakaiIinJoho.get廃止フラグ()).get名称());
+            if (IsHaishi.廃止.equals(IsHaishi.toValue(shinsakaiIinJoho.get廃止フラグ()))) {
+                row.setJokyo(new RString("廃止"));
+            }
             row.setShinsakaiChikuCode(shinsakaiIinJoho.get担当地区コード().value());
             row.setYubinNo(shinsakaiIinJoho.get郵便番号().value());
             row.setYusoKubun(shinsakaiIinJoho.get審査員郵送区分());
             row.setJusho(shinsakaiIinJoho.get住所().value());
-            row.getHaishiYMD().setValue(new RDate(shinsakaiIinJoho.get廃止年月日().toString()));
+            if (!(shinsakaiIinJoho.get廃止年月日() == null || shinsakaiIinJoho.get廃止年月日().isEmpty())) {
+                row.getHaishiYMD().setValue(new RDate(shinsakaiIinJoho.get廃止年月日().toString()));
+            }
             row.setTelNo1(shinsakaiIinJoho.get電話番号().value());
             row.setFaxNo(shinsakaiIinJoho.getFAX番号().value());
             審査会委員一覧.add(row);
@@ -92,7 +98,9 @@ public class ShinsakaiIinJohoTorokuHandler {
         List<dgShozokuKikanIchiran_Row> 所属機関一覧 = new ArrayList<>();
         for (ShozokuKikanIchiranFinderBusiness 所属機関情報 : list) {
             dgShozokuKikanIchiran_Row row = new dgShozokuKikanIchiran_Row();
-            row.setShokisaiHokenshaNo(所属機関情報.get証記載保険者番号().value());
+            if (所属機関情報.get証記載保険者番号() != null) {
+                row.setShokisaiHokenshaNo(所属機関情報.get証記載保険者番号().value());
+            }
             row.setHokenshaName(所属機関情報.get市町村名称());
             row.getNinteiItakusakiCode().setValue(所属機関情報.get認定調査委託先コード());
             row.getNinteiChosaItakusakiName().setValue(所属機関情報.get認定調査委託先名());
@@ -116,11 +124,14 @@ public class ShinsakaiIinJohoTorokuHandler {
                 div.getDgShinsaInJohoIchiran().getClickedItem().getShinsakaiIinShuryoYMD().getValue());
         div.getTxtShimei().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getShimei());
         div.getTxtKanaShimei().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getKanaShimei());
-        div.getTxtBirthYMD().setValue(
-                new FlexibleDate(div.getDgShinsaInJohoIchiran().getClickedItem().getBarthYMD().getValue().toDateString().toString()));
+        if (div.getDgShinsaInJohoIchiran().getClickedItem().getBarthYMD().getValue() != null) {
+            div.getTxtBirthYMD().setValue(
+                    new FlexibleDate(div.getDgShinsaInJohoIchiran().getClickedItem().getBarthYMD().getValue().toDateString().toString()));
+        }
         div.getRadSeibetsu().setSelectedValue(new RString(div.getDgShinsaInJohoIchiran().getClickedItem().getSeibetsu() + "性"));
         div.getDdlShikakuCode().setSelectedValue(div.getDgShinsaInJohoIchiran().getClickedItem().getShikakuCode());
         div.getCcdshinsakaiChikuCode().load(SubGyomuCode.DBE認定支援, new CodeShubetsu("5001"), new Code(div.getDgShinsaInJohoIchiran().getClickedItem().getShinsakaiChikuCode()));
+//      TODO URZ.CodeInput エラー
         div.setHdnTxtSchemaName(new RString("rgdb"));
         div.setHdnTxtSubGyomuCode(new RString("DBE"));
         div.setHdnTxtCodeShubetsu(new RString("5001"));
@@ -190,6 +201,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getTxtHaishiYMD().setDisabled(false);
         div.getTxtTelNo1().setDisabled(false);
         div.getTxtFaxNo().setDisabled(false);
+        div.getBtnDelete().setDisabled(false);
         div.getBtnToroku().setDisabled(false);
         div.getBtnShinsakaiIinAdd().setDisabled(true);
     }
@@ -221,20 +233,6 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getTxtHaishiYMD().clearValue();
         div.getTxtTelNo1().clearDomain();
         div.getTxtFaxNo().clearDomain();
-    }
-
-    /**
-     * 審査会委員詳細情報入力されだ審査会委員コードが重複コードを判断する。
-     *
-     * @return is重複コード
-     */
-    public boolean is重複コード() {
-        for (dgShinsaInJohoIchiran_Row row : div.getDgShinsaInJohoIchiran().getDataSource()) {
-            if (div.getTxtShinsainCode().getValue().equals(row.getShinsainCode())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
@@ -322,6 +320,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getDdlYusoKubun().setDisabled(true);
         div.getTxtJusho().clearDomain();
         div.getTxtJusho().setDisabled(true);
+//      TODO QA-68
         div.getTxtHaishiFlag().setValue(new RString("有効"));
         div.getTxtHaishiFlag().setDisabled(true);
         div.getTxtHaishiYMD().clearValue();

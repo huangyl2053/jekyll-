@@ -39,7 +39,7 @@ public class KaigoNinteiShinsakaiIinShozokuKikanJohoManager {
      * 介護認定審査会委員所属機関情報{@link KaigoNinteiShinsakaiIinShozokuKikanJoho}を保存します。
      *
      * @param 介護認定審査会委員所属機関情報 {@link KaigoNinteiShinsakaiIinShozokuKikanJoho}
-     * @return 更新件数 更新結果の件数を返します。
+     * @return 更新あり:true、更新なし:false。
      */
     @Transaction
     public boolean save介護認定審査会委員所属機関情報(KaigoNinteiShinsakaiIinShozokuKikanJoho 介護認定審査会委員所属機関情報) {
@@ -54,7 +54,7 @@ public class KaigoNinteiShinsakaiIinShozokuKikanJohoManager {
      * 介護認定審査会委員所属機関情報{@link KaigoNinteiShinsakaiIinShozokuKikanJoho}を削除します。
      *
      * @param 介護認定審査会委員所属機関情報 {@link KaigoNinteiShinsakaiIinShozokuKikanJoho}
-     * @return 物理削除件数 物理削除結果の件数を返します。
+     * @return 更新あり:true、更新なし:false
      */
     @Transaction
     public boolean deletePhysical介護認定審査会委員所属機関情報(KaigoNinteiShinsakaiIinShozokuKikanJoho 介護認定審査会委員所属機関情報) {
