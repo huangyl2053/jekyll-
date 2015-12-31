@@ -160,7 +160,7 @@ public class NinteiChosainMasterHandler {
         if (codeList != null && 0 < codeList.size()) {
             row.setChiku(codeList.get(0).getコード名称());
         }
-        row.setChosainShikaku(Sikaku.toValue(chosainShikaku).get名称());
+        row.setChosainShikaku(RString.isNullOrEmpty(chosainShikaku) ? RString.EMPTY : Sikaku.toValue(chosainShikaku).get名称());
         row.setChosainShikakuCode(chosainShikaku);
         TextBoxNum chosaKanoNinzu = new TextBoxNum();
         chosaKanoNinzu.setValue(new Decimal(chosaKanoNinzuPerMonth));
