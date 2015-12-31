@@ -236,10 +236,9 @@ public class NinteiShinsakaiKaisaibashoToroku {
                             kaisaibashoCode.toString()));
                 }
             }
-            ShinsakaiKaisaiBashoJoho shinsakaiKaisaiBashoJoho = ShinsakaiKaisaiBashoJohoManager
+            if (ShinsakaiKaisaiBashoJohoManager
                     .createInstance()
-                    .get介護認定審査会開催場所情報(kaisaibashoCode).records().get(0);
-            if (shinsakaiKaisaiBashoJoho != null) {
+                    .get介護認定審査会開催場所情報(kaisaibashoCode) != null) {
                 throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(
                         kaisaibashoCode.toString()));
             }
