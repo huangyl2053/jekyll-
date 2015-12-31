@@ -546,8 +546,8 @@ public class ShinsakaiIinJohoToroku {
 
     private List<dgShinsaInJohoIchiran_Row> set審査会委員一覧By更新モード(ShinsakaiIinJohoTorokuDiv div) {
         List<dgShinsaInJohoIchiran_Row> 審査会委員一覧情報 = div.getDgShinsaInJohoIchiran().getDataSource();
-        int count = div.getDgShinsaInJohoIchiran().getGridSetting().selectedRowCount();
-        dgShinsaInJohoIchiran_Row row = 審査会委員一覧情報.get(count);
+        int count = div.getDgShinsaInJohoIchiran().getClickedRowId();
+        dgShinsaInJohoIchiran_Row row = div.getDgShinsaInJohoIchiran().getClickedItem();
 
         if (!状態_追加.equals(row.getStatus())) {
             row.setStatus(状態_修正);
@@ -575,9 +575,11 @@ public class ShinsakaiIinJohoToroku {
     }
 
     private void set所属機関一覧情報(ShinsakaiIinJohoTorokuDiv div) {
-        List<ShozokuKikanIchiranFinderBusiness> 所属機関一覧 = finder
-                .get所属機関一覧情報(new ShinsakaiIinJohoMapperParameter(
-                                div.getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode())).records();
+        List<ShozokuKikanIchiranFinderBusiness> 所属機関一覧 = new ArrayList<>();
+//        if (状態_追加.equals(div.getDgShinsaInJohoIchiran().getClickedItem().getStatus())) {
+//          TODO QA-381,QA250
+        所属機関一覧 = finder.get所属機関一覧情報(new ShinsakaiIinJohoMapperParameter(
+                div.getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode())).records();
         div.getDgShozokuKikanIchiran().setDataSource(createHandOf(div).setShozokuKikanIchiranDiv(所属機関一覧));
     }
 
