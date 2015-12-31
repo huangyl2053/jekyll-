@@ -251,6 +251,7 @@ public class ChosainSearchDiv extends Panel {
 
     // </editor-fold>
     public void clear() {
+        this.getCcdHokenshaList().loadHokenshaList();
         this.getRadSearchChosainJokyo().setSelectedIndex(0);
         this.getTxtSearchChosaItakusakiCodeFrom().clearValue();
         this.getTxtSearchChosaItakusakiCodeTo().clearValue();

@@ -198,12 +198,12 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
     /**
      * 履歴番号を取得します。
      *
-     * @param 被保険者番号 HihokenshaNo
-     * @return List<DbT7037ShoKofuKaishuEntity>
+     * @param 被保険者番号 被保険者番号
+     * @return DbT7037ShoKofuKaishuEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public List<DbT7037ShoKofuKaishuEntity> getRirekiNo(
+    public DbT7037ShoKofuKaishuEntity getRirekiNo(
             HihokenshaNo 被保険者番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
 
@@ -213,8 +213,9 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
                 table(DbT7037ShoKofuKaishu.class).
                 where(
                         eq(hihokenshaNo, 被保険者番号)).
-                order(new OrderBy(hihokenshaNo, Order.DESC, NullsOrder.LAST)).
-                toList(DbT7037ShoKofuKaishuEntity.class);
+                order(new OrderBy(rirekiNo, Order.DESC, NullsOrder.LAST)).
+                limit(1).
+                toObject(DbT7037ShoKofuKaishuEntity.class);
     }
 
     /**
@@ -246,10 +247,10 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
     public int updateShoKaishuKanri(DbT7037ShoKofuKaishuEntity entity) {
         return session.getMapper(IDbT7037ShoKofuKaishuMapper.class).updateShoKaishuKanri(entity);
     }
-    
+
     /**
      * DbT7037ShoKofuKaishuEntityを更新します。
-     * 
+     *
      * @param entity 証交付回収テーブルのエンティティクラスです
      * @return 更新件数
      */

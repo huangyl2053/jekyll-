@@ -9,10 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * RoreiFukushiNenkinShokai のクラスファイル 
- * 
+ * RoreiFukushiNenkinShokai のクラスファイル
+ *
  * @author 自動生成
  */
 public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiNenkinShokaiDiv {
@@ -27,12 +30,10 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     private panelRirekiDiv panelRireki;
     @JsonProperty("panelInput")
     private panelInputDiv panelInput;
-    @JsonProperty("hihokenshaNo")
-    private RString hihokenshaNo;
     @JsonProperty("shikibetsuCode")
     private RString shikibetsuCode;
-    @JsonProperty("model")
-    private RString model;
+    @JsonProperty("hihokenshaNo")
+    private RString hihokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -77,24 +78,6 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     }
 
     /*
-     * gethihokenshaNo
-     * @return hihokenshaNo
-     */
-    @JsonProperty("hihokenshaNo")
-    public RString getHihokenshaNo() {
-        return hihokenshaNo;
-    }
-
-    /*
-     * sethihokenshaNo
-     * @param hihokenshaNo hihokenshaNo
-     */
-    @JsonProperty("hihokenshaNo")
-    public void setHihokenshaNo(RString hihokenshaNo) {
-        this.hihokenshaNo = hihokenshaNo;
-    }
-
-    /*
      * getshikibetsuCode
      * @return shikibetsuCode
      */
@@ -113,21 +96,21 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     }
 
     /*
-     * getmodel
-     * @return model
+     * gethihokenshaNo
+     * @return hihokenshaNo
      */
-    @JsonProperty("model")
-    public RString getModel() {
-        return model;
+    @JsonProperty("hihokenshaNo")
+    public RString getHihokenshaNo() {
+        return hihokenshaNo;
     }
 
     /*
-     * setmodel
-     * @param model model
+     * sethihokenshaNo
+     * @param hihokenshaNo hihokenshaNo
      */
-    @JsonProperty("model")
-    public void setModel(RString model) {
-        this.model = model;
+    @JsonProperty("hihokenshaNo")
+    public void setHihokenshaNo(RString hihokenshaNo) {
+        this.hihokenshaNo = hihokenshaNo;
     }
 
     /*

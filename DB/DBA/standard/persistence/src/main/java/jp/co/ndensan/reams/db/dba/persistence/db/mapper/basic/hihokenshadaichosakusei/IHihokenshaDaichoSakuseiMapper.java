@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 
 /**
  * 被保険者台帳のマッパーインタフェースです。
@@ -22,7 +23,7 @@ public interface IHihokenshaDaichoSakuseiMapper {
      * @param parameter 被保険者台帳パラメータ
      * @return ShisetsuNyutaishoEntity 検索結果の{@link ShisetsuNyutaishoEntity}
      */
-    ShisetsuNyutaishoEntity getShisetsuNyutaisho(HihokenshaDaichoSakuseiParameter parameter);
+    List<ShisetsuNyutaishoEntity> getShisetsuNyutaisho(HihokenshaDaichoSakuseiParameter parameter);
 
     /**
      * DbT7060KaigoJigyoshaEntity 介護事業者テーブルのエンティティ
@@ -39,4 +40,12 @@ public interface IHihokenshaDaichoSakuseiMapper {
      * @return ShisetsuNyutaishoEntity 検索結果の{@link ShisetsuNyutaishoEntity}
      */
     List<ShisetsuNyutaishoEntity> getSeikatsuHogoJukyusha(HihokenshaDaichoSakuseiParameter parameter);
+
+    /**
+     * DbT1001HihokenshaDaichoEntity 被保険者台帳管理情報のエンティティ
+     *
+     * @param parameter 被保険者台帳パラメータ
+     * @return DbT1001HihokenshaDaichoEntity 検索結果の{@link DbT1001HihokenshaDaichoEntity}
+     */
+    List<DbT1001HihokenshaDaichoEntity> getHihokenshaDaicho(HihokenshaDaichoSakuseiParameter parameter);
 }

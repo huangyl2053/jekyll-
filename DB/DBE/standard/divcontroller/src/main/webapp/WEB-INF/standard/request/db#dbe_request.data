@@ -59,6 +59,10 @@ dbe/db/dbe/NinteiChosainMaster/onBlur_txtChiku
 dbe/db/dbe/NinteiChosainMaster/onBlur_txtChosaItakusaki
 dbe/db/dbe/NinteiChosainMaster/onBlur_txtShichoson
 dbe/db/dbe/NinteiChosainMaster/onClick_btnBackIchiran
+dbe/db/dbe/NinteiChosainMaster/onClick_btnBackIchiran_Itakusaki
+dbe/db/dbe/NinteiChosainMaster/onClick_btnBackItakusakiMasterToComplete
+dbe/db/dbe/NinteiChosainMaster/onClick_btnBackItakusakiMasterToIchiran
+dbe/db/dbe/NinteiChosainMaster/onClick_btnBackItakusakiMasterToToroku
 dbe/db/dbe/NinteiChosainMaster/onClick_btnBackSearch
 dbe/db/dbe/NinteiChosainMaster/onClick_btnClearKensakuJoken
 dbe/db/dbe/NinteiChosainMaster/onClick_btnInsert

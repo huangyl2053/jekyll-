@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5910001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
@@ -21,8 +23,8 @@ public class IkenshoShujiiIchiranDiv extends PanelBatchParameter {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlShichosonCode")
-    private DropDownList ddlShichosonCode;
+    @JsonProperty("ccdHokensha")
+    private HokenshaListDiv ccdHokensha;
     @JsonProperty("txtIryoKikanCodeFrom")
     private TextBoxCode txtIryoKikanCodeFrom;
     @JsonProperty("lblFromTo1")
@@ -49,21 +51,12 @@ public class IkenshoShujiiIchiranDiv extends PanelBatchParameter {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getddlShichosonCode
-     * @return ddlShichosonCode
+     * getccdHokensha
+     * @return ccdHokensha
      */
-    @JsonProperty("ddlShichosonCode")
-    public DropDownList getDdlShichosonCode() {
-        return ddlShichosonCode;
-    }
-
-    /*
-     * setddlShichosonCode
-     * @param ddlShichosonCode ddlShichosonCode
-     */
-    @JsonProperty("ddlShichosonCode")
-    public void setDdlShichosonCode(DropDownList ddlShichosonCode) {
-        this.ddlShichosonCode = ddlShichosonCode;
+    @JsonProperty("ccdHokensha")
+    public IHokenshaListDiv getCcdHokensha() {
+        return ccdHokensha;
     }
 
     /*

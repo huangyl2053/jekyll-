@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001;
 
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9030001.NinteichosaItakusakiMasterHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoManager;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
@@ -71,7 +72,10 @@ public enum NinteichosaItakusakiMasterDivSpec implements IPredicate<NinteichosaI
                  */
                 @Override
                 public boolean apply(NinteichosaItakusakiMasterDiv div) {
-                    return div.get状態().equals(new RString("その他"));
+                    if (div.get状態().equals(new RString("追加")) || div.get状態().equals(new RString("修正"))) {
+                        return getHandler(div).is調査委託先情報登録エリア編集有り();
+                    }
+                    return true;
                 }
             },
     市町村の合法性チェック {
@@ -97,11 +101,17 @@ public enum NinteichosaItakusakiMasterDivSpec implements IPredicate<NinteichosaI
                  */
                 @Override
                 public boolean apply(NinteichosaItakusakiMasterDiv div) {
-                    NinteichosaItakusakiJohoManager manager = NinteichosaItakusakiJohoManager.createInstance();
-                    int 件数 = manager.countByKey(new LasdecCode(div.getChosaitakusakiJohoInput().getTxtShichoson().getValue()),
-                            div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue());
-                    return 0 == 件数;
-
+                    if (div.get状態().equals(new RString("追加"))) {
+                        NinteichosaItakusakiJohoManager manager = NinteichosaItakusakiJohoManager.createInstance();
+                        int 件数 = manager.countByKey(new LasdecCode(div.getChosaitakusakiJohoInput().getTxtShichoson().getValue()),
+                                div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue());
+                        return 0 == 件数;
+                    }
+                    return true;
                 }
             };
+
+    private static NinteichosaItakusakiMasterHandler getHandler(NinteichosaItakusakiMasterDiv div) {
+        return new NinteichosaItakusakiMasterHandler(div);
+    }
 }

@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -21,8 +23,8 @@ public class ChosainSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlSearchShichoson")
-    private DropDownList ddlSearchShichoson;
+    @JsonProperty("hokenshaList")
+    private HokenshaListDiv hokenshaList;
     @JsonProperty("txtSearchChosaItakusakiCodeFrom")
     private TextBoxCode txtSearchChosaItakusakiCodeFrom;
     @JsonProperty("txtSearchChosaItakusakiCodeTo")
@@ -57,21 +59,12 @@ public class ChosainSearchDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getddlSearchShichoson
-     * @return ddlSearchShichoson
+     * gethokenshaList
+     * @return hokenshaList
      */
-    @JsonProperty("ddlSearchShichoson")
-    public DropDownList getDdlSearchShichoson() {
-        return ddlSearchShichoson;
-    }
-
-    /*
-     * setddlSearchShichoson
-     * @param ddlSearchShichoson ddlSearchShichoson
-     */
-    @JsonProperty("ddlSearchShichoson")
-    public void setDdlSearchShichoson(DropDownList ddlSearchShichoson) {
-        this.ddlSearchShichoson = ddlSearchShichoson;
+    @JsonProperty("hokenshaList")
+    public IHokenshaListDiv getHokenshaList() {
+        return hokenshaList;
     }
 
     /*

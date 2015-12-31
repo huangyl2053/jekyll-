@@ -5,6 +5,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosainmaster.NinteiChosainMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.Sikaku;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.ChosainJohoInputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.NinteiChosainMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.dgChosainIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -39,6 +40,7 @@ public class NinteiChosainMasterHandler {
     private static final RString WOMAN = new RString("2");
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_削除 = new RString("削除");
+    private static final RString 状態_修正 = new RString("修正");
     private static final RString ハイフン = new RString("-");
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
@@ -57,20 +59,11 @@ public class NinteiChosainMasterHandler {
      * 画面初期化処理です。
      */
     public void load() {
-        // TODO 市町村　ドロップダウンリスト 共通部品
-//        IUrControlData controlData = UrControlDataFactory.createInstance();
-//        IAssociationFinder associationFinder = AssociationFinderFactory.createInstance();
-//        Association association = associationFinder.getAssociation();
-//        ICityAtesakiFinder cityAtesakiFinder = CityAtesakiService.createCityAtesakiFinder();
-//        ShichosonAtesaki shichosonAtesaki = cityAtesakiFinder.get市町村宛先(association.get地方公共団体コード());
 
-        List<KeyValueDataSource> shichosonDataSource = new ArrayList<>();
-        shichosonDataSource.add(new KeyValueDataSource(new RString("000001"), new RString("市町村一")));
-        shichosonDataSource.add(new KeyValueDataSource(new RString("000002"), new RString("市町村二")));
-        shichosonDataSource.add(new KeyValueDataSource(new RString("000003"), new RString("市町村三")));
-        div.getDdlSearchShichoson().setDataSource(shichosonDataSource);
+        div.getHokenshaList().loadHokenshaList();
         List<UzT0007CodeEntity> codeList = CodeMaster.getCodeRireki(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU);
         List<KeyValueDataSource> chikuDataSource = new ArrayList<>();
+        chikuDataSource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (UzT0007CodeEntity codeEntity : codeList) {
             chikuDataSource.add(new KeyValueDataSource(codeEntity.getコード().getKey(), codeEntity.getコード名称()));
         }
@@ -81,7 +74,7 @@ public class NinteiChosainMasterHandler {
      * 検索条件入力項目をクリアします。
      */
     public void clearKensakuJoken() {
-        div.getDdlSearchShichoson().setSelectedIndex(0);
+        div.getHokenshaList().loadHokenshaList();
         div.getTxtSearchChosaItakusakiCodeFrom().clearValue();
         div.getTxtSearchChosaItakusakiCodeTo().clearValue();
         div.getTxtSearchChosaItakusakiMeisho().clearValue();
@@ -167,7 +160,7 @@ public class NinteiChosainMasterHandler {
         if (codeList != null && 0 < codeList.size()) {
             row.setChiku(codeList.get(0).getコード名称());
         }
-        row.setChosainShikaku(Sikaku.toValue(chosainShikaku).get名称());
+        row.setChosainShikaku(RString.isNullOrEmpty(chosainShikaku) ? RString.EMPTY : Sikaku.toValue(chosainShikaku).get名称());
         row.setChosainShikakuCode(chosainShikaku);
         TextBoxNum chosaKanoNinzu = new TextBoxNum();
         chosaKanoNinzu.setValue(new Decimal(chosaKanoNinzuPerMonth));
@@ -275,6 +268,8 @@ public class NinteiChosainMasterHandler {
             div.getChosainIchiran().getDgChosainIchiran().getDataSource().add(row);
         } else if (状態_削除.equals(eventJotai) && 状態_追加.equals(row.getJotai())) {
             div.getChosainIchiran().getDgChosainIchiran().getDataSource().remove(index);
+        } else if (状態_修正.equals(eventJotai) && 状態_追加.equals(row.getJotai())) {
+            div.getChosainIchiran().getDgChosainIchiran().getDataSource().set(index, row);
         } else {
             row.setJotai(eventJotai);
             div.getChosainIchiran().getDgChosainIchiran().getDataSource().set(index, row);
@@ -296,7 +291,7 @@ public class NinteiChosainMasterHandler {
     private RString editYubinNo(RString yubinNo) {
         RStringBuilder yubinNoSb = new RStringBuilder();
         if (yubinNo.contains(ハイフン)) {
-            yubinNoSb.append(yubinNo.substring(0, INDEX_4));
+            yubinNoSb.append(yubinNo.substring(0, INDEX_3));
             yubinNoSb.append(yubinNo.substring(INDEX_4));
         } else {
             yubinNoSb.append(yubinNo);
@@ -349,6 +344,8 @@ public class NinteiChosainMasterHandler {
             div.getChosainJohoInput().getTxtShichosonmei().setValue(new RString("市町村三"));
         } else if (new RString("000004").equals(shichoson)) {
             div.getChosainJohoInput().getTxtShichosonmei().setValue(new RString("市町村四"));
+        } else {
+            div.getChosainJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
         }
     }
 
@@ -356,10 +353,17 @@ public class NinteiChosainMasterHandler {
      * 地区名を設定します。
      */
     public void setTxtChikuMei() {
-        UzT0007CodeEntity code = CodeMaster.getCode(
-                SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(div.getChosainJohoInput().getTxtChiku().getValue()));
-        if (code != null) {
-            div.getChosainJohoInput().getTxtChikuMei().setValue(code.getコード名称());
+        List<UzT0007CodeEntity> codeList = CodeMaster.getCodeRireki(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU);
+        boolean isEmpty = true;
+        for (UzT0007CodeEntity uzT0007CodeEntity : codeList) {
+            if (uzT0007CodeEntity.getコード().value().equals(div.getChosainJohoInput().getTxtChiku().getValue())) {
+                div.getChosainJohoInput().getTxtChikuMei().setValue(uzT0007CodeEntity.getコード名称());
+                isEmpty = false;
+                break;
+            }
+        }
+        if (isEmpty) {
+            div.getChosainJohoInput().getTxtChikuMei().setValue(RString.EMPTY);
         }
     }
 
@@ -436,5 +440,34 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getTxtFaxNo().clearDomain();
         div.getChosainJohoInput().getTextBoxShozokuKikan().clearDomain();
         div.getChosainJohoInput().getRadChosainJokyo().setSelectedIndex(0);
+    }
+
+    /**
+     * 調査員情報登録エリアを編集します。
+     *
+     * @return 編集結果
+     */
+    public RString getInputDiv() {
+        RStringBuilder inputDiv = new RStringBuilder();
+        ChosainJohoInputDiv chosainJohoInputDiv = div.getChosainJohoInput();
+        inputDiv.append(chosainJohoInputDiv.getTxtShichoson().getValue());
+        inputDiv.append(chosainJohoInputDiv.getTxtShichosonmei().getValue());
+        inputDiv.append(chosainJohoInputDiv.getTxtChosainCode().getValue());
+        inputDiv.append(chosainJohoInputDiv.getTxtChosaItakusaki().getValue());
+        inputDiv.append(chosainJohoInputDiv.getTxtChosaItakusakiMeisho().getValue());
+        inputDiv.append(chosainJohoInputDiv.getTxtChosainShimei().getValue());
+        inputDiv.append(chosainJohoInputDiv.getTxtChosainKanaShimei().getValue());
+        inputDiv.append(chosainJohoInputDiv.getRadSeibetsu().getSelectedKey());
+        inputDiv.append(chosainJohoInputDiv.getTxtChiku().getValue());
+        inputDiv.append(chosainJohoInputDiv.getDdlChosainShikaku().getSelectedKey());
+        Decimal chosaKanoNinzu = chosainJohoInputDiv.getTxtChosaKanoNinzu().getValue();
+        inputDiv.append(chosaKanoNinzu == null ? RString.EMPTY : chosaKanoNinzu);
+        inputDiv.append(chosainJohoInputDiv.getTxtYubinNo().getValue().value());
+        inputDiv.append(chosainJohoInputDiv.getTxtJusho().getDomain().value());
+        inputDiv.append(chosainJohoInputDiv.getTxtTelNo().getDomain().value());
+        inputDiv.append(chosainJohoInputDiv.getTxtFaxNo().getDomain().value());
+        inputDiv.append(chosainJohoInputDiv.getTextBoxShozokuKikan().getDomain().value());
+        inputDiv.append((chosainJohoInputDiv.getRadChosainJokyo().getSelectedKey()));
+        return inputDiv.toRString();
     }
 }

@@ -24,7 +24,7 @@ public class IkenshoShujiiIchiranFlow extends BatchFlowBase<IkenshoShujiiIchiran
     private static final String REPORT_PROCESS = "reportProcess"; //@Stepの定数はメソッドの近くに置くと見やすくていい。
 
     @Step(REPORT_PROCESS)
-    protected IBatchFlowCommand reportProcess() {
+    IBatchFlowCommand reportProcess() {
         return loopBatch(IkenshoShujiiIchiranProcess.class)
                 .arguments(getParameter().to主治医一覧情報プロセスparameter())
                 .define();

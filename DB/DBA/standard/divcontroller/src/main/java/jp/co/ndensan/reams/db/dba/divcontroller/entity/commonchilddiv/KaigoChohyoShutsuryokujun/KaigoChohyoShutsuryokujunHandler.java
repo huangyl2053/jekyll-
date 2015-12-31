@@ -18,8 +18,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KaigoChohyoShutsuryokujunHandler {
 
     private final KaigoChohyoShutsuryokujunDiv div;
-    private static final RString 出力順 = new RString("出力順");
-    private static final RString 改頁 = new RString("改頁");
 
     /**
      * コンストラクタです。

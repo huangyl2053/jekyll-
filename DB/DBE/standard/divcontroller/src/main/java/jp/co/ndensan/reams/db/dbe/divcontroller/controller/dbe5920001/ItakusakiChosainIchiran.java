@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe5920001;
 
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.itakusakichosainichiran.ItakusakiChosainIchiranBatchParamter;
-import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5920001.ItakusakiChosainIchiranDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -25,14 +24,14 @@ public class ItakusakiChosainIchiran {
      * @return ResponseData<ItakusakiChosainIchiranDiv>
      */
     public ResponseData<ItakusakiChosainIchiranDiv> onload(ItakusakiChosainIchiranDiv div) {
-        // TODO 董亜彬 業務Config取得方針不明、QA提出中
-
+        div.getHokensha().loadHokenshaList();
         return ResponseData.of(div).respond();
 
     }
-    
+
     /**
      * 委託先コードと調査員コードの大小関係を比較です。
+     *
      * @param div 画面情報DIV
      * @return ResponseData<ItakusakiChosainIchiranDiv>
      */

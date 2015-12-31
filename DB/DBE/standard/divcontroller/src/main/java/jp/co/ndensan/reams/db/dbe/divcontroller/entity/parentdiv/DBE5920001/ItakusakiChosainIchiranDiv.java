@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5920001;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
@@ -15,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 /**
  * ItakusakiChosainIchiran のクラスファイル
  *
+ * @author 自動生成
  */
 public class ItakusakiChosainIchiranDiv extends PanelBatchParameter {
 
@@ -25,8 +28,6 @@ public class ItakusakiChosainIchiranDiv extends PanelBatchParameter {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlShichosonCode")
-    private DropDownList ddlShichosonCode;
     @JsonProperty("txtIryoKikanCodeFrom")
     private TextBoxCode txtIryoKikanCodeFrom;
     @JsonProperty("lblFromTo1")
@@ -39,12 +40,14 @@ public class ItakusakiChosainIchiranDiv extends PanelBatchParameter {
     private Label lblFromTo2;
     @JsonProperty("txtShujiiCodeTo")
     private TextBoxCode txtShujiiCodeTo;
-    @JsonProperty("radJyokyo")
-    private RadioButton radJyokyo;
     @JsonProperty("ddlOutputSort")
     private DropDownList ddlOutputSort;
+    @JsonProperty("radJyokyo")
+    private RadioButton radJyokyo;
     @JsonProperty("ddlNextpage")
     private DropDownList ddlNextpage;
+    @JsonProperty("Hokensha")
+    private HokenshaListDiv Hokensha;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -52,24 +55,6 @@ public class ItakusakiChosainIchiranDiv extends PanelBatchParameter {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getddlShichosonCode
-     * @return ddlShichosonCode
-     */
-    @JsonProperty("ddlShichosonCode")
-    public DropDownList getDdlShichosonCode() {
-        return ddlShichosonCode;
-    }
-
-    /*
-     * setddlShichosonCode
-     * @param ddlShichosonCode ddlShichosonCode
-     */
-    @JsonProperty("ddlShichosonCode")
-    public void setDdlShichosonCode(DropDownList ddlShichosonCode) {
-        this.ddlShichosonCode = ddlShichosonCode;
-    }
-
     /*
      * gettxtIryoKikanCodeFrom
      * @return txtIryoKikanCodeFrom
@@ -179,24 +164,6 @@ public class ItakusakiChosainIchiranDiv extends PanelBatchParameter {
     }
 
     /*
-     * getradJyokyo
-     * @return radJyokyo
-     */
-    @JsonProperty("radJyokyo")
-    public RadioButton getRadJyokyo() {
-        return radJyokyo;
-    }
-
-    /*
-     * setradJyokyo
-     * @param radJyokyo radJyokyo
-     */
-    @JsonProperty("radJyokyo")
-    public void setRadJyokyo(RadioButton radJyokyo) {
-        this.radJyokyo = radJyokyo;
-    }
-
-    /*
      * getddlOutputSort
      * @return ddlOutputSort
      */
@@ -215,6 +182,24 @@ public class ItakusakiChosainIchiranDiv extends PanelBatchParameter {
     }
 
     /*
+     * getradJyokyo
+     * @return radJyokyo
+     */
+    @JsonProperty("radJyokyo")
+    public RadioButton getRadJyokyo() {
+        return radJyokyo;
+    }
+
+    /*
+     * setradJyokyo
+     * @param radJyokyo radJyokyo
+     */
+    @JsonProperty("radJyokyo")
+    public void setRadJyokyo(RadioButton radJyokyo) {
+        this.radJyokyo = radJyokyo;
+    }
+
+    /*
      * getddlNextpage
      * @return ddlNextpage
      */
@@ -230,6 +215,15 @@ public class ItakusakiChosainIchiranDiv extends PanelBatchParameter {
     @JsonProperty("ddlNextpage")
     public void setDdlNextpage(DropDownList ddlNextpage) {
         this.ddlNextpage = ddlNextpage;
+    }
+
+    /*
+     * getHokensha
+     * @return Hokensha
+     */
+    @JsonProperty("Hokensha")
+    public IHokenshaListDiv getHokensha() {
+        return Hokensha;
     }
 
     // </editor-fold>
