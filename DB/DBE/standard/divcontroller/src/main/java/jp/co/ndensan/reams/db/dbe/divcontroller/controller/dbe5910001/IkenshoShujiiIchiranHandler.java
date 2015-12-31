@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe5910001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshoshujiiichiran.IkenshoShujiiIchiranParameter;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiHateiJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiOutputPage;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiOutputSort;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5910001.IkenshoShujiiIchiranDiv;
@@ -42,6 +43,7 @@ public class IkenshoShujiiIchiranHandler {
         改頁.add(new KeyValueDataSource(ShujiiOutputPage.なし.getコード(), ShujiiOutputPage.なし.get名称()));
         div.getDdlNextpage().setDataSource(改頁);
 
+        div.getRadJyokyo().setSelectedKey(ShujiiHateiJokyo.有効のみ.getコード());
         div.getDdlOutputSort().setSelectedKey(ShujiiOutputSort.医療機関コード主治医コード.getコード());
         div.getDdlNextpage().setSelectedKey(ShujiiOutputPage.医療機関コード.getコード());
         div.getDdlNextpage().setReadOnly(false);
