@@ -106,9 +106,10 @@ public class TekiyoJogaishaDaichoJohoFinder {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先));
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
+        key.set識別コード(識別コード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         TekiyoJogaiShisetuJyohoParameter parameter = TekiyoJogaiShisetuJyohoParameter.createParamFor識別コード(
-                識別コード, new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
+                ShikibetsuCode.EMPTY, new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
         ITekiyoJogaiShisetuJyohoMapper daichoJohoMapper = mapperProvider.create(ITekiyoJogaiShisetuJyohoMapper.class);
         ShikibetsuTaishoRelateEntity 宛名情報PSM = daichoJohoMapper.select宛名情報(parameter);
         if (宛名情報PSM == null) {
