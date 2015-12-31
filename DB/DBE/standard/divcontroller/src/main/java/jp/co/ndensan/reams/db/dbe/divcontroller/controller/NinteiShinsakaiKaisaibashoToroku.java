@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
-import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 介護認定審査会開催場所登録Divを制御クラスです。
@@ -208,20 +207,20 @@ public class NinteiShinsakaiKaisaibashoToroku {
         return ResponseData.of(div).respond();
     }
 
-    private SearchResult<ShinsakaiKaisaiBashoJoho> get開催場所一覧(NinteiShinsakaiKaisaibashoTorokuDiv div) {
-        SearchResult<ShinsakaiKaisaiBashoJoho> businessList;
+    private List<ShinsakaiKaisaiBashoJoho> get開催場所一覧(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+        List<ShinsakaiKaisaiBashoJoho> businessList;
         ShinsakaiKaisaiBashoJohoManager manager = ShinsakaiKaisaiBashoJohoManager.createInstance();
         if (デフォルト検索条件.equals(div.getRadHyojiJoken().getSelectedKey())) {
             businessList = manager.
                     get介護認定審査会開催場所情報一覧(GogitaiJohoMapperParameter.
-                            createSelectBy審査会開催場所状況(有効));
+                            createSelectBy審査会開催場所状況(有効)).records();
         } else {
             businessList = manager.
                     get介護認定審査会開催場所情報一覧(GogitaiJohoMapperParameter.
-                            createSelectBy審査会開催場所状況(全て));
+                            createSelectBy審査会開催場所状況(全て)).records();
         }
         Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList
-                = Models.create(businessList.records());
+                = Models.create(businessList);
         ViewStateHolder.put(ViewStateKeys.開催場所情報一覧, shinsakaiKaisaiBashoJohoList);
         return businessList;
     }

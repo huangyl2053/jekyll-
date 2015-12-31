@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
-import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 介護認定審査会開催場所登録画面でのバリデーションを管理するハンドラークラスです。
@@ -52,9 +51,9 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
      *
      * @param shinsakaiKaisaiBashoJohoList 介護認定審査会開催場所情報ビジネス
      */
-    public void set介護認定審査会開催場所一覧(SearchResult<ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList) {
+    public void set介護認定審査会開催場所一覧(List<ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList) {
         List<dgKaisaibashoIchiran_Row> rowList = new ArrayList();
-        for (ShinsakaiKaisaiBashoJoho shinsakaiKaisaiBashoJoho : shinsakaiKaisaiBashoJohoList.records()) {
+        for (ShinsakaiKaisaiBashoJoho shinsakaiKaisaiBashoJoho : shinsakaiKaisaiBashoJohoList) {
             dgKaisaibashoIchiran_Row row = new dgKaisaibashoIchiran_Row(RString.EMPTY,
                     shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所コード(),
                     shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所名称(),
