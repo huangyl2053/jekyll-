@@ -3,46 +3,46 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran;
 
-import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.ICodeValueEnumeratedType;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 状況を定義する列挙型です。
+ * 帳票IDを定義する列挙型です。
  */
-public enum JyoukyouType implements ICodeValueEnumeratedType {
+public enum ItakusakiChosainIchiranReportId {
 
     /**
      * 有効のみを表す列挙体です。
      */
-    有効のみ("1"),
-    /**
-     * 無効のみを表す列挙体です。
-     */
-    無効のみ("2"),
-    /**
-     * 全てを表す列挙体です。
-     */
-    全て("3");
+    REPORT_ID("DBE592001");
 
     private final RString code;
 
-    private JyoukyouType(String code) {
+    private ItakusakiChosainIchiranReportId(String code) {
         this.code = new RString(code);
     }
 
-    @Override
-    public RString code() {
-        return code;
+    /**
+     * コードを返します。
+     *
+     * @return コード
+     */
+    public RString getCode() {
+        return this.code;
     }
-
-    @Override
+    
+    /**
+     * name()と同じ文字列をRString型で返します。
+     *
+     * @return name()と同じ文字列を持ったRString
+     */
     public RString toRString() {
         return new RString(this.toString());
     }
+    
 
     /**
      * 該当する列挙型がない場合はnullを返します。
