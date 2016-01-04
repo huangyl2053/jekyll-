@@ -22,8 +22,8 @@ public class NenreiToutatsuYoteishaCheckListBatchParameterSakusei {
     private static final RString CHECKBOX_KEY0 = new RString("key0");
     private static final RString CHECKBOX_KEY1 = new RString("key1");
     private static final RString CHECKBOX_KEY2 = new RString("key2");
-    private static final RString CHECKBOX_KEY3 = new RString("key3");
 
+    // TODO QA319 引数は確認中です。
     public INenreiToutatsuYoteishaCheckListBatchParameter getNenreiToutatsuYoteishaCheckListBatchParameter(
             RString 出力対象, RString 住民種別, FlexibleDate 今回開始日, FlexibleDate 今回終了日, List<RString> 編集方法,
             RString 出力順ID) {
@@ -47,13 +47,9 @@ public class NenreiToutatsuYoteishaCheckListBatchParameterSakusei {
         for (RString key : 編集方法) {
             if (CHECKBOX_KEY0.equals(key)) {
                 項目名付加フラグ = true;
-                連番付加フラグ = true;
-                日付編集フラグ = true;
             } else if (CHECKBOX_KEY1.equals(key)) {
-                項目名付加フラグ = true;
-            } else if (CHECKBOX_KEY2.equals(key)) {
                 連番付加フラグ = true;
-            } else if (CHECKBOX_KEY3.equals(key)) {
+            } else if (CHECKBOX_KEY2.equals(key)) {
                 日付編集フラグ = true;
             }
         }
