@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
  * 旧市町村コード情報のモデルクラスです。
  *
  */
-public class KyuShichosonCodeJohoRelateEntity implements Serializable, Iterable<DbT7056GappeiShichosonEntity> {
+public class KyuShichosonJohoEntities implements Serializable, Iterable<DbT7056GappeiShichosonEntity> {
 
     private final List<DbT7056GappeiShichosonEntity> entities;
     private final boolean gappeiShichoUmuFlag;
@@ -23,18 +23,18 @@ public class KyuShichosonCodeJohoRelateEntity implements Serializable, Iterable<
     /**
      * コンストラクタです。
      */
-    KyuShichosonCodeJohoRelateEntity() {
+    KyuShichosonJohoEntities() {
         entities = Collections.emptyList();
         gappeiShichoUmuFlag = false;
     }
 
-    public KyuShichosonCodeJohoRelateEntity(List<DbT7056GappeiShichosonEntity> entities, boolean contains合併市町村) {
+    public KyuShichosonJohoEntities(List<DbT7056GappeiShichosonEntity> entities, boolean contains合併市町村) {
         this.entities = Collections.unmodifiableList(entities);
         this.gappeiShichoUmuFlag = contains合併市町村;
     }
 
-    public static KyuShichosonCodeJohoRelateEntity empty() {
-        return new KyuShichosonCodeJohoRelateEntity();
+    public static KyuShichosonJohoEntities empty() {
+        return new KyuShichosonJohoEntities();
     }
 
     /**

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiC
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.KyuShichosonCodeJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.KyuShichosonJohoEntities;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7055GappeiJohoDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7056GappeiShichosonDac;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
@@ -83,36 +83,36 @@ public class KyuShichosonCodeFinder {
      *
      * @param 市町村コード 市町村コード
      * @param 導入形態 導入形態
-     * @return KyuShichosonCodeJohoRelateEntityクラス
+     * @return KyuShichosonJohoEntitiesクラス
      */
-    public KyuShichosonCodeJohoRelateEntity getKyuShichosonCodeJoho(LasdecCode 市町村コード, DonyuKeitaiCode 導入形態) {
+    public KyuShichosonJohoEntities getKyuShichosonCodeJoho(LasdecCode 市町村コード, DonyuKeitaiCode 導入形態) {
         if (導入形態.is単一()) {
             return get単一市町村KyuShichosonCodeJoho(市町村コード);
         } else if (導入形態.is広域()) {
             return get広域構成市町村KyuShichosonCodeJoho(市町村コード);
         }
-        return KyuShichosonCodeJohoRelateEntity.empty();
+        return KyuShichosonJohoEntities.empty();
     }
 
-    private KyuShichosonCodeJohoRelateEntity get単一市町村KyuShichosonCodeJoho(LasdecCode 市町村コード) {
+    private KyuShichosonJohoEntities get単一市町村KyuShichosonCodeJoho(LasdecCode 市町村コード) {
         if (!this.hasGappei) {
-            return KyuShichosonCodeJohoRelateEntity.empty();
+            return KyuShichosonJohoEntities.empty();
         }
 
         DbT7055GappeiJohoEntity dbT7055GappeiJohoEntity = dbT7055GappeiJohoDac.selectTopOneByShichosonCode(市町村コード);
         if (dbT7055GappeiJohoEntity == null) {
-            return KyuShichosonCodeJohoRelateEntity.empty();
+            return KyuShichosonJohoEntities.empty();
         }
 
         List<DbT7056GappeiShichosonEntity> dbT7056GappeiShichosonEntitys = dbT7056GappeiShichosonDac.selectAllOrderbyChikiNoDesc();
         if (地域番号_二桁目.compareTo(dbT7055GappeiJohoEntity.getChiikiNo().substring(1, 2)) < 0) {
             List<DbT7055GappeiJohoEntity> dbT7055GappeiJohoEntitys
                     = dbT7055GappeiJohoDac.selectByLtChiikiNo(dbT7055GappeiJohoEntity.getChiikiNo());
-            return new KyuShichosonCodeJohoRelateEntity(
+            return new KyuShichosonJohoEntities(
                     removed旧市町村Had合併OverTwoTimes(dbT7056GappeiShichosonEntitys, dbT7055GappeiJohoEntitys),
                     true);
         }
-        return new KyuShichosonCodeJohoRelateEntity(dbT7056GappeiShichosonEntitys, true);
+        return new KyuShichosonJohoEntities(dbT7056GappeiShichosonEntitys, true);
     }
 
     private List<DbT7056GappeiShichosonEntity> removed旧市町村Had合併OverTwoTimes(List<DbT7056GappeiShichosonEntity> dbT7056GappeiShichosonEntitys,
@@ -128,14 +128,14 @@ public class KyuShichosonCodeFinder {
         return list;
     }
 
-    private KyuShichosonCodeJohoRelateEntity get広域構成市町村KyuShichosonCodeJoho(LasdecCode 市町村コード) {
+    private KyuShichosonJohoEntities get広域構成市町村KyuShichosonCodeJoho(LasdecCode 市町村コード) {
         if (!this.hasGappei) {
-            return KyuShichosonCodeJohoRelateEntity.empty();
+            return KyuShichosonJohoEntities.empty();
         }
 
         DbT7055GappeiJohoEntity dbT7055GappeiJohoEntity = dbT7055GappeiJohoDac.selectTopOneByShichosonCode(市町村コード);
         if (dbT7055GappeiJohoEntity == null) {
-            return KyuShichosonCodeJohoRelateEntity.empty();
+            return KyuShichosonJohoEntities.empty();
         }
 
         List<KoseiShichosonMaster> koseiShichosons = koseiShichosonJohoFinder.get合併旧市町村sBy地域番号(dbT7055GappeiJohoEntity.getChiikiNo());
@@ -143,13 +143,13 @@ public class KyuShichosonCodeFinder {
         if (地域番号_二桁目.compareTo(dbT7055GappeiJohoEntity.getChiikiNo().substring(1, 2)) < 0) {
             List<DbT7055GappeiJohoEntity> dbT7055GappeiJohoEntitys = dbT7055GappeiJohoDac
                     .selectByLtChiikiNo(dbT7055GappeiJohoEntity.getChiikiNo());
-            return new KyuShichosonCodeJohoRelateEntity(create合併市町村ListBy(dbT7055GappeiJohoEntitys, koseiShichosons), true);
+            return new KyuShichosonJohoEntities(create合併市町村ListBy(dbT7055GappeiJohoEntitys, koseiShichosons), true);
         }
         List<DbT7056GappeiShichosonEntity> dbT7056GappeiShichosonEntitys = new ArrayList<>();
         for (KoseiShichosonMaster koseiShichoson : koseiShichosons) {
             dbT7056GappeiShichosonEntitys.add(toDbT7056GappeiShichosonEntity(koseiShichoson));
         }
-        return new KyuShichosonCodeJohoRelateEntity(dbT7056GappeiShichosonEntitys, true);
+        return new KyuShichosonJohoEntities(dbT7056GappeiShichosonEntitys, true);
     }
 
     private List<DbT7056GappeiShichosonEntity> create合併市町村ListBy(List<DbT7055GappeiJohoEntity> dbT7055GappeiJohoEntitys,

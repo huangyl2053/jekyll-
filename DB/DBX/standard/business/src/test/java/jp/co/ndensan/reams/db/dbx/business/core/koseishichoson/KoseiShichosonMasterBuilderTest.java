@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbx.business.core.koseishichoson;
 
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.koseishichosonshisho.KoseiShichosonShishoMaster;
+import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.GappeiKyuShichosonKubun;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7052KoseiShichosonShishoMasterEntityGenerator;
@@ -211,8 +212,10 @@ public class KoseiShichosonMasterBuilderTest extends DbxTestBase {
 
         @Test
         public void 戻り値の合併旧市町村区分は_設定した値と同じ合併旧市町村区分を返す() {
-            business = sut.set合併旧市町村区分(DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_合併旧市町村区分).build();
-            assertThat(business.get合併旧市町村区分(), is(DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_合併旧市町村区分));
+            GappeiKyuShichosonKubun 合併旧市町村区分
+                    = GappeiKyuShichosonKubun.toValue(DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_合併旧市町村区分);
+            business = sut.set合併旧市町村区分(合併旧市町村区分).build();
+            assertThat(business.get合併旧市町村区分(), is(合併旧市町村区分));
         }
 
         @Test

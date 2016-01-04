@@ -17,11 +17,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 public final class ShichosonShikibetsuID implements
         IValueObject<RString>, Comparable<ShichosonShikibetsuID>, IDbColumnMappable, Serializable {
 
+    private static final long serialVersionUID = -2703763889815383528L;
     /**
      * 空の ShichosonShikibetsuID です。
      */
     public static final ShichosonShikibetsuID EMPTY;
-    public static final ShichosonShikibetsuID DEFAULT;
+    public static final ShichosonShikibetsuID KOIKI;
 
     /**
      * 最大長です。
@@ -30,7 +31,7 @@ public final class ShichosonShikibetsuID implements
 
     static {
         EMPTY = new ShichosonShikibetsuID(RString.EMPTY);
-        DEFAULT = new ShichosonShikibetsuID("00");
+        KOIKI = new ShichosonShikibetsuID("00");
         MAX_LENGTH = 2;
     }
 
@@ -99,14 +100,13 @@ public final class ShichosonShikibetsuID implements
         }
         return this.theValue.length() <= MAX_LENGTH;
     }
-    private static final long serialVersionUID = -2703763889815383528L;
 
     /**
-     * デフォルトの値("00")を持つ場合、{@code true}を返します。
+     * 広域保険者の市町村識別IDである場合、{@code true}を返します。
      *
-     * @return デフォルトの値("00")を持つ場合、{@code true}.
+     * @return 広域保険者の市町村識別IDである場合、{@code true}
      */
-    public boolean isDefault() {
-        return Objects.equals(this, DEFAULT);
+    public boolean is広域s() {
+        return Objects.equals(this, KOIKI);
     }
 }

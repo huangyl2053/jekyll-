@@ -41,7 +41,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class ShichosonSecurityJohoFinder {
 
     private static final RString DEFAULT_市町村ＩＤ有効桁数 = new RString("2");
-    private static final RString DEFAULT_市町村識別ID = new RString("00");
     private static final int MAX_市町村識別ID = 99;
     private static final int MIN_市町村識別ID = 1;
     private static final RString 介護事務_120 = new RString("120");
@@ -54,7 +53,7 @@ public class ShichosonSecurityJohoFinder {
     private static final int WORKFLOW_NULL = 0;
     private static final RString AUTHTYPE = new RString("koseiShichosonKengen");
 
-    private final DbT7051KoseiShichosonMasterDac koseiShichosonMasterDac; //〇使用するメソッドはテスト済み
+    private final DbT7051KoseiShichosonMasterDac koseiShichosonMasterDac;
     private final KaigoDonyuKeitaiManager donyuKeitaiManager;
 
     /**
@@ -130,7 +129,7 @@ public class ShichosonSecurityJohoFinder {
 
     private ShichosonJoho create市町村情報By管理情報() {
         ShichosonJoho shichosonJoho = new ShichosonJoho();
-        shichosonJoho.setShichosonShokibetsuID(ShichosonShikibetsuID.DEFAULT);
+        shichosonJoho.setShichosonShokibetsuID(ShichosonShikibetsuID.KOIKI);
         Association finder = AssociationFinderFactory.createInstance().getAssociation();
         shichosonJoho.setShichosonCode(finder.get地方公共団体コード());
         shichosonJoho.setTodofukenMeisho(finder.get都道府県名());
@@ -191,7 +190,7 @@ public class ShichosonSecurityJohoFinder {
 
     private ShichosonSecurityJoho getShichosonSecurityJohoNotNull(RString shichosonShokibetsuID, KaigoDonyuKeitai 導入形態) {
         int 市町村識別ID = Integer.valueOf(shichosonShokibetsuID.toString()).intValue();
-        if (shichosonShokibetsuID.equals(DEFAULT_市町村識別ID)) {
+        if (shichosonShokibetsuID.equals(ShichosonShikibetsuID.KOIKI.value())) {
             return createShichosonSecurityJohoByKanriJoho(導入形態);
         }
         if (MIN_市町村識別ID <= 市町村識別ID && 市町村識別ID <= MAX_市町村識別ID) {

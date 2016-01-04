@@ -123,7 +123,7 @@ public class ShichosonSecurityJohoFinderTest extends DbxTestDacBase {
 
         @Test
         public void getShichosonSecurityJohoは_業務分類が介護事務_導入形態が事務広域_で_市町村識別IDが00の場合_管理情報からShichosonSecurityJohoを生成する() {
-            ShichosonShikibetsuID shichosonShikibetsuID = ShichosonShikibetsuID.DEFAULT;
+            ShichosonShikibetsuID shichosonShikibetsuID = ShichosonShikibetsuID.KOIKI;
             setAutorityItem(shichosonShikibetsuID);
 
             ShichosonSecurityJohoFinder joho = new ShichosonSecurityJohoFinder();

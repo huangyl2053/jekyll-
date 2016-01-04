@@ -13,6 +13,7 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.koseishichosonshisho.KoseiShichosonShishoMaster;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.koseishichosonshisho.KoseiShichosonShishoMasterIdentifier;
+import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.GappeiKyuShichosonKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7052KoseiShichosonShishoMasterEntity;
@@ -43,7 +44,8 @@ public class KoseiShichosonMaster
     private final Models<KoseiShichosonShishoMasterIdentifier, KoseiShichosonShishoMaster> koseiShichosonShishoMaster;
 
     /**
-     * コンストラクタです。<br/>
+     * コンストラクタです。
+     * <p/>
      * 構成市町村マスタの新規作成時に使用します。
      *
      * @param 市町村識別ID 市町村識別ID
@@ -59,7 +61,8 @@ public class KoseiShichosonMaster
     }
 
     /**
-     * コンストラクタです。<br/>
+     * コンストラクタです。
+     * <p/>
      * DBより取得した{@link DbT7051KoseiShichosonMasterEntity}より{@link KoseiShichosonMaster}を生成します。
      *
      * @param entity DBより取得した{@link DbT7051KoseiShichosonMasterEntity}
@@ -76,6 +79,11 @@ public class KoseiShichosonMaster
         this.koseiShichosonShishoMaster = Models.create(koseiShichosonShishoMasterList);
     }
 
+    /**
+     * 指定の {@link DbT7051KoseiShichosonMasterEntity}を保持するインスタンスを生成します。
+     *
+     * @param entity {@link DbT7051KoseiShichosonMasterEntity}
+     */
     public KoseiShichosonMaster(DbT7051KoseiShichosonMasterEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("構成市町村マスタ"));
         this.id = new KoseiShichosonMasterIdentifier(
@@ -311,8 +319,8 @@ public class KoseiShichosonMaster
      *
      * @return 合併旧市町村区分
      */
-    public RString get合併旧市町村区分() {
-        return entity.getGappeiKyuShichosonKubun();
+    public GappeiKyuShichosonKubun get合併旧市町村区分() {
+        return GappeiKyuShichosonKubun.toValue(entity.getGappeiKyuShichosonKubun());
     }
 
     /**
