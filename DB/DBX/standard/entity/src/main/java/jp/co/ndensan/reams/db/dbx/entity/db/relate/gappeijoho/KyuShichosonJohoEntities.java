@@ -28,11 +28,23 @@ public class KyuShichosonJohoEntities implements Serializable, Iterable<DbT7056G
         gappeiShichoUmuFlag = false;
     }
 
+    /**
+     * 指定のlistの要素をすべて保持するインスタンスを生成します。
+     * 合併市町村を含む場合は、第2引数にtrueを設定してください。
+     *
+     * @param entities 全要素
+     * @param contains合併市町村 合併市町村を含むかどうか
+     */
     public KyuShichosonJohoEntities(List<DbT7056GappeiShichosonEntity> entities, boolean contains合併市町村) {
         this.entities = Collections.unmodifiableList(entities);
         this.gappeiShichoUmuFlag = contains合併市町村;
     }
 
+    /**
+     * 空のlistを保持するインスタンスを生成します。
+     *
+     * @return 空のlistを保持するインスタンス
+     */
     public static KyuShichosonJohoEntities empty() {
         return new KyuShichosonJohoEntities();
     }
@@ -46,10 +58,20 @@ public class KyuShichosonJohoEntities implements Serializable, Iterable<DbT7056G
         return gappeiShichoUmuFlag;
     }
 
+    /**
+     * 保持する要素が0件の場合、{@code true}を返します。
+     *
+     * @return 保持する要素が0件の場合{@code true}
+     */
     public boolean isEmpty() {
         return this.entities.isEmpty();
     }
 
+    /**
+     * 要素数を返却します。
+     *
+     * @return 要素数
+     */
     public int size() {
         return this.entities.size();
     }

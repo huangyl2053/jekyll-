@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import javax.ws.rs.HEAD;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichoson;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichoson.*;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
@@ -15,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static jp.co.ndensan.reams.uz.uza.report.util._ReportSourceDataType.DB;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;

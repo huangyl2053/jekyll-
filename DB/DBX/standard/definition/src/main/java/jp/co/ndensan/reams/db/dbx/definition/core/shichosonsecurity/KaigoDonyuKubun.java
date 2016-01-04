@@ -12,7 +12,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum KaigoDonyuKubun {
 
+    /**
+     * 導入済み
+     */
     導入済("1"),
+    /**
+     * 未導入
+     */
     未導入("0");
     private final RString aCode;
 
@@ -20,8 +26,12 @@ public enum KaigoDonyuKubun {
         this.aCode = new RString(code);
     }
 
+    /**
+     * コードを返却します。
+     *
+     * @return コード
+     */
     public RString code() {
         return this.aCode;
     }
-
 }

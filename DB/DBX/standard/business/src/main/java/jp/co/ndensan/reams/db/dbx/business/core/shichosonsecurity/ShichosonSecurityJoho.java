@@ -18,6 +18,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.KoikiType;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class ShichosonSecurityJoho {
 
+    /**
+     * 空を表す{@link ShichosonSecurityJoho}です。
+     */
     public static final ShichosonSecurityJoho EMPTY;
 
     static {
@@ -31,12 +34,12 @@ public final class ShichosonSecurityJoho {
     private final ShichosonJoho 市町村情報;
     private final DonyuKeitaiCode 導入形態コード;
 
-    ShichosonSecurityJoho(KaigoDonyuKubun 介護導入区分,
-                          boolean 支所管理有無フラグ,
-                          KoikiType 広域タイプ,
-                          RString 市町村ＩＤ有効桁数,
-                          ShichosonJoho 市町村情報,
-                          DonyuKeitaiCode 導入形態コード) {
+    private ShichosonSecurityJoho(KaigoDonyuKubun 介護導入区分,
+                                  boolean 支所管理有無フラグ,
+                                  KoikiType 広域タイプ,
+                                  RString 市町村ＩＤ有効桁数,
+                                  ShichosonJoho 市町村情報,
+                                  DonyuKeitaiCode 導入形態コード) {
         this.介護導入区分 = 介護導入区分;
         this.支所管理有無フラグ = 支所管理有無フラグ;
         this.広域タイプ = 広域タイプ;
@@ -70,6 +73,12 @@ public final class ShichosonSecurityJoho {
             throw new UnsupportedOperationException("Not supported yet."); //TODO ツールでは生成できない。手で実装する。
         }
 
+        /**
+         * 導入形態コードを指定してBuilderを生成します。
+         * {@link #build()}二より生成されるinstanceは、ここで指定された導入形態コードを保持します。
+         *
+         * @param 導入形態コード 導入形態コード
+         */
         public Builder(DonyuKeitaiCode 導入形態コード) {
             this.介護導入区分 = KaigoDonyuKubun.導入済;
             this.導入形態コード = 導入形態コード;
@@ -104,7 +113,7 @@ public final class ShichosonSecurityJoho {
         /**
          * 市町村ＩＤ有効桁数を設定します。
          *
-         * @param 市町村ＩＤ有効桁数 市町村ＩＤ有効桁市町村ID有効桁数数
+         * @param 市町村ID有効桁数 市町村ID有効桁数
          * @return builder
          */
         public Builder set市町村ＩＤ有効桁数(RString 市町村ID有効桁数) {

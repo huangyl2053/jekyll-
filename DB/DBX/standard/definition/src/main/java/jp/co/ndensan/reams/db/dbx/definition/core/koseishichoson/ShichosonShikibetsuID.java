@@ -22,6 +22,9 @@ public final class ShichosonShikibetsuID implements
      * 空の ShichosonShikibetsuID です。
      */
     public static final ShichosonShikibetsuID EMPTY;
+    /**
+     * 広域保険者の ShichosonShikibetsuID です。
+     */
     public static final ShichosonShikibetsuID KOIKI;
 
     /**
