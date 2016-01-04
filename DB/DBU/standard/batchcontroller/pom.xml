@@ -19,6 +19,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbuEntity</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbuDefinition</artifactId>
+        </dependency>
 		<!-- DBA -->
 		<!-- DBB -->
 		<!-- DBC -->
