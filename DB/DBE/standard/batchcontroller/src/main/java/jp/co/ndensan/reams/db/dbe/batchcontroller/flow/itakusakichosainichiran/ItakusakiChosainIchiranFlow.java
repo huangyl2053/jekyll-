@@ -29,7 +29,5 @@ public class ItakusakiChosainIchiranFlow extends BatchFlowBase<ItakusakiChosainI
         return loopBatch(ItakusakiChosainIchiranQueryProcess.class)
                 .arguments(getParameter().toProcessParameter())
                 .define();
-
     }
-
 }

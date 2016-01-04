@@ -21,5 +21,5 @@ public interface IItakusakiChosainIchiranMapper {
      * @param paramter 調査委託先・調査員一覧表のMybatisパラメータクラス
      * @return List<ItakusakiChosainIchiranRelateEntity>
      */
-    public List<ItakusakiChosainIchiranRelateEntity> getNinteiChoSain(ItakusakiChosainIchiranMybitisParamter paramter);
+    List<ItakusakiChosainIchiranRelateEntity> getNinteiChoSain(ItakusakiChosainIchiranMybitisParamter paramter);
 }

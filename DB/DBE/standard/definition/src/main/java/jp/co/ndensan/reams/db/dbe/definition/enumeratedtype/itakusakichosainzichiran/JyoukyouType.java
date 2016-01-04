@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran;
 
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.ICodeValueEnumeratedType;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -11,22 +11,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 改頁を定義する列挙型です。
+ * 状況を定義する列挙型です。
  */
-public enum NextPageType implements ICodeValueEnumeratedType {
+public enum JyoukyouType implements ICodeValueEnumeratedType {
 
     /**
      * 有効のみを表す列挙体です。
      */
-    委託先コード("1"),
+    有効のみ("1"),
     /**
      * 無効のみを表す列挙体です。
      */
-    なし("2");
+    無効のみ("2"),
+    /**
+     * 全てを表す列挙体です。
+     */
+    全て("3");
 
     private final RString code;
 
-    private NextPageType(String code) {
+    private JyoukyouType(String code) {
         this.code = new RString(code);
     }
 
@@ -41,8 +45,6 @@ public enum NextPageType implements ICodeValueEnumeratedType {
     }
 
     /**
-     * 引数のコードに対応する列挙型を返します。
-     * <p/>
      * 該当する列挙型がない場合はnullを返します。
      *
      * @param code 検索対象のコード

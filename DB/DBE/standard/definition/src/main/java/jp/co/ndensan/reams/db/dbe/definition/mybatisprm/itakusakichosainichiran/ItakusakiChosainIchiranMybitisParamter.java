@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itakusakichosainichiran;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.JyoukyouType;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NarabiJunType;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.JyoukyouType;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.NarabiJunType;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;

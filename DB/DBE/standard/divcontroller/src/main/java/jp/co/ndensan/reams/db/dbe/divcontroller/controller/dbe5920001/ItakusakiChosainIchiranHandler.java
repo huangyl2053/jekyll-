@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe5920001;
 
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.itakusakichosainichiran.ItakusakiChosainIchiranBatchParamter;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.JyoukyouType;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NarabiJunType;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NextPageType;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.JyoukyouType;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.NarabiJunType;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.NextPageType;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5920001.ItakusakiChosainIchiranDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

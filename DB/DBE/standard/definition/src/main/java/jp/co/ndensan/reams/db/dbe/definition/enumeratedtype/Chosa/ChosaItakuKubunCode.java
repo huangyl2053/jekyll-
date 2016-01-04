@@ -66,6 +66,21 @@ public enum ChosaItakuKubunCode {
     }
 
     /**
+     * 調査委託区分の名称と一致する内容を探します。
+     *
+     * @param name 調査委託区分の名称
+     * @return {@code code} に対応する調査委託区分
+     */
+    public static ChosaItakuKubunCode toValueFrom名称(RString name) {
+        for (ChosaItakuKubunCode chosaItakuKubunCode : ChosaItakuKubunCode.values()) {
+            if (chosaItakuKubunCode.fullName.equals(name)) {
+                return chosaItakuKubunCode;
+            }
+        }
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("調査委託区分"));
+    }
+
+    /**
      * 調査委託区分のコードと一致する内容を探します。
      *
      * @param code 調査委託区分のコード

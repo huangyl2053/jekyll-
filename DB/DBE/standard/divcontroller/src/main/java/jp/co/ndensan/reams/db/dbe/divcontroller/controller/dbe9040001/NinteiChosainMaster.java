@@ -313,9 +313,13 @@ public class NinteiChosainMaster {
                     new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
                     new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
                     new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue()));
-            ChosainJoho chosainJoho = getHandler(div).editChosainJoho(models.get(key).deleted());
-            models.deleteOrRemove(key);
-            models.add(chosainJoho);
+            RString jotai = div.getChosainIchiran().getDgChosainIchiran().getActiveRow().getJotai();
+            if (状態_追加.equals(jotai)) {
+                models.deleteOrRemove(key);
+            } else {
+                ChosainJoho chosainJoho = getHandler(div).editChosainJoho(models.get(key).deleted());
+                models.add(chosainJoho);
+            }
         }
 
         ViewStateHolder.put(ViewStateKeys.認定調査員マスタ検索結果, models);

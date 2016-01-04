@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 public class ItakusakiChosainIchiranProerty extends ReportPropertyBase<ItakusakiChosainIchiranReportSource> {
 
     private static final ReportId ID = new ReportId("DBE592001");
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("title")));
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("listIchiranhyoUpper_1")));
 
     /**
      * コンストラクタです。
@@ -39,6 +39,9 @@ public class ItakusakiChosainIchiranProerty extends ReportPropertyBase<Itakusaki
             Breakers<ItakusakiChosainIchiranReportSource> breakers,
             BreakerCatalog<ItakusakiChosainIchiranReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
+
+
 
 
 

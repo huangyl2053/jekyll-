@@ -52,7 +52,7 @@ public class IkenshoShujiiIchiranReport extends Report<ShujiiIryokikanShujiiIchi
     @Override
     public void writeBy(ReportSourceWriter<ShujiiIryokikanShujiiIchiranhyoReportSource> reportSourceWriter) {
         for (IkenshoShujiiIchiranBodyItem bodyItem : bodyItemList) {
-            IkenshoShujiiIchiranHeaderEditor headerEditor = new IkenshoShujiiIchiranHeaderEditor(headItem);
+            IkenshoShujiiIchiranEditor headerEditor = new IkenshoShujiiIchiranHeaderEditor(headItem);
             IkenshoShujiiIchiranEditor bodyEditor = new IkenshoShujiiIchiranBodyEditor(bodyItem);
             IkenshoShujiiIchiranBuilder builder = new IkenshoShujiiIchiranBuilderImpl(headerEditor, bodyEditor);
             reportSourceWriter.writeLine(builder);

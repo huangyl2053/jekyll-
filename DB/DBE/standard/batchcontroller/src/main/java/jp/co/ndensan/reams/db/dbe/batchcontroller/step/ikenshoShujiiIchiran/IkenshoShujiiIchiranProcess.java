@@ -6,10 +6,13 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ikenshoShujiiIchiran;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran.IkenshoShujiiIchiranBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran.IkenshoShujiiIchiranHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran.IkenshoShujiiIchiranReport;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.ItakusakiChosainIchiranReportId;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.IkenshoShujiiIchiranProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.ikenshoShujiiIchiran.IkenshoShujiiIchiranRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ShujiiIryokikanShujiiIchiranhyoReportSource;
@@ -21,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -31,14 +35,15 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoShujiiIchiran."
             + "IkenshoShujiiIchiranRelateMapper.getIkenshoShujiiIchiranRelateEntity");
+    private static final ReportId REPORT_ID = new ReportId(ItakusakiChosainIchiranReportId.REPORTID_DBE591001.getCode());
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("listIchiranhyoUpper_1")));
 
+    IkenshoShujiiIchiranHeadItem headItem;
     List<IkenshoShujiiIchiranBodyItem> bodyItemList;
-    private static final ReportId REPORT_ID = new ReportId("DBE591001");
+    IkenshoShujiiIchiranProcessParameter processParameter;
     @BatchWriter
     private BatchReportWriter<ShujiiIryokikanShujiiIchiranhyoReportSource> batchWrite;
-    IkenshoShujiiIchiranProcessParameter processParameter;
     private ReportSourceWriter<ShujiiIryokikanShujiiIchiranhyoReportSource> reportSourceWriter;
-    IkenshoShujiiIchiranHeadItem headItem;
 
     @Override
     protected void initialize() {
@@ -63,7 +68,9 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+        batchWrite = batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
+                .addBreak(new BreakerCatalog<ShujiiIryokikanShujiiIchiranhyoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 

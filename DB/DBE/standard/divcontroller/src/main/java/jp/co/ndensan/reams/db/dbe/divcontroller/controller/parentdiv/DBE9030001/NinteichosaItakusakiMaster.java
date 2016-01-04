@@ -263,7 +263,7 @@ public class NinteichosaItakusakiMaster {
             div.getChosaitakusakiJohoInput().clear();
             return ResponseData.of(div).setState(DBE9030001StateName.一覧);
         }
-        if (div.get状態().equals(その他状態コード)) {
+        if (div.get状態().equals(その他状態コード) || div.get状態().equals(削除状態)) {
             return ResponseData.of(div).setState(DBE9030001StateName.一覧);
         }
         return ResponseData.of(div).respond();

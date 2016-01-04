@@ -419,7 +419,7 @@ public class NinteichosaItakusakiMasterHandler {
     private NinteichosaItakusakiJoho converterDataSourceFromKoseiShichosonMaster(dgChosainIchiran_Row row, EntityDataState state, int rowIndex) {
         LasdecCode shichosonCode = new LasdecCode(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString()).get(rowIndex));
         NinteichosaItakusaki ninteichosaItakusaki = johoManager.selectByKey(shichosonCode, row.getChosaItakusakiCode().getValue());
-        if (ninteichosaItakusaki == null) {
+        if (ninteichosaItakusaki == null || ninteichosaItakusaki.getEntity() == null) {
             ninteichosaItakusaki = new NinteichosaItakusaki();
         }
         ninteichosaItakusaki.getEntity().setShichosonCode(shichosonCode);
@@ -427,7 +427,7 @@ public class NinteichosaItakusakiMasterHandler {
         ninteichosaItakusaki.getEntity().setState(state);
         RString chosaItakuKubunCode;
         try {
-            chosaItakuKubunCode = ChosaItakuKubunCode.valueOf(row.getChosaItakuKubun().toString()).getコード();
+            chosaItakuKubunCode = ChosaItakuKubunCode.toValueFrom名称(row.getChosaItakuKubun()).getコード();
         } catch (IllegalArgumentException e) {
             chosaItakuKubunCode = RString.EMPTY;
         }
