@@ -73,7 +73,7 @@ public class NewOldHihokenshabangoFinder {
                     "（新）被保険者番号", String.valueOf(被保険者番号桁数)));
         }
         List<DbT7026ShinKyuHihokenshaNoHenkanEntity> entityList = dac.get旧被保険者番号(shinNo);
-        if (1 >= entityList.size()) {
+        if (1 < entityList.size()) {
             throw new ApplicationException(DbzErrorMessages.検索結果件数不正.getMessage());
         } else {
             return SearchResult.of(entityList, 0, false);
