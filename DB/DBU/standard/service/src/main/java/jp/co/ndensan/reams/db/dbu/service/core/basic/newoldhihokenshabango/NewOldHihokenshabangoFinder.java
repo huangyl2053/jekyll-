@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.service.core.basic.newoldhihokenshabango;
 
-import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbu.business.core.newoldhihokenshabango.NewOldHihokenshabango;
@@ -45,9 +44,9 @@ public class NewOldHihokenshabangoFinder {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link RoujinHokenJukyushaDaichoKanriMapperParameter}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link RoujinHokenJukyushaDaichoKanriMapperParameter}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した
      */
     public static NewOldHihokenshabangoFinder createInstance() {
         return InstanceProvider.create(NewOldHihokenshabangoFinder.class);
@@ -57,26 +56,25 @@ public class NewOldHihokenshabangoFinder {
      * 旧被保険者番号の取得します。
      *
      * @param shinNo 新番号
-     * @return List<DbT7026ShinKyuHihokenshaNoHenkanEntity> 新旧被保険者番号変換
+     * @return NewOldHihokenshabango 新旧被保険者番号変換
      */
     @Transaction
-    public List<NewOldHihokenshabango> getOldHihokenshabangoFromNew(
+    public NewOldHihokenshabango getOldHihokenshabangoFromNew(
             RString shinNo) {
         requireNonNull(shinNo, UrSystemErrorMessages.値がnull.getReplacedMessage("新番号"));
         if (shinNo.length() != 10) {
             throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage());
         }
-        int count = dac.get旧被保険者結果件数(shinNo);
-        if (count > 1) {
+        List<DbT7026ShinKyuHihokenshaNoHenkanEntity> entityList = dac.get旧被保険者番号(shinNo);
+        DbT7026ShinKyuHihokenshaNoHenkanEntity entity = new DbT7026ShinKyuHihokenshaNoHenkanEntity();
+        if (1 < entityList.size()) {
             throw new ApplicationException(DbzErrorMessages.検索結果件数不正.getMessage());
         } else {
-            List<NewOldHihokenshabango> bList = new ArrayList<>();
-            List<DbT7026ShinKyuHihokenshaNoHenkanEntity> entityList = dac.get旧被保険者番号(shinNo);
-            for (DbT7026ShinKyuHihokenshaNoHenkanEntity temp : entityList) {
-                NewOldHihokenshabango newoldhihokenshabango = new NewOldHihokenshabango(temp);
-                bList.add(newoldhihokenshabango);
+            if (0 != entityList.size()) {
+                entity = entityList.get(0);
             }
-            return bList;
+            NewOldHihokenshabango newoldhihokenshabango = new NewOldHihokenshabango(entity);
+            return newoldhihokenshabango;
         }
     }
 
@@ -85,10 +83,10 @@ public class NewOldHihokenshabangoFinder {
      *
      * @param shichosonCode 市町村コード
      * @param kyuNo 旧番号
-     * @return List<DbT7026ShinKyuHihokenshaNoHenkanEntity> 新旧被保険者番号変換
+     * @return NewOldHihokenshabango 新旧被保険者番号変換
      */
     @Transaction
-    public List<NewOldHihokenshabango> getNewHihokenshabangoFromOld(
+    public NewOldHihokenshabango getNewHihokenshabangoFromOld(
             LasdecCode shichosonCode,
             RString kyuNo) {
         requireNonNull(shichosonCode, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
@@ -96,15 +94,12 @@ public class NewOldHihokenshabangoFinder {
         if (shichosonCode.value().length() != 6 && kyuNo.length() != 10) {
             throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage());
         }
-        int count = dac.get新被保険者結果件数(shichosonCode, kyuNo);
-        if (count == 0) {
+        List<DbT7026ShinKyuHihokenshaNoHenkanEntity> entityList = dac.get新被保険者番号(shichosonCode, kyuNo);
+        if (0 == entityList.size() || entityList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         } else {
-            List<NewOldHihokenshabango> list = new ArrayList<>();
-            DbT7026ShinKyuHihokenshaNoHenkanEntity entity = dac.get新被保険者番号(shichosonCode, kyuNo);
-            NewOldHihokenshabango newoldhihokenshabango = new NewOldHihokenshabango(entity);
-            list.add(newoldhihokenshabango);
-            return list;
+            NewOldHihokenshabango newoldhihokenshabango = new NewOldHihokenshabango(entityList.get(0));
+            return newoldhihokenshabango;
         }
     }
 }

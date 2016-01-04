@@ -105,57 +105,15 @@ public class DbT7026ShinKyuHihokenshaNoHenkanDac implements ISaveable<DbT7026Shi
     }
 
     /**
-     * 旧被保険者番号の結果件数取得します。
-     *
-     * @param 新番号
-     * @return DbT7026ShinKyuHihokenshaNoHenkanEntity 新旧被保険者番号変換
-     *
-     */
-    @Transaction
-    public int get旧被保険者結果件数(
-            RString 新番号) {
-        requireNonNull(新番号, UrSystemErrorMessages.値がnull.getReplacedMessage("新番号"));
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        return accessor.select().
-                table(DbT7026ShinKyuHihokenshaNoHenkan.class).
-                where(eq(shinNo, 新番号)).getCount();
-    }
-
-    /**
-     * 新被保険者番号の結果件数取得します。
-     *
-     * @param 市町村コード
-     * @param 旧番号
-     * @return DbT7026ShinKyuHihokenshaNoHenkanEntity 新旧被保険者番号変換
-     *
-     */
-    @Transaction
-    public int get新被保険者結果件数(
-            LasdecCode 市町村コード,
-            RString 旧番号) {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(旧番号, UrSystemErrorMessages.値がnull.getReplacedMessage("旧番号"));
-
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        return accessor.select().
-                table(DbT7026ShinKyuHihokenshaNoHenkan.class).
-                where(and(
-                                eq(shichosonCode, 市町村コード),
-                                eq(kyuNo, 旧番号))).getCount();
-    }
-
-    /**
      * 新被保険者番号の取得します。
      *
      * @param 市町村コード
      * @param 旧番号
-     * @return DbT7026ShinKyuHihokenshaNoHenkanEntity
+     * @return List<DbT7026ShinKyuHihokenshaNoHenkanEntity>
      *
      */
     @Transaction
-    public DbT7026ShinKyuHihokenshaNoHenkanEntity get新被保険者番号(
+    public List<DbT7026ShinKyuHihokenshaNoHenkanEntity> get新被保険者番号(
             LasdecCode 市町村コード,
             RString 旧番号) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
@@ -168,6 +126,6 @@ public class DbT7026ShinKyuHihokenshaNoHenkanDac implements ISaveable<DbT7026Shi
                 where(and(
                                 eq(shichosonCode, 市町村コード),
                                 eq(kyuNo, 旧番号))).
-                toObject(DbT7026ShinKyuHihokenshaNoHenkanEntity.class);
+                toList(DbT7026ShinKyuHihokenshaNoHenkanEntity.class);
     }
 }
