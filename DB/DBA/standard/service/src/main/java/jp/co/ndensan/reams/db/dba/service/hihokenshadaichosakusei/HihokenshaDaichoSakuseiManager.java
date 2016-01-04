@@ -520,8 +520,8 @@ public class HihokenshaDaichoSakuseiManager {
         List<FlexibleDate> 老齢福祉受給終了日 = new ArrayList<>();
         for (int i = 0; i < 一ページのレコード; i++) {
             老齢福祉No.add(RString.EMPTY);
-            老齢福祉受給開始日.add(FlexibleDate.MAX);
-            老齢福祉受給終了日.add(FlexibleDate.MAX);
+            老齢福祉受給開始日.add(FlexibleDate.EMPTY);
+            老齢福祉受給終了日.add(FlexibleDate.EMPTY);
         }
         老齢福祉年金受給者Entity.set老齢福祉No(老齢福祉No);
         老齢福祉年金受給者Entity.set老齢福祉受給開始日(老齢福祉受給開始日);
@@ -533,7 +533,8 @@ public class HihokenshaDaichoSakuseiManager {
             ShoKofuKaishuDivisionEntity shoKofuKaishuDivisionEntity) {
         requireNonNull(shoKofuKaishuDivisionEntity, UrSystemErrorMessages.値がnull.
                 getReplacedMessage("shoKofuKaishuDivisionEntity"));
-        ShoKofuKaishuDivisionSumEntity entity = new ShoKofuKaishuDivisionSumEntity();
+        ShoKofuKaishuDivisionSumEntity 被保険者証発行履歴情報１ = new ShoKofuKaishuDivisionSumEntity();
+        ShoKofuKaishuDivisionSumEntity 被保険者証発行履歴情報２ = new ShoKofuKaishuDivisionSumEntity();
         List<RString> 証履歴No1 = new ArrayList<>();
         List<FlexibleDate> 証履歴発行日1 = new ArrayList<>();
         List<RString> 証履歴事由名称1 = new ArrayList<>();
@@ -550,30 +551,29 @@ public class HihokenshaDaichoSakuseiManager {
                 証履歴回収日1.add(shoKofuKaishuDivisionEntity.get証履歴回収日().get(i));
                 continue;
             }
-            entity.set証履歴No1(証履歴No1);
-            entity.set証履歴事由名称1(証履歴事由名称1);
-            entity.set証履歴回収日1(証履歴回収日1);
-            entity.set証履歴発行日1(証履歴発行日1);
-            hihokenshaDaichoSakuseiEntity.set被保険者証発行履歴情報１(entity);
-            entity = new ShoKofuKaishuDivisionSumEntity();
             if (i >= NOCOUNT_5 && i < NOCOUNT_10) {
                 証履歴No2.add(shoKofuKaishuDivisionEntity.get証履歴No().get(i));
                 証履歴発行日2.add(shoKofuKaishuDivisionEntity.get証履歴発行日().get(i));
                 証履歴事由名称2.add(shoKofuKaishuDivisionEntity.get証履歴事由名称().get(i));
                 証履歴回収日2.add(shoKofuKaishuDivisionEntity.get証履歴回収日().get(i));
-                continue;
             }
-            entity.set証履歴No2(証履歴No2);
-            entity.set証履歴事由名称2(証履歴事由名称2);
-            entity.set証履歴回収日2(証履歴回収日2);
-            entity.set証履歴発行日2(証履歴発行日2);
-            hihokenshaDaichoSakuseiEntity.set被保険者証発行履歴情報２(entity);
         }
+        被保険者証発行履歴情報１.set証履歴No1(証履歴No1);
+        被保険者証発行履歴情報１.set証履歴事由名称1(証履歴事由名称1);
+        被保険者証発行履歴情報１.set証履歴回収日1(証履歴回収日1);
+        被保険者証発行履歴情報１.set証履歴発行日1(証履歴発行日1);
+        被保険者証発行履歴情報２.set証履歴No2(証履歴No2);
+        被保険者証発行履歴情報２.set証履歴事由名称2(証履歴事由名称2);
+        被保険者証発行履歴情報２.set証履歴回収日2(証履歴回収日2);
+        被保険者証発行履歴情報２.set証履歴発行日2(証履歴発行日2);
+        hihokenshaDaichoSakuseiEntity.set被保険者証発行履歴情報１(被保険者証発行履歴情報１);
+        hihokenshaDaichoSakuseiEntity.set被保険者証発行履歴情報２(被保険者証発行履歴情報２);
     }
 
     private void setEmptiy被保険者証発行履歴情報(HihokenshaDaichoSakuseiEntity hihokenshaDaichoSakuseiEntity,
             int 一ページのレコード) {
-        ShoKofuKaishuDivisionSumEntity entity = new ShoKofuKaishuDivisionSumEntity();
+        ShoKofuKaishuDivisionSumEntity 被保険者証発行履歴情報１ = new ShoKofuKaishuDivisionSumEntity();
+        ShoKofuKaishuDivisionSumEntity 被保険者証発行履歴情報２ = new ShoKofuKaishuDivisionSumEntity();
         List<RString> 証履歴No1 = new ArrayList<>();
         List<FlexibleDate> 証履歴発行日1 = new ArrayList<>();
         List<RString> 証履歴事由名称1 = new ArrayList<>();
@@ -590,25 +590,23 @@ public class HihokenshaDaichoSakuseiManager {
                 証履歴回収日1.add(FlexibleDate.EMPTY);
                 continue;
             }
-            entity.set証履歴No1(証履歴No1);
-            entity.set証履歴事由名称1(証履歴事由名称1);
-            entity.set証履歴回収日1(証履歴回収日1);
-            entity.set証履歴発行日1(証履歴発行日1);
-            hihokenshaDaichoSakuseiEntity.set被保険者証発行履歴情報１(entity);
-            entity = new ShoKofuKaishuDivisionSumEntity();
             if (i >= NOCOUNT_5 && i < 一ページのレコード) {
                 証履歴No2.add(RString.EMPTY);
                 証履歴発行日2.add(FlexibleDate.EMPTY);
                 証履歴事由名称2.add(RString.EMPTY);
                 証履歴回収日2.add(FlexibleDate.EMPTY);
-                continue;
             }
-            entity.set証履歴No2(証履歴No2);
-            entity.set証履歴事由名称2(証履歴事由名称2);
-            entity.set証履歴回収日2(証履歴回収日2);
-            entity.set証履歴発行日2(証履歴発行日2);
-            hihokenshaDaichoSakuseiEntity.set被保険者証発行履歴情報２(entity);
         }
+        被保険者証発行履歴情報１.set証履歴No1(証履歴No1);
+        被保険者証発行履歴情報１.set証履歴事由名称1(証履歴事由名称1);
+        被保険者証発行履歴情報１.set証履歴回収日1(証履歴回収日1);
+        被保険者証発行履歴情報１.set証履歴発行日1(証履歴発行日1);
+        被保険者証発行履歴情報２.set証履歴No2(証履歴No2);
+        被保険者証発行履歴情報２.set証履歴事由名称2(証履歴事由名称2);
+        被保険者証発行履歴情報２.set証履歴回収日2(証履歴回収日2);
+        被保険者証発行履歴情報２.set証履歴発行日2(証履歴発行日2);
+        hihokenshaDaichoSakuseiEntity.set被保険者証発行履歴情報１(被保険者証発行履歴情報１);
+        hihokenshaDaichoSakuseiEntity.set被保険者証発行履歴情報２(被保険者証発行履歴情報２);
     }
 
     private List<DbT1001HihokenshaDaichoEntity> get被保険者台帳管理情報(HihokenshaDaichoSakuseiParameter parameter) {
