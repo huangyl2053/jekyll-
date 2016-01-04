@@ -50,7 +50,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -181,35 +180,31 @@ public class HihokenshaDaichoSakuseiManager {
         List<ShisetsuNyutaishoEntity> shisetsuNyutaishoEntityList = get生活保護受給者情報(parameter);
         List<DbT7006RoreiFukushiNenkinJukyushaEntity> dbT7006RoreiList = get老齢福祉年金受給者情報(parameter);
         List<DbT7037ShoKofuKaishuEntity> dbT7037ShoKoList = get証交付回収情報(parameter);
+        // TODO 蘇広俊 世帯情報の取得方針不明、QA170提出中
         DbT1008IryohokenKanyuJokyoEntity dbT1008IryohoEntity = get介護保険医療保険加入状況情報(parameter);
         List<HihokenshaEntity> hihokenshaList = new ArrayList<>();
         HihokenshaEntity hihokenshaEntity = new HihokenshaEntity();
-        hihokenshaEntity.setPrintDate(dateFormat(RDateTime.now()));
-        hihokenshaEntity.setPage(RString.EMPTY);
-        hihokenshaEntity.setTitle(TITLE);
         for (DbT1001HihokenshaDaichoEntity entity : dbT1001HihokenList) {
+            hihokenshaEntity.setPrintDate(dateFormat(RDateTime.now()));
+            hihokenshaEntity.setPage(RString.EMPTY);
+            hihokenshaEntity.setTitle(TITLE);
             ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(
                     GyomuBunrui.介護事務);
             if (new Code(SHICHOSONCODE_120).equals(shichosonSecurityJoho.get導入形態コード())
                     || new Code(SHICHOSONCODE_220).equals(shichosonSecurityJoho.get導入形態コード())) {
-
                 hihokenshaEntity.setShichosonCode(entity.getShichosonCode());
                 Association association = AssociationFinderFactory.createInstance().getAssociation();
                 hihokenshaEntity.setShichosonMeisho(association.get市町村名());
-                hihokenshaList.add(hihokenshaEntity);
             }
             if (new Code(SHICHOSONCODE_111).equals(shichosonSecurityJoho.get導入形態コード())
                     || new Code(SHICHOSONCODE_112).equals(shichosonSecurityJoho.get導入形態コード())
                     || new Code(SHICHOSONCODE_211).equals(shichosonSecurityJoho.get導入形態コード())) {
                 List<DbT7051KoseiShichosonMasterEntity> dbT7051KoseiEntityList
                         = 構成市町村マスタDac.selectByshichosonCode(entity.getShichosonCode());
-
                 hihokenshaEntity.setShichosonMeisho(dbT7051KoseiEntityList.get(0).getShichosonMeisho());
-                hihokenshaList.add(hihokenshaEntity);
             }
             hihokenshaEntity.setHihokenshaNoTitle(HIHOKENSHANO_TITLE);
             hihokenshaEntity.setHihokenshaNo(entity.getHihokenshaNo());
-            hihokenshaList.add(hihokenshaEntity);
             if (SHIKAKUSOSHITSUJIYUCODE_03.equals(entity.getShikakuSoshitsuJiyuCode())) {
                 hihokenshaEntity.setState(STATE_適用除外者);
             } else if (SHIKAKUSOSHITSUJIYUCODE_05.equals(entity.getShikakuSoshitsuJiyuCode())) {
@@ -219,66 +214,67 @@ public class HihokenshaDaichoSakuseiManager {
             } else {
                 hihokenshaEntity.setState(STATE_資格喪失者);
             }
-        }
-        UaFt200FindShikibetsuTaishoFunctionDac dac = InstanceProvider.create(
-                UaFt200FindShikibetsuTaishoFunctionDac.class);
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.UR業務共通, KensakuYusenKubun.住登外優先));
-        IPsmCriteria psm = ShikibetsuTaishoSearchEntityHolder.getCriteria(key.build());
-        List<JuminShubetsu> 住民種別 = new ArrayList<>();
-        List<JuminJotai> 住民状態 = new ArrayList<>();
-        住民種別.add(JuminShubetsu.住登外個人_外国人);
-        住民種別.add(JuminShubetsu.住登外個人_日本人);
-        住民種別.add(JuminShubetsu.日本人);
-        住民種別.add(JuminShubetsu.外国人);
-        住民状態.add(JuminJotai.住民);
-        住民状態.add(JuminJotai.住登外);
-        住民状態.add(JuminJotai.消除者);
-        住民状態.add(JuminJotai.転出者);
-        住民状態.add(JuminJotai.死亡者);
-        key.set住民種別(住民種別);
-        key.set住民状態(住民状態);
-        List<UaFt200FindShikibetsuTaishoEntity> entitylist = dac.select(psm);
-        for (UaFt200FindShikibetsuTaishoEntity entity : entitylist) {
-            IShikibetsuTaisho shikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(entity);
-            hihokenshaEntity.setKanaMeisho(shikibetsuTaisho.get名称().getKana());
-            hihokenshaEntity.setMeisho(shikibetsuTaisho.get名称().getName());
-            hihokenshaEntity.setSeinengappiYMD(shikibetsuTaisho.to個人().get生年月日().toFlexibleDate());
-            hihokenshaEntity.setSeibetsuCode(shikibetsuTaisho.to個人().get性別().getCode());
-            hihokenshaEntity.setSetaiCode(shikibetsuTaisho.to個人().get世帯コード());
-            hihokenshaEntity.setShikibetsuCode(shikibetsuTaisho.to個人().get識別コード());
-            hihokenshaEntity.setChikucodeTitle1(shikibetsuTaisho.to個人().get行政区画().getChiku1().get名称());
-            hihokenshaEntity.setChikuCode1(shikibetsuTaisho.to個人().get行政区画().getChiku1().getコード());
-            hihokenshaEntity.setChikucodeTitle2(shikibetsuTaisho.to個人().get行政区画().getChiku2().get名称());
-            hihokenshaEntity.setChikuCode2(shikibetsuTaisho.to個人().get行政区画().getChiku2().getコード());
-            hihokenshaEntity.setChikucodeTitle3(shikibetsuTaisho.to個人().get行政区画().getChiku3().get名称());
-            hihokenshaEntity.setChikuCode3(shikibetsuTaisho.to個人().get行政区画().getChiku3().getコード());
-            hihokenshaEntity.setJushoTitle(JUSHO_TITLE);
-            hihokenshaEntity.setJusho(new RString(shikibetsuTaisho.get住所().toString()));
-            hihokenshaEntity.setZenkokuJushoCode(shikibetsuTaisho.to個人().get住所().get全国住所コード());
-            hihokenshaEntity.setGyoseikuTitle(GYOSEIKU_TITLE);
-            hihokenshaEntity.setGyoseikuCode(shikibetsuTaisho.to個人().get行政区画().getGyoseiku().getコード());
-            // TODO 蘇広俊 電話番号１取得方針不明、QA207提出中
+            UaFt200FindShikibetsuTaishoFunctionDac dac = InstanceProvider.create(
+                    UaFt200FindShikibetsuTaishoFunctionDac.class);
+            ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                    ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(SubGyomuCode.DBA介護資格.getGyomuCode(),
+                            KensakuYusenKubun.住登外優先));
+            IPsmCriteria psm = ShikibetsuTaishoSearchEntityHolder.getCriteria(key.build());
+            List<JuminShubetsu> 住民種別 = new ArrayList<>();
+            List<JuminJotai> 住民状態 = new ArrayList<>();
+            住民種別.add(JuminShubetsu.住登外個人_外国人);
+            住民種別.add(JuminShubetsu.住登外個人_日本人);
+            住民種別.add(JuminShubetsu.日本人);
+            住民種別.add(JuminShubetsu.外国人);
+            住民状態.add(JuminJotai.住民);
+            住民状態.add(JuminJotai.住登外);
+            住民状態.add(JuminJotai.消除者);
+            住民状態.add(JuminJotai.転出者);
+            住民状態.add(JuminJotai.死亡者);
+            key.set住民種別(住民種別);
+            key.set住民状態(住民状態);
+            List<UaFt200FindShikibetsuTaishoEntity> entitylist = dac.select(psm);
+            for (UaFt200FindShikibetsuTaishoEntity uaFt200entity : entitylist) {
+                IShikibetsuTaisho shikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(uaFt200entity);
+                hihokenshaEntity.setKanaMeisho(shikibetsuTaisho.get名称().getKana());
+                hihokenshaEntity.setMeisho(shikibetsuTaisho.get名称().getName());
+                hihokenshaEntity.setSeinengappiYMD(shikibetsuTaisho.to個人().get生年月日().toFlexibleDate());
+                hihokenshaEntity.setSeibetsuCode(shikibetsuTaisho.to個人().get性別().getCode());
+                hihokenshaEntity.setSetaiCode(shikibetsuTaisho.to個人().get世帯コード());
+                hihokenshaEntity.setShikibetsuCode(shikibetsuTaisho.to個人().get識別コード());
+                hihokenshaEntity.setChikucodeTitle1(shikibetsuTaisho.to個人().get行政区画().getChiku1().get名称());
+                hihokenshaEntity.setChikuCode1(shikibetsuTaisho.to個人().get行政区画().getChiku1().getコード());
+                hihokenshaEntity.setChikucodeTitle2(shikibetsuTaisho.to個人().get行政区画().getChiku2().get名称());
+                hihokenshaEntity.setChikuCode2(shikibetsuTaisho.to個人().get行政区画().getChiku2().getコード());
+                hihokenshaEntity.setChikucodeTitle3(shikibetsuTaisho.to個人().get行政区画().getChiku3().get名称());
+                hihokenshaEntity.setChikuCode3(shikibetsuTaisho.to個人().get行政区画().getChiku3().getコード());
+                hihokenshaEntity.setJushoTitle(JUSHO_TITLE);
+                hihokenshaEntity.setJusho(new RString(shikibetsuTaisho.get住所().toString()));
+                hihokenshaEntity.setZenkokuJushoCode(shikibetsuTaisho.to個人().get住所().get全国住所コード());
+                hihokenshaEntity.setGyoseikuTitle(GYOSEIKU_TITLE);
+                hihokenshaEntity.setGyoseikuCode(shikibetsuTaisho.to個人().get行政区画().getGyoseiku().getコード());
+                // TODO 蘇広俊 電話番号１取得方針不明、QA207提出中
+            }
+            List<ShisetsuNyutaishoEntity> shisetsuNyutaishoList = get入所施設(parameter);
+            for (ShisetsuNyutaishoEntity shisetsuNyutaishoentity : shisetsuNyutaishoList) {
+                hihokenshaEntity.setJigyoshaNo(shisetsuNyutaishoentity.getJigyoshaNo());
+                hihokenshaEntity.setJigyoshaMeisho(new AtenaMeisho(shisetsuNyutaishoentity
+                        .getJigyoshaMeisho().toString()));
+            }
+            if (dbT1008IryohoEntity.getIryoHokenShubetsuCode() != null) {
+                hihokenshaEntity.setIryoHokenShubetsu(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,
+                        new CodeShubetsu(CODESHUBETSU_0001),
+                        new Code(dbT1008IryohoEntity.getIryoHokenShubetsuCode())));
+            }
+            hihokenshaEntity.setIryoHokenshaMeisho(dbT1008IryohoEntity.getIryoHokenshaMeisho());
+            hihokenshaEntity.setIryoHokenKigoNo(dbT1008IryohoEntity.getIryoHokenKigoNo());
+            hihokenshaEntity.setOrderNo(RString.EMPTY);
+            hihokenshaEntity.setDbT1001HihokenshaDaichoEntityList(dbT1001HihokenList);
+            hihokenshaEntity.setShisetsuNyutaishoEntityList(shisetsuNyutaishoEntityList);
+            hihokenshaEntity.setDbT7006RoreiFukushiNenkinJukyushaEntityList(dbT7006RoreiList);
+            hihokenshaEntity.setDbT7037ShoKofuKaishuEntityList(dbT7037ShoKoList);
             hihokenshaList.add(hihokenshaEntity);
         }
-        List<ShisetsuNyutaishoEntity> shisetsuNyutaishoList = get入所施設(parameter);
-        for (ShisetsuNyutaishoEntity entity : shisetsuNyutaishoList) {
-            hihokenshaEntity.setJigyoshaNo(entity.getJigyoshaNo());
-            hihokenshaEntity.setJigyoshaMeisho(new AtenaMeisho(entity.getJigyoshaMeisho().toString()));
-            hihokenshaList.add(hihokenshaEntity);
-        }
-        if (dbT1008IryohoEntity.getIryoHokenShubetsuCode() != null) {
-            hihokenshaEntity.setIryoHokenShubetsu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0001),
-                    new Code(dbT1008IryohoEntity.getIryoHokenShubetsuCode())));
-        }
-        hihokenshaEntity.setIryoHokenshaMeisho(dbT1008IryohoEntity.getIryoHokenshaMeisho());
-        hihokenshaEntity.setIryoHokenKigoNo(dbT1008IryohoEntity.getIryoHokenKigoNo());
-        hihokenshaEntity.setOrderNo(RString.EMPTY);
-        hihokenshaEntity.setDbT1001HihokenshaDaichoEntityList(dbT1001HihokenList);
-        hihokenshaEntity.setShisetsuNyutaishoEntityList(shisetsuNyutaishoEntityList);
-        hihokenshaEntity.setDbT7006RoreiFukushiNenkinJukyushaEntityList(dbT7006RoreiList);
-        hihokenshaEntity.setDbT7037ShoKofuKaishuEntityList(dbT7037ShoKoList);
-        hihokenshaList.add(hihokenshaEntity);
 
         return hihokenshaList;
     }
@@ -290,7 +286,8 @@ public class HihokenshaDaichoSakuseiManager {
      * @return hihokenshaDaichoSakuseiEntityList 被保険者台帳
      */
     @Transaction
-    public List<HihokenshaDaichoSakuseiEntity> getHihokenshaDaichoHenshu(List<HihokenshaEntity> hihokenshaList) {
+    public List<HihokenshaDaichoSakuseiEntity> getHihokenshaDaichoHenshu(List<HihokenshaEntity> hihokenshaList
+    ) {
         requireNonNull(hihokenshaList, UrSystemErrorMessages.値がnull.getReplacedMessage("hihokenshaList"));
         List<HihokenshaDaichoSakuseiEntity> hihokenshaDaichoSakuseiEntityList = get被保険者台帳(hihokenshaList);
         if (hihokenshaDaichoSakuseiEntityList.isEmpty()) {
