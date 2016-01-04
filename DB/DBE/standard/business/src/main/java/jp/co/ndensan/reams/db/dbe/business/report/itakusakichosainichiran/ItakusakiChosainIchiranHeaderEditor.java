@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.itakusakichosainichiran;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.JyoukyouType;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NarabiJunType;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NextPageType;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.JyoukyouType;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.NarabiJunType;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.NextPageType;
 import jp.co.ndensan.reams.db.dbe.entity.report.itakusakichosainichiran.ItakusakiChosainIchiranReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
