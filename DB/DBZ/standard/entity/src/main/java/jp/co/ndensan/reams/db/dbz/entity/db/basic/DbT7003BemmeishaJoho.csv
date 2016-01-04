@@ -1,10 +1,7 @@
-﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,A
-shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
-genshobunHihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
-shinsaseikyuTodokedeYMD,UDD015YMD,FlexibleDate,,,,,A
-bemmeishoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,A
-bemmeishaEdaban,int2,int,,,,,A
-shokuinCode,UDD035Code,Code,,,,,A
-bushoCode,UDD048BushoCode,BushoCode,,,,,A
-yakushoskuName,varchar,RString,,,,,A
-bemmeishaShimei,UDD042AtenaMeisho,AtenaMeisho,,,,,A
+﻿shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
+genshobunHihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,原処分被保険者番号,A
+shinsaseikyuTodokedeYMD,UDD015YMD,FlexibleDate,,,,,審査請求届出日,A
+bemmeishoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,弁明書作成日,A
+bemmeishaEdaban,int2,int,,,,,弁明者枝番,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+bemmeisha,text,RString,,,,,弁明者,A

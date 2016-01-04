@@ -7,14 +7,12 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJoho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJoho.bemmeishaEdaban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJoho.bemmeishoSakuseiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJoho.genshobunHihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJoho.shikibetsuCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJoho.shinsaseikyuTodokedeYMD;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJoho.shoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -39,7 +37,6 @@ public class DbT7003BemmeishaJohoDac implements ISaveable<DbT7003BemmeishaJohoEn
     /**
      * 主キーで弁明者情報を取得します。
      *
-     * @param 証記載保険者番号 ShoKisaiHokenshaNo
      * @param 識別コード ShikibetsuCode
      * @param 原処分被保険者番号 GenshobunHihokenshaNo
      * @param 審査請求届出日 ShinsaseikyuTodokedeYMD
@@ -50,13 +47,11 @@ public class DbT7003BemmeishaJohoDac implements ISaveable<DbT7003BemmeishaJohoEn
      */
     @Transaction
     public DbT7003BemmeishaJohoEntity selectByKey(
-            ShoKisaiHokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             HihokenshaNo 原処分被保険者番号,
             FlexibleDate 審査請求届出日,
             FlexibleDate 弁明書作成日,
             Decimal 弁明者枝番) throws NullPointerException {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(原処分被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者番号"));
         requireNonNull(審査請求届出日, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求届出日"));
@@ -68,7 +63,6 @@ public class DbT7003BemmeishaJohoDac implements ISaveable<DbT7003BemmeishaJohoEn
         return accessor.select().
                 table(DbT7003BemmeishaJoho.class).
                 where(and(
-                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
                                 eq(shikibetsuCode, 識別コード),
                                 eq(genshobunHihokenshaNo, 原処分被保険者番号),
                                 eq(shinsaseikyuTodokedeYMD, 審査請求届出日),

@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShinsakaiIinJohoTorokuHandler {
 
+    private static final RString 状態_追加 = new RString("追加");
+    private static final RString 状態_修正 = new RString("修正");
     private final ShinsakaiIinJohoTorokuDiv div;
 
     /**
@@ -329,5 +331,72 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getTxtTelNo1().setDisabled(true);
         div.getTxtFaxNo().clearDomain();
         div.getTxtFaxNo().setDisabled(true);
+    }
+
+    /**
+     * 新規モード、審査会委員詳細情報を審査会委員一覧に設定します。
+     *
+     * @return List<dgShinsaInJohoIchiran_Row>
+     */
+    public List<dgShinsaInJohoIchiran_Row> set審査会委員一覧By新規モード() {
+        List<dgShinsaInJohoIchiran_Row> 審査会委員一覧情報 = div.getDgShinsaInJohoIchiran().getDataSource();
+
+        dgShinsaInJohoIchiran_Row row = new dgShinsaInJohoIchiran_Row();
+        row.setStatus(状態_追加);
+        row.setShinsainCode(div.getTxtShinsainCode().getValue());
+        row.getShinsakaiIinKaishiYMD().setValue(div.getTxtShinsaIinYMDFrom().getValue());
+        row.getShinsakaiIinShuryoYMD().setValue(div.getTxtShinsaIinYMDTo().getValue());
+        row.setShimei(div.getTxtShimei().getValue());
+        row.setKanaShimei(div.getTxtKanaShimei().getValue());
+        row.setSeibetsu(Seibetsu.toValue(div.getRadSeibetsu().getSelectedKey()).get名称());
+        if (!div.getTxtBirthYMD().getValue().isEmpty()) {
+            row.getBarthYMD().setValue(new RDate(div.getTxtBirthYMD().getValue().toString()));
+        }
+        row.setShikakuCode(div.getDdlShikakuCode().getSelectedValue());
+        row.setBiko(div.getTxtBiko().getValue());
+        row.setJokyo(div.getTxtHaishiFlag().getValue());
+        row.setYubinNo(div.getTxtYubinNo().getValue().value());
+        row.setYusoKubun(div.getDdlYusoKubun().getSelectedKey());
+        row.setJusho(div.getTxtJusho().getDomain().value());
+        row.getHaishiYMD().setValue(div.getTxtHaishiYMD().getValue());
+        row.setTelNo1(div.getTxtTelNo1().getDomain().value());
+        row.setFaxNo(div.getTxtFaxNo().getDomain().value());
+        審査会委員一覧情報.add(row);
+        return 審査会委員一覧情報;
+    }
+
+    /**
+     * 更新モード、審査会委員詳細情報を審査会委員一覧に設定します。
+     *
+     * @return List<dgShinsaInJohoIchiran_Row>
+     */
+    public List<dgShinsaInJohoIchiran_Row> set審査会委員一覧By更新モード() {
+        List<dgShinsaInJohoIchiran_Row> 審査会委員一覧情報 = div.getDgShinsaInJohoIchiran().getDataSource();
+        int count = div.getDgShinsaInJohoIchiran().getClickedRowId();
+        dgShinsaInJohoIchiran_Row row = div.getDgShinsaInJohoIchiran().getClickedItem();
+
+        if (!状態_追加.equals(row.getStatus())) {
+            row.setStatus(状態_修正);
+        }
+        row.setShinsainCode(div.getTxtShinsainCode().getValue());
+        row.getShinsakaiIinKaishiYMD().setValue(div.getTxtShinsaIinYMDFrom().getValue());
+        row.getShinsakaiIinShuryoYMD().setValue(div.getTxtShinsaIinYMDTo().getValue());
+        row.setShimei(div.getTxtShimei().getValue());
+        row.setKanaShimei(div.getTxtKanaShimei().getValue());
+        row.setSeibetsu(Seibetsu.toValue(div.getRadSeibetsu().getSelectedKey()).get名称());
+        if (!div.getTxtBirthYMD().getValue().isEmpty()) {
+            row.getBarthYMD().setValue(new RDate(div.getTxtBirthYMD().getValue().toString()));
+        }
+        row.setShikakuCode(div.getDdlShikakuCode().getSelectedValue());
+        row.setBiko(div.getTxtBiko().getValue());
+        row.setJokyo(div.getTxtHaishiFlag().getValue());
+        row.setYubinNo(div.getTxtYubinNo().getValue().value());
+        row.setYusoKubun(div.getDdlYusoKubun().getSelectedKey());
+        row.setJusho(div.getTxtJusho().getDomain().value());
+        row.getHaishiYMD().setValue(div.getTxtHaishiYMD().getValue());
+        row.setTelNo1(div.getTxtTelNo1().getDomain().value());
+        row.setFaxNo(div.getTxtFaxNo().getDomain().value());
+        審査会委員一覧情報.set(count, row);
+        return 審査会委員一覧情報;
     }
 }

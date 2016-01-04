@@ -31,6 +31,11 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
         this.div = div;
     }
 
+    /**
+     * 審査会委員入力情報をチェックします。
+     *
+     * @return ValidationMessageControlPairs
+     */
     public ValidationMessageControlPairs 審査会委員情報入力チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (!更新モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class))) {
