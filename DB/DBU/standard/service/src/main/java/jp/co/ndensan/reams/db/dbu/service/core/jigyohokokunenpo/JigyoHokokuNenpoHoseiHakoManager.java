@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEnt
 import jp.co.ndensan.reams.db.dbu.persistence.jigyohokokunenpo.IJigyoHokokuNenpoMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.KoseiShichosonJohoEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyukeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
@@ -104,7 +104,7 @@ public class JigyoHokokuNenpoHoseiHakoManager {
         if (合併情報区分 == null || 合併情報区分.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("合併情報区分"));
         }
-        if (DonyukeitaiCode.事務広域.getコード().equals(導入形態コード) || DonyukeitaiCode.認定広域.getコード().equals(導入形態コード)) {
+        if (DonyukeitaiCode.事務広域.getCode().equals(導入形態コード) || DonyukeitaiCode.認定広域.getCode().equals(導入形態コード)) {
             return get市町村情報リストBy導入形態コードは事務広域と認定広域の場合(合併情報区分, 市町村情報);
         } else {
             return get市町村情報リストBy導入形態コード以外の場合(合併情報区分, 市町村情報, 導入形態コード);
@@ -172,15 +172,15 @@ public class JigyoHokokuNenpoHoseiHakoManager {
         保険者区分 = TokeiTaishoKubun.保険者分.getコード();
         出力市町村情報リスト.add(new ShichosonCodeNameResult(市町村コード, 市町村名称, 保険者コード, 保険者区分));
         KyuShichosonCodeJohoRelateEntity relateEntity = new KyuShichosonCodeJohoRelateEntity();
-        if (DonyukeitaiCode.事務単一.getコード().equals(導入形態コード)) {
+        if (DonyukeitaiCode.事務単一.getCode().equals(導入形態コード)) {
             relateEntity = kyuShichosonCodeFinder.getKyuShichosonCodeJoho(市町村コード, DonyukeitaiCode.事務単一);
-        } else if (DonyukeitaiCode.事務広域.getコード().equals(導入形態コード)) {
+        } else if (DonyukeitaiCode.事務広域.getCode().equals(導入形態コード)) {
             relateEntity = kyuShichosonCodeFinder.getKyuShichosonCodeJoho(市町村コード, DonyukeitaiCode.事務広域);
-        } else if (DonyukeitaiCode.事務構成市町村.getコード().equals(導入形態コード)) {
+        } else if (DonyukeitaiCode.事務構成市町村.getCode().equals(導入形態コード)) {
             relateEntity = kyuShichosonCodeFinder.getKyuShichosonCodeJoho(市町村コード, DonyukeitaiCode.事務構成市町村);
-        } else if (DonyukeitaiCode.認定単一.getコード().equals(導入形態コード)) {
+        } else if (DonyukeitaiCode.認定単一.getCode().equals(導入形態コード)) {
             relateEntity = kyuShichosonCodeFinder.getKyuShichosonCodeJoho(市町村コード, DonyukeitaiCode.認定単一);
-        } else if (DonyukeitaiCode.認定広域.getコード().equals(導入形態コード)) {
+        } else if (DonyukeitaiCode.認定広域.getCode().equals(導入形態コード)) {
             relateEntity = kyuShichosonCodeFinder.getKyuShichosonCodeJoho(市町村コード, DonyukeitaiCode.認定広域);
         }
         List<DbT7056GappeiShichosonEntity> gappeiShichosonEntityList = null;
