@@ -11,7 +11,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dba.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
-import jp.co.ndensan.reams.db.dba.business.shichoson.ShichosonBusiness;
+import jp.co.ndensan.reams.db.dba.business.shichoson.Shichoson;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -89,22 +89,22 @@ public class HihousyosaiFinder {
      *
      * @param 市町村コード 市町村コード
      * @param 導入形態コード 導入形態コード
-     * @return SearchResult<ShichosonBusiness>
+     * @return SearchResult<Shichoson>
      */
     @Transaction
-    public SearchResult<ShichosonBusiness> getGappeiShichosonList(
+    public SearchResult<Shichoson> getGappeiShichosonList(
             LasdecCode 市町村コード,
             DonyukeitaiCode 導入形態コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(導入形態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("導入形態コード"));
-        List<ShichosonBusiness> 旧保険者List = new ArrayList<>();
+        List<Shichoson> 旧保険者List = new ArrayList<>();
         List<KyuShichosonCode> 旧市町村コード情報List
                 = KyuShichosonCode.getKyuShichosonCodeJoho(市町村コード, 導入形態コード).get旧市町村コード情報List();
         if (旧市町村コード情報List.isEmpty()) {
-            return SearchResult.of(Collections.<ShichosonBusiness>emptyList(), 0, false);
+            return SearchResult.of(Collections.<Shichoson>emptyList(), 0, false);
         }
         for (KyuShichosonCode 旧市町村コード : 旧市町村コード情報List) {
-            ShichosonBusiness shichosonBusiness = new ShichosonBusiness();
+            Shichoson shichosonBusiness = new Shichoson();
             shichosonBusiness.set旧市町村コード(旧市町村コード.get旧市町村コード());
             shichosonBusiness.set旧市町村名称(旧市町村コード.get旧市町村名称());
             旧保険者List.add(shichosonBusiness);

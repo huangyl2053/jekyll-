@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.business.shichoson;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
-public class ShichosonBusiness {
+public class Shichoson {
 
     private LasdecCode 旧市町村コード;
     private RString 旧市町村名称;
@@ -16,7 +16,7 @@ public class ShichosonBusiness {
     /**
      * コンストラクタです。
      */
-    public ShichosonBusiness() {
+    public Shichoson() {
     }
 
     /**
@@ -25,7 +25,7 @@ public class ShichosonBusiness {
      * @param 旧市町村コード 旧市町村コード
      * @param 旧市町村名称 旧市町村名称
      */
-    public ShichosonBusiness(
+    public Shichoson(
             LasdecCode 旧市町村コード,
             RString 旧市町村名称) {
         this.旧市町村コード = 旧市町村コード;
