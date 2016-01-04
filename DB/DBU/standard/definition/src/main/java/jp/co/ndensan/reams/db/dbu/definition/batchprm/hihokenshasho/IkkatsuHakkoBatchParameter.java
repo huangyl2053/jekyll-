@@ -5,12 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.batchprm.hihokenshasho;
 
-import java.sql.Time;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hihokenshasho.IkkatsuHakkoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
  * 被保険者証一括発行のバッチのパラメータです
@@ -41,15 +41,15 @@ public class IkkatsuHakkoBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_KONKAIFROM_YMD, name = "今回の開始日")
     private FlexibleDate konkaiFromYMD;
     @BatchParameter(key = KEY_KONKAIFROM_HMS, name = "今回の時分秒（以上）")
-    private Time konkaiFromHMS;
+    private RTime konkaiFromHMS;
     @BatchParameter(key = KEY_KONKAITO_YMD, name = "今回の終了日")
     private FlexibleDate konkaiToYMD;
     @BatchParameter(key = KEY_KONKAITO_HMS, name = "今回の時分秒（未満）")
-    private Time konkaiToHMS;
+    private RTime konkaiToHMS;
     @BatchParameter(key = KEY_KONKAIKIJUN_YMD, name = "今回の基準日")
     private FlexibleDate konkaikijunYMD;
     @BatchParameter(key = KEY_KONKAIKIJUNFROM_HMS, name = "今回の時分秒")
-    private Time konkaiKijunHMS;
+    private RTime konkaiKijunHMS;
     @BatchParameter(key = KEY_KOFU_YMD, name = "交付日")
     private FlexibleDate kofuYMD;
     @BatchParameter(key = KEY_TESTSHUTSURYOKUFLAG, name = "テスト出力するフラグ")
@@ -59,7 +59,7 @@ public class IkkatsuHakkoBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_HAKKOU_YMD, name = "発行日")
     private FlexibleDate hakkouYMD;
     @BatchParameter(key = KEY_HAKKOU_HMS, name = "発行日時の時分秒")
-    private Time hakkouHMS;
+    private RTime hakkouHMS;
     @BatchParameter(key = KEY_SHUTSURYOKUJUN_ID, name = "出力順ID")
     private RString shutsuryokujunId;
     @BatchParameter(key = KEY_SHOHYOJITYPE, name = "証表示タイプ")
@@ -86,16 +86,16 @@ public class IkkatsuHakkoBatchParameter extends BatchParameterBase {
      */
     public IkkatsuHakkoBatchParameter(RString shutsuryokuJokenCode,
             FlexibleDate konkaiFromYMD,
-            Time konkaiFromHMS,
+            RTime konkaiFromHMS,
             FlexibleDate konkaiToYMD,
-            Time konkaiToHMS,
+            RTime konkaiToHMS,
             FlexibleDate konkaikijunYMD,
-            Time konkaiKijunHMS,
+            RTime konkaiKijunHMS,
             FlexibleDate kofuYMD,
             Boolean testShutsuryokuFlag,
             Boolean saihakkoFlag,
             FlexibleDate hakkouYMD,
-            Time hakkouHMS,
+            RTime hakkouHMS,
             RString shutsuryokujunId,
             RString shohyojiType) {
         this.shutsuryokuJokenCode = shutsuryokuJokenCode;
