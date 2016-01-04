@@ -15,9 +15,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ItakusakiChosainIchiranReportId {
 
     /**
-     * 有効のみを表す列挙体です。
+     * 調査員一覧情報の帳票ID。
      */
-    REPORT_ID("DBE592001");
+    REPORT_ID("DBE592001"),
+    /**
+     * 医療機関・主治医一覧表の帳票ID。
+     */
+    REPORTID_DBE591001("DBE591001");
 
     private final RString code;
 
@@ -33,7 +37,7 @@ public enum ItakusakiChosainIchiranReportId {
     public RString getCode() {
         return this.code;
     }
-    
+
     /**
      * name()と同じ文字列をRString型で返します。
      *
@@ -42,7 +46,6 @@ public enum ItakusakiChosainIchiranReportId {
     public RString toRString() {
         return new RString(this.toString());
     }
-    
 
     /**
      * 該当する列挙型がない場合はnullを返します。
