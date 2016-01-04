@@ -74,6 +74,9 @@ public class HihousyosaiFinder {
     public SearchResult<KoseiShichosonMaster> getKoseiShichosonMasterList() {
         List<KoseiShichosonMaster> businessList = new ArrayList<>();
         List<DbT7051KoseiShichosonMasterEntity> entityList = dbT7051Dac.selectByGappeiKyuShichosonKubun();
+        if (entityList.isEmpty()) {
+            return SearchResult.of(Collections.<KoseiShichosonMaster>emptyList(), 0, false);
+        }
         for (DbT7051KoseiShichosonMasterEntity entity : entityList) {
             businessList.add(new KoseiShichosonMaster(entity));
         }
@@ -84,8 +87,8 @@ public class HihousyosaiFinder {
     /**
      * 旧保険者リスト情報取得します。
      *
-     * @param LasdecCode 市町村コード
-     * @param DonyukeitaiCode 導入形態コード
+     * @param 市町村コード 市町村コード
+     * @param 導入形態コード 導入形態コード
      * @return SearchResult<ShichosonBusiness>
      */
     @Transaction
