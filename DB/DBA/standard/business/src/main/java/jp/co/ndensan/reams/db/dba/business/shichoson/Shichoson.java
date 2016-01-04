@@ -8,6 +8,10 @@ package jp.co.ndensan.reams.db.dba.business.shichoson;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
+/**
+ *
+ * 旧市町村コード取得のクラスです。
+ */
 public class Shichoson {
 
     private LasdecCode 旧市町村コード;

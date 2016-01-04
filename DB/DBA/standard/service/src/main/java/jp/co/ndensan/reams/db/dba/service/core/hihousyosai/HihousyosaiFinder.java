@@ -66,7 +66,7 @@ public class HihousyosaiFinder {
     }
 
     /**
-     * 所在保険者リスト情報取得します
+     * 所在保険者リスト情報取得します。
      *
      * @return SearchResult<KoseiShichosonMaster> 構成市町村マスタリスト
      */
@@ -74,13 +74,12 @@ public class HihousyosaiFinder {
     public SearchResult<KoseiShichosonMaster> getKoseiShichosonMasterList() {
         List<KoseiShichosonMaster> businessList = new ArrayList<>();
         List<DbT7051KoseiShichosonMasterEntity> entityList = dbT7051Dac.selectByGappeiKyuShichosonKubun();
-        if (entityList.isEmpty()) {
+        if (entityList == null || entityList.isEmpty()) {
             return SearchResult.of(Collections.<KoseiShichosonMaster>emptyList(), 0, false);
         }
         for (DbT7051KoseiShichosonMasterEntity entity : entityList) {
             businessList.add(new KoseiShichosonMaster(entity));
         }
-
         return SearchResult.of(businessList, 0, false);
     }
 
@@ -89,7 +88,7 @@ public class HihousyosaiFinder {
      *
      * @param 市町村コード 市町村コード
      * @param 導入形態コード 導入形態コード
-     * @return SearchResult<Shichoson>
+     * @return SearchResult<Shichoson> 旧保険者リスト情報取得
      */
     @Transaction
     public SearchResult<Shichoson> getGappeiShichosonList(
@@ -97,23 +96,23 @@ public class HihousyosaiFinder {
             DonyukeitaiCode 導入形態コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(導入形態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("導入形態コード"));
-        List<Shichoson> 旧保険者List = new ArrayList<>();
-        List<KyuShichosonCode> 旧市町村コード情報List
+        List<Shichoson> shichosonList = new ArrayList<>();
+        Shichoson shichoson = new Shichoson();
+        List<KyuShichosonCode> kyuShichosonCodeList
                 = KyuShichosonCode.getKyuShichosonCodeJoho(市町村コード, 導入形態コード).get旧市町村コード情報List();
-        if (旧市町村コード情報List.isEmpty()) {
+        if (kyuShichosonCodeList == null || kyuShichosonCodeList.isEmpty()) {
             return SearchResult.of(Collections.<Shichoson>emptyList(), 0, false);
         }
-        for (KyuShichosonCode 旧市町村コード : 旧市町村コード情報List) {
-            Shichoson shichosonBusiness = new Shichoson();
-            shichosonBusiness.set旧市町村コード(旧市町村コード.get旧市町村コード());
-            shichosonBusiness.set旧市町村名称(旧市町村コード.get旧市町村名称());
-            旧保険者List.add(shichosonBusiness);
+        for (KyuShichosonCode kyuShichosonCode : kyuShichosonCodeList) {
+            shichoson.set旧市町村コード(kyuShichosonCode.get旧市町村コード());
+            shichoson.set旧市町村名称(kyuShichosonCode.get旧市町村名称());
+            shichosonList.add(shichoson);
         }
-        return SearchResult.of(旧保険者List, 0, false);
+        return SearchResult.of(shichosonList, 0, false);
     }
 
     /**
-     * 得喪情報取得です。
+     * 得喪情報取得します。
      *
      * @param 被保険者番号 被保険者番号
      * @param 異動日 異動日
@@ -133,13 +132,14 @@ public class HihousyosaiFinder {
     }
 
     /**
-     * 被保区分リスト情報取得です。
+     * 被保区分リスト情報取得します。
      *
-     * @param code Code
+     * @param code 処理モード
      * @return SearchResult<ShikakuKubun> 資格区分リスト
      */
     @Transaction
     public SearchResult<ShikakuKubun> getHihokubunList(RString code) {
+        requireNonNull(code, UrSystemErrorMessages.値がnull.getReplacedMessage("処理モード"));
         List<ShikakuKubun> shikakuKubunList = new ArrayList<>();
         ShikakuKubun shikakuKubun = ShikakuKubun.toValue(code);
         shikakuKubunList.add(shikakuKubun);

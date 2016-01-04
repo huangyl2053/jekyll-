@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 構成市町村情報を取得。
+ * 構成市町村マスタを取得クラスです。
  */
 public class KoseiShichosonMaster {
 
