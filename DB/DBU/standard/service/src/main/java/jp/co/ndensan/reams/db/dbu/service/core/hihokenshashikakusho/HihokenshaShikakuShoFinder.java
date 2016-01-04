@@ -7,13 +7,17 @@ package jp.co.ndensan.reams.db.dbu.service.core.hihokenshashikakusho;
 
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashikakushodata.HihokenshaShikakuShoDataParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.hihokenshashikakushodataentity.HihokenshaShikakuShoDataEntity;
-//import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyukeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyukeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.ShoYoshikiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7037ShoKofuKaishuDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -106,17 +110,17 @@ public class HihokenshaShikakuShoFinder {
         hihokenshaShikakuShoDataEntity.setTanpyoHakkoUmuFlag(true);
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         Code 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
-//        if (DonyukeitaiCode.事務広域.getコード().equals(導入形態コード.getKey()) || DonyukeitaiCode.事務構成市町村.getコード().
-//                equals(導入形態コード.getKey()) || DonyukeitaiCode.認定広域.getコード().equals(導入形態コード.getKey())) {
-//            DbT7051KoseiShichosonMasterEntity 市町村コード = dbT7051KoseiShichosonMasterDac.
-//                    shichosonCode(hihokenshaShikakuParameter.getShoKisaiHokenshaNo());
-//            hihokenshaShikakuShoDataEntity.setShichosonCode(市町村コード.getShichosonCode());
-//        } else if (DonyukeitaiCode.事務単一.getコード().equals(導入形態コード.getKey())
-//                || DonyukeitaiCode.認定単一.getコード().equals(導入形態コード.getKey())) {
-//            IAssociationFinder finder = AssociationFinderFactory.createInstance();
-//            Association association = finder.getAssociation();
-//            hihokenshaShikakuShoDataEntity.setShichosonCode(association.get地方公共団体コード());
-//        }
+        if (DonyukeitaiCode.事務広域.getコード().equals(導入形態コード.getKey()) || DonyukeitaiCode.事務構成市町村.getコード().
+                equals(導入形態コード.getKey()) || DonyukeitaiCode.認定広域.getコード().equals(導入形態コード.getKey())) {
+            DbT7051KoseiShichosonMasterEntity 市町村コード = dbT7051KoseiShichosonMasterDac.
+                    shichosonCode(hihokenshaShikakuParameter.getShoKisaiHokenshaNo());
+            hihokenshaShikakuShoDataEntity.setShichosonCode(市町村コード.getShichosonCode());
+        } else if (DonyukeitaiCode.事務単一.getコード().equals(導入形態コード.getKey())
+                || DonyukeitaiCode.認定単一.getコード().equals(導入形態コード.getKey())) {
+            IAssociationFinder finder = AssociationFinderFactory.createInstance();
+            Association association = finder.getAssociation();
+            hihokenshaShikakuShoDataEntity.setShichosonCode(association.get地方公共団体コード());
+        }
         hihokenshaShikakuShoDataEntity.setHakkoShoriTimestamp(new YMDHMS(RDateTime.now()));
         hihokenshaShikakuShoDataEntity.setLogicalDeletedFlag(false);
         return hihokenshaShikakuShoDataEntity;
