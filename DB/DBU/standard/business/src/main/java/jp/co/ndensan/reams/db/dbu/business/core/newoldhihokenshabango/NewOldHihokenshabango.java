@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 新旧被保険者番号変換するビジネスです。
  *
  */
-public class NewOldHihokenshabangoBusiness {
+public class NewOldHihokenshabango {
 
     private final DbT7026ShinKyuHihokenshaNoHenkanEntity entity;
 
@@ -22,7 +22,7 @@ public class NewOldHihokenshabangoBusiness {
      *
      * @param entity 新旧被保険者番号変換Entity
      */
-    public NewOldHihokenshabangoBusiness(DbT7026ShinKyuHihokenshaNoHenkanEntity entity) {
+    public NewOldHihokenshabango(DbT7026ShinKyuHihokenshaNoHenkanEntity entity) {
         this.entity = entity;
     }
 
