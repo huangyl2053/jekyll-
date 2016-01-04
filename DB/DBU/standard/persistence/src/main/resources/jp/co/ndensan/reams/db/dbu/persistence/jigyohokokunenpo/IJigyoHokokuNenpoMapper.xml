@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.jigyohokokunenpo.IJigyoHokokuNenpoMapper">
+
+    <resultMap id="getJigyoHokokuNenpoListResultMap" type="jp.co.ndensan.reams.db.dbu.entity.basic.DbT7021JigyoHokokuTokeiDataEntity" autoMapping="true">
+        <id property="hokokuYSeireki" column="hokokuYSeireki"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
+        <id property="hokokuM" column="hokokuM"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="shukeiTaishoYSeireki" column="shukeiTaishoYSeireki"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
+        <id property="shukeiTaishoM" column="shukeiTaishoM"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="toukeiTaishoKubun" column="toukeiTaishoKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="shichosonCode" column="shichosonCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <id property="hyoNo" column="hyoNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <id property="shukeiNo" column="shukeiNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <id property="shukeiTani" column="shukeiTani"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <id property="tateNo" column="tateNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <id property="yokoNo" column="yokoNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="shukeiKekkaAtai" column="shukeiKekkaAtai"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="tateKomokuCode" column="tateKomokuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="yokoKomokuCode" column="yokoKomokuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+    </resultMap>
+
+    <resultMap id="getJigyoHokokuNenpoDetalResultMap" type="jp.co.ndensan.reams.db.dbu.entity.basic.DbT7021JigyoHokokuTokeiDataEntity" autoMapping="true">
+        <id property="hokokuYSeireki" column="hokokuYSeireki"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
+        <id property="hokokuM" column="hokokuM"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="shukeiTaishoYSeireki" column="shukeiTaishoYSeireki"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
+        <id property="shukeiTaishoM" column="shukeiTaishoM"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="toukeiTaishoKubun" column="toukeiTaishoKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="shichosonCode" column="shichosonCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <id property="hyoNo" column="hyoNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <id property="shukeiNo" column="shukeiNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <id property="shukeiTani" column="shukeiTani"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <id property="shukeiKomokuMeisho" column="shukeiKomokuMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="tateNo" column="tateNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <id property="yokoNo" column="yokoNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="shukeiKekkaAtai" column="shukeiKekkaAtai"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="tateKomokuCode" column="tateKomokuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="yokoKomokuCode" column="yokoKomokuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+    </resultMap>
+
+    <select id="getJigyoHokokuNenpoList" resultMap="getJigyoHokokuNenpoListResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.JigyoHokokuNenpoParameter" fetchSize="500">
+        SELECT
+        DISTINCT
+        jigyoHokokuTokeiData."hokokuYSeireki" AS "hokokuYSeireki",
+        jigyoHokokuTokeiData."hokokuM" AS "hokokuM",
+        jigyoHokokuTokeiData."shukeiTaishoYSeireki" AS "shukeiTaishoYSeireki",
+        jigyoHokokuTokeiData."shukeiTaishoM" AS "shukeiTaishoM",
+        jigyoHokokuTokeiData."toukeiTaishoKubun" AS "toukeiTaishoKubun",
+        jigyoHokokuTokeiData."shichosonCode" AS "shichosonCode",
+        jigyoHokokuTokeiData."hyoNo" AS "hyoNo",
+        jigyoHokokuTokeiData."shukeiNo" AS "shukeiNo",
+        jigyoHokokuTokeiData."shukeiTani" AS "shukeiTani",
+        jigyoHokokuTokeiData."tateNo" AS "tateNo",
+        jigyoHokokuTokeiData."yokoNo" AS "yokoNo",
+        jigyoHokokuTokeiData."shukeiKekkaAtai" AS "shukeiKekkaAtai",
+        jigyoHokokuTokeiData."tateKomokuCode" AS "tateKomokuCode",
+        jigyoHokokuTokeiData."yokoKomokuCode" AS "yokoKomokuCode"
+
+        FROM
+        rgdb."DbT7021JigyoHokokuTokeiData" AS jigyoHokokuTokeiData
+        WHERE
+        jigyoHokokuTokeiData."hokokuM" = '00'
+        <choose>
+            <when test="usehokokuYSeireki">
+                AND jigyoHokokuTokeiData."hokokuYSeireki" = #{hokokuYSeireki}
+            </when>
+            <when test="usehokensilyakbn">
+                AND jigyoHokokuTokeiData."toukeiTaishoKubun" = #{hokensilyakbn}
+                <if test="usehokensilyakbnShichoson">
+                    AND (
+                    (
+                    jigyoHokokuTokeiData."hyoNo" = '01'
+                    AND
+                    jigyoHokokuTokeiData."shukeiNo" = '0400'
+                    )
+                    OR(
+                    jigyoHokokuTokeiData."hyoNo" = '02'
+                    AND
+                    jigyoHokokuTokeiData."shukeiNo" IN ('0601', '0602', '0603')
+                    )
+                    OR(
+                    jigyoHokokuTokeiData."hyoNo" = '08'
+                    AND
+                    jigyoHokokuTokeiData."shukeiNo" IN ('0100', '0200')
+                    )
+                    )
+                </if>
+                <if test="usehokensilyakbnKyuShichoson">
+                    AND (
+                    (
+                    jigyoHokokuTokeiData."hyoNo" = '11'
+                    AND
+                    jigyoHokokuTokeiData."shukeiNo" = '0400'
+                    )
+                    OR(
+                    jigyoHokokuTokeiData."hyoNo" = '12'
+                    AND
+                    jigyoHokokuTokeiData."shukeiNo" IN ('0601', '0602', '0603')
+                    )
+                    OR(
+                    jigyoHokokuTokeiData."hyoNo" = '18'
+                    AND
+                    jigyoHokokuTokeiData."shukeiNo" IN ('0100', '0200')
+                    )
+                    )
+                </if>
+            </when>
+            <when test="useshichosonCode">
+                AND jigyoHokokuTokeiData."shichosonCode" = #{shichosonCode}
+            </when>
+        </choose>
+        ORDER BY
+        jigyoHokokuTokeiData."shichosonCode" ASC,
+        jigyoHokokuTokeiData."hokokuYSeireki" DESC,
+        jigyoHokokuTokeiData."shukeiNo" ASC
+    </select>
+    <select id="getJigyoHokokuNenpoDetal" resultMap="getJigyoHokokuNenpoDetalResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.JigyoHokokuNenpoDetalParameter" fetchSize="500">
+        SELECT
+        jigyoHokokuTokeiData."hokokuYSeireki" AS "hokokuYSeireki",
+        jigyoHokokuTokeiData."hokokuM" AS "hokokuM",
+        jigyoHokokuTokeiData."shukeiTaishoYSeireki" AS "shukeiTaishoYSeireki",
+        jigyoHokokuTokeiData."shukeiTaishoM" AS "shukeiTaishoM",
+        jigyoHokokuTokeiData."toukeiTaishoKubun" AS "toukeiTaishoKubun",
+        jigyoHokokuTokeiData."shichosonCode" AS "shichosonCode",
+        jigyoHokokuTokeiData."hyoNo" AS "hyoNo",
+        jigyoHokokuTokeiData."shukeiNo" AS "shukeiNo",
+        jigyoHokokuTokeiData."shukeiTani" AS "shukeiTani",
+        jigyoHokokuTokeiData."shukeiKomokuMeisho" AS "shukeiKomokuMeisho",
+        jigyoHokokuTokeiData."tateNo" AS "tateNo",
+        jigyoHokokuTokeiData."yokoNo" AS "yokoNo",
+        jigyoHokokuTokeiData."shukeiKekkaAtai" AS "shukeiKekkaAtai",
+        jigyoHokokuTokeiData."tateKomokuCode" AS "tateKomokuCode",
+        jigyoHokokuTokeiData."yokoKomokuCode" AS "yokoKomokuCode"
+
+        FROM
+        rgdb."DbT7021JigyoHokokuTokeiData" AS jigyoHokokuTokeiData
+        WHERE
+        jigyoHokokuTokeiData."hokokuYSeireki" = #{hokokuYSeireki}
+        AND
+        jigyoHokokuTokeiData."hokokuM" = '00'
+        AND
+        jigyoHokokuTokeiData."shukeiTaishoYSeireki" = #{shukeiTaishoYSeireki}
+        AND
+        jigyoHokokuTokeiData."shukeiTaishoM" = '00'
+        AND
+        jigyoHokokuTokeiData."toukeiTaishoKubun" = #{toukeiTaishoKubun}
+        AND
+        jigyoHokokuTokeiData."shichosonCode" = #{shichosonCode}
+        AND
+        jigyoHokokuTokeiData."hyoNo" = #{hyoNo}
+        <choose>
+            <when test="useshukeiNo">
+                AND
+                jigyoHokokuTokeiData."shukeiNo" = #{shukeiNo}
+            </when>
+            <when test="useshukeiNoList">
+                AND
+                jigyoHokokuTokeiData."shukeiNo" IN
+                <foreach item="item" index="index" collection="shukeiNoList" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </when>
+        </choose>
+        ORDER BY
+        jigyoHokokuTokeiData."hokokuYSeireki",
+        jigyoHokokuTokeiData."hokokuM",
+        jigyoHokokuTokeiData."shukeiTaishoYSeireki",
+        jigyoHokokuTokeiData."shukeiTaishoM",
+        jigyoHokokuTokeiData."toukeiTaishoKubun",
+        jigyoHokokuTokeiData."shichosonCode",
+        jigyoHokokuTokeiData."hyoNo",
+        jigyoHokokuTokeiData."shukeiNo",
+        jigyoHokokuTokeiData."shukeiTani",
+        jigyoHokokuTokeiData."tateNo",
+        jigyoHokokuTokeiData."yokoNo"
+    </select>
+    <update id="updateJigyoHokokuNenpoData" parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.JigyoHokokuNenpoUpdateParameter">
+        UPDATE
+        rgdb."DbT7021JigyoHokokuTokeiData"
+        SET
+        "shukeiKekkaAtai" = #{shukeiKekkaAtai}
+        WHERE
+        "hokokuYSeireki" =  #{hokokuYSeireki}
+        AND
+        "hokokuM" =  #{hokokuM}
+        AND
+        "shukeiTaishoYSeireki" =  #{shukeiTaishoYSeireki}
+        AND
+        "shukeiTaishoM" =  #{shukeiTaishoM}
+        AND
+        "toukeiTaishoKubun" =  #{toukeiTaishoKubun}
+        AND
+        "shichosonCode" =  #{shichosonCode}
+        AND
+        "hyoNo" =  #{hyoNo}
+        AND
+        "shukeiNo"  =  #{shukeiNo}
+        AND
+        "shukeiTani"  =  #{shukeiTani}
+        AND
+        "tateNo"  =  #{tateNo}
+        AND
+        "yokoNo"  =  #{yokoNo}
+    </update>
+    <delete id="deleteJigyoHokokuNenpoData" parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.JigyoHokokuNenpoDeleteParameter">
+        DELETE FROM
+        rgdb."DbT7021JigyoHokokuTokeiData" AS jigyoHokokuTokeiData
+        WHERE
+        jigyoHokokuTokeiData."hokokuYSeireki" =  #{hokokuYSeireki}
+        AND
+        jigyoHokokuTokeiData."hokokuM" =  '00'
+        AND
+        jigyoHokokuTokeiData."shukeiTaishoYSeireki" =  #{shukeiTaishoYSeireki}
+        AND
+        jigyoHokokuTokeiData."shukeiTaishoM" =  '00'
+        AND
+        jigyoHokokuTokeiData."toukeiTaishoKubun" =  #{toukeiTaishoKubun}
+        AND
+        jigyoHokokuTokeiData."shichosonCode" =  #{shichosonCode}
+        AND
+        jigyoHokokuTokeiData."hyoNo" =  #{hyoNo}
+        <choose>
+            <when test="useshukeiNoList">
+                AND
+                jigyoHokokuTokeiData."shukeiNo" IN
+                <foreach item="item" index="index" collection="shukeiNoList" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </when>
+        </choose>
+    </delete>
+</mapper>
