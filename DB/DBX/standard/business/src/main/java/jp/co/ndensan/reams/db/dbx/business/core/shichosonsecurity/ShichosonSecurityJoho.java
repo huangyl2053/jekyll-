@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyukeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -22,16 +22,16 @@ public class ShichosonSecurityJoho {
     private RString 広域タイプ;
     private RString 市町村ＩＤ有効桁数;
     private KoseiShichosonJohoEntity 市町村情報;
-    private DonyukeitaiCode 導入形態;
+    private DonyuKeitaiCode 導入形態;
 
     /**
      * 導入形態を返します。
      *
      * @return 導入形態
      */
-    public DonyukeitaiCode get導入形態() {
+    public DonyuKeitaiCode get導入形態() {
         if (this.導入形態 == null) {
-            this.導入形態 = DonyukeitaiCode.toValue(this.導入形態コード);
+            this.導入形態 = DonyuKeitaiCode.toValue(this.導入形態コード);
         }
         return this.導入形態;
     }
