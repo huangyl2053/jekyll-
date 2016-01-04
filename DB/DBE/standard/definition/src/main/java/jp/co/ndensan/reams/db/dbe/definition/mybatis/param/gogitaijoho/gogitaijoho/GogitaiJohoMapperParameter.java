@@ -11,22 +11,21 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  * 合議体情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class GogitaiJohoMapperParameter {
+public final class GogitaiJohoMapperParameter {
 
-    private final int gogitaiNo;
-    private final FlexibleDate gogitaiYukoKikanKaishiYMD;
-
-    private final boolean usesGogitaiNo;
-    private final boolean usesGogitaiYukoKikanKaishiYMD;
-    private final boolean shinsakaiKaisaiBashoJokyo;
+    private  final int gogitaiNo;
+    private  final FlexibleDate gogitaiYukoKikanKaishiYMD;
+    private  final boolean usesGogitaiNo;
+    private  final boolean usesGogitaiYukoKikanKaishiYMD;
+    private  final boolean shinsakaiKaisaiBashoJokyo;
 
     /**
      * コンストラクタです。
      *
      * @param gogitaiNo int
      * @param gogitaiYukoKikanKaishiYMD FlexibleDate
-     * @param uses主キー1 boolean
-     * @param uses主キー2 boolean
+     * @param usesGogitaiNo boolean
+     * @param usesGogitaiYukoKikanKaishiYMD boolean
      * @param shinsakaiKaisaiBashoJokyo boolean
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
@@ -50,33 +49,30 @@ public class GogitaiJohoMapperParameter {
      *
      * @param gogitaiNo int
      * @param gogitaiYukoKikanKaishiYMD FlexibleDate
-     * @return 身体手帳検索パラメータ
+     * @return GogitaiJohoMapperParameter 合議体情報を特定パラメータ
      */
     public static GogitaiJohoMapperParameter createSelectByKeyParam(
-            int gogitaiNo,
-            FlexibleDate gogitaiYukoKikanKaishiYMD) {
-        return new GogitaiJohoMapperParameter(gogitaiNo, gogitaiYukoKikanKaishiYMD, true, true,true);
+            int gogitaiNo, FlexibleDate gogitaiYukoKikanKaishiYMD) {
+        return new GogitaiJohoMapperParameter(gogitaiNo, gogitaiYukoKikanKaishiYMD, true, true, true);
     }
 
     /**
      * 一覧検索用のパラメータを生成します。
      *
      * @param gogitaiNo int
-     * @return 身体手帳検索パラメータ
+     * @return GogitaiJohoMapperParameter 合議体情報を特定パラメータ
      */
-    public static GogitaiJohoMapperParameter createSelectListParam(
-            int gogitaiNo) {
-        return new GogitaiJohoMapperParameter(gogitaiNo, FlexibleDate.EMPTY, true, false,true);
+    public static GogitaiJohoMapperParameter createSelectListParam(int gogitaiNo) {
+        return new GogitaiJohoMapperParameter(gogitaiNo, FlexibleDate.EMPTY, true, false, true);
     }
     
     /**
      * 開催場所検索用のパラメータを生成します。
      *
      * @param 審査会開催場所状況 審査会開催場所状況
-     * @return 身体手帳検索パラメータ
+     * @return GogitaiJohoMapperParameter 合議体情報を特定パラメータ
      */
-    public static GogitaiJohoMapperParameter createSelectBy審査会開催場所状況(boolean 
-            審査会開催場所状況) {
-        return new GogitaiJohoMapperParameter(0, FlexibleDate.EMPTY, true, false,審査会開催場所状況);
+    public static GogitaiJohoMapperParameter createSelectBy審査会開催場所状況(boolean 審査会開催場所状況) { 
+        return new GogitaiJohoMapperParameter(0, FlexibleDate.EMPTY, true, false, 審査会開催場所状況);
     }
 }

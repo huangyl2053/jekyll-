@@ -3,14 +3,21 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoBuilder;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.dgKaisaibashoIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoManager;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 介護認定審査会開催場所登録画面でのバリデーションを管理するハンドラークラスです。
@@ -97,9 +104,10 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
      *
      */
     public void set開催場所一覧の参照() {
-        dgKaisaibashoIchiran_Row ClickedItem = div.getDgKaisaibashoIchiran().getClickedItem();
-        if (!(更新モード.equals(ClickedItem.getJyotai()) || 追加モード.equals(ClickedItem.getJyotai()))) {
-            setSelectItem(ClickedItem);
+        dgKaisaibashoIchiran_Row clickedItem = div.getDgKaisaibashoIchiran().getClickedItem();
+        if (!(更新モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()) 
+                || 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()))) {
+            setSelectItem(clickedItem);
             set開催場所編集エリア非活性();
         }
     }
@@ -110,8 +118,15 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
      */
     public void set修正の場合開催場所編集エリア() {
         div.getShinakaiKaisaIbashoShosai().setJyotai(更新モード);
-        dgKaisaibashoIchiran_Row ClickedItem = div.getDgKaisaibashoIchiran().getClickedItem();
-        setSelectItem(ClickedItem);
+        dgKaisaibashoIchiran_Row clickedItem = div.getDgKaisaibashoIchiran().getClickedItem();
+        RStringBuilder selectedItem = new RStringBuilder(clickedItem.getKaisaibashoCode());
+        selectedItem.append(clickedItem.getKaisaibashoMeisho())
+         .append(clickedItem.getKaisaibashoJusho())
+         .append(clickedItem.getKaisaibashoTelNo())
+         .append(clickedItem.getKaisaibashoJokyo())
+         .append(clickedItem.getKaisaiChikuCode());
+        div.getShinakaiKaisaIbashoShosai().setSelectItem(selectedItem.toRString());
+        setSelectItem(clickedItem);
         set開催場所編集エリア活性();
     }
 
@@ -154,6 +169,51 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         set開催場所編集エリア非活性();
     }
 
+    /**
+     * 介護認定審査会開催場所登録の「保存する」ボタンが押下の場合、状態によってinsert/update/delete処理に振り分けられます。
+     * 
+     */
+    public void save(){
+         Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList
+                = ViewStateHolder.get(ViewStateKeys.開催場所情報一覧, Models.class);
+        List<dgKaisaibashoIchiran_Row> rowList = div.getDgKaisaibashoIchiran().getDataSource();
+        ShinsakaiKaisaiBashoJohoManager manager = ShinsakaiKaisaiBashoJohoManager.createInstance();
+        for (dgKaisaibashoIchiran_Row row : rowList) {
+            for (ShinsakaiKaisaiBashoJoho shinsakaiKaisaiBashoJoho : shinsakaiKaisaiBashoJohoList) {
+                if (shinsakaiKaisaiBashoJoho.identifier().get介護認定審査会開催場所コード()
+                        .equals(row.getKaisaibashoCode())) {
+                    shinsakaiKaisaiBashoJoho = edit介護認定審査会開催場所情報(row, shinsakaiKaisaiBashoJoho);
+                    if (更新モード.equals(row.getJyotai())) {
+                        manager.介護認定審査会開催場所情報の更新(shinsakaiKaisaiBashoJoho);
+                        break;
+                    } else if (削除モード.equals(row.getJyotai())) {
+                        manager.介護認定審査会開催場所情報の削除(shinsakaiKaisaiBashoJoho);
+                        break;
+                    }
+                }
+            }
+            if (追加モード.equals(row.getJyotai())) {
+                manager.介護認定審査会開催場所情報の追加(edit介護認定審査会開催場所情報(row,
+                        new ShinsakaiKaisaiBashoJoho(row.getKaisaibashoCode())));
+            }
+        }
+    }
+    
+    private ShinsakaiKaisaiBashoJoho edit介護認定審査会開催場所情報(dgKaisaibashoIchiran_Row row,
+            ShinsakaiKaisaiBashoJoho shinsakaiKaisaiBashoJoho) {
+        ShinsakaiKaisaiBashoJohoBuilder builder = shinsakaiKaisaiBashoJoho.createBuilderForEdit();
+        builder.set介護認定審査会開催地区コード(new Code(row.getKaisaiChikuCode()));
+        builder.set介護認定審査会開催場所住所(row.getKaisaibashoJusho());
+        builder.set介護認定審査会開催場所名称(row.getKaisaibashoMeisho());
+        builder.set介護認定審査会開催場所電話番号(new TelNo(row.getKaisaibashoTelNo()));
+        if (通常.equals(row.getKaisaibashoJokyo())) {
+            builder.set介護認定審査会開催場所状況(有効);
+        } else if (削除.equals(row.getKaisaibashoJokyo())) {
+            builder.set介護認定審査会開催場所状況(全て);
+        }
+        return builder.build();
+    }
+    
     private void setYiChiRanItem(dgKaisaibashoIchiran_Row clickedItem) {
         clickedItem.setKaisaibashoCode(div.getTxtKaisaibashoCode().getValue()); 
         clickedItem.setKaisaibashoMeisho(div.getTxtKaisaibashoMeisho().getValue());

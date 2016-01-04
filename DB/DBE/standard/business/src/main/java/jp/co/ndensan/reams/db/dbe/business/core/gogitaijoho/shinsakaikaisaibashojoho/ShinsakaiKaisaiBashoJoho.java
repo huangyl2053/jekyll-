@@ -20,7 +20,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護認定審査会開催場所情報を管理するクラスです。
  */
-public class ShinsakaiKaisaiBashoJoho extends ModelBase<ShinsakaiKaisaiBashoJohoIdentifier, DbT5592ShinsakaiKaisaiBashoJohoEntity, ShinsakaiKaisaiBashoJoho> implements Serializable {
+public class ShinsakaiKaisaiBashoJoho 
+                extends ModelBase<ShinsakaiKaisaiBashoJohoIdentifier, 
+                                  DbT5592ShinsakaiKaisaiBashoJohoEntity, 
+                                  ShinsakaiKaisaiBashoJoho> 
+                implements Serializable {
 
 //TODO NetBeansの機能を使って必ずequalsとhashCodeを追加してください。
     private final DbT5592ShinsakaiKaisaiBashoJohoEntity entity;

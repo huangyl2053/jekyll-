@@ -21,22 +21,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class AkasiHakouKanriEntity {
 
-    private int 連番;
-    private HihokenshaNo 被保険者番号;
-    private RString 住民コード;
-    private YubinNo 郵便番号;
-    private RString 氏名;
-    private RString 住所;
-    private LasdecCode 市町村コードList;
-    private FlexibleDate 交付年月日;
-    private Code 交付事由コード;
-    private RString 交付事由略称;
-    private RString 交付事由名称;
-    private FlexibleDate 回収年月日;
-    private Code 回収事由コード;
-    private RString 回収事由名称;
-    private FlexibleDate 有効期限;
-    private RString 証様式区分コード;
-    private boolean 項目名付加フラグ;
-    private boolean 日付編集フラグ;
+    private int renban;
+    private HihokenshaNo hihokenshaNo;
+    private RString juminCode;
+    private YubinNo yubinNo;
+    private RString shimei;
+    private RString jusho;
+    private LasdecCode shichosonCode;
+    private FlexibleDate kofuYMD;
+    private Code kofuJiyuCode;
+    private RString kofuJiyuRyakusho;
+    private RString kofuJiyuMeisho;
+    private FlexibleDate kaishuYMD;
+    private Code kaishuJiyuCode;
+    private RString kaishuJiyuMeisho;
+    private FlexibleDate yukoKigenYMD;
+    private RString shoYoshikiKubunCode;
+    private boolean komokuNameFukaFlag;
+    private boolean hitukiHenshuFlag;
 }

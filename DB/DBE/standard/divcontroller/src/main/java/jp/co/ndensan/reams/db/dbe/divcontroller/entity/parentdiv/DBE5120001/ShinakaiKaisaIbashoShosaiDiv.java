@@ -43,6 +43,8 @@ public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
     private CodeInputDiv ccdKaisaiChikuCode;
     @JsonProperty("jyotai")
     private RString jyotai;
+    @JsonProperty("selectItem")
+    private RString selectItem;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -201,6 +203,24 @@ public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
     @JsonProperty("jyotai")
     public void setJyotai(RString jyotai) {
         this.jyotai = jyotai;
+    }
+
+    /*
+     * getselectItem
+     * @return selectItem
+     */
+    @JsonProperty("selectItem")
+    public RString getSelectItem() {
+        return selectItem;
+    }
+
+    /*
+     * setselectItem
+     * @param selectItem selectItem
+     */
+    @JsonProperty("selectItem")
+    public void setSelectItem(RString selectItem) {
+        this.selectItem = selectItem;
     }
 
     // </editor-fold>

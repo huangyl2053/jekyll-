@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.service.core.hihokenshashikakusho;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashikakushodata.HihokenshaShikakuShoDataParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.hihokenshashikakushodataentity.HihokenshaShikakuShoDataEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyukeitaiCode;
@@ -35,8 +34,8 @@ public class HihokenshaShikakuShoFinder {
 
     private final DbT7037ShoKofuKaishuDac dbT7037ShoKofuKaishuDac;
     private final DbT7051KoseiShichosonMasterDac dbT7051KoseiShichosonMasterDac;
-    private static final RString MENUID1_VALUE = new RString("DBUMN120001");
-    private static final RString MENUID2_VALUE = new RString("DBUMN120002");
+    private static final RString MENUID_DBUMN120001 = new RString("DBUMN120001");
+    private static final RString MENUID_DBUMN120002 = new RString("DBUMN120002");
 
     /**
      * コンストラクタ。
@@ -83,23 +82,23 @@ public class HihokenshaShikakuShoFinder {
     private HihokenshaShikakuShoDataEntity insert用データEntity(HihokenshaShikakuShoDataParameter hihokenshaShikakuParameter) {
         HihokenshaShikakuShoDataEntity hihokenshaShikakuShoDataEntity = new HihokenshaShikakuShoDataEntity();
         hihokenshaShikakuShoDataEntity.setHihokenshaNo(hihokenshaShikakuParameter.getHihokenshaNo());
-        if (hihokenshaShikakuParameter.getMenuId().equals(MENUID1_VALUE)) {
+        if (hihokenshaShikakuParameter.getMenuId().equals(MENUID_DBUMN120001)) {
             hihokenshaShikakuShoDataEntity.setKofuShoShurui(new RString("0001"));
             hihokenshaShikakuShoDataEntity.setYukoKigenYMD(FlexibleDate.EMPTY);
             hihokenshaShikakuShoDataEntity.setShinYoshikiSumiKubunCode(ShoYoshikiKubun.新様式.getコード());
             hihokenshaShikakuShoDataEntity.setShoYoshikiKubunCode(ShoYoshikiKubun.新様式２.getコード());
         }
-        if (hihokenshaShikakuParameter.getMenuId().equals(MENUID2_VALUE)) {
+        if (hihokenshaShikakuParameter.getMenuId().equals(MENUID_DBUMN120002)) {
             hihokenshaShikakuShoDataEntity.setKofuShoShurui(new RString("0002"));
             hihokenshaShikakuShoDataEntity.setYukoKigenYMD(hihokenshaShikakuParameter.getYukoKigenYMD());
             hihokenshaShikakuShoDataEntity.setShinYoshikiSumiKubunCode(RString.EMPTY);
             hihokenshaShikakuShoDataEntity.setShoYoshikiKubunCode(RString.EMPTY);
         }
-        List<DbT7037ShoKofuKaishuEntity> rirekiNo = dbT7037ShoKofuKaishuDac.getRirekiNo(hihokenshaShikakuParameter.getHihokenshaNo());
-        if (rirekiNo == null || rirekiNo.isEmpty()) {
+        DbT7037ShoKofuKaishuEntity rirekiNo = dbT7037ShoKofuKaishuDac.getRirekiNo(hihokenshaShikakuParameter.getHihokenshaNo());
+        if (rirekiNo == null) {
             hihokenshaShikakuShoDataEntity.setRirekiNo(1);
         } else {
-            hihokenshaShikakuShoDataEntity.setRirekiNo(rirekiNo.get(0).getRirekiNo() + 1);
+            hihokenshaShikakuShoDataEntity.setRirekiNo(rirekiNo.getRirekiNo() + 1);
         }
         hihokenshaShikakuShoDataEntity.setShikibetsuCode(hihokenshaShikakuParameter.getShikibetsuCode());
         hihokenshaShikakuShoDataEntity.setKofuYMD(hihokenshaShikakuParameter.getKofuYMD());

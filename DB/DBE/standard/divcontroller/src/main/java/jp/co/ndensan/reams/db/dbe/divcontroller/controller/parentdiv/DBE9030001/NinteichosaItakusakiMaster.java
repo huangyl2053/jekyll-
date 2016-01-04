@@ -10,30 +10,44 @@ import jp.co.ndensan.reams.db.dbe.business.core.tyousai.koseishichosonmaster.Kos
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.DBE9030001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.DBE9030001TransitionEventName;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.NinteichosaItakusakiJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.NinteichosaItakusakiMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.NinteichosaItakusakiMasterDivSpec;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.dgChosainIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9030001.NinteichosaItakusakiMasterHandler;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * 認定調査委託先マスタのクラスです
@@ -46,6 +60,9 @@ public class NinteichosaItakusakiMaster {
     private static final RString 修正状態コード = new RString("修正");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString 市町村の合法性チェックreplace = new RString("市町村コード");
+    private static final RString その他状態コード = new RString("その他");
+    private static final CodeShubetsu 割付地区名称コード種別 = new CodeShubetsu("5002");
+    private static final RString CSVファイル名 = new RString("認定調査委託先情報.csv");
 
     /**
      * 画面初期化表示、画面項目に設定されている値をクリアする。
@@ -132,32 +149,48 @@ public class NinteichosaItakusakiMaster {
      * ＣＳＶを出力する
      *
      * @param div
+     * @param response
      * @return
      */
-    public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnOutputCsv(NinteichosaItakusakiMasterDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            IValidationMessages messages = ValidationMessagesFactory.createInstance();
-            DBE9030001ErrorMessage 対象データなし = new DBE9030001ErrorMessage(UrErrorMessages.対象データなし);
-            messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先一覧データの存在チェック)
-                    .thenAdd(対象データなし).messages());
-            messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先一覧データの編集しないチェック)
-                    .thenAdd(DbzErrorMessages.編集後更新指示).messages());
-            pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                    対象データなし, div.getChosaitakusakiJohoInput()).build().check(messages));
-            pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                    DbzErrorMessages.編集後更新指示,
-                    div.getChosaitakusakiJohoInput()).build().check(messages));
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
+    public IDownLoadServletResponse onClick_btnOutputCsv(NinteichosaItakusakiMasterDiv div, IDownLoadServletResponse response) {
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
+        try (CsvWriter<NinteichosaItakusakiJohoCsvEntity> csvWriter = new CsvWriter.InstanceBuilder(filePath).canAppend(true).
+                setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+            int rowIndex = 0;
+            for (dgChosainIchiran_Row row : div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource()) {
+                csvWriter.writeLine(converterDataSourceFromToCsvEntity(div, row, rowIndex));
+                rowIndex++;
             }
-            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
-        } else {
-            getHandler(div).outputCsv();
-            div.getCcdKanryoMessage().setSuccessMessage(
-                    new RString(UrInformationMessages.正常終了.getMessage().toString()), CSV出力完了, RString.EMPTY);
-            return ResponseData.of(div).setState(DBE9030001StateName.完了);
         }
+        FilesystemName sharedFileName = new FilesystemName(CSVファイル名);
+        RDateTime sharedFileId = SharedFile.copyToSharedFile(new FilesystemPath(filePath), sharedFileName);
+        div.getCcdKanryoMessage().setSuccessMessage(
+                new RString(UrInformationMessages.正常終了.getMessage().evaluate()), CSV出力完了, RString.EMPTY);
+        return SharedFileDirectAccessDownload.directAccessDownload(sharedFileName, sharedFileId, CSVファイル名, response);
+//        TODO QA #72362
+//        if (!ResponseHolder.isReRequest()) {
+//            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+//            IValidationMessages messages = ValidationMessagesFactory.createInstance();
+//            DBE9030001ErrorMessage 対象データなし = new DBE9030001ErrorMessage(UrErrorMessages.対象データなし);
+//            messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先一覧データの存在チェック)
+//                    .thenAdd(対象データなし).messages());
+//            messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先一覧データの編集しないチェック)
+//                    .thenAdd(DbzErrorMessages.編集後更新指示).messages());
+//            pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+//                    対象データなし, div.getChosaitakusakiJohoInput()).build().check(messages));
+//            pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+//                    DbzErrorMessages.編集後更新指示,
+//                    div.getChosaitakusakiJohoInput()).build().check(messages));
+//            if (pairs.iterator().hasNext()) {
+//                return ResponseData.of(div).addValidationMessages(pairs).respond();
+//            }
+//            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+//        } else {
+//            getHandler(div).outputCsv();
+//            div.getCcdKanryoMessage().setSuccessMessage(
+//                    new RString(UrInformationMessages.正常終了.getMessage().evaluate()), CSV出力完了, RString.EMPTY);
+//            return ResponseData.of(div).setState(DBE9030001StateName.完了);
+//        }
     }
 
 //TODO DBZ.JigyoshaInputGuideが未作成
@@ -230,6 +263,9 @@ public class NinteichosaItakusakiMaster {
             div.getChosaitakusakiJohoInput().clear();
             return ResponseData.of(div).setState(DBE9030001StateName.一覧);
         }
+        if (div.get状態().equals(その他状態コード)) {
+            return ResponseData.of(div).setState(DBE9030001StateName.一覧);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -246,7 +282,8 @@ public class NinteichosaItakusakiMaster {
         DBE9030001ErrorMessage 入力値が不正_追加メッセージあり
                 = new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 市町村の合法性チェックreplace.toString());
         DBE9030001ErrorMessage 既に登録済 = new DBE9030001ErrorMessage(
-                UrErrorMessages.既に登録済, div.getChosaitakusakiJohoInput().getTxtjigyoshano().getValue().toString());
+                UrErrorMessages.既に登録済, div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue() == null
+                ? RString.EMPTY.toString() : div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue().toString());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先情報登録エリアの編集状態チェック)
                 .thenAdd(編集なしで更新不可).messages());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.市町村の合法性チェック)
@@ -309,21 +346,27 @@ public class NinteichosaItakusakiMaster {
             } else {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
-        } else {
+        }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+            int rowIndex = 0;
             for (dgChosainIchiran_Row row : div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource()) {
-                if (削除状態.equals(row.getJotai())) {
-                    if (!getHandler(div).削除行データの整合性チェック(
-                            new LasdecCode(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString())
-                                    .get(Integer.valueOf(div.getHdnSelectID().toString()))), row.getChosaItakusakiCode().getValue())) {
-                        throw new ApplicationException(DbeErrorMessages.他の情報で使用している為削除不可.getMessage());
-                    }
+                if (削除状態.equals(row.getJotai())
+                        && !getHandler(div).削除行データの整合性チェック(
+                                new LasdecCode(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString())
+                                        .get(rowIndex)), row.getChosaItakusakiCode().getValue())) {
+                    throw new ApplicationException(DbeErrorMessages.他の情報で使用している為削除不可.getMessage());
+
                 }
+                rowIndex++;
             }
             getHandler(div).save調査委託先一覧データ();
             div.getCcdKanryoMessage().setSuccessMessage(
-                    new RString(UrInformationMessages.保存終了.getMessage().toString()), RString.EMPTY, RString.EMPTY);
+                    new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
             return ResponseData.of(div).setState(DBE9030001StateName.完了);
         }
+        return ResponseData.of(div).respond();
     }
 
     private NinteichosaItakusakiMasterHandler getHandler(NinteichosaItakusakiMasterDiv div) {
@@ -339,6 +382,32 @@ public class NinteichosaItakusakiMaster {
         return false;
     }
 
+    private NinteichosaItakusakiJohoCsvEntity converterDataSourceFromToCsvEntity(
+            NinteichosaItakusakiMasterDiv div, dgChosainIchiran_Row row, int rowIndex) {
+        NinteichosaItakusakiJohoCsvEntity csvEntity = new NinteichosaItakusakiJohoCsvEntity();
+        csvEntity.set市町村コード(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString()).get(rowIndex));
+        csvEntity.set市町村(row.getShichoson());
+        csvEntity.set調査委託先コード(row.getChosaItakusakiCode().getValue());
+        csvEntity.set事業者番号(row.getJigyoshaNo());
+        csvEntity.set調査委託先名称(row.getChosaItakusakiMeisho());
+        csvEntity.set調査委託先カナ名称(row.getChosaItakusakiKana());
+        csvEntity.set郵便番号(row.getYubinNo());
+        csvEntity.set住所(row.getJusho());
+        csvEntity.set電話番号(row.getTelNo());
+        csvEntity.setＦＡＸ番号(row.getFaxNo());
+        csvEntity.set機関代表者氏名(row.getKikanDaihyoshaName());
+        csvEntity.set機関代表者カナ氏名(row.getKikanDaihyoshaKanaName());
+        csvEntity.set調査委託区分(row.getChosaItakuKubun());
+        csvEntity.set特定調査員表示フラグ(row.getTokuteiChosainDispFlag());
+        csvEntity.set割付定員(new RString(row.getWaritsukeTeiin().getValue().toString()));
+        csvEntity.set割付地区コード(row.getChiku());
+        csvEntity.set割付地区名称(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, 割付地区名称コード種別, new Code(row.getChiku())));
+        csvEntity.set自動割付フラグ(row.getAutoWaritsukeFlag());
+        csvEntity.set機関の区分(row.getKikanKubun());
+        csvEntity.set状況フラグ(row.getJokyoFlag());
+        return csvEntity;
+    }
+
     private static class DBE9030001ErrorMessage implements IMessageGettable, IValidationMessage {
 
         private final Message message;
@@ -352,4 +421,5 @@ public class NinteichosaItakusakiMaster {
             return message;
         }
     }
+
 }

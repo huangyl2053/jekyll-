@@ -25,11 +25,9 @@ public class ItakusakiChosainIchiranFlow extends BatchFlowBase<ItakusakiChosainI
     private static final String CHOSAIN_ITIRAN = "chosainItiran";
 
     @Step(CHOSAIN_ITIRAN)
-    private IBatchFlowCommand chosainItiran() {
+    IBatchFlowCommand chosainItiran() {
         return loopBatch(ItakusakiChosainIchiranQueryProcess.class)
                 .arguments(getParameter().toProcessParameter())
                 .define();
-
     }
-
 }

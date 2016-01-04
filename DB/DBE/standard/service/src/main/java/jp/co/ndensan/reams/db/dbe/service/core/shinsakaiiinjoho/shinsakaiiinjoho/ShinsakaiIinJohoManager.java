@@ -186,6 +186,21 @@ public class ShinsakaiIinJohoManager {
     }
 
     /**
+     * 介護認定審査会委員情報{@link ShinsakaiIinJoho}を保存します。
+     *
+     * @param 介護認定審査会委員情報 介護認定審査会委員情報
+     * @return 追加あり:true、追加なし:false
+     */
+    @Transaction
+    public boolean insert(ShinsakaiIinJoho 介護認定審査会委員情報) {
+        requireNonNull(介護認定審査会委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報"));
+
+        介護認定審査会委員情報Dac.save(介護認定審査会委員情報.toEntity());
+        int count = insert介護認定審査会委員所属機関情報リスト(介護認定審査会委員情報.getKaigoNinteiShinsakaiIinShozokuKikanJohoList());
+        return count == 介護認定審査会委員情報.getKaigoNinteiShinsakaiIinShozokuKikanJohoList().size();
+    }
+
+    /**
      * 介護認定審査会委員情報{@link ShinsakaiIinJoho}を物理削除します。
      *
      * @param 介護認定審査会委員情報 介護認定審査会委員情報
@@ -217,5 +232,14 @@ public class ShinsakaiIinJohoManager {
         for (KaigoNinteiShinsakaiIinShozokuKikanJoho 介護認定審査会委員所属機関情報 : 介護認定審査会委員所属機関情報List) {
             介護認定審査会委員所属機関情報Manager.save介護認定審査会委員所属機関情報(介護認定審査会委員所属機関情報);
         }
+    }
+
+    private int insert介護認定審査会委員所属機関情報リスト(List<KaigoNinteiShinsakaiIinShozokuKikanJoho> 介護認定審査会委員所属機関情報List) {
+        int count = 0;
+        for (KaigoNinteiShinsakaiIinShozokuKikanJoho 介護認定審査会委員所属機関情報 : 介護認定審査会委員所属機関情報List) {
+            介護認定審査会委員所属機関情報Manager.save介護認定審査会委員所属機関情報(介護認定審査会委員所属機関情報);
+            count = count + 1;
+        }
+        return count;
     }
 }

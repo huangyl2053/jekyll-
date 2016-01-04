@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -105,9 +106,10 @@ public class TekiyoJogaishaDaichoJohoFinder {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先));
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
+        key.set識別コード(識別コード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         TekiyoJogaiShisetuJyohoParameter parameter = TekiyoJogaiShisetuJyohoParameter.createParamFor識別コード(
-                識別コード, new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
+                ShikibetsuCode.EMPTY, new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
         ITekiyoJogaiShisetuJyohoMapper daichoJohoMapper = mapperProvider.create(ITekiyoJogaiShisetuJyohoMapper.class);
         ShikibetsuTaishoRelateEntity 宛名情報PSM = daichoJohoMapper.select宛名情報(parameter);
         if (宛名情報PSM == null) {
@@ -149,7 +151,7 @@ public class TekiyoJogaishaDaichoJohoFinder {
             適用除外者台帳情報Entity.set事業者名称(entity.get事業者名称());
             適用除外者台帳情報Entity.set事業者住所(entity.get事業者住所());
             適用除外者台帳情報Entity.set電話番号(entity.get電話番号());
-            適用除外者台帳情報Entity.set郵便番号(entity.get郵便番号().getEditedYubinNo());
+            適用除外者台帳情報Entity.set郵便番号(郵便フォーマット(entity.get郵便番号()));
             set適用除外者台帳情報(適用除外者台帳情報Entity, 宛名情報PSM);
             daichoJohoList.add(new TekiyoJogaishaDaichoJoho(適用除外者台帳情報Entity));
         }
@@ -318,6 +320,16 @@ public class TekiyoJogaishaDaichoJohoFinder {
     }
 
     private RString 日付フォーマット(FlexibleDate 日付) {
+        if (日付 == null || 日付.isEmpty()) {
+            return RString.EMPTY;
+        }
         return 日付.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString 郵便フォーマット(YubinNo 郵便) {
+        if (郵便 == null || 郵便.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return 郵便.getEditedYubinNo();
     }
 }
