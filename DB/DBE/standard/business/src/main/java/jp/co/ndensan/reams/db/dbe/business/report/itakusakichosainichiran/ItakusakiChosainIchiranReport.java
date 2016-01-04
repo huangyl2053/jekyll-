@@ -46,7 +46,7 @@ public final class ItakusakiChosainIchiranReport extends Report<ItakusakiChosain
     @Override
     public void writeBy(ReportSourceWriter<ItakusakiChosainIchiranReportSource> reportSourceWriter) {
         for (ItakusakiChosainIchiranBodyItem bodyItem : bodyItemList) {
-            ItakusakiChosainIchiranHeaderEditor headEditor = new ItakusakiChosainIchiranHeaderEditor(headItem);
+            ItakusakiChosainIchiranEditor headEditor = new ItakusakiChosainIchiranHeaderEditor(headItem);
             ItakusakiChosainIchiranEditor bodyEditor = new ItakusakiChosainIchiranBodyEditor(bodyItem);
             ItakusakiChosainIchiranBuilder builder = new ItakusakiChosainIchiranBuilderItem(headEditor, bodyEditor);
             reportSourceWriter.writeLine(builder);

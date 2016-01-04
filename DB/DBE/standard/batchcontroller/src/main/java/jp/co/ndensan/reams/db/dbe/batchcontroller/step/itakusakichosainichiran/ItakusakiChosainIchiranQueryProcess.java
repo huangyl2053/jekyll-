@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.itakusakichosainichiran;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.itakusakichosainichiran.ItakusakiChosainIchiranBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.itakusakichosainichiran.ItakusakiChosainIchiranHeadItem;
@@ -23,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -35,6 +38,7 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<Itaku
             = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.itakusakichosainichiran."
                     + "IItakusakiChosainIchiranMapper.getNinteiChoSain");
     private static final ReportId REPORT_ID = new ReportId(ItakusakiChosainIchiranReportId.REPORT_ID.getCode());
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("listIchiranhyoUpper_1")));
     private ItakusakiChosainIchiranQueryProcessParemeter paramter;
     List<ItakusakiChosainIchiranBodyItem> bodyItem;
     ItakusakiChosainIchiranHeadItem headItem;
@@ -64,7 +68,9 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<Itaku
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
+                .addBreak(new BreakerCatalog<ItakusakiChosainIchiranReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .create();
         retortWrite = new ReportSourceWriter<>(batchWrite);
     }
 
