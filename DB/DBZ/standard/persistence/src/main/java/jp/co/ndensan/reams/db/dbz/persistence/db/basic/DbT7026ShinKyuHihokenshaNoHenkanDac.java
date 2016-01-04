@@ -89,7 +89,6 @@ public class DbT7026ShinKyuHihokenshaNoHenkanDac implements ISaveable<DbT7026Shi
      *
      * @param 新番号
      * @return List<DbT7026ShinKyuHihokenshaNoHenkanEntity> 新旧被保険者番号変換
-     *
      */
     @Transaction
     public List<DbT7026ShinKyuHihokenshaNoHenkanEntity> get旧被保険者番号(
@@ -109,11 +108,11 @@ public class DbT7026ShinKyuHihokenshaNoHenkanDac implements ISaveable<DbT7026Shi
      *
      * @param 市町村コード
      * @param 旧番号
-     * @return List<DbT7026ShinKyuHihokenshaNoHenkanEntity> 新旧被保険者番号変換
+     * @return DbT7026ShinKyuHihokenshaNoHenkanEntity 新旧被保険者番号変換
      *
      */
     @Transaction
-    public List<DbT7026ShinKyuHihokenshaNoHenkanEntity> get新被保険者番号(
+    public DbT7026ShinKyuHihokenshaNoHenkanEntity get新被保険者番号(
             LasdecCode 市町村コード,
             RString 旧番号) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
@@ -126,6 +125,6 @@ public class DbT7026ShinKyuHihokenshaNoHenkanDac implements ISaveable<DbT7026Shi
                 where(and(
                                 eq(shichosonCode, 市町村コード),
                                 eq(kyuNo, 旧番号))).
-                toList(DbT7026ShinKyuHihokenshaNoHenkanEntity.class);
+                toObject(DbT7026ShinKyuHihokenshaNoHenkanEntity.class);
     }
 }
