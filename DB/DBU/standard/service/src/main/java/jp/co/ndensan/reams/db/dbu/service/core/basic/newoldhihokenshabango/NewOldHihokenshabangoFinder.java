@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbu.service.core.basic.newoldhihokenshabango;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbu.business.core.newoldhihokenshabango.NewOldHihokenshabangoBusiness;
+import jp.co.ndensan.reams.db.dbu.business.core.newoldhihokenshabango.NewOldHihokenshabango;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7026ShinKyuHihokenshaNoHenkanEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7026ShinKyuHihokenshaNoHenkanDac;
@@ -60,7 +60,7 @@ public class NewOldHihokenshabangoFinder {
      * @return List<DbT7026ShinKyuHihokenshaNoHenkanEntity> 新旧被保険者番号変換
      */
     @Transaction
-    public List<NewOldHihokenshabangoBusiness> getOldHihokenshabangoFromNew(
+    public List<NewOldHihokenshabango> getOldHihokenshabangoFromNew(
             RString shinNo) {
         requireNonNull(shinNo, UrSystemErrorMessages.値がnull.getReplacedMessage("新番号"));
         if (shinNo.length() != 10) {
@@ -70,10 +70,10 @@ public class NewOldHihokenshabangoFinder {
         if (count > 1) {
             throw new ApplicationException(DbzErrorMessages.検索結果件数不正.getMessage());
         } else {
-            List<NewOldHihokenshabangoBusiness> bList = new ArrayList<>();
+            List<NewOldHihokenshabango> bList = new ArrayList<>();
             List<DbT7026ShinKyuHihokenshaNoHenkanEntity> entityList = dac.get旧被保険者番号(shinNo);
             for (DbT7026ShinKyuHihokenshaNoHenkanEntity temp : entityList) {
-                NewOldHihokenshabangoBusiness newoldhihokenshabango = new NewOldHihokenshabangoBusiness(temp);
+                NewOldHihokenshabango newoldhihokenshabango = new NewOldHihokenshabango(temp);
                 bList.add(newoldhihokenshabango);
             }
             return bList;
@@ -88,7 +88,7 @@ public class NewOldHihokenshabangoFinder {
      * @return List<DbT7026ShinKyuHihokenshaNoHenkanEntity> 新旧被保険者番号変換
      */
     @Transaction
-    public List<NewOldHihokenshabangoBusiness> getNewHihokenshabangoFromOld(
+    public List<NewOldHihokenshabango> getNewHihokenshabangoFromOld(
             LasdecCode shichosonCode,
             RString kyuNo) {
         requireNonNull(shichosonCode, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
@@ -100,9 +100,9 @@ public class NewOldHihokenshabangoFinder {
         if (count == 0) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         } else {
-            List<NewOldHihokenshabangoBusiness> list = new ArrayList<>();
+            List<NewOldHihokenshabango> list = new ArrayList<>();
             DbT7026ShinKyuHihokenshaNoHenkanEntity entity = dac.get新被保険者番号(shichosonCode, kyuNo);
-            NewOldHihokenshabangoBusiness newoldhihokenshabango = new NewOldHihokenshabangoBusiness(entity);
+            NewOldHihokenshabango newoldhihokenshabango = new NewOldHihokenshabango(entity);
             list.add(newoldhihokenshabango);
             return list;
         }
