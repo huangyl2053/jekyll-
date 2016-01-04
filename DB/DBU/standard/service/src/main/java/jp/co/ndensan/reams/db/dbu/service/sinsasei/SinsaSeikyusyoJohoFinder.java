@@ -43,7 +43,7 @@ public class SinsaSeikyusyoJohoFinder {
      *
      * @param shikibetsuCode 識別コード
      * @param genshobunsHihokennshaNo 原処分被保険者番号
-     * @return List<SinsaSeikyusyoJohoModel> 
+     * @return List<SinsaSeikyusyoJohoModel>
      */
     public List<SinsaSeikyusyoJohoModel> getSinsaSeikyusyoJohoList(ShikibetsuCode shikibetsuCode, HihokenshaNo genshobunsHihokennshaNo) {
         List<SinsaSeikyusyoJohoModel> businessList = new ArrayList<>();
