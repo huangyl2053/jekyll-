@@ -5,17 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbu.service.core.basic.newoldhihokenshabango;
 
+import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbu.business.core.newoldhihokenshabango.NewOldHihokenshabango;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7026ShinKyuHihokenshaNoHenkanEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7005RojinHokenJukyushaJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7026ShinKyuHihokenshaNoHenkanDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -62,7 +65,7 @@ public class NewOldHihokenshabangoFinder {
      * @return NewOldHihokenshabango 新旧被保険者番号変換
      */
     @Transaction
-    public NewOldHihokenshabango getOldHihokenshabangoFromNew(
+    public SearchResult<NewOldHihokenshabango> getOldHihokenshabangoFromNew(
             RString shinNo) {
         requireNonNull(shinNo, UrSystemErrorMessages.値がnull.getReplacedMessage("新番号"));
         if (shinNo.length() != 被保険者番号桁数) {
@@ -77,8 +80,7 @@ public class NewOldHihokenshabangoFinder {
             if (0 != entityList.size()) {
                 entity = entityList.get(0);
             }
-            NewOldHihokenshabango newoldhihokenshabango = new NewOldHihokenshabango(entity);
-            return newoldhihokenshabango;
+            return SearchResult.of(entityList, 0, false);
         }
     }
 
@@ -90,7 +92,7 @@ public class NewOldHihokenshabangoFinder {
      * @return NewOldHihokenshabango 新旧被保険者番号変換
      */
     @Transaction
-    public NewOldHihokenshabango getNewHihokenshabangoFromOld(
+    public SearchResult<NewOldHihokenshabango> getNewHihokenshabangoFromOld(
             LasdecCode shichosonCode,
             RString kyuNo) {
         requireNonNull(shichosonCode, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
@@ -103,12 +105,13 @@ public class NewOldHihokenshabangoFinder {
             throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage().replace(
                     "（旧）被保険者番号", String.valueOf(被保険者番号桁数)));
         }
+        List<DbT7026ShinKyuHihokenshaNoHenkanEntity> entityList = new ArrayList<>();
         DbT7026ShinKyuHihokenshaNoHenkanEntity entity = dac.get新被保険者番号(shichosonCode, kyuNo);
+        entityList.add(entity);
         if (null == entity) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         } else {
-            NewOldHihokenshabango newoldhihokenshabango = new NewOldHihokenshabango(entity);
-            return newoldhihokenshabango;
+            return SearchResult.of(entityList, 0, false);
         }
     }
 }
