@@ -88,7 +88,7 @@ public class DbT7026ShinKyuHihokenshaNoHenkanDac implements ISaveable<DbT7026Shi
      * 旧被保険者番号の取得します。
      *
      * @param 新番号
-     * @return DbT7026ShinKyuHihokenshaNoHenkanEntity 新旧被保険者番号変換
+     * @return List<DbT7026ShinKyuHihokenshaNoHenkanEntity> 新旧被保険者番号変換
      *
      */
     @Transaction
@@ -109,7 +109,7 @@ public class DbT7026ShinKyuHihokenshaNoHenkanDac implements ISaveable<DbT7026Shi
      *
      * @param 市町村コード
      * @param 旧番号
-     * @return List<DbT7026ShinKyuHihokenshaNoHenkanEntity>
+     * @return List<DbT7026ShinKyuHihokenshaNoHenkanEntity> 新旧被保険者番号変換
      *
      */
     @Transaction

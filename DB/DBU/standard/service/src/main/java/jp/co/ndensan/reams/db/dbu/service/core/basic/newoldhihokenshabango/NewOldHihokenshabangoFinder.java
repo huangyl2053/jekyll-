@@ -25,6 +25,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class NewOldHihokenshabangoFinder {
 
+    private static final String 旧市町村コード = "（旧）市町村コード";
+    private static final String 新被保険者番号 = "（新）被保険者番号";
+    private static final String 旧被保険者番号 = "（旧）被保険者番号";
+
     private final DbT7026ShinKyuHihokenshaNoHenkanDac dac;
 
     /**
@@ -63,7 +67,8 @@ public class NewOldHihokenshabangoFinder {
             RString shinNo) {
         requireNonNull(shinNo, UrSystemErrorMessages.値がnull.getReplacedMessage("新番号"));
         if (shinNo.length() != 10) {
-            throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage());
+            throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage().replace(
+                    新被保険者番号, String.valueOf(shinNo.length())));
         }
         List<DbT7026ShinKyuHihokenshaNoHenkanEntity> entityList = dac.get旧被保険者番号(shinNo);
         DbT7026ShinKyuHihokenshaNoHenkanEntity entity = new DbT7026ShinKyuHihokenshaNoHenkanEntity();
@@ -91,8 +96,13 @@ public class NewOldHihokenshabangoFinder {
             RString kyuNo) {
         requireNonNull(shichosonCode, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(kyuNo, UrSystemErrorMessages.値がnull.getReplacedMessage("旧番号"));
-        if (shichosonCode.value().length() != 6 && kyuNo.length() != 10) {
-            throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage());
+        if (shichosonCode.value().length() != 6) {
+            throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage().replace(
+                    旧市町村コード, String.valueOf(shichosonCode.value().length())));
+        }
+        if (kyuNo.length() != 10) {
+            throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage().replace(
+                    旧被保険者番号, String.valueOf(kyuNo.length())));
         }
         List<DbT7026ShinKyuHihokenshaNoHenkanEntity> entityList = dac.get新被保険者番号(shichosonCode, kyuNo);
         if (0 == entityList.size() || entityList.isEmpty()) {
