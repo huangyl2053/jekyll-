@@ -29,7 +29,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujiiIchiranRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoShujiiIchiran.IkenshoShujiiIchiranRelateMapper.getIkenshoShujiiIchiranRelateEntity");
+            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoShujiiIchiran."
+            + "IkenshoShujiiIchiranRelateMapper.getIkenshoShujiiIchiranRelateEntity");
 
     List<IkenshoShujiiIchiranBodyItem> bodyItemList;
     private static final ReportId REPORT_ID = new ReportId("DBE591001");

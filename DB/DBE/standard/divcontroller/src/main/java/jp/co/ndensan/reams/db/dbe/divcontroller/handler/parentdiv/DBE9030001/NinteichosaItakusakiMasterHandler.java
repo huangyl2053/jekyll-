@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9030001;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaItakusaki;
+import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaItakusakiJohoRelate;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Chosa.ChosaItakuKubunCode;
@@ -15,12 +17,10 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Chosa.ChosaKikanKubu
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosaitakusaki.NinteichosaItakusakiKensakuParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.NinteichosaItakusakiMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.dgChosainIchiran_Row;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.chosainjoho.ChosainJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.koseishichosonmaster.KoseiShichosonMasterManager;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -57,11 +57,13 @@ public class NinteichosaItakusakiMasterHandler {
     private static final RString 特定調査員表示フラグ非表示 = new RString("非表示");
     private static final CodeShubetsu 割付地区名称コード種別 = new CodeShubetsu("5002");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString selectKey空白 = new RString("blank");
+    private static final RString SELECTKEY_空白 = new RString("blank");
     private static final RString 追加状態コード = new RString("追加");
     private static final RString 修正状態コード = new RString("修正");
     private static final RString 削除状態コード = new RString("削除");
     private static final RString その他状態コード = new RString("その他");
+    private static final RString BOOLEAN_TRUE = new RString("TRUE");
+    private static final RString BOOLEAN_FALSE = new RString("FALSE");
 
     /**
      * コンストラクタです。
@@ -83,12 +85,12 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosainSearch().getCcdHokenshaList().loadHokenshaList();
         div.getChosainSearch().getRadSearchChosainJokyo().setSelectedKey(new RString("key0"));
         List<KeyValueDataSource> chosaItakuKubunCodes = new ArrayList<>();
-        chosaItakuKubunCodes.add(new KeyValueDataSource(selectKey空白, RString.EMPTY));
+        chosaItakuKubunCodes.add(new KeyValueDataSource(SELECTKEY_空白, RString.EMPTY));
         chosaItakuKubunCodes.addAll(createListFromChosaItakuKubunCodeASC());
         div.getChosainSearch().getDdlitakukubun().getDataSource().clear();
         div.getChosainSearch().getDdlitakukubun().getDataSource().addAll(chosaItakuKubunCodes);
         List<KeyValueDataSource> chosaKikanKubunCodes = new ArrayList<>();
-        chosaKikanKubunCodes.add(new KeyValueDataSource(selectKey空白, RString.EMPTY));
+        chosaKikanKubunCodes.add(new KeyValueDataSource(SELECTKEY_空白, RString.EMPTY));
         chosaKikanKubunCodes.addAll(createListFromChosaKikanKubunASC());
         div.getChosainSearch().getDdlkikankubun().getDataSource().clear();
         div.getChosainSearch().getDdlkikankubun().getDataSource().addAll(chosaKikanKubunCodes);
@@ -113,7 +115,7 @@ public class NinteichosaItakusakiMasterHandler {
     /**
      * 追加ボタンが押下された場合、明細エリアを空白で表示する
      *
-     * @return
+     * @return List<KoseiShichosonMaster>
      */
     public List<KoseiShichosonMaster> searchShujii() {
         NinteichosaItakusakiKensakuParameter 構成市町村マスタ検索条件 = NinteichosaItakusakiKensakuParameter.createParam(
@@ -129,9 +131,9 @@ public class NinteichosaItakusakiMasterHandler {
                 ? null : div.getChosainSearch().getTxtSearchChosaItakusakiMeisho().getValue(),
                 div.getChosainSearch().getTxtSearchChosaItakusakiKanaMeisho().getValue().isEmpty()
                 ? null : div.getChosainSearch().getTxtSearchChosaItakusakiKanaMeisho().getValue(),
-                div.getChosainSearch().getDdlitakukubun().getSelectedKey().equals(selectKey空白)
+                div.getChosainSearch().getDdlitakukubun().getSelectedKey().equals(SELECTKEY_空白)
                 ? null : div.getChosainSearch().getDdlitakukubun().getSelectedKey(),
-                div.getChosainSearch().getDdlkikankubun().getSelectedKey().equals(selectKey空白)
+                div.getChosainSearch().getDdlkikankubun().getSelectedKey().equals(SELECTKEY_空白)
                 ? null : div.getChosainSearch().getDdlkikankubun().getSelectedKey(),
                 div.getChosainSearch().getTxtSaidaiHyojiKensu().getValue() == null
                 ? null : div.getChosainSearch().getTxtSaidaiHyojiKensu().getValue().intValue()
@@ -142,7 +144,7 @@ public class NinteichosaItakusakiMasterHandler {
     /**
      * 検索条件に従い、調査委託先情報を検索する。
      *
-     * @param list
+     * @param list KoseiShichosonMaster
      */
     public void setDataSource(List<KoseiShichosonMaster> list) {
         div.getChosaitakusakichiran().getDgChosainIchiran().setDataSource(converterDataSourceFromKoseiShichosonMaster(list));
@@ -163,9 +165,9 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getDdlKikankubun().getDataSource().addAll(createListFromChosaKikanKubunASC());
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().clear();
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
-                new KeyValueDataSource(new RString("TRUE"), 特定調査員表示フラグ表示));
+                new KeyValueDataSource(BOOLEAN_TRUE, 特定調査員表示フラグ表示));
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
-                new KeyValueDataSource(new RString("FALSE"), 特定調査員表示フラグ非表示));
+                new KeyValueDataSource(BOOLEAN_FALSE, 特定調査員表示フラグ非表示));
         div.getChosaitakusakiJohoInput().clear();
         div.setHdnInputDiv(getChosaitakusakiJohoInputValue());
     }
@@ -182,9 +184,9 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getDdlKikankubun().getDataSource().addAll(createListFromChosaKikanKubunASC());
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().clear();
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
-                new KeyValueDataSource(new RString("TRUE"), 特定調査員表示フラグ表示));
+                new KeyValueDataSource(BOOLEAN_TRUE, 特定調査員表示フラグ表示));
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
-                new KeyValueDataSource(new RString("FALSE"), 特定調査員表示フラグ非表示));
+                new KeyValueDataSource(BOOLEAN_FALSE, 特定調査員表示フラグ非表示));
         div.setHdnSelectID(new RString(String.valueOf(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedRowId())));
         setChosaitakusakiJohoInputDisabled(Boolean.FALSE);
         div.getChosaitakusakiJohoInput().getTxtShichoson().setDisabled(Boolean.TRUE);
@@ -208,9 +210,9 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getDdlKikankubun().getDataSource().addAll(createListFromChosaKikanKubunASC());
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().clear();
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
-                new KeyValueDataSource(new RString("TRUE"), 特定調査員表示フラグ表示));
+                new KeyValueDataSource(BOOLEAN_TRUE, 特定調査員表示フラグ表示));
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
-                new KeyValueDataSource(new RString("FALSE"), 特定調査員表示フラグ非表示));
+                new KeyValueDataSource(BOOLEAN_FALSE, 特定調査員表示フラグ非表示));
         div.setHdnSelectID(new RString(String.valueOf(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedRowId())));
         setChosaitakusakiJohoInputDisabled(Boolean.TRUE);
         setChosaitakusakiJohoInput(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedItem());
@@ -331,8 +333,8 @@ public class NinteichosaItakusakiMasterHandler {
     /**
      * 削除行データの整合性チェック
      *
-     * @param 市町村コード
-     * @param 認定調査委託先コード
+     * @param 市町村コード 市町村コード
+     * @param 認定調査委託先コード 認定調査委託先コード
      * @return 削除行データの整合性
      */
     public boolean 削除行データの整合性チェック(LasdecCode 市町村コード, RString 認定調査委託先コード) {
@@ -348,9 +350,9 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getDdlKikankubun().getDataSource().addAll(createListFromChosaKikanKubunASC());
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().clear();
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
-                new KeyValueDataSource(new RString("TRUE"), 特定調査員表示フラグ表示));
+                new KeyValueDataSource(BOOLEAN_TRUE, 特定調査員表示フラグ表示));
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
-                new KeyValueDataSource(new RString("FALSE"), 特定調査員表示フラグ非表示));
+                new KeyValueDataSource(BOOLEAN_FALSE, 特定調査員表示フラグ非表示));
         div.setHdnSelectID(new RString(String.valueOf(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedRowId())));
         setChosaitakusakiJohoInputDisabled(Boolean.TRUE);
         setChosaitakusakiJohoInput(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedItem());
@@ -379,10 +381,7 @@ public class NinteichosaItakusakiMasterHandler {
                 } catch (IllegalArgumentException e) {
                     chosaKikanKubun = RString.EMPTY;
                 }
-                RString 特定調査員表示フラグ = RString.EMPTY;
-                if (joho.get特定調査員表示フラグ() != null) {
-                    特定調査員表示フラグ = joho.get特定調査員表示フラグ() ? 特定調査員表示フラグ表示 : 特定調査員表示フラグ非表示;
-                }
+                RString 特定調査員表示フラグ = get特定調査員表示フラグ(joho);
                 dgChosainIchiran_Row row = new dgChosainIchiran_Row(
                         RString.EMPTY,
                         master.get市町村名称() == null ? RString.EMPTY : master.get市町村名称(),
@@ -410,15 +409,22 @@ public class NinteichosaItakusakiMasterHandler {
         return dataSources;
     }
 
+    private RString get特定調査員表示フラグ(NinteichosaItakusakiJoho joho) {
+        if (joho.get特定調査員表示フラグ() != null) {
+            return joho.get特定調査員表示フラグ() ? 特定調査員表示フラグ表示 : 特定調査員表示フラグ非表示;
+        }
+        return RString.EMPTY;
+    }
+
     private NinteichosaItakusakiJoho converterDataSourceFromKoseiShichosonMaster(dgChosainIchiran_Row row, EntityDataState state, int rowIndex) {
         LasdecCode shichosonCode = new LasdecCode(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString()).get(rowIndex));
-        DbT5910NinteichosaItakusakiJohoEntity entity = johoManager.selectByKey(shichosonCode, row.getChosaItakusakiCode().getValue());
-        if (entity == null) {
-            entity = new DbT5910NinteichosaItakusakiJohoEntity();
+        NinteichosaItakusaki ninteichosaItakusaki = johoManager.selectByKey(shichosonCode, row.getChosaItakusakiCode().getValue());
+        if (ninteichosaItakusaki == null) {
+            ninteichosaItakusaki = new NinteichosaItakusaki();
         }
-        entity.setShichosonCode(shichosonCode);
-        entity.setNinteichosaItakusakiCode(row.getChosaItakusakiCode().getValue());
-        entity.setState(state);
+        ninteichosaItakusaki.getEntity().setShichosonCode(shichosonCode);
+        ninteichosaItakusaki.getEntity().setNinteichosaItakusakiCode(row.getChosaItakusakiCode().getValue());
+        ninteichosaItakusaki.getEntity().setState(state);
         RString chosaItakuKubunCode;
         try {
             chosaItakuKubunCode = ChosaItakuKubunCode.valueOf(row.getChosaItakuKubun().toString()).getコード();
@@ -432,26 +438,26 @@ public class NinteichosaItakusakiMasterHandler {
             chosaKikanKubun = RString.EMPTY;
         }
         if (!state.equals(EntityDataState.Deleted)) {
-            entity.setJigyoshaNo(new JigyoshaNo(row.getJigyoshaNo()));
-            entity.setJigyoshaMeisho(row.getChosaItakusakiMeisho());
-            entity.setJigyoshaMeishoKana(row.getChosaItakusakiKana());
-            entity.setYubinNo(new YubinNo(row.getYubinNo()));
-            entity.setJusho(row.getJusho());
-            entity.setTelNo(new TelNo(row.getTelNo()));
-            entity.setFaxNo(new TelNo(row.getFaxNo()));
-            entity.setDaihyoshaName(row.getKikanDaihyoshaName());
-            entity.setDaihyoshaNameKana(row.getKikanDaihyoshaKanaName());
-            entity.setChosaItakuKubun(chosaItakuKubunCode);
-            entity.setTokuteiChosainDisplayFlag(特定調査員表示フラグ表示.equals(特定調査員表示フラグ表示));
-            entity.setWaritsukeTeiin(row.getWaritsukeTeiin().getValue().intValue());
-            entity.setWaritsukeChiku(new ChikuCode(row.getChiku()));
-            entity.setAutoWaritsukeFlag(自動割付フラグ有効.equals(row.getAutoWaritsukeFlag()));
-            entity.setKikanKubun(chosaKikanKubun);
-            entity.setJokyoFlag(状況フラグ有効.equals(row.getJokyoFlag()));
+            ninteichosaItakusaki.getEntity().setJigyoshaNo(new JigyoshaNo(row.getJigyoshaNo()));
+            ninteichosaItakusaki.getEntity().setJigyoshaMeisho(row.getChosaItakusakiMeisho());
+            ninteichosaItakusaki.getEntity().setJigyoshaMeishoKana(row.getChosaItakusakiKana());
+            ninteichosaItakusaki.getEntity().setYubinNo(new YubinNo(row.getYubinNo()));
+            ninteichosaItakusaki.getEntity().setJusho(row.getJusho());
+            ninteichosaItakusaki.getEntity().setTelNo(new TelNo(row.getTelNo()));
+            ninteichosaItakusaki.getEntity().setFaxNo(new TelNo(row.getFaxNo()));
+            ninteichosaItakusaki.getEntity().setDaihyoshaName(row.getKikanDaihyoshaName());
+            ninteichosaItakusaki.getEntity().setDaihyoshaNameKana(row.getKikanDaihyoshaKanaName());
+            ninteichosaItakusaki.getEntity().setChosaItakuKubun(chosaItakuKubunCode);
+            ninteichosaItakusaki.getEntity().setTokuteiChosainDisplayFlag(row.getTokuteiChosainDispFlag().equals(特定調査員表示フラグ表示));
+            ninteichosaItakusaki.getEntity().setWaritsukeTeiin(row.getWaritsukeTeiin().getValue().intValue());
+            ninteichosaItakusaki.getEntity().setWaritsukeChiku(new ChikuCode(row.getChiku()));
+            ninteichosaItakusaki.getEntity().setAutoWaritsukeFlag(自動割付フラグ有効.equals(row.getAutoWaritsukeFlag()));
+            ninteichosaItakusaki.getEntity().setKikanKubun(chosaKikanKubun);
+            ninteichosaItakusaki.getEntity().setJokyoFlag(状況フラグ有効.equals(row.getJokyoFlag()));
         }
-        NinteichosaItakusakiJohoRelateEntity relateEntity = new NinteichosaItakusakiJohoRelateEntity();
-        relateEntity.set認定調査委託先情報Entity(entity);
-        NinteichosaItakusakiJoho itakusakiJoho = new NinteichosaItakusakiJoho(relateEntity);
+        NinteichosaItakusakiJohoRelate johoRelate = new NinteichosaItakusakiJohoRelate();
+        johoRelate.getEntity().set認定調査委託先情報Entity(ninteichosaItakusaki.getEntity());
+        NinteichosaItakusakiJoho itakusakiJoho = new NinteichosaItakusakiJoho(johoRelate.getEntity());
         return itakusakiJoho;
 
     }
@@ -493,9 +499,9 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getDdlKikankubun().getDataSource().addAll(createListFromChosaKikanKubunASC());
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().clear();
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
-                new KeyValueDataSource(new RString("TRUE"), 特定調査員表示フラグ表示));
+                new KeyValueDataSource(BOOLEAN_TRUE, 特定調査員表示フラグ表示));
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
-                new KeyValueDataSource(new RString("FALSE"), 特定調査員表示フラグ非表示));
+                new KeyValueDataSource(BOOLEAN_FALSE, 特定調査員表示フラグ非表示));
         RString shichosonCode = div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString())
                 .get(Integer.valueOf(div.getHdnSelectID().toString()));
         div.getChosaitakusakiJohoInput().getTxtShichoson().setValue(shichosonCode == null
@@ -584,6 +590,10 @@ public class NinteichosaItakusakiMasterHandler {
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getTxtTelNo().getDomain().getColumnValue());
         builder.append(div.getChosaitakusakiJohoInput().getTxtFaxNo().getDomain() == null
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getTxtFaxNo().getDomain().getColumnValue());
+        return getInputValue(builder);
+    }
+
+    private RString getInputValue(RStringBuilder builder) {
         builder.append(div.getChosaitakusakiJohoInput().getTxtdaihyoshaname().getDomain() == null
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getTxtdaihyoshaname().getDomain().getColumnValue());
         builder.append(div.getChosaitakusakiJohoInput().getTxtdaihyoshakananame().getDomain() == null

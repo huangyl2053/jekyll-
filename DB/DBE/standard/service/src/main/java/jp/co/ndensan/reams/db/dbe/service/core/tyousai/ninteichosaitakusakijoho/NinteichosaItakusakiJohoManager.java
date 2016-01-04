@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.tyousai.ninteichosaitakusakijoho
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
@@ -71,10 +72,12 @@ public class NinteichosaItakusakiJohoManager {
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT5910NinteichosaItakusakiJohoEntity selectByKey(
+    public NinteichosaItakusaki selectByKey(
             LasdecCode 市町村コード,
             RString 認定調査委託先コード) {
-        return 認定調査委託先情報Dac.selectByKey(市町村コード, 認定調査委託先コード);
+        NinteichosaItakusaki ninteichosaItakusaki = new NinteichosaItakusaki();
+        ninteichosaItakusaki.setEntity(認定調査委託先情報Dac.selectByKey(市町村コード, 認定調査委託先コード));
+        return ninteichosaItakusaki;
     }
 
     /**

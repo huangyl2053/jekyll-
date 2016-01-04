@@ -352,12 +352,12 @@ public class NinteichosaItakusakiMaster {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             int rowIndex = 0;
             for (dgChosainIchiran_Row row : div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource()) {
-                if (削除状態.equals(row.getJotai())) {
-                    if (!getHandler(div).削除行データの整合性チェック(
-                            new LasdecCode(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString())
-                                    .get(rowIndex)), row.getChosaItakusakiCode().getValue())) {
-                        throw new ApplicationException(DbeErrorMessages.他の情報で使用している為削除不可.getMessage());
-                    }
+                if (削除状態.equals(row.getJotai())
+                        && !getHandler(div).削除行データの整合性チェック(
+                                new LasdecCode(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString())
+                                        .get(rowIndex)), row.getChosaItakusakiCode().getValue())) {
+                    throw new ApplicationException(DbeErrorMessages.他の情報で使用している為削除不可.getMessage());
+
                 }
                 rowIndex++;
             }
