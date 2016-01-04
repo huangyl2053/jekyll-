@@ -33,14 +33,12 @@ public final class DbT7002BemmeiNaiyoEntityGenerator {
 
     public static DbT7002BemmeiNaiyoEntity createDbT7002BemmeiNaiyoEntity() {
         DbT7002BemmeiNaiyoEntity entity = new DbT7002BemmeiNaiyoEntity();
-        entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);
         entity.setShikibetsuCode(DEFAULT_識別コード);
         entity.setGenshobunHihokenshaNo(DEFAULT_原処分被保険者番号);
         entity.setShinsaseikyuTodokedeYMD(DEFAULT_審査請求届出日);
         entity.setBemmeishoSakuseiYMD(DEFAULT_弁明書作成日);
         entity.setShinsaseikyuKankeiShobunNaiyo(DEFAULT_審査請求に係る処分内容);
         entity.setBemmeiNaiyo(DEFAULT_弁明内容);
-        entity.setBemmeishoSakuseiTeishutsuYMD(DEFAULT_弁明書作成日提出日);
         return entity;
     }
 }

@@ -48,7 +48,7 @@ public class BemmeiNaiyoBuilder {
      */
     public BemmeiNaiyoBuilder set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
+        //  entity.setShoKisaiHokenshaNo(証記載保険者番号);
         return this;
     }
 
@@ -132,7 +132,7 @@ public class BemmeiNaiyoBuilder {
      */
     public BemmeiNaiyoBuilder set弁明書作成日提出日(FlexibleDate 弁明書作成日提出日) {
         requireNonNull(弁明書作成日提出日, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明書作成日提出日"));
-        entity.setBemmeishoSakuseiTeishutsuYMD(弁明書作成日提出日);
+        //  entity.setBemmeishoSakuseiTeishutsuYMD(弁明書作成日提出日);
         return this;
     }
 
