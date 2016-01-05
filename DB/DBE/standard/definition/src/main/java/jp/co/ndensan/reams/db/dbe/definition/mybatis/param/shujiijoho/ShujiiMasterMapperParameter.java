@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Shuj
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 主治医マスタ用パラメータクラスです。
@@ -30,7 +31,7 @@ public final class ShujiiMasterMapperParameter {
     private final ShujiiCode 主治医コードTo;
     private final RString 主治医氏名;
     private final AtenaKanaMeisho 主治医カナ氏名;
-    private final int saidaiHyojiKensu;
+    private final Decimal saidaiHyojiKensu;
 
     private final boolean uses市町村コード;
     //private final boolean 状況フラグ;
@@ -42,6 +43,7 @@ public final class ShujiiMasterMapperParameter {
     private final boolean uses主治医コードTo;
     private final boolean uses主治医氏名;
     private final boolean uses主治医カナ氏名;
+    boolean usesSaidaiHyojiKensu;
 
     /**
      * コンストラクタです。
@@ -61,7 +63,7 @@ public final class ShujiiMasterMapperParameter {
             ShujiiCode 主治医コードTo,
             RString 主治医氏名,
             AtenaKanaMeisho 主治医カナ氏名,
-            int saidaiHyojiKensu,
+            Decimal saidaiHyojiKensu,
             boolean uses市町村コード,
             boolean uses主治医医療機関コードFrom,
             boolean uses主治医医療機関コードTo,
@@ -70,7 +72,8 @@ public final class ShujiiMasterMapperParameter {
             boolean uses主治医コードFrom,
             boolean uses主治医コードTo,
             boolean uses主治医氏名,
-            boolean uses主治医カナ氏名
+            boolean uses主治医カナ氏名,
+            boolean usesSaidaiHyojiKensu
     ) {
         this.市町村コード = 市町村コード;
         this.状況フラグ = 状況フラグ;
@@ -92,6 +95,7 @@ public final class ShujiiMasterMapperParameter {
         this.uses主治医コードTo = uses主治医コードTo;
         this.uses主治医氏名 = uses主治医氏名;
         this.uses主治医カナ氏名 = uses主治医カナ氏名;
+        this.usesSaidaiHyojiKensu = usesSaidaiHyojiKensu;
     }
 
     /**
@@ -121,7 +125,7 @@ public final class ShujiiMasterMapperParameter {
             ShujiiCode 主治医コードTo,
             RString 主治医氏名,
             AtenaKanaMeisho 主治医カナ氏名,
-            int 最大表示件数
+            Decimal 最大表示件数
     ) {
         boolean uses市町村コード = false;
         if (市町村コード != null || !市町村コード.isEmpty()) {
@@ -159,6 +163,11 @@ public final class ShujiiMasterMapperParameter {
         if (主治医カナ氏名 != null || !主治医カナ氏名.isEmpty()) {
             uses主治医カナ氏名 = true;
         }
+        boolean usesSaidaiHyojiKensu = false;
+        if (最大表示件数 != null) {
+            usesSaidaiHyojiKensu = true;
+        }
+
         return new ShujiiMasterMapperParameter(市町村コード,
                 状況フラグ,
                 主治医医療機関コードFrom,
@@ -178,7 +187,8 @@ public final class ShujiiMasterMapperParameter {
                 uses主治医コードFrom,
                 uses主治医コードTo,
                 uses主治医氏名,
-                uses主治医カナ氏名
+                uses主治医カナ氏名,
+                usesSaidaiHyojiKensu
         );
     }
 }

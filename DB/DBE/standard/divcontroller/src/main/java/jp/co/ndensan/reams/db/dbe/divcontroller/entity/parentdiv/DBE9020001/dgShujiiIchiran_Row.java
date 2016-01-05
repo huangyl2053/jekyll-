@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Dec 22 17:10:13 CST 2015 
+ * Mon Jan 04 17:38:06 CST 2016 
  */
 
 
@@ -36,6 +36,8 @@ public class dgShujiiIchiran_Row extends DataRow {
     private RString jusho;
     private RString telNo;
     private RString faxNo;
+    private RString seibetsu;
+    private RString shichosonCode;
 
     public dgShujiiIchiran_Row() {
         super();
@@ -53,6 +55,8 @@ public class dgShujiiIchiran_Row extends DataRow {
         this.jusho = RString.EMPTY;
         this.telNo = RString.EMPTY;
         this.faxNo = RString.EMPTY;
+        this.seibetsu = RString.EMPTY;
+        this.shichosonCode = RString.EMPTY;
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("shichoson", shichoson);
         this.setOriginalData("shujiiShimei", shujiiShimei);
@@ -67,9 +71,11 @@ public class dgShujiiIchiran_Row extends DataRow {
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("telNo", telNo);
         this.setOriginalData("faxNo", faxNo);
+        this.setOriginalData("seibetsu", seibetsu);
+        this.setOriginalData("shichosonCode", shichosonCode);
     }
 
-    public dgShujiiIchiran_Row(RString jotai, RString shichoson, RString shujiiShimei, RString shujiiKanaShimei, TextBoxCode shujiiCode, TextBoxCode shujiiIryoKikanCode, RString shujiiIryoKikan, RString shinryoka, RString shiteii, RString jokyoFlag, RString yubinNo, RString jusho, RString telNo, RString faxNo) {
+    public dgShujiiIchiran_Row(RString jotai, RString shichoson, RString shujiiShimei, RString shujiiKanaShimei, TextBoxCode shujiiCode, TextBoxCode shujiiIryoKikanCode, RString shujiiIryoKikan, RString shinryoka, RString shiteii, RString jokyoFlag, RString yubinNo, RString jusho, RString telNo, RString faxNo, RString seibetsu, RString shichosonCode) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("shichoson", shichoson);
@@ -85,6 +91,8 @@ public class dgShujiiIchiran_Row extends DataRow {
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("telNo", telNo);
         this.setOriginalData("faxNo", faxNo);
+        this.setOriginalData("seibetsu", seibetsu);
+        this.setOriginalData("shichosonCode", shichosonCode);
         this.jotai = jotai;
         this.shichoson = shichoson;
         this.shujiiShimei = shujiiShimei;
@@ -99,6 +107,8 @@ public class dgShujiiIchiran_Row extends DataRow {
         this.jusho = jusho;
         this.telNo = telNo;
         this.faxNo = faxNo;
+        this.seibetsu = seibetsu;
+        this.shichosonCode = shichosonCode;
     }
 
     public RString getJotai() {
@@ -155,6 +165,14 @@ public class dgShujiiIchiran_Row extends DataRow {
 
     public RString getFaxNo() {
         return faxNo;
+    }
+
+    public RString getSeibetsu() {
+        return seibetsu;
+    }
+
+    public RString getShichosonCode() {
+        return shichosonCode;
     }
 
     public void setJotai(RString jotai) {
@@ -225,6 +243,16 @@ public class dgShujiiIchiran_Row extends DataRow {
     public void setFaxNo(RString faxNo) {
         this.setOriginalData("faxNo", faxNo);
         this.faxNo = faxNo;
+    }
+
+    public void setSeibetsu(RString seibetsu) {
+        this.setOriginalData("seibetsu", seibetsu);
+        this.seibetsu = seibetsu;
+    }
+
+    public void setShichosonCode(RString shichosonCode) {
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.shichosonCode = shichosonCode;
     }
 
     // </editor-fold>

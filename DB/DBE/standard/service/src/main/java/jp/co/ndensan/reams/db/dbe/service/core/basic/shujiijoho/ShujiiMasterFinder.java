@@ -12,6 +12,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.shujiijoho.ShujiiMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiMasterMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiMasterSearchParameter;
 import jp.co.ndensan.reams.db.dbe.entity.basic.shujiijoho.ShujiiMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.shujiijoho.IShujiiMasterJohoMapper;
@@ -104,7 +105,7 @@ public class ShujiiMasterFinder {
      * @return 主治医情報の件数
      */
     @Transaction
-    public int getShujiiJohoCount(ShujiiMasterMapperParameter 主治医情報検索条件) {
+    public int getShujiiJohoCount(ShujiiMasterSearchParameter 主治医情報検索条件) {
         IShujiiMasterJohoMapper mapper = mapperProvider.create(IShujiiMasterJohoMapper.class);
         return mapper.selectShujiiJohoCount(主治医情報検索条件);
     }
@@ -116,7 +117,7 @@ public class ShujiiMasterFinder {
      * @return 要介護認定申請情報の件数
      */
     @Transaction
-    public int getNinteiShinseiJohoCount(ShujiiMasterMapperParameter 主治医情報検索条件) {
+    public int getNinteiShinseiJohoCount(ShujiiMasterSearchParameter 主治医情報検索条件) {
         IShujiiMasterJohoMapper mapper = mapperProvider.create(IShujiiMasterJohoMapper.class);
         return mapper.selectNinteiShinseiJohoCount(主治医情報検索条件);
     }
@@ -128,7 +129,7 @@ public class ShujiiMasterFinder {
      * @return 主治医意見書作成依頼情報の件数
      */
     @Transaction
-    public int getIkenshoIraiJohoCount(ShujiiMasterMapperParameter 主治医情報検索条件) {
+    public int getIkenshoIraiJohoCount(ShujiiMasterSearchParameter 主治医情報検索条件) {
         IShujiiMasterJohoMapper mapper = mapperProvider.create(IShujiiMasterJohoMapper.class);
         return mapper.selectIkenshoIraiJohoCount(主治医情報検索条件);
     }
@@ -140,7 +141,7 @@ public class ShujiiMasterFinder {
      * @return 主治医医療機関名
      */
     @Transaction
-    public RString getShujiiIryoKikanJoho(ShujiiMasterMapperParameter 主治医情報検索条件) {
+    public RString getShujiiIryoKikanJoho(ShujiiMasterSearchParameter 主治医情報検索条件) {
         IShujiiMasterJohoMapper mapper = mapperProvider.create(IShujiiMasterJohoMapper.class);
         return mapper.selectShujiiIryoKikanJoho(主治医情報検索条件);
     }
