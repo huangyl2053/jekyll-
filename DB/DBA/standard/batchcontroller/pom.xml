@@ -29,5 +29,10 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbaBusiness</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>
