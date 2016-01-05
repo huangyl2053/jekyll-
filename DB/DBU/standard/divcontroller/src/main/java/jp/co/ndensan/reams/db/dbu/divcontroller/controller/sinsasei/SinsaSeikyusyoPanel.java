@@ -3,10 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900011;
+package jp.co.ndensan.reams.db.dbu.divcontroller.controller.sinsasei;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.SinsaSeikyusyoJohoModel;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900011.DBU0900011TransitionEventName;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900011.SinsaSeikyusyoJohoHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900011.SinsaSeikyusyoPanelDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900011.grdSinsaSeikyusyoJoho_Row;
 import jp.co.ndensan.reams.db.dbu.service.sinsasei.SinsaSeikyusyoJohoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
@@ -44,7 +48,7 @@ public class SinsaSeikyusyoPanel {
         ViewStateHolder.put(ViewStateKeys.状態, 更新);
 
         List<SinsaSeikyusyoJohoModel> sinsaSeikyusyoJohoList
-                = SinsaSeikyusyoJohoFinder.createInstance().getSinsaSeikyusyoJohoList(識別コード, 被保険者番号);
+                = SinsaSeikyusyoJohoFinder.createInstance().getSinsaSeikyusyoJohoList(識別コード, 被保険者番号).records();
         getHandler(div).onLoad(sinsaSeikyusyoJohoList);
         return createResponse(div);
 
@@ -57,7 +61,7 @@ public class SinsaSeikyusyoPanel {
      * @return レスポンス
      */
     public ResponseData<SinsaSeikyusyoPanelDiv> onClick_btnTuika(SinsaSeikyusyoPanelDiv div) {
-        ViewStateHolder.put(ViewStateKeys.識別コード, div.getAtenainfoCommonChildDiv1().getName());
+        ViewStateHolder.put(ViewStateKeys.識別コード, ViewStateHolder.get(ViewStateKeys.識別コード, RString.class));
         ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getShikakuKihonCommonChildDiv1().get被保険者番号());
         ViewStateHolder.put(ViewStateKeys.状態, 状態_追加);
         return ResponseData.of(div).forwardWithEventName(DBU0900011TransitionEventName.登録画面に遷移).parameter(状態_追加);
@@ -70,8 +74,8 @@ public class SinsaSeikyusyoPanel {
      * @return レスポンス
      */
     public ResponseData<SinsaSeikyusyoPanelDiv> onClick_BtnSenTaKu(SinsaSeikyusyoPanelDiv div) {
+        grdSinsaSeikyusyoJoho_Row grdSinsaSeikyusyoJoho_Row = div.getGrdSinsaSeikyusyoJoho().getSelectedItems().get(0);
         div.getGrdSinsaSeikyusyoJoho().getGridSetting().selectedRowCount();
-        grdSinsaSeikyusyoJoho_Row dgKoufuKaishuRow = div.getGrdSinsaSeikyusyoJoho().getSelectedItems().get(0);
         return createResponseData(div);
     }
 
@@ -82,8 +86,7 @@ public class SinsaSeikyusyoPanel {
      * @return レスポンス
      */
     public ResponseData<SinsaSeikyusyoPanelDiv> onClick_btnShuuSei(SinsaSeikyusyoPanelDiv sindiv) {
-        grdSinsaSeikyusyoJoho_Row grdSinsaSeikyusyoJoho_Row = sindiv.getGrdSinsaSeikyusyoJoho().getSelectedItems().get(0);
-        ViewStateHolder.put(ViewStateKeys.識別コード, sindiv.getAtenainfoCommonChildDiv1().getName());
+        ViewStateHolder.put(ViewStateKeys.識別コード, ViewStateHolder.get(ViewStateKeys.識別コード, RString.class));
         ViewStateHolder.put(ViewStateKeys.被保険者番号, sindiv.getShikakuKihonCommonChildDiv1().get被保険者番号());
         ViewStateHolder.put(ViewStateKeys.状態, 状態_修正);
         sindiv.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue();
@@ -97,8 +100,7 @@ public class SinsaSeikyusyoPanel {
      * @return レスポンス
      */
     public ResponseData<SinsaSeikyusyoPanelDiv> onClick_btnSakuzyo(SinsaSeikyusyoPanelDiv sindiv) {
-        grdSinsaSeikyusyoJoho_Row grdSinsaSeikyusyoJoho_Row = sindiv.getGrdSinsaSeikyusyoJoho().getSelectedItems().get(0);
-        ViewStateHolder.put(ViewStateKeys.識別コード, sindiv.getAtenainfoCommonChildDiv1().getName());
+        ViewStateHolder.put(ViewStateKeys.識別コード, ViewStateHolder.get(ViewStateKeys.識別コード, RString.class));
         ViewStateHolder.put(ViewStateKeys.被保険者番号, sindiv.getShikakuKihonCommonChildDiv1().get被保険者番号());
         ViewStateHolder.put(ViewStateKeys.状態, 状態_削除);
         sindiv.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue();
