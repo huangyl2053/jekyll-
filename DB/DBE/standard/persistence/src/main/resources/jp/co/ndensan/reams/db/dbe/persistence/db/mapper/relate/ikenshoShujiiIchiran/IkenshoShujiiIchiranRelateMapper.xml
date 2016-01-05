@@ -49,7 +49,9 @@
         WHERE
                 DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" = DbT5912ShujiiJoho."shujiiIryokikanCode"
             AND DbT5911ShujiiIryoKikanJoho."shichosonCode" = DbT5912ShujiiJoho."shichosonCode" 
-            AND DbT5912ShujiiJoho."shichosonCode" = #{shichosonCode}
+            <if test="!isShichosonCodeFlag">
+                 AND DbT5912ShujiiJoho."shichosonCode" = #{shichosonCode}
+            </if>    
             <if test="!isIryoKikanCodeFromEmpty">
                 AND DbT5912ShujiiJoho."shujiiIryokikanCode" <![CDATA[>=]]> #{iryoKikanCodeFrom}
             </if>
