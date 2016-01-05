@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho;
+package jp.co.ndensan.reams.db.dbx.service.core.gappeijoho;
 
-import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.GappeiJoho;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7055GappeiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.GappeiJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7055GappeiJohoDac;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
+import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.GappeiJoho;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.gappeijoho.GappeiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7055GappeiJohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.GappeiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7055GappeiJohoDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -30,7 +29,7 @@ import org.junit.runner.RunWith;
  * {link GappeiJohoManager}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-public class GappeiJohoManagerTest extends DbzTestDacBase {
+public class GappeiJohoManagerTest {
 
     private static DbT7055GappeiJohoDac dac;
     private static GappeiJohoManager sut;
@@ -44,7 +43,7 @@ public class GappeiJohoManagerTest extends DbzTestDacBase {
         dac = InstanceProvider.create(DbT7055GappeiJohoDac.class);
     }
 
-    public static class get合併情報 extends DbzTestDacBase {
+    public static class get合併情報 {
 
         @Before
         public void setUp() {
@@ -71,7 +70,7 @@ public class GappeiJohoManagerTest extends DbzTestDacBase {
         }
     }
 
-    public static class save合併情報 extends DbzTestDacBase {
+    public static class save合併情報 {
 
         @Before
         public void setUp() {
@@ -166,7 +165,7 @@ public class GappeiJohoManagerTest extends DbzTestDacBase {
 //        }
         @After
         public void after() {
-            sqlSession.rollbackWithoutDisconnect();
+//            sqlSession.rollbackWithoutDisconnect();
         }
     }
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.config;
+package jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype;
 
 /**
  * このクラスでは、業務Config 動作関連 に対応するキーをまとめています。

@@ -9,21 +9,22 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1004ShisetsuNyutaishoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -49,7 +50,7 @@ public class ShisetsuNyutaishoManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            int 主キー2 = DbT1004ShisetsuNyutaishoEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー2 = DbT1004ShisetsuNyutaishoEntityGenerator.DEFAULT_履歴番号;
             sut.get介護保険施設入退所(null, 主キー2);
         }
 
@@ -61,10 +62,10 @@ public class ShisetsuNyutaishoManagerTest {
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(ShikibetsuCode.class), any(int.class))).thenReturn(null);
+            when(dac.selectByKey(any(ShikibetsuCode.class), any(Decimal.class))).thenReturn(null);
 
             ShikibetsuCode 主キー1 = DbT1004ShisetsuNyutaishoEntityGenerator.DEFAULT_識別コード;
-            int 主キー2 = DbT1004ShisetsuNyutaishoEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー2 = DbT1004ShisetsuNyutaishoEntityGenerator.DEFAULT_履歴番号;
             ShisetsuNyutaisho result = sut.get介護保険施設入退所(主キー1, 主キー2);
 
             assertThat(result, is(nullValue()));
@@ -73,10 +74,10 @@ public class ShisetsuNyutaishoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT1004ShisetsuNyutaishoEntity entity = DbT1004ShisetsuNyutaishoEntityGenerator.createDbT1004ShisetsuNyutaishoEntity();
-            when(dac.selectByKey(any(ShikibetsuCode.class), any(int.class))).thenReturn(entity);
+            when(dac.selectByKey(any(ShikibetsuCode.class), any(Decimal.class))).thenReturn(entity);
 
             ShikibetsuCode 主キー1 = DbT1004ShisetsuNyutaishoEntityGenerator.DEFAULT_識別コード;
-            int 主キー2 = DbT1004ShisetsuNyutaishoEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー2 = DbT1004ShisetsuNyutaishoEntityGenerator.DEFAULT_履歴番号;
             ShisetsuNyutaisho result = sut.get介護保険施設入退所(主キー1, 主キー2);
 
             assertThat(result.get識別コード().value(), is(DbT1004ShisetsuNyutaishoEntityGenerator.DEFAULT_識別コード.value()));
