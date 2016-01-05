@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.ikenshoshujiiichiran;
 
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiHateiJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiOutputSort;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -33,6 +34,7 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
     private final boolean isIryoKikanCodeShujiiNameFlag;
     private final boolean isIryoKikanNameShujiiCodeFlag;
     private final boolean isIryoKikanNameShujiiNameFlag;
+    private final boolean isShichosonCodeFlag;
 
     /**
      * コンストラクタ作成
@@ -54,7 +56,15 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
      * @param isIryoKikanNameShujiiCodeFlag 並び順(主治医医療機関名称+主治医コード)
      * @param isIryoKikanNameShujiiNameFlag 並び順(主治医医療機関名称+主治医名称)
      */
-    public IkenshoShujiiIchiranMybatisParameter(RString shichosonCode, RString shichosonName, RString iryoKikanCodeFrom, boolean isIryoKikanCodeFromEmpty, RString iryoKikanCodeTo, boolean isIryoKikanCodeToEmpty, RString shujiiCodeFrom, boolean isShujiiCodeFromEmpty, RString shujiiCodeTo, boolean isShujiiCodeToEmpty, boolean isJyoukyouYukoFlag, boolean isJyoukyouMukoFlag, boolean isIryoKikanCodeShujiiCodeFlag, boolean isIryoKikanCodeShujiiNameFlag, boolean isIryoKikanNameShujiiCodeFlag, boolean isIryoKikanNameShujiiNameFlag) {
+    public IkenshoShujiiIchiranMybatisParameter(RString shichosonCode,
+            RString shichosonName, RString iryoKikanCodeFrom,
+            boolean isIryoKikanCodeFromEmpty, RString iryoKikanCodeTo,
+            boolean isIryoKikanCodeToEmpty, RString shujiiCodeFrom,
+            boolean isShujiiCodeFromEmpty, RString shujiiCodeTo,
+            boolean isShujiiCodeToEmpty, boolean isJyoukyouYukoFlag,
+            boolean isJyoukyouMukoFlag, boolean isIryoKikanCodeShujiiCodeFlag,
+            boolean isIryoKikanCodeShujiiNameFlag, boolean isIryoKikanNameShujiiCodeFlag,
+            boolean isIryoKikanNameShujiiNameFlag, boolean isShichosonCodeFlag) {
         this.shichosonCode = shichosonCode;
         this.shichosonName = shichosonName;
         this.iryoKikanCodeFrom = iryoKikanCodeFrom;
@@ -71,6 +81,7 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
         this.isIryoKikanCodeShujiiNameFlag = isIryoKikanCodeShujiiNameFlag;
         this.isIryoKikanNameShujiiCodeFlag = isIryoKikanNameShujiiCodeFlag;
         this.isIryoKikanNameShujiiNameFlag = isIryoKikanNameShujiiNameFlag;
+        this.isShichosonCodeFlag = isShichosonCodeFlag;
     }
 
     /**
@@ -103,10 +114,11 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
         boolean isIryoKikanCodeToFlag = false;
         boolean isShujiiCodeFromFlag = false;
         boolean isShujiiCodeToFlag = false;
+        boolean isShichosonCodeFlag = false;
 
-        if (new RString("1").equals(jyokyo)) {
+        if (ShujiiHateiJokyo.有効のみ.getコード().equals(jyokyo)) {
             isYukoFlag = true;
-        } else if (new RString("2").equals(jyokyo)) {
+        } else if (ShujiiHateiJokyo.無効のみ.getコード().equals(jyokyo)) {
             isMokuFlag = true;
         }
 
@@ -120,6 +132,9 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
             isOutputSortIryoKikanNameShujiiNameFlag = true;
         }
 
+        if (isNullOrempty(shichosonCode)) {
+            isShichosonCodeFlag = true;
+        }
         if (isNullOrempty(iryoKikanCodeFrom)) {
             isIryoKikanCodeFromFlag = true;
         }
@@ -137,7 +152,8 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
                 shichosonName, iryoKikanCodeFrom, isIryoKikanCodeFromFlag, iryoKikanCodeTo,
                 isIryoKikanCodeToFlag, shujiiCodeFrom, isShujiiCodeFromFlag, shujiiCodeTo, isShujiiCodeToFlag, isYukoFlag, isMokuFlag,
                 isOutPutSortIryoKikanCodeShujiiCodeFlag, isOutputSortIryoKikanCodeShujiiNameFlag,
-                isOutputSortIryoKikanNameShujiiCodeFlag, isOutputSortIryoKikanNameShujiiNameFlag);
+                isOutputSortIryoKikanNameShujiiCodeFlag, isOutputSortIryoKikanNameShujiiNameFlag,
+                isShichosonCodeFlag);
     }
 
     private static boolean isNullOrempty(RString obj) {
