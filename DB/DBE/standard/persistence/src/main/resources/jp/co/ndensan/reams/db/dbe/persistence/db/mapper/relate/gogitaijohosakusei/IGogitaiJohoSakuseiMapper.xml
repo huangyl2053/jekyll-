@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 合議体情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijohosakusei.IGogitaiJohoSakuseiMapper">
+
+    <select id="getGogitaiJohoSakuseiGridList" parameterType="jp.co.ndensan.reams.db.dbe.definition.core.gogitaijohosakusei.GogitaiJohoSakuseiParameter" resultMap="resultMap_GogitaiJohoSakuseiRelateEntity" fetchSize="500">
+        <include refid="selectGogitaiJohoSakuseiGridList" />        
+    </select>
+    <sql id="selectGogitaiJohoSakuseiGridList">
+        SELECT
+            DbT5591GogitaiJoho."gogitaiNo" as "dbT5591GogitaiJoho_gogitaiNo",
+            DbT5591GogitaiJoho."gogitaiYukoKikanKaishiYMD" as "dbT5591GogitaiJoho_gogitaiYukoKikanKaishiYMD",
+            DbT5591GogitaiJoho."gogitaiMei" as "dbT5591GogitaiJoho_gogitaiMei",
+            DbT5591GogitaiJoho."gogitaiYukoKikanShuryoYMD" as "dbT5591GogitaiJoho_gogitaiYukoKikanShuryoYMD",
+            DbT5591GogitaiJoho."gogitaiKaishiYoteiTime" as "dbT5591GogitaiJoho_gogitaiKaishiYoteiTime",
+            DbT5591GogitaiJoho."gogitaiShuryoYoteiTime" as "dbT5591GogitaiJoho_gogitaiShuryoYoteiTime",
+            DbT5591GogitaiJoho."shinsakaiKaisaiBashoCode" as "dbT5591GogitaiJoho_shinsakaiKaisaiBashoCode",
+            DbT5591GogitaiJoho."shinsakaiYoteiTeiin" as "dbT5591GogitaiJoho_shinsakaiYoteiTeiin",
+            DbT5591GogitaiJoho."shinsakaiJidoWariateTeiin" as "dbT5591GogitaiJoho_shinsakaiJidoWariateTeiin",
+            DbT5591GogitaiJoho."shinsakaiIinTeiin" as "dbT5591GogitaiJoho_shinsakaiIinTeiin",
+            DbT5591GogitaiJoho."gogitaiSeishinkaSonzaiFlag" as "dbT5591GogitaiJoho_gogitaiSeishinkaSonzaiFlag",
+            DbT5591GogitaiJoho."gogitaiDummyFlag" as "dbT5591GogitaiJoho_gogitaiDummyFlag",
+            DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoName" as "dbT5592ShinsakaiKaisaiBashoJoho_shinsakaiKaisaiBashoName"
+        FROM
+            rgdb."DbT5591GogitaiJoho" AS DbT5591GogitaiJoho
+        LEFT JOIN
+            rgdb."DbT5592ShinsakaiKaisaiBashoJoho" AS DbT5592ShinsakaiKaisaiBashoJoho
+        ON
+        DbT5591GogitaiJoho."shinsakaiKaisaiBashoCode" = DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoCode"
+        <where>
+            <if test="is現在有効な合議体のみ">
+                AND DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> #{nowDate}
+                AND #{nowDate} <![CDATA[<=]]> DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanShuryoYMD"
+            </if>
+        </where>
+        ORDER BY 
+            DbT5591GogitaiJoho."gogitaiNo"
+    </sql>
+    
+    
+    <select id="getShinsainList" parameterType="jp.co.ndensan.reams.db.dbe.definition.core.gogitaijohosakusei.GogitaiJohoSakuseiParameter" resultMap="resultMap_GogitaiJohoSakuseiRelateEntity" fetchSize="500">
+        SELECT
+            DbT5593GogitaiWariateIinJoho."gogitaichoKubunCode" AS "dbT5593GogitaiWariateIinJoho_gogitaichoKubunCode",
+            DbT5593GogitaiWariateIinJoho."shinsakaiIinCode" AS "dbT5593GogitaiWariateIinJoho_shinsakaiIinCode",
+            DbT5594ShinsakaiIinJoho."shinsakaiIinShimei" AS "dbT5594ShinsakaiIinJoho_shinsakaiIinShimei",
+            DbT5593GogitaiWariateIinJoho."substituteFlag" AS "dbT5593GogitaiWariateIinJoho_substituteFlag"
+        FROM
+            rgdb."DbT5593GogitaiWariateIinJoho" AS DbT5593GogitaiWariateIinJoho
+        LEFT JOIN rgdb."DbT5594ShinsakaiIinJoho" AS DbT5594ShinsakaiIinJoho
+            ON DbT5593GogitaiWariateIinJoho."shinsakaiIinCode" = DbT5594ShinsakaiIinJoho."shinsakaiIinCode"
+        WHERE
+                    DbT5593GogitaiWariateIinJoho."gogitaiNo" = #{合議体番号}
+            AND DbT5593GogitaiWariateIinJoho."gogitaiYukoKikanKaishiYMD" = #{合議体有効期間開始年月日}
+        ORDER BY DbT5593GogitaiWariateIinJoho."gogitaichoKubunCode" ASC, DbT5593GogitaiWariateIinJoho."shinsakaiIinCode" DESC
+    </select>
+
+    <resultMap id="resultMap_GogitaiJohoSakuseiRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiRelateEntity" autoMapping="true">
+        <association property="gogitaiJohoEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5591GogitaiJohoMapper.ResultMap_DbT5591GogitaiJohoEntity"/>
+        <association property="shinsakaiKaisaiBashoJohoEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5592ShinsakaiKaisaiBashoJohoMapper.ResultMap_DbT5592ShinsakaiKaisaiBashoJohoEntity"/>
+        <association property="gogitaiWariateIinJohoEntity"  resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5593GogitaiWariateIinJohoMapper.ResultMap_DbT5593GogitaiWariateIinJohoEntity"/>
+        <association property="shinsakaiIinJohoEntity"  resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.ResultMap_DbT5594ShinsakaiIinJohoEntity"/>
+    </resultMap>
+</mapper>

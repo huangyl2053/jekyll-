@@ -57,7 +57,8 @@ public class GogitaiWariateIinJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link GogitaiWariateIinJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link GogitaiWariateIinJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link GogitaiWariateIinJohoManager}のインスタンス
      */
     public static GogitaiWariateIinJohoManager createInstance() {
         return InstanceProvider.create(GogitaiWariateIinJohoManager.class);
@@ -121,6 +122,19 @@ public class GogitaiWariateIinJohoManager {
         合議体割当委員情報 = 合議体割当委員情報.modifiedModel();
         save介護認定審査会委員情報リスト(合議体割当委員情報.getShinsakaiIinJohoList());
         return 1 == 合議体割当委員情報Dac.save(合議体割当委員情報.toEntity());
+    }
+
+    /**
+     * 合議体割当委員情報{@link GogitaiWariateIinJoho}を物理削除します。
+     *
+     * @param 合議体割当委員情報 合議体割当委員情報
+     * @return 削除あり:true、削除なし:false <br>
+     * いずれかのテーブルに削除があればtrueを返す
+     */
+    @Transaction
+    public boolean deletePhysical(GogitaiWariateIinJoho 合議体割当委員情報) {
+        requireNonNull(合議体割当委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体割当委員情報"));
+        return 1 == 合議体割当委員情報Dac.deletePhysical(合議体割当委員情報.toEntity());
     }
 
     private void save介護認定審査会委員情報リスト(List<ShinsakaiIinJoho> 介護認定審査会委員情報List) {

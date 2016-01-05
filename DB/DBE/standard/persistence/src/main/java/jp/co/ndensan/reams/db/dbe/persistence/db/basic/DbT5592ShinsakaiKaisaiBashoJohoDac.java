@@ -8,6 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJoho;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJoho.shinsakaiKaisaiBashoCode;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJoho.shinsakaiKaisaiBashoJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -37,7 +38,7 @@ public class DbT5592ShinsakaiKaisaiBashoJohoDac implements ISaveable<DbT5592Shin
     @Transaction
     public DbT5592ShinsakaiKaisaiBashoJohoEntity selectByKey(
             RString 介護認定審査会開催場所コード) throws NullPointerException {
-        requireNonNull(介護認定審査会開催場所コード, 
+        requireNonNull(介護認定審査会開催場所コード,
                 UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所コード"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
@@ -69,8 +70,23 @@ public class DbT5592ShinsakaiKaisaiBashoJohoDac implements ISaveable<DbT5592Shin
     @Transaction
     @Override
     public int save(DbT5592ShinsakaiKaisaiBashoJohoEntity entity) {
-        requireNonNull(entity, 
+        requireNonNull(entity,
                 UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所情報エンティティ"));
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 開催場所コードと名称を取得します。
+     *
+     * @return DbT5592ShinsakaiKaisaiBashoJohoEntityの{@code list}
+     */
+    @Transaction
+    public List<DbT5592ShinsakaiKaisaiBashoJohoEntity> selectKaisaiBashoList() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5592ShinsakaiKaisaiBashoJoho.class).
+                where(eq(shinsakaiKaisaiBashoJokyo, true)).
+                toList(DbT5592ShinsakaiKaisaiBashoJohoEntity.class);
     }
 }
