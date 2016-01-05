@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-		<!-- DBE -->
+        <!-- DBE -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbeBusiness</artifactId>
@@ -23,17 +23,22 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbeEntity</artifactId>
         </dependency>
-		<!-- DBX -->
+        <!-- DBX -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxDefinition</artifactId>
         </dependency>
-		<!-- DBZ -->
-		<!-- 公開系 -->
-		<!-- テスト -->
+        <!-- DBZ -->
+        <!-- 公開系 -->
+        <!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbePersistence</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>
