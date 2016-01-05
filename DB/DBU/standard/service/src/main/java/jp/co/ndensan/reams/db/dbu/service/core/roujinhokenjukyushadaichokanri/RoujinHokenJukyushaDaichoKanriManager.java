@@ -8,12 +8,14 @@ package jp.co.ndensan.reams.db.dbu.service.core.roujinhokenjukyushadaichokanri;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbu.business.core.roujinhokenjukyushadaichokanri.RoujinHokenJukyushaDaichoKanriBusiness;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaMapperParameter;
+import jp.co.ndensan.reams.db.dbu.business.core.roujinhokenjukyushadaichokanri.RoujinHokenJukyushaDaichoKanri;
 import jp.co.ndensan.reams.db.dbu.definition.core.roujinhokenjukyushadaichokanri.RoujinHokenJukyushaDaichoKanriMapperParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7005RojinHokenJukyushaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7005RojinHokenJukyushaJohoDac;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.ShikibetsuTaishoSearchEntityHolder;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -75,15 +77,15 @@ public class RoujinHokenJukyushaDaichoKanriManager {
      * @return List<DbT7005RojinHokenJukyushaJohoEntity> 老健受給情報老健受給情報
      */
     @Transaction
-    public List<RoujinHokenJukyushaDaichoKanriBusiness> getRoukenJukyuJoho(ShikibetsuCode shikibetsuCode) {
-        List<RoujinHokenJukyushaDaichoKanriBusiness> buinessList = new ArrayList<>();
+    public List<RoujinHokenJukyushaDaichoKanri> getRoukenJukyuJoho(ShikibetsuCode shikibetsuCode) {
+        List<RoujinHokenJukyushaDaichoKanri> buinessList = new ArrayList<>();
         requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         List<DbT7005RojinHokenJukyushaJohoEntity> entity = dac.selectRoukenJukyuJoho(shikibetsuCode);
         if (entity == null || entity.isEmpty()) {
             return new ArrayList();
         }
         for (DbT7005RojinHokenJukyushaJohoEntity entityList : entity) {
-            buinessList.add(new RoujinHokenJukyushaDaichoKanriBusiness(entityList));
+            buinessList.add(new RoujinHokenJukyushaDaichoKanri(entityList));
         }
         return buinessList;
     }
@@ -142,6 +144,7 @@ public class RoujinHokenJukyushaDaichoKanriManager {
                 = RoujinHokenJukyushaDaichoKanriMapperParameter.createParam_RoujinHoken(shikibetsuCode,
                         shichosonCode, hihokenshaNo, rojinHokenShichosonCode, rojinHokenJukyushaNo);
         DbT7005RojinHokenJukyushaJohoEntity dbT7005entity = new DbT7005RojinHokenJukyushaJohoEntity();
+
         dbT7005entity.setShikibetsuCode(parameter.getShikibetsuCode());
         dbT7005entity.setShichosonCode(parameter.getShichosonCode());
         dbT7005entity.setHihokenshaNo(parameter.getHihokenshaNo());
@@ -162,5 +165,17 @@ public class RoujinHokenJukyushaDaichoKanriManager {
             IShikibetsuTaisho shikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(entity);
             shikibetsuTaisho.get現全国地方公共団体コード();
         }
+    }
+
+    private UaFt200FindShikibetsuTaishoEntity get宛名情報(ShikibetsuCode 識別コード) {
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(
+                GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先));
+        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+        TekiyoJogaishaMapperParameter parameter = TekiyoJogaishaMapperParameter.createParam_get宛名情報(
+                識別コード, new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
+//        IRoujinHokenJukyushaDaichoKanri mapper = mapperProvider.create(IRoujinHokenJukyushaDaichoKanri.class);
+//        UaFt200FindShikibetsuTaishoEntity 宛名情報 = mapper.select宛名情報(parameter);
+        // return 宛名情報;
+        return null;
     }
 }

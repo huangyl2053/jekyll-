@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 老人保健受給者情報を管理するビジネスです。
  *
  */
-public class RoujinHokenJukyushaDaichoKanriBusiness {
+public class RoujinHokenJukyushaDaichoKanri {
 
     private final DbT7005RojinHokenJukyushaJohoEntity entity;
 
@@ -24,7 +24,7 @@ public class RoujinHokenJukyushaDaichoKanriBusiness {
      *
      * @param entity 被保険者台帳管理Entity
      */
-    public RoujinHokenJukyushaDaichoKanriBusiness(DbT7005RojinHokenJukyushaJohoEntity entity) {
+    public RoujinHokenJukyushaDaichoKanri(DbT7005RojinHokenJukyushaJohoEntity entity) {
         this.entity = entity;
     }
 
