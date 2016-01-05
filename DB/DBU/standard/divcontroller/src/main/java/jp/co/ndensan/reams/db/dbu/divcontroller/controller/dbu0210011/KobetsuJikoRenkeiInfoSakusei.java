@@ -5,17 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.DBU0210011;
 
-import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyo.ChushutsuKikanJohoData;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyo.KaigoJuminhyoBatchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0210011.KobetsuJikoRenkeiInfoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.DBU0210011.KobetsuJikoRenkeiInfoSakuseiHandler;
-import jp.co.ndensan.reams.db.dbu.service.core.basic.kaigojuminhyo.KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
@@ -32,8 +29,8 @@ public class KobetsuJikoRenkeiInfoSakusei {
      * @return 介護住民票個別事項連携情報作成【他社住基】情報Divを持つResponseData
      */
     public ResponseData<KobetsuJikoRenkeiInfoSakuseiDiv> onLoad(KobetsuJikoRenkeiInfoSakuseiDiv div) {
-        ChushutsuKikanJohoData chushutsuKikanJohoData = KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder.createInstance().getChushutsukikanJoho();
-        getHandler(div).initialize(chushutsuKikanJohoData);
+//        ChushutsuKikanJohoData chushutsuKikanJohoData = KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder.createInstance().getChushutsukikanJoho();
+//        getHandler(div).initialize(chushutsuKikanJohoData);
         return ResponseData.of(div).respond();
     }
 
@@ -84,8 +81,8 @@ public class KobetsuJikoRenkeiInfoSakusei {
             if (konkaiFromYMD.isBefore(zenkaiFromYMD) || (konkaiFromYMD.isBefore(zenkaiFromYMD) && konkaiFromTime.isBefore(zenkaiFromTime))) {
                 throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage());
             } else {
-                parameter = KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder.createInstance()
-                        .getKaigoJuminhyoKobetsuJikouBatchParameter(konkaiFromYMD.toDateString(), new RString(konkaiFromTime.toString()));
+//                parameter = KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder.createInstance()
+//                        .getKaigoJuminhyoKobetsuJikouBatchParameter(konkaiFromYMD.toDateString(), new RString(konkaiFromTime.toString()));
             }
         }
 
