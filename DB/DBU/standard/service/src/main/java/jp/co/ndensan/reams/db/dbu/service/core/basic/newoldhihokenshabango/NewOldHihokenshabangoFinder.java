@@ -73,10 +73,14 @@ public class NewOldHihokenshabangoFinder {
                     "（新）被保険者番号", String.valueOf(被保険者番号桁数)));
         }
         List<DbT7026ShinKyuHihokenshaNoHenkanEntity> entityList = dac.get旧被保険者番号(shinNo);
+        List<NewOldHihokenshabango> newOldHihokenshabangoList = new ArrayList<>();
         if (1 < entityList.size()) {
             throw new ApplicationException(DbzErrorMessages.検索結果件数不正.getMessage());
         } else {
-            return SearchResult.of(entityList, 0, false);
+            if (0 != entityList.size()) {
+                newOldHihokenshabangoList.add(new NewOldHihokenshabango(entityList.get(0)));
+            }
+            return SearchResult.of(newOldHihokenshabangoList, 0, false);
         }
     }
 
@@ -101,13 +105,13 @@ public class NewOldHihokenshabangoFinder {
             throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage().replace(
                     "（旧）被保険者番号", String.valueOf(被保険者番号桁数)));
         }
-        List<DbT7026ShinKyuHihokenshaNoHenkanEntity> entityList = new ArrayList<>();
+        List<NewOldHihokenshabango> newOldHihokenshabangoList = new ArrayList<>();
         DbT7026ShinKyuHihokenshaNoHenkanEntity entity = dac.get新被保険者番号(shichosonCode, kyuNo);
-        entityList.add(entity);
         if (null == entity) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         } else {
-            return SearchResult.of(entityList, 0, false);
+            newOldHihokenshabangoList.add(new NewOldHihokenshabango(entity));
+            return SearchResult.of(newOldHihokenshabangoList, 0, false);
         }
     }
 }
