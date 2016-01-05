@@ -27,47 +27,47 @@ public class NewOldHihokenshabango {
     }
 
     /**
-     * getShichosonCode
+     * 市町村コードを返します。
      *
-     * @return shichosonCode
+     * @return 市町村コード
      */
-    public LasdecCode getShichosonCode() {
+    public LasdecCode get市町村コード() {
         return entity.getShichosonCode();
     }
 
     /**
-     * getShinNo
+     * 新番号を返します。
      *
-     * @return shinNo
+     * @return 新番号
      */
-    public RString getShinNo() {
+    public RString get新番号() {
         return entity.getKyuNo();
     }
 
     /**
-     * getKyuNo
+     * 旧番号を返します。
      *
-     * @return kyuNo
+     * @return 旧番号
      */
-    public RString getKyuNo() {
+    public RString get旧番号() {
         return entity.getKyuNo();
     }
 
     /**
-     * getKyuShichosonCode
+     * 旧市町村コード２を返します。
      *
-     * @return kyuShichosonCode
+     * @return 旧市町村コード２
      */
-    public LasdecCode getKyuShichosonCode() {
+    public LasdecCode get旧市町村コード２() {
         return entity.getKyuShichosonCode();
     }
 
     /**
-     * getKyuNo2
+     * 旧番号２を返します。
      *
-     * @return kyuNo2
+     * @return 旧番号２
      */
-    public RString getKyuNo2() {
+    public RString get旧番号２() {
         return entity.getKyuNo2();
     }
 
