@@ -232,8 +232,6 @@ public class TekiyoJogaishaDaichoJohoFinder {
         適用除外者台帳情報Entity.set住所コード(宛名情報PSM.get全国住所コード().getColumnValue());
         適用除外者台帳情報Entity.set行政区タイトル(行政区);
         適用除外者台帳情報Entity.set行政区コード(宛名情報PSM.get行政区コード().getColumnValue());
-        // TODO 凌護行 項目「住所」の編集処理が無し、 QA282回答まち、2015/12/28まで、
-//        適用除外者台帳情報Entity.set住所2(宛名情報PSM.get転入前住所().getColumnValue());
         適用除外者台帳情報Entity.set住所2(get住所の編集(宛名情報PSM.get転入前住所().getColumnValue(), 宛名情報PSM.get転入前住所().getColumnValue().length()));
         適用除外者台帳情報Entity.set住所タイトル2(転入前住所);
         適用除外者台帳情報Entity.set住所コード2(宛名情報PSM.get転入前全国住所コード().getColumnValue());
