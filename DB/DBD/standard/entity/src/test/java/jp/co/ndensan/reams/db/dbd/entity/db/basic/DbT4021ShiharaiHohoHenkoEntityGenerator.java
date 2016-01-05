@@ -4,18 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.basic;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.BemmeiRiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.BemmeiShinsaKekkaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.KanriKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.ShuryoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.ShuryoShinseiRiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.ShuryoShinseiShinsaKekkaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.TorokuKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -27,7 +26,7 @@ public final class DbT4021ShiharaiHohoHenkoEntityGenerator {
 
     public static final ShoKisaiHokenshaNo DEFAULT_証記載保険者番号 = new ShoKisaiHokenshaNo("123456");
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("012345");
-    public static final KanriKubun DEFAULT_管理区分 = KanriKubun.ニ号差止;
+    public static final RString DEFAULT_管理区分 = new RString("ニ号差止");
     public static final int DEFAULT_履歴番号 = 1;
     public static final TorokuKubun DEFAULT_登録区分 = TorokuKubun.二号予告登録者;
     public static final FlexibleDate DEFAULT_適用開始年月日 = new FlexibleDate("20140102");

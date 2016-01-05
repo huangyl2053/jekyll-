@@ -14,7 +14,8 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
 /**
- * 連動パターンテーブルのエンティティクラスです。
+ * DbT7035RendoPatternの項目定義クラスです
+ *
  */
 public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPatternEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
@@ -359,9 +360,9 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
     /**
      * 連携ファイル名のgetメソッドです。
      * <br/>
-     * <br/>連携するファイル名称を拡張子付きで定義する。
-     * <br/>編集書式：
-     * <br/> @日時@　・・・ 年月日時分秒（14桁）
+     * <br/>連携するファイル名称を拡張子付きで定義する。
+     * <br/>編集書式：
+     * <br/> @日時@　・・・ 年月日時分秒（14桁）
      * <br/> @市町村コード@　・・・　市町村コード（6桁）
      * 
      * @return 連携ファイル名
@@ -374,9 +375,9 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
     /**
      * 連携ファイル名のsetメソッドです。
      * <br/>
-     * <br/>連携するファイル名称を拡張子付きで定義する。
-     * <br/>編集書式：
-     * <br/> @日時@　・・・ 年月日時分秒（14桁）
+     * <br/>連携するファイル名称を拡張子付きで定義する。
+     * <br/>編集書式：
+     * <br/> @日時@　・・・ 年月日時分秒（14桁）
      * <br/> @市町村コード@　・・・　市町村コード（6桁）
      * 
      * @param renkeiFileName 連携ファイル名
@@ -447,4 +448,5 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
     }
 
 // </editor-fold>
+
 }

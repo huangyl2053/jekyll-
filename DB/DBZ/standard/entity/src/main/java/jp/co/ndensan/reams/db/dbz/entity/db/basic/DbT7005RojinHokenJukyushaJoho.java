@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT7005RojinHokenJukyushaJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -55,7 +55,7 @@ public enum DbT7005RojinHokenJukyushaJoho implements IColumnDefinition {
     /**
      * 老人保健市町村コード
      */
-    rojinHokenShichosonCode(2147483647, 0),
+    rojinHokenShichosonCode(8, 0),
     /**
      * 老人保健受給者番号
      */

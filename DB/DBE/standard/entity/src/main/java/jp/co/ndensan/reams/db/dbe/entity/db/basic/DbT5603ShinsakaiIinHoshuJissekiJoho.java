@@ -61,7 +61,7 @@ public enum DbT5603ShinsakaiIinHoshuJissekiJoho implements IColumnDefinition {
      * 介護認定審査会開催番号
      * <br/>介護認定審査会開催結果情報
      */
-    shinsakaiKaisaiNo(5, 0),
+    shinsakaiKaisaiNo(8, 0),
     /**
      * 介護認定審査会報酬税率
      */
