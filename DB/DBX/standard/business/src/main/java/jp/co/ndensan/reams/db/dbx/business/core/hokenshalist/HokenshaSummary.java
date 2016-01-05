@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business.core.shichosonlist;
+package jp.co.ndensan.reams.db.dbx.business.core.hokenshalist;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,12 +13,14 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 市町村EntiyのBusinessクラスです。
+ * 保険者の概要です。
+ * <p/>
+ * このクラスは同値比較可能です。
  */
-public final class ShichosonCodeNameResult implements Serializable {
+public final class HokenshaSummary implements Serializable {
 
     /**
-     * 空を表す{@link ShichosonCodeNameResult} です。
+     * 空を表す{@link HokenshaSummary} です。
      * <p/>
      * 各メソッドの返却値は以下の通りです。
      * <ul>
@@ -28,10 +30,10 @@ public final class ShichosonCodeNameResult implements Serializable {
      * <li>保険者区分…{@link TokeiTaishoKubun#空}</li>
      * </ul>
      */
-    public static final ShichosonCodeNameResult EMPTY;
+    public static final HokenshaSummary EMPTY;
 
     static {
-        EMPTY = new ShichosonCodeNameResult();
+        EMPTY = new HokenshaSummary();
     }
 
     private static final long serialVersionUID = -755396991214374692L;
@@ -44,7 +46,7 @@ public final class ShichosonCodeNameResult implements Serializable {
     /**
      * {@link #EMPTY}用のコンストラクタです。
      */
-    private ShichosonCodeNameResult() {
+    private HokenshaSummary() {
         this.市町村コード = LasdecCode.EMPTY;
         this.市町村名称 = RString.EMPTY;
         this.証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
@@ -59,7 +61,7 @@ public final class ShichosonCodeNameResult implements Serializable {
      * @param 保険者番号 証記載保険者番号
      * @param 保険者区分 保険者区分
      */
-    public ShichosonCodeNameResult(LasdecCode 市町村コード, RString 市町村名称, ShoKisaiHokenshaNo 保険者番号, TokeiTaishoKubun 保険者区分) {
+    public HokenshaSummary(LasdecCode 市町村コード, RString 市町村名称, ShoKisaiHokenshaNo 保険者番号, TokeiTaishoKubun 保険者区分) {
         this.市町村コード = 市町村コード;
         this.市町村名称 = 市町村名称;
         this.証記載保険者番号 = 保険者番号;
@@ -120,7 +122,7 @@ public final class ShichosonCodeNameResult implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ShichosonCodeNameResult other = (ShichosonCodeNameResult) obj;
+        final HokenshaSummary other = (HokenshaSummary) obj;
         if (!Objects.equals(this.市町村コード, other.市町村コード)) {
             return false;
         }

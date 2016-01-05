@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business.core.shichosonlist;
+package jp.co.ndensan.reams.db.dbx.business.core.hokenshalist;
 
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -19,7 +20,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * {@link ShichosonCodeNameResult}のテストです。
+ * {@link HokenshaSummary}のテストです。
  */
 @RunWith(Enclosed.class)
 public class ShichosonCodeNameResultTest {
@@ -29,7 +30,7 @@ public class ShichosonCodeNameResultTest {
 
     public static class Getters {
 
-        private ShichosonCodeNameResult sut;
+        private HokenshaSummary sut;
         private LasdecCode shichosonoCode;
         private RString shichosonName;
         private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
@@ -41,7 +42,7 @@ public class ShichosonCodeNameResultTest {
             shichosonName = new RString("電算市");
             shoKisaiHokenshaNo = new ShoKisaiHokenshaNo("000001");
             hokenshaKubun = TokeiTaishoKubun.保険者分;
-            sut = new ShichosonCodeNameResult(shichosonoCode, shichosonName, shoKisaiHokenshaNo, hokenshaKubun);
+            sut = new HokenshaSummary(shichosonoCode, shichosonName, shoKisaiHokenshaNo, hokenshaKubun);
         }
 
         @Test
@@ -72,7 +73,7 @@ public class ShichosonCodeNameResultTest {
 
         @Before
         public void setUp() {
-            sut = new ShichosonCodeNameResult(LasdecCode.EMPTY, RString.EMPTY, ShoKisaiHokenshaNo.EMPTY, TokeiTaishoKubun.保険者分);
+            sut = new HokenshaSummary(LasdecCode.EMPTY, RString.EMPTY, ShoKisaiHokenshaNo.EMPTY, TokeiTaishoKubun.保険者分);
         }
 
         @Test

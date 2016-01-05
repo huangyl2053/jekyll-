@@ -9,12 +9,14 @@ import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;
 import org.junit.Test;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
  * {@link  IGappeiJohoMapper}のテストです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class IGappeiJohoMapperTest {
 

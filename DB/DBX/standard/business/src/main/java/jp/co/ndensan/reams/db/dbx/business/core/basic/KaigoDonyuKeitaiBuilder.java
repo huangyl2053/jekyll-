@@ -6,10 +6,11 @@
 package jp.co.ndensan.reams.db.dbx.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link KaigoDonyuKeitai}の編集を行うビルダークラスです。
@@ -35,29 +36,27 @@ public class KaigoDonyuKeitaiBuilder {
 
     }
 
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
     /**
      * 業務分類を設定します。
      *
      * @param 業務分類 業務分類
      * @return {@link KaigoDonyuKeitaiBuilder}
      */
-    public KaigoDonyuKeitaiBuilder set業務分類(RString 業務分類) {
+    public KaigoDonyuKeitaiBuilder set業務分類(GyomuBunrui 業務分類) {
         requireNonNull(業務分類, UrSystemErrorMessages.値がnull.getReplacedMessage("業務分類"));
-        entity.setGyomuBunrui(業務分類);
+        entity.setGyomuBunrui(業務分類.code());
         return this;
     }
 
     /**
-     * 導入形態コードを設定します。
+     * 導入形態を設定します。
      *
-     * @param 導入形態コード 導入形態コード
+     * @param 導入形態 導入形態
      * @return {@link KaigoDonyuKeitaiBuilder}
      */
-    public KaigoDonyuKeitaiBuilder set導入形態コード(Code 導入形態コード) {
-        requireNonNull(導入形態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("導入形態コード"));
-        entity.setDonyuKeitaiCode(導入形態コード);
+    public KaigoDonyuKeitaiBuilder set導入形態(DonyuKeitaiCode 導入形態) {
+        requireNonNull(導入形態, UrSystemErrorMessages.値がnull.getReplacedMessage("導入形態"));
+        entity.setDonyuKeitaiCode(new Code(導入形態.getCode()));
         return this;
     }
 
@@ -67,7 +66,7 @@ public class KaigoDonyuKeitaiBuilder {
      * @param 支所管理有無フラグ 支所管理有無フラグ
      * @return {@link KaigoDonyuKeitaiBuilder}
      */
-    public KaigoDonyuKeitaiBuilder set支所管理有無フラグ(boolean 支所管理有無フラグ) {
+    public KaigoDonyuKeitaiBuilder set支所管理有無(boolean 支所管理有無フラグ) {
         requireNonNull(支所管理有無フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("支所管理有無フラグ"));
         entity.setShishoKanriUmuFlag(支所管理有無フラグ);
         return this;
