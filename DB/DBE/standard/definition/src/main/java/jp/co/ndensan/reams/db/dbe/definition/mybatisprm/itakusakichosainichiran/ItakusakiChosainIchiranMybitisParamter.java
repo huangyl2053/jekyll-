@@ -28,6 +28,7 @@ public final class ItakusakiChosainIchiranMybitisParamter implements IMyBatisPar
     private final RString jyoukyou;
     private final RString narabiJun;
     private final RString nextPage;
+    private final boolean shichosonCodeFlag;
     private final boolean itakusakiCodeFromFlag;
     private final boolean itakusakiCodeToFlag;
     private final boolean chosainNoFromFlag;
@@ -50,6 +51,7 @@ public final class ItakusakiChosainIchiranMybitisParamter implements IMyBatisPar
             RString jyoukyou,
             RString narabiJun,
             RString nextPage,
+            boolean shichosonCodeFlag,
             boolean itakusakiCodeFromFlag,
             boolean itakusakiCodeToFlag,
             boolean chosainNoFromFlag,
@@ -71,6 +73,7 @@ public final class ItakusakiChosainIchiranMybitisParamter implements IMyBatisPar
         this.jyoukyou = jyoukyou;
         this.narabiJun = narabiJun;
         this.nextPage = nextPage;
+        this.shichosonCodeFlag = shichosonCodeFlag;
         this.itakusakiCodeFromFlag = itakusakiCodeFromFlag;
         this.itakusakiCodeToFlag = itakusakiCodeToFlag;
         this.chosainNoFromFlag = chosainNoFromFlag;
@@ -109,6 +112,10 @@ public final class ItakusakiChosainIchiranMybitisParamter implements IMyBatisPar
             RString jyoukyou,
             RString narabiJun,
             RString nextPage) {
+        boolean shichosonCodeFlag = false;
+        if (!shichosonCode.isEmpty()) {
+            shichosonCodeFlag = true;
+        }
         boolean itakusakiCodeFromFlag = false;
         boolean itakusakiCodeToFlag = false;
         if (!itakusakiCodeFrom.isEmpty()) {
@@ -161,6 +168,7 @@ public final class ItakusakiChosainIchiranMybitisParamter implements IMyBatisPar
                 jyoukyou,
                 narabiJun,
                 nextPage,
+                shichosonCodeFlag,
                 itakusakiCodeFromFlag,
                 itakusakiCodeToFlag,
                 chosainNoFromFlag,

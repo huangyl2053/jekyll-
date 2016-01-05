@@ -7,9 +7,11 @@ package jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyo;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  *
@@ -35,8 +37,8 @@ public class ChushutsuKikanJohoData implements Serializable {
      *
      * @return 対象開始年月日
      */
-    public RString get対象開始年月日() {
-        return new RString(entity.getTaishoKaishiYMD().toString());
+    public FlexibleDate get対象開始年月日() {
+        return entity.getTaishoKaishiYMD();
     }
 
     /**
@@ -44,8 +46,8 @@ public class ChushutsuKikanJohoData implements Serializable {
      *
      * @return 対象終了年月日
      */
-    public RString get対象終了年月日() {
-        return new RString(entity.getTaishoShuryoYMD().toString());
+    public FlexibleDate get対象終了年月日() {
+        return entity.getTaishoShuryoYMD();
     }
 
     /**
@@ -53,8 +55,8 @@ public class ChushutsuKikanJohoData implements Serializable {
      *
      * @return 対象開始日時
      */
-    public RString get対象開始日時() {
-        return new RString(entity.getTaishoKaishiTimestamp().toString());
+    public YMDHMS get対象開始日時() {
+        return entity.getTaishoKaishiTimestamp();
     }
 
     /**
@@ -62,7 +64,8 @@ public class ChushutsuKikanJohoData implements Serializable {
      *
      * @return 対象終了年月日
      */
-    public RString get対象終了日時() {
-        return new RString(entity.getTaishoShuryoTimestamp().toString());
+    public YMDHMS get対象終了日時() {
+        return entity.getTaishoShuryoTimestamp();
     }
+
 }
