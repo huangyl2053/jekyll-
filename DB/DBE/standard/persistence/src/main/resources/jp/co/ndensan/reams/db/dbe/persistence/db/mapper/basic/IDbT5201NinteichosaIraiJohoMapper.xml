@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5031NinteiChosaHoshuTankaマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper">
+    
+    <update id="update認定調査依頼情報BY申請書管理番号" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe223001.UpdateMybatisParameter">
+        update rgdb."DbT5201NinteichosaIraiJoho"
+        SET "ninteichosaTokusokuYMD" = #{Temp_督促日},
+        "ninteichosaTokusokuHoho" = #{Temp_督促方法},
+        "ninteichosaTokusokuKaisu" = "ninteichosaTokusokuKaisu" + 1,
+        "ninteichosaTokusokuMemo" = #{Temp_督促メモ}
+        WHERE "shinseishoKanriNo" = #{申請書管理番号}
+    </update>
+
+</mapper>
