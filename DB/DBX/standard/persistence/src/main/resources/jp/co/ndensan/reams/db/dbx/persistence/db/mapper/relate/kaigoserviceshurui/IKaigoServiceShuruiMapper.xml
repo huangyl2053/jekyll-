@@ -4,9 +4,9 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.kaigoserviceshurui.IKaigoServiceShuruiMapper">
-
+  
     <select id="getKaigoServiceEntity" resultMap="resultMap_KaigoServiceShuruiEntity"
-            parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui.KaigoServiceShuruiMapperParameter" fetchSize="500">
+    parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatis.param.kaigoserviceshurui.KaigoServiceShuruiMapperParameter" fetchSize="500">
         SELECT
         DbT7130KaigoServiceShurui.*,
         DbT7131KaigoServiceNaiyou.*
@@ -22,9 +22,8 @@
         AS dbT7130KaigoServiceShurui
         LEFT JOIN
         (
-        SELECT
+        SELECT 
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.allColumns_DbT7131KaigoServiceNaiyou"/>
-        SELECT
         FROM
         rgdb."DbT7131KaigoServiceNaiyou"
         )AS dbT7131KaigoServiceNaiyou
@@ -37,10 +36,9 @@
 
     <resultMap id="resultMap_KaigoServiceShuruiEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigoserviceshurui.KaigoServiceShuruiEntity" autoMapping="true">
         <!--<id column="dbT7130KaigoServiceShurui_serviceShuruiCd" />-->
-        <id column="dbT7130KaigoServiceShurui_teikyoKaishiYM" />
-        <association property="介護サービス種類Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper.ResultMap_DbT7130KaigoServiceShuruiEntity"/>
-        <collection  property="介護サービス内容Entity" ofType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.ResultMap_DbT7131KaigoServiceNaiyouEntity"
-        />
+        <id column="dbT7130KaigoServiceShurui_teikyoKaishiYM"/>
+       <association property="介護サービス種類Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper.ResultMap_DbT7130KaigoServiceShuruiEntity"/>
+       <collection  property="介護サービス内容Entity" ofType="jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.ResultMap_DbT7131KaigoServiceNaiyouEntity"/>
     </resultMap>
 
 </mapper>

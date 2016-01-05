@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2012HokenryoRankEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank.DbT2012HokenryoRankEntity;
 
 /**
  * {@link jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2012HokenryoRankMapper}のマッパーIFです。

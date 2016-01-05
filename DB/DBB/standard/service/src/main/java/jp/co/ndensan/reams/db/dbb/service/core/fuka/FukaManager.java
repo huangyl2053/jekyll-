@@ -8,7 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.Kibetsu;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.FukaMapperParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.FukaEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaMapper;
@@ -37,7 +37,7 @@ public class FukaManager {
 
     /**
      * 単体テスト用のコンストラクタです。
-     * 
+     *
      * @param mapperProvider mapperProvider
      * @param 介護賦課Dac 介護賦課Dac
      * @param 介護期別Manager 介護期別Manager
@@ -99,7 +99,7 @@ public class FukaManager {
         return 1 == 介護賦課Dac.save(介護賦課.toEntity());
     }
 
-    private void save介護期別リスト(List<Kibetsu> 介護期別List) {    
+    private void save介護期別リスト(List<Kibetsu> 介護期別List) {
         for (Kibetsu 介護期別 : 介護期別List) {
             介護期別Manager.save介護期別(介護期別);
         }

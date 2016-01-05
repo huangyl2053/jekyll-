@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 被保険者台帳管理のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokensha.hihokenshadaicho.IHihokenshaDaichoMapper">
+<!--    <select id="select被保険者台帳管理ByKey" resultMap="resultMap_HihokenshaDaichoEntity" fetchSize="500">
+        <include refid="selectHihokenshaDaichoEntity" />
+    </select>
+
+     TODO RelateEntityを取得できるSQLに修正してください。where句はMapperParameterクラスに合わせて修正します。 
+    <sql id="selectHihokenshaDaichoEntity">
+        SELECT
+        FdT1301SeishinTecho.*,
+        FdT1309SeishinTechoNini.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.fd.fdz.persistence.db.mapper.basic.fda.IFdT1301SeishinTechoMapper.selectFdT1301SeishinTechoNotDeleted" />) AS FdT1301SeishinTecho
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.fd.fdz.persistence.db.mapper.basic.fda.IFdT1309SeishinTechoNiniMapper.selectFdT1309SeishinTechoNiniNotDeleted" />) AS FdT1309SeishinTechoNini
+        ON
+        FdT1301SeishinTecho."fdT1301SeishinTecho_shikibetsuCode" = FdT1309SeishinTechoNini."fdT1309SeishinTechoNini_shikibetsuCode" and
+        FdT1301SeishinTecho."fdT1301SeishinTecho_seishinTechoTimestamp" = FdT1309SeishinTechoNini."fdT1309SeishinTechoNini_seishinTechoTimestamp"
+        <where>
+            <if test="uses識別コード != null">
+                AND FdT1301SeishinTecho."fdT1301SeishinTecho_shikibetsuCode" = #{識別コード}
+            </if>
+            <if test="uses精神手帳履歴日時 != null">
+                and FdT1301SeishinTecho."fdT1301SeishinTecho_seishinTechoTimestamp" = #{精神手帳履歴日時}
+            </if>
+        </where>
+    </sql>
+
+     TODO RelateEntityの形に合わせてマッピング定義を修正してください。 
+    <resultMap id="resultMap_HihokenshaDaichoEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.hihokensha\hihokenshadaicho.HihokenshaDaichoEntity" autoMapping="true">
+        <id property="手帳情報Entity.shikibetsuCode" column="fdT1301SeishinTecho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <id property="手帳情報Entity.seishinTechoTimestamp" column="fdT1301SeishinTecho_seishinTechoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <association property="手帳情報Entity" resultMap="jp.co.ndensan.reams.fd.fdz.persistence.db.mapper.basic.fda.IFdT1301SeishinTechoMapper.resultMap_FdT1301SeishinTechoEntity"/>
+        <collection property="任意項目情報Entity" resultMap="jp.co.ndensan.reams.fd.fdz.persistence.db.mapper.basic.fda.IFdT1309SeishinTechoNiniMapper.resultMap_FdT1309SeishinTechoNiniEntity"/>
+    </resultMap>-->
+
+</mapper>

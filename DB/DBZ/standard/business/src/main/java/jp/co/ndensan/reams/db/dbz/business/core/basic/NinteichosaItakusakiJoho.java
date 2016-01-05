@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -44,7 +44,7 @@ public class NinteichosaItakusakiJoho extends
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
         this.entity = new DbT5910NinteichosaItakusakiJohoEntity();
         this.entity.setShichosonCode(市町村コード);
-        this.entity.setNinteichosaItakusakiCode(認定調査委託先コード);
+       // this.entity.setNinteichosaItakusakiCode(認定調査委託先コード);
         this.id = new NinteichosaItakusakiJohoIdentifier(
                 市町村コード,
                 認定調査委託先コード
@@ -61,7 +61,7 @@ public class NinteichosaItakusakiJoho extends
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先情報"));
         this.id = new NinteichosaItakusakiJohoIdentifier(
                 entity.getShichosonCode(),
-                entity.getNinteichosaItakusakiCode());
+                new ChosaItakusakiCode(entity.getNinteichosaItakusakiCode()));
     }
 
     /**
@@ -94,7 +94,7 @@ public class NinteichosaItakusakiJoho extends
      * @return 認定調査委託先コード
      */
     public ChosaItakusakiCode get認定調査委託先コード() {
-        return entity.getNinteichosaItakusakiCode();
+        return new ChosaItakusakiCode(entity.getNinteichosaItakusakiCode());
     }
 
     /**
@@ -166,7 +166,7 @@ public class NinteichosaItakusakiJoho extends
      * @return 代表者名
      */
     public AtenaMeisho get代表者名() {
-        return entity.getDaihyoshaName();
+        return new AtenaMeisho(entity.getDaihyoshaName());
     }
 
     /**

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.service.core.choshuyuyo;
 
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.KibetsuChoshuYuyo;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2007KibetsuChoshuYuyoEntityGenerator;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.choshuyuyo.DbT2007KibetsuChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2007KibetsuChoshuYuyoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

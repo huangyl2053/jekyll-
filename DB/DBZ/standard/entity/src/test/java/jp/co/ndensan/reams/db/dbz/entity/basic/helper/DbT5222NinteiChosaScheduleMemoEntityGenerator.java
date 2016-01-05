@@ -32,7 +32,7 @@ public final class DbT5222NinteiChosaScheduleMemoEntityGenerator {
     public static DbT5222NinteiChosaScheduleMemoEntity createDbT5222NinteiChosaScheduleMemoEntity() {
         DbT5222NinteiChosaScheduleMemoEntity entity = new DbT5222NinteiChosaScheduleMemoEntity();
         entity.setMemoYMD(DEFAULT_メモ年月日);
-        entity.setChosaChikuCode(DEFAULT_調査地区コード);
+        entity.setChosachikucode(DEFAULT_調査地区コード);
         entity.setMemoKubun(DEFAULT_メモ区分);
         entity.setRemban(DEFAULT_連番);
         entity.setMemoShiteiChosaChikuCode(DEFAULT_メモ指定調査地区コード);

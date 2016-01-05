@@ -7,11 +7,12 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaisho;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaisho.*;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaisho.rirekiNo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaisho.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -23,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護保険施設入退所Aliveのデータアクセスクラスです。
  */
-public class DbV1004ShisetsuNyutaishoAliveDac {
+public class DbV1004ShisetsuNyutaishoAliveDac implements ISaveable<DbV1004ShisetsuNyutaishoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -74,6 +75,7 @@ public class DbV1004ShisetsuNyutaishoAliveDac {
      * @return 登録件数
      */
     @Transaction
+    @Override
     public int save(DbV1004ShisetsuNyutaishoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護保険施設入退所Aliveエンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。

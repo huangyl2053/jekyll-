@@ -134,12 +134,11 @@ public class NinteichosahyoGaikyoChosaBuilderTest extends DbzTestBase {
             assertThat(business.get実施場所イメージ共有ファイルID(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_実施場所イメージ共有ファイルID));
         }
 
-        @Test
-        public void 戻り値の認定調査_現在の状況コードは_設定した値と同じ認定調査_現在の状況コードを返す() {
-            business = sut.set認定調査_現在の状況コード(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_認定調査_現在の状況コード).build();
-            assertThat(business.get認定調査_現在の状況コード(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_認定調査_現在の状況コード));
-        }
-
+//        @Test
+//        public void 戻り値の認定調査_現在の状況コードは_設定した値と同じ認定調査_現在の状況コードを返す() {
+//            business = sut.set認定調査_現在の状況コード(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_認定調査_現在の状況コード).build();
+//            assertThat(business.get認定調査_現在の状況コード(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_認定調査_現在の状況コード));
+//        }
         @Test
         public void 戻り値の認定調査_サービス区分コードは_設定した値と同じ認定調査_サービス区分コードを返す() {
             business = sut.set認定調査_サービス区分コード(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_認定調査_サービス区分コード).build();

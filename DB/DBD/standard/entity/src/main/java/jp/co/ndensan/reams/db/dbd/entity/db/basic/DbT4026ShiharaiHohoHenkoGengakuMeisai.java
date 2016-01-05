@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 支払方法変更減額明細テーブルの項目定義クラスです。
  */
 public enum DbT4026ShiharaiHohoHenkoGengakuMeisai implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -52,17 +52,25 @@ public enum DbT4026ShiharaiHohoHenkoGengakuMeisai implements IColumnDefinition {
      */
     kanriKubun(1, 0),
     /**
-     * 対象年度
-     */
-    taishoNendo(2147483647, 0),
-    /**
      * 履歴番号
      */
     rirekiNo(5, 0),
     /**
+     * 対象年度
+     */
+    taishoNendo(2147483647, 0),
+    /**
      * 未納・時効消滅減額
      */
-    mino_JikoShometsuGengaku(11, 0);
+    mino_JikoShometsuGengaku(11, 0),
+    /**
+     * 納付額
+     */
+    nofugaku(11, 0),
+    /**
+     * 年賦課額
+     */
+    nenFukagaku(11, 0);
 
     private final int maxLength;
     private final int scale;

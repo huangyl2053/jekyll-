@@ -213,18 +213,6 @@ public class NinteichosahyoGaikyoChosaBuilder {
     }
 
     /**
-     * 認定調査_現在の状況コードを設定します。
-     *
-     * @param 認定調査_現在の状況コード 認定調査_現在の状況コード
-     * @return {@link NinteichosahyoGaikyoChosaBuilder}
-     */
-    public NinteichosahyoGaikyoChosaBuilder set認定調査_現在の状況コード(Code 認定調査_現在の状況コード) {
-        requireNonNull(認定調査_現在の状況コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査_現在の状況コード"));
-        entity.setGenzainoJokyoCode(認定調査_現在の状況コード);
-        return this;
-    }
-
-    /**
      * 認定調査_サービス区分コードを設定します。
      *
      * @param 認定調査_サービス区分コード 認定調査_サービス区分コード

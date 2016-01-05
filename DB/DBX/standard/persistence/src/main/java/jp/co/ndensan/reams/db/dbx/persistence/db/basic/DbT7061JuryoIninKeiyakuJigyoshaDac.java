@@ -7,11 +7,13 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyosha;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyosha.*;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyosha.jigyoshaNo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyosha.keiyakuKaishiYMD;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyosha.serviceShubetsuCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -24,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 受領委任契約事業者のデータアクセスクラスです。
  */
-public class DbT7061JuryoIninKeiyakuJigyoshaDac {
+public class DbT7061JuryoIninKeiyakuJigyoshaDac implements ISaveable<DbT7061JuryoIninKeiyakuJigyoshaEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -79,6 +81,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDac {
      * @return 登録件数
      */
     @Transaction
+    @Override
     public int save(DbT7061JuryoIninKeiyakuJigyoshaEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任契約事業者エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。

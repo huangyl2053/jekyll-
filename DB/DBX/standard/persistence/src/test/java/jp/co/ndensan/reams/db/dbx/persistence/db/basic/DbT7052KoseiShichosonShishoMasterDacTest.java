@@ -2,15 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7052KoseiShichosonShishoMasterEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7052KoseiShichosonShishoMasterEntityGenerator;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_市町村コード;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_支所コード;
-import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7052KoseiShichosonShishoMasterEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7052KoseiShichosonShishoMasterEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_市町村コード;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_支所コード;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -31,7 +31,7 @@ import org.junit.Ignore;
  */
 @Ignore
 @RunWith(Enclosed.class)
-public class DbT7052KoseiShichosonShishoMasterDacTest extends DbxTestDacBase {
+public class DbT7052KoseiShichosonShishoMasterDacTest extends DbzTestDacBase {
 
     private static final LasdecCode キー_01 = new LasdecCode("01");
     private static final LasdecCode キー_02 = new LasdecCode("02");
@@ -43,7 +43,7 @@ public class DbT7052KoseiShichosonShishoMasterDacTest extends DbxTestDacBase {
         sut = InstanceProvider.create(DbT7052KoseiShichosonShishoMasterDac.class);
     }
 
-    public static class selectByKeyのテスト extends DbxTestDacBase {
+    public static class selectByKeyのテスト extends DbzTestDacBase {
 
         @Before
         public void setUp() {
@@ -86,7 +86,7 @@ public class DbT7052KoseiShichosonShishoMasterDacTest extends DbxTestDacBase {
         }
     }
 
-    public static class selectAllのテスト extends DbxTestDacBase {
+    public static class selectAllのテスト extends DbzTestDacBase {
 
         @Test
         public void 構成市町村支所マスタが存在する場合_selectAllは_全件を返す() {
@@ -105,7 +105,7 @@ public class DbT7052KoseiShichosonShishoMasterDacTest extends DbxTestDacBase {
         }
     }
 
-    public static class insertのテスト extends DbxTestDacBase {
+    public static class insertのテスト extends DbzTestDacBase {
 
         @Test
         public void 構成市町村支所マスタエンティティを渡すと_insertは_構成市町村支所マスタを追加する() {
@@ -119,7 +119,7 @@ public class DbT7052KoseiShichosonShishoMasterDacTest extends DbxTestDacBase {
         }
     }
 
-    public static class updateのテスト extends DbxTestDacBase {
+    public static class updateのテスト extends DbzTestDacBase {
 
         @Before
         public void setUp() {
@@ -145,7 +145,7 @@ public class DbT7052KoseiShichosonShishoMasterDacTest extends DbxTestDacBase {
         }
     }
 
-    public static class deleteのテスト extends DbxTestDacBase {
+    public static class deleteのテスト extends DbzTestDacBase {
 
         @Before
         public void setUp() {

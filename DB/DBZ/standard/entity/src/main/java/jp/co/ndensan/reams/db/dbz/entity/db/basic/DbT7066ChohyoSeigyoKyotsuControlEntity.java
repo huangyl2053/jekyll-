@@ -10,6 +10,8 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 帳票制御共通コントロールテーブルのエンティティクラスです。
@@ -17,7 +19,7 @@ import java.util.Objects;
      * <br/>共通の帳票制御メンテナンス画面への表示にも使用します。
  */
 public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<DbT7066ChohyoSeigyoKyotsuControlEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7066ChohyoSeigyoKyotsuControl");
 
@@ -42,6 +44,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
     private RString kaigoToiawasesakiShiyoKubun;
     private RString jushoHenshuShiyoKubun;
     private RString setainushiHyojiShiyoKubun;
+    private RString dainoninHyojiShiyoKubun;
     private RString customerBarCodeShiyoKubun;
     private RString gaibuChohyoMojigireSeigyoShiyoKubun;
     private RString naibuChohyoMojigireSeigyoShiyoKubun;
@@ -112,7 +115,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      * 
      * @param subGyomuCode サブ業務コード
      */
-    public void setSubGyomuCode(SubGyomuCode subGyomuCode) {
+    public void setSubGyomuCode(@Nonnull SubGyomuCode subGyomuCode) {
         this.subGyomuCode = subGyomuCode;
     }
 
@@ -130,7 +133,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      * 
      * @param chohyoBunruiID 帳票分類ID
      */
-    public void setChohyoBunruiID(ReportId chohyoBunruiID) {
+    public void setChohyoBunruiID(@Nonnull ReportId chohyoBunruiID) {
         this.chohyoBunruiID = chohyoBunruiID;
     }
 
@@ -148,20 +151,21 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      * 
      * @param kyotsuGamenShiyoUmu 共通画面使用有無
      */
-    public void setKyotsuGamenShiyoUmu(boolean kyotsuGamenShiyoUmu) {
+    public void setKyotsuGamenShiyoUmu(@Nonnull boolean kyotsuGamenShiyoUmu) {
         this.kyotsuGamenShiyoUmu = kyotsuGamenShiyoUmu;
     }
 
     /**
      * 文書番号使用区分のgetメソッドです。
      * <br/>
-     * <br/>UR文書番号管理の使用状況を管理　
-     * <br/>0：使用しない　
-     * <br/>1：画面表示不可（使用はする）　
+     * <br/>UR文書番号管理の使用状況を管理　
+     * <br/>0：使用しない　
+     * <br/>1：画面表示不可（使用はする）　
      * <br/>2：画面表示可
      * 
      * @return 文書番号使用区分
      */
+    @CheckForNull
     public RString getBunshoNoShiyoKubun() {
         return bunshoNoShiyoKubun;
     }
@@ -169,9 +173,9 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
     /**
      * 文書番号使用区分のsetメソッドです。
      * <br/>
-     * <br/>UR文書番号管理の使用状況を管理　
-     * <br/>0：使用しない　
-     * <br/>1：画面表示不可（使用はする）　
+     * <br/>UR文書番号管理の使用状況を管理　
+     * <br/>0：使用しない　
+     * <br/>1：画面表示不可（使用はする）　
      * <br/>2：画面表示可
      * 
      * @param bunshoNoShiyoKubun 文書番号使用区分
@@ -187,6 +191,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      * 
      * @return 通知書定型文使用区分
      */
+    @CheckForNull
     public RString getTsuchishoTeikeibunShiyoKubun() {
         return tsuchishoTeikeibunShiyoKubun;
     }
@@ -209,6 +214,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      * 
      * @return 認証者使用区分
      */
+    @CheckForNull
     public RString getNinshoshaShiyoKubun() {
         return ninshoshaShiyoKubun;
     }
@@ -231,6 +237,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      * 
      * @return 帳票出力順使用区分
      */
+    @CheckForNull
     public RString getChohyoShuturyokujunShiyoKubun() {
         return chohyoShuturyokujunShiyoKubun;
     }
@@ -249,14 +256,15 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
     /**
      * 帳票出力順表示方法のgetメソッドです。
      * <br/>
-     * <br/>UR帳票出力順を使用する場合のモード
-     * <br/>1：ALL（すべてを表示）
-     * <br/>2：SORT_ONLY（出力順のみ表示）
-     * <br/>3：SHUKEI_NONE（出力順、改頁を表示）
+     * <br/>UR帳票出力順を使用する場合のモード
+     * <br/>1：ALL（すべてを表示）
+     * <br/>2：SORT_ONLY（出力順のみ表示）
+     * <br/>3：SHUKEI_NONE（出力順、改頁を表示）
      * <br/>4：KAIPEJIJOKEN_NONE（出力順、集計を表示）
      * 
      * @return 帳票出力順表示方法
      */
+    @CheckForNull
     public RString getChohyoShuturyokujunHyojiHohho() {
         return chohyoShuturyokujunHyojiHohho;
     }
@@ -264,10 +272,10 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
     /**
      * 帳票出力順表示方法のsetメソッドです。
      * <br/>
-     * <br/>UR帳票出力順を使用する場合のモード
-     * <br/>1：ALL（すべてを表示）
-     * <br/>2：SORT_ONLY（出力順のみ表示）
-     * <br/>3：SHUKEI_NONE（出力順、改頁を表示）
+     * <br/>UR帳票出力順を使用する場合のモード
+     * <br/>1：ALL（すべてを表示）
+     * <br/>2：SORT_ONLY（出力順のみ表示）
+     * <br/>3：SHUKEI_NONE（出力順、改頁を表示）
      * <br/>4：KAIPEJIJOKEN_NONE（出力順、集計を表示）
      * 
      * @param chohyoShuturyokujunHyojiHohho 帳票出力順表示方法
@@ -283,6 +291,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      * 
      * @return 介護問合せ先使用区分
      */
+    @CheckForNull
     public RString getKaigoToiawasesakiShiyoKubun() {
         return kaigoToiawasesakiShiyoKubun;
     }
@@ -301,14 +310,15 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
     /**
      * 住所編集使用区分のgetメソッドです。
      * <br/>
-     * <br/>住所編集都道府県名表示有無　
-     * <br/>住所編集郡名表示有無　
-     * <br/>住所編集市町村名表示有無　
-     * <br/>住所編集町域編集方法　
+     * <br/>住所編集都道府県名表示有無　
+     * <br/>住所編集郡名表示有無　
+     * <br/>住所編集市町村名表示有無　
+     * <br/>住所編集町域編集方法　
      * <br/>住所編集方書表示有無
      * 
      * @return 住所編集使用区分
      */
+    @CheckForNull
     public RString getJushoHenshuShiyoKubun() {
         return jushoHenshuShiyoKubun;
     }
@@ -316,10 +326,10 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
     /**
      * 住所編集使用区分のsetメソッドです。
      * <br/>
-     * <br/>住所編集都道府県名表示有無　
-     * <br/>住所編集郡名表示有無　
-     * <br/>住所編集市町村名表示有無　
-     * <br/>住所編集町域編集方法　
+     * <br/>住所編集都道府県名表示有無　
+     * <br/>住所編集郡名表示有無　
+     * <br/>住所編集市町村名表示有無　
+     * <br/>住所編集町域編集方法　
      * <br/>住所編集方書表示有無
      * 
      * @param jushoHenshuShiyoKubun 住所編集使用区分
@@ -333,6 +343,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      * 
      * @return 世帯主表示使用区分
      */
+    @CheckForNull
     public RString getSetainushiHyojiShiyoKubun() {
         return setainushiHyojiShiyoKubun;
     }
@@ -347,13 +358,33 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
     }
 
     /**
+     * 代納人表示使用区分のgetメソッドです。
+     * 
+     * @return 代納人表示使用区分
+     */
+    @CheckForNull
+    public RString getDainoninHyojiShiyoKubun() {
+        return dainoninHyojiShiyoKubun;
+    }
+
+    /**
+     * 代納人表示使用区分のsetメソッドです。
+     * 
+     * @param dainoninHyojiShiyoKubun 代納人表示使用区分
+     */
+    public void setDainoninHyojiShiyoKubun(RString dainoninHyojiShiyoKubun) {
+        this.dainoninHyojiShiyoKubun = dainoninHyojiShiyoKubun;
+    }
+
+    /**
      * カスタマバーコード使用区分のgetメソッドです。
      * <br/>
-     * <br/>カスタマバーコード使用有無、
+     * <br/>カスタマバーコード使用有無、
      * <br/>カスタマバーコード変換エラー編集方法
      * 
      * @return カスタマバーコード使用区分
      */
+    @CheckForNull
     public RString getCustomerBarCodeShiyoKubun() {
         return customerBarCodeShiyoKubun;
     }
@@ -361,7 +392,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
     /**
      * カスタマバーコード使用区分のsetメソッドです。
      * <br/>
-     * <br/>カスタマバーコード使用有無、
+     * <br/>カスタマバーコード使用有無、
      * <br/>カスタマバーコード変換エラー編集方法
      * 
      * @param customerBarCodeShiyoKubun カスタマバーコード使用区分
@@ -375,6 +406,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      * 
      * @return 外部帳票文字切れ制御使用区分
      */
+    @CheckForNull
     public RString getGaibuChohyoMojigireSeigyoShiyoKubun() {
         return gaibuChohyoMojigireSeigyoShiyoKubun;
     }
@@ -393,6 +425,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      * 
      * @return 内部帳票文字切れ制御使用区分
      */
+    @CheckForNull
     public RString getNaibuChohyoMojigireSeigyoShiyoKubun() {
         return naibuChohyoMojigireSeigyoShiyoKubun;
     }
@@ -411,6 +444,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      * 
      * @return 文字切れ分離制御使用区分
      */
+    @CheckForNull
     public RString getMojigireBunriSeigyoShiyoKubun() {
         return mojigireBunriSeigyoShiyoKubun;
     }
@@ -429,6 +463,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      * 
      * @return 定型文文字サイズ使用区分
      */
+    @CheckForNull
     public RString getTeikeibunMojiSizeShiyoKubun() {
         return teikeibunMojiSizeShiyoKubun;
     }
@@ -447,6 +482,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      * 
      * @return 口座マスク使用区分
      */
+    @CheckForNull
     public RString getKozaMaskShiyoKubun() {
         return kozaMaskShiyoKubun;
     }
@@ -465,6 +501,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      * 
      * @return 口座名義人カナ優先使用区分
      */
+    @CheckForNull
     public RString getKozaMeigininKanaYusenShiyoKubun() {
         return kozaMeigininKanaYusenShiyoKubun;
     }
@@ -483,6 +520,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      * 
      * @return 代行プリント使用区分
      */
+    @CheckForNull
     public RString getDaikoPrintShiyoKubun() {
         return daikoPrintShiyoKubun;
     }
@@ -499,12 +537,13 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
     /**
      * 地区表示使用区分のgetメソッドです。
      * <br/>
-     * <br/>地区表示１　
-     * <br/>地区表示２　
+     * <br/>地区表示１　
+     * <br/>地区表示２　
      * <br/>地区表示３
      * 
      * @return 地区表示使用区分
      */
+    @CheckForNull
     public RString getChikuhyojiShiyoKubun() {
         return chikuhyojiShiyoKubun;
     }
@@ -512,8 +551,8 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
     /**
      * 地区表示使用区分のsetメソッドです。
      * <br/>
-     * <br/>地区表示１　
-     * <br/>地区表示２　
+     * <br/>地区表示１　
+     * <br/>地区表示２　
      * <br/>地区表示３
      * 
      * @param chikuhyojiShiyoKubun 地区表示使用区分
@@ -526,7 +565,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      * このエンティティの主キーが他の{@literal DbT7066ChohyoSeigyoKyotsuControlEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7066ChohyoSeigyoKyotsuControlEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -559,6 +598,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
         this.kaigoToiawasesakiShiyoKubun = entity.kaigoToiawasesakiShiyoKubun;
         this.jushoHenshuShiyoKubun = entity.jushoHenshuShiyoKubun;
         this.setainushiHyojiShiyoKubun = entity.setainushiHyojiShiyoKubun;
+        this.dainoninHyojiShiyoKubun = entity.dainoninHyojiShiyoKubun;
         this.customerBarCodeShiyoKubun = entity.customerBarCodeShiyoKubun;
         this.gaibuChohyoMojigireSeigyoShiyoKubun = entity.gaibuChohyoMojigireSeigyoShiyoKubun;
         this.naibuChohyoMojigireSeigyoShiyoKubun = entity.naibuChohyoMojigireSeigyoShiyoKubun;
@@ -576,8 +616,9 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(subGyomuCode, chohyoBunruiID, kyotsuGamenShiyoUmu, bunshoNoShiyoKubun, tsuchishoTeikeibunShiyoKubun, ninshoshaShiyoKubun, chohyoShuturyokujunShiyoKubun, chohyoShuturyokujunHyojiHohho, kaigoToiawasesakiShiyoKubun, jushoHenshuShiyoKubun, setainushiHyojiShiyoKubun, customerBarCodeShiyoKubun, gaibuChohyoMojigireSeigyoShiyoKubun, naibuChohyoMojigireSeigyoShiyoKubun, mojigireBunriSeigyoShiyoKubun, teikeibunMojiSizeShiyoKubun, kozaMaskShiyoKubun, kozaMeigininKanaYusenShiyoKubun, daikoPrintShiyoKubun, chikuhyojiShiyoKubun);
+        return super.toMd5(subGyomuCode, chohyoBunruiID, kyotsuGamenShiyoUmu, bunshoNoShiyoKubun, tsuchishoTeikeibunShiyoKubun, ninshoshaShiyoKubun, chohyoShuturyokujunShiyoKubun, chohyoShuturyokujunHyojiHohho, kaigoToiawasesakiShiyoKubun, jushoHenshuShiyoKubun, setainushiHyojiShiyoKubun, dainoninHyojiShiyoKubun, customerBarCodeShiyoKubun, gaibuChohyoMojigireSeigyoShiyoKubun, naibuChohyoMojigireSeigyoShiyoKubun, mojigireBunriSeigyoShiyoKubun, teikeibunMojiSizeShiyoKubun, kozaMaskShiyoKubun, kozaMeigininKanaYusenShiyoKubun, daikoPrintShiyoKubun, chikuhyojiShiyoKubun);
     }
 
 // </editor-fold>
+
 }

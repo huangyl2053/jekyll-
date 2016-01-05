@@ -1,23 +1,20 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import java.util.Objects;
+import java.util.UUID;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 申請届出情報（子）テーブルのエンティティクラスです。
@@ -39,13 +36,13 @@ public class DbT4120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT4120S
     @PrimaryKey
     private ShinseishoKanriNo shinseishoKanriNo;
     private Code shinseiTodokedeDaikoKubunCode;
-    private AtenaMeisho shinseiTodokedeshaShimei;
-    private AtenaKanaMeisho shinseiTodokedeshaKanaShimei;
+    private RString shinseiTodokedeshaShimei;
+    private RString shinseiTodokedeshaKanaShimei;
     private RString shinseiTodokedeshaTsuzukigaraCode;
     private JigyoshaNo shinseiTodokedeDaikoJigyoshaNo;
     private RString jigyoshaKubun;
     private YubinNo shinseiTodokedeshaYubinNo;
-    private AtenaJusho shinseiTodokedeshaJusho;
+    private RString shinseiTodokedeshaJusho;
     private TelNo shinseiTodokedeshaTelNo;
 
     /**
@@ -139,7 +136,7 @@ public class DbT4120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT4120S
      * @return 申請届出者氏名
      */
     @CheckForNull
-    public AtenaMeisho getShinseiTodokedeshaShimei() {
+    public RString getShinseiTodokedeshaShimei() {
         return shinseiTodokedeshaShimei;
     }
 
@@ -148,7 +145,7 @@ public class DbT4120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT4120S
      *
      * @param shinseiTodokedeshaShimei 申請届出者氏名
      */
-    public void setShinseiTodokedeshaShimei(AtenaMeisho shinseiTodokedeshaShimei) {
+    public void setShinseiTodokedeshaShimei(RString shinseiTodokedeshaShimei) {
         this.shinseiTodokedeshaShimei = shinseiTodokedeshaShimei;
     }
 
@@ -158,7 +155,7 @@ public class DbT4120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT4120S
      * @return 申請届出者氏名カナ
      */
     @CheckForNull
-    public AtenaKanaMeisho getShinseiTodokedeshaKanaShimei() {
+    public RString getShinseiTodokedeshaKanaShimei() {
         return shinseiTodokedeshaKanaShimei;
     }
 
@@ -167,7 +164,7 @@ public class DbT4120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT4120S
      *
      * @param shinseiTodokedeshaKanaShimei 申請届出者氏名カナ
      */
-    public void setShinseiTodokedeshaKanaShimei(AtenaKanaMeisho shinseiTodokedeshaKanaShimei) {
+    public void setShinseiTodokedeshaKanaShimei(RString shinseiTodokedeshaKanaShimei) {
         this.shinseiTodokedeshaKanaShimei = shinseiTodokedeshaKanaShimei;
     }
 
@@ -261,7 +258,7 @@ public class DbT4120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT4120S
      * @return 申請届出者住所
      */
     @CheckForNull
-    public AtenaJusho getShinseiTodokedeshaJusho() {
+    public RString getShinseiTodokedeshaJusho() {
         return shinseiTodokedeshaJusho;
     }
 
@@ -270,7 +267,7 @@ public class DbT4120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT4120S
      *
      * @param shinseiTodokedeshaJusho 申請届出者住所
      */
-    public void setShinseiTodokedeshaJusho(AtenaJusho shinseiTodokedeshaJusho) {
+    public void setShinseiTodokedeshaJusho(RString shinseiTodokedeshaJusho) {
         this.shinseiTodokedeshaJusho = shinseiTodokedeshaJusho;
     }
 

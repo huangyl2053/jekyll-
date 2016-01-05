@@ -6,14 +6,13 @@ package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3062SaishinsaMoshitateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 再審査申立エンティティのテスト用インスタンスを作成する補助クラスです。
@@ -25,10 +24,10 @@ public final class DbT3062SaishinsaMoshitateEntityGenerator {
     public static final FlexibleYearMonth DEFAULT_サービス提供年月 = new FlexibleYearMonth("199001");
     public static final ServiceShuruiCode DEFAULT_サービス種類コード = new ServiceShuruiCode("1");
     public static final ServiceKomokuCode DEFAULT_サービス項目コード = new ServiceKomokuCode("1");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 1;
     public static final FlexibleDate DEFAULT_申立年月日 = new FlexibleDate("19900101");
     public static final RString DEFAULT_申立者区分コード = new RString("Data");
-    public static final HokenshaNo DEFAULT_証記載保険者番号 = new HokenshaNo("1");
+    public static final ShoKisaiHokenshaNo DEFAULT_証記載保険者番号 = new ShoKisaiHokenshaNo("1");
     public static final int DEFAULT_申立単位数 = 1;
     public static final RString DEFAULT_申立事由コード = new RString("Data");
     public static final FlexibleYearMonth DEFAULT_国保連送付年月 = new FlexibleYearMonth("199001");

@@ -404,12 +404,6 @@ public class KoseiShichosonMasterBuilder {
         return new KoseiShichosonMaster(entity, id, koseiShichosonShishoMaster);
     }
 
-    /**
-     * setKoseiShichosonShishoMaster
-     *
-     * @param 構成市町村支所マスタ KoseiShichosonShishoMaster
-     * @return KoseiShichosonMasterBuilder
-     */
     public KoseiShichosonMasterBuilder setKoseiShichosonShishoMaster(KoseiShichosonShishoMaster 構成市町村支所マスタ) {
 
         if (hasSameIdentifier(構成市町村支所マスタ.identifier())) {

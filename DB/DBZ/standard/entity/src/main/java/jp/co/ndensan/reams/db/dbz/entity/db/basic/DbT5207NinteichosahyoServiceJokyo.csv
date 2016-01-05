@@ -1,4 +1,5 @@
-﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,申請書管理番号,A
 ninteichosaRirekiNo,int2,int,,,,,認定調査依頼履歴番号,A
 remban,int2,int,,,,,連番,A
+koroshoIfShikibetsuCode,UDD035Code,Code,,,,,厚労省IF識別コード,A
 serviceJokyo,int2,int,,,,,サービスの状況,A

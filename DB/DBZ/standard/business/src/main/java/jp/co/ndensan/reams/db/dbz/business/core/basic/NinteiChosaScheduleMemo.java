@@ -95,7 +95,7 @@ public class NinteiChosaScheduleMemo extends
      * @return 調査地区コード
      */
     public Code get調査地区コード() {
-        return entity.getChosaChikuCode();
+        return entity.getChosachikucode();
     }
 
     /**

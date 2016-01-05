@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.servicetype.ServiceTypeModel;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ServiceTypeCommonChildDiv.ServiceTypeCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ServiceTypeCommonChildDiv.ServiceTypeCommonChildHandler;
@@ -18,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -44,9 +44,9 @@ public class ServiceTypeCommonChildDiv {
      */
     public ResponseData<ServiceTypeCommonChildDivDiv> onLoad(ServiceTypeCommonChildDivDiv div) {
         ServiceTypeModel serviceType = DataPassingConverter.deserialize(div.getServiceType(), ServiceTypeModel.class);
-        List<KaigoServiceShurui> list = service.getServiceTypeList(KaigoServiceShuruiMapperParameter.createSelectByKeyParam(
+        SearchResult<KaigoServiceShurui> list = service.getServiceTypeList(KaigoServiceShuruiMapperParameter.createSelectByKeyParam(
                 new KaigoServiceShuruiCode(serviceType.getサービス種類コード()), new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString())));
-        getHandler(div).initialize(list, new KaigoServiceShuruiCode(serviceType.getサービス種類コード()));
+        getHandler(div).initialize(list.records(), new KaigoServiceShuruiCode(serviceType.getサービス種類コード()));
         return ResponseData.of(div).respond();
     }
 

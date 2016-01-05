@@ -21,11 +21,11 @@ public enum ShikakuHenkoValidationMessage implements IValidationMessage {
     /**
      * 変更日します。
      */
-    変更日が未入力(DbzErrorMessages.必須項目を入力_追加メッセージあり, "資格変更年月日"),
+    変更日が未入力(UrErrorMessages.必須項目_追加メッセージあり, "資格変更年月日"),
     /**
      * 変更事由します。
      */
-    変更事由が未入力(DbzErrorMessages.必須項目を入力_追加メッセージあり, "資格変更事由"),
+    変更事由が未入力(UrErrorMessages.必須項目_追加メッセージあり, "資格変更事由"),
     /**
      * 日付の前後関係が逆転（変更日が取得日より前）します。
      */
@@ -37,15 +37,15 @@ public enum ShikakuHenkoValidationMessage implements IValidationMessage {
     /**
      * 変更日と次の履歴データの変更日の期間が重複します。
      */
-    変更日と次の履歴データの変更日の期間が重複(DbzErrorMessages.大小関係が不正, "変更日 － 次履歴の変更日"),
+    変更日と次の履歴データの変更日の期間が重複(UrErrorMessages.大小関係が不正, "変更日 － 次履歴の変更日"),
     /**
      * 変更日と前の履歴データの変更日の期間が重複します。
      */
-    変更日と前の履歴データの変更日の期間が重複(DbzErrorMessages.大小関係が不正, "変更日 － 前履歴の変更日"),
+    変更日と前の履歴データの変更日の期間が重複(UrErrorMessages.大小関係が不正, "変更日 － 前履歴の変更日"),
     /**
      * 住所地特例履歴と期間が重複する履歴があるします。
      */
-    変更日と住所地特例履歴の期間が重複する履歴がある(DbzErrorMessages.期間が重複),
+    変更日と住所地特例履歴の期間が重複する履歴がある(UrErrorMessages.期間が重複),
     /**
      * 最新の取得日として登録不可します。
      */

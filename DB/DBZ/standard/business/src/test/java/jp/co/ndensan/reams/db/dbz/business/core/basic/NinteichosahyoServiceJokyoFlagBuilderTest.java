@@ -71,9 +71,9 @@ public class NinteichosahyoServiceJokyoFlagBuilderTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値のサービスの状況は_設定した値と同じサービスの状況を返す() {
-            business = sut.setサービスの状況(DbT5208NinteichosahyoServiceJokyoFlagEntityGenerator.DEFAULT_サービスの状況).build();
-            assertThat(business.getサービスの状況(), is(DbT5208NinteichosahyoServiceJokyoFlagEntityGenerator.DEFAULT_サービスの状況));
+        public void 戻り値のサービスの状況フラグは_設定した値と同じサービスの状況を返す() {
+            business = sut.setサービスの状況フラグ(DbT5208NinteichosahyoServiceJokyoFlagEntityGenerator.DEFAULT_サービスの状況フラグ).build();
+            assertThat(business.getサービスの状況フラグ(), is(DbT5208NinteichosahyoServiceJokyoFlagEntityGenerator.DEFAULT_サービスの状況フラグ));
         }
 
     }

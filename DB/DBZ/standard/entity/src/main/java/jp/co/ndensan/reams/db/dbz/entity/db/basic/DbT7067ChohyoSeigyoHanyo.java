@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * <br/> 帳票制御のために必要な、各帳票独自の項目を管理します。
  */
 public enum DbT7067ChohyoSeigyoHanyo implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -48,6 +48,10 @@ public enum DbT7067ChohyoSeigyoHanyo implements IColumnDefinition {
      * 帳票分類ID
      */
     chohyoBunruiID(2147483647, 0),
+    /**
+     * 管理年度
+     */
+    kanriNendo(2147483647, 0),
     /**
      * 項目名
      */

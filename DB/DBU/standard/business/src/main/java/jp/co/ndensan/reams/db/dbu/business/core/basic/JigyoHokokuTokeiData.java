@@ -21,7 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 事業報告統計データを管理するクラスです。
  */
-public class JigyoHokokuTokeiData extends ParentModelBase<JigyoHokokuTokeiDataIdentifier, DbT7021JigyoHokokuTokeiDataEntity, JigyoHokokuTokeiData> implements Serializable {
+public class JigyoHokokuTokeiData
+        extends ParentModelBase<JigyoHokokuTokeiDataIdentifier, DbT7021JigyoHokokuTokeiDataEntity, JigyoHokokuTokeiData> implements Serializable {
 
     private final DbT7021JigyoHokokuTokeiDataEntity entity;
     private final JigyoHokokuTokeiDataIdentifier id;

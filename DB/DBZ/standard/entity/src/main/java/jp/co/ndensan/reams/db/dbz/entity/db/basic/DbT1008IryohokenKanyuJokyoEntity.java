@@ -2,24 +2,26 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * DbT1008IryohokenKanyuJokyoの項目定義クラスです
  *
  */
 public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008IryohokenKanyuJokyoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1008IryohokenKanyuJokyo");
@@ -104,7 +106,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
      *
      * @param shikibetsuCode 識別コード
      */
-    public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
+    public void setShikibetsuCode(@Nonnull ShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
     }
 
@@ -140,7 +142,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
      *
      * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(LasdecCode shichosonCode) {
+    public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
@@ -149,6 +151,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
      *
      * @return 被保険者番号
      */
+    @CheckForNull
     public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
@@ -167,6 +170,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
      *
      * @return 医療保険種別コード
      */
+    @CheckForNull
     public RString getIryoHokenShubetsuCode() {
         return iryoHokenShubetsuCode;
     }
@@ -185,6 +189,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
      *
      * @return 医療保険者番号
      */
+    @CheckForNull
     public RString getIryoHokenshaNo() {
         return iryoHokenshaNo;
     }
@@ -203,6 +208,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
      *
      * @return 医療保険者名称
      */
+    @CheckForNull
     public RString getIryoHokenshaMeisho() {
         return iryoHokenshaMeisho;
     }
@@ -221,6 +227,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
      *
      * @return 医療保険記号番号
      */
+    @CheckForNull
     public RString getIryoHokenKigoNo() {
         return iryoHokenKigoNo;
     }
@@ -248,7 +255,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
      *
      * @param iryoHokenKanyuYMD 医療保険加入年月日
      */
-    public void setIryoHokenKanyuYMD(FlexibleDate iryoHokenKanyuYMD) {
+    public void setIryoHokenKanyuYMD(@Nonnull FlexibleDate iryoHokenKanyuYMD) {
         this.iryoHokenKanyuYMD = iryoHokenKanyuYMD;
     }
 
@@ -257,6 +264,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
      *
      * @return 医療保険脱退年月日
      */
+    @CheckForNull
     public FlexibleDate getIryoHokenDattaiYMD() {
         return iryoHokenDattaiYMD;
     }
@@ -274,8 +282,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
      * このエンティティの主キーが他の{@literal DbT1008IryohokenKanyuJokyoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT1008IryohokenKanyuJokyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT1008IryohokenKanyuJokyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT1008IryohokenKanyuJokyoEntity other) {

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic;
 
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2012HokenryoRankEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank.DbT2012HokenryoRankEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2012HokenryoRankDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;

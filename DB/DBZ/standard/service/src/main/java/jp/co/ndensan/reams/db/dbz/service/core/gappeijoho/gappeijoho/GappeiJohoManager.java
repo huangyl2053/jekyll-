@@ -56,7 +56,8 @@ public class GappeiJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link GappeiJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link GappeiJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link GappeiJohoManager}のインスタンス
      */
     public static GappeiJohoManager createInstance() {
         return InstanceProvider.create(GappeiJohoManager.class);

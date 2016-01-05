@@ -9,8 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJoho;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5592ShinsakaiKaisaiBashoJohoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5592ShinsakaiKaisaiBashoJohoMapper;
+import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaijoho.GogitaiJohoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -22,12 +26,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class ShinsakaiKaisaiBashoJohoManager {
 
     private final DbT5592ShinsakaiKaisaiBashoJohoDac dac;
+    private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
      */
     public ShinsakaiKaisaiBashoJohoManager() {
         dac = InstanceProvider.create(DbT5592ShinsakaiKaisaiBashoJohoDac.class);
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
     /**
@@ -37,7 +43,18 @@ public class ShinsakaiKaisaiBashoJohoManager {
      */
     ShinsakaiKaisaiBashoJohoManager(DbT5592ShinsakaiKaisaiBashoJohoDac dac) {
         this.dac = dac;
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link GogitaiJohoManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link GogitaiJohoManager}のインスタンス
+     */
+    public static ShinsakaiKaisaiBashoJohoManager createInstance() {
+        return InstanceProvider.create(ShinsakaiKaisaiBashoJohoManager.class);
+    }
+    
 
     /**
      * 主キーに合致する介護認定審査会開催場所情報を返します。
@@ -76,6 +93,28 @@ public class ShinsakaiKaisaiBashoJohoManager {
         return businessList;
     }
 
+    /*************************************************************************追加Start*****************************************************/
+    /**
+     * 介護認定審査会開催場所情報一覧情報をします。
+     *
+     * @param param
+     * @return ShinsakaiKaisaiBashoJohoの{@code list}
+     */
+    @Transaction
+    public List<ShinsakaiKaisaiBashoJoho> get介護認定審査会開催場所情報一覧(GogitaiJohoMapperParameter param) {
+        List<ShinsakaiKaisaiBashoJoho> businessList = new ArrayList<>();
+        IDbT5592ShinsakaiKaisaiBashoJohoMapper iDbT5592Mapper = mapperProvider.create(IDbT5592ShinsakaiKaisaiBashoJohoMapper.class);
+         List<DbT5592ShinsakaiKaisaiBashoJohoEntity> DbT5592ShinsakaiKaisaiBashoJohoEntityList = iDbT5592Mapper.getYiChiRanEntity(param);
+        
+        for (DbT5592ShinsakaiKaisaiBashoJohoEntity entity : DbT5592ShinsakaiKaisaiBashoJohoEntityList) {
+            entity.initializeMd5();
+            businessList.add(new ShinsakaiKaisaiBashoJoho(entity));
+        }
+
+        return businessList;
+    }
+    
+    /*************************************************************************追加End*****************************************************/
     /**
      * 介護認定審査会開催場所情報{@link ShinsakaiKaisaiBashoJoho}を保存します。
      *

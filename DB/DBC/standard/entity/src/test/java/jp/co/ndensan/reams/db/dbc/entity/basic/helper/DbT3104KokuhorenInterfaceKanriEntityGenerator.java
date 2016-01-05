@@ -56,7 +56,7 @@ public final class DbT3104KokuhorenInterfaceKanriEntityGenerator {
         entity.setShoriJisshiTimestamp(DEFAULT_処理実施日時);
         entity.setChushutsuKaishiTimestamp(DEFAULT_抽出開始日時);
         entity.setChushutsuShuryoTimestamp(DEFAULT_抽出終了日時);
-        entity.setSaiShoriKahiKubun(DEFAULT_再処理可能区分);
+        entity.setSaiShoriKanoKubun(DEFAULT_再処理可能区分);
         entity.setShoriJikkoKaisu(DEFAULT_処理実行回数);
         entity.setFileName1(DEFAULT_ファイル名称１);
         entity.setFileName2(DEFAULT_ファイル名称２);

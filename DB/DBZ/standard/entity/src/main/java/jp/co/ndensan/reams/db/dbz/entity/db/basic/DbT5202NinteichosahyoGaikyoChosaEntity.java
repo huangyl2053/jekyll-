@@ -1,26 +1,28 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * 認定調査票（概況調査）（子）テーブルのエンティティクラスです。
  */
 public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<DbT5202NinteichosahyoGaikyoChosaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5202NinteichosahyoGaikyoChosa");
@@ -49,7 +51,6 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
     private Code chosaJisshiBashoCode;
     private RString chosaJisshiBashoMeisho;
     private RDateTime jisshiBashoImageSharedFileId;
-    private Code genzainoJokyoCode;
     private Code serviceKubunCode;
     private RString riyoShisetsuShimei;
     private AtenaJusho riyoShisetsuJusho;
@@ -126,7 +127,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -148,7 +149,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @param ninteichosaRirekiNo 認定調査依頼履歴番号
      */
-    public void setNinteichosaRirekiNo(int ninteichosaRirekiNo) {
+    public void setNinteichosaRirekiNo(@Nonnull int ninteichosaRirekiNo) {
         this.ninteichosaRirekiNo = ninteichosaRirekiNo;
     }
 
@@ -170,7 +171,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @param koroshoIfShikibetsuCode 厚労省IF識別コード
      */
-    public void setKoroshoIfShikibetsuCode(Code koroshoIfShikibetsuCode) {
+    public void setKoroshoIfShikibetsuCode(@Nonnull Code koroshoIfShikibetsuCode) {
         this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
     }
 
@@ -192,7 +193,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @param ninteichousaIraiKubunCode 認定調査依頼区分コード
      */
-    public void setNinteichousaIraiKubunCode(Code ninteichousaIraiKubunCode) {
+    public void setNinteichousaIraiKubunCode(@Nonnull Code ninteichousaIraiKubunCode) {
         this.ninteichousaIraiKubunCode = ninteichousaIraiKubunCode;
     }
 
@@ -210,7 +211,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @param ninteichosaIraiKaisu 認定調査回数
      */
-    public void setNinteichosaIraiKaisu(int ninteichosaIraiKaisu) {
+    public void setNinteichosaIraiKaisu(@Nonnull int ninteichosaIraiKaisu) {
         this.ninteichosaIraiKaisu = ninteichosaIraiKaisu;
     }
 
@@ -228,7 +229,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @param ninteichosaJisshiYMD 認定調査実施年月日
      */
-    public void setNinteichosaJisshiYMD(FlexibleDate ninteichosaJisshiYMD) {
+    public void setNinteichosaJisshiYMD(@Nonnull FlexibleDate ninteichosaJisshiYMD) {
         this.ninteichosaJisshiYMD = ninteichosaJisshiYMD;
     }
 
@@ -246,7 +247,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @param ninteichosaJuryoYMD 認定調査受領年月日
      */
-    public void setNinteichosaJuryoYMD(FlexibleDate ninteichosaJuryoYMD) {
+    public void setNinteichosaJuryoYMD(@Nonnull FlexibleDate ninteichosaJuryoYMD) {
         this.ninteichosaJuryoYMD = ninteichosaJuryoYMD;
     }
 
@@ -268,7 +269,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @param chosaItakuKubunCode 調査委託区分コード
      */
-    public void setChosaItakuKubunCode(Code chosaItakuKubunCode) {
+    public void setChosaItakuKubunCode(@Nonnull Code chosaItakuKubunCode) {
         this.chosaItakuKubunCode = chosaItakuKubunCode;
     }
 
@@ -290,7 +291,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @param ninteiChosaKubunCode 認定調査区分コード
      */
-    public void setNinteiChosaKubunCode(Code ninteiChosaKubunCode) {
+    public void setNinteiChosaKubunCode(@Nonnull Code ninteiChosaKubunCode) {
         this.ninteiChosaKubunCode = ninteiChosaKubunCode;
     }
 
@@ -312,7 +313,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @param chosaItakusakiCode 認定調査委託先コード
      */
-    public void setChosaItakusakiCode(JigyoshaNo chosaItakusakiCode) {
+    public void setChosaItakusakiCode(@Nonnull JigyoshaNo chosaItakusakiCode) {
         this.chosaItakusakiCode = chosaItakusakiCode;
     }
 
@@ -334,7 +335,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @param chosainCode 認定調査員コード
      */
-    public void setChosainCode(RString chosainCode) {
+    public void setChosainCode(@Nonnull RString chosainCode) {
         this.chosainCode = chosainCode;
     }
 
@@ -356,7 +357,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @param chosaJisshiBashoCode 認定調査実施場所コード
      */
-    public void setChosaJisshiBashoCode(Code chosaJisshiBashoCode) {
+    public void setChosaJisshiBashoCode(@Nonnull Code chosaJisshiBashoCode) {
         this.chosaJisshiBashoCode = chosaJisshiBashoCode;
     }
 
@@ -365,6 +366,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @return 認定調査実施場所名称
      */
+    @CheckForNull
     public RString getChosaJisshiBashoMeisho() {
         return chosaJisshiBashoMeisho;
     }
@@ -383,6 +385,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @return 実施場所イメージ共有ファイルID
      */
+    @CheckForNull
     public RDateTime getJisshiBashoImageSharedFileId() {
         return jisshiBashoImageSharedFileId;
     }
@@ -394,28 +397,6 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      */
     public void setJisshiBashoImageSharedFileId(RDateTime jisshiBashoImageSharedFileId) {
         this.jisshiBashoImageSharedFileId = jisshiBashoImageSharedFileId;
-    }
-
-    /**
-     * 認定調査・現在の状況コードのgetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：現在の状況コード）
-     *
-     * @return 認定調査・現在の状況コード
-     */
-    public Code getGenzainoJokyoCode() {
-        return genzainoJokyoCode;
-    }
-
-    /**
-     * 認定調査・現在の状況コードのsetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：現在の状況コード）
-     *
-     * @param genzainoJokyoCode 認定調査・現在の状況コード
-     */
-    public void setGenzainoJokyoCode(Code genzainoJokyoCode) {
-        this.genzainoJokyoCode = genzainoJokyoCode;
     }
 
     /**
@@ -436,7 +417,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @param serviceKubunCode 認定調査・サービス区分コード
      */
-    public void setServiceKubunCode(Code serviceKubunCode) {
+    public void setServiceKubunCode(@Nonnull Code serviceKubunCode) {
         this.serviceKubunCode = serviceKubunCode;
     }
 
@@ -445,6 +426,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @return 利用施設名
      */
+    @CheckForNull
     public RString getRiyoShisetsuShimei() {
         return riyoShisetsuShimei;
     }
@@ -463,6 +445,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @return 利用施設住所
      */
+    @CheckForNull
     public AtenaJusho getRiyoShisetsuJusho() {
         return riyoShisetsuJusho;
     }
@@ -481,6 +464,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @return 利用施設電話番号
      */
+    @CheckForNull
     public TelNo getRiyoShisetsuTelNo() {
         return riyoShisetsuTelNo;
     }
@@ -499,6 +483,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @return 利用施設郵便番号
      */
+    @CheckForNull
     public YubinNo getRiyoShisetsuYubinNo() {
         return riyoShisetsuYubinNo;
     }
@@ -517,6 +502,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @return 利用施設名イメージ共有ファイルID
      */
+    @CheckForNull
     public RDateTime getRiyoShisetsuNameImageSharedFileId() {
         return riyoShisetsuNameImageSharedFileId;
     }
@@ -535,6 +521,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @return 利用施設住所イメージ共有ファイルID
      */
+    @CheckForNull
     public RDateTime getRiyoShisetsuJushoImageSharedFileId() {
         return riyoShisetsuJushoImageSharedFileId;
     }
@@ -553,6 +540,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @return 利用施設電話番号イメージ共有ファイルID
      */
+    @CheckForNull
     public RDateTime getRiyoShisetsuTelNoImageSharedFileId() {
         return riyoShisetsuTelNoImageSharedFileId;
     }
@@ -580,7 +568,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @param tokki 特記
      */
-    public void setTokki(RString tokki) {
+    public void setTokki(@Nonnull RString tokki) {
         this.tokki = tokki;
     }
 
@@ -589,6 +577,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @return 特記イメージ共有ファイルID
      */
+    @CheckForNull
     public RDateTime getTokkiImageSharedFileId() {
         return tokkiImageSharedFileId;
     }
@@ -607,6 +596,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @return 認定調査特記事項受付年月日
      */
+    @CheckForNull
     public FlexibleDate getTokkijikoUketsukeYMD() {
         return tokkijikoUketsukeYMD;
     }
@@ -625,6 +615,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @return 認定調査特記事項受領年月日
      */
+    @CheckForNull
     public FlexibleDate getTokkijikoJuryoYMD() {
         return tokkijikoJuryoYMD;
     }
@@ -642,7 +633,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      * このエンティティの主キーが他の{@literal DbT5202NinteichosahyoGaikyoChosaEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5202NinteichosahyoGaikyoChosaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -678,7 +669,6 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
         this.chosaJisshiBashoCode = entity.chosaJisshiBashoCode;
         this.chosaJisshiBashoMeisho = entity.chosaJisshiBashoMeisho;
         this.jisshiBashoImageSharedFileId = entity.jisshiBashoImageSharedFileId;
-        this.genzainoJokyoCode = entity.genzainoJokyoCode;
         this.serviceKubunCode = entity.serviceKubunCode;
         this.riyoShisetsuShimei = entity.riyoShisetsuShimei;
         this.riyoShisetsuJusho = entity.riyoShisetsuJusho;
@@ -700,7 +690,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, ninteichosaRirekiNo, koroshoIfShikibetsuCode, ninteichousaIraiKubunCode, ninteichosaIraiKaisu, ninteichosaJisshiYMD, ninteichosaJuryoYMD, chosaItakuKubunCode, ninteiChosaKubunCode, chosaItakusakiCode, chosainCode, chosaJisshiBashoCode, chosaJisshiBashoMeisho, jisshiBashoImageSharedFileId, genzainoJokyoCode, serviceKubunCode, riyoShisetsuShimei, riyoShisetsuJusho, riyoShisetsuTelNo, riyoShisetsuYubinNo, riyoShisetsuNameImageSharedFileId, riyoShisetsuJushoImageSharedFileId, riyoShisetsuTelNoImageSharedFileId, tokki, tokkiImageSharedFileId, tokkijikoUketsukeYMD, tokkijikoJuryoYMD);
+        return super.toMd5(shinseishoKanriNo, ninteichosaRirekiNo, koroshoIfShikibetsuCode, ninteichousaIraiKubunCode, ninteichosaIraiKaisu, ninteichosaJisshiYMD, ninteichosaJuryoYMD, chosaItakuKubunCode, ninteiChosaKubunCode, chosaItakusakiCode, chosainCode, chosaJisshiBashoCode, chosaJisshiBashoMeisho, jisshiBashoImageSharedFileId, serviceKubunCode, riyoShisetsuShimei, riyoShisetsuJusho, riyoShisetsuTelNo, riyoShisetsuYubinNo, riyoShisetsuNameImageSharedFileId, riyoShisetsuJushoImageSharedFileId, riyoShisetsuTelNoImageSharedFileId, tokki, tokkiImageSharedFileId, tokkijikoUketsukeYMD, tokkijikoJuryoYMD);
     }
 
 // </editor-fold>

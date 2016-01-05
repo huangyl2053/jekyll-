@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7062KaigoJigyoshaDaihyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -28,8 +28,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class KaigoJigyoshaDaihyosha
         extends ModelBase<KaigoJigyoshaDaihyoshaIdentifier, DbT7062KaigoJigyoshaDaihyoshaEntity, KaigoJigyoshaDaihyosha>
         implements Serializable {
-
-    private static final long serialVersionUID = 3928754943480377769L;
 
     private final DbT7062KaigoJigyoshaDaihyoshaEntity entity;
     private final KaigoJigyoshaDaihyoshaIdentifier id;
@@ -237,6 +235,21 @@ public class KaigoJigyoshaDaihyosha
     }
 
     /**
+     * 介護事業者代表者のみを変更対象とします。<br/>
+     * {@link DbT7062KaigoJigyoshaDaihyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link KaigoJigyoshaDaihyosha}
+     */
+    public KaigoJigyoshaDaihyosha modifiedModel() {
+        DbT7062KaigoJigyoshaDaihyoshaEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new KaigoJigyoshaDaihyosha(
+                modifiedEntity, id);
+    }
+
+    /**
      * 保持する介護事業者代表者を削除対象とします。<br/>
      * {@link DbT7062KaigoJigyoshaDaihyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -266,7 +279,7 @@ public class KaigoJigyoshaDaihyosha
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

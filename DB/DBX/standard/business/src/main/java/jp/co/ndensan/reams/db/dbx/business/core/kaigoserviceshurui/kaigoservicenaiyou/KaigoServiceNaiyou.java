@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservice
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
@@ -21,9 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護サービス内容を管理するクラスです。
  */
-public class KaigoServiceNaiyou
-        extends ModelBase<KaigoServiceNaiyouIdentifier, DbT7131KaigoServiceNaiyouEntity, KaigoServiceNaiyou>
-        implements Serializable {
+public class KaigoServiceNaiyou extends ModelBase<KaigoServiceNaiyouIdentifier, DbT7131KaigoServiceNaiyouEntity, KaigoServiceNaiyou> implements Serializable {
 
     private final DbT7131KaigoServiceNaiyouEntity entity;
     private final KaigoServiceNaiyouIdentifier id;
@@ -38,9 +36,9 @@ public class KaigoServiceNaiyou
      * @param 履歴番号 履歴番号
      */
     public KaigoServiceNaiyou(KaigoServiceShuruiCode サービス種類コード,
-                              RString サービス項目コード,
-                              FlexibleYearMonth 提供開始年月,
-                              Decimal 履歴番号) {
+            RString サービス項目コード,
+            FlexibleYearMonth 提供開始年月,
+            Decimal 履歴番号) {
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         requireNonNull(サービス項目コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス項目コード"));
         requireNonNull(提供開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("提供開始年月"));

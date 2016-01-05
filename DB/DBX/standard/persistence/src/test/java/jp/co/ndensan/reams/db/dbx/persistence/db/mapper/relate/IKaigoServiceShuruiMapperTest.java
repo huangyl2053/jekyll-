@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.KaigoServiceShuruiMapperParameter;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;

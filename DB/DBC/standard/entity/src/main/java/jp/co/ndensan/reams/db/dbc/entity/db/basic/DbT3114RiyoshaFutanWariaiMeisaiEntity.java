@@ -2,6 +2,8 @@ package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -19,8 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  * <br/> 利用者負担割合の明細
  */
 public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT3114RiyoshaFutanWariaiMeisaiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3114RiyoshaFutanWariaiMeisai");
 
@@ -37,23 +38,24 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     @PrimaryKey
-    private Decimal edaNo;
+    private int edaNo;
     private RString shikakuKubun;
     private RString futanWariaiKubun;
     private FlexibleDate yukoKaishiYMD;
     private FlexibleDate yukoShuryoYMD;
     private Decimal honninGoukeiShotokuGaku;
-    private Decimal setaiIchigouHihoknehsaSu;
+    private int setaiIchigouHihokenshaSu;
     private Decimal nenkinShunyuGoukei;
     private Decimal sonotanoGoukeiShotokuKingakuGoukei;
     private RString koseiRiyu;
     private SetaiCode setaiCd;
+    private boolean logicalDeletedFlag;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -62,7 +64,7 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -71,7 +73,7 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -80,16 +82,17 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -98,7 +101,7 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
 
     /**
      * 年度のgetメソッドです。
-     *
+     * 
      * @return 年度
      */
     public FlexibleYear getNendo() {
@@ -107,16 +110,16 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
 
     /**
      * 年度のsetメソッドです。
-     *
+     * 
      * @param nendo 年度
      */
-    public void setNendo(FlexibleYear nendo) {
+    public void setNendo(@Nonnull FlexibleYear nendo) {
         this.nendo = nendo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -125,46 +128,46 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
 
     /**
      * 被保険者番号のsetメソッドです。
-     *
+     * 
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     *
+     * 
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     *
+     * 
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(@Nonnull int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * 枝番号のgetメソッドです。
-     *
+     * 
      * @return 枝番号
      */
-    public Decimal getEdaNo() {
+    public int getEdaNo() {
         return edaNo;
     }
 
     /**
      * 枝番号のsetメソッドです。
-     *
+     * 
      * @param edaNo 枝番号
      */
-    public void setEdaNo(Decimal edaNo) {
+    public void setEdaNo(@Nonnull int edaNo) {
         this.edaNo = edaNo;
     }
 
@@ -172,13 +175,14 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
      * 資格区分のgetメソッドです。
      * <br/>
      * <br/>01：1号被保険者
-     *
+
      * <br/>02：2号被保険者
-     *
+
      * <br/>03：2号被保険者（基準日時点1号被保険者）
-     *
+     * 
      * @return 資格区分
      */
+    @CheckForNull
     public RString getShikakuKubun() {
         return shikakuKubun;
     }
@@ -187,11 +191,11 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
      * 資格区分のsetメソッドです。
      * <br/>
      * <br/>01：1号被保険者
-     *
+
      * <br/>02：2号被保険者
-     *
+
      * <br/>03：2号被保険者（基準日時点1号被保険者）
-     *
+     * 
      * @param shikakuKubun 資格区分
      */
     public void setShikakuKubun(RString shikakuKubun) {
@@ -202,9 +206,10 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
      * 負担割合区分のgetメソッドです。
      * <br/>
      * <br/>10：1割　20：2割
-     *
+     * 
      * @return 負担割合区分
      */
+    @CheckForNull
     public RString getFutanWariaiKubun() {
         return futanWariaiKubun;
     }
@@ -213,7 +218,7 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
      * 負担割合区分のsetメソッドです。
      * <br/>
      * <br/>10：1割　20：2割
-     *
+     * 
      * @param futanWariaiKubun 負担割合区分
      */
     public void setFutanWariaiKubun(RString futanWariaiKubun) {
@@ -222,16 +227,17 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
 
     /**
      * 有効開始日のgetメソッドです。
-     *
+     * 
      * @return 有効開始日
      */
+    @CheckForNull
     public FlexibleDate getYukoKaishiYMD() {
         return yukoKaishiYMD;
     }
 
     /**
      * 有効開始日のsetメソッドです。
-     *
+     * 
      * @param yukoKaishiYMD 有効開始日
      */
     public void setYukoKaishiYMD(FlexibleDate yukoKaishiYMD) {
@@ -240,16 +246,17 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
 
     /**
      * 有効終了日のgetメソッドです。
-     *
+     * 
      * @return 有効終了日
      */
+    @CheckForNull
     public FlexibleDate getYukoShuryoYMD() {
         return yukoShuryoYMD;
     }
 
     /**
      * 有効終了日のsetメソッドです。
-     *
+     * 
      * @param yukoShuryoYMD 有効終了日
      */
     public void setYukoShuryoYMD(FlexibleDate yukoShuryoYMD) {
@@ -258,16 +265,17 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
 
     /**
      * 本人合計所得金額のgetメソッドです。
-     *
+     * 
      * @return 本人合計所得金額
      */
+    @CheckForNull
     public Decimal getHonninGoukeiShotokuGaku() {
         return honninGoukeiShotokuGaku;
     }
 
     /**
      * 本人合計所得金額のsetメソッドです。
-     *
+     * 
      * @param honninGoukeiShotokuGaku 本人合計所得金額
      */
     public void setHonninGoukeiShotokuGaku(Decimal honninGoukeiShotokuGaku) {
@@ -276,34 +284,36 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
 
     /**
      * 世帯１号被保険者数のgetメソッドです。
-     *
+     * 
      * @return 世帯１号被保険者数
      */
-    public Decimal getSetaiIchigouHihoknehsaSu() {
-        return setaiIchigouHihoknehsaSu;
+    @CheckForNull
+    public int getSetaiIchigouHihokenshaSu() {
+        return setaiIchigouHihokenshaSu;
     }
 
     /**
      * 世帯１号被保険者数のsetメソッドです。
-     *
-     * @param setaiIchigouHihoknehsaSu 世帯１号被保険者数
+     * 
+     * @param setaiIchigouHihokenshaSu 世帯１号被保険者数
      */
-    public void setSetaiIchigouHihoknehsaSu(Decimal setaiIchigouHihoknehsaSu) {
-        this.setaiIchigouHihoknehsaSu = setaiIchigouHihoknehsaSu;
+    public void setSetaiIchigouHihokenshaSu(int setaiIchigouHihokenshaSu) {
+        this.setaiIchigouHihokenshaSu = setaiIchigouHihokenshaSu;
     }
 
     /**
      * 年金収入合計のgetメソッドです。
-     *
+     * 
      * @return 年金収入合計
      */
+    @CheckForNull
     public Decimal getNenkinShunyuGoukei() {
         return nenkinShunyuGoukei;
     }
 
     /**
      * 年金収入合計のsetメソッドです。
-     *
+     * 
      * @param nenkinShunyuGoukei 年金収入合計
      */
     public void setNenkinShunyuGoukei(Decimal nenkinShunyuGoukei) {
@@ -312,16 +322,17 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
 
     /**
      * その他の合計所得金額合計のgetメソッドです。
-     *
+     * 
      * @return その他の合計所得金額合計
      */
+    @CheckForNull
     public Decimal getSonotanoGoukeiShotokuKingakuGoukei() {
         return sonotanoGoukeiShotokuKingakuGoukei;
     }
 
     /**
      * その他の合計所得金額合計のsetメソッドです。
-     *
+     * 
      * @param sonotanoGoukeiShotokuKingakuGoukei その他の合計所得金額合計
      */
     public void setSonotanoGoukeiShotokuKingakuGoukei(Decimal sonotanoGoukeiShotokuKingakuGoukei) {
@@ -330,16 +341,17 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
 
     /**
      * 更正理由のgetメソッドです。
-     *
+     * 
      * @return 更正理由
      */
+    @CheckForNull
     public RString getKoseiRiyu() {
         return koseiRiyu;
     }
 
     /**
      * 更正理由のsetメソッドです。
-     *
+     * 
      * @param koseiRiyu 更正理由
      */
     public void setKoseiRiyu(RString koseiRiyu) {
@@ -348,16 +360,17 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
 
     /**
      * 世帯コードのgetメソッドです。
-     *
+     * 
      * @return 世帯コード
      */
+    @CheckForNull
     public SetaiCode getSetaiCd() {
         return setaiCd;
     }
 
     /**
      * 世帯コードのsetメソッドです。
-     *
+     * 
      * @param setaiCd 世帯コード
      */
     public void setSetaiCd(SetaiCode setaiCd) {
@@ -365,10 +378,29 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
     }
 
     /**
+     * 論理削除フラグのgetメソッドです。
+     * 
+     * @return 論理削除フラグ
+     */
+    @CheckForNull
+    public boolean getLogicalDeletedFlag() {
+        return logicalDeletedFlag;
+    }
+
+    /**
+     * 論理削除フラグのsetメソッドです。
+     * 
+     * @param logicalDeletedFlag 論理削除フラグ
+     */
+    public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
+        this.logicalDeletedFlag = logicalDeletedFlag;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT3114RiyoshaFutanWariaiMeisaiEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3114RiyoshaFutanWariaiMeisaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -405,22 +437,23 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
         this.yukoKaishiYMD = entity.yukoKaishiYMD;
         this.yukoShuryoYMD = entity.yukoShuryoYMD;
         this.honninGoukeiShotokuGaku = entity.honninGoukeiShotokuGaku;
-        this.setaiIchigouHihoknehsaSu = entity.setaiIchigouHihoknehsaSu;
+        this.setaiIchigouHihokenshaSu = entity.setaiIchigouHihokenshaSu;
         this.nenkinShunyuGoukei = entity.nenkinShunyuGoukei;
         this.sonotanoGoukeiShotokuKingakuGoukei = entity.sonotanoGoukeiShotokuKingakuGoukei;
         this.koseiRiyu = entity.koseiRiyu;
         this.setaiCd = entity.setaiCd;
+        this.logicalDeletedFlag = entity.logicalDeletedFlag;
     }
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(nendo, hihokenshaNo, rirekiNo, edaNo, shikakuKubun, futanWariaiKubun, yukoKaishiYMD, yukoShuryoYMD, honninGoukeiShotokuGaku, setaiIchigouHihoknehsaSu, nenkinShunyuGoukei, sonotanoGoukeiShotokuKingakuGoukei, koseiRiyu, setaiCd);
+        return super.toMd5(nendo, hihokenshaNo, rirekiNo, edaNo, shikakuKubun, futanWariaiKubun, yukoKaishiYMD, yukoShuryoYMD, honninGoukeiShotokuGaku, setaiIchigouHihokenshaSu, nenkinShunyuGoukei, sonotanoGoukeiShotokuKingakuGoukei, koseiRiyu, setaiCd, logicalDeletedFlag);
     }
 
 // </editor-fold>
+
 }

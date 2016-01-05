@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Value
 public class NinteichosaItakusakiJohoIdentifier implements Serializable {
 
+    private static final long serialVersionUID = -3525745395175489257L;
+
     private final LasdecCode 市町村コード;
     private final RString 認定調査委託先コード;
 

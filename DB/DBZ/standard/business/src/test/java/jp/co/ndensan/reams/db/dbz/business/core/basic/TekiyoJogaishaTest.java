@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1002TekiyoJogaishaEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -158,7 +158,7 @@ public class TekiyoJogaishaTest extends DbzTestBase {
 
         @Test
         public void get適用除外適用事由コードは_entityが持つ適用除外適用事由コードを返す() {
-            assertThat(sut.get適用除外適用事由コード(), is(TekiyoJogaishaEntity.getTekiyoJogaiTekiyoJiyuCode().getColumnValue().getColumnValue()));
+            assertThat(sut.get適用除外適用事由コード(), is(TekiyoJogaishaEntity.getTekiyoJogaiTekiyoJiyuCode()));
         }
 
         @Test
@@ -178,7 +178,7 @@ public class TekiyoJogaishaTest extends DbzTestBase {
 
         @Test
         public void get適用除外解除事由コードは_entityが持つ適用除外解除事由コードを返す() {
-            assertThat(sut.get適用除外解除事由コード(), is(TekiyoJogaishaEntity.getTekiyoJogaikaijokaijoJiyuCode().getColumnValue().getColumnValue()));
+            assertThat(sut.get適用除外解除事由コード(), is(TekiyoJogaishaEntity.getTekiyoJogaikaijokaijoJiyuCode()));
         }
 
         @Test

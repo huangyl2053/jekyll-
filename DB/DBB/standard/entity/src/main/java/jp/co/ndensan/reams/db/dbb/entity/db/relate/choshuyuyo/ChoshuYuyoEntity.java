@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.choshuyuyo.DbT2006ChoshuYuyoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.choshuyuyo.DbT2007KibetsuChoshuYuyoEntity;
 
 /**
  * 介護賦課徴収猶予RelateEntityクラスです。

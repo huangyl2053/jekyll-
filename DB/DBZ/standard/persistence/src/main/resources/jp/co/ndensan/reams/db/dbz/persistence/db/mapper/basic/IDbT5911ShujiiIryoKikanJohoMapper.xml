@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5911ShujiiIryoKikanJoho">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.allColumns_DbT5911ShujiiIryoKikanJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.allColumns_DbT5911ShujiiIryoKikanJoho" />
      FROM
-         rg."DbT5911ShujiiIryoKikanJoho"
+         rgdb."DbT5911ShujiiIryoKikanJoho"
      WHERE
-         rg."DbT5911ShujiiIryoKikanJoho"."isDeleted" = FALSE
+         rgdb."DbT5911ShujiiIryoKikanJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5911ShujiiIryoKikanJoho">
@@ -40,9 +40,9 @@
 
 
     <!--テーブルDbT5911ShujiiIryoKikanJohoの項目をDbT5911ShujiiIryoKikanJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5911ShujiiIryoKikanJohoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5911ShujiiIryoKikanJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity" autoMapping="true">
         <id property="shichosonCode" column="dbT5911ShujiiIryoKikanJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <id property="shujiiIryokikanCode" column="dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" />
+        <!--<id property="shujiiIryokikanCode" column="dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" />-->
         <result property="insertDantaiCd" column="dbT5911ShujiiIryoKikanJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5911ShujiiIryoKikanJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT5911ShujiiIryoKikanJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -51,7 +51,7 @@
         <result property="updateCount" column="dbT5911ShujiiIryoKikanJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT5911ShujiiIryoKikanJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5911ShujiiIryoKikanJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="iryokikanCode" column="dbT5911ShujiiIryoKikanJoho_iryokikanCode" />
+        <!--<result property="iryokikanCode" column="dbT5911ShujiiIryoKikanJoho_iryokikanCode" />-->
         <result property="iryoKikanMeisho" column="dbT5911ShujiiIryoKikanJoho_iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="iryoKikanMeishoKana" column="dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yubinNo" column="dbT5911ShujiiIryoKikanJoho_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
@@ -61,11 +61,10 @@
         <result property="daihyoshaName" column="dbT5911ShujiiIryoKikanJoho_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="jokyoFlag" column="dbT5911ShujiiIryoKikanJoho_jokyoFlag" />
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5911ShujiiIryoKikanJohoEntity">
+<select id="getEntity" resultMap="ResultMap_DbT5911ShujiiIryoKikanJohoEntity">
     SELECT
-    <include refid="allColumns_DbT5911ShujiiIryoKikanJoho">
-         FROM
-         rg."DbT5911ShujiiIryoKikanJoho"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT5911ShujiiIryoKikanJoho" />
+    FROM
+    rgdb."DbT5911ShujiiIryoKikanJoho"
+</select>
 </mapper>

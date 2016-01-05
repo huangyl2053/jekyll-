@@ -12,7 +12,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1008IryohokenKan
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -172,7 +171,7 @@ public class DbT1008IryohokenKanyuJokyoDacTest extends DbzTestDacBase {
 
         public static void insert(
                 ShikibetsuCode 識別コード,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT1008IryohokenKanyuJokyoEntity entity = DbT1008IryohokenKanyuJokyoEntityGenerator.createDbT1008IryohokenKanyuJokyoEntity();
             entity.setShikibetsuCode(識別コード);
             entity.setRirekiNo(履歴番号);

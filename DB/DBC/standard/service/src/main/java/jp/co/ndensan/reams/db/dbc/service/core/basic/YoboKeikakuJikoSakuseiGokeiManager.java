@@ -70,18 +70,18 @@ public class YoboKeikakuJikoSakuseiGokeiManager {
         requireNonNull(サービス提供事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供事業者番号"));
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
 
-        DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity = dac.selectByKey(
-                被保険者番号,
-                対象年月,
-                履歴番号,
-                居宅サービス区分,
-                サービス提供事業者番号,
-                サービス種類コード);
-        if (entity == null) {
-            return null;
-        }
-        entity.initializeMd5();
-        return new YoboKeikakuJikoSakuseiGokei(entity);
+//        DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity = dac.selectByKey(
+//                被保険者番号,
+//                対象年月,
+//                履歴番号,
+//                居宅サービス区分,
+//                サービス提供事業者番号,
+//                サービス種類コード);
+//        if (entity == null) {
+//            return null;
+//        }
+//        entity.initializeMd5();
+        return new YoboKeikakuJikoSakuseiGokei(new DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity());
     }
 
     /**
@@ -93,10 +93,10 @@ public class YoboKeikakuJikoSakuseiGokeiManager {
     public List<YoboKeikakuJikoSakuseiGokei> get予防給付計画自己作成合計一覧() {
         List<YoboKeikakuJikoSakuseiGokei> businessList = new ArrayList<>();
 
-        for (DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity : dac.selectAll()) {
-            entity.initializeMd5();
-            businessList.add(new YoboKeikakuJikoSakuseiGokei(entity));
-        }
+//        for (DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity : dac.selectAll()) {
+//            entity.initializeMd5();
+//            businessList.add(new YoboKeikakuJikoSakuseiGokei(entity));
+//        }
 
         return businessList;
     }
@@ -113,6 +113,7 @@ public class YoboKeikakuJikoSakuseiGokeiManager {
         if (!予防給付計画自己作成合計.hasChanged()) {
             return false;
         }
-        return 1 == dac.save(予防給付計画自己作成合計.toEntity());
+//        return 1 == dac.save(予防給付計画自己作成合計.toEntity());
+        return false;
     }
 }

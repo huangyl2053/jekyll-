@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Value
 public class KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier implements Serializable {
 
+    private static final long serialVersionUID = -1178098786079834337L;
+
     private final RString 介護認定審査会委員コード;
     private final int 連番;
 

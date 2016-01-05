@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.fukaerr.DbT2010FukaErrorListEntity;
 
 /**
  * {@link jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2010FukaErrorListMapper}のマッパーIFです。

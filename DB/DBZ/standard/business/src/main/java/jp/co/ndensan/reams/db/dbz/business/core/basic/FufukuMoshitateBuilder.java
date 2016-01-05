@@ -53,7 +53,7 @@ public class FufukuMoshitateBuilder {
      */
     public FufukuMoshitateBuilder set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
+       // entity.setShoKisaiHokenshaNo(証記載保険者番号);
         return this;
     }
 
@@ -101,7 +101,7 @@ public class FufukuMoshitateBuilder {
      */
     public FufukuMoshitateBuilder set原処分被保険者郵便番号(YubinNo 原処分被保険者郵便番号) {
         requireNonNull(原処分被保険者郵便番号, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者郵便番号"));
-        entity.setGenshobunHihokenshaYubinNo(原処分被保険者郵便番号);
+       // entity.setGenshobunHihokenshaYubinNo(原処分被保険者郵便番号);
         return this;
     }
 
@@ -113,7 +113,7 @@ public class FufukuMoshitateBuilder {
      */
     public FufukuMoshitateBuilder set原処分被保険者住所(AtenaJusho 原処分被保険者住所) {
         requireNonNull(原処分被保険者住所, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者住所"));
-        entity.setGenshobunHihokenshaJusho(原処分被保険者住所);
+       // entity.setGenshobunHihokenshaJusho(原処分被保険者住所);
         return this;
     }
 
@@ -125,7 +125,7 @@ public class FufukuMoshitateBuilder {
      */
     public FufukuMoshitateBuilder set原処分被保険者氏名(AtenaMeisho 原処分被保険者氏名) {
         requireNonNull(原処分被保険者氏名, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者氏名"));
-        entity.setGenshobunHihokenshaShimei(原処分被保険者氏名);
+      //  entity.setGenshobunHihokenshaShimei(原処分被保険者氏名);
         return this;
     }
 
@@ -137,7 +137,7 @@ public class FufukuMoshitateBuilder {
      */
     public FufukuMoshitateBuilder set原処分被保険者電話番号(TelNo 原処分被保険者電話番号) {
         requireNonNull(原処分被保険者電話番号, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者電話番号"));
-        entity.setGenshobunHihokenshaTelNo(原処分被保険者電話番号);
+       // entity.setGenshobunHihokenshaTelNo(原処分被保険者電話番号);
         return this;
     }
 
@@ -149,7 +149,7 @@ public class FufukuMoshitateBuilder {
      */
     public FufukuMoshitateBuilder set原処分被保険者生年月日(FlexibleDate 原処分被保険者生年月日) {
         requireNonNull(原処分被保険者生年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者生年月日"));
-        entity.setGenshobunHihokenshaBirthYMD(原処分被保険者生年月日);
+       // entity.setGenshobunHihokenshaBirthYMD(原処分被保険者生年月日);
         return this;
     }
 
@@ -209,7 +209,7 @@ public class FufukuMoshitateBuilder {
      */
     public FufukuMoshitateBuilder set被保険者との関係コード(Code 被保険者との関係コード) {
         requireNonNull(被保険者との関係コード, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者との関係コード"));
-        entity.setHihokenshaTonoKankeiCode(被保険者との関係コード);
+     //   entity.setHihokenshaTonoKankeiCode(被保険者との関係コード);
         return this;
     }
 
@@ -293,7 +293,7 @@ public class FufukuMoshitateBuilder {
      */
     public FufukuMoshitateBuilder set処分種類コード(Code 処分種類コード) {
         requireNonNull(処分種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("処分種類コード"));
-        entity.setShobunShuruiCode(処分種類コード);
+       // entity.setShobunShuruiCode(処分種類コード);
         return this;
     }
 

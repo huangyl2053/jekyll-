@@ -1,27 +1,15 @@
-/// <reference path="ShichosonSelector_Design.ts" />
-
-// 共有子Divモード記述TypeScriptソースです。
-
+/// <reference path='ShichosonSelector_Design.ts' />
 module DBA
 {
-    export module ShichosonSelector {
-
-        export class ModeController{
+    export module ShichosonSelector
+    {
+        export class ModeController {
             private controls: Controls;
             private fieldName: string;
 
             constructor(fieldName: string) {
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
-            }
-			
- 			public priorities(): Array<string> {
-                return [
-                    "State"
-                ];
-            }
-            public State() {
-                return new Modes.State(this.controls);
             }
 
             public Properties() {
@@ -33,40 +21,21 @@ module DBA
             }
         }
 
-      export module Modes {
-            export class State {
-                private controls: Controls;
-
-                constructor(controls: Controls) {
-                    this.controls = controls;
-                }
-
-                public RadioBtnNoKyuShichosonMode(): void {
-                    this.controls.radShichosonKubun().displayNone = true;
-                                      
-                }
-
-                public RadioBtnNoKoseiShichosonMode(): void {
-                    this.controls.radShichosonKubun().displayNone = true;
-                   
-                }
-				public RadioBtnYesShichosonMode(): void {
-                                       
-                }
-            }
+        export module Modes {
         }
-}    }
+    }
+}
 
-    
-
-module DBA {
-
-    export module ShichosonSelector {
-
+module DBA
+{
+    export module ShichosonSelector
+    {
         export class PublicProperties {
             private controls: Controls;
+            private fieldName: string;
 
             constructor(fieldName: string) {
+                this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
             }
 
@@ -75,11 +44,7 @@ module DBA {
 
                 return editTypes;
             }
-
         }
     }
 }
-
-
-
 

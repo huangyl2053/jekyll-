@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuTodokede;
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuTodokedeBuilder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3005KyotakuKeikakuTodokedeEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3005KyotakuKeikakuTodokedeEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3005KyotakuKeikakuTodokedeEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
