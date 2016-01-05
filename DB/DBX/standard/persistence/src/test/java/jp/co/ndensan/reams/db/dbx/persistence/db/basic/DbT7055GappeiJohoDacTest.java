@@ -2,14 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7055GappeiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator.DEFAULT_合併年月日;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7055GappeiJohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator.DEFAULT_合併年月日;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号;
+import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -30,7 +30,7 @@ import org.junit.Ignore;
  */
 @Ignore
 @RunWith(Enclosed.class)
-public class DbT7055GappeiJohoDacTest extends DbzTestDacBase {
+public class DbT7055GappeiJohoDacTest extends DbxTestDacBase {
 
     private static final FlexibleDate キー_01 = new FlexibleDate("20150101");
     private static final FlexibleDate キー_02 = new FlexibleDate("20150202");
@@ -42,7 +42,7 @@ public class DbT7055GappeiJohoDacTest extends DbzTestDacBase {
         sut = InstanceProvider.create(DbT7055GappeiJohoDac.class);
     }
 
-    public static class selectByKeyのテスト extends DbzTestDacBase {
+    public static class selectByKeyのテスト extends DbxTestDacBase {
 
         @Before
         public void setUp() {
@@ -85,7 +85,7 @@ public class DbT7055GappeiJohoDacTest extends DbzTestDacBase {
         }
     }
 
-    public static class selectAllのテスト extends DbzTestDacBase {
+    public static class selectAllのテスト extends DbxTestDacBase {
 
         @Test
         public void 合併情報が存在する場合_selectAllは_全件を返す() {
@@ -104,7 +104,7 @@ public class DbT7055GappeiJohoDacTest extends DbzTestDacBase {
         }
     }
 
-    public static class insertのテスト extends DbzTestDacBase {
+    public static class insertのテスト extends DbxTestDacBase {
 
         @Test
         public void 合併情報エンティティを渡すと_insertは_合併情報を追加する() {
@@ -118,7 +118,7 @@ public class DbT7055GappeiJohoDacTest extends DbzTestDacBase {
         }
     }
 
-    public static class updateのテスト extends DbzTestDacBase {
+    public static class updateのテスト extends DbxTestDacBase {
 
         @Before
         public void setUp() {
@@ -146,7 +146,7 @@ public class DbT7055GappeiJohoDacTest extends DbzTestDacBase {
         }
     }
 
-    public static class deleteのテスト extends DbzTestDacBase {
+    public static class deleteのテスト extends DbxTestDacBase {
 
         @Before
         public void setUp() {

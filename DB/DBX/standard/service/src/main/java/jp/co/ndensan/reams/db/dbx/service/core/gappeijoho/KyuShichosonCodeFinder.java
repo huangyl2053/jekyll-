@@ -2,7 +2,7 @@ package jp.co.ndensan.reams.db.dbx.service.core.gappeijoho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.gappeijohokanri.GappeiJohoKanriConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyukeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7055GappeiJohoEntity;
@@ -58,16 +58,16 @@ public class KyuShichosonCodeFinder {
      * @param 導入形態 導入形態
      * @return KyuShichosonCodeJohoRelateEntityクラス
      */
-    public KyuShichosonCodeJohoRelateEntity getKyuShichosonCodeJoho(LasdecCode 市町村コード, DonyukeitaiCode 導入形態) {
+    public KyuShichosonCodeJohoRelateEntity getKyuShichosonCodeJoho(LasdecCode 市町村コード, DonyuKeitaiCode 導入形態) {
         KyuShichosonCodeJohoRelateEntity entity = new KyuShichosonCodeJohoRelateEntity();
 
-        if (DonyukeitaiCode.事務単一.equals(導入形態)
-                || DonyukeitaiCode.事務構成市町村.equals(導入形態)
-                || DonyukeitaiCode.認定単一.equals(導入形態)) {
+        if (DonyuKeitaiCode.事務単一.equals(導入形態)
+                || DonyuKeitaiCode.事務構成市町村.equals(導入形態)
+                || DonyuKeitaiCode.認定単一.equals(導入形態)) {
             entity = get単一市町村KyuShichosonCodeJoho(市町村コード, entity);
 
-        } else if (DonyukeitaiCode.事務広域.equals(導入形態)
-                || DonyukeitaiCode.認定広域.equals(導入形態)) {
+        } else if (DonyuKeitaiCode.事務広域.equals(導入形態)
+                || DonyuKeitaiCode.認定広域.equals(導入形態)) {
             entity = get広域構成市町村KyuShichosonCodeJoho(市町村コード, entity);
         }
         return entity;

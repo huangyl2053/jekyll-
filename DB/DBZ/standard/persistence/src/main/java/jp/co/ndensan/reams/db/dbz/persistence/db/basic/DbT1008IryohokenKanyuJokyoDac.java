@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEnti
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
@@ -42,7 +43,7 @@ public class DbT1008IryohokenKanyuJokyoDac implements ISaveable<DbT1008Iryohoken
     @Transaction
     public DbT1008IryohokenKanyuJokyoEntity selectByKey(
             ShikibetsuCode 識別コード,
-            int 履歴番号) throws NullPointerException {
+            Decimal 履歴番号) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
