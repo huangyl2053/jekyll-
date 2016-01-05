@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.mapper.basic.kyokaisogaitosha.IKyokaisoGaitoshaMapper">
+         
+    <select id="select一覧情報" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaParameter"
+            resultMap="ResultMap_KyokaisoGaitoshaRelateEntity" fetchSize="500">
+    SELECT        
+        dbT1006KyokaisoGaitosha."hihokenshaNo" AS dbT1006KyokaisoGaitosha_hihokenshaNo,
+         <!--TODO 凌護行  DBに項目が無し、  QA316回答まち、-->  
+        <!--dbT1006KyokaisoGaitosha."リンク番号" AS dbT1006KyokaisoGaitosha_,-->
+        <!--dbT1006KyokaisoGaitosha."申請年月日" AS dbT1006KyokaisoGaitosha_,-->
+        <!--dbT1006KyokaisoGaitosha."受付年月日" AS dbT1006KyokaisoGaitosha_,-->
+        dbT1006KyokaisoGaitosha."tekiyoKaishiYMD" AS dbT1006KyokaisoGaitosha_tekiyoKaishiYMD,
+        dbT1006KyokaisoGaitosha."tekiyoShuryoYMD" AS dbT1006KyokaisoGaitosha_tekiyoShuryoYMD,
+        <!--dbT1006KyokaisoGaitosha."措置該当・非該当区分" AS dbT1006KyokaisoGaitosha_,-->
+        dbT1006KyokaisoGaitosha."kyokaisoSochiKetteiYMD" AS dbT1006KyokaisoGaitosha_kyokaisoSochiKetteiYMD,
+        dbT1006KyokaisoGaitosha."kyuufugakuGengakuKisaiKiajoFlag" AS dbT1006KyokaisoGaitosha_kyuufugakuGengakuKisaiKiajoFlag,
+        dbT1006KyokaisoGaitosha."hyojunFutanGengakuGaitoFlag" AS dbT1006KyokaisoGaitosha_hyojunFutanGengakuGaitoFlag,
+        dbT1006KyokaisoGaitosha."hyojunFutanKeigengoFutangaku" AS dbT1006KyokaisoGaitosha_hyojunFutanKeigengoFutangaku,
+        dbT1006KyokaisoGaitosha."kyojuhinadoFutangakugengakuGaitoFlag" AS dbT1006KyokaisoGaitosha_kyojuhinadoFutangakugengakuGaitoFlag,
+        dbT1006KyokaisoGaitosha."kyojuhiKeigengoKyoshitsuShuruiCode" AS dbT1006KyokaisoGaitosha_kyojuhiKeigengoKyoshitsuShuruiCode,
+        dbT1006KyokaisoGaitosha."kyojuhiKeigengoHutangaku" AS dbT1006KyokaisoGaitosha_kyojuhiKeigengoHutangaku,
+        dbT1006KyokaisoGaitosha."shokuhiKeigengoHutangakuGaitoFlag" AS dbT1006KyokaisoGaitosha_shokuhiKeigengoHutangakuGaitoFlag,
+        dbT1006KyokaisoGaitosha."shokuhiKeigengoHutangaku" AS dbT1006KyokaisoGaitosha_shokuhiKeigengoHutangaku,
+        dbT1006KyokaisoGaitosha."kogakuServicehiJogengakuGengakuGaitoFlag" AS dbT1006KyokaisoGaitosha_kogakuServicehiJogengakuGengakuGaitoFlag,
+        dbT1006KyokaisoGaitosha."kogakuServicehiJogengakuGengakugoJogengaku" AS dbT1006KyokaisoGaitosha_kogakuServicehiJogengakuGengakugoJogengaku,
+        dbT1006KyokaisoGaitosha."hokenryoNofuGengakuFlag" AS dbT1006KyokaisoGaitosha_hokenryoNofuGengakuFlag,
+        dbT1013KyokaisoSochiShinsei."shinsei_HaishiKubun" AS dbT1013KyokaisoSochiShinsei_shinsei_HaishiKubun,
+        dbT1013KyokaisoSochiShinsei."shinsei_HaishiYMD" AS dbT1013KyokaisoSochiShinsei_shinsei_HaishiYMD,
+        dbT1013KyokaisoSochiShinsei."hogoHuyoKonkyoGengakuKingaku" AS dbT1013KyokaisoSochiShinsei_hogoHuyoKonkyoGengakuKingaku,
+        dbT1013KyokaisoSochiShinsei."kyokaisoShomeishoKofuYMD" AS dbT1013KyokaisoSochiShinsei_kyokaisoShomeishoKofuYMD,
+        dbT1013KyokaisoSochiShinsei."kyufuGengakuTorikeshi_GengakuJikofutanGetsugaku" AS dbT1013KyokaisoSochiShinsei_kyufuGengakuTorikeshi_GengakuJikofutanGetsugaku,
+        dbT1013KyokaisoSochiShinsei."kyojuhiKeigen_GengakuJikofutanGetsugaku" AS dbT1013KyokaisoSochiShinsei_kyojuhiKeigen_GengakuJikofutanGetsugaku,
+        dbT1013KyokaisoSochiShinsei."kyojuhiKeigen_FutangendogakuDankaiCode" AS dbT1013KyokaisoSochiShinsei_kyojuhiKeigen_FutangendogakuDankaiCode,
+        dbT1013KyokaisoSochiShinsei."shokuhiKeigen_GengakuJikofutanGetsugaku" AS dbT1013KyokaisoSochiShinsei_shokuhiKeigen_GengakuJikofutanGetsugaku,
+        dbT1013KyokaisoSochiShinsei."shokuhiKeigen_FutangendogakuDankaiCode" AS dbT1013KyokaisoSochiShinsei_shokuhiKeigen_FutangendogakuDankaiCode,
+        dbT1013KyokaisoSochiShinsei."riyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku" AS dbT1013KyokaisoSochiShinsei_riyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku,
+        dbT1013KyokaisoSochiShinsei."hokenryoGengaku_GengakuJikofutanGetsugaku" AS dbT1013KyokaisoSochiShinsei_hokenryoGengaku_GengakuJikofutanGetsugaku,
+        dbT1013KyokaisoSochiShinsei."gengakuJikofutanGetsugakuGokeigaku" AS dbT1013KyokaisoSochiShinsei_gengakuJikofutanGetsugakuGokeigaku
+        <!--TODO 凌護行  項目を取得する場合、問題があり、  QA回答まち、-->  
+        <!--, dbT1007KyokaisoHokenryoDankai."gengakuGoHokenryoDankai" AS dbT1007KyokaisoHokenryoDankai_gengakuGoHokenryoDankai-->
+        , dbT1007KyokaisoHokenryo.dbT1007_gengakuGoHokenryoDankai AS dbT1007KyokaisoHokenryoDankai_gengakuGoHokenryoDankai
+    FROM 
+        rgdb."DbT1006KyokaisoGaitosha" AS dbT1006KyokaisoGaitosha
+    LEFT OUTER JOIN 
+        rgdb."DbT1013KyokaisoSochiShinsei" AS dbT1013KyokaisoSochiShinsei
+    ON
+        dbT1006KyokaisoGaitosha."hihokenshaNo" = dbT1006KyokaisoGaitosha."hihokenshaNo"
+        <!--// TODO 凌護行　DBに項目が無し、　QA316回答まち、　2016/1/18-->  
+    <!--AND dbT1006KyokaisoGaitosha."リンク番号" = dbT1006KyokaisoGaitosha."リンク番号"-->                                                        
+    AND dbT1006KyokaisoGaitosha."isDeleted" = FALSE
+    LEFT OUTER JOIN                                                                                        
+        (
+            SELECT
+                MAX(dbT1007KyokaisoHokenryoDankai."tekiyoKaishiYM")
+              , dbT1007KyokaisoHokenryoDankai."hihokenshaNo" AS dbT1007_hihokenshaNo
+              <!--, dbT1007KyokaisoHokenryoDankai."リンク番号" AS dbT1007_リンク番号1-->
+              , dbT1007KyokaisoHokenryoDankai."gengakuGoHokenryoDankai" AS dbT1007_gengakuGoHokenryoDankai
+        FROM 
+            rgdb."DbT1007KyokaisoHokenryoDankai" AS dbT1007KyokaisoHokenryoDankai
+        WHERE
+            dbT1007KyokaisoHokenryoDankai."isDeleted" = FALSE
+        GROUP BY
+            dbT1007KyokaisoHokenryoDankai."hihokenshaNo"
+            <!--,リンク番号-->
+            , dbT1007KyokaisoHokenryoDankai."gengakuGoHokenryoDankai"
+        ) dbT1007KyokaisoHokenryo
+    ON                                                                                        
+        dbT1006KyokaisoGaitosha."hihokenshaNo" = dbT1007KyokaisoHokenryo.dbT1007_hihokenshaNo
+    <!--AND dbT1006KyokaisoGaitosha.リンク番号 = dbT1007KyokaisoHokenryo.dbT1007_リンク番号1-->                                                             
+    WHERE                                                                                        
+        dbT1006KyokaisoGaitosha."hihokenshaNo" = #{被保険者番号}
+    AND dbT1006KyokaisoGaitosha."isDeleted" = FALSE
+    </select>
+    
+    <select id="selcet最新履歴番号" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaParameter"
+            resultType="Decimal" fetchSize="500">
+    SELECT        
+        MAX(dbT1006KyokaisoGaitosha."rirekiNo") AS dbT1006KyokaisoGaitosha_rirekiNo
+    FROM 
+        rgdb."DbT1006KyokaisoGaitosha" AS dbT1006KyokaisoGaitosha
+    WHERE                                                                                        
+        dbT1006KyokaisoGaitosha."hihokenshaNo" = #{被保険者番号}
+    AND dbT1006KyokaisoGaitosha."isDeleted" = FALSE
+    </select>
+    
+    <select id="selcet最新リンク番号" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaParameter"
+            resultType="Decimal" fetchSize="500">
+    SELECT  
+              <!--TODO 凌護行  DBに項目が無し、  QA316回答まち、-->  
+        MAX(dbT1006KyokaisoGaitosha."rirekiNo") AS dbT1006KyokaisoGaitosha_rirekiNo
+    FROM 
+        rgdb."DbT1006KyokaisoGaitosha" AS dbT1006KyokaisoGaitosha
+    WHERE                                                                                        
+        dbT1006KyokaisoGaitosha."hihokenshaNo" = #{被保険者番号}
+    AND dbT1006KyokaisoGaitosha."isDeleted" = FALSE
+    </select>
+    
+    <resultMap id="ResultMap_KyokaisoGaitoshaRelateEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaRelateEntity" autoMapping="true">
+        <result property="被保険者番号" column="dbT1006KyokaisoGaitosha_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+         <!--TODO 凌護行  DBに項目が無し、  QA316回答まち、-->  
+<!--        <result property="リンク番号" column=" typeHandler="
+        <result property="申請年月日" column=" typeHandler="
+        <result property="受付年月日" column=" typeHandler="-->
+        <result property="適用開始年月日" column="dbT1006KyokaisoGaitosha_tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="適用終了年月日" column="dbT1006KyokaisoGaitosha_tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <!--<result property="措置該当_非該当区分" column=" typeHandler="-->
+        <result property="境界層措置決定年月日" column="dbT1006KyokaisoGaitosha_kyokaisoSochiKetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="給付額減額記載解除フラグ" column="dbT1006KyokaisoGaitosha_kyuufugakuGengakuKisaiKiajoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="標準負担額額該当フラグ" column="dbT1006KyokaisoGaitosha_hyojunFutanGengakuGaitoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="標準負担軽減後負担額" column="dbT1006KyokaisoGaitosha_hyojunFutanKeigengoFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="居住費等負担額減額該当フラグ" column="dbT1006KyokaisoGaitosha_kyojuhinadoFutangakugengakuGaitoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="居住費軽減後居室種類コード" column="dbT1006KyokaisoGaitosha_kyojuhiKeigengoKyoshitsuShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="居住費軽減後負担額" column="dbT1006KyokaisoGaitosha_kyojuhiKeigengoHutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="食費負担額減額該当フラグ" column="dbT1006KyokaisoGaitosha_shokuhiKeigengoHutangakuGaitoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="食費軽減後負担額" column="dbT1006KyokaisoGaitosha_shokuhiKeigengoHutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="高額ｻｰﾋﾞｽ費上限額減額該当フラグ" column="dbT1006KyokaisoGaitosha_kogakuServicehiJogengakuGengakuGaitoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="高額ｻｰﾋﾞｽ費減額後上限額" column="dbT1006KyokaisoGaitosha_kogakuServicehiJogengakuGengakugoJogengaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="保険料納付減額フラグ" column="dbT1006KyokaisoGaitosha_hokenryoNofuGengakuFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="申請_廃止区分" column="dbT1013KyokaisoSochiShinsei_shinsei_HaishiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="申請_廃止年月日" column="dbT1013KyokaisoSochiShinsei_shinsei_HaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="保護不要根拠減額金額" column="dbT1013KyokaisoSochiShinsei_hogoHuyoKonkyoGengakuKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="境界層証明書交付年月日" column="dbT1013KyokaisoSochiShinsei_kyokaisoShomeishoKofuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="給付額減額取消_減額自己負担月額" column="dbT1013KyokaisoSochiShinsei_kyufuGengakuTorikeshi_GengakuJikofutanGetsugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="居住費軽減_減額自己負担月額" column="dbT1013KyokaisoSochiShinsei_kyojuhiKeigen_GengakuJikofutanGetsugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="居住費軽減_負担限度額段階コード" column="dbT1013KyokaisoSochiShinsei_kyojuhiKeigen_FutangendogakuDankaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="食費軽減_減額自己負担月額" column="dbT1013KyokaisoSochiShinsei_shokuhiKeigen_GengakuJikofutanGetsugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="食費軽減_負担限度額段階コード" column="dbT1013KyokaisoSochiShinsei_shokuhiKeigen_FutangendogakuDankaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="利用者負担世帯合算額_減額自己負担月額" column="dbT1013KyokaisoSochiShinsei_riyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="保険料減額_減額自己負担月額" column="dbT1013KyokaisoSochiShinsei_hokenryoGengaku_GengakuJikofutanGetsugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="減額自己負担月額合計額" column="dbT1013KyokaisoSochiShinsei_gengakuJikofutanGetsugakuGokeigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="保険料納付減額後保険料段階" column="dbT1007KyokaisoHokenryoDankai_gengakuGoHokenryoDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+</mapper>
