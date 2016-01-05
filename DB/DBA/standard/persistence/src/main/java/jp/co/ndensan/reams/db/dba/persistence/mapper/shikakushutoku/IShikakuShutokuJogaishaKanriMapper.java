@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dba.persistence.mapper.shikakushutoku;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity;
 
 /**
  *
@@ -42,8 +41,8 @@ public interface IShikakuShutokuJogaishaKanriMapper {
     /**
      * MAX履歴番号を取得します。
      *
-     * @return DbT1009ShikakuShutokuJogaishaEntity
+     * @return int
      */
-    DbT1009ShikakuShutokuJogaishaEntity get履歴番号();
+    int get履歴番号();
 
 }

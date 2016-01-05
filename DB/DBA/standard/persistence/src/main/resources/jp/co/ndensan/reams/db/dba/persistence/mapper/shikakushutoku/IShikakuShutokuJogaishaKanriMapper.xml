@@ -69,6 +69,7 @@
     <select id="get履歴番号" resultMap="resultMap_DbT1009ShikakuShutokuJogaishaEntity"  fetchSize="500">
         SELECT MAX(DbT1009ShikakuShutokuJogaisha."rirekiNo") as "rirekiNo"
         FROM rgdb."DbT1009ShikakuShutokuJogaisha" DbT1009ShikakuShutokuJogaisha
+        WHERE DbT1009ShikakuShutokuJogaisha."shikibetsuCode" = #{shikibetsuCode}
     </select>
     <resultMap id="resultMap_DbT1009ShikakuShutokuJogaishaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity" autoMapping="true">
         <result property="rirekiNo" column="rirekiNo" />

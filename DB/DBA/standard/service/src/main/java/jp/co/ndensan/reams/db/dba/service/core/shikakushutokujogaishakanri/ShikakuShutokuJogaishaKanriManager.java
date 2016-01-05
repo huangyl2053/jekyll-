@@ -88,12 +88,6 @@ public class ShikakuShutokuJogaishaKanriManager {
         return SearchResult.of(businessList, 0, false);
     }
 
-    /**
-     * 宛名情報を取得します
-     *
-     * @param 識別コード ShikibetsuCode
-     * @return ShikakuShutokuJogaishaKanriEntity
-     */
     private ShikakuShutokuJogaishaKanriEntity get宛名情報(ShikibetsuCode 識別コード) {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先), true);
@@ -114,14 +108,14 @@ public class ShikakuShutokuJogaishaKanriManager {
     @Transaction
     public int insertShikakuShutokuJogaisha(ShikakuShutokuJogaishaKanriEntity shakanrientity) {
         IShikakuShutokuJogaishaKanriMapper mapper = mapperProvider.create(IShikakuShutokuJogaishaKanriMapper.class);
-        DbT1009ShikakuShutokuJogaishaEntity entity = mapper.get履歴番号();
+        int 履歴番号 = mapper.get履歴番号();
         DbT1009ShikakuShutokuJogaishaEntity shikakuentity = new DbT1009ShikakuShutokuJogaishaEntity();
         shikakuentity.setShikibetsuCode(shakanrientity.getShikibetsuCode());
         shikakuentity.setShichosonCode(shakanrientity.getShichosonCode());
         shikakuentity.setShikakuShutokuJogaiRiyu(shakanrientity.getShikakuShutokuJogaiRiyu());
         shikakuentity.setShikakuShutokuJogaiYMD(shakanrientity.getShikakuShutokuJogaiYMD());
         shikakuentity.setShikakuShutokuJogaiKaijoYMD(shakanrientity.getShikakuShutokuJogaiKaijoYMD());
-        shikakuentity.setRirekiNo(entity.getRirekiNo() + 1);
+        shikakuentity.setRirekiNo(履歴番号 + 1);
         shikakuentity.setIsDeleted(false);
         shikakuentity.setState(EntityDataState.Added);
         return dac.save(shikakuentity);
@@ -163,9 +157,12 @@ public class ShikakuShutokuJogaishaKanriManager {
      * @param shakanrientity ShikakuShutokuJogaishaKanriEntity
      * @return true
      */
-    public boolean jogaiKikanJufukuCheck(ShikakuShutokuJogaishaKanriEntity shakanrientity) {
-        IShikakuShutokuJogaishaKanriMapper mapper = mapperProvider.create(IShikakuShutokuJogaishaKanriMapper.class);
+    public
+            boolean jogaiKikanJufukuCheck(ShikakuShutokuJogaishaKanriEntity shakanrientity) {
+        IShikakuShutokuJogaishaKanriMapper mapper = mapperProvider.create(IShikakuShutokuJogaishaKanriMapper.class
+        );
         int count = mapper.get除外期間重複チェック(shakanrientity);
-        return count != 0;
+        return count
+                != 0;
     }
 }
