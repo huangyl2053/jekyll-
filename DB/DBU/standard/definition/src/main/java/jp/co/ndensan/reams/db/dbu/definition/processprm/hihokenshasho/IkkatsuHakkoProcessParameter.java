@@ -33,8 +33,8 @@ public class IkkatsuHakkoProcessParameter implements IBatchProcessParameter {
     private FlexibleDate konkaiKijunYMD;
     private RTime konkaiKijunHMS;
     private FlexibleDate kofuYMD;
-    private Boolean testShutsuryokuFlag;
-    private Boolean saihakkoFlag;
+    private RString testShutsuryokuFlag;
+    private RString saihakkoFlag;
     private FlexibleDate hakkouYMD;
     private RTime hakkouHMS;
     private RString shutsuryokujunId;
@@ -46,6 +46,7 @@ public class IkkatsuHakkoProcessParameter implements IBatchProcessParameter {
     private ShikibetsuCode shikibetsuCode;
     private RString psmShikibetsuTaisho;
     private RString psmAtesaki;
+    private FlexibleDate nenreiTotatsuYMD;
 
     /**
      * コンストラクタ
@@ -73,8 +74,8 @@ public class IkkatsuHakkoProcessParameter implements IBatchProcessParameter {
             FlexibleDate 今回の基準日,
             RTime 今回の時分秒,
             FlexibleDate 交付日,
-            Boolean テスト出力するフラグ,
-            Boolean 再発行するフラグ,
+            RString テスト出力するフラグ,
+            RString 再発行するフラグ,
             FlexibleDate 発行日時の発行日,
             RTime 発行日時の時分秒,
             RString 出力順ID,
@@ -129,6 +130,7 @@ public class IkkatsuHakkoProcessParameter implements IBatchProcessParameter {
                 hihokenshaNo,
                 shikibetsuCode,
                 psmShikibetsuTaisho,
-                psmAtesaki);
+                psmAtesaki,
+                nenreiTotatsuYMD);
     }
 }

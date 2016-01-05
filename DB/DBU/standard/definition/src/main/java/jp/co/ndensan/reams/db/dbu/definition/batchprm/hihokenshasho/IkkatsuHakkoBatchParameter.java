@@ -53,9 +53,9 @@ public class IkkatsuHakkoBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_KOFU_YMD, name = "交付日")
     private FlexibleDate kofuYMD;
     @BatchParameter(key = KEY_TESTSHUTSURYOKUFLAG, name = "テスト出力するフラグ")
-    private Boolean testShutsuryokuFlag;
+    private RString testShutsuryokuFlag;
     @BatchParameter(key = KEY_SAIHAKKOFLAG, name = "再発行するフラグ")
-    private Boolean saihakkoFlag;
+    private RString saihakkoFlag;
     @BatchParameter(key = KEY_HAKKOU_YMD, name = "発行日")
     private FlexibleDate hakkouYMD;
     @BatchParameter(key = KEY_HAKKOU_HMS, name = "発行日時の時分秒")
@@ -92,8 +92,8 @@ public class IkkatsuHakkoBatchParameter extends BatchParameterBase {
             FlexibleDate konkaikijunYMD,
             RTime konkaiKijunHMS,
             FlexibleDate kofuYMD,
-            Boolean testShutsuryokuFlag,
-            Boolean saihakkoFlag,
+            RString testShutsuryokuFlag,
+            RString saihakkoFlag,
             FlexibleDate hakkouYMD,
             RTime hakkouHMS,
             RString shutsuryokujunId,

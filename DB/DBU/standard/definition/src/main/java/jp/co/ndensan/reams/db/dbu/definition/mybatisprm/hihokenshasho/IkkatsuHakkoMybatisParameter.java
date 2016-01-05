@@ -34,6 +34,7 @@ public class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
     private final ShikibetsuCode shikibetsuCode;
     private final RString psmShikibetsuTaisho;
     private final RString psmAtesaki;
+    private final FlexibleDate nenreiTotatsuYMD;
 
     /**
      * コンストラクタ
@@ -51,6 +52,7 @@ public class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
      * @param 識別コード 識別コード
      * @param 識別対象PSM 識別対象PSM
      * @param 宛先PSM 宛先PSM
+     * @param 年齢到達日 年齢到達日
      */
     public IkkatsuHakkoMybatisParameter(RString 出力条件コード,
             RDateTime 今回の開始日時,
@@ -64,7 +66,8 @@ public class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
             HihokenshaNo 被保険者番号,
             ShikibetsuCode 識別コード,
             RString 識別対象PSM,
-            RString 宛先PSM) {
+            RString 宛先PSM,
+            FlexibleDate 年齢到達日) {
         this.shutsuryokuJokenCode = 出力条件コード;
         this.konkaiFromYMDHMS = 今回の開始日時;
         this.konkaiToYMD = 今回の終了日;
@@ -78,6 +81,7 @@ public class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
         this.shikibetsuCode = 識別コード;
         this.psmShikibetsuTaisho = 識別対象PSM;
         this.psmAtesaki = 宛先PSM;
+        this.nenreiTotatsuYMD = 年齢到達日;
     }
 
     public static IkkatsuHakkoMybatisParameter createSelectByKeyParam(RString 出力条件コード,
@@ -92,7 +96,8 @@ public class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
             HihokenshaNo 被保険者番号,
             ShikibetsuCode 識別コード,
             RString PSM識別対象,
-            RString 宛先PSM) {
+            RString 宛先PSM,
+            FlexibleDate 年齢到達日) {
         return new IkkatsuHakkoMybatisParameter(出力条件コード,
                 今回の開始日時,
                 今回の終了日,
@@ -105,6 +110,7 @@ public class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
                 被保険者番号,
                 識別コード,
                 PSM識別対象,
-                宛先PSM);
+                宛先PSM,
+                年齢到達日);
     }
 }
