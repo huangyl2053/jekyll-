@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbu.service.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbu.entity.SinsaSeikyusyoTorokuEntity;
-import jp.co.ndensan.reams.db.dbu.persistence.ShoKofuKaishuJohoParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SinsaSeikyusyoMeisaiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitateEntity;
@@ -46,11 +45,21 @@ public class SinsaSeikyusyoTorokuManager {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link SinsaSeikyusyoTorokuManager}のインスタンスを返します。
+     *
+     *
+     * @return SinsaSeikyusyoTorokuManager
+     */
+    public static SinsaSeikyusyoTorokuManager createInstance() {
+        return InstanceProvider.create(SinsaSeikyusyoTorokuManager.class);
+    }
+
+    /**
      * 画面入力した条件より　審査請求書明細情報を取得します
      *
-     * @param 識別コード ShikibetsuCode
-     * @param 原処分被保険者番号 HihokenshaNo
-     * @param 審査請求届出日 FlexibleDate
+     * @param 識別コード 識別コード
+     * @param 原処分被保険者番号 原処分被保険者番号
+     * @param 審査請求届出日 審査請求届出日
      *
      * @return 審査請求書明細情報
      */
@@ -59,15 +68,19 @@ public class SinsaSeikyusyoTorokuManager {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(原処分被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者番号"));
         requireNonNull(審査請求届出日, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求届出日"));
-        return new SinsaSeikyusyoMeisaiJoho(審査請求書登録dac.selectByKey(識別コード, 原処分被保険者番号, 審査請求届出日));
+        DbT7001FufukuMoshitateEntity entity = 審査請求書登録dac.selectByKey(識別コード, 原処分被保険者番号, 審査請求届出日);
+        if (entity == null) {
+            entity = new DbT7001FufukuMoshitateEntity();
+        }
+        return new SinsaSeikyusyoMeisaiJoho(entity);
     }
 
     /**
      * 審査請求書明細情報を登録します
      *
-     * @param 識別コード ShikibetsuCode
-     * @param 原処分被保険者番号 HihokenshaNo
-     * @param entity DbT7001FufukuMoshitateEntity
+     * @param 識別コード 識別コード
+     * @param 原処分被保険者番号 原処分被保険者番号
+     * @param entity 不服審査申立情報
      *
      * @return 登録件数
      */
@@ -82,7 +95,7 @@ public class SinsaSeikyusyoTorokuManager {
     /**
      * 審査請求書明細情報データを更新します
      *
-     * @param sinsaseiEntity
+     * @param sinsaseiEntity 明細情報
      */
     @Transaction
     public void updSinsaSeikyusyomeisaiJoho(SinsaSeikyusyoTorokuEntity sinsaseiEntity) {
@@ -105,8 +118,7 @@ public class SinsaSeikyusyoTorokuManager {
         dbt7001Entity.setShobunKakuninYMD(sinsaseiEntity.getShobunKakuninYMD());
         dbt7001Entity.setShinsaSeikyuRiyu(sinsaseiEntity.getShinsaSeikyuRiyu());
         dbt7001Entity.setShobunChoKyojiNaiyo(sinsaseiEntity.getShobunChoKyojiNaiyo());
-        //TODO ※有り：TRUE  無し：FALSE
-        dbt7001Entity.setTempuShoruiTo(true);
+        dbt7001Entity.setTempuShoruiTo(sinsaseiEntity.isTempuShoruiTo());
         dbt7001Entity.setShinsaSeikyuTorisageYMD(sinsaseiEntity.getShinsaSeikyuTorisageYMD());
         dbt7001Entity.setState(EntityDataState.Modified);
         審査請求書登録dac.save(dbt7001Entity);
@@ -115,42 +127,43 @@ public class SinsaSeikyusyoTorokuManager {
     /**
      * 審査請求書明細情報を削除します
      *
-     * @param sinsaseiEntity
+     * @param sinsaseiEntity 明細情報
      */
     @Transaction
     public void delSinsaSeikyusyomeisaiJoho(SinsaSeikyusyoTorokuEntity sinsaseiEntity) {
         DbT7001FufukuMoshitateEntity dbt7001Entity = 審査請求書登録dac.selectByKey(sinsaseiEntity.getShikibetsuCode(),
                 sinsaseiEntity.getGenshobunsHihokennshaNo(), sinsaseiEntity.getShinsaSeikyuTodokedeYMD());
-        dbt7001Entity.setState(EntityDataState.Modified);
+        dbt7001Entity.setState(EntityDataState.Deleted);
         審査請求書登録dac.save(dbt7001Entity);
     }
 
     /**
      * 審査請求届出日の重複チェック処理
      *
-     * @param 識別コード ShikibetsuCode
-     * @param 原処分被保険者番号 HihokenshaNo
-     * @param 審査請求届出日 FlexibleDate
-     * @param parameter
+     * @param 識別コード 識別コード
+     * @param 原処分被保険者番号 原処分被保険者番号
+     * @param 審査請求届出日 審査請求届出日
+     * @param gamennmodel 画面モード
+     * @param shinsaSeikyuTodokedeYMD 審査請求届出日
      *
      * @return チェックフラグ
      */
-    public boolean checkSinsaSeikyuTodokede(ShikibetsuCode 識別コード, HihokenshaNo 原処分被保険者番号, FlexibleDate 審査請求届出日, ShoKofuKaishuJohoParameter parameter) {
+    public boolean checkSinsaSeikyuTodokede(ShikibetsuCode 識別コード, HihokenshaNo 原処分被保険者番号,
+            FlexibleDate 審査請求届出日, RString gamennmodel, FlexibleDate shinsaSeikyuTodokedeYMD) {
         boolean isJuuHuku = true;
-        DbT7001FufukuMoshitateEntity fufukuMoshitateEntity = 審査請求書登録dac.selectByKey(識別コード, 原処分被保険者番号, parameter.getShinsaSeikyuTodokedeYMD());
+        DbT7001FufukuMoshitateEntity fufukuMoshitateEntity = 審査請求書登録dac.selectByKey(識別コード, 原処分被保険者番号, shinsaSeikyuTodokedeYMD);
         if (fufukuMoshitateEntity == null) {
             return isJuuHuku;
         }
-        if (画面モード_追加モード.equals(parameter.getGamennmodel())) {
+        if (画面モード_追加モード.equals(gamennmodel)) {
             isJuuHuku = false;
-        } else if (画面モード_修正モード.equals(parameter.getGamennmodel())) {
-            if (!(fufukuMoshitateEntity.getShikibetsuCode() == 識別コード
-                    && fufukuMoshitateEntity.getGenshobunsHihokennshaNo() == 原処分被保険者番号
-                    && fufukuMoshitateEntity.getShinsaSeikyuTodokedeYMD() == 審査請求届出日)) {
+        } else if (画面モード_修正モード.equals(gamennmodel)) {
+            if (!(fufukuMoshitateEntity.getShikibetsuCode().equals(識別コード)
+                    && fufukuMoshitateEntity.getGenshobunsHihokennshaNo().equals(原処分被保険者番号)
+                    && fufukuMoshitateEntity.getShinsaSeikyuTodokedeYMD().equals(審査請求届出日))) {
                 isJuuHuku = false;
             }
         }
         return isJuuHuku;
     }
-
 }

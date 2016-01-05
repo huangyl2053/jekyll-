@@ -19,6 +19,12 @@ public class ShozokuKikanIchiranFinderBusiness implements Serializable {
 
     private final ShozokuKikanIchiranEntity entity;
 
+    /**
+     * コンストラクタです。<br/>
+     * 介護認定審査会委員所属機関情報の新規作成時に使用します。
+     *
+     * @param entity 所属機関一覧情報Entity
+     */
     public ShozokuKikanIchiranFinderBusiness(ShozokuKikanIchiranEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("所属機関一覧情報"));
         this.entity = entity;

@@ -39,16 +39,11 @@ public final class DbT7003BemmeishaJohoEntityGenerator {
 
     public static DbT7003BemmeishaJohoEntity createDbT7003BemmeishaJohoEntity() {
         DbT7003BemmeishaJohoEntity entity = new DbT7003BemmeishaJohoEntity();
-        entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);
         entity.setShikibetsuCode(DEFAULT_識別コード);
         entity.setGenshobunHihokenshaNo(DEFAULT_原処分被保険者番号);
         entity.setShinsaseikyuTodokedeYMD(DEFAULT_審査請求届出日);
         entity.setBemmeishoSakuseiYMD(DEFAULT_弁明書作成日);
         entity.setBemmeishaEdaban(DEFAULT_弁明者枝番.intValue());
-        entity.setShokuinCode(DEFAULT_職員コード);
-        entity.setBushoCode(DEFAULT_部署コード);
-        entity.setYakushoskuName(DEFAULT_役職名);
-        entity.setBemmeishaShimei(DEFAULT_弁明者氏名);
         return entity;
     }
 }

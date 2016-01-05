@@ -6,61 +6,49 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ikenshoShujiiIchiran;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran.IkenshoShujiiIchiranBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran.IkenshoShujiiIchiranHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran.IkenshoShujiiIchiranReport;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.ItakusakiChosainIchiranReportId;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.IkenshoShujiiIchiranProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.ikenshoShujiiIchiran.IkenshoShujiiIchiranRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.itakusakichosainichiran.ItakusakiChosainIchiranReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ShujiiIryokikanShujiiIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 医療機関・主治医一覧表_バッチフ処理クラスです
  */
-public class IkenshoShujiiIchiranProcess extends BatchProcessBase<IkenshoShujiiIchiranRelateEntity> {
+public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujiiIchiranRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoShujiiIchiran.IkenshoShujiiIchiranRelateMapper.getIkenshoShujiiIchiranRelateEntity");
+            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoShujiiIchiran."
+            + "IkenshoShujiiIchiranRelateMapper.getIkenshoShujiiIchiranRelateEntity");
+    private static final ReportId REPORT_ID = new ReportId(ItakusakiChosainIchiranReportId.REPORTID_DBE591001.getCode());
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("listIchiranhyoUpper_1")));
 
-    List<IkenshoShujiiIchiranBodyItem> bodyItemList = new ArrayList<>();
-    private static final ReportId REPORT_ID = new ReportId("DBE591001");
-    @BatchWriter
-    private BatchReportWriter<ItakusakiChosainIchiranReportSource> batchWrite;
+    IkenshoShujiiIchiranHeadItem headItem;
+    List<IkenshoShujiiIchiranBodyItem> bodyItemList;
     IkenshoShujiiIchiranProcessParameter processParameter;
+    @BatchWriter
+    private BatchReportWriter<ShujiiIryokikanShujiiIchiranhyoReportSource> batchWrite;
     private ReportSourceWriter<ShujiiIryokikanShujiiIchiranhyoReportSource> reportSourceWriter;
 
     @Override
     protected void initialize() {
-
-        super.initialize();
-    }
-
-    @Override
-    protected IBatchReader createReader() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
-        reportSourceWriter = new ReportSourceWriter(batchWrite);
-        return new BatchDbReader(MYBATIS_SELECT_ID, IkenshoShujiiIchiranProcessParameter.
-                to主治医一覧表作成MybatisParameter(processParameter));
-    }
-
-    @Override
-    protected void process(IkenshoShujiiIchiranRelateEntity entity) {
-        bodyItemList.add(setBodyItem(entity));
-    }
-
-    @Override
-    protected void afterExecute() {
-        IkenshoShujiiIchiranHeadItem headItem = new IkenshoShujiiIchiranHeadItem(
+        bodyItemList = new ArrayList<>();
+        headItem = new IkenshoShujiiIchiranHeadItem(
                 processParameter.getShichosonCode(),
                 processParameter.getShichosonName(),
                 processParameter.getIryoKikanCodeFrom(),
@@ -70,6 +58,39 @@ public class IkenshoShujiiIchiranProcess extends BatchProcessBase<IkenshoShujiiI
                 processParameter.getJyokyo(),
                 processParameter.getOutputSort(),
                 processParameter.getNextpage());
+    }
+
+    @Override
+    protected IBatchReader createReader() {
+        return new BatchDbReader(MYBATIS_SELECT_ID, IkenshoShujiiIchiranProcessParameter.
+                to主治医一覧表作成MybatisParameter(processParameter));
+    }
+
+    @Override
+    protected void createWriter() {
+        batchWrite = batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
+                .addBreak(new BreakerCatalog<ShujiiIryokikanShujiiIchiranhyoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .create();
+        reportSourceWriter = new ReportSourceWriter<>(batchWrite);
+    }
+
+    @Override
+    protected void usualProcess(IkenshoShujiiIchiranRelateEntity entity) {
+        bodyItemList.add(setBodyItem(entity));
+    }
+
+    @Override
+    protected void keyBreakProcess(IkenshoShujiiIchiranRelateEntity current) {
+        if (hasBrek(getBefore(), current)) {
+            IkenshoShujiiIchiranReport report = IkenshoShujiiIchiranReport.createFrom(headItem, bodyItemList);
+            report.writeBy(reportSourceWriter);
+            bodyItemList = new ArrayList<>();
+        }
+    }
+
+    @Override
+    protected void afterExecute() {
+
         IkenshoShujiiIchiranReport report = IkenshoShujiiIchiranReport.createFrom(headItem, bodyItemList);
         report.writeBy(reportSourceWriter);
     }
@@ -91,5 +112,9 @@ public class IkenshoShujiiIchiranProcess extends BatchProcessBase<IkenshoShujiiI
                 entity.getJusho(),
                 entity.getShujiiName() == null ? RString.EMPTY : entity.getShujiiName().value(),
                 entity.getShinryokaName());
+    }
+
+    private boolean hasBrek(IkenshoShujiiIchiranRelateEntity before, IkenshoShujiiIchiranRelateEntity current) {
+        return !before.getShujiiCode().equals(current.getShujiiCode());
     }
 }

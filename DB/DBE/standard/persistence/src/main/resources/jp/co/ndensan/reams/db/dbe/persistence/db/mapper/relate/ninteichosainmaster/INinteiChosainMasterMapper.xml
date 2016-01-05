@@ -84,6 +84,7 @@
         DbT5913ChosainJoho."dbT5913ChosainJoho_telNo",
         DbT5913ChosainJoho."dbT5913ChosainJoho_faxNo",
         DbT5913ChosainJoho."dbT5913ChosainJoho_jokyoFlag",
+        DbT5913ChosainJoho."dbT5913ChosainJoho_shozokuKikanName",
         DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode",
         DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho",
         DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonMeisho"
@@ -130,7 +131,7 @@
             <if test="uses調査員氏名">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainShimei" LIKE '%' || #{調査員氏名} || '%'
             </if>
-            <if test="uses調査委託先カナ名称">
+            <if test="uses調査員カナ氏名">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainKanaShimei" LIKE '%' || #{調査員カナ氏名} || '%'
             </if>
             <if test="uses地区コード">
@@ -194,7 +195,7 @@
             <if test="uses調査員氏名">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainShimei" LIKE '%' || #{調査員氏名} || '%'
             </if>
-            <if test="uses調査委託先カナ名称">
+            <if test="uses調査員カナ氏名">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainKanaShimei" LIKE '%' || #{調査員カナ氏名} || '%'
             </if>
              <if test="uses地区コード">
@@ -227,6 +228,7 @@
         <result property="ninteichosaItakusakiCode" column="dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jigyoshaMeisho" column="dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonMeisho" column="dbT7051KoseiShichosonMaster_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shozokuKikanName" column="dbT5913ChosainJoho_shozokuKikanName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
 </mapper>

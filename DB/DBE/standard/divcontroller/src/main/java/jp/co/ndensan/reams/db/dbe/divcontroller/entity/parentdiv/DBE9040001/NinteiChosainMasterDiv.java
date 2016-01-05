@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
@@ -114,13 +115,8 @@ public class NinteiChosainMasterDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public DropDownList getDdlSearchShichoson() {
-        return this.getChosainSearch().getDdlSearchShichoson();
-    }
-
-    @JsonIgnore
-    public void setDdlSearchShichoson(DropDownList ddlSearchShichoson) {
-        this.getChosainSearch().setDdlSearchShichoson(ddlSearchShichoson);
+    public IHokenshaListDiv getHokenshaList() {
+        return this.getChosainSearch().getHokenshaList();
     }
 
     @JsonIgnore

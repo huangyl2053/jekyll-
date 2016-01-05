@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 支払方法情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shiharaihohojyoho.IShiharaiHohoJyohoMapper">
+
+    <select id="get口座IDリストByKozaParameter"
+            resultMap="shiharaiHohoJyoho_kozaId"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter" fetchSize="500">
+        SELECT "kozaId"
+        FROM rgur."UrT0715Koza" koza
+        WHERE koza."shikibetsuCode" = #{shikibetsuCode}
+        AND koza."gyomuCode" = 'DB'
+        AND koza."subGyomuCode" = 'DBC'
+        AND koza."kamokuCode" = #{kamokuCode}
+    </select>
+
+    <select id="get口座情報ByKey"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0715KozaEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter" fetchSize="500">
+        SELECT "gyomuCode"
+        ,"subGyomuCode"
+        ,"kamokuCode"
+        ,"gyomuKoyuKey"
+        ,"yotoKubun"
+        FROM rgur."UrT0715Koza" koza
+        WHERE koza."kozaId" = #{kozaId}
+    </select>
+
+    <resultMap id="shiharaiHohoJyoho_kozaId" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0715KozaEntity" autoMapping="true">
+        <id property="kozaId" column="kozaId" />
+    </resultMap>
+
+</mapper>

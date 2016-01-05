@@ -168,12 +168,12 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
      * @param 異動日 異動日
      * @param 枝番 枝番
      * @return DbT1001HihokenshaDaichoEntity
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     public DbT1001HihokenshaDaichoEntity selectByHihokenshaNo(
             HihokenshaNo 被保険者番号,
             FlexibleDate 異動日,
-            RString 枝番) {
+            RString 枝番) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));

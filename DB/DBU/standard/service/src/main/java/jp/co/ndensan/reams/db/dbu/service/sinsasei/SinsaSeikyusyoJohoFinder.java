@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7001FufukuMoshitateDac;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -43,15 +44,15 @@ public class SinsaSeikyusyoJohoFinder {
      *
      * @param shikibetsuCode 識別コード
      * @param genshobunsHihokennshaNo 原処分被保険者番号
-     * @return List<SinsaSeikyusyoJohoModel> 
+     * @return SearchResult<SinsaSeikyusyoJohoModel>
      */
-    public List<SinsaSeikyusyoJohoModel> getSinsaSeikyusyoJohoList(ShikibetsuCode shikibetsuCode, HihokenshaNo genshobunsHihokennshaNo) {
+    public SearchResult<SinsaSeikyusyoJohoModel> getSinsaSeikyusyoJohoList(ShikibetsuCode shikibetsuCode, HihokenshaNo genshobunsHihokennshaNo) {
         List<SinsaSeikyusyoJohoModel> businessList = new ArrayList<>();
         List<DbT7001FufukuMoshitateEntity> dbT7001FufukuMoshitateEntity = fufukumoshitatedac.select一覧情報取得(shikibetsuCode, genshobunsHihokennshaNo);
         for (DbT7001FufukuMoshitateEntity fufukuMoshitateEntity : dbT7001FufukuMoshitateEntity) {
             businessList.add(new SinsaSeikyusyoJohoModel(fufukuMoshitateEntity));
         }
 
-        return businessList;
+        return SearchResult.of(businessList, 0, false);
     }
 }

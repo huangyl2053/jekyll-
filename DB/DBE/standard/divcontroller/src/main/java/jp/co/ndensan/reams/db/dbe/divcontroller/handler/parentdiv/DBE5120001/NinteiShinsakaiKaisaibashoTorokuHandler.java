@@ -3,14 +3,21 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoBuilder;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.dgKaisaibashoIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoManager;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 介護認定審査会開催場所登録画面でのバリデーションを管理するハンドラークラスです。
@@ -18,11 +25,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class NinteiShinsakaiKaisaibashoTorokuHandler {
 
-    public static final RString 更新モード = new RString("更新");
+    public static final RString 更新モード = new RString("修正");
     public static final RString 追加モード = new RString("追加");
     public static final RString 削除モード = new RString("削除");
     public static final RString 通常 = new RString("通常");
     public static final RString 削除 = new RString("削除");
+    public static final RString デフォルト検索条件 = new RString("yuuKo");
+    public static final CodeShubetsu コード種別 = new CodeShubetsu("5001");
     public static final boolean 有効 = true;
     public static final boolean 全て = false;
 
@@ -65,21 +74,13 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
     }
 
     /**
-     * 開催場所の更新処理します。
-     *
-     */
-    public void 開催場所の更新処理() {
-        
-    }
-    
-    /**
      * 開催場所編集エリアを設定します。
      *
      */
     public void set開催場所一覧の追加() {
-        div.getShinakaiKaisaIbashoShosai().setJyotai(追加モード);
         clear開催場所編集エリア();
         set開催場所編集エリア活性();
+        div.getShinakaiKaisaIbashoShosai().setJyotai(追加モード);
     }
 
     /**
@@ -103,9 +104,10 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
      *
      */
     public void set開催場所一覧の参照() {
-        dgKaisaibashoIchiran_Row ClickedItem = div.getDgKaisaibashoIchiran().getClickedItem();
-        if (!(更新モード.equals(ClickedItem.getJyotai()) || 追加モード.equals(ClickedItem.getJyotai()))) {
-            setSelectItem(ClickedItem);
+        dgKaisaibashoIchiran_Row clickedItem = div.getDgKaisaibashoIchiran().getClickedItem();
+        if (!(更新モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()) 
+                || 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()))) {
+            setSelectItem(clickedItem);
             set開催場所編集エリア非活性();
         }
     }
@@ -116,8 +118,15 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
      */
     public void set修正の場合開催場所編集エリア() {
         div.getShinakaiKaisaIbashoShosai().setJyotai(更新モード);
-        dgKaisaibashoIchiran_Row ClickedItem = div.getDgKaisaibashoIchiran().getClickedItem();
-        setSelectItem(ClickedItem);
+        dgKaisaibashoIchiran_Row clickedItem = div.getDgKaisaibashoIchiran().getClickedItem();
+        RStringBuilder selectedItem = new RStringBuilder(clickedItem.getKaisaibashoCode());
+        selectedItem.append(clickedItem.getKaisaibashoMeisho())
+         .append(clickedItem.getKaisaibashoJusho())
+         .append(clickedItem.getKaisaibashoTelNo())
+         .append(clickedItem.getKaisaibashoJokyo())
+         .append(clickedItem.getKaisaiChikuCode());
+        div.getShinakaiKaisaIbashoShosai().setSelectItem(selectedItem.toRString());
+        setSelectItem(clickedItem);
         set開催場所編集エリア活性();
     }
 
@@ -150,82 +159,126 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
             setYiChiRanItem(clickedItem);
             rowList.set(clickedItemId, clickedItem);
         } else if (追加モード.equals(モード)) {
-            clickedItem.setJyotai(追加モード);
             dgKaisaibashoIchiran_Row clickedItemNew = new dgKaisaibashoIchiran_Row();
+            clickedItemNew.setJyotai(追加モード);
             setYiChiRanItem(clickedItemNew);
             rowList.add(clickedItemNew);
         }
-        clickedItem.setJyotai(RString.EMPTY);
         div.getDgKaisaibashoIchiran().setDataSource(rowList);
         clear開催場所編集エリア();
         set開催場所編集エリア非活性();
     }
+
+    /**
+     * 介護認定審査会開催場所登録の「保存する」ボタンが押下の場合、状態によってinsert/update/delete処理に振り分けられます。
+     * 
+     */
+    public void save(){
+         Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList
+                = ViewStateHolder.get(ViewStateKeys.開催場所情報一覧, Models.class);
+        List<dgKaisaibashoIchiran_Row> rowList = div.getDgKaisaibashoIchiran().getDataSource();
+        ShinsakaiKaisaiBashoJohoManager manager = ShinsakaiKaisaiBashoJohoManager.createInstance();
+        for (dgKaisaibashoIchiran_Row row : rowList) {
+            for (ShinsakaiKaisaiBashoJoho shinsakaiKaisaiBashoJoho : shinsakaiKaisaiBashoJohoList) {
+                if (shinsakaiKaisaiBashoJoho.identifier().get介護認定審査会開催場所コード()
+                        .equals(row.getKaisaibashoCode())) {
+                    shinsakaiKaisaiBashoJoho = edit介護認定審査会開催場所情報(row, shinsakaiKaisaiBashoJoho);
+                    if (更新モード.equals(row.getJyotai())) {
+                        manager.介護認定審査会開催場所情報の更新(shinsakaiKaisaiBashoJoho);
+                        break;
+                    } else if (削除モード.equals(row.getJyotai())) {
+                        manager.介護認定審査会開催場所情報の削除(shinsakaiKaisaiBashoJoho);
+                        break;
+                    }
+                }
+            }
+            if (追加モード.equals(row.getJyotai())) {
+                manager.介護認定審査会開催場所情報の追加(edit介護認定審査会開催場所情報(row,
+                        new ShinsakaiKaisaiBashoJoho(row.getKaisaibashoCode())));
+            }
+        }
+    }
+    
+    private ShinsakaiKaisaiBashoJoho edit介護認定審査会開催場所情報(dgKaisaibashoIchiran_Row row,
+            ShinsakaiKaisaiBashoJoho shinsakaiKaisaiBashoJoho) {
+        ShinsakaiKaisaiBashoJohoBuilder builder = shinsakaiKaisaiBashoJoho.createBuilderForEdit();
+        builder.set介護認定審査会開催地区コード(new Code(row.getKaisaiChikuCode()));
+        builder.set介護認定審査会開催場所住所(row.getKaisaibashoJusho());
+        builder.set介護認定審査会開催場所名称(row.getKaisaibashoMeisho());
+        builder.set介護認定審査会開催場所電話番号(new TelNo(row.getKaisaibashoTelNo()));
+        if (通常.equals(row.getKaisaibashoJokyo())) {
+            builder.set介護認定審査会開催場所状況(有効);
+        } else if (削除.equals(row.getKaisaibashoJokyo())) {
+            builder.set介護認定審査会開催場所状況(全て);
+        }
+        return builder.build();
+    }
     
     private void setYiChiRanItem(dgKaisaibashoIchiran_Row clickedItem) {
-        clickedItem.setKaisaibashoCode(div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoCode().getValue()); //開催場所コード
-        clickedItem.setKaisaibashoMeisho(div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoMeisho().getValue()); //開催場所名称
-        clickedItem.setKaisaibashoJusho(div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoJusho().getValue()); //開催場所住所
-        clickedItem.setKaisaibashoTelNo(div.getShinakaiKaisaIbashoShosai().getTxtTelNumber().getDomain().getColumnValue()); //電話番号
-        clickedItem.setKaisaibashoJusho(div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoJusho().getValue()); //開催場所住所
-        div.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode().getCode(); // 開催地区コード
-        div.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode().getCodeMeisho(); // 開催地区内容
-        // 開催場所住所状況
-        if (div.getShinakaiKaisaIbashoShosai().getDdlKaisaiBashoJokyo().getSelectedIndex() == 0) {
+        clickedItem.setKaisaibashoCode(div.getTxtKaisaibashoCode().getValue()); 
+        clickedItem.setKaisaibashoMeisho(div.getTxtKaisaibashoMeisho().getValue());
+        clickedItem.setKaisaibashoJusho(div.getTxtKaisaibashoJusho().getValue());
+        clickedItem.setKaisaibashoTelNo(div.getTxtTelNumber().getDomain().getColumnValue());
+        clickedItem.setKaisaibashoJusho(div.getTxtKaisaibashoJusho().getValue());
+        clickedItem.setKaisaiChikuCode(div.getCcdKaisaiChikuCode().getCode().getColumnValue());
+        if (div.getDdlKaisaiBashoJokyo().getSelectedIndex() == 0) {
             clickedItem.setKaisaibashoJokyo(通常);
-        } else if (div.getShinakaiKaisaIbashoShosai().getDdlKaisaiBashoJokyo().getSelectedIndex() == 1) {
+        } else if (div.getDdlKaisaiBashoJokyo().getSelectedIndex() == 1) {
             clickedItem.setKaisaibashoJokyo(削除);
         }
     }
 
-    private void setSelectItem(dgKaisaibashoIchiran_Row clickedItem) { 
-       div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoCode().setValue(clickedItem.getKaisaibashoCode()); //開催場所コード
-       div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoMeisho().setValue(clickedItem.getKaisaibashoMeisho()); //開催場所名称
-       div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoJusho().setValue(clickedItem.getKaisaibashoJusho()); //開催場所住所
-       div.getShinakaiKaisaIbashoShosai().getTxtTelNumber().setDomain(new TelNo(clickedItem.getKaisaibashoTelNo())); //電話番号
-       div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoJusho().setValue(clickedItem.getKaisaibashoJusho()); //開催場所住所
-       if (通常.equals(clickedItem.getKaisaibashoJokyo())) {
-            div.getShinakaiKaisaIbashoShosai().getDdlKaisaiBashoJokyo().setSelectedIndex(0); // 開催場所住所
+    private void setSelectItem(dgKaisaibashoIchiran_Row clickedItem) {
+        div.getTxtKaisaibashoCode().setValue(clickedItem.getKaisaibashoCode());
+        div.getTxtKaisaibashoMeisho().setValue(clickedItem.getKaisaibashoMeisho());
+        div.getTxtKaisaibashoJusho().setValue(clickedItem.getKaisaibashoJusho());
+        div.getTxtTelNumber().setDomain(new TelNo(clickedItem.getKaisaibashoTelNo()));
+        div.getTxtKaisaibashoJusho().setValue(clickedItem.getKaisaibashoJusho());
+        if (通常.equals(clickedItem.getKaisaibashoJokyo())) {
+            div.getDdlKaisaiBashoJokyo().setSelectedIndex(0);
         } else if (削除.equals(clickedItem.getKaisaibashoJokyo())) {
-                div.getShinakaiKaisaIbashoShosai().getDdlKaisaiBashoJokyo().setSelectedIndex(1); // 開催場所住所
+            div.getDdlKaisaiBashoJokyo().setSelectedIndex(1);
         }
-       get開催地区内容(clickedItem);
+        get開催地区内容(clickedItem);
     }
-    
+
     private void set開催場所編集エリア非活性() {
-        div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoCode().setReadOnly(true); // 開催場所コード
-        div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoMeisho().setReadOnly(true); // 開催場所名称
-        div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoJusho().setReadOnly(true); // 開催場所住所
-        div.getShinakaiKaisaIbashoShosai().getTxtTelNumber().setReadOnly(true);  // 電話番号
-        div.getShinakaiKaisaIbashoShosai().getDdlKaisaiBashoJokyo().setReadOnly(true); // 開催場所住所状況
-        div.getShinakaiKaisaIbashoShosai().getBtnback().setDisabled(true);
-        div.getShinakaiKaisaIbashoShosai().getBtnupdate().setDisabled(true);
-        div.getBtnTsuika().setDisabled(false);
+        div.getTxtKaisaibashoCode().setReadOnly(true);
+        div.getTxtKaisaibashoMeisho().setReadOnly(true);
+        div.getTxtKaisaibashoJusho().setReadOnly(true);
+        div.getTxtTelNumber().setReadOnly(true);
+        div.getDdlKaisaiBashoJokyo().setReadOnly(true);
+        div.getCcdKaisaiChikuCode().setReadOnly(true);
+        div.getBtnback().setDisabled(true);
+        div.getBtnupdate().setDisabled(true);
+        div.getBtnTsuika().setDisabled(true);
     }
 
     private void set開催場所編集エリア活性() {
-        div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoCode().setReadOnly(false); // 開催場所コード
-        div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoMeisho().setReadOnly(false); // 開催場所名称
-        div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoJusho().setReadOnly(false); // 開催場所住所
-        div.getShinakaiKaisaIbashoShosai().getTxtTelNumber().setReadOnly(false); // 電話番号
-        div.getShinakaiKaisaIbashoShosai().getDdlKaisaiBashoJokyo().setReadOnly(false); // 開催場所住所状況
-        div.getShinakaiKaisaIbashoShosai().getBtnback().setDisabled(false);
-        div.getShinakaiKaisaIbashoShosai().getBtnupdate().setDisabled(false);
-        div.getBtnTsuika().setDisabled(true);
+        div.getTxtKaisaibashoCode().setReadOnly(false);
+        div.getTxtKaisaibashoMeisho().setReadOnly(false);
+        div.getTxtKaisaibashoJusho().setReadOnly(false);
+        div.getTxtTelNumber().setReadOnly(false);
+        div.getDdlKaisaiBashoJokyo().setReadOnly(false);
+        div.getCcdKaisaiChikuCode().setReadOnly(false);
+        div.getBtnback().setDisabled(false);
+        div.getBtnupdate().setDisabled(false);
+        div.getBtnTsuika().setDisabled(false);
     }
 
     private void clear開催場所編集エリア() {
         div.getShinakaiKaisaIbashoShosai().setJyotai(RString.EMPTY);
-        div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoCode().clearValue(); // 開催場所コード
-        div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoMeisho().clearValue(); // 開催場所名称
-        div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoJusho().clearValue(); // 開催場所住所
-        div.getShinakaiKaisaIbashoShosai().getTxtTelNumber().clearDomain(); // 電話番号
-        div.getShinakaiKaisaIbashoShosai().getDdlKaisaiBashoJokyo().setSelectedIndex(0); // 開催場所住所状況
-        div.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode().load(new CodeShubetsu("5001"));
-        div.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode().clearDisplayedValues();
+        div.getTxtKaisaibashoCode().clearValue();
+        div.getTxtKaisaibashoMeisho().clearValue();
+        div.getTxtKaisaibashoJusho().clearValue();
+        div.getTxtTelNumber().clearDomain();
+        div.getDdlKaisaiBashoJokyo().setSelectedIndex(0);
+        div.getCcdKaisaiChikuCode().load(コード種別);
+        div.getCcdKaisaiChikuCode().clearDisplayedValues();
     }
-    
-     private void get開催地区内容(dgKaisaibashoIchiran_Row clickedItem) {
+
+    private void get開催地区内容(dgKaisaibashoIchiran_Row clickedItem) {
         ICodeInputDiv codeInput = div.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode();
-        codeInput.load(SubGyomuCode.DBE認定支援, new CodeShubetsu("5001"), new Code(clickedItem.getKaisaiChikuCode()));
+        codeInput.load(SubGyomuCode.DBE認定支援, コード種別, new Code(clickedItem.getKaisaiChikuCode()));
     }
 }

@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe5910001;
 
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshoshujiiichiran.IkenshoShujiiIchiranParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5910001.IkenshoShujiiIchiranDiv;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -27,9 +25,7 @@ public class IkenshoShujiiIchiran {
     public ResponseData<IkenshoShujiiIchiranDiv> onLoad(IkenshoShujiiIchiranDiv div) {
         IkenshoShujiiIchiranHandler handler = createHandlerOf(div);
         ResponseData<IkenshoShujiiIchiranDiv> response = new ResponseData<>();
-        ShichosonSecurityJoho 市町村セキュリティ情報
-                = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-        handler.onLoad(市町村セキュリティ情報.get導入形態コード().getKey());
+        handler.onLoad();
         response.data = div;
         return response;
     }

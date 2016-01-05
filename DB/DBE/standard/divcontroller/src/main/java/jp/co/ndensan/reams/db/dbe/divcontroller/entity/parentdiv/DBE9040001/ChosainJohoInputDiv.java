@@ -71,6 +71,8 @@ public class ChosainJohoInputDiv extends Panel {
     private Button btnTorikeshi;
     @JsonProperty("state")
     private RString state;
+    @JsonProperty("hiddenInputDiv")
+    private RString hiddenInputDiv;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -508,6 +510,24 @@ public class ChosainJohoInputDiv extends Panel {
     @JsonProperty("state")
     public void setState(RString state) {
         this.state = state;
+    }
+
+    /*
+     * gethiddenInputDiv
+     * @return hiddenInputDiv
+     */
+    @JsonProperty("hiddenInputDiv")
+    public RString getHiddenInputDiv() {
+        return hiddenInputDiv;
+    }
+
+    /*
+     * sethiddenInputDiv
+     * @param hiddenInputDiv hiddenInputDiv
+     */
+    @JsonProperty("hiddenInputDiv")
+    public void setHiddenInputDiv(RString hiddenInputDiv) {
+        this.hiddenInputDiv = hiddenInputDiv;
     }
 
     // </editor-fold>

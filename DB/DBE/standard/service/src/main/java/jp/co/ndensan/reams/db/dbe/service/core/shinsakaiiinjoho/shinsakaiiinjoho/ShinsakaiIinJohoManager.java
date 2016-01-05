@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.kaigoninteishins
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -61,7 +62,8 @@ public class ShinsakaiIinJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsakaiIinJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiIinJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiIinJohoManager}のインスタンス
      */
     public static ShinsakaiIinJohoManager createInstance() {
         return InstanceProvider.create(ShinsakaiIinJohoManager.class);
@@ -69,6 +71,8 @@ public class ShinsakaiIinJohoManager {
 
     /**
      * 資格コードが資格コードを表す列挙型クラスからコード、名称を取得する。
+     *
+     * @return List<KeyValueDataSource>
      */
     public List<KeyValueDataSource> get資格コードList() {
         List<KeyValueDataSource> 資格コード = new ArrayList<>();
@@ -95,6 +99,8 @@ public class ShinsakaiIinJohoManager {
 
     /**
      * 審査員郵送区分が審査員郵送区分を表す列挙型クラスからコード、名称を取得する。
+     *
+     * @return List<KeyValueDataSource>
      */
     public List<KeyValueDataSource> get審査員郵送区分List() {
         List<KeyValueDataSource> 審査員郵送区分 = new ArrayList<>();
@@ -110,7 +116,7 @@ public class ShinsakaiIinJohoManager {
      * @param 表示条件 RString
      * @return List<ShinsakaiIinJoho>
      */
-    public List<ShinsakaiIinJoho> get審査会委員一覧(RString 表示条件) {
+    public SearchResult<ShinsakaiIinJoho> get審査会委員一覧(RString 表示条件) {
         List<ShinsakaiIinJoho> 審査会委員一覧 = new ArrayList<>();
         boolean is全ての審査会委員 = false;
         if (new RString("key1").equals(表示条件)) {
@@ -119,13 +125,13 @@ public class ShinsakaiIinJohoManager {
         IShinsakaiIinJohoMapper mapper = mapperProvider.create(IShinsakaiIinJohoMapper.class);
         List<ShinsakaiIinJohoEntity> 審査会委員情報 = mapper.get審査会委員情報By表示条件(is全ての審査会委員);
         if (審査会委員情報 == null || 審査会委員情報.isEmpty()) {
-            return 審査会委員一覧;
+            return SearchResult.of(審査会委員一覧, 0, false);
         }
         for (ShinsakaiIinJohoEntity entity : 審査会委員情報) {
             entity.initializeMd5ToEntities();
             審査会委員一覧.add(new ShinsakaiIinJoho(entity));
         }
-        return 審査会委員一覧;
+        return SearchResult.of(審査会委員一覧, 0, false);
     }
 
     /**
@@ -138,8 +144,7 @@ public class ShinsakaiIinJohoManager {
     public int get審査会委員カウント(ShinsakaiIinJohoMapperParameter parameter) {
         IShinsakaiIinJohoMapper mapper = mapperProvider.create(IShinsakaiIinJohoMapper.class);
 
-        int 審査会委員カウント = mapper.get審査会委員カウント(parameter);
-        return 審査会委員カウント;
+        return mapper.get審査会委員カウント(parameter);
     }
 
     /**
@@ -181,6 +186,36 @@ public class ShinsakaiIinJohoManager {
     }
 
     /**
+     * 介護認定審査会委員情報{@link ShinsakaiIinJoho}を保存します。
+     *
+     * @param 介護認定審査会委員情報 介護認定審査会委員情報
+     * @return 追加あり:true、追加なし:false
+     */
+    @Transaction
+    public boolean insert(ShinsakaiIinJoho 介護認定審査会委員情報) {
+        requireNonNull(介護認定審査会委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報"));
+
+        介護認定審査会委員情報Dac.save(介護認定審査会委員情報.toEntity());
+        int count = insert介護認定審査会委員所属機関情報リスト(介護認定審査会委員情報.getKaigoNinteiShinsakaiIinShozokuKikanJohoList());
+        return count == 介護認定審査会委員情報.getKaigoNinteiShinsakaiIinShozokuKikanJohoList().size();
+    }
+
+    /**
+     * 介護認定審査会委員情報{@link ShinsakaiIinJoho}を物理削除します。
+     *
+     * @param 介護認定審査会委員情報 介護認定審査会委員情報
+     * @return 削除あり:true、削除なし:false <br>
+     * いずれかのテーブルに削除があればtrueを返す
+     */
+    @Transaction
+    public boolean deletePhysical(ShinsakaiIinJoho 介護認定審査会委員情報) {
+        requireNonNull(介護認定審査会委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報"));
+
+        deletePhysical介護認定審査会委員所属機関情報(介護認定審査会委員情報.getKaigoNinteiShinsakaiIinShozokuKikanJohoList());
+        return 1 == 介護認定審査会委員情報Dac.deletePhysical(介護認定審査会委員情報.toEntity());
+    }
+
+    /**
      * 介護認定審査会委員所属機関情報{@link KaigoNinteiShinsakaiIinShozokuKikanJoho}を物理削除します。
      *
      * @param 介護認定審査会委員所属機関情報リスト 介護認定審査会委員所属機関情報リスト
@@ -197,5 +232,14 @@ public class ShinsakaiIinJohoManager {
         for (KaigoNinteiShinsakaiIinShozokuKikanJoho 介護認定審査会委員所属機関情報 : 介護認定審査会委員所属機関情報List) {
             介護認定審査会委員所属機関情報Manager.save介護認定審査会委員所属機関情報(介護認定審査会委員所属機関情報);
         }
+    }
+
+    private int insert介護認定審査会委員所属機関情報リスト(List<KaigoNinteiShinsakaiIinShozokuKikanJoho> 介護認定審査会委員所属機関情報List) {
+        int count = 0;
+        for (KaigoNinteiShinsakaiIinShozokuKikanJoho 介護認定審査会委員所属機関情報 : 介護認定審査会委員所属機関情報List) {
+            介護認定審査会委員所属機関情報Manager.save介護認定審査会委員所属機関情報(介護認定審査会委員所属機関情報);
+            count = count + 1;
+        }
+        return count;
     }
 }

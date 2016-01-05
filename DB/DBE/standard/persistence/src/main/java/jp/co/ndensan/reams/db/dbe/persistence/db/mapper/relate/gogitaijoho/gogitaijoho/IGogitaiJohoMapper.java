@@ -28,4 +28,12 @@ public interface IGogitaiJohoMapper {
      * @return GogitaiJohoRelateEntityの{@code list}
      */
     List<GogitaiJohoRelateEntity> select合議体情報リストBy主キー1(GogitaiJohoMapperParameter 合議体情報検索条件);
+
+    /**
+     * 合議体情報作成に合致する合議体情報のリストを取得します。
+     *
+     * @param 合議体情報検索条件 合議体情報検索条件
+     * @return GogitaiJohoRelateEntityの{@code list}
+     */
+    List<GogitaiJohoRelateEntity> selectGogitaiJohoSakusei(GogitaiJohoMapperParameter 合議体情報検索条件);
 }

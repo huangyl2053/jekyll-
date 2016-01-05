@@ -1,0 +1,88 @@
+﻿{
+ "uiContainerName": "DBUUC09021",
+ "displayWizard": false,
+ "subGyomuCode": "DBU",
+ "steps": [
+  {
+   "id": 1,
+   "name": "審査請求書登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0900011",
+     "toLayoutTitle": "審査請求書登録",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0900011",
+     "layoutTitle": "審査請求書登録",
+     "eventName": "登録画面に遷移",
+     "destroy": false,
+     "condition": "追加",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0900021",
+     "toLayoutTitle": "審査請求書登録",
+     "toState": "追加"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0900011",
+     "layoutTitle": "審査請求書登録",
+     "eventName": "登録画面に遷移",
+     "destroy": false,
+     "condition": "修正",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0900021",
+     "toLayoutTitle": "審査請求書登録",
+     "toState": "修正"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0900011",
+     "layoutTitle": "審査請求書登録",
+     "eventName": "登録画面に遷移",
+     "destroy": false,
+     "condition": "削除",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0900021",
+     "toLayoutTitle": "審査請求書登録",
+     "toState": "削除"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0900021",
+     "layoutTitle": "審査請求書登録",
+     "eventName": "一覧に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0900011",
+     "toLayoutTitle": "審査請求書登録",
+     "toState": "default"
+    },
+    {
+     "id": "6",
+     "type": "end",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0900021",
+     "layoutTitle": "審査請求書登録",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

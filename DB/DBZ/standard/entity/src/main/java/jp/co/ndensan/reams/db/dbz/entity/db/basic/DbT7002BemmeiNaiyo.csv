@@ -1,8 +1,8 @@
-﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,A
-shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
-genshobunHihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
-shinsaseikyuTodokedeYMD,UDD015YMD,FlexibleDate,,,,,A
-bemmeishoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,A
-shinsaseikyuKankeiShobunNaiyo,text,RString,,,,,A
-bemmeiNaiyo,text,RString,,,,,A
-bemmeishoSakuseiTeishutsuYMD,UDD015YMD,FlexibleDate,,,,,A
+﻿shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
+genshobunHihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,原処分被保険者番号,A
+shinsaseikyuTodokedeYMD,UDD015YMD,FlexibleDate,,,,,審査請求届出日,A
+bemmeishoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,弁明書作成日,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+shinsaseikyuKankeiShobunNaiyo,text,RString,,,,,審査請求に係る処分内容,A
+bemmeiNaiyo,text,RString,,,,,弁明内容,A
+bemmeishoTeishutsuYMD,UDD015YMD,FlexibleDate,,,,,弁明書提出日,A

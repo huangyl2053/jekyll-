@@ -36,13 +36,22 @@ public class ShikakuTokusoFinder {
     private static final CodeShubetsu CHIKU_CODE_SHUBETSU_0010 = new CodeShubetsu("0010");
 
     /**
+     * コンストラクタです。
+     *
+     *
+     */
+    ShikakuTokusoFinder() {
+
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+    }
+
+    /**
      * 単体テスト用のコンストラクタです。
      *
      * @param mapperProvider mapperProvider
      */
-    public ShikakuTokusoFinder(MapperProvider mapperProvider) {
-
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+    ShikakuTokusoFinder(MapperProvider mapperProvider) {
+        this.mapperProvider = mapperProvider;
     }
 
     /**

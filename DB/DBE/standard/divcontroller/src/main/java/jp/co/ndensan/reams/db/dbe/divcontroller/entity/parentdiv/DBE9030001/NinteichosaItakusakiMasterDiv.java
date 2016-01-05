@@ -11,14 +11,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshali
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * NinteichosaItakusakiMaster のクラスファイル
@@ -50,6 +44,10 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     private RString hdnTxtCodeMeisho;
     @JsonProperty("hdnInputDiv")
     private RString hdnInputDiv;
+    @JsonProperty("hdnSelectID")
+    private RString hdnSelectID;
+    @JsonProperty("hdnShichosonCodeList")
+    private RString hdnShichosonCodeList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -190,6 +188,42 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     @JsonProperty("hdnInputDiv")
     public void setHdnInputDiv(RString hdnInputDiv) {
         this.hdnInputDiv = hdnInputDiv;
+    }
+
+    /*
+     * gethdnSelectID
+     * @return hdnSelectID
+     */
+    @JsonProperty("hdnSelectID")
+    public RString getHdnSelectID() {
+        return hdnSelectID;
+    }
+
+    /*
+     * sethdnSelectID
+     * @param hdnSelectID hdnSelectID
+     */
+    @JsonProperty("hdnSelectID")
+    public void setHdnSelectID(RString hdnSelectID) {
+        this.hdnSelectID = hdnSelectID;
+    }
+
+    /*
+     * gethdnShichosonCodeList
+     * @return hdnShichosonCodeList
+     */
+    @JsonProperty("hdnShichosonCodeList")
+    public RString getHdnShichosonCodeList() {
+        return hdnShichosonCodeList;
+    }
+
+    /*
+     * sethdnShichosonCodeList
+     * @param hdnShichosonCodeList hdnShichosonCodeList
+     */
+    @JsonProperty("hdnShichosonCodeList")
+    public void setHdnShichosonCodeList(RString hdnShichosonCodeList) {
+        this.hdnShichosonCodeList = hdnShichosonCodeList;
     }
 
     /*

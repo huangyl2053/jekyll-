@@ -12,11 +12,6 @@
         FROM 
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
             AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
-        WHERE 
-            <!--<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."dataShutokuKubun" = '1' AND -->
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."gyomuCode" = 'DB'
-        <!--AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."kensakuYusenKubun" = TRUE-->
-        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = #{shikibetsuCode}
     </select>
     
     <resultMap id="ResultMap_UaFt200FindShikibetsuTaishoEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaishadaichojoho.ShikibetsuTaishoRelateEntity" autoMapping="true">

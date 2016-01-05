@@ -6,10 +6,11 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7026ShinKyuHihokenshaNoHenkan;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7026ShinKyuHihokenshaNoHenkan.kyuNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7026ShinKyuHihokenshaNoHenkan.shichosonCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7026ShinKyuHihokenshaNoHenkan.shinNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7026ShinKyuHihokenshaNoHenkanEntity;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7028KakushuShinKyuNoHenkan.kyuNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -81,5 +82,49 @@ public class DbT7026ShinKyuHihokenshaNoHenkanDac implements ISaveable<DbT7026Shi
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 旧被保険者番号の取得します。
+     *
+     * @param 新番号
+     * @return List<DbT7026ShinKyuHihokenshaNoHenkanEntity> 新旧被保険者番号変換
+     */
+    @Transaction
+    public List<DbT7026ShinKyuHihokenshaNoHenkanEntity> get旧被保険者番号(
+            RString 新番号) {
+        requireNonNull(新番号, UrSystemErrorMessages.値がnull.getReplacedMessage("新番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7026ShinKyuHihokenshaNoHenkan.class).
+                where(
+                        eq(shinNo, 新番号)).
+                toList(DbT7026ShinKyuHihokenshaNoHenkanEntity.class);
+    }
+
+    /**
+     * 新被保険者番号の取得します。
+     *
+     * @param 市町村コード
+     * @param 旧番号
+     * @return DbT7026ShinKyuHihokenshaNoHenkanEntity 新旧被保険者番号変換
+     *
+     */
+    @Transaction
+    public DbT7026ShinKyuHihokenshaNoHenkanEntity get新被保険者番号(
+            LasdecCode 市町村コード,
+            RString 旧番号) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(旧番号, UrSystemErrorMessages.値がnull.getReplacedMessage("旧番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7026ShinKyuHihokenshaNoHenkan.class).
+                where(and(
+                                eq(shichosonCode, 市町村コード),
+                                eq(kyuNo, 旧番号))).
+                toObject(DbT7026ShinKyuHihokenshaNoHenkanEntity.class);
     }
 }

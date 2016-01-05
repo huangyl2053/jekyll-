@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -50,8 +51,8 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
         return accessor.select().
                 table(DbT1004ShisetsuNyutaisho.class).
                 where(and(
-                eq(shikibetsuCode, 識別コード),
-                eq(rirekiNo, 履歴番号))).
+                                eq(shikibetsuCode, 識別コード),
+                                eq(rirekiNo, 履歴番号))).
                 toObject(DbT1004ShisetsuNyutaishoEntity.class);
     }
 
@@ -83,14 +84,15 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
         //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
-    
-     /**
+
+    /**
      * 入退所日リストの取得です。
-     * @param 識別コード
-     * @param 台帳種別
-     * @param 入所施設種類
-     * @return List<DbT1004ShisetsuNyutaishoEntity>
-     * @throws NullPointerException 
+     *
+     * @param 識別コード 識別コード
+     * @param 台帳種別 台帳種別
+     * @param 入所施設種類 入所施設種類
+     * @return 入退所日リスト
+     * @throws NullPointerException
      */
     public List<DbT1004ShisetsuNyutaishoEntity> get入退所日(ShikibetsuCode 識別コード,
             RString 台帳種別, RString 入所施設種類) throws NullPointerException {
@@ -100,6 +102,7 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
                 where(and(eq(DbT1004ShisetsuNyutaisho.shikibetsuCode, 識別コード),
                                 eq(DbT1004ShisetsuNyutaisho.daichoShubetsu, 台帳種別),
                                 eq(DbT1004ShisetsuNyutaisho.nyushoShisetsuShurui, 入所施設種類))).
+                order(by(DbT1004ShisetsuNyutaisho.nyushoYMD)).
                 toList(DbT1004ShisetsuNyutaishoEntity.class);
     }
 }

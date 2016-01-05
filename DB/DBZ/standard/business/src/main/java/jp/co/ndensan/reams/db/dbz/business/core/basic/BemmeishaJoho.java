@@ -7,18 +7,14 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.BushoCode;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -54,14 +50,12 @@ public class BemmeishaJoho extends ParentModelBase<BemmeishaJohoIdentifier, DbT7
         requireNonNull(弁明書作成日, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明書作成日"));
         requireNonNull(弁明者枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明者枝番"));
         this.entity = new DbT7003BemmeishaJohoEntity();
-        this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
         this.entity.setShikibetsuCode(識別コード);
         this.entity.setGenshobunHihokenshaNo(原処分被保険者番号);
         this.entity.setShinsaseikyuTodokedeYMD(審査請求届出日);
         this.entity.setBemmeishoSakuseiYMD(弁明書作成日);
         this.entity.setBemmeishaEdaban(弁明者枝番.intValue());
         this.id = new BemmeishaJohoIdentifier(
-                証記載保険者番号,
                 識別コード,
                 原処分被保険者番号,
                 審査請求届出日,
@@ -79,7 +73,6 @@ public class BemmeishaJoho extends ParentModelBase<BemmeishaJohoIdentifier, DbT7
     public BemmeishaJoho(DbT7003BemmeishaJohoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明者情報"));
         this.id = new BemmeishaJohoIdentifier(
-                entity.getShoKisaiHokenshaNo(),
                 entity.getShikibetsuCode(),
                 entity.getGenshobunHihokenshaNo(),
                 entity.getShinsaseikyuTodokedeYMD(),
@@ -102,15 +95,6 @@ public class BemmeishaJoho extends ParentModelBase<BemmeishaJohoIdentifier, DbT7
     }
 
 //TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
-    /**
-     * 証記載保険者番号を返します。
-     *
-     * @return 証記載保険者番号
-     */
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
-    }
-
     /**
      * 識別コードを返します。
      *
@@ -156,42 +140,38 @@ public class BemmeishaJoho extends ParentModelBase<BemmeishaJohoIdentifier, DbT7
         return new Decimal(entity.getBemmeishaEdaban());
     }
 
-    /**
-     * 職員コードを返します。
-     *
-     * @return 職員コード
-     */
-    public Code get職員コード() {
-        return entity.getShokuinCode();
-    }
-
-    /**
-     * 部署コードを返します。
-     *
-     * @return 部署コード
-     */
-    public BushoCode get部署コード() {
-        return entity.getBushoCode();
-    }
-
-    /**
-     * 役職名を返します。
-     *
-     * @return 役職名
-     */
-    public RString get役職名() {
-        return entity.getYakushoskuName();
-    }
-
-    /**
-     * 弁明者氏名を返します。
-     *
-     * @return 弁明者氏名
-     */
-    public AtenaMeisho get弁明者氏名() {
-        return entity.getBemmeishaShimei();
-    }
-
+//    /**
+//     * 職員コードを返します。
+//     *
+//     * @return 職員コード
+//     */
+//    public Code get職員コード() {
+//        return entity.getShokuinCode();
+//    }
+//    /**
+//     * 部署コードを返します。
+//     *
+//     * @return 部署コード
+//     */
+//    public BushoCode get部署コード() {
+//        return entity.getBushoCode();
+//    }
+//    /**
+//     * 役職名を返します。
+//     *
+//     * @return 役職名
+//     */
+//    public RString get役職名() {
+//        return entity.getYakushoskuName();
+//    }
+//    /**
+//     * 弁明者氏名を返します。
+//     *
+//     * @return 弁明者氏名
+//     */
+//    public AtenaMeisho get弁明者氏名() {
+//        return entity.getBemmeishaShimei();
+//    }
     /**
      * {@link DbT7003BemmeishaJohoEntity}のクローンを返します。
      *
@@ -213,8 +193,7 @@ public class BemmeishaJoho extends ParentModelBase<BemmeishaJohoIdentifier, DbT7
     }
 
     /**
-     * 弁明者情報のみを変更対象とします。<br/>
-     * {@link DbT7003BemmeishaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 弁明者情報のみを変更対象とします。<br/> {@link DbT7003BemmeishaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link BemmeishaJoho}
      */
@@ -229,8 +208,7 @@ public class BemmeishaJoho extends ParentModelBase<BemmeishaJohoIdentifier, DbT7
     }
 
     /**
-     * 保持する弁明者情報を削除対象とします。<br/>
-     * {@link DbT7003BemmeishaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する弁明者情報を削除対象とします。<br/> {@link DbT7003BemmeishaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link BemmeishaJoho}
      */

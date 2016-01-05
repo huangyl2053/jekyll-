@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.hihokenshashohakkokanribo.IHihokenshashoHakkoKanriboMapper">
+
+    <resultMap id="resultMap_get証発行管理リスト情報" type="jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.AkasiHakouKanriEntity" autoMapping="true">
+	<id property="hihokenshaNo" column="shoKofuKaishu_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shichosonCode" column="shoKofuKaishu_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="shikibetsuCode" column="shoKofuKaishu_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="kofuYMD" column="shoKofuKaishu_kofuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="yukoKigenYMD" column="shoKofuKaishu_yukoKigenYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kofuJiyu" column="shoKofuKaishu_kofuJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kaishuYMD" column="shoKofuKaishu_kaishuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kaishuJiyu" column="shoKofuKaishu_kaishuJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoYoshikiKubunCode" column="shoKofuKaishu_shoYoshikiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <select id="get証発行管理リスト情報"
+            resultMap="resultMap_get証発行管理リスト情報" 
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshashohakkokanribo.AkasiHakouKanriMybatisParameter" fetchSize="500">
+        SELECT									
+	    ShoKofuKaishu."hihokenshaNo" AS "shoKofuKaishu_hihokenshaNo",							
+	    ShoKofuKaishu."shichosonCode" AS "shoKofuKaishu_shichosonCode",
+            ShoKofuKaishu."shikibetsuCode" AS "shoKofuKaishu_shikibetsuCode",
+            ShoKofuKaishu."kofuYMD" AS "shoKofuKaishu_kofuYMD",
+            ShoKofuKaishu."yukoKigenYMD" AS "shoKofuKaishu_yukoKigenYMD",
+            ShoKofuKaishu."kofuJiyu" AS "shoKofuKaishu_kofuJiyu",
+            ShoKofuKaishu."kaishuYMD" AS "shoKofuKaishu_kaishuYMD",
+            ShoKofuKaishu."kaishuJiyu" AS "shoKofuKaishu_kaishuJiyu",
+            ShoKofuKaishu."shoYoshikiKubunCode" AS "shoKofuKaishu_shoYoshikiKubunCode"								
+	FROM									
+	    rgdb."DbT7037ShoKofuKaishu" AS ShoKofuKaishu								
+	WHERE									
+	    ShoKofuKaishu."logicalDeletedFlag" = 'false'
+	AND									
+	    ShoKofuKaishu."kofuJiyu" IN #{kofuJiyulist}
+        AND									
+	    ShoKofuKaishu."kaishuJiyu" IN #{kaishuJiyulist}
+        AND
+            ShoKofuKaishu."kofuShoShurui" = #{akasihakouMod}
+        <if test="isKoufukayisihi">
+            AND ShoKofuKaishu."kofuYMD" <![CDATA[>=]]> #{koufukayisihi}
+        </if>
+        <if test="isKoufuSiuryouhi">
+            AND ShoKofuKaishu."kofuYMD" <![CDATA[<=]]> #{koufusiuryouhi}
+        </if>
+        <if test="isKasyuuKayisihi">
+            AND ShoKofuKaishu."kaishuYMD" <![CDATA[>=]]> #{kasyuukayisihi}
+        </if>
+        <if test="isKasyuuSiuryouhi">
+            AND ShoKofuKaishu."kaishuYMD" <![CDATA[<=]]> #{kasyuusiuryouhi}
+        </if>							
+	ORDER BY ShoKofuKaishu."hihokenshaNo"			
+    </select>
+</mapper>

@@ -7,12 +7,16 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.KanriKubun;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -59,6 +63,7 @@ public class IkkatsuHakkoRelateEntity implements IDbAccessable {
     private LasdecCode koikinaiTokureiSochimotoShichosonCode;
     private LasdecCode kyuShichosonCode;
     private boolean logicalDeletedFlag;
+    private YMDHMS hakkoShoriTimestamp;
     private RString daichoShubetsu;
     private RString nyushoShisetsuShurui;
     private JigyoshaNo nyushoShisetsuCode;
@@ -67,7 +72,7 @@ public class IkkatsuHakkoRelateEntity implements IDbAccessable {
     private FlexibleDate taishoShoriYMD;
     private FlexibleDate taishoYMD;
     private RString roomKigoNo;
-    private RString rirekiNo;
+    private int rirekiNo;
     private ShinseishoKanriNo shinseishoKanriNo;
     private RString shinseiJokyoKubun;
     private RString shishoCode;
@@ -200,11 +205,11 @@ public class IkkatsuHakkoRelateEntity implements IDbAccessable {
     private RString zanteiKubun;
     private RString keikakuJigyoshaNo;
     private JigyoshaNo itakusakiJigyoshaNo;
-    private JigyoshaNo meisho;
+    private AtenaMeisho meisho;
     private FlexibleDate seinengappiYMD;
     private RString kannaiKangaiKubun;
-    private RString jusho;
-    private RString banchi;
-    private RString katagaki;
+    private AtenaJusho jusho;
+    private AtenaBanchi banchi;
+    private Katagaki katagaki;
     private boolean shisetyuJotaiFlag;
 }

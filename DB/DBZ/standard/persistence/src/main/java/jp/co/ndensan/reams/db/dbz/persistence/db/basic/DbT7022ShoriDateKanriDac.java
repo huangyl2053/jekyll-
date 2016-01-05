@@ -125,4 +125,23 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(shoriEdaban, "0000"))).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
+
+    /**
+     * 処理日付管理マスタテーブルから、抽出期間情報を取得する。
+     *
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity selectKaisiShuryobi() throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, "DBA"),
+                                eq(shoriName, "異動チェックリスト"))).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
 }

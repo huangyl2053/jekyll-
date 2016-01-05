@@ -5,7 +5,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.basic.kijuntsukishichosonjoho.IKijuntsukiShichosonjohoMapper">
     <select id="get新合併市町村の取得" resultMap="resultMap_DbT7055GappeiJohoEntity"
-            parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleDate" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth" fetchSize="500">
         SELECT
         DbT7055GappeiJoho."chiikiNo" as "chiikiNo"
         ,DbT7055GappeiJoho."gappeiShurui" as "gappeiShurui"
@@ -39,7 +39,7 @@
         <result property="kokuhorenDataFromYMD" column="kokuhorenDataFromYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"></result>
     </resultMap>
     <select id="get旧市町村情報を取得" resultMap="resultMap_GappeiShichosonEntity"
-            parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleDate" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth" fetchSize="500">
         SELECT
         DbT7056GappeiShichoson."kyuShichosonCode" as "kyuShichosonCode"
         ,DbT7056GappeiShichoson."kyuHokenshaNo" as "kyuHokenshaNo"
@@ -98,7 +98,7 @@
         <result property="kokuhorenDataFromYMD" column="kokuhorenDataFromYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
     <select id="get広域の旧合併市町村情報を取得" resultMap="resultMap_ShichosonMasterEntity"
-            parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleDate"  fetchSize="500">
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth"  fetchSize="500">
         SELECT
         DbT7051KoseiShichosonMaster."shichosonShokibetsuID" as "shichosonShokibetsuID"
         ,DbT7051KoseiShichosonMaster."shichosonCode" as "shichosonCode"
@@ -176,7 +176,7 @@
         <result property="kokuhorenDataFromYMD" column="kokuhorenDataFromYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
     <select id="get最新の広域構成市町村の取得" resultMap="resultMap_KoseiShichosonMasterEntity"
-            parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleDate" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth" fetchSize="500">
         SELECT
         DbT7051KoseiShichosonMaster."shichosonShokibetsuID" as "shichosonShokibetsuID"
         ,DbT7051KoseiShichosonMaster."shichosonCode" as "shichosonCode"
@@ -209,7 +209,7 @@
         ,DbT7051KoseiShichosonMaster."unyoKeitaiKubun" as "unyoKeitaiKubun"
         ,DbT7055GappeiJoho."gappeiYMD" as "gappeiYMD"
         ,DbT7055GappeiJoho."kokuhorenDataFromYMD" as "kokuhorenDataFromYMD"
-        ,DbT7055GappeiJoho."shichosonCode" as "GappeiJoho_shichosonCode"
+        ,DbT7055GappeiJoho."shichosonCode" as "gappeiJoho_shichosonCode"
         FROM
         rgdb."DbT7051KoseiShichosonMaster" DbT7051KoseiShichosonMaster
         LEFT JOIN
@@ -255,6 +255,6 @@
         <result property="unyoKeitaiKubun" column="unyoKeitaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="gappeiYMD" column="gappeiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="kokuhorenDataFromYMD" column="kokuhorenDataFromYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="GappeiJoho_shichosonCode" column="GappeiJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="gappeiJoho_shichosonCode" column="gappeiJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
     </resultMap>
 </mapper>

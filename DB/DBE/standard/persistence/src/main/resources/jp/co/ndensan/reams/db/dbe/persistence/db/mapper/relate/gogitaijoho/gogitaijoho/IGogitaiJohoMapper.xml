@@ -44,6 +44,44 @@
             </if>
         </where>
     </sql>
+    
+    <select id="selectGogitaiJohoSakusei" resultMap="resultMap_GogitaiJohoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter" fetchSize="500">
+        <include refid="selectGogitaiJohoSakuseiRelateEntity" />
+    </select>
+    
+    <sql id="selectGogitaiJohoSakuseiRelateEntity">
+        SELECT
+        DbT5591GogitaiJoho.*,
+        DbT5592ShinsakaiKaisaiBashoJoho.*,
+        DbT5593GogitaiWariateIinJoho.*,
+        DbT5594ShinsakaiIinJoho.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5591GogitaiJohoMapper.noDeleted_DbT5591GogitaiJoho" />) AS DbT5591GogitaiJoho
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5592ShinsakaiKaisaiBashoJohoMapper.noDeleted_DbT5592ShinsakaiKaisaiBashoJoho" />) AS DbT5592ShinsakaiKaisaiBashoJoho
+        ON
+        DbT5591GogitaiJoho."dbT5591GogitaiJoho_shinsakaiKaisaiBashoCode" = DbT5592ShinsakaiKaisaiBashoJoho."dbT5592ShinsakaiKaisaiBashoJoho_shinsakaiKaisaiBashoCode"
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5593GogitaiWariateIinJohoMapper.noDeleted_DbT5593GogitaiWariateIinJoho" />) AS DbT5593GogitaiWariateIinJoho
+        ON
+        DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiNo" =  DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_gogitaiNo" 
+        AND 
+        DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanKaishiYMD" =  DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_gogitaiYukoKikanKaishiYMD" 
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.noDeleted_DbT5594ShinsakaiIinJoho" />) AS DbT5594ShinsakaiIinJoho
+        ON
+        DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" = DbT5594ShinsakaiIinJoho."dbT5594ShinsakaiIinJoho_shinsakaiIinCode"
+        <where>
+            <if test="isNowYukoGogitai">
+                AND DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> #{usesGogitaiYukoKikanKaishiYMD}
+                AND #{usesGogitaiYukoKikanKaishiYMD} <![CDATA[<=]]> DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanShuryoYMD"
+            </if>
+        </where>
+        ORDER BY 
+            DbT5591GogitaiJoho."gogitaiNo",
+            DbT5593GogitaiWariateIinJoho."gogitaichoKubunCode" ASC, 
+            DbT5593GogitaiWariateIinJoho."shinsakaiIinCode" DESC
+    </sql>
 
     <resultMap id="resultMap_GogitaiJohoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaijoho.GogitaiJohoRelateEntity" autoMapping="true">
         <id column="dbT5591GogitaiJoho_gogitaiNo"/>

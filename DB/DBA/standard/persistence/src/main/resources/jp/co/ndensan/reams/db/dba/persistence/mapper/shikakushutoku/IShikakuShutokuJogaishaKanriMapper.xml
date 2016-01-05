@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 資格取得除外者の取得のマッピング用XMLです。 -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.mapper.shikakushutoku.IShikakuShutokuJogaishaKanriMapper">
+    <select id="get資格取得除外者一覧" resultMap="resultMap_ShikakuShutokuJogaishaKanriEntity"  fetchSize="500">
+        SELECT
+        DbT1009ShikakuShutokuJogaisha."shikibetsuCode" AS "shikibetsuCode"
+        ,DbT1009ShikakuShutokuJogaisha."rirekiNo" AS "rirekiNo"
+        ,DbT1009ShikakuShutokuJogaisha."shichosonCode" AS "shichosonCode"
+        ,DbT1009ShikakuShutokuJogaisha."shikakuShutokuJogaiRiyu" AS "shikakuShutokuJogaiRiyu"
+        ,DbT1009ShikakuShutokuJogaisha."shikakuShutokuJogaiYMD" AS "shikakuShutokuJogaiYMD"
+        ,DbT1009ShikakuShutokuJogaisha."shikakuShutokuJogaiKaijoYMD" AS "shikakuShutokuJogaiKaijoYMD"
+        FROM
+        rgdb."DbT1009ShikakuShutokuJogaisha" DbT1009ShikakuShutokuJogaisha
+        WHERE
+        DbT1009ShikakuShutokuJogaisha."isDeleted" <![CDATA[<>]]> TRUE
+        ORDER BY DbT1009ShikakuShutokuJogaisha."rirekiNo"
+    </select>
+    <resultMap id="resultMap_ShikakuShutokuJogaishaKanriEntity" type="jp.co.ndensan.reams.db.dba.entity.db.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriEntity" autoMapping="true">
+        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="rirekiNo" column="rirekiNo" />
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="shikakuShutokuJogaiRiyu" column="shikakuShutokuJogaiRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuShutokuJogaiYMD" column="shikakuShutokuJogaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuShutokuJogaiKaijoYMD" column="shikakuShutokuJogaiKaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+
+    <select id="get宛名情報" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriParameter" fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho"/>
+        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+        WHERE
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = #{識別コード}
+    </select>
+    <resultMap id="resultMap_getIkkatsuHakkoRelateEntity" type="jp.co.ndensan.reams.db.dba.entity.db.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriEntity">
+        <result property="meisho"                             column="ShikibetsuTaisho_meisho"                             typeHandler="AtenaMeishoTypeHandler" />
+        <result property="seinengappiYMD"                     column="ShikibetsuTaisho_seinengappiYMD"                     typeHandler="FlexibleDateTypeHandler" />
+        <result property="seibetsuCode"                       column="ShikibetsuTaisho_seibetsuCode"                       typeHandler="RStringTypeHandler" />
+        <result property="juminJotaiCode"                     column="ShikibetsuTaisho_juminJotaiCode"                     typeHandler="RStringTypeHandler" />
+
+    </resultMap>
+
+    <select id="get除外期間重複チェック" resultType="int"  parameterType="jp.co.ndensan.reams.db.dba.entity.db.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriEntity" >
+        SELECT
+        Count(*)
+        FROM    rgdb."DbT1009ShikakuShutokuJogaisha" DbT1009ShikakuShutokuJogaisha
+        WHERE   DbT1009ShikakuShutokuJogaisha."shikibetsuCode" = #{shikibetsuCode}
+
+        AND     DbT1009ShikakuShutokuJogaisha."isDeleted" <![CDATA[<>]]> TRUE
+        AND   ( (#{shikakuShutokuJogaiYMD}  <![CDATA[<]]> DbT1009ShikakuShutokuJogaisha."shikakuShutokuJogaiKaijoYMD"
+        AND DbT1009ShikakuShutokuJogaisha."shikakuShutokuJogaiKaijoYMD"  <![CDATA[<=]]> #{shikakuShutokuJogaiKaijoYMD}
+        )
+        OR
+        (
+        #{shikakuShutokuJogaiYMD} <![CDATA[<=]]>  DbT1009ShikakuShutokuJogaisha."shikakuShutokuJogaiYMD"
+        AND DbT1009ShikakuShutokuJogaisha."shikakuShutokuJogaiYMD"  <![CDATA[<]]> #{shikakuShutokuJogaiKaijoYMD}
+        )
+        OR
+        (
+        DbT1009ShikakuShutokuJogaisha."shikakuShutokuJogaiYMD" <![CDATA[<=]]> #{shikakuShutokuJogaiYMD}
+        AND  #{shikakuShutokuJogaiKaijoYMD}  <![CDATA[<=]]> DbT1009ShikakuShutokuJogaisha."shikakuShutokuJogaiKaijoYMD"
+        )
+        )
+    </select>
+
+    <select id="get履歴番号" resultMap="resultMap_DbT1009ShikakuShutokuJogaishaEntity"  fetchSize="500">
+        SELECT MAX(DbT1009ShikakuShutokuJogaisha."rirekiNo") as "rirekiNo"
+        FROM rgdb."DbT1009ShikakuShutokuJogaisha" DbT1009ShikakuShutokuJogaisha
+        WHERE DbT1009ShikakuShutokuJogaisha."shikibetsuCode" = #{shikibetsuCode}
+    </select>
+    <resultMap id="resultMap_DbT1009ShikakuShutokuJogaishaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity" autoMapping="true">
+        <result property="rirekiNo" column="rirekiNo" />
+    </resultMap>
+</mapper>

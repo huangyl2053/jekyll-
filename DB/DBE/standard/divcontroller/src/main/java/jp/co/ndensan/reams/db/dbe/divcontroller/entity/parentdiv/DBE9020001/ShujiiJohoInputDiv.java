@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -60,6 +61,10 @@ public class ShujiiJohoInputDiv extends Panel {
     private Button btnKakutei;
     @JsonProperty("btnTorikeshi")
     private Button btnTorikeshi;
+    @JsonProperty("state")
+    private RString state;
+    @JsonProperty("hiddenInputDiv")
+    private RString hiddenInputDiv;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -407,6 +412,42 @@ public class ShujiiJohoInputDiv extends Panel {
     @JsonProperty("btnTorikeshi")
     public void setBtnTorikeshi(Button btnTorikeshi) {
         this.btnTorikeshi = btnTorikeshi;
+    }
+
+    /*
+     * getstate
+     * @return state
+     */
+    @JsonProperty("state")
+    public RString getState() {
+        return state;
+    }
+
+    /*
+     * setstate
+     * @param state state
+     */
+    @JsonProperty("state")
+    public void setState(RString state) {
+        this.state = state;
+    }
+
+    /*
+     * gethiddenInputDiv
+     * @return hiddenInputDiv
+     */
+    @JsonProperty("hiddenInputDiv")
+    public RString getHiddenInputDiv() {
+        return hiddenInputDiv;
+    }
+
+    /*
+     * sethiddenInputDiv
+     * @param hiddenInputDiv hiddenInputDiv
+     */
+    @JsonProperty("hiddenInputDiv")
+    public void setHiddenInputDiv(RString hiddenInputDiv) {
+        this.hiddenInputDiv = hiddenInputDiv;
     }
 
     // </editor-fold>
