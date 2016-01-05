@@ -10,3 +10,4 @@ shikyuGendoKijungaku,numeric,Decimal,,,,,市町村特別給付用支給限度基
 kyufuritsuHikisageAriFlag,bool,boolean,,,,,市町村特別給付用給付率引下有フラグ,A
 torokuYMD,UDD015YMD,FlexibleDate,,,,,登録年月日,A
 henkoYMD,UDD015YMD,FlexibleDate,,,,,変更年月日,A
+logicalDeletedFlag,bool,boolean,,,,,論理削除フラグ,A

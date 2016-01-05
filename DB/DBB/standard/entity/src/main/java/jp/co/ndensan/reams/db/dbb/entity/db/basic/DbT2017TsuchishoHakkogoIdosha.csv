@@ -1,0 +1,11 @@
+﻿reportID,UDD032ReportId,ReportId,,,,,帳票ID,A
+chohyosakuseiTimestamp,UDD018YMDHMS,YMDHMS,,,,,帳票作成日時,A
+tsuchishoNo,DbUDD008TsuchishoNo,TsuchishoNo,,,,,通知書番号,A
+fukaNendo,UDD012YSeireki,FlexibleYear,,,,,賦課年度,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+keisanTimestamp,UDD018YMDHMS,YMDHMS,,,,,計算処理日時,A
+gaitoRemban,int4,int,,,,,該当連番,A
+idoYMD,UDD015YMD,FlexibleDate,,,,,異動年月日,A
+idoNaiyo,varchar,RString,,,,,異動内容,A
+idoAriFlag,bool,boolean,,,,,異動ありフラグ,A

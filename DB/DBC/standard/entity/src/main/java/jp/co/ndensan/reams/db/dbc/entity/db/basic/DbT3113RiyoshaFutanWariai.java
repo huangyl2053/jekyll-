@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 利用者負担割合テーブルの項目定義クラスです。
  */
 public enum DbT3113RiyoshaFutanWariai implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -65,23 +65,23 @@ public enum DbT3113RiyoshaFutanWariai implements IColumnDefinition {
     hanteiYMD(2147483647, 0),
     /**
      * 判定区分
-     * <br/>1：年次判定　2：異動分判定　3：過年度分判定　3：即時更正
+     * <br/>1：年次判定　2：異動分判定　3：過年度分判定　4：即時更正
      */
     hanteiKubun(1, 0),
     /**
      * 更正事由
-     * <br/>コードマスタ（DBD　種別=999）
-     * <br/>00：当初（継続、新規認定）
-     * <br/>10：本人所得更正
-     * <br/>20：世帯員所得更正
-     * <br/>30：世帯構成変更
+     * <br/>コードマスタ（DBD　種別=999）
+     * <br/>00：当初（継続、新規認定）
+     * <br/>10：本人所得更正
+     * <br/>20：世帯員所得更正
+     * <br/>30：世帯構成変更
      * <br/>40: その他（即時判定など）
      */
     koseiJiyu(2147483647, 0),
     /**
      * 発行区分
-     * <br/>0：未発行
-     * <br/>1：一括発行で発行済み。
+     * <br/>0：未発行
+     * <br/>1：一括発行で発行済み。
      * <br/>2：単票発行で発行済み。
      */
     hakoKubun(1, 0),
@@ -92,7 +92,11 @@ public enum DbT3113RiyoshaFutanWariai implements IColumnDefinition {
     /**
      * 交付日
      */
-    kofuYMD(2147483647, 0);
+    kofuYMD(2147483647, 0),
+    /**
+     * 論理削除フラグ
+     */
+    logicalDeletedFlag(1, 0);
 
     private final int maxLength;
     private final int scale;

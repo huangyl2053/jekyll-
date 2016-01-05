@@ -1,12 +1,12 @@
-package jp.co.ndensan.reams.db.dbz.entity.db.basic;
+package jp.co.ndensan.reams.db.dbb.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 償還受領委任契約者Aliveテーブルの項目定義クラスです。
+ * 賦課減免Newestテーブルの項目定義クラスです。
  */
-public enum DbV3078ShokanJuryoininKeiyakusha implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+public enum DbV2004Gemmen implements IColumnDefinition {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -40,17 +40,17 @@ public enum DbV3078ShokanJuryoininKeiyakusha implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * hihokenshaNo
+     * choteiNendo
      */
-    hihokenshaNo(2147483647, 0),
+    choteiNendo(2147483647, 0),
     /**
-     * shoKisaiHokenshaNo
+     * fukaNendo
      */
-    shoKisaiHokenshaNo(2147483647, 0),
+    fukaNendo(2147483647, 0),
     /**
-     * uketsukeYMD
+     * tsuchishoNo
      */
-    uketsukeYMD(2147483647, 0),
+    tsuchishoNo(2147483647, 0),
     /**
      * rirekiNo
      */
@@ -60,66 +60,58 @@ public enum DbV3078ShokanJuryoininKeiyakusha implements IColumnDefinition {
      */
     shinseiYMD(2147483647, 0),
     /**
-     * jigyoshaKeiyakuNo
-     */
-    jigyoshaKeiyakuNo(10, 0),
-    /**
-     * keiyakuServiceShurui
-     */
-    keiyakuServiceShurui(1, 0),
-    /**
      * ketteiYMD
      */
     ketteiYMD(2147483647, 0),
     /**
-     * shoninKekkaKubun
+     * torikeshiYMD
      */
-    shoninKekkaKubun(1, 0),
+    torikeshiYMD(2147483647, 0),
     /**
-     * juryoininKaishiYMD
+     * jotaiKubun
      */
-    juryoininKaishiYMD(2147483647, 0),
+    jotaiKubun(1, 0),
     /**
-     * juryoininShuryoYMD
+     * sakuseiKubun
      */
-    juryoininShuryoYMD(2147483647, 0),
+    sakuseiKubun(1, 0),
     /**
-     * keiyakuNo
+     * shinseiJiyu
      */
-    keiyakuNo(8, 0),
+    shinseiJiyu(2147483647, 0),
     /**
-     * fuShoninRiyu
+     * gemmenJiyuCode
      */
-    fuShoninRiyu(80, 0),
+    gemmenJiyuCode(2147483647, 0),
     /**
-     * hiyoGakuGokei
+     * gemmenJiyu
      */
-    hiyoGakuGokei(9, 0),
+    gemmenJiyu(2147483647, 0),
     /**
-     * hokenTaishoHiyoGaku
+     * gemmenTorikeshiJiyuCode
      */
-    hokenTaishoHiyoGaku(9, 0),
+    gemmenTorikeshiJiyuCode(2147483647, 0),
     /**
-     * riyoshaJikoFutanGaku
+     * gemmenTorikeshiJiyu
      */
-    riyoshaJikoFutanGaku(9, 0),
+    gemmenTorikeshiJiyu(2147483647, 0),
     /**
-     * hokenKyufuhiGaku
+     * shinseiGemmenGaku
      */
-    hokenKyufuhiGaku(9, 0),
+    shinseiGemmenGaku(131089, 0),
     /**
-     * shoninKekkaTsuchiSakuseiYMD
+     * ketteiGemmenGaku
      */
-    shoninKekkaTsuchiSakuseiYMD(2147483647, 0),
+    ketteiGemmenGaku(131089, 0),
     /**
-     * shoninKekkaTsuchiSaiHakkoKubun
+     * torikeshiGemmenGaku
      */
-    shoninKekkaTsuchiSaiHakkoKubun(1, 0);
+    torikeshiGemmenGaku(131089, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbV3078ShokanJuryoininKeiyakusha(int maxLength, int scale) {
+    private DbV2004Gemmen(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT2010FukaErrorList implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -49,6 +49,14 @@ public enum DbT2010FukaErrorList implements IColumnDefinition {
      */
     internalReportId(128, 0),
     /**
+     * 賦課年度
+     */
+    fukaNendo(2147483647, 0),
+    /**
+     * 通知書番号
+     */
+    tsuchishoNo(2147483647, 0),
+    /**
      * 内部帳票作成日時
      */
     internalReportCreationDateTime(2147483647, 0),
@@ -61,18 +69,6 @@ public enum DbT2010FukaErrorList implements IColumnDefinition {
      */
     batchStartingDateTime(2147483647, 0),
     /**
-     * 処理区分コード
-     */
-    shoriKubunCode(2147483647, 0),
-    /**
-     * 賦課年度
-     */
-    fukaNendo(2147483647, 0),
-    /**
-     * 通知書番号
-     */
-    tsuchishoNo(2147483647, 0),
-    /**
      * エラーコード
      */
     errorCode(2147483647, 0),
@@ -83,7 +79,27 @@ public enum DbT2010FukaErrorList implements IColumnDefinition {
     /**
      * 識別コード
      */
-    shikibetsuCode(2147483647, 0);
+    shikibetsuCode(2147483647, 0),
+    /**
+     * 処理区分コード
+     */
+    shoriKubunCode(2147483647, 0),
+    /**
+     * 資格取得日
+     */
+    shikakuShutokuYMD(2147483647, 0),
+    /**
+     * 資格取得事由
+     */
+    shikakuShutokuJiyu(2, 0),
+    /**
+     * 資格喪失日
+     */
+    shikakuSoshitsuYMD(2147483647, 0),
+    /**
+     * 資格喪失事由
+     */
+    shikakuSoshitsuJiyu(2, 0);
 
     private final int maxLength;
     private final int scale;

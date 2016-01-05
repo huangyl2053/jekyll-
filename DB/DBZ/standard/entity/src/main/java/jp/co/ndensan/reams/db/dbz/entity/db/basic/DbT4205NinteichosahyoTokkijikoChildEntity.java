@@ -1,20 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import java.util.Objects;
 
 /**
  * 認定調査票（特記情報）（子）テーブルのエンティティクラスです。
  */
 public class DbT4205NinteichosahyoTokkijikoChildEntity extends DbTableEntityBase<DbT4205NinteichosahyoTokkijikoChildEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4205NinteichosahyoTokkijikoChild");
 
@@ -27,20 +30,18 @@ public class DbT4205NinteichosahyoTokkijikoChildEntity extends DbTableEntityBase
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private RString shinseishoKanriNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
     private int ninteichosaRirekiNo;
     @PrimaryKey
     private RString ninteichosaTokkijikoNo;
     @PrimaryKey
-    private RString ninteichosaTokkijikoRenban;
+    private int ninteichosaTokkijikoRemban;
     @PrimaryKey
     private RString tokkijikoTextImageKubun;
     @PrimaryKey
     private Code genponMaskKubun;
     private RString tokkiJiko;
-    private RDateTime tokkiJikoImageSharedFileId;
-    private RDateTime tokkiJikoMaskingImageSharedFileId;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -95,7 +96,7 @@ public class DbT4205NinteichosahyoTokkijikoChildEntity extends DbTableEntityBase
      * 
      * @return 申請書管理番号
      */
-    public RString getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
@@ -106,7 +107,7 @@ public class DbT4205NinteichosahyoTokkijikoChildEntity extends DbTableEntityBase
      * 
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(RString shinseishoKanriNo) {
+    public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -128,7 +129,7 @@ public class DbT4205NinteichosahyoTokkijikoChildEntity extends DbTableEntityBase
      * 
      * @param ninteichosaRirekiNo 認定調査依頼履歴番号
      */
-    public void setNinteichosaRirekiNo(int ninteichosaRirekiNo) {
+    public void setNinteichosaRirekiNo(@Nonnull int ninteichosaRirekiNo) {
         this.ninteichosaRirekiNo = ninteichosaRirekiNo;
     }
 
@@ -146,7 +147,7 @@ public class DbT4205NinteichosahyoTokkijikoChildEntity extends DbTableEntityBase
      * 
      * @param ninteichosaTokkijikoNo 認定調査特記事項番号
      */
-    public void setNinteichosaTokkijikoNo(RString ninteichosaTokkijikoNo) {
+    public void setNinteichosaTokkijikoNo(@Nonnull RString ninteichosaTokkijikoNo) {
         this.ninteichosaTokkijikoNo = ninteichosaTokkijikoNo;
     }
 
@@ -155,17 +156,17 @@ public class DbT4205NinteichosahyoTokkijikoChildEntity extends DbTableEntityBase
      * 
      * @return 認定調査特記事項連番
      */
-    public RString getNinteichosaTokkijikoRenban() {
-        return ninteichosaTokkijikoRenban;
+    public int getNinteichosaTokkijikoRemban() {
+        return ninteichosaTokkijikoRemban;
     }
 
     /**
      * 認定調査特記事項連番のsetメソッドです。
      * 
-     * @param ninteichosaTokkijikoRenban 認定調査特記事項連番
+     * @param ninteichosaTokkijikoRemban 認定調査特記事項連番
      */
-    public void setNinteichosaTokkijikoRenban(RString ninteichosaTokkijikoRenban) {
-        this.ninteichosaTokkijikoRenban = ninteichosaTokkijikoRenban;
+    public void setNinteichosaTokkijikoRemban(@Nonnull int ninteichosaTokkijikoRemban) {
+        this.ninteichosaTokkijikoRemban = ninteichosaTokkijikoRemban;
     }
 
     /**
@@ -186,7 +187,7 @@ public class DbT4205NinteichosahyoTokkijikoChildEntity extends DbTableEntityBase
      * 
      * @param tokkijikoTextImageKubun 特記事項テキスト・イメージ区分
      */
-    public void setTokkijikoTextImageKubun(RString tokkijikoTextImageKubun) {
+    public void setTokkijikoTextImageKubun(@Nonnull RString tokkijikoTextImageKubun) {
         this.tokkijikoTextImageKubun = tokkijikoTextImageKubun;
     }
 
@@ -208,7 +209,7 @@ public class DbT4205NinteichosahyoTokkijikoChildEntity extends DbTableEntityBase
      * 
      * @param genponMaskKubun 原本マスク区分
      */
-    public void setGenponMaskKubun(Code genponMaskKubun) {
+    public void setGenponMaskKubun(@Nonnull Code genponMaskKubun) {
         this.genponMaskKubun = genponMaskKubun;
     }
 
@@ -217,6 +218,7 @@ public class DbT4205NinteichosahyoTokkijikoChildEntity extends DbTableEntityBase
      * 
      * @return 特記事項
      */
+    @CheckForNull
     public RString getTokkiJiko() {
         return tokkiJiko;
     }
@@ -231,46 +233,10 @@ public class DbT4205NinteichosahyoTokkijikoChildEntity extends DbTableEntityBase
     }
 
     /**
-     * 特記事項イメージ共有ファイルIDのgetメソッドです。
-     * 
-     * @return 特記事項イメージ共有ファイルID
-     */
-    public RDateTime getTokkiJikoImageSharedFileId() {
-        return tokkiJikoImageSharedFileId;
-    }
-
-    /**
-     * 特記事項イメージ共有ファイルIDのsetメソッドです。
-     * 
-     * @param tokkiJikoImageSharedFileId 特記事項イメージ共有ファイルID
-     */
-    public void setTokkiJikoImageSharedFileId(RDateTime tokkiJikoImageSharedFileId) {
-        this.tokkiJikoImageSharedFileId = tokkiJikoImageSharedFileId;
-    }
-
-    /**
-     * 特記事項マスキングイメージ共有ファイルIDのgetメソッドです。
-     * 
-     * @return 特記事項マスキングイメージ共有ファイルID
-     */
-    public RDateTime getTokkiJikoMaskingImageSharedFileId() {
-        return tokkiJikoMaskingImageSharedFileId;
-    }
-
-    /**
-     * 特記事項マスキングイメージ共有ファイルIDのsetメソッドです。
-     * 
-     * @param tokkiJikoMaskingImageSharedFileId 特記事項マスキングイメージ共有ファイルID
-     */
-    public void setTokkiJikoMaskingImageSharedFileId(RDateTime tokkiJikoMaskingImageSharedFileId) {
-        this.tokkiJikoMaskingImageSharedFileId = tokkiJikoMaskingImageSharedFileId;
-    }
-
-    /**
      * このエンティティの主キーが他の{@literal DbT4205NinteichosahyoTokkijikoChildEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4205NinteichosahyoTokkijikoChildEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -287,7 +253,7 @@ public class DbT4205NinteichosahyoTokkijikoChildEntity extends DbTableEntityBase
         if (!Objects.equals(this.ninteichosaTokkijikoNo, other.ninteichosaTokkijikoNo)) {
             return false;
         }
-        if (!Objects.equals(this.ninteichosaTokkijikoRenban, other.ninteichosaTokkijikoRenban)) {
+        if (this.ninteichosaTokkijikoRemban != other.ninteichosaTokkijikoRemban) {
             return false;
         }
         if (!Objects.equals(this.tokkijikoTextImageKubun, other.tokkijikoTextImageKubun)) {
@@ -307,12 +273,10 @@ public class DbT4205NinteichosahyoTokkijikoChildEntity extends DbTableEntityBase
         this.shinseishoKanriNo = entity.shinseishoKanriNo;
         this.ninteichosaRirekiNo = entity.ninteichosaRirekiNo;
         this.ninteichosaTokkijikoNo = entity.ninteichosaTokkijikoNo;
-        this.ninteichosaTokkijikoRenban = entity.ninteichosaTokkijikoRenban;
+        this.ninteichosaTokkijikoRemban = entity.ninteichosaTokkijikoRemban;
         this.tokkijikoTextImageKubun = entity.tokkijikoTextImageKubun;
         this.genponMaskKubun = entity.genponMaskKubun;
         this.tokkiJiko = entity.tokkiJiko;
-        this.tokkiJikoImageSharedFileId = entity.tokkiJikoImageSharedFileId;
-        this.tokkiJikoMaskingImageSharedFileId = entity.tokkiJikoMaskingImageSharedFileId;
     }
 
     /**
@@ -321,8 +285,9 @@ public class DbT4205NinteichosahyoTokkijikoChildEntity extends DbTableEntityBase
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, ninteichosaRirekiNo, ninteichosaTokkijikoNo, ninteichosaTokkijikoRenban, tokkijikoTextImageKubun, genponMaskKubun, tokkiJiko, tokkiJikoImageSharedFileId, tokkiJikoMaskingImageSharedFileId);
+        return super.toMd5(shinseishoKanriNo, ninteichosaRirekiNo, ninteichosaTokkijikoNo, ninteichosaTokkijikoRemban, tokkijikoTextImageKubun, genponMaskKubun, tokkiJiko);
     }
 
 // </editor-fold>
+
 }

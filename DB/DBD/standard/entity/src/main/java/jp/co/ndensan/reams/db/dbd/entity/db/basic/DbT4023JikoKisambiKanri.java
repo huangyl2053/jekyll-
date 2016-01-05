@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 時効起算日管理テーブルの項目定義クラスです。
  */
 public enum DbT4023JikoKisambiKanri implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -57,7 +57,7 @@ public enum DbT4023JikoKisambiKanri implements IColumnDefinition {
     fukaNendo(2147483647, 0),
     /**
      * 特徴・普徴区分
-     * <br/>1：特別徴収
+     * <br/>1：特別徴収
      * <br/>2：普通徴収
      */
     tokucho_FuchoKubun(1, 0),
@@ -81,7 +81,11 @@ public enum DbT4023JikoKisambiKanri implements IColumnDefinition {
      * 時効起算日区分
      * <br/>1:納期限翌日（収）,2:督促状発行日（収）,3:収入日（収）,4:債務者の債務の承認,5:差押,6:仮差押,7:仮処分,8:裁判上の請求等、被保険者に対する請求,9:不明（調定無し）（収）,A:その他,B:分納契約日（収）
      */
-    jikoKisanYMDKubun(1, 0);
+    jikoKisanYMDKubun(1, 0),
+    /**
+     * 論理削除フラグ
+     */
+    logicalDeletedFlag(1, 0);
 
     private final int maxLength;
     private final int scale;

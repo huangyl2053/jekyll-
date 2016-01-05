@@ -1,15 +1,12 @@
-package jp.co.ndensan.reams.db.dbx.entity.db.basic;
+package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
- * DbT7061JuryoIninKeiyakuJigyoshaテーブルの項目定義クラスです。
+ * 福祉用具商品テーブルの項目定義クラスです。
  */
-@OnNextSchema("rgdb")
-public enum DbT7061JuryoIninKeiyakuJigyosha implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+public enum DbT3117FukushiyoguShohin implements IColumnDefinition {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -43,49 +40,41 @@ public enum DbT7061JuryoIninKeiyakuJigyosha implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * 受領委任契約事業者番号
+     * 商品番号
      */
-    jigyoshaNo(2147483647, 0),
+    shohinNo(4, 0),
     /**
-     * 受領委任契約開始日
+     * 管理開始年月日
      */
-    keiyakuKaishiYMD(2147483647, 0),
+    kanriKaishiYMD(2147483647, 0),
     /**
-     * 受領委任契約終了日
+     * 管理終了年月日
      */
-    keiyakuShuryoYMD(2147483647, 0),
+    kanriShuryoYMD(2147483647, 0),
     /**
-     * 契約サービス種別
+     * 商品名
      */
-    serviceShubetsuCode(1, 0),
+    shohinmei(20, 0),
     /**
-     * 契約事業者郵便番号
+     * 製造事業者名
      */
-    jigyoshaYubinNo(2147483647, 0),
+    seizoJigyoshamei(20, 0),
     /**
-     * 契約事業者住所
+     * 品目コード
      */
-    jigyoshaJusho(2147483647, 0),
-    /**
-     * 契約事業者電話番号
-     */
-    jigyoshaTelNo(2147483647, 0),
-    /**
-     * 契約事業者FAX番号
-     */
-    jigyoshaFaxNo(2147483647, 0);
+    hinmokuCode(20, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT7061JuryoIninKeiyakuJigyosha(int maxLength, int scale) {
+    private DbT3117FukushiyoguShohin(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -94,7 +83,7 @@ public enum DbT7061JuryoIninKeiyakuJigyosha implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

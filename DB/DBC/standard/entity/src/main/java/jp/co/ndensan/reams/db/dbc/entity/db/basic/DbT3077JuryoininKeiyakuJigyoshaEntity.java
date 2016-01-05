@@ -8,21 +8,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import java.util.Objects;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 受領委任契約事業者テーブルのエンティティクラスです。
  */
 public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT3077JuryoininKeiyakuJigyoshaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3077JuryoininKeiyakuJigyosha");
 
@@ -35,38 +36,32 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private RString jigyoshaKeiyakuNo;
-    @PrimaryKey
+    private RString keiyakuJigyoshaNo;
     private FlexibleDate kaishiYMD;
-    @PrimaryKey
-    private Decimal rirekiNo;
     private FlexibleDate shuryoYMD;
-    private FlexibleDate todokedeYMD;
-    private RString todokedeAddress;
-    private RString todokedeJigyoshaName;
-    private RString todokedeDaihyoshaName;
+    private RString keiyakuShurui;
+    private AtenaMeisho keiyakuJigyoshaName;
+    private AtenaKanaMeisho keiyakuJigyoshaKanaName;
+    private YubinNo keiyakuJigyoshaYubinNo;
+    private AtenaJusho keiyakuJigyoshaJusho;
+    private AtenaMeisho keiyakuDaihyoshaName;
+    private TelNo keiyakuJigyoshaTelNo;
+    private TelNo keiyakuJigyoshaFaxNo;
+    private YubinNo sofusakiYubinNo;
+    private AtenaJusho sofusakiJusho;
+    private RString sofusakiBusho;
+    private AtenaMeisho sofusakiJigyoshaName;
+    private AtenaKanaMeisho sofusakiJigyoshaKanaName;
     private KinyuKikanCode kinyuKikanCode;
     private KinyuKikanShitenCode shitenCode;
     private RString kozaShubetsu;
     private RString kozaNo;
-    private RString tsuchoKigo;
-    private RString tsuchoNo;
-    private AtenaKanaMeisho kozaMeiginin;
-    private AtenaMeisho kozaMeigininKanji;
-    private TelNo jigyoshaFaxNo;
-    private FlexibleDate keiyakuTorokuYMD;
-    private RString sofusakiBusho;
-    private RString eigyoKeitai;
-    private boolean jutakuKaishuKeiyakuUmu;
-    private boolean tokuteiFukushiYoguHanbaiKeiyakuUmu;
-    private boolean shokanbaraiKyufuKeiyakuUmu;
-    private boolean kogakuKyufuKeiyakuUmu;
-    private JigyoshaNo keiyakuJigyoshaNo;
-    private boolean toriatsukaiKakuyakushoUmu;
+    private AtenaMeisho kozaMeiginin;
+    private AtenaKanaMeisho kozaMeigininKana;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -75,7 +70,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -84,7 +79,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -93,16 +88,17 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -110,30 +106,30 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
     }
 
     /**
-     * 事業者契約番号のgetメソッドです。
+     * 契約事業者番号のgetメソッドです。
      * <br/>
      * <br/>1からの連番付番
-     *
-     * @return 事業者契約番号
+     * 
+     * @return 契約事業者番号
      */
-    public RString getJigyoshaKeiyakuNo() {
-        return jigyoshaKeiyakuNo;
+    public RString getKeiyakuJigyoshaNo() {
+        return keiyakuJigyoshaNo;
     }
 
     /**
-     * 事業者契約番号のsetメソッドです。
+     * 契約事業者番号のsetメソッドです。
      * <br/>
      * <br/>1からの連番付番
-     *
-     * @param jigyoshaKeiyakuNo 事業者契約番号
+     * 
+     * @param keiyakuJigyoshaNo 契約事業者番号
      */
-    public void setJigyoshaKeiyakuNo(RString jigyoshaKeiyakuNo) {
-        this.jigyoshaKeiyakuNo = jigyoshaKeiyakuNo;
+    public void setKeiyakuJigyoshaNo(@Nonnull RString keiyakuJigyoshaNo) {
+        this.keiyakuJigyoshaNo = keiyakuJigyoshaNo;
     }
 
     /**
      * 開始年月日のgetメソッドです。
-     *
+     * 
      * @return 開始年月日
      */
     public FlexibleDate getKaishiYMD() {
@@ -142,34 +138,18 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 開始年月日のsetメソッドです。
-     *
+     * 
      * @param kaishiYMD 開始年月日
      */
-    public void setKaishiYMD(FlexibleDate kaishiYMD) {
+    public void setKaishiYMD(@Nonnull FlexibleDate kaishiYMD) {
         this.kaishiYMD = kaishiYMD;
     }
 
     /**
-     * 履歴番号のgetメソッドです。
-     *
-     * @return 履歴番号
-     */
-    public Decimal getRirekiNo() {
-        return rirekiNo;
-    }
-
-    /**
-     * 履歴番号のsetメソッドです。
-     *
-     * @param rirekiNo 履歴番号
-     */
-    public void setRirekiNo(Decimal rirekiNo) {
-        this.rirekiNo = rirekiNo;
-    }
-
-    /**
      * 終了年月日のgetメソッドです。
-     *
+     * <br/>
+     * <br/>未設定時は最大日付
+     * 
      * @return 終了年月日
      */
     public FlexibleDate getShuryoYMD() {
@@ -178,97 +158,278 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 終了年月日のsetメソッドです。
-     *
+     * <br/>
+     * <br/>未設定時は最大日付
+     * 
      * @param shuryoYMD 終了年月日
      */
-    public void setShuryoYMD(FlexibleDate shuryoYMD) {
+    public void setShuryoYMD(@Nonnull FlexibleDate shuryoYMD) {
         this.shuryoYMD = shuryoYMD;
     }
 
     /**
-     * 届出年月日のgetメソッドです。
-     *
-     * @return 届出年月日
+     * 契約種類のgetメソッドです。
+     * <br/>
+     * <br/>01：住宅改修、02：福祉用具、03：住宅改修／福祉用具、11：償還払給付、21：高額給付費
+     * 
+     * @return 契約種類
      */
-    public FlexibleDate getTodokedeYMD() {
-        return todokedeYMD;
+    public RString getKeiyakuShurui() {
+        return keiyakuShurui;
     }
 
     /**
-     * 届出年月日のsetメソッドです。
-     *
-     * @param todokedeYMD 届出年月日
+     * 契約種類のsetメソッドです。
+     * <br/>
+     * <br/>01：住宅改修、02：福祉用具、03：住宅改修／福祉用具、11：償還払給付、21：高額給付費
+     * 
+     * @param keiyakuShurui 契約種類
      */
-    public void setTodokedeYMD(FlexibleDate todokedeYMD) {
-        this.todokedeYMD = todokedeYMD;
+    public void setKeiyakuShurui(@Nonnull RString keiyakuShurui) {
+        this.keiyakuShurui = keiyakuShurui;
     }
 
     /**
-     * 届出者住所のgetメソッドです。
-     *
-     * @return 届出者住所
+     * 契約事業者名称のgetメソッドです。
+     * 
+     * @return 契約事業者名称
      */
-    public RString getTodokedeAddress() {
-        return todokedeAddress;
+    @CheckForNull
+    public AtenaMeisho getKeiyakuJigyoshaName() {
+        return keiyakuJigyoshaName;
     }
 
     /**
-     * 届出者住所のsetメソッドです。
-     *
-     * @param todokedeAddress 届出者住所
+     * 契約事業者名称のsetメソッドです。
+     * 
+     * @param keiyakuJigyoshaName 契約事業者名称
      */
-    public void setTodokedeAddress(RString todokedeAddress) {
-        this.todokedeAddress = todokedeAddress;
+    public void setKeiyakuJigyoshaName(AtenaMeisho keiyakuJigyoshaName) {
+        this.keiyakuJigyoshaName = keiyakuJigyoshaName;
     }
 
     /**
-     * 届出者事業者名称のgetメソッドです。
-     *
-     * @return 届出者事業者名称
+     * 契約事業者カナ名称のgetメソッドです。
+     * 
+     * @return 契約事業者カナ名称
      */
-    public RString getTodokedeJigyoshaName() {
-        return todokedeJigyoshaName;
+    @CheckForNull
+    public AtenaKanaMeisho getKeiyakuJigyoshaKanaName() {
+        return keiyakuJigyoshaKanaName;
     }
 
     /**
-     * 届出者事業者名称のsetメソッドです。
-     *
-     * @param todokedeJigyoshaName 届出者事業者名称
+     * 契約事業者カナ名称のsetメソッドです。
+     * 
+     * @param keiyakuJigyoshaKanaName 契約事業者カナ名称
      */
-    public void setTodokedeJigyoshaName(RString todokedeJigyoshaName) {
-        this.todokedeJigyoshaName = todokedeJigyoshaName;
+    public void setKeiyakuJigyoshaKanaName(AtenaKanaMeisho keiyakuJigyoshaKanaName) {
+        this.keiyakuJigyoshaKanaName = keiyakuJigyoshaKanaName;
     }
 
     /**
-     * 届出者代表者氏名のgetメソッドです。
-     *
-     * @return 届出者代表者氏名
+     * 契約事業者郵便番号のgetメソッドです。
+     * 
+     * @return 契約事業者郵便番号
      */
-    public RString getTodokedeDaihyoshaName() {
-        return todokedeDaihyoshaName;
+    @CheckForNull
+    public YubinNo getKeiyakuJigyoshaYubinNo() {
+        return keiyakuJigyoshaYubinNo;
     }
 
     /**
-     * 届出者代表者氏名のsetメソッドです。
-     *
-     * @param todokedeDaihyoshaName 届出者代表者氏名
+     * 契約事業者郵便番号のsetメソッドです。
+     * 
+     * @param keiyakuJigyoshaYubinNo 契約事業者郵便番号
      */
-    public void setTodokedeDaihyoshaName(RString todokedeDaihyoshaName) {
-        this.todokedeDaihyoshaName = todokedeDaihyoshaName;
+    public void setKeiyakuJigyoshaYubinNo(YubinNo keiyakuJigyoshaYubinNo) {
+        this.keiyakuJigyoshaYubinNo = keiyakuJigyoshaYubinNo;
+    }
+
+    /**
+     * 契約事業者住所のgetメソッドです。
+     * 
+     * @return 契約事業者住所
+     */
+    @CheckForNull
+    public AtenaJusho getKeiyakuJigyoshaJusho() {
+        return keiyakuJigyoshaJusho;
+    }
+
+    /**
+     * 契約事業者住所のsetメソッドです。
+     * 
+     * @param keiyakuJigyoshaJusho 契約事業者住所
+     */
+    public void setKeiyakuJigyoshaJusho(AtenaJusho keiyakuJigyoshaJusho) {
+        this.keiyakuJigyoshaJusho = keiyakuJigyoshaJusho;
+    }
+
+    /**
+     * 契約代表者氏名のgetメソッドです。
+     * 
+     * @return 契約代表者氏名
+     */
+    @CheckForNull
+    public AtenaMeisho getKeiyakuDaihyoshaName() {
+        return keiyakuDaihyoshaName;
+    }
+
+    /**
+     * 契約代表者氏名のsetメソッドです。
+     * 
+     * @param keiyakuDaihyoshaName 契約代表者氏名
+     */
+    public void setKeiyakuDaihyoshaName(AtenaMeisho keiyakuDaihyoshaName) {
+        this.keiyakuDaihyoshaName = keiyakuDaihyoshaName;
+    }
+
+    /**
+     * 契約事業者電話番号のgetメソッドです。
+     * 
+     * @return 契約事業者電話番号
+     */
+    @CheckForNull
+    public TelNo getKeiyakuJigyoshaTelNo() {
+        return keiyakuJigyoshaTelNo;
+    }
+
+    /**
+     * 契約事業者電話番号のsetメソッドです。
+     * 
+     * @param keiyakuJigyoshaTelNo 契約事業者電話番号
+     */
+    public void setKeiyakuJigyoshaTelNo(TelNo keiyakuJigyoshaTelNo) {
+        this.keiyakuJigyoshaTelNo = keiyakuJigyoshaTelNo;
+    }
+
+    /**
+     * 契約事業者FAX番号のgetメソッドです。
+     * 
+     * @return 契約事業者FAX番号
+     */
+    @CheckForNull
+    public TelNo getKeiyakuJigyoshaFaxNo() {
+        return keiyakuJigyoshaFaxNo;
+    }
+
+    /**
+     * 契約事業者FAX番号のsetメソッドです。
+     * 
+     * @param keiyakuJigyoshaFaxNo 契約事業者FAX番号
+     */
+    public void setKeiyakuJigyoshaFaxNo(TelNo keiyakuJigyoshaFaxNo) {
+        this.keiyakuJigyoshaFaxNo = keiyakuJigyoshaFaxNo;
+    }
+
+    /**
+     * 送付先郵便番号のgetメソッドです。
+     * 
+     * @return 送付先郵便番号
+     */
+    @CheckForNull
+    public YubinNo getSofusakiYubinNo() {
+        return sofusakiYubinNo;
+    }
+
+    /**
+     * 送付先郵便番号のsetメソッドです。
+     * 
+     * @param sofusakiYubinNo 送付先郵便番号
+     */
+    public void setSofusakiYubinNo(YubinNo sofusakiYubinNo) {
+        this.sofusakiYubinNo = sofusakiYubinNo;
+    }
+
+    /**
+     * 送付先住所のgetメソッドです。
+     * 
+     * @return 送付先住所
+     */
+    @CheckForNull
+    public AtenaJusho getSofusakiJusho() {
+        return sofusakiJusho;
+    }
+
+    /**
+     * 送付先住所のsetメソッドです。
+     * 
+     * @param sofusakiJusho 送付先住所
+     */
+    public void setSofusakiJusho(AtenaJusho sofusakiJusho) {
+        this.sofusakiJusho = sofusakiJusho;
+    }
+
+    /**
+     * 送付先部署のgetメソッドです。
+     * 
+     * @return 送付先部署
+     */
+    @CheckForNull
+    public RString getSofusakiBusho() {
+        return sofusakiBusho;
+    }
+
+    /**
+     * 送付先部署のsetメソッドです。
+     * 
+     * @param sofusakiBusho 送付先部署
+     */
+    public void setSofusakiBusho(RString sofusakiBusho) {
+        this.sofusakiBusho = sofusakiBusho;
+    }
+
+    /**
+     * 送付先事業者名称のgetメソッドです。
+     * 
+     * @return 送付先事業者名称
+     */
+    @CheckForNull
+    public AtenaMeisho getSofusakiJigyoshaName() {
+        return sofusakiJigyoshaName;
+    }
+
+    /**
+     * 送付先事業者名称のsetメソッドです。
+     * 
+     * @param sofusakiJigyoshaName 送付先事業者名称
+     */
+    public void setSofusakiJigyoshaName(AtenaMeisho sofusakiJigyoshaName) {
+        this.sofusakiJigyoshaName = sofusakiJigyoshaName;
+    }
+
+    /**
+     * 送付先事業者カナ名称のgetメソッドです。
+     * 
+     * @return 送付先事業者カナ名称
+     */
+    @CheckForNull
+    public AtenaKanaMeisho getSofusakiJigyoshaKanaName() {
+        return sofusakiJigyoshaKanaName;
+    }
+
+    /**
+     * 送付先事業者カナ名称のsetメソッドです。
+     * 
+     * @param sofusakiJigyoshaKanaName 送付先事業者カナ名称
+     */
+    public void setSofusakiJigyoshaKanaName(AtenaKanaMeisho sofusakiJigyoshaKanaName) {
+        this.sofusakiJigyoshaKanaName = sofusakiJigyoshaKanaName;
     }
 
     /**
      * 金融機関コードのgetメソッドです。
-     *
+     * 
      * @return 金融機関コード
      */
+    @CheckForNull
     public KinyuKikanCode getKinyuKikanCode() {
         return kinyuKikanCode;
     }
 
     /**
      * 金融機関コードのsetメソッドです。
-     *
+     * 
      * @param kinyuKikanCode 金融機関コード
      */
     public void setKinyuKikanCode(KinyuKikanCode kinyuKikanCode) {
@@ -277,16 +438,17 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 支店コードのgetメソッドです。
-     *
+     * 
      * @return 支店コード
      */
+    @CheckForNull
     public KinyuKikanShitenCode getShitenCode() {
         return shitenCode;
     }
 
     /**
      * 支店コードのsetメソッドです。
-     *
+     * 
      * @param shitenCode 支店コード
      */
     public void setShitenCode(KinyuKikanShitenCode shitenCode) {
@@ -295,16 +457,17 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 口座種別のgetメソッドです。
-     *
+     * 
      * @return 口座種別
      */
+    @CheckForNull
     public RString getKozaShubetsu() {
         return kozaShubetsu;
     }
 
     /**
      * 口座種別のsetメソッドです。
-     *
+     * 
      * @param kozaShubetsu 口座種別
      */
     public void setKozaShubetsu(RString kozaShubetsu) {
@@ -313,16 +476,17 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 口座番号のgetメソッドです。
-     *
+     * 
      * @return 口座番号
      */
+    @CheckForNull
     public RString getKozaNo() {
         return kozaNo;
     }
 
     /**
      * 口座番号のsetメソッドです。
-     *
+     * 
      * @param kozaNo 口座番号
      */
     public void setKozaNo(RString kozaNo) {
@@ -330,282 +494,48 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
     }
 
     /**
-     * 通帳記号のgetメソッドです。
-     *
-     * @return 通帳記号
-     */
-    public RString getTsuchoKigo() {
-        return tsuchoKigo;
-    }
-
-    /**
-     * 通帳記号のsetメソッドです。
-     *
-     * @param tsuchoKigo 通帳記号
-     */
-    public void setTsuchoKigo(RString tsuchoKigo) {
-        this.tsuchoKigo = tsuchoKigo;
-    }
-
-    /**
-     * 通帳番号のgetメソッドです。
-     *
-     * @return 通帳番号
-     */
-    public RString getTsuchoNo() {
-        return tsuchoNo;
-    }
-
-    /**
-     * 通帳番号のsetメソッドです。
-     *
-     * @param tsuchoNo 通帳番号
-     */
-    public void setTsuchoNo(RString tsuchoNo) {
-        this.tsuchoNo = tsuchoNo;
-    }
-
-    /**
      * 口座名義人のgetメソッドです。
-     *
+     * 
      * @return 口座名義人
      */
-    public AtenaKanaMeisho getKozaMeiginin() {
+    @CheckForNull
+    public AtenaMeisho getKozaMeiginin() {
         return kozaMeiginin;
     }
 
     /**
      * 口座名義人のsetメソッドです。
-     *
+     * 
      * @param kozaMeiginin 口座名義人
      */
-    public void setKozaMeiginin(AtenaKanaMeisho kozaMeiginin) {
+    public void setKozaMeiginin(AtenaMeisho kozaMeiginin) {
         this.kozaMeiginin = kozaMeiginin;
     }
 
     /**
-     * 口座名義人漢字のgetメソッドです。
-     *
-     * @return 口座名義人漢字
+     * 口座名義人カナのgetメソッドです。
+     * 
+     * @return 口座名義人カナ
      */
-    public AtenaMeisho getKozaMeigininKanji() {
-        return kozaMeigininKanji;
+    @CheckForNull
+    public AtenaKanaMeisho getKozaMeigininKana() {
+        return kozaMeigininKana;
     }
 
     /**
-     * 口座名義人漢字のsetメソッドです。
-     *
-     * @param kozaMeigininKanji 口座名義人漢字
+     * 口座名義人カナのsetメソッドです。
+     * 
+     * @param kozaMeigininKana 口座名義人カナ
      */
-    public void setKozaMeigininKanji(AtenaMeisho kozaMeigininKanji) {
-        this.kozaMeigininKanji = kozaMeigininKanji;
-    }
-
-    /**
-     * 事業者FAX番号のgetメソッドです。
-     *
-     * @return 事業者FAX番号
-     */
-    public TelNo getJigyoshaFaxNo() {
-        return jigyoshaFaxNo;
-    }
-
-    /**
-     * 事業者FAX番号のsetメソッドです。
-     *
-     * @param jigyoshaFaxNo 事業者FAX番号
-     */
-    public void setJigyoshaFaxNo(TelNo jigyoshaFaxNo) {
-        this.jigyoshaFaxNo = jigyoshaFaxNo;
-    }
-
-    /**
-     * 契約登録年月日のgetメソッドです。
-     *
-     * @return 契約登録年月日
-     */
-    public FlexibleDate getKeiyakuTorokuYMD() {
-        return keiyakuTorokuYMD;
-    }
-
-    /**
-     * 契約登録年月日のsetメソッドです。
-     *
-     * @param keiyakuTorokuYMD 契約登録年月日
-     */
-    public void setKeiyakuTorokuYMD(FlexibleDate keiyakuTorokuYMD) {
-        this.keiyakuTorokuYMD = keiyakuTorokuYMD;
-    }
-
-    /**
-     * 送付先部署のgetメソッドです。
-     *
-     * @return 送付先部署
-     */
-    public RString getSofusakiBusho() {
-        return sofusakiBusho;
-    }
-
-    /**
-     * 送付先部署のsetメソッドです。
-     *
-     * @param sofusakiBusho 送付先部署
-     */
-    public void setSofusakiBusho(RString sofusakiBusho) {
-        this.sofusakiBusho = sofusakiBusho;
-    }
-
-    /**
-     * 営業形態のgetメソッドです。
-     * <br/>
-     * <br/>個人、法人の分け
-     *
-     * @return 営業形態
-     */
-    public RString getEigyoKeitai() {
-        return eigyoKeitai;
-    }
-
-    /**
-     * 営業形態のsetメソッドです。
-     * <br/>
-     * <br/>個人、法人の分け
-     *
-     * @param eigyoKeitai 営業形態
-     */
-    public void setEigyoKeitai(RString eigyoKeitai) {
-        this.eigyoKeitai = eigyoKeitai;
-    }
-
-    /**
-     * 住宅改修契約有無のgetメソッドです。
-     * <br/>
-     * <br/>0:契約無し,1:契約有り（償還払給付契約有無が「0」である場合に限る）
-     *
-     * @return 住宅改修契約有無
-     */
-    public boolean getJutakuKaishuKeiyakuUmu() {
-        return jutakuKaishuKeiyakuUmu;
-    }
-
-    /**
-     * 住宅改修契約有無のsetメソッドです。
-     * <br/>
-     * <br/>0:契約無し,1:契約有り（償還払給付契約有無が「0」である場合に限る）
-     *
-     * @param jutakuKaishuKeiyakuUmu 住宅改修契約有無
-     */
-    public void setJutakuKaishuKeiyakuUmu(boolean jutakuKaishuKeiyakuUmu) {
-        this.jutakuKaishuKeiyakuUmu = jutakuKaishuKeiyakuUmu;
-    }
-
-    /**
-     * 特定福祉用具販売契約有無のgetメソッドです。
-     * <br/>
-     * <br/>0:契約無し,1:契約有り（償還払給付契約有無が「0」である場合に限る）
-     *
-     * @return 特定福祉用具販売契約有無
-     */
-    public boolean getTokuteiFukushiYoguHanbaiKeiyakuUmu() {
-        return tokuteiFukushiYoguHanbaiKeiyakuUmu;
-    }
-
-    /**
-     * 特定福祉用具販売契約有無のsetメソッドです。
-     * <br/>
-     * <br/>0:契約無し,1:契約有り（償還払給付契約有無が「0」である場合に限る）
-     *
-     * @param tokuteiFukushiYoguHanbaiKeiyakuUmu 特定福祉用具販売契約有無
-     */
-    public void setTokuteiFukushiYoguHanbaiKeiyakuUmu(boolean tokuteiFukushiYoguHanbaiKeiyakuUmu) {
-        this.tokuteiFukushiYoguHanbaiKeiyakuUmu = tokuteiFukushiYoguHanbaiKeiyakuUmu;
-    }
-
-    /**
-     * 償還払給付契約有無のgetメソッドです。
-     * <br/>
-     * <br/>0:契約無し,1:契約有り（住宅改修契約有無および特定福祉用具販売契約有無が「0」である場合に限る）
-     *
-     * @return 償還払給付契約有無
-     */
-    public boolean getShokanbaraiKyufuKeiyakuUmu() {
-        return shokanbaraiKyufuKeiyakuUmu;
-    }
-
-    /**
-     * 償還払給付契約有無のsetメソッドです。
-     * <br/>
-     * <br/>0:契約無し,1:契約有り（住宅改修契約有無および特定福祉用具販売契約有無が「0」である場合に限る）
-     *
-     * @param shokanbaraiKyufuKeiyakuUmu 償還払給付契約有無
-     */
-    public void setShokanbaraiKyufuKeiyakuUmu(boolean shokanbaraiKyufuKeiyakuUmu) {
-        this.shokanbaraiKyufuKeiyakuUmu = shokanbaraiKyufuKeiyakuUmu;
-    }
-
-    /**
-     * 高額給付契約有無のgetメソッドです。
-     * <br/>
-     * <br/>0:契約無し,1:契約有り
-     *
-     * @return 高額給付契約有無
-     */
-    public boolean getKogakuKyufuKeiyakuUmu() {
-        return kogakuKyufuKeiyakuUmu;
-    }
-
-    /**
-     * 高額給付契約有無のsetメソッドです。
-     * <br/>
-     * <br/>0:契約無し,1:契約有り
-     *
-     * @param kogakuKyufuKeiyakuUmu 高額給付契約有無
-     */
-    public void setKogakuKyufuKeiyakuUmu(boolean kogakuKyufuKeiyakuUmu) {
-        this.kogakuKyufuKeiyakuUmu = kogakuKyufuKeiyakuUmu;
-    }
-
-    /**
-     * 契約事業者番号のgetメソッドです。
-     *
-     * @return 契約事業者番号
-     */
-    public JigyoshaNo getKeiyakuJigyoshaNo() {
-        return keiyakuJigyoshaNo;
-    }
-
-    /**
-     * 契約事業者番号のsetメソッドです。
-     *
-     * @param keiyakuJigyoshaNo 契約事業者番号
-     */
-    public void setKeiyakuJigyoshaNo(JigyoshaNo keiyakuJigyoshaNo) {
-        this.keiyakuJigyoshaNo = keiyakuJigyoshaNo;
-    }
-
-    /**
-     * 取扱確約書有無のgetメソッドです。
-     *
-     * @return 取扱確約書有無
-     */
-    public boolean getToriatsukaiKakuyakushoUmu() {
-        return toriatsukaiKakuyakushoUmu;
-    }
-
-    /**
-     * 取扱確約書有無のsetメソッドです。
-     *
-     * @param toriatsukaiKakuyakushoUmu 取扱確約書有無
-     */
-    public void setToriatsukaiKakuyakushoUmu(boolean toriatsukaiKakuyakushoUmu) {
-        this.toriatsukaiKakuyakushoUmu = toriatsukaiKakuyakushoUmu;
+    public void setKozaMeigininKana(AtenaKanaMeisho kozaMeigininKana) {
+        this.kozaMeigininKana = kozaMeigininKana;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT3077JuryoininKeiyakuJigyoshaEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3077JuryoininKeiyakuJigyoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -613,13 +543,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.jigyoshaKeiyakuNo, other.jigyoshaKeiyakuNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.kaishiYMD, other.kaishiYMD)) {
-            return false;
-        }
-        if (this.rirekiNo != other.rirekiNo) {
+        if (!Objects.equals(this.keiyakuJigyoshaNo, other.keiyakuJigyoshaNo)) {
             return false;
         }
         return true;
@@ -630,43 +554,39 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
      */
     @Override
     public void shallowCopy(DbT3077JuryoininKeiyakuJigyoshaEntity entity) {
-        this.jigyoshaKeiyakuNo = entity.jigyoshaKeiyakuNo;
+        this.keiyakuJigyoshaNo = entity.keiyakuJigyoshaNo;
         this.kaishiYMD = entity.kaishiYMD;
-        this.rirekiNo = entity.rirekiNo;
         this.shuryoYMD = entity.shuryoYMD;
-        this.todokedeYMD = entity.todokedeYMD;
-        this.todokedeAddress = entity.todokedeAddress;
-        this.todokedeJigyoshaName = entity.todokedeJigyoshaName;
-        this.todokedeDaihyoshaName = entity.todokedeDaihyoshaName;
+        this.keiyakuShurui = entity.keiyakuShurui;
+        this.keiyakuJigyoshaName = entity.keiyakuJigyoshaName;
+        this.keiyakuJigyoshaKanaName = entity.keiyakuJigyoshaKanaName;
+        this.keiyakuJigyoshaYubinNo = entity.keiyakuJigyoshaYubinNo;
+        this.keiyakuJigyoshaJusho = entity.keiyakuJigyoshaJusho;
+        this.keiyakuDaihyoshaName = entity.keiyakuDaihyoshaName;
+        this.keiyakuJigyoshaTelNo = entity.keiyakuJigyoshaTelNo;
+        this.keiyakuJigyoshaFaxNo = entity.keiyakuJigyoshaFaxNo;
+        this.sofusakiYubinNo = entity.sofusakiYubinNo;
+        this.sofusakiJusho = entity.sofusakiJusho;
+        this.sofusakiBusho = entity.sofusakiBusho;
+        this.sofusakiJigyoshaName = entity.sofusakiJigyoshaName;
+        this.sofusakiJigyoshaKanaName = entity.sofusakiJigyoshaKanaName;
         this.kinyuKikanCode = entity.kinyuKikanCode;
         this.shitenCode = entity.shitenCode;
         this.kozaShubetsu = entity.kozaShubetsu;
         this.kozaNo = entity.kozaNo;
-        this.tsuchoKigo = entity.tsuchoKigo;
-        this.tsuchoNo = entity.tsuchoNo;
         this.kozaMeiginin = entity.kozaMeiginin;
-        this.kozaMeigininKanji = entity.kozaMeigininKanji;
-        this.jigyoshaFaxNo = entity.jigyoshaFaxNo;
-        this.keiyakuTorokuYMD = entity.keiyakuTorokuYMD;
-        this.sofusakiBusho = entity.sofusakiBusho;
-        this.eigyoKeitai = entity.eigyoKeitai;
-        this.jutakuKaishuKeiyakuUmu = entity.jutakuKaishuKeiyakuUmu;
-        this.tokuteiFukushiYoguHanbaiKeiyakuUmu = entity.tokuteiFukushiYoguHanbaiKeiyakuUmu;
-        this.shokanbaraiKyufuKeiyakuUmu = entity.shokanbaraiKyufuKeiyakuUmu;
-        this.kogakuKyufuKeiyakuUmu = entity.kogakuKyufuKeiyakuUmu;
-        this.keiyakuJigyoshaNo = entity.keiyakuJigyoshaNo;
-        this.toriatsukaiKakuyakushoUmu = entity.toriatsukaiKakuyakushoUmu;
+        this.kozaMeigininKana = entity.kozaMeigininKana;
     }
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(jigyoshaKeiyakuNo, kaishiYMD, rirekiNo, shuryoYMD, todokedeYMD, todokedeAddress, todokedeJigyoshaName, todokedeDaihyoshaName, kinyuKikanCode, shitenCode, kozaShubetsu, kozaNo, tsuchoKigo, tsuchoNo, kozaMeiginin, kozaMeigininKanji, jigyoshaFaxNo, keiyakuTorokuYMD, sofusakiBusho, eigyoKeitai, jutakuKaishuKeiyakuUmu, tokuteiFukushiYoguHanbaiKeiyakuUmu, shokanbaraiKyufuKeiyakuUmu, kogakuKyufuKeiyakuUmu, keiyakuJigyoshaNo, toriatsukaiKakuyakushoUmu);
+        return super.toMd5(keiyakuJigyoshaNo, kaishiYMD, shuryoYMD, keiyakuShurui, keiyakuJigyoshaName, keiyakuJigyoshaKanaName, keiyakuJigyoshaYubinNo, keiyakuJigyoshaJusho, keiyakuDaihyoshaName, keiyakuJigyoshaTelNo, keiyakuJigyoshaFaxNo, sofusakiYubinNo, sofusakiJusho, sofusakiBusho, sofusakiJigyoshaName, sofusakiJigyoshaKanaName, kinyuKikanCode, shitenCode, kozaShubetsu, kozaNo, kozaMeiginin, kozaMeigininKana);
     }
 
 // </editor-fold>
+
 }
