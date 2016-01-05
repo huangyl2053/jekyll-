@@ -1,0 +1,288 @@
+package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho;
+
+import java.util.List;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
+
+/**
+ *
+ * 市町村遷移のマッパーインタフェースです。
+ */
+public interface IIkkatsuHakkoMapper {
+
+    /**
+     * 被保険者台帳の異動者情報を取得します。
+     *
+     * @param 検索条件 検索条件
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> getHihokenshaDaichoIdo(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
+     * 受給者台帳異動情報を取得します。
+     *
+     * @param 検索条件 検索条件
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> getJukyushaDaichoIdo(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
+     * 年齢到達予定者情報を取得します。
+     *
+     * @param 検索条件 検索条件
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> getNenreiTotatsuYotesha(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
+     * 一時テーブルの作成。
+     *
+     * @return 作成件数
+     */
+    int createTmpHihokenshasho_Ichi();
+
+    /**
+     * データを一時テーブルに登録します。
+     *
+     * @param ikkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity
+     * @return 登録件数
+     */
+    int insertTmpHihokenshasho_Ichi(IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity);
+
+    /**
+     * データを一時テーブルに登録します。
+     *
+     * @return 更新件数
+     */
+    int updateShisetyuJotaiFlag();
+
+    /**
+     * 生年月日の値がない場合、対象情報の取得。
+     *
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> getTaishoJoho1();
+
+    /**
+     * 生年月日の値がある場合、被保険者台帳情報の取得
+     *
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> check被保険者台帳管理();
+
+    /**
+     * 生年月日の値がある場合、適用除外者と他市町村住所地特例の取得
+     *
+     * @param 検索条件 検索条件
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> check適用除外者(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
+     * 画面で「再発行する」をチェックする場合、対象情報を取得します。
+     *
+     * @param 検索条件 検索条件
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> getCheckShoriDateKanri(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
+     * 一括発行する場合、対象情報を取得します。
+     *
+     * @param 検索条件 検索条件
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> getIkkatsuShoriDateKanri(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
+     * 対象外情報を削除します。
+     *
+     * @param 検索条件 検索条件
+     * @return 削除件数
+     */
+    int deleteTmpHihoken(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
+     * 被保険者台帳の情報を取得します。
+     *
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> getHihokenshaDaicho();
+
+    /**
+     * 被保険者台帳の情報を一時テーブルに更新します。
+     *
+     * @param entity entity
+     * @return 更新件数
+     */
+    int updateTmp_Hihokenshasho(IkkatsuHakkoRelateEntity entity);
+
+    /**
+     * 介護保険施設入退所の情報を取得します。
+     *
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> getKaigoHokenShisetsuNyutaisho();
+
+    /**
+     * 介護保険施設入退所の情報を一時テーブルに更新します。
+     *
+     * @param entity entity
+     * @return 更新件数
+     */
+    int updateTmp_KaigoHokenShisetsu(IkkatsuHakkoRelateEntity entity);
+
+    /**
+     * 受給者台帳の情報を取得します。
+     *
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> getJukyushaDaicho();
+
+    /**
+     * 受給者台帳の情報取得を一時テーブルに更新します。
+     *
+     * @param entity entity
+     * @return 更新件数
+     */
+    int updateTmp_JukyushaDaicho(IkkatsuHakkoRelateEntity entity);
+
+    /**
+     * 要介護認定結果情報を取得します。
+     *
+     * @param 検索条件 検索条件
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    IkkatsuHakkoRelateEntity getNinteiKekkaJoho(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
+     * 要介護認定結果情報の情報取得を一時テーブルに更新します。
+     *
+     * @param entity entity
+     * @return 更新件数
+     */
+    int updateTmp_NinteiKekkaJoho(IkkatsuHakkoRelateEntity entity);
+
+    /**
+     * 支払方法変更情報を取得します。
+     *
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> getShiharaiHohoHenko();
+
+    /**
+     * 支払方法変更の情報取得を一時テーブルに更新します。
+     *
+     * @param entity entity
+     * @return 更新件数
+     */
+    int updateTmp_ShiharaiHohoHenko(IkkatsuHakkoRelateEntity entity);
+
+    /**
+     * 居宅給付計画届出情報を取得します。
+     *
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> getKyotakuKeikakuTodokede();
+
+    /**
+     * 居宅給付計画事業者作成情報を取得します。
+     *
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> getKyotakuKeikakuJigyoshaSakusei();
+
+    /**
+     * 居宅給付計画自己作成情報を取得します。
+     *
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> getKyotakuKeikakuJikoSakusei();
+
+    /**
+     * 居宅給付計画届出の情報取得を一時テーブルに更新します。
+     *
+     * @param entity entity
+     * @return 更新件数
+     */
+    int updateTmp_Kyotaku(IkkatsuHakkoRelateEntity entity);
+
+    /**
+     * 本人情報を取得します。
+     *
+     * @param 検索条件 検索条件
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> getHonninJoho(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
+     * 本人情報を一時テーブルに更新します。
+     *
+     * @param entity entity
+     * @return 更新件数
+     */
+    int updateTmp_HonninJoho(IkkatsuHakkoRelateEntity entity);
+
+    /**
+     * 送付先情報を取得します。
+     *
+     * @param 検索条件 検索条件
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> getSofusakiJoho(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
+     * 送付先情報を一時テーブルに更新します。
+     *
+     * @param entity entity
+     * @return 更新件数
+     */
+    int updateTmp_SofusakiJoho(IkkatsuHakkoRelateEntity entity);
+
+    /**
+     * 被保険者証用データを取得します。
+     *
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> getHihokenshayo();
+
+    /**
+     * 被保険者証一覧表用を取得します。
+     *
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> getHihokenshaIchiran();
+
+    /**
+     * 最新履歴番号を取得します。
+     *
+     * @param 検索条件 検索条件
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    IkkatsuHakkoRelateEntity getSaishinrirekiNo(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
+     * 同一被保険者番号の最大履歴番号を取得します。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    int insertShoKofuKaishu(DbT7037ShoKofuKaishuEntity entity);
+
+    /**
+     * 処理日付管理マスタテーブルを更新します。
+     *
+     * @param 検索条件 検索条件
+     * @return IkkatsuHakkoRelateEntity
+     */
+    int updateShoriDateKanri(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
+     * 一時テーブルを削除します。
+     *
+     * @return 削除件数
+     */
+    int dropTmpHihokenshasho_Ichi();
+
+}
