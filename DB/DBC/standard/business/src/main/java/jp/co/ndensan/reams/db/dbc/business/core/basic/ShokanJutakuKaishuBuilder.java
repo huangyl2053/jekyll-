@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanJutakuKaishu}の編集を行うビルダークラスです。
@@ -102,30 +101,29 @@ public class ShokanJutakuKaishuBuilder {
         return this;
     }
 
-    /**
-     * 順次番号を設定します。
-     *
-     * @param 順次番号 順次番号
-     * @return {@link ShokanJutakuKaishuBuilder}
-     */
-    public ShokanJutakuKaishuBuilder set順次番号(RString 順次番号) {
-        requireNonNull(順次番号, UrSystemErrorMessages.値がnull.getReplacedMessage("順次番号"));
-        entity.setJunjiNo(順次番号);
-        return this;
-    }
-
-    /**
-     * 履歴番号を設定します。
-     *
-     * @param 履歴番号 履歴番号
-     * @return {@link ShokanJutakuKaishuBuilder}
-     */
-    public ShokanJutakuKaishuBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
-        return this;
-    }
-
+//    /**
+//     * 順次番号を設定します。
+//     *
+//     * @param 順次番号 順次番号
+//     * @return {@link ShokanJutakuKaishuBuilder}
+//     */
+//    public ShokanJutakuKaishuBuilder set順次番号(RString 順次番号) {
+//        requireNonNull(順次番号, UrSystemErrorMessages.値がnull.getReplacedMessage("順次番号"));
+//        entity.setJunjiNo(順次番号);
+//        return this;
+//    }
+//
+//    /**
+//     * 履歴番号を設定します。
+//     *
+//     * @param 履歴番号 履歴番号
+//     * @return {@link ShokanJutakuKaishuBuilder}
+//     */
+//    public ShokanJutakuKaishuBuilder set履歴番号(Decimal 履歴番号) {
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        entity.setRirekiNo(履歴番号);
+//        return this;
+//    }
     /**
      * サービスコードを設定します。
      *
