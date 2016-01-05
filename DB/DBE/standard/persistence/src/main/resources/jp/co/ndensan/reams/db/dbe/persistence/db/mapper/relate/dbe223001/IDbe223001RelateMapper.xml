@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 合議体情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe223001.IDbe223001RelateMapper">
+
+<!-- NinteiChosaTokusokujoRelateEntityの項目にマッピングします。-->
+    <resultMap id="resultMap_NinteiChosaTokusokujoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.NinteiChosaTokusokujoRelateEntity" autoMapping="true">
+        <result property="temp_事業者郵便番号" column="temp_事業者郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="temp_市町村名称" column="temp_市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_事業者名称" column="temp_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_調査員氏名" column="temp_調査員氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_保険者番号" column="temp_保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_被保険者番号" column="temp_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_被保険者氏名カナ" column="temp_被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <result property="temp_被保険者氏名" column="temp_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="temp_申請年月日" column="temp_申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="temp_性別コード" column="temp_性別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="temp_生年月日" column="temp_生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="temp_被保険者住所" column="temp_被保険者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
+        <result property="temp_被保険者郵便番号" column="temp_被保険者郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="temp_申請書管理番号" column="temp_申請書管理番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
+        <result property="temp_申請区分コード" column="temp_申請区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+    </resultMap>
+    <select id="select要介護認定調査督促状ByKey"
+              resultMap="resultMap_NinteiChosaTokusokujoRelateEntity" 
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe223001.NinteiChosaTokusokujoMybatisParameter"
+              fetchSize="500">
+        SELECT
+            DbT5910NinteichosaItakusakiJoho."yubinNo"  AS  temp_事業者郵便番号,
+            DbT5051KoseiShichosonMaster."shichosonMeisho"  AS  temp_市町村名称,
+            DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho"  AS  temp_事業者名称,
+            DbT5913ChosainJoho."chosainShimei"  AS  temp_調査員氏名,
+            DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"  AS  temp_保険者番号,
+            DbT5101NinteiShinseiJoho."hihokenshaNo"  AS  temp_被保険者番号,
+            DbT5101NinteiShinseiJoho."hihokenshaKana"  AS  temp_被保険者氏名カナ,
+            DbT5101NinteiShinseiJoho."hihokenshaName"  AS  temp_被保険者氏名,
+            DbT5101NinteiShinseiJoho."ninteiShinseiYMD"  AS  temp_申請年月日,
+            DbT5101NinteiShinseiJoho."seibetsu"  AS  temp_性別コード,
+            DbT5101NinteiShinseiJoho."seinengappiYMD"  AS  temp_生年月日,
+            DbT5101NinteiShinseiJoho."jusho"  AS  temp_被保険者住所,
+            DbT5101NinteiShinseiJoho."yubinNo"  AS  temp_被保険者郵便番号,
+            DbT5101NinteiShinseiJoho."shinseishoKanriNo"  AS  temp_申請書管理番号,
+            DbT5101NinteiShinseiJoho."ninteiShinseiShinseijiKubunCode"  AS  temp_申請区分コード
+        FROM 
+            rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101NinteiShinseiJoho  <!--要介護認定申請情報-->
+        INNER JOIN
+            rgdb."DbT5051KoseiShichosonMaster"  AS  DbT5051KoseiShichosonMaster  <!--構成市町村マスタ-->
+          ON  DbT5051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
+        INNER JOIN
+            rgdb."DbT5910NinteichosaItakusakiJoho"  AS  DbT5910NinteichosaItakusakiJoho  <!--認定調査委託先情報-->
+          ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT5051KoseiShichosonMaster."shichosonCode"
+        INNER JOIN
+            rgdb."DbT5913ChosainJoho"  AS  DbT5913ChosainJoho     <!--調査員情報-->
+          ON  DbT5913ChosainJoho."shichosonCode" = DbT5910NinteichosaItakusakiJoho."shichosonCode"
+         AND  DbT5913ChosainJoho."ninteichosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
+        INNER JOIN
+            (
+                SELECT
+                    "shinseishoKanriNo",
+                    MAX("ninteichosaIraiRirekiNo") AS ninteichosaIraiRirekiNo
+                FROM
+                    rgdb."DbT5201NinteichosaIraiJoho"   <!--認定調査依頼情報-->
+                WHERE
+                    "isDeleted" = FALSE
+                GROUP BY
+                    "shinseishoKanriNo"
+            ) AS TB1
+                ON TB1."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+        INNER JOIN
+            rgdb."DbT5201NinteichosaIraiJoho"  AS  DbT5201NinteichosaIraiJoho       <!--認定調査依頼情報-->
+          ON  DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+         AND  DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = TB1.ninteichosaIraiRirekiNo
+         AND  DbT5201NinteichosaIraiJoho."ninteichosaKigenYMD" <![CDATA[<]]> #{temp_基準日}
+         <if test="temp_印刷済対象者==1">
+            AND (DbT5201NinteichosaIraiJoho."ninteichosaTokusokuYMD" is null OR DbT5201NinteichosaIraiJoho."ninteichosaTokusokuYMD" = '')
+         </if>
+        INNER JOIN
+            rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho
+          ON  DbT5105NinteiKanryoJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+         AND  DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" is not null AND DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" != ''
+         AND  DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" is not null AND DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" != ''
+         AND  (DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" = '')
+         AND  (DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" = '')
+         AND  (DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" = '')
+         AND  (DbT5105NinteiKanryoJoho."centerSoshinYMD" is null OR DbT5105NinteiKanryoJoho."centerSoshinYMD" = '')
+        <where>
+            1 = 1
+            <if test="temp_保険者コード!=null and temp_保険者コード!=''">
+                AND  DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" = #{temp_保険者コード}
+            </if>
+            <if test="temp_認定調査委託先コード!=null and temp_認定調査委託先コード!=''">
+                AND  DbT5101NinteiShinseiJoho."ninteiChosaItakusakiCode" = #{temp_認定調査委託先コード}
+            </if>
+            <if test="temp_認定調査員コード!=null and temp_認定調査員コード!=''">
+                AND  DbT5101NinteiShinseiJoho."ninteiChosainCode" = #{temp_認定調査員コード}
+            </if>
+        </where>
+            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
+            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
+        ORDER BY  #{temp_出力順}
+    </select>
+    
+    
+    <!-- NinteiChosaTokusokuTaishoshaIchiranhyoEntityの項目にマッピングします。-->
+    <resultMap id="resultMap_NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity" autoMapping="true">
+        <result property="temp_市町村コード" column="temp_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="temp_市町村名称" column="temp_市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_保険者番号" column="temp_保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_被保険者番号" column="temp_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_被保険者氏名カナ" column="temp_被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <result property="temp_被保険者氏名" column="temp_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="temp_申請日" column="temp_申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="temp_督促状発行日" column="temp_督促状発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="temp_事業者コード" column="temp_事業者コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="temp_事業者名称" column="temp_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_事業者住所" column="temp_事業者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_事業者電話番号" column="temp_事業者電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+    </resultMap>
+    <select id="select認定調査督促対象者一覧表ByKey"
+              resultMap="resultMap_NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity" 
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter"
+              fetchSize="500">
+        SELECT
+           DbT5051KoseiShichosonMaster."shichosonCode" AS temp_市町村コード,
+           DbT5051KoseiShichosonMaster."shichosonMeisho"  AS  temp_市町村名称,
+           DbT5051KoseiShichosonMaster."shoKisaiHokenshaNo" AS temp_保険者番号,
+           DbT5101NinteiShinseiJoho."hihokenshaNo"  AS  temp_被保険者番号,
+           DbT5101NinteiShinseiJoho."hihokenshaKana"  AS  temp_被保険者氏名カナ,
+           DbT5101NinteiShinseiJoho."hihokenshaName"  AS  temp_被保険者氏名,
+           DbT5201NinteichosaIraiJoho."ninteichosaIraiYMD" AS temp_申請日,
+           DbT5201NinteichosaIraiJoho."ninteichosaTokusokuYMD" AS temp_督促状発行日,
+           DbT5910NinteichosaItakusakiJoho."jigyoshaNo"  AS  temp_事業者コード,  <!--TODO QA：テーブルにこの項目は「事業者No」と定義されています。QANo.22 -->
+           DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho"  AS  temp_事業者名称,
+           DbT5910NinteichosaItakusakiJoho."jusho"  AS  temp_事業者住所,
+           DbT5910NinteichosaItakusakiJoho."telNo"  AS  temp_事業者電話番号
+        FROM 
+            rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101NinteiShinseiJoho  <!--要介護認定申請情報-->
+        INNER JOIN
+            rgdb."DbT5051KoseiShichosonMaster"  AS  DbT5051KoseiShichosonMaster  <!--構成市町村マスタ-->
+          ON  DbT5051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
+        
+        
+        INNER JOIN
+            rgdb."DbT5910NinteichosaItakusakiJoho"  AS  DbT5910NinteichosaItakusakiJoho  <!--認定調査委託先情報  TODO QA:設計書でこのテーブルを利用していません。#72754 -->
+          ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT5051KoseiShichosonMaster."shichosonCode"
+        
+        
+        INNER JOIN
+            (
+                SELECT
+                    "shinseishoKanriNo",
+                    MAX("ninteichosaIraiRirekiNo") AS ninteichosaIraiRirekiNo
+                FROM
+                    rgdb."DbT5201NinteichosaIraiJoho"  AS  DbT5201NinteichosaIraiJoho  <!--認定調査依頼情報 -->
+                WHERE
+                    DbT5201NinteichosaIraiJoho."isDeleted" = FALSE
+                GROUP BY
+                    "shinseishoKanriNo"
+            ) AS TB1
+                ON TB1."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+        INNER JOIN
+            rgdb."DbT5201NinteichosaIraiJoho"  AS  DbT5201NinteichosaIraiJoho  <!--認定調査依頼情報"-->
+          ON  DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+         AND  DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = TB1.ninteichosaIraiRirekiNo
+         <if test="temp_印刷期間開始日!=null and temp_印刷期間開始日!='' and temp_印刷期間終了日!=null and temp_印刷期間終了日!=''" >
+              AND  DbT5201NinteichosaIraiJoho."ninteichosaTokusokuYMD" <![CDATA[>=]]> #{temp_印刷期間開始日}
+              AND  DbT5201NinteichosaIraiJoho."ninteichosaTokusokuYMD" <![CDATA[<=]]> #{temp_印刷期間終了日}
+          </if>
+          <if test="temp_印刷期間開始日!=null and temp_印刷期間開始日!='' and (temp_印刷期間終了日==null or temp_印刷期間終了日=='')">
+              AND  DbT5201NinteichosaIraiJoho."ninteichosaTokusokuYMD" <![CDATA[>=]]> #{temp_印刷期間開始日}
+          </if>
+          <if test="(temp_印刷期間開始日==null or temp_印刷期間開始日=='') and temp_印刷期間終了日!=null and temp_印刷期間終了日!=''">
+              AND  DbT5201NinteichosaIraiJoho."ninteichosaTokusokuYMD" <![CDATA[<=]]> #{temp_印刷期間終了日}
+          </if>
+        INNER JOIN
+            rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho
+          ON  DbT5105NinteiKanryoJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+         AND  DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" is not null AND DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" != ''
+         AND  DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" is not null AND DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" != ''
+         AND  (DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" = '')
+         AND  (DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" = '')
+         AND  (DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" = '')
+         AND  (DbT5105NinteiKanryoJoho."centerSoshinYMD" is null OR DbT5105NinteiKanryoJoho."centerSoshinYMD" = '')
+        <where>
+            1 = 1
+            <if test="temp_保険者コード!=null and temp_保険者コード!=''">
+                AND  DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" = #{temp_保険者コード}
+            </if>
+            <if test="temp_認定調査委託先コード!=null and temp_認定調査委託先コード!=''">
+                AND  DbT5101NinteiShinseiJoho."ninteiChosaItakusakiCode" = #{temp_認定調査委託先コード}
+            </if>
+            <if test="temp_認定調査員コード!=null and temp_認定調査員コード!=''">
+                AND  DbT5101NinteiShinseiJoho."ninteiChosainCode" = #{temp_認定調査員コード}
+            </if>
+        </where>
+            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
+            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
+        ORDER BY  #{temp_出力順}
+    </select>
+</mapper>
