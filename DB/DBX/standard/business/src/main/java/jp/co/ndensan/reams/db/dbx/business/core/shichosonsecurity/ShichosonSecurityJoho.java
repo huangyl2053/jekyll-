@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyukeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
