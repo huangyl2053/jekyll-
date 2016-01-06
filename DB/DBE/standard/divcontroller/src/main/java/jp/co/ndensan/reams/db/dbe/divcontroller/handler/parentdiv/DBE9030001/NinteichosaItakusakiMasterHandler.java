@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.tyousai.chosainjoho.ChosainJohoMa
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.koseishichosonmaster.KoseiShichosonMasterManager;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -338,8 +339,9 @@ public class NinteichosaItakusakiMasterHandler {
      * @return 削除行データの整合性
      */
     public boolean 削除行データの整合性チェック(LasdecCode 市町村コード, RString 認定調査委託先コード) {
-        int 件数 = chosainJohoManager.countByShichosonCodeAndNinteichosaItakusakiCode(市町村コード, 認定調査委託先コード);
-        return 件数 <= 0;
+        return false;
+//        int 件数 = chosainJohoManager.countByShichosonCodeAndNinteichosaItakusakiCode(市町村コード, 認定調査委託先コード);
+//        return 件数 <= 0;
     }
 
     private void set明細照会状態() {
@@ -418,7 +420,7 @@ public class NinteichosaItakusakiMasterHandler {
 
     private NinteichosaItakusakiJoho converterDataSourceFromKoseiShichosonMaster(dgChosainIchiran_Row row, EntityDataState state, int rowIndex) {
         LasdecCode shichosonCode = new LasdecCode(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString()).get(rowIndex));
-        NinteichosaItakusaki ninteichosaItakusaki = johoManager.selectByKey(shichosonCode, row.getChosaItakusakiCode().getValue());
+        NinteichosaItakusaki ninteichosaItakusaki = johoManager.selectByKey(shichosonCode, new ChosaItakusakiCode(row.getChosaItakusakiCode().getValue()));
         if (ninteichosaItakusaki == null || ninteichosaItakusaki.getEntity() == null) {
             ninteichosaItakusaki = new NinteichosaItakusaki();
         }

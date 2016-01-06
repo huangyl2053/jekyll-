@@ -6,11 +6,11 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaikaisaino.ShinsakaiKaisaiNo;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101ShinsakaiJoho.shinsakaiKaisaiYMD;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5106ShinsakaiWariateIinJoho;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5106ShinsakaiWariateIinJoho.shinsakaiIinCode;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5106ShinsakaiWariateIinJoho.shinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5106ShinsakaiWariateIinJohoEntity;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5503ShinsakaiWariateIinJoho.shinsakaiKaisaiYMD;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5593GogitaiWariateIinJoho.shinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -103,4 +103,5 @@ public class ShinsakaiWariateIinJohoDac implements IReplaceable<DbT5106Shinsakai
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(data).execute();
     }
+
 }

@@ -5,16 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.syujii.koseishichosonmaster;
 
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.syujii.koseishichosonmaster.KoseiShichosonMaster;
-import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJoho;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.koseishichosonmaster.KoseiShichosonMasterMapperParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5051KoseiShichosonMasterDac;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.koseishichosonmaster.IKoseiShichosonMasterMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoManager;
+import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.koseishichoson.KoseiShichosonMasterMapperParameter;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.koseishichoson.IKoseiShichosonMasterMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -75,7 +73,7 @@ public class KoseiShichosonMasterManager {
         requireNonNull(構成市町村マスタ検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("構成市町村マスタ検索条件"));
         IKoseiShichosonMasterMapper mapper = mapperProvider.create(IKoseiShichosonMasterMapper.class);
 
-        KoseiShichosonMasterRelateEntity relateEntity = mapper.getKoseiShichosonMasterRelateEntity(構成市町村マスタ検索条件);
+        KoseiShichosonMasterRelateEntity relateEntity = mapper.getKoseiShichosonEntity(構成市町村マスタ検索条件);
         if (relateEntity == null) {
             return null;
         }
@@ -97,14 +95,15 @@ public class KoseiShichosonMasterManager {
         if (!構成市町村マスタ.hasChanged()) {
             return false;
         }
-        構成市町村マスタ = 構成市町村マスタ.modifiedModel();
-        save主治医医療機関情報リスト(構成市町村マスタ.getShujiiIryoKikanJohoList());
-        return 1 == 構成市町村マスタDac.save(構成市町村マスタ.toEntity());
+//        構成市町村マスタ = 構成市町村マスタ.modifiedModel();
+//        save主治医医療機関情報リスト(構成市町村マスタ.getShujiiIryoKikanJohoList());
+//        return 1 == 構成市町村マスタDac.save(構成市町村マスタ.toEntity());
+        return false;
     }
 
-    private void save主治医医療機関情報リスト(List<ShujiiIryoKikanJoho> 主治医医療機関情報List) {
-        for (ShujiiIryoKikanJoho 主治医医療機関情報 : 主治医医療機関情報List) {
-            主治医医療機関情報Manager.save(主治医医療機関情報);
-        }
-    }
+//    private void save主治医医療機関情報リスト(List<ShujiiIryoKikanJoho> 主治医医療機関情報List) {
+//        for (ShujiiIryoKikanJoho 主治医医療機関情報 : 主治医医療機関情報List) {
+//            主治医医療機関情報Manager.save(主治医医療機関情報);
+//        }
+//    }
 }

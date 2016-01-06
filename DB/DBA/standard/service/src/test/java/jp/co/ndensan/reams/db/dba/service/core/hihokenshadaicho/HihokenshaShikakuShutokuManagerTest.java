@@ -59,7 +59,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
 
         private static void clearTable() {
             CSVDataUtilForUseSession csvDataUtil = new CSVDataUtilForUseSession();
-            csvDataUtil.clearTable(sqlSession, "DbT1001HihokenshaDaicho");
+//            csvDataUtil.clearTable(sqlSession, "DbT1001HihokenshaDaicho");
         }
 
         @Before
@@ -106,7 +106,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
 
         private static void clearTable() {
             CSVDataUtilForUseSession csvDataUtil = new CSVDataUtilForUseSession();
-            csvDataUtil.clearTable(sqlSession, "DbT1001HihokenshaDaicho");
+//            csvDataUtil.clearTable(sqlSession, "DbT1001HihokenshaDaicho");
         }
 
         @Before
@@ -132,7 +132,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
 
         private static void clearTable() {
             CSVDataUtilForUseSession csvDataUtil = new CSVDataUtilForUseSession();
-            csvDataUtil.clearTable(sqlSession, "DbT1001HihokenshaDaicho");
+//            csvDataUtil.clearTable(sqlSession, "DbT1001HihokenshaDaicho");
         }
 
         @Before
@@ -165,7 +165,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
 
         private static void clearTable() {
             CSVDataUtilForUseSession csvDataUtil = new CSVDataUtilForUseSession();
-            csvDataUtil.clearTable(sqlSession, "DbT1001HihokenshaDaicho");
+//            csvDataUtil.clearTable(sqlSession, "DbT1001HihokenshaDaicho");
         }
 
         @Before
@@ -248,7 +248,7 @@ public class HihokenshaShikakuShutokuManagerTest extends DbaTestDacBase {
 
         private static void clearTable() {
             CSVDataUtilForUseSession csvDataUtil = new CSVDataUtilForUseSession();
-            csvDataUtil.clearTable(sqlSession, "DbT1001HihokenshaDaicho");
+//            csvDataUtil.clearTable(sqlSession, "DbT1001HihokenshaDaicho");
         }
 
         @Before

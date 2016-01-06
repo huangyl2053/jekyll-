@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.ShikakuKanre
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.ShikakuSyousayiEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.ShikakuTeyiseyiEntity;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -567,12 +567,12 @@ public class HihokenshaShikakuTeiseiManager {
                 if (資格訂正情報Entity.get旧保険者() != null && !資格訂正情報Entity.get旧保険者().isEmpty()) {
                     if (市町村セキュリティ情報.get導入形態コード().equals(CODE_112)) {
                         kyuShichosonCodeJoho = KyuShichosonCode.getKyuShichosonCodeJoho(市町村セキュリティ情報.get市町村情報().get市町村コード(),
-                                DonyukeitaiCode.事務構成市町村);
+                                DonyuKeitaiCode.事務構成市町村);
                         旧市町村コード = this.get旧市町村コード(資格訂正情報Entity, 旧市町村コード);
                     }
                     if (市町村セキュリティ情報.get導入形態コード().equals(CODE_120)) {
                         kyuShichosonCodeJoho = KyuShichosonCode.getKyuShichosonCodeJoho(市町村セキュリティ情報.get市町村情報().get市町村コード(),
-                                DonyukeitaiCode.事務単一);
+                                DonyuKeitaiCode.事務単一);
                         旧市町村コード = this.get旧市町村コード(資格訂正情報Entity, 旧市町村コード);
                     }
                 }
@@ -587,10 +587,10 @@ public class HihokenshaShikakuTeiseiManager {
                         }
                     }
                     if (!広住特措置元市町村コード.isEmpty()) {
-                        kyuShichosonCodeJoho = KyuShichosonCode.getKyuShichosonCodeJoho(広住特措置元市町村コード, DonyukeitaiCode.事務広域);
+                        kyuShichosonCodeJoho = KyuShichosonCode.getKyuShichosonCodeJoho(広住特措置元市町村コード, DonyuKeitaiCode.事務広域);
                         旧市町村コード = this.get旧市町村コード(資格訂正情報Entity, 旧市町村コード);
                     } else if (!市町村コード.isEmpty()) {
-                        kyuShichosonCodeJoho = KyuShichosonCode.getKyuShichosonCodeJoho(市町村コード, DonyukeitaiCode.事務広域);
+                        kyuShichosonCodeJoho = KyuShichosonCode.getKyuShichosonCodeJoho(市町村コード, DonyuKeitaiCode.事務広域);
                         旧市町村コード = this.get旧市町村コード(資格訂正情報Entity, 旧市町村コード);
                     }
                 }

@@ -29,6 +29,10 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzPersistence</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzDefinition</artifactId>
+        </dependency>
         <!-- 公開系 -->
         <!-- テスト -->
         <!-- ツール -->
@@ -44,6 +48,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
+            <type>test-jar</type>
         </dependency>
     </dependencies>
 </project>

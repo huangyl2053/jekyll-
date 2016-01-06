@@ -39,6 +39,10 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzService</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
+        </dependency>
         <!-- �e�X�g -->
         <dependency>
             <groupId>${project.groupId}</groupId>

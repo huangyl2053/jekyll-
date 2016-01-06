@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysJuk
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.JukyuShikakuShomeishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.jukyushikakushomeishohakko.IJukyuShikakuShomeishoHakkoRelateMapper;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.YukoMukoKubun;
+import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

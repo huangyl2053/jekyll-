@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbu.business.core.shikakujiyu;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.shikakujiyushutoku.ShikakuJiyuShutoku;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DonyukeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakujiyushutoku.ShikakuJiyuShutoku;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbuTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -54,7 +54,7 @@ public class SikakuJiyuShutokuManagerTest extends DbuTestBase {
             SikakuJiyuShutokuManager sikakuJiyuShutokuManager = new SikakuJiyuShutokuManager();
             List<ShikakuJiyuShutoku> result = sikakuJiyuShutokuManager.shikakuJiyuShutoku(
                     new CodeShubetsu("0127"), new FlexibleDate(new RString("20150101")),
-                    DonyukeitaiCode.事務構成市町村.getCode(), new RString("0"));
+                    DonyuKeitaiCode.事務構成市町村.getCode(), new RString("0"));
             return result;
         }
 
@@ -94,7 +94,7 @@ public class SikakuJiyuShutokuManagerTest extends DbuTestBase {
             SikakuJiyuShutokuManager sikakuJiyuShutokuManager = new SikakuJiyuShutokuManager();
             List<ShikakuJiyuShutoku> result = sikakuJiyuShutokuManager.shikakuJiyuShutoku(
                     new CodeShubetsu("0126"), new FlexibleDate(new RString("20150101")),
-                    DonyukeitaiCode.事務構成市町村.getCode(), new RString("0"));
+                    DonyuKeitaiCode.事務構成市町村.getCode(), new RString("0"));
             return result;
         }
 
@@ -134,7 +134,7 @@ public class SikakuJiyuShutokuManagerTest extends DbuTestBase {
             SikakuJiyuShutokuManager sikakuJiyuShutokuManager = new SikakuJiyuShutokuManager();
             List<ShikakuJiyuShutoku> result = sikakuJiyuShutokuManager.shikakuJiyuShutoku(
                     new CodeShubetsu("0126"), new FlexibleDate(new RString("20150101")),
-                    DonyukeitaiCode.事務広域.getCode(), new RString("0"));
+                    DonyuKeitaiCode.事務広域.getCode(), new RString("0"));
             return result;
         }
 
@@ -188,7 +188,7 @@ public class SikakuJiyuShutokuManagerTest extends DbuTestBase {
             SikakuJiyuShutokuManager sikakuJiyuShutokuManager = new SikakuJiyuShutokuManager();
             List<ShikakuJiyuShutoku> result = sikakuJiyuShutokuManager.shikakuJiyuShutoku(
                     new CodeShubetsu("0126"), new FlexibleDate(new RString("20150101")),
-                    DonyukeitaiCode.事務構成市町村.getCode(), new RString("1"));
+                    DonyuKeitaiCode.事務構成市町村.getCode(), new RString("1"));
             return result;
         }
 
@@ -279,7 +279,7 @@ public class SikakuJiyuShutokuManagerTest extends DbuTestBase {
             SikakuJiyuShutokuManager sikakuJiyuShutokuManager = new SikakuJiyuShutokuManager();
             List<ShikakuJiyuShutoku> result = sikakuJiyuShutokuManager.shikakuJiyuShutoku(
                     new CodeShubetsu("0126"), new FlexibleDate(new RString("20150101")),
-                    DonyukeitaiCode.事務広域.getCode(), new RString("1"));
+                    DonyuKeitaiCode.事務広域.getCode(), new RString("1"));
             return result;
         }
 
@@ -343,7 +343,7 @@ public class SikakuJiyuShutokuManagerTest extends DbuTestBase {
             SikakuJiyuShutokuManager sikakuJiyuShutokuManager = new SikakuJiyuShutokuManager();
             List<ShikakuJiyuShutoku> result = sikakuJiyuShutokuManager.shikakuJiyuShutoku(
                     new CodeShubetsu("0126"), new FlexibleDate(new RString("20150101")),
-                    DonyukeitaiCode.事務構成市町村.getCode(), new RString("0"));
+                    DonyuKeitaiCode.事務構成市町村.getCode(), new RString("0"));
 
             assertThat(result.size(), is(0));
         }
@@ -360,7 +360,7 @@ public class SikakuJiyuShutokuManagerTest extends DbuTestBase {
             SikakuJiyuShutokuManager sikakuJiyuShutokuManager = new SikakuJiyuShutokuManager();
             List<ShikakuJiyuShutoku> result = sikakuJiyuShutokuManager.shikakuJiyuShutoku(
                     new CodeShubetsu("0127"), new FlexibleDate(new RString("20150101")),
-                    DonyukeitaiCode.事務構成市町村.getCode(), new RString("0"));
+                    DonyuKeitaiCode.事務構成市町村.getCode(), new RString("0"));
 
             assertThat(result.size(), is(0));
 

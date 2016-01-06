@@ -10,12 +10,12 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosaitakusaki.NinteichosaItakusakiKensakuParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.tyousai.koseishichosonmaster.KoseiShichosonMasterMapperParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5051KoseiShichosonMasterDac;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.tyousai.koseishichosonmaster.IKoseiShichosonMasterMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoManager;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.koseishichoson.KoseiShichosonMasterMapperParameter;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.koseishichoson.IKoseiShichosonMasterMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -80,7 +80,8 @@ public class KoseiShichosonMasterManager {
             return null;
         }
         relateEntity.initializeMd5ToEntities();
-        return new KoseiShichosonMaster(relateEntity);
+//        return new KoseiShichosonMaster(relateEntity);
+        return null;
     }
 
     /**
@@ -99,7 +100,7 @@ public class KoseiShichosonMasterManager {
         ArrayList<KoseiShichosonMaster> 構成市町村マスタList = new ArrayList<>();
         for (KoseiShichosonMasterRelateEntity relateEntity : relateEntityList) {
             relateEntity.initializeMd5ToEntities();
-            構成市町村マスタList.add(new KoseiShichosonMaster(relateEntity));
+//            構成市町村マスタList.add(new KoseiShichosonMaster(relateEntity));
         }
         return 構成市町村マスタList;
 
@@ -138,11 +139,11 @@ public class KoseiShichosonMasterManager {
      */
     public List<KoseiShichosonMaster> ninteichosaItakusakiSearch(NinteichosaItakusakiKensakuParameter 構成市町村マスタ検索条件) {
         IKoseiShichosonMasterMapper mapper = mapperProvider.create(IKoseiShichosonMasterMapper.class);
-        List<KoseiShichosonMasterRelateEntity> entitys = mapper.ninteichosaItakusakiSearch(構成市町村マスタ検索条件);
+//        List<KoseiShichosonMasterRelateEntity> entitys = mapper.ninteichosaItakusakiSearch(構成市町村マスタ検索条件);
         List<KoseiShichosonMaster> list = new ArrayList<>();
-        for (KoseiShichosonMasterRelateEntity relateEntity : entitys) {
-            list.add(new KoseiShichosonMaster(relateEntity));
-        }
+//        for (KoseiShichosonMasterRelateEntity relateEntity : entitys) {
+//            list.add(new KoseiShichosonMaster(relateEntity));
+//        }
         return list;
     }
 }

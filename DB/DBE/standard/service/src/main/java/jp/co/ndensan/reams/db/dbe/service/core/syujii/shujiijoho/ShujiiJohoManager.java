@@ -6,12 +6,13 @@
 package jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiijoho;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5912ShujiiJohoDac;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5912ShujiiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -49,8 +50,8 @@ public class ShujiiJohoManager {
     @Transaction
     public ShujiiJoho get主治医情報(
             LasdecCode 市町村コード,
-            RString 主治医医療機関コード,
-            RString 主治医コード) {
+            ShujiiIryokikanCode 主治医医療機関コード,
+            ShujiiCode 主治医コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
         requireNonNull(主治医コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医コード"));

@@ -12,10 +12,10 @@ import jp.co.ndensan.reams.db.dba.business.core.koseishichosonmaster.koseishicho
 import jp.co.ndensan.reams.db.dba.business.shichoson.ShichosonBusiness;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihousyosai.HihousyosaiFinderParameter;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.service.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.kyushichosoncode.KyuShichosonCodeJoho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -70,7 +70,7 @@ public class HihousyosaiFinder {
     @Transaction
     public SearchResult<KoseiShichosonMaster> getKoseiShichosonMasterList() {
         List<KoseiShichosonMaster> businessList = new ArrayList<>();
-        List<DbT7051KoseiShichosonMasterEntity> entityList = dbT7051Dac.selectByGappeiKyuShichosonKubun();
+        List<DbT7051KoseiShichosonMasterEntity> entityList = dbT7051Dac.selectAll();
         for (DbT7051KoseiShichosonMasterEntity entity : entityList) {
             businessList.add(new KoseiShichosonMaster(entity));
         }

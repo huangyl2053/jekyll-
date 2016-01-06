@@ -6,38 +6,40 @@ package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.GogitaiDummyKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiKyukaiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaiiincode.ShinsakaiIinCode;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaikaisaino.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.timestring.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5014ShinsakaiIinJogaiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101ShinsakaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5102ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5106ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.JogaiShinsakaiIinEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 /**
- * 審査会などのテストで使用されるEntityを生成するクラスです。
+ * 要介護認定申請情報などのテストで使用されるEntityを生成するクラスです。
  *
  * @author n8178 城間篤人
  */
@@ -50,68 +52,128 @@ public final class ShinsakaiMockEntityCreator {
     }
 
     /**
-     * 審査会情報Entityを生成します。
+     * 要介護認定申請情報Entityを生成します。
      *
-     * @param 開催番号 開催番号
-     * @param 開催年月日 開催年月日
-     * @return 審査会情報Entity
+     * @return 要介護認定申請情報Entity
      */
-    public static DbT5101ShinsakaiJohoEntity create審査会情報Entity(int 開催番号, String 開催年月日) {
-        DbT5101ShinsakaiJohoEntity entity = new DbT5101ShinsakaiJohoEntity();
-        entity.setShinsakaiKaisaiNo(開催番号);
-        entity.setShinsakaiKaisaiYMD(new FlexibleDate(開催年月日));
-        entity.setShinsakaiKaishiTime(new RString("0830"));
-        entity.setShinsakaiShuryoTime(new RString("1720"));
-        entity.setShinsakaiKaisaiBashoCode(new RString("A001"));
-        entity.setGogitaiNo(12);
-        entity.setShinsakaiYoteiTeiin(6);
-        entity.setShinsakaiSaidaiTeiin(7);
-        entity.setShinsakaiJidoWariateTeiin(8);
-        entity.setShinsakaiIinTeiin(9);
-        entity.setGogitaiSeishinkaiSonzaiFlag(true);
-        entity.setGogitaiDummyFlag(false);
-        entity.setShinsakaiShiryoSakuseiYMD(new FlexibleDate("20090101"));
-        entity.setShinsakaiKyukaiFlag(false);
-        entity.setShinsakaiWariateZumiNinzu(5);
-        entity.setShiryoSakuseiKubun(new Code("0"));
+    public static DbT5101NinteiShinseiJohoEntity create要介護認定申請情報Entity(ShinseishoKanriNo 申請書管理番号) {
+        DbT5101NinteiShinseiJohoEntity entity = new DbT5101NinteiShinseiJohoEntity();
+        entity.setAge(1);
+        entity.setChikuCode(ChikuCode.EMPTY);
+        entity.setChosaKubun(Code.EMPTY);
+        entity.setEnkiKetteiYMD(new FlexibleDate("20090101"));
+        entity.setEnkiMikomiKaishiYMD(new FlexibleDate("20090101"));
+        entity.setEnkiMikomiShuryoYMD(new FlexibleDate("20090101"));
+        entity.setEnkiRiyu(RString.EMPTY);
+        entity.setEnkiTsuchiHakkoKaisu(1);
+        entity.setEnkiTsuchiHakkoYMD(new FlexibleDate("20090101"));
+        entity.setEnkitsuchiNashiDoiFlag(true);
+        entity.setHihokenshaKana(AtenaKanaMeisho.EMPTY);
+        entity.setHihokenshaKubunCode(RString.HALF_SPACE);
+        entity.setHihokenshaName(AtenaMeisho.EMPTY);
+        entity.setHihokenshaNo(RString.EMPTY);
+        entity.setHomonChosasakiJusho(AtenaJusho.EMPTY);
+        entity.setHomonChosasakiName(AtenaMeisho.EMPTY);
+        entity.setHomonChosasakiTelNo(TelNo.EMPTY);
+        entity.setHomonChosasakiYubinNo(YubinNo.EMPTY);
+        entity.setIfSofuYMD(new FlexibleDate("20090101"));
+        entity.setIkenshoDataShubetsu(Code.EMPTY);
+        entity.setInsertDantaiCd(RString.HALF_SPACE);
+        entity.setJidoWariateJogaishaKubun(RString.EMPTY);
+        entity.setJohoteikyoDoiFlag(true);
+        entity.setJohoteikyoSiryoOutputYMD(new FlexibleDate("20090101"));
+        entity.setJusho(AtenaJusho.EMPTY);
+        entity.setKateiHomonFlag(true);
+        entity.setKoikinaiTenkyoKubun(Code.EMPTY);
+        entity.setKoroshoIfShikibetsuCode(Code.EMPTY);
+        entity.setKoshinTsuchiHakkoKanryoYMD(new FlexibleDate("20090101"));
+        entity.setKoshinTsuchiHakkoYMD(new FlexibleDate("20090101"));
+        entity.setKyakkaRiyu(RString.EMPTY);
+        entity.setKyakkaYMD(new FlexibleDate("20090101"));
+        entity.setLastUpdateReamsLoginId(RString.FULL_SPACE);
+        entity.setLogicalDeletedFlag(true);
+        entity.setMinashiNigoEtcTaishoFlag(true);
+        entity.setNigoIryoHokenKigoBango(RString.HALF_SPACE);
+        entity.setNigoIryoHokenshaName(RString.HALF_SPACE);
+        entity.setNigoIryoHokenshaName(RString.HALF_SPACE);
+        entity.setNigoTokuteiShippeiCode(Code.EMPTY);
+        entity.setNinteiChosaItakusakiCode(ChosaItakusakiCode.EMPTY);
+        entity.setNinteiChosainCode(ChosainCode.EMPTY);
+        entity.setNinteiShinseiEdabanCode(EdabanCode.EMPTY);
+        entity.setNinteiShinseiHoreiKubunCode(Code.EMPTY);
+        entity.setNinteiShinseiJohoTorokuYMD(new FlexibleDate("20090101"));
+        entity.setNinteiShinseiShinseijiKubunCode(Code.EMPTY);
+        entity.setNinteiShinseiYMD(new FlexibleDate("20090101"));
+        entity.setNinteiShinseiYukoKubunCode(Code.EMPTY);
+        entity.setNyushoShisetsuCode(JigyoshaNo.EMPTY);
+        entity.setRenrakuJikoToChosain(RString.EMPTY);
+        entity.setRenrakuJikoToShujii(RString.EMPTY);
+        entity.setSaiChosaIraiKaisu(1);
+        entity.setSaiSakuseiIraiKaisu(1);
+        entity.setSeibetsu(Code.EMPTY);
+        entity.setSeinengappiYMD(new FlexibleDate("20090101"));
+        entity.setShichosonRenrakuJiko(RString.EMPTY);
+        entity.setShienShinseiKubun(RString.HALF_SPACE);
+        entity.setShikibetsuCode(ShikibetsuCode.EMPTY);
+        entity.setShinsaKeizokuFlag(true);
+        entity.setShinsakaiYusenWaritsukeKubunCode(Code.EMPTY);
+        entity.setShinseiNendo(FlexibleYear.MIN);
+        entity.setShinseiServiceDeleteRiyu(RString.HALF_SPACE);
+        entity.setShinseishoKanriNo(ShinseishoKanriNo.EMPTY);
+        entity.setShisetsuNyushoFlag(true);
+        entity.setShishoCode(RString.EMPTY);
+        entity.setShiteiiFlag(true);
+        entity.setShoKisaiHokenshaNo(RString.HALF_SPACE);
+        entity.setShoriJotaiKubun(Code.EMPTY);
+        entity.setShujiiCode(ShujiiCode.EMPTY);
+        entity.setShujiiIryokikanCode(ShujiiIryokikanCode.EMPTY);
+        entity.setTelNo(TelNo.EMPTY);
+        entity.setTorisageKubunCode(Code.EMPTY);
+        entity.setTorisageRiyu(RString.EMPTY);
+        entity.setTorisageYMD(new FlexibleDate("20090101"));
+        entity.setYubinNo(YubinNo.EMPTY);
+        entity.setZenYokaigoKubunCode(Code.EMPTY);
+        entity.setZenkaiNinteiYMD(FlexibleDate.MIN);
+        entity.setZenkaiYukoKikanEnd(new FlexibleDate("20090101"));
+        entity.setZenkaiYukoKikanStart(new FlexibleDate("20090101"));
         return entity;
     }
 
     /**
-     * 審査会情報Entityを生成します。
+     * 要介護認定申請情報Entityを生成します。
      *
      * @param 開催番号 開催番号
      * @param 開催年月日 開催年月日
      * @param 開催場所番号 開催場所番号
-     * @return 審査会情報Entity
+     * @return 要介護認定申請情報Entity
      */
-    public static DbT5101ShinsakaiJohoEntity create審査会情報Entity(int 開催番号, String 開催年月日, String 開催場所番号) {
-        DbT5101ShinsakaiJohoEntity entity = create審査会情報Entity(開催番号, 開催年月日);
-        entity.setShinsakaiKaisaiBashoCode(new RString(開催場所番号));
-        return entity;
-    }
+//    public static DbT5101NinteiShinseiJohoEntity create要介護認定申請情報Entity(int 開催番号, String 開催年月日, String 開催場所番号) {
+//        DbT5101NinteiShinseiJohoEntity entity = create要介護認定申請情報Entity(開催番号, 開催年月日);
+//        entity.setShinsakaiKaisaiBashoCode(new RString(開催場所番号));
+//        return entity;
+//    }
 
     /**
-     * すべてのキー項目＋開催場所番号を指定して、審査会情報Entityを生成します。
+     * すべてのキー項目＋開催場所番号を指定して、要介護認定申請情報Entityを生成します。
      *
      * @param 開催番号 開催番号
      * @param 開催年月日 開催年月日
      * @param 開始時間 開始時間
      * @param 合議体番号 合議体番号
      * @param 開催場所番号 開催場所番号
-     * @return 審査会情報Entity
+     * @return 要介護認定申請情報Entity
      */
-    public static DbT5101ShinsakaiJohoEntity create審査会情報Entity(int 開催番号, String 開催年月日,
-            int 合議体番号, String 開始時間, String 開催場所番号) {
-        DbT5101ShinsakaiJohoEntity entity = create審査会情報Entity(開催番号, 開催年月日);
-        entity.setGogitaiNo(合議体番号);
-        entity.setShinsakaiKaishiTime(new RString(開始時間));
-        entity.setShinsakaiKaisaiBashoCode(new RString(開催場所番号));
-        return entity;
-    }
+//    public static DbT5101NinteiShinseiJohoEntity create要介護認定申請情報Entity(int 開催番号, String 開催年月日,
+//            int 合議体番号, String 開始時間, String 開催場所番号) {
+//        DbT5101NinteiShinseiJohoEntity entity = create要介護認定申請情報Entity(開催番号, 開催年月日);
+//        entity.setGogitaiNo(合議体番号);
+//        entity.setShinsakaiKaishiTime(new RString(開始時間));
+//        entity.setShinsakaiKaisaiBashoCode(new RString(開催場所番号));
+//        return entity;
+//    }
 
     /**
-     * キー項目以外も含む、すべての要素を指定して、審査会情報Entityを生成します。
+     * キー項目以外も含む、すべての要素を指定して、要介護認定申請情報Entityを生成します。
      *
      * @param 開催番号 開催番号
      * @param 開催年月日 開催年月日
@@ -129,32 +191,32 @@ public final class ShinsakaiMockEntityCreator {
      * @param 審査会資料作成年月日 審査会資料作成年月日
      * @param 審査会割当済み人数 審査会割当済み人数
      * @param 資料作成区分 資料作成区分
-     * @return 審査会情報Entity
+     * @return 要介護認定申請情報Entity
      */
-    public static DbT5101ShinsakaiJohoEntity create審査会情報Entity(ShinsakaiKaisaiNo 開催番号, FlexibleDate 開催年月日,
-            GogitaiNo 合議体番号, TimeString 開始時間, TimeString 終了時間, ShinsakaiKaisaiBashoCode 開催場所番号,
-            int 審査会予定定員, int 審査会最大定員, int 審査会自動割当定員, int 審査会委員定員, GogitaiSeishinkaIshiSonzaiKubun 精神科医存在区分,
-            GogitaiDummyKubun 合議体ダミー区分, ShinsakaiKyukaiKubun 休会区分, FlexibleDate 審査会資料作成年月日, int 審査会割当済み人数,
-            Code 資料作成区分) {
-        DbT5101ShinsakaiJohoEntity entity = new DbT5101ShinsakaiJohoEntity();
-        entity.setShinsakaiKaisaiNo(開催番号.value());
-        entity.setShinsakaiKaisaiYMD(開催年月日);
-        entity.setShinsakaiKaishiTime(開始時間.value());
-        entity.setShinsakaiShuryoTime(終了時間.value());
-        entity.setShinsakaiKaisaiBashoCode(開催場所番号.value());
-        entity.setGogitaiNo(合議体番号.value());
-        entity.setShinsakaiYoteiTeiin(審査会予定定員);
-        entity.setShinsakaiSaidaiTeiin(審査会最大定員);
-        entity.setShinsakaiJidoWariateTeiin(審査会自動割当定員);
-        entity.setShinsakaiIinTeiin(審査会委員定員);
-        entity.setGogitaiSeishinkaiSonzaiFlag(精神科医存在区分.is存在());
-        entity.setGogitaiDummyFlag(合議体ダミー区分.isダミー());
-        entity.setShinsakaiShiryoSakuseiYMD(審査会資料作成年月日);
-        entity.setShinsakaiKyukaiFlag(休会区分.is休会());
-        entity.setShinsakaiWariateZumiNinzu(審査会割当済み人数);
-        entity.setShiryoSakuseiKubun(資料作成区分);
-        return entity;
-    }
+//    public static DbT5101NinteiShinseiJohoEntity create要介護認定申請情報Entity(ShinsakaiKaisaiNo 開催番号, FlexibleDate 開催年月日,
+//            GogitaiNo 合議体番号, TimeString 開始時間, TimeString 終了時間, ShinsakaiKaisaiBashoCode 開催場所番号,
+//            int 審査会予定定員, int 審査会最大定員, int 審査会自動割当定員, int 審査会委員定員, GogitaiSeishinkaIshiSonzaiKubun 精神科医存在区分,
+//            GogitaiDummyKubun 合議体ダミー区分, ShinsakaiKyukaiKubun 休会区分, FlexibleDate 審査会資料作成年月日, int 審査会割当済み人数,
+//            Code 資料作成区分) {
+//        DbT5101NinteiShinseiJohoEntity entity = new DbT5101NinteiShinseiJohoEntity();
+//        entity.setShinsakaiKaisaiNo(開催番号.value());
+//        entity.setShinsakaiKaisaiYMD(開催年月日);
+//        entity.setShinsakaiKaishiTime(開始時間.value());
+//        entity.setShinsakaiShuryoTime(終了時間.value());
+//        entity.setShinsakaiKaisaiBashoCode(開催場所番号.value());
+//        entity.setGogitaiNo(合議体番号.value());
+//        entity.setShinsakaiYoteiTeiin(審査会予定定員);
+//        entity.setShinsakaiSaidaiTeiin(審査会最大定員);
+//        entity.setShinsakaiJidoWariateTeiin(審査会自動割当定員);
+//        entity.setShinsakaiIinTeiin(審査会委員定員);
+//        entity.setGogitaiSeishinkaiSonzaiFlag(精神科医存在区分.is存在());
+//        entity.setGogitaiDummyFlag(合議体ダミー区分.isダミー());
+//        entity.setShinsakaiShiryoSakuseiYMD(審査会資料作成年月日);
+//        entity.setShinsakaiKyukaiFlag(休会区分.is休会());
+//        entity.setShinsakaiWariateZumiNinzu(審査会割当済み人数);
+//        entity.setShiryoSakuseiKubun(資料作成区分);
+//        return entity;
+//    }
 
     /**
      * 審査会割当委員情報Entityを生成します。

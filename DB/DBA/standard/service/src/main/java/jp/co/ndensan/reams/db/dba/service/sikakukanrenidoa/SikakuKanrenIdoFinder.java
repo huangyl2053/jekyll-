@@ -15,15 +15,15 @@ import jp.co.ndensan.reams.db.dba.definition.param.sikakukanrenido.SikakuKanrenI
 import jp.co.ndensan.reams.db.dba.entity.db.relate.SikakuKanrenIdoEntity;
 import jp.co.ndensan.reams.db.dba.persistence.mapper.basic.sikakukanrenido.ISikakuKanrenIdoMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.sikakujiyushutoku.SikakuJiyuShutoku;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakujiyushutoku.ShikakuJiyuShutoku;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.service.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.kyushichosoncode.KyuShichosonCodeJoho;
@@ -103,7 +103,7 @@ public class SikakuKanrenIdoFinder {
     public SearchResult<KoseiShichosonMaster> selectByKoseiShichosonMasterList() {
 
         List<KoseiShichosonMaster> serviceShuruiList = new ArrayList<>();
-        List<DbT7051KoseiShichosonMasterEntity> 所在保険者リスト = db7051Dac.selectByKoseiShichosonMasterList();
+        List<DbT7051KoseiShichosonMasterEntity> 所在保険者リスト = db7051Dac.selectAll();
         if (所在保険者リスト == null || 所在保険者リスト.isEmpty()) {
             return SearchResult.of(Collections.<KoseiShichosonMaster>emptyList(), 0, false);
         }
@@ -145,7 +145,7 @@ public class SikakuKanrenIdoFinder {
         ShichosonSecurityJoho 市町村セキュリティ = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         KyuShichosonCodeJoho 旧市町村コード情報 = KyuShichosonCode.
                 getKyuShichosonCodeJoho(市町村セキュリティ.get市町村情報().get市町村コード(),
-                        DonyukeitaiCode.toValue(市町村セキュリティ.get導入形態コード().getKey()));
+                        DonyuKeitaiCode.toValue(市町村セキュリティ.get導入形態コード().getKey()));
         if (旧市町村コード情報 == null) {
 
             return SearchResult.of(Collections.<GappeiShichoson>emptyList(), 0, false);

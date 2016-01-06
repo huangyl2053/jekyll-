@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core;
+package jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
