@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ShujiiIryokikanShujiiIchiranhyoReportSource;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.SeibetsuCodeType;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
@@ -55,7 +55,7 @@ class IkenshoShujiiIchiranBodyEditor implements IkenshoShujiiIchiranEditor {
         source.listIchiranhyoUpper_5 = item.getListIchiranhyoUpper_5();
         source.listIchiranhyoUpper_7 = item.getListIchiranhyoUpper_7();
         source.listIchiranhyoUpper_8 = item.getListIchiranhyoUpper_8();
-        source.listIchiranhyoUpper_9 = SeibetsuCodeType.toValue(item.getListIchiranhyoUpper_9()).toRString();
+        source.listIchiranhyoUpper_9 = Gender.toValue(item.getListIchiranhyoUpper_9()).getName().getShortJapanese();
 
         source.listIchiranhyoUpper_6 = IryoKikanJokyo.toValue(item.isListIchiranhyoUpper_6()).get名称();
         source.listIchiranhyoUpper_10 = ShujiiJokyo.toValue(item.isListIchiranhyoUpper_10()).get名称();
