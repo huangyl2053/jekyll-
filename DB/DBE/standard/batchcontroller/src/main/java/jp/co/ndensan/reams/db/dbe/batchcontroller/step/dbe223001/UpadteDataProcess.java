@@ -12,12 +12,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 認定調査依頼情報テーブルの更新処理のクラスです。
  */
 public class UpadteDataProcess extends SimpleBatchProcessBase {
 
-    UpdateProcessParameter processParameter;
+    private UpdateProcessParameter processParameter;
     private IDbT5201NinteichosaIraiJohoMapper mapper;
 
     @Override
@@ -31,7 +30,7 @@ public class UpadteDataProcess extends SimpleBatchProcessBase {
 
         List<RString> noList = processParameter.get申請書管理番号List();
         for (RString shinseishoKanriNo : noList) {
-//            mapper.update認定調査依頼情報BY申請書管理番号(processParameter.toNinteiChosaTokusokujoMybatisParameter(shinseishoKanriNo));
+            mapper.update認定調査依頼情報BY申請書管理番号(processParameter.toNinteiChosaTokusokujoMybatisParameter(shinseishoKanriNo));
         }
     }
 

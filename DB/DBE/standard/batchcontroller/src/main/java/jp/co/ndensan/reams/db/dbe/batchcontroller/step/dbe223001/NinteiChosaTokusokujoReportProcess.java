@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe223001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.hos.common.util.StringUtil;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe223001.NinteiChosaTokusokujoBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe223001.NinteiChosaTokusokujoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.DbeMapperInterfaces;
@@ -34,27 +33,33 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 
  * 要介護認定調査督促状の作成クラスです。
  */
 public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiChosaTokusokujoRelateEntity> {
     
-    public static final RString OUT_SHINSEiSHO_KANRINO_LIST;
+   /**
+     * OutputParameter用キー outShinseishoKanriNoList
+     */
+    public static final RString OUT_SHINSEISHO_KANRINO_LIST;
     private NinteiChosaTokusokujoProcessParameter paramter;
     private static final ReportId REPORT_DBE223001 = new ReportId("DBE223001_NinteiChosaTokusokujo");
     @BatchWriter
     private BatchReportWriter<NinteiChosaTokusokujoReportSource> batchWrite;
     private ReportSourceWriter<NinteiChosaTokusokujoReportSource> reportSourceWriter;
     
+    private NinteiChosaTokusokujoBodyItem bodyItem;
+    
     private static final RString 星アイコン = new RString("＊");
     private static final RString 明 = new RString("明");
     private static final RString 大 = new RString("大");
     private static final RString 昭 = new RString("昭");
+    private static final int 四十五 = 45;
+    private static final int 一 = 45;
     
-    NinteiChosaTokusokujoBodyItem bodyItem;
+    
     
     static {
-        OUT_SHINSEiSHO_KANRINO_LIST = new RString("outShinseishoKanriNoList");
+        OUT_SHINSEISHO_KANRINO_LIST = new RString("outShinseishoKanriNoList");
     }
     private OutputParameter<List<RString>> outShinseishoKanriNoList;
     private List<RString> shinseishoKanriNoList;
@@ -97,33 +102,36 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
     private NinteiChosaTokusokujoBodyItem setBodyItem(NinteiChosaTokusokujoRelateEntity entity) {
         
         // 性別の設定
-        RString TempP_性別男 = RString.EMPTY;
-        RString TempP_性別女 = RString.EMPTY;
+        RString tempP_性別男 = RString.EMPTY;
+        RString tempP_性別女 = RString.EMPTY;
         RString seibetsuVal = entity.getTemp_性別コード().getColumnValue();
-        if (Seibetsu.男.toString().equals(seibetsuVal.toString())) {
-            TempP_性別女 = 星アイコン;
+        if (Seibetsu.男.getコード().toString().equals(seibetsuVal.toString())) {
+            tempP_性別女 = 星アイコン;
         } else {
-            TempP_性別男 = 星アイコン;
+            tempP_性別男 = 星アイコン;
         }
         
         // 年号の設定
-        RString TempP_誕生日明治 = RString.EMPTY;
-        RString TempP_誕生日大正 = RString.EMPTY;
-        RString TempP_誕生日昭和 = RString.EMPTY;
+        RString tempP_誕生日明治 = RString.EMPTY;
+        RString tempP_誕生日大正 = RString.EMPTY;
+        RString tempP_誕生日昭和 = RString.EMPTY;
         RString year = entity.getTemp_生年月日().getYear().wareki().getYear();
         if (year.startsWith(明)) {
-            TempP_誕生日大正 = 星アイコン;
-            TempP_誕生日昭和 = 星アイコン;
+            tempP_誕生日大正 = 星アイコン;
+            tempP_誕生日昭和 = 星アイコン;
         } else if (year.startsWith(大)) {
-            TempP_誕生日明治 = 星アイコン;
-            TempP_誕生日昭和 = 星アイコン;
+            tempP_誕生日明治 = 星アイコン;
+            tempP_誕生日昭和 = 星アイコン;
         } else if (year.startsWith(昭)) {
-            TempP_誕生日明治 = 星アイコン;
-            TempP_誕生日大正 = 星アイコン;
+            tempP_誕生日明治 = 星アイコン;
+            tempP_誕生日大正 = 星アイコン;
         }
         
-        RString TempP_通知文問合せ = RString.EMPTY;  // TODO 一時の利用 #72754
-        RString Temp_通知文 = RString.EMPTY;;  // TODO 一時の利用 #72754
+        RString tempP_通知文問合せ = RString.EMPTY;  // TODO 一時の利用 #72754
+        RString temp_通知文 = RString.EMPTY;  // TODO 一時の利用 #72754
+        int 保険者番号の桁 = 0;
+        int 被保険者番号の桁 = 0;
+        int 通知文問合せの行数 = 0;
         return new NinteiChosaTokusokujoBodyItem(
                 new RString(""), // TODO QA CompNinshoshaの利用方法について(CompNinshosha．出力項目．証明発行年月日)
                 new RString(""), // CompNinshosha．出力項目．電子公印
@@ -131,75 +139,65 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
                 new RString(""),  // TODO CompNinshosha．出力項目．首長名
                 new RString(""),  // TODO CompNinshosha．出力項目．公印省略
                 new RString(""),  // TODO CompNinshosha．出力項目．文書番号
-                getNowDate().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
-                getLenStr(Temp_通知文, 0, 45), // TODO QA　TsuchishoTeikeibunManagerの利用方法について 「TsuchishoTeikeibunManager．出力項目．通知文」
-                getLenStr(Temp_通知文, 45, 45),
+                getNowDate().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                        separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
+                getLenStr(temp_通知文, 四十五 * 0, 四十五), // TODO QA　TsuchishoTeikeibunManagerの利用方法について 「TsuchishoTeikeibunManager．出力項目．通知文」
+                getLenStr(temp_通知文, 四十五 * 1, 四十五),
                 entity.getTemp_申請区分コード() == null ? RString.EMPTY : entity.getTemp_申請区分コード().getColumnValue(),
-                getLenStr(entity.getTemp_保険者番号(), 0, 1),
-                getLenStr(entity.getTemp_保険者番号(), 1, 1),
-                getLenStr(entity.getTemp_保険者番号(), 2, 1),
-                getLenStr(entity.getTemp_保険者番号(), 3, 1),
-                getLenStr(entity.getTemp_保険者番号(), 4, 1),
-                getLenStr(entity.getTemp_保険者番号(), 5, 1),
-                getLenStr(entity.getTemp_被保険者番号(), 0, 1),
-                getLenStr(entity.getTemp_被保険者番号(), 1, 1),
-                getLenStr(entity.getTemp_被保険者番号(), 2, 1),
-                getLenStr(entity.getTemp_被保険者番号(), 3, 1),
-                getLenStr(entity.getTemp_被保険者番号(), 4, 1),
-                getLenStr(entity.getTemp_被保険者番号(), 5, 1),
-                getLenStr(entity.getTemp_被保険者番号(), 6, 1),
-                getLenStr(entity.getTemp_被保険者番号(), 7, 1),
-                getLenStr(entity.getTemp_被保険者番号(), 8, 1),
-                getLenStr(entity.getTemp_被保険者番号(), 9, 1),
+                getLenStr(entity.getTemp_保険者番号(), 一 * 保険者番号の桁++, 一),
+                getLenStr(entity.getTemp_保険者番号(), 一 * 保険者番号の桁++, 一),
+                getLenStr(entity.getTemp_保険者番号(), 一 * 保険者番号の桁++, 一),
+                getLenStr(entity.getTemp_保険者番号(), 一 * 保険者番号の桁++, 一),
+                getLenStr(entity.getTemp_保険者番号(), 一 * 保険者番号の桁++, 一),
+                getLenStr(entity.getTemp_保険者番号(), 一 * 保険者番号の桁++, 一),
+                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
+                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
+                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
+                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
+                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
+                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
+                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
+                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
+                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
+                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
                 entity.getTemp_申請年月日() == null ? RString.EMPTY : entity.getTemp_申請年月日().seireki().toDateString(),
                 entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY : entity.getTemp_被保険者氏名カナ().getColumnValue(),
-                TempP_性別男,
-                TempP_性別女,
+                tempP_性別男,
+                tempP_性別女,
                 entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue(),
-                TempP_誕生日明治,
-                TempP_誕生日大正,
-                TempP_誕生日昭和,
+                tempP_誕生日明治,
+                tempP_誕生日大正,
+                tempP_誕生日昭和,
                 entity.getTemp_生年月日() == null ? RString.EMPTY : entity.getTemp_生年月日().seireki().toDateString(),
                 entity.getTemp_被保険者郵便番号() == null ? RString.EMPTY : entity.getTemp_被保険者郵便番号().getEditedYubinNo(),
                 entity.getTemp_被保険者住所() == null ? RString.EMPTY : entity.getTemp_被保険者住所().getColumnValue(),
-                getLenStr(TempP_通知文問合せ, 0, 45), // TODO QA CompToiawasesakiの利用方法について　「CompToiawasesaki．出力項目．通知文   3」
-                getLenStr(TempP_通知文問合せ, 45, 45),
-                getLenStr(TempP_通知文問合せ, 90, 45),
-                getLenStr(TempP_通知文問合せ, 135, 45),
-                getLenStr(TempP_通知文問合せ, 180, 45),
-                getLenStr(TempP_通知文問合せ, 225, 45),
-                getLenStr(TempP_通知文問合せ, 270, 45),
-                getLenStr(TempP_通知文問合せ, 315, 45),
-                getLenStr(TempP_通知文問合せ, 360, 45),
-                getLenStr(TempP_通知文問合せ, 405, 45),
-                getLenStr(TempP_通知文問合せ, 450, 45),
-                getLenStr(TempP_通知文問合せ, 495, 45),
-                getLenStr(TempP_通知文問合せ, 540, 45),
-                getLenStr(TempP_通知文問合せ, 585, 45),
-                getLenStr(TempP_通知文問合せ, 630, 45),
-                getLenStr(TempP_通知文問合せ, 675, 45),
-                getLenStr(TempP_通知文問合せ, 720, 45),
+                getLenStr(tempP_通知文問合せ, 四十五 * 通知文問合せの行数++, 四十五), // TODO QA CompToiawasesakiの利用方法について　「CompToiawasesaki．出力項目．通知文   3」
+                getLenStr(tempP_通知文問合せ, 四十五 * 通知文問合せの行数++, 四十五),
+                getLenStr(tempP_通知文問合せ, 四十五 * 通知文問合せの行数++, 四十五),
+                getLenStr(tempP_通知文問合せ, 四十五 * 通知文問合せの行数++, 四十五),
+                getLenStr(tempP_通知文問合せ, 四十五 * 通知文問合せの行数++, 四十五),
+                getLenStr(tempP_通知文問合せ, 四十五 * 通知文問合せの行数++, 四十五),
+                getLenStr(tempP_通知文問合せ, 四十五 * 通知文問合せの行数++, 四十五),
+                getLenStr(tempP_通知文問合せ, 四十五 * 通知文問合せの行数++, 四十五),
+                getLenStr(tempP_通知文問合せ, 四十五 * 通知文問合せの行数++, 四十五),
+                getLenStr(tempP_通知文問合せ, 四十五 * 通知文問合せの行数++, 四十五),
+                getLenStr(tempP_通知文問合せ, 四十五 * 通知文問合せの行数++, 四十五),
+                getLenStr(tempP_通知文問合せ, 四十五 * 通知文問合せの行数++, 四十五),
+                getLenStr(tempP_通知文問合せ, 四十五 * 通知文問合せの行数++, 四十五),
+                getLenStr(tempP_通知文問合せ, 四十五 * 通知文問合せの行数++, 四十五),
+                getLenStr(tempP_通知文問合せ, 四十五 * 通知文問合せの行数++, 四十五),
+                getLenStr(tempP_通知文問合せ, 四十五 * 通知文問合せの行数++, 四十五),
+                getLenStr(tempP_通知文問合せ, 四十五 * 通知文問合せの行数++, 四十五),
                 new RString("")); //TODO 連番 共通部品
     }
 
-    /**
-     * 文字列の一部を取得します。
-     * @param str 文字列
-     * @param startIndex 開始インデックス 
-     * @param len 長さ
-     * 
-     * @return 結果文字列
-     */
     private RString getLenStr(RString rstr, int startIndex, int len) {
-        String str = "";
-        if (rstr != null) {
-            str = rstr.toString();
-        }
-        if (!StringUtil.isNullOrEmpty(str)) {
-            if (str.length() >= startIndex + len) {
-                return new RString(str.substring(startIndex, startIndex + len));
-            } else if (str.length() > startIndex) {
-                return new RString(str.substring(startIndex));
+
+        if (!RString.isNullOrEmpty(rstr)) {
+            if (rstr.length() >= startIndex + len) {
+                return rstr.substring(startIndex, startIndex + len);
+            } else if (rstr.length() > startIndex) {
+                return rstr.substring(startIndex);
             }
         }
         return RString.EMPTY;

@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 
  * 処理詳細_認定調査督促対象者一覧表の作成クラスです。
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchProcessBase<NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity> {
@@ -46,7 +45,8 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
     @BatchWriter
     private BatchReportWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> batchWrite;
     private ReportSourceWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> reportSourceWriter;
-    int num;
+    private int 帳票データの行番号 = 1;
+    
     
     NinteiChosaTokusokuTaishoshaIchiranhyoItem item;
     private List<NinteiChosaTokusokuTaishoshaIchiranhyoItem> itemList;
@@ -65,7 +65,8 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(DbeMapperInterfaces.認定調査督促対象者一覧表データの抽出.getFullPath(), parameter.toNinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter());
+        return new BatchDbReader(DbeMapperInterfaces.認定調査督促対象者一覧表データの抽出.getFullPath(), 
+                parameter.toNinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter());
     }
     
     @Override
@@ -74,11 +75,6 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
                  addBreak(new BreakerCatalog<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource>().simplePageBreaker(parameter.getTemp_改頁()))
                  .create();
         reportSourceWriter = new ReportSourceWriter(batchWrite);
-    }
-    
-    @Override
-    protected void beforeProcess() {
-        num = 1;
     }
 
     @Override
@@ -91,12 +87,18 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
                 new RString("調査機関住所"),  //kikanJushoTitle
                 new RString("調査員氏名"),  // nameTitle
                 new RString("調査機関TEL"),  //kikanTelTitle
-                new RString(String.valueOf(num++)),  //listNo_1
+                new RString(String.valueOf(帳票データの行番号++)),  //listNo_1
                 parameter.getTemp_保険者名称(),  //listUpper1_1 TODO QA N0.22
-                entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY : entity.getTemp_被保険者氏名カナ().getColumnValue(),  //listUpper1_2
-                entity.getTemp_申請日() == null ? RString.EMPTY :  entity.getTemp_申請日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),  // listShinseiYMD_1
-                entity.getTemp_督促状発行日() == null ? RString.EMPTY : entity.getTemp_督促状発行日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),  // listTokusokujoHakkoYMD_1
-                entity.getTemp_事業者コード() == null ? RString.EMPTY : entity.getTemp_事業者コード().getColumnValue(),  //listUpper2_1 TODO  QA  帳票レイアウトに当該項目が存在しない
+                entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY
+                        : entity.getTemp_被保険者氏名カナ().getColumnValue(),  //listUpper1_2
+                entity.getTemp_申請日() == null ? RString.EMPTY :  entity.getTemp_申請日().
+                        wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                        separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),  // listShinseiYMD_1
+                entity.getTemp_督促状発行日() == null ? RString.EMPTY : entity.getTemp_督促状発行日().
+                        wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                        separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),  // listTokusokujoHakkoYMD_1
+                entity.getTemp_事業者コード() == null ? RString.EMPTY 
+                        : entity.getTemp_事業者コード().getColumnValue(),  //listUpper2_1 TODO  QA  帳票レイアウトに当該項目が存在しない
                 entity.getTemp_事業者住所(),  // listUpper2_2
                 entity.getTemp_被保険者番号(),  //listLower1_1
                 entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue(),  //listLower1_2
@@ -112,5 +114,4 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
         report.writeBy(reportSourceWriter);
         outDataList.setValue(itemList);
     }
-
 }

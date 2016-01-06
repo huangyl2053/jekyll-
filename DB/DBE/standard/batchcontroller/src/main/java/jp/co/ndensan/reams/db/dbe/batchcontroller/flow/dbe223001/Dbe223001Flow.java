@@ -48,13 +48,21 @@ public class Dbe223001Flow extends BatchFlowBase<Dbe223001FlowParameter> {
         executeStep(認定調査督促対象者一覧表の更新);
     }
     
+    /**
+     * 要介護認定調査督促状の作成を行います。
+     * @return バッチコマンド
+     */
     @Step(要介護認定調査督促状の作成)
     protected IBatchFlowCommand ninteiChosaTokusokujoReport() {
-        return loopBatch(NinteiChosaTokusokujoReportProcess.class)
+        return loopBatch(NinteiChosaTokusokujoReportProcess.class)  //TODO QA #73040 複数件の帳票を出力
                 .arguments(getParameter().toNinteiChosaTokusokujoProcessParameter())
                 .define();
     }
     
+    /**
+     * 認定調査督促対象者一覧表の作成を行います。
+     * @return バッチコマンド
+     */
     @Step(認定調査督促対象者一覧表の作成)
     protected IBatchFlowCommand ninteiChosaTokusokuTaishoshaIchiranhyoReport() {
         return loopBatch(NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess.class)
@@ -62,6 +70,10 @@ public class Dbe223001Flow extends BatchFlowBase<Dbe223001FlowParameter> {
                 .define();
     }
 
+    /**
+     * 認定調査督促対象者一覧表CSVの作成を行います。
+     * @return バッチコマンド
+     */
     @Step(認定調査督促対象者一覧表CSVの作成)
     protected IBatchFlowCommand ninteiChosaTokusokuTaishoshaIchiranhyoCsv() {
         
@@ -70,7 +82,11 @@ public class Dbe223001Flow extends BatchFlowBase<Dbe223001FlowParameter> {
                 .define();
     }
     
-    @Step(認定調査督促対象者一覧表の更新)  //TODO QA #71505 排他キー
+    /**
+     * 認定調査督促対象者一覧表の更新を行います。
+     * @return バッチコマンド
+     */
+    @Step(認定調査督促対象者一覧表の更新)  //TODO QA #73040 排他キー
     protected IBatchFlowCommand updateData() {
         return simpleBatch(UpadteDataProcess.class)
                 .arguments(createUpdateParameter())
@@ -89,7 +105,7 @@ public class Dbe223001Flow extends BatchFlowBase<Dbe223001FlowParameter> {
     
     private UpdateProcessParameter createUpdateParameter() {
         UpdateProcessParameter updateProcessParameter = new UpdateProcessParameter();
-        List<RString> noList = getResult(List.class, new RString(要介護認定調査督促状の作成), NinteiChosaTokusokujoReportProcess.OUT_SHINSEiSHO_KANRINO_LIST);
+        List<RString> noList = getResult(List.class, new RString(要介護認定調査督促状の作成), NinteiChosaTokusokujoReportProcess.OUT_SHINSEISHO_KANRINO_LIST);
         
         updateProcessParameter.set申請書管理番号List(noList);
         updateProcessParameter.setTemp_督促日(new RString(getParameter().getTemp_督促日().toString()));

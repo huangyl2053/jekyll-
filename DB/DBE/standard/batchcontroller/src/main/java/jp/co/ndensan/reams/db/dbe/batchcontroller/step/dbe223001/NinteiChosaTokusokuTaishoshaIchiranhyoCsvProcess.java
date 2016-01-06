@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvProcess extends SimpleBatchProcessBase {
 
-    NinteiChosaTokusokuTaishoshaIchiranhyoCsvProcessParameter processParameter;
+    private NinteiChosaTokusokuTaishoshaIchiranhyoCsvProcessParameter processParameter;
     @BatchWriter
     private CsvWriter<NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity> csvWriter;
     private static final RString ファイル名 = new RString("認定調査督促対象者一覧表.csv");
@@ -42,11 +42,12 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvProcess extends SimpleBatc
         csvWriter = new CsvWriter.InstanceBuilder(filePath).canAppend(true)
                 .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).setNewLine(NewLine.CRLF).build();
         csvWriter.writeLine(new NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity(
-                タイトル, null, null, null,null,
+                タイトル, null, null, null, null,
                 null, null, null, null,
                 null, null, null, null));
         csvWriter.writeLine(new NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity(
-                new RString(RDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().toString()), 
+                new RString(RDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                        separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().toString()), 
                 null, null, null, null,
                 null, null, null, null,
                 null, null, null, null));
