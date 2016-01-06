@@ -5,7 +5,7 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.shujiijoho.IShujiiMasterJohoMapper">
-    <resultMap id="resultMap_ShujiiJohoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.basic.shujiijoho.ShujiiMasterRelateEntity" autoMapping="true">
+<!--    <resultMap id="resultMap_ShujiiJohoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.basic.shujiijoho.ShujiiMasterRelateEntity" autoMapping="true">
 	<id property="shichosonCode" column="DbT5912Shuji_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <result property="shichosonMeisho" column="DbT7051Kosei_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
 	<result property="shujiiName" column="DbT5912Shuji_shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoHandler" />
@@ -108,7 +108,7 @@
 	DbT5912Shuji."shujiiIryokikanCode",	
 	DbT5912Shuji."shujiiCode";
     </select>
-    <!--主治医情報の重複チェック-->
+    主治医情報の重複チェック
     <select id="selectShujiiJohoCount"
             resultMap="int"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiMasterMapperParameter" fetchSize="500">
@@ -124,7 +124,7 @@
 	    DbT5912."shujiiCode" = #{主治医コード}
     </select>	
     
-   <!-- 主治医情報の削除処理-->
+    主治医情報の削除処理
    <select id="selectNinteiShinseiJohoCount"
             resultMap="int"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiMasterMapperParameter">
@@ -247,5 +247,5 @@
          "DbT5911ShujiiIryoKikanJoho"."isDeleted" = FALSE
        AND  "DbT5911ShujiiIryoKikanJoho"."shichosonCode" = #{市町村コード}
        AND  "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = #{主治医医療機関コード}
-     </select>
+     </select>-->
 </mapper>
