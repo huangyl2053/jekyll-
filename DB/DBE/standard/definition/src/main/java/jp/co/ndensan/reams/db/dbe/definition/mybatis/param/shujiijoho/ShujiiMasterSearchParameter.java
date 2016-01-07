@@ -5,9 +5,8 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医情報を特定するためのMyBatis用パラメータクラスです。
@@ -17,13 +16,13 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 public final class ShujiiMasterSearchParameter {
 
     private final LasdecCode 市町村コード;
-    private final ShujiiIryokikanCode 主治医医療機関コード;
-    private final ShujiiCode 主治医コード;
+    private final RString 主治医医療機関コード;
+    private final RString 主治医コード;
 
     private ShujiiMasterSearchParameter(
             LasdecCode 市町村コード,
-            ShujiiIryokikanCode 主治医医療機関コード,
-            ShujiiCode 主治医コード) {
+            RString 主治医医療機関コード,
+            RString 主治医コード) {
         this.市町村コード = 市町村コード;
         this.主治医医療機関コード = 主治医医療機関コード;
         this.主治医コード = 主治医コード;
@@ -40,10 +39,9 @@ public final class ShujiiMasterSearchParameter {
      */
     public static ShujiiMasterSearchParameter createParamForSelectShujiiJoho(
             LasdecCode 市町村コード,
-            ShujiiIryokikanCode 主治医医療機関コード,
-            ShujiiCode 主治医コード
+            RString 主治医医療機関コード,
+            RString 主治医コード
     ) {
-
         return new ShujiiMasterSearchParameter(
                 市町村コード, 主治医医療機関コード, 主治医コード);
     }
