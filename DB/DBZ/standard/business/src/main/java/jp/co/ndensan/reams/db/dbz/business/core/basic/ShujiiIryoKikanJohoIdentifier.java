@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 @lombok.Value
 public class ShujiiIryoKikanJohoIdentifier implements Serializable {
 
+    private static final long serialVersionUID = 6649235080694518919L;
     private final LasdecCode 市町村コード;
     private final ShujiiIryokikanCode 主治医医療機関コード;
 

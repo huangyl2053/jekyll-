@@ -6,8 +6,9 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
@@ -24,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 主治医医療機関情報を管理するクラスです。
  */
 public class ShujiiIryoKikanJoho extends
-        ParentModelBase<ShujiiIryoKikanJohoIdentifier, DbT5911ShujiiIryoKikanJohoEntity, ShujiiIryoKikanJoho> implements Serializable {
+        ModelBase<ShujiiIryoKikanJohoIdentifier, DbT5911ShujiiIryoKikanJohoEntity, ShujiiIryoKikanJoho> implements Serializable {
 
     private final DbT5911ShujiiIryoKikanJohoEntity entity;
     private final ShujiiIryoKikanJohoIdentifier id;
@@ -76,7 +77,6 @@ public class ShujiiIryoKikanJoho extends
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 市町村コードを返します。
      *
@@ -197,12 +197,10 @@ public class ShujiiIryoKikanJoho extends
     }
 
     /**
-     * 主治医医療機関情報のみを変更対象とします。<br/>
-     * {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 主治医医療機関情報のみを変更対象とします。<br/> {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShujiiIryoKikanJoho}
      */
-    @Override
     public ShujiiIryoKikanJoho modifiedModel() {
         DbT5911ShujiiIryoKikanJohoEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
@@ -213,8 +211,7 @@ public class ShujiiIryoKikanJoho extends
     }
 
     /**
-     * 保持する主治医医療機関情報を削除対象とします。<br/>
-     * {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する主治医医療機関情報を削除対象とします。<br/> {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShujiiIryoKikanJoho}
      */
@@ -224,7 +221,6 @@ public class ShujiiIryoKikanJoho extends
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ShujiiIryoKikanJoho(deletedEntity, id);
@@ -242,12 +238,12 @@ public class ShujiiIryoKikanJoho extends
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = -5646231335102507143L;
         private final DbT5911ShujiiIryoKikanJohoEntity entity;
         private final ShujiiIryoKikanJohoIdentifier id;
 
@@ -271,5 +267,25 @@ public class ShujiiIryoKikanJoho extends
         return new ShujiiIryoKikanJohoBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ShujiiIryoKikanJoho other = (ShujiiIryoKikanJoho) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 }

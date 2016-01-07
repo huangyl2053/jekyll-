@@ -6,12 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -38,32 +36,6 @@ public class ShujiiIryoKikanJohoBuilder {
         this.entity = entity.clone();
         this.id = id;
 
-    }
-
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 市町村コードを設定します。
-     *
-     * @param 市町村コード 市町村コード
-     * @return {@link ShujiiIryoKikanJohoBuilder}
-     */
-    public ShujiiIryoKikanJohoBuilder set市町村コード(LasdecCode 市町村コード) {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        entity.setShichosonCode(市町村コード);
-        return this;
-    }
-
-    /**
-     * 主治医医療機関コードを設定します。
-     *
-     * @param 主治医医療機関コード 主治医医療機関コード
-     * @return {@link ShujiiIryoKikanJohoBuilder}
-     */
-    public ShujiiIryoKikanJohoBuilder set主治医医療機関コード(ShujiiIryokikanCode 主治医医療機関コード) {
-        requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
-        entity.setShujiiIryokikanCode(主治医医療機関コード);
-        return this;
     }
 
     /**
