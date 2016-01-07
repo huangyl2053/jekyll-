@@ -46,10 +46,6 @@ public class SinsaSeikyusyoMeisaiPanel {
 
         ResponseData<SinsaSeikyusyoMeisaiPanelDiv> responseData = new ResponseData<>();
 
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("0000000003")));
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo(new RString("0000000004")));
-        ViewStateHolder.put(ViewStateKeys.審査請求届出日, new FlexibleDate(new RString("20160107")));
-        ViewStateHolder.put(ViewStateKeys.状態, 追加);
         // TODO:共通DIVが実装不正です。
 //        // 宛名基本情報を取得
 //        requestDiv.getAtenaInfoCommonChildDiv().load(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
@@ -201,7 +197,7 @@ public class SinsaSeikyusyoMeisaiPanel {
                     FufukuMoshitate fufukuMoshitate = ViewStateHolder.get(ViewStateKeys.不服審査申立情報, FufukuMoshitate.class);
                     更新処理(createHandlerOf(div).審査請求書更新の編集(fufukuMoshitate));
                     div.getCcdKanryoMessage().setSuccessMessage(
-                            new RString(UrInformationMessages.正常終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
+                            new RString(UrInformationMessages.正常終了.getMessage().replace("更新").evaluate()), RString.EMPTY, RString.EMPTY);
                     return ResponseData.of(div).setState(DBU0900021StateName.完了);
                 }
             } else {
@@ -230,9 +226,8 @@ public class SinsaSeikyusyoMeisaiPanel {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
                 削除処理();
-                //TODO:（削除は正常に終了しました。）
                 div.getCcdKanryoMessage().setSuccessMessage(
-                        new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
+                        new RString(UrInformationMessages.対象データ削除済み.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
                 return ResponseData.of(div).setState(DBU0900021StateName.完了);
             }
         }

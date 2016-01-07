@@ -1,8 +1,8 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0210011;
 
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900021.*;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900021.SinsaSeikyusyoMeisaiPanelDiv;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.FufukuMoshitate;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.FufukuMoshitateBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.HihokenshaKankeiCode;
@@ -53,47 +53,7 @@ public class SinsaSeikyusyoMeisaiPanelHandler {
      */
     public void 修正_初期化の編集(FufukuMoshitate fufukuMoshitate) {
 
-        if (fufukuMoshitate.get審査請求届出日() != null && !fufukuMoshitate.get審査請求届出日().isEmpty()) {
-            div.getMeisaiPanel().getTxtdateTodokedebi().setValue(new RDate(fufukuMoshitate.get審査請求届出日().toString()));
-        }
-        div.getSinsaSeikyuninJohoPanel().getTxtYubinNo().setValue(fufukuMoshitate.get審査請求人郵便番号());
-        div.getSinsaSeikyuninJohoPanel().getTxtJusho().setDomain(new AtenaJusho(fufukuMoshitate
-                .get審査請求人住所() == null ? RString.EMPTY : fufukuMoshitate.get審査請求人住所().value()));
-        div.getSinsaSeikyuninJohoPanel().getTxtShinsaSeikyuJinShimei().setDomain(new AtenaMeisho(fufukuMoshitate.
-                get審査請求人氏名() == null ? RString.EMPTY : fufukuMoshitate.get審査請求人氏名().value()));
-        div.getSinsaSeikyuninJohoPanel().getTxtTelNo().setDomain(new TelNo(fufukuMoshitate
-                .get審査請求人電話番号() == null ? RString.EMPTY : fufukuMoshitate.get審査請求人電話番号().value()));
-        div.getSinsaSeikyuninJohoPanel().getDdlHihokenyakanko().setDataSource(get被保険者との関係ドロップダウンリスト());
-        div.getSinsaSeikyuninJohoPanel().getDdlHihokenyakanko().setSelectedKey(fufukuMoshitate.get被保険者との関係コード()
-                == null ? RString.EMPTY : fufukuMoshitate.get被保険者との関係コード());
-        div.getSinsaSeikyuninJohoPanel().getTxtHihokensyatonokanken().setValue(fufukuMoshitate.get被保険者との関係());
-        div.getDaiiniJohoPanel().getTxtDairiYubinNo().setValue(fufukuMoshitate.get代理人郵便番号());
-        div.getDaiiniJohoPanel().getTxtDairiJusho().setDomain(new AtenaJusho(fufukuMoshitate
-                .get代理人住所() == null ? RString.EMPTY : fufukuMoshitate.get代理人住所().value()));
-        div.getDaiiniJohoPanel().getTxtDairiJinJohoShimei().setDomain(new AtenaMeisho(fufukuMoshitate
-                .get代理人氏名() == null ? RString.EMPTY : fufukuMoshitate.get代理人氏名().value()));
-        div.getDaiiniJohoPanel().getTxtDairiTelNo().setDomain(new TelNo(fufukuMoshitate.
-                get代理人電話番号() == null ? RString.EMPTY : fufukuMoshitate.get代理人電話番号().value()));
-        if (fufukuMoshitate.get処分日() != null && !fufukuMoshitate.get処分日().isEmpty()) {
-            div.getSyobunJohoPanel().getTxtShobubi().setValue(new RDate(fufukuMoshitate.get処分日().toString()));
-        }
-        div.getSyobunJohoPanel().getTxtShobucho().setValue(fufukuMoshitate.get処分庁());
-        div.getSyobunJohoPanel().getDdlShobuShurui().setDataSource(get処分種類コードドロップダウンリスト());
-        div.getSyobunJohoPanel().getDdlShobuShurui().setSelectedKey(fufukuMoshitate.
-                get処分種類コード() == null ? RString.EMPTY : fufukuMoshitate.get処分種類コード());
-        if (fufukuMoshitate.get処分があったことを知った日() != null && !fufukuMoshitate.get処分があったことを知った日().isEmpty()) {
-            div.getSyobunJohoPanel().getTxtShobuShitaNichi().setValue(new RDate(fufukuMoshitate.get処分があったことを知った日().toString()));
-        }
-        div.getMeisaiPanel().getTxtShinsaSeikyuRiyu().setValue(fufukuMoshitate.get審査請求の理由());
-        div.getMeisaiPanel().getTxtKyoshiNaiyo().setValue(fufukuMoshitate.get処分庁教示の有無及び教示の内容());
-        if (fufukuMoshitate.is添付書類等()) {
-            div.getRadTenpuShorui().setSelectedKey(new RString("key0"));
-        } else {
-            div.getRadTenpuShorui().setSelectedKey(new RString("key1"));
-        }
-        if (fufukuMoshitate.get審査請求取下日() != null && !fufukuMoshitate.get審査請求取下日().isEmpty()) {
-            div.getTxtShinsaSeikyuTorisage().setValue(new RDate(fufukuMoshitate.get審査請求取下日().toString()));
-        }
+        初期化の編集(fufukuMoshitate);
     }
 
     /**
@@ -103,47 +63,7 @@ public class SinsaSeikyusyoMeisaiPanelHandler {
      */
     public void 削除_初期化の編集(FufukuMoshitate fufukuMoshitate) {
 
-        if (fufukuMoshitate.get審査請求届出日() != null && !fufukuMoshitate.get審査請求届出日().isEmpty()) {
-            div.getMeisaiPanel().getTxtdateTodokedebi().setValue(new RDate(fufukuMoshitate.get審査請求届出日().toString()));
-        }
-        div.getSinsaSeikyuninJohoPanel().getTxtYubinNo().setValue(fufukuMoshitate.get審査請求人郵便番号());
-        div.getSinsaSeikyuninJohoPanel().getTxtJusho().setDomain(new AtenaJusho(fufukuMoshitate
-                .get審査請求人住所() == null ? RString.EMPTY : fufukuMoshitate.get審査請求人住所().value()));
-        div.getSinsaSeikyuninJohoPanel().getTxtShinsaSeikyuJinShimei().setDomain(new AtenaMeisho(fufukuMoshitate.
-                get審査請求人氏名() == null ? RString.EMPTY : fufukuMoshitate.get審査請求人氏名().value()));
-        div.getSinsaSeikyuninJohoPanel().getTxtTelNo().setDomain(new TelNo(fufukuMoshitate
-                .get審査請求人電話番号() == null ? RString.EMPTY : fufukuMoshitate.get審査請求人電話番号().value()));
-        div.getSinsaSeikyuninJohoPanel().getDdlHihokenyakanko().setDataSource(get被保険者との関係ドロップダウンリスト());
-        div.getSinsaSeikyuninJohoPanel().getDdlHihokenyakanko().setSelectedKey(fufukuMoshitate.
-                get被保険者との関係コード() == null ? RString.EMPTY : fufukuMoshitate.get被保険者との関係コード());
-        div.getSinsaSeikyuninJohoPanel().getTxtHihokensyatonokanken().setValue(fufukuMoshitate.get被保険者との関係());
-        div.getDaiiniJohoPanel().getTxtDairiYubinNo().setValue(fufukuMoshitate.get代理人郵便番号());
-        div.getDaiiniJohoPanel().getTxtDairiJusho().setDomain(new AtenaJusho(fufukuMoshitate
-                .get代理人住所() == null ? RString.EMPTY : fufukuMoshitate.get代理人住所().value()));
-        div.getDaiiniJohoPanel().getTxtDairiJinJohoShimei().setDomain(new AtenaMeisho(fufukuMoshitate
-                .get代理人氏名() == null ? RString.EMPTY : fufukuMoshitate.get代理人氏名().value()));
-        div.getDaiiniJohoPanel().getTxtDairiTelNo().setDomain(new TelNo(fufukuMoshitate.
-                get代理人電話番号() == null ? RString.EMPTY : fufukuMoshitate.get代理人電話番号().value()));
-        if (fufukuMoshitate.get処分日() != null && !fufukuMoshitate.get処分日().isEmpty()) {
-            div.getSyobunJohoPanel().getTxtShobubi().setValue(new RDate(fufukuMoshitate.get処分日().toString()));
-        }
-        div.getSyobunJohoPanel().getTxtShobucho().setValue(fufukuMoshitate.get処分庁());
-        div.getSyobunJohoPanel().getDdlShobuShurui().setDataSource(get処分種類コードドロップダウンリスト());
-        div.getSyobunJohoPanel().getDdlShobuShurui().setSelectedKey(fufukuMoshitate.
-                get処分種類コード() == null ? RString.EMPTY : fufukuMoshitate.get処分種類コード());
-        if (fufukuMoshitate.get処分があったことを知った日() != null && !fufukuMoshitate.get処分があったことを知った日().isEmpty()) {
-            div.getSyobunJohoPanel().getTxtShobuShitaNichi().setValue(new RDate(fufukuMoshitate.get処分があったことを知った日().toString()));
-        }
-        div.getMeisaiPanel().getTxtShinsaSeikyuRiyu().setValue(fufukuMoshitate.get審査請求の理由());
-        div.getMeisaiPanel().getTxtKyoshiNaiyo().setValue(fufukuMoshitate.get処分庁教示の有無及び教示の内容());
-        if (fufukuMoshitate.is添付書類等()) {
-            div.getRadTenpuShorui().setSelectedKey(new RString("key0"));
-        } else {
-            div.getRadTenpuShorui().setSelectedKey(new RString("key1"));
-        }
-        if (fufukuMoshitate.get審査請求取下日() != null && !fufukuMoshitate.get審査請求取下日().isEmpty()) {
-            div.getTxtShinsaSeikyuTorisage().setValue(new RDate(fufukuMoshitate.get審査請求取下日().toString()));
-        }
+        初期化の編集(fufukuMoshitate);
         削除状態の非活性();
     }
 
@@ -336,5 +256,57 @@ public class SinsaSeikyusyoMeisaiPanelHandler {
             dataSourceList.add(dataSource);
         }
         return dataSourceList;
+    }
+
+    private void 初期化の編集(FufukuMoshitate fufukuMoshitate) {
+
+        if (fufukuMoshitate.get審査請求届出日() != null && !fufukuMoshitate.get審査請求届出日().isEmpty()) {
+            div.getMeisaiPanel().getTxtdateTodokedebi().setValue(new RDate(fufukuMoshitate.get審査請求届出日().toString()));
+        }
+        div.getSinsaSeikyuninJohoPanel().getTxtYubinNo().setValue(fufukuMoshitate.get審査請求人郵便番号());
+        div.getSinsaSeikyuninJohoPanel().getTxtJusho().setDomain(new AtenaJusho(fufukuMoshitate
+                .get審査請求人住所() == null ? RString.EMPTY : fufukuMoshitate.get審査請求人住所().value()));
+        div.getSinsaSeikyuninJohoPanel().getTxtShinsaSeikyuJinShimei().setDomain(new AtenaMeisho(fufukuMoshitate.
+                get審査請求人氏名() == null ? RString.EMPTY : fufukuMoshitate.get審査請求人氏名().value()));
+        div.getSinsaSeikyuninJohoPanel().getTxtTelNo().setDomain(new TelNo(fufukuMoshitate
+                .get審査請求人電話番号() == null ? RString.EMPTY : fufukuMoshitate.get審査請求人電話番号().value()));
+        div.getSinsaSeikyuninJohoPanel().getDdlHihokenyakanko().setDataSource(get被保険者との関係ドロップダウンリスト());
+        div.getSinsaSeikyuninJohoPanel().getDdlHihokenyakanko().setSelectedKey(fufukuMoshitate.get被保険者との関係コード()
+                == null ? RString.EMPTY : fufukuMoshitate.get被保険者との関係コード());
+        div.getSinsaSeikyuninJohoPanel().getTxtHihokensyatonokanken().setValue(nullToEmpty(fufukuMoshitate.get被保険者との関係()));
+        div.getDaiiniJohoPanel().getTxtDairiYubinNo().setValue(fufukuMoshitate.get代理人郵便番号());
+        div.getDaiiniJohoPanel().getTxtDairiJusho().setDomain(new AtenaJusho(fufukuMoshitate
+                .get代理人住所() == null ? RString.EMPTY : fufukuMoshitate.get代理人住所().value()));
+        div.getDaiiniJohoPanel().getTxtDairiJinJohoShimei().setDomain(new AtenaMeisho(fufukuMoshitate
+                .get代理人氏名() == null ? RString.EMPTY : fufukuMoshitate.get代理人氏名().value()));
+        div.getDaiiniJohoPanel().getTxtDairiTelNo().setDomain(new TelNo(fufukuMoshitate.
+                get代理人電話番号() == null ? RString.EMPTY : fufukuMoshitate.get代理人電話番号().value()));
+        if (fufukuMoshitate.get処分日() != null && !fufukuMoshitate.get処分日().isEmpty()) {
+            div.getSyobunJohoPanel().getTxtShobubi().setValue(new RDate(fufukuMoshitate.get処分日().toString()));
+        }
+        div.getSyobunJohoPanel().getTxtShobucho().setValue(nullToEmpty(fufukuMoshitate.get処分庁()));
+        div.getSyobunJohoPanel().getDdlShobuShurui().setDataSource(get処分種類コードドロップダウンリスト());
+        div.getSyobunJohoPanel().getDdlShobuShurui().setSelectedKey(fufukuMoshitate.
+                get処分種類コード() == null ? RString.EMPTY : fufukuMoshitate.get処分種類コード());
+        if (fufukuMoshitate.get処分があったことを知った日() != null && !fufukuMoshitate.get処分があったことを知った日().isEmpty()) {
+            div.getSyobunJohoPanel().getTxtShobuShitaNichi().setValue(new RDate(fufukuMoshitate.get処分があったことを知った日().toString()));
+        }
+        div.getMeisaiPanel().getTxtShinsaSeikyuRiyu().setValue(nullToEmpty(fufukuMoshitate.get審査請求の理由()));
+        div.getMeisaiPanel().getTxtKyoshiNaiyo().setValue(nullToEmpty(fufukuMoshitate.get処分庁教示の有無及び教示の内容()));
+        if (fufukuMoshitate.is添付書類等()) {
+            div.getRadTenpuShorui().setSelectedKey(new RString("key0"));
+        } else {
+            div.getRadTenpuShorui().setSelectedKey(new RString("key1"));
+        }
+        if (fufukuMoshitate.get審査請求取下日() != null && !fufukuMoshitate.get審査請求取下日().isEmpty()) {
+            div.getTxtShinsaSeikyuTorisage().setValue(new RDate(fufukuMoshitate.get審査請求取下日().toString()));
+        }
+    }
+
+    private RString nullToEmpty(RString obj) {
+        if (obj == null) {
+            return RString.EMPTY;
+        }
+        return obj;
     }
 }
