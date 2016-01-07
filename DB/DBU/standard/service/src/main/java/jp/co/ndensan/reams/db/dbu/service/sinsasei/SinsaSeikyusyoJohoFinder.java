@@ -31,6 +31,15 @@ public class SinsaSeikyusyoJohoFinder {
     }
 
     /**
+     * テスト用コンストラクタです。
+     *
+     * @param dac {@link DbT7001FufukuMoshitateDac}
+     */
+    SinsaSeikyusyoJohoFinder(DbT7001FufukuMoshitateDac dac) {
+        this.fufukumoshitatedac = dac;
+    }
+
+    /**
      * クラスをcreateメソッドです。
      *
      * @return 一覧情報の取得処理するクラス
@@ -44,7 +53,7 @@ public class SinsaSeikyusyoJohoFinder {
      *
      * @param shikibetsuCode 識別コード
      * @param genshobunsHihokennshaNo 原処分被保険者番号
-     * @return SearchResult<SinsaSeikyusyoJohoModel>
+     * @return SearchResult<FufukuMoshitate>
      */
     public SearchResult<FufukuMoshitate> getSinsaSeikyusyoJohoList(ShikibetsuCode shikibetsuCode, HihokenshaNo genshobunsHihokennshaNo) {
         List<FufukuMoshitate> businessList = new ArrayList<>();
@@ -52,7 +61,6 @@ public class SinsaSeikyusyoJohoFinder {
         for (DbT7001FufukuMoshitateEntity fufukuMoshitateEntity : dbT7001FufukuMoshitateEntity) {
             businessList.add(new FufukuMoshitate(fufukuMoshitateEntity));
         }
-
         return SearchResult.of(businessList, 0, false);
     }
 }
