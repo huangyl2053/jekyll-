@@ -122,7 +122,7 @@ public class SinsaSeikyusyoTorokuManager {
     public boolean checkSinsaSeikyuTodokede(ShikibetsuCode 識別コード, HihokenshaNo 原処分被保険者番号,
             FlexibleDate 審査請求届出日, RString gamennmodel, FlexibleDate shinsaSeikyuTodokedeYMD) {
         boolean isJuuHuku = true;
-        DbT7001FufukuMoshitateEntity fufukuMoshitateEntity = 審査請求書登録dac.selectByKey(識別コード, 原処分被保険者番号, 審査請求届出日);
+        DbT7001FufukuMoshitateEntity fufukuMoshitateEntity = 審査請求書登録dac.selectByKey(識別コード, 原処分被保険者番号, shinsaSeikyuTodokedeYMD);
         if (fufukuMoshitateEntity == null) {
             return isJuuHuku;
         }
@@ -131,7 +131,7 @@ public class SinsaSeikyusyoTorokuManager {
         } else if (画面モード_修正モード.equals(gamennmodel)) {
             if (!(fufukuMoshitateEntity.getShikibetsuCode().equals(識別コード)
                     && fufukuMoshitateEntity.getGenshobunsHihokennshaNo().equals(原処分被保険者番号)
-                    && fufukuMoshitateEntity.getShinsaSeikyuTodokedeYMD().equals(shinsaSeikyuTodokedeYMD))) {
+                    && fufukuMoshitateEntity.getShinsaSeikyuTodokedeYMD().equals(審査請求届出日))) {
                 isJuuHuku = false;
             }
         }
