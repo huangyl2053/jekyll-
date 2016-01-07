@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraiketteJoho.KetteJoho;
-import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraiketteJoho.SyokanbaraiketteJoho;
+import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
+import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.SyokanbaraiketteJoho;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
@@ -18,9 +18,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3045ShokanSer
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3046ShokanServicePlan200604Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3047ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukeiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketeJoho.KetteJohoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketeJoho.SyokanbaraiketeJohoDekidakaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketeJoho.SyokanbaraiketeJohoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho.KetteJohoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho.SyokanbaraiketeJohoDekidakaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho.SyokanbaraiketeJohoEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3036ShokanHanteiKekkaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3045ShokanServicePlan200004Dac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3046ShokanServicePlan200604Dac;
@@ -85,8 +85,10 @@ public class SyokanbaraiketteJohoManager {
      * @param 償還払請求サービス計画200004Dac 償還払請求サービス計画200004Dac
      * @param 支払方法変更差止Dac 支払方法変更差止Dac
      */
-    public SyokanbaraiketteJohoManager(MapperProvider mapperProvider, DbT3036ShokanHanteiKekkaDac 償還払支給判定結果Dac, DbT3053ShokanShukeiDac 償還払請求集計Dac,
-            DbT3047ShokanServicePlan200904Dac 償還払請求サービス計画200904Dac, DbT3046ShokanServicePlan200604Dac 償還払請求サービス計画200604Dac, DbT3045ShokanServicePlan200004Dac 償還払請求サービス計画200004Dac, DbT4024ShiharaiHohoHenkoSashitomeDac 支払方法変更差止Dac) {
+    public SyokanbaraiketteJohoManager(MapperProvider mapperProvider, DbT3036ShokanHanteiKekkaDac 償還払支給判定結果Dac,
+            DbT3053ShokanShukeiDac 償還払請求集計Dac, DbT3047ShokanServicePlan200904Dac 償還払請求サービス計画200904Dac,
+            DbT3046ShokanServicePlan200604Dac 償還払請求サービス計画200604Dac, DbT3045ShokanServicePlan200004Dac 償還払請求サービス計画200004Dac,
+            DbT4024ShiharaiHohoHenkoSashitomeDac 支払方法変更差止Dac) {
         this.mapperProvider = mapperProvider;
         this.償還払支給判定結果Dac = 償還払支給判定結果Dac;
         this.償還払請求集計Dac = 償還払請求集計Dac;
@@ -107,21 +109,20 @@ public class SyokanbaraiketteJohoManager {
     }
 
     /**
-     * 償還払決定一覧（福祉）を取得します
+     * 償還払決定一覧（福祉）を取得します。
      *
      * @param hiHokenshaNo 被保険者番号
      * @param serviceTeikyoYM サービス提供年月
      * @param seiriNo 整理番号
      * @return 償還払決定情報リスト
      */
-    public SearchResult<SyokanbaraiketteJoho> getSyokanbaraiketteFukushiList(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM, RString seiriNo) {
-        requireNonNull(hiHokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(serviceTeikyoYM, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
-        requireNonNull(seiriNo, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+    public SearchResult<SyokanbaraiketteJoho> getSyokanbaraiketteFukushiList(HihokenshaNo hiHokenshaNo,
+            FlexibleYearMonth serviceTeikyoYM, RString seiriNo) {
 
         List<SyokanbaraiketteJoho> 償還払決定情報List = new ArrayList<>();
         SyokanbaraiketteJohoMapper mapper = mapperProvider.create(SyokanbaraiketteJohoMapper.class);
-        List<SyokanbaraiketeJohoEntity> entityList = mapper.getSyokanbaraiketteFukushiList(SyokanbaraiketteJohoParameter.createMybatisParam(hiHokenshaNo, serviceTeikyoYM, seiriNo));
+        List<SyokanbaraiketeJohoEntity> entityList
+                = mapper.getSyokanbaraiketteFukushiList(SyokanbaraiketteJohoParameter.createMybatisParam(hiHokenshaNo, serviceTeikyoYM, seiriNo));
         for (SyokanbaraiketeJohoEntity entity : entityList) {
             償還払決定情報List.add(new SyokanbaraiketteJoho(entity));
         }
@@ -139,7 +140,8 @@ public class SyokanbaraiketteJohoManager {
      * @param seiriNo 整理番号
      * @return 償還払決定情報リスト
      */
-    public SearchResult<SyokanbaraiketteJoho> getSyokanbaraiketteJyutakuList(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM, RString seiriNo) {
+    public SearchResult<SyokanbaraiketteJoho> getSyokanbaraiketteJyutakuList(HihokenshaNo hiHokenshaNo,
+            FlexibleYearMonth serviceTeikyoYM, RString seiriNo) {
         requireNonNull(hiHokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(serviceTeikyoYM, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(seiriNo, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
@@ -165,7 +167,8 @@ public class SyokanbaraiketteJohoManager {
      * @param seiriNo 整理番号
      * @return 償還払決定情報リスト
      */
-    public SearchResult<SyokanbaraiketteJoho> getSyokanbaraiketteSyokanList(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM, RString seiriNo) {
+    public SearchResult<SyokanbaraiketteJoho> getSyokanbaraiketteSyokanList(HihokenshaNo hiHokenshaNo,
+            FlexibleYearMonth serviceTeikyoYM, RString seiriNo) {
         requireNonNull(hiHokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(serviceTeikyoYM, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(seiriNo, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));

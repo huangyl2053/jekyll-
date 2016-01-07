@@ -5,7 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.syokanbaraikettejoho.SyokanbaraiketteJohoMapper">
     
-    <resultMap id="resultMap_SyokanbaraiketeJohoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketeJoho.SyokanbaraiketeJohoEntity" autoMapping="true">
+    <resultMap id="resultMap_SyokanbaraiketeJohoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho.SyokanbaraiketeJohoEntity" autoMapping="true">
         <result property="jigyoshaNo" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler" />
         <result property="yoshikiNo" column="yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="meisaiNo" column="meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -19,7 +19,7 @@
         <result property="tableKbn" column="tableKbn" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dekidakaKbn" column="dekidakaKbn" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-        <resultMap id="resultMap_SyokanbaraiketeJohoDekidakaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketeJoho.SyokanbaraiketeJohoDekidakaEntity" autoMapping="true">
+        <resultMap id="resultMap_SyokanbaraiketeJohoDekidakaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho.SyokanbaraiketeJohoDekidakaEntity" autoMapping="true">
         <result property="jigyoshaNo" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler" />
         <result property="yoshikiNo" column="yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="meisaiNo" column="meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />

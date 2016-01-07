@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Shokanbar
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraiketteJoho.KetteJoho;
-import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraiketteJoho.SyokanbaraiketteJoho;
+import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
+import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.SyokanbaraiketteJoho;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraikettejoho.SyokanbaraiketteJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
@@ -64,10 +64,8 @@ public class ShokanbaraiketteiJohoHandler {
 
     private void init(List<SyokanbaraiketteJoho> 償還払決定一覧情報, RString 差止控除区分, KetteJoho 決定情報, RString mode) {
         boolean 差額登録フラグ = false;
-        if (モード_修正.equals(mode)) {
-            if (差止控除区分_20.equals(差止控除区分) || 差止控除区分_21.equals(差止控除区分)) {
-                差額登録フラグ = true;
-            }
+        if (モード_修正.equals(mode) && (差止控除区分_20.equals(差止控除区分) || 差止控除区分_21.equals(差止控除区分))) {
+            差額登録フラグ = true;
         }
         div.getDgSyokanbaraikete().setDataSource(set償還払決定一覧情報(差額登録フラグ, 償還払決定一覧情報));
         // TODO QA410 決定情報無の場合、支給区分の設定不明
