@@ -68,15 +68,21 @@ public class ShinsakaiIinJohoTorokuHandler {
             row.setShimei(shinsakaiIinJoho.get介護認定審査会委員氏名().value());
             row.setKanaShimei(shinsakaiIinJoho.get介護認定審査会委員氏名カナ().value());
             row.setSeibetsu(Seibetsu.toValue(shinsakaiIinJoho.get性別()).get名称());
-            if (!shinsakaiIinJoho.get生年月日().isEmpty()) {
+            if (shinsakaiIinJoho.get生年月日() != null && !shinsakaiIinJoho.get生年月日().isEmpty()) {
                 row.getBarthYMD().setValue(new RDate(shinsakaiIinJoho.get生年月日().toString()));
             }
             row.setShikakuCode(Sikaku.toValue(shinsakaiIinJoho.get介護認定審査員資格コード().value()).get名称());
-            row.setBiko(shinsakaiIinJoho.get備考());
+            if (shinsakaiIinJoho.get備考() == null) {
+                row.setBiko(RString.EMPTY);
+            } else {
+                row.setBiko(shinsakaiIinJoho.get備考());
+            }
             if (IsHaishi.廃止.equals(IsHaishi.toValue(shinsakaiIinJoho.get廃止フラグ()))) {
                 row.setJokyo(new RString("廃止"));
             }
-            row.setShinsakaiChikuCode(shinsakaiIinJoho.get担当地区コード().value());
+            if (shinsakaiIinJoho.get担当地区コード() != null) {
+                row.setShinsakaiChikuCode(shinsakaiIinJoho.get担当地区コード().value());
+            }
             row.setYubinNo(shinsakaiIinJoho.get郵便番号().value());
             row.setYusoKubun(shinsakaiIinJoho.get審査員郵送区分());
             row.setJusho(shinsakaiIinJoho.get住所().value());
@@ -84,7 +90,9 @@ public class ShinsakaiIinJohoTorokuHandler {
                 row.getHaishiYMD().setValue(new RDate(shinsakaiIinJoho.get廃止年月日().toString()));
             }
             row.setTelNo1(shinsakaiIinJoho.get電話番号().value());
-            row.setFaxNo(shinsakaiIinJoho.getFAX番号().value());
+            if (shinsakaiIinJoho.getFAX番号() != null) {
+                row.setFaxNo(shinsakaiIinJoho.getFAX番号().value());
+            }
             審査会委員一覧.add(row);
         }
         return 審査会委員一覧;
