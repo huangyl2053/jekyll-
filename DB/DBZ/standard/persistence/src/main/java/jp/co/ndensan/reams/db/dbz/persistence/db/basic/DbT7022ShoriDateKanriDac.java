@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.isDeleted;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.nendo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.nendoNaiRenban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.shichosonCode;
@@ -20,8 +22,12 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
+import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -143,5 +149,27 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(subGyomuCode, "DBA"),
                                 eq(shoriName, "異動チェックリスト"))).
                 toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから、対象開始日年月日と対象終了日年月日を取得する。
+     *
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity selectkaisyuYMD() throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(eq(isDeleted, false),
+                                eq(shoriName, ShoriName.年齢到達予定者チェックリスト.get名称()),
+                                eq(nendo, RDate.getNowDate().getNendo())))
+                .order(new OrderBy(shoriEdaban, Order.DESC, NullsOrder.LAST),
+                        new OrderBy(nendoNaiRenban, Order.DESC, NullsOrder.LAST)).
+                limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+
     }
 }

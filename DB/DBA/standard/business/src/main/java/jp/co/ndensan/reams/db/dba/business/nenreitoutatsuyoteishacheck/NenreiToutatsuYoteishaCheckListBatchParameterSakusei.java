@@ -24,6 +24,17 @@ public class NenreiToutatsuYoteishaCheckListBatchParameterSakusei {
     private static final RString CHECKBOX_KEY2 = new RString("key2");
 
     // TODO QA319 引数は確認中です。
+    /**
+     * 年齢到達予定者チェックリスト_バッチパラメータ作成。
+     *
+     * @param 出力対象
+     * @param 住民種別
+     * @param 今回開始日
+     * @param 今回終了日
+     * @param 編集方法
+     * @param 出力順ID
+     * @return　年齢到達予定者チェックリスト_バッチパラメータ
+     */
     public INenreiToutatsuYoteishaCheckListBatchParameter getNenreiToutatsuYoteishaCheckListBatchParameter(
             RString 出力対象, RString 住民種別, FlexibleDate 今回開始日, FlexibleDate 今回終了日, List<RString> 編集方法,
             RString 出力順ID) {
