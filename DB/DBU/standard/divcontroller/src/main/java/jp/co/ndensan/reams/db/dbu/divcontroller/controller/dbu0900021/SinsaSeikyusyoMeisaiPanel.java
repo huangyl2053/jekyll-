@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.divcontroller.controller.SinsaSeikyusyoMeisaiPanel;
+package jp.co.ndensan.reams.db.dbu.divcontroller.controller.dbu0900021;
 
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900021.DBU0900021StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900021.DBU0900021TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900021.SinsaSeikyusyoMeisaiPanelDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900021.SinsaSeikyusyoMeisaiPanelHandler;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900021.SinsaSeikyusyoMeisaiValidationHandler;
-import jp.co.ndensan.reams.db.dbu.service.core.basic.SinsaSeikyusyoTorokuManager;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0210011.SinsaSeikyusyoMeisaiPanelHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0210011.SinsaSeikyusyoMeisaiValidationHandler;
+import jp.co.ndensan.reams.db.dbu.service.core.sinsaseikyusyotoroku.SinsaSeikyusyoTorokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.FufukuMoshitate;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
