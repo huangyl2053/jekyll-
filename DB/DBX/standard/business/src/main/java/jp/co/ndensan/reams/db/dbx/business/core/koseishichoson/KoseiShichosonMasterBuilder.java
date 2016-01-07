@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbx.business.core.koseishichoson;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.koseishichosonshisho.KoseiShichosonShishoMaster;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.koseishichosonshisho.KoseiShichosonShishoMasterIdentifier;
+import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.GappeiKyuShichosonKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -316,9 +317,9 @@ public class KoseiShichosonMasterBuilder {
      * @param 合併旧市町村区分 合併旧市町村区分 １：合併前の旧市町村である ０：最新の広域構成市町村である
      * @return {@link KoseiShichosonMasterBuilder}
      */
-    public KoseiShichosonMasterBuilder set合併旧市町村区分(RString 合併旧市町村区分) {
+    public KoseiShichosonMasterBuilder set合併旧市町村区分(GappeiKyuShichosonKubun 合併旧市町村区分) {
         requireNonNull(合併旧市町村区分, UrSystemErrorMessages.値がnull.getReplacedMessage("合併旧市町村区分"));
-        entity.setGappeiKyuShichosonKubun(合併旧市町村区分);
+        entity.setGappeiKyuShichosonKubun(合併旧市町村区分.code());
         return this;
     }
 

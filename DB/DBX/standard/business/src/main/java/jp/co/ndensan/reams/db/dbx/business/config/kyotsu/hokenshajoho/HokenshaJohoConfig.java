@@ -15,9 +15,11 @@ import static jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.Con
 import static jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho.保険者情報_保険者名称;
 import static jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho.保険者情報_保険者構成;
 import static jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho.保険者情報_保険者番号;
+import static jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho.保険者情報_広域タイプ;
 import static jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho.保険者情報_最優先地区コード;
 import static jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho.保険者情報_郵便番号;
 import static jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho.保険者情報_電話番号;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.KoikiType;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -147,5 +149,14 @@ public class HokenshaJohoConfig {
      */
     public TopPriorityArea get最優先地区() {
         return TopPriorityArea.toValue(configs.get(保険者情報_最優先地区コード));
+    }
+
+    /**
+     * 広域タイプを返します。
+     *
+     * @return {@link KoikiType}
+     */
+    public KoikiType get広域タイプ() {
+        return KoikiType.toValue(configs.get(保険者情報_広域タイプ));
     }
 }

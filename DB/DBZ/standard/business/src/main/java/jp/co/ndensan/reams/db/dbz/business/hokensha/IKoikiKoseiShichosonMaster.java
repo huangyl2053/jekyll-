@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.hokensha;
 
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.ForeignersNameOutput;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TopPriorityArea;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.GappeiKyuShichosonKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.GappeiKyuShichosonKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.GappeiKyuShichosonHyoji;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.RokenJukyushaNoTaikei;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.UnyoKeitaiKubun;

@@ -96,7 +96,8 @@ public class DbT7055GappeiJohoDac {
     }
 
     /**
-     * 指定地域番号以降で合併情報を返します。
+     * 指定地域番号よりも小さい地域番号を持つ合併情報を返します。
+     * (同値は含まない。)
      *
      * @param 地域番号 RString
      * @return List<DbT7055GappeiJohoEntity>

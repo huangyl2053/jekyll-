@@ -1,0 +1,31 @@
+﻿shichosonShokibetsuID,bpchar,RString,,,,,市町村識別ID,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
+kokuhorenKoikiShichosonNo,varchar,RString,,,,,国保連広域内市町村番号,A
+shichosonMeisho,varchar,RString,,,,,市町村名称,A
+todofukenMeisho,varchar,RString,,,,,都道府県名称,A
+gunMeisho,varchar,RString,,,,,郡名称,A
+yubinNo,UDD003YubinNo,YubinNo,,,,,郵便番号,A
+jusho,UDD046AtenaJusho,AtenaJusho,,,,,住所,A
+telNo,UDD026TelNo,TelNo,,,,,電話番号,A
+yusenChikuCode,varchar,RString,,,,,最優先地区コード,A
+tyohyoTodoufukenHyojiUmu,bpchar,RString,,,,,帳票用都道府県名称表示有無,A
+tyohyoGunHyojiUmu,bpchar,RString,,,,,帳票用郡名称表示有無,A
+tyohyoShichosonHyojiUmu,bpchar,RString,,,,,帳票用市町村名称表示有無,A
+tyohyoJushoHenshuHouhou,bpchar,RString,,,,,帳票用住所編集方法,A
+tyohyoKatagakiHyojiUmu,bpchar,RString,,,,,帳票用方書表示有無,A
+gaikokujinHyojiHouhou,bpchar,RString,,,,,外国人氏名表示方法,A
+rojinhokenShichosonNo,varchar,RString,,,,,老人保健市町村番号,A
+rokenJukyushaNoTaikei,varchar,RString,,,,,老人保健受給者番号体系,A
+tokuchoBunpaishuyaku,varchar,RString,,,,,特徴分配集約,A
+ikoYMD,UDD015YMD,FlexibleDate,,,,,移行日,A
+kanyuYMD,UDD015YMD,FlexibleDate,,,,,加入日,A
+ridatsuYMD,UDD015YMD,FlexibleDate,,,,,離脱日,A
+gappeiKyuShichosonKubun,varchar,RString,,,,,合併旧市町村区分  １：合併前の旧市町村である ０：最新の広域構成市町村である,A
+gappeiKyuShichosonHyojiUmu,varchar,RString,,,,,合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる
+１：表示する ０：表示しない,A
+gappeiChiikiNo,varchar,RString,,,,,合併情報地域番号,A
+unyoHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,運用保険者番号,A
+unyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,運用開始日,A
+unyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,運用終了日,A
+unyoKeitaiKubun,varchar,RString,,,,,運用形態区分,A

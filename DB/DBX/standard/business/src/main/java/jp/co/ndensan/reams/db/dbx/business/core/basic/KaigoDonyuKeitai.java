@@ -8,11 +8,11 @@ package jp.co.ndensan.reams.db.dbx.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -24,30 +24,9 @@ public class KaigoDonyuKeitai extends ModelBase<KaigoDonyuKeitaiIdentifier, DbT7
     private final KaigoDonyuKeitaiIdentifier id;
 
     /**
-     * コンストラクタです。<br/>
-     * 介護導入形態の新規作成時に使用します。
+     * {@link DbT7908KaigoDonyuKeitaiEntity}より{@link KaigoDonyuKeitai}を生成します。
      *
-     * @param 業務分類 業務分類
-     * @param 導入形態コード 導入形態コード
-     */
-    public KaigoDonyuKeitai(RString 業務分類,
-            Code 導入形態コード) {
-        requireNonNull(業務分類, UrSystemErrorMessages.値がnull.getReplacedMessage("業務分類"));
-        requireNonNull(導入形態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("導入形態コード"));
-        this.entity = new DbT7908KaigoDonyuKeitaiEntity();
-        this.entity.setGyomuBunrui(業務分類);
-        this.entity.setDonyuKeitaiCode(導入形態コード);
-        this.id = new KaigoDonyuKeitaiIdentifier(
-                業務分類,
-                導入形態コード
-        );
-    }
-
-    /**
-     * コンストラクタです。<br/>
-     * DBより取得した{@link DbT7908KaigoDonyuKeitaiEntity}より{@link KaigoDonyuKeitai}を生成します。
-     *
-     * @param entity DBより取得した{@link DbT7908KaigoDonyuKeitaiEntity}
+     * @param entity {@link DbT7908KaigoDonyuKeitaiEntity}
      */
     public KaigoDonyuKeitai(DbT7908KaigoDonyuKeitaiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護導入形態"));
@@ -70,14 +49,13 @@ public class KaigoDonyuKeitai extends ModelBase<KaigoDonyuKeitaiIdentifier, DbT7
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 業務分類を返します。
      *
      * @return 業務分類
      */
-    public RString get業務分類() {
-        return entity.getGyomuBunrui();
+    public GyomuBunrui get業務分類() {
+        return GyomuBunrui.toValue(entity.getGyomuBunrui());
     }
 
     /**
@@ -85,16 +63,16 @@ public class KaigoDonyuKeitai extends ModelBase<KaigoDonyuKeitaiIdentifier, DbT7
      *
      * @return 導入形態コード
      */
-    public Code get導入形態コード() {
-        return entity.getDonyuKeitaiCode();
+    public DonyuKeitaiCode get導入形態コード() {
+        return DonyuKeitaiCode.toValue(entity.getDonyuKeitaiCode().value());
     }
 
     /**
-     * 支所管理有無フラグを返します。
+     * 支所管理有無を返します。
      *
-     * @return 支所管理有無フラグ
+     * @return 支所管理有無
      */
-    public boolean is支所管理有無フラグ() {
+    public boolean exists支所管理() {
         return entity.getShishoKanriUmuFlag();
     }
 
@@ -148,7 +126,7 @@ public class KaigoDonyuKeitai extends ModelBase<KaigoDonyuKeitaiIdentifier, DbT7
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.entity.getState() != EntityDataState.Modified;
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -177,6 +155,5 @@ public class KaigoDonyuKeitai extends ModelBase<KaigoDonyuKeitaiIdentifier, DbT7
     public KaigoDonyuKeitaiBuilder createBuilderForEdit() {
         return new KaigoDonyuKeitaiBuilder(entity, id);
     }
-
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    private static final long serialVersionUID = 6866826642745028740L;
 }

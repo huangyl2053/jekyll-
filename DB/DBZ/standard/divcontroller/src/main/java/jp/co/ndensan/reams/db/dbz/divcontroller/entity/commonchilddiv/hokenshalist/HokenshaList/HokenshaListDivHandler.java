@@ -12,13 +12,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbx.business.core.shichosonlist.ShichosonCodeNameResult;
-import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.Comparators;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-//import jp.co.ndensan.reams.db.dbx.service.core.shichosonlist.ShichosonList;
+import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
 
@@ -39,23 +39,27 @@ class HokenshaListDivHandler {
      * また、共有子Div内に、取得した保険者のリストを保持します。
      */
     void loadAndHoldHokenshaList() {
-        List<ShichosonCodeNameResult> shichosonList = getShichosonCodeNameList();
-//        Collections.sort(shichosonList, new Comparator<ShichosonCodeNameResult>() {
-//            @Override
-//            public int compare(ShichosonCodeNameResult o1, ShichosonCodeNameResult o2) {
-//                return Objects.compare(o1.get市町村コード(), o2.get市町村コード(), Comparators.<LasdecCode>naturalOrder());
-//            }
-//        });
+        List<HokenshaSummary> hokenshaList = HokenshaListLoader.createInstance()
+                .getShichosonCodeNameList(GyomuBunrui.介護事務)
+                .getAll();
+
+        Collections.sort(hokenshaList, new Comparator<HokenshaSummary>() {
+            @Override
+            public int compare(HokenshaSummary o1, HokenshaSummary o2) {
+                return Objects.compare(o1.get市町村コード(), o2.get市町村コード(),
+                                       Comparators.<LasdecCode>naturalOrder());
+            }
+        });
 
         List<KeyValueDataSource> list = new ArrayList<>();
-//        if (1 < shichosonList.size()) {
-        list.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
-//        }
+        if (1 < hokenshaList.size()) {
+            list.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+        }
 
-        Map<RString, ShichosonCodeNameResult> map = new HashMap<>();
-        for (ShichosonCodeNameResult s : shichosonList) {
+        Map<RString, HokenshaSummary> map = new HashMap<>();
+        for (HokenshaSummary s : hokenshaList) {
             RString key = s.get市町村コード().value();
-            list.add(new KeyValueDataSource(key, s.get市町村名称()));
+            list.add(new KeyValueDataSource(key, create表示名(s)));
             map.put(key, s);
         }
 
@@ -63,33 +67,30 @@ class HokenshaListDivHandler {
         ShichosonListHolder.putTo(div, map);
     }
 
-    private List<ShichosonCodeNameResult> getShichosonCodeNameList() {
-        //return ShichosonList.createInstance().getShichosonCodeNameList();
-        return new ArrayList<ShichosonCodeNameResult>() {
-            {
-                add(new ShichosonCodeNameResult(
-                        new LasdecCode("010102"), new RString("電算市"), new ShoKisaiHokenshaNo("010103"), TokeiTaishoKubun.構成市町村分)
-                );
-            }
-        };
+    private RString create表示名(HokenshaSummary s) {
+        return new RStringBuilder()
+                .append(s.get証記載保険者番号().value())
+                .append(RString.HALF_SPACE)
+                .append(s.get市町村名称())
+                .toRString();
     }
 
     /**
-     * ddlHokenshaListで選択されている市町村名に該当する保険者の情報を{@link ShichosonCodeNameResult}の形で返却します。
+     * ddlHokenshaListで選択されている市町村名に該当する保険者の情報を{@link HokenshaSummary}の形で返却します。
      *
-     * @return 選択中の保険者の情報を持つ{@link ShichosonCodeNameResult}. 選択中の物が無い場合、{@link ShichosonCodeNameResult#EMPTY}
+     * @return 選択中の保険者の情報を持つ{@link HokenshaSummary}. 選択中の物が無い場合、{@link HokenshaSummary#EMPTY}
      * @throws {@link #loadAndHoldHokenshaList()} により、共有子Divの保険者情報が設定されていない場合
      */
-    ShichosonCodeNameResult getSelectedItemAsShichosonCodeNameResult() {
+    HokenshaSummary getSelectedItemAsHokenshaSummary() {
         if (!ShichosonListHolder.hasShichosonList(div)) {
             throw new IllegalStateException("divに対して保険者情報が初期化されていません。そのため、指定の情報は取得できません。");
         }
-        Map<RString, ShichosonCodeNameResult> map = ShichosonListHolder.getFrom(div);
+        Map<RString, HokenshaSummary> map = ShichosonListHolder.getFrom(div);
         RString selectedKey = this.div.getDdlHokenshaList().getSelectedKey();
         if (map.containsKey(selectedKey)) {
             return map.get(selectedKey);
         } else {
-            return ShichosonCodeNameResult.EMPTY;
+            return HokenshaSummary.EMPTY;
         }
     }
 
@@ -101,11 +102,11 @@ class HokenshaListDivHandler {
             KEY = new RString("市町村リスト");
         }
 
-        private static Map<RString, ShichosonCodeNameResult> getFrom(HokenshaListDiv div) {
+        private static Map<RString, HokenshaSummary> getFrom(HokenshaListDiv div) {
             return Collections.unmodifiableMap(PanelSessionAccessor.get(div, KEY, Map.class));
         }
 
-        private static void putTo(HokenshaListDiv div, Map<RString, ShichosonCodeNameResult> map) {
+        private static void putTo(HokenshaListDiv div, Map<RString, HokenshaSummary> map) {
             PanelSessionAccessor.put(div, KEY, new HashMap<>(map));
         }
 

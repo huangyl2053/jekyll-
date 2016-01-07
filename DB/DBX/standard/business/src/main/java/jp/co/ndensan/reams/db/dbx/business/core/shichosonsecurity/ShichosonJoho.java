@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -16,9 +17,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KoseiShichosonJohoEntity {
+public class ShichosonJoho {
 
-    private RString shichosonShokibetsuID;
+    private ShichosonShikibetsuID shichosonShokibetsuID;
     private LasdecCode shichosonCode;
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private RString kokuhorenKoikiShichosonNo;

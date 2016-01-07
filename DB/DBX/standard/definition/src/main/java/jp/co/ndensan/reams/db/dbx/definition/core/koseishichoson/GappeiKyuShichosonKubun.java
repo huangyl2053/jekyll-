@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha;
+package jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,9 +12,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 広域の構成市長村管理において、その市町村が過去に合併した「旧市町村」か、最新の構成市町村の一つかを、区部するための値です。
- *
- * @author N3327 三浦 凌
+ * 広域の構成市長村管理において、その市町村が過去に合併した「旧市町村」か、最新の構成市町村の一つかを、区別するための値です。
  */
 public enum GappeiKyuShichosonKubun {
 
