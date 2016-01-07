@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.ServiceShubetsuCode;
@@ -34,8 +34,8 @@ public class JuryoIninKeiyakuJigyoshaIdentifierTest extends DbxTestBase {
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator.DEFAULT_受領委任契約事業者番号;
-        主キー名2 = DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator.DEFAULT_受領委任契約開始日;
+        主キー名1 = DbT7061JuryoIninJigyoshaEntityGenerator.DEFAULT_受領委任契約事業者番号;
+        主キー名2 = DbT7061JuryoIninJigyoshaEntityGenerator.DEFAULT_受領委任契約開始日;
     }
 
     public static class シリアライズテスト extends DbxTestBase {
