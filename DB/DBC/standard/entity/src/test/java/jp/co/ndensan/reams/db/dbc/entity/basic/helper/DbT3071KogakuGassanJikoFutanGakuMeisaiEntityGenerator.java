@@ -21,7 +21,7 @@ public final class DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator {
     public static final HokenshaNo DEFAULT_保険者番号 = new HokenshaNo("1");
     public static final RString DEFAULT_支給申請書整理番号 = new RString("Data");
     public static final RString DEFAULT_対象月 = new RString("Data");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 1;
     public static final Decimal DEFAULT_自己負担額 = new Decimal(0);
     public static final Decimal DEFAULT_70_74自己負担額_内数 = new Decimal(0);
     public static final Decimal DEFAULT_70未満高額支給額 = new Decimal(0);

@@ -10,13 +10,15 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 帳票制御共通テーブルのエンティティクラスです。
  * <br/> 帳票制御のために必要な共通的な項目を管理します。
  */
 public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065ChohyoSeigyoKyotsuEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7065ChohyoSeigyoKyotsu");
 
@@ -39,7 +41,8 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
     private boolean jushoHenshuShichosonMeiHyojiUmu;
     private RString jushoHenshuChoikiHenshuHoho;
     private boolean jushoHenshuKatagakiHyojiUmu;
-    private boolean SetainushiHyojiUmu;
+    private boolean setainushiHyojiUmu;
+    private boolean dainoninHyojiUmu;
     private boolean customerBarCodeShiyoUmu;
     private RString customerBarCodeHenkanErrHenshuHoho;
     private RString gaibuChohyoMojigireSeigyo;
@@ -113,7 +116,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * 
      * @param subGyomuCode サブ業務コード
      */
-    public void setSubGyomuCode(SubGyomuCode subGyomuCode) {
+    public void setSubGyomuCode(@Nonnull SubGyomuCode subGyomuCode) {
         this.subGyomuCode = subGyomuCode;
     }
 
@@ -131,7 +134,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * 
      * @param chohyoBunruiID 帳票分類ID
      */
-    public void setChohyoBunruiID(ReportId chohyoBunruiID) {
+    public void setChohyoBunruiID(@Nonnull ReportId chohyoBunruiID) {
         this.chohyoBunruiID = chohyoBunruiID;
     }
 
@@ -140,6 +143,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * 
      * @return 帳票分類名称
      */
+    @CheckForNull
     public RString getChohyoBunruiMeisho() {
         return chohyoBunruiMeisho;
     }
@@ -160,6 +164,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * 
      * @return 住所編集区分
      */
+    @CheckForNull
     public RString getJushoHenshuKubun() {
         return jushoHenshuKubun;
     }
@@ -180,6 +185,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * 
      * @return 住所編集都道府県名表示有無
      */
+    @CheckForNull
     public boolean getJushoHenshuTodoufukenMeiHyojiUmu() {
         return jushoHenshuTodoufukenMeiHyojiUmu;
     }
@@ -198,6 +204,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * 
      * @return 住所編集郡名表示有無
      */
+    @CheckForNull
     public boolean getJushoHenshuGunMeiHyojiUmu() {
         return jushoHenshuGunMeiHyojiUmu;
     }
@@ -216,6 +223,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * 
      * @return 住所編集市町村名表示有無
      */
+    @CheckForNull
     public boolean getJushoHenshuShichosonMeiHyojiUmu() {
         return jushoHenshuShichosonMeiHyojiUmu;
     }
@@ -232,14 +240,15 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
     /**
      * 住所編集町域編集方法のgetメソッドです。
      * <br/>
-     * <br/>1:住所＋番地　
-     * <br/>2:行政区＋番地　
-     * <br/>3:住所＋番地（行政区）　
-     * <br/>4:番地のみ　
+     * <br/>1:住所＋番地　
+     * <br/>2:行政区＋番地　
+     * <br/>3:住所＋番地（行政区）　
+     * <br/>4:番地のみ　
      * <br/>5:表示なし(住所は印字しない)
      * 
      * @return 住所編集町域編集方法
      */
+    @CheckForNull
     public RString getJushoHenshuChoikiHenshuHoho() {
         return jushoHenshuChoikiHenshuHoho;
     }
@@ -247,10 +256,10 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
     /**
      * 住所編集町域編集方法のsetメソッドです。
      * <br/>
-     * <br/>1:住所＋番地　
-     * <br/>2:行政区＋番地　
-     * <br/>3:住所＋番地（行政区）　
-     * <br/>4:番地のみ　
+     * <br/>1:住所＋番地　
+     * <br/>2:行政区＋番地　
+     * <br/>3:住所＋番地（行政区）　
+     * <br/>4:番地のみ　
      * <br/>5:表示なし(住所は印字しない)
      * 
      * @param jushoHenshuChoikiHenshuHoho 住所編集町域編集方法
@@ -264,6 +273,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * 
      * @return 住所編集方書表示有無
      */
+    @CheckForNull
     public boolean getJushoHenshuKatagakiHyojiUmu() {
         return jushoHenshuKatagakiHyojiUmu;
     }
@@ -282,17 +292,37 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * 
      * @return 世帯主表示有無
      */
+    @CheckForNull
     public boolean getSetainushiHyojiUmu() {
-        return SetainushiHyojiUmu;
+        return setainushiHyojiUmu;
     }
 
     /**
      * 世帯主表示有無のsetメソッドです。
      * 
-     * @param SetainushiHyojiUmu 世帯主表示有無
+     * @param setainushiHyojiUmu 世帯主表示有無
      */
-    public void setSetainushiHyojiUmu(boolean SetainushiHyojiUmu) {
-        this.SetainushiHyojiUmu = SetainushiHyojiUmu;
+    public void setSetainushiHyojiUmu(boolean setainushiHyojiUmu) {
+        this.setainushiHyojiUmu = setainushiHyojiUmu;
+    }
+
+    /**
+     * 代納人表示有無のgetメソッドです。
+     * 
+     * @return 代納人表示有無
+     */
+    @CheckForNull
+    public boolean getDainoninHyojiUmu() {
+        return dainoninHyojiUmu;
+    }
+
+    /**
+     * 代納人表示有無のsetメソッドです。
+     * 
+     * @param dainoninHyojiUmu 代納人表示有無
+     */
+    public void setDainoninHyojiUmu(boolean dainoninHyojiUmu) {
+        this.dainoninHyojiUmu = dainoninHyojiUmu;
     }
 
     /**
@@ -300,6 +330,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * 
      * @return カスタマバーコード使用有無
      */
+    @CheckForNull
     public boolean getCustomerBarCodeShiyoUmu() {
         return customerBarCodeShiyoUmu;
     }
@@ -320,6 +351,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * 
      * @return カスタマバーコード変換エラー編集方法
      */
+    @CheckForNull
     public RString getCustomerBarCodeHenkanErrHenshuHoho() {
         return customerBarCodeHenkanErrHenshuHoho;
     }
@@ -342,6 +374,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * 
      * @return 外部帳票文字切れ制御
      */
+    @CheckForNull
     public RString getGaibuChohyoMojigireSeigyo() {
         return gaibuChohyoMojigireSeigyo;
     }
@@ -364,6 +397,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * 
      * @return 内部帳票文字切れ制御
      */
+    @CheckForNull
     public RString getNaibuChohyoMojigireSeigyo() {
         return naibuChohyoMojigireSeigyo;
     }
@@ -386,6 +420,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * 
      * @return 文字切れ分離制御
      */
+    @CheckForNull
     public RString getMojigireBunriSeigyo() {
         return mojigireBunriSeigyo;
     }
@@ -404,13 +439,14 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
     /**
      * 定型文文字サイズのgetメソッドです。
      * <br/>
-     * <br/>1:フォント小　
-     * <br/>2:フォント大　
-     * <br/>3:フォント上小下大　
+     * <br/>1:フォント小　
+     * <br/>2:フォント大　
+     * <br/>3:フォント上小下大　
      * <br/>4:フォント上大下小
      * 
      * @return 定型文文字サイズ
      */
+    @CheckForNull
     public RString getTeikeibunMojiSize() {
         return teikeibunMojiSize;
     }
@@ -418,9 +454,9 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
     /**
      * 定型文文字サイズのsetメソッドです。
      * <br/>
-     * <br/>1:フォント小　
-     * <br/>2:フォント大　
-     * <br/>3:フォント上小下大　
+     * <br/>1:フォント小　
+     * <br/>2:フォント大　
+     * <br/>3:フォント上小下大　
      * <br/>4:フォント上大下小
      * 
      * @param teikeibunMojiSize 定型文文字サイズ
@@ -434,6 +470,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * 
      * @return 口座マスク有無
      */
+    @CheckForNull
     public boolean getKozaMaskUmu() {
         return kozaMaskUmu;
     }
@@ -454,6 +491,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * 
      * @return 口座名義人カナ優先区分
      */
+    @CheckForNull
     public RString getKozaMeigininKanaYusenKubun() {
         return kozaMeigininKanaYusenKubun;
     }
@@ -474,6 +512,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * 
      * @return 代行プリント有無
      */
+    @CheckForNull
     public boolean getDaikoPrintUmu() {
         return daikoPrintUmu;
     }
@@ -490,12 +529,13 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
     /**
      * 地区表示1のgetメソッドです。
      * <br/>
-     * <br/>0:なし　
-     * <br/>1:住所コード　
+     * <br/>0:なし　
+     * <br/>1:住所コード　
      * <br/>2:行政区コード
      * 
      * @return 地区表示1
      */
+    @CheckForNull
     public RString getChikuHyoji1() {
         return chikuHyoji1;
     }
@@ -503,8 +543,8 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
     /**
      * 地区表示1のsetメソッドです。
      * <br/>
-     * <br/>0:なし　
-     * <br/>1:住所コード　
+     * <br/>0:なし　
+     * <br/>1:住所コード　
      * <br/>2:行政区コード
      * 
      * @param chikuHyoji1 地区表示1
@@ -516,14 +556,15 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
     /**
      * 地区表示2のgetメソッドです。
      * <br/>
-     * <br/>0:なし　
-     * <br/>3:地区コード１　
-     * <br/>4:地区コード２　
-     * <br/>5:地区コード３　
+     * <br/>0:なし　
+     * <br/>3:地区コード１　
+     * <br/>4:地区コード２　
+     * <br/>5:地区コード３　
      * <br/>6:納組コード
      * 
      * @return 地区表示2
      */
+    @CheckForNull
     public RString getChikuHyoji2() {
         return chikuHyoji2;
     }
@@ -531,10 +572,10 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
     /**
      * 地区表示2のsetメソッドです。
      * <br/>
-     * <br/>0:なし　
-     * <br/>3:地区コード１　
-     * <br/>4:地区コード２　
-     * <br/>5:地区コード３　
+     * <br/>0:なし　
+     * <br/>3:地区コード１　
+     * <br/>4:地区コード２　
+     * <br/>5:地区コード３　
      * <br/>6:納組コード
      * 
      * @param chikuHyoji2 地区表示2
@@ -546,14 +587,15 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
     /**
      * 地区表示3のgetメソッドです。
      * <br/>
-     * <br/>0:なし　
-     * <br/>3:地区コード１　
-     * <br/>4:地区コード２　
-     * <br/>5:地区コード３　
+     * <br/>0:なし　
+     * <br/>3:地区コード１　
+     * <br/>4:地区コード２　
+     * <br/>5:地区コード３　
      * <br/>6:納組コード
      * 
      * @return 地区表示3
      */
+    @CheckForNull
     public RString getChikuHyoji3() {
         return chikuHyoji3;
     }
@@ -561,10 +603,10 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
     /**
      * 地区表示3のsetメソッドです。
      * <br/>
-     * <br/>0:なし　
-     * <br/>3:地区コード１　
-     * <br/>4:地区コード２　
-     * <br/>5:地区コード３　
+     * <br/>0:なし　
+     * <br/>3:地区コード１　
+     * <br/>4:地区コード２　
+     * <br/>5:地区コード３　
      * <br/>6:納組コード
      * 
      * @param chikuHyoji3 地区表示3
@@ -577,7 +619,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      * このエンティティの主キーが他の{@literal DbT7065ChohyoSeigyoKyotsuEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7065ChohyoSeigyoKyotsuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -608,7 +650,8 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
         this.jushoHenshuShichosonMeiHyojiUmu = entity.jushoHenshuShichosonMeiHyojiUmu;
         this.jushoHenshuChoikiHenshuHoho = entity.jushoHenshuChoikiHenshuHoho;
         this.jushoHenshuKatagakiHyojiUmu = entity.jushoHenshuKatagakiHyojiUmu;
-        this.SetainushiHyojiUmu = entity.SetainushiHyojiUmu;
+        this.setainushiHyojiUmu = entity.setainushiHyojiUmu;
+        this.dainoninHyojiUmu = entity.dainoninHyojiUmu;
         this.customerBarCodeShiyoUmu = entity.customerBarCodeShiyoUmu;
         this.customerBarCodeHenkanErrHenshuHoho = entity.customerBarCodeHenkanErrHenshuHoho;
         this.gaibuChohyoMojigireSeigyo = entity.gaibuChohyoMojigireSeigyo;
@@ -629,8 +672,9 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(subGyomuCode, chohyoBunruiID, chohyoBunruiMeisho, jushoHenshuKubun, jushoHenshuTodoufukenMeiHyojiUmu, jushoHenshuGunMeiHyojiUmu, jushoHenshuShichosonMeiHyojiUmu, jushoHenshuChoikiHenshuHoho, jushoHenshuKatagakiHyojiUmu, SetainushiHyojiUmu, customerBarCodeShiyoUmu, customerBarCodeHenkanErrHenshuHoho, gaibuChohyoMojigireSeigyo, naibuChohyoMojigireSeigyo, mojigireBunriSeigyo, teikeibunMojiSize, kozaMaskUmu, kozaMeigininKanaYusenKubun, daikoPrintUmu, chikuHyoji1, chikuHyoji2, chikuHyoji3);
+        return super.toMd5(subGyomuCode, chohyoBunruiID, chohyoBunruiMeisho, jushoHenshuKubun, jushoHenshuTodoufukenMeiHyojiUmu, jushoHenshuGunMeiHyojiUmu, jushoHenshuShichosonMeiHyojiUmu, jushoHenshuChoikiHenshuHoho, jushoHenshuKatagakiHyojiUmu, setainushiHyojiUmu, dainoninHyojiUmu, customerBarCodeShiyoUmu, customerBarCodeHenkanErrHenshuHoho, gaibuChohyoMojigireSeigyo, naibuChohyoMojigireSeigyo, mojigireBunriSeigyo, teikeibunMojiSize, kozaMaskUmu, kozaMeigininKanaYusenKubun, daikoPrintUmu, chikuHyoji1, chikuHyoji2, chikuHyoji3);
     }
 
 // </editor-fold>
+
 }

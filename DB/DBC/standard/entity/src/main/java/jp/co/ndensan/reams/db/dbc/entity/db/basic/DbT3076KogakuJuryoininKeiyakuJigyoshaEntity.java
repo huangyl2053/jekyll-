@@ -1,24 +1,25 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.util.Objects;
 
 /**
  * 高額受領委任契約事業者テーブルのエンティティクラスです。
  */
 public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT3076KogakuJuryoininKeiyakuJigyoshaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3076KogakuJuryoininKeiyakuJigyosha");
 
@@ -33,10 +34,9 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private FlexibleDate uketsukeYMD;
-    @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     private FlexibleDate shinseiYMD;
+    private FlexibleDate uketsukeYMD;
     private JigyoshaNo jigyoshaNo;
     private FlexibleDate ketteiYMD;
     private RString shoninKekkaKubun;
@@ -50,7 +50,7 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -59,7 +59,7 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -68,7 +68,7 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -77,16 +77,17 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -95,7 +96,7 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
 
     /**
      * 被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -104,61 +105,44 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
 
     /**
      * 被保険者番号のsetメソッドです。
-     *
+     * 
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
-     * 受付年月日のgetメソッドです。
-     *
-     * @return 受付年月日
-     */
-    public FlexibleDate getUketsukeYMD() {
-        return uketsukeYMD;
-    }
-
-    /**
-     * 受付年月日のsetメソッドです。
-     *
-     * @param uketsukeYMD 受付年月日
-     */
-    public void setUketsukeYMD(FlexibleDate uketsukeYMD) {
-        this.uketsukeYMD = uketsukeYMD;
-    }
-
-    /**
      * 履歴番号のgetメソッドです。
-     *
+     * 
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     *
+     * 
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(@Nonnull int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * 申請年月日のgetメソッドです。
-     *
+     * 
      * @return 申請年月日
      */
+    @CheckForNull
     public FlexibleDate getShinseiYMD() {
         return shinseiYMD;
     }
 
     /**
      * 申請年月日のsetメソッドです。
-     *
+     * 
      * @param shinseiYMD 申請年月日
      */
     public void setShinseiYMD(FlexibleDate shinseiYMD) {
@@ -166,10 +150,29 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
     }
 
     /**
+     * 受付年月日のgetメソッドです。
+     * 
+     * @return 受付年月日
+     */
+    @CheckForNull
+    public FlexibleDate getUketsukeYMD() {
+        return uketsukeYMD;
+    }
+
+    /**
+     * 受付年月日のsetメソッドです。
+     * 
+     * @param uketsukeYMD 受付年月日
+     */
+    public void setUketsukeYMD(FlexibleDate uketsukeYMD) {
+        this.uketsukeYMD = uketsukeYMD;
+    }
+
+    /**
      * 事業者番号のgetメソッドです。
      * <br/>
      * <br/>受領委任対象の事業者番号
-     *
+     * 
      * @return 事業者番号
      */
     public JigyoshaNo getJigyoshaNo() {
@@ -180,25 +183,26 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
      * 事業者番号のsetメソッドです。
      * <br/>
      * <br/>受領委任対象の事業者番号
-     *
+     * 
      * @param jigyoshaNo 事業者番号
      */
-    public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(@Nonnull JigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
     /**
      * 決定年月日のgetメソッドです。
-     *
+     * 
      * @return 決定年月日
      */
+    @CheckForNull
     public FlexibleDate getKetteiYMD() {
         return ketteiYMD;
     }
 
     /**
      * 決定年月日のsetメソッドです。
-     *
+     * 
      * @param ketteiYMD 決定年月日
      */
     public void setKetteiYMD(FlexibleDate ketteiYMD) {
@@ -209,7 +213,7 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
      * 承認結果区分のgetメソッドです。
      * <br/>
      * <br/>0:承認しない,1:承認する
-     *
+     * 
      * @return 承認結果区分
      */
     public RString getShoninKekkaKubun() {
@@ -220,25 +224,26 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
      * 承認結果区分のsetメソッドです。
      * <br/>
      * <br/>0:承認しない,1:承認する
-     *
+     * 
      * @param shoninKekkaKubun 承認結果区分
      */
-    public void setShoninKekkaKubun(RString shoninKekkaKubun) {
+    public void setShoninKekkaKubun(@Nonnull RString shoninKekkaKubun) {
         this.shoninKekkaKubun = shoninKekkaKubun;
     }
 
     /**
      * 受領委任払適用開始年月日のgetメソッドです。
-     *
+     * 
      * @return 受領委任払適用開始年月日
      */
+    @CheckForNull
     public FlexibleDate getJuryoininKaishiYMD() {
         return juryoininKaishiYMD;
     }
 
     /**
      * 受領委任払適用開始年月日のsetメソッドです。
-     *
+     * 
      * @param juryoininKaishiYMD 受領委任払適用開始年月日
      */
     public void setJuryoininKaishiYMD(FlexibleDate juryoininKaishiYMD) {
@@ -247,16 +252,17 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
 
     /**
      * 受領委任払適用終了年月日のgetメソッドです。
-     *
+     * 
      * @return 受領委任払適用終了年月日
      */
+    @CheckForNull
     public FlexibleDate getJuryoininShuryoYMD() {
         return juryoininShuryoYMD;
     }
 
     /**
      * 受領委任払適用終了年月日のsetメソッドです。
-     *
+     * 
      * @param juryoininShuryoYMD 受領委任払適用終了年月日
      */
     public void setJuryoininShuryoYMD(FlexibleDate juryoininShuryoYMD) {
@@ -267,9 +273,10 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
      * 契約番号のgetメソッドです。
      * <br/>
      * <br/>開始年月日が属する西暦年度（4桁）＋契約事業者・年度単位に１からの連番（4桁）
-     *
+     * 
      * @return 契約番号
      */
+    @CheckForNull
     public RString getKeiyakuNo() {
         return keiyakuNo;
     }
@@ -278,7 +285,7 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
      * 契約番号のsetメソッドです。
      * <br/>
      * <br/>開始年月日が属する西暦年度（4桁）＋契約事業者・年度単位に１からの連番（4桁）
-     *
+     * 
      * @param keiyakuNo 契約番号
      */
     public void setKeiyakuNo(RString keiyakuNo) {
@@ -287,16 +294,17 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
 
     /**
      * 不承認理由のgetメソッドです。
-     *
+     * 
      * @return 不承認理由
      */
+    @CheckForNull
     public RString getFuShoninRiyu() {
         return fuShoninRiyu;
     }
 
     /**
      * 不承認理由のsetメソッドです。
-     *
+     * 
      * @param fuShoninRiyu 不承認理由
      */
     public void setFuShoninRiyu(RString fuShoninRiyu) {
@@ -305,16 +313,17 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
 
     /**
      * 利用者負担上限額のgetメソッドです。
-     *
+     * 
      * @return 利用者負担上限額
      */
+    @CheckForNull
     public Decimal getRiyoshaFutanJogenGaku() {
         return riyoshaFutanJogenGaku;
     }
 
     /**
      * 利用者負担上限額のsetメソッドです。
-     *
+     * 
      * @param riyoshaFutanJogenGaku 利用者負担上限額
      */
     public void setRiyoshaFutanJogenGaku(Decimal riyoshaFutanJogenGaku) {
@@ -323,16 +332,17 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
 
     /**
      * 承認結果通知書作成日のgetメソッドです。
-     *
+     * 
      * @return 承認結果通知書作成日
      */
+    @CheckForNull
     public FlexibleDate getShoninKekkaTsuchiSakuseiYMD() {
         return shoninKekkaTsuchiSakuseiYMD;
     }
 
     /**
      * 承認結果通知書作成日のsetメソッドです。
-     *
+     * 
      * @param shoninKekkaTsuchiSakuseiYMD 承認結果通知書作成日
      */
     public void setShoninKekkaTsuchiSakuseiYMD(FlexibleDate shoninKekkaTsuchiSakuseiYMD) {
@@ -341,16 +351,17 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
 
     /**
      * 承認結果通知書再発行区分のgetメソッドです。
-     *
+     * 
      * @return 承認結果通知書再発行区分
      */
+    @CheckForNull
     public RString getShoninKekkaTsuchiSaiHakkoKubun() {
         return shoninKekkaTsuchiSaiHakkoKubun;
     }
 
     /**
      * 承認結果通知書再発行区分のsetメソッドです。
-     *
+     * 
      * @param shoninKekkaTsuchiSaiHakkoKubun 承認結果通知書再発行区分
      */
     public void setShoninKekkaTsuchiSaiHakkoKubun(RString shoninKekkaTsuchiSaiHakkoKubun) {
@@ -359,9 +370,9 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
 
     /**
      * このエンティティの主キーが他の{@literal DbT3076KogakuJuryoininKeiyakuJigyoshaEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3076KogakuJuryoininKeiyakuJigyoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -370,9 +381,6 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
             return false;
         }
         if (!Objects.equals(this.hihokenshaNo, other.hihokenshaNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.uketsukeYMD, other.uketsukeYMD)) {
             return false;
         }
         if (this.rirekiNo != other.rirekiNo) {
@@ -387,9 +395,9 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
     @Override
     public void shallowCopy(DbT3076KogakuJuryoininKeiyakuJigyoshaEntity entity) {
         this.hihokenshaNo = entity.hihokenshaNo;
-        this.uketsukeYMD = entity.uketsukeYMD;
         this.rirekiNo = entity.rirekiNo;
         this.shinseiYMD = entity.shinseiYMD;
+        this.uketsukeYMD = entity.uketsukeYMD;
         this.jigyoshaNo = entity.jigyoshaNo;
         this.ketteiYMD = entity.ketteiYMD;
         this.shoninKekkaKubun = entity.shoninKekkaKubun;
@@ -404,13 +412,13 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaEntity extends DbTableEntityBa
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hihokenshaNo, uketsukeYMD, rirekiNo, shinseiYMD, jigyoshaNo, ketteiYMD, shoninKekkaKubun, juryoininKaishiYMD, juryoininShuryoYMD, keiyakuNo, fuShoninRiyu, riyoshaFutanJogenGaku, shoninKekkaTsuchiSakuseiYMD, shoninKekkaTsuchiSaiHakkoKubun);
+        return super.toMd5(hihokenshaNo, rirekiNo, shinseiYMD, uketsukeYMD, jigyoshaNo, ketteiYMD, shoninKekkaKubun, juryoininKaishiYMD, juryoininShuryoYMD, keiyakuNo, fuShoninRiyu, riyoshaFutanJogenGaku, shoninKekkaTsuchiSakuseiYMD, shoninKekkaTsuchiSaiHakkoKubun);
     }
 
 // </editor-fold>
+
 }

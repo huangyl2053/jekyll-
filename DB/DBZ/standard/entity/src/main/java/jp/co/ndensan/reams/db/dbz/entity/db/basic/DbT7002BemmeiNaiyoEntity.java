@@ -2,8 +2,10 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -18,8 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  */
 public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNaiyoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7002BemmeiNaiyo");
 
@@ -32,8 +33,6 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
-    @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
     private HihokenshaNo genshobunHihokenshaNo;
@@ -41,13 +40,14 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
     private FlexibleDate shinsaseikyuTodokedeYMD;
     @PrimaryKey
     private FlexibleDate bemmeishoSakuseiYMD;
+    private LasdecCode shichosonCode;
     private RString shinsaseikyuKankeiShobunNaiyo;
     private RString bemmeiNaiyo;
-    private FlexibleDate bemmeishoSakuseiTeishutsuYMD;
+    private FlexibleDate bemmeishoTeishutsuYMD;
 
     /**
-     * getInsertDantaiCd
-     *
+     * insertDantaiCdのgetメソッドです。
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -55,8 +55,8 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
     }
 
     /**
-     * setInsertDantaiCd
-     *
+     * insertDantaiCdのsetメソッドです。
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -64,8 +64,8 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
     }
 
     /**
-     * getIsDeleted
-     *
+     * isDeletedのgetメソッドです。
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -73,17 +73,18 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
     }
 
     /**
-     * setIsDeleted
-     *
+     * isDeletedのsetメソッドです。
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
-     * setLastUpdateReamsLoginId
-     *
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -91,162 +92,163 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
     }
 
     /**
-     * getShoKisaiHokenshaNo
-     *
-     * @return shoKisaiHokenshaNo
-     */
-    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
-        return shoKisaiHokenshaNo;
-    }
-
-    /**
-     * setShoKisaiHokenshaNo
-     *
-     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
-     */
-    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
-        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
-    }
-
-    /**
-     * getShikibetsuCode
-     *
-     * @return shikibetsuCode
+     * 識別コードのgetメソッドです。
+     * 
+     * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
         return shikibetsuCode;
     }
 
     /**
-     * setShikibetsuCode
-     *
-     * @param shikibetsuCode shikibetsuCode
+     * 識別コードのsetメソッドです。
+     * 
+     * @param shikibetsuCode 識別コード
      */
-    public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
+    public void setShikibetsuCode(@Nonnull ShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
     }
 
     /**
-     * getGenshobunHihokenshaNo
-     *
-     * @return genshobunHihokenshaNo
+     * 原処分被保険者番号のgetメソッドです。
+     * 
+     * @return 原処分被保険者番号
      */
     public HihokenshaNo getGenshobunHihokenshaNo() {
         return genshobunHihokenshaNo;
     }
 
     /**
-     * setGenshobunHihokenshaNo
-     *
-     * @param genshobunHihokenshaNo genshobunHihokenshaNo
+     * 原処分被保険者番号のsetメソッドです。
+     * 
+     * @param genshobunHihokenshaNo 原処分被保険者番号
      */
-    public void setGenshobunHihokenshaNo(HihokenshaNo genshobunHihokenshaNo) {
+    public void setGenshobunHihokenshaNo(@Nonnull HihokenshaNo genshobunHihokenshaNo) {
         this.genshobunHihokenshaNo = genshobunHihokenshaNo;
     }
 
     /**
-     * getShinsaseikyuTodokedeYMD
-     *
-     * @return shinsaseikyuTodokedeYMD
+     * 審査請求届出日のgetメソッドです。
+     * 
+     * @return 審査請求届出日
      */
     public FlexibleDate getShinsaseikyuTodokedeYMD() {
         return shinsaseikyuTodokedeYMD;
     }
 
     /**
-     * setShinsaseikyuTodokedeYMD
-     *
-     * @param shinsaseikyuTodokedeYMD shinsaseikyuTodokedeYMD
+     * 審査請求届出日のsetメソッドです。
+     * 
+     * @param shinsaseikyuTodokedeYMD 審査請求届出日
      */
-    public void setShinsaseikyuTodokedeYMD(FlexibleDate shinsaseikyuTodokedeYMD) {
+    public void setShinsaseikyuTodokedeYMD(@Nonnull FlexibleDate shinsaseikyuTodokedeYMD) {
         this.shinsaseikyuTodokedeYMD = shinsaseikyuTodokedeYMD;
     }
 
     /**
-     * getBemmeishoSakuseiYMD
-     *
-     * @return bemmeishoSakuseiYMD
+     * 弁明書作成日のgetメソッドです。
+     * 
+     * @return 弁明書作成日
      */
     public FlexibleDate getBemmeishoSakuseiYMD() {
         return bemmeishoSakuseiYMD;
     }
 
     /**
-     * setBemmeishoSakuseiYMD
-     *
-     * @param bemmeishoSakuseiYMD bemmeishoSakuseiYMD
+     * 弁明書作成日のsetメソッドです。
+     * 
+     * @param bemmeishoSakuseiYMD 弁明書作成日
      */
-    public void setBemmeishoSakuseiYMD(FlexibleDate bemmeishoSakuseiYMD) {
+    public void setBemmeishoSakuseiYMD(@Nonnull FlexibleDate bemmeishoSakuseiYMD) {
         this.bemmeishoSakuseiYMD = bemmeishoSakuseiYMD;
     }
 
     /**
-     * getShinsaseikyuKankeiShobunNaiyo
-     *
-     * @return shinsaseikyuKankeiShobunNaiyo
+     * 市町村コードのgetメソッドです。
+     * 
+     * @return 市町村コード
      */
+    @CheckForNull
+    public LasdecCode getShichosonCode() {
+        return shichosonCode;
+    }
+
+    /**
+     * 市町村コードのsetメソッドです。
+     * 
+     * @param shichosonCode 市町村コード
+     */
+    public void setShichosonCode(LasdecCode shichosonCode) {
+        this.shichosonCode = shichosonCode;
+    }
+
+    /**
+     * 審査請求に係る処分内容のgetメソッドです。
+     * 
+     * @return 審査請求に係る処分内容
+     */
+    @CheckForNull
     public RString getShinsaseikyuKankeiShobunNaiyo() {
         return shinsaseikyuKankeiShobunNaiyo;
     }
 
     /**
-     * setShinsaseikyuKankeiShobunNaiyo
-     *
-     * @param shinsaseikyuKankeiShobunNaiyo shinsaseikyuKankeiShobunNaiyo
+     * 審査請求に係る処分内容のsetメソッドです。
+     * 
+     * @param shinsaseikyuKankeiShobunNaiyo 審査請求に係る処分内容
      */
     public void setShinsaseikyuKankeiShobunNaiyo(RString shinsaseikyuKankeiShobunNaiyo) {
         this.shinsaseikyuKankeiShobunNaiyo = shinsaseikyuKankeiShobunNaiyo;
     }
 
     /**
-     * getBemmeiNaiyo
-     *
-     * @return bemmeiNaiyo
+     * 弁明内容のgetメソッドです。
+     * 
+     * @return 弁明内容
      */
+    @CheckForNull
     public RString getBemmeiNaiyo() {
         return bemmeiNaiyo;
     }
 
     /**
-     * setBemmeiNaiyo
-     *
-     * @param bemmeiNaiyo bemmeiNaiyo
+     * 弁明内容のsetメソッドです。
+     * 
+     * @param bemmeiNaiyo 弁明内容
      */
     public void setBemmeiNaiyo(RString bemmeiNaiyo) {
         this.bemmeiNaiyo = bemmeiNaiyo;
     }
 
     /**
-     * getBemmeishoSakuseiTeishutsuYMD
-     *
-     * @return bemmeishoSakuseiTeishutsuYMD
+     * 弁明書提出日のgetメソッドです。
+     * 
+     * @return 弁明書提出日
      */
-    public FlexibleDate getBemmeishoSakuseiTeishutsuYMD() {
-        return bemmeishoSakuseiTeishutsuYMD;
+    @CheckForNull
+    public FlexibleDate getBemmeishoTeishutsuYMD() {
+        return bemmeishoTeishutsuYMD;
     }
 
     /**
-     * setBemmeishoSakuseiTeishutsuYMD
-     *
-     * @param bemmeishoSakuseiTeishutsuYMD bemmeishoSakuseiTeishutsuYMD
+     * 弁明書提出日のsetメソッドです。
+     * 
+     * @param bemmeishoTeishutsuYMD 弁明書提出日
      */
-    public void setBemmeishoSakuseiTeishutsuYMD(FlexibleDate bemmeishoSakuseiTeishutsuYMD) {
-        this.bemmeishoSakuseiTeishutsuYMD = bemmeishoSakuseiTeishutsuYMD;
+    public void setBemmeishoTeishutsuYMD(FlexibleDate bemmeishoTeishutsuYMD) {
+        this.bemmeishoTeishutsuYMD = bemmeishoTeishutsuYMD;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT7002BemmeiNaiyoEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7002BemmeiNaiyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7002BemmeiNaiyoEntity other) {
         if (other == null) {
-            return false;
-        }
-        if (!Objects.equals(this.shoKisaiHokenshaNo, other.shoKisaiHokenshaNo)) {
             return false;
         }
         if (!Objects.equals(this.shikibetsuCode, other.shikibetsuCode)) {
@@ -269,25 +271,25 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
      */
     @Override
     public void shallowCopy(DbT7002BemmeiNaiyoEntity entity) {
-        this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
         this.shikibetsuCode = entity.shikibetsuCode;
         this.genshobunHihokenshaNo = entity.genshobunHihokenshaNo;
         this.shinsaseikyuTodokedeYMD = entity.shinsaseikyuTodokedeYMD;
         this.bemmeishoSakuseiYMD = entity.bemmeishoSakuseiYMD;
+        this.shichosonCode = entity.shichosonCode;
         this.shinsaseikyuKankeiShobunNaiyo = entity.shinsaseikyuKankeiShobunNaiyo;
         this.bemmeiNaiyo = entity.bemmeiNaiyo;
-        this.bemmeishoSakuseiTeishutsuYMD = entity.bemmeishoSakuseiTeishutsuYMD;
+        this.bemmeishoTeishutsuYMD = entity.bemmeishoTeishutsuYMD;
     }
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shoKisaiHokenshaNo, shikibetsuCode, genshobunHihokenshaNo, shinsaseikyuTodokedeYMD, bemmeishoSakuseiYMD, shinsaseikyuKankeiShobunNaiyo, bemmeiNaiyo, bemmeishoSakuseiTeishutsuYMD);
+        return super.toMd5(shikibetsuCode, genshobunHihokenshaNo, shinsaseikyuTodokedeYMD, bemmeishoSakuseiYMD, shichosonCode, shinsaseikyuKankeiShobunNaiyo, bemmeiNaiyo, bemmeishoTeishutsuYMD);
     }
 
 // </editor-fold>
+
 }

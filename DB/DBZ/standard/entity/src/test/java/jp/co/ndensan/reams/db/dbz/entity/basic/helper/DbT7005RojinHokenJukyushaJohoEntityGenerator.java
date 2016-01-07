@@ -18,7 +18,7 @@ public final class DbT7005RojinHokenJukyushaJohoEntityGenerator {
     public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("000001234567890");
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode(new RString("010210"));
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("02"));
-    public static final LasdecCode DEFAULT_老人保健市町村コード = new LasdecCode(new RString("010210"));
+    public static final RString DEFAULT_老人保健市町村コード = new RString("010210");
     public static final RString DEFAULT_老人保健受給者番号 = new RString("123456");
 
     /**

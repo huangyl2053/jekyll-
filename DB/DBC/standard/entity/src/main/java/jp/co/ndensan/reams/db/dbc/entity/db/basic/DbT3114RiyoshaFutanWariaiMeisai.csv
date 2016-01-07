@@ -7,8 +7,9 @@ futanWariaiKubun,varchar,RString,,,,,負担割合区分,A
 yukoKaishiYMD,UDD015YMD,FlexibleDate,,,,,有効開始日,A
 yukoShuryoYMD,UDD015YMD,FlexibleDate,,,,,有効終了日,A
 honninGoukeiShotokuGaku,numeric,Decimal,,,,,本人合計所得金額,A
-setaiIchigouHihoknehsaSu,int2,int,,,,,世帯１号被保険者数,A
+setaiIchigouHihokenshaSu,int2,int,,,,,世帯１号被保険者数,A
 nenkinShunyuGoukei,numeric,Decimal,,,,,年金収入合計,A
 sonotanoGoukeiShotokuKingakuGoukei,numeric,Decimal,,,,,その他の合計所得金額合計,A
 koseiRiyu,text,RString,,,,,更正理由,A
 setaiCd,UDD051SetaiCode,SetaiCode,,,,,世帯コード,A
+logicalDeletedFlag,bool,boolean,,,,,論理削除フラグ,A

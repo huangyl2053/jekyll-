@@ -5,7 +5,7 @@ shoriJotaiKubun,bpchar,RString,,,,,処理状態区分,A
 shoriJisshiTimestamp,UDD018YMDHMS,YMDHMS,,,,,処理実施日時,A
 chushutsuKaishiTimestamp,UDD018YMDHMS,YMDHMS,,,,,抽出開始日時,A
 chushutsuShuryoTimestamp,UDD018YMDHMS,YMDHMS,,,,,抽出終了日時,A
-saiShoriKahiKubun,bool,boolean,,,,,再処理可能区分,A
+saiShoriKanoKubun,bool,boolean,,,,,再処理可能区分,A
 shoriJikkoKaisu,numeric,Decimal,,,,,処理実行回数,A
 fileName1,varchar,RString,,,,,ファイル名称１,A
 fileName2,varchar,RString,,,,,ファイル名称２,A
