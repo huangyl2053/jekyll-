@@ -28,7 +28,7 @@ public class ShokanbaraiketteiJohoHandler {
     private static final RString 差止控除区分_20 = new RString("20");
     private static final RString 差止控除区分_21 = new RString("21");
     private static final RString モード_修正 = new RString("修正");
-    private static final RString モード_参照 = new RString("参照");
+    private static final RString モード_照会 = new RString("照会");
     private static final RString 支給区分_支給 = new RString("1");
     private static final RString 支給区分_不支給 = new RString("0");
     private static final RString GYOKUKBN_住宅改修 = new RString("01");
@@ -62,15 +62,7 @@ public class ShokanbaraiketteiJohoHandler {
         ViewStateHolder.put(ViewStateKeys.決定情報, 決定情報);
     }
 
-    /**
-     * 償還払決定一覧情報内容を設定します。
-     *
-     * @param 償還払決定一覧情報 償還払決定一覧情報
-     * @param 差止控除区分 差止控除区分
-     * @param 決定情報 決定情報
-     * @param mode モード
-     */
-    public void init(List<SyokanbaraiketteJoho> 償還払決定一覧情報, RString 差止控除区分, KetteJoho 決定情報, RString mode) {
+    private void init(List<SyokanbaraiketteJoho> 償還払決定一覧情報, RString 差止控除区分, KetteJoho 決定情報, RString mode) {
         boolean 差額登録フラグ = false;
         if (モード_修正.equals(mode)) {
             if (差止控除区分_20.equals(差止控除区分) || 差止控除区分_21.equals(差止控除区分)) {
@@ -97,11 +89,8 @@ public class ShokanbaraiketteiJohoHandler {
                 div.getRdoShikyukubun().setSelectedKey(決定情報.getShikyuHushikyuKetteiKubun());
             }
         }
-        if (モード_参照.equals(mode)) {
-            div.setMode_State(ShokanbaraiketteiJohoDiv.State.sansyo);
-        } else {
-            div.setMode_State(ShokanbaraiketteiJohoDiv.State.sagakutouroku);
-        }
+
+        setState(mode);
     }
 
     /**
@@ -178,7 +167,6 @@ public class ShokanbaraiketteiJohoHandler {
     }
 
     private void set決定情報(KetteJoho 決定情報, RString 支給区分) {
-
         if (決定情報 != null && 決定情報.getShiharaiKingaku() == null) {
             if (支給区分_不支給.equals(支給区分)) {
                 div.getTxtShiharaikingakugoke().setValue(Decimal.ZERO);
@@ -255,5 +243,17 @@ public class ShokanbaraiketteiJohoHandler {
             div.getDgSyokanbaraikete().getGridSetting().getColumn("defaultDataName3").setVisible(false);
         }
         return 償還払決定一覧情報;
+    }
+
+    private void setState(RString mode) {
+        if (モード_照会.equals(mode)) {
+            div.getTxtZogenriyu().setDisabled(true);
+            div.getTxtZogentani().setDisabled(true);
+            div.getTxtShiharaikingakugoke().setDisabled(true);
+            div.getRdoShikyukubun().setDisabled(true);
+            div.getTxtKetebi().setDisabled(true);
+            div.getTxtFuSyikyuriyu1().setDisabled(true);
+            div.getTxtFushikyuriyu2().setDisabled(true);
+        }
     }
 }
