@@ -6,8 +6,13 @@
 
 package jp.co.ndensan.reams.db.dbu.entity.db.relate.koikinaijushochitokurei;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  *
@@ -18,6 +23,36 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 @lombok.Setter
 public class KoikinaiJushochiTokureiRelateEntity {
     
-    private DbT1001HihokenshaDaichoEntity dbT1001Entity;
+    @PrimaryKey
+    private HihokenshaNo hihokenshaNo;
+    @PrimaryKey
+    private FlexibleDate idoYMD;
+    @PrimaryKey
+    private RString edaNo;
+    private RString idoJiyuCode;
+    private LasdecCode shichosonCode;
+    private ShikibetsuCode shikibetsuCode;
+    private RString shikakuShutokuJiyuCode;
+    private FlexibleDate shikakuShutokuYMD;
+    private FlexibleDate shikakuShutokuTodokedeYMD;
+    private FlexibleDate ichigoShikakuShutokuYMD;
+    private RString hihokennshaKubunCode;
+    private RString shikakuSoshitsuJiyuCode;
+    private FlexibleDate shikakuSoshitsuYMD;
+    private FlexibleDate shikakuSoshitsuTodokedeYMD;
+    private RString shikakuHenkoJiyuCode;
+    private FlexibleDate shikakuHenkoYMD;
+    private FlexibleDate shikakuHenkoTodokedeYMD;
+    private RString jushochitokureiTekiyoJiyuCode;
+    private FlexibleDate jushochitokureiTekiyoYMD;
+    private FlexibleDate jushochitokureiTekiyoTodokedeYMD;
+    private RString jushochitokureiKaijoJiyuCode;
+    private FlexibleDate jushochitokureiKaijoYMD;
+    private FlexibleDate jushochitokureiKaijoTodokedeYMD;
+    private RString jushochiTokureiFlag;
+    private RString koikinaiJushochiTokureiFlag;
+    private LasdecCode koikinaiTokureiSochimotoShichosonCode;
+    private LasdecCode kyuShichosonCode;
+    private boolean logicalDeletedFlag;
     private UaFt200FindShikibetsuTaishoEntity ft200Entity;
 }

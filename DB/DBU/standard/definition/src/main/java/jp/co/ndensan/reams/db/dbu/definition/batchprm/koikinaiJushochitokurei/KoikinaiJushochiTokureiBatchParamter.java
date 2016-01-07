@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package jp.co.ndensan.reams.db.dbu.definition.batchprm.koikinaiJushochitokurei;
+package jp.co.ndensan.reams.db.dbu.definition.batchprm.koikinaijushochitokurei;
 
+import jp.co.ndensan.reams.db.dbu.definition.processprm.koikinaijushochitokurei.KoikinaiJushochiTokureiProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,5 +47,18 @@ public class KoikinaiJushochiTokureiBatchParamter extends BatchParameterBase {
     @BatchParameter(key = NARABI_ID, name = "出力順ID")
     private RString narabiId;
     
+    /**
+     * 域内住所地特例者一覧表のProcessParamterパラメータ作成です。
+     * @return 域内住所地特例者一覧表のProcessParamterパラメータ
+     */
+    public KoikinaiJushochiTokureiProcessParamter toProcessParamter() {
+        return new KoikinaiJushochiTokureiProcessParamter(model, 
+                shichosonCode,
+                shichosonName,
+                kijyunbi,
+                kaishibi,
+                shuryobi,
+                narabiId);
+    }
     
 }

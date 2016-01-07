@@ -4,25 +4,371 @@
     
     <resultMap id="getKoikinaiJushochiTokureiListResultMap" 
                type="jp.co.ndensan.reams.db.dbu.entity.db.relate.koikinaijushochitokurei.KoikinaiJushochiTokureiRelateEntity" autoMapping="true">
-        <association property="ft200Entity" 
+        <id property="hihokenshaNo" column="dbT1001HihokenshaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="idoYMD" column="dbT1001HihokenshaDaicho_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="edaNo" column="dbT1001HihokenshaDaicho_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shichosonCode" column="dbT1001HihokenshaDaicho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="lastUpdateTimestamp" column="dbT1001HihokenshaDaicho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT1001HihokenshaDaicho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="idoJiyuCode" column="dbT1001HihokenshaDaicho_idoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikibetsuCode" column="dbT1001HihokenshaDaicho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="shikakuShutokuJiyuCode" column="dbT1001HihokenshaDaicho_shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuShutokuYMD" column="dbT1001HihokenshaDaicho_shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuShutokuTodokedeYMD" column="dbT1001HihokenshaDaicho_shikakuShutokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ichigoShikakuShutokuYMD" column="dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hihokennshaKubunCode" column="dbT1001HihokenshaDaicho_hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuJiyuCode" column="dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuYMD" column="dbT1001HihokenshaDaicho_shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuSoshitsuTodokedeYMD" column="dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuHenkoJiyuCode" column="dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuHenkoYMD" column="dbT1001HihokenshaDaicho_shikakuHenkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuHenkoTodokedeYMD" column="dbT1001HihokenshaDaicho_shikakuHenkoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiTekiyoJiyuCode" column="dbT1001HihokenshaDaicho_jushochitokureiTekiyoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushochitokureiTekiyoYMD" column="dbT1001HihokenshaDaicho_jushochitokureiTekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiTekiyoTodokedeYMD" column="dbT1001HihokenshaDaicho_jushochitokureiTekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiKaijoJiyuCode" column="dbT1001HihokenshaDaicho_jushochitokureiKaijoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushochitokureiKaijoYMD" column="dbT1001HihokenshaDaicho_jushochitokureiKaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiKaijoTodokedeYMD" column="dbT1001HihokenshaDaicho_jushochitokureiKaijoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochiTokureiFlag" column="dbT1001HihokenshaDaicho_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koikinaiJushochiTokureiFlag" column="dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koikinaiTokureiSochimotoShichosonCode" column="dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="kyuShichosonCode" column="dbT1001HihokenshaDaicho_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="logicalDeletedFlag" column="dbT1001HihokenshaDaicho_logicalDeletedFlag" /><!--
+-->        <association property="ft200Entity" 
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
-        <association property="dbT1001Entity" 
-                     resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
     </resultMap>
     
-    <select id="get広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
-            parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.JigyoHokokuNenpoParameter" fetchSize="500">
+    <select id="get直近広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.koikinaijushochitokurei.KoikinaiJushochiTokureiMybatisparamter" fetchSize="500">
         SELECT 
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho"/>,
+            A."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
+            A."idoYMD" as "dbT1001HihokenshaDaicho_idoYMD",
+            A."edaNo" as "dbT1001HihokenshaDaicho_edaNo",
+            A."shichosonCode" as "dbT1001HihokenshaDaicho_shichosonCode",
+            A."idoJiyuCode" as "dbT1001HihokenshaDaicho_idoJiyuCode",
+            A."shikibetsuCode" as "dbT1001HihokenshaDaicho_shikibetsuCode",
+            A."shikakuShutokuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuShutokuJiyuCode",
+            A."shikakuShutokuYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuYMD",
+            A."shikakuShutokuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuTodokedeYMD",
+            A."ichigoShikakuShutokuYMD" as "dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD",
+            A."hihokennshaKubunCode" as "dbT1001HihokenshaDaicho_hihokennshaKubunCode",
+            A."shikakuSoshitsuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode",
+            A."shikakuSoshitsuYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
+            A."shikakuSoshitsuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD",
+            A."shikakuHenkoJiyuCode" as "dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode",
+            A."shikakuHenkoYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoYMD",
+            A."shikakuHenkoTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoTodokedeYMD",
+            A."jushochitokureiTekiyoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoJiyuCode",
+            A."jushochitokureiTekiyoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoYMD",
+            A."jushochitokureiTekiyoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoTodokedeYMD",
+            A."jushochitokureiKaijoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoJiyuCode",
+            A."jushochitokureiKaijoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoYMD",
+            A."jushochitokureiKaijoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoTodokedeYMD",
+            A."jushochiTokureiFlag" as "dbT1001HihokenshaDaicho_jushochiTokureiFlag",
+            A."koikinaiJushochiTokureiFlag" as "dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag",
+            A."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
+            A."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
+            A."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag",
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
-        FROM
-            rgdb."DbT1001HihokenshaDaicho"
+            FROM
+            rgdb."DbT1001HihokenshaDaicho" AS A
+            INNER JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+            ON
+            A."shikibetsuCode" = 
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+            INNER JOIN (
+            SELECT 
+                BB."hihokenshaNo",
+                BB."idoYMD",
+                BB."edaNo",
+                BB."shikakuSoshitsuJiyuCode",
+                BB."shikakuSoshitsuYMD",
+                BB."shikakuSoshitsuTodokedeYMD",
+                BB."koikinaiJushochiTokureiFlag",
+                BB."koikinaiTokureiSochimotoShichosonCode",
+                BB."logicalDeletedFlag" 
+            FROM(
+              SELECT 
+                "hihokenshaNo", 
+                "idoYMD",
+                "edaNo",
+                "shikakuSoshitsuJiyuCode",
+                "shikakuSoshitsuYMD",
+                "shikakuSoshitsuTodokedeYMD",
+                "koikinaiJushochiTokureiFlag",
+                "koikinaiTokureiSochimotoShichosonCode",
+                "logicalDeletedFlag",
+                row_number() over(partition by "hihokenshaNo" order by "idoYMD" desc,"edaNo" desc) as rank_number
+                FROM rgdb."DbT1001HihokenshaDaicho" 
+              WHERE
+                "isDeleted" = FALSE
+              AND												
+                "logicalDeletedFlag"=FALSE) AS BB
+                where rank_number = 1
+            ) AS B
+            ON
+              B."koikinaiJushochiTokureiFlag" = '1'
+              AND B."shikakuSoshitsuTodokedeYMD" IS NULL
+              AND A."hihokenshaNo" = B."hihokenshaNo"
+              AND A."idoYMD" = B."idoYMD"
+              AND A."edaNo" = B."edaNo"
+              <if test="isEmptyShichosonCode">
+                AND B."koikinaiTokureiSochimotoShichosonCode" = #{shichosonCode}
+              </if>
+    </select>    
+    
+    <select id="get基準日広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.koikinaijushochitokurei.KoikinaiJushochiTokureiMybatisparamter" fetchSize="500">
+        SELECT
+            DbT1001."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
+            DbT1001."idoYMD" as "dbT1001HihokenshaDaicho_idoYMD",
+            DbT1001."edaNo" as "dbT1001HihokenshaDaicho_edaNo",
+            DbT1001."shichosonCode" as "dbT1001HihokenshaDaicho_shichosonCode",
+            DbT1001."idoJiyuCode" as "dbT1001HihokenshaDaicho_idoJiyuCode",
+            DbT1001."shikibetsuCode" as "dbT1001HihokenshaDaicho_shikibetsuCode",
+            DbT1001."shikakuShutokuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuShutokuJiyuCode",
+            DbT1001."shikakuShutokuYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuYMD",
+            DbT1001."shikakuShutokuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuTodokedeYMD",
+            DbT1001."ichigoShikakuShutokuYMD" as "dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD",
+            DbT1001."hihokennshaKubunCode" as "dbT1001HihokenshaDaicho_hihokennshaKubunCode",
+            DbT1001."shikakuSoshitsuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode",
+            DbT1001."shikakuSoshitsuYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
+            DbT1001."shikakuSoshitsuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD",
+            DbT1001."shikakuHenkoJiyuCode" as "dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode",
+            DbT1001."shikakuHenkoYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoYMD",
+            DbT1001."shikakuHenkoTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoTodokedeYMD",
+            DbT1001."jushochitokureiTekiyoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoJiyuCode",
+            DbT1001."jushochitokureiTekiyoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoYMD",
+            DbT1001."jushochitokureiTekiyoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoTodokedeYMD",
+            DbT1001."jushochitokureiKaijoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoJiyuCode",
+            DbT1001."jushochitokureiKaijoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoYMD",
+            DbT1001."jushochitokureiKaijoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoTodokedeYMD",
+            DbT1001."jushochiTokureiFlag" as "dbT1001HihokenshaDaicho_jushochiTokureiFlag",
+            DbT1001."koikinaiJushochiTokureiFlag" as "dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag",
+            DbT1001."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
+            DbT1001."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
+            DbT1001."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag",
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+	  FROM(
+            SELECT												
+            "hihokenshaNo",											
+            "idoYMD",											
+            "edaNo"	,										
+            "idoJiyuCode",											
+            "shichosonCode"	,										
+            "shikibetsuCode",											
+            "shikakuShutokuJiyuCode",											
+            "shikakuShutokuYMD"	,										
+            "shikakuShutokuTodokedeYMD",										
+            "ichigoShikakuShutokuYMD",											
+            "hihokennshaKubunCode",											
+            "shikakuSoshitsuJiyuCode",											
+            "shikakuSoshitsuYMD",											
+            "shikakuSoshitsuTodokedeYMD",
+            "shikakuHenkoJiyuCode",											
+            "shikakuHenkoYMD",											
+            "shikakuHenkoTodokedeYMD",											
+            "jushochitokureiTekiyoJiyuCode",
+            "jushochitokureiTekiyoYMD",									
+            "jushochitokureiTekiyoTodokedeYMD",										
+            "jushochitokureiKaijoJiyuCode",
+            "jushochitokureiKaijoYMD",											
+            "jushochitokureiKaijoTodokedeYMD",
+            "jushochiTokureiFlag", 											
+            "koikinaiJushochiTokureiFlag",
+            "koikinaiTokureiSochimotoShichosonCode",
+            "kyuShichosonCode",											
+            "logicalDeletedFlag",
+            row_number() over(partition by "shikakuShutokuYMD" order by "idoYMD" desc,"edaNo" desc) as rank_number
+	  FROM												
+            rgdb."DbT1001HihokenshaDaicho"										
+            WHERE
+            "isDeleted" = FALSE
+            AND												
+            "logicalDeletedFlag"=FALSE	
+            AND "koikinaiJushochiTokureiFlag" = '1'
+            AND "idoYMD" <![CDATA[<=]]> #{idoYMD}
+            AND "idoJiyuCode" = '13'
+            <if test="isEmptyShichosonCode">
+              AND "koikinaiTokureiSochimotoShichosonCode" = #{shichosonCode}
+            </if>									
+            ) DbT1001											
             INNER JOIN
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
             AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
             ON
             DbT1001."shikibetsuCode" = 
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
-
-    </select>    
+            WHERE
+            rank_number = 1
+    </select> 
+    
+    <select id="get範囲広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.koikinaijushochitokurei.KoikinaiJushochiTokureiMybatisparamter" fetchSize="500">
+        SELECT
+            DbT1001."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
+            DbT1001."idoYMD" as "dbT1001HihokenshaDaicho_idoYMD",
+            DbT1001."edaNo" as "dbT1001HihokenshaDaicho_edaNo",
+            DbT1001."shichosonCode" as "dbT1001HihokenshaDaicho_shichosonCode",
+            DbT1001."idoJiyuCode" as "dbT1001HihokenshaDaicho_idoJiyuCode",
+            DbT1001."shikibetsuCode" as "dbT1001HihokenshaDaicho_shikibetsuCode",
+            DbT1001."shikakuShutokuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuShutokuJiyuCode",
+            DbT1001."shikakuShutokuYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuYMD",
+            DbT1001."shikakuShutokuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuTodokedeYMD",
+            DbT1001."ichigoShikakuShutokuYMD" as "dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD",
+            DbT1001."hihokennshaKubunCode" as "dbT1001HihokenshaDaicho_hihokennshaKubunCode",
+            DbT1001."shikakuSoshitsuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode",
+            DbT1001."shikakuSoshitsuYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
+            DbT1001."shikakuSoshitsuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD",
+            DbT1001."shikakuHenkoJiyuCode" as "dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode",
+            DbT1001."shikakuHenkoYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoYMD",
+            DbT1001."shikakuHenkoTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoTodokedeYMD",
+            DbT1001."jushochitokureiTekiyoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoJiyuCode",
+            DbT1001."jushochitokureiTekiyoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoYMD",
+            DbT1001."jushochitokureiTekiyoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoTodokedeYMD",
+            DbT1001."jushochitokureiKaijoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoJiyuCode",
+            DbT1001."jushochitokureiKaijoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoYMD",
+            DbT1001."jushochitokureiKaijoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoTodokedeYMD",
+            DbT1001."jushochiTokureiFlag" as "dbT1001HihokenshaDaicho_jushochiTokureiFlag",
+            DbT1001."koikinaiJushochiTokureiFlag" as "dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag",
+            DbT1001."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
+            DbT1001."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
+            DbT1001."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag",
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+	  FROM(
+            SELECT												
+            "hihokenshaNo",											
+            "idoYMD",											
+            "edaNo"	,										
+            "idoJiyuCode",											
+            "shichosonCode"	,										
+            "shikibetsuCode",											
+            "shikakuShutokuJiyuCode",											
+            "shikakuShutokuYMD"	,										
+            "shikakuShutokuTodokedeYMD",										
+            "ichigoShikakuShutokuYMD",											
+            "hihokennshaKubunCode",											
+            "shikakuSoshitsuJiyuCode",											
+            "shikakuSoshitsuYMD",											
+            "shikakuSoshitsuTodokedeYMD",
+            "shikakuHenkoJiyuCode",											
+            "shikakuHenkoYMD",											
+            "shikakuHenkoTodokedeYMD",											
+            "jushochitokureiTekiyoJiyuCode",
+            "jushochitokureiTekiyoYMD",									
+            "jushochitokureiTekiyoTodokedeYMD",										
+            "jushochitokureiKaijoJiyuCode",
+            "jushochitokureiKaijoYMD",											
+            "jushochitokureiKaijoTodokedeYMD",
+            "jushochiTokureiFlag", 											
+            "koikinaiJushochiTokureiFlag",
+            "koikinaiTokureiSochimotoShichosonCode",
+            "kyuShichosonCode",											
+            "logicalDeletedFlag",
+            row_number() over(partition by "shikakuShutokuYMD" order by "idoYMD" desc,"edaNo" desc) as rank_number
+	  FROM												
+            rgdb."DbT1001HihokenshaDaicho"										
+            WHERE
+            "isDeleted" = FALSE
+            AND												
+            "logicalDeletedFlag"=FALSE	
+            AND "koikinaiJushochiTokureiFlag" = '1'
+            AND "idoYMD" <![CDATA[>=]]> #{kaishibi}
+            AND "idoYMD" <![CDATA[<=]]> #{shuryobi}
+            AND "idoJiyuCode" = '13'
+            <if test="isEmptyShichosonCode">
+              AND "koikinaiTokureiSochimotoShichosonCode" = #{shichosonCode}
+            </if>									
+            ) DbT1001											
+            INNER JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+            ON
+            DbT1001."shikibetsuCode" = 
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+            WHERE
+            rank_number = 1
+    </select> 
+    
+    <select id="get広域特解除情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.koikinaijushochitokurei.KoikinaiKaijoParamter" fetchSize="500">
+        SELECT
+            DbT1001."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
+            DbT1001."idoYMD" as "dbT1001HihokenshaDaicho_idoYMD",
+            DbT1001."edaNo" as "dbT1001HihokenshaDaicho_edaNo",
+            DbT1001."shichosonCode" as "dbT1001HihokenshaDaicho_shichosonCode",
+            DbT1001."idoJiyuCode" as "dbT1001HihokenshaDaicho_idoJiyuCode",
+            DbT1001."shikibetsuCode" as "dbT1001HihokenshaDaicho_shikibetsuCode",
+            DbT1001."shikakuShutokuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuShutokuJiyuCode",
+            DbT1001."shikakuShutokuYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuYMD",
+            DbT1001."shikakuShutokuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuTodokedeYMD",
+            DbT1001."ichigoShikakuShutokuYMD" as "dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD",
+            DbT1001."hihokennshaKubunCode" as "dbT1001HihokenshaDaicho_hihokennshaKubunCode",
+            DbT1001."shikakuSoshitsuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode",
+            DbT1001."shikakuSoshitsuYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
+            DbT1001."shikakuSoshitsuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD",
+            DbT1001."shikakuHenkoJiyuCode" as "dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode",
+            DbT1001."shikakuHenkoYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoYMD",
+            DbT1001."shikakuHenkoTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoTodokedeYMD",
+            DbT1001."jushochitokureiTekiyoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoJiyuCode",
+            DbT1001."jushochitokureiTekiyoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoYMD",
+            DbT1001."jushochitokureiTekiyoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoTodokedeYMD",
+            DbT1001."jushochitokureiKaijoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoJiyuCode",
+            DbT1001."jushochitokureiKaijoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoYMD",
+            DbT1001."jushochitokureiKaijoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoTodokedeYMD",
+            DbT1001."jushochiTokureiFlag" as "dbT1001HihokenshaDaicho_jushochiTokureiFlag",
+            DbT1001."koikinaiJushochiTokureiFlag" as "dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag",
+            DbT1001."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
+            DbT1001."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
+            DbT1001."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag"
+	  FROM(
+            SELECT												
+            "hihokenshaNo",											
+            "idoYMD",											
+            "edaNo"	,										
+            "idoJiyuCode",											
+            "shichosonCode"	,										
+            "shikibetsuCode",											
+            "shikakuShutokuJiyuCode",											
+            "shikakuShutokuYMD"	,										
+            "shikakuShutokuTodokedeYMD",										
+            "ichigoShikakuShutokuYMD",											
+            "hihokennshaKubunCode",											
+            "shikakuSoshitsuJiyuCode",											
+            "shikakuSoshitsuYMD",											
+            "shikakuSoshitsuTodokedeYMD",
+            "shikakuHenkoJiyuCode",											
+            "shikakuHenkoYMD",											
+            "shikakuHenkoTodokedeYMD",											
+            "jushochitokureiTekiyoJiyuCode",
+            "jushochitokureiTekiyoYMD",									
+            "jushochitokureiTekiyoTodokedeYMD",										
+            "jushochitokureiKaijoJiyuCode",
+            "jushochitokureiKaijoYMD",											
+            "jushochitokureiKaijoTodokedeYMD",
+            "jushochiTokureiFlag", 											
+            "koikinaiJushochiTokureiFlag",
+            "koikinaiTokureiSochimotoShichosonCode",
+            "kyuShichosonCode",											
+            "logicalDeletedFlag",
+            row_number() over(partition by "shikakuShutokuYMD" order by "idoYMD" desc,"edaNo" desc) as rank_number
+	  FROM												
+            rgdb."DbT1001HihokenshaDaicho"										
+            WHERE
+            "isDeleted" = FALSE
+            AND	"logicalDeletedFlag"=FALSE
+            AND "hihokenshaNo" = #{hihokenshaNo}
+            AND "shikakuShutokuYMD" = #{shikakuShutokuYMD}
+            AND "koikinaiJushochiTokureiFlag" = '1'
+            AND "idoYMD" <![CDATA[>=]]> #{idoYMD}
+            AND (
+                "jushochiTokureiFlag" != '1'
+                OR "shikakuSoshitsuTodokedeYMD" IS NOT NULL
+               )
+            ) DbT1001											
+            WHERE
+            rank_number = 1
+    </select> 
 </mapper>
