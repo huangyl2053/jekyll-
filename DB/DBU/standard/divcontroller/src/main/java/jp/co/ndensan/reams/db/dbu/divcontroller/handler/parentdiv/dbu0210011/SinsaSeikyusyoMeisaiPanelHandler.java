@@ -1,5 +1,6 @@
-package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900021;
+package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0210011;
 
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900021.*;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.FufukuMoshitate;
