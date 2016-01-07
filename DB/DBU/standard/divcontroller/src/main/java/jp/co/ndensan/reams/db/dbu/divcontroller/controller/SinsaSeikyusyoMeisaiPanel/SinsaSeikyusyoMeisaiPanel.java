@@ -10,12 +10,11 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900021.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900021.SinsaSeikyusyoMeisaiPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900021.SinsaSeikyusyoMeisaiPanelHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900021.SinsaSeikyusyoMeisaiValidationHandler;
-import jp.co.ndensan.reams.db.dbu.entity.SinsaSeikyusyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbu.service.core.basic.SinsaSeikyusyoTorokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.SinsaSeikyusyoMeisaiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.FufukuMoshitate;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -49,12 +48,12 @@ public class SinsaSeikyusyoMeisaiPanel {
 
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("0000000003")));
         ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo(new RString("0000000004")));
-        ViewStateHolder.put(ViewStateKeys.審査請求届出日, new FlexibleDate(new RString("20140501")));
-        ViewStateHolder.put(ViewStateKeys.状態, 削除);
+        ViewStateHolder.put(ViewStateKeys.審査請求届出日, new FlexibleDate(new RString("20160107")));
+        ViewStateHolder.put(ViewStateKeys.状態, 追加);
         // TODO:共通DIVが実装不正です。
-        // 宛名基本情報を取得
+//        // 宛名基本情報を取得
 //        requestDiv.getAtenaInfoCommonChildDiv().load(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
-        // 資格系基本情報を取得
+//        // 資格系基本情報を取得
 //        requestDiv.getKaigoShikakuKihonCommonChildDiv().initialize(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
         if (追加.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
 
@@ -63,16 +62,17 @@ public class SinsaSeikyusyoMeisaiPanel {
         }
         if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
 
-            SinsaSeikyusyoMeisaiJoho sinsaSeikyusyoMeisaiJohoEntity = 資格系基本情報の取得();
-            createHandlerOf(requestDiv).修正_初期化の編集(sinsaSeikyusyoMeisaiJohoEntity);
+            FufukuMoshitate fufukuMoshitate = 資格系基本情報の取得();
+            ViewStateHolder.put(ViewStateKeys.不服審査申立情報, fufukuMoshitate);
+            createHandlerOf(requestDiv).修正_初期化の編集(fufukuMoshitate);
             createHandlerOf(requestDiv).初期画面値の保持();
             return ResponseData.of(requestDiv).setState(DBU0900021StateName.修正);
         }
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
 
-            // 資格系基本情報を取得
-            SinsaSeikyusyoMeisaiJoho sinsaSeikyusyoMeisaiJohoEntity = 資格系基本情報の取得();
-            createHandlerOf(requestDiv).削除_初期化の編集(sinsaSeikyusyoMeisaiJohoEntity);
+            FufukuMoshitate fufukuMoshitate = 資格系基本情報の取得();
+            ViewStateHolder.put(ViewStateKeys.不服審査申立情報, fufukuMoshitate);
+            createHandlerOf(requestDiv).削除_初期化の編集(fufukuMoshitate);
             return ResponseData.of(requestDiv).setState(DBU0900021StateName.削除);
         }
         responseData.data = requestDiv;
@@ -164,9 +164,10 @@ public class SinsaSeikyusyoMeisaiPanel {
                         .equals(ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-                    DbT7001FufukuMoshitateEntity entity = new DbT7001FufukuMoshitateEntity();
-                    createHandlerOf(div).審査請求書登録の編集(entity);
-                    登録処理(entity);
+                    FufukuMoshitate fufukuMoshitate = new FufukuMoshitate(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
+                            ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class), new FlexibleDate(div.getMeisaiPanel().getTxtdateTodokedebi().getValue() == null
+                                    ? RString.EMPTY : div.getMeisaiPanel().getTxtdateTodokedebi().getValue().toDateString()));
+                    登録処理(createHandlerOf(div).審査請求書登録の編集(fufukuMoshitate));
                     div.getCcdKanryoMessage().setSuccessMessage(
                             new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
                     return ResponseData.of(div).setState(DBU0900021StateName.完了);
@@ -181,8 +182,7 @@ public class SinsaSeikyusyoMeisaiPanel {
                 if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                         .equals(ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    return ResponseData.of(div).respond();
-                    // TODO:内容が変更されていないため、保存はできません。
+                    return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
                 }
             }
         }
@@ -198,9 +198,8 @@ public class SinsaSeikyusyoMeisaiPanel {
                         .equals(ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-                    SinsaSeikyusyoTorokuEntity entity = new SinsaSeikyusyoTorokuEntity();
-                    createHandlerOf(div).審査請求書更新の編集(entity);
-                    更新処理(entity);
+                    FufukuMoshitate fufukuMoshitate = ViewStateHolder.get(ViewStateKeys.不服審査申立情報, FufukuMoshitate.class);
+                    更新処理(createHandlerOf(div).審査請求書更新の編集(fufukuMoshitate));
                     div.getCcdKanryoMessage().setSuccessMessage(
                             new RString(UrInformationMessages.正常終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
                     return ResponseData.of(div).setState(DBU0900021StateName.完了);
@@ -215,8 +214,7 @@ public class SinsaSeikyusyoMeisaiPanel {
                 if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                         .equals(ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    return ResponseData.of(div).respond();
-                    // TODO:内容が変更されていないため、保存はできません。
+                    return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
                 }
             }
         }
@@ -231,9 +229,7 @@ public class SinsaSeikyusyoMeisaiPanel {
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-                SinsaSeikyusyoTorokuEntity entity = new SinsaSeikyusyoTorokuEntity();
-                createHandlerOf(div).審査請求書削除の編集(entity);
-                削除処理(entity);
+                削除処理();
                 //TODO:（削除は正常に終了しました。）
                 div.getCcdKanryoMessage().setSuccessMessage(
                         new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
@@ -248,27 +244,26 @@ public class SinsaSeikyusyoMeisaiPanel {
         return SinsaSeikyusyoTorokuManager.createInstance().
                 checkSinsaSeikyuTodokede(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
                         ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                        ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class),
+                        ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class) == null
+                        ? new FlexibleDate(RString.EMPTY) : ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class),
                         ViewStateHolder.get(ViewStateKeys.状態, RString.class),
                         new FlexibleDate(div.getMeisaiPanel().getTxtdateTodokedebi().getValue() == null
                                 ? RString.EMPTY : div.getMeisaiPanel().getTxtdateTodokedebi().getValue().toDateString()));
     }
 
-    private void 削除処理(SinsaSeikyusyoTorokuEntity entity) {
+    private void 削除処理() {
 
-        SinsaSeikyusyoTorokuManager.createInstance().delSinsaSeikyusyomeisaiJoho(entity);
+        SinsaSeikyusyoTorokuManager.createInstance().delSinsaSeikyusyomeisaiJoho(ViewStateHolder.get(ViewStateKeys.不服審査申立情報, FufukuMoshitate.class));
     }
 
-    private void 更新処理(SinsaSeikyusyoTorokuEntity entity) {
+    private void 更新処理(FufukuMoshitate fufukuMoshitate) {
 
-        SinsaSeikyusyoTorokuManager.createInstance().updSinsaSeikyusyomeisaiJoho(entity);
+        SinsaSeikyusyoTorokuManager.createInstance().updSinsaSeikyusyomeisaiJoho(fufukuMoshitate);
     }
 
-    private void 登録処理(DbT7001FufukuMoshitateEntity entity) {
+    private void 登録処理(FufukuMoshitate fufukuMoshitate) {
 
-        SinsaSeikyusyoTorokuManager.createInstance().
-                intSinsaSeikyusyomeisaiJoho(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
-                        ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class), entity);
+        SinsaSeikyusyoTorokuManager.createInstance().intSinsaSeikyusyomeisaiJoho(fufukuMoshitate);
     }
 
     private void 内容の破棄(SinsaSeikyusyoMeisaiPanelDiv div) {
@@ -294,7 +289,7 @@ public class SinsaSeikyusyoMeisaiPanel {
         div.getTxtShinsaSeikyuTorisage().clearValue();
     }
 
-    private SinsaSeikyusyoMeisaiJoho 資格系基本情報の取得() {
+    private FufukuMoshitate 資格系基本情報の取得() {
 
         return SinsaSeikyusyoTorokuManager.createInstance().
                 getSinsaSeikyusyoMeisaiJoho(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),

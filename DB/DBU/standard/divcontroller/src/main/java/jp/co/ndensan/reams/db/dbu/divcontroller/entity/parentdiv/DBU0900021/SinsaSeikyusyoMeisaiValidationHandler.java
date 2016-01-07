@@ -41,7 +41,7 @@ public class SinsaSeikyusyoMeisaiValidationHandler {
     public ValidationMessageControlPairs validateForUpdate(boolean 重複チェック) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
 
-        if (重複チェック) {
+        if (!重複チェック) {
 
             validPairs.add(new ValidationMessageControlPair(RRVMessages.審査請求届出日));
         }
