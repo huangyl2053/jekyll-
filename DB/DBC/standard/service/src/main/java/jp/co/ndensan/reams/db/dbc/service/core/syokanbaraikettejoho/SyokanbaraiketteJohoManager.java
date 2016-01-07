@@ -59,6 +59,7 @@ public class SyokanbaraiketteJohoManager {
     private static final RString サービス計画費 = new RString("サービス計画費");
     private static final RString 特定入所者 = new RString("特定入所者");
     private static final RString 食事費用 = new RString("食事費用");
+    private static final RString GYOKUKBN_償還払い費 = new RString("03");
 
     /**
      * コンストラクタです。
@@ -261,7 +262,7 @@ public class SyokanbaraiketteJohoManager {
             entity.setKounyuKaishuRireki(償還払請求集計Entity.getKounyuKaishuRireki());
             return entity;
         }
-        if (!new RString("03").equals(gyomuKbn)) {
+        if (!GYOKUKBN_償還払い費.equals(gyomuKbn)) {
             return entity;
         }
         if (new FlexibleYearMonth("200904").isBefore(serviceTeikyoYM)) {
@@ -303,7 +304,6 @@ public class SyokanbaraiketteJohoManager {
             resultList.add(new SyokanbaraiketteJoho(setSyokanbaraiketeJohoEntity(dekidakaEntity, 出来高区分_非出来高)));
             resultList.add(new SyokanbaraiketteJoho(setSyokanbaraiketeJohoEntity(dekidakaEntity, 出来高区分_出来高)));
         }
-
         return resultList;
     }
 
