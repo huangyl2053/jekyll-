@@ -1,24 +1,26 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.Objects;
 import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 償還払支給判定結果テーブルのエンティティクラスです。
  */
 public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036ShokanHanteiKekkaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3036ShokanHanteiKekka");
@@ -37,14 +39,18 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
     private RString seiriNo;
-    @PrimaryKey
-    private Decimal rirekiNo;
     private HokenshaNo shoKisaiHokenshaNo;
     private FlexibleDate ketteiYMD;
     private RString shikyuHushikyuKetteiKubun;
     private Decimal shiharaiKingaku;
     private Decimal shiharaiKingakuUchiwakeRiyoshabun;
     private FlexibleYearMonth ketteiIchiranTorikomiYM;
+    private Decimal zenkaiShiharaiKingaku;
+    private Decimal sagakuKingakuGokei;
+    private FlexibleDate ketteiTsuchishoSakuseiYMD;
+    private RString ketteiTsuchiNo;
+    private FlexibleDate furikomiMeisaishoSakuseiYMD;
+    private RString ketteiTsuchiHakkoKubun;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -105,7 +111,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
      *
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
@@ -123,7 +129,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
      *
      * @param serviceTeikyoYM サービス提供年月
      */
-    public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
+    public void setServiceTeikyoYM(@Nonnull FlexibleYearMonth serviceTeikyoYM) {
         this.serviceTeikyoYM = serviceTeikyoYM;
     }
 
@@ -141,26 +147,8 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
      *
      * @param seiriNo 整理番号
      */
-    public void setSeiriNo(RString seiriNo) {
+    public void setSeiriNo(@Nonnull RString seiriNo) {
         this.seiriNo = seiriNo;
-    }
-
-    /**
-     * 履歴番号のgetメソッドです。
-     *
-     * @return 履歴番号
-     */
-    public Decimal getRirekiNo() {
-        return rirekiNo;
-    }
-
-    /**
-     * 履歴番号のsetメソッドです。
-     *
-     * @param rirekiNo 履歴番号
-     */
-    public void setRirekiNo(Decimal rirekiNo) {
-        this.rirekiNo = rirekiNo;
     }
 
     /**
@@ -177,7 +165,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
      *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(HokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(@Nonnull HokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
@@ -186,6 +174,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
      *
      * @return 決定年月日
      */
+    @CheckForNull
     public FlexibleDate getKetteiYMD() {
         return ketteiYMD;
     }
@@ -204,6 +193,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
      *
      * @return 支給・不支給決定区分
      */
+    @CheckForNull
     public RString getShikyuHushikyuKetteiKubun() {
         return shikyuHushikyuKetteiKubun;
     }
@@ -222,6 +212,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
      *
      * @return 支払金額
      */
+    @CheckForNull
     public Decimal getShiharaiKingaku() {
         return shiharaiKingaku;
     }
@@ -240,6 +231,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
      *
      * @return 支払金額内訳・利用者分
      */
+    @CheckForNull
     public Decimal getShiharaiKingakuUchiwakeRiyoshabun() {
         return shiharaiKingakuUchiwakeRiyoshabun;
     }
@@ -258,6 +250,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
      *
      * @return 決定一覧取込年月
      */
+    @CheckForNull
     public FlexibleYearMonth getKetteiIchiranTorikomiYM() {
         return ketteiIchiranTorikomiYM;
     }
@@ -269,6 +262,124 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
      */
     public void setKetteiIchiranTorikomiYM(FlexibleYearMonth ketteiIchiranTorikomiYM) {
         this.ketteiIchiranTorikomiYM = ketteiIchiranTorikomiYM;
+    }
+
+    /**
+     * 前回支払金額のgetメソッドです。
+     *
+     * @return 前回支払金額
+     */
+    @CheckForNull
+    public Decimal getZenkaiShiharaiKingaku() {
+        return zenkaiShiharaiKingaku;
+    }
+
+    /**
+     * 前回支払金額のsetメソッドです。
+     *
+     * @param zenkaiShiharaiKingaku 前回支払金額
+     */
+    public void setZenkaiShiharaiKingaku(Decimal zenkaiShiharaiKingaku) {
+        this.zenkaiShiharaiKingaku = zenkaiShiharaiKingaku;
+    }
+
+    /**
+     * 差額金額合計のgetメソッドです。
+     *
+     * @return 差額金額合計
+     */
+    @CheckForNull
+    public Decimal getSagakuKingakuGokei() {
+        return sagakuKingakuGokei;
+    }
+
+    /**
+     * 差額金額合計のsetメソッドです。
+     *
+     * @param sagakuKingakuGokei 差額金額合計
+     */
+    public void setSagakuKingakuGokei(Decimal sagakuKingakuGokei) {
+        this.sagakuKingakuGokei = sagakuKingakuGokei;
+    }
+
+    /**
+     * 決定通知書作成年月日のgetメソッドです。
+     *
+     * @return 決定通知書作成年月日
+     */
+    @CheckForNull
+    public FlexibleDate getKetteiTsuchishoSakuseiYMD() {
+        return ketteiTsuchishoSakuseiYMD;
+    }
+
+    /**
+     * 決定通知書作成年月日のsetメソッドです。
+     *
+     * @param ketteiTsuchishoSakuseiYMD 決定通知書作成年月日
+     */
+    public void setKetteiTsuchishoSakuseiYMD(FlexibleDate ketteiTsuchishoSakuseiYMD) {
+        this.ketteiTsuchishoSakuseiYMD = ketteiTsuchishoSakuseiYMD;
+    }
+
+    /**
+     * 決定通知Noのgetメソッドです。
+     *
+     * @return 決定通知No
+     */
+    @CheckForNull
+    public RString getKetteiTsuchiNo() {
+        return ketteiTsuchiNo;
+    }
+
+    /**
+     * 決定通知Noのsetメソッドです。
+     *
+     * @param ketteiTsuchiNo 決定通知No
+     */
+    public void setKetteiTsuchiNo(RString ketteiTsuchiNo) {
+        this.ketteiTsuchiNo = ketteiTsuchiNo;
+    }
+
+    /**
+     * 振込明細書作成年月日のgetメソッドです。
+     *
+     * @return 振込明細書作成年月日
+     */
+    @CheckForNull
+    public FlexibleDate getFurikomiMeisaishoSakuseiYMD() {
+        return furikomiMeisaishoSakuseiYMD;
+    }
+
+    /**
+     * 振込明細書作成年月日のsetメソッドです。
+     *
+     * @param furikomiMeisaishoSakuseiYMD 振込明細書作成年月日
+     */
+    public void setFurikomiMeisaishoSakuseiYMD(FlexibleDate furikomiMeisaishoSakuseiYMD) {
+        this.furikomiMeisaishoSakuseiYMD = furikomiMeisaishoSakuseiYMD;
+    }
+
+    /**
+     * 決定通知リアル発行区分のgetメソッドです。
+     * <br/>
+     * <br/>0:未発行、1:発行済
+     *
+     * @return 決定通知リアル発行区分
+     */
+    @CheckForNull
+    public RString getKetteiTsuchiHakkoKubun() {
+        return ketteiTsuchiHakkoKubun;
+    }
+
+    /**
+     * 決定通知リアル発行区分のsetメソッドです。
+     * <br/>
+     * <br/>0:未発行、1:発行済
+     *
+     * @param ketteiTsuchiHakkoKubun 決定通知リアル発行区分
+     */
+    public void setKetteiTsuchiHakkoKubun(RString ketteiTsuchiHakkoKubun) {
+        this.ketteiTsuchiHakkoKubun = ketteiTsuchiHakkoKubun;
     }
 
     /**
@@ -292,9 +403,6 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
         if (!Objects.equals(this.seiriNo, other.seiriNo)) {
             return false;
         }
-        if (this.rirekiNo != other.rirekiNo) {
-            return false;
-        }
         return true;
     }
 
@@ -306,13 +414,18 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
         this.hiHokenshaNo = entity.hiHokenshaNo;
         this.serviceTeikyoYM = entity.serviceTeikyoYM;
         this.seiriNo = entity.seiriNo;
-        this.rirekiNo = entity.rirekiNo;
         this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
         this.ketteiYMD = entity.ketteiYMD;
         this.shikyuHushikyuKetteiKubun = entity.shikyuHushikyuKetteiKubun;
         this.shiharaiKingaku = entity.shiharaiKingaku;
         this.shiharaiKingakuUchiwakeRiyoshabun = entity.shiharaiKingakuUchiwakeRiyoshabun;
         this.ketteiIchiranTorikomiYM = entity.ketteiIchiranTorikomiYM;
+        this.zenkaiShiharaiKingaku = entity.zenkaiShiharaiKingaku;
+        this.sagakuKingakuGokei = entity.sagakuKingakuGokei;
+        this.ketteiTsuchishoSakuseiYMD = entity.ketteiTsuchishoSakuseiYMD;
+        this.ketteiTsuchiNo = entity.ketteiTsuchiNo;
+        this.furikomiMeisaishoSakuseiYMD = entity.furikomiMeisaishoSakuseiYMD;
+        this.ketteiTsuchiHakkoKubun = entity.ketteiTsuchiHakkoKubun;
     }
 
     /**
@@ -322,7 +435,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, rirekiNo, shoKisaiHokenshaNo, ketteiYMD, shikyuHushikyuKetteiKubun, shiharaiKingaku, shiharaiKingakuUchiwakeRiyoshabun, ketteiIchiranTorikomiYM);
+        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, shoKisaiHokenshaNo, ketteiYMD, shikyuHushikyuKetteiKubun, shiharaiKingaku, shiharaiKingakuUchiwakeRiyoshabun, ketteiIchiranTorikomiYM, zenkaiShiharaiKingaku, sagakuKingakuGokei, ketteiTsuchishoSakuseiYMD, ketteiTsuchiNo, furikomiMeisaishoSakuseiYMD, ketteiTsuchiHakkoKubun);
     }
 
 // </editor-fold>

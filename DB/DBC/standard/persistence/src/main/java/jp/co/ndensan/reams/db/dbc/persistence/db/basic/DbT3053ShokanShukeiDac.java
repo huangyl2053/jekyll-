@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraikettejoho.Syo
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukei;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukei.hiHokenshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukei.jigyoshaNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukei.junjiNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukei.rirekiNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukei.meisaiNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukei.renban;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukei.seiriNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukei.serviceTeikyoYM;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukei.yoshikiNo;
@@ -81,8 +81,8 @@ public class DbT3053ShokanShukeiDac implements ISaveable<DbT3053ShokanShukeiEnti
                                 eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
-                                eq(junjiNo, 順次番号),
-                                eq(rirekiNo, 履歴番号))).
+                                eq(meisaiNo, 順次番号),
+                                eq(renban, 履歴番号))).
                 toObject(DbT3053ShokanShukeiEntity.class);
     }
 
@@ -129,14 +129,13 @@ public class DbT3053ShokanShukeiDac implements ISaveable<DbT3053ShokanShukeiEnti
         requireNonNull(parameter.getSeiriNo(), UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        // TODOORDER BY 連番⇒修正要（DbT3053ShokanShukei.junjiNo⇒DbT3053ShokanShukei.renban）
         return accessor.select().
                 table(DbT3053ShokanShukei.class).
                 where(and(
                                 eq(hiHokenshaNo, parameter.getHiHokenshaNo()),
                                 eq(serviceTeikyoYM, parameter.getServiceTeikyoYM()),
                                 eq(seiriNo, parameter.getSeiriNo())))
-                .order(by(DbT3053ShokanShukei.junjiNo, Order.DESC)).limit(1).
+                .order(by(renban, Order.DESC)).limit(1).
                 toObject(DbT3053ShokanShukeiEntity.class);
     }
 }

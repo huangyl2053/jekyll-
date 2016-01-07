@@ -47,8 +47,8 @@ public final class DbT3049ShokanJutakuKaishuEntityGenerator {
         entity.setSeiriNo(DEFAULT_整理番号);
         entity.setJigyoshaNo(DEFAULT_事業者番号);
         entity.setYoshikiNo(DEFAULT_様式番号);
-        entity.setJunjiNo(DEFAULT_順次番号);
-        entity.setRirekiNo(DEFAULT_履歴番号);
+//        entity.setJunjiNo(DEFAULT_順次番号);
+//        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setServiceCode(DEFAULT_サービスコード);
         entity.setJutakuKaishuChakkoYMD(DEFAULT_住宅改修着工年月日);
         entity.setJutakuKaishuJigyoshaName(DEFAULT_住宅改修事業者名);

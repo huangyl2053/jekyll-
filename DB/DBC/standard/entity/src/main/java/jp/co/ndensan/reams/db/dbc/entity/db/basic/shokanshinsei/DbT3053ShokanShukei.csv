@@ -1,10 +1,10 @@
-﻿hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
 seiriNo,varchar,RString,,,,,整理番号,A
 jigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,事業者番号,A
 yoshikiNo,varchar,RString,,,,,様式番号,A
-junjiNo,varchar,RString,,,,,順次番号,A
-rirekiNo,int2,int,,,,,履歴番号,A
+meisaiNo,varchar,RString,,,,,明細番号,A
+renban,varchar,RString,,,,,連番,A
 serviceShuruiCode,DbUDD005ServiceShuruiCode,ServiceShuruiCode,,,,,サービス種類コード,A
 serviceJitsunissu,int2,int,,,,,サービス実日数,A
 planTanisu,int4,int,,,,,計画単位数,A

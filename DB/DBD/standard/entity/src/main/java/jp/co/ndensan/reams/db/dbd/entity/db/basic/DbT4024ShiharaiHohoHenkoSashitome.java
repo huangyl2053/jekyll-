@@ -1,12 +1,15 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 支払方法変更差止テーブルの項目定義クラスです。
  */
+@OnNextSchema("rgdb")
 public enum DbT4024ShiharaiHohoHenkoSashitome implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     /**
      * insertDantaiCd
      */
@@ -55,22 +58,23 @@ public enum DbT4024ShiharaiHohoHenkoSashitome implements IColumnDefinition {
      */
     kanriKubun(1, 0),
     /**
-     * 差止サービス提供年月
-     */
-    sashitome_ServiceTeikyoYM(2147483647, 0),
-    /**
-     * 差止償還整理番号
-     */
-    sashitome_ShokanSeiriNo(10, 0),
-    /**
      * 履歴番号
      */
     rirekiNo(5, 0),
     /**
-     * 差止状況区分
-     * <br/>1：差止登録,9：差止解除
+     * 情報分類区分
+     * <br/>1：差止情報、2：保険料控除情報
      */
-    sashitome_JokyoKubun(1, 0),
+    johoBunruiKubun(1, 0),
+    /**
+     * 連番
+     */
+    renNo(5, 0),
+    /**
+     * 差止控除状態区分
+     * <br/>01：登録,99：解除
+     */
+    sashitomeKojoJotaiKubun(2, 0),
     /**
      * 差止決定年月日
      */
@@ -85,6 +89,10 @@ public enum DbT4024ShiharaiHohoHenkoSashitome implements IColumnDefinition {
      */
     sashitome_TsuchiSaiHakkoFlag(1, 0),
     /**
+     * 差止控除番号
+     */
+    sashitomeKojoNo(2, 0),
+    /**
      * 差止納付期限
      */
     sashitome_NofuYMD(2147483647, 0),
@@ -92,6 +100,14 @@ public enum DbT4024ShiharaiHohoHenkoSashitome implements IColumnDefinition {
      * 差止解除年月日
      */
     sashitome_KaijoYMD(2147483647, 0),
+    /**
+     * 差止サービス提供年月
+     */
+    sashitome_ServiceTeikyoYM(2147483647, 0),
+    /**
+     * 差止償還整理番号
+     */
+    sashitome_ShokanSeiriNo(10, 0),
     /**
      * 控除決定年月日
      */
@@ -120,7 +136,7 @@ public enum DbT4024ShiharaiHohoHenkoSashitome implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -129,7 +145,7 @@ public enum DbT4024ShiharaiHohoHenkoSashitome implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

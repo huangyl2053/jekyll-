@@ -39,7 +39,7 @@ public final class DbT3036ShokanHanteiKekkaEntityGenerator {
         entity.setHiHokenshaNo(DEFAULT_被保険者番号);
         entity.setServiceTeikyoYM(DEFAULT_サービス提供年月);
         entity.setSeiriNo(DEFAULT_整理番号);
-        entity.setRirekiNo(DEFAULT_履歴番号);
+//        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);
         entity.setKetteiYMD(DEFAULT_決定年月日);
         entity.setShikyuHushikyuKetteiKubun(DEFAULT_支給_不支給決定区分);

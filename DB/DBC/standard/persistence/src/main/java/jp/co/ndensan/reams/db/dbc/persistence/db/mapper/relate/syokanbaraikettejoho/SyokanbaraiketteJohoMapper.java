@@ -12,8 +12,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketeJoho.Syokanbar
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketeJoho.SyokanbaraiketeJohoEntity;
 
 /**
- *
- * @author zuotao
+ * 償還払決定一覧情報を取得するマッパーインタフェースです。
  */
 public interface SyokanbaraiketteJohoMapper {
 

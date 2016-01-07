@@ -1,12 +1,16 @@
-/// <reference path="../../d.ts/jquery.d.ts" />
-/// <reference path="../../d.ts/UzViewControls.d.ts" />
-/// <reference path="../../d.ts/UzaConverter.d.ts" />
+/// <reference path="../d.ts/jquery.d.ts" />
+/// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
 
 module DBC {
 
      export module ShokanbaraiketteiJoho {
 
         export class Events {
+
+            public static onChange_rdoShikyukubun(): string {
+                return "onChange_rdoShikyukubun";
+            }
 
         }
 
