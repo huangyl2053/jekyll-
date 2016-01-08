@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiKekkaJohoBuilder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiKekkaJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -135,7 +137,7 @@ public class NinteiKekkaJoho extends ModelBase<NinteiKekkaJohoIdentifier, DbT510
      *
      * @return 介護認定審査会開催番号
      */
-    public int get介護認定審査会開催番号() {
+    public RString get介護認定審査会開催番号() {
         return entity.getShinsakaiKaisaiNo();
     }
 
@@ -223,7 +225,8 @@ public class NinteiKekkaJoho extends ModelBase<NinteiKekkaJohoIdentifier, DbT510
     }
 
     /**
-     * 要介護認定結果情報のみを変更対象とします。<br/> {@link DbT5102NinteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 要介護認定結果情報のみを変更対象とします。<br/>
+     * {@link DbT5102NinteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteiKekkaJoho}
      */
@@ -237,7 +240,8 @@ public class NinteiKekkaJoho extends ModelBase<NinteiKekkaJohoIdentifier, DbT510
     }
 
     /**
-     * 保持する要介護認定結果情報を削除対象とします。<br/> {@link DbT5102NinteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する要介護認定結果情報を削除対象とします。<br/>
+     * {@link DbT5102NinteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteiKekkaJoho}
      */

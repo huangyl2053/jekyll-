@@ -235,7 +235,7 @@ public class KoseiShichosonMasterTest extends DbxTestBase {
 
         @Test
         public void get合併旧市町村区分は_entityが持つ合併旧市町村区分を返す() {
-            assertThat(sut.get合併旧市町村区分(), is(KoseiShichosonMasterEntity.getGappeiKyuShichosonKubun()));
+            assertThat(sut.get合併旧市町村区分().code(), is(KoseiShichosonMasterEntity.getGappeiKyuShichosonKubun()));
         }
 
         @Test

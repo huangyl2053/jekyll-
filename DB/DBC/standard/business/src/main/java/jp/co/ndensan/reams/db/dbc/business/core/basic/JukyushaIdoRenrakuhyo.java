@@ -10,15 +10,14 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -45,9 +44,9 @@ public class JukyushaIdoRenrakuhyo
     public JukyushaIdoRenrakuhyo(FlexibleDate 異動年月日,
             RString 異動区分コード,
             RString 受給者異動事由,
-            HokenshaNo 証記載保険者番号,
+            ShoKisaiHokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
         requireNonNull(異動区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("異動区分コード"));
         requireNonNull(受給者異動事由, UrSystemErrorMessages.値がnull.getReplacedMessage("受給者異動事由"));
@@ -58,7 +57,6 @@ public class JukyushaIdoRenrakuhyo
         this.entity.setIdoYMD(異動年月日);
         this.entity.setIdoKubunCode(異動区分コード);
         this.entity.setJukyushaIdoJiyu(受給者異動事由);
-        this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new JukyushaIdoRenrakuhyoIdentifier(
@@ -135,7 +133,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 証記載保険者番号
      */
-    public HokenshaNo get証記載保険者番号() {
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
         return entity.getShoKisaiHokenshaNo();
     }
 
@@ -153,7 +151,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -234,7 +232,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 広域連合（政令市）保険者番号
      */
-    public HokenshaNo get広域連合_政令市_保険者番号() {
+    public ShoKisaiHokenshaNo get広域連合_政令市_保険者番号() {
         return entity.getKoikiRengoHokenshaNo();
     }
 
@@ -369,7 +367,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 短期入所サービス支給限度基準額
      */
-    public Decimal get短期入所サービス支給限度基準額() {
+    public int get短期入所サービス支給限度基準額() {
         return entity.getTankiNyushoServiceShikyuGendoKijungaku();
     }
 
@@ -549,7 +547,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 食費負担限度額
      */
-    public Decimal get食費負担限度額() {
+    public int get食費負担限度額() {
         return entity.getShokuhiFutanGendogaku();
     }
 
@@ -558,7 +556,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居住費ユニット型個室負担限度額
      */
-    public Decimal get居住費ユニット型個室負担限度額() {
+    public int get居住費ユニット型個室負担限度額() {
         return entity.getKyojuhiUnitGataKoshitsuFutanGendogaku();
     }
 
@@ -567,7 +565,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居住費ユニット型準個室負担限度額
      */
-    public Decimal get居住費ユニット型準個室負担限度額() {
+    public int get居住費ユニット型準個室負担限度額() {
         return entity.getKyojuhiUnitGataJunKoshitsuFutanGendogaku();
     }
 
@@ -576,7 +574,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居住費従来型個室特養等負担限度額
      */
-    public Decimal get居住費従来型個室特養等負担限度額() {
+    public int get居住費従来型個室特養等負担限度額() {
         return entity.getKyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku();
     }
 
@@ -585,7 +583,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居住費従来型個室老健療養等負担限度額
      */
-    public Decimal get居住費従来型個室老健療養等負担限度額() {
+    public int get居住費従来型個室老健療養等負担限度額() {
         return entity.getKyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku();
     }
 
@@ -594,7 +592,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居住費多床室負担限度額
      */
-    public Decimal get居住費多床室負担限度額() {
+    public int get居住費多床室負担限度額() {
         return entity.getKyujuhiTashoshitsuFutanGendogaku();
     }
 
@@ -621,7 +619,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 軽減率
      */
-    public Decimal get軽減率() {
+    public int get軽減率() {
         return entity.getKeigenritsu();
     }
 
@@ -783,7 +781,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居宅費（新１）負担限度額
      */
-    public Decimal get居宅費_新１_負担限度額() {
+    public int get居宅費_新１_負担限度額() {
         return entity.getKyotakuhiShin1FutanGendogaku();
     }
 
@@ -792,7 +790,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居宅費（新２）負担限度額
      */
-    public Decimal get居宅費_新２_負担限度額() {
+    public int get居宅費_新２_負担限度額() {
         return entity.getKyotakuhiShin2FutanGendogaku();
     }
 
@@ -801,7 +799,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 居宅費（新３）負担限度額
      */
-    public Decimal get居宅費_新３_負担限度額() {
+    public int get居宅費_新３_負担限度額() {
         return entity.getKyotakuhiShin3FutanGendogaku();
     }
 

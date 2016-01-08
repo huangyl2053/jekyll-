@@ -6,10 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import lombok.Value;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Value;
 
 /**
  * 市町村特別給付サービス内容の識別子です。
@@ -19,7 +18,7 @@ public class ShichosonTokubetuKyufuServiceIdentifier implements Serializable {
 
     private final RString 市町村特別給付用サービスコード;
     private final FlexibleDate 市町村特別給付用サービス有効期間開始年月日;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
 
     /**
      * コンストラクタです。
@@ -30,7 +29,7 @@ public class ShichosonTokubetuKyufuServiceIdentifier implements Serializable {
      */
     public ShichosonTokubetuKyufuServiceIdentifier(RString 市町村特別給付用サービスコード,
             FlexibleDate 市町村特別給付用サービス有効期間開始年月日,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         this.市町村特別給付用サービスコード = 市町村特別給付用サービスコード;
         this.市町村特別給付用サービス有効期間開始年月日 = 市町村特別給付用サービス有効期間開始年月日;
         this.履歴番号 = 履歴番号;

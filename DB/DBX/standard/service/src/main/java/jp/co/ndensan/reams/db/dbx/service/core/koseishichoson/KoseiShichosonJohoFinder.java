@@ -51,7 +51,7 @@ public class KoseiShichosonJohoFinder {
      * @return 全部市町村情報
      */
     public List<KoseiShichosonMaster> get全市町村情報() {
-        return toKoseiShichosonList(koseiShichosonMasterDac.selectZenShichosonJohoContainingKyuShichoson());
+        return toKoseiShichosonList(koseiShichosonMasterDac.zenShichosonJoho());
     }
 
     private static List<KoseiShichosonMaster> toKoseiShichosonList(List<DbT7051KoseiShichosonMasterEntity> entities) {
@@ -69,7 +69,7 @@ public class KoseiShichosonJohoFinder {
      * @return 現市町村情報
      */
     public List<KoseiShichosonMaster> get現市町村情報() {
-        return toKoseiShichosonList(koseiShichosonMasterDac.selectPresenceShichosonJoho());
+        return toKoseiShichosonList(koseiShichosonMasterDac.genShichosonJoho());
     }
 
     /**
@@ -79,6 +79,6 @@ public class KoseiShichosonJohoFinder {
      * @return 指定の地域番号と1桁目が一致する旧市町村のList
      */
     public List<KoseiShichosonMaster> get合併旧市町村sBy地域番号(RString 地域番号) {
-        return toKoseiShichosonList(koseiShichosonMasterDac.selectKyuShichosonByChikiNoOneDigit(地域番号));
+        return toKoseiShichosonList(koseiShichosonMasterDac.getKouikiKyuShichosonCodeJohoList(地域番号));
     }
 }

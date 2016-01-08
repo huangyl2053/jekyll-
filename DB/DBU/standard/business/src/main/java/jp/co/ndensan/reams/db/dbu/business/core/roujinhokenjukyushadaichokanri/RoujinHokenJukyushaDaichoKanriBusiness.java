@@ -60,7 +60,7 @@ public class RoujinHokenJukyushaDaichoKanriBusiness {
      *
      * @return 老人保健市町村コード
      */
-    public LasdecCode get老人保健市町村コード() {
+    public RString get老人保健市町村コード() {
         return entity.getRojinHokenShichosonCode();
     }
 

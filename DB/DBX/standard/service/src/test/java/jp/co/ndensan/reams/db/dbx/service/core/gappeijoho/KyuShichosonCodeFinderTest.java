@@ -94,8 +94,7 @@ public class KyuShichosonCodeFinderTest extends DbxTestBase {
             dbT7056GappeiShichosonEntitys = new ArrayList<>();
             when(dbT7056GappeiShichosonDac.selectAllOrderbyChikiNoDesc()).thenReturn(dbT7056GappeiShichosonEntitys);
 
-            sut = KyuShichosonCodeFinder.createInstanceForTest(
-                    koseiShichosonJohoFinder, dbT7055GappeiJohoDac, dbT7056GappeiShichosonDac, true);
+            sut = KyuShichosonCodeFinder.createInstance();
         }
 
         @Test
@@ -168,8 +167,7 @@ public class KyuShichosonCodeFinderTest extends DbxTestBase {
 
         @Test
         public void 合併していない場合_結果は空になる() {
-            sut = KyuShichosonCodeFinder.createInstanceForTest(
-                    koseiShichosonJohoFinder, dbT7055GappeiJohoDac, dbT7056GappeiShichosonDac, false);
+            sut = KyuShichosonCodeFinder.createInstance();
 
             KyuShichosonJohoEntities result = sut.getKyuShichosonCodeJoho(new LasdecCode("152201"), DonyuKeitaiCode.事務単一);
             assertThat(result.isEmpty(), is(true));
@@ -195,8 +193,7 @@ public class KyuShichosonCodeFinderTest extends DbxTestBase {
             gappeiJohoOfMaxChikiNo.setShichosonCode(lasdecCode);
             when(dbT7055GappeiJohoDac.selectTopOneByShichosonCode(lasdecCode)).thenReturn(gappeiJohoOfMaxChikiNo);
 
-            sut = KyuShichosonCodeFinder.createInstanceForTest(
-                    koseiShichosonJohoFinder, dbT7055GappeiJohoDac, dbT7056GappeiShichosonDac, true);
+            sut = KyuShichosonCodeFinder.createInstance();
         }
 
         @Test
@@ -268,8 +265,7 @@ public class KyuShichosonCodeFinderTest extends DbxTestBase {
 
         @Test
         public void 合併していない場合_結果は空になる() {
-            sut = KyuShichosonCodeFinder.createInstanceForTest(
-                    koseiShichosonJohoFinder, dbT7055GappeiJohoDac, dbT7056GappeiShichosonDac, false);
+            sut = KyuShichosonCodeFinder.createInstance();
 
             KyuShichosonJohoEntities result = sut.getKyuShichosonCodeJoho(new LasdecCode("152201"), DonyuKeitaiCode.事務広域);
             assertThat(result.isEmpty(), is(true));

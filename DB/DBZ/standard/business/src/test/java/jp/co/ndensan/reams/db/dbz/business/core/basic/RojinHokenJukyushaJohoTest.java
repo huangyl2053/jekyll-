@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7005RojinHokenJukyushaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7005RojinHokenJukyushaJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7005RojinHokenJukyushaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -122,7 +122,7 @@ public class RojinHokenJukyushaJohoTest extends DbzTestBase {
 
         @Test
         public void get老人保健市町村コードは_entityが持つ老人保健市町村コードを返す() {
-            assertThat(sut.get老人保健市町村コード(), is(RojinHokenJukyushaJohoEntity.getRojinHokenShichosonCode()));
+            assertThat(sut.get老人保健市町村コード().getColumnValue(), is(RojinHokenJukyushaJohoEntity.getRojinHokenShichosonCode()));
         }
 
         @Test

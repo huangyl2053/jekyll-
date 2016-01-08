@@ -4,20 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7003BemmeishaJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
@@ -38,7 +33,7 @@ public class BemmeishaJohoTest extends DbzTestBase {
     private static DbT7003BemmeishaJohoEntity BemmeishaJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static ShoKisaiHokenshaNo 主キー名1;
+//    private static ShoKisaiHokenshaNo 主キー名1;
     private static ShikibetsuCode 主キー名2;
     private static HihokenshaNo 主キー名3;
     private static FlexibleDate 主キー名4;
@@ -48,7 +43,7 @@ public class BemmeishaJohoTest extends DbzTestBase {
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号;
+//        主キー名1 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号;
         主キー名2 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_識別コード;
     }
 
@@ -59,32 +54,32 @@ public class BemmeishaJohoTest extends DbzTestBase {
         @Before
         public void setUp() {
             BemmeishaJohoEntity = DbT7003BemmeishaJohoEntityGenerator.createDbT7003BemmeishaJohoEntity();
-            BemmeishaJohoEntity.setShoKisaiHokenshaNo(主キー名1);
+//            BemmeishaJohoEntity.setShoKisaiHokenshaNo(主キー名1);
             BemmeishaJohoEntity.setShikibetsuCode(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new BemmeishaJoho(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
+            sut = new BemmeishaJoho(主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new BemmeishaJoho(主キー名1, null, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
+            sut = new BemmeishaJoho(null, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
         }
 
         @Test
         public void 指定したキーが保持するDbT7003BemmeishaJohoEntityにセットされている() {
-            sut = new BemmeishaJoho(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
-            assertThat(sut.get証記載保険者番号(), is(主キー名1));
+            sut = new BemmeishaJoho(主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
+//            assertThat(sut.get証記載保険者番号(), is(主キー名1));
             assertThat(sut.get識別コード(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するBemmeishaJohoIdentifierにセットされている() {
-            sut = new BemmeishaJoho(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
-            assertThat(sut.identifier().get証記載保険者番号(), is(主キー名1));
+            sut = new BemmeishaJoho(主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
+//            assertThat(sut.identifier().get証記載保険者番号(), is(主キー名1));
             assertThat(sut.identifier().get識別コード(), is(主キー名2));
         }
     }
@@ -96,7 +91,7 @@ public class BemmeishaJohoTest extends DbzTestBase {
         @Before
         public void setUp() {
             BemmeishaJohoEntity = DbT7003BemmeishaJohoEntityGenerator.createDbT7003BemmeishaJohoEntity();
-            BemmeishaJohoEntity.setShoKisaiHokenshaNo(主キー名1);
+//            BemmeishaJohoEntity.setShoKisaiHokenshaNo(主キー名1);
             BemmeishaJohoEntity.setShikibetsuCode(主キー名2);
         }
 
@@ -110,7 +105,7 @@ public class BemmeishaJohoTest extends DbzTestBase {
 
             sut = new BemmeishaJoho(BemmeishaJohoEntity);
 
-            assertThat(sut.identifier().get証記載保険者番号(), is(主キー名1));
+//            assertThat(sut.identifier().get証記載保険者番号(), is(主キー名1));
             assertThat(sut.identifier().get識別コード(), is(主キー名2));
         }
     }
@@ -122,17 +117,16 @@ public class BemmeishaJohoTest extends DbzTestBase {
         @Before
         public void setUp() {
             BemmeishaJohoEntity = DbT7003BemmeishaJohoEntityGenerator.createDbT7003BemmeishaJohoEntity();
-            BemmeishaJohoEntity.setShoKisaiHokenshaNo(主キー名1);
+//            BemmeishaJohoEntity.setShoKisaiHokenshaNo(主キー名1);
             BemmeishaJohoEntity.setShikibetsuCode(主キー名2);
 
             sut = new BemmeishaJoho(BemmeishaJohoEntity);
         }
 
-        @Test
-        public void get証記載保険者番号は_entityが持つ証記載保険者番号を返す() {
-            assertThat(sut.get証記載保険者番号(), is(BemmeishaJohoEntity.getShoKisaiHokenshaNo()));
-        }
-
+//        @Test
+//        public void get証記載保険者番号は_entityが持つ証記載保険者番号を返す() {
+//            assertThat(sut.get証記載保険者番号(), is(BemmeishaJohoEntity.getShoKisaiHokenshaNo()));
+//        }
         @Test
         public void get識別コードは_entityが持つ識別コードを返す() {
             assertThat(sut.get識別コード(), is(BemmeishaJohoEntity.getShikibetsuCode()));
@@ -159,23 +153,13 @@ public class BemmeishaJohoTest extends DbzTestBase {
         }
 
         @Test
-        public void get職員コードは_entityが持つ職員コードを返す() {
-            assertThat(sut.get職員コード(), is(BemmeishaJohoEntity.getShokuinCode()));
+        public void get市町村コードは_entityが持つ役職名を返す() {
+            assertThat(sut.get市町村コード(), is(BemmeishaJohoEntity.getShichosonCode()));
         }
 
         @Test
-        public void get部署コードは_entityが持つ部署コードを返す() {
-            assertThat(sut.get部署コード(), is(BemmeishaJohoEntity.getBushoCode()));
-        }
-
-        @Test
-        public void get役職名は_entityが持つ役職名を返す() {
-            assertThat(sut.get役職名(), is(BemmeishaJohoEntity.getYakushoskuName()));
-        }
-
-        @Test
-        public void get弁明者氏名は_entityが持つ弁明者氏名を返す() {
-            assertThat(sut.get弁明者氏名(), is(BemmeishaJohoEntity.getBemmeishaShimei()));
+        public void get弁明者は_entityが持つ弁明者を返す() {
+            assertThat(sut.get弁明者(), is(BemmeishaJohoEntity.getBemmeisha()));
         }
     }
 
@@ -186,7 +170,7 @@ public class BemmeishaJohoTest extends DbzTestBase {
         @Before
         public void setUp() {
             BemmeishaJohoEntity = DbT7003BemmeishaJohoEntityGenerator.createDbT7003BemmeishaJohoEntity();
-            BemmeishaJohoEntity.setShoKisaiHokenshaNo(主キー名1);
+//            BemmeishaJohoEntity.setShoKisaiHokenshaNo(主キー名1);
             BemmeishaJohoEntity.setShikibetsuCode(主キー名2);
 
             sut = new BemmeishaJoho(BemmeishaJohoEntity);
@@ -205,7 +189,7 @@ public class BemmeishaJohoTest extends DbzTestBase {
         @Before
         public void setUp() {
             BemmeishaJohoEntity = DbT7003BemmeishaJohoEntityGenerator.createDbT7003BemmeishaJohoEntity();
-            BemmeishaJohoEntity.setShoKisaiHokenshaNo(主キー名1);
+//            BemmeishaJohoEntity.setShoKisaiHokenshaNo(主キー名1);
             BemmeishaJohoEntity.setShikibetsuCode(主キー名2);
 
             sut = new BemmeishaJoho(BemmeishaJohoEntity);
@@ -225,7 +209,7 @@ public class BemmeishaJohoTest extends DbzTestBase {
         @Before
         public void setUp() {
             BemmeishaJohoEntity = DbT7003BemmeishaJohoEntityGenerator.createDbT7003BemmeishaJohoEntity();
-            BemmeishaJohoEntity.setShoKisaiHokenshaNo(主キー名1);
+//            BemmeishaJohoEntity.setShoKisaiHokenshaNo(主キー名1);
             BemmeishaJohoEntity.setShikibetsuCode(主キー名2);
 
         }

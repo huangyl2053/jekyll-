@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ChoshuHoho}の編集を行うビルダークラスです。
@@ -70,7 +69,7 @@ public class ChoshuHohoBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link ChoshuHohoBuilder}
      */
-    public ChoshuHohoBuilder set履歴番号(Decimal 履歴番号) {
+    public ChoshuHohoBuilder set履歴番号(int 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;

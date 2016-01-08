@@ -6,12 +6,11 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.business.core.Shotoku;
 import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuKanriEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -30,19 +29,19 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class ShotokuTest extends DbzTestBase {
 
-    private static DbT2008ShotokuEntity ShotokuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
+    private static DbT2008ShotokuKanriEntity ShotokuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static FlexibleYear 所得年度;
     private static ShikibetsuCode 識別コード;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        所得年度 = DbT2008ShotokuEntityGenerator.DEFAULT_所得年度;
-        識別コード = DbT2008ShotokuEntityGenerator.DEFAULT_識別コード;
-        履歴番号 = DbT2008ShotokuEntityGenerator.DEFAULT_履歴番号;
+        所得年度 = DbT2008ShotokuKanriEntityGenerator.DEFAULT_所得年度;
+        識別コード = DbT2008ShotokuKanriEntityGenerator.DEFAULT_識別コード;
+        履歴番号 = DbT2008ShotokuKanriEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -51,7 +50,7 @@ public class ShotokuTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            ShotokuEntity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
+            ShotokuEntity = DbT2008ShotokuKanriEntityGenerator.createDbT2008ShotokuKanriEntity();
             ShotokuEntity.setShotokuNendo(所得年度);
             ShotokuEntity.setShikibetsuCode(識別コード);
             ShotokuEntity.setRirekiNo(履歴番号);
@@ -70,11 +69,11 @@ public class ShotokuTest extends DbzTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 履歴番号がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new Shotoku(所得年度, 識別コード, null);
+            sut = new Shotoku(所得年度, 識別コード, 1);
         }
 
         @Test
-        public void 指定したキーが保持するDbT2008ShotokuEntityにセットされている() {
+        public void 指定したキーが保持するDbT2008ShotokuKanriEntityにセットされている() {
             sut = new Shotoku(所得年度, 識別コード, 履歴番号);
             assertThat(sut.get所得年度(), is(所得年度));
             assertThat(sut.get識別コード(), is(識別コード));
@@ -96,7 +95,7 @@ public class ShotokuTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            ShotokuEntity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
+            ShotokuEntity = DbT2008ShotokuKanriEntityGenerator.createDbT2008ShotokuKanriEntity();
             ShotokuEntity.setShotokuNendo(所得年度);
             ShotokuEntity.setShikibetsuCode(識別コード);
             ShotokuEntity.setRirekiNo(履歴番号);
@@ -108,7 +107,7 @@ public class ShotokuTest extends DbzTestBase {
         }
 
         @Test
-        public void 指定したDbT2008ShotokuEntityのキー情報を識別子が持つ() {
+        public void 指定したDbT2008ShotokuKanriEntityのキー情報を識別子が持つ() {
 
             sut = new Shotoku(ShotokuEntity);
 
@@ -124,7 +123,7 @@ public class ShotokuTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            ShotokuEntity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
+            ShotokuEntity = DbT2008ShotokuKanriEntityGenerator.createDbT2008ShotokuKanriEntity();
             ShotokuEntity.setShotokuNendo(所得年度);
             ShotokuEntity.setShikibetsuCode(識別コード);
             ShotokuEntity.setRirekiNo(履歴番号);
@@ -149,12 +148,12 @@ public class ShotokuTest extends DbzTestBase {
 
         @Test
         public void get非課税区分_住民税減免前はentityが持つ非課税区分_住民税減免前を返す() {
-            assertThat(sut.get非課税区分_住民税減免前(), is(ShotokuEntity.getHiKazeiKubun()));
+            assertThat(sut.get非課税区分_住民税減免前(), is(ShotokuEntity.getKazeiKubun()));
         }
 
         @Test
         public void get非課税区分_住民税減免後は_entityが持つ非課税区分_住民税減免後を返す() {
-            assertThat(sut.get非課税区分_住民税減免後(), is(ShotokuEntity.getHiKazeiKubunGemmenGo()));
+            assertThat(sut.get非課税区分_住民税減免後(), is(ShotokuEntity.getKazeiKubunGemmenGo()));
         }
 
         @Test
@@ -179,7 +178,7 @@ public class ShotokuTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            ShotokuEntity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
+            ShotokuEntity = DbT2008ShotokuKanriEntityGenerator.createDbT2008ShotokuKanriEntity();
             ShotokuEntity.setShotokuNendo(所得年度);
             ShotokuEntity.setShikibetsuCode(識別コード);
             ShotokuEntity.setRirekiNo(履歴番号);
@@ -199,7 +198,7 @@ public class ShotokuTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            ShotokuEntity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
+            ShotokuEntity = DbT2008ShotokuKanriEntityGenerator.createDbT2008ShotokuKanriEntity();
             ShotokuEntity.setShotokuNendo(所得年度);
             ShotokuEntity.setShikibetsuCode(識別コード);
             ShotokuEntity.setRirekiNo(履歴番号);
@@ -220,7 +219,7 @@ public class ShotokuTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            ShotokuEntity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
+            ShotokuEntity = DbT2008ShotokuKanriEntityGenerator.createDbT2008ShotokuKanriEntity();
             ShotokuEntity.setShotokuNendo(所得年度);
             ShotokuEntity.setShikibetsuCode(識別コード);
             ShotokuEntity.setRirekiNo(履歴番号);
@@ -228,28 +227,28 @@ public class ShotokuTest extends DbzTestBase {
         }
 
         @Test
-        public void Shotokuが保持するDbT2008ShotokuEntityのEntityDataStateがUnchangedである場合_deletedメソッド_によりShotokuが保持するDbT2008ShotokuEntityのEntityDataStateがDeletedに指定されたShotokuが返る() {
+        public void Shotokuが保持するDbT2008ShotokuKanriEntityのEntityDataStateがUnchangedである場合_deletedメソッド_によりShotokuが保持するDbT2008ShotokuKanriEntityのEntityDataStateがDeletedに指定されたShotokuが返る() {
             sut = TestSupport.setStateShotoku(EntityDataState.Unchanged);
             result = sut.deleted();
             assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
         }
 
         @Test
-        public void Shotokuが保持するDbT2008ShotokuEntityのEntityDataStateがModifiedである場合_deletedメソッド_によりShotokuが保持するDbT2008ShotokuEntityのEntityDataStateがDeletedに指定されたShotokuが返る() {
+        public void Shotokuが保持するDbT2008ShotokuKanriEntityのEntityDataStateがModifiedである場合_deletedメソッド_によりShotokuが保持するDbT2008ShotokuKanriEntityのEntityDataStateがDeletedに指定されたShotokuが返る() {
             sut = TestSupport.setStateShotoku(EntityDataState.Modified);
             result = sut.deleted();
             assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
         }
 
         @Test
-        public void Shotokuが保持するDbT2008ShotokuEntityのEntityDataStateがDeletedである場合_deletedメソッド_によりShotokuが保持するDbT2008ShotokuEntityのEntityDataStateがDeletedに指定されたShotokuが返る() {
+        public void Shotokuが保持するDbT2008ShotokuKanriEntityのEntityDataStateがDeletedである場合_deletedメソッド_によりShotokuが保持するDbT2008ShotokuKanriEntityのEntityDataStateがDeletedに指定されたShotokuが返る() {
             sut = TestSupport.setStateShotoku(EntityDataState.Deleted);
             result = sut.deleted();
             assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
         }
 
         @Test(expected = IllegalStateException.class)
-        public void Shotokuが保持するDbT2008ShotokuEntityのEntityDataStateがAddedである場合_deletedメソッド_により_IllegalStateExceptionが発火する() {
+        public void Shotokuが保持するDbT2008ShotokuKanriEntityのEntityDataStateがAddedである場合_deletedメソッド_により_IllegalStateExceptionが発火する() {
             sut = TestSupport.setStateShotoku(EntityDataState.Added);
             result = sut.deleted();
         }

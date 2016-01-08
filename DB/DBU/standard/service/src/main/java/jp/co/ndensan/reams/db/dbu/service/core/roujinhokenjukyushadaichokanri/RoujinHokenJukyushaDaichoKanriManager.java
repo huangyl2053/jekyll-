@@ -109,7 +109,7 @@ public class RoujinHokenJukyushaDaichoKanriManager {
                         HihokenshaNo.EMPTY, rojinHokenShichosonCode, rojinHokenJukyushaNo);
         DbT7005RojinHokenJukyushaJohoEntity dbT7005entity = dac.selectByKey(shikibetsuCode);
         dbT7005entity.setShikibetsuCode(parameter.getShikibetsuCode());
-        dbT7005entity.setRojinHokenShichosonCode(parameter.getRojinHokenShichosonCode());
+        dbT7005entity.setRojinHokenShichosonCode(parameter.getRojinHokenShichosonCode().getColumnValue());
         dbT7005entity.setRojinHokenJukyushaNo(parameter.getRojinHokenJukyushaNo());
         dbT7005entity.setState(EntityDataState.Modified);
         return dac.save(dbT7005entity);
@@ -145,7 +145,7 @@ public class RoujinHokenJukyushaDaichoKanriManager {
         dbT7005entity.setShikibetsuCode(parameter.getShikibetsuCode());
         dbT7005entity.setShichosonCode(parameter.getShichosonCode());
         dbT7005entity.setHihokenshaNo(parameter.getHihokenshaNo());
-        dbT7005entity.setRojinHokenShichosonCode(parameter.getRojinHokenShichosonCode());
+        dbT7005entity.setRojinHokenShichosonCode(parameter.getRojinHokenShichosonCode().getColumnValue());
         dbT7005entity.setRojinHokenJukyushaNo(parameter.getRojinHokenJukyushaNo());
         dbT7005entity.setState(EntityDataState.Added);
         return dac.save(dbT7005entity);

@@ -6,11 +6,11 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyosha;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyosha.jigyoshaNo;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyosha.keiyakuKaishiYMD;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyosha.serviceShubetsuCode;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyosha;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyosha.jigyoshaNo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyosha.keiyakuKaishiYMD;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyosha.serviceShubetsuCode;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 受領委任契約事業者のデータアクセスクラスです。
  */
-public class DbT7061JuryoIninKeiyakuJigyoshaDac implements ISaveable<DbT7061JuryoIninKeiyakuJigyoshaEntity> {
+public class DbT7061JuryoIninJigyoshaDac implements ISaveable<DbT7061JuryoIninJigyoshaEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -37,11 +37,11 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDac implements ISaveable<DbT7061Jury
      * @param 受領委任契約事業者番号 JigyoshaNo
      * @param 受領委任契約開始日 KeiyakuKaishiYMD
      * @param 契約サービス種別 ServiceShubetsuCode
-     * @return DbT7061JuryoIninKeiyakuJigyoshaEntity
+     * @return DbT7061JuryoIninJigyoshaEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT7061JuryoIninKeiyakuJigyoshaEntity selectByKey(
+    public DbT7061JuryoIninJigyoshaEntity selectByKey(
             KaigoJigyoshaNo 受領委任契約事業者番号,
             FlexibleDate 受領委任契約開始日,
             RString 契約サービス種別) throws NullPointerException {
@@ -52,37 +52,37 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDac implements ISaveable<DbT7061Jury
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
-                table(DbT7061JuryoIninKeiyakuJigyosha.class).
+                table(DbT7061JuryoIninJigyosha.class).
                 where(and(
                                 eq(jigyoshaNo, 受領委任契約事業者番号),
                                 eq(keiyakuKaishiYMD, 受領委任契約開始日),
                                 eq(serviceShubetsuCode, 契約サービス種別))).
-                toObject(DbT7061JuryoIninKeiyakuJigyoshaEntity.class);
+                toObject(DbT7061JuryoIninJigyoshaEntity.class);
     }
 
     /**
      * 受領委任契約事業者を全件返します。
      *
-     * @return List<DbT7061JuryoIninKeiyakuJigyoshaEntity>
+     * @return List<DbT7061JuryoIninJigyoshaEntity>
      */
     @Transaction
-    public List<DbT7061JuryoIninKeiyakuJigyoshaEntity> selectAll() {
+    public List<DbT7061JuryoIninJigyoshaEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
-                table(DbT7061JuryoIninKeiyakuJigyosha.class).
-                toList(DbT7061JuryoIninKeiyakuJigyoshaEntity.class);
+                table(DbT7061JuryoIninJigyosha.class).
+                toList(DbT7061JuryoIninJigyoshaEntity.class);
     }
 
     /**
-     * DbT7061JuryoIninKeiyakuJigyoshaEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     * DbT7061JuryoIninJigyoshaEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
      * @param entity entity
      * @return 登録件数
      */
     @Transaction
     @Override
-    public int save(DbT7061JuryoIninKeiyakuJigyoshaEntity entity) {
+    public int save(DbT7061JuryoIninJigyoshaEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任契約事業者エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);

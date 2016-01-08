@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic;
 
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7061JuryoIninKeiyakuJigyoshaDac;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7061JuryoIninJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -21,11 +21,11 @@ import org.junit.Test;
  *
  * @author LDNS 燕京
  */
-public class IDbT7061JuryoIninKeiyakuJigyoshaMapperTest extends DbxTestDacBase {
+public class IDbT7061JuryoIninJigyoshaMapperTest extends DbxTestDacBase {
 
-    private static IDbT7061JuryoIninKeiyakuJigyoshaMapper sut;
-    private static DbT7061JuryoIninKeiyakuJigyoshaDac dac;
-    private static DbT7061JuryoIninKeiyakuJigyoshaEntity entity;
+    private static IDbT7061JuryoIninJigyoshaMapper sut;
+    private static DbT7061JuryoIninJigyoshaDac dac;
+    private static DbT7061JuryoIninJigyoshaEntity entity;
     private static DbTestHelper dbTestHelper;
 
     @Before
@@ -38,10 +38,10 @@ public class IDbT7061JuryoIninKeiyakuJigyoshaMapperTest extends DbxTestDacBase {
 
         @BeforeClass
         public void setUp() {
-            dbTestHelper.truncateTable(sqlSession, DbT7061JuryoIninKeiyakuJigyoshaEntity.TABLE_NAME);
-            dac = InstanceProvider.create(DbT7061JuryoIninKeiyakuJigyoshaDac.class);
-            sut = sqlSession.getMapper(IDbT7061JuryoIninKeiyakuJigyoshaMapper.class);
-            entity = DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator.createDbT7061JuryoIninKeiyakuJigyoshaEntity();
+            dbTestHelper.truncateTable(sqlSession, DbT7061JuryoIninJigyoshaEntity.TABLE_NAME);
+            dac = InstanceProvider.create(DbT7061JuryoIninJigyoshaDac.class);
+            sut = sqlSession.getMapper(IDbT7061JuryoIninJigyoshaMapper.class);
+            entity = DbT7061JuryoIninJigyoshaEntityGenerator.createDbT7061JuryoIninJigyoshaEntity();
             dac.save(entity);
         }
 

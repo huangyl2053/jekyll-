@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
  */
 public class KyuShichosonJohoEntities implements Serializable, Iterable<DbT7056GappeiShichosonEntity> {
 
-    private final List<DbT7056GappeiShichosonEntity> entities;
-    private final boolean gappeiShichoUmuFlag;
+    private List<DbT7056GappeiShichosonEntity> entities;
+    private boolean gappeiShichoUmuFlag;
 
     /**
      * コンストラクタです。
@@ -29,8 +29,7 @@ public class KyuShichosonJohoEntities implements Serializable, Iterable<DbT7056G
     }
 
     /**
-     * 指定のlistの要素をすべて保持するインスタンスを生成します。
-     * 合併市町村を含む場合は、第2引数にtrueを設定してください。
+     * 指定のlistの要素をすべて保持するインスタンスを生成します。 合併市町村を含む場合は、第2引数にtrueを設定してください。
      *
      * @param entities 全要素
      * @param contains合併市町村 合併市町村を含むかどうか
@@ -79,5 +78,42 @@ public class KyuShichosonJohoEntities implements Serializable, Iterable<DbT7056G
     @Override
     public Iterator<DbT7056GappeiShichosonEntity> iterator() {
         return this.entities.iterator();
+    }
+
+    /**
+     * 合併市町村有無フラグを設定します。
+     *
+     * @param 合併市町村有無フラグ
+     */
+    public void setGappeiShichoUmuFlag(boolean 合併市町村有無フラグ) {
+        gappeiShichoUmuFlag = 合併市町村有無フラグ;
+    }
+
+    /**
+     * 合併市町村有無フラグを返却します。
+     *
+     * @return 合併市町村有無フラグ
+     */
+    public boolean getGappeiShichoUmuFlag() {
+        return gappeiShichoUmuFlag;
+    }
+    
+    
+    /**
+     * DbT7056GappeiShichosonEntityのリストを設定します。
+     *
+     * @param DbT7056GappeiShichosonEntityList
+     */
+    public void setEntitys(List<DbT7056GappeiShichosonEntity> DbT7056GappeiShichosonEntityList) {
+        entities = DbT7056GappeiShichosonEntityList;
+    }
+    
+    /**
+     * DbT7056GappeiShichosonEntityのリストを返却します。
+     *
+     * @return DbT7056GappeiShichosonEntityのリスト
+     */
+    public List<DbT7056GappeiShichosonEntity> getEntitys() {
+        return entities;
     }
 }

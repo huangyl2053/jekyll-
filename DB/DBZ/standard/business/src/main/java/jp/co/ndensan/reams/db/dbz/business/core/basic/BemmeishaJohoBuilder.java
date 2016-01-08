@@ -7,12 +7,9 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.BushoCode;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -44,18 +41,6 @@ public class BemmeishaJohoBuilder {
 
 //TODO Key項目のsetterメソッドは削除してください。
 //TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 証記載保険者番号を設定します。
-     *
-     * @param 証記載保険者番号 証記載保険者番号
-     * @return {@link BemmeishaJohoBuilder}
-     */
-    public BemmeishaJohoBuilder set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
-        return this;
-    }
-
     /**
      * 識別コードを設定します。
      *
@@ -117,50 +102,26 @@ public class BemmeishaJohoBuilder {
     }
 
     /**
-     * 職員コードを設定します。
+     * 市町村コードを設定します。
      *
-     * @param 職員コード 職員コード
+     * @param 市町村コード 市町村コード
      * @return {@link BemmeishaJohoBuilder}
      */
-    public BemmeishaJohoBuilder set職員コード(Code 職員コード) {
-        requireNonNull(職員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("職員コード"));
-        entity.setShokuinCode(職員コード);
+    public BemmeishaJohoBuilder set市町村コード(LasdecCode 市町村コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        entity.setShichosonCode(市町村コード);
         return this;
     }
 
     /**
-     * 部署コードを設定します。
+     * 弁明者を設定します。
      *
-     * @param 部署コード 部署コード
+     * @param 弁明者 弁明者
      * @return {@link BemmeishaJohoBuilder}
      */
-    public BemmeishaJohoBuilder set部署コード(BushoCode 部署コード) {
-        requireNonNull(部署コード, UrSystemErrorMessages.値がnull.getReplacedMessage("部署コード"));
-        entity.setBushoCode(部署コード);
-        return this;
-    }
-
-    /**
-     * 役職名を設定します。
-     *
-     * @param 役職名 役職名
-     * @return {@link BemmeishaJohoBuilder}
-     */
-    public BemmeishaJohoBuilder set役職名(RString 役職名) {
-        requireNonNull(役職名, UrSystemErrorMessages.値がnull.getReplacedMessage("役職名"));
-        entity.setYakushoskuName(役職名);
-        return this;
-    }
-
-    /**
-     * 弁明者氏名を設定します。
-     *
-     * @param 弁明者氏名 弁明者氏名
-     * @return {@link BemmeishaJohoBuilder}
-     */
-    public BemmeishaJohoBuilder set弁明者氏名(AtenaMeisho 弁明者氏名) {
-        requireNonNull(弁明者氏名, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明者氏名"));
-        entity.setBemmeishaShimei(弁明者氏名);
+    public BemmeishaJohoBuilder set弁明者(RString 弁明者) {
+        requireNonNull(弁明者, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明者"));
+        entity.setBemmeisha(弁明者);
         return this;
     }
 

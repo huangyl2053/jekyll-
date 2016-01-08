@@ -29,12 +29,12 @@ public class GyomuBunruiTest extends DbxTestBase {
 
     @Test
     public void 介護事務を指定した場合_getコードは_無しを返す() {
-        assertThat(GyomuBunrui.介護事務.getコード(), is(new RString("無し")));
+        assertThat(GyomuBunrui.介護事務.code(), is(new RString("無し")));
     }
 
     @Test
     public void 介護事務を指定した場合_get名称は_介護事務を返す() {
-        assertThat(GyomuBunrui.介護事務.get名称(), is(new RString("介護事務")));
+        assertThat(GyomuBunrui.介護事務.name(), is("介護事務"));
     }
 
 }

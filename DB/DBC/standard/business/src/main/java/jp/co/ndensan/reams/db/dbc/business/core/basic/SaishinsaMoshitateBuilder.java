@@ -7,16 +7,15 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3062SaishinsaMoshitateEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link SaishinsaMoshitate}の編集を行うビルダークラスです。
@@ -110,7 +109,7 @@ public class SaishinsaMoshitateBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link SaishinsaMoshitateBuilder}
      */
-    public SaishinsaMoshitateBuilder set履歴番号(Decimal 履歴番号) {
+    public SaishinsaMoshitateBuilder set履歴番号(int 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;
@@ -146,7 +145,7 @@ public class SaishinsaMoshitateBuilder {
      * @param 証記載保険者番号 証記載保険者番号
      * @return {@link SaishinsaMoshitateBuilder}
      */
-    public SaishinsaMoshitateBuilder set証記載保険者番号(HokenshaNo 証記載保険者番号) {
+    public SaishinsaMoshitateBuilder set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         entity.setShokisaiHokenshaNo(証記載保険者番号);
         return this;

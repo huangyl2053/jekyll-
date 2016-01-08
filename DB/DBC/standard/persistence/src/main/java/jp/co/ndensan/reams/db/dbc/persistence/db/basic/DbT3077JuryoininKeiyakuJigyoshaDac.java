@@ -7,16 +7,13 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyosha;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyosha.*;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyosha.keiyakuJigyoshaNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -33,29 +30,21 @@ public class DbT3077JuryoininKeiyakuJigyoshaDac implements ISaveable<DbT3077Jury
     /**
      * 主キーで受領委任契約事業者を取得します。
      *
-     * @param 事業者契約番号 JigyoshaKeiyakuNo
-     * @param 開始年月日 KaishiYMD
-     * @param 履歴番号 RirekiNo
+     * @param 契約事業者番号 JigyoshaKeiyakuNo
      * @return DbT3077JuryoininKeiyakuJigyoshaEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT3077JuryoininKeiyakuJigyoshaEntity selectByKey(
-            RString 事業者契約番号,
-            FlexibleDate 開始年月日,
-            Decimal 履歴番号) throws NullPointerException {
-        requireNonNull(事業者契約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者契約番号"));
-        requireNonNull(開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("開始年月日"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+            RString 契約事業者番号) throws NullPointerException {
+        requireNonNull(契約事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("契約事業者番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT3077JuryoininKeiyakuJigyosha.class).
-                where(and(
-                                eq(jigyoshaKeiyakuNo, 事業者契約番号),
-                                eq(kaishiYMD, 開始年月日),
-                                eq(rirekiNo, 履歴番号))).
+                where(
+                        eq(keiyakuJigyoshaNo, 契約事業者番号)).
                 toObject(DbT3077JuryoininKeiyakuJigyoshaEntity.class);
     }
 

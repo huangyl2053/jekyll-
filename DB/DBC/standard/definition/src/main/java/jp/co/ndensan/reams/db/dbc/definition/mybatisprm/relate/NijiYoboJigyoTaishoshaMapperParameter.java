@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 二次予防事業対象者を特定するためのMyBatis用パラメータクラスです。
@@ -16,9 +14,8 @@ public final class NijiYoboJigyoTaishoshaMapperParameter {
 
 // TODO 主キー型、主キー名を適切に置換してください。
 // TODO 主キーの数が足りない場合、処理を追加してください。
-    private final HokenshaNo 主キー1;
-    private final HihokenshaNo 主キー2;
-    private Decimal 主キー3;
+    private final HihokenshaNo 主キー1;
+    private int 主キー2;
 
     private final boolean uses主キー1;
     private final boolean uses主キー2;
@@ -34,8 +31,8 @@ public final class NijiYoboJigyoTaishoshaMapperParameter {
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     private NijiYoboJigyoTaishoshaMapperParameter(
-            @lombok.NonNull HokenshaNo 主キー1,
-            @lombok.NonNull HihokenshaNo 主キー2,
+            @lombok.NonNull HihokenshaNo 主キー1,
+            int 主キー2,
             boolean uses主キー1,
             boolean uses主キー2) {
 
@@ -55,8 +52,8 @@ public final class NijiYoboJigyoTaishoshaMapperParameter {
      * @return 身体手帳検索パラメータ
      */
     public static NijiYoboJigyoTaishoshaMapperParameter createSelectByKeyParam(
-            HokenshaNo 主キー1,
-            HihokenshaNo 主キー2) {
+            HihokenshaNo 主キー1,
+            int 主キー2) {
         return new NijiYoboJigyoTaishoshaMapperParameter(主キー1, 主キー2, true, true);
     }
 
@@ -67,20 +64,16 @@ public final class NijiYoboJigyoTaishoshaMapperParameter {
      * @return 身体手帳検索パラメータ
      */
     public static NijiYoboJigyoTaishoshaMapperParameter createSelectListParam(
-            HokenshaNo 主キー1) {
-        return new NijiYoboJigyoTaishoshaMapperParameter(主キー1, HihokenshaNo.EMPTY, true, false);
+            HihokenshaNo 主キー1) {
+        return new NijiYoboJigyoTaishoshaMapperParameter(主キー1, 1, true, false);
     }
 
-    public HokenshaNo get主キー1() {
+    public HihokenshaNo get主キー1() {
         return 主キー1;
     }
 
-    public HihokenshaNo get主キー2() {
+    public int get主キー2() {
         return 主キー2;
-    }
-
-    public Decimal get主キー3() {
-        return 主キー3;
     }
 
     public boolean isUses主キー1() {

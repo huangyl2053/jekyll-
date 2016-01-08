@@ -173,7 +173,7 @@ public class NinteiShinseiJohoManager {
             return false;
         }
         要介護認定申請情報 = 要介護認定申請情報.modifiedModel();
-        save要介護認定結果情報リスト(要介護認定申請情報.getNinteiKekkaJohoList());
+//        save要介護認定結果情報リスト(要介護認定申請情報.getNinteiKekkaJohoList());
         save要介護認定一次判定結果情報リスト(要介護認定申請情報.getIchijiHanteiKekkaJohoList());
         save要介護認定完了情報リスト(要介護認定申請情報.getNinteiKanryoJohoList());
         saveイメージ情報リスト(要介護認定申請情報.getImageList());

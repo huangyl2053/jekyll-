@@ -9,23 +9,22 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininMeisai;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3037ShokanJuryoininMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3037ShokanJuryoininMeisaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3037ShokanJuryoininMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3037ShokanJuryoininMeisaiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import org.junit.Ignore;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -53,44 +52,36 @@ public class ShokanJuryoininMeisaiManagerTest {
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYearMonth 主キー2 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_整理番号;
-            Decimal 主キー4 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払支給受領委任払明細(null, 主キー2, 主キー3, 主キー4);
+
+            sut.get償還払支給受領委任払明細(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー1 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_被保険者番号;
             RString 主キー3 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_整理番号;
-            Decimal 主キー4 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払支給受領委任払明細(主キー1, null, 主キー3, 主キー4);
+
+            sut.get償還払支給受領委任払明細(主キー1, null, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー1 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_サービス提供年月;
-            Decimal 主キー4 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払支給受領委任払明細(主キー1, 主キー2, null, 主キー4);
-        }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
-            HihokenshaNo 主キー1 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_被保険者番号;
-            FlexibleYearMonth 主キー2 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_サービス提供年月;
-            RString 主キー3 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_整理番号;
-            sut.get償還払支給受領委任払明細(主キー1, 主キー2, 主キー3, null);
+            sut.get償還払支給受領委任払明細(主キー1, 主キー2, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class))).thenReturn(null);
 
             HihokenshaNo 主キー1 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_整理番号;
-            Decimal 主キー4 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_履歴番号;
-            ShokanJuryoininMeisai result = sut.get償還払支給受領委任払明細(主キー1, 主キー2, 主キー3, 主キー4);
+
+            ShokanJuryoininMeisai result = sut.get償還払支給受領委任払明細(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
         }
@@ -98,12 +89,12 @@ public class ShokanJuryoininMeisaiManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3037ShokanJuryoininMeisaiEntity entity = DbT3037ShokanJuryoininMeisaiEntityGenerator.createDbT3037ShokanJuryoininMeisaiEntity();
-            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class))).thenReturn(entity);
             HihokenshaNo 主キー1 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_整理番号;
-            Decimal 主キー4 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_履歴番号;
-            ShokanJuryoininMeisai result = sut.get償還払支給受領委任払明細(主キー1, 主キー2, 主キー3, 主キー4);
+
+            ShokanJuryoininMeisai result = sut.get償還払支給受領委任払明細(主キー1, 主キー2, 主キー3);
 
             assertThat(result.get被保険者番号().value(), is(DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
         }

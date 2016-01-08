@@ -9,24 +9,23 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGakuMeisai;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3071KogakuGassanJikoFutanGakuMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3071KogakuGassanJikoFutanGakuMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3071KogakuGassanJikoFutanGakuMeisaiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import org.junit.Ignore;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -56,7 +55,7 @@ public class KogakuGassanJikoFutanGakuMeisaiManagerTest {
             HokenshaNo 主キー3 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_保険者番号;
             RString 主キー4 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_支給申請書整理番号;
             RString 主キー5 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_対象月;
-            Decimal 主キー6 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_履歴番号;
             sut.get高額合算自己負担額明細(null, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
         }
 
@@ -66,7 +65,7 @@ public class KogakuGassanJikoFutanGakuMeisaiManagerTest {
             HokenshaNo 主キー3 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_保険者番号;
             RString 主キー4 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_支給申請書整理番号;
             RString 主キー5 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_対象月;
-            Decimal 主キー6 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_履歴番号;
             sut.get高額合算自己負担額明細(主キー1, null, 主キー3, 主キー4, 主キー5, 主キー6);
         }
 
@@ -76,7 +75,7 @@ public class KogakuGassanJikoFutanGakuMeisaiManagerTest {
             FlexibleYear 主キー2 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_対象年度;
             RString 主キー4 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_支給申請書整理番号;
             RString 主キー5 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_対象月;
-            Decimal 主キー6 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_履歴番号;
             sut.get高額合算自己負担額明細(主キー1, 主キー2, null, 主キー4, 主キー5, 主キー6);
         }
 
@@ -86,7 +85,7 @@ public class KogakuGassanJikoFutanGakuMeisaiManagerTest {
             FlexibleYear 主キー2 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_対象年度;
             HokenshaNo 主キー3 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_保険者番号;
             RString 主キー5 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_対象月;
-            Decimal 主キー6 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_履歴番号;
             sut.get高額合算自己負担額明細(主キー1, 主キー2, 主キー3, null, 主キー5, 主キー6);
         }
 
@@ -96,32 +95,22 @@ public class KogakuGassanJikoFutanGakuMeisaiManagerTest {
             FlexibleYear 主キー2 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_対象年度;
             HokenshaNo 主キー3 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_保険者番号;
             RString 主キー4 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_支給申請書整理番号;
-            Decimal 主キー6 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_履歴番号;
             sut.get高額合算自己負担額明細(主キー1, 主キー2, 主キー3, 主キー4, null, 主キー6);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型6にnullを指定した場合_NullPointerExceptionが発生する() {
-            HihokenshaNo 主キー1 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_被保険者番号;
-            FlexibleYear 主キー2 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_対象年度;
-            HokenshaNo 主キー3 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_保険者番号;
-            RString 主キー4 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_支給申請書整理番号;
-            RString 主キー5 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_対象月;
-            sut.get高額合算自己負担額明細(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYear.class), any(HokenshaNo.class),
-                    any(RString.class), any(RString.class), any(Decimal.class))).thenReturn(null);
+                    any(RString.class), any(RString.class), any(int.class))).thenReturn(null);
 
             HihokenshaNo 主キー1 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYear 主キー2 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_対象年度;
             HokenshaNo 主キー3 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_保険者番号;
             RString 主キー4 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_支給申請書整理番号;
             RString 主キー5 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_対象月;
-            Decimal 主キー6 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_履歴番号;
             KogakuGassanJikoFutanGakuMeisai result = sut.get高額合算自己負担額明細(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
             assertThat(result, is(nullValue()));
@@ -131,14 +120,14 @@ public class KogakuGassanJikoFutanGakuMeisaiManagerTest {
         public void 検索結果が存在する場合() {
             DbT3071KogakuGassanJikoFutanGakuMeisaiEntity entity = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.createDbT3071KogakuGassanJikoFutanGakuMeisaiEntity();
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYear.class), any(HokenshaNo.class),
-                    any(RString.class), any(RString.class), any(Decimal.class))).thenReturn(entity);
+                    any(RString.class), any(RString.class), any(int.class))).thenReturn(entity);
 
             HihokenshaNo 主キー1 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYear 主キー2 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_対象年度;
             HokenshaNo 主キー3 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_保険者番号;
             RString 主キー4 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_支給申請書整理番号;
             RString 主キー5 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_対象月;
-            Decimal 主キー6 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_履歴番号;
             KogakuGassanJikoFutanGakuMeisai result = sut.get高額合算自己負担額明細(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
             assertThat(result.get被保険者番号().value(), is(DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));

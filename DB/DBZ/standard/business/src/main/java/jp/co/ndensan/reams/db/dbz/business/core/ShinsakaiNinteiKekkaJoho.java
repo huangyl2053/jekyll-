@@ -6,13 +6,14 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 要介護認定結果情報のビジネスクラスです。
@@ -41,9 +42,9 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return DbT5102NinteiKekkaJohoEntity
      */
-    public DbT5102NinteiKekkaJohoEntity getEntity() {
-        return entity;
-    }
+//    public DbT5102NinteiKekkaJohoEntity getEntity() {
+//        return entity;
+//    }
 
     /**
      * DbT5102NinteiKekkaJohoEntityを設定します。
@@ -120,7 +121,7 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
      * @return 介護認定審査会開催番号
      */
     @Override
-    public Integer get介護認定審査会開催番号() {
+    public RString get介護認定審査会開催番号() {
         return entity.getShinsakaiKaisaiNo();
     }
 
@@ -260,6 +261,11 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
         return new Builder();
     }
 
+    @Override
+    public INinteiKekkaJohoEntity getEntity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * {@link ShinsakaiNinteiKekkaJoho}を生成するためのビルダーです。
      */
@@ -393,8 +399,7 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
          * @param shinsakaiKaisaiNo 介護認定審査会開催番号
          * @return builder
          */
-        @Override
-        public Builder setShinsakaiKaisaiNo(int shinsakaiKaisaiNo) {
+        public Builder setShinsakaiKaisaiNo(RString shinsakaiKaisaiNo) {
             this.entity.setShinsakaiKaisaiNo(shinsakaiKaisaiNo);
             return this;
         }

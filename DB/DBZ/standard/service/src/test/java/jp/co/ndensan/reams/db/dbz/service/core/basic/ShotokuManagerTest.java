@@ -9,23 +9,22 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.Shotoku;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuKanriEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2008ShotokuDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -51,33 +50,26 @@ public class ShotokuManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            ShikibetsuCode 主キー2 = DbT2008ShotokuEntityGenerator.DEFAULT_識別コード;
-            Decimal 主キー3 = DbT2008ShotokuEntityGenerator.DEFAULT_履歴番号;
+            ShikibetsuCode 主キー2 = DbT2008ShotokuKanriEntityGenerator.DEFAULT_識別コード;
+            int 主キー3 = DbT2008ShotokuKanriEntityGenerator.DEFAULT_履歴番号;
             sut.get介護所得(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            FlexibleYear 主キー1 = DbT2008ShotokuEntityGenerator.DEFAULT_所得年度;
-            Decimal 主キー3 = DbT2008ShotokuEntityGenerator.DEFAULT_履歴番号;
+            FlexibleYear 主キー1 = DbT2008ShotokuKanriEntityGenerator.DEFAULT_所得年度;
+            int 主キー3 = DbT2008ShotokuKanriEntityGenerator.DEFAULT_履歴番号;
             sut.get介護所得(主キー1, null, 主キー3);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
-            FlexibleYear 主キー1 = DbT2008ShotokuEntityGenerator.DEFAULT_所得年度;
-            ShikibetsuCode 主キー2 = DbT2008ShotokuEntityGenerator.DEFAULT_識別コード;
-            sut.get介護所得(主キー1, 主キー2, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(FlexibleYear.class), any(ShikibetsuCode.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(FlexibleYear.class), any(ShikibetsuCode.class), any(int.class))).thenReturn(null);
 
-            FlexibleYear 主キー1 = DbT2008ShotokuEntityGenerator.DEFAULT_所得年度;
-            ShikibetsuCode 主キー2 = DbT2008ShotokuEntityGenerator.DEFAULT_識別コード;
-            Decimal 主キー3 = DbT2008ShotokuEntityGenerator.DEFAULT_履歴番号;
+            FlexibleYear 主キー1 = DbT2008ShotokuKanriEntityGenerator.DEFAULT_所得年度;
+            ShikibetsuCode 主キー2 = DbT2008ShotokuKanriEntityGenerator.DEFAULT_識別コード;
+            int 主キー3 = DbT2008ShotokuKanriEntityGenerator.DEFAULT_履歴番号;
             Shotoku result = sut.get介護所得(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
@@ -85,15 +77,15 @@ public class ShotokuManagerTest {
 
         @Test
         public void 検索結果が存在する場合() {
-            DbT2008ShotokuEntity entity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
-            when(dac.selectByKey(any(FlexibleYear.class), any(ShikibetsuCode.class), any(Decimal.class))).thenReturn(entity);
+            DbT2008ShotokuKanriEntity entity = DbT2008ShotokuKanriEntityGenerator.createDbT2008ShotokuKanriEntity();
+            when(dac.selectByKey(any(FlexibleYear.class), any(ShikibetsuCode.class), any(int.class))).thenReturn(entity);
 
-            FlexibleYear 主キー1 = DbT2008ShotokuEntityGenerator.DEFAULT_所得年度;
-            ShikibetsuCode 主キー2 = DbT2008ShotokuEntityGenerator.DEFAULT_識別コード;
-            Decimal 主キー3 = DbT2008ShotokuEntityGenerator.DEFAULT_履歴番号;
+            FlexibleYear 主キー1 = DbT2008ShotokuKanriEntityGenerator.DEFAULT_所得年度;
+            ShikibetsuCode 主キー2 = DbT2008ShotokuKanriEntityGenerator.DEFAULT_識別コード;
+            int 主キー3 = DbT2008ShotokuKanriEntityGenerator.DEFAULT_履歴番号;
             Shotoku result = sut.get介護所得(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get所得年度().toDateString(), is(DbT2008ShotokuEntityGenerator.DEFAULT_所得年度.toDateString()));
+            assertThat(result.get所得年度().toDateString(), is(DbT2008ShotokuKanriEntityGenerator.DEFAULT_所得年度.toDateString()));
         }
     }
 
@@ -111,13 +103,13 @@ public class ShotokuManagerTest {
 
         @Test
         public void 検索結果が存在する場合() {
-            List<DbT2008ShotokuEntity> entityList = Arrays.asList(DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity());
+            List<DbT2008ShotokuKanriEntity> entityList = Arrays.asList(DbT2008ShotokuKanriEntityGenerator.createDbT2008ShotokuKanriEntity());
             when(dac.selectAll()).thenReturn(entityList);
 
             List<Shotoku> result = sut.get介護所得一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get所得年度().toDateString(), is(DbT2008ShotokuEntityGenerator.DEFAULT_所得年度.toDateString()));
+            assertThat(result.get(0).get所得年度().toDateString(), is(DbT2008ShotokuKanriEntityGenerator.DEFAULT_所得年度.toDateString()));
         }
     }
 
@@ -125,9 +117,9 @@ public class ShotokuManagerTest {
 
         @Test
         public void insertに成功するとtrueが返る() {
-            when(dac.save(any(DbT2008ShotokuEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT2008ShotokuKanriEntity.class))).thenReturn(1);
 
-            DbT2008ShotokuEntity entity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
+            DbT2008ShotokuKanriEntity entity = DbT2008ShotokuKanriEntityGenerator.createDbT2008ShotokuKanriEntity();
             Shotoku 介護所得 = new Shotoku(entity);
 
             assertThat(sut.save介護所得(介護所得), is(true));
@@ -135,9 +127,9 @@ public class ShotokuManagerTest {
 
         @Test
         public void insertに失敗するとfalseが返る() {
-            when(dac.save(any(DbT2008ShotokuEntity.class))).thenReturn(0);
+            when(dac.save(any(DbT2008ShotokuKanriEntity.class))).thenReturn(0);
 
-            DbT2008ShotokuEntity entity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
+            DbT2008ShotokuKanriEntity entity = DbT2008ShotokuKanriEntityGenerator.createDbT2008ShotokuKanriEntity();
             Shotoku 介護所得 = new Shotoku(entity);
 
             assertThat(sut.save介護所得(介護所得), is(false));
@@ -145,9 +137,9 @@ public class ShotokuManagerTest {
 
         @Test
         public void updateに成功するとtrueが返る() {
-            when(dac.save(any(DbT2008ShotokuEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT2008ShotokuKanriEntity.class))).thenReturn(1);
 
-            DbT2008ShotokuEntity entity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
+            DbT2008ShotokuKanriEntity entity = DbT2008ShotokuKanriEntityGenerator.createDbT2008ShotokuKanriEntity();
             entity.initializeMd5();
             Shotoku 介護所得 = new Shotoku(entity);
             介護所得 = 介護所得.createBuilderForEdit().set合計所得金額(new Decimal(10000)).build();
@@ -157,9 +149,9 @@ public class ShotokuManagerTest {
 
         @Test
         public void updateに失敗するとfalseが返る() {
-            when(dac.save(any(DbT2008ShotokuEntity.class))).thenReturn(0);
+            when(dac.save(any(DbT2008ShotokuKanriEntity.class))).thenReturn(0);
 
-            DbT2008ShotokuEntity entity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
+            DbT2008ShotokuKanriEntity entity = DbT2008ShotokuKanriEntityGenerator.createDbT2008ShotokuKanriEntity();
             entity.initializeMd5();
             Shotoku 介護所得 = new Shotoku(entity);
             介護所得 = 介護所得.createBuilderForEdit().set合計所得金額(new Decimal(10000)).build();
@@ -169,9 +161,9 @@ public class ShotokuManagerTest {
 
         @Test
         public void deleteに成功するとtrueが返る() {
-            when(dac.save(any(DbT2008ShotokuEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT2008ShotokuKanriEntity.class))).thenReturn(1);
 
-            DbT2008ShotokuEntity entity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
+            DbT2008ShotokuKanriEntity entity = DbT2008ShotokuKanriEntityGenerator.createDbT2008ShotokuKanriEntity();
             entity.initializeMd5();
             Shotoku 介護所得 = new Shotoku(entity);
             介護所得 = 介護所得.deleted();
@@ -181,9 +173,9 @@ public class ShotokuManagerTest {
 
         @Test
         public void deleteに失敗するとfalseが返る() {
-            when(dac.save(any(DbT2008ShotokuEntity.class))).thenReturn(0);
+            when(dac.save(any(DbT2008ShotokuKanriEntity.class))).thenReturn(0);
 
-            DbT2008ShotokuEntity entity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
+            DbT2008ShotokuKanriEntity entity = DbT2008ShotokuKanriEntityGenerator.createDbT2008ShotokuKanriEntity();
             entity.initializeMd5();
             Shotoku 介護所得 = new Shotoku(entity);
             介護所得 = 介護所得.deleted();
@@ -192,7 +184,7 @@ public class ShotokuManagerTest {
         }
 
         public void 何も変更せずにsaveを呼び出すとfalseが返る() {
-            DbT2008ShotokuEntity entity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
+            DbT2008ShotokuKanriEntity entity = DbT2008ShotokuKanriEntityGenerator.createDbT2008ShotokuKanriEntity();
             entity.initializeMd5();
             Shotoku 介護所得 = new Shotoku(entity);
 

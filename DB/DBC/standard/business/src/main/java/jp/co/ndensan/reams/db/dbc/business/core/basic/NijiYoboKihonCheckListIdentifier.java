@@ -6,11 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import lombok.Value;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import lombok.Value;
 
 /**
  * 二次予防基本チェックリストの識別子です。
@@ -18,24 +16,21 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @Value
 public class NijiYoboKihonCheckListIdentifier implements Serializable {
 
-    private final ShikibetsuCode 識別コード;
     private final HihokenshaNo 被保険者番号;
     private final FlexibleDate 受付年月日;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
 
     /**
      * コンストラクタです。
      *
-     * @param 識別コード 識別コード
      * @param 被保険者番号 被保険者番号
      * @param 受付年月日 受付年月日
      * @param 履歴番号 履歴番号
      */
-    public NijiYoboKihonCheckListIdentifier(ShikibetsuCode 識別コード,
+    public NijiYoboKihonCheckListIdentifier(
             HihokenshaNo 被保険者番号,
             FlexibleDate 受付年月日,
-            Decimal 履歴番号) {
-        this.識別コード = 識別コード;
+            int 履歴番号) {
         this.被保険者番号 = 被保険者番号;
         this.受付年月日 = 受付年月日;
         this.履歴番号 = 履歴番号;

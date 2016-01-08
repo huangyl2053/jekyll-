@@ -7,9 +7,8 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakushaEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -53,18 +52,6 @@ public class ShokanJuryoininKeiyakushaBuilder {
     }
 
     /**
-     * 証記載保険者番号を設定します。
-     *
-     * @param 証記載保険者番号 証記載保険者番号
-     * @return {@link ShokanJuryoininKeiyakushaBuilder}
-     */
-    public ShokanJuryoininKeiyakushaBuilder set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
-        return this;
-    }
-
-    /**
      * 受付年月日を設定します。
      *
      * @param 受付年月日 受付年月日
@@ -73,18 +60,6 @@ public class ShokanJuryoininKeiyakushaBuilder {
     public ShokanJuryoininKeiyakushaBuilder set受付年月日(FlexibleDate 受付年月日) {
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
         entity.setUketsukeYMD(受付年月日);
-        return this;
-    }
-
-    /**
-     * 履歴番号を設定します。
-     *
-     * @param 履歴番号 履歴番号
-     * @return {@link ShokanJuryoininKeiyakushaBuilder}
-     */
-    public ShokanJuryoininKeiyakushaBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
         return this;
     }
 
@@ -101,14 +76,14 @@ public class ShokanJuryoininKeiyakushaBuilder {
     }
 
     /**
-     * 事業者契約番号を設定します。
+     * 契約事業者番号を設定します。
      *
-     * @param 事業者契約番号 事業者契約番号
+     * @param 契約事業者番号 契約事業者番号
      * @return {@link ShokanJuryoininKeiyakushaBuilder}
      */
-    public ShokanJuryoininKeiyakushaBuilder set事業者契約番号(RString 事業者契約番号) {
-        requireNonNull(事業者契約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者契約番号"));
-        entity.setJigyoshaKeiyakuNo(事業者契約番号);
+    public ShokanJuryoininKeiyakushaBuilder set契約事業者番号(RString 契約事業者番号) {
+        requireNonNull(契約事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("契約事業者番号"));
+        entity.setKeiyakuJigyoshaNo(契約事業者番号);
         return this;
     }
 

@@ -39,7 +39,7 @@ public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102Ninte
     private FlexibleDate nijiHanteiNinteiYukoKaishiYMD;
     private FlexibleDate nijiHanteiNinteiYukoShuryoYMD;
     private FlexibleDate shinsakaiShiryoSakuseiYMD;
-    private int shinsakaiKaisaiNo;
+    private RString shinsakaiKaisaiNo;
     private RString shinsakaiIken;
     private RString ichijiHnateiKekkaHenkoRiyu;
     private Code yokaigoJotaizoReiCode;
@@ -234,7 +234,7 @@ public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102Ninte
      * @return 介護認定審査会開催番号
      */
     @CheckForNull
-    public int getShinsakaiKaisaiNo() {
+    public RString getShinsakaiKaisaiNo() {
         return shinsakaiKaisaiNo;
     }
 
@@ -245,7 +245,7 @@ public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102Ninte
      *
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      */
-    public void setShinsakaiKaisaiNo(int shinsakaiKaisaiNo) {
+    public void setShinsakaiKaisaiNo(RString shinsakaiKaisaiNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
     }
 

@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -40,7 +39,7 @@ public class SaishinsaMoshitateTest extends DbcTestBase {
     private static FlexibleYearMonth 主キー名3;
     private static ServiceShuruiCode 主キー名4;
     private static ServiceKomokuCode 主キー名5;
-    private static Decimal 主キー名6;
+    private static int 主キー名6;
 
     @BeforeClass
     public static void setUpClass() {

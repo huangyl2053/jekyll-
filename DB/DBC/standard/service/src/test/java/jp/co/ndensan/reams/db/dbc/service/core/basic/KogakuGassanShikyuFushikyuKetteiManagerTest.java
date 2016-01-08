@@ -9,9 +9,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyuFushikyuKettei;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3075KogakuGassanKyufuJissekiEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -21,13 +20,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import org.junit.Ignore;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -56,7 +55,7 @@ public class KogakuGassanShikyuFushikyuKetteiManagerTest {
             FlexibleYear 主キー2 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_対象年度;
             HokenshaNo 主キー3 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_保険者番号;
             RString 主キー4 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_支給申請書整理番号;
-            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー5 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_履歴番号;
             sut.get高額合算支給不支給決定(null, 主キー2, 主キー3, 主キー4, 主キー5);
         }
 
@@ -65,7 +64,7 @@ public class KogakuGassanShikyuFushikyuKetteiManagerTest {
             HihokenshaNo 主キー1 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_被保険者番号;
             HokenshaNo 主キー3 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_保険者番号;
             RString 主キー4 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_支給申請書整理番号;
-            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー5 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_履歴番号;
             sut.get高額合算支給不支給決定(主キー1, null, 主キー3, 主キー4, 主キー5);
         }
 
@@ -74,7 +73,7 @@ public class KogakuGassanShikyuFushikyuKetteiManagerTest {
             HihokenshaNo 主キー1 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYear 主キー2 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_対象年度;
             RString 主キー4 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_支給申請書整理番号;
-            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー5 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_履歴番号;
             sut.get高額合算支給不支給決定(主キー1, 主キー2, null, 主キー4, 主キー5);
         }
 
@@ -83,7 +82,7 @@ public class KogakuGassanShikyuFushikyuKetteiManagerTest {
             HihokenshaNo 主キー1 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYear 主キー2 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_対象年度;
             HokenshaNo 主キー3 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_保険者番号;
-            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー5 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_履歴番号;
             sut.get高額合算支給不支給決定(主キー1, 主キー2, 主キー3, null, 主キー5);
         }
 
@@ -105,7 +104,7 @@ public class KogakuGassanShikyuFushikyuKetteiManagerTest {
             FlexibleYear 主キー2 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_対象年度;
             HokenshaNo 主キー3 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_保険者番号;
             RString 主キー4 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_支給申請書整理番号;
-            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー5 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_履歴番号;
             KogakuGassanShikyuFushikyuKettei result = sut.get高額合算支給不支給決定(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
             assertThat(result, is(nullValue()));
@@ -120,7 +119,7 @@ public class KogakuGassanShikyuFushikyuKetteiManagerTest {
             FlexibleYear 主キー2 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_対象年度;
             HokenshaNo 主キー3 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_保険者番号;
             RString 主キー4 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_支給申請書整理番号;
-            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー5 = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_履歴番号;
             KogakuGassanShikyuFushikyuKettei result = sut.get高額合算支給不支給決定(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
             assertThat(result.get被保険者番号().value(), is(DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_被保険者番号.value()));

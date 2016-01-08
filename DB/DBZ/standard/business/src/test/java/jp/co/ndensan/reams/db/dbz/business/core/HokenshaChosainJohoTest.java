@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.business.core.HokenshaChosainJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4913ChosainJohoEntityGenerator;
@@ -49,12 +48,12 @@ public class HokenshaChosainJohoTest extends DbdTestBase {
 
         @Test
         public void 引数に認定調査委託先コードを設定した場合_get認定調査委託先コードは_認定調査委託先コードと同じ認定調査委託先コードを返す() {
-            assertThat(sut.get認定調査委託先コード(), is(DbT4913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード));
+            assertThat(sut.get認定調査委託先コード().getColumnValue(), is(DbT4913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード));
         }
 
         @Test
         public void 引数に認定調査員コードを設定した場合_get認定調査員コードは認定調査員コードと同じ認定調査員コードを返す() {
-            assertThat(sut.get認定調査員コード(), is(DbT4913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード));
+            assertThat(sut.get認定調査員コード().getColumnValue(), is(DbT4913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード));
         }
 
         @Test
@@ -125,13 +124,13 @@ public class HokenshaChosainJohoTest extends DbdTestBase {
         @Test
         public void setNinteichosaItakusakiCodeで設定した値を＿生成されたChosainJohoJukyuも保持する() {
             HokenshaChosainJoho result = HokenshaChosainJoho.newBuilder().setNinteichosaItakusakiCode(new ChosaItakusakiCode("1234567890")).build();
-            assertThat(result.get認定調査委託先コード(), is(DbT4913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード));
+            assertThat(result.get認定調査委託先コード().getColumnValue(), is(DbT4913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード));
         }
 
         @Test
         public void setNinteiChosainNoで設定した値を＿生成されたChosainJohoJukyuも保持する() {
             HokenshaChosainJoho result = HokenshaChosainJoho.newBuilder().setNinteiChosainNo(new ChosainCode("12345678")).build();
-            assertThat(result.get認定調査員コード(), is(DbT4913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード));
+            assertThat(result.get認定調査員コード().getColumnValue(), is(DbT4913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード));
         }
 
         @Test
@@ -196,7 +195,7 @@ public class HokenshaChosainJohoTest extends DbdTestBase {
 
         @Test
         public void setJokyoFlagで設定した値を＿生成されたChosainJohoJukyuも保持する() {
-            HokenshaChosainJoho result = HokenshaChosainJoho.newBuilder().setJokyoFlag(new Boolean(true)).build();
+            HokenshaChosainJoho result = HokenshaChosainJoho.newBuilder().setJokyoFlag(true).build();
             assertThat(result.has状況フラグ(), is(DbT4913ChosainJohoEntityGenerator.DEFAULT_状況フラグ));
         }
     }

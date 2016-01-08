@@ -6,12 +6,12 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyosha.rirekiNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7114UwanoseServiceShuruiShikyuGendoGaku.yoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7118SogoJigyoShuruiShikyuGendoGaku;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7118SogoJigyoShuruiShikyuGendoGaku.rirekiNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7118SogoJigyoShuruiShikyuGendoGaku.serviceShuruiCode;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7118SogoJigyoShuruiShikyuGendoGaku.tekiyoKaishiYM;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7118SogoJigyoShuruiShikyuGendoGaku.yoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7118SogoJigyoShuruiShikyuGendoGakuEntity;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7119ServiceCode.serviceShuruiCode;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7119ServiceCode.tekiyoKaishiYM;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

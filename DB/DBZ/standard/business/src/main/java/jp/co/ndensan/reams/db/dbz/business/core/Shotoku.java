@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -20,9 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護所得を管理するクラスです。
  */
-public class Shotoku extends ModelBase<ShotokuIdentifier, DbT2008ShotokuEntity, Shotoku> implements Serializable {
+public class Shotoku extends ModelBase<ShotokuIdentifier, DbT2008ShotokuKanriEntity, Shotoku> implements Serializable {
 
-    private final DbT2008ShotokuEntity entity;
+    private final DbT2008ShotokuKanriEntity entity;
     private final ShotokuIdentifier id;
 
     /**
@@ -35,11 +35,11 @@ public class Shotoku extends ModelBase<ShotokuIdentifier, DbT2008ShotokuEntity, 
      */
     public Shotoku(FlexibleYear 所得年度,
             ShikibetsuCode 識別コード,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage("所得年度"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        this.entity = new DbT2008ShotokuEntity();
+        this.entity = new DbT2008ShotokuKanriEntity();
         this.entity.setShotokuNendo(所得年度);
         this.entity.setShikibetsuCode(識別コード);
         this.entity.setRirekiNo(履歴番号);
@@ -52,11 +52,11 @@ public class Shotoku extends ModelBase<ShotokuIdentifier, DbT2008ShotokuEntity, 
 
     /**
      * コンストラクタです。<br/>
-     * DBより取得した{@link DbT2008ShotokuEntity}より{@link Shotoku}を生成します。
+     * DBより取得した{@link DbT2008ShotokuKanriEntity}より{@link Shotoku}を生成します。
      *
-     * @param entity DBより取得した{@link DbT2008ShotokuEntity}
+     * @param entity DBより取得した{@link DbT2008ShotokuKanriEntity}
      */
-    public Shotoku(DbT2008ShotokuEntity entity) {
+    public Shotoku(DbT2008ShotokuKanriEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護所得"));
         this.id = new ShotokuIdentifier(
                 entity.getShotokuNendo(),
@@ -67,11 +67,11 @@ public class Shotoku extends ModelBase<ShotokuIdentifier, DbT2008ShotokuEntity, 
     /**
      * シリアライズ、ビルダー用コンストラクタです。
      *
-     * @param entity {@link DbT2008ShotokuEntity}
+     * @param entity {@link DbT2008ShotokuKanriEntity}
      * @param id {@link ShotokuIdentifier}
      */
     Shotoku(
-            DbT2008ShotokuEntity entity,
+            DbT2008ShotokuKanriEntity entity,
             ShotokuIdentifier id
     ) {
         this.entity = entity;
@@ -102,7 +102,7 @@ public class Shotoku extends ModelBase<ShotokuIdentifier, DbT2008ShotokuEntity, 
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -112,7 +112,7 @@ public class Shotoku extends ModelBase<ShotokuIdentifier, DbT2008ShotokuEntity, 
      * @return 非課税区分（住民税減免前）
      */
     public RString get非課税区分_住民税減免前() {
-        return entity.getHiKazeiKubun();
+        return entity.getKazeiKubun();
     }
 
     /**
@@ -121,7 +121,7 @@ public class Shotoku extends ModelBase<ShotokuIdentifier, DbT2008ShotokuEntity, 
      * @return 非課税区分（住民税減免後）
      */
     public RString get非課税区分_住民税減免後() {
-        return entity.getHiKazeiKubunGemmenGo();
+        return entity.getKazeiKubun();
     }
 
     /**
@@ -152,12 +152,12 @@ public class Shotoku extends ModelBase<ShotokuIdentifier, DbT2008ShotokuEntity, 
     }
 
     /**
-     * {@link DbT2008ShotokuEntity}のクローンを返します。
+     * {@link DbT2008ShotokuKanriEntity}のクローンを返します。
      *
-     * @return {@link DbT2008ShotokuEntity}のクローン
+     * @return {@link DbT2008ShotokuKanriEntity}のクローン
      */
     @Override
-    public DbT2008ShotokuEntity toEntity() {
+    public DbT2008ShotokuKanriEntity toEntity() {
         return this.entity.clone();
     }
 
@@ -172,14 +172,13 @@ public class Shotoku extends ModelBase<ShotokuIdentifier, DbT2008ShotokuEntity, 
     }
 
     /**
-     * 保持する介護所得を削除対象とします。<br/>
-     * {@link DbT2008ShotokuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護所得を削除対象とします。<br/> {@link DbT2008ShotokuKanriEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link Shotoku}
      */
     @Override
     public Shotoku deleted() {
-        DbT2008ShotokuEntity deletedEntity = this.toEntity();
+        DbT2008ShotokuKanriEntity deletedEntity = this.toEntity();
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
@@ -208,10 +207,10 @@ public class Shotoku extends ModelBase<ShotokuIdentifier, DbT2008ShotokuEntity, 
 
         private static final long serialVersionUID = 1L;
 
-        private final DbT2008ShotokuEntity entity;
+        private final DbT2008ShotokuKanriEntity entity;
         private final ShotokuIdentifier id;
 
-        private _SerializationProxy(DbT2008ShotokuEntity entity, ShotokuIdentifier id) {
+        private _SerializationProxy(DbT2008ShotokuKanriEntity entity, ShotokuIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

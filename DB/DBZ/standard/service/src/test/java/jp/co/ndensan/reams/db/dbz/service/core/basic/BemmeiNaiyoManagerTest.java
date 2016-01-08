@@ -8,11 +8,10 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.BemmeiNaiyo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.BemmeiNaiyo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7002BemmeiNaiyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7002BemmeiNaiyoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -53,24 +52,23 @@ public class BemmeiNaiyoManagerTest {
         @Test(expected = NullPointerException.class)
         public void 引数のShoKisaiHokenshaNoにnullを指定した場合_NullPointerExceptionが発生する() {
             ShikibetsuCode 主キー2 = DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_識別コード;
-            sut.get弁明内容(null, 主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
+            sut.get弁明内容(主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数のShikibetsuCodeにnullを指定した場合_NullPointerExceptionが発生する() {
-            ShoKisaiHokenshaNo 主キー1 = DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_証記載保険者番号;
-            sut.get弁明内容(主キー1, null, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
+//            ShoKisaiHokenshaNo 主キー1 = DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_証記載保険者番号;
+//            sut.get弁明内容(主キー1, null, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(ShoKisaiHokenshaNo.class), any(ShikibetsuCode.class),
+            when(dac.selectByKey(any(ShikibetsuCode.class),
                     any(HihokenshaNo.class), any(FlexibleDate.class), any(FlexibleDate.class))).thenReturn(null);
 
-            ShoKisaiHokenshaNo 主キー1 = DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_証記載保険者番号;
             ShikibetsuCode 主キー2 = DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_識別コード;
-            BemmeiNaiyo result = sut.get弁明内容(主キー1, 主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
+            BemmeiNaiyo result = sut.get弁明内容(主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
 
             assertThat(result, is(nullValue()));
         }
@@ -78,14 +76,13 @@ public class BemmeiNaiyoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT7002BemmeiNaiyoEntity entity = DbT7002BemmeiNaiyoEntityGenerator.createDbT7002BemmeiNaiyoEntity();
-            when(dac.selectByKey(any(ShoKisaiHokenshaNo.class), any(ShikibetsuCode.class),
+            when(dac.selectByKey(any(ShikibetsuCode.class),
                     any(HihokenshaNo.class), any(FlexibleDate.class), any(FlexibleDate.class))).thenReturn(entity);
 
-            ShoKisaiHokenshaNo 主キー1 = DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_証記載保険者番号;
             ShikibetsuCode 主キー2 = DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_識別コード;
-            BemmeiNaiyo result = sut.get弁明内容(主キー1, 主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
+            BemmeiNaiyo result = sut.get弁明内容(主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
 
-            assertThat(result.get証記載保険者番号().value(), is(DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_証記載保険者番号.value()));
+            assertThat(result.get識別コード().value(), is(DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_識別コード.value()));
         }
     }
 
@@ -109,7 +106,7 @@ public class BemmeiNaiyoManagerTest {
             List<BemmeiNaiyo> result = sut.get弁明内容一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get証記載保険者番号().value(), is(DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_証記載保険者番号.value()));
+            assertThat(result.get(0).get識別コード().value(), is(DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_識別コード.value()));
         }
     }
 

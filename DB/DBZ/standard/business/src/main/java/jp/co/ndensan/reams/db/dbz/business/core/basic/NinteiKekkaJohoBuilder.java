@@ -25,7 +25,7 @@ public class NinteiKekkaJohoBuilder {
      * @param id {@link NinteiKekkaJohoIdentifier}
      *
      */
-    NinteiKekkaJohoBuilder(
+    public NinteiKekkaJohoBuilder(
             DbT5102NinteiKekkaJohoEntity entity,
             NinteiKekkaJohoIdentifier id
     ) {

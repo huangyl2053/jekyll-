@@ -52,14 +52,14 @@ public class KoseiShichosonJohoFinderTest {
         @Test
         public void get全市町村情報は_dacのselectZenShichosonJohoContainingKyuShichosonと同じsizeのListを返す() {
             list = entities();
-            Mockito.when(dac.selectZenShichosonJohoContainingKyuShichoson()).thenReturn(list);
+            Mockito.when(dac.zenShichosonJoho()).thenReturn(list);
             assertThat(sut.get全市町村情報().size(), is(entities().size()));
         }
 
         @Test
         public void get全市町村情報は_dacのselectZenShichosonJohoContainingKyuShichosonが空のListを返す時_空のListを返す() {
             list = Collections.emptyList();
-            Mockito.when(dac.selectZenShichosonJohoContainingKyuShichoson()).thenReturn(list);
+            Mockito.when(dac.zenShichosonJoho()).thenReturn(list);
             assertThat(sut.get全市町村情報().isEmpty(), is(true));
         }
     }
@@ -86,14 +86,14 @@ public class KoseiShichosonJohoFinderTest {
         @Test
         public void get現市町村情報は_dacのselectPresenceShichosonJohoと同じsizeのListを返す() {
             list = entities();
-            Mockito.when(dac.selectPresenceShichosonJoho()).thenReturn(list);
+            Mockito.when(dac.genShichosonJoho()).thenReturn(list);
             assertThat(sut.get現市町村情報().size(), is(entities().size()));
         }
 
         @Test
         public void get現市町村情報は_dacのselectPresenceShichosonJohoが空のListを返す時_空のListを返す() {
             list = Collections.emptyList();
-            Mockito.when(dac.selectPresenceShichosonJoho()).thenReturn(list);
+            Mockito.when(dac.genShichosonJoho()).thenReturn(list);
             assertThat(sut.get現市町村情報().isEmpty(), is(true));
         }
 

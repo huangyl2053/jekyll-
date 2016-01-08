@@ -6,10 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import lombok.Value;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import lombok.Value;
 
 /**
  * 高額受領委任契約事業者の識別子です。
@@ -19,7 +18,7 @@ public class KogakuJuryoininKeiyakuJigyoshaIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;
     private final FlexibleDate 受付年月日;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
 
     /**
      * コンストラクタです。
@@ -30,7 +29,7 @@ public class KogakuJuryoininKeiyakuJigyoshaIdentifier implements Serializable {
      */
     public KogakuJuryoininKeiyakuJigyoshaIdentifier(HihokenshaNo 被保険者番号,
             FlexibleDate 受付年月日,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         this.被保険者番号 = 被保険者番号;
         this.受付年月日 = 受付年月日;
         this.履歴番号 = 履歴番号;

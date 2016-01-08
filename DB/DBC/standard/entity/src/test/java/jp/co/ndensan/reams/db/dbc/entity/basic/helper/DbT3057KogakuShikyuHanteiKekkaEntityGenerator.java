@@ -48,8 +48,8 @@ public final class DbT3057KogakuShikyuHanteiKekkaEntityGenerator {
         entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setKetteiYMD(DEFAULT_決定年月日);
         entity.setHonninShiharaiGaku(DEFAULT_本人支払額);
-        entity.setShikyuKubunCode(DEFAULT_支給区分コード);
-        entity.setShikyuKingaku(DEFAULT_支給金額);
+        entity.setShiharaiKubunCode(DEFAULT_支給区分コード);
+        entity.setShiharaiKingaku(DEFAULT_支給金額);
         entity.setFushikyuRiyu(DEFAULT_不支給理由);
         entity.setShinsaHohoKubun(DEFAULT_審査方法区分);
         entity.setHanteiKekkaSofuYM(DEFAULT_判定結果送付年月);

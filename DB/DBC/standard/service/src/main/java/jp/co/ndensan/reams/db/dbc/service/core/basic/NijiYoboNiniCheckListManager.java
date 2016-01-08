@@ -13,9 +13,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3102NijiYoboNiniCheckListEn
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3102NijiYoboNiniCheckListDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -45,7 +43,6 @@ public class NijiYoboNiniCheckListManager {
     /**
      * 主キーに合致する二次予防任意チェックリストを返します。
      *
-     * @param 識別コード ShikibetsuCode
      * @param 被保険者番号 HihokenshaNo
      * @param 受付年月日 UketsukeYMD
      * @param 任意質問番号 NiniShitsumonNo
@@ -54,19 +51,16 @@ public class NijiYoboNiniCheckListManager {
      */
     @Transaction
     public NijiYoboNiniCheckList get二次予防任意チェックリスト(
-            ShikibetsuCode 識別コード,
             HihokenshaNo 被保険者番号,
             FlexibleDate 受付年月日,
-            Decimal 任意質問番号,
-            Decimal 履歴番号) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+            int 任意質問番号,
+            int 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
         requireNonNull(任意質問番号, UrSystemErrorMessages.値がnull.getReplacedMessage("任意質問番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbT3102NijiYoboNiniCheckListEntity entity = dac.selectByKey(
-                識別コード,
                 被保険者番号,
                 受付年月日,
                 任意質問番号,

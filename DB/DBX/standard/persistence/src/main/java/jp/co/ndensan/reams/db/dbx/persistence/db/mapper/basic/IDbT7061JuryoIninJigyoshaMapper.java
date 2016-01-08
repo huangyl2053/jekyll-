@@ -5,19 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic;
 
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntity;
 
 /**
  *
  * @author LDNS 燕京
  */
-public interface IDbT7061JuryoIninKeiyakuJigyoshaMapper {
+public interface IDbT7061JuryoIninJigyoshaMapper {
 
     /**
-     * {@link DbT7061JuryoIninKeiyakuJigyoshaEntity}を取得します。
+     * {@link DbT7061JuryoIninJigyoshaEntity}を取得します。
      *
-     * @return {@link DbT7061JuryoIninKeiyakuJigyoshaEntity}
+     * @return {@link DbT7061JuryoIninJigyoshaEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
-    DbT7061JuryoIninKeiyakuJigyoshaEntity getEntity();
+    DbT7061JuryoIninJigyoshaEntity getEntity();
 }

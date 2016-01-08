@@ -12,10 +12,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakushaEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3078ShokanJuryoininKeiyakushaDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -46,27 +45,27 @@ public class ShokanJuryoininKeiyakushaManager {
      * 主キーに合致する償還受領委任契約者を返します。
      *
      * @param 被保険者番号 HihokenshaNo
-     * @param 証記載保険者番号 ShoKisaiHokenshaNo
-     * @param 受付年月日 UketsukeYMD
-     * @param 履歴番号 RirekiNo
+     * @param 申請年月日 ShinseiYMD
+     * @param 契約事業者番号 KeiyakuJigyoshaNo
+     * @param 契約サービス種類 KeiyakuServiceShurui
      * @return ShokanJuryoininKeiyakusha
      */
     @Transaction
     public ShokanJuryoininKeiyakusha get償還受領委任契約者(
             HihokenshaNo 被保険者番号,
-            ShoKisaiHokenshaNo 証記載保険者番号,
-            FlexibleDate 受付年月日,
-            Decimal 履歴番号) {
+            FlexibleDate 申請年月日,
+            RString 契約事業者番号,
+            RString 契約サービス種類) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(契約事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+        requireNonNull(申請年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
+        requireNonNull(契約サービス種類, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbT3078ShokanJuryoininKeiyakushaEntity entity = dac.selectByKey(
                 被保険者番号,
-                証記載保険者番号,
-                受付年月日,
-                履歴番号);
+                申請年月日,
+                契約事業者番号,
+                契約サービス種類);
         if (entity == null) {
             return null;
         }

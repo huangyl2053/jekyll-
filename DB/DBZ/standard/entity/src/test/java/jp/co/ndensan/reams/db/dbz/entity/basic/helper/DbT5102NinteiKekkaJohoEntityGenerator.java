@@ -21,7 +21,7 @@ public final class DbT5102NinteiKekkaJohoEntityGenerator {
     public static final int DEFAULT_二次判定認定有効期間 = 1;
     public static final FlexibleDate DEFAULT_二次判定認定有効開始年月日 = new FlexibleDate("20141030");
     public static final FlexibleDate DEFAULT_二次判定認定有効終了年月日 = new FlexibleDate("20141030");
-    public static final int DEFAULT_介護認定審査会開催番号 = 1;
+    public static final RString DEFAULT_介護認定審査会開催番号 = new RString("1");
     public static final RString DEFAULT_介護認定審査会意見 = new RString("名称");
     public static final RString DEFAULT_一次判定結果変更理由 = new RString("名称");
     public static final Code DEFAULT_要介護状態像例コード = new Code("01");
