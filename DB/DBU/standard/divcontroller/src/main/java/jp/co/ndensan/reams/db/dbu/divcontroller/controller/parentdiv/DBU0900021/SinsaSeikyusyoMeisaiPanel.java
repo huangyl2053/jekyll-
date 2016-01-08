@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.divcontroller.controller.dbu0900021;
+package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0900021;
 
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900021.DBU0900021StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900021.DBU0900021TransitionEventName;
