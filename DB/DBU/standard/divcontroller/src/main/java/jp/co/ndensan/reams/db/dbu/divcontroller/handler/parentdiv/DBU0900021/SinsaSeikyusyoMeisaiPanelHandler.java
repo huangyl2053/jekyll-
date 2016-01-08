@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0900021;
+package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0900021;
 
 import java.util.ArrayList;
 import java.util.List;
