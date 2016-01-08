@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class SinsaSeikyusyoMeisaiPanelHandler {
 
     private final SinsaSeikyusyoMeisaiPanelDiv div;
+    private static final RString 無し = new RString("key1");
+    private static final RString 有り = new RString("key0");
 
     /**
      * コンストラクタです。
@@ -41,7 +43,7 @@ public class SinsaSeikyusyoMeisaiPanelHandler {
      */
     public void 追加_初期化の編集() {
 
-        div.getRadTenpuShorui().setSelectedKey(new RString("key1"));
+        div.getRadTenpuShorui().setSelectedKey(無し);
         div.getSinsaSeikyuninJohoPanel().getDdlHihokenyakanko().setDataSource(get被保険者との関係ドロップダウンリスト());
         div.getSyobunJohoPanel().getDdlShobuShurui().setDataSource(get処分種類コードドロップダウンリスト());
     }
@@ -49,7 +51,7 @@ public class SinsaSeikyusyoMeisaiPanelHandler {
     /**
      * 審査請求書登録の初期化。(修正)
      *
-     * @param fufukuMoshitate 審査請求書登録明細情報
+     * @param fufukuMoshitate 不服審査申立情報
      */
     public void 修正_初期化の編集(FufukuMoshitate fufukuMoshitate) {
 
@@ -57,9 +59,37 @@ public class SinsaSeikyusyoMeisaiPanelHandler {
     }
 
     /**
+     * 明細画面に入力した内容を破棄して。
+     *
+     *
+     */
+    public void 内容の破棄() {
+
+        div.getMeisaiPanel().getTxtdateTodokedebi().clearValue();
+        div.getSinsaSeikyuninJohoPanel().getTxtYubinNo().clearValue();
+        div.getSinsaSeikyuninJohoPanel().getTxtJusho().clearDomain();
+        div.getSinsaSeikyuninJohoPanel().getTxtShinsaSeikyuJinShimei().clearDomain();
+        div.getSinsaSeikyuninJohoPanel().getTxtTelNo().clearDomain();
+        div.getSinsaSeikyuninJohoPanel().getDdlHihokenyakanko().setSelectedKey(RString.EMPTY);
+        div.getSinsaSeikyuninJohoPanel().getTxtHihokensyatonokanken().clearValue();
+        div.getDaiiniJohoPanel().getTxtDairiYubinNo().clearValue();
+        div.getDaiiniJohoPanel().getTxtDairiJusho().clearDomain();
+        div.getDaiiniJohoPanel().getTxtDairiJinJohoShimei().clearDomain();
+        div.getDaiiniJohoPanel().getTxtDairiTelNo().clearDomain();
+        div.getSyobunJohoPanel().getTxtShobubi().clearValue();
+        div.getSyobunJohoPanel().getTxtShobucho().clearValue();
+        div.getSyobunJohoPanel().getDdlShobuShurui().setSelectedKey(RString.EMPTY);
+        div.getSyobunJohoPanel().getTxtShobuShitaNichi().clearValue();
+        div.getMeisaiPanel().getTxtShinsaSeikyuRiyu().clearValue();
+        div.getMeisaiPanel().getTxtKyoshiNaiyo().clearValue();
+        div.getRadTenpuShorui().setSelectedKey(無し);
+        div.getTxtShinsaSeikyuTorisage().clearValue();
+    }
+
+    /**
      * 審査請求書登録の初期化。(削除)
      *
-     * @param fufukuMoshitate 審査請求書登録明細情報
+     * @param fufukuMoshitate 不服審査申立情報
      */
     public void 削除_初期化の編集(FufukuMoshitate fufukuMoshitate) {
 
@@ -133,7 +163,7 @@ public class SinsaSeikyusyoMeisaiPanelHandler {
      * 審査請求書登録の編集。
      *
      * @param fufukuMoshitate 不服審査申立情報
-     * @return FufukuMoshitate
+     * @return 不服審査申立情報
      */
     public FufukuMoshitate 審査請求書登録の編集(FufukuMoshitate fufukuMoshitate) {
 
@@ -159,7 +189,7 @@ public class SinsaSeikyusyoMeisaiPanelHandler {
                 ? RString.EMPTY : div.getSyobunJohoPanel().getTxtShobuShitaNichi().getValue().toDateString()));
         fufukuMoshitateBuilder.set審査請求の理由(div.getMeisaiPanel().getTxtShinsaSeikyuRiyu().getValue());
         fufukuMoshitateBuilder.set処分庁教示の有無及び教示の内容(div.getMeisaiPanel().getTxtKyoshiNaiyo().getValue());
-        if (new RString("key0").equals(div.getRadTenpuShorui().getSelectedKey())) {
+        if (有り.equals(div.getRadTenpuShorui().getSelectedKey())) {
             fufukuMoshitateBuilder.set添付書類等(true);
         } else {
             fufukuMoshitateBuilder.set添付書類等(false);
@@ -174,7 +204,7 @@ public class SinsaSeikyusyoMeisaiPanelHandler {
      * 審査請求書更新の編集。
      *
      * @param fufukuMoshitate 不服審査申立情報
-     * @return FufukuMoshitate
+     * @return 不服審査申立情報
      */
     public FufukuMoshitate 審査請求書更新の編集(FufukuMoshitate fufukuMoshitate) {
 
@@ -197,7 +227,7 @@ public class SinsaSeikyusyoMeisaiPanelHandler {
                 ? RString.EMPTY : div.getSyobunJohoPanel().getTxtShobuShitaNichi().getValue().toDateString()));
         fufukuMoshitateBuilder.set審査請求の理由(div.getMeisaiPanel().getTxtShinsaSeikyuRiyu().getValue());
         fufukuMoshitateBuilder.set処分庁教示の有無及び教示の内容(div.getMeisaiPanel().getTxtKyoshiNaiyo().getValue());
-        if (new RString("key0").equals(div.getRadTenpuShorui().getSelectedKey())) {
+        if (有り.equals(div.getRadTenpuShorui().getSelectedKey())) {
             fufukuMoshitateBuilder.set添付書類等(true);
         } else {
             fufukuMoshitateBuilder.set添付書類等(false);
@@ -294,9 +324,9 @@ public class SinsaSeikyusyoMeisaiPanelHandler {
         div.getMeisaiPanel().getTxtShinsaSeikyuRiyu().setValue(nullToEmpty(fufukuMoshitate.get審査請求の理由()));
         div.getMeisaiPanel().getTxtKyoshiNaiyo().setValue(nullToEmpty(fufukuMoshitate.get処分庁教示の有無及び教示の内容()));
         if (fufukuMoshitate.is添付書類等()) {
-            div.getRadTenpuShorui().setSelectedKey(new RString("key0"));
+            div.getRadTenpuShorui().setSelectedKey(有り);
         } else {
-            div.getRadTenpuShorui().setSelectedKey(new RString("key1"));
+            div.getRadTenpuShorui().setSelectedKey(無し);
         }
         if (fufukuMoshitate.get審査請求取下日() != null && !fufukuMoshitate.get審査請求取下日().isEmpty()) {
             div.getTxtShinsaSeikyuTorisage().setValue(new RDate(fufukuMoshitate.get審査請求取下日().toString()));

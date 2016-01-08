@@ -35,6 +35,7 @@ public class SinsaSeikyusyoMeisaiPanel {
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
+    private static final RString 更新 = new RString("更新");
 
     /**
      * 審査請求書登録_登録の初期化。<br/>
@@ -46,7 +47,7 @@ public class SinsaSeikyusyoMeisaiPanel {
 
         ResponseData<SinsaSeikyusyoMeisaiPanelDiv> responseData = new ResponseData<>();
 
-        // TODO:共通DIVが実装不正です。
+        // TODO 共通DIVが実装不正です。
 //        // 宛名基本情報を取得
 //        requestDiv.getAtenaInfoCommonChildDiv().load(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
 //        // 資格系基本情報を取得
@@ -54,6 +55,7 @@ public class SinsaSeikyusyoMeisaiPanel {
         if (追加.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
 
             createHandlerOf(requestDiv).追加_初期化の編集();
+            createHandlerOf(requestDiv).初期画面値の保持();
             return ResponseData.of(requestDiv).setState(DBU0900021StateName.追加);
         }
         if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
@@ -83,40 +85,37 @@ public class SinsaSeikyusyoMeisaiPanel {
      * @return ResponseData<SinsaSeikyusyoMeisaiPanelDiv>
      */
     public ResponseData<SinsaSeikyusyoMeisaiPanelDiv> onClick_btnTorikeshi(SinsaSeikyusyoMeisaiPanelDiv div) {
-        if ((追加.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))) {
-            if (getValidationHandler(div).追加_変更有無チェック()) {
-                if (!ResponseHolder.isReRequest()) {
-                    QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                            UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-                if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                        .equals(ResponseHolder.getMessageCode())
-                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    内容の破棄(div);
-                    return ResponseData.of(div).forwardWithEventName(DBU0900021TransitionEventName.一覧に戻る).respond();
-                }
-            } else {
-
+        if ((追加.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))
+                && getValidationHandler(div).変更有無チェック(createHandlerOf(div).修正後の値())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                createHandlerOf(div).内容の破棄();
                 return ResponseData.of(div).forwardWithEventName(DBU0900021TransitionEventName.一覧に戻る).respond();
             }
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBU0900021TransitionEventName.一覧に戻る).respond();
         }
-        if ((修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))) {
-            if (getValidationHandler(div).修正_変更有無チェック(createHandlerOf(div).修正後の値())) {
-                if (!ResponseHolder.isReRequest()) {
-                    QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                            UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-                if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                        .equals(ResponseHolder.getMessageCode())
-                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    内容の破棄(div);
-                    return ResponseData.of(div).forwardWithEventName(DBU0900021TransitionEventName.一覧に戻る).respond();
-                }
-            } else {
+        if ((修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))
+                && getValidationHandler(div).変更有無チェック(createHandlerOf(div).修正後の値())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                createHandlerOf(div).内容の破棄();
                 return ResponseData.of(div).forwardWithEventName(DBU0900021TransitionEventName.一覧に戻る).respond();
             }
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBU0900021TransitionEventName.一覧に戻る).respond();
         }
         if ((削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))) {
             return ResponseData.of(div).forwardWithEventName(DBU0900021TransitionEventName.一覧に戻る).respond();
@@ -125,7 +124,7 @@ public class SinsaSeikyusyoMeisaiPanel {
     }
 
     /**
-     * 完了するボタン押下、データがDBに更新します。
+     * 完了するボタン押下、メニュー画面へ遷移します。
      *
      * @param div SinsaSeikyusyoMeisaiPanelDiv
      * @return ResponseData<SinsaSeikyusyoMeisaiPanelDiv>
@@ -147,72 +146,49 @@ public class SinsaSeikyusyoMeisaiPanel {
 
             return ResponseData.of(div).addValidationMessages(getValidationHandler(div).validateForUpdate(重複チェック(div))).respond();
         }
-        if (追加.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (追加.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
+                && getValidationHandler(div).変更有無チェック(createHandlerOf(div).修正後の値())) {
 
-            if (getValidationHandler(div).追加_変更有無チェック()) {
-
-                if (!ResponseHolder.isReRequest()) {
-                    QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                            UrQuestionMessages.保存の確認.getMessage().evaluate());
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-                if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
-                        .equals(ResponseHolder.getMessageCode())
-                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-                    FufukuMoshitate fufukuMoshitate = new FufukuMoshitate(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
-                            ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class), new FlexibleDate(div.getMeisaiPanel().getTxtdateTodokedebi().getValue() == null
-                                    ? RString.EMPTY : div.getMeisaiPanel().getTxtdateTodokedebi().getValue().toDateString()));
-                    登録処理(createHandlerOf(div).審査請求書登録の編集(fufukuMoshitate));
-                    div.getCcdKanryoMessage().setSuccessMessage(
-                            new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
-                    return ResponseData.of(div).setState(DBU0900021StateName.完了);
-                }
-            } else {
-
-                if (!ResponseHolder.isReRequest()) {
-                    QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                            UrQuestionMessages.保存の確認.getMessage().evaluate());
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-                if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
-                        .equals(ResponseHolder.getMessageCode())
-                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-                }
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                        UrQuestionMessages.保存の確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
             }
+            if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+
+                FufukuMoshitate fufukuMoshitate = new FufukuMoshitate(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
+                        ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class), new FlexibleDate(div.getMeisaiPanel().getTxtdateTodokedebi().getValue() == null
+                                ? RString.EMPTY : div.getMeisaiPanel().getTxtdateTodokedebi().getValue().toDateString()));
+                登録処理(createHandlerOf(div).審査請求書登録の編集(fufukuMoshitate));
+                div.getCcdKanryoMessage().setSuccessMessage(
+                        new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
+                return ResponseData.of(div).setState(DBU0900021StateName.完了);
+            }
+        } else {
+            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
         }
-        if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
+                && getValidationHandler(div).変更有無チェック(createHandlerOf(div).修正後の値())) {
 
-            if (getValidationHandler(div).修正_変更有無チェック(createHandlerOf(div).修正後の値())) {
-                if (!ResponseHolder.isReRequest()) {
-                    QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                            UrQuestionMessages.保存の確認.getMessage().evaluate());
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-                if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
-                        .equals(ResponseHolder.getMessageCode())
-                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-                    FufukuMoshitate fufukuMoshitate = ViewStateHolder.get(ViewStateKeys.不服審査申立情報, FufukuMoshitate.class);
-                    更新処理(createHandlerOf(div).審査請求書更新の編集(fufukuMoshitate));
-                    div.getCcdKanryoMessage().setSuccessMessage(
-                            new RString(UrInformationMessages.正常終了.getMessage().replace("更新").evaluate()), RString.EMPTY, RString.EMPTY);
-                    return ResponseData.of(div).setState(DBU0900021StateName.完了);
-                }
-            } else {
-
-                if (!ResponseHolder.isReRequest()) {
-                    QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                            UrQuestionMessages.保存の確認.getMessage().evaluate());
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-                if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
-                        .equals(ResponseHolder.getMessageCode())
-                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-                }
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                        UrQuestionMessages.保存の確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
             }
+            if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+
+                FufukuMoshitate fufukuMoshitate = ViewStateHolder.get(ViewStateKeys.不服審査申立情報, FufukuMoshitate.class);
+                更新処理(createHandlerOf(div).審査請求書更新の編集(fufukuMoshitate));
+                div.getCcdKanryoMessage().setSuccessMessage(
+                        new RString(UrInformationMessages.正常終了.getMessage().replace(更新.toString()).evaluate()), RString.EMPTY, RString.EMPTY);
+                return ResponseData.of(div).setState(DBU0900021StateName.完了);
+            }
+        } else {
+            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
         }
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
 
@@ -259,29 +235,6 @@ public class SinsaSeikyusyoMeisaiPanel {
     private void 登録処理(FufukuMoshitate fufukuMoshitate) {
 
         SinsaSeikyusyoTorokuManager.createInstance().intSinsaSeikyusyomeisaiJoho(fufukuMoshitate);
-    }
-
-    private void 内容の破棄(SinsaSeikyusyoMeisaiPanelDiv div) {
-
-        div.getMeisaiPanel().getTxtdateTodokedebi().clearValue();
-        div.getSinsaSeikyuninJohoPanel().getTxtYubinNo().clearValue();
-        div.getSinsaSeikyuninJohoPanel().getTxtJusho().clearDomain();
-        div.getSinsaSeikyuninJohoPanel().getTxtShinsaSeikyuJinShimei().clearDomain();
-        div.getSinsaSeikyuninJohoPanel().getTxtTelNo().clearDomain();
-        div.getSinsaSeikyuninJohoPanel().getDdlHihokenyakanko().setSelectedKey(RString.EMPTY);
-        div.getSinsaSeikyuninJohoPanel().getTxtHihokensyatonokanken().clearValue();
-        div.getDaiiniJohoPanel().getTxtDairiYubinNo().clearValue();
-        div.getDaiiniJohoPanel().getTxtDairiJusho().clearDomain();
-        div.getDaiiniJohoPanel().getTxtDairiJinJohoShimei().clearDomain();
-        div.getDaiiniJohoPanel().getTxtDairiTelNo().clearDomain();
-        div.getSyobunJohoPanel().getTxtShobubi().clearValue();
-        div.getSyobunJohoPanel().getTxtShobucho().clearValue();
-        div.getSyobunJohoPanel().getDdlShobuShurui().setSelectedKey(RString.EMPTY);
-        div.getSyobunJohoPanel().getTxtShobuShitaNichi().clearValue();
-        div.getMeisaiPanel().getTxtShinsaSeikyuRiyu().clearValue();
-        div.getMeisaiPanel().getTxtKyoshiNaiyo().clearValue();
-        div.getRadTenpuShorui().setSelectedKey(new RString("key1"));
-        div.getTxtShinsaSeikyuTorisage().clearValue();
     }
 
     private FufukuMoshitate 資格系基本情報の取得() {
