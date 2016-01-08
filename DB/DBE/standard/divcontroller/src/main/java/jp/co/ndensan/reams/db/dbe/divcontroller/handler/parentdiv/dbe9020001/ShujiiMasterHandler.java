@@ -97,23 +97,23 @@ public class ShujiiMasterHandler {
      */
     public void setShujiiIchiran(List<ShujiiMaster> shujiiMasterList) {
         List<dgShujiiIchiran_Row> dataGridList = new ArrayList<>();
-        for (ShujiiMaster ShujiiMaster : shujiiMasterList) {
+        for (ShujiiMaster shujiiMaster : shujiiMasterList) {
             dataGridList.add(createDgShujiiIchiranRow(
                     RString.EMPTY,
-                    ShujiiMaster.get市町村コード(),
-                    ShujiiMaster.get主治医氏名(),
-                    ShujiiMaster.get主治医カナ(),
-                    ShujiiMaster.get主治医コード(),
-                    ShujiiMaster.get主治医医療機関コード(),
-                    ShujiiMaster.get医療機関名称(),
-                    ShujiiMaster.get診療科名称(),
-                    ShujiiMaster.is指定医フラグ(),
-                    ShujiiMaster.is状況フラグ(),
-                    ShujiiMaster.get郵便番号(),
-                    ShujiiMaster.get住所(),
-                    ShujiiMaster.get電話番号(),
-                    ShujiiMaster.getFAX番号(),
-                    ShujiiMaster.get性別()));
+                    shujiiMaster.get市町村コード(),
+                    shujiiMaster.get主治医氏名(),
+                    shujiiMaster.get主治医カナ(),
+                    shujiiMaster.get主治医コード(),
+                    shujiiMaster.get主治医医療機関コード(),
+                    shujiiMaster.get医療機関名称(),
+                    shujiiMaster.get診療科名称(),
+                    shujiiMaster.is指定医フラグ(),
+                    shujiiMaster.is状況フラグ(),
+                    shujiiMaster.get郵便番号(),
+                    shujiiMaster.get住所(),
+                    shujiiMaster.get電話番号(),
+                    shujiiMaster.getFAX番号(),
+                    shujiiMaster.get性別()));
         }
         div.getShujiiIchiran().getDgShujiiIchiran().setDataSource(dataGridList);
     }
@@ -276,9 +276,7 @@ public class ShujiiMasterHandler {
     public ShujiiJoho editShujiiJoho(ShujiiJoho shujiiJoho) {
         return shujiiJoho.createBuilderForEdit().set主治医氏名(div.getShujiiJohoInput().getTxtShujiiShimei().getValue())
                 .set主治医カナ(new AtenaKanaMeisho(div.getShujiiJohoInput().getTxtShujiiKanaShimei().getValue()))
-                //.set性別(new Code(div.getShujiiJohoInput().getRadSeibetsu().getSelectedKey()))
-                .set性別(new Code(CODE_MAN.equals(div.getShujiiJohoInput()
-                                        .getRadSeibetsu().getSelectedKey()) ? CODE_M : CODE_W))
+                .set性別(new Code(div.getShujiiJohoInput().getRadSeibetsu().getSelectedKey()))
                 .set指定医フラグ(指定医_可能.equals(div.getShujiiJohoInput().getRadShiteiiFlag().getSelectedKey()))
                 .set診療科名称(div.getShujiiJohoInput().getTxtShinryokaMei().getValue())
                 .set郵便番号(div.getShujiiJohoInput().getTxtYubinNo().getValue())

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.service.core.basic.shujiijoho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.csv.shujiijoho.ShujiiMasterCsvBusiness;
-import jp.co.ndensan.reams.db.dbe.service.core.ninteichosainmaster.NinteiChosainMasterManager;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
@@ -27,7 +26,7 @@ public class ShujiiMasterManager {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link NinteiChosainMasterManager}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link ShujiiMasterManager}のインスタンスを返します。
      *
      * @return {@link InstanceProvider#create}にて生成した{@link ShujiiMasterManager}のインスタンス
      */
