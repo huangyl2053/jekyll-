@@ -18,8 +18,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- *
- * @author soft863
+ * 主治医マスタ画面のバリデーションハンドラークラスです。
+ * 
  */
 public class ShujiiMasterValidationHandler {
 
@@ -39,7 +39,7 @@ public class ShujiiMasterValidationHandler {
     /**
      * ＣＳＶを出力するボタンを押下するとき、バリデーションチェックを行う。
      *
-     * @return バリデーション結果
+     * @return validPairs バリデーション結果
      */
     public ValidationMessageControlPairs validateForOutputCsv() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
@@ -61,8 +61,8 @@ public class ShujiiMasterValidationHandler {
      * 確定するボタンを押下するとき、バリデーションチェックを行う。
      *
      * @param 状態 状態
-     * @param count 調査員情報件数
-     * @return バリデーション結果
+     * @param count 主治医情報件数
+     * @return validPairs バリデーション結果
      */
     public ValidationMessageControlPairs validateForKakutei(RString 状態, int count) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
@@ -97,7 +97,7 @@ public class ShujiiMasterValidationHandler {
     /**
      * 保存するボタンを押下するとき、バリデーションチェックを行う。
      *
-     * @return バリデーション結果
+     * @return validPairs バリデーション結果
      */
     public ValidationMessageControlPairs validateForUpdate() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
@@ -123,15 +123,15 @@ public class ShujiiMasterValidationHandler {
      * 保存するボタンを押下するとき、バリデーションチェックを行う。
      *
      * @param ninteiShinseiJohoCount 要介護認定申請情報件数
-     * @param ninteichosaIraiJohoCount 認定調査依頼情報件数
+     * @param ikenshoIraiJohoCount 主治医意見書作成依頼情報件数
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateForUpdate(int ninteiShinseiJohoCount, int ninteichosaIraiJohoCount) {
+    public ValidationMessageControlPairs validateForUpdate(int ninteiShinseiJohoCount, int ikenshoIraiJohoCount) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (0 < ninteiShinseiJohoCount) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.排他_他のユーザが更新済で更新処理を中止)));
         }
-        if (0 < ninteichosaIraiJohoCount) {
+        if (0 < ikenshoIraiJohoCount) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.排他_他のユーザが更新済で更新処理を中止)));
         }
@@ -139,16 +139,13 @@ public class ShujiiMasterValidationHandler {
     }
 
     /**
-     * 調査員情報登録エリアの編集チェック処理です。
+     * 主治医情報登録エリアの編集チェック処理です。
      *
      * @return 判定結果(true:変更あり,false:変更なし)
      */
     public boolean isUpdate() {
         ShujiiMasterHandler handler = new ShujiiMasterHandler(div);
-        if (!handler.getInputDiv().equals(div.getShujiiJohoInput().getHiddenInputDiv())) {
-            return true;
-        }
-        return false;
+        return !handler.getInputDiv().equals(div.getShujiiJohoInput().getHiddenInputDiv());
     }
 
     private static class IdocheckMessages implements IValidationMessage {

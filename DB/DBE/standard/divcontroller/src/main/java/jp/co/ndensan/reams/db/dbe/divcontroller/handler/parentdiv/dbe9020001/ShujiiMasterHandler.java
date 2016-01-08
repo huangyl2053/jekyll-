@@ -67,7 +67,7 @@ public class ShujiiMasterHandler {
     public void load() {
 
         List<KeyValueDataSource> shichosonDataSource = new ArrayList<>();
-        shichosonDataSource.add(new KeyValueDataSource(new RString("000001"), new RString("市町村一")));
+        shichosonDataSource.add(new KeyValueDataSource(new RString("034001"), new RString("市町村一")));
         shichosonDataSource.add(new KeyValueDataSource(new RString("000002"), new RString("市町村二")));
         shichosonDataSource.add(new KeyValueDataSource(new RString("000003"), new RString("市町村三")));
         div.getDdlSearchShichoson().setDataSource(shichosonDataSource);
@@ -101,6 +101,7 @@ public class ShujiiMasterHandler {
             dataGridList.add(createDgShujiiIchiranRow(
                     RString.EMPTY,
                     shujiiMaster.get市町村コード(),
+                    shujiiMaster.get市町村名称(),
                     shujiiMaster.get主治医氏名(),
                     shujiiMaster.get主治医カナ(),
                     shujiiMaster.get主治医コード(),
@@ -120,7 +121,8 @@ public class ShujiiMasterHandler {
 
     private dgShujiiIchiran_Row createDgShujiiIchiranRow(
             RString jotai,
-            LasdecCode shichoson,
+            LasdecCode shichosonCode,
+            RString shichoson,
             RString shujiiShimei,
             RString shujiiKanaShimei,
             RString shujiiNo,
@@ -137,9 +139,8 @@ public class ShujiiMasterHandler {
     ) {
         dgShujiiIchiran_Row row = new dgShujiiIchiran_Row();
         row.setJotai(jotai);
-        // TODO　共通部品
-        row.setShichoson(new RString("市町村名"));
-        row.setShichosonCode(nullToEmpty(shichoson.value()));
+        row.setShichosonCode(new RString(shichosonCode.toString()));
+        row.setShichoson(shichoson);
         row.setShujiiShimei(shujiiShimei);
         row.setShujiiKanaShimei(shujiiKanaShimei);
         TextBoxCode shujiiCode = new TextBoxCode();
@@ -271,12 +272,13 @@ public class ShujiiMasterHandler {
      * 主治医情報を設定します。
      *
      * @param shujiiJoho 主治医情報
-     * @return 主治医情報
+     * @return ShujiiJoho 主治医情報
      */
     public ShujiiJoho editShujiiJoho(ShujiiJoho shujiiJoho) {
         return shujiiJoho.createBuilderForEdit().set主治医氏名(div.getShujiiJohoInput().getTxtShujiiShimei().getValue())
                 .set主治医カナ(new AtenaKanaMeisho(div.getShujiiJohoInput().getTxtShujiiKanaShimei().getValue()))
-                .set性別(new Code(div.getShujiiJohoInput().getRadSeibetsu().getSelectedKey()))
+                .set性別(new Code(CODE_MAN.equals(div.getShujiiJohoInput().
+                        getRadSeibetsu().getSelectedKey()) ? CODE_M : CODE_W))
                 .set指定医フラグ(指定医_可能.equals(div.getShujiiJohoInput().getRadShiteiiFlag().getSelectedKey()))
                 .set診療科名称(div.getShujiiJohoInput().getTxtShinryokaMei().getValue())
                 .set郵便番号(div.getShujiiJohoInput().getTxtYubinNo().getValue())
@@ -384,7 +386,7 @@ public class ShujiiMasterHandler {
         inputDiv.append(shujiiJohoInputDiv.getTxtShichoson().getValue());
         inputDiv.append(shujiiJohoInputDiv.getTxtShichosonmei().getValue());
         inputDiv.append(shujiiJohoInputDiv.getTxtShujiiIryoKikanCode().getValue());
-        inputDiv.append(shujiiJohoInputDiv.getTxtShujiiIryoKikanMei());
+        inputDiv.append(shujiiJohoInputDiv.getTxtShujiiIryoKikanMei().getValue());
         inputDiv.append(shujiiJohoInputDiv.getTxtShujiiCode().getValue());
         inputDiv.append(shujiiJohoInputDiv.getTxtShujiiShimei().getValue());
         inputDiv.append(shujiiJohoInputDiv.getTxtShujiiKanaShimei().getValue());

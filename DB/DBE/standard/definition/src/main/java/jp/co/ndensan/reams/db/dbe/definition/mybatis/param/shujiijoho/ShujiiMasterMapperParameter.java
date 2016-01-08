@@ -42,13 +42,6 @@ public final class ShujiiMasterMapperParameter {
     private final boolean uses主治医カナ氏名;
     private final boolean usesSaidaiHyojiKensu;
 
-    /**
-     * コンストラクタです。
-     *
-     * @param shichonCode shichonCode
-     * @param usesshichonCode usesshichonCode
-     * @throws NullPointerException 引数のいずれかが{@code null}の場合
-     */
     private ShujiiMasterMapperParameter(
             LasdecCode 市町村コード,
             boolean 状況フラグ,
