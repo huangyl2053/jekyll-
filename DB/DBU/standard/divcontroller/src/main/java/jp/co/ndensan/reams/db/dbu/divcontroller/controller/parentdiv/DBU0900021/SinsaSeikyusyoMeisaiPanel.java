@@ -74,7 +74,6 @@ public class SinsaSeikyusyoMeisaiPanel {
             return ResponseData.of(requestDiv).setState(DBU0900021StateName.削除);
         }
         responseData.data = requestDiv;
-
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -97,9 +96,9 @@ public class SinsaSeikyusyoMeisaiPanel {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 createHandlerOf(div).内容の破棄();
                 return ResponseData.of(div).forwardWithEventName(DBU0900021TransitionEventName.一覧に戻る).respond();
+            } else {
+                ResponseData.of(div).respond();
             }
-        } else {
-            return ResponseData.of(div).forwardWithEventName(DBU0900021TransitionEventName.一覧に戻る).respond();
         }
         if ((修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))
                 && getValidationHandler(div).変更有無チェック(createHandlerOf(div).修正後の値())) {
@@ -113,14 +112,14 @@ public class SinsaSeikyusyoMeisaiPanel {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 createHandlerOf(div).内容の破棄();
                 return ResponseData.of(div).forwardWithEventName(DBU0900021TransitionEventName.一覧に戻る).respond();
+            } else {
+                ResponseData.of(div).respond();
             }
-        } else {
-            return ResponseData.of(div).forwardWithEventName(DBU0900021TransitionEventName.一覧に戻る).respond();
         }
         if ((削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))) {
             return ResponseData.of(div).forwardWithEventName(DBU0900021TransitionEventName.一覧に戻る).respond();
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBU0900021TransitionEventName.一覧に戻る).respond();
     }
 
     /**
@@ -166,8 +165,6 @@ public class SinsaSeikyusyoMeisaiPanel {
                         new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
                 return ResponseData.of(div).setState(DBU0900021StateName.完了);
             }
-        } else {
-            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
         }
         if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
                 && getValidationHandler(div).変更有無チェック(createHandlerOf(div).修正後の値())) {
@@ -187,8 +184,6 @@ public class SinsaSeikyusyoMeisaiPanel {
                         new RString(UrInformationMessages.正常終了.getMessage().replace(更新.toString()).evaluate()), RString.EMPTY, RString.EMPTY);
                 return ResponseData.of(div).setState(DBU0900021StateName.完了);
             }
-        } else {
-            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
         }
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
 
@@ -206,6 +201,9 @@ public class SinsaSeikyusyoMeisaiPanel {
                         new RString(UrInformationMessages.対象データ削除済み.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
                 return ResponseData.of(div).setState(DBU0900021StateName.完了);
             }
+        }
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }
