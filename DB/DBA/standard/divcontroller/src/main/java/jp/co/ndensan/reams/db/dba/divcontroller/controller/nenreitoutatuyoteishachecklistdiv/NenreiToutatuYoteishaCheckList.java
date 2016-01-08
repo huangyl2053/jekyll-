@@ -54,6 +54,7 @@ public class NenreiToutatuYoteishaCheckList {
             requestDiv.getTxtKonkaiRange().setToValue(new RDate(
                     RDate.getNowDate().wareki().toDateString().toString()));
         }
+        // TODO QA323
         //ReportId chohyoBunruiID = nenreiToutatuYoteishaManager.get帳票分類ID(サブ業務コード, new ReportId("DBA200001")).getChohyoBunruiID();
 //        KaigoChohyoShutsuryokujunDiv kaigoChohyoShutsuryokujunDiv = new KaigoChohyoShutsuryokujunDiv();
 //        kaigoChohyoShutsuryokujunDiv.loadChohyoMode(サブ業務コード, chohyoBunruiID);

@@ -234,6 +234,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         dbT7022ShoriDateKanri.setTaishoShuryoYMD(processParameter.getKonkaisyuryo());
         dbT7022ShoriDateKanri.setShoriName(ShoriName.年齢到達予定者チェックリスト.get名称());
         nenreiToutatsuYoteishaCheckListMapper.getInsert(dbT7022ShoriDateKanri);
+
+        // TODO QA323帳票
     }
 
     @Override
@@ -242,12 +244,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         manager.spool(eucFilePath);
     }
 
-    /**
-     * 登録対象者取得。
-     */
     private void getTorokuSya() {
 
-        // 宛名識別対象PSM
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
@@ -270,7 +268,7 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         nenreiToutatsuYoteishaCheckListEntity = nenreiToutatsuYoteishaCheckListMapper.
                 getTorokuNenreiToutatsuYoteishaCheckList(torokuParameter);
         if (!nenreiToutatsuYoteishaCheckListEntity.isEmpty()) {
-            // QA364 検索条件は不定です。
+            // QA286 QA364 検索条件は不定です。
             getShikakuShutokuJogaiList();
             removeListEntity.clear();
             for (NenreiToutatsuYoteishaCheckListEntity entity : nenreiToutatsuYoteishaCheckListEntity) {
@@ -324,12 +322,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
 
     }
 
-    /**
-     * 全ての対象者取得。
-     */
     private void getZenbuSya() {
 
-        // 宛名識別対象PSM
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
@@ -398,23 +392,14 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         }
     }
 
-    /**
-     * 資格取得除外者リスト取得。
-     */
     private void getShikakuShutokuJogaiList() {
         dbT1009ShikakuShutokuJogaishaEntity = nenreiToutatsuYoteishaCheckListMapper.getShikakuShutokuJogaiList();
     }
 
-    /**
-     * 適用除外者リスト取得。
-     */
     private void getTekiyoJogaiList() {
         dbT1002TekiyoJogaishaEntity = nenreiToutatsuYoteishaCheckListMapper.getTekiyoJogaiList();
     }
 
-    /**
-     * 他市町村住所地特例者リスト取得。
-     */
     private void getTashichosonJushochi() {
         dbT1003TashichosonJushochiTokureiEntity = nenreiToutatsuYoteishaCheckListMapper.getTashichosonJushochi();
     }
