@@ -80,7 +80,7 @@ public class TennyushutsuHoryuTaishoshaBusiness implements TennyuTenshutsuHoryuT
      */
     @Override
     public RString get住民種別コード() {
-        return get住民種別コード();
+        return entity.get住民種別コード();
     }
 
     /**
@@ -140,7 +140,7 @@ public class TennyushutsuHoryuTaishoshaBusiness implements TennyuTenshutsuHoryuT
      */
     @Override
     public FlexibleDate get異動年月日() {
-        return entity.get転出予定異動年月日() != null ? entity.get転出予定異動年月日() : entity.転出確定異動年月日();
+        return entity.get転出予定異動年月日() != null ? entity.get転出予定異動年月日() : entity.get転出確定異動年月日();
     }
 
     /**

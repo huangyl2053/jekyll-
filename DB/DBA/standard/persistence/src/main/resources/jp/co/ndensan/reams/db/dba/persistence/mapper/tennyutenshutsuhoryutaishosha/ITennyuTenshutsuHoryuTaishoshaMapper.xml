@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 
-<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.mapper.tennyutenshutsuhoryutaishosha.TennyuTenshutsuHoryuTaishoshaMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.mapper.tennyutenshutsuhoryutaishosha.ITennyuTenshutsuHoryuTaishoshaMapper">
     <select id="get転出保留対象者情報の取得処理" resultMap="resultMap_TennyuTenshutsuHoryuEntity"  fetchSize="500">
         SELECT
         DbT1011TenshutsuHoryuTaishosha."shikibetsuCode" AS "shikibetsuCode"

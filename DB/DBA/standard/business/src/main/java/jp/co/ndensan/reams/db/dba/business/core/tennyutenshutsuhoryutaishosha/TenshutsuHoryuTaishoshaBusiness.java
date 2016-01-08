@@ -80,7 +80,7 @@ public class TenshutsuHoryuTaishoshaBusiness implements TennyuTenshutsuHoryuTais
      */
     @Override
     public RString get住民種別コード() {
-        return get住民種別コード();
+        return entity.get住民種別コード();
     }
 
     /**

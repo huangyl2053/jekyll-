@@ -50,7 +50,7 @@ public class TennyushutsuHoryuTaishoshaEntity {
      *
      * @param 識別コード ShikibetsuCode
      */
-    public void setShikibetsuCode(ShikibetsuCode 識別コード) {
+    public void set識別コード(ShikibetsuCode 識別コード) {
         this.識別コード = 識別コード;
     }
 
@@ -239,7 +239,7 @@ public class TennyushutsuHoryuTaishoshaEntity {
      *
      * @return 転出確定異動年月日
      */
-    public FlexibleDate 転出確定異動年月日() {
+    public FlexibleDate get転出確定異動年月日() {
         return 転出確定異動年月日;
     }
 

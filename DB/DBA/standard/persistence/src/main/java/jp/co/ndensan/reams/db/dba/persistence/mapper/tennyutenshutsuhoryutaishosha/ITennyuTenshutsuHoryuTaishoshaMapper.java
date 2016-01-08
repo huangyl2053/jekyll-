@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.Tenshu
  *
  * 転入転出保留対象者管理のMapperクラスです。
  */
-public interface TennyuTenshutsuHoryuTaishoshaMapper {
+public interface ITennyuTenshutsuHoryuTaishoshaMapper {
 
     /**
      * 転出保留対象者情報の取得する

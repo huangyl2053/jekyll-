@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryutaishosha.Te
 import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaBusiness;
 import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TennyushutsuHoryuTaishoshaEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaEntity;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.tennyutenshutsuhoryutaishosha.TennyuTenshutsuHoryuTaishoshaMapper;
+import jp.co.ndensan.reams.db.dba.persistence.mapper.tennyutenshutsuhoryutaishosha.ITennyuTenshutsuHoryuTaishoshaMapper;
 import jp.co.ndensan.reams.db.dba.service.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriManager;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1011TenshutsuHoryuTaishoshaEntity;
@@ -77,7 +77,7 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
      */
     @Transaction
     public SearchResult<TennyuTenshutsuHoryuTaishosha> getTenshutsuHoryuTaishoshaList() {
-        TennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(TennyuTenshutsuHoryuTaishoshaMapper.class);
+        ITennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(ITennyuTenshutsuHoryuTaishoshaMapper.class);
         List<TennyushutsuHoryuTaishoshaEntity> entityList = mapper.get転出保留対象者情報の取得処理();
         if (entityList.isEmpty()) {
             return SearchResult.of(Collections.<ShikakuShutokuJogaishaKanri>emptyList(), 0, false);
@@ -96,7 +96,7 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
      */
     @Transaction
     public SearchResult<TennyuTenshutsuHoryuTaishosha> getTennyuHoryuTaishoshaList() {
-        TennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(TennyuTenshutsuHoryuTaishoshaMapper.class);
+        ITennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(ITennyuTenshutsuHoryuTaishoshaMapper.class);
         List<TenshutsuHoryuTaishoshaEntity> entityList = mapper.get転入保留対象者情報の取得処理();
         if (entityList.isEmpty()) {
             return SearchResult.of(Collections.<ShikakuShutokuJogaishaKanri>emptyList(), 0, false);
@@ -122,7 +122,7 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
      */
     @Transaction
     public SearchResult<TennyuTenshutsuHoryuTaishosha> getKoikiHoryuTaishoshaList() {
-        TennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(TennyuTenshutsuHoryuTaishoshaMapper.class);
+        ITennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(ITennyuTenshutsuHoryuTaishoshaMapper.class);
         List<TenshutsuHoryuTaishoshaEntity> entityList = mapper.get広域保留対象者情報の取得処理();
         if (entityList.isEmpty()) {
             return SearchResult.of(Collections.<ShikakuShutokuJogaishaKanri>emptyList(), 0, false);

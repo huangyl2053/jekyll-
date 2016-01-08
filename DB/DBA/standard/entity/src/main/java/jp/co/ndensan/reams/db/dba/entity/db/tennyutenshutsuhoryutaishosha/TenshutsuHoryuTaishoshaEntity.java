@@ -48,7 +48,7 @@ public class TenshutsuHoryuTaishoshaEntity {
      *
      * @param 識別コード ShikibetsuCode
      */
-    public void setShikibetsuCode(ShikibetsuCode 識別コード) {
+    public void set識別コード(ShikibetsuCode 識別コード) {
         this.識別コード = 識別コード;
     }
 
