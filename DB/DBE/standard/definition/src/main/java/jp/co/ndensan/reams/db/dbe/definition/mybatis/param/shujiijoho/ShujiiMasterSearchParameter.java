@@ -32,8 +32,8 @@ public final class ShujiiMasterSearchParameter {
      * 一覧検索用のパラメータを生成します。
      *
      * @param 市町村コード 市町村コード
-     * @param 主治医医療機関コード
-     * @param 主治医コード
+     * @param 主治医医療機関コード 主治医医療機関コード
+     * @param 主治医コード 主治医コード
      *
      * @return 主治医マスタパラメータ
      */

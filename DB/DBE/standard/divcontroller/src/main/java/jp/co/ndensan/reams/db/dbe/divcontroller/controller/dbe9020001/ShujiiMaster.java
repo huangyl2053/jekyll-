@@ -151,15 +151,16 @@ public class ShujiiMaster {
                 div.getTxtSearchShujiiShimei().getValue(),
                 new AtenaKanaMeisho(div.getTxtSearchShujiiKanaShimei().getValue()),
                 div.getTxtSaidaiHyojiKensu().getValue());
+        ShujiiMasterFinder shujiiMasterFinder = ShujiiMasterFinder.createInstance();
         List<jp.co.ndensan.reams.db.dbe.business.core.basic.shujiijoho.ShujiiMaster> 主治医情報List
-                = ShujiiMasterFinder.createInstance().getShujiiIchiranList(
+                = shujiiMasterFinder.getShujiiIchiranList(
                         parameter).records();
         if (主治医情報List.isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.主治医マスタ検索結果, Models.create(new ArrayList<ShujiiJoho>()));
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         }
         getHandler(div).setShujiiIchiran(主治医情報List);
-        List<ShujiiJoho> 主治医マスタList = ShujiiMasterFinder.createInstance().getShujiiJohoList(parameter).records();
+        List<ShujiiJoho> 主治医マスタList = shujiiMasterFinder.getShujiiJohoList(parameter).records();
         ViewStateHolder.put(ViewStateKeys.主治医マスタ検索結果, Models.create(主治医マスタList));
     }
 
