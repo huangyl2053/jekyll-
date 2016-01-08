@@ -22,14 +22,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class SinsaSeikyusyoJohoHandler {
 
     private final SinsaSeikyusyoPanelDiv sinsadiv;
-    private boolean False;
     private static final RString 状態_照会 = new RString("照会");
     private static final RString 状態_更新 = new RString("更新");
 
     /**
      * コンストラクタです。
      *
-     * @param sinsadiv
+     * @param sinsadiv SinsaSeikyusyoPanelDiv
      */
     public SinsaSeikyusyoJohoHandler(SinsaSeikyusyoPanelDiv sinsadiv) {
         this.sinsadiv = sinsadiv;
@@ -38,7 +37,7 @@ public class SinsaSeikyusyoJohoHandler {
     /**
      * onLoad処理です。
      *
-     * @param sinsaSeikyusyoJohoList
+     * @param sinsaSeikyusyoJohoList 審査請求書登録明細情報
      */
     public void onLoad(List<FufukuMoshitate> sinsaSeikyusyoJohoList) {
 
@@ -59,9 +58,9 @@ public class SinsaSeikyusyoJohoHandler {
                 }
             }
             sinsadiv.getGrdSinsaSeikyusyoJoho().setDataSource(grdSinsaSeiList);
-            sinsadiv.getSinsaSeikyusyoJohoPane1().getBtnTuika().setVisible(False);
-            sinsadiv.getGrdSinsaSeikyusyoJoho().getGridSetting().setIsShowModifyButtonColumn(False);
-            sinsadiv.getGrdSinsaSeikyusyoJoho().getGridSetting().setIsShowDeleteButtonColumn(False);
+            sinsadiv.getSinsaSeikyusyoJohoPane1().getBtnTuika().setVisible(false);
+            sinsadiv.getGrdSinsaSeikyusyoJoho().getGridSetting().setIsShowModifyButtonColumn(false);
+            sinsadiv.getGrdSinsaSeikyusyoJoho().getGridSetting().setIsShowDeleteButtonColumn(false);
         }
         if (状態_更新.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             List<grdSinsaSeikyusyoJoho_Row> grdSinsaSeiList = new ArrayList<>();

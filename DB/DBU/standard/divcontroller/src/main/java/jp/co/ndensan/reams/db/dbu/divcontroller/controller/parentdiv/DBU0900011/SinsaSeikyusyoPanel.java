@@ -27,8 +27,6 @@ public class SinsaSeikyusyoPanel {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
-    private static final RString 照会 = new RString("照会");
-    private static final RString 更新 = new RString("更新");
 
     /**
      * 審査請求書登録_一覧情報。
@@ -43,8 +41,6 @@ public class SinsaSeikyusyoPanel {
 ////        div.getAtenainfoCommonChildDiv1().load(new ShikibetsuCode(new RString("123401234000011")));
 //        // 資格系基本情報を取得。
 //        div.getShikakuKihonCommonChildDiv1().initialize(HihokenshaNo.EMPTY);
-//        ViewStateHolder.put(ViewStateKeys.状態, 照会);
-        ViewStateHolder.put(ViewStateKeys.状態, 更新);
         List<FufukuMoshitate> sinsaSeikyusyoJohoList
                 = SinsaSeikyusyoJohoFinder.createInstance().getSinsaSeikyusyoJohoList(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
                         ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class)).records();
@@ -55,7 +51,7 @@ public class SinsaSeikyusyoPanel {
     /**
      * 追加ボタン。<br/>
      *
-     * @param div
+     * @param div SinsaSeikyusyoPanelDiv
      * @return ResponseData<SinsaSeikyusyoPanelDiv>
      */
     public ResponseData<SinsaSeikyusyoPanelDiv> onClick_btnTuika(SinsaSeikyusyoPanelDiv div) {
@@ -81,7 +77,7 @@ public class SinsaSeikyusyoPanel {
     /**
      * 修正ボタン。<br/>
      *
-     * @param sindiv
+     * @param sindiv SinsaSeikyusyoPanelDiv
      * @return ResponseData<SinsaSeikyusyoPanelDiv>
      */
     public ResponseData<SinsaSeikyusyoPanelDiv> onClick_btnShuuSei(SinsaSeikyusyoPanelDiv sindiv) {
@@ -97,7 +93,7 @@ public class SinsaSeikyusyoPanel {
     /**
      * 削除ボタン。<br/>
      *
-     * @param sindiv
+     * @param sindiv SinsaSeikyusyoPanelDiv
      * @return ResponseData<SinsaSeikyusyoPanelDiv>
      */
     public ResponseData<SinsaSeikyusyoPanelDiv> onClick_btnSakuzyo(SinsaSeikyusyoPanelDiv sindiv) {
@@ -130,11 +126,5 @@ public class SinsaSeikyusyoPanel {
 
     private ResponseData<SinsaSeikyusyoPanelDiv> createResponse(SinsaSeikyusyoPanelDiv div) {
         return ResponseData.of(div).respond();
-    }
-
-    private ResponseData<SinsaSeikyusyoPanelDiv> createResponseData(SinsaSeikyusyoPanelDiv requestDiv) {
-        ResponseData<SinsaSeikyusyoPanelDiv> response = new ResponseData();
-        response.data = requestDiv;
-        return response;
     }
 }
