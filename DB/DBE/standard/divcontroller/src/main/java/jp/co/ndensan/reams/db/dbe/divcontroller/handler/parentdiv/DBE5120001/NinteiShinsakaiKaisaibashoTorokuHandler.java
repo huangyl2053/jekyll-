@@ -80,6 +80,7 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
     public void set開催場所一覧の追加() {
         clear開催場所編集エリア();
         set開催場所編集エリア活性();
+        div.getBtnTsuika().setDisabled(true);
         div.getShinakaiKaisaIbashoShosai().setJyotai(追加モード);
     }
 

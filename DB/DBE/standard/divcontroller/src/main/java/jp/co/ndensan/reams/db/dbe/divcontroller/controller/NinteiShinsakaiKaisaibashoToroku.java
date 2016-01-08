@@ -159,13 +159,18 @@ public class NinteiShinsakaiKaisaibashoToroku {
      */
     public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> 
         onClick_btnback(NinteiShinsakaiKaisaibashoTorokuDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if ((更新モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()) && isUpdateHasChange(div))
+            || (isAddHasChange(div) && 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()))) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                getHandler(div).set開催場所編集エリアを初期化処理();
+            }
+        } else {
             getHandler(div).set開催場所編集エリアを初期化処理();
         }
         return ResponseData.of(div).respond();
@@ -225,7 +230,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
         return businessList;
     }
 
-
+    
     private void 開催場所コードの重複チェック(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         RString kaisaibashoCode = div.getTxtKaisaibashoCode().getValue();
         List<dgKaisaibashoIchiran_Row> rowList = div.getDgKaisaibashoIchiran().getDataSource();
