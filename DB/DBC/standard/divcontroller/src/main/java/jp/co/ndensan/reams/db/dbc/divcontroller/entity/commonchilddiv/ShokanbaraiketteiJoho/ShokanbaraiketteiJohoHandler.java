@@ -68,27 +68,25 @@ public class ShokanbaraiketteiJohoHandler {
             差額登録フラグ = true;
         }
         div.getDgSyokanbaraikete().setDataSource(set償還払決定一覧情報(差額登録フラグ, 償還払決定一覧情報));
-        // TODO QA410 決定情報無の場合、支給区分の設定不明
-        RString 支給区分 = 支給区分_支給;
+        RString 支給区分 = null;
         if (決定情報 == null) {
             set決定情報(決定情報, 支給区分);
             div.getTxtKetebi().setValue(RDate.getNowDate());
         } else {
-            if (決定情報.getShikyuHushikyuKetteiKubun() != null) {
-                支給区分 = 決定情報.getShikyuHushikyuKetteiKubun();
-            }
+            支給区分 = 決定情報.getShikyuHushikyuKetteiKubun();
             set決定情報(決定情報, 支給区分);
             if (決定情報.getKetteiYMD() == null) {
                 div.getTxtKetebi().setValue(RDate.getNowDate());
             } else {
                 div.getTxtKetebi().setValue(new RDate(決定情報.getKetteiYMD().wareki().toString()));
             }
-            if (決定情報.getShikyuHushikyuKetteiKubun() != null && !RString.EMPTY.equals(決定情報.getShikyuHushikyuKetteiKubun())) {
+            if (支給区分 != null && !RString.EMPTY.equals(支給区分)) {
                 div.getRdoShikyukubun().setSelectedKey(決定情報.getShikyuHushikyuKetteiKubun());
             }
         }
-
-        setState(mode);
+        if (モード_照会.equals(mode)) {
+            setState(支給区分);
+        }
     }
 
     /**
@@ -195,7 +193,7 @@ public class ShokanbaraiketteiJohoHandler {
             } else {
                 div.getTxtZogentani().setValue(Decimal.ZERO);
             }
-        } else {
+        } else if (支給区分_不支給.equals(支給区分)) {
             div.getTxtZogenriyu().setDisabled(true);
             div.getTxtZogentani().setDisabled(true);
             div.getTxtShiharaikingakugoke().setDisabled(true);
@@ -216,6 +214,9 @@ public class ShokanbaraiketteiJohoHandler {
             div.getTxtZogenriyu().setValue(RString.EMPTY);
             div.getTxtZogentani().setValue(Decimal.ZERO);
             div.getTxtShiharaikingakugoke().setValue(Decimal.ZERO);
+        } else {
+            setState(支給区分);
+            div.getRdoShikyukubun().setDisabled(false);
         }
     }
 
@@ -243,15 +244,23 @@ public class ShokanbaraiketteiJohoHandler {
         return 償還払決定一覧情報;
     }
 
-    private void setState(RString mode) {
-        if (モード_照会.equals(mode)) {
-            div.getTxtZogenriyu().setDisabled(true);
-            div.getTxtZogentani().setDisabled(true);
-            div.getTxtShiharaikingakugoke().setDisabled(true);
+    private void setState(RString 支給区分) {
+        div.getTxtZogenriyu().setDisabled(true);
+        div.getTxtZogentani().setDisabled(true);
+        div.getTxtShiharaikingakugoke().setDisabled(true);
+        div.getTxtKetebi().setDisabled(true);
+        div.getTxtFuSyikyuriyu1().setDisabled(true);
+        div.getTxtFushikyuriyu2().setDisabled(true);
+        if (支給区分 == null) {
+            div.getTxtZogenriyu().setValue(RString.EMPTY);
+            div.getTxtZogentani().setValue(Decimal.ZERO);
+            div.getTxtShiharaikingakugoke().setValue(Decimal.ZERO);
+            div.getRdoShikyukubun().setDisabled(false);
+            div.getTxtKetebi().clearValue();
+            div.getTxtFuSyikyuriyu1().setValue(RString.EMPTY);
+            div.getTxtFushikyuriyu2().setValue(RString.EMPTY);
+        } else {
             div.getRdoShikyukubun().setDisabled(true);
-            div.getTxtKetebi().setDisabled(true);
-            div.getTxtFuSyikyuriyu1().setDisabled(true);
-            div.getTxtFushikyuriyu2().setDisabled(true);
         }
     }
 }
