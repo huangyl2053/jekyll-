@@ -37,7 +37,7 @@
      "layoutName": "DBE9040001",
      "layoutTitle": "認定調査員マスタ",
      "eventName": "認定調査委託先マスタに戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE9030001",
