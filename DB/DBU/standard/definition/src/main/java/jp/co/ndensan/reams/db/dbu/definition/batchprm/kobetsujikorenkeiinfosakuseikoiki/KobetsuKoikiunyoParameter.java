@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki;
 
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KobetsuKoikiunyoParameter {
 
-    private LasdecCode shichosonCode;
-    private YMDHMS taishoShuryoTimestamp;
+    private RString shichosonCode;
+    private RString taishoShuryoTimestamp;
+    private RDate systemDate;
 }
