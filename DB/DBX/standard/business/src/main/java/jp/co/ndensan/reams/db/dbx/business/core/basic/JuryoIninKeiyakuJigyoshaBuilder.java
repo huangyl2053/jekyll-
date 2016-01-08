@@ -86,7 +86,7 @@ public class JuryoIninKeiyakuJigyoshaBuilder {
      */
     public JuryoIninKeiyakuJigyoshaBuilder set契約サービス種別(RString 契約サービス種別) {
         requireNonNull(契約サービス種別, UrSystemErrorMessages.値がnull.getReplacedMessage("契約サービス種別"));
-        entity.setServiceShubetsuCode(new ServiceShubetsuCode(契約サービス種別));
+        entity.setServiceShubetsuCode(契約サービス種別);
         return this;
     }
 

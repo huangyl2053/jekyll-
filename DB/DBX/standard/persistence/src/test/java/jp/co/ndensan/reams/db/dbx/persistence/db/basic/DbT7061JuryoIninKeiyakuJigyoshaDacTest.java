@@ -51,11 +51,11 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDacTest extends DbxTestDacBase {
             TestSupport.insert(
                     DEFAULT_受領委任契約事業者番号,
                     DEFAULT_受領委任契約開始日,
-                    DEFAULT_契約サービス種別.getColumnValue());
+                    DEFAULT_契約サービス種別);
             TestSupport.insert(
                     DEFAULT_受領委任契約事業者番号,
                     DEFAULT_受領委任契約開始日,
-                    DEFAULT_契約サービス種別.getColumnValue());
+                    DEFAULT_契約サービス種別);
         }
 
         @Test(expected = NullPointerException.class)
@@ -63,7 +63,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDacTest extends DbxTestDacBase {
             sut.selectByKey(
                     DEFAULT_受領委任契約事業者番号,
                     DEFAULT_受領委任契約開始日,
-                    DEFAULT_契約サービス種別.getColumnValue());
+                    DEFAULT_契約サービス種別);
         }
 
         @Test(expected = NullPointerException.class)
@@ -71,7 +71,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDacTest extends DbxTestDacBase {
             sut.selectByKey(
                     DEFAULT_受領委任契約事業者番号,
                     DEFAULT_受領委任契約開始日,
-                    DEFAULT_契約サービス種別.getColumnValue());
+                    DEFAULT_契約サービス種別);
         }
 
         @Test(expected = NullPointerException.class)
@@ -79,7 +79,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDacTest extends DbxTestDacBase {
             sut.selectByKey(
                     DEFAULT_受領委任契約事業者番号,
                     DEFAULT_受領委任契約開始日,
-                    DEFAULT_契約サービス種別.getColumnValue());
+                    DEFAULT_契約サービス種別);
         }
 
         @Test
@@ -87,7 +87,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDacTest extends DbxTestDacBase {
             DbT7061JuryoIninKeiyakuJigyoshaEntity insertedRecord = sut.selectByKey(
                     DEFAULT_受領委任契約事業者番号,
                     DEFAULT_受領委任契約開始日,
-                    DEFAULT_契約サービス種別.getColumnValue());
+                    DEFAULT_契約サービス種別);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
@@ -96,7 +96,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDacTest extends DbxTestDacBase {
             DbT7061JuryoIninKeiyakuJigyoshaEntity insertedRecord = sut.selectByKey(
                     DEFAULT_受領委任契約事業者番号,
                     DEFAULT_受領委任契約開始日,
-                    DEFAULT_契約サービス種別.getColumnValue());
+                    DEFAULT_契約サービス種別);
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -108,11 +108,11 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDacTest extends DbxTestDacBase {
             TestSupport.insert(
                     DEFAULT_受領委任契約事業者番号,
                     DEFAULT_受領委任契約開始日,
-                    DEFAULT_契約サービス種別.getColumnValue());
+                    DEFAULT_契約サービス種別);
             TestSupport.insert(
                     DEFAULT_受領委任契約事業者番号,
                     DEFAULT_受領委任契約開始日,
-                    DEFAULT_契約サービス種別.getColumnValue());
+                    DEFAULT_契約サービス種別);
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -129,12 +129,12 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDacTest extends DbxTestDacBase {
             TestSupport.insert(
                     DEFAULT_受領委任契約事業者番号,
                     DEFAULT_受領委任契約開始日,
-                    DEFAULT_契約サービス種別.getColumnValue());
+                    DEFAULT_契約サービス種別);
 
             assertThat(sut.selectByKey(
                     DEFAULT_受領委任契約事業者番号,
                     DEFAULT_受領委任契約開始日,
-                    DEFAULT_契約サービス種別.getColumnValue()), is(notNullValue()));
+                    DEFAULT_契約サービス種別), is(notNullValue()));
         }
     }
 
@@ -145,7 +145,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDacTest extends DbxTestDacBase {
             TestSupport.insert(
                     DEFAULT_受領委任契約事業者番号,
                     DEFAULT_受領委任契約開始日,
-                    DEFAULT_契約サービス種別.getColumnValue());
+                    DEFAULT_契約サービス種別);
         }
 
         @Test
@@ -153,7 +153,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDacTest extends DbxTestDacBase {
             DbT7061JuryoIninKeiyakuJigyoshaEntity updateRecord = sut.selectByKey(
                     DEFAULT_受領委任契約事業者番号,
                     DEFAULT_受領委任契約開始日,
-                    DEFAULT_契約サービス種別.getColumnValue());
+                    DEFAULT_契約サービス種別);
             updateRecord.setJigyoshaJusho(new AtenaJusho("なてな住所444"));
 
             sut.save(updateRecord);
@@ -161,7 +161,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDacTest extends DbxTestDacBase {
             DbT7061JuryoIninKeiyakuJigyoshaEntity updatedRecord = sut.selectByKey(
                     DEFAULT_受領委任契約事業者番号,
                     DEFAULT_受領委任契約開始日,
-                    DEFAULT_契約サービス種別.getColumnValue());
+                    DEFAULT_契約サービス種別);
 
             assertThat(updateRecord.getJigyoshaJusho(), is(updatedRecord.getJigyoshaJusho()));
         }
@@ -174,7 +174,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDacTest extends DbxTestDacBase {
             TestSupport.insert(
                     DEFAULT_受領委任契約事業者番号,
                     DEFAULT_受領委任契約開始日,
-                    DEFAULT_契約サービス種別.getColumnValue());
+                    DEFAULT_契約サービス種別);
         }
 
         @Test
@@ -182,7 +182,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDacTest extends DbxTestDacBase {
             DbT7061JuryoIninKeiyakuJigyoshaEntity deletedEntity = sut.selectByKey(
                     DEFAULT_受領委任契約事業者番号,
                     DEFAULT_受領委任契約開始日,
-                    DEFAULT_契約サービス種別.getColumnValue());
+                    DEFAULT_契約サービス種別);
             deletedEntity.setState(EntityDataState.Deleted);
 
             sut.save(deletedEntity);
@@ -190,7 +190,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDacTest extends DbxTestDacBase {
             assertThat(sut.selectByKey(
                     DEFAULT_受領委任契約事業者番号,
                     DEFAULT_受領委任契約開始日,
-                    DEFAULT_契約サービス種別.getColumnValue()), is(nullValue()));
+                    DEFAULT_契約サービス種別), is(nullValue()));
         }
     }
 
@@ -203,7 +203,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaDacTest extends DbxTestDacBase {
             DbT7061JuryoIninKeiyakuJigyoshaEntity entity = DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator.createDbT7061JuryoIninKeiyakuJigyoshaEntity();
             entity.setJigyoshaNo(受領委任契約事業者番号);
             entity.setKeiyakuKaishiYMD(受領委任契約開始日);
-            entity.setServiceShubetsuCode(new ServiceShubetsuCode(契約サービス種別));
+            entity.setServiceShubetsuCode(契約サービス種別);
             sut.save(entity);
         }
     }

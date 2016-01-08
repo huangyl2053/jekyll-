@@ -136,7 +136,7 @@ public class JuryoIninKeiyakuJigyoshaTest extends DbxTestBase {
 
         @Test
         public void get契約サービス種別は_entityが持つ契約サービス種別を返す() {
-            assertThat(sut.get契約サービス種別(), is(JuryoIninKeiyakuJigyoshaEntity.getServiceShubetsuCode().getColumnValue()));
+            assertThat(sut.get契約サービス種別(), is(JuryoIninKeiyakuJigyoshaEntity.getServiceShubetsuCode()));
         }
 
         @Test

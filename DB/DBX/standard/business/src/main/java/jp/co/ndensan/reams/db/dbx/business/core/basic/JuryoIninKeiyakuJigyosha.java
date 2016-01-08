@@ -47,7 +47,7 @@ public class JuryoIninKeiyakuJigyosha extends
         this.entity = new DbT7061JuryoIninKeiyakuJigyoshaEntity();
         this.entity.setJigyoshaNo(受領委任契約事業者番号);
         this.entity.setKeiyakuKaishiYMD(受領委任契約開始日);
-        this.entity.setServiceShubetsuCode(new ServiceShubetsuCode(契約サービス種別));
+        this.entity.setServiceShubetsuCode(契約サービス種別);
         this.id = new JuryoIninKeiyakuJigyoshaIdentifier(
                 受領委任契約事業者番号,
                 受領委任契約開始日,
@@ -66,7 +66,7 @@ public class JuryoIninKeiyakuJigyosha extends
         this.id = new JuryoIninKeiyakuJigyoshaIdentifier(
                 entity.getJigyoshaNo(),
                 entity.getKeiyakuKaishiYMD(),
-                entity.getServiceShubetsuCode().getColumnValue());
+                entity.getServiceShubetsuCode());
     }
 
     /**
@@ -117,7 +117,7 @@ public class JuryoIninKeiyakuJigyosha extends
      * @return 契約サービス種別
      */
     public RString get契約サービス種別() {
-        return entity.getServiceShubetsuCode().getColumnValue();
+        return entity.getServiceShubetsuCode();
     }
 
     /**

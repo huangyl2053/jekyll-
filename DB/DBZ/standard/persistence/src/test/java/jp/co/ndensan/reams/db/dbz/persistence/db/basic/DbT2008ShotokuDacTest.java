@@ -4,11 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2008ShotokuDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2008ShotokuKanriDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuKanriEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuKanriEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -28,7 +28,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * {@link DbT2008ShotokuDac}のテストです。
+ * {@link DbT2008ShotokuKanriDac}のテストです。
  */
 @Ignore
 @RunWith(Enclosed.class)
@@ -36,11 +36,11 @@ public class DbT2008ShotokuDacTest extends DbzTestDacBase {
 
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
-    private static DbT2008ShotokuDac sut;
+    private static DbT2008ShotokuKanriDac sut;
 
     @BeforeClass
     public static void setUpClass() {
-        sut = InstanceProvider.create(DbT2008ShotokuDac.class);
+        sut = InstanceProvider.create(DbT2008ShotokuKanriDac.class);
     }
 
     public static class selectByKeyのテスト extends DbzTestDacBase {
@@ -83,7 +83,7 @@ public class DbT2008ShotokuDacTest extends DbzTestDacBase {
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
-            DbT2008ShotokuEntity insertedRecord = sut.selectByKey(
+            DbT2008ShotokuKanriEntity insertedRecord = sut.selectByKey(
                     DEFAULT_所得年度,
                     DEFAULT_識別コード,
                     DEFAULT_履歴番号);
@@ -92,7 +92,7 @@ public class DbT2008ShotokuDacTest extends DbzTestDacBase {
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
-            DbT2008ShotokuEntity insertedRecord = sut.selectByKey(
+            DbT2008ShotokuKanriEntity insertedRecord = sut.selectByKey(
                     DEFAULT_所得年度,
                     DEFAULT_識別コード,
                     DEFAULT_履歴番号);
@@ -149,20 +149,20 @@ public class DbT2008ShotokuDacTest extends DbzTestDacBase {
 
         @Test
         public void 介護所得エンティティを渡すと_updateは_介護所得を更新する() {
-            DbT2008ShotokuEntity updateRecord = sut.selectByKey(
+            DbT2008ShotokuKanriEntity updateRecord = sut.selectByKey(
                     DEFAULT_所得年度,
                     DEFAULT_識別コード,
                     DEFAULT_履歴番号);
-            updateRecord.setHiKazeiKubun(new RString("2"));
+            updateRecord.setKazeiKubun(new RString("2"));
 
             sut.save(updateRecord);
 
-            DbT2008ShotokuEntity updatedRecord = sut.selectByKey(
+            DbT2008ShotokuKanriEntity updatedRecord = sut.selectByKey(
                     DEFAULT_所得年度,
                     DEFAULT_識別コード,
                     DEFAULT_履歴番号);
 
-            assertThat(updateRecord.getHiKazeiKubun(), is(updatedRecord.getHiKazeiKubun()));
+            assertThat(updateRecord.getKazeiKubun(), is(updatedRecord.getKazeiKubun()));
         }
     }
 
@@ -178,7 +178,7 @@ public class DbT2008ShotokuDacTest extends DbzTestDacBase {
 
         @Test
         public void 介護所得エンティティを渡すと_deleteは_介護所得を削除する() {
-            DbT2008ShotokuEntity deletedEntity = sut.selectByKey(
+            DbT2008ShotokuKanriEntity deletedEntity = sut.selectByKey(
                     DEFAULT_所得年度,
                     DEFAULT_識別コード,
                     DEFAULT_履歴番号);
@@ -198,8 +198,8 @@ public class DbT2008ShotokuDacTest extends DbzTestDacBase {
         public static void insert(
                 FlexibleYear 所得年度,
                 ShikibetsuCode 識別コード,
-                Decimal 履歴番号) {
-            DbT2008ShotokuEntity entity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
+                int 履歴番号) {
+            DbT2008ShotokuKanriEntity entity = DbT2008ShotokuKanriEntityGenerator.createDbT2008ShotokuKanriEntity();
             entity.setShotokuNendo(所得年度);
             entity.setShikibetsuCode(識別コード);
             entity.setRirekiNo(履歴番号);

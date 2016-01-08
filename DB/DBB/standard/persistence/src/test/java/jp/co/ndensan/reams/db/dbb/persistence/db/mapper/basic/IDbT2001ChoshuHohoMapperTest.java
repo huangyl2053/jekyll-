@@ -221,7 +221,7 @@ public class IDbT2001ChoshuHohoMapperTest extends DbbTestDacBase {
 
         @Test
         public void 正しく特別徴収停止日時されている() {
-            assertThat(sut.getEntity().getTokuchoTeishiTimestamp(), is(entity.getTokuchoTeishiTimestamp()));
+            assertThat(sut.getEntity().getTokuchoTeishiNichiji(), is(entity.getTokuchoTeishiNichiji()));
         }
 
         @Test
