@@ -171,7 +171,9 @@ public class ShujiiMaster {
      */
     public ResponseData<ShujiiMasterDiv> onClick_btnInsert(ShujiiMasterDiv div) {
         div.getShujiiJohoInput().setState(状態_追加);
+        getHandler(div).setDisabledFalseToShujiiJohoInputMeisai();
         getHandler(div).clearShujiiJohoInputMeisai();
+        div.getShujiiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
         return ResponseData.of(div).respond();
     }
 
@@ -428,7 +430,7 @@ public class ShujiiMaster {
                     ViewStateKeys.主治医マスタ検索結果, Models.class);
             ShujiiJohoManager shujiiJohoManager = new ShujiiJohoManager();
             for (ShujiiJoho shujiiJoho : models) {
-                shujiiJohoManager.save主治医情報(shujiiJoho);
+                shujiiJohoManager.saveOrDelete主治医情報(shujiiJoho);
             }
             div.getCcdKanryoMessage().setSuccessMessage(
                     new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);

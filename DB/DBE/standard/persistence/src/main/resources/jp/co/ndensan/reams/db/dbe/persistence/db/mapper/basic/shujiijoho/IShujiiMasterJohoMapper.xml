@@ -28,7 +28,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiMasterMapperParameter" fetchSize="500">
         SELECT
 	    DbT5912ShujiiJoho."dbT5912ShujiiJoho_shichosonCode" AS dbT5912ShujiiJoho_shichosonCode,
-	    DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonMeisho" AS dbT5912ShujiiJoho_shichosonCode,
+	    DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonMeisho" AS dbT7051KoseiShichosonMaster_shichosonMeisho,
 	    DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiName" AS dbT5912ShujiiJoho_shujiiName,
 	    DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiKana" AS dbT5912ShujiiJoho_shujiiKana,
 	    DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiCode" AS dbT5912ShujiiJoho_shujiiCode,

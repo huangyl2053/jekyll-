@@ -80,4 +80,20 @@ public class ShujiiJohoManager {
         }
         return 1 == dac.save(主治医情報.toEntity());
     }
+    
+    /**
+     * 主治医情報{@link ShujiiJoho}を保存します。
+     *
+     * @param 主治医情報 {@link ShujiiJoho}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean saveOrDelete主治医情報(ShujiiJoho 主治医情報) {
+        requireNonNull(主治医情報, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医情報"));
+        if (!主治医情報.hasChanged()) {
+            return false;
+        }
+
+        return 1 == dac.saveOrDelete(主治医情報.toEntity());
+    }
 }

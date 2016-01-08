@@ -86,4 +86,18 @@ public class DbT5912ShujiiJohoDac implements ISaveable<DbT5912ShujiiJohoEntity> 
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医情報エンティティ"));
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+    
+     /**
+     * DbT5912ShujiiJohoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 件数
+     */
+    @Transaction
+    public int saveOrDelete(DbT5912ShujiiJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医情報エンティティ"));
+
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
 }
