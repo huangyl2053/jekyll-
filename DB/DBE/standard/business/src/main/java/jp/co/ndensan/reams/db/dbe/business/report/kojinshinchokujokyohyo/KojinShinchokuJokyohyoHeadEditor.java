@@ -55,16 +55,23 @@ class KojinShinchokuJokyohyoHeadEditor implements KojinShinchokuJokyohyoEditor {
         systemDateTime.append(new RString("作成"));
         source.printTimeStamp = systemDateTime.toRString();
         source.title = new RString("個人進捗状況一覧表");
-        source.hihokenshaNo1 = item.getHihokenshaNo().substring(0, 1);
-        source.hihokenshaNo2 = item.getHihokenshaNo().substring(1, 2);
-        source.hihokenshaNo3 = item.getHihokenshaNo().substring(2, 3);
-        source.hihokenshaNo4 = item.getHihokenshaNo().substring(3, 4);
-        source.hihokenshaNo5 = item.getHihokenshaNo().substring(4, 5);
-        source.hihokenshaNo6 = item.getHihokenshaNo().substring(5, 6);
-        source.hihokenshaNo7 = item.getHihokenshaNo().substring(6, 7);
-        source.hihokenshaNo8 = item.getHihokenshaNo().substring(7, 8);
-        source.hihokenshaNo9 = item.getHihokenshaNo().substring(8, 9);
-        source.hihokenshaNo10 = item.getHihokenshaNo().substring(9, 10);
+        RString hihokenshaNo = item.getHihokenshaNo();
+        if (hihokenshaNo == null) {
+            hihokenshaNo = RString.EMPTY;
+        }
+        if (hihokenshaNo.length() < 10) {
+            hihokenshaNo = hihokenshaNo.padRight(RString.HALF_SPACE, 10);
+        }
+        source.hihokenshaNo1 = hihokenshaNo.substring(0, 1);
+        source.hihokenshaNo2 = hihokenshaNo.substring(1, 2);
+        source.hihokenshaNo3 = hihokenshaNo.substring(2, 3);
+        source.hihokenshaNo4 = hihokenshaNo.substring(3, 4);
+        source.hihokenshaNo5 = hihokenshaNo.substring(4, 5);
+        source.hihokenshaNo6 = hihokenshaNo.substring(5, 6);
+        source.hihokenshaNo7 = hihokenshaNo.substring(6, 7);
+        source.hihokenshaNo8 = hihokenshaNo.substring(7, 8);
+        source.hihokenshaNo9 = hihokenshaNo.substring(8, 9);
+        source.hihokenshaNo10 = hihokenshaNo.substring(9, 10);
         source.shinseiKubun = item.getShinseiKubun();
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
         RStringBuilder shinseiYMD = new RStringBuilder();
