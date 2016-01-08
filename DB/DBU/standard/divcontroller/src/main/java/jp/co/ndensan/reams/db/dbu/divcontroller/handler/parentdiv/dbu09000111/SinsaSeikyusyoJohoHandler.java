@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0900011;
+package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu09000111;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +49,7 @@ public class SinsaSeikyusyoJohoHandler {
                     grdSinsaSeikyusyoJoho_Row dgJigyoshaItiran = new grdSinsaSeikyusyoJoho_Row();
                     dgJigyoshaItiran.getTxtShinsaSeikyuTodokeYMD().setValue(new RDate(jigyoshaInput.get審査請求届出日().toString()));
                     dgJigyoshaItiran.setTxtShinsaSeikyuJinName(jigyoshaInput.get審査請求人氏名() == null ? RString.EMPTY : jigyoshaInput.get審査請求人氏名().value());
-                    dgJigyoshaItiran.setTxtShobunNaiyo(ShobunShuruiCode.toValue(jigyoshaInput.get処分種類コード()).get名称());
+                    dgJigyoshaItiran.setTxtShobunNaiyo(ShobunShuruiCode.toValue(nullToEmpty(jigyoshaInput.get処分種類コード())).get名称());
                     dgJigyoshaItiran.getTxtShobunShitaYMD().setValue(new RDate(jigyoshaInput.get処分があったことを知った日().toString()));
                     dgJigyoshaItiran.getTxtBenmeishoSakuseiYMD().setValue(new RDate(jigyoshaInput.get弁明書作成日().toString()));
                     dgJigyoshaItiran.setTxtSaiketsuKekka(nullToEmpty(jigyoshaInput.get裁決結果()));
