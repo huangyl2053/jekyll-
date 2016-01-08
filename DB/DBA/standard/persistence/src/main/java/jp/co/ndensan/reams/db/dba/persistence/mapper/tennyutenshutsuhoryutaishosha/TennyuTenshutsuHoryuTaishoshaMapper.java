@@ -6,7 +6,8 @@
 package jp.co.ndensan.reams.db.dba.persistence.mapper.tennyutenshutsuhoryutaishosha;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TennyuTenshutsuHoryuEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TennyushutsuHoryuTaishoshaEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaEntity;
 
 /**
  *
@@ -19,20 +20,20 @@ public interface TennyuTenshutsuHoryuTaishoshaMapper {
      *
      * @return List<TennyuTenshutsuHoryuEntity>
      */
-    List<TennyuTenshutsuHoryuEntity> get転出保留対象者情報の取得処理();
+    List<TennyushutsuHoryuTaishoshaEntity> get転出保留対象者情報の取得処理();
 
     /**
      * 転入 広域保留対象者情報の取得する
      *
      * @return List<TennyuTenshutsuHoryuEntity>
      */
-    List<TennyuTenshutsuHoryuEntity> get転入保留対象者情報の取得処理();
+    List<TenshutsuHoryuTaishoshaEntity> get転入保留対象者情報の取得処理();
 
     /**
      * 転入 広域保留対象者情報の取得する
      *
      * @return List<TennyuTenshutsuHoryuEntity>
      */
-    List<TennyuTenshutsuHoryuEntity> get広域保留対象者情報の取得処理();
+    List<TenshutsuHoryuTaishoshaEntity> get広域保留対象者情報の取得処理();
 
 }
