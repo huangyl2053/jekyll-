@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 
 /**
@@ -65,19 +66,55 @@ public interface IIkkatsuHakkoMapper {
     List<IkkatsuHakkoRelateEntity> getTaishoJoho1();
 
     /**
-     * 生年月日の値がある場合、被保険者台帳情報の取得
+     * 一時テーブルから生年月日の値があるデータを取得します。
      *
      * @return {@link IkkatsuHakkoRelateEntity}
      */
-    List<IkkatsuHakkoRelateEntity> check被保険者台帳管理();
+    List<IkkatsuHakkoRelateEntity> get生年月日ある();
 
     /**
-     * 生年月日の値がある場合、適用除外者と他市町村住所地特例の取得
+     * 生年月日の値がある場合、被保険者台帳管理にチェックします。
+     *
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> get最新被保険者1();
+
+    /**
+     * 生年月日の値がある場合、被保険者台帳管理に再チェックします。
+     *
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> get最新被保険者2();
+
+    /**
+     * 生年月日の値がある場合、適用除外者にチェックします。
+     *
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> get最新適用除外者1();
+
+    /**
+     * 生年月日の値がある場合、適用除外者に再チェックします。
      *
      * @param 検索条件 検索条件
      * @return {@link IkkatsuHakkoRelateEntity}
      */
-    List<IkkatsuHakkoRelateEntity> check適用除外者(IkkatsuHakkoMybatisParameter 検索条件);
+    List<IkkatsuHakkoRelateEntity> get最新適用除外者2(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
+     * 生年月日の値がある場合、他市町村住所地特例にチェックします。
+     *
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> get最新他市町村住所地特例1();
+
+    /**
+     * 生年月日の値がある場合、他市町村住所地特例に再チェックします。
+     *
+     * @param 検索条件 検索条件
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> get最新他市町村住所地特例2(IkkatsuHakkoMybatisParameter 検索条件);
 
     /**
      * 画面で「再発行する」をチェックする場合、対象情報を取得します。
@@ -154,7 +191,7 @@ public interface IIkkatsuHakkoMapper {
      * @param 検索条件 検索条件
      * @return {@link IkkatsuHakkoRelateEntity}
      */
-    IkkatsuHakkoRelateEntity getNinteiKekkaJoho(IkkatsuHakkoMybatisParameter 検索条件);
+    List<IkkatsuHakkoRelateEntity> getNinteiKekkaJoho(IkkatsuHakkoMybatisParameter 検索条件);
 
     /**
      * 要介護認定結果情報の情報取得を一時テーブルに更新します。
@@ -273,10 +310,10 @@ public interface IIkkatsuHakkoMapper {
     /**
      * 処理日付管理マスタテーブルを更新します。
      *
-     * @param 検索条件 検索条件
+     * @param entity entity
      * @return IkkatsuHakkoRelateEntity
      */
-    int updateShoriDateKanri(IkkatsuHakkoMybatisParameter 検索条件);
+    int updateShoriDateKanri(DbT7022ShoriDateKanriEntity entity);
 
     /**
      * 一時テーブルを削除します。

@@ -52,6 +52,7 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
         List<IkkatsuHakkoRelateEntity> データ抽出list = データ抽出();
         if (データ抽出list.isEmpty()) {
             List<IkkatsuHakkoRelateEntity> 被保険者証一覧List = iIkkatsuHakkoMapper.getHihokenshaIchiran();
+            //TODO 段站立　QA273 被保険者証一覧表編集クラスの確認
         } else {
             for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : データ抽出list) {
                 ikkatsuHakkoRelateEntity.setShisetyuJotaiFlag(FALSE);
@@ -61,11 +62,6 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
         }
     }
 
-    /**
-     * 対象データの抽出
-     *
-     * @return データ抽出list
-     */
     private List<IkkatsuHakkoRelateEntity> データ抽出() {
         List<IkkatsuHakkoRelateEntity> データ抽出list = new ArrayList<>();
         switch (processPrm.getShutsuryokuJokenCode().toString()) {
@@ -84,20 +80,10 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
         return データ抽出list;
     }
 
-    /**
-     * 受給者台帳異動を取得します。
-     *
-     * @return jukyoshaDaichoIdolist
-     */
     private List<IkkatsuHakkoRelateEntity> get受給者のみ() {
         return iIkkatsuHakkoMapper.getJukyushaDaichoIdo(mybatisPrm);
     }
 
-    /**
-     * 年齢到達予定者を取得します。
-     *
-     * @return nenreiTotatsuYoteshalist
-     */
     private List<IkkatsuHakkoRelateEntity> get年齢到達予定者() {
         if (processPrm.getKonkaiKijunYMD().isBefore(processPrm.getKonkaiToYMD())) {
             List<RString> list = new ArrayList<>();
@@ -143,11 +129,6 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
         return null;
     }
 
-    /**
-     * 被保険者台帳の異動者を取得します。
-     *
-     * @return hihokenshaDaichoIdolist
-     */
     private List<IkkatsuHakkoRelateEntity> get該当者全員() {
         List<RString> list = new ArrayList<>();
         List<IkkatsuHakkoRelateEntity> 受給者台帳異動list = get受給者のみ();
@@ -171,7 +152,8 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
                     } else if (jukyoshaDaichoIdo.getHihokenshaNo() == ikkatsuHakkoRelateEntity.getHihokenshaNo()
                             && jukyoshaDaichoIdo.getInsertTimestamp().isAfter(ikkatsuHakkoRelateEntity.getInsertTimestamp())) {
                         hihokenshaDaichoIdolist.add(jukyoshaDaichoIdo);
-                    } else {
+                    } else if (jukyoshaDaichoIdo.getHihokenshaNo() == ikkatsuHakkoRelateEntity.getHihokenshaNo()
+                            && jukyoshaDaichoIdo.getInsertTimestamp().isEqual(ikkatsuHakkoRelateEntity.getInsertTimestamp())) {
                         hihokenshaDaichoIdolist.add(jukyoshaDaichoIdo);
                     }
                 }

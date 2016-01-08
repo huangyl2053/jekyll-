@@ -56,9 +56,6 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
         送付先情報を一時テーブルに更新();
     }
 
-    /**
-     * 被保険者台帳の情報を一時テーブルに更新します。
-     */
     private void 被保台帳を一時テーブルに更新() {
         List<IkkatsuHakkoRelateEntity> 被保険者台帳List = iIkkatsuHakkoMapper.getHihokenshaDaicho();
         for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 被保険者台帳List) {
@@ -66,9 +63,6 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
         }
     }
 
-    /**
-     * 介護保険施設入退所の情報を一時テーブルに更新します。
-     */
     private void 介護保険施設を一時テーブルに更新() {
         List<IkkatsuHakkoRelateEntity> 介護保険施設List = iIkkatsuHakkoMapper.getKaigoHokenShisetsuNyutaisho();
         for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 介護保険施設List) {
@@ -76,9 +70,6 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
         }
     }
 
-    /**
-     * 受給者台帳の情報取得を一時テーブルに更新します。
-     */
     private void 受給者台帳を一時テーブルに更新() {
         List<IkkatsuHakkoRelateEntity> 受給者台帳List = iIkkatsuHakkoMapper.getJukyushaDaicho();
         for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 受給者台帳List) {
@@ -86,9 +77,6 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
         }
     }
 
-    /**
-     * 要介護認定結果情報の情報取得を一時テーブルに更新します。
-     */
     private void 要介護認定を一時テーブルに更新() {
         List<IkkatsuHakkoRelateEntity> 要介護認定List = new ArrayList<>();
         List<IkkatsuHakkoRelateEntity> 受給者台帳list = iIkkatsuHakkoMapper.getJukyushaDaicho();
@@ -107,16 +95,13 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
                     mybatisPrm.getPsmShikibetsuTaisho(),
                     mybatisPrm.getPsmAtesaki(),
                     mybatisPrm.getNenreiTotatsuYMD());
-            要介護認定List.add(iIkkatsuHakkoMapper.getNinteiKekkaJoho(mybatisParam));
+            要介護認定List.addAll(iIkkatsuHakkoMapper.getNinteiKekkaJoho(mybatisParam));
         }
         for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 要介護認定List) {
             iIkkatsuHakkoMapper.updateTmp_NinteiKekkaJoho(ikkatsuHakkoRelateEntity);
         }
     }
 
-    /**
-     * 支払方法変更の情報取得を一時テーブルに更新します。
-     */
     private void 支払方法変更を一時テーブルに更新() {
         List<IkkatsuHakkoRelateEntity> 支払方法変更List = iIkkatsuHakkoMapper.getShiharaiHohoHenko();
         for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 支払方法変更List) {
@@ -124,9 +109,6 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
         }
     }
 
-    /**
-     * 居宅給付計画届出の情報取得を一時テーブルに更新します。
-     */
     private void 居宅給付計画を一時テーブルに更新() {
         List<IkkatsuHakkoRelateEntity> 届出List = iIkkatsuHakkoMapper.getKyotakuKeikakuTodokede();
         List<IkkatsuHakkoRelateEntity> 事業者作成List = iIkkatsuHakkoMapper.getKyotakuKeikakuJigyoshaSakusei();
@@ -146,9 +128,6 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
         }
     }
 
-    /**
-     * 本人情報を一時テーブルに更新します。
-     */
     private void 本人情報を一時テーブルに更新() {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(ShikibetsuTaishoGyomuHanteiKeyFactory.
                 createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
@@ -174,9 +153,6 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
         }
     }
 
-    /**
-     * 送付先情報取得を一時テーブルに更新します。
-     */
     private void 送付先情報を一時テーブルに更新() {
         IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBU介護統計報告);
         AtesakiPSMSearchKeyBuilder builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);

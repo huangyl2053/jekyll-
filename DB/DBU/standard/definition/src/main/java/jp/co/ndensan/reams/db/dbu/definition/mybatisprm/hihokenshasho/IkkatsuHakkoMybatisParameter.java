@@ -19,7 +19,7 @@ import lombok.Getter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
+public final class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
 
     private final RString shutsuryokuJokenCode;
     private final RDateTime konkaiFromYMDHMS;
@@ -37,7 +37,7 @@ public class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
     private final FlexibleDate nenreiTotatsuYMD;
 
     /**
-     * コンストラクタ
+     * コンストラクタです。<br/>
      *
      * @param 出力条件コード 出力条件コード
      * @param 今回の開始日時 今回の開始日時
@@ -53,8 +53,9 @@ public class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
      * @param 識別対象PSM 識別対象PSM
      * @param 宛先PSM 宛先PSM
      * @param 年齢到達日 年齢到達日
+     *
      */
-    public IkkatsuHakkoMybatisParameter(RString 出力条件コード,
+    private IkkatsuHakkoMybatisParameter(RString 出力条件コード,
             RDateTime 今回の開始日時,
             FlexibleDate 今回の終了日,
             RDateTime 今回の終了日時,
@@ -84,6 +85,26 @@ public class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
         this.nenreiTotatsuYMD = 年齢到達日;
     }
 
+    /**
+     * mybatisのパラメータを生成します。
+     *
+     ** @param 出力条件コード 出力条件コード
+     * @param 今回の開始日時 今回の開始日時
+     * @param 今回の終了日 今回の終了日
+     * @param 今回の終了日時 今回の終了日時
+     * @param 今回の基準日 今回の基準日
+     * @param 今回の基準日時 今回の基準日時
+     * @param 申請書管理番号 申請書管理番号
+     * @param 生年月日抽出開始日 生年月日抽出開始日
+     * @param 生年月日抽出終了日 生年月日抽出終了日
+     * @param 被保険者番号 被保険者番号
+     * @param 識別コード 識別コード
+     * @param 識別対象PSM 識別対象PSM
+     * @param 宛先PSM 宛先PSM
+     * @param 年齢到達日 年齢到達日
+     *
+     * @return mybatisパラメータ
+     */
     public static IkkatsuHakkoMybatisParameter createSelectByKeyParam(RString 出力条件コード,
             RDateTime 今回の開始日時,
             FlexibleDate 今回の終了日,
@@ -95,7 +116,7 @@ public class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
             FlexibleDate 生年月日抽出終了日,
             HihokenshaNo 被保険者番号,
             ShikibetsuCode 識別コード,
-            RString PSM識別対象,
+            RString 識別対象PSM,
             RString 宛先PSM,
             FlexibleDate 年齢到達日) {
         return new IkkatsuHakkoMybatisParameter(出力条件コード,
@@ -109,7 +130,7 @@ public class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
                 生年月日抽出終了日,
                 被保険者番号,
                 識別コード,
-                PSM識別対象,
+                識別対象PSM,
                 宛先PSM,
                 年齢到達日);
     }
