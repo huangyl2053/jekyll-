@@ -42,43 +42,13 @@ public class SinsaSeikyusyoJohoHandler {
     public void onLoad(List<FufukuMoshitate> sinsaSeikyusyoJohoList) {
 
         if (状態_照会.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            List<grdSinsaSeikyusyoJoho_Row> grdSinsaSeiList = new ArrayList<>();
-            if (sinsaSeikyusyoJohoList != null && !sinsaSeikyusyoJohoList.isEmpty()) {
-                for (FufukuMoshitate jigyoshaInput : sinsaSeikyusyoJohoList) {
-                    grdSinsaSeikyusyoJoho_Row dgJigyoshaItiran = new grdSinsaSeikyusyoJoho_Row();
-                    dgJigyoshaItiran.getTxtShinsaSeikyuTodokeYMD().setValue(new RDate(jigyoshaInput.get審査請求届出日().toString()));
-                    dgJigyoshaItiran.setTxtShinsaSeikyuJinName(jigyoshaInput.get審査請求人氏名() == null ? RString.EMPTY : jigyoshaInput.get審査請求人氏名().value());
-                    dgJigyoshaItiran.setTxtShobunNaiyo(jigyoshaInput.get処分種類コード() == null
-                            ? RString.EMPTY : ShobunShuruiCode.toValue(jigyoshaInput.get処分種類コード()).get名称());
-                    dgJigyoshaItiran.getTxtShobunShitaYMD().setValue(new RDate(jigyoshaInput.get処分があったことを知った日().toString()));
-                    dgJigyoshaItiran.getTxtBenmeishoSakuseiYMD().setValue(new RDate(jigyoshaInput.get弁明書作成日().toString()));
-                    dgJigyoshaItiran.setTxtSaiketsuKekka(nullToEmpty(jigyoshaInput.get裁決結果()));
-                    dgJigyoshaItiran.getTxtShinsaSeikyuToriageYMD().setValue(new RDate(jigyoshaInput.get審査請求取下日().toString()));
-                    grdSinsaSeiList.add(dgJigyoshaItiran);
-                }
-            }
-            sinsadiv.getGrdSinsaSeikyusyoJoho().setDataSource(grdSinsaSeiList);
+            sinsadiv.getGrdSinsaSeikyusyoJoho().setDataSource(setDataSourcre(sinsaSeikyusyoJohoList));
             sinsadiv.getSinsaSeikyusyoJohoPane1().getBtnTuika().setVisible(false);
             sinsadiv.getGrdSinsaSeikyusyoJoho().getGridSetting().setIsShowModifyButtonColumn(false);
             sinsadiv.getGrdSinsaSeikyusyoJoho().getGridSetting().setIsShowDeleteButtonColumn(false);
         }
         if (状態_更新.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            List<grdSinsaSeikyusyoJoho_Row> grdSinsaSeiList = new ArrayList<>();
-            if (sinsaSeikyusyoJohoList != null && !sinsaSeikyusyoJohoList.isEmpty()) {
-                for (FufukuMoshitate jigyoshaInput : sinsaSeikyusyoJohoList) {
-                    grdSinsaSeikyusyoJoho_Row dgJigyoshaItiran = new grdSinsaSeikyusyoJoho_Row();
-                    dgJigyoshaItiran.getTxtShinsaSeikyuTodokeYMD().setValue(new RDate(jigyoshaInput.get審査請求届出日().toString()));
-                    dgJigyoshaItiran.setTxtShinsaSeikyuJinName(jigyoshaInput.get審査請求人氏名() == null ? RString.EMPTY : jigyoshaInput.get審査請求人氏名().value());
-                    dgJigyoshaItiran.setTxtShobunNaiyo(jigyoshaInput.get処分種類コード() == null
-                            ? RString.EMPTY : ShobunShuruiCode.toValue(jigyoshaInput.get処分種類コード()).get名称());
-                    dgJigyoshaItiran.getTxtShobunShitaYMD().setValue(new RDate(jigyoshaInput.get処分があったことを知った日().toString()));
-                    dgJigyoshaItiran.getTxtBenmeishoSakuseiYMD().setValue(new RDate(jigyoshaInput.get弁明書作成日().toString()));
-                    dgJigyoshaItiran.setTxtSaiketsuKekka(nullToEmpty(jigyoshaInput.get裁決結果()));
-                    dgJigyoshaItiran.getTxtShinsaSeikyuToriageYMD().setValue(new RDate(jigyoshaInput.get審査請求取下日().toString()));
-                    grdSinsaSeiList.add(dgJigyoshaItiran);
-                }
-            }
-            sinsadiv.getGrdSinsaSeikyusyoJoho().setDataSource(grdSinsaSeiList);
+            sinsadiv.getGrdSinsaSeikyusyoJoho().setDataSource(setDataSourcre(sinsaSeikyusyoJohoList));
         }
     }
 
@@ -87,5 +57,28 @@ public class SinsaSeikyusyoJohoHandler {
             return RString.EMPTY;
         }
         return obj;
+    }
+
+    private List<grdSinsaSeikyusyoJoho_Row> setDataSourcre(List<FufukuMoshitate> sinsaSeikyusyoJohoList) {
+        List<grdSinsaSeikyusyoJoho_Row> grdSinsaSeiList = new ArrayList<>();
+        for (FufukuMoshitate jigyoshaInput : sinsaSeikyusyoJohoList) {
+            grdSinsaSeikyusyoJoho_Row dgJigyoshaItiran = new grdSinsaSeikyusyoJoho_Row();
+            dgJigyoshaItiran.getTxtShinsaSeikyuTodokeYMD().setValue(new RDate(jigyoshaInput.get審査請求届出日().toString()));
+            dgJigyoshaItiran.setTxtShinsaSeikyuJinName(jigyoshaInput.get審査請求人氏名() == null ? RString.EMPTY : jigyoshaInput.get審査請求人氏名().value());
+            dgJigyoshaItiran.setTxtShobunNaiyo(jigyoshaInput.get処分種類コード() == null
+                    ? RString.EMPTY : ShobunShuruiCode.toValue(jigyoshaInput.get処分種類コード()).get名称());
+            if (jigyoshaInput.get処分があったことを知った日() != null) {
+                dgJigyoshaItiran.getTxtShobunShitaYMD().setValue(new RDate(jigyoshaInput.get処分があったことを知った日().toString()));
+            }
+            if (jigyoshaInput.get弁明書作成日() != null) {
+                dgJigyoshaItiran.getTxtBenmeishoSakuseiYMD().setValue(new RDate(jigyoshaInput.get弁明書作成日().toString()));
+            }
+            dgJigyoshaItiran.setTxtSaiketsuKekka(nullToEmpty(jigyoshaInput.get裁決結果()));
+            if (jigyoshaInput.get審査請求取下日() != null) {
+                dgJigyoshaItiran.getTxtShinsaSeikyuToriageYMD().setValue(new RDate(jigyoshaInput.get審査請求取下日().toString()));
+            }
+            grdSinsaSeiList.add(dgJigyoshaItiran);
+        }
+        return grdSinsaSeiList;
     }
 }
