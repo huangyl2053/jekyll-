@@ -86,11 +86,11 @@ public class KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder {
         for (KaigoJuminhyoKobetsuParameter list : kobetsuLsit) {
             KobetsuKoikiunyoParameter batchParameter = new KobetsuKoikiunyoParameter();
             batchParameter.setShichosonCode(list.getSakiShichoson().substring(0, 位置_結束));
-            batchParameter.setSystemDate(RDate.getNowDate());
+            batchParameter.setDateTo(RDate.getNowDate());
             RStringBuilder taishoShuryo = new RStringBuilder();
             taishoShuryo.append(list.getKonkaiStSakuseiYMD());
             taishoShuryo.append(list.getKonkaiStSakuseiTime());
-            batchParameter.setTaishoShuryoTimestamp(taishoShuryo.toRString());
+            batchParameter.setDateFrom(taishoShuryo.toRString());
             batchParameterList.add(batchParameter);
         }
         return SearchResult.of(batchParameterList, 0, false);

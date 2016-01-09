@@ -18,6 +18,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KobetsuKoikiunyoParameter {
 
     private RString shichosonCode;
-    private RString taishoShuryoTimestamp;
-    private RDate systemDate;
+    private RString dateFrom;
+    private RDate dateTo;
 }
