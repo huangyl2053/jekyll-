@@ -1,0 +1,206 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBC&quot;,&quot;controlName&quot;:&quot;ShokanShinseiList&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[{&quot;key&quot;:&quot;モード&quot;,&quot;controlName&quot;:&quot;ShokanShinseiList.モード&quot;},{&quot;key&quot;:&quot;被保険者番号&quot;,&quot;controlName&quot;:&quot;ShokanShinseiList.被保険者番号&quot;},{&quot;key&quot;:&quot;サービス年月From&quot;,&quot;controlName&quot;:&quot;ShokanShinseiList.サービス年月From&quot;},{&quot;key&quot;:&quot;サービス年月To&quot;,&quot;controlName&quot;:&quot;ShokanShinseiList.サービス年月To&quot;}],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[{&quot;eventName&quot;:&quot;onClick_InsertButton&quot;},{&quot;eventName&quot;:&quot;onClick_SelectButton&quot;},{&quot;eventName&quot;:&quot;onClick_ModifyButton&quot;}],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBC.ShokanShinseiList"><div class="StateChangable UzPanel JSControl FloatLeft marginTop-Default marginBottom-Default marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel Width-G12 UzCompositeChild" id="ShokanShinseiList" style="margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ShokanShinseiList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G12&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;ShokanShinseiList&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ShokanShinseiList&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dbc/db/dbc/ShokanShinseiList/onLoad&quot;},{&quot;eventName&quot;:&quot;onActive&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onClick_InsertButton&quot;,&quot;requestUrl&quot;:&quot;dbc/db/dbc/ShokanShinseiList/onClick_InsertButton&quot;},{&quot;eventName&quot;:&quot;onSelectByDbClick&quot;,&quot;requestUrl&quot;:&quot;dbc/db/dbc/ShokanShinseiList/onSelectByDbClick&quot;},{&quot;eventName&quot;:&quot;onClick_SelectButton&quot;,&quot;requestUrl&quot;:&quot;dbc/db/dbc/ShokanShinseiList/onClick_SelectButton&quot;},{&quot;eventName&quot;:&quot;onClick_ModifyButton&quot;,&quot;requestUrl&quot;:&quot;dbc/db/dbc/ShokanShinseiList/onClick_ModifyButton&quot;},{&quot;eventName&quot;:&quot;onClick_DeleteButton&quot;,&quot;requestUrl&quot;:&quot;dbc/db/dbc/ShokanShinseiList/onClick_DeleteButton&quot;}],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;モード&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;被保険者番号&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;サービス年月From&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;サービス年月To&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;focusPositionID&quot;:&quot;createFile&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ShokanShinseiList_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content ui-droppable ui-sortable panelPaddingDelete" id="ShokanShinseiList_panel_body_area"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtServiceYM" style="width: 180px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtServiceYM&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;56px&quot;,&quot;selectControlID&quot;:&quot;txtServiceYM_core&quot;,&quot;required&quot;:true,&quot;labelLText&quot;:&quot;サービス年月&quot;,&quot;ymdKubun&quot;:1}"><span class="word-wrap-break-word Label-L text-align-right Width-S" id="txtServiceYM_labelL"><span class="requireMark">*</span><span>サービス年月</span></span><input class="UzTextBox CoreElement required" id="txtServiceYM_core" style="width: 56px;" type="text" placeholder="" data-wareki="" data-setcount="0" data-seireki="" data-orgtext="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2" data-wareki-hirekijyou=""></div><button class="UzButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="btnAdd" style="width: 140px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnAdd&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;140px&quot;,&quot;selectControlID&quot;:&quot;btnAdd&quot;,&quot;onClick&quot;:&quot;onClick_InsertButton&quot;,&quot;text&quot;:&quot;申請を追加する&quot;,&quot;isClientValidate&quot;:true}"><span>申請を追加する</span></button><div class="UzHorizontalLine JSControl controlMargin-M ClearFloat Width-XL UzCompositeChild" id="line" data-control-type="HorizontalLine" data-obj="{&quot;fieldName&quot;:&quot;line&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;HorizontalLine&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;line&quot;,&quot;size&quot;:&quot;XL&quot;}"></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M ClearFloat UzCompositeChild" id="txtServiceYMFrom" style="width: 180px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtServiceYMFrom&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;56px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtServiceYMFrom_core&quot;,&quot;labelLText&quot;:&quot;サービス年月&quot;,&quot;ymdKubun&quot;:1}"><span class="word-wrap-break-word Label-L text-align-right Width-S" id="txtServiceYMFrom_labelL"><span>サービス年月</span></span><input class="UzTextBox CoreElement" id="txtServiceYMFrom_core" style="width: 56px;" type="text" placeholder="" data-wareki="" data-setcount="0" data-seireki="" data-orgtext="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2" data-wareki-hirekijyou=""></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtServiceYMTo" style="width: 114px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtServiceYMTo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;56px&quot;,&quot;selectControlID&quot;:&quot;txtServiceYMTo_core&quot;,&quot;labelLText&quot;:&quot;～&quot;,&quot;labelLWidth&quot;:&quot;XS&quot;,&quot;labelLAlign&quot;:0,&quot;ymdKubun&quot;:1}"><span class="word-wrap-break-word Label-L text-align-left Width-XS" id="txtServiceYMTo_labelL"><span>～</span></span><input class="UzTextBox CoreElement" id="txtServiceYMTo_core" style="width: 56px;" type="text" placeholder="" data-wareki="" data-setcount="0" data-seireki="" data-orgtext="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2" data-wareki-hirekijyou=""></div><button class="UzButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="btnSelect" style="width: 80px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnSelect&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;btnSelect&quot;,&quot;onClick&quot;:&quot;onSelectByDbClick&quot;,&quot;text&quot;:&quot;検索する&quot;}"><span>検索する</span></button><div class="UzDataGrid JSControl FloatLeft marginLeft-XS controlMargin-M Height-S ClearFloat marginRight-XS UzCompositeChild" id="dgShinseiList" style="width: 590px; margin-top: 5px; margin-bottom: 5px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgShinseiList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;590px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;dgShinseiList&quot;,&quot;marginTop&quot;:&quot;5px&quot;,&quot;marginBottom&quot;:&quot;5px&quot;,&quot;height&quot;:&quot;S&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowClearSortButton&quot;:false,&quot;isShowSelectedRowCount&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowRowState&quot;:false,&quot;columns&quot;:[{&quot;columnName&quot;:&quot;被保険者番号&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;hiHokenshaNo&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:0,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;hiHokenshaNo&quot;},{&quot;columnName&quot;:&quot;サービス年月&quot;,&quot;headerHtml&quot;:&quot;<table>\n<tbody>\n<tr><td>サービス<br>年月</tr>\n</tbody>\n</table>&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;serviceTeikyoYM&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;serviceTeikyoYM&quot;},{&quot;columnName&quot;:&quot;申請日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;shinseiYMD&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;shinseiYMD&quot;},{&quot;columnName&quot;:&quot;整理番号&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;seiriNo&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;seiriNo&quot;},{&quot;columnName&quot;:&quot;履歴番号&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;rirekiNo&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:0,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;rirekiNo&quot;},{&quot;columnName&quot;:&quot;送付年月（国保連）&quot;,&quot;headerHtml&quot;:&quot;<table>\n<tbody>\n<tr><td>送付年月<br>（国保連）</td></tr>\n</tbody>\n</table>&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;sofuYM&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;sofuYM&quot;},{&quot;columnName&quot;:&quot;決定日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;ketteiYMD&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;ketteiYMD&quot;},{&quot;columnName&quot;:&quot;様式番号&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;yoshikiNo&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:0,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;yoshikiNo&quot;}],&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:1,&quot;groupHeaderHeight&quot;:0},&quot;isShowSelectButtonColumn&quot;:true,&quot;isShowModifyButtonColumn&quot;:true,&quot;isShowDeleteButtonColumn&quot;:true,&quot;isShowCancelButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;cancelButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;onSelectBySelectButton&quot;:&quot;onClick_SelectButton&quot;,&quot;onSelectByModifyButton&quot;:&quot;onClick_ModifyButton&quot;,&quot;onSelectByDeleteButton&quot;:&quot;onClick_DeleteButton&quot;,&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgShinseiList_grid_table" role="" style="width: 590px; height: 176px; position: relative;"></div><div id="dgShinseiList_footer" style="width: 590px; height: 25px;"></div></div></div></div>        
+   
+     
+   
+   
+   
+   
+   
+   
+     
+             
+   
+   
+             <script class="RamlConvert" type="text/javascript">
+var DBC= DBC? DBC: {};
+DBC['SHOKANSHINSEILIST'] = {};
+DBC['SHOKANSHINSEILIST'].ShokanShinseiListRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShokanShinseiList').getProperty();parameter0.txtServiceYM = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtServiceYM').getProperty();parameter0.btnAdd = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnAdd').getProperty();parameter0.line = Uz.JSControlUtil.getJSControl(parentFieldName + '_line').getProperty();parameter0.txtServiceYMFrom = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtServiceYMFrom').getProperty();parameter0.txtServiceYMTo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtServiceYMTo').getProperty();parameter0.btnSelect = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnSelect').getProperty();parameter0.dgShinseiList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgShinseiList').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBC;
+(function (DBC) {
+    (function (ShokanShinseiList) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_InsertButton = function () {
+                return "onClick_InsertButton";
+            };
+
+            Events.onSelectByDbClick = function () {
+                return "onSelectByDbClick";
+            };
+
+            Events.onClick_SelectButton = function () {
+                return "onClick_SelectButton";
+            };
+
+            Events.onClick_ModifyButton = function () {
+                return "onClick_ModifyButton";
+            };
+
+            Events.onClick_DeleteButton = function () {
+                return "onClick_DeleteButton";
+            };
+            return Events;
+        })();
+        ShokanShinseiList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ShokanShinseiList";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBC.ShokanShinseiList.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBC.ShokanShinseiList.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ShokanShinseiList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtServiceYM = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtServiceYM"));
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.line = function () {
+                return new UZA.HorizontalLine(this.convFiledName("line"));
+            };
+
+            Controls.prototype.txtServiceYMFrom = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtServiceYMFrom"));
+            };
+
+            Controls.prototype.txtServiceYMTo = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtServiceYMTo"));
+            };
+
+            Controls.prototype.btnSelect = function () {
+                return new UZA.Button(this.convFiledName("btnSelect"));
+            };
+
+            Controls.prototype.dgShinseiList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgShinseiList"));
+            };
+            return Controls;
+        })();
+        ShokanShinseiList.Controls = Controls;
+    })(DBC.ShokanShinseiList || (DBC.ShokanShinseiList = {}));
+    var ShokanShinseiList = DBC.ShokanShinseiList;
+})(DBC || (DBC = {}));
+var DBC;
+(function (DBC) {
+    (function (ShokanShinseiList) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShokanShinseiList.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new ShokanShinseiList.PublicProperties(this.fieldName);
+            };
+
+            ModeController.prototype.priorities = function () {
+                return [
+                    "DisplayType"
+                ];
+            };
+
+            ModeController.prototype.DisplayType = function () {
+                return new Modes.DisplayType(this.controls);
+            };
+            return ModeController;
+        })();
+        ShokanShinseiList.ModeController = ModeController;
+
+        (function (Modes) {
+            var DisplayType = (function () {
+                function DisplayType(controls) {
+                    this.controls = controls;
+                }
+                DisplayType.prototype.shokai = function () {
+                    this.controls.txtServiceYM().displayNone = true;
+                    this.controls.btnAdd().displayNone = true;
+                    this.controls.line().displayNone = true;
+                    this.controls.dgShinseiList().marginRight = 40;
+                    this.controls.ShokanShinseiList().width = "G12";
+
+                    this.controls.dgShinseiList().readOnly = true;
+                    this.controls.dgShinseiList().width = 510;
+
+                    var gridSetting = this.controls.dgShinseiList().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowDeleteButtonColumn = false;
+
+                    this.controls.dgShinseiList().gridSetting = gridSetting;
+
+                    this.controls.dgShinseiList()._control.afterPropertiesSet();
+                };
+
+                DisplayType.prototype.toroku = function () {
+                    this.controls.txtServiceYM().displayNone = false;
+                    this.controls.btnAdd().displayNone = false;
+                    this.controls.line().displayNone = false;
+
+                    this.controls.ShokanShinseiList().width = "G12";
+
+                    this.controls.dgShinseiList().readOnly = true;
+                    this.controls.dgShinseiList().width = 580;
+
+                    var gridSetting = this.controls.dgShinseiList().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
+
+                    this.controls.dgShinseiList().gridSetting = gridSetting;
+
+                    this.controls.dgShinseiList()._control.afterPropertiesSet();
+                };
+                return DisplayType;
+            })();
+            Modes.DisplayType = DisplayType;
+        })(ShokanShinseiList.Modes || (ShokanShinseiList.Modes = {}));
+        var Modes = ShokanShinseiList.Modes;
+    })(DBC.ShokanShinseiList || (DBC.ShokanShinseiList = {}));
+    var ShokanShinseiList = DBC.ShokanShinseiList;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (ShokanShinseiList) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShokanShinseiList.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ShokanShinseiList.PublicProperties = PublicProperties;
+    })(DBC.ShokanShinseiList || (DBC.ShokanShinseiList = {}));
+    var ShokanShinseiList = DBC.ShokanShinseiList;
+})(DBC || (DBC = {}));
+</script></div>
