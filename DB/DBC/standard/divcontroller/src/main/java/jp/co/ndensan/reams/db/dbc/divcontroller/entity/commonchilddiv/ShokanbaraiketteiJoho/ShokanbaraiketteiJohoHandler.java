@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class ShokanbaraiketteiJohoHandler {
 
     private final ShokanbaraiketteiJohoDiv div;
+    private static final RString 差止控除区分_10 = new RString("10");
     private static final RString 差止控除区分_20 = new RString("20");
     private static final RString 差止控除区分_21 = new RString("21");
     private static final RString モード_修正 = new RString("修正");
@@ -70,22 +71,26 @@ public class ShokanbaraiketteiJohoHandler {
         div.getDgSyokanbaraikete().setDataSource(set償還払決定一覧情報(差額登録フラグ, 償還払決定一覧情報));
         RString 支給区分 = null;
         if (決定情報 == null) {
-            set決定情報(決定情報, 支給区分);
             div.getTxtKetebi().setValue(RDate.getNowDate());
+            set決定情報(決定情報, 支給区分);
         } else {
             支給区分 = 決定情報.getShikyuHushikyuKetteiKubun();
             set決定情報(決定情報, 支給区分);
             if (決定情報.getKetteiYMD() == null) {
                 div.getTxtKetebi().setValue(RDate.getNowDate());
             } else {
-                div.getTxtKetebi().setValue(new RDate(決定情報.getKetteiYMD().wareki().toString()));
+                div.getTxtKetebi().setValue(new RDate(決定情報.getKetteiYMD().toString()));
             }
             if (支給区分 != null && !RString.EMPTY.equals(支給区分)) {
                 div.getRdoShikyukubun().setSelectedKey(決定情報.getShikyuHushikyuKetteiKubun());
             }
         }
-        if (モード_照会.equals(mode)) {
+        if (差止控除区分_10.equals(差止控除区分) || モード_照会.equals(mode)) {
             setState(支給区分);
+            div.getTxtKetebi().setDisabled(true);
+            div.getRdoShikyukubun().setDisabled(true);
+        } else {
+            div.getTxtKetebi().setDisabled(false);
         }
     }
 
@@ -121,15 +126,15 @@ public class ShokanbaraiketteiJohoHandler {
             row.setDefaultDataName3(syokanbaraiketteJoho.getFukushiYoguShohinName());
             if (syokanbaraiketteJoho.getKounyuKingaku() != null) {
 
-                row.setDefaultDataName4(new RString(syokanbaraiketteJoho.getKounyuKingaku().toString()));
+                row.getDefaultDataName4().setValue(new Decimal(syokanbaraiketteJoho.getKounyuKingaku()));
             } else {
-                row.setDefaultDataName4(new RString(Decimal.ZERO.toString()));
+                row.getDefaultDataName4().setValue(Decimal.ZERO);
             }
             if (syokanbaraiketteJoho.getShiharaiKingaku() != null) {
 
-                row.setDefaultDataName5(new RString(syokanbaraiketteJoho.getShiharaiKingaku().toString()));
+                row.getDefaultDataName5().setValue(new Decimal(syokanbaraiketteJoho.getShiharaiKingaku()));
             } else {
-                row.setDefaultDataName5(new RString(Decimal.ZERO.toString()));
+                row.getDefaultDataName5().setValue(Decimal.ZERO);
             }
             if (syokanbaraiketteJoho.getSagakuKingaku() != null) {
 
@@ -248,7 +253,6 @@ public class ShokanbaraiketteiJohoHandler {
         div.getTxtZogenriyu().setDisabled(true);
         div.getTxtZogentani().setDisabled(true);
         div.getTxtShiharaikingakugoke().setDisabled(true);
-        div.getTxtKetebi().setDisabled(true);
         div.getTxtFuSyikyuriyu1().setDisabled(true);
         div.getTxtFushikyuriyu2().setDisabled(true);
         if (支給区分 == null) {
@@ -256,7 +260,6 @@ public class ShokanbaraiketteiJohoHandler {
             div.getTxtZogentani().setValue(Decimal.ZERO);
             div.getTxtShiharaikingakugoke().setValue(Decimal.ZERO);
             div.getRdoShikyukubun().setDisabled(false);
-            div.getTxtKetebi().clearValue();
             div.getTxtFuSyikyuriyu1().setValue(RString.EMPTY);
             div.getTxtFushikyuriyu2().setValue(RString.EMPTY);
         } else {

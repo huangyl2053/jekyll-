@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -252,10 +253,15 @@ public class SyokanbaraiketteJohoManager {
         KetteJohoEntity entity = new KetteJohoEntity();
         entity.setHiHokenshaNo(償還払支給判定結果Entity.getHiHokenshaNo());
         entity.setServiceTeikyoYM(償還払支給判定結果Entity.getServiceTeikyoYM());
-        entity.setSeiriNo(entity.getSeiriNo());
-        entity.setKetteiYMD(entity.getKetteiYMD());
-        entity.setShikyuHushikyuKetteiKubun(entity.getShikyuHushikyuKetteiKubun());
-        entity.setShiharaiKingaku(entity.getShiharaiKingaku());
+        entity.setSeiriNo(償還払支給判定結果Entity.getSeiriNo());
+        entity.setKetteiYMD(償還払支給判定結果Entity.getKetteiYMD());
+        entity.setShikyuHushikyuKetteiKubun(償還払支給判定結果Entity.getShikyuHushikyuKetteiKubun());
+        Decimal shiharaiKingaku = 償還払支給判定結果Entity.getShiharaiKingaku();
+        if (shiharaiKingaku != null) {
+            entity.setShiharaiKingaku(shiharaiKingaku.intValue());
+        } else {
+            entity.setShiharaiKingaku(0);
+        }
         DbT3053ShokanShukeiEntity 償還払請求集計Entity = 償還払請求集計Dac.select償還払請求集計(mybatisParameter);
 
         if (償還払請求集計Entity != null) {
