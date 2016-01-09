@@ -86,7 +86,6 @@ public class ShujiiMasterHandler {
         div.getTxtSearchShujiiCodeTo().clearValue();
         div.getTxtSearchShujiiShimei().clearValue();
         div.getTxtSearchShujiiKanaShimei().clearValue();
-        div.getRadSearchJokyoFlag().setSelectedIndex(0);
 
     }
 
@@ -215,7 +214,7 @@ public class ShujiiMasterHandler {
         row.setShujiiShimei(nullToEmpty(div.getShujiiJohoInput().getTxtShujiiShimei().getValue()));
         row.setShujiiKanaShimei(nullToEmpty(div.getShujiiJohoInput().getTxtShujiiKanaShimei().getValue()));
         row.setShujiiIryoKikanCode(div.getShujiiJohoInput().getTxtShujiiIryoKikanCode());
-        row.setShujiiKanaShimei(nullToEmpty(div.getShujiiJohoInput().getTxtShujiiIryoKikanMei().getValue()));
+        row.setShujiiIryoKikan(nullToEmpty(div.getShujiiJohoInput().getTxtShujiiIryoKikanMei().getValue()));
         RString seibetsu = div.getShujiiJohoInput().getRadSeibetsu().getSelectedKey();
         if (CODE_MAN.equals(seibetsu)) {
             row.setSeibetsu(表示値_男);
