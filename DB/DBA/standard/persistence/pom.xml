@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-		<!-- DBA -->
+        <!-- DBA -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbaDefinition</artifactId>
@@ -23,12 +23,18 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbaEntity</artifactId>
         </dependency>
-		<!-- DBZ -->
+        <!-- UAX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxPersistence</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzPersistence</artifactId>
         </dependency>
-		<!-- テスト -->
+        <!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
