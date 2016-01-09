@@ -13,7 +13,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class shuiBodyItem {
+public class ShuiBodyItem {
 
     private final RString listShujii_1;
     private final RString listShujii_2;
@@ -26,7 +26,7 @@ public class shuiBodyItem {
      * @param listShujii_2 今回主治医名
      * @param listShujii_3 今回主治医電話番号
      */
-    public shuiBodyItem(
+    public ShuiBodyItem(
             RString listShujii_1,
             RString listShujii_2,
             RString listShujii_3) {

@@ -17,9 +17,10 @@ import lombok.NonNull;
 public class KojinShinchokuJokyohyoReport extends Report<KojinShinchokuJokyohyoReportSource> {
 
     private final List<KojinShinchokuJokyohyoBodyItem> bodyItemList;
-    private final List<chousaBodyItem> chousaItemList;
-    private final List<shuiBodyItem> shujiItemList;
+    private final List<ChousaBodyItem> chousaItemList;
+    private final List<ShuiBodyItem> shujiItemList;
     private final KojinShinchokuJokyohyoHeadItem headItem;
+    private final int 循環_回数 = 3;
 
     /**
      * インスタンスを生成します。
@@ -32,8 +33,8 @@ public class KojinShinchokuJokyohyoReport extends Report<KojinShinchokuJokyohyoR
      */
     public static KojinShinchokuJokyohyoReport createFrom(
             KojinShinchokuJokyohyoHeadItem headItem,
-            @NonNull List<chousaBodyItem> chousaItemList,
-            @NonNull List<shuiBodyItem> shujiItemList,
+            @NonNull List<ChousaBodyItem> chousaItemList,
+            @NonNull List<ShuiBodyItem> shujiItemList,
             @NonNull List<KojinShinchokuJokyohyoBodyItem> bodyItemList) {
 
         return new KojinShinchokuJokyohyoReport(
@@ -53,8 +54,8 @@ public class KojinShinchokuJokyohyoReport extends Report<KojinShinchokuJokyohyoR
      */
     protected KojinShinchokuJokyohyoReport(
             KojinShinchokuJokyohyoHeadItem headItem,
-            List<chousaBodyItem> chousaItemList,
-            List<shuiBodyItem> shujiItemList,
+            List<ChousaBodyItem> chousaItemList,
+            List<ShuiBodyItem> shujiItemList,
             List<KojinShinchokuJokyohyoBodyItem> bodyItemList) {
 
         this.headItem = headItem;
@@ -66,14 +67,14 @@ public class KojinShinchokuJokyohyoReport extends Report<KojinShinchokuJokyohyoR
     @Override
     public void writeBy(ReportSourceWriter<KojinShinchokuJokyohyoReportSource> reportSourceWriter) {
 
-        chousaBodyEditor chousaEditor = null;
-        shuiBodyEditor shujiEditor = null;
+        ChousaBodyEditor chousaEditor = null;
+        ShuiBodyEditor shujiEditor = null;
         int index = 0;
         for (KojinShinchokuJokyohyoBodyItem bodyItem : bodyItemList) {
             KojinShinchokuJokyohyoHeadEditor headerEditor = new KojinShinchokuJokyohyoHeadEditor(headItem);
-            if (index < 3) {
-                chousaEditor = new chousaBodyEditor(chousaItemList.get(index));
-                shujiEditor = new shuiBodyEditor(shujiItemList.get(index));
+            if (index < 循環_回数) {
+                chousaEditor = new ChousaBodyEditor(chousaItemList.get(index));
+                shujiEditor = new ShuiBodyEditor(shujiItemList.get(index));
             }
 
             KojinShinchokuJokyohyoBodyEditor kojinshinEditor = new KojinShinchokuJokyohyoBodyEditor(bodyItem);

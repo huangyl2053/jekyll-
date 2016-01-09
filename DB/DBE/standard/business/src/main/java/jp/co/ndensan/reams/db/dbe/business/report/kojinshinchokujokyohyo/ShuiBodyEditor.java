@@ -10,16 +10,16 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.KojinShinchokuJokyohyo.Ko
 /**
  * 要介護認定個人進捗状況票Editorです。
  */
-class shuiBodyEditor implements KojinShinchokuJokyohyoEditor {
+class ShuiBodyEditor implements KojinShinchokuJokyohyoEditor {
 
-    private final shuiBodyItem item;
+    private final ShuiBodyItem item;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link shuiBodyItem}
+     * @param item {@link ShuiBodyItem}
      */
-    protected shuiBodyEditor(shuiBodyItem item) {
+    protected ShuiBodyEditor(ShuiBodyItem item) {
         this.item = item;
     }
 
