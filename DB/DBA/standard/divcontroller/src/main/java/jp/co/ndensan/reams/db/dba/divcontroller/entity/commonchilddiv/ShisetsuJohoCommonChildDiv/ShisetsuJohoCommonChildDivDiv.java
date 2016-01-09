@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  * @author 自動生成
  */
 public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJohoCommonChildDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -195,5 +195,17 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    private ShisetsuJohoHandler getHandler() {
+        return new ShisetsuJohoHandler(this);
+    }
 
+    /**
+     * 共通子DIVの初期化処理です。
+     *
+     *
+     */
+    @Override
+    public void initialize() {
+        getHandler().initialize();
+    }
 }

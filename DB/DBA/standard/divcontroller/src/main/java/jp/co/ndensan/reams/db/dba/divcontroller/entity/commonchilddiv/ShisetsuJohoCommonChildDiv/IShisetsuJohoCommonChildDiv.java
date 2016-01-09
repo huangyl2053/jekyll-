@@ -7,4 +7,5 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
  */
 public interface IShisetsuJohoCommonChildDiv extends ICommonChildDivBaseProperties {
 
+    public abstract void initialize();
 }

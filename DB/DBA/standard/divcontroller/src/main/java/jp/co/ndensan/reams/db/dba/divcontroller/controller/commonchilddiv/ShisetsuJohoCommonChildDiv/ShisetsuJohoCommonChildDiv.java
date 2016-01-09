@@ -8,13 +8,8 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.commonchilddiv.Shise
 import jp.co.ndensan.reams.db.dba.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoHandler;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -22,26 +17,6 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * 介護保険施設（介護事業者）、その他特例施設、適用除外施設の事業者・施設入力ガイドを呼び出す元共有子Divです。
  */
 public class ShisetsuJohoCommonChildDiv {
-
-    /**
-     * 施設情報初期化。<br/>
-     *
-     * @param requestDiv ShisetsuJohoCommonChildDivDiv
-     * @return ResponseData<ShisetsuJohoCommonChildDivDiv>
-     */
-    public ResponseData<ShisetsuJohoCommonChildDivDiv> onLoad(ShisetsuJohoCommonChildDivDiv requestDiv) {
-
-        ResponseData<ShisetsuJohoCommonChildDivDiv> responseData = new ResponseData<>();
-
-        if (ViewStateHolder.get(ViewStateKeys.台帳種別表示, RString.class) == null) {
-
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-        }
-        getHandler(requestDiv).load();
-        responseData.data = requestDiv;
-
-        return ResponseData.of(requestDiv).respond();
-    }
 
     /**
      * 施設情報に初期化を設定します。

@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -41,8 +43,12 @@ public class ShisetsuJohoHandler {
      * 施設情報に初期化を設定する。
      *
      */
-    public void load() {
+    public void initialize() {
 
+        if (ViewStateHolder.get(ViewStateKeys.台帳種別表示, RString.class) == null) {
+
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        }
         if (台帳種別表示有り.equals(ViewStateHolder.get(ViewStateKeys.台帳種別表示, RString.class))) {
 
             div.getDdlDaichoShubetsu().setDataSource(ドロップダウンの設定());
