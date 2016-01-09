@@ -19,39 +19,42 @@ public class ShokanShinseiIchiranParameter {
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth サービス提供年月From;
     private final FlexibleYearMonth サービス提供年月To;
+    private final boolean isサービス提供年月FromEmpty;
+    private final boolean isサービス提供年月ToEmpty;
 
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月From
-     * @param サービス提供年月To
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月From サービス提供年月From
+     * @param サービス提供年月To サービス提供年月To
+     * @param isサービス提供年月FromEmpty サービス提供年月FromはEmptyかどうか
+     * @param isサービス提供年月ToEmpty サービス提供年月ToはEmptyかどうか
      */
-    private ShokanShinseiIchiranParameter(
-            HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス提供年月From,
-            FlexibleYearMonth サービス提供年月To
-    ) {
+    public ShokanShinseiIchiranParameter(
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月From, FlexibleYearMonth サービス提供年月To, boolean isサービス提供年月FromEmpty, boolean isサービス提供年月ToEmpty) {
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月From = サービス提供年月From;
         this.サービス提供年月To = サービス提供年月To;
-
+        this.isサービス提供年月FromEmpty = isサービス提供年月FromEmpty;
+        this.isサービス提供年月ToEmpty = isサービス提供年月ToEmpty;
     }
 
     /**
-     * キー検索用のパラメータを生成します。
+     * コンストラクタです
      *
-     * @param 被保険者番号
-     * @param サービス提供年月From
-     * @param サービス提供年月To
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月From サービス提供年月From
+     * @param サービス提供年月To サービス提供年月To
+     * @return 償還払申請一覧検索パラメータ
      */
     public static ShokanShinseiIchiranParameter createSelectByKeyParam(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月From,
-            FlexibleYearMonth サービス提供年月To
-    ) {
-        return new ShokanShinseiIchiranParameter(被保険者番号, サービス提供年月From, サービス提供年月To);
+            FlexibleYearMonth サービス提供年月To) {
+
+        return new ShokanShinseiIchiranParameter(被保険者番号, サービス提供年月From, サービス提供年月To,
+                サービス提供年月From == null, サービス提供年月To == null);
     }
 
 }

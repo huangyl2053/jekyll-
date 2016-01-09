@@ -18,10 +18,10 @@ public class ShokanShinseiIchiranParameterCount {
     private final FlexibleYearMonth サービス年月;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param サービス年月
+     * @param 被保険者番号 被保険者番号
+     * @param サービス年月 サービス年月
      */
     private ShokanShinseiIchiranParameterCount(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月) {
         this.被保険者番号 = 被保険者番号;
@@ -29,10 +29,10 @@ public class ShokanShinseiIchiranParameterCount {
     }
 
     /**
-     * キー検索用のパラメータを生成します
+     * キー検索用のパラメータを生成します。
      *
-     * @param 被保険者番号
-     * @param サービス年月
+     * @param 被保険者番号 被保険者番号
+     * @param サービス年月 サービス年月
      * @return
      */
     public static ShokanShinseiIchiranParameterCount createSelectByKeyParam(

@@ -15,7 +15,7 @@
         <result property="seiriNp" column="seiriNp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         
     </resultMap>
-    <select id="shokanShinseiListSyokai"
+    <select id="select償還払支給申請リスト取得照会"
     resultMap="ShokanShinseiIchiranRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshinseiichiran.ShokanShinseiIchiranParameter" fetchSize="500">
     SELECT
@@ -38,9 +38,13 @@
         FROM
             rgdb."DbT3038ShokanKihon" AS shokanKihon
         WHERE
-            shokanKihon."hiHokenshaNo" = #{被保険者番号} AND
-            shokanKihon."serviceTeikyoYM" <![CDATA[>=]]> #{サービス提供年月From} AND
-            shokanKihon."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月To}
+            shokanKihon."hiHokenshaNo" = #{被保険者番号} 
+        <if test="!isサービス提供年月FromEmpty">
+            AND shokanKihon."serviceTeikyoYM" <![CDATA[>=]]> #{サービス提供年月From} 
+        </if>
+         <if test="!isサービス提供年月ToEmpty">
+            AND shokanKihon."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月To}
+            </if>
         GROUP BY
             shokanKihon."hiHokenshaNo",
             shokanKihon."serviceTeikyoYM",
@@ -77,7 +81,7 @@
          shokanShinsei."hiHokenshaNo" DESC,
          shokanShinsei."seiriNo" DESC
     </select>
-    <select id="shokanShinseiListShinsei"
+    <select id="select償還払支給申請リスト取得申請"
             resultMap="ShokanShinseiIchiranRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshinseiichiran.ShokanShinseiIchiranParameter" fetchSize="500">
             
@@ -142,7 +146,7 @@
         shokanShinsei."hiHokenshaNo" DESC,
         shokanShinsei."seiriNo" DESC
     </select>
-    <select id="shokanShinseiCount"
+    <select id="select償還払支給申請情報件数取得"
             resultType="java.lang.Integer"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshinseiichiran.ShokanShinseiIchiranParameterCount" fetchSize="500">
         SELECT

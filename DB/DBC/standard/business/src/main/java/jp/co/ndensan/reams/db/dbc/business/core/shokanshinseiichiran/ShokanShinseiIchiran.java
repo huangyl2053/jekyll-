@@ -17,12 +17,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShokanShinseiIchiran {
 
-    public final ShokanShinseiIchiranRelateEntity relateEntity;
+    private final ShokanShinseiIchiranRelateEntity relateEntity;
 
     /**
      * コンストラクタです。
      *
-     * @param relateEntity ShokanShinseiIchiranRelateEntity s
+     * @param relateEntity ShokanShinseiIchiranRelateEntity
      */
     public ShokanShinseiIchiran(ShokanShinseiIchiranRelateEntity relateEntity) {
         this.relateEntity = relateEntity;

@@ -38,15 +38,15 @@ public class ShokanShinseiHandler {
         List<dgShinseiList_Row> dgshinseilistrow = new ArrayList<>();
         if (!shokandhinseiichiran.records().isEmpty()) {
             for (ShokanShinseiIchiran jigyoshaInput : shokandhinseiichiran.records()) {
-                dgShinseiList_Row List_Row = new dgShinseiList_Row();
-                List_Row.setHiHokenshaNo(jigyoshaInput.get被保険者番号().value());
-                List_Row.setServiceTeikyoYM(jigyoshaInput.getサービス年月().wareki().toDateString());
-                List_Row.setShinseiYMD(jigyoshaInput.get申請年月日().wareki().toDateString());
-                List_Row.setSeiriNo(jigyoshaInput.get整理番号());
-                List_Row.setSofuYM(jigyoshaInput.get送付年月().wareki().toDateString());
-                List_Row.setKetteiYMD(jigyoshaInput.get決定年月日().wareki().toDateString());
-                List_Row.setYoshikiNo(jigyoshaInput.get様式番号());
-                dgshinseilistrow.add(List_Row);
+                dgShinseiList_Row list_Row = new dgShinseiList_Row();
+                list_Row.setHiHokenshaNo(jigyoshaInput.get被保険者番号().value());
+                list_Row.setServiceTeikyoYM(jigyoshaInput.getサービス年月().wareki().toDateString());
+                list_Row.setShinseiYMD(jigyoshaInput.get申請年月日().wareki().toDateString());
+                list_Row.setSeiriNo(jigyoshaInput.get整理番号());
+                list_Row.setSofuYM(jigyoshaInput.get送付年月().wareki().toDateString());
+                list_Row.setKetteiYMD(jigyoshaInput.get決定年月日().wareki().toDateString());
+                list_Row.setYoshikiNo(jigyoshaInput.get様式番号());
+                dgshinseilistrow.add(list_Row);
             }
         }
         this.get状態(状態, dgshinseilistrow);

@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 償還払支給申請情報取得
+ * 償還払支給申請情報取得。
  *
  */
 public class ShokanShinseiIchiranManager {
@@ -45,23 +45,27 @@ public class ShokanShinseiIchiranManager {
      * @param サービス提供年月To
      * @return SearchResult<ShokanShinseiIchiran>
      */
-    public SearchResult<ShokanShinseiIchiran> getShokanShinseiListSyokai(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月From, FlexibleYearMonth サービス提供年月To) {
+    public SearchResult<ShokanShinseiIchiran> getShokanShinseiListSyokai(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月From,
+            FlexibleYearMonth サービス提供年月To) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(サービス提供年月From, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月From"));
-        requireNonNull(サービス提供年月To, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月To"));
+        if (サービス提供年月From == null && サービス提供年月To == null) {
+            return SearchResult.of(Collections.<ShokanShinseiIchiran>emptyList(), 0, false);
+        }
         ShokanShinseiIchiranMapper mapper = mapperProvider.create(ShokanShinseiIchiranMapper.class);
-        List<ShokanShinseiIchiranRelateEntity> relateEntity = mapper.select償還払支給申請リスト取得照会(ShokanShinseiIchiranParameter.createSelectByKeyParam(
-                被保険者番号,
-                サービス提供年月From,
-                サービス提供年月To));
+        List<ShokanShinseiIchiranRelateEntity> relateEntity = mapper.select償還払支給申請リスト取得照会(
+                ShokanShinseiIchiranParameter.createSelectByKeyParam(
+                        被保険者番号,
+                        サービス提供年月From,
+                        サービス提供年月To));
         if (relateEntity == null || relateEntity.isEmpty()) {
             return SearchResult.of(Collections.<ShokanShinseiIchiran>emptyList(), 0, false);
         }
-        List<ShokanShinseiIchiran> ShinseiIchiranList = new ArrayList<>();
+        List<ShokanShinseiIchiran> shinseiIchiranList = new ArrayList<>();
         for (ShokanShinseiIchiranRelateEntity entity : relateEntity) {
-            ShinseiIchiranList.add(new ShokanShinseiIchiran(entity));
+            shinseiIchiranList.add(new ShokanShinseiIchiran(entity));
         }
-        return SearchResult.of(ShinseiIchiranList, 0, false);
+        return SearchResult.of(shinseiIchiranList, 0, false);
     }
 
     /**
@@ -74,8 +78,9 @@ public class ShokanShinseiIchiranManager {
      */
     public SearchResult<ShokanShinseiIchiran> getShokanShinseiListShinsei(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月From, FlexibleYearMonth サービス提供年月To) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(サービス提供年月From, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月From"));
-        requireNonNull(サービス提供年月To, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月To"));
+        if (サービス提供年月From == null && サービス提供年月To == null) {
+            return SearchResult.of(Collections.<ShokanShinseiIchiran>emptyList(), 0, false);
+        }
         ShokanShinseiIchiranMapper mapper = mapperProvider.create(ShokanShinseiIchiranMapper.class);
         List<ShokanShinseiIchiranRelateEntity> relateEntity = mapper.select償還払支給申請リスト取得照会(ShokanShinseiIchiranParameter.createSelectByKeyParam(
                 被保険者番号,
@@ -84,11 +89,11 @@ public class ShokanShinseiIchiranManager {
         if (relateEntity == null || relateEntity.isEmpty()) {
             return SearchResult.of(Collections.<ShokanShinseiIchiran>emptyList(), 0, false);
         }
-        List<ShokanShinseiIchiran> ShinseiIchiranList = new ArrayList<>();
+        List<ShokanShinseiIchiran> shinseiIchiranList = new ArrayList<>();
         for (ShokanShinseiIchiranRelateEntity entity : relateEntity) {
-            ShinseiIchiranList.add(new ShokanShinseiIchiran(entity));
+            shinseiIchiranList.add(new ShokanShinseiIchiran(entity));
         }
-        return SearchResult.of(ShinseiIchiranList, 0, false);
+        return SearchResult.of(shinseiIchiranList, 0, false);
     }
 
     /**
