@@ -54,8 +54,8 @@ public class KogakuGassanKyufuJissekiManagerTest {
             HihokenshaNo 主キー2 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_被保険者番号;
             RString 主キー3 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_支給申請書整理番号;
             RString 主キー4 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_整理番号;
-            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
-            sut.get高額合算給付実績(null, 主キー2, 主キー3, 主キー4, 主キー5);
+//            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
+            sut.get高額合算給付実績(null, 主キー2, 主キー3, 主キー4);
         }
 
         @Test(expected = NullPointerException.class)
@@ -63,8 +63,8 @@ public class KogakuGassanKyufuJissekiManagerTest {
             KokanShikibetsuNo 主キー1 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_交換情報識別番号;
             RString 主キー3 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_支給申請書整理番号;
             RString 主キー4 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_整理番号;
-            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
-            sut.get高額合算給付実績(主キー1, null, 主キー3, 主キー4, 主キー5);
+//            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
+            sut.get高額合算給付実績(主キー1, null, 主キー3, 主キー4);
         }
 
         @Test(expected = NullPointerException.class)
@@ -72,8 +72,8 @@ public class KogakuGassanKyufuJissekiManagerTest {
             KokanShikibetsuNo 主キー1 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_交換情報識別番号;
             HihokenshaNo 主キー2 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_被保険者番号;
             RString 主キー4 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_整理番号;
-            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
-            sut.get高額合算給付実績(主キー1, 主キー2, null, 主キー4, 主キー5);
+//            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
+            sut.get高額合算給付実績(主キー1, 主キー2, null, 主キー4);
         }
 
         @Test(expected = NullPointerException.class)
@@ -81,30 +81,30 @@ public class KogakuGassanKyufuJissekiManagerTest {
             KokanShikibetsuNo 主キー1 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_交換情報識別番号;
             HihokenshaNo 主キー2 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_被保険者番号;
             RString 主キー3 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_支給申請書整理番号;
-            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
-            sut.get高額合算給付実績(主キー1, 主キー2, 主キー3, null, 主キー5);
+//            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
+            sut.get高額合算給付実績(主キー1, 主キー2, 主キー3, null);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型5にnullを指定した場合_NullPointerExceptionが発生する() {
-            KokanShikibetsuNo 主キー1 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_交換情報識別番号;
-            HihokenshaNo 主キー2 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_被保険者番号;
-            RString 主キー3 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_支給申請書整理番号;
-            RString 主キー4 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_整理番号;
-            sut.get高額合算給付実績(主キー1, 主キー2, 主キー3, 主キー4, null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の主キー型5にnullを指定した場合_NullPointerExceptionが発生する() {
+//            KokanShikibetsuNo 主キー1 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_交換情報識別番号;
+//            HihokenshaNo 主キー2 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_被保険者番号;
+//            RString 主キー3 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_支給申請書整理番号;
+//            RString 主キー4 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_整理番号;
+//            sut.get高額合算給付実績(主キー1, 主キー2, 主キー3, 主キー4, null);
+//        }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(KokanShikibetsuNo.class), any(HihokenshaNo.class), any(RString.class), any(RString.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(KokanShikibetsuNo.class), any(HihokenshaNo.class), any(RString.class), any(RString.class))).thenReturn(null);
 
             KokanShikibetsuNo 主キー1 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_交換情報識別番号;
             HihokenshaNo 主キー2 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_被保険者番号;
             RString 主キー3 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_支給申請書整理番号;
             RString 主キー4 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_整理番号;
-            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
-            KogakuGassanKyufuJisseki result = sut.get高額合算給付実績(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
+//            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
+            KogakuGassanKyufuJisseki result = sut.get高額合算給付実績(主キー1, 主キー2, 主キー3, 主キー4);
 
             assertThat(result, is(nullValue()));
         }
@@ -112,14 +112,14 @@ public class KogakuGassanKyufuJissekiManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3075KogakuGassanKyufuJissekiEntity entity = DbT3075KogakuGassanKyufuJissekiEntityGenerator.createDbT3075KogakuGassanKyufuJissekiEntity();
-            when(dac.selectByKey(any(KokanShikibetsuNo.class), any(HihokenshaNo.class), any(RString.class), any(RString.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(KokanShikibetsuNo.class), any(HihokenshaNo.class), any(RString.class), any(RString.class))).thenReturn(entity);
 
             KokanShikibetsuNo 主キー1 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_交換情報識別番号;
             HihokenshaNo 主キー2 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_被保険者番号;
             RString 主キー3 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_支給申請書整理番号;
             RString 主キー4 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_整理番号;
-            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
-            KogakuGassanKyufuJisseki result = sut.get高額合算給付実績(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
+//            Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
+            KogakuGassanKyufuJisseki result = sut.get高額合算給付実績(主キー1, 主キー2, 主キー3, 主キー4);
 
             assertThat(result.get交換情報識別番号().value(), is(DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }

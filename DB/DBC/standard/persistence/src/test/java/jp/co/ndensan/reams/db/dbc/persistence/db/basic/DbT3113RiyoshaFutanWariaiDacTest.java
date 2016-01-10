@@ -198,7 +198,7 @@ public class DbT3113RiyoshaFutanWariaiDacTest extends DbcTestDacBase {
         public static void insert(
                 FlexibleYear 年度,
                 HihokenshaNo 被保険者番号,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3113RiyoshaFutanWariaiEntity entity = DbT3113RiyoshaFutanWariaiEntityGenerator.createDbT3113RiyoshaFutanWariaiEntity();
             entity.setNendo(年度);
             entity.setHihokenshaNo(被保険者番号);

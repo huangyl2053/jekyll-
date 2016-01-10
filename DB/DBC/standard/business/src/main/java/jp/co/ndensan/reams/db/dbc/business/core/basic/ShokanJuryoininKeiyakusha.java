@@ -39,23 +39,25 @@ extends ModelBase<ShokanJuryoininKeiyakushaIdentifier,
      * @param 履歴番号 履歴番号
      */
     public ShokanJuryoininKeiyakusha(HihokenshaNo 被保険者番号,
-            ShoKisaiHokenshaNo 証記載保険者番号,
-            FlexibleDate 受付年月日,
-            Decimal 履歴番号) {
+            //            ShoKisaiHokenshaNo 証記載保険者番号,
+            FlexibleDate 受付年月日
+    //            , int 履歴番号
+    ) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3078ShokanJuryoininKeiyakushaEntity();
         this.entity.setHihokenshaNo(被保険者番号);
-        this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
+//        this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
         this.entity.setUketsukeYMD(受付年月日);
-        this.entity.setRirekiNo(履歴番号);
+//        this.entity.setRirekiNo(履歴番号);
         this.id = new ShokanJuryoininKeiyakushaIdentifier(
                 被保険者番号,
-                証記載保険者番号,
-                受付年月日,
-                履歴番号);
+                //                証記載保険者番号,
+                受付年月日
+        //                , 履歴番号
+        );
     }
 
     /**
@@ -68,9 +70,9 @@ extends ModelBase<ShokanJuryoininKeiyakushaIdentifier,
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還受領委任契約者"));
         this.id = new ShokanJuryoininKeiyakushaIdentifier(
                 entity.getHihokenshaNo(),
-                entity.getShoKisaiHokenshaNo(),
-                entity.getUketsukeYMD(),
-                entity.getRirekiNo());
+                //                entity.getShoKisaiHokenshaNo(),
+                entity.getUketsukeYMD());
+//                entity.getRirekiNo());
     }
 
     /**
@@ -102,9 +104,9 @@ extends ModelBase<ShokanJuryoininKeiyakushaIdentifier,
      *
      * @return 証記載保険者番号
      */
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
-    }
+//    public ShoKisaiHokenshaNo get証記載保険者番号() {
+//        return entity.getShoKisaiHokenshaNo();
+//    }
 
     /**
      * 受付年月日を返します。
@@ -120,9 +122,9 @@ extends ModelBase<ShokanJuryoininKeiyakushaIdentifier,
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
-        return entity.getRirekiNo();
-    }
+//    public Decimal get履歴番号() {
+//        return entity.getRirekiNo();
+//    }
 
     /**
      * 申請年月日を返します。
@@ -138,8 +140,8 @@ extends ModelBase<ShokanJuryoininKeiyakushaIdentifier,
      *
      * @return 事業者契約番号
      */
-    public RString get事業者契約番号() {
-        return entity.getJigyoshaKeiyakuNo();
+    public RString get契約事業者番号() {
+        return entity.getKeiyakuJigyoshaNo();
     }
 
     /**

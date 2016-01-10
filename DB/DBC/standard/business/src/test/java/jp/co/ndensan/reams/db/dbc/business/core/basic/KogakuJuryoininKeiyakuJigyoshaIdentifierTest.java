@@ -27,7 +27,7 @@ public class KogakuJuryoininKeiyakuJigyoshaIdentifierTest extends DbcTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static HihokenshaNo 主キー名1;
     private static FlexibleDate 主キー名2;
-    private static Decimal 主キー名3;
+    private static int 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {

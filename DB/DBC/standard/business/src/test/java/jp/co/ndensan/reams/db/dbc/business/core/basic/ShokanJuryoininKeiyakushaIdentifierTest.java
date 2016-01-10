@@ -35,16 +35,16 @@ public class ShokanJuryoininKeiyakushaIdentifierTest extends DbcTestBase {
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
         主キー名1 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_被保険者番号;
-        主キー名2 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_証記載保険者番号;
+//        主キー名2 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_証記載保険者番号;
         主キー名3 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_受付年月日;
-        主キー名4 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_履歴番号;
+//        主キー名4 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class シリアライズテスト extends DbcTestBase {
 
         @Test
         public void シリアライズできる() {
-            ShokanJuryoininKeiyakushaIdentifier sut = new ShokanJuryoininKeiyakushaIdentifier(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            ShokanJuryoininKeiyakushaIdentifier sut = new ShokanJuryoininKeiyakushaIdentifier(主キー名1, 主キー名3);
             assertThat(sut, is(serializable()));
         }
     }

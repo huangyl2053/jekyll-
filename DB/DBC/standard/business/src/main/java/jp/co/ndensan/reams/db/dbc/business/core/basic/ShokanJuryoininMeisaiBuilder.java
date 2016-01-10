@@ -81,11 +81,11 @@ public class ShokanJuryoininMeisaiBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link ShokanJuryoininMeisaiBuilder}
      */
-    public ShokanJuryoininMeisaiBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
-        return this;
-    }
+//    public ShokanJuryoininMeisaiBuilder set履歴番号(Decimal 履歴番号) {
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        entity.setRirekiNo(履歴番号);
+//        return this;
+//    }
 
     /**
      * 契約番号を設定します。

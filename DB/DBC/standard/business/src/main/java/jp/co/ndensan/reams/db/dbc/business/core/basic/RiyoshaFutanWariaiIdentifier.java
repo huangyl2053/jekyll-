@@ -19,7 +19,7 @@ public class RiyoshaFutanWariaiIdentifier implements Serializable {
 
     private final FlexibleYear 年度;
     private final HihokenshaNo 被保険者番号;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
 
     /**
      * コンストラクタです。
@@ -30,7 +30,7 @@ public class RiyoshaFutanWariaiIdentifier implements Serializable {
      */
     public RiyoshaFutanWariaiIdentifier(FlexibleYear 年度,
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         this.年度 = 年度;
         this.被保険者番号 = 被保険者番号;
         this.履歴番号 = 履歴番号;

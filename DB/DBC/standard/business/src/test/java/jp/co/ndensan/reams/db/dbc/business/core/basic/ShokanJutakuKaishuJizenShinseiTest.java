@@ -36,7 +36,7 @@ public class ShokanJutakuKaishuJizenShinseiTest extends DbcTestBase {
     private static HihokenshaNo 主キー名1;
     private static FlexibleYearMonth 主キー名2;
     private static RString 主キー名3;
-    private static Decimal 主キー名4;
+//    private static Decimal 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
@@ -44,7 +44,7 @@ public class ShokanJutakuKaishuJizenShinseiTest extends DbcTestBase {
         主キー名1 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_被保険者番号;
         主キー名2 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_サービス提供年月;
         主キー名3 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_整理番号;
-        主キー名4 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_履歴番号;
+//        主キー名4 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -61,24 +61,24 @@ public class ShokanJutakuKaishuJizenShinseiTest extends DbcTestBase {
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShokanJutakuKaishuJizenShinsei(null, 主キー名2, 主キー名3, 主キー名4);
+            sut = new ShokanJutakuKaishuJizenShinsei(null, 主キー名2, 主キー名3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShokanJutakuKaishuJizenShinsei(主キー名1, null, 主キー名3, 主キー名4);
+            sut = new ShokanJutakuKaishuJizenShinsei(主キー名1, null, 主キー名3);
         }
 
         @Test
         public void 指定したキーが保持するDbT3035ShokanJutakuKaishuJizenShinseiEntityにセットされている() {
-            sut = new ShokanJutakuKaishuJizenShinsei(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            sut = new ShokanJutakuKaishuJizenShinsei(主キー名1, 主キー名2, 主キー名3);
             assertThat(sut.get被保険者番号(), is(主キー名1));
             assertThat(sut.getサービス提供年月(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するShokanJutakuKaishuJizenShinseiIdentifierにセットされている() {
-            sut = new ShokanJutakuKaishuJizenShinsei(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            sut = new ShokanJutakuKaishuJizenShinsei(主キー名1, 主キー名2, 主キー名3);
             assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
             assertThat(sut.identifier().getサービス提供年月(), is(主キー名2));
         }
@@ -138,10 +138,10 @@ public class ShokanJutakuKaishuJizenShinseiTest extends DbcTestBase {
             assertThat(sut.get整理番号(), is(ShokanJutakuKaishuJizenShinseiEntity.getSeiriNo()));
         }
 
-        @Test
-        public void get履歴番号は_entityが持つ履歴番号を返す() {
-            assertThat(sut.get履歴番号(), is(ShokanJutakuKaishuJizenShinseiEntity.getRirekiNo()));
-        }
+//        @Test
+//        public void get履歴番号は_entityが持つ履歴番号を返す() {
+//            assertThat(sut.get履歴番号(), is(ShokanJutakuKaishuJizenShinseiEntity.getRirekiNo()));
+//        }
 
         @Test
         public void get証記載保険者番号は_entityが持つ証記載保険者番号を返す() {
@@ -159,48 +159,48 @@ public class ShokanJutakuKaishuJizenShinseiTest extends DbcTestBase {
         }
 
         @Test
-        public void get事業者番号は_entityが持つ事業者番号を返す() {
-            assertThat(sut.get事業者番号(), is(ShokanJutakuKaishuJizenShinseiEntity.getJigyoshaNo()));
+        public void get申請事業者番号は_entityが持申請事業者番号を返す() {
+            assertThat(sut.get申請事業者番号(), is(ShokanJutakuKaishuJizenShinseiEntity.getShinseiJigyoshaNo()));
         }
-
-        @Test
-        public void get事業者名称は_entityが持つ事業者名称を返す() {
-            assertThat(sut.get事業者名称(), is(ShokanJutakuKaishuJizenShinseiEntity.getJigyoshaNameKanji()));
-        }
-
-        @Test
-        public void get事業者名称カナは_entityが持つ事業者名称カナを返す() {
-            assertThat(sut.get事業者名称カナ(), is(ShokanJutakuKaishuJizenShinseiEntity.getJigyoshaNameKana()));
-        }
-
-        @Test
-        public void get事業者郵便番号は_entityが持つ事業者郵便番号を返す() {
-            assertThat(sut.get事業者郵便番号(), is(ShokanJutakuKaishuJizenShinseiEntity.getJigyoshaYubunNo()));
-        }
-
-        @Test
-        public void get事業者住所は_entityが持つ事業者住所を返す() {
-            assertThat(sut.get事業者住所(), is(ShokanJutakuKaishuJizenShinseiEntity.getJigyoshaAddress()));
-        }
-
-        @Test
-        public void get事業者電話番号は_entityが持つ事業者電話番号を返す() {
-            assertThat(sut.get事業者電話番号(), is(ShokanJutakuKaishuJizenShinseiEntity.getJigyoshaTelNo()));
-        }
-
-        @Test
-        public void get事業者ＦＡＸ番号は_entityが持つ事業者ＦＡＸ番号を返す() {
-            assertThat(sut.get事業者ＦＡＸ番号(), is(ShokanJutakuKaishuJizenShinseiEntity.getJigyoshaFaxNo()));
-        }
+//
+//        @Test
+//        public void get事業者名称は_entityが持つ事業者名称を返す() {
+//            assertThat(sut.get事業者名称(), is(ShokanJutakuKaishuJizenShinseiEntity.getJigyoshaNameKanji()));
+//        }
+//
+//        @Test
+//        public void get事業者名称カナは_entityが持つ事業者名称カナを返す() {
+//            assertThat(sut.get事業者名称カナ(), is(ShokanJutakuKaishuJizenShinseiEntity.getJigyoshaNameKana()));
+//        }
+//
+//        @Test
+//        public void get事業者郵便番号は_entityが持つ事業者郵便番号を返す() {
+//            assertThat(sut.get事業者郵便番号(), is(ShokanJutakuKaishuJizenShinseiEntity.getJigyoshaYubunNo()));
+//        }
+//
+//        @Test
+//        public void get事業者住所は_entityが持つ事業者住所を返す() {
+//            assertThat(sut.get事業者住所(), is(ShokanJutakuKaishuJizenShinseiEntity.getJigyoshaAddress()));
+//        }
+//
+//        @Test
+//        public void get事業者電話番号は_entityが持つ事業者電話番号を返す() {
+//            assertThat(sut.get事業者電話番号(), is(ShokanJutakuKaishuJizenShinseiEntity.getJigyoshaTelNo()));
+//        }
+//
+//        @Test
+//        public void get事業者ＦＡＸ番号は_entityが持つ事業者ＦＡＸ番号を返す() {
+//            assertThat(sut.get事業者ＦＡＸ番号(), is(ShokanJutakuKaishuJizenShinseiEntity.getJigyoshaFaxNo()));
+//        }
 
         @Test
         public void get理由書作成者は_entityが持つ理由書作成者を返す() {
-            assertThat(sut.get理由書作成者(), is(ShokanJutakuKaishuJizenShinseiEntity.getRiyushoSakuseishaKanji()));
+            assertThat(sut.get理由書作成者(), is(ShokanJutakuKaishuJizenShinseiEntity.getRiyushoSakuseishaName()));
         }
 
         @Test
         public void get理由書作成者カナは_entityが持つ理由書作成者カナを返す() {
-            assertThat(sut.get理由書作成者カナ(), is(ShokanJutakuKaishuJizenShinseiEntity.getRiyushoSakuseishaKana()));
+            assertThat(sut.get理由書作成者カナ(), is(ShokanJutakuKaishuJizenShinseiEntity.getRiyushoSakuseishaKanaName()));
         }
 
         @Test
@@ -210,12 +210,12 @@ public class ShokanJutakuKaishuJizenShinseiTest extends DbcTestBase {
 
         @Test
         public void get契約決定年月日は_entityが持つ契約決定年月日を返す() {
-            assertThat(sut.get契約決定年月日(), is(ShokanJutakuKaishuJizenShinseiEntity.getKeiyakuKetteiYMD()));
+            assertThat(sut.get判定決定年月日(), is(ShokanJutakuKaishuJizenShinseiEntity.getHanteiKetteiYMD()));
         }
 
         @Test
         public void get承認区分は_entityが持つ承認区分を返す() {
-            assertThat(sut.get承認区分(), is(ShokanJutakuKaishuJizenShinseiEntity.getShoninKubun()));
+            assertThat(sut.get判定区分(), is(ShokanJutakuKaishuJizenShinseiEntity.getHanteiKubun()));
         }
 
         @Test
@@ -250,13 +250,13 @@ public class ShokanJutakuKaishuJizenShinseiTest extends DbcTestBase {
 
         @Test
         public void get申請取消事由コードは_entityが持つ申請取消事由コードを返す() {
-            assertThat(sut.get申請取消事由コード(), is(ShokanJutakuKaishuJizenShinseiEntity.getShinseiTorikeshiJiyuCode()));
+            assertThat(sut.get住宅改修申請取消事由コード(), is(ShokanJutakuKaishuJizenShinseiEntity.getKaishuShinseiTorikeshijiyuCode()));
         }
 
-        @Test
-        public void get備考は_entityが持つ備考を返す() {
-            assertThat(sut.get備考(), is(ShokanJutakuKaishuJizenShinseiEntity.getBiko()));
-        }
+//        @Test
+//        public void get備考は_entityが持つ備考を返す() {
+//            assertThat(sut.get備考(), is(ShokanJutakuKaishuJizenShinseiEntity.getBiko()));
+//        }
     }
 
     public static class toEntityテスト extends DbcTestBase {

@@ -39,7 +39,7 @@ public class KogakuGassanJikoFutanGakuMeisaiTest extends DbcTestBase {
     private static HokenshaNo 主キー名3;
     private static RString 主キー名4;
     private static RString 主キー名5;
-    private static Decimal 主キー名6;
+    private static int 主キー名6;
 
     @BeforeClass
     public static void setUpClass() {

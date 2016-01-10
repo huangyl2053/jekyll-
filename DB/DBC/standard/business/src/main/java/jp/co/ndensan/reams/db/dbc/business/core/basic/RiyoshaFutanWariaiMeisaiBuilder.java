@@ -71,7 +71,7 @@ public class RiyoshaFutanWariaiMeisaiBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link RiyoshaFutanWariaiMeisaiBuilder}
      */
-    public RiyoshaFutanWariaiMeisaiBuilder set履歴番号(Decimal 履歴番号) {
+    public RiyoshaFutanWariaiMeisaiBuilder set履歴番号(int 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;
@@ -83,7 +83,7 @@ public class RiyoshaFutanWariaiMeisaiBuilder {
      * @param 枝番号 枝番号
      * @return {@link RiyoshaFutanWariaiMeisaiBuilder}
      */
-    public RiyoshaFutanWariaiMeisaiBuilder set枝番号(Decimal 枝番号) {
+    public RiyoshaFutanWariaiMeisaiBuilder set枝番号(int 枝番号) {
         requireNonNull(枝番号, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番号"));
         entity.setEdaNo(枝番号);
         return this;
@@ -155,9 +155,9 @@ public class RiyoshaFutanWariaiMeisaiBuilder {
      * @param 世帯１号被保険者数 世帯１号被保険者数
      * @return {@link RiyoshaFutanWariaiMeisaiBuilder}
      */
-    public RiyoshaFutanWariaiMeisaiBuilder set世帯１号被保険者数(Decimal 世帯１号被保険者数) {
+    public RiyoshaFutanWariaiMeisaiBuilder set世帯１号被保険者数(int 世帯１号被保険者数) {
         requireNonNull(世帯１号被保険者数, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯１号被保険者数"));
-        entity.setSetaiIchigouHihoknehsaSu(世帯１号被保険者数);
+        entity.setSetaiIchigouHihokenshaSu(世帯１号被保険者数);
         return this;
     }
 

@@ -29,17 +29,17 @@ public class ShokanJuryoininKeiyakushaBuilderTest extends DbcTestBase {
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static HihokenshaNo 主キー名1;
-    private static ShoKisaiHokenshaNo 主キー名2;
+//    private static ShoKisaiHokenshaNo 主キー名2;
     private static FlexibleDate 主キー名3;
-    private static Decimal 主キー名4;
+//    private static Decimal 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
         主キー名1 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_被保険者番号;
-        主キー名2 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_証記載保険者番号;
+//        主キー名2 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_証記載保険者番号;
         主キー名3 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_受付年月日;
-        主キー名4 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_履歴番号;
+//        主キー名4 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class getterSetterTest extends DbcTestBase {
@@ -51,7 +51,7 @@ public class ShokanJuryoininKeiyakushaBuilderTest extends DbcTestBase {
         public void setUp() {
             ShokanJuryoininKeiyakushaEntity = new DbT3078ShokanJuryoininKeiyakushaEntity();
             ShokanJuryoininKeiyakushaEntity.setHihokenshaNo(主キー名1);
-            ShokanJuryoininKeiyakushaEntity.setShoKisaiHokenshaNo(主キー名2);
+//            ShokanJuryoininKeiyakushaEntity.setShoKisaiHokenshaNo(主キー名2);
 
             business = new ShokanJuryoininKeiyakusha(ShokanJuryoininKeiyakushaEntity);
 
@@ -65,11 +65,11 @@ public class ShokanJuryoininKeiyakushaBuilderTest extends DbcTestBase {
             assertThat(business.get被保険者番号(), is(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_被保険者番号));
         }
 
-        @Test
-        public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
-            business = sut.set証記載保険者番号(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_証記載保険者番号).build();
-            assertThat(business.get証記載保険者番号(), is(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_証記載保険者番号));
-        }
+//        @Test
+//        public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
+//            business = sut.set証記載保険者番号(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_証記載保険者番号).build();
+//            assertThat(business.get証記載保険者番号(), is(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_証記載保険者番号));
+//        }
 
         @Test
         public void 戻り値の受付年月日は_設定した値と同じ受付年月日を返す() {
@@ -77,11 +77,11 @@ public class ShokanJuryoininKeiyakushaBuilderTest extends DbcTestBase {
             assertThat(business.get受付年月日(), is(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_受付年月日));
         }
 
-        @Test
-        public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
-            business = sut.set履歴番号(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_履歴番号).build();
-            assertThat(business.get履歴番号(), is(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_履歴番号));
-        }
+//        @Test
+//        public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
+//            business = sut.set履歴番号(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_履歴番号).build();
+//            assertThat(business.get履歴番号(), is(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_履歴番号));
+//        }
 
         @Test
         public void 戻り値の申請年月日は_設定した値と同じ申請年月日を返す() {
@@ -90,9 +90,9 @@ public class ShokanJuryoininKeiyakushaBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の事業者契約番号は_設定した値と同じ事業者契約番号を返す() {
-            business = sut.set事業者契約番号(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_事業者契約番号).build();
-            assertThat(business.get事業者契約番号(), is(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_事業者契約番号));
+        public void 戻り値の契約事業者番号は_設定した値と同じ契約事業者番号を返す() {
+            business = sut.set契約事業者番号(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_契約事業者番号).build();
+            assertThat(business.get契約事業者番号(), is(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_契約事業者番号));
         }
 
         @Test

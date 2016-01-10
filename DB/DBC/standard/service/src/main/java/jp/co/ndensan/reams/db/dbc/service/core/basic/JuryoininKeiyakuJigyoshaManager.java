@@ -46,22 +46,24 @@ public class JuryoininKeiyakuJigyoshaManager {
      *
      * @param 事業者契約番号 JigyoshaKeiyakuNo
      * @param 開始年月日 KaishiYMD
-     * @param 履歴番号 RirekiNo
+// * @param 履歴番号 RirekiNo
      * @return JuryoininKeiyakuJigyosha
      */
     @Transaction
     public JuryoininKeiyakuJigyosha get受領委任契約事業者(
             RString 事業者契約番号,
-            FlexibleDate 開始年月日,
-            Decimal 履歴番号) {
+            FlexibleDate 開始年月日
+    //            Decimal 履歴番号
+    ) {
         requireNonNull(事業者契約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者契約番号"));
         requireNonNull(開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("開始年月日"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbT3077JuryoininKeiyakuJigyoshaEntity entity = dac.selectByKey(
                 事業者契約番号,
-                開始年月日,
-                履歴番号);
+                開始年月日
+        //                履歴番号
+        );
         if (entity == null) {
             return null;
         }

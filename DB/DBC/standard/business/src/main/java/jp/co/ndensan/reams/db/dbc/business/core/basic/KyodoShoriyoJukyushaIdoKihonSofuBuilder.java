@@ -8,7 +8,8 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+//import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -85,7 +86,7 @@ public class KyodoShoriyoJukyushaIdoKihonSofuBuilder {
      * @param 証記載保険者番号 証記載保険者番号
      * @return {@link KyodoShoriyoJukyushaIdoKihonSofuBuilder}
      */
-    public KyodoShoriyoJukyushaIdoKihonSofuBuilder set証記載保険者番号(HokenshaNo 証記載保険者番号) {
+    public KyodoShoriyoJukyushaIdoKihonSofuBuilder set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         entity.setShoKisaiHokenshaNo(証記載保険者番号);
         return this;
@@ -109,7 +110,7 @@ public class KyodoShoriyoJukyushaIdoKihonSofuBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link KyodoShoriyoJukyushaIdoKihonSofuBuilder}
      */
-    public KyodoShoriyoJukyushaIdoKihonSofuBuilder set履歴番号(Decimal 履歴番号) {
+    public KyodoShoriyoJukyushaIdoKihonSofuBuilder set履歴番号(int 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;

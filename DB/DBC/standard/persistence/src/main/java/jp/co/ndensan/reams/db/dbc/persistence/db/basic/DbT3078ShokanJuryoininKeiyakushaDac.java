@@ -35,22 +35,23 @@ public class DbT3078ShokanJuryoininKeiyakushaDac implements ISaveable<DbT3078Sho
      * 主キーで償還受領委任契約者を取得します。
      *
      * @param 被保険者番号 HihokenshaNo
-     * @param 証記載保険者番号 ShoKisaiHokenshaNo
+// * @param 証記載保険者番号 ShoKisaiHokenshaNo
      * @param 受付年月日 UketsukeYMD
-     * @param 履歴番号 RirekiNo
+// * @param 履歴番号 RirekiNo
      * @return DbT3078ShokanJuryoininKeiyakushaEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT3078ShokanJuryoininKeiyakushaEntity selectByKey(
             HihokenshaNo 被保険者番号,
-            ShoKisaiHokenshaNo 証記載保険者番号,
-            FlexibleDate 受付年月日,
-            Decimal 履歴番号) throws NullPointerException {
+            //            ShoKisaiHokenshaNo 証記載保険者番号,
+            FlexibleDate 受付年月日
+    //            Decimal 履歴番号
+    ) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -58,9 +59,10 @@ public class DbT3078ShokanJuryoininKeiyakushaDac implements ISaveable<DbT3078Sho
                 table(DbT3078ShokanJuryoininKeiyakusha.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                                eq(uketsukeYMD, 受付年月日),
-                                eq(rirekiNo, 履歴番号))).
+                                //                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                                eq(uketsukeYMD, 受付年月日)
+                        //                                eq(rirekiNo, 履歴番号)
+                        )).
                 toObject(DbT3078ShokanJuryoininKeiyakushaEntity.class);
     }
 

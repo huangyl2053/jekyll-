@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -40,7 +41,7 @@ public class KagoMoshitate extends ModelBase<KagoMoshitateIdentifier, DbT3059Kag
     public KagoMoshitate(JigyoshaNo 事業所番号,
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業所番号"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
@@ -120,7 +121,7 @@ public class KagoMoshitate extends ModelBase<KagoMoshitateIdentifier, DbT3059Kag
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -147,7 +148,7 @@ public class KagoMoshitate extends ModelBase<KagoMoshitateIdentifier, DbT3059Kag
      *
      * @return 証記載保険者番号
      */
-    public HokenshaNo get証記載保険者番号() {
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
         return entity.getShokisaiHokenshaNo();
     }
 

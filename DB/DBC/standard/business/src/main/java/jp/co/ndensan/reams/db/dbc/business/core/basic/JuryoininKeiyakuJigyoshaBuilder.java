@@ -47,12 +47,12 @@ public class JuryoininKeiyakuJigyoshaBuilder {
     /**
      * 事業者契約番号を設定します。
      *
-     * @param 事業者契約番号 事業者契約番号
+     * @param 契約事業者番号 契約事業者番号
      * @return {@link JuryoininKeiyakuJigyoshaBuilder}
      */
-    public JuryoininKeiyakuJigyoshaBuilder set事業者契約番号(RString 事業者契約番号) {
-        requireNonNull(事業者契約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者契約番号"));
-        entity.setJigyoshaKeiyakuNo(事業者契約番号);
+    public JuryoininKeiyakuJigyoshaBuilder set契約事業者番号(RString 契約事業者番号) {
+        requireNonNull(契約事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("契約事業者番号"));
+        entity.setKeiyakuJigyoshaNo(契約事業者番号);
         return this;
     }
 
@@ -74,11 +74,11 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link JuryoininKeiyakuJigyoshaBuilder}
      */
-    public JuryoininKeiyakuJigyoshaBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
-        return this;
-    }
+//    public JuryoininKeiyakuJigyoshaBuilder set履歴番号(Decimal 履歴番号) {
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        entity.setRirekiNo(履歴番号);
+//        return this;
+//    }
 
     /**
      * 終了年月日を設定します。
@@ -98,11 +98,11 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      * @param 届出年月日 届出年月日
      * @return {@link JuryoininKeiyakuJigyoshaBuilder}
      */
-    public JuryoininKeiyakuJigyoshaBuilder set届出年月日(FlexibleDate 届出年月日) {
-        requireNonNull(届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("届出年月日"));
-        entity.setTodokedeYMD(届出年月日);
-        return this;
-    }
+//    public JuryoininKeiyakuJigyoshaBuilder set届出年月日(FlexibleDate 届出年月日) {
+//        requireNonNull(届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("届出年月日"));
+//        entity.setTodokedeYMD(届出年月日);
+//        return this;
+//    }
 
     /**
      * 届出者住所を設定します。
@@ -110,11 +110,11 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      * @param 届出者住所 届出者住所
      * @return {@link JuryoininKeiyakuJigyoshaBuilder}
      */
-    public JuryoininKeiyakuJigyoshaBuilder set届出者住所(RString 届出者住所) {
-        requireNonNull(届出者住所, UrSystemErrorMessages.値がnull.getReplacedMessage("届出者住所"));
-        entity.setTodokedeAddress(届出者住所);
-        return this;
-    }
+//    public JuryoininKeiyakuJigyoshaBuilder set届出者住所(RString 届出者住所) {
+//        requireNonNull(届出者住所, UrSystemErrorMessages.値がnull.getReplacedMessage("届出者住所"));
+//        entity.setTodokedeAddress(届出者住所);
+//        return this;
+//    }
 
     /**
      * 届出者事業者名称を設定します。
@@ -122,11 +122,11 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      * @param 届出者事業者名称 届出者事業者名称
      * @return {@link JuryoininKeiyakuJigyoshaBuilder}
      */
-    public JuryoininKeiyakuJigyoshaBuilder set届出者事業者名称(RString 届出者事業者名称) {
-        requireNonNull(届出者事業者名称, UrSystemErrorMessages.値がnull.getReplacedMessage("届出者事業者名称"));
-        entity.setTodokedeJigyoshaName(届出者事業者名称);
-        return this;
-    }
+//    public JuryoininKeiyakuJigyoshaBuilder set届出者事業者名称(RString 届出者事業者名称) {
+//        requireNonNull(届出者事業者名称, UrSystemErrorMessages.値がnull.getReplacedMessage("届出者事業者名称"));
+//        entity.setTodokedeJigyoshaName(届出者事業者名称);
+//        return this;
+//    }
 
     /**
      * 届出者代表者氏名を設定します。
@@ -134,11 +134,11 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      * @param 届出者代表者氏名 届出者代表者氏名
      * @return {@link JuryoininKeiyakuJigyoshaBuilder}
      */
-    public JuryoininKeiyakuJigyoshaBuilder set届出者代表者氏名(RString 届出者代表者氏名) {
-        requireNonNull(届出者代表者氏名, UrSystemErrorMessages.値がnull.getReplacedMessage("届出者代表者氏名"));
-        entity.setTodokedeDaihyoshaName(届出者代表者氏名);
-        return this;
-    }
+//    public JuryoininKeiyakuJigyoshaBuilder set届出者代表者氏名(RString 届出者代表者氏名) {
+//        requireNonNull(届出者代表者氏名, UrSystemErrorMessages.値がnull.getReplacedMessage("届出者代表者氏名"));
+//        entity.setTodokedeDaihyoshaName(届出者代表者氏名);
+//        return this;
+//    }
 
     /**
      * 金融機関コードを設定します。
@@ -194,11 +194,11 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      * @param 通帳記号 通帳記号
      * @return {@link JuryoininKeiyakuJigyoshaBuilder}
      */
-    public JuryoininKeiyakuJigyoshaBuilder set通帳記号(RString 通帳記号) {
-        requireNonNull(通帳記号, UrSystemErrorMessages.値がnull.getReplacedMessage("通帳記号"));
-        entity.setTsuchoKigo(通帳記号);
-        return this;
-    }
+//    public JuryoininKeiyakuJigyoshaBuilder set通帳記号(RString 通帳記号) {
+//        requireNonNull(通帳記号, UrSystemErrorMessages.値がnull.getReplacedMessage("通帳記号"));
+//        entity.setTsuchoKigo(通帳記号);
+//        return this;
+//    }
 
     /**
      * 通帳番号を設定します。
@@ -206,11 +206,11 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      * @param 通帳番号 通帳番号
      * @return {@link JuryoininKeiyakuJigyoshaBuilder}
      */
-    public JuryoininKeiyakuJigyoshaBuilder set通帳番号(RString 通帳番号) {
-        requireNonNull(通帳番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通帳番号"));
-        entity.setTsuchoNo(通帳番号);
-        return this;
-    }
+//    public JuryoininKeiyakuJigyoshaBuilder set通帳番号(RString 通帳番号) {
+//        requireNonNull(通帳番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通帳番号"));
+//        entity.setTsuchoNo(通帳番号);
+//        return this;
+//    }
 
     /**
      * 口座名義人を設定します。
@@ -220,7 +220,7 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      */
     public JuryoininKeiyakuJigyoshaBuilder set口座名義人(AtenaKanaMeisho 口座名義人) {
         requireNonNull(口座名義人, UrSystemErrorMessages.値がnull.getReplacedMessage("口座名義人"));
-        entity.setKozaMeiginin(口座名義人);
+        entity.setKozaMeigininKana(口座名義人);
         return this;
     }
 
@@ -232,7 +232,7 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      */
     public JuryoininKeiyakuJigyoshaBuilder set口座名義人漢字(AtenaMeisho 口座名義人漢字) {
         requireNonNull(口座名義人漢字, UrSystemErrorMessages.値がnull.getReplacedMessage("口座名義人漢字"));
-        entity.setKozaMeigininKanji(口座名義人漢字);
+        entity.setKozaMeiginin(口座名義人漢字);
         return this;
     }
 
@@ -244,7 +244,7 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      */
     public JuryoininKeiyakuJigyoshaBuilder set事業者FAX番号(TelNo 事業者FAX番号) {
         requireNonNull(事業者FAX番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者FAX番号"));
-        entity.setJigyoshaFaxNo(事業者FAX番号);
+        entity.setKeiyakuJigyoshaFaxNo(事業者FAX番号);
         return this;
     }
 
@@ -254,11 +254,11 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      * @param 契約登録年月日 契約登録年月日
      * @return {@link JuryoininKeiyakuJigyoshaBuilder}
      */
-    public JuryoininKeiyakuJigyoshaBuilder set契約登録年月日(FlexibleDate 契約登録年月日) {
-        requireNonNull(契約登録年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("契約登録年月日"));
-        entity.setKeiyakuTorokuYMD(契約登録年月日);
-        return this;
-    }
+//    public JuryoininKeiyakuJigyoshaBuilder set契約登録年月日(FlexibleDate 契約登録年月日) {
+//        requireNonNull(契約登録年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("契約登録年月日"));
+//        entity.setKeiyakuTorokuYMD(契約登録年月日);
+//        return this;
+//    }
 
     /**
      * 送付先部署を設定します。
@@ -278,11 +278,11 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      * @param 営業形態 営業形態
      * @return {@link JuryoininKeiyakuJigyoshaBuilder}
      */
-    public JuryoininKeiyakuJigyoshaBuilder set営業形態(RString 営業形態) {
-        requireNonNull(営業形態, UrSystemErrorMessages.値がnull.getReplacedMessage("営業形態"));
-        entity.setEigyoKeitai(営業形態);
-        return this;
-    }
+//    public JuryoininKeiyakuJigyoshaBuilder set営業形態(RString 営業形態) {
+//        requireNonNull(営業形態, UrSystemErrorMessages.値がnull.getReplacedMessage("営業形態"));
+//        entity.setEigyoKeitai(営業形態);
+//        return this;
+//    }
 
     /**
      * 住宅改修契約有無を設定します。
@@ -290,11 +290,11 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      * @param 住宅改修契約有無 住宅改修契約有無
      * @return {@link JuryoininKeiyakuJigyoshaBuilder}
      */
-    public JuryoininKeiyakuJigyoshaBuilder set住宅改修契約有無(boolean 住宅改修契約有無) {
-        requireNonNull(住宅改修契約有無, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅改修契約有無"));
-        entity.setJutakuKaishuKeiyakuUmu(住宅改修契約有無);
-        return this;
-    }
+//    public JuryoininKeiyakuJigyoshaBuilder set住宅改修契約有無(boolean 住宅改修契約有無) {
+//        requireNonNull(住宅改修契約有無, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅改修契約有無"));
+//        entity.setJutakuKaishuKeiyakuUmu(住宅改修契約有無);
+//        return this;
+//    }
 
     /**
      * 特定福祉用具販売契約有無を設定します。
@@ -302,11 +302,11 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      * @param 特定福祉用具販売契約有無 特定福祉用具販売契約有無
      * @return {@link JuryoininKeiyakuJigyoshaBuilder}
      */
-    public JuryoininKeiyakuJigyoshaBuilder set特定福祉用具販売契約有無(boolean 特定福祉用具販売契約有無) {
-        requireNonNull(特定福祉用具販売契約有無, UrSystemErrorMessages.値がnull.getReplacedMessage("特定福祉用具販売契約有無"));
-        entity.setTokuteiFukushiYoguHanbaiKeiyakuUmu(特定福祉用具販売契約有無);
-        return this;
-    }
+//    public JuryoininKeiyakuJigyoshaBuilder set特定福祉用具販売契約有無(boolean 特定福祉用具販売契約有無) {
+//        requireNonNull(特定福祉用具販売契約有無, UrSystemErrorMessages.値がnull.getReplacedMessage("特定福祉用具販売契約有無"));
+//        entity.setTokuteiFukushiYoguHanbaiKeiyakuUmu(特定福祉用具販売契約有無);
+//        return this;
+//    }
 
     /**
      * 償還払給付契約有無を設定します。
@@ -314,11 +314,11 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      * @param 償還払給付契約有無 償還払給付契約有無
      * @return {@link JuryoininKeiyakuJigyoshaBuilder}
      */
-    public JuryoininKeiyakuJigyoshaBuilder set償還払給付契約有無(boolean 償還払給付契約有無) {
-        requireNonNull(償還払給付契約有無, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払給付契約有無"));
-        entity.setShokanbaraiKyufuKeiyakuUmu(償還払給付契約有無);
-        return this;
-    }
+//    public JuryoininKeiyakuJigyoshaBuilder set償還払給付契約有無(boolean 償還払給付契約有無) {
+//        requireNonNull(償還払給付契約有無, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払給付契約有無"));
+//        entity.setShokanbaraiKyufuKeiyakuUmu(償還払給付契約有無);
+//        return this;
+//    }
 
     /**
      * 高額給付契約有無を設定します。
@@ -326,23 +326,11 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      * @param 高額給付契約有無 高額給付契約有無
      * @return {@link JuryoininKeiyakuJigyoshaBuilder}
      */
-    public JuryoininKeiyakuJigyoshaBuilder set高額給付契約有無(boolean 高額給付契約有無) {
-        requireNonNull(高額給付契約有無, UrSystemErrorMessages.値がnull.getReplacedMessage("高額給付契約有無"));
-        entity.setKogakuKyufuKeiyakuUmu(高額給付契約有無);
-        return this;
-    }
-
-    /**
-     * 契約事業者番号を設定します。
-     *
-     * @param 契約事業者番号 契約事業者番号
-     * @return {@link JuryoininKeiyakuJigyoshaBuilder}
-     */
-    public JuryoininKeiyakuJigyoshaBuilder set契約事業者番号(JigyoshaNo 契約事業者番号) {
-        requireNonNull(契約事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("契約事業者番号"));
-        entity.setKeiyakuJigyoshaNo(契約事業者番号);
-        return this;
-    }
+//    public JuryoininKeiyakuJigyoshaBuilder set高額給付契約有無(boolean 高額給付契約有無) {
+//        requireNonNull(高額給付契約有無, UrSystemErrorMessages.値がnull.getReplacedMessage("高額給付契約有無"));
+//        entity.setKogakuKyufuKeiyakuUmu(高額給付契約有無);
+//        return this;
+//    }
 
     /**
      * 取扱確約書有無を設定します。
@@ -350,11 +338,11 @@ public class JuryoininKeiyakuJigyoshaBuilder {
      * @param 取扱確約書有無 取扱確約書有無
      * @return {@link JuryoininKeiyakuJigyoshaBuilder}
      */
-    public JuryoininKeiyakuJigyoshaBuilder set取扱確約書有無(boolean 取扱確約書有無) {
-        requireNonNull(取扱確約書有無, UrSystemErrorMessages.値がnull.getReplacedMessage("取扱確約書有無"));
-        entity.setToriatsukaiKakuyakushoUmu(取扱確約書有無);
-        return this;
-    }
+//    public JuryoininKeiyakuJigyoshaBuilder set取扱確約書有無(boolean 取扱確約書有無) {
+//        requireNonNull(取扱確約書有無, UrSystemErrorMessages.値がnull.getReplacedMessage("取扱確約書有無"));
+//        entity.setToriatsukaiKakuyakushoUmu(取扱確約書有無);
+//        return this;
+//    }
 
     /**
      * {@link JuryoininKeiyakuJigyosha}のインスタンスを生成します。

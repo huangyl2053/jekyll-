@@ -38,7 +38,7 @@ public class DbT3075KogakuGassanKyufuJissekiDac implements ISaveable<DbT3075Koga
      * @param 被保険者番号 HihokenshaNo
      * @param 支給申請書整理番号 ShikyuShinseiSeiriNo
      * @param 整理番号 SeiriNo
-     * @param 履歴番号 RirekiNo
+// * @param 履歴番号 RirekiNo
      * @return DbT3075KogakuGassanKyufuJissekiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -47,13 +47,14 @@ public class DbT3075KogakuGassanKyufuJissekiDac implements ISaveable<DbT3075Koga
             KokanShikibetsuNo 交換情報識別番号,
             HihokenshaNo 被保険者番号,
             RString 支給申請書整理番号,
-            RString 整理番号,
-            Decimal 履歴番号) throws NullPointerException {
+            RString 整理番号
+    //            Decimal 履歴番号
+    ) throws NullPointerException {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -63,8 +64,9 @@ public class DbT3075KogakuGassanKyufuJissekiDac implements ISaveable<DbT3075Koga
                                 eq(kokanJohoShikibetsuNo, 交換情報識別番号),
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(shikyuShinseiSeiriNo, 支給申請書整理番号),
-                                eq(seiriNo, 整理番号),
-                                eq(rirekiNo, 履歴番号))).
+                                eq(seiriNo, 整理番号)
+                        //                                eq(rirekiNo, 履歴番号)
+                        )).
                 toObject(DbT3075KogakuGassanKyufuJissekiEntity.class);
     }
 

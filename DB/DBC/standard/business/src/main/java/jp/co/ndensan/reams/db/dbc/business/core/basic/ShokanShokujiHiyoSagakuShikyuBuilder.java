@@ -106,11 +106,11 @@ public class ShokanShokujiHiyoSagakuShikyuBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link ShokanShokujiHiyoSagakuShikyuBuilder}
      */
-    public ShokanShokujiHiyoSagakuShikyuBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
-        return this;
-    }
+//    public ShokanShokujiHiyoSagakuShikyuBuilder set履歴番号(Decimal 履歴番号) {
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        entity.setRirekiNo(履歴番号);
+//        return this;
+//    }
 
     /**
      * 差額金額を設定します。

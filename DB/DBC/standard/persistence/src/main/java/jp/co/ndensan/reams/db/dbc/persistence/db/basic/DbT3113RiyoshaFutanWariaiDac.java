@@ -43,7 +43,7 @@ public class DbT3113RiyoshaFutanWariaiDac implements ISaveable<DbT3113RiyoshaFut
     public DbT3113RiyoshaFutanWariaiEntity selectByKey(
             FlexibleYear 年度,
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号) throws NullPointerException {
+            int 履歴番号) throws NullPointerException {
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));

@@ -213,7 +213,7 @@ public class KyufuKanrihyoInBatch {
         kokuhorenIFkanri.setSofuTorikomiKubun(new RString("2"));
         kokuhorenIFkanri.setShoriJotaiKubun(new RString("3"));
         kokuhorenIFkanri.setShoriJisshiTimestamp(new YMDHMS(shoriNichiji));
-        kokuhorenIFkanri.setSaiShoriKahiKubun(false);
+        kokuhorenIFkanri.setSaiShoriKanoKubun(false);
         kokuhorenIFkanri.setShoriJikkoKaisu(kokuhorenIFkanri.getShoriJikkoKaisu().add(1));
         kokuhorenIFkanri.setFileName1(fileName);
         kokuhorenIFkanri.setFileKensu1(kyufuCtrlTemps.size());

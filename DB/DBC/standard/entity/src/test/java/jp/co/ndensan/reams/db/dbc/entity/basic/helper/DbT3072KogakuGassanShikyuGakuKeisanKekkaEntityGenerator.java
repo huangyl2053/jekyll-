@@ -25,7 +25,7 @@ public final class DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator {
     public static final FlexibleYear DEFAULT_対象年度 = new FlexibleYear("1990");
     public static final HokenshaNo DEFAULT_証記載保険者番号 = new HokenshaNo("1");
     public static final RString DEFAULT_支給申請書整理番号 = new RString("Data");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 0;
     public static final RString DEFAULT_保険制度コード = new RString("Data");
     public static final RString DEFAULT_自己負担額証明書整理番号 = new RString("Data");
     public static final FlexibleDate DEFAULT_対象計算期間開始年月日 = new FlexibleDate("19900101");
