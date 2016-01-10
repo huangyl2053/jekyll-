@@ -35,7 +35,7 @@ public class SaishinsaMoshitateBuilderTest extends DbcTestBase {
     private static FlexibleYearMonth 主キー名3;
     private static ServiceShuruiCode 主キー名4;
     private static ServiceKomokuCode 主キー名5;
-    private static Decimal 主キー名6;
+    private static int 主キー名6;
 
     @BeforeClass
     public static void setUpClass() {

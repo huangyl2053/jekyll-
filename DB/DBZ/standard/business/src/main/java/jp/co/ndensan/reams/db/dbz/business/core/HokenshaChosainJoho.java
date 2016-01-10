@@ -66,7 +66,7 @@ public class HokenshaChosainJoho implements Serializable, IChosainJoho {
      */
     @Override
     public ChosaItakusakiCode get認定調査委託先コード() {
-        return entity.getNinteichosaItakusakiCode();
+        return entity.getNinteiChosaItakusakiCode();
     }
 
     /**
@@ -76,7 +76,7 @@ public class HokenshaChosainJoho implements Serializable, IChosainJoho {
      */
     @Override
     public ChosainCode get認定調査員コード() {
-        return entity.getNinteiChosainNo();
+        return entity.getNinteiChosainCode();
     }
 
     /**
@@ -327,7 +327,7 @@ public class HokenshaChosainJoho implements Serializable, IChosainJoho {
         @Override
         public Builder setNinteichosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
             Objects.requireNonNull(ninteichosaItakusakiCode);
-            this.entity.setNinteichosaItakusakiCode(ninteichosaItakusakiCode);
+            this.entity.setNinteiChosaItakusakiCode(ninteichosaItakusakiCode);
             return this;
         }
 
@@ -340,7 +340,7 @@ public class HokenshaChosainJoho implements Serializable, IChosainJoho {
         @Override
         public Builder setNinteiChosainNo(ChosainCode ninteiChosainNo) {
             Objects.requireNonNull(ninteiChosainNo);
-            this.entity.setNinteiChosainNo(ninteiChosainNo);
+            this.entity.setNinteiChosainCode(ninteiChosainNo);
             return this;
         }
 

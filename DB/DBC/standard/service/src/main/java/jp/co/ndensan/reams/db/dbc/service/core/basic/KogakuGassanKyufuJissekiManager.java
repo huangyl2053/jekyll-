@@ -57,20 +57,22 @@ public class KogakuGassanKyufuJissekiManager {
             KokanShikibetsuNo 交換情報識別番号,
             HihokenshaNo 被保険者番号,
             RString 支給申請書整理番号,
-            RString 整理番号,
-            Decimal 履歴番号) {
+            RString 整理番号
+    //            Decimal 履歴番号
+    ) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbT3075KogakuGassanKyufuJissekiEntity entity = dac.selectByKey(
                 交換情報識別番号,
                 被保険者番号,
                 支給申請書整理番号,
-                整理番号,
-                履歴番号);
+                整理番号
+        //                履歴番号
+        );
         if (entity == null) {
             return null;
         }

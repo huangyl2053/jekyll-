@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7001FufukuMoshitateEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者番号;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7001FufukuMoshitateEntityGenerator.DEFAULT_審査請求届出日;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
+//import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7001FufukuMoshitateEntityGenerator.DEFAULT_識別コード;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -54,12 +54,12 @@ public class DbT7001FufukuMoshitateDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日);
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日);
@@ -68,7 +68,7 @@ public class DbT7001FufukuMoshitateDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 証記載保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日);
@@ -77,7 +77,7 @@ public class DbT7001FufukuMoshitateDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 識別コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日);
@@ -86,7 +86,7 @@ public class DbT7001FufukuMoshitateDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 原処分被保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日);
@@ -95,7 +95,7 @@ public class DbT7001FufukuMoshitateDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 審査請求届出日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日);
@@ -104,7 +104,7 @@ public class DbT7001FufukuMoshitateDacTest extends DbzTestDacBase {
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT7001FufukuMoshitateEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日);
@@ -114,7 +114,7 @@ public class DbT7001FufukuMoshitateDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7001FufukuMoshitateEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日);
@@ -127,12 +127,12 @@ public class DbT7001FufukuMoshitateDacTest extends DbzTestDacBase {
         @Test
         public void 不服審査申立情報が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日);
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日);
@@ -150,13 +150,13 @@ public class DbT7001FufukuMoshitateDacTest extends DbzTestDacBase {
         @Test
         public void 不服審査申立情報エンティティを渡すと_insertは_不服審査申立情報を追加する() {
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日);
 
             assertThat(sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日), is(notNullValue()));
@@ -168,7 +168,7 @@ public class DbT7001FufukuMoshitateDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日);
@@ -177,7 +177,7 @@ public class DbT7001FufukuMoshitateDacTest extends DbzTestDacBase {
         @Test
         public void 不服審査申立情報エンティティを渡すと_updateは_不服審査申立情報を更新する() {
             DbT7001FufukuMoshitateEntity updateRecord = sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日);
@@ -186,7 +186,7 @@ public class DbT7001FufukuMoshitateDacTest extends DbzTestDacBase {
             sut.save(updateRecord);
 
             DbT7001FufukuMoshitateEntity updatedRecord = sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日);
@@ -200,7 +200,7 @@ public class DbT7001FufukuMoshitateDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日);
@@ -209,7 +209,7 @@ public class DbT7001FufukuMoshitateDacTest extends DbzTestDacBase {
         @Test
         public void 不服審査申立情報エンティティを渡すと_deleteは_不服審査申立情報を削除する() {
             DbT7001FufukuMoshitateEntity deletedEntity = sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日);
@@ -218,7 +218,7 @@ public class DbT7001FufukuMoshitateDacTest extends DbzTestDacBase {
             sut.save(deletedEntity);
 
             assertThat(sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日), is(nullValue()));
@@ -228,12 +228,12 @@ public class DbT7001FufukuMoshitateDacTest extends DbzTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                ShoKisaiHokenshaNo 証記載保険者番号,
+                //                ShoKisaiHokenshaNo 証記載保険者番号,
                 ShikibetsuCode 識別コード,
                 HihokenshaNo 原処分被保険者番号,
                 FlexibleDate 審査請求届出日) {
             DbT7001FufukuMoshitateEntity entity = DbT7001FufukuMoshitateEntityGenerator.createDbT7001FufukuMoshitateEntity();
-            entity.setShoKisaiHokenshaNo(証記載保険者番号);
+//            entity.setShoKisaiHokenshaNo(証記載保険者番号);
             entity.setShikibetsuCode(識別コード);
             entity.setGenshobunsHihokennshaNo(原処分被保険者番号);
             entity.setShinsaSeikyuTodokedeYMD(審査請求届出日);

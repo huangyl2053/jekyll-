@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
@@ -58,7 +57,7 @@ public class SaishinsaMoshitateManagerTest {
             FlexibleYearMonth 主キー3 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス提供年月;
             ServiceShuruiCode 主キー4 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス種類コード;
             ServiceKomokuCode 主キー5 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス項目コード;
-            Decimal 主キー6 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_履歴番号;
             sut.get再審査申立(null, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
         }
 
@@ -68,7 +67,7 @@ public class SaishinsaMoshitateManagerTest {
             FlexibleYearMonth 主キー3 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス提供年月;
             ServiceShuruiCode 主キー4 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス種類コード;
             ServiceKomokuCode 主キー5 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス項目コード;
-            Decimal 主キー6 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_履歴番号;
             sut.get再審査申立(主キー1, null, 主キー3, 主キー4, 主キー5, 主キー6);
         }
 
@@ -78,7 +77,7 @@ public class SaishinsaMoshitateManagerTest {
             HihokenshaNo 主キー2 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_被保険者番号;
             ServiceShuruiCode 主キー4 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス種類コード;
             ServiceKomokuCode 主キー5 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス項目コード;
-            Decimal 主キー6 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_履歴番号;
             sut.get再審査申立(主キー1, 主キー2, null, 主キー4, 主キー5, 主キー6);
         }
 
@@ -88,7 +87,7 @@ public class SaishinsaMoshitateManagerTest {
             HihokenshaNo 主キー2 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー3 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス提供年月;
             ServiceKomokuCode 主キー5 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス項目コード;
-            Decimal 主キー6 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_履歴番号;
             sut.get再審査申立(主キー1, 主キー2, 主キー3, null, 主キー5, 主キー6);
         }
 
@@ -98,31 +97,31 @@ public class SaishinsaMoshitateManagerTest {
             HihokenshaNo 主キー2 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー3 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス提供年月;
             ServiceShuruiCode 主キー4 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス種類コード;
-            Decimal 主キー6 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_履歴番号;
             sut.get再審査申立(主キー1, 主キー2, 主キー3, 主キー4, null, 主キー6);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型6にnullを指定した場合_NullPointerExceptionが発生する() {
-            JigyoshaNo 主キー1 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_事業所番号;
-            HihokenshaNo 主キー2 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_被保険者番号;
-            FlexibleYearMonth 主キー3 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス提供年月;
-            ServiceShuruiCode 主キー4 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス種類コード;
-            ServiceKomokuCode 主キー5 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス項目コード;
-            sut.get再審査申立(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の主キー型6にnullを指定した場合_NullPointerExceptionが発生する() {
+//            JigyoshaNo 主キー1 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_事業所番号;
+//            HihokenshaNo 主キー2 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_被保険者番号;
+//            FlexibleYearMonth 主キー3 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス提供年月;
+//            ServiceShuruiCode 主キー4 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス種類コード;
+//            ServiceKomokuCode 主キー5 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス項目コード;
+//            sut.get再審査申立(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, null);
+//        }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(JigyoshaNo.class), any(HihokenshaNo.class), any(FlexibleYearMonth.class),
-                    any(ServiceShuruiCode.class), any(ServiceKomokuCode.class), any(Decimal.class))).thenReturn(null);
+                    any(ServiceShuruiCode.class), any(ServiceKomokuCode.class), any(int.class))).thenReturn(null);
             JigyoshaNo 主キー1 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_事業所番号;
             HihokenshaNo 主キー2 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー3 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス提供年月;
             ServiceShuruiCode 主キー4 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス種類コード;
             ServiceKomokuCode 主キー5 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス項目コード;
-            Decimal 主キー6 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_履歴番号;
             SaishinsaMoshitate result = sut.get再審査申立(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
             assertThat(result, is(nullValue()));
@@ -132,13 +131,13 @@ public class SaishinsaMoshitateManagerTest {
         public void 検索結果が存在する場合() {
             DbT3062SaishinsaMoshitateEntity entity = DbT3062SaishinsaMoshitateEntityGenerator.createDbT3062SaishinsaMoshitateEntity();
             when(dac.selectByKey(any(JigyoshaNo.class), any(HihokenshaNo.class), any(FlexibleYearMonth.class),
-                    any(ServiceShuruiCode.class), any(ServiceKomokuCode.class), any(Decimal.class))).thenReturn(entity);
+                    any(ServiceShuruiCode.class), any(ServiceKomokuCode.class), any(int.class))).thenReturn(entity);
             JigyoshaNo 主キー1 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_事業所番号;
             HihokenshaNo 主キー2 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー3 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス提供年月;
             ServiceShuruiCode 主キー4 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス種類コード;
             ServiceKomokuCode 主キー5 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_サービス項目コード;
-            Decimal 主キー6 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_履歴番号;
             SaishinsaMoshitate result = sut.get再審査申立(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
             assertThat(result.get事業所番号().value(), is(DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_事業所番号.value()));

@@ -280,7 +280,7 @@ public class RiyoshaFutanWariaiManagerTest {
     private static class TestSupport {
 
         public static RiyoshaFutanWariai createRiyoshaFutanWariai(FlexibleYear 主キー1, HihokenshaNo 主キー2) {
-            RiyoshaFutanWariai 利用者負担割合 = new RiyoshaFutanWariai(主キー1, 主キー2, Decimal.ZERO);
+            RiyoshaFutanWariai 利用者負担割合 = new RiyoshaFutanWariai(主キー1, 主キー2, 0);
             return 利用者負担割合.createBuilderForEdit()
                     // 利用者負担割合明細
                     .setRiyoshaFutanWariaiMeisai(createRiyoshaFutanWariaiMeisai(主キー1, 主キー2))
@@ -291,7 +291,7 @@ public class RiyoshaFutanWariaiManagerTest {
         private static RiyoshaFutanWariaiMeisai createRiyoshaFutanWariaiMeisai(FlexibleYear 主キー1, HihokenshaNo 主キー2) {
             return new RiyoshaFutanWariaiMeisai(
                     主キー1,
-                    主キー2, Decimal.ZERO, Decimal.ONE);
+                    主キー2, 0, 1);
         }
 
         public static RiyoshaFutanWariai initializeRiyoshaFutanWariai(RiyoshaFutanWariai 利用者負担割合) {

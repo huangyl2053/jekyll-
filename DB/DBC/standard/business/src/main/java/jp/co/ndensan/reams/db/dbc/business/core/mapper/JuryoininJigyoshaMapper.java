@@ -57,19 +57,18 @@ public final class JuryoininJigyoshaMapper {
             return null;
         }
         JuryoininJigyosha 受領委任事業者 = new JuryoininJigyosha(
-                create契約番号(entity.getJigyoshaKeiyakuNo()),
+                create契約番号(entity.getKeiyakuJigyoshaNo()),
                 create契約期間(entity),
                 null,
-                entity.getTodokedeYMD(),
-                create届出者(entity),
-                entity.getKeiyakuTorokuYMD(),
-                create契約事業者(entity, 法人, 口座),
-                JutakuKaishuKeiyakuKubun.toValue(entity.getJutakuKaishuKeiyakuUmu()),
-                TokuteiFukushiYoguHanbaiKeiyakuKubun.toValue(entity.getTokuteiFukushiYoguHanbaiKeiyakuUmu()),
-                ShokanbaraiKyufuKeiyakuKubun.toValue(entity.getShokanbaraiKyufuKeiyakuUmu()),
-                KogakuKyufuKeiyakuKubun.toValue(entity.getKogakuKyufuKeiyakuUmu()),
-                ToriatsukaiKakuyakushoKubun.toValue(entity.getToriatsukaiKakuyakushoUmu())
-        );
+                //                entity.getTodokedeYMD(),
+//                create届出者(entity),
+                //                entity.getKeiyakuTorokuYMD(),
+                create契約事業者(entity, 法人, 口座));
+//                JutakuKaishuKeiyakuKubun.toValue(entity.getJutakuKaishuKeiyakuUmu()),
+//                TokuteiFukushiYoguHanbaiKeiyakuKubun.toValue(entity.getTokuteiFukushiYoguHanbaiKeiyakuUmu()),
+//                ShokanbaraiKyufuKeiyakuKubun.toValue(entity.getShokanbaraiKyufuKeiyakuUmu()),
+//                KogakuKyufuKeiyakuKubun.toValue(entity.getKogakuKyufuKeiyakuUmu()),
+//                ToriatsukaiKakuyakushoKubun.toValue(entity.getToriatsukaiKakuyakushoUmu())
         return 受領委任事業者;
     }
 
@@ -110,25 +109,25 @@ public final class JuryoininJigyoshaMapper {
             return null;
         }
         DbT3077JuryoininKeiyakuJigyoshaEntity entity = new DbT3077JuryoininKeiyakuJigyoshaEntity();
-        entity.setJigyoshaKeiyakuNo(受領委任事業者.get契約番号().value());
+        entity.setKeiyakuJigyoshaNo(受領委任事業者.get契約番号().value());
         entity.setKaishiYMD(受領委任事業者.get契約期間().getFrom());
 //        entity.setShoriTimestamp(受領委任事業者.get処理日時());
         entity.setShuryoYMD(受領委任事業者.get契約期間().getTo());
-        entity.setTodokedeYMD(受領委任事業者.get届出年月日());
-        entity.setTodokedeAddress(受領委任事業者.get届出者().get住所());
-        entity.setTodokedeJigyoshaName(受領委任事業者.get届出者().get事業者名称());
-        entity.setTodokedeDaihyoshaName(受領委任事業者.get届出者().get代表者氏名());
+//        entity.setTodokedeYMD(受領委任事業者.get届出年月日());
+//        entity.setTodokedeAddress(受領委任事業者.get届出者().get住所());
+//        entity.setTodokedeJigyoshaName(受領委任事業者.get届出者().get事業者名称());
+//        entity.setTodokedeDaihyoshaName(受領委任事業者.get届出者().get代表者氏名());
 //        entity.setShikibetsuCode(受領委任事業者.get識別コード());
-        entity.setJigyoshaFaxNo(受領委任事業者.get契約事業者().get事業者FAX番号());
-        entity.setKeiyakuTorokuYMD(受領委任事業者.get契約登録年月日());
+//        entity.setJigyoshaFaxNo(受領委任事業者.get契約事業者().get事業者FAX番号());
+//        entity.setKeiyakuTorokuYMD(受領委任事業者.get契約登録年月日());
         entity.setSofusakiBusho(受領委任事業者.get契約事業者().get送付先部署());
-        entity.setEigyoKeitai(受領委任事業者.get契約事業者().get営業形態().getCode());
-        entity.setJutakuKaishuKeiyakuUmu(受領委任事業者.has住宅改修契約());
-        entity.setTokuteiFukushiYoguHanbaiKeiyakuUmu(受領委任事業者.has特定福祉用具販売契約());
-        entity.setShokanbaraiKyufuKeiyakuUmu(受領委任事業者.has償還払給付契約());
-        entity.setKogakuKyufuKeiyakuUmu(受領委任事業者.has高額給付契約());
-        entity.setKeiyakuJigyoshaNo(受領委任事業者.get契約事業者().get事業者番号());
-        entity.setToriatsukaiKakuyakushoUmu(受領委任事業者.has取扱確約書());
+//        entity.setEigyoKeitai(受領委任事業者.get契約事業者().get営業形態().getCode());
+//        entity.setJutakuKaishuKeiyakuUmu(受領委任事業者.has住宅改修契約());
+//        entity.setTokuteiFukushiYoguHanbaiKeiyakuUmu(受領委任事業者.has特定福祉用具販売契約());
+//        entity.setShokanbaraiKyufuKeiyakuUmu(受領委任事業者.has償還払給付契約());
+//        entity.setKogakuKyufuKeiyakuUmu(受領委任事業者.has高額給付契約());
+//        entity.setKeiyakuJigyoshaNo(受領委任事業者.get契約事業者().get事業者番号());
+//        entity.setToriatsukaiKakuyakushoUmu(受領委任事業者.has取扱確約書());
 
         return entity;
     }
@@ -145,26 +144,26 @@ public final class JuryoininJigyoshaMapper {
         return 契約期間;
     }
 
-    private static Todokedesha create届出者(DbT3077JuryoininKeiyakuJigyoshaEntity entity) {
-        RString address = entity.getTodokedeAddress();
-        RString jigyoshaName = entity.getTodokedeJigyoshaName();
-        RString daihyoshaName = entity.getTodokedeDaihyoshaName();
-
-        return new Todokedesha(address, jigyoshaName, daihyoshaName);
-    }
+//    private static Todokedesha create届出者(DbT3077JuryoininKeiyakuJigyoshaEntity entity) {
+//        RString address = entity.getTodokedeAddress();
+//        RString jigyoshaName = entity.getTodokedeJigyoshaName();
+//        RString daihyoshaName = entity.getTodokedeDaihyoshaName();
+//
+//        return new Todokedesha(address, jigyoshaName, daihyoshaName);
+//    }
 
     private static KeiyakuJigyosha create契約事業者(
             DbT3077JuryoininKeiyakuJigyoshaEntity entity, IHojin 法人, IKoza 口座) {
 
-        JigyoshaNo jigyoshaNo = entity.getKeiyakuJigyoshaNo();
+        JigyoshaNo jigyoshaNo = new JigyoshaNo(entity.getKeiyakuJigyoshaNo());
         IHojin hojin = 法人;
-        TelNo jigyoshaFaxNo = entity.getJigyoshaFaxNo();
-        EigyoKeitai eigyoKeitai = EigyoKeitai.toValue(entity.getEigyoKeitai());
+        TelNo jigyoshaFaxNo = entity.getKeiyakuJigyoshaFaxNo();
+//        EigyoKeitai eigyoKeitai = EigyoKeitai.toValue(entity.getEigyoKeitai());
         RString sofusakiBusho = entity.getSofusakiBusho();
         IKoza koza = 口座;
         //TODO n3317塚田萌　ISofusakiは本実装の時に対応する。期限　本実装完了まで
 //        ISofusaki sofusaki = 送付先;
 
-        return new KeiyakuJigyosha(jigyoshaNo, hojin, jigyoshaFaxNo, eigyoKeitai, sofusakiBusho, koza);
+        return new KeiyakuJigyosha(jigyoshaNo, hojin, jigyoshaFaxNo, null, sofusakiBusho, koza);
     }
 }

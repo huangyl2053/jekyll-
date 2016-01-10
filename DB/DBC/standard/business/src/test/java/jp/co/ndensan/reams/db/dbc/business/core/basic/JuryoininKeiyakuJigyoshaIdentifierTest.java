@@ -32,16 +32,16 @@ public class JuryoininKeiyakuJigyoshaIdentifierTest extends DbcTestBase {
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_事業者契約番号;
+        主キー名1 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_契約事業者番号;
         主キー名2 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_開始年月日;
-        主キー名3 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_履歴番号;
+//        主キー名3 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class シリアライズテスト extends DbcTestBase {
 
         @Test
         public void シリアライズできる() {
-            JuryoininKeiyakuJigyoshaIdentifier sut = new JuryoininKeiyakuJigyoshaIdentifier(主キー名1, 主キー名2, 主キー名3);
+            JuryoininKeiyakuJigyoshaIdentifier sut = new JuryoininKeiyakuJigyoshaIdentifier(主キー名1, 主キー名2);
             assertThat(sut, is(serializable()));
         }
     }

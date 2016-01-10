@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
  * 受領委任事業者テーブルのエンティティクラスです。
  * <br/> 受領委任契約をしている事業者を管理します。
  */
-public class DbT7061JuryoIninJigyoshaEntity extends DbTableEntityBase<DbT7061JuryoIninJigyoshaEntity> implements IDbAccessable {
+public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT7061JuryoIninKeiyakuJigyoshaEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7061JuryoIninJigyosha");
@@ -149,9 +149,12 @@ public class DbT7061JuryoIninJigyoshaEntity extends DbTableEntityBase<DbT7061Jur
     /**
      * 契約サービス種別のgetメソッドです。
      * <br/>
-     * <br/>＜Enumで管理＞
-     * <br/>1：特定福祉用具販売事業者
-     * <br/>2：住宅改修事業者
+     * <br/>＜Enumで管理＞
+
+     * <br/>1：特定福祉用具販売事業者
+
+     * <br/>2：住宅改修事業者
+
      * <br/>3：サービス提供事業者
      * 
      * @return 契約サービス種別
@@ -163,9 +166,12 @@ public class DbT7061JuryoIninJigyoshaEntity extends DbTableEntityBase<DbT7061Jur
     /**
      * 契約サービス種別のsetメソッドです。
      * <br/>
-     * <br/>＜Enumで管理＞
-     * <br/>1：特定福祉用具販売事業者
-     * <br/>2：住宅改修事業者
+     * <br/>＜Enumで管理＞
+
+     * <br/>1：特定福祉用具販売事業者
+
+     * <br/>2：住宅改修事業者
+
      * <br/>3：サービス提供事業者
      * 
      * @param serviceShubetsuCode 契約サービス種別
@@ -258,7 +264,7 @@ public class DbT7061JuryoIninJigyoshaEntity extends DbTableEntityBase<DbT7061Jur
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7061JuryoIninJigyoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
-    public boolean equalsPrimaryKeys(DbT7061JuryoIninJigyoshaEntity other) {
+    public boolean equalsPrimaryKeys(DbT7061JuryoIninKeiyakuJigyoshaEntity other) {
         if (other == null) {
             return false;
         }
@@ -278,7 +284,7 @@ public class DbT7061JuryoIninJigyoshaEntity extends DbTableEntityBase<DbT7061Jur
      * {@inheritDoc}
      */
     @Override
-    public void shallowCopy(DbT7061JuryoIninJigyoshaEntity entity) {
+    public void shallowCopy(DbT7061JuryoIninKeiyakuJigyoshaEntity entity) {
         this.jigyoshaNo = entity.jigyoshaNo;
         this.keiyakuKaishiYMD = entity.keiyakuKaishiYMD;
         this.keiyakuShuryoYMD = entity.keiyakuShuryoYMD;

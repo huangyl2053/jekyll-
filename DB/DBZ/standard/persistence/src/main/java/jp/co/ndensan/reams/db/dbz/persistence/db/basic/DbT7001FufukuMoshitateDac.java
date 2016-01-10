@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitate;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitate.genshobunsHihokennshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitate.shikibetsuCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitate.shinsaSeikyuTodokedeYMD;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitate.shoKisaiHokenshaNo;
+//import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitate.shoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -36,7 +36,8 @@ public class DbT7001FufukuMoshitateDac implements ISaveable<DbT7001FufukuMoshita
     /**
      * 主キーで不服審査申立情報を取得します。
      *
-     * @param 証記載保険者番号 ShoKisaiHokenshaNo
+// * @param 証記載保険者番号 ShoKisaiHokenshaNo
+     *
      * @param 識別コード ShikibetsuCode
      * @param 原処分被保険者番号 GenshobunsHihokennshaNo
      * @param 審査請求届出日 ShinsaSeikyuTodokedeYMD
@@ -45,11 +46,11 @@ public class DbT7001FufukuMoshitateDac implements ISaveable<DbT7001FufukuMoshita
      */
     @Transaction
     public DbT7001FufukuMoshitateEntity selectByKey(
-            ShoKisaiHokenshaNo 証記載保険者番号,
+            //            ShoKisaiHokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             HihokenshaNo 原処分被保険者番号,
             FlexibleDate 審査請求届出日) throws NullPointerException {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(原処分被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者番号"));
         requireNonNull(審査請求届出日, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求届出日"));
@@ -59,7 +60,7 @@ public class DbT7001FufukuMoshitateDac implements ISaveable<DbT7001FufukuMoshita
         return accessor.select().
                 table(DbT7001FufukuMoshitate.class).
                 where(and(
-                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                                //                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
                                 eq(shikibetsuCode, 識別コード),
                                 eq(genshobunsHihokennshaNo, 原処分被保険者番号),
                                 eq(shinsaSeikyuTodokedeYMD, 審査請求届出日))).

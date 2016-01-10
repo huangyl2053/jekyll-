@@ -25,14 +25,14 @@ public class SogoJigyoTaishoshaIdentifierTest extends DbcTestBase {
 
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static HokenshaNo 主キー名1;
+//    private static HokenshaNo 主キー名1;
     private static HihokenshaNo 主キー名2;
-    private static Decimal 主キー名3;
+    private static int 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3105SogoJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号;
+//        主キー名1 = DbT3105SogoJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号;
         主キー名2 = DbT3105SogoJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
     }
 
@@ -40,7 +40,7 @@ public class SogoJigyoTaishoshaIdentifierTest extends DbcTestBase {
 
         @Test
         public void シリアライズできる() {
-            SogoJigyoTaishoshaIdentifier sut = new SogoJigyoTaishoshaIdentifier(主キー名1, 主キー名2, 主キー名3);
+            SogoJigyoTaishoshaIdentifier sut = new SogoJigyoTaishoshaIdentifier(主キー名2, 主キー名3);
             assertThat(sut, is(IsSerializable.serializable()));
         }
     }

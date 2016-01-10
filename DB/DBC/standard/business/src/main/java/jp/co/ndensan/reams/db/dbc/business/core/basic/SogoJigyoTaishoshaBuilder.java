@@ -46,11 +46,11 @@ public class SogoJigyoTaishoshaBuilder {
      * @param 証記載保険者番号 証記載保険者番号
      * @return {@link SogoJigyoTaishoshaBuilder}
      */
-    public SogoJigyoTaishoshaBuilder set証記載保険者番号(HokenshaNo 証記載保険者番号) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
-        return this;
-    }
+//    public SogoJigyoTaishoshaBuilder set証記載保険者番号(HokenshaNo 証記載保険者番号) {
+//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+//        entity.setShoKisaiHokenshaNo(証記載保険者番号);
+//        return this;
+//    }
 
     /**
      * 被保険者番号を設定します。
@@ -70,7 +70,7 @@ public class SogoJigyoTaishoshaBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link SogoJigyoTaishoshaBuilder}
      */
-    public SogoJigyoTaishoshaBuilder set履歴番号(Decimal 履歴番号) {
+    public SogoJigyoTaishoshaBuilder set履歴番号(int 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;
@@ -106,11 +106,11 @@ public class SogoJigyoTaishoshaBuilder {
      * @param 識別コード 識別コード
      * @return {@link SogoJigyoTaishoshaBuilder}
      */
-    public SogoJigyoTaishoshaBuilder set識別コード(ShikibetsuCode 識別コード) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        entity.setShikibetsuCode(識別コード);
-        return this;
-    }
+//    public SogoJigyoTaishoshaBuilder set識別コード(ShikibetsuCode 識別コード) {
+//        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+//        entity.setShikibetsuCode(識別コード);
+//        return this;
+//    }
 
     /**
      * 受付年月日を設定します。

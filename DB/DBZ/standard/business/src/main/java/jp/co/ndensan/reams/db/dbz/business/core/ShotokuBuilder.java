@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -18,18 +18,18 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class ShotokuBuilder {
 
-    private final DbT2008ShotokuEntity entity;
+    private final DbT2008ShotokuKanriEntity entity;
     private final ShotokuIdentifier id;
 
     /**
-     * {@link DbT2008ShotokuEntity}より{@link Shotoku}の編集用Builderクラスを生成します。
+     * {@link DbT2008ShotokuKanriEntity}より{@link Shotoku}の編集用Builderクラスを生成します。
      *
-     * @param entity {@link DbT2008ShotokuEntity}
+     * @param entity {@link DbT2008ShotokuKanriEntity}
      * @param id {@link ShotokuIdentifier}
      *
      */
     ShotokuBuilder(
-            DbT2008ShotokuEntity entity,
+            DbT2008ShotokuKanriEntity entity,
             ShotokuIdentifier id
     ) {
         this.entity = entity.clone();
@@ -69,7 +69,7 @@ public class ShotokuBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link ShotokuBuilder}
      */
-    public ShotokuBuilder set履歴番号(Decimal 履歴番号) {
+    public ShotokuBuilder set履歴番号(int 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;
@@ -83,7 +83,7 @@ public class ShotokuBuilder {
      */
     public ShotokuBuilder set非課税区分_住民税減免前(RString 非課税区分_住民税減免前) {
         requireNonNull(非課税区分_住民税減免前, UrSystemErrorMessages.値がnull.getReplacedMessage("非課税区分（住民税減免前）"));
-        entity.setHiKazeiKubun(非課税区分_住民税減免前);
+        entity.setKazeiKubun(非課税区分_住民税減免前);
         return this;
     }
 
@@ -95,7 +95,7 @@ public class ShotokuBuilder {
      */
     public ShotokuBuilder set非課税区分_住民税減免後(RString 非課税区分_住民税減免後) {
         requireNonNull(非課税区分_住民税減免後, UrSystemErrorMessages.値がnull.getReplacedMessage("非課税区分（住民税減免後）"));
-        entity.setHiKazeiKubunGemmenGo(非課税区分_住民税減免後);
+        entity.setKazeiKubunGemmenGo(非課税区分_住民税減免後);
         return this;
     }
 

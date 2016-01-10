@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 受領委任契約事業者エンティティのテスト用インスタンスを作成する補助クラスです。
  */
-public final class DbT7061JuryoIninJigyoshaEntityGenerator {
+public final class DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator {
 
     public static final KaigoJigyoshaNo DEFAULT_受領委任契約事業者番号 = new KaigoJigyoshaNo("0001");
     public static final FlexibleDate DEFAULT_受領委任契約開始日 = new FlexibleDate("19900101");
@@ -28,11 +28,11 @@ public final class DbT7061JuryoIninJigyoshaEntityGenerator {
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
      */
-    private DbT7061JuryoIninJigyoshaEntityGenerator() {
+    private DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator() {
     }
 
-    public static DbT7061JuryoIninJigyoshaEntity createDbT7061JuryoIninJigyoshaEntity() {
-        DbT7061JuryoIninJigyoshaEntity entity = new DbT7061JuryoIninJigyoshaEntity();
+    public static DbT7061JuryoIninKeiyakuJigyoshaEntity createDbT7061JuryoIninKeiyakuJigyoshaEntity() {
+        DbT7061JuryoIninKeiyakuJigyoshaEntity entity = new DbT7061JuryoIninKeiyakuJigyoshaEntity();
         entity.setJigyoshaNo(DEFAULT_受領委任契約事業者番号);
         entity.setKeiyakuKaishiYMD(DEFAULT_受領委任契約開始日);
         entity.setKeiyakuShuryoYMD(DEFAULT_受領委任契約終了日);

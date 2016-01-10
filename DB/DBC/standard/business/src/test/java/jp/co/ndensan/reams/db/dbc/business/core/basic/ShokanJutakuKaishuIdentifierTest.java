@@ -33,7 +33,7 @@ public class ShokanJutakuKaishuIdentifierTest extends DbcTestBase {
     private static JigyoshaNo 主キー名4;
     private static RString 主キー名5;
     private static RString 主キー名6;
-    private static Decimal 主キー名7;
+    private static int 主キー名7;
 
     @BeforeClass
     public static void setUpClass() {

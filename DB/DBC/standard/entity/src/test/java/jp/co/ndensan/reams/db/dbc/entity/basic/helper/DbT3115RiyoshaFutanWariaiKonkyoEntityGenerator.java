@@ -16,8 +16,8 @@ public final class DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator {
 
     public static final FlexibleYear DEFAULT_年度 = new FlexibleYear("1990");
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
-    public static final Decimal DEFAULT_枝番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 0;
+    public static final int DEFAULT_枝番号 = 0;
     public static final HihokenshaNo DEFAULT_世帯員被保険者番号 = new HihokenshaNo("1");
     public static final Decimal DEFAULT_世帯員所得履歴番号 = new Decimal(0);
 

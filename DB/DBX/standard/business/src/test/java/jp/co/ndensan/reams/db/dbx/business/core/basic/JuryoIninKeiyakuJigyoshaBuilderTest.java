@@ -77,8 +77,8 @@ public class JuryoIninKeiyakuJigyoshaBuilderTest extends DbxTestBase {
 
         @Test
         public void 戻り値の契約サービス種別は_設定した値と同じ契約サービス種別を返す() {
-            business = sut.set契約サービス種別(DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator.DEFAULT_契約サービス種別.getColumnValue()).build();
-            assertThat(business.get契約サービス種別(), is(DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator.DEFAULT_契約サービス種別.getColumnValue()));
+            business = sut.set契約サービス種別(DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator.DEFAULT_契約サービス種別).build();
+            assertThat(business.get契約サービス種別(), is(DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator.DEFAULT_契約サービス種別));
         }
 
         @Test

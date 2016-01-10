@@ -29,7 +29,7 @@ public class KagoMoshitateIdentifierTest extends DbcTestBase {
     private static JigyoshaNo 主キー名1;
     private static HihokenshaNo 主キー名2;
     private static FlexibleYearMonth 主キー名3;
-    private static Decimal 主キー名4;
+    private static int 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {

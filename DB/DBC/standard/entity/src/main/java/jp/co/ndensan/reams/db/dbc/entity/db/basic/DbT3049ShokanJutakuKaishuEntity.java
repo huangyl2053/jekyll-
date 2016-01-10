@@ -45,7 +45,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
     @PrimaryKey
     private RString junjiNo;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     private ServiceCode serviceCode;
     private FlexibleDate jutakuKaishuChakkoYMD;
     private RString jutakuKaishuJigyoshaName;
@@ -217,7 +217,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      *
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
@@ -226,7 +226,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

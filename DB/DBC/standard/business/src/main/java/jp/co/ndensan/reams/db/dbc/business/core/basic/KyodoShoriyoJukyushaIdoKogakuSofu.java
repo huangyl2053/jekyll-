@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3004KyodoShoriyoJukyushaIdo
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -44,9 +45,9 @@ extends ModelBase<KyodoShoriyoJukyushaIdoKogakuSofuIdentifier,
     public KyodoShoriyoJukyushaIdoKogakuSofu(FlexibleDate 異動年月日,
             RString 異動区分コード,
             RString 受給者異動事由,
-            HokenshaNo 証記載保険者番号,
+            ShoKisaiHokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
         requireNonNull(異動区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("異動区分コード"));
         requireNonNull(受給者異動事由, UrSystemErrorMessages.値がnull.getReplacedMessage("受給者異動事由"));
@@ -135,7 +136,7 @@ extends ModelBase<KyodoShoriyoJukyushaIdoKogakuSofuIdentifier,
      *
      * @return 証記載保険者番号
      */
-    public HokenshaNo get証記載保険者番号() {
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
         return entity.getShoKisaiHokenshaNo();
     }
 
@@ -153,7 +154,7 @@ extends ModelBase<KyodoShoriyoJukyushaIdoKogakuSofuIdentifier,
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 

@@ -196,7 +196,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceDacTest extends DbcTestDacBase 
         public static void insert(
                 RString 市町村特別給付用サービスコード,
                 FlexibleDate 市町村特別給付用サービス有効期間開始年月日,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3066ShichosonTokubetuKyufuServiceEntity entity = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.createDbT3066ShichosonTokubetuKyufuServiceEntity();
             entity.setServiceCode(市町村特別給付用サービスコード);
             entity.setServiceYukoKikanKaishiYMD(市町村特別給付用サービス有効期間開始年月日);

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -86,11 +87,11 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
-        return this;
-    }
+//    public ShokanJutakuKaishuJizenShinseiBuilder set履歴番号(Decimal 履歴番号) {
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        entity.setRirekiNo(履歴番号);
+//        return this;
+//    }
 
     /**
      * 証記載保険者番号を設定します。
@@ -98,7 +99,7 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
      * @param 証記載保険者番号 証記載保険者番号
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set証記載保険者番号(HokenshaNo 証記載保険者番号) {
+    public ShokanJutakuKaishuJizenShinseiBuilder set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         entity.setShoKisaiHokenshaNo(証記載保険者番号);
         return this;
@@ -134,9 +135,9 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
      * @param 事業者番号 事業者番号
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set事業者番号(JigyoshaNo 事業者番号) {
+    public ShokanJutakuKaishuJizenShinseiBuilder set申請事業者番号(JigyoshaNo 事業者番号) {
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
-        entity.setJigyoshaNo(事業者番号);
+        entity.setShinseiJigyoshaNo(事業者番号);
         return this;
     }
 
@@ -146,11 +147,11 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
      * @param 事業者名称 事業者名称
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set事業者名称(RString 事業者名称) {
-        requireNonNull(事業者名称, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者名称"));
-        entity.setJigyoshaNameKanji(事業者名称);
-        return this;
-    }
+//    public ShokanJutakuKaishuJizenShinseiBuilder set事業者名称(RString 事業者名称) {
+//        requireNonNull(事業者名称, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者名称"));
+//        entity.setJigyoshaNameKanji(事業者名称);
+//        return this;
+//    }
 
     /**
      * 事業者名称カナを設定します。
@@ -158,11 +159,11 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
      * @param 事業者名称カナ 事業者名称カナ
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set事業者名称カナ(RString 事業者名称カナ) {
-        requireNonNull(事業者名称カナ, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者名称カナ"));
-        entity.setJigyoshaNameKana(事業者名称カナ);
-        return this;
-    }
+//    public ShokanJutakuKaishuJizenShinseiBuilder set事業者名称カナ(RString 事業者名称カナ) {
+//        requireNonNull(事業者名称カナ, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者名称カナ"));
+//        entity.setJigyoshaNameKana(事業者名称カナ);
+//        return this;
+//    }
 
     /**
      * 事業者郵便番号を設定します。
@@ -170,11 +171,11 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
      * @param 事業者郵便番号 事業者郵便番号
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set事業者郵便番号(YubinNo 事業者郵便番号) {
-        requireNonNull(事業者郵便番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者郵便番号"));
-        entity.setJigyoshaYubunNo(事業者郵便番号);
-        return this;
-    }
+//    public ShokanJutakuKaishuJizenShinseiBuilder set事業者郵便番号(YubinNo 事業者郵便番号) {
+//        requireNonNull(事業者郵便番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者郵便番号"));
+//        entity.setJigyoshaYubunNo(事業者郵便番号);
+//        return this;
+//    }
 
     /**
      * 事業者住所を設定します。
@@ -182,11 +183,11 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
      * @param 事業者住所 事業者住所
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set事業者住所(RString 事業者住所) {
-        requireNonNull(事業者住所, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者住所"));
-        entity.setJigyoshaAddress(事業者住所);
-        return this;
-    }
+//    public ShokanJutakuKaishuJizenShinseiBuilder set事業者住所(RString 事業者住所) {
+//        requireNonNull(事業者住所, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者住所"));
+//        entity.setJigyoshaAddress(事業者住所);
+//        return this;
+//    }
 
     /**
      * 事業者電話番号を設定します。
@@ -194,11 +195,11 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
      * @param 事業者電話番号 事業者電話番号
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set事業者電話番号(RString 事業者電話番号) {
-        requireNonNull(事業者電話番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者電話番号"));
-        entity.setJigyoshaTelNo(事業者電話番号);
-        return this;
-    }
+//    public ShokanJutakuKaishuJizenShinseiBuilder set事業者電話番号(RString 事業者電話番号) {
+//        requireNonNull(事業者電話番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者電話番号"));
+//        entity.setJigyoshaTelNo(事業者電話番号);
+//        return this;
+//    }
 
     /**
      * 事業者ＦＡＸ番号を設定します。
@@ -206,11 +207,11 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
      * @param 事業者ＦＡＸ番号 事業者ＦＡＸ番号
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set事業者ＦＡＸ番号(RString 事業者ＦＡＸ番号) {
-        requireNonNull(事業者ＦＡＸ番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者ＦＡＸ番号"));
-        entity.setJigyoshaFaxNo(事業者ＦＡＸ番号);
-        return this;
-    }
+//    public ShokanJutakuKaishuJizenShinseiBuilder set事業者ＦＡＸ番号(RString 事業者ＦＡＸ番号) {
+//        requireNonNull(事業者ＦＡＸ番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者ＦＡＸ番号"));
+//        entity.setJigyoshaFaxNo(事業者ＦＡＸ番号);
+//        return this;
+//    }
 
     /**
      * 理由書作成者を設定します。
@@ -220,7 +221,7 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
      */
     public ShokanJutakuKaishuJizenShinseiBuilder set理由書作成者(RString 理由書作成者) {
         requireNonNull(理由書作成者, UrSystemErrorMessages.値がnull.getReplacedMessage("理由書作成者"));
-        entity.setRiyushoSakuseishaKanji(理由書作成者);
+        entity.setRiyushoSakuseishaName(理由書作成者);
         return this;
     }
 
@@ -232,7 +233,7 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
      */
     public ShokanJutakuKaishuJizenShinseiBuilder set理由書作成者カナ(RString 理由書作成者カナ) {
         requireNonNull(理由書作成者カナ, UrSystemErrorMessages.値がnull.getReplacedMessage("理由書作成者カナ"));
-        entity.setRiyushoSakuseishaKana(理由書作成者カナ);
+        entity.setRiyushoSakuseishaKanaName(理由書作成者カナ);
         return this;
     }
 
@@ -249,26 +250,26 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
     }
 
     /**
-     * 契約決定年月日を設定します。
+     * 判定決定年月日を設定します。
      *
-     * @param 契約決定年月日 契約決定年月日
+     * @param 判定決定年月日 契約決定年月日
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set契約決定年月日(FlexibleDate 契約決定年月日) {
-        requireNonNull(契約決定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("契約決定年月日"));
-        entity.setKeiyakuKetteiYMD(契約決定年月日);
+    public ShokanJutakuKaishuJizenShinseiBuilder set判定決定年月日(FlexibleDate 判定決定年月日) {
+        requireNonNull(判定決定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("判定決定年月日"));
+        entity.setHanteiKetteiYMD(判定決定年月日);
         return this;
     }
 
     /**
-     * 承認区分を設定します。
+     * 判定区分を設定します。
      *
-     * @param 承認区分 承認区分
+     * @param 判定区分 判定区分
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set承認区分(RString 承認区分) {
-        requireNonNull(承認区分, UrSystemErrorMessages.値がnull.getReplacedMessage("承認区分"));
-        entity.setShoninKubun(承認区分);
+    public ShokanJutakuKaishuJizenShinseiBuilder set判定区分(RString 判定区分) {
+        requireNonNull(判定区分, UrSystemErrorMessages.値がnull.getReplacedMessage("判定区分"));
+        entity.setHanteiKubun(判定区分);
         return this;
     }
 
@@ -345,14 +346,14 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
     }
 
     /**
-     * 申請取消事由コードを設定します。
+     * 住宅改修申請取消事由コードを設定します。
      *
-     * @param 申請取消事由コード 申請取消事由コード
+     * @param 住宅改修申請取消事由コード 住宅改修申請取消事由コード
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set申請取消事由コード(RString 申請取消事由コード) {
-        requireNonNull(申請取消事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("申請取消事由コード"));
-        entity.setShinseiTorikeshiJiyuCode(申請取消事由コード);
+    public ShokanJutakuKaishuJizenShinseiBuilder set住宅改修申請取消事由コード(RString 住宅改修申請取消事由コード) {
+        requireNonNull(住宅改修申請取消事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅改修申請取消事由コード"));
+        entity.setKaishuShinseiTorikeshijiyuCode(住宅改修申請取消事由コード);
         return this;
     }
 
@@ -362,11 +363,11 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
      * @param 備考 備考
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set備考(RString 備考) {
-        requireNonNull(備考, UrSystemErrorMessages.値がnull.getReplacedMessage("備考"));
-        entity.setBiko(備考);
-        return this;
-    }
+//    public ShokanJutakuKaishuJizenShinseiBuilder set備考(RString 備考) {
+//        requireNonNull(備考, UrSystemErrorMessages.値がnull.getReplacedMessage("備考"));
+//        entity.setBiko(備考);
+//        return this;
+//    }
 
     /**
      * {@link ShokanJutakuKaishuJizenShinsei}のインスタンスを生成します。

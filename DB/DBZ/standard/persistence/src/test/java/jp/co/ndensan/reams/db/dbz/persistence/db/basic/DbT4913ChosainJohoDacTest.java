@@ -206,8 +206,8 @@ public class DbT4913ChosainJohoDacTest extends DbzTestDacBase {
                 ChosainCode 認定調査員コード) {
             DbT4913ChosainJohoEntity entity = DbT4913ChosainJohoEntityGenerator.createDbT4913ChosainJohoEntity();
             entity.setShichosonCode(市町村コード);
-            entity.setNinteichosaItakusakiCode(認定調査委託先コード);
-            entity.setNinteiChosainNo(認定調査員コード);
+            entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
+            entity.setNinteiChosainCode(認定調査員コード);
             sut.save(entity);
         }
     }

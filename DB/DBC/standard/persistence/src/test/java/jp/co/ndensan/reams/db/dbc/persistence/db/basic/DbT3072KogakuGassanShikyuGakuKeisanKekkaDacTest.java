@@ -254,7 +254,7 @@ public class DbT3072KogakuGassanShikyuGakuKeisanKekkaDacTest extends DbcTestDacB
                 FlexibleYear 対象年度,
                 HokenshaNo 証記載保険者番号,
                 RString 支給申請書整理番号,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.createDbT3072KogakuGassanShikyuGakuKeisanKekkaEntity();
             entity.setHihokenshaNo(被保険者番号);
             entity.setTaishoNendo(対象年度);

@@ -46,27 +46,29 @@ public class ShokanJuryoininKeiyakushaManager {
      * 主キーに合致する償還受領委任契約者を返します。
      *
      * @param 被保険者番号 HihokenshaNo
-     * @param 証記載保険者番号 ShoKisaiHokenshaNo
+// * @param 証記載保険者番号 ShoKisaiHokenshaNo
      * @param 受付年月日 UketsukeYMD
-     * @param 履歴番号 RirekiNo
+// * @param 履歴番号 RirekiNo
      * @return ShokanJuryoininKeiyakusha
      */
     @Transaction
     public ShokanJuryoininKeiyakusha get償還受領委任契約者(
             HihokenshaNo 被保険者番号,
-            ShoKisaiHokenshaNo 証記載保険者番号,
-            FlexibleDate 受付年月日,
-            Decimal 履歴番号) {
+            //            ShoKisaiHokenshaNo 証記載保険者番号,
+            FlexibleDate 受付年月日
+    //            Decimal 履歴番号
+    ) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbT3078ShokanJuryoininKeiyakushaEntity entity = dac.selectByKey(
                 被保険者番号,
-                証記載保険者番号,
-                受付年月日,
-                履歴番号);
+                //                証記載保険者番号,
+                受付年月日
+        //                履歴番号
+        );
         if (entity == null) {
             return null;
         }

@@ -27,7 +27,7 @@ public class NijiYoboJigyoTaishoshaMapperParameterTest extends DbcTestBase {
 
 // TODO 主キー型、主キー名を適切に置換してください。
 // TODO 主キーの数が足りない場合、処理を追加してください。
-    private static final HokenshaNo 主キー1 = new HokenshaNo("209007");
+//    private static final HokenshaNo 主キー1 = new HokenshaNo("209007");
     private static final HihokenshaNo 主キー2 = new HihokenshaNo("0123400001");
     private FlexibleDate 主キー3;
     private Decimal 主キー4;
@@ -35,21 +35,21 @@ public class NijiYoboJigyoTaishoshaMapperParameterTest extends DbcTestBase {
 // テストクラス名は適切に変更してください
     public static class createSelectByKeyParamテスト extends DbcTestBase {
 
-        @Test(expected = NullPointerException.class)
-        public void 主キー1にNullを指定すると_NullPointerExceptionが発生する() {
-            NijiYoboJigyoTaishoshaMapperParameter sut = NijiYoboJigyoTaishoshaMapperParameter.createSelectByKeyParam(null, 主キー2);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 主キー1にNullを指定すると_NullPointerExceptionが発生する() {
+//            NijiYoboJigyoTaishoshaMapperParameter sut = NijiYoboJigyoTaishoshaMapperParameter.createSelectByKeyParam(null, 主キー2);
+//        }
 
         @Test(expected = NullPointerException.class)
         public void 主キー2にNullを指定すると_NullPointerExceptionが発生する() {
-            NijiYoboJigyoTaishoshaMapperParameter sut = NijiYoboJigyoTaishoshaMapperParameter.createSelectByKeyParam(主キー1, null);
+            NijiYoboJigyoTaishoshaMapperParameter sut = NijiYoboJigyoTaishoshaMapperParameter.createSelectByKeyParam(null);
         }
 
         @Test
         public void 引数にNull以外を指定すると_パラメータが生成できる() {
-            NijiYoboJigyoTaishoshaMapperParameter sut = NijiYoboJigyoTaishoshaMapperParameter.createSelectByKeyParam(主キー1, 主キー2);
+            NijiYoboJigyoTaishoshaMapperParameter sut = NijiYoboJigyoTaishoshaMapperParameter.createSelectByKeyParam(主キー2);
 
-            assertThat(sut.get主キー1().value(), is(主キー1.value()));
+//            assertThat(sut.get主キー1().value(), is(主キー1.value()));
             assertThat(sut.get主キー2(), is(主キー2));
 //            assertThat(sut.uses主キー1(), is(true));
 //            assertThat(sut.uses主キー2(), is(true));
@@ -67,9 +67,9 @@ public class NijiYoboJigyoTaishoshaMapperParameterTest extends DbcTestBase {
 
         @Test
         public void 引数にNull意外を指定すると_パラメータが生成できる() {
-            NijiYoboJigyoTaishoshaMapperParameter sut = NijiYoboJigyoTaishoshaMapperParameter.createSelectListParam(主キー1);
+            NijiYoboJigyoTaishoshaMapperParameter sut = NijiYoboJigyoTaishoshaMapperParameter.createSelectListParam(主キー2);
 
-            assertThat(sut.get主キー1().value(), is(主キー1.value()));
+            assertThat(sut.get主キー2().value(), is(主キー2.value()));
 //            assertThat(sut.uses主キー1(), is(true));
 //            assertThat(sut.uses主キー2(), is(false));
         }

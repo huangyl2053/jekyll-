@@ -318,7 +318,7 @@ public class DbT3049ShokanJutakuKaishuDacTest extends DbcTestDacBase {
                 JigyoshaNo 事業者番号,
                 RString 様式番号,
                 RString 順次番号,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3049ShokanJutakuKaishuEntity entity = DbT3049ShokanJutakuKaishuEntityGenerator.createDbT3049ShokanJutakuKaishuEntity();
             entity.setHiHokenshaNo(被保険者番号);
             entity.setServiceTeikyoYM(サービス提供年月);

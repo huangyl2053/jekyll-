@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.relate;
 
 import jp.co.ndensan.reams.db.dbd.persistence.db.relate.ShiharaiHohoHenkoDac;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.KanriKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.TorokuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -15,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4021ShiharaiHohoHenkoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
@@ -40,16 +40,16 @@ public class ShiharaiHohoHenkoDacTest {
     private static final ShoKisaiHokenshaNo 証記載保険者番号2 = new ShoKisaiHokenshaNo("124562");
     private static final HihokenshaNo 被保険者番号1 = DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_被保険者番号;
     private static final HihokenshaNo 被保険者番号2 = new HihokenshaNo("987654");
-    private static final KanriKubun 管理区分1 = DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_管理区分;
+    private static final RString 管理区分1 = DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_管理区分;
     private static final TorokuKubun 登録区分1 = DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_登録区分;
     private static final int 履歴番号 = 1;
 //    private static final YMDHMS 履歴番号 = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_処理日時;
 
-    private static final KanriKubun _2号差止管理区分 = KanriKubun.ニ号差止;
+    private static final RString _2号差止管理区分 = new RString("ニ号差止");
     private static final TorokuKubun _2号差止登録区分 = TorokuKubun.二号差止登録;
-    private static final KanriKubun _1号償還払化管理区分 = KanriKubun.一号償還払い化;
+    private static final RString _1号償還払化管理区分 = new RString("一号償還払い化");
     private static final TorokuKubun _1号償還払化登録区分 = TorokuKubun.一号償還払い化登録;
-    private static final KanriKubun _1号減額管理区分 = KanriKubun.一号給付額減額;
+    private static final RString _1号減額管理区分 = new RString("一号給付額減額");
     private static final TorokuKubun _1号減額登録区分 = TorokuKubun.一号給付額減額登録;
 
     @BeforeClass
@@ -263,7 +263,7 @@ public class ShiharaiHohoHenkoDacTest {
         public static void insertDbT4021(
                 ShoKisaiHokenshaNo 証記載保険者番号,
                 HihokenshaNo 被保険者番号,
-                KanriKubun 管理区分,
+                RString 管理区分,
                 TorokuKubun 登録区分,
                 int 履歴番号) {
             DbT4021ShiharaiHohoHenkoEntity entity = DbT4021ShiharaiHohoHenkoEntityGenerator.createDbT4021ShiharaiHohoHenkoEntity();

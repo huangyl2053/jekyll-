@@ -19,7 +19,7 @@ import lombok.Value;
 @Value
 public class BemmeishaJohoIdentifier implements Serializable {
 
-    private final ShoKisaiHokenshaNo 証記載保険者番号;
+//    private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final ShikibetsuCode 識別コード;
     private final HihokenshaNo 原処分被保険者番号;
     private final FlexibleDate 審査請求届出日;
@@ -29,20 +29,22 @@ public class BemmeishaJohoIdentifier implements Serializable {
     /**
      * コンストラクタです。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+// * @param 証記載保険者番号 証記載保険者番号
+     *
      * @param 識別コード 識別コード
      * @param 原処分被保険者番号 原処分被保険者番号
      * @param 審査請求届出日 審査請求届出日
      * @param 弁明書作成日 弁明書作成日
      * @param 弁明者枝番 弁明者枝番
      */
-    public BemmeishaJohoIdentifier(ShoKisaiHokenshaNo 証記載保険者番号,
+    public BemmeishaJohoIdentifier(
+            //            ShoKisaiHokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             HihokenshaNo 原処分被保険者番号,
             FlexibleDate 審査請求届出日,
             FlexibleDate 弁明書作成日,
             Decimal 弁明者枝番) {
-        this.証記載保険者番号 = 証記載保険者番号;
+//        this.証記載保険者番号 = 証記載保険者番号;
         this.識別コード = 識別コード;
         this.原処分被保険者番号 = 原処分被保険者番号;
         this.審査請求届出日 = 審査請求届出日;
@@ -55,9 +57,9 @@ public class BemmeishaJohoIdentifier implements Serializable {
      *
      * @return 証記載保険者番号
      */
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return 証記載保険者番号;
-    }
+//    public ShoKisaiHokenshaNo get証記載保険者番号() {
+//        return 証記載保険者番号;
+//    }
 
     /**
      * get識別コード

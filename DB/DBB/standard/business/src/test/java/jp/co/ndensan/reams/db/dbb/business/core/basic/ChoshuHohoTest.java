@@ -33,7 +33,7 @@ public class ChoshuHohoTest extends DbbTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static FlexibleYear 賦課年度;
     private static HihokenshaNo 被保険者番号;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
@@ -289,7 +289,7 @@ public class ChoshuHohoTest extends DbbTestBase {
 
         @Test
         public void get特別徴収停止日時は_entityが持つ特別徴収停止日時を返す() {
-            assertThat(sut.get特別徴収停止日時(), is(ChoshuHohoEntity.getTokuchoTeishiTimestamp()));
+            assertThat(sut.get特別徴収停止日時(), is(ChoshuHohoEntity.getTokuchoTeishiNichiji()));
         }
 
         @Test

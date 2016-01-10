@@ -33,7 +33,8 @@ public class DbT3100NijiYoboJigyoTaishoshaDac implements ISaveable<DbT3100NijiYo
     /**
      * 主キーで二次予防事業対象者を取得します。
      *
-     * @param 証記載保険者番号 ShoKisaiHokenshaNo
+// * @param 証記載保険者番号 ShoKisaiHokenshaNo
+     *
      * @param 被保険者番号 HihokenshaNo
      * @param 履歴番号 RirekiNo
      * @return DbT3100NijiYoboJigyoTaishoshaEntity
@@ -41,10 +42,10 @@ public class DbT3100NijiYoboJigyoTaishoshaDac implements ISaveable<DbT3100NijiYo
      */
     @Transaction
     public DbT3100NijiYoboJigyoTaishoshaEntity selectByKey(
-            HokenshaNo 証記載保険者番号,
+            //            HokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号) throws NullPointerException {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+            int 履歴番号) throws NullPointerException {
+//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
@@ -53,7 +54,7 @@ public class DbT3100NijiYoboJigyoTaishoshaDac implements ISaveable<DbT3100NijiYo
         return accessor.select().
                 table(DbT3100NijiYoboJigyoTaishosha.class).
                 where(and(
-                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                                //                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(rirekiNo, 履歴番号))).
                 toObject(DbT3100NijiYoboJigyoTaishoshaEntity.class);

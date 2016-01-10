@@ -61,7 +61,7 @@ public class KogakuGassanJikoFutanGakuMeisaiManager {
             HokenshaNo 保険者番号,
             RString 支給申請書整理番号,
             RString 対象月,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
         requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));

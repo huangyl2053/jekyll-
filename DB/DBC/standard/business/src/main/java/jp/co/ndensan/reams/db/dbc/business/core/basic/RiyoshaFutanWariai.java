@@ -41,7 +41,7 @@ extends ModelBase<RiyoshaFutanWariaiIdentifier,
      */
     public RiyoshaFutanWariai(FlexibleYear 年度,
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -108,7 +108,7 @@ extends ModelBase<RiyoshaFutanWariaiIdentifier,
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 

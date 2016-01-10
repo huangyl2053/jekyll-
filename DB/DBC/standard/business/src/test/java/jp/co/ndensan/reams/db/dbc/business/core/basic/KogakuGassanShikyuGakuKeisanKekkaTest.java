@@ -12,7 +12,6 @@ import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.seria
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -38,7 +37,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaTest extends DbcTestBase {
     private static FlexibleYear 主キー名2;
     private static HokenshaNo 主キー名3;
     private static RString 主キー名4;
-    private static Decimal 主キー名5;
+    private static int 主キー名5;
 
     @BeforeClass
     public static void setUpClass() {

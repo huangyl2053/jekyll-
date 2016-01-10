@@ -36,7 +36,7 @@ public class FufukuMoshitateBuilderTest extends DbzTestBase {
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
+//        主キー名1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
         主キー名2 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_識別コード;
     }
 
@@ -48,7 +48,7 @@ public class FufukuMoshitateBuilderTest extends DbzTestBase {
         @Before
         public void setUp() {
             FufukuMoshitateEntity = new DbT7001FufukuMoshitateEntity();
-            FufukuMoshitateEntity.setShoKisaiHokenshaNo(主キー名1);
+//            FufukuMoshitateEntity.setShoKisaiHokenshaNo(主キー名1);
             FufukuMoshitateEntity.setShikibetsuCode(主キー名2);
 
             business = new FufukuMoshitate(FufukuMoshitateEntity);
@@ -57,11 +57,11 @@ public class FufukuMoshitateBuilderTest extends DbzTestBase {
         }
 //TODO Key項目のテストメソッドは削除して下さい。
 
-        @Test
-        public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
-            business = sut.set証記載保険者番号(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号).build();
-            assertThat(business.get証記載保険者番号(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号));
-        }
+//        @Test
+//        public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
+//            business = sut.set証記載保険者番号(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号).build();
+//            assertThat(business.get証記載保険者番号(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号));
+//        }
 
         @Test
         public void 戻り値の識別コードは_設定した値と同じ識別コードを返す() {
@@ -81,35 +81,35 @@ public class FufukuMoshitateBuilderTest extends DbzTestBase {
             assertThat(business.get審査請求届出日(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_審査請求届出日));
         }
 
-        @Test
-        public void 戻り値の原処分被保険者郵便番号は_設定した値と同じ原処分被保険者郵便番号を返す() {
-            business = sut.set原処分被保険者郵便番号(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者郵便番号).build();
-            assertThat(business.get原処分被保険者郵便番号(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者郵便番号));
-        }
-
-        @Test
-        public void 戻り値の原処分被保険者住所は_設定した値と同じ原処分被保険者住所を返す() {
-            business = sut.set原処分被保険者住所(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者住所).build();
-            assertThat(business.get原処分被保険者住所(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者住所));
-        }
-
-        @Test
-        public void 戻り値の原処分被保険者氏名は_設定した値と同じ原処分被保険者氏名を返す() {
-            business = sut.set原処分被保険者氏名(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者氏名).build();
-            assertThat(business.get原処分被保険者氏名(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者氏名));
-        }
-
-        @Test
-        public void 戻り値の原処分被保険者電話番号は_設定した値と同じ原処分被保険者電話番号を返す() {
-            business = sut.set原処分被保険者電話番号(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者電話番号).build();
-            assertThat(business.get原処分被保険者電話番号(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者電話番号));
-        }
-
-        @Test
-        public void 戻り値の原処分被保険者生年月日は_設定した値と同じ原処分被保険者生年月日を返す() {
-            business = sut.set原処分被保険者生年月日(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者生年月日).build();
-            assertThat(business.get原処分被保険者生年月日(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者生年月日));
-        }
+//        @Test
+//        public void 戻り値の原処分被保険者郵便番号は_設定した値と同じ原処分被保険者郵便番号を返す() {
+//            business = sut.set原処分被保険者郵便番号(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者郵便番号).build();
+//            assertThat(business.get原処分被保険者郵便番号(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者郵便番号));
+//        }
+//
+//        @Test
+//        public void 戻り値の原処分被保険者住所は_設定した値と同じ原処分被保険者住所を返す() {
+//            business = sut.set原処分被保険者住所(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者住所).build();
+//            assertThat(business.get原処分被保険者住所(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者住所));
+//        }
+//
+//        @Test
+//        public void 戻り値の原処分被保険者氏名は_設定した値と同じ原処分被保険者氏名を返す() {
+//            business = sut.set原処分被保険者氏名(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者氏名).build();
+//            assertThat(business.get原処分被保険者氏名(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者氏名));
+//        }
+//
+//        @Test
+//        public void 戻り値の原処分被保険者電話番号は_設定した値と同じ原処分被保険者電話番号を返す() {
+//            business = sut.set原処分被保険者電話番号(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者電話番号).build();
+//            assertThat(business.get原処分被保険者電話番号(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者電話番号));
+//        }
+//
+//        @Test
+//        public void 戻り値の原処分被保険者生年月日は_設定した値と同じ原処分被保険者生年月日を返す() {
+//            business = sut.set原処分被保険者生年月日(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者生年月日).build();
+//            assertThat(business.get原処分被保険者生年月日(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者生年月日));
+//        }
 
         @Test
         public void 戻り値の審査請求人郵便番号は_設定した値と同じ審査請求人郵便番号を返す() {
