@@ -4,18 +4,23 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0400011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * tblSaiHakko のクラスファイル 
- * 
+ * tblSaiHakko のクラスファイル
+ *
  * @author 自動生成
  */
 public class tblSaiHakkoDiv extends TablePanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -321,12 +326,14 @@ public class tblSaiHakkoDiv extends TablePanel {
 
     // </editor-fold>
 }
+
 /**
- * celTest のクラスファイル 
- * 
+ * celTest のクラスファイル
+ *
  * @author 自動生成
  */
 class celTestAttblSaiHakko extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("chkTest")
     private CheckBoxList chkTest;
@@ -351,12 +358,14 @@ class celTestAttblSaiHakko extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celTestHosoku のクラスファイル 
- * 
+ * celTestHosoku のクラスファイル
+ *
  * @author 自動生成
  */
 class celTestHosokuAttblSaiHakko extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("lblTestHosoku")
     private Label lblTestHosoku;
@@ -381,9 +390,10 @@ class celTestHosokuAttblSaiHakko extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celNull4 のクラスファイル 
- * 
+ * celNull4 のクラスファイル
+ *
  * @author 自動生成
  */
 class celNull4AttblSaiHakko extends TableCell {
@@ -391,9 +401,10 @@ class celNull4AttblSaiHakko extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celNull5 のクラスファイル 
- * 
+ * celNull5 のクラスファイル
+ *
  * @author 自動生成
  */
 class celNull5AttblSaiHakko extends TableCell {
@@ -401,12 +412,14 @@ class celNull5AttblSaiHakko extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celYMD4 のクラスファイル 
- * 
+ * celYMD4 のクラスファイル
+ *
  * @author 自動生成
  */
 class celYMD4AttblSaiHakko extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("lblYMD4")
     private Label lblYMD4;
@@ -431,12 +444,14 @@ class celYMD4AttblSaiHakko extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celTime4 のクラスファイル 
- * 
+ * celTime4 のクラスファイル
+ *
  * @author 自動生成
  */
 class celTime4AttblSaiHakko extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("lblTime4")
     private Label lblTime4;
@@ -461,9 +476,10 @@ class celTime4AttblSaiHakko extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celNull10 のクラスファイル 
- * 
+ * celNull10 のクラスファイル
+ *
  * @author 自動生成
  */
 class celNull10AttblSaiHakko extends TableCell {
@@ -471,12 +487,14 @@ class celNull10AttblSaiHakko extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celSaiHakko のクラスファイル 
- * 
+ * celSaiHakko のクラスファイル
+ *
  * @author 自動生成
  */
 class celSaiHakkoAttblSaiHakko extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("chkSaiHakko")
     private CheckBoxList chkSaiHakko;
@@ -501,12 +519,14 @@ class celSaiHakkoAttblSaiHakko extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celHakkouYMD のクラスファイル 
- * 
+ * celHakkouYMD のクラスファイル
+ *
  * @author 自動生成
  */
 class celHakkouYMDAttblSaiHakko extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("lblHakkouYMD")
     private Label lblHakkouYMD;
@@ -531,12 +551,14 @@ class celHakkouYMDAttblSaiHakko extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celHakkoYMD のクラスファイル 
- * 
+ * celHakkoYMD のクラスファイル
+ *
  * @author 自動生成
  */
 class celHakkoYMDAttblSaiHakko extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtHakkoYMD")
     private TextBoxDate txtHakkoYMD;
@@ -561,12 +583,14 @@ class celHakkoYMDAttblSaiHakko extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celHakkoTime のクラスファイル 
- * 
+ * celHakkoTime のクラスファイル
+ *
  * @author 自動生成
  */
 class celHakkoTimeAttblSaiHakko extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtHakkoTime")
     private TextBoxTime txtHakkoTime;
@@ -591,12 +615,14 @@ class celHakkoTimeAttblSaiHakko extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celNull11 のクラスファイル 
- * 
+ * celNull11 のクラスファイル
+ *
  * @author 自動生成
  */
 class celNull11AttblSaiHakko extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("lblNull3")
     private Label lblNull3;

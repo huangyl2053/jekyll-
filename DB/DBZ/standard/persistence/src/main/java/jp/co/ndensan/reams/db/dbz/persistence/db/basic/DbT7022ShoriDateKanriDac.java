@@ -29,7 +29,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -171,5 +173,56 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
 
+    }
+
+    /**
+     * 抽出期間の取得値を取得します。
+     *
+     * @param 処理枝番 処理枝番
+     * @param 市町村コード 導入団体クラスで取得した市町村コード
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity selectBy抽出期間の取得(RString 処理枝番,
+            LasdecCode 市町村コード) throws NullPointerException {
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("処理枝番"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, "DBU"),
+                                eq(shichosonCode, 市町村コード),
+                                eq(shoriName, "被保険者証一括発行"),
+                                eq(shoriEdaban, 処理枝番))).
+                order(by(DbT7022ShoriDateKanri.kijunTimestamp, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 「再発行する」のselectイベントを取得します。
+     *
+     * @param 処理枝番 処理枝番
+     * @param 導入団体取得 導入団体取得
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity selectBy再発行(
+            RString 処理枝番,
+            LasdecCode 導入団体取得) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, "DBU"),
+                                eq(shichosonCode, 導入団体取得),
+                                eq(shoriName, "被保険者証一括発行"),
+                                in(shoriEdaban, 処理枝番))).
+                order(by(DbT7022ShoriDateKanri.kijunTimestamp, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
     }
 }
