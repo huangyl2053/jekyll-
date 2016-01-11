@@ -18,9 +18,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class HihokenshaShoBatchPrmHandler {
 
     private final HihokenshaShoBatchPrmDiv div;
-    private static final RString JYUKYUMONO_RADIO_SENTAKU = new RString("key0");
-    private static final RString GAITOMONO_RADIO_SENTAKU = new RString("key1");
-    private static final RString JNENNREI_RADIO_SENTAKU = new RString("key2");
+    private static final RString JYUKYUMONO_RADIO_SENTAKU = new RString("2");
+    private static final RString GAITOMONO_RADIO_SENTAKU = new RString("3");
+    private static final RString JNENNREI_RADIO_SENTAKU = new RString("4");
 
     /**
      * HihokenshaShoBatchPrmHandlerの引入です。
@@ -85,12 +85,12 @@ public class HihokenshaShoBatchPrmHandler {
         if ((JNENNREI_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
             div.getRadShutsuryokuJoken().setSelectedKey(JNENNREI_RADIO_SENTAKU);
             sentaku(resultList);
-            if (div.getTxtKonkaiShoriKijunYMD().getValue().isBeforeOrEquals(div.getTxtZenkaiChushutsuToYMD().getValue())) {
+            if (div.getTxtZenkaiChushutsuToYMD().getValue().isBeforeOrEquals(div.getTxtKonkaiShoriKijunYMD().getValue())) {
                 div.getTxtKonkaiChushutsuToYMD().setValue(new RDate(RDate.getNowDate().wareki().toString()));
                 div.getTxtKonkaiChushutsuToTime().setValue(RDate.getNowTime());
             }
             //TODO QA345張紅麗　まで12/29　今回の終了日と今回の時分秒（未満）の処理確認
-            if (div.getTxtZenkaiChushutsuToYMD().getValue().isBefore(div.getTxtKonkaiShoriKijunYMD().getValue())) {
+            if (div.getTxtKonkaiShoriKijunYMD().getValue().isBefore(div.getTxtZenkaiChushutsuToYMD().getValue())) {
                 div.getTxtKonkaiChushutsuToYMD().setValue(new RDate(resultList.get(0).getTaishoShuryoTimestamp().getDate().wareki().toString()));
                 div.getTxtKonkaiChushutsuToTime().setValue(resultList.get(0).getTaishoShuryoTimestamp().getRDateTime().getTime());
             }

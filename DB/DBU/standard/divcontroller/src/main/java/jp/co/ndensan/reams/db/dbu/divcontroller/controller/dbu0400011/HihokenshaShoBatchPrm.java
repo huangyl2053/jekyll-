@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbu.business.core.hihokenshashoikkatsuhakko.Hihoke
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0400011.HihokenshaShoBatchPrmDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0400011.HihokenshaShoBatchPrmHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0400011.ValidationHandler;
-import jp.co.ndensan.reams.db.dbu.service.core.basic.hihokenshashoikkatsuhakko.HihokenshaShoBatchPrmFinder;
+import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashoikkatsuhakko.HihokenshaShoBatchPrmFinder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -22,9 +22,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 public class HihokenshaShoBatchPrm {
 
     private final HihokenshaShoBatchPrmFinder service;
-    private static final RString JYUKYUMONO_RADIO_SENTAKU = new RString("key0");
-    private static final RString GAITOMONO_RADIO_SENTAKU = new RString("key1");
-    private static final RString JNENNREI_RADIO_SENTAKU = new RString("key2");
+    private static final RString JYUKYUMONO_RADIO_SENTAKU = new RString("2");
+    private static final RString GAITOMONO_RADIO_SENTAKU = new RString("3");
+    private static final RString JNENNREI_RADIO_SENTAKU = new RString("4");
 
     /**
      * コンストラクタです。
