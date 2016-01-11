@@ -8,8 +8,6 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -40,8 +38,8 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
      * @param 主治医コード 主治医コード
      */
     public ShujiiJoho(LasdecCode 市町村コード,
-            ShujiiIryokikanCode 主治医医療機関コード,
-            ShujiiCode 主治医コード) {
+            RString 主治医医療機関コード,
+            RString 主治医コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
         requireNonNull(主治医コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医コード"));
@@ -98,7 +96,7 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
      *
      * @return 主治医医療機関コード
      */
-    public ShujiiIryokikanCode get主治医医療機関コード() {
+    public RString get主治医医療機関コード() {
         return entity.getShujiiIryokikanCode();
     }
 
@@ -107,7 +105,7 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
      *
      * @return 主治医コード
      */
-    public ShujiiCode get主治医コード() {
+    public RString get主治医コード() {
         return entity.getShujiiCode();
     }
 

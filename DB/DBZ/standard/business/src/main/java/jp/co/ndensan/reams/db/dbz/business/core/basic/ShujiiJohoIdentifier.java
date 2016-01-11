@@ -6,9 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医情報の識別子です。
@@ -19,8 +18,8 @@ public class ShujiiJohoIdentifier implements Serializable {
 
     private static final long serialVersionUID = -7489466601005912725L;
     private final LasdecCode 市町村コード;
-    private final ShujiiIryokikanCode 主治医医療機関コード;
-    private final ShujiiCode 主治医コード;
+    private final RString 主治医医療機関コード;
+    private final RString 主治医コード;
 
     /**
      * コンストラクタです。
@@ -30,8 +29,8 @@ public class ShujiiJohoIdentifier implements Serializable {
      * @param 主治医コード 主治医コード
      */
     public ShujiiJohoIdentifier(LasdecCode 市町村コード,
-            ShujiiIryokikanCode 主治医医療機関コード,
-            ShujiiCode 主治医コード) {
+            RString 主治医医療機関コード,
+            RString 主治医コード) {
         this.市町村コード = 市町村コード;
         this.主治医医療機関コード = 主治医医療機関コード;
         this.主治医コード = 主治医コード;
