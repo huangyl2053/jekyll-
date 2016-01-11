@@ -5,17 +5,14 @@
 package jp.co.ndensan.reams.db.dba.service.core.tekiyojogaisha.tekiyojogaisha;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.shisetsunyutaisho.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaisha;
-import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaRelate;
 import jp.co.ndensan.reams.db.dba.definition.core.jogaiidojiyu.JogaiKaijoJiyu;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaMapperParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tekiyojogaisha.tekiyojogaisha.ITekiyoJogaishaMapper;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dba.service.core.tekiyojogaisha.shisetsunyutaisho.ShisetsuNyutaishoManager;
@@ -73,9 +70,6 @@ public class TekiyoJogaishaManager {
     private final DbT1004ShisetsuNyutaishoDac 介護保険施設入退所dac;
     private static int count = 0;
     private static int saveCount = 0;
-    private static boolean 退所日ありフラグ;
-    private static boolean 解除日あり;
-    private static boolean 解除日なし;
 
     /**
      * コンストラクタです。
@@ -161,67 +155,6 @@ public class TekiyoJogaishaManager {
     }
 
     /**
-     * 適用除外者の取得処理します。
-     *
-     * @param shikibetsuCode 識別コード
-     * @param ronrisakujyoFlg 論理削除フラグ
-     * @return SearchResult<TekiyoJogaisha> 適用除外者を管理
-     */
-    @Transaction
-    public SearchResult<TekiyoJogaishaRelate> getTekiyoJogaishaLst(ShikibetsuCode shikibetsuCode, boolean ronrisakujyoFlg) {
-        List<TekiyoJogaishaRelate> tekiyoJogaishaRelateList = new ArrayList<>();
-        TekiyoJogaishaMapperParameter 適用除外者Parameter = TekiyoJogaishaMapperParameter.
-                createParam_get適用除外者(shikibetsuCode, ronrisakujyoFlg);
-        ITekiyoJogaishaMapper mapper = mapperProvider.create(ITekiyoJogaishaMapper.class);
-        List<TekiyoJogaishaRelateEntity> 適用除外者List = mapper.get適用除外者(適用除外者Parameter);
-        if (適用除外者List == null || 適用除外者List.isEmpty()) {
-            return SearchResult.of(Collections.<TekiyoJogaishaRelate>emptyList(), 0, false);
-        }
-        for (TekiyoJogaishaRelateEntity entity : 適用除外者List) {
-            解除日あり = false;
-            解除日なし = false;
-            退所日ありフラグ = true;
-            if (entity.getKaijoYMD().isEmpty()) {
-                解除日なし = true;
-            } else {
-                解除日あり = true;
-            }
-            TekiyoJogaishaMapperParameter 施設情Parameter = TekiyoJogaishaMapperParameter.createParam_get施設情(
-                    entity.getShikibetsuCode(),
-                    entity.getKaijoYMD(),
-                    entity.getTekiyoYMD(),
-                    解除日あり,
-                    解除日なし);
-            List<TekiyoJogaishaRelateEntity> 施設情List = mapper.get施設情(施設情Parameter);
-            if (施設情List == null || 施設情List.isEmpty()) {
-                tekiyoJogaishaRelateList.add(new TekiyoJogaishaRelate(entity));
-            } else {
-                for (TekiyoJogaishaRelateEntity entity1 : 施設情List) {
-                    if (entity1.getTaishoYMD().isEmpty()) {
-                        entity.setRirekiNo(entity1.getRirekiNo());
-                        entity.setNyushoShisetsuCode(entity1.getNyushoShisetsuCode());
-                        entity.setNyushoYMD(entity1.getNyushoYMD());
-                        entity.setTaishoYMD(entity1.getTaishoYMD());
-                        entity.setJigyoshaMeisho(entity1.getJigyoshaMeisho());
-                        tekiyoJogaishaRelateList.add(new TekiyoJogaishaRelate(entity));
-                        退所日ありフラグ = false;
-                    }
-                }
-                if (退所日ありフラグ) {
-                    entity.setRirekiNo(施設情List.get(0).getRirekiNo());
-                    entity.setNyushoShisetsuCode(施設情List.get(0).getNyushoShisetsuCode());
-                    entity.setNyushoYMD(施設情List.get(0).getNyushoYMD());
-                    entity.setTaishoYMD(施設情List.get(0).getTaishoYMD());
-                    entity.setJigyoshaMeisho(施設情List.get(0).getJigyoshaMeisho());
-                    tekiyoJogaishaRelateList.add(new TekiyoJogaishaRelate(entity));
-                }
-            }
-
-        }
-        return SearchResult.of(tekiyoJogaishaRelateList, 0, false);
-    }
-
-    /**
      * 適用除外者の保存処理します。
      *
      * @param tekiyoJogaishalist 用除外者を管理リスト
@@ -252,18 +185,28 @@ public class TekiyoJogaishaManager {
             }
 //            TODO ビジネス設計_DBAMN22001-7_被保険者台帳管理（資格喪失） 実装しない。
 //            if (モード_適用.equals(mode)) {
-//                エラーコード = new Code("DBAE00006");
+//                Code エラーコード = new Code("DBAE00006");
 ////      TODO          HihokenshaShikakuSoshitsuManager.createInstance.ShikakuSoshitsuCheck(tekiyoJogaisha.get識別コード(), HokenshaNo.EMPTY);
 //                if (エラーコード_DBAE00006.equals(エラーコード)) {
 ////        TODO        エラーメッセージを出て、本処理終了
 //                } else if (エラーコード_DBAE00008.equals(エラーコード) || エラーコード_DBAE00007.equals(エラーコード)) {
-//                    regTekiyoJogaisha(tekiyoJogaisha);
+//                    regTekiyoJogaisha(tekiyoJogaisha, mode);
 //                    regKaigoJogaiTokureiTaishoShisetsu(tekiyoJogaisha.getSeishinTechoNiniList().get(0));
-//                } else {
-//                    HihokenshaShikakuSoshitsuManager.createInstance.saveHihokenshaShikakuSoshitsu(tekiyoJogaisha.get識別コード(),
+//                    HihokenshaShikakuSoshitsuManager.createInstance.saveHihokenshaShikakuSoshitsu(
+//                            tekiyoJogaisha.get識別コード(),
 //                            HihokenshaNo.EMPTY,
 //                            tekiyoJogaisha.get適用年月日(),
-//                            new CodeShubetsu("0121"),
+//                            ShikakuSoshitsuJiyu.除外者.getCode(),
+//                            tekiyoJogaisha.get適用年月日()
+//                    );
+//                } else {
+//                    regTekiyoJogaisha(tekiyoJogaisha, mode);
+//                    regKaigoJogaiTokureiTaishoShisetsu(tekiyoJogaisha.getSeishinTechoNiniList().get(0));
+//                    HihokenshaShikakuSoshitsuManager.createInstance.saveHihokenshaShikakuSoshitsu(
+//                            tekiyoJogaisha.get識別コード(),
+//                            HihokenshaNo.EMPTY,
+//                            tekiyoJogaisha.get適用年月日(),
+//                            ShikakuSoshitsuJiyu.除外者.getCode(),
 //                            tekiyoJogaisha.get適用年月日()
 //                    );
 //                }
@@ -312,19 +255,13 @@ public class TekiyoJogaishaManager {
             ShikibetsuCode shikibetsuCode,
             FlexibleDate idoYMD,
             RString edaNo) {
-        if (適用除外者Dac.selectByKey(shikibetsuCode, idoYMD, edaNo) == null) {
+        DbT1002TekiyoJogaishaEntity entity = 適用除外者Dac.selectByKey(shikibetsuCode, idoYMD, edaNo);
+        if (entity == null) {
             return 0;
         }
-        TekiyoJogaishaMapperParameter parameter = TekiyoJogaishaMapperParameter.createSelectByKeyParam(
-                shikibetsuCode, idoYMD, edaNo);
-        ITekiyoJogaishaMapper mapper = mapperProvider.create(ITekiyoJogaishaMapper.class);
-        TekiyoJogaishaEntity entity = mapper.select適用除外者ByKey(parameter);
-        entity.get適用除外者Entity().setLogicalDeletedFlag(true);
-        entity.get適用除外者Entity().setState(EntityDataState.Deleted);
-        if (save(new TekiyoJogaisha(entity))) {
-            return 1;
-        }
-        return 0;
+        entity.setLogicalDeletedFlag(true);
+        entity.setState(EntityDataState.Modified);
+        return 適用除外者Dac.save(entity);
     }
 
     /**
@@ -339,11 +276,11 @@ public class TekiyoJogaishaManager {
         entity.setShikibetsuCode(shisetsuNyutaisho.get識別コード());
         TekiyoJogaishaMapperParameter parameter = TekiyoJogaishaMapperParameter.createParam_getMax履歴番号(shisetsuNyutaisho.get識別コード());
         ITekiyoJogaishaMapper mapper = mapperProvider.create(ITekiyoJogaishaMapper.class);
-        DbT1004ShisetsuNyutaishoEntity 履歴番号 = mapper.getMax履歴番号(parameter);
-        if (履歴番号 == null || 履歴番号.getRirekiNo().intValue() == 0) {
+        Decimal 履歴番号 = mapper.getMax履歴番号(parameter);
+        if (履歴番号 == null) {
             entity.setRirekiNo(new Decimal(1));
         } else {
-            entity.setRirekiNo(履歴番号.getRirekiNo().add(1));
+            entity.setRirekiNo(履歴番号.add(1));
         }
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         entity.setShichosonCode(association.get地方公共団体コード());
@@ -413,6 +350,7 @@ public class TekiyoJogaishaManager {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(
                 GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先));
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
+        key.set識別コード(識別コード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         TekiyoJogaishaMapperParameter parameter = TekiyoJogaishaMapperParameter.createParam_get宛名情報(
                 識別コード, new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
@@ -459,6 +397,7 @@ public class TekiyoJogaishaManager {
             entity.setKaijoUketsukeYMD(tekiyoJogaisha.get解除届出年月日());
             entity.setNyushoTsuchiHakkoYMD(tekiyoJogaisha.get入所通知発行日());
             entity.setTaishoTsuchiHakkoYMD(tekiyoJogaisha.get退所通知発行日());
+            entity.setHenkoTsuchiHakkoYMD(tekiyoJogaisha.get変更通知発行日());
         }
         if (モード_適用.equals(モード)) {
             異動日 = tekiyoJogaisha.get適用年月日();
@@ -474,6 +413,7 @@ public class TekiyoJogaishaManager {
             entity.setKaijoUketsukeYMD(tekiyoJogaisha.get解除届出年月日());
             entity.setNyushoTsuchiHakkoYMD(tekiyoJogaisha.get入所通知発行日());
             entity.setTaishoTsuchiHakkoYMD(tekiyoJogaisha.get退所通知発行日());
+            entity.setHenkoTsuchiHakkoYMD(tekiyoJogaisha.get変更通知発行日());
         }
         entity.setIdoYMD(異動日);
         TekiyoJogaishaMapperParameter parameter = TekiyoJogaishaMapperParameter.createParam_get最大の枝番(tekiyoJogaisha.get識別コード(), 異動日);
