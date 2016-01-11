@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  * 共有子Div「償還払申請一覧」のイベントを定義した共有子Divです。
  *
- *
  */
 public class ShokanShinseiList {
 
@@ -36,7 +35,8 @@ public class ShokanShinseiList {
     private static final RString 選択モード = new RString("選択");
     private static final RString 修正モード = new RString("修正");
     private static final RString 削除モード = new RString("削除");
-    private static final int 桁数_6 = 6;
+    private static final RString 照会 = new RString("照会");
+    private static final RString 申請 = new RString("申請");
     private HihokenshaNo 償還払申請一覧_被保険者番号;
     private FlexibleYearMonth 償還払申請一覧_サービス年月From;
     private FlexibleYearMonth 償還払申請一覧_サービス年月To;
@@ -45,12 +45,20 @@ public class ShokanShinseiList {
         償還払申請一覧_被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
         償還払申請一覧_サービス年月From = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月From, FlexibleYearMonth.class);
         償還払申請一覧_サービス年月To = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月To, FlexibleYearMonth.class);
-
-        SearchResult<ShokanShinseiIchiran> shokandhinseiichiran = ShokanShinseiIchiranManager.
-                createInstance().getShokanShinseiListSyokai(償還払申請一覧_被保険者番号,
-                        償還払申請一覧_サービス年月From,
-                        償還払申請一覧_サービス年月To);
         RString mode = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_モード, RString.class);
+        SearchResult<ShokanShinseiIchiran> shokandhinseiichiran;
+        if (照会.equals(mode)) {
+            shokandhinseiichiran = ShokanShinseiIchiranManager.
+                    createInstance().getShokanShinseiListSyokai(償還払申請一覧_被保険者番号,
+                            償還払申請一覧_サービス年月From,
+                            償還払申請一覧_サービス年月To);
+        } else {
+            shokandhinseiichiran = ShokanShinseiIchiranManager.
+                    createInstance().getShokanShinseiListShinsei(償還払申請一覧_被保険者番号,
+                            償還払申請一覧_サービス年月From,
+                            償還払申請一覧_サービス年月To);
+        }
+        //getHandler(requestdiv).initialize(mode, shokandhinseiichiran);
         getHandler(requestdiv).initialize(mode, shokandhinseiichiran);
         return ResponseData.of(requestdiv).respond();
 
@@ -60,7 +68,7 @@ public class ShokanShinseiList {
      * 「申請を追加する」ボタン押下です。
      *
      * @param requestDiv ShokanShinseiListDiv
-     * @return ResponseData<ShokanShinseiListDiv>
+     * @return ShokanShinseiListDivのResponseData
      */
     public ResponseData<ShokanShinseiListDiv> onClick_InsertButton(ShokanShinseiListDiv requestDiv) {
 
@@ -68,7 +76,7 @@ public class ShokanShinseiList {
             return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         get申請を追加するcheck(requestDiv);
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, requestDiv.getTxtServiceYM().getValue());
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, requestDiv.getTxtServiceYM().getValue().getYearMonth());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_モード, 追加モード);
@@ -83,18 +91,35 @@ public class ShokanShinseiList {
      * 検索ボタン押押下です。
      *
      * @param requestDiv　ShokanShinseiListDiv
-     * @return ResponseData<ShokanShinseiListDiv>
+     * @return ShokanShinseiListDivのResponseData
      */
     public ResponseData<ShokanShinseiListDiv> onSelectByDbClick(ShokanShinseiListDiv requestDiv) {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         get検索ボタンcheck(requestDiv);
-        SearchResult<ShokanShinseiIchiran> shokandhinseiichiran = ShokanShinseiIchiranManager.
-                createInstance().getShokanShinseiListShinsei(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class),
-                        new FlexibleYearMonth(requestDiv.getTxtServiceYMFrom().getValue().getYearMonth().toDateString()),
-                        new FlexibleYearMonth(requestDiv.getTxtServiceYMTo().getValue().getYearMonth().toDateString()));
         RString mode = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_モード, RString.class);
+        SearchResult<ShokanShinseiIchiran> shokandhinseiichiran;
+        FlexibleYearMonth serviceYMFrom = null;
+        if (requestDiv.getTxtServiceYMFrom().getValue() != null) {
+            serviceYMFrom = new FlexibleYearMonth(requestDiv.getTxtServiceYMFrom().getValue().getYearMonth().toDateString());
+        }
+        FlexibleYearMonth serviceYMTo = null;
+        if (requestDiv.getTxtServiceYMTo().getValue() != null) {
+            serviceYMTo = new FlexibleYearMonth(requestDiv.getTxtServiceYMTo().getValue().getYearMonth().toDateString());
+        }
+        if (照会.equals(mode)) {
+            shokandhinseiichiran = ShokanShinseiIchiranManager.
+                    createInstance().getShokanShinseiListSyokai(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class),
+                            serviceYMFrom,
+                            serviceYMTo);
+        } else {
+            shokandhinseiichiran = ShokanShinseiIchiranManager.
+                    createInstance().getShokanShinseiListShinsei(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class),
+                            serviceYMFrom,
+                            serviceYMTo);
+        }
+
         getHandler(requestDiv).initialize(mode, shokandhinseiichiran);
         return ResponseData.of(requestDiv).respond();
     }
@@ -103,7 +128,7 @@ public class ShokanShinseiList {
      * 選択ボタン押下です。
      *
      * @param requestDiv ShokanShinseiListDiv
-     * @return ResponseData<ShokanShinseiListDiv>
+     * @return ShokanShinseiListDivのResponseData
      */
     public ResponseData<ShokanShinseiListDiv> onClick_SelectButton(ShokanShinseiListDiv requestDiv) {
 
@@ -130,7 +155,7 @@ public class ShokanShinseiList {
      * 修正ボタン押下です。
      *
      * @param requestDiv ShokanShinseiListDiv
-     * @return ResponseData<ShokanShinseiListDiv>
+     * @return ShokanShinseiListDivのResponseData
      */
     public ResponseData<ShokanShinseiListDiv> onClick_ModifyButton(ShokanShinseiListDiv requestDiv) {
 
@@ -156,7 +181,7 @@ public class ShokanShinseiList {
      * 削除ボタン押下です。
      *
      * @param requestDiv ShokanShinseiListDiv
-     * @return ResponseData<ShokanShinseiListDiv>
+     * @return ShokanShinseiListDivのResponseData
      */
     public ResponseData<ShokanShinseiListDiv> onClick_DeleteButton(ShokanShinseiListDiv requestDiv) {
 
@@ -207,15 +232,17 @@ public class ShokanShinseiList {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            if (requestDiv.getTxtServiceYMFrom().getValue().getYearMonth() == null && requestDiv.getTxtServiceYMTo().getValue().getYearMonth() == null) {
+            if (requestDiv.getTxtServiceYMFrom().getValue() == null && requestDiv.getTxtServiceYMTo().getValue() == null) {
                 throw new ApplicationException(
                         UrErrorMessages.期間が不正.getMessage());
             }
-            if (requestDiv.getTxtServiceYMFrom().getValue().getYearMonth() != null && requestDiv.getTxtServiceYMTo().getValue().getYearMonth() != null) {
+            if ((requestDiv.getTxtServiceYMFrom().getValue() != null && !RString.EMPTY.equals(requestDiv.getTxtServiceYMFrom().getValue()))
+                    && (requestDiv.getTxtServiceYMTo().getValue() != null && !RString.EMPTY.equals(requestDiv.getTxtServiceYMTo().getValue()))) {
                 if (requestDiv.getTxtServiceYMTo().getValue().getYearMonth().isBefore(requestDiv.getTxtServiceYMFrom().getValue().getYearMonth())) {
                     throw new ApplicationException(
                             UrErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace(
-                                    requestDiv.getTxtServiceYMFrom().getValue().toString(), requestDiv.getTxtServiceYMTo().getValue().toString()));
+                                    requestDiv.getTxtServiceYMFrom().getValue().getYearMonth().toString(),
+                                    requestDiv.getTxtServiceYMTo().getValue().getYearMonth().toString()));
                 }
             }
         }

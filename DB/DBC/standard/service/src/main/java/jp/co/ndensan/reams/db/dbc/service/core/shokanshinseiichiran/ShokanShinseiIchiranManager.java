@@ -22,17 +22,25 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 償還払支給申請情報取得。
+ * 償還払支給申請リストを取得するクラスです。
  *
  */
 public class ShokanShinseiIchiranManager {
 
     private final MapperProvider mapperProvider;
 
+    /**
+     * コンストラクタです。
+     */
     public ShokanShinseiIchiranManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link ShokanShinseiIchiranManager}のインスタンスを返します。
+     *
+     * @return // * {@link InstanceProvider#create}にて生成した{@link ShokanShinseiIchiranManager}のインスタンス
+     */
     public static ShokanShinseiIchiranManager createInstance() {
         return InstanceProvider.create(ShokanShinseiIchiranManager.class);
     }
@@ -40,20 +48,20 @@ public class ShokanShinseiIchiranManager {
     /**
      * 償還払支給申請リスト取得(照会)を取得します。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月From
-     * @param サービス提供年月To
-     * @return SearchResult<ShokanShinseiIchiran>
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月From サービス提供年月From
+     * @param サービス提供年月To サービス提供年月To
+     * @return 償還払支給申請リスト
      */
     public SearchResult<ShokanShinseiIchiran> getShokanShinseiListSyokai(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月From,
             FlexibleYearMonth サービス提供年月To) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        if (サービス提供年月From == null && サービス提供年月To == null) {
+        if ((サービス提供年月From == null || サービス提供年月From.isEmpty()) && (サービス提供年月To == null || サービス提供年月To.isEmpty())) {
             return SearchResult.of(Collections.<ShokanShinseiIchiran>emptyList(), 0, false);
         }
         ShokanShinseiIchiranMapper mapper = mapperProvider.create(ShokanShinseiIchiranMapper.class);
-        List<ShokanShinseiIchiranRelateEntity> relateEntity = mapper.select償還払支給申請リスト取得照会(
+        List<ShokanShinseiIchiranRelateEntity> relateEntity = mapper.select償還払支給申請リスト照会(
                 ShokanShinseiIchiranParameter.createSelectByKeyParam(
                         被保険者番号,
                         サービス提供年月From,
@@ -71,18 +79,18 @@ public class ShokanShinseiIchiranManager {
     /**
      * 償還払支給申請リスト取得 (申請)を取得します。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月From
-     * @param サービス提供年月To
-     * @return SearchResult<ShokanShinseiIchiran>
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月From サービス提供年月From
+     * @param サービス提供年月To サービス提供年月To
+     * @return 償還払支給申請リスト
      */
     public SearchResult<ShokanShinseiIchiran> getShokanShinseiListShinsei(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月From, FlexibleYearMonth サービス提供年月To) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        if (サービス提供年月From == null && サービス提供年月To == null) {
+        if ((サービス提供年月From == null || サービス提供年月From.isEmpty()) && (サービス提供年月To == null || サービス提供年月To.isEmpty())) {
             return SearchResult.of(Collections.<ShokanShinseiIchiran>emptyList(), 0, false);
         }
         ShokanShinseiIchiranMapper mapper = mapperProvider.create(ShokanShinseiIchiranMapper.class);
-        List<ShokanShinseiIchiranRelateEntity> relateEntity = mapper.select償還払支給申請リスト取得照会(ShokanShinseiIchiranParameter.createSelectByKeyParam(
+        List<ShokanShinseiIchiranRelateEntity> relateEntity = mapper.select償還払支給申請リスト申請(ShokanShinseiIchiranParameter.createSelectByKeyParam(
                 被保険者番号,
                 サービス提供年月From,
                 サービス提供年月To));
@@ -99,9 +107,9 @@ public class ShokanShinseiIchiranManager {
     /**
      * 償還払支給申請情報件数取得を取得します。
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @return count 取得件数
+     * @param 被保険者番号 被保険者番号
+     * @param サービス年月 サービス年月
+     * @return 償還払支給申請情報件数
      */
     public int getShokanShinseiCount(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));

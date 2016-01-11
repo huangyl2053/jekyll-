@@ -54,7 +54,7 @@ public class ShokanShinseiIchiranParameter {
             FlexibleYearMonth サービス提供年月To) {
 
         return new ShokanShinseiIchiranParameter(被保険者番号, サービス提供年月From, サービス提供年月To,
-                サービス提供年月From == null, サービス提供年月To == null);
+                サービス提供年月From == null || サービス提供年月From.isEmpty(), サービス提供年月To == null || サービス提供年月To.isEmpty());
     }
 
 }

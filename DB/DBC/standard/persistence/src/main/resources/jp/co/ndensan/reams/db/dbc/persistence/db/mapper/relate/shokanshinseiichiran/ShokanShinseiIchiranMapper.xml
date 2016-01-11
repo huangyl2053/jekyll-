@@ -15,84 +15,17 @@
         <result property="seiriNp" column="seiriNp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         
     </resultMap>
-    <select id="select償還払支給申請リスト取得照会"
-    resultMap="ShokanShinseiIchiranRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshinseiichiran.ShokanShinseiIchiranParameter" fetchSize="500">
-    SELECT
-       shokanShinsei."hiHokenshaNo" AS "hiHokenshaNo",
-       shokanShinsei."serviceTeikyoYM" AS "serviceTeikyoYM",
-       shokanShinsei."seiriNo" AS "seiriNo",
-       T1."yoshikiNo" AS "yoshikiNo",
-       shokanShinsei."shinseiYMD" AS "shinseiYMD",
-       shokanShinsei."sofuYM" AS "sofuYM",
-       T2."ketteiYMD" AS "ketteiYMD"
-    FROM
-       rgdb."DbT3034ShokanShinsei" AS shokanShinsei
-    INNER JOIN
-        (
-        SELECT
-        shokanKihon."hiHokenshaNo" AS "hiHokenshaNo",
-        shokanKihon."serviceTeikyoYM" AS "serviceTeikyoYM",
-        shokanKihon."seiriNp" AS "seiriNp",
-        shokanKihon."yoshikiNo" AS "yoshikiNo"
-        FROM
-            rgdb."DbT3038ShokanKihon" AS shokanKihon
-        WHERE
-            shokanKihon."hiHokenshaNo" = #{被保険者番号} 
-        <if test="!isサービス提供年月FromEmpty">
-            AND shokanKihon."serviceTeikyoYM" <![CDATA[>=]]> #{サービス提供年月From} 
-        </if>
-         <if test="!isサービス提供年月ToEmpty">
-            AND shokanKihon."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月To}
-            </if>
-        GROUP BY
-            shokanKihon."hiHokenshaNo",
-            shokanKihon."serviceTeikyoYM",
-            shokanKihon."seiriNp",
-            shokanKihon."yoshikiNo"
-        )AS T1
-        ON
-        T1."hiHokenshaNo" = shokanShinsei."hiHokenshaNo" AND
-        T1."serviceTeikyoYM" = shokanShinsei."serviceTeikyoYM" AND
-        t1."seiriNp" = shokanShinsei."seiriNo"
-        LEFT JOIN
-        (
-        SELECT
-            shokanHanteiKekka."hiHokenshaNo" AS "hiHokenshaNo",
-            shokanHanteiKekka."serviceTeikyoYM" AS "serviceTeikyoYM",
-            shokanHanteiKekka."seiriNo" AS "seiriNo",
-            shokanHanteiKekka."ketteiYMD" AS "ketteiYMD"
-        FROM
-            rgdb."DbT3036ShokanHanteiKekka" AS shokanHanteiKekka
-        WHERE
-            shokanHanteiKekka."hiHokenshaNo" = #{被保険者番号} AND
-            shokanHanteiKekka."serviceTeikyoYM" <![CDATA[>=]]> #{サービス提供年月From} AND
-            shokanHanteiKekka."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月To}
-        )AS T2
-        ON
-        T2."hiHokenshaNo" = shokanShinsei."hiHokenshaNo" AND
-        T2."serviceTeikyoYM" = shokanShinsei."serviceTeikyoYM" AND
-        T2."seiriNo" = shokanShinsei."seiriNo"
-    WHERE
-        shokanShinsei."hiHokenshaNo" = #{被保険者番号} AND
-        shokanShinsei."serviceTeikyoYM" <![CDATA[>=]]> #{サービス提供年月From} AND
-        shokanShinsei."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月To}
-        order by
-         shokanShinsei."hiHokenshaNo" DESC,
-         shokanShinsei."seiriNo" DESC
-    </select>
-    <select id="select償還払支給申請リスト取得申請"
+    <select id="select償還払支給申請リスト照会"
             resultMap="ShokanShinseiIchiranRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshinseiichiran.ShokanShinseiIchiranParameter" fetchSize="500">
-            
         SELECT
-       shokanShinsei."hiHokenshaNo" AS "hiHokenshaNo",
-       shokanShinsei."serviceTeikyoYM" AS "serviceTeikyoYM",
-       shokanShinsei."seiriNo" AS "seiriNo",
-       T1."yoshikiNo" AS "yoshikiNo",
-       shokanShinsei."shinseiYMD" AS "shinseiYMD",
-       shokanShinsei."sofuYM" AS "sofuYM",
-       T2."ketteiYMD" AS "ketteiYMD"
+        shokanShinsei."hiHokenshaNo" AS "hiHokenshaNo",
+        shokanShinsei."serviceTeikyoYM" AS "serviceTeikyoYM",
+        shokanShinsei."seiriNo" AS "seiriNo",
+        T1."yoshikiNo" AS "yoshikiNo",
+        shokanShinsei."shinseiYMD" AS "shinseiYMD",
+        shokanShinsei."sofuYM" AS "sofuYM",
+        T2."ketteiYMD" AS "ketteiYMD"
         FROM
         rgdb."DbT3034ShokanShinsei" AS shokanShinsei
         INNER JOIN
@@ -103,13 +36,15 @@
         shokanKihon."seiriNp" AS "seiriNp",
         shokanKihon."yoshikiNo" AS "yoshikiNo"
         FROM
-            rgdb."DbT3038ShokanKihon" AS shokanKihon 
+        rgdb."DbT3038ShokanKihon" AS shokanKihon
         WHERE
-            shokanKihon."hiHokenshaNo" = #{被保険者番号} AND
-            shokanKihon."serviceTeikyoYM" <![CDATA[>=]]> #{サービス提供年月From} AND
-            shokanKihon."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月To} AND
-            substring('yoshikiNo',1,3) <![CDATA[<>]]> '21C' AND
-            substring('yoshikiNo',1,3) <![CDATA[<>]]> '21D'
+        shokanKihon."hiHokenshaNo" = #{被保険者番号}
+        <if test="!isサービス提供年月FromEmpty">
+            AND shokanKihon."serviceTeikyoYM" <![CDATA[>=]]> #{サービス提供年月From}
+        </if>
+        <if test="!isサービス提供年月ToEmpty">
+            AND shokanKihon."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月To}
+        </if>
         GROUP BY
         shokanKihon."hiHokenshaNo",
         shokanKihon."serviceTeikyoYM",
@@ -123,25 +58,110 @@
         LEFT JOIN
         (
         SELECT
-            shokanHanteiKekka."hiHokenshaNo" AS "hiHokenshaNo",
-            shokanHanteiKekka."serviceTeikyoYM" AS "serviceTeikyoYM",
-            shokanHanteiKekka."seiriNo" AS "seiriNo",
-            shokanHanteiKekka."ketteiYMD" AS "ketteiYMD"
+        shokanHanteiKekka."hiHokenshaNo" AS "hiHokenshaNo",
+        shokanHanteiKekka."serviceTeikyoYM" AS "serviceTeikyoYM",
+        shokanHanteiKekka."seiriNo" AS "seiriNo",
+        shokanHanteiKekka."ketteiYMD" AS "ketteiYMD"
         FROM
-            rgdb."DbT3036ShokanHanteiKekka" AS shokanHanteiKekka
+        rgdb."DbT3036ShokanHanteiKekka" AS shokanHanteiKekka
         WHERE
-            shokanHanteiKekka."hiHokenshaNo" = #{被保険者番号} AND
-            shokanHanteiKekka."serviceTeikyoYM" <![CDATA[>=]]> #{サービス提供年月From} AND
-            shokanHanteiKekka."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月To}
+        shokanHanteiKekka."hiHokenshaNo" = #{被保険者番号}
+        <if test="!isサービス提供年月FromEmpty">
+            AND shokanHanteiKekka."serviceTeikyoYM" <![CDATA[>=]]> #{サービス提供年月From}
+        </if>
+        <if test="!isサービス提供年月ToEmpty">
+            AND shokanHanteiKekka."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月To}
+        </if>
         )AS T2
         ON
         T2."hiHokenshaNo" = shokanShinsei."hiHokenshaNo" AND
         T2."serviceTeikyoYM" = shokanShinsei."serviceTeikyoYM" AND
         T2."seiriNo" = shokanShinsei."seiriNo"
         WHERE
-        shokanShinsei."hiHokenshaNo" = #{被保険者番号} AND
-        shokanShinsei."serviceTeikyoYM" <![CDATA[>=]]> #{サービス提供年月From} AND
-        shokanShinsei."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月To}
+        shokanShinsei."hiHokenshaNo" = #{被保険者番号}
+        <if test="!isサービス提供年月FromEmpty">
+            AND shokanShinsei."serviceTeikyoYM" <![CDATA[>=]]> #{サービス提供年月From}
+        </if>
+        <if test="!isサービス提供年月ToEmpty">
+            AND shokanShinsei."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月To}
+        </if>
+        order by
+        shokanShinsei."hiHokenshaNo" DESC,
+        shokanShinsei."seiriNo" DESC
+    </select>
+    <select id="select償還払支給申請リスト申請"
+            resultMap="ShokanShinseiIchiranRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshinseiichiran.ShokanShinseiIchiranParameter" fetchSize="500">
+            
+        SELECT
+        shokanShinsei."hiHokenshaNo" AS "hiHokenshaNo",
+        shokanShinsei."serviceTeikyoYM" AS "serviceTeikyoYM",
+        shokanShinsei."seiriNo" AS "seiriNo",
+        T1."yoshikiNo" AS "yoshikiNo",
+        shokanShinsei."shinseiYMD" AS "shinseiYMD",
+        shokanShinsei."sofuYM" AS "sofuYM",
+        T2."ketteiYMD" AS "ketteiYMD"
+        FROM
+        rgdb."DbT3034ShokanShinsei" AS shokanShinsei
+        INNER JOIN
+        (
+        SELECT
+        shokanKihon."hiHokenshaNo" AS "hiHokenshaNo",
+        shokanKihon."serviceTeikyoYM" AS "serviceTeikyoYM",
+        shokanKihon."seiriNp" AS "seiriNp",
+        shokanKihon."yoshikiNo" AS "yoshikiNo"
+        FROM
+        rgdb."DbT3038ShokanKihon" AS shokanKihon 
+        WHERE
+        shokanKihon."hiHokenshaNo" = #{被保険者番号}
+        <if test="!isサービス提供年月FromEmpty">
+            AND shokanKihon."serviceTeikyoYM" <![CDATA[>=]]> #{サービス提供年月From}
+        </if>
+        <if test="!isサービス提供年月ToEmpty">
+            AND shokanKihon."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月To}
+        </if>
+        substring(shokanKihon."yoshikiNo",1,3) <![CDATA[<>]]> '21C' AND
+        substring(shokanKihon."yoshikiNo",1,3) <![CDATA[<>]]> '21D'
+        GROUP BY
+        shokanKihon."hiHokenshaNo",
+        shokanKihon."serviceTeikyoYM",
+        shokanKihon."seiriNp",
+        shokanKihon."yoshikiNo"
+        )AS T1
+        ON
+        T1."hiHokenshaNo" = shokanShinsei."hiHokenshaNo" AND
+        T1."serviceTeikyoYM" = shokanShinsei."serviceTeikyoYM" AND
+        t1."seiriNp" = shokanShinsei."seiriNo"
+        LEFT JOIN
+        (
+        SELECT
+        shokanHanteiKekka."hiHokenshaNo" AS "hiHokenshaNo",
+        shokanHanteiKekka."serviceTeikyoYM" AS "serviceTeikyoYM",
+        shokanHanteiKekka."seiriNo" AS "seiriNo",
+        shokanHanteiKekka."ketteiYMD" AS "ketteiYMD"
+        FROM
+        rgdb."DbT3036ShokanHanteiKekka" AS shokanHanteiKekka
+        WHERE
+        shokanHanteiKekka."hiHokenshaNo" = #{被保険者番号}
+        <if test="!isサービス提供年月FromEmpty">
+            AND shokanHanteiKekka."serviceTeikyoYM" <![CDATA[>=]]> #{サービス提供年月From}
+        </if>
+        <if test="!isサービス提供年月ToEmpty">
+            AND shokanHanteiKekka."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月To}
+        </if>
+        )AS T2
+        ON
+        T2."hiHokenshaNo" = shokanShinsei."hiHokenshaNo" AND
+        T2."serviceTeikyoYM" = shokanShinsei."serviceTeikyoYM" AND
+        T2."seiriNo" = shokanShinsei."seiriNo"
+        WHERE
+        shokanShinsei."hiHokenshaNo" = #{被保険者番号}
+        <if test="!isサービス提供年月FromEmpty">
+            AND shokanShinsei."serviceTeikyoYM" <![CDATA[>=]]> #{サービス提供年月From}
+        </if>
+        <if test="!isサービス提供年月ToEmpty">
+            AND shokanShinsei."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月To}
+        </if>
         ORDER BY
         shokanShinsei."hiHokenshaNo" DESC,
         shokanShinsei."seiriNo" DESC

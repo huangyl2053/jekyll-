@@ -16,9 +16,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshinseiichiran.ShokanSh
  */
 public interface ShokanShinseiIchiranMapper {
 
-    List<ShokanShinseiIchiranRelateEntity> select償還払支給申請リスト取得照会(ShokanShinseiIchiranParameter 償還払支給申請リスト取得条件照会);
+    List<ShokanShinseiIchiranRelateEntity> select償還払支給申請リスト照会(ShokanShinseiIchiranParameter 償還払支給申請リスト取得条件照会);
 
-    List<ShokanShinseiIchiranRelateEntity> select償還払支給申請リスト取得申請(ShokanShinseiIchiranParameter 償還払支給申請リスト取得条件申請);
+    List<ShokanShinseiIchiranRelateEntity> select償還払支給申請リスト申請(ShokanShinseiIchiranParameter 償還払支給申請リスト取得条件申請);
 
     int select償還払支給申請情報件数取得(ShokanShinseiIchiranParameterCount 償還払支給申請情報件数取得);
 
