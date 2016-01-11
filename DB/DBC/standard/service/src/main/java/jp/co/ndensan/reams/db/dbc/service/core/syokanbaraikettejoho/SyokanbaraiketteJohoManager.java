@@ -233,7 +233,7 @@ public class SyokanbaraiketteJohoManager {
         }
 
         DbT3036ShokanHanteiKekkaEntity entity = 償還払支給判定結果Dac.selectByKey(hiHokenshaNo, serviceTeikyoYM, seiriNo);
-        if (entity != null) {
+        if (entity != null && entity.getSagakuKingakuGokei() != null) {
             RStringBuilder rsb = new RStringBuilder();
             rsb.append(shashitomeKojyoKubun.substring(0, 1));
             rsb.append(new RString("1"));
