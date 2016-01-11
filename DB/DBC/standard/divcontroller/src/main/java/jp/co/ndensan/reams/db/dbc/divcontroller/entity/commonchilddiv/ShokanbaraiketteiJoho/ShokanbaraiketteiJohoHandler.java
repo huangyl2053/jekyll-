@@ -63,6 +63,26 @@ public class ShokanbaraiketteiJohoHandler {
         ViewStateHolder.put(ViewStateKeys.決定情報, 決定情報);
     }
 
+    /**
+     * 支給区分の変更連動を処理します。
+     */
+    public void onChange_rdoShikyukubun() {
+        set決定情報(ViewStateHolder.get(ViewStateKeys.決定情報, KetteJoho.class), div.getRdoShikyukubun().getSelectedKey());
+    }
+
+    /**
+     * データグリッドの差額金額を合計して、差額支払金額合計に設定します。
+     */
+    public void onChange_defaultDataName6() {
+        Decimal 差額支払金額合計 = new Decimal(0);
+        for (dgSyokanbaraikete_Row row : div.getDgSyokanbaraikete().getDataSource()) {
+            if (row.getDefaultDataName6().getValue() != null) {
+                差額支払金額合計 = 差額支払金額合計.add(row.getDefaultDataName6().getValue());
+            }
+        }
+        div.getTxtSagakuGoke().setValue(差額支払金額合計);
+    }
+
     private void init(List<SyokanbaraiketteJoho> 償還払決定一覧情報, RString 差止控除区分, KetteJoho 決定情報, RString mode) {
         boolean 差額登録フラグ = false;
         if (モード_修正.equals(mode) && (差止控除区分_20.equals(差止控除区分) || 差止控除区分_21.equals(差止控除区分))) {
@@ -92,23 +112,6 @@ public class ShokanbaraiketteiJohoHandler {
         } else {
             div.getTxtKetebi().setDisabled(false);
         }
-    }
-
-    /**
-     * 支給区分の変更連動を処理します。
-     */
-    public void onChange_rdoShikyukubun() {
-        set決定情報(ViewStateHolder.get(ViewStateKeys.決定情報, KetteJoho.class), div.getRdoShikyukubun().getSelectedKey());
-    }
-
-    public void onChange_defaultDataName6() {
-        Decimal 差額支払金額合計 = new Decimal(0);
-        for (dgSyokanbaraikete_Row row : div.getDgSyokanbaraikete().getDataSource()) {
-            if (row.getDefaultDataName6().getValue() != null) {
-                差額支払金額合計 = 差額支払金額合計.add(row.getDefaultDataName6().getValue());
-            }
-        }
-        div.getTxtSagakuGoke().setValue(差額支払金額合計);
     }
 
     private List<dgSyokanbaraikete_Row> set償還払決定一覧情報(boolean 差額登録フラグ, List<SyokanbaraiketteJoho> 償還払決定一覧情報) {
