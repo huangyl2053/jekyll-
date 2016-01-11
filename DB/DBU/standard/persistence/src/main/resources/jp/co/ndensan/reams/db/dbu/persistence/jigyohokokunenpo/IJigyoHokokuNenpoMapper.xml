@@ -3,7 +3,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.jigyohokokunenpo.IJigyoHokokuNenpoMapper">
 
-    <resultMap id="getJigyoHokokuNenpoListResultMap" type="jp.co.ndensan.reams.db.dbu.entity.basic.DbT7021JigyoHokokuTokeiDataEntity" autoMapping="true">
+    <resultMap id="getJigyoHokokuNenpoListResultMap" type="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity" autoMapping="true">
         <id property="hokokuYSeireki" column="hokokuYSeireki"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
         <id property="hokokuM" column="hokokuM"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <id property="shukeiTaishoYSeireki" column="shukeiTaishoYSeireki"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
@@ -20,7 +20,7 @@
         <result property="yokoKomokuCode" column="yokoKomokuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
     </resultMap>
 
-    <resultMap id="getJigyoHokokuNenpoDetalResultMap" type="jp.co.ndensan.reams.db.dbu.entity.basic.DbT7021JigyoHokokuTokeiDataEntity" autoMapping="true">
+    <resultMap id="getJigyoHokokuNenpoDetalResultMap" type="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity" autoMapping="true">
         <id property="hokokuYSeireki" column="hokokuYSeireki"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
         <id property="hokokuM" column="hokokuM"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <id property="shukeiTaishoYSeireki" column="shukeiTaishoYSeireki"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
