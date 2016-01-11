@@ -184,8 +184,8 @@
         WHERE
         shokanKihon."hiHokenshaNo" = #{被保険者番号} AND
         shokanKihon."serviceTeikyoYM" = #{サービス年月} AND
-        substring('shokanKihon.yoshikiNo',1,3) <![CDATA[<>]]> '21C' AND
-        substring('shokanKihon.yoshikiNo',1,3) <![CDATA[<>]]> '21D'
+        substring(shokanKihon."yoshikiNo",1,3) <![CDATA[<>]]> '21C' AND
+        substring(shokanKihon."yoshikiNo",1,3) <![CDATA[<>]]> '21D'
         ORDER BY
         ShokanKihon."hiHokenshaNo",
         ShokanKihon."serviceTeikyoYM",
