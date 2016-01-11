@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -134,15 +135,17 @@ public class HihousyosaiFinder {
     /**
      * 被保区分リスト情報取得します。
      *
-     * @param code 処理モード
      * @return SearchResult<ShikakuKubun> 資格区分リスト
      */
     @Transaction
-    public SearchResult<ShikakuKubun> getHihokubunList(RString code) {
-        requireNonNull(code, UrSystemErrorMessages.値がnull.getReplacedMessage("処理モード"));
-        List<ShikakuKubun> shikakuKubunList = new ArrayList<>();
-        ShikakuKubun shikakuKubun = ShikakuKubun.toValue(code);
-        shikakuKubunList.add(shikakuKubun);
-        return SearchResult.of(shikakuKubunList, 0, false);
+    public SearchResult<KeyValueDataSource> getHihokubunList() {
+        List<KeyValueDataSource> dataSource = new ArrayList();
+        for (ShikakuKubun seibetsu : ShikakuKubun.values()) {
+            KeyValueDataSource keyValue = new KeyValueDataSource();
+            keyValue.setKey(seibetsu.getコード());
+            keyValue.setValue(seibetsu.get名称());
+            dataSource.add(keyValue);
+        }
+        return SearchResult.of(dataSource, 0, false);
     }
 }
