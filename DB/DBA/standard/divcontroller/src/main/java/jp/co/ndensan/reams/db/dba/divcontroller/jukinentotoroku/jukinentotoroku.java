@@ -27,7 +27,6 @@ public class jukinentotoroku {
 
     /**
      * コンストラクタです。
-     *
      */
     public jukinentotoroku() {
         finder = JukiRendoTorokushaListFinder.createInstance();
@@ -77,31 +76,37 @@ public class jukinentotoroku {
     }
 
     /**
+     * 開始日、終了日によって、チェックを実施する。
+     *
+     * @param div 住基登録者Div
+     * @return チェック結果(true/false)
+     */
+    public ResponseData<jukinentotorokuDiv> onClick_inputCheck(jukinentotorokuDiv div) {
+        boolean checkHisuResult = finder.checkKaishibiShuryobiHisu(
+                div.getBatchParamterInfo().getTxtkonkaikaishi().getValue(),
+                div.getBatchParamterInfo().getTxtkonkaishuryo().getValue());
+        if (checkHisuResult) {
+            finder.checkKaishibiShuryobiJunban(
+                    div.getBatchParamterInfo().getTxtkonkaikaishi().getValue(),
+                    div.getBatchParamterInfo().getTxtkonkaishuryo().getValue());
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 住基連動登録者リスト作成
      *
      * @param div バッチパラメータ情報Div
      * @return 住基連動登録者リスト
      */
     public ResponseData<JyukiRendoTorokushaListBatchParameter> onClick_btnAction(BatchParamterInfoDiv div) {
-        JyukiRendoTorokushaListBatchParameter parameter = new JyukiRendoTorokushaListBatchParameter();
-        boolean checkHisuResult = finder.checkKaishibiShuryobiHisu(
+        JyukiRendoTorokushaListBatchParameter parameter = finder.getJukiRendoJouhouParameter(
+                div.getTxtzenkaikaishi().getValue(),
+                div.getTxtzenkaishuryo().getValue(),
                 div.getTxtkonkaikaishi().getValue(),
-                div.getTxtkonkaishuryo().getValue());
-        if (checkHisuResult) {
-            boolean checkJunbanResult = finder.checkKaishibiShuryobiJunban(
-                    div.getTxtkonkaikaishi().getValue(),
-                    div.getTxtkonkaishuryo().getValue());
-
-            if (checkJunbanResult) {
-                parameter = finder.getJukiRendoJouhouParameter(
-                        div.getTxtzenkaikaishi().getValue(),
-                        div.getTxtzenkaishuryo().getValue(),
-                        div.getTxtkonkaikaishi().getValue(),
-                        div.getTxtkonkaishuryo().getValue(),
-                        div.getChktaishodaicho().getSelectedKeys(),
-                        RString.EMPTY);
-            }
-        }
+                div.getTxtkonkaishuryo().getValue(),
+                div.getChktaishodaicho().getSelectedKeys(),
+                RString.EMPTY);
         return ResponseData.of(parameter).respond();
     }
 }
