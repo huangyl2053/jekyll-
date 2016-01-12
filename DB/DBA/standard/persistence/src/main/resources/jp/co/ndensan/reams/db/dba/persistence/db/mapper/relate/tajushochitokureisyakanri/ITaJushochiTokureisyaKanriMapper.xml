@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 他住所地特例者管理クラスのマッパー用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokureisyakanri.ITaJushochiTokureisyaKanriMapper">
+
+    <resultMap id="result_selct他市町村住所地特例" type="jp.co.ndensan.reams.db.dba.entity.db.relate.TaJushochiTokureisyaKan.TaJushochiTokureisyaKanRirelateEntity">
+        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="idoYMD" column="idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="edaNo" column="edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="idoJiyuCode" column="idoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="tekiyoJiyuCode" column="tekiyoJiyuCode" typeHandler=""/>
+        <result property="tekiyoYMD" column="tekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tekiyoTodokedeYMD" column="tekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tekiyoUketsukeYMD" column="tekiyoUketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kaijoJiyuCode" column="kaijoJiyuCode" typeHandler=""/>
+        <result property="kaijoYMD" column="kaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kaijoTodokedeYMD" column="kaijoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kaijoUketsukeYMD" column="kaijoUketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="sochiHokenshaNo" column="sochiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="sochiHihokenshaNo" column="sochiHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="tatokuRenrakuhyoHakkoYMD" column="tatokuRenrakuhyoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shisetsuTaishoTsuchiHakkoYMD" column="shisetsuTaishoTsuchiHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shisetsuHenkoTsuchiHakkoYMD" column="shisetsuHenkoTsuchiHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="rirekiNo" column="rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="daichoShubetsu" column="daichoShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nyushoShisetsuShurui" column="nyushoShisetsuShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nyushoShisetsuCode" column="nyushoShisetsuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="nyushoYMD" column="nyushoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="taishoYMD" column="taishoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    <select id="selct他市町村住所地特例" resultMap="result_selct他市町村住所地特例" 
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
+        SELECT
+                dbT1003."shikibetsuCode"               AS "shikibetsuCode",
+                dbT1003."idoYMD"                       AS "idoYMD",
+                dbT1003."edaNo"                        AS "edaNo",
+                dbT1003."idoJiyuCode"                  AS "idoJiyuCode",
+                dbT1003."shichosonCode"                AS "shichosonCode",
+                dbT1003."tekiyoJiyuCode"               AS "tekiyoJiyuCode",
+                dbT1003."tekiyoYMD"                    AS "tekiyoYMD",
+                dbT1003."tekiyoTodokedeYMD"            AS "tekiyoTodokedeYMD",
+                dbT1003."tekiyoUketsukeYMD"            AS "tekiyoUketsukeYMD",
+                dbT1003."kaijoJiyuCode"                AS "kaijoJiyuCode",
+                dbT1003."kaijoYMD"                     AS "kaijoYMD",
+                dbT1003."kaijoTodokedeYMD"             AS "kaijoTodokedeYMD",
+                dbT1003."kaijoUketsukeYMD"             AS "kaijoUketsukeYMD",
+                dbT1003."sochiHokenshaNo"              AS "sochiHokenshaNo",
+                dbT1003."sochiHihokenshaNo"            AS "sochiHihokenshaNo",
+                dbT1003."tatokuRenrakuhyoHakkoYMD"     AS "tatokuRenrakuhyoHakkoYMD",
+                dbT1003."shisetsuTaishoTsuchiHakkoYMD" AS "shisetsuTaishoTsuchiHakkoYMD",
+                dbT1003."shisetsuHenkoTsuchiHakkoYMD"  AS "shisetsuHenkoTsuchiHakkoYMD",
+                dbT1004."rirekiNo"                     AS "rirekiNo",
+                dbT1004."daichoShubetsu"               AS "daichoShubetsu",
+                dbT1004."nyushoShisetsuShurui"         AS "nyushoShisetsuShurui",
+                dbT1004."nyushoShisetsuCode"           AS "nyushoShisetsuCode",
+                dbT1004."nyushoYMD"                    AS "nyushoYMD",
+                dbT1004."taishoYMD"                    AS "taishoYMD"
+        FROM
+                (
+                    SELECT
+                        dbT1003Tashichoson."shikibetsuCode"               AS "shikibetsuCode",
+                        dbT1003Tashichoson."idoYMD"                       AS "idoYMD",
+                        dbT1003Tashichoson."edaNo"                        AS "edaNo",
+                        dbT1003Tashichoson."idoJiyuCode"                  AS "idoJiyuCode",
+                        dbT1003Tashichoson."shichosonCode"                AS "shichosonCode",
+                        dbT1003Tashichoson."tekiyoJiyuCode"               AS "tekiyoJiyuCode",
+                        dbT1003Tashichoson."tekiyoYMD"                    AS "tekiyoYMD",
+                        dbT1003Tashichoson."tekiyoTodokedeYMD"            AS "tekiyoTodokedeYMD",
+                        dbT1003Tashichoson."tekiyoUketsukeYMD"            AS "tekiyoUketsukeYMD",
+                        dbT1003Tashichoson."kaijoJiyuCode"                AS "kaijoJiyuCode",
+                        dbT1003Tashichoson."kaijoYMD"                     AS "kaijoYMD",
+                        dbT1003Tashichoson."kaijoTodokedeYMD"             AS "kaijoTodokedeYMD",
+                        dbT1003Tashichoson."kaijoUketsukeYMD"             AS "kaijoUketsukeYMD",
+                        dbT1003Tashichoson."sochiHokenshaNo"              AS "sochiHokenshaNo",
+                        dbT1003Tashichoson."sochiHihokenshaNo"            AS "sochiHihokenshaNo",
+                        dbT1003Tashichoson."tatokuRenrakuhyoHakkoYMD"     AS "tatokuRenrakuhyoHakkoYMD",
+                        dbT1003Tashichoson."shisetsuTaishoTsuchiHakkoYMD" AS "shisetsuTaishoTsuchiHakkoYMD",
+                        dbT1003Tashichoson."shisetsuHenkoTsuchiHakkoYMD"  AS "shisetsuHenkoTsuchiHakkoYMD"
+                    FROM
+                        rgdb."DbT1003TashichosonJushochiTokurei" AS dbT1003Tashichoson,
+                        (
+                            SELECT
+                                dbT1003Tashi."shikibetsuCode" AS "shikibetsuCode",
+                                dbT1003Tashi."idoYMD" AS "idoYMD",
+                                MAX(dbT1003Tashi."edaNo") AS "edaNo"
+                            FROM
+                                rgdb."DbT1003TashichosonJushochiTokurei" AS dbT1003Tashi
+                            WHERE
+                                dbT1003Tashi."shikibetsuCode" = #{shikibetsuCode}
+                                AND dbT1003Tashi."logicalDeletedFlag" = FALSE
+                            GROUP BY
+                                dbT1003Tashi."shikibetsuCode",
+                                dbT1003Tashi."idoYMD"
+                        ) AS dbT1003TashichosonJushochiTokurei
+                    WHERE
+                        dbT1003Tashichoson."shikibetsuCode" = dbT1003TashichosonJushochiTokurei."shikibetsuCode"
+                        AND dbT1003Tashichoson."idoYMD" = dbT1003TashichosonJushochiTokurei."idoYMD"
+                        AND dbT1003Tashichoson."edaNo" = dbT1003TashichosonJushochiTokurei."edaNo"
+                ) AS dbT1003
+                LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" AS dbT1004
+                    ON
+                        dbT1004."shikibetsuCode" = dbT1003."shikibetsuCode"
+        WHERE
+                dbT1004."daichoShubetsu" = #{psmShikibetsuTaisho}
+                AND
+                ((dbT1003."kaijoYMD" IS NULL AND (dbT1004."taishoYMD" IS NULL OR dbT1003."tekiyoYMD" <![CDATA[<=]]> dbT1004."taishoYMD")) 
+                  OR ((dbT1003."kaijoYMD" IS NOT NULL
+                       AND ((dbT1004."taishoYMD" IS NULL AND dbT1004."nyushoYMD" <![CDATA[<]]> dbT1003."kaijoYMD") 
+                             OR (dbT1004."nyushoYMD" <![CDATA[<]]> dbT1003."kaijoYMD" AND dbT1004."taishoYMD" <![CDATA[>]]> dbT1003."tekiyoYMD")))))
+    </select>
+    
+    <resultMap id="result_get事業者名称_介護保険施設" type="jp.co.ndensan.reams.db.dba.entity.db.relate.TaJushochiTokureisyaKan.TaJushochiTokureisyaKanRirelateEntity">
+        <result property="jigyoshaName" column="jigyoshaName" typeHandler=""/>
+    </resultMap>
+    <select id="get事業者名称_介護保険施設" resultMap="result_get事業者名称_介護保険施設" 
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
+      SELECT
+          dbT7060."jigyoshaName" AS "jigyoshaName"
+      FROM
+          rgdb."DbT7060KaigoJigyosha" AS dbT7060
+      WHERE
+          dbT7060."jigyoshaNo" = #{nyushoShisetsuCode}
+          AND dbT7060."yukoKaishiYMD" = (
+                                            SELECT
+                                                MAX(dbT7060Kaigo."yukoKaishiYMD") AS "yukoKaishiYMD"
+                                            FROM
+                                                rgdb."DbT7060KaigoJigyosha" AS dbT7060Kaigo
+                                            WHERE
+                                                dbT7060Kaigo."jigyoshaNo" = #{nyushoShisetsuCode}
+                                         )
+    </select>
+    
+    <resultMap id="result_get事業者名称_住所地特例対象施設" type="jp.co.ndensan.reams.db.dba.entity.db.relate.TaJushochiTokureisyaKan.TaJushochiTokureisyaKanRirelateEntity">
+        <result property="jigyoshaName" column="jigyoshaName" typeHandler=""/>
+    </resultMap>
+    <select id="get事業者名称_住所地特例対象施設" resultMap="result_get事業者名称_住所地特例対象施設" 
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
+      SELECT
+           dbT1005."jigyoshaMeisho" AS "jigyoshaMeisho"
+      FROM
+           rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS dbT1005
+      WHERE
+           dbT1005."jigyoshaShubetsu" = #{juushotiTokureitaishouShisetu}
+           AND dbT1005."jigyoshaNo" = #{nyushoShisetsuCode}
+           AND dbT1005."yukoKaishiYMD" = (
+                                             SELECT
+                                                 MAX(dbT1005Kaigo."yukoKaishiYMD") AS "yukoKaishiYMD"
+                                             FROM
+                                                 rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS dbT1005Kaigo
+                                             WHERE
+                                                 dbT1005Kaigo."jigyoshaShubetsu" = #{juushotiTokureitaishouShisetu}
+                                                 AND	dbT1005Kaigo."jigyoshaNo" = #{nyushoShisetsuCode}
+                                           )
+
+    </select>
+</mapper>
