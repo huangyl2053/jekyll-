@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0960010;
+package jp.co.ndensan.reams.db.dbc.divcontroller.handler.ShokanShinseiList;
 
 import java.util.ArrayList;
 import java.util.List;
