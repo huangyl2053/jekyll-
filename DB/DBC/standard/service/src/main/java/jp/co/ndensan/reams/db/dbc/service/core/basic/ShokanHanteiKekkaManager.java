@@ -65,8 +65,7 @@ public class ShokanHanteiKekkaManager {
         DbT3036ShokanHanteiKekkaEntity entity = dac.selectByKey(
                 被保険者番号,
                 サービス提供年月,
-                整理番号,
-                履歴番号);
+                整理番号);
         if (entity == null) {
             return null;
         }
