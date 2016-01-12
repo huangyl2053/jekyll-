@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.information.InformationEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 適用除外者異動の訂正のクラスです。
@@ -26,7 +27,7 @@ public class TekiyoJogaishaIdoTeisei {
      * @return 結果フラグ
      */
     public boolean checkTekiyoJogaiKikanByTeiseiMode(List<InformationEntity> informationEntityLst) {
-        DbT1004ShisetsuNyutaishoDac dbT1004ShisetsuNyutaishoDac = new DbT1004ShisetsuNyutaishoDac();
+        DbT1004ShisetsuNyutaishoDac dbT1004ShisetsuNyutaishoDac = InstanceProvider.create(DbT1004ShisetsuNyutaishoDac.class);
         for (InformationEntity informationEntity : informationEntityLst) {
             if (DELETE.equals(informationEntity.get状態())) {
                 continue;
@@ -36,12 +37,12 @@ public class TekiyoJogaishaIdoTeisei {
             if (dbT1004EntityLst.isEmpty()) {
                 return false;
             }
+            int count = 0;
             for (DbT1004ShisetsuNyutaishoEntity dbT1004Entity : dbT1004EntityLst) {
                 for (InformationEntity infEntity : informationEntityLst) {
                     if (DELETE.equals(infEntity.get状態())) {
                         continue;
                     }
-                    int count = 0;
                     FlexibleDate taishoYMD = dbT1004Entity.getTaishoYMD();
                     FlexibleDate nyushoYMD = dbT1004Entity.getNyushoYMD();
                     if (!((nyushoYMD != null && infEntity.get適用日().isBefore(nyushoYMD)
