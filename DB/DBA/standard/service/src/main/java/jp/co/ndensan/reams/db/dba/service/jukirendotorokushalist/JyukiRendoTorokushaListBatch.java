@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dba.service.jukirendotorokushalist;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.report.jyukirendotorokushalistbatchentity.JukiRendoTorokuListItem;
 import jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity.JyukiRendoJouhouEntity;
 import jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity.JyukiRendoTorokushaListBatchEntity;
 import jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity.JyukiRendoTorokushaListTyouHyouListEntity;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -32,9 +32,9 @@ public class JyukiRendoTorokushaListBatch {
      * @param entity 住基連動登録者リストEntity
      * @return JyukiRendoTorokushaListTyouHyouListEntity
      */
-    public List<JyukiRendoTorokushaListTyouHyouListEntity> getIdoCheckChohyoData(
+    public List<JukiRendoTorokuListItem> getIdoCheckChohyoData(
             JyukiRendoTorokushaListBatchEntity entity) {
-        List<JyukiRendoTorokushaListTyouHyouListEntity> list = new ArrayList();
+        List<JukiRendoTorokuListItem> list = new ArrayList();
         RDate nowDate = RDate.getNowDate();
         RString 印刷日時 = nowDate.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -43,9 +43,9 @@ public class JyukiRendoTorokushaListBatch {
             JyukiRendoTorokushaListTyouHyouListEntity jyukiRendoTorokushaListTyouHyouListEntity
                     = new JyukiRendoTorokushaListTyouHyouListEntity();
             jyukiRendoTorokushaListTyouHyouListEntity.set印刷日時(new RString(印刷日時.toString() + 印刷時刻.toString()));
-            jyukiRendoTorokushaListTyouHyouListEntity.setページ数(ページ数 + 1);
+            jyukiRendoTorokushaListTyouHyouListEntity.setページ数(new RString(String.valueOf(ページ数 + 1)));
             jyukiRendoTorokushaListTyouHyouListEntity.set帳票タイトル(new RString("住基連動登録者リスト"));
-            jyukiRendoTorokushaListTyouHyouListEntity.set市町村コード(entity.get市町村コード());
+            jyukiRendoTorokushaListTyouHyouListEntity.set市町村コード(new RString(entity.get市町村コード().toString()));
             jyukiRendoTorokushaListTyouHyouListEntity.set市町村名(entity.get市町村名());
             jyukiRendoTorokushaListTyouHyouListEntity.set並び順１(entity.get並び順_1());
             jyukiRendoTorokushaListTyouHyouListEntity.set並び順２(entity.get並び順_2());
@@ -55,13 +55,72 @@ public class JyukiRendoTorokushaListBatch {
             if (jyukiRendoJouhouEntity.get識別コード() == null) {
                 set帳票データ作成用Entityの部分項目(jyukiRendoTorokushaListTyouHyouListEntity, jyukiRendoJouhouEntity);
                 jyukiRendoTorokushaListTyouHyouListEntity.setリスト下_被保険者氏名(
-                        new AtenaMeisho("該当データがありません"));
+                        new RString("該当データがありません"));
             } else {
                 set帳票データ作成用Entityの部分項目(jyukiRendoTorokushaListTyouHyouListEntity, jyukiRendoJouhouEntity);
-                jyukiRendoTorokushaListTyouHyouListEntity.setリスト下_被保険者氏名(
-                        jyukiRendoJouhouEntity.get被保険者氏名());
+                if (jyukiRendoJouhouEntity.get被保険者氏名() != null) {
+                    jyukiRendoTorokushaListTyouHyouListEntity.setリスト下_被保険者氏名(
+                            new RString(jyukiRendoJouhouEntity.get被保険者氏名().toString()));
+                }
             }
-            list.add(jyukiRendoTorokushaListTyouHyouListEntity);
+            JukiRendoTorokuListItem jukiRendoTorokuListItem = new JukiRendoTorokuListItem(
+                    jyukiRendoTorokushaListTyouHyouListEntity.get印刷日時(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get帳票タイトル(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get市町村コード(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get市町村名(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get並び順１(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get並び順２(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get並び順３(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get並び順４(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get並び順５(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get改頁１(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get改頁２(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get改頁３(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get改頁４(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get改頁５(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get開始タイトル(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get終了タイトル(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get区分タイトル(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get異動情報タイトル1(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get異動情報タイトル2(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get異動情報タイトル3(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get開始年月日タイトル(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get終了年月日タイトル(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get異動情報タイトル4(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get異動情報タイトル5(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get異動情報タイトル6(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト上_世帯コード(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト上_被保険者カナ氏名(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト上_事由(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト上_異動年月日(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト上_届出年月日(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト上_開始年月日(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト上_事由_2(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト上_異動年月日_2(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト上_届出年月日_2(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト上_終了年月日(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト上_区分(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト上_異動情報1(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト上_異動情報2(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト上_異動情報3(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト_被保険者番号(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_識別コード(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_被保険者氏名(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_事由(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_異動年月日(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_届出年月日(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_開始年月日(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_事由_2(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_異動年月日_2(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_届出年月日_2(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_終了年月日(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_区分(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_異動情報4(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_異動情報5(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_異動情報6(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getページ数(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get対象情報タイトル());
+            list.add(jukiRendoTorokuListItem);
         }
         return list;
     }
@@ -92,9 +151,14 @@ public class JyukiRendoTorokushaListBatch {
         jyukiRendoTorokushaListTyouHyouListEntity.set異動情報タイトル4(jyukiRendoJouhouEntity.get異動情報タイトル4());
         jyukiRendoTorokushaListTyouHyouListEntity.set異動情報タイトル5(jyukiRendoJouhouEntity.get異動情報タイトル5());
         jyukiRendoTorokushaListTyouHyouListEntity.set異動情報タイトル6(jyukiRendoJouhouEntity.get異動情報タイトル6());
-        jyukiRendoTorokushaListTyouHyouListEntity.setリスト上_世帯コード(jyukiRendoJouhouEntity.get世帯コード());
-        jyukiRendoTorokushaListTyouHyouListEntity.setリスト上_被保険者カナ氏名(
-                jyukiRendoJouhouEntity.get被保険者カナ氏名());
+        if (jyukiRendoJouhouEntity.get世帯コード() != null) {
+            jyukiRendoTorokushaListTyouHyouListEntity.setリスト上_世帯コード(new RString(jyukiRendoJouhouEntity
+                    .get世帯コード().toString()));
+        }
+        if (jyukiRendoJouhouEntity.get被保険者カナ氏名() != null) {
+            jyukiRendoTorokushaListTyouHyouListEntity.setリスト上_被保険者カナ氏名(
+                    new RString(jyukiRendoJouhouEntity.get被保険者カナ氏名().toString()));
+        }
         jyukiRendoTorokushaListTyouHyouListEntity.setリスト上_事由(jyukiRendoJouhouEntity.get取得情報_前_事由());
         if (jyukiRendoJouhouEntity.get取得情報_前_異動年月日() != null) {
             jyukiRendoTorokushaListTyouHyouListEntity.setリスト上_異動年月日(
@@ -137,8 +201,14 @@ public class JyukiRendoTorokushaListBatch {
         jyukiRendoTorokushaListTyouHyouListEntity.setリスト上_異動情報1(jyukiRendoJouhouEntity.get異動情報データ1());
         jyukiRendoTorokushaListTyouHyouListEntity.setリスト上_異動情報2(jyukiRendoJouhouEntity.get異動情報データ2());
         jyukiRendoTorokushaListTyouHyouListEntity.setリスト上_異動情報3(jyukiRendoJouhouEntity.get異動情報データ3());
-        jyukiRendoTorokushaListTyouHyouListEntity.setリスト_被保険者番号(jyukiRendoJouhouEntity.get被保険者番号());
-        jyukiRendoTorokushaListTyouHyouListEntity.setリスト下_識別コード(jyukiRendoJouhouEntity.get識別コード());
+        if (jyukiRendoJouhouEntity.get被保険者番号() != null) {
+            jyukiRendoTorokushaListTyouHyouListEntity.setリスト_被保険者番号(new RString(jyukiRendoJouhouEntity
+                    .get被保険者番号().toString()));
+        }
+        if (jyukiRendoJouhouEntity.get識別コード() != null) {
+            jyukiRendoTorokushaListTyouHyouListEntity.setリスト下_識別コード(new RString(jyukiRendoJouhouEntity
+                    .get識別コード().toString()));
+        }
         jyukiRendoTorokushaListTyouHyouListEntity.setリスト下_事由(jyukiRendoJouhouEntity.get取得情報_後_事由());
         if (jyukiRendoJouhouEntity.get取得情報_後_異動年月日() != null) {
             jyukiRendoTorokushaListTyouHyouListEntity.setリスト下_異動年月日(
