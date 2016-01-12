@@ -55,10 +55,8 @@ public class ShokanShinseiList {
                             償還払申請一覧_サービス年月From,
                             償還払申請一覧_サービス年月To);
         }
-        //getHandler(requestdiv).initialize(mode, shokandhinseiichiran);
         getHandler(requestdiv).initialize(mode, shokandhinseiichiran);
         return ResponseData.of(requestdiv).respond();
-
     }
 
     /**
@@ -137,19 +135,7 @@ public class ShokanShinseiList {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
-                ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-            requestDiv.getDgShinseiList().getGridSetting().selectedRowCount();
-            dgShinseiList_Row dgShinseiList = requestDiv.getDgShinseiList().getSelectedItems().get(0);
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, requestDiv.getTxtServiceYMFrom().getValue().getYearMonth());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, requestDiv.getTxtServiceYMTo().getValue().getYearMonth());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_モード, 選択モード);
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, dgShinseiList.getServiceTeikyoYM());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, dgShinseiList.getHiHokenshaNo());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, dgShinseiList.getSeiriNo());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_様式番号, dgShinseiList.getYoshikiNo());
-        }
+        get選択ボタンcheck(requestDiv);
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -164,19 +150,7 @@ public class ShokanShinseiList {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
-
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
-                ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            requestDiv.getDgShinseiList().getGridSetting().selectedRowCount();
-            dgShinseiList_Row dgShinseiList = requestDiv.getDgShinseiList().getSelectedItems().get(0);
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, requestDiv.getTxtServiceYMFrom().getValue().getYearMonth());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, requestDiv.getTxtServiceYMTo().getValue().getYearMonth());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_モード, 修正モード);
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, dgShinseiList.getServiceTeikyoYM());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, dgShinseiList.getHiHokenshaNo());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, dgShinseiList.getSeiriNo());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_様式番号, dgShinseiList.getYoshikiNo());
-        }
+        get修正ボタンcheck(requestDiv);
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -191,18 +165,8 @@ public class ShokanShinseiList {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
-                ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            requestDiv.getDgShinseiList().getGridSetting().selectedRowCount();
-            dgShinseiList_Row dgShinseiList = requestDiv.getDgShinseiList().getSelectedItems().get(0);
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, requestDiv.getTxtServiceYMFrom().getValue().getYearMonth());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, requestDiv.getTxtServiceYMTo().getValue().getYearMonth());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_モード, 削除モード);
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, dgShinseiList.getServiceTeikyoYM());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, dgShinseiList.getHiHokenshaNo());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, dgShinseiList.getSeiriNo());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_様式番号, dgShinseiList.getYoshikiNo());
-        }
+
+        get削除ボタンcheck(requestDiv);
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -250,4 +214,74 @@ public class ShokanShinseiList {
             }
         }
     }
+
+    private void get選択ボタンcheck(ShokanShinseiListDiv requestDiv) {
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            requestDiv.getDgShinseiList().getGridSetting().selectedRowCount();
+            dgShinseiList_Row dgShinseiList = requestDiv.getDgShinseiList().getSelectedItems().get(0);
+            FlexibleYearMonth serviceYMFrom = FlexibleYearMonth.EMPTY;
+            if (requestDiv.getTxtServiceYMFrom().getValue() != null) {
+                serviceYMFrom = new FlexibleYearMonth(requestDiv.getTxtServiceYMFrom().getValue().getYearMonth().toDateString());
+            }
+            FlexibleYearMonth serviceYMTo = FlexibleYearMonth.EMPTY;
+            if (requestDiv.getTxtServiceYMTo().getValue() != null) {
+                serviceYMTo = new FlexibleYearMonth(requestDiv.getTxtServiceYMTo().getValue().getYearMonth().toDateString());
+            }
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, serviceYMFrom);
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, serviceYMTo);
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_モード, 選択モード);
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, dgShinseiList.getServiceTeikyoYM());
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, new HihokenshaNo(dgShinseiList.getHiHokenshaNo()));
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, dgShinseiList.getSeiriNo());
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_様式番号, dgShinseiList.getYoshikiNo());
+        }
+    }
+
+    private void get修正ボタンcheck(ShokanShinseiListDiv requestDiv) {
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            requestDiv.getDgShinseiList().getGridSetting().selectedRowCount();
+            dgShinseiList_Row dgShinseiList = requestDiv.getDgShinseiList().getSelectedItems().get(0);
+            FlexibleYearMonth serviceYMFrom = FlexibleYearMonth.EMPTY;
+            if (requestDiv.getTxtServiceYMFrom().getValue() != null) {
+                serviceYMFrom = new FlexibleYearMonth(requestDiv.getTxtServiceYMFrom().getValue().getYearMonth().toDateString());
+            }
+            FlexibleYearMonth serviceYMTo = FlexibleYearMonth.EMPTY;
+            if (requestDiv.getTxtServiceYMTo().getValue() != null) {
+                serviceYMTo = new FlexibleYearMonth(requestDiv.getTxtServiceYMTo().getValue().getYearMonth().toDateString());
+            }
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, serviceYMFrom);
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, serviceYMTo);
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_モード, 修正モード);
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, dgShinseiList.getServiceTeikyoYM());
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, new HihokenshaNo(dgShinseiList.getHiHokenshaNo()));
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, dgShinseiList.getSeiriNo());
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_様式番号, dgShinseiList.getYoshikiNo());
+        }
+    }
+
+    private void get削除ボタンcheck(ShokanShinseiListDiv requestDiv) {
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            requestDiv.getDgShinseiList().getGridSetting().selectedRowCount();
+            dgShinseiList_Row dgShinseiList = requestDiv.getDgShinseiList().getSelectedItems().get(0);
+            FlexibleYearMonth serviceYMFrom = FlexibleYearMonth.EMPTY;
+            if (requestDiv.getTxtServiceYMFrom().getValue() != null) {
+                serviceYMFrom = new FlexibleYearMonth(requestDiv.getTxtServiceYMFrom().getValue().getYearMonth().toDateString());
+            }
+            FlexibleYearMonth serviceYMTo = FlexibleYearMonth.EMPTY;
+            if (requestDiv.getTxtServiceYMTo().getValue() != null) {
+                serviceYMTo = new FlexibleYearMonth(requestDiv.getTxtServiceYMTo().getValue().getYearMonth().toDateString());
+            }
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, serviceYMFrom);
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, serviceYMTo);
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_モード, 削除モード);
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, dgShinseiList.getServiceTeikyoYM());
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, new HihokenshaNo(dgShinseiList.getHiHokenshaNo()));
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, dgShinseiList.getSeiriNo());
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_様式番号, dgShinseiList.getYoshikiNo());
+        }
+    }
+
 }

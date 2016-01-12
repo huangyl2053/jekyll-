@@ -8,9 +8,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.ShokanShinseiList;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanshinseiichiran.ShokanShinseiIchiran;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.config.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShinseiList.ShokanShinseiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShinseiList.dgShinseiList_Row;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -41,10 +45,16 @@ public class ShokanShinseiHandler {
                 dgShinseiList_Row list_Row = new dgShinseiList_Row();
                 list_Row.setHiHokenshaNo(jigyoshaInput.get被保険者番号().value());
                 list_Row.setServiceTeikyoYM(jigyoshaInput.getサービス年月().wareki().toDateString());
-                list_Row.setShinseiYMD(jigyoshaInput.get申請年月日().wareki().toDateString());
+                if (jigyoshaInput.get申請年月日() != null) {
+                    list_Row.setShinseiYMD(jigyoshaInput.get申請年月日().wareki().toDateString());
+                }
                 list_Row.setSeiriNo(jigyoshaInput.get整理番号());
-                list_Row.setSofuYM(jigyoshaInput.get送付年月().wareki().toDateString());
-                list_Row.setKetteiYMD(jigyoshaInput.get決定年月日().wareki().toDateString());
+                if (jigyoshaInput.get送付年月() != null) {
+                    list_Row.setSofuYM(jigyoshaInput.get送付年月().wareki().toDateString());
+                }
+                if (jigyoshaInput.get決定年月日() != null) {
+                    list_Row.setKetteiYMD(jigyoshaInput.get決定年月日().wareki().toDateString());
+                }
                 list_Row.setYoshikiNo(jigyoshaInput.get様式番号());
                 dgshinseilistrow.add(list_Row);
             }
@@ -67,6 +77,9 @@ public class ShokanShinseiHandler {
             div.getDgShinseiList().getGridSetting().getColumn(new RString("yoshikiNo")).setVisible(false);
         }
         if (状態_申請.equals(状態)) {
+            RString month = BusinessConfig.get(ConfigNameDBC.初期表示_償還支給申請登録初期, SubGyomuCode.DBC介護給付);
+            RDate yearMonth = RDate.getNowDate().minusMonth(Integer.parseInt(month.toString()));
+            div.getTxtServiceYM().setValue(yearMonth);
             div.getTxtServiceYM().setVisible(true);
             div.getBtnAdd().setVisible(true);
             div.getTxtServiceYMFrom().setVisible(true);
