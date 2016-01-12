@@ -6,9 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7005RojinHokenJukyushaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -20,10 +21,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 老人保健受給者情報を管理するクラスです。
  */
-public class RojinHokenJukyushaJoho extends 
-        ParentModelBase<RojinHokenJukyushaJohoIdentifier, 
-        DbT7005RojinHokenJukyushaJohoEntity, RojinHokenJukyushaJoho> implements Serializable {
+public class RojinHokenJukyushaJoho extends
+        ModelBase<RojinHokenJukyushaJohoIdentifier, DbT7005RojinHokenJukyushaJohoEntity, RojinHokenJukyushaJoho> implements Serializable {
 
+    private static final long serialVersionUID = -1645423049256158209L;
     private final DbT7005RojinHokenJukyushaJohoEntity entity;
     private final RojinHokenJukyushaJohoIdentifier id;
 
@@ -68,7 +69,6 @@ public class RojinHokenJukyushaJoho extends
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 識別コードを返します。
      *
@@ -135,12 +135,10 @@ public class RojinHokenJukyushaJoho extends
     }
 
     /**
-     * 老人保健受給者情報のみを変更対象とします。<br/>
-     * {@link DbT7005RojinHokenJukyushaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 老人保健受給者情報のみを変更対象とします。<br/> {@link DbT7005RojinHokenJukyushaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link RojinHokenJukyushaJoho}
      */
-    @Override
     public RojinHokenJukyushaJoho modifiedModel() {
         DbT7005RojinHokenJukyushaJohoEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
@@ -151,8 +149,7 @@ public class RojinHokenJukyushaJoho extends
     }
 
     /**
-     * 保持する老人保健受給者情報を削除対象とします。<br/>
-     * {@link DbT7005RojinHokenJukyushaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する老人保健受給者情報を削除対象とします。<br/> {@link DbT7005RojinHokenJukyushaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link RojinHokenJukyushaJoho}
      */
@@ -162,7 +159,6 @@ public class RojinHokenJukyushaJoho extends
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new RojinHokenJukyushaJoho(deletedEntity, id);
@@ -180,7 +176,7 @@ public class RojinHokenJukyushaJoho extends
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -209,5 +205,22 @@ public class RojinHokenJukyushaJoho extends
         return new RojinHokenJukyushaJohoBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final RojinHokenJukyushaJoho other = (RojinHokenJukyushaJoho) obj;
+        return Objects.equals(this.id, other.id);
+    }
 }
