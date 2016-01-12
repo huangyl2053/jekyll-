@@ -46,6 +46,10 @@ public class BenmeiTorokuPanel {
      * @return ResponseData<ShikakukihonPanelDiv>
      */
     public ResponseData<BenmeiTorokuPanelDiv> onLoad(BenmeiTorokuPanelDiv panelDiv) {
+        ViewStateHolder.put(BenmeiTorokuViewStateKeys.モード, 状態_修正);
+        ViewStateHolder.put(BenmeiTorokuViewStateKeys.識別コード, new ShikibetsuCode("201609"));
+        ViewStateHolder.put(BenmeiTorokuViewStateKeys.原処分被保険者番号, new HihokenshaNo("20160101"));
+        ViewStateHolder.put(BenmeiTorokuViewStateKeys.審査請求届出日, new FlexibleDate("20160104"));
         //TODO ViewStateより弁明登録一覧画面からの引き継ぎ情報を取得する。
         識別コード = ViewStateHolder.get(BenmeiTorokuViewStateKeys.識別コード, ShikibetsuCode.class);
         原処分被保険者番号 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.原処分被保険者番号, HihokenshaNo.class);
@@ -146,6 +150,9 @@ public class BenmeiTorokuPanel {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            識別コード = ViewStateHolder.get(BenmeiTorokuViewStateKeys.識別コード, ShikibetsuCode.class);
+            原処分被保険者番号 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.原処分被保険者番号, HihokenshaNo.class);
+            審査請求届出日 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.審査請求届出日, FlexibleDate.class);
             boolean blnState = get弁明登録明細情報の登録処理結果(
                     識別コード, 原処分被保険者番号, 審査請求届出日,
                     new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().getValue().toDateString()),
@@ -181,6 +188,9 @@ public class BenmeiTorokuPanel {
     }
 
     private ResponseData<BenmeiTorokuPanelDiv> get弁明登録明細情報の更新処理実行(BenmeiTorokuPanelDiv panelDiv) {
+        識別コード = ViewStateHolder.get(BenmeiTorokuViewStateKeys.識別コード, ShikibetsuCode.class);
+        原処分被保険者番号 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.原処分被保険者番号, HihokenshaNo.class);
+        審査請求届出日 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.審査請求届出日, FlexibleDate.class);
         boolean blnState = get弁明登録明細情報の更新処理結果(識別コード, 原処分被保険者番号, 審査請求届出日,
                 new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().getValue().toDateString()),
                 panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeisya().getValue(),
@@ -200,6 +210,9 @@ public class BenmeiTorokuPanel {
         }
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            識別コード = ViewStateHolder.get(BenmeiTorokuViewStateKeys.識別コード, ShikibetsuCode.class);
+            原処分被保険者番号 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.原処分被保険者番号, HihokenshaNo.class);
+            審査請求届出日 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.審査請求届出日, FlexibleDate.class);
             boolean blnState = get弁明登録明細情報の削除処理結果(識別コード, 原処分被保険者番号, 審査請求届出日);
             if (blnState) {
                 //TODO DBZInformationMessage．DBZI00005(削除は正常に終了しました。）
