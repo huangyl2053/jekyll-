@@ -109,8 +109,8 @@ public class KoikinaiJushochiTokureiHandler {
             }
             if (div.getBatchParamterInfo().getTxtKonkaiShuryobi().getValue().isBefore(div
                     .getBatchParamterInfo().getTxtKonkaiKaishibi().getValue())) {
-                // TODO DbzErrorMessages変更なし 
-                throw new ApplicationException(DbzErrorMessages.終了日が開始日以前.getMessage());
+                throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage()
+                        .replace("今回開始日", "今回終了日"));
             }
         }
     }

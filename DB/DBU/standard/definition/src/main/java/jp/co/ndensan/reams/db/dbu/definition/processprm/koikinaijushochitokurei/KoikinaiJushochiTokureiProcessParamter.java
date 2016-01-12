@@ -57,6 +57,8 @@ public class KoikinaiJushochiTokureiProcessParamter implements IBatchProcessPara
     
     /**
      * 域内住所地特例者一覧表のMyBatisパラメータ作成です。
+     *
+     * @param psmShikibetsuTaisho 宛名識別対象パラメータ
      * @return 域内住所地特例者一覧表のMyBatisパラメータ
      */
     public KoikinaiJushochiTokureiMybatisparamter toMybatisParamter(RString psmShikibetsuTaisho) {

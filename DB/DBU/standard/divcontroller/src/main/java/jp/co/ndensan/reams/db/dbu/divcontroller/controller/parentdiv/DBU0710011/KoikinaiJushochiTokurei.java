@@ -70,7 +70,7 @@ public class KoikinaiJushochiTokurei {
      * @param div KoikinaiJushochiTokurei のクラスファイル 
      * @return ResponseData<KoikinaiJushochiTokureiDiv>
      */
-    public ResponseData<KoikinaiJushochiTokureiDiv> is入力チェック(KoikinaiJushochiTokureiDiv div) {
+    public ResponseData<KoikinaiJushochiTokureiDiv> isCheck(KoikinaiJushochiTokureiDiv div) {
         getHandler(div).is入力チェック();
         return ResponseData.of(div).respond();
     }
@@ -80,7 +80,7 @@ public class KoikinaiJushochiTokurei {
      * @param div KoikinaiJushochiTokurei のクラスファイル 
      * @return ResponseData<KoikinaiJushochiTokureiDiv>
      */
-    public ResponseData<KoikinaiJushochiTokureiBatchParamter> click実行(KoikinaiJushochiTokureiDiv div) {
+    public ResponseData<KoikinaiJushochiTokureiBatchParamter> clickBatch(KoikinaiJushochiTokureiDiv div) {
         return ResponseData.of(getHandler(div).click実行()).respond();
     }
 

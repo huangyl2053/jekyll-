@@ -33,8 +33,8 @@
         <result property="koikinaiJushochiTokureiFlag" column="dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="koikinaiTokureiSochimotoShichosonCode" column="dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="kyuShichosonCode" column="dbT1001HihokenshaDaicho_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <result property="logicalDeletedFlag" column="dbT1001HihokenshaDaicho_logicalDeletedFlag" /><!--
--->        <association property="ft200Entity" 
+        <result property="logicalDeletedFlag" column="dbT1001HihokenshaDaicho_logicalDeletedFlag" />
+        <association property="ft200Entity" 
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
     
@@ -69,7 +69,16 @@
             A."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
             A."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
             A."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag",
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+            "ShikibetsuTaisho"."meisho"                             as "ShikibetsuTaisho_meisho",
+            "ShikibetsuTaisho"."kanaMeisho"                         as "ShikibetsuTaisho_kanaMeisho",
+            "ShikibetsuTaisho"."zenkokuJushoCode"                   as "ShikibetsuTaisho_zenkokuJushoCode",
+            "ShikibetsuTaisho"."gyoseikuCode"                       as "ShikibetsuTaisho_gyoseikuCode",
+            "ShikibetsuTaisho"."gyoseikuName"                       as "ShikibetsuTaisho_gyoseikuName",
+            "ShikibetsuTaisho"."meisho"                             as "ShikibetsuTaisho_meisho",
+            "ShikibetsuTaisho"."seibetsuCode"                       as "ShikibetsuTaisho_seibetsuCode",
+            "ShikibetsuTaisho"."setaiCode"                          as "ShikibetsuTaisho_setaiCode",
+            "ShikibetsuTaisho"."jusho"                              as "ShikibetsuTaisho_jusho",
+            "ShikibetsuTaisho"."juminShubetsuCode"                  as "ShikibetsuTaisho_juminShubetsuCode"
             FROM
             rgdb."DbT1001HihokenshaDaicho" AS A
             INNER JOIN
@@ -150,7 +159,16 @@
             DbT1001."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
             DbT1001."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
             DbT1001."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag",
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+            "ShikibetsuTaisho"."meisho"                             as "ShikibetsuTaisho_meisho",
+            "ShikibetsuTaisho"."kanaMeisho"                         as "ShikibetsuTaisho_kanaMeisho",
+            "ShikibetsuTaisho"."zenkokuJushoCode"                   as "ShikibetsuTaisho_zenkokuJushoCode",
+            "ShikibetsuTaisho"."gyoseikuCode"                       as "ShikibetsuTaisho_gyoseikuCode",
+            "ShikibetsuTaisho"."gyoseikuName"                       as "ShikibetsuTaisho_gyoseikuName",
+            "ShikibetsuTaisho"."meisho"                             as "ShikibetsuTaisho_meisho",
+            "ShikibetsuTaisho"."seibetsuCode"                       as "ShikibetsuTaisho_seibetsuCode",
+            "ShikibetsuTaisho"."setaiCode"                          as "ShikibetsuTaisho_setaiCode",
+            "ShikibetsuTaisho"."jusho"                              as "ShikibetsuTaisho_jusho",
+            "ShikibetsuTaisho"."juminShubetsuCode"                  as "ShikibetsuTaisho_juminShubetsuCode"
 	  FROM(
             SELECT												
             "hihokenshaNo",											
@@ -236,7 +254,16 @@
             DbT1001."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
             DbT1001."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
             DbT1001."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag",
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+            "ShikibetsuTaisho"."meisho"                             as "ShikibetsuTaisho_meisho",
+            "ShikibetsuTaisho"."kanaMeisho"                         as "ShikibetsuTaisho_kanaMeisho",
+            "ShikibetsuTaisho"."zenkokuJushoCode"                   as "ShikibetsuTaisho_zenkokuJushoCode",
+            "ShikibetsuTaisho"."gyoseikuCode"                       as "ShikibetsuTaisho_gyoseikuCode",
+            "ShikibetsuTaisho"."gyoseikuName"                       as "ShikibetsuTaisho_gyoseikuName",
+            "ShikibetsuTaisho"."meisho"                             as "ShikibetsuTaisho_meisho",
+            "ShikibetsuTaisho"."seibetsuCode"                       as "ShikibetsuTaisho_seibetsuCode",
+            "ShikibetsuTaisho"."setaiCode"                          as "ShikibetsuTaisho_setaiCode",
+            "ShikibetsuTaisho"."jusho"                              as "ShikibetsuTaisho_jusho",
+            "ShikibetsuTaisho"."juminShubetsuCode"                  as "ShikibetsuTaisho_juminShubetsuCode"
 	  FROM(
             SELECT												
             "hihokenshaNo",											

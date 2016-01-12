@@ -43,6 +43,6 @@ public interface IKoikinaiJushochiTokureiMapper {
      * @param param 広域内住所地特例者一覧表の広域特解除情報を取得処理のMyBatisパラメータ
      * @return 広住特適用情報のエンティティクラスです
      */
-    List<KoikinaiJushochiTokureiRelateEntity> get広域特解除情報(KoikinaiKaijoParamter param);
+    KoikinaiJushochiTokureiRelateEntity get広域特解除情報(KoikinaiKaijoParamter param);
     
 }
