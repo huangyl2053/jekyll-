@@ -5,19 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
+import java.io.Serializable;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
-import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4912ShujiiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import java.util.Objects;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 主治医情報のビジネスクラスです。
@@ -78,8 +78,8 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
      * @return 主治医医療機関コード
      */
     @Override
-    public ShujiiIryokikanCode get主治医医療機関コード() {
-        return entity.getShujiiIryokikanCode();
+    public RString get主治医医療機関コード() {
+        return entity.getShujiiIryokikanCode().value();
     }
 
     /**
@@ -88,8 +88,8 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
      * @return 主治医コード
      */
     @Override
-    public ShujiiCode get主治医コード() {
-        return entity.getShujiiCode();
+    public RString get主治医コード() {
+        return entity.getShujiiCode().value();
     }
 
     /**
@@ -298,9 +298,9 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          * @return builder
          */
         @Override
-        public Builder setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
+        public Builder setShujiiIryokikanCode(RString shujiiIryokikanCode) {
             Objects.requireNonNull(shujiiIryokikanCode);
-            this.entity.setShujiiIryokikanCode(shujiiIryokikanCode);
+            this.entity.setShujiiIryokikanCode(new ShujiiIryokikanCode(shujiiIryokikanCode));
             return this;
         }
 
@@ -311,9 +311,9 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          * @return builder
          */
         @Override
-        public Builder setShujiiCode(ShujiiCode shujiiCode) {
+        public Builder setShujiiCode(RString shujiiCode) {
             Objects.requireNonNull(shujiiCode);
-            this.entity.setShujiiCode(shujiiCode);
+            this.entity.setShujiiCode(new ShujiiCode(shujiiCode));
             return this;
         }
 
@@ -444,8 +444,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。
-     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */
