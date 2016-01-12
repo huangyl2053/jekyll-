@@ -54,6 +54,8 @@ public class HihokenshaEntity {
     private RString telephoneNo1;
     private RString telephoneNo2;
     private RString jushoTitle;
+    private RString sochiHokenshaTitle;
+    private RString kyuHokenshaTitle;
     private RString jusho;
     private ZenkokuJushoCode zenkokuJushoCode;
     private RString gyoseikuTitle;
