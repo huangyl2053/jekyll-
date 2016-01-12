@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity.Jyuk
 import jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity.TaJushochiTokureiShayouhouEntity;
 import jp.co.ndensan.reams.db.dba.persistence.mapper.jyukirendojouhou.IJyukiRendoJouhouMapper;
 import jp.co.ndensan.reams.db.dba.service.jukirendotorokushalist.JyukiRendoTorokushaListBatch;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -30,12 +29,8 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -120,11 +115,11 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         }
         // TODO 2-上記取得した住基連動情報リストをソートする(技術点を提出しました)
 
-        // TODO 3-住基連動登録者リストEntityを作成する
         JyukiRendoTorokushaListBatchEntity jyukiRendoTorokushaEntity = new JyukiRendoTorokushaListBatchEntity();
         jyukiRendoTorokushaEntity.set市町村コード(AssociationFinderFactory.createInstance().getAssociation()
                 .get地方公共団体コード());
         jyukiRendoTorokushaEntity.set市町村名(AssociationFinderFactory.createInstance().getAssociation().get市町村名());
+        // TODO 並び順について、技術点を提出しました
         jyukiRendoTorokushaEntity.set並び順_1(RString.EMPTY);
         jyukiRendoTorokushaEntity.set並び順_2(RString.EMPTY);
         jyukiRendoTorokushaEntity.set並び順_3(RString.EMPTY);
@@ -148,53 +143,53 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         List<JyukiRendoJouhouEntity> JyukiRendoTorokushalist = JyukiRendoJouhouMapper
                 .getHiHokenshaDaichoList(parameter);
         if (0 == JyukiRendoTorokushalist.size()) {
-            entity.set世帯コード(SetaiCode.EMPTY);
-            entity.set被保険者カナ氏名(AtenaKanaMeisho.EMPTY);
-            entity.set被保険者氏名(AtenaMeisho.EMPTY);
+            entity.set世帯コード(null);
+            entity.set被保険者カナ氏名(null);
+            entity.set被保険者氏名(null);
             entity.set対象情報(1);
-            entity.set改頁１(RString.EMPTY);
-            entity.set改頁２(RString.EMPTY);
-            entity.set改頁３(RString.EMPTY);
-            entity.set改頁４(RString.EMPTY);
-            entity.set改頁５(RString.EMPTY);
+            entity.set改頁１(null);
+            entity.set改頁２(null);
+            entity.set改頁３(null);
+            entity.set改頁４(null);
+            entity.set改頁５(null);
             entity.set対象情報タイトル(new RString("データ種別：被保険者台帳"));
             entity.set開始タイトル(new RString("取得情報"));
             entity.set終了タイトル(new RString("喪失情報"));
             entity.set区分タイトル(new RString("資格"));
-            entity.set異動情報タイトル1(RString.EMPTY);
-            entity.set異動情報タイトル2(RString.EMPTY);
-            entity.set異動情報タイトル3(RString.EMPTY);
-            entity.set開始年月日タイトル(RString.EMPTY);
-            entity.set終了年月日タイトル(RString.EMPTY);
+            entity.set異動情報タイトル1(null);
+            entity.set異動情報タイトル2(null);
+            entity.set異動情報タイトル3(null);
+            entity.set開始年月日タイトル(null);
+            entity.set終了年月日タイトル(null);
             entity.set異動情報タイトル4(new RString("異動情報"));
-            entity.set異動情報タイトル5(RString.EMPTY);
-            entity.set異動情報タイトル6(RString.EMPTY);
-            entity.set開始年月日データ_前(FlexibleDate.EMPTY);
-            entity.set終了年月日データ_前(FlexibleDate.EMPTY);
-            entity.set開始年月日データ_後(FlexibleDate.EMPTY);
-            entity.set終了年月日データ_後(FlexibleDate.EMPTY);
-            entity.set異動情報データ1(RString.EMPTY);
-            entity.set異動情報データ2(RString.EMPTY);
-            entity.set異動情報データ3(RString.EMPTY);
-            entity.set異動情報データ4(RString.EMPTY);
-            entity.set異動情報データ5(RString.EMPTY);
-            entity.set異動情報データ6(RString.EMPTY);
-            entity.set被保険者番号(HihokenshaNo.EMPTY);
-            entity.set識別コード(ShikibetsuCode.EMPTY);
-            entity.set取得情報_前_事由(RString.EMPTY);
-            entity.set取得情報_前_異動年月日(FlexibleDate.EMPTY);
-            entity.set取得情報_前_届出年月日(FlexibleDate.EMPTY);
-            entity.set喪失情報_前_事由(RString.EMPTY);
-            entity.set喪失情報_前_異動年月日(FlexibleDate.EMPTY);
-            entity.set喪失情報_前_届出年月日(FlexibleDate.EMPTY);
-            entity.set取得情報_後_事由(RString.EMPTY);
-            entity.set取得情報_後_異動年月日(FlexibleDate.EMPTY);
-            entity.set取得情報_後_届出年月日(FlexibleDate.EMPTY);
-            entity.set喪失情報_後_事由(RString.EMPTY);
-            entity.set喪失情報_後_異動年月日(FlexibleDate.EMPTY);
-            entity.set喪失情報_後_届出年月日(FlexibleDate.EMPTY);
-            entity.set区分_前_資格(RString.EMPTY);
-            entity.set区分_後_資格(RString.EMPTY);
+            entity.set異動情報タイトル5(null);
+            entity.set異動情報タイトル6(null);
+            entity.set開始年月日データ_前(null);
+            entity.set終了年月日データ_前(null);
+            entity.set開始年月日データ_後(null);
+            entity.set終了年月日データ_後(null);
+            entity.set異動情報データ1(null);
+            entity.set異動情報データ2(null);
+            entity.set異動情報データ3(null);
+            entity.set異動情報データ4(null);
+            entity.set異動情報データ5(null);
+            entity.set異動情報データ6(null);
+            entity.set被保険者番号(null);
+            entity.set識別コード(null);
+            entity.set取得情報_前_事由(null);
+            entity.set取得情報_前_異動年月日(null);
+            entity.set取得情報_前_届出年月日(null);
+            entity.set喪失情報_前_事由(null);
+            entity.set喪失情報_前_異動年月日(null);
+            entity.set喪失情報_前_届出年月日(null);
+            entity.set取得情報_後_事由(null);
+            entity.set取得情報_後_異動年月日(null);
+            entity.set取得情報_後_届出年月日(null);
+            entity.set喪失情報_後_事由(null);
+            entity.set喪失情報_後_異動年月日(null);
+            entity.set喪失情報_後_届出年月日(null);
+            entity.set区分_前_資格(null);
+            entity.set区分_後_資格(null);
             JyukiRendoTorokushalist.add(entity);
         }
         return JyukiRendoTorokushalist;
@@ -227,45 +222,45 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         });
         for (TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhouentity : taJushochiTokureiShayouhoulist) {
             JyukiRendoJouhouEntity entity = new JyukiRendoJouhouEntity();
-            entity.set世帯コード(SetaiCode.EMPTY);
-            entity.set被保険者カナ氏名(AtenaKanaMeisho.EMPTY);
-            entity.set被保険者氏名(AtenaMeisho.EMPTY);
+            entity.set世帯コード(null);
+            entity.set被保険者カナ氏名(null);
+            entity.set被保険者氏名(null);
             if (!taJushochiTokureiShayouhouentity.isLogicalDeletedFlag()) {
                 entity.set対象情報(2);
-                entity.set改頁１(RString.EMPTY);
-                entity.set改頁２(RString.EMPTY);
-                entity.set改頁３(RString.EMPTY);
-                entity.set改頁４(RString.EMPTY);
-                entity.set改頁５(RString.EMPTY);
+                entity.set改頁１(null);
+                entity.set改頁２(null);
+                entity.set改頁３(null);
+                entity.set改頁４(null);
+                entity.set改頁５(null);
                 entity.set対象情報タイトル(new RString("データ種別：他市町村住所地特例者台帳"));
                 entity.set開始タイトル(new RString("適用情報"));
                 entity.set終了タイトル(new RString("解除情報"));
-                entity.set区分タイトル(RString.EMPTY);
+                entity.set区分タイトル(null);
                 entity.set異動情報タイトル1(new RString("施設コード"));
-                entity.set異動情報タイトル2(RString.EMPTY);
-                entity.set異動情報タイトル3(RString.EMPTY);
+                entity.set異動情報タイトル2(null);
+                entity.set異動情報タイトル3(null);
                 entity.set開始年月日タイトル(new RString("入所年月日"));
                 entity.set終了年月日タイトル(new RString("退所年月日"));
                 entity.set異動情報タイトル4(new RString("異動情報"));
-                entity.set異動情報タイトル5(RString.EMPTY);
-                entity.set異動情報タイトル6(RString.EMPTY);
-                entity.set開始年月日データ_前(FlexibleDate.EMPTY);
-                entity.set終了年月日データ_前(FlexibleDate.EMPTY);
+                entity.set異動情報タイトル5(null);
+                entity.set異動情報タイトル6(null);
+                entity.set開始年月日データ_前(null);
+                entity.set終了年月日データ_前(null);
                 entity.set異動情報データ1(taJushochiTokureiShayouhouentity.getNyushoShisetsuCode());
-                entity.set被保険者番号(HihokenshaNo.EMPTY);
+                entity.set被保険者番号(null);
                 entity.set識別コード(taJushochiTokureiShayouhouentity.getShikibetsuCode());
-                entity.set取得情報_前_事由(RString.EMPTY);
-                entity.set取得情報_前_異動年月日(FlexibleDate.EMPTY);
-                entity.set取得情報_前_届出年月日(FlexibleDate.EMPTY);
-                entity.set喪失情報_前_事由(RString.EMPTY);
-                entity.set喪失情報_前_異動年月日(FlexibleDate.EMPTY);
-                entity.set喪失情報_前_届出年月日(FlexibleDate.EMPTY);
-                entity.set区分_前_資格(RString.EMPTY);
-                entity.set区分_後_資格(RString.EMPTY);
-                entity.set異動情報データ2(RString.EMPTY);
-                entity.set異動情報データ3(RString.EMPTY);
-                entity.set異動情報データ5(RString.EMPTY);
-                entity.set異動情報データ6(RString.EMPTY);
+                entity.set取得情報_前_事由(null);
+                entity.set取得情報_前_異動年月日(null);
+                entity.set取得情報_前_届出年月日(null);
+                entity.set喪失情報_前_事由(null);
+                entity.set喪失情報_前_異動年月日(null);
+                entity.set喪失情報_前_届出年月日(null);
+                entity.set区分_前_資格(null);
+                entity.set区分_後_資格(null);
+                entity.set異動情報データ2(null);
+                entity.set異動情報データ3(null);
+                entity.set異動情報データ5(null);
+                entity.set異動情報データ6(null);
 
                 // TODO 技術点を提出しました
                 if (taJushochiTokureiShayouhouentity.getIdoJiyuCode() != null
@@ -291,40 +286,40 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
                 }
             } else {
                 entity.set対象情報(2);
-                entity.set改頁１(RString.EMPTY);
-                entity.set改頁２(RString.EMPTY);
-                entity.set改頁３(RString.EMPTY);
-                entity.set改頁４(RString.EMPTY);
-                entity.set改頁５(RString.EMPTY);
+                entity.set改頁１(null);
+                entity.set改頁２(null);
+                entity.set改頁３(null);
+                entity.set改頁４(null);
+                entity.set改頁５(null);
                 entity.set対象情報タイトル(new RString("データ種別：他市町村住所地特例者台帳"));
                 entity.set開始タイトル(new RString("適用情報"));
                 entity.set終了タイトル(new RString("解除情報"));
-                entity.set区分タイトル(RString.EMPTY);
+                entity.set区分タイトル(null);
                 entity.set異動情報タイトル1(new RString("施設コード"));
-                entity.set異動情報タイトル2(RString.EMPTY);
-                entity.set異動情報タイトル3(RString.EMPTY);
+                entity.set異動情報タイトル2(null);
+                entity.set異動情報タイトル3(null);
                 entity.set開始年月日タイトル(new RString("入所年月日"));
                 entity.set終了年月日タイトル(new RString("退所年月日"));
                 entity.set異動情報タイトル4(new RString("異動情報"));
-                entity.set異動情報タイトル5(RString.EMPTY);
-                entity.set異動情報タイトル6(RString.EMPTY);
-                entity.set開始年月日データ_後(FlexibleDate.EMPTY);
-                entity.set終了年月日データ_後(FlexibleDate.EMPTY);
+                entity.set異動情報タイトル5(null);
+                entity.set異動情報タイトル6(null);
+                entity.set開始年月日データ_後(null);
+                entity.set終了年月日データ_後(null);
                 entity.set異動情報データ1(taJushochiTokureiShayouhouentity.getNyushoShisetsuCode());
-                entity.set被保険者番号(HihokenshaNo.EMPTY);
+                entity.set被保険者番号(null);
                 entity.set識別コード(taJushochiTokureiShayouhouentity.getShikibetsuCode());
-                entity.set取得情報_後_事由(RString.EMPTY);
-                entity.set取得情報_後_異動年月日(FlexibleDate.EMPTY);
-                entity.set取得情報_後_届出年月日(FlexibleDate.EMPTY);
-                entity.set喪失情報_後_事由(RString.EMPTY);
-                entity.set喪失情報_後_異動年月日(FlexibleDate.EMPTY);
-                entity.set喪失情報_後_届出年月日(FlexibleDate.EMPTY);
-                entity.set区分_前_資格(RString.EMPTY);
-                entity.set区分_後_資格(RString.EMPTY);
-                entity.set異動情報データ2(RString.EMPTY);
-                entity.set異動情報データ3(RString.EMPTY);
-                entity.set異動情報データ5(RString.EMPTY);
-                entity.set異動情報データ6(RString.EMPTY);
+                entity.set取得情報_後_事由(null);
+                entity.set取得情報_後_異動年月日(null);
+                entity.set取得情報_後_届出年月日(null);
+                entity.set喪失情報_後_事由(null);
+                entity.set喪失情報_後_異動年月日(null);
+                entity.set喪失情報_後_届出年月日(null);
+                entity.set区分_前_資格(null);
+                entity.set区分_後_資格(null);
+                entity.set異動情報データ2(null);
+                entity.set異動情報データ3(null);
+                entity.set異動情報データ5(null);
+                entity.set異動情報データ6(null);
                 // TODO 技術点を提出しました
                 if (taJushochiTokureiShayouhouentity.getIdoJiyuCode() != null
                         && Arrays.asList(CODE_SHUBETSU_0008).contains(
@@ -382,45 +377,45 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         });
         for (TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhouentity : taJushochiTokureiShayouhoulist) {
             JyukiRendoJouhouEntity entity = new JyukiRendoJouhouEntity();
-            entity.set世帯コード(SetaiCode.EMPTY);
-            entity.set被保険者カナ氏名(AtenaKanaMeisho.EMPTY);
-            entity.set被保険者氏名(AtenaMeisho.EMPTY);
+            entity.set世帯コード(null);
+            entity.set被保険者カナ氏名(null);
+            entity.set被保険者氏名(null);
             if (!taJushochiTokureiShayouhouentity.isLogicalDeletedFlag()) {
                 entity.set対象情報(3);
-                entity.set改頁１(RString.EMPTY);
-                entity.set改頁２(RString.EMPTY);
-                entity.set改頁３(RString.EMPTY);
-                entity.set改頁４(RString.EMPTY);
-                entity.set改頁５(RString.EMPTY);
+                entity.set改頁１(null);
+                entity.set改頁２(null);
+                entity.set改頁３(null);
+                entity.set改頁４(null);
+                entity.set改頁５(null);
                 entity.set対象情報タイトル(new RString("データ種別：適用除外者台帳"));
                 entity.set開始タイトル(new RString("適用情報"));
                 entity.set終了タイトル(new RString("解除情報"));
-                entity.set区分タイトル(RString.EMPTY);
+                entity.set区分タイトル(null);
                 entity.set異動情報タイトル1(new RString("施設コード"));
-                entity.set異動情報タイトル2(RString.EMPTY);
-                entity.set異動情報タイトル3(RString.EMPTY);
+                entity.set異動情報タイトル2(null);
+                entity.set異動情報タイトル3(null);
                 entity.set開始年月日タイトル(new RString("入所年月日"));
                 entity.set終了年月日タイトル(new RString("退所年月日"));
                 entity.set異動情報タイトル4(new RString("異動情報"));
-                entity.set異動情報タイトル5(RString.EMPTY);
-                entity.set異動情報タイトル6(RString.EMPTY);
-                entity.set開始年月日データ_前(FlexibleDate.EMPTY);
-                entity.set終了年月日データ_前(FlexibleDate.EMPTY);
+                entity.set異動情報タイトル5(null);
+                entity.set異動情報タイトル6(null);
+                entity.set開始年月日データ_前(null);
+                entity.set終了年月日データ_前(null);
                 entity.set異動情報データ1(taJushochiTokureiShayouhouentity.getNyushoShisetsuCode());
-                entity.set被保険者番号(HihokenshaNo.EMPTY);
+                entity.set被保険者番号(null);
                 entity.set識別コード(taJushochiTokureiShayouhouentity.getShikibetsuCode());
-                entity.set取得情報_前_事由(RString.EMPTY);
-                entity.set取得情報_前_異動年月日(FlexibleDate.EMPTY);
-                entity.set取得情報_前_届出年月日(FlexibleDate.EMPTY);
-                entity.set喪失情報_前_事由(RString.EMPTY);
-                entity.set喪失情報_前_異動年月日(FlexibleDate.EMPTY);
-                entity.set喪失情報_前_届出年月日(FlexibleDate.EMPTY);
-                entity.set区分_前_資格(RString.EMPTY);
-                entity.set区分_後_資格(RString.EMPTY);
-                entity.set異動情報データ2(RString.EMPTY);
-                entity.set異動情報データ3(RString.EMPTY);
-                entity.set異動情報データ5(RString.EMPTY);
-                entity.set異動情報データ6(RString.EMPTY);
+                entity.set取得情報_前_事由(null);
+                entity.set取得情報_前_異動年月日(null);
+                entity.set取得情報_前_届出年月日(null);
+                entity.set喪失情報_前_事由(null);
+                entity.set喪失情報_前_異動年月日(null);
+                entity.set喪失情報_前_届出年月日(null);
+                entity.set区分_前_資格(null);
+                entity.set区分_後_資格(null);
+                entity.set異動情報データ2(null);
+                entity.set異動情報データ3(null);
+                entity.set異動情報データ5(null);
+                entity.set異動情報データ6(null);
                 // TODO 技術点を提出しました
                 if (taJushochiTokureiShayouhouentity.getIdoJiyuCode() != null
                         && Arrays.asList(CODE_SHUBETSU_0009).contains(
@@ -446,40 +441,40 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
                 }
             } else {
                 entity.set対象情報(3);
-                entity.set改頁１(RString.EMPTY);
-                entity.set改頁２(RString.EMPTY);
-                entity.set改頁３(RString.EMPTY);
-                entity.set改頁４(RString.EMPTY);
-                entity.set改頁５(RString.EMPTY);
+                entity.set改頁１(null);
+                entity.set改頁２(null);
+                entity.set改頁３(null);
+                entity.set改頁４(null);
+                entity.set改頁５(null);
                 entity.set対象情報タイトル(new RString("データ種別：適用除外者台帳"));
                 entity.set開始タイトル(new RString("適用情報"));
                 entity.set終了タイトル(new RString("解除情報"));
-                entity.set区分タイトル(RString.EMPTY);
+                entity.set区分タイトル(null);
                 entity.set異動情報タイトル1(new RString("施設コード"));
-                entity.set異動情報タイトル2(RString.EMPTY);
-                entity.set異動情報タイトル3(RString.EMPTY);
+                entity.set異動情報タイトル2(null);
+                entity.set異動情報タイトル3(null);
                 entity.set開始年月日タイトル(new RString("入所年月日"));
                 entity.set終了年月日タイトル(new RString("退所年月日"));
                 entity.set異動情報タイトル4(new RString("異動情報"));
-                entity.set異動情報タイトル5(RString.EMPTY);
-                entity.set異動情報タイトル6(RString.EMPTY);
-                entity.set開始年月日データ_後(FlexibleDate.EMPTY);
-                entity.set終了年月日データ_後(FlexibleDate.EMPTY);
+                entity.set異動情報タイトル5(null);
+                entity.set異動情報タイトル6(null);
+                entity.set開始年月日データ_後(null);
+                entity.set終了年月日データ_後(null);
                 entity.set異動情報データ1(taJushochiTokureiShayouhouentity.getNyushoShisetsuCode());
-                entity.set被保険者番号(HihokenshaNo.EMPTY);
+                entity.set被保険者番号(null);
                 entity.set識別コード(taJushochiTokureiShayouhouentity.getShikibetsuCode());
-                entity.set取得情報_後_事由(RString.EMPTY);
-                entity.set取得情報_後_異動年月日(FlexibleDate.EMPTY);
-                entity.set取得情報_後_届出年月日(FlexibleDate.EMPTY);
-                entity.set喪失情報_後_事由(RString.EMPTY);
-                entity.set喪失情報_後_異動年月日(FlexibleDate.EMPTY);
-                entity.set喪失情報_後_届出年月日(FlexibleDate.EMPTY);
-                entity.set区分_前_資格(RString.EMPTY);
-                entity.set区分_後_資格(RString.EMPTY);
-                entity.set異動情報データ2(RString.EMPTY);
-                entity.set異動情報データ3(RString.EMPTY);
-                entity.set異動情報データ5(RString.EMPTY);
-                entity.set異動情報データ6(RString.EMPTY);
+                entity.set取得情報_後_事由(null);
+                entity.set取得情報_後_異動年月日(null);
+                entity.set取得情報_後_届出年月日(null);
+                entity.set喪失情報_後_事由(null);
+                entity.set喪失情報_後_異動年月日(null);
+                entity.set喪失情報_後_届出年月日(null);
+                entity.set区分_前_資格(null);
+                entity.set区分_後_資格(null);
+                entity.set異動情報データ2(null);
+                entity.set異動情報データ3(null);
+                entity.set異動情報データ5(null);
+                entity.set異動情報データ6(null);
                 // TODO 技術点を提出しました
                 if (taJushochiTokureiShayouhouentity.getIdoJiyuCode() != null
                         && Arrays.asList(CODE_SHUBETSU_0009).contains(
@@ -518,10 +513,10 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         entity.set取得情報_後_異動年月日(taJushochiTokureiShayouhouentity.getTekiyoYMD());
         entity.set取得情報_後_届出年月日(taJushochiTokureiShayouhouentity.getTekiyoTodokedeYMD());
         entity.set開始年月日データ_後(taJushochiTokureiShayouhouentity.getNyushoYMD());
-        entity.set喪失情報_後_事由(RString.EMPTY);
-        entity.set喪失情報_後_異動年月日(FlexibleDate.EMPTY);
-        entity.set喪失情報_後_届出年月日(FlexibleDate.EMPTY);
-        entity.set終了年月日データ_後(FlexibleDate.EMPTY);
+        entity.set喪失情報_後_事由(null);
+        entity.set喪失情報_後_異動年月日(null);
+        entity.set喪失情報_後_届出年月日(null);
+        entity.set終了年月日データ_後(null);
         entity.set異動情報データ4(new RString("適用異動"));
     }
 
@@ -533,14 +528,14 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
      */
     private void set入所異動情報(JyukiRendoJouhouEntity entity,
             TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhouentity) {
-        entity.set取得情報_後_事由(RString.EMPTY);
-        entity.set取得情報_後_異動年月日(FlexibleDate.EMPTY);
-        entity.set取得情報_後_届出年月日(FlexibleDate.EMPTY);
+        entity.set取得情報_後_事由(null);
+        entity.set取得情報_後_異動年月日(null);
+        entity.set取得情報_後_届出年月日(null);
         entity.set開始年月日データ_後(taJushochiTokureiShayouhouentity.getNyushoYMD());
-        entity.set喪失情報_後_事由(RString.EMPTY);
-        entity.set喪失情報_後_異動年月日(FlexibleDate.EMPTY);
-        entity.set喪失情報_後_届出年月日(FlexibleDate.EMPTY);
-        entity.set終了年月日データ_後(FlexibleDate.EMPTY);
+        entity.set喪失情報_後_事由(null);
+        entity.set喪失情報_後_異動年月日(null);
+        entity.set喪失情報_後_届出年月日(null);
+        entity.set終了年月日データ_後(null);
         entity.set異動情報データ4(new RString("入所異動"));
     }
 
@@ -552,13 +547,13 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
      */
     private void set退所異動情報(JyukiRendoJouhouEntity entity,
             TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhouentity) {
-        entity.set取得情報_後_事由(RString.EMPTY);
-        entity.set取得情報_後_異動年月日(FlexibleDate.EMPTY);
-        entity.set取得情報_後_届出年月日(FlexibleDate.EMPTY);
+        entity.set取得情報_後_事由(null);
+        entity.set取得情報_後_異動年月日(null);
+        entity.set取得情報_後_届出年月日(null);
         entity.set開始年月日データ_後(taJushochiTokureiShayouhouentity.getNyushoYMD());
-        entity.set喪失情報_後_事由(RString.EMPTY);
-        entity.set喪失情報_後_異動年月日(FlexibleDate.EMPTY);
-        entity.set喪失情報_後_届出年月日(FlexibleDate.EMPTY);
+        entity.set喪失情報_後_事由(null);
+        entity.set喪失情報_後_異動年月日(null);
+        entity.set喪失情報_後_届出年月日(null);
         entity.set終了年月日データ_後(taJushochiTokureiShayouhouentity.getTaishoYMD());
         entity.set異動情報データ4(new RString("退所異動"));
     }
@@ -571,10 +566,10 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
      */
     private void set解除異動情報(JyukiRendoJouhouEntity entity,
             TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhouentity) {
-        entity.set取得情報_後_事由(RString.EMPTY);
-        entity.set取得情報_後_異動年月日(FlexibleDate.EMPTY);
-        entity.set取得情報_後_届出年月日(FlexibleDate.EMPTY);
-        entity.set開始年月日データ_後(FlexibleDate.EMPTY);
+        entity.set取得情報_後_事由(null);
+        entity.set取得情報_後_異動年月日(null);
+        entity.set取得情報_後_届出年月日(null);
+        entity.set開始年月日データ_後(null);
         entity.set喪失情報_後_事由(taJushochiTokureiShayouhouentity.getIdoJiyuCode());
         entity.set喪失情報_後_異動年月日(taJushochiTokureiShayouhouentity.getKaijoYMD());
         entity.set喪失情報_後_届出年月日(taJushochiTokureiShayouhouentity.getKaijoTodokedeYMD());
@@ -594,10 +589,10 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         entity.set取得情報_前_異動年月日(taJushochiTokureiShayouhouentity.getTekiyoYMD());
         entity.set取得情報_前_届出年月日(taJushochiTokureiShayouhouentity.getTekiyoTodokedeYMD());
         entity.set開始年月日データ_前(taJushochiTokureiShayouhouentity.getNyushoYMD());
-        entity.set喪失情報_前_事由(RString.EMPTY);
-        entity.set喪失情報_前_異動年月日(FlexibleDate.EMPTY);
-        entity.set喪失情報_前_届出年月日(FlexibleDate.EMPTY);
-        entity.set終了年月日データ_前(FlexibleDate.EMPTY);
+        entity.set喪失情報_前_事由(null);
+        entity.set喪失情報_前_異動年月日(null);
+        entity.set喪失情報_前_届出年月日(null);
+        entity.set終了年月日データ_前(null);
         entity.set異動情報データ4(new RString("適用削除"));
     }
 
@@ -609,10 +604,10 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
      */
     private void set解除削除情報(JyukiRendoJouhouEntity entity,
             TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhouentity) {
-        entity.set取得情報_前_事由(RString.EMPTY);
-        entity.set取得情報_前_異動年月日(FlexibleDate.EMPTY);
-        entity.set取得情報_前_届出年月日(FlexibleDate.EMPTY);
-        entity.set開始年月日データ_前(FlexibleDate.EMPTY);
+        entity.set取得情報_前_事由(null);
+        entity.set取得情報_前_異動年月日(null);
+        entity.set取得情報_前_届出年月日(null);
+        entity.set開始年月日データ_前(null);
         entity.set喪失情報_前_事由(taJushochiTokureiShayouhouentity.getIdoJiyuCode());
         entity.set喪失情報_前_異動年月日(taJushochiTokureiShayouhouentity.getKaijoYMD());
         entity.set喪失情報_前_届出年月日(taJushochiTokureiShayouhouentity.getKaijoTodokedeYMD());
@@ -622,56 +617,56 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
     }
 
     /**
-     * １件データ住基連動情報を取得します
+     * １件データ住基連動情報を追加します
      *
      * @param entity 住基連動情報Entity
      */
     private void set住基連動情報(JyukiRendoJouhouEntity entity) {
-        entity.set世帯コード(SetaiCode.EMPTY);
-        entity.set被保険者カナ氏名(AtenaKanaMeisho.EMPTY);
-        entity.set被保険者氏名(AtenaMeisho.EMPTY);
-        entity.set改頁１(RString.EMPTY);
-        entity.set改頁２(RString.EMPTY);
-        entity.set改頁３(RString.EMPTY);
-        entity.set改頁４(RString.EMPTY);
-        entity.set改頁５(RString.EMPTY);
+        entity.set世帯コード(null);
+        entity.set被保険者カナ氏名(null);
+        entity.set被保険者氏名(null);
+        entity.set改頁１(null);
+        entity.set改頁２(null);
+        entity.set改頁３(null);
+        entity.set改頁４(null);
+        entity.set改頁５(null);
         entity.set開始タイトル(new RString("適用情報"));
         entity.set終了タイトル(new RString("解除情報"));
-        entity.set区分タイトル(RString.EMPTY);
+        entity.set区分タイトル(null);
         entity.set異動情報タイトル1(new RString("施設コード"));
-        entity.set異動情報タイトル2(RString.EMPTY);
-        entity.set異動情報タイトル3(RString.EMPTY);
+        entity.set異動情報タイトル2(null);
+        entity.set異動情報タイトル3(null);
         entity.set開始年月日タイトル(new RString("入所年月日"));
         entity.set終了年月日タイトル(new RString("退所年月日"));
         entity.set異動情報タイトル4(new RString("異動情報"));
-        entity.set異動情報タイトル5(RString.EMPTY);
-        entity.set異動情報タイトル6(RString.EMPTY);
-        entity.set開始年月日データ_前(FlexibleDate.EMPTY);
-        entity.set終了年月日データ_前(FlexibleDate.EMPTY);
-        entity.set開始年月日データ_後(FlexibleDate.EMPTY);
-        entity.set終了年月日データ_後(FlexibleDate.EMPTY);
-        entity.set異動情報データ1(RString.EMPTY);
-        entity.set異動情報データ2(RString.EMPTY);
-        entity.set異動情報データ3(RString.EMPTY);
-        entity.set異動情報データ4(RString.EMPTY);
-        entity.set異動情報データ5(RString.EMPTY);
-        entity.set異動情報データ6(RString.EMPTY);
-        entity.set被保険者番号(HihokenshaNo.EMPTY);
-        entity.set識別コード(ShikibetsuCode.EMPTY);
-        entity.set取得情報_前_事由(RString.EMPTY);
-        entity.set取得情報_前_異動年月日(FlexibleDate.EMPTY);
-        entity.set取得情報_前_届出年月日(FlexibleDate.EMPTY);
-        entity.set喪失情報_前_事由(RString.EMPTY);
-        entity.set喪失情報_前_異動年月日(FlexibleDate.EMPTY);
-        entity.set喪失情報_前_届出年月日(FlexibleDate.EMPTY);
-        entity.set取得情報_後_事由(RString.EMPTY);
-        entity.set取得情報_後_異動年月日(FlexibleDate.EMPTY);
-        entity.set取得情報_後_届出年月日(FlexibleDate.EMPTY);
-        entity.set喪失情報_後_事由(RString.EMPTY);
-        entity.set喪失情報_後_異動年月日(FlexibleDate.EMPTY);
-        entity.set喪失情報_後_届出年月日(FlexibleDate.EMPTY);
-        entity.set区分_前_資格(RString.EMPTY);
-        entity.set区分_後_資格(RString.EMPTY);
+        entity.set異動情報タイトル5(null);
+        entity.set異動情報タイトル6(null);
+        entity.set開始年月日データ_前(null);
+        entity.set終了年月日データ_前(null);
+        entity.set開始年月日データ_後(null);
+        entity.set終了年月日データ_後(null);
+        entity.set異動情報データ1(null);
+        entity.set異動情報データ2(null);
+        entity.set異動情報データ3(null);
+        entity.set異動情報データ4(null);
+        entity.set異動情報データ5(null);
+        entity.set異動情報データ6(null);
+        entity.set被保険者番号(null);
+        entity.set識別コード(null);
+        entity.set取得情報_前_事由(null);
+        entity.set取得情報_前_異動年月日(null);
+        entity.set取得情報_前_届出年月日(null);
+        entity.set喪失情報_前_事由(null);
+        entity.set喪失情報_前_異動年月日(null);
+        entity.set喪失情報_前_届出年月日(null);
+        entity.set取得情報_後_事由(null);
+        entity.set取得情報_後_異動年月日(null);
+        entity.set取得情報_後_届出年月日(null);
+        entity.set喪失情報_後_事由(null);
+        entity.set喪失情報_後_異動年月日(null);
+        entity.set喪失情報_後_届出年月日(null);
+        entity.set区分_前_資格(null);
+        entity.set区分_後_資格(null);
     }
 
 }

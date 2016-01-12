@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.IShujiiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -36,14 +34,14 @@ public interface IShujiiJoho {
      *
      * @return 主治医医療機関コード
      */
-    ShujiiIryokikanCode get主治医医療機関コード();
+    RString get主治医医療機関コード();
 
     /**
      * 主治医コードを返します。
      *
      * @return 主治医コード
      */
-    ShujiiCode get主治医コード();
+    RString get主治医コード();
 
     /**
      * 主治医氏名を返します。
@@ -150,7 +148,7 @@ public interface IShujiiJoho {
          * @param shujiiIryokikanCode 主治医医療機関コード
          * @return builder
          */
-        public Builder setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
+        public Builder setShujiiIryokikanCode(RString shujiiIryokikanCode) {
             return this;
         }
 
@@ -160,7 +158,7 @@ public interface IShujiiJoho {
          * @param shujiiCode 主治医コード
          * @return builder
          */
-        public Builder setShujiiCode(ShujiiCode shujiiCode) {
+        public Builder setShujiiCode(RString shujiiCode) {
             return this;
         }
 
