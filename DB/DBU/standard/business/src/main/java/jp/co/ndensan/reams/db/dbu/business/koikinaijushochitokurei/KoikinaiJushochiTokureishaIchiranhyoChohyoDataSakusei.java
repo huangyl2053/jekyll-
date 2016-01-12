@@ -32,7 +32,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
+public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
     
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
@@ -77,11 +77,15 @@ public class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
     private RString 広住喪失届出日;
     private RString 措置市町村コード;
     private RString 措置市町村名称;
+    
+    private KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei() {
+    
+    }
 
     
     /**
      * 帳票データ作成します。
-     * @param entity
+     * @param entity 広域内住所地特例者一覧表情報Entity
      * @return 帳票用データ
      */
     public static List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> createReportDate(KoikinaiJushochiTokureiItiranEntity entity) {

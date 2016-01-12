@@ -19,7 +19,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class KoikinaiJushochiTokureiProcessParamter implements IBatchProcessParameter{
+public class KoikinaiJushochiTokureiProcessParamter implements IBatchProcessParameter {
     
     private final RString model;
     private final RString shichosonCode;

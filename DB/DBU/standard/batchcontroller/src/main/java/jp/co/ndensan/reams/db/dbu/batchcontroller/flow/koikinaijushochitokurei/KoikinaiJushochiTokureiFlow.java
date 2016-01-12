@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * 広域内住所地特例者一覧表_処理クラスです。
  */
-public class KoikinaiJushochiTokureiFlow extends BatchFlowBase<KoikinaiJushochiTokureiBatchParamter>{
+public class KoikinaiJushochiTokureiFlow extends BatchFlowBase<KoikinaiJushochiTokureiBatchParamter> {
     
     @Override
     protected void defineFlow() {
@@ -25,6 +25,10 @@ public class KoikinaiJushochiTokureiFlow extends BatchFlowBase<KoikinaiJushochiT
     
     private static final String REPORT_PROCESS = "reportProcess";
     
+    /**
+     * 広域内住所地特例者情報を取得します。
+     * @return 広域内住所地特例者情報の設定クラス
+     */
     @Step(REPORT_PROCESS)
     protected IBatchFlowCommand reportProcess() {
         return simpleBatch(KoikinaiJushochiTokureiProcess.class).

@@ -13,21 +13,15 @@ import lombok.Getter;
  *
  * 広域内住所地特例者一覧表の広域特解除情報を取得処理のMyBatisパラメータクラスです。
  */
-@Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KoikinaiKaijoParamter {
+@Getter
+public final class KoikinaiKaijoParamter {
     
     private final RString hihokenshaNo;
     private final RString idoYMD;
     private final RString shikakuShutokuYMD;
     
-    /**
-     * コンストラクタです。
-     * @param hihokenshaNo 被保険者番号
-     * @param idoYMD 異動日
-     * @param shikakuShutokuYMD 資格取得年月日
-     */
-    public KoikinaiKaijoParamter(RString hihokenshaNo,
+    private KoikinaiKaijoParamter(RString hihokenshaNo,
             RString idoYMD,
             RString shikakuShutokuYMD) {
         this.hihokenshaNo = hihokenshaNo;

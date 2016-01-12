@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbu.definition.koikinaijushochitokurei.KoikinaiJus
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.koikinaijushochitokurei.KoikinaiKaijoParamter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.koikinaijushochitokurei.KoikinaiJushochiTokureiProcessParamter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.koikinaijushochitokurei.KoikinaiJushochiTokureiRelateEntity;
-import jp.co.ndensan.reams.db.dbu.persistence.mapper.relate.koikinaijushochitokurei.IKoikinaiJushochiTokureiMapper;
+import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.koikinaijushochitokurei.IKoikinaiJushochiTokureiMapper;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
@@ -38,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 広域内住所地特例者情報の設定クラスです。
  */
-public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase{
+public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
     
     private static final RString 直近 = new RString("1");
     private static final RString 基準日 = new RString("2");
@@ -166,9 +166,9 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase{
             if (基準日.equals(hanteiFlag) || 範囲.equals(hanteiFlag)) {
                 set広住喪失日(entity, 広域内住所地特例者Entity);
             }
-            広域内住所地特例者Entity.set措置市町村コード(entity.getKoikinaiTokureiSochimotoShichosonCode().getColumnValue());
+            広域内住所地特例者Entity.set措置市町村コード(entity.getSochimotoShichosonCode().getColumnValue());
             List<ShichosonCodeYoriShichoson> 市町村情報 = KoikiShichosonJohoFinder.createInstance().shichosonCodeYoriShichosonJoho(entity
-                    .getKoikinaiTokureiSochimotoShichosonCode()).records();
+                    .getSochimotoShichosonCode()).records();
             広域内住所地特例者Entity.set措置市町村名称(市町村情報.isEmpty() ? RString.EMPTY : 市町村情報.get(0).get市町村名称());
             広域内住所地特例者Entity.set住民種別コード(ShikibetsuTaishoFactory
                     .createKojin(entity.getFt200Entity()).get住民種別().getCode());

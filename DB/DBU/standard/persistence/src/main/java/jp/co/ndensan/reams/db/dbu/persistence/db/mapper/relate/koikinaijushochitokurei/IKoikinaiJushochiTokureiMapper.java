@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package jp.co.ndensan.reams.db.dbu.persistence.mapper.relate.koikinaijushochitokurei;
+package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.koikinaijushochitokurei;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.koikinaijushochitokurei.KoikinaiJushochiTokureiMybatisparamter;

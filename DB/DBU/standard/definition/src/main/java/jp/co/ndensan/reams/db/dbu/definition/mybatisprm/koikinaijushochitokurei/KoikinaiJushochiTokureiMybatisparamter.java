@@ -16,7 +16,7 @@ import lombok.Getter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class KoikinaiJushochiTokureiMybatisparamter implements IMyBatisParameter{
+public final class KoikinaiJushochiTokureiMybatisparamter implements IMyBatisParameter {
     
     private static final RString 市町村DDL1件目コード = new RString("000000");
     private final RString shichosonCode;
@@ -26,17 +26,7 @@ public class KoikinaiJushochiTokureiMybatisparamter implements IMyBatisParameter
     private final RString psmShikibetsuTaisho;
     private final boolean isEmptyShichosonCode;
     
-    /**
-     * コンストラクタ
-     *
-     * @param shichosonCode 市町村コード
-     * @param idoYMD 基準日
-     * @param kaishibi 今回開始日
-     * @param shuryobi 今回終了日
-     * @param psmShikibetsuTaisho 宛名識別対象PSM
-     * @param isEmptyShichosonCode 市町村コードFlag
-     */
-    public KoikinaiJushochiTokureiMybatisparamter(RString shichosonCode,
+    private KoikinaiJushochiTokureiMybatisparamter(RString shichosonCode,
             RString idoYMD,
             RString kaishibi,
             RString shuryobi,
@@ -50,6 +40,15 @@ public class KoikinaiJushochiTokureiMybatisparamter implements IMyBatisParameter
         this.isEmptyShichosonCode = isEmptyShichosonCode;
     }
     
+    /**
+     * 広域内住所地特例者一覧表のMyBatisパラメータのcreateします。
+     * @param shichosonCode 市町村コード
+     * @param idoYMD 基準日
+     * @param kaishibi 今回開始日
+     * @param shuryob 今回終了日
+     * @param psmShikibetsuTaisho 宛名識別対象PSM
+     * @return 広域内住所地特例者一覧表のMyBatisパラメータ
+     */
     public static KoikinaiJushochiTokureiMybatisparamter createParamter(RString shichosonCode,
             RString idoYMD,
             RString kaishibi,

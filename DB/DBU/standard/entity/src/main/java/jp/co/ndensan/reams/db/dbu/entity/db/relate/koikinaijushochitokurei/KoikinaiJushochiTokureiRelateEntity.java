@@ -45,13 +45,13 @@ public class KoikinaiJushochiTokureiRelateEntity {
     private FlexibleDate shikakuHenkoTodokedeYMD;
     private RString jushochitokureiTekiyoJiyuCode;
     private FlexibleDate jushochitokureiTekiyoYMD;
-    private FlexibleDate jushochitokureiTekiyoTodokedeYMD;
+    private FlexibleDate tekiyoTodokedeYMD;
     private RString jushochitokureiKaijoJiyuCode;
     private FlexibleDate jushochitokureiKaijoYMD;
-    private FlexibleDate jushochitokureiKaijoTodokedeYMD;
+    private FlexibleDate kaijoTodokedeYMD;
     private RString jushochiTokureiFlag;
     private RString koikinaiJushochiTokureiFlag;
-    private LasdecCode koikinaiTokureiSochimotoShichosonCode;
+    private LasdecCode sochimotoShichosonCode;
     private LasdecCode kyuShichosonCode;
     private boolean logicalDeletedFlag;
     private UaFt200FindShikibetsuTaishoEntity ft200Entity;
