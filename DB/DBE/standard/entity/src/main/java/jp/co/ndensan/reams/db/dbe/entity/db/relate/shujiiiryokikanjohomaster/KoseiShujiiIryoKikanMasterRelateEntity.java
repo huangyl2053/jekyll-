@@ -5,14 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiiryokikanjohomaster;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  * 主治医医療機関情報検索用RelateEntityクラスです。
@@ -23,10 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 @lombok.Setter
 public class KoseiShujiiIryoKikanMasterRelateEntity {
 
-    @PrimaryKey
     private LasdecCode shichosonCode;
-    @PrimaryKey
-    private ShujiiIryokikanCode shujiiIryokikanCode;
+    private RString shujiiIryokikanCode;
     private IryoKikanCode iryokikanCode;
     private RString iryoKikanMeisho;
     private RString iryoKikanMeishoKana;
