@@ -71,9 +71,9 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final int NENREI_TOUTATSU = 65;
 
-//    @BatchWriter
-//    private BatchReportWriter<NenreiToutatsuYoteishaCheckListChohyoDataEntity> batchReportWriter;
     @BatchWriter
+//    private BatchReportWriter<NenreitotatsuYoteishaIchiranhyoReportSource> batchReportWriter;
+//    private ReportSourceWriter<NenreitotatsuYoteishaIchiranhyoReportSource> reportSourceWriter;
     private EucCsvWriter<NenreiToutatsuYoteishaCheckListEucCsvEntity> eucCsvWriter;
 
     @Override
@@ -170,7 +170,7 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
                             nenreiToutatsuYoteishaCheckListEntity2.get(i).setJyotei(new RString("他市町村住所地特例者"));
                         }
                     }
-                    // TODO 転入保留対象者リスト取得 QA286
+//                     TODO 転入保留対象者リスト取得 QA286
 //                    getTashichosonJushochi();
 //                    for (DbT1010TennyushutsuHoryuTaishoshaEntity dbT1010entity : dbT1010TennyushutsuHoryuTaishoshaEntity) {
 //                        if (dbT1010entity.getShikibetsuCode().equals(entity.getShikibetsuCode())
@@ -204,18 +204,10 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
     @Override
     protected void process() {
 
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = manager.getEucOutputDirectry();
-        eucFilePath = Path.combinePath(spoolWorkPath, new RString("NenreiToutatsuYoteishaCheckListEucCsvEntity.csv"));
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
-                setDelimiter(EUC_WRITER_DELIMITER).
-                setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.UTF_8).
-                setNewLine(NewLine.CRLF).
-                hasHeader(nenreiToutatsuYoteishaCheckListJyohoEntity.is項目名付加フラグ()).
-                build();
+//        NenreiTotatsuYoteishaCheckListChohyo checkListChohyo = new NenreiTotatsuYoteishaCheckListChohyo();
+//        NenreitotatsuYoteishaIchiranhyoItem item = checkListChohyo.createNenreiToutatsuYoteishaCheckListChohyo(
+//                nenreiToutatsuYoteishaCheckListJyohoEntity);
         NenreiToutatsuYoteishaCheckListCsv checkListCsv = new NenreiToutatsuYoteishaCheckListCsv();
-
         List<NenreiToutatsuYoteishaCheckListEucCsvEntity> eucCsvEntityList;
         if (processParameter.isRenbanfukaflg()) {
             eucCsvEntityList = checkListCsv.createNenreiToutatsuYoteishaCheckListRenbanCSV(
@@ -224,18 +216,35 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
             eucCsvEntityList = checkListCsv.createNenreiToutatsuYoteishaCheckListCSV(
                     nenreiToutatsuYoteishaCheckListJyohoEntity);
         }
+        if (!eucCsvEntityList.isEmpty()) {
+            manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+            RString spoolWorkPath = manager.getEucOutputDirectry();
+            eucFilePath = Path.combinePath(spoolWorkPath, new RString("NenreiToutatsuYoteishaCheckListEucCsvEntity.csv"));
+            eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+                    setDelimiter(EUC_WRITER_DELIMITER).
+                    setEnclosure(EUC_WRITER_ENCLOSURE).
+                    setEncode(Encode.UTF_8).
+                    setNewLine(NewLine.CRLF).
+                    hasHeader(nenreiToutatsuYoteishaCheckListJyohoEntity.is項目名付加フラグ()).
+                    build();
 
-        for (NenreiToutatsuYoteishaCheckListEucCsvEntity eucCsvEntity : eucCsvEntityList) {
-            eucCsvWriter.writeLine(eucCsvEntity);
+            for (NenreiToutatsuYoteishaCheckListEucCsvEntity eucCsvEntity : eucCsvEntityList) {
+                eucCsvWriter.writeLine(eucCsvEntity);
+            }
         }
 
+        // TODO 南京開発
+//        ReportId ID = new ReportId("DBA200001");
+//        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value()).create();
+//        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+//        NenreitotatsuYoteishaIchiranhyoReport report = NenreitotatsuYoteishaIchiranhyoReport
+//                .createFrom(item.getHeadItem(), item.getBodyItem());
+//        report.writeBy(reportSourceWriter);
         DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanri = new DbT7022ShoriDateKanriEntity();
         dbT7022ShoriDateKanri.setTaishoKaishiYMD(processParameter.getKonkaikaishi());
         dbT7022ShoriDateKanri.setTaishoShuryoYMD(processParameter.getKonkaisyuryo());
         dbT7022ShoriDateKanri.setShoriName(ShoriName.年齢到達予定者チェックリスト.get名称());
         nenreiToutatsuYoteishaCheckListMapper.getInsert(dbT7022ShoriDateKanri);
-
-        // TODO QA323帳票
     }
 
     @Override
