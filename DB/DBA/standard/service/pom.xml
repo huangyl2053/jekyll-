@@ -54,24 +54,20 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzPersistence</artifactId>
-            <version>1.4.2</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxPersistence</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdPersistence</artifactId>
-            <version>1.4.2</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxService</artifactId>
-            <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -80,15 +76,13 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
-            <artifactId>UaxPersistence</artifactId>
-            <version>1.1.2</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>
-            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxPersistence</artifactId>
+            <version>1.2.0</version>
         </dependency>
     </dependencies>
 </project>
