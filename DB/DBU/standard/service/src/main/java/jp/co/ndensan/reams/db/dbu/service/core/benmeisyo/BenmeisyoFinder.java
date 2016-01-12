@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbu.service.core.benmeisyo;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.core.benmeisyo.BenmeiAtenaParameter;
 import jp.co.ndensan.reams.db.dbu.definition.core.benmeisyo.BenmeisyoMapperParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.BenmeiJohoEntity;
@@ -16,9 +18,16 @@ import jp.co.ndensan.reams.db.dbu.persistence.benmeisyo.BenmeisyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.ShobunShuruiCode;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
@@ -195,7 +204,8 @@ public class BenmeisyoFinder {
 
     private HihokenshaDateEntity getHihokenshaDate(ShikibetsuCode 識別コード) {
         BenmeisyoMapper benmeisyoMapper = mapperProvider.create(BenmeisyoMapper.class);
-        UaFt200FindShikibetsuTaishoEntity 宛名情報 = benmeisyoMapper.selectAtena(BenmeiAtenaParameter.createSelectByKeyParam(識別コード));
+        UaFt200FindShikibetsuTaishoEntity 宛名情報 = benmeisyoMapper.selectAtena(BenmeiAtenaParameter.
+                createSelectByKeyParam(識別コード, this.getPsm()));
         HihokenshaDateEntity hihokenEntity = new HihokenshaDateEntity();
         hihokenEntity.set氏名(ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報).get名称());
         hihokenEntity.set郵便番号(ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報).get住所().get郵便番号());
@@ -210,6 +220,27 @@ public class BenmeisyoFinder {
                 fillType(FillType.BLANK).toDateString());
         hihokenEntity.set性別(ShikibetsuTaishoFactory.createKojin(宛名情報).to個人().get性別().getName());
         return hihokenEntity;
+    }
+
+    private RString getPsm() {
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        List<JuminShubetsu> juminShubetsuList = new ArrayList<>();
+        key.setデータ取得区分(DataShutokuKubun.直近レコード);
+        juminShubetsuList.add(JuminShubetsu.日本人);
+        juminShubetsuList.add(JuminShubetsu.外国人);
+        juminShubetsuList.add(JuminShubetsu.住登外個人_日本人);
+        juminShubetsuList.add(JuminShubetsu.住登外個人_外国人);
+        key.set住民種別(juminShubetsuList);
+        List<JuminJotai> juminJotaiList = new ArrayList<>();
+        juminJotaiList.add(JuminJotai.住民);
+        juminJotaiList.add(JuminJotai.住登外);
+        juminJotaiList.add(JuminJotai.消除者);
+        juminJotaiList.add(JuminJotai.転出者);
+        juminJotaiList.add(JuminJotai.死亡者);
+        key.set住民状態(juminJotaiList);
+        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+        return new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
     }
 
     private NinshoshaDenshiKoinDataEntity getNinshoshaDenshiKoinData(BenmeiJohoEntity entity) {
