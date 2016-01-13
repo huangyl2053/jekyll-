@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
+import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.dac._ReportDACUtility;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
@@ -288,5 +290,28 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                                 eq(shikakuShutokuYMD, 取得日),
                                 eq(logicalDeletedFlag, false))).
                 toList(DbT1001HihokenshaDaichoEntity.class);
+    }
+    
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity select被保険者台帳管理By論理削除フラグAnd識別コード(
+            boolean 論理削除フラグ,
+            RString 識別コード) throws NullPointerException {
+        
+        requireNonNull(論理削除フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("論理削除フラグ"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        List<OrderBy> orderBy = new ArrayList<>();
+        orderBy.add(new OrderBy(DbT1001HihokenshaDaicho.idoYMD, Order.DESC, NullsOrder.LAST));
+        orderBy.add(new OrderBy(DbT1001HihokenshaDaicho.edaNo, Order.DESC, NullsOrder.LAST));
+
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                            eq(logicalDeletedFlag, 論理削除フラグ),
+                            eq(shikibetsuCode, 識別コード))).
+                order(_ReportDACUtility.toOrderBysArray(orderBy)).
+                limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
     }
 }

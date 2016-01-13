@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class KoseiShujiiIryoKikanMasterCsvManager {
 
+    private static final int CSV_TYPE = 1024;
+
     /**
      * コンストラクタです。
      */
@@ -43,11 +45,11 @@ public class KoseiShujiiIryoKikanMasterCsvManager {
      * @param csvBusinessList CSV情報リスト
      */
     @Transaction
-    public void CSVOutput(List<KoseiShujiiIryoKikanMasterCSV> csvBusinessList) {
+    public void getCSVoutput(List<KoseiShujiiIryoKikanMasterCSV> csvBusinessList) {
         RString spoolWorkPath = Path.getTmpDirectoryPath();
         RString filePath = Path.combinePath(spoolWorkPath, new RString("主治医医療機関情報.csv"));
         if (!File.exists(filePath)) {
-            File.createFile(filePath, new byte[1024]);
+            File.createFile(filePath, new byte[CSV_TYPE]);
         }
         try (CsvWriter writer = new CsvWriter.InstanceBuilder(filePath)
                 .setEnclosure(new RString("\""))

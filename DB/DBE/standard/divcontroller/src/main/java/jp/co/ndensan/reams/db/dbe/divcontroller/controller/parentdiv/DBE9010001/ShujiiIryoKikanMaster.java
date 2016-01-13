@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.controller.DBE9010001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE9010001;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,11 +90,11 @@ public class ShujiiIryoKikanMaster {
     }
 
     private void searchKoseiShujiiIryoKikanInfo(ShujiiIryoKikanMasterDiv div) {
-        boolean JokyoFlag = false;
+        boolean jokyoFlag = false;
         if (div.getRadSearchJokyoFlag().getSelectedIndex() == 0) {
-            JokyoFlag = true;
+            jokyoFlag = true;
         }
-        KoseiShujiiIryoKikanMasterMapperParameter parameter = KoseiShujiiIryoKikanMasterMapperParameter.createParam_SelectShujiiIryoKikanJohoList(JokyoFlag,
+        KoseiShujiiIryoKikanMasterMapperParameter parameter = KoseiShujiiIryoKikanMasterMapperParameter.createParam_SelectShujiiIryoKikanJohoList(jokyoFlag,
                 div.getCcdHokenshaList().getSelectedItem().get市町村コード(),
                 div.getTxtSearchShujiiIryokikanCodeFrom().getValue(),
                 div.getTxtSearchShujiiIryokikanCodeTo().getValue(),
@@ -203,7 +203,7 @@ public class ShujiiIryoKikanMaster {
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
-            KoseiShujiiIryoKikanMasterCsvManager.createInstance().CSVOutput(getCsvData(div));
+            KoseiShujiiIryoKikanMasterCsvManager.createInstance().getCSVoutput(getCsvData(div));
             return ResponseData.of(div).addMessage(
                     UrInformationMessages.正常終了.getMessage().replace("CSV出力")).respond();
         }

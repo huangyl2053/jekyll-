@@ -1,13 +1,16 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * DbT7005RojinHokenJukyushaJohoの項目定義クラスです
  *
  */
+@OnNextSchema("rgdb")
 public enum DbT7005RojinHokenJukyushaJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     /**
      * insertDantaiCd
      */
@@ -71,7 +74,7 @@ public enum DbT7005RojinHokenJukyushaJoho implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -80,7 +83,7 @@ public enum DbT7005RojinHokenJukyushaJoho implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {
