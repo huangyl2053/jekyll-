@@ -62,7 +62,6 @@
          "DbT5302ShujiiIkenshoJoho"."fuanteiJokyo" as "dbT5302ShujiiIkenshoJoho_fuanteiJokyo",
          "DbT5302ShujiiIkenshoJoho"."chiryoNaiyo" as "dbT5302ShujiiIkenshoJoho_chiryoNaiyo",
          "DbT5302ShujiiIkenshoJoho"."tokkiJiko" as "dbT5302ShujiiIkenshoJoho_tokkiJiko",
-         "DbT5302ShujiiIkenshoJoho"."tokkiJikoImageSharedFileId" as "dbT5302ShujiiIkenshoJoho_tokkiJikoImageSharedFileId",
          "DbT5302ShujiiIkenshoJoho"."nijiHanteiKekkaRenrakuFlag" as "dbT5302ShujiiIkenshoJoho_nijiHanteiKekkaRenrakuFlag",
          "DbT5302ShujiiIkenshoJoho"."ikenshoMemo" as "dbT5302ShujiiIkenshoJoho_ikenshoMemo"
     </sql>
@@ -115,7 +114,6 @@
         <result property="fuanteiJokyo" column="dbT5302ShujiiIkenshoJoho_fuanteiJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chiryoNaiyo" column="dbT5302ShujiiIkenshoJoho_chiryoNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tokkiJiko" column="dbT5302ShujiiIkenshoJoho_tokkiJiko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="tokkiJikoImageSharedFileId" column="dbT5302ShujiiIkenshoJoho_tokkiJikoImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="nijiHanteiKekkaRenrakuFlag" column="dbT5302ShujiiIkenshoJoho_nijiHanteiKekkaRenrakuFlag" />
         <result property="ikenshoMemo" column="dbT5302ShujiiIkenshoJoho_ikenshoMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>

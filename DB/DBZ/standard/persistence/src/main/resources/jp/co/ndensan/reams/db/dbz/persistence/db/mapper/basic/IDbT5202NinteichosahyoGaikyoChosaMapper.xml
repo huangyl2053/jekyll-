@@ -32,23 +32,17 @@
         "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaIraiKaisu" as "dbT5202NinteichosahyoGaikyoChosa_ninteichosaIraiKaisu",
         "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaJisshiYMD" as "dbT5202NinteichosahyoGaikyoChosa_ninteichosaJisshiYMD",
         "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaJuryoYMD" as "dbT5202NinteichosahyoGaikyoChosa_ninteichosaJuryoYMD",
-        "DbT5202NinteichosahyoGaikyoChosa"."chosaItakuKubunCode" as "dbT5202NinteichosahyoGaikyoChosa_chosaItakuKubunCode",
         "DbT5202NinteichosahyoGaikyoChosa"."ninteiChosaKubunCode" as "dbT5202NinteichosahyoGaikyoChosa_ninteiChosaKubunCode",
         "DbT5202NinteichosahyoGaikyoChosa"."chosaItakusakiCode" as "dbT5202NinteichosahyoGaikyoChosa_chosaItakusakiCode",
         "DbT5202NinteichosahyoGaikyoChosa"."chosainCode" as "dbT5202NinteichosahyoGaikyoChosa_chosainCode",
         "DbT5202NinteichosahyoGaikyoChosa"."chosaJisshiBashoCode" as "dbT5202NinteichosahyoGaikyoChosa_chosaJisshiBashoCode",
         "DbT5202NinteichosahyoGaikyoChosa"."chosaJisshiBashoMeisho" as "dbT5202NinteichosahyoGaikyoChosa_chosaJisshiBashoMeisho",
-        "DbT5202NinteichosahyoGaikyoChosa"."jisshiBashoImageSharedFileId" as "dbT5202NinteichosahyoGaikyoChosa_jisshiBashoImageSharedFileId",
         "DbT5202NinteichosahyoGaikyoChosa"."serviceKubunCode" as "dbT5202NinteichosahyoGaikyoChosa_serviceKubunCode",
         "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuShimei" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuShimei",
         "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuJusho" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuJusho",
         "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuTelNo" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuTelNo",
         "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuYubinNo" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuYubinNo",
-        "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuNameImageSharedFileId" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuNameImageSharedFileId",
-        "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuJushoImageSharedFileId" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuJushoImageSharedFileId",
-        "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuTelNoImageSharedFileId" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuTelNoImageSharedFileId",
         "DbT5202NinteichosahyoGaikyoChosa"."tokki" as "dbT5202NinteichosahyoGaikyoChosa_tokki",
-        "DbT5202NinteichosahyoGaikyoChosa"."tokkiImageSharedFileId" as "dbT5202NinteichosahyoGaikyoChosa_tokkiImageSharedFileId",
         "DbT5202NinteichosahyoGaikyoChosa"."tokkijikoUketsukeYMD" as "dbT5202NinteichosahyoGaikyoChosa_tokkijikoUketsukeYMD",
         "DbT5202NinteichosahyoGaikyoChosa"."tokkijikoJuryoYMD" as "dbT5202NinteichosahyoGaikyoChosa_tokkijikoJuryoYMD"
     </sql>
@@ -71,23 +65,17 @@
         <result property="ninteichosaIraiKaisu" column="dbT5202NinteichosahyoGaikyoChosa_ninteichosaIraiKaisu" />
         <result property="ninteichosaJisshiYMD" column="dbT5202NinteichosahyoGaikyoChosa_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ninteichosaJuryoYMD" column="dbT5202NinteichosahyoGaikyoChosa_ninteichosaJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="chosaItakuKubunCode" column="dbT5202NinteichosahyoGaikyoChosa_chosaItakuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ninteiChosaKubunCode" column="dbT5202NinteichosahyoGaikyoChosa_ninteiChosaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <!-- <result property="chosaItakusakiCode" column="dbT5202NinteichosahyoGaikyoChosa_chosaItakusakiCode" />-->
         <result property="chosainCode" column="dbT5202NinteichosahyoGaikyoChosa_chosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chosaJisshiBashoCode" column="dbT5202NinteichosahyoGaikyoChosa_chosaJisshiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="chosaJisshiBashoMeisho" column="dbT5202NinteichosahyoGaikyoChosa_chosaJisshiBashoMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="jisshiBashoImageSharedFileId" column="dbT5202NinteichosahyoGaikyoChosa_jisshiBashoImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="serviceKubunCode" column="dbT5202NinteichosahyoGaikyoChosa_serviceKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="riyoShisetsuShimei" column="dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="riyoShisetsuJusho" column="dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
         <result property="riyoShisetsuTelNo" column="dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="riyoShisetsuYubinNo" column="dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
-        <result property="riyoShisetsuNameImageSharedFileId" column="dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuNameImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="riyoShisetsuJushoImageSharedFileId" column="dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuJushoImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="riyoShisetsuTelNoImageSharedFileId" column="dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuTelNoImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="tokki" column="dbT5202NinteichosahyoGaikyoChosa_tokki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="tokkiImageSharedFileId" column="dbT5202NinteichosahyoGaikyoChosa_tokkiImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="tokkijikoUketsukeYMD" column="dbT5202NinteichosahyoGaikyoChosa_tokkijikoUketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="tokkijikoJuryoYMD" column="dbT5202NinteichosahyoGaikyoChosa_tokkijikoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
