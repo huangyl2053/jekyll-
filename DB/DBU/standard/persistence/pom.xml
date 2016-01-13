@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-		<!-- DBU -->
+        <!-- DBU -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbuDefinition</artifactId>
@@ -23,19 +23,26 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbuEntity</artifactId>
         </dependency>
-		<!-- DBA -->
-		<!-- DBB -->
-		<!-- DBC -->
-		<!-- DBD -->
-		<!-- DBE -->
-		<!-- DBX -->
-		<!-- DBZ -->
+        <!-- DBA -->
+        <!-- DBB -->
+        <!-- DBC -->
+        <!-- DBD -->
+        <!-- DBE -->
+        <!-- DBX -->
+        <!-- DBZ -->
+        <!-- UAX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxPersistence</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzPersistence</artifactId>
         </dependency>
-		<!-- 公開系 -->
-		<!-- テスト -->
+        <!-- 公開系 -->
+        <!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>

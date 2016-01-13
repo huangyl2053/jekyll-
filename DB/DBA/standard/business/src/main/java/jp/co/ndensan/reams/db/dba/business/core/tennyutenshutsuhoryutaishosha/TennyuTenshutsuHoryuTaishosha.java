@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryutaishosha;
 
-import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TennyuTenshutsuHoryuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -20,124 +19,89 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * 転出転入保留対象者情報の取得します
  */
-public class TennyuTenshutsuHoryuTaishosha {
-
-    private final TennyuTenshutsuHoryuEntity entity;
-
-    /**
-     * 転出転入保留対象者情報の取得のEntity
-     *
-     * @param entity TennyuTenshutsuHoryuEntity
-     */
-    public TennyuTenshutsuHoryuTaishosha(TennyuTenshutsuHoryuEntity entity) {
-        this.entity = entity;
-    }
+public interface TennyuTenshutsuHoryuTaishosha {
 
     /**
      * 識別コードのgetメソッドです。
      *
      * @return 識別コード
      */
-    public ShikibetsuCode getShikibetsuCode() {
-        return entity.getShikibetsuCode();
-    }
+    ShikibetsuCode get識別コード();
 
     /**
      * 被保険者番号のgetメソッドです。
      *
      * @return 被保険者番号
      */
-    public HihokenshaNo getHihokenshaNo() {
-        return entity.getHihokenshaNo();
-    }
+    HihokenshaNo get被保険者番号();
 
     /**
      * 履歴番号のgetメソッドです。
      *
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
-        return entity.getRirekiNo();
-    }
+    Decimal get履歴番号();
 
     /**
      * 市町村コードのgetメソッドです。
      *
      * @return 市町村コード
      */
-    public LasdecCode getShichosonCode() {
-        return entity.getShichosonCode();
-    }
+    LasdecCode get市町村コード();
 
     /**
      * 住民種別コードのgetメソッドです。
      *
      * @return 住民種別コード
      */
-    public RString getJuminShubetsuCode() {
-        return entity.getJuminShubetsuCode();
-    }
+    RString get住民種別コード();
 
     /**
      * 宛名氏名のgetメソッドです。
      *
      * @return 宛名氏名
      */
-    public AtenaMeisho getAtenaShimei() {
-        return entity.getAtenaShimei();
-    }
+    AtenaMeisho get宛名氏名();
 
     /**
      * 宛名カナ氏名のgetメソッドです。
      *
      * @return 宛名カナ氏名
      */
-    public AtenaKanaMeisho getAtenaKanaShimei() {
-        return entity.getAtenaKanaShimei();
-    }
+    AtenaKanaMeisho get宛名カナ氏名();
 
     /**
      * 生年月日のgetメソッドです。
      *
      * @return 生年月日
      */
-    public FlexibleDate getSeinengappiYMD() {
-        return entity.getSeinengappiYMD();
-    }
+    FlexibleDate get生年月日();
 
     /**
      * 性別のgetメソッドです。
      *
      * @return 性別
      */
-    public RString getSeibetsuCode() {
-        return entity.getSeibetsuCode();
-    }
+    RString get性別();
 
     /**
      * 異動事由コードのgetメソッドです。
      *
      * @return 異動事由コード
      */
-    public RString getIdoJiyuCode() {
-        return entity.getIdoJiyuCode();
-    }
+    RString get異動事由コード();
 
     /**
      * 異動年月日のgetメソッドです。
      *
      * @return 登録異動年月日
      */
-    public FlexibleDate getTorokuIdoYMD() {
-        return entity.getTorokuIdoYMD();
-    }
+    FlexibleDate get異動年月日();
 
     /**
      * 転出予定住所のgetメソッドです。
      *
      * @return 転出予定住所
      */
-    public AtenaJusho getTenshutsuYoteiJusho() {
-        return entity.getTenshutsuYoteiJusho();
-    }
+    AtenaJusho get転出予定住所();
 }

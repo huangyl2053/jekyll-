@@ -80,7 +80,8 @@ public final class TekiyoJogaishaMapperParameter {
             FlexibleDate 異動日,
             RString 枝番) {
         return new TekiyoJogaishaMapperParameter(
-                識別コード, 異動日, 枝番, true, true, true, FlexibleDate.MAX, FlexibleDate.MAX, true, true, true, RString.EMPTY);
+                識別コード, 異動日, 枝番, true, true, true,
+                FlexibleDate.MAX, FlexibleDate.MAX, true, true, true, RString.EMPTY);
     }
 
     /**
@@ -92,7 +93,8 @@ public final class TekiyoJogaishaMapperParameter {
     public static TekiyoJogaishaMapperParameter createParam_getMax履歴番号(
             ShikibetsuCode 識別コード) {
         return new TekiyoJogaishaMapperParameter(
-                識別コード, FlexibleDate.MAX, RString.EMPTY, true, true, true, FlexibleDate.MAX, FlexibleDate.MAX, true, true, true, RString.EMPTY);
+                識別コード, FlexibleDate.MAX, RString.EMPTY, true,
+                true, true, FlexibleDate.MAX, FlexibleDate.MAX, true, true, true, RString.EMPTY);
     }
 
     /**
@@ -106,7 +108,8 @@ public final class TekiyoJogaishaMapperParameter {
             ShikibetsuCode 識別コード,
             RString psmShikibetsuTaisho) {
         return new TekiyoJogaishaMapperParameter(
-                識別コード, FlexibleDate.MAX, RString.EMPTY, true, true, true, FlexibleDate.MAX, FlexibleDate.MAX, true, true, true, psmShikibetsuTaisho);
+                識別コード, FlexibleDate.MAX, RString.EMPTY, true,
+                true, true, FlexibleDate.MAX, FlexibleDate.MAX, true, true, true, psmShikibetsuTaisho);
     }
 
     /**
@@ -120,7 +123,8 @@ public final class TekiyoJogaishaMapperParameter {
             ShikibetsuCode 識別コード,
             FlexibleDate 異動日) {
         return new TekiyoJogaishaMapperParameter(
-                識別コード, 異動日, RString.EMPTY, true, true, true, FlexibleDate.MAX, FlexibleDate.MAX, true, true, true, RString.EMPTY);
+                識別コード, 異動日, RString.EMPTY, true, true, true,
+                FlexibleDate.MAX, FlexibleDate.MAX, true, true, true, RString.EMPTY);
     }
 
     /**
@@ -134,7 +138,8 @@ public final class TekiyoJogaishaMapperParameter {
             ShikibetsuCode 識別コード,
             boolean 論理削除フラグ) {
         return new TekiyoJogaishaMapperParameter(
-                識別コード, FlexibleDate.MAX, RString.EMPTY, true, true, true, FlexibleDate.MAX, FlexibleDate.MAX, 論理削除フラグ, true, true, RString.EMPTY);
+                識別コード, FlexibleDate.MAX, RString.EMPTY, true, true, true,
+                FlexibleDate.MAX, FlexibleDate.MAX, 論理削除フラグ, true, true, RString.EMPTY);
     }
 
     /**
@@ -143,16 +148,20 @@ public final class TekiyoJogaishaMapperParameter {
      * @param 識別コード 識別コード
      * @param kaijoYMD FlexibleDate
      * @param tekiyoYMD FlexibleDate
-     * @param 解除日あり boolean
-     * @param 解除日なし boolean
      * @return 適用除外者を特定するためのパラメータ
      */
     public static TekiyoJogaishaMapperParameter createParam_get施設情(
             ShikibetsuCode 識別コード,
             FlexibleDate kaijoYMD,
-            FlexibleDate tekiyoYMD,
-            boolean 解除日あり,
-            boolean 解除日なし) {
-        return new TekiyoJogaishaMapperParameter(識別コード, FlexibleDate.MAX, RString.EMPTY, true, true, true, kaijoYMD, tekiyoYMD, true, 解除日あり, 解除日なし, RString.EMPTY);
+            FlexibleDate tekiyoYMD) {
+        boolean 解除日あり = false;
+        boolean 解除日なし = false;
+        if (kaijoYMD == null || kaijoYMD.isEmpty()) {
+            解除日あり = true;
+        } else {
+            解除日なし = true;
+        }
+        return new TekiyoJogaishaMapperParameter(識別コード, FlexibleDate.MAX,
+                RString.EMPTY, true, true, true, kaijoYMD, tekiyoYMD, true, 解除日あり, 解除日なし, RString.EMPTY);
     }
 }

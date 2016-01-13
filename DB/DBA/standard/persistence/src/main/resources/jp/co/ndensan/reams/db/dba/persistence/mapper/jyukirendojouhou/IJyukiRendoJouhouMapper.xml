@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.mapper.jyukirendojouhou.IJyukiRendoJouhouMapper">
+                   
+    <!--テーブルDbT1001HihokenshaDaichoの項目をDbT1001HihokenshaDaichoEntityの項目にマッピングします。-->
+    <resultMap id="resultMap_getHiHokenshaDaichoList" type="jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity.JyukiRendoJouhouEntity" autoMapping="true">
+    <result property="世帯コード" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler" />
+    <result property="被保険者カナ氏名" column="hihokenshakanamei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+    <result property="被保険者氏名" column="hihokenshamei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+    <result property="対象情報" column="taishojyohou" />
+    <result property="改頁１" column="gaipage_1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="改頁２" column="gaipage_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="改頁３" column="gaipage_3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="改頁４" column="gaipage_4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="改頁５" column="gaipage_5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="対象情報タイトル" column="taishojyohoutayitoru" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="開始タイトル" column="kaishitayitoru" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="終了タイトル" column="shuryotayitoru" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="区分タイトル" column="kubuntayitoru" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="異動情報タイトル1" column="idojyohoutayitoru_1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="異動情報タイトル2" column="idojyohoutayitoru_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="異動情報タイトル3" column="idojyohoutayitoru_3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="開始年月日タイトル" column="kaishiYMDtayitoru" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="終了年月日タイトル" column="shuryoYMDtayitoru" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="異動情報タイトル4" column="idojyohoutayitoru_4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="異動情報タイトル5" column="idojyohoutayitoru_5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="異動情報タイトル6" column="idojyohoutayitoru_6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="開始年月日データ_前" column="kaishiYMDdata_zen" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="終了年月日データ_前" column="shuryoYMDdata_zen" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="開始年月日データ_後" column="kaishiYMDdata_go" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="終了年月日データ_後" column="shuryoYMDdata_go" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="異動情報データ1" column="idojyohoudata_1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="異動情報データ2" column="idojyohoudata_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="異動情報データ3" column="idojyohoudata_3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="異動情報データ4" column="idojyohoudata_4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="異動情報データ5" column="idojyohoudata_5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="異動情報データ6" column="idojyohoudata_6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+    <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+    <result property="取得情報_前_事由" column="shutokujyohou_zen_jiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="取得情報_前_異動年月日" column="shutokujyohou_zen_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="取得情報_前_届出年月日" column="shutokujyohou_zen_todokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="喪失情報_前_事由" column="soshitsujyohou_zen_jiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="喪失情報_前_異動年月日" column="soshitsujyohou_zen_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="喪失情報_前_届出年月日" column="soshitsujyohou_zen_todokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="喪失情報_後_事由" column="soshitsujyohou_go_jiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="喪失情報_後_異動年月日" column="soshitsujyohou_go_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="喪失情報_後_届出年月日" column="soshitsujyohou_go_todokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="取得情報_後_事由" column="shutokujyohou_go_jiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="取得情報_後_異動年月日" column="shutokujyohou_go_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="取得情報_後_届出年月日" column="shutokujyohou_go_todokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="区分_前_資格" column="kubun_zen_shikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="区分_後_資格" column="kubun_go_shikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+      
+    <select id="getHiHokenshaDaichoList" resultMap="resultMap_getHiHokenshaDaichoList" 
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter" 
+            fetchSize="500">
+	SELECT
+            NULL AS "setaiCode"
+            ,NULL AS "hihokenshakanamei"
+            ,NULL AS "hihokenshamei"
+            ,1 AS "taishojyohou"
+            ,NULL AS "gaipage_1"
+            ,NULL AS "gaipage_2"
+            ,NULL AS "gaipage_3"
+            ,NULL AS "gaipage_4"
+            ,NULL AS "gaipage_5"
+            ,'データ種別：被保険者台帳' AS "taishojyohoutayitoru"
+            ,'取得情報' AS "kaishitayitoru"
+            ,'喪失情報' AS "shuryotayitoru"
+            ,'資格' AS "kubuntayitoru"
+            ,NULL AS "idojyohoutayitoru_1"
+            ,NULL AS "idojyohoutayitoru_2"
+            ,NULL AS "idojyohoutayitoru_3"
+            ,NULL AS "kaishiYMDtayitoru"
+            ,NULL AS "shuryoYMDtayitoru"
+            ,'異動情報' AS "idojyohoutayitoru_4"
+            ,NULL AS "idojyohoutayitoru_5"
+            ,NULL AS "idojyohoutayitoru_6"
+            ,NULL AS "kaishiYMDdata_zen"
+            ,NULL AS "shuryoYMDdata_zen"
+            ,NULL AS "kaishiYMDdata_go"
+            ,NULL AS "shuryoYMDdata_go"
+            ,NULL AS "idojyohoudata_1"
+            ,NULL AS "idojyohoudata_2"
+            ,NULL AS "idojyohoudata_3"
+            ,NULL AS "idojyohoudata_5"
+            ,NULL AS "idojyohoudata_6"
+            ,dbT1001."hihokenshaNo" AS "hihokenshaNo"
+            ,dbT1001."shikibetsuCode" AS "shikibetsuCode"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND  dbT1001."idoJiyuCode" IN ('01','03','04','07','08','09','12','18','46','49')
+             THEN
+                 dbT1001."shikakuShutokuJiyuCode"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_zen_jiyu"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND  dbT1001."idoJiyuCode" IN ('01','03','04','07','08','09','12','18','46','49')
+             THEN
+                 dbT1001."shikakuShutokuYMD"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_zen_idoYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND  dbT1001."idoJiyuCode" IN ('01','03','04','07','08','09','12','18','46','49')
+             THEN
+                 dbT1001."shikakuShutokuTodokedeYMD"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_zen_todokedeYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND  dbT1001."idoJiyuCode" IN ('01','03','04','07','08','09','12','18','46','49')
+             THEN
+                 '取得削除'
+             ELSE
+                 NULL
+        END AS "idojyohoudata_4"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND dbT1001."idoJiyuCode" IN ('51','52','53','55','57','58','68','99')
+             THEN
+                 dbT1001."shikakuSoshitsuJiyuCode"
+             ELSE
+                 NULL
+        END AS "soshitsujyohou_zen_jiyu"
+        <!-- TODO QA359 -->
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND dbT1001."idoJiyuCode" IN ('51','52','53','55','57','58','68','99')
+             THEN
+                 dbT1001."shikakuSoshitsuYMD"
+             ELSE
+                 NULL
+        END AS "soshitsujyohou_zen_idoYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND dbT1001."idoJiyuCode" IN ('51','52','53','55','57','58','68','99')
+             THEN
+                 dbT1001."shikakuSoshitsuTodokedeYMD"
+             ELSE
+                 NULL
+        END AS "soshitsujyohou_zen_todokedeYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND dbT1001."idoJiyuCode" IN ('51','52','53','55','57','58','68','99')
+             THEN
+                 '喪失削除'
+             ELSE
+                 NULL
+        END AS "idojyohoudata_4"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND dbT1001."idoJiyuCode" IN ('21','22','11','13','14','15','17','16','41','42','23','24','48')
+             THEN
+                 dbT1001."shikakuHenkoJiyuCode"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_zen_jiyu"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND dbT1001."idoJiyuCode" IN ('21','22','11','13','14','15','17','16','41','42','23','24','48')
+             THEN
+                 dbT1001."shikakuHenkoYMD"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_zen_idoYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND dbT1001."idoJiyuCode" IN ('21','22','11','13','14','15','17','16','41','42','23','24','48')
+             THEN
+                 dbT1001."shikakuHenkoTodokedeYMD"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_zen_todokedeYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND dbT1001."idoJiyuCode" IN ('21','22','11','13','14','15','17','16','41','42','23','24','48')
+             THEN
+                 '変更削除'
+             ELSE
+                 NULL
+        END AS "idojyohoudata_4"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND dbT1001."idoJiyuCode" IN ('05')
+             THEN
+                 dbT1001."jushochitokureiTekiyoJiyuCode"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_zen_jiyu"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND dbT1001."idoJiyuCode" IN ('05')
+             THEN
+                 dbT1001."jushochitokureiTekiyoYMD"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_zen_idoYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND dbT1001."idoJiyuCode" IN ('05')
+             THEN
+                 dbT1001."jushochitokureiTekiyoTodokedeYMD"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_zen_todokedeYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND dbT1001."idoJiyuCode" IN ('05')
+             THEN
+                 '住特適用削除'
+             ELSE
+                 NULL
+        END AS "idojyohoudata_4"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND dbT1001."idoJiyuCode" IN ('71','72')
+             THEN
+                 dbT1001."jushochitokureiKaijoJiyuCode"
+             ELSE
+                 NULL
+        END AS "soshitsujyohou_go_jiyu"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND dbT1001."idoJiyuCode" IN ('71','72')
+             THEN
+                 dbT1001."jushochitokureiKaijoYMD"
+             ELSE
+                 NULL
+        END AS "soshitsujyohou_go_idoYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND dbT1001."idoJiyuCode" IN ('71','72')
+             THEN
+                 dbT1001."jushochitokureiKaijoTodokedeYMD"
+             ELSE
+                 NULL
+        END AS "soshitsujyohou_go_todokedeYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+                 AND dbT1001."idoJiyuCode" IN ('71','72')
+             THEN
+                 '住特解除削除'
+             ELSE
+                 NULL
+        END AS "idojyohoudata_4"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('01','03','04','07','08','09','12','18','46','49')
+             THEN
+                 dbT1001."shikakuShutokuJiyuCode"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_go_jiyu"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('01','03','04','07','08','09','12','18','46','49')
+             THEN
+                 dbT1001."shikakuShutokuYMD"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_go_idoYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('01','03','04','07','08','09','12','18','46','49')
+             THEN
+                 dbT1001."shikakuShutokuTodokedeYMD"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_go_todokedeYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('01','03','04','07','08','09','12','18','46','49')
+             THEN
+                 '取得異動'
+             ELSE
+                 NULL
+        END AS "idojyohoudata_4"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('51','52','53','55','57','58','68','99')
+             THEN
+                 dbT1001."shikakuSoshitsuJiyuCode"
+             ELSE
+                 NULL
+        END AS "soshitsujyohou_go_jiyu"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('51','52','53','55','57','58','68','99')
+             THEN
+                 dbT1001."shikakuSoshitsuYMD"
+             ELSE
+                 NULL
+        END AS "soshitsujyohou_go_idoYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('51','52','53','55','57','58','68','99')
+             THEN
+                 dbT1001."shikakuSoshitsuTodokedeYMD"
+             ELSE
+                 NULL
+        END AS "soshitsujyohou_go_todokedeYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('51','52','53','55','57','58','68','99')
+             THEN
+                 '喪失異動'
+             ELSE
+                 NULL
+        END AS "idojyohoudata_4"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('21','22','11','13','14','15','17','16','41','42','23','24','48')
+             THEN                                    
+                 dbT1001."shikakuHenkoJiyuCode"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_go_jiyu"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('21','22','11','13','14','15','17','16','41','42','23','24','48')
+             THEN                                    
+                 dbT1001."shikakuHenkoYMD"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_go_idoYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('21','22','11','13','14','15','17','16','41','42','23','24','48')
+             THEN                                    
+                 dbT1001."shikakuHenkoTodokedeYMD"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_go_todokedeYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('21','22','11','13','14','15','17','16','41','42','23','24','48')
+             THEN                                    
+                 '変更異動'
+             ELSE
+                 NULL
+        END AS "idojyohoudata_4"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('05')
+             THEN
+                 dbT1001."jushochitokureiTekiyoJiyuCode"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_go_jiyu"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('05')
+             THEN
+                 dbT1001."jushochitokureiTekiyoYMD"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_go_idoYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('05')
+             THEN
+                 dbT1001."jushochitokureiTekiyoTodokedeYMD"
+             ELSE
+                 NULL
+        END AS "shutokujyohou_go_todokedeYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('05')
+             THEN
+                 '住特適用異動'
+             ELSE
+                 NULL
+        END AS "idojyohoudata_4"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('71','72')
+             THEN
+                 dbT1001."jushochitokureiKaijoJiyuCode"
+             ELSE
+                 NULL
+        END AS "soshitsujyohou_go_jiyu"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('71','72')
+             THEN
+                 dbT1001."jushochitokureiKaijoYMD"
+             ELSE
+                 NULL
+        END AS "soshitsujyohou_go_idoYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('71','72')
+             THEN
+                 dbT1001."jushochitokureiKaijoTodokedeYMD"
+             ELSE
+                 NULL
+        END AS "soshitsujyohou_go_todokedeYMD"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+                 AND dbT1001."idoJiyuCode" IN ('71','72')
+             THEN
+                 '住特解除異動'
+             ELSE
+                 NULL
+        END AS "idojyohoudata_4"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
+             THEN
+                 dbT1001."hihokennshaKubunCode"
+             ELSE
+                 NULL
+        END AS "kubun_zen_shikaku"
+        ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
+             THEN
+                 dbT1001."hihokennshaKubunCode"
+             ELSE
+                 NULL
+        END AS "kubun_go_shikaku"
+        FROM
+            rgdb."DbT1001HihokenshaDaicho" AS dbT1001
+        WHERE
+            TO_TIMESTAMP(#{konkaikaishiYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3') <![CDATA[<=]]> dbT1001."lastUpdateTimestamp"
+        AND dbT1001."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
+        AND dbT1001."insertReamsLoginId" = 'anonymous'
+        AND (
+            dbT1001."idoJiyuCode" IN ('01','03','04','07','08','09','12','18','46','49')
+            OR dbT1001."idoJiyuCode" IN ('51','52','53','55','57','58','68','99')
+            OR dbT1001."idoJiyuCode" IN ('21','22','11','13','14','15','17','16','41','42','23','24','48')
+            <!-- TODO QA359 -->
+            OR dbT1001."idoJiyuCode" IN ('05')
+            OR dbT1001."idoJiyuCode" IN ('71','72')
+            )
+    </select>
+
+    <resultMap id="resultMap_getTaJushochiTokureiShaKanriList" type="jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity.TaJushochiTokureiShayouhouEntity" autoMapping="true">
+    <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+    <result property="idoJiyuCode" column="idoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="tekiyoYMD" column="tekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="tekiyoTodokedeYMD" column="tekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="kaijoYMD" column="kaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="kaijoTodokedeYMD" column="kaijoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="logicalDeletedFlag" column="logicalDeletedFlag" />
+    <result property="lastUpdateTimestamp" column="lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="nyushoShisetsuCode" column="nyushoShisetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="nyushoYMD" column="nyushoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="taishoYMD" column="taishoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    </resultMap>
+    <select id="getTaJushochiTokureiShaKanriList_0008Code" resultMap="resultMap_getTaJushochiTokureiShaKanriList" 
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter" 
+            fetchSize="500">
+        SELECT
+            T1."shikibetsuCode" AS "shikibetsuCode"
+            ,T1."idoJiyuCode" AS "idoJiyuCode"
+            ,T1."tekiyoYMD" AS "tekiyoYMD"
+            ,T1."tekiyoTodokedeYMD" AS "tekiyoTodokedeYMD"
+            ,T1."kaijoYMD" AS "kaijoYMD"
+            ,T1."kaijoTodokedeYMD" AS "kaijoTodokedeYMD"
+            ,T1."logicalDeletedFlag" AS "logicalDeletedFlag"
+            ,T1."lastUpdateTimestamp" AS "lastUpdateTimestamp"
+            ,A."nyushoShisetsuCode" AS "nyushoShisetsuCode"
+            ,A."nyushoYMD" AS "nyushoYMD"
+            ,A."taishoYMD" AS "taishoYMD"
+        FROM
+            rgdb."DbT1003TashichosonJushochiTokurei" T1
+        LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" A ON
+            A."shikibetsuCode" = T1."shikibetsuCode"
+            AND A."daichoShubetsu" = '2'
+        WHERE
+             TO_TIMESTAMP(#{konkaikaishiYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3') <![CDATA[<=]]> T1."lastUpdateTimestamp"
+        AND T1."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
+        AND T1."idoJiyuCode" IN ('01','08','99')
+        AND T1."insertTimestamp" = A."insertTimestamp"
+        AND T1."insertReamsLoginId" = 'anonymous'
+        ORDER BY
+            T1."shikibetsuCode" DESC
+    </select>
+    
+    <select id="getShisetsuNyutaisho_2Code" resultMap="resultMap_getTaJushochiTokureiShaKanriList" 
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter" 
+            fetchSize="500">
+        SELECT
+            B."shikibetsuCode" AS "shikibetsuCode"
+            ,NULL AS "idoJiyuCode"
+            ,NULL AS "tekiyoYMD"
+            ,NULL AS "tekiyoTodokedeYMD"
+            ,NULL AS "kaijoYMD"
+            ,NULL AS "kaijoTodokedeYMD"
+            ,B."isDeleted" AS "logicalDeletedFlag"
+            ,B."lastUpdateTimestamp" AS "lastUpdateTimestamp"
+            ,B."nyushoShisetsuCode" AS "nyushoShisetsuCode"
+            ,B."nyushoYMD" AS "nyushoYMD"
+            ,B."taishoYMD" AS "taishoYMD"
+        FROM
+            rgdb."DbT1004ShisetsuNyutaisho" B
+        WHERE
+            TO_TIMESTAMP(#{konkaikaishiYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3') <![CDATA[<=]]> B."lastUpdateTimestamp"
+        AND B."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
+        AND B."daichoShubetsu" = '2'
+        AND B."isDeleted" = FALSE
+        AND B."insertReamsLoginId" = 'anonymous'
+        ORDER BY
+            B."shikibetsuCode" DESC
+    </select>
+    
+    <select id="getTaJushochiTokureiShaKanriList_0011Code" resultMap="resultMap_getTaJushochiTokureiShaKanriList" 
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter" 
+            fetchSize="500">
+        SELECT
+            T1."shikibetsuCode" AS "shikibetsuCode"
+            ,T1."idoJiyuCode" AS "idoJiyuCode"
+            ,T1."tekiyoYMD" AS "tekiyoYMD"
+            ,T1."tekiyoTodokedeYMD" AS "tekiyoTodokedeYMD"
+            ,T1."kaijoYMD" AS "kaijoYMD"
+            ,T1."kaijoTodokedeYMD" AS "kaijoTodokedeYMD"
+            ,T1."logicalDeletedFlag" AS "logicalDeletedFlag"
+            ,T1."lastUpdateTimestamp" AS "lastUpdateTimestamp"
+            ,C."nyushoShisetsuCode" AS "nyushoShisetsuCode"
+            ,C."nyushoYMD" AS "nyushoYMD"
+            ,C."taishoYMD" AS "taishoYMD"
+        FROM
+            rgdb."DbT1003TashichosonJushochiTokurei" T1
+        LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" C ON
+            C."shikibetsuCode" = T1."shikibetsuCode"
+            AND C."daichoShubetsu" = '2'
+        WHERE
+             TO_TIMESTAMP(#{konkaikaishiYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3') <![CDATA[<=]]> T1."lastUpdateTimestamp"
+        AND T1."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
+        AND T1."idoJiyuCode" IN ('51','52','53','58','99')
+        <!-- TODO QA373 -->
+        AND T1."insertTimestamp" = C."insertTimestamp"
+        AND T1."insertReamsLoginId" = 'anonymous'
+        ORDER BY
+            T1."shikibetsuCode" DESC
+    </select>
+    
+    <resultMap id="resultMap_getTekiyoJogaishaDaichoList" type="jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity.TaJushochiTokureiShayouhouEntity" autoMapping="true">
+    <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+    <result property="idoJiyuCode" column="idoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="tekiyoYMD" column="tekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="tekiyoTodokedeYMD" column="tekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="kaijoYMD" column="kaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="kaijoTodokedeYMD" column="kaijoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="logicalDeletedFlag" column="logicalDeletedFlag" />
+    <result property="lastUpdateTimestamp" column="lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="nyushoShisetsuCode" column="nyushoShisetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="nyushoYMD" column="nyushoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="taishoYMD" column="taishoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    </resultMap>
+    
+    <select id="getTekiyoJogaishaDaichoList_0009Code" resultMap="resultMap_getTekiyoJogaishaDaichoList" 
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter" 
+                fetchSize="500">
+        SELECT
+            T1."shikibetsuCode" AS "shikibetsuCode"
+            ,T1."idoJiyuCode" AS "idoJiyuCode"
+            ,T1."tekiyoYMD" AS "tekiyoYMD"
+            ,T1."tekiyoTodokedeYMD" AS "tekiyoTodokedeYMD"
+            ,T1."kaijoYMD" AS "kaijoYMD"
+            ,T1."kaijoTodokedeYMD" AS "kaijoTodokedeYMD"
+            ,T1."logicalDeletedFlag" AS "logicalDeletedFlag"
+            ,T1."lastUpdateTimestamp" AS "lastUpdateTimestamp"
+            ,A."nyushoShisetsuCode" AS "nyushoShisetsuCode"
+            ,A."nyushoYMD" AS "nyushoYMD"
+            ,A."taishoYMD" AS "taishoYMD"
+        FROM
+            rgdb."DbT1002TekiyoJogaisha" T1
+        LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" A ON
+            A."shikibetsuCode" = T1."shikibetsuCode"
+            AND A."daichoShubetsu" = '3'
+        WHERE
+             TO_TIMESTAMP(#{konkaikaishiYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3') <![CDATA[<=]]> T1."lastUpdateTimestamp"
+        AND T1."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
+        AND T1."idoJiyuCode" IN ('01','08','99')
+        AND T1."insertTimestamp" = A."insertTimestamp"
+        AND T1."insertReamsLoginId" = 'anonymous'
+        ORDER BY
+            T1."shikibetsuCode"   
+    </select>
+      
+    <select id="getShisetsuNyutaisho_3Code" resultMap="resultMap_getTekiyoJogaishaDaichoList" 
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter" 
+            fetchSize="500">
+        SELECT
+            B."shikibetsuCode" AS "shikibetsuCode"
+            ,NULL AS "idoJiyuCode"
+            ,NULL AS "tekiyoYMD"
+            ,NULL AS "tekiyoTodokedeYMD"
+            ,NULL AS "kaijoYMD"
+            ,NULL AS "kaijoTodokedeYMD"
+            ,B."isDeleted" AS "logicalDeletedFlag"
+            ,B."lastUpdateTimestamp" AS "lastUpdateTimestamp"
+            ,B."nyushoShisetsuCode" AS "nyushoShisetsuCode"
+            ,B."nyushoYMD" AS "nyushoYMD"
+            ,B."taishoYMD" AS "taishoYMD"
+        FROM
+            rgdb."DbT1004ShisetsuNyutaisho" B
+        WHERE
+            TO_TIMESTAMP(#{konkaikaishiYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3') <![CDATA[<=]]> B."lastUpdateTimestamp"
+        AND B."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
+        <!-- TODO QA373 -->
+        AND B."daichoShubetsu" = '3'
+        AND B."isDeleted" = FALSE
+        AND B."insertReamsLoginId" = 'anonymous'
+        ORDER BY
+            B."shikibetsuCode" DESC
+    </select>
+        
+    <select id="getTekiyoJogaishaDaichoList_0012Code" resultMap="resultMap_getTekiyoJogaishaDaichoList" 
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter" 
+                fetchSize="500">
+        SELECT
+            T1."shikibetsuCode" AS "shikibetsuCode"
+            ,T1."idoJiyuCode" AS "idoJiyuCode"
+            ,T1."tekiyoYMD" AS "tekiyoYMD"
+            ,T1."tekiyoTodokedeYMD" AS "tekiyoTodokedeYMD"
+            ,T1."kaijoYMD" AS "kaijoYMD"
+            ,T1."kaijoTodokedeYMD" AS "kaijoTodokedeYMD"
+            ,T1."logicalDeletedFlag" AS "logicalDeletedFlag"
+            ,T1."lastUpdateTimestamp" AS "lastUpdateTimestamp"
+            ,C."nyushoShisetsuCode" AS "nyushoShisetsuCode"
+            ,C."nyushoYMD" AS "nyushoYMD"
+            ,C."taishoYMD" AS "taishoYMD"
+        FROM
+            rgdb."DbT1002TekiyoJogaisha" T1
+        LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" C ON
+            C."shikibetsuCode" = T1."shikibetsuCode"
+            AND C."daichoShubetsu" = '3'
+        WHERE
+             TO_TIMESTAMP(#{konkaikaishiYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3') <![CDATA[<=]]> T1."lastUpdateTimestamp"
+        AND T1."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
+        AND T1."idoJiyuCode" IN ('51','52','53','58','99')
+        AND T1."insertTimestamp" = C."insertTimestamp"
+        AND T1."insertReamsLoginId" = 'anonymous'
+        ORDER BY
+            T1."shikibetsuCode"    
+    </select>
+
+    <insert id="insertShoriDateKanri" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" >
+        INSERT INTO rgdb."DbT7022ShoriDateKanri"
+            ("subGyomuCode"
+            ,"shichosonCode"
+            ,"shoriName"
+            ,"shoriEdaban"
+            ,"nendo"
+            ,"nendoNaiRenban"
+            ,"taishoKaishiYMD"
+            ,"taishoShuryoYMD")
+        VALUES
+            (#{subGyomuCode}
+            ,#{shichosonCode}
+            ,#{shoriName}
+            ,#{shoriEdaban}
+            ,#{nendo}
+            ,#{nendoNaiRenban}
+            ,#{taishoKaishiYMD}
+            ,#{taishoShuryoYMD})
+    </insert>
+    
+    <update id="updateShoriDateKanri" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" >
+        UPDATE rgdb."DbT7022ShoriDateKanri"
+        SET
+            "taishoKaishiYMD" = #{taishoKaishiYMD},
+            "taishoShuryoYMD" = #{taishoShuryoYMD}
+        WHERE
+            "subGyomuCode" = #{subGyomuCode}
+        AND "shoriName" = #{shoriName}
+    </update>
+
+    <select id="getPsmShikibetsuTaisho" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.PsmShikibetsuTaishoMybatisParameter" 
+            fetchSize="500">
+        SELECT
+            PSM."meisho" AS "meisho"
+            ,PSM."kanaMeisho" AS "kanaMeisho"
+            ,PSM."setaiCode" AS "setaiCode"
+        FROM
+            rgua.${psmShikibetsuTaisho} AS PSM
+    </select>
+</mapper>

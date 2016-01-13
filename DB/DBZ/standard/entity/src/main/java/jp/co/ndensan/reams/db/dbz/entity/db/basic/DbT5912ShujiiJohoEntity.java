@@ -1,24 +1,22 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import java.util.Objects;
+import java.util.UUID;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 主治医情報テーブルのエンティティクラスです。
@@ -40,9 +38,9 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
     @PrimaryKey
     private LasdecCode shichosonCode;
     @PrimaryKey
-    private ShujiiIryokikanCode shujiiIryokikanCode;
+    private RString shujiiIryokikanCode;
     @PrimaryKey
-    private ShujiiCode shujiiCode;
+    private RString shujiiCode;
     private AtenaMeisho shujiiName;
     private AtenaKanaMeisho shujiiKana;
     private Code seibetsu;
@@ -124,7 +122,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      *
      * @return 主治医医療機関コード
      */
-    public ShujiiIryokikanCode getShujiiIryokikanCode() {
+    public RString getShujiiIryokikanCode() {
         return shujiiIryokikanCode;
     }
 
@@ -135,7 +133,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      *
      * @param shujiiIryokikanCode 主治医医療機関コード
      */
-    public void setShujiiIryokikanCode(@Nonnull ShujiiIryokikanCode shujiiIryokikanCode) {
+    public void setShujiiIryokikanCode(@Nonnull RString shujiiIryokikanCode) {
         this.shujiiIryokikanCode = shujiiIryokikanCode;
     }
 
@@ -146,7 +144,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      *
      * @return 主治医コード
      */
-    public ShujiiCode getShujiiCode() {
+    public RString getShujiiCode() {
         return shujiiCode;
     }
 
@@ -157,7 +155,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      *
      * @param shujiiCode 主治医コード
      */
-    public void setShujiiCode(@Nonnull ShujiiCode shujiiCode) {
+    public void setShujiiCode(@Nonnull RString shujiiCode) {
         this.shujiiCode = shujiiCode;
     }
 
@@ -365,8 +363,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      * このエンティティの主キーが他の{@literal DbT5912ShujiiJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT5912ShujiiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT5912ShujiiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5912ShujiiJohoEntity other) {

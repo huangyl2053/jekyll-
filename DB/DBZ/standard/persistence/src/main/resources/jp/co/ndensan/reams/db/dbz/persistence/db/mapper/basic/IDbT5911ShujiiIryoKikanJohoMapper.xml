@@ -17,32 +17,33 @@
     </sql>
 
     <sql id="allColumns_DbT5911ShujiiIryoKikanJoho">
-         "DbT5911ShujiiIryoKikanJoho"."shichosonCode" as "dbT5911ShujiiIryoKikanJoho_shichosonCode",
-         "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" as "dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode",
-         "DbT5911ShujiiIryoKikanJoho"."insertDantaiCd" as "dbT5911ShujiiIryoKikanJoho_insertDantaiCd",
-         "DbT5911ShujiiIryoKikanJoho"."insertTimestamp" as "dbT5911ShujiiIryoKikanJoho_insertTimestamp",
-         "DbT5911ShujiiIryoKikanJoho"."insertReamsLoginId" as "dbT5911ShujiiIryoKikanJoho_insertReamsLoginId",
-         "DbT5911ShujiiIryoKikanJoho"."insertContextId" as "dbT5911ShujiiIryoKikanJoho_insertContextId",
-         "DbT5911ShujiiIryoKikanJoho"."isDeleted" as "dbT5911ShujiiIryoKikanJoho_isDeleted",
-         "DbT5911ShujiiIryoKikanJoho"."updateCount" as "dbT5911ShujiiIryoKikanJoho_updateCount",
-         "DbT5911ShujiiIryoKikanJoho"."lastUpdateTimestamp" as "dbT5911ShujiiIryoKikanJoho_lastUpdateTimestamp",
-         "DbT5911ShujiiIryoKikanJoho"."lastUpdateReamsLoginId" as "dbT5911ShujiiIryoKikanJoho_lastUpdateReamsLoginId",
-         "DbT5911ShujiiIryoKikanJoho"."iryokikanCode" as "dbT5911ShujiiIryoKikanJoho_iryokikanCode",
-         "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho" as "dbT5911ShujiiIryoKikanJoho_iryoKikanMeisho",
-         "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeishoKana" as "dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana",
-         "DbT5911ShujiiIryoKikanJoho"."yubinNo" as "dbT5911ShujiiIryoKikanJoho_yubinNo",
-         "DbT5911ShujiiIryoKikanJoho"."jusho" as "dbT5911ShujiiIryoKikanJoho_jusho",
-         "DbT5911ShujiiIryoKikanJoho"."telNo" as "dbT5911ShujiiIryoKikanJoho_telNo",
-         "DbT5911ShujiiIryoKikanJoho"."faxNo" as "dbT5911ShujiiIryoKikanJoho_faxNo",
-         "DbT5911ShujiiIryoKikanJoho"."daihyoshaName" as "dbT5911ShujiiIryoKikanJoho_daihyoshaName",
-         "DbT5911ShujiiIryoKikanJoho"."jokyoFlag" as "dbT5911ShujiiIryoKikanJoho_jokyoFlag"
+        "DbT5911ShujiiIryoKikanJoho"."shichosonCode" as "dbT5911ShujiiIryoKikanJoho_shichosonCode",          
+        "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" as "dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode",          
+        "DbT5911ShujiiIryoKikanJoho"."insertDantaiCd" as "dbT5911ShujiiIryoKikanJoho_insertDantaiCd",          
+        "DbT5911ShujiiIryoKikanJoho"."insertTimestamp" as "dbT5911ShujiiIryoKikanJoho_insertTimestamp",          
+        "DbT5911ShujiiIryoKikanJoho"."insertReamsLoginId" as "dbT5911ShujiiIryoKikanJoho_insertReamsLoginId",          
+        "DbT5911ShujiiIryoKikanJoho"."insertContextId" as "dbT5911ShujiiIryoKikanJoho_insertContextId",          
+        "DbT5911ShujiiIryoKikanJoho"."isDeleted" as "dbT5911ShujiiIryoKikanJoho_isDeleted",          
+        "DbT5911ShujiiIryoKikanJoho"."updateCount" as "dbT5911ShujiiIryoKikanJoho_updateCount",          
+        "DbT5911ShujiiIryoKikanJoho"."lastUpdateTimestamp" as "dbT5911ShujiiIryoKikanJoho_lastUpdateTimestamp",          
+        "DbT5911ShujiiIryoKikanJoho"."lastUpdateReamsLoginId" as "dbT5911ShujiiIryoKikanJoho_lastUpdateReamsLoginId",          
+        "DbT5911ShujiiIryoKikanJoho"."iryokikanCode" as "dbT5911ShujiiIryoKikanJoho_iryokikanCode",          
+        "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho" as "dbT5911ShujiiIryoKikanJoho_iryoKikanMeisho",          
+        "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeishoKana" as "dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana",          
+        "DbT5911ShujiiIryoKikanJoho"."yubinNo" as "dbT5911ShujiiIryoKikanJoho_yubinNo",          
+        "DbT5911ShujiiIryoKikanJoho"."jusho" as "dbT5911ShujiiIryoKikanJoho_jusho",          
+        "DbT5911ShujiiIryoKikanJoho"."telNo" as "dbT5911ShujiiIryoKikanJoho_telNo",          
+        "DbT5911ShujiiIryoKikanJoho"."faxNo" as "dbT5911ShujiiIryoKikanJoho_faxNo",          
+        "DbT5911ShujiiIryoKikanJoho"."daihyoshaName" as "dbT5911ShujiiIryoKikanJoho_daihyoshaName",          
+        "DbT5911ShujiiIryoKikanJoho"."daihyoshaNameKana" AS "dbT5911ShujiiIryoKikanJoho_daihyoshaNameKana",
+        "DbT5911ShujiiIryoKikanJoho"."jokyoFlag" as "dbT5911ShujiiIryoKikanJoho_jokyoFlag"     
     </sql>
 
 
     <!--テーブルDbT5911ShujiiIryoKikanJohoの項目をDbT5911ShujiiIryoKikanJohoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT5911ShujiiIryoKikanJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity" autoMapping="true">
         <id property="shichosonCode" column="dbT5911ShujiiIryoKikanJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <!--<id property="shujiiIryokikanCode" column="dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" />-->
+        <id property="shujiiIryokikanCode" column="dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertDantaiCd" column="dbT5911ShujiiIryoKikanJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5911ShujiiIryoKikanJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT5911ShujiiIryoKikanJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -51,7 +52,7 @@
         <result property="updateCount" column="dbT5911ShujiiIryoKikanJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT5911ShujiiIryoKikanJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5911ShujiiIryoKikanJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <!--<result property="iryokikanCode" column="dbT5911ShujiiIryoKikanJoho_iryokikanCode" />-->
+         <result property="iryokikanCode" column="dbT5911ShujiiIryoKikanJoho_iryokikanCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.IryoKikanCodeTypeHandler"/>
         <result property="iryoKikanMeisho" column="dbT5911ShujiiIryoKikanJoho_iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="iryoKikanMeishoKana" column="dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yubinNo" column="dbT5911ShujiiIryoKikanJoho_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
@@ -59,6 +60,7 @@
         <result property="telNo" column="dbT5911ShujiiIryoKikanJoho_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="faxNo" column="dbT5911ShujiiIryoKikanJoho_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="daihyoshaName" column="dbT5911ShujiiIryoKikanJoho_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="daihyoshaNameKana" column="dbT5911ShujiiIryoKikanJoho_daihyoshaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jokyoFlag" column="dbT5911ShujiiIryoKikanJoho_jokyoFlag" />
     </resultMap>
 <select id="getEntity" resultMap="ResultMap_DbT5911ShujiiIryoKikanJohoEntity">

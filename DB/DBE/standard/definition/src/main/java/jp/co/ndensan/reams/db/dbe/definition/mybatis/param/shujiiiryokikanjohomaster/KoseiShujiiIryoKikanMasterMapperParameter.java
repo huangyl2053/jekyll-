@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiiryokikanjohomaster;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -20,8 +19,8 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
 
     private final boolean 状況フラグ;
     private final LasdecCode 市町村コード;
-    private final ShujiiIryokikanCode 主治医医療機関コードFrom;
-    private final ShujiiIryokikanCode 主治医医療機関コードTo;
+    private final RString 主治医医療機関コードFrom;
+    private final RString 主治医医療機関コードTo;
     private final RString 医療機関名称;
     private final RString 医療機関カナ名称;
     private final Decimal saidaiHyojiKensu;
@@ -35,8 +34,8 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
     private KoseiShujiiIryoKikanMasterMapperParameter(
             boolean 状況フラグ,
             LasdecCode 市町村コード,
-            ShujiiIryokikanCode 主治医医療機関コードFrom,
-            ShujiiIryokikanCode 主治医医療機関コードTo,
+            RString 主治医医療機関コードFrom,
+            RString 主治医医療機関コードTo,
             RString 医療機関名称,
             RString 医療機関カナ名称,
             Decimal saidaiHyojiKensu,
@@ -46,7 +45,6 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
             boolean uses医療機関名称,
             boolean uses医療機関カナ名称,
             boolean usesSaidaiHyojiKensu) {
-
         this.状況フラグ = 状況フラグ;
         this.市町村コード = 市町村コード;
         this.主治医医療機関コードFrom = 主治医医療機関コードFrom;
@@ -78,8 +76,8 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
     public static KoseiShujiiIryoKikanMasterMapperParameter createParam_SelectShujiiIryoKikanJohoList(
             boolean 状況フラグ,
             LasdecCode 市町村コード,
-            ShujiiIryokikanCode 主治医医療機関コードFrom,
-            ShujiiIryokikanCode 主治医医療機関コードTo,
+            RString 主治医医療機関コードFrom,
+            RString 主治医医療機関コードTo,
             RString 医療機関名称,
             RString 医療機関カナ名称,
             Decimal 最大表示件数
@@ -93,8 +91,8 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
                 医療機関カナ名称,
                 最大表示件数,
                 市町村コード != null && !市町村コード.isEmpty(),
-                主治医医療機関コードFrom != null && !主治医医療機関コードFrom.value().isEmpty(),
-                主治医医療機関コードTo != null && !主治医医療機関コードTo.value().isEmpty(),
+                主治医医療機関コードFrom != null && !主治医医療機関コードFrom.isEmpty(),
+                主治医医療機関コードTo != null && !主治医医療機関コードTo.isEmpty(),
                 医療機関名称 != null && !医療機関名称.isEmpty(),
                 医療機関カナ名称 != null && !医療機関カナ名称.isEmpty(),
                 最大表示件数 != null);

@@ -24,10 +24,12 @@ public class ShujiiMasterRelateEntity implements IDbAccessable {
 
     @PrimaryKey
     private LasdecCode shichosonCode;
-    private RString shujiiName;
-    private RString shujiiKana;
+    @PrimaryKey
+    private RString shujiiIryokikanCode;
     @PrimaryKey
     private RString shujiiCode;
+    private RString shujiiName;
+    private RString shujiiKana;
     private RString shinryokaName;
     private boolean shiteiiFlag;
     private boolean jokyoFlag;
@@ -37,7 +39,5 @@ public class ShujiiMasterRelateEntity implements IDbAccessable {
     private TelNo faxNo;
     private RString seibetsu;
     private RString shichosonMeisho;
-    @PrimaryKey
-    private RString shujiiIryokikanCode;
     private RString iryoKikanMeisho;
 }

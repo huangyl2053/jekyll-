@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.KojinSh
 import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoReport;
 import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoReportJoho;
-import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.chousaBodyItem;
-import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.shuiBodyItem;
+import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.ChousaBodyItem;
+import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.ShuiBodyItem;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.KojinShinchokuJokyohyo.KojinShinchokuJokyohyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.KojinShinchokuJokyohyo.KojinShinchokuJokyohyoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -48,17 +48,17 @@ public class KojinShinchokuJokyohyoPrintService {
     }
 
     private static KojinShinchokuJokyohyoReportJoho getJoho(KojinShinchokuJokyohyoEntity entity) {
-        List<chousaBodyItem> items = new ArrayList<>();
-        chousaBodyItem chou1 = new chousaBodyItem(entity.getChosain_1(), entity.getChosain_4(), entity.getChosain_7());
-        chousaBodyItem chou2 = new chousaBodyItem(entity.getChosain_2(), entity.getChosain_5(), entity.getChosain_8());
-        chousaBodyItem chou3 = new chousaBodyItem(entity.getChosain_3(), entity.getChosain_6(), entity.getChosain_9());
+        List<ChousaBodyItem> items = new ArrayList<>();
+        ChousaBodyItem chou1 = new ChousaBodyItem(entity.getChosain_1(), entity.getChosain_4(), entity.getChosain_7());
+        ChousaBodyItem chou2 = new ChousaBodyItem(entity.getChosain_2(), entity.getChosain_5(), entity.getChosain_8());
+        ChousaBodyItem chou3 = new ChousaBodyItem(entity.getChosain_3(), entity.getChosain_6(), entity.getChosain_9());
         items.add(chou3);
         items.add(chou2);
         items.add(chou1);
-        List<shuiBodyItem> shujiItemList = new ArrayList<>();
-        shuiBodyItem shui1 = new shuiBodyItem(entity.getShui_1(), entity.getShui_4(), entity.getShui_7());
-        shuiBodyItem shui2 = new shuiBodyItem(entity.getShui_2(), entity.getShui_5(), entity.getShui_8());
-        shuiBodyItem shui3 = new shuiBodyItem(entity.getShui_3(), entity.getShui_6(), entity.getShui_9());
+        List<ShuiBodyItem> shujiItemList = new ArrayList<>();
+        ShuiBodyItem shui1 = new ShuiBodyItem(entity.getShui_1(), entity.getShui_4(), entity.getShui_7());
+        ShuiBodyItem shui2 = new ShuiBodyItem(entity.getShui_2(), entity.getShui_5(), entity.getShui_8());
+        ShuiBodyItem shui3 = new ShuiBodyItem(entity.getShui_3(), entity.getShui_6(), entity.getShui_9());
         shujiItemList.add(shui1);
         shujiItemList.add(shui2);
         shujiItemList.add(shui3);

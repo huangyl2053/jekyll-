@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.benmeisyo.BenmeisyoMapper">
+
+    <resultMap id="getBenmeisyoResultMap" type="jp.co.ndensan.reams.db.dbu.entity.db.benmeiJoho.BenmeiJohoResultEntity" autoMapping="true">
+        <result property="処分種類コード" column="shobunShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="弁明書作成日" column="bemmeishoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="弁明内容" column="bemmeiNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <select id="getBenmeijoho" resultMap="getBenmeisyoResultMap" parameterType="jp.co.ndensan.reams.db.dbu.definition.core.benmeisyo.BenmeisyoMapperParameter" fetchSize="500">
+        SELECT
+        "DbT7001FufukuMoshitate"."shobunShuruiCode" AS "shobunShuruiCode",
+        "DbT7001FufukuMoshitate"."bemmeishoSakuseiYMD" AS "bemmeishoSakuseiYMD",
+        "DbT7002BemmeiNaiyo"."bemmeiNaiyo" AS "bemmeiNaiyo"
+        FROM
+        rgdb."DbT7001FufukuMoshitate"
+        INNER JOIN
+        rgdb."DbT7002BemmeiNaiyo"
+        ON
+        rgdb."DbT7002BemmeiNaiyo"."shikibetsuCode" = rgdb."DbT7001FufukuMoshitate"."shikibetsuCode"
+        AND rgdb."DbT7002BemmeiNaiyo"."genshobunHihokenshaNo" = rgdb."DbT7001FufukuMoshitate"."genshobunsHihokennshaNo"
+        AND rgdb."DbT7002BemmeiNaiyo"."shinsaseikyuTodokedeYMD" = rgdb."DbT7001FufukuMoshitate"."shinsaSeikyuTodokedeYMD"
+        AND rgdb."DbT7002BemmeiNaiyo"."bemmeishoSakuseiYMD" = rgdb."DbT7001FufukuMoshitate"."bemmeishoSakuseiYMD"
+        WHERE
+        rgdb."DbT7001FufukuMoshitate"."shikibetsuCode" = #{識別コード}
+        AND rgdb."DbT7001FufukuMoshitate"."genshobunsHihokennshaNo" = #{被保険者番号}
+        AND rgdb."DbT7001FufukuMoshitate"."shinsaSeikyuTodokedeYMD" = #{審査請求届出日}
+    </select>
+
+    <resultMap id="atenaInfoResult" type="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity">
+        <association property="ft200Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>
+
+    <select id="selectAtena" resultMap="atenaInfoResult" parameterType="jp.co.ndensan.reams.db.dbu.definition.core.benmeisyo.BenmeiAtenaParameter">
+        SELECT
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+        rgua.${psmShikibetsuTaisho} as <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+        WHERE
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = #{shikibetsuCode}
+    </select>
+</mapper>

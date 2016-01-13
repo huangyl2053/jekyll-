@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import lombok.Value;
@@ -18,7 +17,6 @@ import lombok.Value;
 @Value
 public class FufukuMoshitateIdentifier implements Serializable {
 
-    private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final ShikibetsuCode 識別コード;
     private final HihokenshaNo 原処分被保険者番号;
     private final FlexibleDate 審査請求届出日;
@@ -26,28 +24,16 @@ public class FufukuMoshitateIdentifier implements Serializable {
     /**
      * コンストラクタです。
      *
-     * @param 証記載保険者番号 証記載保険者番号
      * @param 識別コード 識別コード
      * @param 原処分被保険者番号 原処分被保険者番号
      * @param 審査請求届出日 審査請求届出日
      */
-    public FufukuMoshitateIdentifier(ShoKisaiHokenshaNo 証記載保険者番号,
-            ShikibetsuCode 識別コード,
+    public FufukuMoshitateIdentifier(ShikibetsuCode 識別コード,
             HihokenshaNo 原処分被保険者番号,
             FlexibleDate 審査請求届出日) {
-        this.証記載保険者番号 = 証記載保険者番号;
         this.識別コード = 識別コード;
         this.原処分被保険者番号 = 原処分被保険者番号;
         this.審査請求届出日 = 審査請求届出日;
-    }
-
-    /**
-     * get証記載保険者番号
-     *
-     * @return 証記載保険者番号
-     */
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return 証記載保険者番号;
     }
 
     /**

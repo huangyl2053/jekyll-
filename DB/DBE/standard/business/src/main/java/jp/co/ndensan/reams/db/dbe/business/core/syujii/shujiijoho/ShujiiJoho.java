@@ -8,9 +8,6 @@ package jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho;
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -20,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -46,8 +44,8 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
         requireNonNull(主治医コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医コード"));
         this.entity = new DbT5912ShujiiJohoEntity();
         this.entity.setShichosonCode(市町村コード);
-        this.entity.setShujiiIryokikanCode(new ShujiiIryokikanCode(主治医医療機関コード));
-        this.entity.setShujiiCode(new ShujiiCode(主治医コード));
+        this.entity.setShujiiIryokikanCode(主治医医療機関コード);
+        this.entity.setShujiiCode(主治医コード);
         this.id = new ShujiiJohoIdentifier(
                 市町村コード,
                 主治医医療機関コード,
@@ -65,8 +63,8 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医情報"));
         this.id = new ShujiiJohoIdentifier(
                 entity.getShichosonCode(),
-                entity.getShujiiIryokikanCode().getColumnValue(),
-                entity.getShujiiCode().getColumnValue());
+                entity.getShujiiIryokikanCode(),
+                entity.getShujiiCode());
     }
 
     /**
@@ -98,7 +96,7 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
      * @return 主治医医療機関コード
      */
     public RString get主治医医療機関コード() {
-        return entity.getShujiiIryokikanCode().getColumnValue();
+        return entity.getShujiiIryokikanCode();
     }
 
     /**
@@ -107,7 +105,7 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
      * @return 主治医コード
      */
     public RString get主治医コード() {
-        return entity.getShujiiCode().getColumnValue();
+        return entity.getShujiiCode();
     }
 
     /**
@@ -268,6 +266,7 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
 
     private static final class _SerializationProxy implements Serializable {
 
+        private static final long serialVersionUID = -2506710475895177344L;
         private final DbT5912ShujiiJohoEntity entity;
         private final ShujiiJohoIdentifier id;
 

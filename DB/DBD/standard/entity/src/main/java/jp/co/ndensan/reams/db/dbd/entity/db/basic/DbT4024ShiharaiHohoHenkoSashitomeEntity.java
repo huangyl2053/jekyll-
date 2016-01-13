@@ -1,23 +1,25 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
+import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 支払方法変更差止テーブルのエンティティクラスです。
  */
 public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<DbT4024ShiharaiHohoHenkoSashitomeEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4024ShiharaiHohoHenkoSashitome");
@@ -37,17 +39,20 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
     @PrimaryKey
     private RString kanriKubun;
     @PrimaryKey
-    private FlexibleYearMonth sashitome_ServiceTeikyoYM;
-    @PrimaryKey
-    private RString sashitome_ShokanSeiriNo;
-    @PrimaryKey
     private int rirekiNo;
-    private RString sashitome_JokyoKubun;
+    @PrimaryKey
+    private RString johoBunruiKubun;
+    @PrimaryKey
+    private int renNo;
+    private RString sashitomeKojoJotaiKubun;
     private FlexibleDate sashitome_KetteiYMD;
     private FlexibleDate sashitome_TsuchiHakkoYMD;
     private boolean sashitome_TsuchiSaiHakkoFlag;
+    private RString sashitomeKojoNo;
     private FlexibleDate sashitome_NofuYMD;
     private FlexibleDate sashitome_KaijoYMD;
+    private FlexibleYearMonth sashitome_ServiceTeikyoYM;
+    private RString sashitome_ShokanSeiriNo;
     private FlexibleDate kojo_KetteiYMD;
     private FlexibleDate kojo_TsuchiHakkoYMD;
     private boolean kojo_TsuchiSaiHakkoYMD;
@@ -112,7 +117,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(@Nonnull ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
@@ -130,7 +135,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -138,9 +143,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      * 管理区分のgetメソッドです。
      * <br/>
      * <br/>1：２号差止
-     *
      * <br/>2：１号償還払い化
-     *
      * <br/>3：１号給付額減額
      *
      * @return 管理区分
@@ -153,51 +156,13 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      * 管理区分のsetメソッドです。
      * <br/>
      * <br/>1：２号差止
-     *
      * <br/>2：１号償還払い化
-     *
      * <br/>3：１号給付額減額
      *
      * @param kanriKubun 管理区分
      */
-    public void setKanriKubun(RString kanriKubun) {
+    public void setKanriKubun(@Nonnull RString kanriKubun) {
         this.kanriKubun = kanriKubun;
-    }
-
-    /**
-     * 差止サービス提供年月のgetメソッドです。
-     *
-     * @return 差止サービス提供年月
-     */
-    public FlexibleYearMonth getSashitome_ServiceTeikyoYM() {
-        return sashitome_ServiceTeikyoYM;
-    }
-
-    /**
-     * 差止サービス提供年月のsetメソッドです。
-     *
-     * @param sashitome_ServiceTeikyoYM 差止サービス提供年月
-     */
-    public void setSashitome_ServiceTeikyoYM(FlexibleYearMonth sashitome_ServiceTeikyoYM) {
-        this.sashitome_ServiceTeikyoYM = sashitome_ServiceTeikyoYM;
-    }
-
-    /**
-     * 差止償還整理番号のgetメソッドです。
-     *
-     * @return 差止償還整理番号
-     */
-    public RString getSashitome_ShokanSeiriNo() {
-        return sashitome_ShokanSeiriNo;
-    }
-
-    /**
-     * 差止償還整理番号のsetメソッドです。
-     *
-     * @param sashitome_ShokanSeiriNo 差止償還整理番号
-     */
-    public void setSashitome_ShokanSeiriNo(RString sashitome_ShokanSeiriNo) {
-        this.sashitome_ShokanSeiriNo = sashitome_ShokanSeiriNo;
     }
 
     /**
@@ -214,30 +179,71 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(@Nonnull int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
-     * 差止状況区分のgetメソッドです。
+     * 情報分類区分のgetメソッドです。
      * <br/>
-     * <br/>1：差止登録,9：差止解除
+     * <br/>1：差止情報、2：保険料控除情報
      *
-     * @return 差止状況区分
+     * @return 情報分類区分
      */
-    public RString getSashitome_JokyoKubun() {
-        return sashitome_JokyoKubun;
+    public RString getJohoBunruiKubun() {
+        return johoBunruiKubun;
     }
 
     /**
-     * 差止状況区分のsetメソッドです。
+     * 情報分類区分のsetメソッドです。
      * <br/>
-     * <br/>1：差止登録,9：差止解除
+     * <br/>1：差止情報、2：保険料控除情報
      *
-     * @param sashitome_JokyoKubun 差止状況区分
+     * @param johoBunruiKubun 情報分類区分
      */
-    public void setSashitome_JokyoKubun(RString sashitome_JokyoKubun) {
-        this.sashitome_JokyoKubun = sashitome_JokyoKubun;
+    public void setJohoBunruiKubun(@Nonnull RString johoBunruiKubun) {
+        this.johoBunruiKubun = johoBunruiKubun;
+    }
+
+    /**
+     * 連番のgetメソッドです。
+     *
+     * @return 連番
+     */
+    public int getRenNo() {
+        return renNo;
+    }
+
+    /**
+     * 連番のsetメソッドです。
+     *
+     * @param renNo 連番
+     */
+    public void setRenNo(@Nonnull int renNo) {
+        this.renNo = renNo;
+    }
+
+    /**
+     * 差止控除状態区分のgetメソッドです。
+     * <br/>
+     * <br/>01：登録,99：解除
+     *
+     * @return 差止控除状態区分
+     */
+    @CheckForNull
+    public RString getSashitomeKojoJotaiKubun() {
+        return sashitomeKojoJotaiKubun;
+    }
+
+    /**
+     * 差止控除状態区分のsetメソッドです。
+     * <br/>
+     * <br/>01：登録,99：解除
+     *
+     * @param sashitomeKojoJotaiKubun 差止控除状態区分
+     */
+    public void setSashitomeKojoJotaiKubun(RString sashitomeKojoJotaiKubun) {
+        this.sashitomeKojoJotaiKubun = sashitomeKojoJotaiKubun;
     }
 
     /**
@@ -245,6 +251,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      *
      * @return 差止決定年月日
      */
+    @CheckForNull
     public FlexibleDate getSashitome_KetteiYMD() {
         return sashitome_KetteiYMD;
     }
@@ -263,6 +270,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      *
      * @return 差止通知書発行年月日
      */
+    @CheckForNull
     public FlexibleDate getSashitome_TsuchiHakkoYMD() {
         return sashitome_TsuchiHakkoYMD;
     }
@@ -283,6 +291,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      *
      * @return 差止通知書再発行フラグ
      */
+    @CheckForNull
     public boolean getSashitome_TsuchiSaiHakkoFlag() {
         return sashitome_TsuchiSaiHakkoFlag;
     }
@@ -299,10 +308,30 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
     }
 
     /**
+     * 差止控除番号のgetメソッドです。
+     *
+     * @return 差止控除番号
+     */
+    @CheckForNull
+    public RString getSashitomeKojoNo() {
+        return sashitomeKojoNo;
+    }
+
+    /**
+     * 差止控除番号のsetメソッドです。
+     *
+     * @param sashitomeKojoNo 差止控除番号
+     */
+    public void setSashitomeKojoNo(RString sashitomeKojoNo) {
+        this.sashitomeKojoNo = sashitomeKojoNo;
+    }
+
+    /**
      * 差止納付期限のgetメソッドです。
      *
      * @return 差止納付期限
      */
+    @CheckForNull
     public FlexibleDate getSashitome_NofuYMD() {
         return sashitome_NofuYMD;
     }
@@ -321,6 +350,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      *
      * @return 差止解除年月日
      */
+    @CheckForNull
     public FlexibleDate getSashitome_KaijoYMD() {
         return sashitome_KaijoYMD;
     }
@@ -335,10 +365,49 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
     }
 
     /**
+     * 差止サービス提供年月のgetメソッドです。
+     *
+     * @return 差止サービス提供年月
+     */
+    @CheckForNull
+    public FlexibleYearMonth getSashitome_ServiceTeikyoYM() {
+        return sashitome_ServiceTeikyoYM;
+    }
+
+    /**
+     * 差止サービス提供年月のsetメソッドです。
+     *
+     * @param sashitome_ServiceTeikyoYM 差止サービス提供年月
+     */
+    public void setSashitome_ServiceTeikyoYM(FlexibleYearMonth sashitome_ServiceTeikyoYM) {
+        this.sashitome_ServiceTeikyoYM = sashitome_ServiceTeikyoYM;
+    }
+
+    /**
+     * 差止償還整理番号のgetメソッドです。
+     *
+     * @return 差止償還整理番号
+     */
+    @CheckForNull
+    public RString getSashitome_ShokanSeiriNo() {
+        return sashitome_ShokanSeiriNo;
+    }
+
+    /**
+     * 差止償還整理番号のsetメソッドです。
+     *
+     * @param sashitome_ShokanSeiriNo 差止償還整理番号
+     */
+    public void setSashitome_ShokanSeiriNo(RString sashitome_ShokanSeiriNo) {
+        this.sashitome_ShokanSeiriNo = sashitome_ShokanSeiriNo;
+    }
+
+    /**
      * 控除決定年月日のgetメソッドです。
      *
      * @return 控除決定年月日
      */
+    @CheckForNull
     public FlexibleDate getKojo_KetteiYMD() {
         return kojo_KetteiYMD;
     }
@@ -357,6 +426,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      *
      * @return 控除通知書発行年月日
      */
+    @CheckForNull
     public FlexibleDate getKojo_TsuchiHakkoYMD() {
         return kojo_TsuchiHakkoYMD;
     }
@@ -377,6 +447,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      *
      * @return 控除通知書再発行フラグ
      */
+    @CheckForNull
     public boolean getKojo_TsuchiSaiHakkoYMD() {
         return kojo_TsuchiSaiHakkoYMD;
     }
@@ -397,6 +468,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      *
      * @return 控除被保険者証提出期限
      */
+    @CheckForNull
     public FlexibleDate getKojo_ShoTeishutsuYMD() {
         return kojo_ShoTeishutsuYMD;
     }
@@ -414,7 +486,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      * このエンティティの主キーが他の{@literal DbT4024ShiharaiHohoHenkoSashitomeEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4024ShiharaiHohoHenkoSashitomeEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -431,13 +503,13 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
         if (!Objects.equals(this.kanriKubun, other.kanriKubun)) {
             return false;
         }
-        if (!Objects.equals(this.sashitome_ServiceTeikyoYM, other.sashitome_ServiceTeikyoYM)) {
-            return false;
-        }
-        if (!Objects.equals(this.sashitome_ShokanSeiriNo, other.sashitome_ShokanSeiriNo)) {
-            return false;
-        }
         if (this.rirekiNo != other.rirekiNo) {
+            return false;
+        }
+        if (!Objects.equals(this.johoBunruiKubun, other.johoBunruiKubun)) {
+            return false;
+        }
+        if (this.renNo != other.renNo) {
             return false;
         }
         return true;
@@ -451,15 +523,18 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
         this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
         this.hihokenshaNo = entity.hihokenshaNo;
         this.kanriKubun = entity.kanriKubun;
-        this.sashitome_ServiceTeikyoYM = entity.sashitome_ServiceTeikyoYM;
-        this.sashitome_ShokanSeiriNo = entity.sashitome_ShokanSeiriNo;
         this.rirekiNo = entity.rirekiNo;
-        this.sashitome_JokyoKubun = entity.sashitome_JokyoKubun;
+        this.johoBunruiKubun = entity.johoBunruiKubun;
+        this.renNo = entity.renNo;
+        this.sashitomeKojoJotaiKubun = entity.sashitomeKojoJotaiKubun;
         this.sashitome_KetteiYMD = entity.sashitome_KetteiYMD;
         this.sashitome_TsuchiHakkoYMD = entity.sashitome_TsuchiHakkoYMD;
         this.sashitome_TsuchiSaiHakkoFlag = entity.sashitome_TsuchiSaiHakkoFlag;
+        this.sashitomeKojoNo = entity.sashitomeKojoNo;
         this.sashitome_NofuYMD = entity.sashitome_NofuYMD;
         this.sashitome_KaijoYMD = entity.sashitome_KaijoYMD;
+        this.sashitome_ServiceTeikyoYM = entity.sashitome_ServiceTeikyoYM;
+        this.sashitome_ShokanSeiriNo = entity.sashitome_ShokanSeiriNo;
         this.kojo_KetteiYMD = entity.kojo_KetteiYMD;
         this.kojo_TsuchiHakkoYMD = entity.kojo_TsuchiHakkoYMD;
         this.kojo_TsuchiSaiHakkoYMD = entity.kojo_TsuchiSaiHakkoYMD;
@@ -473,7 +548,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shoKisaiHokenshaNo, hihokenshaNo, kanriKubun, sashitome_ServiceTeikyoYM, sashitome_ShokanSeiriNo, rirekiNo, sashitome_JokyoKubun, sashitome_KetteiYMD, sashitome_TsuchiHakkoYMD, sashitome_TsuchiSaiHakkoFlag, sashitome_NofuYMD, sashitome_KaijoYMD, kojo_KetteiYMD, kojo_TsuchiHakkoYMD, kojo_TsuchiSaiHakkoYMD, kojo_ShoTeishutsuYMD);
+        return super.toMd5(shoKisaiHokenshaNo, hihokenshaNo, kanriKubun, rirekiNo, johoBunruiKubun, renNo, sashitomeKojoJotaiKubun, sashitome_KetteiYMD, sashitome_TsuchiHakkoYMD, sashitome_TsuchiSaiHakkoFlag, sashitomeKojoNo, sashitome_NofuYMD, sashitome_KaijoYMD, sashitome_ServiceTeikyoYM, sashitome_ShokanSeiriNo, kojo_KetteiYMD, kojo_TsuchiHakkoYMD, kojo_TsuchiSaiHakkoYMD, kojo_ShoTeishutsuYMD);
     }
 
 // </editor-fold>

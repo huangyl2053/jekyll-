@@ -7,8 +7,9 @@ package jp.co.ndensan.reams.db.dbe.service.core.basic.shujiijoho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.csv.shujiijoho.ShujiiMasterCsvBusiness;
-import jp.co.ndensan.reams.db.dbe.service.core.ninteichosainmaster.NinteiChosainMasterManager;
+import jp.co.ndensan.reams.db.dbe.entity.csv.shujiijoho.ShujiiMasterCsvEntity;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.File;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,7 +28,7 @@ public class ShujiiMasterManager {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link NinteiChosainMasterManager}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link ShujiiMasterManager}のインスタンスを返します。
      *
      * @return {@link InstanceProvider#create}にて生成した{@link ShujiiMasterManager}のインスタンス
      */
@@ -44,7 +45,9 @@ public class ShujiiMasterManager {
     public void csvOutput(List<ShujiiMasterCsvBusiness> csvBusinessList) {
         RString spoolWorkPath = Path.getTmpDirectoryPath();
         RString filePath = Path.combinePath(spoolWorkPath, new RString("主治医情報.csv"));
-
+        if (!File.exists(filePath)) {
+            File.createFile(filePath, new byte[1024]);
+        }
         try (CsvWriter writer = new CsvWriter.InstanceBuilder(filePath)
                 .setEnclosure(new RString("\""))
                 .setEncode(Encode.SJIS)
@@ -52,7 +55,7 @@ public class ShujiiMasterManager {
                 .hasHeader(false)
                 .build()) {
             for (ShujiiMasterCsvBusiness csvBusiness : csvBusinessList) {
-                ShujiiMasterCsvBusiness data = new ShujiiMasterCsvBusiness(
+                ShujiiMasterCsvEntity data = new ShujiiMasterCsvEntity(
                         csvBusiness.getShichosonCode(),
                         csvBusiness.getShichosonMeisho(),
                         csvBusiness.getShujiiCode(),

@@ -33,14 +33,16 @@ public class ShujiiMasterHandler {
     private static final RString 表示値_無効 = new RString("無効");
     private static final RString 表示値_可能 = new RString("なれる");
     private static final RString 表示値_不可 = new RString("なれない");
-    private static final RString 指定医_可能 = new RString("1");
-    private static final RString 指定医_不可 = new RString("2");
-    private static final RString CODE_有効 = new RString("1");
-    private static final RString CODE_無効 = new RString("2");
+    private static final RString 指定医_可能 = new RString("True");
+    private static final RString 指定医_不可 = new RString("False");
+    private static final RString CODE_有効 = new RString("yuko");
+    private static final RString CODE_無効 = new RString("muko");
     private static final RString 表示値_男 = new RString("男");
     private static final RString 表示値_女 = new RString("女");
-    private static final RString MAN = new RString("1");
-    private static final RString WOMAN = new RString("2");
+    private static final RString CODE_M = new RString("1");
+    private static final RString CODE_W = new RString("2");
+    private static final RString CODE_MAN = new RString("key0");
+    private static final RString CODE_WOMAN = new RString("key1");
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_修正 = new RString("修正");
@@ -65,7 +67,7 @@ public class ShujiiMasterHandler {
     public void load() {
 
         List<KeyValueDataSource> shichosonDataSource = new ArrayList<>();
-        shichosonDataSource.add(new KeyValueDataSource(new RString("000001"), new RString("市町村一")));
+        shichosonDataSource.add(new KeyValueDataSource(new RString("034001"), new RString("市町村一")));
         shichosonDataSource.add(new KeyValueDataSource(new RString("000002"), new RString("市町村二")));
         shichosonDataSource.add(new KeyValueDataSource(new RString("000003"), new RString("市町村三")));
         div.getDdlSearchShichoson().setDataSource(shichosonDataSource);
@@ -84,7 +86,6 @@ public class ShujiiMasterHandler {
         div.getTxtSearchShujiiCodeTo().clearValue();
         div.getTxtSearchShujiiShimei().clearValue();
         div.getTxtSearchShujiiKanaShimei().clearValue();
-        div.getRadSearchJokyoFlag().setSelectedIndex(0);
 
     }
 
@@ -95,30 +96,32 @@ public class ShujiiMasterHandler {
      */
     public void setShujiiIchiran(List<ShujiiMaster> shujiiMasterList) {
         List<dgShujiiIchiran_Row> dataGridList = new ArrayList<>();
-        for (ShujiiMaster ShujiiMaster : shujiiMasterList) {
+        for (ShujiiMaster shujiiMaster : shujiiMasterList) {
             dataGridList.add(createDgShujiiIchiranRow(
                     RString.EMPTY,
-                    ShujiiMaster.get市町村コード(),
-                    ShujiiMaster.get主治医氏名(),
-                    ShujiiMaster.get主治医カナ(),
-                    ShujiiMaster.get主治医コード(),
-                    ShujiiMaster.get主治医医療機関コード(),
-                    ShujiiMaster.get医療機関名称(),
-                    ShujiiMaster.get診療科名称(),
-                    ShujiiMaster.is指定医フラグ(),
-                    ShujiiMaster.is状況フラグ(),
-                    ShujiiMaster.get郵便番号(),
-                    ShujiiMaster.get住所(),
-                    ShujiiMaster.get電話番号(),
-                    ShujiiMaster.getFAX番号(),
-                    ShujiiMaster.get性別()));
+                    shujiiMaster.get市町村コード(),
+                    shujiiMaster.get市町村名称(),
+                    shujiiMaster.get主治医氏名(),
+                    shujiiMaster.get主治医カナ(),
+                    shujiiMaster.get主治医コード(),
+                    shujiiMaster.get主治医医療機関コード(),
+                    shujiiMaster.get医療機関名称(),
+                    shujiiMaster.get診療科名称(),
+                    shujiiMaster.is指定医フラグ(),
+                    shujiiMaster.is状況フラグ(),
+                    shujiiMaster.get郵便番号(),
+                    shujiiMaster.get住所(),
+                    shujiiMaster.get電話番号(),
+                    shujiiMaster.getFAX番号(),
+                    shujiiMaster.get性別()));
         }
         div.getShujiiIchiran().getDgShujiiIchiran().setDataSource(dataGridList);
     }
 
     private dgShujiiIchiran_Row createDgShujiiIchiranRow(
             RString jotai,
-            LasdecCode shichoson,
+            LasdecCode shichosonCode,
+            RString shichoson,
             RString shujiiShimei,
             RString shujiiKanaShimei,
             RString shujiiNo,
@@ -135,9 +138,8 @@ public class ShujiiMasterHandler {
     ) {
         dgShujiiIchiran_Row row = new dgShujiiIchiran_Row();
         row.setJotai(jotai);
-        // TODO　共通部品
-        row.setShichoson(new RString("市町村名"));
-        row.setShichosonCode(nullToEmpty(shichoson.value()));
+        row.setShichosonCode(new RString(shichosonCode.toString()));
+        row.setShichoson(shichoson);
         row.setShujiiShimei(shujiiShimei);
         row.setShujiiKanaShimei(shujiiKanaShimei);
         TextBoxCode shujiiCode = new TextBoxCode();
@@ -148,24 +150,24 @@ public class ShujiiMasterHandler {
         row.setShujiiIryoKikanCode(shujiiIryoKikanCode);
         row.setShujiiIryoKikan(shujiiIryoKikan);
         row.setShinryoka(shinryoka);
-        row.setShiteii(shiteii ? 指定医_可能 : 指定医_不可);
+        row.setShiteii(shiteii ? 表示値_可能 : 表示値_不可);
         row.setJokyoFlag(jokyoFlag ? 表示値_有効 : 表示値_無効);
         row.setYubinNo(editYubinNoToIchiran(yubinNo != null ? yubinNo.value() : RString.EMPTY));
         row.setJusho(jusho != null ? jusho.value() : RString.EMPTY);
         row.setTelNo(telNo != null ? telNo.value() : RString.EMPTY);
         row.setFaxNo(faxNo != null ? faxNo.value() : RString.EMPTY);
-        if (MAN.equals(seibetsu)) {
+        if (CODE_M.equals(seibetsu)) {
             row.setSeibetsu(表示値_男);
-        } else if (WOMAN.equals(seibetsu)) {
+        } else if (CODE_W.equals(seibetsu)) {
             row.setSeibetsu(表示値_女);
         }
         return row;
     }
 
     /**
-     * 調査員情報を設定します。
+     * 主治医情報を設定します。
      *
-     * @param row 調査員一覧情報
+     * @param row 主治医一覧情報
      */
     public void setShujiiJohoToMeisai(dgShujiiIchiran_Row row) {
         div.getShujiiJohoInput().getTxtShichoson().setValue(nullToEmpty(row.getShichosonCode()));
@@ -177,16 +179,16 @@ public class ShujiiMasterHandler {
         div.getShujiiJohoInput().getTxtShujiiShimei().setValue(nullToEmpty(row.getShujiiShimei()));
         div.getShujiiJohoInput().getTxtShujiiKanaShimei().setValue(nullToEmpty(row.getShujiiKanaShimei()));
         div.getShujiiJohoInput().getRadSeibetsu().setSelectedKey(
-                表示値_男.equals(row.getSeibetsu()) ? MAN : WOMAN);
+                表示値_男.equals(row.getSeibetsu()) ? CODE_MAN : CODE_WOMAN);
         div.getShujiiJohoInput().getRadShiteiiFlag().setSelectedKey(
                 表示値_可能.equals(row.getShiteii()) ? 指定医_可能 : 指定医_不可);
-        div.getShujiiJohoInput().getTxtShinryokaMei().setValue(row.getShinryoka());
+        div.getShujiiJohoInput().getTxtShinryokaMei().setValue(nullToEmpty(row.getShinryoka()));
         div.getShujiiJohoInput().getTxtYubinNo().setValue(new YubinNo(editYubinNo(row.getYubinNo())));
         div.getShujiiJohoInput().getTxtJusho().setDomain(new AtenaJusho(row.getJusho()));
         div.getShujiiJohoInput().getTxtTelNo().setDomain(new TelNo(row.getTelNo()));
         div.getShujiiJohoInput().getTxtFaxNo().setDomain(new TelNo(row.getFaxNo()));
         div.getShujiiJohoInput().getRadJokyoFlag().setSelectedKey(
-                CODE_有効.equals(row.getJokyoFlag()) ? 表示値_有効 : 表示値_無効);
+                表示値_有効.equals(row.getJokyoFlag()) ? CODE_有効 : CODE_無効);
     }
 
     private RString nullToEmpty(RString obj) {
@@ -197,11 +199,11 @@ public class ShujiiMasterHandler {
     }
 
     /**
-     * 調査員情報を設定します。
+     * 主治医情報を設定します。
      *
      * @param eventJotai 状態
      */
-    public void setChosainJohoToIchiran(RString eventJotai) {
+    public void setShujiiJohoToIchiran(RString eventJotai) {
         dgShujiiIchiran_Row row = new dgShujiiIchiran_Row();
         if (!状態_追加.equals(eventJotai)) {
             row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
@@ -212,11 +214,11 @@ public class ShujiiMasterHandler {
         row.setShujiiShimei(nullToEmpty(div.getShujiiJohoInput().getTxtShujiiShimei().getValue()));
         row.setShujiiKanaShimei(nullToEmpty(div.getShujiiJohoInput().getTxtShujiiKanaShimei().getValue()));
         row.setShujiiIryoKikanCode(div.getShujiiJohoInput().getTxtShujiiIryoKikanCode());
-        row.setShujiiKanaShimei(nullToEmpty(div.getShujiiJohoInput().getTxtShujiiIryoKikanMei().getValue()));
+        row.setShujiiIryoKikan(nullToEmpty(div.getShujiiJohoInput().getTxtShujiiIryoKikanMei().getValue()));
         RString seibetsu = div.getShujiiJohoInput().getRadSeibetsu().getSelectedKey();
-        if (MAN.equals(seibetsu)) {
+        if (CODE_MAN.equals(seibetsu)) {
             row.setSeibetsu(表示値_男);
-        } else if (WOMAN.equals(seibetsu)) {
+        } else if (CODE_WOMAN.equals(seibetsu)) {
             row.setSeibetsu(表示値_女);
         }
         RString shiteiiFlag = div.getShujiiJohoInput().getRadShiteiiFlag().getSelectedKey();
@@ -266,15 +268,16 @@ public class ShujiiMasterHandler {
     }
 
     /**
-     * 調査員情報を設定します。
+     * 主治医情報を設定します。
      *
      * @param shujiiJoho 主治医情報
-     * @return 主治医情報
+     * @return ShujiiJoho 主治医情報
      */
     public ShujiiJoho editShujiiJoho(ShujiiJoho shujiiJoho) {
         return shujiiJoho.createBuilderForEdit().set主治医氏名(div.getShujiiJohoInput().getTxtShujiiShimei().getValue())
                 .set主治医カナ(new AtenaKanaMeisho(div.getShujiiJohoInput().getTxtShujiiKanaShimei().getValue()))
-                .set性別(new Code(div.getShujiiJohoInput().getRadSeibetsu().getSelectedKey()))
+                .set性別(new Code(CODE_MAN.equals(div.getShujiiJohoInput().
+                        getRadSeibetsu().getSelectedKey()) ? CODE_M : CODE_W))
                 .set指定医フラグ(指定医_可能.equals(div.getShujiiJohoInput().getRadShiteiiFlag().getSelectedKey()))
                 .set診療科名称(div.getShujiiJohoInput().getTxtShinryokaMei().getValue())
                 .set郵便番号(div.getShujiiJohoInput().getTxtYubinNo().getValue())
@@ -316,7 +319,7 @@ public class ShujiiMasterHandler {
 //            div.getChosainJohoInput().getTxtShichosonmei().setValue(code.getコード名称());
 //        }
         RString shichoson = div.getShujiiJohoInput().getTxtShichoson().getValue();
-        if (new RString("000001").equals(shichoson)) {
+        if (new RString("034001").equals(shichoson)) {
             div.getShujiiJohoInput().getTxtShichosonmei().setValue(new RString("市町村一"));
         } else if (new RString("000002").equals(shichoson)) {
             div.getShujiiJohoInput().getTxtShichosonmei().setValue(new RString("市町村二"));
@@ -382,7 +385,7 @@ public class ShujiiMasterHandler {
         inputDiv.append(shujiiJohoInputDiv.getTxtShichoson().getValue());
         inputDiv.append(shujiiJohoInputDiv.getTxtShichosonmei().getValue());
         inputDiv.append(shujiiJohoInputDiv.getTxtShujiiIryoKikanCode().getValue());
-        inputDiv.append(shujiiJohoInputDiv.getTxtShujiiIryoKikanMei());
+        inputDiv.append(shujiiJohoInputDiv.getTxtShujiiIryoKikanMei().getValue());
         inputDiv.append(shujiiJohoInputDiv.getTxtShujiiCode().getValue());
         inputDiv.append(shujiiJohoInputDiv.getTxtShujiiShimei().getValue());
         inputDiv.append(shujiiJohoInputDiv.getTxtShujiiKanaShimei().getValue());
@@ -396,5 +399,4 @@ public class ShujiiMasterHandler {
         inputDiv.append((shujiiJohoInputDiv.getRadJokyoFlag().getSelectedKey()));
         return inputDiv.toRString();
     }
-
 }

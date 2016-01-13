@@ -31,35 +31,29 @@ public class IkkatsuHakkoReportProcess extends SimpleBatchProcessBase {
     @Override
     protected void process() {
 
+//        if (get帳票用Entityリスト().isEmpty()) {
+//            //TODO 段站立　QA273 被保険者証一覧表編集クラスの確認
+//        } else {
+//            //TODO 段站立　QA273 被保険者証一覧表編集クラスの確認
+//        }
     }
 
     /**
-     * 帳票用Entityリストを取得します。
+     * TODO 段站立 出力順IDから出力順を取得し、被保険者証用Entityリストをソートする　2015/12/23
      *
-     * @return 帳票用Entityリスト
      */
     private List<IkkatsuHakkoRelateEntity> get帳票用Entityリスト() {
         List<IkkatsuHakkoRelateEntity> 被保険者証用Entityリスト = get被保険者証用();
-        for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 被保険者証用Entityリスト) {
-
-        }
+//        for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 被保険者証用Entityリスト) {
+//            //TODO 段站立 QA273 被保険者証編集クラスの確認 2015/12/23
+//        }
         return 帳票用Entityリスト;
     }
 
-    /**
-     * 被保険者証用データを取得します。
-     *
-     * @return 被保険者証用Entityリスト
-     */
     private List<IkkatsuHakkoRelateEntity> get被保険者証用() {
         return iIkkatsuHakkoMapper.getHihokenshayo();
     }
 
-    /**
-     * 被保険者証一覧表用を取得します。
-     *
-     * @return 被保険者証一覧表用Entityリスト
-     */
     private List<IkkatsuHakkoRelateEntity> get被保険者証一覧() {
         return iIkkatsuHakkoMapper.getHihokenshaIchiran();
     }

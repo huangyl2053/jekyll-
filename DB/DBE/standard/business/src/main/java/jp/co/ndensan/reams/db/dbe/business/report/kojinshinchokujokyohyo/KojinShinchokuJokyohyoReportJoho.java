@@ -15,8 +15,8 @@ import java.util.List;
 public class KojinShinchokuJokyohyoReportJoho {
 
     private final KojinShinchokuJokyohyoHeadItem headItem;
-    private final List<chousaBodyItem> chousaItemList;
-    private final List<shuiBodyItem> shujiItemList;
+    private final List<ChousaBodyItem> chousaItemList;
+    private final List<ShuiBodyItem> shujiItemList;
     private final List<KojinShinchokuJokyohyoBodyItem> bodyItemList;
 
     /**
@@ -29,8 +29,8 @@ public class KojinShinchokuJokyohyoReportJoho {
      */
     public KojinShinchokuJokyohyoReportJoho(
             KojinShinchokuJokyohyoHeadItem headItem,
-            List<chousaBodyItem> chousaItemList,
-            List<shuiBodyItem> shujiItemList,
+            List<ChousaBodyItem> chousaItemList,
+            List<ShuiBodyItem> shujiItemList,
             List<KojinShinchokuJokyohyoBodyItem> bodyItemList) {
 
         this.headItem = headItem;

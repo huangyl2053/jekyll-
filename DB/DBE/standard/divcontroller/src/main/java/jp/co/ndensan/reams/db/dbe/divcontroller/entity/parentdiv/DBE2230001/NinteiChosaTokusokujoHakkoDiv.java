@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2230001;
  * 不正な動作の原因になります。
  */
 
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.chosaitakusakiandchosaininput.IChosaItakusakiAndChosainInputDiv;
@@ -231,20 +230,4 @@ public class NinteiChosaTokusokujoHakkoDiv extends Panel {
     }
 
     // </editor-fold>
-    private NinteiChosaTokusokujoHakkoTempData tempData;
-
-    /**
-     * @return the tempData
-     */
-    public NinteiChosaTokusokujoHakkoTempData getTempData() {
-        return tempData;
-    }
-
-    /**
-     * @param tempData the tempData to set
-     */
-    public void setTempData(NinteiChosaTokusokujoHakkoTempData tempData) {
-        this.tempData = tempData;
-    }
-
 }

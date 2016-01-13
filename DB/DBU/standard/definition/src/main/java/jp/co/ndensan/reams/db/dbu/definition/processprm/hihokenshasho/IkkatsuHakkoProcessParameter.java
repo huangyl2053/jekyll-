@@ -96,19 +96,14 @@ public class IkkatsuHakkoProcessParameter implements IBatchProcessParameter {
         this.shohyojiType = 証表示タイプ;
     }
 
-    /**
-     * FlexibleDateとRTimeデータより、RDateTimeデータに変換します。
-     *
-     * @return konkaiYMDHMS
-     */
-    private RDateTime getKonkaiYMDHMS(FlexibleDate KonkaiYMD, RTime KonkaiHMS) {
-        RDateTime konkaiYMDHMS = RDateTime.of(KonkaiYMD.getYearValue(),
-                KonkaiYMD.getMonthValue(),
-                KonkaiYMD.getDayValue(),
-                KonkaiHMS.getHour(),
-                KonkaiHMS.getMinute(),
-                KonkaiHMS.getSecond(),
-                KonkaiHMS.getMillisOfSecond());
+    private RDateTime getKonkaiYMDHMS(FlexibleDate konkaiYMD, RTime konkaiHMS) {
+        RDateTime konkaiYMDHMS = RDateTime.of(konkaiYMD.getYearValue(),
+                konkaiYMD.getMonthValue(),
+                konkaiYMD.getDayValue(),
+                konkaiHMS.getHour(),
+                konkaiHMS.getMinute(),
+                konkaiHMS.getSecond(),
+                konkaiHMS.getMillisOfSecond());
         return konkaiYMDHMS;
     }
 
@@ -118,7 +113,7 @@ public class IkkatsuHakkoProcessParameter implements IBatchProcessParameter {
      * @return mybatisパラメータ
      */
     public IkkatsuHakkoMybatisParameter toIkkatsuHakkoMybatisParameter() {
-        return new IkkatsuHakkoMybatisParameter(shutsuryokuJokenCode,
+        return IkkatsuHakkoMybatisParameter.createSelectByKeyParam(shutsuryokuJokenCode,
                 getKonkaiYMDHMS(konkaiFromYMD, konkaiFromHMS),
                 konkaiToYMD,
                 getKonkaiYMDHMS(konkaiToYMD, konkaiToHMS),

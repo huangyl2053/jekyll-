@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitoutatsuyoteisha;
 
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import lombok.Getter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class INenreiToutatsuYoteishaCheckListMybatisParameter {
+public class INenreiToutatsuYoteishaCheckListMybatisParameter implements IMyBatisParameter {
 
     private final RString syutsuryokutaisyo;
     private final boolean koumokumeiflg;

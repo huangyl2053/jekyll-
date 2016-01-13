@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.definition.processhprm.nenreitoutatsuyoteisha;
 
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitoutatsuyoteisha.INenreiToutatsuYoteishaCheckListMybatisParameter;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -18,7 +19,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class INenreiToutatsuYoteishaCheckListProcessParameter {
+public class INenreiToutatsuYoteishaCheckListProcessParameter implements IBatchProcessParameter {
 
     private RString syutsuryokutaisyo;
     private boolean koumokumeiflg;

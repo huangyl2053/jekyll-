@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
- * @author nXXXX ○○○○
+ * 主治医マスタのマッパーインタフェースです。
+ * 
  */
 public interface IShujiiMasterJohoMapper {
 

@@ -10,20 +10,20 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanri;
 import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryutaishosha.TennyuTenshutsuHoryuTaishosha;
-import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TennyuTenshutsuHoryuEntity;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.tennyutenshutsuhoryutaishosha.TennyuTenshutsuHoryuTaishoshaMapper;
+import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryutaishosha.TennyushutsuHoryuTaishoshaBusiness;
+import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaBusiness;
+import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TennyushutsuHoryuTaishoshaEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaEntity;
+import jp.co.ndensan.reams.db.dba.persistence.mapper.tennyutenshutsuhoryutaishosha.ITennyuTenshutsuHoryuTaishoshaMapper;
 import jp.co.ndensan.reams.db.dba.service.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriManager;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1011TenshutsuHoryuTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1010TennyushutsuHoryuTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1011TenshutsuHoryuTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -36,8 +36,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class TennyuTenshutsuHoryuTaishoshaManager {
 
     private final MapperProvider mapperProvider;
-    private final DbT1011TenshutsuHoryuTaishoshaDac TenshutsuHoryuTaishoshaDac;
-    private final DbT1010TennyushutsuHoryuTaishoshaDac TennyushutsuHoryuTaishoshaDac;
+    private final DbT1011TenshutsuHoryuTaishoshaDac tenshutsuHoryuTaishoshaDac;
+    private final DbT1010TennyushutsuHoryuTaishoshaDac tennyushutsuHoryuTaishoshaDac;
     private static final RString 転出保留者 = new RString("転出保留者");
     private static final RString 転入保留者 = new RString("転入保留者");
     private static final RString 広域保留者 = new RString("広域保留者");
@@ -45,11 +45,11 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
     /**
      * コンストラクタです。
      */
-    TennyuTenshutsuHoryuTaishoshaManager(MapperProvider mapperProvider, DbT1011TenshutsuHoryuTaishoshaDac TenshutsuHoryuTaishoshaDac,
-            DbT1010TennyushutsuHoryuTaishoshaDac TennyushutsuHoryuTaishoshaDac) {
+    TennyuTenshutsuHoryuTaishoshaManager(MapperProvider mapperProvider, DbT1011TenshutsuHoryuTaishoshaDac tenshutsuHoryuTaishoshaDac,
+            DbT1010TennyushutsuHoryuTaishoshaDac tennyushutsuHoryuTaishoshaDac) {
         this.mapperProvider = mapperProvider;
-        this.TenshutsuHoryuTaishoshaDac = TenshutsuHoryuTaishoshaDac;
-        this.TennyushutsuHoryuTaishoshaDac = TennyushutsuHoryuTaishoshaDac;
+        this.tenshutsuHoryuTaishoshaDac = tenshutsuHoryuTaishoshaDac;
+        this.tennyushutsuHoryuTaishoshaDac = tennyushutsuHoryuTaishoshaDac;
     }
 
     /**
@@ -57,8 +57,8 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
      */
     public TennyuTenshutsuHoryuTaishoshaManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.TenshutsuHoryuTaishoshaDac = InstanceProvider.create(DbT1011TenshutsuHoryuTaishoshaDac.class);
-        this.TennyushutsuHoryuTaishoshaDac = InstanceProvider.create(DbT1010TennyushutsuHoryuTaishoshaDac.class);
+        this.tenshutsuHoryuTaishoshaDac = InstanceProvider.create(DbT1011TenshutsuHoryuTaishoshaDac.class);
+        this.tennyushutsuHoryuTaishoshaDac = InstanceProvider.create(DbT1010TennyushutsuHoryuTaishoshaDac.class);
     }
 
     /**
@@ -77,20 +77,14 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
      */
     @Transaction
     public SearchResult<TennyuTenshutsuHoryuTaishosha> getTenshutsuHoryuTaishoshaList() {
-        TennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(TennyuTenshutsuHoryuTaishoshaMapper.class);
-        List<TennyuTenshutsuHoryuEntity> entityList = mapper.get転出保留対象者情報の取得処理();
+        ITennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(ITennyuTenshutsuHoryuTaishoshaMapper.class);
+        List<TennyushutsuHoryuTaishoshaEntity> entityList = mapper.get転出保留対象者情報の取得処理();
         if (entityList.isEmpty()) {
             return SearchResult.of(Collections.<ShikakuShutokuJogaishaKanri>emptyList(), 0, false);
         }
         List<TennyuTenshutsuHoryuTaishosha> businessList = new ArrayList<>();
-        for (TennyuTenshutsuHoryuEntity entity : entityList) {
-            CodeMaster.getShubetsu(SubGyomuCode.DBA介護資格, new CodeShubetsu(entity.getJuminShubetsuCode())).getコード種別名称();
-            CodeMaster.getShubetsu(SubGyomuCode.DBA介護資格, new CodeShubetsu(entity.getIdoJiyuCode())).getコード種別名称();
-            if (entity.getTenshutsuKakuteiIdoYMD().isEmpty()) {
-                entity.setTorokuIdoYMD(entity.getTenshutsuYoteiIdoYMD());
-            }
-            entity.setTorokuIdoYMD(entity.getTenshutsuKakuteiIdoYMD());
-            businessList.add(new TennyuTenshutsuHoryuTaishosha(entity));
+        for (TennyushutsuHoryuTaishoshaEntity entity : entityList) {
+            businessList.add(new TennyushutsuHoryuTaishoshaBusiness(entity));
         }
         return SearchResult.of(businessList, 0, false);
     }
@@ -102,43 +96,46 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
      */
     @Transaction
     public SearchResult<TennyuTenshutsuHoryuTaishosha> getTennyuHoryuTaishoshaList() {
-        TennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(TennyuTenshutsuHoryuTaishoshaMapper.class);
-        List<TennyuTenshutsuHoryuEntity> entityList = mapper.get転入保留対象者情報の取得処理();
+        ITennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(ITennyuTenshutsuHoryuTaishoshaMapper.class);
+        List<TenshutsuHoryuTaishoshaEntity> entityList = mapper.get転入保留対象者情報の取得処理();
         if (entityList.isEmpty()) {
             return SearchResult.of(Collections.<ShikakuShutokuJogaishaKanri>emptyList(), 0, false);
         }
         List<TennyuTenshutsuHoryuTaishosha> businessList = new ArrayList<>();
-        for (TennyuTenshutsuHoryuEntity entity : entityList) {
-            CodeMaster.getShubetsu(SubGyomuCode.DBA介護資格, new CodeShubetsu(entity.getJuminShubetsuCode())).getコード種別名称();
-            CodeMaster.getShubetsu(SubGyomuCode.DBA介護資格, new CodeShubetsu(entity.getIdoJiyuCode())).getコード種別名称();
-            businessList.add(new TennyuTenshutsuHoryuTaishosha(entity));
+        for (TenshutsuHoryuTaishoshaEntity entity : entityList) {
+            //TODO QA:内容 434
+//            RString 住民種別 = CodeMaster.getCodeMeisho(CodeShubetsu.EMPTY, new Code(entity.get住民種別コード()));
+//            RString 性別 = CodeMaster.getCodeMeisho(CodeShubetsu.EMPTY, new Code(entity.get性別コード()));
+//            RString 異動事由 = CodeMaster.getCodeMeisho(CodeShubetsu.EMPTY, new Code(entity.get異動事由コード()));
+//            entity.set住民種別コード(住民種別);
+//            entity.set性別コード(性別);
+//            entity.set異動事由コード(異動事由);
+            businessList.add(new TenshutsuHoryuTaishoshaBusiness(entity));
         }
         return SearchResult.of(businessList, 0, false);
     }
 
     /**
-     * 広域保留対象者情報の取得処理します
+     * 広域保留対象者 情報の取得処理します
      *
      * @return SearchResult<TennyuTenshutsuHoryuTaishosha>
      */
     @Transaction
     public SearchResult<TennyuTenshutsuHoryuTaishosha> getKoikiHoryuTaishoshaList() {
-        TennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(TennyuTenshutsuHoryuTaishoshaMapper.class);
-        List<TennyuTenshutsuHoryuEntity> entityList = mapper.get広域保留対象者情報の取得処理();
+        ITennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(ITennyuTenshutsuHoryuTaishoshaMapper.class);
+        List<TenshutsuHoryuTaishoshaEntity> entityList = mapper.get広域保留対象者情報の取得処理();
         if (entityList.isEmpty()) {
             return SearchResult.of(Collections.<ShikakuShutokuJogaishaKanri>emptyList(), 0, false);
         }
         List<TennyuTenshutsuHoryuTaishosha> businessList = new ArrayList<>();
-        for (TennyuTenshutsuHoryuEntity entity : entityList) {
-            CodeMaster.getShubetsu(SubGyomuCode.DBA介護資格, new CodeShubetsu(entity.getJuminShubetsuCode())).getコード種別名称();
-            CodeMaster.getShubetsu(SubGyomuCode.DBA介護資格, new CodeShubetsu(entity.getIdoJiyuCode())).getコード種別名称();
-            businessList.add(new TennyuTenshutsuHoryuTaishosha(entity));
+        for (TenshutsuHoryuTaishoshaEntity entity : entityList) {
+            businessList.add(new TenshutsuHoryuTaishoshaBusiness(entity));
         }
         return SearchResult.of(businessList, 0, false);
     }
 
     /**
-     * 転入転出保留対象者情報を物理削除します
+     * 転入転出保留対象者情報を物理削除します n
      *
      * @param 識別コード ShikibetsuCode
      * @param 履歴番号 Decimal
@@ -150,18 +147,14 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
             Decimal 履歴番号,
             RString 対象種類) {
         if (転出保留者.equals(対象種類)) {
-            DbT1011TenshutsuHoryuTaishoshaEntity tenshutsuHoryuTaishoshaEntity = new DbT1011TenshutsuHoryuTaishoshaEntity();
-            tenshutsuHoryuTaishoshaEntity.setShikibetsuCode(識別コード);
-            tenshutsuHoryuTaishoshaEntity.setRirekiNo(履歴番号);
+            DbT1011TenshutsuHoryuTaishoshaEntity tenshutsuHoryuTaishoshaEntity = tenshutsuHoryuTaishoshaDac.selectByKey(識別コード, 履歴番号);
             tenshutsuHoryuTaishoshaEntity.setState(EntityDataState.Deleted);
-            return 1 == TenshutsuHoryuTaishoshaDac.delete(tenshutsuHoryuTaishoshaEntity);
+            return 1 == tenshutsuHoryuTaishoshaDac.delete(tenshutsuHoryuTaishoshaEntity);
         }
         if (転入保留者.equals(対象種類) || 広域保留者.equals(対象種類)) {
-            DbT1010TennyushutsuHoryuTaishoshaEntity tennyushutsuHoryuTaishoshaEntity = new DbT1010TennyushutsuHoryuTaishoshaEntity();
-            tennyushutsuHoryuTaishoshaEntity.setShikibetsuCode(識別コード);
-            tennyushutsuHoryuTaishoshaEntity.setRirekiNo(履歴番号);
+            DbT1010TennyushutsuHoryuTaishoshaEntity tennyushutsuHoryuTaishoshaEntity = tennyushutsuHoryuTaishoshaDac.selectByKey(識別コード, 履歴番号);
             tennyushutsuHoryuTaishoshaEntity.setState(EntityDataState.Deleted);
-            return 1 == TennyushutsuHoryuTaishoshaDac.save(tennyushutsuHoryuTaishoshaEntity);
+            return 1 == tennyushutsuHoryuTaishoshaDac.delete(tennyushutsuHoryuTaishoshaEntity);
         }
         return false;
     }

@@ -67,9 +67,8 @@ public class ShinsakaiIinJohoToroku {
         div.getDdlShikakuCode().setDataSource(manager.get資格コードList());
         div.getDdlYusoKubun().setDataSource(manager.get審査員郵送区分List());
         createHandOf(div).load();
+        init介護認定審査会委員情報更新();
 
-        Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> 介護認定審査会委員情報更新 = Models.create(new ArrayList<ShinsakaiIinJoho>());
-        ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報更新, 介護認定審査会委員情報更新);
         response.data = div;
         return response;
     }
@@ -229,7 +228,11 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData onClick_btnShozokuKikanAdd(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
-        div.getDgShozokuKikanIchiran().getDataSource().add(new dgShozokuKikanIchiran_Row());
+        dgShozokuKikanIchiran_Row row = new dgShozokuKikanIchiran_Row();
+        row.getNinteiItakusakiCode().setDisabled(true);
+        row.getShujiiIryoKikanCode().setDisabled(true);
+        row.getSonotaKikanCode().setDisabled(true);
+        div.getDgShozokuKikanIchiran().getDataSource().add(row);
         response.data = div;
         return response;
     }
@@ -389,6 +392,7 @@ public class ShinsakaiIinJohoToroku {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             審査会委員情報更新();
+            init介護認定審査会委員情報更新();
             onClick_btnSave状態設定(div);
         }
         response.data = div;
@@ -475,6 +479,7 @@ public class ShinsakaiIinJohoToroku {
         handler.shinsakaiIinJohoDiv_init();
         handler.shozokuKikanIchiranDiv_init();
         handler.renrakusakiKinyuKikanDiv_init();
+        div.getBtnShinsakaiIinAdd().setDisabled(false);
         div.getBtnToroku().setDisabled(true);
         div.getBtnDelete().setDisabled(true);
         ViewStateHolder.put(ViewStateKeys.モード, RString.EMPTY);
@@ -510,8 +515,14 @@ public class ShinsakaiIinJohoToroku {
         handler.shinsakaiIinJohoDiv_init();
         handler.shozokuKikanIchiranDiv_init();
         handler.renrakusakiKinyuKikanDiv_init();
+        div.getBtnShinsakaiIinAdd().setDisabled(false);
         div.getBtnToroku().setDisabled(true);
         div.getBtnDelete().setDisabled(true);
+    }
+
+    private void init介護認定審査会委員情報更新() {
+        Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> 介護認定審査会委員情報更新 = Models.create(new ArrayList<ShinsakaiIinJoho>());
+        ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報更新, 介護認定審査会委員情報更新);
     }
 
     private void set所属機関一覧情報(ShinsakaiIinJohoTorokuDiv div) {
@@ -521,6 +532,9 @@ public class ShinsakaiIinJohoToroku {
         所属機関一覧 = finder.get所属機関一覧情報(new ShinsakaiIinJohoMapperParameter(
                 div.getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode())).records();
         div.getDgShozokuKikanIchiran().setDataSource(createHandOf(div).setShozokuKikanIchiranDiv(所属機関一覧));
+        div.getDgShozokuKikanIchiran().getGridSetting().getColumn(new RString("ninteiItakusakiCode")).getCellDetails().setDisabled(true);
+        div.getDgShozokuKikanIchiran().getGridSetting().getColumn(new RString("shujiiIryoKikanCode")).getCellDetails().setDisabled(true);
+        div.getDgShozokuKikanIchiran().getGridSetting().getColumn(new RString("sonotaKikanCode")).getCellDetails().setDisabled(true);
     }
 
     private void set審査会委員情報詳細(ShinsakaiIinJohoTorokuDiv div) {
@@ -543,7 +557,11 @@ public class ShinsakaiIinJohoToroku {
         handler.clear審査会委員詳細情報();
         handler.clear連絡先金融機関();
         div.getDgShozokuKikanIchiran().getDataSource().clear();
-        div.getDgShozokuKikanIchiran().getDataSource().add(new dgShozokuKikanIchiran_Row());
+        dgShozokuKikanIchiran_Row row = new dgShozokuKikanIchiran_Row();
+        row.getNinteiItakusakiCode().setDisabled(true);
+        row.getShujiiIryoKikanCode().setDisabled(true);
+        row.getSonotaKikanCode().setDisabled(true);
+        div.getDgShozokuKikanIchiran().getDataSource().add(row);
     }
 
     private ShinsakaiIinJohoTorokuHandler createHandOf(ShinsakaiIinJohoTorokuDiv div) {

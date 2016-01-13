@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.shikakuhenkorireki;
 
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus.Add;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus.Delete;
@@ -15,6 +17,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakuhenkorireki.ShikakuHenkoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakuhenkorireki.dgHenko_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -22,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.DivcontrollerMethod;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICallbackMethod;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.SingleButtonType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 共有子Div「資格変更履歴」のイベントを定義したDivControllerです。
@@ -30,6 +35,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class ShikakuHenkoRireki {
 
+    private static final Code 広域 = new Code("111");
+    private static final RString 合併有り = new RString("1");
+
     /**
      * 引数から渡されたキーを元に被保険者台帳を検索し、その結果をグリッドに設定します。
      *
@@ -37,11 +45,42 @@ public class ShikakuHenkoRireki {
      * @return 資格変更履歴Divを持つResponseData
      */
     public ResponseData<ShikakuHenkoRirekiDiv> load(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
-//        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
+        Boolean is単一 = !ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード().equals(広域);
+        Boolean is合併有り = BusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告).equals(合併有り);
+        if (is単一 && !is合併有り) {
+            henkoRirekiDiv.getDgHenko().getGridSetting().getColumn("shozaiHokensha").setVisible(false);
+            henkoRirekiDiv.getDgHenko().getGridSetting().getColumn("sochimotoHokensha").setVisible(false);
+            henkoRirekiDiv.getDgHenko().getGridSetting().getColumn("kyuHokensha").setVisible(false);
+            henkoRirekiDiv.getHenkoHokenshaJoho().setVisible(false);
+        } else if (is単一 && is合併有り) {
+            henkoRirekiDiv.getDgHenko().getGridSetting().getColumn("shozaiHokensha").setVisible(false);
+            henkoRirekiDiv.getDgHenko().getGridSetting().getColumn("sochimotoHokensha").setVisible(false);
+            henkoRirekiDiv.getDgHenko().getGridSetting().getColumn("kyuHokensha").setVisible(true);
+            henkoRirekiDiv.getHenkoHokenshaJoho().setVisible(true);
+            henkoRirekiDiv.getHenkoHokenshaJoho().getDdlHenkoKyuHokensha().setVisible(true);
+            henkoRirekiDiv.getHenkoHokenshaJoho().getDdlHenkoSochimotoHokensha().setVisible(false);
+            henkoRirekiDiv.getHenkoHokenshaJoho().getDdlHenkoKyuHokensha().setVisible(false);
+        } else if (!is単一 && !is合併有り) {
+            henkoRirekiDiv.getDgHenko().getGridSetting().getColumn("shozaiHokensha").setVisible(true);
+            henkoRirekiDiv.getDgHenko().getGridSetting().getColumn("sochimotoHokensha").setVisible(true);
+            henkoRirekiDiv.getDgHenko().getGridSetting().getColumn("kyuHokensha").setVisible(false);
+            henkoRirekiDiv.getHenkoHokenshaJoho().setVisible(true);
+            henkoRirekiDiv.getHenkoHokenshaJoho().getDdlHenkoKyuHokensha().setVisible(false);
+            henkoRirekiDiv.getHenkoHokenshaJoho().getDdlHenkoSochimotoHokensha().setVisible(true);
+            henkoRirekiDiv.getHenkoHokenshaJoho().getDdlHenkoKyuHokensha().setVisible(true);
+        } else if (!is単一 && is合併有り) {
+            henkoRirekiDiv.getDgHenko().getGridSetting().getColumn("shozaiHokensha").setVisible(true);
+            henkoRirekiDiv.getDgHenko().getGridSetting().getColumn("sochimotoHokensha").setVisible(true);
+            henkoRirekiDiv.getDgHenko().getGridSetting().getColumn("kyuHokensha").setVisible(true);
+            henkoRirekiDiv.getHenkoHokenshaJoho().setVisible(true);
+            henkoRirekiDiv.getHenkoHokenshaJoho().getDdlHenkoKyuHokensha().setVisible(true);
+            henkoRirekiDiv.getHenkoHokenshaJoho().getDdlHenkoSochimotoHokensha().setVisible(true);
+            henkoRirekiDiv.getHenkoHokenshaJoho().getDdlHenkoKyuHokensha().setVisible(true);
+        }
+         //        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
         //TODO n8178 城間篤人 修正の必要有り。 2015年2月末まで
-//        LasdecCode lasdecCode = new LasdecCode("123456");
-//        LasdecCode kyuLasdecCode = new LasdecCode("123456");
-
+        //        LasdecCode lasdecCode = new LasdecCode("123456");
+        //        LasdecCode kyuLasdecCode = new LasdecCode("123456");
         //HokenshaJohoDisplayMode mode = ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiNashi;
         if (henkoRirekiDiv.getMode_HokenshaJohoDisplayMode() != null) {
             henkoRirekiDiv.getMode_HokenshaJohoDisplayMode();
@@ -309,7 +348,7 @@ public class ShikakuHenkoRireki {
                 break;
         }
 
-       // List<DbT1001HihokenshaDaichoEntity> 全履歴modelList = new ArrayList<>();
+        // List<DbT1001HihokenshaDaichoEntity> 全履歴modelList = new ArrayList<>();
 //        for (HihokenshaDaichoModel model : 全履歴) {
 //            全履歴modelList.add(model.getEntity());
 //        }

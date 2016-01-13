@@ -5,7 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.syokanbaraikettejoho.SyokanbaraiketteJohoMapper">
     
-    <resultMap id="resultMap_SyokanbaraiketeJohoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketeJoho.SyokanbaraiketeJohoEntity" autoMapping="true">
+    <resultMap id="resultMap_SyokanbaraiketeJohoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho.SyokanbaraiketeJohoEntity" autoMapping="true">
         <result property="jigyoshaNo" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler" />
         <result property="yoshikiNo" column="yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="meisaiNo" column="meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -19,7 +19,7 @@
         <result property="tableKbn" column="tableKbn" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dekidakaKbn" column="dekidakaKbn" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-        <resultMap id="resultMap_SyokanbaraiketeJohoDekidakaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketeJoho.SyokanbaraiketeJohoDekidakaEntity" autoMapping="true">
+        <resultMap id="resultMap_SyokanbaraiketeJohoDekidakaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho.SyokanbaraiketeJohoDekidakaEntity" autoMapping="true">
         <result property="jigyoshaNo" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler" />
         <result property="yoshikiNo" column="yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="meisaiNo" column="meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -42,7 +42,7 @@
                 ,DbT3048ShokanFukushiYoguHanbaihi."yoshikiNo"
                 ,DbT3048ShokanFukushiYoguHanbaihi."meisaiNo"
                 ,DbT3048ShokanFukushiYoguHanbaihi."renban"
-                ,SUBSTRING(DbT3048ShokanFukushiYoguHanbaihi."serviceCode", 0 ,2)    AS  serviceCode
+                ,SUBSTRING(DbT3048ShokanFukushiYoguHanbaihi."serviceCode", 1 ,2)    AS  serviceCode
                 ,' '                                                                AS  serviceName
                 ,DbT3048ShokanFukushiYoguHanbaihi."fukushiYoguShohinName"           AS  fukushiYoguShohinName
                 ,DbT3048ShokanFukushiYoguHanbaihi."kounyuKingaku"                   AS kounyuKingaku
@@ -51,8 +51,8 @@
                 ,'2'               AS      tableKbn
                 ,'0'               AS      dekidakaKbn
             FROM
-                rgdb."DbT3048ShokanFukushiYoguHanbaihi" 　AS  DbT3048ShokanFukushiYoguHanbaihi
-            INNER JOIN rgdb."DbT3038ShokanKihon"  　　　　 AS  DbT3038ShokanKihon
+                rgdb."DbT3048ShokanFukushiYoguHanbaihi"  AS  DbT3048ShokanFukushiYoguHanbaihi
+            INNER JOIN rgdb."DbT3038ShokanKihon"       AS  DbT3038ShokanKihon
                     ON
                       DbT3048ShokanFukushiYoguHanbaihi."hiHokenshaNo" = DbT3038ShokanKihon."hiHokenshaNo"
                   AND DbT3048ShokanFukushiYoguHanbaihi."serviceTeikyoYM" = DbT3038ShokanKihon."serviceTeikyoYM"
@@ -76,7 +76,7 @@
                 ,DbT3049ShokanJutakuKaishu."yoshikiNo"
                 ,DbT3049ShokanJutakuKaishu."meisaiNo"
                 ,DbT3049ShokanJutakuKaishu."renban"
-                ,SUBSTRING(DbT3049ShokanJutakuKaishu."serviceCode", 0, 2)             AS serviceCode
+                ,SUBSTRING(DbT3049ShokanJutakuKaishu."serviceCode", 1, 2)             AS serviceCode
                 ,DbT7130KaigoServiceShurui."serviceShuruiMeisho"                      AS serviceName
                 ,' '                                                                  AS fukushiYoguShohinName
                 ,DbT3049ShokanJutakuKaishu."kaishuKingaku"                            AS kounyuKingaku
@@ -88,7 +88,7 @@
                 rgdb."DbT3049ShokanJutakuKaishu" AS DbT3049ShokanJutakuKaishu
             INNER JOIN rgdb."DbT7130KaigoServiceShurui" AS DbT7130KaigoServiceShurui
                 ON
-                    SUBSTRING(DbT3049ShokanJutakuKaishu."serviceCode", 0, 2) = DbT7130KaigoServiceShurui."serviceShuruiCd"
+                    SUBSTRING(DbT3049ShokanJutakuKaishu."serviceCode", 1, 2) = DbT7130KaigoServiceShurui."serviceShuruiCd"
                 AND DbT7130KaigoServiceShurui."teikyoKaishiYM" <![CDATA[<=]]> DbT3049ShokanJutakuKaishu."serviceTeikyoYM"
                 AND DbT7130KaigoServiceShurui."teikyoshuryoYM" <![CDATA[>=]]> DbT3049ShokanJutakuKaishu."serviceTeikyoYM"
             LEFT JOIN 
@@ -231,36 +231,44 @@
     
      <select id="get償還払決定一覧" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoMapperParameter" 
-            resultMap="resultMap_SyokanbaraiketeJohoDekidakaEntity" fetchSize="500">
+            resultMap="resultMap_SyokanbaraiketeJohoEntity" fetchSize="500">
             SELECT
                 償還払決定一覧."jigyoshaNo"
                 ,償還払決定一覧."yoshikiNo"
                 ,償還払決定一覧."meisaiNo"
                 ,償還払決定一覧."renban"
-                ,substring(償還払決定一覧."serviceCode", 1, 2)       AS serviceCode
-                ,DbT7130KaigoServiceShurui."serviceShuruiMeisho"  AS serviceName
                 , ' '                                             AS fukushiYoguShohinName
                 <if test="is計画200904">
+                    ,substring(償還払決定一覧."serviceCode", 1, 2)       AS serviceCode
+                    ,DbT7130KaigoServiceShurui."serviceShuruiMeisho"  AS serviceName
                     ,償還払決定一覧."serviceTanisu"                  AS kounyuKingaku
                     ,償還払決定一覧."seikyuKingaku"                  AS shiharaiKingaku
                     ,'6'             AS tableKbn
                 </if>
                <if test="is計画200604">
+                    ,substring(償還払決定一覧."serviceCode", 1, 2)       AS serviceCode
+                    ,DbT7130KaigoServiceShurui."serviceShuruiMeisho"  AS serviceName
                     ,償還払決定一覧."tanisu"                         AS kounyuKingaku
                     ,償還払決定一覧."seikyuKingaku"                  AS shiharaiKingaku
                     ,'7'             AS tableKbn
                 </if>
                 <if test="is計画200004">
+                    ,substring(償還払決定一覧."serviceCode", 1, 2)       AS serviceCode
+                    ,DbT7130KaigoServiceShurui."serviceShuruiMeisho"  AS serviceName
                     ,償還払決定一覧."tanisu"                         AS kounyuKingaku
                     ,償還払決定一覧."seikyuKingaku"                  AS shiharaiKingaku
                     ,'8'             AS tableKbn
                 </if>
                  <if test="is特定入所者">
+                    ,substring(償還払決定一覧."serviceShuruiCode", 1, 2)       AS serviceCode
+                    ,DbT7130KaigoServiceShurui."serviceShuruiMeisho"  AS serviceName
                     ,償還払決定一覧."hokenbunSeikyugakuTotal"        AS kounyuKingaku
                     ,償還払決定一覧."hokenbunSeikyugakuTotal"        AS shiharaiKingaku
                     ,'5'             AS tableKbn
                 </if>
                 <if test="is償還払請求食事費用">
+                    ,'50'       AS serviceCode
+                    ,DbT7130KaigoServiceShurui."serviceShuruiMeisho"  AS serviceName
                     ,償還払決定一覧."shokujiTeikyohiSeikyugaku"      AS kounyuKingaku
                     ,償還払決定一覧."shokujiTeikyohiSeikyugaku"      AS shiharaiKingaku
                     ,'5'             AS tableKbn
@@ -284,13 +292,32 @@
                       rgdb."DbT3043ShokanShokujiHiyo"    AS 償還払決定一覧
                 </if>
             INNER JOIN  rgdb."DbT7130KaigoServiceShurui" AS DbT7130KaigoServiceShurui
+            <if test="is計画200904">
                 ON  substring(償還払決定一覧."serviceCode", 1, 2) = DbT7130KaigoServiceShurui."serviceShuruiCd"
+            </if>
+            <if test="is計画200604">
+                ON  substring(償還払決定一覧."serviceCode", 1, 2) = DbT7130KaigoServiceShurui."serviceShuruiCd"
+            </if>
+            <if test="is計画200004">
+                ON  substring(償還払決定一覧."serviceCode", 1, 2) = DbT7130KaigoServiceShurui."serviceShuruiCd"
+            </if>
+            <if test="is特定入所者">
+                ON  DbT7130KaigoServiceShurui."serviceShuruiCd" = '50'
+            </if>
+            <if test="is償還払請求食事費用">
+                ON  DbT7130KaigoServiceShurui."serviceShuruiCd" = '50'
+            </if>
                 AND DbT7130KaigoServiceShurui."teikyoKaishiYM" <![CDATA[<=]]> 償還払決定一覧."serviceTeikyoYM"
                 AND DbT7130KaigoServiceShurui."teikyoshuryoYM" <![CDATA[>=]]> 償還払決定一覧."serviceTeikyoYM"
             WHERE
                     償還払決定一覧."hiHokenshaNo" = #{hiHokenshaNo}
                 AND 償還払決定一覧."serviceTeikyoYM" = #{serviceTeikyoYM}
-                AND 償還払決定一覧."seiriNp" = #{seiriNo}
+                <if test="!is特定入所者">
+                    AND 償還払決定一覧."seiriNp" = #{seiriNo}
+                </if>
+                <if test="is特定入所者">
+                    AND 償還払決定一覧."seiriNo" = #{seiriNo}
+                </if>
             ORDER BY
                 償還払決定一覧."jigyoshaNo",
                 償還払決定一覧."yoshikiNo"

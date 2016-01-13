@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei;
 
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -33,4 +34,5 @@ public class ShisetsuNyutaishoEntity {
     private RString fujoShuruiCode;
     private FlexibleDate jukyuTeishiKaishiYMD;
     private FlexibleDate jukyuTeishiShuryoYMD;
+    private AtenaMeisho jigyoshaName;
 }

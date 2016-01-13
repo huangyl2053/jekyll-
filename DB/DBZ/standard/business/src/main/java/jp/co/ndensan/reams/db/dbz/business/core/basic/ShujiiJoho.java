@@ -6,10 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -20,12 +18,13 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 主治医情報を管理するクラスです。
  */
-public class ShujiiJoho extends ParentModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJohoEntity, ShujiiJoho> implements Serializable {
+public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJohoEntity, ShujiiJoho> implements Serializable {
 
     private final DbT5912ShujiiJohoEntity entity;
     private final ShujiiJohoIdentifier id;
@@ -39,8 +38,8 @@ public class ShujiiJoho extends ParentModelBase<ShujiiJohoIdentifier, DbT5912Shu
      * @param 主治医コード 主治医コード
      */
     public ShujiiJoho(LasdecCode 市町村コード,
-            ShujiiIryokikanCode 主治医医療機関コード,
-            ShujiiCode 主治医コード) {
+            RString 主治医医療機関コード,
+            RString 主治医コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
         requireNonNull(主治医コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医コード"));
@@ -83,7 +82,6 @@ public class ShujiiJoho extends ParentModelBase<ShujiiJohoIdentifier, DbT5912Shu
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 市町村コードを返します。
      *
@@ -98,7 +96,7 @@ public class ShujiiJoho extends ParentModelBase<ShujiiJohoIdentifier, DbT5912Shu
      *
      * @return 主治医医療機関コード
      */
-    public ShujiiIryokikanCode get主治医医療機関コード() {
+    public RString get主治医医療機関コード() {
         return entity.getShujiiIryokikanCode();
     }
 
@@ -107,7 +105,7 @@ public class ShujiiJoho extends ParentModelBase<ShujiiJohoIdentifier, DbT5912Shu
      *
      * @return 主治医コード
      */
-    public ShujiiCode get主治医コード() {
+    public RString get主治医コード() {
         return entity.getShujiiCode();
     }
 
@@ -213,12 +211,10 @@ public class ShujiiJoho extends ParentModelBase<ShujiiJohoIdentifier, DbT5912Shu
     }
 
     /**
-     * 主治医情報のみを変更対象とします。<br/>
-     * {@link DbT5912ShujiiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 主治医情報のみを変更対象とします。<br/> {@link DbT5912ShujiiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShujiiJoho}
      */
-    @Override
     public ShujiiJoho modifiedModel() {
         DbT5912ShujiiJohoEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
@@ -229,8 +225,7 @@ public class ShujiiJoho extends ParentModelBase<ShujiiJohoIdentifier, DbT5912Shu
     }
 
     /**
-     * 保持する主治医情報を削除対象とします。<br/>
-     * {@link DbT5912ShujiiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する主治医情報を削除対象とします。<br/> {@link DbT5912ShujiiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShujiiJoho}
      */
@@ -240,7 +235,6 @@ public class ShujiiJoho extends ParentModelBase<ShujiiJohoIdentifier, DbT5912Shu
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ShujiiJoho(deletedEntity, id);
@@ -258,12 +252,12 @@ public class ShujiiJoho extends ParentModelBase<ShujiiJohoIdentifier, DbT5912Shu
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L; // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = -2538426578186074261L;
         private final DbT5912ShujiiJohoEntity entity;
         private final ShujiiJohoIdentifier id;
 
@@ -287,5 +281,25 @@ public class ShujiiJoho extends ParentModelBase<ShujiiJohoIdentifier, DbT5912Shu
         return new ShujiiJohoBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ShujiiJoho other = (ShujiiJoho) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 }

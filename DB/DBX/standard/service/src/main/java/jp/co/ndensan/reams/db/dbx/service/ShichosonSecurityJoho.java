@@ -67,6 +67,12 @@ public final class ShichosonSecurityJoho {
     public ShichosonSecurityJoho() {
     }
 
+    /**
+     * 市町村セキュリティ情報を取得する
+     *
+     * @param 業務分類 業務分類
+     * @return
+     */
     public static ShichosonSecurityJoho getShichosonSecurityJoho(GyomuBunrui 業務分類) {
         requireNonNull(業務分類, UrErrorMessages.対象データなし.getMessage().toString());
         介護導入形態Dac = InstanceProvider.create(DbT7908KaigoDonyuKeitaiDac.class);

@@ -33,7 +33,7 @@ public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> 
     private static final String TAISHOSHUTOKU_PROCESS = "taishoShutokuProcess";
     private static final String ICHIJITABLEUPDATE_PROCESS = "ichijiTableUpdateProcess";
     private static final String IKKATSUHAKKOREPORT_PROCESS = "ikkatsuHakkoReportProcess";
-    private static final String IKKATSUHAKKODBINSERT_PROCESS = "IkkatsuHakkoDBInsertProcess"; //@Stepの定数はメソッドの近くに置くと見やすくていい。
+    private static final String IKKATSUHAKKODBINSERT_PROCESS = "ikkatsuHakkoDBInsertProcess"; //@Stepの定数はメソッドの近くに置くと見やすくていい。
 
     /**
      * 一時テーブルの作成とデータの登録です。
@@ -51,7 +51,7 @@ public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> 
      * @return 登録件数
      */
     @Step(TAISHOSHUTOKU_PROCESS)
-    protected IBatchFlowCommand TaishoShutokuProcess() {
+    protected IBatchFlowCommand taishoShutokuProcess() {
         return simpleBatch(TaishoShutokuProcess.class).arguments(getParameter().toIkkatsuHakkoProcessParameter()).define();
     }
 
@@ -61,7 +61,7 @@ public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> 
      * @return 登録件数
      */
     @Step(ICHIJITABLEUPDATE_PROCESS)
-    protected IBatchFlowCommand IchijiTableUpdateProcess() {
+    protected IBatchFlowCommand ichijiTableUpdateProcess() {
         return simpleBatch(IchijiTableUpdateProcess.class).arguments(getParameter().toIkkatsuHakkoProcessParameter()).define();
     }
 
@@ -71,7 +71,7 @@ public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> 
      * @return 帳票出力パラメータ
      */
     @Step(IKKATSUHAKKOREPORT_PROCESS)
-    protected IBatchFlowCommand IkkatsuHakkoReportProcess() {
+    protected IBatchFlowCommand ikkatsuHakkoReportProcess() {
         return simpleBatch(IkkatsuHakkoReportProcess.class).arguments(getParameter().toIkkatsuHakkoProcessParameter()).define();
     }
 
@@ -81,7 +81,7 @@ public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> 
      * @return 登録件数
      */
     @Step(IKKATSUHAKKODBINSERT_PROCESS)
-    protected IBatchFlowCommand IkkatsuHakkoDBInsertProcess() {
+    protected IBatchFlowCommand ikkatsuHakkoDBInsertProcess() {
         return simpleBatch(IkkatsuHakkoDBInsertProcess.class).arguments(getParameter().toIkkatsuHakkoProcessParameter()).define();
     }
 }

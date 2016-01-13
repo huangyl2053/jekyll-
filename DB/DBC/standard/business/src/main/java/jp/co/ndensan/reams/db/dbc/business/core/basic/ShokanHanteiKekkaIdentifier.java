@@ -6,11 +6,10 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import lombok.Value;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import lombok.Value;
 
 /**
  * 償還払支給判定結果の識別子です。
@@ -21,7 +20,6 @@ public class ShokanHanteiKekkaIdentifier implements Serializable {
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth サービス提供年月;
     private final RString 整理番号;
-    private final Decimal 履歴番号;
 
     /**
      * コンストラクタです。
@@ -29,15 +27,13 @@ public class ShokanHanteiKekkaIdentifier implements Serializable {
      * @param 被保険者番号 被保険者番号
      * @param サービス提供年月 サービス提供年月
      * @param 整理番号 整理番号
-     * @param 履歴番号 履歴番号
      */
     public ShokanHanteiKekkaIdentifier(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
-            RString 整理番号,
-            Decimal 履歴番号) {
+            RString 整理番号
+    ) {
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;
         this.整理番号 = 整理番号;
-        this.履歴番号 = 履歴番号;
     }
 }

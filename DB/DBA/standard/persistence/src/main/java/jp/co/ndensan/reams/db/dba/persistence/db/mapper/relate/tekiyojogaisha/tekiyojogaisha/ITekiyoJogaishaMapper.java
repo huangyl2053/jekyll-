@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaisha.tekiyojogaisha
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 適用除外者のマッパーインタフェースです。
@@ -29,9 +30,9 @@ public interface ITekiyoJogaishaMapper {
      * Max履歴番号取得します。
      *
      * @param 適用除外者検索条件 適用除外者を特定するためのMyBatis用パラメータ
-     * @return DbT1004ShisetsuNyutaishoEntity
+     * @return Max履歴番号
      */
-    DbT1004ShisetsuNyutaishoEntity getMax履歴番号(TekiyoJogaishaMapperParameter 適用除外者検索条件);
+    Decimal getMax履歴番号(TekiyoJogaishaMapperParameter 適用除外者検索条件);
 
     /**
      * 宛名情報取得します。
@@ -64,4 +65,20 @@ public interface ITekiyoJogaishaMapper {
      * @return List<TekiyoJogaishaRelateEntity>
      */
     List<TekiyoJogaishaRelateEntity> get施設情(TekiyoJogaishaMapperParameter 適用除外者検索条件);
+
+    /**
+     * 施設情報の取得します。
+     *
+     * @param parameter 適用除外者を特定するためのMyBatis用パラメータ
+     * @return List<DbT1002TekiyoJogaishaEntity>
+     */
+    List<DbT1002TekiyoJogaishaEntity> getTekiyoJogaisha(TekiyoJogaishaMapperParameter parameter);
+
+    /**
+     * 介護保険施設入退所情報の取得します。
+     *
+     * @param parameter 適用除外者を特定するためのMyBatis用パラメータ
+     * @return List<DbT1004ShisetsuNyutaishoEntity>
+     */
+    List<DbT1004ShisetsuNyutaishoEntity> getShisetsuNyutaisho(TekiyoJogaishaMapperParameter parameter);
 }

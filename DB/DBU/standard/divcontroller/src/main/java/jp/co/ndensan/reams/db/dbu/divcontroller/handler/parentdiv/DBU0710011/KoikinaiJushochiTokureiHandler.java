@@ -7,11 +7,10 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0710011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.koikinaiJushochitokurei.KoikinaiJushochiTokureiBatchParamter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.koikinaijushochitokurei.KoikinaiJushochiTokureiBatchParamter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0710011.KoikinaiJushochiTokureiDiv;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,7 +29,6 @@ public class KoikinaiJushochiTokureiHandler {
     private static final RString 直近 = new RString("1");
     private static final RString 基準日 = new RString("2");
     private static final RString 範囲 = new RString("3");
-    private static final RString 選択 = new RString("key0");
     private static final int 市町村コード = 6;
     private static final int 市町村名称 = 7;
 
@@ -39,7 +37,7 @@ public class KoikinaiJushochiTokureiHandler {
     /**
      * コンストラクタです。
      *
-     * @param div 画面情報
+     * @param div KoikinaiJushochiTokurei のクラスファイル 
      */
     public KoikinaiJushochiTokureiHandler(KoikinaiJushochiTokureiDiv div) {
         this.div = div;
@@ -47,9 +45,9 @@ public class KoikinaiJushochiTokureiHandler {
 
     /**
      * 画面初期化処理です。
+     * @param 市町村List 広域全市町村
      */
-    public void onLoad() {
-        SearchResult<KoikiZenShichosonJoho> 市町村List = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho();
+    public void onLoad(SearchResult<KoikiZenShichosonJoho> 市町村List) {
         List<KeyValueDataSource> 市町村DDL = new ArrayList<>();
         RStringBuilder 一件目名称 = new RStringBuilder();
         一件目名称.append(市町村DDL1件目コード);
@@ -111,15 +109,15 @@ public class KoikinaiJushochiTokureiHandler {
             }
             if (div.getBatchParamterInfo().getTxtKonkaiShuryobi().getValue().isBefore(div
                     .getBatchParamterInfo().getTxtKonkaiKaishibi().getValue())) {
-                // TODO DbzErrorMessages変更なし 
-                throw new ApplicationException(DbzErrorMessages.終了日が開始日以前.getMessage());
+                throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage()
+                        .replace("今回開始日", "今回終了日"));
             }
         }
     }
     
     /**
      * 「実行する」ボタンを押下前のチェック実行します。
-     * @return KoikinaiJushochiTokureiBatchParamter
+     * @return KoikinaiJushochiTokureiBatchParamter KoikinaiJushochiTokureiBatchParamter 広域内住所地特例者一覧表_バッチパラメータクラスです
      */
     public KoikinaiJushochiTokureiBatchParamter click実行() {
         KoikinaiJushochiTokureiBatchParamter batchparam = new KoikinaiJushochiTokureiBatchParamter();

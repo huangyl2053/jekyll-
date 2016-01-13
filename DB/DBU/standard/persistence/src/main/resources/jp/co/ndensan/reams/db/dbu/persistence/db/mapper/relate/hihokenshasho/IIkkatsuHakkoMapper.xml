@@ -31,13 +31,13 @@ and open the template in the editor.
         <result property="shikakuHenkoTodokedeYMD" column="shikakuHenkoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jushochitokureiTekiyoJiyuCode" column="jushochitokureiTekiyoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jushochitokureiTekiyoYMD" column="jushochitokureiTekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="jushochitokureiTekiyoTodokedeYMD" column="jushochitokureiTekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tekiyoTodokedeYMD" column="jushochitokureiTekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jushochitokureiKaijoJiyuCode" column="jushochitokureiKaijoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jushochitokureiKaijoYMD" column="jushochitokureiKaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="jushochitokureiKaijoTodokedeYMD" column="jushochitokureiKaijoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kaijoTodokedeYMD" column="jushochitokureiKaijoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jushochiTokureiFlag" column="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="koikinaiJushochiTokureiFlag" column="koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="koikinaiTokureiSochimotoShichosonCode" column="koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="sochimotoShichosonCode" column="koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="kyuShichosonCode" column="kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="logicalDeletedFlag" column="logicalDeletedFlag"/>
         <result property="hakkoShoriTimestamp" column="hakkoShoriTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
@@ -117,16 +117,16 @@ and open the template in the editor.
         <result property="jukyuShikakuShomeishoHakkoYMD1" column="jukyuShikakuShomeishoHakkoYMD1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jukyuShikakuShomeishoHakkoYMD2" column="jukyuShikakuShomeishoHakkoYMD2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shindanMeireishoHakkoYMD" column="shindanMeireishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="nigoShinseiJuriTsuchishoHakkoYMD" column="nigoShinseiJuriTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hakkoYMD" column="nigoShinseiJuriTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ninteiKekkaTsuchishoHakkoYMD" column="ninteiKekkaTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="kubunHenkoTsuchishoHakkoYMD" column="kubunHenkoTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="serviceHenkoTsuchishoHakkoYMD" column="serviceHenkoTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ninteiKyakkaTsuchishoHakkoYMD" column="ninteiKyakkaTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="ninteiTorikeshiTsuchishoHakkoYMD" column="ninteiTorikeshiTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="torikeshiTsuchishoHakkoYMD" column="ninteiTorikeshiTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shikakuShutokuMaeShinseiFlag" column="shikakuShutokuMaeShinseiFlag"/>
         <result property="kyuSochishaFlag" column="kyuSochishaFlag"/>
         <result property="nijiHanteiYMD" column="nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="nijiHanteiYokaigoJotaiKubunCode" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kaigoJotaiKubunCode" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="nijiHanteiNinteiYukoKikan" column="nijiHanteiNinteiYukoKikan"/>
         <result property="nijiHanteiNinteiYukoKaishiYMD" column="nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="nijiHanteiNinteiYukoShuryoYMD" column="nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -140,7 +140,7 @@ and open the template in the editor.
         <result property="nijiHanteiKekkaInputHoho" column="nijiHanteiKekkaInputHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="niniHanteiKekkaInputYMD" column="niniHanteiKekkaInputYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
-<!--        <result property="kanriKubun" column="kanriKubun" typeHandler=""/>-->
+        <!--        <result property="kanriKubun" column="kanriKubun" typeHandler=""/>-->
         <result property="torokuKubun" column="torokuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tekiyoKaishiYMD" column="tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="tekiyoShuryoYMD" column="tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -195,95 +195,95 @@ and open the template in the editor.
         <result property="shisetyuJotaiFlag" column="shisetyuJotaiFlag"/>
     </resultMap>
 
-      <!--被保険者台帳の異動者情報取得-->
-      <select id="getHihokenshaDaichoIdo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <!--被保険者台帳の異動者情報取得-->
+    <select id="getHihokenshaDaichoIdo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT 
-            DbT1001."hihokenshaNo",
-            DbT1001."shikibetsuCode",
-            DbT1001."idoJiyuCode",
-            DbT1001."insertTimestamp",
-            DbT1001."lastUpdateTimestamp"
+        DbT1001."hihokenshaNo",
+        DbT1001."shikibetsuCode",
+        DbT1001."idoJiyuCode",
+        DbT1001."insertTimestamp",
+        DbT1001."lastUpdateTimestamp"
         FROM(   
-            SELECT 
-                  "hihokenshaNo",
-                  "shikibetsuCode",
-                  "idoJiyuCode",
-                  "insertTimestamp",
-                  "lastUpdateTimestamp",
-                  row_number() over(partition by "hihokenshaNo" order by "idoYMD" desc,"edaNo" desc) as rank_number
-              FROM
-                  rgdb."DbT1001HihokenshaDaicho"
-              WHERE
-                 "logicalDeletedFlag"<![CDATA[<>]]> true
-              AND "insertTimestamp" <![CDATA[>=]]> #{konkaiFromYMDHMS}
-              AND "insertTimestamp" <![CDATA[<=]]> #{konkaiToYMDHMS}) DbT1001
-        WHERE
-           rank_number = 1    
-      </select>
-      
-      <!--受給者台帳異動情報の取得-->
-      <select id="getJukyushaDaichoIdo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
-        SELECT
-           DbT4001."hihokenshaNo",
-           DbT4001."shikibetsuCode",
-           DbT4001."shichosonCode",
-           DbT4001."lastUpdateTimestamp",  
-           DbT4001."insertTimestamp"
-        FROM(  
-            SELECT 
-                 "hihokenshaNo",
-                 "shikibetsuCode",
-                 "shichosonCode",
-                 "lastUpdateTimestamp",  
-                 "insertTimestamp",
-                 row_number() over(partition by "hihokenshaNo" order by "rirekiNo" desc,"edaban" desc) as rank_number
-              FROM
-                 rgdb."DbT4001JukyushaDaicho"
-              WHERE
-                  "chokkinIdoJiyuCode" IN ('01','02','04','10')
-              AND "logicalDeletedFlag"<![CDATA[<>]]> true
-              AND "yukoMukoKubun" = '1'
-              AND "insertTimestamp" <![CDATA[>=]]> #{konkaiFromYMDHMS}
-              AND "insertTimestamp" <![CDATA[<=]]> #{konkaiToYMDHMS})DbT4001
-        WHERE
-           rank_number = 1                
-      </select>
-      
-      <!--年齢到達予定者情報の取得-->
-      <select id="getNenreiTotatsuYotesha" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
-        SELECT
-          DbT1001Hiho."shikibetsuCode",
-          DbT1001Hiho."hihokenshaNo",
-          DbT1001Hiho."shichosonCode",
-          DbT1001Hiho."seinengappiYMD"
+        SELECT 
+        "hihokenshaNo",
+        "shikibetsuCode",
+        "idoJiyuCode",
+        "insertTimestamp",
+        "lastUpdateTimestamp",
+        row_number() over(partition by "hihokenshaNo" order by "idoYMD" desc,"edaNo" desc) as rank_number
         FROM
-            (SELECT               
-                DbT1001."shikibetsuCode",
-                DbT1001."hihokenshaNo",
-                PSM."genLasdecCode" AS "shichosonCode",
-                PSM."seinengappiYMD",
-                row_number() over(partition by DbT1001."hihokenshaNo" order by DbT1001."idoYMD" desc,DbT1001."edaNo" desc) as rank_number
-            FROM               
-                rgua.${psmShikibetsuTaisho} AS PSM
-            INNER JOIN
-                rgdb."DbT1001HihokenshaDaicho" AS DbT1001
-            ON
-                DbT1001."shikibetsuCode"<![CDATA[<>]]> PSM."shikibetsuCode"
-            AND DbT1001."shikakuShutokuYMD" IS NOT NULL
-            AND DbT1001."shikakuSoshitsuYMD" IS NULL
-            AND DbT1001."hihokennshaKubunCode" = '2'        
-            WHERE               
-                PSM."seinengappiYMD" <![CDATA[<=]]> #{seinengappiFromYMD}
-            AND PSM."seinengappiYMD" <![CDATA[>=]]> #{seinengappiToYMD})DbT1001Hiho
-        INNER JOIN
-           rgdb."DbT1009ShikakuShutokuJogaisha" AS DbT1009
-        ON
-           DbT1009."shikibetsuCode" <![CDATA[<>]]> DbT1001Hiho."shikibetsuCode"
+        rgdb."DbT1001HihokenshaDaicho"
         WHERE
-          rank_number = 1
-      </select>
+        "logicalDeletedFlag"<![CDATA[<>]]> true
+        AND "insertTimestamp" <![CDATA[>=]]> #{konkaiFromYMDHMS}
+        AND "insertTimestamp" <![CDATA[<=]]> #{konkaiToYMDHMS}) DbT1001
+        WHERE
+        rank_number = 1    
+    </select>
       
-      <!-- 一時テーブルの作成 -->
+    <!--受給者台帳異動情報の取得-->
+    <select id="getJukyushaDaichoIdo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+        SELECT
+        DbT4001."hihokenshaNo",
+        DbT4001."shikibetsuCode",
+        DbT4001."shichosonCode",
+        DbT4001."lastUpdateTimestamp",  
+        DbT4001."insertTimestamp"
+        FROM(  
+        SELECT 
+        "hihokenshaNo",
+        "shikibetsuCode",
+        "shichosonCode",
+        "lastUpdateTimestamp",  
+        "insertTimestamp",
+        row_number() over(partition by "hihokenshaNo" order by "rirekiNo" desc,"edaban" desc) as rank_number
+        FROM
+        rgdb."DbT4001JukyushaDaicho"
+        WHERE
+        "chokkinIdoJiyuCode" IN ('01','02','04','10')
+        AND "logicalDeletedFlag"<![CDATA[<>]]> true
+        AND "yukoMukoKubun" = '1'
+        AND "insertTimestamp" <![CDATA[>=]]> #{konkaiFromYMDHMS}
+        AND "insertTimestamp" <![CDATA[<=]]> #{konkaiToYMDHMS})DbT4001
+        WHERE
+        rank_number = 1                
+    </select>
+      
+    <!--年齢到達予定者情報の取得-->
+    <select id="getNenreiTotatsuYotesha" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+        SELECT
+        DbT1001Hiho."shikibetsuCode",
+        DbT1001Hiho."hihokenshaNo",
+        DbT1001Hiho."shichosonCode",
+        DbT1001Hiho."seinengappiYMD"
+        FROM
+        (SELECT               
+        DbT1001."shikibetsuCode",
+        DbT1001."hihokenshaNo",
+        PSM."genLasdecCode" AS "shichosonCode",
+        PSM."seinengappiYMD",
+        row_number() over(partition by DbT1001."hihokenshaNo" order by DbT1001."idoYMD" desc,DbT1001."edaNo" desc) as rank_number
+        FROM               
+        rgua.${psmShikibetsuTaisho} AS PSM
+        INNER JOIN
+        rgdb."DbT1001HihokenshaDaicho" AS DbT1001
+        ON
+        DbT1001."shikibetsuCode"<![CDATA[<>]]> PSM."shikibetsuCode"
+        AND DbT1001."shikakuShutokuYMD" IS NOT NULL
+        AND DbT1001."shikakuSoshitsuYMD" IS NULL
+        AND DbT1001."hihokennshaKubunCode" = '2'        
+        WHERE               
+        PSM."seinengappiYMD" <![CDATA[<=]]> #{seinengappiFromYMD}
+        AND PSM."seinengappiYMD" <![CDATA[>=]]> #{seinengappiToYMD})DbT1001Hiho
+        INNER JOIN
+        rgdb."DbT1009ShikakuShutokuJogaisha" AS DbT1009
+        ON
+        DbT1009."shikibetsuCode" <![CDATA[<>]]> DbT1001Hiho."shikibetsuCode"
+        WHERE
+        rank_number = 1
+    </select>
+      
+    <!-- 一時テーブルの作成 -->
     <insert id="createTmpHihokenshasho_Ichi">
         CREATE TEMP TABLE "TmpHihokenshasho_Ichi"
         ("hihokenshaNo"rgdb."DbUDD002HihokenshaNo",
@@ -293,22 +293,22 @@ and open the template in the editor.
         "lastUpdateTimestamp"timestamp,
         "idoYMD"rshare."UDD015YMD",
         "edaNo"character(4),
-        "idoJiyuCode"character,
-        "shikakuShutokuJiyuCode"character,
+        "idoJiyuCode"character(2),
+        "shikakuShutokuJiyuCode"character(2),
         "shikakuShutokuYMD"rshare."UDD015YMD",
         "shikakuShutokuTodokedeYMD"rshare."UDD015YMD",
         "ichigoShikakuShutokuYMD"rshare."UDD015YMD",
-        "hihokennshaKubunCode"character,
-        "shikakuSoshitsuJiyuCode"character,
+        "hihokennshaKubunCode"character(2),
+        "shikakuSoshitsuJiyuCode"character(2),
         "shikakuSoshitsuYMD"rshare."UDD015YMD",
         "shikakuSoshitsuTodokedeYMD"rshare."UDD015YMD",
-        "shikakuHenkoJiyuCode"character,
+        "shikakuHenkoJiyuCode"character(2),
         "shikakuHenkoYMD"rshare."UDD015YMD",
         "shikakuHenkoTodokedeYMD"rshare."UDD015YMD",
-        "jushochitokureiTekiyoJiyuCode"character,
+        "jushochitokureiTekiyoJiyuCode"character(2),
         "jushochitokureiTekiyoYMD"rshare."UDD015YMD",
         "jushochitokureiTekiyoTodokedeYMD"rshare."UDD015YMD",
-        "jushochitokureiKaijoJiyuCode"character,
+        "jushochitokureiKaijoJiyuCode"character(2),
         "jushochitokureiKaijoYMD"rshare."UDD015YMD",
         "jushochitokureiKaijoTodokedeYMD"rshare."UDD015YMD",
         "jushochiTokureiFlag"character,
@@ -317,23 +317,23 @@ and open the template in the editor.
         "kyuShichosonCode"rshare."UDD023LasdecCode",
         "logicalDeletedFlag"boolean,
         "daichoShubetsu"character,
-        "nyushoShisetsuShurui"character,
+        "nyushoShisetsuShurui"character(2),
         "nyushoShisetsuCode"rgdb."DbUDD004JigyoshaNo",
         "nyushoShoriYMD"rshare."UDD015YMD",
         "nyushoYMD"rshare."UDD015YMD",
         "taishoShoriYMD"rshare."UDD015YMD",
         "taishoYMD"rshare."UDD015YMD",
-        "roomKigoNo"character,
+        "roomKigoNo"character(20),
         "hakkoShoriTimestamp"rshare."UDD018YMDHMS",
         "rirekiNo"character(4),
         "shinseishoKanriNo"rgdb."DbUDD013ShinseishoKanriNo",
         "shinseiJokyoKubun"character(1),
-        "shishoCode"character,
+        "shishoCode"character(9),
         "chokkinFlag"boolean,
         "jukyuShinseiJiyu"rshare."UDD035Code",
         "shinseiRiyu"text,
         "shinseishaKankeiCode"rshare."UDD035Code",
-        "homninKankei"character,
+        "homninKankei"character(10),
         "jukyuShinseiYMD"rshare."UDD015YMD",
         "nigoTokuteiShippeiCode"rshare."UDD035Code",
         "shinsakaiIraiYMD"rshare."UDD015YMD",
@@ -416,17 +416,17 @@ and open the template in the editor.
         "nijiHanteiKekkaInputYMD"rshare."UDD015YMD",
         "shoKisaiHokenshaNo"rgdb."DbUDD015ShoKisaiHokenshaNo",
         "kanriKubun"character,
-        "torokuKubun"character,
+        "torokuKubun"character(2),
         "tekiyoKaishiYMD"rshare."UDD015YMD",
         "tekiyoShuryoYMD"rshare."UDD015YMD",
-        "shuryoKubun"character,
+        "shuryoKubun"character(2),
         "yokoku_TorokuYMD"rshare."UDD015YMD",
         "sashitome_IraiJuriYMD"rshare."UDD015YMD",
         "yokoku_TsuchiHakkoYMD"rshare."UDD015YMD",
         "yokoku_TsuchiSaiHakkoFlag"boolean,
         "bemmei_TeishutsuYMD"rshare."UDD015YMD",
         "bemmei_UketsukeYMD"rshare."UDD015YMD",
-        "bemmei_RiyuCode"character,
+        "bemmei_RiyuCode"character(2),
         "bemmei_ShinsaKetteiYMD"rshare."UDD015YMD",
         "bemmei_ShinsaKekkaKubun"character,
         "shokan_KetteiYMD"rshare."UDD015YMD",
@@ -442,7 +442,7 @@ and open the template in the editor.
         "kyufuRitsu"rgdb."DbUDD011HokenKyufuRitsu",
         "shuryoShinsei_UketsukeYMD"rshare."UDD015YMD",
         "shuryoShinsei_YMD"rshare."UDD015YMD",
-        "shuryoShinsei_RiyuCode"character,
+        "shuryoShinsei_RiyuCode"character(2),
         "shuryoShinsei_ShinsaKetteiYMD"rshare."UDD015YMD",
         "shuryoShinsei_ShinsaKekkaKubun"character,
         "mukoKubun"boolean,
@@ -452,9 +452,9 @@ and open the template in the editor.
         "todokedeshaShimei"rshare."UDD042AtenaMeisho",
         "todokedeshaShimeiKana"rshare."UDD043AtenaKanaMeisho",
         "todokedeshaYubinNo"rshare."UDD003YubinNo",
-        "todokedeshaJusho"character,
+        "todokedeshaJusho"character(100),
         "todokedeshaTelNo"rshare."UDD026TelNo",
-        "todokedeshaKankeiKubun"character,
+        "todokedeshaKankeiKubun"character(20),
         "zanteiKubun"character,
         "keikakuJigyoshaNo"rgdb."DbUDD004JigyoshaNo",
         "itakusakiJigyoshaNo"rgdb."DbUDD004JigyoshaNo",
@@ -470,1818 +470,1900 @@ and open the template in the editor.
     <!-- データを一時テーブルに登録します。 -->
     <insert id="insertTmpHihokenshasho_Ichi" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity">
         INSERT INTO
-            "TmpHihokenshasho_Ichi"
+        "TmpHihokenshasho_Ichi"
         VALUES 
-            (#{hihokenshaNo},
-            #{shichosonCode},
-            #{shikibetsuCode},
-            #{insertTimestamp},
-            #{lastUpdateTimestamp},
-            #{idoYMD},
-            #{edaNo},
-            #{idoJiyuCode},
-            #{shikakuShutokuJiyuCode},
-            #{shikakuShutokuYMD},
-            #{shikakuShutokuTodokedeYMD},
-            #{ichigoShikakuShutokuYMD},
-            #{hihokennshaKubunCode},
-            #{shikakuSoshitsuJiyuCode},
-            #{shikakuSoshitsuYMD},
-            #{shikakuSoshitsuTodokedeYMD},
-            #{shikakuHenkoJiyuCode},
-            #{shikakuHenkoYMD},
-            #{shikakuHenkoTodokedeYMD},
-            #{jushochitokureiTekiyoJiyuCode},
-            #{jushochitokureiTekiyoYMD},
-            #{jushochitokureiTekiyoTodokedeYMD},
-            #{jushochitokureiKaijoJiyuCode},
-            #{jushochitokureiKaijoYMD},
-            #{jushochitokureiKaijoTodokedeYMD},
-            #{jushochiTokureiFlag},
-            #{koikinaiJushochiTokureiFlag},
-            #{koikinaiTokureiSochimotoShichosonCode},
-            #{kyuShichosonCode},
-            #{logicalDeletedFlag},
-            #{daichoShubetsu},
-            #{nyushoShisetsuShurui},
-            #{nyushoShisetsuCode},
-            #{nyushoShoriYMD},
-            #{nyushoYMD},
-            #{taishoShoriYMD},
-            #{taishoYMD},
-            #{roomKigoNo},
-            #{hakkoShoriTimestamp},
-            #{rirekiNo},
-            #{shinseishoKanriNo},
-            #{shinseiJokyoKubun},
-            #{shishoCode},
-            #{chokkinFlag},
-            #{jukyuShinseiJiyu},
-            #{shinseiRiyu},
-            #{shinseishaKankeiCode},
-            #{homninKankei},
-            #{jukyuShinseiYMD},
-            #{nigoTokuteiShippeiCode},
-            #{shinsakaiIraiYMD},
-            #{yokaigoJotaiKubunCode},
-            #{ninteiYukoKikanKaishiYMD},
-            #{ninteiYukoKikanShuryoYMD},
-            #{ninteiYMD},
-            #{shiteiServiceShurui01},
-            #{shiteiServiceShurui02},
-            #{shiteiServiceShurui03},
-            #{shiteiServiceShurui04},
-            #{shiteiServiceShurui05},
-            #{shiteiServiceShurui06},
-            #{shiteiServiceShurui07},
-            #{shiteiServiceShurui08},
-            #{shiteiServiceShurui09},
-            #{shiteiServiceShurui10},
-            #{shiteiServiceShurui11},
-            #{shiteiServiceShurui12},
-            #{shiteiServiceShurui13},
-            #{shiteiServiceShurui14},
-            #{shiteiServiceShurui15},
-            #{shiteiServiceShurui16},
-            #{shiteiServiceShurui17},
-            #{shiteiServiceShurui18},
-            #{shiteiServiceShurui19},
-            #{shiteiServiceShurui20},
-            #{shiteiServiceShurui21},
-            #{shiteiServiceShurui22},
-            #{shiteiServiceShurui23},
-            #{shiteiServiceShurui24},
-            #{shiteiServiceShurui25},
-            #{shiteiServiceShurui26},
-            #{shiteiServiceShurui27},
-            #{shiteiServiceShurui28},
-            #{shiteiServiceShurui29},
-            #{shiteiServiceShurui30},
-            #{soshitsuYMD},
-            #{chokkinIdoYMD},
-            #{chokkinIdoJiyuCode},
-            #{yukoMukoKubun},
-            #{dataKubun},
-            #{remban},
-            #{idoRiyu},
-            #{shinseishoKubun},
-            #{sakujoJiyuCode},
-            #{yoshienshaNinteiShinseiFlag},
-            #{shikyuGendoTanisu},
-            #{shikyuGendoKaishiYMD},
-            #{shikyuGendoShuryoYMD},
-            #{tankiSikyuGendoNissu},
-            #{tankiShikyuGendoKaishiYMD},
-            #{tankiShikyuGendoShuryoYMD},
-            #{toshoNinteiYukoKaishiYMD},
-            #{toshoNinteiYukoShuryoYMD},
-            #{jukyuShikakuShomeishoHakkoYMD1},
-            #{jukyuShikakuShomeishoHakkoYMD2},
-            #{shindanMeireishoHakkoYMD},
-            #{nigoShinseiJuriTsuchishoHakkoYMD},
-            #{ninteiKekkaTsuchishoHakkoYMD},
-            #{kubunHenkoTsuchishoHakkoYMD},
-            #{serviceHenkoTsuchishoHakkoYMD},
-            #{ninteiKyakkaTsuchishoHakkoYMD},
-            #{ninteiTorikeshiTsuchishoHakkoYMD},
-            #{shikakuShutokuMaeShinseiFlag},
-            #{kyuSochishaFlag},
-            #{nijiHanteiYMD},
-            #{nijiHanteiYokaigoJotaiKubunCode},
-            #{nijiHanteiNinteiYukoKikan},
-            #{nijiHanteiNinteiYukoKaishiYMD},
-            #{nijiHanteiNinteiYukoShuryoYMD},
-            #{shinsakaiShiryoSakuseiYMD},
-            #{shinsakaiKaisaiNo},
-            #{shinsakaiIken},
-            #{ichijiHanteiKekkaHenkoRiyu},
-            #{yokaigoJotaizoReiCode},
-            #{ninteishinsakaiIkenShurui},
-            #{shinsakaiMemo},
-            #{nijiHanteiKekkaInputHoho},
-            #{nijiHanteiKekkaInputYMD},
-            #{shoKisaiHokenshaNo},
-            #{kanriKubun},
-            #{torokuKubun},
-            #{tekiyoKaishiYMD},
-            #{tekiyoShuryoYMD},
-            #{shuryoKubun},
-            #{yokoku_TorokuYMD},
-            #{sashitome_IraiJuriYMD},
-            #{yokoku_TsuchiHakkoYMD},
-            #{yokoku_TsuchiSaiHakkoFlag},
-            #{bemmei_TeishutsuYMD},
-            #{bemmei_UketsukeYMD},
-            #{bemmei_RiyuCode},
-            #{bemmei_ShinsaKetteiYMD},
-            #{bemmei_ShinsaKekkaKubun},
-            #{shokan_KetteiYMD},
-            #{shokan_TsuchiHakkoYMD},
-            #{shokan_TsuchiSaiHakkoFlag},
-            #{hihokenshaShoTeishutsuYMD},
-            #{sashitome_Flag},
-            #{sashitome_KetteiYMD},
-            #{sashitome_KaijoYMD},
-            #{gemmen_KetteiYMD},
-            #{gemmen_TsuchiHakkoYMD},
-            #{gemmen_TsuchiSaiHakkoFlag},
-            #{kyufuRitsu},
-            #{shuryoShinsei_UketsukeYMD},
-            #{shuryoShinsei_YMD},
-            #{shuryoShinsei_RiyuCode},
-            #{shuryoShinsei_ShinsaKetteiYMD},
-            #{shuryoShinsei_ShinsaKekkaKubun},
-            #{mukoKubun},
-            #{taishoYM},
-            #{todokedeKubun},
-            #{todokedeYMD},
-            #{todokedeshaShimei},
-            #{todokedeshaShimeiKana},
-            #{todokedeshaYubinNo},
-            #{todokedeshaJusho},
-            #{todokedeshaTelNo},
-            #{todokedeshaKankeiKubun},
-            #{zanteiKubun},
-            #{keikakuJigyoshaNo},
-            #{itakusakiJigyoshaNo},
-            #{meisho},
-            #{seinengappiYMD},
-            #{kannaiKangaiKubun},
-            #{jusho},
-            #{banchi},
-            #{katagaki},
-            #{shisetyuJotaiFlag})
+        (#{hihokenshaNo},
+        #{shichosonCode},
+        #{shikibetsuCode},
+        #{insertTimestamp},
+        #{lastUpdateTimestamp},
+        #{idoYMD},
+        #{edaNo},
+        #{idoJiyuCode},
+        #{shikakuShutokuJiyuCode},
+        #{shikakuShutokuYMD},
+        #{shikakuShutokuTodokedeYMD},
+        #{ichigoShikakuShutokuYMD},
+        #{hihokennshaKubunCode},
+        #{shikakuSoshitsuJiyuCode},
+        #{shikakuSoshitsuYMD},
+        #{shikakuSoshitsuTodokedeYMD},
+        #{shikakuHenkoJiyuCode},
+        #{shikakuHenkoYMD},
+        #{shikakuHenkoTodokedeYMD},
+        #{jushochitokureiTekiyoJiyuCode},
+        #{jushochitokureiTekiyoYMD},
+        #{tekiyoTodokedeYMD},
+        #{jushochitokureiKaijoJiyuCode},
+        #{jushochitokureiKaijoYMD},
+        #{kaijoTodokedeYMD},
+        #{jushochiTokureiFlag},
+        #{koikinaiJushochiTokureiFlag},
+        #{sochimotoShichosonCode},
+        #{kyuShichosonCode},
+        #{logicalDeletedFlag},
+        #{daichoShubetsu},
+        #{nyushoShisetsuShurui},
+        #{nyushoShisetsuCode},
+        #{nyushoShoriYMD},
+        #{nyushoYMD},
+        #{taishoShoriYMD},
+        #{taishoYMD},
+        #{roomKigoNo},
+        #{hakkoShoriTimestamp},
+        #{rirekiNo},
+        #{shinseishoKanriNo},
+        #{shinseiJokyoKubun},
+        #{shishoCode},
+        #{chokkinFlag},
+        #{jukyuShinseiJiyu},
+        #{shinseiRiyu},
+        #{shinseishaKankeiCode},
+        #{homninKankei},
+        #{jukyuShinseiYMD},
+        #{nigoTokuteiShippeiCode},
+        #{shinsakaiIraiYMD},
+        #{yokaigoJotaiKubunCode},
+        #{ninteiYukoKikanKaishiYMD},
+        #{ninteiYukoKikanShuryoYMD},
+        #{ninteiYMD},
+        #{shiteiServiceShurui01},
+        #{shiteiServiceShurui02},
+        #{shiteiServiceShurui03},
+        #{shiteiServiceShurui04},
+        #{shiteiServiceShurui05},
+        #{shiteiServiceShurui06},
+        #{shiteiServiceShurui07},
+        #{shiteiServiceShurui08},
+        #{shiteiServiceShurui09},
+        #{shiteiServiceShurui10},
+        #{shiteiServiceShurui11},
+        #{shiteiServiceShurui12},
+        #{shiteiServiceShurui13},
+        #{shiteiServiceShurui14},
+        #{shiteiServiceShurui15},
+        #{shiteiServiceShurui16},
+        #{shiteiServiceShurui17},
+        #{shiteiServiceShurui18},
+        #{shiteiServiceShurui19},
+        #{shiteiServiceShurui20},
+        #{shiteiServiceShurui21},
+        #{shiteiServiceShurui22},
+        #{shiteiServiceShurui23},
+        #{shiteiServiceShurui24},
+        #{shiteiServiceShurui25},
+        #{shiteiServiceShurui26},
+        #{shiteiServiceShurui27},
+        #{shiteiServiceShurui28},
+        #{shiteiServiceShurui29},
+        #{shiteiServiceShurui30},
+        #{soshitsuYMD},
+        #{chokkinIdoYMD},
+        #{chokkinIdoJiyuCode},
+        #{yukoMukoKubun},
+        #{dataKubun},
+        #{remban},
+        #{idoRiyu},
+        #{shinseishoKubun},
+        #{sakujoJiyuCode},
+        #{yoshienshaNinteiShinseiFlag},
+        #{shikyuGendoTanisu},
+        #{shikyuGendoKaishiYMD},
+        #{shikyuGendoShuryoYMD},
+        #{tankiSikyuGendoNissu},
+        #{tankiShikyuGendoKaishiYMD},
+        #{tankiShikyuGendoShuryoYMD},
+        #{toshoNinteiYukoKaishiYMD},
+        #{toshoNinteiYukoShuryoYMD},
+        #{jukyuShikakuShomeishoHakkoYMD1},
+        #{jukyuShikakuShomeishoHakkoYMD2},
+        #{shindanMeireishoHakkoYMD},
+        #{hakkoYMD},
+        #{ninteiKekkaTsuchishoHakkoYMD},
+        #{kubunHenkoTsuchishoHakkoYMD},
+        #{serviceHenkoTsuchishoHakkoYMD},
+        #{ninteiKyakkaTsuchishoHakkoYMD},
+        #{torikeshiTsuchishoHakkoYMD},
+        #{shikakuShutokuMaeShinseiFlag},
+        #{kyuSochishaFlag},
+        #{nijiHanteiYMD},
+        #{kaigoJotaiKubunCode},
+        #{nijiHanteiNinteiYukoKikan},
+        #{nijiHanteiNinteiYukoKaishiYMD},
+        #{nijiHanteiNinteiYukoShuryoYMD},
+        #{shinsakaiShiryoSakuseiYMD},
+        #{shinsakaiKaisaiNo},
+        #{shinsakaiIken},
+        #{ichijiHanteiKekkaHenkoRiyu},
+        #{yokaigoJotaizoReiCode},
+        #{ninteishinsakaiIkenShurui},
+        #{shinsakaiMemo},
+        #{nijiHanteiKekkaInputHoho},
+        #{nijiHanteiKekkaInputYMD},
+        #{shoKisaiHokenshaNo},
+        #{kanriKubun},
+        #{torokuKubun},
+        #{tekiyoKaishiYMD},
+        #{tekiyoShuryoYMD},
+        #{shuryoKubun},
+        #{yokoku_TorokuYMD},
+        #{sashitome_IraiJuriYMD},
+        #{yokoku_TsuchiHakkoYMD},
+        #{yokoku_TsuchiSaiHakkoFlag},
+        #{bemmei_TeishutsuYMD},
+        #{bemmei_UketsukeYMD},
+        #{bemmei_RiyuCode},
+        #{bemmei_ShinsaKetteiYMD},
+        #{bemmei_ShinsaKekkaKubun},
+        #{shokan_KetteiYMD},
+        #{shokan_TsuchiHakkoYMD},
+        #{shokan_TsuchiSaiHakkoFlag},
+        #{hihokenshaShoTeishutsuYMD},
+        #{sashitome_Flag},
+        #{sashitome_KetteiYMD},
+        #{sashitome_KaijoYMD},
+        #{gemmen_KetteiYMD},
+        #{gemmen_TsuchiHakkoYMD},
+        #{gemmen_TsuchiSaiHakkoFlag},
+        #{kyufuRitsu},
+        #{shuryoShinsei_UketsukeYMD},
+        #{shuryoShinsei_YMD},
+        #{shuryoShinsei_RiyuCode},
+        #{shuryoShinsei_ShinsaKetteiYMD},
+        #{shuryoShinsei_ShinsaKekkaKubun},
+        #{mukoKubun},
+        #{taishoYM},
+        #{todokedeKubun},
+        #{todokedeYMD},
+        #{todokedeshaShimei},
+        #{todokedeshaShimeiKana},
+        #{todokedeshaYubinNo},
+        #{todokedeshaJusho},
+        #{todokedeshaTelNo},
+        #{todokedeshaKankeiKubun},
+        #{zanteiKubun},
+        #{keikakuJigyoshaNo},
+        #{itakusakiJigyoshaNo},
+        #{meisho},
+        #{seinengappiYMD},
+        #{kannaiKangaiKubun},
+        #{jusho},
+        #{banchi},
+        #{katagaki},
+        #{shisetyuJotaiFlag})
     </insert>
     
     <!-- 一時テーブルの申請中状態フラグを更新します -->
     <update id="updateShisetyuJotaiFlag">
         UPDATE 
-            "TmpHihokenshasho_Ichi"
+        "TmpHihokenshasho_Ichi"
         SET
-            "shisetyuJotaiFlag" = TRUE
+        "shisetyuJotaiFlag" = TRUE
         WHERE
-            "hihokenshaNo" = (
-                SELECT DISTINCT 
-                    DbT4001."hihokenshaNo"
-                FROM 
-                    rgdb."DbT4001JukyushaDaicho" AS DbT4001
-                WHERE
-                    DbT4001."rirekiNo" = '0000')
+        "hihokenshaNo" = (
+        SELECT DISTINCT 
+        DbT4001."hihokenshaNo"
+        FROM 
+        rgdb."DbT4001JukyushaDaicho" AS DbT4001
+        WHERE
+        DbT4001."rirekiNo" = '0000')
     </update>
     
     <!--生年月日の値がない場合、対象情報の取得-->
     <select id="getTaishoJoho1" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
-           Tmp."hihokenshaNo",
-           Tmp."shikibetsuCode"
+        Tmp."hihokenshaNo",
+        Tmp."shikibetsuCode"
         FROM
-           "TmpHihokenshasho_Ichi" AS Tmp
+        "TmpHihokenshasho_Ichi" AS Tmp
         INNER JOIN 
-            (SELECT
-                 DbT1001."hihokenshaNo",
-                 DbT1001."shikibetsuCode"
-             FROM(
-                  SELECT
-                      "hihokenshaNo",
-                      "shikibetsuCode",
-                      row_number() over(partition by "hihokenshaNo" order by "idoYMD" desc,"edaNo" desc) as rank_number
-                  FROM
-                      rgdb."DbT1001HihokenshaDaicho" 
-                  WHERE
-                      "logicalDeletedFlag"<![CDATA[<>]]> true
-                  AND "shikakuShutokuYMD" IS NOT NULL
-                  AND "shikakuSoshitsuYMD" IS NULL)DbT1001
-             WHERE
-                 rank_number = 1)DbT1001Hiho
+        (SELECT
+        DbT1001."hihokenshaNo",
+        DbT1001."shikibetsuCode"
+        FROM(
+        SELECT
+        "hihokenshaNo",
+        "shikibetsuCode",
+        row_number() over(partition by "hihokenshaNo" order by "idoYMD" desc,"edaNo" desc) as rank_number
+        FROM
+        rgdb."DbT1001HihokenshaDaicho" 
+        WHERE
+        "logicalDeletedFlag"<![CDATA[<>]]> true
+        AND "shikakuShutokuYMD" IS NOT NULL
+        AND "shikakuSoshitsuYMD" IS NULL)DbT1001
+        WHERE
+        rank_number = 1)DbT1001Hiho
         ON 
-            Tmp."hihokenshaNo" = DbT1001Hiho."hihokenshaNo"
+        Tmp."hihokenshaNo" = DbT1001Hiho."hihokenshaNo"
         INNER JOIN 
-           rgdb."DbT1010TennyushutsuHoryuTaishosha" AS DbT1010
+        rgdb."DbT1010TennyushutsuHoryuTaishosha" AS DbT1010
         ON    
-           DbT1010."shikibetsuCode" <![CDATA[<>]]> DbT1001Hiho."shikibetsuCode"
+        DbT1010."shikibetsuCode" <![CDATA[<>]]> DbT1001Hiho."shikibetsuCode"
+        WHERE
+        Tmp."shisetyuJotaiFlag" <![CDATA[<>]]> true
+        AND Tmp."seinengappiYMD" IS NULL
+    </select>
+    
+    <!--一時テーブルから生年月日の値があるデータを取得します-->
+    <select id="get生年月日ある" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
+        SELECT
+            Tmp."hihokenshaNo",
+            Tmp."shikibetsuCode",
+            Tmp."seinengappiYMD"
+        FROM
+            "TmpHihokenshasho_Ichi" AS Tmp
         WHERE
             Tmp."shisetyuJotaiFlag" <![CDATA[<>]]> true
-        AND Tmp."seinengappiYMD" IS NULL
-      </select>
+        AND Tmp."seinengappiYMD" IS NOT NULL
+    </select>
     
     <!--生年月日の値がある場合、被保険者台帳管理にチェック-->
-      <select id="check被保険者台帳管理" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
+    <select id="get最新被保険者1" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
         SELECT
-           Tmp."hihokenshaNo",
-           Tmp."shikibetsuCode",
-           Tmp."seinengappiYMD"
-        FROM
-           "TmpHihokenshasho_Ichi" AS Tmp
-        INNER JOIN 
-            (SELECT
-                 DbT1001."hihokenshaNo",
-                 DbT1001."shikibetsuCode"
-             FROM(
-                  SELECT
-                      "hihokenshaNo",
-                      "shikibetsuCode",
-                      row_number() over(partition by "hihokenshaNo" order by "idoYMD" desc,"edaNo" desc) as rank_number
-                  FROM
-                      rgdb."DbT1001HihokenshaDaicho" 
-                  WHERE
-                      "logicalDeletedFlag"<![CDATA[<>]]> true
-                  AND "shikakuShutokuYMD" IS NOT NULL
-                  AND "shikakuSoshitsuYMD" IS NULL
-                  AND "hihokennshaKubunCode" = '2')DbT1001
-             WHERE
-                 rank_number = 1)DbT1001Hiho
-        ON 
-            Tmp."shikibetsuCode" = DbT1001Hiho."shikibetsuCode"
-        WHERE
-            "shisetyuJotaiFlag" <![CDATA[<>]]> true
-        AND "seinengappiYMD" IS NOT NULL
-      </select>
-      
-      <!--生年月日の値がある場合、適用除外者と他市町村住所地特例のチェック-->
-      <select id="check適用除外者" resultMap="resultMap_getIkkatsuHakkoRelateEntity"  parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
-        SELECT
-            DbT1002Joho."shikibetsuCode"
-        FROM
-            (SELECT
-                 DbT1002."shikibetsuCode"
-             FROM(
-                  SELECT
-                      "shikibetsuCode",
-                      row_number() over(partition by "shikibetsuCode" order by "idoYMD" desc,"edaNo" desc) as rank_number
-                  FROM
-                      rgdb."DbT1002TekiyoJogaisha" 
-                  WHERE
-                      "logicalDeletedFlag"<![CDATA[<>]]> true
-                  AND "tekiyoYMD" IS NOT NULL
-                  AND "kaijoYMD" IS NOT NULL
-                  AND "kaijoYMD" <![CDATA[<=]]> #{})DbT1002
-             WHERE
-                 rank_number = 1)DbT1002Joho
-        INNER JOIN
-          (SELECT
-                 DbT1003."shikibetsuCode"
-             FROM(
-                  SELECT
-                      "shikibetsuCode",
-                      row_number() over(partition by "shikibetsuCode" order by "idoYMD" desc,"edaNo" desc) as rank_number
-                  FROM
-                      rgdb."DbT1003TashichosonJushochiTokurei" 
-                  WHERE
-                      "logicalDeletedFlag"<![CDATA[<>]]> true
-                  AND "tekiyoYMD" IS NOT NULL
-                  AND "kaijoYMD" IS NOT NULL
-                  AND "kaijoYMD" <![CDATA[<=]]> #{})DbT1003
-             WHERE
-                 rank_number = 1)DbT1003Joho
-        ON
-           DbT1003Joho."shikibetsuCode" = DbT1002Joho."shikibetsuCode"
-      </select>
-
-      <!--チェック用データの処理-->
-      <select id="getCheckTmpHihoken" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
-        SELECT
-            "hihokenshaNo",               
-            "shikibetsuCode",
-            "seinengappiYMD"
-        FROM               
-            "TmpHihokenshasho_Ichi"
-        WHERE
-            "shisetyuJotaiFlag" = FALSE
-      </select>
-      
-      <!--一括発行の場合、対象情報を取得します。-->
-      <select id="getIkkatsuShoriDateKanri" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
-        SELECT
-            "hihokenshaNo",
-            "hakkoShoriTimestamp"
-        FROM
-            rgdb."DbT7037ShoKofuKaishu"
-        WHERE
-            "hihokenshaNo" = #{hihokenshaNo}
-        AND "kofuShoShurui" = '001'
-        ORDER BY 
-            "rirekiNo" DESC
-        LIMIT 1
-      </select>
-      
-      <!--画面で「再発行する」をチェックする場合、対象情報を取得します。-->
-      <select id="getCheckShoriDateKanri" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
-        SELECT 
-            DbT7037."hihokenshaNo"
+            DbT1001."shikibetsuCode"
         FROM(
             SELECT
-                "hihokenshaNo",
-                substring("hakkoShoriTimestamp",6,2) AS hakkoShoriDay
+                "shikibetsuCode",
+                row_number() over(partition by "hihokenshaNo" order by "idoYMD" desc,"edaNo" desc) as rank_number
             FROM
-                rgdb."DbT7037ShoKofuKaishu"
+                rgdb."DbT1001HihokenshaDaicho" 
             WHERE
-                "hihokenshaNo" = #{hihokenshaNo}
-            AND "kofuShoShurui" = '001')DbT7037
+                "logicalDeletedFlag"<![CDATA[<>]]> true
+            AND "shikakuShutokuYMD" IS NOT NULL
+            AND "shikakuSoshitsuYMD" IS NULL
+            AND "hihokennshaKubunCode" = '2')DbT1001
         WHERE
-            DbT7037.hakkoShoriDay = (SELECT 
-                                         substring(DbT7022."kijunYMD",6,2)
-                                     FROM
-                                         rgdb."DbT7022ShoriDateKanri" AS DbT7022
-                                     WHERE
-                                         DbT7022."subGyomuCode" = 'DBU'
-                                     AND DbT7022."shoriName" = '被保険者証一括発行'
-                                     AND DbT7022."shoriEdaban" = #{shutsuryokuJokenCode})
-      </select>
+        rank_number = 1
+    </select>
+    
+    <!--生年月日の値がある場合、被保険者台帳管理に再チェック-->
+    <select id="get最新被保険者2" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
+        SELECT
+            DbT1001."shikibetsuCode"
+        FROM(
+            SELECT
+                "shikibetsuCode",
+                row_number() over(partition by "hihokenshaNo" order by "idoYMD" desc,"edaNo" desc) as rank_number
+            FROM
+                rgdb."DbT1001HihokenshaDaicho" 
+            WHERE
+                "logicalDeletedFlag"<![CDATA[<>]]> true)DbT1001
+        WHERE
+            rank_number = 1
+    </select>
+    
+    <!--生年月日の値がある場合、適用除外者のチェック-->
+    <select id="get最新適用除外者1" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
+        SELECT
+            DbT1002."shikibetsuCode"
+        FROM(
+            SELECT
+                "shikibetsuCode",
+                row_number() over(partition by "shikibetsuCode" order by "idoYMD" desc,"edaNo" desc) as rank_number
+            FROM
+                rgdb."DbT1002TekiyoJogaisha" 
+            WHERE
+                "logicalDeletedFlag"<![CDATA[<>]]> true)DbT1002
+        WHERE
+            rank_number = 1
+    </select>
+    
+    <!--生年月日の値がある場合、適用除外者のチェック-->
+    <select id="get最新適用除外者2" resultMap="resultMap_getIkkatsuHakkoRelateEntity"  parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+        SELECT
+            DbT1002."shikibetsuCode"
+        FROM(
+            SELECT
+            "shikibetsuCode",
+            row_number() over(partition by "shikibetsuCode" order by "idoYMD" desc,"edaNo" desc) as rank_number
+            FROM
+            rgdb."DbT1002TekiyoJogaisha" 
+            WHERE
+            "logicalDeletedFlag"<![CDATA[<>]]> true
+            AND "tekiyoYMD" IS NOT NULL
+            AND "kaijoYMD" IS NOT NULL
+            AND "kaijoYMD" <![CDATA[<=]]> #{nenreiTotatsuYMD})DbT1002
+        WHERE
+            rank_number = 1
+    </select>
+    
+    <!--生年月日の値がある場合、他市町村住所地特例のチェック-->
+    <select id="get最新他市町村住所地特例1" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
+        SELECT
+            DbT1003."shikibetsuCode"
+        FROM(
+            SELECT
+                "shikibetsuCode",
+                row_number() over(partition by "shikibetsuCode" order by "idoYMD" desc,"edaNo" desc) as rank_number
+            FROM
+                rgdb."DbT1003TashichosonJushochiTokurei" 
+            WHERE
+                "logicalDeletedFlag"<![CDATA[<>]]> true)DbT1003
+        WHERE
+            rank_number = 1
+    </select>
+    
+    <!--生年月日の値がある場合、他市町村住所地特例のチェック-->
+    <select id="get最新他市町村住所地特例2" resultMap="resultMap_getIkkatsuHakkoRelateEntity"  parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+        SELECT
+            DbT1003."shikibetsuCode"
+        FROM(
+            SELECT
+            "shikibetsuCode",
+            row_number() over(partition by "shikibetsuCode" order by "idoYMD" desc,"edaNo" desc) as rank_number
+            FROM
+            rgdb."DbT1003TashichosonJushochiTokurei" 
+            WHERE
+            "logicalDeletedFlag"<![CDATA[<>]]> true
+            AND "tekiyoYMD" IS NOT NULL
+            AND "kaijoYMD" IS NOT NULL
+            AND "kaijoYMD" <![CDATA[<=]]> #{nenreiTotatsuYMD})DbT1003
+        WHERE
+            rank_number = 1
+    </select>
+    
+    <!--チェック用データの処理-->
+    <select id="getCheckTmpHihoken" resultMap="resultMap_getIkkatsuHakkoRelateEntity">
+        SELECT
+        "hihokenshaNo",               
+        "shikibetsuCode",
+        "seinengappiYMD"
+        FROM               
+        "TmpHihokenshasho_Ichi"
+        WHERE
+        "shisetyuJotaiFlag" = FALSE
+    </select>
+      
+    <!--一括発行の場合、対象情報を取得します。-->
+    <select id="getIkkatsuShoriDateKanri" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+        SELECT
+        "hihokenshaNo",
+        "hakkoShoriTimestamp"
+        FROM
+        rgdb."DbT7037ShoKofuKaishu"
+        WHERE
+        "hihokenshaNo" = #{hihokenshaNo}
+        AND "kofuShoShurui" = '001'
+        ORDER BY 
+        "rirekiNo" DESC
+        LIMIT 1
+    </select>
+      
+    <!--画面で「再発行する」をチェックする場合、対象情報を取得します。-->
+    <select id="getCheckShoriDateKanri" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+        SELECT 
+        DbT7037."hihokenshaNo"
+        FROM(
+        SELECT
+        "hihokenshaNo",
+        substring("hakkoShoriTimestamp",6,2) AS hakkoShoriDay
+        FROM
+        rgdb."DbT7037ShoKofuKaishu"
+        WHERE
+        "hihokenshaNo" = #{hihokenshaNo}
+        AND "kofuShoShurui" = '001')DbT7037
+        WHERE
+        DbT7037.hakkoShoriDay = (SELECT 
+        substring(DbT7022."kijunYMD",6,2)
+        FROM
+        rgdb."DbT7022ShoriDateKanri" AS DbT7022
+        WHERE
+        DbT7022."subGyomuCode" = 'DBU'
+        AND DbT7022."shoriName" = '被保険者証一括発行'
+        AND DbT7022."shoriEdaban" = #{shutsuryokuJokenCode})
+    </select>
     
     <!--対象外情報を削除します。-->
-      <delete id="deleteTmpHihoken" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" >
+    <delete id="deleteTmpHihoken" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" >
         DELETE 
         FROM 
-          "TmpHihokenshasho_Ichi" AS Tmp
+        "TmpHihokenshasho_Ichi" AS Tmp
         WHERE 
-          Tmp."hihokenshaNo" <![CDATA[<>]]> #{hihokenshaNo}
+        Tmp."hihokenshaNo" <![CDATA[<>]]> #{hihokenshaNo}
     </delete>
     
     <!--被保険者台帳の情報を取得します。-->
-      <select id="getHihokenshaDaicho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+    <select id="getHihokenshaDaicho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
-            DbT1001Joho."hihokenshaNo",
-            DbT1001Joho."shikibetsuCode",
-            DbT1001Joho."shichosonCode",
-            DbT1001Joho."idoYMD",
-            DbT1001Joho."edaNo",
-            DbT1001Joho."idoJiyuCode",
-            DbT1001Joho."shikakuShutokuJiyuCode",
-            DbT1001Joho."shikakuShutokuYMD",
-            DbT1001Joho."shikakuShutokuTodokedeYMD",
-            DbT1001Joho."ichigoShikakuShutokuYMD",
-            DbT1001Joho."hihokennshaKubunCode",
-            DbT1001Joho."shikakuSoshitsuJiyuCode",
-            DbT1001Joho."shikakuSoshitsuYMD",
-            DbT1001Joho."shikakuSoshitsuTodokedeYMD",
-            DbT1001Joho."shikakuHenkoJiyuCode",
-            DbT1001Joho."shikakuHenkoYMD",
-            DbT1001Joho."shikakuHenkoTodokedeYMD",
-            DbT1001Joho."jushochitokureiTekiyoJiyuCode",
-            DbT1001Joho."jushochitokureiTekiyoYMD",
-            DbT1001Joho."jushochitokureiTekiyoTodokedeYMD",
-            DbT1001Joho."jushochitokureiKaijoJiyuCode",
-            DbT1001Joho."jushochitokureiKaijoYMD",
-            DbT1001Joho."jushochitokureiKaijoTodokedeYMD",
-            DbT1001Joho."jushochiTokureiFlag",
-            DbT1001Joho."koikinaiJushochiTokureiFlag",
-            DbT1001Joho."koikinaiTokureiSochimotoShichosonCode",
-            DbT1001Joho."kyuShichosonCode",
-            DbT1001Joho."logicalDeletedFlag"
+        DbT1001Joho."hihokenshaNo",
+        DbT1001Joho."shikibetsuCode",
+        DbT1001Joho."shichosonCode",
+        DbT1001Joho."idoYMD",
+        DbT1001Joho."edaNo",
+        DbT1001Joho."idoJiyuCode",
+        DbT1001Joho."shikakuShutokuJiyuCode",
+        DbT1001Joho."shikakuShutokuYMD",
+        DbT1001Joho."shikakuShutokuTodokedeYMD",
+        DbT1001Joho."ichigoShikakuShutokuYMD",
+        DbT1001Joho."hihokennshaKubunCode",
+        DbT1001Joho."shikakuSoshitsuJiyuCode",
+        DbT1001Joho."shikakuSoshitsuYMD",
+        DbT1001Joho."shikakuSoshitsuTodokedeYMD",
+        DbT1001Joho."shikakuHenkoJiyuCode",
+        DbT1001Joho."shikakuHenkoYMD",
+        DbT1001Joho."shikakuHenkoTodokedeYMD",
+        DbT1001Joho."jushochitokureiTekiyoJiyuCode",
+        DbT1001Joho."jushochitokureiTekiyoYMD",
+        DbT1001Joho."jushochitokureiTekiyoTodokedeYMD",
+        DbT1001Joho."jushochitokureiKaijoJiyuCode",
+        DbT1001Joho."jushochitokureiKaijoYMD",
+        DbT1001Joho."jushochitokureiKaijoTodokedeYMD",
+        DbT1001Joho."jushochiTokureiFlag",
+        DbT1001Joho."koikinaiJushochiTokureiFlag",
+        DbT1001Joho."koikinaiTokureiSochimotoShichosonCode",
+        DbT1001Joho."kyuShichosonCode",
+        DbT1001Joho."logicalDeletedFlag"
         FROM 
-            "TmpHihokenshasho_Ichi" AS Tmp
+        "TmpHihokenshasho_Ichi" AS Tmp
         INNER JOIN  
-            (SELECT 
-              DbT1001."hihokenshaNo",
-              DbT1001."shikibetsuCode",
-              DbT1001."shichosonCode",
-              DbT1001."idoYMD",
-              DbT1001."edaNo",
-              DbT1001."idoJiyuCode",
-              DbT1001."shikakuShutokuJiyuCode",
-              DbT1001."shikakuShutokuYMD",
-              DbT1001."shikakuShutokuTodokedeYMD",
-              DbT1001."ichigoShikakuShutokuYMD",
-              DbT1001."hihokennshaKubunCode",
-              DbT1001."shikakuSoshitsuJiyuCode",
-              DbT1001."shikakuSoshitsuYMD",
-              DbT1001."shikakuSoshitsuTodokedeYMD",
-              DbT1001."shikakuHenkoJiyuCode",
-              DbT1001."shikakuHenkoYMD",
-              DbT1001."shikakuHenkoTodokedeYMD",
-              DbT1001."jushochitokureiTekiyoJiyuCode",
-              DbT1001."jushochitokureiTekiyoYMD",
-              DbT1001."jushochitokureiTekiyoTodokedeYMD",
-              DbT1001."jushochitokureiKaijoJiyuCode",
-              DbT1001."jushochitokureiKaijoYMD",
-              DbT1001."jushochitokureiKaijoTodokedeYMD",
-              DbT1001."jushochiTokureiFlag",
-              DbT1001."koikinaiJushochiTokureiFlag",
-              DbT1001."koikinaiTokureiSochimotoShichosonCode",
-              DbT1001."kyuShichosonCode",
-              DbT1001."logicalDeletedFlag"
-            FROM(SELECT
-                    "hihokenshaNo",
-                    "shikibetsuCode",
-                    "shichosonCode",
-                    "idoYMD",
-                    "edaNo",
-                    "idoJiyuCode",
-                    "shikakuShutokuJiyuCode",
-                    "shikakuShutokuYMD",
-                    "shikakuShutokuTodokedeYMD",
-                    "ichigoShikakuShutokuYMD",
-                    "hihokennshaKubunCode",
-                    "shikakuSoshitsuJiyuCode",
-                    "shikakuSoshitsuYMD",
-                    "shikakuSoshitsuTodokedeYMD",
-                    "shikakuHenkoJiyuCode",
-                    "shikakuHenkoYMD",
-                    "shikakuHenkoTodokedeYMD",
-                    "jushochitokureiTekiyoJiyuCode",
-                    "jushochitokureiTekiyoYMD",
-                    "jushochitokureiTekiyoTodokedeYMD",
-                    "jushochitokureiKaijoJiyuCode",
-                    "jushochitokureiKaijoYMD",
-                    "jushochitokureiKaijoTodokedeYMD",
-                    "jushochiTokureiFlag",
-                    "koikinaiJushochiTokureiFlag",
-                    "koikinaiTokureiSochimotoShichosonCode",
-                    "kyuShichosonCode",
-                    "logicalDeletedFlag",
-                    row_number() over(partition by "hihokenshaNo" order by "idoYMD" desc,"edaNo" desc) as rank_number
-                 FROM
-                    rgdb."DbT1001HihokenshaDaicho" 
-                 WHERE
-                    "logicalDeletedFlag"<![CDATA[<>]]> true)DbT1001
-            WHERE
-                rank_number   =  1)DbT1001Joho
-        ON
-            DbT1001Joho."hihokenshaNo" = Tmp."hihokenshaNo"
-      </select>
-    
-    <!--介護保険施設入退所の情報を取得します。-->
-      <select id="getKaigoHokenShisetsuNyutaisho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
-        SELECT
-            Tmp."hihokenshaNo",
-            DbT1004Joho."shikibetsuCode",
-            DbT1004Joho."rirekiNo",
-            DbT1004Joho."shichosonCode",
-            DbT1004Joho."daichoShubetsu",
-            DbT1004Joho."nyushoShisetsuShurui",
-            DbT1004Joho."nyushoShisetsuCode",
-            DbT1004Joho."nyushoShoriYMD",
-            DbT1004Joho."nyushoYMD",
-            DbT1004Joho."taishoShoriYMD",
-            DbT1004Joho."taishoYMD",
-            DbT1004Joho."roomKigoNo"
-        FROM 
-            "TmpHihokenshasho_Ichi" AS Tmp
-        INNER JOIN  
-            (SELECT 
-                DbT1004."shikibetsuCode",
-                DbT1004."rirekiNo",
-                DbT1004."shichosonCode",
-                DbT1004."daichoShubetsu",
-                DbT1004."nyushoShisetsuShurui",
-                DbT1004."nyushoShisetsuCode",
-                DbT1004."nyushoShoriYMD",
-                DbT1004."nyushoYMD",
-                DbT1004."taishoShoriYMD",
-                DbT1004."taishoYMD",
-                DbT1004."roomKigoNo"
-            FROM(SELECT
-                     "shikibetsuCode",
-                     "rirekiNo",
-                     "shichosonCode",
-                     "daichoShubetsu",
-                     "nyushoShisetsuShurui",
-                     "nyushoShisetsuCode",
-                     "nyushoShoriYMD",
-                     "nyushoYMD",
-                     "taishoShoriYMD",
-                     "taishoYMD",
-                     "roomKigoNo",
-                     row_number() over(partition by "shikibetsuCode" order by "nyushoYMD" desc,"taishoYMD" desc) as rank_number
-                 FROM
-                     rgdb."DbT1004ShisetsuNyutaisho"
-                 WHERE
-                     "daichoShubetsu" = '1'
-                 AND "taishoYMD" <![CDATA[>]]> "nyushoYMD")DbT1004
-            WHERE
-               rank_number = 1
-            OR rank_number = 2)DbT1004Joho
-        ON
-            DbT1004Joho."shikibetsuCode" = Tmp."shikibetsuCode"
-      </select>
-      
-      <!--介護保険施設入退所の情報を一時テーブルに更新します。-->
-      <update id="updateTmp_KaigoHokenShisetsu" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity">
-         UPDATE 
-            "TmpHihokenshasho_Ichi"
-         SET
-            "shikibetsuCode" = #{shikibetsuCode},
-            "rirekiNo" = #{rirekiNo},
-            "shichosonCode" = #{shichosonCode},
-            "daichoShubetsu" = #{daichoShubetsu},
-            "nyushoShisetsuShurui" = #{nyushoShisetsuShurui},
-            "nyushoShisetsuCode" = #{nyushoShisetsuCode},
-            "nyushoShoriYMD" = #{nyushoShoriYMD},
-            "nyushoYMD" = #{nyushoYMD},
-            "taishoShoriYMD" = #{taishoShoriYMD},
-            "taishoYMD" = #{taishoYMD},
-            "roomKigoNo" = #{roomKigoNo}
-         WHERE 
-            "hihokenshaNo" = #{hihokenshaNo}  
-      </update>
-      
-      <!--受給者台帳の情報を取得します。-->
-      <select id="getJukyushaDaicho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
-        SELECT
-            DbT4001Joho."shichosonCode",
-            DbT4001Joho."hihokenshaNo",
-            DbT4001Joho."rirekiNo",
-            DbT4001Joho."edaban",
-            DbT4001Joho."shinseishoKanriNo",
-            DbT4001Joho."shinseiJokyoKubun",
-            DbT4001Joho."shishoCode",
-            DbT4001Joho."chokkinFlag",
-            DbT4001Joho."shikibetsuCode",
-            DbT4001Joho."jukyuShinseiJiyu",
-            DbT4001Joho."shinseiRiyu",
-            DbT4001Joho."shinseishaKankeiCode",
-            DbT4001Joho."homninKankei",
-            DbT4001Joho."jukyuShinseiYMD",
-            DbT4001Joho."nigoTokuteiShippeiCode",
-            DbT4001Joho."shinsakaiIraiYMD",
-            DbT4001Joho."yokaigoJotaiKubunCode",
-            DbT4001Joho."ninteiYukoKikanKaishiYMD",
-            DbT4001Joho."ninteiYukoKikanShuryoYMD",
-            DbT4001Joho."ninteiYMD",
-            DbT4001Joho."shiteiServiceShurui01",
-            DbT4001Joho."shiteiServiceShurui02",
-            DbT4001Joho."shiteiServiceShurui03",
-            DbT4001Joho."shiteiServiceShurui04",
-            DbT4001Joho."shiteiServiceShurui05",
-            DbT4001Joho."shiteiServiceShurui06",
-            DbT4001Joho."shiteiServiceShurui07",
-            DbT4001Joho."shiteiServiceShurui08",
-            DbT4001Joho."shiteiServiceShurui09",
-            DbT4001Joho."shiteiServiceShurui10",
-            DbT4001Joho."shiteiServiceShurui11",
-            DbT4001Joho."shiteiServiceShurui12",
-            DbT4001Joho."shiteiServiceShurui13",
-            DbT4001Joho."shiteiServiceShurui14",
-            DbT4001Joho."shiteiServiceShurui15",
-            DbT4001Joho."shiteiServiceShurui16",
-            DbT4001Joho."shiteiServiceShurui17",
-            DbT4001Joho."shiteiServiceShurui18",
-            DbT4001Joho."shiteiServiceShurui19",
-            DbT4001Joho."shiteiServiceShurui20",
-            DbT4001Joho."shiteiServiceShurui21",
-            DbT4001Joho."shiteiServiceShurui22",
-            DbT4001Joho."shiteiServiceShurui23",
-            DbT4001Joho."shiteiServiceShurui24",
-            DbT4001Joho."shiteiServiceShurui25",
-            DbT4001Joho."shiteiServiceShurui26",
-            DbT4001Joho."shiteiServiceShurui27",
-            DbT4001Joho."shiteiServiceShurui28",
-            DbT4001Joho."shiteiServiceShurui29",
-            DbT4001Joho."shiteiServiceShurui30",
-            DbT4001Joho."soshitsuYMD",
-            DbT4001Joho."chokkinIdoYMD",
-            DbT4001Joho."chokkinIdoJiyuCode",
-            DbT4001Joho."yukoMukoKubun",
-            DbT4001Joho."dataKubun",
-            DbT4001Joho."remban",
-            DbT4001Joho."idoRiyu",
-            DbT4001Joho."shinseishoKubun",
-            DbT4001Joho."sakujoJiyuCode",
-            DbT4001Joho."yoshienshaNinteiShinseiFlag",
-            DbT4001Joho."shikyuGendoTanisu",
-            DbT4001Joho."shikyuGendoKaishiYMD",
-            DbT4001Joho."shikyuGendoShuryoYMD",
-            DbT4001Joho."tankiSikyuGendoNissu",
-            DbT4001Joho."tankiShikyuGendoKaishiYMD",
-            DbT4001Joho."tankiShikyuGendoShuryoYMD",
-            DbT4001Joho."toshoNinteiYukoKaishiYMD",
-            DbT4001Joho."toshoNinteiYukoShuryoYMD",
-            DbT4001Joho."jukyuShikakuShomeishoHakkoYMD1",
-            DbT4001Joho."jukyuShikakuShomeishoHakkoYMD2",
-            DbT4001Joho."shindanMeireishoHakkoYMD",
-            DbT4001Joho."nigoShinseiJuriTsuchishoHakkoYMD",
-            DbT4001Joho."ninteiKekkaTsuchishoHakkoYMD",
-            DbT4001Joho."kubunHenkoTsuchishoHakkoYMD",
-            DbT4001Joho."serviceHenkoTsuchishoHakkoYMD",
-            DbT4001Joho."ninteiKyakkaTsuchishoHakkoYMD",
-            DbT4001Joho."ninteiTorikeshiTsuchishoHakkoYMD",
-            DbT4001Joho."shikakuShutokuMaeShinseiFlag",
-            DbT4001Joho."kyuSochishaFlag",
-            DbT4001Joho."logicalDeletedFlag"
-        FROM 
-            "TmpHihokenshasho_Ichi" AS Tmp
-        INNER JOIN  
-            (SELECT 
-                DbT4001."shichosonCode",
-                DbT4001."hihokenshaNo",
-                DbT4001."rirekiNo",
-                DbT4001."edaban",
-                DbT4001."shinseishoKanriNo",
-                DbT4001."shinseiJokyoKubun",
-                DbT4001."shishoCode",
-                DbT4001."chokkinFlag",
-                DbT4001."shikibetsuCode",
-                DbT4001."jukyuShinseiJiyu",
-                DbT4001."shinseiRiyu",
-                DbT4001."shinseishaKankeiCode",
-                DbT4001."homninKankei",
-                DbT4001."jukyuShinseiYMD",
-                DbT4001."nigoTokuteiShippeiCode",
-                DbT4001."shinsakaiIraiYMD",
-                DbT4001."yokaigoJotaiKubunCode",
-                DbT4001."ninteiYukoKikanKaishiYMD",
-                DbT4001."ninteiYukoKikanShuryoYMD",
-                DbT4001."ninteiYMD",
-                DbT4001."shiteiServiceShurui01",
-                DbT4001."shiteiServiceShurui02",
-                DbT4001."shiteiServiceShurui03",
-                DbT4001."shiteiServiceShurui04",
-                DbT4001."shiteiServiceShurui05",
-                DbT4001."shiteiServiceShurui06",
-                DbT4001."shiteiServiceShurui07",
-                DbT4001."shiteiServiceShurui08",
-                DbT4001."shiteiServiceShurui09",
-                DbT4001."shiteiServiceShurui10",
-                DbT4001."shiteiServiceShurui11",
-                DbT4001."shiteiServiceShurui12",
-                DbT4001."shiteiServiceShurui13",
-                DbT4001."shiteiServiceShurui14",
-                DbT4001."shiteiServiceShurui15",
-                DbT4001."shiteiServiceShurui16",
-                DbT4001."shiteiServiceShurui17",
-                DbT4001."shiteiServiceShurui18",
-                DbT4001."shiteiServiceShurui19",
-                DbT4001."shiteiServiceShurui20",
-                DbT4001."shiteiServiceShurui21",
-                DbT4001."shiteiServiceShurui22",
-                DbT4001."shiteiServiceShurui23",
-                DbT4001."shiteiServiceShurui24",
-                DbT4001."shiteiServiceShurui25",
-                DbT4001."shiteiServiceShurui26",
-                DbT4001."shiteiServiceShurui27",
-                DbT4001."shiteiServiceShurui28",
-                DbT4001."shiteiServiceShurui29",
-                DbT4001."shiteiServiceShurui30",
-                DbT4001."soshitsuYMD",
-                DbT4001."chokkinIdoYMD",
-                DbT4001."chokkinIdoJiyuCode",
-                DbT4001."yukoMukoKubun",
-                DbT4001."dataKubun",
-                DbT4001."remban",
-                DbT4001."idoRiyu",
-                DbT4001."shinseishoKubun",
-                DbT4001."sakujoJiyuCode",
-                DbT4001."yoshienshaNinteiShinseiFlag",
-                DbT4001."shikyuGendoTanisu",
-                DbT4001."shikyuGendoKaishiYMD",
-                DbT4001."shikyuGendoShuryoYMD",
-                DbT4001."tankiSikyuGendoNissu",
-                DbT4001."tankiShikyuGendoKaishiYMD",
-                DbT4001."tankiShikyuGendoShuryoYMD",
-                DbT4001."toshoNinteiYukoKaishiYMD",
-                DbT4001."toshoNinteiYukoShuryoYMD",
-                DbT4001."jukyuShikakuShomeishoHakkoYMD1",
-                DbT4001."jukyuShikakuShomeishoHakkoYMD2",
-                DbT4001."shindanMeireishoHakkoYMD",
-                DbT4001."nigoShinseiJuriTsuchishoHakkoYMD",
-                DbT4001."ninteiKekkaTsuchishoHakkoYMD",
-                DbT4001."kubunHenkoTsuchishoHakkoYMD",
-                DbT4001."serviceHenkoTsuchishoHakkoYMD",
-                DbT4001."ninteiKyakkaTsuchishoHakkoYMD",
-                DbT4001."ninteiTorikeshiTsuchishoHakkoYMD",
-                DbT4001."shikakuShutokuMaeShinseiFlag",
-                DbT4001."kyuSochishaFlag",
-                DbT4001."logicalDeletedFlag"
-            FROM(SELECT
-                    "shichosonCode",
-                    "hihokenshaNo",
-                    "rirekiNo",
-                    "edaban",
-                    "shinseishoKanriNo",
-                    "shinseiJokyoKubun",
-                    "shishoCode",
-                    "chokkinFlag",
-                    "shikibetsuCode",
-                    "jukyuShinseiJiyu",
-                    "shinseiRiyu",
-                    "shinseishaKankeiCode",
-                    "homninKankei",
-                    "jukyuShinseiYMD",
-                    "nigoTokuteiShippeiCode",
-                    "shinsakaiIraiYMD",
-                    "yokaigoJotaiKubunCode",
-                    "ninteiYukoKikanKaishiYMD",
-                    "ninteiYukoKikanShuryoYMD",
-                    "ninteiYMD",
-                    "shiteiServiceShurui01",
-                    "shiteiServiceShurui02",
-                    "shiteiServiceShurui03",
-                    "shiteiServiceShurui04",
-                    "shiteiServiceShurui05",
-                    "shiteiServiceShurui06",
-                    "shiteiServiceShurui07",
-                    "shiteiServiceShurui08",
-                    "shiteiServiceShurui09",
-                    "shiteiServiceShurui10",
-                    "shiteiServiceShurui11",
-                    "shiteiServiceShurui12",
-                    "shiteiServiceShurui13",
-                    "shiteiServiceShurui14",
-                    "shiteiServiceShurui15",
-                    "shiteiServiceShurui16",
-                    "shiteiServiceShurui17",
-                    "shiteiServiceShurui18",
-                    "shiteiServiceShurui19",
-                    "shiteiServiceShurui20",
-                    "shiteiServiceShurui21",
-                    "shiteiServiceShurui22",
-                    "shiteiServiceShurui23",
-                    "shiteiServiceShurui24",
-                    "shiteiServiceShurui25",
-                    "shiteiServiceShurui26",
-                    "shiteiServiceShurui27",
-                    "shiteiServiceShurui28",
-                    "shiteiServiceShurui29",
-                    "shiteiServiceShurui30",
-                    "soshitsuYMD",
-                    "chokkinIdoYMD",
-                    "chokkinIdoJiyuCode",
-                    "yukoMukoKubun",
-                    "dataKubun",
-                    "remban",
-                    "idoRiyu",
-                    "shinseishoKubun",
-                    "sakujoJiyuCode",
-                    "yoshienshaNinteiShinseiFlag",
-                    "shikyuGendoTanisu",
-                    "shikyuGendoKaishiYMD",
-                    "shikyuGendoShuryoYMD",
-                    "tankiSikyuGendoNissu",
-                    "tankiShikyuGendoKaishiYMD",
-                    "tankiShikyuGendoShuryoYMD",
-                    "toshoNinteiYukoKaishiYMD",
-                    "toshoNinteiYukoShuryoYMD",
-                    "jukyuShikakuShomeishoHakkoYMD1",
-                    "jukyuShikakuShomeishoHakkoYMD2",
-                    "shindanMeireishoHakkoYMD",
-                    "nigoShinseiJuriTsuchishoHakkoYMD",
-                    "ninteiKekkaTsuchishoHakkoYMD",
-                    "kubunHenkoTsuchishoHakkoYMD",
-                    "serviceHenkoTsuchishoHakkoYMD",
-                    "ninteiKyakkaTsuchishoHakkoYMD",
-                    "ninteiTorikeshiTsuchishoHakkoYMD",
-                    "shikakuShutokuMaeShinseiFlag",
-                    "kyuSochishaFlag",
-                    "logicalDeletedFlag",
-                    row_number() over(partition by "hihokenshaNo" order by "rirekiNo" desc,"edaban" desc) as rank_number
-                FROM
-                    rgdb."DbT4001JukyushaDaicho"
-                WHERE
-                    "yukoMukoKubun" = '1'
-                AND "logicalDeletedFlag"<![CDATA[<>]]> true)DbT4001
-            WHERE
-               rank_number = 1)DbT4001Joho
-        ON
-            Tmp."hihokenshaNo" = DbT4001Joho."hihokenshaNo"
-      </select>
-      
-      <!--受給者台帳の情報取得を一時テーブルに更新します。-->
-      <update id="updateTmp_JukyushaDaicho" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity">
-         UPDATE 
-            "TmpHihokenshasho_Ichi"
-         SET
-            "shichosonCode" = #{shichosonCode},
-            "hihokenshaNo" = #{hihokenshaNo},
-            "rirekiNo" = #{rirekiNo},
-            "edaban" = #{edaban},
-            "shinseishoKanriNo" = #{shinseishoKanriNo},
-            "shinseiJokyoKubun" = #{shinseiJokyoKubun},
-            "shishoCode" = #{shishoCode},
-            "chokkinFlag" = #{chokkinFlag},
-            "shikibetsuCode" = #{shikibetsuCode},
-            "jukyuShinseiJiyu" = #{jukyuShinseiJiyu},
-            "shinseiRiyu" = #{shinseiRiyu},
-            "shinseishaKankeiCode" = #{shinseishaKankeiCode},
-            "homninKankei" = #{homninKankei},
-            "jukyuShinseiYMD" = #{jukyuShinseiYMD},
-            "nigoTokuteiShippeiCode" = #{nigoTokuteiShippeiCode},
-            "shinsakaiIraiYMD" = #{shinsakaiIraiYMD},
-            "yokaigoJotaiKubunCode" = #{yokaigoJotaiKubunCode},
-            "ninteiYukoKikanKaishiYMD" = #{ninteiYukoKikanKaishiYMD},
-            "ninteiYukoKikanShuryoYMD" = #{ninteiYukoKikanShuryoYMD},
-            "ninteiYMD" = #{ninteiYMD},
-            "shiteiServiceShurui01" = #{shiteiServiceShurui01},
-            "shiteiServiceShurui02" = #{shiteiServiceShurui02},
-            "shiteiServiceShurui03" = #{shiteiServiceShurui03},
-            "shiteiServiceShurui04" = #{shiteiServiceShurui04},
-            "shiteiServiceShurui05" = #{shiteiServiceShurui05},
-            "shiteiServiceShurui06" = #{shiteiServiceShurui06},
-            "shiteiServiceShurui07" = #{shiteiServiceShurui07},
-            "shiteiServiceShurui08" = #{shiteiServiceShurui08},
-            "shiteiServiceShurui09" = #{shiteiServiceShurui09},
-            "shiteiServiceShurui10" = #{shiteiServiceShurui10},
-            "shiteiServiceShurui11" = #{shiteiServiceShurui11},
-            "shiteiServiceShurui12" = #{shiteiServiceShurui12},
-            "shiteiServiceShurui13" = #{shiteiServiceShurui13},
-            "shiteiServiceShurui14" = #{shiteiServiceShurui14},
-            "shiteiServiceShurui15" = #{shiteiServiceShurui15},
-            "shiteiServiceShurui16" = #{shiteiServiceShurui16},
-            "shiteiServiceShurui17" = #{shiteiServiceShurui17},
-            "shiteiServiceShurui18" = #{shiteiServiceShurui18},
-            "shiteiServiceShurui19" = #{shiteiServiceShurui19},
-            "shiteiServiceShurui20" = #{shiteiServiceShurui20},
-            "shiteiServiceShurui21" = #{shiteiServiceShurui21},
-            "shiteiServiceShurui22" = #{shiteiServiceShurui22},
-            "shiteiServiceShurui23" = #{shiteiServiceShurui23},
-            "shiteiServiceShurui24" = #{shiteiServiceShurui24},
-            "shiteiServiceShurui25" = #{shiteiServiceShurui25},
-            "shiteiServiceShurui26" = #{shiteiServiceShurui26},
-            "shiteiServiceShurui27" = #{shiteiServiceShurui27},
-            "shiteiServiceShurui28" = #{shiteiServiceShurui28},
-            "shiteiServiceShurui29" = #{shiteiServiceShurui29},
-            "shiteiServiceShurui30" = #{shiteiServiceShurui30},
-            "soshitsuYMD" = #{soshitsuYMD},
-            "chokkinIdoYMD" = #{chokkinIdoYMD},
-            "chokkinIdoJiyuCode" = #{chokkinIdoJiyuCode},
-            "yukoMukoKubun" = #{yukoMukoKubun},
-            "dataKubun" = #{dataKubun},
-            "remban" = #{remban},
-            "idoRiyu" = #{idoRiyu},
-            "shinseishoKubun" = #{shinseishoKubun},
-            "sakujoJiyuCode" = #{sakujoJiyuCode},
-            "yoshienshaNinteiShinseiFlag" = #{yoshienshaNinteiShinseiFlag},
-            "shikyuGendoTanisu" = #{shikyuGendoTanisu},
-            "shikyuGendoKaishiYMD" = #{shikyuGendoKaishiYMD},
-            "shikyuGendoShuryoYMD" = #{shikyuGendoShuryoYMD},
-            "tankiSikyuGendoNissu" = #{tankiSikyuGendoNissu},
-            "tankiShikyuGendoKaishiYMD" = #{tankiShikyuGendoKaishiYMD},
-            "tankiShikyuGendoShuryoYMD" = #{tankiShikyuGendoShuryoYMD},
-            "toshoNinteiYukoKaishiYMD" = #{toshoNinteiYukoKaishiYMD},
-            "toshoNinteiYukoShuryoYMD" = #{toshoNinteiYukoShuryoYMD},
-            "jukyuShikakuShomeishoHakkoYMD1" = #{jukyuShikakuShomeishoHakkoYMD1},
-            "jukyuShikakuShomeishoHakkoYMD2" = #{jukyuShikakuShomeishoHakkoYMD2},
-            "shindanMeireishoHakkoYMD" = #{shindanMeireishoHakkoYMD},
-            "nigoShinseiJuriTsuchishoHakkoYMD" = #{nigoShinseiJuriTsuchishoHakkoYMD},
-            "ninteiKekkaTsuchishoHakkoYMD" = #{ninteiKekkaTsuchishoHakkoYMD},
-            "kubunHenkoTsuchishoHakkoYMD" = #{kubunHenkoTsuchishoHakkoYMD},
-            "serviceHenkoTsuchishoHakkoYMD" = #{serviceHenkoTsuchishoHakkoYMD},
-            "ninteiKyakkaTsuchishoHakkoYMD" = #{ninteiKyakkaTsuchishoHakkoYMD},
-            "ninteiTorikeshiTsuchishoHakkoYMD" = #{ninteiTorikeshiTsuchishoHakkoYMD},
-            "shikakuShutokuMaeShinseiFlag" = #{shikakuShutokuMaeShinseiFlag},
-            "kyuSochishaFlag" = #{kyuSochishaFlag},
-            "logicalDeletedFlag" = #{logicalDeletedFlag}
-         WHERE 
-            "hihokenshaNo" = #{hihokenshaNo}
-      </update>
-        
-      <!--要介護認定結果情報を取得します。-->
-      <select id="getNinteiKekkaJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
-        SELECT
-            Tmp."hihokenshaNo",
-            DbT4102Joho."shinseishoKanriNo",
-            DbT4102Joho."nijiHanteiYMD",
-            DbT4102Joho."nijiHanteiYokaigoJotaiKubunCode",
-            DbT4102Joho."nijiHanteiNinteiYukoKikan",
-            DbT4102Joho."nijiHanteiNinteiYukoKaishiYMD",
-            DbT4102Joho."nijiHanteiNinteiYukoShuryoYMD",
-            DbT4102Joho."shinsakaiKaisaiNo",
-            DbT4102Joho."shinsakaiIken",
-            DbT4102Joho."ichijiHanteiKekkaHenkoRiyu",
-            DbT4102Joho."yokaigoJotaizoReiCode",
-            DbT4102Joho."ninteishinsakaiIkenShurui",
-            DbT4102Joho."shinsakaiMemo",
-            DbT4102Joho."nijiHanteiKekkaInputHoho",
-            DbT4102Joho."nijiHanteiKekkaInputYMD"
-        FROM 
-            "TmpHihokenshasho_Ichi" AS Tmp
-        INNER JOIN  
-            rgdb."DbT4102NinteiKekkaJoho" AS DbT4102Joho
-        ON
-            DbT4102Joho."shinseishoKanriNo" = Tmp."shinseishoKanriNo"
+        (SELECT 
+        DbT1001."hihokenshaNo",
+        DbT1001."shikibetsuCode",
+        DbT1001."shichosonCode",
+        DbT1001."idoYMD",
+        DbT1001."edaNo",
+        DbT1001."idoJiyuCode",
+        DbT1001."shikakuShutokuJiyuCode",
+        DbT1001."shikakuShutokuYMD",
+        DbT1001."shikakuShutokuTodokedeYMD",
+        DbT1001."ichigoShikakuShutokuYMD",
+        DbT1001."hihokennshaKubunCode",
+        DbT1001."shikakuSoshitsuJiyuCode",
+        DbT1001."shikakuSoshitsuYMD",
+        DbT1001."shikakuSoshitsuTodokedeYMD",
+        DbT1001."shikakuHenkoJiyuCode",
+        DbT1001."shikakuHenkoYMD",
+        DbT1001."shikakuHenkoTodokedeYMD",
+        DbT1001."jushochitokureiTekiyoJiyuCode",
+        DbT1001."jushochitokureiTekiyoYMD",
+        DbT1001."jushochitokureiTekiyoTodokedeYMD",
+        DbT1001."jushochitokureiKaijoJiyuCode",
+        DbT1001."jushochitokureiKaijoYMD",
+        DbT1001."jushochitokureiKaijoTodokedeYMD",
+        DbT1001."jushochiTokureiFlag",
+        DbT1001."koikinaiJushochiTokureiFlag",
+        DbT1001."koikinaiTokureiSochimotoShichosonCode",
+        DbT1001."kyuShichosonCode",
+        DbT1001."logicalDeletedFlag"
+        FROM(SELECT
+        "hihokenshaNo",
+        "shikibetsuCode",
+        "shichosonCode",
+        "idoYMD",
+        "edaNo",
+        "idoJiyuCode",
+        "shikakuShutokuJiyuCode",
+        "shikakuShutokuYMD",
+        "shikakuShutokuTodokedeYMD",
+        "ichigoShikakuShutokuYMD",
+        "hihokennshaKubunCode",
+        "shikakuSoshitsuJiyuCode",
+        "shikakuSoshitsuYMD",
+        "shikakuSoshitsuTodokedeYMD",
+        "shikakuHenkoJiyuCode",
+        "shikakuHenkoYMD",
+        "shikakuHenkoTodokedeYMD",
+        "jushochitokureiTekiyoJiyuCode",
+        "jushochitokureiTekiyoYMD",
+        "jushochitokureiTekiyoTodokedeYMD",
+        "jushochitokureiKaijoJiyuCode",
+        "jushochitokureiKaijoYMD",
+        "jushochitokureiKaijoTodokedeYMD",
+        "jushochiTokureiFlag",
+        "koikinaiJushochiTokureiFlag",
+        "koikinaiTokureiSochimotoShichosonCode",
+        "kyuShichosonCode",
+        "logicalDeletedFlag",
+        row_number() over(partition by "hihokenshaNo" order by "idoYMD" desc,"edaNo" desc) as rank_number
+        FROM
+        rgdb."DbT1001HihokenshaDaicho" 
         WHERE
-            DbT4102Joho."shinseishoKanriNo" = #{shinseishoKanriNo}
-      </select>
-        
-        <!--要介護認定結果情報の情報取得を一時テーブルに更新します。-->
-      <update id="updateTmp_NinteiKekkaJoho" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity">
-         UPDATE 
-            "TmpHihokenshasho_Ichi"
-         SET
-            "shinseishoKanriNo" = #{shinseishoKanriNo},
-            "nijiHanteiYMD" = #{nijiHanteiYMD},
-            "nijiHanteiYokaigoJotaiKubunCode" = #{nijiHanteiYokaigoJotaiKubunCode},
-            "nijiHanteiNinteiYukoKikan" = #{nijiHanteiNinteiYukoKikan},
-            "nijiHanteiNinteiYukoKaishiYMD" = #{nijiHanteiNinteiYukoKaishiYMD},
-            "nijiHanteiNinteiYukoShuryoYMD" = #{nijiHanteiNinteiYukoShuryoYMD},
-            "shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo},
-            "shinsakaiIken" = #{shinsakaiIken},
-            "ichijiHanteiKekkaHenkoRiyu" = #{ichijiHanteiKekkaHenkoRiyu},
-            "yokaigoJotaizoReiCode" = #{yokaigoJotaizoReiCode},
-            "ninteishinsakaiIkenShurui" = #{ninteishinsakaiIkenShurui},
-            "shinsakaiMemo" = #{shinsakaiMemo},
-            "nijiHanteiKekkaInputHoho" = #{nijiHanteiKekkaInputHoho},
-            "nijiHanteiKekkaInputYMD" = #{nijiHanteiKekkaInputYMD}
-         WHERE 
-            "hihokenshaNo" = #{hihokenshaNo}  
-      </update>
+        "logicalDeletedFlag"<![CDATA[<>]]> true)DbT1001
+        WHERE
+        rank_number   =  1)DbT1001Joho
+        ON
+        DbT1001Joho."hihokenshaNo" = Tmp."hihokenshaNo"
+    </select>
+    
+    <!--被保険者台帳の情報を一時テーブルに更新します。-->
+    <update id="updateTmp_Hihokenshasho" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity">
+        UPDATE 
+        "TmpHihokenshasho_Ichi"
+        SET
+        "hihokenshaNo" = #{hihokenshaNo},
+        "shikibetsuCode" = #{shikibetsuCode},
+        "shichosonCode" = #{shichosonCode},
+        "idoYMD" = #{idoYMD},
+        "edaNo" = #{edaNo},
+        "idoJiyuCode" = #{idoJiyuCode},
+        "shikakuShutokuJiyuCode" = #{shikakuShutokuJiyuCode},
+        "shikakuShutokuYMD" = #{shikakuShutokuYMD},
+        "shikakuShutokuTodokedeYMD" = #{shikakuShutokuTodokedeYMD},
+        "ichigoShikakuShutokuYMD" = #{ichigoShikakuShutokuYMD},
+        "hihokennshaKubunCode" = #{hihokennshaKubunCode},
+        "shikakuSoshitsuJiyuCode" = #{shikakuSoshitsuJiyuCode},
+        "shikakuSoshitsuYMD" = #{shikakuSoshitsuYMD},
+        "shikakuSoshitsuTodokedeYMD" = #{shikakuSoshitsuTodokedeYMD},
+        "shikakuHenkoJiyuCode" = #{shikakuHenkoJiyuCode},
+        "shikakuHenkoYMD" = #{shikakuHenkoYMD},
+        "shikakuHenkoTodokedeYMD" = #{shikakuHenkoTodokedeYMD},
+        "jushochitokureiTekiyoJiyuCode" = #{jushochitokureiTekiyoJiyuCode},
+        "jushochitokureiTekiyoYMD" = #{jushochitokureiTekiyoYMD},
+        "jushochitokureiTekiyoTodokedeYMD" = #{tekiyoTodokedeYMD},
+        "jushochitokureiKaijoJiyuCode" = #{jushochitokureiKaijoJiyuCode},
+        "jushochitokureiKaijoYMD" = #{jushochitokureiKaijoYMD},
+        "jushochitokureiKaijoTodokedeYMD" = #{kaijoTodokedeYMD},
+        "jushochiTokureiFlag" = #{jushochiTokureiFlag},
+        "koikinaiJushochiTokureiFlag" = #{koikinaiJushochiTokureiFlag},
+        "koikinaiTokureiSochimotoShichosonCode" = #{sochimotoShichosonCode},
+        "kyuShichosonCode" = #{kyuShichosonCode},
+        "logicalDeletedFlag" = #{logicalDeletedFlag}
+        WHERE 
+        "hihokenshaNo" = #{hihokenshaNo}  
+    </update>
       
-      <!--支払方法変更情報を取得します-->
-      <select id="getShiharaiHohoHenko" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+    <!--介護保険施設入退所の情報を取得します。-->
+    <select id="getKaigoHokenShisetsuNyutaisho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
-            DbT4021Joho."shoKisaiHokenshaNo",
-            DbT4021Joho."hihokenshaNo",
-            DbT4021Joho."kanriKubun",
-            DbT4021Joho."rirekiNo",
-            DbT4021Joho."torokuKubun",
-            DbT4021Joho."tekiyoKaishiYMD",
-            DbT4021Joho."tekiyoShuryoYMD",
-            DbT4021Joho."shuryoKubun",
-            DbT4021Joho."yokoku_TorokuYMD",
-            DbT4021Joho."sashitome_IraiJuriYMD",
-            DbT4021Joho."yokoku_TsuchiHakkoYMD",
-            DbT4021Joho."yokoku_TsuchiSaiHakkoFlag",
-            DbT4021Joho."bemmei_TeishutsuYMD",
-            DbT4021Joho."bemmei_UketsukeYMD",
-            DbT4021Joho."bemmei_RiyuCode",
-            DbT4021Joho."bemmei_ShinsaKetteiYMD",
-            DbT4021Joho."bemmei_ShinsaKekkaKubun",
-            DbT4021Joho."shokan_KetteiYMD",
-            DbT4021Joho."shokan_TsuchiHakkoYMD",
-            DbT4021Joho."shokan_TsuchiSaiHakkoFlag",
-            DbT4021Joho."hihokenshaShoTeishutsuYMD",
-            DbT4021Joho."sashitome_Flag",
-            DbT4021Joho."sashitome_KetteiYMD",
-            DbT4021Joho."sashitome_KaijoYMD",
-            DbT4021Joho."gemmen_KetteiYMD",
-            DbT4021Joho."gemmen_TsuchiHakkoYMD",
-            DbT4021Joho."gemmen_TsuchiSaiHakkoFlag",
-            DbT4021Joho."kyufuRitsu",
-            DbT4021Joho."shuryoShinsei_UketsukeYMD",
-            DbT4021Joho."shuryoShinsei_YMD",
-            DbT4021Joho."shuryoShinsei_RiyuCode",
-            DbT4021Joho."shuryoShinsei_ShinsaKetteiYMD",
-            DbT4021Joho."shuryoShinsei_ShinsaKekkaKubun",
-            DbT4021Joho."mukoKubun"
+        Tmp."hihokenshaNo",
+        DbT1004Joho."shikibetsuCode",
+        DbT1004Joho."rirekiNo",
+        DbT1004Joho."shichosonCode",
+        DbT1004Joho."daichoShubetsu",
+        DbT1004Joho."nyushoShisetsuShurui",
+        DbT1004Joho."nyushoShisetsuCode",
+        DbT1004Joho."nyushoShoriYMD",
+        DbT1004Joho."nyushoYMD",
+        DbT1004Joho."taishoShoriYMD",
+        DbT1004Joho."taishoYMD",
+        DbT1004Joho."roomKigoNo"
         FROM 
-            "TmpHihokenshasho_Ichi" AS Tmp
+        "TmpHihokenshasho_Ichi" AS Tmp
         INNER JOIN  
-            (SELECT 
-                DbT4021."shoKisaiHokenshaNo",
-                DbT4021."hihokenshaNo",
-                DbT4021."kanriKubun",
-                DbT4021."rirekiNo",
-                DbT4021."torokuKubun",
-                DbT4021."tekiyoKaishiYMD",
-                DbT4021."tekiyoShuryoYMD",
-                DbT4021."shuryoKubun",
-                DbT4021."yokoku_TorokuYMD",
-                DbT4021."sashitome_IraiJuriYMD",
-                DbT4021."yokoku_TsuchiHakkoYMD",
-                DbT4021."yokoku_TsuchiSaiHakkoFlag",
-                DbT4021."bemmei_TeishutsuYMD",
-                DbT4021."bemmei_UketsukeYMD",
-                DbT4021."bemmei_RiyuCode",
-                DbT4021."bemmei_ShinsaKetteiYMD",
-                DbT4021."bemmei_ShinsaKekkaKubun",
-                DbT4021."shokan_KetteiYMD",
-                DbT4021."shokan_TsuchiHakkoYMD",
-                DbT4021."shokan_TsuchiSaiHakkoFlag",
-                DbT4021."hihokenshaShoTeishutsuYMD",
-                DbT4021."sashitome_Flag",
-                DbT4021."sashitome_KetteiYMD",
-                DbT4021."sashitome_KaijoYMD",
-                DbT4021."gemmen_KetteiYMD",
-                DbT4021."gemmen_TsuchiHakkoYMD",
-                DbT4021."gemmen_TsuchiSaiHakkoFlag",
-                DbT4021."kyufuRitsu",
-                DbT4021."shuryoShinsei_UketsukeYMD",
-                DbT4021."shuryoShinsei_YMD",
-                DbT4021."shuryoShinsei_RiyuCode",
-                DbT4021."shuryoShinsei_ShinsaKetteiYMD",
-                DbT4021."shuryoShinsei_ShinsaKekkaKubun",
-                DbT4021."mukoKubun"
-            FROM(SELECT
-                    "shoKisaiHokenshaNo",
-                    "hihokenshaNo",
-                    "kanriKubun",
-                    "rirekiNo",
-                    "torokuKubun",
-                    "tekiyoKaishiYMD",
-                    "tekiyoShuryoYMD",
-                    "shuryoKubun",
-                    "yokoku_TorokuYMD",
-                    "sashitome_IraiJuriYMD",
-                    "yokoku_TsuchiHakkoYMD",
-                    "yokoku_TsuchiSaiHakkoFlag",
-                    "bemmei_TeishutsuYMD",
-                    "bemmei_UketsukeYMD",
-                    "bemmei_RiyuCode",
-                    "bemmei_ShinsaKetteiYMD",
-                    "bemmei_ShinsaKekkaKubun",
-                    "shokan_KetteiYMD",
-                    "shokan_TsuchiHakkoYMD",
-                    "shokan_TsuchiSaiHakkoFlag",
-                    "hihokenshaShoTeishutsuYMD",
-                    "sashitome_Flag",
-                    "sashitome_KetteiYMD",
-                    "sashitome_KaijoYMD",
-                    "gemmen_KetteiYMD",
-                    "gemmen_TsuchiHakkoYMD",
-                    "gemmen_TsuchiSaiHakkoFlag",
-                    "kyufuRitsu",
-                    "shuryoShinsei_UketsukeYMD",
-                    "shuryoShinsei_YMD",
-                    "shuryoShinsei_RiyuCode",
-                    "shuryoShinsei_ShinsaKetteiYMD",
-                    "shuryoShinsei_ShinsaKekkaKubun",
-                    "mukoKubun",
-                    row_number() over(partition by "shoKisaiHokenshaNo" order by "tekiyoShuryoYMD" desc,"tekiyoKaishiYMD" desc) as rank_number
-                 FROM
-                     rgdb."DbT4021ShiharaiHohoHenko"
-                 WHERE
-                     "tekiyoShuryoYMD" <![CDATA[>]]> "tekiyoKaishiYMD")DbT4021
-            WHERE
-               rank_number = 1
-            OR rank_number = 2
-            OR rank_number = 3)DbT4021Joho
+        (SELECT 
+        DbT1004."shikibetsuCode",
+        DbT1004."rirekiNo",
+        DbT1004."shichosonCode",
+        DbT1004."daichoShubetsu",
+        DbT1004."nyushoShisetsuShurui",
+        DbT1004."nyushoShisetsuCode",
+        DbT1004."nyushoShoriYMD",
+        DbT1004."nyushoYMD",
+        DbT1004."taishoShoriYMD",
+        DbT1004."taishoYMD",
+        DbT1004."roomKigoNo"
+        FROM(SELECT
+        "shikibetsuCode",
+        "rirekiNo",
+        "shichosonCode",
+        "daichoShubetsu",
+        "nyushoShisetsuShurui",
+        "nyushoShisetsuCode",
+        "nyushoShoriYMD",
+        "nyushoYMD",
+        "taishoShoriYMD",
+        "taishoYMD",
+        "roomKigoNo",
+        row_number() over(partition by "shikibetsuCode" order by "nyushoYMD" desc,"taishoYMD" desc) as rank_number
+        FROM
+        rgdb."DbT1004ShisetsuNyutaisho"
+        WHERE
+        "daichoShubetsu" = '1'
+        AND "taishoYMD" <![CDATA[>]]> "nyushoYMD")DbT1004
+        WHERE
+        rank_number = 1
+        OR rank_number = 2)DbT1004Joho
         ON
-            Tmp."hihokenshaNo" = DbT4021Joho."hihokenshaNo"
-      </select>
+        DbT1004Joho."shikibetsuCode" = Tmp."shikibetsuCode"
+    </select>
       
-       <!--支払方法変更の情報取得を一時テーブルに更新します。-->
-      <update id="updateTmp_ShiharaiHohoHenko" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity">
-         UPDATE 
-            "TmpHihokenshasho_Ichi"
-         SET
-            "shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo},
-            "hihokenshaNo" = #{hihokenshaNo},
-            "kanriKubun" = #{kanriKubun},
-            "rirekiNo" = #{rirekiNo},
-            "torokuKubun" = #{torokuKubun},
-            "tekiyoKaishiYMD" = #{tekiyoKaishiYMD},
-            "tekiyoShuryoYMD" = #{tekiyoShuryoYMD},
-            "shuryoKubun" = #{shuryoKubun},
-            "yokoku_TorokuYMD" = #{yokoku_TorokuYMD},
-            "sashitome_IraiJuriYMD" = #{sashitome_IraiJuriYMD},
-            "yokoku_TsuchiHakkoYMD" = #{yokoku_TsuchiHakkoYMD},
-            "yokoku_TsuchiSaiHakkoFlag" = #{yokoku_TsuchiSaiHakkoFlag},
-            "bemmei_TeishutsuYMD" = #{bemmei_TeishutsuYMD},
-            "bemmei_UketsukeYMD" = #{bemmei_UketsukeYMD},
-            "bemmei_RiyuCode" = #{bemmei_RiyuCode},
-            "bemmei_ShinsaKetteiYMD" = #{bemmei_ShinsaKetteiYMD},
-            "bemmei_ShinsaKekkaKubun" = #{bemmei_ShinsaKekkaKubun},
-            "shokan_KetteiYMD" = #{shokan_KetteiYMD},
-            "shokan_TsuchiHakkoYMD" = #{shokan_TsuchiHakkoYMD},
-            "shokan_TsuchiSaiHakkoFlag" = #{shokan_TsuchiSaiHakkoFlag},
-            "hihokenshaShoTeishutsuYMD" = #{hihokenshaShoTeishutsuYMD},
-            "sashitome_Flag" = #{sashitome_Flag},
-            "sashitome_KetteiYMD" = #{sashitome_KetteiYMD},
-            "sashitome_KaijoYMD" = #{sashitome_KaijoYMD},
-            "gemmen_KetteiYMD" = #{gemmen_KetteiYMD},
-            "gemmen_TsuchiHakkoYMD" = #{gemmen_TsuchiHakkoYMD},
-            "gemmen_TsuchiSaiHakkoFlag" = #{gemmen_TsuchiSaiHakkoFlag},
-            "kyufuRitsu" = #{kyufuRitsu},
-            "shuryoShinsei_UketsukeYMD" = #{shuryoShinsei_UketsukeYMD},
-            "shuryoShinsei_YMD" = #{shuryoShinsei_YMD},
-            "shuryoShinsei_RiyuCode" = #{shuryoShinsei_RiyuCode},
-            "shuryoShinsei_ShinsaKetteiYMD" = #{shuryoShinsei_ShinsaKetteiYMD},
-            "shuryoShinsei_ShinsaKekkaKubun" = #{shuryoShinsei_ShinsaKekkaKubun},
-            "mukoKubun" = #{mukoKubun}
-         WHERE 
-            "hihokenshaNo" = #{hihokenshaNo}  
-      </update>
-        
-      <!--居宅給付計画届出情報の取得-->
-      <select id="getKyotakuKeikakuTodokede" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+    <!--介護保険施設入退所の情報を一時テーブルに更新します。-->
+    <update id="updateTmp_KaigoHokenShisetsu" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity">
+        UPDATE 
+        "TmpHihokenshasho_Ichi"
+        SET
+        "shikibetsuCode" = #{shikibetsuCode},
+        "rirekiNo" = #{rirekiNo},
+        "shichosonCode" = #{shichosonCode},
+        "daichoShubetsu" = #{daichoShubetsu},
+        "nyushoShisetsuShurui" = #{nyushoShisetsuShurui},
+        "nyushoShisetsuCode" = #{nyushoShisetsuCode},
+        "nyushoShoriYMD" = #{nyushoShoriYMD},
+        "nyushoYMD" = #{nyushoYMD},
+        "taishoShoriYMD" = #{taishoShoriYMD},
+        "taishoYMD" = #{taishoYMD},
+        "roomKigoNo" = #{roomKigoNo}
+        WHERE 
+        "hihokenshaNo" = #{hihokenshaNo}  
+    </update>
+      
+    <!--受給者台帳の情報を取得します。-->
+    <select id="getJukyushaDaicho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
-            DbT3005Kyotaku."hihokenshaNo",
-            DbT3005Kyotaku."taishoYM",
-            DbT3005Kyotaku."rirekiNo",
-            DbT3005Kyotaku."todokedeKubun",
-            DbT3005Kyotaku."todokedeYMD",
-            DbT3005Kyotaku."todokedeshaShimei",
-            DbT3005Kyotaku."todokedeshaShimeiKana",
-            DbT3005Kyotaku."todokedeshaYubinNo",
-            DbT3005Kyotaku."todokedeshaJusho",
-            DbT3005Kyotaku."todokedeshaTelNo",
-            DbT3005Kyotaku."todokedeshaKankeiKubun",
-            DbT3005Kyotaku."zanteiKubun"   
+        DbT4001Joho."shichosonCode",
+        DbT4001Joho."hihokenshaNo",
+        DbT4001Joho."rirekiNo",
+        DbT4001Joho."edaNo",
+        DbT4001Joho."shinseishoKanriNo",
+        DbT4001Joho."shinseiJokyoKubun",
+        DbT4001Joho."shishoCode",
+        DbT4001Joho."chokkinFlag",
+        DbT4001Joho."shikibetsuCode",
+        DbT4001Joho."jukyuShinseiJiyu",
+        DbT4001Joho."shinseiRiyu",
+        DbT4001Joho."shinseishaKankeiCode",
+        DbT4001Joho."homninKankei",
+        DbT4001Joho."jukyuShinseiYMD",
+        DbT4001Joho."nigoTokuteiShippeiCode",
+        DbT4001Joho."shinsakaiIraiYMD",
+        DbT4001Joho."yokaigoJotaiKubunCode",
+        DbT4001Joho."ninteiYukoKikanKaishiYMD",
+        DbT4001Joho."ninteiYukoKikanShuryoYMD",
+        DbT4001Joho."ninteiYMD",
+        DbT4001Joho."shiteiServiceShurui01",
+        DbT4001Joho."shiteiServiceShurui02",
+        DbT4001Joho."shiteiServiceShurui03",
+        DbT4001Joho."shiteiServiceShurui04",
+        DbT4001Joho."shiteiServiceShurui05",
+        DbT4001Joho."shiteiServiceShurui06",
+        DbT4001Joho."shiteiServiceShurui07",
+        DbT4001Joho."shiteiServiceShurui08",
+        DbT4001Joho."shiteiServiceShurui09",
+        DbT4001Joho."shiteiServiceShurui10",
+        DbT4001Joho."shiteiServiceShurui11",
+        DbT4001Joho."shiteiServiceShurui12",
+        DbT4001Joho."shiteiServiceShurui13",
+        DbT4001Joho."shiteiServiceShurui14",
+        DbT4001Joho."shiteiServiceShurui15",
+        DbT4001Joho."shiteiServiceShurui16",
+        DbT4001Joho."shiteiServiceShurui17",
+        DbT4001Joho."shiteiServiceShurui18",
+        DbT4001Joho."shiteiServiceShurui19",
+        DbT4001Joho."shiteiServiceShurui20",
+        DbT4001Joho."shiteiServiceShurui21",
+        DbT4001Joho."shiteiServiceShurui22",
+        DbT4001Joho."shiteiServiceShurui23",
+        DbT4001Joho."shiteiServiceShurui24",
+        DbT4001Joho."shiteiServiceShurui25",
+        DbT4001Joho."shiteiServiceShurui26",
+        DbT4001Joho."shiteiServiceShurui27",
+        DbT4001Joho."shiteiServiceShurui28",
+        DbT4001Joho."shiteiServiceShurui29",
+        DbT4001Joho."shiteiServiceShurui30",
+        DbT4001Joho."soshitsuYMD",
+        DbT4001Joho."chokkinIdoYMD",
+        DbT4001Joho."chokkinIdoJiyuCode",
+        DbT4001Joho."yukoMukoKubun",
+        DbT4001Joho."dataKubun",
+        DbT4001Joho."remban",
+        DbT4001Joho."idoRiyu",
+        DbT4001Joho."shinseishoKubun",
+        DbT4001Joho."sakujoJiyuCode",
+        DbT4001Joho."yoshienshaNinteiShinseiFlag",
+        DbT4001Joho."shikyuGendoTanisu",
+        DbT4001Joho."shikyuGendoKaishiYMD",
+        DbT4001Joho."shikyuGendoShuryoYMD",
+        DbT4001Joho."tankiSikyuGendoNissu",
+        DbT4001Joho."tankiShikyuGendoKaishiYMD",
+        DbT4001Joho."tankiShikyuGendoShuryoYMD",
+        DbT4001Joho."toshoNinteiYukoKaishiYMD",
+        DbT4001Joho."toshoNinteiYukoShuryoYMD",
+        DbT4001Joho."jukyuShikakuShomeishoHakkoYMD1",
+        DbT4001Joho."jukyuShikakuShomeishoHakkoYMD2",
+        DbT4001Joho."shindanMeireishoHakkoYMD",
+        DbT4001Joho."nigoShinseiJuriTsuchishoHakkoYMD",
+        DbT4001Joho."ninteiKekkaTsuchishoHakkoYMD",
+        DbT4001Joho."kubunHenkoTsuchishoHakkoYMD",
+        DbT4001Joho."serviceHenkoTsuchishoHakkoYMD",
+        DbT4001Joho."ninteiKyakkaTsuchishoHakkoYMD",
+        DbT4001Joho."ninteiTorikeshiTsuchishoHakkoYMD",
+        DbT4001Joho."shikakuShutokuMaeShinseiFlag",
+        DbT4001Joho."kyuSochishaFlag",
+        DbT4001Joho."logicalDeletedFlag"
         FROM 
-            "TmpHihokenshasho_Ichi" AS Tmp
-        INNER JOIN
-            (SELECT 
-                DbT3005."hihokenshaNo",
-                DbT3005."taishoYM",
-                DbT3005."rirekiNo",
-                DbT3005."todokedeKubun",
-                DbT3005."todokedeYMD",
-                DbT3005."todokedeshaShimei",
-                DbT3005."todokedeshaShimeiKana",
-                DbT3005."todokedeshaYubinNo",
-                DbT3005."todokedeshaJusho",
-                DbT3005."todokedeshaTelNo",
-                DbT3005."todokedeshaKankeiKubun",
-                DbT3005."zanteiKubun"
-            FROM(SELECT
-                    "hihokenshaNo",
-                    "taishoYM",
-                    "rirekiNo",
-                    "todokedeKubun",
-                    "todokedeYMD",
-                    "todokedeshaShimei",
-                    "todokedeshaShimeiKana",
-                    "todokedeshaYubinNo",
-                    "todokedeshaJusho",
-                    "todokedeshaTelNo",
-                    "todokedeshaKankeiKubun",
-                    "zanteiKubun",
-                    row_number() over(partition by "hihokenshaNo" order by "taishoYM" desc,"rirekiNo" desc) as rank_number
-                 FROM
-                     rgdb."DbT3005KyotakuKeikakuTodokede")DbT3005
-            WHERE
-               rank_number = 1
-            OR rank_number = 2
-            OR rank_number = 3)DbT3005Kyotaku
+        "TmpHihokenshasho_Ichi" AS Tmp
+        INNER JOIN  
+        (SELECT 
+        DbT4001."shichosonCode",
+        DbT4001."hihokenshaNo",
+        DbT4001."rirekiNo",
+        DbT4001."edaNo",
+        DbT4001."shinseishoKanriNo",
+        DbT4001."shinseiJokyoKubun",
+        DbT4001."shishoCode",
+        DbT4001."chokkinFlag",
+        DbT4001."shikibetsuCode",
+        DbT4001."jukyuShinseiJiyu",
+        DbT4001."shinseiRiyu",
+        DbT4001."shinseishaKankeiCode",
+        DbT4001."homninKankei",
+        DbT4001."jukyuShinseiYMD",
+        DbT4001."nigoTokuteiShippeiCode",
+        DbT4001."shinsakaiIraiYMD",
+        DbT4001."yokaigoJotaiKubunCode",
+        DbT4001."ninteiYukoKikanKaishiYMD",
+        DbT4001."ninteiYukoKikanShuryoYMD",
+        DbT4001."ninteiYMD",
+        DbT4001."shiteiServiceShurui01",
+        DbT4001."shiteiServiceShurui02",
+        DbT4001."shiteiServiceShurui03",
+        DbT4001."shiteiServiceShurui04",
+        DbT4001."shiteiServiceShurui05",
+        DbT4001."shiteiServiceShurui06",
+        DbT4001."shiteiServiceShurui07",
+        DbT4001."shiteiServiceShurui08",
+        DbT4001."shiteiServiceShurui09",
+        DbT4001."shiteiServiceShurui10",
+        DbT4001."shiteiServiceShurui11",
+        DbT4001."shiteiServiceShurui12",
+        DbT4001."shiteiServiceShurui13",
+        DbT4001."shiteiServiceShurui14",
+        DbT4001."shiteiServiceShurui15",
+        DbT4001."shiteiServiceShurui16",
+        DbT4001."shiteiServiceShurui17",
+        DbT4001."shiteiServiceShurui18",
+        DbT4001."shiteiServiceShurui19",
+        DbT4001."shiteiServiceShurui20",
+        DbT4001."shiteiServiceShurui21",
+        DbT4001."shiteiServiceShurui22",
+        DbT4001."shiteiServiceShurui23",
+        DbT4001."shiteiServiceShurui24",
+        DbT4001."shiteiServiceShurui25",
+        DbT4001."shiteiServiceShurui26",
+        DbT4001."shiteiServiceShurui27",
+        DbT4001."shiteiServiceShurui28",
+        DbT4001."shiteiServiceShurui29",
+        DbT4001."shiteiServiceShurui30",
+        DbT4001."soshitsuYMD",
+        DbT4001."chokkinIdoYMD",
+        DbT4001."chokkinIdoJiyuCode",
+        DbT4001."yukoMukoKubun",
+        DbT4001."dataKubun",
+        DbT4001."remban",
+        DbT4001."idoRiyu",
+        DbT4001."shinseishoKubun",
+        DbT4001."sakujoJiyuCode",
+        DbT4001."yoshienshaNinteiShinseiFlag",
+        DbT4001."shikyuGendoTanisu",
+        DbT4001."shikyuGendoKaishiYMD",
+        DbT4001."shikyuGendoShuryoYMD",
+        DbT4001."tankiSikyuGendoNissu",
+        DbT4001."tankiShikyuGendoKaishiYMD",
+        DbT4001."tankiShikyuGendoShuryoYMD",
+        DbT4001."toshoNinteiYukoKaishiYMD",
+        DbT4001."toshoNinteiYukoShuryoYMD",
+        DbT4001."jukyuShikakuShomeishoHakkoYMD1",
+        DbT4001."jukyuShikakuShomeishoHakkoYMD2",
+        DbT4001."shindanMeireishoHakkoYMD",
+        DbT4001."nigoShinseiJuriTsuchishoHakkoYMD",
+        DbT4001."ninteiKekkaTsuchishoHakkoYMD",
+        DbT4001."kubunHenkoTsuchishoHakkoYMD",
+        DbT4001."serviceHenkoTsuchishoHakkoYMD",
+        DbT4001."ninteiKyakkaTsuchishoHakkoYMD",
+        DbT4001."ninteiTorikeshiTsuchishoHakkoYMD",
+        DbT4001."shikakuShutokuMaeShinseiFlag",
+        DbT4001."kyuSochishaFlag",
+        DbT4001."logicalDeletedFlag"
+        FROM(SELECT
+        "shichosonCode",
+        "hihokenshaNo",
+        "rirekiNo",
+        "edaban" AS "edaNo",
+        "shinseishoKanriNo",
+        "shinseiJokyoKubun",
+        "shishoCode",
+        "chokkinFlag",
+        "shikibetsuCode",
+        "jukyuShinseiJiyu",
+        "shinseiRiyu",
+        "shinseishaKankeiCode",
+        "homninKankei",
+        "jukyuShinseiYMD",
+        "nigoTokuteiShippeiCode",
+        "shinsakaiIraiYMD",
+        "yokaigoJotaiKubunCode",
+        "ninteiYukoKikanKaishiYMD",
+        "ninteiYukoKikanShuryoYMD",
+        "ninteiYMD",
+        "shiteiServiceShurui01",
+        "shiteiServiceShurui02",
+        "shiteiServiceShurui03",
+        "shiteiServiceShurui04",
+        "shiteiServiceShurui05",
+        "shiteiServiceShurui06",
+        "shiteiServiceShurui07",
+        "shiteiServiceShurui08",
+        "shiteiServiceShurui09",
+        "shiteiServiceShurui10",
+        "shiteiServiceShurui11",
+        "shiteiServiceShurui12",
+        "shiteiServiceShurui13",
+        "shiteiServiceShurui14",
+        "shiteiServiceShurui15",
+        "shiteiServiceShurui16",
+        "shiteiServiceShurui17",
+        "shiteiServiceShurui18",
+        "shiteiServiceShurui19",
+        "shiteiServiceShurui20",
+        "shiteiServiceShurui21",
+        "shiteiServiceShurui22",
+        "shiteiServiceShurui23",
+        "shiteiServiceShurui24",
+        "shiteiServiceShurui25",
+        "shiteiServiceShurui26",
+        "shiteiServiceShurui27",
+        "shiteiServiceShurui28",
+        "shiteiServiceShurui29",
+        "shiteiServiceShurui30",
+        "soshitsuYMD",
+        "chokkinIdoYMD",
+        "chokkinIdoJiyuCode",
+        "yukoMukoKubun",
+        "dataKubun",
+        "remban",
+        "idoRiyu",
+        "shinseishoKubun",
+        "sakujoJiyuCode",
+        "yoshienshaNinteiShinseiFlag",
+        "shikyuGendoTanisu",
+        "shikyuGendoKaishiYMD",
+        "shikyuGendoShuryoYMD",
+        "tankiSikyuGendoNissu",
+        "tankiShikyuGendoKaishiYMD",
+        "tankiShikyuGendoShuryoYMD",
+        "toshoNinteiYukoKaishiYMD",
+        "toshoNinteiYukoShuryoYMD",
+        "jukyuShikakuShomeishoHakkoYMD1",
+        "jukyuShikakuShomeishoHakkoYMD2",
+        "shindanMeireishoHakkoYMD",
+        "nigoShinseiJuriTsuchishoHakkoYMD",
+        "ninteiKekkaTsuchishoHakkoYMD",
+        "kubunHenkoTsuchishoHakkoYMD",
+        "serviceHenkoTsuchishoHakkoYMD",
+        "ninteiKyakkaTsuchishoHakkoYMD",
+        "ninteiTorikeshiTsuchishoHakkoYMD",
+        "shikakuShutokuMaeShinseiFlag",
+        "kyuSochishaFlag",
+        "logicalDeletedFlag",
+        row_number() over(partition by "hihokenshaNo" order by "rirekiNo" desc,"edaban" desc) as rank_number
+        FROM
+        rgdb."DbT4001JukyushaDaicho"
+        WHERE
+        "yukoMukoKubun" = '1'
+        AND "logicalDeletedFlag"<![CDATA[<>]]> true)DbT4001
+        WHERE
+        rank_number = 1)DbT4001Joho
         ON
-            Tmp."hihokenshaNo" = DbT3005Kyotaku."hihokenshaNo"  
-      </select>
+        Tmp."hihokenshaNo" = DbT4001Joho."hihokenshaNo"
+    </select>
       
-      <!--居宅給付計画事業者作成情報の取得-->
-      <select id="getKyotakuKeikakuJigyoshaSakusei" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <!--受給者台帳の情報取得を一時テーブルに更新します。-->
+    <update id="updateTmp_JukyushaDaicho" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity">
+        UPDATE 
+        "TmpHihokenshasho_Ichi"
+        SET
+        "shichosonCode" = #{shichosonCode},
+        "hihokenshaNo" = #{hihokenshaNo},
+        "rirekiNo" = #{rirekiNo},
+        "edaNo" = #{edaNo},
+        "shinseishoKanriNo" = #{shinseishoKanriNo},
+        "shinseiJokyoKubun" = #{shinseiJokyoKubun},
+        "shishoCode" = #{shishoCode},
+        "chokkinFlag" = #{chokkinFlag},
+        "shikibetsuCode" = #{shikibetsuCode},
+        "jukyuShinseiJiyu" = #{jukyuShinseiJiyu},
+        "shinseiRiyu" = #{shinseiRiyu},
+        "shinseishaKankeiCode" = #{shinseishaKankeiCode},
+        "homninKankei" = #{homninKankei},
+        "jukyuShinseiYMD" = #{jukyuShinseiYMD},
+        "nigoTokuteiShippeiCode" = #{nigoTokuteiShippeiCode},
+        "shinsakaiIraiYMD" = #{shinsakaiIraiYMD},
+        "yokaigoJotaiKubunCode" = #{yokaigoJotaiKubunCode},
+        "ninteiYukoKikanKaishiYMD" = #{ninteiYukoKikanKaishiYMD},
+        "ninteiYukoKikanShuryoYMD" = #{ninteiYukoKikanShuryoYMD},
+        "ninteiYMD" = #{ninteiYMD},
+        "shiteiServiceShurui01" = #{shiteiServiceShurui01},
+        "shiteiServiceShurui02" = #{shiteiServiceShurui02},
+        "shiteiServiceShurui03" = #{shiteiServiceShurui03},
+        "shiteiServiceShurui04" = #{shiteiServiceShurui04},
+        "shiteiServiceShurui05" = #{shiteiServiceShurui05},
+        "shiteiServiceShurui06" = #{shiteiServiceShurui06},
+        "shiteiServiceShurui07" = #{shiteiServiceShurui07},
+        "shiteiServiceShurui08" = #{shiteiServiceShurui08},
+        "shiteiServiceShurui09" = #{shiteiServiceShurui09},
+        "shiteiServiceShurui10" = #{shiteiServiceShurui10},
+        "shiteiServiceShurui11" = #{shiteiServiceShurui11},
+        "shiteiServiceShurui12" = #{shiteiServiceShurui12},
+        "shiteiServiceShurui13" = #{shiteiServiceShurui13},
+        "shiteiServiceShurui14" = #{shiteiServiceShurui14},
+        "shiteiServiceShurui15" = #{shiteiServiceShurui15},
+        "shiteiServiceShurui16" = #{shiteiServiceShurui16},
+        "shiteiServiceShurui17" = #{shiteiServiceShurui17},
+        "shiteiServiceShurui18" = #{shiteiServiceShurui18},
+        "shiteiServiceShurui19" = #{shiteiServiceShurui19},
+        "shiteiServiceShurui20" = #{shiteiServiceShurui20},
+        "shiteiServiceShurui21" = #{shiteiServiceShurui21},
+        "shiteiServiceShurui22" = #{shiteiServiceShurui22},
+        "shiteiServiceShurui23" = #{shiteiServiceShurui23},
+        "shiteiServiceShurui24" = #{shiteiServiceShurui24},
+        "shiteiServiceShurui25" = #{shiteiServiceShurui25},
+        "shiteiServiceShurui26" = #{shiteiServiceShurui26},
+        "shiteiServiceShurui27" = #{shiteiServiceShurui27},
+        "shiteiServiceShurui28" = #{shiteiServiceShurui28},
+        "shiteiServiceShurui29" = #{shiteiServiceShurui29},
+        "shiteiServiceShurui30" = #{shiteiServiceShurui30},
+        "soshitsuYMD" = #{soshitsuYMD},
+        "chokkinIdoYMD" = #{chokkinIdoYMD},
+        "chokkinIdoJiyuCode" = #{chokkinIdoJiyuCode},
+        "yukoMukoKubun" = #{yukoMukoKubun},
+        "dataKubun" = #{dataKubun},
+        "remban" = #{remban},
+        "idoRiyu" = #{idoRiyu},
+        "shinseishoKubun" = #{shinseishoKubun},
+        "sakujoJiyuCode" = #{sakujoJiyuCode},
+        "yoshienshaNinteiShinseiFlag" = #{yoshienshaNinteiShinseiFlag},
+        "shikyuGendoTanisu" = #{shikyuGendoTanisu},
+        "shikyuGendoKaishiYMD" = #{shikyuGendoKaishiYMD},
+        "shikyuGendoShuryoYMD" = #{shikyuGendoShuryoYMD},
+        "tankiSikyuGendoNissu" = #{tankiSikyuGendoNissu},
+        "tankiShikyuGendoKaishiYMD" = #{tankiShikyuGendoKaishiYMD},
+        "tankiShikyuGendoShuryoYMD" = #{tankiShikyuGendoShuryoYMD},
+        "toshoNinteiYukoKaishiYMD" = #{toshoNinteiYukoKaishiYMD},
+        "toshoNinteiYukoShuryoYMD" = #{toshoNinteiYukoShuryoYMD},
+        "jukyuShikakuShomeishoHakkoYMD1" = #{jukyuShikakuShomeishoHakkoYMD1},
+        "jukyuShikakuShomeishoHakkoYMD2" = #{jukyuShikakuShomeishoHakkoYMD2},
+        "shindanMeireishoHakkoYMD" = #{shindanMeireishoHakkoYMD},
+        "nigoShinseiJuriTsuchishoHakkoYMD" = #{hakkoYMD},
+        "ninteiKekkaTsuchishoHakkoYMD" = #{ninteiKekkaTsuchishoHakkoYMD},
+        "kubunHenkoTsuchishoHakkoYMD" = #{kubunHenkoTsuchishoHakkoYMD},
+        "serviceHenkoTsuchishoHakkoYMD" = #{serviceHenkoTsuchishoHakkoYMD},
+        "ninteiKyakkaTsuchishoHakkoYMD" = #{ninteiKyakkaTsuchishoHakkoYMD},
+        "ninteiTorikeshiTsuchishoHakkoYMD" = #{torikeshiTsuchishoHakkoYMD},
+        "shikakuShutokuMaeShinseiFlag" = #{shikakuShutokuMaeShinseiFlag},
+        "kyuSochishaFlag" = #{kyuSochishaFlag},
+        "logicalDeletedFlag" = #{logicalDeletedFlag}
+        WHERE 
+        "hihokenshaNo" = #{hihokenshaNo}
+    </update>
+        
+    <!--要介護認定結果情報を取得します。-->
+    <select id="getNinteiKekkaJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
-            DbT3005Joho."hihokenshaNo",
-            DbT3005Joho."taishoYM",
-            DbT3005Joho."rirekiNo",
-            DbT3005Joho."todokedeKubun",
-            DbT3005Joho."todokedeYMD",
-            DbT3005Joho."todokedeshaShimei",
-            DbT3005Joho."todokedeshaShimeiKana",
-            DbT3005Joho."todokedeshaYubinNo",
-            DbT3005Joho."todokedeshaJusho",
-            DbT3005Joho."todokedeshaTelNo",
-            DbT3005Joho."todokedeshaKankeiKubun",
-            DbT3005Joho."zanteiKubun",
-            DbT3006Joho."tekiyoKaishiYMD",
-            DbT3006Joho."itakusakiJigyoshaNo",
-            DbT3006Joho."jigyoshaHenkoJiyu"
-        FROM       
-            (SELECT
-                DbT3005Kyotaku."hihokenshaNo",
-                DbT3005Kyotaku."taishoYM",
-                DbT3005Kyotaku."rirekiNo",
-                DbT3005Kyotaku."todokedeKubun",
-                DbT3005Kyotaku."todokedeYMD",
-                DbT3005Kyotaku."todokedeshaShimei",
-                DbT3005Kyotaku."todokedeshaShimeiKana",
-                DbT3005Kyotaku."todokedeshaYubinNo",
-                DbT3005Kyotaku."todokedeshaJusho",
-                DbT3005Kyotaku."todokedeshaTelNo",
-                DbT3005Kyotaku."todokedeshaKankeiKubun",
-                DbT3005Kyotaku."zanteiKubun"   
-            FROM 
-                "TmpHihokenshasho_Ichi" AS Tmp
-            INNER JOIN
-                (SELECT 
-                    DbT3005."hihokenshaNo",
-                    DbT3005."taishoYM",
-                    DbT3005."rirekiNo",
-                    DbT3005."todokedeKubun",
-                    DbT3005."todokedeYMD",
-                    DbT3005."todokedeshaShimei",
-                    DbT3005."todokedeshaShimeiKana",
-                    DbT3005."todokedeshaYubinNo",
-                    DbT3005."todokedeshaJusho",
-                    DbT3005."todokedeshaTelNo",
-                    DbT3005."todokedeshaKankeiKubun",
-                    DbT3005."zanteiKubun"
-                FROM(SELECT
-                        "hihokenshaNo",
-                        "taishoYM",
-                        "rirekiNo",
-                        "todokedeKubun",
-                        "todokedeYMD",
-                        "todokedeshaShimei",
-                        "todokedeshaShimeiKana",
-                        "todokedeshaYubinNo",
-                        "todokedeshaJusho",
-                        "todokedeshaTelNo",
-                        "todokedeshaKankeiKubun",
-                        "zanteiKubun",
-                        row_number() over(partition by "hihokenshaNo" order by "taishoYM" desc,"rirekiNo" desc) as rank_number
-                     FROM
-                         rgdb."DbT3005KyotakuKeikakuTodokede")DbT3005
-                WHERE
-                   rank_number = 1
-                OR rank_number = 2
-                OR rank_number = 3)DbT3005Kyotaku
-            ON
-                Tmp."hihokenshaNo" = DbT3005Kyotaku."hihokenshaNo")DbT3005Joho
-        LEFT JOIN
-            (SELECT 
-                DbT3006.hihokenshaNo,
-                DbT3006."taishoYM",
-                DbT3006."rirekiNo",
-                DbT3006."tekiyoKaishiYMD",
-                DbT3006."itakusakiJigyoshaNo",
-                DbT3006."jigyoshaHenkoJiyu"
-            FROM(SELECT
-                    hihokenshaNo,
-                    "taishoYM",
-                    "rirekiNo",
-                    "tekiyoKaishiYMD",
-                    "itakusakiJigyoshaNo",
-                    "jigyoshaHenkoJiyu",
-                    row_number() over(partition by hihokenshaNo order by "taishoYM" desc,"rirekiNo" desc) as rank_number
-                 FROM
-                     rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei")DbT3006
-            WHERE
-               rank_number = 1
-            OR rank_number = 2
-            OR rank_number = 3)DbT3006Joho
+        Tmp."hihokenshaNo",
+        DbT4102Joho."shinseishoKanriNo",
+        DbT4102Joho."nijiHanteiYMD",
+        DbT4102Joho."nijiHanteiYokaigoJotaiKubunCode",
+        DbT4102Joho."nijiHanteiNinteiYukoKikan",
+        DbT4102Joho."nijiHanteiNinteiYukoKaishiYMD",
+        DbT4102Joho."nijiHanteiNinteiYukoShuryoYMD",
+        DbT4102Joho."shinsakaiKaisaiNo",
+        DbT4102Joho."shinsakaiIken",
+        DbT4102Joho."ichijiHanteiKekkaHenkoRiyu",
+        DbT4102Joho."yokaigoJotaizoReiCode",
+        DbT4102Joho."ninteishinsakaiIkenShurui",
+        DbT4102Joho."shinsakaiMemo",
+        DbT4102Joho."nijiHanteiKekkaInputHoho",
+        DbT4102Joho."nijiHanteiKekkaInputYMD"
+        FROM 
+        "TmpHihokenshasho_Ichi" AS Tmp
+        INNER JOIN  
+        rgdb."DbT4102NinteiKekkaJoho" AS DbT4102Joho
         ON
-            DbT3006Joho.hihokenshaNo = DbT3005Joho."hihokenshaNo"
+        DbT4102Joho."shinseishoKanriNo" = Tmp."shinseishoKanriNo"
+        WHERE
+        DbT4102Joho."shinseishoKanriNo" = #{shinseishoKanriNo}
+    </select>
+        
+    <!--要介護認定結果情報の情報取得を一時テーブルに更新します。-->
+    <update id="updateTmp_NinteiKekkaJoho" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity">
+        UPDATE 
+        "TmpHihokenshasho_Ichi"
+        SET
+        "shinseishoKanriNo" = #{shinseishoKanriNo},
+        "nijiHanteiYMD" = #{nijiHanteiYMD},
+        "nijiHanteiYokaigoJotaiKubunCode" = #{kaigoJotaiKubunCode},
+        "nijiHanteiNinteiYukoKikan" = #{nijiHanteiNinteiYukoKikan},
+        "nijiHanteiNinteiYukoKaishiYMD" = #{nijiHanteiNinteiYukoKaishiYMD},
+        "nijiHanteiNinteiYukoShuryoYMD" = #{nijiHanteiNinteiYukoShuryoYMD},
+        "shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo},
+        "shinsakaiIken" = #{shinsakaiIken},
+        "ichijiHanteiKekkaHenkoRiyu" = #{ichijiHanteiKekkaHenkoRiyu},
+        "yokaigoJotaizoReiCode" = #{yokaigoJotaizoReiCode},
+        "ninteishinsakaiIkenShurui" = #{ninteishinsakaiIkenShurui},
+        "shinsakaiMemo" = #{shinsakaiMemo},
+        "nijiHanteiKekkaInputHoho" = #{nijiHanteiKekkaInputHoho},
+        "nijiHanteiKekkaInputYMD" = #{nijiHanteiKekkaInputYMD}
+        WHERE 
+        "hihokenshaNo" = #{hihokenshaNo}  
+    </update>
+      
+    <!--支払方法変更情報を取得します-->
+    <select id="getShiharaiHohoHenko" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+        SELECT
+        DbT4021Joho."shoKisaiHokenshaNo",
+        DbT4021Joho."hihokenshaNo",
+        DbT4021Joho."kanriKubun",
+        DbT4021Joho."rirekiNo",
+        DbT4021Joho."torokuKubun",
+        DbT4021Joho."tekiyoKaishiYMD",
+        DbT4021Joho."tekiyoShuryoYMD",
+        DbT4021Joho."shuryoKubun",
+        DbT4021Joho."yokoku_TorokuYMD",
+        DbT4021Joho."sashitome_IraiJuriYMD",
+        DbT4021Joho."yokoku_TsuchiHakkoYMD",
+        DbT4021Joho."yokoku_TsuchiSaiHakkoFlag",
+        DbT4021Joho."bemmei_TeishutsuYMD",
+        DbT4021Joho."bemmei_UketsukeYMD",
+        DbT4021Joho."bemmei_RiyuCode",
+        DbT4021Joho."bemmei_ShinsaKetteiYMD",
+        DbT4021Joho."bemmei_ShinsaKekkaKubun",
+        DbT4021Joho."shokan_KetteiYMD",
+        DbT4021Joho."shokan_TsuchiHakkoYMD",
+        DbT4021Joho."shokan_TsuchiSaiHakkoFlag",
+        DbT4021Joho."hihokenshaShoTeishutsuYMD",
+        DbT4021Joho."sashitome_Flag",
+        DbT4021Joho."sashitome_KetteiYMD",
+        DbT4021Joho."sashitome_KaijoYMD",
+        DbT4021Joho."gemmen_KetteiYMD",
+        DbT4021Joho."gemmen_TsuchiHakkoYMD",
+        DbT4021Joho."gemmen_TsuchiSaiHakkoFlag",
+        DbT4021Joho."kyufuRitsu",
+        DbT4021Joho."shuryoShinsei_UketsukeYMD",
+        DbT4021Joho."shuryoShinsei_YMD",
+        DbT4021Joho."shuryoShinsei_RiyuCode",
+        DbT4021Joho."shuryoShinsei_ShinsaKetteiYMD",
+        DbT4021Joho."shuryoShinsei_ShinsaKekkaKubun",
+        DbT4021Joho."mukoKubun"
+        FROM 
+        "TmpHihokenshasho_Ichi" AS Tmp
+        INNER JOIN  
+        (SELECT 
+        DbT4021."shoKisaiHokenshaNo",
+        DbT4021."hihokenshaNo",
+        DbT4021."kanriKubun",
+        DbT4021."rirekiNo",
+        DbT4021."torokuKubun",
+        DbT4021."tekiyoKaishiYMD",
+        DbT4021."tekiyoShuryoYMD",
+        DbT4021."shuryoKubun",
+        DbT4021."yokoku_TorokuYMD",
+        DbT4021."sashitome_IraiJuriYMD",
+        DbT4021."yokoku_TsuchiHakkoYMD",
+        DbT4021."yokoku_TsuchiSaiHakkoFlag",
+        DbT4021."bemmei_TeishutsuYMD",
+        DbT4021."bemmei_UketsukeYMD",
+        DbT4021."bemmei_RiyuCode",
+        DbT4021."bemmei_ShinsaKetteiYMD",
+        DbT4021."bemmei_ShinsaKekkaKubun",
+        DbT4021."shokan_KetteiYMD",
+        DbT4021."shokan_TsuchiHakkoYMD",
+        DbT4021."shokan_TsuchiSaiHakkoFlag",
+        DbT4021."hihokenshaShoTeishutsuYMD",
+        DbT4021."sashitome_Flag",
+        DbT4021."sashitome_KetteiYMD",
+        DbT4021."sashitome_KaijoYMD",
+        DbT4021."gemmen_KetteiYMD",
+        DbT4021."gemmen_TsuchiHakkoYMD",
+        DbT4021."gemmen_TsuchiSaiHakkoFlag",
+        DbT4021."kyufuRitsu",
+        DbT4021."shuryoShinsei_UketsukeYMD",
+        DbT4021."shuryoShinsei_YMD",
+        DbT4021."shuryoShinsei_RiyuCode",
+        DbT4021."shuryoShinsei_ShinsaKetteiYMD",
+        DbT4021."shuryoShinsei_ShinsaKekkaKubun",
+        DbT4021."mukoKubun"
+        FROM(SELECT
+        "shoKisaiHokenshaNo",
+        "hihokenshaNo",
+        "kanriKubun",
+        "rirekiNo",
+        "torokuKubun",
+        "tekiyoKaishiYMD",
+        "tekiyoShuryoYMD",
+        "shuryoKubun",
+        "yokoku_TorokuYMD",
+        "sashitome_IraiJuriYMD",
+        "yokoku_TsuchiHakkoYMD",
+        "yokoku_TsuchiSaiHakkoFlag",
+        "bemmei_TeishutsuYMD",
+        "bemmei_UketsukeYMD",
+        "bemmei_RiyuCode",
+        "bemmei_ShinsaKetteiYMD",
+        "bemmei_ShinsaKekkaKubun",
+        "shokan_KetteiYMD",
+        "shokan_TsuchiHakkoYMD",
+        "shokan_TsuchiSaiHakkoFlag",
+        "hihokenshaShoTeishutsuYMD",
+        "sashitome_Flag",
+        "sashitome_KetteiYMD",
+        "sashitome_KaijoYMD",
+        "gemmen_KetteiYMD",
+        "gemmen_TsuchiHakkoYMD",
+        "gemmen_TsuchiSaiHakkoFlag",
+        "kyufuRitsu",
+        "shuryoShinsei_UketsukeYMD",
+        "shuryoShinsei_YMD",
+        "shuryoShinsei_RiyuCode",
+        "shuryoShinsei_ShinsaKetteiYMD",
+        "shuryoShinsei_ShinsaKekkaKubun",
+        "mukoKubun",
+        row_number() over(partition by "shoKisaiHokenshaNo" order by "tekiyoShuryoYMD" desc,"tekiyoKaishiYMD" desc) as rank_number
+        FROM
+        rgdb."DbT4021ShiharaiHohoHenko"
+        WHERE
+        "tekiyoShuryoYMD" <![CDATA[>]]> "tekiyoKaishiYMD")DbT4021
+        WHERE
+        rank_number = 1
+        OR rank_number = 2
+        OR rank_number = 3)DbT4021Joho
+        ON
+        Tmp."hihokenshaNo" = DbT4021Joho."hihokenshaNo"
+    </select>
+      
+    <!--支払方法変更の情報取得を一時テーブルに更新します。-->
+    <update id="updateTmp_ShiharaiHohoHenko" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity">
+        UPDATE 
+        "TmpHihokenshasho_Ichi"
+        SET
+        "shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo},
+        "hihokenshaNo" = #{hihokenshaNo},
+        "kanriKubun" = #{kanriKubun},
+        "rirekiNo" = #{rirekiNo},
+        "torokuKubun" = #{torokuKubun},
+        "tekiyoKaishiYMD" = #{tekiyoKaishiYMD},
+        "tekiyoShuryoYMD" = #{tekiyoShuryoYMD},
+        "shuryoKubun" = #{shuryoKubun},
+        "yokoku_TorokuYMD" = #{yokoku_TorokuYMD},
+        "sashitome_IraiJuriYMD" = #{sashitome_IraiJuriYMD},
+        "yokoku_TsuchiHakkoYMD" = #{yokoku_TsuchiHakkoYMD},
+        "yokoku_TsuchiSaiHakkoFlag" = #{yokoku_TsuchiSaiHakkoFlag},
+        "bemmei_TeishutsuYMD" = #{bemmei_TeishutsuYMD},
+        "bemmei_UketsukeYMD" = #{bemmei_UketsukeYMD},
+        "bemmei_RiyuCode" = #{bemmei_RiyuCode},
+        "bemmei_ShinsaKetteiYMD" = #{bemmei_ShinsaKetteiYMD},
+        "bemmei_ShinsaKekkaKubun" = #{bemmei_ShinsaKekkaKubun},
+        "shokan_KetteiYMD" = #{shokan_KetteiYMD},
+        "shokan_TsuchiHakkoYMD" = #{shokan_TsuchiHakkoYMD},
+        "shokan_TsuchiSaiHakkoFlag" = #{shokan_TsuchiSaiHakkoFlag},
+        "hihokenshaShoTeishutsuYMD" = #{hihokenshaShoTeishutsuYMD},
+        "sashitome_Flag" = #{sashitome_Flag},
+        "sashitome_KetteiYMD" = #{sashitome_KetteiYMD},
+        "sashitome_KaijoYMD" = #{sashitome_KaijoYMD},
+        "gemmen_KetteiYMD" = #{gemmen_KetteiYMD},
+        "gemmen_TsuchiHakkoYMD" = #{gemmen_TsuchiHakkoYMD},
+        "gemmen_TsuchiSaiHakkoFlag" = #{gemmen_TsuchiSaiHakkoFlag},
+        "kyufuRitsu" = #{kyufuRitsu},
+        "shuryoShinsei_UketsukeYMD" = #{shuryoShinsei_UketsukeYMD},
+        "shuryoShinsei_YMD" = #{shuryoShinsei_YMD},
+        "shuryoShinsei_RiyuCode" = #{shuryoShinsei_RiyuCode},
+        "shuryoShinsei_ShinsaKetteiYMD" = #{shuryoShinsei_ShinsaKetteiYMD},
+        "shuryoShinsei_ShinsaKekkaKubun" = #{shuryoShinsei_ShinsaKekkaKubun},
+        "mukoKubun" = #{mukoKubun}
+        WHERE 
+        "hihokenshaNo" = #{hihokenshaNo}  
+    </update>
+        
+    <!--居宅給付計画届出情報の取得-->
+    <select id="getKyotakuKeikakuTodokede" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+        SELECT
+        DbT3005Kyotaku."hihokenshaNo",
+        DbT3005Kyotaku."taishoYM",
+        DbT3005Kyotaku."rirekiNo",
+        DbT3005Kyotaku."todokedeKubun",
+        DbT3005Kyotaku."todokedeYMD",
+        DbT3005Kyotaku."todokedeshaShimei",
+        DbT3005Kyotaku."todokedeshaShimeiKana",
+        DbT3005Kyotaku."todokedeshaYubinNo",
+        DbT3005Kyotaku."todokedeshaJusho",
+        DbT3005Kyotaku."todokedeshaTelNo",
+        DbT3005Kyotaku."todokedeshaKankeiKubun",
+        DbT3005Kyotaku."zanteiKubun"   
+        FROM 
+        "TmpHihokenshasho_Ichi" AS Tmp
+        INNER JOIN
+        (SELECT 
+        DbT3005."hihokenshaNo",
+        DbT3005."taishoYM",
+        DbT3005."rirekiNo",
+        DbT3005."todokedeKubun",
+        DbT3005."todokedeYMD",
+        DbT3005."todokedeshaShimei",
+        DbT3005."todokedeshaShimeiKana",
+        DbT3005."todokedeshaYubinNo",
+        DbT3005."todokedeshaJusho",
+        DbT3005."todokedeshaTelNo",
+        DbT3005."todokedeshaKankeiKubun",
+        DbT3005."zanteiKubun"
+        FROM(SELECT
+        "hihokenshaNo",
+        "taishoYM",
+        "rirekiNo",
+        "todokedeKubun",
+        "todokedeYMD",
+        "todokedeshaShimei",
+        "todokedeshaShimeiKana",
+        "todokedeshaYubinNo",
+        "todokedeshaJusho",
+        "todokedeshaTelNo",
+        "todokedeshaKankeiKubun",
+        "zanteiKubun",
+        row_number() over(partition by "hihokenshaNo" order by "taishoYM" desc,"rirekiNo" desc) as rank_number
+        FROM
+        rgdb."DbT3005KyotakuKeikakuTodokede")DbT3005
+        WHERE
+        rank_number = 1
+        OR rank_number = 2
+        OR rank_number = 3)DbT3005Kyotaku
+        ON
+        Tmp."hihokenshaNo" = DbT3005Kyotaku."hihokenshaNo"  
+    </select>
+      
+    <!--居宅給付計画事業者作成情報の取得-->
+    <select id="getKyotakuKeikakuJigyoshaSakusei" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+        SELECT
+        DbT3005Joho."hihokenshaNo",
+        DbT3005Joho."taishoYM",
+        DbT3005Joho."rirekiNo",
+        DbT3005Joho."todokedeKubun",
+        DbT3005Joho."todokedeYMD",
+        DbT3005Joho."todokedeshaShimei",
+        DbT3005Joho."todokedeshaShimeiKana",
+        DbT3005Joho."todokedeshaYubinNo",
+        DbT3005Joho."todokedeshaJusho",
+        DbT3005Joho."todokedeshaTelNo",
+        DbT3005Joho."todokedeshaKankeiKubun",
+        DbT3005Joho."zanteiKubun",
+        DbT3006Joho."tekiyoKaishiYMD",
+        DbT3006Joho."itakusakiJigyoshaNo",
+        DbT3006Joho."jigyoshaHenkoJiyu"
+        FROM       
+        (SELECT
+        DbT3005Kyotaku."hihokenshaNo",
+        DbT3005Kyotaku."taishoYM",
+        DbT3005Kyotaku."rirekiNo",
+        DbT3005Kyotaku."todokedeKubun",
+        DbT3005Kyotaku."todokedeYMD",
+        DbT3005Kyotaku."todokedeshaShimei",
+        DbT3005Kyotaku."todokedeshaShimeiKana",
+        DbT3005Kyotaku."todokedeshaYubinNo",
+        DbT3005Kyotaku."todokedeshaJusho",
+        DbT3005Kyotaku."todokedeshaTelNo",
+        DbT3005Kyotaku."todokedeshaKankeiKubun",
+        DbT3005Kyotaku."zanteiKubun"   
+        FROM 
+        "TmpHihokenshasho_Ichi" AS Tmp
+        INNER JOIN
+        (SELECT 
+        DbT3005."hihokenshaNo",
+        DbT3005."taishoYM",
+        DbT3005."rirekiNo",
+        DbT3005."todokedeKubun",
+        DbT3005."todokedeYMD",
+        DbT3005."todokedeshaShimei",
+        DbT3005."todokedeshaShimeiKana",
+        DbT3005."todokedeshaYubinNo",
+        DbT3005."todokedeshaJusho",
+        DbT3005."todokedeshaTelNo",
+        DbT3005."todokedeshaKankeiKubun",
+        DbT3005."zanteiKubun"
+        FROM(SELECT
+        "hihokenshaNo",
+        "taishoYM",
+        "rirekiNo",
+        "todokedeKubun",
+        "todokedeYMD",
+        "todokedeshaShimei",
+        "todokedeshaShimeiKana",
+        "todokedeshaYubinNo",
+        "todokedeshaJusho",
+        "todokedeshaTelNo",
+        "todokedeshaKankeiKubun",
+        "zanteiKubun",
+        row_number() over(partition by "hihokenshaNo" order by "taishoYM" desc,"rirekiNo" desc) as rank_number
+        FROM
+        rgdb."DbT3005KyotakuKeikakuTodokede")DbT3005
+        WHERE
+        rank_number = 1
+        OR rank_number = 2
+        OR rank_number = 3)DbT3005Kyotaku
+        ON
+        Tmp."hihokenshaNo" = DbT3005Kyotaku."hihokenshaNo")DbT3005Joho
+        LEFT JOIN
+        (SELECT 
+        DbT3006.hihokenshaNo,
+        DbT3006."taishoYM",
+        DbT3006."rirekiNo",
+        DbT3006."tekiyoKaishiYMD",
+        DbT3006."itakusakiJigyoshaNo",
+        DbT3006."jigyoshaHenkoJiyu"
+        FROM(SELECT
+        hihokenshaNo,
+        "taishoYM",
+        "rirekiNo",
+        "tekiyoKaishiYMD",
+        "itakusakiJigyoshaNo",
+        "jigyoshaHenkoJiyu",
+        row_number() over(partition by hihokenshaNo order by "taishoYM" desc,"rirekiNo" desc) as rank_number
+        FROM
+        rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei")DbT3006
+        WHERE
+        rank_number = 1
+        OR rank_number = 2
+        OR rank_number = 3)DbT3006Joho
+        ON
+        DbT3006Joho.hihokenshaNo = DbT3005Joho."hihokenshaNo"
         AND DbT3006Joho."taishoYM" = DbT3005Joho."taishoYM"
         AND DbT3006Joho."rirekiNo" = DbT3005Joho."rirekiNo"   
-      </select>
+    </select>
       
-      <!--居宅給付計画自己作成情報の取得-->
-      <select id="getKyotakuKeikakuJikoSakusei" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <!--居宅給付計画自己作成情報の取得-->
+    <select id="getKyotakuKeikakuJikoSakusei" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
-            DbT3005Joho."hihokenshaNo",
-            DbT3005Joho."taishoYM",
-            DbT3005Joho."rirekiNo",
-            DbT3005Joho."todokedeKubun",
-            DbT3005Joho."todokedeYMD",
-            DbT3005Joho."todokedeshaShimei",
-            DbT3005Joho."todokedeshaShimeiKana",
-            DbT3005Joho."todokedeshaYubinNo",
-            DbT3005Joho."todokedeshaJusho",
-            DbT3005Joho."todokedeshaTelNo",
-            DbT3005Joho."todokedeshaKankeiKubun",
-            DbT3005Joho."zanteiKubun",
-            DbT3007Joho."tekiyoKaishiYMD"
+        DbT3005Joho."hihokenshaNo",
+        DbT3005Joho."taishoYM",
+        DbT3005Joho."rirekiNo",
+        DbT3005Joho."todokedeKubun",
+        DbT3005Joho."todokedeYMD",
+        DbT3005Joho."todokedeshaShimei",
+        DbT3005Joho."todokedeshaShimeiKana",
+        DbT3005Joho."todokedeshaYubinNo",
+        DbT3005Joho."todokedeshaJusho",
+        DbT3005Joho."todokedeshaTelNo",
+        DbT3005Joho."todokedeshaKankeiKubun",
+        DbT3005Joho."zanteiKubun",
+        DbT3007Joho."tekiyoKaishiYMD"
         FROM
-            (SELECT
-                DbT3005Kyotaku."hihokenshaNo",
-                DbT3005Kyotaku."taishoYM",
-                DbT3005Kyotaku."rirekiNo",
-                DbT3005Kyotaku."todokedeKubun",
-                DbT3005Kyotaku."todokedeYMD",
-                DbT3005Kyotaku."todokedeshaShimei",
-                DbT3005Kyotaku."todokedeshaShimeiKana",
-                DbT3005Kyotaku."todokedeshaYubinNo",
-                DbT3005Kyotaku."todokedeshaJusho",
-                DbT3005Kyotaku."todokedeshaTelNo",
-                DbT3005Kyotaku."todokedeshaKankeiKubun",
-                DbT3005Kyotaku."zanteiKubun"   
-            FROM 
-                "TmpHihokenshasho_Ichi" AS Tmp
-            INNER JOIN
-                (SELECT 
-                    DbT3005."hihokenshaNo",
-                    DbT3005."taishoYM",
-                    DbT3005."rirekiNo",
-                    DbT3005."todokedeKubun",
-                    DbT3005."todokedeYMD",
-                    DbT3005."todokedeshaShimei",
-                    DbT3005."todokedeshaShimeiKana",
-                    DbT3005."todokedeshaYubinNo",
-                    DbT3005."todokedeshaJusho",
-                    DbT3005."todokedeshaTelNo",
-                    DbT3005."todokedeshaKankeiKubun",
-                    DbT3005."zanteiKubun"
-                FROM(SELECT
-                        "hihokenshaNo",
-                        "taishoYM",
-                        "rirekiNo",
-                        "todokedeKubun",
-                        "todokedeYMD",
-                        "todokedeshaShimei",
-                        "todokedeshaShimeiKana",
-                        "todokedeshaYubinNo",
-                        "todokedeshaJusho",
-                        "todokedeshaTelNo",
-                        "todokedeshaKankeiKubun",
-                        "zanteiKubun",
-                        row_number() over(partition by "hihokenshaNo" order by "taishoYM" desc,"rirekiNo" desc) as rank_number
-                     FROM
-                         rgdb."DbT3005KyotakuKeikakuTodokede")DbT3005
-                WHERE
-                   rank_number = 1
-                OR rank_number = 2
-                OR rank_number = 3)DbT3005Kyotaku
-            ON
-                Tmp."hihokenshaNo" = DbT3005Kyotaku."hihokenshaNo")DbT3005Joho
+        (SELECT
+        DbT3005Kyotaku."hihokenshaNo",
+        DbT3005Kyotaku."taishoYM",
+        DbT3005Kyotaku."rirekiNo",
+        DbT3005Kyotaku."todokedeKubun",
+        DbT3005Kyotaku."todokedeYMD",
+        DbT3005Kyotaku."todokedeshaShimei",
+        DbT3005Kyotaku."todokedeshaShimeiKana",
+        DbT3005Kyotaku."todokedeshaYubinNo",
+        DbT3005Kyotaku."todokedeshaJusho",
+        DbT3005Kyotaku."todokedeshaTelNo",
+        DbT3005Kyotaku."todokedeshaKankeiKubun",
+        DbT3005Kyotaku."zanteiKubun"   
+        FROM 
+        "TmpHihokenshasho_Ichi" AS Tmp
+        INNER JOIN
+        (SELECT 
+        DbT3005."hihokenshaNo",
+        DbT3005."taishoYM",
+        DbT3005."rirekiNo",
+        DbT3005."todokedeKubun",
+        DbT3005."todokedeYMD",
+        DbT3005."todokedeshaShimei",
+        DbT3005."todokedeshaShimeiKana",
+        DbT3005."todokedeshaYubinNo",
+        DbT3005."todokedeshaJusho",
+        DbT3005."todokedeshaTelNo",
+        DbT3005."todokedeshaKankeiKubun",
+        DbT3005."zanteiKubun"
+        FROM(SELECT
+        "hihokenshaNo",
+        "taishoYM",
+        "rirekiNo",
+        "todokedeKubun",
+        "todokedeYMD",
+        "todokedeshaShimei",
+        "todokedeshaShimeiKana",
+        "todokedeshaYubinNo",
+        "todokedeshaJusho",
+        "todokedeshaTelNo",
+        "todokedeshaKankeiKubun",
+        "zanteiKubun",
+        row_number() over(partition by "hihokenshaNo" order by "taishoYM" desc,"rirekiNo" desc) as rank_number
+        FROM
+        rgdb."DbT3005KyotakuKeikakuTodokede")DbT3005
+        WHERE
+        rank_number = 1
+        OR rank_number = 2
+        OR rank_number = 3)DbT3005Kyotaku
+        ON
+        Tmp."hihokenshaNo" = DbT3005Kyotaku."hihokenshaNo")DbT3005Joho
         LEFT JOIN  
-            (SELECT 
-                DbT3007."hihokenshaNo",
-                DbT3007."taishoYM",
-                DbT3007."rirekiNo",
-                DbT3007."tekiyoKaishiYMD"
-            FROM(SELECT
-                    "hihokenshaNo",
-                    "taishoYM",
-                    "rirekiNo",
-                    "tekiyoKaishiYMD",
-                    row_number() over(partition by "hihokenshaNo" order by "taishoYM" desc,"rirekiNo" desc) as rank_number
-                 FROM
-                     rgdb."DbT3007KyotakuKeikakuJikoSakusei")DbT3007
-            WHERE
-               rank_number = 1
-            OR rank_number = 2
-            OR rank_number = 3)DbT3007Joho
-         ON
-            DbT3007Joho."hihokenshaNo" = DbT3005Joho."hihokenshaNo"
+        (SELECT 
+        DbT3007."hihokenshaNo",
+        DbT3007."taishoYM",
+        DbT3007."rirekiNo",
+        DbT3007."tekiyoKaishiYMD"
+        FROM(SELECT
+        "hihokenshaNo",
+        "taishoYM",
+        "rirekiNo",
+        "tekiyoKaishiYMD",
+        row_number() over(partition by "hihokenshaNo" order by "taishoYM" desc,"rirekiNo" desc) as rank_number
+        FROM
+        rgdb."DbT3007KyotakuKeikakuJikoSakusei")DbT3007
+        WHERE
+        rank_number = 1
+        OR rank_number = 2
+        OR rank_number = 3)DbT3007Joho
+        ON
+        DbT3007Joho."hihokenshaNo" = DbT3005Joho."hihokenshaNo"
         AND DbT3007Joho."taishoYM" = DbT3005Joho."taishoYM"
         AND DbT3007Joho."rirekiNo" = DbT3005Joho."rirekiNo"     
-      </select>
+    </select>
       
-      <!--居宅給付計画届出の情報取得を一時テーブルに更新します。-->
-      <update id="updateTmp_Kyotaku" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity">
+    <!--居宅給付計画届出の情報取得を一時テーブルに更新します。-->
+    <update id="updateTmp_Kyotaku" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity">
         UPDATE
-            "TmpHihokenshasho_Ichi"
+        "TmpHihokenshasho_Ichi"
         SET
-            "hihokenshaNo" = #{hihokenshaNo},
-            "taishoYM" = #{taishoYM},
-            "rirekiNo" = #{rirekiNo},
-            "todokedeKubun" = #{todokedeKubun},
-            "todokedeYMD" = #{todokedeYMD},
-            "todokedeshaShimei" = #{todokedeshaShimei},
-            "todokedeshaShimeiKana" = #{todokedeshaShimeiKana},
-            "todokedeshaYubinNo" = #{todokedeshaYubinNo},
-            "todokedeshaJusho" = #{todokedeshaJusho},
-            "todokedeshaTelNo" = #{todokedeshaTelNo},
-            "todokedeshaKankeiKubun" = #{todokedeshaKankeiKubun},
-            "zanteiKubun" = #{zanteiKubun},
-            "tekiyoKaishiYMD" = #{tekiyoKaishiYMD},
-            "itakusakiJigyoshaNo" = #{itakusakiJigyoshaNo},
-            "jigyoshaHenkoJiyu" = #{jigyoshaHenkoJiyu}
+        "hihokenshaNo" = #{hihokenshaNo},
+        "taishoYM" = #{taishoYM},
+        "rirekiNo" = #{rirekiNo},
+        "todokedeKubun" = #{todokedeKubun},
+        "todokedeYMD" = #{todokedeYMD},
+        "todokedeshaShimei" = #{todokedeshaShimei},
+        "todokedeshaShimeiKana" = #{todokedeshaShimeiKana},
+        "todokedeshaYubinNo" = #{todokedeshaYubinNo},
+        "todokedeshaJusho" = #{todokedeshaJusho},
+        "todokedeshaTelNo" = #{todokedeshaTelNo},
+        "todokedeshaKankeiKubun" = #{todokedeshaKankeiKubun},
+        "zanteiKubun" = #{zanteiKubun},
+        "tekiyoKaishiYMD" = #{tekiyoKaishiYMD},
+        "itakusakiJigyoshaNo" = #{itakusakiJigyoshaNo},
+        "jigyoshaHenkoJiyu" = #{jigyoshaHenkoJiyu}
         WHERE
-            "hihokenshaNo" = #{hihokenshaNo}
-      </update>
+        "hihokenshaNo" = #{hihokenshaNo}
+    </update>
         
-      <!--本人情報取得-->
-      <select id="getHonninJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <!--本人情報取得-->
+    <select id="getHonninJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT 
-            Tmp."hihokenshaNo",
-            PSM."meisho",
-            PSM."seinengappiYMD"
+        Tmp."hihokenshaNo",
+        PSM."meisho",
+        PSM."seinengappiYMD"
         FROM
-            "TmpHihokenshasho_Ichi" AS Tmp
+        "TmpHihokenshasho_Ichi" AS Tmp
         INNER JOIN  
-            rgua.${psmShikibetsuTaisho} AS PSM
+        rgua.${psmShikibetsuTaisho} AS PSM
         ON
-            PSM."shikibetsuCode" = Tmp."shichosonCode"
-      </select>  
+        PSM."shikibetsuCode" = Tmp."shichosonCode"
+    </select>  
       
-      <!--本人情報を一時テーブルに更新します。-->
-      <update id="updateTmp_HonninJoho" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity">
+    <!--本人情報を一時テーブルに更新します。-->
+    <update id="updateTmp_HonninJoho" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity">
         UPDATE 
-            "TmpHihokenshasho_Ichi"
+        "TmpHihokenshasho_Ichi"
         SET
-            "meisho" = #{meisho},
-            "seinengappiYMD" = #{seinengappiYMD}
+        "meisho" = #{meisho},
+        "seinengappiYMD" = #{seinengappiYMD}
         WHERE 
-            "hihokenshaNo" = #{hihokenshaNo}
-      </update>
+        "hihokenshaNo" = #{hihokenshaNo}
+    </update>
       
-      <!--送付先情報取得-->
-      <select id="getSofusakiJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+    <!--送付先情報取得-->
+    <select id="getSofusakiJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT 
-            Tmp."hihokenshaNo" ,
-            psmAtesaki."kannaiKangaiKubun",
-            psmAtesaki."jusho",
-            psmAtesaki."banchi",
-            psmAtesaki."katagaki"
+        Tmp."hihokenshaNo" ,
+        psmAtesaki."kannaiKangaiKubun",
+        psmAtesaki."jusho",
+        psmAtesaki."banchi",
+        psmAtesaki."katagaki"
         FROM
-            "TmpHihokenshasho_Ichi" AS Tmp
+        "TmpHihokenshasho_Ichi" AS Tmp
         INNER JOIN
-            rgua.${psmAtesaki} AS psmAtesaki
+        rgua.${psmAtesaki} AS psmAtesaki
         ON
-            psmAtesaki."shikibetsuCode" = Tmp."shichosonCode"     
-      </select>  
+        psmAtesaki."shikibetsuCode" = Tmp."shichosonCode"     
+    </select>  
       
-      <!--送付先情報を一時テーブルに更新します。-->
-      <update id="updateTmp_SofusakiJoho" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity">
+    <!--送付先情報を一時テーブルに更新します。-->
+    <update id="updateTmp_SofusakiJoho" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity">
         UPDATE 
-            "TmpHihokenshasho_Ichi"
+        "TmpHihokenshasho_Ichi"
         SET
-            "kannaiKangaiKubun" = #{kannaiKangaiKubun},
-            "jusho" = #{jusho},
-            "banchi" = #{banchi},
-            "katagaki" = #{katagaki}
+        "kannaiKangaiKubun" = #{kannaiKangaiKubun},
+        "jusho" = #{jusho},
+        "banchi" = #{banchi},
+        "katagaki" = #{katagaki}
         WHERE 
-            "hihokenshaNo" = #{hihokenshaNo}
-      </update>
+        "hihokenshaNo" = #{hihokenshaNo}
+    </update>
       
-      <!-- 被保険者証用データを取得します。-->
-      <select id="getHihokenshayo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+    <!-- 被保険者証用データを取得します。-->
+    <select id="getHihokenshayo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
-            "hihokenshaNo",
-            "shikibetsuCode",
-            "shichosonCode",
-            "lastUpdateTimestamp",
-            "insertTimestamp",
-            "idoYMD",
-            "edaNo",
-            "idoJiyuCode",
-            "shikakuShutokuJiyuCode",
-            "shikakuShutokuYMD",
-            "shikakuShutokuTodokedeYMD",
-            "ichigoShikakuShutokuYMD",
-            "hihokennshaKubunCode",
-            "shikakuSoshitsuJiyuCode",
-            "shikakuSoshitsuYMD",
-            "shikakuSoshitsuTodokedeYMD",
-            "shikakuHenkoJiyuCode",
-            "shikakuHenkoYMD",
-            "shikakuHenkoTodokedeYMD",
-            "jushochitokureiTekiyoJiyuCode",
-            "jushochitokureiTekiyoYMD",
-            "jushochitokureiTekiyoTodokedeYMD",
-            "jushochitokureiKaijoJiyuCode",
-            "jushochitokureiKaijoYMD",
-            "jushochitokureiKaijoTodokedeYMD",
-            "jushochiTokureiFlag",
-            "koikinaiJushochiTokureiFlag",
-            "koikinaiTokureiSochimotoShichosonCode",
-            "kyuShichosonCode",
-            "logicalDeletedFlag",
-            "hakkoShoriTimestamp",
-            "daichoShubetsu",
-            "nyushoShisetsuShurui",
-            "nyushoShisetsuCode",
-            "nyushoShoriYMD",
-            "nyushoYMD",
-            "taishoShoriYMD",
-            "taishoYMD",
-            "roomKigoNo",
-            "rirekiNo",
-            "shinseishoKanriNo",
-            "shinseiJokyoKubun",
-            "shishoCode",
-            "chokkinFlag",
-            "jukyuShinseiJiyu",
-            "shinseiRiyu",
-            "shinseishaKankeiCode",
-            "homninKankei",
-            "jukyuShinseiYMD",
-            "nigoTokuteiShippeiCode",
-            "shinsakaiIraiYMD",
-            "yokaigoJotaiKubunCode",
-            "ninteiYukoKikanKaishiYMD",
-            "ninteiYukoKikanShuryoYMD",
-            "ninteiYMD",
-            "shiteiServiceShurui01",
-            "shiteiServiceShurui02",
-            "shiteiServiceShurui03",
-            "shiteiServiceShurui04",
-            "shiteiServiceShurui05",
-            "shiteiServiceShurui06",
-            "shiteiServiceShurui07",
-            "shiteiServiceShurui08",
-            "shiteiServiceShurui09",
-            "shiteiServiceShurui10",
-            "shiteiServiceShurui11",
-            "shiteiServiceShurui12",
-            "shiteiServiceShurui13",
-            "shiteiServiceShurui14",
-            "shiteiServiceShurui15",
-            "shiteiServiceShurui16",
-            "shiteiServiceShurui17",
-            "shiteiServiceShurui18",
-            "shiteiServiceShurui19",
-            "shiteiServiceShurui20",
-            "shiteiServiceShurui21",
-            "shiteiServiceShurui22",
-            "shiteiServiceShurui23",
-            "shiteiServiceShurui24",
-            "shiteiServiceShurui25",
-            "shiteiServiceShurui26",
-            "shiteiServiceShurui27",
-            "shiteiServiceShurui28",
-            "shiteiServiceShurui29",
-            "shiteiServiceShurui30",
-            "soshitsuYMD",
-            "chokkinIdoYMD",
-            "chokkinIdoJiyuCode",
-            "yukoMukoKubun",
-            "dataKubun",
-            "remban",
-            "idoRiyu",
-            "shinseishoKubun",
-            "sakujoJiyuCode",
-            "yoshienshaNinteiShinseiFlag",
-            "shikyuGendoTanisu",
-            "shikyuGendoKaishiYMD",
-            "shikyuGendoShuryoYMD",
-            "tankiSikyuGendoNissu",
-            "tankiShikyuGendoKaishiYMD",
-            "tankiShikyuGendoShuryoYMD",
-            "toshoNinteiYukoKaishiYMD",
-            "toshoNinteiYukoShuryoYMD",
-            "jukyuShikakuShomeishoHakkoYMD1",
-            "jukyuShikakuShomeishoHakkoYMD2",
-            "shindanMeireishoHakkoYMD",
-            "nigoShinseiJuriTsuchishoHakkoYMD",
-            "ninteiKekkaTsuchishoHakkoYMD",
-            "kubunHenkoTsuchishoHakkoYMD",
-            "serviceHenkoTsuchishoHakkoYMD",
-            "ninteiKyakkaTsuchishoHakkoYMD",
-            "ninteiTorikeshiTsuchishoHakkoYMD",
-            "shikakuShutokuMaeShinseiFlag",
-            "kyuSochishaFlag",
-            "nijiHanteiYMD",
-            "nijiHanteiYokaigoJotaiKubunCode",
-            "nijiHanteiNinteiYukoKikan",
-            "nijiHanteiNinteiYukoKaishiYMD",
-            "nijiHanteiNinteiYukoShuryoYMD",
-            "shinsakaiShiryoSakuseiYMD",
-            "shinsakaiKaisaiNo",
-            "shinsakaiIken",
-            "ichijiHanteiKekkaHenkoRiyu",
-            "yokaigoJotaizoReiCode",
-            "ninteishinsakaiIkenShurui",
-            "shinsakaiMemo",
-            "nijiHanteiKekkaInputHoho",
-            "nijiHanteiKekkaInputYMD",
-            "shoKisaiHokenshaNo",
-            "kanriKubun",
-            "torokuKubun",
-            "tekiyoKaishiYMD",
-            "tekiyoShuryoYMD",
-            "shuryoKubun",
-            "yokoku_TorokuYMD",
-            "sashitome_IraiJuriYMD",
-            "yokoku_TsuchiHakkoYMD",
-            "yokoku_TsuchiSaiHakkoFlag",
-            "bemmei_TeishutsuYMD",
-            "bemmei_UketsukeYMD",
-            "bemmei_RiyuCode",
-            "bemmei_ShinsaKetteiYMD",
-            "bemmei_ShinsaKekkaKubun",
-            "shokan_KetteiYMD",
-            "shokan_TsuchiHakkoYMD",
-            "shokan_TsuchiSaiHakkoFlag",
-            "hihokenshaShoTeishutsuYMD",
-            "sashitome_Flag",
-            "sashitome_KetteiYMD",
-            "sashitome_KaijoYMD",
-            "gemmen_KetteiYMD",
-            "gemmen_TsuchiHakkoYMD",
-            "gemmen_TsuchiSaiHakkoFlag",
-            "kyufuRitsu",
-            "shuryoShinsei_UketsukeYMD",
-            "shuryoShinsei_YMD",
-            "shuryoShinsei_RiyuCode",
-            "shuryoShinsei_ShinsaKetteiYMD",
-            "shuryoShinsei_ShinsaKekkaKubun",
-            "mukoKubun",
-            "taishoYM",
-            "todokedeKubun",
-            "todokedeYMD",
-            "todokedeshaShimei",
-            "todokedeshaShimeiKana",
-            "todokedeshaYubinNo",
-            "todokedeshaJusho",
-            "todokedeshaTelNo",
-            "todokedeshaKankeiKubun",
-            "zanteiKubun",
-            "keikakuJigyoshaNo",
-            "itakusakiJigyoshaNo",
-            "meisho",
-            "seinengappiYMD",
-            "kannaiKangaiKubun",
-            "jusho",
-            "banchi",
-            "katagaki",
-            "shisetyuJotaiFlag"
+        "hihokenshaNo",
+        "shikibetsuCode",
+        "shichosonCode",
+        "lastUpdateTimestamp",
+        "insertTimestamp",
+        "idoYMD",
+        "edaNo",
+        "idoJiyuCode",
+        "shikakuShutokuJiyuCode",
+        "shikakuShutokuYMD",
+        "shikakuShutokuTodokedeYMD",
+        "ichigoShikakuShutokuYMD",
+        "hihokennshaKubunCode",
+        "shikakuSoshitsuJiyuCode",
+        "shikakuSoshitsuYMD",
+        "shikakuSoshitsuTodokedeYMD",
+        "shikakuHenkoJiyuCode",
+        "shikakuHenkoYMD",
+        "shikakuHenkoTodokedeYMD",
+        "jushochitokureiTekiyoJiyuCode",
+        "jushochitokureiTekiyoYMD",
+        "jushochitokureiTekiyoTodokedeYMD",
+        "jushochitokureiKaijoJiyuCode",
+        "jushochitokureiKaijoYMD",
+        "jushochitokureiKaijoTodokedeYMD",
+        "jushochiTokureiFlag",
+        "koikinaiJushochiTokureiFlag",
+        "koikinaiTokureiSochimotoShichosonCode",
+        "kyuShichosonCode",
+        "logicalDeletedFlag",
+        "hakkoShoriTimestamp",
+        "daichoShubetsu",
+        "nyushoShisetsuShurui",
+        "nyushoShisetsuCode",
+        "nyushoShoriYMD",
+        "nyushoYMD",
+        "taishoShoriYMD",
+        "taishoYMD",
+        "roomKigoNo",
+        "rirekiNo",
+        "shinseishoKanriNo",
+        "shinseiJokyoKubun",
+        "shishoCode",
+        "chokkinFlag",
+        "jukyuShinseiJiyu",
+        "shinseiRiyu",
+        "shinseishaKankeiCode",
+        "homninKankei",
+        "jukyuShinseiYMD",
+        "nigoTokuteiShippeiCode",
+        "shinsakaiIraiYMD",
+        "yokaigoJotaiKubunCode",
+        "ninteiYukoKikanKaishiYMD",
+        "ninteiYukoKikanShuryoYMD",
+        "ninteiYMD",
+        "shiteiServiceShurui01",
+        "shiteiServiceShurui02",
+        "shiteiServiceShurui03",
+        "shiteiServiceShurui04",
+        "shiteiServiceShurui05",
+        "shiteiServiceShurui06",
+        "shiteiServiceShurui07",
+        "shiteiServiceShurui08",
+        "shiteiServiceShurui09",
+        "shiteiServiceShurui10",
+        "shiteiServiceShurui11",
+        "shiteiServiceShurui12",
+        "shiteiServiceShurui13",
+        "shiteiServiceShurui14",
+        "shiteiServiceShurui15",
+        "shiteiServiceShurui16",
+        "shiteiServiceShurui17",
+        "shiteiServiceShurui18",
+        "shiteiServiceShurui19",
+        "shiteiServiceShurui20",
+        "shiteiServiceShurui21",
+        "shiteiServiceShurui22",
+        "shiteiServiceShurui23",
+        "shiteiServiceShurui24",
+        "shiteiServiceShurui25",
+        "shiteiServiceShurui26",
+        "shiteiServiceShurui27",
+        "shiteiServiceShurui28",
+        "shiteiServiceShurui29",
+        "shiteiServiceShurui30",
+        "soshitsuYMD",
+        "chokkinIdoYMD",
+        "chokkinIdoJiyuCode",
+        "yukoMukoKubun",
+        "dataKubun",
+        "remban",
+        "idoRiyu",
+        "shinseishoKubun",
+        "sakujoJiyuCode",
+        "yoshienshaNinteiShinseiFlag",
+        "shikyuGendoTanisu",
+        "shikyuGendoKaishiYMD",
+        "shikyuGendoShuryoYMD",
+        "tankiSikyuGendoNissu",
+        "tankiShikyuGendoKaishiYMD",
+        "tankiShikyuGendoShuryoYMD",
+        "toshoNinteiYukoKaishiYMD",
+        "toshoNinteiYukoShuryoYMD",
+        "jukyuShikakuShomeishoHakkoYMD1",
+        "jukyuShikakuShomeishoHakkoYMD2",
+        "shindanMeireishoHakkoYMD",
+        "nigoShinseiJuriTsuchishoHakkoYMD",
+        "ninteiKekkaTsuchishoHakkoYMD",
+        "kubunHenkoTsuchishoHakkoYMD",
+        "serviceHenkoTsuchishoHakkoYMD",
+        "ninteiKyakkaTsuchishoHakkoYMD",
+        "ninteiTorikeshiTsuchishoHakkoYMD",
+        "shikakuShutokuMaeShinseiFlag",
+        "kyuSochishaFlag",
+        "nijiHanteiYMD",
+        "nijiHanteiYokaigoJotaiKubunCode",
+        "nijiHanteiNinteiYukoKikan",
+        "nijiHanteiNinteiYukoKaishiYMD",
+        "nijiHanteiNinteiYukoShuryoYMD",
+        "shinsakaiShiryoSakuseiYMD",
+        "shinsakaiKaisaiNo",
+        "shinsakaiIken",
+        "ichijiHanteiKekkaHenkoRiyu",
+        "yokaigoJotaizoReiCode",
+        "ninteishinsakaiIkenShurui",
+        "shinsakaiMemo",
+        "nijiHanteiKekkaInputHoho",
+        "nijiHanteiKekkaInputYMD",
+        "shoKisaiHokenshaNo",
+        "kanriKubun",
+        "torokuKubun",
+        "tekiyoKaishiYMD",
+        "tekiyoShuryoYMD",
+        "shuryoKubun",
+        "yokoku_TorokuYMD",
+        "sashitome_IraiJuriYMD",
+        "yokoku_TsuchiHakkoYMD",
+        "yokoku_TsuchiSaiHakkoFlag",
+        "bemmei_TeishutsuYMD",
+        "bemmei_UketsukeYMD",
+        "bemmei_RiyuCode",
+        "bemmei_ShinsaKetteiYMD",
+        "bemmei_ShinsaKekkaKubun",
+        "shokan_KetteiYMD",
+        "shokan_TsuchiHakkoYMD",
+        "shokan_TsuchiSaiHakkoFlag",
+        "hihokenshaShoTeishutsuYMD",
+        "sashitome_Flag",
+        "sashitome_KetteiYMD",
+        "sashitome_KaijoYMD",
+        "gemmen_KetteiYMD",
+        "gemmen_TsuchiHakkoYMD",
+        "gemmen_TsuchiSaiHakkoFlag",
+        "kyufuRitsu",
+        "shuryoShinsei_UketsukeYMD",
+        "shuryoShinsei_YMD",
+        "shuryoShinsei_RiyuCode",
+        "shuryoShinsei_ShinsaKetteiYMD",
+        "shuryoShinsei_ShinsaKekkaKubun",
+        "mukoKubun",
+        "taishoYM",
+        "todokedeKubun",
+        "todokedeYMD",
+        "todokedeshaShimei",
+        "todokedeshaShimeiKana",
+        "todokedeshaYubinNo",
+        "todokedeshaJusho",
+        "todokedeshaTelNo",
+        "todokedeshaKankeiKubun",
+        "zanteiKubun",
+        "keikakuJigyoshaNo",
+        "itakusakiJigyoshaNo",
+        "meisho",
+        "seinengappiYMD",
+        "kannaiKangaiKubun",
+        "jusho",
+        "banchi",
+        "katagaki",
+        "shisetyuJotaiFlag"
         FROM
-            "TmpHihokenshasho_Ichi"
+        "TmpHihokenshasho_Ichi"
         WHERE
-            "shisetyuJotaiFlag" = FALSE
-      </select>
+        "shisetyuJotaiFlag" = FALSE
+    </select>
       
-      <!-- 被保険者証一覧表用を取得します。-->
-      <select id="getHihokenshaIchiran" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+    <!-- 被保険者証一覧表用を取得します。-->
+    <select id="getHihokenshaIchiran" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
-            "hihokenshaNo",
-            "shikibetsuCode",
-            "shichosonCode",
-            "lastUpdateTimestamp",
-            "insertTimestamp",
-            "idoYMD",
-            "edaNo",
-            "idoJiyuCode",
-            "shikakuShutokuJiyuCode",
-            "shikakuShutokuYMD",
-            "shikakuShutokuTodokedeYMD",
-            "ichigoShikakuShutokuYMD",
-            "hihokennshaKubunCode",
-            "shikakuSoshitsuJiyuCode",
-            "shikakuSoshitsuYMD",
-            "shikakuSoshitsuTodokedeYMD",
-            "shikakuHenkoJiyuCode",
-            "shikakuHenkoYMD",
-            "shikakuHenkoTodokedeYMD",
-            "jushochitokureiTekiyoJiyuCode",
-            "jushochitokureiTekiyoYMD",
-            "jushochitokureiTekiyoTodokedeYMD",
-            "jushochitokureiKaijoJiyuCode",
-            "jushochitokureiKaijoYMD",
-            "jushochitokureiKaijoTodokedeYMD",
-            "jushochiTokureiFlag",
-            "koikinaiJushochiTokureiFlag",
-            "koikinaiTokureiSochimotoShichosonCode",
-            "kyuShichosonCode",
-            "logicalDeletedFlag",
-            "hakkoShoriTimestamp",
-            "daichoShubetsu",
-            "nyushoShisetsuShurui",
-            "nyushoShisetsuCode",
-            "nyushoShoriYMD",
-            "nyushoYMD",
-            "taishoShoriYMD",
-            "taishoYMD",
-            "roomKigoNo",
-            "rirekiNo",
-            "shinseishoKanriNo",
-            "shinseiJokyoKubun",
-            "shishoCode",
-            "chokkinFlag",
-            "jukyuShinseiJiyu",
-            "shinseiRiyu",
-            "shinseishaKankeiCode",
-            "homninKankei",
-            "jukyuShinseiYMD",
-            "nigoTokuteiShippeiCode",
-            "shinsakaiIraiYMD",
-            "yokaigoJotaiKubunCode",
-            "ninteiYukoKikanKaishiYMD",
-            "ninteiYukoKikanShuryoYMD",
-            "ninteiYMD",
-            "shiteiServiceShurui01",
-            "shiteiServiceShurui02",
-            "shiteiServiceShurui03",
-            "shiteiServiceShurui04",
-            "shiteiServiceShurui05",
-            "shiteiServiceShurui06",
-            "shiteiServiceShurui07",
-            "shiteiServiceShurui08",
-            "shiteiServiceShurui09",
-            "shiteiServiceShurui10",
-            "shiteiServiceShurui11",
-            "shiteiServiceShurui12",
-            "shiteiServiceShurui13",
-            "shiteiServiceShurui14",
-            "shiteiServiceShurui15",
-            "shiteiServiceShurui16",
-            "shiteiServiceShurui17",
-            "shiteiServiceShurui18",
-            "shiteiServiceShurui19",
-            "shiteiServiceShurui20",
-            "shiteiServiceShurui21",
-            "shiteiServiceShurui22",
-            "shiteiServiceShurui23",
-            "shiteiServiceShurui24",
-            "shiteiServiceShurui25",
-            "shiteiServiceShurui26",
-            "shiteiServiceShurui27",
-            "shiteiServiceShurui28",
-            "shiteiServiceShurui29",
-            "shiteiServiceShurui30",
-            "soshitsuYMD",
-            "chokkinIdoYMD",
-            "chokkinIdoJiyuCode",
-            "yukoMukoKubun",
-            "dataKubun",
-            "remban",
-            "idoRiyu",
-            "shinseishoKubun",
-            "sakujoJiyuCode",
-            "yoshienshaNinteiShinseiFlag",
-            "shikyuGendoTanisu",
-            "shikyuGendoKaishiYMD",
-            "shikyuGendoShuryoYMD",
-            "tankiSikyuGendoNissu",
-            "tankiShikyuGendoKaishiYMD",
-            "tankiShikyuGendoShuryoYMD",
-            "toshoNinteiYukoKaishiYMD",
-            "toshoNinteiYukoShuryoYMD",
-            "jukyuShikakuShomeishoHakkoYMD1",
-            "jukyuShikakuShomeishoHakkoYMD2",
-            "shindanMeireishoHakkoYMD",
-            "nigoShinseiJuriTsuchishoHakkoYMD",
-            "ninteiKekkaTsuchishoHakkoYMD",
-            "kubunHenkoTsuchishoHakkoYMD",
-            "serviceHenkoTsuchishoHakkoYMD",
-            "ninteiKyakkaTsuchishoHakkoYMD",
-            "ninteiTorikeshiTsuchishoHakkoYMD",
-            "shikakuShutokuMaeShinseiFlag",
-            "kyuSochishaFlag",
-            "nijiHanteiYMD",
-            "nijiHanteiYokaigoJotaiKubunCode",
-            "nijiHanteiNinteiYukoKikan",
-            "nijiHanteiNinteiYukoKaishiYMD",
-            "nijiHanteiNinteiYukoShuryoYMD",
-            "shinsakaiShiryoSakuseiYMD",
-            "shinsakaiKaisaiNo",
-            "shinsakaiIken",
-            "ichijiHanteiKekkaHenkoRiyu",
-            "yokaigoJotaizoReiCode",
-            "ninteishinsakaiIkenShurui",
-            "shinsakaiMemo",
-            "nijiHanteiKekkaInputHoho",
-            "nijiHanteiKekkaInputYMD",
-            "shoKisaiHokenshaNo",
-            "kanriKubun",
-            "torokuKubun",
-            "tekiyoKaishiYMD",
-            "tekiyoShuryoYMD",
-            "shuryoKubun",
-            "yokoku_TorokuYMD",
-            "sashitome_IraiJuriYMD",
-            "yokoku_TsuchiHakkoYMD",
-            "yokoku_TsuchiSaiHakkoFlag",
-            "bemmei_TeishutsuYMD",
-            "bemmei_UketsukeYMD",
-            "bemmei_RiyuCode",
-            "bemmei_ShinsaKetteiYMD",
-            "bemmei_ShinsaKekkaKubun",
-            "shokan_KetteiYMD",
-            "shokan_TsuchiHakkoYMD",
-            "shokan_TsuchiSaiHakkoFlag",
-            "hihokenshaShoTeishutsuYMD",
-            "sashitome_Flag",
-            "sashitome_KetteiYMD",
-            "sashitome_KaijoYMD",
-            "gemmen_KetteiYMD",
-            "gemmen_TsuchiHakkoYMD",
-            "gemmen_TsuchiSaiHakkoFlag",
-            "kyufuRitsu",
-            "shuryoShinsei_UketsukeYMD",
-            "shuryoShinsei_YMD",
-            "shuryoShinsei_RiyuCode",
-            "shuryoShinsei_ShinsaKetteiYMD",
-            "shuryoShinsei_ShinsaKekkaKubun",
-            "mukoKubun",
-            "taishoYM",
-            "todokedeKubun",
-            "todokedeYMD",
-            "todokedeshaShimei",
-            "todokedeshaShimeiKana",
-            "todokedeshaYubinNo",
-            "todokedeshaJusho",
-            "todokedeshaTelNo",
-            "todokedeshaKankeiKubun",
-            "zanteiKubun",
-            "keikakuJigyoshaNo",
-            "itakusakiJigyoshaNo",
-            "meisho",
-            "seinengappiYMD",
-            "kannaiKangaiKubun",
-            "jusho",
-            "banchi",
-            "katagaki",
-            "shisetyuJotaiFlag"
+        "hihokenshaNo",
+        "shikibetsuCode",
+        "shichosonCode",
+        "lastUpdateTimestamp",
+        "insertTimestamp",
+        "idoYMD",
+        "edaNo",
+        "idoJiyuCode",
+        "shikakuShutokuJiyuCode",
+        "shikakuShutokuYMD",
+        "shikakuShutokuTodokedeYMD",
+        "ichigoShikakuShutokuYMD",
+        "hihokennshaKubunCode",
+        "shikakuSoshitsuJiyuCode",
+        "shikakuSoshitsuYMD",
+        "shikakuSoshitsuTodokedeYMD",
+        "shikakuHenkoJiyuCode",
+        "shikakuHenkoYMD",
+        "shikakuHenkoTodokedeYMD",
+        "jushochitokureiTekiyoJiyuCode",
+        "jushochitokureiTekiyoYMD",
+        "jushochitokureiTekiyoTodokedeYMD",
+        "jushochitokureiKaijoJiyuCode",
+        "jushochitokureiKaijoYMD",
+        "jushochitokureiKaijoTodokedeYMD",
+        "jushochiTokureiFlag",
+        "koikinaiJushochiTokureiFlag",
+        "koikinaiTokureiSochimotoShichosonCode",
+        "kyuShichosonCode",
+        "logicalDeletedFlag",
+        "hakkoShoriTimestamp",
+        "daichoShubetsu",
+        "nyushoShisetsuShurui",
+        "nyushoShisetsuCode",
+        "nyushoShoriYMD",
+        "nyushoYMD",
+        "taishoShoriYMD",
+        "taishoYMD",
+        "roomKigoNo",
+        "rirekiNo",
+        "shinseishoKanriNo",
+        "shinseiJokyoKubun",
+        "shishoCode",
+        "chokkinFlag",
+        "jukyuShinseiJiyu",
+        "shinseiRiyu",
+        "shinseishaKankeiCode",
+        "homninKankei",
+        "jukyuShinseiYMD",
+        "nigoTokuteiShippeiCode",
+        "shinsakaiIraiYMD",
+        "yokaigoJotaiKubunCode",
+        "ninteiYukoKikanKaishiYMD",
+        "ninteiYukoKikanShuryoYMD",
+        "ninteiYMD",
+        "shiteiServiceShurui01",
+        "shiteiServiceShurui02",
+        "shiteiServiceShurui03",
+        "shiteiServiceShurui04",
+        "shiteiServiceShurui05",
+        "shiteiServiceShurui06",
+        "shiteiServiceShurui07",
+        "shiteiServiceShurui08",
+        "shiteiServiceShurui09",
+        "shiteiServiceShurui10",
+        "shiteiServiceShurui11",
+        "shiteiServiceShurui12",
+        "shiteiServiceShurui13",
+        "shiteiServiceShurui14",
+        "shiteiServiceShurui15",
+        "shiteiServiceShurui16",
+        "shiteiServiceShurui17",
+        "shiteiServiceShurui18",
+        "shiteiServiceShurui19",
+        "shiteiServiceShurui20",
+        "shiteiServiceShurui21",
+        "shiteiServiceShurui22",
+        "shiteiServiceShurui23",
+        "shiteiServiceShurui24",
+        "shiteiServiceShurui25",
+        "shiteiServiceShurui26",
+        "shiteiServiceShurui27",
+        "shiteiServiceShurui28",
+        "shiteiServiceShurui29",
+        "shiteiServiceShurui30",
+        "soshitsuYMD",
+        "chokkinIdoYMD",
+        "chokkinIdoJiyuCode",
+        "yukoMukoKubun",
+        "dataKubun",
+        "remban",
+        "idoRiyu",
+        "shinseishoKubun",
+        "sakujoJiyuCode",
+        "yoshienshaNinteiShinseiFlag",
+        "shikyuGendoTanisu",
+        "shikyuGendoKaishiYMD",
+        "shikyuGendoShuryoYMD",
+        "tankiSikyuGendoNissu",
+        "tankiShikyuGendoKaishiYMD",
+        "tankiShikyuGendoShuryoYMD",
+        "toshoNinteiYukoKaishiYMD",
+        "toshoNinteiYukoShuryoYMD",
+        "jukyuShikakuShomeishoHakkoYMD1",
+        "jukyuShikakuShomeishoHakkoYMD2",
+        "shindanMeireishoHakkoYMD",
+        "nigoShinseiJuriTsuchishoHakkoYMD",
+        "ninteiKekkaTsuchishoHakkoYMD",
+        "kubunHenkoTsuchishoHakkoYMD",
+        "serviceHenkoTsuchishoHakkoYMD",
+        "ninteiKyakkaTsuchishoHakkoYMD",
+        "ninteiTorikeshiTsuchishoHakkoYMD",
+        "shikakuShutokuMaeShinseiFlag",
+        "kyuSochishaFlag",
+        "nijiHanteiYMD",
+        "nijiHanteiYokaigoJotaiKubunCode",
+        "nijiHanteiNinteiYukoKikan",
+        "nijiHanteiNinteiYukoKaishiYMD",
+        "nijiHanteiNinteiYukoShuryoYMD",
+        "shinsakaiShiryoSakuseiYMD",
+        "shinsakaiKaisaiNo",
+        "shinsakaiIken",
+        "ichijiHanteiKekkaHenkoRiyu",
+        "yokaigoJotaizoReiCode",
+        "ninteishinsakaiIkenShurui",
+        "shinsakaiMemo",
+        "nijiHanteiKekkaInputHoho",
+        "nijiHanteiKekkaInputYMD",
+        "shoKisaiHokenshaNo",
+        "kanriKubun",
+        "torokuKubun",
+        "tekiyoKaishiYMD",
+        "tekiyoShuryoYMD",
+        "shuryoKubun",
+        "yokoku_TorokuYMD",
+        "sashitome_IraiJuriYMD",
+        "yokoku_TsuchiHakkoYMD",
+        "yokoku_TsuchiSaiHakkoFlag",
+        "bemmei_TeishutsuYMD",
+        "bemmei_UketsukeYMD",
+        "bemmei_RiyuCode",
+        "bemmei_ShinsaKetteiYMD",
+        "bemmei_ShinsaKekkaKubun",
+        "shokan_KetteiYMD",
+        "shokan_TsuchiHakkoYMD",
+        "shokan_TsuchiSaiHakkoFlag",
+        "hihokenshaShoTeishutsuYMD",
+        "sashitome_Flag",
+        "sashitome_KetteiYMD",
+        "sashitome_KaijoYMD",
+        "gemmen_KetteiYMD",
+        "gemmen_TsuchiHakkoYMD",
+        "gemmen_TsuchiSaiHakkoFlag",
+        "kyufuRitsu",
+        "shuryoShinsei_UketsukeYMD",
+        "shuryoShinsei_YMD",
+        "shuryoShinsei_RiyuCode",
+        "shuryoShinsei_ShinsaKetteiYMD",
+        "shuryoShinsei_ShinsaKekkaKubun",
+        "mukoKubun",
+        "taishoYM",
+        "todokedeKubun",
+        "todokedeYMD",
+        "todokedeshaShimei",
+        "todokedeshaShimeiKana",
+        "todokedeshaYubinNo",
+        "todokedeshaJusho",
+        "todokedeshaTelNo",
+        "todokedeshaKankeiKubun",
+        "zanteiKubun",
+        "keikakuJigyoshaNo",
+        "itakusakiJigyoshaNo",
+        "meisho",
+        "seinengappiYMD",
+        "kannaiKangaiKubun",
+        "jusho",
+        "banchi",
+        "katagaki",
+        "shisetyuJotaiFlag"
         FROM
-            "TmpHihokenshasho_Ichi"
-      </select>
+        "TmpHihokenshasho_Ichi"
+    </select>
       
-       <!--同一被保険者番号の最大履歴番号を取得します。 -->
-    <insert id="getSaishinrirekiNo" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter">
+    <!--同一被保険者番号の最大履歴番号を取得します。 -->
+    <select id="getSaishinrirekiNo" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT 
-            "rirekiNo"+1
+            "rirekiNo"
         FROM 
             rgdb."DbT7037ShoKofuKaishu"
         WHERE
@@ -2289,65 +2371,65 @@ and open the template in the editor.
         ORDER BY 
             "rirekiNo" DESC
         LIMIT 1
-    </insert>
+    </select>
     
-      <!-- 出力条件コードは「2：受給者のみ（申請中を除く）」場合、 -->
+    <!-- 出力条件コードは「2：受給者のみ（申請中を除く）」場合、 -->
     <insert id="insertShoKofuKaishu" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity">
         INSERT INTO
-            rgdb."DbT7037ShoKofuKaishu"
-            ("hihokenshaNo",
-            "kofuShoShurui",
-            "rirekiNo",
-            "shichosonCode",
-            "shikibetsuCode",
-            "kofuYMD",
-            "yukoKigenYMD",
-            "kofuJiyu",
-            "kofuRiyu",
-            "kaishuYMD",
-            "kaishuJiyu",
-            "kaishuRiyu",
-            "tanpyoHakkoUmuFlag",
-            "hakkoShoriTimestamp",
-            "shinYoshikiSumiKubunCode",
-            "shoYoshikiKubunCode",
-            "logicalDeletedFlag")
-        VALUES("hihokenshaNo",
-            "kofuShoShurui",
-            "rirekiNo",
-            "shichosonCode",
-            "shikibetsuCode",
-            "kofuYMD",
-            "yukoKigenYMD",
-            "kofuJiyu",
-            "kofuRiyu",
-            "kaishuYMD",
-            "kaishuJiyu",
-            "kaishuRiyu",
-            "tanpyoHakkoUmuFlag",
-            "hakkoShoriTimestamp",
-            "shinYoshikiSumiKubunCode",
-            "shoYoshikiKubunCode",
-            "logicalDeletedFlag")
+        rgdb."DbT7037ShoKofuKaishu"
+        ("hihokenshaNo",
+        "kofuShoShurui",
+        "rirekiNo",
+        "shichosonCode",
+        "shikibetsuCode",
+        "kofuYMD",
+        "yukoKigenYMD",
+        "kofuJiyu",
+        "kofuRiyu",
+        "kaishuYMD",
+        "kaishuJiyu",
+        "kaishuRiyu",
+        "tanpyoHakkoUmuFlag",
+        "hakkoShoriTimestamp",
+        "shinYoshikiSumiKubunCode",
+        "shoYoshikiKubunCode",
+        "logicalDeletedFlag")
+        VALUES(#{hihokenshaNo},
+        #{kofuShoShurui},
+        #{rirekiNo},
+        #{shichosonCode},
+        #{shikibetsuCode},
+        #{kofuYMD},
+        #{yukoKigenYMD},
+        #{kofuJiyu},
+        #{kofuRiyu},
+        #{kaishuYMD},
+        #{kaishuJiyu},
+        #{kaishuRiyu},
+        #{tanpyoHakkoUmuFlag},
+        #{hakkoShoriTimestamp},
+        #{shinYoshikiSumiKubunCode},
+        #{shoYoshikiKubunCode},
+        #{logicalDeletedFlag})
     </insert>
     
-     <!-- 処理日付管理マスタテーブル更新 -->
-    <update id="updateShoriDateKanri" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" >
+    <!-- 処理日付管理マスタテーブル更新 -->
+    <update id="updateShoriDateKanri" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" >
         UPDATE 
-            rgdb."DbT7022ShoriDateKanri"
+        rgdb."DbT7022ShoriDateKanri"
         SET
-            "kijunTimestamp" = #{konkaikijunYMDHMS},
-            "taishoKaishiTimestamp" = #{konkaiFromYMDHMS},
-            "taishoShuryoTimestamp" = #{konkaiToYMDHMS}
+        "kijunTimestamp" = #{kijunTimestamp},
+        "taishoKaishiTimestamp" = #{taishoKaishiTimestamp},
+        "taishoShuryoTimestamp" = #{taishoShuryoTimestamp}
         WHERE
-            "subGyomuCode" = 'DBU'
+        "subGyomuCode" = 'DBU'
         AND "shoriName" = '被保険者証一括発行'
-        AND "shoriEdaban" = #{shutsuryokuJokenCode}
+        AND "shoriEdaban" = #{shoriEdaban}
     </update>
     
     <!-- 一時テーブルを削除します -->
     <update id="dropTmpHihokenshasho_Ichi">
         DROP TABLE
-            "TmpHihokenshasho_Ichi"
+        "TmpHihokenshasho_Ichi"
     </update>
 </mapper>

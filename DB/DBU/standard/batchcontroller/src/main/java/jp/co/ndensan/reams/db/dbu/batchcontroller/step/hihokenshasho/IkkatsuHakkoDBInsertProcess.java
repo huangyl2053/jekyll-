@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbu.definition.processprm.hihokenshasho.IkkatsuHak
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho.IIkkatsuHakkoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -62,16 +63,18 @@ public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
             for (IkkatsuHakkoRelateEntity entity : 被保険者証一覧リスト) {
                 iIkkatsuHakkoMapper.insertShoKofuKaishu(set証交付回収Entity(entity));
             }
-            iIkkatsuHakkoMapper.updateShoriDateKanri(mybatisPrm);
+            DbT7022ShoriDateKanriEntity dbT7022Entity = new DbT7022ShoriDateKanriEntity();
+            YMDHMS konkaikijunYMDHMS = new YMDHMS(mybatisPrm.getKonkaikijunYMDHMS());
+            YMDHMS konkaiFromYMDHMS = new YMDHMS(mybatisPrm.getKonkaiFromYMDHMS());
+            YMDHMS konkaiToYMDHMS = new YMDHMS(mybatisPrm.getKonkaiToYMDHMS());
+            dbT7022Entity.setKijunTimestamp(konkaikijunYMDHMS);
+            dbT7022Entity.setTaishoKaishiTimestamp(konkaiFromYMDHMS);
+            dbT7022Entity.setTaishoShuryoTimestamp(konkaiToYMDHMS);
+            dbT7022Entity.setShoriEdaban(mybatisPrm.getShutsuryokuJokenCode());
+            iIkkatsuHakkoMapper.updateShoriDateKanri(dbT7022Entity);
         }
     }
 
-    /**
-     * DbT7037ShoKofuKaishuEntityの設定です。
-     *
-     * @param IkkatsuHakkoRelateEntity entity
-     * @return DbT7037ShoKofuKaishuEntity dbT7037Entity
-     */
     private DbT7037ShoKofuKaishuEntity set証交付回収Entity(IkkatsuHakkoRelateEntity entity) {
         DbT7037ShoKofuKaishuEntity dbT7037Entity = new DbT7037ShoKofuKaishuEntity();
         get交付情報(entity);
@@ -95,21 +98,15 @@ public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
         return dbT7037Entity;
     }
 
-    /**
-     * 交付事由と交付理由を取得します。
-     *
-     * @param IkkatsuHakkoRelateEntity entity
-     */
     private void get交付情報(IkkatsuHakkoRelateEntity entity) {
-        set証交付回収Entity(entity);
         switch (processPrm.getShutsuryokuJokenCode().toString()) {
             case "2":
                 kofuJiyu = KOFUJIYU_CODE2;
                 kofuRiyu = KOFURIYU_VALUE2;
                 break;
             case "3":
-                UzT0007CodeEntity codeMastEntity;
-                codeMastEntity = CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"), new Code(entity.getIdoJiyuCode()));
+                UzT0007CodeEntity codeMastEntity = CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"),
+                        new Code(entity.getIdoJiyuCode()));
                 kofuJiyu = codeMastEntity.getコード().value();
                 kofuRiyu = codeMastEntity.getコード名称();
                 break;
@@ -122,12 +119,6 @@ public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
         }
     }
 
-    /**
-     * 同一被保険者番号の最大履歴番号を取得します。
-     *
-     * @param hihokenshaNo 被保険者番号
-     * @return rirekiNo 履歴番号
-     */
     private int get最大履歴番号(HihokenshaNo hihokenshaNo) {
         IkkatsuHakkoMybatisParameter mybatisParam = IkkatsuHakkoMybatisParameter.createSelectByKeyParam(mybatisPrm.getShutsuryokuJokenCode(),
                 mybatisPrm.getKonkaiFromYMDHMS(),
@@ -143,6 +134,14 @@ public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
                 mybatisPrm.getPsmShikibetsuTaisho(),
                 mybatisPrm.getPsmAtesaki(),
                 mybatisPrm.getNenreiTotatsuYMD());
-        return iIkkatsuHakkoMapper.getSaishinrirekiNo(mybatisParam).getRirekiNo();
+        IkkatsuHakkoRelateEntity rirekiNoEntity = iIkkatsuHakkoMapper.getSaishinrirekiNo(mybatisParam);
+        int rirekiNo;
+        if (rirekiNoEntity == null) {
+            rirekiNo = 1;
+        } else {
+            rirekiNo = rirekiNoEntity.getRirekiNo() + 1;
+        }
+
+        return rirekiNo;
     }
 }
