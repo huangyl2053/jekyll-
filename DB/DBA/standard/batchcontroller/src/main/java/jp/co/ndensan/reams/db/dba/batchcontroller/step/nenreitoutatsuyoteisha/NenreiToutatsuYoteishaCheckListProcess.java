@@ -103,6 +103,7 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
                 AgeCalculator ageCalculator = new AgeCalculator(DateOfBirthFactory
                         .createInstance(entity.getSeinengappiYMD()), JuminJotai.未定義, 消除異動年月日);
                 FlexibleDate 年齢到達日 = ageCalculator.get年齢到達日(NENREI_TOUTATSU);
+                entity.setNenreiyotainichi(年齢到達日);
                 if (processParameter.getKonkaisyuryo().isBefore(年齢到達日)
                         || (年齢到達日.isBefore(processParameter.getKonkaikaishi()))) {
                     removeListEntity.add(entity);
@@ -132,14 +133,14 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
                 } else {
                     nenreiToutatsuYoteishaCheckListEntity2.get(i).setShigekubun(new RString("2号取得者"));
                 }
-                // 内部QA429
+                // 内部QA429 外部423
                 if (new RString("0").equals(entity.getJushochiTokureiFlag())) {
                     nenreiToutatsuYoteishaCheckListEntity2.get(i).setJutosyakubun(new RString("住所地特例"));
                 } else {
                     nenreiToutatsuYoteishaCheckListEntity2.get(i).setJutosyakubun(new RString(""));
                 }
                 List<UrT0508SeikatsuHogoJukyushaEntity> urT0508Seika = nenreiToutatsuYoteishaCheckListMapper
-                        .getSeikatsuHogojyu();
+                        .getSeikatsuHogojyu(nenreiToutatsuYoteishaCheckListEntity2.get(i).getShikibetsuCode());
                 if (!urT0508Seika.isEmpty() && urT0508Seika.get(0).getJukyuKaishiYMD()
                         .isBeforeOrEquals(entity.getNenreiyotainichi())
                         && entity.getNenreiyotainichi().isBeforeOrEquals(
@@ -192,7 +193,7 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         nenreiToutatsuYoteishaCheckListJyohoEntity.set市町村コード(new RString(
                 association.get地方公共団体コード().toString()));
         nenreiToutatsuYoteishaCheckListJyohoEntity.set市町村名(association.get市町村名());
-        // TODO
+        // TODO　内部QA476
 //        nenreiToutatsuYoteishaCheckListJyohoEntity.set並び順(RString.EMPTY);
 //        nenreiToutatsuYoteishaCheckListJyohoEntity.set改頁(RString.EMPTY);
         nenreiToutatsuYoteishaCheckListJyohoEntity.set項目名付加フラグ(processParameter.isKoumokumeiflg());
