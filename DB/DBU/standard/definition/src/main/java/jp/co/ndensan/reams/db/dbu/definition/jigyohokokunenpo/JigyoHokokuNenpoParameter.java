@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 事業報告集計一覧データの取得処理のMyBatisパラメタークラスです。
  *
  */
+@lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class JigyoHokokuNenpoParameter {
 
     private final FlexibleYear hokokuYSeireki;
@@ -40,20 +42,15 @@ public class JigyoHokokuNenpoParameter {
         this.hokensilyakbn = 保険者区分;
     }
 
+    /**
+     * 事業報告集計一覧データの取得処理のパラメターを生成します。
+     *
+     * @param 年度 年度
+     * @param 市町村コード 市町村コード
+     * @param 保険者区分 保険者区分
+     * @return JigyoHokokuNenpoParameter 事業報告集計一覧データの取得処理のパラメター
+     */
     public static JigyoHokokuNenpoParameter createParameterForJigyoHokokuNenpo(FlexibleYear 年度, LasdecCode 市町村コード, RString 保険者区分) {
-
         return new JigyoHokokuNenpoParameter(年度, 市町村コード, 保険者区分);
-    }
-
-    public FlexibleYear getHokokuYSeireki() {
-        return hokokuYSeireki;
-    }
-
-    public LasdecCode getShichosonCode() {
-        return shichosonCode;
-    }
-
-    public RString getHokensilyakbn() {
-        return hokensilyakbn;
     }
 }
