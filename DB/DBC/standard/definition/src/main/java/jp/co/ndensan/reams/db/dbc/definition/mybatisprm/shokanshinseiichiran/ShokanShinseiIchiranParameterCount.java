@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
  * 償還払支給申請リスト取得条件を特定するためのMyBatis用パラメータクラスです。
  *
  */
+@lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanShinseiIchiranParameterCount {
 
     private final HihokenshaNo 被保険者番号;
