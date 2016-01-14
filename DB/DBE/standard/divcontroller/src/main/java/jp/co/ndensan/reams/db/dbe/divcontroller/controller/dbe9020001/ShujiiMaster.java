@@ -128,8 +128,12 @@ public class ShujiiMaster {
             }
         } else {
             div.getShujiiSearch().setDisabled(false);
+            getHandler(div).load();
+            getHandler(div).clearKensakuJoken();
             return ResponseData.of(div).setState(DBE9020001StateName.検索);
         }
+        getHandler(div).load();
+        getHandler(div).clearKensakuJoken();
         return ResponseData.of(div).respond();
     }
 
