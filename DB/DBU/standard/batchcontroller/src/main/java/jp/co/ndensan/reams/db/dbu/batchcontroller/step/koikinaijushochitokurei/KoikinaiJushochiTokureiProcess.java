@@ -65,13 +65,13 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
         set出力順ソート();
         List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> 帳票データlist 
                 =  is帳票データ作成(is広域内住所地特例者一覧表情報Entity作成(get広域内住所地特例者情報()));
-        // TODO 帳票仕様とフォームファイルがありません
+        // TODO QA 440 董亜彬 帳票仕様とフォームファイルがありません
         
     }
     
     @Override
     protected void afterExecute() {
-        // TODO 
+        // TODO QA 440 董亜彬 帳票仕様とフォームファイルがありません
     }
     
     private List<KoikinaiJushochiTokureiEntity> get広域内住所地特例者情報() {
@@ -197,7 +197,7 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
     }
     
     private void set並び順と改頁() {
-        // TODO 董亜彬　出力順取得方針不明、課題提出中
+        // TODO　QA：#73393 董亜彬　出力順取得方針不明、課題提出中
     }
     
     private void get市町村コードと市町村名称() {
@@ -216,7 +216,7 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
         return new KoikinaiJushochiTokureiItiranEntity(並び順, 改頁, 市町村コード, 市町村名称, entityList);
     }
     private void set出力順ソート() {
-        // TODO 董亜彬　出力順取得方針不明、課題提出中
+        // TODO　QA：#73393 董亜彬　出力順取得方針不明、課題提出中
     }
     
     private RString nullToEmtiy(Object obj) {
