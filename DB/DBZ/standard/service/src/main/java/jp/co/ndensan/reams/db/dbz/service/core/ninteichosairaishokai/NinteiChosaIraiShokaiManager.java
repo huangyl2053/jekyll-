@@ -53,7 +53,7 @@ public class NinteiChosaIraiShokaiManager {
      * 認定調査情報を取得の処理です。
      *
      * @param 被保険者番号 被保険者番号
-     * @return SearchResult<NinteiChosaIraiShokaiRelateEntity>
+     * @return SearchResult<NinteiChosaIraiShokaiMaster>
      */
     public SearchResult<NinteiChosaIraiShokaiMaster> getNinteiChousaJouhou(RString 被保険者番号) {
         NinteiChosaIraiShokaiParameter parament = NinteiChosaIraiShokaiParameter.createParam(被保険者番号);
