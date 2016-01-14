@@ -69,7 +69,7 @@ public class jukinentotoroku {
                         .setValue(nowDate);
             }
         }
-        // TODO 帳票出力順の初期化(技術点に提出しました)
+        // TODO 帳票出力順の初期化(技術点に提出しました※QA#73393)
 //        loadChohyoMode(サブ業務コード, 帳票ID);
         responseData.data = div;
         return responseData;

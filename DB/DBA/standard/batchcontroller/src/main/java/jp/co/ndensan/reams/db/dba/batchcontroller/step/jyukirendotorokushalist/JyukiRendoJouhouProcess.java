@@ -10,12 +10,15 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.report.jukirendotorokulist.JukiRendoTorokuListItem;
+import jp.co.ndensan.reams.db.dba.business.report.jukirendotorokulist.JukiRendoTorokuListReport;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.PsmShikibetsuTaishoMybatisParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity.JyukiRendoJouhouEntity;
 import jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity.JyukiRendoTorokushaListBatchEntity;
 import jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity.TaJushochiTokureiShayouhouEntity;
+import jp.co.ndensan.reams.db.dba.entity.report.jukirendotorokulist.JukiRendoTorokuListReportSource;
 import jp.co.ndensan.reams.db.dba.persistence.mapper.jyukirendojouhou.IJyukiRendoJouhouMapper;
 import jp.co.ndensan.reams.db.dba.service.jukirendotorokushalist.JyukiRendoTorokushaListBatch;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
@@ -28,10 +31,15 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 住基連動登録者リストを作成する
@@ -44,6 +52,10 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
     private static final String[] CODE_SHUBETSU_0012 = {"51", "52", "53", "58", "99"};
     private IJyukiRendoJouhouMapper JyukiRendoJouhouMapper;
     private JyukiRendoTorokushaListBatchProcessParameter processParameter;
+
+    @BatchWriter
+    private BatchReportWriter<JukiRendoTorokuListReportSource> batchReportWriter;
+    private ReportSourceWriter<JukiRendoTorokuListReportSource> reportSourceWriter;
 
     @Override
     protected void beforeExecute() {
@@ -127,8 +139,15 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         jyukiRendoTorokushaEntity.set並び順_5(RString.EMPTY);
         jyukiRendoTorokushaEntity.set住基連動情報(jyukiRendoJouhouList);
         JyukiRendoTorokushaListBatch jyukiRendoTorokushaListBatch = new JyukiRendoTorokushaListBatch();
-        jyukiRendoTorokushaListBatch.getIdoCheckChohyoData(jyukiRendoTorokushaEntity);
-        // TODO 4．２　作成した帳票データリストを帳票に引き渡す、帳票を出力する。(帳票インタフェースがありません)
+        List<JukiRendoTorokuListItem> item = jyukiRendoTorokushaListBatch
+                .getIdoCheckChohyoData(jyukiRendoTorokushaEntity);
+        ReportId ID = new ReportId("DBA200007");
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        JukiRendoTorokuListReport report = JukiRendoTorokuListReport
+                .createFrom(item);
+        report.writeBy(reportSourceWriter);
+        batchReportWriter.close();
     }
 
     /**
