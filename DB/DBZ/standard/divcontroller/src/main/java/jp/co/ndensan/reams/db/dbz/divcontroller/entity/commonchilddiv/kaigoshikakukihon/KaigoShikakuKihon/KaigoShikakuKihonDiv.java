@@ -11,7 +11,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigoatenakihon.KaigoAtenaKihonBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.service.core.kaigoatenakihon.KaigoAtenaKihonFinder;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -425,6 +430,11 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    private static final RDate 有効期間2009年04月 = new RDate(2009, 04);
+    private static final RDate 有効期間2006年04月 = new RDate(2006, 04);
+    private static final RDate 有効期間2002年04月 = new RDate(2002, 04);
+    private static final RDate 有効期間2000年04月 = new RDate(2000, 04);
+
     /**
      * 介護資格基本の初期化
      *
@@ -451,12 +461,28 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
         this.txtSoshitsuJiyu.setReadOnly(true);
         this.txtJutokuKubun.setValue(kihonBusiness.get住所地特例フラグ().equals(new RString("1")) ? new RString("住特") : RString.EMPTY);
         this.txtJutokuKubun.setReadOnly(true);
-        //TODO 要介護認定状態区分?
-        //this.txtYokaigoJotaiKubun
-        this.txtYokaigoJotaiKubun.setReadOnly(true);
-        this.txtNinteiKaishiYmd.setValue(new RDate(kihonBusiness.get認定有効期間開始年月日().toString()));
+        RDate 認定有効期間開始年月日 = new RDate(kihonBusiness.get認定有効期間開始年月日().toString());
+        RDate 認定有効期間終了年月日 = new RDate(kihonBusiness.get認定有効期間終了年月日().toString());
+        this.txtYokaigoJotaiKubun.setValue(get要介護状態区分コード(認定有効期間終了年月日, kihonBusiness.get要介護認定状態区分コード()));
+        this.txtNinteiKaishiYmd.setValue(認定有効期間開始年月日);
         this.txtNinteiKaishiYmd.setReadOnly(true);
-        this.txtNinteiShuryoYmd.setValue(new RDate(kihonBusiness.get認定有効期間終了年月日().toString()));
+        this.txtNinteiShuryoYmd.setValue(認定有効期間終了年月日);
         this.txtNinteiShuryoYmd.setReadOnly(true);
+    }
+
+    private RString get要介護状態区分コード(RDate 認定有効期間終了年月日, Code 要介護認定状態区分コード) {
+        if (認定有効期間終了年月日.isBefore(有効期間2000年04月)) {
+            return RString.EMPTY;
+        }
+        if (認定有効期間終了年月日.isBefore(有効期間2002年04月)) {
+            return YokaigoJotaiKubun99.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
+        }
+        if (認定有効期間終了年月日.isBefore(有効期間2006年04月)) {
+            return YokaigoJotaiKubun02.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
+        }
+        if (認定有効期間終了年月日.isBefore(有効期間2009年04月)) {
+            return YokaigoJotaiKubun06.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
+        }
+        return YokaigoJotaiKubun09.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
     }
 }
