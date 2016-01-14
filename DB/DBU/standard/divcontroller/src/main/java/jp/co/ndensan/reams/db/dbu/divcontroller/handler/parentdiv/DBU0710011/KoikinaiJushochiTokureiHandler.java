@@ -42,7 +42,6 @@ public class KoikinaiJushochiTokureiHandler {
      * @param div KoikinaiJushochiTokurei のクラスファイル 
      */
     public KoikinaiJushochiTokureiHandler(KoikinaiJushochiTokureiDiv div) {
-        System.out.println("*****************************");
         this.div = div;
     }
 
@@ -121,8 +120,8 @@ public class KoikinaiJushochiTokureiHandler {
     }
     
     /**
-     * 「実行する」ボタンを押下前のチェック実行します。
-     * @return KoikinaiJushochiTokureiBatchParamter KoikinaiJushochiTokureiBatchParamter 広域内住所地特例者一覧表_バッチパラメータクラスです
+     * 「実行する」ボタンを押下バッチ実行、バッチパラメータ作成をします。
+     * @return KoikinaiJushochiTokureiBatchParamter 広域内住所地特例者一覧表_バッチパラメータクラスです
      */
     public KoikinaiJushochiTokureiBatchParamter click実行() {
         KoikinaiJushochiTokureiBatchParamter batchparam = new KoikinaiJushochiTokureiBatchParamter();
