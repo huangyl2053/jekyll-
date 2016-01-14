@@ -13,7 +13,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
@@ -49,7 +48,7 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
         this.entity = new DbT5911ShujiiIryoKikanJohoEntity();
         this.entity.setShichosonCode(市町村コード);
-        this.entity.setShujiiIryokikanCode(new ShujiiIryokikanCode(主治医医療機関コード));
+        this.entity.setShujiiIryokikanCode(主治医医療機関コード);
         this.id = new ShujiiIryoKikanJohoIdentifier(
                 市町村コード,
                 主治医医療機関コード
@@ -67,7 +66,7 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
         this.entity = requireNonNull(entity.get主治医医療機関情報Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関情報"));
         this.id = new ShujiiIryoKikanJohoIdentifier(
                 entity.get主治医医療機関情報Entity().getShichosonCode(),
-                entity.get主治医医療機関情報Entity().getShujiiIryokikanCode().getColumnValue());
+                entity.get主治医医療機関情報Entity().getShujiiIryokikanCode());
 
         List<ShujiiJoho> shujiiJohoList = new ArrayList<>();
         for (DbT5912ShujiiJohoEntity shujiiJohoEntity : entity.get主治医情報Entity()) {
@@ -107,7 +106,7 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
      * @return 主治医医療機関コード
      */
     public RString get主治医医療機関コード() {
-        return entity.getShujiiIryokikanCode().getColumnValue();
+        return entity.getShujiiIryokikanCode();
     }
 
     /**
