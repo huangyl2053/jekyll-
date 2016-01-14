@@ -16,6 +16,7 @@
     </sql>
 
     <sql id="allColumns_DbT5116IchijiHanteiKekkaJoho">
+         "DbT5116IchijiHanteiKekkaJoho"."shinseishoKanriNo" as "dbT5116IchijiHanteiKekkaJoho_shinseishoKanriNo",
          "DbT5116IchijiHanteiKekkaJoho"."insertDantaiCd" as "dbT5116IchijiHanteiKekkaJoho_insertDantaiCd",
          "DbT5116IchijiHanteiKekkaJoho"."insertTimestamp" as "dbT5116IchijiHanteiKekkaJoho_insertTimestamp",
          "DbT5116IchijiHanteiKekkaJoho"."insertReamsLoginId" as "dbT5116IchijiHanteiKekkaJoho_insertReamsLoginId",
@@ -24,7 +25,6 @@
          "DbT5116IchijiHanteiKekkaJoho"."updateCount" as "dbT5116IchijiHanteiKekkaJoho_updateCount",
          "DbT5116IchijiHanteiKekkaJoho"."lastUpdateTimestamp" as "dbT5116IchijiHanteiKekkaJoho_lastUpdateTimestamp",
          "DbT5116IchijiHanteiKekkaJoho"."lastUpdateReamsLoginId" as "dbT5116IchijiHanteiKekkaJoho_lastUpdateReamsLoginId",
-         "DbT5116IchijiHanteiKekkaJoho"."shinseishoKanriNo" as "dbT5116IchijiHanteiKekkaJoho_shinseishoKanriNo",
          "DbT5116IchijiHanteiKekkaJoho"."kariIchijiHanteiKubun" as "dbT5116IchijiHanteiKekkaJoho_kariIchijiHanteiKubun",
          "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" as "dbT5116IchijiHanteiKekkaJoho_ichijiHanteiYMD",
          "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaCode" as "dbT5116IchijiHanteiKekkaJoho_ichijiHanteiKekkaCode",
@@ -69,6 +69,7 @@
 
     <!--テーブルDbT5116IchijiHanteiKekkaJohoの項目をDbT5116IchijiHanteiKekkaJohoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT5116IchijiHanteiKekkaJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT5116IchijiHanteiKekkaJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="insertDantaiCd" column="dbT5116IchijiHanteiKekkaJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5116IchijiHanteiKekkaJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT5116IchijiHanteiKekkaJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -77,7 +78,6 @@
         <result property="updateCount" column="dbT5116IchijiHanteiKekkaJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT5116IchijiHanteiKekkaJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5116IchijiHanteiKekkaJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shinseishoKanriNo" column="dbT5116IchijiHanteiKekkaJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="kariIchijiHanteiKubun" column="dbT5116IchijiHanteiKekkaJoho_kariIchijiHanteiKubun" />
         <result property="ichijiHanteiYMD" column="dbT5116IchijiHanteiKekkaJoho_ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ichijiHanteiKekkaCode" column="dbT5116IchijiHanteiKekkaJoho_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
