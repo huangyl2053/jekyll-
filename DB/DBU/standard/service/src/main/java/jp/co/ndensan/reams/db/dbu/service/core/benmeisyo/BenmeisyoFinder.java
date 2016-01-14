@@ -136,7 +136,7 @@ public class BenmeisyoFinder {
         RString 文言２ = BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_定型文_文言２, SubGyomuCode.DBU介護統計報告);
         RString 文言３ = BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_定型文_文言３, SubGyomuCode.DBU介護統計報告);
         StringBuilder 文言 = new StringBuilder();
-        if (文言１.equals(文言_部分)) {
+        if (文言１.contains(文言_部分)) {
             RString 部分1 = 文言１.substring(0, 文言１.indexOf("@"));
             RString 部分2 = 審査請求届出日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
                     fillType(FillType.BLANK).toDateString();
@@ -149,7 +149,7 @@ public class BenmeisyoFinder {
         } else {
             文言.append(文言１);
         }
-        if (文言２.equals(文言_部分)) {
+        if (文言２.contains(文言_部分)) {
             RString 部分1 = 文言２.substring(0, 文言２.indexOf("@"));
             RString 部分2 = 審査請求届出日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
                     fillType(FillType.BLANK).toDateString();
@@ -162,7 +162,7 @@ public class BenmeisyoFinder {
         } else {
             文言.append(文言２);
         }
-        if (文言３.equals(文言_部分)) {
+        if (文言３.contains(文言_部分)) {
             RString 部分1 = 文言３.substring(0, 文言３.indexOf("@"));
             RString 部分2 = 審査請求届出日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
                     fillType(FillType.BLANK).toDateString();
