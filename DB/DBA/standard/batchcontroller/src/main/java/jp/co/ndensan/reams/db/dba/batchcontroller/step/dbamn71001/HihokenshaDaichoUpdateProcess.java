@@ -28,9 +28,7 @@ public class HihokenshaDaichoUpdateProcess extends SimpleBatchProcessBase {
     protected void process() {
         
         List<ShikakuIdoTaishoshaEntity> entityList = (List<ShikakuIdoTaishoshaEntity>) parameter.getShikakuIdoTaishoshaEntityList();
-        // 被保険者台帳管理の更新
         hihokenshaDaichoKoshin.updHihokenshaDaicho(entityList);
-        // 年齢到達条件の更新
         hihokenshaDaichoKoshin.updNenreitotatsuJoken(parameter.getFlowParam());
     }
     

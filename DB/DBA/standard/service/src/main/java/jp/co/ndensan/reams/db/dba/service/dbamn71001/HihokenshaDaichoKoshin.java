@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.service.dbamn71001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.core.dbamn71001.Dbamn71001BatchFlowParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.dbamn71001.Dbamn71001BatchFlowParameter;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dba.entity.dbamn71001.SaishinIdohiDataEntity;
 import jp.co.ndensan.reams.db.dba.entity.dbamn71001.ShikakuIdoTaishoshaEntity;
@@ -170,11 +170,12 @@ public class HihokenshaDaichoKoshin {
             }
         }
 
-        if ((dbT1001HihokenshaDaichoEntity != null && JuminJotai.住登外.toString().equals(entity.get住民状態コード().toString())
+        if ((dbT1001HihokenshaDaichoEntity != null && (JuminJotai.住登外.toString().equals(entity.get住民状態コード().toString())
                 || JuminJotai.転出者.toString().equals(entity.get住民状態コード().toString())
-                || JuminJotai.消除者.toString().equals(entity.get住民状態コード().toString()))
+                || JuminJotai.消除者.toString().equals(entity.get住民状態コード().toString())))
                 && (saishinIdohiDataEntity.get資格取得年月日() != null && saishinIdohiDataEntity.get資格喪失年月日() == null
-                && saishinIdohiDataEntity.get被保険者区分コード().toString().equals(HihokenshaKubunCode.第１号被保険者.toString()))) {
+                && saishinIdohiDataEntity.get被保険者区分コード().toString().equals(HihokenshaKubunCode.第２号被保険者.toString())
+                && "1".equals(saishinIdohiDataEntity.get住所地特例フラグ().toString()))) {
 
             DbT1001HihokenshaDaichoEntity insertEn = new DbT1001HihokenshaDaichoEntity();
             insertEn.setHihokenshaNo(saishinIdohiDataEntity.get被保険者番号());

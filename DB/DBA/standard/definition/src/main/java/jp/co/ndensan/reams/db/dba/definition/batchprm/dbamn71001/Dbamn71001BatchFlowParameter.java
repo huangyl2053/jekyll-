@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.core.dbamn71001;
+package jp.co.ndensan.reams.db.dba.definition.batchprm.dbamn71001;
 
 import jp.co.ndensan.reams.db.dba.definition.processprm.dbamn71001.ShikakuIdoTaishoshaShutokuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -12,7 +12,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 65歳年齢到達資格異動バッチパラメータクラスです。
  */
 @Getter
@@ -20,7 +19,6 @@ import lombok.Setter;
 public class Dbamn71001BatchFlowParameter extends BatchParameterBase {
 
     /**
-     *
      * 65歳年齢到達資格異動バッチパラメータクラスです。
      */
     private FlexibleDate kaishiYMD;

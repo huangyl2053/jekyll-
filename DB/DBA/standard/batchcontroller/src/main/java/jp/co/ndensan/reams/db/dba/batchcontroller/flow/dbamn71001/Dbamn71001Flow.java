@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.batchcontroller.step.dbamn71001.HihokenshaDaichoUpdateProcess;
 import jp.co.ndensan.reams.db.dba.batchcontroller.step.dbamn71001.ParameterSetProcess;
 import jp.co.ndensan.reams.db.dba.batchcontroller.step.dbamn71001.ShikakuIdoTaishoshaShutokuProcess;
-import jp.co.ndensan.reams.db.dba.definition.core.dbamn71001.Dbamn71001BatchFlowParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.dbamn71001.Dbamn71001BatchFlowParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dbamn71001.HihokenshaDaichoUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dbamn71001.ParameterSetProcessParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dbamn71001.ShikakuIdoTaishoshaShutokuProcessParameter;
@@ -57,13 +57,15 @@ public class Dbamn71001Flow extends BatchFlowBase<Dbamn71001BatchFlowParameter> 
      */
     @Step(資格異動対象者情報取得)
     protected IBatchFlowCommand getShikakuIdoTaishosha() {
+        
+        ShikakuIdoTaishoshaShutokuProcessParameter parameter;
         if (getParameter() == null || getParameter().getKaishiYMD().isEmpty() || getParameter().getShuryoYMD().isEmpty()) {
-            return simpleBatch(ShikakuIdoTaishoshaShutokuProcess.class)
-                .arguments(setBatchParameter())
-                .define();
+            parameter = setBatchParameter();
+        } else {
+            parameter = getParameter().toShikakuIdoTaishoshaShutokuProcessParameter();
         }
         return simpleBatch(ShikakuIdoTaishoshaShutokuProcess.class)
-                    .arguments(getParameter().toShikakuIdoTaishoshaShutokuProcessParameter())
+                    .arguments(parameter)
                     .define();
     }
     

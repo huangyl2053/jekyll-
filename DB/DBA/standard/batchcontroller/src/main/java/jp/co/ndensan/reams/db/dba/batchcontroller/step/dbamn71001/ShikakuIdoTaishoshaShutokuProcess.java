@@ -63,7 +63,6 @@ public class ShikakuIdoTaishoshaShutokuProcess extends SimpleBatchProcessBase {
         
         List<ShikibetsuCode> shikibetsuCode = new ArrayList<>();
         
-        // 識別コードの検索
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         List<JuminShubetsu> juminShubetsuList = new ArrayList<>();
@@ -86,7 +85,6 @@ public class ShikakuIdoTaishoshaShutokuProcess extends SimpleBatchProcessBase {
             }
         }
         
-        // 宛名識別対象PSMの検索
         key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         juminShubetsuList = new ArrayList<>();
