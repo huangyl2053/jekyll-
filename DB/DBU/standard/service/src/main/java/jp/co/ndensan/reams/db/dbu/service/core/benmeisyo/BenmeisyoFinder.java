@@ -96,9 +96,11 @@ public class BenmeisyoFinder {
         benmeisyoTyohyoDataEntity.set送付先住所(this.get送付先住所());
         benmeisyoTyohyoDataEntity.set送付先名称(this.get送付先名称());
         BenmeiJohoEntity benmeiJohoEntity = this.getBenmeiJohoData(識別コード, 被保険者番号, 審査請求届出日);
-        benmeisyoTyohyoDataEntity.set弁明書作成日(benmeiJohoEntity.get弁明書作成日());
-        benmeisyoTyohyoDataEntity.set弁明の件名(benmeiJohoEntity.get弁明の件名());
-        benmeisyoTyohyoDataEntity.set弁明の内容(benmeiJohoEntity.get弁明の内容());
+        if (benmeiJohoEntity != null) {
+            benmeisyoTyohyoDataEntity.set弁明書作成日(benmeiJohoEntity.get弁明書作成日());
+            benmeisyoTyohyoDataEntity.set弁明の件名(benmeiJohoEntity.get弁明の件名());
+            benmeisyoTyohyoDataEntity.set弁明の内容(benmeiJohoEntity.get弁明の内容());
+        }
         NinshoshaDenshiKoinDataEntity ninshoshaDenshiKoinDataEntity = this.getNinshoshaDenshiKoinData(benmeiJohoEntity);
         benmeisyoTyohyoDataEntity.set認証者役職名(ninshoshaDenshiKoinDataEntity.get認証者役職名());
         benmeisyoTyohyoDataEntity.set認証者氏名(ninshoshaDenshiKoinDataEntity.get認職者氏名());
@@ -183,11 +185,17 @@ public class BenmeisyoFinder {
         BenmeiJohoEntity entity = new BenmeiJohoEntity();
         BenmeiJohoResultEntity resultentity = benmeisyoMapper.getBenmeijoho(BenmeisyoMapperParameter.
                 createSelectByKeyParam(識別コード, 被保険者番号, 審査請求届出日));
-        entity.set弁明書作成日(resultentity.get弁明書作成日());
-        if (resultentity.get処分種類コード() != null && !resultentity.get処分種類コード().isEmpty()) {
-            entity.set弁明の件名(ShobunShuruiCode.toValue(resultentity.get処分種類コード()).get名称());
+        if (resultentity != null) {
+            if (resultentity.get弁明書作成日() != null && !resultentity.get弁明書作成日().isEmpty()) {
+                entity.set弁明書作成日(resultentity.get弁明書作成日());
+            }
+            if (resultentity.get処分種類コード() != null && !resultentity.get処分種類コード().isEmpty()) {
+                entity.set弁明の件名(ShobunShuruiCode.toValue(resultentity.get処分種類コード()).get名称());
+            }
+            if (resultentity.get弁明内容() != null && !resultentity.get弁明内容().isEmpty()) {
+                entity.set弁明の内容(resultentity.get弁明内容());
+            }
         }
-        entity.set弁明の内容(resultentity.get弁明内容());
         return entity;
     }
 
