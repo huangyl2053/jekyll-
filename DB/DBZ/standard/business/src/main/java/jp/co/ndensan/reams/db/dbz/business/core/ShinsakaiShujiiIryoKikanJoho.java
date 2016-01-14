@@ -5,19 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import java.io.Serializable;
+import java.util.Objects;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
+import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import java.util.Objects;
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 主治医医療機関情報のビジネスクラスです。
@@ -80,7 +80,7 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
      */
     @Override
     public ShujiiIryokikanCode get主治医医療機関コード() {
-        return entity.getShujiiIryokikanCode();
+        return new ShujiiIryokikanCode(entity.getShujiiIryokikanCode());
     }
 
     /**
@@ -291,7 +291,7 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
         @Override
         public Builder setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
             Objects.requireNonNull(shujiiIryokikanCode);
-            this.entity.setShujiiIryokikanCode(shujiiIryokikanCode);
+            this.entity.setShujiiIryokikanCode(shujiiIryokikanCode.value());
             return this;
         }
 
@@ -423,8 +423,7 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。
-     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */
