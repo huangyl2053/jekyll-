@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.mapper.otheraddressinformation.IOtherAddressInformationMapper">
+    <select id="get他市町村住所地特例者情報の取得処理" resultMap="resultMap_OtherAddressInfFromDBEntity"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.otheraddressledger.OtherAddressInformationParameter"  fetchSize="500">
+        SELECT A."識別コード" AS "識別コード",
+        A."異動日" AS "異動日",
+        A."枝番" AS "枝番",
+        A."市町村コード" AS "市町村コード",
+        A."他市町村住所地特例適用事由コード" AS "他市町村住所地特例適用事由コード",
+        A."適用年月日" AS "適用年月日",
+        A."適用届出年月日" AS "適用届出年月日",
+        A."他市町村住所地特例解除事由コード" AS "他市町村住所地特例解除事由コード",
+        A."解除年月日" AS "解除年月日",
+        A."解除届出年月日" AS "解除届出年月日",
+        A."措置保険者番号" AS "措置保険者番号",
+        A."措置被保険者番号" AS "措置被保険者番号",
+        A."保険者名称" AS "保険者名称",
+        B."daichoShubetsu" AS "台帳種別",
+        B."nyushoShisetsuCode" AS "入所施設コード",
+        B."nyushoShisetsuShurui" AS "入所施設種類",
+        B."nyushoYMD" AS "入所年月日",
+        B."taishoYMD" AS "退所年月日",
+        C."jigyoshaShubetsu" AS "事業者種別",
+        C."jigyoshaNo" AS "事業者番号",
+        C."jigyoshaMeisho" AS "事業者名称",
+        C."jigyoshaJusho" AS "事業者住所",
+        C."yubinNo" AS "郵便番号",
+        C."telNo" AS "電話番号"
+        FROM (SELECT  T4."識別コード" AS "識別コード",
+        T4."異動日" AS "異動日",
+        T4."枝番" AS "枝番",
+        T4."異動事由コード" AS "異動事由コード",
+        T4."市町村コード" AS "市町村コード",
+        T4."他市町村住所地特例適用事由コード" AS "他市町村住所地特例適用事由コード",
+        T4."適用年月日" AS "適用年月日",
+        T4."適用届出年月日" AS "適用届出年月日",
+        T4."適用受付年月日" AS "適用受付年月日",
+        T4."他市町村住所地特例解除事由コード" AS "他市町村住所地特例解除事由コード",
+        T4."解除年月日" AS "解除年月日",
+        T4."解除届出年月日" AS "解除届出年月日",
+        T4."解除受付年月日" AS "解除受付年月日",
+        T4."措置保険者番号" AS "措置保険者番号",
+        T4."措置被保険者番号" AS "措置被保険者番号",
+        T5."hokenjaName" AS "保険者名称"
+        FROM
+        (SELECT
+        T3."識別コード" AS "識別コード",
+        T3."異動日" AS "異動日",
+        T3."枝番" AS "枝番",
+        T1."idoJiyuCode" AS "異動事由コード",
+        T1."shichosonCode" AS "市町村コード",
+        T1."tekiyoJiyuCode" AS "他市町村住所地特例適用事由コード",
+        T1."tekiyoYMD" AS "適用年月日",
+        T1."tekiyoTodokedeYMD" AS "適用届出年月日",
+        T1."tekiyoUketsukeYMD" AS "適用受付年月日",
+        T1."kaijoJiyuCode" AS "他市町村住所地特例解除事由コード",
+        T1."kaijoYMD" AS "解除年月日",
+        T1."kaijoTodokedeYMD" AS "解除届出年月日",
+        T1."kaijoUketsukeYMD" AS "解除受付年月日",
+        T1."sochiHokenshaNo" AS "措置保険者番号",
+        T1."sochiHihokenshaNo" AS "措置被保険者番号"
+        FROM rgdb."DbT1003TashichosonJushochiTokurei" T1,
+        (SELECT T2."shikibetsuCode" AS "識別コード",
+        T2."idoYMD" AS "異動日",
+        MAX(T2."edaNo") AS "枝番"
+        FROM rgdb."DbT1003TashichosonJushochiTokurei" T2
+        WHERE T2."shikibetsuCode"=#{shikibetsuCode} AND T2."logicalDeletedFlag"=FALSE
+        GROUP BY T2."shikibetsuCode",T2."idoYMD")AS T3
+        WHERE T1."shikibetsuCode"=T3."識別コード" AND T1."idoYMD"=T3."異動日" AND T1."edaNo"=T3."枝番")AS T4
+        LEFT JOIN rgur."UrT0507Hokenja" T5
+        ON T4."措置保険者番号"=T5."hokenjaNo" AND T5."hokenjaShubetsu"='介護保険') AS A
+        INNER JOIN rgdb."DbT1004ShisetsuNyutaisho" B
+        ON B."shikibetsuCode"=A."識別コード"
+        AND B."daichoShubetsu"='2'
+        AND B."nyushoShisetsuShurui"='12'
+        LEFT JOIN rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" C
+        ON B."nyushoShisetsuCode"=C."jigyoshaNo"
+        AND B."nyushoShisetsuShurui"=C."jigyoshaShubetsu"
+        AND B."nyushoYMD" <![CDATA[>=]]> C."yukoKaishiYMD"
+        AND B."nyushoYMD" <![CDATA[<=]]> C."yukoShuryoYMD"
+        WHERE CASE WHEN A."解除年月日"=NULL
+        THEN B."taishoYMD" IS NULL OR A."適用年月日" <![CDATA[<=]]> B."taishoYMD"
+        WHEN A."解除年月日" <![CDATA[<>]]> NULL
+        THEN (B."taishoYMD" IS NULL AND B."nyushoYMD" <![CDATA[<]]> A."解除年月日")
+        OR (B."nyushoYMD" <![CDATA[<]]> A."解除年月日" AND B."taishoYMD" <![CDATA[>]]> A."適用年月日")
+        END
+        ORDER BY B."nyushoYMD" DESC
+
+
+    </select>
+    <resultMap id="resultMap_OtherAddressInfFromDBEntity"
+               type="jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger.OtherAddressInfFromDBEntity" autoMapping="true">
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+        <result property="異動日" column="異動日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="枝番" column="枝番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="他市町村住所地特例適用事由コード" column="他市町村住所地特例適用事由コード" 
+                typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="適用年月日" column="適用年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="適用届出年月日" column="適用届出年月日"
+                typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="他市町村住所地特例解除事由コード" column="他市町村住所地特例解除事由コード"
+                typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="解除年月日" column="解除年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="解除届出年月日" column="解除届出年月日"
+                typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="措置保険者番号" column="措置保険者番号"
+                typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
+        <result property="措置被保険者番号" column="措置被保険者番号"
+                typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="保険者名称" column="保険者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="台帳種別" column="台帳種別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="入所施設コード" column="入所施設コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler" />
+        <result property="入所施設種類" column="入所施設種類" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="入所年月日" column="入所年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="退所年月日" column="退所年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="事業者種別" column="事業者種別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業者番号" column="事業者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業者名称" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="事業者住所" column="事業者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="電話番号" column="電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+    </resultMap>
+    <select id="get宛名識別対象" resultMap="resultMap_OtherAddressInformationRecipientNameMybatisEntity"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.atena.OtherAddressInformationRecipientNameMybatisParam"  fetchSize="500">
+        SELECT T1."kanaMeisho" AS "カナ名称",
+        T1."meisho" AS "氏名",
+        T1."seinengappiYMD" AS "生年月日",
+        T1."seibetsuCode" AS "性別コード",
+        T1."setaiCode" AS "世帯コード",
+        T1."shikibetsuCode" AS "識別コード",
+        T1."chikuName1" AS "地区名１",
+        T1."chikuName2" AS "地区名２",
+        T1."chikuName3" AS "地区名３",
+        T1."chikuCode1" AS "地区コード１",
+        T1."chikuCode2" AS "地区コード２",
+        T1."chikuCode3" AS "地区コード３",
+        T1."jusho" AS "住所",
+        T1."zenkokuJushoCode" AS "住所コード",
+        T1."gyoseikuCode" AS "行政区コード",
+        T1."tennyumaeZenkokuJushoCode" AS "前住所コード",
+        T1."tennyumaeJusho" AS "前住所",
+        T1."torokuIdoYMD" AS "転入年月日",
+        T1."renrakusaki1" AS "連絡先",
+        IFNULL(T1."tenshutsuKakuteiIdoYMD",T1."tenshutsuYoteiIdoYMD")AS "転出年月日"
+        FROM <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+        AS T1
+    </select>
+    <resultMap id="resultMap_OtherAddressInformationRecipientNameMybatisEntity"
+               type="jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger.OtherAddressInformationRecipientNameMybatisEntity" autoMapping="true">
+        <result property="カナ名称" column="カナ名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="性別コード" column="性別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="世帯コード" column="世帯コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler" />
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+        <result property="地区名１" column="地区名１" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="地区名２" column="地区名２" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="地区名３" column="地区名３" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="地区コード１" column="地区コード１" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler" />
+        <result property="地区コード２" column="地区コード２" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler" />
+        <result property="地区コード３" column="地区コード３" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler" />
+        <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
+        <result property="住所コード" column="住所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler" />
+        <result property="行政区コード" column="行政区コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler" />
+        <result property="前住所コード" column="前住所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler" />
+        <result property="前住所" column="前住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
+        <result property="転入年月日" column="転入年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="連絡先" column="連絡先" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="転出年月日" column="転出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    </resultMap>
+</mapper>
