@@ -103,12 +103,12 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("ServiceShitei"));
             };
 
-            Controls.prototype.lblServiceIken = function () {
-                return new UZA.Label(this.convFiledName("lblServiceIken"));
-            };
-
             Controls.prototype.dgServiceIchiran = function () {
                 return new UZA.DataGrid(this.convFiledName("dgServiceIchiran"));
+            };
+
+            Controls.prototype.lblServiceIken = function () {
+                return new UZA.Label(this.convFiledName("lblServiceIken"));
             };
 
             Controls.prototype.txtShinsakaiIken = function () {

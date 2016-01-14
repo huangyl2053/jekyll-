@@ -109,12 +109,12 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("ServiceShitei"));
             }
 
-            public lblServiceIken(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblServiceIken"));
-            }
-
             public dgServiceIchiran(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgServiceIchiran"));
+            }
+
+            public lblServiceIken(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblServiceIken"));
             }
 
             public txtShinsakaiIken(): UZA.TextBoxMultiLine {

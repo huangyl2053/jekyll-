@@ -89,6 +89,10 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtChosainKanaShimei"));
             }
 
+            public txtMaxKensu(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtMaxKensu"));
+            }
+
             public btnClear(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnClear"));
             }

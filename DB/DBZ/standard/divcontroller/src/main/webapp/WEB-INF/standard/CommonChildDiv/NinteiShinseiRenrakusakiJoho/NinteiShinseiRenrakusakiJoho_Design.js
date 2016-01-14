@@ -4,6 +4,9 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnKakutei = function () {
+                return "onClick_btnKakutei";
+            };
             return Events;
         })();
         NinteiShinseiRenrakusakiJoho.Events = Events;
@@ -102,6 +105,10 @@ var DBZ;
 
             Controls.prototype.btnModoru = function () {
                 return new UZA.Button(this.convFiledName("btnModoru"));
+            };
+
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             };
             return Controls;
         })();

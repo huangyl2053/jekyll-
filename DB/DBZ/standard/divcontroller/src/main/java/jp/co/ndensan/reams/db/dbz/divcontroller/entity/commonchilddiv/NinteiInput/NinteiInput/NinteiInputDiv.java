@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInpu
  * @author 自動生成
  */
 public class NinteiInputDiv extends Panel implements INinteiInputDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -354,16 +354,6 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     @JsonIgnore
-    public Label getLblServiceIken() {
-        return this.getServiceShitei().getLblServiceIken();
-    }
-
-    @JsonIgnore
-    public void  setLblServiceIken(Label lblServiceIken) {
-        this.getServiceShitei().setLblServiceIken(lblServiceIken);
-    }
-
-    @JsonIgnore
     public DataGrid<dgServiceIchiran_Row> getDgServiceIchiran() {
         return this.getServiceShitei().getDgServiceIchiran();
     }
@@ -371,6 +361,16 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     @JsonIgnore
     public void  setDgServiceIchiran(DataGrid<dgServiceIchiran_Row> dgServiceIchiran) {
         this.getServiceShitei().setDgServiceIchiran(dgServiceIchiran);
+    }
+
+    @JsonIgnore
+    public Label getLblServiceIken() {
+        return this.getServiceShitei().getLblServiceIken();
+    }
+
+    @JsonIgnore
+    public void  setLblServiceIken(Label lblServiceIken) {
+        this.getServiceShitei().setLblServiceIken(lblServiceIken);
     }
 
     // </editor-fold>
