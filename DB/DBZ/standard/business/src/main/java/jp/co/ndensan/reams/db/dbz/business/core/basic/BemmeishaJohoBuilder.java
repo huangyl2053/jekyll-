@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.BushoCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -117,6 +117,18 @@ public class BemmeishaJohoBuilder {
     }
 
     /**
+     * 審査請求に係る処分内容を設定します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return {@link BemmeiNaiyoBuilder}
+     */
+    public BemmeishaJohoBuilder set市町村コード(LasdecCode 市町村コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求に係る処分内容"));
+        entity.setShichosonCode(市町村コード);
+        return this;
+    }
+
+    /**
      * 職員コードを設定します。
      *
      * @param 職員コード 職員コード
@@ -158,9 +170,9 @@ public class BemmeishaJohoBuilder {
      * @param 弁明者氏名 弁明者氏名
      * @return {@link BemmeishaJohoBuilder}
      */
-    public BemmeishaJohoBuilder set弁明者氏名(AtenaMeisho 弁明者氏名) {
+    public BemmeishaJohoBuilder set弁明者氏名(RString 弁明者氏名) {
         requireNonNull(弁明者氏名, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明者氏名"));
-        //  entity.setBemmeishaShimei(弁明者氏名);
+        entity.setBemmeisha(弁明者氏名);
         return this;
     }
 

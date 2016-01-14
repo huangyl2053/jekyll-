@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -113,6 +114,18 @@ public class BemmeiNaiyoBuilder {
     }
 
     /**
+     * 審査請求に係る処分内容を設定します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return {@link BemmeiNaiyoBuilder}
+     */
+    public BemmeiNaiyoBuilder set市町村コード(LasdecCode 市町村コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求に係る処分内容"));
+        entity.setShichosonCode(市町村コード);
+        return this;
+    }
+
+    /**
      * 弁明内容を設定します。
      *
      * @param 弁明内容 弁明内容
@@ -132,7 +145,7 @@ public class BemmeiNaiyoBuilder {
      */
     public BemmeiNaiyoBuilder set弁明書作成日提出日(FlexibleDate 弁明書作成日提出日) {
         requireNonNull(弁明書作成日提出日, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明書作成日提出日"));
-        //  entity.setBemmeishoSakuseiTeishutsuYMD(弁明書作成日提出日);
+        entity.setBemmeishoTeishutsuYMD(弁明書作成日提出日);
         return this;
     }
 

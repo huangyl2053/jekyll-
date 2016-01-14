@@ -6,23 +6,22 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 弁明内容を管理するクラスです。
  */
-public class BemmeiNaiyo extends ParentModelBase<BemmeiNaiyoIdentifier, DbT7002BemmeiNaiyoEntity, BemmeiNaiyo> implements Serializable {
+public class BemmeiNaiyo extends ModelBase<BemmeiNaiyoIdentifier, DbT7002BemmeiNaiyoEntity, BemmeiNaiyo> implements Serializable {
 
     private final DbT7002BemmeiNaiyoEntity entity;
     private final BemmeiNaiyoIdentifier id;
@@ -31,18 +30,16 @@ public class BemmeiNaiyo extends ParentModelBase<BemmeiNaiyoIdentifier, DbT7002B
      * コンストラクタです。<br/>
      * 弁明内容の新規作成時に使用します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
      * @param 識別コード 識別コード
      * @param 原処分被保険者番号 原処分被保険者番号
      * @param 審査請求届出日 審査請求届出日
      * @param 弁明書作成日 弁明書作成日
      */
-    public BemmeiNaiyo(ShoKisaiHokenshaNo 証記載保険者番号,
+    public BemmeiNaiyo(
             ShikibetsuCode 識別コード,
             HihokenshaNo 原処分被保険者番号,
             FlexibleDate 審査請求届出日,
             FlexibleDate 弁明書作成日) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(原処分被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者番号"));
         requireNonNull(審査請求届出日, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求届出日"));
@@ -54,7 +51,6 @@ public class BemmeiNaiyo extends ParentModelBase<BemmeiNaiyoIdentifier, DbT7002B
         this.entity.setShinsaseikyuTodokedeYMD(審査請求届出日);
         this.entity.setBemmeishoSakuseiYMD(弁明書作成日);
         this.id = new BemmeiNaiyoIdentifier(
-                証記載保険者番号,
                 識別コード,
                 原処分被保険者番号,
                 審査請求届出日,
@@ -71,8 +67,6 @@ public class BemmeiNaiyo extends ParentModelBase<BemmeiNaiyoIdentifier, DbT7002B
     public BemmeiNaiyo(DbT7002BemmeiNaiyoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明内容"));
         this.id = new BemmeiNaiyoIdentifier(
-                //entity.getShoKisaiHokenshaNo(),
-                new ShoKisaiHokenshaNo(RString.EMPTY),
                 entity.getShikibetsuCode(),
                 entity.getGenshobunHihokenshaNo(),
                 entity.getShinsaseikyuTodokedeYMD(),
@@ -139,6 +133,15 @@ public class BemmeiNaiyo extends ParentModelBase<BemmeiNaiyoIdentifier, DbT7002B
     }
 
     /**
+     * 市町村コードを返します。
+     *
+     * @return 市町村コード
+     */
+    public LasdecCode get市町村コード() {
+        return entity.getShichosonCode();
+    }
+
+    /**
      * 審査請求に係る処分内容を返します。
      *
      * @return 審査請求に係る処分内容
@@ -154,6 +157,15 @@ public class BemmeiNaiyo extends ParentModelBase<BemmeiNaiyoIdentifier, DbT7002B
      */
     public RString get弁明内容() {
         return entity.getBemmeiNaiyo();
+    }
+
+    /**
+     * 審査請求に係る処分内容を返します。
+     *
+     * @return 審査請求に係る処分内容
+     */
+    public FlexibleDate get弁明書提出日() {
+        return entity.getBemmeishoTeishutsuYMD();
     }
 
     /**
@@ -185,11 +197,11 @@ public class BemmeiNaiyo extends ParentModelBase<BemmeiNaiyoIdentifier, DbT7002B
     }
 
     /**
-     * 弁明内容のみを変更対象とします。<br/> {@link DbT7002BemmeiNaiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 弁明内容のみを変更対象とします。<br/>
+     * {@link DbT7002BemmeiNaiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link BemmeiNaiyo}
      */
-    @Override
     public BemmeiNaiyo modifiedModel() {
         DbT7002BemmeiNaiyoEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
@@ -200,7 +212,8 @@ public class BemmeiNaiyo extends ParentModelBase<BemmeiNaiyoIdentifier, DbT7002B
     }
 
     /**
-     * 保持する弁明内容を削除対象とします。<br/> {@link DbT7002BemmeiNaiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する弁明内容を削除対象とします。<br/>
+     * {@link DbT7002BemmeiNaiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link BemmeiNaiyo}
      */
@@ -228,25 +241,7 @@ public class BemmeiNaiyo extends ParentModelBase<BemmeiNaiyoIdentifier, DbT7002B
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * getBemmeishaJohoList
-     *
-     * @return BemmeishaJohoリスト
-     */
-    public List<BemmeishaJoho> getBemmeishaJohoList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * modified
-     *
-     * @return BemmeiNaiyo
-     */
-    public BemmeiNaiyo modified() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

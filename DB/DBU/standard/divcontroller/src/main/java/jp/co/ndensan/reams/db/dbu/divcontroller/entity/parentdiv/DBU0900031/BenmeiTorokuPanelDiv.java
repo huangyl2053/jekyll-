@@ -4,22 +4,22 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900031;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoatenainfo.IKaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoatenainfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.IKaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * BenmeiTorokuPanel のクラスファイル 
- * 
+ * BenmeiTorokuPanel のクラスファイル
+ *
  * @author 自動生成
  */
 public class BenmeiTorokuPanelDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
@@ -133,7 +133,7 @@ public class BenmeiTorokuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtdateBenmeiSyoSakuseibi(TextBoxDate txtdateBenmeiSyoSakuseibi) {
+    public void setTxtdateBenmeiSyoSakuseibi(TextBoxDate txtdateBenmeiSyoSakuseibi) {
         this.getBenmeiTorokuMeisaiPanel().setTxtdateBenmeiSyoSakuseibi(txtdateBenmeiSyoSakuseibi);
     }
 
@@ -143,7 +143,7 @@ public class BenmeiTorokuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtMultiLineBenmeisya(TextBoxMultiLine txtMultiLineBenmeisya) {
+    public void setTxtMultiLineBenmeisya(TextBoxMultiLine txtMultiLineBenmeisya) {
         this.getBenmeiTorokuMeisaiPanel().setTxtMultiLineBenmeisya(txtMultiLineBenmeisya);
     }
 
@@ -153,7 +153,7 @@ public class BenmeiTorokuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtMultiLineShobunNaiyo(TextBoxMultiLine txtMultiLineShobunNaiyo) {
+    public void setTxtMultiLineShobunNaiyo(TextBoxMultiLine txtMultiLineShobunNaiyo) {
         this.getBenmeiTorokuMeisaiPanel().setTxtMultiLineShobunNaiyo(txtMultiLineShobunNaiyo);
     }
 
@@ -163,7 +163,7 @@ public class BenmeiTorokuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtMultiLineBenmeiNaiyo(TextBoxMultiLine txtMultiLineBenmeiNaiyo) {
+    public void setTxtMultiLineBenmeiNaiyo(TextBoxMultiLine txtMultiLineBenmeiNaiyo) {
         this.getBenmeiTorokuMeisaiPanel().setTxtMultiLineBenmeiNaiyo(txtMultiLineBenmeiNaiyo);
     }
 
@@ -173,7 +173,7 @@ public class BenmeiTorokuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtDateBenmeisyoTeishutubi(TextBoxDate txtDateBenmeisyoTeishutubi) {
+    public void setTxtDateBenmeisyoTeishutubi(TextBoxDate txtDateBenmeisyoTeishutubi) {
         this.getBenmeiTorokuMeisaiPanel().setTxtDateBenmeisyoTeishutubi(txtDateBenmeisyoTeishutubi);
     }
 
