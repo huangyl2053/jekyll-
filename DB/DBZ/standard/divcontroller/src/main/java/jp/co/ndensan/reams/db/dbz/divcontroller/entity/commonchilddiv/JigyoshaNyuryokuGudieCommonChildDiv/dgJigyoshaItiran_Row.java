@@ -3,13 +3,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JigyoshaN
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Dec 03 16:04:11 JST 2015 
+ * Wed Jan 13 20:47:01 JST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
 /**
@@ -22,8 +23,8 @@ public class dgJigyoshaItiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
 
     private RString txtJigyoshaNo;
-    private RString txtYukoKaishibiYMD;
-    private RString txtYukoShuryobiYMD;
+    private TextBoxDate txtYukoKaishibiYMD;
+    private TextBoxDate txtYukoShuryobiYMD;
     private RString txtMeisho;
     private RString txtServiceShurui;
     private RString txtJusho;
@@ -32,8 +33,8 @@ public class dgJigyoshaItiran_Row extends DataRow {
     public dgJigyoshaItiran_Row() {
         super();
         this.txtJigyoshaNo = RString.EMPTY;
-        this.txtYukoKaishibiYMD = RString.EMPTY;
-        this.txtYukoShuryobiYMD = RString.EMPTY;
+        this.txtYukoKaishibiYMD = new TextBoxDate();
+        this.txtYukoShuryobiYMD = new TextBoxDate();
         this.txtMeisho = RString.EMPTY;
         this.txtServiceShurui = RString.EMPTY;
         this.txtJusho = RString.EMPTY;
@@ -47,7 +48,7 @@ public class dgJigyoshaItiran_Row extends DataRow {
         this.setOriginalData("txtTelNo", txtTelNo);
     }
 
-    public dgJigyoshaItiran_Row(RString txtJigyoshaNo, RString txtYukoKaishibiYMD, RString txtYukoShuryobiYMD, RString txtMeisho, RString txtServiceShurui, RString txtJusho, RString txtTelNo) {
+    public dgJigyoshaItiran_Row(RString txtJigyoshaNo, TextBoxDate txtYukoKaishibiYMD, TextBoxDate txtYukoShuryobiYMD, RString txtMeisho, RString txtServiceShurui, RString txtJusho, RString txtTelNo) {
         super();
         this.setOriginalData("txtJigyoshaNo", txtJigyoshaNo);
         this.setOriginalData("txtYukoKaishibiYMD", txtYukoKaishibiYMD);
@@ -69,11 +70,11 @@ public class dgJigyoshaItiran_Row extends DataRow {
         return txtJigyoshaNo;
     }
 
-    public RString getTxtYukoKaishibiYMD() {
+    public TextBoxDate getTxtYukoKaishibiYMD() {
         return txtYukoKaishibiYMD;
     }
 
-    public RString getTxtYukoShuryobiYMD() {
+    public TextBoxDate getTxtYukoShuryobiYMD() {
         return txtYukoShuryobiYMD;
     }
 
@@ -98,12 +99,12 @@ public class dgJigyoshaItiran_Row extends DataRow {
         this.txtJigyoshaNo = txtJigyoshaNo;
     }
 
-    public void setTxtYukoKaishibiYMD(RString txtYukoKaishibiYMD) {
+    public void setTxtYukoKaishibiYMD(TextBoxDate txtYukoKaishibiYMD) {
         this.setOriginalData("txtYukoKaishibiYMD", txtYukoKaishibiYMD);
         this.txtYukoKaishibiYMD = txtYukoKaishibiYMD;
     }
 
-    public void setTxtYukoShuryobiYMD(RString txtYukoShuryobiYMD) {
+    public void setTxtYukoShuryobiYMD(TextBoxDate txtYukoShuryobiYMD) {
         this.setOriginalData("txtYukoShuryobiYMD", txtYukoShuryobiYMD);
         this.txtYukoShuryobiYMD = txtYukoShuryobiYMD;
     }
