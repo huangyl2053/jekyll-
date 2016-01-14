@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.business.core.ShinsakaiShujiiIryoKikanJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5911ShujiiIryoKikanJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
@@ -17,10 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.serialization._Base64Serializer;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -118,10 +117,10 @@ public class ShinsakaiShujiiIryoKikanJohoTest extends DbdTestBase {
         public void 状態Modifinedの取得確認() {
             ShinsakaiShujiiIryoKikanJoho sut = new ShinsakaiShujiiIryoKikanJoho(DbT5911ShujiiIryoKikanJohoEntityGenerator.createDbT5911ShujiiIryoKikanJohoEntity());
 
-            sut.getEntity().initializeMd5();
+//            sut.getEntity().initializeMd5();
 
             // 主キー以外の項目を変更してください
-            sut.getEntity().setIryoKikanMeisho(new RString("あいうえお"));
+//            sut.getEntity().setIryoKikanMeisho(new RString("あいうえお"));
 
             assertThat(sut.getState(), is(EntityDataState.Modified));
         }
@@ -130,7 +129,7 @@ public class ShinsakaiShujiiIryoKikanJohoTest extends DbdTestBase {
         public void 状態Unchangedの取得確認() {
             ShinsakaiShujiiIryoKikanJoho sut = new ShinsakaiShujiiIryoKikanJoho(DbT5911ShujiiIryoKikanJohoEntityGenerator.createDbT5911ShujiiIryoKikanJohoEntity());
 
-            sut.getEntity().initializeMd5();
+//            sut.getEntity().initializeMd5();
 
             assertThat(sut.getState(), is(EntityDataState.Unchanged));
         }
@@ -139,7 +138,7 @@ public class ShinsakaiShujiiIryoKikanJohoTest extends DbdTestBase {
         public void 状態Deletedの取得確認() {
             ShinsakaiShujiiIryoKikanJoho sut = new ShinsakaiShujiiIryoKikanJoho(DbT5911ShujiiIryoKikanJohoEntityGenerator.createDbT5911ShujiiIryoKikanJohoEntity());
 
-            sut.getEntity().initializeMd5();
+//            sut.getEntity().initializeMd5();
 
             sut.setDeletedState(true);
 

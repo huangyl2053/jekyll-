@@ -47,11 +47,11 @@ public enum DbT5913ChosainJoho implements IColumnDefinition {
      * 認定調査委託先コード
      * <br/>認定調査委託先情報
      */
-    ninteichosaItakusakiCode(10, 0),
+    ninteiChosaItakusakiCode(10, 0),
     /**
      * 認定調査員コード
      */
-    ninteiChosainNo(8, 0),
+    ninteiChosainCode(8, 0),
     /**
      * 調査員氏名
      */

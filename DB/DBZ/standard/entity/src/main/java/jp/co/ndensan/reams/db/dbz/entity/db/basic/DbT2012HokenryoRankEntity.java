@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -17,8 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  */
 public class DbT2012HokenryoRankEntity extends DbTableEntityBase<DbT2012HokenryoRankEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2012HokenryoRank");
 
@@ -38,8 +38,8 @@ public class DbT2012HokenryoRankEntity extends DbTableEntityBase<DbT2012Hokenryo
     private FlexibleYear sokyuNendo;
 
     /**
-     * getInsertDantaiCd
-     *
+     * insertDantaiCdのgetメソッドです。
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -47,8 +47,8 @@ public class DbT2012HokenryoRankEntity extends DbTableEntityBase<DbT2012Hokenryo
     }
 
     /**
-     * setInsertDantaiCd
-     *
+     * insertDantaiCdのsetメソッドです。
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -56,8 +56,8 @@ public class DbT2012HokenryoRankEntity extends DbTableEntityBase<DbT2012Hokenryo
     }
 
     /**
-     * getIsDeleted
-     *
+     * isDeletedのgetメソッドです。
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -65,17 +65,18 @@ public class DbT2012HokenryoRankEntity extends DbTableEntityBase<DbT2012Hokenryo
     }
 
     /**
-     * setIsDeleted
-     *
+     * isDeletedのsetメソッドです。
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
-     * setLastUpdateReamsLoginId
-     *
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -83,82 +84,83 @@ public class DbT2012HokenryoRankEntity extends DbTableEntityBase<DbT2012Hokenryo
     }
 
     /**
-     * getFukaNendo
-     *
-     * @return fukaNendo
+     * 賦課年度のgetメソッドです。
+     * 
+     * @return 賦課年度
      */
     public FlexibleYear getFukaNendo() {
         return fukaNendo;
     }
 
     /**
-     * setFukaNendo
-     *
-     * @param fukaNendo fukaNendo
+     * 賦課年度のsetメソッドです。
+     * 
+     * @param fukaNendo 賦課年度
      */
-    public void setFukaNendo(FlexibleYear fukaNendo) {
+    public void setFukaNendo(@Nonnull FlexibleYear fukaNendo) {
         this.fukaNendo = fukaNendo;
     }
 
     /**
-     * getShichosonCode
-     *
-     * @return shichosonCode
+     * 市町村コードのgetメソッドです。
+     * 
+     * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
         return shichosonCode;
     }
 
     /**
-     * setShichosonCode
-     *
-     * @param shichosonCode shichosonCode
+     * 市町村コードのsetメソッドです。
+     * 
+     * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(LasdecCode shichosonCode) {
+    public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
     /**
-     * getRankKubun
-     *
-     * @return rankKubun
+     * ランク区分のgetメソッドです。
+     * 
+     * @return ランク区分
      */
     public RankKubun getRankKubun() {
         return rankKubun;
     }
 
     /**
-     * setRankKubun
-     *
-     * @param rankKubun rankKubun
+     * ランク区分のsetメソッドです。
+     * 
+     * @param rankKubun ランク区分
      */
-    public void setRankKubun(RankKubun rankKubun) {
+    public void setRankKubun(@Nonnull RankKubun rankKubun) {
         this.rankKubun = rankKubun;
     }
 
     /**
-     * getSokyuNendo
-     *
-     * @return sokyuNendo
+     * 遡及年度のgetメソッドです。
+     * 
+     * @return 遡及年度
      */
     public FlexibleYear getSokyuNendo() {
         return sokyuNendo;
     }
 
     /**
-     * setSokyuNendo
-     *
-     * @param sokyuNendo sokyuNendo
+     * 遡及年度のsetメソッドです。
+     * 
+     * @param sokyuNendo 遡及年度
      */
-    public void setSokyuNendo(FlexibleYear sokyuNendo) {
+    public void setSokyuNendo(@Nonnull FlexibleYear sokyuNendo) {
         this.sokyuNendo = sokyuNendo;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT2012HokenryoRankEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2012HokenryoRankEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT2012HokenryoRankEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2012HokenryoRankEntity other) {
@@ -187,7 +189,6 @@ public class DbT2012HokenryoRankEntity extends DbTableEntityBase<DbT2012Hokenryo
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -196,4 +197,5 @@ public class DbT2012HokenryoRankEntity extends DbTableEntityBase<DbT2012Hokenryo
     }
 
 // </editor-fold>
+
 }

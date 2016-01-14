@@ -15,14 +15,16 @@ import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJohoI
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.koseishichosonmaster.KoseiShichosonMasterIdentifier;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -48,7 +50,7 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
      * @param 認定調査委託先コード 認定調査委託先コード
      */
     public NinteichosaItakusakiJoho(LasdecCode 市町村コード,
-            RString 認定調査委託先コード) {
+            ChosaItakusakiCode 認定調査委託先コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
         this.entity = new DbT5910NinteichosaItakusakiJohoEntity();
@@ -118,7 +120,7 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
      *
      * @return 認定調査委託先コード
      */
-    public RString get認定調査委託先コード() {
+    public ChosaItakusakiCode get認定調査委託先コード() {
         return entity.getNinteichosaItakusakiCode();
     }
 
@@ -190,7 +192,7 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
      *
      * @return 代表者名
      */
-    public RString get代表者名() {
+    public AtenaMeisho get代表者名() {
         return entity.getDaihyoshaName();
     }
 

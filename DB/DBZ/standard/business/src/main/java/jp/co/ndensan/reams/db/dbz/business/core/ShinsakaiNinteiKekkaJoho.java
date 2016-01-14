@@ -6,13 +6,14 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 要介護認定結果情報のビジネスクラスです。
@@ -41,9 +42,10 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return DbT5102NinteiKekkaJohoEntity
      */
-    public DbT5102NinteiKekkaJohoEntity getEntity() {
-        return entity;
-    }
+//    @Override
+//    public DbT5102NinteiKekkaJohoEntity getEntity() {
+//        return entity;
+//    }
 
     /**
      * DbT5102NinteiKekkaJohoEntityを設定します。
@@ -141,7 +143,7 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
      */
     @Override
     public RString get一次判定結果変更理由() {
-        return entity.getIchijiHnateiKekkaHenkoRiyu();
+        return entity.getIchijiHanteiKekkaHenkoRiyu();
     }
 
     /**
@@ -191,7 +193,7 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
      */
     @Override
     public FlexibleDate get二次判定結果入力年月日() {
-        return entity.getNiniHanteiKekkaInputYMD();
+        return entity.getNijiHanteiKekkaInputYMD();
     }
 
     /**
@@ -258,6 +260,11 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
      */
     public static Builder newBuilder() {
         return new Builder();
+    }
+
+    @Override
+    public INinteiKekkaJohoEntity getEntity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -421,7 +428,7 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
         @Override
         public Builder setIchijiHnateiKekkaHenkoRiyu(RString ichijiHnateiKekkaHenkoRiyu) {
             Objects.requireNonNull(ichijiHnateiKekkaHenkoRiyu);
-            this.entity.setIchijiHnateiKekkaHenkoRiyu(ichijiHnateiKekkaHenkoRiyu);
+            this.entity.setIchijiHanteiKekkaHenkoRiyu(ichijiHnateiKekkaHenkoRiyu);
             return this;
         }
 
@@ -486,7 +493,7 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
         @Override
         public Builder setNiniHanteiKekkaInputYMD(FlexibleDate niniHanteiKekkaInputYMD) {
             Objects.requireNonNull(niniHanteiKekkaInputYMD);
-            this.entity.setNiniHanteiKekkaInputYMD(niniHanteiKekkaInputYMD);
+            this.entity.setNijiHanteiKekkaInputYMD(niniHanteiKekkaInputYMD);
             return this;
         }
 

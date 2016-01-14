@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5212NinteichosahyoKihonChosaScoreItemEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -123,7 +123,7 @@ public class NinteichosahyoKihonChosaScoreItem extends
      * @return 素点項目
      */
     public int get素点項目() {
-        return entity.getReserchItem01();
+        return entity.getResearchItem01();
     }
 
     /**

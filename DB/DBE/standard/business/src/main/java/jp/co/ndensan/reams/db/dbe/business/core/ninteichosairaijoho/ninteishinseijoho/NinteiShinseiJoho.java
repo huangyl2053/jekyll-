@@ -12,13 +12,17 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -452,7 +456,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 認定調査委託先コード
      */
-    public RString get認定調査委託先コード() {
+    public ChosaItakusakiCode get認定調査委託先コード() {
         return entity.getNinteiChosaItakusakiCode();
     }
 
@@ -461,7 +465,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 認定調査員コード
      */
-    public RString get認定調査員コード() {
+    public ChosainCode get認定調査員コード() {
         return entity.getNinteiChosainCode();
     }
 
@@ -479,7 +483,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 主治医医療機関コード
      */
-    public RString get主治医医療機関コード() {
+    public ShujiiIryokikanCode get主治医医療機関コード() {
         return entity.getShujiiIryokikanCode();
     }
 
@@ -488,7 +492,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 主治医コード
      */
-    public RString get主治医コード() {
+    public ShujiiCode get主治医コード() {
         return entity.getShujiiCode();
     }
 

@@ -6,13 +6,15 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaSchedule;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaSchedule.ninteiChosaItakusakiCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaSchedule.ninteiChosaJikanWaku;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaSchedule.ninteiChosaYoteiKaishiTime;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaSchedule.ninteiChosaYoteiShuryoTime;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaSchedule.ninteiChosaYoteiYMD;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaSchedule.ninteiChosainNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaSchedule.ninteichosaItakusakiCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaSchedule.ninteiChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -52,8 +54,8 @@ public class DbT5221NinteichosaScheduleDac implements ISaveable<DbT5221Ninteicho
             RString 認定調査予定開始時間,
             RString 認定調査予定終了時間,
             Code 認定調査時間枠,
-            RString 認定調査委託先コード,
-            RString 認定調査員コード) throws NullPointerException {
+            ChosaItakusakiCode 認定調査委託先コード,
+            ChosainCode 認定調査員コード) throws NullPointerException {
         requireNonNull(認定調査予定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定年月日"));
         requireNonNull(認定調査予定開始時間, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定開始時間"));
         requireNonNull(認定調査予定終了時間, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定終了時間"));
@@ -70,8 +72,8 @@ public class DbT5221NinteichosaScheduleDac implements ISaveable<DbT5221Ninteicho
                                 eq(ninteiChosaYoteiKaishiTime, 認定調査予定開始時間),
                                 eq(ninteiChosaYoteiShuryoTime, 認定調査予定終了時間),
                                 eq(ninteiChosaJikanWaku, 認定調査時間枠),
-                                eq(ninteichosaItakusakiCode, 認定調査委託先コード),
-                                eq(ninteiChosainNo, 認定調査員コード))).
+                                eq(ninteiChosaItakusakiCode, 認定調査委託先コード),
+                                eq(ninteiChosainCode, 認定調査員コード))).
                 toObject(DbT5221NinteichosaScheduleEntity.class);
     }
 

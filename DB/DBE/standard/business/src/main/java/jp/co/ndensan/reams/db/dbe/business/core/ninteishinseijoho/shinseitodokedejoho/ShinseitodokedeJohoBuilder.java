@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinseitodokedejoho;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -85,7 +85,7 @@ public class ShinseitodokedeJohoBuilder {
      */
     public ShinseitodokedeJohoBuilder set申請届出者続柄コード(RString 申請届出者続柄コード) {
         requireNonNull(申請届出者続柄コード, UrSystemErrorMessages.値がnull.getReplacedMessage("申請届出者続柄コード"));
-        entity.setShinseiTodokedeshaTsuzukigaraCode(申請届出者続柄コード);
+        entity.setShinseiTodokedeshaTsuzukigara(申請届出者続柄コード);
         return this;
     }
 

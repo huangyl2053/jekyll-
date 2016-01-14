@@ -5,19 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import java.io.Serializable;
+import java.util.Objects;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.IShujiiIryoKikanJohoEntity;
+import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import java.util.Objects;
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 主治医医療機関情報のビジネスクラスです。
@@ -49,10 +50,10 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
      *
      * @return DbT5911ShujiiIryoKikanJohoEntity
      */
-    @Override
-    public DbT5911ShujiiIryoKikanJohoEntity getEntity() {
-        return entity;
-    }
+//    @Override
+//    public DbT5911ShujiiIryoKikanJohoEntity getEntity() {
+//        return entity;
+//    }
 
     /**
      * DbT5911ShujiiIryoKikanJohoEntityを設定します。
@@ -217,6 +218,11 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
      */
     public static Builder newBuilder() {
         return new Builder();
+    }
+
+    @Override
+    public IShujiiIryoKikanJohoEntity getEntity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

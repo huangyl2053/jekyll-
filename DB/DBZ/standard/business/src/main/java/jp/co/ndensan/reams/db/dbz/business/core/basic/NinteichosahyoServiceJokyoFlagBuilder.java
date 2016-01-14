@@ -78,9 +78,9 @@ public class NinteichosahyoServiceJokyoFlagBuilder {
      * @param サービスの状況 サービスの状況
      * @return {@link NinteichosahyoServiceJokyoFlagBuilder}
      */
-    public NinteichosahyoServiceJokyoFlagBuilder setサービスの状況(int サービスの状況) {
+    public NinteichosahyoServiceJokyoFlagBuilder setサービスの状況(boolean サービスの状況) {
         requireNonNull(サービスの状況, UrSystemErrorMessages.値がnull.getReplacedMessage("サービスの状況"));
-        entity.setServiceJokyo(サービスの状況);
+        entity.setServiceJokyoFlag(サービスの状況);
         return this;
     }
 

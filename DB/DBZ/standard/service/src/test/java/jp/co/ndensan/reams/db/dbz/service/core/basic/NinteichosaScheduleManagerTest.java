@@ -9,8 +9,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5221NinteichosaScheduleEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5221NinteichosaScheduleDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -51,8 +53,8 @@ public class NinteichosaScheduleManagerTest {
         RString 認定調査予定開始時間 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査予定開始時間;
         RString 認定調査予定終了時間 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査予定終了時間;
         Code 認定調査時間枠 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査時間枠;
-        RString 認定調査委託先コード = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査委託先コード;
-        RString 認定調査員コード = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査員コード;
+        ChosaItakusakiCode 認定調査委託先コード = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査委託先コード;
+        ChosainCode 認定調査員コード = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査員コード;
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
@@ -68,7 +70,7 @@ public class NinteichosaScheduleManagerTest {
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(FlexibleDate.class), any(RString.class), any(RString.class), any(Code.class), any(RString.class), any(RString.class))).thenReturn(null);
+            when(dac.selectByKey(any(FlexibleDate.class), any(RString.class), any(RString.class), any(Code.class), any(ChosaItakusakiCode.class), any(ChosainCode.class))).thenReturn(null);
             NinteichosaSchedule result = sut.get認定調査スケジュール情報(認定調査予定年月日, 認定調査予定開始時間, 認定調査予定終了時間, 認定調査時間枠, 認定調査委託先コード, 認定調査員コード);
 
             assertThat(result, is(nullValue()));
@@ -77,7 +79,7 @@ public class NinteichosaScheduleManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5221NinteichosaScheduleEntity entity = DbT5221NinteichosaScheduleEntityGenerator.createDbT5221NinteichosaScheduleEntity();
-            when(dac.selectByKey(any(FlexibleDate.class), any(RString.class), any(RString.class), any(Code.class), any(RString.class), any(RString.class))).thenReturn(entity);
+            when(dac.selectByKey(any(FlexibleDate.class), any(RString.class), any(RString.class), any(Code.class), any(ChosaItakusakiCode.class), any(ChosainCode.class))).thenReturn(entity);
             NinteichosaSchedule result = sut.get認定調査スケジュール情報(認定調査予定年月日, 認定調査予定開始時間, 認定調査予定終了時間, 認定調査時間枠, 認定調査委託先コード, 認定調査員コード);
 
             assertThat(result.get認定調査予定年月日(), is(DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査予定年月日));

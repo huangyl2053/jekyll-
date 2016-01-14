@@ -6,17 +6,18 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 認定調査委託先情報のビジネスクラスです。
@@ -45,9 +46,9 @@ public class ShinsakaiNinteichosaItakusakiJoho implements Serializable, INinteic
      *
      * @return DbT5910NinteichosaItakusakiJohoEntity
      */
-    public DbT5910NinteichosaItakusakiJohoEntity getEntity() {
-        return entity;
-    }
+//    public DbT5910NinteichosaItakusakiJohoEntity getEntity() {
+//        return entity;
+//    }
 
     /**
      * 市町村コードを返します。
@@ -273,6 +274,11 @@ public class ShinsakaiNinteichosaItakusakiJoho implements Serializable, INinteic
      */
     public static Builder newBuilder() {
         return new Builder();
+    }
+
+    @Override
+    public INinteichosaItakusakiJohoEntity getEntity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

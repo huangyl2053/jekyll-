@@ -1,4 +1,4 @@
-﻿fukaNendo,UDD012YSeireki,FlexibleYear,,,,,A
-shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
-rankKubun,varchar,RankKubun,,,,,A
-sokyuNendo,UDD012YSeireki,FlexibleYear,,,,,A
+﻿fukaNendo,UDD012YSeireki,FlexibleYear,,,,,賦課年度,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+rankKubun,varchar,RankKubun,,,,,ランク区分,A
+sokyuNendo,UDD012YSeireki,FlexibleYear,,,,,遡及年度,A

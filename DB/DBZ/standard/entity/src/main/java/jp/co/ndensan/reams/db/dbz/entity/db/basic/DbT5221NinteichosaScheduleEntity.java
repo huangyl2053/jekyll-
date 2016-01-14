@@ -5,6 +5,8 @@ import java.util.UUID;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -21,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  */
 public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221NinteichosaScheduleEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5221NinteichosaSchedule");
 
@@ -43,9 +46,9 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
     @PrimaryKey
     private Code chosaChikuCode;
     @PrimaryKey
-    private RString ninteiChosaItakusakiCode;
+    private ChosaItakusakiCode ninteiChosaItakusakiCode;
     @PrimaryKey
-    private RString ninteiChosainCode;
+    private ChosainCode ninteiChosainCode;
     @PrimaryKey
     private LasdecCode shichosonCode;
     private ShinseishoKanriNo shinseishoKanriNo;
@@ -62,7 +65,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -71,7 +74,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -80,7 +83,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -89,17 +92,16 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -108,7 +110,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 認定調査予定年月日のgetメソッドです。
-     * 
+     *
      * @return 認定調査予定年月日
      */
     public FlexibleDate getNinteiChosaYoteiYMD() {
@@ -117,7 +119,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 認定調査予定年月日のsetメソッドです。
-     * 
+     *
      * @param ninteiChosaYoteiYMD 認定調査予定年月日
      */
     public void setNinteiChosaYoteiYMD(@Nonnull FlexibleDate ninteiChosaYoteiYMD) {
@@ -126,7 +128,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 認定調査予定開始時間のgetメソッドです。
-     * 
+     *
      * @return 認定調査予定開始時間
      */
     public RString getNinteiChosaYoteiKaishiTime() {
@@ -135,7 +137,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 認定調査予定開始時間のsetメソッドです。
-     * 
+     *
      * @param ninteiChosaYoteiKaishiTime 認定調査予定開始時間
      */
     public void setNinteiChosaYoteiKaishiTime(@Nonnull RString ninteiChosaYoteiKaishiTime) {
@@ -144,7 +146,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 認定調査予定終了時間のgetメソッドです。
-     * 
+     *
      * @return 認定調査予定終了時間
      */
     public RString getNinteiChosaYoteiShuryoTime() {
@@ -153,7 +155,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 認定調査予定終了時間のsetメソッドです。
-     * 
+     *
      * @param ninteiChosaYoteiShuryoTime 認定調査予定終了時間
      */
     public void setNinteiChosaYoteiShuryoTime(@Nonnull RString ninteiChosaYoteiShuryoTime) {
@@ -162,7 +164,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 認定調査時間枠のgetメソッドです。
-     * 
+     *
      * @return 認定調査時間枠
      */
     public Code getNinteiChosaJikanWaku() {
@@ -171,7 +173,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 認定調査時間枠のsetメソッドです。
-     * 
+     *
      * @param ninteiChosaJikanWaku 認定調査時間枠
      */
     public void setNinteiChosaJikanWaku(@Nonnull Code ninteiChosaJikanWaku) {
@@ -180,7 +182,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 調査地区コードのgetメソッドです。
-     * 
+     *
      * @return 調査地区コード
      */
     public Code getChosaChikuCode() {
@@ -189,7 +191,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 調査地区コードのsetメソッドです。
-     * 
+     *
      * @param chosaChikuCode 調査地区コード
      */
     public void setChosaChikuCode(@Nonnull Code chosaChikuCode) {
@@ -200,10 +202,10 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      * 認定調査委託先コードのgetメソッドです。
      * <br/>
      * <br/>認定調査委託先情報
-     * 
+     *
      * @return 認定調査委託先コード
      */
-    public RString getNinteiChosaItakusakiCode() {
+    public ChosaItakusakiCode getNinteiChosaItakusakiCode() {
         return ninteiChosaItakusakiCode;
     }
 
@@ -211,10 +213,10 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      * 認定調査委託先コードのsetメソッドです。
      * <br/>
      * <br/>認定調査委託先情報
-     * 
+     *
      * @param ninteiChosaItakusakiCode 認定調査委託先コード
      */
-    public void setNinteiChosaItakusakiCode(@Nonnull RString ninteiChosaItakusakiCode) {
+    public void setNinteiChosaItakusakiCode(@Nonnull ChosaItakusakiCode ninteiChosaItakusakiCode) {
         this.ninteiChosaItakusakiCode = ninteiChosaItakusakiCode;
     }
 
@@ -222,10 +224,10 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      * 認定調査員コードのgetメソッドです。
      * <br/>
      * <br/>認定調査員情報
-     * 
+     *
      * @return 認定調査員コード
      */
-    public RString getNinteiChosainCode() {
+    public ChosainCode getNinteiChosainCode() {
         return ninteiChosainCode;
     }
 
@@ -233,10 +235,10 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      * 認定調査員コードのsetメソッドです。
      * <br/>
      * <br/>認定調査員情報
-     * 
+     *
      * @param ninteiChosainCode 認定調査員コード
      */
-    public void setNinteiChosainCode(@Nonnull RString ninteiChosainCode) {
+    public void setNinteiChosainCode(@Nonnull ChosainCode ninteiChosainCode) {
         this.ninteiChosainCode = ninteiChosainCode;
     }
 
@@ -244,7 +246,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      * 市町村コードのgetメソッドです。
      * <br/>
      * <br/>市町村コード
-     * 
+     *
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
@@ -255,7 +257,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      * 市町村コードのsetメソッドです。
      * <br/>
      * <br/>市町村コード
-     * 
+     *
      * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
@@ -266,7 +268,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      * 申請書管理番号のgetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @return 申請書管理番号
      */
     @CheckForNull
@@ -278,7 +280,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      * 申請書管理番号のsetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @param shinseishoKanriNo 申請書管理番号
      */
     public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
@@ -289,7 +291,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      * 予約状況のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：予約状況）
-     * 
+     *
      * @return 予約状況
      */
     public Code getYoyakuJokyo() {
@@ -300,7 +302,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      * 予約状況のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：予約状況）
-     * 
+     *
      * @param yoyakuJokyo 予約状況
      */
     public void setYoyakuJokyo(@Nonnull Code yoyakuJokyo) {
@@ -311,7 +313,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      * 予約可能フラグのgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：予約可能フラグ）
-     * 
+     *
      * @return 予約可能フラグ
      */
     public boolean getYoyakuKaoFlag() {
@@ -322,7 +324,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      * 予約可能フラグのsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：予約可能フラグ）
-     * 
+     *
      * @param yoyakuKaoFlag 予約可能フラグ
      */
     public void setYoyakuKaoFlag(@Nonnull boolean yoyakuKaoFlag) {
@@ -331,7 +333,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 備考のgetメソッドです。
-     * 
+     *
      * @return 備考
      */
     @CheckForNull
@@ -341,7 +343,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 備考のsetメソッドです。
-     * 
+     *
      * @param biko 備考
      */
     public void setBiko(RString biko) {
@@ -350,7 +352,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 場所のgetメソッドです。
-     * 
+     *
      * @return 場所
      */
     @CheckForNull
@@ -360,7 +362,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 場所のsetメソッドです。
-     * 
+     *
      * @param basho 場所
      */
     public void setBasho(RString basho) {
@@ -369,7 +371,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 駐車場のgetメソッドです。
-     * 
+     *
      * @return 駐車場
      */
     @CheckForNull
@@ -379,7 +381,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 駐車場のsetメソッドです。
-     * 
+     *
      * @param chushajo 駐車場
      */
     public void setChushajo(RString chushajo) {
@@ -388,7 +390,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 立会人１のgetメソッドです。
-     * 
+     *
      * @return 立会人１
      */
     @CheckForNull
@@ -398,7 +400,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 立会人１のsetメソッドです。
-     * 
+     *
      * @param tachiainin1 立会人１
      */
     public void setTachiainin1(RString tachiainin1) {
@@ -407,7 +409,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 連絡先１のgetメソッドです。
-     * 
+     *
      * @return 連絡先１
      */
     @CheckForNull
@@ -417,7 +419,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 連絡先１のsetメソッドです。
-     * 
+     *
      * @param renrakusaki1 連絡先１
      */
     public void setRenrakusaki1(TelNo renrakusaki1) {
@@ -426,7 +428,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 立会人２のgetメソッドです。
-     * 
+     *
      * @return 立会人２
      */
     @CheckForNull
@@ -436,7 +438,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 立会人２のsetメソッドです。
-     * 
+     *
      * @param tachiainin2 立会人２
      */
     public void setTachiainin2(RString tachiainin2) {
@@ -445,7 +447,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 連絡先２のgetメソッドです。
-     * 
+     *
      * @return 連絡先２
      */
     @CheckForNull
@@ -455,7 +457,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 連絡先２のsetメソッドです。
-     * 
+     *
      * @param renrakusaki2 連絡先２
      */
     public void setRenrakusaki2(TelNo renrakusaki2) {
@@ -464,7 +466,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 対象者メモのgetメソッドです。
-     * 
+     *
      * @return 対象者メモ
      */
     @CheckForNull
@@ -474,7 +476,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * 対象者メモのsetメソッドです。
-     * 
+     *
      * @param taishoshaMemo 対象者メモ
      */
     public void setTaishoshaMemo(RString taishoshaMemo) {
@@ -483,10 +485,9 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * このエンティティの主キーが他の{@literal DbT5221NinteichosaScheduleEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT5221NinteichosaScheduleEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT5221NinteichosaScheduleEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5221NinteichosaScheduleEntity other) {
@@ -548,6 +549,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -556,5 +558,4 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
     }
 
 // </editor-fold>
-
 }

@@ -8,8 +8,10 @@ package jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho;
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -36,15 +38,15 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
      * @param 認定調査員コード 認定調査員コード
      */
     public ChosainJoho(LasdecCode 市町村コード,
-            RString 認定調査委託先コード,
-            RString 認定調査員コード) {
+            ChosaItakusakiCode 認定調査委託先コード,
+            ChosainCode 認定調査員コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
         requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
         this.entity = new DbT5913ChosainJohoEntity();
         this.entity.setShichosonCode(市町村コード);
-        this.entity.setNinteichosaItakusakiCode(認定調査委託先コード);
-        this.entity.setNinteiChosainNo(認定調査員コード);
+        this.entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
+        this.entity.setNinteiChosainCode(認定調査員コード);
         this.id = new ChosainJohoIdentifier(
                 市町村コード,
                 認定調査委託先コード,
@@ -62,8 +64,8 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員情報"));
         this.id = new ChosainJohoIdentifier(
                 entity.getShichosonCode(),
-                entity.getNinteichosaItakusakiCode(),
-                entity.getNinteiChosainNo());
+                entity.getNinteiChosaItakusakiCode(),
+                entity.getNinteiChosainCode());
     }
 
     /**
@@ -94,8 +96,8 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
      *
      * @return 認定調査委託先コード
      */
-    public RString get認定調査委託先コード() {
-        return entity.getNinteichosaItakusakiCode();
+    public ChosaItakusakiCode get認定調査委託先コード() {
+        return entity.getNinteiChosaItakusakiCode();
     }
 
     /**
@@ -103,8 +105,8 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
      *
      * @return 認定調査員コード
      */
-    public RString get認定調査員コード() {
-        return entity.getNinteiChosainNo();
+    public ChosainCode get認定調査員コード() {
+        return entity.getNinteiChosainCode();
     }
 
     /**
