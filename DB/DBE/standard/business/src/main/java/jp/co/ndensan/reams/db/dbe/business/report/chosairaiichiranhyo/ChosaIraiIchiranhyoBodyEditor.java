@@ -43,7 +43,7 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
         source.listIchiranhyo_9 = new RDate(item.getListIchiranhyo_9().toString()).wareki().fillType(FillType.ZERO).toDateString();
         source.listIchiranhyo_10 = item.getListIchiranhyo_10();
         source.listIchiranhyo_11 = item.getListIchiranhyo_11();
-        source.listIchiranhyo_12 = item.getListIchiranhyo_12();
+        source.listIchiranhyo_12 = new RDate(item.getListIchiranhyo_12().toString()).wareki().fillType(FillType.ZERO).toDateString();
         return source;
     }
 }

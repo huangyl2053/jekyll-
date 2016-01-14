@@ -51,7 +51,7 @@ public class ChosaIraiIchiranhyoReport extends Report<ChosaIraiIchiranhyoReportS
     }
 
     @Override
-    protected void writeBy(ReportSourceWriter<ChosaIraiIchiranhyoReportSource> reportSourceWriter) {
+    public void writeBy(ReportSourceWriter<ChosaIraiIchiranhyoReportSource> reportSourceWriter) {
         for (ChosaIraiIchiranhyoBodyItem bodyItem : bodyItemList) {
             IChosaIraiIchiranhyoEditor headerEditor = new ChosaIraiIchiranhyoHeaderEditor(headItem);
             IChosaIraiIchiranhyoEditor bodyEditor = new ChosaIraiIchiranhyoBodyEditor(bodyItem);
