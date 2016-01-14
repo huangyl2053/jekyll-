@@ -16,21 +16,21 @@ import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.Tenshu
 public interface ITennyuTenshutsuHoryuTaishoshaMapper {
 
     /**
-     * 転出保留対象者情報の取得する
+     * 転出保留対象者情報の取得する。
      *
      * @return List<TennyuTenshutsuHoryuEntity>
      */
     List<TennyushutsuHoryuTaishoshaEntity> get転出保留対象者情報の取得処理();
 
     /**
-     * 転入 広域保留対象者情報の取得する
+     * 転入 広域保留対象者情報の取得する。
      *
      * @return List<TennyuTenshutsuHoryuEntity>
      */
     List<TenshutsuHoryuTaishoshaEntity> get転入保留対象者情報の取得処理();
 
     /**
-     * 転入 広域保留対象者情報の取得する
+     * 転入 広域保留対象者情報の取得する。
      *
      * @return List<TennyuTenshutsuHoryuEntity>
      */

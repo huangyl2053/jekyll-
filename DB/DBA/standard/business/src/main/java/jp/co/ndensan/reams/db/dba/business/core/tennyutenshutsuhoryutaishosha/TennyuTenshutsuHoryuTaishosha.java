@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
- * 転出転入保留対象者情報の取得します
+ * 転出転入保留対象者情報の取得します。
  */
 public interface TennyuTenshutsuHoryuTaishosha {
 

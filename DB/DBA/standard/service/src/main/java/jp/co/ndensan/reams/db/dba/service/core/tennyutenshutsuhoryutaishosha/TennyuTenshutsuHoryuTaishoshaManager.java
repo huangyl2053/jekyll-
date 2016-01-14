@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
- * 転入転出保留対象者管理のMapperクラスです
+ * 転入転出保留対象者管理のMapperクラスです。
  */
 public class TennyuTenshutsuHoryuTaishoshaManager {
 
@@ -71,7 +71,7 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
     }
 
     /**
-     * 転出保留対象者情報の取得処理します
+     * 転出保留対象者情報の取得処理します。
      *
      * @return SearchResult<TennyuTenshutsuHoryuTaishosha>
      */
@@ -90,7 +90,7 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
     }
 
     /**
-     * 転入保留対象者情報の取得処理します
+     * 転入保留対象者情報の取得処理します。
      *
      * @return SearchResult<TennyuTenshutsuHoryuTaishosha>
      */
@@ -116,7 +116,7 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
     }
 
     /**
-     * 広域保留対象者 情報の取得処理します
+     * 広域保留対象者 情報の取得処理します。
      *
      * @return SearchResult<TennyuTenshutsuHoryuTaishosha>
      */
@@ -135,7 +135,7 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
     }
 
     /**
-     * 転入転出保留対象者情報を物理削除します n
+     * 転入転出保留対象者情報を物理削除します。
      *
      * @param 識別コード ShikibetsuCode
      * @param 履歴番号 Decimal
