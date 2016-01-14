@@ -38,7 +38,7 @@ public final class DbT5116IchijiHanteiKekkaJohoEntityGenerator {
     public static final int DEFAULT_中間評価項目得点第5群 = 1;
     public static final int DEFAULT_中間評価項目得点第6群 = 1;
     public static final int DEFAULT_中間評価項目得点第7群 = 1;
-    public static final Code DEFAULT_要介護認定一次判定警告コード = new Code("1");
+    public static final RString DEFAULT_要介護認定一次判定警告コード = new RString("1");
     public static final Code DEFAULT_要介護認定状態の安定性コード = new Code("1");
     public static final Decimal DEFAULT_認知症自立度Ⅱ以上の蓋然性 = new Decimal("1");
     public static final Code DEFAULT_認知機能及び状態安定性から推定される給付区分コード = new Code("1");

@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 認定調査票（概況調査）サービスの状況フラグテーブルの項目定義クラスです。
  */
 public enum DbT5208NinteichosahyoServiceJokyoFlag implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -54,9 +54,13 @@ public enum DbT5208NinteichosahyoServiceJokyoFlag implements IColumnDefinition {
      */
     remban(5, 0),
     /**
-     * サービスの状況
+     * 厚労省IF識別コード
      */
-    serviceJokyo(5, 0);
+    koroshoIfShikibetsuCode(2147483647, 0),
+    /**
+     * サービスの状況フラグ
+     */
+    serviceJokyoFlag(1, 0);
 
     private final int maxLength;
     private final int scale;
