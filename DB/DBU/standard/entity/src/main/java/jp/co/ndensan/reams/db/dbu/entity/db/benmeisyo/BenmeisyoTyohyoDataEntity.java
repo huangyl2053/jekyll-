@@ -27,11 +27,11 @@ public class BenmeisyoTyohyoDataEntity {
     private FlexibleDate 弁明書作成日;
     private RString 弁明の件名;
     private RString 弁明の内容;
-    private RString 認証者役職名;
-    private RString 認証者氏名;
-    private RString 電子公印;
-    private RString 公印省略;
-    private RString 公印文字列;
+//    private RString 認証者役職名;
+//    private RString 認証者氏名;
+//    private RString 電子公印;
+//    private RString 公印省略;
+//    private RString 公印文字列;
     private RString 文言;
     private HihokenshaNo 被保険者番号;
     private IName 被保険者氏名;
