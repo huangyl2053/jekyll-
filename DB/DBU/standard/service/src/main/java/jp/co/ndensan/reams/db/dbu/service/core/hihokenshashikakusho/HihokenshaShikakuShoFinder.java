@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.service.core.hihokenshashikakusho;
 
+import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.kofusho.KofushoShurui;
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashikakushodata.HihokenshaShikakuShoDataParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.hihokenshashikakushodataentity.HihokenshaShikakuShoDataEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
@@ -83,13 +84,13 @@ public class HihokenshaShikakuShoFinder {
         HihokenshaShikakuShoDataEntity hihokenshaShikakuShoDataEntity = new HihokenshaShikakuShoDataEntity();
         hihokenshaShikakuShoDataEntity.setHihokenshaNo(hihokenshaShikakuParameter.getHihokenshaNo());
         if (hihokenshaShikakuParameter.getMenuId().equals(MENUID_DBUMN120001)) {
-            hihokenshaShikakuShoDataEntity.setKofuShoShurui(new RString("0001"));
+            hihokenshaShikakuShoDataEntity.setKofuShoShurui(KofushoShurui.被保険者証.getコード());
             hihokenshaShikakuShoDataEntity.setYukoKigenYMD(FlexibleDate.EMPTY);
             hihokenshaShikakuShoDataEntity.setShinYoshikiSumiKubunCode(ShoYoshikiKubun.新様式.getコード());
             hihokenshaShikakuShoDataEntity.setShoYoshikiKubunCode(ShoYoshikiKubun.新様式２.getコード());
         }
         if (hihokenshaShikakuParameter.getMenuId().equals(MENUID_DBUMN120002)) {
-            hihokenshaShikakuShoDataEntity.setKofuShoShurui(new RString("0002"));
+            hihokenshaShikakuShoDataEntity.setKofuShoShurui(KofushoShurui.資格者証.getコード());
             hihokenshaShikakuShoDataEntity.setYukoKigenYMD(hihokenshaShikakuParameter.getYukoKigenYMD());
             hihokenshaShikakuShoDataEntity.setShinYoshikiSumiKubunCode(RString.EMPTY);
             hihokenshaShikakuShoDataEntity.setShoYoshikiKubunCode(RString.EMPTY);
