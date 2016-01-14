@@ -50,7 +50,7 @@ public class DBU0130011Main {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
             createHandler(div).update老健受給情報();
         }
