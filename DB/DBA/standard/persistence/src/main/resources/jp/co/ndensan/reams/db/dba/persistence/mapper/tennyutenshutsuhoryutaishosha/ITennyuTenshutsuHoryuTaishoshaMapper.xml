@@ -67,8 +67,8 @@
         ,DbT1010TennyushutsuHoryuTaishosha."torokuIdoYMD" AS "torokuIdoYMD"
         ,DbT1010TennyushutsuHoryuTaishosha."jusho" AS "jusho"
         FROM rgdb."DbT1010TennyushutsuHoryuTaishosha" DbT1010TennyushutsuHoryuTaishosha
-        <!--        WHERE
-        NOT EXISTS ( SELECT * FROM rgdb."DbT7051KoseiShichosonMaster"  DbT7051KoseiShichosonMaster WHERE DbT7051KoseiShichosonMaster."shichosonCode" =  substr(DbT1010TennyushutsuHoryuTaishosha."zenkokuJushoCode" , 1 ,5))-->
+        WHERE
+        NOT EXISTS ( SELECT * FROM rgdb."DbT7051KoseiShichosonMaster"  DbT7051KoseiShichosonMaster WHERE DbT7051KoseiShichosonMaster."shichosonCode" =  substr(DbT1010TennyushutsuHoryuTaishosha."shichosonCode" , 1 ,5))
     </select>
     <resultMap id="resultMap_HoryuEntity" type="jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaEntity" autoMapping="true">
         <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
@@ -106,8 +106,8 @@
         ,DbT1010TennyushutsuHoryuTaishosha."torokuIdoYMD" AS "torokuIdoYMD"
         ,DbT1010TennyushutsuHoryuTaishosha."jusho" AS "jusho"
         FROM rgdb."DbT1010TennyushutsuHoryuTaishosha" DbT1010TennyushutsuHoryuTaishosha
-        <!--        WHERE
-        NOT EXISTS ( SELECT * FROM rgdb."DbT7051KoseiShichosonMaster"  DbT7051KoseiShichosonMaster WHERE DbT7051KoseiShichosonMaster."shichosonCode" =  substr(DbT1010TennyushutsuHoryuTaishosha."zenkokuJushoCode" , 1 ,5))-->
+        WHERE
+        NOT EXISTS ( SELECT * FROM rgdb."DbT7051KoseiShichosonMaster"  DbT7051KoseiShichosonMaster WHERE DbT7051KoseiShichosonMaster."shichosonCode" =  substr(DbT1010TennyushutsuHoryuTaishosha."shichosonCode" , 1 ,5))
     </select>
     <resultMap id="resultMap_TenshutsuEntity" type="jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaEntity" autoMapping="true">
         <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>

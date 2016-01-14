@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiToku
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  *
@@ -80,9 +81,10 @@ public interface INenreiToutatsuYoteishaCheckListMapper {
     /**
      * UrT0508SeikatsuHogoJukyushaEntity 生活保護受給者リスト。
      *
+     * @param shikibetsuCode 識別コード
      * @return 生活保護受給者リストList<UrT0508SeikatsuHogoJukyushaEntity>
      */
-    List<UrT0508SeikatsuHogoJukyushaEntity> getSeikatsuHogojyu();
+    List<UrT0508SeikatsuHogoJukyushaEntity> getSeikatsuHogojyu(ShikibetsuCode shikibetsuCode);
 
     int getInsert(DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanriEntity);
 }

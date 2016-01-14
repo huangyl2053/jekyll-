@@ -33,10 +33,12 @@ public class ShukeiInfo {
         shukeiInfo.put(new RString("203"), new RString("3：18：0100、0200"));
     }
 
-    public static RString getShukeiInfo(RString key) {
-        return shukeiInfo.get(key);
-    }
-
+    /**
+     * 統計対象区分を取得します。
+     *
+     * @param key 様式種類コード
+     * @return 統計対象区分
+     */
     public static RString getToukeiTaishoKubun(RString key) {
         List<RString> shukei = shukeiInfo.get(key).split("：");
         if (0 < shukei.size()) {
@@ -45,6 +47,12 @@ public class ShukeiInfo {
         return RString.EMPTY;
     }
 
+    /**
+     * 表番号を取得します。
+     *
+     * @param key 様式種類コード
+     * @return 表番号
+     */
     public static Code getHyoNo(RString key) {
         List<RString> shukei = shukeiInfo.get(key).split("：");
         if (1 < shukei.size()) {
@@ -53,6 +61,12 @@ public class ShukeiInfo {
         return Code.EMPTY;
     }
 
+    /**
+     * 集計番号リストを取得します。
+     *
+     * @param key 様式種類コード
+     * @return 集計番号リスト
+     */
     public static List<Code> getShukeiNo(RString key) {
         List<Code> shukeiNoCodeList = new ArrayList<>();
         List<RString> shukei = shukeiInfo.get(key).split("：");

@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class JyukiRendoTorokushaListBatch {
 
     private static final RString 印刷時刻 = new RString("   時  分  秒");
-    private static final int ページ数 = 0;
+    private int ページ数 = 0;
 
     /**
      * 帳票データ作成
@@ -40,10 +40,11 @@ public class JyukiRendoTorokushaListBatch {
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
 
         for (JyukiRendoJouhouEntity jyukiRendoJouhouEntity : entity.get住基連動情報()) {
+            ページ数 = ページ数 + 1;
             JyukiRendoTorokushaListTyouHyouListEntity jyukiRendoTorokushaListTyouHyouListEntity
                     = new JyukiRendoTorokushaListTyouHyouListEntity();
             jyukiRendoTorokushaListTyouHyouListEntity.set印刷日時(new RString(印刷日時.toString() + 印刷時刻.toString()));
-            jyukiRendoTorokushaListTyouHyouListEntity.setページ数(new RString(String.valueOf(ページ数 + 1)));
+            jyukiRendoTorokushaListTyouHyouListEntity.setページ数(new RString(String.valueOf(ページ数)));
             jyukiRendoTorokushaListTyouHyouListEntity.set帳票タイトル(new RString("住基連動登録者リスト"));
             jyukiRendoTorokushaListTyouHyouListEntity.set市町村コード(new RString(entity.get市町村コード().toString()));
             jyukiRendoTorokushaListTyouHyouListEntity.set市町村名(entity.get市町村名());
@@ -118,8 +119,8 @@ public class JyukiRendoTorokushaListBatch {
                     jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_異動情報4(),
                     jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_異動情報5(),
                     jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_異動情報6(),
-                    jyukiRendoTorokushaListTyouHyouListEntity.getページ数(),
-                    jyukiRendoTorokushaListTyouHyouListEntity.get対象情報タイトル());
+                    jyukiRendoTorokushaListTyouHyouListEntity.get対象情報タイトル(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.getページ数());
             list.add(jukiRendoTorokuListItem);
         }
         return list;

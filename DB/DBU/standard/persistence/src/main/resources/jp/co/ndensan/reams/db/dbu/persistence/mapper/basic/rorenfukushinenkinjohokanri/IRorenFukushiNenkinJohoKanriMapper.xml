@@ -19,14 +19,15 @@
         AND
         DbT7006."jukyuShuryoYMD"<![CDATA[<=]]> #{jukyuShuryoYMD}
         )
-        OR
+        OR(
         DbT7006."jukyuKaishiYMD"<![CDATA[>=]]> #{jukyuKaishiYMD}
         AND
         DbT7006."jukyuKaishiYMD"<![CDATA[<]]> #{jukyuShuryoYMD}
         )
-        OR
+        OR(
         DbT7006."jukyuKaishiYMD"<![CDATA[<=]]> #{jukyuKaishiYMD}
         AND
         DbT7006."jukyuShuryoYMD"<![CDATA[>=]]> #{jukyuShuryoYMD}
+        ))
     </select>
 </mapper>

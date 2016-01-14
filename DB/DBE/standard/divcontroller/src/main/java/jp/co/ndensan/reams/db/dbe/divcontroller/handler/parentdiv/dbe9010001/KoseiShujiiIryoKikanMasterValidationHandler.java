@@ -130,7 +130,10 @@ public class KoseiShujiiIryoKikanMasterValidationHandler {
      */
     public boolean isUpdate() {
         KoseiShujiiIryoKikanMasterHandler handler = new KoseiShujiiIryoKikanMasterHandler(div);
-        return !handler.getInputDiv().equals(div.getShujiiJohoInput().getHiddenInputDiv());
+        if (!handler.getInputDiv().equals(div.getShujiiJohoInput().getHiddenInputDiv())) {
+            return true;
+        }
+        return false;
     }
 
     private static class IdocheckMessages implements IValidationMessage {

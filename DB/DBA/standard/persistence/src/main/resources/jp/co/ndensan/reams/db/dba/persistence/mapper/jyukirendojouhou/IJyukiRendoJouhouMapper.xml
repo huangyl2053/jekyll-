@@ -570,7 +570,7 @@
         AND B."isDeleted" = FALSE
         AND B."insertReamsLoginId" = 'anonymous'
         ORDER BY
-            B."shikibetsuCode" DESC
+            B."shikibetsuCode"
     </select>
         
     <select id="getTekiyoJogaishaDaichoList_0012Code" resultMap="resultMap_getTekiyoJogaishaDaichoList" 

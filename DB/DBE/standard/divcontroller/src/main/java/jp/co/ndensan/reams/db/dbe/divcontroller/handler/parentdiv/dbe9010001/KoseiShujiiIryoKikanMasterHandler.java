@@ -229,7 +229,8 @@ public class KoseiShujiiIryoKikanMasterHandler {
      */
     public ShujiiIryoKikanJoho editShujiiIryoKikanJoho(ShujiiIryoKikanJoho shujiiIryoKikanJoho) {
         return shujiiIryoKikanJoho.createBuilderForEdit()
-                .set医療機関コード(new IryoKikanCode(div.getShujiiJohoInput().getTxtiryokikanCode().getValue()))
+                .set医療機関コード(div.getShujiiJohoInput().getTxtiryokikanCode().getValue().isEmpty() ? null
+                        : new IryoKikanCode(div.getShujiiJohoInput().getTxtiryokikanCode().getValue()))
                 .set医療機関名称(div.getShujiiJohoInput().getTxtiryokikanname().getValue())
                 .set医療機関名称カナ(div.getShujiiJohoInput().getTxtiryokikanKananame().getValue())
                 .set郵便番号(div.getShujiiJohoInput().getTxtYubinNo().getValue())

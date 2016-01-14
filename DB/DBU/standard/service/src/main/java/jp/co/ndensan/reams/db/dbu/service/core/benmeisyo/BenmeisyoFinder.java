@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSour
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.ur.urz.service.report.core.IReportWriter;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -40,7 +41,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.report.IReportWriter;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -54,7 +54,7 @@ public class BenmeisyoFinder {
     private static final int 長_4 = 4;
     private final MapperProvider mapperProvider;
     private final IReportWriter iReportWriter;
-    //TODO　コンフィグキーのEnumクラスが存在しない　QA:426　2016/01/11
+    //TODO　コンフィグキーのEnumクラスが存在しない　QA:441　2016/01/13
     private Enum 不服申し立て弁明書_送付先情報_郵便番号;
     private Enum 不服申し立て弁明書_送付先情報_住所１;
     private Enum 不服申し立て弁明書_送付先情報_住所２;
@@ -71,8 +71,7 @@ public class BenmeisyoFinder {
      */
     public BenmeisyoFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.iReportWriter = InstanceProvider.create(IReportWriter.class);
-
+        this.iReportWriter = InstanceProvider.createWithCustomize(IReportWriter.class);
     }
 
     /**
@@ -81,9 +80,9 @@ public class BenmeisyoFinder {
      * @param mapperProvider
      * @param iReportWriter
      */
-    public BenmeisyoFinder(MapperProvider mapperProvider, IReportWriter iReportWriter) {
+    BenmeisyoFinder(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
-        this.iReportWriter = iReportWriter;
+        this.iReportWriter = InstanceProvider.createWithCustomize(IReportWriter.class);
     }
 
     /**
@@ -92,7 +91,7 @@ public class BenmeisyoFinder {
      * @return {@link InstanceProvider#create}にて生成した{@link BenmeisyoFinder}のインスタンス
      */
     public static BenmeisyoFinder createInstance() {
-        return InstanceProvider.create(BenmeisyoFinder.class);
+        return new BenmeisyoFinder();
     }
 
     /**

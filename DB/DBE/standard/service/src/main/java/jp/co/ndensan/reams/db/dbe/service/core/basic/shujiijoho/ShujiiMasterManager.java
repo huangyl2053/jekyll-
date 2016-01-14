@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  * 主治医情報のCSV出力クラスです。
  */
 public class ShujiiMasterManager {
+    
+    private static final int BYTE = 1024;
 
     /**
      * コンストラクタです。
@@ -46,7 +48,7 @@ public class ShujiiMasterManager {
         RString spoolWorkPath = Path.getTmpDirectoryPath();
         RString filePath = Path.combinePath(spoolWorkPath, new RString("主治医情報.csv"));
         if (!File.exists(filePath)) {
-            File.createFile(filePath, new byte[1024]);
+            File.createFile(filePath, new byte[BYTE]);
         }
         try (CsvWriter writer = new CsvWriter.InstanceBuilder(filePath)
                 .setEnclosure(new RString("\""))
