@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.NinshoshaDenshiKoinDataEnt
 import jp.co.ndensan.reams.db.dbu.persistence.benmeisyo.BenmeisyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.ShobunShuruiCode;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -29,7 +30,6 @@ import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSour
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.service.report.core.IReportWriter;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -53,25 +53,12 @@ public class BenmeisyoFinder {
     private static final RString 文言_部分 = new RString("@@@@");
     private static final int 長_4 = 4;
     private final MapperProvider mapperProvider;
-    private final IReportWriter iReportWriter;
-    //TODO　コンフィグキーのEnumクラスが存在しない　QA:441　2016/01/13
-    private Enum 不服申し立て弁明書_送付先情報_郵便番号;
-    private Enum 不服申し立て弁明書_送付先情報_住所１;
-    private Enum 不服申し立て弁明書_送付先情報_住所２;
-    private Enum 不服申し立て弁明書_送付先情報_住所３;
-    private Enum 不服申し立て弁明書_送付先情報_名称１;
-    private Enum 不服申し立て弁明書_送付先情報_名称２;
-    private Enum 不服申し立て弁明書_定型文_文言１;
-    private Enum 不服申し立て弁明書_定型文_文言２;
-    private Enum 不服申し立て弁明書_定型文_文言３;
-    private Enum 不服申し立て弁明書_認証者_種別コード;
 
     /**
      * コンストラクタです。
      */
     public BenmeisyoFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.iReportWriter = InstanceProvider.createWithCustomize(IReportWriter.class);
     }
 
     /**
@@ -82,7 +69,7 @@ public class BenmeisyoFinder {
      */
     BenmeisyoFinder(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
-        this.iReportWriter = InstanceProvider.createWithCustomize(IReportWriter.class);
+//        this.iReportWriter = InstanceProvider.createWithCustomize(IReportWriter.class);
     }
 
     /**
@@ -104,7 +91,8 @@ public class BenmeisyoFinder {
      */
     public BenmeisyoTyohyoDataEntity setBenmeisyoTyohyoData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日) {
         BenmeisyoTyohyoDataEntity benmeisyoTyohyoDataEntity = new BenmeisyoTyohyoDataEntity();
-        benmeisyoTyohyoDataEntity.set送付先郵便番号(BusinessConfig.get(不服申し立て弁明書_送付先情報_郵便番号, SubGyomuCode.DBZ介護共通));
+        benmeisyoTyohyoDataEntity.set送付先郵便番号(BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_郵便番号,
+                SubGyomuCode.DBU介護統計報告));
         benmeisyoTyohyoDataEntity.set送付先住所(this.get送付先住所());
         benmeisyoTyohyoDataEntity.set送付先名称(this.get送付先名称());
         BenmeiJohoEntity benmeiJohoEntity = this.getBenmeiJohoData(識別コード, 被保険者番号, 審査請求届出日);
@@ -130,23 +118,23 @@ public class BenmeisyoFinder {
 
     private RString get送付先住所() {
         StringBuilder 送付先住所 = new StringBuilder();
-        送付先住所.append(BusinessConfig.get(不服申し立て弁明書_送付先情報_住所１, SubGyomuCode.DBZ介護共通));
-        送付先住所.append(BusinessConfig.get(不服申し立て弁明書_送付先情報_住所２, SubGyomuCode.DBZ介護共通));
-        送付先住所.append(BusinessConfig.get(不服申し立て弁明書_送付先情報_住所３, SubGyomuCode.DBZ介護共通));
+        送付先住所.append(BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_住所１, SubGyomuCode.DBU介護統計報告));
+        送付先住所.append(BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_住所２, SubGyomuCode.DBU介護統計報告));
+        送付先住所.append(BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_住所３, SubGyomuCode.DBU介護統計報告));
         return new RString(送付先住所.toString());
     }
 
     private RString get送付先名称() {
         StringBuilder 送付先名称 = new StringBuilder();
-        送付先名称.append(BusinessConfig.get(不服申し立て弁明書_送付先情報_名称１, SubGyomuCode.DBZ介護共通));
-        送付先名称.append(BusinessConfig.get(不服申し立て弁明書_送付先情報_名称２, SubGyomuCode.DBZ介護共通));
+        送付先名称.append(BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_名称１, SubGyomuCode.DBU介護統計報告));
+        送付先名称.append(BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_名称２, SubGyomuCode.DBU介護統計報告));
         return new RString(送付先名称.toString());
     }
 
     private RString get文言(FlexibleDate 審査請求届出日) {
-        RString 文言１ = BusinessConfig.get(不服申し立て弁明書_定型文_文言１, SubGyomuCode.DBZ介護共通);
-        RString 文言２ = BusinessConfig.get(不服申し立て弁明書_定型文_文言２, SubGyomuCode.DBZ介護共通);
-        RString 文言３ = BusinessConfig.get(不服申し立て弁明書_定型文_文言３, SubGyomuCode.DBZ介護共通);
+        RString 文言１ = BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_定型文_文言１, SubGyomuCode.DBU介護統計報告);
+        RString 文言２ = BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_定型文_文言２, SubGyomuCode.DBU介護統計報告);
+        RString 文言３ = BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_定型文_文言３, SubGyomuCode.DBU介護統計報告);
         StringBuilder 文言 = new StringBuilder();
         if (文言１.equals(文言_部分)) {
             RString 部分1 = 文言１.substring(0, 文言１.indexOf("@"));
@@ -196,7 +184,9 @@ public class BenmeisyoFinder {
         BenmeiJohoResultEntity resultentity = benmeisyoMapper.getBenmeijoho(BenmeisyoMapperParameter.
                 createSelectByKeyParam(識別コード, 被保険者番号, 審査請求届出日));
         entity.set弁明書作成日(resultentity.get弁明書作成日());
-        entity.set弁明の件名(ShobunShuruiCode.toValue(resultentity.get処分種類コード()).get名称());
+        if (resultentity.get処分種類コード() != null && !resultentity.get処分種類コード().isEmpty()) {
+            entity.set弁明の件名(ShobunShuruiCode.toValue(resultentity.get処分種類コード()).get名称());
+        }
         entity.set弁明の内容(resultentity.get弁明内容());
         return entity;
     }
@@ -244,7 +234,8 @@ public class BenmeisyoFinder {
 
     private NinshoshaDenshiKoinDataEntity getNinshoshaDenshiKoinData(BenmeiJohoEntity entity) {
         NinshoshaDenshiKoinDataEntity ninshoshaDenshiKoinDataEntity = new NinshoshaDenshiKoinDataEntity();
-        RString 種別コード = new RString(BusinessConfig.get(不服申し立て弁明書_認証者_種別コード, SubGyomuCode.DBZ介護共通).toString());
+        RString 種別コード = new RString(BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_認証者_種別コード,
+                SubGyomuCode.DBU介護統計報告).toString());
         NinshoshaSource ninshoshaSource = this.getNinshoshaSource(種別コード, entity);
         ninshoshaDenshiKoinDataEntity.set認証者役職名(ninshoshaSource.ninshoshaYakushokuMei);
         ninshoshaDenshiKoinDataEntity.set認職者氏名(ninshoshaSource.ninshoshaShimeiKakeru);
@@ -254,10 +245,11 @@ public class BenmeisyoFinder {
         return ninshoshaDenshiKoinDataEntity;
     }
 
+    //TODO LDNS-863 Reams_本開発課題一覧_技術点 No:34
     private NinshoshaSource getNinshoshaSource(RString 種別コード, BenmeiJohoEntity entity) {
         INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
         INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(
-                GyomuCode.DB介護保険, 種別コード, entity.get弁明書作成日().toRDate(), iReportWriter.getImageFolderPath());
+                GyomuCode.DB介護保険, 種別コード, entity.get弁明書作成日().toRDate(), RString.EMPTY);
         return ninshoshaSourceBuilder.buildSource();
     }
 
