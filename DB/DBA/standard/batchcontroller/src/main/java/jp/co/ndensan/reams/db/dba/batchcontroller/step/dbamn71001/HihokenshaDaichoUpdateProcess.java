@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dba.definition.processprm.dbamn71001.HihokenshaDai
 import jp.co.ndensan.reams.db.dba.entity.dbamn71001.ShikakuIdoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dba.service.dbamn71001.HihokenshaDaichoKoshin;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * ６５歳年齢到達資格異動被保険者台帳更新_バッチ処理クラスです
@@ -25,6 +26,7 @@ public class HihokenshaDaichoUpdateProcess extends SimpleBatchProcessBase {
     }
 
     @Override
+    @Transaction
     protected void process() {
         
         List<ShikakuIdoTaishoshaEntity> entityList = (List<ShikakuIdoTaishoshaEntity>) parameter.getShikakuIdoTaishoshaEntityList();
