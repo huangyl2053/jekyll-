@@ -36,7 +36,7 @@ public class BenmeiTorokuPanel {
     private static final RString 状態_削除 = new RString("削除");
     private BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho;
     private ShikibetsuCode 識別コード;
-    private HihokenshaNo 原処分被保険者番号;
+    private HihokenshaNo 被保険者番号;
     private FlexibleDate 審査請求届出日;
 
     /**
@@ -46,26 +46,23 @@ public class BenmeiTorokuPanel {
      * @return ResponseData<ShikakukihonPanelDiv>
      */
     public ResponseData<BenmeiTorokuPanelDiv> onLoad(BenmeiTorokuPanelDiv panelDiv) {
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.モード, 状態_修正);
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.識別コード, new ShikibetsuCode("201609"));
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.原処分被保険者番号, new HihokenshaNo("20160101"));
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.審査請求届出日, new FlexibleDate("20160104"));
+
         //TODO ViewStateより弁明登録一覧画面からの引き継ぎ情報を取得する。
         識別コード = ViewStateHolder.get(BenmeiTorokuViewStateKeys.識別コード, ShikibetsuCode.class);
-        原処分被保険者番号 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.原処分被保険者番号, HihokenshaNo.class);
+        被保険者番号 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.被保険者番号, HihokenshaNo.class);
         審査請求届出日 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.審査請求届出日, FlexibleDate.class);
-        RString viewState = ViewStateHolder.get(BenmeiTorokuViewStateKeys.モード, RString.class);
-        //TODO 共通Div（AtenaCommonChildDiv）異常を発生する。
+        RString 初期_状態 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.モード, RString.class);
+        //TODO 共通Div（AtenaCommonChildDiv）を呼び出しの場合、異常を発生する。
         //panelDiv.getAtenaPanel().getAtenaCommonChildDiv().load(識別コード);
-        panelDiv.getShikakuKihonCommonChildDiv().initialize(原処分被保険者番号);
-        if (viewState.equals(状態_修正)) {
-            benmeiTorokuMeisaiJoho = get弁明登録明細情報の取得(識別コード, 原処分被保険者番号, 審査請求届出日);
+        panelDiv.getShikakuKihonCommonChildDiv().initialize(被保険者番号);
+        if (初期_状態.equals(状態_修正)) {
+            benmeiTorokuMeisaiJoho = get弁明登録明細情報の取得(識別コード, 被保険者番号, 審査請求届出日);
             ViewStateHolder.put(BenmeiTorokuViewStateKeys.弁明登録情報, benmeiTorokuMeisaiJoho);
-            getHandler(panelDiv).initialize(benmeiTorokuMeisaiJoho, viewState);
-        } else if (viewState.equals(状態_削除)) {
-            benmeiTorokuMeisaiJoho = get弁明登録明細情報の取得(識別コード, 原処分被保険者番号, 審査請求届出日);
+            getHandler(panelDiv).initialize(benmeiTorokuMeisaiJoho, 初期_状態);
+        } else if (初期_状態.equals(状態_削除)) {
+            benmeiTorokuMeisaiJoho = get弁明登録明細情報の取得(識別コード, 被保険者番号, 審査請求届出日);
             if (benmeiTorokuMeisaiJoho != null) {
-                getHandler(panelDiv).initialize(benmeiTorokuMeisaiJoho, viewState);
+                getHandler(panelDiv).initialize(benmeiTorokuMeisaiJoho, 初期_状態);
             } else {
                 throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
             }
@@ -100,10 +97,6 @@ public class BenmeiTorokuPanel {
     public ResponseData<BenmeiTorokuPanelDiv> onClick_btnSave(BenmeiTorokuPanelDiv panelDiv) {
         RString processState = panelDiv.getProcessState();
         benmeiTorokuMeisaiJoho = ViewStateHolder.get(BenmeiTorokuViewStateKeys.弁明登録情報, BenmeiTorokuMeisaiJoho.class);
-        if (panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().getValue().toDateString() == null
-                || panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().getValue().toDateString().equals(new RString(""))) {
-            throw new ApplicationException(UrErrorMessages.必須項目.getMessage());
-        }
         if (processState.equals(状態_追加)) {
             return get弁明登録明細情報の登録処理(panelDiv);
         } else if (processState.equals(状態_修正)) {
@@ -116,11 +109,11 @@ public class BenmeiTorokuPanel {
 
     private BenmeiTorokuMeisaiJoho get弁明登録明細情報の取得(
             ShikibetsuCode 識別コード,
-            HihokenshaNo 原処分被保険者番号,
+            HihokenshaNo 被保険者番号,
             FlexibleDate 審査請求届出日) {
         BenmeiTorokuManager benmeiTorokuManager = BenmeiTorokuManager.createInstance();
         BenmeiTorokuMeisaiJoho benmeiTorokuMeisai
-                = benmeiTorokuManager.getBenmeiTorokuMeisaiJoho(識別コード, 原処分被保険者番号, 審査請求届出日);
+                = benmeiTorokuManager.getBenmeiTorokuMeisaiJoho(識別コード, 被保険者番号, 審査請求届出日);
         return benmeiTorokuMeisai;
     }
 
@@ -151,10 +144,10 @@ public class BenmeiTorokuPanel {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             識別コード = ViewStateHolder.get(BenmeiTorokuViewStateKeys.識別コード, ShikibetsuCode.class);
-            原処分被保険者番号 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.原処分被保険者番号, HihokenshaNo.class);
+            被保険者番号 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.被保険者番号, HihokenshaNo.class);
             審査請求届出日 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.審査請求届出日, FlexibleDate.class);
             boolean blnState = get弁明登録明細情報の登録処理結果(
-                    識別コード, 原処分被保険者番号, 審査請求届出日,
+                    識別コード, 被保険者番号, 審査請求届出日,
                     new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().getValue().toDateString()),
                     panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeisya().getValue(),
                     panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineShobunNaiyo().getValue(),
@@ -189,9 +182,9 @@ public class BenmeiTorokuPanel {
 
     private ResponseData<BenmeiTorokuPanelDiv> get弁明登録明細情報の更新処理実行(BenmeiTorokuPanelDiv panelDiv) {
         識別コード = ViewStateHolder.get(BenmeiTorokuViewStateKeys.識別コード, ShikibetsuCode.class);
-        原処分被保険者番号 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.原処分被保険者番号, HihokenshaNo.class);
+        被保険者番号 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.被保険者番号, HihokenshaNo.class);
         審査請求届出日 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.審査請求届出日, FlexibleDate.class);
-        boolean blnState = get弁明登録明細情報の更新処理結果(識別コード, 原処分被保険者番号, 審査請求届出日,
+        boolean blnState = get弁明登録明細情報の更新処理結果(識別コード, 被保険者番号, 審査請求届出日,
                 new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().getValue().toDateString()),
                 panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeisya().getValue(),
                 panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineShobunNaiyo().getValue(),
@@ -211,9 +204,9 @@ public class BenmeiTorokuPanel {
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             識別コード = ViewStateHolder.get(BenmeiTorokuViewStateKeys.識別コード, ShikibetsuCode.class);
-            原処分被保険者番号 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.原処分被保険者番号, HihokenshaNo.class);
+            被保険者番号 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.被保険者番号, HihokenshaNo.class);
             審査請求届出日 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.審査請求届出日, FlexibleDate.class);
-            boolean blnState = get弁明登録明細情報の削除処理結果(識別コード, 原処分被保険者番号, 審査請求届出日);
+            boolean blnState = get弁明登録明細情報の削除処理結果(識別コード, 被保険者番号, 審査請求届出日);
             if (blnState) {
                 //TODO DBZInformationMessage．DBZI00005(削除は正常に終了しました。）
                 return ResponseData.of(panelDiv).addMessage(UrInformationMessages.対象データ削除済み.getMessage()).respond();
@@ -223,7 +216,7 @@ public class BenmeiTorokuPanel {
     }
 
     private boolean get弁明登録明細情報の登録処理結果(ShikibetsuCode 識別コード,
-            HihokenshaNo 原処分被保険者番号,
+            HihokenshaNo 被保険者番号,
             FlexibleDate 審査請求届出日,
             FlexibleDate 弁明書作成日,
             RString 弁明者,
@@ -232,11 +225,11 @@ public class BenmeiTorokuPanel {
             FlexibleDate 弁明書提出日) {
         BenmeiTorokuManager benmeiTorokuManager = BenmeiTorokuManager.createInstance();
         return benmeiTorokuManager.insBenmeiTorokuJoho(
-                識別コード, 原処分被保険者番号, 審査請求届出日, 弁明書作成日, 弁明者, 審査請求に係る処分内容, 弁明内容, 弁明書提出日);
+                識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日, 弁明者, 審査請求に係る処分内容, 弁明内容, 弁明書提出日);
     }
 
     private boolean get弁明登録明細情報の更新処理結果(ShikibetsuCode 識別コード,
-            HihokenshaNo 原処分被保険者番号,
+            HihokenshaNo 被保険者番号,
             FlexibleDate 審査請求届出日,
             FlexibleDate 弁明書作成日,
             RString 弁明者,
@@ -245,21 +238,18 @@ public class BenmeiTorokuPanel {
             FlexibleDate 弁明書提出日) {
         BenmeiTorokuManager benmeiTorokuManager = BenmeiTorokuManager.createInstance();
         return benmeiTorokuManager.updBenmeiTorokuJoho(
-                識別コード, 原処分被保険者番号, 審査請求届出日, 弁明書作成日, 弁明者, 審査請求に係る処分内容, 弁明内容, 弁明書提出日);
+                識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日, 弁明者, 審査請求に係る処分内容, 弁明内容, 弁明書提出日);
     }
 
-    private boolean get弁明登録明細情報の削除処理結果(ShikibetsuCode 識別コード, HihokenshaNo 原処分被保険者番号, FlexibleDate 審査請求届出日) {
+    private boolean get弁明登録明細情報の削除処理結果(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日) {
         BenmeiTorokuManager benmeiTorokuManager = BenmeiTorokuManager.createInstance();
-        return benmeiTorokuManager.delBenmeiTorokuJoho(識別コード, 原処分被保険者番号, 審査請求届出日);
+        return benmeiTorokuManager.delBenmeiTorokuJoho(識別コード, 被保険者番号, 審査請求届出日);
     }
 
     private boolean get弁明登録明細の更新有り無し(BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho, BenmeiTorokuPanelDiv panelDiv) {
         RString selectResults = get弁明登録明細情報の編集結果(benmeiTorokuMeisaiJoho);
         RString inputDiv = get弁明登録明細入力の編集結果(panelDiv);
-        if (selectResults.equals(inputDiv)) {
-            return false;
-        }
-        return true;
+        return !selectResults.equals(inputDiv);
     }
 
     private RString get弁明登録明細情報の編集結果(BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho) {
