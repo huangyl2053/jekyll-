@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryutaishosha;
 
 import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TennyushutsuHoryuTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.JukiIdoJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -80,7 +83,7 @@ public class TennyushutsuHoryuTaishoshaBusiness implements TennyuTenshutsuHoryuT
      */
     @Override
     public RString get住民種別コード() {
-        return entity.get住民種別コード();
+        return new RString(JuminShubetsu.toValue(entity.get住民種別コード()).name());
     }
 
     /**
@@ -120,7 +123,7 @@ public class TennyushutsuHoryuTaishoshaBusiness implements TennyuTenshutsuHoryuT
      */
     @Override
     public RString get性別() {
-        return entity.get性別コード();
+        return Gender.toValue(entity.get性別コード()).getName().getShortJapanese();
     }
 
     /**
@@ -130,7 +133,7 @@ public class TennyushutsuHoryuTaishoshaBusiness implements TennyuTenshutsuHoryuT
      */
     @Override
     public RString get異動事由コード() {
-        return entity.get異動事由コード();
+        return JukiIdoJiyu.toValue(entity.get異動事由コード()).get異動事由略称();
     }
 
     /**

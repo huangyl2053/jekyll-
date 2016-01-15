@@ -103,13 +103,6 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
         }
         List<TennyuTenshutsuHoryuTaishosha> businessList = new ArrayList<>();
         for (TenshutsuHoryuTaishoshaEntity entity : entityList) {
-            //TODO QA:内容 434
-//            RString 住民種別 = CodeMaster.getCodeMeisho(CodeShubetsu.EMPTY, new Code(entity.get住民種別コード()));
-//            RString 性別 = CodeMaster.getCodeMeisho(CodeShubetsu.EMPTY, new Code(entity.get性別コード()));
-//            RString 異動事由 = CodeMaster.getCodeMeisho(CodeShubetsu.EMPTY, new Code(entity.get異動事由コード()));
-//            entity.set住民種別コード(住民種別);
-//            entity.set性別コード(性別);
-//            entity.set異動事由コード(異動事由);
             businessList.add(new TenshutsuHoryuTaishoshaBusiness(entity));
         }
         return SearchResult.of(businessList, 0, false);
