@@ -6,12 +6,11 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.nenreitoutatuyoteishachecklistdiv;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.jukinentotoroku.DbT7022ShoriDateKanriBusiness;
 import jp.co.ndensan.reams.db.dba.business.nenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListBatchParameterSakusei;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitoutatsuyoteisha.INenreiToutatsuYoteishaCheckListBatchParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1120011.NenreiToutatuYoteishaCheckListDiv;
 import jp.co.ndensan.reams.db.dba.service.core.nenreitoutatuyoteishachecklist.NenreiToutatuYoteishaCheckListManager;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -24,8 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class NenreiToutatuYoteishaCheckList {
 
-    private static final SubGyomuCode サブ業務コード = new SubGyomuCode("DBA");
-
+//    private static final SubGyomuCode サブ業務コード = new SubGyomuCode("DBA");
     /**
      * 年齢到達予定者チェックリストの初期化。<br/>
      *
@@ -38,18 +36,18 @@ public class NenreiToutatuYoteishaCheckList {
 
         NenreiToutatuYoteishaCheckListManager nenreiToutatuYoteishaManager
                 = InstanceProvider.create(NenreiToutatuYoteishaCheckListManager.class);
-        DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanriEntity = nenreiToutatuYoteishaManager.get開始終了日();
+        DbT7022ShoriDateKanriBusiness shoriDateKanri = nenreiToutatuYoteishaManager.get開始終了日();
         requestDiv.getRadShutsuRyokuTaisho().setSelectedKey(new RString("key0"));
         requestDiv.getRadJunminShubetsu().setSelectedKey(new RString("key0"));
-        if (dbT7022ShoriDateKanriEntity != null) {
+        if (shoriDateKanri != null) {
             requestDiv.getTxtZenkaiRange().setFromValue(new RDate(
-                    dbT7022ShoriDateKanriEntity.getTaishoKaishiYMD().wareki().toDateString().toString()));
+                    shoriDateKanri.getTaishoKaishiYMD().wareki().toDateString().toString()));
 
             requestDiv.getTxtZenkaiRange().setToValue(new RDate(
-                    dbT7022ShoriDateKanriEntity.getTaishoShuryoYMD().wareki().toDateString().toString()));
+                    shoriDateKanri.getTaishoShuryoYMD().wareki().toDateString().toString()));
 
             requestDiv.getTxtKonkaiRange().setFromValue(new RDate(
-                    dbT7022ShoriDateKanriEntity.getTaishoKaishiYMD().plusDay(1).wareki().toDateString().toString()));
+                    shoriDateKanri.getTaishoKaishiYMD().plusDay(1).wareki().toDateString().toString()));
 
             requestDiv.getTxtKonkaiRange().setToValue(new RDate(
                     RDate.getNowDate().wareki().toDateString().toString()));

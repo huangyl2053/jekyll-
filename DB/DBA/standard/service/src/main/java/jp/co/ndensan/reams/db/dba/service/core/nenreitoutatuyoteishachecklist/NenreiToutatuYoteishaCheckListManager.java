@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dba.service.core.nenreitoutatuyoteishachecklist;
 
+import jp.co.ndensan.reams.db.dba.business.core.jukinentotoroku.DbT7022ShoriDateKanriBusiness;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7068ChohyoBunruiKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -47,7 +49,8 @@ public class NenreiToutatuYoteishaCheckListManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NenreiToutatuYoteishaCheckListManager}のインスタンスを戻します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link NenreiToutatuYoteishaCheckListManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link NenreiToutatuYoteishaCheckListManager}のインスタンス
      */
     public static NenreiToutatuYoteishaCheckListManager createInstance() {
         return InstanceProvider.create(NenreiToutatuYoteishaCheckListManager.class);
@@ -59,10 +62,13 @@ public class NenreiToutatuYoteishaCheckListManager {
      * @return List<DbT1001HihokenshaDaichoEntity>
      */
     @Transaction
-    public DbT7022ShoriDateKanriEntity get開始終了日() {
-
-        return dbt7022dac.selectkaisyuYMD();
-
+    public DbT7022ShoriDateKanriBusiness get開始終了日() {
+        DbT7022ShoriDateKanriEntity entity = dbt7022dac.selectkaisyuYMD();
+        if (entity == null) {
+            return null;
+        }
+        DbT7022ShoriDateKanriBusiness shoriDateKanri = new DbT7022ShoriDateKanriBusiness(entity);
+        return shoriDateKanri;
     }
 
     /**
@@ -73,8 +79,13 @@ public class NenreiToutatuYoteishaCheckListManager {
      * @return 帳票分類管理Entity
      */
     @Transaction
-    public DbT7068ChohyoBunruiKanriEntity get帳票分類ID(SubGyomuCode subGyomuCode, ReportId reportId) {
-        return dbt7068dac.selectByKey(subGyomuCode, reportId);
+    public ChohyoBunruiKanri get帳票分類ID(SubGyomuCode subGyomuCode, ReportId reportId) {
+        DbT7068ChohyoBunruiKanriEntity entity = dbt7068dac.selectByKey(subGyomuCode, reportId);
+        if (entity == null) {
+            return null;
+        }
+        ChohyoBunruiKanri chohyoBunruiKanri = new ChohyoBunruiKanri(entity);
+        return chohyoBunruiKanri;
     }
 
 }

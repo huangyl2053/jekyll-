@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  *
- * 年齢到達予定者チェックリスト_CSVデータ作成します。
+ * 年齢到達予定者チェックリスト_CSVデータ作成です。
  */
 public class NenreiToutatsuYoteishaCheckListCsv {
 
@@ -28,11 +28,11 @@ public class NenreiToutatsuYoteishaCheckListCsv {
     private static final RString 住登内外国人 = new RString("2");
     private static final RString 住登外日本人 = new RString("3");
     private static final RString 住登外外国人 = new RString("4");
-    private static final RString 住民種別_日本人のみ = new RString("2");
-    private static final RString 住民種別_外国人のみ = new RString("3");
+    private static final RString 住民種別_日本人のみ = new RString("日本人");
+    private static final RString 住民種別_外国人のみ = new RString("外国人");
 
     /**
-     * 年齢到達予定者チェックリスト_CSVデータ作成、連番なし。
+     * 年齢到達予定者チェックリスト_CSVデータ作成、連番ありません。
      *
      * @param nenCheckListJyohoEntity 年齢到達予定者チェックリスト情報Entity
      * @return 年齢到達予定者チェックリスト_CSVデータ
@@ -42,7 +42,6 @@ public class NenreiToutatsuYoteishaCheckListCsv {
         List<NenreiToutatsuYoteishaCheckListEucCsvEntity> csvDataList = new ArrayList<>();
         List<NenreiToutatsuYoteishaCheckListEntity> checkListEntity = nenCheckListJyohoEntity
                 .get年齢到達予定者チェックリスト();
-
         if (!checkListEntity.isEmpty()) {
             for (NenreiToutatsuYoteishaCheckListEntity entity : checkListEntity) {
                 NenreiToutatsuYoteishaCheckListEucCsvEntity csvDataEntity
@@ -95,7 +94,7 @@ public class NenreiToutatsuYoteishaCheckListCsv {
     }
 
     /**
-     * 年齢到達予定者チェックリスト_CSVデータ作成、連番あり。
+     * 年齢到達予定者チェックリスト_CSVデータ作成、連番あります。
      *
      * @param nenCheckListJyohoEntity 年齢到達予定者チェックリスト情報Entity
      * @return 年齢到達予定者チェックリスト_CSVデータ
