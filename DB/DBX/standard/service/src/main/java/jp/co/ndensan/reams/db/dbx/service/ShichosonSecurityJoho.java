@@ -77,10 +77,11 @@ public final class ShichosonSecurityJoho {
         requireNonNull(業務分類, UrErrorMessages.対象データなし.getMessage().toString());
         介護導入形態Dac = InstanceProvider.create(DbT7908KaigoDonyuKeitaiDac.class);
         構成市町村マスタDac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
-        DbT7908KaigoDonyuKeitaiEntity 介護導入形態 = 介護導入形態Dac.selectByGyomuBunrui(業務分類.getコード()).get(0);
-        if (null == 介護導入形態) {
+        List<DbT7908KaigoDonyuKeitaiEntity> entitys = 介護導入形態Dac.selectByGyomuBunrui(業務分類.getコード());
+        if (entitys.isEmpty()) {
             return get未導入市町村セキュリティ情報();
         } else {
+            DbT7908KaigoDonyuKeitaiEntity 介護導入形態 = 介護導入形態Dac.selectByGyomuBunrui(業務分類.getコード()).get(0);
             return get導入済市町村セキュリティ情報(介護導入形態);
         }
     }
