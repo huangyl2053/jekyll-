@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5208NinteichosahyoServiceJokyoFlagEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -72,8 +72,8 @@ public class NinteichosahyoServiceJokyoFlagBuilderTest extends DbzTestBase {
 
         @Test
         public void 戻り値のサービスの状況は_設定した値と同じサービスの状況を返す() {
-            business = sut.setサービスの状況(DbT5208NinteichosahyoServiceJokyoFlagEntityGenerator.DEFAULT_サービスの状況).build();
-            assertThat(business.getサービスの状況(), is(DbT5208NinteichosahyoServiceJokyoFlagEntityGenerator.DEFAULT_サービスの状況));
+            business = sut.setサービスの状況(DbT5208NinteichosahyoServiceJokyoFlagEntityGenerator.DEFAULT_サービスの状況フラグ).build();
+            assertThat(business.getサービスの状況(), is(DbT5208NinteichosahyoServiceJokyoFlagEntityGenerator.DEFAULT_サービスの状況フラグ));
         }
 
     }

@@ -11,7 +11,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.JogaiShinsakaiIin.JogaiShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.core.JogaiShinsakaiIin.JogaiShinsakaiIinList;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5014ShinsakaiIinJogaiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5102ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.JogaiShinsakaiIinEntity;
 
 /**
@@ -38,16 +37,17 @@ public final class JogaiShinsakaiIinMapper {
             return null;
         }
 
-        DbT5102ShinsakaiIinJohoEntity 審査会委員Entity = 除外対象委員Entity.get審査会委員Entity();
+//        DbT5102ShinsakaiIinJohoEntity 審査会委員Entity = 除外対象委員Entity.get審査会委員Entity();
         DbT5014ShinsakaiIinJogaiJohoEntity 審査会委員除外情報Entity = 除外対象委員Entity.get除外委員情報Entity();
-        if (審査会委員Entity == null || 審査会委員除外情報Entity == null) {
-            return null;
-        }
+//        if (審査会委員Entity == null || 審査会委員除外情報Entity == null) {
+//            return null;
+//        }
 
-        return new JogaiShinsakaiIin(審査会委員除外情報Entity.getShoKisaiHokenshaNo(),
-                審査会委員除外情報Entity.getHihokenshaNo(),
-                審査会委員除外情報Entity.getKanriNo(),
-                ShinsakaiIinMapper.to審査会委員(審査会委員Entity));
+//        return new JogaiShinsakaiIin(審査会委員除外情報Entity.getShoKisaiHokenshaNo(),
+//                審査会委員除外情報Entity.getHihokenshaNo(),
+//                審査会委員除外情報Entity.getKanriNo(),
+//                ShinsakaiIinMapper.to審査会委員(審査会委員Entity));
+        return null;
     }
 
     /**

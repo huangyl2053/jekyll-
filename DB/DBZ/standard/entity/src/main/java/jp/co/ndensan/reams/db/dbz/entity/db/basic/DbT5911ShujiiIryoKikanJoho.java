@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 主治医医療機関情報テーブルの項目定義クラスです。
  */
 public enum DbT5911ShujiiIryoKikanJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -55,11 +55,11 @@ public enum DbT5911ShujiiIryoKikanJoho implements IColumnDefinition {
     /**
      * 医療機関名称
      */
-    iryoKikanMeisho(120, 0),
+    iryoKikanMeisho(512, 0),
     /**
      * 医療機関名称カナ
      */
-    iryoKikanMeishoKana(120, 0),
+    iryoKikanMeishoKana(512, 0),
     /**
      * 郵便番号
      */
@@ -67,7 +67,7 @@ public enum DbT5911ShujiiIryoKikanJoho implements IColumnDefinition {
     /**
      * 住所
      */
-    jusho(50, 0),
+    jusho(512, 0),
     /**
      * 電話番号
      */
@@ -79,9 +79,14 @@ public enum DbT5911ShujiiIryoKikanJoho implements IColumnDefinition {
     /**
      * 代表者名
      */
-    daihyoshaName(2147483647, 0),
+    daihyoshaName(512, 0),
+    /**
+     * 代表者名カナ
+     */
+    daihyoshaNameKana(512, 0),
     /**
      * 状況フラグ
+     * <br/>True：有効　False：無効
      */
     jokyoFlag(1, 0);
 

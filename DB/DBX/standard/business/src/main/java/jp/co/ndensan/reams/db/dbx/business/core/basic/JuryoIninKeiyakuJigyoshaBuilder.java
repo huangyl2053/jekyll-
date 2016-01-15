@@ -6,8 +6,7 @@
 package jp.co.ndensan.reams.db.dbx.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyoshaEntity;
-import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.ServiceShubetsuCode;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
@@ -21,18 +20,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class JuryoIninKeiyakuJigyoshaBuilder {
 
-    private final DbT7061JuryoIninKeiyakuJigyoshaEntity entity;
+    private final DbT7061JuryoIninJigyoshaEntity entity;
     private final JuryoIninKeiyakuJigyoshaIdentifier id;
 
     /**
-     * {@link DbT7061JuryoIninKeiyakuJigyoshaEntity}より{@link JuryoIninKeiyakuJigyosha}の編集用Builderクラスを生成します。
+     * {@link DbT7061JuryoIninJigyoshaEntity}より{@link JuryoIninKeiyakuJigyosha}の編集用Builderクラスを生成します。
      *
-     * @param entity {@link DbT7061JuryoIninKeiyakuJigyoshaEntity}
+     * @param entity {@link DbT7061JuryoIninJigyoshaEntity}
      * @param id {@link JuryoIninKeiyakuJigyoshaIdentifier}
      *
      */
     JuryoIninKeiyakuJigyoshaBuilder(
-            DbT7061JuryoIninKeiyakuJigyoshaEntity entity,
+            DbT7061JuryoIninJigyoshaEntity entity,
             JuryoIninKeiyakuJigyoshaIdentifier id
     ) {
         this.entity = entity.clone();

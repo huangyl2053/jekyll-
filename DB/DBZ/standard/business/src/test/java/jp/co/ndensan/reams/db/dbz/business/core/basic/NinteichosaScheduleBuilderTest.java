@@ -4,8 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5221NinteichosaScheduleEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -31,8 +33,8 @@ public class NinteichosaScheduleBuilderTest extends DbzTestBase {
     private static RString 認定調査予定開始時間;
     private static RString 認定調査予定終了時間;
     private static Code 認定調査時間枠;
-    private static RString 認定調査委託先コード;
-    private static RString 認定調査員コード;
+    private static ChosaItakusakiCode 認定調査委託先コード;
+    private static ChosainCode 認定調査員コード;
 
     @BeforeClass
     public static void setUpClass() {

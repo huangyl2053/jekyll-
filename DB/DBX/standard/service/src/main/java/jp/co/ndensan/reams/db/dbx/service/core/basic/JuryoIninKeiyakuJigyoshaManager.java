@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.JuryoIninKeiyakuJigyosha;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7061JuryoIninKeiyakuJigyoshaDac;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7061JuryoIninJigyoshaDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -23,21 +23,21 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class JuryoIninKeiyakuJigyoshaManager {
 
-    private final DbT7061JuryoIninKeiyakuJigyoshaDac dac;
+    private final DbT7061JuryoIninJigyoshaDac dac;
 
     /**
      * コンストラクタです。
      */
     public JuryoIninKeiyakuJigyoshaManager() {
-        dac = InstanceProvider.create(DbT7061JuryoIninKeiyakuJigyoshaDac.class);
+        dac = InstanceProvider.create(DbT7061JuryoIninJigyoshaDac.class);
     }
 
     /**
      * テスト用コンストラクタです。
      *
-     * @param dac {@link DbT7061JuryoIninKeiyakuJigyoshaDac}
+     * @param dac {@link DbT7061JuryoIninJigyoshaDac}
      */
-    JuryoIninKeiyakuJigyoshaManager(DbT7061JuryoIninKeiyakuJigyoshaDac dac) {
+    JuryoIninKeiyakuJigyoshaManager(DbT7061JuryoIninJigyoshaDac dac) {
         this.dac = dac;
     }
 
@@ -58,7 +58,7 @@ public class JuryoIninKeiyakuJigyoshaManager {
         requireNonNull(受領委任契約開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任契約開始日"));
         requireNonNull(契約サービス種別, UrSystemErrorMessages.値がnull.getReplacedMessage("契約サービス種別"));
 
-        DbT7061JuryoIninKeiyakuJigyoshaEntity entity = dac.selectByKey(
+        DbT7061JuryoIninJigyoshaEntity entity = dac.selectByKey(
                 受領委任契約事業者番号,
                 受領委任契約開始日,
                 契約サービス種別);
@@ -78,7 +78,7 @@ public class JuryoIninKeiyakuJigyoshaManager {
     public List<JuryoIninKeiyakuJigyosha> get受領委任契約事業者一覧() {
         List<JuryoIninKeiyakuJigyosha> businessList = new ArrayList<>();
 
-        for (DbT7061JuryoIninKeiyakuJigyoshaEntity entity : dac.selectAll()) {
+        for (DbT7061JuryoIninJigyoshaEntity entity : dac.selectAll()) {
             entity.initializeMd5();
             businessList.add(new JuryoIninKeiyakuJigyosha(entity));
         }

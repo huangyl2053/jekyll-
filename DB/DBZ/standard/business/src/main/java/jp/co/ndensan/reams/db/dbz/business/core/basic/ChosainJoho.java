@@ -44,8 +44,8 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
         requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
         this.entity = new DbT5913ChosainJohoEntity();
         this.entity.setShichosonCode(市町村コード);
-        this.entity.setNinteichosaItakusakiCode(認定調査委託先コード);
-        this.entity.setNinteiChosainNo(認定調査員コード);
+        this.entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
+        this.entity.setNinteiChosainCode(認定調査員コード);
         this.id = new ChosainJohoIdentifier(
                 市町村コード,
                 認定調査委託先コード,
@@ -63,8 +63,8 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員情報"));
         this.id = new ChosainJohoIdentifier(
                 entity.getShichosonCode(),
-                entity.getNinteichosaItakusakiCode(),
-                entity.getNinteiChosainNo());
+                entity.getNinteiChosaItakusakiCode(),
+                entity.getNinteiChosainCode());
     }
 
     /**
@@ -97,7 +97,7 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
      * @return 認定調査委託先コード
      */
     public ChosaItakusakiCode get認定調査委託先コード() {
-        return entity.getNinteichosaItakusakiCode();
+        return entity.getNinteiChosaItakusakiCode();
     }
 
     /**
@@ -106,7 +106,7 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
      * @return 認定調査員コード
      */
     public ChosainCode get認定調査員コード() {
-        return entity.getNinteiChosainNo();
+        return entity.getNinteiChosainCode();
     }
 
     /**
@@ -229,8 +229,7 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
     }
 
     /**
-     * 調査員情報のみを変更対象とします。<br/>
-     * {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 調査員情報のみを変更対象とします。<br/> {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ChosainJoho}
      */
@@ -245,8 +244,7 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
     }
 
     /**
-     * 保持する調査員情報を削除対象とします。<br/>
-     * {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する調査員情報を削除対象とします。<br/> {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ChosainJoho}
      */

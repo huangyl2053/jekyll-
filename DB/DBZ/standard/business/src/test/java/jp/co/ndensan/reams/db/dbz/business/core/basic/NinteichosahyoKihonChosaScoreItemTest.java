@@ -4,10 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5212NinteichosahyoKihonChosaScoreItemEntity;
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5212NinteichosahyoKihonChosaScoreItemEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5212NinteichosahyoKihonChosaScoreItemEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -136,7 +136,7 @@ public class NinteichosahyoKihonChosaScoreItemTest extends DbzTestBase {
 
         @Test
         public void get素点項目は_entityが持つ素点項目を返す() {
-            assertThat(sut.get素点項目(), is(NinteichosahyoKihonChosaScoreItemEntity.getReserchItem01()));
+            assertThat(sut.get素点項目(), is(NinteichosahyoKihonChosaScoreItemEntity.getResearchItem01()));
         }
     }
 
