@@ -9,11 +9,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
+import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GappeiJohoKubun.合併あり;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GappeiJohoKubun.合併なし;
@@ -328,12 +327,11 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
 
         // 「ビジネス設計_DBUMN00000_市町村情報セキュリティ情報取得」の「市町村セキュリティ情報を取得する」を参照する
         // １．０．１　導入形態の処理
-        ShichosonSecurityJohoFinder shichosonSecurityJohoFinder = ShichosonSecurityJohoFinder.createInstance();
-        ShichosonSecurityJoho shichosonSecurityJoho = shichosonSecurityJohoFinder.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        ShichosonSecurityJoho 市町村情報セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
 
         // 履歴一覧の「所在保険者」「措置元保険者」「旧保険者」「識別コード」の表示・非表示制御
-        if ((new RString("112").equals(shichosonSecurityJoho.get導入形態コード())
-                || new RString("120").equals(shichosonSecurityJoho.get導入形態コード()))
+        if ("112".equals(市町村情報セキュリティ情報.get導入形態コード().toString())
+                || "120".equals(市町村情報セキュリティ情報.get導入形態コード().toString())
                 && new RString(合併なし.toString()).equals(BusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告))) {
 
             // 単一で合併無し・・・「所在保険者」「措置元保険者」「旧保険者」「識別コード」の全て非表示。
@@ -341,8 +339,8 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             this.getDgShikakuShutokuRireki().getGridSetting().getColumn("sochimotoHokensha").setVisible(false);
             this.getDgShikakuShutokuRireki().getGridSetting().getColumn("kyuHokensha").setVisible(false);
             this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shikibetsuCode").setVisible(false);
-        } else if ((new RString("112").equals(shichosonSecurityJoho.get導入形態コード())
-                || new RString("120").equals(shichosonSecurityJoho.get導入形態コード()))
+        } else if (("112".equals(市町村情報セキュリティ情報.get導入形態コード().toString())
+                || "120".equals(市町村情報セキュリティ情報.get導入形態コード().toString()))
                 && new RString(合併あり.toString()).equals(BusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告))) {
 
             // 単一で合併有り・・・「旧保険者」は表示、以外は非表示。
@@ -350,7 +348,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             this.getDgShikakuShutokuRireki().getGridSetting().getColumn("sochimotoHokensha").setVisible(false);
             this.getDgShikakuShutokuRireki().getGridSetting().getColumn("kyuHokensha").setVisible(true);
             this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shikibetsuCode").setVisible(false);
-        } else if (new RString("111").equals(shichosonSecurityJoho.get導入形態コード())
+        } else if ("111".equals(市町村情報セキュリティ情報.get導入形態コード().toString())
                 && new RString(合併なし.toString()).equals(BusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告))) {
 
             // 広域で合併無し・・・「旧保険者」は非表示、以外は表示。
@@ -358,7 +356,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             this.getDgShikakuShutokuRireki().getGridSetting().getColumn("sochimotoHokensha").setVisible(true);
             this.getDgShikakuShutokuRireki().getGridSetting().getColumn("kyuHokensha").setVisible(false);
             this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shikibetsuCode").setVisible(true);
-        } else if (new RString("111").equals(shichosonSecurityJoho.get導入形態コード())
+        } else if ("111".equals(市町村情報セキュリティ情報.get導入形態コード().toString())
                 && new RString(合併あり.toString()).equals(BusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告))) {
 
             // 広域で合併有り・・・「所在保険者」「措置元保険者」「旧保険者」「識別コード」の全て表示。
