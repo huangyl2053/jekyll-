@@ -96,11 +96,14 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
                 separator(Separator.JAPANESE).
                 fillType(FillType.BLANK).toDateString());
         printTimeStampSb.append(RString.HALF_SPACE);
-        printTimeStampSb.append(String.format("%02d", printdate.getHour()));
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(DATE_時);
-        printTimeStampSb.append(String.format("%02d", printdate.getMinute()));
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(DATE_分);
-        printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(DATE_秒);
         printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(DATE_作成);
