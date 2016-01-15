@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dba.business.core.shikakushutokujogaishakanri;
 
 import jp.co.ndensan.reams.db.dba.entity.db.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriEntity;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -80,7 +82,7 @@ public class ShikakuShutokuJogaishaKanri {
      * @return 性別
      */
     public RString getSeibetsuCode() {
-        return shikakuShutokuJogaishaKanriEntity.getSeibetsuCode();
+        return Gender.toValue(shikakuShutokuJogaishaKanriEntity.getSeibetsuCode()).getName().getShortJapanese();
     }
 
     /**
@@ -89,7 +91,7 @@ public class ShikakuShutokuJogaishaKanri {
      * @return 住民状態
      */
     public RString getJuminJotaiCode() {
-        return shikakuShutokuJogaishaKanriEntity.getJuminJotaiCode();
+        return JuminJotai.toValue(shikakuShutokuJogaishaKanriEntity.getJuminJotaiCode()).住民状態略称();
     }
 
     /**
