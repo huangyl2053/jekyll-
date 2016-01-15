@@ -6,11 +6,15 @@
 package jp.co.ndensan.reams.db.dbe.business.core.gogitaijohosakusei;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 合議体情報作成のビジネスクラスです
@@ -53,7 +57,7 @@ public class GogitaiJohoSakuseiRsult implements Serializable {
      * @return 合議体番号
      */
     public int get合議体番号() {
-        return entity.getGogitaiJohoEntity().getGogitaiNo();
+        return entity.getGogitaiNo();
     }
 
     /**
@@ -62,7 +66,7 @@ public class GogitaiJohoSakuseiRsult implements Serializable {
      * @return 合議体名称
      */
     public RString get合議体名称() {
-        return entity.getGogitaiJohoEntity().getGogitaiMei();
+        return entity.getGogitaiMei();
     }
 
     /**
@@ -71,7 +75,7 @@ public class GogitaiJohoSakuseiRsult implements Serializable {
      * @return 合議体有効期間開始年月日
      */
     public FlexibleDate get合議体有効期間開始年月日() {
-        return entity.getGogitaiJohoEntity().getGogitaiYukoKikanKaishiYMD();
+        return entity.getGogitaiYukoKikanKaishiYMD();
     }
 
     /**
@@ -80,7 +84,7 @@ public class GogitaiJohoSakuseiRsult implements Serializable {
      * @return 合議体有効期間終了年月日
      */
     public FlexibleDate get合議体有効期間終了年月日() {
-        return entity.getGogitaiJohoEntity().getGogitaiYukoKikanShuryoYMD();
+        return entity.getGogitaiYukoKikanShuryoYMD();
     }
 
     /**
@@ -89,7 +93,7 @@ public class GogitaiJohoSakuseiRsult implements Serializable {
      * @return 合議体開始予定時刻
      */
     public RString get合議体開始予定時刻() {
-        return entity.getGogitaiJohoEntity().getGogitaiKaishiYoteiTime();
+        return entity.getGogitaiKaishiYoteiTime();
     }
 
     /**
@@ -98,7 +102,7 @@ public class GogitaiJohoSakuseiRsult implements Serializable {
      * @return 合議体終了予定時刻
      */
     public RString get合議体終了予定時刻() {
-        return entity.getGogitaiJohoEntity().getGogitaiShuryoYoteiTime();
+        return entity.getGogitaiShuryoYoteiTime();
     }
 
     /**
@@ -107,7 +111,7 @@ public class GogitaiJohoSakuseiRsult implements Serializable {
      * @return 介護認定審査会予定定員
      */
     public int get介護認定審査会予定定員() {
-        return entity.getGogitaiJohoEntity().getShinsakaiYoteiTeiin();
+        return entity.getShinsakaiYoteiTeiin();
     }
 
     /**
@@ -116,7 +120,7 @@ public class GogitaiJohoSakuseiRsult implements Serializable {
      * @return 介護認定審査会自動割当定員
      */
     public int get介護認定審査会自動割当定員() {
-        return entity.getGogitaiJohoEntity().getShinsakaiJidoWariateTeiin();
+        return entity.getShinsakaiJidoWariateTeiin();
     }
 
     /**
@@ -125,7 +129,7 @@ public class GogitaiJohoSakuseiRsult implements Serializable {
      * @return 介護認定審査会委員定員
      */
     public int get介護認定審査会委員定員() {
-        return entity.getGogitaiJohoEntity().getShinsakaiIinTeiin();
+        return entity.getShinsakaiIinTeiin();
     }
 
     /**
@@ -133,8 +137,8 @@ public class GogitaiJohoSakuseiRsult implements Serializable {
      *
      * @return 合議体精神科医存在フラグ
      */
-    public boolean get合議体精神科医存在フラグ() {
-        return entity.getGogitaiJohoEntity().getGogitaiSeishinkaSonzaiFlag();
+    public boolean is合議体精神科医存在フラグ() {
+        return entity.isGogitaiSeishinkaSonzaiFlag();
     }
 
     /**
@@ -142,8 +146,8 @@ public class GogitaiJohoSakuseiRsult implements Serializable {
      *
      * @return 合議体ダミーフラグ
      */
-    public boolean get合議体ダミーフラグ() {
-        return entity.getGogitaiJohoEntity().getGogitaiDummyFlag();
+    public boolean is合議体ダミーフラグ() {
+        return entity.isGogitaiDummyFlag();
     }
 
     /**
@@ -152,7 +156,7 @@ public class GogitaiJohoSakuseiRsult implements Serializable {
      * @return 介護認定審査会開催場所コード
      */
     public RString get介護認定審査会開催場所コード() {
-        return entity.getGogitaiJohoEntity().getShinsakaiKaisaiBashoCode();
+        return entity.getShinsakaiKaisaiBashoCode();
     }
 
     /**
@@ -161,7 +165,7 @@ public class GogitaiJohoSakuseiRsult implements Serializable {
      * @return 開催場所名称
      */
     public RString get開催場所名称() {
-        return entity.getShinsakaiKaisaiBashoJohoEntity().getShinsakaiKaisaiBashoName();
+        return entity.getShinsakaiKaisaiBashoName();
     }
 
     /**
@@ -170,7 +174,7 @@ public class GogitaiJohoSakuseiRsult implements Serializable {
      * @return 合議体長区分コード
      */
     public Code get合議体長区分コード() {
-        return entity.getGogitaiWariateIinJohoEntity().getGogitaichoKubunCode();
+        return entity.getGogitaichoKubunCode();
     }
 
     /**
@@ -179,7 +183,7 @@ public class GogitaiJohoSakuseiRsult implements Serializable {
      * @return 介護認定審査会委員コード
      */
     public RString get介護認定審査会委員コード() {
-        return entity.getGogitaiWariateIinJohoEntity().getShinsakaiIinCode();
+        return entity.getShinsakaiIinCode();
     }
 
     /**
@@ -188,7 +192,7 @@ public class GogitaiJohoSakuseiRsult implements Serializable {
      * @return 審査会委員名称
      */
     public AtenaMeisho get審査会委員名称() {
-        return entity.getShinsakaiIinJohoEntity().getShinsakaiIinShimei();
+        return entity.getShinsakaiIinShimei();
     }
 
     /**
@@ -196,7 +200,39 @@ public class GogitaiJohoSakuseiRsult implements Serializable {
      *
      * @return 補欠
      */
-    public boolean get補欠() {
-        return entity.getGogitaiWariateIinJohoEntity().getSubstituteFlag();
+    public boolean is補欠() {
+        return entity.isSubstituteFlag();
+    }
+
+    /**
+     * CSV出力用、合議体情報一覧の行データを取得します。
+     *
+     * @return List<RString>
+     */
+    public List<RString> toList() {
+        List<RString> retList = new ArrayList<>();
+        retList.add(new RString(String.valueOf(this.get合議体番号())).padZeroToLeft(2));
+        retList.add(this.get合議体名称());
+        retList.add(this.get合議体有効期間開始年月日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+        retList.add(this.get合議体有効期間終了年月日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+        retList.add(this.get合議体開始予定時刻());
+        retList.add(this.get合議体終了予定時刻());
+        retList.add(new RString(String.valueOf(this.get介護認定審査会予定定員())));
+        retList.add(new RString(String.valueOf(this.get介護認定審査会自動割当定員())));
+        retList.add(new RString(String.valueOf(this.get介護認定審査会委員定員())));
+        retList.add(this.get介護認定審査会開催場所コード());
+        retList.add(new RString(String.valueOf(this.is合議体精神科医存在フラグ())));
+        retList.add(new RString(String.valueOf(this.is合議体ダミーフラグ())));
+        retList.add(nullToBlank(this.get介護認定審査会委員コード()));
+        retList.add(new RString(String.valueOf(this.is補欠())));
+        retList.add(this.get合議体長区分コード() == null ? RString.EMPTY : this.get合議体長区分コード().value());
+        return retList;
+    }
+
+    private RString nullToBlank(RString str) {
+        if (str == null) {
+            return RString.EMPTY;
+        }
+        return str;
     }
 }

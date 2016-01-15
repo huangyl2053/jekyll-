@@ -73,14 +73,14 @@
         DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" = DbT5594ShinsakaiIinJoho."dbT5594ShinsakaiIinJoho_shinsakaiIinCode"
         <where>
             <if test="isNowYukoGogitai">
-                AND DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> #{usesGogitaiYukoKikanKaishiYMD}
-                AND #{usesGogitaiYukoKikanKaishiYMD} <![CDATA[<=]]> DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanShuryoYMD"
+                AND DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> #{gogitaiYukoKikanKaishiYMD}
+                AND #{gogitaiYukoKikanKaishiYMD} <![CDATA[<=]]> DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanShuryoYMD"
             </if>
         </where>
         ORDER BY 
-            DbT5591GogitaiJoho."gogitaiNo",
-            DbT5593GogitaiWariateIinJoho."gogitaichoKubunCode" ASC, 
-            DbT5593GogitaiWariateIinJoho."shinsakaiIinCode" DESC
+            DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiNo",
+            DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_gogitaichoKubunCode" ASC, 
+            DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" DESC
     </sql>
 
     <resultMap id="resultMap_GogitaiJohoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaijoho.GogitaiJohoRelateEntity" autoMapping="true">

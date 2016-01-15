@@ -15,7 +15,11 @@ public enum ConfigNameDBE {
     /**
      * 要支援認定結果
      */
-    要支援認定結果("要支援認定結果");
+    要支援認定結果("要支援認定結果"),
+    /**
+     * 合議体最大委員数
+     */
+    合議体最大委員数("合議体最大委員数");
     private final RString fullName;
 
     private ConfigNameDBE(String fullname) {
