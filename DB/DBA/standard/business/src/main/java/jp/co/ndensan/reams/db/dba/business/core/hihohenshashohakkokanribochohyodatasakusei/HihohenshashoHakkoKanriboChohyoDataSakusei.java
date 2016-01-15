@@ -5,11 +5,24 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.hihohenshashohakkokanribochohyodatasakusei;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.AkasiHakouKanriEntity;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.AkasiHakouKanriRelateEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihohenshashoHakkoKanriboChohyoDataSakuseiEntity;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.NarabiJunType;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.NextPageType;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.ShoYoshikiKubun;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  *
@@ -19,140 +32,89 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class HihohenshashoHakkoKanriboChohyoDataSakusei {
 
-    private final FlexibleDate 印刷日時;
-    private final RString ページ数;
-    private final RString 帳票タイトル;
-    private final LasdecCode 市町村コード;
-    private final RString 市町村名;
-    private final RString ソート順１;
-    private final RString ソート順２;
-    private final RString ソート順３;
-    private final RString ソート順４;
-    private final RString ソート順５;
-    private final RString 改頁１;
-    private final RString 改頁２;
-    private final RString 改頁３;
-    private final RString 改頁４;
-    private final RString 改頁５;
-    private final List<AkasiHakouKanriEntity> akasiHakouKanriEntityList;
-    private final RString 様式;
+    private static final RString DATE_時 = new RString("時");
+    private static final RString DATE_分 = new RString("分");
+    private static final RString DATE_秒 = new RString("秒");
+    private static final RString DATE_作成 = new RString("作成");
+    private static final RString 改頁 = new RString("被保険者証発行管理簿");
 
     /**
-     * 非公開コンストラクタです。
+     * 証発行管理帳票データリスト作成します。
      *
-     * @param 印刷日時 FlexibleDate
-     * @param ページ数 RString
-     * @param 帳票タイトル RString
-     * @param 市町村コード LasdecCode
-     * @param 市町村名 RString
-     * @param ソート順１ RString
-     * @param ソート順２ RString
-     * @param ソート順３ RString
-     * @param ソート順４ RString
-     * @param ソート順５ RString
-     * @param 改頁１ RString
-     * @param 改頁２ RString
-     * @param 改頁３ RString
-     * @param 改頁４ RString
-     * @param 改頁５ RString
-     * @param akasiHakouKanriEntityList List<AkasiHakouKanriEntity>
-     * @param 様式 RString
+     * @param relateEntityList 証発行管理リスト情報EntityList
+     * @return List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity>
+     * 証発行管理リスト帳票用データリスト
      */
-    private HihohenshashoHakkoKanriboChohyoDataSakusei(
-            FlexibleDate 印刷日時,
-            RString ページ数,
-            RString 帳票タイトル,
-            LasdecCode 市町村コード,
-            RString 市町村名,
-            RString ソート順１,
-            RString ソート順２,
-            RString ソート順３,
-            RString ソート順４,
-            RString ソート順５,
-            RString 改頁１,
-            RString 改頁２,
-            RString 改頁３,
-            RString 改頁４,
-            RString 改頁５,
-            List<AkasiHakouKanriEntity> akasiHakouKanriEntityList,
-            RString 様式) {
-        this.印刷日時 = 印刷日時;
-        this.ページ数 = ページ数;
-        this.帳票タイトル = 帳票タイトル;
-        this.市町村コード = 市町村コード;
-        this.市町村名 = 市町村名;
-        this.ソート順１ = ソート順１;
-        this.ソート順２ = ソート順２;
-        this.ソート順３ = ソート順３;
-        this.ソート順４ = ソート順４;
-        this.ソート順５ = ソート順５;
-        this.改頁１ = 改頁１;
-        this.改頁２ = 改頁２;
-        this.改頁３ = 改頁３;
-        this.改頁４ = 改頁４;
-        this.改頁５ = 改頁５;
-        this.akasiHakouKanriEntityList = akasiHakouKanriEntityList;
-        this.様式 = 様式;
+    public List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> getShohakkoKanriChohyoDataList(AkasiHakouKanriRelateEntity relateEntityList) {
+
+        HihohenshashoHakkoKanriboChohyoDataSakuseiEntity chohyoDataEntity = new HihohenshashoHakkoKanriboChohyoDataSakuseiEntity();
+        List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> chohyoDataEntityList = new ArrayList<>();
+        chohyoDataEntity.set印刷日時(get印刷日時());
+
+        chohyoDataEntity.set帳票タイトル(relateEntityList.getChouhouTitle());
+        chohyoDataEntity.set市町村コード(relateEntityList.getShichosonCode());
+        chohyoDataEntity.set市町村名(relateEntityList.getShichosonMeisho());
+        // TODO ソート順/改頁　技術点問題あり。   2016/01/20まで。
+        chohyoDataEntity.setソート順１(NarabiJunType.toValue(relateEntityList.getSortJun()).toRString());
+        chohyoDataEntity.setソート順２(RString.EMPTY);
+        chohyoDataEntity.setソート順３(RString.EMPTY);
+        chohyoDataEntity.setソート順４(RString.EMPTY);
+        chohyoDataEntity.setソート順５(RString.EMPTY);
+        if (NextPageType.委託先コード.code().equals(relateEntityList.getKayiPeji())) {
+            chohyoDataEntity.set改頁１(改頁);
+        } else {
+            chohyoDataEntity.set改頁１(RString.EMPTY);
+        }
+        chohyoDataEntity.set改頁２(RString.EMPTY);
+        chohyoDataEntity.set改頁３(RString.EMPTY);
+        chohyoDataEntity.set改頁４(RString.EMPTY);
+        chohyoDataEntity.set改頁５(RString.EMPTY);
+        int ページ数 = 1;
+        for (AkasiHakouKanriEntity entity : relateEntityList.getAkasiHakouKanriEntityList()) {
+            chohyoDataEntity.setページ数(ページ数);
+            chohyoDataEntity.set被保険者番号(entity.getHihokenshaNo());
+            chohyoDataEntity.set識別コード(entity.getShikibetsuCode());
+            chohyoDataEntity.set郵便番号(entity.getYubinNo());
+            chohyoDataEntity.set氏名(entity.getMeisho());
+            chohyoDataEntity.set住所(entity.getJusho());
+            chohyoDataEntity.set市町村コードListYou(entity.getShichosonCode());
+            chohyoDataEntity.set交付年月日(entity.getKofuYMD().wareki()
+                    .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+            chohyoDataEntity.set交付事由コード(entity.getKofuJiyu());
+            // TODO 張国朋 QA 499 回復から提供されたら対応可能。2016/01/20 まで
+            chohyoDataEntity.set交付事由略称(CodeMaster.getCodeRyakusho(new CodeShubetsu("0002"), new Code(entity.getKofuJiyu())));
+            // TODO 張国朋 QA 499 回復から提供されたら対応可能。2016/01/20 まで
+            chohyoDataEntity.set交付事由名称(CodeMaster.getCodeMeisho(new CodeShubetsu("0002"), new Code(entity.getKofuJiyu())));
+            chohyoDataEntity.set回収年月日(entity.getKaishuYMD().wareki()
+                    .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+            chohyoDataEntity.set回収事由コード(entity.getKofuJiyu());
+            // TODO 張国朋 QA 499 回復から提供されたら対応可能。2016/01/20 まで
+            chohyoDataEntity.set回収事由名称(CodeMaster.getCodeMeisho(new CodeShubetsu("0003"), new Code(entity.getKofuJiyu())));
+            chohyoDataEntity.set有効期限((new RString(entity.getYukoKigenYMD().toString())));
+            // TODO 張国朋 QA 54 回復から提供されたら対応可能。2016/01/20 まで
+            chohyoDataEntity.set様式(ShoYoshikiKubun.toValue(entity.getShoYoshikiKubunCode()).get名称());
+        }
+        chohyoDataEntityList.add(chohyoDataEntity);
+        return chohyoDataEntityList;
     }
 
-    /**
-     * 証発行管理帳票データリスト作成を生成します。
-     *
-     * @param 印刷日時 FlexibleDate
-     * @param ページ数 RString
-     * @param 帳票タイトル RString
-     * @param 市町村コード LasdecCode
-     * @param 市町村名 RString
-     * @param ソート順１ RString
-     * @param ソート順２ RString
-     * @param ソート順３ RString
-     * @param ソート順４ RString
-     * @param ソート順５ RString
-     * @param 改頁１ RString
-     * @param 改頁２ RString
-     * @param 改頁３ RString
-     * @param 改頁４ RString
-     * @param 改頁５ RString
-     * @param akasiHakouKanriEntityList List<AkasiHakouKanriEntity>
-     * @param 様式 RString
-     * @return 証発行管理帳票データリスト
-     */
-    public static HihohenshashoHakkoKanriboChohyoDataSakusei createParam_ShohakkoKanriChohyoDataList(
-            FlexibleDate 印刷日時,
-            RString ページ数,
-            RString 帳票タイトル,
-            LasdecCode 市町村コード,
-            RString 市町村名,
-            RString ソート順１,
-            RString ソート順２,
-            RString ソート順３,
-            RString ソート順４,
-            RString ソート順５,
-            RString 改頁１,
-            RString 改頁２,
-            RString 改頁３,
-            RString 改頁４,
-            RString 改頁５,
-            List<AkasiHakouKanriEntity> akasiHakouKanriEntityList,
-            RString 様式) {
-        return new HihohenshashoHakkoKanriboChohyoDataSakusei(
-                印刷日時,
-                ページ数,
-                帳票タイトル,
-                市町村コード,
-                市町村名,
-                ソート順１,
-                ソート順２,
-                ソート順３,
-                ソート順４,
-                ソート順５,
-                改頁１,
-                改頁２,
-                改頁３,
-                改頁４,
-                改頁５,
-                akasiHakouKanriEntityList,
-                様式
-        );
+    private RString get印刷日時() {
+        RDateTime printdate = RDateTime.now();
+        RStringBuilder printTimeStampSb = new RStringBuilder();
+        printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(String.format("%02d", printdate.getHour()));
+        printTimeStampSb.append(DATE_時);
+        printTimeStampSb.append(String.format("%02d", printdate.getMinute()));
+        printTimeStampSb.append(DATE_分);
+        printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
+        printTimeStampSb.append(DATE_秒);
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(DATE_作成);
+        return printTimeStampSb.toRString();
     }
 }
