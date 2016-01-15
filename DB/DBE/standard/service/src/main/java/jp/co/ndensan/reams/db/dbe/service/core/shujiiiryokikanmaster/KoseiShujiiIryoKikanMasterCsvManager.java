@@ -52,10 +52,9 @@ public class KoseiShujiiIryoKikanMasterCsvManager {
             File.createFile(filePath, new byte[CSV_TYPE]);
         }
         try (CsvWriter writer = new CsvWriter.InstanceBuilder(filePath)
-                .setEnclosure(new RString("\""))
                 .setEncode(Encode.SJIS)
                 .canAppend(false)
-                .hasHeader(false)
+                .hasHeader(true)
                 .build()) {
             for (KoseiShujiiIryoKikanMasterCSV csvBusiness : csvBusinessList) {
                 KoseiShujiiIryoKikanMasterCsvEntity data = new KoseiShujiiIryoKikanMasterCsvEntity(

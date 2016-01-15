@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe9010001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.ShujiiIryoKikanMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.dgShujiiIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
@@ -76,11 +77,11 @@ public class KoseiShujiiIryoKikanMasterValidationHandler {
                         UrErrorMessages.入力値が不正_追加メッセージあり, "市町村コード"),
                         div.getShujiiJohoInput().getTxtShichoson()));
             }
-            RString shichoson = div.getShujiiJohoInput().getTxtShichoson().getValue();
+            RString shujiiIryoKikanCode = div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue();
             if (0 < count) {
                 validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                        UrErrorMessages.既に登録済, String.valueOf(shichoson)),
-                        div.getShujiiJohoInput().getTxtShichoson()));
+                        UrErrorMessages.既に登録済, String.valueOf(shujiiIryoKikanCode)),
+                        div.getShujiiJohoInput().getTxtShujiiIryoKikanCode()));
             }
         }
         return validPairs;
@@ -115,14 +116,14 @@ public class KoseiShujiiIryoKikanMasterValidationHandler {
      * @param shujiiJohoCount 主治医情報件数
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateForUpdate(int shujiiJohoCount) {
+    public ValidationMessageControlPairs validateForDelete(int shujiiJohoCount) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (0 < shujiiJohoCount) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.排他_他のユーザが更新済で更新処理を中止)));
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(DbeErrorMessages.他の情報で使用している為削除不可)));
         }
         return validPairs;
     }
-
+    
     /**
      * 調査員情報登録エリアの編集チェック処理です。
      *

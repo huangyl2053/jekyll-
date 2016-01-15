@@ -167,6 +167,15 @@ public class ShujiiIryoKikanJoho extends
     }
 
     /**
+     * 代表者名カナを返します。
+     *
+     * @return 代表者名カナ
+     */
+    public RString get代表者名カナ() {
+        return entity.getDaihyoshaNameKana();
+    }
+
+    /**
      * 状況フラグを返します。
      *
      * @return 状況フラグ

@@ -135,6 +135,18 @@ public class ShujiiIryoKikanJohoBuilder {
     }
 
     /**
+     * 代表者名を設定します。
+     *
+     * @param 代表者名カナ 代表者名カナ
+     * @return {@link ShujiiIryoKikanJohoBuilder}
+     */
+    public ShujiiIryoKikanJohoBuilder set代表者名カナ(RString 代表者名カナ) {
+        requireNonNull(代表者名カナ, UrSystemErrorMessages.値がnull.getReplacedMessage("代表者名カナ"));
+        entity.setDaihyoshaNameKana(代表者名カナ);
+        return this;
+    }
+
+    /**
      * 状況フラグを設定します。
      *
      * @param 状況フラグ 状況フラグ
