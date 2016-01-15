@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic;
+package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5129TennyuShiboEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5129TennyuShiboEntity;
 
 /**
  * {@link jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5129TennyuShiboEntity}のマッパーIFです。
