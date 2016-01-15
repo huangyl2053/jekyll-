@@ -44,7 +44,7 @@ public class KogakuGassanShikyuFushikyuKettei
             FlexibleYear 対象年度,
             HokenshaNo 保険者番号,
             RString 支給申請書整理番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
         requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
@@ -137,7 +137,7 @@ public class KogakuGassanShikyuFushikyuKettei
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 

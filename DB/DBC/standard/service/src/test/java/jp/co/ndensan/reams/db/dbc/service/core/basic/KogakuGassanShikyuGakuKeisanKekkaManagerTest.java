@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
@@ -55,7 +54,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaManagerTest {
             FlexibleYear 主キー2 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_対象年度;
             HokenshaNo 主キー3 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_証記載保険者番号;
             RString 主キー4 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_支給申請書整理番号;
-            Decimal 主キー5 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー5 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_履歴番号;
             sut.get高額合算支給額計算結果(null, 主キー2, 主キー3, 主キー4, 主キー5);
         }
 
@@ -64,7 +63,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaManagerTest {
             HihokenshaNo 主キー1 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_被保険者番号;
             HokenshaNo 主キー3 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_証記載保険者番号;
             RString 主キー4 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_支給申請書整理番号;
-            Decimal 主キー5 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー5 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_履歴番号;
             sut.get高額合算支給額計算結果(主キー1, null, 主キー3, 主キー4, 主キー5);
         }
 
@@ -73,7 +72,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaManagerTest {
             HihokenshaNo 主キー1 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYear 主キー2 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_対象年度;
             RString 主キー4 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_支給申請書整理番号;
-            Decimal 主キー5 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー5 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_履歴番号;
             sut.get高額合算支給額計算結果(主キー1, 主キー2, null, 主キー4, 主キー5);
         }
 
@@ -82,28 +81,28 @@ public class KogakuGassanShikyuGakuKeisanKekkaManagerTest {
             HihokenshaNo 主キー1 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYear 主キー2 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_対象年度;
             HokenshaNo 主キー3 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_証記載保険者番号;
-            Decimal 主キー5 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー5 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_履歴番号;
             sut.get高額合算支給額計算結果(主キー1, 主キー2, 主キー3, null, 主キー5);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型5にnullを指定した場合_NullPointerExceptionが発生する() {
-            HihokenshaNo 主キー1 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_被保険者番号;
-            FlexibleYear 主キー2 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_対象年度;
-            HokenshaNo 主キー3 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_証記載保険者番号;
-            RString 主キー4 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_支給申請書整理番号;
-            sut.get高額合算支給額計算結果(主キー1, 主キー2, 主キー3, 主キー4, null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の主キー型5にnullを指定した場合_NullPointerExceptionが発生する() {
+//            HihokenshaNo 主キー1 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_被保険者番号;
+//            FlexibleYear 主キー2 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_対象年度;
+//            HokenshaNo 主キー3 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_証記載保険者番号;
+//            RString 主キー4 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_支給申請書整理番号;
+//            sut.get高額合算支給額計算結果(主キー1, 主キー2, 主キー3, 主キー4, null);
+//        }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYear.class), any(HokenshaNo.class), any(RString.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYear.class), any(HokenshaNo.class), any(RString.class), any(int.class))).thenReturn(null);
             HihokenshaNo 主キー1 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYear 主キー2 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_対象年度;
             HokenshaNo 主キー3 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_証記載保険者番号;
             RString 主キー4 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_支給申請書整理番号;
-            Decimal 主キー5 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー5 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_履歴番号;
             KogakuGassanShikyuGakuKeisanKekka result = sut.get高額合算支給額計算結果(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
             assertThat(result, is(nullValue()));
@@ -112,12 +111,12 @@ public class KogakuGassanShikyuGakuKeisanKekkaManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.createDbT3072KogakuGassanShikyuGakuKeisanKekkaEntity();
-            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYear.class), any(HokenshaNo.class), any(RString.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYear.class), any(HokenshaNo.class), any(RString.class), any(int.class))).thenReturn(entity);
             HihokenshaNo 主キー1 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYear 主キー2 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_対象年度;
             HokenshaNo 主キー3 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_証記載保険者番号;
             RString 主キー4 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_支給申請書整理番号;
-            Decimal 主キー5 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー5 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_履歴番号;
             KogakuGassanShikyuGakuKeisanKekka result = sut.get高額合算支給額計算結果(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
             assertThat(result.get被保険者番号().value(), is(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_被保険者番号.value()));

@@ -43,11 +43,11 @@ public class DbT3101NijiYoboKihonCheckListDac implements ISaveable<DbT3101NijiYo
      */
     @Transaction
     public DbT3101NijiYoboKihonCheckListEntity selectByKey(
-            ShikibetsuCode 識別コード,
+            //            ShikibetsuCode 識別コード,
             HihokenshaNo 被保険者番号,
             FlexibleDate 受付年月日,
-            Decimal 履歴番号) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+            int 履歴番号) throws NullPointerException {
+//        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -57,7 +57,7 @@ public class DbT3101NijiYoboKihonCheckListDac implements ISaveable<DbT3101NijiYo
         return accessor.select().
                 table(DbT3101NijiYoboKihonCheckList.class).
                 where(and(
-                                eq(shikibetsuCode, 識別コード),
+                                //                                eq(shikibetsuCode, 識別コード),
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(uketsukeYMD, 受付年月日),
                                 eq(rirekiNo, 履歴番号))).

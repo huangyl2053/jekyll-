@@ -253,14 +253,29 @@ public class KyotakuKeikakuTodokede extends
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * getKyotakuKeikakuJigyoshaSakuseiList
+     *
+     * @return KyotakuKeikakuJigyoshaSakuseiリスト
+     */
     public List<KyotakuKeikakuJigyoshaSakusei> getKyotakuKeikakuJigyoshaSakuseiList() {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * getKyotakuKeikakuJigyoshaSakuseiList
+     *
+     * @return KyotakuKeikakuJikoSakuseiリスト
+     */
     public List<KyotakuKeikakuJikoSakusei> getKyotakuKeikakuJikoSakuseiList() {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * modified
+     *
+     * @return KyotakuKeikakuTodokede
+     */
     public KyotakuKeikakuTodokede modified() {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }

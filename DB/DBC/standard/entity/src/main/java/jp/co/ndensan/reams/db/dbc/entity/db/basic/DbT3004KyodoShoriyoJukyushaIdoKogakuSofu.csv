@@ -1,7 +1,7 @@
 ﻿idoYMD,UDD015YMD,FlexibleDate,,,,,異動年月日,A
 idoKubunCode,varchar,RString,,,,,異動区分コード,A
 jukyushaIdoJiyu,varchar,RString,,,,,受給者異動事由,A
-shoKisaiHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,証記載保険者番号,A
+shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
 hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 rirekiNo,int2,int,,,,,履歴番号,A
 setaiShuyakuNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,世帯集約番号,A

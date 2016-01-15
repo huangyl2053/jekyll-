@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
  */
 public interface IDbT1001HihokenshaDaichoMapper {
 
-    /* * {@linkDbT1001HihokenshaDaichoEntity}を取得します。
+    /** {@link DbT1001HihokenshaDaichoEntity}を取得します。
      *
-     * @return {@linkDbT1001HihokenshaDaichoEntity}
+     * @return {@link DbT1001HihokenshaDaichoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT1001HihokenshaDaichoEntity getEntity();

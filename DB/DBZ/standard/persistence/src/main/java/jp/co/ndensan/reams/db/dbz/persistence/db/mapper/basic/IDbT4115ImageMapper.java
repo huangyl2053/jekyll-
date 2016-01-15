@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4115ImageEntity;
  */
 public interface IDbT4115ImageMapper {
 
-    /* * {@linkDbT4115ImageEntity}を取得します。
+    /** {@link DbT4115ImageEntity}を取得します。
      *
-     * @return {@linkDbT4115ImageEntity}
+     * @return {@link DbT4115ImageEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT4115ImageEntity getEntity();

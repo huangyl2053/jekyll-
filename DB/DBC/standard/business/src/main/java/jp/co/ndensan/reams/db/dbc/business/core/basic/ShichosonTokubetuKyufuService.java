@@ -39,7 +39,7 @@ extends ModelBase<ShichosonTokubetuKyufuServiceIdentifier,
      */
     public ShichosonTokubetuKyufuService(RString 市町村特別給付用サービスコード,
             FlexibleDate 市町村特別給付用サービス有効期間開始年月日,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(市町村特別給付用サービスコード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用サービスコード"));
         requireNonNull(市町村特別給付用サービス有効期間開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用サービス有効期間開始年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -106,7 +106,7 @@ extends ModelBase<ShichosonTokubetuKyufuServiceIdentifier,
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 

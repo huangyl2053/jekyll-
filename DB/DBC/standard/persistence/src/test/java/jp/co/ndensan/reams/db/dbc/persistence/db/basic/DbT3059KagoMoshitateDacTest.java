@@ -225,7 +225,7 @@ public class DbT3059KagoMoshitateDacTest extends DbcTestDacBase {
                 JigyoshaNo 事業所番号,
                 HihokenshaNo 被保険者番号,
                 FlexibleYearMonth サービス提供年月,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3059KagoMoshitateEntity entity = DbT3059KagoMoshitateEntityGenerator.createDbT3059KagoMoshitateEntity();
             entity.setJigyoshoNo(事業所番号);
             entity.setHiHokenshaNo(被保険者番号);

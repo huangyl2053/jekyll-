@@ -232,14 +232,29 @@ public class KyotakuKeikakuJikoSakusei extends
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 居宅計画自己作成明細リストを取得します。
+     *
+     * @return 居宅計画自己作成明細リスト
+     */
     public List<KyotakuKeikakuJikosakuseiMeisai> getKyotakuKeikakuJikosakuseiMeisaiList() {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 予防計画自己作成明細リストを取得します。
+     *
+     * @return 予防計画自己作成明細リスト
+     */
     public List<YoboKeikakuJikoSakuseiMeisai> getYoboKeikakuJikoSakuseiMeisaiList() {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * modified
+     *
+     * @return KyotakuKeikakuJikoSakusei
+     */
     public KyotakuKeikakuJikoSakusei modified() {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }

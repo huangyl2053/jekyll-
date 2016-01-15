@@ -35,4 +35,32 @@ public class HihokenshaDaichoIdentifier implements Serializable {
         this.異動日 = 異動日;
         this.枝番 = 枝番;
     }
+
+    /**
+     * get被保険者番号
+     *
+     * @return 被保険者番号
+     */
+    public HihokenshaNo get被保険者番号() {
+        return 被保険者番号;
+    }
+
+    /**
+     * get異動日
+     *
+     * @return 異動日
+     */
+    public FlexibleDate get異動日() {
+        return 異動日;
+    }
+
+    /**
+     * get枝番
+     *
+     * @return 枝番
+     */
+    public RString get枝番() {
+        return 枝番;
+    }
+
 }

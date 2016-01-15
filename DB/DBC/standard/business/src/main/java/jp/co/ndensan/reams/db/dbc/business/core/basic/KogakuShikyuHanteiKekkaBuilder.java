@@ -83,7 +83,7 @@ public class KogakuShikyuHanteiKekkaBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link KogakuShikyuHanteiKekkaBuilder}
      */
-    public KogakuShikyuHanteiKekkaBuilder set履歴番号(Decimal 履歴番号) {
+    public KogakuShikyuHanteiKekkaBuilder set履歴番号(int 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;
@@ -121,7 +121,7 @@ public class KogakuShikyuHanteiKekkaBuilder {
      */
     public KogakuShikyuHanteiKekkaBuilder set支給区分コード(RString 支給区分コード) {
         requireNonNull(支給区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("支給区分コード"));
-        entity.setShiharaiKubunCode(支給区分コード);
+        entity.setShikyuKubunCode(支給区分コード);
         return this;
     }
 
@@ -133,7 +133,7 @@ public class KogakuShikyuHanteiKekkaBuilder {
      */
     public KogakuShikyuHanteiKekkaBuilder set支給金額(Decimal 支給金額) {
         requireNonNull(支給金額, UrSystemErrorMessages.値がnull.getReplacedMessage("支給金額"));
-        entity.setShiharaiKingaku(支給金額);
+        entity.setShikyuKingaku(支給金額);
         return this;
     }
 

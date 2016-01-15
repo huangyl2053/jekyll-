@@ -43,25 +43,25 @@ public class KogakuGassanKyufuJisseki
     public KogakuGassanKyufuJisseki(KokanShikibetsuNo 交換情報識別番号,
             HihokenshaNo 被保険者番号,
             RString 支給申請書整理番号,
-            RString 整理番号,
-            Decimal 履歴番号) {
+            RString 整理番号) {
+//            Decimal 履歴番号
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3075KogakuGassanKyufuJissekiEntity();
         this.entity.setKokanJohoShikibetsuNo(交換情報識別番号);
         this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setShikyuShinseiSeiriNo(支給申請書整理番号);
         this.entity.setSeiriNo(整理番号);
-        this.entity.setRirekiNo(履歴番号);
+//        this.entity.setRirekiNo(履歴番号);
         this.id = new KogakuGassanKyufuJissekiIdentifier(
                 交換情報識別番号,
                 被保険者番号,
                 支給申請書整理番号,
-                整理番号,
-                履歴番号
+                整理番号
+        //                履歴番号
         );
     }
 
@@ -77,8 +77,8 @@ public class KogakuGassanKyufuJisseki
                 entity.getKokanJohoShikibetsuNo(),
                 entity.getHihokenshaNo(),
                 entity.getShikyuShinseiSeiriNo(),
-                entity.getSeiriNo(),
-                entity.getRirekiNo());
+                entity.getSeiriNo());
+//                entity.getRirekiNo());
     }
 
     /**
@@ -137,9 +137,9 @@ public class KogakuGassanKyufuJisseki
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
-        return entity.getRirekiNo();
-    }
+//    public Decimal get履歴番号() {
+//        return entity.getRirekiNo();
+//    }
 
     /**
      * 自己負担額証明書整理番号を返します。

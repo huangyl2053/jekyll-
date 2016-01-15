@@ -14,7 +14,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJoho.be
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJoho.genshobunHihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJoho.shikibetsuCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJoho.shinsaseikyuTodokedeYMD;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJoho.shoKisaiHokenshaNo;
+//import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJoho.shoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -50,13 +50,13 @@ public class DbT7003BemmeishaJohoDac implements ISaveable<DbT7003BemmeishaJohoEn
      */
     @Transaction
     public DbT7003BemmeishaJohoEntity selectByKey(
-            ShoKisaiHokenshaNo 証記載保険者番号,
+            //            ShoKisaiHokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             HihokenshaNo 原処分被保険者番号,
             FlexibleDate 審査請求届出日,
             FlexibleDate 弁明書作成日,
             Decimal 弁明者枝番) throws NullPointerException {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(原処分被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者番号"));
         requireNonNull(審査請求届出日, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求届出日"));
@@ -68,7 +68,7 @@ public class DbT7003BemmeishaJohoDac implements ISaveable<DbT7003BemmeishaJohoEn
         return accessor.select().
                 table(DbT7003BemmeishaJoho.class).
                 where(and(
-                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                                //                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
                                 eq(shikibetsuCode, 識別コード),
                                 eq(genshobunHihokenshaNo, 原処分被保険者番号),
                                 eq(shinsaseikyuTodokedeYMD, 審査請求届出日),

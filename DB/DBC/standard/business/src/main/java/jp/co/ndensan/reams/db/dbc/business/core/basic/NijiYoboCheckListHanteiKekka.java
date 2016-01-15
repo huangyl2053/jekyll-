@@ -38,21 +38,22 @@ extends ModelBase<NijiYoboCheckListHanteiKekkaIdentifier,
      * @param 受付年月日 受付年月日
      * @param 履歴番号 履歴番号
      */
-    public NijiYoboCheckListHanteiKekka(ShikibetsuCode 識別コード,
+    public NijiYoboCheckListHanteiKekka(
+            //            ShikibetsuCode 識別コード,
             HihokenshaNo 被保険者番号,
             FlexibleDate 受付年月日,
-            Decimal 履歴番号) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+            int 履歴番号) {
+//        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3103NijiYoboCheckListHanteiKekkaEntity();
-        this.entity.setShikibetsuCode(識別コード);
+//        this.entity.setShikibetsuCode(識別コード);
         this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setUketsukeYMD(受付年月日);
         this.entity.setRirekiNo(履歴番号);
         this.id = new NijiYoboCheckListHanteiKekkaIdentifier(
-                識別コード,
+                //                識別コード,
                 被保険者番号,
                 受付年月日,
                 履歴番号
@@ -68,7 +69,7 @@ extends ModelBase<NijiYoboCheckListHanteiKekkaIdentifier,
     public NijiYoboCheckListHanteiKekka(DbT3103NijiYoboCheckListHanteiKekkaEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("二次予防チェックリスト判定結果"));
         this.id = new NijiYoboCheckListHanteiKekkaIdentifier(
-                entity.getShikibetsuCode(),
+                //                entity.getShikibetsuCode(),
                 entity.getHihokenshaNo(),
                 entity.getUketsukeYMD(),
                 entity.getRirekiNo());
@@ -94,9 +95,9 @@ extends ModelBase<NijiYoboCheckListHanteiKekkaIdentifier,
      *
      * @return 識別コード
      */
-    public ShikibetsuCode get識別コード() {
-        return entity.getShikibetsuCode();
-    }
+//    public ShikibetsuCode get識別コード() {
+//        return entity.getShikibetsuCode();
+//    }
 
     /**
      * 被保険者番号を返します。
@@ -121,7 +122,7 @@ extends ModelBase<NijiYoboCheckListHanteiKekkaIdentifier,
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -193,7 +194,7 @@ extends ModelBase<NijiYoboCheckListHanteiKekkaIdentifier,
      *
      * @return 支援必要性_生活機能全般
      */
-    public Decimal get支援必要性_生活機能全般() {
+    public int get支援必要性_生活機能全般() {
         return entity.getShien_SeikatsuKinoZenpan();
     }
 
@@ -202,7 +203,7 @@ extends ModelBase<NijiYoboCheckListHanteiKekkaIdentifier,
      *
      * @return 支援必要性_運動器機能
      */
-    public Decimal get支援必要性_運動器機能() {
+    public int get支援必要性_運動器機能() {
         return entity.getShien_UndokiKino();
     }
 
@@ -211,7 +212,7 @@ extends ModelBase<NijiYoboCheckListHanteiKekkaIdentifier,
      *
      * @return 支援必要性_栄養
      */
-    public Decimal get支援必要性_栄養() {
+    public int get支援必要性_栄養() {
         return entity.getShien_Eiyo();
     }
 
@@ -220,7 +221,7 @@ extends ModelBase<NijiYoboCheckListHanteiKekkaIdentifier,
      *
      * @return 支援必要性_口腔
      */
-    public Decimal get支援必要性_口腔() {
+    public int get支援必要性_口腔() {
         return entity.getShien_Koku();
     }
 
@@ -229,7 +230,7 @@ extends ModelBase<NijiYoboCheckListHanteiKekkaIdentifier,
      *
      * @return 支援必要性_閉じこもり
      */
-    public Decimal get支援必要性_閉じこもり() {
+    public int get支援必要性_閉じこもり() {
         return entity.getShien_Tojikomori();
     }
 
@@ -238,7 +239,7 @@ extends ModelBase<NijiYoboCheckListHanteiKekkaIdentifier,
      *
      * @return 支援必要性_認知能力
      */
-    public Decimal get支援必要性_認知能力() {
+    public int get支援必要性_認知能力() {
         return entity.getShien_NinchiNoryoku();
     }
 
@@ -247,7 +248,7 @@ extends ModelBase<NijiYoboCheckListHanteiKekkaIdentifier,
      *
      * @return 支援必要性_うつ
      */
-    public Decimal get支援必要性_うつ() {
+    public int get支援必要性_うつ() {
         return entity.getShien_Utsu();
     }
 

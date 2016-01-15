@@ -32,7 +32,7 @@ public class ShokanShokujiHiyoSagakuShikyuIdentifierTest extends DbcTestBase {
     private static RString 主キー名3;
     private static JigyoshaNo 主キー名4;
     private static RString 主キー名5;
-    private static Decimal 主キー名6;
+//    private static Decimal 主キー名6;
 
     @BeforeClass
     public static void setUpClass() {
@@ -42,14 +42,14 @@ public class ShokanShokujiHiyoSagakuShikyuIdentifierTest extends DbcTestBase {
         主キー名3 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_整理番号;
         主キー名4 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_事業者番号;
         主キー名5 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_様式番号;
-        主キー名6 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_履歴番号;
+//        主キー名6 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class シリアライズテスト extends DbcTestBase {
 
         @Test
         public void シリアライズできる() {
-            ShokanShokujiHiyoSagakuShikyuIdentifier sut = new ShokanShokujiHiyoSagakuShikyuIdentifier(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
+            ShokanShokujiHiyoSagakuShikyuIdentifier sut = new ShokanShokujiHiyoSagakuShikyuIdentifier(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5);
             assertThat(sut, is(serializable()));
         }
     }

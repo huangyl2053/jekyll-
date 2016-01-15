@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -376,8 +377,8 @@ public class FukaAlive extends ParentModelBase<FukaAliveIdentifier, DbV2002FukaE
      *
      * @return 調定日時
      */
-    public RDateTime get調定日時() {
-        return entity.getChoteiTimestamp();
+    public YMDHMS get調定日時() {
+        return entity.getChoteiNichiji();
     }
 
     /**
@@ -475,8 +476,8 @@ public class FukaAlive extends ParentModelBase<FukaAliveIdentifier, DbV2002FukaE
      *
      * @return 異動基準日時
      */
-    public RDateTime get異動基準日時() {
-        return entity.getIdoKijunTimestamp();
+    public YMDHMS get異動基準日時() {
+        return entity.getIdoKijunNichiji();
     }
 
     /**

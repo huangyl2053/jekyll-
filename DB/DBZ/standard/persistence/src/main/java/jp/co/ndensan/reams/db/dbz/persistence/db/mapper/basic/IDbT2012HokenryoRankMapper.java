@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2012HokenryoRankEntity;
  */
 public interface IDbT2012HokenryoRankMapper {
 
-    /* * {@linkDbT2012HokenryoRankEntity}を取得します。
+    /** {@link DbT2012HokenryoRankEntity}を取得します。
      *
-     * @return {@linkDbT2012HokenryoRankEntity}
+     * @return {@link DbT2012HokenryoRankEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT2012HokenryoRankEntity getEntity();

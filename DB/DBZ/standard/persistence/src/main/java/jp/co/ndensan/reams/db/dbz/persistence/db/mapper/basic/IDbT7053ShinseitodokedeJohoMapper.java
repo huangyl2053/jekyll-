@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7053ShinseitodokedeJohoEnti
  */
 public interface IDbT7053ShinseitodokedeJohoMapper {
 
-    /* * {@linkDbT7053ShinseitodokedeJohoEntity}を取得します。
+    /** {@link DbT7053ShinseitodokedeJohoEntity}を取得します。
      *
-     * @return {@linkDbT7053ShinseitodokedeJohoEntity}
+     * @return {@link DbT7053ShinseitodokedeJohoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7053ShinseitodokedeJohoEntity getEntity();

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7002BemmeiNaiyoEntityGe
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_原処分被保険者番号;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_審査請求届出日;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_弁明書作成日;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_証記載保険者番号;
+//import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_証記載保険者番号;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_識別コード;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -54,13 +54,13 @@ public class DbT7002BemmeiNaiyoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
                     DEFAULT_弁明書作成日);
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -70,7 +70,7 @@ public class DbT7002BemmeiNaiyoDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 証記載保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -80,7 +80,7 @@ public class DbT7002BemmeiNaiyoDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 識別コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -90,7 +90,7 @@ public class DbT7002BemmeiNaiyoDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 原処分被保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -100,7 +100,7 @@ public class DbT7002BemmeiNaiyoDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 審査請求届出日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -110,7 +110,7 @@ public class DbT7002BemmeiNaiyoDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 弁明書作成日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -120,7 +120,7 @@ public class DbT7002BemmeiNaiyoDacTest extends DbzTestDacBase {
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT7002BemmeiNaiyoEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -131,7 +131,7 @@ public class DbT7002BemmeiNaiyoDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7002BemmeiNaiyoEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -145,13 +145,13 @@ public class DbT7002BemmeiNaiyoDacTest extends DbzTestDacBase {
         @Test
         public void 弁明内容が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
                     DEFAULT_弁明書作成日);
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -170,14 +170,14 @@ public class DbT7002BemmeiNaiyoDacTest extends DbzTestDacBase {
         @Test
         public void 弁明内容エンティティを渡すと_insertは_弁明内容を追加する() {
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
                     DEFAULT_弁明書作成日);
 
             assertThat(sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -190,7 +190,7 @@ public class DbT7002BemmeiNaiyoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -200,7 +200,7 @@ public class DbT7002BemmeiNaiyoDacTest extends DbzTestDacBase {
         @Test
         public void 弁明内容エンティティを渡すと_updateは_弁明内容を更新する() {
             DbT7002BemmeiNaiyoEntity updateRecord = sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -210,7 +210,7 @@ public class DbT7002BemmeiNaiyoDacTest extends DbzTestDacBase {
             sut.save(updateRecord);
 
             DbT7002BemmeiNaiyoEntity updatedRecord = sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -225,7 +225,7 @@ public class DbT7002BemmeiNaiyoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -235,7 +235,7 @@ public class DbT7002BemmeiNaiyoDacTest extends DbzTestDacBase {
         @Test
         public void 弁明内容エンティティを渡すと_deleteは_弁明内容を削除する() {
             DbT7002BemmeiNaiyoEntity deletedEntity = sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -245,7 +245,7 @@ public class DbT7002BemmeiNaiyoDacTest extends DbzTestDacBase {
             sut.save(deletedEntity);
 
             assertThat(sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+                    //                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -256,13 +256,13 @@ public class DbT7002BemmeiNaiyoDacTest extends DbzTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                ShoKisaiHokenshaNo 証記載保険者番号,
+                //                ShoKisaiHokenshaNo 証記載保険者番号,
                 ShikibetsuCode 識別コード,
                 HihokenshaNo 原処分被保険者番号,
                 FlexibleDate 審査請求届出日,
                 FlexibleDate 弁明書作成日) {
             DbT7002BemmeiNaiyoEntity entity = DbT7002BemmeiNaiyoEntityGenerator.createDbT7002BemmeiNaiyoEntity();
-            entity.setShoKisaiHokenshaNo(証記載保険者番号);
+//            entity.setShoKisaiHokenshaNo(証記載保険者番号);
             entity.setShikibetsuCode(識別コード);
             entity.setGenshobunHihokenshaNo(原処分被保険者番号);
             entity.setShinsaseikyuTodokedeYMD(審査請求届出日);

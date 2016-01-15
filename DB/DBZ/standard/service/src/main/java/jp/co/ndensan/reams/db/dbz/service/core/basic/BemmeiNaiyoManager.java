@@ -45,7 +45,8 @@ public class BemmeiNaiyoManager {
     /**
      * 主キーに合致する弁明内容を返します。
      *
-     * @param 証記載保険者番号 ShoKisaiHokenshaNo
+// * @param 証記載保険者番号 ShoKisaiHokenshaNo
+     *
      * @param 識別コード ShikibetsuCode
      * @param 原処分被保険者番号 GenshobunHihokenshaNo
      * @param 審査請求届出日 ShinsaseikyuTodokedeYMD
@@ -54,19 +55,19 @@ public class BemmeiNaiyoManager {
      */
     @Transaction
     public BemmeiNaiyo get弁明内容(
-            ShoKisaiHokenshaNo 証記載保険者番号,
+            //            ShoKisaiHokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             HihokenshaNo 原処分被保険者番号,
             FlexibleDate 審査請求届出日,
             FlexibleDate 弁明書作成日) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(原処分被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者番号"));
         requireNonNull(審査請求届出日, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求届出日"));
         requireNonNull(弁明書作成日, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明書作成日"));
 
         DbT7002BemmeiNaiyoEntity entity = dac.selectByKey(
-                証記載保険者番号,
+                //                証記載保険者番号,
                 識別コード,
                 原処分被保険者番号,
                 審査請求届出日,

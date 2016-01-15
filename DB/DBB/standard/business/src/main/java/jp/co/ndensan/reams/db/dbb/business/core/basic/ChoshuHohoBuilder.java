@@ -70,7 +70,7 @@ public class ChoshuHohoBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link ChoshuHohoBuilder}
      */
-    public ChoshuHohoBuilder set履歴番号(Decimal 履歴番号) {
+    public ChoshuHohoBuilder set履歴番号(int 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;
@@ -432,7 +432,7 @@ public class ChoshuHohoBuilder {
      */
     public ChoshuHohoBuilder set特別徴収停止日時(YMDHMS 特別徴収停止日時) {
         requireNonNull(特別徴収停止日時, UrSystemErrorMessages.値がnull.getReplacedMessage("特別徴収停止日時"));
-        entity.setTokuchoTeishiTimestamp(特別徴収停止日時);
+        entity.setTokuchoTeishiNichiji(特別徴収停止日時);
         return this;
     }
 

@@ -35,4 +35,32 @@ public class ChosainJohoIdentifier implements Serializable {
         this.認定調査委託先コード = 認定調査委託先コード;
         this.認定調査員コード = 認定調査員コード;
     }
+
+    /**
+     * get市町村コード
+     *
+     * @return 市町村コード
+     */
+    public LasdecCode get市町村コード() {
+        return 市町村コード;
+    }
+
+    /**
+     * get認定調査委託先コード
+     *
+     * @return 認定調査委託先コード
+     */
+    public ChosaItakusakiCode get認定調査委託先コード() {
+        return 認定調査委託先コード;
+    }
+
+    /**
+     * get認定調査員コード
+     *
+     * @return 認定調査員コード
+     */
+    public ChosainCode get認定調査員コード() {
+        return 認定調査員コード;
+    }
+
 }

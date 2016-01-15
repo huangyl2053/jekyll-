@@ -23,6 +23,9 @@ public class KaigoJigyoshaNo implements IValueObject<RString>, IDbColumnMappable
 
     private final RString 介護事業者番号;
 
+    /**
+     * {@link KaigoJigyoshaNo}のEMPTY格納用定数です。
+     */
     public static final KaigoJigyoshaNo EMPTY;
 
     /**

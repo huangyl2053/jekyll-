@@ -44,8 +44,8 @@ public class DbT3114RiyoshaFutanWariaiMeisaiDac implements ISaveable<DbT3114Riyo
     public DbT3114RiyoshaFutanWariaiMeisaiEntity selectByKey(
             FlexibleYear 年度,
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号,
-            Decimal 枝番号) throws NullPointerException {
+            int 履歴番号,
+            int 枝番号) throws NullPointerException {
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));

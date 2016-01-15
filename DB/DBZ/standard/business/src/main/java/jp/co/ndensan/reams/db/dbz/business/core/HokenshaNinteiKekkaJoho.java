@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -118,7 +119,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      * @return 介護認定審査会開催番号
      */
     @Override
-    public Integer get介護認定審査会開催番号() {
+    public RString get介護認定審査会開催番号() {
         return entity.getShinsakaiKaisaiNo();
     }
 
@@ -139,7 +140,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      */
     @Override
     public RString get一次判定結果変更理由() {
-        return entity.getIchijiHnateiKekkaHenkoRiyu();
+        return entity.getIchijiHanteiKekkaHenkoRiyu();
     }
 
     /**
@@ -189,7 +190,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      */
     @Override
     public FlexibleDate get二次判定結果入力年月日() {
-        return entity.getNiniHanteiKekkaInputYMD();
+        return entity.getNijiHanteiKekkaInputYMD();
     }
 
     /**
@@ -392,7 +393,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
          * @return builder
          */
         @Override
-        public Builder setShinsakaiKaisaiNo(int shinsakaiKaisaiNo) {
+        public Builder setShinsakaiKaisaiNo(RString shinsakaiKaisaiNo) {
             this.entity.setShinsakaiKaisaiNo(shinsakaiKaisaiNo);
             return this;
         }
@@ -419,7 +420,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
         @Override
         public Builder setIchijiHnateiKekkaHenkoRiyu(RString ichijiHnateiKekkaHenkoRiyu) {
             Objects.requireNonNull(ichijiHnateiKekkaHenkoRiyu);
-            this.entity.setIchijiHnateiKekkaHenkoRiyu(ichijiHnateiKekkaHenkoRiyu);
+            this.entity.setIchijiHanteiKekkaHenkoRiyu(ichijiHnateiKekkaHenkoRiyu);
             return this;
         }
 
@@ -476,15 +477,15 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
         }
 
         /**
-         * niniHanteiKekkaInputYMDを設定します。
+         * nijiHanteiKekkaInputYMDを設定します。
          *
-         * @param niniHanteiKekkaInputYMD 二次判定結果入力年月日
+         * @param nijiHanteiKekkaInputYMD 二次判定結果入力年月日
          * @return builder
          */
         @Override
-        public Builder setNiniHanteiKekkaInputYMD(FlexibleDate niniHanteiKekkaInputYMD) {
-            Objects.requireNonNull(niniHanteiKekkaInputYMD);
-            this.entity.setNiniHanteiKekkaInputYMD(niniHanteiKekkaInputYMD);
+        public Builder setNiniHanteiKekkaInputYMD(FlexibleDate nijiHanteiKekkaInputYMD) {
+            Objects.requireNonNull(nijiHanteiKekkaInputYMD);
+            this.entity.setNijiHanteiKekkaInputYMD(nijiHanteiKekkaInputYMD);
             return this;
         }
 

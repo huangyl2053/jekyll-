@@ -53,7 +53,7 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 順次番号,
-            Decimal 履歴番号) throws NullPointerException {
+            int 履歴番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));

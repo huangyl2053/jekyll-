@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7066ChohyoSeigyoKyotsuContr
  */
 public interface IDbT7066ChohyoSeigyoKyotsuControlMapper {
 
-    /* * {@linkDbT7066ChohyoSeigyoKyotsuControlEntity}を取得します。
+    /** {@link DbT7066ChohyoSeigyoKyotsuControlEntity}を取得します。
      *
-     * @return {@linkDbT7066ChohyoSeigyoKyotsuControlEntity}
+     * @return {@link DbT7066ChohyoSeigyoKyotsuControlEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7066ChohyoSeigyoKyotsuControlEntity getEntity();

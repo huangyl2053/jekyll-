@@ -30,4 +30,23 @@ public class TennyushutsuHoryuTaishoshaIdentifier implements Serializable {
         this.識別コード = 識別コード;
         this.履歴番号 = 履歴番号;
     }
+
+    /**
+     * get識別コード
+     *
+     * @return 識別コード
+     */
+    public ShikibetsuCode get識別コード() {
+        return 識別コード;
+    }
+
+    /**
+     * get履歴番号
+     *
+     * @return 履歴番号
+     */
+    public Decimal get履歴番号() {
+        return 履歴番号;
+    }
+
 }

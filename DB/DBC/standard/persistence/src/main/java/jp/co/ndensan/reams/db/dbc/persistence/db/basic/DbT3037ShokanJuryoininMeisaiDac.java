@@ -37,7 +37,7 @@ public class DbT3037ShokanJuryoininMeisaiDac implements ISaveable<DbT3037ShokanJ
      * @param 被保険者番号 HiHokenshaNo
      * @param サービス提供年月 ServiceTeikyoYM
      * @param 整理番号 SeiriNo
-     * @param 履歴番号 RirekiNo
+// * @param 履歴番号 RirekiNo
      * @return DbT3037ShokanJuryoininMeisaiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -45,12 +45,13 @@ public class DbT3037ShokanJuryoininMeisaiDac implements ISaveable<DbT3037ShokanJ
     public DbT3037ShokanJuryoininMeisaiEntity selectByKey(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
-            RString 整理番号,
-            Decimal 履歴番号) throws NullPointerException {
+            RString 整理番号
+    //            Decimal 履歴番号
+    ) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -59,8 +60,9 @@ public class DbT3037ShokanJuryoininMeisaiDac implements ISaveable<DbT3037ShokanJ
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNo, 整理番号),
-                                eq(rirekiNo, 履歴番号))).
+                                eq(seiriNo, 整理番号)
+                        //                                eq(rirekiNo, 履歴番号)
+                        )).
                 toObject(DbT3037ShokanJuryoininMeisaiEntity.class);
     }
 

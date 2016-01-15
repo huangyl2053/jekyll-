@@ -34,8 +34,8 @@ public class RiyoshaFutanWariaiMeisaiTest extends DbcTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static FlexibleYear 年度;
     private static HihokenshaNo 被保険者番号;
-    private static Decimal 履歴番号;
-    private static Decimal 枝番号;
+    private static int 履歴番号;
+    private static int 枝番号;
 
     @BeforeClass
     public static void setUpClass() {
@@ -181,7 +181,7 @@ public class RiyoshaFutanWariaiMeisaiTest extends DbcTestBase {
 
         @Test
         public void get世帯１号被保険者数は_entityが持つ世帯１号被保険者数を返す() {
-            assertThat(sut.get世帯１号被保険者数(), is(RiyoshaFutanWariaiMeisaiEntity.getSetaiIchigouHihoknehsaSu()));
+            assertThat(sut.get世帯１号被保険者数(), is(RiyoshaFutanWariaiMeisaiEntity.getSetaiIchigouHihokenshaSu()));
         }
 
         @Test

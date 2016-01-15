@@ -24,7 +24,7 @@ public class ShokanShokujiHiyoSagakuShikyuIdentifier implements Serializable {
     private final RString 整理番号;
     private final JigyoshaNo 事業者番号;
     private final RString 様式番号;
-    private final Decimal 履歴番号;
+//    private final Decimal 履歴番号;
 
     /**
      * コンストラクタです。
@@ -34,19 +34,20 @@ public class ShokanShokujiHiyoSagakuShikyuIdentifier implements Serializable {
      * @param 整理番号 整理番号
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
-     * @param 履歴番号 履歴番号
+// * @param 履歴番号 履歴番号
      */
     public ShokanShokujiHiyoSagakuShikyuIdentifier(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             JigyoshaNo 事業者番号,
-            RString 様式番号,
-            Decimal 履歴番号) {
+            RString 様式番号
+    //            Decimal 履歴番号
+    ) {
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;
         this.整理番号 = 整理番号;
         this.事業者番号 = 事業者番号;
         this.様式番号 = 様式番号;
-        this.履歴番号 = 履歴番号;
+//        this.履歴番号 = 履歴番号;
     }
 }

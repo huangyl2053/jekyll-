@@ -41,7 +41,7 @@ public class FufukuMoshitateTest extends DbzTestBase {
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
+//        主キー名1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
         主キー名2 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_識別コード;
     }
 
@@ -52,32 +52,35 @@ public class FufukuMoshitateTest extends DbzTestBase {
         @Before
         public void setUp() {
             FufukuMoshitateEntity = DbT7001FufukuMoshitateEntityGenerator.createDbT7001FufukuMoshitateEntity();
-            FufukuMoshitateEntity.setShoKisaiHokenshaNo(主キー名1);
+//            FufukuMoshitateEntity.setShoKisaiHokenshaNo(主キー名1);
             FufukuMoshitateEntity.setShikibetsuCode(主キー名2);
         }
 
 //TODO 主キー名を置換してください
-        @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new FufukuMoshitate(null, 主キー名2, 主キー名3, 主キー名4);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
+//            sut = new FufukuMoshitate(null, 主キー名2, 主キー名3, 主キー名4);
+//        }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new FufukuMoshitate(主キー名1, null, 主キー名3, 主キー名4);
+//            sut = new FufukuMoshitate(主キー名1, null, 主キー名3, 主キー名4);
+            sut = new FufukuMoshitate(null, 主キー名3, 主キー名4);
         }
 
         @Test
         public void 指定したキーが保持するDbT7001FufukuMoshitateEntityにセットされている() {
-            sut = new FufukuMoshitate(主キー名1, 主キー名2, 主キー名3, 主キー名4);
-            assertThat(sut.get証記載保険者番号(), is(主キー名1));
+//            sut = new FufukuMoshitate(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            sut = new FufukuMoshitate(主キー名2, 主キー名3, 主キー名4);
+//            assertThat(sut.get証記載保険者番号(), is(主キー名1));
             assertThat(sut.get識別コード(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するFufukuMoshitateIdentifierにセットされている() {
-            sut = new FufukuMoshitate(主キー名1, 主キー名2, 主キー名3, 主キー名4);
-            assertThat(sut.identifier().get証記載保険者番号(), is(主キー名1));
+//            sut = new FufukuMoshitate(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            sut = new FufukuMoshitate(主キー名2, 主キー名3, 主キー名4);
+//            assertThat(sut.identifier().get証記載保険者番号(), is(主キー名1));
             assertThat(sut.identifier().get識別コード(), is(主キー名2));
         }
     }
@@ -89,7 +92,7 @@ public class FufukuMoshitateTest extends DbzTestBase {
         @Before
         public void setUp() {
             FufukuMoshitateEntity = DbT7001FufukuMoshitateEntityGenerator.createDbT7001FufukuMoshitateEntity();
-            FufukuMoshitateEntity.setShoKisaiHokenshaNo(主キー名1);
+//            FufukuMoshitateEntity.setShoKisaiHokenshaNo(主キー名1);
             FufukuMoshitateEntity.setShikibetsuCode(主キー名2);
         }
 
@@ -103,7 +106,7 @@ public class FufukuMoshitateTest extends DbzTestBase {
 
             sut = new FufukuMoshitate(FufukuMoshitateEntity);
 
-            assertThat(sut.identifier().get証記載保険者番号(), is(主キー名1));
+//            assertThat(sut.identifier().get証記載保険者番号(), is(主キー名1));
             assertThat(sut.identifier().get識別コード(), is(主キー名2));
         }
     }
@@ -115,16 +118,16 @@ public class FufukuMoshitateTest extends DbzTestBase {
         @Before
         public void setUp() {
             FufukuMoshitateEntity = DbT7001FufukuMoshitateEntityGenerator.createDbT7001FufukuMoshitateEntity();
-            FufukuMoshitateEntity.setShoKisaiHokenshaNo(主キー名1);
+//            FufukuMoshitateEntity.setShoKisaiHokenshaNo(主キー名1);
             FufukuMoshitateEntity.setShikibetsuCode(主キー名2);
 
             sut = new FufukuMoshitate(FufukuMoshitateEntity);
         }
-
-        @Test
-        public void get証記載保険者番号は_entityが持つ証記載保険者番号を返す() {
-            assertThat(sut.get証記載保険者番号(), is(FufukuMoshitateEntity.getShoKisaiHokenshaNo()));
-        }
+//
+//        @Test
+//        public void get証記載保険者番号は_entityが持つ証記載保険者番号を返す() {
+//            assertThat(sut.get証記載保険者番号(), is(FufukuMoshitateEntity.getShoKisaiHokenshaNo()));
+//        }
 
         @Test
         public void get識別コードは_entityが持つ識別コードを返す() {
@@ -140,31 +143,31 @@ public class FufukuMoshitateTest extends DbzTestBase {
         public void get審査請求届出日は_entityが持つ審査請求届出日を返す() {
             assertThat(sut.get審査請求届出日(), is(FufukuMoshitateEntity.getShinsaSeikyuTodokedeYMD()));
         }
-
-        @Test
-        public void get原処分被保険者郵便番号は_entityが持つ原処分被保険者郵便番号を返す() {
-            assertThat(sut.get原処分被保険者郵便番号(), is(FufukuMoshitateEntity.getGenshobunHihokenshaYubinNo()));
-        }
-
-        @Test
-        public void get原処分被保険者住所は_entityが持つ原処分被保険者住所を返す() {
-            assertThat(sut.get原処分被保険者住所(), is(FufukuMoshitateEntity.getGenshobunHihokenshaJusho()));
-        }
-
-        @Test
-        public void get原処分被保険者氏名は_entityが持つ原処分被保険者氏名を返す() {
-            assertThat(sut.get原処分被保険者氏名(), is(FufukuMoshitateEntity.getGenshobunHihokenshaShimei()));
-        }
-
-        @Test
-        public void get原処分被保険者電話番号は_entityが持つ原処分被保険者電話番号を返す() {
-            assertThat(sut.get原処分被保険者電話番号(), is(FufukuMoshitateEntity.getGenshobunHihokenshaTelNo()));
-        }
-
-        @Test
-        public void get原処分被保険者生年月日は_entityが持つ原処分被保険者生年月日を返す() {
-            assertThat(sut.get原処分被保険者生年月日(), is(FufukuMoshitateEntity.getGenshobunHihokenshaBirthYMD()));
-        }
+//
+//        @Test
+//        public void get原処分被保険者郵便番号は_entityが持つ原処分被保険者郵便番号を返す() {
+//            assertThat(sut.get原処分被保険者郵便番号(), is(FufukuMoshitateEntity.getGenshobunHihokenshaYubinNo()));
+//        }
+//
+//        @Test
+//        public void get原処分被保険者住所は_entityが持つ原処分被保険者住所を返す() {
+//            assertThat(sut.get原処分被保険者住所(), is(FufukuMoshitateEntity.getGenshobunHihokenshaJusho()));
+//        }
+//
+//        @Test
+//        public void get原処分被保険者氏名は_entityが持つ原処分被保険者氏名を返す() {
+//            assertThat(sut.get原処分被保険者氏名(), is(FufukuMoshitateEntity.getGenshobunHihokenshaShimei()));
+//        }
+//
+//        @Test
+//        public void get原処分被保険者電話番号は_entityが持つ原処分被保険者電話番号を返す() {
+//            assertThat(sut.get原処分被保険者電話番号(), is(FufukuMoshitateEntity.getGenshobunHihokenshaTelNo()));
+//        }
+//
+//        @Test
+//        public void get原処分被保険者生年月日は_entityが持つ原処分被保険者生年月日を返す() {
+//            assertThat(sut.get原処分被保険者生年月日(), is(FufukuMoshitateEntity.getGenshobunHihokenshaBirthYMD()));
+//        }
 
         @Test
         public void get審査請求人郵便番号は_entityが持つ審査請求人郵便番号を返す() {
@@ -284,7 +287,7 @@ public class FufukuMoshitateTest extends DbzTestBase {
         @Before
         public void setUp() {
             FufukuMoshitateEntity = DbT7001FufukuMoshitateEntityGenerator.createDbT7001FufukuMoshitateEntity();
-            FufukuMoshitateEntity.setShoKisaiHokenshaNo(主キー名1);
+//            FufukuMoshitateEntity.setShoKisaiHokenshaNo(主キー名1);
             FufukuMoshitateEntity.setShikibetsuCode(主キー名2);
 
             sut = new FufukuMoshitate(FufukuMoshitateEntity);
@@ -303,7 +306,7 @@ public class FufukuMoshitateTest extends DbzTestBase {
         @Before
         public void setUp() {
             FufukuMoshitateEntity = DbT7001FufukuMoshitateEntityGenerator.createDbT7001FufukuMoshitateEntity();
-            FufukuMoshitateEntity.setShoKisaiHokenshaNo(主キー名1);
+//            FufukuMoshitateEntity.setShoKisaiHokenshaNo(主キー名1);
             FufukuMoshitateEntity.setShikibetsuCode(主キー名2);
 
             sut = new FufukuMoshitate(FufukuMoshitateEntity);
@@ -323,7 +326,7 @@ public class FufukuMoshitateTest extends DbzTestBase {
         @Before
         public void setUp() {
             FufukuMoshitateEntity = DbT7001FufukuMoshitateEntityGenerator.createDbT7001FufukuMoshitateEntity();
-            FufukuMoshitateEntity.setShoKisaiHokenshaNo(主キー名1);
+//            FufukuMoshitateEntity.setShoKisaiHokenshaNo(主キー名1);
             FufukuMoshitateEntity.setShikibetsuCode(主キー名2);
 
         }

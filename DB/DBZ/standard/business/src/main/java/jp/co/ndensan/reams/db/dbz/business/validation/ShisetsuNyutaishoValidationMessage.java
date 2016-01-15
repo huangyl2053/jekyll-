@@ -90,21 +90,21 @@ public enum ShisetsuNyutaishoValidationMessage implements IValidationMessage {
         /**
          * 退所日と次の履歴データの入所日の期間が重複
          */
-        退所日と次の履歴データの入所日の期間が重複(DbzErrorMessages.入力値が不正_追加メッセージあり.getMessage().replace("入退所期間が重複")),
+        退所日と次の履歴データの入所日の期間が重複(DbzErrorMessages.入力値が不正_追加メッセージあり.getMessage().replace("入退所期間が重複")), //NOPMD Enumでチェックする必要性がないためチェックしない
         /**
          * 入所日と前の履歴データの退所日の期間が重複
          */
-        入所日と前の履歴データの退所日の期間が重複(DbzErrorMessages.入力値が不正_追加メッセージあり.getMessage().replace("入退所期間が重複")),
+        入所日と前の履歴データの退所日の期間が重複(DbzErrorMessages.入力値が不正_追加メッセージあり.getMessage().replace("入退所期間が重複")), //NOPMD Enumでチェックする必要性がないためチェックしない
         /**
          * 入所日と期間が重複する履歴がある
          */
-        入所日と期間が重複する履歴がある(DbzErrorMessages.入力値が不正_追加メッセージあり.getMessage().replace("入退所期間が重複")),
+        入所日と期間が重複する履歴がある(DbzErrorMessages.入力値が不正_追加メッセージあり.getMessage().replace("入退所期間が重複")), //NOPMD Enumでチェックする必要性がないためチェックしない
         /**
          * 退所日と期間が重複する履歴がある
          */
-        退所日と期間が重複する履歴がある(DbzErrorMessages.入力値が不正_追加メッセージあり.getMessage().replace("入退所期間が重複"));
+        退所日と期間が重複する履歴がある(DbzErrorMessages.入力値が不正_追加メッセージあり.getMessage().replace("入退所期間が重複")); //NOPMD Enumでチェックする必要性がないためチェックしない
 
-        Message message;
+        private Message message;
 
         private _Message(Message message) {
             this.message = message;
@@ -113,6 +113,13 @@ public enum ShisetsuNyutaishoValidationMessage implements IValidationMessage {
         @Override
         public Message getMessage() {
             return message;
+        }
+
+        /**
+         * @param message the message to set
+         */
+        public void setMessage(Message message) {
+            this.message = message;
         }
     }
 }

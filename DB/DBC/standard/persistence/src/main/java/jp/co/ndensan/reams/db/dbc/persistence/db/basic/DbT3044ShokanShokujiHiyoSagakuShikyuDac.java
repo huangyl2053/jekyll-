@@ -50,14 +50,15 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDac implements ISaveable<DbT304
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             JigyoshaNo 事業者番号,
-            RString 様式番号,
-            Decimal 履歴番号) throws NullPointerException {
+            RString 様式番号
+    //            Decimal 履歴番号
+    ) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -68,8 +69,9 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDac implements ISaveable<DbT304
                                 eq(serviceTeikyoYM, サービス提供年月),
                                 eq(seiriNp, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
-                                eq(yoshikiNo, 様式番号),
-                                eq(rirekiNo, 履歴番号))).
+                                eq(yoshikiNo, 様式番号)
+                        //                                eq(rirekiNo, 履歴番号)
+                        )).
                 toObject(DbT3044ShokanShokujiHiyoSagakuShikyuEntity.class);
     }
 

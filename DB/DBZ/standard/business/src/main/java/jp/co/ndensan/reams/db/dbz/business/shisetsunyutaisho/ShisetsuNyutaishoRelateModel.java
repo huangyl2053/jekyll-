@@ -96,10 +96,10 @@ public class ShisetsuNyutaishoRelateModel implements Serializable {
      */
     public EntityDataState getState() {
 
-        if (entity.getState() == EntityDataState.Unchanged) {
-            if (isChildChanged()) {
+        if (entity.getState() == EntityDataState.Unchanged && isChildChanged()) {
+//            if () {
                 return EntityDataState.Modified;
-            }
+//            }
         }
 
         return entity.getState();

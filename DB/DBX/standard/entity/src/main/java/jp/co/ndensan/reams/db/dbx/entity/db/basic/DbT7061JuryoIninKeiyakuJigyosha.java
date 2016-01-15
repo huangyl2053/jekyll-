@@ -1,15 +1,13 @@
 package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
- * DbT7061JuryoIninKeiyakuJigyoshaテーブルの項目定義クラスです。
+ * 受領委任事業者テーブルの項目定義クラスです。
+ * <br/> 受領委任契約をしている事業者を管理します。
  */
-@OnNextSchema("rgdb")
 public enum DbT7061JuryoIninKeiyakuJigyosha implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -56,6 +54,13 @@ public enum DbT7061JuryoIninKeiyakuJigyosha implements IColumnDefinition {
     keiyakuShuryoYMD(2147483647, 0),
     /**
      * 契約サービス種別
+     * <br/>＜Enumで管理＞
+
+     * <br/>1：特定福祉用具販売事業者
+
+     * <br/>2：住宅改修事業者
+
+     * <br/>3：サービス提供事業者
      */
     serviceShubetsuCode(1, 0),
     /**
@@ -85,7 +90,7 @@ public enum DbT7061JuryoIninKeiyakuJigyosha implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -94,7 +99,7 @@ public enum DbT7061JuryoIninKeiyakuJigyosha implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

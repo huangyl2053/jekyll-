@@ -40,6 +40,15 @@ public class ShisetsuNyutaishoRirekiKanriContext implements IContext {
     private final Optional<ShisetsuNyutaishoModel> 次履歴;
     private final IItemList<ShisetsuNyutaishoModel> 全履歴;
 
+    /**
+     * コンストラクタ
+     *
+     * @param state ViewExecutionStatus
+     * @param jigyoshaMeisho RString
+     * @param 前履歴 ShisetsuNyutaishoModel
+     * @param 次履歴 ShisetsuNyutaishoModel
+     * @param 全履歴 ShisetsuNyutaishoModelリスト
+     */
     public ShisetsuNyutaishoRirekiKanriContext(ViewExecutionStatus state, RString jigyoshaMeisho,
             Optional<ShisetsuNyutaishoModel> 前履歴, Optional<ShisetsuNyutaishoModel> 次履歴, IItemList<ShisetsuNyutaishoModel> 全履歴) {
         this.state = state;
@@ -50,6 +59,14 @@ public class ShisetsuNyutaishoRirekiKanriContext implements IContext {
         this.全履歴 = 全履歴;
     }
 
+    /**
+     * コンストラクタ
+     *
+     * @param state ViewExecutionStatus
+     * @param jigyoshaMeisho RString
+     * @param 前履歴 ShisetsuNyutaishoModel
+     * @param 次履歴 ShisetsuNyutaishoModel
+     */
     public ShisetsuNyutaishoRirekiKanriContext(ViewExecutionStatus state, RString jigyoshaMeisho,
             Optional<ShisetsuNyutaishoModel> 前履歴, Optional<ShisetsuNyutaishoModel> 次履歴) {
         this.state = state;
@@ -60,26 +77,57 @@ public class ShisetsuNyutaishoRirekiKanriContext implements IContext {
         this.全履歴 = ItemList.empty();
     }
 
+    /**
+     * getState
+     *
+     * @return ViewExecutionStatus
+     */
     public ViewExecutionStatus getState() {
         return state;
     }
 
+    /**
+     * shouldSkipValidation
+     *
+     * @param message IValidationMessage
+     * @return boolean
+     */
     public boolean shouldSkipValidation(IValidationMessage message) {
         return !spec.contains(message);
     }
 
+    /**
+     * getJigyoshaMeisho
+     *
+     * @return RString
+     */
     public RString getJigyoshaMeisho() {
         return jigyoshaMeisho;
     }
 
+    /**
+     * get前履歴
+     *
+     * @return ShisetsuNyutaishoModel
+     */
     public Optional<ShisetsuNyutaishoModel> get前履歴() {
         return this.前履歴;
     }
 
+    /**
+     * get次履歴
+     *
+     * @return ShisetsuNyutaishoModel
+     */
     public Optional<ShisetsuNyutaishoModel> get次履歴() {
         return this.次履歴;
     }
 
+    /**
+     * get全履歴
+     *
+     * @return ShisetsuNyutaishoModelリスト
+     */
     public IItemList<ShisetsuNyutaishoModel> get全履歴() {
         return this.全履歴;
     }

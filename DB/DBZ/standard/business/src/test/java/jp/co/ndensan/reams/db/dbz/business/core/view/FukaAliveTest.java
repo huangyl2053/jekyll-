@@ -280,7 +280,7 @@ public class FukaAliveTest extends DbzTestBase {
 
         @Test
         public void get調定日時は_entityが持つ調定日時を返す() {
-            assertThat(sut.get調定日時(), is(FukaAliveEntity.getChoteiTimestamp()));
+            assertThat(sut.get調定日時(), is(FukaAliveEntity.getChoteiNichiji()));
         }
 
         @Test
@@ -335,7 +335,7 @@ public class FukaAliveTest extends DbzTestBase {
 
         @Test
         public void get異動基準日時は_entityが持つ異動基準日時を返す() {
-            assertThat(sut.get異動基準日時(), is(FukaAliveEntity.getIdoKijunTimestamp()));
+            assertThat(sut.get異動基準日時(), is(FukaAliveEntity.getIdoKijunNichiji()));
         }
 
         @Test

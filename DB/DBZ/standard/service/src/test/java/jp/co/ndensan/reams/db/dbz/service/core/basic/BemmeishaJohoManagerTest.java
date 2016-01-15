@@ -51,27 +51,27 @@ public class BemmeishaJohoManagerTest {
     public static class get弁明者情報 extends DbzTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
-        @Test(expected = NullPointerException.class)
-        public void 引数のShoKisaiHokenshaNoにnullを指定した場合_NullPointerExceptionが発生する() {
-            ShikibetsuCode 主キー2 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_識別コード;
-            sut.get弁明者情報(null, 主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX, Decimal.ZERO);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数のShoKisaiHokenshaNoにnullを指定した場合_NullPointerExceptionが発生する() {
+//            ShikibetsuCode 主キー2 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_識別コード;
+//            sut.get弁明者情報(null, 主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX, Decimal.ZERO);
+//        }
 
         @Test(expected = NullPointerException.class)
         public void 引数のShikibetsuCodeにnullを指定した場合_NullPointerExceptionが発生する() {
-            ShoKisaiHokenshaNo 主キー1 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号;
-            sut.get弁明者情報(主キー1, null, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX, Decimal.ZERO);
+//            ShoKisaiHokenshaNo 主キー1 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号;
+            sut.get弁明者情報(null, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX, Decimal.ZERO);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(ShoKisaiHokenshaNo.class), any(ShikibetsuCode.class),
+            when(dac.selectByKey(any(ShikibetsuCode.class),
                     any(HihokenshaNo.class), any(FlexibleDate.class), any(FlexibleDate.class), any(Decimal.class))).thenReturn(null);
 
-            ShoKisaiHokenshaNo 主キー1 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号;
+//            ShoKisaiHokenshaNo 主キー1 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号;
             ShikibetsuCode 主キー2 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_識別コード;
-            BemmeishaJoho result = sut.get弁明者情報(主キー1, 主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX, Decimal.ZERO);
+            BemmeishaJoho result = sut.get弁明者情報(主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX, Decimal.ZERO);
 
             assertThat(result, is(nullValue()));
         }
@@ -79,14 +79,14 @@ public class BemmeishaJohoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT7003BemmeishaJohoEntity entity = DbT7003BemmeishaJohoEntityGenerator.createDbT7003BemmeishaJohoEntity();
-            when(dac.selectByKey(any(ShoKisaiHokenshaNo.class), any(ShikibetsuCode.class),
+            when(dac.selectByKey(any(ShikibetsuCode.class),
                     any(HihokenshaNo.class), any(FlexibleDate.class), any(FlexibleDate.class), any(Decimal.class))).thenReturn(entity);
 
-            ShoKisaiHokenshaNo 主キー1 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号;
+//            ShoKisaiHokenshaNo 主キー1 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号;
             ShikibetsuCode 主キー2 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_識別コード;
-            BemmeishaJoho result = sut.get弁明者情報(主キー1, 主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX, Decimal.ZERO);
+            BemmeishaJoho result = sut.get弁明者情報(主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX, Decimal.ZERO);
 
-            assertThat(result.get証記載保険者番号().value(), is(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号.value()));
+            assertThat(result.get識別コード().value(), is(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_識別コード.value()));
         }
     }
 
@@ -110,7 +110,7 @@ public class BemmeishaJohoManagerTest {
             List<BemmeishaJoho> result = sut.get弁明者情報一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get証記載保険者番号().value(), is(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号.value()));
+            assertThat(result.get(0).get識別コード().value(), is(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_識別コード.value()));
         }
     }
 
@@ -143,7 +143,7 @@ public class BemmeishaJohoManagerTest {
             DbT7003BemmeishaJohoEntity entity = DbT7003BemmeishaJohoEntityGenerator.createDbT7003BemmeishaJohoEntity();
             entity.initializeMd5();
             BemmeishaJoho 弁明者情報 = new BemmeishaJoho(entity);
-            弁明者情報 = 弁明者情報.createBuilderForEdit().set役職名(new RString("任意項目1を変更")).build();
+            弁明者情報 = 弁明者情報.createBuilderForEdit().set弁明者(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save弁明者情報(弁明者情報), is(true));
         }
@@ -155,7 +155,7 @@ public class BemmeishaJohoManagerTest {
             DbT7003BemmeishaJohoEntity entity = DbT7003BemmeishaJohoEntityGenerator.createDbT7003BemmeishaJohoEntity();
             entity.initializeMd5();
             BemmeishaJoho 弁明者情報 = new BemmeishaJoho(entity);
-            弁明者情報 = 弁明者情報.createBuilderForEdit().set役職名(new RString("任意項目1を変更")).build();
+            弁明者情報 = 弁明者情報.createBuilderForEdit().set弁明者(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save弁明者情報(弁明者情報), is(false));
         }

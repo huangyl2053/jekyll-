@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -19,8 +19,8 @@ public final class DbT3116KijunShunyugakuTekiyoKanriEntityGenerator {
 
     public static final SetaiCode DEFAULT_世帯コード = new SetaiCode("012340123400001");
     public static final FlexibleYear DEFAULT_年度 = new FlexibleYear("1990");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
-    public static final HokenshaNo DEFAULT_被保険者番号 = new HokenshaNo("1");
+    public static final int DEFAULT_履歴番号 = 1;
+    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
     public static final Decimal DEFAULT_公的年金収入額 = new Decimal(0);
     public static final Decimal DEFAULT_給与収入額 = new Decimal(0);
     public static final Decimal DEFAULT_その他の収入額 = new Decimal(0);
@@ -32,8 +32,8 @@ public final class DbT3116KijunShunyugakuTekiyoKanriEntityGenerator {
     public static final FlexibleDate DEFAULT_申請書作成の世帯基準日 = new FlexibleDate("19900101");
     public static final FlexibleDate DEFAULT_決定通知書発行日 = new FlexibleDate("19900101");
     public static final boolean DEFAULT_宛先印字対象者フラグ = false;
-    public static final Decimal DEFAULT_年少扶養控除_16歳未満_人数 = new Decimal(0);
-    public static final Decimal DEFAULT_年少扶養控除_16_18歳未満_人数 = new Decimal(0);
+    public static final int DEFAULT_年少扶養控除_16歳未満_人数 = 1;
+    public static final int DEFAULT_年少扶養控除_16_18歳未満_人数 = 1;
     public static final Decimal DEFAULT_世帯員の総収入額 = new Decimal(0);
     public static final boolean DEFAULT_世帯主フラグ = false;
     public static final Decimal DEFAULT_課税所得額 = new Decimal(0);

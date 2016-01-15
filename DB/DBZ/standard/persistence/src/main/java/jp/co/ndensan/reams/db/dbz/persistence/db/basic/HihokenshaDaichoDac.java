@@ -104,6 +104,7 @@ public class HihokenshaDaichoDac implements IPersistable<DbT1001HihokenshaDaicho
      * @param 枝番 {@link RString 枝番}
      * @return
      * {@link DbT1001HihokenshaDaichoEntity 被保険者台帳管理Entity}の{@link List リスト}
+     * @throws NullPointerException NullPointerException
      */
     @Transaction
     public DbT1001HihokenshaDaichoEntity selectByKey(HihokenshaNo 被保険者番号,

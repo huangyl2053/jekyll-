@@ -6,11 +6,11 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyosha.rirekiNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3083DaisanshaKoiKyushoMeisai.hihokenshaNo;
+//import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyosha.rirekiNo;
+//import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3083DaisanshaKoiKyushoMeisai.hihokenshaNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7116JukyushaGendoGakuKanri;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7116JukyushaGendoGakuKanri.shikibetsuKubun;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7116JukyushaGendoGakuKanri.yukoKaishiYM;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7116JukyushaGendoGakuKanri.*;
+//import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7116JukyushaGendoGakuKanri.yukoKaishiYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7116JukyushaGendoGakuKanriEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;

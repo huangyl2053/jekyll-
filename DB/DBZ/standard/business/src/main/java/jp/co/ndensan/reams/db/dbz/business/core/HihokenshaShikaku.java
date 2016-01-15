@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.IKaigoShikaku;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.JushochiTokureishaKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShikakuHihokenshaKubun;
+//import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.KoikinaiJushochitokureishaKubun;
@@ -535,9 +535,9 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         }
 
         //TODO n8178 城間篤人 UR側の区分も今後、CodeAssignedItemの形に修正する予定。修正後にこのメソッドを削除する　2014年9月末
-        private ShikakuHihokenshaKubun toShikakuHihokenshaKubun(HihokenshaKubun hihokenshaKubun) {
-            return ShikakuHihokenshaKubun.第１号被保険者;
-        }
+//        private ShikakuHihokenshaKubun toShikakuHihokenshaKubun(HihokenshaKubun hihokenshaKubun) {
+//            return ShikakuHihokenshaKubun.第１号被保険者;
+//        }
 
         private boolean isNull(Object target) {
             return target == null;

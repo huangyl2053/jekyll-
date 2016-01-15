@@ -100,10 +100,10 @@ public class FufukuMoshitateManagerTest {
 
             when(provider.create(any(Class.class))).thenReturn(mapper);
 
-            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
+//            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
             ShikibetsuCode 主キー2 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_識別コード;
 
-            FufukuMoshitateMapperParameter 不服審査申立情報検索条件 = FufukuMoshitateMapperParameter.createSelectByKeyParam(主キー1, 主キー2);
+            FufukuMoshitateMapperParameter 不服審査申立情報検索条件 = FufukuMoshitateMapperParameter.createSelectByKeyParam(主キー2);
             FufukuMoshitate result = sut.get不服審査申立情報(不服審査申立情報検索条件);
 
             assertThat(result, is(nullValue()));
@@ -117,12 +117,12 @@ public class FufukuMoshitateManagerTest {
 
             when(provider.create(any(Class.class))).thenReturn(mapper);
 
-            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
+//            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
             ShikibetsuCode 主キー2 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_識別コード;
-            FufukuMoshitateMapperParameter 不服審査申立情報検索条件 = FufukuMoshitateMapperParameter.createSelectByKeyParam(主キー1, 主キー2);
+            FufukuMoshitateMapperParameter 不服審査申立情報検索条件 = FufukuMoshitateMapperParameter.createSelectByKeyParam(主キー2);
             FufukuMoshitate result = sut.get不服審査申立情報(不服審査申立情報検索条件);
 
-            assertThat(result.get証記載保険者番号(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号));
+            assertThat(result.get識別コード(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_識別コード));
         }
     }
 
@@ -140,8 +140,9 @@ public class FufukuMoshitateManagerTest {
 
             when(provider.create(any(Class.class))).thenReturn(mapper);
 
-            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
-            FufukuMoshitateMapperParameter 不服審査申立情報検索条件 = FufukuMoshitateMapperParameter.createSelectListParam(主キー1);
+//            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
+            ShikibetsuCode 主キー2 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_識別コード;
+            FufukuMoshitateMapperParameter 不服審査申立情報検索条件 = FufukuMoshitateMapperParameter.createSelectByKeyParam(主キー2);
             List<FufukuMoshitate> result = sut.get不服審査申立情報リストBy主キー1(不服審査申立情報検索条件);
 
             assertThat(result.isEmpty(), is(true));
@@ -157,12 +158,13 @@ public class FufukuMoshitateManagerTest {
 
             when(provider.create(any(Class.class))).thenReturn(mapper);
 
-            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
-            FufukuMoshitateMapperParameter 不服審査申立情報検索条件 = FufukuMoshitateMapperParameter.createSelectListParam(主キー1);
+//            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
+            ShikibetsuCode 主キー2 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_識別コード;
+            FufukuMoshitateMapperParameter 不服審査申立情報検索条件 = FufukuMoshitateMapperParameter.createSelectListParam(主キー2);
             List<FufukuMoshitate> result = sut.get不服審査申立情報リストBy主キー1(不服審査申立情報検索条件);
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get証記載保険者番号().value(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号.value()));
+            assertThat(result.get(0).get識別コード().value(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_識別コード.value()));
         }
     }
 
@@ -173,9 +175,9 @@ public class FufukuMoshitateManagerTest {
 // 不服審査申立情報
             when(dac.save(any(DbT7001FufukuMoshitateEntity.class))).thenReturn(1);
             when(弁明内容Manager.save(any(BemmeiNaiyo.class))).thenReturn(true);
-            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
+//            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
             ShikibetsuCode 主キー2 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_識別コード;
-            FufukuMoshitate 不服審査申立情報 = TestSupport.createFufukuMoshitate(主キー1, 主キー2);
+            FufukuMoshitate 不服審査申立情報 = TestSupport.createFufukuMoshitate(主キー2);
 
             assertThat(sut.save(不服審査申立情報), is(true));
         }
@@ -186,9 +188,9 @@ public class FufukuMoshitateManagerTest {
 // 不服審査申立情報
             when(dac.save(any(DbT7001FufukuMoshitateEntity.class))).thenReturn(1);
             when(弁明内容Manager.save(any(BemmeiNaiyo.class))).thenReturn(true);
-            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
+//            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
             ShikibetsuCode 主キー2 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_識別コード;
-            FufukuMoshitate 不服審査申立情報 = TestSupport.createFufukuMoshitate(主キー1, 主キー2);
+            FufukuMoshitate 不服審査申立情報 = TestSupport.createFufukuMoshitate(主キー2);
 
             assertThat(sut.save(不服審査申立情報), is(false));
         }
@@ -199,9 +201,9 @@ public class FufukuMoshitateManagerTest {
             when(dac.save(any(DbT7001FufukuMoshitateEntity.class))).thenReturn(1);
             when(弁明内容Manager.save(any(BemmeiNaiyo.class))).thenReturn(true);
 
-            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
+//            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
             ShikibetsuCode 主キー2 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_識別コード;
-            FufukuMoshitate 不服審査申立情報 = TestSupport.createFufukuMoshitate(主キー1, 主キー2);
+            FufukuMoshitate 不服審査申立情報 = TestSupport.createFufukuMoshitate(主キー2);
             不服審査申立情報 = TestSupport.initializeFufukuMoshitate(不服審査申立情報);
             不服審査申立情報 = TestSupport.modifiedFufukuMoshitate(不服審査申立情報);
 
@@ -215,9 +217,9 @@ public class FufukuMoshitateManagerTest {
             when(dac.save(any(DbT7001FufukuMoshitateEntity.class))).thenReturn(1);
             when(弁明内容Manager.save(any(BemmeiNaiyo.class))).thenReturn(true);
 
-            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
+//            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
             ShikibetsuCode 主キー2 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_識別コード;
-            FufukuMoshitate 不服審査申立情報 = TestSupport.createFufukuMoshitate(主キー1, 主キー2);
+            FufukuMoshitate 不服審査申立情報 = TestSupport.createFufukuMoshitate(主キー2);
             不服審査申立情報 = TestSupport.initializeFufukuMoshitate(不服審査申立情報);
             不服審査申立情報 = TestSupport.modifiedFufukuMoshitate(不服審査申立情報);
 
@@ -230,9 +232,9 @@ public class FufukuMoshitateManagerTest {
             when(dac.save(any(DbT7001FufukuMoshitateEntity.class))).thenReturn(1);
             when(弁明内容Manager.save(any(BemmeiNaiyo.class))).thenReturn(true);
 
-            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
+//            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
             ShikibetsuCode 主キー2 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_識別コード;
-            FufukuMoshitate 不服審査申立情報 = TestSupport.createFufukuMoshitate(主キー1, 主キー2);
+            FufukuMoshitate 不服審査申立情報 = TestSupport.createFufukuMoshitate(主キー2);
             不服審査申立情報 = TestSupport.initializeFufukuMoshitate(不服審査申立情報);
             不服審査申立情報 = 不服審査申立情報.deleted();
 
@@ -246,9 +248,9 @@ public class FufukuMoshitateManagerTest {
             when(dac.save(any(DbT7001FufukuMoshitateEntity.class))).thenReturn(1);
             when(弁明内容Manager.save(any(BemmeiNaiyo.class))).thenReturn(true);
 
-            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
+//            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
             ShikibetsuCode 主キー2 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_識別コード;
-            FufukuMoshitate 不服審査申立情報 = TestSupport.createFufukuMoshitate(主キー1, 主キー2);
+            FufukuMoshitate 不服審査申立情報 = TestSupport.createFufukuMoshitate(主キー2);
             不服審査申立情報 = TestSupport.initializeFufukuMoshitate(不服審査申立情報);
             不服審査申立情報 = 不服審査申立情報.deleted();
 
@@ -262,9 +264,9 @@ public class FufukuMoshitateManagerTest {
             when(dac.save(any(DbT7001FufukuMoshitateEntity.class))).thenReturn(1);
             when(弁明内容Manager.save(any(BemmeiNaiyo.class))).thenReturn(true);
 
-            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
+//            ShoKisaiHokenshaNo 主キー1 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_証記載保険者番号;
             ShikibetsuCode 主キー2 = DbT7001FufukuMoshitateEntityGenerator.DEFAULT_識別コード;
-            FufukuMoshitate 不服審査申立情報 = TestSupport.createFufukuMoshitate(主キー1, 主キー2);
+            FufukuMoshitate 不服審査申立情報 = TestSupport.createFufukuMoshitate(主キー2);
             不服審査申立情報 = TestSupport.initializeFufukuMoshitate(不服審査申立情報);
 
             assertThat(sut.save(不服審査申立情報), is(false));
@@ -273,18 +275,18 @@ public class FufukuMoshitateManagerTest {
 
     private static class TestSupport {
 
-        public static FufukuMoshitate createFufukuMoshitate(ShoKisaiHokenshaNo 主キー1, ShikibetsuCode 主キー2) {
-            FufukuMoshitate 不服審査申立情報 = new FufukuMoshitate(主キー1, 主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX);
+        public static FufukuMoshitate createFufukuMoshitate( ShikibetsuCode 主キー2) {
+            FufukuMoshitate 不服審査申立情報 = new FufukuMoshitate(主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX);
             return 不服審査申立情報.createBuilderForEdit()
                     // 弁明内容
-                    .setBemmeiNaiyo(createBemmeiNaiyo(主キー1, 主キー2))
+                    .setBemmeiNaiyo(createBemmeiNaiyo(主キー2))
                     .build();
         }
 
 // 弁明内容
-        private static BemmeiNaiyo createBemmeiNaiyo(ShoKisaiHokenshaNo 主キー1, ShikibetsuCode 主キー2) {
+        private static BemmeiNaiyo createBemmeiNaiyo( ShikibetsuCode 主キー2) {
             return new BemmeiNaiyo(
-                    主キー1, 主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
+                    主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
         }
 
         public static FufukuMoshitate initializeFufukuMoshitate(FufukuMoshitate 不服審査申立情報) {

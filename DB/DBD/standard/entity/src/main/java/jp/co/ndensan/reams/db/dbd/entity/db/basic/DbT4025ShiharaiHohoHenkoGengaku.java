@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 支払方法変更減額テーブルの項目定義クラスです。
  */
 public enum DbT4025ShiharaiHohoHenkoGengaku implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -86,7 +86,11 @@ public enum DbT4025ShiharaiHohoHenkoGengaku implements IColumnDefinition {
     /**
      * 確定減額期間終了年月日
      */
-    kakutei_GengakuShuryoYMD(2147483647, 0);
+    kakutei_GengakuShuryoYMD(2147483647, 0),
+    /**
+     * 論理削除フラグ
+     */
+    logicalDeletedFlag(1, 0);
 
     private final int maxLength;
     private final int scale;
