@@ -5,11 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildHandler;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShurui;
-import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.kaigoserviceshurui.KaigoServiceShuruiMapperParameter;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui.KaigoServiceShuruiMapperParameter;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiManager;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -49,7 +50,9 @@ public class ServiceTypeInputCommonChildDiv {
         KaigoServiceShuruiMapperParameter param = KaigoServiceShuruiMapperParameter.createSelectByKeyParam(
                 new KaigoServiceShuruiCode(div.getTxtServiceType().getValue()),
                 new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString()));
-        List<KaigoServiceShurui> focusServiceTypeList = service.getFocusServiceTypeList(param);
+        KaigoServiceShurui kaigoServiceShurui = service.get介護サービス種類(param);
+        List<KaigoServiceShurui> focusServiceTypeList = new ArrayList<>();
+        focusServiceTypeList.add(kaigoServiceShurui);
         getHandler(div).setServiceTypeName(focusServiceTypeList);
         return ResponseData.of(div).respond();
     }
