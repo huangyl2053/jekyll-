@@ -143,7 +143,7 @@ public class TennyushutsuHoryuTaishoshaBusiness implements TennyuTenshutsuHoryuT
      */
     @Override
     public FlexibleDate get異動年月日() {
-        return entity.get転出予定異動年月日() != null ? entity.get転出予定異動年月日() : entity.get転出確定異動年月日();
+        return entity.get転出確定異動年月日() != null ? entity.get転出確定異動年月日() : entity.get転出予定異動年月日();
     }
 
     /**

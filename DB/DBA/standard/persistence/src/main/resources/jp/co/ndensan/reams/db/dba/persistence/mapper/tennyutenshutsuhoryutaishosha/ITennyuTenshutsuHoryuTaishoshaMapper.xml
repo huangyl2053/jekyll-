@@ -9,7 +9,7 @@
         , (SELECT DbT1001HihokenshaDaicho."hihokenshaNo"
         FROM rgdb."DbT1001HihokenshaDaicho"  DbT1001HihokenshaDaicho
         WHERE DbT1001HihokenshaDaicho."shikibetsuCode" = DbT1011TenshutsuHoryuTaishosha."shikibetsuCode"
-        AND DbT1001HihokenshaDaicho."isDeleted" = False
+        AND DbT1001HihokenshaDaicho."logicalDeletedFlag" = False
         ORDER BY DbT1001HihokenshaDaicho."idoYMD" DESC
         ,DbT1001HihokenshaDaicho."edaNo" DESC
         LIMIT 1
@@ -51,7 +51,7 @@
         ,(SELECT DbT1001HihokenshaDaicho."hihokenshaNo"
         FROM rgdb."DbT1001HihokenshaDaicho"  DbT1001HihokenshaDaicho
         WHERE DbT1001HihokenshaDaicho."shikibetsuCode" = DbT1010TennyushutsuHoryuTaishosha."shikibetsuCode"
-        AND DbT1001HihokenshaDaicho."isDeleted" = False
+        AND DbT1001HihokenshaDaicho."logicalDeletedFlag" = False
         ORDER BY DbT1001HihokenshaDaicho."idoYMD" DESC
         ,DbT1001HihokenshaDaicho."edaNo" DESC
         LIMIT 1
@@ -90,7 +90,7 @@
         ,(SELECT DbT1001HihokenshaDaicho."hihokenshaNo"
         FROM rgdb."DbT1001HihokenshaDaicho"  DbT1001HihokenshaDaicho
         WHERE DbT1001HihokenshaDaicho."shikibetsuCode" = DbT1010TennyushutsuHoryuTaishosha."shikibetsuCode"
-        AND DbT1001HihokenshaDaicho."isDeleted" = False
+        AND DbT1001HihokenshaDaicho."logicalDeletedFlag" = False
         ORDER BY DbT1001HihokenshaDaicho."idoYMD" DESC
         ,DbT1001HihokenshaDaicho."edaNo" DESC
         LIMIT 1
