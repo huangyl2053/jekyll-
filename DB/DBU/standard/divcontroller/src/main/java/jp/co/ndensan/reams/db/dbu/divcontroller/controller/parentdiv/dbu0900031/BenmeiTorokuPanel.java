@@ -56,12 +56,6 @@ public class BenmeiTorokuPanel {
      * @return ResponseData<ShikakukihonPanelDiv>
      */
     public ResponseData<BenmeiTorokuPanelDiv> onLoad(BenmeiTorokuPanelDiv panelDiv) {
-
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.モード, 状態_修正);
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.識別コード, new ShikibetsuCode("201601"));
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.被保険者番号, new HihokenshaNo("20160101"));
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.審査請求届出日, new FlexibleDate("20160104"));
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.弁明書作成日, new FlexibleDate("20160104"));
         //TODO ViewStateより弁明登録一覧画面からの引き継ぎ情報を取得する。
         識別コード = ViewStateHolder.get(BenmeiTorokuViewStateKeys.識別コード, ShikibetsuCode.class);
         被保険者番号 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.被保険者番号, HihokenshaNo.class);

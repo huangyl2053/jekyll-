@@ -25,7 +25,11 @@ public enum ItakusakiChosainIchiranReportId {
     /**
      * 要介護認定業務進捗状況一覧表の帳票ID。
      */
-    REPORTID_DBE521002("DBE521002");
+    REPORTID_DBE521002("DBE521002"),
+    /**
+     * 要介護認定結果情報提供票（主治医）の帳票ID。
+     */
+    REPORTID_DBE090001("DBE090001");
 
     private final RString code;
 

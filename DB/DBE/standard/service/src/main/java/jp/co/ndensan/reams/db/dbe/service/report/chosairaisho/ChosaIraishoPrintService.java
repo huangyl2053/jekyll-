@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.service.report.chosairaiichiranhyo;
+package jp.co.ndensan.reams.db.dbe.service.report.chosairaisho;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoBodyItem;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoHeadItem;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoProperty;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReport;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReportJoho;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaiichiranhyo.ChosaIraiIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadItem;
+import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoProperty;
+import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoReport;
+import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoReportJoho;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaisho.ChosaIraishoReportSource;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
@@ -31,34 +30,60 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
  *
- * 認定調査依頼一覧表Printerです。
+ * 要介護認定調査依頼書Printerです。
  */
-public class ChosaIraiIchiranhyoPrintService {
+public class ChosaIraishoPrintService {
 
     /**
-     * 認定調査依頼一覧表を印刷します。
+     * 要介護認定調査依頼書を印刷します。
      *
-     * @param headItem 認定調査依頼一覧表表作成_帳票クラスパラメータクラス
-     * @param bodyItems 認定調査依頼一覧表表作成_帳票クラスパラメータクラス
+     * @param headItem 要介護認定調査依頼書作成_帳票クラスパラメータクラス
      * @return {@link SourceDataCollection}
      */
-    public SourceDataCollection print(ChosaIraiIchiranhyoHeadItem headItem, List<ChosaIraiIchiranhyoBodyItem> bodyItems) {
-        ChosaIraiIchiranhyoProperty property = new ChosaIraiIchiranhyoProperty();
+    public SourceDataCollection print(ChosaIraishoHeadItem headItem) {
+        ChosaIraishoProperty property = new ChosaIraishoProperty();
         try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<ChosaIraiIchiranhyoReportSource> assembler = createAssembler(property, reportManager)) {
+            try (ReportAssembler<ChosaIraishoReportSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
                         RDate.getNowDate(), assembler.getImageFolderPath());
-                headItem = new ChosaIraiIchiranhyoHeadItem(
-                        headItem.getPrintTimeStamp(),
+
+                headItem = new ChosaIraishoHeadItem(
                         headItem.getShomeiHakkoYMD(),
-                        headItem.getYubinNo(),
-                        headItem.getShuchoMei(),
-                        headItem.getJigyoshaJusho(),
                         ninshoshaSourceBuilder.buildSource().denshiKoin,
+                        headItem.getShichosonMei(),
+                        headItem.getShuchoMei(),
                         ninshoshaSourceBuilder.buildSource().koinShoryaku,
-                        headItem.getJigyoshaName(),
-                        headItem.getJigyoshaNo(),
+                        headItem.getBunshoNo(),
+                        ninshoshaSourceBuilder.buildSource().hakkoYMD,
+                        headItem.getHihokenshaNo1(),
+                        headItem.getHihokenshaNo2(),
+                        headItem.getHihokenshaNo3(),
+                        headItem.getHihokenshaNo4(),
+                        headItem.getHihokenshaNo5(),
+                        headItem.getHihokenshaNo6(),
+                        headItem.getHihokenshaNo7(),
+                        headItem.getHihokenshaNo8(),
+                        headItem.getHihokenshaNo9(),
+                        headItem.getHihokenshaNo10(),
+                        headItem.getHihokenshaNameKana(),
+                        headItem.getBirthGengoMeiji(),
+                        headItem.getBirthGengoTaisho(),
+                        headItem.getBirthGengoShowa(),
+                        headItem.getBirthYMD(),
+                        headItem.getHihokenshaName(),
+                        headItem.getSeibetsuMan(),
+                        headItem.getSeibetsuWoman(),
+                        headItem.getYubinNo(),
+                        headItem.getJusho(),
+                        headItem.getTelNo(),
+                        headItem.getHomonChosasakiYubinNo(),
+                        headItem.getHomonChosasakiJusho1(),
+                        headItem.getHomonChosasakiJusho2(),
+                        headItem.getHomonChosasakiJusho3(),
+                        headItem.getHomonChosasakiTelNo(),
+                        headItem.getShinseiYMD(),
+                        headItem.getTeishutsuKigen(),
                         headItem.getTsuchibun1(),
                         headItem.getTsuchibun2(),
                         headItem.getTsuchibun3(),
@@ -76,9 +101,11 @@ public class ChosaIraiIchiranhyoPrintService {
                         headItem.getTsuchibun15(),
                         headItem.getTsuchibun16(),
                         headItem.getTsuchibun17(),
-                        headItem.getTsuchibun18());
-                for (ChosaIraiIchiranhyoReport report : toReports(new ChosaIraiIchiranhyoReportJoho(headItem, bodyItems))) {
-                    ReportSourceWriter<ChosaIraiIchiranhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                        headItem.getTsuchibun18(),
+                        headItem.getTsuchibun19(),
+                        headItem.getRemban());
+                for (ChosaIraishoReport report : toReports(new ChosaIraishoReportJoho(headItem))) {
+                    ReportSourceWriter<ChosaIraishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
                 }
             }
@@ -86,11 +113,10 @@ public class ChosaIraiIchiranhyoPrintService {
         }
     }
 
-    private static List<ChosaIraiIchiranhyoReport> toReports(ChosaIraiIchiranhyoReportJoho reportJoho) {
-        List<ChosaIraiIchiranhyoReport> list = new ArrayList<>();
-        list.add(ChosaIraiIchiranhyoReport.createFrom(
-                reportJoho.getHeadItem(),
-                reportJoho.getBodyItemList()));
+    private static List<ChosaIraishoReport> toReports(ChosaIraishoReportJoho reportJoho) {
+        List<ChosaIraishoReport> list = new ArrayList<>();
+        list.add(ChosaIraishoReport.createFrom(
+                reportJoho.getHeadItem()));
         return list;
     }
 
