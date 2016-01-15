@@ -149,7 +149,7 @@ public class BenmeiTorokuManager {
      * @param 識別コード ShikibetsuCode
      * @param 被保険者番号 HihokenshaNo
      * @param 審査請求届出日 FlexibleDate
-     * @param 弁明書作成日
+     * @param 弁明書作成日 FlexibleDate
      * @return BemmeishaJoho
      */
     @Transaction
@@ -183,26 +183,23 @@ public class BenmeiTorokuManager {
     }
 
     private boolean getFufukuMoshitateINS(FufukuMoshitate fufukuMoshitate) {
-        int 戻る値 = 0;
         DbT7001FufukuMoshitateEntity fufukuMoshitateEntity = fufukuMoshitate.toEntity();
         fufukuMoshitateEntity.setState(EntityDataState.Added);
-        戻る値 = dbT7001FufukuMoshitateDac.save(fufukuMoshitateEntity);
+        int 戻る値 = dbT7001FufukuMoshitateDac.save(fufukuMoshitateEntity);
         return 戻る値 == 1;
     }
 
     private boolean getBemmeiNaiyoINS(BemmeiNaiyo bemmeiNaiyo) {
-        int 戻る値 = 0;
         DbT7002BemmeiNaiyoEntity bemmeiNaiyoEntity = bemmeiNaiyo.toEntity();
         bemmeiNaiyoEntity.setState(EntityDataState.Added);
-        戻る値 = dbT7002BemmeiNaiyoDac.saveOrDelete(bemmeiNaiyoEntity);
+        int 戻る値 = dbT7002BemmeiNaiyoDac.saveOrDelete(bemmeiNaiyoEntity);
         return 戻る値 == 1;
     }
 
     private boolean getBemmeishaJohoINS(BemmeishaJoho bemmeishaJoho) {
-        int 戻る値 = 0;
         DbT7003BemmeishaJohoEntity bemmeishaJohoEntity = bemmeishaJoho.toEntity();
         bemmeishaJohoEntity.setState(EntityDataState.Added);
-        戻る値 = dbT7003BemmeishaJohoDac.saveOrDelete(bemmeishaJohoEntity);
+        int 戻る値 = dbT7003BemmeishaJohoDac.saveOrDelete(bemmeishaJohoEntity);
         return 戻る値 == 1;
     }
 
@@ -223,26 +220,23 @@ public class BenmeiTorokuManager {
     }
 
     private boolean getFufukuMoshitateUPD(FufukuMoshitate fufukuMoshitate) {
-        int 戻る値 = 0;
         DbT7001FufukuMoshitateEntity dbT7001FufukuMoshitateEntity = fufukuMoshitate.toEntity();
         dbT7001FufukuMoshitateEntity.setState(EntityDataState.Modified);
-        戻る値 = dbT7001FufukuMoshitateDac.save(dbT7001FufukuMoshitateEntity);
+        int 戻る値 = dbT7001FufukuMoshitateDac.save(dbT7001FufukuMoshitateEntity);
         return 戻る値 == 1;
     }
 
     private boolean getBemmeiNaiyoUPD(BemmeiNaiyo bemmeiNaiyo) {
-        int 戻る値 = 0;
         DbT7002BemmeiNaiyoEntity bemmeiNaiyoEntity = bemmeiNaiyo.toEntity();
         bemmeiNaiyoEntity.setState(EntityDataState.Modified);
-        戻る値 = dbT7002BemmeiNaiyoDac.saveOrDelete(bemmeiNaiyoEntity);
+        int 戻る値 = dbT7002BemmeiNaiyoDac.saveOrDelete(bemmeiNaiyoEntity);
         return 戻る値 == 1;
     }
 
-    private boolean getBemmeishaJohoUPD(BemmeishaJoho BemmeishaJoho) {
-        int 戻る値 = 0;
-        DbT7003BemmeishaJohoEntity bemmeishaJohoEntity = BemmeishaJoho.toEntity();
+    private boolean getBemmeishaJohoUPD(BemmeishaJoho bemmeishaJoho) {
+        DbT7003BemmeishaJohoEntity bemmeishaJohoEntity = bemmeishaJoho.toEntity();
         bemmeishaJohoEntity.setState(EntityDataState.Modified);
-        戻る値 = dbT7003BemmeishaJohoDac.saveOrDelete(bemmeishaJohoEntity);
+        int 戻る値 = dbT7003BemmeishaJohoDac.saveOrDelete(bemmeishaJohoEntity);
         return 戻る値 == 1;
     }
 
@@ -263,29 +257,31 @@ public class BenmeiTorokuManager {
     }
 
     private boolean getFufukuMoshitateDEL(FufukuMoshitate fufukuMoshitate) {
-        int 戻る値 = 0;
         DbT7001FufukuMoshitateEntity dbT7001FufukuMoshitateEntity = fufukuMoshitate.toEntity();
         dbT7001FufukuMoshitateEntity.setState(EntityDataState.Modified);
-        戻る値 = dbT7001FufukuMoshitateDac.save(dbT7001FufukuMoshitateEntity);
+        int 戻る値 = dbT7001FufukuMoshitateDac.save(dbT7001FufukuMoshitateEntity);
         return 戻る値 == 1;
     }
 
     private boolean getBemmeiNaiyoDEL(BemmeiNaiyo bemmeiNaiyo) {
-        int 戻る値 = 0;
         DbT7002BemmeiNaiyoEntity bemmeiNaiyoEntity = bemmeiNaiyo.toEntity();
         bemmeiNaiyoEntity.setState(EntityDataState.Deleted);
-        戻る値 = dbT7002BemmeiNaiyoDac.saveOrDelete(bemmeiNaiyoEntity);
+        int 戻る値 = dbT7002BemmeiNaiyoDac.saveOrDelete(bemmeiNaiyoEntity);
         return 戻る値 == 1;
     }
 
     private boolean getBemmeishaJohoDEL(BemmeishaJoho bemmeishaJoho) {
-        int 戻る値 = 0;
         DbT7003BemmeishaJohoEntity bemmeishaJohoEntity = bemmeishaJoho.toEntity();
         bemmeishaJohoEntity.setState(EntityDataState.Deleted);
-        戻る値 = dbT7003BemmeishaJohoDac.saveOrDelete(bemmeishaJohoEntity);
+        int 戻る値 = dbT7003BemmeishaJohoDac.saveOrDelete(bemmeishaJohoEntity);
         return 戻る値 == 1;
     }
 
+    /**
+     * 地方公共団体コードを取得です 。
+     *
+     * @return LasdecCode
+     */
     public LasdecCode get地方公共団体コード() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         return association.get地方公共団体コード();
