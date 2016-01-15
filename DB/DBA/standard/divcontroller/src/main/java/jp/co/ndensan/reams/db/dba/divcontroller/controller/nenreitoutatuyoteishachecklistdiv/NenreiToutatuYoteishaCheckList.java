@@ -24,6 +24,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class NenreiToutatuYoteishaCheckList {
 
 //    private static final SubGyomuCode サブ業務コード = new SubGyomuCode("DBA");
+    private static final RString 出力対象_登録対象者 = new RString("key0");
+    private static final RString 住民種別_全て = new RString("key0");
+
     /**
      * 年齢到達予定者チェックリストの初期化。<br/>
      *
@@ -31,24 +34,19 @@ public class NenreiToutatuYoteishaCheckList {
      * @return ResponseData<NenreiToutatuYoteishaCheckListDiv>
      */
     public ResponseData<NenreiToutatuYoteishaCheckListDiv> onLoad(NenreiToutatuYoteishaCheckListDiv requestDiv) {
-
         ResponseData<NenreiToutatuYoteishaCheckListDiv> responseData = new ResponseData<>();
-
         NenreiToutatuYoteishaCheckListManager nenreiToutatuYoteishaManager
                 = InstanceProvider.create(NenreiToutatuYoteishaCheckListManager.class);
         DbT7022ShoriDateKanriBusiness shoriDateKanri = nenreiToutatuYoteishaManager.get開始終了日();
-        requestDiv.getRadShutsuRyokuTaisho().setSelectedKey(new RString("key0"));
-        requestDiv.getRadJunminShubetsu().setSelectedKey(new RString("key0"));
+        requestDiv.getRadShutsuRyokuTaisho().setSelectedKey(出力対象_登録対象者);
+        requestDiv.getRadJunminShubetsu().setSelectedKey(住民種別_全て);
         if (shoriDateKanri != null) {
             requestDiv.getTxtZenkaiRange().setFromValue(new RDate(
                     shoriDateKanri.getTaishoKaishiYMD().wareki().toDateString().toString()));
-
             requestDiv.getTxtZenkaiRange().setToValue(new RDate(
                     shoriDateKanri.getTaishoShuryoYMD().wareki().toDateString().toString()));
-
             requestDiv.getTxtKonkaiRange().setFromValue(new RDate(
                     shoriDateKanri.getTaishoKaishiYMD().plusDay(1).wareki().toDateString().toString()));
-
             requestDiv.getTxtKonkaiRange().setToValue(new RDate(
                     RDate.getNowDate().wareki().toDateString().toString()));
         }
@@ -56,9 +54,7 @@ public class NenreiToutatuYoteishaCheckList {
         //ReportId chohyoBunruiID = nenreiToutatuYoteishaManager.get帳票分類ID(サブ業務コード, new ReportId("DBA200001")).getChohyoBunruiID();
 //        KaigoChohyoShutsuryokujunDiv kaigoChohyoShutsuryokujunDiv = new KaigoChohyoShutsuryokujunDiv();
 //        kaigoChohyoShutsuryokujunDiv.loadChohyoMode(サブ業務コード, chohyoBunruiID);
-
         responseData.data = requestDiv;
-
         return responseData;
     }
 
@@ -70,21 +66,18 @@ public class NenreiToutatuYoteishaCheckList {
      */
     public ResponseData<INenreiToutatsuYoteishaCheckListBatchParameter> onClick_btnBatchRegister(
             NenreiToutatuYoteishaCheckListDiv requestDiv) {
-
         NenreiToutatsuYoteishaCheckListBatchParameterSakusei batchParameterSakusei
                 = new NenreiToutatsuYoteishaCheckListBatchParameterSakusei();
-
         RString 出力対象 = requestDiv.getRadShutsuRyokuTaisho().getSelectedKey();
         RString 住民種別 = requestDiv.getRadJunminShubetsu().getSelectedKey();
         FlexibleDate 今回開始日 = new FlexibleDate(requestDiv.getTxtKonkaiRange().getFromValue().toDateString());
         FlexibleDate 今回終了日 = new FlexibleDate(requestDiv.getTxtKonkaiRange().getToValue().toDateString());
         List<RString> 編集方法 = requestDiv.getChkHenshuHoho().getSelectedKeys();
         // TODO 帳票出力順の実装方式は不明です。
-        RString 出力順ID = new RString("123");
+        RString 出力順ID = RString.EMPTY;
         INenreiToutatsuYoteishaCheckListBatchParameter parameter
                 = batchParameterSakusei.getNenreiToutatsuYoteishaCheckListBatchParameter(
                         出力対象, 住民種別, 今回開始日, 今回終了日, 編集方法, 出力順ID);
-
         return ResponseData.of(parameter).respond();
 
     }
