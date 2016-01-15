@@ -64,7 +64,6 @@ public class BenmeisyoFinder {
      */
     BenmeisyoFinder(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
-//        this.iReportWriter = InstanceProvider.createWithCustomize(IReportWriter.class);
     }
 
     /**
@@ -96,12 +95,6 @@ public class BenmeisyoFinder {
             benmeisyoTyohyoDataEntity.set弁明の件名(benmeiJohoEntity.get弁明の件名());
             benmeisyoTyohyoDataEntity.set弁明の内容(benmeiJohoEntity.get弁明の内容());
         }
-//        NinshoshaDenshiKoinDataEntity ninshoshaDenshiKoinDataEntity = this.getNinshoshaDenshiKoinData(benmeiJohoEntity);
-//        benmeisyoTyohyoDataEntity.set認証者役職名(ninshoshaDenshiKoinDataEntity.get認証者役職名());
-//        benmeisyoTyohyoDataEntity.set認証者氏名(ninshoshaDenshiKoinDataEntity.get認職者氏名());
-//        benmeisyoTyohyoDataEntity.set電子公印(ninshoshaDenshiKoinDataEntity.get電子公印());
-//        benmeisyoTyohyoDataEntity.set公印省略(ninshoshaDenshiKoinDataEntity.get公印省略());
-//        benmeisyoTyohyoDataEntity.set公印文字列(ninshoshaDenshiKoinDataEntity.get公印文字列());
         benmeisyoTyohyoDataEntity.set文言(this.get文言(審査請求届出日));
         benmeisyoTyohyoDataEntity.set被保険者番号(被保険者番号);
         HihokenshaDateEntity hihokenshaDateEntity = this.getHihokenshaDate(識別コード);
@@ -234,25 +227,4 @@ public class BenmeisyoFinder {
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         return new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
     }
-
-//    private NinshoshaDenshiKoinDataEntity getNinshoshaDenshiKoinData(BenmeiJohoEntity entity) {
-//        NinshoshaDenshiKoinDataEntity ninshoshaDenshiKoinDataEntity = new NinshoshaDenshiKoinDataEntity();
-//        RString 種別コード = new RString(BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_認証者_種別コード,
-//                SubGyomuCode.DBU介護統計報告).toString());
-//        NinshoshaSource ninshoshaSource = this.getNinshoshaSource(種別コード, entity);
-//        ninshoshaDenshiKoinDataEntity.set認証者役職名(ninshoshaSource.ninshoshaYakushokuMei);
-//        ninshoshaDenshiKoinDataEntity.set認職者氏名(ninshoshaSource.ninshoshaShimeiKakeru);
-//        ninshoshaDenshiKoinDataEntity.set電子公印(ninshoshaSource.denshiKoin);
-//        ninshoshaDenshiKoinDataEntity.set公印省略(ninshoshaSource.koinShoryaku);
-//        ninshoshaDenshiKoinDataEntity.set公印文字列(ninshoshaSource.koinMojiretsu);
-//        return ninshoshaDenshiKoinDataEntity;
-//    }
-//
-//    //TODO LDNS-863 Reams_本開発課題一覧_技術点 No:34
-//    private NinshoshaSource getNinshoshaSource(RString 種別コード, BenmeiJohoEntity entity) {
-//        INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-//        INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(
-//                GyomuCode.DB介護保険, 種別コード, entity.get弁明書作成日().toRDate(), RString.EMPTY);
-//        return ninshoshaSourceBuilder.buildSource();
-//    }
 }
