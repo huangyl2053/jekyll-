@@ -65,7 +65,7 @@ public class TaJushochiTokureisyaKanriParameter implements Comparable<TaJushochi
 
     @Override
     public int compareTo(TaJushochiTokureisyaKanriParameter o) {
-        return this.tekiyoYMD.compareTo(o.getTekiyoYMD());
+        return o.getTekiyoYMD().compareTo(this.tekiyoYMD);
     }
 
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.tajushochitokureisyakanri;
+package jp.co.ndensan.reams.db.dba.service.core.tajushochitokureisyakanri;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,9 +30,18 @@ public class TaJushochiTokureisyaKanriManager {
     /**
      * コンストラクタです。
      */
-    public TaJushochiTokureisyaKanriManager() {
+    TaJushochiTokureisyaKanriManager() {
 
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+    }
+
+    /**
+     * 単体テスト用のコンストラクタです。
+     *
+     * @param mapperProvider mapperProvider
+     */
+    TaJushochiTokureisyaKanriManager(MapperProvider mapperProvider) {
+        this.mapperProvider = mapperProvider;
     }
 
     /**
@@ -52,7 +61,12 @@ public class TaJushochiTokureisyaKanriManager {
     public void checkTekiyouJotai(List<TaJushochiTokureisyaKanriParameter> paramater) {
 
         List<TaJushochiTokureisyaKanriParameter> sortList = new ArrayList<>();
-        sortList.addAll(paramater);
+
+        for (TaJushochiTokureisyaKanriParameter date : paramater) {
+            if (!新規.equals(date.get状態())) {
+                sortList.add(date);
+            }
+        }
         Collections.sort(sortList);
         TaJushochiTokureisyaKanriParameter 直近適用グリッド行 = sortList.get(0);
         for (TaJushochiTokureisyaKanriParameter date : paramater) {
@@ -63,7 +77,6 @@ public class TaJushochiTokureisyaKanriManager {
                         UrErrorMessages.期間が重複.getMessage());
             }
         }
-
     }
 
     /**
@@ -77,7 +90,6 @@ public class TaJushochiTokureisyaKanriManager {
                 throw new ApplicationException(
                         UrErrorMessages.入力値が不正.getMessage());
             }
-
         }
     }
 
