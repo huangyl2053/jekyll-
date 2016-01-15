@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.shikakutokuso;
+package jp.co.ndensan.reams.db.dbz.service.shikakutokuso;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.shikakutokuso.ShikakuTokuso;
-import jp.co.ndensan.reams.db.dba.business.core.shikakutokuso.ShutokuJiyuDDL;
-import jp.co.ndensan.reams.db.dba.definition.shikakutokuso.ShikakuTokusoParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.shikakutoku.shikakutokuso.ServiceShikakuRelateEntity;
-import jp.co.ndensan.reams.db.dba.persistence.db.basic.shikakutokuso.IShikakuTokusoMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.shikakutokuso.IShikakuTokusoMapper;
+import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
+import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShutokuJiyuDDL;
+import jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakutoku.shikakutokuso.ServiceShikakuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;

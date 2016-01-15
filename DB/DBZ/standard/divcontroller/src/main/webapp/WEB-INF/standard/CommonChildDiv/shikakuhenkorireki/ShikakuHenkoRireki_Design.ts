@@ -12,14 +12,6 @@ module DBZ {
                 return "onClick_btnAdd";
             }
 
-            public static onSelect_dgHenko(): string {
-                return "onSelect_dgHenko";
-            }
-
-            public static onSelectByDblClick_dgHenko(): string {
-                return "onSelectByDblClick_dgHenko";
-            }
-
             public static onSelectByModifyButton_dgHenko(): string {
                 return "onSelectByModifyButton_dgHenko";
             }

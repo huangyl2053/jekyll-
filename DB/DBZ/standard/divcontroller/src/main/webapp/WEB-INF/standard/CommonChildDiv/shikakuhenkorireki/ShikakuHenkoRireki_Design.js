@@ -8,14 +8,6 @@ var DBZ;
                 return "onClick_btnAdd";
             };
 
-            Events.onSelect_dgHenko = function () {
-                return "onSelect_dgHenko";
-            };
-
-            Events.onSelectByDblClick_dgHenko = function () {
-                return "onSelectByDblClick_dgHenko";
-            };
-
             Events.onSelectByModifyButton_dgHenko = function () {
                 return "onSelectByModifyButton_dgHenko";
             };
