@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.persistence.mapper.tajushochitokureisyakanri;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisya.TaJushochiTokureisyaKanriParameter;
 
 /**
- * 施設入退所情報のリストのデータを取得する。
+ * 施設入退所情報のリストのデータを取得です。
  *
  */
 public interface TaJushochiTokureisyaKanriMapper {
