@@ -245,11 +245,11 @@ public class KoseiShujiiIryoKikanMasterHandler {
      * 市町村名を設定します。
      */
     public void setTxtShichosonmei() {
-        // TODO QA253　共通部品
+    // TODO QA253　共通部品
 //        UzT0007CodeEntity code = CodeMaster.getCode(
-//                SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(div.getShujiiJohoInput().getTxtShichoson().getValue()));
+//                SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(div.getChosainJohoInput().getTxtShichoson().getValue()));
 //        if (code != null) {
-//            div.getShujiiJohoInput().getTxtShichosonmei().setValue(code.getコード名称());
+//            div.getChosainJohoInput().getTxtShichosonmei().setValue(code.getコード名称());
 //        }
         RString shichoson = div.getShujiiJohoInput().getTxtShichoson().getValue();
         if (new RString("000001").equals(shichoson)) {
@@ -268,7 +268,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
     /**
      * 調査員情報登録エリアが非活性に設定します。
      */
-    public void setDisabledTrueToShujiiJohoToMeisai() {
+    public void setDisabledTrue() {
         div.getShujiiJohoInput().getTxtShichoson().setDisabled(true);
         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(true);
         div.getShujiiJohoInput().getTxtiryokikanCode().setDisabled(true);
@@ -286,7 +286,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
     /**
      * 主治医医療機関情報登録エリアが活性に設定します。
      */
-    public void setDisabledFalseToShujiiIryoKikanJoho() {
+    public void setDisabledFalse() {
         div.getShujiiJohoInput().getTxtShichoson().setDisabled(false);
         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(false);
         div.getShujiiJohoInput().getTxtiryokikanCode().setDisabled(false);

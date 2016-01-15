@@ -125,7 +125,7 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnInsert(ShujiiIryoKikanMasterDiv div) {
         div.getShujiiJohoInput().setState(状態_追加);
-        getHandler(div).setDisabledFalseToShujiiIryoKikanJoho();
+        getHandler(div).setDisabledFalse();
         getHandler(div).clearShujiiIryoKikanJohoToMeisai();
         div.getShujiiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
         return ResponseData.of(div).respond();
@@ -140,7 +140,7 @@ public class ShujiiIryoKikanMaster {
     public ResponseData<ShujiiIryoKikanMasterDiv> onSelectByModifyButton_dgShujiiIchiran(
             ShujiiIryoKikanMasterDiv div) {
         div.getShujiiJohoInput().setState(状態_修正);
-        getHandler(div).setDisabledFalseToShujiiIryoKikanJoho();
+        getHandler(div).setDisabledFalse();
         dgShujiiIchiran_Row row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
         getHandler(div).setShujiiJohoToMeisai(row);
         div.getShujiiJohoInput().getTxtShichoson().setDisabled(true);
@@ -163,7 +163,7 @@ public class ShujiiIryoKikanMaster {
         div.getShujiiJohoInput().setState(状態_削除);
         dgShujiiIchiran_Row row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
         getHandler(div).setShujiiJohoToMeisai(row);
-        getHandler(div).setDisabledTrueToShujiiJohoToMeisai();
+        getHandler(div).setDisabledTrue();
         div.getShujiiJohoInput().getBtnKakutei().setDisabled(false);
         return ResponseData.of(div).respond();
     }
@@ -181,9 +181,9 @@ public class ShujiiIryoKikanMaster {
             div.getShujiiJohoInput().getTxtShichoson().setDisabled(true);
             div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(true);
         } else if (状態_削除.equals(row.getJotai())) {
-            getHandler(div).setDisabledTrueToShujiiJohoToMeisai();
+            getHandler(div).setDisabledTrue();
         } else if (RString.EMPTY.equals(row.getJotai())) {
-            getHandler(div).setDisabledTrueToShujiiJohoToMeisai();
+            getHandler(div).setDisabledTrue();
             div.getShujiiJohoInput().getBtnKakutei().setDisabled(true);
         }
         return ResponseData.of(div).respond();
@@ -246,6 +246,26 @@ public class ShujiiIryoKikanMaster {
     public ResponseData<ShujiiIryoKikanMasterDiv> onBlur_txtShichoson(ShujiiIryoKikanMasterDiv div) {
         getHandler(div).setTxtShichosonmei();
         return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 医療機関検索ボタンが押下された場合、医療機関選択ダイアログを表示する
+     * @param div ShujiiIryoKikanMasterDiv
+     * @return  ResponseData<ShujiiIryoKikanMasterDiv>
+     */
+    public ResponseData<ShujiiIryoKikanMasterDiv> onBlur_txtIryokikan(ShujiiIryoKikanMasterDiv div) {
+         //TODO 内部番号QA455
+         return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 口座情報を登録するボタンが押下された場合、口座情報画面へ遷移する。
+     * @param div ShujiiIryoKikanMasterDiv
+     * @return ResponseData<ShujiiIryoKikanMasterDiv>
+     */
+    public ResponseData<ShujiiIryoKikanMasterDiv> onClick_Shujii(ShujiiIryoKikanMasterDiv div) {
+         //TODO 内部番号QA471
+         return ResponseData.of(div).respond();
     }
 
     /**
