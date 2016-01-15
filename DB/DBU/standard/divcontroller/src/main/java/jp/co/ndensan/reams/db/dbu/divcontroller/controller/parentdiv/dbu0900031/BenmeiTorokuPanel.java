@@ -280,6 +280,9 @@ public class BenmeiTorokuPanel {
     }
 
     private boolean get弁明登録明細の更新有り無し(BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho, BenmeiTorokuPanelDiv panelDiv) {
+        if (benmeiTorokuMeisaiJoho == null) {
+            return false;
+        }
         RString selectResults = get弁明登録明細情報の編集結果(benmeiTorokuMeisaiJoho);
         RString inputDiv = get弁明登録明細入力の編集結果(panelDiv);
         return !selectResults.equals(inputDiv);
