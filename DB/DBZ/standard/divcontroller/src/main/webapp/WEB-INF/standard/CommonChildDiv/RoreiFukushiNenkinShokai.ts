@@ -21,6 +21,10 @@ module DBZ
                 return new Modes.ModeB(this.controls);
             }
             ////////////////////////////
+			 public ModeC() {
+                return new Modes.ModeC(this.controls);
+            }
+            ////////////////////////////
 
             public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
@@ -33,7 +37,7 @@ module DBZ
             
             public priorities(): Array<string> {
                 return [
-                    "ModeA","ModeB"
+                    "ModeA","ModeB","ModeC"
                 ];
             }
             ////////////////////////////////////////////////////
@@ -56,6 +60,7 @@ module DBZ
               
               
               }
+			  
               
               //更新モード
               export class ModeB {
@@ -73,6 +78,26 @@ module DBZ
                      this.controls.txtEndDate().readOnly = false;
                 }
 
+              
+              
+              }
+			   export class ModeC {
+                private controls: Controls;
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                 public init(): void {
+                  
+                     this.controls.panelInput().displayNone = true;
+					 this.controls.btnAdd().displayNone = true;					
+					 this.controls.datagridRireki().gridSetting.isShowSelectButtonColumn = false;
+                     this.controls.datagridRireki().gridSetting.isShowModifyButtonColumn = false;
+                     this.controls.datagridRireki().gridSetting.isShowDeleteButtonColumn = false;
+					  
+					 
+					 
+                }
               
               
               }

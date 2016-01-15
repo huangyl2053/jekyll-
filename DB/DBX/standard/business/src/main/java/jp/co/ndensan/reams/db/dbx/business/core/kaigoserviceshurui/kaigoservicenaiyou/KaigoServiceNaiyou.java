@@ -87,7 +87,6 @@ public class KaigoServiceNaiyou
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * サービス種類コードを返します。
      *

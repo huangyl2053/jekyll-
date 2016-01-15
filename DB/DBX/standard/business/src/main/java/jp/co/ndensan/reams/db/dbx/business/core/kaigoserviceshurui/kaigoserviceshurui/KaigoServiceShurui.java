@@ -274,7 +274,6 @@ public class KaigoServiceShurui
     public KaigoServiceShuruiBuilder createBuilderForEdit() {
         return new KaigoServiceShuruiBuilder(entity, id, kaigoServiceNaiyou);
     }
-    // </editor-fold>
 
     @Override
     public int hashCode() {

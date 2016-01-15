@@ -15,7 +15,8 @@ public enum DBB0120001StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    平準化計算("平準化計算");
+    平準化計算("平準化計算"),
+    通知書一括発行("通知書一括発行");
 
     private final RString name;
 

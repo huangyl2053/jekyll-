@@ -17,7 +17,7 @@
     </sql>
 
     <sql id="allColumns_DbT7130KaigoServiceShurui">
-         "DbT7130KaigoServiceShurui"."serviceShuruiCd" as "dbT7130KaigoServiceShurui_serviceShuruiCd",
+         <!--"DbT7130KaigoServiceShurui"."serviceShuruiCd" as "dbT7130KaigoServiceShurui_serviceShuruiCd",-->
          "DbT7130KaigoServiceShurui"."teikyoKaishiYM" as "dbT7130KaigoServiceShurui_teikyoKaishiYM",
          "DbT7130KaigoServiceShurui"."insertDantaiCd" as "dbT7130KaigoServiceShurui_insertDantaiCd",
          "DbT7130KaigoServiceShurui"."insertTimestamp" as "dbT7130KaigoServiceShurui_insertTimestamp",
@@ -29,14 +29,14 @@
          "DbT7130KaigoServiceShurui"."lastUpdateReamsLoginId" as "dbT7130KaigoServiceShurui_lastUpdateReamsLoginId",
          "DbT7130KaigoServiceShurui"."teikyoshuryoYM" as "dbT7130KaigoServiceShurui_teikyoshuryoYM",
          "DbT7130KaigoServiceShurui"."serviceShuruiMeisho" as "dbT7130KaigoServiceShurui_serviceShuruiMeisho",
-         "DbT7130KaigoServiceShurui"."serviceShuruiRyakusho" as "dbT7130KaigoServiceShurui_serviceShuruiRyakusho",
-         "DbT7130KaigoServiceShurui"."serviceBunrruicode" as "dbT7130KaigoServiceShurui_serviceBunrruicode"
+         "DbT7130KaigoServiceShurui"."serviceShuruiRyakusho" as "dbT7130KaigoServiceShurui_serviceShuruiRyakusho"<!--,
+         "DbT7130KaigoServiceShurui"."serviceBunrruicode" as "dbT7130KaigoServiceShurui_serviceBunrruicode"-->
     </sql>
 
 
     <!--テーブルDbT7130KaigoServiceShuruiの項目をDbT7130KaigoServiceShuruiEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT7130KaigoServiceShuruiEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity" autoMapping="true">
-        <id property="serviceShuruiCd" column="dbT7130KaigoServiceShurui_serviceShuruiCd" />
+        <!--<id property="serviceShuruiCd" column="dbT7130KaigoServiceShurui_serviceShuruiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>-->
         <id property="teikyoKaishiYM" column="dbT7130KaigoServiceShurui_teikyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7130KaigoServiceShurui_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT7130KaigoServiceShurui_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
@@ -49,9 +49,9 @@
         <result property="teikyoshuryoYM" column="dbT7130KaigoServiceShurui_teikyoshuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="serviceShuruiMeisho" column="dbT7130KaigoServiceShurui_serviceShuruiMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceShuruiRyakusho" column="dbT7130KaigoServiceShurui_serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="serviceBunrruicode" column="dbT7130KaigoServiceShurui_serviceBunrruicode" />
+        <!--<result property="serviceBunrruicode" column="dbT7130KaigoServiceShurui_serviceBunrruicode"/>-->
     </resultMap>
-    <select id="getEntity" resultMap="resultMap_DbT7130KaigoServiceShuruiEntity">
+    <select id="getEntity" resultMap="ResultMap_DbT7130KaigoServiceShuruiEntity">
         SELECT
         <include refid="allColumns_DbT7130KaigoServiceShurui"/>
         FROM

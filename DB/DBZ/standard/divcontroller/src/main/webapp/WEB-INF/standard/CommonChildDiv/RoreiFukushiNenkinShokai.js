@@ -14,6 +14,10 @@ var DBZ;
                 return new Modes.ModeB(this.controls);
             };
 
+            ModeController.prototype.ModeC = function () {
+                return new Modes.ModeC(this.controls);
+            };
+
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
@@ -25,7 +29,8 @@ var DBZ;
             ModeController.prototype.priorities = function () {
                 return [
                     "ModeA",
-                    "ModeB"
+                    "ModeB",
+                    "ModeC"
                 ];
             };
             return ModeController;
@@ -58,6 +63,20 @@ var DBZ;
                 return ModeB;
             })();
             Modes.ModeB = ModeB;
+            var ModeC = (function () {
+                function ModeC(controls) {
+                    this.controls = controls;
+                }
+                ModeC.prototype.init = function () {
+                    this.controls.panelInput().displayNone = true;
+                    this.controls.btnAdd().displayNone = true;
+                    this.controls.datagridRireki().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.datagridRireki().gridSetting.isShowModifyButtonColumn = false;
+                    this.controls.datagridRireki().gridSetting.isShowDeleteButtonColumn = false;
+                };
+                return ModeC;
+            })();
+            Modes.ModeC = ModeC;
         })(RoreiFukushiNenkinShokai.Modes || (RoreiFukushiNenkinShokai.Modes = {}));
         var Modes = RoreiFukushiNenkinShokai.Modes;
     })(DBZ.RoreiFukushiNenkinShokai || (DBZ.RoreiFukushiNenkinShokai = {}));

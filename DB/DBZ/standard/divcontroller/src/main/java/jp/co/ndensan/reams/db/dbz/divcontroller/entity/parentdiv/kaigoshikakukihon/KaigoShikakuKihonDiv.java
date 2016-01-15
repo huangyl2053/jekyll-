@@ -302,6 +302,11 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
         getHandler().initialize(市町村コード, 識別コード);
     }
 
+    @Override
+    public void initialize(HihokenshaNo 被保険者番号) {
+        getHandler().initialize(被保険者番号);
+    }
+
     @JsonIgnore
     public KaigoShikakuKihonHandler getHandler() {
         return new KaigoShikakuKihonHandler(this);

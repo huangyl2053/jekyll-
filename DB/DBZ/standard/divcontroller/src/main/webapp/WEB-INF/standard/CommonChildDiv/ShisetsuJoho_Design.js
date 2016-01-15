@@ -4,9 +4,6 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onChange_radShisetsuShurui = function () {
-                return "onChange_radShisetsuShurui";
-            };
             return Events;
         })();
         ShisetsuJoho.Events = Events;
@@ -35,8 +32,16 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlDaichoShubetsu"));
             };
 
-            Controls.prototype.radShisetsuShurui = function () {
-                return new UZA.RadioButton(this.convFiledName("radShisetsuShurui"));
+            Controls.prototype.radJigyosha = function () {
+                return new UZA.RadioButton(this.convFiledName("radJigyosha"));
+            };
+
+            Controls.prototype.radOther = function () {
+                return new UZA.RadioButton(this.convFiledName("radOther"));
+            };
+
+            Controls.prototype.radJyogai = function () {
+                return new UZA.RadioButton(this.convFiledName("radJyogai"));
             };
 
             Controls.prototype.txtShisetsuCode = function () {

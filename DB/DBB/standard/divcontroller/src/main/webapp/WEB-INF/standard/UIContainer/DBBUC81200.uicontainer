@@ -46,7 +46,7 @@
      "layoutSubGyomuCode": "DBB",
      "layoutName": "DBB8110001",
      "layoutTitle": "各種通知書作成（個別）",
-     "eventName": "完了",
+     "eventName": "終了する",
      "destroy": false,
      "condition": ""
     }

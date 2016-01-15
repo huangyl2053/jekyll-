@@ -40,12 +40,12 @@ module DBZ
 
                 public JidoSaiban(): void {
                     this.controls.txtBunshoNo().readOnly = true;
-                    this.controls.btnGetBunshoNo().visible = false;
+                    this.controls.btnGetBunshoNo().visible = true;
                 }
 
                 public Kotei(): void {
                     this.controls.txtBunshoNo().readOnly = true;
-                    this.controls.btnGetBunshoNo().visible = true;
+                    this.controls.btnGetBunshoNo().visible = false;
                 }
             }
 

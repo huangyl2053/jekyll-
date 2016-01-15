@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value
 public class KaigoServiceShuruiIdentifier implements Serializable {
+
     private static final long serialVersionUID = -3015222238060588342L;
 
     private final KaigoServiceShuruiCode サービス種類コード;

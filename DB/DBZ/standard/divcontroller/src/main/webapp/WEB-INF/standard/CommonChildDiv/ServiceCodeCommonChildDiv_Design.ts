@@ -37,6 +37,10 @@ module DBZ {
                 return new UZA.TextBoxCode(this.convFiledName("txtServiceCode"));
             }
 
+            public txtKomokuCode(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtKomokuCode"));
+            }
+
             public txtKijunYM(): UZA.TextBoxDate {
                 return new UZA.TextBoxDate(this.convFiledName("txtKijunYM"));
             }
