@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJohoEntity;
 public interface IDbT4913ChosainJohoMapper {
 
     /**
-     * {@link DbT4913ChosainJohoEntity}を取得します。
+     * {@link  DbT4913ChosainJohoEntity}を取得します。
      *
-     * @return {@link DbT4913ChosainJohoEntity}
+     * @return {@link  DbT4913ChosainJohoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT4913ChosainJohoEntity getEntity();

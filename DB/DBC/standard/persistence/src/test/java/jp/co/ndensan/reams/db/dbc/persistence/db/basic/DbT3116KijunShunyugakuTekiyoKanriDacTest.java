@@ -8,6 +8,7 @@ import java.util.Collections;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3116KijunShunyugakuTekiyoKanriEntityGenerator;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -224,8 +225,8 @@ public class DbT3116KijunShunyugakuTekiyoKanriDacTest extends DbcTestDacBase {
         public static void insert(
                 SetaiCode 世帯コード,
                 FlexibleYear 年度,
-                Decimal 履歴番号,
-                HokenshaNo 被保険者番号) {
+                int 履歴番号,
+                HihokenshaNo 被保険者番号) {
             DbT3116KijunShunyugakuTekiyoKanriEntity entity = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.createDbT3116KijunShunyugakuTekiyoKanriEntity();
             entity.setSetaiCode(世帯コード);
             entity.setNendo(年度);

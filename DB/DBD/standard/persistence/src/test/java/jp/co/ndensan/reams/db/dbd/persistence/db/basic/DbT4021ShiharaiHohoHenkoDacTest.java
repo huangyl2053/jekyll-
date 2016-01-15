@@ -12,7 +12,6 @@ import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenk
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_管理区分;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_被保険者番号;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_証記載保険者番号;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.KanriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestDacBase;
@@ -228,7 +227,7 @@ public class DbT4021ShiharaiHohoHenkoDacTest extends DbdTestDacBase {
         public static void insert(
                 ShoKisaiHokenshaNo 証記載保険者番号,
                 HihokenshaNo 被保険者番号,
-                KanriKubun 管理区分,
+                RString 管理区分,
                 int 履歴番号) {
             DbT4021ShiharaiHohoHenkoEntity entity = DbT4021ShiharaiHohoHenkoEntityGenerator.createDbT4021ShiharaiHohoHenkoEntity();
             entity.setShoKisaiHokenshaNo(証記載保険者番号);

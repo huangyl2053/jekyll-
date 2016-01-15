@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,8 +23,8 @@ public class NinteichosaScheduleIdentifier implements Serializable {
     private final RString 認定調査予定開始時間;
     private final RString 認定調査予定終了時間;
     private final Code 認定調査時間枠;
-    private final RString 認定調査委託先コード;
-    private final RString 認定調査員コード;
+    private final ChosaItakusakiCode 認定調査委託先コード;
+    private final ChosainCode 認定調査員コード;
 
     /**
      * コンストラクタです。
@@ -38,8 +40,8 @@ public class NinteichosaScheduleIdentifier implements Serializable {
             RString 認定調査予定開始時間,
             RString 認定調査予定終了時間,
             Code 認定調査時間枠,
-            RString 認定調査委託先コード,
-            RString 認定調査員コード) {
+            ChosaItakusakiCode 認定調査委託先コード,
+            ChosainCode 認定調査員コード) {
         this.認定調査予定年月日 = 認定調査予定年月日;
         this.認定調査予定開始時間 = 認定調査予定開始時間;
         this.認定調査予定終了時間 = 認定調査予定終了時間;

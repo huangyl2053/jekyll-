@@ -208,4 +208,5 @@ public class DbT5033ShinsakaiIinHoshuTankaEntity extends DbTableEntityBase<DbT50
 
 
 
+
 }

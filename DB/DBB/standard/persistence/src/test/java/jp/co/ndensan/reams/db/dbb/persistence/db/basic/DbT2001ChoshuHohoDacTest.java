@@ -197,7 +197,7 @@ public class DbT2001ChoshuHohoDacTest extends DbbTestDacBase {
         public static void insert(
                 FlexibleYear 賦課年度,
                 HihokenshaNo 被保険者番号,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT2001ChoshuHohoEntity entity = DbT2001ChoshuHohoEntityGenerator.createDbT2001ChoshuHohoEntity();
             entity.setFukaNendo(賦課年度);
             entity.setHihokenshaNo(被保険者番号);

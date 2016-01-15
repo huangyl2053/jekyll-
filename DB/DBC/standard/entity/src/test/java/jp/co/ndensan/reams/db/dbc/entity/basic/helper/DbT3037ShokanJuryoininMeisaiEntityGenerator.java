@@ -18,7 +18,6 @@ public final class DbT3037ShokanJuryoininMeisaiEntityGenerator {
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
     public static final FlexibleYearMonth DEFAULT_サービス提供年月 = new FlexibleYearMonth("199001");
     public static final RString DEFAULT_整理番号 = new RString("Data");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
     public static final RString DEFAULT_契約番号 = new RString("Data");
     public static final Decimal DEFAULT_支払金額 = new Decimal(0);
 
@@ -33,7 +32,6 @@ public final class DbT3037ShokanJuryoininMeisaiEntityGenerator {
         entity.setHiHokenshaNo(DEFAULT_被保険者番号);
         entity.setServiceTeikyoYM(DEFAULT_サービス提供年月);
         entity.setSeiriNo(DEFAULT_整理番号);
-        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setKeiyakuNo(DEFAULT_契約番号);
         entity.setShiharaiKingaku(DEFAULT_支払金額);
         return entity;

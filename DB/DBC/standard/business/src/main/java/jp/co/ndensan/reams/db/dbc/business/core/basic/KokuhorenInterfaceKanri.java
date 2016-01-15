@@ -144,7 +144,7 @@ public class KokuhorenInterfaceKanri extends
      * @return 再処理可能区分
      */
     public boolean is再処理可能区分() {
-        return entity.getSaiShoriKahiKubun();
+        return entity.getSaiShoriKanoKubun();
     }
 
     /**

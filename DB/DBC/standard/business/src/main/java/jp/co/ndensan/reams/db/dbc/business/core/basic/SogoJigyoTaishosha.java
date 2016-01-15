@@ -33,22 +33,24 @@ extends ModelBase<SogoJigyoTaishoshaIdentifier,
      * コンストラクタです。<br/>
      * 総合事業対象者の新規作成時に使用します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+// * @param 証記載保険者番号 証記載保険者番号
+     *
      * @param 被保険者番号 被保険者番号
      * @param 履歴番号 履歴番号
      */
-    public SogoJigyoTaishosha(HokenshaNo 証記載保険者番号,
+    public SogoJigyoTaishosha(
+            //            HokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+            int 履歴番号) {
+//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3105SogoJigyoTaishoshaEntity();
-        this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
+//        this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
         this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new SogoJigyoTaishoshaIdentifier(
-                証記載保険者番号,
+                //                証記載保険者番号,
                 被保険者番号,
                 履歴番号
         );
@@ -63,7 +65,7 @@ extends ModelBase<SogoJigyoTaishoshaIdentifier,
     public SogoJigyoTaishosha(DbT3105SogoJigyoTaishoshaEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("総合事業対象者"));
         this.id = new SogoJigyoTaishoshaIdentifier(
-                entity.getShoKisaiHokenshaNo(),
+                //                entity.getShoKisaiHokenshaNo(),
                 entity.getHihokenshaNo(),
                 entity.getRirekiNo());
     }
@@ -88,9 +90,9 @@ extends ModelBase<SogoJigyoTaishoshaIdentifier,
      *
      * @return 証記載保険者番号
      */
-    public HokenshaNo get証記載保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
-    }
+//    public HokenshaNo get証記載保険者番号() {
+//        return entity.getShoKisaiHokenshaNo();
+//    }
 
     /**
      * 被保険者番号を返します。
@@ -106,7 +108,7 @@ extends ModelBase<SogoJigyoTaishoshaIdentifier,
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -133,9 +135,9 @@ extends ModelBase<SogoJigyoTaishoshaIdentifier,
      *
      * @return 識別コード
      */
-    public ShikibetsuCode get識別コード() {
-        return entity.getShikibetsuCode();
-    }
+//    public ShikibetsuCode get識別コード() {
+//        return entity.getShikibetsuCode();
+//    }
 
     /**
      * 受付年月日を返します。

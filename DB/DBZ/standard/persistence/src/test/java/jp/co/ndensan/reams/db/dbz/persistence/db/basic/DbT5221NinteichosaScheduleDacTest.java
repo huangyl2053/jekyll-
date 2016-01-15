@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5221NinteichosaScheduleDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5221NinteichosaScheduleEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査予定年月日;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査予定終了時間;
@@ -14,6 +14,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5221NinteichosaS
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査員コード;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査委託先コード;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査時間枠;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -291,15 +292,15 @@ public class DbT5221NinteichosaScheduleDacTest extends DbzTestDacBase {
                 RString 認定調査予定開始時間,
                 RString 認定調査予定終了時間,
                 Code 認定調査時間枠,
-                RString 認定調査委託先コード,
-                RString 認定調査員コード) {
+                ChosaItakusakiCode 認定調査委託先コード,
+                ChosainCode 認定調査員コード) {
             DbT5221NinteichosaScheduleEntity entity = DbT5221NinteichosaScheduleEntityGenerator.createDbT5221NinteichosaScheduleEntity();
             entity.setNinteiChosaYoteiYMD(認定調査予定年月日);
             entity.setNinteiChosaYoteiKaishiTime(認定調査予定開始時間);
             entity.setNinteiChosaYoteiShuryoTime(認定調査予定終了時間);
             entity.setNinteiChosaJikanWaku(認定調査時間枠);
-            entity.setNinteichosaItakusakiCode(認定調査委託先コード);
-            entity.setNinteiChosainNo(認定調査員コード);
+            entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
+            entity.setNinteiChosainCode(認定調査員コード);
             sut.save(entity);
         }
     }

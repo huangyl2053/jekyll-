@@ -90,6 +90,16 @@ public class DbT3007KyotakuKeikakuJikoSakuseiDac implements ISaveable<DbT3007Kyo
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
+    /**
+     * DbT3007KyotakuKeikakuJikoSakuseiから指定された検索キーで検索を行います
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 証記載保険者番号 HokenshaNo
+     * @param 識別コード ShikibetsuCode
+     * @param 対象年月 FlexibleYearMonth
+     * @param 処理日時 YMDHMS
+     * @return DbT3007KyotakuKeikakuJikoSakuseiEntity
+     */
     public DbT3007KyotakuKeikakuJikoSakuseiEntity
             selectByKey(HihokenshaNo 被保険者番号, HokenshaNo 証記載保険者番号,
                     ShikibetsuCode 識別コード, FlexibleYearMonth 対象年月, YMDHMS 処理日時) {

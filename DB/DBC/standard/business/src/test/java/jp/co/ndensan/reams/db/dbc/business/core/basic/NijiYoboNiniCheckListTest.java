@@ -33,16 +33,16 @@ public class NijiYoboNiniCheckListTest extends DbcTestBase {
     private static DbT3102NijiYoboNiniCheckListEntity NijiYoboNiniCheckListEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static ShikibetsuCode 識別コード;
+//    private static ShikibetsuCode 識別コード;
     private static HihokenshaNo 被保険者番号;
     private static FlexibleDate 受付年月日;
-    private static Decimal 任意質問番号;
-    private static Decimal 履歴番号;
+    private static int 任意質問番号;
+    private static int 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        識別コード = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_識別コード;
+//        識別コード = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_識別コード;
         被保険者番号 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_被保険者番号;
         受付年月日 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_受付年月日;
         任意質問番号 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_任意質問番号;
@@ -56,7 +56,7 @@ public class NijiYoboNiniCheckListTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboNiniCheckListEntity = DbT3102NijiYoboNiniCheckListEntityGenerator.createDbT3102NijiYoboNiniCheckListEntity();
-            NijiYoboNiniCheckListEntity.setShikibetsuCode(識別コード);
+//            NijiYoboNiniCheckListEntity.setShikibetsuCode(識別コード);
             NijiYoboNiniCheckListEntity.setHihokenshaNo(被保険者番号);
             NijiYoboNiniCheckListEntity.setUketsukeYMD(受付年月日);
             NijiYoboNiniCheckListEntity.setNiniShitsumonNo(任意質問番号);
@@ -64,20 +64,20 @@ public class NijiYoboNiniCheckListTest extends DbcTestBase {
         }
 
 //TODO 主キー名を置換してください
-        @Test(expected = NullPointerException.class)
-        public void 識別コードがnullである場合に_NullPointerExceptionが発生する() {
-            sut = new NijiYoboNiniCheckList(null, 被保険者番号, 受付年月日, 任意質問番号, 履歴番号);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 識別コードがnullである場合に_NullPointerExceptionが発生する() {
+//            sut = new NijiYoboNiniCheckList(null, 被保険者番号, 受付年月日, 任意質問番号, 履歴番号);
+//        }
 
         @Test(expected = NullPointerException.class)
         public void 被保険者番号がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new NijiYoboNiniCheckList(識別コード, null, 受付年月日, 任意質問番号, 履歴番号);
+            sut = new NijiYoboNiniCheckList(null, 受付年月日, 任意質問番号, 履歴番号);
         }
 
         @Test
         public void 指定したキーが保持するDbT3102NijiYoboNiniCheckListEntityにセットされている() {
-            sut = new NijiYoboNiniCheckList(識別コード, 被保険者番号, 受付年月日, 任意質問番号, 履歴番号);
-            assertThat(sut.get識別コード(), is(識別コード));
+            sut = new NijiYoboNiniCheckList(被保険者番号, 受付年月日, 任意質問番号, 履歴番号);
+//            assertThat(sut.get識別コード(), is(識別コード));
             assertThat(sut.get被保険者番号(), is(被保険者番号));
             assertThat(sut.get受付年月日(), is(受付年月日));
             assertThat(sut.get任意質問番号(), is(任意質問番号));
@@ -86,8 +86,8 @@ public class NijiYoboNiniCheckListTest extends DbcTestBase {
 
         @Test
         public void 指定したキーが保持するNijiYoboNiniCheckListIdentifierにセットされている() {
-            sut = new NijiYoboNiniCheckList(識別コード, 被保険者番号, 受付年月日, 任意質問番号, 履歴番号);
-            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            sut = new NijiYoboNiniCheckList(被保険者番号, 受付年月日, 任意質問番号, 履歴番号);
+//            assertThat(sut.identifier().get識別コード(), is(識別コード));
             assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
             assertThat(sut.identifier().get受付年月日(), is(受付年月日));
             assertThat(sut.identifier().get任意質問番号(), is(任意質問番号));
@@ -102,7 +102,7 @@ public class NijiYoboNiniCheckListTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboNiniCheckListEntity = DbT3102NijiYoboNiniCheckListEntityGenerator.createDbT3102NijiYoboNiniCheckListEntity();
-            NijiYoboNiniCheckListEntity.setShikibetsuCode(識別コード);
+//            NijiYoboNiniCheckListEntity.setShikibetsuCode(識別コード);
             NijiYoboNiniCheckListEntity.setHihokenshaNo(被保険者番号);
             NijiYoboNiniCheckListEntity.setUketsukeYMD(受付年月日);
             NijiYoboNiniCheckListEntity.setNiniShitsumonNo(任意質問番号);
@@ -119,7 +119,7 @@ public class NijiYoboNiniCheckListTest extends DbcTestBase {
 
             sut = new NijiYoboNiniCheckList(NijiYoboNiniCheckListEntity);
 
-            assertThat(sut.identifier().get識別コード(), is(識別コード));
+//            assertThat(sut.identifier().get識別コード(), is(識別コード));
             assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
             assertThat(sut.identifier().get受付年月日(), is(受付年月日));
             assertThat(sut.identifier().get任意質問番号(), is(任意質問番号));
@@ -134,7 +134,7 @@ public class NijiYoboNiniCheckListTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboNiniCheckListEntity = DbT3102NijiYoboNiniCheckListEntityGenerator.createDbT3102NijiYoboNiniCheckListEntity();
-            NijiYoboNiniCheckListEntity.setShikibetsuCode(識別コード);
+//            NijiYoboNiniCheckListEntity.setShikibetsuCode(識別コード);
             NijiYoboNiniCheckListEntity.setHihokenshaNo(被保険者番号);
             NijiYoboNiniCheckListEntity.setUketsukeYMD(受付年月日);
             NijiYoboNiniCheckListEntity.setNiniShitsumonNo(任意質問番号);
@@ -143,10 +143,10 @@ public class NijiYoboNiniCheckListTest extends DbcTestBase {
             sut = new NijiYoboNiniCheckList(NijiYoboNiniCheckListEntity);
         }
 
-        @Test
-        public void get識別コードは_entityが持つ識別コードを返す() {
-            assertThat(sut.get識別コード(), is(NijiYoboNiniCheckListEntity.getShikibetsuCode()));
-        }
+//        @Test
+//        public void get識別コードは_entityが持つ識別コードを返す() {
+//            assertThat(sut.get識別コード(), is(NijiYoboNiniCheckListEntity.getShikibetsuCode()));
+//        }
 
         @Test
         public void get被保険者番号は_entityが持つ被保険者番号を返す() {
@@ -181,7 +181,7 @@ public class NijiYoboNiniCheckListTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboNiniCheckListEntity = DbT3102NijiYoboNiniCheckListEntityGenerator.createDbT3102NijiYoboNiniCheckListEntity();
-            NijiYoboNiniCheckListEntity.setShikibetsuCode(識別コード);
+//            NijiYoboNiniCheckListEntity.setShikibetsuCode(識別コード);
             NijiYoboNiniCheckListEntity.setHihokenshaNo(被保険者番号);
             NijiYoboNiniCheckListEntity.setUketsukeYMD(受付年月日);
             NijiYoboNiniCheckListEntity.setNiniShitsumonNo(任意質問番号);
@@ -203,7 +203,7 @@ public class NijiYoboNiniCheckListTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboNiniCheckListEntity = DbT3102NijiYoboNiniCheckListEntityGenerator.createDbT3102NijiYoboNiniCheckListEntity();
-            NijiYoboNiniCheckListEntity.setShikibetsuCode(識別コード);
+//            NijiYoboNiniCheckListEntity.setShikibetsuCode(識別コード);
             NijiYoboNiniCheckListEntity.setHihokenshaNo(被保険者番号);
             NijiYoboNiniCheckListEntity.setUketsukeYMD(受付年月日);
             NijiYoboNiniCheckListEntity.setNiniShitsumonNo(任意質問番号);
@@ -226,7 +226,7 @@ public class NijiYoboNiniCheckListTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboNiniCheckListEntity = DbT3102NijiYoboNiniCheckListEntityGenerator.createDbT3102NijiYoboNiniCheckListEntity();
-            NijiYoboNiniCheckListEntity.setShikibetsuCode(識別コード);
+//            NijiYoboNiniCheckListEntity.setShikibetsuCode(識別コード);
             NijiYoboNiniCheckListEntity.setHihokenshaNo(被保険者番号);
             NijiYoboNiniCheckListEntity.setUketsukeYMD(受付年月日);
             NijiYoboNiniCheckListEntity.setNiniShitsumonNo(任意質問番号);

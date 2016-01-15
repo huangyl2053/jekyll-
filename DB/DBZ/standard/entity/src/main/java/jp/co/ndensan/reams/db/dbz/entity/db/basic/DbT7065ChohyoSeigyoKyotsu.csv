@@ -7,7 +7,8 @@ jushoHenshuGunMeiHyojiUmu,bool,boolean,,,,,住所編集郡名表示有無,A
 jushoHenshuShichosonMeiHyojiUmu,bool,boolean,,,,,住所編集市町村名表示有無,A
 jushoHenshuChoikiHenshuHoho,varchar,RString,,,,,住所編集町域編集方法,A
 jushoHenshuKatagakiHyojiUmu,bool,boolean,,,,,住所編集方書表示有無,A
-SetainushiHyojiUmu,bool,boolean,,,,,世帯主表示有無,A
+setainushiHyojiUmu,bool,boolean,,,,,世帯主表示有無,A
+dainoninHyojiUmu,bool,boolean,,,,,代納人表示有無,A
 customerBarCodeShiyoUmu,bool,boolean,,,,,カスタマバーコード使用有無,A
 customerBarCodeHenkanErrHenshuHoho,varchar,RString,,,,,カスタマバーコード変換エラー編集方法,A
 gaibuChohyoMojigireSeigyo,varchar,RString,,,,,外部帳票文字切れ制御,A

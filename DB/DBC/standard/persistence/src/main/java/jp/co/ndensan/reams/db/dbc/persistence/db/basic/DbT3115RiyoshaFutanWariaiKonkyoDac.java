@@ -45,8 +45,8 @@ public class DbT3115RiyoshaFutanWariaiKonkyoDac implements ISaveable<DbT3115Riyo
     public DbT3115RiyoshaFutanWariaiKonkyoEntity selectByKey(
             FlexibleYear 年度,
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号,
-            Decimal 枝番号,
+            int 履歴番号,
+            int 枝番号,
             HihokenshaNo 世帯員被保険者番号) throws NullPointerException {
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));

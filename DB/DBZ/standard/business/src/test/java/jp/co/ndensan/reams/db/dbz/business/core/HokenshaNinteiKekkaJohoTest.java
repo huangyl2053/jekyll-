@@ -151,7 +151,7 @@ public class HokenshaNinteiKekkaJohoTest extends DbdTestBase {
 
         @Test
         public void setShinsakaiKaisaiNoで設定した値を＿生成されたHokenshaShinseitodokedeJohoも保持する() {
-            HokenshaNinteiKekkaJoho result = HokenshaNinteiKekkaJoho.newBuilder().setShinsakaiKaisaiNo(1).build();
+            HokenshaNinteiKekkaJoho result = HokenshaNinteiKekkaJoho.newBuilder().setShinsakaiKaisaiNo(new RString("1")).build();
             assertThat(result.get介護認定審査会開催番号(), is(DbT4102NinteiKekkaJohoEntityGenerator.DEFAULT_介護認定審査会開催番号));
         }
 

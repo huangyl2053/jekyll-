@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7014KaigoSetaiEntity;
 public interface IDbT7014KaigoSetaiMapper {
 
     /**
-     * {@link DbT7014KaigoSetaiEntity}を取得します。
+     * {@link  DbT7014KaigoSetaiEntity}を取得します。
      *
-     * @return {@link DbT7014KaigoSetaiEntity}
+     * @return {@link  DbT7014KaigoSetaiEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7014KaigoSetaiEntity getEntity();

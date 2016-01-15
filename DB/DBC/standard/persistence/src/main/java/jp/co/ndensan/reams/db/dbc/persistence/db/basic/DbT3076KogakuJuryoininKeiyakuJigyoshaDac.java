@@ -43,7 +43,7 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDac implements ISaveable<DbT30
     public DbT3076KogakuJuryoininKeiyakuJigyoshaEntity selectByKey(
             HihokenshaNo 被保険者番号,
             FlexibleDate 受付年月日,
-            Decimal 履歴番号) throws NullPointerException {
+            int 履歴番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));

@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 認定調査委託先情報テーブルの項目定義クラスです。
  */
 public enum DbT5910NinteichosaItakusakiJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -55,11 +55,11 @@ public enum DbT5910NinteichosaItakusakiJoho implements IColumnDefinition {
     /**
      * 事業者名称
      */
-    jigyoshaMeisho(120, 0),
+    jigyoshaMeisho(512, 0),
     /**
      * 事業者名称カナ
      */
-    jigyoshaMeishoKana(120, 0),
+    jigyoshaMeishoKana(512, 0),
     /**
      * 郵便番号
      */
@@ -67,7 +67,7 @@ public enum DbT5910NinteichosaItakusakiJoho implements IColumnDefinition {
     /**
      * 住所
      */
-    jusho(50, 0),
+    jusho(512, 0),
     /**
      * 電話番号
      */
@@ -79,29 +79,42 @@ public enum DbT5910NinteichosaItakusakiJoho implements IColumnDefinition {
     /**
      * 代表者名
      */
-    daihyoshaName(2147483647, 0),
+    daihyoshaName(512, 0),
+    /**
+     * 代表者名カナ
+     */
+    daihyoshaNameKana(512, 0),
     /**
      * 調査委託区分
+     * <br/>Enum（DBE：調査委託区分）
      */
     chosaItakuKubun(1, 0),
+    /**
+     * 特定調査員表示フラグ
+     */
+    tokuteiChosainDisplayFlag(1, 0),
     /**
      * 割付定員
      */
     waritsukeTeiin(5, 0),
     /**
      * 割付地区
+     * <br/>Code（DBE：5002）
      */
     waritsukeChiku(2147483647, 0),
     /**
      * 自動割付フラグ
+     * <br/>Enum（DBE：自動割付フラグ）
      */
     autoWaritsukeFlag(1, 0),
     /**
      * 機関の区分
+     * <br/>Enum（DBE：機関の区分）
      */
     kikanKubun(1, 0),
     /**
      * 状況フラグ
+     * <br/>True：有効　False：無効
      */
     jokyoFlag(1, 0);
 

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護資格基本情報Divの操作を行うクラスです。
@@ -55,13 +56,15 @@ public class KaigoShikakuKihonHandler {
      */
     public void initialize(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
 
-        KaigoShikakuKihonSearchKey 検索キー = new KaigoShikakuKihonSearchKey.Builder(市町村コード, 識別コード).build();
+//        KaigoShikakuKihonSearchKey 検索キー = new KaigoShikakuKihonSearchKey.Builder(市町村コード, 識別コード).build();
 //        Optional<HihokenshaDaichoModel> daicho = hihokenshaDaichoManager.get最新被保険者台帳(検索キー.get市町村コード(), 検索キー.get識別コード());
 //        if (!daicho.isPresent()) {
 //            return;
 //        }
 
 //        HihokenshaDaichoModel daichoModel = daicho.get();
+        //TODO n2810久保　CheckStyle回避のために暫定対応
+        div.getTxtHihokenshaNo().setValue(RString.EMPTY);
 //        div.getTxtHihokenshaNo().setValue(daichoModel.get被保険者番号().value());
 //        div.getTxtShutokuYmd().setValue(daichoModel.get資格取得年月日());
 //        div.getTxtShutokuJiyu().setValue(daichoModel.get資格取得事由().getName());

@@ -13,7 +13,6 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiy
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.teikyoKaishiYM;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -30,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護サービス内容のデータアクセスクラスです。
  */
-public class DbT7131KaigoServiceNaiyouDac implements ISaveable<DbT7131KaigoServiceNaiyouEntity> {
+public class DbT7131KaigoServiceNaiyouDac {
 
     @InjectSession
     private SqlSession session;
@@ -89,7 +88,6 @@ public class DbT7131KaigoServiceNaiyouDac implements ISaveable<DbT7131KaigoServi
      * @return 登録件数
      */
     @Transaction
-    @Override
     public int save(DbT7131KaigoServiceNaiyouEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護サービス内容エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。

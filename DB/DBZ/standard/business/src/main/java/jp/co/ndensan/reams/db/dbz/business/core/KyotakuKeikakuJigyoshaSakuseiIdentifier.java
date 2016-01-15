@@ -24,6 +24,7 @@ public class KyotakuKeikakuJigyoshaSakuseiIdentifier implements Serializable {
     /**
      * コンストラクタです。
      *
+     * @param 被保険者番号 被保険者番号
      * @param 対象年月 対象年月
      * @param 履歴番号 履歴番号
      */
@@ -33,5 +34,32 @@ public class KyotakuKeikakuJigyoshaSakuseiIdentifier implements Serializable {
         this.被保険者番号 = 被保険者番号;
         this.対象年月 = 対象年月;
         this.履歴番号 = 履歴番号;
+    }
+
+    /**
+     * get被保険者番号
+     *
+     * @return 被保険者番号
+     */
+    public HihokenshaNo get被保険者番号() {
+        return 被保険者番号;
+    }
+
+    /**
+     * get対象年月
+     *
+     * @return 対象年月
+     */
+    public FlexibleYearMonth get対象年月() {
+        return 対象年月;
+    }
+
+    /**
+     * get履歴番号
+     *
+     * @return 履歴番号
+     */
+    public Decimal get履歴番号() {
+        return 履歴番号;
     }
 }

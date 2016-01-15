@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ninteishinseijoho.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -50,13 +52,14 @@ public class NinteiShinseiJohoManager {
             ShinseishoKanriNo 申請書管理番号) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
 
-        DbT5101NinteiShinseiJohoEntity entity = dac.selectByKey(
+        Optional<DbT5101NinteiShinseiJohoEntity> entity = dac.selectByKey(
                 申請書管理番号);
         if (entity == null) {
             return null;
         }
-        entity.initializeMd5();
-        return new NinteiShinseiJoho(entity);
+//        entity.initializeMd5();
+//        return new NinteiShinseiJoho(entity);
+        return null;
     }
 
     /**
@@ -88,6 +91,6 @@ public class NinteiShinseiJohoManager {
         if (!要介護認定申請情報.hasChanged()) {
             return false;
         }
-        return 1 == dac.save(要介護認定申請情報.toEntity());
+        return 1 == dac.update((INinteiShinseiJohoEntity) 要介護認定申請情報.toEntity());
     }
 }

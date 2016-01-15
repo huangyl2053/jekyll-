@@ -7,14 +7,17 @@ package jp.co.ndensan.reams.db.dbe.business.core.tyousai.ninteichosaitakusakijoh
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.koseishichosonmaster.KoseiShichosonMasterIdentifier;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -71,7 +74,7 @@ public class NinteichosaItakusakiJohoBuilder {
      * @param 認定調査委託先コード 認定調査委託先コード
      * @return {@link NinteichosaItakusakiJohoBuilder}
      */
-    public NinteichosaItakusakiJohoBuilder set認定調査委託先コード(RString 認定調査委託先コード) {
+    public NinteichosaItakusakiJohoBuilder set認定調査委託先コード(ChosaItakusakiCode 認定調査委託先コード) {
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
         entity.setNinteichosaItakusakiCode(認定調査委託先コード);
         return this;
@@ -167,7 +170,7 @@ public class NinteichosaItakusakiJohoBuilder {
      * @param 代表者名 代表者名
      * @return {@link NinteichosaItakusakiJohoBuilder}
      */
-    public NinteichosaItakusakiJohoBuilder set代表者名(RString 代表者名) {
+    public NinteichosaItakusakiJohoBuilder set代表者名(AtenaMeisho 代表者名) {
         requireNonNull(代表者名, UrSystemErrorMessages.値がnull.getReplacedMessage("代表者名"));
         entity.setDaihyoshaName(代表者名);
         return this;

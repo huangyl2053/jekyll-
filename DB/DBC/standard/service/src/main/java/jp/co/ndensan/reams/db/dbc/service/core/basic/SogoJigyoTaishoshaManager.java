@@ -44,22 +44,23 @@ public class SogoJigyoTaishoshaManager {
     /**
      * 主キーに合致する総合事業対象者を返します。
      *
-     * @param 証記載保険者番号 ShoKisaiHokenshaNo
+// * @param 証記載保険者番号 ShoKisaiHokenshaNo
+     *
      * @param 被保険者番号 HihokenshaNo
      * @param 履歴番号 RirekiNo
      * @return SogoJigyoTaishosha
      */
     @Transaction
     public SogoJigyoTaishosha get総合事業対象者(
-            HokenshaNo 証記載保険者番号,
+            //            HokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+            int 履歴番号) {
+//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbT3105SogoJigyoTaishoshaEntity entity = dac.selectByKey(
-                証記載保険者番号,
+                //                証記載保険者番号,
                 被保険者番号,
                 履歴番号);
         if (entity == null) {

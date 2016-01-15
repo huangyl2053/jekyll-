@@ -285,7 +285,7 @@ public class DbT3071KogakuGassanJikoFutanGakuMeisaiDacTest extends DbcTestDacBas
                 HokenshaNo 保険者番号,
                 RString 支給申請書整理番号,
                 RString 対象月,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3071KogakuGassanJikoFutanGakuMeisaiEntity entity = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.createDbT3071KogakuGassanJikoFutanGakuMeisaiEntity();
             entity.setHihokenshaNo(被保険者番号);
             entity.setTaishoNendo(対象年度);

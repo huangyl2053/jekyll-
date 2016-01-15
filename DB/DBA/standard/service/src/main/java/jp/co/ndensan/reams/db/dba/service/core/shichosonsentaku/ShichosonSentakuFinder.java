@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorResult;
 import jp.co.ndensan.reams.db.dba.persistence.mapper.basic.shichosonsentaku.IShichosonSentakuMapper;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7056GappeiShichosonDac;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7056GappeiShichosonDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -55,8 +57,7 @@ public class ShichosonSentakuFinder {
      * @return 旧市町村選択情報取得
      */
     public List<ShichosonSelectorResult> getGapeiShichosonSentaku(FlexibleDate 基準日) {
-        List<DbT7056GappeiShichosonEntity> entityList = dac.selectfor合併市町村選択情報の取得処理(
-                基準日);
+        List<DbT7056GappeiShichosonEntity> entityList = dac.selectAll();
         if (entityList.isEmpty()) {
             return new ArrayList();
         }

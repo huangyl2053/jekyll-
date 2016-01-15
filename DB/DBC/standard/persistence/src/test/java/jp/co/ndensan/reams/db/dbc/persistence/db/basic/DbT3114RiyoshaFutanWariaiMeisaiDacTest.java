@@ -175,7 +175,7 @@ public class DbT3114RiyoshaFutanWariaiMeisaiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_履歴番号,
                     DEFAULT_枝番号);
-            updateRecord.setSetaiIchigouHihoknehsaSu(new Decimal(2));
+            updateRecord.setSetaiIchigouHihokenshaSu(2);
 
             sut.save(updateRecord);
 
@@ -185,7 +185,7 @@ public class DbT3114RiyoshaFutanWariaiMeisaiDacTest extends DbcTestDacBase {
                     DEFAULT_履歴番号,
                     DEFAULT_枝番号);
 
-            assertThat(updateRecord.getSetaiIchigouHihoknehsaSu(), is(updatedRecord.getSetaiIchigouHihoknehsaSu()));
+            assertThat(updateRecord.getSetaiIchigouHihokenshaSu(), is(updatedRecord.getSetaiIchigouHihokenshaSu()));
         }
     }
 
@@ -224,8 +224,8 @@ public class DbT3114RiyoshaFutanWariaiMeisaiDacTest extends DbcTestDacBase {
         public static void insert(
                 FlexibleYear 年度,
                 HihokenshaNo 被保険者番号,
-                Decimal 履歴番号,
-                Decimal 枝番号) {
+                int 履歴番号,
+                int 枝番号) {
             DbT3114RiyoshaFutanWariaiMeisaiEntity entity = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.createDbT3114RiyoshaFutanWariaiMeisaiEntity();
             entity.setNendo(年度);
             entity.setHihokenshaNo(被保険者番号);

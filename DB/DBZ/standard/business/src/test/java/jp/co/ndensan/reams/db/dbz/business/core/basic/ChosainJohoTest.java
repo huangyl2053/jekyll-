@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5913ChosainJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -124,12 +124,12 @@ public class ChosainJohoTest extends DbzTestBase {
 
         @Test
         public void get認定調査委託先コードは_entityが持つ認定調査委託先コードを返す() {
-            assertThat(sut.get認定調査委託先コード(), is(chosainJohoEntity.getNinteichosaItakusakiCode()));
+            assertThat(sut.get認定調査委託先コード(), is(chosainJohoEntity.getNinteiChosaItakusakiCode()));
         }
 
         @Test
         public void get認定調査員コードは_entityが持つ認定調査員コードを返す() {
-            assertThat(sut.get認定調査員コード(), is(chosainJohoEntity.getNinteiChosainNo()));
+            assertThat(sut.get認定調査員コード(), is(chosainJohoEntity.getNinteiChosainCode()));
         }
 
         @Test

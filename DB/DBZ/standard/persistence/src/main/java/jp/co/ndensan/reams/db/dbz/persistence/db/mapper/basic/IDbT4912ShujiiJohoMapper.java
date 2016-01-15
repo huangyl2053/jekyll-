@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4912ShujiiJohoEntity;
 public interface IDbT4912ShujiiJohoMapper {
 
     /**
-     * {@link DbT4912ShujiiJohoEntity}を取得します。
+     * {@link  DbT4912ShujiiJohoEntity}を取得します。
      *
-     * @return {@link DbT4912ShujiiJohoEntity}
+     * @return {@link  DbT4912ShujiiJohoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT4912ShujiiJohoEntity getEntity();

@@ -10,10 +10,10 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002FukaEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -53,7 +53,7 @@ public final class DbV2002FukaEntityGenerator {
     public static final Decimal DEFAULT_算定年額保険料2 = new Decimal(0);
     public static final FlexibleYearMonth DEFAULT_月割開始年月2 = new FlexibleYearMonth("199010");
     public static final FlexibleYearMonth DEFAULT_月割終了年月2 = new FlexibleYearMonth("199010");
-    public static final RDateTime DEFAULT_調定日時 = RDateTime.of(1990, 1, 1, 8, 30, 0, 0);
+    public static final YMDHMS DEFAULT_調定日時 = new YMDHMS("20140328000000");
     public static final RString DEFAULT_調定事由1 = new RString("Data");
     public static final RString DEFAULT_調定事由2 = new RString("Data");
     public static final RString DEFAULT_調定事由3 = new RString("Data");
@@ -64,7 +64,7 @@ public final class DbV2002FukaEntityGenerator {
     public static final Decimal DEFAULT_確定介護保険料_年額 = new Decimal(0);
     public static final RString DEFAULT_保険料段階_仮算定時 = new RString("Data");
     public static final int DEFAULT_徴収方法履歴番号 = 1;
-    public static final RDateTime DEFAULT_異動基準日時 = RDateTime.of(1990, 1, 1, 8, 30, 0, 0);
+    public static final YMDHMS DEFAULT_異動基準日時 = new YMDHMS("20140328000000");
     public static final RString DEFAULT_口座区分 = new RString("Data");
     public static final RString DEFAULT_境界層区分 = new RString("Data");
     public static final RString DEFAULT_職権区分 = new RString("Data");
@@ -109,7 +109,7 @@ public final class DbV2002FukaEntityGenerator {
         entity.setNengakuHokenryo2(DEFAULT_算定年額保険料2);
         entity.setTsukiwariStartYM2(DEFAULT_月割開始年月2);
         entity.setTsukiwariEndYM2(DEFAULT_月割終了年月2);
-        entity.setChoteiTimestamp(DEFAULT_調定日時);
+        entity.setChoteiNichiji(DEFAULT_調定日時);
         entity.setChoteiJiyu1(DEFAULT_調定事由1);
         entity.setChoteiJiyu2(DEFAULT_調定事由2);
         entity.setChoteiJiyu3(DEFAULT_調定事由3);
@@ -120,7 +120,7 @@ public final class DbV2002FukaEntityGenerator {
         entity.setKakuteiHokenryo(DEFAULT_確定介護保険料_年額);
         entity.setHokenryoDankaiKarisanntei(DEFAULT_保険料段階_仮算定時);
         entity.setChoshuHohoRirekiNo(DEFAULT_徴収方法履歴番号);
-        entity.setIdoKijunTimestamp(DEFAULT_異動基準日時);
+        entity.setIdoKijunNichiji(DEFAULT_異動基準日時);
         entity.setKozaKubun(DEFAULT_口座区分);
         entity.setKyokaisoKubun(DEFAULT_境界層区分);
         entity.setShokkenKubun(DEFAULT_職権区分);

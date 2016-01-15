@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.ninteichosairaijoho.ninteichosai
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJoho;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5201NinteichosaIraiJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5201NinteichosaIraiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;

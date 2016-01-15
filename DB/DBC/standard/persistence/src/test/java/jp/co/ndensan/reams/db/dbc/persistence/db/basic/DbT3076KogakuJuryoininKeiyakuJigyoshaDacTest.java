@@ -197,7 +197,7 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase
         public static void insert(
                 HihokenshaNo 被保険者番号,
                 FlexibleDate 受付年月日,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3076KogakuJuryoininKeiyakuJigyoshaEntity entity = DbT3076KogakuJuryoininKeiyakuJigyoshaEntityGenerator.createDbT3076KogakuJuryoininKeiyakuJigyoshaEntity();
             entity.setHihokenshaNo(被保険者番号);
             entity.setUketsukeYMD(受付年月日);

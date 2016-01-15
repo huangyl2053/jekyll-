@@ -48,12 +48,10 @@ public class DbT3103NijiYoboCheckListHanteiKekkaDacTest extends DbcTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
             TestSupport.insert(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
@@ -62,7 +60,6 @@ public class DbT3103NijiYoboCheckListHanteiKekkaDacTest extends DbcTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 識別コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
@@ -71,7 +68,6 @@ public class DbT3103NijiYoboCheckListHanteiKekkaDacTest extends DbcTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 被保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
@@ -80,7 +76,6 @@ public class DbT3103NijiYoboCheckListHanteiKekkaDacTest extends DbcTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 受付年月日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
@@ -89,7 +84,6 @@ public class DbT3103NijiYoboCheckListHanteiKekkaDacTest extends DbcTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 履歴番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
@@ -98,7 +92,6 @@ public class DbT3103NijiYoboCheckListHanteiKekkaDacTest extends DbcTestDacBase {
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT3103NijiYoboCheckListHanteiKekkaEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
@@ -108,7 +101,6 @@ public class DbT3103NijiYoboCheckListHanteiKekkaDacTest extends DbcTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT3103NijiYoboCheckListHanteiKekkaEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
@@ -121,12 +113,10 @@ public class DbT3103NijiYoboCheckListHanteiKekkaDacTest extends DbcTestDacBase {
         @Test
         public void 二次予防チェックリスト判定結果が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
             TestSupport.insert(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
@@ -144,13 +134,11 @@ public class DbT3103NijiYoboCheckListHanteiKekkaDacTest extends DbcTestDacBase {
         @Test
         public void 二次予防チェックリスト判定結果エンティティを渡すと_insertは_二次予防チェックリスト判定結果を追加する() {
             TestSupport.insert(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
 
             assertThat(sut.selectByKey(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号), is(notNullValue()));
@@ -162,7 +150,6 @@ public class DbT3103NijiYoboCheckListHanteiKekkaDacTest extends DbcTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
@@ -171,16 +158,14 @@ public class DbT3103NijiYoboCheckListHanteiKekkaDacTest extends DbcTestDacBase {
         @Test
         public void 二次予防チェックリスト判定結果エンティティを渡すと_updateは_二次予防チェックリスト判定結果を更新する() {
             DbT3103NijiYoboCheckListHanteiKekkaEntity updateRecord = sut.selectByKey(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
-            updateRecord.setShien_Eiyo(new Decimal(123));
+            updateRecord.setShien_Eiyo(123);
 
             sut.save(updateRecord);
 
             DbT3103NijiYoboCheckListHanteiKekkaEntity updatedRecord = sut.selectByKey(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
@@ -194,7 +179,6 @@ public class DbT3103NijiYoboCheckListHanteiKekkaDacTest extends DbcTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
@@ -203,7 +187,6 @@ public class DbT3103NijiYoboCheckListHanteiKekkaDacTest extends DbcTestDacBase {
         @Test
         public void 二次予防チェックリスト判定結果エンティティを渡すと_deleteは_二次予防チェックリスト判定結果を削除する() {
             DbT3103NijiYoboCheckListHanteiKekkaEntity deletedEntity = sut.selectByKey(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
@@ -212,7 +195,6 @@ public class DbT3103NijiYoboCheckListHanteiKekkaDacTest extends DbcTestDacBase {
             sut.save(deletedEntity);
 
             assertThat(sut.selectByKey(
-                    DEFAULT_識別コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_受付年月日,
                     DEFAULT_履歴番号), is(nullValue()));
@@ -222,12 +204,10 @@ public class DbT3103NijiYoboCheckListHanteiKekkaDacTest extends DbcTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                ShikibetsuCode 識別コード,
                 HihokenshaNo 被保険者番号,
                 FlexibleDate 受付年月日,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3103NijiYoboCheckListHanteiKekkaEntity entity = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.createDbT3103NijiYoboCheckListHanteiKekkaEntity();
-            entity.setShikibetsuCode(識別コード);
             entity.setHihokenshaNo(被保険者番号);
             entity.setUketsukeYMD(受付年月日);
             entity.setRirekiNo(履歴番号);

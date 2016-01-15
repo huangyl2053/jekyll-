@@ -23,6 +23,9 @@ public class KaigoDoctorCode implements Comparable<KaigoDoctorCode>, IDbColumnMa
 
     private final RString 介護医師コード;
 
+    /**
+     * {@link KaigoDoctorCode}のEMPTY格納用定数です。
+     */
     public static final KaigoDoctorCode EMPTY;
 
     /**
@@ -36,6 +39,7 @@ public class KaigoDoctorCode implements Comparable<KaigoDoctorCode>, IDbColumnMa
      * インスタンスを生成します。
      *
      * @param 介護医師コード 介護医師コード
+     * @throws NullPointerException NullPointerException
      */
     public KaigoDoctorCode(RString 介護医師コード) throws NullPointerException {
         this.介護医師コード = requireNonNull(介護医師コード, UrSystemErrorMessages.値がnull.getReplacedMessage("契約番号"));

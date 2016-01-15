@@ -18,7 +18,8 @@ public enum DBA2010012StateName implements IStateEnumerations {
     追加状態("追加状態"),
     修正状態("修正状態"),
     削除状態("削除状態"),
-    完了状態("完了状態");
+    完了状態("完了状態"),
+    照会状態("照会状態");
 
     private final RString name;
 

@@ -4,18 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.GogitaiWariateDac;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5107GogitaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import org.junit.Test;
-import org.junit.Ignore;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -67,14 +66,14 @@ public class GogitaiWariateDacTest {
         }
     }
 
-    private static DbT5107GogitaiWariateIinJohoEntity create合議体割当Entity(int 合議体番号, String 割当委員コード, String 開始年月日, String 終了年月日) {
-        DbT5107GogitaiWariateIinJohoEntity entity = new DbT5107GogitaiWariateIinJohoEntity();
+    private static DbT5593GogitaiWariateIinJohoEntity create合議体割当Entity(int 合議体番号, String 割当委員コード, String 開始年月日, String 終了年月日) {
+        DbT5593GogitaiWariateIinJohoEntity entity = new DbT5593GogitaiWariateIinJohoEntity();
         entity.setGogitaiNo(合議体番号);
         entity.setShinsakaiIinCode(new RString(割当委員コード));
         entity.setGogitaiYukoKikanKaishiYMD(new FlexibleDate(開始年月日));
         entity.setGogitaiYukoKikanShuryoYMD(new FlexibleDate(終了年月日));
         entity.setGogitaichoKubunCode(new Code(new RString("1")));
-        entity.setShinsainKubunCode(new Code(new RString("1")));
+        entity.setShinsakaiIinCode(new RString("1"));
         return entity;
     }
 }

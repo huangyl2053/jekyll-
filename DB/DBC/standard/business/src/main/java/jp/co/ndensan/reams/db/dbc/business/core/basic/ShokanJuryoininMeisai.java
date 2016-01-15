@@ -35,26 +35,27 @@ extends ModelBase<ShokanJuryoininMeisaiIdentifier,
      * @param 被保険者番号 被保険者番号
      * @param サービス提供年月 サービス提供年月
      * @param 整理番号 整理番号
-     * @param 履歴番号 履歴番号
+// * @param 履歴番号 履歴番号
      */
     public ShokanJuryoininMeisai(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
-            RString 整理番号,
-            Decimal 履歴番号) {
+            RString 整理番号
+    //            Decimal 履歴番号
+    ) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3037ShokanJuryoininMeisaiEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
         this.entity.setSeiriNo(整理番号);
-        this.entity.setRirekiNo(履歴番号);
+//        this.entity.setRirekiNo(履歴番号);
         this.id = new ShokanJuryoininMeisaiIdentifier(
                 被保険者番号,
                 サービス提供年月,
-                整理番号,
-                履歴番号
+                整理番号
+        //                履歴番号
         );
     }
 
@@ -69,8 +70,9 @@ extends ModelBase<ShokanJuryoininMeisaiIdentifier,
         this.id = new ShokanJuryoininMeisaiIdentifier(
                 entity.getHiHokenshaNo(),
                 entity.getServiceTeikyoYM(),
-                entity.getSeiriNo(),
-                entity.getRirekiNo());
+                entity.getSeiriNo()
+        //                entity.getRirekiNo()
+        );
     }
 
     /**
@@ -120,9 +122,9 @@ extends ModelBase<ShokanJuryoininMeisaiIdentifier,
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
-        return entity.getRirekiNo();
-    }
+//    public Decimal get履歴番号() {
+//        return entity.getRirekiNo();
+//    }
 
     /**
      * 契約番号を返します。

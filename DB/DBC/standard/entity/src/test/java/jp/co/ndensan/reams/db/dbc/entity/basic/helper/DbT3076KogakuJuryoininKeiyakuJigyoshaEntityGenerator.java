@@ -18,7 +18,7 @@ public final class DbT3076KogakuJuryoininKeiyakuJigyoshaEntityGenerator {
 
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
     public static final FlexibleDate DEFAULT_受付年月日 = new FlexibleDate("19900101");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 1;
     public static final FlexibleDate DEFAULT_申請年月日 = new FlexibleDate("19900101");
     public static final JigyoshaNo DEFAULT_事業者番号 = new JigyoshaNo("1");
     public static final FlexibleDate DEFAULT_決定年月日 = new FlexibleDate("19900101");

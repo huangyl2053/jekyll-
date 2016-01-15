@@ -6,8 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 高額受領委任契約事業者テーブルの項目定義クラスです。
  */
 public enum DbT3076KogakuJuryoininKeiyakuJigyosha implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -45,10 +44,6 @@ public enum DbT3076KogakuJuryoininKeiyakuJigyosha implements IColumnDefinition {
      */
     hihokenshaNo(2147483647, 0),
     /**
-     * 受付年月日
-     */
-    uketsukeYMD(2147483647, 0),
-    /**
      * 履歴番号
      */
     rirekiNo(5, 0),
@@ -56,6 +51,10 @@ public enum DbT3076KogakuJuryoininKeiyakuJigyosha implements IColumnDefinition {
      * 申請年月日
      */
     shinseiYMD(2147483647, 0),
+    /**
+     * 受付年月日
+     */
+    uketsukeYMD(2147483647, 0),
     /**
      * 事業者番号
      * <br/>受領委任対象の事業者番号
@@ -110,7 +109,7 @@ public enum DbT3076KogakuJuryoininKeiyakuJigyosha implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -119,7 +118,7 @@ public enum DbT3076KogakuJuryoininKeiyakuJigyosha implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

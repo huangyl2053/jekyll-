@@ -12,7 +12,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 業務Configから取得した値であること表します。
  *
  * @author N3327 三浦 凌
+ * @deprecated 不要のため削除する。
  */
+@Deprecated
 public interface IConfigValue {
 
     /**

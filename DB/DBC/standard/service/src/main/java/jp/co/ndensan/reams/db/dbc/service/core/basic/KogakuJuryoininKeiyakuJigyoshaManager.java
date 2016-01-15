@@ -53,7 +53,7 @@ public class KogakuJuryoininKeiyakuJigyoshaManager {
     public KogakuJuryoininKeiyakuJigyosha get高額受領委任契約事業者(
             HihokenshaNo 被保険者番号,
             FlexibleDate 受付年月日,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));

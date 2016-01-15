@@ -25,7 +25,7 @@ public class ShokanJutakuKaishuIdentifier implements Serializable {
     private final JigyoshaNo 事業者番号;
     private final RString 様式番号;
     private final RString 順次番号;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
 
     /**
      * コンストラクタです。
@@ -44,7 +44,7 @@ public class ShokanJutakuKaishuIdentifier implements Serializable {
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 順次番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;
         this.整理番号 = 整理番号;

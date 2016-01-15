@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -33,7 +32,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaBuilderTest extends DbcTestBase {
     private static FlexibleYear 主キー名2;
     private static HokenshaNo 主キー名3;
     private static RString 主キー名4;
-    private static Decimal 主キー名5;
+    private static int 主キー名5;
 
     @BeforeClass
     public static void setUpClass() {

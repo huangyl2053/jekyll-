@@ -35,27 +35,29 @@ public class DbT3077JuryoininKeiyakuJigyoshaDac implements ISaveable<DbT3077Jury
      *
      * @param 事業者契約番号 JigyoshaKeiyakuNo
      * @param 開始年月日 KaishiYMD
-     * @param 履歴番号 RirekiNo
+// * @param 履歴番号 RirekiNo
      * @return DbT3077JuryoininKeiyakuJigyoshaEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT3077JuryoininKeiyakuJigyoshaEntity selectByKey(
             RString 事業者契約番号,
-            FlexibleDate 開始年月日,
-            Decimal 履歴番号) throws NullPointerException {
+            FlexibleDate 開始年月日
+    //            Decimal 履歴番号
+    ) throws NullPointerException {
         requireNonNull(事業者契約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者契約番号"));
         requireNonNull(開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("開始年月日"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT3077JuryoininKeiyakuJigyosha.class).
                 where(and(
-                                eq(jigyoshaKeiyakuNo, 事業者契約番号),
-                                eq(kaishiYMD, 開始年月日),
-                                eq(rirekiNo, 履歴番号))).
+                                eq(keiyakuJigyoshaNo, 事業者契約番号),
+                                eq(kaishiYMD, 開始年月日)
+                        //                                eq(rirekiNo, 履歴番号)
+                        )).
                 toObject(DbT3077JuryoininKeiyakuJigyoshaEntity.class);
     }
 

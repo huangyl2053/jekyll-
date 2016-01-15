@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyosha;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyosha.*;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -26,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護事業者のデータアクセスクラスです。
  */
-public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEntity> {
+public class DbT7060KaigoJigyoshaDac {
 
     @InjectSession
     private SqlSession session;
@@ -77,7 +76,6 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
      * @return 登録件数
      */
     @Transaction
-    @Override
     public int save(DbT7060KaigoJigyoshaEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護事業者エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
@@ -85,6 +83,10 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
+    /**
+     * @param 事業者番号s 事業者番号s
+     * @return DbT7060KaigoJigyoshaEntityのlist
+     */
     public Collection<DbT7060KaigoJigyoshaEntity> select特定の事業者番号の事業者List(List<RString> 事業者番号s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

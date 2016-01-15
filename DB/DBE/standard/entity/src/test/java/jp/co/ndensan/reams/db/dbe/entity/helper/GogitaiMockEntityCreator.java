@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5103GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5107GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -70,17 +69,17 @@ public final class GogitaiMockEntityCreator {
      * @param 終了年月日 終了年月日
      * @return 合議体割当情報Entity
      */
-    public static DbT5107GogitaiWariateIinJohoEntity create合議体割当EntitySpy(int 合議体番号, String 割当委員コード,
-            String 開始年月日, String 終了年月日) {
-        DbT5107GogitaiWariateIinJohoEntity entity = create合議体割当Entity(合議体番号, 割当委員コード, 開始年月日, 終了年月日);
-        entity = spy(entity);
-
-        doReturn(new RString("meisho")).when(entity).getGogitaichoKubunCodeMeisho();
-        doReturn(new RString("meisho")).when(entity).getShinsainKubunCodeMeisho();
-        doReturn(new RString("ryakusho")).when(entity).getGogitaichoKubunCodeRyakusho();
-        doReturn(new RString("ryakusho")).when(entity).getShinsainKubunCodeRyakusho();
-        return entity;
-    }
+//    public static DbT5107GogitaiWariateIinJohoEntity create合議体割当EntitySpy(int 合議体番号, String 割当委員コード,
+//            String 開始年月日, String 終了年月日) {
+//        DbT5107GogitaiWariateIinJohoEntity entity = create合議体割当Entity(合議体番号, 割当委員コード, 開始年月日, 終了年月日);
+//        entity = spy(entity);
+//
+//        doReturn(new RString("meisho")).when(entity).getGogitaichoKubunCodeMeisho();
+//        doReturn(new RString("meisho")).when(entity).getShinsainKubunCodeMeisho();
+//        doReturn(new RString("ryakusho")).when(entity).getGogitaichoKubunCodeRyakusho();
+//        doReturn(new RString("ryakusho")).when(entity).getShinsainKubunCodeRyakusho();
+//        return entity;
+//    }
 
     /**
      * 合議体割当情報Entityを生成して返します。
@@ -91,17 +90,17 @@ public final class GogitaiMockEntityCreator {
      * @param 終了年月日 終了年月日
      * @return 合議体割当情報Entity
      */
-    public static DbT5107GogitaiWariateIinJohoEntity create合議体割当Entity(int 合議体番号, String 割当委員コード,
-            String 開始年月日, String 終了年月日) {
-        DbT5107GogitaiWariateIinJohoEntity entity = new DbT5107GogitaiWariateIinJohoEntity();
-        entity.setGogitaiNo(合議体番号);
-        entity.setShinsakaiIinCode(new RString(割当委員コード));
-        entity.setGogitaiYukoKikanKaishiYMD(new FlexibleDate(開始年月日));
-        entity.setGogitaiYukoKikanShuryoYMD(new FlexibleDate(終了年月日));
-        entity.setGogitaichoKubunCode(new Code(new RString("1")));
-        entity.setShinsainKubunCode(new Code(new RString("1")));
-        return entity;
-    }
+//    public static DbT5107GogitaiWariateIinJohoEntity create合議体割当Entity(int 合議体番号, String 割当委員コード,
+//            String 開始年月日, String 終了年月日) {
+//        DbT5107GogitaiWariateIinJohoEntity entity = new DbT5107GogitaiWariateIinJohoEntity();
+//        entity.setGogitaiNo(合議体番号);
+//        entity.setShinsakaiIinCode(new RString(割当委員コード));
+//        entity.setGogitaiYukoKikanKaishiYMD(new FlexibleDate(開始年月日));
+//        entity.setGogitaiYukoKikanShuryoYMD(new FlexibleDate(終了年月日));
+//        entity.setGogitaichoKubunCode(new Code(new RString("1")));
+//        entity.setShinsainKubunCode(new Code(new RString("1")));
+//        return entity;
+//    }
 
     /**
      * 審査会開催場所Entityを生成して返します。（Spy)

@@ -28,7 +28,7 @@ public class FufukuMoshitateMapperParameterTest extends DbzTestBase {
 
 // TODO 主キー型、主キー名を適切に置換してください。
 // TODO 主キーの数が足りない場合、処理を追加してください。
-    private static ShoKisaiHokenshaNo 主キー1;
+//    private static ShoKisaiHokenshaNo 主キー1;
     private static ShikibetsuCode 主キー2;
     private static HihokenshaNo 主キー3;
     private static FlexibleDate 主キー4;
@@ -36,21 +36,21 @@ public class FufukuMoshitateMapperParameterTest extends DbzTestBase {
 // テストクラス名は適切に変更してください
     public static class createSelectByKeyParamテスト extends DbzTestBase {
 
-        @Test(expected = NullPointerException.class)
-        public void 主キー1にNullを指定すると_NullPointerExceptionが発生する() {
-            FufukuMoshitateMapperParameter sut = FufukuMoshitateMapperParameter.createSelectByKeyParam(null, 主キー2);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 主キー1にNullを指定すると_NullPointerExceptionが発生する() {
+//            FufukuMoshitateMapperParameter sut = FufukuMoshitateMapperParameter.createSelectByKeyParam(主キー2);
+//        }
 
         @Test(expected = NullPointerException.class)
         public void 主キー2にNullを指定すると_NullPointerExceptionが発生する() {
-            FufukuMoshitateMapperParameter sut = FufukuMoshitateMapperParameter.createSelectByKeyParam(主キー1, null);
+            FufukuMoshitateMapperParameter sut = FufukuMoshitateMapperParameter.createSelectByKeyParam(null);
         }
 
         @Test
         public void 引数にNull以外を指定すると_パラメータが生成できる() {
-            FufukuMoshitateMapperParameter sut = FufukuMoshitateMapperParameter.createSelectByKeyParam(主キー1, 主キー2);
+            FufukuMoshitateMapperParameter sut = FufukuMoshitateMapperParameter.createSelectByKeyParam(主キー2);
 
-            assertThat(sut.get主キー1().value(), is(主キー1.value()));
+//            assertThat(sut.get主キー1().value(), is(主キー1.value()));
             assertThat(sut.get主キー2(), is(主キー2));
 //            assertThat(sut.uses主キー1(), is(true));
 //            assertThat(sut.uses主キー2(), is(true));
@@ -68,9 +68,9 @@ public class FufukuMoshitateMapperParameterTest extends DbzTestBase {
 
         @Test
         public void 引数にNull意外を指定すると_パラメータが生成できる() {
-            FufukuMoshitateMapperParameter sut = FufukuMoshitateMapperParameter.createSelectListParam(主キー1);
+            FufukuMoshitateMapperParameter sut = FufukuMoshitateMapperParameter.createSelectListParam(主キー2);
 
-            assertThat(sut.get主キー1().value(), is(主キー1.value()));
+            assertThat(sut.get主キー2().value(), is(主キー2.value()));
 //            assertThat(sut.uses主キー1(), is(true));
 //            assertThat(sut.uses主キー2(), is(false));
         }

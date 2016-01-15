@@ -31,30 +31,32 @@ public class BemmeiNaiyo extends ParentModelBase<BemmeiNaiyoIdentifier, DbT7002B
      * コンストラクタです。<br/>
      * 弁明内容の新規作成時に使用します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+// * @param 証記載保険者番号 証記載保険者番号
+     *
      * @param 識別コード 識別コード
      * @param 原処分被保険者番号 原処分被保険者番号
      * @param 審査請求届出日 審査請求届出日
      * @param 弁明書作成日 弁明書作成日
      */
-    public BemmeiNaiyo(ShoKisaiHokenshaNo 証記載保険者番号,
+    public BemmeiNaiyo(
+            //            ShoKisaiHokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             HihokenshaNo 原処分被保険者番号,
             FlexibleDate 審査請求届出日,
             FlexibleDate 弁明書作成日) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(原処分被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者番号"));
         requireNonNull(審査請求届出日, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求届出日"));
         requireNonNull(弁明書作成日, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明書作成日"));
         this.entity = new DbT7002BemmeiNaiyoEntity();
-        this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
+//        this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
         this.entity.setShikibetsuCode(識別コード);
         this.entity.setGenshobunHihokenshaNo(原処分被保険者番号);
         this.entity.setShinsaseikyuTodokedeYMD(審査請求届出日);
         this.entity.setBemmeishoSakuseiYMD(弁明書作成日);
         this.id = new BemmeiNaiyoIdentifier(
-                証記載保険者番号,
+                //                証記載保険者番号,
                 識別コード,
                 原処分被保険者番号,
                 審査請求届出日,
@@ -71,7 +73,7 @@ public class BemmeiNaiyo extends ParentModelBase<BemmeiNaiyoIdentifier, DbT7002B
     public BemmeiNaiyo(DbT7002BemmeiNaiyoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明内容"));
         this.id = new BemmeiNaiyoIdentifier(
-                entity.getShoKisaiHokenshaNo(),
+                //                entity.getShoKisaiHokenshaNo(),
                 entity.getShikibetsuCode(),
                 entity.getGenshobunHihokenshaNo(),
                 entity.getShinsaseikyuTodokedeYMD(),
@@ -98,9 +100,9 @@ public class BemmeiNaiyo extends ParentModelBase<BemmeiNaiyoIdentifier, DbT7002B
      *
      * @return 証記載保険者番号
      */
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
-    }
+//    public ShoKisaiHokenshaNo get証記載保険者番号() {
+//        return entity.getShoKisaiHokenshaNo();
+//    }
 
     /**
      * 識別コードを返します。
@@ -157,12 +159,12 @@ public class BemmeiNaiyo extends ParentModelBase<BemmeiNaiyoIdentifier, DbT7002B
     }
 
     /**
-     * 弁明書作成日提出日を返します。
+     * 弁明書提出日を返します。
      *
-     * @return 弁明書作成日提出日
+     * @return 弁明書提出日
      */
-    public FlexibleDate get弁明書作成日提出日() {
-        return entity.getBemmeishoSakuseiTeishutsuYMD();
+    public FlexibleDate get弁明書提出日() {
+        return entity.getBemmeishoTeishutsuYMD();
     }
 
     /**
@@ -234,10 +236,20 @@ public class BemmeiNaiyo extends ParentModelBase<BemmeiNaiyoIdentifier, DbT7002B
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * getBemmeishaJohoList
+     *
+     * @return BemmeishaJohoリスト
+     */
     public List<BemmeishaJoho> getBemmeishaJohoList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * modified
+     *
+     * @return BemmeiNaiyo
+     */
     public BemmeiNaiyo modified() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

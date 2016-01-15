@@ -7,11 +7,16 @@ package jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteishins
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -529,7 +534,7 @@ public class NinteiShinseiJohoBuilder {
      * @param 認定調査委託先コード 認定調査委託先コード
      * @return {@link NinteiShinseiJohoBuilder}
      */
-    public NinteiShinseiJohoBuilder set認定調査委託先コード(RString 認定調査委託先コード) {
+    public NinteiShinseiJohoBuilder set認定調査委託先コード(ChosaItakusakiCode 認定調査委託先コード) {
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
         entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
         return this;
@@ -541,7 +546,7 @@ public class NinteiShinseiJohoBuilder {
      * @param 認定調査員コード 認定調査員コード
      * @return {@link NinteiShinseiJohoBuilder}
      */
-    public NinteiShinseiJohoBuilder set認定調査員コード(RString 認定調査員コード) {
+    public NinteiShinseiJohoBuilder set認定調査員コード(ChosainCode 認定調査員コード) {
         requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
         entity.setNinteiChosainCode(認定調査員コード);
         return this;
@@ -565,7 +570,7 @@ public class NinteiShinseiJohoBuilder {
      * @param 主治医医療機関コード 主治医医療機関コード
      * @return {@link NinteiShinseiJohoBuilder}
      */
-    public NinteiShinseiJohoBuilder set主治医医療機関コード(RString 主治医医療機関コード) {
+    public NinteiShinseiJohoBuilder set主治医医療機関コード(ShujiiIryokikanCode 主治医医療機関コード) {
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
         entity.setShujiiIryokikanCode(主治医医療機関コード);
         return this;
@@ -577,7 +582,7 @@ public class NinteiShinseiJohoBuilder {
      * @param 主治医コード 主治医コード
      * @return {@link NinteiShinseiJohoBuilder}
      */
-    public NinteiShinseiJohoBuilder set主治医コード(RString 主治医コード) {
+    public NinteiShinseiJohoBuilder set主治医コード(ShujiiCode 主治医コード) {
         requireNonNull(主治医コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医コード"));
         entity.setShujiiCode(主治医コード);
         return this;

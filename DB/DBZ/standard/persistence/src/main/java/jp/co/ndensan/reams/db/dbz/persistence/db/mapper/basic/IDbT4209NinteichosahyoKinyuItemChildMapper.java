@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4209NinteichosahyoKinyuItem
  */
 public interface IDbT4209NinteichosahyoKinyuItemChildMapper {
 
-    /* * {@linkDbT4209NinteichosahyoKinyuItemChildEntity}を取得します。
+    /** {@link DbT4209NinteichosahyoKinyuItemChildEntity}を取得します。
      *
-     * @return {@linkDbT4209NinteichosahyoKinyuItemChildEntity}
+     * @return {@link DbT4209NinteichosahyoKinyuItemChildEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT4209NinteichosahyoKinyuItemChildEntity getEntity();

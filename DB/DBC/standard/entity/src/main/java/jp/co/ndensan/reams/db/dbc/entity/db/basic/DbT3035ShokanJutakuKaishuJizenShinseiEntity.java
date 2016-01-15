@@ -1,28 +1,30 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import java.util.Objects;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払支給住宅改修事前申請テーブルのエンティティクラスです。
  */
 public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBase<DbT3035ShokanJutakuKaishuJizenShinseiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3035ShokanJutakuKaishuJizenShinsei");
 
@@ -40,35 +42,51 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
     private RString seiriNo;
-    @PrimaryKey
-    private Decimal rirekiNo;
-    private HokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private FlexibleDate uketsukeYMD;
     private FlexibleDate shinseiYMD;
-    private JigyoshaNo jigyoshaNo;
-    private RString jigyoshaNameKanji;
-    private RString jigyoshaNameKana;
-    private YubinNo jigyoshaYubunNo;
-    private RString jigyoshaAddress;
-    private RString jigyoshaTelNo;
-    private RString jigyoshaFaxNo;
-    private RString riyushoSakuseishaKanji;
-    private RString riyushoSakuseishaKana;
+    private RString shinseiRiyu;
+    private RString shinseishaKubun;
+    private RString shinseishaNameKanji;
+    private RString shinseishaNameKana;
+    private YubinNo shinseishaYubinNo;
+    private RString shinseishaJusho;
+    private TelNo shinseishaTelNo;
+    private JigyoshaNo shinseiJigyoshaNo;
+    private FlexibleDate riyushoSakuseiYMD;
+    private RString riyushoSakuseishaName;
+    private RString riyushoSakuseishaKanaName;
+    private JigyoshaNo riyushoSakuseiJigyoshaNo;
+    private RString shiharaiHohoKubunCode;
+    private RString shiharaiBasho;
+    private FlexibleDate shiharaiKaishiYMD;
+    private FlexibleDate shiharaiShuryoYMD;
+    private RString shiharaiKaishiTime;
+    private RString shiharaiShuryoTime;
+    private long kozaID;
+    private RString juryoininKeiyakuNo;
     private ServiceShuruiCode serviceShuruiCode;
-    private FlexibleDate keiyakuKetteiYMD;
-    private RString shoninKubun;
+    private RString jutakuShoyusha;
+    private RString hihokenshaKankei;
+    private boolean yokaigo3DankaiHenko;
+    private boolean jutakuJushoHenko;
+    private FlexibleDate hanteiKetteiYMD;
+    private RString hanteiKubun;
+    private RString shoninJoken;
     private RString fushoninRiyu;
     private int kyufugakuHiyogakuTotal;
     private int kyufugakuHokenTaishoHiyogaku;
     private int kyufugakuRiyoshaJikofutangaku;
     private int kyufugakuHokenkyufuhigaku;
+    private FlexibleDate ketteitsuchishoHakkoYMD;
+    private RString kaishushinseiKubun;
+    private RString kaishuShinseiTorikeshijiyuCode;
+    private HokenKyufuRitsu hokenKyufuritsu;
     private FlexibleDate sekoKanryoYoteiYMD;
-    private RString shinseiTorikeshiJiyuCode;
-    private RString biko;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -77,7 +95,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -86,7 +104,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -95,16 +113,17 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -113,7 +132,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 被保険者番号
      */
     public HihokenshaNo getHiHokenshaNo() {
@@ -122,16 +141,16 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 被保険者番号のsetメソッドです。
-     *
+     * 
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
     /**
      * サービス提供年月のgetメソッドです。
-     *
+     * 
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -140,16 +159,16 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * サービス提供年月のsetメソッドです。
-     *
+     * 
      * @param serviceTeikyoYM サービス提供年月
      */
-    public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
+    public void setServiceTeikyoYM(@Nonnull FlexibleYearMonth serviceTeikyoYM) {
         this.serviceTeikyoYM = serviceTeikyoYM;
     }
 
     /**
      * 整理番号のgetメソッドです。
-     *
+     * 
      * @return 整理番号
      */
     public RString getSeiriNo() {
@@ -158,61 +177,44 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 整理番号のsetメソッドです。
-     *
+     * 
      * @param seiriNo 整理番号
      */
-    public void setSeiriNo(RString seiriNo) {
+    public void setSeiriNo(@Nonnull RString seiriNo) {
         this.seiriNo = seiriNo;
     }
 
     /**
-     * 履歴番号のgetメソッドです。
-     *
-     * @return 履歴番号
-     */
-    public Decimal getRirekiNo() {
-        return rirekiNo;
-    }
-
-    /**
-     * 履歴番号のsetメソッドです。
-     *
-     * @param rirekiNo 履歴番号
-     */
-    public void setRirekiNo(Decimal rirekiNo) {
-        this.rirekiNo = rirekiNo;
-    }
-
-    /**
      * 証記載保険者番号のgetメソッドです。
-     *
+     * 
      * @return 証記載保険者番号
      */
-    public HokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     *
+     * 
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(HokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(@Nonnull ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * 受付年月日のgetメソッドです。
-     *
+     * 
      * @return 受付年月日
      */
+    @CheckForNull
     public FlexibleDate getUketsukeYMD() {
         return uketsukeYMD;
     }
 
     /**
      * 受付年月日のsetメソッドです。
-     *
+     * 
      * @param uketsukeYMD 受付年月日
      */
     public void setUketsukeYMD(FlexibleDate uketsukeYMD) {
@@ -223,9 +225,10 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
      * 申請年月日のgetメソッドです。
      * <br/>
      * <br/>1:本人,2:代理人,3:受領委任事業者
-     *
+     * 
      * @return 申請年月日
      */
+    @CheckForNull
     public FlexibleDate getShinseiYMD() {
         return shinseiYMD;
     }
@@ -234,7 +237,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
      * 申請年月日のsetメソッドです。
      * <br/>
      * <br/>1:本人,2:代理人,3:受領委任事業者
-     *
+     * 
      * @param shinseiYMD 申請年月日
      */
     public void setShinseiYMD(FlexibleDate shinseiYMD) {
@@ -242,179 +245,398 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
     }
 
     /**
-     * 事業者番号のgetメソッドです。
-     *
-     * @return 事業者番号
+     * 申請理由のgetメソッドです。
+     * 
+     * @return 申請理由
      */
-    public JigyoshaNo getJigyoshaNo() {
-        return jigyoshaNo;
+    @CheckForNull
+    public RString getShinseiRiyu() {
+        return shinseiRiyu;
     }
 
     /**
-     * 事業者番号のsetメソッドです。
-     *
-     * @param jigyoshaNo 事業者番号
+     * 申請理由のsetメソッドです。
+     * 
+     * @param shinseiRiyu 申請理由
      */
-    public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
-        this.jigyoshaNo = jigyoshaNo;
+    public void setShinseiRiyu(RString shinseiRiyu) {
+        this.shinseiRiyu = shinseiRiyu;
     }
 
     /**
-     * 事業者名称のgetメソッドです。
-     *
-     * @return 事業者名称
+     * 申請者区分のgetメソッドです。
+     * 
+     * @return 申請者区分
      */
-    public RString getJigyoshaNameKanji() {
-        return jigyoshaNameKanji;
+    @CheckForNull
+    public RString getShinseishaKubun() {
+        return shinseishaKubun;
     }
 
     /**
-     * 事業者名称のsetメソッドです。
-     *
-     * @param jigyoshaNameKanji 事業者名称
+     * 申請者区分のsetメソッドです。
+     * 
+     * @param shinseishaKubun 申請者区分
      */
-    public void setJigyoshaNameKanji(RString jigyoshaNameKanji) {
-        this.jigyoshaNameKanji = jigyoshaNameKanji;
+    public void setShinseishaKubun(RString shinseishaKubun) {
+        this.shinseishaKubun = shinseishaKubun;
     }
 
     /**
-     * 事業者名称カナのgetメソッドです。
-     *
-     * @return 事業者名称カナ
+     * 申請者氏名のgetメソッドです。
+     * 
+     * @return 申請者氏名
      */
-    public RString getJigyoshaNameKana() {
-        return jigyoshaNameKana;
+    @CheckForNull
+    public RString getShinseishaNameKanji() {
+        return shinseishaNameKanji;
     }
 
     /**
-     * 事業者名称カナのsetメソッドです。
-     *
-     * @param jigyoshaNameKana 事業者名称カナ
+     * 申請者氏名のsetメソッドです。
+     * 
+     * @param shinseishaNameKanji 申請者氏名
      */
-    public void setJigyoshaNameKana(RString jigyoshaNameKana) {
-        this.jigyoshaNameKana = jigyoshaNameKana;
+    public void setShinseishaNameKanji(RString shinseishaNameKanji) {
+        this.shinseishaNameKanji = shinseishaNameKanji;
     }
 
     /**
-     * 事業者郵便番号のgetメソッドです。
-     *
-     * @return 事業者郵便番号
+     * 申請者氏名カナのgetメソッドです。
+     * 
+     * @return 申請者氏名カナ
      */
-    public YubinNo getJigyoshaYubunNo() {
-        return jigyoshaYubunNo;
+    @CheckForNull
+    public RString getShinseishaNameKana() {
+        return shinseishaNameKana;
     }
 
     /**
-     * 事業者郵便番号のsetメソッドです。
-     *
-     * @param jigyoshaYubunNo 事業者郵便番号
+     * 申請者氏名カナのsetメソッドです。
+     * 
+     * @param shinseishaNameKana 申請者氏名カナ
      */
-    public void setJigyoshaYubunNo(YubinNo jigyoshaYubunNo) {
-        this.jigyoshaYubunNo = jigyoshaYubunNo;
+    public void setShinseishaNameKana(RString shinseishaNameKana) {
+        this.shinseishaNameKana = shinseishaNameKana;
     }
 
     /**
-     * 事業者住所のgetメソッドです。
-     *
-     * @return 事業者住所
+     * 申請者郵便番号のgetメソッドです。
+     * 
+     * @return 申請者郵便番号
      */
-    public RString getJigyoshaAddress() {
-        return jigyoshaAddress;
+    @CheckForNull
+    public YubinNo getShinseishaYubinNo() {
+        return shinseishaYubinNo;
     }
 
     /**
-     * 事業者住所のsetメソッドです。
-     *
-     * @param jigyoshaAddress 事業者住所
+     * 申請者郵便番号のsetメソッドです。
+     * 
+     * @param shinseishaYubinNo 申請者郵便番号
      */
-    public void setJigyoshaAddress(RString jigyoshaAddress) {
-        this.jigyoshaAddress = jigyoshaAddress;
+    public void setShinseishaYubinNo(YubinNo shinseishaYubinNo) {
+        this.shinseishaYubinNo = shinseishaYubinNo;
     }
 
     /**
-     * 事業者電話番号のgetメソッドです。
-     *
-     * @return 事業者電話番号
+     * 申請者住所のgetメソッドです。
+     * 
+     * @return 申請者住所
      */
-    public RString getJigyoshaTelNo() {
-        return jigyoshaTelNo;
+    @CheckForNull
+    public RString getShinseishaJusho() {
+        return shinseishaJusho;
     }
 
     /**
-     * 事業者電話番号のsetメソッドです。
-     *
-     * @param jigyoshaTelNo 事業者電話番号
+     * 申請者住所のsetメソッドです。
+     * 
+     * @param shinseishaJusho 申請者住所
      */
-    public void setJigyoshaTelNo(RString jigyoshaTelNo) {
-        this.jigyoshaTelNo = jigyoshaTelNo;
+    public void setShinseishaJusho(RString shinseishaJusho) {
+        this.shinseishaJusho = shinseishaJusho;
     }
 
     /**
-     * 事業者ＦＡＸ番号のgetメソッドです。
-     *
-     * @return 事業者ＦＡＸ番号
+     * 申請者電話番号のgetメソッドです。
+     * 
+     * @return 申請者電話番号
      */
-    public RString getJigyoshaFaxNo() {
-        return jigyoshaFaxNo;
+    @CheckForNull
+    public TelNo getShinseishaTelNo() {
+        return shinseishaTelNo;
     }
 
     /**
-     * 事業者ＦＡＸ番号のsetメソッドです。
-     *
-     * @param jigyoshaFaxNo 事業者ＦＡＸ番号
+     * 申請者電話番号のsetメソッドです。
+     * 
+     * @param shinseishaTelNo 申請者電話番号
      */
-    public void setJigyoshaFaxNo(RString jigyoshaFaxNo) {
-        this.jigyoshaFaxNo = jigyoshaFaxNo;
+    public void setShinseishaTelNo(TelNo shinseishaTelNo) {
+        this.shinseishaTelNo = shinseishaTelNo;
+    }
+
+    /**
+     * 申請事業者番号のgetメソッドです。
+     * 
+     * @return 申請事業者番号
+     */
+    @CheckForNull
+    public JigyoshaNo getShinseiJigyoshaNo() {
+        return shinseiJigyoshaNo;
+    }
+
+    /**
+     * 申請事業者番号のsetメソッドです。
+     * 
+     * @param shinseiJigyoshaNo 申請事業者番号
+     */
+    public void setShinseiJigyoshaNo(JigyoshaNo shinseiJigyoshaNo) {
+        this.shinseiJigyoshaNo = shinseiJigyoshaNo;
+    }
+
+    /**
+     * 理由書作成日のgetメソッドです。
+     * 
+     * @return 理由書作成日
+     */
+    @CheckForNull
+    public FlexibleDate getRiyushoSakuseiYMD() {
+        return riyushoSakuseiYMD;
+    }
+
+    /**
+     * 理由書作成日のsetメソッドです。
+     * 
+     * @param riyushoSakuseiYMD 理由書作成日
+     */
+    public void setRiyushoSakuseiYMD(FlexibleDate riyushoSakuseiYMD) {
+        this.riyushoSakuseiYMD = riyushoSakuseiYMD;
     }
 
     /**
      * 理由書作成者のgetメソッドです。
-     *
+     * 
      * @return 理由書作成者
      */
-    public RString getRiyushoSakuseishaKanji() {
-        return riyushoSakuseishaKanji;
+    @CheckForNull
+    public RString getRiyushoSakuseishaName() {
+        return riyushoSakuseishaName;
     }
 
     /**
      * 理由書作成者のsetメソッドです。
-     *
-     * @param riyushoSakuseishaKanji 理由書作成者
+     * 
+     * @param riyushoSakuseishaName 理由書作成者
      */
-    public void setRiyushoSakuseishaKanji(RString riyushoSakuseishaKanji) {
-        this.riyushoSakuseishaKanji = riyushoSakuseishaKanji;
+    public void setRiyushoSakuseishaName(RString riyushoSakuseishaName) {
+        this.riyushoSakuseishaName = riyushoSakuseishaName;
     }
 
     /**
      * 理由書作成者カナのgetメソッドです。
-     *
+     * 
      * @return 理由書作成者カナ
      */
-    public RString getRiyushoSakuseishaKana() {
-        return riyushoSakuseishaKana;
+    @CheckForNull
+    public RString getRiyushoSakuseishaKanaName() {
+        return riyushoSakuseishaKanaName;
     }
 
     /**
      * 理由書作成者カナのsetメソッドです。
-     *
-     * @param riyushoSakuseishaKana 理由書作成者カナ
+     * 
+     * @param riyushoSakuseishaKanaName 理由書作成者カナ
      */
-    public void setRiyushoSakuseishaKana(RString riyushoSakuseishaKana) {
-        this.riyushoSakuseishaKana = riyushoSakuseishaKana;
+    public void setRiyushoSakuseishaKanaName(RString riyushoSakuseishaKanaName) {
+        this.riyushoSakuseishaKanaName = riyushoSakuseishaKanaName;
+    }
+
+    /**
+     * 理由書作成事業者番号のgetメソッドです。
+     * 
+     * @return 理由書作成事業者番号
+     */
+    @CheckForNull
+    public JigyoshaNo getRiyushoSakuseiJigyoshaNo() {
+        return riyushoSakuseiJigyoshaNo;
+    }
+
+    /**
+     * 理由書作成事業者番号のsetメソッドです。
+     * 
+     * @param riyushoSakuseiJigyoshaNo 理由書作成事業者番号
+     */
+    public void setRiyushoSakuseiJigyoshaNo(JigyoshaNo riyushoSakuseiJigyoshaNo) {
+        this.riyushoSakuseiJigyoshaNo = riyushoSakuseiJigyoshaNo;
+    }
+
+    /**
+     * 支払方法区分コードのgetメソッドです。
+     * 
+     * @return 支払方法区分コード
+     */
+    @CheckForNull
+    public RString getShiharaiHohoKubunCode() {
+        return shiharaiHohoKubunCode;
+    }
+
+    /**
+     * 支払方法区分コードのsetメソッドです。
+     * 
+     * @param shiharaiHohoKubunCode 支払方法区分コード
+     */
+    public void setShiharaiHohoKubunCode(RString shiharaiHohoKubunCode) {
+        this.shiharaiHohoKubunCode = shiharaiHohoKubunCode;
+    }
+
+    /**
+     * 支払場所のgetメソッドです。
+     * 
+     * @return 支払場所
+     */
+    @CheckForNull
+    public RString getShiharaiBasho() {
+        return shiharaiBasho;
+    }
+
+    /**
+     * 支払場所のsetメソッドです。
+     * 
+     * @param shiharaiBasho 支払場所
+     */
+    public void setShiharaiBasho(RString shiharaiBasho) {
+        this.shiharaiBasho = shiharaiBasho;
+    }
+
+    /**
+     * 支払期間開始年月日のgetメソッドです。
+     * 
+     * @return 支払期間開始年月日
+     */
+    @CheckForNull
+    public FlexibleDate getShiharaiKaishiYMD() {
+        return shiharaiKaishiYMD;
+    }
+
+    /**
+     * 支払期間開始年月日のsetメソッドです。
+     * 
+     * @param shiharaiKaishiYMD 支払期間開始年月日
+     */
+    public void setShiharaiKaishiYMD(FlexibleDate shiharaiKaishiYMD) {
+        this.shiharaiKaishiYMD = shiharaiKaishiYMD;
+    }
+
+    /**
+     * 支払期間終了年月日のgetメソッドです。
+     * 
+     * @return 支払期間終了年月日
+     */
+    @CheckForNull
+    public FlexibleDate getShiharaiShuryoYMD() {
+        return shiharaiShuryoYMD;
+    }
+
+    /**
+     * 支払期間終了年月日のsetメソッドです。
+     * 
+     * @param shiharaiShuryoYMD 支払期間終了年月日
+     */
+    public void setShiharaiShuryoYMD(FlexibleDate shiharaiShuryoYMD) {
+        this.shiharaiShuryoYMD = shiharaiShuryoYMD;
+    }
+
+    /**
+     * 支払窓口開始時間のgetメソッドです。
+     * 
+     * @return 支払窓口開始時間
+     */
+    @CheckForNull
+    public RString getShiharaiKaishiTime() {
+        return shiharaiKaishiTime;
+    }
+
+    /**
+     * 支払窓口開始時間のsetメソッドです。
+     * 
+     * @param shiharaiKaishiTime 支払窓口開始時間
+     */
+    public void setShiharaiKaishiTime(RString shiharaiKaishiTime) {
+        this.shiharaiKaishiTime = shiharaiKaishiTime;
+    }
+
+    /**
+     * 支払窓口終了時間のgetメソッドです。
+     * 
+     * @return 支払窓口終了時間
+     */
+    @CheckForNull
+    public RString getShiharaiShuryoTime() {
+        return shiharaiShuryoTime;
+    }
+
+    /**
+     * 支払窓口終了時間のsetメソッドです。
+     * 
+     * @param shiharaiShuryoTime 支払窓口終了時間
+     */
+    public void setShiharaiShuryoTime(RString shiharaiShuryoTime) {
+        this.shiharaiShuryoTime = shiharaiShuryoTime;
+    }
+
+    /**
+     * 口座IDのgetメソッドです。
+     * 
+     * @return 口座ID
+     */
+    @CheckForNull
+    public long getKozaID() {
+        return kozaID;
+    }
+
+    /**
+     * 口座IDのsetメソッドです。
+     * 
+     * @param kozaID 口座ID
+     */
+    public void setKozaID(long kozaID) {
+        this.kozaID = kozaID;
+    }
+
+    /**
+     * 受領委任契約番号のgetメソッドです。
+     * 
+     * @return 受領委任契約番号
+     */
+    @CheckForNull
+    public RString getJuryoininKeiyakuNo() {
+        return juryoininKeiyakuNo;
+    }
+
+    /**
+     * 受領委任契約番号のsetメソッドです。
+     * 
+     * @param juryoininKeiyakuNo 受領委任契約番号
+     */
+    public void setJuryoininKeiyakuNo(RString juryoininKeiyakuNo) {
+        this.juryoininKeiyakuNo = juryoininKeiyakuNo;
     }
 
     /**
      * サービス種類コードのgetメソッドです。
-     *
+     * 
      * @return サービス種類コード
      */
+    @CheckForNull
     public ServiceShuruiCode getServiceShuruiCode() {
         return serviceShuruiCode;
     }
 
     /**
      * サービス種類コードのsetメソッドです。
-     *
+     * 
      * @param serviceShuruiCode サービス種類コード
      */
     public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
@@ -422,54 +644,160 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
     }
 
     /**
-     * 契約決定年月日のgetメソッドです。
-     *
-     * @return 契約決定年月日
+     * 住宅所有者のgetメソッドです。
+     * 
+     * @return 住宅所有者
      */
-    public FlexibleDate getKeiyakuKetteiYMD() {
-        return keiyakuKetteiYMD;
+    @CheckForNull
+    public RString getJutakuShoyusha() {
+        return jutakuShoyusha;
     }
 
     /**
-     * 契約決定年月日のsetメソッドです。
-     *
-     * @param keiyakuKetteiYMD 契約決定年月日
+     * 住宅所有者のsetメソッドです。
+     * 
+     * @param jutakuShoyusha 住宅所有者
      */
-    public void setKeiyakuKetteiYMD(FlexibleDate keiyakuKetteiYMD) {
-        this.keiyakuKetteiYMD = keiyakuKetteiYMD;
+    public void setJutakuShoyusha(RString jutakuShoyusha) {
+        this.jutakuShoyusha = jutakuShoyusha;
     }
 
     /**
-     * 承認区分のgetメソッドです。
-     *
-     * @return 承認区分
+     * 被保険者との関係のgetメソッドです。
+     * 
+     * @return 被保険者との関係
      */
-    public RString getShoninKubun() {
-        return shoninKubun;
+    @CheckForNull
+    public RString getHihokenshaKankei() {
+        return hihokenshaKankei;
     }
 
     /**
-     * 承認区分のsetメソッドです。
-     *
-     * @param shoninKubun 承認区分
+     * 被保険者との関係のsetメソッドです。
+     * 
+     * @param hihokenshaKankei 被保険者との関係
      */
-    public void setShoninKubun(RString shoninKubun) {
-        this.shoninKubun = shoninKubun;
+    public void setHihokenshaKankei(RString hihokenshaKankei) {
+        this.hihokenshaKankei = hihokenshaKankei;
     }
 
     /**
-     * 不承認の理由のgetメソッドです。
-     *
-     * @return 不承認の理由
+     * 要介護状態３段階変更のgetメソッドです。
+     * <br/>
+     * <br/>True：変更する、False：変更無し
+     * 
+     * @return 要介護状態３段階変更
      */
+    @CheckForNull
+    public boolean getYokaigo3DankaiHenko() {
+        return yokaigo3DankaiHenko;
+    }
+
+    /**
+     * 要介護状態３段階変更のsetメソッドです。
+     * <br/>
+     * <br/>True：変更する、False：変更無し
+     * 
+     * @param yokaigo3DankaiHenko 要介護状態３段階変更
+     */
+    public void setYokaigo3DankaiHenko(boolean yokaigo3DankaiHenko) {
+        this.yokaigo3DankaiHenko = yokaigo3DankaiHenko;
+    }
+
+    /**
+     * 住宅住所変更のgetメソッドです。
+     * <br/>
+     * <br/>True：変更する、False：変更無し
+     * 
+     * @return 住宅住所変更
+     */
+    @CheckForNull
+    public boolean getJutakuJushoHenko() {
+        return jutakuJushoHenko;
+    }
+
+    /**
+     * 住宅住所変更のsetメソッドです。
+     * <br/>
+     * <br/>True：変更する、False：変更無し
+     * 
+     * @param jutakuJushoHenko 住宅住所変更
+     */
+    public void setJutakuJushoHenko(boolean jutakuJushoHenko) {
+        this.jutakuJushoHenko = jutakuJushoHenko;
+    }
+
+    /**
+     * 判定決定年月日のgetメソッドです。
+     * 
+     * @return 判定決定年月日
+     */
+    @CheckForNull
+    public FlexibleDate getHanteiKetteiYMD() {
+        return hanteiKetteiYMD;
+    }
+
+    /**
+     * 判定決定年月日のsetメソッドです。
+     * 
+     * @param hanteiKetteiYMD 判定決定年月日
+     */
+    public void setHanteiKetteiYMD(FlexibleDate hanteiKetteiYMD) {
+        this.hanteiKetteiYMD = hanteiKetteiYMD;
+    }
+
+    /**
+     * 判定区分のgetメソッドです。
+     * 
+     * @return 判定区分
+     */
+    @CheckForNull
+    public RString getHanteiKubun() {
+        return hanteiKubun;
+    }
+
+    /**
+     * 判定区分のsetメソッドです。
+     * 
+     * @param hanteiKubun 判定区分
+     */
+    public void setHanteiKubun(RString hanteiKubun) {
+        this.hanteiKubun = hanteiKubun;
+    }
+
+    /**
+     * 承認条件のgetメソッドです。
+     * 
+     * @return 承認条件
+     */
+    @CheckForNull
+    public RString getShoninJoken() {
+        return shoninJoken;
+    }
+
+    /**
+     * 承認条件のsetメソッドです。
+     * 
+     * @param shoninJoken 承認条件
+     */
+    public void setShoninJoken(RString shoninJoken) {
+        this.shoninJoken = shoninJoken;
+    }
+
+    /**
+     * 不承認理由のgetメソッドです。
+     * 
+     * @return 不承認理由
+     */
+    @CheckForNull
     public RString getFushoninRiyu() {
         return fushoninRiyu;
     }
 
     /**
-     * 不承認の理由のsetメソッドです。
-     *
-     * @param fushoninRiyu 不承認の理由
+     * 不承認理由のsetメソッドです。
+     * 
+     * @param fushoninRiyu 不承認理由
      */
     public void setFushoninRiyu(RString fushoninRiyu) {
         this.fushoninRiyu = fushoninRiyu;
@@ -477,16 +805,17 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 給付額等・費用額合計のgetメソッドです。
-     *
+     * 
      * @return 給付額等・費用額合計
      */
+    @CheckForNull
     public int getKyufugakuHiyogakuTotal() {
         return kyufugakuHiyogakuTotal;
     }
 
     /**
      * 給付額等・費用額合計のsetメソッドです。
-     *
+     * 
      * @param kyufugakuHiyogakuTotal 給付額等・費用額合計
      */
     public void setKyufugakuHiyogakuTotal(int kyufugakuHiyogakuTotal) {
@@ -495,16 +824,17 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 給付額等・保険対象費用額のgetメソッドです。
-     *
+     * 
      * @return 給付額等・保険対象費用額
      */
+    @CheckForNull
     public int getKyufugakuHokenTaishoHiyogaku() {
         return kyufugakuHokenTaishoHiyogaku;
     }
 
     /**
      * 給付額等・保険対象費用額のsetメソッドです。
-     *
+     * 
      * @param kyufugakuHokenTaishoHiyogaku 給付額等・保険対象費用額
      */
     public void setKyufugakuHokenTaishoHiyogaku(int kyufugakuHokenTaishoHiyogaku) {
@@ -513,16 +843,17 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 給付額等・利用者自己負担額のgetメソッドです。
-     *
+     * 
      * @return 給付額等・利用者自己負担額
      */
+    @CheckForNull
     public int getKyufugakuRiyoshaJikofutangaku() {
         return kyufugakuRiyoshaJikofutangaku;
     }
 
     /**
      * 給付額等・利用者自己負担額のsetメソッドです。
-     *
+     * 
      * @param kyufugakuRiyoshaJikofutangaku 給付額等・利用者自己負担額
      */
     public void setKyufugakuRiyoshaJikofutangaku(int kyufugakuRiyoshaJikofutangaku) {
@@ -531,16 +862,17 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 給付額等・保険給付費額のgetメソッドです。
-     *
+     * 
      * @return 給付額等・保険給付費額
      */
+    @CheckForNull
     public int getKyufugakuHokenkyufuhigaku() {
         return kyufugakuHokenkyufuhigaku;
     }
 
     /**
      * 給付額等・保険給付費額のsetメソッドです。
-     *
+     * 
      * @param kyufugakuHokenkyufuhigaku 給付額等・保険給付費額
      */
     public void setKyufugakuHokenkyufuhigaku(int kyufugakuHokenkyufuhigaku) {
@@ -548,17 +880,102 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
     }
 
     /**
+     * 事前申請決定通知発行日のgetメソッドです。
+     * 
+     * @return 事前申請決定通知発行日
+     */
+    @CheckForNull
+    public FlexibleDate getKetteitsuchishoHakkoYMD() {
+        return ketteitsuchishoHakkoYMD;
+    }
+
+    /**
+     * 事前申請決定通知発行日のsetメソッドです。
+     * 
+     * @param ketteitsuchishoHakkoYMD 事前申請決定通知発行日
+     */
+    public void setKetteitsuchishoHakkoYMD(FlexibleDate ketteitsuchishoHakkoYMD) {
+        this.ketteitsuchishoHakkoYMD = ketteitsuchishoHakkoYMD;
+    }
+
+    /**
+     * 住宅改修申請区分のgetメソッドです。
+     * <br/>
+     * <br/>(DBC)Enum住宅改修申請区分
+     * 
+     * @return 住宅改修申請区分
+     */
+    @CheckForNull
+    public RString getKaishushinseiKubun() {
+        return kaishushinseiKubun;
+    }
+
+    /**
+     * 住宅改修申請区分のsetメソッドです。
+     * <br/>
+     * <br/>(DBC)Enum住宅改修申請区分
+     * 
+     * @param kaishushinseiKubun 住宅改修申請区分
+     */
+    public void setKaishushinseiKubun(RString kaishushinseiKubun) {
+        this.kaishushinseiKubun = kaishushinseiKubun;
+    }
+
+    /**
+     * 住宅改修申請取消事由コードのgetメソッドです。
+     * <br/>
+     * <br/>(DBC)コードマスタ：0028
+     * 
+     * @return 住宅改修申請取消事由コード
+     */
+    @CheckForNull
+    public RString getKaishuShinseiTorikeshijiyuCode() {
+        return kaishuShinseiTorikeshijiyuCode;
+    }
+
+    /**
+     * 住宅改修申請取消事由コードのsetメソッドです。
+     * <br/>
+     * <br/>(DBC)コードマスタ：0028
+     * 
+     * @param kaishuShinseiTorikeshijiyuCode 住宅改修申請取消事由コード
+     */
+    public void setKaishuShinseiTorikeshijiyuCode(RString kaishuShinseiTorikeshijiyuCode) {
+        this.kaishuShinseiTorikeshijiyuCode = kaishuShinseiTorikeshijiyuCode;
+    }
+
+    /**
+     * 保険給付率のgetメソッドです。
+     * 
+     * @return 保険給付率
+     */
+    @CheckForNull
+    public HokenKyufuRitsu getHokenKyufuritsu() {
+        return hokenKyufuritsu;
+    }
+
+    /**
+     * 保険給付率のsetメソッドです。
+     * 
+     * @param hokenKyufuritsu 保険給付率
+     */
+    public void setHokenKyufuritsu(HokenKyufuRitsu hokenKyufuritsu) {
+        this.hokenKyufuritsu = hokenKyufuritsu;
+    }
+
+    /**
      * 施工完了予定年月日のgetメソッドです。
-     *
+     * 
      * @return 施工完了予定年月日
      */
+    @CheckForNull
     public FlexibleDate getSekoKanryoYoteiYMD() {
         return sekoKanryoYoteiYMD;
     }
 
     /**
      * 施工完了予定年月日のsetメソッドです。
-     *
+     * 
      * @param sekoKanryoYoteiYMD 施工完了予定年月日
      */
     public void setSekoKanryoYoteiYMD(FlexibleDate sekoKanryoYoteiYMD) {
@@ -566,46 +983,10 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
     }
 
     /**
-     * 申請取消事由コードのgetメソッドです。
-     *
-     * @return 申請取消事由コード
-     */
-    public RString getShinseiTorikeshiJiyuCode() {
-        return shinseiTorikeshiJiyuCode;
-    }
-
-    /**
-     * 申請取消事由コードのsetメソッドです。
-     *
-     * @param shinseiTorikeshiJiyuCode 申請取消事由コード
-     */
-    public void setShinseiTorikeshiJiyuCode(RString shinseiTorikeshiJiyuCode) {
-        this.shinseiTorikeshiJiyuCode = shinseiTorikeshiJiyuCode;
-    }
-
-    /**
-     * 備考のgetメソッドです。
-     *
-     * @return 備考
-     */
-    public RString getBiko() {
-        return biko;
-    }
-
-    /**
-     * 備考のsetメソッドです。
-     *
-     * @param biko 備考
-     */
-    public void setBiko(RString biko) {
-        this.biko = biko;
-    }
-
-    /**
      * このエンティティの主キーが他の{@literal DbT3035ShokanJutakuKaishuJizenShinseiEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3035ShokanJutakuKaishuJizenShinseiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -622,9 +1003,6 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
         if (!Objects.equals(this.seiriNo, other.seiriNo)) {
             return false;
         }
-        if (this.rirekiNo != other.rirekiNo) {
-            return false;
-        }
         return true;
     }
 
@@ -636,41 +1014,58 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
         this.hiHokenshaNo = entity.hiHokenshaNo;
         this.serviceTeikyoYM = entity.serviceTeikyoYM;
         this.seiriNo = entity.seiriNo;
-        this.rirekiNo = entity.rirekiNo;
         this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
         this.uketsukeYMD = entity.uketsukeYMD;
         this.shinseiYMD = entity.shinseiYMD;
-        this.jigyoshaNo = entity.jigyoshaNo;
-        this.jigyoshaNameKanji = entity.jigyoshaNameKanji;
-        this.jigyoshaNameKana = entity.jigyoshaNameKana;
-        this.jigyoshaYubunNo = entity.jigyoshaYubunNo;
-        this.jigyoshaAddress = entity.jigyoshaAddress;
-        this.jigyoshaTelNo = entity.jigyoshaTelNo;
-        this.jigyoshaFaxNo = entity.jigyoshaFaxNo;
-        this.riyushoSakuseishaKanji = entity.riyushoSakuseishaKanji;
-        this.riyushoSakuseishaKana = entity.riyushoSakuseishaKana;
+        this.shinseiRiyu = entity.shinseiRiyu;
+        this.shinseishaKubun = entity.shinseishaKubun;
+        this.shinseishaNameKanji = entity.shinseishaNameKanji;
+        this.shinseishaNameKana = entity.shinseishaNameKana;
+        this.shinseishaYubinNo = entity.shinseishaYubinNo;
+        this.shinseishaJusho = entity.shinseishaJusho;
+        this.shinseishaTelNo = entity.shinseishaTelNo;
+        this.shinseiJigyoshaNo = entity.shinseiJigyoshaNo;
+        this.riyushoSakuseiYMD = entity.riyushoSakuseiYMD;
+        this.riyushoSakuseishaName = entity.riyushoSakuseishaName;
+        this.riyushoSakuseishaKanaName = entity.riyushoSakuseishaKanaName;
+        this.riyushoSakuseiJigyoshaNo = entity.riyushoSakuseiJigyoshaNo;
+        this.shiharaiHohoKubunCode = entity.shiharaiHohoKubunCode;
+        this.shiharaiBasho = entity.shiharaiBasho;
+        this.shiharaiKaishiYMD = entity.shiharaiKaishiYMD;
+        this.shiharaiShuryoYMD = entity.shiharaiShuryoYMD;
+        this.shiharaiKaishiTime = entity.shiharaiKaishiTime;
+        this.shiharaiShuryoTime = entity.shiharaiShuryoTime;
+        this.kozaID = entity.kozaID;
+        this.juryoininKeiyakuNo = entity.juryoininKeiyakuNo;
         this.serviceShuruiCode = entity.serviceShuruiCode;
-        this.keiyakuKetteiYMD = entity.keiyakuKetteiYMD;
-        this.shoninKubun = entity.shoninKubun;
+        this.jutakuShoyusha = entity.jutakuShoyusha;
+        this.hihokenshaKankei = entity.hihokenshaKankei;
+        this.yokaigo3DankaiHenko = entity.yokaigo3DankaiHenko;
+        this.jutakuJushoHenko = entity.jutakuJushoHenko;
+        this.hanteiKetteiYMD = entity.hanteiKetteiYMD;
+        this.hanteiKubun = entity.hanteiKubun;
+        this.shoninJoken = entity.shoninJoken;
         this.fushoninRiyu = entity.fushoninRiyu;
         this.kyufugakuHiyogakuTotal = entity.kyufugakuHiyogakuTotal;
         this.kyufugakuHokenTaishoHiyogaku = entity.kyufugakuHokenTaishoHiyogaku;
         this.kyufugakuRiyoshaJikofutangaku = entity.kyufugakuRiyoshaJikofutangaku;
         this.kyufugakuHokenkyufuhigaku = entity.kyufugakuHokenkyufuhigaku;
+        this.ketteitsuchishoHakkoYMD = entity.ketteitsuchishoHakkoYMD;
+        this.kaishushinseiKubun = entity.kaishushinseiKubun;
+        this.kaishuShinseiTorikeshijiyuCode = entity.kaishuShinseiTorikeshijiyuCode;
+        this.hokenKyufuritsu = entity.hokenKyufuritsu;
         this.sekoKanryoYoteiYMD = entity.sekoKanryoYoteiYMD;
-        this.shinseiTorikeshiJiyuCode = entity.shinseiTorikeshiJiyuCode;
-        this.biko = entity.biko;
     }
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, rirekiNo, shoKisaiHokenshaNo, uketsukeYMD, shinseiYMD, jigyoshaNo, jigyoshaNameKanji, jigyoshaNameKana, jigyoshaYubunNo, jigyoshaAddress, jigyoshaTelNo, jigyoshaFaxNo, riyushoSakuseishaKanji, riyushoSakuseishaKana, serviceShuruiCode, keiyakuKetteiYMD, shoninKubun, fushoninRiyu, kyufugakuHiyogakuTotal, kyufugakuHokenTaishoHiyogaku, kyufugakuRiyoshaJikofutangaku, kyufugakuHokenkyufuhigaku, sekoKanryoYoteiYMD, shinseiTorikeshiJiyuCode, biko);
+        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, shoKisaiHokenshaNo, uketsukeYMD, shinseiYMD, shinseiRiyu, shinseishaKubun, shinseishaNameKanji, shinseishaNameKana, shinseishaYubinNo, shinseishaJusho, shinseishaTelNo, shinseiJigyoshaNo, riyushoSakuseiYMD, riyushoSakuseishaName, riyushoSakuseishaKanaName, riyushoSakuseiJigyoshaNo, shiharaiHohoKubunCode, shiharaiBasho, shiharaiKaishiYMD, shiharaiShuryoYMD, shiharaiKaishiTime, shiharaiShuryoTime, kozaID, juryoininKeiyakuNo, serviceShuruiCode, jutakuShoyusha, hihokenshaKankei, yokaigo3DankaiHenko, jutakuJushoHenko, hanteiKetteiYMD, hanteiKubun, shoninJoken, fushoninRiyu, kyufugakuHiyogakuTotal, kyufugakuHokenTaishoHiyogaku, kyufugakuRiyoshaJikofutangaku, kyufugakuHokenkyufuhigaku, ketteitsuchishoHakkoYMD, kaishushinseiKubun, kaishuShinseiTorikeshijiyuCode, hokenKyufuritsu, sekoKanryoYoteiYMD);
     }
 
 // </editor-fold>
+
 }

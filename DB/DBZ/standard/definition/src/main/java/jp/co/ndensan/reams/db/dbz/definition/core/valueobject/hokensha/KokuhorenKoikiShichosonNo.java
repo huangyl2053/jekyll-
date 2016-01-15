@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class KokuhorenKoikiShichosonNo implements IValueObject<RString>, Comparable<KokuhorenKoikiShichosonNo>, Serializable {
 
-    private static final int three = 3;
+    private static final int THREE = 3;
     /**
      * 空の{@link KokuhorenKoikiShichosonNo}です。
      */
@@ -29,7 +29,7 @@ public final class KokuhorenKoikiShichosonNo implements IValueObject<RString>, C
 
     static {
         EMPTY = new KokuhorenKoikiShichosonNo(RString.EMPTY);
-        MAX_LENGTH = 3;
+        MAX_LENGTH = THREE;
     }
 
     private final RString theValue;

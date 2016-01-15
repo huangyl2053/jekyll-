@@ -53,44 +53,44 @@ public class ShokanJutakuKaishuJizenShinseiManagerTest {
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYearMonth 主キー2 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_整理番号;
-            Decimal 主キー4 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払支給住宅改修事前申請(null, 主キー2, 主キー3, 主キー4);
+//            Decimal 主キー4 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_履歴番号;
+            sut.get償還払支給住宅改修事前申請(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー1 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_被保険者番号;
             RString 主キー3 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_整理番号;
-            Decimal 主キー4 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払支給住宅改修事前申請(主キー1, null, 主キー3, 主キー4);
+//            Decimal 主キー4 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_履歴番号;
+            sut.get償還払支給住宅改修事前申請(主キー1, null, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー1 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_サービス提供年月;
-            Decimal 主キー4 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払支給住宅改修事前申請(主キー1, 主キー2, null, 主キー4);
+//            Decimal 主キー4 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_履歴番号;
+            sut.get償還払支給住宅改修事前申請(主キー1, 主キー2, null);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
-            HihokenshaNo 主キー1 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_被保険者番号;
-            FlexibleYearMonth 主キー2 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_サービス提供年月;
-            RString 主キー3 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_整理番号;
-            sut.get償還払支給住宅改修事前申請(主キー1, 主キー2, 主キー3, null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
+//            HihokenshaNo 主キー1 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_被保険者番号;
+//            FlexibleYearMonth 主キー2 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_サービス提供年月;
+//            RString 主キー3 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_整理番号;
+//            sut.get償還払支給住宅改修事前申請(主キー1, 主キー2, 主キー3, null);
+//        }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class))).thenReturn(null);
 
             HihokenshaNo 主キー1 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_整理番号;
-            Decimal 主キー4 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_履歴番号;
-            ShokanJutakuKaishuJizenShinsei result = sut.get償還払支給住宅改修事前申請(主キー1, 主キー2, 主キー3, 主キー4);
+//            Decimal 主キー4 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_履歴番号;
+            ShokanJutakuKaishuJizenShinsei result = sut.get償還払支給住宅改修事前申請(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
         }
@@ -98,12 +98,12 @@ public class ShokanJutakuKaishuJizenShinseiManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3035ShokanJutakuKaishuJizenShinseiEntity entity = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.createDbT3035ShokanJutakuKaishuJizenShinseiEntity();
-            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class))).thenReturn(entity);
             HihokenshaNo 主キー1 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_整理番号;
-            Decimal 主キー4 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_履歴番号;
-            ShokanJutakuKaishuJizenShinsei result = sut.get償還払支給住宅改修事前申請(主キー1, 主キー2, 主キー3, 主キー4);
+//            Decimal 主キー4 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_履歴番号;
+            ShokanJutakuKaishuJizenShinsei result = sut.get償還払支給住宅改修事前申請(主キー1, 主キー2, 主キー3);
 
             assertThat(result.get被保険者番号().value(), is(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
@@ -162,7 +162,7 @@ public class ShokanJutakuKaishuJizenShinseiManagerTest {
             DbT3035ShokanJutakuKaishuJizenShinseiEntity entity = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.createDbT3035ShokanJutakuKaishuJizenShinseiEntity();
             entity.initializeMd5();
             ShokanJutakuKaishuJizenShinsei 償還払支給住宅改修事前申請 = new ShokanJutakuKaishuJizenShinsei(entity);
-            償還払支給住宅改修事前申請 = 償還払支給住宅改修事前申請.createBuilderForEdit().set事業者名称カナ(new RString("任意項目1を変更")).build();
+            償還払支給住宅改修事前申請 = 償還払支給住宅改修事前申請.createBuilderForEdit().set不承認の理由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払支給住宅改修事前申請(償還払支給住宅改修事前申請), is(true));
         }
@@ -174,7 +174,7 @@ public class ShokanJutakuKaishuJizenShinseiManagerTest {
             DbT3035ShokanJutakuKaishuJizenShinseiEntity entity = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.createDbT3035ShokanJutakuKaishuJizenShinseiEntity();
             entity.initializeMd5();
             ShokanJutakuKaishuJizenShinsei 償還払支給住宅改修事前申請 = new ShokanJutakuKaishuJizenShinsei(entity);
-            償還払支給住宅改修事前申請 = 償還払支給住宅改修事前申請.createBuilderForEdit().set事業者名称カナ(new RString("任意項目1を変更")).build();
+            償還払支給住宅改修事前申請 = 償還払支給住宅改修事前申請.createBuilderForEdit().set不承認の理由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払支給住宅改修事前申請(償還払支給住宅改修事前申請), is(false));
         }

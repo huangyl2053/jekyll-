@@ -226,7 +226,7 @@ public class DbT3057KogakuShikyuHanteiKekkaDacTest extends DbcTestDacBase {
                 HihokenshaNo 被保険者番号,
                 FlexibleYearMonth サービス提供年月,
                 HokenshaNo 証記載保険者番号,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3057KogakuShikyuHanteiKekkaEntity entity = DbT3057KogakuShikyuHanteiKekkaEntityGenerator.createDbT3057KogakuShikyuHanteiKekkaEntity();
             entity.setHihokenshaNo(被保険者番号);
             entity.setServiceTeikyoYM(サービス提供年月);

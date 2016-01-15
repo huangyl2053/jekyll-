@@ -4,10 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5208NinteichosahyoServiceJokyoFlagEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -123,7 +123,7 @@ public class NinteichosahyoServiceJokyoFlagTest extends DbzTestBase {
 
         @Test
         public void getサービスの状況は_entityが持つサービスの状況を返す() {
-            assertThat(sut.getサービスの状況(), is(NinteichosahyoServiceJokyoFlagEntity.getServiceJokyo()));
+            assertThat(sut.getサービスの状況(), is(NinteichosahyoServiceJokyoFlagEntity.getServiceJokyoFlag()));
         }
     }
 

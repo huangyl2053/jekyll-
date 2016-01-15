@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv;
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoChohyoShutsuryokujun.KaigoChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.printcontentssetting.PrintContentsSettingDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 
@@ -26,7 +25,7 @@ public class JutakuKaishuhiShikyuKetteiTsuchishoPanelDiv extends PanelPublish {
     @JsonProperty("JutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod")
     private PaymentDateDiv JutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod;
     @JsonProperty("JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder")
-    private KaigoChohyoShutsuryokujunDiv JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder;
+    private ChohyoShutsuryokujunDiv JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -55,12 +54,12 @@ public class JutakuKaishuhiShikyuKetteiTsuchishoPanelDiv extends PanelPublish {
     }
 
     @JsonProperty("JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder")
-    public KaigoChohyoShutsuryokujunDiv getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder() {
+    public ChohyoShutsuryokujunDiv getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder() {
         return JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder;
     }
 
     @JsonProperty("JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder")
-    public void setJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder(KaigoChohyoShutsuryokujunDiv JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder) {
+    public void setJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder(ChohyoShutsuryokujunDiv JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder) {
         this.JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder = JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder;
     }
 

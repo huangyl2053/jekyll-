@@ -32,3 +32,4 @@ shuryoShinsei_RiyuCode,varchar,RString,,,,,終了申請理由コード,A
 shuryoShinsei_ShinsaKetteiYMD,UDD015YMD,FlexibleDate,,,,,終了申請審査決定年月日,A
 shuryoShinsei_ShinsaKekkaKubun,varchar,RString,,,,,終了申請審査結果区分,A
 mukoKubun,bool,boolean,,,,,無効区分,A
+logicalDeletedFlag,bool,boolean,,,,,論理削除フラグ,A

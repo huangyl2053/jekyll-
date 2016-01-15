@@ -1,26 +1,26 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import java.util.Objects;
+import java.util.UUID;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 調査員情報テーブルのエンティティクラスです。
  */
-public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJohoEntity> implements IDbAccessable, IChosainJohoEntity {
+public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
@@ -37,9 +37,9 @@ public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJo
     @PrimaryKey
     private LasdecCode shichosonCode;
     @PrimaryKey
-    private ChosaItakusakiCode ninteichosaItakusakiCode;
+    private ChosaItakusakiCode ninteiChosaItakusakiCode;
     @PrimaryKey
-    private ChosainCode ninteiChosainNo;
+    private ChosainCode ninteiChosainCode;
     private RString chosainShimei;
     private RString chosainKanaShimei;
     private RString seibetsu;
@@ -123,8 +123,8 @@ public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJo
      *
      * @return 認定調査委託先コード
      */
-    public ChosaItakusakiCode getNinteichosaItakusakiCode() {
-        return ninteichosaItakusakiCode;
+    public ChosaItakusakiCode getNinteiChosaItakusakiCode() {
+        return ninteiChosaItakusakiCode;
     }
 
     /**
@@ -132,10 +132,10 @@ public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJo
      * <br/>
      * <br/>認定調査委託先情報
      *
-     * @param ninteichosaItakusakiCode 認定調査委託先コード
+     * @param ninteiChosaItakusakiCode 認定調査委託先コード
      */
-    public void setNinteichosaItakusakiCode(@Nonnull ChosaItakusakiCode ninteichosaItakusakiCode) {
-        this.ninteichosaItakusakiCode = ninteichosaItakusakiCode;
+    public void setNinteiChosaItakusakiCode(@Nonnull ChosaItakusakiCode ninteiChosaItakusakiCode) {
+        this.ninteiChosaItakusakiCode = ninteiChosaItakusakiCode;
     }
 
     /**
@@ -143,17 +143,17 @@ public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJo
      *
      * @return 認定調査員コード
      */
-    public ChosainCode getNinteiChosainNo() {
-        return ninteiChosainNo;
+    public ChosainCode getNinteiChosainCode() {
+        return ninteiChosainCode;
     }
 
     /**
      * 認定調査員コードのsetメソッドです。
      *
-     * @param ninteiChosainNo 認定調査員コード
+     * @param ninteiChosainCode 認定調査員コード
      */
-    public void setNinteiChosainNo(@Nonnull ChosainCode ninteiChosainNo) {
-        this.ninteiChosainNo = ninteiChosainNo;
+    public void setNinteiChosainCode(@Nonnull ChosainCode ninteiChosainCode) {
+        this.ninteiChosainCode = ninteiChosainCode;
     }
 
     /**
@@ -401,8 +401,7 @@ public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJo
      * このエンティティの主キーが他の{@literal DbT5913ChosainJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT5913ChosainJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT5913ChosainJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5913ChosainJohoEntity other) {
@@ -412,10 +411,10 @@ public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJo
         if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
             return false;
         }
-        if (!Objects.equals(this.ninteichosaItakusakiCode, other.ninteichosaItakusakiCode)) {
+        if (!Objects.equals(this.ninteiChosaItakusakiCode, other.ninteiChosaItakusakiCode)) {
             return false;
         }
-        if (!Objects.equals(this.ninteiChosainNo, other.ninteiChosainNo)) {
+        if (!Objects.equals(this.ninteiChosainCode, other.ninteiChosainCode)) {
             return false;
         }
         return true;
@@ -423,12 +422,14 @@ public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJo
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT5913ChosainJohoEntity entity) {
         this.shichosonCode = entity.shichosonCode;
-        this.ninteichosaItakusakiCode = entity.ninteichosaItakusakiCode;
-        this.ninteiChosainNo = entity.ninteiChosainNo;
+        this.ninteiChosaItakusakiCode = entity.ninteiChosaItakusakiCode;
+        this.ninteiChosainCode = entity.ninteiChosainCode;
         this.chosainShimei = entity.chosainShimei;
         this.chosainKanaShimei = entity.chosainKanaShimei;
         this.seibetsu = entity.seibetsu;
@@ -450,8 +451,7 @@ public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJo
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shichosonCode, ninteichosaItakusakiCode, ninteiChosainNo, chosainShimei, chosainKanaShimei, seibetsu, chosainShikaku, chikuCode, chosaKanoNinzuPerMonth, yubinNo, jusho, telNo, faxNo, shozokuKikanName, jokyoFlag);
+        return super.toMd5(shichosonCode, ninteiChosaItakusakiCode, ninteiChosainCode, chosainShimei, chosainKanaShimei, seibetsu, chosainShikaku, chikuCode, chosaKanoNinzuPerMonth, yubinNo, jusho, telNo, faxNo, shozokuKikanName, jokyoFlag);
     }
 
-// </editor-fold>
 }

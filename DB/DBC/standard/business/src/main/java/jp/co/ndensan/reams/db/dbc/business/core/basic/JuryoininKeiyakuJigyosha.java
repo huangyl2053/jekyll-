@@ -38,22 +38,23 @@ public class JuryoininKeiyakuJigyosha
      *
      * @param 事業者契約番号 事業者契約番号
      * @param 開始年月日 開始年月日
-     * @param 履歴番号 履歴番号
+// * @param 履歴番号 履歴番号
      */
     public JuryoininKeiyakuJigyosha(RString 事業者契約番号,
-            FlexibleDate 開始年月日,
-            Decimal 履歴番号) {
+            FlexibleDate 開始年月日
+    //            Decimal 履歴番号
+    ) {
         requireNonNull(事業者契約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者契約番号"));
         requireNonNull(開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("開始年月日"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3077JuryoininKeiyakuJigyoshaEntity();
-        this.entity.setJigyoshaKeiyakuNo(事業者契約番号);
+        this.entity.setKeiyakuJigyoshaNo(事業者契約番号);
         this.entity.setKaishiYMD(開始年月日);
-        this.entity.setRirekiNo(履歴番号);
+//        this.entity.setRirekiNo(履歴番号);
         this.id = new JuryoininKeiyakuJigyoshaIdentifier(
                 事業者契約番号,
-                開始年月日,
-                履歴番号
+                開始年月日
+        //                履歴番号
         );
     }
 
@@ -66,9 +67,9 @@ public class JuryoininKeiyakuJigyosha
     public JuryoininKeiyakuJigyosha(DbT3077JuryoininKeiyakuJigyoshaEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任契約事業者"));
         this.id = new JuryoininKeiyakuJigyoshaIdentifier(
-                entity.getJigyoshaKeiyakuNo(),
-                entity.getKaishiYMD(),
-                entity.getRirekiNo());
+                entity.getKeiyakuJigyoshaNo(),
+                entity.getKaishiYMD());
+//                entity.getRirekiNo());
     }
 
     /**
@@ -91,8 +92,8 @@ public class JuryoininKeiyakuJigyosha
      *
      * @return 事業者契約番号
      */
-    public RString get事業者契約番号() {
-        return entity.getJigyoshaKeiyakuNo();
+    public RString get契約事業者番号() {
+        return entity.getKeiyakuJigyoshaNo();
     }
 
     /**
@@ -109,9 +110,9 @@ public class JuryoininKeiyakuJigyosha
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
-        return entity.getRirekiNo();
-    }
+//    public Decimal get履歴番号() {
+//        return entity.getRirekiNo();
+//    }
 
     /**
      * 終了年月日を返します。
@@ -127,36 +128,36 @@ public class JuryoininKeiyakuJigyosha
      *
      * @return 届出年月日
      */
-    public FlexibleDate get届出年月日() {
-        return entity.getTodokedeYMD();
-    }
+//    public FlexibleDate get届出年月日() {
+//        return entity.getTodokedeYMD();
+//    }
 
     /**
      * 届出者住所を返します。
      *
      * @return 届出者住所
      */
-    public RString get届出者住所() {
-        return entity.getTodokedeAddress();
-    }
+//    public RString get届出者住所() {
+//        return entity.getTodokedeAddress();
+//    }
 
     /**
      * 届出者事業者名称を返します。
      *
      * @return 届出者事業者名称
      */
-    public RString get届出者事業者名称() {
-        return entity.getTodokedeJigyoshaName();
-    }
+//    public RString get届出者事業者名称() {
+//        return entity.getTodokedeJigyoshaName();
+//    }
 
     /**
      * 届出者代表者氏名を返します。
      *
      * @return 届出者代表者氏名
      */
-    public RString get届出者代表者氏名() {
-        return entity.getTodokedeDaihyoshaName();
-    }
+//    public RString get届出者代表者氏名() {
+//        return entity.getTodokedeDaihyoshaName();
+//    }
 
     /**
      * 金融機関コードを返します。
@@ -199,18 +200,18 @@ public class JuryoininKeiyakuJigyosha
      *
      * @return 通帳記号
      */
-    public RString get通帳記号() {
-        return entity.getTsuchoKigo();
-    }
+//    public RString get通帳記号() {
+//        return entity.getTsuchoKigo();
+//    }
 
     /**
      * 通帳番号を返します。
      *
      * @return 通帳番号
      */
-    public RString get通帳番号() {
-        return entity.getTsuchoNo();
-    }
+//    public RString get通帳番号() {
+//        return entity.getTsuchoNo();
+//    }
 
     /**
      * 口座名義人を返します。
@@ -218,7 +219,7 @@ public class JuryoininKeiyakuJigyosha
      * @return 口座名義人
      */
     public AtenaKanaMeisho get口座名義人() {
-        return entity.getKozaMeiginin();
+        return entity.getKozaMeigininKana();
     }
 
     /**
@@ -227,7 +228,7 @@ public class JuryoininKeiyakuJigyosha
      * @return 口座名義人漢字
      */
     public AtenaMeisho get口座名義人漢字() {
-        return entity.getKozaMeigininKanji();
+        return entity.getKozaMeiginin();
     }
 
     /**
@@ -236,7 +237,7 @@ public class JuryoininKeiyakuJigyosha
      * @return 事業者FAX番号
      */
     public TelNo get事業者FAX番号() {
-        return entity.getJigyoshaFaxNo();
+        return entity.getKeiyakuJigyoshaFaxNo();
     }
 
     /**
@@ -244,9 +245,9 @@ public class JuryoininKeiyakuJigyosha
      *
      * @return 契約登録年月日
      */
-    public FlexibleDate get契約登録年月日() {
-        return entity.getKeiyakuTorokuYMD();
-    }
+//    public FlexibleDate get契約登録年月日() {
+//        return entity.getKeiyakuTorokuYMD();
+//    }
 
     /**
      * 送付先部署を返します。
@@ -262,63 +263,53 @@ public class JuryoininKeiyakuJigyosha
      *
      * @return 営業形態
      */
-    public RString get営業形態() {
-        return entity.getEigyoKeitai();
-    }
+//    public RString get営業形態() {
+//        return entity.getEigyoKeitai();
+//    }
 
     /**
      * 住宅改修契約有無を返します。
      *
      * @return 住宅改修契約有無
      */
-    public boolean is住宅改修契約有無() {
-        return entity.getJutakuKaishuKeiyakuUmu();
-    }
+//    public boolean is住宅改修契約有無() {
+//        return entity.getJutakuKaishuKeiyakuUmu();
+//    }
 
     /**
      * 特定福祉用具販売契約有無を返します。
      *
      * @return 特定福祉用具販売契約有無
      */
-    public boolean is特定福祉用具販売契約有無() {
-        return entity.getTokuteiFukushiYoguHanbaiKeiyakuUmu();
-    }
+//    public boolean is特定福祉用具販売契約有無() {
+//        return entity.getTokuteiFukushiYoguHanbaiKeiyakuUmu();
+//    }
 
     /**
      * 償還払給付契約有無を返します。
      *
      * @return 償還払給付契約有無
      */
-    public boolean is償還払給付契約有無() {
-        return entity.getShokanbaraiKyufuKeiyakuUmu();
-    }
+//    public boolean is償還払給付契約有無() {
+//        return entity.getShokanbaraiKyufuKeiyakuUmu();
+//    }
 
     /**
      * 高額給付契約有無を返します。
      *
      * @return 高額給付契約有無
      */
-    public boolean is高額給付契約有無() {
-        return entity.getKogakuKyufuKeiyakuUmu();
-    }
-
-    /**
-     * 契約事業者番号を返します。
-     *
-     * @return 契約事業者番号
-     */
-    public JigyoshaNo get契約事業者番号() {
-        return entity.getKeiyakuJigyoshaNo();
-    }
-
+//    public boolean is高額給付契約有無() {
+//        return entity.getKogakuKyufuKeiyakuUmu();
+//    }
     /**
      * 取扱確約書有無を返します。
      *
      * @return 取扱確約書有無
      */
-    public boolean is取扱確約書有無() {
-        return entity.getToriatsukaiKakuyakushoUmu();
-    }
+//    public boolean is取扱確約書有無() {
+//        return entity.getToriatsukaiKakuyakushoUmu();
+//    }
 
     /**
      * {@link DbT3077JuryoininKeiyakuJigyoshaEntity}のクローンを返します。

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho;
 
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.gappeijoho.GappeiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,8 +40,8 @@ public class GappeiJohoMapperParameterTest extends DbzTestBase {
         public void 引数にNull以外を指定すると_パラメータが生成できる() {
             GappeiJohoMapperParameter sut = GappeiJohoMapperParameter.createSelectByKeyParam(gappeiYMD, chiikiNo);
 
-            assertThat(sut.getGappeiYMD(), is(gappeiYMD));
-            assertThat(sut.getChiikiNo(), is(chiikiNo));
+            assertThat(sut.getgappeiYMD(), is(gappeiYMD));
+            assertThat(sut.getchiikiNo(), is(chiikiNo));
         }
     }
 

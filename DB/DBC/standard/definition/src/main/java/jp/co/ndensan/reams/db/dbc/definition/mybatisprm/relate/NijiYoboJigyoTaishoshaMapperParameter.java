@@ -16,33 +16,34 @@ public final class NijiYoboJigyoTaishoshaMapperParameter {
 
 // TODO 主キー型、主キー名を適切に置換してください。
 // TODO 主キーの数が足りない場合、処理を追加してください。
-    private final HokenshaNo 主キー1;
+//    private final HokenshaNo 主キー1;
     private final HihokenshaNo 主キー2;
     private Decimal 主キー3;
 
-    private final boolean uses主キー1;
+//    private final boolean uses主キー1;
     private final boolean uses主キー2;
 
 // TODO 用途に応じてアクセス修飾子を修正してください。
     /**
      * コンストラクタです。
      *
-     * @param 主キー1 主キー1
+// * @param 主キー1 主キー1
+     *
      * @param 主キー2 主キー2
-     * @param uses主キー1 uses主キー1
+// * @param uses主キー1 uses主キー1
      * @param uses主キー2 uses主キー2
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     private NijiYoboJigyoTaishoshaMapperParameter(
-            @lombok.NonNull HokenshaNo 主キー1,
+            //            @lombok.NonNull HokenshaNo 主キー1,
             @lombok.NonNull HihokenshaNo 主キー2,
-            boolean uses主キー1,
+            //            boolean uses主キー1,
             boolean uses主キー2) {
 
-        this.主キー1 = 主キー1;
+//        this.主キー1 = 主キー1;
         this.主キー2 = 主キー2;
 
-        this.uses主キー1 = uses主キー1;
+//        this.uses主キー1 = uses主キー1;
         this.uses主キー2 = uses主キー2;
     }
 
@@ -50,14 +51,15 @@ public final class NijiYoboJigyoTaishoshaMapperParameter {
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param 主キー1 主キー1
+// * @param 主キー1 主キー1
+     *
      * @param 主キー2 主キー2
      * @return 身体手帳検索パラメータ
      */
     public static NijiYoboJigyoTaishoshaMapperParameter createSelectByKeyParam(
-            HokenshaNo 主キー1,
+            //            HokenshaNo 主キー1,
             HihokenshaNo 主キー2) {
-        return new NijiYoboJigyoTaishoshaMapperParameter(主キー1, 主キー2, true, true);
+        return new NijiYoboJigyoTaishoshaMapperParameter(主キー2, true);
     }
 
     /**
@@ -67,13 +69,13 @@ public final class NijiYoboJigyoTaishoshaMapperParameter {
      * @return 身体手帳検索パラメータ
      */
     public static NijiYoboJigyoTaishoshaMapperParameter createSelectListParam(
-            HokenshaNo 主キー1) {
-        return new NijiYoboJigyoTaishoshaMapperParameter(主キー1, HihokenshaNo.EMPTY, true, false);
+            HihokenshaNo 主キー1) {
+        return new NijiYoboJigyoTaishoshaMapperParameter(HihokenshaNo.EMPTY, false);
     }
 
-    public HokenshaNo get主キー1() {
-        return 主キー1;
-    }
+//    public HokenshaNo get主キー1() {
+//        return 主キー1;
+//    }
 
     public HihokenshaNo get主キー2() {
         return 主キー2;
@@ -83,9 +85,9 @@ public final class NijiYoboJigyoTaishoshaMapperParameter {
         return 主キー3;
     }
 
-    public boolean isUses主キー1() {
-        return uses主キー1;
-    }
+//    public boolean isUses主キー1() {
+//        return uses主キー1;
+//    }
 
     public boolean isUses主キー2() {
         return uses主キー2;

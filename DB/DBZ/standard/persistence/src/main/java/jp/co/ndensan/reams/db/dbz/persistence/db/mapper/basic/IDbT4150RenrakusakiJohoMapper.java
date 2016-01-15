@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4150RenrakusakiJohoEntity;
  */
 public interface IDbT4150RenrakusakiJohoMapper {
 
-    /* * {@linkDbT4150RenrakusakiJohoEntity}を取得します。
+    /** {@link DbT4150RenrakusakiJohoEntity}を取得します。
      *
-     * @return {@linkDbT4150RenrakusakiJohoEntity}
+     * @return {@link DbT4150RenrakusakiJohoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT4150RenrakusakiJohoEntity getEntity();

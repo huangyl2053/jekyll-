@@ -45,7 +45,8 @@ public class NijiYoboKihonCheckListManager {
     /**
      * 主キーに合致する二次予防基本チェックリストを返します。
      *
-     * @param 識別コード ShikibetsuCode
+// * @param 識別コード ShikibetsuCode
+     *
      * @param 被保険者番号 HihokenshaNo
      * @param 受付年月日 UketsukeYMD
      * @param 履歴番号 RirekiNo
@@ -53,17 +54,17 @@ public class NijiYoboKihonCheckListManager {
      */
     @Transaction
     public NijiYoboKihonCheckList get二次予防基本チェックリスト(
-            ShikibetsuCode 識別コード,
+            //            ShikibetsuCode 識別コード,
             HihokenshaNo 被保険者番号,
             FlexibleDate 受付年月日,
-            Decimal 履歴番号) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+            int 履歴番号) {
+//        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbT3101NijiYoboKihonCheckListEntity entity = dac.selectByKey(
-                識別コード,
+                //                識別コード,
                 被保険者番号,
                 受付年月日,
                 履歴番号);

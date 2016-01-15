@@ -4,8 +4,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0490011;
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoChohyoShutsuryokujun.KaigoChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.printcontentssetting.PrintContentsSettingDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 
 /**
@@ -24,7 +24,7 @@ public class KogakuShikyuKetteiTsuchiSakuseiListPanelDiv extends PanelPublish {
     @JsonProperty("KogakuShikyuKetteiTsuchiSakuseiListtHakkoDate")
     private PrintContentsSettingDiv KogakuShikyuKetteiTsuchiSakuseiListtHakkoDate;
     @JsonProperty("CommonKariChildDiv1")
-    private KaigoChohyoShutsuryokujunDiv CommonKariChildDiv1;
+    private ChohyoShutsuryokujunDiv CommonKariChildDiv1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -43,12 +43,12 @@ public class KogakuShikyuKetteiTsuchiSakuseiListPanelDiv extends PanelPublish {
     }
 
     @JsonProperty("CommonKariChildDiv1")
-    public KaigoChohyoShutsuryokujunDiv getCommonKariChildDiv1() {
+    public ChohyoShutsuryokujunDiv getCommonKariChildDiv1() {
         return CommonKariChildDiv1;
     }
 
     @JsonProperty("CommonKariChildDiv1")
-    public void setCommonKariChildDiv1(KaigoChohyoShutsuryokujunDiv CommonKariChildDiv1) {
+    public void setCommonKariChildDiv1(ChohyoShutsuryokujunDiv CommonKariChildDiv1) {
         this.CommonKariChildDiv1 = CommonKariChildDiv1;
     }
 
