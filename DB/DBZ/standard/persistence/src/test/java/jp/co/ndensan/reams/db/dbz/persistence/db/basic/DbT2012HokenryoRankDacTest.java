@@ -2,14 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2011RankJohoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2011RankJohoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2011RankJohoEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2012HokenryoRankDac;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2012HokenryoRankEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2012HokenryoRankEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -26,19 +28,19 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * {@link DbT2011RankJohoDac}のテストです。
+ * {@link DbT2012HokenryoRankDac}のテストです。
  */
 @RunWith(Enclosed.class)
 @Ignore
-public class DbT2011RankJohoDacTest extends DbbTestDacBase {
+public class DbT2012HokenryoRankDacTest extends DbbTestDacBase {
 
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
-    private static DbT2011RankJohoDac sut;
+    private static DbT2012HokenryoRankDac sut;
 
     @BeforeClass
     public static void setUpClass() {
-        sut = InstanceProvider.create(DbT2011RankJohoDac.class);
+        sut = InstanceProvider.create(DbT2012HokenryoRankDac.class);
     }
 
     public static class selectByKeyのテスト extends DbbTestDacBase {
@@ -47,39 +49,39 @@ public class DbT2011RankJohoDacTest extends DbbTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_賦課年度,
-                    DEFAULT_ランク区分);
+                    DEFAULT_市町村コード);
             TestSupport.insert(
                     DEFAULT_賦課年度,
-                    DEFAULT_ランク区分);
+                    DEFAULT_市町村コード);
         }
 
         @Test(expected = NullPointerException.class)
         public void 賦課年度がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_賦課年度,
-                    DEFAULT_ランク区分);
+                    DEFAULT_市町村コード);
         }
 
         @Test(expected = NullPointerException.class)
-        public void ランク区分がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+        public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_賦課年度,
-                    DEFAULT_ランク区分);
+                    DEFAULT_市町村コード);
         }
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
-            DbT2011RankJohoEntity insertedRecord = sut.selectByKey(
+            DbT2012HokenryoRankEntity insertedRecord = sut.selectByKey(
                     DEFAULT_賦課年度,
-                    DEFAULT_ランク区分);
+                    DEFAULT_市町村コード);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
-            DbT2011RankJohoEntity insertedRecord = sut.selectByKey(
+            DbT2012HokenryoRankEntity insertedRecord = sut.selectByKey(
                     DEFAULT_賦課年度,
-                    DEFAULT_ランク区分);
+                    DEFAULT_市町村コード);
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -87,18 +89,18 @@ public class DbT2011RankJohoDacTest extends DbbTestDacBase {
     public static class selectAllのテスト extends DbbTestDacBase {
 
         @Test
-        public void ランク情報が存在する場合_selectAllは_全件を返す() {
+        public void 保険料ランクが存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
                     DEFAULT_賦課年度,
-                    DEFAULT_ランク区分);
+                    DEFAULT_市町村コード);
             TestSupport.insert(
                     DEFAULT_賦課年度,
-                    DEFAULT_ランク区分);
+                    DEFAULT_市町村コード);
             assertThat(sut.selectAll().size(), is(2));
         }
 
         @Test
-        public void ランク情報が存在しない場合_selectAllは_空のリストを返す() {
+        public void 保険料ランクが存在しない場合_selectAllは_空のリストを返す() {
             assertThat(sut.selectAll(), is(Collections.EMPTY_LIST));
         }
     }
@@ -106,14 +108,14 @@ public class DbT2011RankJohoDacTest extends DbbTestDacBase {
     public static class insertのテスト extends DbbTestDacBase {
 
         @Test
-        public void ランク情報エンティティを渡すと_insertは_ランク情報を追加する() {
+        public void 保険料ランクエンティティを渡すと_insertは_保険料ランクを追加する() {
             TestSupport.insert(
                     DEFAULT_賦課年度,
-                    DEFAULT_ランク区分);
+                    DEFAULT_市町村コード);
 
             assertThat(sut.selectByKey(
                     DEFAULT_賦課年度,
-                    DEFAULT_ランク区分), is(notNullValue()));
+                    DEFAULT_市町村コード), is(notNullValue()));
         }
     }
 
@@ -123,21 +125,21 @@ public class DbT2011RankJohoDacTest extends DbbTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_賦課年度,
-                    DEFAULT_ランク区分);
+                    DEFAULT_市町村コード);
         }
 
         @Test
-        public void ランク情報エンティティを渡すと_updateは_ランク情報を更新する() {
-            DbT2011RankJohoEntity updateRecord = sut.selectByKey(
+        public void 保険料ランクエンティティを渡すと_updateは_保険料ランクを更新する() {
+            DbT2012HokenryoRankEntity updateRecord = sut.selectByKey(
                     DEFAULT_賦課年度,
-                    DEFAULT_ランク区分);
-            updateRecord.setRankKubun(new RankKubun(new RString("11")));
+                    DEFAULT_市町村コード);
+            updateRecord.setRankKubun(new RankKubun(new RString("3")));
 
             sut.save(updateRecord);
 
-            DbT2011RankJohoEntity updatedRecord = sut.selectByKey(
+            DbT2012HokenryoRankEntity updatedRecord = sut.selectByKey(
                     DEFAULT_賦課年度,
-                    DEFAULT_ランク区分);
+                    DEFAULT_市町村コード);
 
             assertThat(updateRecord.getRankKubun(), is(updatedRecord.getRankKubun()));
         }
@@ -149,21 +151,21 @@ public class DbT2011RankJohoDacTest extends DbbTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_賦課年度,
-                    DEFAULT_ランク区分);
+                    DEFAULT_市町村コード);
         }
 
         @Test
-        public void ランク情報エンティティを渡すと_deleteは_ランク情報を削除する() {
-            DbT2011RankJohoEntity deletedEntity = sut.selectByKey(
+        public void 保険料ランクエンティティを渡すと_deleteは_保険料ランクを削除する() {
+            DbT2012HokenryoRankEntity deletedEntity = sut.selectByKey(
                     DEFAULT_賦課年度,
-                    DEFAULT_ランク区分);
+                    DEFAULT_市町村コード);
             deletedEntity.setState(EntityDataState.Deleted);
 
             sut.save(deletedEntity);
 
             assertThat(sut.selectByKey(
                     DEFAULT_賦課年度,
-                    DEFAULT_ランク区分), is(nullValue()));
+                    DEFAULT_市町村コード), is(nullValue()));
         }
     }
 
@@ -171,10 +173,10 @@ public class DbT2011RankJohoDacTest extends DbbTestDacBase {
 
         public static void insert(
                 FlexibleYear 賦課年度,
-                RankKubun ランク区分) {
-            DbT2011RankJohoEntity entity = DbT2011RankJohoEntityGenerator.createDbT2011RankJohoEntity();
+                LasdecCode 市町村コード) {
+            DbT2012HokenryoRankEntity entity = DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity();
             entity.setFukaNendo(賦課年度);
-            entity.setRankKubun(ランク区分);
+            entity.setShichosonCode(市町村コード);
             sut.save(entity);
         }
     }

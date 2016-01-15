@@ -2,12 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2011RankJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 //import static jp.co.ndensan.reams.db.dbb.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.HokenryoRankIdentifier;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,28 +16,28 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * {@link RankJohoIdentifier}のテストクラスです。
+ * {@link HokenryoRankIdentifier}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-public class RankJohoIdentifierTest extends DbbTestBase {
+public class HokenryoRankIdentifierTest extends DbbTestBase {
 
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static FlexibleYear 賦課年度;
-    private static RankKubun ランク区分;
+    private static LasdecCode 市町村コード;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        賦課年度 = DbT2011RankJohoEntityGenerator.DEFAULT_賦課年度;
-        ランク区分 = DbT2011RankJohoEntityGenerator.DEFAULT_ランク区分;
+        賦課年度 = DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度;
+        市町村コード = DbT2012HokenryoRankEntityGenerator.DEFAULT_市町村コード;
     }
 
     public static class シリアライズテスト extends DbbTestBase {
 
         @Test
         public void シリアライズできる() {
-            RankJohoIdentifier sut = new RankJohoIdentifier(賦課年度, ランク区分);
+            HokenryoRankIdentifier sut = new HokenryoRankIdentifier(賦課年度, 市町村コード);
 //            assertThat(sut, is(serializable()));
         }
     }
