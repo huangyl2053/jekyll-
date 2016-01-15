@@ -1,0 +1,6 @@
+﻿shohinNo,bpchar,RString,,,,,商品番号,A
+kanriKaishiYMD,UDD015YMD,FlexibleDate,,,,,管理開始年月日,A
+kanriShuryoYMD,UDD015YMD,FlexibleDate,,,,,管理終了年月日,A
+shohinmei,varchar,RString,,,,,商品名,A
+seizoJigyoshamei,varchar,RString,,,,,製造事業者名,A
+hinmokuCode,varchar,RString,,,,,品目コード,A
