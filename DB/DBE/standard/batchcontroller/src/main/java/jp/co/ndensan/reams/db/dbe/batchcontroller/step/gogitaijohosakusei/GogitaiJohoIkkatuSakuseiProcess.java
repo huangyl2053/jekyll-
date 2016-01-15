@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.gogitaijohosakusei;
 
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Hoshu.GogitaichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.gogitaijohosakusei.GogitaiJohoIkkatuSakuseiErrorMessage;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijohosakusei.GogitaiJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.gogitaijohosakusei.GogitaiJohoSakuseiProcessParamter;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
@@ -42,6 +44,12 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.TaskStateAccessor;
 public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJohoSakuseiCSVEntity> {
 
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final int GOGITAIMEI_LENGTH_200 = 200;
+    private static final int TEIIN_LENGTH_4 = 4;
+    private static final RString SLASH = new RString("/");
+    private static final RString POSITIVE_INTEGERS_REGEX = new RString("^[1-9]\\d*$");
+    private static final RString FLAG_TRUE = new RString("true");
+    private static final RString FLAG_FALSE = new RString("false");
     private GogitaiJohoSakuseiProcessParamter parameter;
     private RString errorMsg;
     private int errorNo;
@@ -69,7 +77,7 @@ public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJoh
 
         RString filePath = Path.combinePath(spoolWorkPath, parameter.getInputFileName());
 
-        // TODO
+        // TODO window以下、テスト用
         filePath = filePath.insert(63, "tmp/");
 
         CsvReader csvReader = new CsvReader.InstanceBuilder(filePath, GogitaiJohoSakuseiCSVEntity.class)
@@ -91,6 +99,7 @@ public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJoh
 
     @Override
     protected void process(GogitaiJohoSakuseiCSVEntity item) {
+        errorMsg = RString.EMPTY;
         errorNo = errorNo + 1;
         this.checkCSVData(item);
         if (errorMsg.isEmpty()) {
@@ -124,6 +133,7 @@ public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJoh
         SharedFile.deleteEntry(new SharedFileEntryDescriptor(new FilesystemName(parameter.getSharedFileName()),
                 parameter.getSharedFileID()));
         if (errorMsg.isEmpty()) {
+            // TODO QA464 ＤＢコミット、ＤＢロールバック ログファイル
             TaskStateAccessor.setCompleteState(TaskCompleteState.SUCCESS);
         } else {
             TaskStateAccessor.setCompleteState(TaskCompleteState.BUSINESS_ERROR);
@@ -132,105 +142,156 @@ public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJoh
 
     private void checkCSVData(GogitaiJohoSakuseiCSVEntity csvData) {
 
+        RStringBuilder rsb = new RStringBuilder();
         if (csvData.getGogitaiNo().length() != 2) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体Noは２桁.getErrorMSG()));
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体Noは２桁.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
         if (!RStringUtil.isAlphabetAndHalfsizeNumberOnly(csvData.getGogitaiNo())) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体Noが半角英数字.getErrorMSG()));
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体Noが半角英数字.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
         if (csvData.getGogitaiMei().isEmpty()) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体名称が空.getErrorMSG()));
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体名称が空.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
-        if (200 < csvData.getGogitaiMei().length()) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体名称の桁数.getErrorMSG()));
+        if (GOGITAIMEI_LENGTH_200 < csvData.getGogitaiMei().length()) {
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体名称の桁数.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
         if (csvData.getGogitaiYukoKikanKaishiYMD().isEmpty()) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.有効開始日が空.getErrorMSG()));
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.有効開始日が空.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
         if (csvData.getGogitaiYukoKikanShuryoYMD().isEmpty()) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.有効終了日が空.getErrorMSG()));
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.有効終了日が空.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
-        if (!FlexibleDate.canConvert(csvData.getGogitaiYukoKikanKaishiYMD().replace(new RString("/"), RString.EMPTY))) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.有効開始日が日付.getErrorMSG()));
+        if (!FlexibleDate.canConvert(csvData.getGogitaiYukoKikanKaishiYMD().replace(SLASH, RString.EMPTY))) {
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.有効開始日が日付.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
-        if (!FlexibleDate.canConvert(csvData.getGogitaiYukoKikanShuryoYMD().replace(new RString("/"), RString.EMPTY))) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.有効終了日が日付.getErrorMSG()));
+        if (!FlexibleDate.canConvert(csvData.getGogitaiYukoKikanShuryoYMD().replace(SLASH, RString.EMPTY))) {
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.有効終了日が日付.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
-        if (new FlexibleDate(csvData.getGogitaiYukoKikanShuryoYMD().replace(new RString("/"), RString.EMPTY))
-                .isBefore(new FlexibleDate(csvData.getGogitaiYukoKikanKaishiYMD().replace(new RString("/"), RString.EMPTY)))) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.有効開始日大有効終了日.getErrorMSG()));
+        if (new FlexibleDate(csvData.getGogitaiYukoKikanShuryoYMD().replace(SLASH, RString.EMPTY))
+                .isBefore(new FlexibleDate(csvData.getGogitaiYukoKikanKaishiYMD().replace(SLASH, RString.EMPTY)))) {
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.有効開始日大有効終了日.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
         if (csvData.getGogitaiKaishiYoteiTime().isEmpty()) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.開始予定時刻が空.getErrorMSG()));
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.開始予定時刻が空.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
         if (csvData.getGogitaiShuryoYoteiTime().isEmpty()) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.終了予定時刻が空.getErrorMSG()));
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.終了予定時刻が空.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
         if (!RTime.canConvert(csvData.getGogitaiKaishiYoteiTime())) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.開始予定時刻が時刻.getErrorMSG()));
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.開始予定時刻が時刻.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
         if (!RTime.canConvert(csvData.getGogitaiShuryoYoteiTime())) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.終了予定時刻が時刻.getErrorMSG()));
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.終了予定時刻が時刻.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
         if (mapper.getKaisaiBashoJohoCount(csvData.getShinsakaiKaisaiBashoCode()) == 0) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.開催場所コードがテーブルに存在.getErrorMSG()));
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.開催場所コードがテーブルに存在.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
-        if (csvData.getShinsakaiYoteiTeiin().isEmpty()) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.予定定員が空.getErrorMSG()));
-        }
-        if (!RStringUtil.matchesRegex(csvData.getShinsakaiYoteiTeiin(), new RString("^[1-9]\\d*$"))) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.予定定員が正整数字.getErrorMSG()));
-        }
-        if (4 < csvData.getShinsakaiYoteiTeiin().length()) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.予定定員の桁数大4.getErrorMSG()));
-        }
-        if (!RStringUtil.matchesRegex(csvData.getShinsakaiJidoWariateTeiin(), new RString("^[1-9]\\d*$"))) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.自動割当定員が正整数字.getErrorMSG()));
-        }
-        if (4 < csvData.getShinsakaiJidoWariateTeiin().length()) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.自動割当定員の桁数大4.getErrorMSG()));
-        }
-        if (csvData.getShinsakaiIinTeiin().isEmpty()) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.委員定員が空.getErrorMSG()));
-        }
-        if (!RStringUtil.matchesRegex(csvData.getShinsakaiIinTeiin(), new RString("^[1-9]\\d*$"))) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.委員定員が正整数字.getErrorMSG()));
-        }
-        if (4 < csvData.getShinsakaiIinTeiin().length()) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.委員定員の桁数大4.getErrorMSG()));
-        }
+        rsb.append(checkIntCSVData(csvData));
+        rsb.append(checkFlagCSVData(csvData));
+        rsb.append(checkGogitaiWariateIinJohoData(csvData));
+        errorMsg = rsb.toRString();
+    }
+
+    private RStringBuilder checkFlagCSVData(GogitaiJohoSakuseiCSVEntity csvData) {
+        RStringBuilder rsb = new RStringBuilder();
         if (csvData.getGogitaiSeishinkaSonzaiFlag().isEmpty()) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.精神科医所属が空.getErrorMSG()));
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.精神科医所属が空.getErrorMSG()));
         }
-        if (!(new RString("true").equals(csvData.getGogitaiSeishinkaSonzaiFlag())
-                || new RString("false").equals(csvData.getGogitaiSeishinkaSonzaiFlag()))) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.精神科医所属が01.getErrorMSG()));
+        if (!(FLAG_TRUE.equals(csvData.getGogitaiSeishinkaSonzaiFlag())
+                || FLAG_FALSE.equals(csvData.getGogitaiSeishinkaSonzaiFlag()))) {
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.精神科医所属が01.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
         if (csvData.getGogitaiDummyFlag().isEmpty()) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.ダミーフラグが空.getErrorMSG()));
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.ダミーフラグが空.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
-        if (!(new RString("true").equals(csvData.getGogitaiDummyFlag())
-                || new RString("false").equals(csvData.getGogitaiDummyFlag()))) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.ダミーフラグが01.getErrorMSG()));
+        if (!(FLAG_TRUE.equals(csvData.getGogitaiDummyFlag())
+                || FLAG_FALSE.equals(csvData.getGogitaiDummyFlag()))) {
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.ダミーフラグが01.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
+
+        return rsb;
+    }
+
+    private RStringBuilder checkGogitaiWariateIinJohoData(GogitaiJohoSakuseiCSVEntity csvData) {
+        RStringBuilder rsb = new RStringBuilder();
         if (mapper.getShinsakaiIinJohoCount(csvData.getShinsakaiIinCode()) == 0) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.審査会委員コードがテーブルに存在.getErrorMSG()));
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.審査会委員コードがテーブルに存在.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
         if (csvData.getGogitaichoKubunCode().isEmpty()) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体長区分コードが空.getErrorMSG()));
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体長区分コードが空.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
-        if (!(new RString("0").equals(csvData.getGogitaichoKubunCode())
-                || new RString("1").equals(csvData.getGogitaichoKubunCode())
-                || new RString("2").equals(csvData.getGogitaichoKubunCode()))) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体長区分コードが012.getErrorMSG()));
+        if (!(GogitaichoKubunCode.通常.getコード().equals(csvData.getGogitaichoKubunCode())
+                || GogitaichoKubunCode.副合議体長.getコード().equals(csvData.getGogitaichoKubunCode())
+                || GogitaichoKubunCode.合議体長.getコード().equals(csvData.getGogitaichoKubunCode()))) {
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体長区分コードが012.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
         if (csvData.getSubstituteFlag().isEmpty()) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.補欠が空.getErrorMSG()));
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.補欠が空.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
-        if (!(new RString("true").equals(csvData.getSubstituteFlag())
-                || new RString("false").equals(csvData.getSubstituteFlag()))) {
-            errorMsg = errorMsg.concat(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.補欠が01.getErrorMSG()));
+        if (!(FLAG_TRUE.equals(csvData.getSubstituteFlag())
+                || FLAG_FALSE.equals(csvData.getSubstituteFlag()))) {
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.補欠が01.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
         }
+        return rsb;
+    }
+
+    private RStringBuilder checkIntCSVData(GogitaiJohoSakuseiCSVEntity csvData) {
+        RStringBuilder rsb = new RStringBuilder();
+        if (csvData.getShinsakaiYoteiTeiin().isEmpty()) {
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.予定定員が空.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
+        }
+        if (!RStringUtil.matchesRegex(csvData.getShinsakaiYoteiTeiin(), POSITIVE_INTEGERS_REGEX)) {
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.予定定員が正整数字.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
+        }
+        if (TEIIN_LENGTH_4 < csvData.getShinsakaiYoteiTeiin().length()) {
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.予定定員の桁数大4.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
+        }
+        if (!RStringUtil.matchesRegex(csvData.getShinsakaiJidoWariateTeiin(), POSITIVE_INTEGERS_REGEX)) {
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.自動割当定員が正整数字.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
+        }
+        if (TEIIN_LENGTH_4 < csvData.getShinsakaiJidoWariateTeiin().length()) {
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.自動割当定員の桁数大4.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
+        }
+        if (csvData.getShinsakaiIinTeiin().isEmpty()) {
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.委員定員が空.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
+        }
+        if (!RStringUtil.matchesRegex(csvData.getShinsakaiIinTeiin(), POSITIVE_INTEGERS_REGEX)) {
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.委員定員が正整数字.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
+        }
+        if (TEIIN_LENGTH_4 < csvData.getShinsakaiIinTeiin().length()) {
+            rsb.append(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.委員定員の桁数大4.getErrorMSG()));
+            rsb.append(NewLine.CRLF);
+        }
+        return rsb;
     }
 
     private RString intToRStr(int no) {

@@ -65,6 +65,9 @@ public class GogitaiJohoSakusei {
     private static final RString JYOTAI_NAME_DEL = new RString("削除");
     private static final RString RAD_HYOJIJOKEN_ISNOW = new RString("key0");
     private static final RString SHARED_FILE_NAME = new RString("合議体情報");
+    private static final RString OUTPUT_CSV_FILE_NAME = new RString("\\合議体情報.csv");
+    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegister");
     private final GogitaiJohoSakuseiFinder service;
     private final GogitaiJohoManager manager;
 
@@ -289,10 +292,10 @@ public class GogitaiJohoSakusei {
                     GogitaiJohoSakuseiParameter.createGogitaiJohoSakuseiParameter(
                             FlexibleDate.getNowDate(), is現在有効な合議体のみ, 0, FlexibleDate.EMPTY, RString.EMPTY));
             RString path = Path.getTmpDirectoryPath();
-            try (CsvListWriter writer = new CsvListWriter.InstanceBuilder(path.concat("\\合議体情報.csv"))
+            try (CsvListWriter writer = new CsvListWriter.InstanceBuilder(path.concat(OUTPUT_CSV_FILE_NAME))
                     .canAppend(false)
                     .hasHeader(false)
-                    .setDelimiter(new RString(","))
+                    .setDelimiter(CSV_WRITER_DELIMITER)
                     .setEncode(Encode.SJIS)
                     .setNewLine(NewLine.CRLF)
                     .build()) {
@@ -463,7 +466,7 @@ public class GogitaiJohoSakusei {
      */
     public ResponseData<GogitaiJohoSakuseiDiv> btnShow(GogitaiJohoSakuseiDiv div) {
         // TODO QA419待ち
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBatchRegister"), false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, false);
         return ResponseData.of(div).respond();
     }
 
@@ -559,14 +562,14 @@ public class GogitaiJohoSakusei {
         GogitaiJohoBuilder gogitaiJohoBuilder = getHandler(div).getGogitaiJohoBuilder(gogitaiJoho.createBuilderForEdit(), row);
         row.setJyotai(JYOTAI_NAME_UPD);
         for (dgShinsainList_Row shinsainRow : div.getDgShinsainList().getDataSource()) {
-            GogitaiWariateIinJohoIdentifier gogitaiWariateIinJohoIdentifier
+            GogitaiWariateIinJohoIdentifier gogitaiWariateIinIdentifier
                     = new GogitaiWariateIinJohoIdentifier(Integer.parseInt(div.getTxtGogitaiNumber().getValue().toString()),
                             new FlexibleDate(div.getTxtYukoKaishiYMD().getValue().toDateString()), shinsainRow.getShinsakaiIinCode());
             GogitaiWariateIinJoho gogitaiWariateIinJohoForUpd = new GogitaiWariateIinJoho(
-                    gogitaiWariateIinJohoIdentifier.get合議体番号(),
-                    gogitaiWariateIinJohoIdentifier.get合議体有効期間開始年月日(),
-                    gogitaiWariateIinJohoIdentifier.get介護認定審査会委員コード());
-            GogitaiWariateIinJoho gogitaiWariateIinJoho = gogitaiJoho.getGogitaiWariateIinJoho(gogitaiWariateIinJohoIdentifier);
+                    gogitaiWariateIinIdentifier.get合議体番号(),
+                    gogitaiWariateIinIdentifier.get合議体有効期間開始年月日(),
+                    gogitaiWariateIinIdentifier.get介護認定審査会委員コード());
+            GogitaiWariateIinJoho gogitaiWariateIinJoho = gogitaiJoho.getGogitaiWariateIinJoho(gogitaiWariateIinIdentifier);
             gogitaiWariateIinJoho = getHandler(div).getGogitaiWariateIinJohoByShinsain(shinsainRow, gogitaiWariateIinJoho.createBuilderForEdit());
             gogitaiWariateIinJohoForUpd = getHandler(div).getGogitaiWariateIinJohoByShinsain(shinsainRow, gogitaiWariateIinJohoForUpd.createBuilderForEdit());
             gogitaiWariateIinJoho = gogitaiWariateIinJoho.modifiedModel();
@@ -574,14 +577,14 @@ public class GogitaiJohoSakusei {
             gogitaiJohoModelForUpd.add(gogitaiWariateIinJohoForUpd);
         }
         for (dgHoketsuShinsainList_Row hoketsuShinsainRow : div.getDgHoketsuShinsainList().getDataSource()) {
-            GogitaiWariateIinJohoIdentifier gogitaiWariateIinJohoIdentifier
+            GogitaiWariateIinJohoIdentifier gogitaiWariateIinIdentifier
                     = new GogitaiWariateIinJohoIdentifier(Integer.parseInt(div.getTxtGogitaiNumber().getValue().toString()),
                             new FlexibleDate(div.getTxtYukoKaishiYMD().getValue().toDateString()), hoketsuShinsainRow.getHoketsuShinsakaiIinCode());
             GogitaiWariateIinJoho gogitaiWariateIinJohoForUpd = new GogitaiWariateIinJoho(
-                    gogitaiWariateIinJohoIdentifier.get合議体番号(),
-                    gogitaiWariateIinJohoIdentifier.get合議体有効期間開始年月日(),
-                    gogitaiWariateIinJohoIdentifier.get介護認定審査会委員コード());
-            GogitaiWariateIinJoho gogitaiWariateIinJoho = gogitaiJoho.getGogitaiWariateIinJoho(gogitaiWariateIinJohoIdentifier);
+                    gogitaiWariateIinIdentifier.get合議体番号(),
+                    gogitaiWariateIinIdentifier.get合議体有効期間開始年月日(),
+                    gogitaiWariateIinIdentifier.get介護認定審査会委員コード());
+            GogitaiWariateIinJoho gogitaiWariateIinJoho = gogitaiJoho.getGogitaiWariateIinJoho(gogitaiWariateIinIdentifier);
             gogitaiWariateIinJoho = getHandler(div).getGogitaiWariateIinJohoByHoketsu(hoketsuShinsainRow, gogitaiWariateIinJoho.createBuilderForEdit());
             gogitaiWariateIinJohoForUpd = getHandler(div).getGogitaiWariateIinJohoByHoketsu(hoketsuShinsainRow, gogitaiWariateIinJohoForUpd.createBuilderForEdit());
             gogitaiWariateIinJoho = gogitaiWariateIinJoho.modifiedModel();

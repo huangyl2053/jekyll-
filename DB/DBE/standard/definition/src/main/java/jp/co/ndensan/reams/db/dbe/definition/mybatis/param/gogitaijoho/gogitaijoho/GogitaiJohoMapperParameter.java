@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  * 合議体情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class GogitaiJohoMapperParameter {
 
     private final int gogitaiNo;

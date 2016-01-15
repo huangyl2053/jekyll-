@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 合議体情報作成のパラメータクラス
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class GogitaiJohoSakuseiParameter {
 
     private final FlexibleDate nowDate;

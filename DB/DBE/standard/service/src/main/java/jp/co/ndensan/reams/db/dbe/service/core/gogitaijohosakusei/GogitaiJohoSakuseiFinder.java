@@ -86,7 +86,7 @@ public class GogitaiJohoSakuseiFinder {
      * 合議体情報一覧のデータを取得します。
      *
      * @param param 合議体情報作成のパラメータ
-     * @return　SearchResult<GogitaiJohoSakuseiRsult>
+     * @return SearchResult<GogitaiJohoSakuseiRsult>
      */
     public SearchResult<GogitaiJohoSakuseiRsult> getDateGridList(GogitaiJohoSakuseiParameter param) {
 
@@ -106,7 +106,7 @@ public class GogitaiJohoSakuseiFinder {
      * 合議体情報作成のデータを取得します。
      *
      * @param is現在有効な合議体のみ 現在有効な合議体のみ
-     * @return　SearchResult<GogitaiJoho>
+     * @return SearchResult<GogitaiJoho>
      */
     public SearchResult<GogitaiJoho> getGogitaiJohoSakusei(boolean is現在有効な合議体のみ) {
 
@@ -127,7 +127,7 @@ public class GogitaiJohoSakuseiFinder {
     /**
      * 開催場所コードドロップリストを取得します。
      *
-     * @return　SearchResult<KeyValueDataSource>
+     * @return SearchResult<KeyValueDataSource>
      */
     public SearchResult<KeyValueDataSource> getKaisaiBashoList() {
 
@@ -147,7 +147,7 @@ public class GogitaiJohoSakuseiFinder {
      * 審査員一覧のデータを取得します。
      *
      * @param param 合議体情報作成のパラメータ
-     * @return　SearchResult<GogitaiJohoSakuseiRsult>
+     * @return SearchResult<GogitaiJohoSakuseiRsult>
      */
     public SearchResult<GogitaiJohoSakuseiRsult> getShinsainList(GogitaiJohoSakuseiParameter param) {
 
@@ -167,7 +167,7 @@ public class GogitaiJohoSakuseiFinder {
      * 合議体番号を取得します。
      *
      * @param 合議体番号 合議体番号
-     * @return　int
+     * @return int
      */
     public int getGogitaiNoJuuhuku(int 合議体番号) {
         return dbt5591dac.selectgogitaiNoJuuhukuByKey(合議体番号);
@@ -210,7 +210,7 @@ public class GogitaiJohoSakuseiFinder {
      * 合議体割当委員情報が存在しているをチェックします。
      *
      * @param 合議体番号 合議体番号
-     * @return　true:存在 false:存在しない
+     * @return true:存在 false:存在しない
      */
     public boolean getGogitaiWariateIinJohoCount(int 合議体番号) {
         return 0 != dbt5593dac.selectByGogitaiNO(合議体番号);
@@ -220,7 +220,7 @@ public class GogitaiJohoSakuseiFinder {
      * 介護認定審査会開催予定情報が存在しているをチェックします。
      *
      * @param 合議体番号 合議体番号
-     * @return　true:存在 false:存在しない
+     * @return true:存在 false:存在しない
      */
     public boolean getShinsakaiKaisaiYoteiJohoCount(int 合議体番号) {
         return 0 != dbt5501dac.selectByGogitaiNO(合議体番号);

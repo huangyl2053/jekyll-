@@ -51,6 +51,11 @@ public class GogitaiJohoSakuseiCSVEntity {
     @CsvField(order = 14)
     private RString substituteFlag;
 
+    /**
+     * CSVデータから、合議体情報テーブルを設定します。
+     *
+     * @return DbT5591GogitaiJohoEntity
+     */
     public DbT5591GogitaiJohoEntity toDbt5591Entity() {
         DbT5591GogitaiJohoEntity entity = new DbT5591GogitaiJohoEntity();
         entity.setGogitaiNo(strToInt(this.gogitaiNo));
@@ -69,6 +74,11 @@ public class GogitaiJohoSakuseiCSVEntity {
         return entity;
     }
 
+    /**
+     * CSVデータから、合議体割当委員情報テーブルを設定します。
+     *
+     * @return DbT5593GogitaiWariateIinJohoEntity
+     */
     public DbT5593GogitaiWariateIinJohoEntity toDbt5593Entity() {
         DbT5593GogitaiWariateIinJohoEntity entity = new DbT5593GogitaiWariateIinJohoEntity();
         entity.setGogitaiNo(strToInt(this.gogitaiNo));
