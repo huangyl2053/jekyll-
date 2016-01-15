@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3002KyodoShoriyoJukyush
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -283,9 +284,9 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuDacTest extends DbcTestDacBa
                 FlexibleDate 異動年月日,
                 RString 異動区分コード,
                 RString 受給者異動事由,
-                HokenshaNo 証記載保険者番号,
+                ShoKisaiHokenshaNo 証記載保険者番号,
                 HihokenshaNo 被保険者番号,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity entity = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.createDbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
             entity.setIdoYMD(異動年月日);
             entity.setIdoKubunCode(異動区分コード);

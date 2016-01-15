@@ -1,25 +1,23 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import java.util.Objects;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 二次予防事業対象者テーブルのエンティティクラスです。
  */
 public class DbT3100NijiYoboJigyoTaishoshaEntity extends DbTableEntityBase<DbT3100NijiYoboJigyoTaishoshaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3100NijiYoboJigyoTaishosha");
 
@@ -32,20 +30,18 @@ public class DbT3100NijiYoboJigyoTaishoshaEntity extends DbTableEntityBase<DbT31
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private HokenshaNo shoKisaiHokenshaNo;
-    @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     private FlexibleDate tekiyoKaishiYMD;
     private FlexibleDate tekiyoShuryoYMD;
-    private ShikibetsuCode shikibetsuCode;
     private FlexibleDate uketsukeYMD;
     private FlexibleDate ketteiYMD;
+    private FlexibleDate chosaJisshiYMD;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -54,7 +50,7 @@ public class DbT3100NijiYoboJigyoTaishoshaEntity extends DbTableEntityBase<DbT31
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -63,7 +59,7 @@ public class DbT3100NijiYoboJigyoTaishoshaEntity extends DbTableEntityBase<DbT31
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -72,16 +68,17 @@ public class DbT3100NijiYoboJigyoTaishoshaEntity extends DbTableEntityBase<DbT31
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -89,26 +86,8 @@ public class DbT3100NijiYoboJigyoTaishoshaEntity extends DbTableEntityBase<DbT31
     }
 
     /**
-     * 証記載保険者番号のgetメソッドです。
-     *
-     * @return 証記載保険者番号
-     */
-    public HokenshaNo getShoKisaiHokenshaNo() {
-        return shoKisaiHokenshaNo;
-    }
-
-    /**
-     * 証記載保険者番号のsetメソッドです。
-     *
-     * @param shoKisaiHokenshaNo 証記載保険者番号
-     */
-    public void setShoKisaiHokenshaNo(HokenshaNo shoKisaiHokenshaNo) {
-        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
-    }
-
-    /**
      * 被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -117,43 +96,44 @@ public class DbT3100NijiYoboJigyoTaishoshaEntity extends DbTableEntityBase<DbT31
 
     /**
      * 被保険者番号のsetメソッドです。
-     *
+     * 
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     *
+     * 
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     *
+     * 
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(@Nonnull int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * 適用開始年月日のgetメソッドです。
-     *
+     * 
      * @return 適用開始年月日
      */
+    @CheckForNull
     public FlexibleDate getTekiyoKaishiYMD() {
         return tekiyoKaishiYMD;
     }
 
     /**
      * 適用開始年月日のsetメソッドです。
-     *
+     * 
      * @param tekiyoKaishiYMD 適用開始年月日
      */
     public void setTekiyoKaishiYMD(FlexibleDate tekiyoKaishiYMD) {
@@ -162,16 +142,17 @@ public class DbT3100NijiYoboJigyoTaishoshaEntity extends DbTableEntityBase<DbT31
 
     /**
      * 適用終了年月日のgetメソッドです。
-     *
+     * 
      * @return 適用終了年月日
      */
+    @CheckForNull
     public FlexibleDate getTekiyoShuryoYMD() {
         return tekiyoShuryoYMD;
     }
 
     /**
      * 適用終了年月日のsetメソッドです。
-     *
+     * 
      * @param tekiyoShuryoYMD 適用終了年月日
      */
     public void setTekiyoShuryoYMD(FlexibleDate tekiyoShuryoYMD) {
@@ -179,35 +160,18 @@ public class DbT3100NijiYoboJigyoTaishoshaEntity extends DbTableEntityBase<DbT31
     }
 
     /**
-     * 識別コードのgetメソッドです。
-     *
-     * @return 識別コード
-     */
-    public ShikibetsuCode getShikibetsuCode() {
-        return shikibetsuCode;
-    }
-
-    /**
-     * 識別コードのsetメソッドです。
-     *
-     * @param shikibetsuCode 識別コード
-     */
-    public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
-        this.shikibetsuCode = shikibetsuCode;
-    }
-
-    /**
      * 受付年月日のgetメソッドです。
-     *
+     * 
      * @return 受付年月日
      */
+    @CheckForNull
     public FlexibleDate getUketsukeYMD() {
         return uketsukeYMD;
     }
 
     /**
      * 受付年月日のsetメソッドです。
-     *
+     * 
      * @param uketsukeYMD 受付年月日
      */
     public void setUketsukeYMD(FlexibleDate uketsukeYMD) {
@@ -216,16 +180,17 @@ public class DbT3100NijiYoboJigyoTaishoshaEntity extends DbTableEntityBase<DbT31
 
     /**
      * 決定年月日のgetメソッドです。
-     *
+     * 
      * @return 決定年月日
      */
+    @CheckForNull
     public FlexibleDate getKetteiYMD() {
         return ketteiYMD;
     }
 
     /**
      * 決定年月日のsetメソッドです。
-     *
+     * 
      * @param ketteiYMD 決定年月日
      */
     public void setKetteiYMD(FlexibleDate ketteiYMD) {
@@ -233,18 +198,34 @@ public class DbT3100NijiYoboJigyoTaishoshaEntity extends DbTableEntityBase<DbT31
     }
 
     /**
+     * 調査実施日のgetメソッドです。
+     * 
+     * @return 調査実施日
+     */
+    @CheckForNull
+    public FlexibleDate getChosaJisshiYMD() {
+        return chosaJisshiYMD;
+    }
+
+    /**
+     * 調査実施日のsetメソッドです。
+     * 
+     * @param chosaJisshiYMD 調査実施日
+     */
+    public void setChosaJisshiYMD(FlexibleDate chosaJisshiYMD) {
+        this.chosaJisshiYMD = chosaJisshiYMD;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT3100NijiYoboJigyoTaishoshaEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3100NijiYoboJigyoTaishoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3100NijiYoboJigyoTaishoshaEntity other) {
         if (other == null) {
-            return false;
-        }
-        if (!Objects.equals(this.shoKisaiHokenshaNo, other.shoKisaiHokenshaNo)) {
             return false;
         }
         if (!Objects.equals(this.hihokenshaNo, other.hihokenshaNo)) {
@@ -261,25 +242,24 @@ public class DbT3100NijiYoboJigyoTaishoshaEntity extends DbTableEntityBase<DbT31
      */
     @Override
     public void shallowCopy(DbT3100NijiYoboJigyoTaishoshaEntity entity) {
-        this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
         this.hihokenshaNo = entity.hihokenshaNo;
         this.rirekiNo = entity.rirekiNo;
         this.tekiyoKaishiYMD = entity.tekiyoKaishiYMD;
         this.tekiyoShuryoYMD = entity.tekiyoShuryoYMD;
-        this.shikibetsuCode = entity.shikibetsuCode;
         this.uketsukeYMD = entity.uketsukeYMD;
         this.ketteiYMD = entity.ketteiYMD;
+        this.chosaJisshiYMD = entity.chosaJisshiYMD;
     }
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shoKisaiHokenshaNo, hihokenshaNo, rirekiNo, tekiyoKaishiYMD, tekiyoShuryoYMD, shikibetsuCode, uketsukeYMD, ketteiYMD);
+        return super.toMd5(hihokenshaNo, rirekiNo, tekiyoKaishiYMD, tekiyoShuryoYMD, uketsukeYMD, ketteiYMD, chosaJisshiYMD);
     }
 
 // </editor-fold>
+
 }

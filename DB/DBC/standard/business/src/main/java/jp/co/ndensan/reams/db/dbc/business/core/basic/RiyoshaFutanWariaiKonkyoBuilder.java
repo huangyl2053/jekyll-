@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
+
 /**
  * {@link RiyoshaFutanWariaiKonkyo}の編集を行うビルダークラスです。
  */
@@ -68,7 +69,7 @@ public class RiyoshaFutanWariaiKonkyoBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link RiyoshaFutanWariaiKonkyoBuilder}
      */
-    public RiyoshaFutanWariaiKonkyoBuilder set履歴番号(Decimal 履歴番号) {
+    public RiyoshaFutanWariaiKonkyoBuilder set履歴番号(int 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;
@@ -80,7 +81,7 @@ public class RiyoshaFutanWariaiKonkyoBuilder {
      * @param 枝番号 枝番号
      * @return {@link RiyoshaFutanWariaiKonkyoBuilder}
      */
-    public RiyoshaFutanWariaiKonkyoBuilder set枝番号(Decimal 枝番号) {
+    public RiyoshaFutanWariaiKonkyoBuilder set枝番号(int 枝番号) {
         requireNonNull(枝番号, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番号"));
         entity.setEdaNo(枝番号);
         return this;

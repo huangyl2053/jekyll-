@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
  */
 public interface IDbT1002TekiyoJogaishaMapper {
 
-    /* * {@linkDbT1002TekiyoJogaishaEntity}を取得します。
+    /** {@link DbT1002TekiyoJogaishaEntity}を取得します。
      *
-     * @return {@linkDbT1002TekiyoJogaishaEntity}
+     * @return {@link DbT1002TekiyoJogaishaEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT1002TekiyoJogaishaEntity getEntity();

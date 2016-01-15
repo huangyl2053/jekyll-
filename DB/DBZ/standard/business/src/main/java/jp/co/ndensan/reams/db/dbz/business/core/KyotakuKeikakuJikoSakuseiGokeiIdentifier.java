@@ -50,4 +50,58 @@ public class KyotakuKeikakuJikoSakuseiGokeiIdentifier implements Serializable {
         this.サービス提供事業者番号 = サービス提供事業者番号;
         this.サービス種類コード = サービス種類コード;
     }
+
+    /**
+     * get被保険者番号
+     *
+     * @return 被保険者番号
+     */
+    public HihokenshaNo get被保険者番号() {
+        return 被保険者番号;
+    }
+
+    /**
+     * get対象年月
+     *
+     * @return 対象年月
+     */
+    public FlexibleYearMonth get対象年月() {
+        return 対象年月;
+    }
+
+    /**
+     * get履歴番号
+     *
+     * @return 履歴番号
+     */
+    public Decimal get履歴番号() {
+        return 履歴番号;
+    }
+
+    /**
+     * get居宅サービス区分
+     *
+     * @return 居宅サービス区分
+     */
+    public RString get居宅サービス区分() {
+        return 居宅サービス区分;
+    }
+
+    /**
+     * getサービス提供事業者番号
+     *
+     * @return サービス提供事業者番号
+     */
+    public JigyoshaNo getサービス提供事業者番号() {
+        return サービス提供事業者番号;
+    }
+
+    /**
+     * getサービス種類コード
+     *
+     * @return サービス種類コード
+     */
+    public ServiceShuruiCode getサービス種類コード() {
+        return サービス種類コード;
+    }
 }

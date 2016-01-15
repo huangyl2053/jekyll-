@@ -2,6 +2,8 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -15,8 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  * 認定調査票（基本調査素点項目）テーブルのエンティティクラスです。
  */
 public class DbT5212NinteichosahyoKihonChosaScoreItemEntity extends DbTableEntityBase<DbT5212NinteichosahyoKihonChosaScoreItemEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5212NinteichosahyoKihonChosaScoreItem");
 
@@ -35,11 +36,11 @@ public class DbT5212NinteichosahyoKihonChosaScoreItemEntity extends DbTableEntit
     @PrimaryKey
     private int remban;
     private Code koroshoIfShikibetsuCode;
-    private int reserchItem01;
+    private int researchItem01;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -48,7 +49,7 @@ public class DbT5212NinteichosahyoKihonChosaScoreItemEntity extends DbTableEntit
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -57,7 +58,7 @@ public class DbT5212NinteichosahyoKihonChosaScoreItemEntity extends DbTableEntit
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -66,16 +67,17 @@ public class DbT5212NinteichosahyoKihonChosaScoreItemEntity extends DbTableEntit
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -86,7 +88,7 @@ public class DbT5212NinteichosahyoKihonChosaScoreItemEntity extends DbTableEntit
      * 申請書管理番号のgetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     *
+     * 
      * @return 申請書管理番号
      */
     public ShinseishoKanriNo getShinseishoKanriNo() {
@@ -97,10 +99,10 @@ public class DbT5212NinteichosahyoKihonChosaScoreItemEntity extends DbTableEntit
      * 申請書管理番号のsetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     *
+     * 
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -108,7 +110,7 @@ public class DbT5212NinteichosahyoKihonChosaScoreItemEntity extends DbTableEntit
      * 要介護認定調査履歴番号のgetメソッドです。
      * <br/>
      * <br/>認定調査依頼情報
-     *
+     * 
      * @return 要介護認定調査履歴番号
      */
     public int getNinteichosaRirekiNo() {
@@ -119,16 +121,16 @@ public class DbT5212NinteichosahyoKihonChosaScoreItemEntity extends DbTableEntit
      * 要介護認定調査履歴番号のsetメソッドです。
      * <br/>
      * <br/>認定調査依頼情報
-     *
+     * 
      * @param ninteichosaRirekiNo 要介護認定調査履歴番号
      */
-    public void setNinteichosaRirekiNo(int ninteichosaRirekiNo) {
+    public void setNinteichosaRirekiNo(@Nonnull int ninteichosaRirekiNo) {
         this.ninteichosaRirekiNo = ninteichosaRirekiNo;
     }
 
     /**
      * 連番のgetメソッドです。
-     *
+     * 
      * @return 連番
      */
     public int getRemban() {
@@ -137,10 +139,10 @@ public class DbT5212NinteichosahyoKihonChosaScoreItemEntity extends DbTableEntit
 
     /**
      * 連番のsetメソッドです。
-     *
+     * 
      * @param remban 連番
      */
-    public void setRemban(int remban) {
+    public void setRemban(@Nonnull int remban) {
         this.remban = remban;
     }
 
@@ -148,7 +150,7 @@ public class DbT5212NinteichosahyoKihonChosaScoreItemEntity extends DbTableEntit
      * 厚労省IF識別コードのgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：厚労省認定ソフトのバージョン）
-     *
+     * 
      * @return 厚労省IF識別コード
      */
     public Code getKoroshoIfShikibetsuCode() {
@@ -159,36 +161,37 @@ public class DbT5212NinteichosahyoKihonChosaScoreItemEntity extends DbTableEntit
      * 厚労省IF識別コードのsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：厚労省認定ソフトのバージョン）
-     *
+     * 
      * @param koroshoIfShikibetsuCode 厚労省IF識別コード
      */
-    public void setKoroshoIfShikibetsuCode(Code koroshoIfShikibetsuCode) {
+    public void setKoroshoIfShikibetsuCode(@Nonnull Code koroshoIfShikibetsuCode) {
         this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
     }
 
     /**
      * 素点項目のgetメソッドです。
-     *
+     * 
      * @return 素点項目
      */
-    public int getReserchItem01() {
-        return reserchItem01;
+    @CheckForNull
+    public int getResearchItem01() {
+        return researchItem01;
     }
 
     /**
      * 素点項目のsetメソッドです。
-     *
-     * @param reserchItem01 素点項目
+     * 
+     * @param researchItem01 素点項目
      */
-    public void setReserchItem01(int reserchItem01) {
-        this.reserchItem01 = reserchItem01;
+    public void setResearchItem01(int researchItem01) {
+        this.researchItem01 = researchItem01;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT5212NinteichosahyoKihonChosaScoreItemEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5212NinteichosahyoKihonChosaScoreItemEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -217,18 +220,18 @@ public class DbT5212NinteichosahyoKihonChosaScoreItemEntity extends DbTableEntit
         this.ninteichosaRirekiNo = entity.ninteichosaRirekiNo;
         this.remban = entity.remban;
         this.koroshoIfShikibetsuCode = entity.koroshoIfShikibetsuCode;
-        this.reserchItem01 = entity.reserchItem01;
+        this.researchItem01 = entity.researchItem01;
     }
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, ninteichosaRirekiNo, remban, koroshoIfShikibetsuCode, reserchItem01);
+        return super.toMd5(shinseishoKanriNo, ninteichosaRirekiNo, remban, koroshoIfShikibetsuCode, researchItem01);
     }
 
 // </editor-fold>
+
 }

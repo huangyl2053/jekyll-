@@ -22,7 +22,7 @@ public final class DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator {
     public static final FlexibleYear DEFAULT_対象年度 = new FlexibleYear("1990");
     public static final HokenshaNo DEFAULT_保険者番号 = new HokenshaNo("1");
     public static final RString DEFAULT_支給申請書整理番号 = new RString("Data");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 0;
     public static final RString DEFAULT_自己負担額証明書整理番号 = new RString("Data");
     public static final RString DEFAULT_保険制度コード = new RString("Data");
     public static final RString DEFAULT_国保_被保険者証記号 = new RString("Data");

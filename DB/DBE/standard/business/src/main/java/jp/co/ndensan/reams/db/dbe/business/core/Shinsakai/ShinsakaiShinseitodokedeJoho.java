@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai;
 
 import java.io.Serializable;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.IShinseitodokedeJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.IShinseitodokedeJoho;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.IShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -99,7 +99,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      */
     @Override
     public RString get申請届出者続柄コード() {
-        return entity.getShinseiTodokedeshaTsuzukigaraCode();
+        return entity.getShinseiTodokedeshaTsuzukigara();
     }
 
     /**
@@ -323,7 +323,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
         @Override
         public Builder setShinseiTodokedeshaTsuzukigaraCode(RString todokedeshaTsuzukigaraCode) {
             Objects.requireNonNull(todokedeshaTsuzukigaraCode);
-            this.entity.setShinseiTodokedeshaTsuzukigaraCode(todokedeshaTsuzukigaraCode);
+            this.entity.setShinseiTodokedeshaTsuzukigara(todokedeshaTsuzukigaraCode);
             return this;
         }
 

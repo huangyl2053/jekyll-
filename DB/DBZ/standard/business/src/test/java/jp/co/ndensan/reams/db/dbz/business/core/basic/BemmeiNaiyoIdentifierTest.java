@@ -36,7 +36,7 @@ public class BemmeiNaiyoIdentifierTest extends DbzTestBase {
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_証記載保険者番号;
+//        主キー名1 = DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_証記載保険者番号;
         主キー名2 = DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_識別コード;
     }
 
@@ -44,7 +44,8 @@ public class BemmeiNaiyoIdentifierTest extends DbzTestBase {
 
         @Test
         public void シリアライズできる() {
-            BemmeiNaiyoIdentifier sut = new BemmeiNaiyoIdentifier(主キー名1, 主キー名2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
+//            BemmeiNaiyoIdentifier sut = new BemmeiNaiyoIdentifier(主キー名1, 主キー名2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
+            BemmeiNaiyoIdentifier sut = new BemmeiNaiyoIdentifier(主キー名2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
             assertThat(sut, is(IsSerializable.serializable()));
         }
     }

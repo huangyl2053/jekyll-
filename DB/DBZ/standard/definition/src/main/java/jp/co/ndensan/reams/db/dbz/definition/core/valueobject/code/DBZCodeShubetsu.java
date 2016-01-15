@@ -32,7 +32,7 @@ public enum DBZCodeShubetsu implements ICodeShubetsu {
     /**
      * getCodeShubetsuを取得します。
      *
-     * @return　codeShubetsu
+     * @return codeShubetsu
      */
     @Override
     public CodeShubetsu getCodeShubetsu() {
@@ -42,7 +42,7 @@ public enum DBZCodeShubetsu implements ICodeShubetsu {
     /**
      * getSubGyomuCodeを取得します。
      *
-     * @return　subGyomuCode
+     * @return subGyomuCode
      */
     @Override
     public SubGyomuCode getSubGyomuCode() {

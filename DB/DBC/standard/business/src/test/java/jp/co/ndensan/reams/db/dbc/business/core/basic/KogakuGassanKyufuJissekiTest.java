@@ -37,7 +37,7 @@ public class KogakuGassanKyufuJissekiTest extends DbcTestBase {
     private static HihokenshaNo 主キー名2;
     private static RString 主キー名3;
     private static RString 主キー名4;
-    private static Decimal 主キー名5;
+//    private static Decimal 主キー名5;
 
     @BeforeClass
     public static void setUpClass() {
@@ -46,7 +46,7 @@ public class KogakuGassanKyufuJissekiTest extends DbcTestBase {
         主キー名2 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_被保険者番号;
         主キー名3 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_支給申請書整理番号;
         主キー名4 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_整理番号;
-        主キー名5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
+//        主キー名5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -63,24 +63,24 @@ public class KogakuGassanKyufuJissekiTest extends DbcTestBase {
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KogakuGassanKyufuJisseki(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5);
+            sut = new KogakuGassanKyufuJisseki(null, 主キー名2, 主キー名3, 主キー名4);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KogakuGassanKyufuJisseki(主キー名1, null, 主キー名3, 主キー名4, 主キー名5);
+            sut = new KogakuGassanKyufuJisseki(主キー名1, null, 主キー名3, 主キー名4);
         }
 
         @Test
         public void 指定したキーが保持するDbT3075KogakuGassanKyufuJissekiEntityにセットされている() {
-            sut = new KogakuGassanKyufuJisseki(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5);
+            sut = new KogakuGassanKyufuJisseki(主キー名1, 主キー名2, 主キー名3, 主キー名4);
             assertThat(sut.get交換情報識別番号(), is(主キー名1));
             assertThat(sut.get被保険者番号(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するKogakuGassanKyufuJissekiIdentifierにセットされている() {
-            sut = new KogakuGassanKyufuJisseki(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5);
+            sut = new KogakuGassanKyufuJisseki(主キー名1, 主キー名2, 主キー名3, 主キー名4);
             assertThat(sut.identifier().get交換情報識別番号(), is(主キー名1));
             assertThat(sut.identifier().get被保険者番号(), is(主キー名2));
         }
@@ -145,10 +145,10 @@ public class KogakuGassanKyufuJissekiTest extends DbcTestBase {
             assertThat(sut.get整理番号(), is(KogakuGassanKyufuJissekiEntity.getSeiriNo()));
         }
 
-        @Test
-        public void get履歴番号は_entityが持つ履歴番号を返す() {
-            assertThat(sut.get履歴番号(), is(KogakuGassanKyufuJissekiEntity.getRirekiNo()));
-        }
+//        @Test
+//        public void get履歴番号は_entityが持つ履歴番号を返す() {
+//            assertThat(sut.get履歴番号(), is(KogakuGassanKyufuJissekiEntity.getRirekiNo()));
+//        }
 
         @Test
         public void get自己負担額証明書整理番号は_entityが持つ自己負担額証明書整理番号を返す() {

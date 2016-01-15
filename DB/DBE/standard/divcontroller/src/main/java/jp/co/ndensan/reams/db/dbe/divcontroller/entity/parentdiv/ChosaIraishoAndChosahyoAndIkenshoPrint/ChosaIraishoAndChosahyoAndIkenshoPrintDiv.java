@@ -7,9 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.ChosaIraishoAn
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.chosaitakusakiandchosaininput.IChosaItakusakiAndChosainInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hokenshaList.HokenshaListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonPrint;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
@@ -35,7 +34,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("ccdHokenshaList")
-    private HokenshaListDiv ccdHokenshaList;
+    private IHokenshaListDiv ccdHokenshaList;
     @JsonProperty("InsatsuTaishoShitei")
     private InsatsuTaishoShiteiDiv InsatsuTaishoShitei;
     @JsonProperty("TeishutsuKigen")

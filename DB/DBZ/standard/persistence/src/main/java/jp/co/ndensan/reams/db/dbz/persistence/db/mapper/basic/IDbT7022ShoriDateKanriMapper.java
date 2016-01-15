@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 public interface IDbT7022ShoriDateKanriMapper {
 
     /**
-     * {@link DbT7022ShoriDateKanriEntity}を取得します。
+     * {@link  DbT7022ShoriDateKanriEntity}を取得します。
      *
-     * @return {@link DbT7022ShoriDateKanriEntity}
+     * @return {@link  DbT7022ShoriDateKanriEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7022ShoriDateKanriEntity getEntity();

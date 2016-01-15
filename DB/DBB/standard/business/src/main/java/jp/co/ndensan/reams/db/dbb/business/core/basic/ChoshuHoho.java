@@ -36,7 +36,7 @@ public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHoh
      */
     public ChoshuHoho(FlexibleYear 賦課年度,
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -103,7 +103,7 @@ public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHoh
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -374,7 +374,7 @@ public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHoh
      * @return 特別徴収停止日時
      */
     public YMDHMS get特別徴収停止日時() {
-        return entity.getTokuchoTeishiTimestamp();
+        return entity.getTokuchoTeishiNichiji();
     }
 
     /**

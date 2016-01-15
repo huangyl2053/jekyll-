@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
  */
 public interface IDbT1006KyokaisoGaitoshaMapper {
 
-    /* * {@linkDbT1003TashichosonJushochiTokureiEntity}を取得します。
+    /** {@link DbT1003TashichosonJushochiTokureiEntity}を取得します。
      *
-     * @return {@linkDbT1003TashichosonJushochiTokureiEntity}
+     * @return {@link DbT1003TashichosonJushochiTokureiEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT1006KyokaisoGaitoshaEntity getEntity();

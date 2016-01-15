@@ -15,14 +15,16 @@ import jp.co.ndensan.reams.db.dbe.business.core.syujii.koseishichosonmaster.Kose
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.IryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
+import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -47,7 +49,7 @@ public class ShujiiIryoKikanJoho extends ParentModelBase<ShujiiIryoKikanJohoIden
      * @param 主治医医療機関コード 主治医医療機関コード
      */
     public ShujiiIryoKikanJoho(LasdecCode 市町村コード,
-            RString 主治医医療機関コード) {
+            ShujiiIryokikanCode 主治医医療機関コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
         this.entity = new DbT5911ShujiiIryoKikanJohoEntity();
@@ -117,7 +119,7 @@ public class ShujiiIryoKikanJoho extends ParentModelBase<ShujiiIryoKikanJohoIden
      *
      * @return 主治医医療機関コード
      */
-    public RString get主治医医療機関コード() {
+    public ShujiiIryokikanCode get主治医医療機関コード() {
         return entity.getShujiiIryokikanCode();
     }
 
@@ -189,7 +191,7 @@ public class ShujiiIryoKikanJoho extends ParentModelBase<ShujiiIryoKikanJohoIden
      *
      * @return 代表者名
      */
-    public RString get代表者名() {
+    public AtenaMeisho get代表者名() {
         return entity.getDaihyoshaName();
     }
 

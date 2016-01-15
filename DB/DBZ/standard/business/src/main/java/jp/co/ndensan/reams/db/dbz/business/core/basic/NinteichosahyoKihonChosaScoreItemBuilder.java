@@ -93,7 +93,7 @@ public class NinteichosahyoKihonChosaScoreItemBuilder {
      */
     public NinteichosahyoKihonChosaScoreItemBuilder set素点項目(int 素点項目) {
         requireNonNull(素点項目, UrSystemErrorMessages.値がnull.getReplacedMessage("素点項目"));
-        entity.setReserchItem01(素点項目);
+        entity.setResearchItem01(素点項目);
         return this;
     }
 

@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7211GaibuRenkeiDataoutputJo
  */
 public interface IDbT7211GaibuRenkeiDataoutputJohoMapper {
 
-    /* * {@linkDbT7211GaibuRenkeiDataoutputJohoEntity}を取得します。
+    /** {@link DbT7211GaibuRenkeiDataoutputJohoEntity}を取得します。
      *
-     * @return {@linkDbT7211GaibuRenkeiDataoutputJoholEntity}
+     * @return {@link DbT7211GaibuRenkeiDataoutputJoholEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7211GaibuRenkeiDataoutputJohoEntity getEntity();

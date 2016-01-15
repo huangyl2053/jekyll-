@@ -1,6 +1,8 @@
-﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
-hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 kanriKubun,varchar,RString,,,,,管理区分,A
-taishoNendo,UDD012YSeireki,FlexibleYear,,,,,対象年度,A
 rirekiNo,int2,int,,,,,履歴番号,A
+taishoNendo,UDD012YSeireki,FlexibleYear,,,,,対象年度,A
 mino_JikoShometsuGengaku,numeric,Decimal,,,,,未納・時効消滅減額,A
+nofugaku,numeric,Decimal,,,,,納付額,A
+nenFukagaku,numeric,Decimal,,,,,年賦課額,A

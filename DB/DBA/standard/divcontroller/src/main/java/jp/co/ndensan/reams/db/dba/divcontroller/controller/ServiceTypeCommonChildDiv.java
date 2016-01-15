@@ -5,12 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.servicetype.ServiceTypeModel;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ServiceTypeCommonChildDiv.ServiceTypeCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ServiceTypeCommonChildDiv.ServiceTypeCommonChildHandler;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShurui;
-import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.kaigoserviceshurui.KaigoServiceShuruiMapperParameter;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui.KaigoServiceShuruiMapperParameter;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
@@ -44,8 +45,10 @@ public class ServiceTypeCommonChildDiv {
      */
     public ResponseData<ServiceTypeCommonChildDivDiv> onLoad(ServiceTypeCommonChildDivDiv div) {
         ServiceTypeModel serviceType = DataPassingConverter.deserialize(div.getServiceType(), ServiceTypeModel.class);
-        List<KaigoServiceShurui> list = service.getServiceTypeList(KaigoServiceShuruiMapperParameter.createSelectByKeyParam(
+        KaigoServiceShurui kaigoServiceShurui = service.get介護サービス種類(KaigoServiceShuruiMapperParameter.createSelectByKeyParam(
                 new KaigoServiceShuruiCode(serviceType.getサービス種類コード()), new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString())));
+        List<KaigoServiceShurui> list = new ArrayList<>();
+        list.add(kaigoServiceShurui);
         getHandler(div).initialize(list, new KaigoServiceShuruiCode(serviceType.getサービス種類コード()));
         return ResponseData.of(div).respond();
     }

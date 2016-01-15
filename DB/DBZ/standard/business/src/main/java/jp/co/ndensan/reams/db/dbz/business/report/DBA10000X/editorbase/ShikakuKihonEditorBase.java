@@ -6,16 +6,16 @@
 package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.config.kyotsutokei.ChohyoKyotsuJushoEditConfig;
+import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.jushohenshu.ChohyoKyotsuJushoEditConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoJushoEditConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoPrintConfig;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshashoModel;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.IHihokenshashoCommonEditData;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.GunNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.HowToEditJusho;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.KatagakiPrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.ShichosonNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.TodofukenNamePrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.GunNamePrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HowToEditJusho;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.KatagakiPrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.ShichosonNamePrint;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TodofukenNamePrint;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
@@ -101,6 +101,7 @@ public class ShikakuKihonEditorBase {
             case そのまま:
                 source.setHihokenshanno(hihoNo);
                 break;
+            default:
         }
     }
 

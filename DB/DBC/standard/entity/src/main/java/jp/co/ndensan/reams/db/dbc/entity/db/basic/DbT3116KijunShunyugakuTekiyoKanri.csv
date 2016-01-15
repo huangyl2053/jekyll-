@@ -1,7 +1,7 @@
 ﻿setaiCode,UDD051SetaiCode,SetaiCode,,,,,世帯コード,A
 nendo,UDD012YSeireki,FlexibleYear,,,,,年度,A
 rirekiNo,int2,int,,,,,履歴番号,A
-hihokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,被保険者番号,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 kotekiNenkinShunyugaku,numeric,Decimal,,,,,公的年金収入額,A
 kyuyoShunyugaku,numeric,Decimal,,,,,給与収入額,A
 sonotaShunyugaku,numeric,Decimal,,,,,その他の収入額,A

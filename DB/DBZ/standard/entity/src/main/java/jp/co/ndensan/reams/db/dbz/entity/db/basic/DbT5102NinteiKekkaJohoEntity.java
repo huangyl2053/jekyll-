@@ -1,23 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
+import java.util.UUID;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 要介護認定結果情報テーブルのエンティティクラスです。
  */
-public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102NinteiKekkaJohoEntity> implements IDbAccessable, INinteiKekkaJohoEntity {
+public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102NinteiKekkaJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
@@ -39,14 +39,14 @@ public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102Ninte
     private FlexibleDate nijiHanteiNinteiYukoKaishiYMD;
     private FlexibleDate nijiHanteiNinteiYukoShuryoYMD;
     private FlexibleDate shinsakaiShiryoSakuseiYMD;
-    private int shinsakaiKaisaiNo;
+    private RString shinsakaiKaisaiNo;
     private RString shinsakaiIken;
-    private RString ichijiHnateiKekkaHenkoRiyu;
+    private RString ichijiHanteiKekkaHenkoRiyu;
     private Code yokaigoJotaizoReiCode;
     private RString ninteishinsakaiIkenShurui;
     private RString shinsakaiMemo;
     private Code nijiHanteiKekkaInputHoho;
-    private FlexibleDate niniHanteiKekkaInputYMD;
+    private FlexibleDate nijiHanteiKekkaInputYMD;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -234,7 +234,7 @@ public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102Ninte
      * @return 介護認定審査会開催番号
      */
     @CheckForNull
-    public int getShinsakaiKaisaiNo() {
+    public RString getShinsakaiKaisaiNo() {
         return shinsakaiKaisaiNo;
     }
 
@@ -245,7 +245,7 @@ public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102Ninte
      *
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      */
-    public void setShinsakaiKaisaiNo(int shinsakaiKaisaiNo) {
+    public void setShinsakaiKaisaiNo(RString shinsakaiKaisaiNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
     }
 
@@ -274,17 +274,17 @@ public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102Ninte
      * @return 一次判定結果変更理由
      */
     @CheckForNull
-    public RString getIchijiHnateiKekkaHenkoRiyu() {
-        return ichijiHnateiKekkaHenkoRiyu;
+    public RString getIchijiHanteiKekkaHenkoRiyu() {
+        return ichijiHanteiKekkaHenkoRiyu;
     }
 
     /**
      * 一次判定結果変更理由のsetメソッドです。
      *
-     * @param ichijiHnateiKekkaHenkoRiyu 一次判定結果変更理由
+     * @param ichijiHanteiKekkaHenkoRiyu 一次判定結果変更理由
      */
-    public void setIchijiHnateiKekkaHenkoRiyu(RString ichijiHnateiKekkaHenkoRiyu) {
-        this.ichijiHnateiKekkaHenkoRiyu = ichijiHnateiKekkaHenkoRiyu;
+    public void setIchijiHanteiKekkaHenkoRiyu(RString ichijiHanteiKekkaHenkoRiyu) {
+        this.ichijiHanteiKekkaHenkoRiyu = ichijiHanteiKekkaHenkoRiyu;
     }
 
     /**
@@ -381,25 +381,24 @@ public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102Ninte
      * @return 二次判定結果入力年月日
      */
     @CheckForNull
-    public FlexibleDate getNiniHanteiKekkaInputYMD() {
-        return niniHanteiKekkaInputYMD;
+    public FlexibleDate getNijiHanteiKekkaInputYMD() {
+        return nijiHanteiKekkaInputYMD;
     }
 
     /**
      * 二次判定結果入力年月日のsetメソッドです。
      *
-     * @param niniHanteiKekkaInputYMD 二次判定結果入力年月日
+     * @param nijiHanteiKekkaInputYMD 二次判定結果入力年月日
      */
-    public void setNiniHanteiKekkaInputYMD(FlexibleDate niniHanteiKekkaInputYMD) {
-        this.niniHanteiKekkaInputYMD = niniHanteiKekkaInputYMD;
+    public void setNijiHanteiKekkaInputYMD(FlexibleDate nijiHanteiKekkaInputYMD) {
+        this.nijiHanteiKekkaInputYMD = nijiHanteiKekkaInputYMD;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT5102NinteiKekkaJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT5102NinteiKekkaJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT5102NinteiKekkaJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5102NinteiKekkaJohoEntity other) {
@@ -426,12 +425,12 @@ public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102Ninte
         this.shinsakaiShiryoSakuseiYMD = entity.shinsakaiShiryoSakuseiYMD;
         this.shinsakaiKaisaiNo = entity.shinsakaiKaisaiNo;
         this.shinsakaiIken = entity.shinsakaiIken;
-        this.ichijiHnateiKekkaHenkoRiyu = entity.ichijiHnateiKekkaHenkoRiyu;
+        this.ichijiHanteiKekkaHenkoRiyu = entity.ichijiHanteiKekkaHenkoRiyu;
         this.yokaigoJotaizoReiCode = entity.yokaigoJotaizoReiCode;
         this.ninteishinsakaiIkenShurui = entity.ninteishinsakaiIkenShurui;
         this.shinsakaiMemo = entity.shinsakaiMemo;
         this.nijiHanteiKekkaInputHoho = entity.nijiHanteiKekkaInputHoho;
-        this.niniHanteiKekkaInputYMD = entity.niniHanteiKekkaInputYMD;
+        this.nijiHanteiKekkaInputYMD = entity.nijiHanteiKekkaInputYMD;
     }
 
     /**
@@ -441,7 +440,7 @@ public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102Ninte
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, nijiHanteiYMD, nijiHanteiYokaigoJotaiKubunCode, nijiHanteiNinteiYukoKikan, nijiHanteiNinteiYukoKaishiYMD, nijiHanteiNinteiYukoShuryoYMD, shinsakaiShiryoSakuseiYMD, shinsakaiKaisaiNo, shinsakaiIken, ichijiHnateiKekkaHenkoRiyu, yokaigoJotaizoReiCode, ninteishinsakaiIkenShurui, shinsakaiMemo, nijiHanteiKekkaInputHoho, niniHanteiKekkaInputYMD);
+        return super.toMd5(shinseishoKanriNo, nijiHanteiYMD, nijiHanteiYokaigoJotaiKubunCode, nijiHanteiNinteiYukoKikan, nijiHanteiNinteiYukoKaishiYMD, nijiHanteiNinteiYukoShuryoYMD, shinsakaiShiryoSakuseiYMD, shinsakaiKaisaiNo, shinsakaiIken, ichijiHanteiKekkaHenkoRiyu, yokaigoJotaizoReiCode, ninteishinsakaiIkenShurui, shinsakaiMemo, nijiHanteiKekkaInputHoho, nijiHanteiKekkaInputYMD);
     }
 
 // </editor-fold>

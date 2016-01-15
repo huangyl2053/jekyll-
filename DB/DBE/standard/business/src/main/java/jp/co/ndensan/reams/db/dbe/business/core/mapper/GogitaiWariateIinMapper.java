@@ -9,10 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.Gogitai.GogitaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.core.Gogitai.GogitaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.core.Gogitai.GogitaiWariateIinList;
-import jp.co.ndensan.reams.db.dbe.business.core.Gogitai.GogitaichoKubun;
-import jp.co.ndensan.reams.db.dbe.business.core.ShinsainKubun;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIin;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5107GogitaiWariateIinJohoEntity;
+//import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5107GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.GogitaiWariateShinsakaiIinEntity;
 
 /**
@@ -59,26 +56,27 @@ public final class GogitaiWariateIinMapper {
             return null;
         }
 
-        return new GogitaiWariateIin(
-                create審査会委員(合議体割当委員Entity),
-                create審査員区分(合議体割当委員Entity),
-                create合議体長区分(合議体割当委員Entity),
-                create合議体情報(合議体割当委員Entity));
+//        return new GogitaiWariateIin(
+//                create審査会委員(合議体割当委員Entity),
+//                create審査員区分(合議体割当委員Entity),
+//                create合議体長区分(合議体割当委員Entity),
+//                create合議体情報(合議体割当委員Entity));
+        return null;
     }
 
-    private static ShinsakaiIin create審査会委員(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
-        return ShinsakaiIinMapper.to審査会委員(合議体割当委員Entity.get審査会委員Entity());
-    }
+//    private static ShinsakaiIin create審査会委員(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
+//        return ShinsakaiIinMapper.to審査会委員(合議体割当委員Entity.get審査会委員Entity());
+//    }
 
-    private static ShinsainKubun create審査員区分(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
-        return new ShinsainKubun(合議体割当委員Entity.get合議体割当Entity().getShinsainKubunCode(),
-                合議体割当委員Entity.get合議体割当Entity().getShinsainKubunCodeMeisho(), 合議体割当委員Entity.get合議体割当Entity().getShinsainKubunCodeRyakusho());
-    }
-
-    private static GogitaichoKubun create合議体長区分(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
-        return new GogitaichoKubun(合議体割当委員Entity.get合議体割当Entity().getGogitaichoKubunCode(),
-                合議体割当委員Entity.get合議体割当Entity().getGogitaichoKubunCodeMeisho(), 合議体割当委員Entity.get合議体割当Entity().getGogitaichoKubunCodeRyakusho());
-    }
+//    private static ShinsainKubun create審査員区分(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
+//        return new ShinsainKubun(合議体割当委員Entity.get合議体割当Entity().getShinsainKubunCode(),
+//                合議体割当委員Entity.get合議体割当Entity().getShinsainKubunCodeMeisho(), 合議体割当委員Entity.get合議体割当Entity().getShinsainKubunCodeRyakusho());
+//    }
+//
+//    private static GogitaichoKubun create合議体長区分(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
+//        return new GogitaichoKubun(合議体割当委員Entity.get合議体割当Entity().getGogitaichoKubunCode(),
+//                合議体割当委員Entity.get合議体割当Entity().getGogitaichoKubunCodeMeisho(), 合議体割当委員Entity.get合議体割当Entity().getGogitaichoKubunCodeRyakusho());
+//    }
 
     private static GogitaiDetail create合議体情報(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
         return GogitaiDetailMapper.to合議体情報(合議体割当委員Entity.get合議体情報Entity(),
@@ -92,17 +90,17 @@ public final class GogitaiWariateIinMapper {
      * @param 合議体割当委員List 合議体
      * @return 合議体割当EntityList
      */
-    public static List<DbT5107GogitaiWariateIinJohoEntity> to合議体割当委員EntityList(GogitaiWariateIinList 合議体割当委員List) {
-        if (合議体割当委員List == null) {
-            return null;
-        }
-
-        List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員情報EntityList = new ArrayList<>();
-        for (GogitaiWariateIin 合議体割当委員 : 合議体割当委員List) {
-            合議体割当委員情報EntityList.add(to合議体割当委員Entity(合議体割当委員));
-        }
-        return 合議体割当委員情報EntityList;
-    }
+//    public static List<DbT5107GogitaiWariateIinJohoEntity> to合議体割当委員EntityList(GogitaiWariateIinList 合議体割当委員List) {
+//        if (合議体割当委員List == null) {
+//            return null;
+//        }
+//
+//        List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員情報EntityList = new ArrayList<>();
+//        for (GogitaiWariateIin 合議体割当委員 : 合議体割当委員List) {
+//            合議体割当委員情報EntityList.add(to合議体割当委員Entity(合議体割当委員));
+//        }
+//        return 合議体割当委員情報EntityList;
+//    }
 
     /**
      * 合議体割当の情報を、合議体割当Entityにマッピングします。<br/>
@@ -111,19 +109,19 @@ public final class GogitaiWariateIinMapper {
      * @param 合議体割当委員 合議体割当委員
      * @return 合議体割当Entity
      */
-    public static DbT5107GogitaiWariateIinJohoEntity to合議体割当委員Entity(GogitaiWariateIin 合議体割当委員) {
-        if (合議体割当委員 == null) {
-            return null;
-        }
-
-        DbT5107GogitaiWariateIinJohoEntity entity = new DbT5107GogitaiWariateIinJohoEntity();
-        entity.setGogitaiNo(合議体割当委員.get合議体情報().get合議体番号().value());
-        entity.setShinsakaiIinCode(合議体割当委員.get委員情報().get審査会委員コード().value());
-        entity.setGogitaiYukoKikanKaishiYMD(合議体割当委員.get合議体情報().get有効期間開始年月日().value());
-        entity.setGogitaiYukoKikanShuryoYMD(合議体割当委員.get合議体情報().get有効期間終了年月日());
-        entity.setGogitaichoKubunCode(合議体割当委員.get合議体長区分().getGogitaichoKubunCode().asCode());
-        entity.setShinsainKubunCode(合議体割当委員.get認定調査員区分().getShinsainKubunCode().asCode());
-        return entity;
-    }
+//    public static DbT5107GogitaiWariateIinJohoEntity to合議体割当委員Entity(GogitaiWariateIin 合議体割当委員) {
+//        if (合議体割当委員 == null) {
+//            return null;
+//        }
+//
+//        DbT5107GogitaiWariateIinJohoEntity entity = new DbT5107GogitaiWariateIinJohoEntity();
+//        entity.setGogitaiNo(合議体割当委員.get合議体情報().get合議体番号().value());
+//        entity.setShinsakaiIinCode(合議体割当委員.get委員情報().get審査会委員コード().value());
+//        entity.setGogitaiYukoKikanKaishiYMD(合議体割当委員.get合議体情報().get有効期間開始年月日().value());
+//        entity.setGogitaiYukoKikanShuryoYMD(合議体割当委員.get合議体情報().get有効期間終了年月日());
+//        entity.setGogitaichoKubunCode(合議体割当委員.get合議体長区分().getGogitaichoKubunCode().asCode());
+//        entity.setShinsainKubunCode(合議体割当委員.get認定調査員区分().getShinsainKubunCode().asCode());
+//        return entity;
+//    }
 
 }

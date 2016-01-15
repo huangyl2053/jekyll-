@@ -1,4 +1,4 @@
-﻿var DBZ;
+var DBZ;
 (function (DBZ) {
     (function (ShisetsuJoho) {
         var ModeController = (function () {
@@ -48,11 +48,11 @@
                     this.controls = controls;
                 }
                 台帳種別.prototype.台帳種別表示する = function () {
-                    this.controls.ddlDaichoShubetsu().displayNone = false;
+                    this.controls.ddlDaichoShubetsu().visible = true;
                 };
 
                 台帳種別.prototype.台帳種別非表示する = function () {
-                    this.controls.ddlDaichoShubetsu().displayNone = true;
+                    this.controls.ddlDaichoShubetsu().visible = false;
                 };
                 return 台帳種別;
             })();
@@ -63,11 +63,21 @@
                     this.controls = controls;
                 }
                 施設種類.prototype.施設種類を表示する = function () {
-                    this.controls.radShisetsuShurui().displayNone = false;
+                    this.controls.radJigyosha().displayNone = false;
+                    this.controls.radOther().displayNone = false;
+                    this.controls.radJyogai().displayNone = false;
                 };
 
-                施設種類.prototype.施設種類を表示しない = function () {
-                    this.controls.radShisetsuShurui().displayNone = true;
+                施設種類.prototype.施設種類を非表示する = function () {
+                    this.controls.radJigyosha().displayNone = true;
+                    this.controls.radOther().displayNone = true;
+                    this.controls.radJyogai().displayNone = true;
+                };
+
+                施設種類.prototype.介護保険特例者表示 = function () {
+                    this.controls.radJigyosha().displayNone = false;
+                    this.controls.radOther().displayNone = false;
+                    this.controls.radJyogai().displayNone = true;
                 };
                 return 施設種類;
             })();

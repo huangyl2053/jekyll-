@@ -32,7 +32,7 @@ public class KogakuGassanKyufuJissekiBuilderTest extends DbcTestBase {
     private static HihokenshaNo 主キー名2;
     private static RString 主キー名3;
     private static RString 主キー名4;
-    private static Decimal 主キー名5;
+//    private static Decimal 主キー名5;
 
     @BeforeClass
     public static void setUpClass() {
@@ -41,7 +41,7 @@ public class KogakuGassanKyufuJissekiBuilderTest extends DbcTestBase {
         主キー名2 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_被保険者番号;
         主キー名3 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_支給申請書整理番号;
         主キー名4 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_整理番号;
-        主キー名5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
+//        主キー名5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class getterSetterTest extends DbcTestBase {
@@ -85,11 +85,11 @@ public class KogakuGassanKyufuJissekiBuilderTest extends DbcTestBase {
             assertThat(business.get整理番号(), is(DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_整理番号));
         }
 
-        @Test
-        public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
-            business = sut.set履歴番号(DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号).build();
-            assertThat(business.get履歴番号(), is(DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号));
-        }
+//        @Test
+//        public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
+//            business = sut.set履歴番号(DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号).build();
+//            assertThat(business.get履歴番号(), is(DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号));
+//        }
 
         @Test
         public void 戻り値の自己負担額証明書整理番号は_設定した値と同じ自己負担額証明書整理番号を返す() {

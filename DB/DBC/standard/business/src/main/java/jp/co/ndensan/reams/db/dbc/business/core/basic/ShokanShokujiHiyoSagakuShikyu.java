@@ -38,34 +38,34 @@ extends ModelBase<ShokanShokujiHiyoSagakuShikyuIdentifier,
      * @param 整理番号 整理番号
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
-     * @param 履歴番号 履歴番号
+// * @param 履歴番号 履歴番号
      */
     public ShokanShokujiHiyoSagakuShikyu(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             JigyoshaNo 事業者番号,
-            RString 様式番号,
-            Decimal 履歴番号) {
+            RString 様式番号) {
+//            Decimal 履歴番号
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3044ShokanShokujiHiyoSagakuShikyuEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
         this.entity.setSeiriNp(整理番号);
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
-        this.entity.setRirekiNo(履歴番号);
+//        this.entity.setRirekiNo(履歴番号);
         this.id = new ShokanShokujiHiyoSagakuShikyuIdentifier(
                 被保険者番号,
                 サービス提供年月,
                 整理番号,
                 事業者番号,
-                様式番号,
-                履歴番号
+                様式番号
+        //                履歴番号
         );
     }
 
@@ -82,8 +82,8 @@ extends ModelBase<ShokanShokujiHiyoSagakuShikyuIdentifier,
                 entity.getServiceTeikyoYM(),
                 entity.getSeiriNp(),
                 entity.getJigyoshaNo(),
-                entity.getYoshikiNo(),
-                entity.getRirekiNo());
+                entity.getYoshikiNo());
+//                entity.getRirekiNo());
     }
 
     /**
@@ -151,9 +151,9 @@ extends ModelBase<ShokanShokujiHiyoSagakuShikyuIdentifier,
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
-        return entity.getRirekiNo();
-    }
+//    public Decimal get履歴番号() {
+//        return entity.getRirekiNo();
+//    }
 
     /**
      * 差額金額を返します。

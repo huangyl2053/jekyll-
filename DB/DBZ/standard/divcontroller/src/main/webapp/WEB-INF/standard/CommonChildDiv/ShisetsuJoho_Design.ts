@@ -8,10 +8,6 @@ module DBZ {
 
         export class Events {
 
-            public static onChange_radShisetsuShurui(): string {
-                return "onChange_radShisetsuShurui";
-            }
-
         }
 
         export class Controls {
@@ -41,8 +37,16 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlDaichoShubetsu"));
             }
 
-            public radShisetsuShurui(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radShisetsuShurui"));
+            public radJigyosha(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radJigyosha"));
+            }
+
+            public radOther(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radOther"));
+            }
+
+            public radJyogai(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radJyogai"));
             }
 
             public txtShisetsuCode(): UZA.TextBoxCode {

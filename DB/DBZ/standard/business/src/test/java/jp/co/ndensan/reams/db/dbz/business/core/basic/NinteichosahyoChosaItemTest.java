@@ -4,10 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5211NinteichosahyoChosaItemEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -128,7 +128,7 @@ public class NinteichosahyoChosaItemTest extends DbzTestBase {
 
         @Test
         public void get調査項目は_entityが持つ調査項目を返す() {
-            assertThat(sut.get調査項目(), is(NinteichosahyoChosaItemEntity.getReserchItem()));
+            assertThat(sut.get調査項目(), is(NinteichosahyoChosaItemEntity.getResearchItem()));
         }
     }
 

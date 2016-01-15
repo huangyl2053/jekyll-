@@ -166,7 +166,7 @@ public class YoboKeikakuJikoSakuseiMeisaiBuilder {
     /**
      * 種類限度超過単位数・日数を設定します。
      *
-     * @param 種類限度超過単位数・日数 種類限度超過単位数・日数
+     * @param 種類限度超過単位数_日数 種類限度超過単位数・日数
      * @return {@link YoboKeikakuJikoSakuseiMeisaiBuilder}
      */
     public YoboKeikakuJikoSakuseiMeisaiBuilder set種類限度超過単位数_日数(Decimal 種類限度超過単位数_日数) {
@@ -178,7 +178,7 @@ public class YoboKeikakuJikoSakuseiMeisaiBuilder {
     /**
      * 区分限度内単位数・日数を設定します。
      *
-     * @param 区分限度内単位数・日数 区分限度内単位数・日数
+     * @param 区分限度内単位数_日数 区分限度内単位数・日数
      * @return {@link YoboKeikakuJikoSakuseiMeisaiBuilder}
      */
     public YoboKeikakuJikoSakuseiMeisaiBuilder set区分限度内単位数_日数(Decimal 区分限度内単位数_日数) {
@@ -190,7 +190,7 @@ public class YoboKeikakuJikoSakuseiMeisaiBuilder {
     /**
      * 区分限度超過単位数・日数を設定します。
      *
-     * @param 区分限度超過単位数・日数 区分限度超過単位数・日数
+     * @param 区分限度超過単位数_日数 区分限度超過単位数・日数
      * @return {@link YoboKeikakuJikoSakuseiMeisaiBuilder}
      */
     public YoboKeikakuJikoSakuseiMeisaiBuilder set区分限度超過単位数_日数(Decimal 区分限度超過単位数_日数) {

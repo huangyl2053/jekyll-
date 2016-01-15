@@ -31,12 +31,12 @@ public class NijiYoboKihonCheckListBuilderTest extends DbcTestBase {
     private static ShikibetsuCode 識別コード;
     private static HihokenshaNo 被保険者番号;
     private static FlexibleDate 受付年月日;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        識別コード = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード;
+//        識別コード = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード;
         被保険者番号 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
         受付年月日 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_受付年月日;
         履歴番号 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_履歴番号;
@@ -50,7 +50,7 @@ public class NijiYoboKihonCheckListBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboKihonCheckListEntity = new DbT3101NijiYoboKihonCheckListEntity();
-            NijiYoboKihonCheckListEntity.setShikibetsuCode(識別コード);
+//            NijiYoboKihonCheckListEntity.setShikibetsuCode(識別コード);
             NijiYoboKihonCheckListEntity.setHihokenshaNo(被保険者番号);
             NijiYoboKihonCheckListEntity.setUketsukeYMD(受付年月日);
             NijiYoboKihonCheckListEntity.setRirekiNo(履歴番号);
@@ -61,11 +61,11 @@ public class NijiYoboKihonCheckListBuilderTest extends DbcTestBase {
         }
 //TODO Key項目のテストメソッドは削除して下さい。
 
-        @Test
-        public void 戻り値の識別コードは_設定した値と同じ識別コードを返す() {
-            business = sut.set識別コード(DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード).build();
-            assertThat(business.get識別コード(), is(DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード));
-        }
+//        @Test
+//        public void 戻り値の識別コードは_設定した値と同じ識別コードを返す() {
+//            business = sut.set識別コード(DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード).build();
+//            assertThat(business.get識別コード(), is(DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード));
+//        }
 
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {

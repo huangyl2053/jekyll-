@@ -6,8 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 調査地区グループマスタテーブルの項目定義クラスです。
  */
 public enum DbT5225ChosaChikuGroup implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -73,7 +72,7 @@ public enum DbT5225ChosaChikuGroup implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -82,7 +81,7 @@ public enum DbT5225ChosaChikuGroup implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

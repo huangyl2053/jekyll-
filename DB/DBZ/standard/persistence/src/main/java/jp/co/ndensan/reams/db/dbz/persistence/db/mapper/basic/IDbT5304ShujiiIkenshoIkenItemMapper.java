@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEn
 public interface IDbT5304ShujiiIkenshoIkenItemMapper {
 
     /**
-     * {@link DbT5304ShujiiIkenshoIkenItemEntity}を取得します。
+     * {@link  DbT5304ShujiiIkenshoIkenItemEntity}を取得します。
      *
-     * @return {@link DbT5304ShujiiIkenshoIkenItemEntity}
+     * @return {@link  DbT5304ShujiiIkenshoIkenItemEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT5304ShujiiIkenshoIkenItemEntity getEntity();

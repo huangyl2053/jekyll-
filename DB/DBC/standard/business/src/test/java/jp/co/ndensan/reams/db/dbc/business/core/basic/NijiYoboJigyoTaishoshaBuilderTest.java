@@ -27,14 +27,14 @@ public class NijiYoboJigyoTaishoshaBuilderTest extends DbcTestBase {
     private static DbT3100NijiYoboJigyoTaishoshaEntity NijiYoboJigyoTaishoshaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static HokenshaNo 証記載保険者番号;
+//    private static HokenshaNo 証記載保険者番号;
     private static HihokenshaNo 被保険者番号;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        証記載保険者番号 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号;
+//        証記載保険者番号 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号;
         被保険者番号 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
         履歴番号 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_履歴番号;
     }
@@ -47,7 +47,7 @@ public class NijiYoboJigyoTaishoshaBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboJigyoTaishoshaEntity = new DbT3100NijiYoboJigyoTaishoshaEntity();
-            NijiYoboJigyoTaishoshaEntity.setShoKisaiHokenshaNo(証記載保険者番号);
+//            NijiYoboJigyoTaishoshaEntity.setShoKisaiHokenshaNo(証記載保険者番号);
             NijiYoboJigyoTaishoshaEntity.setHihokenshaNo(被保険者番号);
             NijiYoboJigyoTaishoshaEntity.setRirekiNo(履歴番号);
 
@@ -57,11 +57,11 @@ public class NijiYoboJigyoTaishoshaBuilderTest extends DbcTestBase {
         }
 //TODO Key項目のテストメソッドは削除して下さい。
 
-        @Test
-        public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
-            business = sut.set証記載保険者番号(DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号).build();
-            assertThat(business.get証記載保険者番号(), is(DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号));
-        }
+//        @Test
+//        public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
+//            business = sut.set証記載保険者番号(DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号).build();
+//            assertThat(business.get証記載保険者番号(), is(DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号));
+//        }
 
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
@@ -87,11 +87,11 @@ public class NijiYoboJigyoTaishoshaBuilderTest extends DbcTestBase {
             assertThat(business.get適用終了年月日(), is(DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_適用終了年月日));
         }
 
-        @Test
-        public void 戻り値の識別コードは_設定した値と同じ識別コードを返す() {
-            business = sut.set識別コード(DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_識別コード).build();
-            assertThat(business.get識別コード(), is(DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_識別コード));
-        }
+//        @Test
+//        public void 戻り値の識別コードは_設定した値と同じ識別コードを返す() {
+//            business = sut.set識別コード(DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_識別コード).build();
+//            assertThat(business.get識別コード(), is(DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_識別コード));
+//        }
 
         @Test
         public void 戻り値の受付年月日は_設定した値と同じ受付年月日を返す() {

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+//import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 再審査申立の識別子です。
@@ -25,7 +25,7 @@ public class SaishinsaMoshitateIdentifier implements Serializable {
     private final FlexibleYearMonth サービス提供年月;
     private final ServiceShuruiCode サービス種類コード;
     private final ServiceKomokuCode サービス項目コード;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
 
     /**
      * コンストラクタです。
@@ -42,7 +42,7 @@ public class SaishinsaMoshitateIdentifier implements Serializable {
             FlexibleYearMonth サービス提供年月,
             ServiceShuruiCode サービス種類コード,
             ServiceKomokuCode サービス項目コード,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         this.事業所番号 = 事業所番号;
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;

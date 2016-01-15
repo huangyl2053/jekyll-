@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
@@ -52,44 +51,44 @@ public class RiyoshaFutanWariaiMeisaiManagerTest {
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー2 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー3 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_履歴番号;
-            Decimal 主キー4 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_枝番号;
+            int 主キー3 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー4 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_枝番号;
             sut.get利用者負担割合明細(null, 主キー2, 主キー3, 主キー4);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYear 主キー1 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_年度;
-            Decimal 主キー3 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_履歴番号;
-            Decimal 主キー4 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_枝番号;
+            int 主キー3 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー4 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_枝番号;
             sut.get利用者負担割合明細(主キー1, null, 主キー3, 主キー4);
         }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
-            FlexibleYear 主キー1 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_年度;
-            HihokenshaNo 主キー2 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー4 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_枝番号;
-            sut.get利用者負担割合明細(主キー1, 主キー2, null, 主キー4);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
-            FlexibleYear 主キー1 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_年度;
-            HihokenshaNo 主キー2 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー3 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_履歴番号;
-            sut.get利用者負担割合明細(主キー1, 主キー2, 主キー3, null);
-        }
+//
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
+//            FlexibleYear 主キー1 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_年度;
+//            HihokenshaNo 主キー2 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_被保険者番号;
+//            int 主キー4 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_枝番号;
+//            sut.get利用者負担割合明細(主キー1, 主キー2, null, 主キー4);
+//        }
+//
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
+//            FlexibleYear 主キー1 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_年度;
+//            HihokenshaNo 主キー2 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_被保険者番号;
+//            int 主キー3 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_履歴番号;
+//            sut.get利用者負担割合明細(主キー1, 主キー2, 主キー3, null);
+//        }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(FlexibleYear.class), any(HihokenshaNo.class), any(Decimal.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(FlexibleYear.class), any(HihokenshaNo.class), any(int.class), any(int.class))).thenReturn(null);
 
             FlexibleYear 主キー1 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_年度;
             HihokenshaNo 主キー2 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー3 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_履歴番号;
-            Decimal 主キー4 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_枝番号;
+            int 主キー3 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー4 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_枝番号;
             RiyoshaFutanWariaiMeisai result = sut.get利用者負担割合明細(主キー1, 主キー2, 主キー3, 主キー4);
 
             assertThat(result, is(nullValue()));
@@ -98,11 +97,11 @@ public class RiyoshaFutanWariaiMeisaiManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3114RiyoshaFutanWariaiMeisaiEntity entity = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.createDbT3114RiyoshaFutanWariaiMeisaiEntity();
-            when(dac.selectByKey(any(FlexibleYear.class), any(HihokenshaNo.class), any(Decimal.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(FlexibleYear.class), any(HihokenshaNo.class), any(int.class), any(int.class))).thenReturn(entity);
             FlexibleYear 主キー1 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_年度;
             HihokenshaNo 主キー2 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー3 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_履歴番号;
-            Decimal 主キー4 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_枝番号;
+            int 主キー3 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー4 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_枝番号;
             RiyoshaFutanWariaiMeisai result = sut.get利用者負担割合明細(主キー1, 主キー2, 主キー3, 主キー4);
 
             assertThat(result.get年度().toDateString(), is(DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_年度.toDateString()));

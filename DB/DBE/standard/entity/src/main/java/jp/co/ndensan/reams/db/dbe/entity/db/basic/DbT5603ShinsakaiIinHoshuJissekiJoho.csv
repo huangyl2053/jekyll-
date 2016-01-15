@@ -2,7 +2,7 @@
 shinsakaiIinHoshuKubun,UDD035Code,Code,,,,,審査会委員報酬区分,A
 shinsakaiKaisaiYMD,UDD015YMD,FlexibleDate,,,,,実施年月日,A
 remban,int2,int,,,,,連番,A
-shinsakaiKaisaiNo,int2,int,,,,,介護認定審査会開催番号,A
+shinsakaiKaisaiNo,bpchar,RString,,,,,介護認定審査会開催番号,A
 shinsakaiHoshuZeiritsu,int2,int,,,,,介護認定審査会報酬税率,A
 shinsakaiHoshu,int4,int,,,,,介護認定審査報酬,A
 shinsakaiSonotaHoshu,int4,int,,,,,介護認定審査その他報酬,A

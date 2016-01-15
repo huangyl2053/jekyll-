@@ -126,7 +126,8 @@ public final class HihokenshaShikakuMapper {
     }
 
     private static IHihokenshaShikaku _toHihokenshaShikaku(DbT1001HihokenshaDaichoEntity entity) {
-        IKaigoShikaku kaigoShikaku = toKaigoShikaku(entity);
+//        IKaigoShikaku kaigoShikaku = toKaigoShikaku(entity);
+        IKaigoShikaku kaigoShikaku = toKaigoShikaku();
         ShikakuHenko 資格変更 = toShikakuHenko(
                 entity.getShikakuHenkoJiyuCode().toRString(),
                 entity.getShikakuHenkoTodokedeYMD(),
@@ -166,7 +167,8 @@ public final class HihokenshaShikakuMapper {
         return shikaku;
     }
 
-    private static IKaigoShikaku toKaigoShikaku(DbT1001HihokenshaDaichoEntity entity) {
+//    private static IKaigoShikaku toKaigoShikaku(DbT1001HihokenshaDaichoEntity entity) {
+    private static IKaigoShikaku toKaigoShikaku() {
         // IKaigoShikaku kaigoShikaku = KaigoShikakuFactory.createInstance(
         //                entity.getShikibetsuCode(),
         //                HokenShubetsu.介護保険,

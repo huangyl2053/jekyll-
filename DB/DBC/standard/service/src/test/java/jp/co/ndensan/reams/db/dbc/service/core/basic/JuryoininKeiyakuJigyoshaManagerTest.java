@@ -51,33 +51,33 @@ public class JuryoininKeiyakuJigyoshaManagerTest {
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleDate 主キー2 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_開始年月日;
-            Decimal 主キー3 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_履歴番号;
-            sut.get受領委任契約事業者(null, 主キー2, 主キー3);
+//            Decimal 主キー3 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_履歴番号;
+            sut.get受領委任契約事業者(null, 主キー2);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            RString 主キー1 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_事業者契約番号;
-            Decimal 主キー3 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_履歴番号;
-            sut.get受領委任契約事業者(主キー1, null, 主キー3);
+            RString 主キー1 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_契約事業者番号;
+//            Decimal 主キー3 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_履歴番号;
+            sut.get受領委任契約事業者(主キー1, null);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
-            RString 主キー1 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_事業者契約番号;
-            FlexibleDate 主キー2 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_開始年月日;
-            sut.get受領委任契約事業者(主キー1, 主キー2, null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
+//            RString 主キー1 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_契約事業者番号;
+//            FlexibleDate 主キー2 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_開始年月日;
+//            sut.get受領委任契約事業者(主キー1, 主キー2, null);
+//        }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(RString.class), any(FlexibleDate.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(RString.class), any(FlexibleDate.class))).thenReturn(null);
 
-            RString 主キー1 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_事業者契約番号;
+            RString 主キー1 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_契約事業者番号;
             FlexibleDate 主キー2 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_開始年月日;
-            Decimal 主キー3 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_履歴番号;
-            JuryoininKeiyakuJigyosha result = sut.get受領委任契約事業者(主キー1, 主キー2, 主キー3);
+//            Decimal 主キー3 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_履歴番号;
+            JuryoininKeiyakuJigyosha result = sut.get受領委任契約事業者(主キー1, 主キー2);
 
             assertThat(result, is(nullValue()));
         }
@@ -85,14 +85,14 @@ public class JuryoininKeiyakuJigyoshaManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3077JuryoininKeiyakuJigyoshaEntity entity = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.createDbT3077JuryoininKeiyakuJigyoshaEntity();
-            when(dac.selectByKey(any(RString.class), any(FlexibleDate.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(RString.class), any(FlexibleDate.class))).thenReturn(entity);
 
-            RString 主キー1 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_事業者契約番号;
+            RString 主キー1 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_契約事業者番号;
             FlexibleDate 主キー2 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_開始年月日;
-            Decimal 主キー3 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_履歴番号;
-            JuryoininKeiyakuJigyosha result = sut.get受領委任契約事業者(主キー1, 主キー2, 主キー3);
+//            Decimal 主キー3 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_履歴番号;
+            JuryoininKeiyakuJigyosha result = sut.get受領委任契約事業者(主キー1, 主キー2);
 
-            assertThat(result.get事業者契約番号(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_事業者契約番号));
+            assertThat(result.get契約事業者番号(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_契約事業者番号));
         }
     }
 
@@ -116,7 +116,7 @@ public class JuryoininKeiyakuJigyoshaManagerTest {
             List<JuryoininKeiyakuJigyosha> result = sut.get受領委任契約事業者一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get事業者契約番号(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_事業者契約番号));
+            assertThat(result.get(0).get契約事業者番号(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_契約事業者番号));
         }
     }
 
@@ -149,7 +149,7 @@ public class JuryoininKeiyakuJigyoshaManagerTest {
             DbT3077JuryoininKeiyakuJigyoshaEntity entity = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.createDbT3077JuryoininKeiyakuJigyoshaEntity();
             entity.initializeMd5();
             JuryoininKeiyakuJigyosha 受領委任契約事業者 = new JuryoininKeiyakuJigyosha(entity);
-            受領委任契約事業者 = 受領委任契約事業者.createBuilderForEdit().set届出者事業者名称(new RString("任意項目1を変更")).build();
+            受領委任契約事業者 = 受領委任契約事業者.createBuilderForEdit().set送付先部署(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save受領委任契約事業者(受領委任契約事業者), is(true));
         }
@@ -161,7 +161,7 @@ public class JuryoininKeiyakuJigyoshaManagerTest {
             DbT3077JuryoininKeiyakuJigyoshaEntity entity = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.createDbT3077JuryoininKeiyakuJigyoshaEntity();
             entity.initializeMd5();
             JuryoininKeiyakuJigyosha 受領委任契約事業者 = new JuryoininKeiyakuJigyosha(entity);
-            受領委任契約事業者 = 受領委任契約事業者.createBuilderForEdit().set届出者事業者名称(new RString("任意項目1を変更")).build();
+            受領委任契約事業者 = 受領委任契約事業者.createBuilderForEdit().set送付先部署(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save受領委任契約事業者(受領委任契約事業者), is(false));
         }

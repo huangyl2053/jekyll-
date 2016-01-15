@@ -62,7 +62,7 @@ public class ChosainJohoBuilder {
      */
     public ChosainJohoBuilder set認定調査委託先コード(ChosaItakusakiCode 認定調査委託先コード) {
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
-        entity.setNinteichosaItakusakiCode(認定調査委託先コード);
+        entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
         return this;
     }
 
@@ -74,7 +74,7 @@ public class ChosainJohoBuilder {
      */
     public ChosainJohoBuilder set認定調査員コード(ChosainCode 認定調査員コード) {
         requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
-        entity.setNinteiChosainNo(認定調査員コード);
+        entity.setNinteiChosainCode(認定調査員コード);
         return this;
     }
 

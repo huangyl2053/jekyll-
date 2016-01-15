@@ -56,7 +56,7 @@ public class KogakuShikyuHanteiKekkaManager {
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             HokenshaNo 証記載保険者番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));

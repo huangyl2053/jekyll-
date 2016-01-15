@@ -50,6 +50,9 @@ public final class KaigoShikakuKihonSearchKey {
         return 識別コード;
     }
 
+    /**
+     * Builder
+     */
     public static final class Builder {
 
         private final LasdecCode 市町村コード;

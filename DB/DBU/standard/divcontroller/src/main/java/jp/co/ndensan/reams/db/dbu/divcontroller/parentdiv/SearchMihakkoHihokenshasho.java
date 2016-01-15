@@ -5,13 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.parentdiv;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.dbu0400011.SearchMihakkoHihokenshashoDiv;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-
 /**
  * 被保険者証一括発行検索条件Divを制御します。
  *
@@ -19,24 +12,24 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  */
 public class SearchMihakkoHihokenshasho {
 
-    /**
-     * 未発行検索条件画面の初期処理を表します。
-     *
-     * @param panel SearchMihakkoHihokenshashoDiv
-     * @return ResponseData
-     */
-    public ResponseData<SearchMihakkoHihokenshashoDiv> onLoad(SearchMihakkoHihokenshashoDiv panel) {
-        ResponseData<SearchMihakkoHihokenshashoDiv> response = new ResponseData<>();
-
-        List<KeyValueDataSource> dataSource = new ArrayList<>();
-        dataSource.add(new KeyValueDataSource(new RString("nenreiTotatsu"), new RString("65歳年齢到達者")));
-        dataSource.add(new KeyValueDataSource(new RString("jukiIdo"), new RString("住基異動対象者")));
-        dataSource.add(new KeyValueDataSource(new RString("yokaigoNintei"), new RString("要介護認定者")));
-        panel.getChkHakkoTaishoSearchCondition().setSelectedItems(dataSource);
-
-        response.data = panel;
-        return response;
-
-    }
-
+//    /**
+//     * 未発行検索条件画面の初期処理を表します。
+//     *
+//     * @param panel SearchMihakkoHihokenshashoDiv
+//     * @return ResponseData
+//     */
+//    public ResponseData<SearchMihakkoHihokenshashoDiv> onLoad(SearchMihakkoHihokenshashoDiv panel) {
+//        ResponseData<SearchMihakkoHihokenshashoDiv> response = new ResponseData<>();
+//
+//        List<KeyValueDataSource> dataSource = new ArrayList<>();
+//        dataSource.add(new KeyValueDataSource(new RString("nenreiTotatsu"), new RString("65歳年齢到達者")));
+//        dataSource.add(new KeyValueDataSource(new RString("jukiIdo"), new RString("住基異動対象者")));
+//        dataSource.add(new KeyValueDataSource(new RString("yokaigoNintei"), new RString("要介護認定者")));
+//        panel.getChkHakkoTaishoSearchCondition().setSelectedItems(dataSource);
+//
+//        response.data = panel;
+//        return response;
+//
+//    }
+//
 }

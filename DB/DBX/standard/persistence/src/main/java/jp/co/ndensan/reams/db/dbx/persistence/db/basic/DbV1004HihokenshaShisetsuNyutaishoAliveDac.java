@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004HihokenshaShisetsuNyuta
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004HihokenshaShisetsuNyutaisho.*;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004HihokenshaShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -24,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 被保険者施設入退所Aliveのデータアクセスクラスです。
  */
-public class DbV1004HihokenshaShisetsuNyutaishoAliveDac implements ISaveable<DbV1004HihokenshaShisetsuNyutaishoEntity> {
+public class DbV1004HihokenshaShisetsuNyutaishoAliveDac {
 
     @InjectSession
     private SqlSession session;
@@ -75,7 +74,6 @@ public class DbV1004HihokenshaShisetsuNyutaishoAliveDac implements ISaveable<DbV
      * @return 登録件数
      */
     @Transaction
-    @Override
     public int save(DbV1004HihokenshaShisetsuNyutaishoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者施設入退所Aliveエンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
@@ -83,6 +81,10 @@ public class DbV1004HihokenshaShisetsuNyutaishoAliveDac implements ISaveable<DbV
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
+    /**
+     * @param 識別コード 識別コード
+     * @return DbV1004HihokenshaShisetsuNyutaishoEntityのlist
+     */
     public List<DbV1004HihokenshaShisetsuNyutaishoEntity> selectBy識別コード(ShikibetsuCode 識別コード) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

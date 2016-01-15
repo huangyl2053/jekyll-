@@ -9,3 +9,4 @@ koseiJiyu,UDD035Code,Code,,,,,更正事由,A
 hakoKubun,varchar,RString,,,,,発行区分,A
 hakoYMD,UDD015YMD,FlexibleDate,,,,,発行日,A
 kofuYMD,UDD015YMD,FlexibleDate,,,,,交付日,A
+logicalDeletedFlag,bool,boolean,,,,,論理削除フラグ,A

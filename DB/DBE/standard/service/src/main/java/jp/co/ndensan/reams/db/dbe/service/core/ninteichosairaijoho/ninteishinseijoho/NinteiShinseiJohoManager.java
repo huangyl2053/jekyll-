@@ -11,9 +11,10 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteishinse
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteishinseijoho.NinteiShinseiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinseijoho.INinteiShinseiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJohoManager;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -95,7 +96,7 @@ public class NinteiShinseiJohoManager {
         }
         要介護認定申請情報 = 要介護認定申請情報.modifiedModel();
         save認定調査依頼情報リスト(要介護認定申請情報.getNinteichosaIraiJohoList());
-        return 1 == 要介護認定申請情報Dac.save(要介護認定申請情報.toEntity());
+        return 1 == 要介護認定申請情報Dac.update((INinteiShinseiJohoEntity) 要介護認定申請情報.toEntity());
     }
 
     private void save認定調査依頼情報リスト(List<NinteichosaIraiJoho> 認定調査依頼情報List) {

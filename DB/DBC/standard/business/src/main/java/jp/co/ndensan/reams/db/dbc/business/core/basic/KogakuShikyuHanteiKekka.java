@@ -41,7 +41,7 @@ public class KogakuShikyuHanteiKekka
     public KogakuShikyuHanteiKekka(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             HokenshaNo 証記載保険者番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
@@ -121,7 +121,7 @@ public class KogakuShikyuHanteiKekka
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -149,7 +149,7 @@ public class KogakuShikyuHanteiKekka
      * @return 支給区分コード
      */
     public RString get支給区分コード() {
-        return entity.getShiharaiKubunCode();
+        return entity.getShikyuKubunCode();
     }
 
     /**
@@ -158,7 +158,7 @@ public class KogakuShikyuHanteiKekka
      * @return 支給金額
      */
     public Decimal get支給金額() {
-        return entity.getShiharaiKingaku();
+        return entity.getShikyuKingaku();
     }
 
     /**

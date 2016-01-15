@@ -23,6 +23,9 @@ public class ChohyoKofuRirekiID implements IValueObject<RString>, Comparable<Cho
 
     private final RString 帳票交付履歴ID;
 
+    /**
+     * {@link ChohyoKofuRirekiID}のEMPTY格納用定数です。
+     */
     public static final ChohyoKofuRirekiID EMPTY;
 
     /**

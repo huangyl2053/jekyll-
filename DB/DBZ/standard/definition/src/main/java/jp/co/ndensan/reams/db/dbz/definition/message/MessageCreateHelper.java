@@ -20,6 +20,11 @@ public final class MessageCreateHelper {
     private MessageCreateHelper() {
     }
 
+    /**
+     * @param prefix prefix
+     * @param no no
+     * @return String
+     */
     public static String toCode(String prefix, int no) {
 
         RString noString = new RString(Integer.toString(no));

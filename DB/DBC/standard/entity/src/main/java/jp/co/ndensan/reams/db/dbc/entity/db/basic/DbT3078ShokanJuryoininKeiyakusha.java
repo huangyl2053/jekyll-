@@ -6,8 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 償還受領委任契約者テーブルの項目定義クラスです。
  */
 public enum DbT3078ShokanJuryoininKeiyakusha implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -45,31 +44,23 @@ public enum DbT3078ShokanJuryoininKeiyakusha implements IColumnDefinition {
      */
     hihokenshaNo(2147483647, 0),
     /**
-     * 証記載保険者番号
+     * 申請年月日
      */
-    shoKisaiHokenshaNo(2147483647, 0),
+    shinseiYMD(2147483647, 0),
     /**
      * 受付年月日
      */
     uketsukeYMD(2147483647, 0),
     /**
-     * 履歴番号
-     */
-    rirekiNo(5, 0),
-    /**
-     * 申請年月日
-     */
-    shinseiYMD(2147483647, 0),
-    /**
-     * 事業者契約番号
+     * 契約事業者番号
      * <br/>償還受領委任契約事業者の事業者契約番号
      */
-    jigyoshaKeiyakuNo(10, 0),
+    keiyakuJigyoshaNo(10, 0),
     /**
      * 契約サービス種類
-     * <br/>1:住宅改修費,2:福祉用具購入費,3:償還払給付,4：高額給付
+     * <br/>01：福祉用具、02：住宅改修、03：予防福祉用具、04：予防住宅改修、05：償還払支給、06：高額給付支給
      */
-    keiyakuServiceShurui(1, 0),
+    keiyakuServiceShurui(2, 0),
     /**
      * 決定年月日
      */
@@ -80,6 +71,11 @@ public enum DbT3078ShokanJuryoininKeiyakusha implements IColumnDefinition {
      */
     shoninKekkaKubun(1, 0),
     /**
+     * 契約番号
+     * <br/>開始年月日が属する西暦年度（4桁）＋契約事業者・年度単位に１からの連番（4桁）
+     */
+    keiyakuNo(8, 0),
+    /**
      * 受領委任払適用開始年月日
      */
     juryoininKaishiYMD(2147483647, 0),
@@ -87,11 +83,6 @@ public enum DbT3078ShokanJuryoininKeiyakusha implements IColumnDefinition {
      * 受領委任払適用終了年月日
      */
     juryoininShuryoYMD(2147483647, 0),
-    /**
-     * 契約番号
-     * <br/>開始年月日が属する西暦年度（4桁）＋契約事業者・年度単位に１からの連番（4桁）
-     */
-    keiyakuNo(8, 0),
     /**
      * 不承認理由
      */
@@ -123,7 +114,23 @@ public enum DbT3078ShokanJuryoininKeiyakusha implements IColumnDefinition {
     /**
      * 承認結果通知書再発行区分
      */
-    shoninKekkaTsuchiSaiHakkoKubun(1, 0);
+    shoninKekkaTsuchiSaiHakkoKubun(1, 0),
+    /**
+     * 支給申請書有無区分
+     */
+    shikyushinseiUmuKubun(1, 0),
+    /**
+     * 支給申請サービス提供年月
+     */
+    shikyushinseiServiceYM(2147483647, 0),
+    /**
+     * 支給申請償還整理番号
+     */
+    shikyushinseiSeiriNo(10, 0),
+    /**
+     * 備考
+     */
+    biko(50, 0);
 
     private final int maxLength;
     private final int scale;
@@ -135,7 +142,7 @@ public enum DbT3078ShokanJuryoininKeiyakusha implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -144,7 +151,7 @@ public enum DbT3078ShokanJuryoininKeiyakusha implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

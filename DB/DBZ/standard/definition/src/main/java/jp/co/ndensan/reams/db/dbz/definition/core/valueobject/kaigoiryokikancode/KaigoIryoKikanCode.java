@@ -23,6 +23,9 @@ public class KaigoIryoKikanCode implements Comparable<KaigoIryoKikanCode>, IDbCo
 
     private final RString 介護医療機関コード;
 
+    /**
+     * {@link KaigoIryoKikanCode}のEMPTY格納用定数です。
+     */
     public static final KaigoIryoKikanCode EMPTY;
 
     /**
@@ -36,6 +39,7 @@ public class KaigoIryoKikanCode implements Comparable<KaigoIryoKikanCode>, IDbCo
      * 引数からメンバを受け取るコンストラクタです。
      *
      * @param 介護医療機関コード 介護医療機関コード
+     * @throws NullPointerException NullPointerException
      */
     public KaigoIryoKikanCode(RString 介護医療機関コード) throws NullPointerException {
         this.介護医療機関コード = requireNonNull(介護医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("介護医療機関コード"));

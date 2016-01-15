@@ -22,7 +22,7 @@ public class KogakuGassanKyufuJissekiIdentifier implements Serializable {
     private final HihokenshaNo 被保険者番号;
     private final RString 支給申請書整理番号;
     private final RString 整理番号;
-    private final Decimal 履歴番号;
+//    private final int 履歴番号;
 
     /**
      * コンストラクタです。
@@ -31,17 +31,17 @@ public class KogakuGassanKyufuJissekiIdentifier implements Serializable {
      * @param 被保険者番号 被保険者番号
      * @param 支給申請書整理番号 支給申請書整理番号
      * @param 整理番号 整理番号
-     * @param 履歴番号 履歴番号
+// * @param 履歴番号 履歴番号
      */
     public KogakuGassanKyufuJissekiIdentifier(KokanShikibetsuNo 交換情報識別番号,
             HihokenshaNo 被保険者番号,
             RString 支給申請書整理番号,
-            RString 整理番号,
-            Decimal 履歴番号) {
+            RString 整理番号) {
+//            int 履歴番号
         this.交換情報識別番号 = 交換情報識別番号;
         this.被保険者番号 = 被保険者番号;
         this.支給申請書整理番号 = 支給申請書整理番号;
         this.整理番号 = 整理番号;
-        this.履歴番号 = 履歴番号;
+//        this.履歴番号 = 履歴番号;
     }
 }

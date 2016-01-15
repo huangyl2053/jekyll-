@@ -58,11 +58,11 @@ public class ShokanJuryoininKeiyakushaBuilder {
      * @param 証記載保険者番号 証記載保険者番号
      * @return {@link ShokanJuryoininKeiyakushaBuilder}
      */
-    public ShokanJuryoininKeiyakushaBuilder set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
-        return this;
-    }
+//    public ShokanJuryoininKeiyakushaBuilder set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
+//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+//        entity.setShoKisaiHokenshaNo(証記載保険者番号);
+//        return this;
+//    }
 
     /**
      * 受付年月日を設定します。
@@ -82,11 +82,11 @@ public class ShokanJuryoininKeiyakushaBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link ShokanJuryoininKeiyakushaBuilder}
      */
-    public ShokanJuryoininKeiyakushaBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
-        return this;
-    }
+//    public ShokanJuryoininKeiyakushaBuilder set履歴番号(Decimal 履歴番号) {
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        entity.setRirekiNo(履歴番号);
+//        return this;
+//    }
 
     /**
      * 申請年月日を設定します。
@@ -103,12 +103,12 @@ public class ShokanJuryoininKeiyakushaBuilder {
     /**
      * 事業者契約番号を設定します。
      *
-     * @param 事業者契約番号 事業者契約番号
+     * @param 契約事業者番号 契約事業者番号
      * @return {@link ShokanJuryoininKeiyakushaBuilder}
      */
-    public ShokanJuryoininKeiyakushaBuilder set事業者契約番号(RString 事業者契約番号) {
-        requireNonNull(事業者契約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者契約番号"));
-        entity.setJigyoshaKeiyakuNo(事業者契約番号);
+    public ShokanJuryoininKeiyakushaBuilder set契約事業者番号(RString 契約事業者番号) {
+        requireNonNull(契約事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("契約事業者番号"));
+        entity.setKeiyakuJigyoshaNo(契約事業者番号);
         return this;
     }
 

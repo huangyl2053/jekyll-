@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5206GaikyoTokkiEntity;
 public interface IDbT5206GaikyoTokkiMapper {
 
     /**
-     * {@link DbT5206GaikyoTokkiEntity}を取得します。
+     * {@link  DbT5206GaikyoTokkiEntity}を取得します。
      *
-     * @return {@link DbT5206GaikyoTokkiEntity}
+     * @return {@link  DbT5206GaikyoTokkiEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT5206GaikyoTokkiEntity getEntity();

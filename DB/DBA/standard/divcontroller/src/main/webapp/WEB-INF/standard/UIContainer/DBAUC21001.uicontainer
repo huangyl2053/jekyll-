@@ -1,0 +1,88 @@
+﻿{
+ "uiContainerName": "DBAUC21001",
+ "displayWizard": false,
+ "subGyomuCode": "DBA",
+ "steps": [
+  {
+   "id": 1,
+   "name": "介護事業者追加",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA2010013",
+     "toLayoutTitle": "事業者登録",
+     "toState": "追加状態"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2010013",
+     "layoutTitle": "事業者登録",
+     "eventName": "サービス追加",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA2010014",
+     "toLayoutTitle": "サービス登録",
+     "toState": "追加状態"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2010013",
+     "layoutTitle": "事業者登録",
+     "eventName": "サービス修正",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA2010014",
+     "toLayoutTitle": "サービス登録",
+     "toState": "修正状態"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2010013",
+     "layoutTitle": "事業者登録",
+     "eventName": "サービス削除",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA2010014",
+     "toLayoutTitle": "サービス登録",
+     "toState": "削除状態"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2010014",
+     "layoutTitle": "サービス登録",
+     "eventName": "再検索する",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA2010013",
+     "toLayoutTitle": "事業者登録",
+     "toState": "追加状態"
+    },
+    {
+     "id": "6",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2010013",
+     "layoutTitle": "事業者登録",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

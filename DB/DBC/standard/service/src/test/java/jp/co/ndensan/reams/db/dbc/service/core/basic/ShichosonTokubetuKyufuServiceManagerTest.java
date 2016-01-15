@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3066ShichosonTokubetuK
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
@@ -51,31 +50,31 @@ public class ShichosonTokubetuKyufuServiceManagerTest {
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleDate 主キー2 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービス有効期間開始年月日;
-            Decimal 主キー3 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_履歴番号;
             sut.get市町村特別給付サービス内容(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             RString 主キー1 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービスコード;
-            Decimal 主キー3 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_履歴番号;
             sut.get市町村特別給付サービス内容(主キー1, null, 主キー3);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
-            RString 主キー1 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービスコード;
-            FlexibleDate 主キー2 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービス有効期間開始年月日;
-            sut.get市町村特別給付サービス内容(主キー1, 主キー2, null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
+//            RString 主キー1 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービスコード;
+//            FlexibleDate 主キー2 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービス有効期間開始年月日;
+//            sut.get市町村特別給付サービス内容(主キー1, 主キー2, null);
+//        }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(RString.class), any(FlexibleDate.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(RString.class), any(FlexibleDate.class), any(int.class))).thenReturn(null);
             RString 主キー1 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービスコード;
             FlexibleDate 主キー2 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービス有効期間開始年月日;
-            Decimal 主キー3 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_履歴番号;
             ShichosonTokubetuKyufuService result = sut.get市町村特別給付サービス内容(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
@@ -84,10 +83,10 @@ public class ShichosonTokubetuKyufuServiceManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3066ShichosonTokubetuKyufuServiceEntity entity = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.createDbT3066ShichosonTokubetuKyufuServiceEntity();
-            when(dac.selectByKey(any(RString.class), any(FlexibleDate.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(RString.class), any(FlexibleDate.class), any(int.class))).thenReturn(entity);
             RString 主キー1 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービスコード;
             FlexibleDate 主キー2 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービス有効期間開始年月日;
-            Decimal 主キー3 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_履歴番号;
             ShichosonTokubetuKyufuService result = sut.get市町村特別給付サービス内容(主キー1, 主キー2, 主キー3);
 
             assertThat(result.get市町村特別給付用サービスコード(), is(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービスコード));

@@ -25,6 +25,9 @@ public final class ShisetsuCode implements IValueObject<RString>, Comparable<Shi
 
     private final RString 施設コード;
 
+    /**
+     * {@link ShisetsuCode}のEMPTY格納用定数です。
+     */
     public static final ShisetsuCode EMPTY;
 
     /**
@@ -38,6 +41,7 @@ public final class ShisetsuCode implements IValueObject<RString>, Comparable<Shi
      * 指定の値を持った、ShisetsuCodeを生成します。
      *
      * @param 施設コード 施設コードの値
+     * @throws NullPointerException NullPointerException
      */
     public ShisetsuCode(RString 施設コード) throws NullPointerException {
         requireNonNull(施設コード, UrSystemErrorMessages.値がnull.getReplacedMessage("施設コード"));

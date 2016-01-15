@@ -5,8 +5,10 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5221NinteichosaScheduleEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -35,8 +37,8 @@ public class NinteichosaScheduleTest extends DbzTestBase {
     private static RString 認定調査予定開始時間;
     private static RString 認定調査予定終了時間;
     private static Code 認定調査時間枠;
-    private static RString 認定調査委託先コード;
-    private static RString 認定調査員コード;
+    private static ChosaItakusakiCode 認定調査委託先コード;
+    private static ChosainCode 認定調査員コード;
 
     @BeforeClass
     public static void setUpClass() {
@@ -146,12 +148,12 @@ public class NinteichosaScheduleTest extends DbzTestBase {
 
         @Test
         public void get認定調査委託先コードは_entityが持つ認定調査委託先コードを返す() {
-            assertThat(sut.get認定調査委託先コード(), is(NinteichosaScheduleEntity.getNinteichosaItakusakiCode()));
+            assertThat(sut.get認定調査委託先コード(), is(NinteichosaScheduleEntity.getNinteiChosaItakusakiCode()));
         }
 
         @Test
         public void get認定調査員コードは_entityが持つ認定調査員コードを返す() {
-            assertThat(sut.get認定調査員コード(), is(NinteichosaScheduleEntity.getNinteiChosainNo()));
+            assertThat(sut.get認定調査員コード(), is(NinteichosaScheduleEntity.getNinteiChosainCode()));
         }
 
         @Test

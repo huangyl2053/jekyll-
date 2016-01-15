@@ -288,7 +288,7 @@ public class DbT3062SaishinsaMoshitateDacTest extends DbcTestDacBase {
                 FlexibleYearMonth サービス提供年月,
                 ServiceShuruiCode サービス種類コード,
                 ServiceKomokuCode サービス項目コード,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3062SaishinsaMoshitateEntity entity = DbT3062SaishinsaMoshitateEntityGenerator.createDbT3062SaishinsaMoshitateEntity();
             entity.setJigyoshoNo(事業所番号);
             entity.setHiHokenshaNo(被保険者番号);

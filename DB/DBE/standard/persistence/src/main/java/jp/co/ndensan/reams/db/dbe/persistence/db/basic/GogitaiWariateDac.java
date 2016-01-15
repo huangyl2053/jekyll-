@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5107GogitaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -16,33 +16,33 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
  *
  * @author n8178 城間篤人
  */
-public class GogitaiWariateDac implements IReplaceable<DbT5107GogitaiWariateIinJohoEntity>,
-        IDeletable<DbT5107GogitaiWariateIinJohoEntity> {
+public class GogitaiWariateDac implements IReplaceable<DbT5593GogitaiWariateIinJohoEntity>,
+        IDeletable<DbT5593GogitaiWariateIinJohoEntity> {
 
     @InjectSession
     private SqlSession session;
 
     @Override
-    public int insertOrUpdate(DbT5107GogitaiWariateIinJohoEntity entity) {
+    public int insertOrUpdate(DbT5593GogitaiWariateIinJohoEntity entity) {
         //TODO n8178 城間篤人 updateCountを扱えるようになってから改めて実装 2014年3月
         int updateCount = 0;
         return updateCount == 0 ? insert(entity) : update(entity);
     }
 
     @Override
-    public int insert(DbT5107GogitaiWariateIinJohoEntity entity) {
+    public int insert(DbT5593GogitaiWariateIinJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(entity).execute();
     }
 
     @Override
-    public int update(DbT5107GogitaiWariateIinJohoEntity entity) {
+    public int update(DbT5593GogitaiWariateIinJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.update(entity).execute();
     }
 
     @Override
-    public int delete(DbT5107GogitaiWariateIinJohoEntity entity) {
+    public int delete(DbT5593GogitaiWariateIinJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
     }

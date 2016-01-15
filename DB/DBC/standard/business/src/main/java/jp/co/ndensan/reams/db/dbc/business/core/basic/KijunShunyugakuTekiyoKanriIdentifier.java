@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import lombok.Value;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -20,8 +21,8 @@ public class KijunShunyugakuTekiyoKanriIdentifier implements Serializable {
 
     private final SetaiCode 世帯コード;
     private final FlexibleYear 年度;
-    private final Decimal 履歴番号;
-    private final HokenshaNo 被保険者番号;
+    private final int 履歴番号;
+    private final HihokenshaNo 被保険者番号;
 
     /**
      * コンストラクタです。
@@ -33,8 +34,8 @@ public class KijunShunyugakuTekiyoKanriIdentifier implements Serializable {
      */
     public KijunShunyugakuTekiyoKanriIdentifier(SetaiCode 世帯コード,
             FlexibleYear 年度,
-            Decimal 履歴番号,
-            HokenshaNo 被保険者番号) {
+            int 履歴番号,
+            HihokenshaNo 被保険者番号) {
         this.世帯コード = 世帯コード;
         this.年度 = 年度;
         this.履歴番号 = 履歴番号;

@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7005RojinHokenJukyushaJohoE
 public interface IDbT7005RojinHokenJukyushaJohoMapper {
 
     /**
-     * {@link DbT7005RojinHokenJukyushaJohoEntity}を取得します。
+     * {@link  DbT7005RojinHokenJukyushaJohoEntity}を取得します。
      *
-     * @return {@link DbT7005RojinHokenJukyushaJohoEntity}
+     * @return {@link  DbT7005RojinHokenJukyushaJohoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7005RojinHokenJukyushaJohoEntity getEntity();

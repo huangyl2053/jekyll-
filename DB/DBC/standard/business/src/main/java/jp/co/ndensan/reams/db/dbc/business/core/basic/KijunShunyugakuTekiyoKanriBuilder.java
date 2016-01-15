@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -71,7 +72,7 @@ public class KijunShunyugakuTekiyoKanriBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link KijunShunyugakuTekiyoKanriBuilder}
      */
-    public KijunShunyugakuTekiyoKanriBuilder set履歴番号(Decimal 履歴番号) {
+    public KijunShunyugakuTekiyoKanriBuilder set履歴番号(int 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;
@@ -83,7 +84,7 @@ public class KijunShunyugakuTekiyoKanriBuilder {
      * @param 被保険者番号 被保険者番号
      * @return {@link KijunShunyugakuTekiyoKanriBuilder}
      */
-    public KijunShunyugakuTekiyoKanriBuilder set被保険者番号(HokenshaNo 被保険者番号) {
+    public KijunShunyugakuTekiyoKanriBuilder set被保険者番号(HihokenshaNo 被保険者番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         entity.setHihokenshaNo(被保険者番号);
         return this;
@@ -227,7 +228,7 @@ public class KijunShunyugakuTekiyoKanriBuilder {
      * @param 年少扶養控除_16歳未満人数 年少扶養控除_16歳未満人数
      * @return {@link KijunShunyugakuTekiyoKanriBuilder}
      */
-    public KijunShunyugakuTekiyoKanriBuilder set年少扶養控除_16歳未満人数(Decimal 年少扶養控除_16歳未満人数) {
+    public KijunShunyugakuTekiyoKanriBuilder set年少扶養控除_16歳未満人数(int 年少扶養控除_16歳未満人数) {
         requireNonNull(年少扶養控除_16歳未満人数, UrSystemErrorMessages.値がnull.getReplacedMessage("年少扶養控除_16歳未満人数"));
         entity.setNenshoFuyokojoUnder16Ninzu(年少扶養控除_16歳未満人数);
         return this;
@@ -239,7 +240,7 @@ public class KijunShunyugakuTekiyoKanriBuilder {
      * @param 年少扶養控除_16から18歳未満人数 年少扶養控除_16から18歳未満人数
      * @return {@link KijunShunyugakuTekiyoKanriBuilder}
      */
-    public KijunShunyugakuTekiyoKanriBuilder set年少扶養控除_16から18歳未満人数(Decimal 年少扶養控除_16から18歳未満人数) {
+    public KijunShunyugakuTekiyoKanriBuilder set年少扶養控除_16から18歳未満人数(int 年少扶養控除_16から18歳未満人数) {
         requireNonNull(年少扶養控除_16から18歳未満人数, UrSystemErrorMessages.値がnull.getReplacedMessage("年少扶養控除_16から18歳未満人数"));
         entity.setNenshoFuyokojoOver16Ninzu(年少扶養控除_16から18歳未満人数);
         return this;

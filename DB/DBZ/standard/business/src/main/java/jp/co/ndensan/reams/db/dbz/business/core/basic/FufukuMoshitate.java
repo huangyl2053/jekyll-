@@ -42,21 +42,22 @@ public class FufukuMoshitate extends
      * @param 原処分被保険者番号 原処分被保険者番号
      * @param 審査請求届出日 審査請求届出日
      */
-    public FufukuMoshitate(ShoKisaiHokenshaNo 証記載保険者番号,
+    public FufukuMoshitate(
+            //            ShoKisaiHokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             HihokenshaNo 原処分被保険者番号,
             FlexibleDate 審査請求届出日) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(原処分被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者番号"));
         requireNonNull(審査請求届出日, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求届出日"));
         this.entity = new DbT7001FufukuMoshitateEntity();
-        this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
+//        this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
         this.entity.setShikibetsuCode(識別コード);
         this.entity.setGenshobunsHihokennshaNo(原処分被保険者番号);
         this.entity.setShinsaSeikyuTodokedeYMD(審査請求届出日);
         this.id = new FufukuMoshitateIdentifier(
-                証記載保険者番号,
+                //                証記載保険者番号,
                 識別コード,
                 原処分被保険者番号,
                 審査請求届出日
@@ -72,7 +73,7 @@ public class FufukuMoshitate extends
     public FufukuMoshitate(DbT7001FufukuMoshitateEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("不服審査申立情報"));
         this.id = new FufukuMoshitateIdentifier(
-                entity.getShoKisaiHokenshaNo(),
+                //                entity.getShoKisaiHokenshaNo(),
                 entity.getShikibetsuCode(),
                 entity.getGenshobunsHihokennshaNo(),
                 entity.getShinsaSeikyuTodokedeYMD());
@@ -98,9 +99,9 @@ public class FufukuMoshitate extends
      *
      * @return 証記載保険者番号
      */
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
-    }
+//    public ShoKisaiHokenshaNo get証記載保険者番号() {
+//        return entity.getShoKisaiHokenshaNo();
+//    }
 
     /**
      * 識別コードを返します。
@@ -134,45 +135,45 @@ public class FufukuMoshitate extends
      *
      * @return 原処分被保険者郵便番号
      */
-    public YubinNo get原処分被保険者郵便番号() {
-        return entity.getGenshobunHihokenshaYubinNo();
-    }
+//    public YubinNo get原処分被保険者郵便番号() {
+//        return entity.getGenshobunHihokenshaYubinNo();
+//    }
 
     /**
      * 原処分被保険者住所を返します。
      *
      * @return 原処分被保険者住所
      */
-    public AtenaJusho get原処分被保険者住所() {
-        return entity.getGenshobunHihokenshaJusho();
-    }
+//    public AtenaJusho get原処分被保険者住所() {
+//        return entity.getGenshobunHihokenshaJusho();
+//    }
 
     /**
      * 原処分被保険者氏名を返します。
      *
      * @return 原処分被保険者氏名
      */
-    public AtenaMeisho get原処分被保険者氏名() {
-        return entity.getGenshobunHihokenshaShimei();
-    }
+//    public AtenaMeisho get原処分被保険者氏名() {
+//        return entity.getGenshobunHihokenshaShimei();
+//    }
 
     /**
      * 原処分被保険者電話番号を返します。
      *
      * @return 原処分被保険者電話番号
      */
-    public TelNo get原処分被保険者電話番号() {
-        return entity.getGenshobunHihokenshaTelNo();
-    }
+//    public TelNo get原処分被保険者電話番号() {
+//        return entity.getGenshobunHihokenshaTelNo();
+//    }
 
     /**
      * 原処分被保険者生年月日を返します。
      *
      * @return 原処分被保険者生年月日
      */
-    public FlexibleDate get原処分被保険者生年月日() {
-        return entity.getGenshobunHihokenshaBirthYMD();
-    }
+//    public FlexibleDate get原処分被保険者生年月日() {
+//        return entity.getGenshobunHihokenshaBirthYMD();
+//    }
 
     /**
      * 審査請求人郵便番号を返します。
@@ -215,7 +216,7 @@ public class FufukuMoshitate extends
      *
      * @return 被保険者との関係コード
      */
-    public Code get被保険者との関係コード() {
+    public RString get被保険者との関係コード() {
         return entity.getHihokenshaTonoKankeiCode();
     }
 
@@ -278,7 +279,7 @@ public class FufukuMoshitate extends
      *
      * @return 処分種類コード
      */
-    public Code get処分種類コード() {
+    public RString get処分種類コード() {
         return entity.getShobunShuruiCode();
     }
 
@@ -441,10 +442,20 @@ public class FufukuMoshitate extends
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * getBemmeiNaiyoList
+     *
+     * @return BemmeiNaiyoリスト
+     */
     public List<BemmeiNaiyo> getBemmeiNaiyoList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * modified
+     *
+     * @return FufukuMoshitate
+     */
     public FufukuMoshitate modified() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

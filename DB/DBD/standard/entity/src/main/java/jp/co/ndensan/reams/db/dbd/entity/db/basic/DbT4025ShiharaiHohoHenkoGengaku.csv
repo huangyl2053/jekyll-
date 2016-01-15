@@ -1,5 +1,5 @@
-﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
-hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 kanriKubun,varchar,RString,,,,,管理区分,A
 rirekiNo,int2,int,,,,,履歴番号,A
 tainoHanteiYMD,UDD015YMD,FlexibleDate,,,,,滞納判定年月日,A
@@ -9,3 +9,4 @@ nofusumiKikan,numeric,Decimal,,,,,納付済期間,A
 nofusumiGengakuKikan,numeric,Decimal,,,,,納付済減額期間,A
 kakutei_GengakuKaishiYMD,UDD015YMD,FlexibleDate,,,,,確定減額期間開始年月日,A
 kakutei_GengakuShuryoYMD,UDD015YMD,FlexibleDate,,,,,確定減額期間終了年月日,A
+logicalDeletedFlag,bool,boolean,,,,,論理削除フラグ,A

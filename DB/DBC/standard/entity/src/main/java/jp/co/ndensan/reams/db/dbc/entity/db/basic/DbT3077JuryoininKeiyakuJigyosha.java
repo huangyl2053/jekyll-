@@ -6,8 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 受領委任契約事業者テーブルの項目定義クラスです。
  */
 public enum DbT3077JuryoininKeiyakuJigyosha implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -41,38 +40,72 @@ public enum DbT3077JuryoininKeiyakuJigyosha implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * 事業者契約番号
+     * 契約事業者番号
      * <br/>1からの連番付番
      */
-    jigyoshaKeiyakuNo(10, 0),
+    keiyakuJigyoshaNo(10, 0),
     /**
      * 開始年月日
      */
     kaishiYMD(2147483647, 0),
     /**
-     * 履歴番号
-     */
-    rirekiNo(5, 0),
-    /**
      * 終了年月日
+     * <br/>未設定時は最大日付
      */
     shuryoYMD(2147483647, 0),
     /**
-     * 届出年月日
+     * 契約種類
+     * <br/>01：住宅改修、02：福祉用具、03：住宅改修／福祉用具、11：償還払給付、21：高額給付費
      */
-    todokedeYMD(2147483647, 0),
+    keiyakuShurui(2, 0),
     /**
-     * 届出者住所
+     * 契約事業者名称
      */
-    todokedeAddress(100, 0),
+    keiyakuJigyoshaName(2147483647, 0),
     /**
-     * 届出者事業者名称
+     * 契約事業者カナ名称
      */
-    todokedeJigyoshaName(20, 0),
+    keiyakuJigyoshaKanaName(2147483647, 0),
     /**
-     * 届出者代表者氏名
+     * 契約事業者郵便番号
      */
-    todokedeDaihyoshaName(30, 0),
+    keiyakuJigyoshaYubinNo(2147483647, 0),
+    /**
+     * 契約事業者住所
+     */
+    keiyakuJigyoshaJusho(2147483647, 0),
+    /**
+     * 契約代表者氏名
+     */
+    keiyakuDaihyoshaName(2147483647, 0),
+    /**
+     * 契約事業者電話番号
+     */
+    keiyakuJigyoshaTelNo(2147483647, 0),
+    /**
+     * 契約事業者FAX番号
+     */
+    keiyakuJigyoshaFaxNo(2147483647, 0),
+    /**
+     * 送付先郵便番号
+     */
+    sofusakiYubinNo(2147483647, 0),
+    /**
+     * 送付先住所
+     */
+    sofusakiJusho(2147483647, 0),
+    /**
+     * 送付先部署
+     */
+    sofusakiBusho(40, 0),
+    /**
+     * 送付先事業者名称
+     */
+    sofusakiJigyoshaName(2147483647, 0),
+    /**
+     * 送付先事業者カナ名称
+     */
+    sofusakiJigyoshaKanaName(2147483647, 0),
     /**
      * 金融機関コード
      */
@@ -88,68 +121,15 @@ public enum DbT3077JuryoininKeiyakuJigyosha implements IColumnDefinition {
     /**
      * 口座番号
      */
-    kozaNo(2147483647, 0),
-    /**
-     * 通帳記号
-     */
-    tsuchoKigo(2147483647, 0),
-    /**
-     * 通帳番号
-     */
-    tsuchoNo(2147483647, 0),
+    kozaNo(10, 0),
     /**
      * 口座名義人
      */
     kozaMeiginin(2147483647, 0),
     /**
-     * 口座名義人漢字
+     * 口座名義人カナ
      */
-    kozaMeigininKanji(2147483647, 0),
-    /**
-     * 事業者FAX番号
-     */
-    jigyoshaFaxNo(2147483647, 0),
-    /**
-     * 契約登録年月日
-     */
-    keiyakuTorokuYMD(2147483647, 0),
-    /**
-     * 送付先部署
-     */
-    sofusakiBusho(80, 0),
-    /**
-     * 営業形態
-     * <br/>個人、法人の分け
-     */
-    eigyoKeitai(1, 0),
-    /**
-     * 住宅改修契約有無
-     * <br/>0:契約無し,1:契約有り（償還払給付契約有無が「0」である場合に限る）
-     */
-    jutakuKaishuKeiyakuUmu(1, 0),
-    /**
-     * 特定福祉用具販売契約有無
-     * <br/>0:契約無し,1:契約有り（償還払給付契約有無が「0」である場合に限る）
-     */
-    tokuteiFukushiYoguHanbaiKeiyakuUmu(1, 0),
-    /**
-     * 償還払給付契約有無
-     * <br/>0:契約無し,1:契約有り（住宅改修契約有無および特定福祉用具販売契約有無が「0」である場合に限る）
-     */
-    shokanbaraiKyufuKeiyakuUmu(1, 0),
-    /**
-     * 高額給付契約有無
-     * <br/>0:契約無し,1:契約有り
-     */
-    kogakuKyufuKeiyakuUmu(1, 0),
-    /**
-     * 契約事業者番号
-     */
-    keiyakuJigyoshaNo(2147483647, 0),
-    /**
-     * 取扱確約書有無
-     */
-    toriatsukaiKakuyakushoUmu(1, 0);
+    kozaMeigininKana(2147483647, 0);
 
     private final int maxLength;
     private final int scale;
@@ -161,7 +141,7 @@ public enum DbT3077JuryoininKeiyakuJigyosha implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -170,7 +150,7 @@ public enum DbT3077JuryoininKeiyakuJigyosha implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

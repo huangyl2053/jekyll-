@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbe.persistence.db.relate.helper.ShinsakaiIinDacMock;
+//import jp.co.ndensan.reams.db.dbe.persistence.db.relate.helper.ShinsakaiIinDacMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.BeforeClass;
@@ -23,12 +23,12 @@ import org.junit.runner.RunWith;
 public class ShinsakaiIinDacTest {
 
     private static ShinsakaiIinDac shinsakaiIinDac;
-    private static ShinsakaiIinDacMock shinsakaiIinDacMock;
+//    private static ShinsakaiIinDacMock shinsakaiIinDacMock;
 
     @BeforeClass
     public static void setUpBeforeClass() {
         shinsakaiIinDac = InstanceProvider.create(ShinsakaiIinDac.class);
-        shinsakaiIinDacMock = InstanceProvider.create(ShinsakaiIinDacMock.class);
+//        shinsakaiIinDacMock = InstanceProvider.create(ShinsakaiIinDacMock.class);
     }
 
     public static class select審査会委員_引数に審査会委員コードを渡した場合のテスト extends DbeTestDacBase {

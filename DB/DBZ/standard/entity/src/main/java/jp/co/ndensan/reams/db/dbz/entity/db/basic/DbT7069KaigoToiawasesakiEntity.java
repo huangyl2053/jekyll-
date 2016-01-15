@@ -12,12 +12,14 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 介護問合せ先テーブルのエンティティクラスです。
  */
 public class DbT7069KaigoToiawasesakiEntity extends DbTableEntityBase<DbT7069KaigoToiawasesakiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7069KaigoToiawasesaki");
 
@@ -101,12 +103,14 @@ public class DbT7069KaigoToiawasesakiEntity extends DbTableEntityBase<DbT7069Kai
      * 
      * @param subGyomuCode サブ業務コード
      */
-    public void setSubGyomuCode(SubGyomuCode subGyomuCode) {
+    public void setSubGyomuCode(@Nonnull SubGyomuCode subGyomuCode) {
         this.subGyomuCode = subGyomuCode;
     }
 
     /**
      * 帳票分類IDのgetメソッドです。
+     * <br/>
+     * <br/>共通としての管理時は「000000000」
      * 
      * @return 帳票分類ID
      */
@@ -116,10 +120,12 @@ public class DbT7069KaigoToiawasesakiEntity extends DbTableEntityBase<DbT7069Kai
 
     /**
      * 帳票分類IDのsetメソッドです。
+     * <br/>
+     * <br/>共通としての管理時は「000000000」
      * 
      * @param chohyoBunruiID 帳票分類ID
      */
-    public void setChohyoBunruiID(ReportId chohyoBunruiID) {
+    public void setChohyoBunruiID(@Nonnull ReportId chohyoBunruiID) {
         this.chohyoBunruiID = chohyoBunruiID;
     }
 
@@ -128,6 +134,7 @@ public class DbT7069KaigoToiawasesakiEntity extends DbTableEntityBase<DbT7069Kai
      * 
      * @return 郵便番号
      */
+    @CheckForNull
     public YubinNo getYubinNo() {
         return yubinNo;
     }
@@ -146,6 +153,7 @@ public class DbT7069KaigoToiawasesakiEntity extends DbTableEntityBase<DbT7069Kai
      * 
      * @return 所在地
      */
+    @CheckForNull
     public RString getShozaichi() {
         return shozaichi;
     }
@@ -164,6 +172,7 @@ public class DbT7069KaigoToiawasesakiEntity extends DbTableEntityBase<DbT7069Kai
      * 
      * @return 庁舎名
      */
+    @CheckForNull
     public RString getChoshaName() {
         return choshaName;
     }
@@ -182,6 +191,7 @@ public class DbT7069KaigoToiawasesakiEntity extends DbTableEntityBase<DbT7069Kai
      * 
      * @return 電話番号
      */
+    @CheckForNull
     public TelNo getTelNo() {
         return telNo;
     }
@@ -200,6 +210,7 @@ public class DbT7069KaigoToiawasesakiEntity extends DbTableEntityBase<DbT7069Kai
      * 
      * @return 内線番号
      */
+    @CheckForNull
     public RString getNaisenNo() {
         return naisenNo;
     }
@@ -218,6 +229,7 @@ public class DbT7069KaigoToiawasesakiEntity extends DbTableEntityBase<DbT7069Kai
      * 
      * @return 部署名
      */
+    @CheckForNull
     public RString getBushoName() {
         return bushoName;
     }
@@ -236,6 +248,7 @@ public class DbT7069KaigoToiawasesakiEntity extends DbTableEntityBase<DbT7069Kai
      * 
      * @return 担当者名
      */
+    @CheckForNull
     public RString getTantoshaName() {
         return tantoshaName;
     }
@@ -253,7 +266,7 @@ public class DbT7069KaigoToiawasesakiEntity extends DbTableEntityBase<DbT7069Kai
      * このエンティティの主キーが他の{@literal DbT7069KaigoToiawasesakiEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7069KaigoToiawasesakiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -296,4 +309,5 @@ public class DbT7069KaigoToiawasesakiEntity extends DbTableEntityBase<DbT7069Kai
     }
 
 // </editor-fold>
+
 }

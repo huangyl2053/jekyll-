@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.Shotoku;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2008ShotokuDac;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2008ShotokuKanriDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -23,21 +23,21 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class ShotokuManager {
 
-    private final DbT2008ShotokuDac dac;
+    private final DbT2008ShotokuKanriDac dac;
 
     /**
      * コンストラクタです。
      */
     public ShotokuManager() {
-        dac = InstanceProvider.create(DbT2008ShotokuDac.class);
+        dac = InstanceProvider.create(DbT2008ShotokuKanriDac.class);
     }
 
     /**
      * テスト用コンストラクタです。
      *
-     * @param dac {@link DbT2008ShotokuDac}
+     * @param dac {@link DbT2008ShotokuKanriDac}
      */
-    ShotokuManager(DbT2008ShotokuDac dac) {
+    ShotokuManager(DbT2008ShotokuKanriDac dac) {
         this.dac = dac;
     }
 
@@ -53,12 +53,12 @@ public class ShotokuManager {
     public Shotoku get介護所得(
             FlexibleYear 所得年度,
             ShikibetsuCode 識別コード,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage("所得年度"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
-        DbT2008ShotokuEntity entity = dac.selectByKey(
+        DbT2008ShotokuKanriEntity entity = dac.selectByKey(
                 所得年度,
                 識別コード,
                 履歴番号);
@@ -78,7 +78,7 @@ public class ShotokuManager {
     public List<Shotoku> get介護所得一覧() {
         List<Shotoku> businessList = new ArrayList<>();
 
-        for (DbT2008ShotokuEntity entity : dac.selectAll()) {
+        for (DbT2008ShotokuKanriEntity entity : dac.selectAll()) {
             entity.initializeMd5();
             businessList.add(new Shotoku(entity));
         }

@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3009KyotakuKeikakuJikoSakus
  */
 public interface IDbT3009KyotakuKeikakuJikoSakuseiGokeiMapper {
 
-    /* * {@linkDbT3009KyotakuKeikakuJikoSakuseiGokeiEntity}を取得します。
+    /** {@link DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity}を取得します。
      *
-     * @return {@linkDbT3009KyotakuKeikakuJikoSakuseiGokeiEntity}
+     * @return {@link DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity getEntity();

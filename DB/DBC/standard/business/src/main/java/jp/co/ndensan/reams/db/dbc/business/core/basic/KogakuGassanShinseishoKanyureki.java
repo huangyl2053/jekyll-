@@ -46,7 +46,7 @@ public class KogakuGassanShinseishoKanyureki
             HokenshaNo 保険者番号,
             RString 整理番号,
             RString 加入歴番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
         requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
@@ -153,7 +153,7 @@ public class KogakuGassanShinseishoKanyureki
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 

@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.Gogitai.GogitaiList;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.gogitaiyukokikankaishidate.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
-import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.GogitaiWariateShinsakaiIinEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.Test;
@@ -124,11 +123,11 @@ public class GogitaiMapperTest {
     private static GogitaiWariateShinsakaiIinEntity create合議体割当委員Entity(int 合議体番号, String 合議体有効期間開始年月日,
             String 合議体有効期間終了年月日, String 委員コード, String 委員開始年月日, String 場所コード) {
         GogitaiWariateShinsakaiIinEntity entity = new GogitaiWariateShinsakaiIinEntity();
-        entity.set割当Entity(GogitaiMockEntityCreator.create合議体割当EntitySpy(合議体番号, 委員コード,
-                合議体有効期間開始年月日, 合議体有効期間終了年月日));
+//        entity.set割当Entity(GogitaiMockEntityCreator.create合議体割当EntitySpy(合議体番号, 委員コード,
+//                合議体有効期間開始年月日, 合議体有効期間終了年月日));
         entity.set合議体情報Entity(GogitaiMockEntityCreator.create合議体情報Entity(合議体番号, 合議体有効期間開始年月日,
                 合議体有効期間終了年月日, 場所コード));
-        entity.set委員Entity(ShinsakaiMockEntityCreator.create審査会委員EntitySpy(委員コード));
+//        entity.set委員Entity(ShinsakaiMockEntityCreator.create審査会委員EntitySpy(委員コード));
         entity.set開催場所Entity(GogitaiMockEntityCreator.create開催場所EntitySpy(場所コード));
         return entity;
     }
