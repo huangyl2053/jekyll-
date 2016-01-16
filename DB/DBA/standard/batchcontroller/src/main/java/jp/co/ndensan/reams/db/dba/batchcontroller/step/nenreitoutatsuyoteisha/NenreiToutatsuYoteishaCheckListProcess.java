@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
@@ -34,7 +35,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -52,17 +52,6 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  */
 public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBase {
 
-    private INenreiToutatsuYoteishaCheckListProcessParameter processParameter;
-    private INenreiToutatsuYoteishaCheckListMapper nenreiToutatsuYoteishaCheckListMapper;
-    private List<NenreiToutatsuYoteishaCheckListEntity> nenreiToutatsuYoteishaCheckListEntity;
-    private List<NenreiToutatsuYoteishaCheckListEntity> nenreiToutatsuYoteishaCheckListEntity2;
-    private List<DbT1009ShikakuShutokuJogaishaEntity> dbT1009ShikakuShutokuJogaishaEntity;
-    private List<DbT1002TekiyoJogaishaEntity> dbT1002TekiyoJogaishaEntity;
-    private List<DbT1003TashichosonJushochiTokureiEntity> dbT1003TashichosonJushochiTokureiEntity;
-    private NenreiToutatsuYoteishaCheckListJyohoEntity nenreiToutatsuYoteishaCheckListJyohoEntity;
-    private final List<NenreiToutatsuYoteishaCheckListEntity> removeListEntity = new ArrayList<>();
-    private FileSpoolManager manager;
-    private RString eucFilePath;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(
             new RString("NenreiToutatsuYoteishaCheckListEucCsvEntity"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
@@ -76,17 +65,28 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
     private static final RString 住登内外国人 = new RString("2");
     private static final RString 住登外日本人 = new RString("3");
     private static final RString 住登外外国人 = new RString("4");
-    private static final RString 住所地特例フラグtrue = new RString("1");
+    private static final RString 住所地特例フラグTRUE = new RString("1");
     private static final RString 被保険者区分コード = new RString("2");
     private static final RString 資格区分_新規取得者 = new RString("新規取得者");
     private static final RString 資格区分_2号取得者 = new RString("2号取得者");
     private static final RString 住特者区分_住所地特例 = new RString("住所地特例");
     private static final RString 状態_被保険者 = new RString("被保険者");
     private static final RString 状態_適用除外者 = new RString("適用除外者");
+    private static final RString 状態_転入保留対象者 = new RString("転入保留対象者");
     private static final RString 状態_他市町村住所地特例者 = new RString("他市町村住所地特例者");
     private static final RString 生活 = new RString("●");
-    private static final ReportId ID = new ReportId("DBA200014_TennyuTenshutsuMitorokuIchiranhyo");
-
+    private INenreiToutatsuYoteishaCheckListProcessParameter processParameter;
+    private INenreiToutatsuYoteishaCheckListMapper nenreiToutatsuYoteishaCheckListMapper;
+    private List<NenreiToutatsuYoteishaCheckListEntity> nenreiToutatsuYoteishaCheckListEntity;
+    private List<NenreiToutatsuYoteishaCheckListEntity> nenreiToutatsuYoteishaCheckListEntity2;
+    private List<DbT1009ShikakuShutokuJogaishaEntity> dbT1009ShikakuShutokuJogaishaEntity;
+    private List<DbT1002TekiyoJogaishaEntity> dbT1002TekiyoJogaishaEntity;
+    private List<DbT1003TashichosonJushochiTokureiEntity> dbT1003TashichosonJushochiTokureiEntity;
+    private List<DbT1010TennyushutsuHoryuTaishoshaEntity> dbT1010TennyushutsuHoryuTaishoshaEntity;
+    private NenreiToutatsuYoteishaCheckListJyohoEntity nenreiToutatsuYoteishaCheckListJyohoEntity;
+    private final List<NenreiToutatsuYoteishaCheckListEntity> removeListEntity = new ArrayList<>();
+    private FileSpoolManager manager;
+    private RString eucFilePath;
     @BatchWriter
 //    private BatchReportWriter<NenreitotatsuYoteishaIchiranhyoReportSource> batchReportWriter;
 //    private ReportSourceWriter<NenreitotatsuYoteishaIchiranhyoReportSource> reportSourceWriter;
@@ -141,40 +141,38 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
                 }
             }
             nenreiToutatsuYoteishaCheckListEntity2.removeAll(removeListEntity);
-            for (int i = 0; i < nenreiToutatsuYoteishaCheckListEntity2.size(); i++) {
-                NenreiToutatsuYoteishaCheckListEntity entity = nenreiToutatsuYoteishaCheckListEntity2.get(i);
+            for (NenreiToutatsuYoteishaCheckListEntity entity : nenreiToutatsuYoteishaCheckListEntity2) {
                 if (entity.getHihokenshaNo() == null) {
-                    nenreiToutatsuYoteishaCheckListEntity2.get(i).setShigekubun(資格区分_新規取得者);
+                    entity.setShigekubun(資格区分_新規取得者);
                 } else {
-                    nenreiToutatsuYoteishaCheckListEntity2.get(i).setShigekubun(資格区分_2号取得者);
+                    entity.setShigekubun(資格区分_2号取得者);
                 }
-                if (住所地特例フラグtrue.equals(entity.getJushochiTokureiFlag())) {
-                    nenreiToutatsuYoteishaCheckListEntity2.get(i).setJutosyakubun(住特者区分_住所地特例);
+                if (住所地特例フラグTRUE.equals(entity.getJushochiTokureiFlag())) {
+                    entity.setJutosyakubun(住特者区分_住所地特例);
                 } else {
-                    nenreiToutatsuYoteishaCheckListEntity2.get(i).setJutosyakubun(RString.EMPTY);
+                    entity.setJutosyakubun(RString.EMPTY);
                 }
                 List<UrT0508SeikatsuHogoJukyushaEntity> urT0508Seika = nenreiToutatsuYoteishaCheckListMapper
-                        .getSeikatsuHogojyu(nenreiToutatsuYoteishaCheckListEntity2.get(i).getShikibetsuCode());
+                        .getSeikatsuHogojyu(entity.getShikibetsuCode());
                 if (!urT0508Seika.isEmpty() && urT0508Seika.get(0).getJukyuKaishiYMD()
                         .isBeforeOrEquals(entity.getNenreiyotainichi())
                         && entity.getNenreiyotainichi().isBeforeOrEquals(
                                 urT0508Seika.get(0).getJukyuHaishiYMD())) {
-                    nenreiToutatsuYoteishaCheckListEntity2.get(i).setSeikatsu(生活);
+                    entity.setSeikatsu(生活);
                 } else {
-                    nenreiToutatsuYoteishaCheckListEntity2.get(i).setSeikatsu(RString.EMPTY);
+                    entity.setSeikatsu(RString.EMPTY);
                 }
-
                 if (被保険者区分コード.equals(entity.getHihokennshaKubunCode())) {
-                    nenreiToutatsuYoteishaCheckListEntity2.get(i).setJyotei(状態_被保険者);
+                    entity.setJyotei(状態_被保険者);
                 }
-
                 if (出力対象者_全ての対象者.equals(processParameter.getSyutsuryokutaisyo())) {
                     getTekiyoJogaiList();
                     for (DbT1002TekiyoJogaishaEntity dbT1002entity : dbT1002TekiyoJogaishaEntity) {
                         if (dbT1002entity.getShikibetsuCode().equals(entity.getShikibetsuCode())
                                 && dbT1002entity.getTekiyoYMD().isBeforeOrEquals(entity.getNenreiyotainichi())
                                 && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1002entity.getKaijoYMD())) {
-                            nenreiToutatsuYoteishaCheckListEntity2.get(i).setJyotei(状態_適用除外者);
+                            entity.setJyotei(状態_適用除外者);
+                            break;
                         }
                     }
                     getTashichosonJushochi();
@@ -182,22 +180,22 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
                         if (dbT1003entity.getShikibetsuCode().equals(entity.getShikibetsuCode())
                                 && dbT1003entity.getTekiyoYMD().isBeforeOrEquals(entity.getNenreiyotainichi())
                                 && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1003entity.getKaijoYMD())) {
-                            nenreiToutatsuYoteishaCheckListEntity2.get(i).setJyotei(状態_他市町村住所地特例者);
+                            entity.setJyotei(状態_他市町村住所地特例者);
+                            break;
                         }
                     }
-//                     TODO 転入保留対象者リスト取得 QA298
-//                    getTashichosonJushochi();
-//                    for (DbT1010TennyushutsuHoryuTaishoshaEntity dbT1010entity : dbT1010TennyushutsuHoryuTaishoshaEntity) {
-//                        if (dbT1010entity.getShikibetsuCode().equals(entity.getShikibetsuCode())
-//                                && dbT1010entity.getTekiyoYMD().isBeforeOrEquals(entity.getNenreiyotainichi())
-//                                && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1010entity.getKaijoYMD())) {
-//                            nenreiToutatsuYoteishaCheckListEntity2.get(i).setJyotei(new RString("転入保留対象者"));
-//                        }
-//                    }
+                    getTennyushutsuHoryuTaishosha();
+                    for (DbT1010TennyushutsuHoryuTaishoshaEntity dbT1010entity : dbT1010TennyushutsuHoryuTaishoshaEntity) {
+                        if (dbT1010entity.getShikibetsuCode().equals(entity.getShikibetsuCode())
+                                && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1010entity.getTorokuIdoYMD())) {
+                            entity.setJyotei(状態_転入保留対象者);
+                            break;
+                        }
+                    }
                 }
                 if (!被保険者区分コード.equals(entity.getHihokennshaKubunCode()) && !出力対象者_全ての対象者
                         .equals(processParameter.getSyutsuryokutaisyo())) {
-                    nenreiToutatsuYoteishaCheckListEntity2.get(i).setJyotei(RString.EMPTY);
+                    entity.setJyotei(RString.EMPTY);
                 }
             }
             nenreiToutatsuYoteishaCheckListJyohoEntity.set年齢到達予定者チェックリスト(nenreiToutatsuYoteishaCheckListEntity2);
@@ -298,7 +296,6 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
                 }
             }
             nenreiToutatsuYoteishaCheckListEntity.removeAll(removeListEntity);
-
             getTekiyoJogaiList();
             removeListEntity.clear();
             for (NenreiToutatsuYoteishaCheckListEntity entity : nenreiToutatsuYoteishaCheckListEntity) {
@@ -319,7 +316,16 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
                 }
             }
             nenreiToutatsuYoteishaCheckListEntity.removeAll(removeListEntity);
-            // TODO 転入保留対象者リスト取得(内QA298 )
+            getTennyushutsuHoryuTaishosha();
+            removeListEntity.clear();
+            for (NenreiToutatsuYoteishaCheckListEntity entity : nenreiToutatsuYoteishaCheckListEntity) {
+                for (DbT1010TennyushutsuHoryuTaishoshaEntity dbt1010entity : dbT1010TennyushutsuHoryuTaishoshaEntity) {
+                    if (entity.getShikibetsuCode().equals(dbt1010entity.getShikibetsuCode())) {
+                        removeListEntity.add(entity);
+                    }
+                }
+            }
+            nenreiToutatsuYoteishaCheckListEntity.removeAll(removeListEntity);
         }
         List<JuminJotai> 住民状態 = new ArrayList<>();
         住民状態.add(JuminJotai.転出者);
@@ -336,7 +342,6 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
                 nenreiToutatsuYoteishaCheckListEntity.add(entity);
             }
         }
-
     }
 
     private void getZenbuSya() {
@@ -410,6 +415,10 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
 
     private void getTashichosonJushochi() {
         dbT1003TashichosonJushochiTokureiEntity = nenreiToutatsuYoteishaCheckListMapper.getTashichosonJushochi();
+    }
+
+    private void getTennyushutsuHoryuTaishosha() {
+        dbT1010TennyushutsuHoryuTaishoshaEntity = nenreiToutatsuYoteishaCheckListMapper.getTennyushutsuHoryuTaishosha();
     }
 // TODO  QA377 AccessLogの実装方式
 //    private PersonalData toPersonalData(NenreiToutatsuYoteishaCheckListEntity nenreiToutatsuYoteisha) {

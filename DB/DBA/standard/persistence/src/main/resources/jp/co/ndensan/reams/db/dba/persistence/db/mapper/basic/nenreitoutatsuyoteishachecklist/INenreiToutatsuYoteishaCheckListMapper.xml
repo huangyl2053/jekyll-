@@ -276,6 +276,25 @@
          WHERE DbT1003.rank_number = 1
     </select>
     
+    <resultMap id="resultMap_DbT1010TennyushutsuHoryuTaishoshaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity" autoMapping="true">
+    <result property="shikibetsuCode"   column="DbT1010Tennyu_shikibetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+    <result property="torokuIdoYMD"    column="DbT1010Tennyu_torokuIdoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    </resultMap>
+    <select id="getTennyushutsuHoryuTaishosha"
+        resultMap="resultMap_DbT1010TennyushutsuHoryuTaishoshaEntity" fetchSize="500">
+        SELECT
+            "DbT1010Tennyu_shikibetsuCode",
+            "DbT1010Tennyu_torokuIdoYMD"
+        FROM (
+                SELECT									
+                    "shikibetsuCode" AS "DbT1010Tennyu_shikibetsuCode",
+                    "torokuIdoYMD" AS "DbT1010Tennyu_torokuIdoYMD",
+                    row_number() over(partition by "shikibetsuCode" order by "rirekiNo" DESC) as rank_number
+                FROM	
+                    rgdb."DbT1010TennyushutsuHoryuTaishosha"
+            ) AS DbT1010
+        where DbT1010.rank_number = 1
+    </select>
     <resultMap id="resultMap_UrT0508SeikatsuHogoJukyushaEntity" type="jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity" autoMapping="true">
         <result property="shikibetsuCode"   column="UrT0508Seika_shikibetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
 	<result property="jukyuKaishiYMD"    column="UrT0508Seika_jukyuKaishiYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.nenreitoutatsuyoteishachecklist.Nenr
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -42,20 +43,20 @@ public interface INenreiToutatsuYoteishaCheckListMapper {
     /**
      * NenreiToutatsuYoteishaCheckListEntity 全ての対象者取得1。
      *
-     * @param znebuParameter　znebuParameter
+     * @param zenbuParameter　zenbuParameter
      * @return 年齢到達予定者チェックリスト List<NenreiToutatsuYoteishaCheckListEntity>
      */
     List<NenreiToutatsuYoteishaCheckListEntity> getZenbuNenreiToutatsuYoteishaCheckList(
-            NenreiToutatsuYoteishaCheckListMybatisParameter znebuParameter);
+            NenreiToutatsuYoteishaCheckListMybatisParameter zenbuParameter);
 
     /**
      * NenreiToutatsuYoteishaCheckListEntity 全ての対象者取得2。
      *
-     * @param znebuParameter znebuParameter
+     * @param zenbuParameter zenbuParameter
      * @return 年齢到達予定者チェックリスト List<NenreiToutatsuYoteishaCheckListEntity>
      */
     List<NenreiToutatsuYoteishaCheckListEntity> getZenbuNenreiToutatsuYoteishaCheckList2(
-            NenreiToutatsuYoteishaCheckListMybatisParameter znebuParameter);
+            NenreiToutatsuYoteishaCheckListMybatisParameter zenbuParameter);
 
     /**
      * DbT1009ShikakuShutokuJogaishaEntity 資格取得除外者リスト取得。
@@ -72,11 +73,18 @@ public interface INenreiToutatsuYoteishaCheckListMapper {
     List<DbT1002TekiyoJogaishaEntity> getTekiyoJogaiList();
 
     /**
-     * UrT0508SeikatsuHogoJukyushaEntity 他市町村住所地特例者リスト取得取得。
+     * UrT0508SeikatsuHogoJukyushaEntity 他市町村住所地特例者リスト取得。
      *
      * @return 他市町村住所地特例者リストList<UrT0508SeikatsuHogoJukyushaEntity>
      */
     List<DbT1003TashichosonJushochiTokureiEntity> getTashichosonJushochi();
+
+    /**
+     * DbT1010TennyushutsuHoryuTaishoshaEntity 転入保留対象者リスト取得。
+     *
+     * @return　転入保留対象者リスト取得List<DbT1010TennyushutsuHoryuTaishoshaEntity>
+     */
+    List<DbT1010TennyushutsuHoryuTaishoshaEntity> getTennyushutsuHoryuTaishosha();
 
     /**
      * UrT0508SeikatsuHogoJukyushaEntity 生活保護受給者リスト。
