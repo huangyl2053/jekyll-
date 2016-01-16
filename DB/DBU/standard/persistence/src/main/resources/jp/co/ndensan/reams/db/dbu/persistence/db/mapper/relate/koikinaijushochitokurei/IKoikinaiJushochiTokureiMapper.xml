@@ -380,7 +380,7 @@
             "koikinaiTokureiSochimotoShichosonCode",
             "kyuShichosonCode",											
             "logicalDeletedFlag",
-            row_number() over(partition by "shikakuShutokuYMD" order by "idoYMD" desc,"edaNo" desc) as rank_number
+            row_number() over(partition by "shikakuShutokuYMD" order by "idoYMD" , "edaNo") as rank_number
 	  FROM												
             rgdb."DbT1001HihokenshaDaicho"										
             WHERE
@@ -388,10 +388,9 @@
             AND	"logicalDeletedFlag"=FALSE
             AND "hihokenshaNo" = #{hihokenshaNo}
             AND "shikakuShutokuYMD" = #{shikakuShutokuYMD}
-            AND "koikinaiJushochiTokureiFlag" = '1'
             AND "idoYMD" <![CDATA[>=]]> #{idoYMD}
             AND (
-                "jushochiTokureiFlag" != '1'
+                "koikinaiJushochiTokureiFlag" != '1'
                 OR "shikakuSoshitsuTodokedeYMD" IS NOT NULL
                )
             ) DbT1001											
