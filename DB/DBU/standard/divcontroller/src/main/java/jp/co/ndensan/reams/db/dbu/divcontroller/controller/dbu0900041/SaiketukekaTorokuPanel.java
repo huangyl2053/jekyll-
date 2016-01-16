@@ -167,12 +167,12 @@ public class SaiketukekaTorokuPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
 
             if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                        UrQuestionMessages.保存の確認.getMessage().evaluate());
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
+                        UrQuestionMessages.削除の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
 
-            if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+            if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 削除処理(識別コード, 被保険者番号, 審査請求届出日);
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(削除.toString())).respond();
