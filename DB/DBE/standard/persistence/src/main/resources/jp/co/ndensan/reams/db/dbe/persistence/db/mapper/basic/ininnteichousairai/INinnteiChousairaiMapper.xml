@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 認定調査依頼のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.ininnteichousairai.INinnteiChousairaiMapper">
+    <resultMap id="result_NinnteiChousairaiEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.NinnteiChousairaiEntity">
+        <result property="ninteichosaItakusakiCode" column="Temp_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshaMeisho" column="Temp_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="waritsukeChiku" column="Temp_waritsukeChiku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler"/>
+        <result property="waritsukeTeiin" column="Temp_waritsukeTeiin"/>
+        <result property="jusho" column="Temp_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="telNo" column="Temp_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="kikanKubun" column="Temp_kikanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="waritsukesumiKensu" column="Temp_waritsukeCount"/>
+    </resultMap>
+    <select id="selectNinnteiChousaItaku" resultMap="result_NinnteiChousairaiEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
+            SELECT
+                DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode" AS Temp_ninteichosaItakusakiCode
+                , DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho" AS Temp_jigyoshaMeisho
+                , DbT5910NinteichosaItakusakiJoho."waritsukeChiku" AS Temp_waritsukeChiku
+                , DbT5910NinteichosaItakusakiJoho."waritsukeTeiin" AS Temp_waritsukeTeiin
+                , DbT5910NinteichosaItakusakiJoho."jusho" AS Temp_jusho
+                , DbT5910NinteichosaItakusakiJoho."telNo" AS Temp_telNo
+                , DbT5910NinteichosaItakusakiJoho."kikanKubun" AS Temp_kikanKubun
+                , SUM( 
+                  COALESCE(ninteichosaIraiJohoZimi.waritsukeCount, 0)
+                ) AS Temp_waritsukeCount
+              FROM
+                rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910NinteichosaItakusakiJoho 
+                LEFT JOIN ( 
+                  SELECT
+                    DbT5201NinteichosaIraiJoho."ninteichosaItakusakiCode" AS Temp_ninteichosaItakusakiCode
+                    , CASE 
+                      WHEN DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '' 
+                      AND DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" = '' 
+                      AND DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" = '' 
+                      AND DbT5105NinteiKanryoJoho."centerSoshinYMD" = '' 
+                      THEN 1 
+                      ELSE 0 
+                      END AS waritsukeCount 
+                  FROM
+                    rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201NinteichosaIraiJoho 
+                    INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho 
+                      ON DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo" 
+                      AND DbT5101NinteiShinseiJoho."shoriJotaiKubun" IN ('0','3')
+                      AND DbT5101NinteiShinseiJoho."logicalDeletedFlag" = FALSE 
+                      <if test="flag=true">
+                            AND DbT5101NinteiShinseiJoho."shishoCode" = #{shishoCode}
+                      </if>
+                    INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho 
+                      ON DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = DbT5105NinteiKanryoJoho."shinseishoKanriNo" 
+                    INNER JOIN ( 
+                      SELECT
+                        MAX( 
+                          DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo"
+                        ) AS Temp_ninteichosaIraiRirekiNo
+                        , DbT5201NinteichosaIraiJoho."shinseishoKanriNo" AS shinseishoKanriRirekiNo_shinseishoNo 
+                      FROM
+                        rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201NinteichosaIraiJoho 
+                      GROUP BY
+                        shinseishoKanriRirekiNo_shinseishoNo
+                    ) AS shinseishoKanriRirekiNo 
+                      ON DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = shinseishoKanriRirekiNo.shinseishoKanriRirekiNo_shinseishoNo
+                  WHERE
+                    DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = shinseishoKanriRirekiNo.Temp_ninteichosaIraiRirekiNo
+                    AND DbT5201NinteichosaIraiJoho."logicalDeletedFlag"
+                ) AS ninteichosaIraiJohoZimi 
+                  ON ninteichosaIraiJohoZimi.Temp_ninteichosaItakusakiCode = Temp_ninteichosaItakusakiCode 
+              WHERE
+                DbT5910NinteichosaItakusakiJoho."shichosonCode" IN ( 
+                  SELECT
+                    dbT7051."shichosonCode" AS shichosonCode
+                  FROM
+                    rgdb."DbT7051KoseiShichosonMaster" AS dbT7051 
+                  WHERE
+                    dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+                ) 
+                AND DbT5910NinteichosaItakusakiJoho."jokyoFlag" = TRUE 
+              GROUP BY
+                DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
+                , DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho"
+                , DbT5910NinteichosaItakusakiJoho."waritsukeChiku"
+                , DbT5910NinteichosaItakusakiJoho."waritsukeTeiin"
+                , DbT5910NinteichosaItakusakiJoho."jusho"
+                , DbT5910NinteichosaItakusakiJoho."telNo"
+                , DbT5910NinteichosaItakusakiJoho."kikanKubun"
+    </select>
+</mapper>
