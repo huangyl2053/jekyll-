@@ -33,6 +33,7 @@ public class SaiketukekaTorokuPanel {
 
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
+    private static final RString 更新 = new RString("更新");
 
     /**
      * 裁決結果登録_登録の初期化。<br/>
@@ -142,7 +143,7 @@ public class SaiketukekaTorokuPanel {
                         .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                     修正処理(div, 識別コード, 被保険者番号, 審査請求届出日);
                     // TODO ramlファイルにメッセージエリア<介護共通部品>がない
-                    return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(修正.toString())).respond();
+                    return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(更新.toString())).respond();
                 }
 
                 if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
