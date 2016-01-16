@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbumn52001;
+package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0520011;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;

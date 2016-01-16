@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.dbumn52001;
+package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0520011;
 
 import jp.co.ndensan.reams.db.dbu.definition.core.kyokaisogaitoshabatchparameter.KyokaisoKanriMasterListBatchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0520011.KyokaisouKanriMasterListPanelDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbumn52001.KyokaisouKanriMasterListPanelHandler;
-import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbumn52001.KyokaisouKanriMasterListValidatisonHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0520011.KyokaisouKanriMasterListPanelHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0520011.KyokaisouKanriMasterListValidatisonHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoBunruiKanriManager;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
