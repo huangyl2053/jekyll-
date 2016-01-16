@@ -15,14 +15,16 @@ public enum DBE5100001StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    開催予定登録("開催予定登録"),
-    対象者割当("対象者割当"),
+    対象者割付("対象者割付"),
     審査会資料("審査会資料"),
     審査結果登録("審査結果登録"),
     事前結果登録("事前結果登録"),
-    データ出力("データ出力"),
-    判定結果("判定結果"),
-    Defalt("Defalt");
+    Defalt("Defalt"),
+    審査会個人別状況照会("審査会個人別状況照会"),
+    データ出力（モバイル）("データ出力（モバイル）"),
+    開催結果登録("開催結果登録"),
+    データ取込み（モバイル）("データ取込み（モバイル）"),
+    結果登録（OCR)("結果登録（OCR)");
 
     private final RString name;
 
