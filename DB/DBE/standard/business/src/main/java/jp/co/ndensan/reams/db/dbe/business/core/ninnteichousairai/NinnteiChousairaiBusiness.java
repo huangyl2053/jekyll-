@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.NinnteiChousairaiEntity;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -78,6 +79,15 @@ public class NinnteiChousairaiBusiness {
      */
     public TelNo getTelNo() {
         return entity.getTelNo();
+    }
+
+    /**
+     * 市町村コードを返します。
+     *
+     * @return 市町村コード
+     */
+    public LasdecCode getShichosonCode() {
+        return entity.getShichosonCode();
     }
 
     /**
