@@ -68,4 +68,24 @@ public class NinnteiChousairaiFinder {
         }
         return SearchResult.of(認定調査委託先List, 0, false);
     }
+
+    /**
+     * 認定調査委託先一覧を取得する。
+     *
+     * @param parametere 要介護認定結果情報パラメータ
+     * @return ShujiiMaster 認定調査委託先情報
+     */
+    @Transaction
+    public SearchResult<NinnteiChousairaiBusiness> getItakuSenn(NinnteiChousairaiParameter parametere) {
+        INinnteiChousairaiMapper mapper = mapperProvider.create(INinnteiChousairaiMapper.class);
+        List<NinnteiChousairaiEntity> entityList = mapper.selectItakuSenn(parametere);
+        if (entityList == null || entityList.isEmpty()) {
+            return SearchResult.of(Collections.<NinnteiChousairaiBusiness>emptyList(), 0, false);
+        }
+        List<NinnteiChousairaiBusiness> 認定調査委託先一覧 = new ArrayList<>();
+        for (NinnteiChousairaiEntity entity : entityList) {
+            認定調査委託先一覧.add(new NinnteiChousairaiBusiness(entity));
+        }
+        return SearchResult.of(認定調査委託先一覧, 0, false);
+    }
 }

@@ -21,4 +21,12 @@ public interface INinnteiChousairaiMapper {
      * @return NinnteiChousairaiEntity 要介護認定結果情報Entityクラスです。
      */
     List<NinnteiChousairaiEntity> selectNinnteiChousaItaku(NinnteiChousairaiParameter parametere);
+
+    /**
+     * 認定調査委託先一覧を取得します。
+     *
+     * @param parametere 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです。
+     * @return NinnteiChousairaiEntity 要介護認定結果情報Entityクラスです。
+     */
+    List<NinnteiChousairaiEntity> selectItakuSenn(NinnteiChousairaiParameter parametere);
 }

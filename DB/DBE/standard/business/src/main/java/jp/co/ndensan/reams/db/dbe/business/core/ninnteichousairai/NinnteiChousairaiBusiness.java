@@ -97,4 +97,59 @@ public class NinnteiChousairaiBusiness {
     public int getWaritsukesumiKensu() {
         return entity.getWaritsukesumiKensu();
     }
+
+    /**
+     * 認定調査員コードを返します。
+     *
+     * @return 認定調査員コード
+     */
+    public RString getNinteiChosainNo() {
+        return entity.getNinteiChosainNo();
+    }
+
+    /**
+     * 調査員氏名を返します。
+     *
+     * @return 調査員氏名
+     */
+    public RString getChosainShimei() {
+        return entity.getChosainShimei();
+    }
+
+    /**
+     * 調査員氏名カナを返します。
+     *
+     * @return 調査員氏名カナ
+     */
+    public RString getChosainKanaShimei() {
+        return entity.getChosainKanaShimei();
+    }
+
+    /**
+     * 性別を返します。
+     *
+     * @return 性別
+     */
+    public RString getSeibetsu() {
+        return entity.getSeibetsu();
+    }
+
+    /**
+     * 地区コードを返します。
+     *
+     * @return 地区コード
+     */
+    public RString getChikuCode() {
+        return entity.getChikuCode();
+    }
+
+    /**
+     * 調査員資格を返します。
+     *
+     * @return 調査員資格
+     */
+    public RString getChosainShikaku() {
+        return entity.getChosainShikaku();
+    }
+
 }
