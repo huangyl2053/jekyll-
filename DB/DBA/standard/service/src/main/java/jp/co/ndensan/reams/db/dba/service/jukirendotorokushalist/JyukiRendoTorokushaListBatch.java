@@ -24,9 +24,10 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class JyukiRendoTorokushaListBatch {
 
     private static final RString 印刷時刻 = new RString("   時  分  秒");
+    private static final RString 被保険者氏名 = new RString("該当データがありません");
 
     /**
-     * 帳票データ作成
+     * 帳票データを作成します。
      *
      * @param entity 住基連動登録者リストEntity
      * @return JyukiRendoTorokushaListTyouHyouListEntity
@@ -37,7 +38,6 @@ public class JyukiRendoTorokushaListBatch {
         RDate nowDate = RDate.getNowDate();
         RString 印刷日時 = nowDate.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-
         for (JyukiRendoJouhouEntity jyukiRendoJouhouEntity : entity.get住基連動情報()) {
             JyukiRendoTorokushaListTyouHyouListEntity jyukiRendoTorokushaListTyouHyouListEntity
                     = new JyukiRendoTorokushaListTyouHyouListEntity();
@@ -51,8 +51,7 @@ public class JyukiRendoTorokushaListBatch {
             jyukiRendoTorokushaListTyouHyouListEntity.set並び順５(entity.get並び順_5());
             if (jyukiRendoJouhouEntity.get識別コード() == null) {
                 set帳票データ作成用Entityの部分項目(jyukiRendoTorokushaListTyouHyouListEntity, jyukiRendoJouhouEntity);
-                jyukiRendoTorokushaListTyouHyouListEntity.setリスト下_被保険者氏名(
-                        new RString("該当データがありません"));
+                jyukiRendoTorokushaListTyouHyouListEntity.setリスト下_被保険者氏名(被保険者氏名);
             } else {
                 set帳票データ作成用Entityの部分項目(jyukiRendoTorokushaListTyouHyouListEntity, jyukiRendoJouhouEntity);
                 if (jyukiRendoJouhouEntity.get被保険者氏名() != null) {
@@ -120,12 +119,6 @@ public class JyukiRendoTorokushaListBatch {
         return list;
     }
 
-    /**
-     * 帳票データ作成用Entityの部分項目を設定します
-     *
-     * @param jyukiRendoTorokushaListTyouHyouListEntity 住基連動登録者リスト帳票用データリストEntity
-     * @param jyukiRendoJouhouEntity 住基連動情報Entity
-     */
     private void set帳票データ作成用Entityの部分項目(
             JyukiRendoTorokushaListTyouHyouListEntity jyukiRendoTorokushaListTyouHyouListEntity,
             JyukiRendoJouhouEntity jyukiRendoJouhouEntity) {
