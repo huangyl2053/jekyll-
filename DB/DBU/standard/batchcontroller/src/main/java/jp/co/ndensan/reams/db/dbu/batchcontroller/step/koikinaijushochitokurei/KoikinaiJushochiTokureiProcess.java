@@ -106,7 +106,7 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
     
     private RString getPsmParamter(RString hanteiFlag) {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先), true);
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         if (直近.equals(hanteiFlag)) {
             key.setデータ取得区分(DataShutokuKubun.直近レコード);
         } else if (基準日.equals(hanteiFlag) || 範囲.equals(hanteiFlag)) {
@@ -149,9 +149,9 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
             広域内住所地特例者Entity.set取得日(nullToEmtiy(entity.getShikakuShutokuYMD()));
             広域内住所地特例者Entity.set取得届出日(nullToEmtiy(entity.getShikakuShutokuTodokedeYMD()));
             広域内住所地特例者Entity.set喪失日(nullToEmtiy(entity.getShikakuSoshitsuYMD()));
-            広域内住所地特例者Entity.set広住喪失届出日(nullToEmtiy(entity.getShikakuSoshitsuTodokedeYMD()));
+            広域内住所地特例者Entity.set喪失届出日(nullToEmtiy(entity.getShikakuSoshitsuTodokedeYMD()));
             広域内住所地特例者Entity.set資格区分(entity.getHihokennshaKubunCode());
-            広域内住所地特例者Entity.set住特(entity.getKoikinaiJushochiTokureiFlag());
+            広域内住所地特例者Entity.set住特(entity.getJushochiTokureiFlag());
             広域内住所地特例者Entity.set識別コード(entity.getShikibetsuCode().getColumnValue());
             広域内住所地特例者Entity.set氏名(ShikibetsuTaishoFactory
                     .createKojin(entity.getFt200Entity()).get名称().getName().getColumnValue());
