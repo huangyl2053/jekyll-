@@ -11,6 +11,7 @@
         <result property="waritsukeTeiin" column="Temp_waritsukeTeiin"/>
         <result property="jusho" column="Temp_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="telNo" column="Temp_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="shichosonCode" column="Temp_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="kikanKubun" column="Temp_kikanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="waritsukesumiKensu" column="Temp_waritsukeCount"/>
     </resultMap>
@@ -23,6 +24,7 @@
                 , DbT5910NinteichosaItakusakiJoho."waritsukeTeiin" AS Temp_waritsukeTeiin
                 , DbT5910NinteichosaItakusakiJoho."jusho" AS Temp_jusho
                 , DbT5910NinteichosaItakusakiJoho."telNo" AS Temp_telNo
+                , DbT5910NinteichosaItakusakiJoho."shichosonCode" AS Temp_shichosonCode
                 , DbT5910NinteichosaItakusakiJoho."kikanKubun" AS Temp_kikanKubun
                 , SUM( 
                   COALESCE(ninteichosaIraiJohoZimi.waritsukeCount, 0)
@@ -84,6 +86,7 @@
                 , DbT5910NinteichosaItakusakiJoho."waritsukeChiku"
                 , DbT5910NinteichosaItakusakiJoho."waritsukeTeiin"
                 , DbT5910NinteichosaItakusakiJoho."jusho"
+                ,DbT5910NinteichosaItakusakiJoho."shichosonCode"
                 , DbT5910NinteichosaItakusakiJoho."telNo"
                 , DbT5910NinteichosaItakusakiJoho."kikanKubun"
     </select>

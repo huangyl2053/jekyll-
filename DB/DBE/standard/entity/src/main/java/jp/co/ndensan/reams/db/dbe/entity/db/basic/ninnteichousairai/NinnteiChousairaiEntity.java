@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai;
 
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -26,6 +27,7 @@ public class NinnteiChousairaiEntity {
     private int waritsukeTeiin;
     private RString jusho;
     private TelNo telNo;
+    private LasdecCode shichosonCode;
     private RString kikanKubun;
     private int waritsukesumiKensu;
     private RString ninteiChosainNo;
