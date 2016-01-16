@@ -51,7 +51,11 @@ public class SaiketukekaTorokuValidationHandler {
      * @return 判定結果(true:変更あり,false:変更なし)
      */
     public boolean 修正_変更有無チェック(RString 修正後の値) {
-        
+        if (ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class) == null && 修正後の値 == null) {
+            return false;
+        } else if (ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class) == null && 修正後の値 != null) {
+            return true;
+        }
         return !修正後の値.toString().equals(ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class).toString());
     }
 

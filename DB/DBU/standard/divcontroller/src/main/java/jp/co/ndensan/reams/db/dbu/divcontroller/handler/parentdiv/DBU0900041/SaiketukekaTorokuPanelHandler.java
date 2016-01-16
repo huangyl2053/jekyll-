@@ -52,7 +52,7 @@ public class SaiketukekaTorokuPanelHandler {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleDate 審査請求届出日 = ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class);
 
-        共有子DIVの初期化(識別コード, 被保険者番号);
+//        共有子DIVの初期化(識別コード, 被保険者番号);   // TODO
         裁決結果登録明細情報の編集(識別コード, 被保険者番号, 審査請求届出日);
     }
     

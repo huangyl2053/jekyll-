@@ -48,12 +48,12 @@ public class SaiketukekaTorokuPanel {
         if (修正.toString().equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class).toString())) {
 
             createHandlerOf(requestDiv).修正_初期化の編集();
-            return ResponseData.of(requestDiv).setState(DBU0900041StateName.修正);
+            return ResponseData.of(requestDiv).setState(DBU0900041StateName.修正状態);
         }
         if (削除.toString().equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class).toString())) {
 
             createHandlerOf(requestDiv).削除_初期化の編集();
-            return ResponseData.of(requestDiv).setState(DBU0900041StateName.削除);
+            return ResponseData.of(requestDiv).setState(DBU0900041StateName.削除状態);
         }
         responseData.data = requestDiv;
         return ResponseData.of(requestDiv).respond();
@@ -142,13 +142,14 @@ public class SaiketukekaTorokuPanel {
                 if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                         .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                     修正処理(div, 識別コード, 被保険者番号, 審査請求届出日);
-                    // TODO ramlファイルにメッセージエリア<介護共通部品>がない
                     return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(更新.toString())).respond();
                 }
 
                 if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
                         .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    return ResponseData.of(div).setState(DBU0900041StateName.完了);
+                    div.getKaryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(
+                        new RString(UrInformationMessages.処理完了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
+                    return ResponseData.of(div).setState(DBU0900041StateName.完了状態);
                 }
 
             } else {
@@ -158,7 +159,7 @@ public class SaiketukekaTorokuPanel {
 
                 if (new RString(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode())
                         .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    return ResponseData.of(div).setState(DBU0900041StateName.修正);
+                    return ResponseData.of(div).setState(DBU0900041StateName.修正状態);
                 }
             }
         }
@@ -174,14 +175,14 @@ public class SaiketukekaTorokuPanel {
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 削除処理(識別コード, 被保険者番号, 審査請求届出日);
-                //TODO QA ramlファイルにメッセージエリア<介護共通部品>がない
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(削除.toString())).respond();
             }
 
             if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-                return ResponseData.of(div).setState(DBU0900041StateName.完了);
+                div.getKaryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(
+                        new RString(UrInformationMessages.処理完了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
+                return ResponseData.of(div).setState(DBU0900041StateName.完了状態);
             }
         }
         return ResponseData.of(div).respond();
@@ -190,7 +191,6 @@ public class SaiketukekaTorokuPanel {
     private void 削除処理(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日) {
 
         SaiketukekaToroku saiketukekaToroku = new SaiketukekaToroku();
-        // TODO QA DBに存在しない場合、削除の状況
         saiketukekaToroku.delSaiketukekaMeisaiJoho(識別コード, 被保険者番号, 審査請求届出日);
     }
 
@@ -201,7 +201,6 @@ public class SaiketukekaTorokuPanel {
         FlexibleDate 弁明書作成日 = new FlexibleDate(div.getSaiketukekaMeisaiPanel().getTxtDateBenmeisyoSakuseibi().getValue().toDateString());
 
         SaiketukekaToroku saiketukekaToroku = new SaiketukekaToroku();
-        // TODO QA DBに存在しない場合、更新の状況
         saiketukekaToroku.updSaiketukekaMeisaiJoho(識別コード, 被保険者番号, 審査請求届出日, 裁決結果, 裁決理由, 弁明書作成日);
     }
 

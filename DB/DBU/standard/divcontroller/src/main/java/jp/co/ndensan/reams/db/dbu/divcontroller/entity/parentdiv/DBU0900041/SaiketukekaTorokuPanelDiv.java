@@ -8,9 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoatenainfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.IKaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
  * SaiketukekaTorokuPanel のクラスファイル 
@@ -31,6 +30,8 @@ public class SaiketukekaTorokuPanelDiv extends Panel {
     private ShikakuKihonPanelDiv ShikakuKihonPanel;
     @JsonProperty("SaiketukekaMeisaiPanel")
     private SaiketukekaMeisaiPanelDiv SaiketukekaMeisaiPanel;
+    @JsonProperty("KaryoMessage")
+    private KaryoMessageDiv KaryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -91,7 +92,24 @@ public class SaiketukekaTorokuPanelDiv extends Panel {
     public void setSaiketukekaMeisaiPanel(SaiketukekaMeisaiPanelDiv SaiketukekaMeisaiPanel) {
         this.SaiketukekaMeisaiPanel = SaiketukekaMeisaiPanel;
     }
-    
+
+    /*
+     * getKaryoMessage
+     * @return KaryoMessage
+     */
+    @JsonProperty("KaryoMessage")
+    public KaryoMessageDiv getKaryoMessage() {
+        return KaryoMessage;
+    }
+
+    /*
+     * setKaryoMessage
+     * @param KaryoMessage KaryoMessage
+     */
+    @JsonProperty("KaryoMessage")
+    public void setKaryoMessage(KaryoMessageDiv KaryoMessage) {
+        this.KaryoMessage = KaryoMessage;
+    }
 
     /*
      * [ ショートカットの作成 ]
