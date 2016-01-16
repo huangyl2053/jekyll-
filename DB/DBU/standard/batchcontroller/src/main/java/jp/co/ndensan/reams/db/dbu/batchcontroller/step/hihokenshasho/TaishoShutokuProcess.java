@@ -42,38 +42,30 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void process() {
+        対象者チェック();
         List<IkkatsuHakkoRelateEntity> 対象情報List = 再発行チェック();
-        for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 対象情報List) {
-            IkkatsuHakkoMybatisParameter mybatisParam = IkkatsuHakkoMybatisParameter.createSelectByKeyParam(mybatisPrm.getShutsuryokuJokenCode(),
-                    mybatisPrm.getKonkaiFromYMDHMS(),
-                    mybatisPrm.getKonkaiToYMD(),
-                    mybatisPrm.getKonkaiToYMDHMS(),
-                    mybatisPrm.getKonkaikijunYMD(),
-                    mybatisPrm.getKonkaikijunYMDHMS(),
-                    mybatisPrm.getShinseishoKanriNo(),
-                    mybatisPrm.getSeinengappiToYMD(),
-                    mybatisPrm.getSeinengappiFromYMD(),
-                    ikkatsuHakkoRelateEntity.getHihokenshaNo(),
-                    mybatisPrm.getShikibetsuCode(),
-                    mybatisPrm.getPsmShikibetsuTaisho(),
-                    mybatisPrm.getPsmAtesaki(),
-                    mybatisPrm.getNenreiTotatsuYMD());
-            iIkkatsuHakkoMapper.deleteTmpHihoken(mybatisParam);
+        if (!対象情報List.isEmpty()) {
+            for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 対象情報List) {
+                iIkkatsuHakkoMapper.deleteTmpHihoken(createPrm被保険者番号(ikkatsuHakkoRelateEntity));
+            }
         }
     }
 
     private List<IkkatsuHakkoRelateEntity> 再発行チェック() {
         List<IkkatsuHakkoRelateEntity> 対象情報List = new ArrayList<>();
-        switch (processPrm.getSaihakkoFlag().toString()) {
-            case "0":
-                対象情報List = 再発行チェックしない();
-                break;
-            case "1":
-                対象情報List = 再発行チェックする();
-                break;
-            default:
-                break;
+        if (対象List != null) {
+            switch (processPrm.getSaihakkoFlag().toString()) {
+                case "0":
+                    対象情報List = 再発行チェックしない();
+                    break;
+                case "1":
+                    対象情報List = 再発行チェックする();
+                    break;
+                default:
+                    break;
+            }
         }
+
         return 対象情報List;
     }
 
@@ -83,29 +75,14 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
         // 画面からの発行の場合、チェックしない。
         List<IkkatsuHakkoRelateEntity> 対象情報List = new ArrayList<>();
         List<IkkatsuHakkoRelateEntity> 一括発行List = new ArrayList<>();
-        List<IkkatsuHakkoRelateEntity> 対象者取得List = 対象者取得();
-        List<IkkatsuHakkoRelateEntity> 対象者1List = 対象者チェック1();
-        for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 対象者取得List) {
-            IkkatsuHakkoMybatisParameter mybatisParam = IkkatsuHakkoMybatisParameter.createSelectByKeyParam(mybatisPrm.getShutsuryokuJokenCode(),
-                    mybatisPrm.getKonkaiFromYMDHMS(),
-                    mybatisPrm.getKonkaiToYMD(),
-                    mybatisPrm.getKonkaiToYMDHMS(),
-                    mybatisPrm.getKonkaikijunYMD(),
-                    mybatisPrm.getKonkaikijunYMDHMS(),
-                    mybatisPrm.getShinseishoKanriNo(),
-                    mybatisPrm.getSeinengappiToYMD(),
-                    mybatisPrm.getSeinengappiFromYMD(),
-                    ikkatsuHakkoRelateEntity.getHihokenshaNo(),
-                    mybatisPrm.getShikibetsuCode(),
-                    mybatisPrm.getPsmShikibetsuTaisho(),
-                    mybatisPrm.getPsmAtesaki(),
-                    mybatisPrm.getNenreiTotatsuYMD());
-            一括発行List.addAll(iIkkatsuHakkoMapper.getIkkatsuShoriDateKanri(mybatisParam));
+        List<IkkatsuHakkoRelateEntity> 生年月日の値がない対象List = iIkkatsuHakkoMapper.getTaishoJoho1();
+        for (IkkatsuHakkoRelateEntity entity : 対象List) {
+            一括発行List.addAll(iIkkatsuHakkoMapper.getIkkatsuShoriDateKanri(createPrm被保険者番号(entity)));
         }
-        for (IkkatsuHakkoRelateEntity 対象者1Entity : 対象者1List) {
+        for (IkkatsuHakkoRelateEntity entity : 生年月日の値がない対象List) {
             for (IkkatsuHakkoRelateEntity 一括発行Entity1 : 一括発行List) {
-                if (対象者1Entity.getHihokenshaNo().equals(一括発行Entity1.getHihokenshaNo())
-                        && 対象者1Entity.getLastUpdateTimestamp().isAfter(一括発行Entity1.getHakkoShoriTimestamp().getRDateTime())) {
+                if (entity.getHihokenshaNo().equals(一括発行Entity1.getHihokenshaNo())
+                        && entity.getLastUpdateTimestamp().isAfter(一括発行Entity1.getHakkoShoriTimestamp().getRDateTime())) {
                     対象情報List.add(一括発行Entity1);
                 }
             }
@@ -115,42 +92,20 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
 
     private List<IkkatsuHakkoRelateEntity> 再発行チェックする() {
         List<IkkatsuHakkoRelateEntity> 再発行チェックする情報List = new ArrayList<>();
-        IkkatsuHakkoMybatisParameter mybatisParam;
-        List<IkkatsuHakkoRelateEntity> 対象者取得List = 対象者取得();
-        for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 対象者取得List) {
-            mybatisParam = IkkatsuHakkoMybatisParameter.createSelectByKeyParam(mybatisPrm.getShutsuryokuJokenCode(),
-                    mybatisPrm.getKonkaiFromYMDHMS(),
-                    mybatisPrm.getKonkaiToYMD(),
-                    mybatisPrm.getKonkaiToYMDHMS(),
-                    mybatisPrm.getKonkaikijunYMD(),
-                    mybatisPrm.getKonkaikijunYMDHMS(),
-                    mybatisPrm.getShinseishoKanriNo(),
-                    mybatisPrm.getSeinengappiToYMD(),
-                    mybatisPrm.getSeinengappiFromYMD(),
-                    ikkatsuHakkoRelateEntity.getHihokenshaNo(),
-                    mybatisPrm.getShikibetsuCode(),
-                    mybatisPrm.getPsmShikibetsuTaisho(),
-                    mybatisPrm.getPsmAtesaki(),
-                    mybatisPrm.getNenreiTotatsuYMD());
-            再発行チェックする情報List.addAll(iIkkatsuHakkoMapper.getCheckShoriDateKanri(mybatisParam));
+        for (IkkatsuHakkoRelateEntity entity : 対象List) {
+            再発行チェックする情報List.addAll(iIkkatsuHakkoMapper.getCheckShoriDateKanri(createPrm被保険者番号(entity)));
         }
         return 再発行チェックする情報List;
-    }
-
-    private List<IkkatsuHakkoRelateEntity> 対象者取得() {
-        対象者チェック2();
-        対象List.addAll(対象者チェック1());
-        return 対象List;
-    }
-
-    private List<IkkatsuHakkoRelateEntity> 対象者チェック1() {
-        return iIkkatsuHakkoMapper.getTaishoJoho1();
     }
 
     /**
      * TODO 段站立 QA296 チェック処理内容の確認　2015/12/23
      */
-    private void 対象者チェック2() {
+    private void 対象者チェック() {
+        List<IkkatsuHakkoRelateEntity> 生年月日の値がない対象List = iIkkatsuHakkoMapper.getTaishoJoho1();
+        if (!生年月日の値がない対象List.isEmpty()) {
+            対象List.addAll(iIkkatsuHakkoMapper.getTaishoJoho1());
+        }
         List<IkkatsuHakkoRelateEntity> 生年月日あるデータList = iIkkatsuHakkoMapper.get生年月日ある();
         for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 生年月日あるデータList) {
             RString shikibetsuCode = ikkatsuHakkoRelateEntity.getShikibetsuCode().value();
@@ -162,12 +117,19 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
         }
     }
 
+    private void check転入保留対象者(IkkatsuHakkoRelateEntity entity) {
+        RString shikibetsuCode = entity.getShikibetsuCode().value();
+        if (!get転入保留対象者().contains(shikibetsuCode)) {
+            対象List.add(entity);
+        }
+    }
+
     private void check他市町村住所地特例(IkkatsuHakkoRelateEntity entity) {
         RString shikibetsuCode = entity.getShikibetsuCode().value();
         if (get最新他市町村住所地特例1().contains(shikibetsuCode)) {
-            対象List.add(entity);
+            check転入保留対象者(entity);
         } else if (get最新他市町村住所地特例2(entity).contains(shikibetsuCode)) {
-            対象List.add(entity);
+            check転入保留対象者(entity);
         }
     }
 
@@ -180,9 +142,18 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
         }
     }
 
+    private List<RString> get転入保留対象者() {
+        List<RString> list = new ArrayList<>();
+        List<IkkatsuHakkoRelateEntity> 転入保留対象者List = iIkkatsuHakkoMapper.get転入保留対象者();
+        for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 転入保留対象者List) {
+            list.add(ikkatsuHakkoRelateEntity.getShikibetsuCode().value());
+        }
+        return list;
+    }
+
     private List<RString> get適用除外者List2(IkkatsuHakkoRelateEntity entity) {
         List<RString> list = new ArrayList<>();
-        List<IkkatsuHakkoRelateEntity> 適用除外者List2 = iIkkatsuHakkoMapper.get最新適用除外者2(createPrm(entity));
+        List<IkkatsuHakkoRelateEntity> 適用除外者List2 = iIkkatsuHakkoMapper.get最新適用除外者2(createPrm年齢到達日(entity));
         for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 適用除外者List2) {
             list.add(ikkatsuHakkoRelateEntity.getShikibetsuCode().value());
         }
@@ -191,7 +162,7 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
 
     private List<RString> get最新他市町村住所地特例2(IkkatsuHakkoRelateEntity entity) {
         List<RString> list = new ArrayList<>();
-        List<IkkatsuHakkoRelateEntity> 最新他市町村住所地特例List2 = iIkkatsuHakkoMapper.get最新他市町村住所地特例2(createPrm(entity));
+        List<IkkatsuHakkoRelateEntity> 最新他市町村住所地特例List2 = iIkkatsuHakkoMapper.get最新他市町村住所地特例2(createPrm年齢到達日(entity));
         for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 最新他市町村住所地特例List2) {
             list.add(ikkatsuHakkoRelateEntity.getShikibetsuCode().value());
         }
@@ -234,7 +205,7 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
         return list;
     }
 
-    private IkkatsuHakkoMybatisParameter createPrm(IkkatsuHakkoRelateEntity entity) {
+    private IkkatsuHakkoMybatisParameter createPrm年齢到達日(IkkatsuHakkoRelateEntity entity) {
         AgeCalculator ageCalculator = new AgeCalculator(DateOfBirthFactory.createInstance(entity.getSeinengappiYMD()),
                 JuminJotai.住民, FlexibleDate.MAX);
         IkkatsuHakkoMybatisParameter mybatisParam = IkkatsuHakkoMybatisParameter.createSelectByKeyParam(mybatisPrm.getShutsuryokuJokenCode(),
@@ -254,4 +225,21 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
         return mybatisParam;
     }
 
+    private IkkatsuHakkoMybatisParameter createPrm被保険者番号(IkkatsuHakkoRelateEntity entity) {
+        IkkatsuHakkoMybatisParameter mybatisParam = IkkatsuHakkoMybatisParameter.createSelectByKeyParam(mybatisPrm.getShutsuryokuJokenCode(),
+                mybatisPrm.getKonkaiFromYMDHMS(),
+                mybatisPrm.getKonkaiToYMD(),
+                mybatisPrm.getKonkaiToYMDHMS(),
+                mybatisPrm.getKonkaikijunYMD(),
+                mybatisPrm.getKonkaikijunYMDHMS(),
+                mybatisPrm.getShinseishoKanriNo(),
+                mybatisPrm.getSeinengappiToYMD(),
+                mybatisPrm.getSeinengappiFromYMD(),
+                entity.getHihokenshaNo(),
+                mybatisPrm.getShikibetsuCode(),
+                mybatisPrm.getPsmShikibetsuTaisho(),
+                mybatisPrm.getPsmAtesaki(),
+                mybatisPrm.getNenreiTotatsuYMD());
+        return mybatisParam;
+    }
 }

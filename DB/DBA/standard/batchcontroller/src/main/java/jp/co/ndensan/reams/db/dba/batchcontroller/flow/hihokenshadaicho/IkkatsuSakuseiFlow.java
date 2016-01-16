@@ -24,6 +24,11 @@ public class IkkatsuSakuseiFlow extends BatchFlowBase<IkkatsuSakuseiBatchParamet
 
     private static final String REPORT_PROCESS = "reportProcess"; //@Stepの定数はメソッドの近くに置くと見やすくていい。
 
+    /**
+     * 帳票データ作成のProcessです。
+     *
+     * @return IkkatsuSakuseiProcess
+     */
     @Step(REPORT_PROCESS)
     protected IBatchFlowCommand reportProcess() {
         return loopBatch(IkkatsuSakuseiProcess.class)
