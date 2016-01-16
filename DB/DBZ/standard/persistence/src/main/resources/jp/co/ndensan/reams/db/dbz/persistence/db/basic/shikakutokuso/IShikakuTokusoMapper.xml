@@ -48,7 +48,7 @@
         LEFT JOIN
         rgdb ."DbT7051KoseiShichosonMaster" as DbT7051KoseiShicho
         ON
-        DbT1001Hiho."kyuShichosonCode" = DbT7051KoseiShicho."shichosonCode"
+        DbT1001Hiho."shichosonCode" = DbT7051KoseiShicho."shichosonCode"
         AND
         DbT7051KoseiShicho."gappeiKyuShichosonKubun" = '0'
         LEFT JOIN
