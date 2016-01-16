@@ -418,10 +418,11 @@ public class ShujiiIryoKikanMaster {
             for (ShujiiIryoKikanJoho shujiiIryoKikanJoho : models) {
                 shujiiIryoKikanJohoManager.saveOrDelete主治医医療機関情報(shujiiIryoKikanJoho);
             }
-            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+            div.getCcdKanryoMessage().setSuccessMessage(
+                    new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
+            return ResponseData.of(div).setState(DBE9010001StateName.完了);
         }
-        onClick_btnSearchKoseiShujiiIryoKikan(div);
-       return ResponseData.of(div).respond();
+        return ResponseData.of(div).respond();
     }
 
     private ValidationMessageControlPairs validateForDelete(ShujiiIryoKikanMasterDiv div) {
