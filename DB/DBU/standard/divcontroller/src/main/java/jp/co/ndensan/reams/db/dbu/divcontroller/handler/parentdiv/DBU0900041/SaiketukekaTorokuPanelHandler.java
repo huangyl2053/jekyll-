@@ -33,6 +33,7 @@ public class SaiketukekaTorokuPanelHandler {
     public void 修正_初期化の編集() {
 
         初期化の編集();
+        活性の恢復();
         初期画面値の保持();
     }
 
@@ -51,7 +52,13 @@ public class SaiketukekaTorokuPanelHandler {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleDate 審査請求届出日 = ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class);
 
+        共有子DIVの初期化(識別コード, 被保険者番号);
         裁決結果登録明細情報の編集(識別コード, 被保険者番号, 審査請求届出日);
+    }
+    
+    private void 共有子DIVの初期化(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+        div.getAtenaInfoCommonChildDiv().load(識別コード);
+        div.getKaigoShikakuKihonCommonChildDiv().initialize(被保険者番号);
     }
 
     /**
@@ -80,6 +87,12 @@ public class SaiketukekaTorokuPanelHandler {
         div.getSaiketukekaMeisaiPanel().getTxtDateBenmeisyoSakuseibi().setReadOnly(true);
         div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketuRiyu().setReadOnly(true);
         div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketukeka().setReadOnly(true);
+    }
+    
+   private void 活性の恢復() {
+        div.getSaiketukekaMeisaiPanel().getTxtDateBenmeisyoSakuseibi().setReadOnly(false);
+        div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketuRiyu().setReadOnly(false);
+        div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketukeka().setReadOnly(false);
     }
 
     /**

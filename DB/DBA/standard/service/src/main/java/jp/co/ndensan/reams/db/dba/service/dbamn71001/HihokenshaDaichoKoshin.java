@@ -97,7 +97,7 @@ public class HihokenshaDaichoKoshin {
         }
 
         // 検索結果が取得できない場合
-        if (dbT1001HihokenshaDaichoEntity == null && JuminJotai.住民.toString().equals(entity.get住民状態コード().toString())) {
+        if (dbT1001HihokenshaDaichoEntity == null && JuminJotai.住民.コード().toString().equals(entity.get住民状態コード().toString())) {
             HihokenshanotsukibanFinder finder = HihokenshanotsukibanFinder.createInstance();
             HihokenshaNo hihokenshaNo = finder.getHihokenshanotsukiban(entity.get識別コード());
             DbT1001HihokenshaDaichoEntity insertEn = new DbT1001HihokenshaDaichoEntity();
@@ -120,7 +120,7 @@ public class HihokenshaDaichoKoshin {
         }
 
         // 検索結果が取得できる場合
-        if (dbT1001HihokenshaDaichoEntity != null && JuminJotai.住民.toString().equals(entity.get住民状態コード().toString())) {
+        if (dbT1001HihokenshaDaichoEntity != null && JuminJotai.住民.コード().toString().equals(entity.get住民状態コード().toString())) {
 
             枝番 = hihokenshaManager.getSaidaiEdaban(saishinIdohiDataEntity.get被保険者番号(), age);
             if (saishinIdohiDataEntity.get資格取得年月日() != null && saishinIdohiDataEntity.get資格喪失年月日() != null
@@ -170,9 +170,9 @@ public class HihokenshaDaichoKoshin {
             }
         }
 
-        if ((dbT1001HihokenshaDaichoEntity != null && (JuminJotai.住登外.toString().equals(entity.get住民状態コード().toString())
-                || JuminJotai.転出者.toString().equals(entity.get住民状態コード().toString())
-                || JuminJotai.消除者.toString().equals(entity.get住民状態コード().toString())))
+        if ((dbT1001HihokenshaDaichoEntity != null && (JuminJotai.住登外.コード().toString().equals(entity.get住民状態コード().toString())
+                || JuminJotai.転出者.コード().toString().equals(entity.get住民状態コード().toString())
+                || JuminJotai.消除者.コード().toString().equals(entity.get住民状態コード().toString())))
                 && (saishinIdohiDataEntity.get資格取得年月日() != null && saishinIdohiDataEntity.get資格喪失年月日() == null
                 && saishinIdohiDataEntity.get被保険者区分コード().toString().equals(HihokenshaKubunCode.第２号被保険者.toString())
                 && "1".equals(saishinIdohiDataEntity.get住所地特例フラグ().toString()))) {
