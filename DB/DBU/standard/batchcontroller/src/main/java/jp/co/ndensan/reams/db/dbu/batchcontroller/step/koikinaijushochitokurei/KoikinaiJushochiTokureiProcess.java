@@ -185,13 +185,13 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
                         new RString(entity.getShikakuShutokuYMD().toString())));
         if (広域特解除情報 != null
                 && new FlexibleDate(paramter.getIdoYMD()).isBefore(広域特解除情報.getIdoYMD())) {
-            if (entity.getIdoJiyuCode().equals(entity.getShikakuSoshitsuJiyuCode())) {
-                広域内住所地特例者Entity.set広住喪失日(new RString(entity.getShikakuSoshitsuYMD().toString()));
-                広域内住所地特例者Entity.set広住喪失届出日(new RString(entity.getShikakuSoshitsuTodokedeYMD().toString()));
+            if (広域特解除情報.getIdoJiyuCode().equals(広域特解除情報.getShikakuSoshitsuJiyuCode())) {
+                広域内住所地特例者Entity.set広住喪失日(nullToEmtiy(entity.getShikakuSoshitsuYMD()));
+                広域内住所地特例者Entity.set広住喪失届出日(nullToEmtiy(entity.getShikakuSoshitsuTodokedeYMD()));
             } 
-            if (entity.getIdoJiyuCode().equals(entity.getShikakuHenkoJiyuCode())) {
-                広域内住所地特例者Entity.set広住喪失日(new RString(entity.getShikakuHenkoYMD().toString()));
-                広域内住所地特例者Entity.set広住喪失届出日(new RString(entity.getShikakuHenkoTodokedeYMD().toString()));
+            if (広域特解除情報.getIdoJiyuCode().equals(広域特解除情報.getShikakuHenkoJiyuCode())) {
+                広域内住所地特例者Entity.set広住喪失日(nullToEmtiy(entity.getShikakuHenkoYMD()));
+                広域内住所地特例者Entity.set広住喪失届出日(nullToEmtiy(entity.getShikakuHenkoTodokedeYMD()));
             }
         }
     }
