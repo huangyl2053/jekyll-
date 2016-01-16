@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
- *
+ * 住基連動登録者_バッチ処理クラスです。
  */
 public class JyukiRendoTorokushaListBatchFlow extends BatchFlowBase<JyukiRendoTorokushaListBatchParameter> {
 
@@ -26,14 +26,24 @@ public class JyukiRendoTorokushaListBatchFlow extends BatchFlowBase<JyukiRendoTo
         executeStep(DB_UPDATE_PROCESS);
     }
 
+    /**
+     * データを作成します。
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(DATA_CREATE_PROCESS)
-    private IBatchFlowCommand createData() {
+    protected IBatchFlowCommand createData() {
         return simpleBatch(JyukiRendoJouhouProcess.class).arguments(
                 getParameter().toJyukiRendoTorokushaListBatchProcessParameter()).define();
     }
 
+    /**
+     * 処理日付管理マスタを更新します。
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(DB_UPDATE_PROCESS)
-    private IBatchFlowCommand updateData() {
+    protected IBatchFlowCommand updateData() {
         return simpleBatch(ShoriDateKanriDBUpdateProcess.class).arguments(
                 getParameter().toJyukiRendoTorokushaListBatchProcessParameter()).define();
     }

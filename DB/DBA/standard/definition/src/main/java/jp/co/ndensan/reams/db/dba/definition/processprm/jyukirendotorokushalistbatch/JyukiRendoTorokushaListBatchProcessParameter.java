@@ -27,6 +27,7 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
     private boolean tajushochitokureishakanriFLG;
     private boolean tekiyojogaishadaichoFLG;
     private RString shuturyokujunID;
+    private RString loginId;
 
     /**
      * コンストラクタ
@@ -60,6 +61,6 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
     }
 
     public JyukiRendoTorokushaListBatchMybatisParameter toJyukiRendoTorokushaListBatchMybatisParameter() {
-        return new JyukiRendoTorokushaListBatchMybatisParameter(konkaikaishiYMDHMS, konkaishuryoYMDHMS);
+        return new JyukiRendoTorokushaListBatchMybatisParameter(konkaikaishiYMDHMS, konkaishuryoYMDHMS, loginId);
     }
 }

@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.jukinentotoroku;
+package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1140011;
 
+import jp.co.ndensan.reams.db.dba.business.core.jukinentotoroku.DbT7022ShoriDateKanriBusiness;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.BatchParamterInfoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.jukinentotorokuDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1140011.JukinenTotorokuValidationHandler;
 import jp.co.ndensan.reams.db.dba.service.jukirendotorokushalist.JukiRendoTorokushaListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -15,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 住基連動登録者リスト作成クラスです。
@@ -39,40 +42,38 @@ public class jukinentotoroku {
      * @return ResponseData<jukinentotorokuDiv> 住基登録者Div
      */
     public ResponseData<jukinentotorokuDiv> onLoad(jukinentotorokuDiv div) {
-        ResponseData<jukinentotorokuDiv> responseData = new ResponseData<>();
         FlexibleDate nowDate = new FlexibleDate(RDate.getNowDate().toDateString());
-
-        if (finder.getKaishiShuryobi() == null || finder.getKaishiShuryobi().getTaishoKaishiYMD() == null
-                && finder.getKaishiShuryobi().getTaishoShuryoYMD() == null) {
+        DbT7022ShoriDateKanriBusiness business = finder.getKaishiShuryobi();
+        if (business == null || (business.getTaishoKaishiYMD() == null
+                && business.getTaishoShuryoYMD() == null)) {
             div.getBatchParamterInfo().getTxtkonkaikaishi().setValue(nowDate);
             div.getBatchParamterInfo().getTxtkonkaishuryo().setValue(nowDate);
 
         } else {
-            if (nowDate.isBeforeOrEquals(finder.getKaishiShuryobi().getTaishoShuryoYMD())) {
+            if (nowDate.isBeforeOrEquals(business.getTaishoShuryoYMD())) {
                 div.getBatchParamterInfo().getTxtzenkaikaishi()
-                        .setValue(finder.getKaishiShuryobi().getTaishoKaishiYMD());
+                        .setValue(business.getTaishoKaishiYMD());
                 div.getBatchParamterInfo().getTxtzenkaishuryo()
-                        .setValue(finder.getKaishiShuryobi().getTaishoShuryoYMD());
+                        .setValue(business.getTaishoShuryoYMD());
                 div.getBatchParamterInfo().getTxtkonkaikaishi()
-                        .setValue(finder.getKaishiShuryobi().getTaishoShuryoYMD());
+                        .setValue(business.getTaishoShuryoYMD());
                 div.getBatchParamterInfo().getTxtkonkaishuryo()
-                        .setValue(finder.getKaishiShuryobi().getTaishoShuryoYMD());
+                        .setValue(business.getTaishoShuryoYMD());
 
-            } else if (nowDate.isAfter(finder.getKaishiShuryobi().getTaishoShuryoYMD())) {
+            } else if (nowDate.isAfter(business.getTaishoShuryoYMD())) {
                 div.getBatchParamterInfo().getTxtzenkaikaishi()
-                        .setValue(finder.getKaishiShuryobi().getTaishoKaishiYMD());
+                        .setValue(business.getTaishoKaishiYMD());
                 div.getBatchParamterInfo().getTxtzenkaishuryo()
-                        .setValue(finder.getKaishiShuryobi().getTaishoShuryoYMD());
+                        .setValue(business.getTaishoShuryoYMD());
                 div.getBatchParamterInfo().getTxtkonkaikaishi()
-                        .setValue(finder.getKaishiShuryobi().getTaishoShuryoYMD());
+                        .setValue(business.getTaishoShuryoYMD());
                 div.getBatchParamterInfo().getTxtkonkaishuryo()
                         .setValue(nowDate);
             }
         }
         // TODO 帳票出力順の初期化(技術点に提出しました※QA#73393)
 //        loadChohyoMode(サブ業務コード, 帳票ID);
-        responseData.data = div;
-        return responseData;
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -82,13 +83,12 @@ public class jukinentotoroku {
      * @return チェック結果(true/false)
      */
     public ResponseData<jukinentotorokuDiv> onClick_inputCheck(jukinentotorokuDiv div) {
-        boolean checkHisuResult = finder.checkKaishibiShuryobiHisu(
+        JukinenTotorokuValidationHandler handler = new JukinenTotorokuValidationHandler(div);
+        ValidationMessageControlPairs validPairs = handler.validateForAction(
                 div.getBatchParamterInfo().getTxtkonkaikaishi().getValue(),
                 div.getBatchParamterInfo().getTxtkonkaishuryo().getValue());
-        if (checkHisuResult) {
-            finder.checkKaishibiShuryobiJunban(
-                    div.getBatchParamterInfo().getTxtkonkaikaishi().getValue(),
-                    div.getBatchParamterInfo().getTxtkonkaishuryo().getValue());
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         return ResponseData.of(div).respond();
     }

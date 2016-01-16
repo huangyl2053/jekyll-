@@ -8,16 +8,14 @@ package jp.co.ndensan.reams.db.dba.service.jukirendotorokushalist;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.jukinentotoroku.DbT7022ShoriDateKanriBusiness;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchParameter;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -112,68 +110,48 @@ public class JukiRendoTorokushaListFinder {
                 適用除外者台帳フラグ = true;
             }
         }
-        // TODO QA332を提出しました
         JyukiRendoTorokushaListBatchParameter parameter = new JyukiRendoTorokushaListBatchParameter();
+        RStringBuilder 今回開始日Builder = new RStringBuilder();
+        RStringBuilder 今回終了日Builder = new RStringBuilder();
 
         if (!前回開始日.isEmpty()) {
-
-            parameter.setZenkaikaishiYMDHMS(new RString(前回開始日.toString().substring(0, 4) + ライン.toString()
-                    + 前回開始日.toString().substring(4, 6) + ライン.toString()
-                    + 前回開始日.toString().substring(6, 8) + MIN_日時.toString()));
+            RStringBuilder 前回開始日Builder = new RStringBuilder();
+            前回開始日Builder.append(前回開始日.toString().substring(0, 4));
+            前回開始日Builder.append(ライン.toString());
+            前回開始日Builder.append(前回開始日.toString().substring(4, 6));
+            前回開始日Builder.append(ライン.toString());
+            前回開始日Builder.append(前回開始日.toString().substring(6, 8));
+            前回開始日Builder.append(MIN_日時.toString());
+            parameter.setZenkaikaishiYMDHMS(前回開始日Builder.toRString());
         }
         if (!前回終了日.isEmpty()) {
-            parameter.setZenkaishuryoYMDHMS(new RString(前回終了日.toString().substring(0, 4) + ライン.toString()
-                    + 前回終了日.toString().substring(4, 6) + ライン.toString()
-                    + 前回終了日.toString().substring(6, 8) + MAX_日時.toString()));
+            RStringBuilder 前回終了日Builder = new RStringBuilder();
+            前回終了日Builder.append(前回終了日.toString().substring(0, 4));
+            前回終了日Builder.append(ライン.toString());
+            前回終了日Builder.append(前回終了日.toString().substring(4, 6));
+            前回終了日Builder.append(ライン.toString());
+            前回終了日Builder.append(前回終了日.toString().substring(6, 8));
+            前回終了日Builder.append(MAX_日時.toString());
+            parameter.setZenkaishuryoYMDHMS(前回終了日Builder.toRString());
         }
-        parameter.setKonkaikaishiYMDHMS(new RString(今回開始日.toString().substring(0, 4) + ライン.toString()
-                + 今回開始日.toString().substring(4, 6) + ライン.toString()
-                + 今回開始日.toString().substring(6, 8) + MIN_日時.toString()));
-        parameter.setKonkaishuryoYMDHMS(new RString(今回終了日.toString().substring(0, 4) + ライン.toString()
-                + 今回終了日.toString().substring(4, 6) + ライン.toString()
-                + 今回終了日.toString().substring(6, 8) + MAX_日時.toString()));
+        今回開始日Builder.append(今回開始日.toString().substring(0, 4));
+        今回開始日Builder.append(ライン.toString());
+        今回開始日Builder.append(今回開始日.toString().substring(4, 6));
+        今回開始日Builder.append(ライン.toString());
+        今回開始日Builder.append(今回開始日.toString().substring(6, 8));
+        今回開始日Builder.append(MIN_日時.toString());
+        今回終了日Builder.append(今回終了日.toString().substring(0, 4));
+        今回終了日Builder.append(ライン.toString());
+        今回終了日Builder.append(今回終了日.toString().substring(4, 6));
+        今回終了日Builder.append(ライン.toString());
+        今回終了日Builder.append(今回終了日.toString().substring(6, 8));
+        今回終了日Builder.append(MAX_日時.toString());
+        parameter.setKonkaikaishiYMDHMS(今回開始日Builder.toRString());
+        parameter.setKonkaishuryoYMDHMS(今回終了日Builder.toRString());
         parameter.setHihokenshadaichoFLG(被保険者台帳フラグ);
         parameter.setTajushochitokureishakanriFLG(他住所地特例者管理フラグ);
         parameter.setTekiyojogaishadaichoFLG(適用除外者台帳フラグ);
         parameter.setShuturyokujunID(RString.EMPTY);
         return parameter;
-    }
-
-    /**
-     * 開始日、終了日によって、順番の整合性チェックを実施する。
-     *
-     * @param 今回開始日 今回開始日
-     * @param 今回終了日 今回終了日
-     *
-     * @return チェックOK（ true; false)
-     */
-    public boolean checkKaishibiShuryobiJunban(FlexibleDate 今回開始日, FlexibleDate 今回終了日) {
-        if (今回開始日.isBeforeOrEquals(今回終了日)) {
-            return true;
-        } else {
-            throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace("開始日", "終了日"));
-        }
-    }
-
-    /**
-     * 開始日、終了日によって、必須チェックを実施する。
-     *
-     * @param 今回開始日 今回開始日
-     * @param 今回終了日 今回終了日
-     *
-     * @return チェックOK（ true; false)
-     */
-    public boolean checkKaishibiShuryobiHisu(FlexibleDate 今回開始日, FlexibleDate 今回終了日) {
-
-        if (!今回開始日.isEmpty() && !今回終了日.isEmpty()) {
-            if (今回開始日.isValid() && 今回終了日.isValid()) {
-                return true;
-            } else {
-                // TODO QA415
-                throw new ApplicationException(UrErrorMessages.必須.getMessage().replace("今回開始日と終了日両方"));
-            }
-        } else {
-            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace("今回開始日と終了日両方"));
-        }
     }
 }

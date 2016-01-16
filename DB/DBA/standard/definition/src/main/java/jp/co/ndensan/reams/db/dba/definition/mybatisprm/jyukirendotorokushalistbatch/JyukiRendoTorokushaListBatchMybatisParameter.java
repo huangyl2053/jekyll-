@@ -18,6 +18,7 @@ public class JyukiRendoTorokushaListBatchMybatisParameter implements IMyBatisPar
 
     private final RString konkaikaishiYMDHMS;
     private final RString konkaishuryoYMDHMS;
+    private final RString loginId;
 
     /**
      * コンストラクタ
@@ -25,9 +26,10 @@ public class JyukiRendoTorokushaListBatchMybatisParameter implements IMyBatisPar
      * @param konkaikaishiYMDHMS 今回開始日時
      * @param konkaishuryoYMDHMS 今回終了日時
      */
-    public JyukiRendoTorokushaListBatchMybatisParameter(RString konkaikaishiYMDHMS, RString konkaishuryoYMDHMS) {
+    public JyukiRendoTorokushaListBatchMybatisParameter(RString konkaikaishiYMDHMS, RString konkaishuryoYMDHMS, RString loginId) {
 
         this.konkaikaishiYMDHMS = konkaikaishiYMDHMS;
         this.konkaishuryoYMDHMS = konkaishuryoYMDHMS;
+        this.loginId = loginId;
     }
 }
