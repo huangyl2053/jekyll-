@@ -20,7 +20,8 @@ public enum DBB0320002TransitionEventName implements IContainerEvents {
     特別徴収("特別徴収"),
     減免("減免"),
     初期化("初期化"),
-    一覧に戻る("一覧に戻る");
+    一覧に戻る("一覧に戻る"),
+    比較("比較");
 
     private final RString name;
 

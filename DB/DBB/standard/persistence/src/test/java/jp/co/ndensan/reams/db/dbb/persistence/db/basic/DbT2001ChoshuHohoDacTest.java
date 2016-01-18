@@ -5,9 +5,11 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator.*;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator.DEFAULT_履歴番号;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator.DEFAULT_被保険者番号;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator.DEFAULT_賦課年度;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -18,11 +20,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -30,7 +31,6 @@ import org.junit.runner.RunWith;
  * {@link DbT2001ChoshuHohoDac}のテストです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class DbT2001ChoshuHohoDacTest extends DbbTestDacBase {
 
     private static final RString キー_02 = new RString("02");

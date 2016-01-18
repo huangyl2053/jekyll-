@@ -4,10 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -279,12 +279,12 @@ public class ChoshuHohoTest extends DbbTestBase {
 
         @Test
         public void get依頼情報送付済みフラグは_entityが持つ依頼情報送付済みフラグを返す() {
-            assertThat(sut.is依頼情報送付済みフラグ(), is(ChoshuHohoEntity.getIraiSohuzumiFlag()));
+            assertThat(sut.get依頼情報送付済みフラグ(), is(ChoshuHohoEntity.getIraiSohuzumiFlag()));
         }
 
         @Test
         public void get追加依頼情報送付済みフラグは_entityが持つ追加依頼情報送付済みフラグを返す() {
-            assertThat(sut.is追加依頼情報送付済みフラグ(), is(ChoshuHohoEntity.getTsuikaIraiSohuzumiFlag()));
+            assertThat(sut.get追加依頼情報送付済みフラグ(), is(ChoshuHohoEntity.getTsuikaIraiSohuzumiFlag()));
         }
 
         @Test

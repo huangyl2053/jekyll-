@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 //import static jp.co.ndensan.reams.db.dbb.testhelper.matcher.IsSerializable.serializable;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -17,7 +17,6 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -26,7 +25,6 @@ import org.junit.runner.RunWith;
  * {@link ChoshuYuyo}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class ChoshuYuyoTest extends DbbTestBase {
 
     private static DbT2006ChoshuYuyoEntity ChoshuYuyoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
@@ -39,9 +37,10 @@ public class ChoshuYuyoTest extends DbbTestBase {
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
         調停年度 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度;
         賦課年度 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_賦課年度;
+        通知書番号 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_通知書番号;
+        履歴番号 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbbTestBase {
@@ -171,8 +170,8 @@ public class ChoshuYuyoTest extends DbbTestBase {
         }
 
         @Test
-        public void get徴収猶予種類コードは_entityが持つ徴収猶予種類コードを返す() {
-            assertThat(sut.get徴収猶予種類コード(), is(ChoshuYuyoEntity.getYuyoJiyuCode()));
+        public void get徴収猶予種類は_entityが持つ徴収猶予種類コードを返す() {
+            assertThat(sut.get徴収猶予種類().value(), is(ChoshuYuyoEntity.getYuyoJiyuCode()));
         }
 
         @Test
@@ -181,8 +180,8 @@ public class ChoshuYuyoTest extends DbbTestBase {
         }
 
         @Test
-        public void get徴収猶予取消種類コードは_entityが持つ徴収猶予取消種類コードを返す() {
-            assertThat(sut.get徴収猶予取消種類コード(), is(ChoshuYuyoEntity.getYuyoTorikeshiJiyuCode()));
+        public void get徴収猶予取消種類は_entityが持つ徴収猶予取消種類コードを返す() {
+            assertThat(sut.get徴収猶予取消種類().value(), is(ChoshuYuyoEntity.getYuyoTorikeshiJiyuCode()));
         }
 
         @Test

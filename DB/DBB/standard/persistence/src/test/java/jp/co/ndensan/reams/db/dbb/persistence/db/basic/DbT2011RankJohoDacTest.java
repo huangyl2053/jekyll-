@@ -5,9 +5,10 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2011RankJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2011RankJohoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2011RankJohoEntityGenerator.*;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2011RankJohoEntityGenerator.DEFAULT_ランク区分;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2011RankJohoEntityGenerator.DEFAULT_賦課年度;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2011RankJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -17,11 +18,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -29,7 +29,6 @@ import org.junit.runner.RunWith;
  * {@link DbT2011RankJohoDac}のテストです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class DbT2011RankJohoDacTest extends DbbTestDacBase {
 
     private static final RString キー_02 = new RString("02");

@@ -8,11 +8,12 @@ package jp.co.ndensan.reams.db.dbb.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoGemmenShurui;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoGemmenTorikeshiShurui;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -37,9 +38,9 @@ public class Gemmen extends ModelBase<GemmenIdentifier, DbT2004GemmenEntity, Gem
      * @param 履歴番号 履歴番号
      */
     public Gemmen(FlexibleYear 調定年度,
-            FlexibleYear 賦課年度,
-            TsuchishoNo 通知書番号,
-            Decimal 履歴番号) {
+                  FlexibleYear 賦課年度,
+                  TsuchishoNo 通知書番号,
+                  Decimal 履歴番号) {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
@@ -178,12 +179,13 @@ public class Gemmen extends ModelBase<GemmenIdentifier, DbT2004GemmenEntity, Gem
     }
 
     /**
-     * 減免種類コードを返します。
+     * 減免種類を返します。
      *
-     * @return 減免種類コード
+     * @return 減免種類
      */
-    public Code get減免種類コード() {
-        return entity.getGemmenJiyuCode();
+    public HokenryoGemmenShurui get減免種類() {
+        //TODO 以下は暫定対応。将来的には、entityのgetterの戻り値から対応する。
+        return new HokenryoGemmenShurui(entity.getGemmenJiyuCode());
     }
 
     /**
@@ -196,12 +198,13 @@ public class Gemmen extends ModelBase<GemmenIdentifier, DbT2004GemmenEntity, Gem
     }
 
     /**
-     * 減免取消種類コードを返します。
+     * 減免取消種類を返します。
      *
-     * @return 減免取消種類コード
+     * @return 減免取消種類
      */
-    public Code get減免取消種類コード() {
-        return entity.getGemmenTorikeshiJiyuCode();
+    public HokenryoGemmenTorikeshiShurui get減免取消種類() {
+        //TODO 以下は暫定対応。将来的には、entityのgetterの戻り値から対応する。
+        return new HokenryoGemmenTorikeshiShurui(entity.getGemmenTorikeshiJiyuCode());
     }
 
     /**

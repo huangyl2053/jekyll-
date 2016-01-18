@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.controller.helper;
+package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.helper;
 
-import jp.co.ndensan.reams.db.dbz.business.FukaTaishoshaSearchMaxNumberValidator;
-import jp.co.ndensan.reams.db.dbz.business.FukaTaishoshaSearchSearchConditionValidator;
-import jp.co.ndensan.reams.db.dbz.business.FukaTaishoshaSearchSearchResultValidator;
+import jp.co.ndensan.reams.db.dbz.business.core.FukaTaishoshaSearchMaxNumberValidator;
+import jp.co.ndensan.reams.db.dbz.business.core.FukaTaishoshaSearchSearchConditionValidator;
+import jp.co.ndensan.reams.db.dbz.business.core.FukaTaishoshaSearchSearchResultValidator;
 import jp.co.ndensan.reams.db.dbz.business.validation.FukaTaishoshaSearchValidationMessage;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.SearchConditionDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;

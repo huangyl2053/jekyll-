@@ -9,23 +9,22 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.DankaiIndex;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -33,7 +32,6 @@ import static org.mockito.Mockito.when;
  * {link HokenryoDankaiManager}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class HokenryoDankaiManagerTest {
 
     private static DbT2013HokenryoDankaiDac dac;
@@ -78,9 +76,9 @@ public class HokenryoDankaiManagerTest {
             FlexibleYear 主キー1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度;
             DankaiIndex 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
             RankKubun 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
-            HokenryoDankai result = sut.get保険料段階(主キー1, 主キー2, 主キー3);
+            Optional<HokenryoDankai> result = sut.get保険料段階(主キー1, 主キー2, 主キー3);
 
-            assertThat(result, is(nullValue()));
+            assertThat(result.isPresent(), is(false));
         }
 
         @Test
@@ -90,9 +88,9 @@ public class HokenryoDankaiManagerTest {
             FlexibleYear 主キー1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度;
             DankaiIndex 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
             RankKubun 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
-            HokenryoDankai result = sut.get保険料段階(主キー1, 主キー2, 主キー3);
+            Optional<HokenryoDankai> result = sut.get保険料段階(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get賦課年度().toDateString(), is(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度.toDateString()));
+            assertThat(result.get().get賦課年度().toDateString(), is(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度.toDateString()));
         }
     }
 

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TokuChoKekkaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,14 +30,22 @@ public class TokuChoKekkaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getdgTokuchoKekka
+     * @return dgTokuchoKekka
+     */
     @JsonProperty("dgTokuchoKekka")
     public DataGrid<dgTokuchoKekka_Row> getDgTokuchoKekka() {
         return dgTokuchoKekka;
     }
 
+    /*
+     * setdgTokuchoKekka
+     * @param dgTokuchoKekka dgTokuchoKekka
+     */
     @JsonProperty("dgTokuchoKekka")
     public void setDgTokuchoKekka(DataGrid<dgTokuchoKekka_Row> dgTokuchoKekka) {
-        this.dgTokuchoKekka=dgTokuchoKekka;
+        this.dgTokuchoKekka = dgTokuchoKekka;
     }
 
     // </editor-fold>

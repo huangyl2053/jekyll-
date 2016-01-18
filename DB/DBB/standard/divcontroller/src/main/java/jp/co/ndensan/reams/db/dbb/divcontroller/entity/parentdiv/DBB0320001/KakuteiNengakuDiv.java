@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KakuteiNengakuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,34 +34,58 @@ public class KakuteiNengakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtKeisanjoNenkanHokenryoGaku
+     * @return txtKeisanjoNenkanHokenryoGaku
+     */
     @JsonProperty("txtKeisanjoNenkanHokenryoGaku")
     public TextBoxNum getTxtKeisanjoNenkanHokenryoGaku() {
         return txtKeisanjoNenkanHokenryoGaku;
     }
 
+    /*
+     * settxtKeisanjoNenkanHokenryoGaku
+     * @param txtKeisanjoNenkanHokenryoGaku txtKeisanjoNenkanHokenryoGaku
+     */
     @JsonProperty("txtKeisanjoNenkanHokenryoGaku")
     public void setTxtKeisanjoNenkanHokenryoGaku(TextBoxNum txtKeisanjoNenkanHokenryoGaku) {
-        this.txtKeisanjoNenkanHokenryoGaku=txtKeisanjoNenkanHokenryoGaku;
+        this.txtKeisanjoNenkanHokenryoGaku = txtKeisanjoNenkanHokenryoGaku;
     }
 
+    /*
+     * gettxtGemmenGaku
+     * @return txtGemmenGaku
+     */
     @JsonProperty("txtGemmenGaku")
     public TextBoxNum getTxtGemmenGaku() {
         return txtGemmenGaku;
     }
 
+    /*
+     * settxtGemmenGaku
+     * @param txtGemmenGaku txtGemmenGaku
+     */
     @JsonProperty("txtGemmenGaku")
     public void setTxtGemmenGaku(TextBoxNum txtGemmenGaku) {
-        this.txtGemmenGaku=txtGemmenGaku;
+        this.txtGemmenGaku = txtGemmenGaku;
     }
 
+    /*
+     * gettxtNenkanHokenryoGaku
+     * @return txtNenkanHokenryoGaku
+     */
     @JsonProperty("txtNenkanHokenryoGaku")
     public TextBoxNum getTxtNenkanHokenryoGaku() {
         return txtNenkanHokenryoGaku;
     }
 
+    /*
+     * settxtNenkanHokenryoGaku
+     * @param txtNenkanHokenryoGaku txtNenkanHokenryoGaku
+     */
     @JsonProperty("txtNenkanHokenryoGaku")
     public void setTxtNenkanHokenryoGaku(TextBoxNum txtNenkanHokenryoGaku) {
-        this.txtNenkanHokenryoGaku=txtNenkanHokenryoGaku;
+        this.txtNenkanHokenryoGaku = txtNenkanHokenryoGaku;
     }
 
     // </editor-fold>

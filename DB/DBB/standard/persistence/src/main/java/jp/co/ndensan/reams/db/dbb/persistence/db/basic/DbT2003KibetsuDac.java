@@ -8,12 +8,12 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003Kibetsu;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003Kibetsu.choshuHouhou;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003Kibetsu.choteiNendo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003Kibetsu.fukaNendo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003Kibetsu.ki;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003Kibetsu.rirekiNo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003Kibetsu.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2005KibetsuGemmen.ki;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyo.choteiNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyo.rirekiNo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorList.fukaNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorList.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -39,12 +39,12 @@ public class DbT2003KibetsuDac implements ISaveable<DbT2003KibetsuEntity> {
     /**
      * 主キーで介護期別を取得します。
      *
-     * @param 調定年度 調定年度
-     * @param 賦課年度 賦課年度
-     * @param 通知書番号 通知書番号
-     * @param 履歴番号 履歴番号
-     * @param 徴収方法 徴収方法
-     * @param 期 期
+     * @param 調定年度 ChoteiNendo
+     * @param 賦課年度 FlexibleYear
+     * @param 通知書番号 TsuchishoNo
+     * @param 履歴番号 RirekiNo
+     * @param 徴収方法 ChoshuHouhou
+     * @param 期 Ki
      * @return DbT2003KibetsuEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -68,19 +68,19 @@ public class DbT2003KibetsuDac implements ISaveable<DbT2003KibetsuEntity> {
         return accessor.select().
                 table(DbT2003Kibetsu.class).
                 where(and(
-                eq(choteiNendo, 調定年度),
-                eq(fukaNendo, 賦課年度),
-                eq(tsuchishoNo, 通知書番号),
-                eq(rirekiNo, 履歴番号),
-                eq(choshuHouhou, 徴収方法),
-                eq(ki, 期))).
+                                eq(choteiNendo, 調定年度),
+                                eq(fukaNendo, 賦課年度),
+                                eq(tsuchishoNo, 通知書番号),
+                                eq(rirekiNo, 履歴番号),
+                                eq(choshuHouhou, 徴収方法),
+                                eq(ki, 期))).
                 toObject(DbT2003KibetsuEntity.class);
     }
 
     /**
      * 介護期別を全件返します。
      *
-     * @return DbT2003KibetsuEntityの{@code list}
+     * @return List<DbT2003KibetsuEntity>
      */
     @Transaction
     public List<DbT2003KibetsuEntity> selectAll() {
@@ -102,7 +102,7 @@ public class DbT2003KibetsuDac implements ISaveable<DbT2003KibetsuEntity> {
     public int save(DbT2003KibetsuEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護期別エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

@@ -13,7 +13,7 @@ import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKe
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke.日付関連_所得年度;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke.日付関連_調定年度;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke.日付関連_遡及年度;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.FukaSearchMenu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.helper.FukaTaishoshaSearchValidationHelper;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;

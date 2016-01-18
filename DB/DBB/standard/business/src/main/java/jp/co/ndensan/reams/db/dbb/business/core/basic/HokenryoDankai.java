@@ -8,14 +8,16 @@ package jp.co.ndensan.reams.db.dbb.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.DankaiIndex;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -27,6 +29,17 @@ public class HokenryoDankai extends ModelBase<HokenryoDankaiIdentifier, DbT2013H
     private final HokenryoDankaiIdentifier id;
 
     /**
+     * コンストラクタです。
+     *
+     * @deprecated コンパイルエラー回避のためのコンストラクタ。<br/>
+     * Identifierが設定されないので使用しないこと。
+     */
+    public HokenryoDankai() {
+        this.entity = new DbT2013HokenryoDankaiEntity();
+        this.id = null;
+    }
+
+    /**
      * コンストラクタです。<br/>
      * 保険料段階の新規作成時に使用します。
      *
@@ -35,8 +48,8 @@ public class HokenryoDankai extends ModelBase<HokenryoDankaiIdentifier, DbT2013H
      * @param ランク区分 ランク区分
      */
     public HokenryoDankai(FlexibleYear 賦課年度,
-            DankaiIndex 段階インデックス,
-            RankKubun ランク区分) {
+                          DankaiIndex 段階インデックス,
+                          RankKubun ランク区分) {
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(段階インデックス, UrSystemErrorMessages.値がnull.getReplacedMessage("段階インデックス"));
         requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));
@@ -132,6 +145,17 @@ public class HokenryoDankai extends ModelBase<HokenryoDankaiIdentifier, DbT2013H
      */
     public RString get特例表記() {
         return entity.getTokureiHyoki();
+    }
+
+    public RString edit表示用保険料段階() {
+        RString 段階区分 = get段階区分();
+        int stage = Integer.parseInt(段階区分.substring(0, 2).toString());
+        int suffix = Integer.parseInt(段階区分.substring(2).toString());
+        RString 表示用 = !(stage == 0) ? new RString(String.format("第%1$d段階", stage)) : new RString("-");
+        if (new FukaKeisanConfig().get激変緩和期間().between(get賦課年度()) && suffix != 0) {
+            表示用 = new RStringBuilder(表示用).append(String.format("(改正前%1$d)", suffix)).toRString();
+        }
+        return new RStringBuilder(表示用).append(get特例表記()).toRString();
     }
 
     /**

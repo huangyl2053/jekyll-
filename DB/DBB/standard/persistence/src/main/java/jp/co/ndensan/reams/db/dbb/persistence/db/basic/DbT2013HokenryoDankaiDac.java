@@ -6,9 +6,10 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorList.fukaNendo;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankai;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankai.dankaiIndex;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankai.fukaNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankai.dankaiKubun;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankai.rankuKubun;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.DankaiIndex;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -59,6 +61,33 @@ public class DbT2013HokenryoDankaiDac implements ISaveable<DbT2013HokenryoDankai
                                 eq(dankaiIndex, 段階インデックス),
                                 eq(rankuKubun, ランク区分))).
                 toObject(DbT2013HokenryoDankaiEntity.class);
+    }
+
+    /**
+     * 引数のキーに合致する保険料段階を返します。
+     *
+     * @param 賦課年度 FukaNendo
+     * @param 段階区分 段階区分
+     * @return DbT2013HokenryoDankaiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT2013HokenryoDankaiEntity selectBy段階区分(
+            FlexibleYear 賦課年度,
+            RString 段階区分) throws NullPointerException {
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(段階区分, UrSystemErrorMessages.値がnull.getReplacedMessage("段階区分"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        List<DbT2013HokenryoDankaiEntity> list = accessor.select().
+                table(DbT2013HokenryoDankai.class).
+                where(and(
+                                eq(fukaNendo, 賦課年度),
+                                eq(dankaiKubun, 段階区分))).
+                toList(DbT2013HokenryoDankaiEntity.class);
+
+        return list.size() > 0 ? list.get(0) : null;
     }
 
     /**

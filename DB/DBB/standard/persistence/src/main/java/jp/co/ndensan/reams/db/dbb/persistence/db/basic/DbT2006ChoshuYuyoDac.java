@@ -8,10 +8,10 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyo;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyo.choteiNendo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyo.fukaNendo;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyo.rirekiNo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyo.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyoEntity;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorList.fukaNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorList.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -59,17 +59,17 @@ public class DbT2006ChoshuYuyoDac implements ISaveable<DbT2006ChoshuYuyoEntity> 
         return accessor.select().
                 table(DbT2006ChoshuYuyo.class).
                 where(and(
-                eq(choteiNendo, 調定年度),
-                eq(fukaNendo, 賦課年度),
-                eq(tsuchishoNo, 通知書番号),
-                eq(rirekiNo, 履歴番号))).
+                                eq(choteiNendo, 調定年度),
+                                eq(fukaNendo, 賦課年度),
+                                eq(tsuchishoNo, 通知書番号),
+                                eq(rirekiNo, 履歴番号))).
                 toObject(DbT2006ChoshuYuyoEntity.class);
     }
 
     /**
      * 介護賦課徴収猶予を全件返します。
      *
-     * @return DbT2006ChoshuYuyoEntityの{@code list}
+     * @return List<DbT2006ChoshuYuyoEntity>
      */
     @Transaction
     public List<DbT2006ChoshuYuyoEntity> selectAll() {
@@ -91,7 +91,7 @@ public class DbT2006ChoshuYuyoDac implements ISaveable<DbT2006ChoshuYuyoEntity> 
     public int save(DbT2006ChoshuYuyoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護賦課徴収猶予エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+        //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

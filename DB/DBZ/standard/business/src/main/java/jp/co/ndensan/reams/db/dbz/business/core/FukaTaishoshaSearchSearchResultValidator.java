@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business;
+package jp.co.ndensan.reams.db.dbz.business.core;
 
 import jp.co.ndensan.reams.db.dbz.business.validation.FukaTaishoshaSearchValidationMessage;
 import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;

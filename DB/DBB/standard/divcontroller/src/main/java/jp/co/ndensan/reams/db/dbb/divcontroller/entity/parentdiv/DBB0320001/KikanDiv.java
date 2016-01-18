@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KikanDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,24 +33,40 @@ public class KikanDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettblKikan1
+     * @return tblKikan1
+     */
     @JsonProperty("tblKikan1")
     public tblKikan1Div getTblKikan1() {
         return tblKikan1;
     }
 
+    /*
+     * settblKikan1
+     * @param tblKikan1 tblKikan1
+     */
     @JsonProperty("tblKikan1")
     public void setTblKikan1(tblKikan1Div tblKikan1) {
-        this.tblKikan1=tblKikan1;
+        this.tblKikan1 = tblKikan1;
     }
 
+    /*
+     * gettblKikan2
+     * @return tblKikan2
+     */
     @JsonProperty("tblKikan2")
     public tblKikan2Div getTblKikan2() {
         return tblKikan2;
     }
 
+    /*
+     * settblKikan2
+     * @param tblKikan2 tblKikan2
+     */
     @JsonProperty("tblKikan2")
     public void setTblKikan2(tblKikan2Div tblKikan2) {
-        this.tblKikan2=tblKikan2;
+        this.tblKikan2 = tblKikan2;
     }
 
     /*

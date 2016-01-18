@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic;
+package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 
 /**
- * {@link jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper}のマッパーIFです。
+ * {@link jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper}のマッパーIFです。
  */
 public interface IUrT0705ChoteiKyotsuMapper {
 

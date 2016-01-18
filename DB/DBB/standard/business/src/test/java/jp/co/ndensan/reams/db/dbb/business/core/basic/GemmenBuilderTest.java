@@ -4,15 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2004GemmenEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoGemmenShurui;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoGemmenTorikeshiShurui;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -40,6 +39,8 @@ public class GemmenBuilderTest extends DbbTestBase {
 //TODO 主キー値を適切な値に置換してください
         調停年度 = DbT2004GemmenEntityGenerator.DEFAULT_調定年度;
         賦課年度 = DbT2004GemmenEntityGenerator.DEFAULT_賦課年度;
+        通知書番号 = DbT2004GemmenEntityGenerator.DEFAULT_通知書番号;
+        履歴番号 = DbT2004GemmenEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class getterSetterTest extends DbbTestBase {
@@ -56,31 +57,6 @@ public class GemmenBuilderTest extends DbbTestBase {
             business = new Gemmen(GemmenEntity);
 
             sut = business.createBuilderForEdit();
-        }
-//TODO Key項目のテストメソッドは削除して下さい。
-
-        @Test
-        public void 戻り値の調定年度は_設定した値と同じ調定年度を返す() {
-            business = sut.set調定年度(DbT2004GemmenEntityGenerator.DEFAULT_調定年度).build();
-            assertThat(business.get調定年度(), is(DbT2004GemmenEntityGenerator.DEFAULT_調定年度));
-        }
-
-        @Test
-        public void 戻り値の賦課年度は_設定した値と同じ賦課年度を返す() {
-            business = sut.set賦課年度(DbT2004GemmenEntityGenerator.DEFAULT_賦課年度).build();
-            assertThat(business.get賦課年度(), is(DbT2004GemmenEntityGenerator.DEFAULT_賦課年度));
-        }
-
-        @Test
-        public void 戻り値の通知書番号は_設定した値と同じ通知書番号を返す() {
-            business = sut.set通知書番号(DbT2004GemmenEntityGenerator.DEFAULT_通知書番号).build();
-            assertThat(business.get通知書番号(), is(DbT2004GemmenEntityGenerator.DEFAULT_通知書番号));
-        }
-
-        @Test
-        public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
-            business = sut.set履歴番号(DbT2004GemmenEntityGenerator.DEFAULT_履歴番号).build();
-            assertThat(business.get履歴番号(), is(DbT2004GemmenEntityGenerator.DEFAULT_履歴番号));
         }
 
         @Test
@@ -120,9 +96,9 @@ public class GemmenBuilderTest extends DbbTestBase {
         }
 
         @Test
-        public void 戻り値の減免種類コードは_設定した値と同じ減免種類コードを返す() {
-            business = sut.set減免種類コード(DbT2004GemmenEntityGenerator.DEFAULT_減免種類コード).build();
-            assertThat(business.get減免種類コード(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免種類コード));
+        public void 戻り値の減免種類は_設定した値と同じ減免種類コードを返す() {
+            business = sut.set減免種類(new HokenryoGemmenShurui(DbT2004GemmenEntityGenerator.DEFAULT_減免種類コード)).build();
+            assertThat(business.get減免種類().value(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免種類コード));
         }
 
         @Test
@@ -133,8 +109,8 @@ public class GemmenBuilderTest extends DbbTestBase {
 
         @Test
         public void 戻り値の減免取消種類コードは_設定した値と同じ減免取消種類コードを返す() {
-            business = sut.set減免取消種類コード(DbT2004GemmenEntityGenerator.DEFAULT_減免取消種類コード).build();
-            assertThat(business.get減免取消種類コード(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免取消種類コード));
+            business = sut.set減免取消種類(new HokenryoGemmenTorikeshiShurui(DbT2004GemmenEntityGenerator.DEFAULT_減免取消種類コード)).build();
+            assertThat(business.get減免取消種類().value(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免取消種類コード));
         }
 
         @Test

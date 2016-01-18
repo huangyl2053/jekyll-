@@ -7,13 +7,11 @@ package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyoEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoChoshuYuyoShurui;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoChoshuYuyoTorikeshiShurui;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ChoshuYuyo}の編集を行うビルダークラスです。
@@ -39,56 +37,7 @@ public class ChoshuYuyoBuilder {
 
     }
 
-//TODO Key項目のsetterメソッドは削除してください。
 //TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 調定年度を設定します。
-     *
-     * @param 調定年度 調定年度
-     * @return {@link ChoshuYuyoBuilder}
-     */
-    public ChoshuYuyoBuilder set調定年度(FlexibleYear 調定年度) {
-        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        entity.setChoteiNendo(調定年度);
-        return this;
-    }
-
-    /**
-     * 賦課年度を設定します。
-     *
-     * @param 賦課年度 賦課年度
-     * @return {@link ChoshuYuyoBuilder}
-     */
-    public ChoshuYuyoBuilder set賦課年度(FlexibleYear 賦課年度) {
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
-        entity.setFukaNendo(賦課年度);
-        return this;
-    }
-
-    /**
-     * 通知書番号を設定します。
-     *
-     * @param 通知書番号 通知書番号
-     * @return {@link ChoshuYuyoBuilder}
-     */
-    public ChoshuYuyoBuilder set通知書番号(TsuchishoNo 通知書番号) {
-        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
-        entity.setTsuchishoNo(通知書番号);
-        return this;
-    }
-
-    /**
-     * 履歴番号を設定します。
-     *
-     * @param 履歴番号 履歴番号
-     * @return {@link ChoshuYuyoBuilder}
-     */
-    public ChoshuYuyoBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
-        return this;
-    }
-
     /**
      * 徴収猶予申請年月日を設定します。
      *
@@ -162,14 +111,14 @@ public class ChoshuYuyoBuilder {
     }
 
     /**
-     * 徴収猶予種類コードを設定します。
+     * 徴収猶予種類を設定します。
      *
-     * @param 徴収猶予種類コード 徴収猶予種類コード
+     * @param 徴収猶予種類 徴収猶予種類
      * @return {@link ChoshuYuyoBuilder}
      */
-    public ChoshuYuyoBuilder set徴収猶予種類コード(Code 徴収猶予種類コード) {
-        requireNonNull(徴収猶予種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収猶予種類コード"));
-        entity.setYuyoJiyuCode(徴収猶予種類コード);
+    public ChoshuYuyoBuilder set徴収猶予種類(HokenryoChoshuYuyoShurui 徴収猶予種類) {
+        requireNonNull(徴収猶予種類, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収猶予種類"));
+        entity.setYuyoJiyuCode(徴収猶予種類.value());
         return this;
     }
 
@@ -186,14 +135,14 @@ public class ChoshuYuyoBuilder {
     }
 
     /**
-     * 徴収猶予取消種類コードを設定します。
+     * 徴収猶予取消種類を設定します。
      *
-     * @param 徴収猶予取消種類コード 徴収猶予取消種類コード
+     * @param 徴収猶予取消種類 徴収猶予取消種類
      * @return {@link ChoshuYuyoBuilder}
      */
-    public ChoshuYuyoBuilder set徴収猶予取消種類コード(Code 徴収猶予取消種類コード) {
-        requireNonNull(徴収猶予取消種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収猶予取消種類コード"));
-        entity.setYuyoTorikeshiJiyuCode(徴収猶予取消種類コード);
+    public ChoshuYuyoBuilder set徴収猶予取消種類(HokenryoChoshuYuyoTorikeshiShurui 徴収猶予取消種類) {
+        requireNonNull(徴収猶予取消種類, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収猶予取消種類"));
+        entity.setYuyoTorikeshiJiyuCode(徴収猶予取消種類.value());
         return this;
     }
 

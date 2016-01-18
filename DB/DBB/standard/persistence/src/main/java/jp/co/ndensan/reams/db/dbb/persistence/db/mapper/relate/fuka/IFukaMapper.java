@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.FukaMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.FukaEntity;
 
@@ -19,4 +20,8 @@ public interface IFukaMapper {
      * @return FukaEntity
      */
     FukaEntity getFukaEntity(FukaMapperParameter 賦課検索条件);
+
+    public FukaEntity select介護賦課ByKey(FukaMapperParameter 介護賦課検索条件);
+
+    public List<FukaEntity> select介護賦課リストBy主キー1(FukaMapperParameter 介護賦課検索条件);
 }

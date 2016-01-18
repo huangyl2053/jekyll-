@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1007KyokaisoHokenryoDankaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -20,9 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 境界層保険料段階を管理するクラスです。
  */
-public class KyokaisoHokenryoDankai extends
-        ModelBase<KyokaisoHokenryoDankaiIdentifier, DbT1007KyokaisoHokenryoDankaiEntity, KyokaisoHokenryoDankai>
-        implements Serializable {
+public class KyokaisoHokenryoDankai extends ModelBase<KyokaisoHokenryoDankaiIdentifier, DbT1007KyokaisoHokenryoDankaiEntity, KyokaisoHokenryoDankai> implements Serializable {
 
     private final DbT1007KyokaisoHokenryoDankaiEntity entity;
     private final KyokaisoHokenryoDankaiIdentifier id;

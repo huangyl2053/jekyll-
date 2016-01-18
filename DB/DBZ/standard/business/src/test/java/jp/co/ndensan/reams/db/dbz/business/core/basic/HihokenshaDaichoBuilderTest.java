@@ -4,11 +4,16 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuHenkoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -16,7 +21,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -24,7 +28,6 @@ import org.junit.runner.RunWith;
 /**
  * {@link HihokenshaDaichoBuilder}のテストクラスです。
  */
-@Ignore
 @RunWith(Enclosed.class)
 public class HihokenshaDaichoBuilderTest extends DbzTestBase {
 
@@ -99,7 +102,7 @@ public class HihokenshaDaichoBuilderTest extends DbzTestBase {
 
         @Test
         public void 戻り値の資格取得事由コードは_設定した値と同じ資格取得事由コードを返す() {
-            business = sut.set資格取得事由コード(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格取得事由コード).build();
+            business = sut.set資格取得事由コード(new KaigoShikakuShutokuJiyu(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格取得事由コード)).build();
             assertThat(business.get資格取得事由コード(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格取得事由コード));
         }
 
@@ -129,7 +132,7 @@ public class HihokenshaDaichoBuilderTest extends DbzTestBase {
 
         @Test
         public void 戻り値の資格喪失事由コードは_設定した値と同じ資格喪失事由コードを返す() {
-            business = sut.set資格喪失事由コード(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格喪失事由コード).build();
+            business = sut.set資格喪失事由コード(new KaigoShikakuSoshitsuJiyu(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格喪失事由コード)).build();
             assertThat(business.get資格喪失事由コード(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格喪失事由コード));
         }
 
@@ -147,7 +150,7 @@ public class HihokenshaDaichoBuilderTest extends DbzTestBase {
 
         @Test
         public void 戻り値の資格変更事由コードは_設定した値と同じ資格変更事由コードを返す() {
-            business = sut.set資格変更事由コード(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格変更事由コード).build();
+            business = sut.set資格変更事由コード(new KaigoShikakuHenkoJiyu(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格変更事由コード)).build();
             assertThat(business.get資格変更事由コード(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格変更事由コード));
         }
 
@@ -165,7 +168,7 @@ public class HihokenshaDaichoBuilderTest extends DbzTestBase {
 
         @Test
         public void 戻り値の住所地特例適用事由コードは_設定した値と同じ住所地特例適用事由コードを返す() {
-            business = sut.set住所地特例適用事由コード(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例適用事由コード).build();
+            business = sut.set住所地特例適用事由コード(new KaigoShikakuJutokuTekiyoJiyu(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例適用事由コード)).build();
             assertThat(business.get住所地特例適用事由コード(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例適用事由コード));
         }
 
@@ -183,7 +186,7 @@ public class HihokenshaDaichoBuilderTest extends DbzTestBase {
 
         @Test
         public void 戻り値の住所地特例解除事由コードは_設定した値と同じ住所地特例解除事由コードを返す() {
-            business = sut.set住所地特例解除事由コード(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例解除事由コード).build();
+            business = sut.set住所地特例解除事由コード(new KaigoShikakuJutokuKaijoJiyu(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例解除事由コード)).build();
             assertThat(business.get住所地特例解除事由コード(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例解除事由コード));
         }
 
@@ -226,7 +229,7 @@ public class HihokenshaDaichoBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の論理削除フラグは_設定した値と同じ論理削除フラグを返す() {
             business = sut.set論理削除フラグ(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_論理削除フラグ).build();
-            assertThat(business.is論理削除フラグ(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_論理削除フラグ));
+            assertThat(business.get論理削除フラグ(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_論理削除フラグ));
         }
 
     }

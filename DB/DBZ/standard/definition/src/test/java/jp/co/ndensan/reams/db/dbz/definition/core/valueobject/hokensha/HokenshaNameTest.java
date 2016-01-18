@@ -5,16 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.HokenshaName;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.util.IllegalInitialValueException;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.isA;
 import static org.hamcrest.CoreMatchers.not;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 

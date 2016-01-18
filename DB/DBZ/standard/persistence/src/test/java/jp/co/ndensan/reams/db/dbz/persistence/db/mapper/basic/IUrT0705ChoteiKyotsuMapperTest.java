@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic;
+package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
-import jp.co.ndensan.reams.db.dbb.entity.basic.helper.UrT0705ChoteiKyotsuEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.UrT0705ChoteiKyotsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.UrT0705ChoteiKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;

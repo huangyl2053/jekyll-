@@ -9,23 +9,22 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -33,7 +32,6 @@ import static org.mockito.Mockito.when;
  * {link FukaManager}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class FukaManagerTest {
 
     private static DbT2002FukaDac dac;
@@ -91,9 +89,9 @@ public class FukaManagerTest {
             FlexibleYear 主キー2 = DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
             TsuchishoNo 主キー3 = DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
             Decimal 主キー4 = DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
-            Fuka result = sut.get介護賦課(主キー1, 主キー2, 主キー3, 主キー4);
+            Optional<Fuka> result = sut.get介護賦課(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result, is(nullValue()));
+            assertThat(result.isPresent(), is(false));
         }
 
         @Test
@@ -105,9 +103,9 @@ public class FukaManagerTest {
             FlexibleYear 主キー2 = DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
             TsuchishoNo 主キー3 = DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
             Decimal 主キー4 = DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
-            Fuka result = sut.get介護賦課(主キー1, 主キー2, 主キー3, 主キー4);
+            Optional<Fuka> result = sut.get介護賦課(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get調定年度().toDateString(), is(DbT2002FukaEntityGenerator.DEFAULT_調定年度.toDateString()));
+            assertThat(result.get().get調定年度().toDateString(), is(DbT2002FukaEntityGenerator.DEFAULT_調定年度.toDateString()));
         }
     }
 

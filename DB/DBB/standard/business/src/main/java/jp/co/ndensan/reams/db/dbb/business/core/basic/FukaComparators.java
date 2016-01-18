@@ -41,6 +41,15 @@ public enum FukaComparators implements Comparator<Fuka> {
                 public int compare(Fuka model1, Fuka model2) {
                     return model1.get通知書番号().compareTo(model2.get通知書番号());
                 }
+            },
+    /**
+     * 履歴番号でソートする機能を持ちます。
+     */
+    orderBy履歴番号 {
+                @Override
+                public int compare(Fuka model1, Fuka model2) {
+                    return model1.get履歴番号().compareTo(model2.get履歴番号());
+                }
             };
 
     /**
