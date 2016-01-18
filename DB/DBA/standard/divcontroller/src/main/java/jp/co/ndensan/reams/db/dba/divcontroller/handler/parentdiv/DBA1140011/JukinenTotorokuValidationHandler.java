@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1140011;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.jukinentotorokuDiv;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -34,23 +33,24 @@ public class JukinenTotorokuValidationHandler {
     /**
      * 実行するボタンを押下するとき、バリデーションチェックを行う。
      *
-     * @param 今回開始日 今回開始日
-     * @param 今回終了日 今回終了日
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateForAction(FlexibleDate 今回開始日, FlexibleDate 今回終了日) {
+    public ValidationMessageControlPairs validateForAction() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
 
-        if (今回開始日.isEmpty() || 今回終了日.isEmpty()) {
+        if (div.getBatchParamterInfo().getTxtkonkaikaishi().getValue().isEmpty()
+                || div.getBatchParamterInfo().getTxtkonkaishuryo().getValue().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.必須, "今回開始日と終了日両方")));
         } else {
-            if (!今回開始日.isValid() || !今回終了日.isValid()) {
+            if (!div.getBatchParamterInfo().getTxtkonkaikaishi().getValue().isValid()
+                    || !div.getBatchParamterInfo().getTxtkonkaishuryo().getValue().isValid()) {
                 // TODO QA415
                 validPairs.add(new ValidationMessageControlPair(
                         new IdocheckMessages(UrErrorMessages.不正, "日付")));
             } else {
-                if (今回開始日.isAfter(今回終了日)) {
+                if (div.getBatchParamterInfo().getTxtkonkaikaishi().getValue().isAfter(
+                        div.getBatchParamterInfo().getTxtkonkaishuryo().getValue())) {
                     validPairs.add(new ValidationMessageControlPair(
                             new IdocheckMessages(DbzErrorMessages.期間が不正_未来日付不可, "開始日", "終了日")));
                 }

@@ -83,10 +83,7 @@ public class jukinentotoroku {
      * @return チェック結果(true/false)
      */
     public ResponseData<jukinentotorokuDiv> onClick_inputCheck(jukinentotorokuDiv div) {
-        JukinenTotorokuValidationHandler handler = new JukinenTotorokuValidationHandler(div);
-        ValidationMessageControlPairs validPairs = handler.validateForAction(
-                div.getBatchParamterInfo().getTxtkonkaikaishi().getValue(),
-                div.getBatchParamterInfo().getTxtkonkaishuryo().getValue());
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForAction();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
@@ -108,5 +105,9 @@ public class jukinentotoroku {
                 div.getChktaishodaicho().getSelectedKeys(),
                 RString.EMPTY);
         return ResponseData.of(parameter).respond();
+    }
+
+    private JukinenTotorokuValidationHandler getValidationHandler(jukinentotorokuDiv div) {
+        return new JukinenTotorokuValidationHandler(div);
     }
 }
