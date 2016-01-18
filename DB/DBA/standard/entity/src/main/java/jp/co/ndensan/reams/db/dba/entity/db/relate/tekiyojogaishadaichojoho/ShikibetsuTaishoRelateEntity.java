@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShikibetsuTaishoRelateEntity {
 
     private LasdecCode 現全国地方公共団体コード;
-//private 連絡先
+    private TelNo 連絡先1;
     private FlexibleDate 生年月日;
     private RString 性別コード;
     private SetaiCode 世帯コード;

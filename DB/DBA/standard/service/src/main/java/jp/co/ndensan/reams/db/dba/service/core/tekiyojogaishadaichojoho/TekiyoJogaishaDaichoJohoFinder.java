@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaishadaichojoho.Shik
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaishadaichojoho.TekiyoJogaiShisetuJyohoRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaishadaichojoho.TekiyoJogaishaDaichoJohoRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tekiyojogaishadaichojoho.ITekiyoJogaiShisetuJyohoMapper;
+import jp.co.ndensan.reams.db.dbx.business.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
@@ -95,6 +96,7 @@ public class TekiyoJogaishaDaichoJohoFinder {
     }
 
     /**
+     * 適用除外者台帳情報の取得します。
      *
      * @param 識別コード 識別コード
      * @return SearchResult<TekiyoJogaishaDaichoJoho> 適用除外者台帳情報
@@ -134,8 +136,8 @@ public class TekiyoJogaishaDaichoJohoFinder {
             適用除外者台帳情報Entity.set市町村コード(宛名情報PSM.get現全国地方公共団体コード().getColumnValue());
             適用除外者台帳情報Entity.set市町村名称(市町村名称);
             適用除外者台帳情報Entity.set電話番号タイトル(連絡先);
-            //TODO 凌護行 「宛名情報」の戻り値一覧に「連絡先」が無い、 QA274回答まち、2015/12/28まで
-//            適用除外者台帳情報Entity.set電話番号１(宛名情報PSM.get連絡先());
+            //TODO 凌護行 「宛名情報」の戻り値一覧に「連絡先」が無い、 QA286回答まち、2015/12/28まで
+//            適用除外者台帳情報Entity.set電話番号１(宛名情報PSM.get連絡先1().getColumnValue());
             適用除外者台帳情報Entity.set電話番号２(RString.EMPTY);
             適用除外者台帳情報Entity.set連番(entity.get連番());
             適用除外者台帳情報Entity.set適用年月日(日付フォーマット(entity.get適用年月日()));
@@ -243,18 +245,21 @@ public class TekiyoJogaishaDaichoJohoFinder {
         RString 市町村名称 = RString.EMPTY;
         Code 導入形態コード = Code.EMPTY;
         List<KoikiZenShichosonJoho> 現市町村情報リスト = new ArrayList<>();
+        KoseiShichosonJoho shichosonJoho = null;
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (市町村セキュリティ情報 != null) {
             導入形態コード = 市町村セキュリティ情報.get導入形態コード();
+            shichosonJoho = 市町村セキュリティ情報.get市町村情報();
         }
         if (導入形態コード != null && !導入形態コード.isEmpty()
-                && 導入形態コード.getColumnValue().length() >= 導入形態コード_LENGTH_3
-                && (広域.equals(導入形態コード.getColumnValue().substringEmptyOnError(導入形態コード_LENGTH_1, 導入形態コード_LENGTH_3)))) {
-            現市町村情報リスト = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho().records();
-//TODO 凌護行 「QA #70076」回答により、機能「市町村情報取得_単一」いらないです、 QA259回答まち、2015/12/28まで
-//            else {
-//                現市町村情報 = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho();
-//            }
+                && 導入形態コード.getColumnValue().length() >= 導入形態コード_LENGTH_3) {
+            if (広域.equals(導入形態コード.getColumnValue().substringEmptyOnError(導入形態コード_LENGTH_1, 導入形態コード_LENGTH_3))) {
+                現市町村情報リスト = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho().records();
+            } else {
+                if (shichosonJoho != null) {
+                    return shichosonJoho.get市町村名称();
+                }
+            }
         }
         if (現市町村情報リスト != null && !現市町村情報リスト.isEmpty()) {
             for (KoikiZenShichosonJoho 市町村情報 : 現市町村情報リスト) {
