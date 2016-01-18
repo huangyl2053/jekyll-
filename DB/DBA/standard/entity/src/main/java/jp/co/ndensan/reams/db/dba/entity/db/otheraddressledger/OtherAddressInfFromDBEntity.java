@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -29,10 +28,10 @@ public class OtherAddressInfFromDBEntity {
     private FlexibleDate 異動日;
     private RString 枝番;
     private LasdecCode 市町村コード;
-    private KaigoTatokuTekiyoJiyu 他市町村住所地特例適用事由コード;
+    private RString 他市町村住所地特例適用事由コード;
     private FlexibleDate 適用年月日;
     private FlexibleDate 適用届出年月日;
-    private KaigoTatokuTekiyoJiyu 他市町村住所地特例解除事由コード;
+    private RString 他市町村住所地特例解除事由コード;
     private FlexibleDate 解除年月日;
     private FlexibleDate 解除届出年月日;
     private ShoKisaiHokenshaNo 措置保険者番号;

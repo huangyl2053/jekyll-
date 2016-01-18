@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -25,11 +24,11 @@ public class OtherAddressInfEntity {
     private RString NO;
     private FlexibleDate 適用年月日;
     private FlexibleDate 適用届出年月日;
-    private KaigoTatokuTekiyoJiyu 適用事由コード;
+    private RString 適用事由コード;
     private RString 適用事由名称;
     private FlexibleDate 解除年月日;
     private FlexibleDate 解除届出年月日;
-    private KaigoTatokuTekiyoJiyu 解除事由コード;
+    private RString 解除事由コード;
     private RString 解除事由名称;
     private FlexibleDate 入所年月日;
     private FlexibleDate 退所年月日;

@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -143,28 +144,28 @@ public class TashichosonJushochiTokureiDaicho {
         他市町村住所地特例者台帳情報.set転入年月日(宛名識別対象取得PSM.get転入年月日());
         他市町村住所地特例者台帳情報.set転出年月日(宛名識別対象取得PSM.get転出年月日());
         他市町村住所地特例者台帳情報.setNO(他市町村住所地特例者情報.getNO());
-        他市町村住所地特例者台帳情報.set適用年月日(他市町村住所地特例者情報.get適用年月日().
-                wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK));
-        他市町村住所地特例者台帳情報.set適用届出年月日(他市町村住所地特例者情報.get適用届出年月日().
-                wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK));
+        他市町村住所地特例者台帳情報.set適用年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get適用年月日()));
+        他市町村住所地特例者台帳情報.set適用届出年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get適用届出年月日()));
         他市町村住所地特例者台帳情報.set他市町村住所地特例適用事由コード(他市町村住所地特例者情報.get適用事由名称());
         他市町村住所地特例者台帳情報.set他市町村住所地特例適用事由名称(他市町村住所地特例者情報.get適用事由名称());
-        他市町村住所地特例者台帳情報.set入所年月日(他市町村住所地特例者情報.get入所年月日().
-                wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK));
+        他市町村住所地特例者台帳情報.set入所年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get入所年月日()));
         他市町村住所地特例者台帳情報.set事業者名称(他市町村住所地特例者情報.get事業者名称());
         他市町村住所地特例者台帳情報.set電話番号(他市町村住所地特例者情報.get電話番号());
-        他市町村住所地特例者台帳情報.set解除年月日(他市町村住所地特例者情報.get解除年月日().
-                wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK));
-        他市町村住所地特例者台帳情報.set解除届出年月日(他市町村住所地特例者情報.get解除届出年月日().
-                wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK));
+        他市町村住所地特例者台帳情報.set解除年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get解除年月日()));
+        他市町村住所地特例者台帳情報.set解除届出年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get解除届出年月日()));
         他市町村住所地特例者台帳情報.set他市町村住所地特例解除事由コード(他市町村住所地特例者情報.get解除事由名称());
         他市町村住所地特例者台帳情報.set他市町村住所地特例解除事由名称(他市町村住所地特例者情報.get解除事由名称());
-        他市町村住所地特例者台帳情報.set退所年月日(他市町村住所地特例者情報.get退所年月日().
-                wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK));
+        他市町村住所地特例者台帳情報.set退所年月日(flexibleDateToFillTypeFormatted(他市町村住所地特例者情報.get退所年月日()));
         他市町村住所地特例者台帳情報.set事業者住所(他市町村住所地特例者情報.get事業者住所());
         他市町村住所地特例者台帳情報.set郵便番号(他市町村住所地特例者情報.get郵便番号());
         他市町村住所地特例者台帳情報.set保険者名称(他市町村住所地特例者情報.get保険者名称());
         他市町村住所地特例者台帳情報.set他被保番号(他市町村住所地特例者情報.get他被保番号());
+    }
+
+    private FillTypeFormatted flexibleDateToFillTypeFormatted(FlexibleDate date) {
+        return null == date ? FlexibleDate.EMPTY.
+                wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK)
+                : date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK);
     }
 
     /**
@@ -225,10 +226,10 @@ public class TashichosonJushochiTokureiDaicho {
         List<OtherAddressInfEntity> otherAddressInfEntityLst = new ArrayList<>();
         int no = 1;
         for (OtherAddressInfFromDBEntity otherAddressInfFromDBEntity : 他市町村住所地特例者情報Lst) {
-            RString 適用事由名称 = CodeMaster.getCodeMeisho(SubGyomuCode.URZ業務共通_共通系, new CodeShubetsu("0118"),
-                    otherAddressInfFromDBEntity.get他市町村住所地特例適用事由コード().getColumnValue());
-            RString 解除事由名称 = CodeMaster.getCodeMeisho(SubGyomuCode.URZ業務共通_共通系, new CodeShubetsu("0122"),
-                    otherAddressInfFromDBEntity.get他市町村住所地特例解除事由コード().getColumnValue());
+            RString 適用事由名称 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0008"),
+                    new Code(otherAddressInfFromDBEntity.get他市町村住所地特例適用事由コード()));
+            RString 解除事由名称 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0011"),
+                    new Code(otherAddressInfFromDBEntity.get他市町村住所地特例解除事由コード()));
             OtherAddressInfEntity otherAddressInfEntity = new OtherAddressInfEntity();
             set他市町村住所地特例者情報(otherAddressInfEntity, otherAddressInfFromDBEntity, no, 適用事由名称, 解除事由名称);
             otherAddressInfEntityLst.add(otherAddressInfEntity);
