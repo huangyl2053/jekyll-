@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.youkaigoninteikekktesuchi.IYouKaiGoNinTeiKekTesuChiMapper">
+    
+    <resultMap id="ResultMap_YouKaiGoNinTeiKekTesuChiRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiRelateEntity" autoMapping="true">
+        <result property="shujiiIryokikanCode" column="youKaiGoNinTeiKekTesuChiRelateEntity_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="iryoKikanMeisho" column="youKaiGoNinTeiKekTesuChiRelateEntity_iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="youKaiGoNinTeiKekTesuChiRelateEntity_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="telNo" column="youKaiGoNinTeiKekTesuChiRelateEntity_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jusho" column="youKaiGoNinTeiKekTesuChiRelateEntity_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shujiiCode" column="youKaiGoNinTeiKekTesuChiRelateEntity_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shujiiName" column="youKaiGoNinTeiKekTesuChiRelateEntity_shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="taiSyouCount" column="youKaiGoNinTeiKekTesuChiRelateEntity_taiSyouCount"/>
+        <result property="hihokenshaNo" column="dbT5101NinteiShinseiJoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaName" column="dbT5101NinteiShinseiJoho_hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seibetsu" column="dbT5101NinteiShinseiJoho_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seinengappiYMD" column="dbT5101NinteiShinseiJoho_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="age" column="dbT5101NinteiShinseiJoho_age" />
+        <result property="ninteiShinseiYMD" column="dbT5101NinteiShinseiJoho_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiShinseiShinseijiKubunCode" column="dbT5101NinteiShinseiJoho_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiShinseiHoreiKubunCode" column="dbT5101NinteiShinseiJoho_ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiHanteiYokaigoJotaiKubunCode" column="dbT5102NinteiKekkaJoho_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiHanteiNinteiYukoKikan" column="dbT5102NinteiKekkaJoho_nijiHanteiNinteiYukoKikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiHanteiNinteiYukoKaishiYMD" column="dbT5102NinteiKekkaJoho_nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiHanteiNinteiYukoShuryoYMD" column="dbT5102NinteiKekkaJoho_nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiHanteiYMD" column="dbT5102NinteiKekkaJoho_nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseishoKanriNo" column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiJohoTeikyoYMD" column="dbT5301ShujiiIkenshoIraiJoho_ninteiJohoTeikyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+   <select id="getSyuJiSenTakuYiChiRan" 
+           resultMap="ResultMap_YouKaiGoNinTeiKekTesuChiRelateEntity"
+           parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter" fetchSize="500" >
+        SELECT
+            rgdb."DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" AS youKaiGoNinTeiKekTesuChiRelateEntity_shujiiIryokikanCode,
+            rgdb."DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho" AS youKaiGoNinTeiKekTesuChiRelateEntity_iryoKikanMeisho,
+            rgdb."DbT5911ShujiiIryoKikanJoho"."yubinNo" AS youKaiGoNinTeiKekTesuChiRelateEntity_yubinNo,
+            rgdb."DbT5911ShujiiIryoKikanJoho"."telNo" AS youKaiGoNinTeiKekTesuChiRelateEntity_telNo,
+            rgdb."DbT5911ShujiiIryoKikanJoho"."jusho" AS youKaiGoNinTeiKekTesuChiRelateEntity_jusho,
+            rgdb."DbT5912ShujiiJoho"."shujiiCode" AS youKaiGoNinTeiKekTesuChiRelateEntity_shujiiCode,
+            rgdb."DbT5912ShujiiJoho"."shujiiName" AS youKaiGoNinTeiKekTesuChiRelateEntity_shujiiName,
+            COUNT(0) AS youKaiGoNinTeiKekTesuChiRelateEntity_taiSyouCount
+        FROM
+            rgdb."DbT5101NinteiShinseiJoho"
+            INNER JOIN  rgdb."DbT5102NinteiKekkaJoho"
+            ON  rgdb."DbT5102NinteiKekkaJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+            INNER JOIN  rgdb."DbT5051KoseiShichosonMaster"
+            ON  rgdb."DbT5051KoseiShichosonMaster"."shoKisaiHokenshaNo" = rgdb."DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"
+            INNER JOIN  rgdb."DbT5911ShujiiIryoKikanJoho"
+            ON  rgdb."DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = rgdb."DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
+            AND rgdb."DbT5911ShujiiIryoKikanJoho"."shichosonCode" = rgdb."DbT5051KoseiShichosonMaster"."shichosonCode"
+            INNER JOIN  rgdb."DbT5912ShujiiJoho"
+            ON  rgdb."DbT5912ShujiiJoho"."shujiiIryokikanCode" = rgdb."DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
+            AND rgdb."DbT5912ShujiiJoho"."shujiiCode" = rgdb."DbT5101NinteiShinseiJoho"."shujiiCode"
+            AND rgdb."DbT5912ShujiiJoho"."shichosonCode" = rgdb."DbT5051KoseiShichosonMaster"."shichosonCode"
+            INNER JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"
+            ON  rgdb."DbT5301ShujiiIkenshoIraiJoho"."shujiiIryokikanCode" = rgdb."DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
+            <if test="useSyuRyoKuTaiSyou">
+            AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoKiboFlag" = TRUE
+            </if>
+            AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."logicalDeletedFlag" = FALSE
+        WHERE 
+            rgdb."DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN ('01','04')
+            AND 
+            rgdb."DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE
+            <if test="useNijiHanteiYMDFrom">
+            AND
+            rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiYMD" <![CDATA[>=]]> #{二次判定期間From}
+            </if>
+            <if test="useNijiHanteiYMDTo">
+            AND
+            rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiYMD" <![CDATA[<=]]> #{二次判定期間To}
+            </if>
+            <if test="useShujiiIryokikanCode">
+            AND 
+            rgdb."DbT5101NinteiShinseiJoho"."shujiiIryokikanCode" = #{主治医医療機関コード}
+            </if>
+            <if test="useShujiiCode">
+             AND
+             rgdb."DbT5101NinteiShinseiJoho"."shujiiCode" = #{主治医コード}
+            </if>
+            <if test="useMaDaNyuRyouKu">
+             AND
+             rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoYMD" IS NULL
+            </if>
+        GROUP BY 
+            rgdb."DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode",
+            rgdb."DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho",
+            rgdb."DbT5911ShujiiIryoKikanJoho"."yubinNo",
+            rgdb."DbT5911ShujiiIryoKikanJoho"."telNo",
+            rgdb."DbT5911ShujiiIryoKikanJoho"."jusho",
+            rgdb."DbT5912ShujiiJoho"."shujiiCode",
+            rgdb."DbT5912ShujiiJoho"."shujiiName"
+        ORDER BY 
+            rgdb."DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode",
+            rgdb."DbT5912ShujiiJoho"."shujiiCode"
+    </select>
+    
+    <select id="getKeKaTsuChiSyuTsuRyoKuTaiSyou"
+            resultMap="ResultMap_YouKaiGoNinTeiKekTesuChiRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter" fetchSize="500" >
+       SELECT
+            rgdb."DbT5101NinteiShinseiJoho"."hihokenshaNo" AS dbT5101NinteiShinseiJoho_hihokenshaNo,
+            rgdb."DbT5101NinteiShinseiJoho"."hihokenshaName" AS dbT5101NinteiShinseiJoho_hihokenshaName,
+            rgdb."DbT5101NinteiShinseiJoho"."seinengappiYMD" AS dbT5101NinteiShinseiJoho_seinengappiYMD,
+	    rgdb."DbT5101NinteiShinseiJoho".seibetsu AS dbT5101NinteiShinseiJoho_seibetsu,
+	    rgdb."DbT5101NinteiShinseiJoho".age AS dbT5101NinteiShinseiJoho_age,
+	    rgdb."DbT5101NinteiShinseiJoho"."ninteiShinseiYMD" AS dbT5101NinteiShinseiJoho_ninteiShinseiYMD,
+	    rgdb."DbT5101NinteiShinseiJoho"."ninteiShinseiShinseijiKubunCode" AS dbT5101NinteiShinseiJoho_ninteiShinseiShinseijiKubunCode,
+	    rgdb."DbT5101NinteiShinseiJoho"."ninteiShinseiHoreiKubunCode" AS dbT5101NinteiShinseiJoho_ninteiShinseiHoreiKubunCode,
+	    rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiYokaigoJotaiKubunCode" AS dbT5102NinteiKekkaJoho_nijiHanteiYokaigoJotaiKubunCode,
+	    rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiNinteiYukoKikan" AS dbT5102NinteiKekkaJoho_nijiHanteiNinteiYukoKikan,
+	    rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiNinteiYukoKaishiYMD" AS dbT5102NinteiKekkaJoho_nijiHanteiNinteiYukoKaishiYMD,
+	    rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiNinteiYukoShuryoYMD" AS dbT5102NinteiKekkaJoho_nijiHanteiNinteiYukoShuryoYMD,
+	    rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiYMD" AS dbT5102NinteiKekkaJoho_nijiHanteiYMD,
+            rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoYMD" AS dbT5301ShujiiIkenshoIraiJoho_ninteiJohoTeikyoYMD,
+            rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo" AS dbT5101NinteiShinseiJoho_shinseishoKanriNo
+        FROM
+            rgdb."DbT5101NinteiShinseiJoho"
+            INNER JOIN  rgdb."DbT5102NinteiKekkaJoho"
+            ON  rgdb."DbT5102NinteiKekkaJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+            INNER JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"
+            ON  rgdb."DbT5301ShujiiIkenshoIraiJoho"."shujiiIryokikanCode" = rgdb."DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
+            <if test="useSyuRyoKuTaiSyou">
+            AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoKiboFlag" = TRUE
+            </if>
+            AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."logicalDeletedFlag" = FALSE
+        WHERE 
+            rgdb."DbT5101NinteiShinseiJoho"."shujiiIryokikanCode" = #{主治医医療機関コード}
+            AND
+            rgdb."DbT5101NinteiShinseiJoho"."shujiiCode" = #{主治医コード}
+            AND
+            rgdb."DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN ('01','04')
+            AND 
+            rgdb."DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE
+            <if test="useNijiHanteiYMDFrom">
+            AND
+            rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiYMD" <![CDATA[>=]]> #{二次判定期間From}
+            </if>
+            <if test="useNijiHanteiYMDTo">
+            AND
+            rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiYMD" <![CDATA[<=]]> #{二次判定期間To}
+            </if>
+            <if test="useMaDaNyuRyouKu">
+            AND
+            rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoYMD" IS NULL
+            </if>
+        ORDER BY 
+            rgdb."DbT5101NinteiShinseiJoho"."hihokenshaNo"
+    </select>
+</mapper>
