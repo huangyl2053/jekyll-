@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0900041;
 
+import jp.co.ndensan.reams.db.dbu.business.saiketukekameisaijoho.SaiketukekaMeisaiJohoData;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900041.SaiketukekaTorokuPanelDiv;
-import jp.co.ndensan.reams.db.dbu.entity.SaiketukekaMeisaiJoho;
 import jp.co.ndensan.reams.db.dbu.service.core.saiketukekatoroku.SaiketukekaToroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
@@ -55,7 +55,7 @@ public class SaiketukekaTorokuPanelHandler {
 //        共有子DIVの初期化(識別コード, 被保険者番号);   // TODO
         裁決結果登録明細情報の編集(識別コード, 被保険者番号, 審査請求届出日);
     }
-    
+
     private void 共有子DIVの初期化(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
         div.getAtenaInfoCommonChildDiv().load(識別コード);
         div.getKaigoShikakuKihonCommonChildDiv().initialize(被保険者番号);
@@ -88,8 +88,8 @@ public class SaiketukekaTorokuPanelHandler {
         div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketuRiyu().setReadOnly(true);
         div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketukeka().setReadOnly(true);
     }
-    
-   private void 活性の恢復() {
+
+    private void 活性の恢復() {
         div.getSaiketukekaMeisaiPanel().getTxtDateBenmeisyoSakuseibi().setReadOnly(false);
         div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketuRiyu().setReadOnly(false);
         div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketukeka().setReadOnly(false);
@@ -129,20 +129,22 @@ public class SaiketukekaTorokuPanelHandler {
     public void 裁決結果登録明細情報の編集(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日) {
 
         SaiketukekaToroku saiketukekaToroku = new SaiketukekaToroku();
-        SaiketukekaMeisaiJoho saiketukekaMeisaiJoho = saiketukekaToroku.getSaiketukekaMeisaiJoho(識別コード, 被保険者番号, 審査請求届出日);
 
-        div.getTxtMultiLineSaiketukeka().setValue(saiketukekaMeisaiJoho.get裁決結果());
-        div.getTxtMultiLineSaiketuRiyu().setValue(saiketukekaMeisaiJoho.get裁決理由());
-        if (saiketukekaMeisaiJoho.get弁明書作成日() != null) {
-            div.getTxtDateBenmeisyoSakuseibi().setValue(new RDate(saiketukekaMeisaiJoho.get弁明書作成日().toString()));
+        SaiketukekaMeisaiJohoData data = new SaiketukekaMeisaiJohoData(saiketukekaToroku.
+                getSaiketukekaMeisaiJoho(識別コード, 被保険者番号, 審査請求届出日));
+
+        div.getTxtMultiLineSaiketukeka().setValue(data.get裁決結果());
+        div.getTxtMultiLineSaiketuRiyu().setValue(data.get裁決理由());
+        if (data.get弁明書作成日() != null) {
+            div.getTxtDateBenmeisyoSakuseibi().setValue(new RDate(data.get弁明書作成日().toString()));
         }
     }
-    
+
     /**
      * 内容の破棄を行いました。
      */
     public void 内容の破棄() {
-       
+
         div.getSaiketukekaMeisaiPanel().getTxtDateBenmeisyoSakuseibi().clearValue();
         div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketuRiyu().clearValue();
         div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketukeka().clearValue();

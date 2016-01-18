@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0900041;
 
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900041.SaiketukekaTorokuPanelDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -20,16 +19,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class SaiketukekaTorokuValidationHandler {
 
-    private final SaiketukekaTorokuPanelDiv div;
-
-    /**
-     * コンストラクタです。
-     *
-     * @param div 審査請求書登録_登録Div
-     */
-    public SaiketukekaTorokuValidationHandler(SaiketukekaTorokuPanelDiv div) {
-        this.div = div;
-    }
 
     /**
      * 保存するボタンを押下するとき、完了メッセージを行う。
@@ -51,11 +40,7 @@ public class SaiketukekaTorokuValidationHandler {
      * @return 判定結果(true:変更あり,false:変更なし)
      */
     public boolean 修正_変更有無チェック(RString 修正後の値) {
-        if (ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class) == null && 修正後の値 == null) {
-            return false;
-        } else if (ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class) == null && 修正後の値 != null) {
-            return true;
-        }
+        修正後の値 = 修正後の値 == null ? RString.EMPTY : 修正後の値;
         return !修正後の値.toString().equals(ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class).toString());
     }
 

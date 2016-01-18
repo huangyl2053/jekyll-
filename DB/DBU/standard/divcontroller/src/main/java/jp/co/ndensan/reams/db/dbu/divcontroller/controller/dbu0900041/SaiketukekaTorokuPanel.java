@@ -36,7 +36,7 @@ public class SaiketukekaTorokuPanel {
     private static final RString 更新 = new RString("更新");
 
     /**
-     * 裁決結果登録_登録の初期化。<br/>
+     * 裁決結果登録_登録の初期化。(オンロード)<br/>
      *
      * @param requestDiv SaiketukekaTorokuPanelDiv
      * @return ResponseData<SaiketukekaTorokuPanelDiv>
@@ -58,7 +58,13 @@ public class SaiketukekaTorokuPanel {
         responseData.data = requestDiv;
         return ResponseData.of(requestDiv).respond();
     }
-    
+
+    /**
+     * 裁決結果登録_登録の初期化。(オンアクティブ)<br/>
+     *
+     * @param requestDiv SaiketukekaTorokuPanelDiv
+     * @return ResponseData<SaiketukekaTorokuPanelDiv>
+     */
     public ResponseData<SaiketukekaTorokuPanelDiv> onActive(SaiketukekaTorokuPanelDiv requestDiv) {
         return onLoad(requestDiv);
     }
@@ -71,7 +77,7 @@ public class SaiketukekaTorokuPanel {
      */
     public ResponseData<SaiketukekaTorokuPanelDiv> onClick_btnCancel(SaiketukekaTorokuPanelDiv div) {
         if ((修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))) {
-            if (getValidationHandler(div).修正_変更有無チェック(createHandlerOf(div).get修正後の値())) {
+            if (getValidationHandler().修正_変更有無チェック(createHandlerOf(div).get修正後の値())) {
                 return 変更あり_修正処理の取消(div);
             } else {
                 createHandlerOf(div).内容の破棄();
@@ -124,66 +130,70 @@ public class SaiketukekaTorokuPanel {
         if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
 
             if (div.getSaiketukekaMeisaiPanel().getTxtDateBenmeisyoSakuseibi().getValue() == null) {
-                // 弁明書作成日の必須入力チェック
-                ValidationMessageControlPairs validPairs = getValidationHandler(div).validateFor弁明書作成日の必須入力();
+                ValidationMessageControlPairs validPairs = getValidationHandler().validateFor弁明書作成日の必須入力();
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
-
-            boolean 変更あり = getValidationHandler(div).修正_変更有無チェック(createHandlerOf(div).get修正後の値());
-
+            boolean 変更あり = getValidationHandler().修正_変更有無チェック(createHandlerOf(div).get修正後の値());
             if (変更あり) {
-                // 保存の確認
-                if (!ResponseHolder.isReRequest()) {
-                    QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                            UrQuestionMessages.保存の確認.getMessage().evaluate());
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-                // 保存処理
-                if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
-                        .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    修正処理(div, 識別コード, 被保険者番号, 審査請求届出日);
-                    return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(更新.toString())).respond();
-                }
-
-                if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
-                        .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    div.getKaryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(
-                        new RString(UrInformationMessages.処理完了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
-                    return ResponseData.of(div).setState(DBU0900041StateName.完了状態);
-                }
-
+                return 変更あり_修正処理(div);
             } else {
-                if (!ResponseHolder.isReRequest()) {
-                    return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-                }
-
-                if (new RString(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode())
-                        .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    return ResponseData.of(div).setState(DBU0900041StateName.修正状態);
-                }
+                return 変更なし_修正処理(div);
             }
         }
 
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
                         UrQuestionMessages.削除の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-
             if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 削除処理(識別コード, 被保険者番号, 審査請求届出日);
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(削除.toString())).respond();
             }
-
             if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 div.getKaryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(
                         new RString(UrInformationMessages.処理完了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
                 return ResponseData.of(div).setState(DBU0900041StateName.完了状態);
             }
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private ResponseData<SaiketukekaTorokuPanelDiv> 変更あり_修正処理(SaiketukekaTorokuPanelDiv div) {
+
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        FlexibleDate 審査請求届出日 = ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class);
+
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            修正処理(div, 識別コード, 被保険者番号, 審査請求届出日);
+            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(更新.toString())).respond();
+        }
+        if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getKaryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(
+                    new RString(UrInformationMessages.処理完了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
+            return ResponseData.of(div).setState(DBU0900041StateName.完了状態);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private ResponseData<SaiketukekaTorokuPanelDiv> 変更なし_修正処理(SaiketukekaTorokuPanelDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+        }
+        if (new RString(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).setState(DBU0900041StateName.修正状態);
         }
         return ResponseData.of(div).respond();
     }
@@ -208,7 +218,7 @@ public class SaiketukekaTorokuPanel {
         return new SaiketukekaTorokuPanelHandler(requestDiv);
     }
 
-    private SaiketukekaTorokuValidationHandler getValidationHandler(SaiketukekaTorokuPanelDiv div) {
-        return new SaiketukekaTorokuValidationHandler(div);
+    private SaiketukekaTorokuValidationHandler getValidationHandler() {
+        return new SaiketukekaTorokuValidationHandler();
     }
 }
