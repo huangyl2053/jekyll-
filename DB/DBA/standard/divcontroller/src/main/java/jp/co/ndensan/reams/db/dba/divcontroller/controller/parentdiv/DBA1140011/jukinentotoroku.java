@@ -97,7 +97,7 @@ public class jukinentotoroku {
      * @return 住基連動登録者リスト
      */
     public ResponseData<JyukiRendoTorokushaListBatchParameter> onClick_btnAction(BatchParamterInfoDiv div) {
-        JyukiRendoTorokushaListBatchParameter parameter = finder.getJukiRendoJouhouParameter(
+        JyukiRendoTorokushaListBatchParameter parameter = finder.getJukiRendoTorokushaListBatchParameter(
                 div.getTxtzenkaikaishi().getValue(),
                 div.getTxtzenkaishuryo().getValue(),
                 div.getTxtkonkaikaishi().getValue(),

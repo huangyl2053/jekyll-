@@ -25,8 +25,12 @@ public class JyukiRendoTorokushaListBatchMybatisParameter implements IMyBatisPar
      *
      * @param konkaikaishiYMDHMS 今回開始日時
      * @param konkaishuryoYMDHMS 今回終了日時
+     * @param loginId 登録者ID
      */
-    public JyukiRendoTorokushaListBatchMybatisParameter(RString konkaikaishiYMDHMS, RString konkaishuryoYMDHMS, RString loginId) {
+    public JyukiRendoTorokushaListBatchMybatisParameter(
+            RString konkaikaishiYMDHMS,
+            RString konkaishuryoYMDHMS,
+            RString loginId) {
 
         this.konkaikaishiYMDHMS = konkaikaishiYMDHMS;
         this.konkaishuryoYMDHMS = konkaishuryoYMDHMS;

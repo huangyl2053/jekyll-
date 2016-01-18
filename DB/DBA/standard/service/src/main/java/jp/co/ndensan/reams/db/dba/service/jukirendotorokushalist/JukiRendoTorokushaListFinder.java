@@ -93,7 +93,7 @@ public class JukiRendoTorokushaListFinder {
      * @param 出力順ID 出力順ID
      * @return JyukiRendoTorokushaListBatchParameter 住基連動登録者リスト作成バッチパラメータクラス
      */
-    public JyukiRendoTorokushaListBatchParameter getJukiRendoJouhouParameter(
+    public JyukiRendoTorokushaListBatchParameter getJukiRendoTorokushaListBatchParameter(
             FlexibleDate 前回開始日,
             FlexibleDate 前回終了日,
             FlexibleDate 今回開始日,
