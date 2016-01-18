@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KayiSy
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KouFuJiyuu;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -28,10 +28,10 @@ public class HihokenshashoHakkoKanriboFinder {
 
     private static final RString メニューID_DBAMN72001 = new RString("DBAMN72001");
     private static final RString メニューID_DBAMN72002 = new RString("DBAMN72002");
-    private static final CodeShubetsu コード種別_002 = new CodeShubetsu("002");
-    private static final CodeShubetsu コード種別_003 = new CodeShubetsu("003");
-    private static final CodeShubetsu コード種別_004 = new CodeShubetsu("004");
-    private static final CodeShubetsu コード種別_005 = new CodeShubetsu("005");
+    private static final CodeShubetsu コード種別_0002 = new CodeShubetsu("0002");
+    private static final CodeShubetsu コード種別_0003 = new CodeShubetsu("0003");
+    private static final CodeShubetsu コード種別_0004 = new CodeShubetsu("0004");
+    private static final CodeShubetsu コード種別_0005 = new CodeShubetsu("0005");
 
     /**
      * コンストラクタです。
@@ -58,36 +58,31 @@ public class HihokenshashoHakkoKanriboFinder {
      * @return boolean チェック結果
      */
     @Transaction
-    public boolean checkInput(FlexibleDate koufubiFrom,
-            FlexibleDate koufubiTo,
-            FlexibleDate kaishubiFrom,
-            FlexibleDate kaishubiTo) {
-        if (!koufubiFrom.isEmpty() && !koufubiTo.isEmpty()) {
-            if ((kaishubiFrom.isEmpty() && kaishubiTo.isEmpty())
-                    || (!kaishubiFrom.isEmpty() && !kaishubiTo.isEmpty())) {
-                return false;
-            }
-        } else if (koufubiFrom.isEmpty() && koufubiTo.isEmpty()
-                && !kaishubiFrom.isEmpty() && !kaishubiTo.isEmpty()) {
-            return false;
+    public boolean checkInput(RDate koufubiFrom,
+            RDate koufubiTo,
+            RDate kaishubiFrom,
+            RDate kaishubiTo) {
+        if (koufubiFrom != null && koufubiTo != null) {
+            return true;
         }
-        return true;
+        return koufubiFrom == null && koufubiTo == null
+                && kaishubiFrom != null && kaishubiTo != null;
     }
 
     /**
      * 交付事由取得です。
      *
      * @param menuID 処理メニューID
-     * @return SearchResult<KouFuJiyuu> 交付事由りすと
+     * @return SearchResult<KouFuJiyuu> 交付事由リスト
      */
     @Transaction
     public SearchResult<KouFuJiyuu> getKofuJiyuInitialData(RString menuID) {
         List<KouFuJiyuu> kouFuJiyuuList = new ArrayList<>();
         CodeShubetsu codeShubetsu = CodeShubetsu.EMPTY;
         if (メニューID_DBAMN72001.equals(menuID)) {
-            codeShubetsu = コード種別_002;
+            codeShubetsu = コード種別_0002;
         } else if (メニューID_DBAMN72002.equals(menuID)) {
-            codeShubetsu = コード種別_004;
+            codeShubetsu = コード種別_0004;
         }
         List<UzT0007CodeEntity> entityList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, codeShubetsu);
         if (entityList == null) {
@@ -105,16 +100,16 @@ public class HihokenshashoHakkoKanriboFinder {
      * 回収事由取得です。
      *
      * @param menuID 処理メニューID
-     * @return SearchResult<KayiSyuuJiyuu> 回収事由りすと
+     * @return SearchResult<KayiSyuuJiyuu> 回収事由リスト
      */
     @Transaction
     public SearchResult<KayiSyuuJiyuu> getKaishuJiyuInitialData(RString menuID) {
         List<KayiSyuuJiyuu> kayiSyuuJiyuuList = new ArrayList<>();
         CodeShubetsu codeShubetsu = CodeShubetsu.EMPTY;
         if (メニューID_DBAMN72001.equals(menuID)) {
-            codeShubetsu = コード種別_003;
+            codeShubetsu = コード種別_0003;
         } else if (メニューID_DBAMN72002.equals(menuID)) {
-            codeShubetsu = コード種別_005;
+            codeShubetsu = コード種別_0005;
         }
         List<UzT0007CodeEntity> codeentityList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, codeShubetsu);
         if (codeentityList == null) {

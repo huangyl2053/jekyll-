@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -74,17 +73,16 @@ public class BatchPanel {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (koufubiFrom.isBefore(koufubiTo)) {
+            if ((koufubiFrom != null && koufubiTo != null) && koufubiTo.isBefore(koufubiFrom)) {
                 throw new ApplicationException(
                         DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace(koufubiFrom.toString(), koufubiTo.toString()));
             }
-            if (kaishubiFrom.isBefore(kaishubiTo)) {
+            if ((kaishubiFrom != null && kaishubiTo != null) && kaishubiTo.isBefore(kaishubiFrom)) {
                 throw new ApplicationException(
                         DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace(kaishubiFrom.toString(), kaishubiTo.toString()));
             }
             boolean flg = HihokenshashoHakkoKanriboFinder.createInstance().checkInput(
-                    new FlexibleDate(koufubiFrom.toDateString()), new FlexibleDate(koufubiTo.toDateString()),
-                    new FlexibleDate(kaishubiFrom.toDateString()), new FlexibleDate(kaishubiTo.toDateString()));
+                    koufubiFrom, koufubiTo, kaishubiFrom, kaishubiTo);
             if (!flg) {
                 throw new IllegalStateException(UrErrorMessages.必須.toString());
             } else {
