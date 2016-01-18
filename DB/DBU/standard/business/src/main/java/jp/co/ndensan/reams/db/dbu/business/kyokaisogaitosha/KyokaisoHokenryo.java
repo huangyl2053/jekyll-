@@ -8,11 +8,12 @@ package jp.co.ndensan.reams.db.dbu.business.kyokaisogaitosha;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1007KyokaisoHokenryoDankaiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 境界層保険料段階情報を管理するビジネスです。
  */
-public class KyokaisoHokenryoDankai {
+public class KyokaisoHokenryo {
 
     private final DbT1007KyokaisoHokenryoDankaiEntity entity;
 
@@ -21,8 +22,17 @@ public class KyokaisoHokenryoDankai {
      *
      * @param entity 境界層保険料段階情報Entity
      */
-    public KyokaisoHokenryoDankai(DbT1007KyokaisoHokenryoDankaiEntity entity) {
+    public KyokaisoHokenryo(DbT1007KyokaisoHokenryoDankaiEntity entity) {
         this.entity = entity;
+    }
+
+    /**
+     * 履歴番号を取得します。
+     *
+     * @return 履歴番号
+     */
+    public Decimal get履歴番号() {
+        return entity.getRirekiNo();
     }
 
     /**

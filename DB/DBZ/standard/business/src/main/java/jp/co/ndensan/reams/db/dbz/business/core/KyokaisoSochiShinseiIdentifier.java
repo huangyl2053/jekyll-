@@ -16,6 +16,7 @@ import lombok.Value;
 @Value
 public class KyokaisoSochiShinseiIdentifier implements Serializable {
 
+    private static final long serialVersionUID = -9167924161581162602L;
     private final HihokenshaNo 被保険者番号;
     private final Decimal 履歴番号;
 

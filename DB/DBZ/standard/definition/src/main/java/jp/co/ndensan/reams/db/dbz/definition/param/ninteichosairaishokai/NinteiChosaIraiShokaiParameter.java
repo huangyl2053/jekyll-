@@ -20,7 +20,7 @@ public class NinteiChosaIraiShokaiParameter {
     }
 
     /**
-     * パラメータ設定
+     * パラメータ設定です
      *
      * @param hihokenshaNo 被保険者番号
      * @return NinteiChosaIraiShokaiParameter

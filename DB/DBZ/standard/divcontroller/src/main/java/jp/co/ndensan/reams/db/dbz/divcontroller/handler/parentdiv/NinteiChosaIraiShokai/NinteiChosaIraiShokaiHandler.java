@@ -37,10 +37,11 @@ public class NinteiChosaIraiShokaiHandler {
     public NinteiChosaIraiShokaiHandler(NinteiChosaIraiShokaiDiv div) {
         this.div = div;
     }
-// TODO 閉じるbtn 原画面がない。
 
     /**
-     * 初期化を行います。
+     * 認定調査依頼照会の初期化処理ください。
+     *
+     * @param ninteiChosaList 認定調査情報
      */
     public void load(List<NinteiChosaIraiShokaiMaster> ninteiChosaList) {
         // TODO QA485、initialize実装がない　2016/01/19
@@ -56,7 +57,6 @@ public class NinteiChosaIraiShokaiHandler {
             row.setNinteiDate(日期フォマト(entity.getNijiHanteiYMD()));
             row.setYokaigodo(get要介護度(entity.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue()));
             row.setYukoKikan(new RString(Integer.toString(entity.getNijiHanteiNinteiYukoKikan()) + "ヶ月"));
-
             row.setNinteichosaItakusakiCode(entity.getNinteiChosaItakusakiCode().getColumnValue());
             row.setNinteiChosainCode(entity.getChosainShimei());
             row.setNinteiChosainName(entity.getNinteiChosainCode().getColumnValue());

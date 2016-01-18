@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -15,6 +14,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -72,7 +72,6 @@ public class KyokaisoGaitosha extends ModelBase<KyokaisoGaitoshaIdentifier, DbT1
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 被保険者番号を返します。
      *
@@ -265,15 +264,29 @@ public class KyokaisoGaitosha extends ModelBase<KyokaisoGaitoshaIdentifier, DbT1
 
     }
 
+    /**
+     * 境界層該当者情報のみを変更対象とします。<br/>
+     * {@link DbT1006KyokaisoGaitoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link KyokaisoGaitosha}
+     */
+    public KyokaisoGaitosha modifiedModel() {
+        DbT1006KyokaisoGaitoshaEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new KyokaisoGaitosha(
+                modifiedEntity, id);
+    }
+
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;
-
+        private static final long serialVersionUID = -4772548934045114858L;
         private final DbT1006KyokaisoGaitoshaEntity entity;
         private final KyokaisoGaitoshaIdentifier id;
 
@@ -296,6 +309,4 @@ public class KyokaisoGaitosha extends ModelBase<KyokaisoGaitoshaIdentifier, DbT1
     public KyokaisoGaitoshaBuilder createBuilderForEdit() {
         return new KyokaisoGaitoshaBuilder(entity, id);
     }
-
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

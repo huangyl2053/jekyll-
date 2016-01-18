@@ -113,48 +113,48 @@ public class KyokaisouKanriMasterListPanelHandler {
 
                 if (keys.equals(KY1)) {
 
-                    batchPara.setHokenryoNofuGengakuFlag(該当内容区分);
+                    batchPara.setIshokenFlag(該当内容区分);
                     hokenryoNofuGengakuFlag = true;
                 }
                 if (keys.equals(KY2)) {
-                    batchPara.setIshyojunFutanGengakuGaitoFlag(該当内容区分);
+                    batchPara.setIshyojunFutanFlag(該当内容区分);
                     iskyuufugakuGengakuKisaiKiajoFlag = true;
                 }
                 if (keys.equals(KY3)) {
-                    batchPara.setIskogakuServicehiJogengakuGengakuGaitoFlag(該当内容区分);
+                    batchPara.setIskogakuFlag(該当内容区分);
                     ishyojunFutanGengakuGaitoFlag = true;
                 }
                 if (keys.equals(KY4)) {
-                    batchPara.setIskyojuhinadoFutangakugengakuGaitoFlag(該当内容区分);
+                    batchPara.setIskyojuhinadoFutangFlag(該当内容区分);
                     iskyojuhinadoFutangakugengakuGaitoFlag = true;
                 }
                 if (keys.equals(KY5)) {
-                    batchPara.setIskyuufugakuGengakuKisaiKiajoFlag(該当内容区分);
+                    batchPara.setIskyuufugakuFlag(該当内容区分);
                     isshokuhiKeigengoHutangakuGaitoFlag = true;
                 }
                 if (keys.equals(KY6)) {
-                    batchPara.setIsshokuhiKeigengoHutangakuGaitoFlag(該当内容区分);
+                    batchPara.setIsshokuhiKeiFlag(該当内容区分);
                     iskogakuServicehiJogengakuGengakuGaitoFlag = true;
                 }
             }
         }
         if (!hokenryoNofuGengakuFlag) {
-            batchPara.setHokenryoNofuGengakuFlag(該当内容区分ない);
+            batchPara.setIshokenFlag(該当内容区分ない);
         }
         if (!iskyuufugakuGengakuKisaiKiajoFlag) {
-            batchPara.setIshyojunFutanGengakuGaitoFlag(該当内容区分ない);
+            batchPara.setIshyojunFutanFlag(該当内容区分ない);
         }
         if (!ishyojunFutanGengakuGaitoFlag) {
-            batchPara.setIskogakuServicehiJogengakuGengakuGaitoFlag(該当内容区分ない);
+            batchPara.setIskogakuFlag(該当内容区分ない);
         }
         if (!iskyojuhinadoFutangakugengakuGaitoFlag) {
-            batchPara.setIskyojuhinadoFutangakugengakuGaitoFlag(該当内容区分ない);
+            batchPara.setIskyojuhinadoFutangFlag(該当内容区分ない);
         }
         if (!isshokuhiKeigengoHutangakuGaitoFlag) {
-            batchPara.setIskyuufugakuGengakuKisaiKiajoFlag(該当内容区分ない);
+            batchPara.setIskyuufugakuFlag(該当内容区分ない);
         }
         if (!iskogakuServicehiJogengakuGengakuGaitoFlag) {
-            batchPara.setIsshokuhiKeigengoHutangakuGaitoFlag(該当内容区分ない);
+            batchPara.setIsshokuhiKeiFlag(該当内容区分ない);
         }
         // TODO出力顺 取得方法不明
 //        batchPara.setOrder_ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID().toString()));

@@ -17,6 +17,7 @@ import lombok.Value;
 @Value
 public class KyokaisoHokenryoDankaiIdentifier implements Serializable {
 
+    private static final long serialVersionUID = 7573451962586234880L;
     private final HihokenshaNo 被保険者番号;
     private final Decimal 履歴番号;
     private final FlexibleYearMonth 適用開始年月;

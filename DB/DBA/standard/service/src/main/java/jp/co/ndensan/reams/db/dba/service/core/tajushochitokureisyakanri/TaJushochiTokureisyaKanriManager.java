@@ -72,7 +72,7 @@ public class TaJushochiTokureisyaKanriManager {
         for (TaJushochiTokureisyaKanriParameter date : paramater) {
 
             if (新規.equals(date.get状態()) && (date.getNyuusyoYMD().isBefore(直近適用グリッド行.getTayishoYMD())
-                    && date.getNyuusyoYMD().isBefore(直近適用グリッド行.getKaijoYMD()))) {
+                    || date.getNyuusyoYMD().isBefore(直近適用グリッド行.getKaijoYMD()))) {
                 throw new ApplicationException(
                         UrErrorMessages.期間が重複.getMessage());
             }
