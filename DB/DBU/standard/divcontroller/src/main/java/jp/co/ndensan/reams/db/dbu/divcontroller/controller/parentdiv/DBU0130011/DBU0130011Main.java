@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.divcontroller.controller.dbu0130011;
+package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0130011;
 
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0130011.DBU0130011MainDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0130011.DBU0130011TransitionEventName;
-import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0130011.DBU0130011MainHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0130011.DBU0130011MainHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.roujinhokenjukyushadaichokanri.RoujinHokenJukyushaDaichoKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
@@ -58,7 +58,7 @@ public class DBU0130011Main {
     }
 
     /**
-     * 老人保健受給者台帳管理画面更新を処理します。
+     * 検索画面に戻るを処理します。
      *
      * @param div 老人保健受給者台帳管理DIV
      * @return ResponseData<DBU0130011MainDiv>
@@ -68,7 +68,7 @@ public class DBU0130011Main {
     }
 
     /**
-     * 老人保健受給者台帳管理画面更新を処理します。
+     * 該当者一覧画面に戻るを処理します。
      *
      * @param div 老人保健受給者台帳管理DIV
      * @return ResponseData<DBU0130011MainDiv>
