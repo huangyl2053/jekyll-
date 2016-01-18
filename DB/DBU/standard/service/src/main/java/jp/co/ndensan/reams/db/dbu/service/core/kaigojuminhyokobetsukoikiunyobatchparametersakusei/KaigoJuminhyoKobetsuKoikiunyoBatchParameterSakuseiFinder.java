@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder {
 
     private final MapperProvider mapperProvider;
-    private static final int 位置_結束 = 5;
+    private static final int 位置_結束 = 6;
 
     /**
      * コンストラクタ。
