@@ -291,12 +291,12 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                                 eq(logicalDeletedFlag, false))).
                 toList(DbT1001HihokenshaDaichoEntity.class);
     }
-    
+
     @Transaction
     public DbT1001HihokenshaDaichoEntity select被保険者台帳管理By論理削除フラグAnd識別コード(
             boolean 論理削除フラグ,
             RString 識別コード) throws NullPointerException {
-        
+
         requireNonNull(論理削除フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("論理削除フラグ"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
 
@@ -308,8 +308,33 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                            eq(logicalDeletedFlag, 論理削除フラグ),
-                            eq(shikibetsuCode, 識別コード))).
+                                eq(logicalDeletedFlag, 論理削除フラグ),
+                                eq(shikibetsuCode, 識別コード))).
+                order(_ReportDACUtility.toOrderBysArray(orderBy)).
+                limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者番号、論理削除フラグで被保険者台帳から最新データを取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT1001HihokenshaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity selectByHihokenshaNo(HihokenshaNo 被保険者番号)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        List<OrderBy> orderBy = new ArrayList<>();
+        orderBy.add(new OrderBy(DbT1001HihokenshaDaicho.idoYMD, Order.DESC, NullsOrder.LAST));
+        orderBy.add(new OrderBy(DbT1001HihokenshaDaicho.edaNo, Order.DESC, NullsOrder.LAST));
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(logicalDeletedFlag, false))).
                 order(_ReportDACUtility.toOrderBysArray(orderBy)).
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);

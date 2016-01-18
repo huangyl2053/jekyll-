@@ -18,17 +18,17 @@
         DbT1001."dbT1001HihokenshaDaicho_idoJiyuCode",
         DbT1001."dbT1001HihokenshaDaicho_shikibetsuCode",
         DbT1001."dbT1001HihokenshaDaicho_shikakuShutokuJiyuCode",
+        DbT1001."dbT1001HihokenshaDaicho_shikakuShutokuYMD",
         DbT1001."dbT1001HihokenshaDaicho_shikakuShutokuTodokedeYMD",
-        <if test = "chushutsuFlag == '0'">
-         NULL  AS "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
-        </if>
-         <if test = "chushutsuFlag == '1'">
-          "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
-        </if>      
         DbT1001."dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD",
         DbT1001."dbT1001HihokenshaDaicho_hihokennshaKubunCode",
         DbT1001."dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode",
-        DbT1001."dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
+        <if test = "chushutsuFlag == '0'">
+            NULL  AS "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
+        </if>
+        <if test = "chushutsuFlag == '1'">
+            "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
+        </if>      
         DbT1001."dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD",
         DbT1001."dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode",
         DbT1001."dbT1001HihokenshaDaicho_shikakuHenkoYMD",
@@ -45,8 +45,8 @@
         DbT1001."dbT1001HihokenshaDaicho_kyuShichosonCode",
         DbT1001."dbT1001HihokenshaDaicho_logicalDeletedFlag"
     </sql>
-    <select id="get被保険者台帳管理" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.IkkatsuSakuseiMybatisParameter" fetchSize="500">
+    
+    <select id="get被保険者台帳管理" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity" fetchSize="500">
         SELECT
            <include refid="allColumns_DbT1001HihokenshaDaicho" />
         FROM
@@ -64,14 +64,34 @@
            DbT1001."dbT1001HihokenshaDaicho_shikakuShutokuYMD"
     </select>
     
+    <select id="get被保険者台帳管理情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.IkkatsuSakuseiMybatisParameter" fetchSize="500">
+        SELECT
+           <include refid="allColumns_DbT1001HihokenshaDaicho" />
+        FROM
+           (SELECT
+               <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />,
+               row_number() over(partition by "shikakuShutokuYMD" order by "idoYMD" desc,"edaNo" desc) as rank_number
+           FROM
+               rgdb."DbT1001HihokenshaDaicho"
+           WHERE
+               "isDeleted" <![CDATA[<>]]> TRUE)DbT1001
+        WHERE
+            rank_number = 1
+        AND DbT1001."dbT1001HihokenshaDaicho_shikibetsuCode" = #{shikibetsuCode}
+        ORDER BY
+           DbT1001."dbT1001HihokenshaDaicho_shikibetsuCode",
+           DbT1001."dbT1001HihokenshaDaicho_shikakuShutokuYMD"
+    </select>
+    
     <resultMap id="ResultMap_ShisetsuNyutaishoEntity" type="jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.ShisetsuNyutaishoEntity" autoMapping="true">
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="jukyuKaishiYMD" column="jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jukyuHaishiYMD" column="jukyuHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jukyushaNo" column="jukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kaigoRyoDairiNofuKubun" column="kaigoRyoDairiNofuKubun" typeHandler="jp.co.ndensan.reams.ur.urd.entity.typehandlers.KaigoRyoDairiNofuKubunTypeHandler"/>
+        <result property="kaigoRyoDairiNofuKubun" column="kaigoRyoDairiNofuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kaigoRyoDairiNofuYM" column="kaigoRyoDairiNofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="kyugoShisetsuNyuTaishoKubun" column="kyugoShisetsuNyuTaishoKubun" typeHandler="jp.co.ndensan.reams.ur.urd.entity.typehandlers.KyugoShisetsuNyuTaishoKubunTypeHandler"/>
+        <result property="kyugoShisetsuNyuTaishoKubun" column="kyugoShisetsuNyuTaishoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kyugoShisetsuNyutaishoYMD" column="kyugoShisetsuNyutaishoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="fujoShuruiCode" column="fujoShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jukyuTeishiKaishiYMD" column="jukyuTeishiKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -134,7 +154,7 @@
         FROM
             rgdb."DbT7006RoreiFukushiNenkinJukyusha"
         WHERE    
-            "shikibetsuCode" = #{shichosonCode}
+            "shikibetsuCode" = #{shikibetsuCode}
         ORDER BY
             "dbT7006RoreiFukushiNenkinJukyusha_shikibetsuCode",
             "dbT7006RoreiFukushiNenkinJukyusha_jukyuKaishiYMD"
@@ -148,7 +168,7 @@
             rgdb."DbT7037ShoKofuKaishu"
         WHERE
             "isDeleted" <![CDATA[<>]]> TRUE
-        AND "shichosonCode" = #{shichosonCode}
+        AND "shikibetsuCode" = #{shikibetsuCode}
         ORDER BY
             "dbT7037ShoKofuKaishu_shikibetsuCode",
             "dbT7037ShoKofuKaishu_kofuYMD",

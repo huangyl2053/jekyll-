@@ -22,7 +22,7 @@ public interface IIkkatsuSakuseiMapper {
      * @param 検索条件 検索条件
      * @return {@link DbT1001HihokenshaDaichoEntity}
      */
-    List<DbT1001HihokenshaDaichoEntity> get被保険者台帳管理(IkkatsuSakuseiMybatisParameter 検索条件);
+    List<DbT1001HihokenshaDaichoEntity> get被保険者台帳管理情報(IkkatsuSakuseiMybatisParameter 検索条件);
 
     /**
      * 生活保護受給者テーブルの情報を取得します。

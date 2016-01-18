@@ -22,7 +22,7 @@ public class IkkatsuSakuseiFlow extends BatchFlowBase<IkkatsuSakuseiBatchParamet
         executeStep(REPORT_PROCESS);
     }
 
-    private static final String REPORT_PROCESS = "reportProcess"; //@Stepの定数はメソッドの近くに置くと見やすくていい。
+    private static final String REPORT_PROCESS = "reportProcess";
 
     /**
      * 帳票データ作成のProcessです。
