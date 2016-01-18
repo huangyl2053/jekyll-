@@ -41,7 +41,9 @@ public class SaiketukekaTorokuValidationHandler {
      */
     public boolean 修正_変更有無チェック(RString 修正後の値) {
         修正後の値 = 修正後の値 == null ? RString.EMPTY : 修正後の値;
-        return !修正後の値.toString().equals(ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class).toString());
+        RString 修正前の値 = ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class) == null ?
+                RString.EMPTY : ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class);
+        return !修正後の値.toString().equals(修正前の値.toString());
     }
 
     private static enum NoInputMessages implements IValidationMessage {
