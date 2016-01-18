@@ -15,160 +15,185 @@ import lombok.Setter;
  *
  * 境界層管理マスタリストのMyBatisパラメータ
  */
-@SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter {
 
     private final RString mode;
-    private final RString Range;
-    private final FlexibleDate Date_FROM;
-    private final FlexibleDate Date_TO;
-    private final RString iskyuufugakuGengakuKisaiKiajoFlag;
-    private final RString ishyojunFutanGengakuGaitoFlag;
-    private final RString iskyojuhinadoFutangakugengakuGaitoFlag;
-    private final RString isshokuhiKeigengoHutangakuGaitoFlag;
-    private final RString iskogakuServicehiJogengakuGengakuGaitoFlag;
-    private final RString ishokenryoNofuGengakuFlag;
+    private final RString range;
+    private final FlexibleDate date_FROM;
+    private final FlexibleDate date_TO;
+    private final RString iskyuufugakuFlag;
+    private final RString ishyojunFutanFlag;
+    private final RString iskyojuhinadoFutangFlag;
+    private final RString isshokuhiKeiFlag;
+    private final RString iskogakuFlag;
+    private final RString ishokenFlag;
     private final RString order_ID;
-    private final boolean ismodeFlag1;
-    private final boolean ismodeFlag2;
-    private final boolean ismodeFlag3;
-    private final boolean isRangeFlag1;
-    private final boolean isRangeFlag2;
-    private final boolean isRangeFlag3;
+    private final boolean ismodekjunhe;
+    private final boolean ismoderange;
+    private final boolean ismodenayi;
+    private final boolean isRangeApplication;
+    private final boolean isRangeStart;
+    private final boolean isRangeEnd;
     private final boolean isDateFlag;
     private final boolean isDate_TOFlag;
     private final RString psmShikibetsuTaisho;
 
     /**
-     * コンストラクタ
+     * コンストラクタ。
      *
      * @param mode 取得モード
-     * @param Range 境界層対象抽出範囲
-     * @param Date_FROM 日付FROM
-     * @param Date_TO 日付TO
-     * @param iskyuufugakuGengakuKisaiKiajoFlag
-     * @param ishyojunFutanGengakuGaitoFlag
-     * @param iskyojuhinadoFutangakugengakuGaitoFlag
-     * @param isshokuhiKeigengoHutangakuGaitoFlag
-     * @param iskogakuServicehiJogengakuGengakuGaitoFlag
-     * @param ishokenryoNofuGengakuFlag
+     * @param range 境界層対象抽出範囲
+     * @param date_FROM 日付FROM
+     * @param date_TO 日付TO
+     * @param iskyuufugakuFlag 給付額減額解除該当区分フラグ
+     * @param ishyojunFutanFlag 標準負担額減額該当区分フラグ
+     * @param iskyojuhinadoFutangFlag 特定介護居住費等負担額減額該当区分フラグ
+     * @param isshokuhiKeiFlag 特定介護食費負担額減額該当区分フラグ
+     * @param iskogakuFlag 高額サービス費該当区分フラグ
+     * @param ishokenFlag 納付減額該当区分フラグ
      * @param order_ID 出力順ID
-     * @param ismodeFlag1
-     * @param psmShikibetsuTaisho
-     * @param ismodeFlag2
-     * @param isDate_TOFlag
-     * @param ismodeFlag3
-     * @param isDateFlag
-     * @param isRangeFlag1
-     * @param isRangeFlag3
-     * @param isRangeFlag2
+     * @param ismodekjunhe 基準日
+     * @param ismoderange 範囲
+     * @param ismodenayi 指定無し
+     * @param isRangeApplication 境界層該当申請日
+     * @param isRangeStart 境界層該当開始日
+     * @param isRangeEnd 境界層該当終了日
+     * @param isDateFlag 日付FROMNULL
+     * @param isDate_TOFlag 日付ToNULL
+     * @param psmShikibetsuTaisho 宛名情報取得
      */
     public KyokaisoGaitoshaMybatisParameter(RString mode,
-            RString Range,
-            FlexibleDate Date_FROM,
-            FlexibleDate Date_TO,
-            RString iskyuufugakuGengakuKisaiKiajoFlag,
-            RString ishyojunFutanGengakuGaitoFlag,
-            RString iskyojuhinadoFutangakugengakuGaitoFlag,
-            RString isshokuhiKeigengoHutangakuGaitoFlag,
-            RString iskogakuServicehiJogengakuGengakuGaitoFlag,
-            RString ishokenryoNofuGengakuFlag,
+            RString range,
+            FlexibleDate date_FROM,
+            FlexibleDate date_TO,
+            RString iskyuufugakuFlag,
+            RString ishyojunFutanFlag,
+            RString iskyojuhinadoFutangFlag,
+            RString isshokuhiKeiFlag,
+            RString iskogakuFlag,
+            RString ishokenFlag,
             RString order_ID,
-            boolean ismodeFlag1,
-            boolean ismodeFlag2,
-            boolean ismodeFlag3,
-            boolean isRangeFlag1,
-            boolean isRangeFlag2,
-            boolean isRangeFlag3,
+            boolean ismodekjunhe,
+            boolean ismoderange,
+            boolean ismodenayi,
+            boolean isRangeApplication,
+            boolean isRangeStart,
+            boolean isRangeEnd,
             boolean isDateFlag,
             boolean isDate_TOFlag,
             RString psmShikibetsuTaisho) {
-        this.Date_FROM = Date_FROM;
-        this.Date_TO = Date_TO;
-        this.iskyuufugakuGengakuKisaiKiajoFlag = iskyuufugakuGengakuKisaiKiajoFlag;
-        this.Range = Range;
-        this.ishokenryoNofuGengakuFlag = ishokenryoNofuGengakuFlag;
-        this.ishyojunFutanGengakuGaitoFlag = ishyojunFutanGengakuGaitoFlag;
-        this.iskyojuhinadoFutangakugengakuGaitoFlag = iskyojuhinadoFutangakugengakuGaitoFlag;
-        this.isshokuhiKeigengoHutangakuGaitoFlag = isshokuhiKeigengoHutangakuGaitoFlag;
+        this.date_FROM = date_FROM;
+        this.date_TO = date_TO;
+        this.iskyuufugakuFlag = iskyuufugakuFlag;
+        this.range = range;
+        this.ishyojunFutanFlag = ishyojunFutanFlag;
+        this.iskyojuhinadoFutangFlag = iskyojuhinadoFutangFlag;
+        this.isshokuhiKeiFlag = isshokuhiKeiFlag;
+        this.iskogakuFlag = iskogakuFlag;
         this.mode = mode;
         this.order_ID = order_ID;
-        this.iskogakuServicehiJogengakuGengakuGaitoFlag = iskogakuServicehiJogengakuGengakuGaitoFlag;
-        this.ismodeFlag1 = ismodeFlag1;
-        this.ismodeFlag2 = ismodeFlag2;
-        this.ismodeFlag3 = ismodeFlag3;
-        this.isRangeFlag1 = isRangeFlag1;
-        this.isRangeFlag2 = isRangeFlag2;
-        this.isRangeFlag3 = isRangeFlag3;
+        this.ishokenFlag = ishokenFlag;
+        this.ismodekjunhe = ismodekjunhe;
+        this.ismoderange = ismoderange;
+        this.ismodenayi = ismodenayi;
+        this.isRangeApplication = isRangeApplication;
+        this.isRangeStart = isRangeStart;
+        this.isRangeEnd = isRangeEnd;
         this.isDateFlag = isDateFlag;
         this.isDate_TOFlag = isDate_TOFlag;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
+    /**
+     * mybatisのパラメータを生成します。
+     *
+     * @param mode 取得モード
+     * @param range 境界層対象抽出範囲
+     * @param date_FROM 日付FROM
+     * @param date_TO 日付TO
+     * @param iskyuufugakuFlag 給付額減額解除該当区分フラグ
+     * @param ishyojunFutanFlag 標準負担額減額該当区分フラグ
+     * @param iskyojuhinadoFutangFlag 特定介護居住費等負担額減額該当区分フラグ
+     * @param isshokuhiKeiFlag 特定介護食費負担額減額該当区分フラグ
+     * @param iskogakuFlag 高額サービス費該当区分フラグ
+     * @param ishokenFlag 納付減額該当区分フラグ
+     * @param order_ID 出力順ID
+     * @param ismodekjunhe 基準日
+     * @param ismoderange 範囲
+     * @param ismodenayi 指定無し
+     * @param isRangeApplication 境界層該当申請日
+     * @param isRangeStart　境界層該当開始日
+     * @param isRangeEnd　境界層該当終了日
+     * @param isDateFlag　日付FROMNULL
+     * @param isDate_TOFlag　日付ToNULL
+     * @param psmShikibetsuTaisho 宛名情報取得
+     * @return mybatisパラメータ
+     */
     public static KyokaisoGaitoshaMybatisParameter createParam(RString mode,
-            RString Range,
-            FlexibleDate Date_FROM,
-            FlexibleDate Date_TO,
-            RString iskyuufugakuGengakuKisaiKiajoFlag,
-            RString ishyojunFutanGengakuGaitoFlag,
-            RString iskyojuhinadoFutangakugengakuGaitoFlag,
-            RString isshokuhiKeigengoHutangakuGaitoFlag,
-            RString iskogakuServicehiJogengakuGengakuGaitoFlag,
-            RString ishokenryoNofuGengakuFlag,
+            RString range,
+            FlexibleDate date_FROM,
+            FlexibleDate date_TO,
+            RString iskyuufugakuFlag,
+            RString ishyojunFutanFlag,
+            RString iskyojuhinadoFutangFlag,
+            RString isshokuhiKeiFlag,
+            RString iskogakuFlag,
+            RString ishokenFlag,
             RString order_ID,
-            boolean ismodeFlag1,
-            boolean ismodeFlag2,
-            boolean ismodeFlag3,
-            boolean isRangeFlag1,
-            boolean isRangeFlag2,
-            boolean isRangeFlag3,
+            boolean ismodekjunhe,
+            boolean ismoderange,
+            boolean ismodenayi,
+            boolean isRangeApplication,
+            boolean isRangeStart,
+            boolean isRangeEnd,
             boolean isDateFlag,
             boolean isDate_TOFlag,
             RString psmShikibetsuTaisho) {
 
         if (new RString("1").equals(mode)) {
-            ismodeFlag1 = true;
+            ismodekjunhe = true;
         }
         if (new RString("2").equals(mode)) {
-            ismodeFlag2 = true;
+            ismoderange = true;
         }
         if (new RString("3").equals(mode)) {
-            ismodeFlag1 = true;
+            ismodenayi = true;
         }
-        if (new RString("1").equals(Range)) {
-            isRangeFlag1 = true;
+        if (new RString("1").equals(range)) {
+            isRangeApplication = true;
         }
-        if (new RString("2").equals(Range)) {
-            isRangeFlag2 = true;
+        if (new RString("2").equals(range)) {
+            isRangeStart = true;
         }
-        if (new RString("3").equals(Range)) {
-            isRangeFlag3 = true;
+        if (new RString("3").equals(range)) {
+            isRangeEnd = true;
         }
-        if (Date_FROM == null || Date_FROM.isEmpty()) {
+        if (date_FROM == null || date_FROM.isEmpty()) {
             isDateFlag = true;
         }
-        if (Date_TO == null || Date_TO.isEmpty()) {
+        if (date_TO == null || date_TO.isEmpty()) {
             isDate_TOFlag = true;
         }
         return new KyokaisoGaitoshaMybatisParameter(mode,
-                Range,
-                Date_FROM,
-                Date_TO,
-                iskyuufugakuGengakuKisaiKiajoFlag,
-                ishyojunFutanGengakuGaitoFlag,
-                iskyojuhinadoFutangakugengakuGaitoFlag,
-                ishokenryoNofuGengakuFlag,
-                isshokuhiKeigengoHutangakuGaitoFlag,
-                iskogakuServicehiJogengakuGengakuGaitoFlag,
+                range,
+                date_FROM,
+                date_TO,
+                iskyuufugakuFlag,
+                ishyojunFutanFlag,
+                iskyojuhinadoFutangFlag,
+                isshokuhiKeiFlag,
+                iskogakuFlag,
+                ishokenFlag,
                 order_ID,
-                ismodeFlag1,
-                ismodeFlag2,
-                ismodeFlag3,
-                isRangeFlag1,
-                isRangeFlag2,
-                isRangeFlag3,
+                ismodekjunhe,
+                ismoderange,
+                ismodenayi,
+                isRangeApplication,
+                isRangeStart,
+                isRangeEnd,
                 isDateFlag,
                 isDate_TOFlag,
                 psmShikibetsuTaisho);

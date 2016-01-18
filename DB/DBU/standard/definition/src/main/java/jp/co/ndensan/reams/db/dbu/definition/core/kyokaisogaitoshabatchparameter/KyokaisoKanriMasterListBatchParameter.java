@@ -10,70 +10,63 @@ import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  *
  * 境界層管理マスタリスト_バッチパラメータ作成クラスです。
  */
-@Getter
-@Setter
+@lombok.Getter
+@lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class KyokaisoKanriMasterListBatchParameter extends BatchParameterBase {
+public class KyokaisoKanriMasterListBatchParameter extends BatchParameterBase {
 
-    public static final String KEY_mode = "mode";
-    public static final String KEY_Range = "Range";
-    public static final String KEY_Date_FROM = "Date_FROM";
-    public static final String KEY_Date_TO = "Date_TO";
-    public static final String KEY_iskyuufugakuGengakuKisaiKiajoFlag = "iskyuufugakuGengakuKisaiKiajoFlag";
-    public static final String KEY_ishyojunFutanGengakuGaitoFlag = "ishyojunFutanGengakuGaitoFlag";
-    public static final String KEY_iskyojuhinadoFutangakugengakuGaitoFlag = "iskyojuhinadoFutangakugengakuGaitoFlag";
-    public static final String KEY_isshokuhiKeigengoHutangakuGaitoFlag = "isshokuhiKeigengoHutangakuGaitoFlag";
-    public static final String KEY_iskogakuServicehiJogengakuGengakuGaitoFlag = "iskogakuServicehiJogengakuGengakuGaitoFlag ";
-    public static final String KEY_ishokenryoNofuGengakuFlag = "ishokenryoNofuGengakuFlag";
-    public static final String KEY_order_ID = "order_ID ";
+    private static final String KEY_MODE = "mode";
+    private static final String KEY_RANGE = "range";
+    private static final String KEY_DATE_FROM = "date_FROM";
+    private static final String KEY_DATE_TO = "date_TO";
+    private static final String KEY_ISKYUUFUGAKUFLAG = "iskyuufugakuFlag";
+    private static final String KEY_ISHHYOJUNFUTFLA = "ishyojunFutanFlag";
+    private static final String KEY_ISKYOJUHINADOFLAG = "iskyojuhinadoFutangFlag";
+    private static final String KWY_ISSHOKUHIKEIFLAN = "isshokuhiKeiFlag";
+    private static final String KEY_ISKOGAKUFLAG = "iskogakuFlag";
+    private static final String KEY_ISHOKENFLAG = "ishokenFlag";
+    private static final String KEY_ORDER_ID = "order_ID";
 
-    @BatchParameter(key = KEY_mode, name = "取得モード")
+    @BatchParameter(key = KEY_MODE, name = "取得モード")
     private RString mode;
-    @BatchParameter(key = KEY_Range, name = "境界層対象抽出範囲")
-    private RString Range;
-    @BatchParameter(key = KEY_Date_FROM, name = "日付FROM")
-    private FlexibleDate Date_FROM;
-    @BatchParameter(key = KEY_Date_TO, name = "日付TO")
-    private FlexibleDate Date_TO;
-    @BatchParameter(key = KEY_iskyuufugakuGengakuKisaiKiajoFlag, name = "給付額減額解除該当区分フラグ")
-    private RString iskyuufugakuGengakuKisaiKiajoFlag;
-    @BatchParameter(key = KEY_ishyojunFutanGengakuGaitoFlag, name = "標準負担額減額該当区分フラグ")
-    private RString ishyojunFutanGengakuGaitoFlag;
-    @BatchParameter(key = KEY_iskyojuhinadoFutangakugengakuGaitoFlag, name = "特定介護居住費等負担額減額該当区分フラグ")
-    private RString iskyojuhinadoFutangakugengakuGaitoFlag;
-    @BatchParameter(key = KEY_isshokuhiKeigengoHutangakuGaitoFlag, name = "特定介護食費負担額減額該当区分フラグ")
-    private RString isshokuhiKeigengoHutangakuGaitoFlag;
-    @BatchParameter(key = KEY_iskogakuServicehiJogengakuGengakuGaitoFlag, name = "高額サービス費該当区分フラグ")
-    private RString iskogakuServicehiJogengakuGengakuGaitoFlag;
-    @BatchParameter(key = KEY_ishokenryoNofuGengakuFlag, name = "納付減額該当区分フラグ")
-    private RString hokenryoNofuGengakuFlag;
-    @BatchParameter(key = KEY_order_ID, name = "出力順ID")
+    @BatchParameter(key = KEY_RANGE, name = "境界層対象抽出範囲")
+    private RString range;
+    @BatchParameter(key = KEY_DATE_FROM, name = "日付FROM")
+    private FlexibleDate date_FROM;
+    @BatchParameter(key = KEY_DATE_TO, name = "日付TO")
+    private FlexibleDate date_TO;
+    @BatchParameter(key = KEY_ISKYUUFUGAKUFLAG, name = "給付額減額解除該当区分フラグ")
+    private RString iskyuufugakuFlag;
+    @BatchParameter(key = KEY_ISHHYOJUNFUTFLA, name = "標準負担額減額該当区分フラグ")
+    private RString ishyojunFutanFlag;
+    @BatchParameter(key = KEY_ISKYOJUHINADOFLAG, name = "特定介護居住費等負担額減額該当区分フラグ")
+    private RString iskyojuhinadoFutangFlag;
+    @BatchParameter(key = KWY_ISSHOKUHIKEIFLAN, name = "特定介護食費負担額減額該当区分フラグ")
+    private RString isshokuhiKeiFlag;
+    @BatchParameter(key = KEY_ISKOGAKUFLAG, name = "高額サービス費該当区分フラグ")
+    private RString iskogakuFlag;
+    @BatchParameter(key = KEY_ISHOKENFLAG, name = "納付減額該当区分フラグ")
+    private RString ishokenFlag;
+    @BatchParameter(key = KEY_ORDER_ID, name = "出力順ID")
     private RString order_ID;
 
-    /**
-     * processのパラメータを生成します。
-     *
-     * @return processパラメータ
-     */
     public KyokaisoGaitoshaProcessParameter toKyokaisoGaitoshaProcessParameter() {
-        return new KyokaisoGaitoshaProcessParameter(mode,
-                Range,
-                Date_FROM,
-                Date_TO,
-                iskogakuServicehiJogengakuGengakuGaitoFlag,
-                ishyojunFutanGengakuGaitoFlag,
-                iskyojuhinadoFutangakugengakuGaitoFlag,
-                isshokuhiKeigengoHutangakuGaitoFlag,
-                iskogakuServicehiJogengakuGengakuGaitoFlag,
-                hokenryoNofuGengakuFlag,
-                order_ID);
+        return new KyokaisoGaitoshaProcessParameter(
+                this.mode,
+                this.range,
+                this.date_FROM,
+                this.date_TO,
+                this.iskyuufugakuFlag,
+                this.ishyojunFutanFlag,
+                this.iskyojuhinadoFutangFlag,
+                this.isshokuhiKeiFlag,
+                this.iskogakuFlag,
+                this.ishokenFlag,
+                this.order_ID);
     }
-
 }
