@@ -81,9 +81,9 @@
         AND B."nyushoShisetsuShurui"=C."jigyoshaShubetsu"
         AND B."nyushoYMD" <![CDATA[>=]]> C."yukoKaishiYMD"
         AND B."nyushoYMD" <![CDATA[<=]]> C."yukoShuryoYMD"
-        WHERE CASE WHEN A."解除年月日"=NULL
+        WHERE CASE WHEN A."解除年月日" IS NULL
         THEN B."taishoYMD" IS NULL OR A."適用年月日" <![CDATA[<=]]> B."taishoYMD"
-        WHEN A."解除年月日" <![CDATA[<>]]> NULL
+        WHEN A."解除年月日" IS NOT NULL
         THEN (B."taishoYMD" IS NULL AND B."nyushoYMD" <![CDATA[<]]> A."解除年月日")
         OR (B."nyushoYMD" <![CDATA[<]]> A."解除年月日" AND B."taishoYMD" <![CDATA[>]]> A."適用年月日")
         END
@@ -97,7 +97,7 @@
         <result property="異動日" column="異動日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="枝番" column="枝番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
-        <result property="他市町村住所地特例適用事由コード" column="他市町村住所地特例適用事由コード" 
+        <result property="他市町村住所地特例適用事由コード" column="他市町村住所地特例適用事由コード"
                 typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="適用年月日" column="適用年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="適用届出年月日" column="適用届出年月日"
@@ -145,8 +145,8 @@
         T1."tennyumaeJusho" AS "前住所",
         T1."torokuIdoYMD" AS "転入年月日",
         T1."renrakusaki1" AS "連絡先",
-        IFNULL(T1."tenshutsuKakuteiIdoYMD",T1."tenshutsuYoteiIdoYMD")AS "転出年月日"
-        FROM <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+        COALESCE(T1."tenshutsuKakuteiIdoYMD",T1."tenshutsuYoteiIdoYMD")AS "転出年月日"
+        FROM <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
         AS T1
     </select>
     <resultMap id="resultMap_OtherAddressInformationRecipientNameMybatisEntity"

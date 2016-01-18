@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
@@ -34,7 +35,7 @@ public class OtherAddressLedgerEntity {
     private FlexibleDate 生年月日;
     private RString 性別;
     private SetaiCode 世帯コード;
-    private RString 識別コード;
+    private ShikibetsuCode 識別コード;
     private AtenaKanaMeisho 氏名カナ;
     private RString 地区タイトル1;
     private ChikuCode 地区コード1;

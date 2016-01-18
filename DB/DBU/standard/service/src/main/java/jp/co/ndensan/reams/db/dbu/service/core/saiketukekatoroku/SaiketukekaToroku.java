@@ -100,13 +100,12 @@ public class SaiketukekaToroku {
     public int delSaiketukekaMeisaiJoho(
             ShikibetsuCode 識別コード,
             HihokenshaNo 原処分被保険者番号,
-            FlexibleDate 審査請求届出日
-    ) {
+            FlexibleDate 審査請求届出日) {
         DbT7001FufukuMoshitateEntity entity = 不服審査申立情報dac.selectByKey(識別コード,
                 原処分被保険者番号, 審査請求届出日);
-        entity.setShikibetsuCode(null);
-        entity.setGenshobunsHihokennshaNo(null);
-        entity.setShinsaSeikyuTodokedeYMD(null);
+        entity.setSaiketsuKekka(null);
+        entity.setSaiketsuRiyu(null);
+        entity.setBemmeishoSakuseiYMD(null);
         entity.setState(EntityDataState.Modified);
         return 不服審査申立情報dac.save(entity);
     }

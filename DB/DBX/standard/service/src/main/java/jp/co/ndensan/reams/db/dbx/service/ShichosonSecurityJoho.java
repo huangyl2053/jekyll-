@@ -81,7 +81,7 @@ public final class ShichosonSecurityJoho {
         if (entitys.isEmpty()) {
             return get未導入市町村セキュリティ情報();
         } else {
-            DbT7908KaigoDonyuKeitaiEntity 介護導入形態 = 介護導入形態Dac.selectByGyomuBunrui(業務分類.getコード()).get(0);
+            DbT7908KaigoDonyuKeitaiEntity 介護導入形態 = entitys.get(0);
             return get導入済市町村セキュリティ情報(介護導入形態);
         }
     }

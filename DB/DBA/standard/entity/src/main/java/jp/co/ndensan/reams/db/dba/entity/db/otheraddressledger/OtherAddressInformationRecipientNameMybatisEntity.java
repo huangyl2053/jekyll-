@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -28,7 +29,7 @@ public class OtherAddressInformationRecipientNameMybatisEntity {
     private FlexibleDate 生年月日;
     private RString 性別コード;
     private SetaiCode 世帯コード;
-    private RString 識別コード;
+    private ShikibetsuCode 識別コード;
     private RString 地区名１;
     private RString 地区名２;
     private RString 地区名３;
