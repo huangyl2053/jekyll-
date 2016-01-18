@@ -19,7 +19,7 @@ public class NinnteiChousairaiBusiness {
     private final NinnteiChousairaiEntity entity;
 
     /**
-     * 認定調査委託先コードを返します。
+     * 認定調査依頼項目を返します。
      *
      * @param entity
      */
