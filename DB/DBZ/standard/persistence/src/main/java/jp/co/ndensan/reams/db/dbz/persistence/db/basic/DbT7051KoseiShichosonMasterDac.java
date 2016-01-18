@@ -281,6 +281,22 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
     }
 
     /**
+     * 証記載保険者番号による市町村情報の検索します。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @return List<DbT7051KoseiShichosonMasterEntity> 市町村情報
+     */
+    @Transaction
+    public List<DbT7051KoseiShichosonMasterEntity> getshichosonMeisho(ShoKisaiHokenshaNo 証記載保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(eq(shoKisaiHokenshaNo, 証記載保険者番号)).
+                toList(DbT7051KoseiShichosonMasterEntity.class);
+    }
+
+    /**
      * 市町村コードによる市町村情報の検索します。
      *
      * @param 市町村コード 市町村コード
