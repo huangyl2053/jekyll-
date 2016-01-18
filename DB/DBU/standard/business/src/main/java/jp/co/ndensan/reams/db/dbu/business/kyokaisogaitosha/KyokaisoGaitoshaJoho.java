@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.kyokaisogaitosha;
 
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaRelateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -14,16 +14,16 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 境界層該当者一覧情報を管理するビジネスです。
  */
-public class KyokaisoGaitosha {
+public class KyokaisoGaitoshaJoho {
 
-    private final KyokaisoGaitoshaRelateEntity entity;
+    private final KyokaisoGaitoshaJohoRelateEntity entity;
 
     /**
      * コンストラクタです。
      *
      * @param entity 境界層該当者一覧情報RelateEntity
      */
-    public KyokaisoGaitosha(KyokaisoGaitoshaRelateEntity entity) {
+    public KyokaisoGaitoshaJoho(KyokaisoGaitoshaJohoRelateEntity entity) {
         this.entity = entity;
     }
 
@@ -186,7 +186,7 @@ public class KyokaisoGaitosha {
      * @return 高額ｻｰﾋﾞｽ費減額後上限額
      */
     public Decimal get高額ｻｰﾋﾞｽ費減額後上限額() {
-        return entity.get高額ｻｰﾋﾞｽ費減額後上限額();
+        return entity.get高額費減額後上限額();
     }
 
     /**

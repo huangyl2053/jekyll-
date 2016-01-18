@@ -7,7 +7,8 @@ package jp.co.ndensan.reams.db.dbu.persistence.mapper.basic.kyokaisogaitosha;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaParameter;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaRelateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoRelateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaJohoRelateEntity;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -21,7 +22,7 @@ public interface IKyokaisoGaitoshaMapper {
      * @param parameter 境界層該当者一覧情報パラメータ
      * @return List<KyokaisoGaitoshaRelateEntity> 境界層該当者一覧情報リスト
      */
-    List<KyokaisoGaitoshaRelateEntity> select一覧情報(KyokaisoGaitoshaParameter parameter);
+    List<KyokaisoGaitoshaJohoRelateEntity> select一覧情報(KyokaisoGaitoshaParameter parameter);
 
     /**
      * 最新履歴番号を取得します。
@@ -38,4 +39,12 @@ public interface IKyokaisoGaitoshaMapper {
      * @return Decimal 最新リンク番号
      */
     Decimal selcet最新リンク番号(KyokaisoGaitoshaParameter parameter);
+
+    /**
+     * 検索条件より、適当な条件を連結して、境界層該当者情報を検索する。
+     *
+     * @param 検索条件 境界層該当者一覧情報パラメータ
+     * @return DbT1006KyokaisoGaitoshaEntityの{@code list}
+     */
+    List<KyokaisoGaitoRelateEntity> select境界層該当者(KyokaisoGaitoshaParameter 検索条件);
 }
