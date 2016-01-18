@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Fukushiyo
 
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -18,25 +19,32 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class ValidationHandler {
 
-    public static ValidationMessageControlPairs 管理日Fromの必須チェック() {
+    private final FukushiyoguShohinGuideDiv div;
 
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate管理日必須));
-        return validationMessages;
+    /**
+     * コンストラクタです。
+     *
+     * @param div 福祉用具商品名入力ガイド
+     */
+    public ValidationHandler(FukushiyoguShohinGuideDiv div) {
+        this.div = div;
     }
 
-    public static ValidationMessageControlPairs 商品名の必須チェック() {
-
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate商品名必須));
-        return validationMessages;
+    public void 管理日Fromの必須チェック(ValidationMessageControlPairs validPairs) {
+        if (RString.EMPTY.equals(div.getPanInput().getTxtKanriKaishiDay().getValue().toDateString())) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate管理日必須));
+        } else if (div.getPanInput().getTxtKanriShuryoDay().getValue() != null
+                && !div.getPanInput().getTxtKanriShuryoDay().getValue().toDateString().equals(RString.EMPTY)
+                && div.getPanInput().getTxtKanriShuryoDay().getValue().
+                isBefore(div.getPanInput().getTxtKanriKaishiDay().getValue())) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate整合性));
+        }
     }
 
-    public static ValidationMessageControlPairs 管理日Fromと管理日Toの整合性チェック() {
-
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate整合性));
-        return validationMessages;
+    public void 商品名の必須チェック(ValidationMessageControlPairs validPairs) {
+        if (div.getPanInput().getTxtShohinmei().getValue() == null || div.getPanInput().getTxtShohinmei().getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate商品名必須));
+        }
     }
 
     private static enum RRVMessages implements IValidationMessage {

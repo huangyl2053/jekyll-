@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogushohin.FukushiyoguSho
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.FukushiyoguShohinGuide.FukushiyoguShohinGuideDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.FukushiyoguShohinGuide.FukushiyoguShohinInputGuideHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.FukushiyoguShohinGuide.ValidationHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.FukushiyoguShohinGuide.dgFukushiyoguShohin_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogushohin.FukushiyoguShohinInputGuideManager;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
@@ -47,11 +46,9 @@ public class FukushiyoguShohinGuide {
      * @param fukuDiv FukushiyoguShohinGuideDiv
      * @return ResponseData<FukushiyoguShohinGuideDiv>
      */
-    public ResponseData<FukushiyoguShohinGuideDiv> onLoad(FukushiyoguShohinGuideDiv fukuDiv) {
-        ResponseData<FukushiyoguShohinGuideDiv> responseData = new ResponseData<>();
+    public ResponseData<FukushiyoguShohinGuideDiv> initialize(FukushiyoguShohinGuideDiv fukuDiv) {
         createHandlerOf(fukuDiv).initialize();
-        responseData.data = fukuDiv;
-        return createResponse(fukuDiv);
+        return createResponseData(fukuDiv);
     }
 
     /**
@@ -94,7 +91,8 @@ public class FukushiyoguShohinGuide {
         fukuDiv.getPanInput().setState(追加);
         fukuDiv.getPanInput().setVisible(true);
         fukuDiv.getBtnSave().setVisible(true);
-        return createResponseData(状態の調整(fukuDiv, 追加));
+        createHandlerOf(fukuDiv).状態の調整(追加);
+        return createResponseData(fukuDiv);
     }
 
     /**
@@ -108,7 +106,8 @@ public class FukushiyoguShohinGuide {
         fukuDiv.getPanInput().setState(修正);
         fukuDiv.getPanInput().setVisible(true);
         fukuDiv.getBtnSave().setVisible(true);
-        return createResponseData(状態の調整(fukuDiv, 修正));
+        createHandlerOf(fukuDiv).状態の調整(修正);
+        return createResponseData(fukuDiv);
     }
 
     /**
@@ -122,41 +121,8 @@ public class FukushiyoguShohinGuide {
         fukuDiv.getPanInput().setState(削除);
         fukuDiv.getPanInput().setVisible(true);
         fukuDiv.getBtnSave().setVisible(true);
-        return createResponseData(状態の調整(fukuDiv, 削除));
-    }
-
-    private FukushiyoguShohinGuideDiv 状態の調整(FukushiyoguShohinGuideDiv fukuDiv, RString 状態) {
-        if (!fukuDiv.getPanInput().getState().equals(追加)) {
-            dgFukushiyoguShohin_Row dgfukushiyogushohinRow = fukuDiv.getDgFukushiyoguShohin().getSelectedItems().get(0);
-
-            fukuDiv.getPanInput().setShohinNo(dgfukushiyogushohinRow.getShohinNo());
-            fukuDiv.getPanInput().getTxtKanriKaishiDay().setValue(dgfukushiyogushohinRow.getKanriKaishiYMD().getValue());
-            fukuDiv.getPanInput().getTxtKanriShuryoDay().setValue(dgfukushiyogushohinRow.getKanriShuryoYMD().getValue());
-            fukuDiv.getPanInput().getTxtShohinmei().setValue(dgfukushiyogushohinRow.getShohinmei());
-            fukuDiv.getPanInput().getTxtSeizoJigyoshamei().setValue(dgfukushiyogushohinRow.getSeizoJigyoshamei());
-            fukuDiv.getPanInput().getTxtHinmokuCode().setValue(dgfukushiyogushohinRow.getHinmokuCode());
-        } else {
-            fukuDiv.getPanInput().setShohinNo(RString.EMPTY);
-            fukuDiv.getPanInput().getTxtKanriKaishiDay().clearValue();
-            fukuDiv.getPanInput().getTxtKanriShuryoDay().clearValue();
-            fukuDiv.getPanInput().getTxtShohinmei().clearValue();
-            fukuDiv.getPanInput().getTxtSeizoJigyoshamei().clearValue();
-            fukuDiv.getPanInput().getTxtHinmokuCode().clearValue();
-        }
-        if (追加.equals(状態) || 修正.equals(状態)) {
-            fukuDiv.getPanInput().getTxtKanriKaishiDay().setReadOnly(false);
-            fukuDiv.getPanInput().getTxtKanriShuryoDay().setReadOnly(false);
-            fukuDiv.getPanInput().getTxtShohinmei().setReadOnly(false);
-            fukuDiv.getPanInput().getTxtSeizoJigyoshamei().setReadOnly(false);
-            fukuDiv.getPanInput().getTxtHinmokuCode().setReadOnly(false);
-        } else {
-            fukuDiv.getPanInput().getTxtKanriKaishiDay().setReadOnly(true);
-            fukuDiv.getPanInput().getTxtKanriShuryoDay().setReadOnly(true);
-            fukuDiv.getPanInput().getTxtShohinmei().setReadOnly(true);
-            fukuDiv.getPanInput().getTxtSeizoJigyoshamei().setReadOnly(true);
-            fukuDiv.getPanInput().getTxtHinmokuCode().setReadOnly(true);
-        }
-        return fukuDiv;
+        createHandlerOf(fukuDiv).状態の調整(削除);
+        return createResponseData(fukuDiv);
     }
 
     /**
@@ -175,8 +141,9 @@ public class FukushiyoguShohinGuide {
                 setfukushiyo(fukuDiv);
             }
         } else {
-            if (check_btnKakuninn(fukuDiv).iterator().hasNext()) {
-                return ResponseData.of(fukuDiv).addValidationMessages(check_btnKakuninn(fukuDiv)).respond();
+            ValidationMessageControlPairs validationMessageControlPairs = check_btnKakuninn(fukuDiv);
+            if (validationMessageControlPairs.iterator().hasNext()) {
+                return ResponseData.of(fukuDiv).addValidationMessages(validationMessageControlPairs).respond();
             }
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(fukuDiv).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
@@ -190,9 +157,30 @@ public class FukushiyoguShohinGuide {
         return createResponseData(fukuDiv);
     }
 
+    public ValidationMessageControlPairs check_btnKakuninn(FukushiyoguShohinGuideDiv fukuDiv) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+
+        getValidationHandler(fukuDiv).管理日Fromの必須チェック(validationMessages);
+        getValidationHandler(fukuDiv).商品名の必須チェック(validationMessages);
+//        getValidationHandler(fukuDiv).管理日Fromと管理日Toの整合性チェック();
+        return validationMessages;
+    }
+//
+//    public void 管理日Fromの必須チェック(FukushiyoguShohinGuideDiv fukuDiv) {
+//
+//    }
+//
+//    public void 商品名の必須チェック(FukushiyoguShohinGuideDiv fukuDiv) {
+//
+//    }
+//
+//    public void 管理日Fromと管理日Toの整合性チェック(FukushiyoguShohinGuideDiv fukuDiv) {
+//
+//    }
+
     private void setfukushiyo(FukushiyoguShohinGuideDiv fukuDiv) {
         Models<FukushiyoguShohinIdentifier, FukushiyoguShohin> models = ViewStateHolder.get(ViewStateKeys.福祉用具商品名入力ガイド検索結果, Models.class);
-        FukushiyoguShohinInputGuideManager fukushiyoguShohinInputGuideManager = FukushiyoguShohinInputGuideManager.createInstance();
+        FukushiyoguShohinInputGuideManager fukushiManager = FukushiyoguShohinInputGuideManager.createInstance();
         if (追加.equals(fukuDiv.getPanInput().getState())) {
             FukushiyoguShohin fukushiyoguShohin = new FukushiyoguShohin(Saiban.get(SubGyomuCode.DBC介護給付,
                     SaibanHanyokeyName.商品番号.getコード()).nextString(),
@@ -206,7 +194,7 @@ public class FukushiyoguShohinGuide {
             builder.set品目コード(nullToEmpty(fukuDiv.getTxtHinmokuCode().getValue()));
             fukushiyoguShohin = builder.build();
             fukushiyoguShohin.toEntity().setState(EntityDataState.Added);
-            fukushiyoguShohinInputGuideManager.saveOrDelete(fukushiyoguShohin);
+            fukushiManager.saveOrDelete(fukushiyoguShohin);
         } else if (修正.equals(fukuDiv.getPanInput().getState())) {
             FukushiyoguShohinIdentifier key = new FukushiyoguShohinIdentifier(fukuDiv.getPanInput().getShohinNo(),
                     new FlexibleDate(fukuDiv.getTxtKanriKaishiDay().getValue().toString()));
@@ -220,13 +208,12 @@ public class FukushiyoguShohinGuide {
             builder.set品目コード(nullToEmpty(fukuDiv.getTxtHinmokuCode().getValue()));
             fukushiyoguShohin = builder.build();
             fukushiyoguShohin.toEntity().setState(EntityDataState.Modified);
-            fukushiyoguShohinInputGuideManager.saveOrDelete(fukushiyoguShohin);
+            fukushiManager.saveOrDelete(fukushiyoguShohin);
         } else if (削除.equals(fukuDiv.getPanInput().getState())) {
             FukushiyoguShohinIdentifier key = new FukushiyoguShohinIdentifier(fukuDiv.getPanInput().getShohinNo(),
                     new FlexibleDate(fukuDiv.getTxtKanriKaishiDay().getValue().toString()));
             FukushiyoguShohin fukushiyoguShohin = models.get(key);
-            fukushiyoguShohin.deleted();
-            fukushiyoguShohinInputGuideManager.saveOrDelete(fukushiyoguShohin);
+            fukushiManager.saveOrDelete(fukushiyoguShohin.deleted());
         }
 
     }
@@ -236,41 +223,6 @@ public class FukushiyoguShohinGuide {
             return RString.EMPTY;
         }
         return obj;
-    }
-
-    private ValidationMessageControlPairs check_btnKakuninn(FukushiyoguShohinGuideDiv fukuDiv) {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-
-        管理日Fromの必須チェック(fukuDiv, validationMessages);
-        商品名の必須チェック(fukuDiv, validationMessages);
-        管理日Fromと管理日Toの整合性チェック(fukuDiv, validationMessages);
-        return validationMessages;
-    }
-
-    private void 管理日Fromの必須チェック(FukushiyoguShohinGuideDiv fukuDiv, ValidationMessageControlPairs validationMessages) {
-        if (fukuDiv.getPanInput().getTxtKanriKaishiDay().getValue() != null) {
-            if (RString.EMPTY.equals(fukuDiv.getPanInput().getTxtKanriKaishiDay().getValue())) {
-                validationMessages.add(ValidationHandler.管理日Fromの必須チェック());
-            }
-        }
-    }
-
-    private void 商品名の必須チェック(FukushiyoguShohinGuideDiv fukuDiv, ValidationMessageControlPairs validationMessages) {
-        if (fukuDiv.getPanInput().getTxtShohinmei().getValue() != null) {
-            if (RString.EMPTY.equals(fukuDiv.getPanInput().getTxtShohinmei().getValue())) {
-                validationMessages.add(ValidationHandler.商品名の必須チェック());
-            }
-        }
-    }
-
-    private void 管理日Fromと管理日Toの整合性チェック(FukushiyoguShohinGuideDiv fukuDiv, ValidationMessageControlPairs validationMessages) {
-        if (fukuDiv.getPanInput().getTxtKanriShuryoDay().getValue() != null
-                && fukuDiv.getPanInput().getTxtKanriKaishiDay().getValue() != null) {
-            if (fukuDiv.getPanInput().getTxtKanriShuryoDay().getValue().
-                    isBefore(fukuDiv.getPanInput().getTxtKanriKaishiDay().getValue())) {
-                validationMessages.add(ValidationHandler.管理日Fromと管理日Toの整合性チェック());
-            }
-        }
     }
 
     /**
@@ -306,8 +258,7 @@ public class FukushiyoguShohinGuide {
         return response;
     }
 
-    private ResponseData<FukushiyoguShohinGuideDiv> createResponse(FukushiyoguShohinGuideDiv fukuDiv) {
-        return ResponseData.of(fukuDiv).respond();
+    private ValidationHandler getValidationHandler(FukushiyoguShohinGuideDiv div) {
+        return new ValidationHandler(div);
     }
-
 }

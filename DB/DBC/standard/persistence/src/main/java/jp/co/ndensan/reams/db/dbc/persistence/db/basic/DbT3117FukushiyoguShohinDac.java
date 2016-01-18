@@ -102,7 +102,7 @@ public class DbT3117FukushiyoguShohinDac implements ISaveable<DbT3117Fukushiyogu
     /**
      * 検索で福祉用具商品名入力ガイドを取得します。
      *
-     * @param 基準日
+     * @param 基準日 FlexibleDate
      * @return DbT3117FukushiyoguShohinEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */

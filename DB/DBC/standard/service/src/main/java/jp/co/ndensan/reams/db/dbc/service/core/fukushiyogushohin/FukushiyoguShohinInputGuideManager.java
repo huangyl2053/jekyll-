@@ -56,7 +56,7 @@ public class FukushiyoguShohinInputGuideManager {
     /**
      * 福祉用具商品名入力ガイドデータを返します。
      *
-     * @param 基準日
+     * @param 基準日 FlexibleDate
      * @return SearchResult<FukushiyoguShohin>
      */
     @Transaction

@@ -8,12 +8,12 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import lombok.Value;
 
 /**
  * 福祉用具商品名入力ガイドの識別子です。
  */
-@Value
+@SuppressWarnings("PMD.UnusedPrivateField")
+@lombok.Value
 public class FukushiyoguShohinIdentifier implements Serializable {
 
     private static final long serialVersionUID = -5921387384337740106L;
