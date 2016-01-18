@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalist
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 宛名識別対象取得パラメータクラス
+ * 宛名識別対象取得パラメータクラス。
  */
 public class PsmShikibetsuTaishoMybatisParameter {
 

@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 住基連動登録者リストのバッチ処理クラスのパラメータ
+ * 住基連動登録者リストのバッチ処理クラスのパラメータ。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
@@ -30,7 +30,7 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
     private RString loginId;
 
     /**
-     * コンストラクタ
+     * コンストラクタ。
      *
      * @param zenkaikaishiYMDHMS 前回開始日時
      * @param zenkaishuryoYMDHMS 前回終了日時

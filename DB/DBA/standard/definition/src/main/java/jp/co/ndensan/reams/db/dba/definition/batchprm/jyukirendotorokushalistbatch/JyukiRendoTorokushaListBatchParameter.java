@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 住基連動登録者リストバッチのパラメータ
+ * 住基連動登録者リストバッチのパラメータ。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

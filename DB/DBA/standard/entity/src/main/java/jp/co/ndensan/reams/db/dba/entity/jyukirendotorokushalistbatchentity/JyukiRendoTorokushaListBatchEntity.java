@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 住基連動登録者リストEntity
+ * 住基連動登録者リストEntity。
  */
 @lombok.Getter
 @lombok.Setter

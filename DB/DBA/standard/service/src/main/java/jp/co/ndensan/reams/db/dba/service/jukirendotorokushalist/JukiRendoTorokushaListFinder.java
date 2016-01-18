@@ -20,11 +20,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 住基連動登録者リスト作成クラスです
+ * 住基連動登録者リスト作成クラスです。
  */
 public class JukiRendoTorokushaListFinder {
 
-    private final DbT7022ShoriDateKanriDac dac;
     private static final RString 処理名 = new RString("住基連動登録者リスト");
     private static final RString MIN_日時 = new RString(" 00:00:00.000");
     private static final RString MAX_日時 = new RString(" 23:59:59.999");
@@ -32,6 +31,10 @@ public class JukiRendoTorokushaListFinder {
     private static final RString CHECKBOX_KEY0 = new RString("key0");
     private static final RString CHECKBOX_KEY1 = new RString("key1");
     private static final RString CHECKBOX_KEY2 = new RString("key2");
+    private static final int 年終了桁数 = 4;
+    private static final int 月終了桁数 = 6;
+    private static final int 日終了桁数 = 8;
+    private final DbT7022ShoriDateKanriDac dac;
 
     /**
      * コンストラクタです。
@@ -116,35 +119,35 @@ public class JukiRendoTorokushaListFinder {
 
         if (!前回開始日.isEmpty()) {
             RStringBuilder 前回開始日Builder = new RStringBuilder();
-            前回開始日Builder.append(前回開始日.toString().substring(0, 4));
+            前回開始日Builder.append(前回開始日.toString().substring(0, 年終了桁数));
             前回開始日Builder.append(ライン.toString());
-            前回開始日Builder.append(前回開始日.toString().substring(4, 6));
+            前回開始日Builder.append(前回開始日.toString().substring(年終了桁数, 月終了桁数));
             前回開始日Builder.append(ライン.toString());
-            前回開始日Builder.append(前回開始日.toString().substring(6, 8));
+            前回開始日Builder.append(前回開始日.toString().substring(月終了桁数, 日終了桁数));
             前回開始日Builder.append(MIN_日時.toString());
             parameter.setZenkaikaishiYMDHMS(前回開始日Builder.toRString());
         }
         if (!前回終了日.isEmpty()) {
             RStringBuilder 前回終了日Builder = new RStringBuilder();
-            前回終了日Builder.append(前回終了日.toString().substring(0, 4));
+            前回終了日Builder.append(前回終了日.toString().substring(0, 年終了桁数));
             前回終了日Builder.append(ライン.toString());
-            前回終了日Builder.append(前回終了日.toString().substring(4, 6));
+            前回終了日Builder.append(前回終了日.toString().substring(年終了桁数, 月終了桁数));
             前回終了日Builder.append(ライン.toString());
-            前回終了日Builder.append(前回終了日.toString().substring(6, 8));
+            前回終了日Builder.append(前回終了日.toString().substring(月終了桁数, 日終了桁数));
             前回終了日Builder.append(MAX_日時.toString());
             parameter.setZenkaishuryoYMDHMS(前回終了日Builder.toRString());
         }
-        今回開始日Builder.append(今回開始日.toString().substring(0, 4));
+        今回開始日Builder.append(今回開始日.toString().substring(0, 年終了桁数));
         今回開始日Builder.append(ライン.toString());
-        今回開始日Builder.append(今回開始日.toString().substring(4, 6));
+        今回開始日Builder.append(今回開始日.toString().substring(年終了桁数, 月終了桁数));
         今回開始日Builder.append(ライン.toString());
-        今回開始日Builder.append(今回開始日.toString().substring(6, 8));
+        今回開始日Builder.append(今回開始日.toString().substring(月終了桁数, 日終了桁数));
         今回開始日Builder.append(MIN_日時.toString());
-        今回終了日Builder.append(今回終了日.toString().substring(0, 4));
+        今回終了日Builder.append(今回終了日.toString().substring(0, 年終了桁数));
         今回終了日Builder.append(ライン.toString());
-        今回終了日Builder.append(今回終了日.toString().substring(4, 6));
+        今回終了日Builder.append(今回終了日.toString().substring(年終了桁数, 月終了桁数));
         今回終了日Builder.append(ライン.toString());
-        今回終了日Builder.append(今回終了日.toString().substring(6, 8));
+        今回終了日Builder.append(今回終了日.toString().substring(月終了桁数, 日終了桁数));
         今回終了日Builder.append(MAX_日時.toString());
         parameter.setKonkaikaishiYMDHMS(今回開始日Builder.toRString());
         parameter.setKonkaishuryoYMDHMS(今回終了日Builder.toRString());

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 処理日付管理マスタに更新します
+ * 処理日付管理マスタに更新します。
  */
 public class ShoriDateKanriDBUpdateProcess extends SimpleBatchProcessBase {
 
@@ -24,26 +24,23 @@ public class ShoriDateKanriDBUpdateProcess extends SimpleBatchProcessBase {
     private static final RString 処理枝番 = new RString("0000");
     private static final FlexibleYear 年度 = new FlexibleYear("0000");
     private static final RString 年度内連番 = new RString("0000");
+    private static final int 日付桁数 = 8;
     private IJyukiRendoJouhouMapper jyukiRendoJouhouMapper;
     private JyukiRendoTorokushaListBatchProcessParameter processParameter;
-    private int insertCount;
-    private int updateCount;
 
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
         jyukiRendoJouhouMapper = getMapper(IJyukiRendoJouhouMapper.class);
-        insertCount = 0;
-        updateCount = 0;
     }
 
     @Override
     protected void process() {
         DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
         entity.setTaishoKaishiYMD(new FlexibleDate(processParameter.getKonkaikaishiYMDHMS()
-                .replace("-", "").substring(0, 8)));
+                .replace("-", "").substring(0, 日付桁数)));
         entity.setTaishoShuryoYMD(new FlexibleDate(processParameter.getKonkaishuryoYMDHMS()
-                .replace("-", "").substring(0, 8)));
+                .replace("-", "").substring(0, 日付桁数)));
         if (processParameter.getZenkaikaishiYMDHMS() == null && processParameter.getZenkaishuryoYMDHMS() == null) {
             entity.setSubGyomuCode(SubGyomuCode.DBA介護資格);
             entity.setShichosonCode(AssociationFinderFactory.createInstance().getAssociation()
@@ -52,11 +49,11 @@ public class ShoriDateKanriDBUpdateProcess extends SimpleBatchProcessBase {
             entity.setShoriEdaban(処理枝番);
             entity.setNendo(年度);
             entity.setNendoNaiRenban(年度内連番);
-            insertCount = jyukiRendoJouhouMapper.insertShoriDateKanri(entity);
+            jyukiRendoJouhouMapper.insertShoriDateKanri(entity);
         } else {
             entity.setSubGyomuCode(SubGyomuCode.DBA介護資格);
             entity.setShoriName(処理名);
-            updateCount = jyukiRendoJouhouMapper.updateShoriDateKanri(entity);
+            jyukiRendoJouhouMapper.updateShoriDateKanri(entity);
         }
     }
 }

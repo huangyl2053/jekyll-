@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 
 /**
- * 宛名識別対象Entity
+ * 宛名識別対象Entity。
  */
 @lombok.Getter
 @lombok.Setter

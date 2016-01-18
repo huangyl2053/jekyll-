@@ -51,6 +51,9 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  */
 public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
 
+    private static final int 対象情報_被保険者台帳 = 1;
+    private static final int 対象情報_他市町村住所地特例者台帳 = 2;
+    private static final int 対象情報_適用除外者台帳 = 3;
     private static final RString CODE_SHUBETSU_0008 = new RString("0008");
     private static final RString CODE_SHUBETSU_0011 = new RString("0011");
     private static final RString CODE_SHUBETSU_0009 = new RString("0009");
@@ -74,7 +77,7 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
     private static final RString 適用削除 = new RString("適用削除");
     private static final RString 解除削除 = new RString("解除削除");
 
-    private IJyukiRendoJouhouMapper JyukiRendoJouhouMapper;
+    private IJyukiRendoJouhouMapper jyukiRendoJouhouMapper;
     private JyukiRendoTorokushaListBatchProcessParameter processParameter;
     private RString loginId;
 
@@ -85,7 +88,7 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
-        JyukiRendoJouhouMapper = getMapper(IJyukiRendoJouhouMapper.class);
+        jyukiRendoJouhouMapper = getMapper(IJyukiRendoJouhouMapper.class);
         IUrControlData controlData = UrControlDataFactory.createInstance();
         loginId = controlData.getLoginInfo().getUserId();
     }
@@ -131,7 +134,7 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
                     key.set住民状態(住名状態);
                     UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(
                             key.getPSM検索キー());
-                    UaFt200FindShikibetsuTaishoEntity shikibetsuTaishoentity = JyukiRendoJouhouMapper
+                    UaFt200FindShikibetsuTaishoEntity shikibetsuTaishoentity = jyukiRendoJouhouMapper
                             .getPsmShikibetsuTaisho(new PsmShikibetsuTaishoMybatisParameter(
                                             new RString(uaFt200Psm.getParameterMap()
                                                     .get("psmShikibetsuTaisho").toString())));
@@ -165,8 +168,8 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         JyukiRendoTorokushaListBatch jyukiRendoTorokushaListBatch = new JyukiRendoTorokushaListBatch();
         List<JukiRendoTorokuListItem> item = jyukiRendoTorokushaListBatch
                 .getIdoCheckChohyoData(jyukiRendoTorokushaEntity);
-        ReportId ID = new ReportId("DBA200007");
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value()).create();
+        ReportId id = new ReportId("DBA200007");
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(id.value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         JukiRendoTorokuListReport report = JukiRendoTorokuListReport
                 .createFrom(item);
@@ -177,28 +180,28 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
     private List<JyukiRendoJouhouEntity> get被保険者台帳リスト(
             JyukiRendoTorokushaListBatchMybatisParameter parameter) {
         JyukiRendoJouhouEntity entity = new JyukiRendoJouhouEntity();
-        List<JyukiRendoJouhouEntity> JyukiRendoTorokushalist = JyukiRendoJouhouMapper
+        List<JyukiRendoJouhouEntity> jyukiRendoTorokushalist = jyukiRendoJouhouMapper
                 .getHiHokenshaDaichoList(parameter);
-        if (0 == JyukiRendoTorokushalist.size()) {
-            entity.set対象情報(1);
+        if (jyukiRendoTorokushalist.isEmpty()) {
+            entity.set対象情報(対象情報_被保険者台帳);
             entity.set対象情報タイトル(データ種別_被保険者台帳);
             entity.set開始タイトル(取得情報);
             entity.set終了タイトル(喪失情報);
             entity.set区分タイトル(資格);
             entity.set異動情報タイトル4(異動情報);
-            JyukiRendoTorokushalist.add(entity);
+            jyukiRendoTorokushalist.add(entity);
         }
-        return JyukiRendoTorokushalist;
+        return jyukiRendoTorokushalist;
     }
 
     private List<JyukiRendoJouhouEntity> get他住所地特例者管理リスト(
             JyukiRendoTorokushaListBatchMybatisParameter parameter) {
         List<JyukiRendoJouhouEntity> jyukiRendoJouhouList = new ArrayList<>();
         List<TaJushochiTokureiShayouhouEntity> taJushochiTokureiShayouhoulist = new ArrayList<>();
-        taJushochiTokureiShayouhoulist.addAll(JyukiRendoJouhouMapper
+        taJushochiTokureiShayouhoulist.addAll(jyukiRendoJouhouMapper
                 .getTaJushochiTokureiShaKanriList_0008Code(parameter));
-        taJushochiTokureiShayouhoulist.addAll(JyukiRendoJouhouMapper.getShisetsuNyutaisho_2Code(parameter));
-        taJushochiTokureiShayouhoulist.addAll(JyukiRendoJouhouMapper
+        taJushochiTokureiShayouhoulist.addAll(jyukiRendoJouhouMapper.getShisetsuNyutaisho_2Code(parameter));
+        taJushochiTokureiShayouhoulist.addAll(jyukiRendoJouhouMapper
                 .getTaJushochiTokureiShaKanriList_0011Code(parameter));
         Collections.sort(taJushochiTokureiShayouhoulist, new Comparator<TaJushochiTokureiShayouhouEntity>() {
             @Override
@@ -206,66 +209,38 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
                 return entity2.getLastUpdateTimestamp().compareTo(entity1.getLastUpdateTimestamp());
             }
         });
-        for (TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhouentity : taJushochiTokureiShayouhoulist) {
+        for (TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhou : taJushochiTokureiShayouhoulist) {
             JyukiRendoJouhouEntity entity = new JyukiRendoJouhouEntity();
-            if (!taJushochiTokureiShayouhouentity.isLogicalDeletedFlag()) {
-                entity.set対象情報(2);
-                entity.set対象情報タイトル(データ種別_他市町村住所地特例者台帳);
-                entity.set開始タイトル(適用情報);
-                entity.set終了タイトル(解除情報);
-                entity.set異動情報タイトル1(施設コード);
-                entity.set開始年月日タイトル(入所年月日);
-                entity.set終了年月日タイトル(退所年月日);
-                entity.set異動情報タイトル4(異動情報);
-                entity.set異動情報データ1(taJushochiTokureiShayouhouentity.getNyushoShisetsuCode());
-                entity.set識別コード(taJushochiTokureiShayouhouentity.getShikibetsuCode());
-                if (taJushochiTokureiShayouhouentity.getIdoJiyuCode() != null
-                        && !CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格,
-                                new CodeShubetsu(CODE_SHUBETSU_0008.toString()),
-                                new Code(taJushochiTokureiShayouhouentity.getIdoJiyuCode().toString())).isEmpty()) {
-                    set適用異動情報(entity, taJushochiTokureiShayouhouentity);
-                } else if (taJushochiTokureiShayouhouentity.getIdoJiyuCode() == null
-                        && taJushochiTokureiShayouhouentity.getNyushoYMD() != null
-                        && taJushochiTokureiShayouhouentity.getTaishoYMD() == null) {
-                    set入所異動情報(entity, taJushochiTokureiShayouhouentity);
-                } else if (taJushochiTokureiShayouhouentity.getIdoJiyuCode() == null
-                        && taJushochiTokureiShayouhouentity.getNyushoYMD() != null
-                        && taJushochiTokureiShayouhouentity.getTaishoYMD() != null) {
-                    set退所異動情報(entity, taJushochiTokureiShayouhouentity);
-                } else if (taJushochiTokureiShayouhouentity.getIdoJiyuCode() != null
-                        && !CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格,
-                                new CodeShubetsu(CODE_SHUBETSU_0011.toString()),
-                                new Code(taJushochiTokureiShayouhouentity.getIdoJiyuCode().toString())).isEmpty()) {
-                    set解除異動情報(entity, taJushochiTokureiShayouhouentity);
-                }
+            entity.set対象情報(対象情報_他市町村住所地特例者台帳);
+            entity.set対象情報タイトル(データ種別_他市町村住所地特例者台帳);
+            entity.set開始タイトル(適用情報);
+            entity.set終了タイトル(解除情報);
+            entity.set異動情報タイトル1(施設コード);
+            entity.set開始年月日タイトル(入所年月日);
+            entity.set終了年月日タイトル(退所年月日);
+            entity.set異動情報タイトル4(異動情報);
+            entity.set異動情報データ1(taJushochiTokureiShayouhou.getNyushoShisetsuCode());
+            entity.set識別コード(taJushochiTokureiShayouhou.getShikibetsuCode());
+            if (!taJushochiTokureiShayouhou.isLogicalDeletedFlag()) {
+                set異動情報(entity, taJushochiTokureiShayouhou, CODE_SHUBETSU_0008, CODE_SHUBETSU_0011);
             } else {
-                entity.set対象情報(2);
-                entity.set対象情報タイトル(データ種別_他市町村住所地特例者台帳);
-                entity.set開始タイトル(適用情報);
-                entity.set終了タイトル(解除情報);
-                entity.set異動情報タイトル1(施設コード);
-                entity.set開始年月日タイトル(入所年月日);
-                entity.set終了年月日タイトル(退所年月日);
-                entity.set異動情報タイトル4(異動情報);
-                entity.set異動情報データ1(taJushochiTokureiShayouhouentity.getNyushoShisetsuCode());
-                entity.set識別コード(taJushochiTokureiShayouhouentity.getShikibetsuCode());
-                if (taJushochiTokureiShayouhouentity.getIdoJiyuCode() != null
+                if (taJushochiTokureiShayouhou.getIdoJiyuCode() != null
                         && !CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格,
                                 new CodeShubetsu(CODE_SHUBETSU_0008.toString()),
-                                new Code(taJushochiTokureiShayouhouentity.getIdoJiyuCode().toString())).isEmpty()) {
-                    set適用削除情報(entity, taJushochiTokureiShayouhouentity);
-                } else if (taJushochiTokureiShayouhouentity.getIdoJiyuCode() != null
+                                new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString())).isEmpty()) {
+                    set適用削除情報(entity, taJushochiTokureiShayouhou);
+                } else if (taJushochiTokureiShayouhou.getIdoJiyuCode() != null
                         && !CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格,
                                 new CodeShubetsu(CODE_SHUBETSU_0011.toString()),
-                                new Code(taJushochiTokureiShayouhouentity.getIdoJiyuCode().toString())).isEmpty()) {
-                    set解除削除情報(entity, taJushochiTokureiShayouhouentity);
+                                new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString())).isEmpty()) {
+                    set解除削除情報(entity, taJushochiTokureiShayouhou);
                 }
             }
             jyukiRendoJouhouList.add(entity);
         }
-        if (0 == taJushochiTokureiShayouhoulist.size()) {
+        if (taJushochiTokureiShayouhoulist.isEmpty()) {
             JyukiRendoJouhouEntity entity = new JyukiRendoJouhouEntity();
-            entity.set対象情報(2);
+            entity.set対象情報(対象情報_他市町村住所地特例者台帳);
             entity.set対象情報タイトル(データ種別_他市町村住所地特例者台帳);
             set住基連動情報(entity);
             jyukiRendoJouhouList.add(entity);
@@ -277,10 +252,10 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
             JyukiRendoTorokushaListBatchMybatisParameter parameter) {
         List<JyukiRendoJouhouEntity> jyukiRendoJouhouList = new ArrayList<>();
         List<TaJushochiTokureiShayouhouEntity> taJushochiTokureiShayouhoulist = new ArrayList<>();
-        taJushochiTokureiShayouhoulist.addAll(JyukiRendoJouhouMapper
+        taJushochiTokureiShayouhoulist.addAll(jyukiRendoJouhouMapper
                 .getTekiyoJogaishaDaichoList_0009Code(parameter));
-        taJushochiTokureiShayouhoulist.addAll(JyukiRendoJouhouMapper.getShisetsuNyutaisho_3Code(parameter));
-        taJushochiTokureiShayouhoulist.addAll(JyukiRendoJouhouMapper
+        taJushochiTokureiShayouhoulist.addAll(jyukiRendoJouhouMapper.getShisetsuNyutaisho_3Code(parameter));
+        taJushochiTokureiShayouhoulist.addAll(jyukiRendoJouhouMapper
                 .getTekiyoJogaishaDaichoList_0012Code(parameter));
         Collections.sort(taJushochiTokureiShayouhoulist, new Comparator<TaJushochiTokureiShayouhouEntity>() {
             @Override
@@ -292,66 +267,38 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
                 return flag;
             }
         });
-        for (TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhouentity : taJushochiTokureiShayouhoulist) {
+        for (TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhou : taJushochiTokureiShayouhoulist) {
             JyukiRendoJouhouEntity entity = new JyukiRendoJouhouEntity();
-            if (!taJushochiTokureiShayouhouentity.isLogicalDeletedFlag()) {
-                entity.set対象情報(3);
-                entity.set対象情報タイトル(データ種別_適用除外者台帳);
-                entity.set開始タイトル(適用情報);
-                entity.set終了タイトル(解除情報);
-                entity.set異動情報タイトル1(施設コード);
-                entity.set開始年月日タイトル(入所年月日);
-                entity.set終了年月日タイトル(退所年月日);
-                entity.set異動情報タイトル4(異動情報);
-                entity.set異動情報データ1(taJushochiTokureiShayouhouentity.getNyushoShisetsuCode());
-                entity.set識別コード(taJushochiTokureiShayouhouentity.getShikibetsuCode());
-                if (taJushochiTokureiShayouhouentity.getIdoJiyuCode() != null
-                        && !CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格,
-                                new CodeShubetsu(CODE_SHUBETSU_0009.toString()),
-                                new Code(taJushochiTokureiShayouhouentity.getIdoJiyuCode().toString())).isEmpty()) {
-                    set適用異動情報(entity, taJushochiTokureiShayouhouentity);
-                } else if (taJushochiTokureiShayouhouentity.getIdoJiyuCode() == null
-                        && taJushochiTokureiShayouhouentity.getNyushoYMD() != null
-                        && taJushochiTokureiShayouhouentity.getTaishoYMD() == null) {
-                    set入所異動情報(entity, taJushochiTokureiShayouhouentity);
-                } else if (taJushochiTokureiShayouhouentity.getIdoJiyuCode() == null
-                        && taJushochiTokureiShayouhouentity.getNyushoYMD() != null
-                        && taJushochiTokureiShayouhouentity.getTaishoYMD() != null) {
-                    set退所異動情報(entity, taJushochiTokureiShayouhouentity);
-                } else if (taJushochiTokureiShayouhouentity.getIdoJiyuCode() != null
-                        && !CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格,
-                                new CodeShubetsu(CODE_SHUBETSU_0012.toString()),
-                                new Code(taJushochiTokureiShayouhouentity.getIdoJiyuCode().toString())).isEmpty()) {
-                    set解除異動情報(entity, taJushochiTokureiShayouhouentity);
-                }
+            entity.set対象情報(対象情報_適用除外者台帳);
+            entity.set対象情報タイトル(データ種別_適用除外者台帳);
+            entity.set開始タイトル(適用情報);
+            entity.set終了タイトル(解除情報);
+            entity.set異動情報タイトル1(施設コード);
+            entity.set開始年月日タイトル(入所年月日);
+            entity.set終了年月日タイトル(退所年月日);
+            entity.set異動情報タイトル4(異動情報);
+            entity.set異動情報データ1(taJushochiTokureiShayouhou.getNyushoShisetsuCode());
+            entity.set識別コード(taJushochiTokureiShayouhou.getShikibetsuCode());
+            if (!taJushochiTokureiShayouhou.isLogicalDeletedFlag()) {
+                set異動情報(entity, taJushochiTokureiShayouhou, CODE_SHUBETSU_0009, CODE_SHUBETSU_0012);
             } else {
-                entity.set対象情報(3);
-                entity.set対象情報タイトル(データ種別_適用除外者台帳);
-                entity.set開始タイトル(適用情報);
-                entity.set終了タイトル(解除情報);
-                entity.set異動情報タイトル1(施設コード);
-                entity.set開始年月日タイトル(入所年月日);
-                entity.set終了年月日タイトル(退所年月日);
-                entity.set異動情報タイトル4(異動情報);
-                entity.set異動情報データ1(taJushochiTokureiShayouhouentity.getNyushoShisetsuCode());
-                entity.set識別コード(taJushochiTokureiShayouhouentity.getShikibetsuCode());
-                if (taJushochiTokureiShayouhouentity.getIdoJiyuCode() != null
+                if (taJushochiTokureiShayouhou.getIdoJiyuCode() != null
                         && !CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格,
                                 new CodeShubetsu(CODE_SHUBETSU_0009.toString()),
-                                new Code(taJushochiTokureiShayouhouentity.getIdoJiyuCode().toString())).isEmpty()) {
-                    set適用削除情報(entity, taJushochiTokureiShayouhouentity);
-                } else if (taJushochiTokureiShayouhouentity.getIdoJiyuCode() != null
+                                new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString())).isEmpty()) {
+                    set適用削除情報(entity, taJushochiTokureiShayouhou);
+                } else if (taJushochiTokureiShayouhou.getIdoJiyuCode() != null
                         && !CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格,
                                 new CodeShubetsu(CODE_SHUBETSU_0012.toString()),
-                                new Code(taJushochiTokureiShayouhouentity.getIdoJiyuCode().toString())).isEmpty()) {
-                    set解除削除情報(entity, taJushochiTokureiShayouhouentity);
+                                new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString())).isEmpty()) {
+                    set解除削除情報(entity, taJushochiTokureiShayouhou);
                 }
             }
             jyukiRendoJouhouList.add(entity);
         }
-        if (0 == jyukiRendoJouhouList.size()) {
+        if (jyukiRendoJouhouList.isEmpty()) {
             JyukiRendoJouhouEntity entity = new JyukiRendoJouhouEntity();
-            entity.set対象情報(3);
+            entity.set対象情報(対象情報_適用除外者台帳);
             entity.set対象情報タイトル(データ種別_適用除外者台帳);
             set住基連動情報(entity);
             jyukiRendoJouhouList.add(entity);
@@ -359,52 +306,77 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         return jyukiRendoJouhouList;
     }
 
+    private void set異動情報(JyukiRendoJouhouEntity entity,
+            TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhou,
+            RString codeShuBetsuIti,
+            RString codeShuBetsuNi) {
+        if (taJushochiTokureiShayouhou.getIdoJiyuCode() != null
+                && !CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格,
+                        new CodeShubetsu(codeShuBetsuIti.toString()),
+                        new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString())).isEmpty()) {
+            set適用異動情報(entity, taJushochiTokureiShayouhou);
+        } else if (taJushochiTokureiShayouhou.getIdoJiyuCode() == null
+                && taJushochiTokureiShayouhou.getNyushoYMD() != null
+                && taJushochiTokureiShayouhou.getTaishoYMD() == null) {
+            set入所異動情報(entity, taJushochiTokureiShayouhou);
+        } else if (taJushochiTokureiShayouhou.getIdoJiyuCode() == null
+                && taJushochiTokureiShayouhou.getNyushoYMD() != null
+                && taJushochiTokureiShayouhou.getTaishoYMD() != null) {
+            set退所異動情報(entity, taJushochiTokureiShayouhou);
+        } else if (taJushochiTokureiShayouhou.getIdoJiyuCode() != null
+                && !CodeMaster.getCodeRireki(SubGyomuCode.DBA介護資格,
+                        new CodeShubetsu(codeShuBetsuNi.toString()),
+                        new Code(taJushochiTokureiShayouhou.getIdoJiyuCode().toString())).isEmpty()) {
+            set解除異動情報(entity, taJushochiTokureiShayouhou);
+        }
+    }
+
     private void set適用異動情報(JyukiRendoJouhouEntity entity,
-            TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhouentity) {
-        entity.set取得情報_後_事由(taJushochiTokureiShayouhouentity.getIdoJiyuCode());
-        entity.set取得情報_後_異動年月日(taJushochiTokureiShayouhouentity.getTekiyoYMD());
-        entity.set取得情報_後_届出年月日(taJushochiTokureiShayouhouentity.getTekiyoTodokedeYMD());
-        entity.set開始年月日データ_後(taJushochiTokureiShayouhouentity.getNyushoYMD());
+            TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhou) {
+        entity.set取得情報_後_事由(taJushochiTokureiShayouhou.getIdoJiyuCode());
+        entity.set取得情報_後_異動年月日(taJushochiTokureiShayouhou.getTekiyoYMD());
+        entity.set取得情報_後_届出年月日(taJushochiTokureiShayouhou.getTekiyoTodokedeYMD());
+        entity.set開始年月日データ_後(taJushochiTokureiShayouhou.getNyushoYMD());
         entity.set異動情報データ4(適用異動);
     }
 
     private void set入所異動情報(JyukiRendoJouhouEntity entity,
-            TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhouentity) {
-        entity.set開始年月日データ_後(taJushochiTokureiShayouhouentity.getNyushoYMD());
+            TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhou) {
+        entity.set開始年月日データ_後(taJushochiTokureiShayouhou.getNyushoYMD());
         entity.set異動情報データ4(入所異動);
     }
 
     private void set退所異動情報(JyukiRendoJouhouEntity entity,
-            TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhouentity) {
-        entity.set開始年月日データ_後(taJushochiTokureiShayouhouentity.getNyushoYMD());
-        entity.set終了年月日データ_後(taJushochiTokureiShayouhouentity.getTaishoYMD());
+            TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhou) {
+        entity.set開始年月日データ_後(taJushochiTokureiShayouhou.getNyushoYMD());
+        entity.set終了年月日データ_後(taJushochiTokureiShayouhou.getTaishoYMD());
         entity.set異動情報データ4(退所異動);
     }
 
     private void set解除異動情報(JyukiRendoJouhouEntity entity,
-            TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhouentity) {
-        entity.set喪失情報_後_事由(taJushochiTokureiShayouhouentity.getIdoJiyuCode());
-        entity.set喪失情報_後_異動年月日(taJushochiTokureiShayouhouentity.getKaijoYMD());
-        entity.set喪失情報_後_届出年月日(taJushochiTokureiShayouhouentity.getKaijoTodokedeYMD());
-        entity.set終了年月日データ_後(taJushochiTokureiShayouhouentity.getTaishoYMD());
+            TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhou) {
+        entity.set喪失情報_後_事由(taJushochiTokureiShayouhou.getIdoJiyuCode());
+        entity.set喪失情報_後_異動年月日(taJushochiTokureiShayouhou.getKaijoYMD());
+        entity.set喪失情報_後_届出年月日(taJushochiTokureiShayouhou.getKaijoTodokedeYMD());
+        entity.set終了年月日データ_後(taJushochiTokureiShayouhou.getTaishoYMD());
         entity.set異動情報データ4(解除異動);
     }
 
     private void set適用削除情報(JyukiRendoJouhouEntity entity,
-            TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhouentity) {
-        entity.set取得情報_前_事由(taJushochiTokureiShayouhouentity.getIdoJiyuCode());
-        entity.set取得情報_前_異動年月日(taJushochiTokureiShayouhouentity.getTekiyoYMD());
-        entity.set取得情報_前_届出年月日(taJushochiTokureiShayouhouentity.getTekiyoTodokedeYMD());
-        entity.set開始年月日データ_前(taJushochiTokureiShayouhouentity.getNyushoYMD());
+            TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhou) {
+        entity.set取得情報_前_事由(taJushochiTokureiShayouhou.getIdoJiyuCode());
+        entity.set取得情報_前_異動年月日(taJushochiTokureiShayouhou.getTekiyoYMD());
+        entity.set取得情報_前_届出年月日(taJushochiTokureiShayouhou.getTekiyoTodokedeYMD());
+        entity.set開始年月日データ_前(taJushochiTokureiShayouhou.getNyushoYMD());
         entity.set異動情報データ4(適用削除);
     }
 
     private void set解除削除情報(JyukiRendoJouhouEntity entity,
-            TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhouentity) {
-        entity.set喪失情報_前_事由(taJushochiTokureiShayouhouentity.getIdoJiyuCode());
-        entity.set喪失情報_前_異動年月日(taJushochiTokureiShayouhouentity.getKaijoYMD());
-        entity.set喪失情報_前_届出年月日(taJushochiTokureiShayouhouentity.getKaijoTodokedeYMD());
-        entity.set終了年月日データ_前(taJushochiTokureiShayouhouentity.getTaishoYMD());
+            TaJushochiTokureiShayouhouEntity taJushochiTokureiShayouhou) {
+        entity.set喪失情報_前_事由(taJushochiTokureiShayouhou.getIdoJiyuCode());
+        entity.set喪失情報_前_異動年月日(taJushochiTokureiShayouhou.getKaijoYMD());
+        entity.set喪失情報_前_届出年月日(taJushochiTokureiShayouhou.getKaijoTodokedeYMD());
+        entity.set終了年月日データ_前(taJushochiTokureiShayouhou.getTaishoYMD());
         entity.set異動情報データ4(解除削除);
     }
 

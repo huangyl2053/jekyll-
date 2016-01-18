@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 住基連動登録者リスト帳票用データリストEntity
+ * 住基連動登録者リスト帳票用データリストEntity。
  */
 @lombok.Getter
 @lombok.Setter

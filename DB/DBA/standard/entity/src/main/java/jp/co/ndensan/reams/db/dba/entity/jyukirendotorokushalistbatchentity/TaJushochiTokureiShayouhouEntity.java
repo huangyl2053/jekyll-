@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 他住所地特例者情報Entity
+ * 他住所地特例者情報Entity。
  */
 @lombok.Getter
 @lombok.Setter

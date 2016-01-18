@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- * 住基連動登録者リストのMyBatisパラメータ
+ * 住基連動登録者リストのMyBatisパラメータ。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
@@ -21,7 +21,7 @@ public class JyukiRendoTorokushaListBatchMybatisParameter implements IMyBatisPar
     private final RString loginId;
 
     /**
-     * コンストラクタ
+     * コンストラクタ。
      *
      * @param konkaikaishiYMDHMS 今回開始日時
      * @param konkaishuryoYMDHMS 今回終了日時

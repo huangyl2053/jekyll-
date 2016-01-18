@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 住基連動情報Entity
+ * 住基連動情報Entity。
  */
 @lombok.Getter
 @lombok.Setter

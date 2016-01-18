@@ -91,7 +91,7 @@ public class jukinentotoroku {
     }
 
     /**
-     * 住基連動登録者リスト作成
+     * 住基連動登録者リスト作成。
      *
      * @param div バッチパラメータ情報Div
      * @return 住基連動登録者リスト
