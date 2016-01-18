@@ -10,8 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.AkasiHakouKanriEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.AkasiHakouKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihohenshashoHakkoKanriboChohyoDataSakuseiEntity;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.NarabiJunType;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.NextPageType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.ShoYoshikiKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -55,16 +53,16 @@ public final class HihohenshashoHakkoKanriboChohyoDataSakusei {
         chohyoDataEntity.set市町村コード(relateEntityList.getShichosonCode());
         chohyoDataEntity.set市町村名(relateEntityList.getShichosonMeisho());
         // TODO ソート順/改頁　技術点問題あり。   2016/01/20まで。
-        chohyoDataEntity.setソート順１(NarabiJunType.toValue(relateEntityList.getSortJun()).toRString());
+        //chohyoDataEntity.setソート順１(NarabiJunType.toValue(relateEntityList.getSortJun()).toRString());
         chohyoDataEntity.setソート順２(RString.EMPTY);
         chohyoDataEntity.setソート順３(RString.EMPTY);
         chohyoDataEntity.setソート順４(RString.EMPTY);
         chohyoDataEntity.setソート順５(RString.EMPTY);
-        if (NextPageType.委託先コード.code().equals(relateEntityList.getKayiPeji())) {
-            chohyoDataEntity.set改頁１(改頁);
-        } else {
-            chohyoDataEntity.set改頁１(RString.EMPTY);
-        }
+//        if (NextPageType.委託先コード.code().equals(relateEntityList.getKayiPeji())) {
+//            chohyoDataEntity.set改頁１(改頁);
+//        } else {
+//            chohyoDataEntity.set改頁１(RString.EMPTY);
+//        }
         chohyoDataEntity.set改頁２(RString.EMPTY);
         chohyoDataEntity.set改頁３(RString.EMPTY);
         chohyoDataEntity.set改頁４(RString.EMPTY);
