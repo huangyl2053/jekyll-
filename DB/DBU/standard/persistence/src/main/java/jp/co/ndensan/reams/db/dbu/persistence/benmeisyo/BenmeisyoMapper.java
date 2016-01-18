@@ -16,7 +16,19 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
  */
 public interface BenmeisyoMapper {
 
+    /**
+     * 弁明情報を検索です。
+     *
+     * @param 検索条件 弁明情報パラメータ
+     * @return BenmeiJohoResultEntity
+     */
     BenmeiJohoResultEntity getBenmeijoho(BenmeisyoMapperParameter 検索条件);
 
+    /**
+     * 宛名識別対象PSMを検索です。
+     *
+     * @param param 宛名識別対象PSMパラメータ
+     * @return UaFt200FindShikibetsuTaishoEntity
+     */
     UaFt200FindShikibetsuTaishoEntity selectAtena(BenmeiAtenaParameter param);
 }

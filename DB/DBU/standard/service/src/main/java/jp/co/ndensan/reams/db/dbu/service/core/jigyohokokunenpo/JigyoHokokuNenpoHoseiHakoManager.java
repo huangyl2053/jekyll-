@@ -86,6 +86,15 @@ public class JigyoHokokuNenpoHoseiHakoManager {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link JigyoHokokuNenpoHoseiHakoManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link JigyoHokokuNenpoHoseiHakoManager}のインスタンス
+     */
+    public static JigyoHokokuNenpoHoseiHakoManager createInstance() {
+        return new JigyoHokokuNenpoHoseiHakoManager();
+    }
+
+    /**
      * 市町村コード、名称リストを取得します。
      *
      * @return 市町村Entiyリスト

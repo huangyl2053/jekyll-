@@ -41,6 +41,16 @@ public class ChohyoBunruiKanriManager {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link ChohyoBunruiKanriManager}のインスタンスを返します。
+     *
+     *
+     * @return ChohyoBunruiKanriManager
+     */
+    public static ChohyoBunruiKanriManager createInstance() {
+        return InstanceProvider.create(ChohyoBunruiKanriManager.class);
+    }
+
+    /**
      * 主キーに合致する帳票分類管理を返します。
      *
      * @param サブ業務コード SubGyomuCode

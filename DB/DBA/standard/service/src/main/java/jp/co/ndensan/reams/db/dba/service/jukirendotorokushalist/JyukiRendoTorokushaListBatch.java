@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.service.jukirendotorokushalist;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.report.jyukirendotorokushalistbatchentity.JukiRendoTorokuListItem;
+import jp.co.ndensan.reams.db.dba.business.report.jukirendotorokulist.JukiRendoTorokuListItem;
 import jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity.JyukiRendoJouhouEntity;
 import jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity.JyukiRendoTorokushaListBatchEntity;
 import jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity.JyukiRendoTorokushaListTyouHyouListEntity;
@@ -24,10 +24,10 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class JyukiRendoTorokushaListBatch {
 
     private static final RString 印刷時刻 = new RString("   時  分  秒");
-    private static final int ページ数 = 0;
+    private static final RString 被保険者氏名 = new RString("該当データがありません");
 
     /**
-     * 帳票データ作成
+     * 帳票データを作成します。
      *
      * @param entity 住基連動登録者リストEntity
      * @return JyukiRendoTorokushaListTyouHyouListEntity
@@ -38,13 +38,10 @@ public class JyukiRendoTorokushaListBatch {
         RDate nowDate = RDate.getNowDate();
         RString 印刷日時 = nowDate.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-
         for (JyukiRendoJouhouEntity jyukiRendoJouhouEntity : entity.get住基連動情報()) {
             JyukiRendoTorokushaListTyouHyouListEntity jyukiRendoTorokushaListTyouHyouListEntity
                     = new JyukiRendoTorokushaListTyouHyouListEntity();
             jyukiRendoTorokushaListTyouHyouListEntity.set印刷日時(new RString(印刷日時.toString() + 印刷時刻.toString()));
-            jyukiRendoTorokushaListTyouHyouListEntity.setページ数(new RString(String.valueOf(ページ数 + 1)));
-            jyukiRendoTorokushaListTyouHyouListEntity.set帳票タイトル(new RString("住基連動登録者リスト"));
             jyukiRendoTorokushaListTyouHyouListEntity.set市町村コード(new RString(entity.get市町村コード().toString()));
             jyukiRendoTorokushaListTyouHyouListEntity.set市町村名(entity.get市町村名());
             jyukiRendoTorokushaListTyouHyouListEntity.set並び順１(entity.get並び順_1());
@@ -54,8 +51,7 @@ public class JyukiRendoTorokushaListBatch {
             jyukiRendoTorokushaListTyouHyouListEntity.set並び順５(entity.get並び順_5());
             if (jyukiRendoJouhouEntity.get識別コード() == null) {
                 set帳票データ作成用Entityの部分項目(jyukiRendoTorokushaListTyouHyouListEntity, jyukiRendoJouhouEntity);
-                jyukiRendoTorokushaListTyouHyouListEntity.setリスト下_被保険者氏名(
-                        new RString("該当データがありません"));
+                jyukiRendoTorokushaListTyouHyouListEntity.setリスト下_被保険者氏名(被保険者氏名);
             } else {
                 set帳票データ作成用Entityの部分項目(jyukiRendoTorokushaListTyouHyouListEntity, jyukiRendoJouhouEntity);
                 if (jyukiRendoJouhouEntity.get被保険者氏名() != null) {
@@ -65,7 +61,7 @@ public class JyukiRendoTorokushaListBatch {
             }
             JukiRendoTorokuListItem jukiRendoTorokuListItem = new JukiRendoTorokuListItem(
                     jyukiRendoTorokushaListTyouHyouListEntity.get印刷日時(),
-                    jyukiRendoTorokushaListTyouHyouListEntity.get帳票タイトル(),
+                    jyukiRendoTorokushaListTyouHyouListEntity.get対象情報タイトル(),
                     jyukiRendoTorokushaListTyouHyouListEntity.get市町村コード(),
                     jyukiRendoTorokushaListTyouHyouListEntity.get市町村名(),
                     jyukiRendoTorokushaListTyouHyouListEntity.get並び順１(),
@@ -117,20 +113,12 @@ public class JyukiRendoTorokushaListBatch {
                     jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_区分(),
                     jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_異動情報4(),
                     jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_異動情報5(),
-                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_異動情報6(),
-                    jyukiRendoTorokushaListTyouHyouListEntity.getページ数(),
-                    jyukiRendoTorokushaListTyouHyouListEntity.get対象情報タイトル());
+                    jyukiRendoTorokushaListTyouHyouListEntity.getリスト下_異動情報6());
             list.add(jukiRendoTorokuListItem);
         }
         return list;
     }
 
-    /**
-     * 帳票データ作成用Entityの部分項目を設定します
-     *
-     * @param jyukiRendoTorokushaListTyouHyouListEntity 住基連動登録者リスト帳票用データリストEntity
-     * @param jyukiRendoJouhouEntity 住基連動情報Entity
-     */
     private void set帳票データ作成用Entityの部分項目(
             JyukiRendoTorokushaListTyouHyouListEntity jyukiRendoTorokushaListTyouHyouListEntity,
             JyukiRendoJouhouEntity jyukiRendoJouhouEntity) {

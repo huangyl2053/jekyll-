@@ -9,9 +9,6 @@ import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosatokusok
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.DbeBusinessConfigKey;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2230001.NinteiChosaTokusokujoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -47,6 +44,7 @@ public class NinteiChosaTokusokujoHakkoHandler {
      */
     public void onLoad() {
         initializtion();
+        onChange_radChohyo();
     }
 
     /**
@@ -73,10 +71,8 @@ public class NinteiChosaTokusokujoHakkoHandler {
      */
     public NinteiChosaTokusokujoHakkoTempData getTempData() {
         NinteiChosaTokusokujoHakkoTempData tempData = new NinteiChosaTokusokujoHakkoTempData();
-        //TODO 保険者
-        tempData.setTemp_保険者コード(RString.EMPTY);
-        //TODO 保険者
-        tempData.setTemp_保険者名称(RString.EMPTY);
+        tempData.setTemp_保険者コード(div.getCcdHokensha().getSelectedItem().get保険者区分().getコード());
+        tempData.setTemp_保険者名称(div.getCcdHokensha().getSelectedItem().get保険者区分().get名称());
         tempData.setTemp_認定調査委託先コード(div.getYokaigoNinteiChosaTokusokujo().getCcdItakusakiAndChosain().getChosaItakusakiCode());
         tempData.setTemp_認定調査員コード(div.getYokaigoNinteiChosaTokusokujo().getCcdItakusakiAndChosain().getChosain());
         tempData.setTemp_基準日(div.getYokaigoNinteiChosaTokusokujo().getTxtKijunDay().getValue());
@@ -96,12 +92,19 @@ public class NinteiChosaTokusokujoHakkoHandler {
         tempData.setTemp_督促日(div.getYokaigoNinteiChosaTokusokujo().getTxtHakkoDay().getValue());
         tempData.setTemp_印刷期間開始日(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getFromValue());
         tempData.setTemp_印刷期間終了日(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getToValue());
-        tempData.setTemp_出力順(((ChohyoShutsuryokujunDiv) div.getCcdChohyoShutsuryokujun()).getTxtSort().getValue());
-        tempData.setTemp_集計(((ChohyoShutsuryokujunDiv) div.getCcdChohyoShutsuryokujun()).getTxtShukei().getValue());
-        tempData.setTemp_改頁(((ChohyoShutsuryokujunDiv) div.getCcdChohyoShutsuryokujun()).getTxtKaiPage().getValue());
         tempData.setTemp_印刷書類区分(div.getHakkoJoken().getRadChohyoSentaku().getSelectedKey().equals(RADIOBUTTONKEY0)
                 ? 印刷書類区分_要介護認定調査督促状 : 印刷書類区分_認定調査督促状対象者一覧);
         return tempData;
+    }
+
+    public void onChange_radChohyo() {
+        if (RADIOBUTTONKEY0.equals(div.getHakkoJoken().getRadChohyoSentaku().getSelectedKey())) {
+            div.getYokaigoNinteiChosaTokusokujo().setDisplayNone(false);
+            div.getNinteiChosaTokusokuTaishoshaIchiranhyo().setDisplayNone(true);
+        } else {
+            div.getYokaigoNinteiChosaTokusokujo().setDisplayNone(true);
+            div.getNinteiChosaTokusokuTaishoshaIchiranhyo().setDisplayNone(false);
+        }
     }
 
     private void initializtion() {
@@ -110,9 +113,7 @@ public class NinteiChosaTokusokujoHakkoHandler {
         if (Decimal.canConvert(認定調査督促期限日数)) {
             div.getYokaigoNinteiChosaTokusokujo().getTxtOverChosaIraiDay().setValue(new Decimal(認定調査督促期限日数.toString()));
         }
-        //TODO 保険者
-        ShichosonSecurityJoho securityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-
+        div.getCcdHokensha().loadHokenshaList();
         div.getHakkoJoken().getRadChohyoSentaku().setSelectedKey(RADIOBUTTONKEY0);
         div.getYokaigoNinteiChosaTokusokujo().getTxtHakkoDay().setValue(FlexibleDate.getNowDate());
     }

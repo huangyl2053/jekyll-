@@ -15,11 +15,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- * 被保険者証一括発行のMyBatisパラメータ
+ * 被保険者証一括発行のMyBatisパラメータです。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 public final class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
+
+    public static IkkatsuHakkoMybatisParameter createSelectByKeyParam(RString chushutsuFlag, RString shutsuryokuFlag, RString shutsuryokujunId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     private final RString shutsuryokuJokenCode;
     private final RDateTime konkaiFromYMDHMS;

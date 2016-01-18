@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 主治医医療機関情報を管理するクラスです
+ * 主治医医療機関情報を管理するクラスです。
  *
  */
 public class KoseiShujiiIryoKikanMasterFinder {

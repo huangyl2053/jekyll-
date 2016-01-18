@@ -56,6 +56,11 @@ public class NinteiChosaTokusokujoHakko {
         }
     }
 
+    public ResponseData<NinteiChosaTokusokujoHakkoDiv> onChange_radChohyo(NinteiChosaTokusokujoHakkoDiv div) {
+        getHandler(div).onChange_radChohyo();
+        return ResponseData.of(div).respond();
+    }
+
     /**
      * 「発行する」ボタンをクリックの設定します。
      *

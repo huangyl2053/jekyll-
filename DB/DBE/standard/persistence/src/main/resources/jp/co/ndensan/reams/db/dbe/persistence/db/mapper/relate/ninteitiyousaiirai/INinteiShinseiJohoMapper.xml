@@ -41,9 +41,9 @@
         COUNT(0)
         FROM
         ((rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
-        INNER JOIN rgdb."DbT5051KoseiShichosonMaster" AS DbT5051
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
         ON
-        DbT5051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+        DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
         INNER JOIN
         (
         SELECT
@@ -85,8 +85,8 @@
         <if test="temp_ninteiChosainCode_isNotEmpty" >
             AND TB3."ninteiChosainCode" = #{temp_ninteiChosainCode}
         </if>
-        AND TB3."shoriJotaiKubun" != '却下'
-        AND TB3."shoriJotaiKubun" != '取下'
+        AND TB3."shoriJotaiKubun" != '2'
+        AND TB3."shoriJotaiKubun" != '1'
     </select>
 
     <select id="countGaitouDataKenSu2" resultType="int" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosatokusokujohakko.CountGaitouDataKenSu2Parameter" fetchSize="500">
@@ -94,12 +94,12 @@
         COUNT(0)
         FROM
         (rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
-        INNER JOIN rgdb."DbT5051KoseiShichosonMaster" AS DbT5051
-        ON DbT5051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
+        ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
         INNER JOIN
         (
         SELECT
-        T5201."shinseishoKanriNo"
+        T5201."shinseishoKanriNo",
         MAX(T5201."ninteichosaIraiRirekiNo")
         FROM
         rgdb."DbT5201NinteichosaIraiJoho" AS T5201
@@ -148,7 +148,7 @@
         <if test="temp_ninteiChosainCode_isNotEmpty">
             AND TB2."ninteiChosainCode" = #{temp_ninteiChosainCode}
         </if>
-        AND TB2."shoriJotaiKubun" != '却下'
-        AND TB2."shoriJotaiKubun" != '取下'
+        AND TB2."shoriJotaiKubun" != '2'
+        AND TB2."shoriJotaiKubun" != '1'
     </select>
 </mapper>

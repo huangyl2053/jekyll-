@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * 事業報告年報詳細データの更新処理のMyBatisパラメタークラスです。
  *
  */
+@lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class JigyoHokokuNenpoUpdateParameter {
 
     private final FlexibleYear hokokuYSeireki;
@@ -45,57 +47,25 @@ public class JigyoHokokuNenpoUpdateParameter {
         this.shukeiKekkaAtai = shukeiKekkaAtai;
     }
 
+    /**
+     * 事業報告年報詳細データの更新処理のパラメターを生成します。
+     *
+     * @param 報告年 報告年
+     * @param 報告月 報告月
+     * @param 集計対象年 集計対象年
+     * @param 集計対象月 集計対象月
+     * @param 統計対象区分 統計対象区分
+     * @param 市町村コード 市町村コード
+     * @param 表番号 表番号
+     * @param 集計番号 集計番号
+     * @param 集計単位 集計単位
+     * @param 縦番号 縦番号
+     * @param 横番号 横番号
+     * @param 集計結果値 集計結果値
+     * @return JigyoHokokuNenpoUpdateParameter 事業報告年報詳細データの更新処理のパラメター
+     */
     public static JigyoHokokuNenpoUpdateParameter createParameterForJigyoHokokuNenpo(
             FlexibleYear 報告年, RString 報告月, FlexibleYear 集計対象年, RString 集計対象月, RString 統計対象区分, LasdecCode 市町村コード, Code 表番号, Code 集計番号, Code 集計単位, Decimal 縦番号, Decimal 横番号, Decimal 集計結果値) {
         return new JigyoHokokuNenpoUpdateParameter(報告年, 報告月, 集計対象年, 集計対象月, 統計対象区分, 市町村コード, 表番号, 集計番号, 集計単位, 縦番号, 横番号, 集計結果値);
     }
-
-    public FlexibleYear getHokokuYSeireki() {
-        return hokokuYSeireki;
-    }
-
-    public RString getHokokuM() {
-        return hokokuM;
-    }
-
-    public FlexibleYear getShukeiTaishoYSeireki() {
-        return shukeiTaishoYSeireki;
-    }
-
-    public RString getShukeiTaishoM() {
-        return shukeiTaishoM;
-    }
-
-    public RString getToukeiTaishoKubun() {
-        return toukeiTaishoKubun;
-    }
-
-    public LasdecCode getShichosonCode() {
-        return shichosonCode;
-    }
-
-    public Code getHyoNo() {
-        return hyoNo;
-    }
-
-    public Code getShukeiNo() {
-        return shukeiNo;
-    }
-
-    public Code getShukeiTani() {
-        return shukeiTani;
-    }
-
-    public Decimal getTateNo() {
-        return tateNo;
-    }
-
-    public Decimal getYokoNo() {
-        return yokoNo;
-    }
-
-    public Decimal getShukeiKekkaAtai() {
-        return shukeiKekkaAtai;
-    }
-
 }

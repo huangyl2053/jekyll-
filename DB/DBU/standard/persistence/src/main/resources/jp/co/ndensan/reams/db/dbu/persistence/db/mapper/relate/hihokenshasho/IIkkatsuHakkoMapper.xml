@@ -140,7 +140,7 @@ and open the template in the editor.
         <result property="nijiHanteiKekkaInputHoho" column="nijiHanteiKekkaInputHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="niniHanteiKekkaInputYMD" column="niniHanteiKekkaInputYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
-        <!--        <result property="kanriKubun" column="kanriKubun" typeHandler=""/>-->
+        <result property="kanriKubun" column="kanriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="torokuKubun" column="torokuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tekiyoKaishiYMD" column="tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="tekiyoShuryoYMD" column="tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -820,6 +820,14 @@ and open the template in the editor.
             AND "kaijoYMD" <![CDATA[<=]]> #{nenreiTotatsuYMD})DbT1003
         WHERE
             rank_number = 1
+    </select>
+    
+    <!--取得した対象データは「転入保留対象者」テーブルに存在しない者が対象を取得します-->
+    <select id="get転入保留対象者" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
+        SELECT
+            "shikibetsuCode"
+        FROM
+            rgdb."DbT1010TennyushutsuHoryuTaishosha"
     </select>
     
     <!--チェック用データの処理-->

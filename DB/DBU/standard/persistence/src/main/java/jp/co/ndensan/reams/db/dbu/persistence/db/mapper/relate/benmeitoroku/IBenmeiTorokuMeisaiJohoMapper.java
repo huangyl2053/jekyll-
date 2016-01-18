@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.benmeitoroku.BenmeiTorokuMeis
 public interface IBenmeiTorokuMeisaiJohoMapper {
 
     /**
-     * 弁明登録明細情報を条件指定検索で複数件取得します。
+     * 弁明登録明細情報を取得します。
      *
      * @param mapperParameter 弁明登録明細情報パラメータ
      * @return BenmeiTorokuMeisaiJohoEntity

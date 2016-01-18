@@ -65,13 +65,13 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
         set出力順ソート();
         List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> 帳票データlist 
                 =  is帳票データ作成(is広域内住所地特例者一覧表情報Entity作成(get広域内住所地特例者情報()));
-        // TODO 帳票仕様とフォームファイルがありません
+        // TODO QA 440 董亜彬 帳票仕様とフォームファイルがありません
         
     }
     
     @Override
     protected void afterExecute() {
-        // TODO 
+        // TODO QA 440 董亜彬 帳票仕様とフォームファイルがありません
     }
     
     private List<KoikinaiJushochiTokureiEntity> get広域内住所地特例者情報() {
@@ -106,7 +106,7 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
     
     private RString getPsmParamter(RString hanteiFlag) {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先), true);
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         if (直近.equals(hanteiFlag)) {
             key.setデータ取得区分(DataShutokuKubun.直近レコード);
         } else if (基準日.equals(hanteiFlag) || 範囲.equals(hanteiFlag)) {
@@ -149,9 +149,9 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
             広域内住所地特例者Entity.set取得日(nullToEmtiy(entity.getShikakuShutokuYMD()));
             広域内住所地特例者Entity.set取得届出日(nullToEmtiy(entity.getShikakuShutokuTodokedeYMD()));
             広域内住所地特例者Entity.set喪失日(nullToEmtiy(entity.getShikakuSoshitsuYMD()));
-            広域内住所地特例者Entity.set広住喪失届出日(nullToEmtiy(entity.getShikakuSoshitsuTodokedeYMD()));
+            広域内住所地特例者Entity.set喪失届出日(nullToEmtiy(entity.getShikakuSoshitsuTodokedeYMD()));
             広域内住所地特例者Entity.set資格区分(entity.getHihokennshaKubunCode());
-            広域内住所地特例者Entity.set住特(entity.getKoikinaiJushochiTokureiFlag());
+            広域内住所地特例者Entity.set住特(entity.getJushochiTokureiFlag());
             広域内住所地特例者Entity.set識別コード(entity.getShikibetsuCode().getColumnValue());
             広域内住所地特例者Entity.set氏名(ShikibetsuTaishoFactory
                     .createKojin(entity.getFt200Entity()).get名称().getName().getColumnValue());
@@ -185,19 +185,19 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
                         new RString(entity.getShikakuShutokuYMD().toString())));
         if (広域特解除情報 != null
                 && new FlexibleDate(paramter.getIdoYMD()).isBefore(広域特解除情報.getIdoYMD())) {
-            if (entity.getIdoJiyuCode().equals(entity.getShikakuSoshitsuJiyuCode())) {
-                広域内住所地特例者Entity.set広住喪失日(new RString(entity.getShikakuSoshitsuYMD().toString()));
-                広域内住所地特例者Entity.set広住喪失届出日(new RString(entity.getShikakuSoshitsuTodokedeYMD().toString()));
+            if (広域特解除情報.getIdoJiyuCode().equals(広域特解除情報.getShikakuSoshitsuJiyuCode())) {
+                広域内住所地特例者Entity.set広住喪失日(nullToEmtiy(entity.getShikakuSoshitsuYMD()));
+                広域内住所地特例者Entity.set広住喪失届出日(nullToEmtiy(entity.getShikakuSoshitsuTodokedeYMD()));
             } 
-            if (entity.getIdoJiyuCode().equals(entity.getShikakuHenkoJiyuCode())) {
-                広域内住所地特例者Entity.set広住喪失日(new RString(entity.getShikakuHenkoYMD().toString()));
-                広域内住所地特例者Entity.set広住喪失届出日(new RString(entity.getShikakuHenkoTodokedeYMD().toString()));
+            if (広域特解除情報.getIdoJiyuCode().equals(広域特解除情報.getShikakuHenkoJiyuCode())) {
+                広域内住所地特例者Entity.set広住喪失日(nullToEmtiy(entity.getShikakuHenkoYMD()));
+                広域内住所地特例者Entity.set広住喪失届出日(nullToEmtiy(entity.getShikakuHenkoTodokedeYMD()));
             }
         }
     }
     
     private void set並び順と改頁() {
-        // TODO 董亜彬　出力順取得方針不明、課題提出中
+        // TODO　QA：#73393 董亜彬　出力順取得方針不明、課題提出中
     }
     
     private void get市町村コードと市町村名称() {
@@ -216,7 +216,7 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
         return new KoikinaiJushochiTokureiItiranEntity(並び順, 改頁, 市町村コード, 市町村名称, entityList);
     }
     private void set出力順ソート() {
-        // TODO 董亜彬　出力順取得方針不明、課題提出中
+        // TODO　QA：#73393 董亜彬　出力順取得方針不明、課題提出中
     }
     
     private RString nullToEmtiy(Object obj) {

@@ -41,8 +41,7 @@ public class BenmeiTorokuPanelHandler {
             if (benmeiTorokuMeisaiJoho != null) {
                 panelDiv.setProcessState(状態_修正);
                 get画面初期の更新モードの表示制御();
-                get弁明登録明細情報のnull処理1(benmeiTorokuMeisaiJoho);
-                get弁明登録明細情報のnull処理2(benmeiTorokuMeisaiJoho);
+                get弁明登録明細情報のnull処理(benmeiTorokuMeisaiJoho);
             } else {
                 panelDiv.setProcessState(状態_追加);
                 get画面初期の更新モードの表示制御();
@@ -55,8 +54,7 @@ public class BenmeiTorokuPanelHandler {
         } else if (viewState.equals(状態_削除)) {
             panelDiv.setProcessState(状態_削除);
             get画面初期の削除モードの表示制御();
-            get弁明登録明細情報のnull処理1(benmeiTorokuMeisaiJoho);
-            get弁明登録明細情報のnull処理2(benmeiTorokuMeisaiJoho);
+            get弁明登録明細情報のnull処理(benmeiTorokuMeisaiJoho);
         }
     }
 
@@ -76,7 +74,7 @@ public class BenmeiTorokuPanelHandler {
         panelDiv.getBenmeiTorokuMeisaiPanel().getTxtDateBenmeisyoTeishutubi().setDisabled(true);
     }
 
-    private void get弁明登録明細情報のnull処理1(BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho) {
+    private void get弁明登録明細情報のnull処理(BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho) {
         if (benmeiTorokuMeisaiJoho.getBemmeishoSakuseiYMD() == null) {
             panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().clearValue();
         } else {
@@ -94,9 +92,6 @@ public class BenmeiTorokuPanelHandler {
             panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineShobunNaiyo().setValue(
                     benmeiTorokuMeisaiJoho.getShinsaseikyuKankeiShobunNaiyo());
         }
-    }
-
-    private void get弁明登録明細情報のnull処理2(BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho) {
         if (benmeiTorokuMeisaiJoho.getBemmeiNaiyo() == null) {
             panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeiNaiyo().setValue(RString.EMPTY);
         } else {

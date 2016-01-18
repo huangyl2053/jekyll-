@@ -5,13 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbu.service.core.benmeitoroku;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.benmeitoroku.BenmeiTorokuMeisaiJoho;
 import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.benmeitoroku.BenmeiTorokuMeisaiJohoParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.benmeitoroku.BenmeiTorokuMeisaiJohoEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.benmeitoroku.IBenmeiTorokuMeisaiJohoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.BemmeiNaiyo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.BemmeishaJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.FufukuMoshitate;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity;
@@ -23,7 +25,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -65,10 +67,9 @@ public class BenmeiTorokuManager {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link RoujinHokenJukyushaDaichoKanriMapperParameter}のインスタンスを返します。
+     * クラスをcreateメソッドです
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link RoujinHokenJukyushaDaichoKanriMapperParameter}のインスタンス
+     * @return　弁明登録情報の取得処理するクラス
      */
     public static BenmeiTorokuManager createInstance() {
         return InstanceProvider.create(BenmeiTorokuManager.class);
@@ -78,19 +79,19 @@ public class BenmeiTorokuManager {
      * 弁明登録明細情報の取得処理を行うです。
      *
      * @param 識別コード ShikibetsuCode
-     * @param 原処分被保険者番号 HihokenshaNo
+     * @param 被保険者番号 HihokenshaNo
      * @param 審査請求届出日 FlexibleDate
      * @return BenmeiTorokuMeisaiJoho
      */
     @Transaction
     public BenmeiTorokuMeisaiJoho getBenmeiTorokuMeisaiJoho(
             ShikibetsuCode 識別コード,
-            HihokenshaNo 原処分被保険者番号,
+            HihokenshaNo 被保険者番号,
             FlexibleDate 審査請求届出日
     ) {
         IBenmeiTorokuMeisaiJohoMapper benmeiTorokuMapper = mapperProvider.create(IBenmeiTorokuMeisaiJohoMapper.class);
         BenmeiTorokuMeisaiJohoEntity benmeiTorokuMeisaiJohoEntity
-                = benmeiTorokuMapper.getBenmeiTorokuMeisaiJoho(BenmeiTorokuMeisaiJohoParameter.createParam_common(識別コード, 原処分被保険者番号, 審査請求届出日));
+                = benmeiTorokuMapper.getBenmeiTorokuMeisaiJoho(BenmeiTorokuMeisaiJohoParameter.createParam_common(識別コード, 被保険者番号, 審査請求届出日));
         if (benmeiTorokuMeisaiJohoEntity != null) {
             return new BenmeiTorokuMeisaiJoho(benmeiTorokuMeisaiJohoEntity);
         }
@@ -98,255 +99,189 @@ public class BenmeiTorokuManager {
     }
 
     /**
-     * 弁明登録情報の登録処理を行うです。
+     * 不服審査申立情報の取得処理を行うです。
      *
      * @param 識別コード ShikibetsuCode
-     * @param 弁明書提出日 FlexibleDate
-     * @param 原処分被保険者番号 HihokenshaNo
-     * @param 弁明内容 RString
+     * @param 被保険者番号 HihokenshaNo
      * @param 審査請求届出日 FlexibleDate
-     * @param 審査請求に係る処分内容 RString
-     * @param 弁明書作成日 FlexibleDate
-     * @param 弁明者 RString
-     * @return RString
+     * @return FufukuMoshitate
      */
     @Transaction
-    public boolean insBenmeiTorokuJoho(
+    public FufukuMoshitate getFufukuMoshitate(
             ShikibetsuCode 識別コード,
-            HihokenshaNo 原処分被保険者番号,
-            FlexibleDate 審査請求届出日,
-            FlexibleDate 弁明書作成日,
-            RString 弁明者,
-            RString 審査請求に係る処分内容,
-            RString 弁明内容,
-            FlexibleDate 弁明書提出日
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 審査請求届出日
     ) {
-        boolean blnDbT7001 = getFufukuMoshitateINS(識別コード, 原処分被保険者番号, 審査請求届出日, 弁明書作成日);
-        boolean blnDbT7002
-                = getBemmeiNaiyoINS(識別コード, 原処分被保険者番号, 審査請求届出日, 弁明書作成日, 審査請求に係る処分内容, 弁明内容, 弁明書提出日);
-        boolean blnDbT7003 = getBemmeishaJohoINS(識別コード, 原処分被保険者番号, 審査請求届出日, 弁明書作成日, 弁明者);
+        DbT7001FufukuMoshitateEntity entity = dbT7001FufukuMoshitateDac.selectByKey(識別コード, 被保険者番号, 審査請求届出日);
+        if (entity == null) {
+            return null;
+        }
+        return new FufukuMoshitate(entity);
+    }
+
+    /**
+     * 弁明内容情報の取得処理を行うです。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @param 被保険者番号 HihokenshaNo
+     * @param 審査請求届出日 FlexibleDate
+     * @param 弁明書作成日 FlexibleDate
+     * @return BenmeiTorokuMeisaiJoho
+     */
+    @Transaction
+    public BemmeiNaiyo getBenmeiNaiyo(
+            ShikibetsuCode 識別コード,
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 審査請求届出日,
+            FlexibleDate 弁明書作成日
+    ) {
+        DbT7002BemmeiNaiyoEntity entity = dbT7002BemmeiNaiyoDac.selectByKey(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
+        if (entity == null) {
+            return null;
+        }
+        return new BemmeiNaiyo(entity);
+    }
+
+    /**
+     * 弁明者情報の取得処理を行うです。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @param 被保険者番号 HihokenshaNo
+     * @param 審査請求届出日 FlexibleDate
+     * @param 弁明書作成日 FlexibleDate
+     * @return BemmeishaJoho
+     */
+    @Transaction
+    public BemmeishaJoho getBenmeishaJoho(
+            ShikibetsuCode 識別コード,
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 審査請求届出日,
+            FlexibleDate 弁明書作成日
+    ) {
+        DbT7003BemmeishaJohoEntity entity = dbT7003BemmeishaJohoDac.selectByKey(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日, new Decimal(1));
+        if (entity == null) {
+            return null;
+        }
+        return new BemmeishaJoho(entity);
+    }
+
+    /**
+     * 弁明登録情報の登録処理を行うです。
+     *
+     * @param fufukuMoshitate 不服審査申立情報
+     * @param bemmeiNaiyo 弁明内容
+     * @param bemmeishaJoho 弁明者情報
+     * @return boolean
+     */
+    @Transaction
+    public boolean insBenmeiTorokuJoho(FufukuMoshitate fufukuMoshitate, BemmeiNaiyo bemmeiNaiyo, BemmeishaJoho bemmeishaJoho) {
+        boolean blnDbT7001 = getFufukuMoshitateINS(fufukuMoshitate);
+        boolean blnDbT7002 = getBemmeiNaiyoINS(bemmeiNaiyo);
+        boolean blnDbT7003 = getBemmeishaJohoINS(bemmeishaJoho);
         return blnDbT7001 && blnDbT7002 && blnDbT7003;
     }
 
-    private boolean getFufukuMoshitateINS(
-            ShikibetsuCode 識別コード,
-            HihokenshaNo 原処分被保険者番号,
-            FlexibleDate 審査請求届出日,
-            FlexibleDate 弁明書作成日) {
-        DbT7001FufukuMoshitateEntity dbT7001FufukuMoshitateEntity
-                = dbT7001FufukuMoshitateDac.selectByKey(識別コード, 原処分被保険者番号, 審査請求届出日);
-        int 戻る値 = 0;
-        if (dbT7001FufukuMoshitateEntity == null) {
-            DbT7001FufukuMoshitateEntity fufukuMoshitateEntity = new DbT7001FufukuMoshitateEntity();
-            fufukuMoshitateEntity.setShikibetsuCode(識別コード);
-            fufukuMoshitateEntity.setGenshobunsHihokennshaNo(原処分被保険者番号);
-            fufukuMoshitateEntity.setShinsaSeikyuTodokedeYMD(審査請求届出日);
-            fufukuMoshitateEntity.setBemmeishoSakuseiYMD(弁明書作成日);
-            fufukuMoshitateEntity.setState(EntityDataState.Added);
-            戻る値 = dbT7001FufukuMoshitateDac.save(fufukuMoshitateEntity);
-        }
+    private boolean getFufukuMoshitateINS(FufukuMoshitate fufukuMoshitate) {
+        DbT7001FufukuMoshitateEntity fufukuMoshitateEntity = fufukuMoshitate.toEntity();
+        fufukuMoshitateEntity.setState(EntityDataState.Added);
+        int 戻る値 = dbT7001FufukuMoshitateDac.save(fufukuMoshitateEntity);
         return 戻る値 == 1;
     }
 
-    private boolean getBemmeiNaiyoINS(
-            ShikibetsuCode 識別コード,
-            HihokenshaNo 原処分被保険者番号,
-            FlexibleDate 審査請求届出日,
-            FlexibleDate 弁明書作成日,
-            RString 審査請求に係る処分内容,
-            RString 弁明内容,
-            FlexibleDate 弁明書提出日
-    ) {
-        DbT7002BemmeiNaiyoEntity dbT7002BemmeiNaiyoEntity = dbT7002BemmeiNaiyoDac.selectByKey(識別コード, 原処分被保険者番号, 審査請求届出日, 弁明書作成日);
-        int 戻る値 = 0;
-        if (dbT7002BemmeiNaiyoEntity == null) {
-            DbT7002BemmeiNaiyoEntity bemmeiNaiyoEntity = new DbT7002BemmeiNaiyoEntity();
-            bemmeiNaiyoEntity.setShikibetsuCode(識別コード);
-            bemmeiNaiyoEntity.setGenshobunHihokenshaNo(原処分被保険者番号);
-            bemmeiNaiyoEntity.setShinsaseikyuTodokedeYMD(審査請求届出日);
-            bemmeiNaiyoEntity.setBemmeishoSakuseiYMD(弁明書作成日);
-            bemmeiNaiyoEntity.setShichosonCode(get地方公共団体コード());
-            bemmeiNaiyoEntity.setShinsaseikyuKankeiShobunNaiyo(審査請求に係る処分内容);
-            bemmeiNaiyoEntity.setBemmeiNaiyo(弁明内容);
-            bemmeiNaiyoEntity.setBemmeishoTeishutsuYMD(弁明書提出日);
-            bemmeiNaiyoEntity.setState(EntityDataState.Added);
-            戻る値 = dbT7002BemmeiNaiyoDac.saveOrDelete(bemmeiNaiyoEntity);
-        }
+    private boolean getBemmeiNaiyoINS(BemmeiNaiyo bemmeiNaiyo) {
+        DbT7002BemmeiNaiyoEntity bemmeiNaiyoEntity = bemmeiNaiyo.toEntity();
+        bemmeiNaiyoEntity.setState(EntityDataState.Added);
+        int 戻る値 = dbT7002BemmeiNaiyoDac.saveOrDelete(bemmeiNaiyoEntity);
         return 戻る値 == 1;
     }
 
-    private boolean getBemmeishaJohoINS(
-            ShikibetsuCode 識別コード,
-            HihokenshaNo 原処分被保険者番号,
-            FlexibleDate 審査請求届出日,
-            FlexibleDate 弁明書作成日,
-            RString 弁明者) {
-        List<DbT7003BemmeishaJohoEntity> dbT7003BemmeishaJohoEntityList
-                = dbT7003BemmeishaJohoDac.selectGyomuToutokuByKey(識別コード, 原処分被保険者番号, 審査請求届出日, 弁明書作成日);
-        int 戻る値 = 0;
-        if (dbT7003BemmeishaJohoEntityList.isEmpty()) {
-            DbT7003BemmeishaJohoEntity bemmeishaJohoEntity = new DbT7003BemmeishaJohoEntity();
-            bemmeishaJohoEntity.setShikibetsuCode(識別コード);
-            bemmeishaJohoEntity.setGenshobunHihokenshaNo(原処分被保険者番号);
-            bemmeishaJohoEntity.setShinsaseikyuTodokedeYMD(審査請求届出日);
-            bemmeishaJohoEntity.setBemmeishoSakuseiYMD(弁明書作成日);
-            bemmeishaJohoEntity.setShichosonCode(get地方公共団体コード());
-            bemmeishaJohoEntity.setBemmeisha(弁明者);
-            bemmeishaJohoEntity.setState(EntityDataState.Added);
-            戻る値 = dbT7003BemmeishaJohoDac.saveOrDelete(bemmeishaJohoEntity);
-        }
+    private boolean getBemmeishaJohoINS(BemmeishaJoho bemmeishaJoho) {
+        DbT7003BemmeishaJohoEntity bemmeishaJohoEntity = bemmeishaJoho.toEntity();
+        bemmeishaJohoEntity.setState(EntityDataState.Added);
+        int 戻る値 = dbT7003BemmeishaJohoDac.saveOrDelete(bemmeishaJohoEntity);
         return 戻る値 == 1;
     }
 
     /**
      * 弁明登録情報の修正処理を行うです 。
      *
-     * @param 識別コード ShikibetsuCode
-     * @param 弁明書提出日 FlexibleDate
-     * @param 原処分被保険者番号 HihokenshaNo
-     * @param 弁明内容 RString
-     * @param 審査請求届出日 FlexibleDate
-     * @param 審査請求に係る処分内容 RString
-     * @param 弁明書作成日 FlexibleDate
-     * @param 弁明者 RString
-     * @return RString
+     * @param fufukuMoshitate 不服審査申立情報
+     * @param bemmeiNaiyo 弁明内容
+     * @param bemmeishaJoho 弁明者情報
+     * @return boolean
      */
     @Transaction
-    public boolean updBenmeiTorokuJoho(
-            ShikibetsuCode 識別コード,
-            HihokenshaNo 原処分被保険者番号,
-            FlexibleDate 審査請求届出日,
-            FlexibleDate 弁明書作成日,
-            RString 弁明者,
-            RString 審査請求に係る処分内容,
-            RString 弁明内容,
-            FlexibleDate 弁明書提出日
-    ) {
-        boolean blnDbT7001 = getFufukuMoshitateUPD(識別コード, 原処分被保険者番号, 審査請求届出日, 弁明書作成日);
-        boolean blnDbT7002
-                = getBemmeiNaiyoUPD(識別コード, 原処分被保険者番号, 審査請求届出日, 弁明書作成日, 審査請求に係る処分内容, 弁明内容, 弁明書提出日);
-        boolean blnDbT7003 = getBemmeishaJohoUPD(識別コード, 原処分被保険者番号, 審査請求届出日, 弁明書作成日, 弁明者);
+    public boolean updBenmeiTorokuJoho(FufukuMoshitate fufukuMoshitate, BemmeiNaiyo bemmeiNaiyo, BemmeishaJoho bemmeishaJoho) {
+        boolean blnDbT7001 = getFufukuMoshitateUPD(fufukuMoshitate);
+        boolean blnDbT7002 = getBemmeiNaiyoUPD(bemmeiNaiyo);
+        boolean blnDbT7003 = getBemmeishaJohoUPD(bemmeishaJoho);
         return blnDbT7001 && blnDbT7002 && blnDbT7003;
     }
 
-    private boolean getFufukuMoshitateUPD(
-            ShikibetsuCode 識別コード,
-            HihokenshaNo 原処分被保険者番号,
-            FlexibleDate 審査請求届出日,
-            FlexibleDate 弁明書作成日) {
-        DbT7001FufukuMoshitateEntity dbT7001FufukuMoshitateEntity
-                = dbT7001FufukuMoshitateDac.selectByKey(識別コード, 原処分被保険者番号, 審査請求届出日);
-        int 戻る値 = 0;
-        if (dbT7001FufukuMoshitateEntity != null) {
-            dbT7001FufukuMoshitateEntity.setBemmeishoSakuseiYMD(弁明書作成日);
-            dbT7001FufukuMoshitateEntity.setState(EntityDataState.Modified);
-            戻る値 = dbT7001FufukuMoshitateDac.save(dbT7001FufukuMoshitateEntity);
-        }
+    private boolean getFufukuMoshitateUPD(FufukuMoshitate fufukuMoshitate) {
+        DbT7001FufukuMoshitateEntity dbT7001FufukuMoshitateEntity = fufukuMoshitate.toEntity();
+        dbT7001FufukuMoshitateEntity.setState(EntityDataState.Modified);
+        int 戻る値 = dbT7001FufukuMoshitateDac.save(dbT7001FufukuMoshitateEntity);
         return 戻る値 == 1;
     }
 
-    private boolean getBemmeiNaiyoUPD(
-            ShikibetsuCode 識別コード,
-            HihokenshaNo 原処分被保険者番号,
-            FlexibleDate 審査請求届出日,
-            FlexibleDate 弁明書作成日,
-            RString 審査請求に係る処分内容,
-            RString 弁明内容,
-            FlexibleDate 弁明書提出日
-    ) {
-        List<DbT7002BemmeiNaiyoEntity> dbT7002BemmeiNaiyoEntityList = dbT7002BemmeiNaiyoDac.selectGyomuByKey(識別コード, 原処分被保険者番号, 審査請求届出日);
-        int 戻る値 = 0;
-        for (DbT7002BemmeiNaiyoEntity bemmeiNaiyoEntity : dbT7002BemmeiNaiyoEntityList) {
-            //TODO PKをUpdateする bemmeiNaiyoEntity.setBemmeishoSakuseiYMD(弁明書作成日);
-            bemmeiNaiyoEntity.setShinsaseikyuKankeiShobunNaiyo(審査請求に係る処分内容);
-            bemmeiNaiyoEntity.setBemmeiNaiyo(弁明内容);
-            bemmeiNaiyoEntity.setBemmeishoTeishutsuYMD(弁明書提出日);
-            bemmeiNaiyoEntity.setState(EntityDataState.Modified);
-            戻る値 = dbT7002BemmeiNaiyoDac.saveOrDelete(bemmeiNaiyoEntity);
-        }
+    private boolean getBemmeiNaiyoUPD(BemmeiNaiyo bemmeiNaiyo) {
+        DbT7002BemmeiNaiyoEntity bemmeiNaiyoEntity = bemmeiNaiyo.toEntity();
+        bemmeiNaiyoEntity.setState(EntityDataState.Modified);
+        int 戻る値 = dbT7002BemmeiNaiyoDac.saveOrDelete(bemmeiNaiyoEntity);
         return 戻る値 == 1;
     }
 
-    private boolean getBemmeishaJohoUPD(
-            ShikibetsuCode 識別コード,
-            HihokenshaNo 原処分被保険者番号,
-            FlexibleDate 審査請求届出日,
-            FlexibleDate 弁明書作成日,
-            RString 弁明者) {
-        List<DbT7003BemmeishaJohoEntity> dbT7003BemmeishaJohoEntityList = dbT7003BemmeishaJohoDac.selectGyomuDelUpdByKey(識別コード, 原処分被保険者番号, 審査請求届出日);
-        int 戻る値 = 0;
-        for (DbT7003BemmeishaJohoEntity bemmeishaJohoEntity : dbT7003BemmeishaJohoEntityList) {
-            //TODO PKをUpdateする bemmeishaJohoEntity.setBemmeishoSakuseiYMD(弁明書作成日);
-            bemmeishaJohoEntity.setBemmeisha(弁明者);
-            bemmeishaJohoEntity.setState(EntityDataState.Modified);
-            戻る値 = dbT7003BemmeishaJohoDac.saveOrDelete(bemmeishaJohoEntity);
-        }
+    private boolean getBemmeishaJohoUPD(BemmeishaJoho bemmeishaJoho) {
+        DbT7003BemmeishaJohoEntity bemmeishaJohoEntity = bemmeishaJoho.toEntity();
+        bemmeishaJohoEntity.setState(EntityDataState.Modified);
+        int 戻る値 = dbT7003BemmeishaJohoDac.saveOrDelete(bemmeishaJohoEntity);
         return 戻る値 == 1;
     }
 
     /**
      * 弁明登録情報の削除処理を行うです 。
      *
-     * @param 識別コード ShikibetsuCode
-     * @param 原処分被保険者番号 HihokenshaNo
-     * @param 審査請求届出日 FlexibleDate
-     * @return RString
+     * @param fufukuMoshitate 不服審査申立情報
+     * @param bemmeiNaiyo 弁明内容
+     * @param bemmeishaJoho 弁明者情報
+     * @return boolean
      */
     @Transaction
-    public boolean delBenmeiTorokuJoho(
-            ShikibetsuCode 識別コード,
-            HihokenshaNo 原処分被保険者番号,
-            FlexibleDate 審査請求届出日
-    ) {
-        boolean blnDbT7001 = getFufukuMoshitateDEL(識別コード, 原処分被保険者番号, 審査請求届出日);
-        boolean blnDbT7002 = getBemmeiNaiyoDEL(識別コード, 原処分被保険者番号, 審査請求届出日);
-        boolean blnDbT7003 = getBemmeishaJohoDEL(識別コード, 原処分被保険者番号, 審査請求届出日);
+    public boolean delBenmeiTorokuJoho(FufukuMoshitate fufukuMoshitate, BemmeiNaiyo bemmeiNaiyo, BemmeishaJoho bemmeishaJoho) {
+        boolean blnDbT7001 = getFufukuMoshitateDEL(fufukuMoshitate);
+        boolean blnDbT7002 = getBemmeiNaiyoDEL(bemmeiNaiyo);
+        boolean blnDbT7003 = getBemmeishaJohoDEL(bemmeishaJoho);
         return blnDbT7001 && blnDbT7002 && blnDbT7003;
     }
 
-    private boolean getFufukuMoshitateDEL(
-            ShikibetsuCode 識別コード,
-            HihokenshaNo 原処分被保険者番号,
-            FlexibleDate 審査請求届出日) {
-        DbT7001FufukuMoshitateEntity dbT7001FufukuMoshitateEntity
-                = dbT7001FufukuMoshitateDac.selectByKey(識別コード, 原処分被保険者番号, 審査請求届出日);
-        int 戻る値 = 0;
-        if (dbT7001FufukuMoshitateEntity != null) {
-            dbT7001FufukuMoshitateEntity.setBemmeishoSakuseiYMD(FlexibleDate.EMPTY);
-            戻る値 = dbT7001FufukuMoshitateDac.save(dbT7001FufukuMoshitateEntity);
-        }
+    private boolean getFufukuMoshitateDEL(FufukuMoshitate fufukuMoshitate) {
+        DbT7001FufukuMoshitateEntity dbT7001FufukuMoshitateEntity = fufukuMoshitate.toEntity();
+        dbT7001FufukuMoshitateEntity.setState(EntityDataState.Modified);
+        int 戻る値 = dbT7001FufukuMoshitateDac.save(dbT7001FufukuMoshitateEntity);
         return 戻る値 == 1;
     }
 
-    private boolean getBemmeiNaiyoDEL(
-            ShikibetsuCode 識別コード,
-            HihokenshaNo 原処分被保険者番号,
-            FlexibleDate 審査請求届出日) {
-        List<DbT7002BemmeiNaiyoEntity> dbT7002BemmeiNaiyoEntityList
-                = dbT7002BemmeiNaiyoDac.selectGyomuByKey(識別コード, 原処分被保険者番号, 審査請求届出日);
-        int 戻る値 = 0;
-        for (DbT7002BemmeiNaiyoEntity bemmeiNaiyoEntity : dbT7002BemmeiNaiyoEntityList) {
-            bemmeiNaiyoEntity.setState(EntityDataState.Deleted);
-            戻る値 = dbT7002BemmeiNaiyoDac.saveOrDelete(bemmeiNaiyoEntity);
-        }
+    private boolean getBemmeiNaiyoDEL(BemmeiNaiyo bemmeiNaiyo) {
+        DbT7002BemmeiNaiyoEntity bemmeiNaiyoEntity = bemmeiNaiyo.toEntity();
+        bemmeiNaiyoEntity.setState(EntityDataState.Deleted);
+        int 戻る値 = dbT7002BemmeiNaiyoDac.saveOrDelete(bemmeiNaiyoEntity);
         return 戻る値 == 1;
     }
 
-    private boolean getBemmeishaJohoDEL(
-            ShikibetsuCode 識別コード,
-            HihokenshaNo 原処分被保険者番号,
-            FlexibleDate 審査請求届出日) {
-        List<DbT7003BemmeishaJohoEntity> dbT7003BemmeishaJohoEntityList
-                = dbT7003BemmeishaJohoDac.selectGyomuDelUpdByKey(識別コード, 原処分被保険者番号, 審査請求届出日);
-        int 戻る値 = 0;
-        for (DbT7003BemmeishaJohoEntity bemmeishaJohoEntity : dbT7003BemmeishaJohoEntityList) {
-            bemmeishaJohoEntity.setState(EntityDataState.Deleted);
-            戻る値 = dbT7003BemmeishaJohoDac.saveOrDelete(bemmeishaJohoEntity);
-        }
+    private boolean getBemmeishaJohoDEL(BemmeishaJoho bemmeishaJoho) {
+        DbT7003BemmeishaJohoEntity bemmeishaJohoEntity = bemmeishaJoho.toEntity();
+        bemmeishaJohoEntity.setState(EntityDataState.Deleted);
+        int 戻る値 = dbT7003BemmeishaJohoDac.saveOrDelete(bemmeishaJohoEntity);
         return 戻る値 == 1;
     }
 
-    private LasdecCode get地方公共団体コード() {
+    /**
+     * 地方公共団体コードを取得です 。
+     *
+     * @return LasdecCode
+     */
+    public LasdecCode get地方公共団体コード() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         return association.get地方公共団体コード();
     }

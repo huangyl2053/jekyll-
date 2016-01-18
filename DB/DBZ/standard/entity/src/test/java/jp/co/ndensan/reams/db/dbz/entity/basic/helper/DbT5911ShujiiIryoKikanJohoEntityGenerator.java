@@ -39,7 +39,7 @@ public final class DbT5911ShujiiIryoKikanJohoEntityGenerator {
     public static DbT5911ShujiiIryoKikanJohoEntity createDbT5911ShujiiIryoKikanJohoEntity() {
         DbT5911ShujiiIryoKikanJohoEntity entity = new DbT5911ShujiiIryoKikanJohoEntity();
         entity.setShichosonCode(DEFAULT_市町村コード);
-        entity.setShujiiIryokikanCode(DEFAULT_主治医医療機関コード);
+        entity.setShujiiIryokikanCode(DEFAULT_主治医医療機関コード.value());
         entity.setIryokikanCode(DEFAULT_医療機関コード);
         entity.setIryoKikanMeisho(DEFAULT_医療機関名称);
         entity.setIryoKikanMeishoKana(DEFAULT_医療機関名称カナ);

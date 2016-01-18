@@ -147,6 +147,33 @@ public class GogitaiJohoManager {
         return 1 == 合議体情報Dac.deletePhysical(合議体情報.toEntity());
     }
 
+    /**
+     * 合議体情報{@link GogitaiJoho}を物理削除します。
+     *
+     * @param 合議体情報 合議体情報
+     * @return 削除あり:true、削除なし:false <br>
+     * いずれかのテーブルに削除があればtrueを返す
+     */
+    @Transaction
+    public boolean deletePhysicalWithoutGogitaiWariateIin(GogitaiJoho 合議体情報) {
+        requireNonNull(合議体情報, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体情報"));
+        return 1 == 合議体情報Dac.deletePhysical(合議体情報.toEntity());
+    }
+
+    /**
+     * 合議体情報{@link GogitaiJoho}を保存します、合議体割当委員情報{@link GogitaiWariateIinJoho}を物理削除します。
+     *
+     * @param 合議体情報 合議体情報
+     * @return 削除あり:true、削除なし:false <br>
+     * いずれかのテーブルに削除があればtrueを返す
+     */
+    @Transaction
+    public boolean saveWithDeletePhysical(GogitaiJoho 合議体情報) {
+        requireNonNull(合議体情報, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体情報"));
+        deletePhysical合議体割当委員情報リスト(合議体情報.getGogitaiWariateIinJohoList());
+        return 1 == 合議体情報Dac.deletePhysical(合議体情報.toEntity());
+    }
+
     private void deletePhysical合議体割当委員情報リスト(List<GogitaiWariateIinJoho> 合議体割当委員情報List) {
         for (GogitaiWariateIinJoho 合議体割当委員情報 : 合議体割当委員情報List) {
             合議体割当委員情報Manager.deletePhysical(合議体割当委員情報);

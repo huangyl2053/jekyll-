@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.Gogi
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgGogitaiIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgShinsainList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijohosakusei.GogitaiJohoSakuseiFinder;
+import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -26,18 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  */
 public class GogitaiJohoSakuseiValidationHandler {
 
-    private static final RString HYOJI_JOKEN_GENZAI_YUUKOU = new RString("key1");
-    private static final RString SEISHINKAI_SONZAI_SURU = new RString("key0");
-    private static final RString SEISHINKAI_SONZAI_SHINAI = new RString("key1");
-    private static final RString DUMMY_FLAG_TUUJOU = new RString("key0");
-    private static final RString DUMMY_FLAG_DAMI = new RString("key1");
-    private static final RString JYOTAI_CODE_ADD = new RString("1");
-    private static final RString JYOTAI_NAME_ADD = new RString("追加");
-    private static final RString JYOTAI_CODE_UPD = new RString("2");
-    private static final RString JYOTAI_NAME_UPD = new RString("修正");
-    private static final RString JYOTAI_CODE_DEL = new RString("3");
-    private static final RString JYOTAI_NAME_DEL = new RString("削除");
-
+    private static final int SHINSAIN_COUNT_3 = 3;
     private final GogitaiJohoSakuseiDiv div;
 
     /**
@@ -97,11 +88,12 @@ public class GogitaiJohoSakuseiValidationHandler {
      */
     public ValidationMessageControlPairs kaisaiBashoCodeCheck() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        GogitaiJohoSakuseiFinder service = GogitaiJohoSakuseiFinder.createInstance();
-        if (!service.getKaisaiBashoCode(div.getDdlkaisaibasho().getSelectedKey())) {
-            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.コードマスタなし));
-            return validationMessages;
-        }
+        // TODO QA210 Redmine#72702「開催場所コードの存在性チェック」は実装なしとしてください。
+//        GogitaiJohoSakuseiFinder service = GogitaiJohoSakuseiFinder.createInstance();
+//        if (!service.getKaisaiBashoCode(div.getDdlkaisaibasho().getSelectedKey())) {
+//            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.コードマスタなし));
+//            return validationMessages;
+//        }
 
         return validationMessages;
     }
@@ -146,7 +138,7 @@ public class GogitaiJohoSakuseiValidationHandler {
      */
     public ValidationMessageControlPairs shinsainListRequiredCheck() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (div.getDgShinsainList().getDataSource().size() < 3) {
+        if (div.getDgShinsainList().getDataSource().size() < SHINSAIN_COUNT_3) {
             validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.割当審査員は少なくとも5人));
             return validationMessages;
         }
@@ -180,9 +172,7 @@ public class GogitaiJohoSakuseiValidationHandler {
      */
     public ValidationMessageControlPairs shinsainPersonNumCheck() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        // TODO 業務Configの「合議体最大委員数」の引数が不明
-        RString personNum = BusinessConfig.get(null);
-
+        RString personNum = BusinessConfig.get(ConfigNameDBE.合議体最大委員数, SubGyomuCode.DBE認定支援);
         List<dgShinsainList_Row> rowList = div.getDgShinsainList().getDataSource();
         if (Integer.parseInt(personNum.toString()) < rowList.size()) {
             validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.合議体委員数が最大値を超過));
@@ -253,15 +243,15 @@ public class GogitaiJohoSakuseiValidationHandler {
 
         桁数が不正(UrErrorMessages.桁数が不正, "合議体No", "2"),
         既に登録済(UrErrorMessages.既に登録済, "合議体No"),
-        コードマスタなし(UrErrorMessages.コードマスタなし, "開催場所コード"),
-        終了日が開始日以前(UrErrorMessages.終了日が開始日以前, ""),
+        コードマスタなし(UrErrorMessages.コードマスタなし),
+        終了日が開始日以前(UrErrorMessages.終了日が開始日以前),
         期間が不正_追加メッセージあり２(UrErrorMessages.期間が不正_追加メッセージあり２, "開始予定時刻", "終了予定時刻"),
-        割当審査員は少なくとも5人(DbeErrorMessages.割当審査員は少なくとも5人, ""),
-        合議体長副合議体長は一人づつ(DbeErrorMessages.合議体長副合議体長は一人づつ, ""),
-        合議体委員数が最大値を超過(DbeErrorMessages.合議体委員数が最大値を超過, ""),
-        審査会の合議体長は必ず１人(DbeErrorMessages.審査会の合議体長は必ず１人, ""),
+        割当審査員は少なくとも5人(DbeErrorMessages.割当審査員は少なくとも5人),
+        合議体長副合議体長は一人づつ(DbeErrorMessages.合議体長副合議体長は一人づつ),
+        合議体委員数が最大値を超過(DbeErrorMessages.合議体委員数が最大値を超過),
+        審査会の合議体長は必ず１人(DbeErrorMessages.審査会の合議体長は必ず１人),
         // TODO QA399
-        審査会開催最大数を超過(DbeErrorMessages.審査会開催最大数を超過, ""),
+        審査会開催最大数を超過(DbeErrorMessages.審査会開催最大数を超過),
         対象データなし_追加メッセージあり(UrErrorMessages.対象データなし_追加メッセージあり, "合議体一覧");
 
         private final Message message;

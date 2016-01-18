@@ -60,7 +60,6 @@ public class ShujiiIryoKikanMaster {
      * @return ResponseData<ShujiiIryoKikanMasterDiv>
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onLoad(ShujiiIryoKikanMasterDiv div) {
-        getHandler(div).load();
         getHandler(div).clearKensakuJoken();
         return ResponseData.of(div).respond();
     }
@@ -82,9 +81,9 @@ public class ShujiiIryoKikanMaster {
      * @param div ShujiiIryoKikanMasterDiv
      * @return ResponseData<ShujiiIryoKikanMasterDiv>
      */
-    public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnSearchKoseiShujiiIryoKikan(ShujiiIryoKikanMasterDiv div) {
+    public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnSearchKoseiShujiiIryoKikan(
+            ShujiiIryoKikanMasterDiv div) {
         searchKoseiShujiiIryoKikanInfo(div);
-        div.getShujiiIchiran().getDgShujiiIchiran().getGridSetting().getColumn("iryoKikanCode").setVisible(false);
         div.getShujiiIchiran().setDisabled(false);
         return ResponseData.of(div).respond();
     }
@@ -94,7 +93,9 @@ public class ShujiiIryoKikanMaster {
         if (div.getRadSearchJokyoFlag().getSelectedIndex() == 0) {
             jokyoFlag = true;
         }
-        KoseiShujiiIryoKikanMasterMapperParameter parameter = KoseiShujiiIryoKikanMasterMapperParameter.createParam_SelectShujiiIryoKikanJohoList(jokyoFlag,
+        KoseiShujiiIryoKikanMasterMapperParameter parameter = KoseiShujiiIryoKikanMasterMapperParameter.
+                createParam_SelectShujiiIryoKikanJohoList(
+                jokyoFlag,
                 div.getCcdHokenshaList().getSelectedItem().get市町村コード(),
                 div.getTxtSearchShujiiIryokikanCodeFrom().getValue(),
                 div.getTxtSearchShujiiIryokikanCodeTo().getValue(),
@@ -102,15 +103,17 @@ public class ShujiiIryoKikanMaster {
                 div.getTxtSearchShujiiIryokikanKanaMeisho().getValue(),
                 div.getTxtSaidaiHyojiKensu().getValue()
         );
-        KoseiShujiiIryoKikanMasterFinder koseiShujiiIryoKikanMasterFinder = KoseiShujiiIryoKikanMasterFinder.createInstance();
-        List<jp.co.ndensan.reams.db.dbe.business.core.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterBusiness> 主治医医療機関情報List
-                = koseiShujiiIryoKikanMasterFinder.getShujiKikanJohoIchiranList(parameter).records();
+        List<jp.co.ndensan.reams.db.dbe.business.core.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterBusiness> 
+                主治医医療機関情報List
+                = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiKikanJohoIchiranList(parameter).records();
         if (主治医医療機関情報List.isEmpty()) {
-            ViewStateHolder.put(ViewStateKeys.主治医医療機関マスタ検索結果, Models.create(new ArrayList<ShujiiIryoKikanJoho>()));
+            ViewStateHolder.put(ViewStateKeys.主治医医療機関マスタ検索結果, Models.create(
+                    new ArrayList<ShujiiIryoKikanJoho>()));
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         }
         getHandler(div).setShujiKikanJohoIchiran(主治医医療機関情報List);
-        List<ShujiiIryoKikanJoho> 主治医医療機関マスタList = koseiShujiiIryoKikanMasterFinder.getShujiiIryoKikanJohoList(parameter).records();
+        List<ShujiiIryoKikanJoho> 主治医医療機関マスタList
+                = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiiIryoKikanJohoList(parameter).records();
         ViewStateHolder.put(ViewStateKeys.主治医医療機関マスタ検索結果, Models.create(主治医医療機関マスタList));
     }
 
@@ -122,7 +125,7 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnInsert(ShujiiIryoKikanMasterDiv div) {
         div.getShujiiJohoInput().setState(状態_追加);
-        getHandler(div).setDisabledFalseToShujiiIryoKikanJoho();
+        getHandler(div).setDisabledFalse();
         getHandler(div).clearShujiiIryoKikanJohoToMeisai();
         div.getShujiiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
         return ResponseData.of(div).respond();
@@ -134,10 +137,11 @@ public class ShujiiIryoKikanMaster {
      * @param div ShujiiIryoKikanMasterDiv
      * @return ResponseData<ShujiiIryoKikanMasterDiv>
      */
-    public ResponseData<ShujiiIryoKikanMasterDiv> onSelectByModifyButton_dgShujiiIchiran(ShujiiIryoKikanMasterDiv div) {
+    public ResponseData<ShujiiIryoKikanMasterDiv> onSelectByModifyButton_dgShujiiIchiran(
+            ShujiiIryoKikanMasterDiv div) {
         div.getShujiiJohoInput().setState(状態_修正);
-        getHandler(div).setDisabledFalseToShujiiIryoKikanJoho();
-        dgShujiiIchiran_Row row = div.getShujiiIchiran().getDgShujiiIchiran().getClickedItem();
+        getHandler(div).setDisabledFalse();
+        dgShujiiIchiran_Row row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
         getHandler(div).setShujiiJohoToMeisai(row);
         div.getShujiiJohoInput().getTxtShichoson().setDisabled(true);
         div.getShujiiJohoInput().getBtnToSearchShichoson().setDisabled(true);
@@ -154,11 +158,12 @@ public class ShujiiIryoKikanMaster {
      * @param div ShujiiIryoKikanMasterDiv
      * @return ResponseData<ShujiiIryoKikanMasterDiv>
      */
-    public ResponseData<ShujiiIryoKikanMasterDiv> onSelectByDeleteButton_dgShujiiIchiran(ShujiiIryoKikanMasterDiv div) {
+    public ResponseData<ShujiiIryoKikanMasterDiv> onSelectByDeleteButton_dgShujiiIchiran(
+            ShujiiIryoKikanMasterDiv div) {
         div.getShujiiJohoInput().setState(状態_削除);
         dgShujiiIchiran_Row row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
         getHandler(div).setShujiiJohoToMeisai(row);
-        getHandler(div).setDisabledTrueToShujiiJohoToMeisai();
+        getHandler(div).setDisabledTrue();
         div.getShujiiJohoInput().getBtnKakutei().setDisabled(false);
         return ResponseData.of(div).respond();
     }
@@ -176,9 +181,9 @@ public class ShujiiIryoKikanMaster {
             div.getShujiiJohoInput().getTxtShichoson().setDisabled(true);
             div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(true);
         } else if (状態_削除.equals(row.getJotai())) {
-            getHandler(div).setDisabledTrueToShujiiJohoToMeisai();
+            getHandler(div).setDisabledTrue();
         } else if (RString.EMPTY.equals(row.getJotai())) {
-            getHandler(div).setDisabledTrueToShujiiJohoToMeisai();
+            getHandler(div).setDisabledTrue();
             div.getShujiiJohoInput().getBtnKakutei().setDisabled(true);
         }
         return ResponseData.of(div).respond();
@@ -242,6 +247,26 @@ public class ShujiiIryoKikanMaster {
         getHandler(div).setTxtShichosonmei();
         return ResponseData.of(div).respond();
     }
+    
+    /**
+     * 医療機関検索ボタンが押下された場合、医療機関選択ダイアログを表示する
+     * @param div ShujiiIryoKikanMasterDiv
+     * @return  ResponseData<ShujiiIryoKikanMasterDiv>
+     */
+    public ResponseData<ShujiiIryoKikanMasterDiv> onBlur_txtIryokikan(ShujiiIryoKikanMasterDiv div) {
+         //TODO 内部番号QA455
+         return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 口座情報を登録するボタンが押下された場合、口座情報画面へ遷移する。
+     * @param div ShujiiIryoKikanMasterDiv
+     * @return ResponseData<ShujiiIryoKikanMasterDiv>
+     */
+    public ResponseData<ShujiiIryoKikanMasterDiv> onClick_Shujii(ShujiiIryoKikanMasterDiv div) {
+         //TODO 内部番号QA471
+         return ResponseData.of(div).respond();
+    }
 
     /**
      * 取消するボタンが押下された場合、入力明細エリアの入力内容を破棄し、主治医医療機関情報一覧エリアへ戻ります。
@@ -266,7 +291,7 @@ public class ShujiiIryoKikanMaster {
             }
         }
         div.getShujiiIchiran().setDisabled(false);
-        return ResponseData.of(div).setState(DBE9010001StateName.医療機関一覧);
+        return ResponseData.of(div).setState(DBE9010001StateName.医療機関詳細);
     }
 
     /**
@@ -277,13 +302,12 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnKakutei(ShujiiIryoKikanMasterDiv div) {
         RString イベント状態 = div.getShujiiJohoInput().getState();
-        int shujiiIryoKikanJohoCount = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiiIryoKikanJohoCount(
+        int shujiioCount = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiiIryoKikanJohoCount(
                 KoseiShujiiIryoKikanMasterSearchParameter.createParam_SelectShujiiIryoKikanJoho(
                         new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
                         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue()));
         ValidationMessageControlPairs validPairs
-                = getValidationHandler(div).validateForKakutei(イベント状態, shujiiIryoKikanJohoCount);
-
+                = getValidationHandler(div).validateForKakutei(イベント状態, shujiioCount);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
@@ -299,7 +323,8 @@ public class ShujiiIryoKikanMaster {
             ShujiiIryoKikanJohoIdentifier key = new ShujiiIryoKikanJohoIdentifier(
                     new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
                     div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue());
-            ShujiiIryoKikanJoho shujiiIryoKikanJoho = getHandler(div).editShujiiIryoKikanJoho(models.get(key).modifiedModel());
+            ShujiiIryoKikanJoho shujiiIryoKikanJoho = getHandler(div).editShujiiIryoKikanJoho(models.get(key).
+                    modifiedModel());
             models.deleteOrRemove(key);
             models.add(shujiiIryoKikanJoho);
         } else if (状態_削除.equals(イベント状態)) {
@@ -311,7 +336,8 @@ public class ShujiiIryoKikanMaster {
             if (状態_追加.equals(jotai)) {
                 models.deleteOrRemove(key);
             } else {
-                ShujiiIryoKikanJoho shujiiIryoKikanJoho = getHandler(div).editShujiiIryoKikanJoho(models.get(key).deleted());
+                ShujiiIryoKikanJoho shujiiIryoKikanJoho = getHandler(div).editShujiiIryoKikanJoho(models.get(key).
+                        deleted());
                 models.add(shujiiIryoKikanJoho);
             }
         }
@@ -338,11 +364,13 @@ public class ShujiiIryoKikanMaster {
         }
         if (isUpdate) {
             if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode(),
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.検索画面遷移の確認.getMessage().
+                        getCode(),
                         UrQuestionMessages.検索画面遷移の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+            if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.
+                    getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 onLoad(div);
                 div.getShujiiSearch().setDisabled(false);
@@ -363,6 +391,10 @@ public class ShujiiIryoKikanMaster {
      * @return ResponseData<ShujiiIryoKikanMasterDiv>
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnSave(ShujiiIryoKikanMasterDiv div) {
+        return getSave(div);
+    }
+
+    private ResponseData<ShujiiIryoKikanMasterDiv> getSave(ShujiiIryoKikanMasterDiv div) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForUpdate();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -376,15 +408,18 @@ public class ShujiiIryoKikanMaster {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             validPairs = validateForDelete(div);
+            
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
             Models<ShujiiIryoKikanJohoIdentifier, ShujiiIryoKikanJoho> models = ViewStateHolder.
-                    get(ViewStateKeys.主治医医療機関マスタ検索結果, Models.class);
+                get(ViewStateKeys.主治医医療機関マスタ検索結果, Models.class);
             ShujiiIryoKikanJohoManager shujiiIryoKikanJohoManager = ShujiiIryoKikanJohoManager.createInstance();
             for (ShujiiIryoKikanJoho shujiiIryoKikanJoho : models) {
                 shujiiIryoKikanJohoManager.saveOrDelete主治医医療機関情報(shujiiIryoKikanJoho);
             }
+            div.getCcdKanryoMessage().setSuccessMessage(
+                    new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
             return ResponseData.of(div).setState(DBE9010001StateName.完了);
         }
         return ResponseData.of(div).respond();
@@ -392,17 +427,20 @@ public class ShujiiIryoKikanMaster {
 
     private ValidationMessageControlPairs validateForDelete(ShujiiIryoKikanMasterDiv div) {
         List<dgShujiiIchiran_Row> dataList = div.getShujiiIchiran().getDgShujiiIchiran().getDataSource();
-        KoseiShujiiIryoKikanMasterFinder koseiShujiiIryoKikanMasterFinder = KoseiShujiiIryoKikanMasterFinder.createInstance();
+        KoseiShujiiIryoKikanMasterFinder koseiShujiiIryoKikanMasterFinder = KoseiShujiiIryoKikanMasterFinder.
+                createInstance();
         for (dgShujiiIchiran_Row row : dataList) {
             if (状態_削除.equals(row.getJotai())) {
-                KoseiShujiiIryoKikanMasterSearchParameter parameter = KoseiShujiiIryoKikanMasterSearchParameter.createParam_SelectShujiiIryoKikanJoho(
+                KoseiShujiiIryoKikanMasterSearchParameter parameter = KoseiShujiiIryoKikanMasterSearchParameter.
+                        createParam_SelectShujiiIryoKikanJoho(
                         new LasdecCode(row.getShichosonCode()),
                         row.getShujiiIryoKikanCode().getValue());
-                return getValidationHandler(div).validateForUpdate(
+              
+                return getValidationHandler(div).validateForDelete(
                         koseiShujiiIryoKikanMasterFinder.getShujiiJohoCount(parameter));
             }
         }
-        return new ValidationMessageControlPairs();
+         return new ValidationMessageControlPairs();
     }
 
     /**

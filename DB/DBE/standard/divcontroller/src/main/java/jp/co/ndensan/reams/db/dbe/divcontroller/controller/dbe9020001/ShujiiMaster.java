@@ -128,8 +128,12 @@ public class ShujiiMaster {
             }
         } else {
             div.getShujiiSearch().setDisabled(false);
+            getHandler(div).load();
+            getHandler(div).clearKensakuJoken();
             return ResponseData.of(div).setState(DBE9020001StateName.検索);
         }
+        getHandler(div).load();
+        getHandler(div).clearKensakuJoken();
         return ResponseData.of(div).respond();
     }
 
@@ -139,7 +143,7 @@ public class ShujiiMaster {
             jokyoFlag = true;
         }
         ShujiiMasterMapperParameter parameter = ShujiiMasterMapperParameter.createSelectByKeyParam(
-                new LasdecCode(div.getDdlSearchShichoson().getSelectedKey()),
+                div.getCcdHokenshaList().getSelectedItem().get市町村コード(),
                 jokyoFlag,
                 div.getTxtSearchShujiiIryokikanCodeFrom().getValue(),
                 div.getTxtSearchShujiiIryokikanCodeTo().getValue(),
@@ -156,7 +160,7 @@ public class ShujiiMaster {
                         parameter).records();
         if (主治医情報List.isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.主治医マスタ検索結果, Models.create(new ArrayList<ShujiiJoho>()));
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         div.getShujiiSearch().setDisabled(true);
         div.getShujiiIchiran().setDisabled(false);
@@ -177,6 +181,7 @@ public class ShujiiMaster {
         getHandler(div).setDisabledFalseToShujiiJohoInputMeisai();
         div.getShujiiJohoInput().getTxtShichosonmei().setDisabled(true);
         div.getShujiiJohoInput().getTxtShujiiIryoKikanMei().setDisabled(true);
+        div.getShujiiJohoInput().getBtnKakutei().setDisabled(false);
         getHandler(div).clearShujiiJohoInputMeisai();
         div.getShujiiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
         RString 主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
@@ -258,6 +263,10 @@ public class ShujiiMaster {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 div.getShujiiIchiran().setDisabled(false);
                 return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧);
+            } else if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
             }
         }
         div.getShujiiIchiran().setDisabled(false);
@@ -334,7 +343,6 @@ public class ShujiiMaster {
      * @return ResponseData<ShujiiMasterDiv>
      */
     public ResponseData<ShujiiMasterDiv> onSelectByDlbClick_dgShujiiIchiran(ShujiiMasterDiv div) {
-        div.getShujiiJohoInput().setState(RString.EMPTY);
         dgShujiiIchiran_Row row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
         getHandler(div).setShujiiJohoToMeisai(row);
         if (状態_修正.equals(row.getJotai())) {
@@ -347,6 +355,7 @@ public class ShujiiMaster {
             getHandler(div).setDisabledTrueToShujiiJohoInputMeisai();
             div.getShujiiJohoInput().getBtnKakutei().setDisabled(true);
         }
+        div.getShujiiIchiran().setDisabled(true);
         RString 主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
         if (主治医医療機関コード != null && !主治医医療機関コード.isEmpty()) {
             return ResponseData.of(div).setState(DBE9020001StateName.主治医登録_医療機関登録から遷移);
@@ -373,6 +382,7 @@ public class ShujiiMaster {
         div.getShujiiJohoInput().getBtnToSearchIryoKikan().setDisabled(true);
         div.getShujiiJohoInput().getTxtShujiiIryoKikanMei().setDisabled(true);
         div.getShujiiJohoInput().getTxtShujiiCode().setDisabled(true);
+        div.getShujiiJohoInput().getBtnKakutei().setDisabled(false);
         div.getShujiiIchiran().setDisabled(true);
         div.getShujiiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
         RString 主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);

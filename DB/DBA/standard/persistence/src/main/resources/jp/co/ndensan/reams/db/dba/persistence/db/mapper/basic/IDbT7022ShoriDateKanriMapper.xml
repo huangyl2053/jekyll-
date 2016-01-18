@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic">
+    
+    <select id="get処理日付管理マスタByKey" 
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" 
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.dbamn71001.ParameterSetMybatisParameter" fetchSize="500">
+        SELECT
+            *
+        FROM
+            rgdb."DbT7022ShoriDateKanri"
+        WHERE
+            "shichosonCode" = #{市町村コード}
+        AND "shoriName" = #{処理名}
+        AND "shoriEdaban" = #{処理枝番}
+        AND "nendo" = #{年度}
+        AND "nendoNaiRenban" = #{年度内連番}
+    </select>
+</mapper>

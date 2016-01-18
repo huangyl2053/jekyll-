@@ -9,11 +9,10 @@ import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  *
- * 被保険者証発行管理簿_バッチ用のパラメータです。
+ * 被保険者証発行管理簿_マッパー用のパラメータです。
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -28,8 +27,9 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
     private final boolean isKoufuSiuryouhi;
     private final boolean isKasyuuKayisihi;
     private final boolean isKasyuuSiuryouhi;
-    private final List<UzT0007CodeEntity> kofuJiyulist;
-    private final List<UzT0007CodeEntity> kaishuJiyulist;
+    private final List<RString> kofuJiyulist;
+    private final List<RString> kaishuJiyulist;
+    private final RString psmShikibetsuTaisho;
 
     /**
      * 非公開コンストラクタです。
@@ -43,8 +43,8 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
      * @param isKoufuSiuryouhi 交付終了日あり
      * @param isKasyuuKayisihi 回収年月日あり
      * @param isKasyuuSiuryouhi 回収年月日あり
-     * @param 交付事由 List<UzT0007CodeEntity>
-     * @param 回収事由 List<UzT0007CodeEntity>
+     * @param 交付事由 List<RString>
+     * @param 回収事由 List<RString>
      */
     private HihokenshashoHakkoKanriboMybatisParameter(
             RString 証発行モード,
@@ -56,8 +56,9 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
             boolean isKoufuSiuryouhi,
             boolean isKasyuuKayisihi,
             boolean isKasyuuSiuryouhi,
-            List<UzT0007CodeEntity> 交付事由,
-            List<UzT0007CodeEntity> 回収事由) {
+            List<RString> 交付事由,
+            List<RString> 回収事由,
+            RString psmShikibetsuTaisho) {
         this.akasihakouMod = 証発行モード;
         this.koufukayisihi = 交付開始日;
         this.koufusiuryouhi = 交付終了日;
@@ -69,6 +70,7 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
         this.isKasyuuSiuryouhi = isKasyuuSiuryouhi;
         this.kofuJiyulist = 交付事由;
         this.kaishuJiyulist = 回収事由;
+        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
     /**
@@ -79,33 +81,35 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
      * @param 交付終了日 FlexibleDate
      * @param 回収開始日 FlexibleDate
      * @param 回収終了日 FlexibleDate
-     * @param 交付事由 List<UzT0007CodeEntity>
-     * @param 回収事由 List<UzT0007CodeEntity>
+     * @param 交付事由 List<RString>
+     * @param 回収事由 List<RString>
+     * @param psmShikibetsuTaisho PSM
      * @return 被保険者証発行管理簿_バッチ用のパラメータ
      */
-    public static HihokenshashoHakkoKanriboMybatisParameter RelateParameter_証発行管理リスト情報の取得(
+    public static HihokenshashoHakkoKanriboMybatisParameter create_Param(
             RString 証発行モード,
             FlexibleDate 交付開始日,
             FlexibleDate 交付終了日,
             FlexibleDate 回収開始日,
             FlexibleDate 回収終了日,
-            List<UzT0007CodeEntity> 交付事由,
-            List<UzT0007CodeEntity> 回収事由) {
+            List<RString> 交付事由,
+            List<RString> 回収事由,
+            RString psmShikibetsuTaisho) {
         boolean isKoufukayisihi = false;
         boolean isKoufuSiuryouhi = false;
         boolean isKasyuuKayisihi = false;
         boolean isKasyuuSiuryouhi = false;
-        if (交付開始日.isEmpty()) {
+        if (交付開始日 != null && !交付開始日.isEmpty()) {
             isKoufukayisihi = true;
         }
-        if (交付終了日.isEmpty()) {
-            isKoufukayisihi = true;
+        if (交付終了日 != null && !交付終了日.isEmpty()) {
+            isKoufuSiuryouhi = true;
         }
-        if (回収開始日.isEmpty()) {
-            isKoufukayisihi = true;
+        if (交付終了日 != null && !回収開始日.isEmpty()) {
+            isKasyuuKayisihi = true;
         }
-        if (回収終了日.isEmpty()) {
-            isKoufukayisihi = true;
+        if (回収終了日 != null && !回収終了日.isEmpty()) {
+            isKasyuuSiuryouhi = true;
         }
         return new HihokenshashoHakkoKanriboMybatisParameter(
                 証発行モード,
@@ -118,6 +122,8 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
                 isKasyuuKayisihi,
                 isKasyuuSiuryouhi,
                 交付事由,
-                回収事由);
+                回収事由,
+                psmShikibetsuTaisho);
     }
+
 }

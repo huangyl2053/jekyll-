@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0710011;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.koikinaijushochitokurei.KoikinaiJushochiTokureiBatchParamter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0710011.KoikinaiJushochiTokureiDiv;
@@ -29,7 +31,7 @@ public class KoikinaiJushochiTokureiHandler {
     private static final RString 直近 = new RString("1");
     private static final RString 基準日 = new RString("2");
     private static final RString 範囲 = new RString("3");
-    private static final int 市町村コード = 6;
+    private static final int 市町村コード = 6;  
     private static final int 市町村名称 = 7;
 
     private final KoikinaiJushochiTokureiDiv div;
@@ -61,7 +63,9 @@ public class KoikinaiJushochiTokureiHandler {
             二件目名称.append(市町村List.records().get(i).get市町村名称());
             市町村DDL.add(new KeyValueDataSource(new RString(String.valueOf(i + 1)), 二件目名称.toRString()));
         }
+        Collections.sort(市町村DDL, new ComparatorByStartDateSort());
         div.getBatchParamterInfo().getDdlShichosonShitei().setDataSource(市町村DDL);
+        div.getBatchParamterInfo().getDdlShichosonShitei().setSelectedKey(市町村DDL1件目コード);
         div.getBatchParamterInfo().getTxtKijunYMD().setDisabled(true);
         div.getBatchParamterInfo().getTxtKonkaiKaishibi().setDisabled(true);
         div.getBatchParamterInfo().getTxtKonkaiShuryobi().setDisabled(true);
@@ -116,8 +120,8 @@ public class KoikinaiJushochiTokureiHandler {
     }
     
     /**
-     * 「実行する」ボタンを押下前のチェック実行します。
-     * @return KoikinaiJushochiTokureiBatchParamter KoikinaiJushochiTokureiBatchParamter 広域内住所地特例者一覧表_バッチパラメータクラスです
+     * 「実行する」ボタンを押下バッチ実行、バッチパラメータ作成をします。
+     * @return KoikinaiJushochiTokureiBatchParamter 広域内住所地特例者一覧表_バッチパラメータクラスです
      */
     public KoikinaiJushochiTokureiBatchParamter click実行() {
         KoikinaiJushochiTokureiBatchParamter batchparam = new KoikinaiJushochiTokureiBatchParamter();
@@ -145,5 +149,15 @@ public class KoikinaiJushochiTokureiHandler {
             batchparam.setShuryobi(new RString(div.getBatchParamterInfo().getTxtKonkaiShuryobi().getValue().toString()));
         }
         return batchparam;
+    }
+    
+    private class ComparatorByStartDateSort implements Comparator {
+
+        @Override
+        public int compare(Object arg0, Object arg1) {
+            KeyValueDataSource row0 = (KeyValueDataSource) arg0;
+            KeyValueDataSource row1 = (KeyValueDataSource) arg1;
+            return row0.getValue().compareTo(row1.getValue());
+        }
     }
 }

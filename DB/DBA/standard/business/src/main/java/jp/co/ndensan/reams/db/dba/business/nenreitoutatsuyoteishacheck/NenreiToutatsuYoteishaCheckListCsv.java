@@ -16,12 +16,23 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  *
- * 年齢到達予定者チェックリスト_CSVデータ作成します。
+ * 年齢到達予定者チェックリスト_CSVデータ作成です。
  */
 public class NenreiToutatsuYoteishaCheckListCsv {
 
+    private static final RString 性別コード1 = new RString("1");
+    private static final RString 性別コード2 = new RString("2");
+    private static final RString 性別_男 = new RString("男");
+    private static final RString 性別_女 = new RString("女");
+    private static final RString 住登内日本人 = new RString("1");
+    private static final RString 住登内外国人 = new RString("2");
+    private static final RString 住登外日本人 = new RString("3");
+    private static final RString 住登外外国人 = new RString("4");
+    private static final RString 住民種別_日本人のみ = new RString("日本人");
+    private static final RString 住民種別_外国人のみ = new RString("外国人");
+
     /**
-     * 年齢到達予定者チェックリスト_CSVデータ作成、連番なし。
+     * 年齢到達予定者チェックリスト_CSVデータ作成、連番ありません。
      *
      * @param nenCheckListJyohoEntity 年齢到達予定者チェックリスト情報Entity
      * @return 年齢到達予定者チェックリスト_CSVデータ
@@ -31,7 +42,6 @@ public class NenreiToutatsuYoteishaCheckListCsv {
         List<NenreiToutatsuYoteishaCheckListEucCsvEntity> csvDataList = new ArrayList<>();
         List<NenreiToutatsuYoteishaCheckListEntity> checkListEntity = nenCheckListJyohoEntity
                 .get年齢到達予定者チェックリスト();
-
         if (!checkListEntity.isEmpty()) {
             for (NenreiToutatsuYoteishaCheckListEntity entity : checkListEntity) {
                 NenreiToutatsuYoteishaCheckListEucCsvEntity csvDataEntity
@@ -40,10 +50,10 @@ public class NenreiToutatsuYoteishaCheckListCsv {
                 csvDataEntity.setShikibetsuCode(new RString(entity.getShikibetsuCode().value().toString()));
                 csvDataEntity.setKanaMeisho(entity.getKanaMeisho());
                 csvDataEntity.setMeisho(entity.getMeisho());
-                if (new RString("1").equals(entity.getSeibetsuCode())) {
-                    csvDataEntity.setSeibetsu(new RString("男"));
-                } else if (new RString("2").equals(entity.getSeibetsuCode())) {
-                    csvDataEntity.setSeibetsu(new RString("女"));
+                if (性別コード1.equals(entity.getSeibetsuCode())) {
+                    csvDataEntity.setSeibetsu(性別_男);
+                } else if (性別コード2.equals(entity.getSeibetsuCode())) {
+                    csvDataEntity.setSeibetsu(性別_女);
                 }
                 if (nenCheckListJyohoEntity.is日付編集フラグ()) {
                     if (entity.getSeinengappiYMD() != null) {
@@ -68,12 +78,12 @@ public class NenreiToutatsuYoteishaCheckListCsv {
                 csvDataEntity.setJusho(entity.getJusho());
                 csvDataEntity.setGyoseikuCode(entity.getGyoseikuCode());
                 csvDataEntity.setGyoseikuName(entity.getGyoseikuName());
-                if (new RString("1").equals(entity.getJuminShubetsuCode()) || new RString("3").equals(
+                if (住登内日本人.equals(entity.getJuminShubetsuCode()) || 住登外日本人.equals(
                         entity.getJuminShubetsuCode())) {
-                    csvDataEntity.setJuminShubetsu(new RString("日本人"));
-                } else if (new RString("2").equals(entity.getJuminShubetsuCode()) || new RString("4").equals(
+                    csvDataEntity.setJuminShubetsu(住民種別_日本人のみ);
+                } else if (住登内外国人.equals(entity.getJuminShubetsuCode()) || 住登外外国人.equals(
                         entity.getJuminShubetsuCode())) {
-                    csvDataEntity.setJuminShubetsu(new RString("外国人"));
+                    csvDataEntity.setJuminShubetsu(住民種別_外国人のみ);
                 }
                 csvDataEntity.setSeikatsu(entity.getSeikatsu());
                 csvDataEntity.setJyotei(entity.getJyotei());
@@ -84,7 +94,7 @@ public class NenreiToutatsuYoteishaCheckListCsv {
     }
 
     /**
-     * 年齢到達予定者チェックリスト_CSVデータ作成、連番あり。
+     * 年齢到達予定者チェックリスト_CSVデータ作成、連番あります。
      *
      * @param nenCheckListJyohoEntity 年齢到達予定者チェックリスト情報Entity
      * @return 年齢到達予定者チェックリスト_CSVデータ
@@ -100,14 +110,14 @@ public class NenreiToutatsuYoteishaCheckListCsv {
                 NenreiToutatsuYoteishaCheckListEucCsvEntity csvDataEntity
                         = new NenreiToutatsuYoteishaCheckListEucCsvEntity();
                 csvDataEntity.setRenban(new RString(String.valueOf(renban)));
-                csvDataEntity.setHihokenshaNo(new RString(entity.getHihokenshaNo().toString()));
-                csvDataEntity.setShikibetsuCode(new RString(entity.getShikibetsuCode().toString()));
+                csvDataEntity.setHihokenshaNo(new RString(entity.getHihokenshaNo().value().toString()));
+                csvDataEntity.setShikibetsuCode(new RString(entity.getShikibetsuCode().value().toString()));
                 csvDataEntity.setKanaMeisho(entity.getKanaMeisho());
                 csvDataEntity.setMeisho(entity.getMeisho());
-                if (new RString("1").equals(entity.getSeibetsuCode())) {
-                    csvDataEntity.setSeibetsu(new RString("男"));
-                } else if (new RString("2").equals(entity.getSeibetsuCode())) {
-                    csvDataEntity.setSeibetsu(new RString("女"));
+                if (性別コード1.equals(entity.getSeibetsuCode())) {
+                    csvDataEntity.setSeibetsu(性別_男);
+                } else if (性別コード2.equals(entity.getSeibetsuCode())) {
+                    csvDataEntity.setSeibetsu(性別_女);
                 }
                 if (nenCheckListJyohoEntity.is日付編集フラグ()) {
                     if (entity.getSeinengappiYMD() != null) {
@@ -132,12 +142,12 @@ public class NenreiToutatsuYoteishaCheckListCsv {
                 csvDataEntity.setJusho(entity.getJusho());
                 csvDataEntity.setGyoseikuCode(entity.getGyoseikuCode());
                 csvDataEntity.setGyoseikuName(entity.getGyoseikuName());
-                if (new RString("1").equals(entity.getJuminShubetsuCode()) || new RString("3").equals(
+                if (住登内日本人.equals(entity.getJuminShubetsuCode()) || 住登外日本人.equals(
                         entity.getJuminShubetsuCode())) {
-                    csvDataEntity.setJuminShubetsu(new RString("日本人"));
-                } else if (new RString("2").equals(entity.getJuminShubetsuCode()) || new RString("4").equals(
+                    csvDataEntity.setJuminShubetsu(住民種別_日本人のみ);
+                } else if (住登内外国人.equals(entity.getJuminShubetsuCode()) || 住登外外国人.equals(
                         entity.getJuminShubetsuCode())) {
-                    csvDataEntity.setJuminShubetsu(new RString("外国人"));
+                    csvDataEntity.setJuminShubetsu(住民種別_外国人のみ);
                 }
                 csvDataEntity.setSeikatsu(entity.getSeikatsu());
                 csvDataEntity.setJyotei(entity.getJyotei());

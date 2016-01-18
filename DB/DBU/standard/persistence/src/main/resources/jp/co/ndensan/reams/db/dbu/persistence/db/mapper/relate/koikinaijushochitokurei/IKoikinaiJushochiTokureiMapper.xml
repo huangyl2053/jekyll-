@@ -4,7 +4,7 @@
     
     <resultMap id="getKoikinaiJushochiTokureiListResultMap" 
                type="jp.co.ndensan.reams.db.dbu.entity.db.relate.koikinaijushochitokurei.KoikinaiJushochiTokureiRelateEntity" autoMapping="true">
-<!--        <id property="hihokenshaNo" column="dbT1001HihokenshaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="hihokenshaNo" column="dbT1001HihokenshaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="idoYMD" column="dbT1001HihokenshaDaicho_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <id property="edaNo" column="dbT1001HihokenshaDaicho_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="shichosonCode" column="dbT1001HihokenshaDaicho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
@@ -35,7 +35,7 @@
         <result property="kyuShichosonCode" column="dbT1001HihokenshaDaicho_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="logicalDeletedFlag" column="dbT1001HihokenshaDaicho_logicalDeletedFlag" />
         <association property="ft200Entity" 
-                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>-->
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
     
     <select id="get直近広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
@@ -380,7 +380,7 @@
             "koikinaiTokureiSochimotoShichosonCode",
             "kyuShichosonCode",											
             "logicalDeletedFlag",
-            row_number() over(partition by "shikakuShutokuYMD" order by "idoYMD" desc,"edaNo" desc) as rank_number
+            row_number() over(partition by "shikakuShutokuYMD" order by "idoYMD" , "edaNo") as rank_number
 	  FROM												
             rgdb."DbT1001HihokenshaDaicho"										
             WHERE
@@ -388,10 +388,9 @@
             AND	"logicalDeletedFlag"=FALSE
             AND "hihokenshaNo" = #{hihokenshaNo}
             AND "shikakuShutokuYMD" = #{shikakuShutokuYMD}
-            AND "koikinaiJushochiTokureiFlag" = '1'
             AND "idoYMD" <![CDATA[>=]]> #{idoYMD}
             AND (
-                "jushochiTokureiFlag" != '1'
+                "koikinaiJushochiTokureiFlag" != '1'
                 OR "shikakuSoshitsuTodokedeYMD" IS NOT NULL
                )
             ) DbT1001											

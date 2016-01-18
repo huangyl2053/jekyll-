@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GogitaiJohoSakuseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,6 +31,10 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     private GogitaiShosaiDiv GogitaiShosai;
     @JsonProperty("UploadFileToroku")
     private UploadFileTorokuDiv UploadFileToroku;
+    @JsonProperty("hiddenFileName")
+    private RString hiddenFileName;
+    @JsonProperty("hiddenFileId")
+    private RString hiddenFileId;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -107,6 +112,42 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     @JsonProperty("UploadFileToroku")
     public void setUploadFileToroku(UploadFileTorokuDiv UploadFileToroku) {
         this.UploadFileToroku = UploadFileToroku;
+    }
+
+    /*
+     * gethiddenFileName
+     * @return hiddenFileName
+     */
+    @JsonProperty("hiddenFileName")
+    public RString getHiddenFileName() {
+        return hiddenFileName;
+    }
+
+    /*
+     * sethiddenFileName
+     * @param hiddenFileName hiddenFileName
+     */
+    @JsonProperty("hiddenFileName")
+    public void setHiddenFileName(RString hiddenFileName) {
+        this.hiddenFileName = hiddenFileName;
+    }
+
+    /*
+     * gethiddenFileId
+     * @return hiddenFileId
+     */
+    @JsonProperty("hiddenFileId")
+    public RString getHiddenFileId() {
+        return hiddenFileId;
+    }
+
+    /*
+     * sethiddenFileId
+     * @param hiddenFileId hiddenFileId
+     */
+    @JsonProperty("hiddenFileId")
+    public void setHiddenFileId(RString hiddenFileId) {
+        this.hiddenFileId = hiddenFileId;
     }
 
     /*

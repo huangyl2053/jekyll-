@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 合議体情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.dbamn71001.IDbamn71001RelateMapper">
+
+<!-- UaFt200FindShikibetsuTaishoEntityの項目にマッピングします。-->
+    <select id="select識別コード"
+              resultType="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity"
+              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.dbamn71001.AtenaMybatisParameter"
+              fetchSize="500">
+      SELECT
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" AS shikibetsuCode
+      FROM 
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />  
+            AS  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+    </select>    
+
+
+<!-- ShikakuIdoTaishoshaEntityの項目にマッピングします。-->
+    <resultMap id="resultMap_ShikakuIdoTaishoshaEntity" type="jp.co.ndensan.reams.db.dba.entity.dbamn71001.ShikakuIdoTaishoshaEntity" autoMapping="true">
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+        <result property="現全国地方公共団体コード" column="現全国地方公共団体コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="旧全国地方公共団体コード" column="旧全国地方公共団体コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="住民種別コード" column="住民種別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住民状態コード" column="住民状態コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    </resultMap>
+    <select id="select資格異動対象者"
+              resultMap="resultMap_ShikakuIdoTaishoshaEntity"
+              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.dbamn71001.AtenaMybatisParameter"
+              fetchSize="500">
+        SELECT
+            "shikibetsuCode" AS 識別コード,
+            "genLasdecCode" AS 現全国地方公共団体コード,
+            "kyuLasdecCode" AS 旧全国地方公共団体コード,
+            "juminShubetsuCode" AS 住民種別コード,
+            "juminJotaiCode" AS 住民状態コード,
+            "seinengappiYMD" AS 生年月日
+        FROM 
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+        <if test="識別コード!=null">
+            WHERE 
+                "shikibetsuCode" IN 
+             <foreach item="識別コード" index="index" collection="識別コード" open="(" separator="," close=")">
+                  #{識別コード}  
+             </foreach>  
+        </if>
+    </select>  
+    
+    
+<!-- DbT1003TashichosonJushochiTokureiEntityの項目にマッピングします。-->
+    <select id="select他市町村住所地特例" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity"
+              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.dbamn71001.ShikakuIdoTaishoshaShutokuMybatisParameter"
+              fetchSize="500">
+        SELECT
+            *
+        FROM
+            rgdb."DbT1003TashichosonJushochiTokurei"
+        WHERE
+            "shikibetsuCode" = #{識別コード}
+          AND (("tekiyoYMD" <![CDATA[<=]]> #{年齢到達日}
+                AND "kaijoYMD" <![CDATA[>]]> #{年齢到達日}
+               )
+             OR
+               ("tekiyoYMD" <![CDATA[<=]]> #{年齢到達日}
+               AND "kaijoYMD" IS NULL
+              ))
+          AND "logicalDeletedFlag" = FALSE
+    </select>
+    
+
+<!-- DbT1002TekiyoJogaishaEntityの項目にマッピングします。-->
+    <select id="select適用除外者" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity"
+              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.dbamn71001.ShikakuIdoTaishoshaShutokuMybatisParameter"
+              fetchSize="500">
+        SELECT
+            *
+        FROM
+            rgdb."DbT1002TekiyoJogaisha"
+        WHERE
+            "shikibetsuCode" = #{識別コード}
+          AND (("tekiyoYMD" <![CDATA[<=]]> #{年齢到達日}
+                AND "kaijoYMD" <![CDATA[>=]]> #{年齢到達日}
+               )
+             OR
+               ("tekiyoYMD" <![CDATA[<=]]> #{年齢到達日}
+               AND "kaijoYMD" IS NULL
+              ))
+          AND "logicalDeletedFlag" = FALSE
+    </select>
+    
+
+<!-- DbT1009ShikakuShutokuJogaishaEntityの項目にマッピングします。-->   
+    <select id="select資格取得除外者" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity"
+              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.dbamn71001.ShikakuIdoTaishoshaShutokuMybatisParameter"
+              fetchSize="500">
+        SELECT
+            *
+        FROM
+            rgdb."DbT1009ShikakuShutokuJogaisha"
+        WHERE
+            "shikibetsuCode" = #{識別コード}
+    </select>
+  
+
+<!-- DbT1010TennyushutsuHoryuTaishoshaEntityの項目にマッピングします。-->
+    <select id="select転入保留対象者" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity"
+              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.dbamn71001.ShikakuIdoTaishoshaShutokuMybatisParameter"
+              fetchSize="500">
+        SELECT
+            *
+        FROM
+            rgdb."DbT1010TennyushutsuHoryuTaishosha"
+        WHERE
+            "shikibetsuCode" = #{識別コード}
+    </select>
+</mapper>

@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 
 /**
@@ -65,19 +64,14 @@ public class ShujiiMasterHandler {
      * 画面初期化処理です。
      */
     public void load() {
-
-        List<KeyValueDataSource> shichosonDataSource = new ArrayList<>();
-        shichosonDataSource.add(new KeyValueDataSource(new RString("034001"), new RString("市町村一")));
-        shichosonDataSource.add(new KeyValueDataSource(new RString("000002"), new RString("市町村二")));
-        shichosonDataSource.add(new KeyValueDataSource(new RString("000003"), new RString("市町村三")));
-        div.getDdlSearchShichoson().setDataSource(shichosonDataSource);
+         div.getCcdHokenshaList().loadHokenshaList();
     }
 
     /**
      * 検索条件入力項目をクリアします。
      */
     public void clearKensakuJoken() {
-        div.getDdlSearchShichoson().setSelectedIndex(0);
+        div.getCcdHokenshaList().loadHokenshaList();
         div.getTxtSearchShujiiIryokikanCodeFrom().clearValue();
         div.getTxtSearchShujiiIryokikanCodeTo().clearValue();
         div.getTxtSearchShujiiIryokikanMeisho().clearValue();
@@ -86,7 +80,8 @@ public class ShujiiMasterHandler {
         div.getTxtSearchShujiiCodeTo().clearValue();
         div.getTxtSearchShujiiShimei().clearValue();
         div.getTxtSearchShujiiKanaShimei().clearValue();
-
+        div.getRadSearchJokyoFlag().setSelectedIndex(0);
+        div.getTxtSaidaiHyojiKensu().clearValue();
     }
 
     /**

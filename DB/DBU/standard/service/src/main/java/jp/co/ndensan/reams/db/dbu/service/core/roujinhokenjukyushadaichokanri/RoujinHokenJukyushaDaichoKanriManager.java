@@ -63,7 +63,7 @@ public class RoujinHokenJukyushaDaichoKanriManager {
     }
 
     /**
-     * 老人保健受給者情報テーブルから老健受給情報老健受給情報を処理します。
+     * 老人保健受給者情報テーブルから老健受給情報老健受給情報を取得します。
      *
      * @param shikibetsuCode 識別コード
      * @return RojinHokenJukyushaJoho 老健受給情報老健受給情報
@@ -80,7 +80,7 @@ public class RoujinHokenJukyushaDaichoKanriManager {
     }
 
     /**
-     * 老健受給情報{@link RojinHokenJukyushaJoho}を保存します。
+     * 老健受給情報{@link RojinHokenJukyushaJoho}を更新します。
      *
      * @param 老健受給情報 {@link RojinHokenJukyushaJoho}
      * @return 更新件数 更新結果の件数を返します。
@@ -95,7 +95,7 @@ public class RoujinHokenJukyushaDaichoKanriManager {
     }
 
     /**
-     * 老健受給情報{@link RojinHokenJukyushaJoho}を保存します。
+     * 老健受給情報{@link RojinHokenJukyushaJoho}を登録します。
      *
      * @param 老健受給情報 {@link RojinHokenJukyushaJoho}
      * @return 登録件数 登録結果の件数を返します。
@@ -109,6 +109,13 @@ public class RoujinHokenJukyushaDaichoKanriManager {
         return dac.save(老健受給情報.toEntity());
     }
 
+    /**
+     * 宛名情報の現全国地方公共団体コードを取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return 現全国地方公共団体コード
+     */
+    @Transaction
     public RString get宛名情報(ShikibetsuCode 識別コード) {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(
                 GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
@@ -119,9 +126,6 @@ public class RoujinHokenJukyushaDaichoKanriManager {
                 new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
         IRoujinHokenJukyushaDaichoKanriMapper mapper = mapperProvider.create(IRoujinHokenJukyushaDaichoKanriMapper.class);
         UaFt200FindShikibetsuTaishoEntity 宛名情報 = mapper.selectJyohou(psmParameter);
-        if (宛名情報 == null) {
-            return RString.EMPTY;
-        }
         RString genLasdecCode = ShikibetsuTaishoFactory.createKojin(宛名情報).get現全国地方公共団体コード().getColumnValue();
         return genLasdecCode;
     }

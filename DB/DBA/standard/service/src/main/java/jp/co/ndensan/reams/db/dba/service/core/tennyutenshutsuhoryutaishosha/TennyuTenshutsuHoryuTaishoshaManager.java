@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
- * 転入転出保留対象者管理のMapperクラスです
+ * 転入転出保留対象者管理のMapperクラスです。
  */
 public class TennyuTenshutsuHoryuTaishoshaManager {
 
@@ -71,7 +71,7 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
     }
 
     /**
-     * 転出保留対象者情報の取得処理します
+     * 転出保留対象者情報の取得処理します。
      *
      * @return SearchResult<TennyuTenshutsuHoryuTaishosha>
      */
@@ -90,7 +90,7 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
     }
 
     /**
-     * 転入保留対象者情報の取得処理します
+     * 転入保留対象者情報の取得処理します。
      *
      * @return SearchResult<TennyuTenshutsuHoryuTaishosha>
      */
@@ -103,20 +103,13 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
         }
         List<TennyuTenshutsuHoryuTaishosha> businessList = new ArrayList<>();
         for (TenshutsuHoryuTaishoshaEntity entity : entityList) {
-            //TODO QA:内容 434
-//            RString 住民種別 = CodeMaster.getCodeMeisho(CodeShubetsu.EMPTY, new Code(entity.get住民種別コード()));
-//            RString 性別 = CodeMaster.getCodeMeisho(CodeShubetsu.EMPTY, new Code(entity.get性別コード()));
-//            RString 異動事由 = CodeMaster.getCodeMeisho(CodeShubetsu.EMPTY, new Code(entity.get異動事由コード()));
-//            entity.set住民種別コード(住民種別);
-//            entity.set性別コード(性別);
-//            entity.set異動事由コード(異動事由);
             businessList.add(new TenshutsuHoryuTaishoshaBusiness(entity));
         }
         return SearchResult.of(businessList, 0, false);
     }
 
     /**
-     * 広域保留対象者 情報の取得処理します
+     * 広域保留対象者 情報の取得処理します。
      *
      * @return SearchResult<TennyuTenshutsuHoryuTaishosha>
      */
@@ -135,7 +128,7 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
     }
 
     /**
-     * 転入転出保留対象者情報を物理削除します n
+     * 転入転出保留対象者情報を物理削除します。
      *
      * @param 識別コード ShikibetsuCode
      * @param 履歴番号 Decimal

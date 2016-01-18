@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 認定調査情報取得のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ninteichosairaishokai.INinteiChosaIraiShokaiMapper">
+
+    <resultMap id="result_NinteiRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.ninteichosairaishokai.NinteiChosaIraiShokaiRelateEntity" autoMapping="true">
+        <result column="ninteiShinseiYMD" property="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result column="ninteiShinseiShinseijiKubunCode" property="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result column="torisageYMD" property="torisageYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result column="ninteiChosaItakusakiCode" property="ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosaItakusakiCodeTypeHandler" />
+        <result column="ninteiChosainCode" property="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosainCodeTypeHandler" />
+        <result column="nijiHanteiYMD" property="nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result column="nijiHanteiYokaigoJotaiKubunCode" property="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result column="nijiHanteiNinteiYukoKikan" property="nijiHanteiNinteiYukoKikan" />
+        <result column="ninteichosaIraiKubunCode" property="ninteichosaIraiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result column="jigyoshaMeisho" property="jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result column="chosainShimei" property="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+
+    <select id="get認定調査情報" resultMap="result_NinteiRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.param.ninteichosairaishokai.NinteiChosaIraiShokaiParameter" fetchSize="500">
+      SELECT
+           dbT5101."ninteiShinseiYMD" AS "ninteiShinseiYMD",
+           dbT5101."ninteiShinseiShinseijiKubunCode" AS "ninteiShinseiShinseijiKubunCode",
+           dbT5101."torisageYMD" AS "torisageYMD",
+           dbT5101."ninteiChosaItakusakiCode" AS "ninteiChosaItakusakiCode",
+           dbT5101."ninteiChosainCode" AS "ninteiChosainCode",
+           dbT5102."nijiHanteiYMD" AS "nijiHanteiYMD",
+           dbT5102."nijiHanteiYokaigoJotaiKubunCode" AS "nijiHanteiYokaigoJotaiKubunCode",
+           dbT5102."nijiHanteiNinteiYukoKikan" AS "nijiHanteiNinteiYukoKikan",
+           dbT5201."ninteichosaIraiKubunCode" AS "ninteichosaIraiKubunCode",
+           dbT5910."jigyoshaMeisho" AS "jigyoshaMeisho",
+           dbT5913."chosainShimei" AS "chosainShimei"
+      FROM
+           rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
+           INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
+           ON dbT5102."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
+           INNER JOIN
+           (
+               SELECT 
+                   dbT5201Nintei."shinseishoKanriNo",
+                   MAX(dbT5201Nintei."ninteichosaIraiRirekiNo") AS "ninteichosaIraiRirekiNo"
+               FROM 
+                   rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201Nintei
+               WHERE 
+                   dbT5201Nintei."logicalDeletedFlag" = False
+               GROUP BY
+                   dbT5201Nintei."shinseishoKanriNo"
+           ) rinzitable
+           ON rinzitable."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
+           INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
+           ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
+           INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201
+           ON dbT5201."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
+               AND dbT5201."ninteichosaIraiRirekiNo" = rinzitable."ninteichosaIraiRirekiNo"
+           LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910
+           ON dbT5910."ninteichosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
+               AND dbT5910."shichosonCode" = dbT7051."shichosonCode"
+           LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbT5913
+           ON dbT5913."ninteichosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
+               AND dbT5913."ninteiChosainNo" = dbT5101."ninteiChosainCode"
+               AND dbT5913."shichosonCode" = dbT7051."shichosonCode"
+      WHERE
+           dbT5101."hihokenshaNo" = #{hihokenshaNo}
+           AND dbT5101."shoriJotaiKubun" IN ('01','04')
+           ORDER BY
+               dbT5101."ninteiShinseiYMD" DESC
+    </select>
+</mapper>

@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.business.core.shujiiiryokikanjohomaster;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteichosainmaster.NinteiChosainMaster;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosainmaster.NinteiChosainMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterRelateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -27,12 +25,12 @@ public class KoseiShujiiIryoKikanMasterBusiness {
 
     /**
      * コンストラクタです。<br/>
-     * DBより取得した{@link NinteiChosainMasterRelateEntity}より{@link NinteiChosainMaster}を生成します。
+     * DBより取得した{@link KoseiShujiiIryoKikanMasterRelateEntity}より{@link KoseiShujiiIryoKikanMaster}を生成します。
      *
-     * @param entity DBより取得した{@link NinteiChosainMasterRelateEntity}
+     * @param entity DBより取得した{@link KoseiShujiiIryoKikanMasterRelateEntity}
      */
     public KoseiShujiiIryoKikanMasterBusiness(KoseiShujiiIryoKikanMasterRelateEntity entity) {
-        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員情報"));
+        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関情報"));
     }
 
     /**

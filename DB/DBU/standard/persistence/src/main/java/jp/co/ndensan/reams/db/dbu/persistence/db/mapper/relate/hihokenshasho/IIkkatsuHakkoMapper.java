@@ -117,6 +117,13 @@ public interface IIkkatsuHakkoMapper {
     List<IkkatsuHakkoRelateEntity> get最新他市町村住所地特例2(IkkatsuHakkoMybatisParameter 検索条件);
 
     /**
+     * 生年月日の値がある場合、転入保留対象者に取得します。
+     *
+     * @return {@link IkkatsuHakkoRelateEntity}
+     */
+    List<IkkatsuHakkoRelateEntity> get転入保留対象者();
+
+    /**
      * 画面で「再発行する」をチェックする場合、対象情報を取得します。
      *
      * @param 検索条件 検索条件

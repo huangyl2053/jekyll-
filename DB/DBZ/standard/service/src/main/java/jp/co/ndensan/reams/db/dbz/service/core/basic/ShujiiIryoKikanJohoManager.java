@@ -56,7 +56,7 @@ public class ShujiiIryoKikanJohoManager {
 
         DbT5911ShujiiIryoKikanJohoEntity entity = dac.selectByKey(
                 市町村コード,
-                主治医医療機関コード);
+                主治医医療機関コード.value());
         if (entity == null) {
             return null;
         }

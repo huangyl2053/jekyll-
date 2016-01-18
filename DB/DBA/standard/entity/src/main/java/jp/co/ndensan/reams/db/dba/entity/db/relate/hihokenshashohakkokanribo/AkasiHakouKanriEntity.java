@@ -5,16 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 証発行管理リストEntityです。
+ * 証発行管理リストです。
  */
 @lombok.Getter
 @lombok.Setter
@@ -22,21 +21,20 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class AkasiHakouKanriEntity {
 
     private int renban;
-    private HihokenshaNo hihokenshaNo;
-    private RString juminCode;
-    private YubinNo yubinNo;
-    private RString shimei;
-    private RString jusho;
+    private RString hihokenshaNo;
     private LasdecCode shichosonCode;
+    private ShikibetsuCode shikibetsuCode;
     private FlexibleDate kofuYMD;
+    private FlexibleDate yukoKigenYMD;
+    private RString kofuJiyu;
+    private FlexibleDate kaishuYMD;
+    private RString kaishuJiyu;
+    private RString shoYoshikiKubunCode;
+    private RString meisho;
+    private RString yubinNo;
+    private RString jusho;
     private Code kofuJiyuCode;
     private RString kofuJiyuRyakusho;
-    private RString kofuJiyuMeisho;
-    private FlexibleDate kaishuYMD;
     private Code kaishuJiyuCode;
-    private RString kaishuJiyuMeisho;
-    private FlexibleDate yukoKigenYMD;
-    private RString shoYoshikiKubunCode;
-    private boolean komokuNameFukaFlag;
-    private boolean hitukiHenshuFlag;
+
 }

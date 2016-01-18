@@ -22,38 +22,40 @@ public class NenreiToutatsuYoteishaCheckListBatchParameterSakusei {
     private static final RString CHECKBOX_KEY0 = new RString("key0");
     private static final RString CHECKBOX_KEY1 = new RString("key1");
     private static final RString CHECKBOX_KEY2 = new RString("key2");
-
+    private static final RString 出力対象_1 = new RString("1");
+    private static final RString 出力対象_2 = new RString("2");
+    private static final RString 住民種別_1 = new RString("1");
+    private static final RString 住民種別_2 = new RString("2");
+    private static final RString 住民種別_3 = new RString("3");
     // TODO QA319 引数は確認中です。
     /**
      * 年齢到達予定者チェックリスト_バッチパラメータ作成。
      *
-     * @param 出力対象
-     * @param 住民種別
-     * @param 今回開始日
-     * @param 今回終了日
-     * @param 編集方法
-     * @param 出力順ID
+     * @param 出力対象 出力対象
+     * @param 住民種別 住民種別
+     * @param 今回開始日 今回開始日
+     * @param 今回終了日 今回終了日
+     * @param 編集方法 編集方法
+     * @param 出力順ID 出力順ID
      * @return　年齢到達予定者チェックリスト_バッチパラメータ
      */
     public INenreiToutatsuYoteishaCheckListBatchParameter getNenreiToutatsuYoteishaCheckListBatchParameter(
             RString 出力対象, RString 住民種別, FlexibleDate 今回開始日, FlexibleDate 今回終了日, List<RString> 編集方法,
             RString 出力順ID) {
-
         boolean 項目名付加フラグ = false;
         boolean 連番付加フラグ = false;
         boolean 日付編集フラグ = false;
         if (CHERADIO_KEY0.equals(出力対象)) {
-            出力対象 = new RString("1");
+            出力対象 = 出力対象_1;
         } else if (CHERADIO_KEY1.equals(出力対象)) {
-            出力対象 = new RString("2");
+            出力対象 = 出力対象_2;
         }
-
         if (CHERADIO_KEY0.equals(住民種別)) {
-            住民種別 = new RString("1");
+            住民種別 = 住民種別_1;
         } else if (CHERADIO_KEY1.equals(住民種別)) {
-            住民種別 = new RString("2");
+            住民種別 = 住民種別_2;
         } else if (CHERADIO_KEY2.equals(住民種別)) {
-            住民種別 = new RString("3");
+            住民種別 = 住民種別_3;
         }
         for (RString key : 編集方法) {
             if (CHECKBOX_KEY0.equals(key)) {
@@ -64,9 +66,7 @@ public class NenreiToutatsuYoteishaCheckListBatchParameterSakusei {
                 日付編集フラグ = true;
             }
         }
-
         return new INenreiToutatsuYoteishaCheckListBatchParameter(出力対象, 項目名付加フラグ, 連番付加フラグ,
                 日付編集フラグ, 住民種別, 今回開始日, 今回終了日, 出力順ID);
-
     }
 }

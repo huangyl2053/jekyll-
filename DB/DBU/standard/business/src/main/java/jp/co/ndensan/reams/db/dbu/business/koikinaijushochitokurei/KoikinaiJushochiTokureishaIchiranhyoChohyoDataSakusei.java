@@ -33,7 +33,7 @@ import lombok.Setter;
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
-    
+
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
@@ -77,14 +77,14 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
     private RString 広住喪失届出日;
     private RString 措置市町村コード;
     private RString 措置市町村名称;
-    
+
     private KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei() {
-    
+
     }
 
-    
     /**
      * 帳票データ作成します。
+     *
      * @param entity 広域内住所地特例者一覧表情報Entity
      * @return 帳票用データ
      */
@@ -96,15 +96,18 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
                 separator(Separator.JAPANESE).
                 fillType(FillType.BLANK).toDateString());
         printTimeStampSb.append(RString.HALF_SPACE);
-        printTimeStampSb.append(String.format("%02d", printdate.getHour()));
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(DATE_時);
-        printTimeStampSb.append(String.format("%02d", printdate.getMinute()));
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(DATE_分);
-        printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(DATE_秒);
         printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(DATE_作成);
-        
+
         RString 印刷日時 = printTimeStampSb.toRString();
         RString 市町村コード = entity.get市町村コード();
         RString 市町村名 = entity.get市町村名();
@@ -133,8 +136,8 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
             データList.add(データ);
         } else {
             for (int i = 1; i < entity.get広域内住所地特例者List().size(); i++) {
-                KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei データ = 
-                        new KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei();
+                KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei データ
+                        = new KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei();
                 KoikinaiJushochiTokureiEntity 該当データ = entity.get広域内住所地特例者List().get(i);
                 データ.set印刷日時(印刷日時);
                 データ.setページ数(new RString(String.valueOf(i)));
@@ -180,7 +183,7 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
         }
         return データList;
     }
-    
+
     private static RString get生年月日(KoikinaiJushochiTokureiEntity 該当データ) {
         if (JuminShubetsu.日本人.getCode().equals(該当データ.get住民種別コード())
                 || JuminShubetsu.住登外個人_日本人.getCode().equals(該当データ.get住民種別コード())) {
@@ -193,16 +196,15 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
             } else if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(BusinessConfig
                     .get(ConfigNameDBU.外国人表示制御_生年月日表示方法))) {
                 return new RString(new FlexibleDate(該当データ.get生年月日()).wareki()
-                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toString());
+                        .separator(Separator.PERIOD).fillType(FillType.BLANK).toString());
             }
         }
         return RString.EMPTY;
     }
-    
+
     private static RString timeToRString(RString time) {
         return new RString(new FlexibleDate(time).wareki()
-                    .separator(Separator.PERIOD).fillType(FillType.NONE).toString());
+                .separator(Separator.PERIOD).fillType(FillType.NONE).toString());
     }
-    
-    
+
 }

@@ -32,7 +32,7 @@ public interface IShikakuShutokuJogaishaKanriMapper {
     ShikakuShutokuJogaishaKanriEntity get宛名情報(ShikakuShutokuJogaishaKanriParameter parameter);
 
     /**
-     * 宛名情報を取得します。
+     * 除外期間重複チェックします。
      *
      * @param shakanrientity ShikakuShutokuJogaishaKanriEntity
      * @return int

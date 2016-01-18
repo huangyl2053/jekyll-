@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.Batc
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.DBA1110011.BatchPanelHandler;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboFinder;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -41,8 +43,8 @@ public class BatchPanel {
      * @return 被保険者証発行管理簿Divを持つResponseData
      */
     public ResponseData<BatchPanelDiv> onLoad(BatchPanelDiv div) {
-//        IUrControlData controlData = UrControlDataFactory.createInstance();
-//        RString menuID = controlData.getMenuID();
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        RString menuID = controlData.getMenuID();
         List<KouFuJiyuu> kouFuJiyuuList = HihokenshashoHakkoKanriboFinder.createInstance().getKofuJiyuInitialData(new RString("DBAMN72001")).records();
         List<KayiSyuuJiyuu> kayiSyuuJiyuuList = HihokenshashoHakkoKanriboFinder.createInstance().getKaishuJiyuInitialData(new RString("DBAMN72001")).records();
         getHandler(div).initialize(kouFuJiyuuList, kayiSyuuJiyuuList);
@@ -58,17 +60,17 @@ public class BatchPanel {
      * @param div {@link BatchPanelDiv 被保険者証発行管理簿Div}
      * @return 被保険者証発行管理簿Divを持つResponseData
      */
-    public ResponseData<HihokenshashoHakkoKanriboBatchParameter> onClick_btnJikko(BatchPanelDiv div) {
-        HihokenshashoHakkoKanriboBatchParameter parameter = new HihokenshashoHakkoKanriboBatchParameter();
+    public ResponseData onClick_btnJikko(BatchPanelDiv div) {
+
+        ResponseData<HihokenshashoHakkoKanriboBatchParameter> response = new ResponseData<>();
         RDate koufubiFrom = div.getTxtKoufubiRange().getFromValue();
         RDate koufubiTo = div.getTxtKoufubiRange().getToValue();
         RDate kaishubiFrom = div.getTxtKaishubiRange().getFromValue();
         RDate kaishubiTo = div.getTxtKaishubiRange().getToValue();
-        ResponseData<BatchPanelDiv> response = new ResponseData<>();
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(parameter).addMessage(message).respond();
+            return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
@@ -81,17 +83,19 @@ public class BatchPanel {
                         DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace(kaishubiFrom.toString(), kaishubiTo.toString()));
             }
             boolean flg = HihokenshashoHakkoKanriboFinder.createInstance().checkInput(
-                    FlexibleDate.MAX, FlexibleDate.MAX, FlexibleDate.MAX, FlexibleDate.MAX);
-            if (flg == false) {
+                    new FlexibleDate(koufubiFrom.toDateString()), new FlexibleDate(koufubiTo.toDateString()),
+                    new FlexibleDate(kaishubiFrom.toDateString()), new FlexibleDate(kaishubiTo.toDateString()));
+            if (!flg) {
                 throw new IllegalStateException(UrErrorMessages.必須.toString());
             } else {
-                //HihokenshashoHakkoKanriboFinder.createInstance().getHihokenshashoHakkoKanriboBatchParameter();
-                getHandler(div);
-                response.data = div;
+                IUrControlData controlData = UrControlDataFactory.createInstance();
+                RString menuID = controlData.getMenuID();
+                List<KouFuJiyuu> kouFuJiyuuList = HihokenshashoHakkoKanriboFinder.createInstance().getKofuJiyuInitialData(new RString("DBAMN72001")).records();
+                List<KayiSyuuJiyuu> kayiSyuuJiyuuList = HihokenshashoHakkoKanriboFinder.createInstance().getKaishuJiyuInitialData(new RString("DBAMN72001")).records();
+                response.data = getHandler(div).batchParameter(kouFuJiyuuList, kayiSyuuJiyuuList, menuID);
             }
         }
-
-        return ResponseData.of(parameter).respond();
+        return response;
     }
 
     /**

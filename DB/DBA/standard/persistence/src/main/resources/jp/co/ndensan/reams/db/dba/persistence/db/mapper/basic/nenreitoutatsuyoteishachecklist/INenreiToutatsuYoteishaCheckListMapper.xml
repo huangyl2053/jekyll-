@@ -80,7 +80,7 @@
         WHERE	
             DbT1001Hiho."logicalDeletedFlag" <![CDATA[<>]]> TRUE
         AND
-            DbT1001Hiho."jushochiTokureiFlag" = '0'	
+            DbT1001Hiho."jushochiTokureiFlag" = '1'	
         AND
             DbT1001Hiho."shikakuSoshitsuYMD" IS NULL
         AND
@@ -176,7 +176,7 @@
         WHERE	
             DbT1001Hiho."logicalDeletedFlag" <![CDATA[<>]]> TRUE
         AND 
-            DbT1001Hiho."jushochiTokureiFlag" = '0'
+            DbT1001Hiho."jushochiTokureiFlag" = '1'
         AND 
             DbT1001Hiho."hihokennshaKubunCode" = '2'
 	UNION
@@ -213,15 +213,16 @@
     </resultMap>
     <select id="getShikakuShutokuJogaiList"
         resultMap="resultMap_DbT1009ShikakuShutokuJogaishaEntity" fetchSize="500">
+        SELECT
+            "DbT1009Shikaku_shikibetsuCode"
+        FROM (
                 SELECT									
-                    "shikibetsuCode" AS "DbT1009Shikaku_shikibetsuCode"
+                    "shikibetsuCode" AS "DbT1009Shikaku_shikibetsuCode",
+                    row_number() over(partition by "shikibetsuCode" order by "rirekiNo" DESC, "shikakuShutokuJogaiYMD" DESC) as rank_number
                 FROM	
                     rgdb."DbT1009ShikakuShutokuJogaisha"
-                WHERE	
-                    "isDeleted" <![CDATA[<>]]> TRUE
-                ORDER BY "rirekiNo" DESC,
-                    "shikakuShutokuJogaiYMD" DESC
-                LIMIT 1
+            ) AS DBT1009
+        where DBT1009.rank_number = 1
     </select>
       
     <resultMap id="resultMap_DbT1002TekiyoJogaishaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity" autoMapping="true">
@@ -231,18 +232,23 @@
     </resultMap>
     <select id="getTekiyoJogaiList"
         resultMap="resultMap_DbT1002TekiyoJogaishaEntity" fetchSize="500">
+        SELECT
+            "DbT1002Tekiyo_shikibetsuCode",
+            "DbT1002Tekiyo_tekiyoYMD",
+             "DbT1002Tekiyo_kaijoYMD"
+        FROM (
                 SELECT									
                     DbT1002Tekiyo."shikibetsuCode" AS "DbT1002Tekiyo_shikibetsuCode",
                     DbT1002Tekiyo."tekiyoYMD" AS "DbT1002Tekiyo_tekiyoYMD",
-                    DbT1002Tekiyo."kaijoYMD" AS "DbT1002Tekiyo_kaijoYMD"
+                    DbT1002Tekiyo."kaijoYMD" AS "DbT1002Tekiyo_kaijoYMD",
+                    row_number() over(partition by "shikibetsuCode" order by "tekiyoYMD" DESC, "idoYMD" DESC) as rank_number
                 FROM	
                     rgdb."DbT1002TekiyoJogaisha" AS DbT1002Tekiyo
                 WHERE	
                     "logicalDeletedFlag" <![CDATA[<>]]> TRUE
-
-                ORDER BY DbT1002Tekiyo."tekiyoYMD" DESC,
-                    DbT1002Tekiyo."idoYMD" DESC
-                LIMIT 1
+              ) AS DbT1002
+        WHERE DbT1002.rank_number = 1
+        
     </select>
     
     <resultMap id="resultMap_DbT1003TashichosonJushochiTokureiEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity" autoMapping="true">
@@ -252,20 +258,43 @@
     </resultMap>
     <select id="getTashichosonJushochi"
         resultMap="resultMap_DbT1003TashichosonJushochiTokureiEntity" fetchSize="500">
+        SELECT 
+            "DbT1003Tashicho_shikibetsuCode",
+            "DbT1003Tashicho_tekiyoYMD",
+            "DbT1003Tashicho_kaijoYMD"
+        FROM (
                 SELECT									
                     DbT1003Tashicho."shikibetsuCode" AS "DbT1003Tashicho_shikibetsuCode",
                     DbT1003Tashicho."tekiyoYMD" AS "DbT1003Tashicho_tekiyoYMD",
-                    DbT1003Tashicho."kaijoYMD" AS "DbT1003Tashicho_kaijoYMD"
+                    DbT1003Tashicho."kaijoYMD" AS "DbT1003Tashicho_kaijoYMD",
+                    row_number() over(partition by "shikibetsuCode" order by "tekiyoYMD" DESC, "idoYMD" DESC) as rank_number
                 FROM	
                     rgdb."DbT1003TashichosonJushochiTokurei" AS DbT1003Tashicho
                 WHERE	
                     DbT1003Tashicho."logicalDeletedFlag" <![CDATA[<>]]> TRUE
-
-                ORDER BY DbT1003Tashicho."tekiyoYMD" DESC,
-                    DbT1003Tashicho."idoYMD" DESC
-                LIMIT 1
+             ) AS DbT1003
+         WHERE DbT1003.rank_number = 1
     </select>
     
+    <resultMap id="resultMap_DbT1010TennyushutsuHoryuTaishoshaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity" autoMapping="true">
+    <result property="shikibetsuCode"   column="DbT1010Tennyu_shikibetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+    <result property="torokuIdoYMD"    column="DbT1010Tennyu_torokuIdoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    </resultMap>
+    <select id="getTennyushutsuHoryuTaishosha"
+        resultMap="resultMap_DbT1010TennyushutsuHoryuTaishoshaEntity" fetchSize="500">
+        SELECT
+            "DbT1010Tennyu_shikibetsuCode",
+            "DbT1010Tennyu_torokuIdoYMD"
+        FROM (
+                SELECT									
+                    "shikibetsuCode" AS "DbT1010Tennyu_shikibetsuCode",
+                    "torokuIdoYMD" AS "DbT1010Tennyu_torokuIdoYMD",
+                    row_number() over(partition by "shikibetsuCode" order by "rirekiNo" DESC) as rank_number
+                FROM	
+                    rgdb."DbT1010TennyushutsuHoryuTaishosha"
+            ) AS DbT1010
+        where DbT1010.rank_number = 1
+    </select>
     <resultMap id="resultMap_UrT0508SeikatsuHogoJukyushaEntity" type="jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity" autoMapping="true">
         <result property="shikibetsuCode"   column="UrT0508Seika_shikibetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
 	<result property="jukyuKaishiYMD"    column="UrT0508Seika_jukyuKaishiYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -273,7 +302,7 @@
     </resultMap>
     <select id="getSeikatsuHogojyu"
         resultMap="resultMap_UrT0508SeikatsuHogoJukyushaEntity" parameterType="jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode" fetchSize="500">
-                SELECT									
+               SELECT									
                     UrT0508Seika."shikibetsuCode" AS "UrT0508Seika_shikibetsuCode",
                     UrT0508Seika."jukyuKaishiYMD" AS "UrT0508Seika_jukyuKaishiYMD",
                     UrT0508Seika."jukyuHaishiYMD" AS "UrT0508Seika_jukyuHaishiYMD"

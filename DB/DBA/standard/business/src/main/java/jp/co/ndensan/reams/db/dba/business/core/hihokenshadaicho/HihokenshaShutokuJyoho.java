@@ -37,6 +37,15 @@ public class HihokenshaShutokuJyoho {
     }
 
     /**
+     * 被保険者台帳管理を返します。
+     *
+     * @return 被保険者台帳管理
+     */
+    public DbT1001HihokenshaDaichoEntity get被保険者台帳管理() {
+        return entity;
+    }
+
+    /**
      * 被保険者番号を返します。
      *
      * @return 被保険者番号

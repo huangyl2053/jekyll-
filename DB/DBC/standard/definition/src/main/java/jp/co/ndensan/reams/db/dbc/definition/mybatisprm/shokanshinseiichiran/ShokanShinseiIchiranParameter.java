@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshinseiichiran;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import lombok.Getter;
 
 /**
  * 償還払支給申請リスト取得条件を特定するためのMyBatis用パラメータクラスです。
  *
  */
-@Getter
+@lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanShinseiIchiranParameter {
 
     private final HihokenshaNo 被保険者番号;

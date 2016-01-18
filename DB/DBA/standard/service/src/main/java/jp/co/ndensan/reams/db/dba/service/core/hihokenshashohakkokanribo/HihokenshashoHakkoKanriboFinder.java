@@ -28,20 +28,10 @@ public class HihokenshashoHakkoKanriboFinder {
 
     private static final RString メニューID_DBAMN72001 = new RString("DBAMN72001");
     private static final RString メニューID_DBAMN72002 = new RString("DBAMN72002");
-    private static CodeShubetsu codeShubetsu;
-    private static RString 証発行モード;
-    private static RString 出力対象;
-    private static FlexibleDate 交付開始日;
-    private static FlexibleDate 交付終了日;
-    private static FlexibleDate 回収開始日;
-    private static FlexibleDate 回収終了日;
-    private static boolean 最新情報フラグ;
-    private static boolean 連番付加フラグ;
-    private static boolean 項目名付加フラグ;
-    private static boolean 日付編集フラグ;
-    private static List<UzT0007CodeEntity> 交付事由;
-    private static List<UzT0007CodeEntity> 回収事由;
-    private static RString 出力順ID;
+    private static final CodeShubetsu コード種別_002 = new CodeShubetsu("002");
+    private static final CodeShubetsu コード種別_003 = new CodeShubetsu("003");
+    private static final CodeShubetsu コード種別_004 = new CodeShubetsu("004");
+    private static final CodeShubetsu コード種別_005 = new CodeShubetsu("005");
 
     /**
      * コンストラクタです。
@@ -58,81 +48,28 @@ public class HihokenshashoHakkoKanriboFinder {
         return InstanceProvider.create(HihokenshashoHakkoKanriboFinder.class);
     }
 
-//    /**
-//     * バッチ用パラメータ取得です。
-//     *
-//     * @param parameter バッチ用のパラメータ
-//     * @return AkasiHakouKanriParameter バッチ用のパラメータ
-//     */
-//    @Transaction
-//    public AkasiHakouKanriParameter getHihokenshashoHakkoKanriboBatchParameter(AkasiHakouKanriParameter parameter) {
-//
-//        証発行モード = parameter.getAkasihakoumod();
-//        if (parameter.isHakoukannririsutoflg()) {
-//            出力対象 = parameter.getSiyuturiyokudaysyou();
-//            交付開始日 = parameter.getKoufukayisihi();
-//            交付終了日 = parameter.getKoufusiuryouhi();
-//            回収開始日 = parameter.getKasyuukayisihi();
-//            回収終了日 = parameter.getKasyuusiuryouhi();
-//            最新情報フラグ = parameter.isSeyisinjyohoflg();
-//        } else {
-//            出力対象 = parameter.getSiyuturiyokudaysyou();
-//            交付開始日 = parameter.getKoufukayisihi();
-//            交付終了日 = parameter.getKoufusiuryouhi();
-//            回収開始日 = null;
-//            回収終了日 = null;
-//            最新情報フラグ = false;
-//        }
-//        if (parameter.isSubedesentakuflg()) {
-//            項目名付加フラグ = true;
-//            連番付加フラグ = true;
-//            日付編集フラグ = true;
-//        } else {
-//            項目名付加フラグ = parameter.isKoumukumeyifukaflg();
-//            連番付加フラグ = parameter.isRenbanfukaflg();
-//            日付編集フラグ = parameter.isHizikehensyuuflg();
-//        }
-//        交付事由 = parameter.getKayuujiyuulist();
-//        回収事由 = parameter.getKasyuujiyuulist();
-//        出力順ID = parameter.getSyuturyokujunid();
-//        return AkasiHakouKanriParameter.createParam_Batch(
-//                証発行モード,
-//                出力対象,
-//                交付開始日,
-//                交付終了日,
-//                回収開始日,
-//                回収終了日,
-//                最新情報フラグ,
-//                連番付加フラグ,
-//                項目名付加フラグ,
-//                日付編集フラグ,
-//                交付事由,
-//                回収事由,
-//                出力順ID);
-//    }
     /**
      * チェックを行う。
      *
-     * @param 交付開始日 FlexibleDate
-     * @param 交付終了日 FlexibleDate
-     * @param 回収開始日 FlexibleDate
-     * @param 回収終了日 FlexibleDate
+     * @param koufubiFrom 交付開始日
+     * @param koufubiTo 交付終了日
+     * @param kaishubiFrom 回収開始日
+     * @param kaishubiTo 回収終了日
      * @return boolean チェック結果
      */
     @Transaction
-    public boolean checkInput(FlexibleDate 交付開始日,
-            FlexibleDate 交付終了日,
-            FlexibleDate 回収開始日,
-            FlexibleDate 回収終了日) {
-        if (!交付開始日.isEmpty() && !交付終了日.isEmpty()) {
-            if ((回収開始日.isEmpty() && 回収終了日.isEmpty()) || (!回収開始日.isEmpty() && !回収終了日.isEmpty())) {
+    public boolean checkInput(FlexibleDate koufubiFrom,
+            FlexibleDate koufubiTo,
+            FlexibleDate kaishubiFrom,
+            FlexibleDate kaishubiTo) {
+        if (!koufubiFrom.isEmpty() && !koufubiTo.isEmpty()) {
+            if ((kaishubiFrom.isEmpty() && kaishubiTo.isEmpty())
+                    || (!kaishubiFrom.isEmpty() && !kaishubiTo.isEmpty())) {
                 return false;
             }
-        }
-        if (交付開始日.isEmpty() && 交付終了日.isEmpty()) {
-            if (!回収開始日.isEmpty() && !回収終了日.isEmpty()) {
-                return false;
-            }
+        } else if (koufubiFrom.isEmpty() && koufubiTo.isEmpty()
+                && !kaishubiFrom.isEmpty() && !kaishubiTo.isEmpty()) {
+            return false;
         }
         return true;
     }
@@ -140,22 +77,23 @@ public class HihokenshashoHakkoKanriboFinder {
     /**
      * 交付事由取得です。
      *
-     * @param 処理メニューID RString
-     * @return SearchResult<KouFuJiyuu> 交付事由
+     * @param menuID 処理メニューID
+     * @return SearchResult<KouFuJiyuu> 交付事由りすと
      */
     @Transaction
-    public SearchResult<KouFuJiyuu> getKofuJiyuInitialData(RString 処理メニューID) {
+    public SearchResult<KouFuJiyuu> getKofuJiyuInitialData(RString menuID) {
         List<KouFuJiyuu> kouFuJiyuuList = new ArrayList<>();
-        if (メニューID_DBAMN72001.equals(処理メニューID)) {
-            codeShubetsu = new CodeShubetsu("0002");
-        } else if (メニューID_DBAMN72002.equals(処理メニューID)) {
-            codeShubetsu = new CodeShubetsu("0004");
+        CodeShubetsu codeShubetsu = CodeShubetsu.EMPTY;
+        if (メニューID_DBAMN72001.equals(menuID)) {
+            codeShubetsu = コード種別_002;
+        } else if (メニューID_DBAMN72002.equals(menuID)) {
+            codeShubetsu = コード種別_004;
         }
-        List<UzT0007CodeEntity> codeentityList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, codeShubetsu);
-        if (codeentityList == null) {
+        List<UzT0007CodeEntity> entityList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, codeShubetsu);
+        if (entityList == null) {
             return SearchResult.of(Collections.<UzT0007CodeEntity>emptyList(), 0, false);
         }
-        for (UzT0007CodeEntity entity : codeentityList) {
+        for (UzT0007CodeEntity entity : entityList) {
             RString name = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, codeShubetsu, entity.getコード());
             entity.setコード名称(name);
             kouFuJiyuuList.add(new KouFuJiyuu(entity));
@@ -166,16 +104,17 @@ public class HihokenshashoHakkoKanriboFinder {
     /**
      * 回収事由取得です。
      *
-     * @param 処理メニューID RString
-     * @return SearchResult<KayiSyuuJiyuu> 回収事由
+     * @param menuID 処理メニューID
+     * @return SearchResult<KayiSyuuJiyuu> 回収事由りすと
      */
     @Transaction
-    public SearchResult<KayiSyuuJiyuu> getKaishuJiyuInitialData(RString 処理メニューID) {
+    public SearchResult<KayiSyuuJiyuu> getKaishuJiyuInitialData(RString menuID) {
         List<KayiSyuuJiyuu> kayiSyuuJiyuuList = new ArrayList<>();
-        if (メニューID_DBAMN72001.equals(処理メニューID)) {
-            codeShubetsu = new CodeShubetsu("0003");
-        } else if (メニューID_DBAMN72002.equals(処理メニューID)) {
-            codeShubetsu = new CodeShubetsu("0005");
+        CodeShubetsu codeShubetsu = CodeShubetsu.EMPTY;
+        if (メニューID_DBAMN72001.equals(menuID)) {
+            codeShubetsu = コード種別_003;
+        } else if (メニューID_DBAMN72002.equals(menuID)) {
+            codeShubetsu = コード種別_005;
         }
         List<UzT0007CodeEntity> codeentityList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, codeShubetsu);
         if (codeentityList == null) {

@@ -16,8 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JyukiRendoTorokushaListTyouHyouListEntity {
 
     private RString 印刷日時;
-    private RString ページ数;
-    private RString 帳票タイトル;
     private RString 対象情報タイトル;
     private RString 市町村コード;
     private RString 市町村名;

@@ -4,7 +4,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.IkkatsuSakuseiMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.HihokenshaEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.ShisetsuNyutaishoEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaicho.IkkatsuSakuseiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
@@ -29,7 +28,7 @@ public interface IIkkatsuSakuseiMapper {
      * 生活保護受給者テーブルの情報を取得します。
      *
      * @param 検索条件 検索条件
-     * @return {@link IkkatsuSakuseiRelateEntity}
+     * @return {@link ShisetsuNyutaishoEntity}
      */
     List<ShisetsuNyutaishoEntity> get生活保護受給者(IkkatsuSakuseiMybatisParameter 検索条件);
 
@@ -69,7 +68,7 @@ public interface IIkkatsuSakuseiMapper {
      * 入所施設情報を取得します。
      *
      * @param 検索条件 検索条件
-     * @return {@link IkkatsuSakuseiRelateEntity}
+     * @return {@link ShisetsuNyutaishoEntity}
      */
     ShisetsuNyutaishoEntity get入所施設(IkkatsuSakuseiMybatisParameter 検索条件);
 

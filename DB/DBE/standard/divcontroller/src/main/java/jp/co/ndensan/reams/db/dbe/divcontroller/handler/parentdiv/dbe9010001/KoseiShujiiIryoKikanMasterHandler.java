@@ -50,13 +50,6 @@ public class KoseiShujiiIryoKikanMasterHandler {
     }
 
     /**
-     * 画面初期化処理です。
-     */
-    public void load() {
-        div.getCcdHokenshaList().loadHokenshaList();
-    }
-
-    /**
      * 検索条件入力項目をクリアします。
      */
     public void clearKensakuJoken() {
@@ -79,6 +72,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
         for (KoseiShujiiIryoKikanMasterBusiness koseiShujiiIryoKikanMaster : koseiShujiiIryoKikanMasterList) {
             dataGridList.add(createDgShujiiIchiranRow(
                     RString.EMPTY,
+                    koseiShujiiIryoKikanMaster.get市町村(),
                     koseiShujiiIryoKikanMaster.get市町村コード(),
                     koseiShujiiIryoKikanMaster.get主治医医療機関コード(),
                     koseiShujiiIryoKikanMaster.get医療機関コード(),
@@ -97,6 +91,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
 
     private dgShujiiIchiran_Row createDgShujiiIchiranRow(
             RString jotai,
+            RString shichosonName,
             LasdecCode shichoson,
             RString shujiiIryokikanCode,
             IryoKikanCode iryokikanCode,
@@ -113,19 +108,19 @@ public class KoseiShujiiIryoKikanMasterHandler {
         dgShujiiIchiran_Row row = new dgShujiiIchiran_Row();
         row.setJotai(jotai);
         // TODO　共通部品
-        row.setShichoson(new RString("市町村名"));
+        row.setShichoson(shichosonName);
         row.setShichosonCode(nullToEmpty(shichoson.value()));
         TextBoxCode shujiiIryoKikanCode = new TextBoxCode();
         shujiiIryoKikanCode.setValue(nullToEmpty(shujiiIryokikanCode));
         row.setShujiiIryoKikanCode(shujiiIryoKikanCode);
-        row.setIryoKikanCode(nullToEmpty(iryokikanCode.getColumnValue()));
+        row.setIryoKikanCode(iryokikanCode == null ? RString.EMPTY : nullToEmpty(iryokikanCode.getColumnValue()));
         row.setShujiiIryoKikan(nullToEmpty(iryoKikanMeisho));
         row.setShujiiIryoKikankana(nullToEmpty(iryoKikanMeishoKana));
         row.setYubinNo(editYubinNoToIchiran(yubinNo != null ? yubinNo.value() : RString.EMPTY));
         row.setJusho(nullToEmpty(jusho));
         row.setTelNo(telNo != null ? telNo.value() : RString.EMPTY);
         row.setFaxNo(faxNo != null ? faxNo.value() : RString.EMPTY);
-        row.setDaihyosha(nullToEmpty(daihyoshaName.getColumnValue()));
+        row.setDaihyosha(daihyoshaName != null ? daihyoshaName.value() : RString.EMPTY);
         row.setDaihyoshakana(nullToEmpty(daihyoshaNameKana));
         row.setJokyoFlag(jokyoFlag ? 表示値_有効 : 表示値_無効);
         return row;
@@ -168,8 +163,24 @@ public class KoseiShujiiIryoKikanMasterHandler {
     public void setShujiiIryoKikanJohoToIchiran(RString eventJotai) {
         dgShujiiIchiran_Row row = new dgShujiiIchiran_Row();
         if (!状態_追加.equals(eventJotai)) {
-            row = div.getDgShujiiIchiran().getActiveRow();
+            row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
         }
+        setRow(row);
+        int index = div.getShujiiIchiran().getDgShujiiIchiran().getClickedRowId();
+        if (状態_追加.equals(eventJotai)) {
+            row.setJotai(eventJotai);
+            div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().add(row);
+        } else if (状態_削除.equals(eventJotai) && 状態_追加.equals(row.getJotai())) {
+            div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().remove(index);
+        } else if (状態_修正.equals(eventJotai) && 状態_追加.equals(row.getJotai())) {
+            div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().set(index, row);
+        } else {
+            row.setJotai(eventJotai);
+            div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().set(index, row);
+        }
+    }
+
+    private void setRow(dgShujiiIchiran_Row row) {
         row.setShichoson(nullToEmpty(div.getShujiiJohoInput().getTxtShichosonmei().getValue()));
         row.setShichosonCode(nullToEmpty(div.getShujiiJohoInput().getTxtShichoson().getValue()));
         row.setShujiiIryoKikanCode(div.getShujiiJohoInput().getTxtShujiiIryoKikanCode());
@@ -184,18 +195,6 @@ public class KoseiShujiiIryoKikanMasterHandler {
         row.setDaihyoshakana(div.getShujiiJohoInput().getTxtdaihyoshakananame().getValue());
         RString jokyoFlag = div.getShujiiJohoInput().getRadJokyoFlag().getSelectedKey();
         row.setJokyoFlag(CODE_有効.equals(jokyoFlag) ? 表示値_有効 : 表示値_無効);
-        int index = div.getShujiiIchiran().getDgShujiiIchiran().getClickedRowId();
-        if (状態_追加.equals(eventJotai)) {
-            row.setJotai(eventJotai);
-            div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().add(row);
-        } else if (状態_削除.equals(eventJotai) && 状態_追加.equals(row.getJotai())) {
-            div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().remove(index);
-        } else if (状態_修正.equals(eventJotai) && 状態_追加.equals(row.getJotai())) {
-            div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().set(index, row);
-        } else {
-            row.setJotai(eventJotai);
-            div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().set(index, row);
-        }
     }
 
     private RString editYubinNoToIchiran(RString yubinNo) {
@@ -229,12 +228,15 @@ public class KoseiShujiiIryoKikanMasterHandler {
      */
     public ShujiiIryoKikanJoho editShujiiIryoKikanJoho(ShujiiIryoKikanJoho shujiiIryoKikanJoho) {
         return shujiiIryoKikanJoho.createBuilderForEdit()
-                .set医療機関コード(new IryoKikanCode(div.getShujiiJohoInput().getTxtiryokikanCode().getValue()))
+                .set医療機関コード(div.getShujiiJohoInput().getTxtiryokikanCode().getValue().isEmpty() ? null
+                        : new IryoKikanCode(div.getShujiiJohoInput().getTxtiryokikanCode().getValue()))
                 .set医療機関名称(div.getShujiiJohoInput().getTxtiryokikanname().getValue())
                 .set医療機関名称カナ(div.getShujiiJohoInput().getTxtiryokikanKananame().getValue())
                 .set郵便番号(div.getShujiiJohoInput().getTxtYubinNo().getValue())
                 .set住所(div.getShujiiJohoInput().getTxtJusho().getDomain().value())
                 .set電話番号(div.getShujiiJohoInput().getTxtTelNo().getDomain())
+                .set代表者名(new AtenaMeisho(div.getShujiiJohoInput().getTxtdaihyoshaname().getValue()))
+                .set代表者名カナ(div.getShujiiJohoInput().getTxtdaihyoshakananame().getValue())
                 .setFax番号(div.getShujiiJohoInput().getTxtFaxNo().getDomain())
                 .set状況フラグ(CODE_有効.equals(div.getShujiiJohoInput().getRadJokyoFlag().getSelectedKey())).build();
     }
@@ -243,11 +245,11 @@ public class KoseiShujiiIryoKikanMasterHandler {
      * 市町村名を設定します。
      */
     public void setTxtShichosonmei() {
-        // TODO QA253　共通部品
+    // TODO QA253　共通部品
 //        UzT0007CodeEntity code = CodeMaster.getCode(
-//                SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(div.getShujiiJohoInput().getTxtShichoson().getValue()));
+//                SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(div.getChosainJohoInput().getTxtShichoson().getValue()));
 //        if (code != null) {
-//            div.getShujiiJohoInput().getTxtShichosonmei().setValue(code.getコード名称());
+//            div.getChosainJohoInput().getTxtShichosonmei().setValue(code.getコード名称());
 //        }
         RString shichoson = div.getShujiiJohoInput().getTxtShichoson().getValue();
         if (new RString("000001").equals(shichoson)) {
@@ -266,7 +268,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
     /**
      * 調査員情報登録エリアが非活性に設定します。
      */
-    public void setDisabledTrueToShujiiJohoToMeisai() {
+    public void setDisabledTrue() {
         div.getShujiiJohoInput().getTxtShichoson().setDisabled(true);
         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(true);
         div.getShujiiJohoInput().getTxtiryokikanCode().setDisabled(true);
@@ -284,7 +286,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
     /**
      * 主治医医療機関情報登録エリアが活性に設定します。
      */
-    public void setDisabledFalseToShujiiIryoKikanJoho() {
+    public void setDisabledFalse() {
         div.getShujiiJohoInput().getTxtShichoson().setDisabled(false);
         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(false);
         div.getShujiiJohoInput().getTxtiryokikanCode().setDisabled(false);

@@ -20,23 +20,17 @@ public class HihokenshashoHakkoKanriboFlow extends BatchFlowBase<HihokenshashoHa
     @Override
     protected void defineFlow() {
         executeStep(REPORT_PROCESS);
-//        executeStep(REPORT_PAGEBREAK_PROCESS);
-        executeStep(REPORT_PROCESS);
     }
+    private static final String REPORT_PROCESS = "reportProcess";
 
-    private static final String REPORT_PROCESS = "reportProcess"; //@Stepの定数はメソッドの近くに置くと見やすくていい。
-
+    /**
+     * batchProcessです。
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(REPORT_PROCESS)
     protected IBatchFlowCommand reportProcess() {
-        return loopBatch(HihokenshashoHakkoKanriboProcess.class)
-                .arguments(getParameter().toAkasiHakouKanriProcessParameter()).define();
-    }
-
-    private static final String REPORT_PAGEBREAK_PROCESS = "reportpagebreakprocess";
-
-    @Step(REPORT_PAGEBREAK_PROCESS)
-    protected IBatchFlowCommand createReportWithPageBreak() {
-        return loopBatch(HihokenshashoHakkoKanriboProcess.class)
+        return simpleBatch(HihokenshashoHakkoKanriboProcess.class)
                 .arguments(getParameter().toAkasiHakouKanriProcessParameter()).define();
     }
 }
