@@ -29,7 +29,7 @@ public class BenmeiTorokuMeisaiJohoParameter implements IMyBatisParameter {
      * @param genshobunHihokenshaNo
      * @param shinsaseikyuTodokedeYMD
      */
-    public BenmeiTorokuMeisaiJohoParameter(
+    private BenmeiTorokuMeisaiJohoParameter(
             ShikibetsuCode shikibetsuCode,
             HihokenshaNo genshobunHihokenshaNo,
             FlexibleDate shinsaseikyuTodokedeYMD) {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 概要： 合併情報のマッピング用XMLです。 -->
+<!-- 概要： 弁明登録明細情報のマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.benmeitoroku.IBenmeiTorokuMeisaiJohoMapper">

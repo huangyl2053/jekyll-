@@ -67,10 +67,9 @@ public class BenmeiTorokuManager {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link RoujinHokenJukyushaDaichoKanriMapperParameter}のインスタンスを返します。
+     * クラスをcreateメソッドです
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link RoujinHokenJukyushaDaichoKanriMapperParameter}のインスタンス
+     * @return　弁明登録情報の取得処理するクラス
      */
     public static BenmeiTorokuManager createInstance() {
         return InstanceProvider.create(BenmeiTorokuManager.class);
