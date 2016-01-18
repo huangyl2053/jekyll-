@@ -71,7 +71,9 @@
          "DbT2002Fuka"."kozaKubun" as "dbT2002Fuka_kozaKubun",
          "DbT2002Fuka"."kyokaisoKubun" as "dbT2002Fuka_kyokaisoKubun",
          "DbT2002Fuka"."shokkenKubun" as "dbT2002Fuka_shokkenKubun",
-         "DbT2002Fuka"."fukaShichosonCode" as "dbT2002Fuka_fukaShichosonCode"
+         "DbT2002Fuka"."fukaShichosonCode" as "dbT2002Fuka_fukaShichosonCode",
+         "DbT2002Fuka"."tkSaishutsuKampuGaku" as "dbT2002Fuka_tkSaishutsuKampuGaku",
+         "DbT2002Fuka"."fuSaishutsuKampuGaku" as "dbT2002Fuka_fuSaishutsuKampuGaku"
     </sql>
 
 
@@ -132,6 +134,8 @@
         <result property="kyokaisoKubun" column="dbT2002Fuka_kyokaisoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shokkenKubun" column="dbT2002Fuka_shokkenKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="fukaShichosonCode" column="dbT2002Fuka_fukaShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="tkSaishutsuKampuGaku" column="dbT2002Fuka_tkSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuSaishutsuKampuGaku" column="dbT2002Fuka_fuSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
 
     <select id="getEntity" resultMap="ResultMap_DbT2002FukaEntity">
