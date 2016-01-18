@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 宛名情報を取得しのマッピング用XMLです。 -->
+
+    <!-- 概要： 境界層管理マスタリスト情報のマッピング用XMLです。 -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.basic.mapper.kyokaisogaitosha.IKkyokaisoGaitoshaMapper">
+    <resultMap id="resultMap_KoseiShichosonMasterEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisogGaitoshaRelateEntity" autoMapping="true">
+      <result property="shichosonCode" column="DbT1006Kyokaiso_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="shikibetsuCode" column="DbT1006Kyokaiso_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="hihokenshaNo" column="DbT1006Kyokaiso_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="tekiyoKaishiYMD" column="DbT1006Kyokaiso_tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="tekiyoShuryoYMD" column="DbT1006Kyokaiso_tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kyuufugakuGengakuKisaiKiajoFlag" column="DbT1006Kyokaiso_kyuufugakuGengakuKisaiKiajoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hyojunFutanGengakuGaitoFlag" column="DbT1006Kyokaiso_hyojunFutanGengakuGaitoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hyojunFutanKeigengoFutangaku" column="DbT1006Kyokaiso_hyojunFutanKeigengoFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kyojuhinadoFutangakugengakuGaitoFlag" column="DbT1006Kyokaiso_kyojuhinadoFutangakugengakuGaitoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyojuhiKeigengoKyoshitsuShuruiCode" column="DbT1006Kyokaiso_kyojuhiKeigengoKyoshitsuShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyojuhiKeigengoHutangaku" column="DbT1006Kyokaiso_kyojuhiKeigengoHutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shokuhiKeigengoHutangakuGaitoFlag" column="DbT1006Kyokaiso_shokuhiKeigengoHutangakuGaitoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shokuhiKeigengoHutangaku" column="DbT1006Kyokaiso_shokuhiKeigengoHutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kogakuServicehiJogengakuGengakuGaitoFlag" column="DbT1006Kyokaiso_kogakuServicehiJogengakuGengakuGaitoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kogakuServicehiJogengakuGengakugoJogengaku" column="DbT1006Kyokaiso_kogakuServicehiJogengakuGengakugoJogengaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="hokenryoNofuGengakuFlag" column="DbT1006Kyokaiso_hokenryoNofuGengakuFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <result property="gengakuGoHokenryoDankai" column="DbT1006Kyokaiso_gengakuGoHokenryoDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiYMD" column="DbT1006Kyokaiso_shinseiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/> 
+        <result property="meisho"    column="PSM_meisho"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+         <!-- TODO 数据库中 这个字段没有。南京讨轮中。       
+        <result property="kanaMeisho" column="PSM_kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />-->
+         <result property="seinengappiYMD"    column="PSM_seinengappiYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+         <result property="seibetsuCode"    column="PSM_seibetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+         <result property="setaiCode" column="PSM_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+       <result property="juminShubetsuCode"    column="PSM_juminShubetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <result property="juminJotaiCode"   column="PSM_juminJotaiCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+    </resultMap>
+     <select id="getKyokaisoKanriMasterList" resultMap="resultMap_KoseiShichosonMasterEntity"
+             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaMybatisParameter"  fetchSize="500">
+             SELECT
+                DbT1006Kyokaiso."DbT1001Hiho_shichosonCode" as "DbT1006Kyokaiso_shichosonCode",
+                DbT1006Kyokaiso."DbT1001Hiho_shikibetsuCode" as "DbT1006Kyokaiso_shikibetsuCode",
+                DbT1006Kyokaiso."DbT1006Kyo_hihokenshaNo" as "DbT1006Kyokaiso_hihokenshaNo",
+                DbT1006Kyokaiso."DbT1006Kyo_tekiyoKaishiYMD" as "DbT1006Kyokaiso_tekiyoKaishiYMD",
+                DbT1006Kyokaiso."DbT1006Kyo_tekiyoShuryoYMD" as "DbT1006Kyokaiso_tekiyoShuryoYMD",           
+                DbT1006Kyokaiso."DbT1006Kyo_kyuufugakuGengakuKisaiKiajoFlag" as "DbT1006Kyokaiso_kyuufugakuGengakuKisaiKiajoFlag",
+                DbT1006Kyokaiso."DbT1006Kyo_hyojunFutanGengakuGaitoFlag" as "DbT1006Kyokaiso_hyojunFutanGengakuGaitoFlag",
+                DbT1006Kyokaiso."DbT1006Kyo_hyojunFutanKeigengoFutangaku" as "DbT1006Kyokaiso_hyojunFutanKeigengoFutangaku",
+                DbT1006Kyokaiso."DbT1006Kyo_kyojuhinadoFutangakugengakuGaitoFlag" as "DbT1006Kyokaiso_kyojuhinadoFutangakugengakuGaitoFlag",
+                DbT1006Kyokaiso."DbT1006Kyo_kyojuhiKeigengoKyoshitsuShuruiCode" as "DbT1006Kyokaiso_kyojuhiKeigengoKyoshitsuShuruiCode",
+                DbT1006Kyokaiso."DbT1006Kyo_kyojuhiKeigengoHutangaku" as "DbT1006Kyokaiso_kyojuhiKeigengoHutangaku",
+                DbT1006Kyokaiso."DbT1006Kyo_shokuhiKeigengoHutangakuGaitoFlag" as "DbT1006Kyokaiso_shokuhiKeigengoHutangakuGaitoFlag",
+                DbT1006Kyokaiso."DbT1006Kyo_shokuhiKeigengoHutangaku" as "DbT1006Kyokaiso_shokuhiKeigengoHutangaku",
+                DbT1006Kyokaiso."DbT1006Kyo_kogakuServicehiJogengakuGengakuGaitoFlag" as "DbT1006Kyokaiso_kogakuServicehiJogengakuGengakuGaitoFlag",
+                DbT1006Kyokaiso."DbT1006Kyo_kogakuServicehiJogengakuGengakugoJogengaku" as "DbT1006Kyokaiso_kogakuServicehiJogengakuGengakugoJogengaku",
+                DbT1006Kyokaiso."DbT1006Kyo_hokenryoNofuGengakuFlag" as"DbT1006Kyokaiso_hokenryoNofuGengakuFlag",
+                DbT1006Kyokaiso."DbT1007Kyo_gengakuGoHokenryoDankai" as "DbT1006Kyokaiso_gengakuGoHokenryoDankai",
+                DbT1006Kyokaiso."DbT1013Kyo_shinseiYMD" as "DbT1006Kyokaiso_shinseiYMD" ,
+                DbT1006Kyokaiso."PSM_meisho" as "PSM_meisho",
+                DbT1006Kyokaiso."PSM_kanaMeisho" as "PSM_kanaMeisho",
+                DbT1006Kyokaiso."PSM_seinengappiYMD" as "PSM_seinengappiYMD",
+                DbT1006Kyokaiso."PSM_seibetsuCode" as "PSM_seibetsuCode",
+                DbT1006Kyokaiso."PSM_setaiCode" as "PSM_setaiCode",
+                DbT1006Kyokaiso."PSM_juminShubetsuCode" as "PSM_juminShubetsuCode",
+                DbT1006Kyokaiso."PSM_juminJotaiCode" as "PSM_juminJotaiCode"
+                
+            FROM
+                 ( SELECT
+                DbT1001Hiho."shichosonCode" as "DbT1001Hiho_shichosonCode",
+                DbT1001Hiho."shikibetsuCode" as "DbT1001Hiho_shikibetsuCode",
+                DbT1006Kyo."hihokenshaNo" as "DbT1006Kyo_hihokenshaNo",
+                DbT1006Kyo."tekiyoKaishiYMD" as "DbT1006Kyo_tekiyoKaishiYMD",
+                DbT1006Kyo."tekiyoShuryoYMD" as "DbT1006Kyo_tekiyoShuryoYMD",           
+                DbT1006Kyo."kyuufugakuGengakuKisaiKiajoFlag" as "DbT1006Kyo_kyuufugakuGengakuKisaiKiajoFlag",
+                DbT1006Kyo."hyojunFutanGengakuGaitoFlag" as "DbT1006Kyo_hyojunFutanGengakuGaitoFlag",
+                DbT1006Kyo."hyojunFutanKeigengoFutangaku" as "DbT1006Kyo_hyojunFutanKeigengoFutangaku",
+                DbT1006Kyo."kyojuhinadoFutangakugengakuGaitoFlag" as "DbT1006Kyo_kyojuhinadoFutangakugengakuGaitoFlag",
+                DbT1006Kyo."kyojuhiKeigengoKyoshitsuShuruiCode" as "DbT1006Kyo_kyojuhiKeigengoKyoshitsuShuruiCode",
+                DbT1006Kyo."kyojuhiKeigengoHutangaku" as "DbT1006Kyo_kyojuhiKeigengoHutangaku",
+                DbT1006Kyo."shokuhiKeigengoHutangakuGaitoFlag" as "DbT1006Kyo_shokuhiKeigengoHutangakuGaitoFlag",
+                DbT1006Kyo."shokuhiKeigengoHutangaku" as "DbT1006Kyo_shokuhiKeigengoHutangaku",
+                DbT1006Kyo."kogakuServicehiJogengakuGengakuGaitoFlag" as "DbT1006Kyo_kogakuServicehiJogengakuGengakuGaitoFlag",
+                DbT1006Kyo."kogakuServicehiJogengakuGengakugoJogengaku" as "DbT1006Kyo_kogakuServicehiJogengakuGengakugoJogengaku",
+                DbT1006Kyo."hokenryoNofuGengakuFlag" as"DbT1006Kyo_hokenryoNofuGengakuFlag",
+                DbT1007Kyo."gengakuGoHokenryoDankai" as "DbT1007Kyo_gengakuGoHokenryoDankai",
+                DbT1013Kyo."shinseiYMD" as "DbT1013Kyo_shinseiYMD",
+                PSM."meisho" as "PSM_meisho",
+                PSM."kanaMeisho" as "PSM_kanaMeisho",
+                PSM."seinengappiYMD" as "PSM_seinengappiYMD",
+                PSM."seibetsuCode" as "PSM_seibetsuCode",
+                PSM."setaiCode" as "PSM_setaiCode",
+                PSM."juminShubetsuCode" as "PSM_juminShubetsuCode",
+                PSM."juminJotaiCode" as "PSM_juminJotaiCode",
+                row_number() over(partition by (DbT1001Hiho."hihokenshaNo") order by DbT1001Hiho."idoYMD" desc,DbT1001Hiho."edaNo" desc) as rank_number1,
+                row_number() over(partition by (DbT1007Kyo."hihokenshaNo") order by DbT1007Kyo."tekiyoKaishiYM" desc) as rank_number2 
+            FROM
+                rgdb."DbT1006KyokaisoGaitosha" AS DbT1006Kyo
+                LEFT JOIN 
+                rgdb."DbT1001HihokenshaDaicho" AS DbT1001Hiho
+                ON
+                    DbT1001Hiho."hihokenshaNo"=DbT1006Kyo."hihokenshaNo"
+                LEFT JOIN
+                rgdb."DbT1013KyokaisoSochiShinsei" AS DbT1013Kyo
+                ON
+                    DbT1013Kyo."hihokenshaNo" = DbT1006Kyo."hihokenshaNo"
+                AND
+                    DbT1006Kyo."rirekiNo" = DbT1013Kyo."rirekiNo"
+                LEFT JOIN
+                rgdb."DbT1007KyokaisoHokenryoDankai" AS DbT1007Kyo
+                ON
+                   DbT1006Kyo."hihokenshaNo" =  DbT1007Kyo."hihokenshaNo"
+                AND
+                    DbT1006Kyo."rirekiNo" = DbT1007Kyo."rirekiNo"
+               LEFT JOIN   
+                        rgua.${psmShikibetsuTaisho} AS PSM
+                    ON
+                     DbT1001Hiho."shikibetsuCode" = PSM."shikibetsuCode" 
+                      
+                WHERE
+                   ( DbT1006Kyo."kyuufugakuGengakuKisaiKiajoFlag" = #{iskyuufugakuFlag}
+                   
+                   OR
+                        DbT1006Kyo."hyojunFutanGengakuGaitoFlag" = #{ishyojunFutanFlag}
+                    
+                   OR
+                       DbT1006Kyo."kyojuhinadoFutangakugengakuGaitoFlag" = #{iskyojuhinadoFutangFlag}
+                   
+                   OR   
+                       DbT1006Kyo."shokuhiKeigengoHutangakuGaitoFlag" = #{isshokuhiKeiFlag}
+                  
+                   OR 
+                       DbT1006Kyo."kogakuServicehiJogengakuGengakuGaitoFlag" = #{iskogakuFlag} 
+                   OR 
+                        DbT1006Kyo."hokenryoNofuGengakuFlag" = #{ishokenFlag} )            
+                   
+                  AND
+                     DbT1006Kyo."isDeleted" <![CDATA[<>]]> TRUE
+                  AND
+                     DbT1001Hiho."isDeleted" <![CDATA[<>]]> TRUE
+                  AND
+                     DbT1007Kyo."isDeleted" <![CDATA[<>]]> TRUE
+                  AND
+                     DbT1013Kyo."isDeleted" <![CDATA[<>]]> TRUE 
+
+                   <if test = "ismodekjunhe">
+                       AND  
+                          (DbT1006Kyo."tekiyoKaishiYMD" <![CDATA[<=]]> #{date_FROM} OR 
+                          (DbT1006Kyo."tekiyoKaishiYMD" <![CDATA[<=]]> #{date_FROM} 
+                       AND DbT1006Kyo."tekiyoShuryoYMD" IS NOT NULL AND #{date_FROM} <![CDATA[<=]]> DbT1006Kyo."tekiyoShuryoYMD"))
+                    </if>                  
+                   
+                    <if test = "ismoderange and isRangeApplication and isDateFlag"> 
+                       AND
+                          #{date_FROM} <![CDATA[<=]]> DbT1013Kyo."shinseiYMD"    
+                    </if>
+                    <if test = "ismoderange and isRangeApplication and isDate_TOFlag"> 
+                       AND
+                          DbT1013Kyo."shinseiYMD" <![CDATA[<=]]> #{date_TO}    
+                    </if>
+                
+                    <if test = "ismoderange and isRangeStart and isDateFlag"> 
+                      AND
+                         #{date_FROM} <![CDATA[<=]]> DbT1006Kyo."tekiyoKaishiYMD"    
+                    </if>
+                    <if test = "ismoderange and isRangeStart and isDate_TOFlag"> 
+                      AND
+                         DbT1006Kyo."tekiyoKaishiYMD" <![CDATA[<=]]> #{date_TO}    
+                    </if>
+                      <if test = "ismoderange and isRangeEnd and isDateFlag"> 
+                      AND
+                         #{date_FROM} <![CDATA[<=]]> DbT1006Kyo."tekiyoShuryoYMD"    
+                     </if>
+                      <if test = "ismoderange and isRangeEnd and isDate_TOFlag"> 
+                       AND
+                          DbT1006Kyo."tekiyoShuryoYMD"  <![CDATA[<=]]> #{date_TO}    
+                     </if>          
+           ORDER BY
+                       DbT1006Kyo."hihokenshaNo"  
+                     ) DbT1006Kyokaiso    
+                  WHERE
+                     rank_number1= 1
+                   AND
+                     rank_number2= 1                    
+    </select>  
+</mapper>
