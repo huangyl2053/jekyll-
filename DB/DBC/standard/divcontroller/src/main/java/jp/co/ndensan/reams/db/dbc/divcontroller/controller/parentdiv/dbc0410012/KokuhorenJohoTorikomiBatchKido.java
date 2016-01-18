@@ -7,11 +7,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0410012
 
 import jp.co.ndensan.reams.db.dbc.business.core.KokuhorenJohoTorikomi;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.KokuhorenJohoTorikomiBatchParameter;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410012.KokuhorenJohoTorikomiBatchKidoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.helper.KokuhorenJohoTorikomiValidationHelper;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigNameDBU;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -62,7 +63,7 @@ public class KokuhorenJohoTorikomiBatchKido {
 //        KokuhorenJohoTorikomi business = new KokuhorenJohoTorikomi();
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
 
-        pairs.add(KokuhorenJohoTorikomiValidationHelper.validate(panel.getDogetsuKagobun(), panel.getTsujobun(), panel.getCommonShutsuryokuJun()));
+        pairs.add(KokuhorenJohoTorikomiValidationHelper.validate(panel.getChkDogetsuKagobun(), panel.getChkTsujobun(), (IChohyoShutsuryokujunDiv) panel.getPnlShutsuryokuJun()));
 
         ResponseData<KokuhorenJohoTorikomiBatchKidoDiv> responseData = new ResponseData<>();
         responseData.addValidationMessages(pairs);

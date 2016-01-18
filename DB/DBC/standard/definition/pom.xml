@@ -19,18 +19,21 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbd</groupId>
             <artifactId>DbdDefinition</artifactId>
+            <version>${project.version}</version>
         </dependency>
 		<!-- DBX -->
 		<!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzDefinition</artifactId>
+            <version>${project.version}</version>
         </dependency>
 		<!-- 公開系 -->
 		<!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

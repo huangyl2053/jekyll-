@@ -82,6 +82,21 @@ public class KokuhorenInterfaceKanriManager {
     }
 
     /**
+     * 最大処理年月を取得します。
+     *
+     * @return DbT3104KokuhorenInterfaceKanriEntity
+     */
+    @Transaction
+    public DbT3104KokuhorenInterfaceKanriEntity get最大処理年月() {
+        DbT3104KokuhorenInterfaceKanriEntity entity = dac.getMaxShoriYM();
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return entity;
+    }
+
+    /**
      * 国保連インターフェース管理{@link KokuhorenInterfaceKanri}を保存します。
      *
      * @param 国保連インターフェース管理 {@link KokuhorenInterfaceKanri}
@@ -95,4 +110,5 @@ public class KokuhorenInterfaceKanriManager {
         }
         return 1 == dac.save(国保連インターフェース管理.toEntity());
     }
+
 }
