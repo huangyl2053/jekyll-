@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.persistence.db.basic;
 
+import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiData;
@@ -19,6 +20,7 @@ import static jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokei
 import static jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiData.toukeiTaishoKubun;
 import static jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiData.yokoNo;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -28,8 +30,13 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.distinct;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -130,5 +137,111 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 介護保険特別会計経理状況一覧データの取得
+     *
+     * @param 年度 年度
+     * @param 市町村コード 市町村コード
+     * @param 保険者区分 保険者区分
+     * @return List<DbT7021JigyoHokokuTokeiDataEntity>
+     */
+    @Transaction
+    public List<DbT7021JigyoHokokuTokeiDataEntity> selectKaigoHokenTokeiDataList(
+            FlexibleYear 年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分) {
+        List<RString> shukeiNoList = new ArrayList<RString>() {
+            {
+                add(new RString("0100"));
+                add(new RString("0200"));
+                add(new RString("0301"));
+                add(new RString("0302"));
+                add(new RString("0303"));
+            }
+        };
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        ITrueFalseCriteria iTrueFalseCriteria = null;
+        if (年度.isEmpty() && (保険者区分 != null && !保険者区分.getコード().isEmpty()) && !市町村コード.isEmpty()) {
+            iTrueFalseCriteria = and(
+                    eq(hokokuM, new RString("00")),
+                    eq(toukeiTaishoKubun, 保険者区分.getコード()),
+                    eq(hyoNo, new RString("09")),
+                    in(shukeiNo, shukeiNoList),
+                    eq(shichosonCode, 市町村コード));
+        } else if (!年度.isEmpty() && (保険者区分 == null || 保険者区分.getコード().isEmpty()) && !市町村コード.isEmpty()) {
+            iTrueFalseCriteria = and(
+                    eq(hokokuYSeireki, 年度),
+                    eq(hokokuM, new RString("00")),
+                    eq(hyoNo, new RString("09")),
+                    in(shukeiNo, shukeiNoList),
+                    eq(shichosonCode, 市町村コード));
+        } else if (!年度.isEmpty() && (保険者区分 != null && !保険者区分.getコード().isEmpty()) && 市町村コード.isEmpty()) {
+            iTrueFalseCriteria = and(
+                    eq(hokokuYSeireki, 年度),
+                    eq(hokokuM, new RString("00")),
+                    eq(toukeiTaishoKubun, 保険者区分.getコード()),
+                    eq(hyoNo, new RString("09")),
+                    in(shukeiNo, shukeiNoList));
+        } else if (!年度.isEmpty() && (保険者区分 != null && !保険者区分.getコード().isEmpty()) && !市町村コード.isEmpty()) {
+            iTrueFalseCriteria = and(
+                    eq(hokokuYSeireki, 年度),
+                    eq(hokokuM, new RString("00")),
+                    eq(toukeiTaishoKubun, 保険者区分.getコード()),
+                    eq(hyoNo, new RString("09")),
+                    in(shukeiNo, shukeiNoList),
+                    eq(shichosonCode, 市町村コード));
+        }
+
+        return accessor.selectSpecific(distinct(hokokuYSeireki), distinct(shukeiTaishoYSeireki), distinct(toukeiTaishoKubun),
+                distinct(shichosonCode), distinct(hyoNo), distinct(shukeiNo)).
+                table(DbT7021JigyoHokokuTokeiData.class).
+                where(iTrueFalseCriteria).
+                order(by(DbT7021JigyoHokokuTokeiData.shichosonCode, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.hokokuYSeireki, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.toukeiTaishoKubun, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.shukeiNo, Order.ASC)).
+                toList(DbT7021JigyoHokokuTokeiDataEntity.class);
+    }
+
+    /**
+     * 介護保険特別会計経理状況詳細データの取得
+     *
+     * @param 報告年
+     * @param 集計対象年
+     * @param 統計対象区分
+     * @param 市町村コード
+     * @param 集計番号
+     * @return List<DbT7021JigyoHokokuTokeiDataEntity>
+     */
+    @Transaction
+    public List<DbT7021JigyoHokokuTokeiDataEntity> selectKaigoHokenTokeiData(
+            FlexibleYear 報告年, RString 集計対象年, RString 統計対象区分,
+            LasdecCode 市町村コード, RString 集計番号
+    ) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7021JigyoHokokuTokeiData.class).
+                where(and(
+                                eq(hokokuYSeireki, 報告年),
+                                eq(hokokuM, new RString("00")),
+                                eq(DbT7021JigyoHokokuTokeiData.shukeiTaishoYSeireki, 集計対象年),
+                                eq(DbT7021JigyoHokokuTokeiData.shukeiTaishoM, new RString("00")),
+                                eq(toukeiTaishoKubun, 統計対象区分),
+                                eq(shichosonCode, 市町村コード),
+                                eq(hyoNo, new RString("09")),
+                                eq(DbT7021JigyoHokokuTokeiData.shukeiNo, 集計番号)
+                        )).
+                order(by(DbT7021JigyoHokokuTokeiData.hokokuYSeireki, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.hokokuM, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.shukeiTaishoYSeireki, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.shukeiTaishoM, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.toukeiTaishoKubun, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.shichosonCode, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.hyoNo, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.shukeiNo, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.shukeiTani, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.tateNo, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.yokoNo, Order.ASC)).
+                toList(DbT7021JigyoHokokuTokeiDataEntity.class);
     }
 }
