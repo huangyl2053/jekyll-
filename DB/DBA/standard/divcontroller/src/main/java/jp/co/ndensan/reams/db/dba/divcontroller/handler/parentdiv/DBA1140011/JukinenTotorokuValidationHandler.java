@@ -24,7 +24,7 @@ public class JukinenTotorokuValidationHandler {
     /**
      * コンストラクタです。
      *
-     * @param div 介護認定審査会開催場所情報Div
+     * @param div 住基連動登録者Div
      */
     public JukinenTotorokuValidationHandler(jukinentotorokuDiv div) {
         this.div = div;
