@@ -1,0 +1,395 @@
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon;
+/*
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+
+/**
+ * KaigoShikakuKihon のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    /*
+     * [ private の作成 ]
+     * クライアント側から取得した情報を元にを検索を行い
+     * コントロール名とフィールド名を取得する
+     * private + コントロール名 + フィールド名 の文字列を作成
+     */
+    @JsonProperty("txtHihokenshaNo")
+    private TextBox txtHihokenshaNo;
+    @JsonProperty("txtShutokuYmd")
+    private TextBoxFlexibleDate txtShutokuYmd;
+    @JsonProperty("txtShutokuJiyu")
+    private TextBox txtShutokuJiyu;
+    @JsonProperty("txtSoshitsuYmd")
+    private TextBoxFlexibleDate txtSoshitsuYmd;
+    @JsonProperty("txtSoshitsuJiyu")
+    private TextBox txtSoshitsuJiyu;
+    @JsonProperty("txtJutokuKubun")
+    private TextBox txtJutokuKubun;
+    @JsonProperty("txtYokaigoJotaiKubun")
+    private TextBox txtYokaigoJotaiKubun;
+    @JsonProperty("txtNinteiKaishiYmd")
+    private TextBoxDate txtNinteiKaishiYmd;
+    @JsonProperty("txtNinteiShuryoYmd")
+    private TextBoxDate txtNinteiShuryoYmd;
+    @JsonProperty("btnNinteiRireki")
+    private ButtonDialog btnNinteiRireki;
+    @JsonProperty("btnHihoRireki")
+    private ButtonDialog btnHihoRireki;
+    @JsonProperty("btnRenrakusaki")
+    private ButtonDialog btnRenrakusaki;
+
+    /*
+     * [ GetterとSetterの作成 ]
+     * クライアント側から取得した情報を元に検索を行い
+     * コントロール名とフィールド名を取得する
+     * フィールド名のGetterとSetter を作成
+     */
+    /*
+     * gettxtHihokenshaNo
+     * @return txtHihokenshaNo
+     */
+    @JsonProperty("txtHihokenshaNo")
+    public TextBox getTxtHihokenshaNo() {
+        return txtHihokenshaNo;
+    }
+
+    /*
+     * settxtHihokenshaNo
+     * @param txtHihokenshaNo txtHihokenshaNo
+     */
+    @JsonProperty("txtHihokenshaNo")
+    public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
+        this.txtHihokenshaNo = txtHihokenshaNo;
+    }
+
+    /*
+     * gettxtShutokuYmd
+     * @return txtShutokuYmd
+     */
+    @JsonProperty("txtShutokuYmd")
+    public TextBoxFlexibleDate getTxtShutokuYmd() {
+        return txtShutokuYmd;
+    }
+
+    /*
+     * settxtShutokuYmd
+     * @param txtShutokuYmd txtShutokuYmd
+     */
+    @JsonProperty("txtShutokuYmd")
+    public void setTxtShutokuYmd(TextBoxFlexibleDate txtShutokuYmd) {
+        this.txtShutokuYmd = txtShutokuYmd;
+    }
+
+    /*
+     * gettxtShutokuJiyu
+     * @return txtShutokuJiyu
+     */
+    @JsonProperty("txtShutokuJiyu")
+    public TextBox getTxtShutokuJiyu() {
+        return txtShutokuJiyu;
+    }
+
+    /*
+     * settxtShutokuJiyu
+     * @param txtShutokuJiyu txtShutokuJiyu
+     */
+    @JsonProperty("txtShutokuJiyu")
+    public void setTxtShutokuJiyu(TextBox txtShutokuJiyu) {
+        this.txtShutokuJiyu = txtShutokuJiyu;
+    }
+
+    /*
+     * gettxtSoshitsuYmd
+     * @return txtSoshitsuYmd
+     */
+    @JsonProperty("txtSoshitsuYmd")
+    public TextBoxFlexibleDate getTxtSoshitsuYmd() {
+        return txtSoshitsuYmd;
+    }
+
+    /*
+     * settxtSoshitsuYmd
+     * @param txtSoshitsuYmd txtSoshitsuYmd
+     */
+    @JsonProperty("txtSoshitsuYmd")
+    public void setTxtSoshitsuYmd(TextBoxFlexibleDate txtSoshitsuYmd) {
+        this.txtSoshitsuYmd = txtSoshitsuYmd;
+    }
+
+    /*
+     * gettxtSoshitsuJiyu
+     * @return txtSoshitsuJiyu
+     */
+    @JsonProperty("txtSoshitsuJiyu")
+    public TextBox getTxtSoshitsuJiyu() {
+        return txtSoshitsuJiyu;
+    }
+
+    /*
+     * settxtSoshitsuJiyu
+     * @param txtSoshitsuJiyu txtSoshitsuJiyu
+     */
+    @JsonProperty("txtSoshitsuJiyu")
+    public void setTxtSoshitsuJiyu(TextBox txtSoshitsuJiyu) {
+        this.txtSoshitsuJiyu = txtSoshitsuJiyu;
+    }
+
+    /*
+     * gettxtJutokuKubun
+     * @return txtJutokuKubun
+     */
+    @JsonProperty("txtJutokuKubun")
+    public TextBox getTxtJutokuKubun() {
+        return txtJutokuKubun;
+    }
+
+    /*
+     * settxtJutokuKubun
+     * @param txtJutokuKubun txtJutokuKubun
+     */
+    @JsonProperty("txtJutokuKubun")
+    public void setTxtJutokuKubun(TextBox txtJutokuKubun) {
+        this.txtJutokuKubun = txtJutokuKubun;
+    }
+
+    /*
+     * gettxtYokaigoJotaiKubun
+     * @return txtYokaigoJotaiKubun
+     */
+    @JsonProperty("txtYokaigoJotaiKubun")
+    public TextBox getTxtYokaigoJotaiKubun() {
+        return txtYokaigoJotaiKubun;
+    }
+
+    /*
+     * settxtYokaigoJotaiKubun
+     * @param txtYokaigoJotaiKubun txtYokaigoJotaiKubun
+     */
+    @JsonProperty("txtYokaigoJotaiKubun")
+    public void setTxtYokaigoJotaiKubun(TextBox txtYokaigoJotaiKubun) {
+        this.txtYokaigoJotaiKubun = txtYokaigoJotaiKubun;
+    }
+
+    /*
+     * gettxtNinteiKaishiYmd
+     * @return txtNinteiKaishiYmd
+     */
+    @JsonProperty("txtNinteiKaishiYmd")
+    public TextBoxDate getTxtNinteiKaishiYmd() {
+        return txtNinteiKaishiYmd;
+    }
+
+    /*
+     * settxtNinteiKaishiYmd
+     * @param txtNinteiKaishiYmd txtNinteiKaishiYmd
+     */
+    @JsonProperty("txtNinteiKaishiYmd")
+    public void setTxtNinteiKaishiYmd(TextBoxDate txtNinteiKaishiYmd) {
+        this.txtNinteiKaishiYmd = txtNinteiKaishiYmd;
+    }
+
+    /*
+     * gettxtNinteiShuryoYmd
+     * @return txtNinteiShuryoYmd
+     */
+    @JsonProperty("txtNinteiShuryoYmd")
+    public TextBoxDate getTxtNinteiShuryoYmd() {
+        return txtNinteiShuryoYmd;
+    }
+
+    /*
+     * settxtNinteiShuryoYmd
+     * @param txtNinteiShuryoYmd txtNinteiShuryoYmd
+     */
+    @JsonProperty("txtNinteiShuryoYmd")
+    public void setTxtNinteiShuryoYmd(TextBoxDate txtNinteiShuryoYmd) {
+        this.txtNinteiShuryoYmd = txtNinteiShuryoYmd;
+    }
+
+    /*
+     * getbtnNinteiRireki
+     * @return btnNinteiRireki
+     */
+    @JsonProperty("btnNinteiRireki")
+    public ButtonDialog getBtnNinteiRireki() {
+        return btnNinteiRireki;
+    }
+
+    /*
+     * setbtnNinteiRireki
+     * @param btnNinteiRireki btnNinteiRireki
+     */
+    @JsonProperty("btnNinteiRireki")
+    public void setBtnNinteiRireki(ButtonDialog btnNinteiRireki) {
+        this.btnNinteiRireki = btnNinteiRireki;
+    }
+
+    /*
+     * getbtnHihoRireki
+     * @return btnHihoRireki
+     */
+    @JsonProperty("btnHihoRireki")
+    public ButtonDialog getBtnHihoRireki() {
+        return btnHihoRireki;
+    }
+
+    /*
+     * setbtnHihoRireki
+     * @param btnHihoRireki btnHihoRireki
+     */
+    @JsonProperty("btnHihoRireki")
+    public void setBtnHihoRireki(ButtonDialog btnHihoRireki) {
+        this.btnHihoRireki = btnHihoRireki;
+    }
+
+    /*
+     * getbtnRenrakusaki
+     * @return btnRenrakusaki
+     */
+    @JsonProperty("btnRenrakusaki")
+    public ButtonDialog getBtnRenrakusaki() {
+        return btnRenrakusaki;
+    }
+
+    /*
+     * setbtnRenrakusaki
+     * @param btnRenrakusaki btnRenrakusaki
+     */
+    @JsonProperty("btnRenrakusaki")
+    public void setBtnRenrakusaki(ButtonDialog btnRenrakusaki) {
+        this.btnRenrakusaki = btnRenrakusaki;
+    }
+
+    /*
+     * [共有子DIVモード]
+     */
+    @JsonProperty("modes")
+    private HashSet<Mode> modes;
+
+    public static enum 連絡先ボタンを implements ICommonChildDivMode {
+
+        表示する("表示する"),
+        表示しない("表示しない");
+
+        private final String name;
+
+        private 連絡先ボタンを(final String name) {
+            this.name = name;
+        }
+
+        public static 連絡先ボタンを getEnum(String str) {
+            連絡先ボタンを[] enumArray = 連絡先ボタンを.values();
+
+            for (連絡先ボタンを enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public 連絡先ボタンを getMode_連絡先ボタンを() {
+        return (連絡先ボタンを) _CommonChildDivModeUtil.getMode( this.modes, 連絡先ボタンを.class );
+    }
+
+    public void setMode_連絡先ボタンを( 連絡先ボタンを value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, 連絡先ボタンを.class , value );
+    }
+
+    public static enum 認定履歴ボタンを implements ICommonChildDivMode {
+
+        表示する("表示する"),
+        表示しない("表示しない");
+
+        private final String name;
+
+        private 認定履歴ボタンを(final String name) {
+            this.name = name;
+        }
+
+        public static 認定履歴ボタンを getEnum(String str) {
+            認定履歴ボタンを[] enumArray = 認定履歴ボタンを.values();
+
+            for (認定履歴ボタンを enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public 認定履歴ボタンを getMode_認定履歴ボタンを() {
+        return (認定履歴ボタンを) _CommonChildDivModeUtil.getMode( this.modes, 認定履歴ボタンを.class );
+    }
+
+    public void setMode_認定履歴ボタンを( 認定履歴ボタンを value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, 認定履歴ボタンを.class , value );
+    }
+
+    public static enum 被保履歴ボタンを implements ICommonChildDivMode {
+
+        表示する("表示する"),
+        表示しない("表示しない");
+
+        private final String name;
+
+        private 被保履歴ボタンを(final String name) {
+            this.name = name;
+        }
+
+        public static 被保履歴ボタンを getEnum(String str) {
+            被保履歴ボタンを[] enumArray = 被保履歴ボタンを.values();
+
+            for (被保履歴ボタンを enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public 被保履歴ボタンを getMode_被保履歴ボタンを() {
+        return (被保履歴ボタンを) _CommonChildDivModeUtil.getMode( this.modes, 被保履歴ボタンを.class );
+    }
+
+    public void setMode_被保履歴ボタンを( 被保履歴ボタンを value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, 被保履歴ボタンを.class , value );
+    }
+
+    // </editor-fold>
+    //--------------- この行より下にコードを追加してください -------------------
+
+}

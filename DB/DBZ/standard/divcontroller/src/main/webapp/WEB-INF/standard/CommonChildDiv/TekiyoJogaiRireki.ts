@@ -222,9 +222,7 @@ module DBZ
                     this.controls.btnKakutei().disabled = false;
 					this.controls.btnInputClear().displayNone = false;
                     this.controls.btnInputClear().disabled = false;
-                    this.controls.panelTekiyoRireki().displayNone = false;                	
-					this.controls.txtNyusyoDate().displayNone = true;
-                    this.controls.txtTaisyoDate().displayNone = true;
+                    this.controls.panelTekiyoRireki().displayNone = false;  
                     this.controls.btnAdd().displayNone = true;
 					
                 }
@@ -241,8 +239,6 @@ module DBZ
                    
 				    this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
                     this.controls.panelTekiyoInput().displayNone = false;
-                    this.controls.txtNyusyoDate().displayNone = true;
-                    this.controls.txtTaisyoDate().displayNone = true;
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
                     this.controls.btnKakutei().displayNone = false;
                     this.controls.btnKakutei().disabled = false;
@@ -269,9 +265,7 @@ module DBZ
                     this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
 					this.controls.datagridTekiyoJogai().gridSetting.isShowModifyButtonColumn = true;
 					this.controls.datagridTekiyoJogai().gridSetting.isShowDeleteButtonColumn = true;									
-					this.controls.panelTekiyoInput().title = '明細';				
-					this.controls.txtNyusyoDate().displayNone = true;
-                    this.controls.txtTaisyoDate().displayNone = true;
+					this.controls.panelTekiyoInput().title = '明細';
                 }
                 
               }
@@ -294,9 +288,7 @@ module DBZ
 					this.controls.datagridTekiyoJogai().gridSetting.isShowModifyButtonColumn = false;
 					this.controls.datagridTekiyoJogai().gridSetting.isShowDeleteButtonColumn = false;				
 					this.controls.panelTekiyoInput().title = '明細';	
-					this.controls.panelTekiyoInput().disabled = true;					
-					this.controls.txtNyusyoDate().displayNone = true;
-                    this.controls.txtTaisyoDate().displayNone = true;
+					this.controls.panelTekiyoInput().disabled = true;
 					                 
                 }
                 

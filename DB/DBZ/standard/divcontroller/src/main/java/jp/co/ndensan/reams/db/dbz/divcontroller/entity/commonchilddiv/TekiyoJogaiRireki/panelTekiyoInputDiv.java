@@ -27,16 +27,12 @@ public class panelTekiyoInputDiv extends Panel {
     private TextBoxDate txtTekiyoTodokeDate;
     @JsonProperty("ddlTekiyoJiyu")
     private DropDownList ddlTekiyoJiyu;
-    @JsonProperty("txtNyusyoDate")
-    private TextBoxDate txtNyusyoDate;
     @JsonProperty("txtKayijoDate")
     private TextBoxDate txtKayijoDate;
     @JsonProperty("txtKaijoTodokedeDate")
     private TextBoxDate txtKaijoTodokedeDate;
     @JsonProperty("ddlKaijyoJiyu")
     private DropDownList ddlKaijyoJiyu;
-    @JsonProperty("txtTaisyoDate")
-    private TextBoxDate txtTaisyoDate;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -99,24 +95,6 @@ public class panelTekiyoInputDiv extends Panel {
     }
 
     /*
-     * gettxtNyusyoDate
-     * @return txtNyusyoDate
-     */
-    @JsonProperty("txtNyusyoDate")
-    public TextBoxDate getTxtNyusyoDate() {
-        return txtNyusyoDate;
-    }
-
-    /*
-     * settxtNyusyoDate
-     * @param txtNyusyoDate txtNyusyoDate
-     */
-    @JsonProperty("txtNyusyoDate")
-    public void setTxtNyusyoDate(TextBoxDate txtNyusyoDate) {
-        this.txtNyusyoDate = txtNyusyoDate;
-    }
-
-    /*
      * gettxtKayijoDate
      * @return txtKayijoDate
      */
@@ -168,24 +146,6 @@ public class panelTekiyoInputDiv extends Panel {
     @JsonProperty("ddlKaijyoJiyu")
     public void setDdlKaijyoJiyu(DropDownList ddlKaijyoJiyu) {
         this.ddlKaijyoJiyu = ddlKaijyoJiyu;
-    }
-
-    /*
-     * gettxtTaisyoDate
-     * @return txtTaisyoDate
-     */
-    @JsonProperty("txtTaisyoDate")
-    public TextBoxDate getTxtTaisyoDate() {
-        return txtTaisyoDate;
-    }
-
-    /*
-     * settxtTaisyoDate
-     * @param txtTaisyoDate txtTaisyoDate
-     */
-    @JsonProperty("txtTaisyoDate")
-    public void setTxtTaisyoDate(TextBoxDate txtTaisyoDate) {
-        this.txtTaisyoDate = txtTaisyoDate;
     }
 
     // </editor-fold>

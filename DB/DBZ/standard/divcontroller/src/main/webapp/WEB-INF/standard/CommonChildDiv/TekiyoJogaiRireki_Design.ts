@@ -62,10 +62,6 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlTekiyoJiyu"));
             }
 
-            public txtNyusyoDate(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtNyusyoDate"));
-            }
-
             public txtKayijoDate(): UZA.TextBoxDate {
                 return new UZA.TextBoxDate(this.convFiledName("txtKayijoDate"));
             }
@@ -76,10 +72,6 @@ module DBZ {
 
             public ddlKaijyoJiyu(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlKaijyoJiyu"));
-            }
-
-            public txtTaisyoDate(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtTaisyoDate"));
             }
 
             public panelTekiyoJokaiTekiInput(): UZA.Panel {
