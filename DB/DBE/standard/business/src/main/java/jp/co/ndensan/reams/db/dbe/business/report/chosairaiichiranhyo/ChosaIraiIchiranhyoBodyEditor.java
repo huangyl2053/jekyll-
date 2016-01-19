@@ -28,8 +28,8 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
 
     /**
      *
-     * @param source 認定調査依頼一覧表Sourceクラスです
-     * @return ChosaIraiIchiranhyoReportSource 認定調査依頼一覧表Sourceクラスです
+     * @param source 認定調査依頼一覧表Sourceクラス
+     * @return ChosaIraiIchiranhyoReportSource 認定調査依頼一覧表Sourceクラス
      */
     @Override
     public ChosaIraiIchiranhyoReportSource edit(ChosaIraiIchiranhyoReportSource source) {
@@ -48,6 +48,7 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
         source.listIchiranhyo_9 = new RDate(item.getBirthYMD().toString()).wareki().fillType(FillType.BLANK).toDateString();
         source.listIchiranhyo_10 = item.getJyuusyo();
         source.listIchiranhyo_11 = item.getTelNo();
+        //TODO QA515 「提出期限」を「平 4. 1. 1」編集すろ。
         source.listIchiranhyo_12 = new RDate(item.getTeyisyukigenn().toString()).wareki().fillType(FillType.BLANK).toDateString();
         return source;
     }

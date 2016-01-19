@@ -30,8 +30,8 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
 
     /**
      *
-     * @param source 要介護認定調査依頼書Sourceクラスです
-     * @return ChosaIraishoReportSource 要介護認定調査依頼書Sourceクラスです
+     * @param source 要介護認定調査依頼書Sourceクラス
+     * @return ChosaIraishoReportSource 要介護認定調査依頼書Sourceクラス
      */
     @Override
     public ChosaIraishoReportSource edit(ChosaIraishoReportSource source) {

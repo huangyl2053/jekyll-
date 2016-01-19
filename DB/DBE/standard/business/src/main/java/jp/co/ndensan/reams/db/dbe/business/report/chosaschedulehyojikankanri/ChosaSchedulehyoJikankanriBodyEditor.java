@@ -58,7 +58,7 @@ class ChosaSchedulehyoJikankanriBodyEditor implements IChosaSchedulehyoJikankanr
 
     /**
      *
-     * @param source 認定調査スケジュール表(時間管理)Sourceクラスです
+     * @param source 認定調査スケジュール表(時間管理)Sourceクラス
      * @return ChosaSchedulehyoJikankanriReportSource
      */
     @Override
