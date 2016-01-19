@@ -148,8 +148,8 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
 
         return accessor.select().
                 table(DbT7022ShoriDateKanri.class).
-                where(and(  
-                        //  to do 検索条件： 処理名　IN 処理名リスト
+                where(and(
+                                //  to do 検索条件： 処理名　IN 処理名リスト
                                 eq(subGyomuCode, "DBB"),
                                 eq(nendo, 年度)
                         )).
@@ -267,6 +267,25 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(shoriName, "被保険者証一括発行"),
                                 in(shoriEdaban, 処理枝番))).
                 order(by(DbT7022ShoriDateKanri.kijunTimestamp, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから、前回開始終了日を取得する。
+     *
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity selectKaishiShuryoYMD() throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, "DBA"),
+                                eq(shoriName, "住基連動登録者リスト"))).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
 }

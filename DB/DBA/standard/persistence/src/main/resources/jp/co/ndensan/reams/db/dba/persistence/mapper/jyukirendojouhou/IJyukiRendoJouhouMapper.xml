@@ -117,10 +117,10 @@
                           THEN dbT1001."shikakuShutokuJiyuCode"
                      ELSE
                          CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0013" />
-                              THEN dbT1001."shikakuHenkoYMD"
+                              THEN dbT1001."shikakuHenkoJiyuCode"
                          ELSE
                              CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0014" />
-                                  THEN dbT1001."jushochitokureiTekiyoYMD"
+                                  THEN dbT1001."jushochitokureiTekiyoJiyuCode"
                              ELSE NULL
                              END
                          END

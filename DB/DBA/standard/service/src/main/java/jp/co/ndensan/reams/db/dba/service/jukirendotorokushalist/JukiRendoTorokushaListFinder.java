@@ -10,10 +10,7 @@ import jp.co.ndensan.reams.db.dba.business.core.jukinentotoroku.DbT7022ShoriDate
 import jp.co.ndensan.reams.db.dba.definition.batchprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -68,14 +65,7 @@ public class JukiRendoTorokushaListFinder {
      */
     @Transaction
     public DbT7022ShoriDateKanriBusiness getKaishiShuryobi() {
-        // TODO QA303を提出しました
-        DbT7022ShoriDateKanriEntity entity = dac.selectByKey(
-                SubGyomuCode.DBA介護資格,
-                LasdecCode.EMPTY,
-                処理名,
-                RString.EMPTY,
-                FlexibleYear.MAX,
-                RString.EMPTY);
+        DbT7022ShoriDateKanriEntity entity = dac.selectKaishiShuryoYMD();
         if (entity == null) {
             return null;
         }
