@@ -30,5 +30,11 @@
 		<!-- 公開系 -->
 		<!-- テスト -->
 		<!-- ツール -->
-	</dependencies>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbc</groupId>
+            <artifactId>DbcEntity</artifactId>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
 </project>

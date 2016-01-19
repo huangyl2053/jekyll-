@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3076KogakuJuryoininKeiyakuJigyoshaEntityGenerator;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3076KogakuJuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_受付年月日;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3076KogakuJuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_履歴番号;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3076KogakuJuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_被保険者番号;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3076KogakuJuryoininKeiyakuJigyoshaEntity;
@@ -49,11 +48,9 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
-                    DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
             TestSupport.insert(
                     DEFAULT_被保険者番号,
-                    DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
         }
 
@@ -61,7 +58,6 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase
         public void 被保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
         }
 
@@ -69,7 +65,6 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase
         public void 受付年月日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
         }
 
@@ -77,7 +72,6 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase
         public void 履歴番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
         }
 
@@ -85,7 +79,6 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT3076KogakuJuryoininKeiyakuJigyoshaEntity insertedRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
             assertThat(insertedRecord, is(notNullValue()));
         }
@@ -94,7 +87,6 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT3076KogakuJuryoininKeiyakuJigyoshaEntity insertedRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
             assertThat(insertedRecord, is(nullValue()));
         }
@@ -106,11 +98,9 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase
         public void 高額受領委任契約事業者が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
-                    DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
             TestSupport.insert(
                     DEFAULT_被保険者番号,
-                    DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
             assertThat(sut.selectAll().size(), is(2));
         }
@@ -127,12 +117,10 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase
         public void 高額受領委任契約事業者エンティティを渡すと_insertは_高額受領委任契約事業者を追加する() {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
-                    DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
 
             assertThat(sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_受付年月日,
                     DEFAULT_履歴番号), is(notNullValue()));
         }
     }
@@ -143,7 +131,6 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
-                    DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
         }
 
@@ -151,7 +138,6 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase
         public void 高額受領委任契約事業者エンティティを渡すと_updateは_高額受領委任契約事業者を更新する() {
             DbT3076KogakuJuryoininKeiyakuJigyoshaEntity updateRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
             updateRecord.setShinseiYMD(new FlexibleDate("20150101"));
 
@@ -159,7 +145,6 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase
 
             DbT3076KogakuJuryoininKeiyakuJigyoshaEntity updatedRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
 
             assertThat(updateRecord.getShinseiYMD(), is(updatedRecord.getShinseiYMD()));
@@ -172,7 +157,6 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
-                    DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
         }
 
@@ -180,7 +164,6 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase
         public void 高額受領委任契約事業者エンティティを渡すと_deleteは_高額受領委任契約事業者を削除する() {
             DbT3076KogakuJuryoininKeiyakuJigyoshaEntity deletedEntity = sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_受付年月日,
                     DEFAULT_履歴番号);
             deletedEntity.setState(EntityDataState.Deleted);
 
@@ -188,7 +171,6 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase
 
             assertThat(sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_受付年月日,
                     DEFAULT_履歴番号), is(nullValue()));
         }
     }
@@ -197,11 +179,9 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase
 
         public static void insert(
                 HihokenshaNo 被保険者番号,
-                FlexibleDate 受付年月日,
                 int 履歴番号) {
             DbT3076KogakuJuryoininKeiyakuJigyoshaEntity entity = DbT3076KogakuJuryoininKeiyakuJigyoshaEntityGenerator.createDbT3076KogakuJuryoininKeiyakuJigyoshaEntity();
             entity.setHihokenshaNo(被保険者番号);
-            entity.setUketsukeYMD(受付年月日);
             entity.setRirekiNo(履歴番号);
             sut.save(entity);
         }

@@ -8,6 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinsei;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinsei.hiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinsei.seiriNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinsei.serviceTeikyoYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinseiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -55,7 +56,8 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiDac implements ISaveable<DbT30
                 table(DbT3035ShokanJutakuKaishuJizenShinsei.class).
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
-                                eq(serviceTeikyoYM, サービス提供年月))).
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号))).
                 toObject(DbT3035ShokanJutakuKaishuJizenShinseiEntity.class);
     }
 
