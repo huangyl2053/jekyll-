@@ -6,7 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.kaigoserviceshurui.IKaigoServiceShuruiMapper">
   
     <select id="getKaigoServiceEntity" resultMap="resultMap_KaigoServiceShuruiEntity"
-    parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatis.param.kaigoserviceshurui.KaigoServiceShuruiMapperParameter" fetchSize="500">
+    parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui.KaigoServiceShuruiMapperParameter" fetchSize="500">
         SELECT
         DbT7130KaigoServiceShurui.*,
         DbT7131KaigoServiceNaiyou.*

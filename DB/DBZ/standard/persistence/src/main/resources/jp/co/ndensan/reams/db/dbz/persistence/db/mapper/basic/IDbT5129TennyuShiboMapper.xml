@@ -3,12 +3,12 @@
 <!-- 概要： DbT5129TennyuShiboマスタとエンティティのマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5129TennyuShiboMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5129TennyuShiboMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5129TennyuShibo">
      SELECT
-         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5129TennyuShiboMapper.allColumns_DbT5129TennyuShibo" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5129TennyuShiboMapper.allColumns_DbT5129TennyuShibo" />
      FROM
          rgdb."DbT5129TennyuShibo"
      WHERE
@@ -43,7 +43,7 @@
 
 
     <!--テーブルDbT5129TennyuShiboの項目をDbT5129TennyuShiboEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5129TennyuShiboEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5129TennyuShiboEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5129TennyuShiboEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5129TennyuShiboEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT5129TennyuShibo_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="insertDantaiCd" column="dbT5129TennyuShibo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5129TennyuShibo_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.gappeijoho;
+package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.gappeicityjoho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter;
