@@ -6,10 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -21,9 +18,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TashajukiHachiCSVDataEntity {
 
-    private LasdecCode 市町村コード;
+    private RString 市町村コード;
     private RString 識別ＩＤ;
-    private YMDHMS タイムスタンプ;
+    private RString タイムスタンプ;
     private RString 最終レコード区分;
     private RString 連番;
     private RString ＦＩＬＬＥＲ1;
@@ -35,6 +32,6 @@ public class TashajukiHachiCSVDataEntity {
     private FlexibleDate 受給認定取消年月日;
     private RString 資格区分;
     private RString 受給者区分;
-    private RDateTime 更新日時;
+    private RString 更新日時;
     private RString ＦＩＬＬＥＲ2;
 }
