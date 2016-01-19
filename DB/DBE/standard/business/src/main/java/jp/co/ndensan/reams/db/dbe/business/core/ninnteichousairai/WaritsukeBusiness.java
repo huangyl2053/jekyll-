@@ -123,21 +123,12 @@ public class WaritsukeBusiness {
     }
 
     /**
-     * 調査員割付可能人数/月を返します。
-     *
-     * @return 調査員割付可能人数/月
-     */
-    public RString getIryoKikanMeisho() {
-        return entity.getIryoKikanMeisho();
-    }
-
-    /**
      * 主治医医療機関を返します。
      *
      * @return 主治医医療機関
      */
-    public AtenaMeisho getShujiiName() {
-        return entity.getShujiiName();
+    public RString getIryoKikanMeisho() {
+        return entity.getIryoKikanMeisho();
     }
 
     /**
@@ -145,8 +136,26 @@ public class WaritsukeBusiness {
      *
      * @return 主治医
      */
+    public AtenaMeisho getShujiiName() {
+        return entity.getShujiiName();
+    }
+
+    /**
+     * 調査員割付可能人数/月を返します。
+     *
+     * @return 調査員割付可能人数/月
+     */
     public int getChosaKanoNinzuPerMonth() {
         return entity.getChosaKanoNinzuPerMonth();
+    }
+
+    /**
+     * 前回認定調査委託先を返します。
+     *
+     * @return 前回認定調査委託先
+     */
+    public RString getTemp_jigyoshaMeisho() {
+        return entity.getTemp_jigyoshaMeisho();
     }
 
     /**
@@ -154,23 +163,14 @@ public class WaritsukeBusiness {
      *
      * @return 前回主治医医療機関
      */
-    public RString getTemp_jigyoshaMeisho() {
-        return entity.getTemp_jigyoshaMeisho();
+    public RString getTemp_iryoKikanMeisho() {
+        return entity.getTemp_iryoKikanMeisho();
     }
 
     /**
      * 前回主治医を返します。
      *
      * @return 前回主治医
-     */
-    public RString getTemp_iryoKikanMeisho() {
-        return entity.getTemp_iryoKikanMeisho();
-    }
-
-    /**
-     * 前回認定調査委託先を返します。
-     *
-     * @return 前回認定調査委託先
      */
     public AtenaMeisho getTemp_shujiiName() {
         return entity.getTemp_shujiiName();
