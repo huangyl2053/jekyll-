@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dba.business.core.jukinentotoroku.DbT7022ShoriDate
 import jp.co.ndensan.reams.db.dba.definition.batchprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -65,7 +66,7 @@ public class JukiRendoTorokushaListFinder {
      */
     @Transaction
     public DbT7022ShoriDateKanriBusiness getKaishiShuryobi() {
-        DbT7022ShoriDateKanriEntity entity = dac.selectKaishiShuryoYMD();
+        DbT7022ShoriDateKanriEntity entity = dac.selectKaishiShuryoYMD(SubGyomuCode.DBA介護資格, 処理名);
         if (entity == null) {
             return null;
         }

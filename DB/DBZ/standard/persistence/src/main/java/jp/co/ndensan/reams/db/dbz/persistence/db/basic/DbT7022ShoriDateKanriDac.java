@@ -273,19 +273,23 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     /**
      * 処理日付管理マスタテーブルから、前回開始終了日を取得する。
      *
+     * @param サブ業務コード
+     * @param 処理名
      * @return DbT7022ShoriDateKanriEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT7022ShoriDateKanriEntity selectKaishiShuryoYMD() throws NullPointerException {
+    public DbT7022ShoriDateKanriEntity selectKaishiShuryoYMD(
+            SubGyomuCode サブ業務コード,
+            RString 処理名) throws NullPointerException {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
-                                eq(subGyomuCode, "DBA"),
-                                eq(shoriName, "住基連動登録者リスト"))).
+                                eq(subGyomuCode, サブ業務コード),
+                                eq(shoriName, 処理名))).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
 }
