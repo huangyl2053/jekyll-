@@ -54,7 +54,7 @@
         WHERE
                     DbT5593GogitaiWariateIinJoho."gogitaiNo" = #{合議体番号}
             AND DbT5593GogitaiWariateIinJoho."gogitaiYukoKikanKaishiYMD" = #{合議体有効期間開始年月日}
-        ORDER BY DbT5593GogitaiWariateIinJoho."gogitaichoKubunCode" ASC, DbT5593GogitaiWariateIinJoho."shinsakaiIinCode" DESC
+        ORDER BY DbT5593GogitaiWariateIinJoho."gogitaichoKubunCode" DESC, DbT5593GogitaiWariateIinJoho."shinsakaiIinCode" ASC
     </select>
     
     
@@ -80,7 +80,7 @@
             DbT5593GogitaiWariateIinJoho."substituteFlag" AS "dbT5593GogitaiWariateIinJoho_substituteFlag"
         FROM
             rgdb."DbT5591GogitaiJoho" AS DbT5591GogitaiJoho
-        LEFT JOIN
+        INNER JOIN
             rgdb."DbT5593GogitaiWariateIinJoho" AS DbT5593GogitaiWariateIinJoho
         ON
         DbT5591GogitaiJoho."gogitaiNo" = DbT5593GogitaiWariateIinJoho."gogitaiNo"

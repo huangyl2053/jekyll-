@@ -192,7 +192,7 @@ public class GogitaiJohoSakuseiValidationHandler {
         List<dgShinsainList_Row> rowList = div.getDgShinsainList().getDataSource();
         boolean flag = false;
         for (dgShinsainList_Row row : rowList) {
-            if (row.getGogitaicho()) {
+            if (row.getGogitaicho() && !flag) {
                 flag = true;
                 continue;
             }
