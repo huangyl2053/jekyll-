@@ -22,6 +22,12 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbuDefinition</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbuBusiness</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <!-- DBA -->
         <!-- DBB -->
@@ -49,7 +55,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzService</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
