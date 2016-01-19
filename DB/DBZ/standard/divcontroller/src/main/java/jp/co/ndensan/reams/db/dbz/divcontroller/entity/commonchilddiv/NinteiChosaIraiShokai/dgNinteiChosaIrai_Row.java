@@ -3,21 +3,17 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiCho
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Aug 07 17:18:44 JST 2015 
+ * Fri Aug 07 17:18:44 JST 2015
  */
-
-
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
-
 /**
- * dgNinteiChosaIrai_Row のクラスファイル 
- * 
+ * dgNinteiChosaIrai_Row のクラスファイル
+ *
  * @author 自動生成
  */
-
 public class dgNinteiChosaIrai_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 

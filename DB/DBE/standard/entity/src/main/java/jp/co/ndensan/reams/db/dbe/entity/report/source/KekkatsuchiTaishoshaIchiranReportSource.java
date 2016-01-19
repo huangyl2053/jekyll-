@@ -40,8 +40,12 @@ public class KekkatsuchiTaishoshaIchiranReportSource implements IReportSource {
     public RString listKekkatsuchi_9;
     @ReportItem(name = "listKekkatsuchi_10", length = 4, order = 14)
     public RString listKekkatsuchi_10;
-    @ReportItem(name = "gokei", length = 3, order = 15)
+    @ReportItem(name = "gokeiLabel", length = 3, order = 15)
+    public RString gokeiLabel;
+    @ReportItem(name = "gokei", length = 3, order = 16)
     public RString gokei;
+    @ReportItem(name = "kenLabel", length = 1, order = 17)
+    public RString kenLabel;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

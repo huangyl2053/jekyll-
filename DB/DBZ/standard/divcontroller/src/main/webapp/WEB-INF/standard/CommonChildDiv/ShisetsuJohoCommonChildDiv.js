@@ -1,5 +1,5 @@
-var DBA;
-(function (DBA) {
+var DBZ;
+(function (DBZ) {
     (function (ShisetsuJohoCommonChildDiv) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -16,12 +16,12 @@ var DBA;
             return ModeController;
         })();
         ShisetsuJohoCommonChildDiv.ModeController = ModeController;
-    })(DBA.ShisetsuJohoCommonChildDiv || (DBA.ShisetsuJohoCommonChildDiv = {}));
-    var ShisetsuJohoCommonChildDiv = DBA.ShisetsuJohoCommonChildDiv;
-})(DBA || (DBA = {}));
+    })(DBZ.ShisetsuJohoCommonChildDiv || (DBZ.ShisetsuJohoCommonChildDiv = {}));
+    var ShisetsuJohoCommonChildDiv = DBZ.ShisetsuJohoCommonChildDiv;
+})(DBZ || (DBZ = {}));
 
-var DBA;
-(function (DBA) {
+var DBZ;
+(function (DBZ) {
     (function (ShisetsuJohoCommonChildDiv) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -36,6 +36,6 @@ var DBA;
             return PublicProperties;
         })();
         ShisetsuJohoCommonChildDiv.PublicProperties = PublicProperties;
-    })(DBA.ShisetsuJohoCommonChildDiv || (DBA.ShisetsuJohoCommonChildDiv = {}));
-    var ShisetsuJohoCommonChildDiv = DBA.ShisetsuJohoCommonChildDiv;
-})(DBA || (DBA = {}));
+    })(DBZ.ShisetsuJohoCommonChildDiv || (DBZ.ShisetsuJohoCommonChildDiv = {}));
+    var ShisetsuJohoCommonChildDiv = DBZ.ShisetsuJohoCommonChildDiv;
+})(DBZ || (DBZ = {}));

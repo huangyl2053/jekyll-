@@ -64,7 +64,17 @@ class KaigoKekkaTaishouIchiranHeaderEditor implements KaigoKekkaTaishouIchiranEd
         iryoKikanCodeBulider.append(new RDate(item.getChushutsuKikanTo().toString()).wareki().toDateString());
         source.chushutsuKikan = iryoKikanCodeBulider.toRString();
         if (item.getGokei() != null) {
-            source.gokei = new RString(item.getGokei().toString());
+            RStringBuilder rsbGokeiLabel = new RStringBuilder();
+            rsbGokeiLabel.append(new RString("合計："));
+            source.gokeiLabel = new RString(rsbGokeiLabel.toString());
+
+            RStringBuilder rsbGokei = new RStringBuilder();
+            rsbGokei.append(item.getGokei().toString());
+            source.gokei = new RString(rsbGokei.toString());
+
+            RStringBuilder rsbkenLabel = new RStringBuilder();
+            rsbkenLabel.append(new RString("件"));
+            source.kenLabel = new RString(rsbkenLabel.toString());
         }
         source.shichosonName = item.getShichosonName();
 

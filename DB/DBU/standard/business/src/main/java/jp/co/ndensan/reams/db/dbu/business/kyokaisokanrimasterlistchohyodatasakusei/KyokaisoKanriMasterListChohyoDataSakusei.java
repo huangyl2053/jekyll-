@@ -177,7 +177,7 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
             if ((解除する).equals(entity.getKyuufugakuGengakuKisaiKiajoFlag())) {
                 給付額減額解除.add((給付額減額記載解除フラグ_解除する));
             } else {
-                給付額減額解除.add(entity.getKyuufugakuGengakuKisaiKiajoFlag());
+                給付額減額解除.add(RString.EMPTY);
             }
             標準負担減額後負担額.add(entity.getHyojunFutanKeigengoFutangaku());
             居住費軽減後居室種類.add(new RString(CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu(CodeShubetsu_0243),

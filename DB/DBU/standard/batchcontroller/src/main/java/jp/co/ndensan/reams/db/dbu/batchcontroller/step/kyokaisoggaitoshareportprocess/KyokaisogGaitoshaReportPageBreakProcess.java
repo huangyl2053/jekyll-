@@ -65,7 +65,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
     private static final RString なし = new RString("なし");
     private static final RString Empty = new RString("Empty");
     private static final RString 帳票ID = new RString("DBA200005_KyokaisoKanriMasterList");
-    private static final RString 境界層該当内容 = new RString("境界層該当内容");
+    private static final RString 境界層該当内容 = new RString("【境界層該当内容】　");
     private static final ReportId ID = new ReportId("DBA200005_KyokaisoKanriMasterList");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.basic.mapper.kyokaisogaitosha.IKkyokaisoGaitoshaMapper.getKyokaisoKanriMasterList");
@@ -139,8 +139,8 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
 
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
+        RStringBuilder nituliki = new RStringBuilder();
         if ((取得モード_1).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getMode())) {
-            RStringBuilder nituliki = new RStringBuilder();
             nituliki.append((出力条件_基準日));
             nituliki.append(parameter.toKyokaisoGaitoshaMybatisParameter().getDate_FROM()
                     .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
@@ -149,7 +149,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
             出力条件.add(nituliki.toRString());
         }
         if ((取得モード_2).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getMode())) {
-            RStringBuilder nituliki = new RStringBuilder();
+            nituliki = new RStringBuilder();
             nituliki.append((出力条件_範囲));
             if ((境界層該当申請日名称).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getRange())) {
                 nituliki.append(境界層該当申請日);
@@ -171,7 +171,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
             出力条件.add(nituliki.toRString());
         }
         if ((取得モード_3).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getMode())) {
-            RStringBuilder nituliki = new RStringBuilder();
+            nituliki = new RStringBuilder();
             nituliki.append((出力条件_指定無し));
             出力条件.add(nituliki.toRString());
         }
