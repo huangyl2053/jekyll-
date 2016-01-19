@@ -44,7 +44,7 @@
         <result property="updateCount" column="dbT2012HokenryoRank_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT2012HokenryoRank_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT2012HokenryoRank_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="rankKubun" column="dbT2012HokenryoRank_rankKubun" />
+        <result property="rankKubun" column="dbT2012HokenryoRank_rankKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="sokyuNendo" column="dbT2012HokenryoRank_sokyuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
     </resultMap>
     

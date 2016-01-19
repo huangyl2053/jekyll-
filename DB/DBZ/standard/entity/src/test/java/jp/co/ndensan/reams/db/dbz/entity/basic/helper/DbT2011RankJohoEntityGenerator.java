@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2011RankJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -15,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class DbT2011RankJohoEntityGenerator {
 
     public static final FlexibleYear DEFAULT_賦課年度 = new FlexibleYear("1990");
-    public static final RankKubun DEFAULT_ランク区分 = new RankKubun(new RString("Data"));
+    public static final RString DEFAULT_ランク区分 = new RString("Data");
     public static final RString DEFAULT_ランク名称 = new RString("Data");
 
     /**
