@@ -18,7 +18,8 @@ public enum DBU0510011StateName implements IStateEnumerations {
     ReSearch("ReSearch"),
     Yameru("Yameru"),
     Sakujo("Sakujo"),
-    Insert("Insert");
+    Insert("Insert"),
+    AfterSave("AfterSave");
 
     private final RString name;
 

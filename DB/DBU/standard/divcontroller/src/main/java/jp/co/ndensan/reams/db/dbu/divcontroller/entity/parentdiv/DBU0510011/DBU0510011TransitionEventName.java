@@ -18,7 +18,8 @@ public enum DBU0510011TransitionEventName implements IContainerEvents {
     insert("insert"),
     delete("delete"),
     back("back"),
-    stop("stop");
+    stop("stop"),
+    complete("complete");
 
     private final RString name;
 
