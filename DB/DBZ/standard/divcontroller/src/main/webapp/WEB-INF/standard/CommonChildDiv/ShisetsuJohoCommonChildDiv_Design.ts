@@ -2,7 +2,7 @@
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
 
-module DBA {
+module DBZ {
 
      export module ShisetsuJohoCommonChildDiv {
 
@@ -38,11 +38,11 @@ module DBA {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBA.ShisetsuJohoCommonChildDiv.Controls.myType();
+                return this._myName + "_" + DBZ.ShisetsuJohoCommonChildDiv.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBA.ShisetsuJohoCommonChildDiv.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.ShisetsuJohoCommonChildDiv.Controls.myType() + "_" + fieldName;
             }
 
             public ShisetsuJohoCommonChildDiv(): UZA.Panel {

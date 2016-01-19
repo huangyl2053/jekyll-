@@ -1,5 +1,5 @@
 /// <reference path='ShisetsuJohoCommonChildDiv_Design.ts' />
-module DBA
+module DBZ
 {
     export module ShisetsuJohoCommonChildDiv
     {
@@ -26,7 +26,7 @@ module DBA
     }
 }
 
-module DBA
+module DBZ
 {
     export module ShisetsuJohoCommonChildDiv
     {

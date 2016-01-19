@@ -3,27 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.core.shisetujyoho;
+package jp.co.ndensan.reams.db.dbz.business.core.shisetujyoho;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
  * 入所施設名称オブジェクトの項目定義クラスです。
  */
-public class KaigoJigyoshaInputGuide implements Serializable {
+public class KaigoJogaiTokureiTaishoShisetsuInputGuide implements Serializable {
 
-    private final DbT7060KaigoJigyoshaEntity entity;
+    private final DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity;
 
     /**
      * コンストラクタです.
      *
      * @param entity 介護事業者Entity
      */
-    public KaigoJigyoshaInputGuide(DbT7060KaigoJigyoshaEntity entity) {
+    public KaigoJogaiTokureiTaishoShisetsuInputGuide(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity) {
         this.entity = entity;
     }
 
@@ -32,7 +32,7 @@ public class KaigoJigyoshaInputGuide implements Serializable {
      *
      * @return 事業者番号
      */
-    public KaigoJigyoshaNo get事業者番号() {
+    public RString get事業者番号() {
         return entity.getJigyoshaNo();
     }
 
@@ -42,6 +42,6 @@ public class KaigoJigyoshaInputGuide implements Serializable {
      * @return 事業者名称
      */
     public AtenaMeisho get事業者名称() {
-        return entity.getJigyoshaName();
+        return entity.getJigyoshaMeisho();
     }
 }
