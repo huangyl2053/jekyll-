@@ -1,0 +1,154 @@
+﻿{
+ "uiContainerName": "DBCUC06011",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "福祉用具購入費支給申請登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0600011",
+     "layoutTitle": "福祉用具購入費支給申請登録",
+     "eventName": "検索に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0600011",
+     "layoutTitle": "福祉用具購入費支給申請登録",
+     "eventName": "一覧に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0600011",
+     "layoutTitle": "福祉用具購入費支給申請登録",
+     "eventName": "明細情報",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0600021",
+     "toLayoutTitle": "福祉用具購入費支給申請登録",
+     "toState": "touroku"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0200001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0600011",
+     "toLayoutTitle": "福祉用具購入費支給申請登録",
+     "toState": "default"
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0600021",
+     "layoutTitle": "福祉用具購入費支給申請登録",
+     "eventName": "決定情報",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0600031",
+     "toLayoutTitle": "福祉用具購入費支給申請登録",
+     "toState": "touroku"
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0600021",
+     "layoutTitle": "福祉用具購入費支給申請登録",
+     "eventName": "一覧に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0600011",
+     "toLayoutTitle": "福祉用具購入費支給申請登録",
+     "toState": "default"
+    },
+    {
+     "id": "8",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0600021",
+     "layoutTitle": "福祉用具購入費支給申請登録",
+     "eventName": "処理終了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "9",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0600031",
+     "layoutTitle": "福祉用具購入費支給申請登録",
+     "eventName": "明細情報",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0600021",
+     "toLayoutTitle": "福祉用具購入費支給申請登録",
+     "toState": "touroku"
+    },
+    {
+     "id": "10",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0600031",
+     "layoutTitle": "福祉用具購入費支給申請登録",
+     "eventName": "一覧に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0600011",
+     "toLayoutTitle": "福祉用具購入費支給申請登録",
+     "toState": "default"
+    },
+    {
+     "id": "11",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0600031",
+     "layoutTitle": "福祉用具購入費支給申請登録",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
