@@ -14,7 +14,7 @@
     </resultMap>
      <select id="getKaigoJigyoshaEntity" 
             resultMap="resultMap_KaigoJigyoshaEntity"
-            parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatis.param.KaigoJigyosha.KaigoJigyoshaMapperParameter">
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigojigyosha.KaigoJigyoshaMapperParameter">
          SELECT 
          DbT7060KaigoJigyosha.*,
          DbT7062KaigoJigyoshaDaihyosha.*,
