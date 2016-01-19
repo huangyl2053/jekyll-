@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.ninteichosairaishokai.NinteiChos
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaIraiShokai.NinteiChosaIraiShokaiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.NinteiChosaIraiShokai.NinteiChosaIraiShokaiHandler;
-import jp.co.ndensan.reams.db.dbz.service.core.ninteichosairaishokai.NinteiChosaIraiShokaiManager;
+import jp.co.ndensan.reams.db.dbz.service.core.ninteichosairaishokai.NinteiChosaIraiShokaiFinder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -31,7 +31,7 @@ public class NinteiChosaIraiShokai {
     public ResponseData<NinteiChosaIraiShokaiDiv> load(NinteiChosaIraiShokaiDiv div) {
         RString 被保険者番号 = new RString((ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class)).toString());
         List<NinteiChosaIraiShokaiMaster> ninteiChosaList
-                = NinteiChosaIraiShokaiManager.createInstance().getNinteiChousaJouhou(被保険者番号).records();
+                = NinteiChosaIraiShokaiFinder.createInstance().getNinteiChousaJouhou(被保険者番号).records();
         getHandler(div).load(ninteiChosaList);
         return ResponseData.of(div).respond();
     }
