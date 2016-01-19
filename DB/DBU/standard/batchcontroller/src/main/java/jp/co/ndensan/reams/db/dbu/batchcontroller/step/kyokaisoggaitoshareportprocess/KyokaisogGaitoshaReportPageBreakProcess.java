@@ -68,7 +68,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
     private static final RString 境界層該当内容 = new RString("境界層該当内容");
     private static final ReportId ID = new ReportId("DBA200005_KyokaisoKanriMasterList");
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbu.persistence.db.basic.mapper.kyokaisogaitosha.IKyokaisoGaitoshaMapper.getKyokaisoKanriMasterList");
+            "jp.co.ndensan.reams.db.dbu.persistence.db.basic.mapper.kyokaisogaitosha.IKkyokaisoGaitoshaMapper.getKyokaisoKanriMasterList");
     private List<ReportOutputJokenhyoItem> lists;
     List<KyokaisogGaitoshaRelateEntity> daichoJohoList = new ArrayList<>();
     private KyokaisogGaitoshaListEntity kyokaisokanrimasterList;
@@ -119,7 +119,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
     protected void process(KyokaisogGaitoshaRelateEntity entity) {
 //         TODO  境界層管理マスタリストフォームあります。　帳票は3/25纳品
 //         TODO  QA377 AccessLogの実装方式
-//        paramte();
+        paramte();
 //       PersonalData personalData = toPersonalData(KyokaisogGaitoshaRelateEntity);
 //        AccessLogger.log(AccessLogType.照会, KyokaisogGaitoshaRelateEntity);
 //        KyokaisoKanriMasterListChohyoDataSakusei chohyoDataSakusei = new KyokaisoKanriMasterListChohyoDataSakusei();
