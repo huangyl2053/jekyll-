@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  *
- * 認定調査スケジュール表(時間管理)Printerです。
+ * 認定調査スケジュール表(時間管理)PrinterServiceクラスです。
  */
 public class ChosaSchedulehyoJikankanriPrintService {
 

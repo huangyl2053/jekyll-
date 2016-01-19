@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
  *
- * 認定調査依頼一覧表PrinterServiceです。
+ * 認定調査依頼一覧表PrinterServiceクラスです。
  */
 public class ChosaIraiIchiranhyoPrintService {
 
