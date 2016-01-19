@@ -35,14 +35,21 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 public class KyokaisoKanriMasterListChohyoDataSakusei {
 
     private static final int NOCOUNT_20 = 20;
+    private static final RString 男 = new RString("1");
+    private static final RString 解除する = new RString("1");
+    private static final RString 性別_男 = new RString("男");
+    private static final RString 性別_女 = new RString("女");
+    private static final RString CodeShubetsu_0243 = new RString("0243");
+    private static final RString 給付額減額記載解除フラグ_解除する = new RString("解除する");
 
     /**
      *
      * @param kyokaisogGaitoshaListEntity kyokaisogGaitoshaListEntity
      *
      * @return 境界層管理マスタリスト帳票ソースデータリスト。
+     *
      */
-    //TODO 南京账票没有提供。测试不可。並び順和改頁已提QA
+    //TODO QA#73393 改頁 ,並び順取得。
     public List<KyokaisoKanriMasterListChohyoDataSakuseiEntity> getcreateNenreiToutatsuYoteishaCheckListChohyo(
             KyokaisogGaitoshaListEntity kyokaisogGaitoshaListEntity) {
         KyokaisoKanriMasterListChohyoDataSakuseiEntity chohyoDataEntity = new KyokaisoKanriMasterListChohyoDataSakuseiEntity();
@@ -63,10 +70,10 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
         chohyoDataEntity.set改頁4(null);
         chohyoDataEntity.set改頁5(null);
 
-        if (0 == kyokaisogGaitoshaListEntity.getKyokaisokanrimasterList().size()) {
+        if (kyokaisogGaitoshaListEntity.getKyokaisokanrimasterList() != null && 0 == kyokaisogGaitoshaListEntity.getKyokaisokanrimasterList().size()) {
             境界層管理マスタリスト帳票ソースデータリスト.add(chohyoDataEntity);
-
         } else {
+            get境界層管理マスタリスト分割処理(kyokaisogGaitoshaListEntity);
             chohyoDataEntity = 帳票用データリスト(kyokaisogGaitoshaListEntity);
             境界層管理マスタリスト帳票ソースデータリスト.add(chohyoDataEntity);
         }
@@ -75,7 +82,8 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
 
     /**
      *
-     * get印刷日時取得です。
+     * 印刷日時取得です。
+     *
      */
     private static RString get印刷日時() {
         RStringBuilder systemDateTime = new RStringBuilder();
@@ -115,7 +123,6 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
         chohyoDataEntity.set改頁4(null);
         chohyoDataEntity.set改頁5(null);
         return chohyoDataEntity;
-
     }
 
     /**
@@ -152,10 +159,10 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
             識別コード.add(entity.getShikibetsuCode());
             カナ氏名.add(entity.getKanaShimei());
             氏名.add(entity.getMeisho());
-            if (new RString("1").equals(entity.getSetaiCode().value())) {
-                性別.add(new RString("男"));
-            } else if (new RString("2").equals(entity.getSetaiCode().value())) {
-                性別.add(new RString("女"));
+            if ((男).equals(entity.getSetaiCode().value())) {
+                性別.add((性別_男));
+            } else {
+                性別.add((性別_女));
             }
 
             種別.add(new RString(CodeMaster.getCode(SubGyomuCode.DBA介護資格,
@@ -163,48 +170,44 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
             状態.add(new RString(CodeMaster.getCode(SubGyomuCode.DBA介護資格, CodeShubetsu.EMPTY,
                     new Code(entity.getJuminJotaiCode())).getコード名称().toString()));
             世帯コード.add(entity.getSetaiCode());
-            生年月日.add(new FlexibleDate(entity.getSeinengappiYMD().
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString()));
-            該当申請日.add(new FlexibleDate(entity.getShinseiYMD().
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString()));
-            該当開始日.add(new FlexibleDate(entity.getTekiyoKaishiYMD().
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString()));
-            該当終了日.add(new FlexibleDate(entity.getTekiyoShuryoYMD().
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString()));
-            給付額減額解除.add(entity.getKyuufugakuGengakuKisaiKiajoFlag());
+            生年月日.add(共通ポリシfomart(entity.getSeinengappiYMD()));
+            該当申請日.add(共通ポリシfomart(entity.getShinseiYMD()));
+            該当開始日.add(共通ポリシfomart(entity.getTekiyoKaishiYMD()));
+            該当終了日.add(共通ポリシfomart(entity.getTekiyoShuryoYMD()));
+            if ((解除する).equals(entity.getKyuufugakuGengakuKisaiKiajoFlag())) {
+                給付額減額解除.add((給付額減額記載解除フラグ_解除する));
+            } else {
+                給付額減額解除.add(entity.getKyuufugakuGengakuKisaiKiajoFlag());
+            }
             標準負担減額後負担額.add(entity.getHyojunFutanKeigengoFutangaku());
-            居住費軽減後居室種類.add(new RString(CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu("0243"),
+            居住費軽減後居室種類.add(new RString(CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu(CodeShubetsu_0243),
                     new Code(entity.getKyojuhiKeigengoKyoshitsuShuruiCode())).getコード名称().toString()));
             居住費軽減後負担額.add(entity.getKyojuhiKeigengoHutangaku());
             食費軽減後負担額.add(entity.getShokuhiKeigengoHutangaku());
             高額ｻｰﾋﾞｽ費減額後上限額.add(entity.getKogakuServicehiJogengakuGengakugoJogengaku());
             保険料納付減額後保険料段階.add(entity.getGengakuGoHokenryoDankai());
             if ((nocount + 1) % NOCOUNT_20 == 0) {
-                KyokaisoKanriMasterListChohyoDataSakuseiEntity entity1
+                KyokaisoKanriMasterListChohyoDataSakuseiEntity entityy
                         = new KyokaisoKanriMasterListChohyoDataSakuseiEntity();
-                entity1.set被保険者番号(被保険者番号);
-                entity1.set識別コード(識別コード);
-                entity1.setカナ氏名(カナ氏名);
-                entity1.set氏名(氏名);
-                entity1.set性別(性別);
-                entity1.set種別(種別);
-                entity1.set状態(状態);
-                entity1.set世帯コード(世帯コード);
-                entity1.set生年月日(生年月日);
-                entity1.set該当申請日(該当申請日);
-                entity1.set該当開始日(該当開始日);
-                entity1.set該当終了日(該当終了日);
-                entity1.set給付額減額解除(給付額減額解除);
-                entity1.set標準負担減額後負担額(標準負担減額後負担額);
-                entity1.set居住費軽減後居室種類(居住費軽減後居室種類);
-                entity1.set居住費軽減後負担額(居住費軽減後負担額);
-                entity1.set食費軽減後負担額(食費軽減後負担額);
-                entity1.set高額ｻｰﾋﾞｽ費減額後上限額(高額ｻｰﾋﾞｽ費減額後上限額);
-                entity1.set保険料納付減額後保険料段階(保険料納付減額後保険料段階);
+                entityy.set被保険者番号(被保険者番号);
+                entityy.set識別コード(識別コード);
+                entityy.setカナ氏名(カナ氏名);
+                entityy.set氏名(氏名);
+                entityy.set性別(性別);
+                entityy.set種別(種別);
+                entityy.set状態(状態);
+                entityy.set世帯コード(世帯コード);
+                entityy.set生年月日(生年月日);
+                entityy.set該当申請日(該当申請日);
+                entityy.set該当開始日(該当開始日);
+                entityy.set該当終了日(該当終了日);
+                entityy.set給付額減額解除(給付額減額解除);
+                entityy.set標準負担減額後負担額(標準負担減額後負担額);
+                entityy.set居住費軽減後居室種類(居住費軽減後居室種類);
+                entityy.set居住費軽減後負担額(居住費軽減後負担額);
+                entityy.set食費軽減後負担額(食費軽減後負担額);
+                entityy.set高額ｻｰﾋﾞｽ費減額後上限額(高額ｻｰﾋﾞｽ費減額後上限額);
+                entityy.set保険料納付減額後保険料段階(保険料納付減額後保険料段階);
                 被保険者番号.clear();
                 識別コード.clear();
                 カナ氏名.clear();
@@ -224,35 +227,41 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
                 食費軽減後負担額.clear();
                 高額ｻｰﾋﾞｽ費減額後上限額.clear();
                 保険料納付減額後保険料段階.clear();
-                境界層管理マスタ帳票用データリスト.add(entity1);
+                境界層管理マスタ帳票用データリスト.add(entityy);
 
             } else if (境界層管理マスタリスト.size() - 境界層管理マスタリスト.size() % NOCOUNT_20 < (nocount + 1)) {
-                KyokaisoKanriMasterListChohyoDataSakuseiEntity entity1
+                KyokaisoKanriMasterListChohyoDataSakuseiEntity entityy
                         = new KyokaisoKanriMasterListChohyoDataSakuseiEntity();
-                entity1.set被保険者番号(被保険者番号);
-                entity1.set識別コード(識別コード);
-                entity1.setカナ氏名(カナ氏名);
-                entity1.set氏名(氏名);
-                entity1.set性別(性別);
-                entity1.set種別(種別);
-                entity1.set状態(状態);
-                entity1.set世帯コード(世帯コード);
-                entity1.set生年月日(生年月日);
-                entity1.set該当申請日(該当申請日);
-                entity1.set該当開始日(該当開始日);
-                entity1.set該当終了日(該当終了日);
-                entity1.set給付額減額解除(給付額減額解除);
-                entity1.set標準負担減額後負担額(標準負担減額後負担額);
-                entity1.set居住費軽減後居室種類(居住費軽減後居室種類);
-                entity1.set居住費軽減後負担額(居住費軽減後負担額);
-                entity1.set食費軽減後負担額(食費軽減後負担額);
-                entity1.set高額ｻｰﾋﾞｽ費減額後上限額(高額ｻｰﾋﾞｽ費減額後上限額);
-                entity1.set保険料納付減額後保険料段階(保険料納付減額後保険料段階);
-                境界層管理マスタ帳票用データリスト.add(entity1);
+                entityy.set被保険者番号(被保険者番号);
+                entityy.set識別コード(識別コード);
+                entityy.setカナ氏名(カナ氏名);
+                entityy.set氏名(氏名);
+                entityy.set性別(性別);
+                entityy.set種別(種別);
+                entityy.set状態(状態);
+                entityy.set世帯コード(世帯コード);
+                entityy.set生年月日(生年月日);
+                entityy.set該当申請日(該当申請日);
+                entityy.set該当開始日(該当開始日);
+                entityy.set該当終了日(該当終了日);
+                entityy.set給付額減額解除(給付額減額解除);
+                entityy.set標準負担減額後負担額(標準負担減額後負担額);
+                entityy.set居住費軽減後居室種類(居住費軽減後居室種類);
+                entityy.set居住費軽減後負担額(居住費軽減後負担額);
+                entityy.set食費軽減後負担額(食費軽減後負担額);
+                entityy.set高額ｻｰﾋﾞｽ費減額後上限額(高額ｻｰﾋﾞｽ費減額後上限額);
+                entityy.set保険料納付減額後保険料段階(保険料納付減額後保険料段階);
+                境界層管理マスタ帳票用データリスト.add(entityy);
             }
             nocount++;
         }
         return 境界層管理マスタ帳票用データリスト;
     }
 
+    private FlexibleDate 共通ポリシfomart(FlexibleDate date) {
+
+        return new FlexibleDate(date.
+                wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+    }
 }
