@@ -102,7 +102,7 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
         List<HihokenshaDaichoSakuseiEntity> 被保険者台帳EntityList = HihokenshaDaichoSakuseiManager.
                 createInstance().getHihokenshaDaichoHenshu(被保険者EntityList);
         if (processPrm.getShutsuryokuFlag().equals(発行する)) {
-            HihokenshaDaichoIchiranHyoFinder.createInstance().getChohyoIchiran(被保険者台帳EntityList);
+            HihokenshaDaichoIchiranHyoFinder.createInstance().getChohyoIchiran(processPrm.getShutsuryokujunId(), 被保険者台帳EntityList);
         }
     }
 

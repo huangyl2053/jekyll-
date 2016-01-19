@@ -81,13 +81,14 @@ public class HihokenshaDaichoIchiranHyoFinder {
     }
 
     /**
-     * 介護保険施設情報件数を取得する
+     * 被保険者台帳一覧表帳票用DataEntityを作成します。
      *
      * @param hihokenshaList hihokenshaList
+     * @param shutsuryokujunId shutsuryokujunId
      * @return List<HihokenshaDaichoIchiranHyoRelateEntity>
      */
     @Transaction
-    public List<HihokenshaDaichoIchiranHyoRelateEntity> getChohyoIchiran(List<HihokenshaDaichoSakuseiEntity> hihokenshaList) {
+    public List<HihokenshaDaichoIchiranHyoRelateEntity> getChohyoIchiran(RString shutsuryokujunId, List<HihokenshaDaichoSakuseiEntity> hihokenshaList) {
         int リストNO = 0;
         List<HihokenshaDaichoIchiranHyoRelateEntity> 被保険者台帳一覧表List = new ArrayList<>();
         for (HihokenshaDaichoSakuseiEntity entity : hihokenshaList) {
