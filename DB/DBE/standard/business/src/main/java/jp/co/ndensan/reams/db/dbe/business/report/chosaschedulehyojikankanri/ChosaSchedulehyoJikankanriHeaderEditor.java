@@ -32,6 +32,11 @@ public class ChosaSchedulehyoJikankanriHeaderEditor implements IChosaSchedulehyo
         this.item = item;
     }
 
+    /**
+     *
+     * @param source 認定調査スケジュール表(時間管理)Sourceクラスです
+     * @return ChosaSchedulehyoJikankanriReportSource
+     */
     @Override
     public ChosaSchedulehyoJikankanriReportSource edit(ChosaSchedulehyoJikankanriReportSource source) {
         return editHeader(source);

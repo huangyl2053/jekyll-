@@ -50,6 +50,10 @@ public class ChosaSchedulehyoJikankanriReport extends Report<ChosaSchedulehyoJik
         this.bodyItemList = itemList;
     }
 
+    /**
+     *
+     * @param reportSourceWriter
+     */
     @Override
     public void writeBy(ReportSourceWriter<ChosaSchedulehyoJikankanriReportSource> reportSourceWriter) {
         for (ChosaSchedulehyoJikankanriBodyItem bodyItem : bodyItemList) {

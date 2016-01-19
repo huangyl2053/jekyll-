@@ -31,15 +31,15 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
  *
- * 認定調査依頼一覧表Printerです。
+ * 認定調査依頼一覧表PrinterServiceです。
  */
 public class ChosaIraiIchiranhyoPrintService {
 
     /**
      * 認定調査依頼一覧表を印刷します。
      *
-     * @param headItem 認定調査依頼一覧表表作成_帳票クラスパラメータクラス
-     * @param bodyItems 認定調査依頼一覧表表作成_帳票クラスパラメータクラス
+     * @param headItem 認定調査依頼一覧表ヘッダのITEM
+     * @param bodyItems 認定調査依頼一覧表ボディのITEM
      * @return {@link SourceDataCollection}
      */
     public SourceDataCollection print(ChosaIraiIchiranhyoHeadItem headItem, List<ChosaIraiIchiranhyoBodyItem> bodyItems) {
@@ -59,24 +59,7 @@ public class ChosaIraiIchiranhyoPrintService {
                         ninshoshaSourceBuilder.buildSource().koinShoryaku,
                         headItem.getJigyoshaName(),
                         headItem.getJigyoshaNo(),
-                        headItem.getTsuchibun1(),
-                        headItem.getTsuchibun2(),
-                        headItem.getTsuchibun3(),
-                        headItem.getTsuchibun4(),
-                        headItem.getTsuchibun5(),
-                        headItem.getTsuchibun6(),
-                        headItem.getTsuchibun7(),
-                        headItem.getTsuchibun8(),
-                        headItem.getTsuchibun9(),
-                        headItem.getTsuchibun10(),
-                        headItem.getTsuchibun11(),
-                        headItem.getTsuchibun12(),
-                        headItem.getTsuchibun13(),
-                        headItem.getTsuchibun14(),
-                        headItem.getTsuchibun15(),
-                        headItem.getTsuchibun16(),
-                        headItem.getTsuchibun17(),
-                        headItem.getTsuchibun18());
+                        headItem.getTsuchibun());
                 for (ChosaIraiIchiranhyoReport report : toReports(new ChosaIraiIchiranhyoReportJoho(headItem, bodyItems))) {
                     ReportSourceWriter<ChosaIraiIchiranhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);

@@ -32,6 +32,11 @@ class ChosaSchedulehyoTyousayinHeaderEditor implements IChosaSchedulehyoTyousayi
         this.item = item;
     }
 
+    /**
+     *
+     * @param source 認定調査スケジュール表(調査員)Sourceクラス
+     * @return ChosaSchedulehyoTyousayinReportSource 認定調査スケジュール表(調査員)Sourceクラス
+     */
     @Override
     public ChosaSchedulehyoTyousayinReportSource edit(ChosaSchedulehyoTyousayinReportSource source) {
         return editHeader(source);

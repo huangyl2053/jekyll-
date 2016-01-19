@@ -41,6 +41,10 @@ public class ChosaIraishoReport extends Report<ChosaIraishoReportSource> {
         this.headItem = headItem;
     }
 
+    /**
+     *
+     * @param reportSourceWriter
+     */
     @Override
     public void writeBy(ReportSourceWriter<ChosaIraishoReportSource> reportSourceWriter) {
         IChosaIraishoEditor headerEditor = new ChosaIraishoHeaderEditor(headItem);
