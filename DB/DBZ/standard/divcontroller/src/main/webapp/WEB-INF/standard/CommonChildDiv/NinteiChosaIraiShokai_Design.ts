@@ -1,7 +1,6 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
-// <reference path="./KaigoNinteiShinseishaInfo/KaigoNinteiShinseishaInfo.ts" />
 
 module DBZ {
 
@@ -33,10 +32,6 @@ module DBZ {
             public NinteiChosaIraiShokai(): UZA.Panel {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
-
-            //public ccdKaigoNinteiShinseisha(): DBZ.KaigoNinteiShinseishaInfo.ModeController {
-            //    return new DBZ.KaigoNinteiShinseishaInfo.ModeController(this.convFiledName("ccdKaigoNinteiShinseisha"));
-            //}
 
             public dgNinteiChosaIrai(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgNinteiChosaIrai"));
