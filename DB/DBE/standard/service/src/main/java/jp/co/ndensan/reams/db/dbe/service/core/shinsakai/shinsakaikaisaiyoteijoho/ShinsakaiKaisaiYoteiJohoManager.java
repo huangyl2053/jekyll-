@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaiyoteijoho;
 
-import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho;
@@ -13,11 +12,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaionseijoho.Shi
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoMapperParameter;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5111ShinsakaiOnseiJoho.shinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoDac;
@@ -153,120 +147,5 @@ public class ShinsakaiKaisaiYoteiJohoManager {
         for (ShinsakaiWariateJoho 介護認定審査会割当情報 : 介護認定審査会割当情報List) {
             介護認定審査会割当情報Manager.save介護認定審査会割当情報(介護認定審査会割当情報);
         }
-    }
-
-    /**
-     *
-     * ヘッドエリア内容を取得する
-     *
-     * @param 介護認定審査会開催予定情報検索条件
-     * @return relateEntity
-     */
-    @Transaction
-    public ShinsakaiKaisaiYoteiJoho getヘッドエリア内容検索(ShinsakaiKaisaiYoteiJohoMapperParameter 介護認定審査会開催予定情報検索条件) {
-        requireNonNull(介護認定審査会開催予定情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催予定情報検索条件"));
-        IShinsakaiKaisaiYoteiJohoMapper mapper = mapperProvider.create(IShinsakaiKaisaiYoteiJohoMapper.class);
-
-        ShinsakaiKaisaiYoteiJohoRelateEntity relateEntity = mapper.getShinsakaiKaisaiYoteiJohoEntity(介護認定審査会開催予定情報検索条件);
-        if (relateEntity == null) {
-            return null;
-        }
-        relateEntity.initializeMd5ToEntities();
-        return new ShinsakaiKaisaiYoteiJoho(relateEntity);
-    }
-
-    /**
-     * 審査会委員一覧検索を取得する
-     *
-     * @param 介護認定審査会開催予定情報検索条件
-     * @return businessList
-     */
-    @Transaction
-    public List<ShinsakaiKaisaiYoteiJoho> get審査会委員一覧検索(ShinsakaiKaisaiYoteiJohoMapperParameter 介護認定審査会開催予定情報検索条件) {
-        requireNonNull(介護認定審査会開催予定情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催予定情報検索条件"));
-        IShinsakaiKaisaiYoteiJohoMapper mapper = mapperProvider.create(IShinsakaiKaisaiYoteiJohoMapper.class);
-        List<ShinsakaiKaisaiYoteiJoho> businessList = new ArrayList<>();
-        ShinsakaiKaisaiYoteiJohoRelateEntity relateEntity = mapper.getShinsakaiKaisaiYoteiJohoEntity(介護認定審査会開催予定情報検索条件);
-        if (relateEntity == null) {
-            return null;
-        }
-        relateEntity.initializeMd5ToEntities();
-        return businessList;
-    }
-
-    /**
-     * 護認定審査会音声情報更新処理
-     *
-     * @param 開催番号
-     * @return
-     */
-    @Transaction
-    public boolean insert介護認定審査会音声情報(ShinsakaiOnseiJoho 開催番号) {
-        requireNonNull(開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("開催番号"));
-        if (!開催番号.hasChanged()) {
-            return false;
-        }
-        //int i = dac.save(調査員);DbT5512ShinsakaiOnseiJohoDac
-        return false;
-    }
-
-    /**
-     * 介護認定審査会開催予定情報更新
-     *
-     * @param shinsakaiKaisaiNo 開催番号
-     * @return entity
-     */
-    @Transaction
-    public int update介護認定審査会開催予定情報更新(ShinsakaiKaisaiYoteiJohoMapperParameter shinsakaiKaisaiNo) {
-        requireNonNull(shinsakaiKaisaiNo, UrSystemErrorMessages.値がnull.getReplacedMessage("shinsakaiKaisaiNo"));
-        DbT5501ShinsakaiKaisaiYoteiJohoEntity ShinsakaiKaisaiYoteiJohoEntity = new DbT5501ShinsakaiKaisaiYoteiJohoEntity();
-        int entity = 介護認定審査会開催予定情報Dac.save(ShinsakaiKaisaiYoteiJohoEntity);
-        return entity;
-    }
-
-    /**
-     * 介護認定審査会開催結果情報更新
-     *
-     * @param 開催番号
-     * @return
-     */
-    @Transaction
-    public boolean update介護認定審査会開催結果情報更新(ShinsakaiKaisaiKekkaJoho 開催番号) {
-        requireNonNull(shinsakaiKaisaiNo, UrSystemErrorMessages.値がnull.getReplacedMessage("shinsakaiKaisaiNo"));
-        DbT5511ShinsakaiKaisaiKekkaJohoEntity shinsakaiKaisaiKekkaJohoEntity = new DbT5511ShinsakaiKaisaiKekkaJohoEntity();
-        // int entity = 介護認定審査会開催結果情報Dac.save(shinsakaiKaisaiKekkaJohoEntity);
-        // int i = dac.save(調査員);DbT5511ShinsakaiKaisaiKekkaJohoDac
-        return false;//entity;//1 == dac.save(entity.toEntity());
-    }
-
-    /**
-     * 介護認定審査会割当委員情報更新
-     *
-     * @param 開催番号
-     * @return
-     */
-    @Transaction
-    public DbT5503ShinsakaiWariateIinJohoEntity update介護認定審査会割当委員情報更新(ShinsakaiWariateIinJohoMapperParameter 開催番号) {
-        requireNonNull(開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("開催番号"));
-        DbT5503ShinsakaiWariateIinJohoEntity ShinsakaiKaisaiYoteiJohoEntity = new DbT5503ShinsakaiWariateIinJohoEntity();
-//        if (ShinsakaiKaisaiYoteiJohoEntity == 0) {
-//        }
-        return ShinsakaiKaisaiYoteiJohoEntity;
-    }
-
-    /**
-     * 介護認定審査会割当委員情報を物理削除する
-     *
-     * @param 開催番号
-     * @return
-     */
-    @Transaction
-    public boolean delete介護認定審査会割当委員情報(ShinsakaiWariateIinJohoMapperParameter 開催番号) {
-        requireNonNull(開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("開催番号"));
-        // DbT5503ShinsakaiWariateIinJohoEntity ShinsakaiKaisaiYoteiJohoEntity = new DbT5503ShinsakaiWariateIinJohoEntity();
-//        if (!開催番号.hasChanged()) {
-//            return false;
-//        }
-        return false;//1 == 介護認定審査会割当委員情報Dac.save(開催番号.toEntity());
     }
 }

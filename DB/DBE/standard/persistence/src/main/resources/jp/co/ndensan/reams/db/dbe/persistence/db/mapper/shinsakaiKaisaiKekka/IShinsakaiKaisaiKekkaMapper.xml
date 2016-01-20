@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.shinsakaiKaisaiKekka.IShinsakaiKaisaiKekkaMapper">
+    <select id="getヘッドエリア内容検索" resultMap="resultMap_ShinsakaiKaisaiYoteiJohoEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"  fetchSize="500">
+        SELECT
+        '第' || DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" || '回審査会' AS "shinsakaiKaisaiMei"
+        ,DbT5591GogitaiJoho."gogitaiNo" AS "gogitaiNo"
+        ,DbT5591GogitaiJoho."gogitaiMei" AS "gogitaiMei"
+        ,DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiWariateZumiNinzu"AS "shinsakaiWariateZumiNinzu"
+        ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiJisshiNinzu" AS "shinsakaiJisshiNinzu"
+        ,DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoName" AS "shinsakaiKaisaiBashoName"
+        ,DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"  AS "shinsakaiKaisaiYoteiYMD"
+        ,DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaishiYoteiTime" AS "shinsakaiKaishiYoteiTime"
+        ,DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiShuryoYoteiTime"  AS "shinsakaiShuryoYoteiTime"
+        ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiYMD" AS "shinsakaiKaisaiYMD"
+        ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaishiTime" AS "shinsakaiKaishiTime"
+        ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiShuryoTime" AS "shinsakaiShuryoTime"
+        ,DbT5511ShinsakaiKaisaiKekkaJoho."shoyoJikanGokei" AS "shoyoJikanGokei"
+        ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiBashoCode" AS "shinsakaiKaisaiBasho"
+        FROM
+        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  DbT5501ShinsakaiKaisaiYoteiJoho
+        LEFT JOIN  rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511ShinsakaiKaisaiKekkaJoho
+        ON DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
+        LEFT JOIN rgdb."DbT5591GogitaiJoho" DbT5591GogitaiJoho
+        ON DbT5591GogitaiJoho."gogitaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."gogitaiNo"
+        LEFT JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" DbT5592ShinsakaiKaisaiBashoJoho
+        ON DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoCode" = DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiBashoCode"
+        WHERE
+        DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" =#{開催番号}
+    </select>
+    <resultMap id="resultMap_ShinsakaiKaisaiYoteiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.shinsakaiKaisaiKekka.ShinsakaiKaisaiYoteiJohoEntity" autoMapping="true">
+        <result property="審査会名称" column="shinsakaiKaisaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="合議体番号" column="gogitaiNo" />
+        <result property="合議体名称" column="gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="予定人数" column="shinsakaiWariateZumiNinzu"/>
+        <result property="実施人数" column="shinsakaiJisshiNinzu"/>
+        <result property="介護認定審査会開催場所名称" column="shinsakaiKaisaiBashoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="開催予定日" column="shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="予定開始時間" column="shinsakaiKaishiYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="予定終了時間" column="shinsakaiShuryoYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="開催日" column="shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="開催開始時間" column="shinsakaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="開催終了時間" column="shinsakaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="所要時間" column="shoyoJikanGokei"/>
+        <result property="開催会場" column="tenshutsuKakuteiIdoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <select id="get審査会委員一覧検索" resultMap="resultMap_ShinsakaiWariateIinJohoEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"   fetchSize="500">
+        SELECT
+        DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode" AS "shinsakaiIinCode"
+        ,DbT5594ShinsakaiIinJoho."shinsakaiIinShimei" AS "shinsakaiIinShimei"
+        ,DbT5594ShinsakaiIinJoho."seibetsu" AS "seibetsu"
+        ,DbT5594ShinsakaiIinJoho."shinsakaiIinShikakuCode" AS "shinsakaiIinShikakuCode"
+        ,DbT5593GogitaiWariateIinJoho."gogitaichoKubunCode" AS "gogitaichoKubunCode"
+        ,DbT5503ShinsakaiWariateIinJoho."kaigoninteiShinsakaiGichoKubunCode"  AS "kaigoninteiShinsakaiGichoKubunCode"
+        ,DbT5503ShinsakaiWariateIinJoho."shussekiFlag" AS "shussekiFlag"
+        ,DbT5503ShinsakaiWariateIinJoho."existChikokuFlag" AS "existChikokuFlag"
+        ,DbT5503ShinsakaiWariateIinJoho."shussekiTime" AS "shussekiTime"
+        ,DbT5503ShinsakaiWariateIinJoho."existSotaiFlag"  AS "existSotaiFlag"
+        ,DbT5503ShinsakaiWariateIinJoho."taisekiTime" AS "taisekiTime"
+        FROM
+        rgdb."DbT5503ShinsakaiWariateIinJoho"  DbT5503ShinsakaiWariateIinJoho
+        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501ShinsakaiKaisaiYoteiJoho
+        ON DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" = DbT5503ShinsakaiWariateIinJoho."shinsakaiKaisaiNo"
+        INNER JOIN rgdb."DbT5594ShinsakaiIinJoho"  DbT5594ShinsakaiIinJoho
+        ON DbT5594ShinsakaiIinJoho."shinsakaiIinCode" = DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode"
+        INNER JOIN rgdb."DbT5593GogitaiWariateIinJoho" DbT5593GogitaiWariateIinJoho
+        ON DbT5593GogitaiWariateIinJoho."shinsakaiIinCode" = DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode"
+        AND DbT5593GogitaiWariateIinJoho."gogitaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."gogitaiNo"
+        WHERE
+        DbT5503ShinsakaiWariateIinJoho."shinsakaiKaisaiNo" =#{開催番号}
+        ORDER BY DbT5593GogitaiWariateIinJoho."gogitaichoKubunCode" desc , DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode" asc
+    </select>
+    <resultMap id="resultMap_ShinsakaiWariateIinJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.shinsakaiKaisaiKekka.ShinsakaiWariateIinJohoEntity" autoMapping="true">
+        <result property="介護認定審査会委員コード" column="shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="介護認定審査会委員氏名" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="性別" column="seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="介護認定審査員資格コード" column="shinsakaiIinShikakuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="合議体長区分コード" column="gogitaichoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="介護認定審査会議長区分コード" column="kaigoninteiShinsakaiGichoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="委員出席" column="shussekiFlag"/>
+        <result property="委員遅刻有無" column="existChikokuFlag"/>
+        <result property="委員出席時間" column="shussekiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="委員早退有無" column="existSotaiFlag"/>
+        <result property="委員退席時間" column="taisekiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <select id="get開催予定情報更新"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            resultMap="resultMap_YoteiJohoEntity" fetchSize="500">
+        SELECT
+        DbT5501ShinsakaiKaisaiYoteiJoho.*
+        ,DbT5503ShinsakaiWariateIinJoho.*
+        ,DbT5511ShinsakaiKaisaiKekkaJoho.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.noDeleted_DbT5501ShinsakaiKaisaiYoteiJoho" />) AS DbT5501ShinsakaiKaisaiYoteiJoho
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5503ShinsakaiWariateIinJohoMapper.noDeleted_DbT5503ShinsakaiWariateIinJoho" />) AS DbT5503ShinsakaiWariateIinJoho
+        ON DbT5503ShinsakaiWariateIinJoho."dbT5503ShinsakaiWariateIinJoho_shinsakaiKaisaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo"
+        INNER JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5511ShinsakaiKaisaiKekkaJohoMapper.noDeleted_DbT5511ShinsakaiKaisaiKekkaJoho" />) AS DbT5511ShinsakaiKaisaiKekkaJoho
+        ON DbT5511ShinsakaiKaisaiKekkaJoho."dbT5511ShinsakaiKaisaiKekkaJoho_shinsakaiKaisaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo"
+        <where>
+            DbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo" = #{開催番号}
+        </where>
+    </select>
+    <resultMap id="resultMap_YoteiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoRelateEntity" autoMapping="true">
+        <id  column="dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo"/>
+        <association property="介護認定審査会開催予定情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.ResultMap_DbT5501ShinsakaiKaisaiYoteiJohoEntity"/>
+        <collection property="介護認定審査会開催結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5511ShinsakaiKaisaiKekkaJohoMapper.ResultMap_DbT5511ShinsakaiKaisaiKekkaJohoEntity" />
+        <collection property="介護認定審査会割当委員情報RelateEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiwariateiinjoho.IShinsakaiWariateIinJohoMapper.resultMap_ShinsakaiWariateIinJohoEntity"/>
+    </resultMap>
+
+</mapper>
