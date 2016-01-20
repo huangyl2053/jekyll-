@@ -8,15 +8,21 @@ package jp.co.ndensan.reams.db.dbe.service.core.basic.ninnteichousairai;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinnteiChousairaiBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinteichosaIraiJohoRelateBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.ShichosonMeishoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.WaritsukeBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.NinnteiChousairaiEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.NinteichosaIraiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.WaritsukeEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.ininnteichousairai.INinnteiChousairaiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -157,6 +163,33 @@ public class NinnteiChousairaiFinder {
             未割付再依頼一覧.add(new WaritsukeBusiness(entity));
         }
         return SearchResult.of(未割付再依頼一覧, 0, false);
+    }
+
+    /**
+     * 割付済み一覧を取得する。
+     *
+     * @param parametere 要介護認定結果情報パラメータ
+     * @return SearchResult<NinteichosaIraiJohoRelateBusiness> 割付済み一覧
+     */
+    @Transaction
+    public SearchResult<NinteichosaIraiJohoRelateBusiness> getNinteichosaIraiJohoList(NinnteiChousairaiParameter parametere) {
+        INinnteiChousairaiMapper mapper = mapperProvider.create(INinnteiChousairaiMapper.class);
+        NinteichosaIraiJohoRelateEntity entity = mapper.getNinteichosaIraiJohoList(parametere);
+        if (entity == null) {
+            return SearchResult.of(Collections.<NinteichosaIraiJohoRelateBusiness>emptyList(), 0, false);
+        }
+        List<NinteichosaIraiJohoRelateBusiness> 割付済み一覧 = new ArrayList<>();
+        List<NinteiKanryoJoho> ninteiKanryoJohoList = new ArrayList<>();
+        for (DbT5105NinteiKanryoJohoEntity ninteiKanryoJohoEntity : entity.getNinteiKanryoJohoEntity()) {
+            ninteiKanryoJohoList.add(new NinteiKanryoJoho(ninteiKanryoJohoEntity));
+        }
+
+        List<NinteichosaIraiJoho> ninteichosaIraiJohoList = new ArrayList<>();
+        for (DbT5201NinteichosaIraiJohoEntity ninteichosaIraiJohoEntity : entity.getNinteichosaIraiJohoEntity()) {
+            ninteichosaIraiJohoList.add(new NinteichosaIraiJoho(ninteichosaIraiJohoEntity));
+        }
+        割付済み一覧.add(new NinteichosaIraiJohoRelateBusiness(ninteichosaIraiJohoList, ninteiKanryoJohoList));
+        return SearchResult.of(割付済み一覧, 0, false);
     }
 
     /**

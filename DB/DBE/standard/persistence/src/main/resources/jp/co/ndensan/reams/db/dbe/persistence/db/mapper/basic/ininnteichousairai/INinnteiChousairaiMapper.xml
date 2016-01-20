@@ -367,6 +367,199 @@
                 dbT5201."iraishoShutsuryokuYMD"
     </select>
     
+     <resultMap id="getNinteichosaIraiJohoList_resultMap" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.NinteichosaIraiJohoRelateEntity">
+            <collection property="ninteiKanryoJohoEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.ResultMap_DbT5105NinteiKanryoJohoEntity"/>
+            <collection property="ninteichosaIraiJohoEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity"/>
+     </resultMap>
+    
+    <select id="getNinteichosaIraiJohoList" resultMap="getNinteichosaIraiJohoList_resultMap" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
+            SELECT
+                DbT5105NinteiKanryoJoho.*,
+                NinteichosaIraiJoho.*
+              FROM
+                (
+                    SELECT
+                         dbT5101."koroshoIfShikibetsuCode"         AS "koroshoIfShikibetsuCode"
+                        ,dbT5101."hihokenshaNo"                    AS "hihokenshaNo"
+                        ,dbT5101."hihokenshaName"                  AS "hihokenshaName"
+                        ,dbT5101."seibetsu"                        AS "seibetsu"
+                        ,dbT5101."ninteiShinseiYMD"                AS "ninteiShinseiYMD"
+                        ,dbT5101."ninteiShinseiShinseijiKubunCode" AS "ninteiShinseiKubunCode"
+                        ,dbT5101."chikuCode"                       AS "chikuCode"
+                        ,dbT5101."chosaKubun"                      AS "chosaKubun"
+                        ,dbT5101."jusho"                           AS "jusho"
+                        ,dbT5101."hihokenshaKana"                  AS "hihokenshaKana"
+                        ,dbT5101."seinengappiYMD"                  AS "seinengappiYMD"
+                        ,dbT5101."yubinNo"                         AS "yubinNo"
+                        ,dbT5101."telNo"                           AS "telNo"
+                        ,dbT5101."homonChosasakiYubinNo"           AS "homonChosasakiYubinNo"
+                        ,dbT5101."homonChosasakiJusho"             AS "homonChosasakiJusho"
+                        ,dbT5101."homonChosasakiName"              AS "homonChosasakiName"
+                        ,dbT5101."homonChosasakiTelNo"             AS "homonChosasakiTelNo"
+                        ,dbT5101."ninteiShinseiYMD"                AS "ninteiShinseiYMDKoShin"
+                        ,dbT5101."zenkaiNinteiYMD"                 AS "zenkaiNinteiYMD"
+                        ,dbT5101."zenYokaigoKubunCode"             AS "zenYokaigoKubunCode"
+                        ,dbT5101."age"                             AS "age"
+                        ,dbT5201."ninteichosaIraiYMD"              AS "ninteichosaIraiYMD"
+                        ,dbT5201."ninteichosaKigenYMD"             AS "ninteichosaKigenYMD"
+                        ,dbT5201."iraishoShutsuryokuYMD"           AS "iraishoShutsuryokuYMD"
+                        ,dbT5201."chosahyoTouShutsuryokuYMD"       AS "chosahyoTouShutsuryokuYMD"
+                        ,dbT5910."waritsukeTeiin"                  AS "waritsukeTeiin"
+                        ,dbT5911."iryoKikanMeisho"                 AS "iryoKikanMeisho"
+                        ,dbT5912."shujiiName"                      AS "shujiiName"
+                        ,dbT5913."chosaKanoNinzuPerMonth"          AS "chosaKanoNinzuPerMonth"
+                        ,dbT5910Zenkai."jigyoshaMeisho"            AS "Temp_jigyoshaMeisho"
+                        ,dbT5911Zenkai."iryoKikanMeisho"           AS "Temp_iryoKikanMeisho"
+                        ,dbT5912Zenkai."shujiiName"                AS "Temp_shujiiName"
+                        ,dbT5913Zenkai."chosainShimei"             AS "Temp_chosainShimei"
+                        ,dbT5101."shinseishoKanriNo"               AS "shinseishoKanriNo"
+                      FROM
+                        rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
+                        INNER JOIN
+                        (
+                            SELECT  
+                                dbT5201Nintei."shinseishoKanriNo" AS "shinseishoKanriNo"
+                            FROM
+                                rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201Nintei
+                                INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS dbT5105
+                                    ON
+                                    dbT5201Nintei."shinseishoKanriNo" = dbT5105."shinseishoKanriNo"
+                                    AND dbT5105."ninteiShinseiJohoTorokuKanryoYMD"<![CDATA[<>]]> ''
+                                    AND dbT5105."ninteiShinsakaiWariateKanryoYMD" = ''
+                                    AND dbT5105."ninteiShinsakaiKanryoYMD" = ''
+                                    AND dbT5105."centerSoshinYMD" = ''
+                                INNER JOIN
+                                (
+                                    SELECT
+                                        MAX(dbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo") AS "ninteichosaIraiRirekiNo",
+                                        dbT5201NinteichosaIraiJoho."shinseishoKanriNo" AS "shinseishoKanriNo"
+                                    FROM
+                                        rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201NinteichosaIraiJoho
+                                    GROUP BY dbT5201NinteichosaIraiJoho."shinseishoKanriNo"
+                                )AS shinseishosaidairirekishoNo
+                                    ON dbT5201Nintei."shinseishoKanriNo" = shinseishosaidairirekishoNo."shinseishoKanriNo"
+                            WHERE
+                                dbT5201Nintei."ninteichosaIraiRirekiNo" = shinseishosaidairirekishoNo."ninteichosaIraiRirekiNo"
+                                AND dbT5201Nintei."logicalDeletedFlag" = FALSE
+                        ) AS dbT5201Waritukezumi
+                            ON
+                                dbT5101."shinseishoKanriNo" = dbT5201Waritukezumi."shinseishoKanriNo"
+                        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
+                            ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
+                        LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbT5913
+                            ON dbT5913."shichosonCode" = dbT7051."shichosonCode"
+                        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910
+                            ON dbT5910."shichosonCode" = dbT7051."shichosonCode"
+                        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911
+                            ON
+                                dbT5911."shichosonCode" IN ( 
+                          SELECT
+                            dbT7051."shichosonCode" AS shichosonCode
+                          FROM
+                            rgdb."DbT7051KoseiShichosonMaster" AS dbT7051 
+                          WHERE
+                            dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+                        )
+                                AND dbT5911."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+                                AND dbT5911."jokyoFlag" = TRUE
+                        LEFT JOIN rgdb."DbT5912ShujiiJoho" AS dbT5912
+                            ON
+                                dbT5912."shichosonCode" IN ( 
+                          SELECT
+                            dbT7051."shichosonCode" AS shichosonCode
+                          FROM
+                            rgdb."DbT7051KoseiShichosonMaster" AS dbT7051 
+                          WHERE
+                            dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+                        )
+                                AND dbT5912."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+                                AND dbT5912."shujiiCode" = dbT5101."shujiiCode"
+                                AND dbT5912."jokyoFlag" = TRUE
+                        LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS dbT5121
+                            ON dbT5121."shinseishoKanriNo" = dbT5201Waritukezumi."shinseishoKanriNo"
+                        LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" AS dbT5101Zenkai
+                            ON dbT5101Zenkai."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo"
+                        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051Zenkai
+                            ON dbT7051Zenkai."shoKisaiHokenshaNo" = dbT5101Zenkai."shoKisaiHokenshaNo"
+                        LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbT5913Zenkai
+                            ON
+                                dbT5913Zenkai."shichosonCode" = dbT7051Zenkai."shichosonCode"
+                                AND dbT5913Zenkai."ninteichosaItakusakiCode" = dbT5101Zenkai."ninteiChosaItakusakiCode"
+                                AND dbT5913Zenkai."ninteiChosainNo" = dbT5101Zenkai."ninteiChosainCode"
+                                AND dbT5913Zenkai."jokyoFlag" = TRUE
+                        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910Zenkai
+                            ON
+                                dbT5910Zenkai."shichosonCode" = dbT7051Zenkai."shichosonCode"
+                                AND dbT5910Zenkai."ninteichosaItakusakiCode" = dbT5101Zenkai."ninteiChosaItakusakiCode"
+                                AND dbT5910Zenkai."jokyoFlag" = TRUE
+                        LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201
+                            ON dbT5201."shinseishoKanriNo" = dbT5201Waritukezumi."shinseishoKanriNo"
+                        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911Zenkai
+                            ON
+                                dbT5911Zenkai."shichosonCode" IN ( 
+                          SELECT
+                            dbT7051."shichosonCode" AS shichosonCode
+                          FROM
+                            rgdb."DbT7051KoseiShichosonMaster" AS dbT7051 
+                          WHERE
+                            dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+                        )
+                                AND dbT5911Zenkai."shujiiIryokikanCode" = dbT5101Zenkai."shujiiIryokikanCode"
+                                AND dbT5911Zenkai."jokyoFlag" = TRUE
+                        LEFT JOIN rgdb."DbT5912ShujiiJoho" AS dbT5912Zenkai
+                            ON
+                                dbT5912Zenkai."shichosonCode" IN ( 
+                          SELECT
+                            dbT7051."shichosonCode" AS shichosonCode
+                          FROM
+                            rgdb."DbT7051KoseiShichosonMaster" AS dbT7051 
+                          WHERE
+                            dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+                        )
+                                AND dbT5912Zenkai."shujiiIryokikanCode" = dbT5101Zenkai."shujiiIryokikanCode"
+                                AND dbT5912Zenkai."shujiiCode" = dbT5101Zenkai."shujiiCode"
+                                AND dbT5912Zenkai."jokyoFlag" = TRUE
+                        WHERE
+                                dbT5101."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+                                AND dbT5101."shoriJotaiKubun" IN ('0','3')
+                                AND dbT5101."logicalDeletedFlag" = FALSE
+                                AND dbT5101."ninteiChosaItakusakiCode" = #{ninteichosaItakusakiCode}
+                                <if test="uses調査員コード">
+                                    AND dbT5101."ninteiChosainCode" = #{ninteiChosainCode}
+                                </if>
+                                <if test="uses支所コード">
+                                    AND dbT5101."shishoCode" = #{shishoCode}
+                                </if>
+                        ORDER BY dbT5101."ninteiChosaItakusakiCode",
+                        dbT5101."ninteiChosainCode",
+                        dbT5201."iraishoShutsuryokuYMD"
+        
+                ) waritsuke 
+                INNER JOIN
+                      (
+                         SELECT
+                            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.allColumns_DbT5201NinteichosaIraiJoho" />
+                            FROM
+                            rgdb."DbT5201NinteichosaIraiJoho"
+                            INNER JOIN 
+                                    (
+                                     SELECT
+                                         MAX(dbT5201."ninteichosaIraiRirekiNo") AS "ninteichosaIraiRirekiNo",
+                                         dbT5201."shinseishoKanriNo" AS "shinseishoKanriNo"
+                                     FROM
+                                         rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201
+                                     GROUP BY dbT5201."shinseishoKanriNo") AS shinseishosaidairirekishoNo
+                               ON "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = shinseishosaidairirekishoNo."shinseishoKanriNo"
+                            WHERE
+                                 "DbT5201NinteichosaIraiJoho"."isDeleted" = FALSE
+                       ) AS NinteichosaIraiJoho
+                ON NinteichosaIraiJoho."dbT5201NinteichosaIraiJoho_shinseishoKanriNo" = waritsuke."shinseishoKanriNo"
+              INNER JOIN 
+                   (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.noDeleted_DbT5105NinteiKanryoJoho" />) AS DbT5105NinteiKanryoJoho
+                ON DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_shinseishoKanriNo" = waritsuke."shinseishoKanriNo"   
+    </select>
+    
     <resultMap id="result_ShiteWaritsukeEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.WaritsukeEntity">
         <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
