@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.mapper.taShichosonJushochiTokureiShisetsuHenkoTsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper">
+        <select id="getTaShichosonJushochiTokureiShisetsuHenkoTsuchisho" 
+                resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity" 
+                parameterType="jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoShijiDataEntity" fetchSize="500">
+            SELECT 
+                   C."jigyoshaMeisho" AS "事業者名称",
+                   C."telNo" AS "電話番号",
+                   C."faxNo" AS "FAX番号",
+                   C."yubinNo" AS "郵便番号",
+                   C."jigyoshaJusho" AS "事業者住所"
+            FROM 
+                 rgdb."DbT1003TashichosonJushochiTokurei" A,
+                 rgdb."DbT1004ShisetsuNyutaisho" B,
+                 rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" C
+            WHERE
+                 A."shikibetsuCode" =#{shikibetsuCode}
+            AND  A."idoYMD" =#{idoYMD}
+            AND  A."edaNo" =#{edaNo}
+            AND  A."logicalDeletedFlag" <![CDATA[<>]]> true
+            AND  A."shikibetsuCode" = B."shikibetsuCode"
+            AND  B."nyushoYMD" <![CDATA[<=]]> #{nyushoYMD}
+            AND  C."jigyoshaShubetsu" = B."nyushoShisetsuShurui"
+            AND  C."jigyoshaNo" = B."nyushoShisetsuCode"
+            AND  C."yukoKaishiYMD" <![CDATA[<=]]> B."taishoYMD" AND B."taishoYMD" <![CDATA[<=]]> C."yukoShuryoYMD"
+            ORDER BY B."nyushoYMD" LIMIT 2
+        </select>
+        <select id="setTatokuKanrenChohyoRenrakuhyo" 
+                resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity" 
+                parameterType="jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoShijiDataEntity" fetchSize="500">
+             SELECT 
+                   B."nyushoYMD" AS "入所年月日",
+                   C."jigyoshaMeisho" AS "事業者名称",
+                   C."telNo" AS "電話番号",
+                   C."faxNo" AS "FAX番号",
+                   C."yubinNo" AS "郵便番号",
+                   C."jigyoshaJusho" AS "事業者住所"
+            FROM 
+                 rgdb."DbT1003TashichosonJushochiTokurei" A,
+                 rgdb."DbT1004ShisetsuNyutaisho" B,
+                 rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" C
+            WHERE
+                 A."shikibetsuCode" =#{shikibetsuCode}
+            AND  A."idoYMD" =#{idoYMD}
+            AND  A."edaNo" =#{edaNo}
+            AND  A."logicalDeletedFlag" <![CDATA[<>]]> true
+            AND  A."shikibetsuCode" = B."shikibetsuCode"
+            AND  NOT(
+                 (A."tekiyoYMD" <![CDATA[>]]> B."nyushoYMD" AND A."tekiyoYMD" <![CDATA[>=]]> B."taishoYMD")
+                 AND
+                 (A."kaijoYMD" <![CDATA[<=]]> B."nyushoYMD" AND A."kaijoYMD" <![CDATA[<]]> B."taishoYMD")
+            )
+            AND  C."jigyoshaShubetsu" = B."nyushoShisetsuShurui"
+            AND  C."jigyoshaNo" = B."nyushoShisetsuCode"
+            AND  C."yukoKaishiYMD" <![CDATA[<=]]> B."taishoYMD"  AND B."taishoYMD" <![CDATA[<=]]> C."yukoShuryoYMD"
+        </select>
+        <select id="selectTaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatis" 
+                resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.TaShichosonJushochiTokureiShisetsuHenkoTsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatisParameter">
+        SELECT 
+            A."kanaMeisho"AS "カナ名称",
+            A."meisho" AS "名称",
+            A."seinengappiYMD" AS "生年月日",
+            A."seibetsuCode" AS "性別コード"
+        FROM   
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />  AS A       
+    </select>
+    <select id="selectTatokuKanrenChohyoRenrakuhyoMybatis" 
+                resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.TaShichosonJushochiTokureiShisetsuHenkoTsuchisho.TatokuKanrenChohyoRenrakuhyoMybatisParameter">
+        SELECT 
+            A."kanaMeisho" AS "カナ名称",
+            A."meisho" AS "名称",
+            A."seinengappiYMD" AS "生年月日",
+            A."seibetsuCode" AS "性別コード",
+            A."tennyumaeYubinNo" AS "転入前郵便番号",
+            A."tennyumaeJusho" AS "転入前住所",
+            A."orokuIdoYMD" AS "登録異動年月日"
+        FROM   
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />  AS A       
+    </select>
+</mapper>
+    
