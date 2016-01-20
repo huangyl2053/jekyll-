@@ -20,6 +20,7 @@ public class JohoTeikyoShiryoItem {
     private final RString hokenshaName1;
     private final RString hokenshaName2;
     private final RString tsuchibun1;
+    private final RString title;
     private final RString hihokenshaName;
     private final RString jusho;
     private final RDate infoNijiDate;
@@ -43,6 +44,7 @@ public class JohoTeikyoShiryoItem {
      * @param hakkoYMD 発行日
      * @param hokenshaName1 保険者名称１
      * @param hokenshaName2 保険者名称２
+     * @param title 帳票名
      * @param tsuchibun1 通知文１
      * @param hihokenshaName 氏名
      * @param jusho 住所
@@ -61,7 +63,7 @@ public class JohoTeikyoShiryoItem {
      * @param tsuchibun9 通知文９
      * @param tsuchibun10 通知文１０
      */
-    public JohoTeikyoShiryoItem(RDate hakkoYMD, RString hokenshaName1, RString hokenshaName2,
+    public JohoTeikyoShiryoItem(RDate hakkoYMD, RString hokenshaName1, RString hokenshaName2,RString title, 
             RString tsuchibun1, RString hihokenshaName, RString jusho, RDate infoNijiDate,
             RString ninteiKekka, RDate yokaigoNiteiKaishoYMD, RDate yokaigoNinteiShuryoYMD,
             RString shinsakaiIken, RString tsuchibun2, RString tsuchibun3, RString tsuchibun4,
@@ -70,6 +72,7 @@ public class JohoTeikyoShiryoItem {
         this.hakkoYMD = hakkoYMD;
         this.hokenshaName1 = hokenshaName1;
         this.hokenshaName2 = hokenshaName2;
+        this.title = title;
         this.tsuchibun1 = tsuchibun1;
         this.hihokenshaName = hihokenshaName;
         this.jusho = jusho;

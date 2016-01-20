@@ -6,13 +6,10 @@
 package jp.co.ndensan.reams.db.dbe.business.report.johoteikyoshiryo;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.johoteikyoshiryo.JohoTeikyoShiryoReportSource;
-import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 要介護認定結果情報提供票（主治医）のEditorです。
@@ -44,7 +41,7 @@ public class JohoTeikyoShiryoEditor implements IJohoTeikyoShiryoEditor {
                 .fillType(FillType.BLANK).toDateString();
         source.hokenshaName1 = item.getHokenshaName1();
         source.hokenshaName2 = item.getHokenshaName2();
-        source.title = BusinessConfig.get(ConfigNameDBE.要支援認定結果, SubGyomuCode.DBE認定支援);
+        source.title = item.getTitle();
         source.tsuchibun1 = item.getTsuchibun1();
         source.hihokenshaName = item.getHihokenshaName();
         source.Jusho = item.getJusho();
