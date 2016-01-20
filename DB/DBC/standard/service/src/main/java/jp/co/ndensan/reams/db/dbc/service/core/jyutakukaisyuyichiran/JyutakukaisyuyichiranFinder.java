@@ -69,8 +69,6 @@ public class JyutakukaisyuyichiranFinder {
         for (DbT3049ShokanJutakuKaishuEntity entity : entityList) {
             住宅改修一覧.add(new ShokanJutakuKaishuBusiness(entity));
         }
-
         return SearchResult.of(住宅改修一覧, 0, false);
-
     }
 }

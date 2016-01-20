@@ -130,6 +130,5 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
                                 eq(yoshikiNo, 様式番号))).
                 order(by(DbT3049ShokanJutakuKaishu.seiriNo, Order.ASC)).
                 toList(DbT3049ShokanJutakuKaishuEntity.class);
-
     }
 }

@@ -42,12 +42,6 @@ public class JyutakugaisyunaiyoList {
      * @return JyutakugaisyunaiyoListDivのResponseData
      */
     public ResponseData<JyutakugaisyunaiyoListDiv> onLoad(JyutakugaisyunaiyoListDiv requestDiv) {
-        ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_被保険者番号, new HihokenshaNo("002"));
-        ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_サービス提供年月, new FlexibleYearMonth("201601"));
-        ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_整理番号, new RString("123"));
-        ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_様式番号, new RString("15"));
-        ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_モード, new RString("登録"));
-
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_サービス提供年月, FlexibleYearMonth.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_整理番号, RString.class);
@@ -101,7 +95,6 @@ public class JyutakugaisyunaiyoList {
      * @return JyutakugaisyunaiyoListDivのResponseData
      */
     public ResponseData<JyutakugaisyunaiyoListDiv> onClick_SelectButton(JyutakugaisyunaiyoListDiv requestDiv) {
-
         requestDiv = setPnlNyuryokuArea(モード_選択, requestDiv);
         return ResponseData.of(requestDiv).respond();
     }
@@ -155,7 +148,6 @@ public class JyutakugaisyunaiyoList {
             dgGaisyuListRow = new dgGaisyuList_Row();
             dgGaisyuListRow.setTxtJyotai(モード_追加);
             dgGaisyuListRow.setTxtSeiriNo(RString.EMPTY);
-
             list.add(listRowSet(dgGaisyuListRow, requestDiv));
         } else {
             requestDiv.getDgGaisyuList().getGridSetting().selectedRowCount();
