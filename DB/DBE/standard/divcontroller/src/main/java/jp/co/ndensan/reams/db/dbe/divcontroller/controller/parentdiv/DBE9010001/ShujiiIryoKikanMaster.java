@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster.KoseiShujii
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster.ShujiiIryoKikanJohoManager;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJohoIdentifier;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -289,9 +290,10 @@ public class ShujiiIryoKikanMaster {
                 div.getShujiiIchiran().setDisabled(false);
                 return ResponseData.of(div).setState(DBE9010001StateName.医療機関一覧);
             }
+            return ResponseData.of(div).setState(DBE9010001StateName.医療機関詳細);
         }
         div.getShujiiIchiran().setDisabled(false);
-        return ResponseData.of(div).setState(DBE9010001StateName.医療機関詳細);
+        return ResponseData.of(div).setState(DBE9010001StateName.医療機関一覧);
     }
 
     /**
@@ -422,7 +424,8 @@ public class ShujiiIryoKikanMaster {
                     new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
             return ResponseData.of(div).setState(DBE9010001StateName.完了);
         }
-        return ResponseData.of(div).respond();
+         return ResponseData.of(div).respond();
+       
     }
 
     private ValidationMessageControlPairs validateForDelete(ShujiiIryoKikanMasterDiv div) {
@@ -474,6 +477,7 @@ public class ShujiiIryoKikanMaster {
      * @return ResponseData<ShujiiIryoKikanMasterDiv>
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnBackShujiiMasterToToroku(ShujiiIryoKikanMasterDiv div) {
+        ViewStateHolder.put(SaibanHanyokeyName.医療機関コード, div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue());
         if (状態_削除.equals(div.getShujiiJohoInput().getState())
                 || RString.EMPTY.equals(div.getShujiiJohoInput().getState())
                 || ((状態_修正.equals(div.getShujiiJohoInput().getState())

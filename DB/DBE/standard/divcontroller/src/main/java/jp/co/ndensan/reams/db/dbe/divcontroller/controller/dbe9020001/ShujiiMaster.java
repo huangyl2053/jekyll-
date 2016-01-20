@@ -68,7 +68,7 @@ public class ShujiiMaster {
         if (主治医医療機関コード != null && !主治医医療機関コード.isEmpty()) {
             div.getShujiiSearch().getTxtSearchShujiiIryokikanCodeFrom().setValue(主治医医療機関コード);
             onClick_btnSearchShujii(div);
-            return ResponseData.of(div).setState(DBE9020001StateName.主治医登録_医療機関登録から遷移);
+            return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_医療機関登録から遷移);
         }
 
         return ResponseData.of(div).respond();
