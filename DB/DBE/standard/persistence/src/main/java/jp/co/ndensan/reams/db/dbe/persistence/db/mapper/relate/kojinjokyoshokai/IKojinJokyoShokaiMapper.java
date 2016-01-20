@@ -17,9 +17,16 @@ public interface IKojinJokyoShokaiMapper {
     /**
      * 要介護認定個人状況照会を取得します。
      *
-     * @param parameter 要介護認定個人状況照会
+     * @param parameter 要介護認定個人状況照会用パラメータ
      * @return KojinJokyoShokaiRelateEntity 検索結果の{@link KojinJokyoShokaiRelateEntity}
      */
     KojinJokyoShokaiRelateEntity selectKojinJokyoShokai(KojinJokyoShokaiParameter parameter);
-
+    
+     /**
+     * 要介護認定個人進捗状況票を取得します。
+     *
+     * @param parameter 要介護認定個人状況照会用パラメータ
+     * @return KojinJokyoShokaiRelateEntity 検索結果の{@link KojinJokyoShokaiRelateEntity}
+     */
+    KojinJokyoShokaiRelateEntity selectKojinShinchokuJokyohyo(KojinJokyoShokaiParameter parameter);
 }
