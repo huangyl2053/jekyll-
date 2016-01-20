@@ -28,15 +28,15 @@ public class KaigoKekkaTaishouIchiranBodyItem {
     /**
      * インスタンスを生成します。
      *
-     * @param listKekkatsuchi_2　開催年月日
-     * @param listKekkatsuchi_3　申請日
-     * @param listKekkatsuchi_4　被保険者番号
-     * @param listKekkatsuchi_5　氏名
-     * @param listKekkatsuchi_6　氏名カナ
-     * @param listKekkatsuchi_7　生年月日
-     * @param listKekkatsuchi_8　性別
-     * @param listKekkatsuchi_9　二次判定結果
-     * @param listKekkatsuchi_10 帳票ID
+     * @param listKekkatsuchi_2　審査会番号
+     * @param listKekkatsuchi_3　開催年月日
+     * @param listKekkatsuchi_4　申請日
+     * @param listKekkatsuchi_5　被保険者番号
+     * @param listKekkatsuchi_6　氏名
+     * @param listKekkatsuchi_7　氏名カナ
+     * @param listKekkatsuchi_8　生年月日
+     * @param listKekkatsuchi_9　性別
+     * @param listKekkatsuchi_10　二次判定結果
      */
     public KaigoKekkaTaishouIchiranBodyItem(
             RString listKekkatsuchi_2,
