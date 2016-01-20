@@ -7,9 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.NinteiChosaIr
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Chosa.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosairaishokai.NinteiChosaIraiShokaiMaster;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaIraiShokai.NinteiChosaIraiShokaiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaIraiShokai.dgNinteiChosaIrai_Row;
@@ -78,20 +76,21 @@ public class NinteiChosaIraiShokaiHandler {
 
     private RString get申請区分(RString 申請区分コード) {
         RString 申請区分 = RString.EMPTY;
-        List<KeyValueDataSource> dataSource = new ArrayList();
-        for (NinteiShinseiShinseijiKubunCode seibetsu : NinteiShinseiShinseijiKubunCode.values()) {
-
-            KeyValueDataSource keyValue = new KeyValueDataSource();
-            keyValue.setKey(seibetsu.code());
-            keyValue.setValue(seibetsu.toRString());
-            dataSource.add(keyValue);
-        }
-
-        for (KeyValueDataSource 申請区分Enum : dataSource) {
-            if (申請区分コード.equals(申請区分Enum.getKey())) {
-                申請区分 = 申請区分Enum.getValue();
-            }
-        }
+        // TODO DBDにここEnumクラスを存在しない、DBZにここEnumクラスを存在しない　2016/01/24。
+//        List<KeyValueDataSource> dataSource = new ArrayList();
+//        for (NinteiShinseiShinseijiKubunCode seibetsu : NinteiShinseiShinseijiKubunCode.values()) {
+//
+//            KeyValueDataSource keyValue = new KeyValueDataSource();
+//            keyValue.setKey(seibetsu.code());
+//            keyValue.setValue(seibetsu.toRString());
+//            dataSource.add(keyValue);
+//        }
+//
+//        for (KeyValueDataSource 申請区分Enum : dataSource) {
+//            if (申請区分コード.equals(申請区分Enum.getKey())) {
+//                申請区分 = 申請区分Enum.getValue();
+//            }
+//        }
         return 申請区分;
     }
 
@@ -115,19 +114,20 @@ public class NinteiChosaIraiShokaiHandler {
 
     private RString get履歴区分(RString 履歴区分コード) {
         RString 履歴区分 = RString.EMPTY;
-        List<KeyValueDataSource> dataSource = new ArrayList();
-        for (NinteiChousaIraiKubunCode seibetsu : NinteiChousaIraiKubunCode.values()) {
-            KeyValueDataSource keyValue = new KeyValueDataSource();
-            keyValue.setKey(seibetsu.getコード());
-            keyValue.setValue(seibetsu.get名称());
-            dataSource.add(keyValue);
-        }
-
-        for (KeyValueDataSource 履歴区分Enum : dataSource) {
-            if (履歴区分コード.equals(履歴区分Enum.getKey())) {
-                履歴区分 = 履歴区分Enum.getValue();
-            }
-        }
+        // TODO QA472DBZのEnumクラスを引用できない 2016/01/24。
+//        List<KeyValueDataSource> dataSource = new ArrayList();
+//        for (NinteiChousaIraiKubunCode seibetsu : NinteiChousaIraiKubunCode.values()) {
+//            KeyValueDataSource keyValue = new KeyValueDataSource();
+//            keyValue.setKey(seibetsu.getコード());
+//            keyValue.setValue(seibetsu.get名称());
+//            dataSource.add(keyValue);
+//        }
+//
+//        for (KeyValueDataSource 履歴区分Enum : dataSource) {
+//            if (履歴区分コード.equals(履歴区分Enum.getKey())) {
+//                履歴区分 = 履歴区分Enum.getValue();
+//            }
+//        }
         return 履歴区分;
     }
 }
