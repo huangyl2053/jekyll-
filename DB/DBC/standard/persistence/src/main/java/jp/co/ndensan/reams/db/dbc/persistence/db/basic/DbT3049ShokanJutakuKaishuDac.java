@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -105,5 +107,28 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 住宅改修一覧の取得です。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 様式番号 様式番号
+     * @return List<DbT3049ShokanJutakuKaishuEntity> 住宅改修一覧
+     */
+    public List<DbT3049ShokanJutakuKaishuEntity> getJyutakukaisyuList(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月, RString 整理番号, RString 様式番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().table(DbT3049ShokanJutakuKaishu.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号),
+                                eq(yoshikiNo, 様式番号))).
+                order(by(DbT3049ShokanJutakuKaishu.seiriNo, Order.ASC)).
+                toList(DbT3049ShokanJutakuKaishuEntity.class);
+
     }
 }

@@ -4,6 +4,33 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_InsertButton = function () {
+                return "onClick_InsertButton";
+            };
+
+            Events.onClick_SelectButton = function () {
+                return "onClick_SelectButton";
+            };
+
+            Events.onClick_ModifyButton = function () {
+                return "onClick_ModifyButton";
+            };
+
+            Events.onClick_DeleteButton = function () {
+                return "onClick_DeleteButton";
+            };
+
+            Events.onClick_CopyButton = function () {
+                return "onClick_CopyButton";
+            };
+
+            Events.onClick_ClearButton = function () {
+                return "onClick_ClearButton";
+            };
+
+            Events.onClick_ConfirmButton = function () {
+                return "onClick_ConfirmButton";
+            };
             return Events;
         })();
         JyutakugaisyunaiyoList.Events = Events;
