@@ -55,7 +55,7 @@ public class NinteiChosaIraiShokaiHandler {
             row.setNinteiDate(日期フォマト(entity.getNijiHanteiYMD()));
             RString 要介護度 = get要介護度(entity.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue());
             if (new RString("なし").equals(要介護度)) {
-                row.setYokaigodo(new RString(""));
+                row.setYokaigodo(RString.EMPTY);
             } else {
                 row.setYokaigodo(get要介護度(entity.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue()));
             }
