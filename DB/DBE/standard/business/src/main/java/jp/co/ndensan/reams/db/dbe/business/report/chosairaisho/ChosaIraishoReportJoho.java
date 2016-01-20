@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.chosairaisho;
 
 /**
  *
- * 要介護認定調査依頼書クラスパラメータクラスです。
+ * 要介護認定調査依頼書作成_帳票パラメータクラスです。
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

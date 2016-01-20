@@ -43,7 +43,7 @@ public class ChosaIraishoReport extends Report<ChosaIraishoReportSource> {
 
     /**
      *
-     * @param reportSourceWriter
+     * @param reportSourceWriter 要介護認定調査依頼書Sourceクラス
      */
     @Override
     public void writeBy(ReportSourceWriter<ChosaIraishoReportSource> reportSourceWriter) {

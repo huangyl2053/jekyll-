@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * 認定調査スケジュール表(調査員)作成_帳票クラスパラメータクラスです。
+ * 認定調査スケジュール表(調査員)作成_帳票パラメータクラスです。
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.chosaschedulehyotyousayin;
 
-import jp.co.ndensan.reams.db.dbe.business.report.chosaschedulehyo.ChosaSchedulehyoReport;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosaschedulehyotyousayin.ChosaSchedulehyoTyousayinReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -13,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  *
- * {@link ChosaSchedulehyoReport}のプロパティです。
+ * {@link 認定調査スケジュール表(調査員)のReport}のプロパティです。
  */
 public class ChosaSchedulehyoTyousayinProperty extends ReportPropertyBase<ChosaSchedulehyoTyousayinReportSource> {
 

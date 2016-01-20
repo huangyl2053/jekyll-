@@ -42,7 +42,11 @@ class ChosaSchedulehyoTyousayinBodyEditor implements IChosaSchedulehyoTyousayinE
         source.listChosaSukejuru_1 = item.getNo();
         source.listChosaSukejuru_2 = item.getNinyutyousayinnNo();
         source.listChosaSukejuru_3 = item.getNinyutyousayinnName();
-        source.listChosaSukejuru_4 = new RDate(item.getNinnteyityousayoteyibi().toString()).wareki().toDateString();
+        if (item.getNinnteyityousayoteyibi().isEmpty()) {
+            source.listChosaSukejuru_4 = RString.EMPTY;
+        } else {
+            source.listChosaSukejuru_4 = new RDate(item.getNinnteyityousayoteyibi().toString()).wareki().toDateString();
+        }
         RStringBuilder ninnteyityousaTime = new RStringBuilder();
         ninnteyityousaTime.append(item.getNinnteyityousakaisiTime());
         ninnteyityousaTime.append(KANA);
@@ -53,9 +57,10 @@ class ChosaSchedulehyoTyousayinBodyEditor implements IChosaSchedulehyoTyousayinE
         source.listChosaSukejuru_8 = item.getHihokennsyaName();
         source.listChosaSukejuru_9 = item.getHihokennsyaAdd();
         source.listChosaSukejuru_10 = item.getTyousajisibasyou();
+        //TODO QA501 立会者の編集
         source.listChosaSukejuru_11 = item.getTatiayisya();
-        source.listTel1_1 = item.getListTel1_1();
-        source.listTel2_1 = item.getListTel2_1();
+        source.listTel1_1 = item.getRennrakusaki1();
+        source.listTel2_1 = item.getRennrakusaki2();
         return source;
     }
 }

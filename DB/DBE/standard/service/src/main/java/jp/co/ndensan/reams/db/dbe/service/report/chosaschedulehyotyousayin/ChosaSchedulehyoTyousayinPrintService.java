@@ -23,7 +23,7 @@ public class ChosaSchedulehyoTyousayinPrintService {
     /**
      * 認定調査スケジュール表(調査員)を印刷します。
      *
-     * @param ichiranReportJoho 認定調査スケジュール表(調査員)作成_帳票クラスパラメータクラス
+     * @param ichiranReportJoho 認定調査スケジュール表(調査員)作成_帳票パラメータクラス
      * @return {@link SourceDataCollection}
      */
     public SourceDataCollection print(ChosaSchedulehyoTyousayinReportJoho ichiranReportJoho) {

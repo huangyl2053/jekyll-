@@ -24,35 +24,35 @@ public class ChosaSchedulehyoJikankanriReport extends Report<ChosaSchedulehyoJik
      * インスタンスを生成します。
      *
      * @param headItem 認定調査スケジュール表(時間管理)ヘッダのITEM
-     * @param itemList 認定調査スケジュール表(時間管理)ボディのITEMリスト
+     * @param bodyItemList 認定調査スケジュール表(時間管理)ボディのITEMリスト
      * @return 認定調査スケジュール表(時間管理)のReport
      */
     public static ChosaSchedulehyoJikankanriReport createFrom(
             ChosaSchedulehyoJikankanriHeadItem headItem,
-            @NonNull List<ChosaSchedulehyoJikankanriBodyItem> itemList) {
+            @NonNull List<ChosaSchedulehyoJikankanriBodyItem> bodyItemList) {
 
         return new ChosaSchedulehyoJikankanriReport(
                 headItem,
-                itemList);
+                bodyItemList);
     }
 
     /**
      * インスタンスを生成します。
      *
      * @param headItem 認定調査スケジュール表(時間管理)ヘッダのITEM
-     * @param itemList 認定調査スケジュール表(時間管理)のITEMリスト
+     * @param bodyItemList 認定調査スケジュール表(時間管理)ボディのITEMリスト
      */
     protected ChosaSchedulehyoJikankanriReport(
             ChosaSchedulehyoJikankanriHeadItem headItem,
-            List<ChosaSchedulehyoJikankanriBodyItem> itemList) {
+            List<ChosaSchedulehyoJikankanriBodyItem> bodyItemList) {
 
         this.headItem = headItem;
-        this.bodyItemList = itemList;
+        this.bodyItemList = bodyItemList;
     }
 
     /**
      *
-     * @param reportSourceWriter
+     * @param reportSourceWriter 認定調査スケジュール表(時間管理)Sourceクラス
      */
     @Override
     public void writeBy(ReportSourceWriter<ChosaSchedulehyoJikankanriReportSource> reportSourceWriter) {

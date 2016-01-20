@@ -18,7 +18,6 @@ public class ChosaSchedulehyoTyousayinBodyItem {
 
     private final RString ninnteyityousakaisiTime;
     private final RString ninnteyityousasyuroTime;
-    private final RString listTel1_1;
     private final RString no;
     private final RString ninyutyousayinnNo;
     private final RString ninyutyousayinnName;
@@ -29,14 +28,14 @@ public class ChosaSchedulehyoTyousayinBodyItem {
     private final RString hihokennsyaAdd;
     private final RString tyousajisibasyou;
     private final RString tatiayisya;
-    private final RString listTel2_1;
+    private final RString rennrakusaki1;
+    private final RString rennrakusaki2;
 
     /**
      * インスタンスを生成します。
      *
      * @param ninnteyityousakaisiTime 認定調査予定開始時間
      * @param ninnteyityousasyuroTime 認定調査予定終了時間
-     * @param listTel1_1 連絡先１
      * @param no No
      * @param ninyutyousayinnNo 認定調査員番号
      * @param ninyutyousayinnName 認定調査員名
@@ -47,12 +46,12 @@ public class ChosaSchedulehyoTyousayinBodyItem {
      * @param hihokennsyaAdd 被保険者住所
      * @param tyousajisibasyou 調査実施場所
      * @param tatiayisya 立会者
-     * @param listTel2_1 連絡先２
+     * @param rennrakusaki1 連絡先１
+     * @param rennrakusaki2 連絡先２
      */
     public ChosaSchedulehyoTyousayinBodyItem(
             RString ninnteyityousakaisiTime,
             RString ninnteyityousasyuroTime,
-            RString listTel1_1,
             RString no,
             RString ninyutyousayinnNo,
             RString ninyutyousayinnName,
@@ -63,10 +62,10 @@ public class ChosaSchedulehyoTyousayinBodyItem {
             RString hihokennsyaAdd,
             RString tyousajisibasyou,
             RString tatiayisya,
-            RString listTel2_1) {
+            RString rennrakusaki1,
+            RString rennrakusaki2) {
         this.ninnteyityousakaisiTime = ninnteyityousakaisiTime;
         this.ninnteyityousasyuroTime = ninnteyityousasyuroTime;
-        this.listTel1_1 = listTel1_1;
         this.no = no;
         this.ninyutyousayinnNo = ninyutyousayinnNo;
         this.ninyutyousayinnName = ninyutyousayinnName;
@@ -77,6 +76,7 @@ public class ChosaSchedulehyoTyousayinBodyItem {
         this.hihokennsyaAdd = hihokennsyaAdd;
         this.tyousajisibasyou = tyousajisibasyou;
         this.tatiayisya = tatiayisya;
-        this.listTel2_1 = listTel2_1;
+        this.rennrakusaki1 = rennrakusaki1;
+        this.rennrakusaki2 = rennrakusaki2;
     }
 }

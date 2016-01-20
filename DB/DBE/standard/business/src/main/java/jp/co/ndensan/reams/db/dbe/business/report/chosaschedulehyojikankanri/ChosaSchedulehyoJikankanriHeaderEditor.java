@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class ChosaSchedulehyoJikankanriHeaderEditor implements IChosaSchedulehyoJikankanriEditor {
 
+    private static final RString TITLE = new RString("認定調査スケジュール表");
     private final ChosaSchedulehyoJikankanriHeadItem item;
 
     /**
@@ -59,7 +60,7 @@ public class ChosaSchedulehyoJikankanriHeaderEditor implements IChosaSchedulehyo
         systemDateTime.append(RString.HALF_SPACE);
         systemDateTime.append(new RString("作成"));
         source.printTimeStamp = systemDateTime.toRString();
-        source.title = new RString("認定調査スケジュール表");
+        source.title = TITLE;
         source.chosaItakusakiNo = item.getChosaItakusakiNo();
         source.chosaItakusakiName = item.getChosaItakusakiName();
         return source;

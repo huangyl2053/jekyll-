@@ -12,14 +12,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  *
- * {@link ChosaIraiIchiranhyoReport}のプロパティです。
+ * {@link 認定調査依頼一覧表のReport}のプロパティです。
  */
 public class ChosaIraiIchiranhyoProperty extends ReportPropertyBase<ChosaIraiIchiranhyoReportSource> {
 
     private static final ReportId ID = new ReportId("DBE220002");
 
     /**
-     * ChosaIraiIchiranhyoReportのプロパティです。
+     * インスタンスを生成します。
      */
     public ChosaIraiIchiranhyoProperty() {
         super(SubGyomuCode.DBE認定支援, ID);

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  *
- * {@link ChosaSchedulehyoJikankanriReport}のプロパティです。
+ * {@link 認定調査スケジュール表(時間管理)のReport}のプロパティです。
  */
 public class ChosaSchedulehyoJikankanriProperty extends ReportPropertyBase<ChosaSchedulehyoJikankanriReportSource> {
 

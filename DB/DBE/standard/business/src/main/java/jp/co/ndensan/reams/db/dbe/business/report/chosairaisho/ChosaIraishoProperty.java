@@ -12,14 +12,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  *
- * {@link ChosaIraishoReport}のプロパティです。
+ * {@link 要介護認定調査依頼書のReport}のプロパティです。
  */
 public class ChosaIraishoProperty extends ReportPropertyBase<ChosaIraishoReportSource> {
 
     private static final ReportId ID = new ReportId("DBE220001");
 
     /**
-     * ChosaIraishoReportのプロパティです。
+     * インスタンスを生成します。
      */
     public ChosaIraishoProperty() {
         super(SubGyomuCode.DBE認定支援, ID);

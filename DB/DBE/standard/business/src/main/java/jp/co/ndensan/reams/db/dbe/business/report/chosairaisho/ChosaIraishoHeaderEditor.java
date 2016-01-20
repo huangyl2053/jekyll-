@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
 
+    private static final RString TITLE = new RString("認定調査依頼書");
     private final ChosaIraishoHeadItem item;
 
     /**
@@ -40,13 +41,17 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
 
     private ChosaIraishoReportSource editHeader(ChosaIraishoReportSource source) {
         source.bunshoNo = item.getBunshoNo();
-        source.hakkoYMD = new RDate(item.getHakkoYMD().toString()).wareki().fillType(FillType.ZERO).toDateString();
+        if (item.getHakkoYMD().isEmpty()) {
+            source.hakkoYMD = RString.EMPTY;
+        } else {
+            source.hakkoYMD = new RDate(item.getHakkoYMD().toString()).wareki().fillType(FillType.BLANK).toDateString();
+        }
         source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
         source.shichosonMei = item.getShichosonMei();
         source.shuchoMei = item.getShuchoMei();
         source.koinShoryaku = item.getKoinShoryaku();
         source.denshiKoin1 = item.getDenshiKoin1();
-        source.title = new RString("認定調査依頼書");
+        source.title = TITLE;
         source.hihokenshaNo1 = item.getHihokenshaNo1();
         source.hihokenshaNo2 = item.getHihokenshaNo2();
         source.hihokenshaNo3 = item.getHihokenshaNo3();
@@ -59,7 +64,11 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
         source.hihokenshaNo10 = item.getHihokenshaNo10();
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
         source.hihokenshaName = item.getHihokenshaName();
-        source.birthYMD = new RDate(item.getBirthYMD().toString()).wareki().eraType(EraType.KANJI).toDateString();
+        if (item.getBirthYMD().isEmpty()) {
+            source.birthYMD = RString.EMPTY;
+        } else {
+            source.birthYMD = new RDate(item.getBirthYMD().toString()).wareki().eraType(EraType.KANJI).toDateString();
+        }
         source.birthGengoMeiji = item.getBirthGengoMeiji();
         source.birthGengoTaisho = item.getBirthGengoTaisho();
         source.birthGengoShowa = item.getBirthGengoShowa();
@@ -73,8 +82,16 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
         source.homonChosasakiJusho2 = item.getHomonChosasakiJusho2();
         source.homonChosasakiJusho3 = item.getHomonChosasakiJusho3();
         source.homonChosasakiTelNo = item.getHomonChosasakiTelNo();
-        source.shinseiYMD = new RDate(item.getShinseiYMD().toString()).wareki().eraType(EraType.KANJI).toDateString();
-        source.teishutsuKigen = new RDate(item.getTeishutsuKigen().toString()).wareki().eraType(EraType.KANJI).toDateString();
+        if (item.getShinseiYMD().isEmpty()) {
+            source.shinseiYMD = RString.EMPTY;
+        } else {
+            source.shinseiYMD = new RDate(item.getShinseiYMD().toString()).wareki().eraType(EraType.KANJI).toDateString();
+        }
+        if (item.getTeishutsuKigen().isEmpty()) {
+            source.teishutsuKigen = RString.EMPTY;
+        } else {
+            source.teishutsuKigen = new RDate(item.getTeishutsuKigen().toString()).wareki().eraType(EraType.KANJI).toDateString();
+        }
         source.tsuchibun1 = item.getTsuchibun1();
         source.tsuchibun2 = item.getTsuchibun2();
         source.tsuchibun3 = item.getTsuchibun3();

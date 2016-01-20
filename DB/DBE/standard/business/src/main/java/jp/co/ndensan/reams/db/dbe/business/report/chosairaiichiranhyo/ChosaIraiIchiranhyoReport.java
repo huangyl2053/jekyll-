@@ -24,35 +24,35 @@ public class ChosaIraiIchiranhyoReport extends Report<ChosaIraiIchiranhyoReportS
      * インスタンスを生成します。
      *
      * @param headItem 認定調査依頼一覧表ヘッダのITEM
-     * @param itemList 認定調査依頼一覧表ボディのITEMリスト
+     * @param bodyItemList 認定調査依頼一覧表ボディのITEMリスト
      * @return 認定調査依頼一覧表のReport
      */
     public static ChosaIraiIchiranhyoReport createFrom(
             ChosaIraiIchiranhyoHeadItem headItem,
-            @NonNull List<ChosaIraiIchiranhyoBodyItem> itemList) {
+            @NonNull List<ChosaIraiIchiranhyoBodyItem> bodyItemList) {
 
         return new ChosaIraiIchiranhyoReport(
                 headItem,
-                itemList);
+                bodyItemList);
     }
 
     /**
      * インスタンスを生成します。
      *
      * @param headItem 認定調査依頼一覧表ヘッダのITEM
-     * @param itemList 認定調査依頼一覧表のITEMリスト
+     * @param bodyItemList 認定調査依頼一覧表ボディのITEMリスト
      */
     protected ChosaIraiIchiranhyoReport(
             ChosaIraiIchiranhyoHeadItem headItem,
-            List<ChosaIraiIchiranhyoBodyItem> itemList) {
+            List<ChosaIraiIchiranhyoBodyItem> bodyItemList) {
 
         this.headItem = headItem;
-        this.bodyItemList = itemList;
+        this.bodyItemList = bodyItemList;
     }
 
     /**
      *
-     * @param reportSourceWriter
+     * @param reportSourceWriter 認定調査依頼一覧表Sourceクラス
      */
     @Override
     public void writeBy(ReportSourceWriter<ChosaIraiIchiranhyoReportSource> reportSourceWriter) {
