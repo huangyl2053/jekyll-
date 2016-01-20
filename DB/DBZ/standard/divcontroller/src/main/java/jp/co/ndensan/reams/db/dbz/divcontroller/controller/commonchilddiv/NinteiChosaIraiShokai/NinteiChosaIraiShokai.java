@@ -36,6 +36,14 @@ public class NinteiChosaIraiShokai {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 閉じるボタンを押下する場合、元画面へ遷移する。
+     */
+    // TODO 閉じるbtn 原画面がない。
+//    public ResponseData<NinteiChosaIraiShokaiDiv> onClick_btnClose(NinteiChosaIraiShokaiDiv div) {
+//
+//        return ResponseData.of(div).respond();
+//    }
     private NinteiChosaIraiShokaiHandler getHandler(NinteiChosaIraiShokaiDiv div) {
         return new NinteiChosaIraiShokaiHandler(div);
     }
