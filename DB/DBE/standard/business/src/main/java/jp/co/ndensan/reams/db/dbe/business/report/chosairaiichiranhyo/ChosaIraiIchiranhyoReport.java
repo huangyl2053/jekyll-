@@ -50,6 +50,10 @@ public class ChosaIraiIchiranhyoReport extends Report<ChosaIraiIchiranhyoReportS
         this.bodyItemList = itemList;
     }
 
+    /**
+     *
+     * @param reportSourceWriter
+     */
     @Override
     public void writeBy(ReportSourceWriter<ChosaIraiIchiranhyoReportSource> reportSourceWriter) {
         for (ChosaIraiIchiranhyoBodyItem bodyItem : bodyItemList) {

@@ -162,21 +162,8 @@ public class FukushiyoguShohinGuide {
 
         getValidationHandler(fukuDiv).管理日Fromの必須チェック(validationMessages);
         getValidationHandler(fukuDiv).商品名の必須チェック(validationMessages);
-//        getValidationHandler(fukuDiv).管理日Fromと管理日Toの整合性チェック();
         return validationMessages;
     }
-//
-//    public void 管理日Fromの必須チェック(FukushiyoguShohinGuideDiv fukuDiv) {
-//
-//    }
-//
-//    public void 商品名の必須チェック(FukushiyoguShohinGuideDiv fukuDiv) {
-//
-//    }
-//
-//    public void 管理日Fromと管理日Toの整合性チェック(FukushiyoguShohinGuideDiv fukuDiv) {
-//
-//    }
 
     private void setfukushiyo(FukushiyoguShohinGuideDiv fukuDiv) {
         Models<FukushiyoguShohinIdentifier, FukushiyoguShohin> models = ViewStateHolder.get(ViewStateKeys.福祉用具商品名入力ガイド検索結果, Models.class);

@@ -7,10 +7,7 @@ package jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -22,9 +19,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TashajukiJunitoJugoCSVDataEntity {
 
-    private LasdecCode 市町村コード;
+    private RString 市町村コード;
     private RString 識別ＩＤ;
-    private YMDHMS タイムスタンプ;
+    private RString タイムスタンプ;
     private RString 最終レコード区分;
     private RString 連番;
     private RString 識別コード;
@@ -34,12 +31,12 @@ public class TashajukiJunitoJugoCSVDataEntity {
     private RString 資格被保険者区分;
     private RString 住所地特例者区分;
     private RString 受給者区分;
-    private Code 要介護状態区分ｺｰﾄﾞ;
+    private Code 要介護状態区分コード;
     private FlexibleDate 認定有効開始日;
     private FlexibleDate 認定有効終了日;
     private FlexibleDate 受給認定年月日;
     private FlexibleDate 受給認定取消年月日;
     private RString 削除フラグ;
-    private RDateTime 作成日時;
-    private RDateTime 更新日時;
+    private RString 作成日時;
+    private RString 更新日時;
 }

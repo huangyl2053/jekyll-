@@ -7,15 +7,19 @@ package jp.co.ndensan.reams.db.dbe.business.core.youkaigoninteikekktesuchi;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.NinteiShinseiHoreiCode;
+import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 要介護認定結果通知情報ビジネスクラスです。
  */
 public class YouKaiGoNinTeiKekTesuChi  implements Serializable {
 
-    private YouKaiGoNinTeiKekTesuChiRelateEntity entity;
+    private final YouKaiGoNinTeiKekTesuChiRelateEntity entity;
     
      /**
      * コンストラクタです。<br/>
@@ -28,21 +32,197 @@ public class YouKaiGoNinTeiKekTesuChi  implements Serializable {
         this.entity = relateEntity;
     }
 
+    /**
+     * 主治医医療機関コードを返します。
+     * @return 主治医医療機関コード
+     */
+    public RString get主治医医療機関コード() {
+       return entity.getShujiiIryokikanCode();
+    }
+    
+    /**
+     * 主治医医療機関名称を返します。
+     * @return 主治医医療機関名称
+     */
+    public RString get医療機関名称() {
+       return entity.getIryoKikanMeisho();
+    }
+    
+    /**
+     * 郵便番号を返します。
+     * @return 郵便番号
+     */
+    public RString get郵便番号() {
+       return entity.getYubinNo();
+    }
+    
+    /**
+     * 電話番号を返します。
+     * @return 電話番号
+     */
+    public RString get電話番号() {
+       return entity.getTelNo();
+    }
+    
+    /**
+     * 住所を返します。
+     * @return 住所
+     */
+    public RString get住所() {
+       return entity.getJusho();
+    }
+    
+    /**
+     * 主治医コードを返します。
+     * @return 主治医コード
+     */
+    public RString get主治医コード() {
+       return entity.getShujiiCode();
+    }
+    
+    /**
+     * 主治医氏名を返します。
+     * @return 主治医氏名
+     */
+    public RString get主治医氏名() {
+       return entity.getShujiiName();
+    }
+    
+    /**
+     * 対象件数を返します。
+     * @return 対象件数
+     */
+    public int get対象件数() {
+       return entity.getTaiSyouCount();
+    }
+    
+    /**
+     * 連番を返します。
+     * @return 連番
+     */
+    public RString get連番() {
+       return new RString (String.valueOf(entity.getRenNo()));
+    }
+    
+    /**
+     * 被保険者番号を返します。
+     * @return 被保険者番号
+     */
+    public RString get被保険者番号() {
+       return entity.getHihokenshaNo();
+    }
+    
+    /**
+     * 被保険者氏名を返します。
+     * @return 被保険者氏名
+     */
+    public RString get被保険者氏名() {
+       return entity.getHihokenshaName();
+    }
+    
+    /**
+     * 性別を返します。
+     * @return 性別
+     */
+    public RString get性別() {
+       return entity.getSeibetsu();
+    }
     
     
+    /**
+     * 生年月日を返します。
+     * @return 生年月日
+     */
+    public RString get生年月日() {
+       return entity.getSeinengappiYMD();
+    }
+    
+    /**
+     * 年齢を返します。
+     * @return 年齢
+     */
+    public int get年齢() {
+       return entity.getAge();
+    }
+    
+    /**
+     * 申請日を返します。
+     * @return 申請日
+     */
+    public RString get申請日() {
+       return entity.getNinteiShinseiYMD();
+    }
+    
+    /**
+     * 申請区分（申請時）を返します。
+     * @return 申請区分_申請時
+     */
+    public RString get申請区分_申請時() {
+       return NinteiShinseiShinseijiKubunCode.toValue(entity.getNinteiShinseiShinseijiKubunCode()).get名称();
+    }
+    
+    /**
+     * 申請区分（法令）を返します。
+     * @return 申請区分_法令
+     */
+    public RString get申請区分_法令() {
+       return NinteiShinseiHoreiCode.toValue(entity.getNinteiShinseiHoreiKubunCode()).get名称();
+    }
     
     
+    /**
+     * 二次判定結果を返します。
+     * @return 二次判定結果
+     */
+    public RString get二次判定結果() {
+       return YokaigoJotaiKubun09.toValue(entity.getNijiHanteiYokaigoJotaiKubunCode()).get名称();
+    }
     
+    /**
+     * 有効期間を返します。
+     * @return 有効期間
+     */
+    public RString get有効期間() {
+       return entity.getNijiHanteiNinteiYukoKikan();
+    }
     
+    /**
+     * 有効期間開始を返します。
+     * @return 有効期間開始
+     */
+    public RString get有効期間開始() {
+       return entity.getNijiHanteiNinteiYukoKaishiYMD();
+    }
     
+    /**
+     * 有効期間終了を返します。
+     * @return 有効期間終了
+     */
+    public RString get有効期間終了() {
+       return entity.getNijiHanteiNinteiYukoShuryoYMD();
+    }
     
+    /**
+     * 二次判定日を返します。
+     * @return 二次判定日
+     */
+    public RString get二次判定日() {
+       return entity.getNijiHanteiYMD();
+    }
     
+    /**
+     * 認定状況提供日を返します。
+     * @return 認定状況提供日
+     */
+    public RString get認定状況提供日() {
+       return entity.getNinteiJohoTeikyoYMD();
+    }
     
-    
-    
-    
-    
-    
-    
-    
+    /**
+     * 申請書管理番号を返します。
+     * @return 申請書管理番号
+     */
+    public RString get申請書管理番号() {
+       return entity.getShinseishoKanriNo();
+    }
 }

@@ -56,19 +56,24 @@ class ChosaSchedulehyoJikankanriBodyEditor implements IChosaSchedulehyoJikankanr
         this.item = item;
     }
 
+    /**
+     *
+     * @param source 認定調査スケジュール表(時間管理)Sourceクラス
+     * @return ChosaSchedulehyoJikankanriReportSource
+     */
     @Override
     public ChosaSchedulehyoJikankanriReportSource edit(ChosaSchedulehyoJikankanriReportSource source) {
         return editBody(source);
     }
 
     private ChosaSchedulehyoJikankanriReportSource editBody(ChosaSchedulehyoJikankanriReportSource source) {
-        source.listChosaSukejuru2_1 = item.getListChosaSukejuru2_1();
-        source.listChosaSukejuru2_2 = item.getListChosaSukejuru2_2();
-        source.listChosaSukejuru2_3 = item.getListChosaSukejuru2_3();
-        source.listChosaSukejuru2_4 = item.getListChosaSukejuru2_4();
-        source.listChosaSukejuru3_1 = item.getListChosaSukejuru3_1();
-        source.listChosaSukejuru3_2 = item.getListChosaSukejuru3_2();
-        source.listChosaSukejuru3_3 = item.getListChosaSukejuru3_3();
+        source.listChosaSukejuru2_1 = item.getNo();
+        source.listChosaSukejuru2_2 = item.getTyousayinnNo();
+        source.listChosaSukejuru2_3 = item.getTyousayinnName();
+        source.listChosaSukejuru2_4 = item.getHihokennsyaNo();
+        source.listChosaSukejuru3_1 = item.getHihokennsyaName();
+        source.listChosaSukejuru3_2 = item.getRennrakusaki1();
+        source.listChosaSukejuru3_3 = item.getRennrakusaki2();
         if (item.getNinteiChosaYoteiKaishiTime().compareTo(HAKU時) <= 0
                 && HAKU時半ごろ.compareTo(item.getNinteiChosaYoteiShuryoTime()) <= 0) {
             source.listChosaSukejuru1_1 = getほし();

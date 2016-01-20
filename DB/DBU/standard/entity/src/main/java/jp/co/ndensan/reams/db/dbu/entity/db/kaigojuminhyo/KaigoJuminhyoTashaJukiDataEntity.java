@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -23,13 +22,13 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KaigoJyuminhyouTashajukiDataEntity {
+public class KaigoJuminhyoTashaJukiDataEntity {
 
     private HihokenshaNo 被保険者番号;
     private FlexibleDate 異動日;
     private RString 枝番;
     private RString 異動事由コード;
-    private LasdecCode 市町村コード;
+    private RString 市町村コード;
     private ShikibetsuCode 識別コード;
     private RString 資格取得事由コード;
     private FlexibleDate 資格取得年月日;
@@ -53,8 +52,8 @@ public class KaigoJyuminhyouTashajukiDataEntity {
     private LasdecCode 広住特措置元市町村コード;
     private LasdecCode 旧市町村コード;
     private boolean 論理削除フラグ;
-    private RDateTime 挿入日時;
-    private RDateTime 更新日時;
+    private RString 挿入日時;
+    private RString 更新日時;
     private LasdecCode 受給者市町村コード;
     private HihokenshaNo 受給者被保険者番号;
     private RString 受給者履歴番号;
@@ -135,6 +134,6 @@ public class KaigoJyuminhyouTashajukiDataEntity {
     private boolean 受給者資格取得前申請フラグ;
     private boolean 受給者旧措置者フラグ;
     private boolean 受給者論理削除フラグ;
-    private RDateTime 受給者挿入日時;
-    private RDateTime 受給者更新日時;
+    private RString 受給者挿入日時;
+    private RString 受給者更新日時;
 }

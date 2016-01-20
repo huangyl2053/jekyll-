@@ -28,6 +28,10 @@ class ChosaIraiIchiranhyoBuilderImpl implements IChosaIraiIchiranhyoBuilder {
         this.bodyEditor = bodyEditor;
     }
 
+    /**
+     *
+     * @return ChosaIraiIchiranhyoReportSource 認定調査依頼一覧表Sourceクラス
+     */
     @Override
     public ChosaIraiIchiranhyoReportSource build() {
         return ReportEditorJoiner.from(new ChosaIraiIchiranhyoReportSource()).join(headerEditor).join(bodyEditor).buildSource();

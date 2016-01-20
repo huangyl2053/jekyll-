@@ -90,8 +90,8 @@ public class GogitaiJohoSakuseiHandler {
             row.getGogitaiKaishiYoteiTime().setValue(strToTime(result.get合議体開始予定時刻()));
             row.getGogitaiShuryoYoteiTime().setValue(strToTime(result.get合議体終了予定時刻()));
             row.setKaisaiBashoCode(result.get介護認定審査会開催場所コード());
-            row.setSeishinkaiSonzai(IsGogitaiSeishinkaSonzai.toValue(result.is合議体精神科医存在フラグ()).getコード());
-            row.setGogitaiDummyFlag(IsGogitaiDummy.toValue(result.is合議体ダミーフラグ()).getコード());
+            row.setSeishinkaiSonzai(result.is合議体精神科医存在フラグ());
+            row.setGogitaiDummyFlag(result.is合議体ダミーフラグ());
             row.getYoteiTeiin().setValue(new Decimal(result.get介護認定審査会予定定員()));
             row.getJidoWariateTeiin().setValue(new Decimal(result.get介護認定審査会自動割当定員()));
             row.getIinTeiin().setValue(new Decimal(result.get介護認定審査会委員定員()));

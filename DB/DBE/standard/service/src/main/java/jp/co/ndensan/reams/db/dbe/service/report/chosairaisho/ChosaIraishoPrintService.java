@@ -30,14 +30,14 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
  *
- * 要介護認定調査依頼書Printerです。
+ * 要介護認定調査依頼書PrinterServiceクラスです。
  */
 public class ChosaIraishoPrintService {
 
     /**
      * 要介護認定調査依頼書を印刷します。
      *
-     * @param headItem 要介護認定調査依頼書作成_帳票クラスパラメータクラス
+     * @param headItem 要介護認定調査依頼書ヘッダのITEMです。
      * @return {@link SourceDataCollection}
      */
     public SourceDataCollection print(ChosaIraishoHeadItem headItem) {

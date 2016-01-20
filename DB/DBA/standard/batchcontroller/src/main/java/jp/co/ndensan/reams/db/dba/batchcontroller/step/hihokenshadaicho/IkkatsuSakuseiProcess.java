@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
@@ -100,7 +102,7 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
         List<HihokenshaDaichoSakuseiEntity> 被保険者台帳EntityList = HihokenshaDaichoSakuseiManager.
                 createInstance().getHihokenshaDaichoHenshu(被保険者EntityList);
         if (processPrm.getShutsuryokuFlag().equals(発行する)) {
-            HihokenshaDaichoIchiranHyoFinder.createInstance().getChohyoIchiran(被保険者台帳EntityList);
+            HihokenshaDaichoIchiranHyoFinder.createInstance().getChohyoIchiran(processPrm.getShutsuryokujunId(), 被保険者台帳EntityList);
         }
     }
 
@@ -134,31 +136,31 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
         被保険者Entity.setPage(RString.EMPTY);
         被保険者Entity.setTitle(TITLE);
         被保険者Entity.setShichosonCode(entity.getShichosonCode());
-        //被保険者Entity.setShichosonMeisho(get市町村名称(entity));
+        被保険者Entity.setShichosonMeisho(get市町村名称(entity));
         被保険者Entity.setHihokenshaNoTitle(HIHOKENSHANOTITLE);
         被保険者Entity.setHihokenshaNo(entity.getHihokenshaNo());
         被保険者Entity.setShikibetsuCode(entity.getShikibetsuCode());
-//        UaFt200FindShikibetsuTaishoEntity 識別対象Entity = get宛名識別対象取得(entity);
-//        IShikibetsuTaisho shikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(識別対象Entity);
-//        被保険者Entity.setKanaMeisho(shikibetsuTaisho.get名称().getKana());
-//        被保険者Entity.setMeisho(shikibetsuTaisho.get名称().getName());
-//        被保険者Entity.setSeinengappiYMD(shikibetsuTaisho.to個人().get生年月日().toFlexibleDate());
-//        被保険者Entity.setSeibetsuCode(shikibetsuTaisho.to個人().get性別().getCode());
-//        被保険者Entity.setSetaiCode(shikibetsuTaisho.to個人().get世帯コード());
-//        被保険者Entity.setShikibetsuCode(shikibetsuTaisho.to個人().get識別コード());
-//        被保険者Entity.setChikucodeTitle1(shikibetsuTaisho.to個人().get行政区画().getChiku1().get名称());
-//        被保険者Entity.setChikuCode1(shikibetsuTaisho.to個人().get行政区画().getChiku1().getコード());
-//        被保険者Entity.setChikucodeTitle2(shikibetsuTaisho.to個人().get行政区画().getChiku2().get名称());
-//        被保険者Entity.setChikuCode2(shikibetsuTaisho.to個人().get行政区画().getChiku2().getコード());
-//        被保険者Entity.setChikucodeTitle3(shikibetsuTaisho.to個人().get行政区画().getChiku3().get名称());
-//        被保険者Entity.setChikuCode3(shikibetsuTaisho.to個人().get行政区画().getChiku3().getコード());
-//        被保険者Entity.setJushoTitle(JUSHO_TITLE);
-//        被保険者Entity.setJusho(new RString(shikibetsuTaisho.get住所().toString()));
-//        被保険者Entity.setZenkokuJushoCode(shikibetsuTaisho.to個人().get住所().get全国住所コード());
-//        被保険者Entity.setGyoseikuTitle(GYOSEIKU_TITLE);
-//        被保険者Entity.setGyoseikuCode(shikibetsuTaisho.to個人().get行政区画().getGyoseiku().getコード());
-//        被保険者Entity.setTelephoneNo1(shikibetsuTaisho.to個人().get連絡先１().value());
-//        被保険者Entity.setTelephoneNo2(shikibetsuTaisho.to個人().get連絡先２().value());
+        UaFt200FindShikibetsuTaishoEntity 識別対象Entity = get宛名識別対象取得(entity);
+        IShikibetsuTaisho shikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(識別対象Entity);
+        被保険者Entity.setKanaMeisho(shikibetsuTaisho.get名称().getKana());
+        被保険者Entity.setMeisho(shikibetsuTaisho.get名称().getName());
+        被保険者Entity.setSeinengappiYMD(shikibetsuTaisho.to個人().get生年月日().toFlexibleDate());
+        被保険者Entity.setSeibetsuCode(shikibetsuTaisho.to個人().get性別().getCode());
+        被保険者Entity.setSetaiCode(shikibetsuTaisho.to個人().get世帯コード());
+        被保険者Entity.setShikibetsuCode(shikibetsuTaisho.to個人().get識別コード());
+        被保険者Entity.setChikucodeTitle1(shikibetsuTaisho.to個人().get行政区画().getChiku1().get名称());
+        被保険者Entity.setChikuCode1(shikibetsuTaisho.to個人().get行政区画().getChiku1().getコード());
+        被保険者Entity.setChikucodeTitle2(shikibetsuTaisho.to個人().get行政区画().getChiku2().get名称());
+        被保険者Entity.setChikuCode2(shikibetsuTaisho.to個人().get行政区画().getChiku2().getコード());
+        被保険者Entity.setChikucodeTitle3(shikibetsuTaisho.to個人().get行政区画().getChiku3().get名称());
+        被保険者Entity.setChikuCode3(shikibetsuTaisho.to個人().get行政区画().getChiku3().getコード());
+        被保険者Entity.setJushoTitle(JUSHO_TITLE);
+        被保険者Entity.setJusho(new RString(shikibetsuTaisho.get住所().toString()));
+        被保険者Entity.setZenkokuJushoCode(shikibetsuTaisho.to個人().get住所().get全国住所コード());
+        被保険者Entity.setGyoseikuTitle(GYOSEIKU_TITLE);
+        被保険者Entity.setGyoseikuCode(shikibetsuTaisho.to個人().get行政区画().getGyoseiku().getコード());
+        被保険者Entity.setTelephoneNo1(shikibetsuTaisho.to個人().get連絡先１().value());
+        被保険者Entity.setTelephoneNo2(shikibetsuTaisho.to個人().get連絡先２().value());
         被保険者Entity.setSochiHokenshaTitle(SOCHIHOKENSHATITLE);
         被保険者Entity.setKyuHokenshaTitle(KYUHOKENSHATITLE);
         被保険者Entity.setState(get状態(entity));
@@ -187,7 +189,10 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
         }
         if (導入形態コード.equals(SHICHOSONCODE_111) || 導入形態コード.equals(SHICHOSONCODE_112)
                 || 導入形態コード.equals(SHICHOSONCODE_211)) {
-            shichosonMeisho = iIkkatsuSakuseiMapper.get市町村名称(pram).getShichosonMeisho();
+            HihokenshaEntity shichosonMeishoEntity = iIkkatsuSakuseiMapper.get市町村名称(pram);
+            if (shichosonMeishoEntity != null) {
+                shichosonMeisho = shichosonMeishoEntity.getShichosonMeisho();
+            }
         }
         return shichosonMeisho;
     }

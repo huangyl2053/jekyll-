@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
@@ -115,15 +116,19 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
             }
             removeListEntity.clear();
             for (NenreiToutatsuYoteishaCheckListEntity entity : nenreiToutatsuYoteishaCheckListEntity2) {
-                FlexibleDate 消除異動年月日 = FlexibleDate.EMPTY;
-                AgeCalculator ageCalculator = new AgeCalculator(DateOfBirthFactory
-                        .createInstance(entity.getSeinengappiYMD()), JuminJotai.未定義, 消除異動年月日);
-                FlexibleDate 年齢到達日 = ageCalculator.get年齢到達日(NENREI_TOUTATSU);
-                entity.setNenreiyotainichi(年齢到達日);
-                // QA489 年齢到達日がnullの場合
-                if (processParameter.getKonkaisyuryo().isBefore(年齢到達日)
-                        || (年齢到達日.isBefore(processParameter.getKonkaikaishi()))) {
+                if (entity.getSeinengappiYMD() == null || entity.getSeinengappiYMD().isEmpty()) {
                     removeListEntity.add(entity);
+                } else {
+                    FlexibleDate 消除異動年月日 = FlexibleDate.EMPTY;
+                    AgeCalculator ageCalculator = new AgeCalculator(DateOfBirthFactory
+                            .createInstance(entity.getSeinengappiYMD()), JuminJotai.未定義, 消除異動年月日, AgeArrivalDay.前日);
+                    FlexibleDate 年齢到達日 = ageCalculator.get年齢到達日(NENREI_TOUTATSU);
+                    entity.setNenreiyotainichi(年齢到達日);
+                    // QA489 年齢到達日がnullの場合
+                    if (processParameter.getKonkaisyuryo().isBefore(年齢到達日)
+                            || (年齢到達日.isBefore(processParameter.getKonkaikaishi()))) {
+                        removeListEntity.add(entity);
+                    }
                 }
             }
             nenreiToutatsuYoteishaCheckListEntity2.removeAll(removeListEntity);

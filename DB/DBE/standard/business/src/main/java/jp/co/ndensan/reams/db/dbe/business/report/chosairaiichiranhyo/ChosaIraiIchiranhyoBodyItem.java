@@ -16,60 +16,60 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ChosaIraiIchiranhyoBodyItem {
 
-    private final RString listIchiranhyo_1;
-    private final RString listIchiranhyo_2;
-    private final RString listIchiranhyo_3;
-    private final RString listIchiranhyo_4;
-    private final RString listIchiranhyo_5;
-    private final RString listIchiranhyo_6;
-    private final RString listIchiranhyo_7;
-    private final RString listIchiranhyo_8;
-    private final RString listIchiranhyo_9;
-    private final RString listIchiranhyo_10;
-    private final RString listIchiranhyo_11;
-    private final RString listIchiranhyo_12;
+    private final RString no;
+    private final RString tyousayinnmeyi;
+    private final RString hihokennsyabanngou;
+    private final RString sinnseyibi;
+    private final RString sinnseyikubunn;
+    private final RString hihokennsyameyi;
+    private final RString hihokennsyameyikaya;
+    private final RString seyibetu;
+    private final RString birthYMD;
+    private final RString jyuusyo;
+    private final RString telNo;
+    private final RString teyisyukigenn;
 
     /**
      * インスタンスを生成します。
      *
-     * @param listIchiranhyo_1 No.
-     * @param listIchiranhyo_2 調査員名
-     * @param listIchiranhyo_3 被保険者番号
-     * @param listIchiranhyo_4 申請日
-     * @param listIchiranhyo_5 申請区分
-     * @param listIchiranhyo_6 被保険者名
-     * @param listIchiranhyo_7 被保険者名(カナ)
-     * @param listIchiranhyo_8 性別
-     * @param listIchiranhyo_9 生年月日
-     * @param listIchiranhyo_10 住所
-     * @param listIchiranhyo_11 電話番号
-     * @param listIchiranhyo_12 提出期限
+     * @param no No.
+     * @param tyousayinnmeyi 調査員名
+     * @param hihokennsyabanngou 被保険者番号
+     * @param sinnseyibi 申請日
+     * @param sinnseyikubunn 申請区分
+     * @param hihokennsyameyi 被保険者名
+     * @param hihokennsyameyikaya 被保険者名(カナ)
+     * @param seyibetu 性別
+     * @param birthYMD 生年月日
+     * @param jyuusyo 住所
+     * @param telNo 電話番号
+     * @param teyisyukigenn 提出期限
      */
     public ChosaIraiIchiranhyoBodyItem(
-            RString listIchiranhyo_1,
-            RString listIchiranhyo_2,
-            RString listIchiranhyo_3,
-            RString listIchiranhyo_4,
-            RString listIchiranhyo_5,
-            RString listIchiranhyo_6,
-            RString listIchiranhyo_7,
-            RString listIchiranhyo_8,
-            RString listIchiranhyo_9,
-            RString listIchiranhyo_10,
-            RString listIchiranhyo_11,
-            RString listIchiranhyo_12) {
-        this.listIchiranhyo_1 = listIchiranhyo_1;
-        this.listIchiranhyo_2 = listIchiranhyo_2;
-        this.listIchiranhyo_3 = listIchiranhyo_3;
-        this.listIchiranhyo_4 = listIchiranhyo_4;
-        this.listIchiranhyo_5 = listIchiranhyo_5;
-        this.listIchiranhyo_6 = listIchiranhyo_6;
-        this.listIchiranhyo_7 = listIchiranhyo_7;
-        this.listIchiranhyo_8 = listIchiranhyo_8;
-        this.listIchiranhyo_9 = listIchiranhyo_9;
-        this.listIchiranhyo_10 = listIchiranhyo_10;
-        this.listIchiranhyo_11 = listIchiranhyo_11;
-        this.listIchiranhyo_12 = listIchiranhyo_12;
+            RString no,
+            RString tyousayinnmeyi,
+            RString hihokennsyabanngou,
+            RString sinnseyibi,
+            RString sinnseyikubunn,
+            RString hihokennsyameyi,
+            RString hihokennsyameyikaya,
+            RString seyibetu,
+            RString birthYMD,
+            RString jyuusyo,
+            RString telNo,
+            RString teyisyukigenn) {
+        this.no = no;
+        this.tyousayinnmeyi = tyousayinnmeyi;
+        this.hihokennsyabanngou = hihokennsyabanngou;
+        this.sinnseyibi = sinnseyibi;
+        this.sinnseyikubunn = sinnseyikubunn;
+        this.hihokennsyameyi = hihokennsyameyi;
+        this.hihokennsyameyikaya = hihokennsyameyikaya;
+        this.seyibetu = seyibetu;
+        this.birthYMD = birthYMD;
+        this.jyuusyo = jyuusyo;
+        this.telNo = telNo;
+        this.teyisyukigenn = teyisyukigenn;
     }
 
 }

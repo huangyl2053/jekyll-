@@ -39,26 +39,51 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<KyokaisogGaitoshaRelateEntity> {
 
+    private static final RString 取得モード_1 = new RString("1");
+    private static final RString 取得モード_2 = new RString("2");
+    private static final RString 取得モード_3 = new RString("2");
+    private static final RString 境界層該当申請日名称 = new RString("1");
+    private static final RString 境界層該当開始日名称 = new RString("2");
+    private static final RString 境界層該当終了日名称 = new RString("3");
+    private static final RString 登録されて = new RString("1");
+    private static final RString 出力条件_基準日 = new RString("【抽出条件】 基準日で抽出");
+    private static final RString 出力条件_範囲 = new RString("【抽出条件】 範囲で抽出");
+    private static final RString 出力条件_指定無し = new RString("指定無し");
+    private static final RString 境界層該当申請日 = new RString("境界層該当申請日");
+    private static final RString 境界層該当開始日 = new RString("境界層該当開始日");
+    private static final RString 境界層該当終了日 = new RString("境界層該当終了日");
+    private static final RString 時点での境界層登録者 = new RString("時点での境界層登録者");
+    private static final RString 標準負担額 = new RString("標準負担額の減額情報が登録されている情報");
+    private static final RString 給付額減額記載解除 = new RString("給付額減額記載解除情報が登録されている情報");
+    private static final RString 特定介護サービス居住費 = new RString("特定介護サービス居住費等負担額の減額情報が登録されている情報");
+    private static final RString 特定介護サービス食費負 = new RString("特定介護サービス食費負担額の減額情報が登録されている情報");
+    private static final RString 高額介護サービス費世帯 = new RString("高額介護サービス費世帯上限額の減額情報が登録されている情報");
+    private static final RString 保険料額 = new RString("保険料額の低減適用情報が登録されている情報");
+    private static final RString 出力条件_が = new RString("が");
+    private static final RString 出力条件_ = new RString("～");
+    private static final RString 境界層管理マスタリスト = new RString("境界層管理マスタリスト");
+    private static final RString なし = new RString("なし");
+    private static final RString Empty = new RString("Empty");
+    private static final RString 帳票ID = new RString("DBA200005_KyokaisoKanriMasterList");
+    private static final RString 境界層該当内容 = new RString("【境界層該当内容】　");
     private static final ReportId ID = new ReportId("DBA200005_KyokaisoKanriMasterList");
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbu.persistence.db.basic.mapper.kyokaisogaitosha.IKyokaisoGaitoshaMapper.getKyokaisoKanriMasterList");
+            "jp.co.ndensan.reams.db.dbu.persistence.db.basic.mapper.kyokaisogaitosha.IKkyokaisoGaitoshaMapper.getKyokaisoKanriMasterList");
     private List<ReportOutputJokenhyoItem> lists;
     List<KyokaisogGaitoshaRelateEntity> daichoJohoList = new ArrayList<>();
     private KyokaisogGaitoshaListEntity kyokaisokanrimasterList;
     private KyokaisoGaitoshaProcessParameter parameter;
     private KyokaisoKanriMasterListChohyoDataSakuseiEntity dataSakuseiEntity;
     ReportOutputJokenhyoItem hyoItem;
-//TODO 客户没有提供
+// TODO 境界層管理マスタリストフォームあります。　帳票は3/25纳品
 //    @BatchWriter
 //    private BatchReportWriter<CKyokaisoKanriMasterReportSource> batchReportWriter;
 //    private ReportSourceWriter<CKyokaisoKanriMasterReportSource> reportSourceWriter;
 
     @Override
     protected void initialize() {
-
         lists = new ArrayList<>();
         kyokaisokanrimasterList = new KyokaisogGaitoshaListEntity();
-
     }
 
     @Override
@@ -85,100 +110,102 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
 
     @Override
     protected void createWriter() {
-        //TODO 发行账票 客户方3月25号纳品。没有提供
+        // TODO 境界層管理マスタリストフォームあります。　帳票は3/25纳品
 //        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value()).create();
 //        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
     @Override
     protected void process(KyokaisogGaitoshaRelateEntity entity) {
-        //TODO  发行账票 客户方3月25号纳品。没有提供
-        // TODO  QA377 AccessLogの実装方式
-//        PersonalData personalData = toPersonalData(KyokaisogGaitoshaRelateEntity);
+//         TODO  境界層管理マスタリストフォームあります。　帳票は3/25纳品
+//         TODO  QA377 AccessLogの実装方式
+        paramte();
+//       PersonalData personalData = toPersonalData(KyokaisogGaitoshaRelateEntity);
 //        AccessLogger.log(AccessLogType.照会, KyokaisogGaitoshaRelateEntity);
-        //OutputJokenhyoFactory();
 //        KyokaisoKanriMasterListChohyoDataSakusei chohyoDataSakusei = new KyokaisoKanriMasterListChohyoDataSakusei();
-//         chohyoDataSakusei.getcreateNenreiToutatsuYoteishaCheckListChohyo(kyokaisokanrimasterList);
+//        chohyoDataSakusei.getcreateNenreiToutatsuYoteishaCheckListChohyo(kyokaisokanrimasterList);
         daichoJohoList.add(entity);
     }
 
-    private void paramte(KyokaisogGaitoshaListEntity entity) {
+    private void paramte() {
         IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
         kyokaisokanrimasterList.set市町村コード(association.get地方公共団体コード().getColumnValue());
         kyokaisokanrimasterList.set市町村名(association.get市町村名());
-        //TODO QA#73393 改頁 ,並び順取得。
-        entity.set並び順(parameter.toKyokaisoGaitoshaMybatisParameter().getOrder_ID());
-        entity.set改頁(parameter.toKyokaisoGaitoshaMybatisParameter().getOrder_ID());
-        entity.setKyokaisokanrimasterList(daichoJohoList);
-
+        // TODO QA #73393 出力順ID実装方式 回復待ち
+        kyokaisokanrimasterList.set並び順(parameter.toKyokaisoGaitoshaMybatisParameter().getOrder_ID());
+        kyokaisokanrimasterList.set改頁(parameter.toKyokaisoGaitoshaMybatisParameter().getOrder_ID());
+        kyokaisokanrimasterList.setKyokaisokanrimasterList(daichoJohoList);
     }
 
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder nituliki = new RStringBuilder();
-        if (new RString("1").equals(parameter.toKyokaisoGaitoshaMybatisParameter().getMode())) {
-            nituliki.append(new RString("【抽出条件】 範囲で抽出　"));
+        if ((取得モード_1).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getMode())) {
+            nituliki.append((出力条件_基準日));
             nituliki.append(parameter.toKyokaisoGaitoshaMybatisParameter().getDate_FROM()
                     .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            nituliki.append("時点での境界層登録者");
+            nituliki.append(時点での境界層登録者);
             出力条件.add(nituliki.toRString());
         }
-
-        if (new RString("2").equals(parameter.toKyokaisoGaitoshaMybatisParameter().getMode())) {
-            nituliki.append(new RString("【抽出条件】 範囲で抽出　"));
-            if (new RString("1").equals(parameter.toKyokaisoGaitoshaMybatisParameter().getRange())) {
-                nituliki.append("境界層該当申請日");
+        if ((取得モード_2).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getMode())) {
+            nituliki = new RStringBuilder();
+            nituliki.append((出力条件_範囲));
+            if ((境界層該当申請日名称).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getRange())) {
+                nituliki.append(境界層該当申請日);
             }
-            if (new RString("2").equals(parameter.toKyokaisoGaitoshaMybatisParameter().getRange())) {
-                nituliki.append("境界層該当開始日");
+            if ((境界層該当開始日名称).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getRange())) {
+                nituliki.append(境界層該当開始日);
             }
-            if (new RString("3").equals(parameter.toKyokaisoGaitoshaMybatisParameter().getRange())) {
-                nituliki.append("境界層該当終了日");
+            if ((境界層該当終了日名称).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getRange())) {
+                nituliki.append(境界層該当終了日);
             }
-            nituliki.append(new RString("が"));
+            nituliki.append((出力条件_が));
             nituliki.append(parameter.toKyokaisoGaitoshaMybatisParameter().getDate_FROM()
                     .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            nituliki.append(new RString("～"));
+            nituliki.append((出力条件_));
             nituliki.append(parameter.toKyokaisoGaitoshaMybatisParameter().getDate_TO()
                     .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             出力条件.add(nituliki.toRString());
         }
-        if (new RString("3").equals(parameter.toKyokaisoGaitoshaMybatisParameter().getMode())) {
-            nituliki.append(new RString("指定無し"));
+        if ((取得モード_3).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getMode())) {
+            nituliki = new RStringBuilder();
+            nituliki.append((出力条件_指定無し));
             出力条件.add(nituliki.toRString());
         }
-        if (new RString("1").equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIshokenFlag())) {
-            出力条件.add(new RString("給付額減額記載解除情報が登録されている情報"));
+        if ((登録されて).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIshokenFlag())) {
+            出力条件.add((給付額減額記載解除));
         }
-        if (new RString("1").equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIshyojunFutanFlag())) {
-            出力条件.add(new RString("標準負担額の減額情報が登録されている情報"));
+        if ((登録されて).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIshyojunFutanFlag())) {
+            出力条件.add((標準負担額));
         }
-        if (new RString("1").equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIskogakuFlag())) {
-            出力条件.add(new RString("特定介護サービス居住費等負担額の減額情報が登録されている情報"));
+        if ((登録されて).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIskogakuFlag())) {
+            出力条件.add((特定介護サービス居住費));
         }
-        if (new RString("1").equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIskyojuhinadoFutangFlag())) {
-            出力条件.add(new RString("特定介護サービス食費負担額の減額情報が登録されている情報"));
+        if ((登録されて).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIskyojuhinadoFutangFlag())) {
+            出力条件.add((特定介護サービス食費負));
         }
-        if (new RString("1").equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIskyuufugakuFlag())) {
-            出力条件.add(new RString("高額介護サービス費世帯上限額の減額情報が登録されている情報"));
+        if ((登録されて).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIskyuufugakuFlag())) {
+            出力条件.add((高額介護サービス費世帯));
         }
-        if (new RString("1").equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIsshokuhiKeiFlag())) {
-            出力条件.add(new RString("保険料額の低減適用情報が登録されている情報"));
+        if ((登録されて).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIsshokuhiKeiFlag())) {
+            出力条件.add((保険料額));
         }
+        出力条件.set(0, 境界層該当内容.concat(出力条件.get(0)));
         return 出力条件;
     }
 
     private void outputJokenhyoFactory() {
-        hyoItem = new ReportOutputJokenhyoItem(new RString("DBA200005_KyokaisoKanriMasterList"),
-                new RString("境界層管理マスタリスト"), kyokaisokanrimasterList.get市町村コード(), kyokaisokanrimasterList.get市町村名(),
+        hyoItem = new ReportOutputJokenhyoItem((帳票ID),
+                (境界層管理マスタリスト), kyokaisokanrimasterList.get市町村コード(), kyokaisokanrimasterList.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                dataSakuseiEntity.getページ数(), new RString("なし"), new RString("Empty"), contribute());
+                dataSakuseiEntity.getページ数(), (なし), (Empty), contribute());
     }
 
     @Override
     protected void afterExecute() {
+        outputJokenhyoFactory();
     }
 }

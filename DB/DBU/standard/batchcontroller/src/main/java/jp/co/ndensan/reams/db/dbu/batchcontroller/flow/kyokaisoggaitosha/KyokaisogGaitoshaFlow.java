@@ -25,9 +25,9 @@ public class KyokaisogGaitoshaFlow extends BatchFlowBase<KyokaisoKanriMasterList
     }
 
     /**
-     * kyokaisogGaitoshaReportProcess。
+     * 帳票出力パラメータの取得です。
      *
-     * @return KyokaisogGaitoshaReportPageBreakProcesss
+     * @return 帳票出力パラメータ
      */
     @Step(KYOKAISOG_REPORT_PROCESS)
     protected IBatchFlowCommand kyokaisogGaitoshaReportProcess() {

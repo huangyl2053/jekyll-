@@ -7,11 +7,13 @@ package jp.co.ndensan.reams.db.dbz.service.core.ninteichosairaishokai;
 
 import java.util.ArrayList;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosairaishokai.NinteiChosaIraiShokaiMaster;
 import jp.co.ndensan.reams.db.dbz.definition.param.ninteichosairaishokai.NinteiChosaIraiShokaiParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.ninteichosairaishokai.NinteiChosaIraiShokaiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ninteichosairaishokai.INinteiChosaIraiShokaiMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -20,14 +22,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * 認定調査情報を取得するのクラスです。
  */
-public class NinteiChosaIraiShokaiManager {
+public class NinteiChosaIraiShokaiFinder {
 
     private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
      */
-    NinteiChosaIraiShokaiManager() {
+    NinteiChosaIraiShokaiFinder() {
         mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
@@ -35,7 +37,7 @@ public class NinteiChosaIraiShokaiManager {
      * テスト用コンストラクタです。
      *
      */
-    NinteiChosaIraiShokaiManager(MapperProvider mapperProvider) {
+    NinteiChosaIraiShokaiFinder(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
     }
 
@@ -45,21 +47,21 @@ public class NinteiChosaIraiShokaiManager {
      * @return NinteiChosaIraiShokaiManager
      *
      */
-    public static NinteiChosaIraiShokaiManager createInstance() {
-        return InstanceProvider.create(NinteiChosaIraiShokaiManager.class);
+    public static NinteiChosaIraiShokaiFinder createInstance() {
+        return InstanceProvider.create(NinteiChosaIraiShokaiFinder.class);
     }
 
     /**
      * 認定調査情報を取得の処理です。
      *
      * @param 被保険者番号 被保険者番号
-     * @return SearchResult<NinteiChosaIraiShokaiMaster>
+     * @return SearchResult<NinteiChosaIraiShokaiMaster> 認定調査情報
      */
     public SearchResult<NinteiChosaIraiShokaiMaster> getNinteiChousaJouhou(RString 被保険者番号) {
-        NinteiChosaIraiShokaiParameter parament = NinteiChosaIraiShokaiParameter.createParam(被保険者番号);
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        NinteiChosaIraiShokaiParameter parameter = NinteiChosaIraiShokaiParameter.createParam(被保険者番号);
         INinteiChosaIraiShokaiMapper mapper = mapperProvider.create(INinteiChosaIraiShokaiMapper.class);
-        List<NinteiChosaIraiShokaiRelateEntity> entityList = mapper.get認定調査情報(parament);
-
+        List<NinteiChosaIraiShokaiRelateEntity> entityList = mapper.get認定調査情報(parameter);
         List<NinteiChosaIraiShokaiMaster> shokaiMaster = new ArrayList<>();
         for (NinteiChosaIraiShokaiRelateEntity entity : entityList) {
             shokaiMaster.add(new NinteiChosaIraiShokaiMaster(entity));

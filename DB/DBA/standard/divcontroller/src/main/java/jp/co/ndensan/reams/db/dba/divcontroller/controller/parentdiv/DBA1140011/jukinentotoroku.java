@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1140011
 import jp.co.ndensan.reams.db.dba.business.core.jukinentotoroku.DbT7022ShoriDateKanriBusiness;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.BatchParamterInfoDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.DBA1140011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.jukinentotorokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1140011.JukinenTotorokuValidationHandler;
 import jp.co.ndensan.reams.db.dba.service.jukirendotorokushalist.JukiRendoTorokushaListFinder;
@@ -104,7 +105,7 @@ public class jukinentotoroku {
                 div.getTxtkonkaishuryo().getValue(),
                 div.getChktaishodaicho().getSelectedKeys(),
                 RString.EMPTY);
-        return ResponseData.of(parameter).respond();
+        return ResponseData.of(parameter).forwardWithEventName(DBA1140011TransitionEventName.処理終了).respond();
     }
 
     private JukinenTotorokuValidationHandler getValidationHandler(jukinentotorokuDiv div) {
