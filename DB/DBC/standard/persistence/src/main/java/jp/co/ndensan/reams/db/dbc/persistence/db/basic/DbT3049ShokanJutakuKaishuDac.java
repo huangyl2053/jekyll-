@@ -121,6 +121,7 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
     public List<DbT3049ShokanJutakuKaishuEntity> getJyutakukaisyuList(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号, RString 様式番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        // QA289 テーブル「償還払請求住宅改修」に項目「順次番号」と「処理日時」が存在しません
         return accessor.select().table(DbT3049ShokanJutakuKaishu.class).
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
