@@ -12,6 +12,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dba.business.core.jushochitokurei.tashichosonjushochitokurei.TashichosonJushochiTokurei;
+import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMaster;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.jushochitokurei.tashichosonjushochitokurei.TashichosonJushochiTokureiMapperParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.TaJushochiTokureisyaKan.TaJushochiTokureisyaKanGamenRirelateEntity;
@@ -22,6 +23,8 @@ import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokurei
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dba.service.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaishoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
@@ -38,7 +41,6 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -146,36 +148,45 @@ public class TashichosonJushochiTokureiManager {
     /**
      * 適用情報リストを取得します。
      *
-     * @param 識別コード ShikibetsuCode
-     * @param 適用情報リスト 適用情報リスト
+     * @param 識別コード 識別コード
+     * @return 適用情報リスト 適用情報リスト
      */
-    public SearchResult<TaJushochiTokureisyaKanRirelateEntity> get適用情報リスト(ShikibetsuCode 識別コード, RString 他市町村住所地特例者) {
-        ITaJushochiTokureisyaKanriMapper mapper = InstanceProvider.create(ITaJushochiTokureisyaKanriMapper.class);
-        List<TaJushochiTokureisyaKanRirelateEntity> 他市町村住所地特例情報リスト
-                = mapper.selct他市町村住所地特例(TaJushochiTokureisyaKanriParameter.createParamBy他住所地特例者管理(
-                                識別コード, 他市町村住所地特例者, RString.EMPTY, JigyoshaNo.EMPTY, RString.EMPTY));
+    public SearchResult<TaJushochiTokureisyaKanriMaster> get適用情報リスト(ShikibetsuCode 識別コード) {
+        ITaJushochiTokureisyaKanriMapper mapper = mapperProvider.create(ITaJushochiTokureisyaKanriMapper.class);
+        TaJushochiTokureisyaKanriParameter parameter
+                = TaJushochiTokureisyaKanriParameter.createParamBy他住所地特例者管理(
+                        識別コード, DaichoType.他市町村住所地特例者.getCode(),
+                        RString.EMPTY, JigyoshaNo.EMPTY, RString.EMPTY);
+        List<TaJushochiTokureisyaKanRirelateEntity> 他市町村住所地特例情報リスト = mapper.selct他市町村住所地特例(parameter);
         List<TaJushochiTokureisyaKanRirelateEntity> 適用情報リスト = new ArrayList<>();
+        List<TaJushochiTokureisyaKanriMaster> syaKanriMaster = new ArrayList<>();
         for (TaJushochiTokureisyaKanRirelateEntity 他市町村住所地特例情報 : 他市町村住所地特例情報リスト) {
 
-            RString 介護保険施設 = ShisetsuType.介護保険施設.get名称();
-            RString 住所地特例対象施設 = ShisetsuType.住所地特例対象施設.get名称();
+            RString 介護保険施設 = ShisetsuType.介護保険施設.getコード();
+            RString 住所地特例対象施設 = ShisetsuType.住所地特例対象施設.getコード();
             if (介護保険施設.equals(他市町村住所地特例情報.getNyushoShisetsuShurui())) {
-                AtenaMeisho 事業者名称
-                        = mapper.get事業者名称_介護保険施設(TaJushochiTokureisyaKanriParameter.createParamBy他住所地特例者管理(
-                                        ShikibetsuCode.EMPTY, RString.EMPTY, RString.EMPTY, 他市町村住所地特例情報.getNyushoShisetsuCode(), RString.EMPTY));
-                他市町村住所地特例情報.setJigyoshaName(事業者名称);
+                TaJushochiTokureisyaKanriParameter iParameter
+                        = TaJushochiTokureisyaKanriParameter.createParamBy他住所地特例者管理(
+                                ShikibetsuCode.EMPTY, RString.EMPTY, RString.EMPTY, 他市町村住所地特例情報.getNyushoShisetsuCode(), RString.EMPTY);
+                TaJushochiTokureisyaKanRirelateEntity 事業者名称 = mapper.get事業者名称_介護保険施設(iParameter);
+                if (事業者名称 != null) {
+                    他市町村住所地特例情報.setJigyoshaName(事業者名称.getJigyoshaName());
+                }
                 適用情報リスト.add(他市町村住所地特例情報);
             }
             if (住所地特例対象施設.equals(他市町村住所地特例情報.getNyushoShisetsuShurui())) {
-                AtenaMeisho 事業者名称
-                        = mapper.get事業者名称_住所地特例対象施設(TaJushochiTokureisyaKanriParameter.createParamBy他住所地特例者管理(
-                                        ShikibetsuCode.EMPTY, RString.EMPTY, RString.EMPTY, 他市町村住所地特例情報.getNyushoShisetsuCode(), 住所地特例対象施設));
-                他市町村住所地特例情報.setJigyoshaName(事業者名称);
+                RString 事業者種別 = JigyosyaType.住所地特例対象施設.getコード();
+                TaJushochiTokureisyaKanriParameter iParameter = TaJushochiTokureisyaKanriParameter.createParamBy他住所地特例者管理(
+                        ShikibetsuCode.EMPTY, RString.EMPTY, RString.EMPTY, 他市町村住所地特例情報.getNyushoShisetsuCode(), 事業者種別);
+                TaJushochiTokureisyaKanRirelateEntity 事業者名称 = mapper.get事業者名称_住所地特例対象施設(iParameter);
+                if (事業者名称 != null) {
+                    他市町村住所地特例情報.setJigyoshaName(事業者名称.getJigyoshaName());
+                }
                 適用情報リスト.add(他市町村住所地特例情報);
             }
         }
-        if (適用情報リスト
-                != null && !適用情報リスト.isEmpty()) {
+
+        if (適用情報リスト != null && !適用情報リスト.isEmpty()) {
             List<TaJushochiTokureisyaKanRirelateEntity> list = new ArrayList<>();
             for (TaJushochiTokureisyaKanRirelateEntity 適用情報 : 適用情報リスト) {
                 FlexibleDate 退所日 = 適用情報.getTaishoYMD();
@@ -186,9 +197,15 @@ public class TashichosonJushochiTokureiManager {
                     list.add(適用情報リスト.get(0));
                 }
             }
-            return SearchResult.of(list, 0, false);
+            for (TaJushochiTokureisyaKanRirelateEntity listEntity : list) {
+                syaKanriMaster.add(new TaJushochiTokureisyaKanriMaster(listEntity));
+            }
+            return SearchResult.of(syaKanriMaster, 0, false);
         } else {
-            return SearchResult.of(Collections.<TaJushochiTokureisyaKanRirelateEntity>emptyList(), 0, false);
+            for (TaJushochiTokureisyaKanRirelateEntity entityList : 適用情報リスト) {
+                syaKanriMaster.add(new TaJushochiTokureisyaKanriMaster(entityList));
+            }
+            return SearchResult.of(syaKanriMaster, 0, false);
         }
     }
 
@@ -197,6 +214,7 @@ public class TashichosonJushochiTokureiManager {
      *
      * @param 識別コード ShikibetsuCode
      * @param 他市町村住所地特例リスト 他住所地特例共有子DIVのDivController
+     * @return 戻る_件数
      */
     @Transaction
     public int saveTaJushochiTokurei(List<TaJushochiTokureisyaKanGamenRirelateEntity> 他市町村住所地特例リスト, ShikibetsuCode 識別コード) {
@@ -213,7 +231,10 @@ public class TashichosonJushochiTokureiManager {
             if (状態_追加.equals(他市町村住所地特例.getJoutai())) {
                 dbT1003Entity.setShikibetsuCode(他市町村住所地特例.getShikibetsuCode());
                 dbT1003Entity.setIdoYMD(他市町村住所地特例.getIdoYMD());
-                dbT1003Entity.setEdaNo(他市町村住所地特例.getEdaNo());
+                // 該当識別コードと異動日に対応する最大枝番＋１
+                String edaNoMax = 他市町村住所地特例Dac.selectEdaNoMax().toString();
+                dbT1003Entity.setEdaNo(new RString(String.valueOf(Integer.parseInt(edaNoMax) + 1)));
+
                 if (他市町村住所地特例.getKaijoYMD().isEmpty()) {
                     dbT1003Entity.setIdoJiyuCode(他市町村住所地特例.getTekiyouZiyuuCode());
                 } else {
@@ -239,7 +260,10 @@ public class TashichosonJushochiTokureiManager {
             } else if (状態_修正.equals(他市町村住所地特例.getJoutai())) {
                 dbT1003Entity.setShikibetsuCode(他市町村住所地特例.getShikibetsuCode());
                 dbT1003Entity.setIdoYMD(他市町村住所地特例.getIdoYMD());
-                dbT1003Entity.setEdaNo(他市町村住所地特例.getEdaNo());
+                // 該当識別コードと異動日に対応する最大枝番＋１
+                String edaNoMax = 他市町村住所地特例Dac.selectEdaNoMax().toString();
+                dbT1003Entity.setEdaNo(new RString(String.valueOf(Integer.parseInt(edaNoMax) + 1)));
+
                 dbT1003Entity.setIdoJiyuCode(他市町村住所地特例.getIdoJiyuCode());
                 dbT1003Entity.setShichosonCode(他市町村住所地特例.getShichosonCode());
                 dbT1003Entity.setTekiyoJiyuCode(他市町村住所地特例.getTekiyoJiyuCode());
@@ -270,6 +294,10 @@ public class TashichosonJushochiTokureiManager {
             } else if (状態_適用.equals(他市町村住所地特例.getJoutai())) {
                 dbT1003Entity.setShikibetsuCode(他市町村住所地特例.getShikibetsuCode());
                 dbT1003Entity.setIdoYMD(他市町村住所地特例.getIdoYMD());
+                // 該当識別コードと異動日に対応する最大枝番＋１
+                String edaNoMax = 他市町村住所地特例Dac.selectEdaNoMax().toString();
+                dbT1003Entity.setEdaNo(new RString(String.valueOf(Integer.parseInt(edaNoMax) + 1)));
+
                 dbT1003Entity.setEdaNo(他市町村住所地特例.getEdaNo());
                 dbT1003Entity.setIdoJiyuCode(他市町村住所地特例.getIdoJiyuCode());
                 dbT1003Entity.setShichosonCode(他市町村住所地特例.getShichosonCode());
@@ -317,7 +345,10 @@ public class TashichosonJushochiTokureiManager {
                 boolean チェック結果 = false;
                 dbT1003Entity.setShikibetsuCode(他市町村住所地特例.getShikibetsuCode());
                 dbT1003Entity.setIdoYMD(他市町村住所地特例.getIdoYMD());
-                dbT1003Entity.setEdaNo(他市町村住所地特例.getEdaNo());
+                // 該当識別コードと異動日に対応する最大枝番＋１
+                String edaNoMax = 他市町村住所地特例Dac.selectEdaNoMax().toString();
+                dbT1003Entity.setEdaNo(new RString(String.valueOf(Integer.parseInt(edaNoMax) + 1)));
+
                 dbT1003Entity.setIdoJiyuCode(他市町村住所地特例.getIdoJiyuCode());
                 dbT1003Entity.setShichosonCode(他市町村住所地特例.getShichosonCode());
                 dbT1003Entity.setTekiyoJiyuCode(他市町村住所地特例.getTekiyoJiyuCode());
