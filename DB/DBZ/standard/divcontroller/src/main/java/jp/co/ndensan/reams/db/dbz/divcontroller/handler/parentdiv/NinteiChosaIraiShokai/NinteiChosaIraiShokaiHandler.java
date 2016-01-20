@@ -76,7 +76,7 @@ public class NinteiChosaIraiShokaiHandler {
 
     private RString get申請区分(RString 申請区分コード) {
         RString 申請区分 = RString.EMPTY;
-        // TODO DBDにここEnumクラスを存在しない、DBZにここEnumクラスを存在しない　2016/01/24。
+        // TODO QA524DBDにここEnumクラスを存在しない、DBZにここEnumクラスを存在しない　2016/01/24。
 //        List<KeyValueDataSource> dataSource = new ArrayList();
 //        for (NinteiShinseiShinseijiKubunCode seibetsu : NinteiShinseiShinseijiKubunCode.values()) {
 //
