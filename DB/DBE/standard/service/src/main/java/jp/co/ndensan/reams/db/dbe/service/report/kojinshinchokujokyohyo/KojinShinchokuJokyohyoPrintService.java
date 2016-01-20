@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.KojinSh
 import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoReportJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.ChousaBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.ShuiBodyItem;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.KojinShinchokuJokyohyo.KojinShinchokuJokyohyoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.KojinShinchokuJokyohyo.KojinShinchokuJokyohyoReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.kojinshinchokujokyohyo.KojinShinchokuJokyohyoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.kojinshinchokujokyohyo.KojinShinchokuJokyohyoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;

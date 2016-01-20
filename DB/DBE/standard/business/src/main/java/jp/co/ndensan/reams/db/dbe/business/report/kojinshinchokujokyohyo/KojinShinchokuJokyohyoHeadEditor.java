@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo;
 
-import jp.co.ndensan.reams.db.dbe.entity.report.source.KojinShinchokuJokyohyo.KojinShinchokuJokyohyoReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.kojinshinchokujokyohyo.KojinShinchokuJokyohyoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -22,6 +22,14 @@ import jp.co.ndensan.reams.uz.uza.lang.Wareki;
 class KojinShinchokuJokyohyoHeadEditor implements KojinShinchokuJokyohyoEditor {
 
     private final KojinShinchokuJokyohyoHeadItem item;
+    private final int 結束_位置3 = 3;
+    private final int 結束_位置4 = 4;
+    private final int 結束_位置5 = 5;
+    private final int 結束_位置6 = 6;
+    private final int 結束_位置7 = 7;
+    private final int 結束_位置8 = 8;
+    private final int 結束_位置9 = 9;
+    private final int 結束_位置10 = 10;
 
     /**
      * インスタンスを生成します。
@@ -59,19 +67,19 @@ class KojinShinchokuJokyohyoHeadEditor implements KojinShinchokuJokyohyoEditor {
         if (hihokenshaNo == null) {
             hihokenshaNo = RString.EMPTY;
         }
-        if (hihokenshaNo.length() < 10) {
-            hihokenshaNo = hihokenshaNo.padRight(RString.HALF_SPACE, 10);
+        if (hihokenshaNo.length() < 結束_位置10) {
+            hihokenshaNo = hihokenshaNo.padRight(RString.HALF_SPACE, 結束_位置10);
         }
         source.hihokenshaNo1 = hihokenshaNo.substring(0, 1);
         source.hihokenshaNo2 = hihokenshaNo.substring(1, 2);
-        source.hihokenshaNo3 = hihokenshaNo.substring(2, 3);
-        source.hihokenshaNo4 = hihokenshaNo.substring(3, 4);
-        source.hihokenshaNo5 = hihokenshaNo.substring(4, 5);
-        source.hihokenshaNo6 = hihokenshaNo.substring(5, 6);
-        source.hihokenshaNo7 = hihokenshaNo.substring(6, 7);
-        source.hihokenshaNo8 = hihokenshaNo.substring(7, 8);
-        source.hihokenshaNo9 = hihokenshaNo.substring(8, 9);
-        source.hihokenshaNo10 = hihokenshaNo.substring(9, 10);
+        source.hihokenshaNo3 = hihokenshaNo.substring(2, 結束_位置3);
+        source.hihokenshaNo4 = hihokenshaNo.substring(結束_位置3, 結束_位置4);
+        source.hihokenshaNo5 = hihokenshaNo.substring(結束_位置4, 結束_位置5);
+        source.hihokenshaNo6 = hihokenshaNo.substring(結束_位置5, 結束_位置6);
+        source.hihokenshaNo7 = hihokenshaNo.substring(結束_位置6, 結束_位置7);
+        source.hihokenshaNo8 = hihokenshaNo.substring(結束_位置7, 結束_位置8);
+        source.hihokenshaNo9 = hihokenshaNo.substring(結束_位置8, 結束_位置9);
+        source.hihokenshaNo10 = hihokenshaNo.substring(結束_位置9, 結束_位置10);
         source.shinseiKubun = item.getShinseiKubun();
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
         RStringBuilder shinseiYMD = new RStringBuilder();
