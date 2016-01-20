@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
+ * 抽出期間情報を設定です。
  *
- * @author lijia
  */
 public class ChushutsuKikanJohoData implements Serializable {
 
