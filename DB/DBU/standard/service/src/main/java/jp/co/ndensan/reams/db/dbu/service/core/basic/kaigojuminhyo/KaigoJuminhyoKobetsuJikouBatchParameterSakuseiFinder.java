@@ -35,6 +35,15 @@ public class KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder {
     }
 
     /**
+     * テスト用コンストラクタです。
+     *
+     * @param shoriDateKanriDac {@link shoriDateKanriDac}
+     */
+    KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder(DbT7022ShoriDateKanriDac shoriDateKanriDac) {
+        this.shoriDateKanriDac = shoriDateKanriDac;
+    }
+
+    /**
      * 介護住民票個別事項連携情報作成【他社住基】_バッチパラメータ作成するクラスを返します。
      *
      * @return 介護住民票個別事項連携情報作成【他社住基】_バッチパラメータ作成するクラス
