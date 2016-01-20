@@ -24,23 +24,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder {
 
-    private final DbT7022ShoriDateKanriDac dbT7022ShoriDateKanriDac;
+    private final DbT7022ShoriDateKanriDac shoriDateKanriDac;
     private YMDHMS taishoShuryoTimestamp;
 
     /**
      * コンストラクタです。
      */
     public KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder() {
-        dbT7022ShoriDateKanriDac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
-    }
-
-    /**
-     * テスト用コンストラクタです。
-     *
-     * @param dbT7022ShoriDateKanriDac {@link dbT7022ShoriDateKanriDac}
-     */
-    KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder(DbT7022ShoriDateKanriDac dbT7022ShoriDateKanriDac) {
-        this.dbT7022ShoriDateKanriDac = dbT7022ShoriDateKanriDac;
+        shoriDateKanriDac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     }
 
     /**
@@ -48,8 +39,8 @@ public class KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder {
      *
      * @return 介護住民票個別事項連携情報作成【他社住基】_バッチパラメータ作成するクラス
      */
-    public static KaigoJyuminhyouTashajukiCSVDataSakuseiFinder createInstance() {
-        return new KaigoJyuminhyouTashajukiCSVDataSakuseiFinder();
+    public static KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder createInstance() {
+        return new KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder();
     }
 
     /**
@@ -76,7 +67,7 @@ public class KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder {
      */
     @Transaction
     public ChushutsuKikanJohoData getChushutsukikanJoho() {
-        List<DbT7022ShoriDateKanriEntity> shoriDateKanriEntity = dbT7022ShoriDateKanriDac.selectChushutsukikan();
+        List<DbT7022ShoriDateKanriEntity> shoriDateKanriEntity = shoriDateKanriDac.selectChushutsukikan();
         ChushutsuKikanJohoData chushutsuKikanJohoData = null;
         if (shoriDateKanriEntity != null) {
             for (DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanriEntity : shoriDateKanriEntity) {
