@@ -245,7 +245,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
      * 市町村名を設定します。
      */
     public void setTxtShichosonmei() {
-    // TODO QA253　共通部品
+    // TODO QA388　共通部品
 //        UzT0007CodeEntity code = CodeMaster.getCode(
 //                SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(div.getChosainJohoInput().getTxtShichoson().getValue()));
 //        if (code != null) {
