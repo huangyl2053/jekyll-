@@ -53,12 +53,17 @@ public class NinteiChosaIraiShokaiHandler {
             row.setShinseiKubun(get申請区分(entity.getNinteiShinseiShinseijiKubunCode().getColumnValue()));
             row.setShinseiTorikeshiDate(日期フォマト(entity.getTorisageYMD()));
             row.setNinteiDate(日期フォマト(entity.getNijiHanteiYMD()));
-            row.setYokaigodo(get要介護度(entity.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue()));
+            RString 要介護度 = get要介護度(entity.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue());
+            if (new RString("なし").equals(要介護度)) {
+                row.setYokaigodo(new RString(""));
+            } else {
+                row.setYokaigodo(get要介護度(entity.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue()));
+            }
             row.setYukoKikan(new RString(Integer.toString(entity.getNijiHanteiNinteiYukoKikan()) + "ヶ月"));
             row.setNinteichosaItakusakiCode(entity.getNinteiChosaItakusakiCode().getColumnValue());
-            row.setNinteiChosainCode(entity.getChosainShimei());
+            row.setNinteiChosainCode(entity.getJigyoshaMeisho());
             row.setNinteiChosainName(entity.getNinteiChosainCode().getColumnValue());
-            row.setNinteichosaItakusakiName(entity.getJigyoshaMeisho());
+            row.setNinteichosaItakusakiName(entity.getChosainShimei());
             row.setRirekiNo(get履歴区分(entity.getNinteichosaIraiKubunCode().getColumnValue()));
             no = no + 1;
             rowList.add(row);
