@@ -57,48 +57,12 @@ public class NinteiChosaIraiShokaiMaster {
     }
 
     /**
-     * 二次判定年月日を取得します。
-     *
-     * @return 二次判定年月日
-     */
-    public ChosaItakusakiCode getNinteiChosaItakusakiCode() {
-        return entity.getNinteiChosaItakusakiCode();
-    }
-
-    /**
-     * 二次判定要介護状態区分コードを取得します。
-     *
-     * @return 二次判定要介護状態区分コード
-     */
-    public ChosainCode getNinteiChosainCode() {
-        return entity.getNinteiChosainCode();
-    }
-
-    /**
-     * 二次判定認定有効期間を取得します。
-     *
-     * @return 二次判定認定有効期間
-     */
-    public FlexibleDate getNijiHanteiYMD() {
-        return entity.getNijiHanteiYMD();
-    }
-
-    /**
-     * 事業者名称を取得します。
-     *
-     * @return 事業者名称
-     */
-    public Code getNijiHanteiYokaigoJotaiKubunCode() {
-        return entity.getNijiHanteiYokaigoJotaiKubunCode();
-    }
-
-    /**
      * 認定調査委託先コードを取得します。
      *
      * @return 認定調査委託先コード
      */
-    public int getNijiHanteiNinteiYukoKikan() {
-        return entity.getNijiHanteiNinteiYukoKikan();
+    public ChosaItakusakiCode getNinteiChosaItakusakiCode() {
+        return entity.getNinteiChosaItakusakiCode();
     }
 
     /**
@@ -106,23 +70,59 @@ public class NinteiChosaIraiShokaiMaster {
      *
      * @return 認定調査員コード
      */
-    public Code getNinteichosaIraiKubunCode() {
-        return entity.getNinteichosaIraiKubunCode();
+    public ChosainCode getNinteiChosainCode() {
+        return entity.getNinteiChosainCode();
     }
 
     /**
-     * 調査員氏名を取得します。
+     * 二次判定年月日を取得します。
      *
-     * @return 調査員氏名
+     * @return 二次判定年月日
      */
-    public RString getJigyoshaMeisho() {
-        return entity.getJigyoshaMeisho();
+    public FlexibleDate getNijiHanteiYMD() {
+        return entity.getNijiHanteiYMD();
+    }
+
+    /**
+     * 二次判定要介護状態区分コードを取得します。
+     *
+     * @return 二次判定要介護状態区分コード
+     */
+    public Code getNijiHanteiYokaigoJotaiKubunCode() {
+        return entity.getNijiHanteiYokaigoJotaiKubunCode();
+    }
+
+    /**
+     * 二次判定認定有効期間を取得します。
+     *
+     * @return 二次判定認定有効期間
+     */
+    public int getNijiHanteiNinteiYukoKikan() {
+        return entity.getNijiHanteiNinteiYukoKikan();
     }
 
     /**
      * 認定調査依頼区分コードを取得します。
      *
      * @return 認定調査依頼区分コード
+     */
+    public Code getNinteichosaIraiKubunCode() {
+        return entity.getNinteichosaIraiKubunCode();
+    }
+
+    /**
+     * 事業者名称を取得します。
+     *
+     * @return 事業者名称
+     */
+    public RString getJigyoshaMeisho() {
+        return entity.getJigyoshaMeisho();
+    }
+
+    /**
+     * 調査員氏名を取得します。
+     *
+     * @return 調査員氏名
      */
     public RString getChosainShimei() {
         return entity.getChosainShimei();
