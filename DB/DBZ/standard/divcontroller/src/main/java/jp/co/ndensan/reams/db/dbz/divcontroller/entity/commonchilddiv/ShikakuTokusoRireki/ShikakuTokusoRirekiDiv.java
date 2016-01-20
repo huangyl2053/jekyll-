@@ -18,7 +18,7 @@ import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GappeiJo
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GappeiJohoKubun.合併なし;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.kyotsutokei.ConfigKeysGappeiJohoKanri;
-import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
+//import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParameter;
 import jp.co.ndensan.reams.db.dbz.service.shikakutokuso.ShikakuTokusoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -390,7 +390,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             row.setShutokuTodokedeDate(資格取得届出日);
 
             try {
-                row.setHihokenshaKubun(ShikakuKubun.toValue(ShikakuTokuso.get被保険者区分コード()).get略称());
+//                row.setHihokenshaKubun(ShikakuKubun.toValue(ShikakuTokuso.get被保険者区分コード()).get略称());
             } catch (IllegalArgumentException e) {
                 row.setHihokenshaKubun(RString.EMPTY);
             }
