@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- * 認定調査スケジュール登録・認定調査スケジュール表(事務所)ヘッダのITEMです。
+ * 認定調査スケジュール表(事務所)ヘッダのITEMです。
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

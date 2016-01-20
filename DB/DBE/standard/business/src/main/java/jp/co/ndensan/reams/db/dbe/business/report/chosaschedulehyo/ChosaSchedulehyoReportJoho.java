@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.chosaschedulehyo;
 import java.util.List;
 
 /**
- * 認定調査スケジュール登録・認定調査スケジュール表(事務所)作成_帳票クラスパラメータクラスです。
+ * 認定調査スケジュール表(事務所)作成_帳票クラスパラメータクラスです。
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

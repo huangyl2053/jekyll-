@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.chosaschedulehyo;
 import lombok.Getter;
 
 /**
- * 認定調査スケジュール登録・認定調査スケジュール表(事務所)のITEMです。
+ * 認定調査スケジュール表(事務所)のITEMです。
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -20,13 +20,12 @@ public class ChosaSchedulehyoItem {
     /**
      * インスタンスを生成します。
      *
-     * @param headItem 認定調査スケジュール登録・認定調査スケジュール表(事務所)ヘッダのITEM
-     * @param bodyItem 認定調査スケジュール登録・認定調査スケジュール表(事務所)ボディのITEM
+     * @param headItem 認定調査スケジュール表(事務所)
+     * @param bodyItem 認定調査スケジュール表(事務所)
      */
     public ChosaSchedulehyoItem(
             ChosaSchedulehyoHeadItem headItem,
             ChosaSchedulehyoBodyItem bodyItem) {
-
         this.headItem = headItem;
         this.bodyItem = bodyItem;
     }

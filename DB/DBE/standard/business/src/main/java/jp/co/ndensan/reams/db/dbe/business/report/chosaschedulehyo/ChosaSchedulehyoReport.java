@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
- * 認定調査スケジュール登録・認定調査スケジュール表(事務所)のReportです。
+ * 認定調査スケジュール表(事務所)のReportです。
  */
 public class ChosaSchedulehyoReport extends Report<ChosaSchedulehyoReportSource> {
 
@@ -22,9 +22,9 @@ public class ChosaSchedulehyoReport extends Report<ChosaSchedulehyoReportSource>
     /**
      * インスタンスを生成します。
      *
-     * @param headItem 認定調査スケジュール登録・認定調査スケジュール表(事務所)ヘッダのITEM
-     * @param itemList 認定調査スケジュール登録・認定調査スケジュール表(事務所)ボディのITEMリスト
-     * @return 認定調査スケジュール登録・認定調査スケジュール表(事務所)のReport
+     * @param headItem 認定調査スケジュール表(事務所)ヘッダのITEM
+     * @param itemList 認定調査スケジュール表(事務所)ボディのITEMリスト
+     * @return 認定調査スケジュール表(事務所)のReport
      */
     public static ChosaSchedulehyoReport createFrom(
             ChosaSchedulehyoHeadItem headItem,
@@ -38,8 +38,8 @@ public class ChosaSchedulehyoReport extends Report<ChosaSchedulehyoReportSource>
     /**
      * インスタンスを生成します。
      *
-     * @param headItem 認定調査スケジュール登録・認定調査スケジュール表(事務所)ヘッダのITEM
-     * @param itemList 認定調査スケジュール登録・認定調査スケジュール表(事務所)のITEMリスト
+     * @param headItem 認定調査スケジュール表(事務所)ヘッダのITEM
+     * @param itemList 認定調査スケジュール表(事務所)のITEMリスト
      */
     protected ChosaSchedulehyoReport(
             ChosaSchedulehyoHeadItem headItem,
@@ -49,6 +49,10 @@ public class ChosaSchedulehyoReport extends Report<ChosaSchedulehyoReportSource>
         this.bodyItemList = itemList;
     }
 
+    /**
+     *
+     * @param reportSourceWriter
+     */
     @Override
     public void writeBy(ReportSourceWriter<ChosaSchedulehyoReportSource> reportSourceWriter) {
         for (ChosaSchedulehyoBodyItem bodyItem : bodyItemList) {

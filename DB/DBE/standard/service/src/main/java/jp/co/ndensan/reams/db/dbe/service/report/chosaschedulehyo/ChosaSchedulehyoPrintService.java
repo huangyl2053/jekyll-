@@ -15,14 +15,14 @@ import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
- * 認定調査スケジュール登録・認定調査スケジュール表(事務所)Printerです。
+ * 認定調査スケジュール表(事務所)Printerクラスです。
  */
 public class ChosaSchedulehyoPrintService {
 
     /**
-     * 認定調査スケジュール登録・認定調査スケジュール表(事務所)を印刷します。
+     * 認定調査スケジュール表(事務所)を印刷します。
      *
-     * @param reportJoho 認定調査スケジュール登録・認定調査スケジュール表(事務所)作成_帳票クラスパラメータクラス
+     * @param reportJoho 認定調査スケジュール表(事務所)作成_帳票パラメータクラス。
      * @return {@link ChosaSchedulehyoReport}
      */
     public SourceDataCollection print(ChosaSchedulehyoReportJoho reportJoho) {

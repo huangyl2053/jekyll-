@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.chosaschedulehyo.ChosaSchedulehy
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 認定調査スケジュール登録・認定調査スケジュール表(事務所)Builderクラスです。
+ * 認定調査スケジュール表(事務所)Builderクラスです。
  */
 class ChosaSchedulehyoBuilderImpl implements ChosaSchedulehyoBuilder {
 

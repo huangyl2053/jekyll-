@@ -9,74 +9,74 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- * 認定調査スケジュール登録・認定調査スケジュール表(調査員)ボディのITEMです。
+ * 認定調査スケジュール表(事務所)ボディのITEMです。
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ChosaSchedulehyoBodyItem {
 
-    private final RString List1_1;
-    private final RString List1_2;
-    private final RString List1_3;
-    private final RString List1_4;
-    private final RString List1_5;
-    private final RString List1_6;
-    private final RString List1_7;
-    private final RString List1_8;
-    private final RString List1_9;
-    private final RString List1_10;
-    private final RString List1_11;
-    private final RString List1_12;
-    private final RString List1_13;
-    private final RString List1_14;
+    private final RString 日付;
+    private final RString 曜日;
+    private final RString 空き_AM;
+    private final RString 空き_件数1;
+    private final RString 空き_PM;
+    private final RString 空き_件数2;
+    private final RString 仮予約_AM;
+    private final RString 仮予約_件数1;
+    private final RString 仮予約_PM;
+    private final RString 仮予約_件数2;
+    private final RString 確定_AM;
+    private final RString 確定_件数1;
+    private final RString 確定_PM;
+    private final RString 確定_件数2;
 
     /**
      * インスタンスを生成します。
      *
-     * @param List1_1 日付
-     * @param List1_2 曜日
-     * @param List1_3 空き_AM
-     * @param List1_4 件数
-     * @param List1_5 空き_PM
-     * @param List1_6 件数
-     * @param List1_7 仮予約_AM
-     * @param List1_8 件数
-     * @param List1_9 仮予約_PM
-     * @param List1_10 件数
-     * @param List1_11 確定_AM
-     * @param List1_12 件数
-     * @param List1_13 確定_PM
-     * @param List1_14 件数
+     * @param 日付 日付
+     * @param 曜日 曜日
+     * @param 空き_AM 空き_AM
+     * @param 空き_件数1 件数
+     * @param 空き_PM 空き_PM
+     * @param 空き_件数2 件数
+     * @param 仮予約_AM 仮予約_AM
+     * @param 仮予約_件数1 件数
+     * @param 仮予約_PM 仮予約_PM
+     * @param 仮予約_件数2 件数
+     * @param 確定_AM 確定_AM
+     * @param 確定_件数1 件数
+     * @param 確定_PM 確定_PM
+     * @param 確定_件数2 件数
      */
     public ChosaSchedulehyoBodyItem(
-            RString List1_1,
-            RString List1_2,
-            RString List1_3,
-            RString List1_4,
-            RString List1_5,
-            RString List1_6,
-            RString List1_7,
-            RString List1_8,
-            RString List1_9,
-            RString List1_10,
-            RString List1_11,
-            RString List1_12,
-            RString List1_13,
-            RString List1_14) {
+            RString 日付,
+            RString 曜日,
+            RString 空き_AM,
+            RString 空き_件数1,
+            RString 空き_PM,
+            RString 空き_件数2,
+            RString 仮予約_AM,
+            RString 仮予約_件数1,
+            RString 仮予約_PM,
+            RString 仮予約_件数2,
+            RString 確定_AM,
+            RString 確定_件数1,
+            RString 確定_PM,
+            RString 確定_件数2) {
 
-        this.List1_1 = List1_1;
-        this.List1_2 = List1_2;
-        this.List1_3 = List1_3;
-        this.List1_4 = List1_4;
-        this.List1_5 = List1_5;
-        this.List1_6 = List1_6;
-        this.List1_7 = List1_7;
-        this.List1_8 = List1_8;
-        this.List1_9 = List1_9;
-        this.List1_10 = List1_10;
-        this.List1_11 = List1_11;
-        this.List1_12 = List1_12;
-        this.List1_13 = List1_13;
-        this.List1_14 = List1_14;
+        this.日付 = 日付;
+        this.曜日 = 曜日;
+        this.空き_AM = 空き_AM;
+        this.空き_件数1 = 空き_件数1;
+        this.空き_PM = 空き_PM;
+        this.空き_件数2 = 空き_件数2;
+        this.仮予約_AM = 仮予約_AM;
+        this.仮予約_件数1 = 仮予約_件数1;
+        this.仮予約_PM = 仮予約_PM;
+        this.仮予約_件数2 = 仮予約_件数2;
+        this.確定_AM = 確定_AM;
+        this.確定_件数1 = 確定_件数1;
+        this.確定_PM = 確定_PM;
+        this.確定_件数2 = 確定_件数2;
     }
 }

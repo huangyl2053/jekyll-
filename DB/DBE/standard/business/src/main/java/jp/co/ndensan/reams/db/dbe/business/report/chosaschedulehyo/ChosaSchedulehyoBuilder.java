@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.chosaschedulehyo.ChosaSchedulehy
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 主治医医療機関・主治医一覧表Builderのインターフェースクラスです。
+ * 認定調査スケジュール表(事務所)Builderのインターフェースクラスです。
  */
 interface ChosaSchedulehyoBuilder extends IReportBuilder<ChosaSchedulehyoReportSource> {
 }

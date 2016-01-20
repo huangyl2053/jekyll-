@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- * 認定調査スケジュール登録・認定調査スケジュール表(事務所)ヘッダEditorです。
+ * 認定調査スケジュール表(事務所)ヘッダEditorです。
  */
 class ChosaSchedulehyoHeaderEditor implements ChosaSchedulehyoEditor {
 
@@ -53,13 +53,16 @@ class ChosaSchedulehyoHeaderEditor implements ChosaSchedulehyoEditor {
         systemDateTime.append(new RString("秒"));
         systemDateTime.append(RString.HALF_SPACE);
         systemDateTime.append(new RString("作成"));
-        source.printTimeStamp1 = systemDateTime.toRString();
+        // TODO QA504仕様にprintTimeStamp1を存在しない　2016/01/27。
+//        source.printTimeStamp1 = systemDateTime.toRString();
+//        source.printTimeStamp = item.getPrintTimeStamp();
         source.title = item.getTitle();
-        source.chosaItakusakiNo = item.getChosaItakusakiNo();
-        source.chosaItakusakiName = item.getChosaItakusakiName();
-        source.chosaTaishoYY = item.getChosaTaishoYY();
-        source.chosaTaishoMM = item.getChosaTaishoMM();
-        source.printTimeStamp = item.getPrintTimeStamp();
+        // TODO QA504画面にchosaItakusakiNoとchosaItakusakiNameを未定義です　2016/01/27。
+//        source.chosaItakusakiNo = item.getChosaItakusakiNo();
+//        source.chosaItakusakiName = item.getChosaItakusakiName();
+        // TODO QA504仕様にchosaTaishoYYとchosaTaishoMMを存在しない　2016/01/27。
+//        source.chosaTaishoYY = item.getChosaTaishoYY();
+//        source.chosaTaishoMM = item.getChosaTaishoMM();
         return source;
     }
 }
