@@ -57,24 +57,6 @@ public class NinteiChosaIraiShokaiMaster {
     }
 
     /**
-     * 認定調査委託先コードを取得します。
-     *
-     * @return 認定調査委託先コード
-     */
-    public ChosaItakusakiCode getNinteiChosaItakusakiCode() {
-        return entity.getNinteiChosaItakusakiCode();
-    }
-
-    /**
-     * 認定調査員コードを取得します。
-     *
-     * @return 認定調査員コード
-     */
-    public ChosainCode getNinteiChosainCode() {
-        return entity.getNinteiChosainCode();
-    }
-
-    /**
      * 二次判定年月日を取得します。
      *
      * @return 二次判定年月日
@@ -102,15 +84,6 @@ public class NinteiChosaIraiShokaiMaster {
     }
 
     /**
-     * 認定調査依頼区分コードを取得します。
-     *
-     * @return 認定調査依頼区分コード
-     */
-    public Code getNinteichosaIraiKubunCode() {
-        return entity.getNinteichosaIraiKubunCode();
-    }
-
-    /**
      * 事業者名称を取得します。
      *
      * @return 事業者名称
@@ -120,11 +93,38 @@ public class NinteiChosaIraiShokaiMaster {
     }
 
     /**
+     * 認定調査委託先コードを取得します。
+     *
+     * @return 認定調査委託先コード
+     */
+    public ChosaItakusakiCode getNinteiChosaItakusakiCode() {
+        return entity.getNinteiChosaItakusakiCode();
+    }
+
+    /**
+     * 認定調査員コードを取得します。
+     *
+     * @return 認定調査員コード
+     */
+    public ChosainCode getNinteiChosainCode() {
+        return entity.getNinteiChosainCode();
+    }
+
+    /**
      * 調査員氏名を取得します。
      *
      * @return 調査員氏名
      */
     public RString getChosainShimei() {
         return entity.getChosainShimei();
+    }
+
+    /**
+     * 認定調査依頼区分コードを取得します。
+     *
+     * @return 認定調査依頼区分コード
+     */
+    public Code getNinteichosaIraiKubunCode() {
+        return entity.getNinteichosaIraiKubunCode();
     }
 }

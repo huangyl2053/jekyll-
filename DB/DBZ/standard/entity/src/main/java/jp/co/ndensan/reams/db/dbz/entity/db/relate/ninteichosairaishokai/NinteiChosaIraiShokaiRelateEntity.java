@@ -23,12 +23,12 @@ public class NinteiChosaIraiShokaiRelateEntity {
     private FlexibleDate ninteiShinseiYMD;
     private Code ninteiShinseiShinseijiKubunCode;
     private FlexibleDate torisageYMD;
-    private ChosaItakusakiCode ninteiChosaItakusakiCode;
-    private ChosainCode ninteiChosainCode;
     private FlexibleDate nijiHanteiYMD;
     private Code nijiHanteiYokaigoJotaiKubunCode;
     private int nijiHanteiNinteiYukoKikan;
-    private Code ninteichosaIraiKubunCode;
     private RString jigyoshaMeisho;
+    private ChosaItakusakiCode ninteiChosaItakusakiCode;
+    private ChosainCode ninteiChosainCode;
     private RString chosainShimei;
+    private Code ninteichosaIraiKubunCode;
 }
