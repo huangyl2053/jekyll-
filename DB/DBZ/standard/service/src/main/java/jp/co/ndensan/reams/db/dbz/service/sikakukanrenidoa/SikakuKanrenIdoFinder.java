@@ -154,8 +154,10 @@ public class SikakuKanrenIdoFinder {
         List<GappeiShichoson> 旧市町村コード情報List = new ArrayList<>();
         ShichosonSecurityJoho 市町村セキュリティ = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         KyuShichosonCodeJoho 旧市町村コード情報 = KyuShichosonCode.
-                getKyuShichosonCodeJoho(市町村セキュリティ.get市町村情報().get市町村コード(),
-                        DonyukeitaiCode.toValue(市町村セキュリティ.get導入形態コード().getKey()));
+                getKyuShichosonCodeJoho(
+                        市町村セキュリティ.get市町村情報() == null ? null : 市町村セキュリティ.get市町村情報().get市町村コード(),
+                        DonyukeitaiCode.toValue(市町村セキュリティ.get導入形態コード().getKey() == null
+                                ? null : 市町村セキュリティ.get導入形態コード().getKey()));
         if (旧市町村コード情報 == null) {
 
             return SearchResult.of(Collections.<GappeiShichoson>emptyList(), 0, false);
