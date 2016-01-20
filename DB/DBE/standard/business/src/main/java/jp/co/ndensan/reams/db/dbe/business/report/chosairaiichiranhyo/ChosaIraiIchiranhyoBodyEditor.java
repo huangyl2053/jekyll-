@@ -41,7 +41,7 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
         source.listIchiranhyo_1 = item.getNo();
         source.listIchiranhyo_2 = item.getTyousayinnmeyi();
         source.listIchiranhyo_3 = item.getHihokennsyabanngou();
-        if (item.getSinnseyibi().isEmpty()) {
+        if (item.getSinnseyibi() == null || item.getSinnseyibi().isEmpty()) {
             source.listIchiranhyo_4 = RString.EMPTY;
         } else {
             source.listIchiranhyo_4 = new RDate(item.getSinnseyibi().toString()).wareki().fillType(FillType.BLANK).toDateString();
@@ -50,7 +50,7 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
         source.listIchiranhyo_6 = item.getHihokennsyameyi();
         source.listIchiranhyo_7 = item.getHihokennsyameyikaya();
         source.listIchiranhyo_8 = item.getSeyibetu();
-        if (item.getBirthYMD().isEmpty()) {
+        if (item.getBirthYMD() == null || item.getBirthYMD().isEmpty()) {
             source.listIchiranhyo_9 = RString.EMPTY;
         } else {
             source.listIchiranhyo_9 = new RDate(item.getBirthYMD().toString()).wareki().fillType(FillType.BLANK).toDateString();
@@ -58,7 +58,7 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
         source.listIchiranhyo_10 = item.getJyuusyo();
         source.listIchiranhyo_11 = item.getTelNo();
         //TODO QA515 「提出期限」を「平 4. 1. 1」編集すろ。
-        if (item.getTeyisyukigenn().isEmpty()) {
+        if (item.getTeyisyukigenn() == null || item.getTeyisyukigenn().isEmpty()) {
             source.listIchiranhyo_12 = RString.EMPTY;
         } else {
             source.listIchiranhyo_12 = new RDate(item.getTeyisyukigenn().toString()).wareki().fillType(FillType.BLANK).toDateString();

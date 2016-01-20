@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.report.chosairaisho;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaisho.ChosaIraishoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -41,11 +40,7 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
 
     private ChosaIraishoReportSource editHeader(ChosaIraishoReportSource source) {
         source.bunshoNo = item.getBunshoNo();
-        if (item.getHakkoYMD().isEmpty()) {
-            source.hakkoYMD = RString.EMPTY;
-        } else {
-            source.hakkoYMD = new RDate(item.getHakkoYMD().toString()).wareki().fillType(FillType.BLANK).toDateString();
-        }
+        source.hakkoYMD = item.getHakkoYMD();
         source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
         source.shichosonMei = item.getShichosonMei();
         source.shuchoMei = item.getShuchoMei();
@@ -64,7 +59,7 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
         source.hihokenshaNo10 = item.getHihokenshaNo10();
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
         source.hihokenshaName = item.getHihokenshaName();
-        if (item.getBirthYMD().isEmpty()) {
+        if (item.getBirthYMD() == null || item.getBirthYMD().isEmpty()) {
             source.birthYMD = RString.EMPTY;
         } else {
             source.birthYMD = new RDate(item.getBirthYMD().toString()).wareki().eraType(EraType.KANJI).toDateString();
@@ -78,16 +73,17 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
         source.jusho = item.getJusho();
         source.telNo = item.getTelNo();
         source.homonChosasakiYubinNo = item.getHomonChosasakiYubinNo();
+        //TODO 李 QA511 RESを生成するのフィールドと帳票設計書の項目は一致しない
         source.homonChosasakiJusho1 = item.getHomonChosasakiJusho1();
         source.homonChosasakiJusho2 = item.getHomonChosasakiJusho2();
         source.homonChosasakiJusho3 = item.getHomonChosasakiJusho3();
         source.homonChosasakiTelNo = item.getHomonChosasakiTelNo();
-        if (item.getShinseiYMD().isEmpty()) {
+        if (item.getShinseiYMD() == null || item.getShinseiYMD().isEmpty()) {
             source.shinseiYMD = RString.EMPTY;
         } else {
             source.shinseiYMD = new RDate(item.getShinseiYMD().toString()).wareki().eraType(EraType.KANJI).toDateString();
         }
-        if (item.getTeishutsuKigen().isEmpty()) {
+        if (item.getTeishutsuKigen() == null || item.getTeishutsuKigen().isEmpty()) {
             source.teishutsuKigen = RString.EMPTY;
         } else {
             source.teishutsuKigen = new RDate(item.getTeishutsuKigen().toString()).wareki().eraType(EraType.KANJI).toDateString();

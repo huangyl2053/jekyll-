@@ -42,7 +42,7 @@ class ChosaSchedulehyoTyousayinBodyEditor implements IChosaSchedulehyoTyousayinE
         source.listChosaSukejuru_1 = item.getNo();
         source.listChosaSukejuru_2 = item.getNinyutyousayinnNo();
         source.listChosaSukejuru_3 = item.getNinyutyousayinnName();
-        if (item.getNinnteyityousayoteyibi().isEmpty()) {
+        if (item.getNinnteyityousayoteyibi() == null || item.getNinnteyityousayoteyibi().isEmpty()) {
             source.listChosaSukejuru_4 = RString.EMPTY;
         } else {
             source.listChosaSukejuru_4 = new RDate(item.getNinnteyityousayoteyibi().toString()).wareki().toDateString();
@@ -57,7 +57,7 @@ class ChosaSchedulehyoTyousayinBodyEditor implements IChosaSchedulehyoTyousayinE
         source.listChosaSukejuru_8 = item.getHihokennsyaName();
         source.listChosaSukejuru_9 = item.getHihokennsyaAdd();
         source.listChosaSukejuru_10 = item.getTyousajisibasyou();
-        //TODO QA501 立会者の編集
+        //TODO 李 QA501 立会者の編集
         source.listChosaSukejuru_11 = item.getTatiayisya();
         source.listTel1_1 = item.getRennrakusaki1();
         source.listTel2_1 = item.getRennrakusaki2();
