@@ -37,7 +37,7 @@ public class ValidationHandler {
                 && !div.getPanInput().getTxtKanriShuryoDay().getValue().toDateString().equals(RString.EMPTY)
                 && div.getPanInput().getTxtKanriShuryoDay().getValue().
                 isBefore(div.getPanInput().getTxtKanriKaishiDay().getValue())) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate整合性));
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate整合性, div.getPanInput().getTxtKanriKaishiDay()));
         }
     }
 
