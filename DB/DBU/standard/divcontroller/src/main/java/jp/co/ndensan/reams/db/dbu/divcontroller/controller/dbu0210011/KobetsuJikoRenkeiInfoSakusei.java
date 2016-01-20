@@ -5,15 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.DBU0210011;
 
+import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyo.ChushutsuKikanJohoData;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyo.KaigoJuminhyoBatchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0210011.KobetsuJikoRenkeiInfoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.DBU0210011.KobetsuJikoRenkeiInfoSakuseiHandler;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.db.dbu.service.core.basic.kaigojuminhyo.KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  *
@@ -29,8 +29,8 @@ public class KobetsuJikoRenkeiInfoSakusei {
      * @return 介護住民票個別事項連携情報作成【他社住基】情報Divを持つResponseData
      */
     public ResponseData<KobetsuJikoRenkeiInfoSakuseiDiv> onLoad(KobetsuJikoRenkeiInfoSakuseiDiv div) {
-//        ChushutsuKikanJohoData chushutsuKikanJohoData = KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder.createInstance().getChushutsukikanJoho();
-//        getHandler(div).initialize(chushutsuKikanJohoData);
+        ChushutsuKikanJohoData chushutsuKikanJohoData = KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder.createInstance().getChushutsukikanJoho();
+        getHandler(div).initialize(chushutsuKikanJohoData);
         return ResponseData.of(div).respond();
     }
 
@@ -70,23 +70,22 @@ public class KobetsuJikoRenkeiInfoSakusei {
      * {@link KobetsuJikoRenkeiInfoSakuseiDiv 介護住民票個別事項連携情報作成【他社住基】情報Div}
      * @return 介護住民票個別事項連携情報作成【他社住基】情報Divを持つResponseData
      */
-    public ResponseData<KaigoJuminhyoBatchParameter> onClick_btnJikko(KobetsuJikoRenkeiInfoSakuseiDiv div) {
-        KaigoJuminhyoBatchParameter parameter = new KaigoJuminhyoBatchParameter();
-        ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
-        if (true) {
-            RDate konkaiFromYMD = div.getChushutsuKikan().getTxtKonkaiChushutsuFromYMD().getValue();
-            RTime konkaiFromTime = div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().getValue();
-            RDate zenkaiFromYMD = div.getChushutsuKikan().getTxtZenkaiChushutsuFromYMD().getValue();
-            RTime zenkaiFromTime = div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().getValue();
-            if (konkaiFromYMD.isBefore(zenkaiFromYMD) || (konkaiFromYMD.isBefore(zenkaiFromYMD) && konkaiFromTime.isBefore(zenkaiFromTime))) {
-                throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage());
-            } else {
-//                parameter = KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder.createInstance()
-//                        .getKaigoJuminhyoKobetsuJikouBatchParameter(konkaiFromYMD.toDateString(), new RString(konkaiFromTime.toString()));
-            }
+    public ResponseData onClick_btnJikko(KobetsuJikoRenkeiInfoSakuseiDiv div) {
+        ResponseData<KaigoJuminhyoBatchParameter> response = new ResponseData<>();
+        RDate konkaiFromYMD = div.getChushutsuKikan().getTxtKonkaiChushutsuFromYMD().getValue();
+        RTime konkaiFromTime = div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().getValue();
+        RDate zenkaiFromYMD = div.getChushutsuKikan().getTxtZenkaiChushutsuFromYMD().getValue();
+        RTime zenkaiFromTime = div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().getValue();
+        if ((konkaiFromYMD != null && konkaiFromTime != null && zenkaiFromYMD != null && zenkaiFromTime != null)
+                && (konkaiFromYMD.isBefore(zenkaiFromYMD) || (konkaiFromYMD.isBefore(zenkaiFromYMD) && konkaiFromTime.isBefore(zenkaiFromTime)))) {
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(getHandler(div).開始日と終了日の比較チェック());
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        } else {
+            response.data = KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder.createInstance()
+                    .getKaigoJuminhyoKobetsuJikouBatchParameter(konkaiFromYMD, konkaiFromTime);
         }
-
-        return ResponseData.of(parameter).respond();
+        return response;
     }
 
     private KobetsuJikoRenkeiInfoSakuseiHandler getHandler(KobetsuJikoRenkeiInfoSakuseiDiv div) {
