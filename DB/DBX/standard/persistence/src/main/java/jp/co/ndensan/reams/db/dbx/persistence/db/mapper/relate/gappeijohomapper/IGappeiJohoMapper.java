@@ -1,19 +1,28 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.gappeijoho;
+package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.gappeijohomapper;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.gappeijoho.GappeiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.gappeijoho.GappeiJyohoSpecificParameter;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.GappeiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.GappeiJyohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.KouikiGappeiJyohoEntity;
 
 /**
- * 合併市町村情報取得用データアクセスクラスです。
+ * 合併情報のマッパーインタフェースです。
  */
-public interface IGappeiJyohoMapper {
+public interface IGappeiJohoMapper {
+
+    /**
+     * 合併情報情報をキー検索で１件取得します。
+     *
+     * @param 合併情報検索条件 合併情報検索条件
+     * @return GappeiJohoRelateEntity
+     */
+    GappeiJohoRelateEntity getGappeiJohoRelateEntity(GappeiJohoMapperParameter 合併情報検索条件);
 
     /**
      * 単一全合併市町村情報の取得処理

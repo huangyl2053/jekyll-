@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.Gappe
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.gappeijoho.GappeiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.GappeiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7055GappeiJohoDac;
-import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.gappeijoho.IGappeiJohoMapper;
+import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.gappeijohomapper.IGappeiJohoMapper;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

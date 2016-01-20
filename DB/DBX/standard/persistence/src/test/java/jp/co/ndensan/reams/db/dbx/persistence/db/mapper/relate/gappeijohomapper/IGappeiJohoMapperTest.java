@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.gappeijoho;
+package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.gappeijohomapper;
 
+import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.gappeijohomapper.IGappeiJohoMapper;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;
 import org.junit.Test;
