@@ -36,7 +36,7 @@ public class KojinJokyoShokaiFinder {
     /**
      * テスト用コンストラクタです。
      *
-     * @param dac {@link DbT5912ShujiiJohoDac}
+     * @param mapperProvider  {@link MapperProvider}}
      */
     KojinJokyoShokaiFinder(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
