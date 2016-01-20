@@ -31,12 +31,12 @@ public class JyutakugaisyunaiyoListHandler {
      * 画面初期化処理します。
      *
      * @param 状態
-     * @param JyutakugaisyunaiyoList 住宅改修一覧
+     * @param jyutakugaisyunaiyoList 住宅改修一覧
      */
-    public void initialize(RString 状態, SearchResult<ShokanJutakuKaishuBusiness> JyutakugaisyunaiyoList) {
+    public void initialize(RString 状態, SearchResult<ShokanJutakuKaishuBusiness> jyutakugaisyunaiyoList) {
         List<dgGaisyuList_Row> dgGaisyuListRow = new ArrayList<>();
-        if (!JyutakugaisyunaiyoList.records().isEmpty()) {
-            for (ShokanJutakuKaishuBusiness jyutaku : JyutakugaisyunaiyoList.records()) {
+        if (!jyutakugaisyunaiyoList.records().isEmpty()) {
+            for (ShokanJutakuKaishuBusiness jyutaku : jyutakugaisyunaiyoList.records()) {
                 dgGaisyuList_Row listRow = new dgGaisyuList_Row();
                 if (jyutaku.get住宅改修着工年月日() != null) {
                     listRow.setTxtChakkoYoteibi(jyutaku.get住宅改修着工年月日().wareki().toDateString());

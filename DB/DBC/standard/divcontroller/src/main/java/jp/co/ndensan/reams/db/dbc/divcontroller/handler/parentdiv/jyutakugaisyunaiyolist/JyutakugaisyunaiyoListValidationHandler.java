@@ -43,13 +43,12 @@ public class JyutakugaisyunaiyoListValidationHandler {
         if (div.getTxtTyakkoyotebi().getValue() == null || div.getTxtKanseyotebi().getValue() == null) {
             return validPairs;
         }
-        String 参数着工日 = div.getTxtTyakkoyotebi().getValue().toDateString().toString();
-        FlexibleDate 比較着工日 = new FlexibleDate(参数着工日);
-        String 参数完成日 = div.getTxtKanseyotebi().getValue().toDateString().toString();
-        FlexibleDate 比較完成日 = new FlexibleDate(参数完成日);
+        FlexibleDate 比較着工日 = new FlexibleDate(div.getTxtTyakkoyotebi().getValue().toDateString().toString());
+        FlexibleDate 比較完成日 = new FlexibleDate(div.getTxtKanseyotebi().getValue().toDateString().toString());
         if (比較完成日.isBefore(比較着工日)) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.期間が不正_追加メッセージあり２, 参数着工日, 参数完成日), div.getTxtTyakkoyotebi(), div.getTxtKanseyotebi()));
+                    UrErrorMessages.期間が不正_追加メッセージあり２, div.getTxtTyakkoyotebi().getValue().toDateString().toString(),
+                    div.getTxtKanseyotebi().getValue().toDateString().toString()), div.getTxtTyakkoyotebi(), div.getTxtKanseyotebi()));
         }
         return validPairs;
     }

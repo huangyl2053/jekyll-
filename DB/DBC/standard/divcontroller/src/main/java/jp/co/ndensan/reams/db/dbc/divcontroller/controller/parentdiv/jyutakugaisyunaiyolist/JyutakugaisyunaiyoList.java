@@ -42,6 +42,12 @@ public class JyutakugaisyunaiyoList {
      * @return JyutakugaisyunaiyoListDivのResponseData
      */
     public ResponseData<JyutakugaisyunaiyoListDiv> onLoad(JyutakugaisyunaiyoListDiv requestDiv) {
+        ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_被保険者番号, new HihokenshaNo("002"));
+        ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_サービス提供年月, new FlexibleYearMonth("201601"));
+        ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_整理番号, new RString("123"));
+        ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_様式番号, new RString("15"));
+        ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_モード, new RString("登録"));
+
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_サービス提供年月, FlexibleYearMonth.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_整理番号, RString.class);
@@ -136,13 +142,13 @@ public class JyutakugaisyunaiyoList {
     public ResponseData<JyutakugaisyunaiyoListDiv> onClick_ConfirmButton(JyutakugaisyunaiyoListDiv requestDiv) {
         List<dgGaisyuList_Row> list = requestDiv.getDgGaisyuList().getDataSource();
         dgGaisyuList_Row dgGaisyuListRow;
-        JyutakugaisyunaiyoListValidationHandler ValidationHandler = getValidationHandler(requestDiv);
+        JyutakugaisyunaiyoListValidationHandler validationHandler = getValidationHandler(requestDiv);
         if (モード_追加.equals(requestDiv.getPnlNyuryokuArea().getState())) {
-            ValidationMessageControlPairs validPairs = ValidationHandler.validateFor着工日と完成日の前後順();
+            ValidationMessageControlPairs validPairs = validationHandler.validateFor着工日と完成日の前後順();
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
             }
-            validPairs = ValidationHandler.validateFor事業者();
+            validPairs = validationHandler.validateFor事業者();
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
             }
@@ -156,11 +162,11 @@ public class JyutakugaisyunaiyoList {
             dgGaisyuListRow = requestDiv.getDgGaisyuList().getSelectedItems().get(0);
             int count = list.indexOf(dgGaisyuListRow);
             if (モード_修正.equals(requestDiv.getPnlNyuryokuArea().getState())) {
-                ValidationMessageControlPairs validPairs = ValidationHandler.validateFor着工日と完成日の前後順();
+                ValidationMessageControlPairs validPairs = validationHandler.validateFor着工日と完成日の前後順();
                 if (validPairs.iterator().hasNext()) {
                     return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
                 }
-                validPairs = ValidationHandler.validateFor事業者();
+                validPairs = validationHandler.validateFor事業者();
                 if (validPairs.iterator().hasNext()) {
                     return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
                 }
