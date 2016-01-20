@@ -31,8 +31,8 @@ public class ValidationHandler {
     }
 
     public void 管理日Fromの必須チェック(ValidationMessageControlPairs validPairs) {
-        if (RString.EMPTY.equals(div.getPanInput().getTxtKanriKaishiDay().getValue().toDateString())) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate管理日必須));
+        if (div.getPanInput().getTxtKanriKaishiDay().getValue() == null) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate管理日必須, div.getPanInput().getTxtKanriKaishiDay()));
         } else if (div.getPanInput().getTxtKanriShuryoDay().getValue() != null
                 && !div.getPanInput().getTxtKanriShuryoDay().getValue().toDateString().equals(RString.EMPTY)
                 && div.getPanInput().getTxtKanriShuryoDay().getValue().
@@ -43,7 +43,7 @@ public class ValidationHandler {
 
     public void 商品名の必須チェック(ValidationMessageControlPairs validPairs) {
         if (div.getPanInput().getTxtShohinmei().getValue() == null || div.getPanInput().getTxtShohinmei().getValue().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate商品名必須));
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate商品名必須, div.getPanInput().getTxtShohinmei()));
         }
     }
 

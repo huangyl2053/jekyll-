@@ -119,7 +119,9 @@ public class FukushiyoguShohinInputGuideHandler {
             for (FukushiyoguShohin jigyoshaInput : businessList) {
                 dgFukushiyoguShohin_Row dgFukushiyoguShohin = new dgFukushiyoguShohin_Row();
                 dgFukushiyoguShohin.setShohinNo(nullToEmpty(jigyoshaInput.get商品番号()));
-                dgFukushiyoguShohin.getKanriKaishiYMD().setValue(new RDate(jigyoshaInput.get管理開始年月日().toString()));
+                if (jigyoshaInput.get管理開始年月日() != null) {
+                    dgFukushiyoguShohin.getKanriKaishiYMD().setValue(new RDate(jigyoshaInput.get管理開始年月日().toString()));
+                }
                 if (jigyoshaInput.get管理終了年月日() != null) {
                     dgFukushiyoguShohin.getKanriShuryoYMD().setValue(new RDate(jigyoshaInput.get管理終了年月日().toString()));
                 }
