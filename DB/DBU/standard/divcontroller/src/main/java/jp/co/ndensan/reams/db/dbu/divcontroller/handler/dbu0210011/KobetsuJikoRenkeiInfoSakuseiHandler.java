@@ -40,16 +40,24 @@ public class KobetsuJikoRenkeiInfoSakuseiHandler {
     public void initialize(ChushutsuKikanJohoData chushutsuKikanJohoData) {
 
         if (chushutsuKikanJohoData != null) {
-            div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setValue(new RDate(chushutsuKikanJohoData.get対象開始日時().getDate().wareki().toDateString().toString()));
-            div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setValue(chushutsuKikanJohoData.get対象開始日時().getRDateTime().getTime());
-            div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromYMD().setValue(new RDate(chushutsuKikanJohoData.get対象終了日時().getDate().wareki().toDateString().toString()));
-            div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().setValue(chushutsuKikanJohoData.get対象開始日時().getRDateTime().getTime());
-            div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().setValue(new RDate(chushutsuKikanJohoData.get対象終了日時().getDate().wareki().toDateString().toString()));
-            div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().setValue(chushutsuKikanJohoData.get対象開始日時().getRDateTime().getTime());
+            div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setValue(
+                    new RDate(chushutsuKikanJohoData.get対象開始日時().getDate().wareki().toDateString().toString()));
+            div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setValue(
+                    chushutsuKikanJohoData.get対象開始日時().getRDateTime().getTime());
+            div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromYMD().setValue(
+                    new RDate(chushutsuKikanJohoData.get対象終了日時().getDate().wareki().toDateString().toString()));
+            div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().setValue(
+                    chushutsuKikanJohoData.get対象開始日時().getRDateTime().getTime());
+            div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().setValue(
+                    new RDate(chushutsuKikanJohoData.get対象終了日時().getDate().wareki().toDateString().toString()));
+            div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().setValue(
+                    chushutsuKikanJohoData.get対象開始日時().getRDateTime().getTime());
         } else {
-            div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromYMD().setValue(new RDate(RDate.getNowDate().wareki().toDateString().toString()));
+            div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromYMD().setValue(
+                    new RDate(RDate.getNowDate().wareki().toDateString().toString()));
             div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().setValue(RDate.getNowTime());
-            div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().setValue(new RDate(RDate.getNowDate().wareki().toDateString().toString()));
+            div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().setValue(
+                    new RDate(RDate.getNowDate().wareki().toDateString().toString()));
             div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().setValue(RDate.getNowTime());
         }
     }
