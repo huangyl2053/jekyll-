@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.definition.core.shikakukubun;
+package jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  */
 public enum ShikakuKubun {
+//TODO DBAから遷移か
 
     /**
      * コード:1 名称:_1号被保険者 略称:１号
