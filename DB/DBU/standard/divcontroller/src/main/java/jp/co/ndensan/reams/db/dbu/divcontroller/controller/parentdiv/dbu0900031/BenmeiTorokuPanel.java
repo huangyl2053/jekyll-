@@ -165,28 +165,47 @@ public class BenmeiTorokuPanel {
             被保険者番号 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.被保険者番号, HihokenshaNo.class);
             審査請求届出日 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.審査請求届出日, FlexibleDate.class);
             弁明書作成日 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.弁明書作成日, FlexibleDate.class);
-
             BenmeiTorokuManager benmeiTorokuManager = BenmeiTorokuManager.createInstance();
             LasdecCode shichosonCode = benmeiTorokuManager.get地方公共団体コード();
             FufukuMoshitate fufukuMoshitate = new FufukuMoshitate(識別コード, 被保険者番号, 審査請求届出日);
             FufukuMoshitateBuilder fufukuBuilder = fufukuMoshitate.createBuilderForEdit();
-            fufukuBuilder.set弁明書作成日(new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().getValue().toDateString()));
+            if (panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().getValue() == null) {
+                弁明書作成日 = FlexibleDate.EMPTY;
+            } else {
+                弁明書作成日 = new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().getValue().toDateString());
+            }
+            fufukuBuilder.set弁明書作成日(弁明書作成日);
             fufukuMoshitate = fufukuBuilder.build();
             BemmeiNaiyo bemmeiNaiyo = new BemmeiNaiyo(識別コード, 被保険者番号, 審査請求届出日,
                     new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().getValue().toDateString()));
             BemmeiNaiyoBuilder bemmeiNaiyoBuilder = bemmeiNaiyo.createBuilderForEdit();
             bemmeiNaiyoBuilder.set市町村コード(shichosonCode);
-            bemmeiNaiyoBuilder.set審査請求に係る処分内容(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineShobunNaiyo().getValue());
-            bemmeiNaiyoBuilder.set弁明内容(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeiNaiyo().getValue());
-            bemmeiNaiyoBuilder.set弁明書作成日提出日(new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtDateBenmeisyoTeishutubi().getValue().toDateString()));
+            if (panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineShobunNaiyo().getValue() == null) {
+                bemmeiNaiyoBuilder.set審査請求に係る処分内容(RString.EMPTY);
+            } else {
+                bemmeiNaiyoBuilder.set審査請求に係る処分内容(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineShobunNaiyo().getValue());
+            }
+            if (panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeiNaiyo().getValue() == null) {
+                bemmeiNaiyoBuilder.set弁明内容(RString.EMPTY);
+            } else {
+                bemmeiNaiyoBuilder.set弁明内容(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeiNaiyo().getValue());
+            }
+            if (panelDiv.getBenmeiTorokuMeisaiPanel().getTxtDateBenmeisyoTeishutubi().getValue() == null) {
+                bemmeiNaiyoBuilder.set弁明書作成日提出日(FlexibleDate.EMPTY);
+            } else {
+                bemmeiNaiyoBuilder.set弁明書作成日提出日(new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtDateBenmeisyoTeishutubi().getValue().toDateString()));
+            }
             bemmeiNaiyo = bemmeiNaiyoBuilder.build();
             BemmeishaJoho bemmeishaJoho = new BemmeishaJoho(識別コード, 被保険者番号, 審査請求届出日,
                     new FlexibleDate(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().getValue().toDateString()), new Decimal("1"));
             BemmeishaJohoBuilder bemmeishaJohoBuilder = bemmeishaJoho.createBuilderForEdit();
             bemmeishaJohoBuilder.set市町村コード(shichosonCode);
-            bemmeishaJohoBuilder.set弁明者氏名(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeisya().getValue());
+            if (panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeisya().getValue() == null) {
+                bemmeishaJohoBuilder.set弁明者氏名(RString.EMPTY);
+            } else {
+                bemmeishaJohoBuilder.set弁明者氏名(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeisya().getValue());
+            }
             bemmeishaJoho = bemmeishaJohoBuilder.build();
-
             boolean blnState = get弁明登録明細情報の登録処理結果(fufukuMoshitate, bemmeiNaiyo, bemmeishaJoho);
             if (blnState) {
                 return ResponseData.of(panelDiv).addMessage(UrInformationMessages.正常終了.getMessage().replace(状態_登録.toString())).respond();
