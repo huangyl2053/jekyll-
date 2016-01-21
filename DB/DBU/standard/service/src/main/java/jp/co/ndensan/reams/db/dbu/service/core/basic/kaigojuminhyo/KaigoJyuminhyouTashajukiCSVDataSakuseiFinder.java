@@ -101,8 +101,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             hachilist = this.get8桁CSVデータ1(tashajyukiList, codeHenkanKubun, hachilist);
             TashajukiHachiCSVDataEntity hachientity = this.getHachiCSVData(new TashajukiHachiCSVDataEntity());
             hachientity = this.get8桁市町村コード(hachilist, hachientity, tashajyukiList);
-            int 連番 = Integer.valueOf(hachientity.get連番().toString()) + 1;
-            RString 連番new = this.get連番(連番);
+            RString 連番new = this.get連番(Integer.valueOf(hachientity.get連番().toString()) + 1);
             hachientity.set連番(連番new);
             hachientity.setタイムスタンプ(new RString(RDate.getNowDateTime().toString()));
             hachientity.set最終レコード区分(最終ﾚｺｰﾄﾞ);
