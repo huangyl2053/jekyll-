@@ -447,30 +447,6 @@ public class ShujiiIryoKikanMaster {
     }
 
     /**
-     * 主治医一覧に戻ります。
-     *
-     * @param div ShujiiIryoKikanMasterDiv
-     * @return ResponseData<ShujiiIryoKikanMasterDiv>
-     */
-    public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnBackIchiran(ShujiiIryoKikanMasterDiv div) {
-        div.getShujiiIchiran().setDisabled(false);
-        ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 主治医検索に戻ります。
-     *
-     * @param div ShujiiIryoKikanMasterDiv
-     * @return ResponseData<ShujiiIryoKikanMasterDiv>
-     */
-    public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnBackSearch(ShujiiIryoKikanMasterDiv div) {
-        div.getShujiiSearch().setDisabled(false);
-        div.getShujiiIchiran().setDisabled(false);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 主治医を登録ボタンボタン押下で、主治医マスタに戻ります。
      *
      * @param div ShujiiIryoKikanMasterDiv

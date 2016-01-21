@@ -45,7 +45,6 @@ public class ShujiiIryoKikanJohoBuilder {
      * @return {@link ShujiiIryoKikanJohoBuilder}
      */
     public ShujiiIryoKikanJohoBuilder set医療機関コード(IryoKikanCode 医療機関コード) {
-        requireNonNull(医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("医療機関コード"));
         entity.setIryokikanCode(医療機関コード);
         return this;
     }
