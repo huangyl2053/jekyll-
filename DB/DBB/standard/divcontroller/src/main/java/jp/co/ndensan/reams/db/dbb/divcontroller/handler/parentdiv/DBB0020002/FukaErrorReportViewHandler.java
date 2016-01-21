@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorListBuilder;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorListIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvItem;
 import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvItemList;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0020002.FukaErrorReportView;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.FukaErrorReportViewDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.FukaErrorShoriButtonDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.dgFukaErrorList_Row;
@@ -32,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- * {@link FukaErrorReportView}のHandlerクラスです。
+ * 賦課エラー一覧のHandlerクラスです。
  */
 public class FukaErrorReportViewHandler {
 
