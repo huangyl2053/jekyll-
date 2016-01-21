@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri;
 
 import jp.co.ndensan.reams.db.dba.entity.db.relate.TaJushochiTokureisyaKan.TaJushochiTokureisyaKanRirelateEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuKaijoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -85,7 +83,7 @@ public class TaJushochiTokureisyaKanriMaster {
      *
      * @return 他市町村住所地特例適用事由コード
      */
-    public KaigoTatokuTekiyoJiyu getTekiyoJiyuCode() {
+    public RString getTekiyoJiyuCode() {
         return entity.getTekiyoJiyuCode();
     }
 
@@ -121,7 +119,7 @@ public class TaJushochiTokureisyaKanriMaster {
      *
      * @return 他市町村住所地特例解除事由コード
      */
-    public KaigoTatokuKaijoJiyu getKaijoJiyuCode() {
+    public RString getKaijoJiyuCode() {
         return entity.getKaijoJiyuCode();
     }
 
