@@ -19,13 +19,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- * 年齢到達者登録リスト帳票用データ作成クラス。
+ * 年齢到達登録者リスト帳票用データ作成クラス。
  */
 public class NenreiTotatsushaTorokuListBatch {
 
     private static final RString 印刷時刻 = new RString("   時  分  秒");
     private static final RString 被保険者氏名 = new RString("該当データがありません");
 
+    /**
+     * 帳票データを作成します。
+     *
+     * @param entity 年齢到達登録者リストEntity
+     * @return NenreiTotatsuTorokushaListTyouHyouListEntity
+     */
     public List<NenreitotatsuKakuninListItem> getNenreiTotatsushaTorokuChohyoData(
             NenreiTotatsuTorokushaListEntity entity) {
         List<NenreitotatsuKakuninListItem> list = new ArrayList();
