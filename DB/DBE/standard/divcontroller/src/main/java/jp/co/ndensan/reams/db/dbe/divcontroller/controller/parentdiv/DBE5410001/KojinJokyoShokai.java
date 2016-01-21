@@ -6,6 +6,7 @@
 
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5410001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.kojinjokyoshokai.KojinJokyoShokaiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001.KojinJokyoShokaiDiv;
@@ -28,7 +29,7 @@ public class KojinJokyoShokai {
     /**
      * 画面初期化処理です。
      *
-     * @param div KojinJokyoShokaiDiv
+     * @param div 要介護認定個人状況照会div
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onLoad(KojinJokyoShokaiDiv div) {
@@ -46,7 +47,7 @@ public class KojinJokyoShokai {
     /**
      * 連絡先ボタン処理です。
      *
-     * @param div KojinJokyoShokaiDiv
+     * @param div 要介護認定個人状況照会div
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
      public ResponseData<KojinJokyoShokaiDiv> onClick_btnRenrakusaki(KojinJokyoShokaiDiv div) {
@@ -57,7 +58,7 @@ public class KojinJokyoShokai {
      /**
      * 連絡事項ボタン処理です。
      *
-     * @param div KojinJokyoShokaiDiv
+     * @param div 要介護認定個人状況照会div
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
      public ResponseData<KojinJokyoShokaiDiv> onClick_btnShichosonRenrakuJiko(KojinJokyoShokaiDiv div) {
@@ -68,7 +69,7 @@ public class KojinJokyoShokai {
      /**
      * 審査会情報ボタン処理です。
      *
-     * @param div KojinJokyoShokaiDiv
+     * @param div 要介護認定個人状況照会div
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
      public ResponseData<KojinJokyoShokaiDiv> onClick_btnShinsakaiJoho(KojinJokyoShokaiDiv div) {
@@ -79,7 +80,7 @@ public class KojinJokyoShokai {
     /**
      * 意見書依頼照会処理です。
      *
-     * @param div KojinJokyoShokaiDiv
+     * @param div 要介護認定個人状況照会div
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
      public ResponseData<KojinJokyoShokaiDiv> onClick_btnShujiiIkenshoSakuseiIraiShokai(KojinJokyoShokaiDiv div) {
@@ -91,7 +92,7 @@ public class KojinJokyoShokai {
     /**
      * 調査依頼照会処理です。
      *
-     * @param div KojinJokyoShokaiDiv
+     * @param div 要介護認定個人状況照会div
      * @return ResponseData<KojinJokyoShokaiDiv>
      */ 
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnNinteiChosaIraiShokai(KojinJokyoShokaiDiv div) {
@@ -103,7 +104,7 @@ public class KojinJokyoShokai {
     /**
      * 個人進捗状況表を発行する処理です。
      *
-     * @param div KojinJokyoShokaiDiv
+     * @param div 要介護認定個人状況照会div
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<SourceDataCollection> onClick_btnprint(KojinJokyoShokaiDiv div) {
@@ -112,11 +113,14 @@ public class KojinJokyoShokai {
         KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
         List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai> kojinJokyoShokaiList 
                  = kojinJokyoShokaiFinder.getKojinShinchokuJokyohyo(parameter).records();
-        KojinShinchokuJokyohyoEntity jokyohyoEntity = new KojinShinchokuJokyohyoEntity();
+        List<KojinShinchokuJokyohyoEntity> jokyohyoEntityList = new ArrayList<>();
         if (!kojinJokyoShokaiList.isEmpty()) {
-             jokyohyoEntity = getHandler(div).setKojinShinchokuJokyohyo(kojinJokyoShokaiList);
+             jokyohyoEntityList = getHandler(div).setKojinShinchokuJokyohyo(kojinJokyoShokaiList);
         }
-        return ResponseData.of(new KojinShinchokuJokyohyoPrintService().print(jokyohyoEntity)).respond();
+        for(int i = 0;i < jokyohyoEntityList.size();i++){
+           return ResponseData.of(new KojinShinchokuJokyohyoPrintService().print(jokyohyoEntityList.get(i))).respond(); 
+        }
+        return ResponseData.of(new KojinShinchokuJokyohyoPrintService().print(jokyohyoEntityList.get(0))).respond();
     }
     
      private KojinJokyoShokaiHandler getHandler(KojinJokyoShokaiDiv div) {

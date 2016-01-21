@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.kojinjokyoshokai;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.kojinjokyoshokai.KojinJokyoShokaiParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.kojinjokyoshokai.KojinJokyoShokaiRelateEntity;
 
@@ -28,5 +29,5 @@ public interface IKojinJokyoShokaiMapper {
      * @param parameter 要介護認定個人状況照会用パラメータ
      * @return KojinJokyoShokaiRelateEntity 検索結果の{@link KojinJokyoShokaiRelateEntity}
      */
-    KojinJokyoShokaiRelateEntity selectKojinShinchokuJokyohyo(KojinJokyoShokaiParameter parameter);
+    List<KojinJokyoShokaiRelateEntity> selectKojinShinchokuJokyohyo(KojinJokyoShokaiParameter parameter);
 }

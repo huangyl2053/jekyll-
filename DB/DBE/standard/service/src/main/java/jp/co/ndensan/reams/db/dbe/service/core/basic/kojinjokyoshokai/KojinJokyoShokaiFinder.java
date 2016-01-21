@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.service.core.basic.kojinjokyoshokai;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai;
@@ -80,12 +81,14 @@ public class KojinJokyoShokaiFinder {
     public SearchResult<KojinJokyoShokai> getKojinShinchokuJokyohyo(KojinJokyoShokaiParameter parameter) {
         requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage("parameter"));
 	IKojinJokyoShokaiMapper mapper = mapperProvider.create(IKojinJokyoShokaiMapper.class);
-	KojinJokyoShokaiRelateEntity kojinJokyoShokaiRelateEntity = mapper.selectKojinShinchokuJokyohyo(parameter);
-        List<KojinJokyoShokai> kojinJokyoShokaiList = new ArrayList();
-         if (kojinJokyoShokaiRelateEntity != null) {
-            kojinJokyoShokaiList.add(new KojinJokyoShokai(kojinJokyoShokaiRelateEntity));
+	List<KojinJokyoShokaiRelateEntity> shokaiRelateEntityList = mapper.selectKojinShinchokuJokyohyo(parameter);
+        List<KojinJokyoShokai> businessList = new ArrayList();
+        if (shokaiRelateEntityList.isEmpty()) {
+            return SearchResult.of(Collections.<KojinJokyoShokai>emptyList(), 0, false);
         }
-        
-        return SearchResult.of(kojinJokyoShokaiList, kojinJokyoShokaiList.size(), true);
+        for (KojinJokyoShokaiRelateEntity entity : shokaiRelateEntityList) {
+            businessList.add(new KojinJokyoShokai(entity));
+        }
+        return SearchResult.of(businessList, 0, false);
     }
 }
