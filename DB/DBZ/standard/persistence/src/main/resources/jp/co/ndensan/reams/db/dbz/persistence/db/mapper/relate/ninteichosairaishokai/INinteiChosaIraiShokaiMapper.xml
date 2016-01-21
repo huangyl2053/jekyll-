@@ -22,17 +22,17 @@
     <select id="get認定調査情報" resultMap="result_NinteiRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbz.definition.param.ninteichosairaishokai.NinteiChosaIraiShokaiParameter" fetchSize="500">
       SELECT
-           DbT5101."ninteiShinseiYMD" AS "ninteiShinseiYMD",
-           DbT5101."ninteiShinseiShinseijiKubunCode" AS "ninteiShinseiShinseijiKubunCode",
-           DbT5101."torisageYMD" AS "torisageYMD",
-           DbT5102."nijiHanteiYMD" AS "nijiHanteiYMD",
-           DbT5102."nijiHanteiYokaigoJotaiKubunCode" AS "nijiHanteiYokaigoJotaiKubunCode",
-           DbT5102."nijiHanteiNinteiYukoKikan" AS "nijiHanteiNinteiYukoKikan",
-           DbT5910."jigyoshaMeisho" AS "jigyoshaMeisho",
-           DbT5101."ninteiChosaItakusakiCode" AS "ninteiChosaItakusakiCode",
-           DbT5913."ninteiChosainCode" AS "ninteiChosainCode",
-           DbT5201."chosainShimei" AS "chosainShimei",
-           DbT5101."ninteichosaIraiKubunCode" AS "ninteichosaIraiKubunCode"
+           dbT5101."ninteiShinseiYMD" AS "ninteiShinseiYMD",
+           dbT5101."ninteiShinseiShinseijiKubunCode" AS "ninteiShinseiShinseijiKubunCode",
+           dbT5101."torisageYMD" AS "torisageYMD",
+           dbT5102."nijiHanteiYMD" AS "nijiHanteiYMD",
+           dbT5102."nijiHanteiYokaigoJotaiKubunCode" AS "nijiHanteiYokaigoJotaiKubunCode",
+           dbT5102."nijiHanteiNinteiYukoKikan" AS "nijiHanteiNinteiYukoKikan",
+           dbT5910."jigyoshaMeisho" AS "jigyoshaMeisho",
+           dbT5101."ninteiChosaItakusakiCode" AS "ninteiChosaItakusakiCode",
+           dbT5101."ninteiChosainCode" AS "ninteiChosainCode",
+           dbT5913."chosainShimei" AS "chosainShimei",
+           dbT5201."ninteichosaIraiKubunCode" AS "ninteichosaIraiKubunCode"
       FROM
            rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
            INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
