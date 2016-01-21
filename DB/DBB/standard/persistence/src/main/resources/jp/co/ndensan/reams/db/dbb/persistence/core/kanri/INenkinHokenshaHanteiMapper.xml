@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 介護賦課のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.core.kanri.INenkinHokenshaHanteiMapper">
+    <select id="selectByKey" resultType="RString" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.NenkinHokenshaHanteiParameter" fetchSize="500">
+        SELECT 
+            ueT0513Tokubetsu."tokubetsuChoshuGimushaGroupCode"
+        FROM
+            rgue."UeT0513TokubetsuChoshuGimushaGroup" AS ueT0513Tokubetsu
+        WHERE
+            ueT0513Tokubetsu."tokubetsuChoshuGimushaCode" = #{choshuGimushaCode}
+    </select>
+</mapper>
