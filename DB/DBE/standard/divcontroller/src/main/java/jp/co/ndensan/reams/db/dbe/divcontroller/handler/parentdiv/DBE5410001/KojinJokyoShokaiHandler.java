@@ -179,7 +179,6 @@ public class KojinJokyoShokaiHandler {
     }
     
     private KojinShinchokuJokyohyoEntity getKojinShinchokuJokyohyo(List<KojinJokyoShokai> kojinJokyoShokaiList) {
-        KojinShinchokuJokyohyoEntity shinchokuJokyohyoEntity = new KojinShinchokuJokyohyoEntity();
         KojinShinchokuJokyohyoEntity jokyohyoEntity = new KojinShinchokuJokyohyoEntity();
         jokyohyoEntity.setHihokenshaNo(kojinJokyoShokaiList.get(0).get被保険者番号().getColumnValue());
         jokyohyoEntity.setShinseiKubun(kojinJokyoShokaiList.get(0).get認定申請区分申請時コード().getColumnValue());
@@ -287,6 +286,6 @@ public class KojinJokyoShokaiHandler {
         jokyohyoEntity.setKonnkai_22(new RString(kojinJokyoShokaiList.get(0).get今回センター送信年月日().toString()));
         jokyohyoEntity.setZennkai_22(new RString(kojinJokyoShokaiList.get(0).get前回センター送信年月日().toString()));
         jokyohyoEntity.setZennnoma_22(new RString(kojinJokyoShokaiList.get(0).get前々回センター送信年月日().toString()));
-        return shinchokuJokyohyoEntity;
+        return jokyohyoEntity;
     }
 }

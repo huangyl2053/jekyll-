@@ -37,9 +37,9 @@ public class KojinJokyoShokai {
         KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
         List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai> kojinJokyoShokaiList 
                  = kojinJokyoShokaiFinder.getKojinJokyoShokai(parameter).records();
-         if (!kojinJokyoShokaiList.isEmpty()) {
+        if (!kojinJokyoShokaiList.isEmpty()) {
              getHandler(div).setKojinJokyoShokai(kojinJokyoShokaiList);
-         }
+        }
         return ResponseData.of(div).respond();
     }
     
