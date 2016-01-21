@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportItem;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportShoriKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,19 +21,22 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  */
 public class FukaErrorListCsvItem implements IInternalReportItem {
 
-    @CsvField(order = 10, name = "賦課年度")
+    private static final CodeShubetsu コード種別エラーコード = new CodeShubetsu(new RString("0009"));
+
+    @CsvField(order = 10, name = "処理区分")
+    private final RString 処理区分;
+    @CsvField(order = 20, name = "賦課年度")
     private final RString 賦課年度;
-    @CsvField(order = 20, name = "通知書番号")
+    @CsvField(order = 30, name = "通知書番号")
     private final RString 通知書番号;
-    @CsvField(order = 30, name = "エラー内容")
+    @CsvField(order = 40, name = "エラー内容")
     private final RString エラー詳細;
-    @CsvField(order = 40, name = "被保険者番号")
+    @CsvField(order = 50, name = "被保険者番号")
     private final RString 被保険者番号;
-    @CsvField(order = 50, name = "識別コード")
+    @CsvField(order = 60, name = "識別コード")
     private final RString 識別コード;
 
     private final FukaErrorList model;
-    private final InternalReportShoriKubun 処理区分;
 
     /**
      * コンストラクタです。
@@ -54,12 +58,12 @@ public class FukaErrorListCsvItem implements IInternalReportItem {
 
         this.賦課年度 = model.get賦課年度().toDateString();
         this.通知書番号 = model.get通知書番号().value();
-        this.エラー詳細 = CodeMaster.getCodeMeisho(new CodeShubetsu(new RString("0009")), model.getエラーコード());
+        this.エラー詳細 = CodeMaster.getCodeMeisho(コード種別エラーコード, model.getエラーコード());
         this.被保険者番号 = model.get被保険者番号().value();
         this.識別コード = model.get識別コード().value();
 
         this.model = model;
-        this.処理区分 = InternalReportShoriKubun.toValue(model.get処理区分コード());
+        this.処理区分 = new RString(InternalReportShoriKubun.toValue(model.get処理区分コード()).name());
     }
 
     /**
@@ -118,6 +122,6 @@ public class FukaErrorListCsvItem implements IInternalReportItem {
 
     @Override
     public InternalReportShoriKubun getShoriKubun() {
-        return 処理区分;
+        return InternalReportShoriKubun.toValue(new Code(処理区分));
     }
 }
