@@ -70,9 +70,6 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
     }
 
     private List<IkkatsuHakkoRelateEntity> 再発行チェックしない() {
-
-        //TODO 段站立　QA248　画面からの発行と一括発行の判定条件　2015/12/17から
-        // 画面からの発行の場合、チェックしない。
         List<IkkatsuHakkoRelateEntity> 対象情報List = new ArrayList<>();
         List<IkkatsuHakkoRelateEntity> 一括発行List = new ArrayList<>();
         List<IkkatsuHakkoRelateEntity> 生年月日の値がない対象List = iIkkatsuHakkoMapper.getTaishoJoho1();
@@ -98,9 +95,6 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
         return 再発行チェックする情報List;
     }
 
-    /**
-     * TODO 段站立 QA296 チェック処理内容の確認　2015/12/23
-     */
     private void 対象者チェック() {
         List<IkkatsuHakkoRelateEntity> 生年月日の値がない対象List = iIkkatsuHakkoMapper.getTaishoJoho1();
         if (!生年月日の値がない対象List.isEmpty()) {
