@@ -19,12 +19,12 @@ public class KaigoJuminhyoRelateEntity implements Cloneable, Serializable {
     /**
      * @param dbT1001HihokenshaDaichoEntity 被保険者台帳管理Entity
      */
-    private DbT1001HihokenshaDaichoEntity dbT1001HihokenshaDaichoEntity;
+    private final DbT1001HihokenshaDaichoEntity dbT1001HihokenshaDaichoEntity;
 
     /**
      * @param dbT4001JukyushaDaichoEntity 受給者台帳Entity
      */
-    private DbT4001JukyushaDaichoEntity dbT4001JukyushaDaichoEntity;
+    private final DbT4001JukyushaDaichoEntity dbT4001JukyushaDaichoEntity;
 
     /**
      * コンストラクタです。
