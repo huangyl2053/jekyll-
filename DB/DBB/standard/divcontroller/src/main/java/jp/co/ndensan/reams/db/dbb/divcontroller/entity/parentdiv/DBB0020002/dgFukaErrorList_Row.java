@@ -1,9 +1,9 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Oct 03 00:27:24 JST 2014 
+ * Tue Jan 19 16:46:18 CST 2016 
  */
 
 
@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgFukaErrorList_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
 
     private RString shoriJokyoCode;
     private RString shoriJokyo;
@@ -29,6 +30,8 @@ public class dgFukaErrorList_Row extends DataRow {
     private RString errorDetail;
     private RString hihokenshaNo;
     private RString shikibetsuCode;
+    private RString subGyomuCode;
+    private RString naibuChohyoId;
 
     public dgFukaErrorList_Row() {
         super();
@@ -40,9 +43,21 @@ public class dgFukaErrorList_Row extends DataRow {
         this.errorDetail = RString.EMPTY;
         this.hihokenshaNo = RString.EMPTY;
         this.shikibetsuCode = RString.EMPTY;
+        this.subGyomuCode = RString.EMPTY;
+        this.naibuChohyoId = RString.EMPTY;
+        this.setOriginalData("shoriJokyoCode", shoriJokyoCode);
+        this.setOriginalData("shoriJokyo", shoriJokyo);
+        this.setOriginalData("fukaNendo", fukaNendo);
+        this.setOriginalData("tsuchishoNo", tsuchishoNo);
+        this.setOriginalData("errorCode", errorCode);
+        this.setOriginalData("errorDetail", errorDetail);
+        this.setOriginalData("hihokenshaNo", hihokenshaNo);
+        this.setOriginalData("shikibetsuCode", shikibetsuCode);
+        this.setOriginalData("subGyomuCode", subGyomuCode);
+        this.setOriginalData("naibuChohyoId", naibuChohyoId);
     }
 
-    public dgFukaErrorList_Row(RString shoriJokyoCode, RString shoriJokyo, TextBoxDate fukaNendo, RString tsuchishoNo, RString errorCode, RString errorDetail, RString hihokenshaNo, RString shikibetsuCode) {
+    public dgFukaErrorList_Row(RString shoriJokyoCode, RString shoriJokyo, TextBoxDate fukaNendo, RString tsuchishoNo, RString errorCode, RString errorDetail, RString hihokenshaNo, RString shikibetsuCode, RString subGyomuCode, RString naibuChohyoId) {
         super();
         this.setOriginalData("shoriJokyoCode", shoriJokyoCode);
         this.setOriginalData("shoriJokyo", shoriJokyo);
@@ -52,6 +67,8 @@ public class dgFukaErrorList_Row extends DataRow {
         this.setOriginalData("errorDetail", errorDetail);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
         this.setOriginalData("shikibetsuCode", shikibetsuCode);
+        this.setOriginalData("subGyomuCode", subGyomuCode);
+        this.setOriginalData("naibuChohyoId", naibuChohyoId);
         this.shoriJokyoCode = shoriJokyoCode;
         this.shoriJokyo = shoriJokyo;
         this.fukaNendo = fukaNendo;
@@ -60,6 +77,8 @@ public class dgFukaErrorList_Row extends DataRow {
         this.errorDetail = errorDetail;
         this.hihokenshaNo = hihokenshaNo;
         this.shikibetsuCode = shikibetsuCode;
+        this.subGyomuCode = subGyomuCode;
+        this.naibuChohyoId = naibuChohyoId;
     }
 
     public RString getShoriJokyoCode() {
@@ -92,6 +111,14 @@ public class dgFukaErrorList_Row extends DataRow {
 
     public RString getShikibetsuCode() {
         return shikibetsuCode;
+    }
+
+    public RString getSubGyomuCode() {
+        return subGyomuCode;
+    }
+
+    public RString getNaibuChohyoId() {
+        return naibuChohyoId;
     }
 
     public void setShoriJokyoCode(RString shoriJokyoCode) {
@@ -134,4 +161,15 @@ public class dgFukaErrorList_Row extends DataRow {
         this.shikibetsuCode = shikibetsuCode;
     }
 
+    public void setSubGyomuCode(RString subGyomuCode) {
+        this.setOriginalData("subGyomuCode", subGyomuCode);
+        this.subGyomuCode = subGyomuCode;
+    }
+
+    public void setNaibuChohyoId(RString naibuChohyoId) {
+        this.setOriginalData("naibuChohyoId", naibuChohyoId);
+        this.naibuChohyoId = naibuChohyoId;
+    }
+
+    // </editor-fold>
 }
