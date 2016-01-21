@@ -244,7 +244,7 @@ public class GogitaiJohoSakuseiValidationHandler {
         桁数が不正(UrErrorMessages.桁数が不正, "合議体No", "2"),
         既に登録済(UrErrorMessages.既に登録済, "合議体No"),
         コードマスタなし(UrErrorMessages.コードマスタなし),
-        終了日が開始日以前(UrErrorMessages.終了日が開始日以前),
+        終了日が開始日以前(DbeErrorMessages.終了日が開始日以前),
         期間が不正_追加メッセージあり２(UrErrorMessages.期間が不正_追加メッセージあり２, "開始予定時刻", "終了予定時刻"),
         割当審査員は少なくとも5人(DbeErrorMessages.割当審査員は少なくとも5人),
         合議体長副合議体長は一人づつ(DbeErrorMessages.合議体長副合議体長は一人づつ),
