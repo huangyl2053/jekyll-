@@ -83,21 +83,29 @@ class KojinShinchokuJokyohyoHeadEditor implements KojinShinchokuJokyohyoEditor {
         source.shinseiKubun = item.getShinseiKubun();
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
         RStringBuilder shinseiYMD = new RStringBuilder();
-        Wareki shinsei = new RDate(item.getShinseiYMD().toString()).wareki();
-        shinseiYMD.append(shinsei.eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
-        source.shinseiYMD = shinseiYMD.toRString();
+        if (RString.isNullOrEmpty(item.getShinseiYMD())) {
+            source.shinseiYMD = RString.EMPTY;
+        } else {
+            Wareki shinsei = new RDate(item.getShinseiYMD().toString()).wareki();
+            shinseiYMD.append(shinsei.eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.ZERO).toDateString());
+            source.shinseiYMD = shinseiYMD.toRString();
+        }
         source.seibetsu = item.getSeibetsu();
         source.hihokenshaName = item.getHihokenshaName();
         RStringBuilder birthYMD = new RStringBuilder();
-        Wareki birth = new RDate(item.getBirthYMD().toString()).wareki();
-        birthYMD.append(birth.eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
-        source.birthYMD = birthYMD.toRString();
+        if (RString.isNullOrEmpty(item.getBirthYMD())) {
+            source.birthYMD = RString.EMPTY;
+        } else {
+            Wareki birth = new RDate(item.getBirthYMD().toString()).wareki();
+            birthYMD.append(birth.eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.ZERO).toDateString());
+            source.birthYMD = birthYMD.toRString();
+        }
         source.age = item.getAge();
         source.yubinNo1 = item.getYubinNo1();
         source.hihokenshaJusho = item.getHihokenshaJusho();
