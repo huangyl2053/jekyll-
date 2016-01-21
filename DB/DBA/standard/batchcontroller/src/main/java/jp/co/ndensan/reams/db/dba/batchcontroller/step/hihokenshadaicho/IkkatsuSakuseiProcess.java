@@ -77,18 +77,8 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
     }
 
     @Override
-    protected void beforeExecute() {
-
-    }
-
-    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MYBATIS_SELECT_ID);
-    }
-
-    @Override
-    protected void createWriter() {
-
     }
 
     @Override
