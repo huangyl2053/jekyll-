@@ -371,11 +371,11 @@ public class GogitaiJohoSakusei {
                 }
                 if (gogitaiJoho.toEntity().getState() == EntityDataState.Modified) {
                     manager.saveWithDeletePhysical(gogitaiJoho);
-                    Models<GogitaiWariateIinJohoIdentifier, GogitaiWariateIinJoho> gogitaiJohoModelForUpd
+                    Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModelForUpd
                             = ViewStateHolder.get(ViewStateKeys.合議体情報更新, Models.class);
                     GogitaiWariateIinJohoManager gogitaiWariateIinJohoManager = GogitaiWariateIinJohoManager.createInstance();
-                    while (gogitaiJohoModelForUpd.iterator().hasNext()) {
-                        gogitaiWariateIinJohoManager.save(gogitaiJohoModelForUpd.iterator().next());
+                    for (GogitaiWariateIinJoho gogitaiWariateIinJoho : gogitaiJohoModelForUpd.get(gogitaiJoho.identifier()).getGogitaiWariateIinJohoList()) {
+                        gogitaiWariateIinJohoManager.save(gogitaiWariateIinJoho);
                     }
                 }
             }
@@ -507,10 +507,11 @@ public class GogitaiJohoSakusei {
 
     private GogitaiJoho setGogitaiJohoForUpd(GogitaiJohoSakuseiDiv div, dgGogitaiIchiran_Row row, GogitaiJoho gogitaiJoho) {
 
-        Models<GogitaiWariateIinJohoIdentifier, GogitaiWariateIinJoho> gogitaiJohoModelForUpd = ViewStateHolder.get(ViewStateKeys.合議体情報更新, Models.class);
+        Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModelForUpd = ViewStateHolder.get(ViewStateKeys.合議体情報更新, Models.class);
         if (gogitaiJohoModelForUpd == null) {
-            gogitaiJohoModelForUpd = Models.create(new ArrayList<GogitaiWariateIinJoho>());
+            gogitaiJohoModelForUpd = Models.create(new ArrayList<GogitaiJoho>());
         }
+        GogitaiJoho gogitaiJohoForUpd = new GogitaiJoho(gogitaiJoho.identifier().get合議体番号(), gogitaiJoho.identifier().get合議体有効期間開始年月日());
         GogitaiJohoBuilder gogitaiJohoBuilder = getHandler(div).getGogitaiJohoBuilder(gogitaiJoho.createBuilderForEdit(), row);
         row.setJyotai(JYOTAI_NAME_UPD);
         for (dgShinsainList_Row shinsainRow : div.getDgShinsainList().getDataSource()) {
@@ -521,12 +522,13 @@ public class GogitaiJohoSakusei {
                     gogitaiWariateIinIdentifier.get合議体番号(),
                     gogitaiWariateIinIdentifier.get合議体有効期間開始年月日(),
                     gogitaiWariateIinIdentifier.get介護認定審査会委員コード());
+
             GogitaiWariateIinJoho gogitaiWariateIinJoho = gogitaiJoho.getGogitaiWariateIinJoho(gogitaiWariateIinIdentifier);
             gogitaiWariateIinJoho = getHandler(div).getGogitaiWariateIinJohoByShinsain(shinsainRow, gogitaiWariateIinJoho.createBuilderForEdit());
             gogitaiWariateIinJohoForUpd = getHandler(div).getGogitaiWariateIinJohoByShinsain(shinsainRow, gogitaiWariateIinJohoForUpd.createBuilderForEdit());
             gogitaiWariateIinJoho = gogitaiWariateIinJoho.modifiedModel();
             gogitaiJohoBuilder.setGogitaiWariateIinJoho(gogitaiWariateIinJoho);
-            gogitaiJohoModelForUpd.add(gogitaiWariateIinJohoForUpd);
+            gogitaiJohoForUpd.createBuilderForEdit().setGogitaiWariateIinJoho(gogitaiWariateIinJohoForUpd).build();
         }
         for (dgHoketsuShinsainList_Row hoketsuShinsainRow : div.getDgHoketsuShinsainList().getDataSource()) {
             GogitaiWariateIinJohoIdentifier gogitaiWariateIinIdentifier
@@ -541,12 +543,14 @@ public class GogitaiJohoSakusei {
             gogitaiWariateIinJohoForUpd = getHandler(div).getGogitaiWariateIinJohoByHoketsu(hoketsuShinsainRow, gogitaiWariateIinJohoForUpd.createBuilderForEdit());
             gogitaiWariateIinJoho = gogitaiWariateIinJoho.modifiedModel();
             gogitaiJohoBuilder.setGogitaiWariateIinJoho(gogitaiWariateIinJoho);
-            gogitaiJohoModelForUpd.add(gogitaiWariateIinJohoForUpd);
+            gogitaiJohoForUpd.createBuilderForEdit().setGogitaiWariateIinJoho(gogitaiWariateIinJohoForUpd).build();
+
         }
         gogitaiJoho = gogitaiJohoBuilder.build();
         gogitaiJoho = gogitaiJoho.modifiedModel();
         div.getDgGogitaiIchiran().getDataSource().set(div.getDgGogitaiIchiran().getClickedRowId(), row);
 
+        gogitaiJohoModelForUpd.add(gogitaiJohoForUpd);
         ViewStateHolder.put(ViewStateKeys.合議体情報更新, gogitaiJohoModelForUpd);
         return gogitaiJoho;
     }

@@ -64,8 +64,7 @@ public class GogitaiJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link GogitaiJohoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link GogitaiJohoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link GogitaiJohoManager}のインスタンス
      */
     public static GogitaiJohoManager createInstance() {
         return InstanceProvider.create(GogitaiJohoManager.class);
@@ -171,7 +170,7 @@ public class GogitaiJohoManager {
     public boolean saveWithDeletePhysical(GogitaiJoho 合議体情報) {
         requireNonNull(合議体情報, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体情報"));
         deletePhysical合議体割当委員情報リスト(合議体情報.getGogitaiWariateIinJohoList());
-        return 1 == 合議体情報Dac.deletePhysical(合議体情報.toEntity());
+        return 1 == 合議体情報Dac.save(合議体情報.toEntity());
     }
 
     private void deletePhysical合議体割当委員情報リスト(List<GogitaiWariateIinJoho> 合議体割当委員情報List) {

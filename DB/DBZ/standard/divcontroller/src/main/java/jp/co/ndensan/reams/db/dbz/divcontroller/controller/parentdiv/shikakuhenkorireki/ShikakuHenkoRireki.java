@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.shikakuhen
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.ShikakuHenkoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.ShikakuHenkoRirekiHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.dgHenko_Row;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -85,7 +86,13 @@ public class ShikakuHenkoRireki {
      */
     public ResponseData<ShikakuHenkoRirekiDiv> onClick_btnHenkoTorikeshi(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
         getHandler(henkoRirekiDiv).clear資格変更入力Panel();
-        henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.shokai);
+        if (!ShikakuHenkoRirekiDiv.DisplayType.toroku.equals(henkoRirekiDiv.getMode_DisplayType())) {
+            henkoRirekiDiv.getBtnAdd().setDisabled(false);
+            henkoRirekiDiv.getDgHenko().setReadOnly(false);
+            henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
+            henkoRirekiDiv.setInputMode(ViewExecutionStatus.None.getValue());
+            henkoRirekiDiv.getHenkoHokenshaJoho().setReadOnly(false);
+        }
         return createSettingData(henkoRirekiDiv);
     }
 
@@ -99,8 +106,27 @@ public class ShikakuHenkoRireki {
     public ResponseData<ShikakuHenkoRirekiDiv> onClick_btnHenkoKakutei(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
         ShikakuHenkoRirekiHandler handler = getHandler(henkoRirekiDiv);
         handler.updateEntryData();
+        if (ShikakuHenkoRirekiDiv.DisplayType.toroku.equals(henkoRirekiDiv.getMode_DisplayType())) {
+            boolean is追加なし = true;
+            for (dgHenko_Row row : henkoRirekiDiv.getDgHenko().getDataSource()) {
+                if (row.getState().equals(new RString("追加"))) {
+                    is追加なし = false;
+                }
+            }
+            if (is追加なし) {
+                henkoRirekiDiv.setInputMode(ViewExecutionStatus.Add.getValue());
+            } else {
+                henkoRirekiDiv.setInputMode(ViewExecutionStatus.None.getValue());
+            }
+        } else {
+            henkoRirekiDiv.getBtnAdd().setDisabled(false);
+            henkoRirekiDiv.setInputMode(ViewExecutionStatus.None.getValue());
+        }
         handler.clear資格変更入力Panel();
-        henkoRirekiDiv.setExecutionStatus(ViewExecutionStatus.None.getValue());
+        henkoRirekiDiv.getDgHenko().setReadOnly(false);
+        henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
+        henkoRirekiDiv.setExecutionStatus(ViewExecutionStatus.Modify.getValue());
+        henkoRirekiDiv.getHenkoHokenshaJoho().setReadOnly(false);
         return createSettingData(henkoRirekiDiv);
     }
 
