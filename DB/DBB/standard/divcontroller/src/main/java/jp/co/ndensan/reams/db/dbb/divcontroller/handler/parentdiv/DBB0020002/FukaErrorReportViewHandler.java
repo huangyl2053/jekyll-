@@ -37,6 +37,8 @@ public class FukaErrorReportViewHandler {
 
     private final FukaErrorReportViewDiv div;
     private static final CodeShubetsu コード種別エラーコード = new CodeShubetsu(new RString("0009"));
+    private static final RString エラーコード_更正対象 = new RString("01");
+    private static final RString エラーコード_資格修正対象 = new RString("02");
 
     /**
      * コンストラクタです。
@@ -90,23 +92,16 @@ public class FukaErrorReportViewHandler {
      * 選択した行のエラー内容に合わせて、修正処理へ遷移するボタンの表示非表示を切り替え、遷移可能な状態に切り替えます。
      */
     public void onSelect_dgFukaErrorList() {
-        setSelectState();
-    }
-
-    private void setSelectState() {
         FukaErrorShoriButtonDiv buttonDiv = div.getFukaErrorShoriButton();
         setButtonDisplayNone();
         dgFukaErrorList_Row row = div.getDgFukaErrorList().getSelectedItems().get(0);
-        switch (row.getErrorCode().toString()) {
-            case "01":
-                buttonDiv.getBtnFukaKosei().setDisplayNone(false);
-                break;
-            case "02":
-                buttonDiv.getBtnShikakuFuseigo().setDisplayNone(false);
-                break;
-            default:
-                setButtonDisplayNone();
-                break;
+        // TODO更正対象及び資格修正対象のコード値未確定 QA502
+        if (エラーコード_更正対象.equals(row.getErrorCode())) {
+            buttonDiv.getBtnFukaKosei().setDisplayNone(false);
+        } else if (エラーコード_資格修正対象.equals(row.getErrorCode())) {
+            buttonDiv.getBtnShikakuFuseigo().setDisplayNone(false);
+        } else {
+            setButtonDisplayNone();
         }
         buttonDiv.getBtnMishori().setDisplayNone(false);
         buttonDiv.setDisabled(false);
