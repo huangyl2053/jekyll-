@@ -52,6 +52,8 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("KaigoJuminhyoEucCsv"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final RString 日時 = new RString("@日時@");
+    private static final RString 市町村コード = new RString("@市町村コード@");
     private FileSpoolManager manager;
     private RString eucFilePath;
     private RString renkeiFileName;
@@ -90,12 +92,12 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
         rendoPatternEntity.setCodeHenkanKubun(dbT7035RendoPatternEntity.getCodeHenkanKubun());
         renkeiFileName = dbT7035RendoPatternEntity.getRenkeiFileName();
         if (!RString.isNullOrEmpty(renkeiFileName)) {
-            if (renkeiFileName.contains(new RString("@日時@"))) {
-                renkeiFileName = renkeiFileName.replace("@日時@", new YMDHMS(RDate.getNowDateTime()).toString());
+            if (renkeiFileName.contains(日時)) {
+                renkeiFileName = renkeiFileName.replace(日時.toString(), new YMDHMS(RDate.getNowDateTime()).toString());
             }
-            if (renkeiFileName.contains(new RString("@市町村コード@"))) {
+            if (renkeiFileName.contains(市町村コード)) {
                 Association association = AssociationFinderFactory.createInstance().getAssociation();
-                renkeiFileName = renkeiFileName.replace("@市町村コード@", association.get地方公共団体コード().toString());
+                renkeiFileName = renkeiFileName.replace(市町村コード.toString(), association.get地方公共団体コード().toString());
             }
         }
         rendoPatternEntity.setRenkeiFileName(renkeiFileName);

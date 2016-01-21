@@ -28,9 +28,6 @@ public class KaigoJuminhyoDBUpdateProcess extends BatchProcessBase<DbT7022ShoriD
             "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.getEntity");
     private boolean isEmpty = true;
     private KaigoJuminhyoProcessParameter parameter;
-    private final SubGyomuCode subGyomuCode = new SubGyomuCode("DBU");
-    private final RString shoriName = new RString("介護住民票個別事項連携情報作成【他社住基】");
-    private final RString shoriEdaban = new RString("0000");
 
     @BatchWriter
     private BatchPermanentTableWriter<DbT7022ShoriDateKanriEntity> tableWrite;
@@ -58,10 +55,10 @@ public class KaigoJuminhyoDBUpdateProcess extends BatchProcessBase<DbT7022ShoriD
     protected void afterExecute() {
         if (isEmpty) {
             DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
-            entity.setSubGyomuCode(subGyomuCode);
+            entity.setSubGyomuCode(SubGyomuCode.DBU介護統計報告);
             entity.setShichosonCode(new LasdecCode("000000"));
-            entity.setShoriEdaban(shoriEdaban);
-            entity.setShoriName(shoriName);
+            entity.setShoriEdaban(new RString("0000"));
+            entity.setShoriName(new RString("介護住民票個別事項連携情報作成【他社住基】"));
             entity.setNendo(new FlexibleYear("0000"));
             entity.setNendoNaiRenban(new RString("0000"));
             entity.setKijunTimestamp(new YMDHMS(parameter.getTaishoShuryoTimestamp()));
