@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 public class FukaErrorReportViewHandler {
 
     private final FukaErrorReportViewDiv div;
+    private static final CodeShubetsu コード種別エラーコード = new CodeShubetsu(new RString("0009"));
 
     /**
      * コンストラクタです。
@@ -132,7 +133,7 @@ public class FukaErrorReportViewHandler {
             }
             if (fukaErrorList.getエラーコード() != null) {
                 row.setErrorCode(fukaErrorList.getエラーコード().getKey());
-                row.setErrorDetail(CodeMaster.getCodeMeisho(new CodeShubetsu(SubGyomuCode.DBB介護賦課.value()), fukaErrorList.getエラーコード()));
+                row.setErrorDetail(CodeMaster.getCodeMeisho(コード種別エラーコード, fukaErrorList.getエラーコード()));
             }
             if (fukaErrorList.get被保険者番号() != null) {
                 row.setHihokenshaNo(fukaErrorList.get被保険者番号().value());
