@@ -6,7 +6,6 @@
 
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5410001;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.kojinjokyoshokai.KojinJokyoShokaiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001.KojinJokyoShokaiDiv;
@@ -113,14 +112,11 @@ public class KojinJokyoShokai {
         KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
         List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai> kojinJokyoShokaiList 
                  = kojinJokyoShokaiFinder.getKojinShinchokuJokyohyo(parameter).records();
-        List<KojinShinchokuJokyohyoEntity> jokyohyoEntityList = new ArrayList<>();
+        KojinShinchokuJokyohyoEntity jokyohyoEntity = new KojinShinchokuJokyohyoEntity();
         if (!kojinJokyoShokaiList.isEmpty()) {
-             jokyohyoEntityList = getHandler(div).setKojinShinchokuJokyohyo(kojinJokyoShokaiList);
+             jokyohyoEntity = getHandler(div).setKojinShinchokuJokyohyo(kojinJokyoShokaiList);
         }
-        for(int i = 0;i < jokyohyoEntityList.size();i++){
-           return ResponseData.of(new KojinShinchokuJokyohyoPrintService().print(jokyohyoEntityList.get(i))).respond(); 
-        }
-        return ResponseData.of(new KojinShinchokuJokyohyoPrintService().print(jokyohyoEntityList.get(0))).respond();
+        return ResponseData.of(new KojinShinchokuJokyohyoPrintService().print(jokyohyoEntity)).respond();
     }
     
      private KojinJokyoShokaiHandler getHandler(KojinJokyoShokaiDiv div) {
