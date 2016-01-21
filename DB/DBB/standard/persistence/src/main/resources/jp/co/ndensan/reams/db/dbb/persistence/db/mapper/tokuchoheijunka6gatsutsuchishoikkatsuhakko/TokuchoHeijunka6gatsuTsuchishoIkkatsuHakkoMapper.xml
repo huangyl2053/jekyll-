@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+ 
+
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoMapper">
+    <select id="get基準日時" 
+                resultType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlresultEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity" fetchSize="500">
+        SELECT MAX(A."kijunTimestamp") AS "基準日時"
+        FROM   rgdb."DbT7022ShoriDateKanri" AS A
+        WHERE  A."subGyomuCode"=#{基準日時}
+        AND    A."nendo"=#{年度}
+        AND    A."shoriName"=#{処理名}
+    </select>
+    <select id="select特徴平準化_6月分更新後とリアルのデータ" 
+                resultType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlresultEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity" fetchSize="500">
+        SELECT 
+        FROM   rgdb."DbT2015KeisangoJohoTemp"　　AS  計算後情報
+               INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',true,'',true,'','','','','','','','','','','',true,'','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,true,'','','','','','','','',true,'','',true,true,true) 　AS  宛名
+                     ON   宛名.識別コード　＝　計算後情報.識別コード
+               INNER　JOIN　 rgua."UaFt250FindAtesaki"('DB','DBB','','','','','','','','','')　AS  宛先
+                     ON   宛先.識別コード　＝　計算後情報.識別コード
+               LEFT　JOIN　rshare."UrFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', NULL, NULL, NULL)　AS　納組
+                     ON   納組.識別コード　＝　計算後情報.識別コード
+               LEFT　JOIN　rshare."UrFt700FindKoza"(NULL, NULL, NULL, NULL, NULL, NULL)　AS　口座
+                     ON   口座.識別コード　＝　計算後情報.識別コード
+        INNER　JOIN　 年金特徴回付情報（介護継承）
+               ON　 業務コード　＝　"DBB"																						
+               AND 年金特徴回付情報（介護継承）. 処理年度　＝　入力．調定年度　－１																						
+               AND 通知内容コード　IN　(UE特徴分配.Enum.通知内容コード.特別徴収対象者情報, UE特徴分配.Enum.通知内容コード.特別徴収追加候補者情報)																						
+               AND  計算後情報.仮徴収・基礎年金番号　＝　年金特徴回付情報（介護継承）. 基礎年金番号																						
+               AND 計算後情報.仮徴収・年金コード　＝　年金特徴回付情報（介護継承）. 年金コード																						
+               AND 計算後情報.仮徴収・捕捉月　＝　年金特徴回付情報（介護継承）. 捕捉月																						
+        WHERE 		調定年度　＝　入力．調定年度				
+	AND    賦課年度　＝　入力．調定年度				
+	AND    更正前後区分　＝　「2：更正後」				
+	AND    特徴期別金額01　≠　０				
+	AND    特徴期別金額02　≠　０				
+	AND    特徴期別金額03　≠　０				
+
+        
+    </select>
+  <update id="update仮算定額変更情報一時テーブルの計算後情報更正前情報1" 
+                resultType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlresultEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity" fetchSize="500">
+        UPDATE  仮算定額変更通知書一括発行一時テーブ												
+        SET    「更正前」計算後情報の全項目　　＝　計算後情報．同じ名称の項目												
+		更正前情報有無区分　　＝　「1」　：あり												
+        WHERE 	仮算定額変更情報一時テーブル．調定年度　＝　計算後情報一時．調定年度												
+	AND	仮算定額変更情報一時テーブル．賦課年度　＝　計算後情報一時．賦課年度												
+	AND	仮算定額変更情報一時テーブル．通知書番号　＝　計算後情報一時．通知書番号												
+	AND	更正前後区分　＝　「1：更正前」												
+
+  </update>
+  <select id="select特徴平準化_6月分更新後のデータ" 
+                resultType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlresultEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity" fetchSize="500">
+        SELECT	計算後情報.*																			
+		宛名.*																				
+		宛先.*																				
+		口座.*																				
+		年金特徴回付情報（介護継承）.*																				
+         FROM   rgdb."DbT2015KeisangoJoho" AS 計算後情報																					
+               INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',true,'',true,'','','','','','','','','','','',true,'','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,true,'','','','','','','','',true,'','',true,true,true) 　AS  宛名
+			ON   宛名."shikibetsuCode"　=　計算後情報."shikibetsuCode"																				
+		INNER　JOIN　 rgua."UaFt250FindAtesaki"('DB','DBB','','','','','','','','','')　AS  宛先																					
+			ON   宛先."shikibetsuCode"　=　計算後情報."shikibetsuCode"																				
+		LEFT　JOIN　rshare."UrFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', NULL, NULL, NULL)　AS　納組																					
+			ON   納組."shikibetsuCode"　=　計算後情報."shikibetsuCode"																				
+		LEFT　JOIN　rshare."UrFt700FindKoza"(NULL, NULL, NULL, NULL, NULL, NULL)　AS　口座																					
+			ON   口座."shikibetsuCode"　=　計算後情報."shikibetsuCode"																				
+         INNER　JOIN　 年金特徴回付情報（介護継承）																							
+	        ON　 業務コード　＝　"DBB"																						
+	        AND 年金特徴回付情報（介護継承）. 処理年度　＝　入力．調定年度　－１																						
+	        AND 通知内容コード　IN　(UE特徴分配.Enum.通知内容コード.特別徴収対象者情報, UE特徴分配.Enum.通知内容コード.特別徴収追加候補者情報)																						
+	        AND  計算後情報.仮徴収・基礎年金番号　＝　年金特徴回付情報（介護継承）. 基礎年金番号																						
+	        AND 計算後情報.仮徴収・年金コード　＝　年金特徴回付情報（介護継承）. 年金コード																						
+	        AND 計算後情報.仮徴収・捕捉月　＝　年金特徴回付情報（介護継承）. 捕捉月																						
+         WHERE 	調定年度　＝　入力．調定年度																					
+	 AND	賦課年度　＝　入力．調定年度																					
+	 AND	更正前後区分　＝　「2：更正後」																					
+	 AND	作成処理名　＝　DBZ介護賦課．Enum．処理名．特徴平準化計算_6月分																					
+	 AND	特徴期別金額01　≠　０																					
+	 AND	特徴期別金額02　≠　０																					
+	 AND	特徴期別金額03　≠　０																					
+							
+
+  </select>
+  <update id="update仮算定額変更情報一時テーブルの計算後情報更正前情報2" 
+                resultType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlresultEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity" fetchSize="500">
+        UPDATE  仮算定額変更通知書一括発行一時テーブ											
+        SET    「更正前」計算後情報の全項目　　＝　計算後情報．同じ名称の項目											
+		更正前情報有無区分　　＝　「1」　：あり											
+       WHERE 	仮算定額変更情報一時テーブル．調定年度　＝　計算後情報．調定年度											
+	AND	仮算定額変更情報一時テーブル．賦課年度　＝　計算後情報．賦課年度											
+	AND	仮算定額変更情報一時テーブル．通知書番号　＝　計算後情報．通知書番号											
+	AND	更正前後区分　＝　「1：更正前」											
+	AND	作成処理名　＝　DBZ介護賦課．Enum．処理名．特徴平準化計算_6月分											
+																					
+											
+
+  </update>
+  <update id="update更正前の対象者_追加含む_情報" 
+                resultType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlresultEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity" fetchSize="500">
+        UPDATE  仮算定額変更情報一時テーブル																					
+        SET    「更正後」対象者（追加含む）情報の項目　　＝　年金特徴回付情報（介護継承）．同じ名称の項目																					
+        WHERE  「更正前」賦課情報.仮徴収・基礎年金番号　＝　年金特徴回付情報（介護継承）. 基礎年金番号																					
+	AND 	計算後情報.仮徴収・年金コード　＝　年金特徴回付情報（介護継承）. 年金コード																					
+	AND 	計算後情報.仮徴収・捕捉月　＝　年金特徴回付情報（介護継承）. 捕捉月																					
+	AND     通知内容コード　IN　(UE特徴分配.Enum.通知内容コード.特別徴収対象者情報, UE特徴分配.Enum.通知内容コード.特別徴収追加候補者情報)																						
+	AND     年金特徴回付情報（介護継承）. 処理年度　＝　入力．調定年度　－１																						
+											
+
+  </update>
+  <select id="select全ての賦課情報" 
+                resultType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlresultEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity" fetchSize="500">
+        SELECT 		全項目												
+        FROM		賦課Newest  												
+		(	SELECT 　賦課情報前年度．調定年度, 											
+					賦課情報前年度．被保険者番号,　									
+					MAX(賦課情報前年度．通知書番号)　AS 通知書番号									
+			FROM  賦課Newest　AS 賦課情報MAX通知書											
+				  (   SELECT 　MAX(調定年度） as 調定年度, 被保険者番号										
+						FROM  賦課Newest								
+						WHERE  賦課年度　＝　入力．調定年度　－　1 								
+						GROUP BY  被保険者番号								
+				　)   AS  A										
+			WHERE 		賦課情報MAX通知書．調定年度　＝　A.調定年度　									
+				AND	賦課情報MAX通知書．賦課年度　＝　入力．調定年度　－　1 									
+				AND	賦課情報MAX通知書．被保険者番号　＝　A.被保険者番号									
+			GROUP BY  調定年度,被保険者番号											
+		)  AS  B												
+        WHERE 		賦課Newest.調定年度　＝B.調定年度												
+	AND	賦課Newest.賦課年度　＝入力．調定年度　－　1 												
+	AND	賦課Newest.通知書番号　＝Ｂ.通知書番号												
+	AND	賦課Newest.被保険者番号　＝Ｂ.被保険者番号												
+																						
+											
+
+  </select>
+  <update id="update前年度特徴期別金額06" 
+                resultType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlresultEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity" fetchSize="500">
+        UPDATE 		仮算定額変更情報一時テーブル																						
+SET		前年度・特徴期別金額06　＝　（　SELECT 調定共通（介護継承）．調定額																						
+							FROM  前年度賦課情報一時テーブル　　AS 前年度賦課																	
+								INNER JOIN  介護期別																
+									ON   介護期別．調定年度　＝　前年度賦課．調定年度															
+									AND  介護期別．賦課年度　＝　前年度賦課．調定賦課															
+									AND  介護期別．通知書番号　＝　前年度賦課．通知書番号															
+									AND  介護期別．履歴番号　＝　前年度賦課．履歴番号															
+									AND  介護期別．期　＝　「6」															
+									AND  介護期別．徴収方法　＝DBB介護賦課．Enum．徴収方法期別．特別徴収															
+								INNER JOIN  調定共通（介護継承）																
+									ON   調定共通（介護継承）．調定ID　＝　介護期別．調定ID															
+							WHERE   前年度賦課.被保険者番号　　＝　仮算定額変更情報一時テーブル.「更正後」計算後情報．被保険者番号																	
+						)																		
+																					
+											
+
+  </update>
+  <update id="update継続の被保険者区分" 
+                resultType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlresultEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity" fetchSize="500">
+        	UPDATE 		仮算定額変更情報一時テーブル																							
+	SET		被保険者区分　＝　０：継続																							
+	WHERE 		「更正後」計算後情報．徴収方法4月 IN (DBB介護賦課.Enum.徴収方法.特別徴収（厚生労働省）, DBB介護賦課.Enum.徴収方法.特別徴収（地共済）)																							
+		AND	前年度・特徴期別金額06　　≠　０																							
+																										
+																				
+											
+
+  </update>
+  <update id="update4月開始の被保険者区分" 
+                resultType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlresultEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity" fetchSize="500">
+        	UPDATE 		仮算定額変更情報一時テーブル																							
+	SET		被保険者区分　＝　１：4月開始																							
+	WHERE 		「更正後」計算後情報．徴収方法4月 IN (DBB介護賦課.Enum.徴収方法.特別徴収（厚生労働省）, DBB介護賦課.Enum.徴収方法.特別徴収（地共済）)																							
+		AND	前年度・特徴期別金額06　　＝　０																							
+																					
+											
+
+  </update>
+  <update id="update6月開始の被保険者区分" 
+                resultType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlresultEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity" fetchSize="500">
+        UPDATE 		仮算定額変更情報一時テーブル																
+SET		被保険者区分　＝　2：6月開始																
+WHERE 		(「更正後」計算後情報．徴収方法4月　≠　DBB介護賦課.Enum.徴収方法.特別徴収（厚生労働省）																
+			AND	「更正後」計算後情報．徴収方法4月　≠　　DBB介護賦課.Enum.徴収方法.特別徴収（地共済） )														
+	AND	(「更正後」計算後情報．徴収方法6月　＝　DBB介護賦課.Enum.徴収方法.特別徴収（厚生労働省）　　																
+			OR	「更正後」計算後情報．徴収方法6月　＝　DBB介護賦課.Enum.徴収方法.特別徴収（地共済） )														
+																					
+											
+
+  </update>
+  <insert id="insert入力の出力対象区分によって" 
+                resultType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlresultEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity" fetchSize="500">
+        INSERT  INTO  通知書発行後異動者 (帳票ID, 帳票作成日時, 賦課年度,通知書番号, 識別コード, 被保険者番号, 計算処理日時, 該当連番, 異動ありフラグ)																							
+SELECT 		入力．帳票ID																					
+		入力．帳票作成日時																					
+		賦課年度																					
+		被保険者番号																					
+		識別コード																					
+		調定日時																					
+		ROWNUM																					
+		FALSE																					
+FROM		仮算定額変更情報一時テーブル																					
+WHERE条件は、入力．出力対象区分によって、追加する。																							
+	・　入力．出力対象区分　＝DBB.Enum.HeijunkaHenkoOutputJoken（平準化変更通知書出力条件）．全件（追加候補者含む）の場合																						
+		条件なし、全てのデータを抽出する。																					
+																							
+	・　入力．出力対象区分　＝DBB.Enum.HeijunkaHenkoOutputJoken（平準化変更通知書出力条件）．全件（追加候補者含まない）の場合																						
+		被保険者区分　=  0：継続																					
+																							
+	・　入力．出力対象区分　＝DBB.Enum.HeijunkaHenkoOutputJoken（平準化変更通知書出力条件）．追加候補者のみ全ての場合																						
+		被保険者区分　=  １：4月開始　or  被保険者区分　=  2：6月開始																					
+																							
+ORDER BY   上記１で取得された出力順																							
+							
+
+  </insert>
+   <insert id="insert入力の出力対象区分によって" 
+                resultType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlresultEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity" fetchSize="500">
+        INSERT  INTO  rgdb."DbT2017TsuchishoHakkogoIdosha" ("hohyoBunruiID", "chohyosakuseiTimestamp",
+                                                            "tsuchishoNo","shikibetsuCode", "hihokenshaNo",
+                                                            "keisanTimestamp", "gaitoRemban", "idoAriFlag")																							
+        SELECT 	#{帳票ID}																					
+	        #{帳票作成日時}																																									
+		被保険者番号																					
+		識別コード																					
+		調定日時																					
+		ROWNUM																					
+		FALSE																					
+        FROM		仮算定額変更情報一時テーブル																					
+        WHERE条件は、入力．出力対象区分によって、追加する。																							
+	・　入力．出力対象区分　＝DBB.Enum.HeijunkaHenkoOutputJoken（平準化変更通知書出力条件）．全件（追加候補者含む）の場合																						
+		条件なし、全てのデータを抽出する。																					
+																							
+	・　入力．出力対象区分　＝DBB.Enum.HeijunkaHenkoOutputJoken（平準化変更通知書出力条件）．全件（追加候補者含まない）の場合																						
+		被保険者区分　=  0：継続																					
+																							
+	・　入力．出力対象区分　＝DBB.Enum.HeijunkaHenkoOutputJoken（平準化変更通知書出力条件）．追加候補者のみ全ての場合																						
+		被保険者区分　=  １：4月開始　or  被保険者区分　=  2：6月開始																					
+																							
+        ORDER BY   上記１で取得された出力順																							
+
+   </insert>
+</mapper>
+    
