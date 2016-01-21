@@ -99,7 +99,7 @@ public class YouKaiGoNinTeiKekTesuChi  implements Serializable {
      * @return 連番
      */
     public RString get連番() {
-       return new RString (String.valueOf(entity.getRenNo()));
+       return new RString(String.valueOf(entity.getRenNo()));
     }
     
     /**
@@ -178,7 +178,7 @@ public class YouKaiGoNinTeiKekTesuChi  implements Serializable {
      */
     public RString get二次判定結果() {
         
-       return YokaigoJotaiKubun09.toValue(entity.getNijiHanteiYokaigoJotaiKubunCode()).get名称();
+       return YokaigoJotaiKubun09.toValue(entity.getNijiHanteiYokaigoJotaiKubunCod()).get名称();
     }
     
     /**

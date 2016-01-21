@@ -48,8 +48,8 @@ public class YouKaiGoNinTeiKekTesuChiFinder {
     @Transaction
     public SearchResult<YouKaiGoNinTeiKekTesuChi> get主治医選択一覧(YouKaiGoNinTeiKekTesuChiMapperParameter param) {
         List<YouKaiGoNinTeiKekTesuChi> businessList = new ArrayList<>();
-        IYouKaiGoNinTeiKekTesuChiMapper YouKaiMapper = mapperProvider.create(IYouKaiGoNinTeiKekTesuChiMapper.class);
-        List<YouKaiGoNinTeiKekTesuChiRelateEntity> youKaiEntityList = YouKaiMapper.getSyuJiSenTakuYiChiRan(param);
+        IYouKaiGoNinTeiKekTesuChiMapper youKaiMapper = mapperProvider.create(IYouKaiGoNinTeiKekTesuChiMapper.class);
+        List<YouKaiGoNinTeiKekTesuChiRelateEntity> youKaiEntityList = youKaiMapper.getSyuJiSenTakuYiChiRan(param);
 
         for (YouKaiGoNinTeiKekTesuChiRelateEntity entity : youKaiEntityList) {
             businessList.add(new YouKaiGoNinTeiKekTesuChi(entity));
@@ -66,9 +66,9 @@ public class YouKaiGoNinTeiKekTesuChiFinder {
     @Transaction
     public SearchResult<YouKaiGoNinTeiKekTesuChi> get結果通知出力対象申請者一覧(YouKaiGoNinTeiKekTesuChiMapperParameter param) {
         List<YouKaiGoNinTeiKekTesuChi> businessList = new ArrayList<>();
-        IYouKaiGoNinTeiKekTesuChiMapper YouKaiMapper
+        IYouKaiGoNinTeiKekTesuChiMapper youKaiMapper
                 = mapperProvider.create(IYouKaiGoNinTeiKekTesuChiMapper.class);
-        List<YouKaiGoNinTeiKekTesuChiRelateEntity> youKaiEntityList = YouKaiMapper.getKeKaTsuChiSyuTsuRyoKuTaiSyou(param);
+        List<YouKaiGoNinTeiKekTesuChiRelateEntity> youKaiEntityList = youKaiMapper.getKeKaTsuChiSyuTsuRyoKuTaiSyou(param);
         int 連番 = 1;
         for (YouKaiGoNinTeiKekTesuChiRelateEntity entity : youKaiEntityList) {
             entity.setRenNo(連番);

@@ -16,7 +16,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class YouKaiGoNinTeiKekTesuChiMybitisParamter implements IMyBatisParameter {
+public final class YouKaiGoNinTeiKekTesuChiMybitisParamter implements IMyBatisParameter {
 
     private final RString 二次判定期間From;
     private final RString 二次判定期間To;

@@ -16,14 +16,34 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class MainPanelHandler {
 
+    /**
+     * 未出力のみ
+     */
     public static final RString 未出力のみ = new RString("key0");
+    /**
+     * 未出力のみフラグ
+     */
     public static final RString 未出力のみフラグ = new RString("1");
+    /**
+     * 未出力のみ以外
+     */
     public static final RString 未出力のみ以外 = new RString("2");
+    /**
+     * 希望のみ
+     */
     public static final RString 希望のみ = new RString("key0");
+    /**
+     * レ点
+     */
     public static final RString レ点 = new RString("✔");
+    /**
+     * 対象申請者一覧
+     */
     public static final RString 対象申請者一覧 = new RString("対象申請者一覧");
+    /**
+     * 申請者
+     */
     public static final RString 申請者 =  new RString("申請者");
-
     private final MainPanelDiv div;
 
     /**

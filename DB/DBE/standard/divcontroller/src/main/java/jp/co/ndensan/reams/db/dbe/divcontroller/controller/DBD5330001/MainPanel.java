@@ -66,13 +66,13 @@ public class MainPanel {
         }
         
         // TODO 主治医医療機関コードと主治医コード　QA421を待ち
-        List<YouKaiGoNinTeiKekTesuChi> YouKaiGoNinTeiKekTesuChiBusiness = YouKaiGoNinTeiKekTesuChiFinder.createInstance()
+        List<YouKaiGoNinTeiKekTesuChi> youKaiGoNinTeiKekTesuChiBusiness = YouKaiGoNinTeiKekTesuChiFinder.createInstance()
                 .get主治医選択一覧(YouKaiGoNinTeiKekTesuChiMapperParameter
                 .createSelectListParam(dateFrom,
                         dateTo,
                         RString.EMPTY, RString.EMPTY, 未出力のみフラグ, 希望のみフラグ)).records();
 
-        getHandler(div).edit主治医選択一覧情報(YouKaiGoNinTeiKekTesuChiBusiness);
+        getHandler(div).edit主治医選択一覧情報(youKaiGoNinTeiKekTesuChiBusiness);
         return ResponseData.of(div).respond();
     }
 
@@ -101,13 +101,13 @@ public class MainPanel {
         }
         RString 主治医医療機関コード = div.getDgDoctorSelection().getActiveRow().getShujiiIryokikanCode();
         RString 主治医コード = div.getDgDoctorSelection().getActiveRow().getDoctorCode();
-        List<YouKaiGoNinTeiKekTesuChi> YouKaiGoNinTeiKekTesuChiBusiness = YouKaiGoNinTeiKekTesuChiFinder.createInstance()
+        List<YouKaiGoNinTeiKekTesuChi> youKaiGoNinTeiKekTesuChiBusiness = YouKaiGoNinTeiKekTesuChiFinder.createInstance()
                 .get結果通知出力対象申請者一覧(YouKaiGoNinTeiKekTesuChiMapperParameter
-                        .createSelectListParam(dateFrom,
-                                dateTo,
-                                主治医医療機関コード,主治医コード, 未出力のみフラグ, 希望のみフラグ)).records();
+                        .createSelectListParam(dateFrom, 
+                                dateTo, 
+                                主治医医療機関コード, 主治医コード, 未出力のみフラグ, 希望のみフラグ)).records();
 
-        getHandler(div).edit結果通知出力対象申請者一覧情報(YouKaiGoNinTeiKekTesuChiBusiness);
+        getHandler(div).edit結果通知出力対象申請者一覧情報(youKaiGoNinTeiKekTesuChiBusiness);
         return ResponseData.of(div).respond();
     }
     
