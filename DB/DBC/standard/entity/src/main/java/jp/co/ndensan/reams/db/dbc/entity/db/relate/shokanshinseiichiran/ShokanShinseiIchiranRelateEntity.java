@@ -28,4 +28,25 @@ public class ShokanShinseiIchiranRelateEntity {
     private FlexibleYearMonth サービス提供年月From;
     private FlexibleYearMonth サービス提供年月To;
 
+    public ShokanShinseiIchiranRelateEntity(
+            HihokenshaNo hiHokenshaNo,
+            FlexibleYearMonth serviceTeikyoYM,
+            RString seiriNo,
+            FlexibleDate shinseiYMD,
+            FlexibleYearMonth sofuYM,
+            RString yoshikiNo,
+            FlexibleDate ketteiYMD,
+            FlexibleYearMonth サービス提供年月From,
+            FlexibleYearMonth サービス提供年月To) {
+        this.hiHokenshaNo = hiHokenshaNo;
+        this.serviceTeikyoYM = serviceTeikyoYM;
+        this.seiriNo = seiriNo;
+        this.shinseiYMD = shinseiYMD;
+        this.sofuYM = sofuYM;
+        this.yoshikiNo = yoshikiNo;
+        this.ketteiYMD = ketteiYMD;
+        this.サービス提供年月From = サービス提供年月From;
+        this.サービス提供年月To = サービス提供年月To;
+    }
+
 }
