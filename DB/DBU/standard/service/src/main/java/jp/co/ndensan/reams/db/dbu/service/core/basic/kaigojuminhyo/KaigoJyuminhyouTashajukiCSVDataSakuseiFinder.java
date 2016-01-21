@@ -42,9 +42,9 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
     private static final RString 連番 = new RString("0000001");
     private static final RString 区分_1 = new RString("1");
     private static final RString 区分_0 = new RString("0");
-    private static final RString 市町村コード_初期化 = new RString("123456");
+    private static final RString 市町村コード_初期化 = new RString("      ");
     private static final RString 識別ＩＤ_初期化 = new RString("    ");
-    private static final RString システム日付_初期化 = new RString("20160119173112");
+    private static final RString システム日付_初期化 = new RString("              ");
     private static final RString 区分_初期化 = new RString(" ");
     private static final RString 連番_初期化 = new RString("       ");
     private static final RString ＦＩＬＬＥＲ1_初期化 = new RString("        ");
@@ -54,8 +54,8 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
     private static final RString 識別コード_15桁初期化 = new RString("               ");
     private static final Code 要介護状態区分ｺｰﾄﾞ_初期化 = new Code("  ");
     private static final FlexibleDate 年月日_初期化 = new FlexibleDate("        ");
-    private static final RString 更新日時_8桁初期化 = new RString("20160119173112");
-    private static final RString 更新日時_12桁初期化 = new RString("20160119173112");
+    private static final RString 更新日時_8桁初期化 = new RString("              ");
+    private static final RString 更新日時_12桁初期化 = new RString("              ");
     private static final RString ＦＩＬＬＥＲ2_初期化 = new RString("    ");
     private static final RString 削除フラグ_初期化 = new RString(" ");
     private final DbT7027KakushuCodeHenkanDac dac;
@@ -133,10 +133,11 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             件数 = 件数 + 1;
             RString 連番new = this.get連番(件数);
             hachientity.set連番(連番new);
-            if (entity.get被保険者番号() != null && (!entity.get被保険者番号().isEmpty() && (entity.get受給者被保険者番号() == null
-                    || entity.get受給者被保険者番号().isEmpty()))) {
+            if ((entity.get被保険者番号() != null && !entity.get被保険者番号().isEmpty())
+                    && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
                 hachientity.set被保険者番号(entity.get被保険者番号());
                 hachientity.set市町村コード(entity.get市町村コード());
+                //TODO 該当「識別コード」に8桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_8) {
@@ -157,12 +158,13 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     hachientity.set更新日時(entity.get更新日時());
                 }
             }
-            if (entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null && entity.get資格取得年月日() != null
-                    && entity.get受給者認定有効期間開始年月日() != null && (!entity.get被保険者番号().isEmpty()
+            if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null && entity.get資格取得年月日() != null
+                    && entity.get受給者認定有効期間開始年月日() != null) && (!entity.get被保険者番号().isEmpty()
                     && !entity.get受給者被保険者番号().isEmpty()
                     && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
                 hachientity.set被保険者番号(entity.get被保険者番号());
                 hachientity.set市町村コード(entity.get市町村コード());
+                //TODO 該当「識別コード」に8桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_8) {
@@ -191,12 +193,13 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     }
                 }
             }
-            if (entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
-                    && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null
+            if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
+                    && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null)
                     && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
                     && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
                 hachientity.set被保険者番号(entity.get被保険者番号());
                 hachientity.set市町村コード(entity.get市町村コード());
+                //TODO 該当「識別コード」に8桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_8) {
@@ -220,6 +223,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             if ((entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty()) && (entity.get受給者被保険者番号() != null
                     && !entity.get受給者被保険者番号().isEmpty())) {
                 hachientity.set市町村コード(new RString(this.get地方公共団体コード().toString()));
+                //TODO 該当「識別コード」に8桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 受給者識別コード = this.get受給者識別コード(codeHenkanKubun, entity);
                     if (受給者識別コード.length() <= 桁目_8) {
@@ -309,10 +313,11 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             件数 = 件数 + 1;
             RString 連番new = this.get連番(件数);
             junientity.set連番(連番new);
-            if (entity.get被保険者番号() != null && (!entity.get被保険者番号().isEmpty() && (entity.get受給者被保険者番号() == null
-                    || entity.get受給者被保険者番号().isEmpty()))) {
+            if ((entity.get被保険者番号() != null && !entity.get被保険者番号().isEmpty())
+                    && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
                 junientity.set市町村コード(entity.get市町村コード());
                 junientity.set被保険者番号(entity.get被保険者番号());
+                //TODO 該当「識別コード」に12桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_12) {
@@ -341,6 +346,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
                 junientity.set市町村コード(entity.get市町村コード());
                 junientity.set被保険者番号(entity.get被保険者番号());
+                //TODO 該当「識別コード」に12桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_12) {
@@ -385,6 +391,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
                 junientity.set市町村コード(entity.get市町村コード());
                 junientity.set被保険者番号(entity.get被保険者番号());
+                //TODO 該当「識別コード」に12桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_12) {
@@ -410,6 +417,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             if ((entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty())
                     && (entity.get受給者被保険者番号() != null && !entity.get受給者被保険者番号().isEmpty())) {
                 junientity.set市町村コード(new RString(this.get地方公共団体コード().toString()));
+                //TODO 該当「識別コード」に12桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 受給者識別コード = this.get受給者識別コード(codeHenkanKubun, entity);
                     if (受給者識別コード.length() <= 桁目_12) {
@@ -503,10 +511,11 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             件数 = 件数 + 1;
             RString 連番new = this.get連番(件数);
             jugoentity.set連番(連番new);
-            if (entity.get被保険者番号() != null && (!entity.get被保険者番号().isEmpty()
-                    && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty()))) {
+            if ((entity.get被保険者番号() != null && !entity.get被保険者番号().isEmpty())
+                    && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
                 jugoentity.set市町村コード(entity.get市町村コード());
                 jugoentity.set被保険者番号(entity.get被保険者番号());
+                //TODO 該当「識別コード」に15桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_15) {
@@ -535,6 +544,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
                 jugoentity.set市町村コード(entity.get市町村コード());
                 jugoentity.set被保険者番号(entity.get被保険者番号());
+                //TODO 該当「識別コード」に15桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_15) {
@@ -579,6 +589,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
                 jugoentity.set市町村コード(entity.get市町村コード());
                 jugoentity.set被保険者番号(entity.get被保険者番号());
+                //TODO 該当「識別コード」に15桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_15) {
@@ -604,6 +615,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             if ((entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty())
                     && (entity.get受給者被保険者番号() != null && !entity.get受給者被保険者番号().isEmpty())) {
                 jugoentity.set市町村コード(new RString(this.get地方公共団体コード().toString()));
+                //TODO 該当「識別コード」に15桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 受給者識別コード = this.get受給者識別コード(codeHenkanKubun, entity);
                     if (受給者識別コード.length() <= 桁目_15) {
@@ -647,13 +659,25 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
         return jugoentity;
     }
 
+    /**
+     * コード区分と内部コードより、市町村コードと外部コードを取得する。
+     *
+     * @param codeHenkanKubun コード区分
+     * @param コード コード
+     * @return dbentity DbT7027KakushuCodeHenkanEntity
+     */
     //TODO 該当の検索結果は複数件を戻る可能 QA333 2015/12/30まで。
+    public DbT7027KakushuCodeHenkanEntity getShinkyuCode(RString codeHenkanKubun, RString コード) {
+        DbT7027KakushuCodeHenkanEntity dbentity = dac.selectByCodeKubun(codeHenkanKubun, コード);
+        return dbentity;
+    }
+
     private RString get識別コード(RString codeHenkanKubun, KaigoJuminhyoTashaJukiDataEntity entity) {
         if (entity.get識別コード() == null || entity.get識別コード().isEmpty()) {
             RString 識別コード = new RString("");
             return 識別コード;
         }
-        DbT7027KakushuCodeHenkanEntity dbentity = dac.selectByCodeKubun(codeHenkanKubun, new RString(entity.get識別コード().toString()));
+        DbT7027KakushuCodeHenkanEntity dbentity = getShinkyuCode(codeHenkanKubun, new RString(entity.get識別コード().toString()));
         if (dbentity == null) {
             RString 識別コード = new RString("");
             return 識別コード;
@@ -662,13 +686,12 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
         return 識別コード;
     }
 
-    //TODO 該当の検索結果は複数件を戻る可能 QA333 2015/12/30まで。
     private RString get受給者識別コード(RString codeHenkanKubun, KaigoJuminhyoTashaJukiDataEntity entity) {
         if (entity.get受給者識別コード() == null || entity.get受給者識別コード().isEmpty()) {
             RString 受給者識別コード = new RString("");
             return 受給者識別コード;
         }
-        DbT7027KakushuCodeHenkanEntity dbentity = dac.selectByCodeKubun(codeHenkanKubun, new RString(entity.get受給者識別コード().toString()));
+        DbT7027KakushuCodeHenkanEntity dbentity = getShinkyuCode(codeHenkanKubun, new RString(entity.get受給者識別コード().toString()));
         if (dbentity == null) {
             RString 受給者識別コード = new RString("");
             return 受給者識別コード;
