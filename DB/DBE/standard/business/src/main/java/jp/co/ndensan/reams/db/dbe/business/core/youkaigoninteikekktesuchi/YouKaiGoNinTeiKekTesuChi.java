@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.core.youkaigoninteikekktesuchi;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.NinteiShinseiHoreiCode;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -158,7 +156,9 @@ public class YouKaiGoNinTeiKekTesuChi  implements Serializable {
      * @return 申請区分_申請時
      */
     public RString get申請区分_申請時() {
-       return NinteiShinseiShinseijiKubunCode.toValue(entity.getNinteiShinseiShinseijiKubunCode()).get名称();
+       // return NinteiShinseiShinseijiKubunCode.toValue(entity.getNinteiShinseiShinseijiKubunCode()).get名称();
+        // TODO QA539を待ち
+        return RString.EMPTY;
     }
     
     /**
@@ -166,7 +166,9 @@ public class YouKaiGoNinTeiKekTesuChi  implements Serializable {
      * @return 申請区分_法令
      */
     public RString get申請区分_法令() {
-       return NinteiShinseiHoreiCode.toValue(entity.getNinteiShinseiHoreiKubunCode()).get名称();
+       // return NinteiShinseiHoreiCode.toValue(entity.getNinteiShinseiHoreiKubunCode()).get名称();
+        // TODO QA539を待ち
+        return RString.EMPTY;
     }
     
     
@@ -175,6 +177,7 @@ public class YouKaiGoNinTeiKekTesuChi  implements Serializable {
      * @return 二次判定結果
      */
     public RString get二次判定結果() {
+        
        return YokaigoJotaiKubun09.toValue(entity.getNijiHanteiYokaigoJotaiKubunCode()).get名称();
     }
     
