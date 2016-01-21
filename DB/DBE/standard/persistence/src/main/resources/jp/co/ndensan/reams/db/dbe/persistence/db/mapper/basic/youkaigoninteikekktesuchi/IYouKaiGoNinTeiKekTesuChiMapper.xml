@@ -60,6 +60,9 @@
         AND rgdb."DbT5912ShujiiJoho"."shichosonCode" = rgdb."DbT5051KoseiShichosonMaster"."shichosonCode"
         INNER JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"
         ON  rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+        AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" = 
+            MAX(SELECT rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" FROM  rgdb."DbT5301ShujiiIkenshoIraiJoho" 
+                    WHERE rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
         <if test="useSyuRyoKuTaiSyou">
             AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoKiboFlag" = TRUE
         </if>
@@ -126,6 +129,9 @@
         ON  rgdb."DbT5102NinteiKekkaJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
         INNER JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"
         ON  rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+        AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" = 
+            MAX(SELECT rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" FROM  rgdb."DbT5301ShujiiIkenshoIraiJoho" 
+                    WHERE rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
         <if test="useSyuRyoKuTaiSyou">
             AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoKiboFlag" = TRUE
         </if>
@@ -156,7 +162,7 @@
     
     <select id="getCyouHyouSyuTsuRyoKu"
             resultMap="ResultMap_YouKaiGoNinTeiKekTesuChiRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter" fetchSize="500" >
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe090001.YouKaiGoNinTeiKekTesuChiMybitisParamter" fetchSize="500" >
         SELECT
             rgdb."DbT5051KoseiShichosonMaster"."shichosonMeisho" AS dbT5051KoseiShichosonMaster_shichosonMeisho,
             rgdb."DbT5101NinteiShinseiJoho"."hihokenshaName"  AS dbT5101NinteiShinseiJoho_hihokenshaName,
@@ -176,6 +182,9 @@
         ON  rgdb."DbT5102NinteiKekkaJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
         INNER JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"
         ON  rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+        AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" = 
+            MAX(SELECT rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" FROM  rgdb."DbT5301ShujiiIkenshoIraiJoho" 
+                    WHERE rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoKiboFlag" = TRUE
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."logicalDeletedFlag" = FALSE
         WHERE 
@@ -213,7 +222,7 @@
     </select>
     
     <!-- 主治医意見書作成依頼情報更新 -->
-    <update id="updateShoriDateKanri" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" >
+    <update id="updateShuJiIkenSyoSaKuSeiIraiJyouHou" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity" >
         UPDATE 
             rgdb."DbT5301ShujiiIkenshoIraiJoho"
         SET

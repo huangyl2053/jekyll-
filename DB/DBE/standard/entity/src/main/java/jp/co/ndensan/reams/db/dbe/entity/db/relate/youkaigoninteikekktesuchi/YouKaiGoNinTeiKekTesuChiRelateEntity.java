@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 public class YouKaiGoNinTeiKekTesuChiRelateEntity {
-
     private RString shujiiIryokikanCode;
     private RString iryoKikanMeisho;
     private RString yubinNo;
@@ -22,7 +21,6 @@ public class YouKaiGoNinTeiKekTesuChiRelateEntity {
     private RString shujiiCode;
     private RString shujiiName;
     private int taiSyouCount;
-    
     private int renNo;
     private RString hihokenshaNo;
     private RString hihokenshaName;
@@ -39,9 +37,7 @@ public class YouKaiGoNinTeiKekTesuChiRelateEntity {
     private RString nijiHanteiYMD;
     private RString ninteiJohoTeikyoYMD;
     private RString shinseishoKanriNo;
-    
     private RString shichosonMeisho;
     private RString shinsakaiIken;
     private RString ikenshoIraiRirekiNo;
-
 }

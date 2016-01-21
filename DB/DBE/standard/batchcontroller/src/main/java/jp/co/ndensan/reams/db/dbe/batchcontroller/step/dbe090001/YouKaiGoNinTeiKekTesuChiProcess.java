@@ -47,21 +47,18 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     private static final ReportId REPORT_ID = new ReportId(ItakusakiChosainIchiranReportId.REPORTID_DBE090001.getCode());
     private JohoTeikyoShiryoItem headItem;
     private IYouKaiGoNinTeiKekTesuChiMapper mapper;
-    private YouKaiGoNinTeiKekTesuChiMybitisParamter mybatisPrm; 
-    
-    
-    
+    private YouKaiGoNinTeiKekTesuChiMybitisParamter mybatisPrm;
+
     @BatchWriter
     private BatchReportWriter<JohoTeikyoShiryoReportSource> batchWrite;
     private ReportSourceWriter<JohoTeikyoShiryoReportSource> retortWrite;
 
-    
-     @Override
+    @Override
     protected void initialize() {
         mybatisPrm = paramter.toMybitisParameter();
         mapper = getMapper(IYouKaiGoNinTeiKekTesuChiMapper.class);
     }
-    
+
     @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MYBATIS_SELECT_ID, paramter.toMybitisParameter());
@@ -71,6 +68,13 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     protected void createWriter() {
         batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
         retortWrite = new ReportSourceWriter<>(batchWrite);
+    }
+
+    @Override
+    protected void beforeExecute() {
+        mapper = getMapper(IYouKaiGoNinTeiKekTesuChiMapper.class);
+        List<YouKaiGoNinTeiKekTesuChiRelateEntity> list = mapper.getCyouHyouSyuTsuRyoKu(mybatisPrm);
+        System.out.println(list.size());
     }
 
     @Override
@@ -90,43 +94,34 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     }
 
     private void eidtItem(YouKaiGoNinTeiKekTesuChiRelateEntity entity) {
-       
+
+        // 課題番号34を待ち
 //        ReportAssembler<ChosaIraiIchiranhyoReportSource> assembler = createAssembler(property, reportManager)
 //        INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
 //        INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
 //        RDate.getNowDate(), assembler.getImageFolderPath());
-        
-// QA  要提
-        RString 認証者氏名 = new RString("認証者氏名") ;
+        RString 認証者氏名 = new RString("認証者氏名");
         RString 帳票名 = BusinessConfig.get(ItakusakiChosainIchiranReportId.REPORTID_DBE090001, SubGyomuCode.DBE認定支援);
         RString 認定結果 = YokaigoJotaiKubun09.toValue(entity.getNijiHanteiYokaigoJotaiKubunCode()).get名称();
 
         TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
         List<TsuchishoTeikeibunEntity> tempList = manager.get通知書定型文パターン(REPORT_ID, SubGyomuCode.DBE認定支援).get通知書定型文List();
-
-        headItem = new JohoTeikyoShiryoItem(RDate.getNowDate()
-                , entity.getShichosonMeisho()             // CompNinshosha．出力項目．市町村名  CompNinshosha中没有这个项目 提QA
-                , 認証者氏名                               //  認証者氏名
-                , 帳票名                                   //  帳票名
-                , get通知文(tempList,1)      
-                , entity.getHihokenshaName()              // 氏名
-                , entity.getJusho()                       // 住所
-                , new RDate(entity.getNijiHanteiYMD().toString())    // 認定年月日
-                , 認定結果                                            // 認定結果
-                , new RDate(entity.getNijiHanteiNinteiYukoKaishiYMD().toString()) // 認定有効期間From
-                , new RDate(entity.getNijiHanteiNinteiYukoShuryoYMD().toString()) // 認定有効期間To
-                , entity.getShinsakaiIken() // 審査会意見
-                , get通知文(tempList,2)  
-                , get通知文(tempList,3) 
-                , get通知文(tempList,4) 
-                , get通知文(tempList,5) 
-                , get通知文(tempList,6) 
-                , get通知文(tempList,7) 
-                , get通知文(tempList,8) 
-                , get通知文(tempList,9) 
-                , get通知文(tempList,10));
-        
-        
+        headItem = new JohoTeikyoShiryoItem(RDate.getNowDate(), entity.getShichosonMeisho() // QA 539
+                , 認証者氏名, 帳票名, get通知文(tempList, 1)
+                , entity.getHihokenshaName()
+                , entity.getJusho()
+                , new RDate(entity.getNijiHanteiYMD().toString())
+                , 認定結果, new RDate(entity.getNijiHanteiNinteiYukoKaishiYMD().toString())
+                , new RDate(entity.getNijiHanteiNinteiYukoShuryoYMD().toString())
+                , entity.getShinsakaiIken(), get通知文(tempList, 2)
+                , get通知文(tempList, 3)
+                , get通知文(tempList, 4)
+                , get通知文(tempList, 5)
+                , get通知文(tempList, 6)
+                , get通知文(tempList, 7)
+                , get通知文(tempList, 8)
+                , get通知文(tempList, 9)
+                , get通知文(tempList, 10));
     }
 
     private RString get通知文(List<TsuchishoTeikeibunEntity> tempList, int index) {
