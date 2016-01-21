@@ -40,13 +40,17 @@ public class KojinJokyoShokaiHandler {
     /**
      * 要介護認定個人状況のデータを設定します。
      *
-     * @param kojinJokyoShokaiList 要介護認定個人状況
+     * @param kojinJokyoShokaiList 要介護認定個人状況データ
      */
     public void setKojinJokyoShokai(List<KojinJokyoShokai> kojinJokyoShokaiList) {
-        div.getCcdKaigoNinteiAtenInfo();
+        div.getCcdKaigoNinteiAtenInfo().initialize();
         div.getCcdKaigoNinteiShikakuInfo();
         getKojinJokyoShokai1(kojinJokyoShokaiList);
         getKojinJokyoShokai2(kojinJokyoShokaiList);
+        // TODO 蘇広俊 QA439提出中
+        div.getCcdShujiiIryokikanAndShujiiInput();
+        // TODO 蘇広俊 QA479提出中
+        div.getCcdChosaItakusakiAndChosainInput();
     }
     
     private void getKojinJokyoShokai1(List<KojinJokyoShokai> kojinJokyoShokaiList) {
@@ -117,7 +121,6 @@ public class KojinJokyoShokaiHandler {
     }
     
     private void getKojinJokyoShokai2(List<KojinJokyoShokai> kojinJokyoShokaiList) {
-        
         if (kojinJokyoShokaiList.get(0).get認定申請区分申請時() != null) {
         div.getTxtShinseiKubunShinseiji().setValue(NinteiShinseiShinseijiKubunCode.
                 toValue(new RString(kojinJokyoShokaiList.get(0).get認定申請区分申請時().toString())).toRString());
@@ -166,14 +169,13 @@ public class KojinJokyoShokaiHandler {
     }
     
     /**
-     *要介護認定個人状況のデータを設定します。
+     * 要介護認定個人状況のデータを設定します。
      *
-     * @param kojinJokyoShokaiList 要介護認定個人状況
+     * @param kojinJokyoShokaiList 要介護認定個人状況データ
      * @return KojinShinchokuJokyohyoEntity
      */
     public KojinShinchokuJokyohyoEntity setKojinShinchokuJokyohyo(List<KojinJokyoShokai> kojinJokyoShokaiList) {
         KojinShinchokuJokyohyoEntity jokyohyoEntity = getKojinShinchokuJokyohyo(kojinJokyoShokaiList);
-        
         return jokyohyoEntity;
     }
     
@@ -286,7 +288,6 @@ public class KojinJokyoShokaiHandler {
         jokyohyoEntity.setKonnkai_22(new RString(kojinJokyoShokaiList.get(0).get今回センター送信年月日().toString()));
         jokyohyoEntity.setZennkai_22(new RString(kojinJokyoShokaiList.get(0).get前回センター送信年月日().toString()));
         jokyohyoEntity.setZennnoma_22(new RString(kojinJokyoShokaiList.get(0).get前々回センター送信年月日().toString()));
-        
         return jokyohyoEntity;
     }
 }

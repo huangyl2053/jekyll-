@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.kojinshinchokujokyohyo.Ko
 import jp.co.ndensan.reams.db.dbe.service.core.basic.kojinjokyoshokai.KojinJokyoShokaiFinder;
 import jp.co.ndensan.reams.db.dbe.service.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -34,12 +35,68 @@ public class KojinJokyoShokai {
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(SaibanHanyokeyName.申請書整理番号, ShinseishoKanriNo.class);
         KojinJokyoShokaiParameter parameter = KojinJokyoShokaiParameter.createSelectByKeyParam(申請書管理番号);
         KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
-         List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai> kojinJokyoShokaiList 
+        List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai> kojinJokyoShokaiList 
                  = kojinJokyoShokaiFinder.getKojinJokyoShokai(parameter).records();
          if (!kojinJokyoShokaiList.isEmpty()) {
              getHandler(div).setKojinJokyoShokai(kojinJokyoShokaiList);
          }
-        
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 連絡先ボタン処理です。
+     *
+     * @param div KojinJokyoShokaiDiv
+     * @return ResponseData<KojinJokyoShokaiDiv>
+     */
+     public ResponseData<KojinJokyoShokaiDiv> onClick_btnRenrakusaki(KojinJokyoShokaiDiv div) {
+        // TODO 蘇広俊 QA530提出中
+        return ResponseData.of(div).respond();
+    }
+    
+     /**
+     * 連絡事項ボタン処理です。
+     *
+     * @param div KojinJokyoShokaiDiv
+     * @return ResponseData<KojinJokyoShokaiDiv>
+     */
+     public ResponseData<KojinJokyoShokaiDiv> onClick_btnShichosonRenrakuJiko(KojinJokyoShokaiDiv div) {
+         // TODO 蘇広俊 QA530提出中
+         return ResponseData.of(div).respond();
+    }
+    
+     /**
+     * 審査会情報ボタン処理です。
+     *
+     * @param div KojinJokyoShokaiDiv
+     * @return ResponseData<KojinJokyoShokaiDiv>
+     */
+     public ResponseData<KojinJokyoShokaiDiv> onClick_btnShinsakaiJoho(KojinJokyoShokaiDiv div) {
+        // TODO 蘇広俊 QA530提出中
+        return ResponseData.of(div).respond();
+    }
+     
+    /**
+     * 意見書依頼照会処理です。
+     *
+     * @param div KojinJokyoShokaiDiv
+     * @return ResponseData<KojinJokyoShokaiDiv>
+     */
+     public ResponseData<KojinJokyoShokaiDiv> onClick_btnShujiiIkenshoSakuseiIraiShokai(KojinJokyoShokaiDiv div) {
+         ViewStateHolder.put(ViewStateKeys.被保険者番号,  div.getCcdKaigoNinteiShikakuInfo().get被保険者番号());
+         // TODO 蘇広俊 QA530提出中
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 調査依頼照会処理です。
+     *
+     * @param div KojinJokyoShokaiDiv
+     * @return ResponseData<KojinJokyoShokaiDiv>
+     */ 
+    public ResponseData<KojinJokyoShokaiDiv> onClick_btnNinteiChosaIraiShokai(KojinJokyoShokaiDiv div) {
+        ViewStateHolder.put(ViewStateKeys.被保険者番号,  div.getCcdKaigoNinteiShikakuInfo().get被保険者番号());
+        // TODO 蘇広俊 QA530提出中
         return ResponseData.of(div).respond();
     }
     
@@ -53,13 +110,12 @@ public class KojinJokyoShokai {
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(SaibanHanyokeyName.申請書整理番号, ShinseishoKanriNo.class);
         KojinJokyoShokaiParameter parameter = KojinJokyoShokaiParameter.createSelectByKeyParam(申請書管理番号);
         KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
-       List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai> kojinJokyoShokaiList 
+        List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai> kojinJokyoShokaiList 
                  = kojinJokyoShokaiFinder.getKojinShinchokuJokyohyo(parameter).records();
-       KojinShinchokuJokyohyoEntity jokyohyoEntity = new KojinShinchokuJokyohyoEntity();
-         if (!kojinJokyoShokaiList.isEmpty()) {
+        KojinShinchokuJokyohyoEntity jokyohyoEntity = new KojinShinchokuJokyohyoEntity();
+        if (!kojinJokyoShokaiList.isEmpty()) {
              jokyohyoEntity = getHandler(div).setKojinShinchokuJokyohyo(kojinJokyoShokaiList);
-         }
-         
+        }
         return ResponseData.of(new KojinShinchokuJokyohyoPrintService().print(jokyohyoEntity)).respond();
     }
     
