@@ -59,7 +59,7 @@
         <result property="lastUpdateTimestamp" column="dbT5201NinteichosaIraiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5201NinteichosaIraiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="koroshoIfShikibetsuCode" column="dbT5201NinteichosaIraiJoho_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <!--        <result property="ninteichosaItakusakiCode" column="dbT5201NinteichosaIraiJoho_ninteichosaItakusakiCode" />-->
+        <result property="ninteichosaItakusakiCode" column="dbT5201NinteichosaIraiJoho_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="ninteiChosainCode" column="dbT5201NinteichosaIraiJoho_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteichosaIraiKubunCode" column="dbT5201NinteichosaIraiJoho_ninteichosaIraiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ninteichosaIraiKaisu" column="dbT5201NinteichosaIraiJoho_ninteichosaIraiKaisu" />
