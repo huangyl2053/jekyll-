@@ -63,11 +63,11 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
     private DbT7022ShoriDateKanriEntity shoriDateKanriEntity;
     private DbT7035RendoPatternEntity dbT7035RendoPatternEntity;
     private RendoPatternEntity rendoPatternEntity;
-    private List<KaigoJuminhyoEntity> kaigoJuminhyoEntityList = new ArrayList<>();
-    private List<KaigoJuminhyoTashaJukiDataEntity> tashaJukiDataEntityList = new ArrayList<>();
-    private List<TashajukiHachiCSVDataEntity> hachiCSVDataEntityList = new ArrayList<>();
-    private List<TashajukiJunitoJugoCSVDataEntity> junitoJugoCSVDataEntityList = new ArrayList<>();
     private KaigoJuminhyoProcessParameter processParameter;
+    List<KaigoJuminhyoEntity> kaigoJuminhyoEntityList = new ArrayList<>();
+    List<KaigoJuminhyoTashaJukiDataEntity> tashaJukiDataEntityList = new ArrayList<>();
+    List<TashajukiHachiCSVDataEntity> hachiCSVDataEntityList = new ArrayList<>();
+    List<TashajukiJunitoJugoCSVDataEntity> junitoJugoCSVDataEntityList = new ArrayList<>();
 
     @Override
     protected void initialize() {
