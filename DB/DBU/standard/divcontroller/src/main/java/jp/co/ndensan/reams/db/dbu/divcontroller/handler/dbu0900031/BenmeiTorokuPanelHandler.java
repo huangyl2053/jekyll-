@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class BenmeiTorokuPanelHandler {
 
     private final BenmeiTorokuPanelDiv panelDiv;
-    private static final RString 状態_追加 = new RString("追加");
-    private static final RString 状態_修正 = new RString("修正");
+    private static final RString 状態_登録 = new RString("登録");
+    private static final RString 状態_更新 = new RString("更新");
     private static final RString 状態_削除 = new RString("削除");
 
     /**
@@ -37,13 +37,13 @@ public class BenmeiTorokuPanelHandler {
      * @param viewState 表示状態
      */
     public void initialize(BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho, RString viewState) {
-        if (viewState.equals(状態_修正)) {
+        if (viewState.equals(状態_更新)) {
             if (benmeiTorokuMeisaiJoho != null) {
-                panelDiv.setProcessState(状態_修正);
+                panelDiv.setProcessState(状態_更新);
                 get画面初期の更新モードの表示制御();
                 get弁明登録明細情報のnull処理(benmeiTorokuMeisaiJoho);
             } else {
-                panelDiv.setProcessState(状態_追加);
+                panelDiv.setProcessState(状態_登録);
                 get画面初期の更新モードの表示制御();
                 panelDiv.getBenmeiTorokuMeisaiPanel().getTxtdateBenmeiSyoSakuseibi().clearValue();
                 panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeisya().setValue(RString.EMPTY);
