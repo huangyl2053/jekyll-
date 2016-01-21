@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.relate.TaJushochiTokureisyaKan;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuKaijoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -35,11 +33,13 @@ public class TaJushochiTokureisyaKanRirelateEntity {
     private RString edaNo;
     private RString idoJiyuCode;
     private LasdecCode shichosonCode;
-    private KaigoTatokuTekiyoJiyu tekiyoJiyuCode;
+    // TODO KaigoTatokuTekiyoJiyuタイプ、TypeHandlerを存在しない。
+    private RString tekiyoJiyuCode;
     private FlexibleDate tekiyoYMD;
     private FlexibleDate tekiyoTodokedeYMD;
     private FlexibleDate tekiyoUketsukeYMD;
-    private KaigoTatokuKaijoJiyu kaijoJiyuCode;
+    // TODO KaigoTatokuTekiyoJiyuタイプ、TypeHandlerを存在しない。
+    private RString kaijoJiyuCode;
     private FlexibleDate kaijoYMD;
     private FlexibleDate kaijoTodokedeYMD;
     private FlexibleDate kaijoUketsukeYMD;
