@@ -19,9 +19,9 @@
         <result property="seinengappiYMD" column="dbT5101NinteiShinseiJoho_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="age" column="dbT5101NinteiShinseiJoho_age" />
         <result property="ninteiShinseiYMD" column="dbT5101NinteiShinseiJoho_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="ninteiShinseiShinseijiKubunCode" column="dbT5101NinteiShinseiJoho_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiShinseiShinseijiKubunCod" column="dbT5101NinteiShinseiJoho_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteiShinseiHoreiKubunCode" column="dbT5101NinteiShinseiJoho_ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="nijiHanteiYokaigoJotaiKubunCode" column="dbT5102NinteiKekkaJoho_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiHanteiYokaigoJotaiKubunCod" column="dbT5102NinteiKekkaJoho_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="nijiHanteiNinteiYukoKikan" column="dbT5102NinteiKekkaJoho_nijiHanteiNinteiYukoKikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="nijiHanteiNinteiYukoKaishiYMD" column="dbT5102NinteiKekkaJoho_nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="nijiHanteiNinteiYukoShuryoYMD" column="dbT5102NinteiKekkaJoho_nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
