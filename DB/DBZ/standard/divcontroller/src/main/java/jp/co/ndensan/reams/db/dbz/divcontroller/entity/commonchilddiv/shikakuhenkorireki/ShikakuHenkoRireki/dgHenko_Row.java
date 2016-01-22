@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhe
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Dec 09 23:02:30 JST 2015 
+ * Fri Jan 22 17:25:29 JST 2016 
  */
 
 
@@ -31,6 +31,8 @@ public class dgHenko_Row extends DataRow {
     private RString sochimotoHokensha;
     private RString kyuHokensha;
     private TextBoxFlexibleDate shoriDate;
+    private RString hihokenshaNo;
+    private RString shikibetsuCode;
 
     public dgHenko_Row() {
         super();
@@ -43,6 +45,8 @@ public class dgHenko_Row extends DataRow {
         this.sochimotoHokensha = RString.EMPTY;
         this.kyuHokensha = RString.EMPTY;
         this.shoriDate = new TextBoxFlexibleDate();
+        this.hihokenshaNo = RString.EMPTY;
+        this.shikibetsuCode = RString.EMPTY;
         this.setOriginalData("state", state);
         this.setOriginalData("henkoDate", henkoDate);
         this.setOriginalData("henkoTodokedeDate", henkoTodokedeDate);
@@ -52,9 +56,11 @@ public class dgHenko_Row extends DataRow {
         this.setOriginalData("sochimotoHokensha", sochimotoHokensha);
         this.setOriginalData("kyuHokensha", kyuHokensha);
         this.setOriginalData("shoriDate", shoriDate);
+        this.setOriginalData("hihokenshaNo", hihokenshaNo);
+        this.setOriginalData("shikibetsuCode", shikibetsuCode);
     }
 
-    public dgHenko_Row(RString state, TextBoxFlexibleDate henkoDate, TextBoxFlexibleDate henkoTodokedeDate, RString henkoJiyu, RString henkoJiyuKey, RString shozaiHokensha, RString sochimotoHokensha, RString kyuHokensha, TextBoxFlexibleDate shoriDate) {
+    public dgHenko_Row(RString state, TextBoxFlexibleDate henkoDate, TextBoxFlexibleDate henkoTodokedeDate, RString henkoJiyu, RString henkoJiyuKey, RString shozaiHokensha, RString sochimotoHokensha, RString kyuHokensha, TextBoxFlexibleDate shoriDate, RString hihokenshaNo, RString shikibetsuCode) {
         super();
         this.setOriginalData("state", state);
         this.setOriginalData("henkoDate", henkoDate);
@@ -65,6 +71,8 @@ public class dgHenko_Row extends DataRow {
         this.setOriginalData("sochimotoHokensha", sochimotoHokensha);
         this.setOriginalData("kyuHokensha", kyuHokensha);
         this.setOriginalData("shoriDate", shoriDate);
+        this.setOriginalData("hihokenshaNo", hihokenshaNo);
+        this.setOriginalData("shikibetsuCode", shikibetsuCode);
         this.state = state;
         this.henkoDate = henkoDate;
         this.henkoTodokedeDate = henkoTodokedeDate;
@@ -74,6 +82,8 @@ public class dgHenko_Row extends DataRow {
         this.sochimotoHokensha = sochimotoHokensha;
         this.kyuHokensha = kyuHokensha;
         this.shoriDate = shoriDate;
+        this.hihokenshaNo = hihokenshaNo;
+        this.shikibetsuCode = shikibetsuCode;
     }
 
     public RString getState() {
@@ -110,6 +120,14 @@ public class dgHenko_Row extends DataRow {
 
     public TextBoxFlexibleDate getShoriDate() {
         return shoriDate;
+    }
+
+    public RString getHihokenshaNo() {
+        return hihokenshaNo;
+    }
+
+    public RString getShikibetsuCode() {
+        return shikibetsuCode;
     }
 
     public void setState(RString state) {
@@ -155,6 +173,16 @@ public class dgHenko_Row extends DataRow {
     public void setShoriDate(TextBoxFlexibleDate shoriDate) {
         this.setOriginalData("shoriDate", shoriDate);
         this.shoriDate = shoriDate;
+    }
+
+    public void setHihokenshaNo(RString hihokenshaNo) {
+        this.setOriginalData("hihokenshaNo", hihokenshaNo);
+        this.hihokenshaNo = hihokenshaNo;
+    }
+
+    public void setShikibetsuCode(RString shikibetsuCode) {
+        this.setOriginalData("shikibetsuCode", shikibetsuCode);
+        this.shikibetsuCode = shikibetsuCode;
     }
 
     // </editor-fold>
