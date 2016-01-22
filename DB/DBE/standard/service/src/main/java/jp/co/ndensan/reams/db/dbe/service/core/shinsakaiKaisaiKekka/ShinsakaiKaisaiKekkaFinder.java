@@ -61,7 +61,7 @@ public class ShinsakaiKaisaiKekkaFinder {
 
     /**
      *
-     * ヘッドエリア内容を取得する
+     * ヘッドエリア内容を取得です。
      *
      * @param 開催番号 開催番号
      * @return ヘッドエリア内容
@@ -75,7 +75,7 @@ public class ShinsakaiKaisaiKekkaFinder {
     }
 
     /**
-     * 審査会委員一覧検索を取得する
+     * 審査会委員一覧検索を取得です。
      *
      * @param 開催番号 開催番号
      * @return 審査会委員一覧
@@ -96,7 +96,7 @@ public class ShinsakaiKaisaiKekkaFinder {
     }
 
     /**
-     * 審査会委員一覧検索を取得する
+     * 審査会委員一覧検索を取得です。
      *
      * @param 開催番号 開催番号
      * @return 審査会委員一覧

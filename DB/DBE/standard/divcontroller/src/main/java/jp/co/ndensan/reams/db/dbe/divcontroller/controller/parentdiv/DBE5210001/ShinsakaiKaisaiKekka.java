@@ -43,7 +43,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  *
- * 介護認定審査会開催結果登録するクラスです
+ * 介護認定審査会開催結果登録するクラスです。
  *
  */
 public class ShinsakaiKaisaiKekka {
@@ -60,14 +60,15 @@ public class ShinsakaiKaisaiKekka {
     }
 
     /**
-     * 画面初期化表示、画面項目に設定されている値をクリアする。
+     * 画面初期化表示、画面項目に設定されている値をクリアです。
      *
      * @param div 介護認定審査会開催結果登録div
      * @return ResponseData<ShinsakaiKaisaiKekkaDiv>
      */
     public ResponseData<ShinsakaiKaisaiKekkaDiv> onLoad(ShinsakaiKaisaiKekkaDiv div) {
         ResponseData<ShinsakaiKaisaiKekkaDiv> responseData = new ResponseData<>();
-        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        // RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        RString 開催番号 = new RString("41022222");
         ShinsakaiKaisaiYoteiJohoBusiness saiYoteiJoho = service.getヘッドエリア内容検索(開催番号);
         getHandler(div).onLoad(saiYoteiJoho);
         getHandler(div).setDisabled();
@@ -82,7 +83,7 @@ public class ShinsakaiKaisaiKekka {
     }
 
     /**
-     * 音声ファイルを追加 ボタンを押下 音声ファイル取込を行う
+     * 音声ファイルを追加 ボタンを押下 音声ファイル取込を行う。
      *
      * @param div 介護認定審査会開催結果登録div
      * @return responseData
@@ -95,7 +96,7 @@ public class ShinsakaiKaisaiKekka {
     }
 
     /**
-     * 審査会委員一覧Gridの「削除」ボタンを押下 ＤＢ介護認定審査会割当委員情報」より物理削除する
+     * 審査会委員一覧Gridの「削除」ボタンを押下 ＤＢ介護認定審査会割当委員情報」より物理削除です。
      *
      * @param div 介護認定審査会開催結果登録div
      * @return responseData
@@ -128,7 +129,7 @@ public class ShinsakaiKaisaiKekka {
     }
 
     /**
-     * 保存」ボタンを押下 介護認定審査会結果情報更新処理。
+     * 保存」ボタンを押下 介護認定審査会結果情報更新処理です。
      *
      * @param div 介護認定審査会開催結果登録div
      * @return ResponseData<ShinsakaiKaisaiKekkaDiv>
@@ -160,7 +161,7 @@ public class ShinsakaiKaisaiKekka {
     }
 
     /**
-     * 「一覧に戻る」ボタンをクリックの場合、 審査会一覧画面に戻る
+     * 「一覧に戻る」ボタンをクリックの場合、 審査会一覧画面に戻る。
      *
      * @param div 介護認定審査会開催結果登録div
      * @return ResponseData<ShinsakaiKaisaiKekkaDiv>

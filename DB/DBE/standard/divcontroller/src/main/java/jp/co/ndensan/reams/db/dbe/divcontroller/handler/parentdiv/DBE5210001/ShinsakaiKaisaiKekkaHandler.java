@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  *
- * 護認定審査会開催結果登録するクラスです
+ * 護認定審査会開催結果登録するクラスです。
  *
  */
 public class ShinsakaiKaisaiKekkaHandler {
@@ -43,7 +43,7 @@ public class ShinsakaiKaisaiKekkaHandler {
     }
 
     /**
-     * 画面初期化表示、画面項目に設定されている値をクリアする。
+     * 画面初期化表示、画面項目に設定されている値をクリアです。
      *
      * @param saiYoteiJoho ヘッドエリア内容
      */
@@ -71,7 +71,7 @@ public class ShinsakaiKaisaiKekkaHandler {
     }
 
     /**
-     * ヘッドエリア内容の状態設定します
+     * ヘッドエリア内容の状態設定です。
      *
      */
     public void setDisabled() {
@@ -85,7 +85,7 @@ public class ShinsakaiKaisaiKekkaHandler {
     }
 
     /**
-     * 画面初期化表示、画面項目に設定されている値をクリアする。
+     * 画面初期化表示、画面項目に設定されている値をクリアです。
      *
      * @param list 審査会委員一覧設定
      *
@@ -97,6 +97,7 @@ public class ShinsakaiKaisaiKekkaHandler {
             ShinsakaiWariateIinJohoBusiness business = list.get(i);
             row.getNumber().setValue(new Decimal(i + 1));
             row.setShinsakjaiIinCode(business.get審査会委員コード());
+            row.setShimei(business.get介護認定審査会委員氏名().value());
             row.setShimei(business.get介護認定審査会委員氏名().value());
             row.setSeibetsu(business.get性別() == null
                     ? RString.EMPTY : Seibetsu.toValue(business.get性別()).get名称());
