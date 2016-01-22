@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
+import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataBuilder;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataIdentifier;
 import jp.co.ndensan.reams.db.dbu.definition.core.nenpoyoushiki2no8.NenpoYoushiki2No8ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.DeleteJigyoHokokuNenpo;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -67,6 +69,10 @@ public class NenpoYoushiki2No8 {
     private LasdecCode 市町村コード;
     private RString 様式種類コード;
     private RString 補正フラグ;
+    private FlexibleDate 報告年度;
+    private FlexibleDate 集計年度;
+    private RString 保険者コード;
+    private RString 保険者名称;
     private boolean 修正FLG = false;
 
     /**
@@ -76,10 +82,19 @@ public class NenpoYoushiki2No8 {
      * @return ResponseData<NenpoYoushiki2No8Div>
      */
     public ResponseData<NenpoYoushiki2No8Div> onLoad(NenpoYoushiki2No8Div div) {
+        ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.報告年度, new FlexibleDate("1990"));
+        ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.集計年度, new FlexibleDate("2016"));
+        ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.保険者コード, new RString("123456"));
+        ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.保険者名称, new RString("保険者名称"));
         ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.報告年, new FlexibleYear("1990"));
         ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.集計対象年, new FlexibleYear("2016"));
         ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.市町村コード, new LasdecCode("123456"));
         ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.様式種類コード, new RString("001"));
+        ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.補正フラグ, new RString("修正"));
+        報告年度 = ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.報告年度, FlexibleDate.class);
+        集計年度 = ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.集計年度, FlexibleDate.class);
+        保険者コード = ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.保険者コード, RString.class);
+        保険者名称 = ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.保険者名称, RString.class);
         報告年 = ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.報告年, FlexibleYear.class);
         集計対象年 = ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.集計対象年, FlexibleYear.class);
         市町村コード = ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.市町村コード, LasdecCode.class);
@@ -88,7 +103,7 @@ public class NenpoYoushiki2No8 {
         List<dgItakuyobosabisujukyusu_Row> dgItakuyobosabiList = this.get件数タブ();
         List<dgChiikimitchakuyobosabisujukyu_Row> dgChiikimitchList = this.get費用額();
         List<dgHisetsugaigosabisujukyu_Row> dgHisetsugaigoList = this.get給付額();
-        getHandler(div).初期状態(補正フラグ);
+        getHandler(div).初期状態(補正フラグ, 報告年度, 集計年度, 保険者コード, 保険者名称);
         if ((dgItakuyobosabiList == null || dgItakuyobosabiList.isEmpty())
                 && (dgChiikimitchList == null || dgChiikimitchList.isEmpty())
                 && (dgHisetsugaigoList == null || dgHisetsugaigoList.isEmpty())) {
@@ -194,113 +209,136 @@ public class NenpoYoushiki2No8 {
     }
 
     private JigyoHokokuTokeiData get修正後件数データ(dgItakuyobosabisujukyusu_Row 画面データ, JigyoHokokuTokeiData viewdata) {
+        JigyoHokokuTokeiDataBuilder builder = viewdata.createBuilderForEdit();
         if (画面データ.getTxtYokaigoIchi().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYoshienNi().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYoshienKei().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtKekkaYokaigo().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoIchi().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoNi().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoSan().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoYon().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoGo().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoKei().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtGokei().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoIchi().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoIchi().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoIchi().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYoshienNi().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYoshienNi().getValue());
+            builder.set集計結果値(画面データ.getTxtYoshienNi().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYoshienKei().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYoshienKei().getValue());
+            builder.set集計結果値(画面データ.getTxtYoshienKei().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtKekkaYokaigo().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtKekkaYokaigo().getValue());
+            builder.set集計結果値(画面データ.getTxtKekkaYokaigo().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoIchi().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoIchi().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoIchi().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoNi().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoNi().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoNi().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoSan().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoSan().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoSan().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoYon().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoYon().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoYon().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoGo().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoGo().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoGo().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoKei().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoKei().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoKei().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtGokei().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtGokei().getValue());
+            builder.set集計結果値(画面データ.getTxtGokei().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
@@ -309,113 +347,136 @@ public class NenpoYoushiki2No8 {
     }
 
     private JigyoHokokuTokeiData get修正後費用額データ(dgChiikimitchakuyobosabisujukyu_Row 画面データ, JigyoHokokuTokeiData viewdata) {
+        JigyoHokokuTokeiDataBuilder builder = viewdata.createBuilderForEdit();
         if (画面データ.getTxtYokaigoIchi().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYoshienNi().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYoshienKei().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtKekkaYokaigo().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoIchi().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoNi().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoSan().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoYon().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoGo().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoKei().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtGokei().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoIchi().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoIchi().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoIchi().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYoshienNi().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYoshienNi().getValue());
+            builder.set集計結果値(画面データ.getTxtYoshienNi().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYoshienKei().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYoshienKei().getValue());
+            builder.set集計結果値(画面データ.getTxtYoshienKei().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtKekkaYokaigo().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtKekkaYokaigo().getValue());
+            builder.set集計結果値(画面データ.getTxtKekkaYokaigo().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoIchi().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoIchi().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoIchi().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoNi().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoNi().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoNi().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoSan().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoSan().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoSan().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoYon().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoYon().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoYon().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoGo().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoGo().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoGo().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoKei().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoKei().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoKei().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtGokei().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtGokei().getValue());
+            builder.set集計結果値(画面データ.getTxtGokei().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
@@ -424,113 +485,136 @@ public class NenpoYoushiki2No8 {
     }
 
     private JigyoHokokuTokeiData get修正後給付額データ(dgHisetsugaigosabisujukyu_Row 画面データ, JigyoHokokuTokeiData viewdata) {
+        JigyoHokokuTokeiDataBuilder builder = viewdata.createBuilderForEdit();
         if (画面データ.getTxtYokaigoIchi().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYoshienNi().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYoshienKei().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtKekkaYokaigo().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoIchi().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoNi().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoSan().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoYon().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoGo().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtYokaigoKei().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (画面データ.getTxtGokei().getValue().toString().isEmpty()) {
-            viewdata.createBuilderForEdit().set集計結果値(Decimal.ZERO);
+            builder.set集計結果値(Decimal.ZERO);
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoIchi().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoIchi().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoIchi().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYoshienNi().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYoshienNi().getValue());
+            builder.set集計結果値(画面データ.getTxtYoshienNi().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYoshienKei().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYoshienKei().getValue());
+            builder.set集計結果値(画面データ.getTxtYoshienKei().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtKekkaYokaigo().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtKekkaYokaigo().getValue());
+            builder.set集計結果値(画面データ.getTxtKekkaYokaigo().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoIchi().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoIchi().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoIchi().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoNi().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoNi().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoNi().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoSan().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoSan().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoSan().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoYon().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoYon().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoYon().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoGo().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoGo().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoGo().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtYokaigoKei().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtYokaigoKei().getValue());
+            builder.set集計結果値(画面データ.getTxtYokaigoKei().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
         if (!画面データ.getTxtGokei().getValue().equals(viewdata.get集計結果値())) {
-            viewdata.createBuilderForEdit().set集計結果値(画面データ.getTxtGokei().getValue());
+            builder.set集計結果値(画面データ.getTxtGokei().getValue());
+            viewdata = builder.build();
             修正FLG = true;
             return viewdata;
         }
@@ -593,9 +677,9 @@ public class NenpoYoushiki2No8 {
                     if (jigyoHokokuNenpo.get横番号().equals(横番号_13)) {
                         dgItakuyobosabi.getTxtGokei().setValue(jigyoHokokuNenpo.get集計結果値());
                     }
-                    dgItakuyobosabiList.add(dgItakuyobosabi);
                 }
             }
+            dgItakuyobosabiList.add(dgItakuyobosabi);
         }
         return dgItakuyobosabiList;
     }
@@ -645,9 +729,9 @@ public class NenpoYoushiki2No8 {
                     if (jigyoHokokuNenpo.get横番号().equals(横番号_13)) {
                         dgChiikimitch.getTxtGokei().setValue(jigyoHokokuNenpo.get集計結果値());
                     }
-                    dgChiikimitchList.add(dgChiikimitch);
                 }
             }
+            dgChiikimitchList.add(dgChiikimitch);
         }
         return dgChiikimitchList;
     }
@@ -697,9 +781,9 @@ public class NenpoYoushiki2No8 {
                     if (jigyoHokokuNenpo.get横番号().equals(横番号_13)) {
                         dgHisetsugaigo.getTxtGokei().setValue(jigyoHokokuNenpo.get集計結果値());
                     }
-                    dgHisetsugaigoList.add(dgHisetsugaigo);
                 }
             }
+            dgHisetsugaigoList.add(dgHisetsugaigo);
         }
         return dgHisetsugaigoList;
     }

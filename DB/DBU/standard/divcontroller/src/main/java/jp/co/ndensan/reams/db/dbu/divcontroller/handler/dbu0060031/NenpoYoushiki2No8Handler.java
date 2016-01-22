@@ -22,15 +22,15 @@ public class NenpoYoushiki2No8Handler {
         this.div = div;
     }
 
-    public void 初期状態(RString viewState) {
-//        div.getKanryoMessage()
-        div.getHihokenshabango().getTxthokokuYM().setValue(FlexibleDate.MAX);
+    public void 初期状態(RString viewState, FlexibleDate 報告年度, FlexibleDate 集計年度, RString 保険者コード, RString 保険者名称) {
+
+        div.getHihokenshabango().getTxthokokuYM().setValue(報告年度);
         div.getHihokenshabango().getTxthokokuYM().setDisabled(true);
-        div.getHihokenshabango().getTxtshukeiY().setValue(FlexibleDate.MAX);
+        div.getHihokenshabango().getTxtshukeiY().setValue(集計年度);
         div.getHihokenshabango().getTxtshukeiY().setDisabled(true);
-        div.getHihokenshabango().getTxtHihokenshabango().setValue(フラグ_削除);
+        div.getHihokenshabango().getTxtHihokenshabango().setValue(保険者コード);
         div.getHihokenshabango().getTxtHihokenshabango().setDisabled(true);
-        div.getHihokenshabango().getTxthihokenshamei().setValue(フラグ_削除);
+        div.getHihokenshabango().getTxthihokenshamei().setValue(保険者名称);
         div.getHihokenshabango().getTxthihokenshamei().setDisabled(true);
         if (viewState.equals(フラグ_削除)) {
             div.getShisetsugaigosabisujukyuMeisai().getDgItakuyobosabisujukyusu().setDisabled(true);
