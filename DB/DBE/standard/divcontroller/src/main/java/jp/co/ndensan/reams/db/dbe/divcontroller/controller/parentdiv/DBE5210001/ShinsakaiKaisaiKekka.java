@@ -67,8 +67,7 @@ public class ShinsakaiKaisaiKekka {
      */
     public ResponseData<ShinsakaiKaisaiKekkaDiv> onLoad(ShinsakaiKaisaiKekkaDiv div) {
         ResponseData<ShinsakaiKaisaiKekkaDiv> responseData = new ResponseData<>();
-        // RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
-        RString 開催番号 = new RString("41022222");
+        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         ShinsakaiKaisaiYoteiJohoBusiness saiYoteiJoho = service.getヘッドエリア内容検索(開催番号);
         getHandler(div).onLoad(saiYoteiJoho);
         getHandler(div).setDisabled();
