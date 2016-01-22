@@ -71,6 +71,7 @@ public class ShinsakaiKaisaiKekka {
         RString 開催番号 = new RString("41022222");
         ShinsakaiKaisaiYoteiJohoBusiness saiYoteiJoho = service.getヘッドエリア内容検索(開催番号);
         getHandler(div).onLoad(saiYoteiJoho);
+        getHandler(div).setDisabled();
         List<ShinsakaiWariateIinJohoBusiness> list = service.get審査会委員一覧検索(開催番号).records();
         getHandler(div).initialize(list);
         SearchResult<ShinsakaiKaisaiYoteiJoho> yoteiJohoList = service.get審査会委員(開催番号);
@@ -86,9 +87,9 @@ public class ShinsakaiKaisaiKekka {
      * @param div
      * @return responseData
      */
+    // TODO
     public ResponseData onClick_AddButton(ShinsakaiKaisaiKekkaDiv div) {
         ResponseData<ShinsakaiKaisaiKekkaDiv> responseData = new ResponseData<>();
-
         responseData.data = div;
         return responseData;
     }
@@ -104,7 +105,8 @@ public class ShinsakaiKaisaiKekka {
             return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
         ResponseData<ShinsakaiKaisaiKekkaDiv> responseData = new ResponseData<>();
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
             //        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
             RString 開催番号 = new RString("41022222");
             Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
@@ -112,12 +114,11 @@ public class ShinsakaiKaisaiKekka {
             ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = yoteiJohoModel.get(shinsakaiKaisaiYoteiJohoIdentifier);
             ShinsakaiWariateIinJohoIdentifier shinsakaiWariateIinJohoIdentifier = new ShinsakaiWariateIinJohoIdentifier(開催番号, div.getDgShinsakaiIinIchiran().getClickedItem().getShinsakjaiIinCode());
             ShinsakaiWariateIinJoho shinsakaiWariateIinJoho = shinsakaiKaisaiYoteiJoho.getShinsakaiWariateIinJoho(shinsakaiWariateIinJohoIdentifier);
-            shinsakaiWariateIinJoho.deleted();
+            shinsakaiWariateIinJoho = shinsakaiWariateIinJoho.deleted();
             ShinsakaiKaisaiYoteiJohoBuilder shinsakaiKaisaiYoteiJohoBuilder = shinsakaiKaisaiYoteiJoho.createBuilderForEdit();
             shinsakaiKaisaiYoteiJohoBuilder.setShinsakaiWariateIinJoho(shinsakaiWariateIinJoho);
-            shinsakaiKaisaiYoteiJoho = shinsakaiKaisaiYoteiJohoBuilder.build();
-            yoteiJohoModel.deleteOrRemove(shinsakaiKaisaiYoteiJohoIdentifier);
-            yoteiJohoModel.add(shinsakaiKaisaiYoteiJoho);
+            shinsakaiKaisaiYoteiJohoBuilder.build();
+            div.getDgShinsakaiIinIchiran().getDataSource().remove(div.getDgShinsakaiIinIchiran().getClickedItem());
             ViewStateHolder.put(ViewStateKeys.審査会開催結果登録, yoteiJohoModel);
         }
         responseData.data = div;
@@ -146,7 +147,9 @@ public class ShinsakaiKaisaiKekka {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+
             setYotei(div);
             return ResponseData.of(div).addMessage(
                     UrInformationMessages.正常終了.getMessage().replace("審査会開催結果登録")).respond();
@@ -164,19 +167,20 @@ public class ShinsakaiKaisaiKekka {
     }
 
     private void setYotei(ShinsakaiKaisaiKekkaDiv div) {
-        RString 開催番号 = new RString("410222222");
+        RString 開催番号 = new RString("41022222");
 //        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
-        if (div.getTxtKaisaiBi().getValue().isEmpty()) {
+        if ("新規モード".equals(div.getModel())) {
             setYoteiJoho(div);
-        } else {
+        }
+        if ("更新モード".equals(div.getModel())) {
             setKekkaJoho(div);
         }
         ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
         ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = yoteiJohoModel.get(shinsakaiKaisaiYoteiJohoIdentifier);
         ShinsakaiWariateIinJohoManager shinsakaiWariateIinJohoManager = ShinsakaiWariateIinJohoManager.createInstance();
         for (ShinsakaiWariateIinJoho shinsakaiWariateIinJoho : shinsakaiKaisaiYoteiJoho.getShinsakaiWariateIinJohoList()) {
-            if (shinsakaiKaisaiYoteiJoho.toEntity().getState() == EntityDataState.Deleted) {
+            if (shinsakaiWariateIinJoho.toEntity().getState() == EntityDataState.Deleted) {
                 shinsakaiWariateIinJohoManager.deletePhysical(shinsakaiWariateIinJoho);
             }
         }
@@ -184,7 +188,7 @@ public class ShinsakaiKaisaiKekka {
     }
 
     private void setYoteiJoho(ShinsakaiKaisaiKekkaDiv div) {
-        RString 開催番号 = new RString("410222222");
+        RString 開催番号 = new RString("41022222");
 //        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
         ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
@@ -204,7 +208,6 @@ public class ShinsakaiKaisaiKekka {
         shinsakaiKaisaiYoteiJoho.modifiedModel();
         shinsakaiKaisaiYoteiJoho = shinsakaiKaisaiYoteiJohoBuilder.build();
         manager.save(shinsakaiKaisaiYoteiJoho);
-
     }
 
     private void setKekkaJoho(ShinsakaiKaisaiKekkaDiv div) {

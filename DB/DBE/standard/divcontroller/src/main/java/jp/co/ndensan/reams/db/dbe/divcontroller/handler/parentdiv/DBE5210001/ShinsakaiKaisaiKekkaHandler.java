@@ -48,21 +48,19 @@ public class ShinsakaiKaisaiKekkaHandler {
      * @param saiYoteiJoho ShinsakaiKaisaiYoteiJohoBusiness
      */
     public void onLoad(ShinsakaiKaisaiYoteiJohoBusiness saiYoteiJoho) {
+        if (saiYoteiJoho.get開催日().isEmpty()) {
+            div.setModel(new RString("新規モード"));
+        } else {
+            div.setModel(new RString("更新モード"));
+        }
         div.getTxtShinsakaiMeisho().setValue(saiYoteiJoho.get審査会名称());
-        div.getTxtShinsakaiMeisho().setDisabled(true);
         div.getTxtGogitai().setValue(saiYoteiJoho.get合議体名称());
-        div.getTxtGogitai().setDisabled(true);
         div.getTxtYoteiTeiin().setValue(new Decimal(saiYoteiJoho.get予定人数()));
-        div.getTxtYoteiTeiin().setDisabled(true);
         div.getTxtJissiSu().setValue(new Decimal(saiYoteiJoho.get実施人数()));
         div.getTxtYoteiKaijo().setValue(saiYoteiJoho.get介護認定審査会開催場所名称());
-        div.getTxtYoteiKaijo().setDisabled(true);
         div.getTxtKaisaiYoteibi().setValue(saiYoteiJoho.get開催予定日());
-        div.getTxtKaisaiYoteibi().setDisabled(true);
         div.getTxtYoteiStartTime().setValue(RTime.parse(saiYoteiJoho.get予定開始時間()));
-        div.getTxtYoteiStartTime().setDisabled(true);
         div.getTxtYoteiEndTime().setValue(RTime.parse(saiYoteiJoho.get予定終了時間()));
-        div.getTxtYoteiEndTime().setDisabled(true);
         div.getTxtKaisaiBi().setValue(saiYoteiJoho.get開催日());
         div.getTxtKaisaiStartTime().setValue(strToTime(saiYoteiJoho.get開催開始時間()));
         div.getTxtKaisaiEndTime().setValue(strToTime(saiYoteiJoho.get開催終了時間()));
@@ -70,6 +68,16 @@ public class ShinsakaiKaisaiKekkaHandler {
 //TODO 開催会場
 //        div.getDdlKaisaiBasho().getDataSource();
 //        div.getDdlKaisaiBasho().setSelectedKey(saiYoteiJoho.get開催会場());
+    }
+
+    public void setDisabled() {
+        div.getTxtShinsakaiMeisho().setDisabled(true);
+        div.getTxtGogitai().setDisabled(true);
+        div.getTxtYoteiTeiin().setDisabled(true);
+        div.getTxtYoteiKaijo().setDisabled(true);
+        div.getTxtKaisaiYoteibi().setDisabled(true);
+        div.getTxtYoteiStartTime().setDisabled(true);
+        div.getTxtYoteiEndTime().setDisabled(true);
     }
 
     /**
