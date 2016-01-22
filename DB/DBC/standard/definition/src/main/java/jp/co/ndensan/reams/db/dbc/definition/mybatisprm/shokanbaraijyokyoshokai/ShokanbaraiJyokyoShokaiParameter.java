@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -31,15 +30,13 @@ public class ShokanbaraiJyokyoShokaiParameter {
     // 事業者番号
     private final JigyoshaNo jigyoshaNo;
     // 明細番号
-    private final RString meisanNo;
+    private final RString meisaiNo;
     // 連番
-    private final int renban;
+    private final RString renban;
     // サービス種類コード　
     private final ServiceShuruiCode serviceShuruiCode;
     // サービス項目コード
     private final ServiceKomokuCode serviceKomokuCode;
-    // 識別コード
-    private final ShikibetsuCode shikibetsuCode;
 
     /**
      * 初期化
@@ -49,11 +46,10 @@ public class ShokanbaraiJyokyoShokaiParameter {
      * @param seiriNo
      * @param yoshikiNo
      * @param jigyoshaNo
-     * @param meisanNo
+     * @param meisaiNo
      * @param remban
      * @param serviceShuruiCode
      * @param serviceKomokuCode
-     * @param shikibetsuCode
      */
     private ShokanbaraiJyokyoShokaiParameter(
             HihokenshaNo hiHokenshaNo,
@@ -61,22 +57,20 @@ public class ShokanbaraiJyokyoShokaiParameter {
             RString seiriNo,
             RString yoshikiNo,
             JigyoshaNo jigyoshaNo,
-            RString meisanNo,
-            int renban,
+            RString meisaiNo,
+            RString renban,
             ServiceShuruiCode serviceShuruiCode,
-            ServiceKomokuCode serviceKomokuCode,
-            ShikibetsuCode shikibetsuCode
+            ServiceKomokuCode serviceKomokuCode
     ) {
         this.hiHokenshaNo = hiHokenshaNo;
         this.serviceTeikyoYM = serviceTeikyoYM;
         this.seiriNo = seiriNo;
         this.yoshikiNo = yoshikiNo;
         this.jigyoshaNo = jigyoshaNo;
-        this.meisanNo = meisanNo;
+        this.meisaiNo = meisaiNo;
         this.renban = renban;
         this.serviceShuruiCode = serviceShuruiCode;
         this.serviceKomokuCode = serviceKomokuCode;
-        this.shikibetsuCode = shikibetsuCode;
     }
 
     public static ShokanbaraiJyokyoShokaiParameter createMybatisParam(
@@ -85,11 +79,10 @@ public class ShokanbaraiJyokyoShokaiParameter {
             RString seiriNo,
             RString yoshikiNo,
             JigyoshaNo jigyoshaNo,
-            RString meisanNo,
-            int renban,
+            RString meisaiNo,
+            RString renban,
             ServiceShuruiCode serviceShuruiCode,
-            ServiceKomokuCode serviceKomokuCode,
-            ShikibetsuCode shikibetsuCode
+            ServiceKomokuCode serviceKomokuCode
     ) {
         return new ShokanbaraiJyokyoShokaiParameter(
                 hihokenshaNo,
@@ -97,11 +90,10 @@ public class ShokanbaraiJyokyoShokaiParameter {
                 seiriNo,
                 yoshikiNo,
                 jigyoshaNo,
-                meisanNo,
+                meisaiNo,
                 renban,
                 serviceShuruiCode,
-                serviceKomokuCode,
-                shikibetsuCode
+                serviceKomokuCode
         );
     }
 }

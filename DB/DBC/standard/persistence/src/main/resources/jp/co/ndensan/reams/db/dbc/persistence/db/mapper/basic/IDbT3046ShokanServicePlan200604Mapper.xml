@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3046ShokanServicePlan200604とDbT3046ShokanServicePlan200604Entityの単テーブル(追記型)用MapperXMLです。 -->
+<!-- 作者： 潘鶴 -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3046ShokanServicePlan200604Mapper">
+    <sql id="allColumns_DbT3046ShokanServicePlan200604">
+         "DbT3046ShokanServicePlan200604"."insertTimestamp" as "dbT3046ShokanServicePlan200604_insertTimestamp",
+         "DbT3046ShokanServicePlan200604"."insertDantaiCd" as "dbT3046ShokanServicePlan200604_insertDantaiCd",
+         "DbT3046ShokanServicePlan200604"."insertReamsLoginId" as "dbT3046ShokanServicePlan200604_insertReamsLoginId",
+         "DbT3046ShokanServicePlan200604"."insertContextId" as "dbT3046ShokanServicePlan200604_insertContextId",
+         "DbT3046ShokanServicePlan200604"."isDeleted" as "dbT3046ShokanServicePlan200604_isDeleted",
+         "DbT3046ShokanServicePlan200604"."updateCount" as "dbT3046ShokanServicePlan200604_updateCount",
+         "DbT3046ShokanServicePlan200604"."lastUpdateTimestamp" as "dbT3046ShokanServicePlan200604_lastUpdateTimestamp",
+         "DbT3046ShokanServicePlan200604"."lastUpdateReamsLoginId" as "dbT3046ShokanServicePlan200604_lastUpdateReamsLoginId",
+         "DbT3046ShokanServicePlan200604"."hiHokenshaNo" as "dbT3046ShokanServicePlan200604_hiHokenshaNo",
+         "DbT3046ShokanServicePlan200604"."serviceTeikyoYM" as "dbT3046ShokanServicePlan200604_serviceTeikyoYM",
+         "DbT3046ShokanServicePlan200604"."seiriNo" as "dbT3046ShokanServicePlan200604_seiriNo",
+         "DbT3046ShokanServicePlan200604"."jigyoshaNo" as "dbT3046ShokanServicePlan200604_jigyoshaNo",
+         "DbT3046ShokanServicePlan200604"."yoshikiNo" as "dbT3046ShokanServicePlan200604_yoshikiNo",
+         "DbT3046ShokanServicePlan200604"."meisaiNo" as "dbT3046ShokanServicePlan200604_meisaiNo",
+         "DbT3046ShokanServicePlan200604"."renban" as "dbT3046ShokanServicePlan200604_renban",
+         "DbT3046ShokanServicePlan200604"."shiteiKijunGaitoJigyoshaKubunCode" as "dbT3046ShokanServicePlan200604_shiteiKijunGaitoJigyoshaKubunCode",
+         "DbT3046ShokanServicePlan200604"."kyotakuServiceSakuseiIraiYMD" as "dbT3046ShokanServicePlan200604_kyotakuServiceSakuseiIraiYMD",
+         "DbT3046ShokanServicePlan200604"."serviceCode" as "dbT3046ShokanServicePlan200604_serviceCode",
+         "DbT3046ShokanServicePlan200604"."tanisu" as "dbT3046ShokanServicePlan200604_tanisu",
+         "DbT3046ShokanServicePlan200604"."tanisuTanka" as "dbT3046ShokanServicePlan200604_tanisuTanka",
+         "DbT3046ShokanServicePlan200604"."seikyuKingaku" as "dbT3046ShokanServicePlan200604_seikyuKingaku",
+         "DbT3046ShokanServicePlan200604"."tantokangoshienSemmoninNo" as "dbT3046ShokanServicePlan200604_tantokangoshienSemmoninNo",
+         "DbT3046ShokanServicePlan200604"."tekiyo" as "dbT3046ShokanServicePlan200604_tekiyo",
+         "DbT3046ShokanServicePlan200604"."shinsaHohoKubunCode" as "dbT3046ShokanServicePlan200604_shinsaHohoKubunCode",
+         "DbT3046ShokanServicePlan200604"."shinsaYM" as "dbT3046ShokanServicePlan200604_shinsaYM",
+         "DbT3046ShokanServicePlan200604"."shikyuKubunCode" as "dbT3046ShokanServicePlan200604_shikyuKubunCode",
+         "DbT3046ShokanServicePlan200604"."tensuKingaku" as "dbT3046ShokanServicePlan200604_tensuKingaku",
+         "DbT3046ShokanServicePlan200604"."shikyuKingaku" as "dbT3046ShokanServicePlan200604_shikyuKingaku",
+         "DbT3046ShokanServicePlan200604"."zougenTen" as "dbT3046ShokanServicePlan200604_zougenTen",
+         "DbT3046ShokanServicePlan200604"."sagakuKingaku" as "dbT3046ShokanServicePlan200604_sagakuKingaku",
+         "DbT3046ShokanServicePlan200604"."zougenRiyu" as "dbT3046ShokanServicePlan200604_zougenRiyu",
+         "DbT3046ShokanServicePlan200604"."fushikyuRiyu" as "dbT3046ShokanServicePlan200604_fushikyuRiyu",
+         "DbT3046ShokanServicePlan200604"."kounyuKaishuRireki" as "dbT3046ShokanServicePlan200604_kounyuKaishuRireki"
+    </sql>
+
+
+    <!--ビューDbT3046ShokanServicePlan200604の項目をDbT3046ShokanServicePlan200604Entityの項目にマッピングします。-->
+    <resultMap id="resultMap_DbT3046ShokanServicePlan200604Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604Entity" autoMapping="true">
+        <id property="hiHokenshaNo" column="dbT3046ShokanServicePlan200604_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="serviceTeikyoYM" column="dbT3046ShokanServicePlan200604_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="seiriNo" column="dbT3046ShokanServicePlan200604_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="jigyoshaNo" column="dbT3046ShokanServicePlan200604_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <id property="yoshikiNo" column="dbT3046ShokanServicePlan200604_yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="meisaiNo" column="dbT3046ShokanServicePlan200604_meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="renban" column="dbT3046ShokanServicePlan200604_renban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3046ShokanServicePlan200604_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3046ShokanServicePlan200604_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3046ShokanServicePlan200604_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3046ShokanServicePlan200604_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3046ShokanServicePlan200604_isDeleted" />
+        <result property="updateCount" column="dbT3046ShokanServicePlan200604_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3046ShokanServicePlan200604_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3046ShokanServicePlan200604_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiteiKijunGaitoJigyoshaKubunCode" column="dbT3046ShokanServicePlan200604_shiteiKijunGaitoJigyoshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyotakuServiceSakuseiIraiYMD" column="dbT3046ShokanServicePlan200604_kyotakuServiceSakuseiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="serviceCode" column="dbT3046ShokanServicePlan200604_serviceCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceCodeTypeHandler"/>
+        <result property="tanisu" column="dbT3046ShokanServicePlan200604_tanisu" />
+        <result property="tanisuTanka" column="dbT3046ShokanServicePlan200604_tanisuTanka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="seikyuKingaku" column="dbT3046ShokanServicePlan200604_seikyuKingaku" />
+        <result property="tantokangoshienSemmoninNo" column="dbT3046ShokanServicePlan200604_tantokangoshienSemmoninNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tekiyo" column="dbT3046ShokanServicePlan200604_tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsaHohoKubunCode" column="dbT3046ShokanServicePlan200604_shinsaHohoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsaYM" column="dbT3046ShokanServicePlan200604_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="shikyuKubunCode" column="dbT3046ShokanServicePlan200604_shikyuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tensuKingaku" column="dbT3046ShokanServicePlan200604_tensuKingaku" />
+        <result property="shikyuKingaku" column="dbT3046ShokanServicePlan200604_shikyuKingaku" />
+        <result property="zougenTen" column="dbT3046ShokanServicePlan200604_zougenTen" />
+        <result property="sagakuKingaku" column="dbT3046ShokanServicePlan200604_sagakuKingaku" />
+        <result property="zougenRiyu" column="dbT3046ShokanServicePlan200604_zougenRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fushikyuRiyu" column="dbT3046ShokanServicePlan200604_fushikyuRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kounyuKaishuRireki" column="dbT3046ShokanServicePlan200604_kounyuKaishuRireki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+</mapper>

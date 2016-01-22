@@ -90,7 +90,7 @@
             ,BASIC."meisaiNo"
             ,SHIKIBETSUB."ryakusho"   
     </select>
-
+    
     <resultMap id="resultMap_ShokanMeisaiEntity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanMeisaiEntity"
                autoMapping="true">
@@ -100,7 +100,7 @@
         </association>
     </resultMap>
     <select id="get償還払請求明細一覧"
-            resultType="resultMap_ShokanMeisaiEntity"
+            resultMap="resultMap_ShokanMeisaiEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
             SHOKANMEISAI.*
@@ -160,11 +160,11 @@
         <result property="serviceName" column="serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hokenshaName" column="hokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association  property="entity"
-                     resultMap="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokureiEntity">
+                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3107ShokanMeisaiJushochiTokureiMapper.resultMap_DbT3107ShokanMeisaiJushochiTokureiEntity">
         </association>
     </resultMap>
     <select id="get償還払請求明細住特一覧"
-            resultType="resultMap_ShokanMeisaiJushochiTokureiEntity"
+            resultMap="resultMap_ShokanMeisaiJushochiTokureiEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
             SHOKANMEISAIJUSHOCHITOKUREI.*,
@@ -221,11 +221,11 @@
                autoMapping="true">
         <result property="serviceName" column="serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="entity"
-                     resultMap="jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3047ShokanServicePlan200904Entity">
+                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3047ShokanServicePlan200904Mapper.resultMap_DbT3047ShokanServicePlan200904Entity">
         </association>
     </resultMap>
     <select id="get償還払請求サービス計画200904データ"
-            resultType="resultMap_ShokanServicePlan200904Entity"
+            resultMap="resultMap_ShokanServicePlan200904Entity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
             SHOKANSERVICEPLAN200904.*
@@ -246,7 +246,7 @@
                    FROM
                         rgdb."DbT7131KaigoServiceNaiyou" NAIYOU
                    WHERE
-                        NAIYOU.teikyoKaishiYM <![CDATA[<=]]> #{serviceTeikyoYM}
+                        NAIYOU."teikyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
                         AND (NAIYOU."teikyoShuryoYM" IS NULL
                             OR
                             NAIYOU."teikyoShuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
@@ -263,7 +263,7 @@
                 substring(SHOKANSERVICEPLAN200904."serviceCode", 1, 2) = KAIGOSERVICENAIYOUB."serviceShuruiCd"
                 AND substring(SHOKANSERVICEPLAN200904."serviceCode", length(SHOKANSERVICEPLAN200904."serviceCode") - 3) = KAIGOSERVICENAIYOUB."serviceKoumokuCd"
         WHERE
-            SHOKANSERVICEPLAN200904."" = #{serviceTeikyoYM}
+            SHOKANSERVICEPLAN200904."serviceTeikyoYM" = #{serviceTeikyoYM}
             AND SHOKANSERVICEPLAN200904."hiHokenshaNo" = #{hiHokenshaNo}
             AND SHOKANSERVICEPLAN200904."seiriNo" = #{seiriNo}
             AND SHOKANSERVICEPLAN200904."jigyoshaNo" = #{jigyoshaNo}
@@ -276,16 +276,16 @@
             SHOKANSERVICEPLAN200904."renban"
     </select>
     
-    <resultMap id="resultMap_ShokanServicePlan200604Entity"
+     <resultMap id="resultMap_ShokanServicePlan200604Entity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200604Entity"
                autoMapping="true">
         <result property="serviceName" column="serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="entity"
-                     resultMap="jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3046ShokanServicePlan200604Entity">
+                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3046ShokanServicePlan200604Mapper.resultMap_DbT3046ShokanServicePlan200604Entity">
         </association>
     </resultMap>
     <select id="get償還払請求サービス計画200604データ"
-            resultType="resultMap_ShokanServicePlan200604Entity"
+            resultMap="resultMap_ShokanServicePlan200604Entity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
             SHOKANSERVICEPLAN200604.*
@@ -335,17 +335,17 @@
         ORDER BY
             SHOKANSERVICEPLAN200604."renban"
     </select>
-    
+
     <resultMap id="resultMap_ShokanServicePlan200004Entity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200004Entity"
                autoMapping="true">
         <result property="serviceName" column="serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="entity"
-                     resultMap="jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3045ShokanServicePlan200004Entity">
+                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3045ShokanServicePlan200004Mapper.resultMap_DbT3045ShokanServicePlan200004Entity">
         </association>
     </resultMap>
     <select id="get償還払請求サービス計画200004データ"
-            resultType="resultMap_ShokanServicePlan200004Entity"
+            resultMap="resultMap_ShokanServicePlan200004Entity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
             SHOKANSERVICEPLAN200004.*
@@ -394,8 +394,8 @@
             </if>
         ORDER BY
             SHOKANSERVICEPLAN200004."renban"
-    </select>
-    
+    </select>  
+      
     <resultMap id="resultMap_ShokanShukeiEntity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShukeiEntity"
                autoMapping="true">
@@ -405,7 +405,7 @@
         </association>
     </resultMap>
     <select id="get償還払請求集計データ"
-            resultType="resultMap_ShokanShukeiEntity"
+            resultMap="resultMap_ShokanShukeiEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
             SSHOKANSHUKEI.*,
@@ -450,8 +450,8 @@
             </if>
         ORDER BY
             SSHOKANSHUKEI."renban" DESC
-    </select>
-
+    </select>       
+               
     <resultMap id="resultMap_ShokanShakaiFukushiHojinKeigengakuEntity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuEntity"
                autoMapping="true">
@@ -461,7 +461,7 @@
         </association>
     </resultMap>
     <select id="get償還払請求社会福祉法人軽減額データ"
-            resultType="resultMap_ShokanShakaiFukushiHojinKeigengakuEntity"
+            resultMap="resultMap_ShokanShakaiFukushiHojinKeigengakuEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
             SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU.*,
@@ -550,16 +550,16 @@
         FROM
             rgdb."DbT7120TokuteiShinryoServiceCode" TOKUTEISHINRYOSERVICECODE
         WHERE
-        <if test="renban != null">
+        <if test="serviceShuruiCode != null">
             TOKUTEISHINRYOSERVICECODE."serviceShuruiCode" = #{serviceShuruiCode} AND
         </if>
             TOKUTEISHINRYOSERVICECODE."serviceKomokuCode" = #{serviceKomokuCode}
-            AND TOKUTEISHINRYOSERVICECODE."tekiyoKaishiYM" <![CDATA[<=]]> #{tekiyoKaishiYM}
+            AND TOKUTEISHINRYOSERVICECODE."tekiyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
             AND (TOKUTEISHINRYOSERVICECODE."tekiyoKaishiYM" IS NULL
                 OR
                 TOKUTEISHINRYOSERVICECODE."tekiyoKaishiYM" <![CDATA[>=]]> #{serviceTeikyoYM})
         ORDER BY
             TOKUTEISHINRYOSERVICECODE."tekiyoKaishiYM" DESC
     </select>
-
+    
 </mapper>

@@ -27,7 +27,7 @@ public interface IShokanbaraiJyokyoShokaiMapper {
 
     List<ServiceTeikyoShomeisho> getサービス提供証明書一覧(ShokanbaraiJyokyoShokaiParameter parameter);
 
-    List<ShokanMeisaiEntity> get償還払請求明細一覧();
+    List<ShokanMeisaiEntity> get償還払請求明細一覧(ShokanbaraiJyokyoShokaiParameter parameter);
 
     List<ShokanMeisaiJushochiTokureiEntity> get償還払請求明細住特一覧(ShokanbaraiJyokyoShokaiParameter parameter);
 
@@ -46,5 +46,4 @@ public interface IShokanbaraiJyokyoShokaiMapper {
     List<DbT7060KaigoJigyoshaEntity> get介護事業者情報(ShokanbaraiJyokyoShokaiParameter parameter);
 
     List<DbT7120TokuteiShinryoServiceCodeEntity> get特定診療サービスコード(ShokanbaraiJyokyoShokaiParameter parameter);
-
 }

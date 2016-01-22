@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaig
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7120TokuteiShinryoServiceCodeEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3039ShokanMeisaiEntity;
@@ -28,7 +30,15 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3043ShokanSho
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.KaigoJigyoshaReturnEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ServiceTeikyoShomeisho;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanMeisaiJushochiTokureiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200604Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200904Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3034ShokanShinseiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3038ShokanKihonDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3039ShokanMeisaiDac;
@@ -43,6 +53,10 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanbaraijyokyo
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -176,7 +190,7 @@ public class ShokanbaraiJyokyoShokai {
             RString 整理番号,
             RString 様式番号) {
         ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
-                被保険者番号, サービス提供年月, 整理番号, 様式番号, null, null, 0, null, null, null);
+                被保険者番号, サービス提供年月, 整理番号, 様式番号, null, null, null, null, null);
 
         IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
         List<ServiceTeikyoShomeisho> entityList = mapper.getサービス提供証明書一覧(parameter);
@@ -213,73 +227,72 @@ public class ShokanbaraiJyokyoShokai {
         shokanKihon.add(new ShokanKihon(entity));
         return shokanKihon;
     }
-//
-//    /**
-//     * 償還払請求明細一覧取得
-//     *
-//     * @param 被保険者番号
-//     * @param サービス提供年月
-//     * @param 整理番号
-//     * @param 事業者番号
-//     * @param 様式番号
-//     * @param 明細番号
-//     * @param 連番
-//     * @param サービス種類コード
-//     * @return List<ShokanMeisaiEntity>
-//     */
-//    public List<ShokanMeisaiEntity> getShokanbarayiSeikyuMeisayiList(
-//            HihokenshaNo 被保険者番号,
-//            FlexibleYearMonth サービス提供年月,
-//            RString 整理番号,
-//            JigyoshaNo 事業者番号,
-//            RString 様式番号,
-//            RString 明細番号,
-//            int 連番,
-//            ServiceShuruiCode サービス種類コード) {
-//        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
-//                被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, サービス種類コード, null, null);
-//
-//        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
-//        List<ShokanMeisaiEntity> entityList = mapper.get償還払請求明細一覧(parameter);
-//        if (entityList == null || entityList.isEmpty()) {
-//            return new ArrayList<>();
-//        }
-//        return entityList;
-//    }
-//
-//    /**
-//     * 償還払請求明細住特一覧取得
-//     *
-//     * @param 被保険者番号
-//     * @param サービス提供年月
-//     * @param 整理番号
-//     * @param 事業者番号
-//     * @param 様式番号
-//     * @param 明細番号
-//     * @param 連番
-//     * @param サービス種類コード
-//     * @return List<ShokanMeisaiJushochiTokureiEntity>
-//     */
-//    public List<ShokanMeisaiJushochiTokureiEntity> getShokanbarayiSeikyuMeisayiJyutokuList(
-//            HihokenshaNo 被保険者番号,
-//            FlexibleYearMonth サービス提供年月,
-//            RString 整理番号,
-//            JigyoshaNo 事業者番号,
-//            RString 様式番号,
-//            RString 明細番号,
-//            int 連番,
-//            ServiceShuruiCode サービス種類コード) {
-//        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
-//                被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, サービス種類コード, null, null);
-//
-//        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
-//        List<ShokanMeisaiJushochiTokureiEntity> entityList = mapper.get償還払請求明細住特一覧(parameter);
-//        if (entityList == null || entityList.isEmpty()) {
-//            return new ArrayList<>();
-//        }
-//        return entityList;
-//    }
-//
+
+    /**
+     * 償還払請求明細一覧取得
+     *
+     * @param 被保険者番号
+     * @param サービス提供年月
+     * @param 整理番号
+     * @param 事業者番号
+     * @param 様式番号
+     * @param 明細番号
+     * @param 連番
+     * @param サービス種類コード
+     * @return List<ShokanMeisaiEntity>
+     */
+    public List<ShokanMeisaiEntity> getShokanbarayiSeikyuMeisayiList(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号,
+            RString 連番,
+            ServiceShuruiCode サービス種類コード) {
+        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
+                被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, サービス種類コード, null);
+
+        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
+        List<ShokanMeisaiEntity> entityList = mapper.get償還払請求明細一覧(parameter);
+        if (entityList == null || entityList.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return entityList;
+    }
+
+    /**
+     * 償還払請求明細住特一覧取得
+     *
+     * @param 被保険者番号
+     * @param サービス提供年月
+     * @param 整理番号
+     * @param 事業者番号
+     * @param 様式番号
+     * @param 明細番号
+     * @param 連番
+     * @param サービス種類コード
+     * @return List<ShokanMeisaiJushochiTokureiEntity>
+     */
+    public List<ShokanMeisaiJushochiTokureiEntity> getShokanbarayiSeikyuMeisayiJyutokuList(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号,
+            RString 連番,
+            ServiceShuruiCode サービス種類コード) {
+        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
+                被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, サービス種類コード, null);
+
+        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
+        List<ShokanMeisaiJushochiTokureiEntity> entityList = mapper.get償還払請求明細住特一覧(parameter);
+        if (entityList == null || entityList.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return entityList;
+    }
 
     /**
      * 償還払請求特定診療費データ取得
@@ -362,69 +375,68 @@ public class ShokanbaraiJyokyoShokai {
 
         return shokanTokuteiShinryoTokubetsuRyoyo;
     }
-//
-//    /**
-//     * 償還払請求サービス計画200904データ取得
-//     *
-//     * @param 被保険者番号
-//     * @param サービス提供年月
-//     * @param 整理番号
-//     * @param 事業者番号
-//     * @param 様式番号
-//     * @param 明細番号
-//     * @param 連番
-//     * @return List<ShokanServicePlan200904Entity>
-//     */
-//    public List<ShokanServicePlan200904Entity> getServiceKeikaku200904(
-//            HihokenshaNo 被保険者番号,
-//            FlexibleYearMonth サービス提供年月,
-//            RString 整理番号,
-//            JigyoshaNo 事業者番号,
-//            RString 様式番号,
-//            RString 明細番号,
-//            int 連番) {
-//        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
-//                被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, null, null, null);
-//
-//        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
-//        List<ShokanServicePlan200904Entity> entityList = mapper.get償還払請求サービス計画200904データ(parameter);
-//        if (entityList == null || entityList.isEmpty()) {
-//            return new ArrayList<>();
-//        }
-//        return entityList;
-//    }
-//
-//    /**
-//     * 償還払請求サービス計画200604データ取得
-//     *
-//     * @param 被保険者番号
-//     * @param サービス提供年月
-//     * @param 整理番号
-//     * @param 事業者番号
-//     * @param 様式番号
-//     * @param 明細番号
-//     * @param 連番
-//     * @return List<ShokanServicePlan200604Entity>
-//     */
-//    public List<ShokanServicePlan200604Entity> getServiceKeikaku200604(
-//            HihokenshaNo 被保険者番号,
-//            FlexibleYearMonth サービス提供年月,
-//            RString 整理番号,
-//            JigyoshaNo 事業者番号,
-//            RString 様式番号,
-//            RString 明細番号,
-//            int 連番) {
-//        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
-//                被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, null, null, null);
-//
-//        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
-//        List<ShokanServicePlan200604Entity> entityList = mapper.get償還払請求サービス計画200604データ(parameter);
-//        if (entityList == null || entityList.isEmpty()) {
-//            return new ArrayList<>();
-//        }
-//        return entityList;
-//    }
-//
+
+    /**
+     * 償還払請求サービス計画200904データ取得
+     *
+     * @param 被保険者番号
+     * @param サービス提供年月
+     * @param 整理番号
+     * @param 事業者番号
+     * @param 様式番号
+     * @param 明細番号
+     * @param 連番
+     * @return List<ShokanServicePlan200904Entity>
+     */
+    public List<ShokanServicePlan200904Entity> getServiceKeikaku200904(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号,
+            RString 連番) {
+        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
+                被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, null, null);
+
+        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
+        List<ShokanServicePlan200904Entity> entityList = mapper.get償還払請求サービス計画200904データ(parameter);
+        if (entityList == null || entityList.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return entityList;
+    }
+
+    /**
+     * 償還払請求サービス計画200604データ取得
+     *
+     * @param 被保険者番号
+     * @param サービス提供年月
+     * @param 整理番号
+     * @param 事業者番号
+     * @param 様式番号
+     * @param 明細番号
+     * @param 連番
+     * @return List<ShokanServicePlan200604Entity>
+     */
+    public List<ShokanServicePlan200604Entity> getServiceKeikaku200604(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号,
+            RString 連番) {
+        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
+                被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, null, null);
+
+        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
+        List<ShokanServicePlan200604Entity> entityList = mapper.get償還払請求サービス計画200604データ(parameter);
+        if (entityList == null || entityList.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return entityList;
+    }
 
     /**
      * 償還払請求特定入所者介護サービス費用データ取得
@@ -630,139 +642,153 @@ public class ShokanbaraiJyokyoShokai {
 
         return shokanMeisai;
     }
-//
-//    /**
-//     * 償還払請求集計データ取得
-//     *
-//     * @param 被保険者番号
-//     * @param サービス提供年月
-//     * @param 整理番号
-//     * @param 事業者番号
-//     * @param 様式番号
-//     * @param 明細番号
-//     * @param 連番
-//     * @return List<ShokanShukeiEntity>
-//     */
-//    public List<ShokanShukeiEntity> getSeikyuShukeiData(
-//            HihokenshaNo 被保険者番号,
-//            FlexibleYearMonth サービス提供年月,
-//            RString 整理番号,
-//            JigyoshaNo 事業者番号,
-//            RString 様式番号,
-//            RString 明細番号,
-//            int 連番) {
-//        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
-//                被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, null, null, null);
-//
-//        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
-//        List<ShokanShukeiEntity> entityList = mapper.get償還払請求集計データ(parameter);
-//        if (entityList == null || entityList.isEmpty()) {
-//            return new ArrayList<>();
-//        }
-//        return entityList;
-//    }
-//
-//    /**
-//     * 償還払請求社会福祉法人軽減額データ取得
-//     *
-//     * @param 被保険者番号
-//     * @param サービス提供年月
-//     * @param 整理番号
-//     * @param 事業者番号
-//     * @param 様式番号
-//     * @param 明細番号
-//     * @param 連番
-//     * @return List<ShokanShakaiFukushiHojinKeigengakuEntity>
-//     */
-//    public List<ShokanShakaiFukushiHojinKeigengakuEntity> getSeikyuShakaifukushiHoujinKeigengaku(
-//            HihokenshaNo 被保険者番号,
-//            FlexibleYearMonth サービス提供年月,
-//            RString 整理番号,
-//            JigyoshaNo 事業者番号,
-//            RString 様式番号,
-//            RString 明細番号,
-//            int 連番) {
-//        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
-//                被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, null, null, null);
-//
-//        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
-//        List<ShokanShakaiFukushiHojinKeigengakuEntity> entityList = mapper.get償還払請求社会福祉法人軽減額データ(parameter);
-//        if (entityList == null || entityList.isEmpty()) {
-//            return new ArrayList<>();
-//        }
-//        return entityList;
-//    }
-//
-//    /**
-//     * 識別番号管理データ取得
-//     *
-//     * @param サービス提供年月
-//     * @param 様式番号
-//     * @return ShikibetsuNoKanriEntity
-//     */
-//    public ShikibetsuNoKanriEntity getShikibetsubangoKanri(
-//            FlexibleYearMonth サービス提供年月,
-//            RString 様式番号) {
-//        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
-//                null, サービス提供年月, null, 様式番号, null, null, 0, null, null, null);
-//
-//        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
-//        List<DbT3118ShikibetsuNoKanriEntity> entityList = mapper.get識別番号管理データ(parameter);
-//        if (entityList == null || entityList.isEmpty()) {
-//            new ShikibetsuNoKanriEntity();
-//        }
-//        ShikibetsuNoKanriEntity returnEntity = new ShikibetsuNoKanriEntity();
-//        returnEntity.setEntity(entityList.get(0));
-//        return returnEntity;
-//    }
-//
-//    /**
-//     * 介護事業者情報取得
-//     *
-//     * @param サービス提供年月
-//     * @param 事業者番号
-//     * @return KaigoJigyoshaReturnEntity
-//     */
-//    public KaigoJigyoshaReturnEntity getKaigoJigyoshaInfo(
-//            FlexibleYearMonth サービス提供年月,
-//            JigyoshaNo 事業者番号) {
-//        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
-//                null, サービス提供年月, null, null, 事業者番号, null, 0, null, null, null);
-//
-//        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
-//        List<DbT7060KaigoJigyoshaEntity> entityList = mapper.get介護事業者情報(parameter);
-//        if (entityList == null || entityList.isEmpty()) {
-//            return new KaigoJigyoshaReturnEntity();
-//        }
-//
-//        KaigoJigyoshaReturnEntity returnEntity = new KaigoJigyoshaReturnEntity();
-//        returnEntity.setEntity(entityList.get(0));
-//
-//        return returnEntity;
-//    }
-//
-//    /**
-//     * 特定診療サービスコードの取得
-//     *
-//     * @param サービス提供年月
-//     * @param 様式番号
-//     * @param 識別コード
-//     * @return DbT7120TokuteiShinryoServiceCodeEntity
-//     */
-//    public DbT7120TokuteiShinryoServiceCodeEntity getTokuteiShinryoServiceCodeInfo(
-//            FlexibleYearMonth サービス提供年月,
-//            RString 様式番号,
-//            ShikibetsuCode 識別コード) {
-//        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
-//                null, サービス提供年月, null, 様式番号, null, null, 0, null, null, 識別コード);
-//
-//        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
-//        List<DbT7120TokuteiShinryoServiceCodeEntity> entityList = mapper.get特定診療サービスコード(parameter);
-//        if (entityList == null || entityList.isEmpty()) {
-//            return new DbT7120TokuteiShinryoServiceCodeEntity();
-//        }
-//
-//        return entityList.get(0);
-//    }
 
+    /**
+     * 償還払請求集計データ取得
+     *
+     * @param 被保険者番号
+     * @param サービス提供年月
+     * @param 整理番号
+     * @param 事業者番号
+     * @param 様式番号
+     * @param 明細番号
+     * @param 連番
+     * @return List<ShokanShukeiEntity>
+     */
+    public List<ShokanShukeiEntity> getSeikyuShukeiData(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号,
+            RString 連番) {
+        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
+                被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, null, null);
+
+        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
+        List<ShokanShukeiEntity> entityList = mapper.get償還払請求集計データ(parameter);
+        if (entityList == null || entityList.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return entityList;
+    }
+
+    /**
+     * 償還払請求社会福祉法人軽減額データ取得
+     *
+     * @param 被保険者番号
+     * @param サービス提供年月
+     * @param 整理番号
+     * @param 事業者番号
+     * @param 様式番号
+     * @param 明細番号
+     * @param 連番
+     * @return List<ShokanShakaiFukushiHojinKeigengakuEntity>
+     */
+    public List<ShokanShakaiFukushiHojinKeigengakuEntity> getSeikyuShakaifukushiHoujinKeigengaku(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号,
+            RString 連番) {
+        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
+                被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, null, null);
+
+        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
+        List<ShokanShakaiFukushiHojinKeigengakuEntity> entityList = mapper.get償還払請求社会福祉法人軽減額データ(parameter);
+        if (entityList == null || entityList.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return entityList;
+    }
+
+    /**
+     * 識別番号管理データ取得
+     *
+     * @param サービス提供年月
+     * @param 様式番号
+     * @return ShikibetsuNoKanriEntity
+     */
+    public ShikibetsuNoKanriEntity getShikibetsubangoKanri(
+            FlexibleYearMonth サービス提供年月,
+            RString 様式番号) {
+        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
+                null, サービス提供年月, null, 様式番号, null, null, null, null, null);
+
+        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
+        List<DbT3118ShikibetsuNoKanriEntity> entityList = mapper.get識別番号管理データ(parameter);
+        if (entityList == null || entityList.isEmpty()) {
+            return new ShikibetsuNoKanriEntity();
+        }
+        ShikibetsuNoKanriEntity returnEntity = new ShikibetsuNoKanriEntity();
+        returnEntity.setEntity(entityList.get(0));
+        return returnEntity;
+    }
+
+    /**
+     * 介護事業者情報取得
+     *
+     * @param サービス提供年月
+     * @param 事業者番号
+     * @return KaigoJigyoshaReturnEntity
+     */
+    public KaigoJigyoshaReturnEntity getKaigoJigyoshaInfo(
+            FlexibleYearMonth サービス提供年月,
+            JigyoshaNo 事業者番号) {
+        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
+                null, サービス提供年月, null, null, 事業者番号, null, null, null, null);
+
+        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
+        List<DbT7060KaigoJigyoshaEntity> entityList = mapper.get介護事業者情報(parameter);
+        if (entityList == null || entityList.isEmpty()) {
+            return new KaigoJigyoshaReturnEntity();
+        }
+
+        KaigoJigyoshaReturnEntity returnEntity = new KaigoJigyoshaReturnEntity();
+        returnEntity.setEntity(entityList.get(0));
+
+        return returnEntity;
+    }
+
+    /**
+     * 特定診療サービスコードの取得
+     *
+     * @param サービス提供年月
+     * @param 様式番号
+     * @param 識別コード
+     * @return DbT7120TokuteiShinryoServiceCodeEntity
+     */
+    public DbT7120TokuteiShinryoServiceCodeEntity getTokuteiShinryoServiceCodeInfo(
+            FlexibleYearMonth サービス提供年月,
+            RString 様式番号,
+            ShikibetsuCode 識別コード) {
+
+        ServiceShuruiCode serviceShuruiCode = null;
+
+        if (new RString("2165").equals(様式番号)
+                || new RString("216x").equals(様式番号)
+                || new RString("21Ax").equals(様式番号)) {
+            serviceShuruiCode = new ServiceShuruiCode("60");
+        } else if (new RString("2155").equals(様式番号)
+                || new RString("2156").equals(様式番号)
+                || new RString("219x").equals(様式番号)) {
+            serviceShuruiCode = new ServiceShuruiCode("60");
+        }
+
+        ServiceKomokuCode serviceKomokuCode = new ServiceKomokuCode(new RString("00") + 識別コード.toString());
+
+        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
+                null, サービス提供年月, null, 様式番号, null, null, null, serviceShuruiCode, serviceKomokuCode);
+
+        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
+        List<DbT7120TokuteiShinryoServiceCodeEntity> entityList = mapper.get特定診療サービスコード(parameter);
+        if (entityList == null || entityList.isEmpty()) {
+            return new DbT7120TokuteiShinryoServiceCodeEntity();
+        }
+
+        return entityList.get(0);
+    }
 }
