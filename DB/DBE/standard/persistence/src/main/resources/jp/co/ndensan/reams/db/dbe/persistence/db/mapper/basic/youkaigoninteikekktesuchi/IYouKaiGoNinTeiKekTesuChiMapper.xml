@@ -61,8 +61,12 @@
         INNER JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"
         ON  rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" = 
-            MAX(SELECT rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" FROM  rgdb."DbT5301ShujiiIkenshoIraiJoho" 
-                    WHERE rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
+            (SELECT
+                MAX(rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo")
+            FROM
+              rgdb."DbT5301ShujiiIkenshoIraiJoho"
+            WHERE
+              rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
         <if test="useSyuRyoKuTaiSyou">
             AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoKiboFlag" = TRUE
         </if>
@@ -130,8 +134,11 @@
         INNER JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"
         ON  rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" = 
-            MAX(SELECT rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" FROM  rgdb."DbT5301ShujiiIkenshoIraiJoho" 
-                    WHERE rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
+            (SELECT MAX(rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo")
+            FROM
+                rgdb."DbT5301ShujiiIkenshoIraiJoho"
+            WHERE
+                rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
         <if test="useSyuRyoKuTaiSyou">
             AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoKiboFlag" = TRUE
         </if>
@@ -183,8 +190,12 @@
         INNER JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"
         ON  rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" = 
-            MAX(SELECT rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" FROM  rgdb."DbT5301ShujiiIkenshoIraiJoho" 
-                    WHERE rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
+            (SELECT
+                MAX(rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo")
+            FROM
+                rgdb."DbT5301ShujiiIkenshoIraiJoho"
+            WHERE
+                rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoKiboFlag" = TRUE
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."logicalDeletedFlag" = FALSE
         WHERE 

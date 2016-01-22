@@ -62,7 +62,7 @@ public class FukaErrorReportView {
     }
 
     /**
-     * 選択した作成日時に合わせて賦おｎCh課エラー一覧のデータを取得し、グリッド上に表示しなおします。
+     * 選択した作成日時に合わせて賦課エラー一覧のデータを取得し、グリッド上に表示しなおします。
      *
      * @param div 賦課エラー一覧Div
      * @return 賦課エラー一覧Divを持つResponseData
