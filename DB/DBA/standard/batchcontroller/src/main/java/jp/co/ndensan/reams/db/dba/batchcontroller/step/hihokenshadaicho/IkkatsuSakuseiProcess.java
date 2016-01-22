@@ -177,12 +177,12 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
                         mybatisPrm.getPsmShikibetsuTaisho());
         RString shichosonMeisho = RString.EMPTY;
         Code 導入形態コード = shichosonSecurityJoho.get導入形態コード();
-        if (導入形態コード.equals(SHICHOSONCODE_120) || 導入形態コード.equals(SHICHOSONCODE_220)) {
+        if (SHICHOSONCODE_120.equals(導入形態コード) || SHICHOSONCODE_220.equals(導入形態コード)) {
             Association association = AssociationFinderFactory.createInstance().getAssociation();
             shichosonMeisho = association.get市町村名();
         }
-        if (導入形態コード.equals(SHICHOSONCODE_111) || 導入形態コード.equals(SHICHOSONCODE_112)
-                || 導入形態コード.equals(SHICHOSONCODE_211)) {
+        if (SHICHOSONCODE_111.equals(導入形態コード) || SHICHOSONCODE_112.equals(導入形態コード)
+                || SHICHOSONCODE_211.equals(導入形態コード)) {
             HihokenshaEntity shichosonMeishoEntity = iIkkatsuSakuseiMapper.get市町村名称(mybatisParameter);
             if (shichosonMeishoEntity != null) {
                 shichosonMeisho = shichosonMeishoEntity.getShichosonMeisho();
