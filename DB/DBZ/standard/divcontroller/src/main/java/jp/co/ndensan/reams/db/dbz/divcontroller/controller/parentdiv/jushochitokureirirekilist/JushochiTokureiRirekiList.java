@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.jushochito
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.JushochiTokureiRirekiListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.JushochiTokureiRirekiListHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.dgJutoku_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -47,25 +46,25 @@ public class JushochiTokureiRirekiList {
      * @return 住所地特例履歴ListDivを持つResponseData
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onSelect_dgJutoku(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
-        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
-        handler.setupToBeforeInput();
-        handler.showSelectedData();
-
-        dgJutoku_Row clickedRow = jutokuRirekiDiv.getDgJutoku().getClickedItem();
-        switch (clickedRow.getRowState()) {
-            case Added:
-            case Modified:
-                return onSelectByModifyButton_dgJutoku(jutokuRirekiDiv);
-            case Deleted:
-                handler.showSelectedData();
-                handler.setMeisaiDeleteMode();
-                break;
-            case Unchanged:
-            default:
-                handler.showSelectedData();
-                handler.setMeisaiShokaiMode();
-                break;
-        }
+//        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
+//        handler.setupToBeforeInput();
+//        handler.showSelectedData();
+//
+//        dgJutoku_Row clickedRow = jutokuRirekiDiv.getDgJutoku().getClickedItem();
+//        switch (clickedRow.getRowState()) {
+//            case Added:
+//            case Modified:
+//                return onSelectByModifyButton_dgJutoku(jutokuRirekiDiv);
+//            case Deleted:
+//                handler.showSelectedData();
+//                handler.setMeisaiDeleteMode();
+//                break;
+//            case Unchanged:
+//            default:
+//                handler.showSelectedData();
+//                handler.setMeisaiShokaiMode();
+//                break;
+//        }
 
         return ResponseData.of(jutokuRirekiDiv).respond();
     }
@@ -139,6 +138,7 @@ public class JushochiTokureiRirekiList {
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
 
         handler.clearInputData();
+        handler.setupToAfterInput();
         return ResponseData.of(jutokuRirekiDiv).respond();
     }
 

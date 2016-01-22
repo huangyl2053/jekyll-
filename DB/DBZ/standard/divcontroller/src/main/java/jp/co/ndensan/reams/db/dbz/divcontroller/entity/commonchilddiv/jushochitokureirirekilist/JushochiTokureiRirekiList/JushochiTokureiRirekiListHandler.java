@@ -7,23 +7,25 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochit
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuJutokuKaijoJiyu;
+import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.business.jushotitokure.JushotiTokureiBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.JushochiTokureiRirekiListDiv.DisplayType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.jushotitokurei.JushotiTokureiFinder;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -55,17 +57,16 @@ public class JushochiTokureiRirekiListHandler {
      * 共有子Divが持つ住所地特例処理モードを元に、適切な明細入力モードを設定します。
      */
     public void setMeisaiInputMode() {
-        JushochiTokureiExecutionStatus jutokuExeStatus
-                = JushochiTokureiExecutionStatus.toValue(jutokuRirekiDiv.getJushochiTokureiExecutionState());
+        DisplayType displayType = jutokuRirekiDiv.getMode_DisplayType();
 
-        switch (jutokuExeStatus) {
-            case Tekiyo:
+        switch (displayType) {
+            case tekiyo:
                 jutokuRirekiDiv.setMode_MeisaiDisplayMode(JushochiTokureiRirekiListDiv.MeisaiDisplayMode.tekiyoInput);
                 break;
-            case Kaijo:
+            case kaijo:
                 jutokuRirekiDiv.setMode_MeisaiDisplayMode(JushochiTokureiRirekiListDiv.MeisaiDisplayMode.kaijoInput);
                 break;
-            case Teisei:
+            case teiseitoroku:
                 jutokuRirekiDiv.setMode_MeisaiDisplayMode(JushochiTokureiRirekiListDiv.MeisaiDisplayMode.teiseiInput);
                 break;
             default:
@@ -78,17 +79,15 @@ public class JushochiTokureiRirekiListHandler {
      * 共有子Divが持つ住所地特例処理モードを元に、適切な明細照会モードを設定します。
      */
     public void setMeisaiShokaiMode() {
-        JushochiTokureiExecutionStatus jutokuExeStatus
-                = JushochiTokureiExecutionStatus.toValue(jutokuRirekiDiv.getJushochiTokureiExecutionState());
-
-        switch (jutokuExeStatus) {
-            case Tekiyo:
+        DisplayType displayType = jutokuRirekiDiv.getMode_DisplayType();
+        switch (displayType) {
+            case tekiyo:
                 jutokuRirekiDiv.setMode_MeisaiDisplayMode(JushochiTokureiRirekiListDiv.MeisaiDisplayMode.tekiyoShokai);
                 break;
-            case Kaijo:
+            case kaijo:
                 jutokuRirekiDiv.setMode_MeisaiDisplayMode(JushochiTokureiRirekiListDiv.MeisaiDisplayMode.kaijoShokai);
                 break;
-            case Teisei:
+            case teiseitoroku:
                 jutokuRirekiDiv.setMode_MeisaiDisplayMode(JushochiTokureiRirekiListDiv.MeisaiDisplayMode.teiseiShokai);
                 break;
             default:
@@ -111,24 +110,24 @@ public class JushochiTokureiRirekiListHandler {
     public void showSelectedData() {
         dgJutoku_Row row = jutokuRirekiDiv.getDgJutoku().getClickedItem();
 
-        IPredicate condition = new IPredicate<HihokenshaDaichoModel>() {
-            @Override
-            public boolean evaluate(HihokenshaDaichoModel targetModel) {
-                return false;
-                //return conditionDate.equals(targetModel.get適用年月日());
-            }
-        };
+        jutokuRirekiDiv.getJutokuTekiyoInput().getTxtTekiyoDate().setValue(row.getTekiyoDate().getValue());
+        jutokuRirekiDiv.getJutokuTekiyoInput().getTxtTekiyoTodokedeDate().setValue(row.getTekiyoTodokedeDate().getValue());
+        jutokuRirekiDiv.getJutokuTekiyoInput().getDdlTekiyoJiyu().setDataSource(getCode(new CodeShubetsu("0008")));
+        try {
+            jutokuRirekiDiv.getJutokuTekiyoInput().getDdlTekiyoJiyu().setSelectedKey(row.getTekiyoJiyuKey());
+        } catch (SystemException e) {
+            jutokuRirekiDiv.getJutokuTekiyoInput().getDdlTekiyoJiyu().setSelectedKey(RString.EMPTY);
 
-//        IItemList<HihokenshaDaichoModel> jutokuList = new HihokenshaDaichoList(getEditing被保険者台帳情報()).to住所地特例List();
-//        IItemList<HihokenshaDaichoModel> jutokuList = getEditing被保険者台帳情報();
-//        IItemList<HihokenshaDaichoModel> jutokuOneSeason = jutokuList.filter(condition);
-//        for (HihokenshaDaichoModel model : jutokuOneSeason) {
-//            if (model.get解除年月日().isEmpty()) {
-//                setTekiyoInputMeisai(model);
-//            } else {
-//                setKaijoInputMeisai(model);
-//            }
-//        }
+        }
+        jutokuRirekiDiv.getJutokuKaijoInput().getTxtKaijoDate().setValue(row.getKaijoDate().getValue());
+        jutokuRirekiDiv.getJutokuKaijoInput().getTxtKaijoTodokedeDate().setValue(row.getKaijoTodokedeDate().getValue());
+        jutokuRirekiDiv.getJutokuKaijoInput().getDdlKaijoJiyu().setDataSource(getCode(new CodeShubetsu("0011")));
+        try {
+            jutokuRirekiDiv.getJutokuKaijoInput().getDdlKaijoJiyu().setSelectedKey(row.getKaijoJiyuKey());
+        } catch (SystemException e) {
+            jutokuRirekiDiv.getJutokuKaijoInput().getDdlKaijoJiyu().setSelectedKey(RString.EMPTY);
+        }
+
     }
 
     /**
@@ -177,7 +176,9 @@ public class JushochiTokureiRirekiListHandler {
     public void updateEntryData() {
         RString status = jutokuRirekiDiv.getExecutionStatus();
         if (ViewExecutionStatus.Add.getValue().equals(status)) {
-            add住所地特例履歴();
+            dgJutoku_Row newRow = add住所地特例履歴();
+            int rowNo = jutokuRirekiDiv.getDgJutoku().getTotalRecords();
+            jutokuRirekiDiv.getDgJutoku().getDataSource().add(newRow);
         } else if (ViewExecutionStatus.Modify.getValue().equals(status)) {
             dgJutoku_Row row = jutokuRirekiDiv.getDgJutoku().getClickedItem();
             TextBoxDate shoriDate = new TextBoxDate();
@@ -261,8 +262,12 @@ public class JushochiTokureiRirekiListHandler {
                 適用届出日.setValue(jushotiTokureiBusiness.get適用届出日());
                 row.setTekiyoTodokedeDate(適用届出日);
 
-                row.setTekiyoJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu("0008"), new Code(jushotiTokureiBusiness.get適用事由コード())));
-
+                try {
+                    row.setTekiyoJiyu(ShikakuJutokuTekiyoJiyu.toValue(jushotiTokureiBusiness.get適用事由コード()).get名称());
+                } catch (IllegalArgumentException e) {
+                    row.setTekiyoJiyu(RString.EMPTY);
+                }
+                row.setTekiyoJiyuKey(jushotiTokureiBusiness.get適用事由コード());
                 TextBoxFlexibleDate 解除日 = new TextBoxFlexibleDate();
                 解除日.setValue(jushotiTokureiBusiness.get解除日());
                 row.setKaijoDate(解除日);
@@ -271,8 +276,12 @@ public class JushochiTokureiRirekiListHandler {
                 解除届出日.setValue(jushotiTokureiBusiness.get解除届出日());
                 row.setKaijoTodokedeDate(解除届出日);
 
+                try {
+                    row.setKaijoJiyu(ShikakuJutokuKaijoJiyu.toValue(jushotiTokureiBusiness.get解除事由コード()).get名称());
+                } catch (IllegalArgumentException e) {
+                    row.setKaijoJiyu(RString.EMPTY);
+                }
                 row.setKaijoJiyuKey(jushotiTokureiBusiness.get解除事由コード());
-                row.setKaijoJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu("0011"), new Code(jushotiTokureiBusiness.get解除事由コード())));
                 //措置元保険者 旧保険者 処理日時
 
                 dgJutokuList.add(row);
@@ -426,8 +435,11 @@ public class JushochiTokureiRirekiListHandler {
 
     private List<KeyValueDataSource> getCode(CodeShubetsu codeShubetsu) {
 
-        List<UzT0007CodeEntity> codeValueList = CodeMaster.getCode(codeShubetsu);
+        List<UzT0007CodeEntity> codeValueList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, codeShubetsu);
+
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+
         for (UzT0007CodeEntity codeValueObject : codeValueList) {
             dataSourceList.add(new KeyValueDataSource(codeValueObject.getコード().getKey(), codeValueObject.getコード名称()));
         }
