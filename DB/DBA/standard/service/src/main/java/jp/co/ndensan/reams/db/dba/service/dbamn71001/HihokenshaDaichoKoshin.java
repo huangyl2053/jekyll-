@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dba.service.dbamn71001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.dbamn71001.Dbamn71001BatchFlowParameter;
-import jp.co.ndensan.reams.db.dba.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dba.entity.dbamn71001.SaishinIdohiDataEntity;
 import jp.co.ndensan.reams.db.dba.entity.dbamn71001.ShikakuIdoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.DBXCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth._DateOfBirth;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -84,10 +85,8 @@ public class HihokenshaDaichoKoshin {
 
         SaishinIdohiDataEntity saishinIdohiDataEntity = new SaishinIdohiDataEntity();
 
-        // 65歳年齢到達日の取得  TODO QA コンストラクタと引数を確認  #73116
         AgeCalculator ageCalculator = new AgeCalculator(
-                new _DateOfBirth(entity.get生年月日()), JuminJotai.toValue(entity.get住民状態コード()),
-                FlexibleDate.MAX);
+                new _DateOfBirth(entity.get生年月日()), JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日);
         FlexibleDate age = ageCalculator.get年齢到達日(AGE_65);
 
         DbT1001HihokenshaDaichoEntity dbT1001HihokenshaDaichoEntity = dbT1001Dac

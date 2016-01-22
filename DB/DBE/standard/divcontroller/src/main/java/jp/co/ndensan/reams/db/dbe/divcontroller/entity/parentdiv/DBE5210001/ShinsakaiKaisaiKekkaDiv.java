@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -52,6 +53,8 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     private ShinsakaiIinTorokuDiv ShinsakaiIinToroku;
     @JsonProperty("onseiFile")
     private onseiFileDiv onseiFile;
+    @JsonProperty("Model")
+    private RString Model;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -327,6 +330,24 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     @JsonProperty("onseiFile")
     public void setOnseiFile(onseiFileDiv onseiFile) {
         this.onseiFile = onseiFile;
+    }
+
+    /*
+     * getModel
+     * @return Model
+     */
+    @JsonProperty("Model")
+    public RString getModel() {
+        return Model;
+    }
+
+    /*
+     * setModel
+     * @param Model Model
+     */
+    @JsonProperty("Model")
+    public void setModel(RString Model) {
+        this.Model = Model;
     }
 
     /*

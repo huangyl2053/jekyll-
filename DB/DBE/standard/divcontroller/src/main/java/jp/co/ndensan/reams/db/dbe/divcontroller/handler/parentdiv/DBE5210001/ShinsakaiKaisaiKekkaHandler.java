@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.Sikaku;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -25,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  *
- * 護認定審査会開催結果登録するクラスです
+ * 護認定審査会開催結果登録するクラスです。
  *
  */
 public class ShinsakaiKaisaiKekkaHandler {
@@ -42,29 +43,27 @@ public class ShinsakaiKaisaiKekkaHandler {
     }
 
     /**
-     * ShinsakaiKaisaiYoteiJohoBusiness 画面初期化表示、画面項目に設定されている値をクリアする。
+     * 画面初期化表示、画面項目に設定されている値をクリアです。
      *
-     * @param saiYoteiJoho ShinsakaiKaisaiYoteiJohoBusiness
+     * @param saiYoteiJoho ヘッドエリア内容
      */
     public void onLoad(ShinsakaiKaisaiYoteiJohoBusiness saiYoteiJoho) {
+        if (saiYoteiJoho.get開催日().isEmpty() || saiYoteiJoho.get開催日() == null) {
+            div.setModel(new RString("新規モード"));
+        } else {
+            div.setModel(new RString("更新モード"));
+        }
         div.getTxtShinsakaiMeisho().setValue(saiYoteiJoho.get審査会名称());
-        div.getTxtShinsakaiMeisho().setDisabled(true);
         div.getTxtGogitai().setValue(saiYoteiJoho.get合議体名称());
-        div.getTxtGogitai().setDisabled(true);
         div.getTxtYoteiTeiin().setValue(new Decimal(saiYoteiJoho.get予定人数()));
-        div.getTxtYoteiTeiin().setDisabled(true);
         div.getTxtJissiSu().setValue(new Decimal(saiYoteiJoho.get実施人数()));
         div.getTxtYoteiKaijo().setValue(saiYoteiJoho.get介護認定審査会開催場所名称());
-        div.getTxtYoteiKaijo().setDisabled(true);
         div.getTxtKaisaiYoteibi().setValue(saiYoteiJoho.get開催予定日());
-        div.getTxtKaisaiYoteibi().setDisabled(true);
         div.getTxtYoteiStartTime().setValue(RTime.parse(saiYoteiJoho.get予定開始時間()));
-        div.getTxtYoteiStartTime().setDisabled(true);
         div.getTxtYoteiEndTime().setValue(RTime.parse(saiYoteiJoho.get予定終了時間()));
-        div.getTxtYoteiEndTime().setDisabled(true);
         div.getTxtKaisaiBi().setValue(saiYoteiJoho.get開催日());
-        div.getTxtKaisaiStartTime().setValue(RTime.parse(saiYoteiJoho.get開催開始時間()));
-        div.getTxtKaisaiEndTime().setValue(RTime.parse(saiYoteiJoho.get開催終了時間()));
+        div.getTxtKaisaiStartTime().setValue(strToTime(saiYoteiJoho.get開催開始時間()));
+        div.getTxtKaisaiEndTime().setValue(strToTime(saiYoteiJoho.get開催終了時間()));
         div.getTxtShoyoTime().setValue(new RString(String.valueOf(saiYoteiJoho.get所要時間())));
 //TODO 開催会場
 //        div.getDdlKaisaiBasho().getDataSource();
@@ -72,16 +71,33 @@ public class ShinsakaiKaisaiKekkaHandler {
     }
 
     /**
-     * 画面初期化表示、画面項目に設定されている値をクリアする。
+     * ヘッドエリア内容の状態設定です。
      *
-     * @param list
+     */
+    public void setDisabled() {
+        div.getTxtShinsakaiMeisho().setDisabled(true);
+        div.getTxtGogitai().setDisabled(true);
+        div.getTxtYoteiTeiin().setDisabled(true);
+        div.getTxtYoteiKaijo().setDisabled(true);
+        div.getTxtKaisaiYoteibi().setDisabled(true);
+        div.getTxtYoteiStartTime().setDisabled(true);
+        div.getTxtYoteiEndTime().setDisabled(true);
+    }
+
+    /**
+     * 画面初期化表示、画面項目に設定されている値をクリアです。
+     *
+     * @param list 審査会委員一覧設定
      *
      */
     public void initialize(List<ShinsakaiWariateIinJohoBusiness> list) {
         List<dgShinsakaiIinIchiran_Row> dataGridList = new ArrayList<>();
-        for (ShinsakaiWariateIinJohoBusiness business : list) {
+        for (int i = 0; i < list.size(); i++) {
             dgShinsakaiIinIchiran_Row row = new dgShinsakaiIinIchiran_Row();
-            row.setShinsakjaiIinCode(business.get介護認定審査員資格コード().value());
+            ShinsakaiWariateIinJohoBusiness business = list.get(i);
+            row.getNumber().setValue(new Decimal(i + 1));
+            row.setShinsakjaiIinCode(business.get審査会委員コード());
+            row.setShimei(business.get介護認定審査会委員氏名().value());
             row.setShimei(business.get介護認定審査会委員氏名().value());
             row.setSeibetsu(business.get性別() == null
                     ? RString.EMPTY : Seibetsu.toValue(business.get性別()).get名称());
@@ -104,10 +120,6 @@ public class ShinsakaiKaisaiKekkaHandler {
         div.getDgShinsakaiIinIchiran().setDataSource(dataGridList);
     }
 
-    /**
-     * 介護認定審査会議長区分コードをクリアする。
-     *
-     */
     private List<KeyValueDataSource> setKaigoninteiShinsakaiGichoKubunCode() {
         List<KeyValueDataSource> kaigoninteiShinsakaiGichoKubunCode = new ArrayList<>();
         for (KaigoninteiShinsakaiGichoKubunCode gichoKubunCode : KaigoninteiShinsakaiGichoKubunCode.values()) {
@@ -117,10 +129,6 @@ public class ShinsakaiKaisaiKekkaHandler {
         return kaigoninteiShinsakaiGichoKubunCode;
     }
 
-    /**
-     * 委員出席をクリアする。
-     *
-     */
     private List<KeyValueDataSource> setIsShusseki() {
         List<KeyValueDataSource> Shusseki = new ArrayList<>();
         for (IsShusseki isShusseki : IsShusseki.values()) {
@@ -130,10 +138,6 @@ public class ShinsakaiKaisaiKekkaHandler {
         return Shusseki;
     }
 
-    /**
-     * 委員早退有無をクリアする。
-     *
-     */
     private List<KeyValueDataSource> setIssotaiUmu() {
         List<KeyValueDataSource> sotaiUmu = new ArrayList<>();
         for (IssotaiUmu issotaiUmu : IssotaiUmu.values()) {
@@ -143,10 +147,6 @@ public class ShinsakaiKaisaiKekkaHandler {
         return sotaiUmu;
     }
 
-    /**
-     * 員遅刻有無をクリアする。
-     *
-     */
     private List<KeyValueDataSource> setIsChikokuUmu() {
         List<KeyValueDataSource> chikokuUmu = new ArrayList<>();
         for (IsChikokuUmu isChikokuUmu : IsChikokuUmu.values()) {
@@ -154,5 +154,13 @@ public class ShinsakaiKaisaiKekkaHandler {
             chikokuUmu.add(dataSource);
         }
         return chikokuUmu;
+    }
+
+    private RTime strToTime(RString str) {
+        if (str == null) {
+            return RDateTime.MIN.getTime();
+        }
+        str = str.insert(2, ":");
+        return RTime.parse(str);
     }
 }

@@ -23,7 +23,7 @@ public class DeleteJigyoHokokuNenpo {
     private LasdecCode 市町村コード;
     private RString 様式種類コード;
 
-    private DeleteJigyoHokokuNenpo(FlexibleYear 報告年, FlexibleYear 集計対象年, LasdecCode 市町村コード, RString 様式種類コード) {
+    public DeleteJigyoHokokuNenpo(FlexibleYear 報告年, FlexibleYear 集計対象年, LasdecCode 市町村コード, RString 様式種類コード) {
         this.報告年 = 報告年;
         this.集計対象年 = 集計対象年;
         this.市町村コード = 市町村コード;

@@ -47,6 +47,5 @@ public interface IYouKaiGoNinTeiKekTesuChiMapper {
      * @param entity entity
      * @return 更新件数
      */
-    int updateShuJiIkenSyoSaKuSeiIraiJyouHou (DbT5301ShujiiIkenshoIraiJohoEntity entity);
-    
+    int updateShuJiIkenSyoSaKuSeiIraiJyouHou(DbT5301ShujiiIkenshoIraiJohoEntity entity);
 }

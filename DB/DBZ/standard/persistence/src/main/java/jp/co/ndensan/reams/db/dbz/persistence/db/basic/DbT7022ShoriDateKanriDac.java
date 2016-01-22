@@ -165,7 +165,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT7022ShoriDateKanri.class).
-                where(and(eq(subGyomuCode, "DBA"),
+                where(and(eq(subGyomuCode, SubGyomuCode.DBA介護資格),
                                 eq(isDeleted, false),
                                 eq(shoriName, ShoriName.年齢到達予定者チェックリスト.get名称()),
                                 eq(nendo, RDate.getNowDate().getNendo())))

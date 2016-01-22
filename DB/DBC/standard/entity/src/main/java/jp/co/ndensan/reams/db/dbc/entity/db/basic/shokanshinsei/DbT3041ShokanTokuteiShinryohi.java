@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbT3041ShokanTokuteiShinryohi implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     /**
      * insertDantaiCd
      */
@@ -60,14 +61,14 @@ public enum DbT3041ShokanTokuteiShinryohi implements IColumnDefinition {
      */
     yoshikiNo(4, 0),
     /**
-     * 順次番号
+     * 明細番号
      * <br/>複数レコード対応のため
      */
-    junjiNo(4, 0),
+    meisaiNo(4, 0),
     /**
-     * 履歴番号
+     * 連番
      */
-    rirekiNo(5, 0),
+    renban(2, 0),
     /**
      * 傷病名
      */
@@ -183,7 +184,7 @@ public enum DbT3041ShokanTokuteiShinryohi implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -192,7 +193,7 @@ public enum DbT3041ShokanTokuteiShinryohi implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

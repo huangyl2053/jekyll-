@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.jyutakugaisyunaiyolist;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjutakukaishu.ShokanJutakuKaishuBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.JyutakugaisyunaiyoListDiv;
@@ -36,7 +37,7 @@ public class JyutakugaisyunaiyoList {
     private static final RString モード_選択 = new RString("選択");
 
     /**
-     * onLoadです。
+     * 住宅改修内容一覧のonLoadです。
      *
      * @param requestDiv JyutakugaisyunaiyoListDiv
      * @return JyutakugaisyunaiyoListDivのResponseData
@@ -47,14 +48,19 @@ public class JyutakugaisyunaiyoList {
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_整理番号, RString.class);
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_様式番号, RString.class);
         RString mode = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_モード, RString.class);
-        SearchResult<ShokanJutakuKaishuBusiness> jyutakukaisyuList = JyutakukaisyuyichiranFinder
-                .createInstance().selectJyutakukaisyuList(被保険者番号, サービス提供年月, 整理番号, 様式番号);
+        SearchResult<ShokanJutakuKaishuBusiness> jyutakukaisyuList;
+        if (被保険者番号 == null || サービス提供年月 == null || 整理番号 == null || 様式番号 == null) {
+            jyutakukaisyuList = SearchResult.of(new ArrayList<>(), 0, false);
+        } else {
+            jyutakukaisyuList = JyutakukaisyuyichiranFinder
+                    .createInstance().selectJyutakukaisyuList(被保険者番号, サービス提供年月, 整理番号, 様式番号);
+        }
         getHandler(requestDiv).initialize(mode, jyutakukaisyuList);
         return ResponseData.of(requestDiv).respond();
     }
 
     /**
-     * 追加ボタン押下です。
+     * 追加ボタンを押下した際に実行します。
      *
      * @param requestDiv JyutakugaisyunaiyoListDiv
      * @return JyutakugaisyunaiyoListDivのResponseData
@@ -78,7 +84,7 @@ public class JyutakugaisyunaiyoList {
     }
 
     /**
-     * 削除ボタン押下です。
+     * 削除ボタンを押下した際に実行します。
      *
      * @param requestDiv JyutakugaisyunaiyoListDiv
      * @return JyutakugaisyunaiyoListDivのResponseData
@@ -89,7 +95,7 @@ public class JyutakugaisyunaiyoList {
     }
 
     /**
-     * 選択ボタン押下です。
+     * 選択ボタンを押下した際に実行します。
      *
      * @param requestDiv JyutakugaisyunaiyoListDiv
      * @return JyutakugaisyunaiyoListDivのResponseData
@@ -100,7 +106,7 @@ public class JyutakugaisyunaiyoList {
     }
 
     /**
-     * 本人住所をコピーするボタン押下です。
+     * 本人住所をコピーするボタンを押下した際に実行します。
      *
      * @param requestDiv JyutakugaisyunaiyoListDiv
      * @return JyutakugaisyunaiyoListDivのResponseData
@@ -111,7 +117,7 @@ public class JyutakugaisyunaiyoList {
     }
 
     /**
-     * 入力内容をクリアするボタン押下です。
+     * 入力内容をクリアするボタンを押下した際に実行します。
      *
      * @param requestDiv JyutakugaisyunaiyoListDiv
      * @return JyutakugaisyunaiyoListDivのResponseData
@@ -127,7 +133,7 @@ public class JyutakugaisyunaiyoList {
     }
 
     /**
-     * 明細を確定するボタン押下です。
+     * 明細を確定するボタンを押下した際に実行します。
      *
      * @param requestDiv JyutakugaisyunaiyoListDiv
      * @return JyutakugaisyunaiyoListDivのResponseData
@@ -135,13 +141,8 @@ public class JyutakugaisyunaiyoList {
     public ResponseData<JyutakugaisyunaiyoListDiv> onClick_ConfirmButton(JyutakugaisyunaiyoListDiv requestDiv) {
         List<dgGaisyuList_Row> list = requestDiv.getDgGaisyuList().getDataSource();
         dgGaisyuList_Row dgGaisyuListRow;
-        JyutakugaisyunaiyoListValidationHandler validationHandler = getValidationHandler(requestDiv);
         if (モード_追加.equals(requestDiv.getPnlNyuryokuArea().getState())) {
-            ValidationMessageControlPairs validPairs = validationHandler.validateFor着工日と完成日の前後順();
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
-            }
-            validPairs = validationHandler.validateFor事業者();
+            ValidationMessageControlPairs validPairs = getCheck(requestDiv);
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
             }
@@ -152,13 +153,8 @@ public class JyutakugaisyunaiyoList {
         } else {
             requestDiv.getDgGaisyuList().getGridSetting().selectedRowCount();
             dgGaisyuListRow = requestDiv.getDgGaisyuList().getSelectedItems().get(0);
-            int count = list.indexOf(dgGaisyuListRow);
             if (モード_修正.equals(requestDiv.getPnlNyuryokuArea().getState())) {
-                ValidationMessageControlPairs validPairs = validationHandler.validateFor着工日と完成日の前後順();
-                if (validPairs.iterator().hasNext()) {
-                    return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
-                }
-                validPairs = validationHandler.validateFor事業者();
+                ValidationMessageControlPairs validPairs = getCheck(requestDiv);
                 if (validPairs.iterator().hasNext()) {
                     return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
                 }
@@ -167,10 +163,22 @@ public class JyutakugaisyunaiyoList {
             } else if (モード_削除.equals(requestDiv.getPnlNyuryokuArea().getState())) {
                 dgGaisyuListRow.setTxtJyotai(モード_削除);
             }
-            list.set(count, dgGaisyuListRow);
         }
         clearAll(requestDiv);
         return ResponseData.of(requestDiv).respond();
+    }
+
+    private ValidationMessageControlPairs getCheck(JyutakugaisyunaiyoListDiv requestDiv) {
+        JyutakugaisyunaiyoListValidationHandler validationHandler = getValidationHandler(requestDiv);
+        ValidationMessageControlPairs validPairs = validationHandler.validateFor着工日と完成日の前後順();
+        if (validPairs.iterator().hasNext()) {
+            return validPairs;
+        }
+        validPairs = validationHandler.validateFor事業者();
+        if (validPairs.iterator().hasNext()) {
+            return validPairs;
+        }
+        return validPairs;
     }
 
     private JyutakugaisyunaiyoListDiv setPnlNyuryokuArea(RString 状態, JyutakugaisyunaiyoListDiv requestDiv) {

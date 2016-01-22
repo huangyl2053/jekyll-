@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohosakusei.GogitaiJohoSakuseiRsult;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiKaisaiKekka.ShinsakaiKaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiKaisaiKekka.ShinsakaiWariateIinJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoRelateEntity;
@@ -60,10 +61,10 @@ public class ShinsakaiKaisaiKekkaFinder {
 
     /**
      *
-     * ヘッドエリア内容を取得する
+     * ヘッドエリア内容を取得です。
      *
-     * @param 開催番号 RString
-     * @return relateEntity
+     * @param 開催番号 開催番号
+     * @return ヘッドエリア内容
      */
     @Transaction
     public ShinsakaiKaisaiYoteiJohoBusiness getヘッドエリア内容検索(RString 開催番号) {
@@ -74,10 +75,10 @@ public class ShinsakaiKaisaiKekkaFinder {
     }
 
     /**
-     * 審査会委員一覧検索を取得する
+     * 審査会委員一覧検索を取得です。
      *
-     * @param 開催番号 RString
-     * @return
+     * @param 開催番号 開催番号
+     * @return 審査会委員一覧
      */
     @Transaction
     public SearchResult<ShinsakaiWariateIinJohoBusiness> get審査会委員一覧検索(RString 開催番号) {
@@ -95,18 +96,23 @@ public class ShinsakaiKaisaiKekkaFinder {
     }
 
     /**
-     * 審査会委員一覧検索を取得する
+     * 審査会委員一覧検索を取得です。
      *
-     * @param 開催番号 RString
-     * @return
+     * @param 開催番号 開催番号
+     * @return 審査会委員一覧
      */
     @Transaction
     public SearchResult<ShinsakaiKaisaiYoteiJoho> get審査会委員(RString 開催番号) {
         List<ShinsakaiKaisaiYoteiJoho> resultList = new ArrayList<>();
-        IShinsakaiKaisaiKekkaMapper mapper = mapperProvider.create(IShinsakaiKaisaiKekkaMapper.class);
-        ShinsakaiKaisaiYoteiJohoRelateEntity entityList = mapper.get開催予定情報更新(開催番号);
-        entityList.initializeMd5ToEntities();
-        resultList.add(new ShinsakaiKaisaiYoteiJoho(entityList));
+        List<ShinsakaiKaisaiYoteiJohoRelateEntity> entityList
+                = mapperProvider.create(IShinsakaiKaisaiKekkaMapper.class).get開催予定情報更新(開催番号);
+        if (entityList.isEmpty()) {
+            return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
+        }
+        for (ShinsakaiKaisaiYoteiJohoRelateEntity entity : entityList) {
+            entity.initializeMd5ToEntities();
+            resultList.add(new ShinsakaiKaisaiYoteiJoho(entity));
+        }
         return SearchResult.of(resultList, 0, false);
     }
 }

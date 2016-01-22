@@ -78,6 +78,7 @@ class ChosaIraiIchiranhyoHeaderEditor implements IChosaIraiIchiranhyoEditor {
         systemDateTime.append(new RString("作成"));
         source.printTimeStamp = systemDateTime.toRString();
         source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
+        //TODO パラメータの「郵便番号」がありません。 QA541
         source.yubinNo = item.getYubinNo();
         source.shichosonMei = RString.EMPTY;
         source.shuchoMei = item.getShuchoMei();

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity;
@@ -241,7 +242,25 @@ public class BemmeiNaiyo extends ModelBase<BemmeiNaiyoIdentifier, DbT7002BemmeiN
 
     @Override
     public boolean hasChanged() {
-        return hasChangedEntity();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * getBemmeishaJohoList
+     *
+     * @return BemmeishaJohoリスト
+     */
+    public List<BemmeishaJoho> getBemmeishaJohoList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * modified
+     *
+     * @return BemmeiNaiyo
+     */
+    public BemmeiNaiyo modified() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private static final class _SerializationProxy implements Serializable {

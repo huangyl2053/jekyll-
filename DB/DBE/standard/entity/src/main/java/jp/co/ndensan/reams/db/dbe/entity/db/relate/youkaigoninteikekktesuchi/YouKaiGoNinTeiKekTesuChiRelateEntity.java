@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class YouKaiGoNinTeiKekTesuChiRelateEntity {
-
     private RString shujiiIryokikanCode;
     private RString iryoKikanMeisho;
     private RString yubinNo;
@@ -22,7 +22,6 @@ public class YouKaiGoNinTeiKekTesuChiRelateEntity {
     private RString shujiiCode;
     private RString shujiiName;
     private int taiSyouCount;
-    
     private int renNo;
     private RString hihokenshaNo;
     private RString hihokenshaName;
@@ -30,18 +29,16 @@ public class YouKaiGoNinTeiKekTesuChiRelateEntity {
     private RString seinengappiYMD;
     private int age;
     private RString ninteiShinseiYMD;
-    private RString ninteiShinseiShinseijiKubunCode;
+    private RString ninteiShinseiShinseijiKubunCod;
     private RString ninteiShinseiHoreiKubunCode;
-    private RString nijiHanteiYokaigoJotaiKubunCode;
+    private RString nijiHanteiYokaigoJotaiKubunCod;
     private RString nijiHanteiNinteiYukoKikan;
     private RString nijiHanteiNinteiYukoKaishiYMD;
     private RString nijiHanteiNinteiYukoShuryoYMD;
     private RString nijiHanteiYMD;
     private RString ninteiJohoTeikyoYMD;
     private RString shinseishoKanriNo;
-    
     private RString shichosonMeisho;
     private RString shinsakaiIken;
     private RString ikenshoIraiRirekiNo;
-
 }

@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.config.DousaKan
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.config.RojinHokenJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -154,7 +155,7 @@ public final class ShichosonSecurityJoho {
             ConverterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);
         } else if (new Code("111").equals(介護導入形態.getDonyuKeitaiCode())
                 || new Code("211").equals(介護導入形態.getDonyuKeitaiCode())) {
-            RString 市町村識別ID = getShichosonShikibetsuId(権限項目種類).get(0).getItemId();
+            RString 市町村識別ID = getShichosonShikibetsuId(UrControlDataFactory.createInstance().getLoginInfo().getUserId()).get(0).getItemId();
             if (市町村識別ID_DEFAULT.equals(市町村識別ID)) {
                 KanriJoho kanriJoho = getKanriJoho(介護導入形態);
                 ConverterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);

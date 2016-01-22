@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBD5330001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jan 04 18:40:51 CST 2016 
+ * Thu Jan 21 17:18:12 CST 2016 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgDoctorSelection_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
 
     private RString shujiiIryokikanCode;
     private RString shujiiIryokikanName;
@@ -29,6 +29,7 @@ public class dgDoctorSelection_Row extends DataRow {
     private RString doctorCode;
     private RString doctorName;
     private RString count;
+    private RString shinseishoKanriNo;
 
     public dgDoctorSelection_Row() {
         super();
@@ -40,6 +41,7 @@ public class dgDoctorSelection_Row extends DataRow {
         this.doctorCode = RString.EMPTY;
         this.doctorName = RString.EMPTY;
         this.count = RString.EMPTY;
+        this.shinseishoKanriNo = RString.EMPTY;
         this.setOriginalData("shujiiIryokikanCode", shujiiIryokikanCode);
         this.setOriginalData("shujiiIryokikanName", shujiiIryokikanName);
         this.setOriginalData("yubinNo", yubinNo);
@@ -48,9 +50,10 @@ public class dgDoctorSelection_Row extends DataRow {
         this.setOriginalData("doctorCode", doctorCode);
         this.setOriginalData("doctorName", doctorName);
         this.setOriginalData("count", count);
+        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
     }
 
-    public dgDoctorSelection_Row(RString shujiiIryokikanCode, RString shujiiIryokikanName, RString yubinNo, RString tel, RString jusho, RString doctorCode, RString doctorName, RString count) {
+    public dgDoctorSelection_Row(RString shujiiIryokikanCode, RString shujiiIryokikanName, RString yubinNo, RString tel, RString jusho, RString doctorCode, RString doctorName, RString count, RString shinseishoKanriNo) {
         super();
         this.setOriginalData("shujiiIryokikanCode", shujiiIryokikanCode);
         this.setOriginalData("shujiiIryokikanName", shujiiIryokikanName);
@@ -60,6 +63,7 @@ public class dgDoctorSelection_Row extends DataRow {
         this.setOriginalData("doctorCode", doctorCode);
         this.setOriginalData("doctorName", doctorName);
         this.setOriginalData("count", count);
+        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.shujiiIryokikanCode = shujiiIryokikanCode;
         this.shujiiIryokikanName = shujiiIryokikanName;
         this.yubinNo = yubinNo;
@@ -68,6 +72,7 @@ public class dgDoctorSelection_Row extends DataRow {
         this.doctorCode = doctorCode;
         this.doctorName = doctorName;
         this.count = count;
+        this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     public RString getShujiiIryokikanCode() {
@@ -100,6 +105,10 @@ public class dgDoctorSelection_Row extends DataRow {
 
     public RString getCount() {
         return count;
+    }
+
+    public RString getShinseishoKanriNo() {
+        return shinseishoKanriNo;
     }
 
     public void setShujiiIryokikanCode(RString shujiiIryokikanCode) {
@@ -140,6 +149,11 @@ public class dgDoctorSelection_Row extends DataRow {
     public void setCount(RString count) {
         this.setOriginalData("count", count);
         this.count = count;
+    }
+
+    public void setShinseishoKanriNo(RString shinseishoKanriNo) {
+        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
+        this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     // </editor-fold>

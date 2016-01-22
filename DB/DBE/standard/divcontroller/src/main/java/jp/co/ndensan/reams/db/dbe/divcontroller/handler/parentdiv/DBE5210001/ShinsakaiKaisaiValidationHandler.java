@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -63,8 +64,8 @@ public class ShinsakaiKaisaiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         List<dgShinsakaiIinIchiran_Row> rowList = div.getShinsakaiIinToroku().getDgShinsakaiIinIchiran().getDataSource();
         for (dgShinsakaiIinIchiran_Row row : rowList) {
-            if (RTime.parse(row.getShussekiTime()).isBefore(div.getTxtKaisaiStartTime().getValue())
-                    || div.getTxtKaisaiEndTime().getValue().isBefore(RTime.parse(row.getShussekiTime().toString()))) {
+            if (strToTime(row.getShussekiTime()).isBefore(div.getTxtKaisaiStartTime().getValue())
+                    || div.getTxtKaisaiEndTime().getValue().isBefore(strToTime(row.getShussekiTime()))) {
                 validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "出席時間")));
                 return validationMessages;
             }
@@ -82,8 +83,8 @@ public class ShinsakaiKaisaiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         List<dgShinsakaiIinIchiran_Row> rowList = div.getShinsakaiIinToroku().getDgShinsakaiIinIchiran().getDataSource();
         for (dgShinsakaiIinIchiran_Row row : rowList) {
-            if (RTime.parse(row.getTaisekiTime()).isBefore(div.getTxtKaisaiStartTime().getValue())
-                    || div.getTxtKaisaiEndTime().getValue().isBefore(RTime.parse(row.getTaisekiTime().toString()))) {
+            if (strToTime(row.getTaisekiTime()).isBefore(div.getTxtKaisaiStartTime().getValue())
+                    || div.getTxtKaisaiEndTime().getValue().isBefore(strToTime(row.getTaisekiTime()))) {
                 validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "退席時間")));
                 return validationMessages;
             }
@@ -143,7 +144,7 @@ public class ShinsakaiKaisaiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         List<dgShinsakaiIinIchiran_Row> rowList = div.getShinsakaiIinToroku().getDgShinsakaiIinIchiran().getDataSource();
         for (dgShinsakaiIinIchiran_Row row : rowList) {
-            if (row.getGichoKubun().getSelectedKey().equals(new RString("false"))) {
+            if (row.getChikokuUmu().getSelectedKey().equals(new RString("false"))) {
                 is全員遅刻 = false;
             }
         }
@@ -165,7 +166,7 @@ public class ShinsakaiKaisaiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         List<dgShinsakaiIinIchiran_Row> rowList = div.getShinsakaiIinToroku().getDgShinsakaiIinIchiran().getDataSource();
         for (dgShinsakaiIinIchiran_Row row : rowList) {
-            if (row.getGichoKubun().getSelectedKey().equals(new RString("false"))) {
+            if (row.getSotaiUmu().getSelectedKey().equals(new RString("false"))) {
                 is全員が早退 = false;
             }
         }
@@ -188,5 +189,13 @@ public class ShinsakaiKaisaiValidationHandler {
         public Message getMessage() {
             return message;
         }
+    }
+
+    private RTime strToTime(RString str) {
+        if (str == null) {
+            return RDateTime.MIN.getTime();
+        }
+        str = str.insert(2, ":");
+        return RTime.parse(str);
     }
 }

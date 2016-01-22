@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.Ikkatsu
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.HihokenshaDaichoSakuseiEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaicho.HihokenshaDaichoIchiranHyoRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshadaicho.IIkkatsuSakuseiMapper;
-import jp.co.ndensan.reams.db.dba.service.core.nyutaishoshakanri.NyutaishoshaKanriFinder;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
@@ -34,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import org.codehaus.plexus.util.StringUtils;
 
 /**
  * 被保険者台帳一括作成バッチより、被保険者台帳一覧表帳票用DataEntityを作成します。
@@ -62,9 +60,9 @@ public class HihokenshaDaichoIchiranHyoFinder {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link NyutaishoshaKanriFinder}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoIchiranHyoFinder}のインスタンスを返します。
      *
-     * @return NyutaishoshaKanriFinder
+     * @return HihokenshaDaichoIchiranHyoFinder
      */
     public static HihokenshaDaichoIchiranHyoFinder createInstance() {
         return InstanceProvider.create(HihokenshaDaichoIchiranHyoFinder.class);
@@ -88,7 +86,8 @@ public class HihokenshaDaichoIchiranHyoFinder {
      * @return List<HihokenshaDaichoIchiranHyoRelateEntity>
      */
     @Transaction
-    public List<HihokenshaDaichoIchiranHyoRelateEntity> getChohyoIchiran(RString shutsuryokujunId, List<HihokenshaDaichoSakuseiEntity> hihokenshaList) {
+    public List<HihokenshaDaichoIchiranHyoRelateEntity> getChohyoIchiran(
+            RString shutsuryokujunId, List<HihokenshaDaichoSakuseiEntity> hihokenshaList) {
         int リストNO = 0;
         List<HihokenshaDaichoIchiranHyoRelateEntity> 被保険者台帳一覧表List = new ArrayList<>();
         for (HihokenshaDaichoSakuseiEntity entity : hihokenshaList) {
@@ -124,9 +123,9 @@ public class HihokenshaDaichoIchiranHyoFinder {
     }
 
     private RString get住所(HihokenshaDaichoSakuseiEntity entity) {
-        RString 住所 = RString.EMPTY;
-        if (entity.getJusho() != null && entity.getJusho().toString().length() >= 60) {
-            住所 = new RString(StringUtils.substring(entity.getJusho().toString(), 0, LENGTH_60));
+        RString 住所;
+        if (entity.getJusho() != null && entity.getJusho().toString().length() >= LENGTH_60) {
+            住所 = entity.getJusho().substring(0, LENGTH_60);
         } else {
             住所 = entity.getJusho();
         }
@@ -134,9 +133,9 @@ public class HihokenshaDaichoIchiranHyoFinder {
     }
 
     private GyoseikuCode get行政区(HihokenshaDaichoSakuseiEntity entity) {
-        GyoseikuCode 行政区 = GyoseikuCode.EMPTY;
+        GyoseikuCode 行政区;
         if (entity.getGyoseikuCode() != null && entity.getGyoseikuCode().toString().length() >= LENGTH_50) {
-            行政区 = new GyoseikuCode(StringUtils.substring(entity.getGyoseikuCode().toString(), 0, 50));
+            行政区 = new GyoseikuCode(entity.getGyoseikuCode().toString().substring(0, LENGTH_50));
         } else {
             行政区 = entity.getGyoseikuCode();
         }
@@ -159,7 +158,7 @@ public class HihokenshaDaichoIchiranHyoFinder {
     private RString get年齢(HihokenshaDaichoSakuseiEntity entity, IShikibetsuTaisho 識別対象) {
         FlexibleDate 生年月日 = new FlexibleDate(entity.getSeinengappiYMD());
         JuminJotai 住民状態 = 識別対象.to個人().get住民状態();
-        FlexibleDate 消除異動年月日 = FlexibleDate.EMPTY;
+        FlexibleDate 消除異動年月日;
         if (住民状態.equals(JuminJotai.死亡者)) {
             消除異動年月日 = 識別対象.to個人().get消除異動年月日();
         } else {

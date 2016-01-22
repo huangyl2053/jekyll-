@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaisho
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth._DateOfBirth;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
@@ -36,33 +37,32 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShikakuIdoTaishoshaShutokuProcess extends SimpleBatchProcessBase {
 
-
-   /**
+    /**
      * OutputParameter用キー shikakuIdoTaishoShaList
      */
     public static final RString SHIKAKU_IDO_TAISHOSHA_LIST;
     private ShikakuIdoTaishoshaShutokuProcessParameter parameter;
     private IDbamn71001RelateMapper mapper;
     private static final int AGE_65 = 65;
-    
+
     static {
         SHIKAKU_IDO_TAISHOSHA_LIST = new RString("shikakuIdoTaishoShaList");
     }
     private OutputParameter<List<ShikakuIdoTaishoshaEntity>> shikakuIdoTaishoShaList;
-    
+
     @Override
     protected void beforeExecute() {
         mapper = getMapper(IDbamn71001RelateMapper.class);
-        shikakuIdoTaishoShaList= new OutputParameter<>();
+        shikakuIdoTaishoShaList = new OutputParameter<>();
     }
-    
+
     @Override
     protected void process() {
         FlexibleDate 開始日 = parameter.get開始日();
         FlexibleDate 終了日 = parameter.get終了日();
-        
+
         List<ShikibetsuCode> shikibetsuCode = new ArrayList<>();
-        
+
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         List<JuminShubetsu> juminShubetsuList = new ArrayList<>();
@@ -76,15 +76,15 @@ public class ShikakuIdoTaishoshaShutokuProcess extends SimpleBatchProcessBase {
         juminJotaiList.add(JuminJotai.転出者);
         key.set住民状態(juminJotaiList);
         IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
-        
+
         List<UaFt200FindShikibetsuTaishoEntity> entityList = mapper.select識別コード(parameter
-                                        .toAtenaMybatisParameter(shikibetsuTaishoPSMSearchKey, null));
+                .toAtenaMybatisParameter(shikibetsuTaishoPSMSearchKey, null));
         for (UaFt200FindShikibetsuTaishoEntity entity : entityList) {
             if (entity.getShikibetsuCode() != null) {
                 shikibetsuCode.add(entity.getShikibetsuCode());
             }
         }
-        
+
         key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         juminShubetsuList = new ArrayList<>();
@@ -100,10 +100,10 @@ public class ShikakuIdoTaishoshaShutokuProcess extends SimpleBatchProcessBase {
         juminJotaiList.add(JuminJotai.転出者);
         key.set住民状態(juminJotaiList);
         shikibetsuTaishoPSMSearchKey = key.build();
-        
+
         List<ShikakuIdoTaishoshaEntity> 資格異動対象者ListTmp = mapper.select資格異動対象者(parameter
-                                        .toAtenaMybatisParameter(shikibetsuTaishoPSMSearchKey, shikibetsuCode));
-        
+                .toAtenaMybatisParameter(shikibetsuTaishoPSMSearchKey, shikibetsuCode));
+
         List<ShikakuIdoTaishoshaEntity> 資格異動対象者List = new ArrayList<>();
         資格異動対象者List.addAll(資格異動対象者ListTmp);
         for (ShikakuIdoTaishoshaEntity entity : 資格異動対象者ListTmp) {
@@ -112,38 +112,38 @@ public class ShikakuIdoTaishoshaShutokuProcess extends SimpleBatchProcessBase {
                 資格異動対象者List.remove(entity);
             }
         }
-        
+
         資格異動対象者ListTmp.clear();
         資格異動対象者ListTmp.addAll(資格異動対象者List);
         List<DbT1003TashichosonJushochiTokureiEntity> 他市町村住所地特例List;
         List<DbT1002TekiyoJogaishaEntity> 適用除外者List;
         List<DbT1009ShikakuShutokuJogaishaEntity> 資格取得除外者List;
         List<DbT1010TennyushutsuHoryuTaishoshaEntity> 転入保留対象者List;
-        
+
         for (ShikakuIdoTaishoshaEntity entity : 資格異動対象者ListTmp) {
-            // 65歳年齢到達日の取得  TODO QA コンストラクタと引数を確認 #73116
+
             AgeCalculator ageCalculator = new AgeCalculator(new _DateOfBirth(entity.get生年月日()),
-                                        JuminJotai.toValue(entity.get住民状態コード()), FlexibleDate.MAX);
+                    JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日);
             FlexibleDate age = ageCalculator.get年齢到達日(AGE_65);
-            
+
             ShikakuIdoTaishoshaShutokuMybatisParameter myBatisParam = parameter
-                                        .toShikakuIdoTaishoshaShutokuMybatisParameter(entity.get識別コード(), age);
-            
+                    .toShikakuIdoTaishoshaShutokuMybatisParameter(entity.get識別コード(), age);
+
             他市町村住所地特例List = mapper.select他市町村住所地特例(myBatisParam);
             if (!他市町村住所地特例List.isEmpty()) {
                 資格異動対象者List.remove(entity);
             }
-            
+
             適用除外者List = mapper.select適用除外者(myBatisParam);
             if (!適用除外者List.isEmpty()) {
                 資格異動対象者List.remove(entity);
             }
-            
+
             資格取得除外者List = mapper.select資格取得除外者(myBatisParam);
             if (!資格取得除外者List.isEmpty()) {
                 資格異動対象者List.remove(entity);
             }
-            
+
             転入保留対象者List = mapper.select転入保留対象者(myBatisParam);
             if (!転入保留対象者List.isEmpty()) {
                 資格異動対象者List.remove(entity);
@@ -151,5 +151,5 @@ public class ShikakuIdoTaishoshaShutokuProcess extends SimpleBatchProcessBase {
         }
         shikakuIdoTaishoShaList.setValue(資格異動対象者List);
     }
-    
+
 }

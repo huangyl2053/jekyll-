@@ -38,9 +38,7 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 public class FukaErrorReportView {
 
     /**
-     * 画面の読み込み時に実行されるイベントです。<br/>
-     * 賦課エラー一覧の、最新のリスト作成日時に対応する情報を、画面上に表示します。<br/>
-     * また、次処理への遷移ボタンを、グリッドの1行目に表示されているエラー内容に合わせて表示します。
+     * 画面初期化処理です。
      *
      * @param div 賦課エラー一覧Div
      * @return 賦課エラー一覧Divを持つResponseData
@@ -64,8 +62,7 @@ public class FukaErrorReportView {
     }
 
     /**
-     * リスト作成日時DDLが選択している項目が変更された際に実行されるイベントです。<br/>
-     * 選択した作成日時に合わせて賦おｎCh課エラー一覧のデータを取得し、グリッド上に表示しなおします。
+     * 選択した作成日時に合わせて賦課エラー一覧のデータを取得し、グリッド上に表示しなおします。
      *
      * @param div 賦課エラー一覧Div
      * @return 賦課エラー一覧Divを持つResponseData
@@ -78,8 +75,7 @@ public class FukaErrorReportView {
     }
 
     /**
-     * CSVダウンロードボタンをクリックした際に実行されるイベントです。<br/>
-     * 現在賦課エラー一覧グリッドに表示されている情報をCSV化してダウンロードします。
+     * 賦課エラー一覧グリッドに表示されている情報をCSV化してダウンロードします。
      *
      * @param div 賦課エラー一覧Div
      * @param response IDownLoadServletResponse。ダウンロード処理の際、引数の最後にもたせる必要がある。
@@ -100,7 +96,6 @@ public class FukaErrorReportView {
     }
 
     /**
-     * 賦課エラー一覧グリッドから、1行選択した際に実行されるイベントです。<br/>
      * 選択した行のエラー内容に合わせて、修正処理へ遷移するボタンの表示非表示を切り替え、遷移可能な状態に切り替えます。
      *
      * @param div 賦課エラー一覧Div

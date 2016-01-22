@@ -22,11 +22,13 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEnti
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.gyosekukaku.IGyoseiKukaku;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -39,7 +41,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 被保険者証発行管理簿_バッチフ処理クラスです
+ * 被保険者台帳一括作成_バッチフ処理クラスです
  */
 public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDaichoEntity> {
 
@@ -63,6 +65,7 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
     private static final Code SHICHOSONCODE_112 = new Code("112");
     private static final Code SHICHOSONCODE_211 = new Code("211");
     private static final RString NYUSHOSHISETSUSHURUI_11 = new RString("11");
+    private static final RString TELEPHONENOTITLE = new RString("連絡先");
     private static final RString 発行する = new RString("1");
     private IkkatsuSusakuseiProcessParameter processPrm;
     private IkkatsuSakuseiMybatisParameter mybatisPrm;
@@ -77,18 +80,8 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
     }
 
     @Override
-    protected void beforeExecute() {
-
-    }
-
-    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MYBATIS_SELECT_ID);
-    }
-
-    @Override
-    protected void createWriter() {
-
     }
 
     @Override
@@ -101,7 +94,7 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
         sort帳票データ();
         List<HihokenshaDaichoSakuseiEntity> 被保険者台帳EntityList = HihokenshaDaichoSakuseiManager.
                 createInstance().getHihokenshaDaichoHenshu(被保険者EntityList);
-        if (processPrm.getShutsuryokuFlag().equals(発行する)) {
+        if (発行する.equals(processPrm.getShutsuryokuFlag())) {
             HihokenshaDaichoIchiranHyoFinder.createInstance().getChohyoIchiran(processPrm.getShutsuryokujunId(), 被保険者台帳EntityList);
         }
     }
@@ -115,57 +108,58 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
 
     private void get帳票データ() {
         for (HihokenshaEntity hihokenshaEntity : 被保険者EntityList) {
-            IkkatsuSakuseiMybatisParameter mybatisPram = createParm(hihokenshaEntity);
-            hihokenshaEntity.setDbT1001HihokenshaDaichoEntityList(iIkkatsuSakuseiMapper.get被保険者台帳管理情報(mybatisPram));
-            hihokenshaEntity.setShisetsuNyutaishoEntityList(iIkkatsuSakuseiMapper.get生活保護受給者(mybatisPram));
-            hihokenshaEntity.setDbT7006RoreiFukushiNenkinJukyushaEntityList(iIkkatsuSakuseiMapper.get老齢福祉年金受給者(mybatisPram));
-            hihokenshaEntity.setDbT7037ShoKofuKaishuEntityList(iIkkatsuSakuseiMapper.get証交付回収(mybatisPram));
+            IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
+                    createSelectByKeyParam(mybatisPrm.getChushutsuFlag(), mybatisPrm.getShichosonCode(), hihokenshaEntity.getShikibetsuCode(),
+                            mybatisPrm.getPsmShikibetsuTaisho());
+            hihokenshaEntity.setDbT1001HihokenshaDaichoEntityList(iIkkatsuSakuseiMapper.get被保険者台帳管理情報(mybatisParameter));
+            hihokenshaEntity.setShisetsuNyutaishoEntityList(iIkkatsuSakuseiMapper.get生活保護受給者(mybatisParameter));
+            hihokenshaEntity.setDbT7006RoreiFukushiNenkinJukyushaEntityList(iIkkatsuSakuseiMapper.get老齢福祉年金受給者(mybatisParameter));
+            hihokenshaEntity.setDbT7037ShoKofuKaishuEntityList(iIkkatsuSakuseiMapper.get証交付回収(mybatisParameter));
+            // 段站立　世帯情報取得方針不明、QA170回答待ち
         }
-    }
-
-    private IkkatsuSakuseiMybatisParameter createParm(HihokenshaEntity entity) {
-        IkkatsuSakuseiMybatisParameter pram = IkkatsuSakuseiMybatisParameter.
-                createSelectByKeyParam(mybatisPrm.getChushutsuFlag(), mybatisPrm.getShichosonCode(), entity.getShikibetsuCode(),
-                        mybatisPrm.getPsmShikibetsuTaisho());
-        return pram;
     }
 
     private HihokenshaEntity set被保険者Entity(DbT1001HihokenshaDaichoEntity entity) {
         HihokenshaEntity 被保険者Entity = new HihokenshaEntity();
-        被保険者Entity.setPrintDate(new RString(RDate.getNowDate().toString()));
+        被保険者Entity.setPrintDate(RDate.getNowDate().toDateString());
         被保険者Entity.setPage(RString.EMPTY);
         被保険者Entity.setTitle(TITLE);
         被保険者Entity.setShichosonCode(entity.getShichosonCode());
         被保険者Entity.setShichosonMeisho(get市町村名称(entity));
         被保険者Entity.setHihokenshaNoTitle(HIHOKENSHANOTITLE);
         被保険者Entity.setHihokenshaNo(entity.getHihokenshaNo());
-        被保険者Entity.setShikibetsuCode(entity.getShikibetsuCode());
         UaFt200FindShikibetsuTaishoEntity 識別対象Entity = get宛名識別対象取得(entity);
         IShikibetsuTaisho shikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(識別対象Entity);
+        IKojin iKojin = shikibetsuTaisho.to個人();
         被保険者Entity.setKanaMeisho(shikibetsuTaisho.get名称().getKana());
         被保険者Entity.setMeisho(shikibetsuTaisho.get名称().getName());
-        被保険者Entity.setSeinengappiYMD(shikibetsuTaisho.to個人().get生年月日().toFlexibleDate());
-        被保険者Entity.setSeibetsuCode(shikibetsuTaisho.to個人().get性別().getCode());
-        被保険者Entity.setSetaiCode(shikibetsuTaisho.to個人().get世帯コード());
-        被保険者Entity.setShikibetsuCode(shikibetsuTaisho.to個人().get識別コード());
-        被保険者Entity.setChikucodeTitle1(shikibetsuTaisho.to個人().get行政区画().getChiku1().get名称());
-        被保険者Entity.setChikuCode1(shikibetsuTaisho.to個人().get行政区画().getChiku1().getコード());
-        被保険者Entity.setChikucodeTitle2(shikibetsuTaisho.to個人().get行政区画().getChiku2().get名称());
-        被保険者Entity.setChikuCode2(shikibetsuTaisho.to個人().get行政区画().getChiku2().getコード());
-        被保険者Entity.setChikucodeTitle3(shikibetsuTaisho.to個人().get行政区画().getChiku3().get名称());
-        被保険者Entity.setChikuCode3(shikibetsuTaisho.to個人().get行政区画().getChiku3().getコード());
+        被保険者Entity.setSeinengappiYMD(iKojin.get生年月日().toFlexibleDate());
+        被保険者Entity.setSeibetsuCode(iKojin.get性別().getCode());
+        被保険者Entity.setSetaiCode(iKojin.get世帯コード());
+        被保険者Entity.setShikibetsuCode(iKojin.get識別コード());
+        被保険者Entity.setTelephoneNoTitle(TELEPHONENOTITLE);
+        IGyoseiKukaku iGyoseiKukaku = iKojin.get行政区画();
+        被保険者Entity.setChikucodeTitle1(iGyoseiKukaku.getChiku1().get名称());
+        被保険者Entity.setChikuCode1(iGyoseiKukaku.getChiku1().getコード());
+        被保険者Entity.setChikucodeTitle2(iGyoseiKukaku.getChiku2().get名称());
+        被保険者Entity.setChikuCode2(iGyoseiKukaku.getChiku2().getコード());
+        被保険者Entity.setChikucodeTitle3(iGyoseiKukaku.getChiku3().get名称());
+        被保険者Entity.setChikuCode3(iGyoseiKukaku.getChiku3().getコード());
         被保険者Entity.setJushoTitle(JUSHO_TITLE);
         被保険者Entity.setJusho(new RString(shikibetsuTaisho.get住所().toString()));
-        被保険者Entity.setZenkokuJushoCode(shikibetsuTaisho.to個人().get住所().get全国住所コード());
+        被保険者Entity.setZenkokuJushoCode(iKojin.get住所().get全国住所コード());
         被保険者Entity.setGyoseikuTitle(GYOSEIKU_TITLE);
-        被保険者Entity.setGyoseikuCode(shikibetsuTaisho.to個人().get行政区画().getGyoseiku().getコード());
-        被保険者Entity.setTelephoneNo1(shikibetsuTaisho.to個人().get連絡先１().value());
-        被保険者Entity.setTelephoneNo2(shikibetsuTaisho.to個人().get連絡先２().value());
+        被保険者Entity.setGyoseikuCode(iGyoseiKukaku.getGyoseiku().getコード());
+        被保険者Entity.setTelephoneNo1(iKojin.get連絡先１().value());
+        被保険者Entity.setTelephoneNo2(RString.EMPTY);
         被保険者Entity.setSochiHokenshaTitle(SOCHIHOKENSHATITLE);
         被保険者Entity.setKyuHokenshaTitle(KYUHOKENSHATITLE);
         被保険者Entity.setState(get状態(entity));
         if (get入所施設(entity) != null) {
             被保険者Entity.setJigyoshaNo(get入所施設(entity).getJigyoshaNo());
+            if (NYUSHOSHISETSUSHURUI_11.equals(get入所施設(entity).getNyushoShisetsuShurui())) {
+                被保険者Entity.setJigyoshaMeisho(new AtenaMeisho(get入所施設(entity).getJigyoshaName().toString()));
+            }
             被保険者Entity.setJigyoshaMeisho(new AtenaMeisho(get入所施設(entity).getJigyoshaMeisho()));
         }
         if (get医療保険(entity) != null) {
@@ -178,18 +172,18 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
 
     private RString get市町村名称(DbT1001HihokenshaDaichoEntity entity) {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        IkkatsuSakuseiMybatisParameter pram = IkkatsuSakuseiMybatisParameter.
+        IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
                 createSelectByKeyParam(mybatisPrm.getChushutsuFlag(), entity.getShichosonCode(), mybatisPrm.getShikibetsuCode(),
                         mybatisPrm.getPsmShikibetsuTaisho());
         RString shichosonMeisho = RString.EMPTY;
         Code 導入形態コード = shichosonSecurityJoho.get導入形態コード();
-        if (導入形態コード.equals(SHICHOSONCODE_120) || 導入形態コード.equals(SHICHOSONCODE_220)) {
+        if (SHICHOSONCODE_120.equals(導入形態コード) || SHICHOSONCODE_220.equals(導入形態コード)) {
             Association association = AssociationFinderFactory.createInstance().getAssociation();
             shichosonMeisho = association.get市町村名();
         }
-        if (導入形態コード.equals(SHICHOSONCODE_111) || 導入形態コード.equals(SHICHOSONCODE_112)
-                || 導入形態コード.equals(SHICHOSONCODE_211)) {
-            HihokenshaEntity shichosonMeishoEntity = iIkkatsuSakuseiMapper.get市町村名称(pram);
+        if (SHICHOSONCODE_111.equals(導入形態コード) || SHICHOSONCODE_112.equals(導入形態コード)
+                || SHICHOSONCODE_211.equals(導入形態コード)) {
+            HihokenshaEntity shichosonMeishoEntity = iIkkatsuSakuseiMapper.get市町村名称(mybatisParameter);
             if (shichosonMeishoEntity != null) {
                 shichosonMeisho = shichosonMeishoEntity.getShichosonMeisho();
             }
@@ -199,7 +193,7 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
 
     private RString get状態(DbT1001HihokenshaDaichoEntity entity) {
         RString 資格喪失事由コード = entity.getShikakuSoshitsuJiyuCode();
-        RString state = RString.EMPTY;
+        RString state;
         if (SHIKAKUSOSHITSUJIYUCODE_03.equals(資格喪失事由コード)) {
             state = STATE_適用除外者;
         } else if (SHIKAKUSOSHITSUJIYUCODE_05.equals(資格喪失事由コード)) {
@@ -217,27 +211,25 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.set識別コード(entity.getShikibetsuCode());
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        IkkatsuSakuseiMybatisParameter pram = IkkatsuSakuseiMybatisParameter.
+        IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
                 createSelectByKeyParam(mybatisPrm.getChushutsuFlag(), mybatisPrm.getShichosonCode(), mybatisPrm.getShikibetsuCode(),
                         new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
-        return iIkkatsuSakuseiMapper.get識別対象(pram);
+        return iIkkatsuSakuseiMapper.get識別対象(mybatisParameter);
     }
 
     private ShisetsuNyutaishoEntity get入所施設(DbT1001HihokenshaDaichoEntity entity) {
-        IkkatsuSakuseiMybatisParameter pram = IkkatsuSakuseiMybatisParameter.
+        IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
                 createSelectByKeyParam(mybatisPrm.getChushutsuFlag(), mybatisPrm.getShichosonCode(), entity.getShikibetsuCode(),
                         mybatisPrm.getPsmShikibetsuTaisho());
-        ShisetsuNyutaishoEntity 入所施設Entity = iIkkatsuSakuseiMapper.get入所施設(pram);
-        if (入所施設Entity != null && NYUSHOSHISETSUSHURUI_11.equals(入所施設Entity.getNyushoShisetsuShurui())) {
-            入所施設Entity.setJigyoshaMeisho(new RString(入所施設Entity.getJigyoshaName().toString()));
-        }
+        ShisetsuNyutaishoEntity 入所施設Entity = iIkkatsuSakuseiMapper.get入所施設(mybatisParameter);
         return 入所施設Entity;
     }
 
     private DbT1008IryohokenKanyuJokyoEntity get医療保険(DbT1001HihokenshaDaichoEntity entity) {
-        IkkatsuSakuseiMybatisParameter pram = IkkatsuSakuseiMybatisParameter.
+        IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
                 createSelectByKeyParam(mybatisPrm.getChushutsuFlag(), mybatisPrm.getShichosonCode(), entity.getShikibetsuCode(),
                         mybatisPrm.getPsmShikibetsuTaisho());
-        return iIkkatsuSakuseiMapper.get介護保険医療保険加入状況(pram);
+        return iIkkatsuSakuseiMapper.get介護保険医療保険加入状況(mybatisParameter);
     }
+
 }

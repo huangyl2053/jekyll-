@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 
 /**
  *
- * 市町村遷移のマッパーインタフェースです。
+ * 被保険者台帳一括作成のマッパーインタフェースです。
  */
 public interface IIkkatsuSakuseiMapper {
 

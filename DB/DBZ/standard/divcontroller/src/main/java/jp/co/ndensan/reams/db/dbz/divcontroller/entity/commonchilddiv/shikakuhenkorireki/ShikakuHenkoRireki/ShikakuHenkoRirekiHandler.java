@@ -90,6 +90,9 @@ public class ShikakuHenkoRirekiHandler {
             div.setMode_BtnDisplayMode(ShikakuHenkoRirekiDiv.BtnDisplayMode.SetDisplayNone);
             div.setMode_ShoriNichijiDisplayMode(ShikakuHenkoRirekiDiv.ShoriNichijiDisplayMode.VisibleTrue);
             div.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.shokai);
+            div.getDgHenko().getGridSetting().setIsShowModifyButtonColumn(false);
+            div.getDgHenko().getGridSetting().setIsShowDeleteButtonColumn(false);
+            div.getDgHenko().getGridSetting().setIsShowRowState(false);
         } else if (ShikakuHenkoRirekiDiv.DisplayType.toroku.equals(div.getMode_DisplayType())) {
             div.getBtnAdd().setDisabled(true);
             div.setMode_ShoriNichijiDisplayMode(ShikakuHenkoRirekiDiv.ShoriNichijiDisplayMode.VisibleFalse);
@@ -97,7 +100,9 @@ public class ShikakuHenkoRirekiHandler {
             div.setInputMode(ViewExecutionStatus.Add.getValue());
         } else if (ShikakuHenkoRirekiDiv.DisplayType.teiseitoroku.equals(div.getMode_DisplayType())) {
             div.setMode_ShoriNichijiDisplayMode(ShikakuHenkoRirekiDiv.ShoriNichijiDisplayMode.VisibleFalse);
-            div.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.shokai);
+            div.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
+            div.getBtnHenkoKakutei().setVisible(true);
+            div.getBtnHenkoTorikeshi().setVisible(true);
         }
     }
 
@@ -139,6 +144,8 @@ public class ShikakuHenkoRirekiHandler {
             変更日.setValue(div.getHenkoInput().getTxtHenkoDate().getValue());
             TextBoxFlexibleDate 変更届出日 = new TextBoxFlexibleDate();
             変更届出日.setValue(div.getHenkoInput().getTxtHenkoTodokedeDate().getValue());
+            TextBoxFlexibleDate 処理日時 = new TextBoxFlexibleDate();
+            処理日時.setValue(FlexibleDate.EMPTY);
             dgHenko_Row row = new dgHenko_Row(
                     追加状態,
                     変更日,
@@ -148,7 +155,7 @@ public class ShikakuHenkoRirekiHandler {
                     null,//TODO 所在保険者？
                     div.getHenkoInput().getDdlHenkoSochimotoHokensha().getSelectedValue(),
                     div.getHenkoInput().getDdlHenkoKyuHokensha().getSelectedValue(),
-                    null);//TODO 処理日時？
+                    処理日時);
             div.getDgHenko().getDataSource().add(row);
         } else if (div.getInputMode().equals(ViewExecutionStatus.Modify.getValue())) {
             RString 状態 = 修正状態;
@@ -159,6 +166,8 @@ public class ShikakuHenkoRirekiHandler {
             変更日.setValue(div.getHenkoInput().getTxtHenkoDate().getValue());
             TextBoxFlexibleDate 変更届出日 = new TextBoxFlexibleDate();
             変更届出日.setValue(div.getHenkoInput().getTxtHenkoTodokedeDate().getValue());
+            TextBoxFlexibleDate 処理日時 = new TextBoxFlexibleDate();
+            処理日時.setValue(FlexibleDate.EMPTY);
             dgHenko_Row row = new dgHenko_Row(
                     状態,
                     変更日,
@@ -168,10 +177,14 @@ public class ShikakuHenkoRirekiHandler {
                     null,//TODO 所在保険者？
                     div.getHenkoInput().getDdlHenkoSochimotoHokensha().getSelectedValue(),
                     div.getHenkoInput().getDdlHenkoKyuHokensha().getSelectedValue(),
-                    null);//TODO 処理日時？
+                    処理日時);
             div.getDgHenko().getDataSource().set(div.getDgHenko().getClickedRowId(), row);
         } else if (div.getInputMode().equals(ViewExecutionStatus.Delete.getValue())) {
-            div.getDgHenko().getClickedItem().setState(new RString("削除"));
+            if (div.getDgHenko().getClickedItem().getState().equals(追加状態)) {
+                div.getDgHenko().getDataSource().remove(div.getDgHenko().getClickedRowId());
+            } else {
+                div.getDgHenko().getClickedItem().setState(new RString("削除"));
+            }
         }
     }
 
@@ -191,20 +204,21 @@ public class ShikakuHenkoRirekiHandler {
         届出日.setValue(sikakuKanrenIdo.get資格変更届出年月日());
         RString 変更事由;
         try {
-            変更事由 = ShikakuHenkoJiyu.valueOf(sikakuKanrenIdo.get住所地特例適用事由コード().toString()).getName();
+            変更事由 = ShikakuHenkoJiyu.toValue(sikakuKanrenIdo.get住所地特例適用事由コード()).getName();
         } catch (IllegalArgumentException e) {
             変更事由 = RString.EMPTY;
         }
         TextBoxFlexibleDate 処理日時 = new TextBoxFlexibleDate();
-        処理日時.setValue(new FlexibleDate(sikakuKanrenIdo.get処理日時().toString()));
+        処理日時.setValue(new FlexibleDate(sikakuKanrenIdo.get処理日時().getDate().toDateString()));
+        RString 広住特措置元市町村コード = sikakuKanrenIdo.get広住特措置元市町村コード() == null ? RString.EMPTY : sikakuKanrenIdo.get広住特措置元市町村コード().getColumnValue();
         dgHenko_Row row = new dgHenko_Row(
                 RString.EMPTY, 変更日, 届出日, 変更事由, sikakuKanrenIdo.get住所地特例適用事由コード(), sikakuKanrenIdo.get市町村名称(),
-                sikakuKanrenIdo.get広住特措置元市町村コード().getColumnValue(), sikakuKanrenIdo.get旧市町村名称(), 処理日時);
+                広住特措置元市町村コード, sikakuKanrenIdo.get旧市町村名称(), 処理日時);
         return row;
     }
 
     private List<dgHenko_Row> get資格変更履歴(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日) {
-        SikakuKanrenIdoFinder finder = new SikakuKanrenIdoFinder();
+        SikakuKanrenIdoFinder finder = SikakuKanrenIdoFinder.createInstance();
         List<SikakuKanrenIdo> kanrenIdos = finder.getSikakuKanrenIdo(SikakuKanrenIdoParameter.createParam(被保険者番号, 識別コード, 取得日)).records();
         List<dgHenko_Row> rows = new ArrayList<>();
         for (SikakuKanrenIdo sikakuKanrenIdo : kanrenIdos) {
@@ -214,7 +228,7 @@ public class ShikakuHenkoRirekiHandler {
     }
 
     private List<KeyValueDataSource> get措置元保険者DDL() {
-        SikakuKanrenIdoFinder finder = new SikakuKanrenIdoFinder();
+        SikakuKanrenIdoFinder finder = SikakuKanrenIdoFinder.createInstance();
         List<KoseiShichosonMaster> shichosonMasters = finder.selectByKoseiShichosonMasterList().records();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         dataSource.add(new KeyValueDataSource(EMPTY_KEY, RString.EMPTY));
@@ -230,7 +244,7 @@ public class ShikakuHenkoRirekiHandler {
     }
 
     private List<KeyValueDataSource> get旧保険者リスト情報() {
-        SikakuKanrenIdoFinder finder = new SikakuKanrenIdoFinder();
+        SikakuKanrenIdoFinder finder = SikakuKanrenIdoFinder.createInstance();
         List<GappeiShichoson> gappeiShichosons = finder.getGappeiShichosonList().records();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         dataSource.add(new KeyValueDataSource(EMPTY_KEY, RString.EMPTY));
@@ -245,7 +259,7 @@ public class ShikakuHenkoRirekiHandler {
     }
 
     private List<KeyValueDataSource> get変更事由リスト情報() {
-        SikakuKanrenIdoFinder finder = new SikakuKanrenIdoFinder();
+        SikakuKanrenIdoFinder finder = SikakuKanrenIdoFinder.createInstance();
         List<HenkoJiyu> gappeiShichosons = finder.getHenkoJiyuList().records();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         dataSource.add(new KeyValueDataSource(EMPTY_KEY, RString.EMPTY));
@@ -266,10 +280,12 @@ public class ShikakuHenkoRirekiHandler {
         ShikakuhenkorirekiManage shikakuhenkorirekiManage = ShikakuhenkorirekiManage.createInstance();
         List<IKojin> kojins = shikakuhenkorirekiManage.getKojinInfoByShikibetuCd(識別コード);
         dataSource.add(new KeyValueDataSource(EMPTY_KEY, RString.EMPTY));
-        int count = 1;
         for (IKojin iKojin : kojins) {
-            dataSource.add(new KeyValueDataSource(new RString(String.valueOf(count)), get住民情報(iKojin)));
-            count++;
+            dataSource.add(
+                    new KeyValueDataSource(iKojin.get識別コード().getColumnValue().
+                            concat(半角コロン).
+                            concat(iKojin.get現全国地方公共団体コード().getColumnValue()),
+                            get住民情報(iKojin)));
         }
         return dataSource;
     }

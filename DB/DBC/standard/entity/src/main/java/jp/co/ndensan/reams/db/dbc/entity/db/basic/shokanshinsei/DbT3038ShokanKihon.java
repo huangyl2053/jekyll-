@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbT3038ShokanKihon implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     /**
      * insertDantaiCd
      */
@@ -60,9 +61,9 @@ public enum DbT3038ShokanKihon implements IColumnDefinition {
      */
     yoshikiNo(4, 0),
     /**
-     * 履歴番号
+     * 明細番号
      */
-    rirekiNo(5, 0),
+    meisaiNo(5, 0),
     /**
      * 旧措置入所者特例コード
      */
@@ -146,7 +147,7 @@ public enum DbT3038ShokanKihon implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -155,7 +156,7 @@ public enum DbT3038ShokanKihon implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

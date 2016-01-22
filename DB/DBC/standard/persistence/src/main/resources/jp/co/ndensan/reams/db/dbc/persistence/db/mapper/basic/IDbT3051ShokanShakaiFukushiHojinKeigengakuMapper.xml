@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3051ShokanShakaiFukushiHojinKeigengakuとDbT3051ShokanShakaiFukushiHojinKeigengakuEntityの単テーブル(追記型)用MapperXMLです。 -->
+<!-- 作者： 潘鶴 -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3051ShokanShakaiFukushiHojinKeigengakuMapper">
+    <sql id="allColumns_DbT3051ShokanShakaiFukushiHojinKeigengaku">
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."insertTimestamp" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_insertTimestamp",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."insertDantaiCd" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_insertDantaiCd",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."insertReamsLoginId" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_insertReamsLoginId",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."insertContextId" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_insertContextId",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."isDeleted" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_isDeleted",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."updateCount" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_updateCount",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."lastUpdateTimestamp" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_lastUpdateTimestamp",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."lastUpdateReamsLoginId" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_lastUpdateReamsLoginId",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."hiHokenshaNo" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_hiHokenshaNo",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."serviceTeikyoYM" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_serviceTeikyoYM",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."seiriNo" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_seiriNo",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."jigyoshaNo" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_jigyoshaNo",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."yoshikiNo" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_yoshikiNo",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."meisaiNo" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_meisaiNo",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."renban" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_renban",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."keigenritsu" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_keigenritsu",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."serviceShuruiCode" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_serviceShuruiCode",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."riyoshaFutangakuTotal" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_riyoshaFutangakuTotal",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."keigengaku" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_keigengaku",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."keigengoRiyoshaFutangaku" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_keigengoRiyoshaFutangaku",
+         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."biko" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_biko"
+    </sql>
+
+
+    <!--ビューDbT3051ShokanShakaiFukushiHojinKeigengakuの項目をDbT3051ShokanShakaiFukushiHojinKeigengakuEntityの項目にマッピングします。-->
+    <resultMap id="resultMap_DbT3051ShokanShakaiFukushiHojinKeigengakuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3051ShokanShakaiFukushiHojinKeigengakuEntity" autoMapping="true">
+        <id property="hiHokenshaNo" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="serviceTeikyoYM" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="seiriNo" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="jigyoshaNo" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <id property="yoshikiNo" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="meisaiNo" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="renban" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_renban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_isDeleted" />
+        <result property="updateCount" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="keigenritsu" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_keigenritsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="serviceShuruiCode" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="riyoshaFutangakuTotal" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_riyoshaFutangakuTotal" />
+        <result property="keigengaku" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_keigengaku" />
+        <result property="keigengoRiyoshaFutangaku" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_keigengoRiyoshaFutangaku" />
+        <result property="biko" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+</mapper>

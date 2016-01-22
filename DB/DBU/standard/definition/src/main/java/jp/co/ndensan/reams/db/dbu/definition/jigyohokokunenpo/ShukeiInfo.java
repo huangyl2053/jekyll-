@@ -33,6 +33,10 @@ public class ShukeiInfo {
         shukeiInfo.put(new RString("203"), new RString("3：18：0100、0200"));
     }
 
+    public static RString getShukeiInfo(RString key) {
+        return shukeiInfo.get(key);
+    }
+
     /**
      * 統計対象区分を取得します。
      *

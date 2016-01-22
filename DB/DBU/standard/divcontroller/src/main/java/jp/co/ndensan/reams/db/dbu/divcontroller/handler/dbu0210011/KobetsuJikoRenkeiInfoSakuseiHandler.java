@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.divcontroller.handler.DBU0210011;
+package jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0210011;
 
 import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyo.ChushutsuKikanJohoData;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0210011.KobetsuJikoRenkeiInfoSakuseiDiv;
@@ -41,23 +41,21 @@ public class KobetsuJikoRenkeiInfoSakuseiHandler {
 
         if (chushutsuKikanJohoData != null) {
             div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setValue(
-                    new RDate(chushutsuKikanJohoData.get対象開始日時().getDate().wareki().toDateString().toString()));
+                    chushutsuKikanJohoData.get対象開始日時().getDate());
             div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setValue(
                     chushutsuKikanJohoData.get対象開始日時().getRDateTime().getTime());
             div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromYMD().setValue(
-                    new RDate(chushutsuKikanJohoData.get対象終了日時().getDate().wareki().toDateString().toString()));
+                    chushutsuKikanJohoData.get対象終了日時().getDate());
             div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().setValue(
                     chushutsuKikanJohoData.get対象開始日時().getRDateTime().getTime());
             div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().setValue(
-                    new RDate(chushutsuKikanJohoData.get対象終了日時().getDate().wareki().toDateString().toString()));
+                    chushutsuKikanJohoData.get対象終了日時().getDate());
             div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().setValue(
                     chushutsuKikanJohoData.get対象開始日時().getRDateTime().getTime());
         } else {
-            div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromYMD().setValue(
-                    new RDate(RDate.getNowDate().wareki().toDateString().toString()));
+            div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromYMD().setValue(RDate.getNowDate());
             div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().setValue(RDate.getNowTime());
-            div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().setValue(
-                    new RDate(RDate.getNowDate().wareki().toDateString().toString()));
+            div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().setValue(RDate.getNowDate());
             div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().setValue(RDate.getNowTime());
         }
     }

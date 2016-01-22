@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class NenreiToutatuYoteishaCheckList {
 
-//    private static final SubGyomuCode サブ業務コード = new SubGyomuCode("DBA");
     private static final RString 出力対象_登録対象者 = new RString("key0");
     private static final RString 住民種別_全て = new RString("key0");
 

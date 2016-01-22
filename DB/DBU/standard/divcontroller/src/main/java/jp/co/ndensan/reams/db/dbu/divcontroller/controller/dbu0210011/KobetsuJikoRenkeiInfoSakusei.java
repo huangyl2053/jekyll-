@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.divcontroller.controller.DBU0210011;
+package jp.co.ndensan.reams.db.dbu.divcontroller.controller.dbu0210011;
 
 import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyo.ChushutsuKikanJohoData;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyo.KaigoJuminhyoBatchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0210011.KobetsuJikoRenkeiInfoSakuseiDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.handler.DBU0210011.KobetsuJikoRenkeiInfoSakuseiHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0210011.KobetsuJikoRenkeiInfoSakuseiHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.basic.kaigojuminhyo.KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -29,7 +29,8 @@ public class KobetsuJikoRenkeiInfoSakusei {
      * @return 介護住民票個別事項連携情報作成【他社住基】情報Divを持つResponseData
      */
     public ResponseData<KobetsuJikoRenkeiInfoSakuseiDiv> onLoad(KobetsuJikoRenkeiInfoSakuseiDiv div) {
-        ChushutsuKikanJohoData chushutsuKikanJohoData = KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder.createInstance().getChushutsukikanJoho();
+        ChushutsuKikanJohoData chushutsuKikanJohoData
+                = KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder.createInstance().getChushutsukikanJoho();
         getHandler(div).initialize(chushutsuKikanJohoData);
         return ResponseData.of(div).respond();
     }
@@ -42,6 +43,11 @@ public class KobetsuJikoRenkeiInfoSakusei {
      * @return 介護住民票個別事項連携情報作成【他社住基】情報Divを持つResponseData
      */
     public ResponseData<KobetsuJikoRenkeiInfoSakuseiDiv> onClick_chkZenken(KobetsuJikoRenkeiInfoSakuseiDiv div) {
+        if (div.getKobetsuJikoRenkeiInfoSakuseiBP().getChkZenken().isAllSelected()) {
+            div.getKobetsuJikoRenkeiInfoSakuseiBP().getChkKikanHenko().setDisabled(true);
+        } else {
+            div.getKobetsuJikoRenkeiInfoSakuseiBP().getChkKikanHenko().setDisabled(false);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -53,7 +59,7 @@ public class KobetsuJikoRenkeiInfoSakusei {
      * @return 介護住民票個別事項連携情報作成【他社住基】情報Divを持つResponseData
      */
     public ResponseData<KobetsuJikoRenkeiInfoSakuseiDiv> onClick_chkKikanHenko(KobetsuJikoRenkeiInfoSakuseiDiv div) {
-        if (div.getKobetsuJikoRenkeiInfoSakuseiBP().getChkKikanHenko().isAllSelected() == true) {
+        if (div.getKobetsuJikoRenkeiInfoSakuseiBP().getChkKikanHenko().isAllSelected()) {
             div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setReadOnly(false);
             div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setReadOnly(false);
         } else {
@@ -77,7 +83,8 @@ public class KobetsuJikoRenkeiInfoSakusei {
         RDate zenkaiFromYMD = div.getChushutsuKikan().getTxtZenkaiChushutsuFromYMD().getValue();
         RTime zenkaiFromTime = div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().getValue();
         if ((konkaiFromYMD != null && konkaiFromTime != null && zenkaiFromYMD != null && zenkaiFromTime != null)
-                && (konkaiFromYMD.isBefore(zenkaiFromYMD) || (konkaiFromYMD.isBefore(zenkaiFromYMD) && konkaiFromTime.isBefore(zenkaiFromTime)))) {
+                && (konkaiFromYMD.isBefore(zenkaiFromYMD)
+                || (konkaiFromYMD.isBefore(zenkaiFromYMD) && konkaiFromTime.isBefore(zenkaiFromTime)))) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(getHandler(div).開始日と終了日の比較チェック());
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();

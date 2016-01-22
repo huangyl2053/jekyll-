@@ -7,8 +7,11 @@ package jp.co.ndensan.reams.db.dbe.business.report.chosairaisho;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaisho.ChosaIraishoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  *
@@ -40,7 +43,11 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
 
     private ChosaIraishoReportSource editHeader(ChosaIraishoReportSource source) {
         source.bunshoNo = item.getBunshoNo();
-        source.hakkoYMD = item.getHakkoYMD();
+        if (item.getHakkoYMD() == null && item.getHakkoYMD().isEmpty()) {
+            source.hakkoYMD = item.getHakkoYMD();
+        } else {
+            source.hakkoYMD = パターン12(new RDate(item.getHakkoYMD().toString()));
+        }
         source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
         source.shichosonMei = item.getShichosonMei();
         source.shuchoMei = item.getShuchoMei();
@@ -62,7 +69,7 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
         if (item.getBirthYMD() == null || item.getBirthYMD().isEmpty()) {
             source.birthYMD = RString.EMPTY;
         } else {
-            source.birthYMD = new RDate(item.getBirthYMD().toString()).wareki().eraType(EraType.KANJI).toDateString();
+            source.birthYMD = パターン12(new RDate(item.getBirthYMD().toString()));
         }
         source.birthGengoMeiji = item.getBirthGengoMeiji();
         source.birthGengoTaisho = item.getBirthGengoTaisho();
@@ -81,12 +88,12 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
         if (item.getShinseiYMD() == null || item.getShinseiYMD().isEmpty()) {
             source.shinseiYMD = RString.EMPTY;
         } else {
-            source.shinseiYMD = new RDate(item.getShinseiYMD().toString()).wareki().eraType(EraType.KANJI).toDateString();
+            source.shinseiYMD = パターン12(new RDate(item.getShinseiYMD().toString()));
         }
         if (item.getTeishutsuKigen() == null || item.getTeishutsuKigen().isEmpty()) {
             source.teishutsuKigen = RString.EMPTY;
         } else {
-            source.teishutsuKigen = new RDate(item.getTeishutsuKigen().toString()).wareki().eraType(EraType.KANJI).toDateString();
+            source.teishutsuKigen = パターン12(new RDate(item.getTeishutsuKigen().toString()));
         }
         source.tsuchibun1 = item.getTsuchibun1();
         source.tsuchibun2 = item.getTsuchibun2();
@@ -109,5 +116,11 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
         source.tsuchibun19 = item.getTsuchibun19();
         source.remban = item.getRemban();
         return source;
+    }
+
+    private RString パターン12(RDate rDate) {
+        return rDate.wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).toDateString();
     }
 }

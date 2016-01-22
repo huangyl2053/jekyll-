@@ -42,26 +42,33 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.youkaigoninteikekktesuchi"
                     + ".IYouKaiGoNinTeiKekTesuChiMapper.getCyouHyouSyuTsuRyoKu");
-
+    private static final int  通知文1 = 1;
+    private static final int  通知文2 = 2;
+    private static final int  通知文3 = 3;
+    private static final int  通知文4 = 4;
+    private static final int  通知文5 = 5;
+    private static final int  通知文6 = 6;
+    private static final int  通知文7 = 7;
+    private static final int  通知文8 = 8;
+    private static final int  通知文9 = 9;
+    private static final int  通知文10 = 10;
+    
     private YouKaiGoNinTeiKekTesuChiProcessParemeter paramter;
     private static final ReportId REPORT_ID = new ReportId(ItakusakiChosainIchiranReportId.REPORTID_DBE090001.getCode());
     private JohoTeikyoShiryoItem headItem;
     private IYouKaiGoNinTeiKekTesuChiMapper mapper;
-    private YouKaiGoNinTeiKekTesuChiMybitisParamter mybatisPrm; 
-    
-    
-    
+    private YouKaiGoNinTeiKekTesuChiMybitisParamter mybatisPrm;
+
     @BatchWriter
     private BatchReportWriter<JohoTeikyoShiryoReportSource> batchWrite;
     private ReportSourceWriter<JohoTeikyoShiryoReportSource> retortWrite;
 
-    
-     @Override
+    @Override
     protected void initialize() {
         mybatisPrm = paramter.toMybitisParameter();
         mapper = getMapper(IYouKaiGoNinTeiKekTesuChiMapper.class);
     }
-    
+
     @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MYBATIS_SELECT_ID, paramter.toMybitisParameter());
@@ -74,11 +81,18 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     }
 
     @Override
+    protected void beforeExecute() {
+        mapper = getMapper(IYouKaiGoNinTeiKekTesuChiMapper.class);
+        List<YouKaiGoNinTeiKekTesuChiRelateEntity> list = mapper.getCyouHyouSyuTsuRyoKu(mybatisPrm);
+        System.out.println(list.size());
+    }
+
+    @Override
     protected void process(YouKaiGoNinTeiKekTesuChiRelateEntity t) {
         eidtItem(t);
         DbT5301ShujiiIkenshoIraiJohoEntity entity = new DbT5301ShujiiIkenshoIraiJohoEntity();
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(t.getShinseishoKanriNo()));
-        entity.setIkenshoIraiRirekiNo(new Integer(t.getIkenshoIraiRirekiNo().toString()));
+        entity.setIkenshoIraiRirekiNo(Integer.valueOf(t.getIkenshoIraiRirekiNo().toString()));
         entity.setNinteiJohoTeikyoYMD(new FlexibleDate(mybatisPrm.get認定状況提供日()));
         mapper.updateShuJiIkenSyoSaKuSeiIraiJyouHou(entity);
     }
@@ -90,43 +104,34 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     }
 
     private void eidtItem(YouKaiGoNinTeiKekTesuChiRelateEntity entity) {
-       
+
+        // 課題番号34を待ち
 //        ReportAssembler<ChosaIraiIchiranhyoReportSource> assembler = createAssembler(property, reportManager)
 //        INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
 //        INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
 //        RDate.getNowDate(), assembler.getImageFolderPath());
-        
-// QA  要提
-        RString 認証者氏名 = new RString("認証者氏名") ;
+        RString 認証者氏名 = new RString("認証者氏名");
         RString 帳票名 = BusinessConfig.get(ItakusakiChosainIchiranReportId.REPORTID_DBE090001, SubGyomuCode.DBE認定支援);
-        RString 認定結果 = YokaigoJotaiKubun09.toValue(entity.getNijiHanteiYokaigoJotaiKubunCode()).get名称();
+        RString 認定結果 = YokaigoJotaiKubun09.toValue(entity.getNijiHanteiYokaigoJotaiKubunCod()).get名称();
 
         TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
         List<TsuchishoTeikeibunEntity> tempList = manager.get通知書定型文パターン(REPORT_ID, SubGyomuCode.DBE認定支援).get通知書定型文List();
-
-        headItem = new JohoTeikyoShiryoItem(RDate.getNowDate()
-                , entity.getShichosonMeisho()             // CompNinshosha．出力項目．市町村名  CompNinshosha中没有这个项目 提QA
-                , 認証者氏名                               //  認証者氏名
-                , 帳票名                                   //  帳票名
-                , get通知文(tempList,1)      
-                , entity.getHihokenshaName()              // 氏名
-                , entity.getJusho()                       // 住所
-                , new RDate(entity.getNijiHanteiYMD().toString())    // 認定年月日
-                , 認定結果                                            // 認定結果
-                , new RDate(entity.getNijiHanteiNinteiYukoKaishiYMD().toString()) // 認定有効期間From
-                , new RDate(entity.getNijiHanteiNinteiYukoShuryoYMD().toString()) // 認定有効期間To
-                , entity.getShinsakaiIken() // 審査会意見
-                , get通知文(tempList,2)  
-                , get通知文(tempList,3) 
-                , get通知文(tempList,4) 
-                , get通知文(tempList,5) 
-                , get通知文(tempList,6) 
-                , get通知文(tempList,7) 
-                , get通知文(tempList,8) 
-                , get通知文(tempList,9) 
-                , get通知文(tempList,10));
-        
-        
+        headItem = new JohoTeikyoShiryoItem(RDate.getNowDate(), entity.getShichosonMeisho() // QA 539
+                , 認証者氏名, 帳票名, get通知文(tempList, 通知文1)
+                , entity.getHihokenshaName()
+                , entity.getJusho()
+                , new RDate(entity.getNijiHanteiYMD().toString())
+                , 認定結果, new RDate(entity.getNijiHanteiNinteiYukoKaishiYMD().toString())
+                , new RDate(entity.getNijiHanteiNinteiYukoShuryoYMD().toString())
+                , entity.getShinsakaiIken(), get通知文(tempList, 通知文2)
+                , get通知文(tempList, 通知文3)
+                , get通知文(tempList, 通知文4)
+                , get通知文(tempList, 通知文5)
+                , get通知文(tempList, 通知文6)
+                , get通知文(tempList, 通知文7)
+                , get通知文(tempList, 通知文8)
+                , get通知文(tempList, 通知文9)
+                , get通知文(tempList, 通知文10));
     }
 
     private RString get通知文(List<TsuchishoTeikeibunEntity> tempList, int index) {

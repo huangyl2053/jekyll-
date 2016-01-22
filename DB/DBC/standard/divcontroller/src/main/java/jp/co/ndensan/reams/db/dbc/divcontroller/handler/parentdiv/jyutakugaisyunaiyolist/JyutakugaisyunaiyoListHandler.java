@@ -30,7 +30,7 @@ public class JyutakugaisyunaiyoListHandler {
     /**
      * 画面初期化処理します。
      *
-     * @param 状態
+     * @param 状態 状態
      * @param jyutakugaisyunaiyoList 住宅改修一覧
      */
     public void initialize(RString 状態, SearchResult<ShokanJutakuKaishuBusiness> jyutakugaisyunaiyoList) {

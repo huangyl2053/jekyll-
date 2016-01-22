@@ -11,7 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class YouKaiGoNinTeiKekTesuChiMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class YouKaiGoNinTeiKekTesuChiMapperParameter {
 
     private final RString 二次判定期間From;
     private final RString 二次判定期間To;

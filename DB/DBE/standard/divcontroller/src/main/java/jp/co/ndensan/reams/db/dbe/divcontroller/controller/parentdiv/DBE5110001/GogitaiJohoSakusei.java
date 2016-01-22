@@ -365,7 +365,6 @@ public class GogitaiJohoSakusei {
                     manager.save(gogitaiJoho);
                 }
                 if (gogitaiJoho.toEntity().getState() == EntityDataState.Deleted) {
-                    // TODO QA211
                     gogitaiNOExitCheck(gogitaiJoho.get合議体番号());
                     manager.deletePhysicalWithoutGogitaiWariateIin(gogitaiJoho);
                 }
