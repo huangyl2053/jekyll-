@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.jyutakugaisyunaiyolist;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjutakukaishu.ShokanJutakuKaishuBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.JyutakugaisyunaiyoListDiv;
@@ -47,8 +48,13 @@ public class JyutakugaisyunaiyoList {
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_整理番号, RString.class);
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_様式番号, RString.class);
         RString mode = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_モード, RString.class);
-        SearchResult<ShokanJutakuKaishuBusiness> jyutakukaisyuList = JyutakukaisyuyichiranFinder
-                .createInstance().selectJyutakukaisyuList(被保険者番号, サービス提供年月, 整理番号, 様式番号);
+        SearchResult<ShokanJutakuKaishuBusiness> jyutakukaisyuList;
+        if (被保険者番号 == null || サービス提供年月 == null || 整理番号 == null || 様式番号 == null) {
+            jyutakukaisyuList = SearchResult.of(new ArrayList<>(), 0, false);
+        } else {
+            jyutakukaisyuList = JyutakukaisyuyichiranFinder
+                    .createInstance().selectJyutakukaisyuList(被保険者番号, サービス提供年月, 整理番号, 様式番号);
+        }
         getHandler(requestDiv).initialize(mode, jyutakukaisyuList);
         return ResponseData.of(requestDiv).respond();
     }
