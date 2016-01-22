@@ -135,9 +135,9 @@ public class DbT2010FukaErrorListDac implements ISaveable<DbT2010FukaErrorListEn
         return accessor.select().
                 table(DbT2010FukaErrorList.class).
                 where(eq(internalReportCreationDateTime, リスト作成日時)).
-                order(new OrderBy(shoriKubunCode, Order.DESC, NullsOrder.LAST),
-                        new OrderBy(fukaNendo, Order.DESC, NullsOrder.LAST),
-                        new OrderBy(tsuchishoNo, Order.DESC, NullsOrder.LAST)).
+                order(new OrderBy(shoriKubunCode, Order.ASC, NullsOrder.LAST),
+                        new OrderBy(fukaNendo, Order.ASC, NullsOrder.LAST),
+                        new OrderBy(tsuchishoNo, Order.ASC, NullsOrder.LAST)).
                 toList(DbT2010FukaErrorListEntity.class);
     }
 }
