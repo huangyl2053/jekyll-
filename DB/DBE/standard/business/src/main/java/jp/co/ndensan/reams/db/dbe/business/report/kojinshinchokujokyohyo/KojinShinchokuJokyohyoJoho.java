@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.report.source.kojinshinchokujokyohyo;
+package jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KojinShinchokuJokyohyoEntity {
+public class KojinShinchokuJokyohyoJoho {
 
     private RString hihokenshaNo;
     private RString shinseiKubun;
