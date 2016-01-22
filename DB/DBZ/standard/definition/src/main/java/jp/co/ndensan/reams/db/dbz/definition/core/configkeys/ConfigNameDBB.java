@@ -15,8 +15,11 @@ public enum ConfigNameDBB {
     /**
      * コード:無し 名称:動作関連_特徴分配集約システム 略称:定義なし
      */
-    動作関連_特徴分配集約システム("動作関連_特徴分配集約システム");
-
+    動作関連_特徴分配集約システム("動作関連_特徴分配集約システム"),
+    /**
+     * コード:無し 名称:日付関連_調定年度 略称:定義なし
+     */
+    日付関連_調定年度("日付関連_調定年度");
     private final RString fullName;
 
     private ConfigNameDBB(String fullname) {
