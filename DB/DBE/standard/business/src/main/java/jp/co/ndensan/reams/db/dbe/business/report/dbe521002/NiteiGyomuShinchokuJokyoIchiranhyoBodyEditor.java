@@ -52,13 +52,13 @@ public class NiteiGyomuShinchokuJokyoIchiranhyoBodyEditor implements INiteiGyomu
         source.listIchiranhyo1_7 = item.getListIchiranhyo1_7();
         source.listIchiranhyo1_8 = item.getListIchiranhyo1_8();
         source.listIchiranhyo1_9 = item.getListIchiranhyo1_9();
-        FlexibleDate ninteiShinseiYMD = new FlexibleDate(item.getListIchiranhyo1_10());
-        source.listIchiranhyo1_10 = ninteiShinseiYMD.wareki().separator(Separator.PERIOD).
+        source.listIchiranhyo1_10 = item.getListIchiranhyo1_10().isEmpty() ? RString.EMPTY :
+                new FlexibleDate(item.getListIchiranhyo1_10()).wareki().separator(Separator.PERIOD).
                 fillType(FillType.BLANK).toDateString();
         source.listHihokenshaName_1 = item.getListHihokenshaName_1();
         source.listHihokenshaJusho_1 = item.getListHihokenshaJusho_1();
-        FlexibleDate seinengappiYMD = new FlexibleDate(item.getListIchiranhyo2_1());
-        source.listIchiranhyo2_1 = seinengappiYMD.wareki().separator(Separator.PERIOD).
+        source.listIchiranhyo2_1 = item.getListIchiranhyo2_1().isEmpty() ? RString.EMPTY :
+                new FlexibleDate(item.getListIchiranhyo2_1()).wareki().separator(Separator.PERIOD).
                 fillType(FillType.BLANK).toDateString();
         source.listIchiranhyo2_2 = item.getListIchiranhyo2_2();
         source.listIchiranhyo2_3 = item.getListIchiranhyo2_3();
@@ -66,8 +66,8 @@ public class NiteiGyomuShinchokuJokyoIchiranhyoBodyEditor implements INiteiGyomu
         source.listChosainName_1 = item.getListChosainName_1();
         source.listIryokikanName_1 = item.getListIryokikanName_1();
         source.listIshiName_1 = item.getListIshiName_1();
-        FlexibleDate shinsakaiyoteiYMD = new FlexibleDate(item.getListShinsaYoteiYMD_1());
-        source.listShinsaYoteiYMD_1 = shinsakaiyoteiYMD.wareki().separator(Separator.PERIOD).
+        source.listShinsaYoteiYMD_1 = item.getListShinsaYoteiYMD_1().isEmpty() ? RString.EMPTY : 
+                new FlexibleDate(item.getListShinsaYoteiYMD_1()).wareki().separator(Separator.PERIOD).
                 fillType(FillType.BLANK).toDateString();
         return source;
     }
