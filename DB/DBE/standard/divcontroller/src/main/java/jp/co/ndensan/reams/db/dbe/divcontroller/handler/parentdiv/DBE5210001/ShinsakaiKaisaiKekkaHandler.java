@@ -43,12 +43,12 @@ public class ShinsakaiKaisaiKekkaHandler {
     }
 
     /**
-     * ShinsakaiKaisaiYoteiJohoBusiness 画面初期化表示、画面項目に設定されている値をクリアする。
+     * 画面初期化表示、画面項目に設定されている値をクリアする。
      *
-     * @param saiYoteiJoho ShinsakaiKaisaiYoteiJohoBusiness
+     * @param saiYoteiJoho ヘッドエリア内容
      */
     public void onLoad(ShinsakaiKaisaiYoteiJohoBusiness saiYoteiJoho) {
-        if (saiYoteiJoho.get開催日().isEmpty()) {
+        if (saiYoteiJoho.get開催日().isEmpty() || saiYoteiJoho.get開催日() == null) {
             div.setModel(new RString("新規モード"));
         } else {
             div.setModel(new RString("更新モード"));
@@ -70,6 +70,10 @@ public class ShinsakaiKaisaiKekkaHandler {
 //        div.getDdlKaisaiBasho().setSelectedKey(saiYoteiJoho.get開催会場());
     }
 
+    /**
+     * ヘッドエリア内容の状態設定します
+     *
+     */
     public void setDisabled() {
         div.getTxtShinsakaiMeisho().setDisabled(true);
         div.getTxtGogitai().setDisabled(true);
@@ -83,7 +87,7 @@ public class ShinsakaiKaisaiKekkaHandler {
     /**
      * 画面初期化表示、画面項目に設定されている値をクリアする。
      *
-     * @param list
+     * @param list 審査会委員一覧設定
      *
      */
     public void initialize(List<ShinsakaiWariateIinJohoBusiness> list) {
@@ -115,10 +119,6 @@ public class ShinsakaiKaisaiKekkaHandler {
         div.getDgShinsakaiIinIchiran().setDataSource(dataGridList);
     }
 
-    /**
-     * 介護認定審査会議長区分コードをクリアする。
-     *
-     */
     private List<KeyValueDataSource> setKaigoninteiShinsakaiGichoKubunCode() {
         List<KeyValueDataSource> kaigoninteiShinsakaiGichoKubunCode = new ArrayList<>();
         for (KaigoninteiShinsakaiGichoKubunCode gichoKubunCode : KaigoninteiShinsakaiGichoKubunCode.values()) {
@@ -128,10 +128,6 @@ public class ShinsakaiKaisaiKekkaHandler {
         return kaigoninteiShinsakaiGichoKubunCode;
     }
 
-    /**
-     * 委員出席をクリアする。
-     *
-     */
     private List<KeyValueDataSource> setIsShusseki() {
         List<KeyValueDataSource> Shusseki = new ArrayList<>();
         for (IsShusseki isShusseki : IsShusseki.values()) {
@@ -141,10 +137,6 @@ public class ShinsakaiKaisaiKekkaHandler {
         return Shusseki;
     }
 
-    /**
-     * 委員早退有無をクリアする。
-     *
-     */
     private List<KeyValueDataSource> setIssotaiUmu() {
         List<KeyValueDataSource> sotaiUmu = new ArrayList<>();
         for (IssotaiUmu issotaiUmu : IssotaiUmu.values()) {
@@ -154,10 +146,6 @@ public class ShinsakaiKaisaiKekkaHandler {
         return sotaiUmu;
     }
 
-    /**
-     * 員遅刻有無をクリアする。
-     *
-     */
     private List<KeyValueDataSource> setIsChikokuUmu() {
         List<KeyValueDataSource> chikokuUmu = new ArrayList<>();
         for (IsChikokuUmu isChikokuUmu : IsChikokuUmu.values()) {

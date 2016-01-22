@@ -63,8 +63,8 @@ public class ShinsakaiKaisaiKekkaFinder {
      *
      * ヘッドエリア内容を取得する
      *
-     * @param 開催番号 RString
-     * @return relateEntity
+     * @param 開催番号 開催番号
+     * @return ヘッドエリア内容
      */
     @Transaction
     public ShinsakaiKaisaiYoteiJohoBusiness getヘッドエリア内容検索(RString 開催番号) {
@@ -77,8 +77,8 @@ public class ShinsakaiKaisaiKekkaFinder {
     /**
      * 審査会委員一覧検索を取得する
      *
-     * @param 開催番号 RString
-     * @return
+     * @param 開催番号 開催番号
+     * @return 審査会委員一覧
      */
     @Transaction
     public SearchResult<ShinsakaiWariateIinJohoBusiness> get審査会委員一覧検索(RString 開催番号) {
@@ -98,8 +98,8 @@ public class ShinsakaiKaisaiKekkaFinder {
     /**
      * 審査会委員一覧検索を取得する
      *
-     * @param 開催番号 RString
-     * @return
+     * @param 開催番号 開催番号
+     * @return 審査会委員一覧
      */
     @Transaction
     public SearchResult<ShinsakaiKaisaiYoteiJoho> get審査会委員(RString 開催番号) {
