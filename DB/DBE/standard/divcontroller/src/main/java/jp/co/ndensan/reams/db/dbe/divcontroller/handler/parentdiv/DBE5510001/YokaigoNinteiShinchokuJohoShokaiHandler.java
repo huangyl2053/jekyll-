@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteishinchokujohoshokai
 import jp.co.ndensan.reams.db.dbe.business.report.dbe521002.NiteiGyomuShinchokuJokyoIchiranhyoBodyItem;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.YokaigoNinteiShinchokuJohoShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.dgShinseiJoho_Row;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -80,6 +82,8 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         if (DATE_SOURCE_KEY0.equals(div.getRadHizukeHani().getSelectedKey())) {
             div.getTxtShiteiHizukeForm().setDisabled(true);
             div.getTxtShiteiHizukeTo().setDisabled(true);
+            div.getTxtShiteiHizukeForm().clearValue();
+            div.getTxtShiteiHizukeTo().clearValue();
         } else {
             div.getTxtShiteiHizukeForm().setDisabled(false);
             div.getTxtShiteiHizukeTo().setDisabled(false);
@@ -197,10 +201,10 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         row.getKaigoNinteiShinsakaiKaisaiDay().setValue(flexibleDateToRDate(joho.get介護認定審査会開催年月日()));
         row.setKaigoNinteiShinsakaiKaisaiNo(joho.get介護認定審査会開催番号());
         row.setKaigoNinteiShinsakaiGogitai(new RString(String.valueOf(joho.get合議体番号())));
-        row.setKaigoNinteiShinsakaiYokaigodo(joho.get二次判定要介護状態区分コード());
+        row.setKaigoNinteiShinsakaiYokaigodo(YokaigoJotaiKubun09.toValue(joho.get二次判定要介護状態区分コード()).get名称());
         row.setHihokenshaYubinNo(joho.get郵便番号());
         row.setHihokenshaJusho(joho.get住所());
-        row.setHihokenshaSeibetsu(joho.get性別());
+        row.setHihokenshaSeibetsu(Seibetsu.toValue(joho.get性別()).get名称());
         row.getHihokenshaBirthDay().setValue(flexibleDateToRDate(joho.get生年月日()));
         row.setHihokenshaNenrei(new RString(String.valueOf(joho.get年齢())));
         return row;

@@ -46,7 +46,7 @@ public class YokaigoNinteiShinchokuJohoShokaiFinder {
      *
      * @return {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiShinchokuJohoShokaiFinder}のインスタンス
      */
-    public static YokaigoNinteiShinchokuJohoShokaiFinder create() {
+    public static YokaigoNinteiShinchokuJohoShokaiFinder createInstance() {
         return InstanceProvider.create(YokaigoNinteiShinchokuJohoShokaiFinder.class);
     }
     

@@ -23,7 +23,7 @@ public class NiteiGyomuShinchokuJokyoIchiranhyoBuilderItem implements INiteiGyom
      * @param headEditor {@link ItakusakiChosainIchiranEditor}
      * @param bodyEditor {@link ItakusakiChosainIchiranEditor}
      */
-    public NiteiGyomuShinchokuJokyoIchiranhyoBuilderItem(INiteiGyomuShinchokuJokyoIchiranhyoEditor  headEditor,
+    NiteiGyomuShinchokuJokyoIchiranhyoBuilderItem(INiteiGyomuShinchokuJokyoIchiranhyoEditor  headEditor,
             INiteiGyomuShinchokuJokyoIchiranhyoEditor bodyEditor) {
         this.bodyEditor = bodyEditor;
         this.headEditor = headEditor;
