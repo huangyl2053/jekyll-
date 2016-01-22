@@ -229,7 +229,7 @@ public class TashichosonJushochiTokureiManager {
         DbT1003TashichosonJushochiTokureiEntity dbT1003Entity = new DbT1003TashichosonJushochiTokureiEntity();
         DbT1004ShisetsuNyutaishoEntity dbT1004Entity = new DbT1004ShisetsuNyutaishoEntity();
         for (TaJushochiTokureisyaKanGamenRirelateEntity 他市町村住所地特例 : 他市町村住所地特例リスト) {
-            if (状態_追加.isEmpty()) {
+            if (他市町村住所地特例.getJoutai().isEmpty()) {
                 continue;
             }
             if (状態_追加.equals(他市町村住所地特例.getJoutai())) {
