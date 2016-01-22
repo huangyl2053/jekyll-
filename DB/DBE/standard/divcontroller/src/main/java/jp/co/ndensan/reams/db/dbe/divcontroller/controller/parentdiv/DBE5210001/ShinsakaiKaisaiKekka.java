@@ -74,7 +74,8 @@ public class ShinsakaiKaisaiKekka {
         List<ShinsakaiWariateIinJohoBusiness> list = service.get審査会委員一覧検索(開催番号).records();
         getHandler(div).initialize(list);
         SearchResult<ShinsakaiKaisaiYoteiJoho> yoteiJohoList = service.get審査会委員(開催番号);
-        Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> shinsakaiKaisaiYoteiJoho = Models.create(yoteiJohoList.records());
+        Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> shinsakaiKaisaiYoteiJoho
+                = Models.create(yoteiJohoList.records());
         ViewStateHolder.put(ViewStateKeys.審査会開催結果登録, shinsakaiKaisaiYoteiJoho);
         responseData.data = div;
         return responseData;
@@ -172,10 +173,10 @@ public class ShinsakaiKaisaiKekka {
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel
                 = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
-        if ("新規モード".equals(div.getModel())) {
+        if (new RString("新規モード").equals(div.getModel())) {
             setYoteiJoho(div);
         }
-        if ("更新モード".equals(div.getModel())) {
+        if (new RString("更新モード").equals(div.getModel())) {
             setKekkaJoho(div);
         }
         ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
@@ -219,7 +220,8 @@ public class ShinsakaiKaisaiKekka {
         ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
         ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = yoteiJohoModel.get(shinsakaiKaisaiYoteiJohoIdentifier);
         ShinsakaiKaisaiKekkaJohoIdentifier shinsakaiKaisaiKekkaJohoIdentifier = new ShinsakaiKaisaiKekkaJohoIdentifier(開催番号);
-        ShinsakaiKaisaiKekkaJoho shinsakaiKaisaiKekkaJoho = shinsakaiKaisaiYoteiJoho.getShinsakaiKaisaiKekkaJoho(shinsakaiKaisaiKekkaJohoIdentifier);
+        ShinsakaiKaisaiKekkaJoho shinsakaiKaisaiKekkaJoho
+                = shinsakaiKaisaiYoteiJoho.getShinsakaiKaisaiKekkaJoho(shinsakaiKaisaiKekkaJohoIdentifier);
         ShinsakaiKaisaiKekkaJohoBuilder shinsakaiKaisaiKekkaJohoBuilder = shinsakaiKaisaiKekkaJoho.createBuilderForEdit();
         shinsakaiKaisaiKekkaJohoBuilder.set介護認定審査会開催年月日(div.getTxtKaisaiBi().getValue());
         shinsakaiKaisaiKekkaJohoBuilder.set介護認定審査会開始時刻(timeToStr(div.getTxtKaisaiStartTime().getValue()));
