@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5410001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai;
+import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoJoho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001.KojinJokyoShokaiDiv;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.kojinshinchokujokyohyo.KojinShinchokuJokyohyoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -173,13 +173,13 @@ public class KojinJokyoShokaiHandler {
      * @param kojinJokyoShokaiList 要介護認定個人状況データ
      * @return KojinShinchokuJokyohyoEntity
      */
-    public KojinShinchokuJokyohyoEntity setKojinShinchokuJokyohyo(List<KojinJokyoShokai> kojinJokyoShokaiList) {
-        KojinShinchokuJokyohyoEntity shinchokuJokyohyoEntity = getKojinShinchokuJokyohyo(kojinJokyoShokaiList);
+    public KojinShinchokuJokyohyoJoho setKojinShinchokuJokyohyo(List<KojinJokyoShokai> kojinJokyoShokaiList) {
+        KojinShinchokuJokyohyoJoho shinchokuJokyohyoEntity = getKojinShinchokuJokyohyo(kojinJokyoShokaiList);
         return shinchokuJokyohyoEntity;
     }
 
-    private KojinShinchokuJokyohyoEntity getKojinShinchokuJokyohyo(List<KojinJokyoShokai> kojinJokyoShokaiList) {
-        KojinShinchokuJokyohyoEntity jokyohyoEntity = new KojinShinchokuJokyohyoEntity();
+    private KojinShinchokuJokyohyoJoho getKojinShinchokuJokyohyo(List<KojinJokyoShokai> kojinJokyoShokaiList) {
+        KojinShinchokuJokyohyoJoho jokyohyoEntity = new KojinShinchokuJokyohyoJoho();
         jokyohyoEntity.setHihokenshaNo(kojinJokyoShokaiList.get(0).get被保険者番号().getColumnValue());
         // TODO 蘇広俊 QA518提出中
         jokyohyoEntity.setShinseiKubun(kojinJokyoShokaiList.get(0).get認定申請区分申請時コード().getColumnValue());
