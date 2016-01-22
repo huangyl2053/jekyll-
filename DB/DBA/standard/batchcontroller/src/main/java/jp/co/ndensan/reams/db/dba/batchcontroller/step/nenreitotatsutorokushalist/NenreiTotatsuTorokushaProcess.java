@@ -66,7 +66,6 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
     private List<NenreitotatsuKakuninListItem> item;
     private List<NenreiTotatsushaJouhouEntity> nenreiTotatsushaJouhoulist;
     private ShikibetsuCode old識別コード;
-    private boolean isEmpty = true;
 
     @BatchWriter
     private BatchReportWriter<NenreitotatsuKakuninListReportSource> batchReportWriter;
@@ -101,7 +100,6 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
 
     @Override
     protected void process(NenreiTotatsushaJouhouEntity nenreiTotatsushaJouhouEntity) {
-        isEmpty = false;
         if (nenreiTotatsushaJouhouEntity.get識別コード() != null) {
             ShikibetsuCode new識別コード = nenreiTotatsushaJouhouEntity.get識別コード();
             if (!new識別コード.equals(old識別コード)) {
@@ -148,7 +146,7 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
 
     @Override
     protected void afterExecute() {
-        if (isEmpty) {
+        if (nenreiTotatsushaJouhoulist.isEmpty()) {
             NenreiTotatsushaJouhouEntity nenreiTotatsushaJouhouEntity = new NenreiTotatsushaJouhouEntity();
             nenreiTotatsushaJouhouEntity.set対象情報タイトル(データ種別_被保険者台帳);
             nenreiTotatsushaJouhouEntity.set開始タイトル(取得情報);
