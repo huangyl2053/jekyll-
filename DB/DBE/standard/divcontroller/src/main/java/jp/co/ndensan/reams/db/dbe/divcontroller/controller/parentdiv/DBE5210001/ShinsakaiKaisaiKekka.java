@@ -67,8 +67,7 @@ public class ShinsakaiKaisaiKekka {
      */
     public ResponseData<ShinsakaiKaisaiKekkaDiv> onLoad(ShinsakaiKaisaiKekkaDiv div) {
         ResponseData<ShinsakaiKaisaiKekkaDiv> responseData = new ResponseData<>();
-//        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
-        RString 開催番号 = new RString("41022222");
+        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         ShinsakaiKaisaiYoteiJohoBusiness saiYoteiJoho = service.getヘッドエリア内容検索(開催番号);
         getHandler(div).onLoad(saiYoteiJoho);
         getHandler(div).setDisabled();
@@ -107,8 +106,7 @@ public class ShinsakaiKaisaiKekka {
         ResponseData<ShinsakaiKaisaiKekkaDiv> responseData = new ResponseData<>();
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 && new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-            //        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
-            RString 開催番号 = new RString("41022222");
+            RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
             Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
             ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
             ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = yoteiJohoModel.get(shinsakaiKaisaiYoteiJohoIdentifier);
@@ -167,8 +165,7 @@ public class ShinsakaiKaisaiKekka {
     }
 
     private void setYotei(ShinsakaiKaisaiKekkaDiv div) {
-        RString 開催番号 = new RString("41022222");
-//        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
         if ("新規モード".equals(div.getModel())) {
             setYoteiJoho(div);
@@ -188,8 +185,7 @@ public class ShinsakaiKaisaiKekka {
     }
 
     private void setYoteiJoho(ShinsakaiKaisaiKekkaDiv div) {
-        RString 開催番号 = new RString("41022222");
-//        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
         ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
         ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = yoteiJohoModel.get(shinsakaiKaisaiYoteiJohoIdentifier);
@@ -211,8 +207,7 @@ public class ShinsakaiKaisaiKekka {
     }
 
     private void setKekkaJoho(ShinsakaiKaisaiKekkaDiv div) {
-        RString 開催番号 = new RString("41022222");
-//        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
         ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
         ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = yoteiJohoModel.get(shinsakaiKaisaiYoteiJohoIdentifier);
@@ -232,8 +227,7 @@ public class ShinsakaiKaisaiKekka {
     }
 
     private void setWariateIinJoho(ShinsakaiKaisaiKekkaDiv div) {
-        RString 開催番号 = new RString("41022222");
-//        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
         for (dgShinsakaiIinIchiran_Row row : div.getDgShinsakaiIinIchiran().getDataSource()) {
             ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
