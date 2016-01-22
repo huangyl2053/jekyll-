@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.Sikaku;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -63,8 +64,8 @@ public class ShinsakaiKaisaiKekkaHandler {
         div.getTxtYoteiEndTime().setValue(RTime.parse(saiYoteiJoho.get予定終了時間()));
         div.getTxtYoteiEndTime().setDisabled(true);
         div.getTxtKaisaiBi().setValue(saiYoteiJoho.get開催日());
-        div.getTxtKaisaiStartTime().setValue(RTime.parse(saiYoteiJoho.get開催開始時間()));
-        div.getTxtKaisaiEndTime().setValue(RTime.parse(saiYoteiJoho.get開催終了時間()));
+        div.getTxtKaisaiStartTime().setValue(strToTime(saiYoteiJoho.get開催開始時間()));
+        div.getTxtKaisaiEndTime().setValue(strToTime(saiYoteiJoho.get開催終了時間()));
         div.getTxtShoyoTime().setValue(new RString(String.valueOf(saiYoteiJoho.get所要時間())));
 //TODO 開催会場
 //        div.getDdlKaisaiBasho().getDataSource();
@@ -79,9 +80,11 @@ public class ShinsakaiKaisaiKekkaHandler {
      */
     public void initialize(List<ShinsakaiWariateIinJohoBusiness> list) {
         List<dgShinsakaiIinIchiran_Row> dataGridList = new ArrayList<>();
-        for (ShinsakaiWariateIinJohoBusiness business : list) {
+        for (int i = 0; i < list.size(); i++) {
             dgShinsakaiIinIchiran_Row row = new dgShinsakaiIinIchiran_Row();
-            row.setShinsakjaiIinCode(business.get介護認定審査員資格コード().value());
+            ShinsakaiWariateIinJohoBusiness business = list.get(i);
+            row.getNumber().setValue(new Decimal(i + 1));
+            row.setShinsakjaiIinCode(business.get審査会委員コード());
             row.setShimei(business.get介護認定審査会委員氏名().value());
             row.setSeibetsu(business.get性別() == null
                     ? RString.EMPTY : Seibetsu.toValue(business.get性別()).get名称());
@@ -154,5 +157,13 @@ public class ShinsakaiKaisaiKekkaHandler {
             chikokuUmu.add(dataSource);
         }
         return chikokuUmu;
+    }
+
+    private RTime strToTime(RString str) {
+        if (str == null) {
+            return RDateTime.MIN.getTime();
+        }
+        str = str.insert(2, ":");
+        return RTime.parse(str);
     }
 }
