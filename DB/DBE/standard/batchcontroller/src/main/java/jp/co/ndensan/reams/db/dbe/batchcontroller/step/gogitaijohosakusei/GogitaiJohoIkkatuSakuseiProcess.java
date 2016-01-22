@@ -111,7 +111,7 @@ public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJoh
                     true,
                     Integer.parseInt(item.getGogitaiNo().toString()),
                     new FlexibleDate(item.getGogitaiYukoKikanKaishiYMD().replace(SLASH, RString.EMPTY)),
-                    item.getShinsakaiKaisaiBashoCode()));
+                    item.getShinsakaiIinCode()));
             if (count == 0) {
                 dbT5593EntityWriter.insert(item.toDbt5593Entity());
             } else {
