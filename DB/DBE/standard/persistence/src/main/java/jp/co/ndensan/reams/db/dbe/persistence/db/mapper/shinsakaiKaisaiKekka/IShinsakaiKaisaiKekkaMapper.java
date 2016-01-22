@@ -37,7 +37,7 @@ public interface IShinsakaiKaisaiKekkaMapper {
      * 介護認定審査会開催予定情報情報をキー検索で１件取得します。
      *
      * @param 開催番号 RString
-     * @return ShinsakaiKaisaiYoteiJohoEntity
+     * @return List<ShinsakaiKaisaiYoteiJohoRelateEntity>
      */
-    ShinsakaiKaisaiYoteiJohoRelateEntity get開催予定情報更新(RString 開催番号);
+    List<ShinsakaiKaisaiYoteiJohoRelateEntity> get開催予定情報更新(RString 開催番号);
 }

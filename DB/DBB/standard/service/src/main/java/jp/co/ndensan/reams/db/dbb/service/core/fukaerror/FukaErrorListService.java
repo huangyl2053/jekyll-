@@ -104,6 +104,12 @@ public class FukaErrorListService {
         賦課エラー一覧dac.save(entity);
     }
 
+    /**
+     * 賦課エラー一覧の内部帳票を取得します。
+     *
+     * @param reportCreationDateTime リスト作成日時
+     * @return 賦課エラーの情報
+     */
     public FukaErrorInternalReport getFukaErrorInternalReport(RDateTime reportCreationDateTime) {
         List<DbT2010FukaErrorListEntity> entityList = 賦課エラー一覧dac.select賦課エラー情報リスト(reportCreationDateTime);
 

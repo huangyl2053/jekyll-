@@ -81,4 +81,18 @@ public class DbT5503ShinsakaiWariateIinJohoDac implements ISaveable<DbT5503Shins
 
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 介護認定審査会割当委員情報deletePhysical件数を返します。
+     *
+     * @param entity 介護認定審査会割当委員情報テーブルのエンティティ
+     * @return int 物理削除件数
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int deletePhysical(DbT5503ShinsakaiWariateIinJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当委員情報エンティティ"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.deletePhysical(entity).execute();
+    }
 }
