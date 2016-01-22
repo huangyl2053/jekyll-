@@ -25,7 +25,7 @@ public class SearchJigyoHokokuNenpo {
     private RString 様式種類コード;
     private Code 集計番号;
 
-    private SearchJigyoHokokuNenpo(FlexibleYear 報告年, FlexibleYear 集計対象年, LasdecCode 市町村コード, RString 様式種類コード, Code 集計番号) {
+    public SearchJigyoHokokuNenpo(FlexibleYear 報告年, FlexibleYear 集計対象年, LasdecCode 市町村コード, RString 様式種類コード, Code 集計番号) {
         this.報告年 = 報告年;
         this.集計対象年 = 集計対象年;
         this.市町村コード = 市町村コード;

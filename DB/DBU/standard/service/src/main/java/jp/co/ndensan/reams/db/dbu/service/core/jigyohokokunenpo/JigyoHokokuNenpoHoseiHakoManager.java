@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbu.service.core.jigyohokokunenpo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.business.jigyohokokunenpo.JigyoHokokuNenpoResult;
 import jp.co.ndensan.reams.db.dbu.business.jigyohokokunenpo.ShichosonCodeNameResult;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.DeleteJigyoHokokuNenpo;
@@ -298,16 +299,16 @@ public class JigyoHokokuNenpoHoseiHakoManager {
      * @return 事業報告集計一覧データリスト
      */
     @Transaction
-    public SearchResult<JigyoHokokuNenpoResult> getJigyoHokokuNenpoDetal(SearchJigyoHokokuNenpo jigyoHokokuNenpoSearch) {
-        List<JigyoHokokuNenpoResult> 事業報告集計一覧データリスト = new ArrayList<>();
+    public SearchResult<JigyoHokokuTokeiData> getJigyoHokokuNenpoDetal(SearchJigyoHokokuNenpo jigyoHokokuNenpoSearch) {
+        List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = new ArrayList<>();
         IJigyoHokokuNenpoMapper jigyoHokokuNenpoMapper = mapperProvider.create(IJigyoHokokuNenpoMapper.class);
         List<DbT7021JigyoHokokuTokeiDataEntity> 事業報告集計一覧データEntityリスト
                 = jigyoHokokuNenpoMapper.getJigyoHokokuNenpoDetal(getJigyoHokokuNenpoParameter(jigyoHokokuNenpoSearch));
         for (DbT7021JigyoHokokuTokeiDataEntity entity : 事業報告集計一覧データEntityリスト) {
-            事業報告集計一覧データリスト.add(new JigyoHokokuNenpoResult(entity));
+            事業報告集計一覧データリスト.add(new JigyoHokokuTokeiData(entity));
         }
         if (事業報告集計一覧データリスト.isEmpty()) {
-            return SearchResult.of(Collections.<JigyoHokokuNenpoResult>emptyList(), 0, false);
+            return SearchResult.of(Collections.<JigyoHokokuTokeiData>emptyList(), 0, false);
         }
         return SearchResult.of(事業報告集計一覧データリスト, 0, false);
     }
@@ -332,10 +333,10 @@ public class JigyoHokokuNenpoHoseiHakoManager {
      * @return 更新件数
      */
     @Transaction
-    public int updateJigyoHokokuNenpoData(List<JigyoHokokuNenpoResult> 事業報告集計一覧データリスト) {
+    public int updateJigyoHokokuNenpoData(List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト) {
         int updateCount = 0;
         IJigyoHokokuNenpoMapper jigyoHokokuNenpoMapper = mapperProvider.create(IJigyoHokokuNenpoMapper.class);
-        for (JigyoHokokuNenpoResult jigyoHokokuNenpo : 事業報告集計一覧データリスト) {
+        for (JigyoHokokuTokeiData jigyoHokokuNenpo : 事業報告集計一覧データリスト) {
             JigyoHokokuNenpoUpdateParameter parameter = JigyoHokokuNenpoUpdateParameter.createParameterForJigyoHokokuNenpo(
                     jigyoHokokuNenpo.get報告年(), jigyoHokokuNenpo.get報告月(),
                     jigyoHokokuNenpo.get集計対象年(), jigyoHokokuNenpo.get集計対象月(),

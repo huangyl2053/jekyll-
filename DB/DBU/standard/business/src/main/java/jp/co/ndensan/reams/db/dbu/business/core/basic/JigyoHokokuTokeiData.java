@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbu.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -16,13 +15,14 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 事業報告統計データを管理するクラスです。
  */
 public class JigyoHokokuTokeiData
-        extends ParentModelBase<JigyoHokokuTokeiDataIdentifier, DbT7021JigyoHokokuTokeiDataEntity, JigyoHokokuTokeiData> implements Serializable {
+        extends ModelBase<JigyoHokokuTokeiDataIdentifier, DbT7021JigyoHokokuTokeiDataEntity, JigyoHokokuTokeiData> implements Serializable, Comparable<JigyoHokokuTokeiData> {
 
     private final DbT7021JigyoHokokuTokeiDataEntity entity;
     private final JigyoHokokuTokeiDataIdentifier id;
@@ -289,7 +289,6 @@ public class JigyoHokokuTokeiData
      *
      * @return 変更対象処理実施後の{@link JigyoHokokuTokeiData}
      */
-    @Override
     public JigyoHokokuTokeiData modifiedModel() {
         DbT7021JigyoHokokuTokeiDataEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
@@ -358,5 +357,9 @@ public class JigyoHokokuTokeiData
         return new JigyoHokokuTokeiDataBuilder(entity, id);
     }
 
+    @Override
+    public int compareTo(JigyoHokokuTokeiData JigyoHokoku) {
+        return this.get縦番号().compareTo(JigyoHokoku.get縦番号());
+    }
 //TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }
