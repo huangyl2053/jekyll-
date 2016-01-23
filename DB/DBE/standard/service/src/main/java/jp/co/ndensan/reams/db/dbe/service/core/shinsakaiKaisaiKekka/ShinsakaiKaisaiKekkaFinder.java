@@ -67,11 +67,16 @@ public class ShinsakaiKaisaiKekkaFinder {
      * @return ヘッドエリア内容
      */
     @Transaction
-    public ShinsakaiKaisaiYoteiJohoBusiness getヘッドエリア内容検索(RString 開催番号) {
+    public SearchResult<ShinsakaiKaisaiYoteiJohoBusiness> getヘッドエリア内容検索(RString 開催番号) {
         requireNonNull(開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("開催番号"));
         IShinsakaiKaisaiKekkaMapper mapper = mapperProvider.create(IShinsakaiKaisaiKekkaMapper.class);
         ShinsakaiKaisaiYoteiJohoEntity yoteiJohoEntity = mapper.getヘッドエリア内容検索(開催番号);
-        return new ShinsakaiKaisaiYoteiJohoBusiness(yoteiJohoEntity);
+        List<ShinsakaiKaisaiYoteiJohoBusiness> kaisaiYoteiJohoBusiness = new ArrayList();
+        if (yoteiJohoEntity != null) {
+            kaisaiYoteiJohoBusiness.add(new ShinsakaiKaisaiYoteiJohoBusiness(yoteiJohoEntity));
+        }
+
+        return SearchResult.of(kaisaiYoteiJohoBusiness, 0, false);
     }
 
     /**

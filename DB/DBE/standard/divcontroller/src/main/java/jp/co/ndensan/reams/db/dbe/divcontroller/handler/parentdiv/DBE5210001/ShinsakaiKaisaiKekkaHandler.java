@@ -47,27 +47,30 @@ public class ShinsakaiKaisaiKekkaHandler {
      *
      * @param saiYoteiJoho ヘッドエリア内容
      */
-    public void onLoad(ShinsakaiKaisaiYoteiJohoBusiness saiYoteiJoho) {
-        if (saiYoteiJoho.get開催日().isEmpty() || saiYoteiJoho.get開催日() == null) {
-            div.setModel(new RString("新規モード"));
-        } else {
-            div.setModel(new RString("更新モード"));
-        }
-        div.getTxtShinsakaiMeisho().setValue(saiYoteiJoho.get審査会名称());
-        div.getTxtGogitai().setValue(saiYoteiJoho.get合議体名称());
-        div.getTxtYoteiTeiin().setValue(new Decimal(saiYoteiJoho.get予定人数()));
-        div.getTxtJissiSu().setValue(new Decimal(saiYoteiJoho.get実施人数()));
-        div.getTxtYoteiKaijo().setValue(saiYoteiJoho.get介護認定審査会開催場所名称());
-        div.getTxtKaisaiYoteibi().setValue(saiYoteiJoho.get開催予定日());
-        div.getTxtYoteiStartTime().setValue(RTime.parse(saiYoteiJoho.get予定開始時間()));
-        div.getTxtYoteiEndTime().setValue(RTime.parse(saiYoteiJoho.get予定終了時間()));
-        div.getTxtKaisaiBi().setValue(saiYoteiJoho.get開催日());
-        div.getTxtKaisaiStartTime().setValue(strToTime(saiYoteiJoho.get開催開始時間()));
-        div.getTxtKaisaiEndTime().setValue(strToTime(saiYoteiJoho.get開催終了時間()));
-        div.getTxtShoyoTime().setValue(new RString(String.valueOf(saiYoteiJoho.get所要時間())));
+    public void onLoad(List<ShinsakaiKaisaiYoteiJohoBusiness> saiYoteiJoho) {
+        for (int i = 0; i < saiYoteiJoho.size(); i++) {
+            ShinsakaiKaisaiYoteiJohoBusiness business = saiYoteiJoho.get(i);
+            div.getTxtShinsakaiMeisho().setValue(business.get審査会名称());
+            div.getTxtGogitai().setValue(business.get合議体名称());
+            div.getTxtYoteiTeiin().setValue(new Decimal(business.get予定人数()));
+            div.getTxtJissiSu().setValue(new Decimal(business.get実施人数()));
+            div.getTxtYoteiKaijo().setValue(business.get介護認定審査会開催場所名称());
+            div.getTxtKaisaiYoteibi().setValue(business.get開催予定日());
+            div.getTxtYoteiStartTime().setValue(RTime.parse(business.get予定開始時間()));
+            div.getTxtYoteiEndTime().setValue(RTime.parse(business.get予定終了時間()));
+            div.getTxtKaisaiBi().setValue(business.get開催日());
+            if (div.getTxtKaisaiBi().getValue() == null || div.getTxtKaisaiBi().getValue().isEmpty()) {
+                div.setModel(new RString("新規モード"));
+            } else {
+                div.setModel(new RString("更新モード"));
+            }
+            div.getTxtKaisaiStartTime().setValue(strToTime(business.get開催開始時間()));
+            div.getTxtKaisaiEndTime().setValue(strToTime(business.get開催終了時間()));
+            div.getTxtShoyoTime().setValue(new RString(String.valueOf(business.get所要時間())));
 //TODO 開催会場
 //        div.getDdlKaisaiBasho().getDataSource();
-//        div.getDdlKaisaiBasho().setSelectedKey(saiYoteiJoho.get開催会場());
+//        div.getDdlKaisaiBasho().setSelectedKey(business.get開催会場());
+        }
     }
 
     /**
