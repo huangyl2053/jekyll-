@@ -4,6 +4,9 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnModoru = function () {
+                return "onClick_btnModoru";
+            };
             return Events;
         })();
         ShujiiIkenshoIraiShokai.Events = Events;
