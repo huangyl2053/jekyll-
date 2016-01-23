@@ -55,8 +55,7 @@ public class JyukiRendoTorokushaListBatch {
             } else {
                 set帳票データ作成用Entityの部分項目(tyouHyouListEntity, jyukiRendoJouhouEntity);
                 if (jyukiRendoJouhouEntity.get被保険者氏名() != null) {
-                    tyouHyouListEntity.setリスト下_被保険者氏名(
-                            new RString(jyukiRendoJouhouEntity.get被保険者氏名().toString()));
+                    tyouHyouListEntity.setリスト下_被保険者氏名(jyukiRendoJouhouEntity.get被保険者氏名().value());
                 }
             }
             JukiRendoTorokuListItem jukiRendoTorokuListItem = new JukiRendoTorokuListItem(
@@ -140,12 +139,10 @@ public class JyukiRendoTorokushaListBatch {
         tyouHyouListEntity.set異動情報タイトル5(jyukiRendoJouhouEntity.get異動情報タイトル5());
         tyouHyouListEntity.set異動情報タイトル6(jyukiRendoJouhouEntity.get異動情報タイトル6());
         if (jyukiRendoJouhouEntity.get世帯コード() != null) {
-            tyouHyouListEntity.setリスト上_世帯コード(new RString(jyukiRendoJouhouEntity
-                    .get世帯コード().toString()));
+            tyouHyouListEntity.setリスト上_世帯コード(jyukiRendoJouhouEntity.get世帯コード().value());
         }
         if (jyukiRendoJouhouEntity.get被保険者カナ氏名() != null) {
-            tyouHyouListEntity.setリスト上_被保険者カナ氏名(
-                    new RString(jyukiRendoJouhouEntity.get被保険者カナ氏名().toString()));
+            tyouHyouListEntity.setリスト上_被保険者カナ氏名(jyukiRendoJouhouEntity.get被保険者カナ氏名().value());
         }
         tyouHyouListEntity.setリスト上_事由(jyukiRendoJouhouEntity.get取得情報_前_事由());
         if (jyukiRendoJouhouEntity.get取得情報_前_異動年月日() != null) {
@@ -190,12 +187,10 @@ public class JyukiRendoTorokushaListBatch {
         tyouHyouListEntity.setリスト上_異動情報2(jyukiRendoJouhouEntity.get異動情報データ2());
         tyouHyouListEntity.setリスト上_異動情報3(jyukiRendoJouhouEntity.get異動情報データ3());
         if (jyukiRendoJouhouEntity.get被保険者番号() != null) {
-            tyouHyouListEntity.setリスト_被保険者番号(new RString(jyukiRendoJouhouEntity
-                    .get被保険者番号().toString()));
+            tyouHyouListEntity.setリスト_被保険者番号(jyukiRendoJouhouEntity.get被保険者番号().value());
         }
         if (jyukiRendoJouhouEntity.get識別コード() != null) {
-            tyouHyouListEntity.setリスト下_識別コード(new RString(jyukiRendoJouhouEntity
-                    .get識別コード().toString()));
+            tyouHyouListEntity.setリスト下_識別コード(jyukiRendoJouhouEntity.get識別コード().value());
         }
         tyouHyouListEntity.setリスト下_事由(jyukiRendoJouhouEntity.get取得情報_後_事由());
         if (jyukiRendoJouhouEntity.get取得情報_後_異動年月日() != null) {

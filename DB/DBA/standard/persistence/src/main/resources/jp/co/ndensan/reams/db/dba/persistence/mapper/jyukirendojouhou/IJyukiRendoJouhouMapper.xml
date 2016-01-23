@@ -580,10 +580,9 @@
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.PsmShikibetsuTaishoMybatisParameter" 
             fetchSize="500">
         SELECT
-            PSM."meisho" AS "meisho"
-            ,PSM."kanaMeisho" AS "kanaMeisho"
-            ,PSM."setaiCode" AS "setaiCode"
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
-            rgua.${psmShikibetsuTaisho} AS PSM
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
     </select>
 </mapper>

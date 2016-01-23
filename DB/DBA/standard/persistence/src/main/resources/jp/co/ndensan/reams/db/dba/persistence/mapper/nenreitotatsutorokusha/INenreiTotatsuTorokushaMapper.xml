@@ -54,13 +54,13 @@
     <result property="区分_後_資格" column="kubun_go_shikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     <sql id="shubetsuCode_0007">
-        ('01','03','04','07','08','09','12','18','46','49')
+        ('02')
     </sql>
     <sql id="shubetsuCode_0010">
         ('51','52','53','55','57','58','68','99')
     </sql>
     <sql id="shubetsuCode_0013">
-        ('21','22','11','13','14','15','17','16','41','42','23','24','48')
+        ('31')
     </sql>
     <sql id="shubetsuCode_0014">
         ('05')
@@ -81,7 +81,7 @@
             ,NULL AS "gaipage_3"
             ,NULL AS "gaipage_4"
             ,NULL AS "gaipage_5"
-            ,'データ種別:被保険者台帳' AS "taishojyohoutayitoru"
+            ,'データ種別：被保険者台帳' AS "taishojyohoutayitoru"
             ,'取得情報' AS "kaishitayitoru"
             ,'喪失情報' AS "shuryotayitoru"
             ,'資格' AS "kubuntayitoru"
@@ -346,10 +346,9 @@
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsutorokushalistbatch.NenreiTotatsuTorokushaListMybatisParameter" 
             fetchSize="500">
         SELECT
-            PSM."meisho" AS "meisho"
-            ,PSM."kanaMeisho" AS "kanaMeisho"
-            ,PSM."setaiCode" AS "setaiCode"
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
-            rgua.${psmShikibetsuTaisho} AS PSM
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
     </select>
 </mapper>
