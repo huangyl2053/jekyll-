@@ -165,7 +165,8 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT7022ShoriDateKanri.class).
-                where(and(eq(isDeleted, false),
+                where(and(eq(subGyomuCode, SubGyomuCode.DBA介護資格),
+                                eq(isDeleted, false),
                                 eq(shoriName, ShoriName.年齢到達予定者チェックリスト.get名称()),
                                 eq(nendo, RDate.getNowDate().getNendo())))
                 .order(new OrderBy(shoriEdaban, Order.DESC, NullsOrder.LAST),
@@ -223,6 +224,49 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(shoriName, "被保険者証一括発行"),
                                 in(shoriEdaban, 処理枝番))).
                 order(by(DbT7022ShoriDateKanri.kijunTimestamp, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから、抽出期間情報を取得する。
+     *
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT7022ShoriDateKanriEntity> selectChushutsukikan() {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, "DBU"),
+                                eq(shoriName, "介護住民票個別事項連携情報作成【他社住基】"),
+                                eq(shoriEdaban, "0000"))).
+                toList(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから、前回開始終了日を取得する。
+     *
+     * @param サブ業務コード
+     * @param 処理名
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity selectKaishiShuryoYMD(
+            SubGyomuCode サブ業務コード,
+            RString 処理名) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, サブ業務コード),
+                                eq(shoriName, 処理名))).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
 
