@@ -334,7 +334,7 @@ public class TashichosonJushochiTokureiManager {
                 dbT1004Entity.setTaishoYMD(null);
                 dbT1004Entity.setRoomKigoNo(null);
 
-                //TODO　袁献輝　QA558被保険者台帳管理クラス未実装しました　2016/01/26。
+                //TODO　袁献輝　被保険者台帳管理クラス未実装しました　2016/01/26。
 //                RString 画面喪失 = 被保険者台帳管理.ShikakuSoshitsuCheck(識別コード, null);
                 RString 画面喪失 = new RString("");
                 if (!画面喪失.isEmpty()) {
