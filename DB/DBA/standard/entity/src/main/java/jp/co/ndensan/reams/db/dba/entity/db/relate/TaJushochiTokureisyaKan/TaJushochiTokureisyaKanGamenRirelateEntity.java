@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  *
@@ -26,11 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 public class TaJushochiTokureisyaKanGamenRirelateEntity {
 
     private RString joutai;
-    @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
-    @PrimaryKey
     private FlexibleDate idoYMD;
-    @PrimaryKey
     private RString edaNo;
     private RString idoJiyuCode;
     private LasdecCode shichosonCode;
@@ -50,7 +46,6 @@ public class TaJushochiTokureisyaKanGamenRirelateEntity {
     private boolean logicalDeletedFlag;
     private RString tekiyouZiyuuCode;
     private RString kaijoZiyuuCode;
-    @PrimaryKey
     private Decimal rirekiNo;
     private RString daichoShubetsu;
     private RString nyushoShisetsuShurui;

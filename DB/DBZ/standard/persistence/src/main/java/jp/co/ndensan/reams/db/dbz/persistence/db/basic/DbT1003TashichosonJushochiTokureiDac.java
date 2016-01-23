@@ -95,9 +95,11 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
      *
      * @return 最大枝番
      */
-    public RString selectEdaNoMax() {
+    @Transaction
+    public DbT1003TashichosonJushochiTokureiEntity selectEdaNoMax() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.selectSpecific(max(edaNo)).
-                table(DbT1003TashichosonJushochiTokurei.class).toObject(RString.class);
+                table(DbT1003TashichosonJushochiTokurei.class).toObject(DbT1003TashichosonJushochiTokureiEntity.class);
     }
+
 }

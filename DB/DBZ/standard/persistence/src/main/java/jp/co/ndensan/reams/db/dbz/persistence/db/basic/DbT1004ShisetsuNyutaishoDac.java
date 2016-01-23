@@ -115,9 +115,9 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
      *
      * @return 最大履歴番号
      */
-    public Decimal selectRirekiNoMax() {
+    public DbT1004ShisetsuNyutaishoEntity selectRirekiNoMax() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.selectSpecific(max(rirekiNo)).
-                table(DbT1004ShisetsuNyutaisho.class).toObject(Decimal.class);
+                table(DbT1004ShisetsuNyutaisho.class).toObject(DbT1004ShisetsuNyutaishoEntity.class);
     }
 }
