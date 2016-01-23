@@ -59,4 +59,7 @@ public class WaritsukeEntity {
     private RString temp_iryoKikanMeisho;
     private AtenaMeisho temp_shujiiName;
     private RString temp_chosainShimei;
+    private FlexibleDate ninteichosaKanryoYMD;
+    private RString shinseishoKanriNo;
+    private int ninteichosaIraiRirekiNo;
 }

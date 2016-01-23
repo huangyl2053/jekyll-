@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jan 13 09:33:18 CST 2016 
+ * Sat Jan 23 12:00:20 CST 2016 
  */
 
 
@@ -33,6 +33,7 @@ public class dgchosainIchiran_Row extends DataRow {
     private RString chosainShikaku;
     private RString hokenshaCode;
     private RString hokenshaName;
+    private RString chosaKanoNinzuPerMonth;
 
     public dgchosainIchiran_Row() {
         super();
@@ -46,6 +47,7 @@ public class dgchosainIchiran_Row extends DataRow {
         this.chosainShikaku = RString.EMPTY;
         this.hokenshaCode = RString.EMPTY;
         this.hokenshaName = RString.EMPTY;
+        this.chosaKanoNinzuPerMonth = RString.EMPTY;
         this.setOriginalData("chosainCode", chosainCode);
         this.setOriginalData("chosainShimei", chosainShimei);
         this.setOriginalData("chosainKanaShimei", chosainKanaShimei);
@@ -56,9 +58,10 @@ public class dgchosainIchiran_Row extends DataRow {
         this.setOriginalData("chosainShikaku", chosainShikaku);
         this.setOriginalData("hokenshaCode", hokenshaCode);
         this.setOriginalData("hokenshaName", hokenshaName);
+        this.setOriginalData("chosaKanoNinzuPerMonth", chosaKanoNinzuPerMonth);
     }
 
-    public dgchosainIchiran_Row(TextBoxCode chosainCode, RString chosainShimei, RString chosainKanaShimei, RString chosainSeibetsu, RString chosainTelNo, RString chosaChiku, TextBoxNum waritsukeZumi, RString chosainShikaku, RString hokenshaCode, RString hokenshaName) {
+    public dgchosainIchiran_Row(TextBoxCode chosainCode, RString chosainShimei, RString chosainKanaShimei, RString chosainSeibetsu, RString chosainTelNo, RString chosaChiku, TextBoxNum waritsukeZumi, RString chosainShikaku, RString hokenshaCode, RString hokenshaName, RString chosaKanoNinzuPerMonth) {
         super();
         this.setOriginalData("chosainCode", chosainCode);
         this.setOriginalData("chosainShimei", chosainShimei);
@@ -70,6 +73,7 @@ public class dgchosainIchiran_Row extends DataRow {
         this.setOriginalData("chosainShikaku", chosainShikaku);
         this.setOriginalData("hokenshaCode", hokenshaCode);
         this.setOriginalData("hokenshaName", hokenshaName);
+        this.setOriginalData("chosaKanoNinzuPerMonth", chosaKanoNinzuPerMonth);
         this.chosainCode = chosainCode;
         this.chosainShimei = chosainShimei;
         this.chosainKanaShimei = chosainKanaShimei;
@@ -80,6 +84,7 @@ public class dgchosainIchiran_Row extends DataRow {
         this.chosainShikaku = chosainShikaku;
         this.hokenshaCode = hokenshaCode;
         this.hokenshaName = hokenshaName;
+        this.chosaKanoNinzuPerMonth = chosaKanoNinzuPerMonth;
     }
 
     public TextBoxCode getChosainCode() {
@@ -120,6 +125,10 @@ public class dgchosainIchiran_Row extends DataRow {
 
     public RString getHokenshaName() {
         return hokenshaName;
+    }
+
+    public RString getChosaKanoNinzuPerMonth() {
+        return chosaKanoNinzuPerMonth;
     }
 
     public void setChosainCode(TextBoxCode chosainCode) {
@@ -170,6 +179,11 @@ public class dgchosainIchiran_Row extends DataRow {
     public void setHokenshaName(RString hokenshaName) {
         this.setOriginalData("hokenshaName", hokenshaName);
         this.hokenshaName = hokenshaName;
+    }
+
+    public void setChosaKanoNinzuPerMonth(RString chosaKanoNinzuPerMonth) {
+        this.setOriginalData("chosaKanoNinzuPerMonth", chosaKanoNinzuPerMonth);
+        this.chosaKanoNinzuPerMonth = chosaKanoNinzuPerMonth;
     }
 
     // </editor-fold>

@@ -344,12 +344,12 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxthokkoymd() {
+    public TextBoxDate getTxthokkoymd() {
         return this.getIraiprint().getTxthokkoymd();
     }
 
     @JsonIgnore
-    public void setTxthokkoymd(TextBox txthokkoymd) {
+    public void setTxthokkoymd(TextBoxDate txthokkoymd) {
         this.getIraiprint().setTxthokkoymd(txthokkoymd);
     }
 
@@ -364,12 +364,12 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtkigenymd() {
+    public TextBoxDate getTxtkigenymd() {
         return this.getIraiprint().getTxtkigenymd();
     }
 
     @JsonIgnore
-    public void setTxtkigenymd(TextBox txtkigenymd) {
+    public void setTxtkigenymd(TextBoxDate txtkigenymd) {
         this.getIraiprint().setTxtkigenymd(txtkigenymd);
     }
 

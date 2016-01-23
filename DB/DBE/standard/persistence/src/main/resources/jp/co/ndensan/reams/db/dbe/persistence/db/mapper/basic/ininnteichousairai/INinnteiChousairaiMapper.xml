@@ -99,6 +99,7 @@
         <result property="chikuCode" column="Temp_chikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chosainShikaku" column="Temp_chosainShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="waritsukesumiKensu" column="Temp_waritsukeCount"/>
+        <result property="chosaKanoNinzuPerMonth" column="chosaKanoNinzuPerMonth" />
     </resultMap>
     <select id="selectChousaIn" resultMap="result_ChousaIn" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
@@ -110,6 +111,7 @@
                 , DbT5913ChosainJoho."telNo" AS Temp_telNo
                 , DbT5913ChosainJoho."chikuCode" AS Temp_chikuCode
                 , DbT5913ChosainJoho."chosainShikaku" AS Temp_chosainShikaku
+                , DbT5913ChosainJoho."chosaKanoNinzuPerMonth" AS chosaKanoNinzuPerMonth
                 , SUM( 
                   COALESCE(ninteichosaIraiJohoZimi.waritsukeCount, 0)
                 ) AS Temp_waritsukeCount 
@@ -173,6 +175,7 @@
                  , DbT5913ChosainJoho."telNo"
                  , DbT5913ChosainJoho."chikuCode"
                  , DbT5913ChosainJoho."chosainShikaku"
+                 , DbT5913ChosainJoho."chosaKanoNinzuPerMonth"
     </select>
     <resultMap id="result_WaritsukeEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.WaritsukeEntity">
         <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
@@ -208,6 +211,9 @@
         <result property="temp_iryoKikanMeisho" column="Temp_iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="temp_shujiiName" column="Temp_shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="temp_chosainShimei" column="Temp_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteichosaKanryoYMD" column="ninteichosaKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo"/>
     </resultMap>
     <select id="getWaritsuke" resultMap="result_WaritsukeEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
@@ -245,6 +251,9 @@
                 ,dbT5911Zenkai."iryoKikanMeisho"           AS "Temp_iryoKikanMeisho"
                 ,dbT5912Zenkai."shujiiName"                AS "Temp_shujiiName"
                 ,dbT5913Zenkai."chosainShimei"             AS "Temp_chosainShimei"
+                ,dbT5105."ninteichosaKanryoYMD"            AS ninteichosaKanryoYMD
+                ,dbT5101."shinseishoKanriNo"               AS "shinseishoKanriNo"
+                ,dbT5201."ninteichosaIraiRirekiNo"         AS "ninteichosaIraiRirekiNo"
               FROM
                 rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
                 INNER JOIN
@@ -351,6 +360,8 @@
                         AND dbT5912Zenkai."shujiiIryokikanCode" = dbT5101Zenkai."shujiiIryokikanCode"
                         AND dbT5912Zenkai."shujiiCode" = dbT5101Zenkai."shujiiCode"
                         AND dbT5912Zenkai."jokyoFlag" = TRUE
+            INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS dbT5105
+              ON dbT5101."shinseishoKanriNo" = dbT5105."shinseishoKanriNo"
                 WHERE
                         dbT5101."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
                         AND dbT5101."shoriJotaiKubun" IN ('0','3')
@@ -576,6 +587,8 @@
         <result property="temp_shujiiName" column="Temp_shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="temp_jigyoshaMeisho" column="Temp_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="temp_chosainShimei" column="Temp_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
     </resultMap>
      <select id="getShiteWaritsuke" resultMap="result_ShiteWaritsukeEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
@@ -595,6 +608,8 @@
                 , dbT5912SenKai."shujiiName" AS Temp_shujiiName
                 , dbT5910SenKai."jigyoshaMeisho" AS jigyoshaMeisho
                 , dbT5913SenKai."chosainShimei" AS chosainShimei
+                , dbT5101."shinseishoKanriNo"               AS "shinseishoKanriNo"
+                , DbT5201Nintei."ninteichosaIraiRirekiNo"         AS "ninteichosaIraiRirekiNo"
               FROM
                 rgdb."DbT5101NinteiShinseiJoho" AS dbT5101 
                 INNER JOIN ( 
@@ -699,6 +714,8 @@
             <result property="temp_shujiiName" column="Temp_shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
             <result property="temp_jigyoshaMeisho" column="Temp_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
             <result property="temp_chosainShimei" column="Temp_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+            <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+            <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
         </resultMap>
          <select id="getShiteWaritsukeSai" resultMap="result_ShiteWaritsukeSaiEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
@@ -718,11 +735,14 @@
                     , dbT5912SenKai."shujiiName" AS Temp_shujiiName
                     , dbT5910SenKai."jigyoshaMeisho" AS jigyoshaMeisho
                     , dbT5913SenKai."chosainShimei" AS chosainShimei
+                    , ninteiChosaShite.shinseishoKanriNo               AS "shinseishoKanriNo"
+                    , ninteiChosaShite.ninteichosaIraiRirekiNo         AS "ninteichosaIraiRirekiNo"
                   FROM
                     rgdb."DbT5101NinteiShinseiJoho" AS dbT5101 
                     INNER JOIN ( 
                       SELECT
                         dbT5201Nintei."shinseishoKanriNo" AS shinseishoKanriNo 
+                        , dbT5201Nintei."ninteichosaIraiRirekiNo" AS ninteichosaIraiRirekiNo
                       FROM
                         rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201Nintei 
                         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS dbT5105Nintei
@@ -817,4 +837,23 @@
                     ORDER BY
                         dbT5101."chosaKubun"  
             </select>
+            
+            <select id="getNinteichosaIraiJoho" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity" 
+                   parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+                SELECT
+                  DbT5201NinteichosaIraiJoho.* 
+                FROM 
+                  <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.noDeleted_DbT5201NinteichosaIraiJoho" /> AS DbT5201NinteichosaIraiJoho
+                WHERE
+                    DbT5201NinteichosaIraiJoho."dbT5201NinteichosaIraiJoho_shinseishoKanriNo" = #{申請書管理番号}
+                 AND
+                   DbT5201NinteichosaIraiJoho."dbT5201NinteichosaIraiJoho_ninteichosaIraiRirekiNo"
+                  =   (SELECT
+                        MAX(dbT5201Nintei."ninteichosaIraiRirekiNo") 
+                       FROM
+                          rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201Nintei
+                       WHERE
+                          dbT5201Nintei."shinseishoKanriNo" = #{申請書管理番号}
+                      )
+          </select>
 </mapper>

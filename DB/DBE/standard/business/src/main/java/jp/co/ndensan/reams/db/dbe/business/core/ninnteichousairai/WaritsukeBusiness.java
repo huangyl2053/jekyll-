@@ -328,4 +328,31 @@ public class WaritsukeBusiness {
     public int getAge() {
         return entity.getAge();
     }
+
+    /**
+     * 認定調査完了年月日を返します。
+     *
+     * @return 認定調査完了年月日
+     */
+    public FlexibleDate getNinteichosaKanryoYMD() {
+        return entity.getNinteichosaKanryoYMD();
+    }
+
+    /**
+     * 申請書管理番号を返します。
+     *
+     * @return 申請書管理番号
+     */
+    public RString getShinseishoKanriNo() {
+        return entity.getShinseishoKanriNo();
+    }
+
+    /**
+     * 認定調査依頼履歴番号を返します。
+     *
+     * @return 認定調査依頼履歴番号
+     */
+    public int getNinteichosaIraiRirekiNo() {
+        return entity.getNinteichosaIraiRirekiNo();
+    }
 }

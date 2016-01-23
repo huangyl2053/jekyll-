@@ -162,4 +162,13 @@ public class NinnteiChousairaiBusiness {
         return entity.getChosainShikaku();
     }
 
+    /**
+     * 調査可能人数／月を返します。
+     *
+     * @return 調査可能人数／月
+     */
+    public int getChosaKanoNinzuPerMonth() {
+        return entity.getChosaKanoNinzuPerMonth();
+    }
+
 }

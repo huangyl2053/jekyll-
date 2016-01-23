@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jan 13 09:33:18 CST 2016 
+ * Sat Jan 23 12:00:20 CST 2016 
  */
 
 
@@ -45,6 +45,10 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
     private RString zenkaiShujii;
     private TextBoxDate iraishoShutsuryokuDay;
     private TextBoxDate chosahyoNadoShutsuryookuDay;
+    private RString ninteichosaKanryoYMD;
+    private RString shinseishoKanriNo;
+    private RString ninteichosaIraiRirekiNo;
+    private RString koroshoIfShikibetsuCode;
 
     public dgWaritsukeZumiShinseishaIchiran_Row() {
         super();
@@ -69,6 +73,10 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
         this.zenkaiShujii = RString.EMPTY;
         this.iraishoShutsuryokuDay = new TextBoxDate();
         this.chosahyoNadoShutsuryookuDay = new TextBoxDate();
+        this.ninteichosaKanryoYMD = RString.EMPTY;
+        this.shinseishoKanriNo = RString.EMPTY;
+        this.ninteichosaIraiRirekiNo = RString.EMPTY;
+        this.koroshoIfShikibetsuCode = RString.EMPTY;
         this.setOriginalData("no", no);
         this.setOriginalData("shokai", shokai);
         this.setOriginalData("jotai", jotai);
@@ -90,9 +98,13 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
         this.setOriginalData("zenkaiShujii", zenkaiShujii);
         this.setOriginalData("iraishoShutsuryokuDay", iraishoShutsuryokuDay);
         this.setOriginalData("chosahyoNadoShutsuryookuDay", chosahyoNadoShutsuryookuDay);
+        this.setOriginalData("ninteichosaKanryoYMD", ninteichosaKanryoYMD);
+        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
+        this.setOriginalData("ninteichosaIraiRirekiNo", ninteichosaIraiRirekiNo);
+        this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
     }
 
-    public dgWaritsukeZumiShinseishaIchiran_Row(TextBoxNum no, ButtonDialog shokai, RString jotai, RString hihokenshaNo, RString hihokenshaShimei, RString seibetsu, TextBoxDate ninteiShinseiDay, RString shinseiKubunShinseiji, RString chiku, RString zenkaiChosaItakusaki, RString zenkaiChosain, RString chosaIraiDay, RString chosaKubun, RString hokensha, RString jusho, RString shujiIryoKikan, RString shujii, RString zenkaiShujiIryoKikan, RString zenkaiShujii, TextBoxDate iraishoShutsuryokuDay, TextBoxDate chosahyoNadoShutsuryookuDay) {
+    public dgWaritsukeZumiShinseishaIchiran_Row(TextBoxNum no, ButtonDialog shokai, RString jotai, RString hihokenshaNo, RString hihokenshaShimei, RString seibetsu, TextBoxDate ninteiShinseiDay, RString shinseiKubunShinseiji, RString chiku, RString zenkaiChosaItakusaki, RString zenkaiChosain, RString chosaIraiDay, RString chosaKubun, RString hokensha, RString jusho, RString shujiIryoKikan, RString shujii, RString zenkaiShujiIryoKikan, RString zenkaiShujii, TextBoxDate iraishoShutsuryokuDay, TextBoxDate chosahyoNadoShutsuryookuDay, RString ninteichosaKanryoYMD, RString shinseishoKanriNo, RString ninteichosaIraiRirekiNo, RString koroshoIfShikibetsuCode) {
         super();
         this.setOriginalData("no", no);
         this.setOriginalData("shokai", shokai);
@@ -115,6 +127,10 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
         this.setOriginalData("zenkaiShujii", zenkaiShujii);
         this.setOriginalData("iraishoShutsuryokuDay", iraishoShutsuryokuDay);
         this.setOriginalData("chosahyoNadoShutsuryookuDay", chosahyoNadoShutsuryookuDay);
+        this.setOriginalData("ninteichosaKanryoYMD", ninteichosaKanryoYMD);
+        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
+        this.setOriginalData("ninteichosaIraiRirekiNo", ninteichosaIraiRirekiNo);
+        this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
         this.no = no;
         this.shokai = shokai;
         this.jotai = jotai;
@@ -136,6 +152,10 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
         this.zenkaiShujii = zenkaiShujii;
         this.iraishoShutsuryokuDay = iraishoShutsuryokuDay;
         this.chosahyoNadoShutsuryookuDay = chosahyoNadoShutsuryookuDay;
+        this.ninteichosaKanryoYMD = ninteichosaKanryoYMD;
+        this.shinseishoKanriNo = shinseishoKanriNo;
+        this.ninteichosaIraiRirekiNo = ninteichosaIraiRirekiNo;
+        this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
     }
 
     public TextBoxNum getNo() {
@@ -220,6 +240,22 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
 
     public TextBoxDate getChosahyoNadoShutsuryookuDay() {
         return chosahyoNadoShutsuryookuDay;
+    }
+
+    public RString getNinteichosaKanryoYMD() {
+        return ninteichosaKanryoYMD;
+    }
+
+    public RString getShinseishoKanriNo() {
+        return shinseishoKanriNo;
+    }
+
+    public RString getNinteichosaIraiRirekiNo() {
+        return ninteichosaIraiRirekiNo;
+    }
+
+    public RString getKoroshoIfShikibetsuCode() {
+        return koroshoIfShikibetsuCode;
     }
 
     public void setNo(TextBoxNum no) {
@@ -325,6 +361,26 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
     public void setChosahyoNadoShutsuryookuDay(TextBoxDate chosahyoNadoShutsuryookuDay) {
         this.setOriginalData("chosahyoNadoShutsuryookuDay", chosahyoNadoShutsuryookuDay);
         this.chosahyoNadoShutsuryookuDay = chosahyoNadoShutsuryookuDay;
+    }
+
+    public void setNinteichosaKanryoYMD(RString ninteichosaKanryoYMD) {
+        this.setOriginalData("ninteichosaKanryoYMD", ninteichosaKanryoYMD);
+        this.ninteichosaKanryoYMD = ninteichosaKanryoYMD;
+    }
+
+    public void setShinseishoKanriNo(RString shinseishoKanriNo) {
+        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
+        this.shinseishoKanriNo = shinseishoKanriNo;
+    }
+
+    public void setNinteichosaIraiRirekiNo(RString ninteichosaIraiRirekiNo) {
+        this.setOriginalData("ninteichosaIraiRirekiNo", ninteichosaIraiRirekiNo);
+        this.ninteichosaIraiRirekiNo = ninteichosaIraiRirekiNo;
+    }
+
+    public void setKoroshoIfShikibetsuCode(RString koroshoIfShikibetsuCode) {
+        this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
+        this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
     }
 
     // </editor-fold>

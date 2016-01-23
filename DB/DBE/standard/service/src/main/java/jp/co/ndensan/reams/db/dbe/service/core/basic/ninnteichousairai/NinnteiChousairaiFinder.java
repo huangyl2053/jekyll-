@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -66,7 +67,7 @@ public class NinnteiChousairaiFinder {
     }
 
     /**
-     * 認定調査委託先情報を取得する。
+     * 認定調査委託先情報を取得します。
      *
      * @param parametere 要介護認定結果情報パラメータ
      * @return SearchResult<NinnteiChousairaiBusiness> 認定調査委託先情報
@@ -86,7 +87,7 @@ public class NinnteiChousairaiFinder {
     }
 
     /**
-     * 調査員情報を取得する。
+     * 調査員情報を取得します。
      *
      * @param parametere 要介護認定結果情報パラメータ
      * @return SearchResult<NinnteiChousairaiBusiness> 調査員情報
@@ -106,7 +107,7 @@ public class NinnteiChousairaiFinder {
     }
 
     /**
-     * 割付済み申請者一覧を取得する。
+     * 割付済み申請者一覧を取得します。
      *
      * @param parametere 要介護認定結果情報パラメータ
      * @return SearchResult<WaritsukeBusiness> 割付済み申請者一覧
@@ -126,7 +127,7 @@ public class NinnteiChousairaiFinder {
     }
 
     /**
-     * 未割付申請者一覧（新規依頼）を取得する。
+     * 未割付申請者一覧（新規依頼）を取得します。
      *
      * @param parametere 要介護認定結果情報パラメータ
      * @return SearchResult<WaritsukeBusiness> 未割付申請者一覧（新規依頼）
@@ -146,7 +147,7 @@ public class NinnteiChousairaiFinder {
     }
 
     /**
-     * 未割付申請者一覧（再依頼）を取得する。
+     * 未割付申請者一覧（再依頼）を取得します。
      *
      * @param parametere 要介護認定結果情報パラメータ
      * @return SearchResult<WaritsukeBusiness> 未割付申請者一覧（再依頼）
@@ -166,7 +167,7 @@ public class NinnteiChousairaiFinder {
     }
 
     /**
-     * 割付済み一覧を取得する。
+     * 割付済み一覧を取得します。
      *
      * @param parametere 要介護認定結果情報パラメータ
      * @return SearchResult<NinteichosaIraiJohoRelateBusiness> 割付済み一覧
@@ -181,11 +182,13 @@ public class NinnteiChousairaiFinder {
         List<NinteichosaIraiJohoRelateBusiness> 割付済み一覧 = new ArrayList<>();
         List<NinteiKanryoJoho> ninteiKanryoJohoList = new ArrayList<>();
         for (DbT5105NinteiKanryoJohoEntity ninteiKanryoJohoEntity : entity.getNinteiKanryoJohoEntity()) {
+            ninteiKanryoJohoEntity.initializeMd5();
             ninteiKanryoJohoList.add(new NinteiKanryoJoho(ninteiKanryoJohoEntity));
         }
 
         List<NinteichosaIraiJoho> ninteichosaIraiJohoList = new ArrayList<>();
         for (DbT5201NinteichosaIraiJohoEntity ninteichosaIraiJohoEntity : entity.getNinteichosaIraiJohoEntity()) {
+            ninteichosaIraiJohoEntity.initializeMd5();
             ninteichosaIraiJohoList.add(new NinteichosaIraiJoho(ninteichosaIraiJohoEntity));
         }
         割付済み一覧.add(new NinteichosaIraiJohoRelateBusiness(ninteichosaIraiJohoList, ninteiKanryoJohoList));
@@ -193,7 +196,7 @@ public class NinnteiChousairaiFinder {
     }
 
     /**
-     * 市町村名称を取得する。
+     * 市町村名称を取得します。
      *
      * @param shoKisaiHokenshaNo 保険者番号
      * @return SearchResult<ShichosonMeishoBusiness> 市町村名称リスト
@@ -209,5 +212,24 @@ public class NinnteiChousairaiFinder {
             shichosonMeisho.add(new ShichosonMeishoBusiness(entity));
         }
         return SearchResult.of(shichosonMeisho, 0, false);
+    }
+
+    /**
+     * 認定調査依頼情報を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return SearchResult<NinteichosaIraiJoho> 認定調査依頼情報
+     */
+    @Transaction
+    public SearchResult<NinteichosaIraiJoho> getNinteichosaIraiJoho(RString 申請書管理番号) {
+        INinnteiChousairaiMapper mapper = mapperProvider.create(INinnteiChousairaiMapper.class);
+        DbT5201NinteichosaIraiJohoEntity entity = mapper.getNinteichosaIraiJoho(申請書管理番号);
+        if (entity == null) {
+            return SearchResult.of(Collections.<NinteichosaIraiJoho>emptyList(), 0, false);
+        }
+        entity.initializeMd5();
+        List<NinteichosaIraiJoho> list = new ArrayList<>();
+        list.add(new NinteichosaIraiJoho(entity));
+        return SearchResult.of(list, 0, false);
     }
 }

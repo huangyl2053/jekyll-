@@ -24,11 +24,11 @@ public class iraiprintDiv extends Panel {
     @JsonProperty("Chkirai")
     private CheckBoxList Chkirai;
     @JsonProperty("txthokkoymd")
-    private TextBox txthokkoymd;
+    private TextBoxDate txthokkoymd;
     @JsonProperty("radkigen")
     private RadioButton radkigen;
     @JsonProperty("txtkigenymd")
-    private TextBox txtkigenymd;
+    private TextBoxDate txtkigenymd;
     @JsonProperty("SP")
     private Space SP;
     @JsonProperty("Chkchosa")
@@ -69,7 +69,7 @@ public class iraiprintDiv extends Panel {
      * @return txthokkoymd
      */
     @JsonProperty("txthokkoymd")
-    public TextBox getTxthokkoymd() {
+    public TextBoxDate getTxthokkoymd() {
         return txthokkoymd;
     }
 
@@ -78,7 +78,7 @@ public class iraiprintDiv extends Panel {
      * @param txthokkoymd txthokkoymd
      */
     @JsonProperty("txthokkoymd")
-    public void setTxthokkoymd(TextBox txthokkoymd) {
+    public void setTxthokkoymd(TextBoxDate txthokkoymd) {
         this.txthokkoymd = txthokkoymd;
     }
 
@@ -105,7 +105,7 @@ public class iraiprintDiv extends Panel {
      * @return txtkigenymd
      */
     @JsonProperty("txtkigenymd")
-    public TextBox getTxtkigenymd() {
+    public TextBoxDate getTxtkigenymd() {
         return txtkigenymd;
     }
 
@@ -114,7 +114,7 @@ public class iraiprintDiv extends Panel {
      * @param txtkigenymd txtkigenymd
      */
     @JsonProperty("txtkigenymd")
-    public void setTxtkigenymd(TextBox txtkigenymd) {
+    public void setTxtkigenymd(TextBoxDate txtkigenymd) {
         this.txtkigenymd = txtkigenymd;
     }
 

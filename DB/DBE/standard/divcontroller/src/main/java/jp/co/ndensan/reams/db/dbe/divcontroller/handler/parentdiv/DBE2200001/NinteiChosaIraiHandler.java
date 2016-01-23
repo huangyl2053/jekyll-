@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinnteiChousairaiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.WaritsukeBusiness;
+import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Shinsei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.NinteiChosaIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgChosaItakusakiIchiran_Row;
@@ -14,6 +15,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -26,13 +28,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 認定調査員マスタ画面のハンドラークラスです。
  */
 public class NinteiChosaIraiHandler {
 
+    private static final RString 設定方法 = new RString("1");
     private static final CodeShubetsu CHIKU_CODE_SHUBETSU = new CodeShubetsu("5001");
+    private static final RString WARITSUKE_ZUMI = new RString("割付済み");
+    private static final RString MIWARITSUKE = new RString("未割付");
     private final NinteiChosaIraiDiv div;
 
     /**
@@ -133,7 +139,7 @@ public class NinteiChosaIraiHandler {
         for (NinnteiChousairaiBusiness business : 調査員情報一覧List) {
             dgchosainIchiran_Row row = new dgchosainIchiran_Row();
             TextBoxCode chosainCode = new TextBoxCode();
-            chosainCode.setValue(nullToEmpty(business.getChikuCode()));
+            chosainCode.setValue(nullToEmpty(business.getNinteiChosainNo()));
             row.setChosainCode(chosainCode);
             row.setChosainShimei(nullToEmpty(business.getChosainShimei()));
             row.setChosainKanaShimei(nullToEmpty(business.getChosainKanaShimei()));
@@ -146,6 +152,7 @@ public class NinteiChosaIraiHandler {
             waritsukeZumi.setValue(new Decimal(business.getWaritsukesumiKensu()));
             row.setWaritsukeZumi(waritsukeZumi);
             row.setChosainShikaku(nullToEmpty(business.getChosainShikaku()));
+            row.setChosaKanoNinzuPerMonth(new RString(String.valueOf(business.getChosaKanoNinzuPerMonth())));
             row.setHokenshaCode(nullToEmpty(selectRow.getHokenshaCode()));
             row.setHokenshaName(nullToEmpty(selectRow.getHokenshaName()));
             dataSource.add(row);
@@ -201,9 +208,52 @@ public class NinteiChosaIraiHandler {
 
             row.setZenkaiShujiiIryoKikan(nullToEmpty(business.getTemp_jigyoshaMeisho()));
             row.setZenkaiShujii(nullToEmpty(business.getTemp_iryoKikanMeisho()));
+            row.setShinseishoKanriNo(nullToEmpty(business.getShinseishoKanriNo()));
+            row.setNinteichosaIraiRirekiNo(new RString(String.valueOf(business.getNinteichosaIraiRirekiNo())));
+            row.setKoroshoIfShikibetsuCode(
+                    business.getKoroshoIfShikibetsuCode() == null ? RString.EMPTY : business.getKoroshoIfShikibetsuCode().value());
             dataSource.add(row);
         }
         div.getDgMiwaritsukeShinseishaIchiran().setDataSource(dataSource);
+    }
+
+    /**
+     * 未割付申請者一覧Gridに割付済み申請者を設定します。
+     *
+     * @param waritsukeZumiShinseishaIchiranRow 割付済み申請者
+     */
+    public void set未割付申請者一覧(dgWaritsukeZumiShinseishaIchiran_Row waritsukeZumiShinseishaIchiranRow) {
+        dgMiwaritsukeShinseishaIchiran_Row row = new dgMiwaritsukeShinseishaIchiran_Row();
+        RString jotai = waritsukeZumiShinseishaIchiranRow.getJotai();
+        if (MIWARITSUKE.equals(jotai)) {
+            row.setJotai(jotai);
+        } else {
+            row.setJotai(WARITSUKE_ZUMI);
+        }
+
+        row.setHihokenshaNo(waritsukeZumiShinseishaIchiranRow.getHihokenshaNo());
+        row.setHihokenshaShimei(waritsukeZumiShinseishaIchiranRow.getHihokenshaShimei());
+        row.setSeibetsu(waritsukeZumiShinseishaIchiranRow.getSeibetsu());
+        row.setNinteiShinseiDay(waritsukeZumiShinseishaIchiranRow.getNinteiShinseiDay());
+        row.setShinseiKubunShinseiji(waritsukeZumiShinseishaIchiranRow.getShinseiKubunShinseiji());
+        row.setChiku(waritsukeZumiShinseishaIchiranRow.getChiku());
+        row.setZenkaiChosaItakusaki(waritsukeZumiShinseishaIchiranRow.getZenkaiChosaItakusaki());
+        row.setZenkaiNinteiChosainShimei(waritsukeZumiShinseishaIchiranRow.getZenkaiChosain());
+        row.setHokensha(waritsukeZumiShinseishaIchiranRow.getHokensha());
+        row.setChosaKubun(waritsukeZumiShinseishaIchiranRow.getChosaKubun());
+        row.setJusho(waritsukeZumiShinseishaIchiranRow.getJusho());
+        row.setShujiiIryoKikan(waritsukeZumiShinseishaIchiranRow.getShujiIryoKikan());
+        row.setShujii(waritsukeZumiShinseishaIchiranRow.getShujii());
+        row.setZenkaiShujiiIryoKikan(waritsukeZumiShinseishaIchiranRow.getZenkaiShujiIryoKikan());
+        row.setZenkaiShujii(waritsukeZumiShinseishaIchiranRow.getZenkaiShujii());
+        row.setChosaIraiDay(waritsukeZumiShinseishaIchiranRow.getChosaIraiDay());
+        row.setIraishoShutsuryokuDay(waritsukeZumiShinseishaIchiranRow.getIraishoShutsuryokuDay());
+        row.setChosahyoNadoShutsuryookuDay(waritsukeZumiShinseishaIchiranRow.getChosahyoNadoShutsuryookuDay());
+        row.setNinteichosaKanryoYMD(waritsukeZumiShinseishaIchiranRow.getNinteichosaKanryoYMD());
+        row.setShinseishoKanriNo(waritsukeZumiShinseishaIchiranRow.getShinseishoKanriNo());
+        row.setNinteichosaIraiRirekiNo(waritsukeZumiShinseishaIchiranRow.getNinteichosaIraiRirekiNo());
+        row.setKoroshoIfShikibetsuCode(waritsukeZumiShinseishaIchiranRow.getKoroshoIfShikibetsuCode());
+        div.getDgMiwaritsukeShinseishaIchiran().getDataSource().add(row);
     }
 
     /**
@@ -262,14 +312,66 @@ public class NinteiChosaIraiHandler {
             row.setZenkaiShujiIryoKikan(nullToEmpty(business.getTemp_jigyoshaMeisho()));
             row.setZenkaiShujii(nullToEmpty(business.getTemp_iryoKikanMeisho()));
             TextBoxDate iraishoShutsuryokuDay = new TextBoxDate();
-            iraishoShutsuryokuDay.setValue(new RDate(business.getIraishoShutsuryokuYMD().toString()));
+            if (business.getIraishoShutsuryokuYMD() != null) {
+                iraishoShutsuryokuDay.setValue(new RDate(business.getIraishoShutsuryokuYMD().toString()));
+            }
+
             row.setIraishoShutsuryokuDay(iraishoShutsuryokuDay);
             TextBoxDate chosahyoNadoShutsuryookuDay = new TextBoxDate();
-            chosahyoNadoShutsuryookuDay.setValue(new RDate(business.getChosahyoTouShutsuryokuYMD().toString()));
+            if (business.getChosahyoTouShutsuryokuYMD() != null) {
+                chosahyoNadoShutsuryookuDay.setValue(new RDate(business.getChosahyoTouShutsuryokuYMD().toString()));
+            }
+
             row.setChosahyoNadoShutsuryookuDay(chosahyoNadoShutsuryookuDay);
+            if (business.getNinteichosaKanryoYMD() != null) {
+                row.setNinteichosaKanryoYMD(new RString(business.getNinteichosaKanryoYMD().toString()));
+            }
+            row.setShinseishoKanriNo(nullToEmpty(business.getShinseishoKanriNo()));
+            row.setNinteichosaIraiRirekiNo(new RString(String.valueOf(business.getNinteichosaIraiRirekiNo())));
+            row.setKoroshoIfShikibetsuCode(
+                    business.getKoroshoIfShikibetsuCode() == null ? RString.EMPTY : business.getKoroshoIfShikibetsuCode().value());
             dataSource.add(row);
         }
         div.getDgWaritsukeZumiShinseishaIchiran().setDataSource(dataSource);
+        div.getTxtChosaIraiDay().setValue(RDate.getNowDate());
+    }
+
+    /**
+     * 割付済み申請者一覧Gridに検索結果を設定します。
+     *
+     * @param miwaritsukeShinseishaIchiranRow 未割付申請者
+     */
+    public void set割付済み申請者一覧(dgMiwaritsukeShinseishaIchiran_Row miwaritsukeShinseishaIchiranRow) {
+        dgWaritsukeZumiShinseishaIchiran_Row row = new dgWaritsukeZumiShinseishaIchiran_Row();
+        RString jotai = miwaritsukeShinseishaIchiranRow.getJotai();
+        if (WARITSUKE_ZUMI.equals(jotai)) {
+            row.setJotai(jotai);
+        } else {
+            row.setJotai(MIWARITSUKE);
+        }
+        row.setHihokenshaNo(miwaritsukeShinseishaIchiranRow.getHihokenshaNo());
+        row.setHihokenshaShimei(miwaritsukeShinseishaIchiranRow.getHihokenshaShimei());
+        row.setSeibetsu(miwaritsukeShinseishaIchiranRow.getSeibetsu());
+        row.setNinteiShinseiDay(miwaritsukeShinseishaIchiranRow.getNinteiShinseiDay());
+        row.setShinseiKubunShinseiji(miwaritsukeShinseishaIchiranRow.getShinseiKubunShinseiji());
+        row.setChiku(miwaritsukeShinseishaIchiranRow.getChiku());
+        row.setZenkaiChosaItakusaki(miwaritsukeShinseishaIchiranRow.getZenkaiChosaItakusaki());
+        row.setZenkaiChosain(miwaritsukeShinseishaIchiranRow.getZenkaiNinteiChosainShimei());
+        row.setChosaIraiDay(miwaritsukeShinseishaIchiranRow.getChosaIraiDay());
+        row.setChosaKubun(miwaritsukeShinseishaIchiranRow.getChosaKubun());
+        row.setHokensha(miwaritsukeShinseishaIchiranRow.getHokensha());
+        row.setJusho(miwaritsukeShinseishaIchiranRow.getJusho());
+        row.setShujiIryoKikan(miwaritsukeShinseishaIchiranRow.getShujiiIryoKikan());
+        row.setShujii(miwaritsukeShinseishaIchiranRow.getShujii());
+        row.setZenkaiShujiIryoKikan(miwaritsukeShinseishaIchiranRow.getZenkaiShujiiIryoKikan());
+        row.setZenkaiShujii(miwaritsukeShinseishaIchiranRow.getZenkaiShujii());
+        row.setIraishoShutsuryokuDay(miwaritsukeShinseishaIchiranRow.getIraishoShutsuryokuDay());
+        row.setChosahyoNadoShutsuryookuDay(miwaritsukeShinseishaIchiranRow.getChosahyoNadoShutsuryookuDay());
+        row.setNinteichosaKanryoYMD(miwaritsukeShinseishaIchiranRow.getNinteichosaKanryoYMD());
+        row.setShinseishoKanriNo(miwaritsukeShinseishaIchiranRow.getShinseishoKanriNo());
+        row.setNinteichosaIraiRirekiNo(miwaritsukeShinseishaIchiranRow.getNinteichosaIraiRirekiNo());
+        row.setKoroshoIfShikibetsuCode(miwaritsukeShinseishaIchiranRow.getKoroshoIfShikibetsuCode());
+        div.getDgWaritsukeZumiShinseishaIchiran().getDataSource().add(row);
     }
 
     /**
@@ -298,6 +400,30 @@ public class NinteiChosaIraiHandler {
     }
 
     /**
+     * 割付済み申請者一覧Gridと未割付申請者一覧Gridの項番を設定します。
+     *
+     */
+    public void initIndex() {
+
+        List<dgMiwaritsukeShinseishaIchiran_Row> dgMiwaritsukeShinseishaIchiran = div.getDgMiwaritsukeShinseishaIchiran().getDataSource();
+
+        int i = 1;
+        for (dgMiwaritsukeShinseishaIchiran_Row row : dgMiwaritsukeShinseishaIchiran) {
+            row.setNo(new RString(String.valueOf(i++)));
+        }
+        div.getDgMiwaritsukeShinseishaIchiran().setDataSource(dgMiwaritsukeShinseishaIchiran);
+        List<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseishaIchiran = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
+
+        i = 1;
+        for (dgWaritsukeZumiShinseishaIchiran_Row row : dgWaritsukeZumiShinseishaIchiran) {
+            TextBoxNum num = new TextBoxNum();
+            num.setValue(new Decimal(i++));
+            row.setNo(num);
+        }
+        div.getDgWaritsukeZumiShinseishaIchiran().setDataSource(dgWaritsukeZumiShinseishaIchiran);
+    }
+
+    /**
      * 委託先基本情報に非活用/活用を設定します。
      *
      * @param disabled (true:非活用,false:活用)
@@ -309,6 +435,145 @@ public class NinteiChosaIraiHandler {
         div.getTxtChosainCode().setDisabled(disabled);
         div.getTxtChosainShimei().setDisabled(disabled);
         div.getTxtChosainChiku().setDisabled(disabled);
+    }
+
+    /**
+     * 編集内容判断処理です。
+     *
+     * @return 判断結果（編集内容があるの場合:true、編集内容がなしの場合：false）
+     */
+    public boolean isUpdate() {
+        boolean isUpdate = false;
+        List<dgMiwaritsukeShinseishaIchiran_Row> dgMiwaritsukeShinseishaIchiran = div.getDgMiwaritsukeShinseishaIchiran().getDataSource();
+        for (dgMiwaritsukeShinseishaIchiran_Row miwaritsukeShinseishaIchiran_Row : dgMiwaritsukeShinseishaIchiran) {
+            if (!RString.EMPTY.equals(miwaritsukeShinseishaIchiran_Row.getJotai())) {
+                isUpdate = true;
+                break;
+            }
+        }
+        List<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseishaIchiran = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
+        for (dgWaritsukeZumiShinseishaIchiran_Row waritsukeZumiShinseishaIchiran_Row : dgWaritsukeZumiShinseishaIchiran) {
+            if (!RString.EMPTY.equals(waritsukeZumiShinseishaIchiran_Row.getJotai())) {
+                isUpdate = true;
+                break;
+            }
+        }
+        return isUpdate;
+    }
+
+    /**
+     * 編集内容判断処理です。
+     *
+     * @return 判断結果（編集内容があるの場合:true、編集内容がなしの場合：false）
+     */
+    public boolean isUpdateForHozon() {
+        boolean isUpdate = false;
+        List<dgMiwaritsukeShinseishaIchiran_Row> dgMiwaritsukeShinseishaIchiran = div.getDgMiwaritsukeShinseishaIchiran().getDataSource();
+        for (dgMiwaritsukeShinseishaIchiran_Row miwaritsukeShinseishaIchiran_Row : dgMiwaritsukeShinseishaIchiran) {
+            if (WARITSUKE_ZUMI.equals(miwaritsukeShinseishaIchiran_Row.getJotai())) {
+                isUpdate = true;
+                break;
+            }
+        }
+        List<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseishaIchiran = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
+        for (dgWaritsukeZumiShinseishaIchiran_Row waritsukeZumiShinseishaIchiran_Row : dgWaritsukeZumiShinseishaIchiran) {
+            if (MIWARITSUKE.equals(waritsukeZumiShinseishaIchiran_Row.getJotai())) {
+                isUpdate = true;
+                break;
+            }
+        }
+        return isUpdate;
+    }
+
+    /**
+     * 割付済み人数を取得します。
+     *
+     * @return 割付済み人数
+     */
+    public int get既存割付済み人数() {
+        List<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseishaIchiran = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
+        int count = 0;
+        for (dgWaritsukeZumiShinseishaIchiran_Row waritsukeZumiShinseishaIchiran_Row : dgWaritsukeZumiShinseishaIchiran) {
+            RString jotai = waritsukeZumiShinseishaIchiran_Row.getJotai();
+            if (RString.EMPTY.equals(jotai) || WARITSUKE_ZUMI.equals(jotai)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * 印刷条件DIVの初期化処理です。
+     *
+     */
+    public void init印刷条件DIV() {
+        RString 認定調査期限設定方法 = BusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, SubGyomuCode.DBE認定支援);
+        if (設定方法.equals(認定調査期限設定方法)) {
+            div.getRadkigen().setDisabled(false);
+        } else {
+            div.getRadkigen().setDisabled(true);
+        }
+        RDate nowDate = RDate.getNowDate();
+        div.getTxthokkoymd().setValue(nowDate);
+        div.getTxtkigenymd().setValue(nowDate);
+    }
+
+    public void create認定調査依頼書印刷用パラメータ() {
+        ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                MIWARITSUKE,
+                設定方法,
+                MIWARITSUKE,
+                MIWARITSUKE,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                MIWARITSUKE,
+                設定方法,
+                MIWARITSUKE,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法,
+                設定方法);
     }
 
     private RString nullToEmpty(RString obj) {

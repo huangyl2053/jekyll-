@@ -36,5 +36,5 @@ public class NinnteiChousairaiEntity {
     private RString seibetsu;
     private RString chikuCode;
     private RString chosainShikaku;
-
+    private int chosaKanoNinzuPerMonth;
 }
