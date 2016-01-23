@@ -40,5 +40,11 @@
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzService</artifactId>
+            <version>1.5.1</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

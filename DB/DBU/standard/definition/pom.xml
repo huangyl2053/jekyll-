@@ -61,5 +61,11 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxDefinition</artifactId>
+            <version>1.2.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

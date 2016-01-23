@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -17,6 +18,7 @@ public final class DbT7067ChohyoSeigyoHanyoEntityGenerator {
 
     public static final SubGyomuCode DEFAULT_サブ業務コード = new SubGyomuCode("DBZ");
     public static final ReportId DEFAULT_帳票分類ID = new ReportId("0000000001");
+    public static final FlexibleYear DEFAULT_管理年度 = new FlexibleYear("2016");
     public static final RString DEFAULT_項目名 = new RString("Data");
     public static final RString DEFAULT_設定値 = new RString("Data");
     public static final RString DEFAULT_説明 = new RString("Data");
@@ -34,6 +36,7 @@ public final class DbT7067ChohyoSeigyoHanyoEntityGenerator {
         DbT7067ChohyoSeigyoHanyoEntity entity = new DbT7067ChohyoSeigyoHanyoEntity();
         entity.setSubGyomuCode(DEFAULT_サブ業務コード);
         entity.setChohyoBunruiID(DEFAULT_帳票分類ID);
+        entity.setKanriNendo(DEFAULT_管理年度);
         entity.setKomokuName(DEFAULT_項目名);
         entity.setKomokuValue(DEFAULT_設定値);
         entity.setKomokuSetsumei(DEFAULT_説明);

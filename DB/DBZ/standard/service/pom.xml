@@ -73,5 +73,11 @@
             <artifactId>DbxService</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxPersistence</artifactId>
+            <version>1.2.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

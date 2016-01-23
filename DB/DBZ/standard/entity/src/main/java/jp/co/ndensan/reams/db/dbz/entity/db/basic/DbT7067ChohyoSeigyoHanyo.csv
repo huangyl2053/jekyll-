@@ -1,5 +1,6 @@
 ﻿subGyomuCode,UDD055SubGyomuCode,SubGyomuCode,,,,,サブ業務コード,A
 chohyoBunruiID,UDD032ReportId,ReportId,,,,,帳票分類ID,A
+kanriNendo,UDD012YSeireki,FlexibleYear,,,,,管理年度,A
 komokuName,text,RString,,,,,項目名,A
 komokuValue,text,RString,,,,,設定値,A
 komokuSetsumei,text,RString,,,,,説明,A
