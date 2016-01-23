@@ -59,17 +59,17 @@ public class ShinsakaiKaisaiKekkaHandler {
             div.getTxtYoteiStartTime().setValue(RTime.parse(business.get予定開始時間()));
             div.getTxtYoteiEndTime().setValue(RTime.parse(business.get予定終了時間()));
             div.getTxtKaisaiBi().setValue(business.get開催日());
-            if (div.getTxtKaisaiBi().getValue() == null || div.getTxtKaisaiBi().getValue().isEmpty()) {
-                div.setModel(new RString("新規モード"));
-            } else {
-                div.setModel(new RString("更新モード"));
-            }
             div.getTxtKaisaiStartTime().setValue(strToTime(business.get開催開始時間()));
             div.getTxtKaisaiEndTime().setValue(strToTime(business.get開催終了時間()));
             div.getTxtShoyoTime().setValue(new RString(String.valueOf(business.get所要時間())));
 //TODO 開催会場
 //        div.getDdlKaisaiBasho().getDataSource();
 //        div.getDdlKaisaiBasho().setSelectedKey(business.get開催会場());
+        }
+        if (div.getTxtKaisaiBi().getValue() == null || div.getTxtKaisaiBi().getValue().isEmpty()) {
+            div.setModel(new RString("新規モード"));
+        } else {
+            div.setModel(new RString("更新モード"));
         }
     }
 
