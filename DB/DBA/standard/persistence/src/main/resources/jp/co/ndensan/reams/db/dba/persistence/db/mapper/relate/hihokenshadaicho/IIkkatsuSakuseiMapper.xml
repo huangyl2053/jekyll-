@@ -23,10 +23,10 @@
         DbT1001."dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD",
         DbT1001."dbT1001HihokenshaDaicho_hihokennshaKubunCode",
         DbT1001."dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode",
-        <if test = "chushutsuFlag == '0'">
+        <if test = "!chushutsuFlag">
             NULL  AS "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
         </if>
-        <if test = "chushutsuFlag == '1'">
+        <if test = "chushutsuFlag">
             "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
         </if>      
         DbT1001."dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD",

@@ -16,8 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 public final class HihokenshaDaichoIkkatsuSakusei {
 
-    private final RString 資格喪失者抽出フラグ;
-    private final RString 出力フラグ;
+    private final boolean 資格喪失者抽出フラグ;
+    private final boolean 出力フラグ;
     private final RString 出力順ID;
 
     /**
@@ -28,7 +28,7 @@ public final class HihokenshaDaichoIkkatsuSakusei {
      * @param 出力順ID 出力順ID
      *
      */
-    private HihokenshaDaichoIkkatsuSakusei(RString 資格喪失者抽出フラグ, RString 出力フラグ, RString 出力順ID) {
+    private HihokenshaDaichoIkkatsuSakusei(boolean 資格喪失者抽出フラグ, boolean 出力フラグ, RString 出力順ID) {
         this.資格喪失者抽出フラグ = 資格喪失者抽出フラグ;
         this.出力フラグ = 出力フラグ;
         this.出力順ID = 出力順ID;
@@ -44,8 +44,8 @@ public final class HihokenshaDaichoIkkatsuSakusei {
      *
      * @return IkkatsuSakuseiBatchParameter
      */
-    public static IkkatsuSakuseiBatchParameter createHihokenshaDaichoBatchParameter(RString 資格喪失者抽出フラグ,
-            RString 出力フラグ,
+    public static IkkatsuSakuseiBatchParameter createHihokenshaDaichoBatchParameter(boolean 資格喪失者抽出フラグ,
+            boolean 出力フラグ,
             RString 出力順ID) {
         return new IkkatsuSakuseiBatchParameter(資格喪失者抽出フラグ, 出力フラグ, 出力順ID);
     }

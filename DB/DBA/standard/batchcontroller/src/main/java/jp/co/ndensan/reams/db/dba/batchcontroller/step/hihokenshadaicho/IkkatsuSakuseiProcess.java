@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.gyosekukaku.IGyoseiKukaku;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -66,7 +67,6 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
     private static final Code SHICHOSONCODE_211 = new Code("211");
     private static final RString NYUSHOSHISETSUSHURUI_11 = new RString("11");
     private static final RString TELEPHONENOTITLE = new RString("連絡先");
-    private static final RString 発行する = new RString("1");
     private IkkatsuSusakuseiProcessParameter processPrm;
     private IkkatsuSakuseiMybatisParameter mybatisPrm;
     private IIkkatsuSakuseiMapper iIkkatsuSakuseiMapper;
@@ -81,7 +81,7 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID);
+        return new BatchDbReader(MYBATIS_SELECT_ID, mybatisPrm);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
         sort帳票データ();
         List<HihokenshaDaichoSakuseiEntity> 被保険者台帳EntityList = HihokenshaDaichoSakuseiManager.
                 createInstance().getHihokenshaDaichoHenshu(被保険者EntityList);
-        if (発行する.equals(processPrm.getShutsuryokuFlag())) {
+        if (processPrm.isShutsuryokuFlag()) {
             HihokenshaDaichoIchiranHyoFinder.createInstance().getChohyoIchiran(processPrm.getShutsuryokujunId(), 被保険者台帳EntityList);
         }
     }
@@ -109,7 +109,7 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
     private void get帳票データ() {
         for (HihokenshaEntity hihokenshaEntity : 被保険者EntityList) {
             IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
-                    createSelectByKeyParam(mybatisPrm.getChushutsuFlag(), mybatisPrm.getShichosonCode(), hihokenshaEntity.getShikibetsuCode(),
+                    createSelectByKeyParam(mybatisPrm.isChushutsuFlag(), mybatisPrm.getShichosonCode(), hihokenshaEntity.getShikibetsuCode(),
                             mybatisPrm.getPsmShikibetsuTaisho());
             hihokenshaEntity.setDbT1001HihokenshaDaichoEntityList(iIkkatsuSakuseiMapper.get被保険者台帳管理情報(mybatisParameter));
             hihokenshaEntity.setShisetsuNyutaishoEntityList(iIkkatsuSakuseiMapper.get生活保護受給者(mybatisParameter));
@@ -146,7 +146,7 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
         被保険者Entity.setChikucodeTitle3(iGyoseiKukaku.getChiku3().get名称());
         被保険者Entity.setChikuCode3(iGyoseiKukaku.getChiku3().getコード());
         被保険者Entity.setJushoTitle(JUSHO_TITLE);
-        被保険者Entity.setJusho(new RString(shikibetsuTaisho.get住所().toString()));
+        被保険者Entity.setJusho(shikibetsuTaisho.get住所().get住所());
         被保険者Entity.setZenkokuJushoCode(iKojin.get住所().get全国住所コード());
         被保険者Entity.setGyoseikuTitle(GYOSEIKU_TITLE);
         被保険者Entity.setGyoseikuCode(iGyoseiKukaku.getGyoseiku().getコード());
@@ -158,7 +158,7 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
         if (get入所施設(entity) != null) {
             被保険者Entity.setJigyoshaNo(get入所施設(entity).getJigyoshaNo());
             if (NYUSHOSHISETSUSHURUI_11.equals(get入所施設(entity).getNyushoShisetsuShurui())) {
-                被保険者Entity.setJigyoshaMeisho(new AtenaMeisho(get入所施設(entity).getJigyoshaName().toString()));
+                被保険者Entity.setJigyoshaMeisho(new AtenaMeisho(get入所施設(entity).getJigyoshaName().value()));
             }
             被保険者Entity.setJigyoshaMeisho(new AtenaMeisho(get入所施設(entity).getJigyoshaMeisho()));
         }
@@ -173,7 +173,7 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
     private RString get市町村名称(DbT1001HihokenshaDaichoEntity entity) {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
-                createSelectByKeyParam(mybatisPrm.getChushutsuFlag(), entity.getShichosonCode(), mybatisPrm.getShikibetsuCode(),
+                createSelectByKeyParam(mybatisPrm.isChushutsuFlag(), entity.getShichosonCode(), mybatisPrm.getShikibetsuCode(),
                         mybatisPrm.getPsmShikibetsuTaisho());
         RString shichosonMeisho = RString.EMPTY;
         Code 導入形態コード = shichosonSecurityJoho.get導入形態コード();
@@ -198,7 +198,7 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
             state = STATE_適用除外者;
         } else if (SHIKAKUSOSHITSUJIYUCODE_05.equals(資格喪失事由コード)) {
             state = STATE_他市町村住所地特例者;
-        } else if (RString.EMPTY.equals(資格喪失事由コード)) {
+        } else if (資格喪失事由コード == null) {
             state = STATE_資格取得者;
         } else {
             state = STATE_資格喪失者;
@@ -209,17 +209,21 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
     private UaFt200FindShikibetsuTaishoEntity get宛名識別対象取得(DbT1001HihokenshaDaichoEntity entity) {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        //TODO  段站立　QA553　住民種別が設定必要の確認
+        List<JuminShubetsu> juminShubetsu = new ArrayList<>();
+        juminShubetsu.add(JuminShubetsu.外国人);
+        key.set住民種別(juminShubetsu);
         key.set識別コード(entity.getShikibetsuCode());
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
-                createSelectByKeyParam(mybatisPrm.getChushutsuFlag(), mybatisPrm.getShichosonCode(), mybatisPrm.getShikibetsuCode(),
+                createSelectByKeyParam(mybatisPrm.isChushutsuFlag(), mybatisPrm.getShichosonCode(), mybatisPrm.getShikibetsuCode(),
                         new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
         return iIkkatsuSakuseiMapper.get識別対象(mybatisParameter);
     }
 
     private ShisetsuNyutaishoEntity get入所施設(DbT1001HihokenshaDaichoEntity entity) {
         IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
-                createSelectByKeyParam(mybatisPrm.getChushutsuFlag(), mybatisPrm.getShichosonCode(), entity.getShikibetsuCode(),
+                createSelectByKeyParam(mybatisPrm.isChushutsuFlag(), mybatisPrm.getShichosonCode(), entity.getShikibetsuCode(),
                         mybatisPrm.getPsmShikibetsuTaisho());
         ShisetsuNyutaishoEntity 入所施設Entity = iIkkatsuSakuseiMapper.get入所施設(mybatisParameter);
         return 入所施設Entity;
@@ -227,7 +231,7 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
 
     private DbT1008IryohokenKanyuJokyoEntity get医療保険(DbT1001HihokenshaDaichoEntity entity) {
         IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
-                createSelectByKeyParam(mybatisPrm.getChushutsuFlag(), mybatisPrm.getShichosonCode(), entity.getShikibetsuCode(),
+                createSelectByKeyParam(mybatisPrm.isChushutsuFlag(), mybatisPrm.getShichosonCode(), entity.getShikibetsuCode(),
                         mybatisPrm.getPsmShikibetsuTaisho());
         return iIkkatsuSakuseiMapper.get介護保険医療保険加入状況(mybatisParameter);
     }

@@ -24,9 +24,9 @@ public class IkkatsuSakuseiBatchParameter extends BatchParameterBase {
     private static final String KEY_SHUTSURYOKUJUN_ID = "shutsuryokujunId";
 
     @BatchParameter(key = KEY_CHUSHUTSUFLAG, name = "資格喪失者抽出フラグ")
-    private RString chushutsuFlag;
+    private boolean chushutsuFlag;
     @BatchParameter(key = KEY_SHUTSURYOKUFLAG, name = "出力フラグ")
-    private RString shutsuryokuFlag;
+    private boolean shutsuryokuFlag;
     @BatchParameter(key = KEY_SHUTSURYOKUJUN_ID, name = "出力順ID")
     private RString shutsuryokujunId;
 
@@ -38,8 +38,8 @@ public class IkkatsuSakuseiBatchParameter extends BatchParameterBase {
      * @param shutsuryokujunId 出力順ID
      *
      */
-    public IkkatsuSakuseiBatchParameter(RString chushutsuFlag,
-            RString shutsuryokuFlag,
+    public IkkatsuSakuseiBatchParameter(boolean chushutsuFlag,
+            boolean shutsuryokuFlag,
             RString shutsuryokujunId) {
         this.chushutsuFlag = chushutsuFlag;
         this.shutsuryokuFlag = shutsuryokuFlag;

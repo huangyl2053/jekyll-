@@ -21,8 +21,8 @@ import lombok.Setter;
 @Setter
 public class IkkatsuSusakuseiProcessParameter implements IBatchProcessParameter {
 
-    private RString chushutsuFlag;
-    private RString shutsuryokuFlag;
+    private boolean chushutsuFlag;
+    private boolean shutsuryokuFlag;
     private RString shutsuryokujunId;
     private LasdecCode shichosonCode;
     private ShikibetsuCode shikibetsuCode;
@@ -35,8 +35,8 @@ public class IkkatsuSusakuseiProcessParameter implements IBatchProcessParameter 
      * @param 出力フラグ 出力フラグ
      * @param 出力順ID 出力順ID
      */
-    public IkkatsuSusakuseiProcessParameter(RString 資格喪失者抽出フラグ,
-            RString 出力フラグ,
+    public IkkatsuSusakuseiProcessParameter(boolean 資格喪失者抽出フラグ,
+            boolean 出力フラグ,
             RString 出力順ID) {
         this.chushutsuFlag = 資格喪失者抽出フラグ;
         this.shutsuryokuFlag = 出力フラグ;

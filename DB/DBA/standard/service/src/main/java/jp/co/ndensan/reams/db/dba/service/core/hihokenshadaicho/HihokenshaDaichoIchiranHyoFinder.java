@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -134,8 +135,8 @@ public class HihokenshaDaichoIchiranHyoFinder {
 
     private GyoseikuCode get行政区(HihokenshaDaichoSakuseiEntity entity) {
         GyoseikuCode 行政区;
-        if (entity.getGyoseikuCode() != null && entity.getGyoseikuCode().toString().length() >= LENGTH_50) {
-            行政区 = new GyoseikuCode(entity.getGyoseikuCode().toString().substring(0, LENGTH_50));
+        if (entity.getGyoseikuCode() != null && entity.getGyoseikuCode().value().length() >= LENGTH_50) {
+            行政区 = new GyoseikuCode(entity.getGyoseikuCode().value().substring(0, LENGTH_50));
         } else {
             行政区 = entity.getGyoseikuCode();
         }
@@ -147,16 +148,27 @@ public class HihokenshaDaichoIchiranHyoFinder {
         iIkkatsuSakuseiMapper = mapperProvider.create(IIkkatsuSakuseiMapper.class);
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        //TODO  段站立　QA553　住民種別が設定必要の確認
+        List<JuminShubetsu> juminShubetsu = new ArrayList<>();
+        juminShubetsu.add(JuminShubetsu.外国人);
+        key.set住民種別(juminShubetsu);
         key.set識別コード(entity.getShikibetsuCode());
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         IkkatsuSakuseiMybatisParameter pram = IkkatsuSakuseiMybatisParameter.
-                createSelectByKeyParam(RString.EMPTY, LasdecCode.EMPTY, ShikibetsuCode.EMPTY,
+                createSelectByKeyParam(false, LasdecCode.EMPTY, ShikibetsuCode.EMPTY,
                         new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
         return iIkkatsuSakuseiMapper.get識別対象(pram);
     }
 
     private RString get年齢(HihokenshaDaichoSakuseiEntity entity, IShikibetsuTaisho 識別対象) {
-        FlexibleDate 生年月日 = new FlexibleDate(entity.getSeinengappiYMD());
+
+        RString seinengappiYMD = entity.getSeinengappiYMD();
+        FlexibleDate 生年月日;
+        if (seinengappiYMD != null) {
+            生年月日 = new FlexibleDate(entity.getSeinengappiYMD());
+        } else {
+            生年月日 = FlexibleDate.EMPTY;
+        }
         JuminJotai 住民状態 = 識別対象.to個人().get住民状態();
         FlexibleDate 消除異動年月日;
         if (住民状態.equals(JuminJotai.死亡者)) {
@@ -174,7 +186,7 @@ public class HihokenshaDaichoIchiranHyoFinder {
         List<FlexibleDate> 受給廃止日List = entity.get生活保護情報Entity().get受給廃止日();
         RString 生保 = RString.EMPTY;
         int index = 受給開始日List.size() - 1;
-        if (受給開始日List.size() > 1 && 受給廃止日List.get(index).equals(FlexibleDate.EMPTY)) {
+        if (受給開始日List.size() > 0 && 受給廃止日List.get(index) == null) {
             生保 = MARU;
         }
         return 生保;
@@ -185,7 +197,7 @@ public class HihokenshaDaichoIchiranHyoFinder {
         List<FlexibleDate> 受給終了日List = entity.get老齢福祉情報Entity().get老齢福祉受給終了日();
         RString 老福 = RString.EMPTY;
         int index = 受給開始日List.size() - 1;
-        if (受給開始日List.size() > 1 && 受給終了日List.get(index).equals(FlexibleDate.EMPTY)) {
+        if (受給開始日List.size() > 0 && 受給終了日List.get(index) == null) {
             老福 = MARU;
         }
         return 老福;
@@ -194,9 +206,9 @@ public class HihokenshaDaichoIchiranHyoFinder {
     private RString get資格区分(HihokenshaDaichoSakuseiEntity entity) {
         RString 資格区分 = RString.EMPTY;
         RString 被保険者区分コード = 被保険者台帳管理Dac.selectByHihokenshaNo(entity.getHihokenshaNo()).getHihokennshaKubunCode();
-        if (被保険者区分コード.equals(被保険者区分コード_1)) {
+        if (被保険者区分コード_1.equals(被保険者区分コード)) {
             資格区分 = 資格区分_1号;
-        } else if (被保険者区分コード.equals(被保険者区分コード_2)) {
+        } else if (被保険者区分コード_2.equals(被保険者区分コード)) {
             資格区分 = 資格区分_2号;
         }
         return 資格区分;
