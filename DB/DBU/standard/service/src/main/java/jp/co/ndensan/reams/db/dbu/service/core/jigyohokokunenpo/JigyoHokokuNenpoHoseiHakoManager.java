@@ -92,7 +92,7 @@ public class JigyoHokokuNenpoHoseiHakoManager {
      * @return {@link InstanceProvider#create}にて生成した{@link JigyoHokokuNenpoHoseiHakoManager}のインスタンス
      */
     public static JigyoHokokuNenpoHoseiHakoManager createInstance() {
-        return new JigyoHokokuNenpoHoseiHakoManager();
+        return InstanceProvider.create(JigyoHokokuNenpoHoseiHakoManager.class);
     }
 
     /**
