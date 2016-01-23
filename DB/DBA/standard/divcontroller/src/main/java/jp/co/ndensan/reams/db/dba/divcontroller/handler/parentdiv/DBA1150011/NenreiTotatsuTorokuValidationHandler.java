@@ -33,37 +33,62 @@ public class NenreiTotatsuTorokuValidationHandler {
     /**
      * 実行するボタンを押下するとき、バリデーションチェックを行う。
      *
-     * @return バリデーション結果
+     * @return ValidationMessageControlPairs(バリデーション結果)
      */
     public ValidationMessageControlPairs validateForAction() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-
         if (div.getBatchParamterInfo().getTxtkonkaikaishi().getValue().isEmpty()
                 || div.getBatchParamterInfo().getTxtkonkaishuryo().getValue().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new IdocheckMessages(UrErrorMessages.必須, "今回開始日と終了日両方")));
+            if (div.getBatchParamterInfo().getTxtkonkaikaishi().getValue().isEmpty()) {
+                validPairs.add(new ValidationMessageControlPair(
+                        IdocheckMessages.Validate日付必須,
+                        div.getBatchParamterInfo().getTxtkonkaikaishi()));
+            } else if (div.getBatchParamterInfo().getTxtkonkaishuryo().getValue().isEmpty()) {
+                validPairs.add(new ValidationMessageControlPair(
+                        IdocheckMessages.Validate日付必須,
+                        div.getBatchParamterInfo().getTxtkonkaishuryo()));
+            } else {
+                validPairs.add(new ValidationMessageControlPair(
+                        IdocheckMessages.Validate日付必須,
+                        div.getBatchParamterInfo().getTxtkonkaikaishi()));
+            }
         } else {
             if (!div.getBatchParamterInfo().getTxtkonkaikaishi().getValue().isValid()
                     || !div.getBatchParamterInfo().getTxtkonkaishuryo().getValue().isValid()) {
                 // TODO QA415
-                validPairs.add(new ValidationMessageControlPair(
-                        new IdocheckMessages(UrErrorMessages.不正, "日付")));
-            } else {
-                if (div.getBatchParamterInfo().getTxtkonkaikaishi().getValue().isAfter(
-                        div.getBatchParamterInfo().getTxtkonkaishuryo().getValue())) {
+                if (!div.getBatchParamterInfo().getTxtkonkaikaishi().getValue().isValid()) {
                     validPairs.add(new ValidationMessageControlPair(
-                            new IdocheckMessages(DbzErrorMessages.期間が不正_未来日付不可, "開始日", "終了日")));
+                            IdocheckMessages.Validate日付不正,
+                            div.getBatchParamterInfo().getTxtkonkaikaishi()));
+                } else if (!div.getBatchParamterInfo().getTxtkonkaishuryo().getValue().isValid()) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            IdocheckMessages.Validate日付不正,
+                            div.getBatchParamterInfo().getTxtkonkaishuryo()));
+                } else {
+                    validPairs.add(new ValidationMessageControlPair(
+                            IdocheckMessages.Validate日付不正,
+                            div.getBatchParamterInfo().getTxtkonkaikaishi()));
+                }
+            } else {
+                if (div.getBatchParamterInfo().getTxtkonkaishuryo().getValue()
+                        .isBefore(div.getBatchParamterInfo().getTxtkonkaikaishi().getValue())) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            IdocheckMessages.Validate整合性,
+                            div.getBatchParamterInfo().getTxtkonkaikaishi()));
                 }
             }
         }
         return validPairs;
     }
 
-    private static class IdocheckMessages implements IValidationMessage {
+    private static enum IdocheckMessages implements IValidationMessage {
 
+        Validate日付必須(UrErrorMessages.必須, "今回開始日と終了日両方"),
+        Validate日付不正(UrErrorMessages.不正, "日付"),
+        Validate整合性(DbzErrorMessages.期間が不正_未来日付不可, "開始日", "終了日");
         private final Message message;
 
-        public IdocheckMessages(IMessageGettable message, String... replacements) {
+        private IdocheckMessages(IMessageGettable message, String... replacements) {
             this.message = message.getMessage().replace(replacements);
         }
 

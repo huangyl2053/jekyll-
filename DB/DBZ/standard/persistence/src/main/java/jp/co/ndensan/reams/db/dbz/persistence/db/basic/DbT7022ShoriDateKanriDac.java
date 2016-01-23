@@ -250,8 +250,8 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     /**
      * 処理日付管理マスタテーブルから、前回開始終了日を取得する。
      *
-     * @param サブ業務コード
-     * @param 処理名
+     * @param サブ業務コード サブ業務コード
+     * @param 処理名 処理名
      * @return DbT7022ShoriDateKanriEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
