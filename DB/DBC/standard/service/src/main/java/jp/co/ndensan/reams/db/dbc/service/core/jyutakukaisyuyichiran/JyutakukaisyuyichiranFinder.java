@@ -63,9 +63,6 @@ public class JyutakukaisyuyichiranFinder {
         List<ShokanJutakuKaishuBusiness> 住宅改修一覧 = new ArrayList<>();
         List<DbT3049ShokanJutakuKaishuEntity> entityList = dac.getJyutakukaisyuList(
                 被保険者番号, サービス提供年月, 整理番号, 様式番号);
-        if (entityList == null || entityList.isEmpty()) {
-            return SearchResult.of(住宅改修一覧, 0, false);
-        }
         for (DbT3049ShokanJutakuKaishuEntity entity : entityList) {
             住宅改修一覧.add(new ShokanJutakuKaishuBusiness(entity));
         }
