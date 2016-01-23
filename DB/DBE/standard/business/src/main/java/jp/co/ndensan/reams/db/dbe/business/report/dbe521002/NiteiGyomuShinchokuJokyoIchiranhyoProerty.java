@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
+ * 
  * {@link NiteiGyomuShinchokuJokyoIchiranhyoReport}のプロパティです。
- * @author soft863
  */
 public class NiteiGyomuShinchokuJokyoIchiranhyoProerty extends ReportPropertyBase<NiteiGyomuShinchokuJokyoIchiranhyoReportSource> {
     

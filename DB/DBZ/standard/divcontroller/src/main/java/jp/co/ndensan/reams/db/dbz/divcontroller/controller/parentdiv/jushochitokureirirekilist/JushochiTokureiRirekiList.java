@@ -46,25 +46,6 @@ public class JushochiTokureiRirekiList {
      * @return 住所地特例履歴ListDivを持つResponseData
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onSelect_dgJutoku(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
-//        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
-//        handler.setupToBeforeInput();
-//        handler.showSelectedData();
-//
-//        dgJutoku_Row clickedRow = jutokuRirekiDiv.getDgJutoku().getClickedItem();
-//        switch (clickedRow.getRowState()) {
-//            case Added:
-//            case Modified:
-//                return onSelectByModifyButton_dgJutoku(jutokuRirekiDiv);
-//            case Deleted:
-//                handler.showSelectedData();
-//                handler.setMeisaiDeleteMode();
-//                break;
-//            case Unchanged:
-//            default:
-//                handler.showSelectedData();
-//                handler.setMeisaiShokaiMode();
-//                break;
-//        }
 
         return ResponseData.of(jutokuRirekiDiv).respond();
     }
