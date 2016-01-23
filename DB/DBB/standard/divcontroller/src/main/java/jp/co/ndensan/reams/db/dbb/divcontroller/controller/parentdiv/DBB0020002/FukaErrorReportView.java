@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0020002
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
+import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvItem;
 import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvItemList;
 import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvReport;
-import jp.co.ndensan.reams.db.dbb.business.report.FukaErrorInternalReportItem;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.FukaErrorReportViewDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0020002.FukaErrorReportViewHandler;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.fukaerr.DbT2010FukaErrorListEntity;
@@ -120,7 +120,7 @@ public class FukaErrorReportView {
 
             // TODO 資格修正へ遷移する QA502
         } else {
-            FukaErrorInternalReportItem item = new FukaErrorInternalReportItem(fukaErrorList);
+            FukaErrorListCsvItem item = new FukaErrorListCsvItem(fukaErrorList);
             List<IValidationMessage> validationMessage = item.validate().getList();
             if (!validationMessage.isEmpty()) {
                 return ResponseData.of(div).addValidationMessages(setMessage(validationMessage)).respond();
@@ -142,7 +142,7 @@ public class FukaErrorReportView {
 
             // TODO 即時賦課更正へ遷移する。　画面ID：DBB8120001  QA502
         } else {
-            FukaErrorInternalReportItem item = new FukaErrorInternalReportItem(fukaErrorList);
+            FukaErrorListCsvItem item = new FukaErrorListCsvItem(fukaErrorList);
             List<IValidationMessage> validationMessage = item.validate().getList();
             if (!validationMessage.isEmpty()) {
                 return ResponseData.of(div).addValidationMessages(setMessage(validationMessage)).respond();

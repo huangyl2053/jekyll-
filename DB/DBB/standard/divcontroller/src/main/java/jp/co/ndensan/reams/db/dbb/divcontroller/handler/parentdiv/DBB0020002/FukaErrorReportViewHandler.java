@@ -128,7 +128,7 @@ public class FukaErrorReportViewHandler {
             }
             if (fukaErrorList.getエラーコード() != null) {
                 row.setErrorCode(fukaErrorList.getエラーコード().getKey());
-                row.setErrorDetail(CodeMaster.getCodeMeisho(コード種別エラーコード, fukaErrorList.getエラーコード()));
+                row.setErrorDetail(CodeMaster.getCodeRyakusho(コード種別エラーコード, fukaErrorList.getエラーコード()));
             }
             if (fukaErrorList.get被保険者番号() != null) {
                 row.setHihokenshaNo(fukaErrorList.get被保険者番号().value());

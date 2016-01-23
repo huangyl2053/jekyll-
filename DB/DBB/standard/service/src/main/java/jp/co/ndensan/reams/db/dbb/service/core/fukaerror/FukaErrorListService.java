@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
+import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvItem;
+import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvItemList;
+import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvReport;
 import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListReportCommon;
-import jp.co.ndensan.reams.db.dbb.business.report.FukaErrorInternalReport;
-import jp.co.ndensan.reams.db.dbb.business.report.FukaErrorInternalReportItem;
-import jp.co.ndensan.reams.db.dbb.business.report.FukaErrorInternalReportItemList;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.fukaerr.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2010FukaErrorListDac;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportCommon;
@@ -110,19 +110,19 @@ public class FukaErrorListService {
      * @param reportCreationDateTime リスト作成日時
      * @return 賦課エラーの情報
      */
-    public FukaErrorInternalReport getFukaErrorInternalReport(RDateTime reportCreationDateTime) {
+    public FukaErrorListCsvReport getFukaErrorInternalReport(RDateTime reportCreationDateTime) {
         List<DbT2010FukaErrorListEntity> entityList = 賦課エラー一覧dac.select賦課エラー情報リスト(reportCreationDateTime);
 
         DbT2010FukaErrorListEntity representativeEntity = getRepresentativeEntity(entityList);
         IInternalReportCommon commonInfo = getCommon(representativeEntity);
 
-        List<FukaErrorInternalReportItem> entityToBusinessList = new ArrayList<>();
+        List<FukaErrorListCsvItem> entityToBusinessList = new ArrayList<>();
         for (DbT2010FukaErrorListEntity entity : entityList) {
             FukaErrorList model = new FukaErrorList(entity);
-            entityToBusinessList.add(new FukaErrorInternalReportItem(model));
+            entityToBusinessList.add(new FukaErrorListCsvItem(model));
         }
-        FukaErrorInternalReportItemList itemList = new FukaErrorInternalReportItemList(entityToBusinessList);
-        return new FukaErrorInternalReport(commonInfo, itemList);
+        FukaErrorListCsvItemList itemList = new FukaErrorListCsvItemList(entityToBusinessList);
+        return new FukaErrorListCsvReport(commonInfo, itemList);
     }
 
     private DbT2010FukaErrorListEntity getRepresentativeEntity(List<DbT2010FukaErrorListEntity> entityList) {
