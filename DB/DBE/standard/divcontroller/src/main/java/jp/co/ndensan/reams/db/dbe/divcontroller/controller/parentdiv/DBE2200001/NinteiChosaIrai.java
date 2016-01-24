@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiKanryoJohoIdentifier
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinnteiChousairaiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinteichosaIraiJohoRelateBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.WaritsukeBusiness;
+import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadItem;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Shinsei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgch
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2200001.NinteiChosaIraiHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninnteichousairai.NinnteiChousairaiFinder;
+import jp.co.ndensan.reams.db.dbe.service.report.chosairaisho.ChosaIraishoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -50,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -406,9 +409,9 @@ public class NinteiChosaIrai {
      * 「選択した帳票を発行する」ボタンのclick処理です。
      *
      * @param div NinteiChosaIraiDiv
-     * @return ResponseData<NinteiChosaIraiDiv>
+     * @return ResponseData<SourceDataCollection>
      */
-    public ResponseData<NinteiChosaIraiDiv> onClick_BtnPrint(NinteiChosaIraiDiv div) {
+    public ResponseData<SourceDataCollection> onClick_BtnPrint(NinteiChosaIraiDiv div) {
         List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
         if (selectedItems.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace("割付済み申請者未指定ため、依頼書の印刷"));
@@ -432,7 +435,22 @@ public class NinteiChosaIrai {
         }
         // TODO 前排他制御を行う
         updateNinteichosaIraiJohoForPrint(div);
-        return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("発行処理は")).respond();
+        List<ChosaIraishoHeadItem> chosaIraishoHeadItemList = getHandler(div).create認定調査依頼書印刷用パラメータ();
+        if (div.getChkirai().getSelectedValues().contains(new RString("認定調査依頼書"))) {
+            return ResponseData.of(new ChosaIraishoPrintService().print(chosaIraishoHeadItemList.get(0)))
+                    .addMessage(UrInformationMessages.正常終了.getMessage().replace("発行処理は")).respond();
+        }
+        return ResponseData.of(new ChosaIraishoPrintService().print(chosaIraishoHeadItemList.get(0)))
+                .addMessage(UrInformationMessages.正常終了.getMessage().replace("発行処理は")).respond();
+        // TODO Temp_認定調査票(概況調査) 帳票未作成
+        // TODO Temp_認定調査票(基本調査)　帳票未作成
+        // TODO Temp_認定調査票(特記事項)　帳票未作成
+        // TODO Temp_認定調査票OCR(概況調査)　帳票未作成
+        // TODO Temp_認定調査票OCR(基本調査)　帳票未作成
+        // TODO Temp_認定調査票OCR(特記事項)　帳票未作成
+        // TODO Temp_認定調査票(特記事項)フリー様式　帳票未作成
+        // TODO Temp_認定調査票差異チェック票　帳票未作成
+
     }
 
     private void updateNinteichosaIraiJohoForPrint(NinteiChosaIraiDiv div) {

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Jan 23 12:00:20 CST 2016 
+ * Sun Jan 24 16:16:12 CST 2016 
  */
 
 
@@ -48,6 +48,21 @@ public class dgMiwaritsukeShinseishaIchiran_Row extends DataRow {
     private RString shinseishoKanriNo;
     private RString ninteichosaIraiRirekiNo;
     private RString koroshoIfShikibetsuCode;
+    private RString waritsukeTeiin;
+    private RString chosaKanoNinzuPerMonth;
+    private RString ninteichosaKigenYMD;
+    private RString hihokenshaKana;
+    private RString seinengappiYMD;
+    private RString yubinNo;
+    private RString telNo;
+    private RString homonChosasakiYubinNo;
+    private RString homonChosasakiJusho;
+    private RString homonChosasakiName;
+    private RString homonChosasakiTelNo;
+    private RString ninteiShinseiYMDKoShin;
+    private RString zenkaiNinteiYMD;
+    private RString zenYokaigoKubunCode;
+    private RString age;
 
     public dgMiwaritsukeShinseishaIchiran_Row() {
         super();
@@ -76,6 +91,21 @@ public class dgMiwaritsukeShinseishaIchiran_Row extends DataRow {
         this.shinseishoKanriNo = RString.EMPTY;
         this.ninteichosaIraiRirekiNo = RString.EMPTY;
         this.koroshoIfShikibetsuCode = RString.EMPTY;
+        this.waritsukeTeiin = RString.EMPTY;
+        this.chosaKanoNinzuPerMonth = RString.EMPTY;
+        this.ninteichosaKigenYMD = RString.EMPTY;
+        this.hihokenshaKana = RString.EMPTY;
+        this.seinengappiYMD = RString.EMPTY;
+        this.yubinNo = RString.EMPTY;
+        this.telNo = RString.EMPTY;
+        this.homonChosasakiYubinNo = RString.EMPTY;
+        this.homonChosasakiJusho = RString.EMPTY;
+        this.homonChosasakiName = RString.EMPTY;
+        this.homonChosasakiTelNo = RString.EMPTY;
+        this.ninteiShinseiYMDKoShin = RString.EMPTY;
+        this.zenkaiNinteiYMD = RString.EMPTY;
+        this.zenYokaigoKubunCode = RString.EMPTY;
+        this.age = RString.EMPTY;
         this.setOriginalData("no", no);
         this.setOriginalData("shokai", shokai);
         this.setOriginalData("jotai", jotai);
@@ -101,9 +131,24 @@ public class dgMiwaritsukeShinseishaIchiran_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("ninteichosaIraiRirekiNo", ninteichosaIraiRirekiNo);
         this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
+        this.setOriginalData("waritsukeTeiin", waritsukeTeiin);
+        this.setOriginalData("chosaKanoNinzuPerMonth", chosaKanoNinzuPerMonth);
+        this.setOriginalData("ninteichosaKigenYMD", ninteichosaKigenYMD);
+        this.setOriginalData("hihokenshaKana", hihokenshaKana);
+        this.setOriginalData("seinengappiYMD", seinengappiYMD);
+        this.setOriginalData("yubinNo", yubinNo);
+        this.setOriginalData("telNo", telNo);
+        this.setOriginalData("homonChosasakiYubinNo", homonChosasakiYubinNo);
+        this.setOriginalData("homonChosasakiJusho", homonChosasakiJusho);
+        this.setOriginalData("homonChosasakiName", homonChosasakiName);
+        this.setOriginalData("homonChosasakiTelNo", homonChosasakiTelNo);
+        this.setOriginalData("ninteiShinseiYMDKoShin", ninteiShinseiYMDKoShin);
+        this.setOriginalData("zenkaiNinteiYMD", zenkaiNinteiYMD);
+        this.setOriginalData("zenYokaigoKubunCode", zenYokaigoKubunCode);
+        this.setOriginalData("age", age);
     }
 
-    public dgMiwaritsukeShinseishaIchiran_Row(RString no, ButtonDialog shokai, RString jotai, RString hihokenshaNo, RString hihokenshaShimei, RString seibetsu, TextBoxDate ninteiShinseiDay, RString shinseiKubunShinseiji, RString chiku, RString zenkaiChosaItakusaki, RString zenkaiNinteiChosainShimei, RString hokensha, RString chosaKubun, RString jusho, RString shujiiIryoKikan, RString shujii, RString zenkaiShujiiIryoKikan, RString zenkaiShujii, RString chosaIraiDay, TextBoxDate iraishoShutsuryokuDay, TextBoxDate chosahyoNadoShutsuryookuDay, RString ninteichosaKanryoYMD, RString shinseishoKanriNo, RString ninteichosaIraiRirekiNo, RString koroshoIfShikibetsuCode) {
+    public dgMiwaritsukeShinseishaIchiran_Row(RString no, ButtonDialog shokai, RString jotai, RString hihokenshaNo, RString hihokenshaShimei, RString seibetsu, TextBoxDate ninteiShinseiDay, RString shinseiKubunShinseiji, RString chiku, RString zenkaiChosaItakusaki, RString zenkaiNinteiChosainShimei, RString hokensha, RString chosaKubun, RString jusho, RString shujiiIryoKikan, RString shujii, RString zenkaiShujiiIryoKikan, RString zenkaiShujii, RString chosaIraiDay, TextBoxDate iraishoShutsuryokuDay, TextBoxDate chosahyoNadoShutsuryookuDay, RString ninteichosaKanryoYMD, RString shinseishoKanriNo, RString ninteichosaIraiRirekiNo, RString koroshoIfShikibetsuCode, RString waritsukeTeiin, RString chosaKanoNinzuPerMonth, RString ninteichosaKigenYMD, RString hihokenshaKana, RString seinengappiYMD, RString yubinNo, RString telNo, RString homonChosasakiYubinNo, RString homonChosasakiJusho, RString homonChosasakiName, RString homonChosasakiTelNo, RString ninteiShinseiYMDKoShin, RString zenkaiNinteiYMD, RString zenYokaigoKubunCode, RString age) {
         super();
         this.setOriginalData("no", no);
         this.setOriginalData("shokai", shokai);
@@ -130,6 +175,21 @@ public class dgMiwaritsukeShinseishaIchiran_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("ninteichosaIraiRirekiNo", ninteichosaIraiRirekiNo);
         this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
+        this.setOriginalData("waritsukeTeiin", waritsukeTeiin);
+        this.setOriginalData("chosaKanoNinzuPerMonth", chosaKanoNinzuPerMonth);
+        this.setOriginalData("ninteichosaKigenYMD", ninteichosaKigenYMD);
+        this.setOriginalData("hihokenshaKana", hihokenshaKana);
+        this.setOriginalData("seinengappiYMD", seinengappiYMD);
+        this.setOriginalData("yubinNo", yubinNo);
+        this.setOriginalData("telNo", telNo);
+        this.setOriginalData("homonChosasakiYubinNo", homonChosasakiYubinNo);
+        this.setOriginalData("homonChosasakiJusho", homonChosasakiJusho);
+        this.setOriginalData("homonChosasakiName", homonChosasakiName);
+        this.setOriginalData("homonChosasakiTelNo", homonChosasakiTelNo);
+        this.setOriginalData("ninteiShinseiYMDKoShin", ninteiShinseiYMDKoShin);
+        this.setOriginalData("zenkaiNinteiYMD", zenkaiNinteiYMD);
+        this.setOriginalData("zenYokaigoKubunCode", zenYokaigoKubunCode);
+        this.setOriginalData("age", age);
         this.no = no;
         this.shokai = shokai;
         this.jotai = jotai;
@@ -155,6 +215,21 @@ public class dgMiwaritsukeShinseishaIchiran_Row extends DataRow {
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.ninteichosaIraiRirekiNo = ninteichosaIraiRirekiNo;
         this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
+        this.waritsukeTeiin = waritsukeTeiin;
+        this.chosaKanoNinzuPerMonth = chosaKanoNinzuPerMonth;
+        this.ninteichosaKigenYMD = ninteichosaKigenYMD;
+        this.hihokenshaKana = hihokenshaKana;
+        this.seinengappiYMD = seinengappiYMD;
+        this.yubinNo = yubinNo;
+        this.telNo = telNo;
+        this.homonChosasakiYubinNo = homonChosasakiYubinNo;
+        this.homonChosasakiJusho = homonChosasakiJusho;
+        this.homonChosasakiName = homonChosasakiName;
+        this.homonChosasakiTelNo = homonChosasakiTelNo;
+        this.ninteiShinseiYMDKoShin = ninteiShinseiYMDKoShin;
+        this.zenkaiNinteiYMD = zenkaiNinteiYMD;
+        this.zenYokaigoKubunCode = zenYokaigoKubunCode;
+        this.age = age;
     }
 
     public RString getNo() {
@@ -255,6 +330,66 @@ public class dgMiwaritsukeShinseishaIchiran_Row extends DataRow {
 
     public RString getKoroshoIfShikibetsuCode() {
         return koroshoIfShikibetsuCode;
+    }
+
+    public RString getWaritsukeTeiin() {
+        return waritsukeTeiin;
+    }
+
+    public RString getChosaKanoNinzuPerMonth() {
+        return chosaKanoNinzuPerMonth;
+    }
+
+    public RString getNinteichosaKigenYMD() {
+        return ninteichosaKigenYMD;
+    }
+
+    public RString getHihokenshaKana() {
+        return hihokenshaKana;
+    }
+
+    public RString getSeinengappiYMD() {
+        return seinengappiYMD;
+    }
+
+    public RString getYubinNo() {
+        return yubinNo;
+    }
+
+    public RString getTelNo() {
+        return telNo;
+    }
+
+    public RString getHomonChosasakiYubinNo() {
+        return homonChosasakiYubinNo;
+    }
+
+    public RString getHomonChosasakiJusho() {
+        return homonChosasakiJusho;
+    }
+
+    public RString getHomonChosasakiName() {
+        return homonChosasakiName;
+    }
+
+    public RString getHomonChosasakiTelNo() {
+        return homonChosasakiTelNo;
+    }
+
+    public RString getNinteiShinseiYMDKoShin() {
+        return ninteiShinseiYMDKoShin;
+    }
+
+    public RString getZenkaiNinteiYMD() {
+        return zenkaiNinteiYMD;
+    }
+
+    public RString getZenYokaigoKubunCode() {
+        return zenYokaigoKubunCode;
+    }
+
+    public RString getAge() {
+        return age;
     }
 
     public void setNo(RString no) {
@@ -380,6 +515,81 @@ public class dgMiwaritsukeShinseishaIchiran_Row extends DataRow {
     public void setKoroshoIfShikibetsuCode(RString koroshoIfShikibetsuCode) {
         this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
         this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
+    }
+
+    public void setWaritsukeTeiin(RString waritsukeTeiin) {
+        this.setOriginalData("waritsukeTeiin", waritsukeTeiin);
+        this.waritsukeTeiin = waritsukeTeiin;
+    }
+
+    public void setChosaKanoNinzuPerMonth(RString chosaKanoNinzuPerMonth) {
+        this.setOriginalData("chosaKanoNinzuPerMonth", chosaKanoNinzuPerMonth);
+        this.chosaKanoNinzuPerMonth = chosaKanoNinzuPerMonth;
+    }
+
+    public void setNinteichosaKigenYMD(RString ninteichosaKigenYMD) {
+        this.setOriginalData("ninteichosaKigenYMD", ninteichosaKigenYMD);
+        this.ninteichosaKigenYMD = ninteichosaKigenYMD;
+    }
+
+    public void setHihokenshaKana(RString hihokenshaKana) {
+        this.setOriginalData("hihokenshaKana", hihokenshaKana);
+        this.hihokenshaKana = hihokenshaKana;
+    }
+
+    public void setSeinengappiYMD(RString seinengappiYMD) {
+        this.setOriginalData("seinengappiYMD", seinengappiYMD);
+        this.seinengappiYMD = seinengappiYMD;
+    }
+
+    public void setYubinNo(RString yubinNo) {
+        this.setOriginalData("yubinNo", yubinNo);
+        this.yubinNo = yubinNo;
+    }
+
+    public void setTelNo(RString telNo) {
+        this.setOriginalData("telNo", telNo);
+        this.telNo = telNo;
+    }
+
+    public void setHomonChosasakiYubinNo(RString homonChosasakiYubinNo) {
+        this.setOriginalData("homonChosasakiYubinNo", homonChosasakiYubinNo);
+        this.homonChosasakiYubinNo = homonChosasakiYubinNo;
+    }
+
+    public void setHomonChosasakiJusho(RString homonChosasakiJusho) {
+        this.setOriginalData("homonChosasakiJusho", homonChosasakiJusho);
+        this.homonChosasakiJusho = homonChosasakiJusho;
+    }
+
+    public void setHomonChosasakiName(RString homonChosasakiName) {
+        this.setOriginalData("homonChosasakiName", homonChosasakiName);
+        this.homonChosasakiName = homonChosasakiName;
+    }
+
+    public void setHomonChosasakiTelNo(RString homonChosasakiTelNo) {
+        this.setOriginalData("homonChosasakiTelNo", homonChosasakiTelNo);
+        this.homonChosasakiTelNo = homonChosasakiTelNo;
+    }
+
+    public void setNinteiShinseiYMDKoShin(RString ninteiShinseiYMDKoShin) {
+        this.setOriginalData("ninteiShinseiYMDKoShin", ninteiShinseiYMDKoShin);
+        this.ninteiShinseiYMDKoShin = ninteiShinseiYMDKoShin;
+    }
+
+    public void setZenkaiNinteiYMD(RString zenkaiNinteiYMD) {
+        this.setOriginalData("zenkaiNinteiYMD", zenkaiNinteiYMD);
+        this.zenkaiNinteiYMD = zenkaiNinteiYMD;
+    }
+
+    public void setZenYokaigoKubunCode(RString zenYokaigoKubunCode) {
+        this.setOriginalData("zenYokaigoKubunCode", zenYokaigoKubunCode);
+        this.zenYokaigoKubunCode = zenYokaigoKubunCode;
+    }
+
+    public void setAge(RString age) {
+        this.setOriginalData("age", age);
+        this.age = age;
     }
 
     // </editor-fold>
