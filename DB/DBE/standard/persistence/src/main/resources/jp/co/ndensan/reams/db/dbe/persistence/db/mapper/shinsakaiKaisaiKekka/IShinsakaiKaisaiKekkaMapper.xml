@@ -98,10 +98,10 @@
         ,DbT5511ShinsakaiKaisaiKekkaJoho.*
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.noDeleted_DbT5501ShinsakaiKaisaiYoteiJoho" />) AS DbT5501ShinsakaiKaisaiYoteiJoho
-        LEFT JOIN
+        INNER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5503ShinsakaiWariateIinJohoMapper.noDeleted_DbT5503ShinsakaiWariateIinJoho" />) AS DbT5503ShinsakaiWariateIinJoho
         ON DbT5503ShinsakaiWariateIinJoho."dbT5503ShinsakaiWariateIinJoho_shinsakaiKaisaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo"
-        INNER JOIN
+        LEFT JOIN
         (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5511ShinsakaiKaisaiKekkaJohoMapper.noDeleted_DbT5511ShinsakaiKaisaiKekkaJoho" />) AS DbT5511ShinsakaiKaisaiKekkaJoho
         ON DbT5511ShinsakaiKaisaiKekkaJoho."dbT5511ShinsakaiKaisaiKekkaJoho_shinsakaiKaisaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo"
         <where>
