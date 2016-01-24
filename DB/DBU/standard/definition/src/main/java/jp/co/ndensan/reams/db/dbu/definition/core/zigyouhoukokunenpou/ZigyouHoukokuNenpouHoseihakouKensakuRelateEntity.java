@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbu.entity.db.relate.zigyouhoukokunenpou;
+package jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -8,8 +8,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @lombok.Setter
-@lombok.AllArgsConstructor
-@lombok.NoArgsConstructor
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity implements Serializable {
 
