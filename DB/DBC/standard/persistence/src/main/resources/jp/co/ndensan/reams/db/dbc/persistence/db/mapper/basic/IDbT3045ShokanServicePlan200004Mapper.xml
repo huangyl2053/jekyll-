@@ -39,7 +39,7 @@
 
 
     <!--ビューDbT3045ShokanServicePlan200004の項目をDbT3045ShokanServicePlan200004Entityの項目にマッピングします。-->
-    <resultMap id="resultMap_DbT3045ShokanServicePlan200004Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004Entity" autoMapping="true">
+    <resultMap id="resultMap_DbT3045ShokanServicePlan200004Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3045ShokanServicePlan200004Entity" autoMapping="true">
         <id property="hiHokenshaNo" column="dbT3046ShokanServicePlan200604_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="serviceTeikyoYM" column="dbT3046ShokanServicePlan200604_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="seiriNo" column="dbT3046ShokanServicePlan200604_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
