@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu;
+package jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
