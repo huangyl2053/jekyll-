@@ -8,16 +8,16 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinseiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払支給申請を管理するクラスです。
@@ -34,26 +34,21 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
      * @param 被保険者番号 被保険者番号
      * @param サービス提供年月 サービス提供年月
      * @param 整理番号 整理番号
-     * @param 履歴番号 履歴番号
      */
     public ShokanShinsei(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
-            RString 整理番号,
-            Decimal 履歴番号) {
+            RString 整理番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3034ShokanShinseiEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
         this.entity.setSeiriNo(整理番号);
-        this.entity.setRirekiNo(履歴番号);
         this.id = new ShokanShinseiIdentifier(
                 被保険者番号,
                 サービス提供年月,
-                整理番号,
-                履歴番号
+                整理番号
         );
     }
 
@@ -68,8 +63,7 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
         this.id = new ShokanShinseiIdentifier(
                 entity.getHiHokenshaNo(),
                 entity.getServiceTeikyoYM(),
-                entity.getSeiriNo(),
-                entity.getRirekiNo());
+                entity.getSeiriNo());
     }
 
     /**
@@ -112,15 +106,6 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
      */
     public RString get整理番号() {
         return entity.getSeiriNo();
-    }
-
-    /**
-     * 履歴番号を返します。
-     *
-     * @return 履歴番号
-     */
-    public Decimal get履歴番号() {
-        return entity.getRirekiNo();
     }
 
     /**
@@ -193,24 +178,6 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
      */
     public RString get申請者住所() {
         return entity.getShinseishaAddress();
-    }
-
-    /**
-     * 申請者電話番号を返します。
-     *
-     * @return 申請者電話番号
-     */
-    public RString get申請者電話番号() {
-        return entity.getShinseishaTelNo();
-    }
-
-    /**
-     * 申請事業者コードを返します。
-     *
-     * @return 申請事業者コード
-     */
-    public RString get申請事業者コード() {
-        return entity.getShinseiJigyoshaCode();
     }
 
     /**
@@ -301,15 +268,6 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
      */
     public FlexibleDate get支払期間終了年月日() {
         return entity.getShiharaiShuryoYMD();
-    }
-
-    /**
-     * 閉庁内容を返します。
-     *
-     * @return 閉庁内容
-     */
-    public RString get閉庁内容() {
-        return entity.getHeichoNaiyo();
     }
 
     /**
