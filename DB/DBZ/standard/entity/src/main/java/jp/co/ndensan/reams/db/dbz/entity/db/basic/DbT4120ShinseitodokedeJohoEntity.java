@@ -298,14 +298,13 @@ public class DbT4120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT4120S
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo);
     }
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT4120ShinseitodokedeJohoEntity entity) {
