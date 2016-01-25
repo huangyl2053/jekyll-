@@ -232,7 +232,7 @@
             ShujiiJoho1."telNo" AS "ShujiiJoho1_telNo",		
             ShujiiIryoKikanJoho3."iryoKikanMeisho" AS "ShujiiIryoKikanJoho4_iryoKikanMeisho",		
             ShujiiJoho2."shujiiName" AS "ShujiiJoho2_shujiiName",		
-            ShujiiJoho2."shujiiName" AS "ShujiiJoho2_shujiiName",		
+            ShujiiJoho2."telNo" AS "ShujiiJoho2_telNo",		
             DbT5105Nintei."ninteiShinseiJohoTorokuKanryoYMD" AS "DbT5105Nintei_ninteiShinseiJohoTorokuKanryoYMD",		
             NinteiKanryoJoho1."ninteiShinseiJohoTorokuKanryoYMD" AS "NinteiKanryoJoho1_ninteiShinseiJohoTorokuKanryoYMD",	
             NinteiKanryoJoho2."ninteiShinseiJohoTorokuKanryoYMD" AS "NinteiKanryoJoho2_ninteiShinseiJohoTorokuKanryoYMD",	

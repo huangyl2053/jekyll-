@@ -361,7 +361,7 @@ public class ShujiiMaster {
         div.getShujiiIchiran().setDisabled(true);
         RString 主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
         if (主治医医療機関コード != null && !主治医医療機関コード.isEmpty()) {
-            return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_医療機関登録から遷移);
+            return ResponseData.of(div).setState(DBE9020001StateName.主治医登録_医療機関登録から遷移);
         }
         
         return ResponseData.of(div).respond();

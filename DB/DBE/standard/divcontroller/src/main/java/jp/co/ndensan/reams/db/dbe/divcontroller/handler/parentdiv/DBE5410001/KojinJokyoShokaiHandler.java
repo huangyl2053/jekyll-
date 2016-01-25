@@ -281,7 +281,7 @@ public class KojinJokyoShokaiHandler {
         jokyohyoEntity.setKonnkai_19(new RString(kojinJokyoShokaiList.get(0).get今回審査会割当完了年月日().toString()));
         jokyohyoEntity.setZennkai_19(new RString(kojinJokyoShokaiList.get(0).get前回審査会割当完了年月日().toString()));
         jokyohyoEntity.setZennnoma_19(new RString(kojinJokyoShokaiList.get(0).get前々回審査会割当完了年月日().toString()));
-        jokyohyoEntity.setKonnkai_20(new RString(kojinJokyoShokaiList.get(0).get今回審査会割当完了年月日().toString()));
+        jokyohyoEntity.setKonnkai_20(new RString(kojinJokyoShokaiList.get(0).get今回審査会完了年月日().toString()));
         jokyohyoEntity.setZennkai_20(new RString(kojinJokyoShokaiList.get(0).get前回審査会完了年月日().toString()));
         jokyohyoEntity.setZennnoma_20(new RString(kojinJokyoShokaiList.get(0).get前々回審査会完了年月日().toString()));
         jokyohyoEntity.setKonnkai_21(new RString(kojinJokyoShokaiList.get(0).get今回センター送信予定年月日().toString()));
