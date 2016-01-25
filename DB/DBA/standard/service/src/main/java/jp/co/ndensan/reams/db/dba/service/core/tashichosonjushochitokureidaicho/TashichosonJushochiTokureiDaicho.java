@@ -266,6 +266,7 @@ public class TashichosonJushochiTokureiDaicho {
         他市町村住所地特例者情報.set適用年月日(otherAddressInfFromDBEntity.get適用年月日());
         他市町村住所地特例者情報.set郵便番号(otherAddressInfFromDBEntity.get郵便番号());
         他市町村住所地特例者情報.set電話番号(otherAddressInfFromDBEntity.get電話番号());
+        他市町村住所地特例者情報.set他被保番号(otherAddressInfFromDBEntity.get措置被保険者番号());
     }
 
     /**
