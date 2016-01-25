@@ -7,19 +7,20 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 
 /**
  * 償還払請求福祉用具販売費テーブルのエンティティクラスです。
  */
 public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<DbT3048ShokanFukushiYoguHanbaihiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3048ShokanFukushiYoguHanbaihi");
@@ -43,9 +44,9 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
     @PrimaryKey
     private RString yoshikiNo;
     @PrimaryKey
-    private RString junjiNo;
+    private RString meisaiNo;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private RString renban;
     private ServiceCode serviceCode;
     private FlexibleDate fukushiYoguHanbaiYMD;
     private RString fukushiYoguShohinName;
@@ -116,7 +117,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
      *
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
@@ -134,7 +135,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
      *
      * @param serviceTeikyoYM サービス提供年月
      */
-    public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
+    public void setServiceTeikyoYM(@Nonnull FlexibleYearMonth serviceTeikyoYM) {
         this.serviceTeikyoYM = serviceTeikyoYM;
     }
 
@@ -152,7 +153,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
      *
      * @param seiriNo 整理番号
      */
-    public void setSeiriNo(RString seiriNo) {
+    public void setSeiriNo(@Nonnull RString seiriNo) {
         this.seiriNo = seiriNo;
     }
 
@@ -170,7 +171,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
      *
      * @param jigyoshaNo 事業者番号
      */
-    public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(@Nonnull JigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
@@ -188,48 +189,48 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
      *
      * @param yoshikiNo 様式番号
      */
-    public void setYoshikiNo(RString yoshikiNo) {
+    public void setYoshikiNo(@Nonnull RString yoshikiNo) {
         this.yoshikiNo = yoshikiNo;
     }
 
     /**
-     * 順次番号のgetメソッドです。
+     * 明細番号のgetメソッドです。
      * <br/>
      * <br/>複数レコード対応のため
      *
-     * @return 順次番号
+     * @return 明細番号
      */
-    public RString getJunjiNo() {
-        return junjiNo;
+    public RString getMeisaiNo() {
+        return meisaiNo;
     }
 
     /**
-     * 順次番号のsetメソッドです。
+     * 明細番号のsetメソッドです。
      * <br/>
      * <br/>複数レコード対応のため
      *
-     * @param junjiNo 順次番号
+     * @param meisaiNo 明細番号
      */
-    public void setJunjiNo(RString junjiNo) {
-        this.junjiNo = junjiNo;
+    public void setMeisaiNo(@Nonnull RString meisaiNo) {
+        this.meisaiNo = meisaiNo;
     }
 
     /**
-     * 履歴番号のgetメソッドです。
+     * 連番のgetメソッドです。
      *
-     * @return 履歴番号
+     * @return 連番
      */
-    public Decimal getRirekiNo() {
-        return rirekiNo;
+    public RString getRenban() {
+        return renban;
     }
 
     /**
-     * 履歴番号のsetメソッドです。
+     * 連番のsetメソッドです。
      *
-     * @param rirekiNo 履歴番号
+     * @param renban 連番
      */
-    public void setRirekiNo(Decimal rirekiNo) {
-        this.rirekiNo = rirekiNo;
+    public void setRenban(@Nonnull RString renban) {
+        this.renban = renban;
     }
 
     /**
@@ -237,6 +238,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
      *
      * @return サービスコード
      */
+    @CheckForNull
     public ServiceCode getServiceCode() {
         return serviceCode;
     }
@@ -255,6 +257,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
      *
      * @return 福祉用具販売年月日
      */
+    @CheckForNull
     public FlexibleDate getFukushiYoguHanbaiYMD() {
         return fukushiYoguHanbaiYMD;
     }
@@ -273,6 +276,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
      *
      * @return 福祉用具商品名
      */
+    @CheckForNull
     public RString getFukushiYoguShohinName() {
         return fukushiYoguShohinName;
     }
@@ -291,6 +295,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
      *
      * @return 福祉用具種目コード
      */
+    @CheckForNull
     public RString getFukushiYoguShumokuCode() {
         return fukushiYoguShumokuCode;
     }
@@ -309,6 +314,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
      *
      * @return 福祉用具製造事業者名
      */
+    @CheckForNull
     public RString getFukushiYoguSeizoJigyoshaName() {
         return fukushiYoguSeizoJigyoshaName;
     }
@@ -327,6 +333,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
      *
      * @return 福祉用具販売事業者名
      */
+    @CheckForNull
     public RString getFukushiYoguHanbaiJigyoshaName() {
         return fukushiYoguHanbaiJigyoshaName;
     }
@@ -345,6 +352,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
      *
      * @return 購入金額
      */
+    @CheckForNull
     public int getKounyuKingaku() {
         return kounyuKingaku;
     }
@@ -363,6 +371,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
      *
      * @return 品目コード
      */
+    @CheckForNull
     public RString getHinmokuCode() {
         return hinmokuCode;
     }
@@ -381,6 +390,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
      *
      * @return 審査方法区分コード
      */
+    @CheckForNull
     public RString getShinsaHohoKubunCode() {
         return shinsaHohoKubunCode;
     }
@@ -399,6 +409,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
      *
      * @return 差額金額
      */
+    @CheckForNull
     public int getSagakuKingaku() {
         return sagakuKingaku;
     }
@@ -439,10 +450,10 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
         if (!Objects.equals(this.yoshikiNo, other.yoshikiNo)) {
             return false;
         }
-        if (!Objects.equals(this.junjiNo, other.junjiNo)) {
+        if (!Objects.equals(this.meisaiNo, other.meisaiNo)) {
             return false;
         }
-        if (this.rirekiNo != other.rirekiNo) {
+        if (!Objects.equals(this.renban, other.renban)) {
             return false;
         }
         return true;
@@ -458,8 +469,8 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
         this.seiriNo = entity.seiriNo;
         this.jigyoshaNo = entity.jigyoshaNo;
         this.yoshikiNo = entity.yoshikiNo;
-        this.junjiNo = entity.junjiNo;
-        this.rirekiNo = entity.rirekiNo;
+        this.meisaiNo = entity.meisaiNo;
+        this.renban = entity.renban;
         this.serviceCode = entity.serviceCode;
         this.fukushiYoguHanbaiYMD = entity.fukushiYoguHanbaiYMD;
         this.fukushiYoguShohinName = entity.fukushiYoguShohinName;
@@ -479,7 +490,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiEntity extends DbTableEntityBase<Db
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, jigyoshaNo, yoshikiNo, junjiNo, rirekiNo, serviceCode, fukushiYoguHanbaiYMD, fukushiYoguShohinName, fukushiYoguShumokuCode, fukushiYoguSeizoJigyoshaName, fukushiYoguHanbaiJigyoshaName, kounyuKingaku, hinmokuCode, shinsaHohoKubunCode, sagakuKingaku);
+        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, jigyoshaNo, yoshikiNo, meisaiNo, renban, serviceCode, fukushiYoguHanbaiYMD, fukushiYoguShohinName, fukushiYoguShumokuCode, fukushiYoguSeizoJigyoshaName, fukushiYoguHanbaiJigyoshaName, kounyuKingaku, hinmokuCode, shinsaHohoKubunCode, sagakuKingaku);
     }
 
 // </editor-fold>

@@ -11,4 +11,4 @@ ikenshoBettoShinryohi,int4,int,,,,,主治医意見書別途診療費,A
 ikenshoHoshu,int4,int,,,,,主治医意見書報酬,A
 hoshuShiharaiYMD,UDD015YMD,FlexibleDate,,,,,主治医意見書報酬支払年月日,A
 hoshuShiharaiMemo,text,RString,,,,,主治医意見書報酬支払メモ,A
-ginkoFurikomiShutsuryokuFlag,bool,boolean,,,,,銀行振込出力フラグ,A
+ginkoFurikomiShutsuryokuFlag,bool,boolean,,,,,銀行振込出力済フラグ,A

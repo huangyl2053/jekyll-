@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT3017KyufujissekiKihon implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -60,7 +60,7 @@ public enum DbT3017KyufujissekiKihon implements IColumnDefinition {
     /**
      * 証記載保険者番号
      */
-    hokenshaNo(2147483647, 0),
+    shokisaiHokenshaNo(2147483647, 0),
     /**
      * 被保険者番号
      */

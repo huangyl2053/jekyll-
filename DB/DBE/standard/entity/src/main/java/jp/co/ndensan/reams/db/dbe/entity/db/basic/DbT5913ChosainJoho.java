@@ -7,7 +7,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbT5913ChosainJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
     /**
      * insertDantaiCd
      */
@@ -48,11 +47,11 @@ public enum DbT5913ChosainJoho implements IColumnDefinition {
      * 認定調査委託先コード
      * <br/>認定調査委託先情報
      */
-    ninteichosaItakusakiCode(10, 0),
+    ninteiChosaItakusakiCode(10, 0),
     /**
      * 認定調査員コード
      */
-    ninteiChosainNo(8, 0),
+    ninteiChosainCode(8, 0),
     /**
      * 調査員氏名
      */
@@ -116,7 +115,7 @@ public enum DbT5913ChosainJoho implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -125,7 +124,7 @@ public enum DbT5913ChosainJoho implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

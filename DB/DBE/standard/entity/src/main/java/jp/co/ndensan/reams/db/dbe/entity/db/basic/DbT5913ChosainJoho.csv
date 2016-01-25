@@ -1,6 +1,6 @@
 ﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
-ninteichosaItakusakiCode,varchar,RString,,,,,認定調査委託先コード,A
-ninteiChosainNo,varchar,RString,,,,,認定調査員コード,A
+ninteiChosaItakusakiCode,varchar,RString,,,,,認定調査委託先コード,A
+ninteiChosainCode,varchar,RString,,,,,認定調査員コード,A
 chosainShimei,varchar,RString,,,,,調査員氏名,A
 chosainKanaShimei,varchar,RString,,,,,調査員氏名カナ,A
 seibetsu,bpchar,RString,,,,,性別,A
