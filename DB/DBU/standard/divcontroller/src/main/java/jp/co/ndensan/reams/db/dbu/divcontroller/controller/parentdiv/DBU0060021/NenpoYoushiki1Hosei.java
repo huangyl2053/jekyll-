@@ -65,14 +65,14 @@ public class NenpoYoushiki1Hosei {
         param.set補正フラグ(補正フラグ);
 
         List<JigyoHokokuTokeiData> jigyoHokokuTokeiDataList = JigyoHokokuNenpoHoseiHakoManager.createInstance()
-                .getJigyoHokokuNenpoDetal(new SearchJigyoHokokuNenpo
-                        (new FlexibleYear(param.get画面報告年度()),
+                .getJigyoHokokuNenpoDetal(new SearchJigyoHokokuNenpo(new FlexibleYear(param.get画面報告年度()),
                                 new FlexibleYear(param.get画面集計年度()),
                                 new LasdecCode(param.get選択した市町村コード()),
                                 param.get事業報告年報補正表示のコード(),
                                 Code.EMPTY)).records();
         if (jigyoHokokuTokeiDataList.isEmpty()) {
-            // TODO 上記取得データが0件の場合、エラーメッセージを表示して、「OK」をクリックすれば、検索画面に遷移する 
+            // TODO「OK」をクリックすれば、検索画面に遷移する 
+            return ResponseData.of(div).forwardWithEventName(DBU0130011TransitionEventName.対象者検索に戻る).respond();
         }
         Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> jigyoHokokuTokeiData = Models.create(jigyoHokokuTokeiDataList);
         ViewStateHolder.put(ViewStateKeys.開催場所情報一覧, jigyoHokokuTokeiData);
