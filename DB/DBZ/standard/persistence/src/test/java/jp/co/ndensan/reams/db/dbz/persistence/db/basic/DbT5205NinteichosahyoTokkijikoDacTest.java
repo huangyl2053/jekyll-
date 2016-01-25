@@ -312,14 +312,14 @@ public class DbT5205NinteichosahyoTokkijikoDacTest extends DbzTestDacBase {
                 ShinseishoKanriNo 申請書管理番号,
                 int 認定調査依頼履歴番号,
                 RString 認定調査特記事項番号,
-                RString 認定調査特記事項連番,
+                int 認定調査特記事項連番,
                 RString DEFAULT_特記事項テキスト_イメージ区分,
                 Code 原本マスク区分) {
             DbT5205NinteichosahyoTokkijikoEntity entity = DbT5205NinteichosahyoTokkijikoEntityGenerator.createDbT5205NinteichosahyoTokkijikoEntity();
             entity.setShinseishoKanriNo(申請書管理番号);
             entity.setNinteichosaRirekiNo(認定調査依頼履歴番号);
             entity.setNinteichosaTokkijikoNo(認定調査特記事項番号);
-            entity.setNinteichosaTokkijikoRenban(認定調査特記事項連番);
+            entity.setNinteichosaTokkijikoRemban(認定調査特記事項連番);
             entity.setTokkijikoTextImageKubun(DEFAULT_特記事項テキスト_イメージ区分);
             entity.setGenponMaskKubun(原本マスク区分);
             sut.save(entity);
