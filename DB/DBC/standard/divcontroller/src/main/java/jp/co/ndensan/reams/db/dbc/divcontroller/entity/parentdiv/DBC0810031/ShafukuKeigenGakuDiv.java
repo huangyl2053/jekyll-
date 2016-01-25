@@ -7,19 +7,16 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810031;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoatenainfo.IKaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoatenainfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShafukuKeigenGaku のクラスファイル
- *
+ * ShafukuKeigenGaku のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ShafukuKeigenGakuDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,8 +25,6 @@ public class ShafukuKeigenGakuDiv extends Panel {
      */
     @JsonProperty("panelCcd")
     private panelCcdDiv panelCcd;
-    @JsonProperty("ccdKaigoAtenaInfo")
-    private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
     @JsonProperty("panelHead")
     private panelHeadDiv panelHead;
     @JsonProperty("panelShafukukenngengaku")
@@ -57,15 +52,6 @@ public class ShafukuKeigenGakuDiv extends Panel {
     @JsonProperty("panelCcd")
     public void setPanelCcd(panelCcdDiv panelCcd) {
         this.panelCcd = panelCcd;
-    }
-
-    /*
-     * getccdKaigoAtenaInfo
-     * @return ccdKaigoAtenaInfo
-     */
-    @JsonProperty("ccdKaigoAtenaInfo")
-    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
-        return ccdKaigoAtenaInfo;
     }
 
     /*
@@ -113,7 +99,7 @@ public class ShafukuKeigenGakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgdShafukukeigenngaku(DataGrid<dgdShafukukeigenngaku_Row> dgdShafukukeigenngaku) {
+    public void  setDgdShafukukeigenngaku(DataGrid<dgdShafukukeigenngaku_Row> dgdShafukukeigenngaku) {
         this.getPanelShafukukenngengaku().setDgdShafukukeigenngaku(dgdShafukukeigenngaku);
     }
 
@@ -123,7 +109,7 @@ public class ShafukuKeigenGakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setPanelShakaiFukushiShokai(panelShakaiFukushiShokaiDiv panelShakaiFukushiShokai) {
+    public void  setPanelShakaiFukushiShokai(panelShakaiFukushiShokaiDiv panelShakaiFukushiShokai) {
         this.getPanelShafukukenngengaku().setPanelShakaiFukushiShokai(panelShakaiFukushiShokai);
     }
 
@@ -133,7 +119,7 @@ public class ShafukuKeigenGakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtServiceShurui(TextBox txtServiceShurui) {
+    public void  setTxtServiceShurui(TextBox txtServiceShurui) {
         this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setTxtServiceShurui(txtServiceShurui);
     }
 
@@ -143,7 +129,7 @@ public class ShafukuKeigenGakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKengenritsu(TextBoxNum txtKengenritsu) {
+    public void  setTxtKengenritsu(TextBoxNum txtKengenritsu) {
         this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setTxtKengenritsu(txtKengenritsu);
     }
 
@@ -153,7 +139,7 @@ public class ShafukuKeigenGakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtRiyoshaFutangakuTotal(TextBoxNum txtRiyoshaFutangakuTotal) {
+    public void  setTxtRiyoshaFutangakuTotal(TextBoxNum txtRiyoshaFutangakuTotal) {
         this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setTxtRiyoshaFutangakuTotal(txtRiyoshaFutangakuTotal);
     }
 
@@ -163,7 +149,7 @@ public class ShafukuKeigenGakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKengengaku(TextBoxNum txtKengengaku) {
+    public void  setTxtKengengaku(TextBoxNum txtKengengaku) {
         this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setTxtKengengaku(txtKengengaku);
     }
 
@@ -173,7 +159,7 @@ public class ShafukuKeigenGakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKeigengoRiyoshaFutangaku(TextBoxNum txtKeigengoRiyoshaFutangaku) {
+    public void  setTxtKeigengoRiyoshaFutangaku(TextBoxNum txtKeigengoRiyoshaFutangaku) {
         this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setTxtKeigengoRiyoshaFutangaku(txtKeigengoRiyoshaFutangaku);
     }
 
@@ -183,7 +169,7 @@ public class ShafukuKeigenGakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtBikou(TextBox txtBikou) {
+    public void  setTxtBikou(TextBox txtBikou) {
         this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setTxtBikou(txtBikou);
     }
 
@@ -193,7 +179,7 @@ public class ShafukuKeigenGakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnClose(Button btnClose) {
+    public void  setBtnClose(Button btnClose) {
         this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setBtnClose(btnClose);
     }
 

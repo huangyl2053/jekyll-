@@ -6,11 +6,18 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.dbc0810031;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.shafukukeigengaku.ShafukuKeigenGakuRealtEntity;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810031.ShafukuKeigenGakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810031.ShafukuKeigenGakuHandler;
-import jp.co.ndensan.reams.db.dbc.service.core.relate.shafukukeigengaku.ShafukuKeigenGakuFinder;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuEntity;
+import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -25,9 +32,37 @@ public class ShafukuKeigenGaku {
      * @return response
      */
     public ResponseData<ShafukuKeigenGakuDiv> onLoad(ShafukuKeigenGakuDiv div) {
+        // TODO 引き継ぎデータの取得
+        ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("123456"));
+        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(new RString("200405"));
+        HihokenshaNo 被保険者番号 = new HihokenshaNo("1");
+        RString 整理番号 = new RString("123456");
+        JigyoshaNo 事業者番号 = new JigyoshaNo("2");
+        RString 様式番号 = new RString("2345");
+        RString 申請日 = new RString("20151124");
+        RString 明細番号 = new RString("3456");
+        RString 証明書 = new RString("証明書");
+        // KaigoAtenaInfo  「介護宛名情報」共有子Divの初期化
+//        div.getPanelCcd().getCcdKaigoAtenaInfo().load(識別コード);
+        // KaigoShikakuKihon 「介護資格系基本情報」共有子Div の初期化(这个entity中的load方法没写)
+        if (!被保険者番号.isEmpty()) {
+//            div.getPanelCcd().getCcdKaigoShikakuKihon().load(LasdecCode.EMPTY, 識別コード);
+        } else {
+            div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
+        }
+        
         div.getPanelShakaiFukushiShokai().setVisible(false);
-        List<ShafukuKeigenGakuRealtEntity> shafukuKeigenGakuList = ShafukuKeigenGakuFinder.createInstance().getAll();
-        getHandler(div).initialize(shafukuKeigenGakuList);
+        // TODO 调用别人用的business里面的方法；
+        List<ShokanShakaiFukushiHojinKeigengakuEntity> ShokanShakaiFukushiHojinKeigengakuuList 
+                = ShokanbaraiJyokyoShokai.createInstance().getSeikyuShakaifukushiHoujinKeigengaku(
+                        被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, 様式番号);
+        if (null == ShokanShakaiFukushiHojinKeigengakuuList || 0 == ShokanShakaiFukushiHojinKeigengakuuList.size()) {
+                    throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        }
+        getHandler(div).initialize(ShokanShakaiFukushiHojinKeigengakuuList);
+        // 调用别人用的business里面的方法；
+//        ShikibetsuNoKanri shikibetsuNoKanri = business.getShikibetsubangoKanri(entity.getサービス年月(), 様式番号);
+        getHandler(div).setボタン表示制御処理();
         return ResponseData.of(div).respond();
     }
 
@@ -170,6 +205,10 @@ public class ShafukuKeigenGaku {
     public ResponseData<ShafukuKeigenGakuDiv> onClick_selectButton(ShafukuKeigenGakuDiv div) {
         div.getPanelShakaiFukushiShokai().setVisible(true);
         getHandler(div).selectButton();
+        return ResponseData.of(div).respond();
+    }
+    
+    public ResponseData<ShafukuKeigenGakuDiv> onClick_backButton(ShafukuKeigenGakuDiv div) {
         return ResponseData.of(div).respond();
     }
 
