@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1130011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.KaigoChohyoShutsuryokujun.KaigoChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class IdochekkurisutoDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -166,7 +166,7 @@ public class IdochekkurisutoDiv extends Panel {
     }
 
     @JsonIgnore
-    public KaigoChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
+    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
         return this.getBatchParamterInfo().getCcdChohyoShutsuryokujun();
     }
 

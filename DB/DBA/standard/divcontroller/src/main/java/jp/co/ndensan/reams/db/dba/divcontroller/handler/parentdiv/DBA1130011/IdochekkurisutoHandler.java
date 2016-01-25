@@ -69,7 +69,7 @@ public class IdochekkurisutoHandler {
         div.getChktaishodaicho().setSelectedItemsByKey(items);
         div.getTxtzenkaikaishi().setDisabled(true);
         div.getTxtzenkaishuryo().setDisabled(true);
-        div.getCcdChohyoShutsuryokujun().loadChohyoMode(SubGyomuCode.DBA介護資格, new ReportId(REPORT_ID_DBA200006));
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, new ReportId(REPORT_ID_DBA200006));
     }
 
 }

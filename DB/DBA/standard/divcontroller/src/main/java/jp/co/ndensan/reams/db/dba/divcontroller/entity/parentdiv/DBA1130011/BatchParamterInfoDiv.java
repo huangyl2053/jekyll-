@@ -4,20 +4,19 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1130011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.KaigoChohyoShutsuryokujun.KaigoChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
 /**
- * BatchParamterInfo のクラスファイル
- *
+ * BatchParamterInfo のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class BatchParamterInfoDiv extends PanelBatchParameter {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -47,7 +46,7 @@ public class BatchParamterInfoDiv extends PanelBatchParameter {
     @JsonProperty("txtkonkaishuryo")
     private TextBoxFlexibleDate txtkonkaishuryo;
     @JsonProperty("ccdChohyoShutsuryokujun")
-    private KaigoChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
+    private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -258,7 +257,7 @@ public class BatchParamterInfoDiv extends PanelBatchParameter {
      * @return ccdChohyoShutsuryokujun
      */
     @JsonProperty("ccdChohyoShutsuryokujun")
-    public KaigoChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
+    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
         return ccdChohyoShutsuryokujun;
     }
 

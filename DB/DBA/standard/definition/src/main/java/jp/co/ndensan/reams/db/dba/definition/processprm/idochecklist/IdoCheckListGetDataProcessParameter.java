@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dba.definition.processprm.idochecklist;
 
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.idochecklist.IdoCheckListGetDataParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -55,6 +58,12 @@ public class IdoCheckListGetDataProcessParameter implements IBatchProcessParamet
     }
 
     public IdoCheckListGetDataParameter toIdoCheckListGetDataParameter() {
-        return IdoCheckListGetDataParameter.createIdoCheckListGetDataParameter(konkaiKaishi, konkaiShuryo, RString.HALF_SPACE);
+        return IdoCheckListGetDataParameter.createIdoCheckListGetDataParameter(
+                konkaiKaishi,
+                konkaiShuryo,
+                RString.HALF_SPACE,
+                ShikibetsuCode.EMPTY,
+                GyomuCode.EMPTY,
+                FlexibleDate.EMPTY);
     }
 }

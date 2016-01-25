@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1130011.Ido
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1130011.IdochekkurisutoValidationHandler;
 import jp.co.ndensan.reams.db.dba.service.core.idochecklist.IdoCheckListFinder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 異動チェックリストのコントローラです。
@@ -40,41 +41,49 @@ public class Idochekkurisuto {
     }
 
     /**
+     * 「実行する」を押下場合、入力チェックを実行します。
+     *
+     * @param div 異動チェックリストDIV
+     * @return ResponseData<IdochekkurisutoDiv>
+     */
+    public ResponseData<IdochekkurisutoDiv> onBefore_BatchRegister(IdochekkurisutoDiv div) {
+
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(getValidationHandler(div).checkKashiAfterShuryoMsg());
+        validationMessages.add(getValidationHandler(div).checkRequiredKashiShuryoMsg());
+
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「実行する」を押下場合、バッチを起動します。
      *
      * @param div 異動チェックリストDIV
      * @return ResponseData<IdochekkurisutoDiv>
      */
-    public ResponseData<IdochekkurisutoDiv> onClick_BatchRegister(IdochekkurisutoDiv div) {
-
-        if (div.getTxtkonkaishuryo().getValue().isBefore(div.getTxtkonkaikaishi().getValue())) {
-            return ResponseData.of(div).addValidationMessages(getValidationHandler().getKashiAfterShuryoMsg()).respond();
-        }
-
-        if (div.getTxtkonkaishuryo().getValue().isEmpty()
-                && div.getTxtkonkaikaishi().getValue().isEmpty()) {
-            return ResponseData.of(div).addValidationMessages(getValidationHandler().getRequiredKashiShuryoMsg()).respond();
-        }
-
+    public ResponseData<IdoCheckListBatchParameter> onClick_BatchRegister(IdochekkurisutoDiv div) {
         IdoCheckListParameter param = IdoCheckListParameter.createIdoCheckListParameter(
                 div.getTxtzenkaikaishi().getValue(),
                 div.getTxtzenkaishuryo().getValue(),
                 div.getTxtkonkaikaishi().getValue(),
                 div.getTxtkonkaishuryo().getValue(),
                 div.getChktaishodaicho().getSelectedKeys(),
-                div.getCcdChohyoShutsuryokujun().getCcdChohyoShutsuryokujun().get出力順ID(),
+                div.getCcdChohyoShutsuryokujun().get出力順ID(),
                 div.getChktaishodaicho().isAllSelected());
 
         IdoCheckListBatchParameter batchParam = service.getIdoCheckListBatchParameter(param);
 
-        return ResponseData.of(div).respond();
+        return ResponseData.of(batchParam).respond();
     }
 
     private IdochekkurisutoHandler getHandler(IdochekkurisutoDiv div) {
         return new IdochekkurisutoHandler(div);
     }
 
-    private IdochekkurisutoValidationHandler getValidationHandler() {
-        return new IdochekkurisutoValidationHandler();
+    private IdochekkurisutoValidationHandler getValidationHandler(IdochekkurisutoDiv div) {
+        return new IdochekkurisutoValidationHandler(div);
     }
 }

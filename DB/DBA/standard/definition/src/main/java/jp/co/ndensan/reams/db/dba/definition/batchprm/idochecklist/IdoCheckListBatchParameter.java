@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.definition.batchprm.idochecklist;
 
 import jp.co.ndensan.reams.db.dba.definition.processprm.idochecklist.IdoCheckListGetDataProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.processprm.idochecklist.UpdShoriDataKanriProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -30,7 +31,6 @@ public class IdoCheckListBatchParameter extends BatchParameterBase {
     private static final String KEY_SEIKATSUHOGO_FLAG = "seikatsuHogoFlag";
     private static final String KEY_ROREI_FUKUSHI_NENKIN_FLAG = "roreiFukushiNenkinFlag";
     private static final String KEY_SHUTURYOKU_JUN_ID = "shuturyokuJunId";
-//    private static final String KEY_IDOCHECKLIST = "idocheckList";
 
     @BatchParameter(key = KEY_ZENKAI_KAISHI, name = "前回開始日時")
     private RDateTime zenkaiKaishi;
@@ -52,13 +52,16 @@ public class IdoCheckListBatchParameter extends BatchParameterBase {
     private boolean roreiFukushiNenkinFlag;
     @BatchParameter(key = KEY_SHUTURYOKU_JUN_ID, name = "出力順ID")
     private long shuturyokuJunId;
-//    @BatchParameter(key = KEY_IDOCHECKLIST, name = "異動チェックリスト")
-//    private IdoCheckListInfo idocheckList;
 
     public IdoCheckListGetDataProcessParameter toIdoCheckListGetDataProcessParameter() {
         return new IdoCheckListGetDataProcessParameter(
                 konkaiKaishi, konkaiShuryo, hihokenshaDaichouFlag,
                 jushochiTokureiKanriFlag, tekiyoJogaishaDaichouFlag,
                 seikatsuHogoFlag, roreiFukushiNenkinFlag, shuturyokuJunId);
+    }
+
+    public UpdShoriDataKanriProcessParameter toUpdShoriDataKanriProcessParameter() {
+        return new UpdShoriDataKanriProcessParameter(
+                zenkaiKaishi, zenkaiShuryo, konkaiKaishi, konkaiShuryo);
     }
 }
