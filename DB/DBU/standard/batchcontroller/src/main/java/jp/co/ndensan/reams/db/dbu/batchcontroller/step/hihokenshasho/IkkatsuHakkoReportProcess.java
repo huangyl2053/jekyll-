@@ -32,20 +32,20 @@ public class IkkatsuHakkoReportProcess extends SimpleBatchProcessBase {
     protected void process() {
 
 //        if (get帳票用Entityリスト().isEmpty()) {
-//            //TODO 段站立　QA273 被保険者証一覧表編集クラスの確認
+//            //TODO 内部：QA273　Redmine：#72186 被保険者証一覧表編集クラスが未実装
 //        } else {
-//            //TODO 段站立　QA273 被保険者証一覧表編集クラスの確認
+//            //TODO 内部：QA273　Redmine：#72186  被保険者証一覧表編集クラスが未実装
 //        }
     }
 
     /**
-     * TODO 段站立 出力順IDから出力順を取得し、被保険者証用Entityリストをソートする　2015/12/23
+     * TODO Redmine：#73393　出力順IDから出力順を取得し、被保険者証用Entityリストをソートする
      *
      */
     private List<IkkatsuHakkoRelateEntity> get帳票用Entityリスト() {
         List<IkkatsuHakkoRelateEntity> 被保険者証用Entityリスト = get被保険者証用();
 //        for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 被保険者証用Entityリスト) {
-//            //TODO 段站立 QA273 被保険者証編集クラスの確認 2015/12/23
+//            //TODO 内部：QA273　Redmine：#72186 被保険者証編集クラスが未実装
 //        }
         return 帳票用Entityリスト;
     }

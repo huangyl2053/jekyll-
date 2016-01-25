@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 
 /**
  *
- * 市町村遷移のマッパーインタフェースです。
+ * 被保険者証一括発行のマッパーインタフェースです。
  */
 public interface IIkkatsuHakkoMapper {
 
@@ -329,4 +329,10 @@ public interface IIkkatsuHakkoMapper {
      */
     int dropTmpHihokenshasho_Ichi();
 
+    /**
+     * 一時テーブルを取得します。
+     *
+     * @return 件数
+     */
+    int getTmpHihokenshasho_Ichi();
 }

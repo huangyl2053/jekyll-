@@ -46,14 +46,16 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void process() {
-        被保台帳を一時テーブルに更新();
-        介護保険施設を一時テーブルに更新();
-        受給者台帳を一時テーブルに更新();
-        要介護認定を一時テーブルに更新();
-        支払方法変更を一時テーブルに更新();
-        居宅給付計画を一時テーブルに更新();
-        本人情報を一時テーブルに更新();
-        送付先情報を一時テーブルに更新();
+        if (iIkkatsuHakkoMapper.getTmpHihokenshasho_Ichi() > 0) {
+            被保台帳を一時テーブルに更新();
+            介護保険施設を一時テーブルに更新();
+            受給者台帳を一時テーブルに更新();
+            要介護認定を一時テーブルに更新();
+            支払方法変更を一時テーブルに更新();
+            居宅給付計画を一時テーブルに更新();
+            本人情報を一時テーブルに更新();
+            送付先情報を一時テーブルに更新();
+        }
     }
 
     private void 被保台帳を一時テーブルに更新() {
@@ -110,20 +112,16 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
     }
 
     private void 居宅給付計画を一時テーブルに更新() {
-        List<IkkatsuHakkoRelateEntity> 届出List = iIkkatsuHakkoMapper.getKyotakuKeikakuTodokede();
         List<IkkatsuHakkoRelateEntity> 事業者作成List = iIkkatsuHakkoMapper.getKyotakuKeikakuJigyoshaSakusei();
         List<IkkatsuHakkoRelateEntity> 自己作成List = iIkkatsuHakkoMapper.getKyotakuKeikakuJikoSakusei();
-        if (!事業者作成List.isEmpty()) {
+
+        if (事業者作成List.get(0).getKeikakuJigyoshaNo() != null) {
             for (IkkatsuHakkoRelateEntity jigyoshaSakuseiEntity : 事業者作成List) {
                 iIkkatsuHakkoMapper.updateTmp_Kyotaku(jigyoshaSakuseiEntity);
             }
-        } else if (!自己作成List.isEmpty()) {
+        } else {
             for (IkkatsuHakkoRelateEntity jikoSakuseiEntity : 自己作成List) {
                 iIkkatsuHakkoMapper.updateTmp_Kyotaku(jikoSakuseiEntity);
-            }
-        } else {
-            for (IkkatsuHakkoRelateEntity todokedeEntity : 届出List) {
-                iIkkatsuHakkoMapper.updateTmp_Kyotaku(todokedeEntity);
             }
         }
     }
