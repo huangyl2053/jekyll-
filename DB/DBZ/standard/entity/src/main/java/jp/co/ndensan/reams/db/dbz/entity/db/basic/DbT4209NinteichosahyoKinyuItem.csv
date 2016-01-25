@@ -1,0 +1,6 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
+ninteichosaRirekiNo,int2,int,,,,,認定調査依頼履歴番号,A
+remban,int2,int,,,,,連番,A
+koroshoIfShikibetsuCode,UDD035Code,Code,,,,,厚労省IF識別コード,A
+serviceJokyoKinyu,text,RString,,,,,サービスの状況記入,A
+serviceJokyoImageSharedFileId,timestamp,RDateTime,,,,,サービスの状況イメージ共有ファイルID,A
