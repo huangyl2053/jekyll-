@@ -29,9 +29,9 @@ public final class DbT5225ChosaChikuGroupEntityGenerator {
     public static DbT5225ChosaChikuGroupEntity createDbT5225ChosaChikuGroupEntity() {
         DbT5225ChosaChikuGroupEntity entity = new DbT5225ChosaChikuGroupEntity();
         entity.setChosaChikuGroupCode(DEFAULT_調査地区グループコード);
-        entity.setChosachikucode(DEFAULT_調査地区コード);
+        entity.setChosaChikuCode(DEFAULT_調査地区コード);
         entity.setShichosonCode(DEFAULT_市町村コード);
-        entity.setChosachikugroupname(DEFAULT_調査地区グループ名称);
+        entity.setChosaChikuGroupName(DEFAULT_調査地区グループ名称);
         entity.setYusenNo(DEFAULT_優先番号);
         return entity;
     }

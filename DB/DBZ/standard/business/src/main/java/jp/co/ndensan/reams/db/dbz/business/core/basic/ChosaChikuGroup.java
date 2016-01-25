@@ -19,9 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 調査地区グループマスタを管理するクラスです。
  */
-public class ChosaChikuGroup extends 
-        ParentModelBase<ChosaChikuGroupIdentifier, 
-        DbT5225ChosaChikuGroupEntity, ChosaChikuGroup> implements Serializable {
+public class ChosaChikuGroup extends
+        ParentModelBase<ChosaChikuGroupIdentifier, DbT5225ChosaChikuGroupEntity, ChosaChikuGroup> implements Serializable {
 
     private final DbT5225ChosaChikuGroupEntity entity;
     private final ChosaChikuGroupIdentifier id;
@@ -89,7 +88,7 @@ public class ChosaChikuGroup extends
      * @return 調査地区コード
      */
     public Code get調査地区コード() {
-        return entity.getChosachikucode();
+        return entity.getChosaChikuCode();
     }
 
     /**
@@ -107,7 +106,7 @@ public class ChosaChikuGroup extends
      * @return 調査地区グループ名称
      */
     public RString get調査地区グループ名称() {
-        return entity.getChosachikugroupname();
+        return entity.getChosaChikuGroupName();
     }
 
     /**

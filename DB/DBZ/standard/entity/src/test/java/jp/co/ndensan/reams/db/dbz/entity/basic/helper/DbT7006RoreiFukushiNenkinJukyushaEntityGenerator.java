@@ -30,7 +30,7 @@ public final class DbT7006RoreiFukushiNenkinJukyushaEntityGenerator {
         DbT7006RoreiFukushiNenkinJukyushaEntity entity = new DbT7006RoreiFukushiNenkinJukyushaEntity();
         entity.setShikibetsuCode(DEFAULT_識別コード);
         entity.setJukyuKaishiYMD(DEFAULT_受給開始年月日);
-        entity.setJukyuShuryoYMD(DEFAULT_受給終了年月日);
+        entity.setJukyuHaishiYMD(DEFAULT_受給終了年月日);
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
         return entity;
     }
