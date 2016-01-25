@@ -520,14 +520,13 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
         if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
             return false;
         }
-        if (this.ninteichosaRirekiNo != other.ninteichosaRirekiNo) {
-            return false;
-        }
-        return true;
+        return this.ninteichosaRirekiNo == other.ninteichosaRirekiNo;
     }
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT5202NinteichosahyoGaikyoChosaEntity entity) {
