@@ -29,7 +29,7 @@
 
 
     <!--ビューDbT3051ShokanShakaiFukushiHojinKeigengakuの項目をDbT3051ShokanShakaiFukushiHojinKeigengakuEntityの項目にマッピングします。-->
-    <resultMap id="resultMap_DbT3051ShokanShakaiFukushiHojinKeigengakuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3051ShokanShakaiFukushiHojinKeigengakuEntity" autoMapping="true">
+    <resultMap id="resultMap_DbT3051ShokanShakaiFukushiHojinKeigengakuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3051ShokanShakaiFukushiHojinKeigengakuEntity" autoMapping="true">
         <id property="hiHokenshaNo" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="serviceTeikyoYM" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="seiriNo" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

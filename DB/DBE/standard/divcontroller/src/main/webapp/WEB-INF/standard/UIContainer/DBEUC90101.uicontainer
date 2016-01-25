@@ -37,7 +37,7 @@
      "layoutName": "DBE9020001",
      "layoutTitle": "主治医マスタ",
      "eventName": "医療機関登録へ戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE9010001",

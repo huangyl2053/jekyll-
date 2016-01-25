@@ -48,8 +48,8 @@
         <result property="lastUpdateReamsLoginId" column="dbT3107ShokanMeisaiJushochiTokurei_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceShuruiCode" column="dbT3107ShokanMeisaiJushochiTokurei_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
         <result property="serviceKomokuCode" column="dbT3107ShokanMeisaiJushochiTokurei_serviceKomokuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler"/>
-        <result property="tanisu" column="dbT3107ShokanMeisaiJushochiTokurei_tanisu" />
-        <result property="nissuKaisu" column="dbT3107ShokanMeisaiJushochiTokurei_nissuKaisu" />
+        <result property="tanisu" column="dbT3107ShokanMeisaiJushochiTokurei_tanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nissuKaisu" column="dbT3107ShokanMeisaiJushochiTokurei_nissuKaisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="serviceTanisu" column="dbT3107ShokanMeisaiJushochiTokurei_serviceTanisu" />
         <result property="shisetsuShozaiHokenshaNo" column="dbT3107ShokanMeisaiJushochiTokurei_shisetsuShozaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <result property="tekiyo" column="dbT3107ShokanMeisaiJushochiTokurei_tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

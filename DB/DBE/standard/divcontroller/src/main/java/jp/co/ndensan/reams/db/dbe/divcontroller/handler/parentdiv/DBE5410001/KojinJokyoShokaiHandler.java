@@ -185,8 +185,8 @@ public class KojinJokyoShokaiHandler {
         jokyohyoEntity.setShinseiKubun(kojinJokyoShokaiList.get(0).get認定申請区分申請時コード().getColumnValue());
         jokyohyoEntity.setHihokenshaNameKana(kojinJokyoShokaiList.get(0).get被保険者氏名カナ());
         jokyohyoEntity.setShinseiYMD(new RString(kojinJokyoShokaiList.get(0).get認定申請年月日().toString()));
-        jokyohyoEntity.setSeibetsu(kojinJokyoShokaiList.get(0).get性別() == null ? RString.EMPTY : 
-                Seibetsu.toValue(kojinJokyoShokaiList.get(0).get性別()).get名称());
+        jokyohyoEntity.setSeibetsu(kojinJokyoShokaiList.get(0).get性別() == null ? RString.EMPTY
+                : Seibetsu.toValue(kojinJokyoShokaiList.get(0).get性別()).get名称());
         jokyohyoEntity.setHihokenshaName(kojinJokyoShokaiList.get(0).get被保険者氏名());
         jokyohyoEntity.setBirthYMD(new RString(kojinJokyoShokaiList.get(0).get生年月日().toString()));
         jokyohyoEntity.setAge(new RString(String.valueOf(kojinJokyoShokaiList.get(0).get年齢())));

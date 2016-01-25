@@ -68,6 +68,7 @@ public class ShujiiMaster {
         if (主治医医療機関コード != null && !主治医医療機関コード.isEmpty()) {
             div.getShujiiSearch().getTxtSearchShujiiIryokikanCodeFrom().setValue(主治医医療機関コード);
             onClick_btnSearchShujii(div);
+            div.getShujiiSearch().setDisplayNone(true);
             return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_医療機関登録から遷移);
         }
 
@@ -92,6 +93,7 @@ public class ShujiiMaster {
      * @return ResponseData<ShujiiMasterDiv>
      */
     public ResponseData<ShujiiMasterDiv> onClick_btnSearchShujii(ShujiiMasterDiv div) {
+        getHandler(div).load();
         searchChosainInfo(div);
 
         return ResponseData.of(div).respond();
@@ -127,6 +129,7 @@ public class ShujiiMaster {
                 return ResponseData.of(div).setState(DBE9020001StateName.検索);
             }
         } else {
+            div.getShujiiSearch().setDisplayNone(false);
             div.getShujiiSearch().setDisabled(false);
             getHandler(div).load();
             getHandler(div).clearKensakuJoken();
@@ -272,7 +275,7 @@ public class ShujiiMaster {
         div.getShujiiIchiran().setDisabled(false);
         RString 主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
         if (主治医医療機関コード != null && !主治医医療機関コード.isEmpty()) {
-            return ResponseData.of(div).setState(DBE9020001StateName.主治医登録_医療機関登録から遷移);
+            return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_医療機関登録から遷移);
         }
         return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧);
     }
@@ -331,7 +334,7 @@ public class ShujiiMaster {
         getHandler(div).setShujiiJohoToIchiran(イベント状態);
         RString 主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
         if (主治医医療機関コード != null && !主治医医療機関コード.isEmpty()) {
-            return ResponseData.of(div).setState(DBE9020001StateName.主治医登録_医療機関登録から遷移);
+            return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_医療機関登録から遷移);
         }
         return ResponseData.of(div).respond();
     }
@@ -358,7 +361,7 @@ public class ShujiiMaster {
         div.getShujiiIchiran().setDisabled(true);
         RString 主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
         if (主治医医療機関コード != null && !主治医医療機関コード.isEmpty()) {
-            return ResponseData.of(div).setState(DBE9020001StateName.主治医登録_医療機関登録から遷移);
+            return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_医療機関登録から遷移);
         }
         
         return ResponseData.of(div).respond();

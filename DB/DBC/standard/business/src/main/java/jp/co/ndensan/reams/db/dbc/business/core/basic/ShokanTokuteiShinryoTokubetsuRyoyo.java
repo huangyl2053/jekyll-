@@ -8,23 +8,21 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求特定診療費・特別療養費を管理するクラスです。
  */
-public class ShokanTokuteiShinryoTokubetsuRyoyo 
-extends ModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier, 
-        DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity, 
-        ShokanTokuteiShinryoTokubetsuRyoyo> implements Serializable {
+public class ShokanTokuteiShinryoTokubetsuRyoyo
+        extends ModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier, DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity, ShokanTokuteiShinryoTokubetsuRyoyo> implements Serializable {
 
     private final DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity;
     private final ShokanTokuteiShinryoTokubetsuRyoyoIdentifier id;
@@ -38,39 +36,39 @@ extends ModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier,
      * @param 整理番号 整理番号
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
-     * @param 順次番号 順次番号
-     * @param 履歴番号 履歴番号
+     * @param 明細番号 明細番号
+     * @param 連番 連番
      */
     public ShokanTokuteiShinryoTokubetsuRyoyo(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             JigyoshaNo 事業者番号,
             RString 様式番号,
-            RString 順次番号,
-            Decimal 履歴番号) {
+            RString 明細番号,
+            RString 連番) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(順次番号, UrSystemErrorMessages.値がnull.getReplacedMessage("順次番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
         this.entity = new DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
         this.entity.setSeiriNo(整理番号);
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
-        this.entity.setJunjiNo(順次番号);
-        this.entity.setRirekiNo(履歴番号);
+        this.entity.setMeisaiNo(明細番号);
+        this.entity.setRenban(連番);
         this.id = new ShokanTokuteiShinryoTokubetsuRyoyoIdentifier(
                 被保険者番号,
                 サービス提供年月,
                 整理番号,
                 事業者番号,
                 様式番号,
-                順次番号,
-                履歴番号
+                明細番号,
+                連番
         );
     }
 
@@ -78,8 +76,7 @@ extends ModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier,
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity}より{@link ShokanTokuteiShinryoTokubetsuRyoyo}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity}
+     * @param entity DBより取得した{@link DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity}
      */
     public ShokanTokuteiShinryoTokubetsuRyoyo(DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求特定診療費・特別療養費"));
@@ -89,8 +86,8 @@ extends ModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier,
                 entity.getSeiriNo(),
                 entity.getJigyoshaNo(),
                 entity.getYoshikiNo(),
-                entity.getJunjiNo(),
-                entity.getRirekiNo());
+                entity.getMeisaiNo(),
+                entity.getRenban());
     }
 
     /**
@@ -154,21 +151,21 @@ extends ModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier,
     }
 
     /**
-     * 順次番号を返します。
+     * 明細番号を返します。
      *
-     * @return 順次番号
+     * @return 明細番号
      */
-    public RString get順次番号() {
-        return entity.getJunjiNo();
+    public RString get明細番号() {
+        return entity.getMeisaiNo();
     }
 
     /**
-     * 履歴番号を返します。
+     * 連番を返します。
      *
-     * @return 履歴番号
+     * @return 連番
      */
-    public Decimal get履歴番号() {
-        return entity.getRirekiNo();
+    public RString get連番() {
+        return entity.getRenban();
     }
 
     /**
@@ -247,8 +244,7 @@ extends ModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier,
     /**
      * 償還払請求特定診療費・特別療養費の識別子{@link ShokanTokuteiShinryoTokubetsuRyoyoIdentifier}を返します。
      *
-     * @return
-     * 償還払請求特定診療費・特別療養費の識別子{@link ShokanTokuteiShinryoTokubetsuRyoyoIdentifier}
+     * @return 償還払請求特定診療費・特別療養費の識別子{@link ShokanTokuteiShinryoTokubetsuRyoyoIdentifier}
      */
     @Override
     public ShokanTokuteiShinryoTokubetsuRyoyoIdentifier identifier() {

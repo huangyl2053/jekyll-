@@ -239,7 +239,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
     /**
      * 連番のsetメソッドです。
      *
-     * @param rirekiNo 連番
+     * @param renban 連番
      */
     public void setRenban(RString renban) {
         this.renban = renban;
