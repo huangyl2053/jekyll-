@@ -7,19 +7,20 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import java.util.Objects;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 
 /**
  * DbT3006KyotakuKeikakuJigyoshaSakuseiの項目定義クラスです
  *
  */
 public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBase<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3006KyotakuKeikakuJigyoshaSakusei");
@@ -33,11 +34,11 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private HihokenshaNo hihokenshano;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private FlexibleYearMonth taishoYM;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     private FlexibleDate tekiyoKaishiYMD;
     private FlexibleDate tekiyoShuryoYMD;
     private RString sakuseiKubunCode;
@@ -96,17 +97,17 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
      *
      * @return 被保険者番号
      */
-    public HihokenshaNo getHihokenshano() {
-        return hihokenshano;
+    public HihokenshaNo getHihokenshaNo() {
+        return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
      *
-     * @param hihokenshano 被保険者番号
+     * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshano(HihokenshaNo hihokenshano) {
-        this.hihokenshano = hihokenshano;
+    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
+        this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
@@ -123,7 +124,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
      *
      * @param taishoYM 対象年月
      */
-    public void setTaishoYM(FlexibleYearMonth taishoYM) {
+    public void setTaishoYM(@Nonnull FlexibleYearMonth taishoYM) {
         this.taishoYM = taishoYM;
     }
 
@@ -132,7 +133,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
      *
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
@@ -141,7 +142,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(@Nonnull int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -159,7 +160,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
      *
      * @param tekiyoKaishiYMD 適用開始年月日
      */
-    public void setTekiyoKaishiYMD(FlexibleDate tekiyoKaishiYMD) {
+    public void setTekiyoKaishiYMD(@Nonnull FlexibleDate tekiyoKaishiYMD) {
         this.tekiyoKaishiYMD = tekiyoKaishiYMD;
     }
 
@@ -168,6 +169,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
      *
      * @return 適用終了年月日
      */
+    @CheckForNull
     public FlexibleDate getTekiyoShuryoYMD() {
         return tekiyoShuryoYMD;
     }
@@ -199,7 +201,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
      *
      * @param sakuseiKubunCode 作成区分コード
      */
-    public void setSakuseiKubunCode(RString sakuseiKubunCode) {
+    public void setSakuseiKubunCode(@Nonnull RString sakuseiKubunCode) {
         this.sakuseiKubunCode = sakuseiKubunCode;
     }
 
@@ -217,7 +219,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
      *
      * @param keikakuJigyoshaNo 計画事業者番号
      */
-    public void setKeikakuJigyoshaNo(JigyoshaNo keikakuJigyoshaNo) {
+    public void setKeikakuJigyoshaNo(@Nonnull JigyoshaNo keikakuJigyoshaNo) {
         this.keikakuJigyoshaNo = keikakuJigyoshaNo;
     }
 
@@ -228,6 +230,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
      *
      * @return 委託先事業者番号
      */
+    @CheckForNull
     public JigyoshaNo getItakusakiJigyoshaNo() {
         return itakusakiJigyoshaNo;
     }
@@ -248,6 +251,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
      *
      * @return 事業者変更年月日
      */
+    @CheckForNull
     public FlexibleDate getJigyoshaHenkoYMD() {
         return jigyoshaHenkoYMD;
     }
@@ -266,6 +270,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
      *
      * @return 事業者変更事由
      */
+    @CheckForNull
     public RString getJigyoshaHenkoJiyu() {
         return jigyoshaHenkoJiyu;
     }
@@ -291,7 +296,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.hihokenshano, other.hihokenshano)) {
+        if (!Objects.equals(this.hihokenshaNo, other.hihokenshaNo)) {
             return false;
         }
         if (!Objects.equals(this.taishoYM, other.taishoYM)) {
@@ -308,7 +313,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
      */
     @Override
     public void shallowCopy(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity) {
-        this.hihokenshano = entity.hihokenshano;
+        this.hihokenshaNo = entity.hihokenshaNo;
         this.taishoYM = entity.taishoYM;
         this.rirekiNo = entity.rirekiNo;
         this.tekiyoKaishiYMD = entity.tekiyoKaishiYMD;
@@ -327,7 +332,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiEntity extends DbTableEntityBas
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hihokenshano, taishoYM, rirekiNo, tekiyoKaishiYMD, tekiyoShuryoYMD, sakuseiKubunCode, keikakuJigyoshaNo, itakusakiJigyoshaNo, jigyoshaHenkoYMD, jigyoshaHenkoJiyu);
+        return super.toMd5(hihokenshaNo, taishoYM, rirekiNo, tekiyoKaishiYMD, tekiyoShuryoYMD, sakuseiKubunCode, keikakuJigyoshaNo, itakusakiJigyoshaNo, jigyoshaHenkoYMD, jigyoshaHenkoJiyu);
     }
 
 // </editor-fold>
