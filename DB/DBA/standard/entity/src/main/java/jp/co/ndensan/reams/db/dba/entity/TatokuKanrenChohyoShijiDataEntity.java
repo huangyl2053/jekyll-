@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.entity;
 
-import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -21,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class TatokuKanrenChohyoShijiDataEntity {
 
     private YubinNo 保険者郵便番号;
-    private BunshoNo 文書番号;
+    private RString 文書番号;
     private RString 保険者住所;
     private FlexibleDate 発行年月日;
     private RString 保険者名;

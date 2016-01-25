@@ -55,7 +55,7 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
     public TatokuKanrenChohyoTaishoTsuchishoEntity setTatokuKanrenChohyoTaishoTsuchisho(TatokuKanrenChohyoShijiDataEntity inEntity) {
         TatokuKanrenChohyoTaishoTsuchishoEntity outEntity = new TatokuKanrenChohyoTaishoTsuchishoEntity();
         outEntity.set保険者郵便番号(inEntity.get保険者郵便番号().getEditedYubinNo());
-        outEntity.set文書番号(new RString(inEntity.get文書番号().toString()));
+        outEntity.set文書番号(inEntity.get文書番号());
         outEntity.set保険者住所(inEntity.get保険者住所());
         outEntity.set発行年月日(inEntity.get発行年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         outEntity.set保険者名(inEntity.get保険者名());
