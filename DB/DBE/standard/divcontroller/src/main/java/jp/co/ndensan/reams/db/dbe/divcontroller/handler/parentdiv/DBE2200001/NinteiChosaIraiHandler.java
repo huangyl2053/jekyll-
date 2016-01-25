@@ -232,24 +232,24 @@ public class NinteiChosaIraiHandler {
         if (business.getNinteichosaKigenYMD() != null) {
             row.setNinteichosaKigenYMD(new RString(business.getNinteichosaKigenYMD().toString()));
         }
-        row.setHihokenshaKana(business.getHihokenshaKana() != null ? RString.EMPTY : business.getHihokenshaKana().value());
+        row.setHihokenshaKana(business.getHihokenshaKana() == null ? RString.EMPTY : business.getHihokenshaKana().value());
         if (business.getSeinengappiYMD() != null) {
             row.setSeinengappiYMD(new RString(business.getSeinengappiYMD().toString()));
         }
-        row.setYubinNo(business.getYubinNo() != null ? RString.EMPTY : business.getYubinNo().value());
-        row.setTelNo(business.getTelNo() != null ? RString.EMPTY : business.getTelNo().value());
+        row.setYubinNo(business.getYubinNo() == null ? RString.EMPTY : business.getYubinNo().value());
+        row.setTelNo(business.getTelNo() == null ? RString.EMPTY : business.getTelNo().value());
         row.setHomonChosasakiYubinNo(
-                business.getHomonChosasakiYubinNo() != null ? RString.EMPTY : business.getHomonChosasakiYubinNo().value());
-        row.setHomonChosasakiJusho(business.getHomonChosasakiJusho() != null ? RString.EMPTY : business.getHomonChosasakiJusho().value());
-        row.setHomonChosasakiName(business.getHomonChosasakiName() != null ? RString.EMPTY : business.getHomonChosasakiName().value());
-        row.setHomonChosasakiTelNo(business.getHomonChosasakiTelNo() != null ? RString.EMPTY : business.getHomonChosasakiTelNo().value());
+                business.getHomonChosasakiYubinNo() == null ? RString.EMPTY : business.getHomonChosasakiYubinNo().value());
+        row.setHomonChosasakiJusho(business.getHomonChosasakiJusho() == null ? RString.EMPTY : business.getHomonChosasakiJusho().value());
+        row.setHomonChosasakiName(business.getHomonChosasakiName() == null ? RString.EMPTY : business.getHomonChosasakiName().value());
+        row.setHomonChosasakiTelNo(business.getHomonChosasakiTelNo() == null ? RString.EMPTY : business.getHomonChosasakiTelNo().value());
         if (business.getNinteiShinseiYMDKoShin() != null) {
             row.setNinteiShinseiYMDKoShin(new RString(business.getNinteiShinseiYMDKoShin().toString()));
         }
         if (business.getZenkaiNinteiYMD() != null) {
             row.setZenkaiNinteiYMD(new RString(business.getZenkaiNinteiYMD().toString()));
         }
-        row.setZenYokaigoKubunCode(business.getZenYokaigoKubunCode() != null ? RString.EMPTY : business.getZenYokaigoKubunCode().value());
+        row.setZenYokaigoKubunCode(business.getZenYokaigoKubunCode() == null ? RString.EMPTY : business.getZenYokaigoKubunCode().value());
         row.setAge(new RString(String.valueOf(business.getAge())));
     }
 
@@ -394,24 +394,24 @@ public class NinteiChosaIraiHandler {
         if (business.getNinteichosaKigenYMD() != null) {
             row.setNinteichosaKigenYMD(new RString(business.getNinteichosaKigenYMD().toString()));
         }
-        row.setHihokenshaKana(business.getHihokenshaKana() != null ? RString.EMPTY : business.getHihokenshaKana().value());
+        row.setHihokenshaKana(business.getHihokenshaKana() == null ? RString.EMPTY : business.getHihokenshaKana().value());
         if (business.getSeinengappiYMD() != null) {
             row.setSeinengappiYMD(new RString(business.getSeinengappiYMD().toString()));
         }
-        row.setYubinNo(business.getYubinNo() != null ? RString.EMPTY : business.getYubinNo().value());
-        row.setTelNo(business.getTelNo() != null ? RString.EMPTY : business.getTelNo().value());
+        row.setYubinNo(business.getYubinNo() == null ? RString.EMPTY : business.getYubinNo().value());
+        row.setTelNo(business.getTelNo() == null ? RString.EMPTY : business.getTelNo().value());
         row.setHomonChosasakiYubinNo(
-                business.getHomonChosasakiYubinNo() != null ? RString.EMPTY : business.getHomonChosasakiYubinNo().value());
-        row.setHomonChosasakiJusho(business.getHomonChosasakiJusho() != null ? RString.EMPTY : business.getHomonChosasakiJusho().value());
-        row.setHomonChosasakiName(business.getHomonChosasakiName() != null ? RString.EMPTY : business.getHomonChosasakiName().value());
-        row.setHomonChosasakiTelNo(business.getHomonChosasakiTelNo() != null ? RString.EMPTY : business.getHomonChosasakiTelNo().value());
+                business.getHomonChosasakiYubinNo() == null ? RString.EMPTY : business.getHomonChosasakiYubinNo().value());
+        row.setHomonChosasakiJusho(business.getHomonChosasakiJusho() == null ? RString.EMPTY : business.getHomonChosasakiJusho().value());
+        row.setHomonChosasakiName(business.getHomonChosasakiName() == null ? RString.EMPTY : business.getHomonChosasakiName().value());
+        row.setHomonChosasakiTelNo(business.getHomonChosasakiTelNo() == null ? RString.EMPTY : business.getHomonChosasakiTelNo().value());
         if (business.getNinteiShinseiYMDKoShin() != null) {
             row.setNinteiShinseiYMDKoShin(new RString(business.getNinteiShinseiYMDKoShin().toString()));
         }
         if (business.getZenkaiNinteiYMD() != null) {
             row.setZenkaiNinteiYMD(new RString(business.getZenkaiNinteiYMD().toString()));
         }
-        row.setZenYokaigoKubunCode(business.getZenYokaigoKubunCode() != null ? RString.EMPTY : business.getZenYokaigoKubunCode().value());
+        row.setZenYokaigoKubunCode(business.getZenYokaigoKubunCode() == null ? RString.EMPTY : business.getZenYokaigoKubunCode().value());
         row.setAge(new RString(String.valueOf(business.getAge())));
     }
 
