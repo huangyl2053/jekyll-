@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -104,6 +105,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
      * @param serchResult 要介護認定進捗状況照会情報
      */
     public void btnKensaku(SearchResult<YokaigoNinteiShinchokuJoho> serchResult) {
+        div.getDgShinseiJoho().getDataSource().clear();
         List<dgShinseiJoho_Row> dg_row = new ArrayList<>();
         for (YokaigoNinteiShinchokuJoho joho : serchResult.records()) {
             dg_row.add(setRow(joho));
@@ -165,48 +167,91 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
 
     private dgShinseiJoho_Row setRow(YokaigoNinteiShinchokuJoho joho) {
         dgShinseiJoho_Row row = new dgShinseiJoho_Row();
-        row.setHokensha(joho.get市町村名称());
+        row.setHokensha(nullToEmpty(joho.get市町村名称()));
         row.setHihokenshaNo(joho.get被保険者番号() == null ? RString.EMPTY : joho.get被保険者番号().getColumnValue());
-        row.setShimei(joho.get被保険者氏名());
-        row.setHihoKubun(joho.get被保険者区分コード());
-        row.getShinseiDay().setValue(joho.get認定申請年月日() == null ? null : new RDate(joho.get認定申請年月日().toString()));
-        row.setShinseiKubun(joho
-                .get認定申請区分申請時コード());
+        row.setShimei(nullToEmpty(joho.get被保険者氏名()));
+        row.setHihoKubun(nullToEmpty(joho.get被保険者区分コード()));
+        if (joho.get認定申請年月日() == null || joho.get認定申請年月日().isEmpty()) {
+            row.setShinseiDay(new TextBoxDate());
+        } else {
+            row.getShinseiDay().setValue(new RDate(joho.get認定申請年月日().toString()));
+        }
+        row.setShinseiKubun(nullToEmpty(joho.get認定申請区分申請時コード()));
         row.setChosaIrai(flexibleDateToRString(joho.get認定調査依頼完了年月日()));
         row.setChosaJisshi(flexibleDateToRString(joho.get認定調査完了年月日()));
-        row.setChosaTokki(joho.get認定調査特記());
+        row.setChosaTokki(nullToEmpty(joho.get認定調査特記()));
         row.setShujiiIkenshoIrai(flexibleDateToRString(joho.get主治医意見書作成依頼完了年月日()));
         row.setShujiiIkenshoJuryo(flexibleDateToRString(joho.get主治医意見書登録完了年月日()));
         row.setIchijiHantei(flexibleDateToRString(joho.get要介護認定一次判定完了年月日()));
         row.setMaskingKanryo(flexibleDateToRString(joho.getマスキング完了年月日()));
         row.setShinsakaiWaritsuke(flexibleDateToRString(joho.get認定審査会割当完了年月日()));
         row.setShinsakaiJisshi(flexibleDateToRString(joho.get認定審査会完了年月日()));
-        row.getNinteiChosaIraiDay().setValue(flexibleDateToRDate(joho.get認定調査依頼年月日()));
-        row.getNinteiChosaJuryoDay().setValue(flexibleDateToRDate(joho.get認定調査受領年月日()));
-        row.setNinteiChosaItakusaki(joho.get事業者名称());
-        row.setNinteiChosain(joho.get調査員氏名());
-        row.getShujiiIkenshoIraiDay().setValue(flexibleDateToRDate(joho.get主治医意見書作成依頼年月日()));
-        row.getShujiiJuryoDay().setValue(flexibleDateToRDate(joho.get主治医意見書受領年月日()));
-        row.setShujiiIryoKikan(joho.get医療機関名称());
-        row.setShujiiName(joho.get主治医氏名());
-        row.getIchijiHanteiDay().setValue(flexibleDateToRDate(joho.get要介護認定一次判定年月日()));
-        row.getIchijiHanteiKanryouDay().setValue(flexibleDateToRDate(joho.get要介護認定一次判定完了年月日()));
+        if (joho.get認定調査依頼年月日() == null || joho.get認定調査依頼年月日().isEmpty()) {
+            row.setNinteiChosaIraiDay(new TextBoxDate());
+        } else {
+            row.getNinteiChosaIraiDay().setValue(flexibleDateToRDate(joho.get認定調査依頼年月日()));
+        }
+        if (joho.get認定調査受領年月日() == null || joho.get認定調査受領年月日().isEmpty()) {
+            row.setNinteiChosaJuryoDay(new TextBoxDate());
+        } else {
+            row.getNinteiChosaJuryoDay().setValue(flexibleDateToRDate(joho.get認定調査受領年月日()));
+        }
+        row.setNinteiChosaItakusaki(nullToEmpty(joho.get事業者名称()));
+        row.setNinteiChosain(nullToEmpty(joho.get調査員氏名()));
+        if (joho.get主治医意見書作成依頼年月日() == null || joho.get主治医意見書作成依頼年月日().isEmpty()) {
+            row.setShujiiIkenshoIraiDay(new TextBoxDate());
+        } else {
+            row.getShujiiIkenshoIraiDay().setValue(flexibleDateToRDate(joho.get主治医意見書作成依頼年月日()));
+        }
+        if (joho.get主治医意見書受領年月日() == null || joho.get主治医意見書受領年月日().isEmpty()) {
+            row.setShujiiJuryoDay(new TextBoxDate());
+        } else {
+            row.getShujiiJuryoDay().setValue(flexibleDateToRDate(joho.get主治医意見書受領年月日()));
+        }
+        row.setShujiiIryoKikan(nullToEmpty(joho.get医療機関名称()));
+        row.setShujiiName(nullToEmpty(joho.get主治医氏名()));
+        if (joho.get要介護認定一次判定年月日() == null || joho.get要介護認定一次判定年月日().isEmpty()) {
+            row.setIchijiHanteiDay(new TextBoxDate());
+        } else {
+            row.getIchijiHanteiDay().setValue(flexibleDateToRDate(joho.get要介護認定一次判定年月日()));
+        }
+        if (joho.get要介護認定一次判定完了年月日() == null || joho.get要介護認定一次判定完了年月日().isEmpty()) {
+            row.setIchijiHanteiKanryouDay(new TextBoxDate());
+        } else {
+            row.getIchijiHanteiKanryouDay().setValue(flexibleDateToRDate(joho.get要介護認定一次判定完了年月日()));
+        }
         // TODO 董亜彬 QA 533
-        row.setIchijiHanteiKekka(joho.get要介護認定一次判定結果コード());
-        row.getKaigoNinteiShinsakaiWaritsukeDay().setValue(flexibleDateToRDate(joho.get認定審査会割当完了年月日()));
+        row.setIchijiHanteiKekka(nullToEmpty(joho.get要介護認定一次判定結果コード()));
+        if (joho.get認定審査会割当完了年月日() == null || joho.get認定審査会割当完了年月日().isEmpty()) {
+            row.setKaigoNinteiShinsakaiWaritsukeDay(new TextBoxDate());
+        } else {
+            row.getKaigoNinteiShinsakaiWaritsukeDay().setValue(flexibleDateToRDate(joho.get認定審査会割当完了年月日()));
+        }
         row.setKaigoNinteiShinsakaiShiryo(joho.get介護認定審査会資料作成年月日() == null ? RString.EMPTY : joho
                 .get介護認定審査会資料作成年月日().wareki().eraType(EraType.ALPHABET)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
                 .fillType(FillType.ZERO).toDateString());
-        row.getKaigoNinteiShinsakaiYoteiDay().setValue(flexibleDateToRDate(joho.get介護認定審査会開催予定年月日()));
-        row.getKaigoNinteiShinsakaiKaisaiDay().setValue(flexibleDateToRDate(joho.get介護認定審査会開催年月日()));
-        row.setKaigoNinteiShinsakaiKaisaiNo(joho.get介護認定審査会開催番号());
+        if (joho.get介護認定審査会開催予定年月日() == null || joho.get介護認定審査会開催予定年月日().isEmpty()) {
+            row.setKaigoNinteiShinsakaiYoteiDay(new TextBoxDate());
+        } else {
+            row.getKaigoNinteiShinsakaiYoteiDay().setValue(flexibleDateToRDate(joho.get介護認定審査会開催予定年月日()));
+        }
+        if (joho.get介護認定審査会開催年月日() == null || joho.get介護認定審査会開催年月日().isEmpty()) {
+            row.setKaigoNinteiShinsakaiKaisaiDay(new TextBoxDate());
+        } else {
+            row.getKaigoNinteiShinsakaiKaisaiDay().setValue(flexibleDateToRDate(joho.get介護認定審査会開催年月日()));
+        }
+        row.setKaigoNinteiShinsakaiKaisaiNo(nullToEmpty(joho.get介護認定審査会開催番号()));
         row.setKaigoNinteiShinsakaiGogitai(new RString(String.valueOf(joho.get合議体番号())));
         row.setKaigoNinteiShinsakaiYokaigodo(YokaigoJotaiKubun09.toValue(joho.get二次判定要介護状態区分コード()).get名称());
-        row.setHihokenshaYubinNo(joho.get郵便番号());
-        row.setHihokenshaJusho(joho.get住所());
+        row.setHihokenshaYubinNo(nullToEmpty(joho.get郵便番号()));
+        row.setHihokenshaJusho(nullToEmpty(joho.get住所()));
         row.setHihokenshaSeibetsu(Seibetsu.toValue(joho.get性別()).get名称());
-        row.getHihokenshaBirthDay().setValue(flexibleDateToRDate(joho.get生年月日()));
+        if (joho.get生年月日() == null || joho.get生年月日().isEmpty()) {
+            row.setHihokenshaBirthDay(new TextBoxDate());
+        } else {
+            row.getHihokenshaBirthDay().setValue(flexibleDateToRDate(joho.get生年月日()));
+        }
         row.setHihokenshaNenrei(new RString(String.valueOf(joho.get年齢())));
         return row;
     }
@@ -219,12 +264,13 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
     }
 
     private RDate flexibleDateToRDate(FlexibleDate date) {
-        if (date != null && !date.isEmpty()) {
-            return new RDate(date.wareki().eraType(EraType.ALPHABET)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
-                .fillType(FillType.ZERO).toDateString().toString());
-        }
-        return null;
+        return new RDate(date.wareki().eraType(EraType.ALPHABET)
+            .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
+            .fillType(FillType.ZERO).toDateString().toString());
+    }
+    
+    private RString nullToEmpty(Object obj) {
+        return obj == null ? RString.EMPTY : new RString(obj.toString());
     }
 
     private void setDisable() {
