@@ -120,7 +120,7 @@ public class NinteichosahyoKihonChosaScoreItem extends ModelBase<NinteichosahyoK
      * @return 素点項目
      */
     public int get素点項目() {
-        return entity.getReserchItem01();
+        return entity.getResearchItem01();
     }
 
     /**

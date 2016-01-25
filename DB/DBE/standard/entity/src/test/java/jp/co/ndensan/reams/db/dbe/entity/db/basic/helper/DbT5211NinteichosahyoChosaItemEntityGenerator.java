@@ -32,7 +32,7 @@ public final class DbT5211NinteichosahyoChosaItemEntityGenerator {
         entity.setNinteichosaRirekiNo(DEFAULT_要介護認定調査履歴番号);
         entity.setRemban(DEFAULT_連番);
         entity.setKoroshoIfShikibetsuCode(DEFAULT_厚労省IF識別コード);
-        entity.setReserchItem(DEFAULT_調査項目);
+        entity.setResearchItem(DEFAULT_調査項目);
         return entity;
     }
 }
