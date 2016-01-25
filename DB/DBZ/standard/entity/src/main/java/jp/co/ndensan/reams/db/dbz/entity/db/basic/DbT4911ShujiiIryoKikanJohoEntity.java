@@ -11,15 +11,16 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 
 /**
  * 主治医医療機関情報（子）テーブルのエンティティクラスです。
  */
-public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911ShujiiIryoKikanJohoEntity> implements IDbAccessable, IShujiiIryoKikanJohoEntity {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911ShujiiIryoKikanJohoEntity> implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4911ShujiiIryoKikanJoho");
@@ -29,7 +30,7 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
     private RString insertReamsLoginId;
     private UUID insertContextId;
     private boolean isDeleted = false;
-    private int updateCount = 0;
+    private final int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
@@ -43,7 +44,8 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
     private RString jusho;
     private TelNo telNo;
     private TelNo faxNo;
-    private AtenaMeisho daihyoshaName;
+    private RString daihyoshaName;
+    private RString daihyoshaNameKana;
     private boolean jokyoFlag;
 
     /**
@@ -105,7 +107,7 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
      *
      * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(LasdecCode shichosonCode) {
+    public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
@@ -123,7 +125,7 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
      *
      * @param shujiiIryokikanCode 主治医医療機関コード
      */
-    public void setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
+    public void setShujiiIryokikanCode(@Nonnull ShujiiIryokikanCode shujiiIryokikanCode) {
         this.shujiiIryokikanCode = shujiiIryokikanCode;
     }
 
@@ -134,6 +136,7 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
      *
      * @return 医療機関コード
      */
+    @CheckForNull
     public IryoKikanCode getIryokikanCode() {
         return iryokikanCode;
     }
@@ -154,6 +157,7 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
      *
      * @return 医療機関名称
      */
+    @CheckForNull
     public RString getIryoKikanMeisho() {
         return iryoKikanMeisho;
     }
@@ -172,6 +176,7 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
      *
      * @return 医療機関名称カナ
      */
+    @CheckForNull
     public RString getIryoKikanMeishoKana() {
         return iryoKikanMeishoKana;
     }
@@ -190,6 +195,7 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
      *
      * @return 郵便番号
      */
+    @CheckForNull
     public YubinNo getYubinNo() {
         return yubinNo;
     }
@@ -208,6 +214,7 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
      *
      * @return 住所
      */
+    @CheckForNull
     public RString getJusho() {
         return jusho;
     }
@@ -226,6 +233,7 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
      *
      * @return 電話番号
      */
+    @CheckForNull
     public TelNo getTelNo() {
         return telNo;
     }
@@ -244,6 +252,7 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
      *
      * @return FAX番号
      */
+    @CheckForNull
     public TelNo getFaxNo() {
         return faxNo;
     }
@@ -262,7 +271,8 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
      *
      * @return 代表者名
      */
-    public AtenaMeisho getDaihyoshaName() {
+    @CheckForNull
+    public RString getDaihyoshaName() {
         return daihyoshaName;
     }
 
@@ -271,12 +281,33 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
      *
      * @param daihyoshaName 代表者名
      */
-    public void setDaihyoshaName(AtenaMeisho daihyoshaName) {
+    public void setDaihyoshaName(RString daihyoshaName) {
         this.daihyoshaName = daihyoshaName;
     }
 
     /**
+     * 代表者名カナのgetメソッドです。
+     *
+     * @return 代表者名カナ
+     */
+    @CheckForNull
+    public RString getDaihyoshaNameKana() {
+        return daihyoshaNameKana;
+    }
+
+    /**
+     * 代表者名カナのsetメソッドです。
+     *
+     * @param daihyoshaNameKana 代表者名カナ
+     */
+    public void setDaihyoshaNameKana(RString daihyoshaNameKana) {
+        this.daihyoshaNameKana = daihyoshaNameKana;
+    }
+
+    /**
      * 状況フラグのgetメソッドです。
+     * <br/>
+     * <br/>True：有効　False：無効
      *
      * @return 状況フラグ
      */
@@ -286,10 +317,12 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
 
     /**
      * 状況フラグのsetメソッドです。
+     * <br/>
+     * <br/>True：有効　False：無効
      *
      * @param jokyoFlag 状況フラグ
      */
-    public void setJokyoFlag(boolean jokyoFlag) {
+    public void setJokyoFlag(@Nonnull boolean jokyoFlag) {
         this.jokyoFlag = jokyoFlag;
     }
 
@@ -297,7 +330,7 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
      * このエンティティの主キーが他の{@literal DbT4911ShujiiIryoKikanJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4911ShujiiIryoKikanJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -329,6 +362,7 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
         this.telNo = entity.telNo;
         this.faxNo = entity.faxNo;
         this.daihyoshaName = entity.daihyoshaName;
+        this.daihyoshaNameKana = entity.daihyoshaNameKana;
         this.jokyoFlag = entity.jokyoFlag;
     }
 
@@ -339,7 +373,7 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shichosonCode, shujiiIryokikanCode, iryokikanCode, iryoKikanMeisho, iryoKikanMeishoKana, yubinNo, jusho, telNo, faxNo, daihyoshaName, jokyoFlag);
+        return super.toMd5(shichosonCode, shujiiIryokikanCode, iryokikanCode, iryoKikanMeisho, iryoKikanMeishoKana, yubinNo, jusho, telNo, faxNo, daihyoshaName, daihyoshaNameKana, jokyoFlag);
     }
 
 // </editor-fold>
