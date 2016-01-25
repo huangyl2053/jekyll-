@@ -94,6 +94,13 @@
     <resultMap id="resultMap_ShokanMeisaiEntity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanMeisaiEntity"
                autoMapping="true">
+        <id column="hiHokenshaNo"/>
+        <id column="serviceTeikyoYM"/>
+        <id column="seiriNp"/>
+        <id column="jigyoshaNo"/>
+        <id column="yoshikiNo"/>
+        <id column="meisaiNo"/>
+        <id column="renban"/>
         <result property="serviceName" column="serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3039ShokanMeisaiMapper.resultMap_DbT3039ShokanMeisaiEntity">
@@ -157,6 +164,13 @@
     <resultMap id="resultMap_ShokanMeisaiJushochiTokureiEntity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanMeisaiJushochiTokureiEntity"
                autoMapping="true">
+        <id column="hiHokenshaNo"/>
+        <id column="serviceTeikyoYM"/>
+        <id column="seiriNp"/>
+        <id column="jigyoshaNo"/>
+        <id column="yoshikiNo"/>
+        <id column="junjiNo"/>
+        <id column="rirekiNo"/>
         <result property="serviceName" column="serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hokenshaName" column="hokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association  property="entity"
@@ -224,6 +238,13 @@
     <resultMap id="resultMap_ShokanServicePlan200904Entity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200904Entity"
                autoMapping="true">
+        <id column="hiHokenshaNo"/>
+        <id column="serviceTeikyoYM"/>
+        <id column="seiriNp"/>
+        <id column="jigyoshaNo"/>
+        <id column="yoshikiNo"/>
+        <id column="meisaiNo"/>
+        <id column="renban"/>
         <result property="serviceName" column="serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3047ShokanServicePlan200904Mapper.resultMap_DbT3047ShokanServicePlan200904Entity">
@@ -284,6 +305,13 @@
      <resultMap id="resultMap_ShokanServicePlan200604Entity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200604Entity"
                autoMapping="true">
+        <id column="hiHokenshaNo"/>
+        <id column="serviceTeikyoYM"/>
+        <id column="seiriNp"/>
+        <id column="jigyoshaNo"/>
+        <id column="yoshikiNo"/>
+        <id column="meisaiNo"/>
+        <id column="renban"/>
         <result property="serviceName" column="serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3046ShokanServicePlan200604Mapper.resultMap_DbT3046ShokanServicePlan200604Entity">
@@ -344,6 +372,13 @@
     <resultMap id="resultMap_ShokanServicePlan200004Entity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200004Entity"
                autoMapping="true">
+        <id column="hiHokenshaNo"/>
+        <id column="serviceTeikyoYM"/>
+        <id column="seiriNp"/>
+        <id column="jigyoshaNo"/>
+        <id column="yoshikiNo"/>
+        <id column="meisaiNo"/>
+        <id column="renban"/>
         <result property="serviceName" column="serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3045ShokanServicePlan200004Mapper.resultMap_DbT3045ShokanServicePlan200004Entity">
@@ -404,6 +439,13 @@
     <resultMap id="resultMap_ShokanShukeiEntity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShukeiEntity"
                autoMapping="true">
+        <id column="hiHokenshaNo"/>
+        <id column="serviceTeikyoYM"/>
+        <id column="seiriNo"/>
+        <id column="jigyoshaNo"/>
+        <id column="yoshikiNo"/>
+        <id column="meisaiNo"/>
+        <id column="renban"/>
         <result property="serviceShuruiRyakusho" column="serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukeiEntity">
@@ -460,6 +502,13 @@
     <resultMap id="resultMap_ShokanShakaiFukushiHojinKeigengakuEntity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuEntity"
                autoMapping="true">
+        <id column="hiHokenshaNo"/>
+        <id column="serviceTeikyoYM"/>
+        <id column="seiriNo"/>
+        <id column="jigyoshaNo"/>
+        <id column="yoshikiNo"/>
+        <id column="meisaiNo"/>
+        <id column="renban"/>
         <result property="serviceShuruiRyakusho" column="serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3051ShokanShakaiFukushiHojinKeigengakuEntity">
