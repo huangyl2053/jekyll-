@@ -15,26 +15,20 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-		<!-- DBC -->
+        <!-- DBC -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbcDefinition</artifactId>
         </dependency>
-		<!-- DBD -->
-		<!-- DBX -->
-		<!-- DBZ -->
+        <!-- DBD -->
+        <!-- DBX -->
+        <!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
         </dependency>
-		<!-- 公開系 -->
-		<!-- テスト -->
-		<!-- ツール -->
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbc</groupId>
-            <artifactId>DbcEntity</artifactId>
-            <scope>test</scope>
-            <type>jar</type>
-        </dependency>
+        <!-- 公開系 -->
+        <!-- テスト -->
+        <!-- ツール -->
     </dependencies>
 </project>
