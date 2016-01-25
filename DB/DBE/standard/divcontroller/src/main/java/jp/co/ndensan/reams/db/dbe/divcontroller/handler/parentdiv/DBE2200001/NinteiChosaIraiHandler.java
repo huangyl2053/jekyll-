@@ -128,7 +128,7 @@ public class NinteiChosaIraiHandler {
             row.setChosaItakusakiJusho(nullToEmpty(business.getJusho()));
             row.setChosaItakusakiTelNo(business.getTelNo() == null ? RString.EMPTY : business.getTelNo().value());
             row.setChosaItakusakiKubun(nullToEmpty(business.getKikanKubun()));
-            // TODO
+            // TODO　内部QA：523 Redmine：#74276（市町村コードと市町村名称の取得方式は不確定です）
             row.setHokenshaCode(nullToEmpty(市町村コード));
             row.setHokenshaName(nullToEmpty(市町村名称));
             dataSource.add(row);
@@ -381,7 +381,7 @@ public class NinteiChosaIraiHandler {
             row.setNinteichosaIraiRirekiNo(new RString(String.valueOf(business.getNinteichosaIraiRirekiNo())));
             row.setKoroshoIfShikibetsuCode(
                     business.getKoroshoIfShikibetsuCode() == null ? RString.EMPTY : business.getKoroshoIfShikibetsuCode().value());
-
+            setDgWaritsukeZumiShinseishaIchiran_Row(row, business);
             dataSource.add(row);
         }
         div.getDgWaritsukeZumiShinseishaIchiran().setDataSource(dataSource);
@@ -648,7 +648,7 @@ public class NinteiChosaIraiHandler {
             } else {
                 性別男 = HOUSI;
             }
-            // TODO CompToiawasesaki．出力項目．通知文 取得方式が知らない
+            // TODO 内部QA：467 Redmine：#73861(CompToiawasesaki．出力項目．通知文 取得方式が知らない)
             ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(RString.EMPTY,
                     RString.EMPTY,
                     RString.EMPTY,

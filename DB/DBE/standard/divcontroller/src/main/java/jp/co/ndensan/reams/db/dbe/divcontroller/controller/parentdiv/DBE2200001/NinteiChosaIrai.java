@@ -84,14 +84,14 @@ public class NinteiChosaIrai {
         RString 支所コード = RString.EMPTY;
         LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
         if (getHandler(div).is単一保険者() && 市町村コード != null) {
-
+            // TODO  内部QA：523 Redmine：#74276(保険者番号の取得方式が知らない、一時固定値を使用します)
             保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
             保険者名称 = div.getCcdHokenshaList().getSelectedItem().get市町村名称();
-            // QA88 TODO 支所情報取得につきましては、現在設計を追加で行っています。実装におかれましては、TODOとして進めてください。
+            // TODO  内部QA：88 Redmine：#70702 支所情報取得につきましては、現在設計を追加で行っています。実装におかれましては、TODOとして進めてください。
             支所コード = RString.EMPTY;
         }
 
-        // TODO
+        // TODO  内部QA：523 Redmine：#74276(保険者番号の取得方式が知らない、一時固定値を使用します)
         保険者番号 = new ShoKisaiHokenshaNo("209007");
 
         ViewStateHolder.put(ViewStateKeys.支所コード, 支所コード);
@@ -322,7 +322,7 @@ public class NinteiChosaIrai {
         }
         inertNinteichosaIraiJoho(div);
         updateNinteichosaIraiJoho(div);
-        // TODO
+        // TODO 内部QA560 Redmine：    (完了メッセージの表示方式が知らない)
 //        div.getKanryoMessage().setSuccessMessage(
 //                new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
         return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
@@ -433,7 +433,7 @@ public class NinteiChosaIrai {
         if (list.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.未指定.getMessage().replace("発行書類を"));
         }
-        // TODO 前排他制御を行う
+        // TODO  内部QA：523 Redmine：#74276(「前排他制御を行う」の排他はしらない)
         updateNinteichosaIraiJohoForPrint(div);
         List<ChosaIraishoHeadItem> chosaIraishoHeadItemList = getHandler(div).create認定調査依頼書印刷用パラメータ();
         if (div.getChkirai().getSelectedValues().contains(new RString("認定調査依頼書"))) {
