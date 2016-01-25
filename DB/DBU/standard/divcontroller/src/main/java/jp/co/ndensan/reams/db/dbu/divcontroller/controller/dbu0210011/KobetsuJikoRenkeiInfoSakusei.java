@@ -88,11 +88,11 @@ public class KobetsuJikoRenkeiInfoSakusei {
     public ResponseData<KobetsuJikoRenkeiInfoSakuseiDiv> onClick_btnJikkoBefore(KobetsuJikoRenkeiInfoSakuseiDiv div) {
         RDate konkaiFromYMD = div.getChushutsuKikan().getTxtKonkaiChushutsuFromYMD().getValue();
         RTime konkaiFromTime = div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().getValue();
-        RDate zenkaiFromYMD = div.getChushutsuKikan().getTxtZenkaiChushutsuFromYMD().getValue();
-        RTime zenkaiFromTime = div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().getValue();
-        if ((konkaiFromYMD != null && konkaiFromTime != null && zenkaiFromYMD != null && zenkaiFromTime != null)
-                && (zenkaiFromYMD.isBefore(konkaiFromYMD)
-                || (konkaiFromYMD.equals(zenkaiFromYMD) && zenkaiFromTime.isBefore(konkaiFromTime)))) {
+        RDate zenkaiToYMD = div.getChushutsuKikan().getTxtZenkaiChushutsuToYMD().getValue();
+        RTime zenkaiToTime = div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().getValue();
+        if ((konkaiFromYMD != null && konkaiFromTime != null && zenkaiToYMD != null && zenkaiToTime != null)
+                && (zenkaiToYMD.isBefore(konkaiFromYMD)
+                || (konkaiFromYMD.equals(zenkaiToYMD) && zenkaiToTime.isBefore(konkaiFromTime)))) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(getHandler(div).開始日と終了日の比較チェック());
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
