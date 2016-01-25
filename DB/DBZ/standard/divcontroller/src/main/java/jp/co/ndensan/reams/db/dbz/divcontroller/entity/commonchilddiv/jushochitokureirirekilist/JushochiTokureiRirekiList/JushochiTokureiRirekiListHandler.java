@@ -105,7 +105,7 @@ public class JushochiTokureiRirekiListHandler {
 
         jutokuRirekiDiv.getJutokuTekiyoInput().getTxtTekiyoDate().setValue(row.getTekiyoDate().getValue());
         jutokuRirekiDiv.getJutokuTekiyoInput().getTxtTekiyoTodokedeDate().setValue(row.getTekiyoTodokedeDate().getValue());
-        jutokuRirekiDiv.getJutokuTekiyoInput().getDdlTekiyoJiyu().setDataSource(getCode(new CodeShubetsu("0008")));
+        jutokuRirekiDiv.getJutokuTekiyoInput().getDdlTekiyoJiyu().setDataSource(getCode(new CodeShubetsu("0014")));
         try {
             jutokuRirekiDiv.getJutokuTekiyoInput().getDdlTekiyoJiyu().setSelectedKey(row.getTekiyoJiyuKey());
         } catch (SystemException e) {
@@ -114,7 +114,7 @@ public class JushochiTokureiRirekiListHandler {
         }
         jutokuRirekiDiv.getJutokuKaijoInput().getTxtKaijoDate().setValue(row.getKaijoDate().getValue());
         jutokuRirekiDiv.getJutokuKaijoInput().getTxtKaijoTodokedeDate().setValue(row.getKaijoTodokedeDate().getValue());
-        jutokuRirekiDiv.getJutokuKaijoInput().getDdlKaijoJiyu().setDataSource(getCode(new CodeShubetsu("0011")));
+        jutokuRirekiDiv.getJutokuKaijoInput().getDdlKaijoJiyu().setDataSource(getCode(new CodeShubetsu("0015")));
         try {
             jutokuRirekiDiv.getJutokuKaijoInput().getDdlKaijoJiyu().setSelectedKey(row.getKaijoJiyuKey());
         } catch (SystemException e) {
@@ -270,8 +270,8 @@ public class JushochiTokureiRirekiListHandler {
             jutokuRirekiDiv.getDgJutoku().setDataSource(dgJutokuList);
         }
 
-        jutokuRirekiDiv.getJutokuTekiyoInput().getDdlTekiyoJiyu().setDataSource(getCode(new CodeShubetsu("0008")));
-        jutokuRirekiDiv.getJutokuKaijoInput().getDdlKaijoJiyu().setDataSource(getCode(new CodeShubetsu("0011")));
+        jutokuRirekiDiv.getJutokuTekiyoInput().getDdlTekiyoJiyu().setDataSource(getCode(new CodeShubetsu("0014")));
+        jutokuRirekiDiv.getJutokuKaijoInput().getDdlKaijoJiyu().setDataSource(getCode(new CodeShubetsu("0015")));
 
         // 画面に初期化表示制御
         initBtnDisplay();
@@ -334,7 +334,7 @@ public class JushochiTokureiRirekiListHandler {
         dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
 
         for (UzT0007CodeEntity codeValueObject : codeValueList) {
-            dataSourceList.add(new KeyValueDataSource(codeValueObject.getコード().getKey(), codeValueObject.getコード名称()));
+            dataSourceList.add(new KeyValueDataSource(codeValueObject.getコード().getKey(), codeValueObject.getコード略称()));
         }
         return dataSourceList;
     }
