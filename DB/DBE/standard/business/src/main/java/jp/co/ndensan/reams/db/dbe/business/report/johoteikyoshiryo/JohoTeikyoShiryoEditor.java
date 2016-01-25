@@ -33,11 +33,10 @@ public class JohoTeikyoShiryoEditor implements IJohoTeikyoShiryoEditor {
     }
 
     private JohoTeikyoShiryoReportSource editSource(JohoTeikyoShiryoReportSource source) {
-
         source.hakkoYMD = item.getHakkoYMD().wareki()
-                .eraType(EraType.KANJI_RYAKU)
+                .eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.PERIOD)
+                .separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
         source.hokenshaName1 = item.getHokenshaName1();
         source.hokenshaName2 = item.getHokenshaName2();
@@ -46,20 +45,20 @@ public class JohoTeikyoShiryoEditor implements IJohoTeikyoShiryoEditor {
         source.hihokenshaName = item.getHihokenshaName();
         source.Jusho = item.getJusho();
         source.infoNijiDate = item.getInfoNijiDate().wareki()
-                .eraType(EraType.KANJI_RYAKU)
+                .eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.PERIOD)
+                .separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
         source.ninteiKekka = item.getNinteiKekka();
         source.yokaigoNiteiKaishoYMD = item.getYokaigoNiteiKaishoYMD().wareki()
-                .eraType(EraType.KANJI_RYAKU)
+                .eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.PERIOD)
+                .separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
         source.yokaigoNinteiShuryoYMD = item.getYokaigoNinteiShuryoYMD().wareki()
-                .eraType(EraType.KANJI_RYAKU)
+                .eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.PERIOD)
+                .separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
         source.shinsakaiIken = item.getShinsakaiIken();
         source.tsuchibun2 = item.getTsuchibun2();
