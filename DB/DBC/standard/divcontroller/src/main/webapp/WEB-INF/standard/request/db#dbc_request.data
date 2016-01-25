@@ -189,6 +189,8 @@ dbc/db/dbc/ShikyuGendogakuKyotakuServiceDetailPanel/onClick_radIdoKubun
 dbc/db/dbc/ShikyuGendogakuKyotakuServiceListPanel/onClick_btnSettle
 dbc/db/dbc/ShinsazumiShikyuShinseiListPanel/onClick_btnSearchShinsazumi
 dbc/db/dbc/ShinsazumiShikyuShinseiListPanel/onLoad
+dbc/db/dbc/ShinseiSearch/onClick_btnSelect
+dbc/db/dbc/ShinseiSearch/onLoad
 dbc/db/dbc/ShokanShikyuKetteiKanryo/onLoad
 dbc/db/dbc/ShokanShikyuKetteiKihon/onLoad
 dbc/db/dbc/ShokanShikyuKetteiShinseisho/onChangeShikyuKubun
