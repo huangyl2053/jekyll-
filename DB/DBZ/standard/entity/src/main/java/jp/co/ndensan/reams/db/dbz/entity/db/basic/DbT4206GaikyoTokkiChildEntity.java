@@ -10,12 +10,14 @@ import java.util.UUID;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * 認定調査票（概況特記）（子）テーブルのエンティティクラスです。
  */
 public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206GaikyoTokkiChildEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4206GaikyoTokkiChild");
 
@@ -24,7 +26,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
     private RString insertReamsLoginId;
     private UUID insertContextId;
     private boolean isDeleted = false;
-    private int updateCount = 0;
+    private final int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
@@ -43,7 +45,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -52,7 +54,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -61,7 +63,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -70,17 +72,16 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -91,7 +92,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
      * 申請書管理番号のgetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @return 申請書管理番号
      */
     public ShinseishoKanriNo getShinseishoKanriNo() {
@@ -102,7 +103,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
      * 申請書管理番号のsetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @param shinseishoKanriNo 申請書管理番号
      */
     public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
@@ -113,7 +114,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
      * 認定調査依頼履歴番号のgetメソッドです。
      * <br/>
      * <br/>認定調査依頼情報
-     * 
+     *
      * @return 認定調査依頼履歴番号
      */
     public int getNinteichosaRirekiNo() {
@@ -124,7 +125,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
      * 認定調査依頼履歴番号のsetメソッドです。
      * <br/>
      * <br/>認定調査依頼情報
-     * 
+     *
      * @param ninteichosaRirekiNo 認定調査依頼履歴番号
      */
     public void setNinteichosaRirekiNo(@Nonnull int ninteichosaRirekiNo) {
@@ -133,7 +134,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * gaikyoTokkiTextImageKubunのgetメソッドです。
-     * 
+     *
      * @return gaikyoTokkiTextImageKubun
      */
     public RString getGaikyoTokkiTextImageKubun() {
@@ -142,7 +143,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * gaikyoTokkiTextImageKubunのsetメソッドです。
-     * 
+     *
      * @param gaikyoTokkiTextImageKubun gaikyoTokkiTextImageKubun
      */
     public void setGaikyoTokkiTextImageKubun(@Nonnull RString gaikyoTokkiTextImageKubun) {
@@ -151,7 +152,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * jutakuKaishuのgetメソッドです。
-     * 
+     *
      * @return jutakuKaishu
      */
     @CheckForNull
@@ -161,7 +162,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * jutakuKaishuのsetメソッドです。
-     * 
+     *
      * @param jutakuKaishu jutakuKaishu
      */
     public void setJutakuKaishu(RString jutakuKaishu) {
@@ -170,7 +171,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * tokubetsuKyufuServiceのgetメソッドです。
-     * 
+     *
      * @return tokubetsuKyufuService
      */
     @CheckForNull
@@ -180,7 +181,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * tokubetsuKyufuServiceのsetメソッドです。
-     * 
+     *
      * @param tokubetsuKyufuService tokubetsuKyufuService
      */
     public void setTokubetsuKyufuService(RString tokubetsuKyufuService) {
@@ -189,7 +190,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * zaitakuServiceのgetメソッドです。
-     * 
+     *
      * @return zaitakuService
      */
     @CheckForNull
@@ -199,7 +200,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * zaitakuServiceのsetメソッドです。
-     * 
+     *
      * @param zaitakuService zaitakuService
      */
     public void setZaitakuService(RString zaitakuService) {
@@ -208,7 +209,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * shusoのgetメソッドです。
-     * 
+     *
      * @return shuso
      */
     @CheckForNull
@@ -218,7 +219,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * shusoのsetメソッドです。
-     * 
+     *
      * @param shuso shuso
      */
     public void setShuso(RString shuso) {
@@ -227,7 +228,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * kazokuJokyoのgetメソッドです。
-     * 
+     *
      * @return kazokuJokyo
      */
     @CheckForNull
@@ -237,7 +238,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * kazokuJokyoのsetメソッドです。
-     * 
+     *
      * @param kazokuJokyo kazokuJokyo
      */
     public void setKazokuJokyo(RString kazokuJokyo) {
@@ -246,7 +247,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * kyojuKankyoのgetメソッドです。
-     * 
+     *
      * @return kyojuKankyo
      */
     @CheckForNull
@@ -256,7 +257,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * kyojuKankyoのsetメソッドです。
-     * 
+     *
      * @param kyojuKankyo kyojuKankyo
      */
     public void setKyojuKankyo(RString kyojuKankyo) {
@@ -265,7 +266,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * kikaiKikiのgetメソッドです。
-     * 
+     *
      * @return kikaiKiki
      */
     @CheckForNull
@@ -275,7 +276,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * kikaiKikiのsetメソッドです。
-     * 
+     *
      * @param kikaiKiki kikaiKiki
      */
     public void setKikaiKiki(RString kikaiKiki) {
@@ -284,9 +285,9 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * このエンティティの主キーが他の{@literal DbT4206GaikyoTokkiChildEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4206GaikyoTokkiChildEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -325,6 +326,7 @@ public class DbT4206GaikyoTokkiChildEntity extends DbTableEntityBase<DbT4206Gaik
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
