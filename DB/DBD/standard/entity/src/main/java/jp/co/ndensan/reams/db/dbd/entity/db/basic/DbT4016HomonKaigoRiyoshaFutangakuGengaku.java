@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 訪問介護利用者負担額減額テーブルの項目定義クラスです。
  */
 public enum DbT4016HomonKaigoRiyoshaFutangakuGengaku implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -40,6 +40,30 @@ public enum DbT4016HomonKaigoRiyoshaFutangakuGengaku implements IColumnDefinitio
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
+     * shinseiYMD
+     */
+    shinseiYMD(2147483647, 0),
+    /**
+     * ketteiYMD
+     */
+    ketteiYMD(2147483647, 0),
+    /**
+     * tekiyoKaishiYMD
+     */
+    tekiyoKaishiYMD(2147483647, 0),
+    /**
+     * tekiyoShuryoYMD
+     */
+    tekiyoShuryoYMD(2147483647, 0),
+    /**
+     * ketteiKubun
+     */
+    ketteiKubun(1, 0),
+    /**
+     * hiShoninRiyu
+     */
+    hiShoninRiyu(200, 0),
+    /**
      * 証記載保険者番号
      */
     shoKisaiHokenshaNo(2147483647, 0),
@@ -53,14 +77,14 @@ public enum DbT4016HomonKaigoRiyoshaFutangakuGengaku implements IColumnDefinitio
     rirekiNo(5, 0),
     /**
      * 法別区分
-     * <br/>施行時ホームヘルプ(56)
-     * <br/>障害時ホームヘルプ(57)
+     * <br/>施行時ホームヘルプ(56)
+     * <br/>障害時ホームヘルプ(57)
      * <br/>障害ヘルプ全額免除(58)
      */
     hobetsuKubun(2, 0),
     /**
      * 障害者手帳有無
-     * <br/>1：有
+     * <br/>1：有
      * <br/>0：無
      */
     shogaishaTechoUmu(1, 0),

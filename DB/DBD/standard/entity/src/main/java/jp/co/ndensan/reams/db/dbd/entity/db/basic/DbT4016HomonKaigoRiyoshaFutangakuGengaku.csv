@@ -1,5 +1,11 @@
-﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
-hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+﻿shinseiYMD,UDD015YMD,FlexibleDate,,,,,shinseiYMD,A
+ketteiYMD,UDD015YMD,FlexibleDate,,,,,ketteiYMD,A
+tekiyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,tekiyoKaishiYMD,A
+tekiyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,tekiyoShuryoYMD,A
+ketteiKubun,varchar,RString,,,,,ketteiKubun,A
+hiShoninRiyu,varchar,RString,,,,,hiShoninRiyu,A
+shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 rirekiNo,int2,int,,,,,履歴番号,A
 hobetsuKubun,varchar,RString,,,,,法別区分,A
 shogaishaTechoUmu,bool,boolean,,,,,障害者手帳有無,A
@@ -7,6 +13,6 @@ shogaishaTechoTokyu,varchar,RString,,,,,障害者手帳等級,A
 shogaishaTechoNo,varchar,RString,,,,,障害者手帳番号,A
 shogaishaTechoKofuYMD,UDD015YMD,FlexibleDate,,,,,障害者手帳交付年月日,A
 shinseiJiyu,varchar,RString,,,,,申請事由,A
-kyufuritsu,DbUDD011HokenKyufuRitsu,DbUDD011HokenKyufuRitsu,,,,,給付率,A
+kyufuritsu,DbUDD011HokenKyufuRitsu,HokenKyufuRitsu,,,,,給付率,A
 kohiFutanshaNo,varchar,RString,,,,,公費負担者番号,A
 kohiJukyushaNo,varchar,RString,,,,,公費受給者番号,A
