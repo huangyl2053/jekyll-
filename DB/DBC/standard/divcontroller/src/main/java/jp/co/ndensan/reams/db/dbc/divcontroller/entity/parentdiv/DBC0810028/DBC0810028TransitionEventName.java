@@ -25,7 +25,7 @@ public enum DBC0810028TransitionEventName implements IContainerEvents {
     食事費用へ("食事費用へ"),
     請求額集計へ("請求額集計へ"),
     社福軽減額へ("社福軽減額へ"),
-    給付費明細(住所地特例)へ("給付費明細(住所地特例)へ");
+    給付費明細_住所地特例へ("給付費明細_住所地特例へ");
 
     private final RString name;
 
