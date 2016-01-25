@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -88,6 +89,18 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
      */
     public HihokenshaNo get被保険者番号() {
         return entity.getHiHokenshaNo();
+    }
+
+    public TelNo get申請者電話番号() {
+        return entity.getShinseishaTelNo();
+    }
+
+    public Decimal get保険対象費用額() {
+        return entity.getHokenTaishoHiyogaku();
+    }
+
+    public boolean get国保連再送付フラグ() {
+        return entity.getKokuhorenSaisofuFlag();
     }
 
     /**
