@@ -100,7 +100,7 @@ public class KyotakuKeikakuJigyoshaSakuseiDac implements IModifiable<DbT3006Kyot
         List<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity> 居宅給付計画事業者作成List = accessor.select().
                 table(DbT3006KyotakuKeikakuJigyoshaSakusei.class).
                 where(and(
-                                eq(DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshano, 被保険者番号),
+                                eq(DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshaNo, 被保険者番号),
                                 eq(DbT3006KyotakuKeikakuJigyoshaSakusei.taishoYM, 対象年月),
                                 eq(DbT3006KyotakuKeikakuJigyoshaSakusei.rirekiNo, 履歴番号))).
                 order(by(DbT3006KyotakuKeikakuJigyoshaSakusei.rirekiNo, Order.DESC)).
