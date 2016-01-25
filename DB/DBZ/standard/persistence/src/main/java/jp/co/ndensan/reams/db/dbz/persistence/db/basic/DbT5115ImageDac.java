@@ -31,19 +31,13 @@ public class DbT5115ImageDac implements ISaveable<DbT5115ImageEntity> {
      * 主キーでイメージ情報を取得します。
      *
      * @param 申請書管理番号 申請書管理番号
-     * @param 取込ページ番号 取込ページ番号
-     * @param 原本マスク分 原本マスク分
      * @return DbT5115ImageEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT5115ImageEntity selectByKey(
-            ShinseishoKanriNo 申請書管理番号,
-            int 取込ページ番号,
-            Code 原本マスク分) throws NullPointerException {
+            ShinseishoKanriNo 申請書管理番号) throws NullPointerException {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        requireNonNull(取込ページ番号, UrSystemErrorMessages.値がnull.getReplacedMessage("取込ページ番号"));
-        requireNonNull(原本マスク分, UrSystemErrorMessages.値がnull.getReplacedMessage("原本マスク分"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 

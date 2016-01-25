@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4115Image;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4115Image.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4115ImageEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -31,19 +30,13 @@ public class DbT4115ImageDac implements ISaveable<DbT4115ImageEntity> {
      * 主キーでイメージ情報を取得します。
      *
      * @param 申請書管理番号 申請書管理番号
-     * @param 取込ページ番号 取込ページ番号
-     * @param 原本マスク分 原本マスク分
      * @return DbT4115ImageEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT4115ImageEntity selectByKey(
-            ShinseishoKanriNo 申請書管理番号,
-            int 取込ページ番号,
-            Code 原本マスク分) throws NullPointerException {
+            ShinseishoKanriNo 申請書管理番号) throws NullPointerException {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        requireNonNull(取込ページ番号, UrSystemErrorMessages.値がnull.getReplacedMessage("取込ページ番号"));
-        requireNonNull(原本マスク分, UrSystemErrorMessages.値がnull.getReplacedMessage("原本マスク分"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
