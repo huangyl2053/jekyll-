@@ -47,9 +47,9 @@ public class TaJushochiTokureisyaKanriParameter {
      *
      * @param shikibetsuCode 識別コード
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
-     * @param psmShikibetsuTaisho 他市町村住所地特例者
+     * @param juushotiTokureiMono 他市町村住所地特例者
      * @param nyushoShisetsuCode 入所施設コード
-     * @param juushotiTokureitaishouShisetu 住所地特例対象施設
+     * @param juushotiTokureitaishouShisetu 事業者種別
      * @return 他住所地特例者管理パラメータ
      */
     public static TaJushochiTokureisyaKanriParameter createParamBy他住所地特例者管理(
@@ -60,80 +60,4 @@ public class TaJushochiTokureisyaKanriParameter {
             RString juushotiTokureitaishouShisetu) {
         return new TaJushochiTokureisyaKanriParameter(shikibetsuCode, psmShikibetsuTaisho, juushotiTokureiMono, nyushoShisetsuCode, juushotiTokureitaishouShisetu);
     }
-
-//    /**
-//     * 識別コード検索用のパラメータを生成します。
-//     *
-//     * @param shikibetsuCode 識別コード
-//     * @param psmShikibetsuTaisho psmShikibetsuTaisho
-//     * @param psmShikibetsuTaisho 他市町村住所地特例者
-//     * @param nyushoShisetsuCode 入所施設コード
-//     * @param juushotiTokureitaishouShisetu 住所地特例対象施設
-//     * @return 他住所地特例者管理パラメータ
-//     */
-//    public static TaJushochiTokureisyaKanriParameter createParamFor識別コード(
-//            ShikibetsuCode shikibetsuCode,
-//            RString psmShikibetsuTaisho,
-//            RString juushotiTokureiMono,
-//            JigyoshaNo nyushoShisetsuCode,
-//            RString juushotiTokureitaishouShisetu) {
-//        return new TaJushochiTokureisyaKanriParameter(shikibetsuCode, psmShikibetsuTaisho, RString.EMPTY, JigyoshaNo.EMPTY, RString.EMPTY);
-//    }
-//
-//    /**
-//     * 他市町村住所地特例情報取得のパラメータを生成します。
-//     *
-//     * @param shikibetsuCode 識別コード
-//     * @param psmShikibetsuTaisho psmShikibetsuTaisho
-//     * @param psmShikibetsuTaisho 他市町村住所地特例者
-//     * @param nyushoShisetsuCode 入所施設コード
-//     * @param juushotiTokureitaishouShisetu 住所地特例対象施設
-//     * @return 他住所地特例者管理パラメータ
-//     */
-//    public static TaJushochiTokureisyaKanriParameter createParamBy他市町村住所地特例(
-//            ShikibetsuCode shikibetsuCode,
-//            RString psmShikibetsuTaisho,
-//            RString juushotiTokureiMono,
-//            JigyoshaNo nyushoShisetsuCode,
-//            RString juushotiTokureitaishouShisetu) {
-//        return new TaJushochiTokureisyaKanriParameter(shikibetsuCode, RString.EMPTY, RString.EMPTY, JigyoshaNo.EMPTY, RString.EMPTY);
-//    }
-//
-//    /**
-//     * 事業者名称取得のパラメータを生成します。
-//     *
-//     * @param shikibetsuCode 識別コード
-//     * @param psmShikibetsuTaisho psmShikibetsuTaisho
-//     * @param psmShikibetsuTaisho 他市町村住所地特例者
-//     * @param nyushoShisetsuCode 入所施設コード
-//     * @param juushotiTokureitaishouShisetu 住所地特例対象施設
-//     * @return 他住所地特例者管理パラメータ
-//     */
-//    public static TaJushochiTokureisyaKanriParameter createParamBy事業者名称取得FOR介護保険施設(
-//            ShikibetsuCode shikibetsuCode,
-//            RString psmShikibetsuTaisho,
-//            RString juushotiTokureiMono,
-//            JigyoshaNo nyushoShisetsuCode,
-//            RString juushotiTokureitaishouShisetu) {
-//        return new TaJushochiTokureisyaKanriParameter(ShikibetsuCode.EMPTY, RString.EMPTY, RString.EMPTY, nyushoShisetsuCode, RString.EMPTY);
-//    }
-//
-//    /**
-//     * 事業者名称取得のパラメータを生成します。
-//     *
-//     * @param shikibetsuCode 識別コード
-//     * @param psmShikibetsuTaisho psmShikibetsuTaisho
-//     * @param psmShikibetsuTaisho 他市町村住所地特例者
-//     * @param nyushoShisetsuCode 入所施設コード
-//     * @param juushotiTokureitaishouShisetu 住所地特例対象施設
-//     * @return 他住所地特例者管理パラメータ
-//     */
-//    public static TaJushochiTokureisyaKanriParameter createParamBy事業者名称取得FOR住所地特例対象施設(
-//            ShikibetsuCode shikibetsuCode,
-//            RString psmShikibetsuTaisho,
-//            RString juushotiTokureiMono,
-//            JigyoshaNo nyushoShisetsuCode,
-//            RString juushotiTokureitaishouShisetu) {
-//        return new TaJushochiTokureisyaKanriParameter(ShikibetsuCode.EMPTY, RString.EMPTY, RString.EMPTY, nyushoShisetsuCode, juushotiTokureitaishouShisetu);
-//    }
 }
