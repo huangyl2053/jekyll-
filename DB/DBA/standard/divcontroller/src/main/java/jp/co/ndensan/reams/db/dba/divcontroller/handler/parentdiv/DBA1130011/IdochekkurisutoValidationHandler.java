@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1130011;
 
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1130011.IdochekkurisutoDiv;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -18,32 +19,79 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class IdochekkurisutoValidationHandler {
 
+    private final IdochekkurisutoDiv div;
+
     /**
-     * 今回開始日と今回終了日の順番の整合性チェックです。
+     * コンストラクタです。
+     *
+     * @param div IdochekkurisutoDiv
+     */
+    public IdochekkurisutoValidationHandler(IdochekkurisutoDiv div) {
+        this.div = div;
+    }
+
+    /**
+     * 今回開始日と今回終了日の順番の整合性をチェックします。
      *
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs getKashiAfterShuryoMsg() {
+    public ValidationMessageControlPairs checkKashiAfterShuryoMsg() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(IdocheckMessages.期間が不正_未来日付不可));
+        if (div.getTxtkonkaishuryo().getValue().isBefore(div.getTxtkonkaikaishi().getValue())) {
+            validationMessages.add(new ValidationMessageControlPair(IdocheckMessages.期間が不正_未来日付不可));
+        }
         return validationMessages;
     }
 
     /**
-     * 今回開始日と終了日の必須チェックです。
+     * 今回開始日と終了日の必須をチェックします。
      *
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs getRequiredKashiShuryoMsg() {
+    public ValidationMessageControlPairs checkRequiredKashiShuryoMsg() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(IdocheckMessages.必須));
+        if (div.getTxtkonkaishuryo().getValue().isEmpty()
+                && div.getTxtkonkaikaishi().getValue().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(IdocheckMessages.開始日と終了日必須));
+        }
+        return validationMessages;
+    }
+
+    /**
+     * 対象台帳の必須をチェックします。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs checkRequiredChktaishodaicho() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (div.getChktaishodaicho().getSelectedKeys().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(IdocheckMessages.対象台帳必須));
+        }
+        return validationMessages;
+    }
+
+    /**
+     * 出力順帳の必須をチェックします。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs checkRequiredChohyoShu() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        // TODO QA509
+        if (div.getCcdChohyoShutsuryokujun().isDisabled()) {
+//            validationMessages.add(new ValidationMessageControlPair(IdocheckMessages.出力順必須));
+        }
         return validationMessages;
     }
 
     private static enum IdocheckMessages implements IValidationMessage {
 
-        必須(UrErrorMessages.必須, "今回開始日と終了日両方"),
-        期間が不正_未来日付不可(DbzErrorMessages.期間が不正_未来日付不可, "開始日", "終了日");
+        開始日と終了日必須(UrErrorMessages.必須, "今回開始日と終了日両方"),
+        期間が不正_未来日付不可(DbzErrorMessages.期間が不正_未来日付不可, "開始日", "終了日"),
+        対象台帳必須(UrErrorMessages.必須, "対象台帳"),
+        出力順必須(UrErrorMessages.必須, "出力順"),
+        今回開始日必須(UrErrorMessages.必須, "今回開始日"),
+        今回終了日必須(UrErrorMessages.必須, "今回終了日");
 
         private final Message message;
 

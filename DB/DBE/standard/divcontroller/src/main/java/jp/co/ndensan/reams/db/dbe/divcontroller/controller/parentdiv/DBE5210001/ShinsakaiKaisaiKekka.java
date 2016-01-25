@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -67,7 +67,7 @@ public class ShinsakaiKaisaiKekka {
      */
     public ResponseData<ShinsakaiKaisaiKekkaDiv> onLoad(ShinsakaiKaisaiKekkaDiv div) {
         ResponseData<ShinsakaiKaisaiKekkaDiv> responseData = new ResponseData<>();
-        RString 開催番号 = new RString("034001  ");
+        RString 開催番号 = new RString("41022222");
 //        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         List<ShinsakaiKaisaiYoteiJohoBusiness> saiYoteiJoho = service.getヘッドエリア内容検索(開催番号).records();
         getHandler(div).onLoad(saiYoteiJoho);
@@ -109,7 +109,7 @@ public class ShinsakaiKaisaiKekka {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 && new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
 //            RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
-            RString 開催番号 = new RString("034001  ");
+            RString 開催番号 = new RString("41022222");
             Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel
                     = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
             ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
@@ -172,7 +172,7 @@ public class ShinsakaiKaisaiKekka {
     }
 
     private void setYotei(ShinsakaiKaisaiKekkaDiv div) {
-        RString 開催番号 = new RString("034001  ");
+        RString 開催番号 = new RString("41022222");
 //        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel
                 = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
@@ -195,7 +195,7 @@ public class ShinsakaiKaisaiKekka {
 
     private void setYoteiJoho(ShinsakaiKaisaiKekkaDiv div) {
 //        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
-        RString 開催番号 = new RString("034001  ");
+        RString 開催番号 = new RString("41022222");
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel
                 = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
         ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
@@ -219,7 +219,7 @@ public class ShinsakaiKaisaiKekka {
 
     private void setKekkaJoho(ShinsakaiKaisaiKekkaDiv div) {
 //        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
-        RString 開催番号 = new RString("034001  ");
+        RString 開催番号 = new RString("41022222");
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel
                 = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
         ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
@@ -242,7 +242,7 @@ public class ShinsakaiKaisaiKekka {
 
     private void setWariateIinJoho(ShinsakaiKaisaiKekkaDiv div) {
 //        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
-        RString 開催番号 = new RString("41022229");
+        RString 開催番号 = new RString("41022222");
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel
                 = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
         for (dgShinsakaiIinIchiran_Row row : div.getDgShinsakaiIinIchiran().getDataSource()) {

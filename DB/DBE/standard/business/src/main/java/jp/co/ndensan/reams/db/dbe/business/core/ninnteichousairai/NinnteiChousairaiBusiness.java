@@ -21,7 +21,7 @@ public class NinnteiChousairaiBusiness {
     /**
      * 認定調査依頼項目を返します。
      *
-     * @param entity
+     * @param entity NinnteiChousairaiEntity
      */
     public NinnteiChousairaiBusiness(NinnteiChousairaiEntity entity) {
         this.entity = entity;

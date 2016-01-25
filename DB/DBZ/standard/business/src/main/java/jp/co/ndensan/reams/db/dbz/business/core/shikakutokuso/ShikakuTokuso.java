@@ -79,7 +79,7 @@ public class ShikakuTokuso {
      * @return 取得事由コード
      */
     public RString get取得事由コード() {
-        return entity.getJushochitokureiTekiyoJiyuCode();
+        return entity.getShikakuShutokuJiyuCode();
     }
 
     /**
@@ -110,12 +110,12 @@ public class ShikakuTokuso {
     }
 
     /**
-     * 資格喪失届出年月日を取得します。
+     * 喪失事由コードを取得します。
      *
-     * @return 資格喪失届出日
+     * @return 喪失事由コード
      */
-    public RString get喪失届出日() {
-        return entity.getJushochitokureiKaijoJiyuCode();
+    public RString get喪失事由コード() {
+        return entity.getShikakuSoshitsuJiyuCode();
     }
 
     /**

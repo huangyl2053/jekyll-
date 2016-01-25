@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.batchcontroller.flow.KaigoJuminhyo;
+package jp.co.ndensan.reams.db.dbu.batchcontroller.flow.kaigojuminhyo;
 
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.KaigoJuminhyo.KaigoJuminhyoDBUpdateProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.KaigoJuminhyo.KaigoJuminhyoEucCsvProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.kaigojuminhyo.KaigoJuminhyoDBUpdateProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.kaigojuminhyo.KaigoJuminhyoEucCsvProcess;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyo.KaigoJuminhyoBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -20,7 +20,7 @@ public class KaigoJuminhyoFlow extends BatchFlowBase<KaigoJuminhyoBatchParameter
     @Override
     protected void defineFlow() {
         executeStep(KAIGOJUMINHYO_EUC_CSV_PROCESS);
-        executeStep(KAIGOJUMINHYO_DB_UPD_PROCESS);
+        //executeStep(KAIGOJUMINHYO_DB_UPD_PROCESS);
     }
 
     private static final String KAIGOJUMINHYO_EUC_CSV_PROCESS = "kaigoJuminhyoEucCsvProcess";

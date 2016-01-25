@@ -26,7 +26,7 @@ public class WaritsukeBusiness {
     /**
      * 割付済み申請者一覧を返します。
      *
-     * @param entity
+     * @param entity WaritsukeEntity
      */
     public WaritsukeBusiness(WaritsukeEntity entity) {
         this.entity = entity;

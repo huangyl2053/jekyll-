@@ -24,13 +24,13 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJohoEntit
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -284,8 +284,7 @@ public class ShinsakaiKaisaiYoteiJoho extends ParentModelBase<ShinsakaiKaisaiYot
      * 削除処理結果となる{@link ShinsakaiKaisaiYoteiJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link ShinsakaiKaisaiYoteiJoho}
-     * @throws IllegalStateException
-     * DbT5501ShinsakaiKaisaiYoteiJohoEntityのデータ状態が変更の場合
+     * @throws IllegalStateException DbT5501ShinsakaiKaisaiYoteiJohoEntityのデータ状態が変更の場合
      */
     @Override
     public ShinsakaiKaisaiYoteiJoho deleted() {

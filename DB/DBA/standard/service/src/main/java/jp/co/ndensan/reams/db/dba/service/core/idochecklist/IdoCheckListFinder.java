@@ -133,10 +133,16 @@ public class IdoCheckListFinder {
     }
 
     private RDateTime appendZero(FlexibleDate formatDate) {
+        if (formatDate == null) {
+            return null;
+        }
         return RDateTime.of(formatDate.getYearValue(), formatDate.getMonthValue(), formatDate.getDayValue(), 0, 0, 0, 0);
     }
 
     private RDateTime appendDay(FlexibleDate formatDate) {
+        if (formatDate == null) {
+            return null;
+        }
         return RDateTime.of(formatDate.getYearValue(), formatDate.getMonthValue(), formatDate.getDayValue(), 23, 59, 59, 999);
     }
 }

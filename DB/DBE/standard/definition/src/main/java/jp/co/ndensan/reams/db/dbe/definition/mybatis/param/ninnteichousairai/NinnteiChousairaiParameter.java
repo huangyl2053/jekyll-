@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NinnteiChousairaiParameter {
+public final class NinnteiChousairaiParameter {
 
     private final ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private final RString shishoCode;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.batchcontroller.step.KaigoJuminhyo;
+package jp.co.ndensan.reams.db.dbu.batchcontroller.step.kaigojuminhyo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.TashajukiHachiCSVDataE
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.TashajukiJunitoJugoCSVDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyo.KaigoJuminhyoRelateEntity;
 import jp.co.ndensan.reams.db.dbu.service.core.basic.kaigojuminhyo.KaigoJyuminhyouTashajukiCSVDataSakuseiFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.RenkeiDataFormatVersion;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7035RendoPatternEntity;
@@ -153,7 +154,7 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
     @Override
     protected void process(KaigoJuminhyoRelateEntity entity) {
         KaigoJuminhyoEntity kaigoJuminhyoEntity = new KaigoJuminhyoEntity();
-        kaigoJuminhyoEntity.setHihokenshaNo(entity.getDbT1001HihokenshaDaichoEntity().getHihokenshaNo());
+        kaigoJuminhyoEntity.setHihokenshaNo(new HihokenshaNo(entity.getDbT1001HihokenshaDaichoEntity().getHihokenshaNo().value()));
         kaigoJuminhyoEntity.setIdoYMD(entity.getDbT1001HihokenshaDaichoEntity().getIdoYMD());
         kaigoJuminhyoEntity.setEdaNo(entity.getDbT1001HihokenshaDaichoEntity().getEdaNo());
         kaigoJuminhyoEntity.setIdoJiyuCode(entity.getDbT1001HihokenshaDaichoEntity().getIdoJiyuCode());

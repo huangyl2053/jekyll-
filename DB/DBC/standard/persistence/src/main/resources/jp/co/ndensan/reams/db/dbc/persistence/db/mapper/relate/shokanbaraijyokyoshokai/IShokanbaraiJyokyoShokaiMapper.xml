@@ -168,8 +168,8 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
             SHOKANMEISAIJUSHOCHITOKUREI.*,
-            KAIGOSERVICENAIYOUB."serviceName"
-            
+            KAIGOSERVICENAIYOUB."serviceName",
+            HOKENJA."hokenjaName"
         FROM
             rgdb."DbT3107ShokanMeisaiJushochiTokurei" SHOKANMEISAIJUSHOCHITOKUREI
             LEFT JOIN
@@ -202,6 +202,11 @@
              ON 
                 SHOKANMEISAIJUSHOCHITOKUREI."serviceShuruiCode" = KAIGOSERVICENAIYOUB."serviceShuruiCd"
                 AND SHOKANMEISAIJUSHOCHITOKUREI."serviceKomokuCode" = KAIGOSERVICENAIYOUB."serviceKoumokuCd"
+             LEFT JOIN
+                rgur."UrT0507Hokenja" HOKENJA
+             ON
+                SHOKANMEISAIJUSHOCHITOKUREI."shisetsuShozaiHokenshaNo" = HOKENJA."hokenjaNo"
+                AND HOKENJA."hokenjaShubetsu" = '0013'
         WHERE
             SHOKANMEISAIJUSHOCHITOKUREI."serviceTeikyoYM" = #{serviceTeikyoYM}
             AND SHOKANMEISAIJUSHOCHITOKUREI."hiHokenshaNo" = #{hiHokenshaNo}
