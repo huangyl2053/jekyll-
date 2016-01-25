@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 介護賦課テーブルの項目定義クラスです。
  */
 public enum DbT2002Fuka implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -170,7 +170,7 @@ public enum DbT2002Fuka implements IColumnDefinition {
     /**
      * 調定日時
      */
-    choteiTimestamp(2147483647, 0),
+    choteiNichiji(2147483647, 0),
     /**
      * 調定事由1
      */
@@ -215,10 +215,10 @@ public enum DbT2002Fuka implements IColumnDefinition {
     /**
      * 異動基準日時
      */
-    idoKijunTimestamp(2147483647, 0),
+    idoKijunNichiji(2147483647, 0),
     /**
      * 口座区分
-     * <br/>1：該当　0:非該当
+     * <br/>1：口座振替　0:現金納付
      */
     kozaKubun(1, 0),
     /**
@@ -234,7 +234,15 @@ public enum DbT2002Fuka implements IColumnDefinition {
     /**
      * 賦課市町村コード
      */
-    fukaShichosonCode(2147483647, 0);
+    fukaShichosonCode(2147483647, 0),
+    /**
+     * 特徴歳出還付額
+     */
+    tkSaishutsuKampuGaku(7, 0),
+    /**
+     * 普徴歳出還付額
+     */
+    fuSaishutsuKampuGaku(7, 0);
 
     private final int maxLength;
     private final int scale;

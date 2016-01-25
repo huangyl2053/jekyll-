@@ -1,8 +1,0 @@
-﻿shotokuNendo,UDD012YSeireki,FlexibleYear,,,,,所得年度,A
-shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
-rirekiNo,int4,int,,,,,履歴番号,A
-hiKazeiKubun,varchar,RString,,,,,非課税区分（住民税減免前）,A
-hiKazeiKubunGemmenGo,varchar,RString,,,,,非課税区分（住民税減免後）,A
-gokeiShotokuGaku,numeric,Decimal,,,,,合計所得金額,A
-nenkiniShunyuGaku,numeric,Decimal,,,,,公的年金収入額,A
-gekihenKanwaKubun,varchar,RString,,,,,激変緩和措置区分,A

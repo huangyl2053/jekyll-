@@ -7,18 +7,20 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 
 /**
  * 償還払請求社会福祉法人軽減額テーブルのエンティティクラスです。
  */
 public class DbT3051ShokanShakaiFukushiHojinKeigengakuEntity extends DbTableEntityBase<DbT3051ShokanShakaiFukushiHojinKeigengakuEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3051ShokanShakaiFukushiHojinKeigengaku");
@@ -42,9 +44,9 @@ public class DbT3051ShokanShakaiFukushiHojinKeigengakuEntity extends DbTableEnti
     @PrimaryKey
     private RString yoshikiNo;
     @PrimaryKey
-    private RString junjiNo;
+    private RString meisaiNo;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private RString renban;
     private Decimal keigenritsu;
     private ServiceShuruiCode serviceShuruiCode;
     private int riyoshaFutangakuTotal;
@@ -111,7 +113,7 @@ public class DbT3051ShokanShakaiFukushiHojinKeigengakuEntity extends DbTableEnti
      *
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
@@ -129,7 +131,7 @@ public class DbT3051ShokanShakaiFukushiHojinKeigengakuEntity extends DbTableEnti
      *
      * @param serviceTeikyoYM サービス提供年月
      */
-    public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
+    public void setServiceTeikyoYM(@Nonnull FlexibleYearMonth serviceTeikyoYM) {
         this.serviceTeikyoYM = serviceTeikyoYM;
     }
 
@@ -147,7 +149,7 @@ public class DbT3051ShokanShakaiFukushiHojinKeigengakuEntity extends DbTableEnti
      *
      * @param seiriNo 整理番号
      */
-    public void setSeiriNo(RString seiriNo) {
+    public void setSeiriNo(@Nonnull RString seiriNo) {
         this.seiriNo = seiriNo;
     }
 
@@ -165,7 +167,7 @@ public class DbT3051ShokanShakaiFukushiHojinKeigengakuEntity extends DbTableEnti
      *
      * @param jigyoshaNo 事業者番号
      */
-    public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(@Nonnull JigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
@@ -183,48 +185,48 @@ public class DbT3051ShokanShakaiFukushiHojinKeigengakuEntity extends DbTableEnti
      *
      * @param yoshikiNo 様式番号
      */
-    public void setYoshikiNo(RString yoshikiNo) {
+    public void setYoshikiNo(@Nonnull RString yoshikiNo) {
         this.yoshikiNo = yoshikiNo;
     }
 
     /**
-     * 順次番号のgetメソッドです。
+     * 明細番号のgetメソッドです。
      * <br/>
      * <br/>複数レコード対応のため
      *
-     * @return 順次番号
+     * @return 明細番号
      */
-    public RString getJunjiNo() {
-        return junjiNo;
+    public RString getMeisaiNo() {
+        return meisaiNo;
     }
 
     /**
-     * 順次番号のsetメソッドです。
+     * 明細番号のsetメソッドです。
      * <br/>
      * <br/>複数レコード対応のため
      *
-     * @param junjiNo 順次番号
+     * @param meisaiNo 明細番号
      */
-    public void setJunjiNo(RString junjiNo) {
-        this.junjiNo = junjiNo;
+    public void setMeisaiNo(@Nonnull RString meisaiNo) {
+        this.meisaiNo = meisaiNo;
     }
 
     /**
-     * 履歴番号のgetメソッドです。
+     * 連番のgetメソッドです。
      *
-     * @return 履歴番号
+     * @return 連番
      */
-    public Decimal getRirekiNo() {
-        return rirekiNo;
+    public RString getRenban() {
+        return renban;
     }
 
     /**
-     * 履歴番号のsetメソッドです。
+     * 連番のsetメソッドです。
      *
-     * @param rirekiNo 履歴番号
+     * @param renban 連番
      */
-    public void setRirekiNo(Decimal rirekiNo) {
-        this.rirekiNo = rirekiNo;
+    public void setRenban(@Nonnull RString renban) {
+        this.renban = renban;
     }
 
     /**
@@ -232,6 +234,7 @@ public class DbT3051ShokanShakaiFukushiHojinKeigengakuEntity extends DbTableEnti
      *
      * @return 軽減率
      */
+    @CheckForNull
     public Decimal getKeigenritsu() {
         return keigenritsu;
     }
@@ -250,6 +253,7 @@ public class DbT3051ShokanShakaiFukushiHojinKeigengakuEntity extends DbTableEnti
      *
      * @return サービス種類コード
      */
+    @CheckForNull
     public ServiceShuruiCode getServiceShuruiCode() {
         return serviceShuruiCode;
     }
@@ -268,6 +272,7 @@ public class DbT3051ShokanShakaiFukushiHojinKeigengakuEntity extends DbTableEnti
      *
      * @return 受領すべき利用者負担の総額
      */
+    @CheckForNull
     public int getRiyoshaFutangakuTotal() {
         return riyoshaFutangakuTotal;
     }
@@ -286,6 +291,7 @@ public class DbT3051ShokanShakaiFukushiHojinKeigengakuEntity extends DbTableEnti
      *
      * @return 軽減額
      */
+    @CheckForNull
     public int getKeigengaku() {
         return keigengaku;
     }
@@ -304,6 +310,7 @@ public class DbT3051ShokanShakaiFukushiHojinKeigengakuEntity extends DbTableEnti
      *
      * @return 軽減後利用者負担額
      */
+    @CheckForNull
     public int getKeigengoRiyoshaFutangaku() {
         return keigengoRiyoshaFutangaku;
     }
@@ -322,6 +329,7 @@ public class DbT3051ShokanShakaiFukushiHojinKeigengakuEntity extends DbTableEnti
      *
      * @return 備考
      */
+    @CheckForNull
     public RString getBiko() {
         return biko;
     }
@@ -362,10 +370,10 @@ public class DbT3051ShokanShakaiFukushiHojinKeigengakuEntity extends DbTableEnti
         if (!Objects.equals(this.yoshikiNo, other.yoshikiNo)) {
             return false;
         }
-        if (!Objects.equals(this.junjiNo, other.junjiNo)) {
+        if (!Objects.equals(this.meisaiNo, other.meisaiNo)) {
             return false;
         }
-        if (this.rirekiNo != other.rirekiNo) {
+        if (!Objects.equals(this.renban, other.renban)) {
             return false;
         }
         return true;
@@ -381,8 +389,8 @@ public class DbT3051ShokanShakaiFukushiHojinKeigengakuEntity extends DbTableEnti
         this.seiriNo = entity.seiriNo;
         this.jigyoshaNo = entity.jigyoshaNo;
         this.yoshikiNo = entity.yoshikiNo;
-        this.junjiNo = entity.junjiNo;
-        this.rirekiNo = entity.rirekiNo;
+        this.meisaiNo = entity.meisaiNo;
+        this.renban = entity.renban;
         this.keigenritsu = entity.keigenritsu;
         this.serviceShuruiCode = entity.serviceShuruiCode;
         this.riyoshaFutangakuTotal = entity.riyoshaFutangakuTotal;
@@ -398,7 +406,7 @@ public class DbT3051ShokanShakaiFukushiHojinKeigengakuEntity extends DbTableEnti
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, jigyoshaNo, yoshikiNo, junjiNo, rirekiNo, keigenritsu, serviceShuruiCode, riyoshaFutangakuTotal, keigengaku, keigengoRiyoshaFutangaku, biko);
+        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, jigyoshaNo, yoshikiNo, meisaiNo, renban, keigenritsu, serviceShuruiCode, riyoshaFutangakuTotal, keigengaku, keigengoRiyoshaFutangaku, biko);
     }
 
 // </editor-fold>
