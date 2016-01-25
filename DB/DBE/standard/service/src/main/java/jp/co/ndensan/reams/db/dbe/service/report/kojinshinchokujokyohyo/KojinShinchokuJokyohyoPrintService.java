@@ -52,9 +52,9 @@ public class KojinShinchokuJokyohyoPrintService {
         ChousaBodyItem chou1 = new ChousaBodyItem(joho.getChosain_1(), joho.getChosain_4(), joho.getChosain_7());
         ChousaBodyItem chou2 = new ChousaBodyItem(joho.getChosain_2(), joho.getChosain_5(), joho.getChosain_8());
         ChousaBodyItem chou3 = new ChousaBodyItem(joho.getChosain_3(), joho.getChosain_6(), joho.getChosain_9());
-        items.add(chou3);
-        items.add(chou2);
         items.add(chou1);
+        items.add(chou2);
+        items.add(chou3);
         List<ShuiBodyItem> shujiItemList = new ArrayList<>();
         ShuiBodyItem shui1 = new ShuiBodyItem(joho.getShui_1(), joho.getShui_4(), joho.getShui_7());
         ShuiBodyItem shui2 = new ShuiBodyItem(joho.getShui_2(), joho.getShui_5(), joho.getShui_8());
