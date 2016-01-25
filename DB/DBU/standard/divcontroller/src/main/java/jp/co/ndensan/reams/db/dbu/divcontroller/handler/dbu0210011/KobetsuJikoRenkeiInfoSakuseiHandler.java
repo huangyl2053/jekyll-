@@ -40,23 +40,26 @@ public class KobetsuJikoRenkeiInfoSakuseiHandler {
     public void initialize(ChushutsuKikanJohoData chushutsuKikanJohoData) {
 
         if (chushutsuKikanJohoData != null) {
-            div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setValue(
-                    chushutsuKikanJohoData.get対象開始日時().getDate());
-            div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setValue(
-                    chushutsuKikanJohoData.get対象開始日時().getRDateTime().getTime());
             div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromYMD().setValue(
-                    chushutsuKikanJohoData.get対象終了日時().getDate());
+                    chushutsuKikanJohoData.get対象開始日時().getDate());
             div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().setValue(
                     chushutsuKikanJohoData.get対象開始日時().getRDateTime().getTime());
             div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().setValue(
                     chushutsuKikanJohoData.get対象終了日時().getDate());
             div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().setValue(
-                    chushutsuKikanJohoData.get対象開始日時().getRDateTime().getTime());
+                    chushutsuKikanJohoData.get対象終了日時().getRDateTime().getTime());
+            div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setValue(
+                    chushutsuKikanJohoData.get対象終了日時().getDate());
+            div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setValue(
+                    chushutsuKikanJohoData.get対象終了日時().getRDateTime().getTime());
+
         } else {
-            div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromYMD().setValue(RDate.getNowDate());
-            div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().setValue(RDate.getNowTime());
+            div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromYMD().clearValue();
+            div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().clearValue();
             div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().setValue(RDate.getNowDate());
             div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().setValue(RDate.getNowTime());
+            div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setValue(RDate.getNowDate());
+            div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setValue(RDate.getNowTime());
         }
     }
 
@@ -67,13 +70,13 @@ public class KobetsuJikoRenkeiInfoSakuseiHandler {
      */
     public ValidationMessageControlPairs 開始日と終了日の比較チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.ValidateA));
+        validationMessages.add(new ValidationMessageControlPair(RRVMessages.Validate));
         return validationMessages;
     }
 
     private static enum RRVMessages implements IValidationMessage {
 
-        ValidateA(DbzErrorMessages.期間が不正_未来日付不可, "今回開始日と今回開始時", "前回終了日と前回終了時");
+        Validate(DbzErrorMessages.期間が不正_未来日付不可, "今回開始日と今回開始時", "前回終了日と前回終了時");
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {
