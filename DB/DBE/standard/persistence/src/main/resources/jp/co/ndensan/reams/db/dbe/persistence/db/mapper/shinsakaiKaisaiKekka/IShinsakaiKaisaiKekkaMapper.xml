@@ -29,7 +29,7 @@
         LEFT JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" DbT5592ShinsakaiKaisaiBashoJoho
         ON DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoCode" = DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiBashoCode"
         WHERE
-        DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" =#{開催番号}
+        TRIM(DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo") =TRIM(#{開催番号})
     </select>
     <resultMap id="resultMap_ShinsakaiKaisaiYoteiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.shinsakaiKaisaiKekka.ShinsakaiKaisaiYoteiJohoEntity" autoMapping="true">
         <result property="審査会名称" column="shinsakaiKaisaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -72,7 +72,7 @@
         ON DbT5593GogitaiWariateIinJoho."shinsakaiIinCode" = DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode"
         AND DbT5593GogitaiWariateIinJoho."gogitaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."gogitaiNo"
         WHERE
-        DbT5503ShinsakaiWariateIinJoho."shinsakaiKaisaiNo" =#{開催番号}
+        TRIM(DbT5503ShinsakaiWariateIinJoho."shinsakaiKaisaiNo") =TRIM(#{開催番号})
         ORDER BY DbT5593GogitaiWariateIinJoho."gogitaichoKubunCode" desc , DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode" asc
     </select>
     <resultMap id="resultMap_ShinsakaiWariateIinJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.shinsakaiKaisaiKekka.ShinsakaiWariateIinJohoEntity" autoMapping="true">
@@ -105,7 +105,7 @@
         (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5511ShinsakaiKaisaiKekkaJohoMapper.noDeleted_DbT5511ShinsakaiKaisaiKekkaJoho" />) AS DbT5511ShinsakaiKaisaiKekkaJoho
         ON DbT5511ShinsakaiKaisaiKekkaJoho."dbT5511ShinsakaiKaisaiKekkaJoho_shinsakaiKaisaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo"
         <where>
-            DbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo" = #{開催番号}
+            TRIM(DbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo") = TRIM(#{開催番号})
         </where>
     </select>
     <resultMap id="resultMap_YoteiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoRelateEntity" autoMapping="true">
