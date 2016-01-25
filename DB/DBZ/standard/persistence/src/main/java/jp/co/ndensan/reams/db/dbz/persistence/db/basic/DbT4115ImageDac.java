@@ -8,15 +8,12 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4115Image;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4115Image.genponMaskKubun;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4115Image.shinseishoKanriNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4115Image.torikomiPageNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4115ImageEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -52,10 +49,7 @@ public class DbT4115ImageDac implements ISaveable<DbT4115ImageEntity> {
 
         return accessor.select().
                 table(DbT4115Image.class).
-                where(and(
-                                eq(shinseishoKanriNo, 申請書管理番号),
-                                eq(torikomiPageNo, 取込ページ番号),
-                                eq(genponMaskKubun, 原本マスク分))).
+                where(eq(shinseishoKanriNo, 申請書管理番号)).
                 toObject(DbT4115ImageEntity.class);
     }
 
