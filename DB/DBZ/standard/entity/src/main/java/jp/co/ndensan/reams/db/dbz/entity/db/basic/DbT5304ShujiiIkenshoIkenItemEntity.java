@@ -1,21 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * 要介護認定主治医意見書意見項目テーブルのエンティティクラスです。
  */
 public class DbT5304ShujiiIkenshoIkenItemEntity extends DbTableEntityBase<DbT5304ShujiiIkenshoIkenItemEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5304ShujiiIkenshoIkenItem");
@@ -32,6 +34,7 @@ public class DbT5304ShujiiIkenshoIkenItemEntity extends DbTableEntityBase<DbT530
     private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
     private int ikenshoIraiRirekiNo;
+    @PrimaryKey
     private int remban;
     private Code koroshoIfShikibetsuCode;
     private RString ikenItem;
@@ -99,7 +102,7 @@ public class DbT5304ShujiiIkenshoIkenItemEntity extends DbTableEntityBase<DbT530
      *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -121,7 +124,7 @@ public class DbT5304ShujiiIkenshoIkenItemEntity extends DbTableEntityBase<DbT530
      *
      * @param ikenshoIraiRirekiNo 主治医意見書作成依頼履歴番号
      */
-    public void setIkenshoIraiRirekiNo(int ikenshoIraiRirekiNo) {
+    public void setIkenshoIraiRirekiNo(@Nonnull int ikenshoIraiRirekiNo) {
         this.ikenshoIraiRirekiNo = ikenshoIraiRirekiNo;
     }
 
@@ -139,7 +142,7 @@ public class DbT5304ShujiiIkenshoIkenItemEntity extends DbTableEntityBase<DbT530
      *
      * @param remban 連番
      */
-    public void setRemban(int remban) {
+    public void setRemban(@Nonnull int remban) {
         this.remban = remban;
     }
 
@@ -161,7 +164,7 @@ public class DbT5304ShujiiIkenshoIkenItemEntity extends DbTableEntityBase<DbT530
      *
      * @param koroshoIfShikibetsuCode 厚労省IF識別コード
      */
-    public void setKoroshoIfShikibetsuCode(Code koroshoIfShikibetsuCode) {
+    public void setKoroshoIfShikibetsuCode(@Nonnull Code koroshoIfShikibetsuCode) {
         this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
     }
 
@@ -170,6 +173,7 @@ public class DbT5304ShujiiIkenshoIkenItemEntity extends DbTableEntityBase<DbT530
      *
      * @return 意見項目
      */
+    @CheckForNull
     public RString getIkenItem() {
         return ikenItem;
     }
@@ -187,7 +191,7 @@ public class DbT5304ShujiiIkenshoIkenItemEntity extends DbTableEntityBase<DbT530
      * このエンティティの主キーが他の{@literal DbT5304ShujiiIkenshoIkenItemEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5304ShujiiIkenshoIkenItemEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -199,6 +203,9 @@ public class DbT5304ShujiiIkenshoIkenItemEntity extends DbTableEntityBase<DbT530
             return false;
         }
         if (this.ikenshoIraiRirekiNo != other.ikenshoIraiRirekiNo) {
+            return false;
+        }
+        if (this.remban != other.remban) {
             return false;
         }
         return true;

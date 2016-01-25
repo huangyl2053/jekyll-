@@ -1,6 +1,6 @@
 ﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
 shujiiIryokikanCode,varchar,RString,,,,,主治医医療機関コード,A
-iryokikanCode,DbUDD012IryoKikanCode,DbUDD012IryoKikanCode,,,,,医療機関コード,A
+iryokikanCode,DbUDD012IryoKikanCode,IryoKikanCode,,,,,医療機関コード,A
 iryoKikanMeisho,varchar,RString,,,,,医療機関名称,A
 iryoKikanMeishoKana,varchar,RString,,,,,医療機関名称カナ,A
 yubinNo,UDD003YubinNo,YubinNo,,,,,郵便番号,A

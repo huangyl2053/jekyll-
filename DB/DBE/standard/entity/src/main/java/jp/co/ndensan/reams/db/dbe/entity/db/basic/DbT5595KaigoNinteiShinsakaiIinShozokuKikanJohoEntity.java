@@ -11,12 +11,14 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 介護認定審査会委員所属機関情報テーブルのエンティティクラスです。
  */
 public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTableEntityBase<DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho");
 
@@ -35,7 +37,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
     private RString jigyoshaKubun;
     private FlexibleDate shozokuKaishiYMD;
     private FlexibleDate shozokuShuryoYMD;
-    private DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private RString shujiiIryokikanCode;
     private RString shujiiCode;
     private RString ninteichosaItakusakiCode;
@@ -44,7 +46,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -53,7 +55,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -62,7 +64,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -71,17 +73,16 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -90,7 +91,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * 介護認定審査会委員コードのgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会委員コード
      */
     public RString getShinsakaiIinCode() {
@@ -99,7 +100,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * 介護認定審査会委員コードのsetメソッドです。
-     * 
+     *
      * @param shinsakaiIinCode 介護認定審査会委員コード
      */
     public void setShinsakaiIinCode(@Nonnull RString shinsakaiIinCode) {
@@ -108,7 +109,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * 連番のgetメソッドです。
-     * 
+     *
      * @return 連番
      */
     public int getRemban() {
@@ -117,7 +118,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * 連番のsetメソッドです。
-     * 
+     *
      * @param remban 連番
      */
     public void setRemban(@Nonnull int remban) {
@@ -126,7 +127,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * 事業者区分のgetメソッドです。
-     * 
+     *
      * @return 事業者区分
      */
     @CheckForNull
@@ -136,7 +137,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * 事業者区分のsetメソッドです。
-     * 
+     *
      * @param jigyoshaKubun 事業者区分
      */
     public void setJigyoshaKubun(RString jigyoshaKubun) {
@@ -145,7 +146,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * 所属開始年月日のgetメソッドです。
-     * 
+     *
      * @return 所属開始年月日
      */
     @CheckForNull
@@ -155,7 +156,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * 所属開始年月日のsetメソッドです。
-     * 
+     *
      * @param shozokuKaishiYMD 所属開始年月日
      */
     public void setShozokuKaishiYMD(FlexibleDate shozokuKaishiYMD) {
@@ -164,7 +165,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * 所属終了年月日のgetメソッドです。
-     * 
+     *
      * @return 所属終了年月日
      */
     @CheckForNull
@@ -174,7 +175,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * 所属終了年月日のsetメソッドです。
-     * 
+     *
      * @param shozokuShuryoYMD 所属終了年月日
      */
     public void setShozokuShuryoYMD(FlexibleDate shozokuShuryoYMD) {
@@ -183,20 +184,20 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
     @CheckForNull
-    public DbUDD015ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
@@ -204,7 +205,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      * 主治医医療機関コードのgetメソッドです。
      * <br/>
      * <br/>証記載保険者番号＋主治医医療機関コード
-     * 
+     *
      * @return 主治医医療機関コード
      */
     @CheckForNull
@@ -216,7 +217,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      * 主治医医療機関コードのsetメソッドです。
      * <br/>
      * <br/>証記載保険者番号＋主治医医療機関コード
-     * 
+     *
      * @param shujiiIryokikanCode 主治医医療機関コード
      */
     public void setShujiiIryokikanCode(RString shujiiIryokikanCode) {
@@ -227,7 +228,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      * 主治医コードのgetメソッドです。
      * <br/>
      * <br/>証記載保険者番号＋主治医医療機関コード＋主治医コード
-     * 
+     *
      * @return 主治医コード
      */
     @CheckForNull
@@ -239,7 +240,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      * 主治医コードのsetメソッドです。
      * <br/>
      * <br/>証記載保険者番号＋主治医医療機関コード＋主治医コード
-     * 
+     *
      * @param shujiiCode 主治医コード
      */
     public void setShujiiCode(RString shujiiCode) {
@@ -250,7 +251,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      * 認定調査委託先コードのgetメソッドです。
      * <br/>
      * <br/>証記載保険者番号＋認定調査委託先コード
-     * 
+     *
      * @return 認定調査委託先コード
      */
     @CheckForNull
@@ -262,7 +263,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      * 認定調査委託先コードのsetメソッドです。
      * <br/>
      * <br/>証記載保険者番号＋認定調査委託先コード
-     * 
+     *
      * @param ninteichosaItakusakiCode 認定調査委託先コード
      */
     public void setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {
@@ -273,7 +274,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      * 認定調査員コードのgetメソッドです。
      * <br/>
      * <br/>証記載保険者番号＋認定調査委託先コード＋認定調査員コード
-     * 
+     *
      * @return 認定調査員コード
      */
     @CheckForNull
@@ -285,7 +286,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      * 認定調査員コードのsetメソッドです。
      * <br/>
      * <br/>証記載保険者番号＋認定調査委託先コード＋認定調査員コード
-     * 
+     *
      * @param ninteiChosainNo 認定調査員コード
      */
     public void setNinteiChosainNo(RString ninteiChosainNo) {
@@ -296,7 +297,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      * その他機関コードのgetメソッドです。
      * <br/>
      * <br/>証記載保険者番号＋その他機関コード
-     * 
+     *
      * @return その他機関コード
      */
     @CheckForNull
@@ -308,7 +309,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      * その他機関コードのsetメソッドです。
      * <br/>
      * <br/>証記載保険者番号＋その他機関コード
-     * 
+     *
      * @param sonotaKikanCode その他機関コード
      */
     public void setSonotaKikanCode(RString sonotaKikanCode) {
@@ -317,9 +318,9 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * このエンティティの主キーが他の{@literal DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -356,6 +357,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -364,5 +366,4 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
     }
 
 // </editor-fold>
-
 }

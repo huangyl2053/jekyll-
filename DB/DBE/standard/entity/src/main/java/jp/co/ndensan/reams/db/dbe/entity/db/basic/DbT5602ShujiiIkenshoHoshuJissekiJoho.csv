@@ -1,6 +1,6 @@
 ﻿shujiiIryoKikanCode,varchar,RString,,,,,主治医医療機関コード,A
 shujiiCode,varchar,RString,,,,,主治医コード,A
-shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,申請書管理番号,A
+shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
 ikenshoIraiRirekiNo,int2,int,,,,,主治医意見書作成依頼履歴番号,A
 iraishoSakuseiIraiYMD,UDD015YMD,FlexibleDate,,,,,主治医意見書作成依頼年月日,A
 ikenshoKinyuYMD,UDD015YMD,FlexibleDate,,,,,主治医意見書記入年月日,A
