@@ -29,6 +29,15 @@ public class YouKaiGoNinTeiKekTesuChiFinder {
     public YouKaiGoNinTeiKekTesuChiFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
+    
+   /**
+     * テスト用コンストラクタです。
+     *
+     * @param MapperProvider {@link mapperProvider}
+     */
+    YouKaiGoNinTeiKekTesuChiFinder(MapperProvider mapperProvider) {
+        this.mapperProvider = mapperProvider;
+    }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link YouKaiGoNinTeiKekTesuChiFinder}のインスタンスを返します。

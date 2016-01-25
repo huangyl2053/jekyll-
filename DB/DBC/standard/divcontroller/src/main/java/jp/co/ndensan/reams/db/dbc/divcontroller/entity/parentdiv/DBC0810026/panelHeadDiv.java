@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810031;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810026;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -54,12 +54,12 @@ public class panelHeadDiv extends Panel {
     private Button btnKinkyujiShoteiShikkan;
     @JsonProperty("btnShokujiHiyo")
     private Button btnShokujiHiyo;
-    @JsonProperty("btnShafukukeigengaku")
-    private Button btnShafukukeigengaku;
     @JsonProperty("btnSeikyugakuShukei")
     private Button btnSeikyugakuShukei;
-    @JsonProperty("hlDown")
-    private HorizontalLine hlDown;
+    @JsonProperty("btnShafukukeigengaku")
+    private Button btnShafukukeigengaku;
+    @JsonProperty("hldown")
+    private HorizontalLine hldown;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -356,24 +356,6 @@ public class panelHeadDiv extends Panel {
     }
 
     /*
-     * getbtnShafukukeigengaku
-     * @return btnShafukukeigengaku
-     */
-    @JsonProperty("btnShafukukeigengaku")
-    public Button getBtnShafukukeigengaku() {
-        return btnShafukukeigengaku;
-    }
-
-    /*
-     * setbtnShafukukeigengaku
-     * @param btnShafukukeigengaku btnShafukukeigengaku
-     */
-    @JsonProperty("btnShafukukeigengaku")
-    public void setBtnShafukukeigengaku(Button btnShafukukeigengaku) {
-        this.btnShafukukeigengaku = btnShafukukeigengaku;
-    }
-
-    /*
      * getbtnSeikyugakuShukei
      * @return btnSeikyugakuShukei
      */
@@ -392,21 +374,39 @@ public class panelHeadDiv extends Panel {
     }
 
     /*
-     * gethlDown
-     * @return hlDown
+     * getbtnShafukukeigengaku
+     * @return btnShafukukeigengaku
      */
-    @JsonProperty("hlDown")
-    public HorizontalLine getHlDown() {
-        return hlDown;
+    @JsonProperty("btnShafukukeigengaku")
+    public Button getBtnShafukukeigengaku() {
+        return btnShafukukeigengaku;
     }
 
     /*
-     * sethlDown
-     * @param hlDown hlDown
+     * setbtnShafukukeigengaku
+     * @param btnShafukukeigengaku btnShafukukeigengaku
      */
-    @JsonProperty("hlDown")
-    public void setHlDown(HorizontalLine hlDown) {
-        this.hlDown = hlDown;
+    @JsonProperty("btnShafukukeigengaku")
+    public void setBtnShafukukeigengaku(Button btnShafukukeigengaku) {
+        this.btnShafukukeigengaku = btnShafukukeigengaku;
+    }
+
+    /*
+     * gethldown
+     * @return hldown
+     */
+    @JsonProperty("hldown")
+    public HorizontalLine getHldown() {
+        return hldown;
+    }
+
+    /*
+     * sethldown
+     * @param hldown hldown
+     */
+    @JsonProperty("hldown")
+    public void setHldown(HorizontalLine hldown) {
+        this.hldown = hldown;
     }
 
     // </editor-fold>

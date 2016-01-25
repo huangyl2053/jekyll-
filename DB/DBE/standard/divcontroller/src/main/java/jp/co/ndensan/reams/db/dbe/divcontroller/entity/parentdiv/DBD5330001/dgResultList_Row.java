@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBD5330001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jan 21 17:18:12 CST 2016 
+ * Mon Jan 25 16:49:45 CST 2016 
  */
 
 
@@ -36,6 +36,7 @@ public class dgResultList_Row extends DataRow {
     private RString yukoKikanTo;
     private RString nijiHanteiYMD;
     private RString ninteiJokyoTeikyoYMD;
+    private RString shinseishoKanriNo;
 
     public dgResultList_Row() {
         super();
@@ -54,6 +55,7 @@ public class dgResultList_Row extends DataRow {
         this.yukoKikanTo = RString.EMPTY;
         this.nijiHanteiYMD = RString.EMPTY;
         this.ninteiJokyoTeikyoYMD = RString.EMPTY;
+        this.shinseishoKanriNo = RString.EMPTY;
         this.setOriginalData("no", no);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
         this.setOriginalData("hihokenshaName", hihokenshaName);
@@ -69,9 +71,10 @@ public class dgResultList_Row extends DataRow {
         this.setOriginalData("yukoKikanTo", yukoKikanTo);
         this.setOriginalData("nijiHanteiYMD", nijiHanteiYMD);
         this.setOriginalData("ninteiJokyoTeikyoYMD", ninteiJokyoTeikyoYMD);
+        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
     }
 
-    public dgResultList_Row(RString no, RString hihokenshaNo, RString hihokenshaName, RString seibetsu, RString birthDay, RString age, RString shinseiYMD, RString shinseiKubunOnShinsei, RString shinseiKubunOnHorei, RString nijiHanteiKekka, RString yukoKikan, RString yukoKikanFrom, RString yukoKikanTo, RString nijiHanteiYMD, RString ninteiJokyoTeikyoYMD) {
+    public dgResultList_Row(RString no, RString hihokenshaNo, RString hihokenshaName, RString seibetsu, RString birthDay, RString age, RString shinseiYMD, RString shinseiKubunOnShinsei, RString shinseiKubunOnHorei, RString nijiHanteiKekka, RString yukoKikan, RString yukoKikanFrom, RString yukoKikanTo, RString nijiHanteiYMD, RString ninteiJokyoTeikyoYMD, RString shinseishoKanriNo) {
         super();
         this.setOriginalData("no", no);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
@@ -88,6 +91,7 @@ public class dgResultList_Row extends DataRow {
         this.setOriginalData("yukoKikanTo", yukoKikanTo);
         this.setOriginalData("nijiHanteiYMD", nijiHanteiYMD);
         this.setOriginalData("ninteiJokyoTeikyoYMD", ninteiJokyoTeikyoYMD);
+        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.no = no;
         this.hihokenshaNo = hihokenshaNo;
         this.hihokenshaName = hihokenshaName;
@@ -103,6 +107,7 @@ public class dgResultList_Row extends DataRow {
         this.yukoKikanTo = yukoKikanTo;
         this.nijiHanteiYMD = nijiHanteiYMD;
         this.ninteiJokyoTeikyoYMD = ninteiJokyoTeikyoYMD;
+        this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     public RString getNo() {
@@ -163,6 +168,10 @@ public class dgResultList_Row extends DataRow {
 
     public RString getNinteiJokyoTeikyoYMD() {
         return ninteiJokyoTeikyoYMD;
+    }
+
+    public RString getShinseishoKanriNo() {
+        return shinseishoKanriNo;
     }
 
     public void setNo(RString no) {
@@ -238,6 +247,11 @@ public class dgResultList_Row extends DataRow {
     public void setNinteiJokyoTeikyoYMD(RString ninteiJokyoTeikyoYMD) {
         this.setOriginalData("ninteiJokyoTeikyoYMD", ninteiJokyoTeikyoYMD);
         this.ninteiJokyoTeikyoYMD = ninteiJokyoTeikyoYMD;
+    }
+
+    public void setShinseishoKanriNo(RString shinseishoKanriNo) {
+        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
+        this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     // </editor-fold>

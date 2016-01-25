@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -21,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KoikinaiTenkyoEntity {
-    
+
     private HihokenshaNo 被保険者番号;
     private AtenaKanaMeisho 氏名カナ;
     private AtenaMeisho 氏名;
@@ -36,5 +35,6 @@ public class KoikinaiTenkyoEntity {
     private FlexibleDate 登録異動日;
     private FlexibleDate 登録届出日;
     private RString 異動情報;
+    private FlexibleDate 印刷日時;
 
 }
