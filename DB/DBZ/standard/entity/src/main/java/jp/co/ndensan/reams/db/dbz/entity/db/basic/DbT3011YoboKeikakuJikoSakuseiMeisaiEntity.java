@@ -1,22 +1,17 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 予防給付計画自己作成明細テーブルのエンティティクラスです。
@@ -35,7 +30,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiEntity extends DbTableEntityBase
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private HihokenshaNo hihokenshaNo;
+    private DbUDD002HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private FlexibleYearMonth taishoYM;
     @PrimaryKey
@@ -43,11 +38,11 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiEntity extends DbTableEntityBase
     @PrimaryKey
     private RString kyotakuServiceKubun;
     @PrimaryKey
-    private JigyoshaNo serviceTeikyoJigyoshaNo;
+    private DbUDD004JigyoshaNo serviceTeikyoJigyoshaNo;
     @PrimaryKey
-    private ServiceShuruiCode serviceShuruiCode;
+    private DbUDD005ServiceShuruiCode serviceShuruiCode;
     @PrimaryKey
-    private ServiceKomokuCode serviceKomokuCode;
+    private DbUDD006ServiceKomokuCode serviceKomokuCode;
     private Decimal taniSu;
     private Decimal kaisu_Nissu;
     private Decimal shuruiGendoNaiTaniSu_Nissu;
@@ -55,8 +50,8 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiEntity extends DbTableEntityBase
     private Decimal kubunGendoNaiTaniSu_Nissu;
     private Decimal kubunGendoChokaTaniSu_Nissu;
     private Decimal taniSuTanka;
-    private HokenKyufuRitsu kyufuRitsu;
-    private HokenKyufuRitsu waribikiGoTekiyoRitsu;
+    private DbUDD011HokenKyufuRitsu kyufuRitsu;
+    private DbUDD011HokenKyufuRitsu waribikiGoTekiyoRitsu;
     private Decimal waribikiGoTekiyoTaniSu;
     private Decimal teigakuRiyoshaFutanTankaKingaku;
 
@@ -111,7 +106,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiEntity extends DbTableEntityBase
      * 
      * @return 被保険者番号
      */
-    public HihokenshaNo getHihokenshaNo() {
+    public DbUDD002HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
@@ -120,7 +115,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiEntity extends DbTableEntityBase
      * 
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull DbUDD002HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -187,7 +182,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiEntity extends DbTableEntityBase
      * 
      * @return サービス提供事業者番号
      */
-    public JigyoshaNo getServiceTeikyoJigyoshaNo() {
+    public DbUDD004JigyoshaNo getServiceTeikyoJigyoshaNo() {
         return serviceTeikyoJigyoshaNo;
     }
 
@@ -196,7 +191,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiEntity extends DbTableEntityBase
      * 
      * @param serviceTeikyoJigyoshaNo サービス提供事業者番号
      */
-    public void setServiceTeikyoJigyoshaNo(@Nonnull JigyoshaNo serviceTeikyoJigyoshaNo) {
+    public void setServiceTeikyoJigyoshaNo(@Nonnull DbUDD004JigyoshaNo serviceTeikyoJigyoshaNo) {
         this.serviceTeikyoJigyoshaNo = serviceTeikyoJigyoshaNo;
     }
 
@@ -205,7 +200,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiEntity extends DbTableEntityBase
      * 
      * @return サービス種類コード
      */
-    public ServiceShuruiCode getServiceShuruiCode() {
+    public DbUDD005ServiceShuruiCode getServiceShuruiCode() {
         return serviceShuruiCode;
     }
 
@@ -214,7 +209,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiEntity extends DbTableEntityBase
      * 
      * @param serviceShuruiCode サービス種類コード
      */
-    public void setServiceShuruiCode(@Nonnull ServiceShuruiCode serviceShuruiCode) {
+    public void setServiceShuruiCode(@Nonnull DbUDD005ServiceShuruiCode serviceShuruiCode) {
         this.serviceShuruiCode = serviceShuruiCode;
     }
 
@@ -223,7 +218,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiEntity extends DbTableEntityBase
      * 
      * @return サービス項目コード
      */
-    public ServiceKomokuCode getServiceKomokuCode() {
+    public DbUDD006ServiceKomokuCode getServiceKomokuCode() {
         return serviceKomokuCode;
     }
 
@@ -232,7 +227,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiEntity extends DbTableEntityBase
      * 
      * @param serviceKomokuCode サービス項目コード
      */
-    public void setServiceKomokuCode(@Nonnull ServiceKomokuCode serviceKomokuCode) {
+    public void setServiceKomokuCode(@Nonnull DbUDD006ServiceKomokuCode serviceKomokuCode) {
         this.serviceKomokuCode = serviceKomokuCode;
     }
 
@@ -381,7 +376,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiEntity extends DbTableEntityBase
      * @return 給付率
      */
     @CheckForNull
-    public HokenKyufuRitsu getKyufuRitsu() {
+    public DbUDD011HokenKyufuRitsu getKyufuRitsu() {
         return kyufuRitsu;
     }
 
@@ -392,7 +387,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiEntity extends DbTableEntityBase
      * 
      * @param kyufuRitsu 給付率
      */
-    public void setKyufuRitsu(HokenKyufuRitsu kyufuRitsu) {
+    public void setKyufuRitsu(DbUDD011HokenKyufuRitsu kyufuRitsu) {
         this.kyufuRitsu = kyufuRitsu;
     }
 
@@ -404,7 +399,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiEntity extends DbTableEntityBase
      * @return 割引後適用率
      */
     @CheckForNull
-    public HokenKyufuRitsu getWaribikiGoTekiyoRitsu() {
+    public DbUDD011HokenKyufuRitsu getWaribikiGoTekiyoRitsu() {
         return waribikiGoTekiyoRitsu;
     }
 
@@ -415,7 +410,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiEntity extends DbTableEntityBase
      * 
      * @param waribikiGoTekiyoRitsu 割引後適用率
      */
-    public void setWaribikiGoTekiyoRitsu(HokenKyufuRitsu waribikiGoTekiyoRitsu) {
+    public void setWaribikiGoTekiyoRitsu(DbUDD011HokenKyufuRitsu waribikiGoTekiyoRitsu) {
         this.waribikiGoTekiyoRitsu = waribikiGoTekiyoRitsu;
     }
 
@@ -536,4 +531,5 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiEntity extends DbTableEntityBase
     }
 
 // </editor-fold>
+
 }
