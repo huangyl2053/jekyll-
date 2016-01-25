@@ -1,0 +1,10 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,shinseishoKanriNo,A
+ninteichosaRirekiNo,int2,int,,,,,ninteichosaRirekiNo,A
+gaikyoTokkiTextImageKubun,bpchar,RString,,,,,gaikyoTokkiTextImageKubun,A
+jutakuKaishu,text,RString,,,,,jutakuKaishu,A
+tokubetsuKyufuService,text,RString,,,,,tokubetsuKyufuService,A
+zaitakuService,text,RString,,,,,zaitakuService,A
+shuso,text,RString,,,,,shuso,A
+kazokuJokyo,text,RString,,,,,kazokuJokyo,A
+kyojuKankyo,text,RString,,,,,kyojuKankyo,A
+kikaiKiki,text,RString,,,,,kikaiKiki,A
