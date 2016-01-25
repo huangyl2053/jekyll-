@@ -7,8 +7,12 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBD5330001.Main
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBD5330001.dgDoctorSelection_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBD5330001.dgResultList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 要介護認定結果通知（主治医）画面でのバリデーションを管理するハンドラークラスです。
@@ -43,7 +47,7 @@ public class MainPanelHandler {
     /**
      * 申請者
      */
-    public static final RString 申請者 =  new RString("申請者");
+    public static final RString 申請者 = new RString("申請者");
     private final MainPanelDiv div;
 
     /**
@@ -72,7 +76,7 @@ public class MainPanelHandler {
                     youKaiGoNinTeiKekTesuChi.get主治医コード(),
                     youKaiGoNinTeiKekTesuChi.get主治医氏名(),
                     new RString(String.valueOf(youKaiGoNinTeiKekTesuChi.get対象件数())),
-                   youKaiGoNinTeiKekTesuChi.get申請書管理番号());
+                    youKaiGoNinTeiKekTesuChi.get申請書管理番号());
             rowList.add(row);
         }
         div.getDgDoctorSelection().setDataSource(rowList);
@@ -107,23 +111,67 @@ public class MainPanelHandler {
                     youKaiGoNinTeiKekTesuChi.get有効期間開始(),
                     youKaiGoNinTeiKekTesuChi.get有効期間終了(),
                     youKaiGoNinTeiKekTesuChi.get二次判定日(),
-                    認定状況提供日);
-            // ,youKaiGoNinTeiKekTesuChi.get申請書管理番号()
-
+                    認定状況提供日,
+                    youKaiGoNinTeiKekTesuChi.get申請書管理番号()
+            );
             rowList.add(row);
         }
         div.getDgResultList().setDataSource(rowList);
     }
 
     /**
+     * 「対象データなし」メッセジーの取得します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs getメッセジー_対象データなし() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.対象データなし_追加メッセージあり, 対象申請者一覧.toString())));
+        return validPairs;
+    }
+
+    /**
+     * 「選択されていない」メッセジーの取得します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs getメッセジー_選択されていない() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.選択されていない, 申請者.toString())));
+        return validPairs;
+    }
+
+    /**
      * 要介護認定結果通知（主治医）の初期処理を表示します。
      *
+     * @return ValidationMessageControlPairs
      */
-    public void 二次判定期間の前後順チェック() {
+    public ValidationMessageControlPairs 二次判定期間の前後順チェック() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getTxtNijiHanteiKikan().getToValue() != null && div.getTxtNijiHanteiKikan().getFromValue() != null) {
             if (div.getTxtNijiHanteiKikan().getToValue().isBefore(div.getTxtNijiHanteiKikan().getFromValue())) {
-                throw new ApplicationException(UrErrorMessages.終了日が開始日以前.toString());
+                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.終了日が開始日以前, RString.EMPTY.toString())));
             }
         }
+        return validPairs;
     }
+
+    private static class IdocheckMessages implements IValidationMessage {
+
+        private final Message message;
+
+        public IdocheckMessages(IMessageGettable message, String... replacements) {
+            if (replacements.length == 0) {
+                this.message = message.getMessage();
+            } else {
+                this.message = message.getMessage().replace(replacements);
+            }
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+    }
+
 }
