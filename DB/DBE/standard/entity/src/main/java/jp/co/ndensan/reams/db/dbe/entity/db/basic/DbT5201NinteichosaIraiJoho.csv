@@ -1,7 +1,7 @@
-﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,申請書管理番号,A
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
 ninteichosaIraiRirekiNo,int2,int,,,,,認定調査依頼履歴番号,A
 koroshoIfShikibetsuCode,UDD035Code,Code,,,,,厚労省IF識別コード,A
-ninteichosaItakusakiCode,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,認定調査委託先コード,A
+ninteichosaItakusakiCode,DbUDD004JigyoshaNo,JigyoshaNo,,,,,認定調査委託先コード,A
 ninteiChosainCode,varchar,RString,,,,,認定調査員コード,A
 ninteichosaIraiKubunCode,UDD035Code,Code,,,,,認定調査依頼区分コード,A
 ninteichosaIraiKaisu,int2,int,,,,,認定調査回数,A
