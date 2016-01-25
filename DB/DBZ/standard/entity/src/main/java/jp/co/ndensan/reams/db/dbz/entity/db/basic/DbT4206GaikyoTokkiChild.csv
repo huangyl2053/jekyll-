@@ -1,0 +1,10 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
+ninteichosaRirekiNo,int2,int,,,,,認定調査依頼履歴番号,A
+gaikyoTokkiTextImageKubun,bpchar,RString,,,,,gaikyoTokkiTextImageKubun,A
+jutakuKaishu,text,RString,,,,,jutakuKaishu,A
+tokubetsuKyufuService,text,RString,,,,,tokubetsuKyufuService,A
+zaitakuService,text,RString,,,,,zaitakuService,A
+shuso,text,RString,,,,,shuso,A
+kazokuJokyo,text,RString,,,,,kazokuJokyo,A
+kyojuKankyo,text,RString,,,,,kyojuKankyo,A
+kikaiKiki,text,RString,,,,,kikaiKiki,A
