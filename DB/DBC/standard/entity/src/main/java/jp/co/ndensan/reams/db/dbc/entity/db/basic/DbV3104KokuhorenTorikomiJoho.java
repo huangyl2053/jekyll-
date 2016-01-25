@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbV3104KokuhorenTorikomiJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * shoriYM
      */
@@ -33,9 +33,9 @@ public enum DbV3104KokuhorenTorikomiJoho implements IColumnDefinition {
      */
     tougetsushoridate(2147483647, 0),
     /**
-     * saiShoriKahiKubun
+     * saiShoriKanoKubun
      */
-    saiShoriKahiKubun(1, 0);
+    saiShoriKanoKubun(1, 0);
 
     private final int maxLength;
     private final int scale;

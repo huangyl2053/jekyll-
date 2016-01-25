@@ -1,19 +1,22 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * DbV3104KokuhorenTorikomiJohoの項目定義クラスです
  *
  */
 public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV3104KokuhorenTorikomiJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbV3104KokuhorenTorikomiJoho");
 
@@ -23,20 +26,21 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
     private RString zen_shorijotaikubun;
     private RString zenzen_shorijotaikubun;
     private YMDHMS tougetsushoridate;
-    private boolean saiShoriKahiKubun;
+    private boolean saiShoriKanoKubun;
 
     /**
      * shoriYMのgetメソッドです。
-     *
+     * 
      * @return shoriYM
      */
+    @CheckForNull
     public FlexibleYearMonth getShoriYM() {
         return shoriYM;
     }
 
     /**
      * shoriYMのsetメソッドです。
-     *
+     * 
      * @param shoriYM shoriYM
      */
     public void setShoriYM(FlexibleYearMonth shoriYM) {
@@ -45,16 +49,17 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
 
     /**
      * kokanShikibetsuNoのgetメソッドです。
-     *
+     * 
      * @return kokanShikibetsuNo
      */
+    @CheckForNull
     public RString getKokanShikibetsuNo() {
         return kokanShikibetsuNo;
     }
 
     /**
      * kokanShikibetsuNoのsetメソッドです。
-     *
+     * 
      * @param kokanShikibetsuNo kokanShikibetsuNo
      */
     public void setKokanShikibetsuNo(RString kokanShikibetsuNo) {
@@ -63,16 +68,17 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
 
     /**
      * shoriJotaiKubunのgetメソッドです。
-     *
+     * 
      * @return shoriJotaiKubun
      */
+    @CheckForNull
     public RString getShoriJotaiKubun() {
         return shoriJotaiKubun;
     }
 
     /**
      * shoriJotaiKubunのsetメソッドです。
-     *
+     * 
      * @param shoriJotaiKubun shoriJotaiKubun
      */
     public void setShoriJotaiKubun(RString shoriJotaiKubun) {
@@ -81,16 +87,17 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
 
     /**
      * zen_shorijotaikubunのgetメソッドです。
-     *
+     * 
      * @return zen_shorijotaikubun
      */
+    @CheckForNull
     public RString getZen_shorijotaikubun() {
         return zen_shorijotaikubun;
     }
 
     /**
      * zen_shorijotaikubunのsetメソッドです。
-     *
+     * 
      * @param zen_shorijotaikubun zen_shorijotaikubun
      */
     public void setZen_shorijotaikubun(RString zen_shorijotaikubun) {
@@ -99,16 +106,17 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
 
     /**
      * zenzen_shorijotaikubunのgetメソッドです。
-     *
+     * 
      * @return zenzen_shorijotaikubun
      */
+    @CheckForNull
     public RString getZenzen_shorijotaikubun() {
         return zenzen_shorijotaikubun;
     }
 
     /**
      * zenzen_shorijotaikubunのsetメソッドです。
-     *
+     * 
      * @param zenzen_shorijotaikubun zenzen_shorijotaikubun
      */
     public void setZenzen_shorijotaikubun(RString zenzen_shorijotaikubun) {
@@ -117,16 +125,17 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
 
     /**
      * tougetsushoridateのgetメソッドです。
-     *
+     * 
      * @return tougetsushoridate
      */
+    @CheckForNull
     public YMDHMS getTougetsushoridate() {
         return tougetsushoridate;
     }
 
     /**
      * tougetsushoridateのsetメソッドです。
-     *
+     * 
      * @param tougetsushoridate tougetsushoridate
      */
     public void setTougetsushoridate(YMDHMS tougetsushoridate) {
@@ -134,28 +143,29 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
     }
 
     /**
-     * saiShoriKahiKubunのgetメソッドです。
-     *
-     * @return saiShoriKahiKubun
+     * saiShoriKanoKubunのgetメソッドです。
+     * 
+     * @return saiShoriKanoKubun
      */
-    public boolean getSaiShoriKahiKubun() {
-        return saiShoriKahiKubun;
+    @CheckForNull
+    public boolean getSaiShoriKanoKubun() {
+        return saiShoriKanoKubun;
     }
 
     /**
-     * saiShoriKahiKubunのsetメソッドです。
-     *
-     * @param saiShoriKahiKubun saiShoriKahiKubun
+     * saiShoriKanoKubunのsetメソッドです。
+     * 
+     * @param saiShoriKanoKubun saiShoriKanoKubun
      */
-    public void setSaiShoriKahiKubun(boolean saiShoriKahiKubun) {
-        this.saiShoriKahiKubun = saiShoriKahiKubun;
+    public void setSaiShoriKanoKubun(boolean saiShoriKanoKubun) {
+        this.saiShoriKanoKubun = saiShoriKanoKubun;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbV3104KokuhorenTorikomiJohoEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbV3104KokuhorenTorikomiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -177,18 +187,18 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
         this.zen_shorijotaikubun = entity.zen_shorijotaikubun;
         this.zenzen_shorijotaikubun = entity.zenzen_shorijotaikubun;
         this.tougetsushoridate = entity.tougetsushoridate;
-        this.saiShoriKahiKubun = entity.saiShoriKahiKubun;
+        this.saiShoriKanoKubun = entity.saiShoriKanoKubun;
     }
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shoriYM, kokanShikibetsuNo, shoriJotaiKubun, zen_shorijotaikubun, zenzen_shorijotaikubun, tougetsushoridate, saiShoriKahiKubun);
+        return super.toMd5(shoriYM, kokanShikibetsuNo, shoriJotaiKubun, zen_shorijotaikubun, zenzen_shorijotaikubun, tougetsushoridate, saiShoriKanoKubun);
     }
 
 // </editor-fold>
+
 }
