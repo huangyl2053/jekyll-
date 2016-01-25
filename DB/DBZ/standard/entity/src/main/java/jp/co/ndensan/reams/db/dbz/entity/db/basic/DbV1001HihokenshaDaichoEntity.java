@@ -1,50 +1,39 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import javax.annotation.CheckForNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 
 /**
  * DbV1001HihokenshaDaichoの項目定義クラスです
  *
  */
-public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+public class DbV1001HihokenshaDaichoEntity extends DbTableEntityBase<DbV1001HihokenshaDaichoEntity> implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbV1001HihokenshaDaicho");
 
-    private RString insertDantaiCd;
-    private RDateTime insertTimestamp;
-    private RString insertReamsLoginId;
-    private UUID insertContextId;
-    private boolean isDeleted = false;
-    private int updateCount = 0;
-    private RDateTime lastUpdateTimestamp;
-    private RString lastUpdateReamsLoginId;
-    private LasdecCode shichosonCode;
     private HihokenshaNo hihokenshaNo;
-    private YMDHMS shoriTimestamp;
+    private FlexibleDate idoYMD;
+    private RString edaNo;
+    private RString idoJiyuCode;
+    private LasdecCode shichosonCode;
     private ShikibetsuCode shikibetsuCode;
     private RString shikakuShutokuJiyuCode;
     private FlexibleDate shikakuShutokuYMD;
     private FlexibleDate shikakuShutokuTodokedeYMD;
-    private FlexibleDate ichigoHihokenshaNenreiTotatsuYMD;
-    private Code hihokennshaKubunCode;
+    private FlexibleDate ichigoShikakuShutokuYMD;
+    private RString hihokennshaKubunCode;
     private RString shikakuSoshitsuJiyuCode;
     private FlexibleDate shikakuSoshitsuYMD;
     private FlexibleDate shikakuSoshitsuTodokedeYMD;
-    private RString jushochiTokureiFlag;
     private RString shikakuHenkoJiyuCode;
     private FlexibleDate shikakuHenkoYMD;
     private FlexibleDate shikakuHenkoTodokedeYMD;
@@ -54,87 +43,24 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     private RString jushochitokureiKaijoJiyuCode;
     private FlexibleDate jushochitokureiKaijoYMD;
     private FlexibleDate jushochitokureiKaijoTodokedeYMD;
+    private RString jushochiTokureiFlag;
     private RString koikinaiJushochiTokureiFlag;
     private LasdecCode koikinaiTokureiSochimotoShichosonCode;
     private LasdecCode kyuShichosonCode;
-    private RString saikofuKubun;
-    private RString saikofuJiyuCode;
-    private RString chohyoKofuRirekiID;
+    private boolean logicalDeletedFlag;
 
     /**
-     * getInsertDantaiCd
-     *
-     * @return insertDantaiCd
-     */
-    public RString getInsertDantaiCd() {
-        return insertDantaiCd;
-    }
-
-    /**
-     * setInsertDantaiCd
-     *
-     * @param insertDantaiCd insertDantaiCd
-     */
-    public void setInsertDantaiCd(RString insertDantaiCd) {
-        this.insertDantaiCd = insertDantaiCd;
-    }
-
-    /**
-     * getIsDeleted
-     *
-     * @return isDeleted
-     */
-    public boolean getIsDeleted() {
-        return isDeleted;
-    }
-
-    /**
-     * setIsDeleted
-     *
-     * @param isDeleted isDeleted
-     */
-    public void setIsDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
-    /**
-     * setLastUpdateReamsLoginId
-     *
-     * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
-     */
-    public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
-        this.lastUpdateReamsLoginId = lastUpdateReamsLoginId;
-    }
-
-    /**
-     * getShichosonCode
-     *
-     * @return shichosonCode
-     */
-    public LasdecCode getShichosonCode() {
-        return shichosonCode;
-    }
-
-    /**
-     * setShichosonCode
-     *
-     * @param shichosonCode shichosonCode
-     */
-    public void setShichosonCode(LasdecCode shichosonCode) {
-        this.shichosonCode = shichosonCode;
-    }
-
-    /**
-     * getHihokenshaNo
+     * hihokenshaNoのgetメソッドです。
      *
      * @return hihokenshaNo
      */
+    @CheckForNull
     public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
-     * setHihokenshaNo
+     * hihokenshaNoのsetメソッドです。
      *
      * @param hihokenshaNo hihokenshaNo
      */
@@ -143,34 +69,93 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getShoriTimestamp
+     * idoYMDのgetメソッドです。
      *
-     * @return shoriTimestamp
+     * @return idoYMD
      */
-    public YMDHMS getShoriTimestamp() {
-        return shoriTimestamp;
+    @CheckForNull
+    public FlexibleDate getIdoYMD() {
+        return idoYMD;
     }
 
     /**
-     * setShoriTimestamp
+     * idoYMDのsetメソッドです。
      *
-     * @param shoriTimestamp shoriTimestamp
+     * @param idoYMD idoYMD
      */
-    public void setShoriTimestamp(YMDHMS shoriTimestamp) {
-        this.shoriTimestamp = shoriTimestamp;
+    public void setIdoYMD(FlexibleDate idoYMD) {
+        this.idoYMD = idoYMD;
     }
 
     /**
-     * getShikibetsuCode
+     * edaNoのgetメソッドです。
+     *
+     * @return edaNo
+     */
+    @CheckForNull
+    public RString getEdaNo() {
+        return edaNo;
+    }
+
+    /**
+     * edaNoのsetメソッドです。
+     *
+     * @param edaNo edaNo
+     */
+    public void setEdaNo(RString edaNo) {
+        this.edaNo = edaNo;
+    }
+
+    /**
+     * idoJiyuCodeのgetメソッドです。
+     *
+     * @return idoJiyuCode
+     */
+    @CheckForNull
+    public RString getIdoJiyuCode() {
+        return idoJiyuCode;
+    }
+
+    /**
+     * idoJiyuCodeのsetメソッドです。
+     *
+     * @param idoJiyuCode idoJiyuCode
+     */
+    public void setIdoJiyuCode(RString idoJiyuCode) {
+        this.idoJiyuCode = idoJiyuCode;
+    }
+
+    /**
+     * shichosonCodeのgetメソッドです。
+     *
+     * @return shichosonCode
+     */
+    @CheckForNull
+    public LasdecCode getShichosonCode() {
+        return shichosonCode;
+    }
+
+    /**
+     * shichosonCodeのsetメソッドです。
+     *
+     * @param shichosonCode shichosonCode
+     */
+    public void setShichosonCode(LasdecCode shichosonCode) {
+        this.shichosonCode = shichosonCode;
+    }
+
+    /**
+     * shikibetsuCodeのgetメソッドです。
      *
      * @return shikibetsuCode
      */
+    @CheckForNull
     public ShikibetsuCode getShikibetsuCode() {
         return shikibetsuCode;
     }
 
     /**
-     * setShikibetsuCode
+     * shikibetsuCodeのsetメソッドです。
      *
      * @param shikibetsuCode shikibetsuCode
      */
@@ -179,16 +164,17 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getShikakuShutokuJiyuCode
+     * shikakuShutokuJiyuCodeのgetメソッドです。
      *
      * @return shikakuShutokuJiyuCode
      */
+    @CheckForNull
     public RString getShikakuShutokuJiyuCode() {
         return shikakuShutokuJiyuCode;
     }
 
     /**
-     * setShikakuShutokuJiyuCode
+     * shikakuShutokuJiyuCodeのsetメソッドです。
      *
      * @param shikakuShutokuJiyuCode shikakuShutokuJiyuCode
      */
@@ -197,16 +183,17 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getShikakuShutokuYMD
+     * shikakuShutokuYMDのgetメソッドです。
      *
      * @return shikakuShutokuYMD
      */
+    @CheckForNull
     public FlexibleDate getShikakuShutokuYMD() {
         return shikakuShutokuYMD;
     }
 
     /**
-     * setShikakuShutokuYMD
+     * shikakuShutokuYMDのsetメソッドです。
      *
      * @param shikakuShutokuYMD shikakuShutokuYMD
      */
@@ -215,16 +202,17 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getShikakuShutokuTodokedeYMD
+     * shikakuShutokuTodokedeYMDのgetメソッドです。
      *
      * @return shikakuShutokuTodokedeYMD
      */
+    @CheckForNull
     public FlexibleDate getShikakuShutokuTodokedeYMD() {
         return shikakuShutokuTodokedeYMD;
     }
 
     /**
-     * setShikakuShutokuTodokedeYMD
+     * shikakuShutokuTodokedeYMDのsetメソッドです。
      *
      * @param shikakuShutokuTodokedeYMD shikakuShutokuTodokedeYMD
      */
@@ -233,52 +221,55 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getIchigoHihokenshaNenreiTotatsuYMD
+     * ichigoShikakuShutokuYMDのgetメソッドです。
      *
-     * @return ichigoHihokenshaNenreiTotatsuYMD
+     * @return ichigoShikakuShutokuYMD
      */
-    public FlexibleDate getIchigoHihokenshaNenreiTotatsuYMD() {
-        return ichigoHihokenshaNenreiTotatsuYMD;
+    @CheckForNull
+    public FlexibleDate getIchigoShikakuShutokuYMD() {
+        return ichigoShikakuShutokuYMD;
     }
 
     /**
-     * setIchigoHihokenshaNenreiTotatsuYMD
+     * ichigoShikakuShutokuYMDのsetメソッドです。
      *
-     * @param ichigoHihokenshaNenreiTotatsuYMD ichigoHihokenshaNenreiTotatsuYMD
+     * @param ichigoShikakuShutokuYMD ichigoShikakuShutokuYMD
      */
-    public void setIchigoHihokenshaNenreiTotatsuYMD(FlexibleDate ichigoHihokenshaNenreiTotatsuYMD) {
-        this.ichigoHihokenshaNenreiTotatsuYMD = ichigoHihokenshaNenreiTotatsuYMD;
+    public void setIchigoShikakuShutokuYMD(FlexibleDate ichigoShikakuShutokuYMD) {
+        this.ichigoShikakuShutokuYMD = ichigoShikakuShutokuYMD;
     }
 
     /**
-     * getHihokennshaKubunCode
+     * hihokennshaKubunCodeのgetメソッドです。
      *
      * @return hihokennshaKubunCode
      */
-    public Code getHihokennshaKubunCode() {
+    @CheckForNull
+    public RString getHihokennshaKubunCode() {
         return hihokennshaKubunCode;
     }
 
     /**
-     * setHihokennshaKubunCode
+     * hihokennshaKubunCodeのsetメソッドです。
      *
      * @param hihokennshaKubunCode hihokennshaKubunCode
      */
-    public void setHihokennshaKubunCode(Code hihokennshaKubunCode) {
+    public void setHihokennshaKubunCode(RString hihokennshaKubunCode) {
         this.hihokennshaKubunCode = hihokennshaKubunCode;
     }
 
     /**
-     * getShikakuSoshitsuJiyuCode
+     * shikakuSoshitsuJiyuCodeのgetメソッドです。
      *
      * @return shikakuSoshitsuJiyuCode
      */
+    @CheckForNull
     public RString getShikakuSoshitsuJiyuCode() {
         return shikakuSoshitsuJiyuCode;
     }
 
     /**
-     * setShikakuSoshitsuJiyuCode
+     * shikakuSoshitsuJiyuCodeのsetメソッドです。
      *
      * @param shikakuSoshitsuJiyuCode shikakuSoshitsuJiyuCode
      */
@@ -287,16 +278,17 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getShikakuSoshitsuYMD
+     * shikakuSoshitsuYMDのgetメソッドです。
      *
      * @return shikakuSoshitsuYMD
      */
+    @CheckForNull
     public FlexibleDate getShikakuSoshitsuYMD() {
         return shikakuSoshitsuYMD;
     }
 
     /**
-     * setShikakuSoshitsuYMD
+     * shikakuSoshitsuYMDのsetメソッドです。
      *
      * @param shikakuSoshitsuYMD shikakuSoshitsuYMD
      */
@@ -305,16 +297,17 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getShikakuSoshitsuTodokedeYMD
+     * shikakuSoshitsuTodokedeYMDのgetメソッドです。
      *
      * @return shikakuSoshitsuTodokedeYMD
      */
+    @CheckForNull
     public FlexibleDate getShikakuSoshitsuTodokedeYMD() {
         return shikakuSoshitsuTodokedeYMD;
     }
 
     /**
-     * setShikakuSoshitsuTodokedeYMD
+     * shikakuSoshitsuTodokedeYMDのsetメソッドです。
      *
      * @param shikakuSoshitsuTodokedeYMD shikakuSoshitsuTodokedeYMD
      */
@@ -323,34 +316,17 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getJushochiTokureiFlag
-     *
-     * @return jushochiTokureiFlag
-     */
-    public RString getJushochiTokureiFlag() {
-        return jushochiTokureiFlag;
-    }
-
-    /**
-     * setJushochiTokureiFlag
-     *
-     * @param jushochiTokureiFlag jushochiTokureiFlag
-     */
-    public void setJushochiTokureiFlag(RString jushochiTokureiFlag) {
-        this.jushochiTokureiFlag = jushochiTokureiFlag;
-    }
-
-    /**
-     * getShikakuHenkoJiyuCode
+     * shikakuHenkoJiyuCodeのgetメソッドです。
      *
      * @return shikakuHenkoJiyuCode
      */
+    @CheckForNull
     public RString getShikakuHenkoJiyuCode() {
         return shikakuHenkoJiyuCode;
     }
 
     /**
-     * setShikakuHenkoJiyuCode
+     * shikakuHenkoJiyuCodeのsetメソッドです。
      *
      * @param shikakuHenkoJiyuCode shikakuHenkoJiyuCode
      */
@@ -359,16 +335,17 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getShikakuHenkoYMD
+     * shikakuHenkoYMDのgetメソッドです。
      *
      * @return shikakuHenkoYMD
      */
+    @CheckForNull
     public FlexibleDate getShikakuHenkoYMD() {
         return shikakuHenkoYMD;
     }
 
     /**
-     * setShikakuHenkoYMD
+     * shikakuHenkoYMDのsetメソッドです。
      *
      * @param shikakuHenkoYMD shikakuHenkoYMD
      */
@@ -377,16 +354,17 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getShikakuHenkoTodokedeYMD
+     * shikakuHenkoTodokedeYMDのgetメソッドです。
      *
      * @return shikakuHenkoTodokedeYMD
      */
+    @CheckForNull
     public FlexibleDate getShikakuHenkoTodokedeYMD() {
         return shikakuHenkoTodokedeYMD;
     }
 
     /**
-     * setShikakuHenkoTodokedeYMD
+     * shikakuHenkoTodokedeYMDのsetメソッドです。
      *
      * @param shikakuHenkoTodokedeYMD shikakuHenkoTodokedeYMD
      */
@@ -395,16 +373,17 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getJushochitokureiTekiyoJiyuCode
+     * jushochitokureiTekiyoJiyuCodeのgetメソッドです。
      *
      * @return jushochitokureiTekiyoJiyuCode
      */
+    @CheckForNull
     public RString getJushochitokureiTekiyoJiyuCode() {
         return jushochitokureiTekiyoJiyuCode;
     }
 
     /**
-     * setJushochitokureiTekiyoJiyuCode
+     * jushochitokureiTekiyoJiyuCodeのsetメソッドです。
      *
      * @param jushochitokureiTekiyoJiyuCode jushochitokureiTekiyoJiyuCode
      */
@@ -413,16 +392,17 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getJushochitokureiTekiyoYMD
+     * jushochitokureiTekiyoYMDのgetメソッドです。
      *
      * @return jushochitokureiTekiyoYMD
      */
+    @CheckForNull
     public FlexibleDate getJushochitokureiTekiyoYMD() {
         return jushochitokureiTekiyoYMD;
     }
 
     /**
-     * setJushochitokureiTekiyoYMD
+     * jushochitokureiTekiyoYMDのsetメソッドです。
      *
      * @param jushochitokureiTekiyoYMD jushochitokureiTekiyoYMD
      */
@@ -431,16 +411,17 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getJushochitokureiTekiyoTodokedeYMD
+     * jushochitokureiTekiyoTodokedeYMDのgetメソッドです。
      *
      * @return jushochitokureiTekiyoTodokedeYMD
      */
+    @CheckForNull
     public FlexibleDate getJushochitokureiTekiyoTodokedeYMD() {
         return jushochitokureiTekiyoTodokedeYMD;
     }
 
     /**
-     * setJushochitokureiTekiyoTodokedeYMD
+     * jushochitokureiTekiyoTodokedeYMDのsetメソッドです。
      *
      * @param jushochitokureiTekiyoTodokedeYMD jushochitokureiTekiyoTodokedeYMD
      */
@@ -449,16 +430,17 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getJushochitokureiKaijoJiyuCode
+     * jushochitokureiKaijoJiyuCodeのgetメソッドです。
      *
      * @return jushochitokureiKaijoJiyuCode
      */
+    @CheckForNull
     public RString getJushochitokureiKaijoJiyuCode() {
         return jushochitokureiKaijoJiyuCode;
     }
 
     /**
-     * setJushochitokureiKaijoJiyuCode
+     * jushochitokureiKaijoJiyuCodeのsetメソッドです。
      *
      * @param jushochitokureiKaijoJiyuCode jushochitokureiKaijoJiyuCode
      */
@@ -467,16 +449,17 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getJushochitokureiKaijoYMD
+     * jushochitokureiKaijoYMDのgetメソッドです。
      *
      * @return jushochitokureiKaijoYMD
      */
+    @CheckForNull
     public FlexibleDate getJushochitokureiKaijoYMD() {
         return jushochitokureiKaijoYMD;
     }
 
     /**
-     * setJushochitokureiKaijoYMD
+     * jushochitokureiKaijoYMDのsetメソッドです。
      *
      * @param jushochitokureiKaijoYMD jushochitokureiKaijoYMD
      */
@@ -485,16 +468,17 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getJushochitokureiKaijoTodokedeYMD
+     * jushochitokureiKaijoTodokedeYMDのgetメソッドです。
      *
      * @return jushochitokureiKaijoTodokedeYMD
      */
+    @CheckForNull
     public FlexibleDate getJushochitokureiKaijoTodokedeYMD() {
         return jushochitokureiKaijoTodokedeYMD;
     }
 
     /**
-     * setJushochitokureiKaijoTodokedeYMD
+     * jushochitokureiKaijoTodokedeYMDのsetメソッドです。
      *
      * @param jushochitokureiKaijoTodokedeYMD jushochitokureiKaijoTodokedeYMD
      */
@@ -503,16 +487,36 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getKoikinaiJushochiTokureiFlag
+     * jushochiTokureiFlagのgetメソッドです。
+     *
+     * @return jushochiTokureiFlag
+     */
+    @CheckForNull
+    public RString getJushochiTokureiFlag() {
+        return jushochiTokureiFlag;
+    }
+
+    /**
+     * jushochiTokureiFlagのsetメソッドです。
+     *
+     * @param jushochiTokureiFlag jushochiTokureiFlag
+     */
+    public void setJushochiTokureiFlag(RString jushochiTokureiFlag) {
+        this.jushochiTokureiFlag = jushochiTokureiFlag;
+    }
+
+    /**
+     * koikinaiJushochiTokureiFlagのgetメソッドです。
      *
      * @return koikinaiJushochiTokureiFlag
      */
+    @CheckForNull
     public RString getKoikinaiJushochiTokureiFlag() {
         return koikinaiJushochiTokureiFlag;
     }
 
     /**
-     * setKoikinaiJushochiTokureiFlag
+     * koikinaiJushochiTokureiFlagのsetメソッドです。
      *
      * @param koikinaiJushochiTokureiFlag koikinaiJushochiTokureiFlag
      */
@@ -521,34 +525,37 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getKoikinaiTokureiSochimotoShichosonCode
+     * koikinaiTokureiSochimotoShichosonCodeのgetメソッドです。
      *
      * @return koikinaiTokureiSochimotoShichosonCode
      */
+    @CheckForNull
     public LasdecCode getKoikinaiTokureiSochimotoShichosonCode() {
         return koikinaiTokureiSochimotoShichosonCode;
     }
 
     /**
-     * setKoikinaiTokureiSochimotoShichosonCode
+     * koikinaiTokureiSochimotoShichosonCodeのsetメソッドです。
      *
-     * @param koikinaiTokureiSochimotoShichosonCode koikinaiTokureiSochimotoShichosonCode
+     * @param koikinaiTokureiSochimotoShichosonCode
+     * koikinaiTokureiSochimotoShichosonCode
      */
     public void setKoikinaiTokureiSochimotoShichosonCode(LasdecCode koikinaiTokureiSochimotoShichosonCode) {
         this.koikinaiTokureiSochimotoShichosonCode = koikinaiTokureiSochimotoShichosonCode;
     }
 
     /**
-     * getKyuShichosonCode
+     * kyuShichosonCodeのgetメソッドです。
      *
      * @return kyuShichosonCode
      */
+    @CheckForNull
     public LasdecCode getKyuShichosonCode() {
         return kyuShichosonCode;
     }
 
     /**
-     * setKyuShichosonCode
+     * kyuShichosonCodeのsetメソッドです。
      *
      * @param kyuShichosonCode kyuShichosonCode
      */
@@ -557,70 +564,82 @@ public class DbV1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getSaikofuKubun
+     * logicalDeletedFlagのgetメソッドです。
      *
-     * @return saikofuKubun
+     * @return logicalDeletedFlag
      */
-    public RString getSaikofuKubun() {
-        return saikofuKubun;
+    @CheckForNull
+    public boolean getLogicalDeletedFlag() {
+        return logicalDeletedFlag;
     }
 
     /**
-     * setSaikofuKubun
+     * logicalDeletedFlagのsetメソッドです。
      *
-     * @param saikofuKubun saikofuKubun
+     * @param logicalDeletedFlag logicalDeletedFlag
      */
-    public void setSaikofuKubun(RString saikofuKubun) {
-        this.saikofuKubun = saikofuKubun;
-    }
-
-    /**
-     * getSaikofuJiyuCode
-     *
-     * @return saikofuJiyuCode
-     */
-    public RString getSaikofuJiyuCode() {
-        return saikofuJiyuCode;
-    }
-
-    /**
-     * setSaikofuJiyuCode
-     *
-     * @param saikofuJiyuCode saikofuJiyuCode
-     */
-    public void setSaikofuJiyuCode(RString saikofuJiyuCode) {
-        this.saikofuJiyuCode = saikofuJiyuCode;
-    }
-
-    /**
-     * getChohyoKofuRirekiID
-     *
-     * @return chohyoKofuRirekiID
-     */
-    public RString getChohyoKofuRirekiID() {
-        return chohyoKofuRirekiID;
-    }
-
-    /**
-     * setChohyoKofuRirekiID
-     *
-     * @param chohyoKofuRirekiID chohyoKofuRirekiID
-     */
-    public void setChohyoKofuRirekiID(RString chohyoKofuRirekiID) {
-        this.chohyoKofuRirekiID = chohyoKofuRirekiID;
+    public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
+        this.logicalDeletedFlag = logicalDeletedFlag;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbV1001HihokenshaDaichoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbV1001HihokenshaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbV1001HihokenshaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
+    @Override
     public boolean equalsPrimaryKeys(DbV1001HihokenshaDaichoEntity other) {
         if (other == null) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void shallowCopy(DbV1001HihokenshaDaichoEntity entity) {
+        this.hihokenshaNo = entity.hihokenshaNo;
+        this.idoYMD = entity.idoYMD;
+        this.edaNo = entity.edaNo;
+        this.idoJiyuCode = entity.idoJiyuCode;
+        this.shichosonCode = entity.shichosonCode;
+        this.shikibetsuCode = entity.shikibetsuCode;
+        this.shikakuShutokuJiyuCode = entity.shikakuShutokuJiyuCode;
+        this.shikakuShutokuYMD = entity.shikakuShutokuYMD;
+        this.shikakuShutokuTodokedeYMD = entity.shikakuShutokuTodokedeYMD;
+        this.ichigoShikakuShutokuYMD = entity.ichigoShikakuShutokuYMD;
+        this.hihokennshaKubunCode = entity.hihokennshaKubunCode;
+        this.shikakuSoshitsuJiyuCode = entity.shikakuSoshitsuJiyuCode;
+        this.shikakuSoshitsuYMD = entity.shikakuSoshitsuYMD;
+        this.shikakuSoshitsuTodokedeYMD = entity.shikakuSoshitsuTodokedeYMD;
+        this.shikakuHenkoJiyuCode = entity.shikakuHenkoJiyuCode;
+        this.shikakuHenkoYMD = entity.shikakuHenkoYMD;
+        this.shikakuHenkoTodokedeYMD = entity.shikakuHenkoTodokedeYMD;
+        this.jushochitokureiTekiyoJiyuCode = entity.jushochitokureiTekiyoJiyuCode;
+        this.jushochitokureiTekiyoYMD = entity.jushochitokureiTekiyoYMD;
+        this.jushochitokureiTekiyoTodokedeYMD = entity.jushochitokureiTekiyoTodokedeYMD;
+        this.jushochitokureiKaijoJiyuCode = entity.jushochitokureiKaijoJiyuCode;
+        this.jushochitokureiKaijoYMD = entity.jushochitokureiKaijoYMD;
+        this.jushochitokureiKaijoTodokedeYMD = entity.jushochitokureiKaijoTodokedeYMD;
+        this.jushochiTokureiFlag = entity.jushochiTokureiFlag;
+        this.koikinaiJushochiTokureiFlag = entity.koikinaiJushochiTokureiFlag;
+        this.koikinaiTokureiSochimotoShichosonCode = entity.koikinaiTokureiSochimotoShichosonCode;
+        this.kyuShichosonCode = entity.kyuShichosonCode;
+        this.logicalDeletedFlag = entity.logicalDeletedFlag;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    @Override
+    public RString getMd5() {
+        return super.toMd5(hihokenshaNo, idoYMD, edaNo, idoJiyuCode, shichosonCode, shikibetsuCode, shikakuShutokuJiyuCode, shikakuShutokuYMD, shikakuShutokuTodokedeYMD, ichigoShikakuShutokuYMD, hihokennshaKubunCode, shikakuSoshitsuJiyuCode, shikakuSoshitsuYMD, shikakuSoshitsuTodokedeYMD, shikakuHenkoJiyuCode, shikakuHenkoYMD, shikakuHenkoTodokedeYMD, jushochitokureiTekiyoJiyuCode, jushochitokureiTekiyoYMD, jushochitokureiTekiyoTodokedeYMD, jushochitokureiKaijoJiyuCode, jushochitokureiKaijoYMD, jushochitokureiKaijoTodokedeYMD, jushochiTokureiFlag, koikinaiJushochiTokureiFlag, koikinaiTokureiSochimotoShichosonCode, kyuShichosonCode, logicalDeletedFlag);
     }
 
 // </editor-fold>
