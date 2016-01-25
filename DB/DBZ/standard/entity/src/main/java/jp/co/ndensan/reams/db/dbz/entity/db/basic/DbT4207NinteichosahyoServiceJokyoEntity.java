@@ -91,7 +91,7 @@ public class DbT4207NinteichosahyoServiceJokyoEntity extends DbTableEntityBase<D
      *
      * @return 申請書管理番号
      */
-    public DbUDD013ShinseishoKanriNo getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
@@ -102,7 +102,7 @@ public class DbT4207NinteichosahyoServiceJokyoEntity extends DbTableEntityBase<D
      *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(@Nonnull DbUDD013ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
