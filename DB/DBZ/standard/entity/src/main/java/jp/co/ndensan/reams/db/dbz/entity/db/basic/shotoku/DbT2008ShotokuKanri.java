@@ -54,13 +54,13 @@ public enum DbT2008ShotokuKanri implements IColumnDefinition {
     rirekiNo(5, 0),
     /**
      * 課税区分（住民税減免前）
-     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消　
+     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消　
      * <br/>※保険料賦課の際に参照する
      */
     kazeiKubun(1, 0),
     /**
      * 課税区分（住民税減免後）
-     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消　
+     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消　
      * <br/>※給付（高額等）で参照する
      */
     kazeiKubunGemmenGo(1, 0),
@@ -87,11 +87,11 @@ public enum DbT2008ShotokuKanri implements IColumnDefinition {
     /**
      * 優先区分
      */
-    yusebKubun(1, 0),
+    yusenKubun(1, 0),
     /**
-     * 処理日
+     * 処理日時
      */
-    shoriYMD(2147483647, 0);
+    shoriTimeStamp(2147483647, 0);
 
     private final int maxLength;
     private final int scale;
