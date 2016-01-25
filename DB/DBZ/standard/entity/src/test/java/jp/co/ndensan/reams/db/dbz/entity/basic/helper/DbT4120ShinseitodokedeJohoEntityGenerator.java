@@ -23,7 +23,6 @@ public final class DbT4120ShinseitodokedeJohoEntityGenerator {
     public static final Code DEFAULT_申請届出代行区分コード = new Code("1");
     public static final RString DEFAULT_申請届出者氏名 = new RString("申請届出者氏名");
     public static final RString DEFAULT_申請届出者氏名カナ = new RString("申請届出者カナ");
-    public static final RString DEFAULT_申請届出者続柄コード = new RString("01");
     public static final JigyoshaNo DEFAULT_申請届出代行事業者番号 = new JigyoshaNo("1234567890");
     public static final RString DEFAULT_事業者区分 = new RString("01");
     public static final YubinNo DEFAULT_申請届出者郵便番号 = new YubinNo("123-4567");
@@ -42,7 +41,6 @@ public final class DbT4120ShinseitodokedeJohoEntityGenerator {
         entity.setShinseiTodokedeDaikoKubunCode(DEFAULT_申請届出代行区分コード);
         entity.setShinseiTodokedeshaShimei(DEFAULT_申請届出者氏名);
         entity.setShinseiTodokedeshaKanaShimei(DEFAULT_申請届出者氏名カナ);
-        entity.setShinseiTodokedeshaTsuzukigaraCode(DEFAULT_申請届出者続柄コード);
         entity.setShinseiTodokedeDaikoJigyoshaNo(DEFAULT_申請届出代行事業者番号);
         entity.setJigyoshaKubun(DEFAULT_事業者区分);
         entity.setShinseiTodokedeshaYubinNo(DEFAULT_申請届出者郵便番号);
