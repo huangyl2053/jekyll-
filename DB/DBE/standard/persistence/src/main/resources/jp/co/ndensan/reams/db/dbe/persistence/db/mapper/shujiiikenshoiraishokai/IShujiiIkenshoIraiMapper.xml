@@ -69,6 +69,6 @@
             DbT5101Nintei."hihokenshaNo" = #{hihokenshaNo}
             AND DbT5101Nintei."zenYokaigoKubunCode" IN('01','04')
           ORDER BY
-            DbT5101Nintei."ninteiShinseiYMD"
+            DbT5101Nintei."ninteiShinseiYMD" DESC
     </select>
 </mapper>

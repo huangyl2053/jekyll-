@@ -8,11 +8,13 @@ package jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshoiraishokai;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoirai.ShujiiIkenshoIraiBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshoirai.ShujiiIkenshoIraiEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.shujiiikenshoiraishokai.IShujiiIkenshoIraiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -53,13 +55,14 @@ public class ShujiiIkenshoIraiShokaiFinder {
     /**
      * 認定調査情報を返します。
      *
-     * @param hihokenshaNo 被保険者番号
+     * @param 被保険者番号 被保険者番号
      * @return SearchResult<ShujiiIkenshoIraiBusiness> 認定調査情報
      */
     @Transaction
-    public SearchResult<ShujiiIkenshoIraiBusiness> getNinnteiChousa(HihokenshaNo hihokenshaNo) {
+    public SearchResult<ShujiiIkenshoIraiBusiness> getNinnteiChousa(HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         IShujiiIkenshoIraiMapper mapper = mapperProvider.create(IShujiiIkenshoIraiMapper.class);
-        List<ShujiiIkenshoIraiEntity> relateEntityList = mapper.selectNinnteiChousa(hihokenshaNo);
+        List<ShujiiIkenshoIraiEntity> relateEntityList = mapper.selectNinnteiChousa(被保険者番号);
         if (relateEntityList.isEmpty()) {
             return SearchResult.of(Collections.<ShujiiIkenshoIraiBusiness>emptyList(), 0, false);
         }
