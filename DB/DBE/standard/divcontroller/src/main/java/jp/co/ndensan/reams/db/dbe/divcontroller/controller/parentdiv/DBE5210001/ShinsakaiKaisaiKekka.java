@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5210001;
 
+import java.io.File;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJohoBuilder;
@@ -12,6 +13,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaikaisaikekkajo
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaionseijoho.ShinsakaiOnseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaionseijoho.ShinsakaiOnseiJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoIdentifier;
@@ -31,9 +34,11 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.io.ByteReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -67,8 +72,7 @@ public class ShinsakaiKaisaiKekka {
      */
     public ResponseData<ShinsakaiKaisaiKekkaDiv> onLoad(ShinsakaiKaisaiKekkaDiv div) {
         ResponseData<ShinsakaiKaisaiKekkaDiv> responseData = new ResponseData<>();
-        RString 開催番号 = new RString("41022222");
-//        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         List<ShinsakaiKaisaiYoteiJohoBusiness> saiYoteiJoho = service.getヘッドエリア内容検索(開催番号).records();
         getHandler(div).onLoad(saiYoteiJoho);
         getHandler(div).setDisabled();
@@ -86,13 +90,27 @@ public class ShinsakaiKaisaiKekka {
      * 音声ファイルを追加 ボタンを押下 音声ファイル取込を行う。
      *
      * @param div 介護認定審査会開催結果登録div
+     * @param files
      * @return responseData
      */
-    // TODO
-    public ResponseData onClick_AddButton(ShinsakaiKaisaiKekkaDiv div) {
-        ResponseData<ShinsakaiKaisaiKekkaDiv> responseData = new ResponseData<>();
-        responseData.data = div;
-        return responseData;
+    public ResponseData<ShinsakaiKaisaiKekkaDiv> onClick_btnRemoveIin(ShinsakaiKaisaiKekkaDiv div, FileData[] files) {
+        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        int 連番 = service.get連番(開催番号);
+        for (FileData file : files) {
+            ByteReader byteReader = new ByteReader(file.getFilePath().concat(File.separator).concat(file.getFileName()));
+            byte[] array = new byte[1024];
+            byteReader.read(array);
+            ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = new ShinsakaiKaisaiYoteiJoho(開催番号);
+            ShinsakaiOnseiJoho shinsakaiOnseiJoho = new ShinsakaiOnseiJoho(開催番号, 連番);
+            ShinsakaiOnseiJohoBuilder ShinsakaiOnseiJohoBuilder = shinsakaiOnseiJoho.createBuilderForEdit();
+            ShinsakaiOnseiJohoBuilder.set審査会音声ファイル(array);
+            shinsakaiOnseiJoho = ShinsakaiOnseiJohoBuilder.build();
+            ShinsakaiKaisaiYoteiJohoBuilder shinsakaiKaisaiYoteiJohoBuilder = shinsakaiKaisaiYoteiJoho.createBuilderForEdit();
+            shinsakaiKaisaiYoteiJohoBuilder.setShinsakaiOnseiJoho(shinsakaiOnseiJoho);
+            shinsakaiKaisaiYoteiJoho = shinsakaiKaisaiYoteiJohoBuilder.build();
+            manager.save(shinsakaiKaisaiYoteiJoho);
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -108,8 +126,7 @@ public class ShinsakaiKaisaiKekka {
         ResponseData<ShinsakaiKaisaiKekkaDiv> responseData = new ResponseData<>();
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 && new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-//            RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
-            RString 開催番号 = new RString("41022222");
+            RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
             Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel
                     = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
             ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
@@ -172,8 +189,7 @@ public class ShinsakaiKaisaiKekka {
     }
 
     private void setYotei(ShinsakaiKaisaiKekkaDiv div) {
-        RString 開催番号 = new RString("41022222");
-//        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel
                 = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
         if (new RString("新規モード").equals(div.getModel())) {
@@ -194,8 +210,7 @@ public class ShinsakaiKaisaiKekka {
     }
 
     private void setYoteiJoho(ShinsakaiKaisaiKekkaDiv div) {
-//        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
-        RString 開催番号 = new RString("41022222");
+        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel
                 = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
         ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
@@ -218,8 +233,7 @@ public class ShinsakaiKaisaiKekka {
     }
 
     private void setKekkaJoho(ShinsakaiKaisaiKekkaDiv div) {
-//        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
-        RString 開催番号 = new RString("41022222");
+        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel
                 = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
         ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
@@ -241,8 +255,7 @@ public class ShinsakaiKaisaiKekka {
     }
 
     private void setWariateIinJoho(ShinsakaiKaisaiKekkaDiv div) {
-//        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
-        RString 開催番号 = new RString("41022222");
+        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel
                 = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
         for (dgShinsakaiIinIchiran_Row row : div.getDgShinsakaiIinIchiran().getDataSource()) {

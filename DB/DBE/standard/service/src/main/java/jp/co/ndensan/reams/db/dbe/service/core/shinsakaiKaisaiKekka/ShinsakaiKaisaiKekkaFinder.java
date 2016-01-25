@@ -120,4 +120,15 @@ public class ShinsakaiKaisaiKekkaFinder {
         }
         return SearchResult.of(resultList, 0, false);
     }
+
+    /**
+     * MAX(連番)を取得です。
+     *
+     * @param 開催番号 開催番号
+     * @return
+     */
+    @Transaction
+    public int get連番(RString 開催番号) {
+        return mapperProvider.create(IShinsakaiKaisaiKekkaMapper.class).get連番(開催番号);
+    }
 }

@@ -115,4 +115,13 @@
         <collection property="介護認定審査会割当委員情報RelateEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiwariateiinjoho.IShinsakaiWariateIinJohoMapper.resultMap_ShinsakaiWariateIinJohoEntity"/>
     </resultMap>
 
+    <select id="get連番" resultType="int"
+            fetchSize="500">
+        SELECT
+        MAX(DbT5512ShinsakaiOnseiJoho."renban") AS "renban"
+        FROM
+        rgdb."DbT5512ShinsakaiOnseiJoho" DbT5512ShinsakaiOnseiJoho
+        WHERE
+        DbT5512ShinsakaiOnseiJoho."shinsakaiKaisaiNo" = #{開催番号}
+    </select>
 </mapper>

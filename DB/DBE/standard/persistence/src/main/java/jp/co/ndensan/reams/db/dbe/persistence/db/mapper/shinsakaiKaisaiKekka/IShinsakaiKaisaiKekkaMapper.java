@@ -40,4 +40,12 @@ public interface IShinsakaiKaisaiKekkaMapper {
      * @return List<ShinsakaiKaisaiYoteiJohoRelateEntity>
      */
     List<ShinsakaiKaisaiYoteiJohoRelateEntity> get開催予定情報更新(RString 開催番号);
+
+    /**
+     * MAX履歴番号を取得します。
+     *
+     * @param 開催番号 開催番号
+     * @return int
+     */
+    int get連番(RString 開催番号);
 }
