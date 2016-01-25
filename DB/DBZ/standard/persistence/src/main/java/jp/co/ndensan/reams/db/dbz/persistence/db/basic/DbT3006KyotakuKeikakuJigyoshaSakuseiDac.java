@@ -8,7 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakusei;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshano;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakusei.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakusei.taishoYM;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
@@ -52,7 +52,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiDac implements ISaveable<DbT300
         return accessor.select().
                 table(DbT3006KyotakuKeikakuJigyoshaSakusei.class).
                 where(and(
-                                eq(hihokenshano, 被保険者番号),
+                                eq(hihokenshaNo, 被保険者番号),
                                 eq(taishoYM, 対象年月),
                                 eq(rirekiNo, 履歴番号))).
                 toObject(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity.class);
