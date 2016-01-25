@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011YoboKeikakuJikoSakuseiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -44,8 +44,8 @@ public final class DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator {
     private DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator() {
     }
 
-    public static DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity createDbT3011YoboKeikakuJikoSakuseiMeisaiEntity() {
-        DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity = new DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity();
+    public static DbT3011YoboKeikakuJikoSakuseiMeisaiEntity createDbT3011YoboKeikakuJikoSakuseiMeisaiEntity() {
+        DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity = new DbT3011YoboKeikakuJikoSakuseiMeisaiEntity();
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
         entity.setTaishoYM(DEFAULT_対象年月);
         entity.setRirekiNo(DEFAULT_履歴番号);

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3008KyotakuKeikakuJikos
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011YoboKeikakuJikoSakuseiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3007KyotakuKeikakuJikoSakuseiDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiDac;
@@ -167,7 +167,7 @@ public class IKyotakuKeikakuJikoSakuseiMapperTest {
         public static void insertDbT3011(
                 HihokenshaNo 主キー1,
                 FlexibleYearMonth 主キー2) {
-            DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity = DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator.createDbT3011YoboKeikakuJikoSakuseiMeisaiEntity();
+            DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity = DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator.createDbT3011YoboKeikakuJikoSakuseiMeisaiEntity();
             entity.setHihokenshaNo(主キー1);
             entity.setTaishoYM(主キー2);
             entity.setState(EntityDataState.Added);
