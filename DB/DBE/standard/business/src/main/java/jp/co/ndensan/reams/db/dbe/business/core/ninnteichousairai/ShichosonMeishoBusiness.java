@@ -18,7 +18,7 @@ public class ShichosonMeishoBusiness {
     /**
      * 市町村情報を返します。
      *
-     * @param entity
+     * @param entity DbT7051KoseiShichosonMasterEntity
      */
     public ShichosonMeishoBusiness(DbT7051KoseiShichosonMasterEntity entity) {
         this.entity = entity;
