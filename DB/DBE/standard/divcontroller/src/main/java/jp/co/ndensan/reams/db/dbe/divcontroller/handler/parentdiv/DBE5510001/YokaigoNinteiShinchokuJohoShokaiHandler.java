@@ -36,6 +36,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
 
     private static final RString DATE_SOURCE_KEY0 = new RString("key0");
     private static final RString DATE_SOURCE_KEY1 = new RString("key1");
+    private static final List<RString> CHK_BOX_NASI = new ArrayList<>();
     private final YokaigoNinteiShinchokuJohoShokaiDiv div;
 
     /**
@@ -247,16 +248,16 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         div.getTxtShimei().clearValue();
         div.getTxtShiteiHizukeForm().clearValue();
         div.getTxtShiteiHizukeTo().clearValue();
-        div.getChkNinteiChosaIrai().setSelectedItemsByKey(null);
-        div.getChkNinteiChosaJisshi().setSelectedItemsByKey(null);
-        div.getChkNinteiChosaTokki().setSelectedItemsByKey(null);
-        div.getChkShujiiIkenshoIrai().setSelectedItemsByKey(null);
-        div.getChkShujiiIkenshoJuryo().setSelectedItemsByKey(null);
-        div.getChkIchijiHanteiKanryo().setSelectedItemsByKey(null);
-        div.getChkMaskingKanryo().setSelectedItemsByKey(null);
-        div.getChkShinsakaiWaritsuke().setSelectedItemsByKey(null);
-        div.getChkShinsakaiJisshi().setSelectedItemsByKey(null);
-        div.getChkKensakuOption().setSelectedItemsByKey(null);
+        div.getChkNinteiChosaIrai().setSelectedItemsByKey(CHK_BOX_NASI);
+        div.getChkNinteiChosaJisshi().setSelectedItemsByKey(CHK_BOX_NASI);
+        div.getChkNinteiChosaTokki().setSelectedItemsByKey(CHK_BOX_NASI);
+        div.getChkShujiiIkenshoIrai().setSelectedItemsByKey(CHK_BOX_NASI);
+        div.getChkShujiiIkenshoJuryo().setSelectedItemsByKey(CHK_BOX_NASI);
+        div.getChkIchijiHanteiKanryo().setSelectedItemsByKey(CHK_BOX_NASI);
+        div.getChkMaskingKanryo().setSelectedItemsByKey(CHK_BOX_NASI);
+        div.getChkShinsakaiWaritsuke().setSelectedItemsByKey(CHK_BOX_NASI);
+        div.getChkShinsakaiJisshi().setSelectedItemsByKey(CHK_BOX_NASI);
+        div.getChkKensakuOption().setSelectedItemsByKey(CHK_BOX_NASI);
         div.getTxtMaximumDisplayNumber().clearValue();
     }
 
@@ -275,5 +276,4 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
             return message;
         }
     }
-
 }
