@@ -119,7 +119,7 @@ public class NinteiChosaScheduleMemoTest extends DbzTestBase {
 
         @Test
         public void get調査地区コードは_entityが持つ調査地区コードを返す() {
-            assertThat(sut.get調査地区コード(), is(NinteiChosaScheduleMemoEntity.getChosachikucode()));
+            assertThat(sut.get調査地区コード(), is(NinteiChosaScheduleMemoEntity.getChosaChikuCode()));
         }
 
         @Test

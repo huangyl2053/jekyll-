@@ -120,7 +120,7 @@ public class NinteichosahyoChosaItem extends ModelBase<NinteichosahyoChosaItemId
      * @return 調査項目
      */
     public RString get調査項目() {
-        return entity.getReserchItem();
+        return entity.getResearchItem();
     }
 
     /**

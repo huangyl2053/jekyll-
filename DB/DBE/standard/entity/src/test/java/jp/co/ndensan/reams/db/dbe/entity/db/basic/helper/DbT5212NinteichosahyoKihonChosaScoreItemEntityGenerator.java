@@ -31,7 +31,7 @@ public final class DbT5212NinteichosahyoKihonChosaScoreItemEntityGenerator {
         entity.setNinteichosaRirekiNo(DEFAULT_要介護認定調査履歴番号);
         entity.setRemban(DEFAULT_連番);
         entity.setKoroshoIfShikibetsuCode(DEFAULT_厚労省IF識別コード);
-        entity.setReserchItem01(DEFAULT_素点項目);
+        entity.setResearchItem01(DEFAULT_素点項目);
         return entity;
     }
 }

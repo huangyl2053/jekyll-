@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo.chosachikucode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo.chosaChikuCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo.memoKubun;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo.memoYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo.remban;
@@ -58,10 +58,10 @@ public class DbT5222NinteiChosaScheduleMemoDac implements ISaveable<DbT5222Ninte
         return accessor.select().
                 table(DbT5222NinteiChosaScheduleMemo.class).
                 where(and(
-                eq(memoYMD, メモ年月日),
-                eq(chosachikucode, 調査地区コード),
-                eq(memoKubun, メモ区分),
-                eq(remban, 連番))).
+                                eq(memoYMD, メモ年月日),
+                                eq(chosaChikuCode, 調査地区コード),
+                                eq(memoKubun, メモ区分),
+                                eq(remban, 連番))).
                 toObject(DbT5222NinteiChosaScheduleMemoEntity.class);
     }
 
