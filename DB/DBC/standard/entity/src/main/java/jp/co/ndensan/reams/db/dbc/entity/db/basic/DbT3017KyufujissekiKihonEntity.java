@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -23,7 +25,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShi
  *
  */
 public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017KyufujissekiKihonEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3017KyufujissekiKihon");
@@ -45,7 +47,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
     @PrimaryKey
     private RString kyufuSakuseiKubunCode;
     @PrimaryKey
-    private HokenshaNo hokenshaNo;
+    private HokenshaNo shokisaiHokenshaNo;
     @PrimaryKey
     private HihokenshaNo hiHokenshaNo;
     @PrimaryKey
@@ -82,61 +84,61 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
     private RString chushiRiyuNyushomaeJyokyoCode;
     private FlexibleDate nyushoYMD;
     private FlexibleDate taishoYMD;
-    private Decimal nyushoJitsunissu;
-    private Decimal gaihakuNissu;
+    private int nyushoJitsunissu;
+    private int gaihakuNissu;
     private RString taishogoJotaiCode;
     private HokenKyufuRitsu hokenKyufuritsu;
     private HokenKyufuRitsu kohi1Kyufuritsu;
     private HokenKyufuRitsu kohi2Kyufuritsu;
     private HokenKyufuRitsu kohi3Kyufuritsu;
-    private Decimal maeHokenServiceTanisu;
+    private int maeHokenServiceTanisu;
     private Decimal maeHokenSeikyugaku;
-    private Decimal maeHokenRiyoshaFutangaku;
+    private int maeHokenRiyoshaFutangaku;
     private Decimal maeHokenKinkyuShisetsuRyoyoSeikyugaku;
     private Decimal maeHokenTokuteiShinryohiSeikyugaku;
-    private Decimal maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku;
-    private Decimal maeKohi1ServiceTanisu;
-    private Decimal maeKohi1Seikyugaku;
-    private Decimal maeKohi1RiyoshaFutangaku;
-    private Decimal maeKohi1KinkyuShisetsuRyoyoSeikyugaku;
-    private Decimal maeKohi1TokuteiShinryohiSeikyugaku;
-    private Decimal maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku;
-    private Decimal maeKohi2ServiceTanisu;
-    private Decimal maeKohi2Seikyugaku;
-    private Decimal maeKohi2RiyoshaFutangaku;
-    private Decimal maeKohi2KinkyuShisetsuRyoyoSeikyugaku;
-    private Decimal maeKohi2TokuteiShinryohiSeikyugaku;
-    private Decimal maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku;
-    private Decimal maeKohi3ServiceTanisu;
-    private Decimal maeKohi3Seikyugaku;
-    private Decimal maeKohi3RiyoshaFutangaku;
-    private Decimal maeKohi3KinkyuShisetsuRyoyoSeikyugaku;
-    private Decimal maeKohi3TokuteiShinryohiSeikyugaku;
-    private Decimal maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku;
-    private Decimal atoHokenServiceTanisu;
+    private int maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku;
+    private int maeKohi1ServiceTanisu;
+    private int maeKohi1Seikyugaku;
+    private int maeKohi1RiyoshaFutangaku;
+    private int maeKohi1KinkyuShisetsuRyoyoSeikyugaku;
+    private int maeKohi1TokuteiShinryohiSeikyugaku;
+    private int maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku;
+    private int maeKohi2ServiceTanisu;
+    private int maeKohi2Seikyugaku;
+    private int maeKohi2RiyoshaFutangaku;
+    private int maeKohi2KinkyuShisetsuRyoyoSeikyugaku;
+    private int maeKohi2TokuteiShinryohiSeikyugaku;
+    private int maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku;
+    private int maeKohi3ServiceTanisu;
+    private int maeKohi3Seikyugaku;
+    private int maeKohi3RiyoshaFutangaku;
+    private int maeKohi3KinkyuShisetsuRyoyoSeikyugaku;
+    private int maeKohi3TokuteiShinryohiSeikyugaku;
+    private int maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku;
+    private int atoHokenServiceTanisu;
     private Decimal atoHokenSeikyugaku;
-    private Decimal atoHokenRiyoshaFutangaku;
+    private int atoHokenRiyoshaFutangaku;
     private Decimal atoHokenKinkyuShisetsuRyoyoSeikyugaku;
     private Decimal atoHokenTokuteiShinryohiSeikyugaku;
-    private Decimal atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku;
-    private Decimal atoKohi1ServiceTanisu;
-    private Decimal atoKohi1Seikyugaku;
-    private Decimal atoKohi1RiyoshaFutangaku;
-    private Decimal atoKohi1KinkyuShisetsuRyoyoSeikyugaku;
-    private Decimal atoKohi1TokuteiShinryohiSeikyugaku;
-    private Decimal atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku;
-    private Decimal atoKohi2ServiceTanisu;
-    private Decimal atoKohi2Seikyugaku;
-    private Decimal atoKohi2RiyoshaFutangaku;
-    private Decimal atoKohi2KinkyuShisetsuRyoyoSeikyugaku;
-    private Decimal atoKohi2TokuteiShinryohiSeikyugaku;
-    private Decimal atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku;
-    private Decimal atoKohi3ServiceTanisu;
-    private Decimal atoKohi3Seikyugaku;
-    private Decimal atoKohi3RiyoshaFutangaku;
-    private Decimal atoKohi3KinkyuShisetsuRyoyoSeikyugaku;
-    private Decimal atoKohi3TokuteiShinryohiSeikyugaku;
-    private Decimal atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku;
+    private int atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku;
+    private int atoKohi1ServiceTanisu;
+    private int atoKohi1Seikyugaku;
+    private int atoKohi1RiyoshaFutangaku;
+    private int atoKohi1KinkyuShisetsuRyoyoSeikyugaku;
+    private int atoKohi1TokuteiShinryohiSeikyugaku;
+    private int atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku;
+    private int atoKohi2ServiceTanisu;
+    private int atoKohi2Seikyugaku;
+    private int atoKohi2RiyoshaFutangaku;
+    private int atoKohi2KinkyuShisetsuRyoyoSeikyugaku;
+    private int atoKohi2TokuteiShinryohiSeikyugaku;
+    private int atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku;
+    private int atoKohi3ServiceTanisu;
+    private int atoKohi3Seikyugaku;
+    private int atoKohi3RiyoshaFutangaku;
+    private int atoKohi3KinkyuShisetsuRyoyoSeikyugaku;
+    private int atoKohi3TokuteiShinryohiSeikyugaku;
+    private int atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku;
     private RString keikaiKubunCode;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
@@ -204,7 +206,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param kokanShikibetsuNo 交換情報識別番号
      */
-    public void setKokanShikibetsuNo(KokanShikibetsuNo kokanShikibetsuNo) {
+    public void setKokanShikibetsuNo(@Nonnull KokanShikibetsuNo kokanShikibetsuNo) {
         this.kokanShikibetsuNo = kokanShikibetsuNo;
     }
 
@@ -222,7 +224,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param inputShikibetsuNo 入力識別番号
      */
-    public void setInputShikibetsuNo(NyuryokuShikibetsuNo inputShikibetsuNo) {
+    public void setInputShikibetsuNo(@Nonnull NyuryokuShikibetsuNo inputShikibetsuNo) {
         this.inputShikibetsuNo = inputShikibetsuNo;
     }
 
@@ -240,7 +242,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param recodeShubetsuCode レコード種別コード
      */
-    public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
+    public void setRecodeShubetsuCode(@Nonnull RString recodeShubetsuCode) {
         this.recodeShubetsuCode = recodeShubetsuCode;
     }
 
@@ -262,7 +264,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param kyufuSakuseiKubunCode 給付実績情報作成区分コード
      */
-    public void setKyufuSakuseiKubunCode(RString kyufuSakuseiKubunCode) {
+    public void setKyufuSakuseiKubunCode(@Nonnull RString kyufuSakuseiKubunCode) {
         this.kyufuSakuseiKubunCode = kyufuSakuseiKubunCode;
     }
 
@@ -271,17 +273,17 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 証記載保険者番号
      */
-    public HokenshaNo getHokenshaNo() {
-        return hokenshaNo;
+    public HokenshaNo getShokisaiHokenshaNo() {
+        return shokisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
      *
-     * @param hokenshaNo 証記載保険者番号
+     * @param shokisaiHokenshaNo 証記載保険者番号
      */
-    public void setHokenshaNo(HokenshaNo hokenshaNo) {
-        this.hokenshaNo = hokenshaNo;
+    public void setShokisaiHokenshaNo(@Nonnull HokenshaNo shokisaiHokenshaNo) {
+        this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
     /**
@@ -298,7 +300,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
@@ -316,7 +318,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param serviceTeikyoYM サービス提供年月
      */
-    public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
+    public void setServiceTeikyoYM(@Nonnull FlexibleYearMonth serviceTeikyoYM) {
         this.serviceTeikyoYM = serviceTeikyoYM;
     }
 
@@ -338,7 +340,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param kyufuJissekiKubunCode 給付実績区分コード
      */
-    public void setKyufuJissekiKubunCode(RString kyufuJissekiKubunCode) {
+    public void setKyufuJissekiKubunCode(@Nonnull RString kyufuJissekiKubunCode) {
         this.kyufuJissekiKubunCode = kyufuJissekiKubunCode;
     }
 
@@ -356,7 +358,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param jigyoshoNo 事業所番号
      */
-    public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
+    public void setJigyoshoNo(@Nonnull JigyoshaNo jigyoshoNo) {
         this.jigyoshoNo = jigyoshoNo;
     }
 
@@ -374,7 +376,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param toshiNo 通し番号
      */
-    public void setToshiNo(RString toshiNo) {
+    public void setToshiNo(@Nonnull RString toshiNo) {
         this.toshiNo = toshiNo;
     }
 
@@ -383,6 +385,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 公費１・負担者番号
      */
+    @CheckForNull
     public RString getKohi1FutanshaNo() {
         return kohi1FutanshaNo;
     }
@@ -401,6 +404,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 公費１・受給者番号
      */
+    @CheckForNull
     public RString getKohi1JukyushaNo() {
         return kohi1JukyushaNo;
     }
@@ -419,6 +423,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 公費２・負担者番号
      */
+    @CheckForNull
     public RString getKohi2FutanshaNo() {
         return kohi2FutanshaNo;
     }
@@ -437,6 +442,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 公費２・受給者番号
      */
+    @CheckForNull
     public RString getKohi2JukyushaNo() {
         return kohi2JukyushaNo;
     }
@@ -455,6 +461,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 公費３・負担者番号
      */
+    @CheckForNull
     public RString getKohi3FutanshaNo() {
         return kohi3FutanshaNo;
     }
@@ -473,6 +480,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 公費３・受給者番号
      */
+    @CheckForNull
     public RString getKohi3JukyushaNo() {
         return kohi3JukyushaNo;
     }
@@ -491,6 +499,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 生年月日
      */
+    @CheckForNull
     public FlexibleDate getUmareYMD() {
         return umareYMD;
     }
@@ -509,6 +518,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 性別コード
      */
+    @CheckForNull
     public RString getSeibetsuCode() {
         return seibetsuCode;
     }
@@ -527,6 +537,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 要介護状態区分コード
      */
+    @CheckForNull
     public RString getYoKaigoJotaiKubunCode() {
         return yoKaigoJotaiKubunCode;
     }
@@ -545,6 +556,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 旧措置入所者特例コード
      */
+    @CheckForNull
     public RString getKyuSochiNyushoshaTokureiCode() {
         return kyuSochiNyushoshaTokureiCode;
     }
@@ -563,6 +575,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 認定有効期間・開始年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteiYukoKaishiYMD() {
         return ninteiYukoKaishiYMD;
     }
@@ -581,6 +594,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 認定有功期間・終了年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteiYukoShuryoYMD() {
         return ninteiYukoShuryoYMD;
     }
@@ -599,6 +613,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 老人保健市町村番号
      */
+    @CheckForNull
     public RString getRojinHokenShichosonNo() {
         return rojinHokenShichosonNo;
     }
@@ -617,6 +632,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 老人保健受給者番号
      */
+    @CheckForNull
     public RString getRojinhokenJukyushaNo() {
         return rojinhokenJukyushaNo;
     }
@@ -637,6 +653,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 保険者番号（後期）
      */
+    @CheckForNull
     public RString getKokiHokenshaNo() {
         return kokiHokenshaNo;
     }
@@ -659,6 +676,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 被保険者番号（後期）
      */
+    @CheckForNull
     public RString getKokiHiHokenshaNo() {
         return kokiHiHokenshaNo;
     }
@@ -681,6 +699,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 保険者番号（国保）
      */
+    @CheckForNull
     public RString getKokuhoHokenshaNo() {
         return kokuhoHokenshaNo;
     }
@@ -703,6 +722,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 被保険者証番号（国保）
      */
+    @CheckForNull
     public RString getKokuhoHiHokenshashoNo() {
         return kokuhoHiHokenshashoNo;
     }
@@ -725,6 +745,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 個人番号（国保）
      */
+    @CheckForNull
     public RString getKokuhoKojinNo() {
         return kokuhoKojinNo;
     }
@@ -745,6 +766,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 居宅サービス計画作成区分コード
      */
+    @CheckForNull
     public RString getKyotakuServiceSakuseiKubunCode() {
         return kyotakuServiceSakuseiKubunCode;
     }
@@ -763,6 +785,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 事業所番号(居宅介護支援事業所等)
      */
+    @CheckForNull
     public JigyoshaNo getKyotakuKaigoShienJigyoshoNo() {
         return kyotakuKaigoShienJigyoshoNo;
     }
@@ -781,6 +804,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 開始年月日
      */
+    @CheckForNull
     public FlexibleDate getKaishiYMD() {
         return kaishiYMD;
     }
@@ -799,6 +823,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 中止年月日
      */
+    @CheckForNull
     public FlexibleDate getChushiYMD() {
         return chushiYMD;
     }
@@ -817,6 +842,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 中止理由・入所（院）前の状況コード
      */
+    @CheckForNull
     public RString getChushiRiyuNyushomaeJyokyoCode() {
         return chushiRiyuNyushomaeJyokyoCode;
     }
@@ -835,6 +861,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 入所（院）年月日
      */
+    @CheckForNull
     public FlexibleDate getNyushoYMD() {
         return nyushoYMD;
     }
@@ -853,6 +880,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 退所（院）年月日
      */
+    @CheckForNull
     public FlexibleDate getTaishoYMD() {
         return taishoYMD;
     }
@@ -871,7 +899,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 入所（院）実日数
      */
-    public Decimal getNyushoJitsunissu() {
+    @CheckForNull
+    public int getNyushoJitsunissu() {
         return nyushoJitsunissu;
     }
 
@@ -880,7 +909,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param nyushoJitsunissu 入所（院）実日数
      */
-    public void setNyushoJitsunissu(Decimal nyushoJitsunissu) {
+    public void setNyushoJitsunissu(int nyushoJitsunissu) {
         this.nyushoJitsunissu = nyushoJitsunissu;
     }
 
@@ -889,7 +918,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 外泊日数
      */
-    public Decimal getGaihakuNissu() {
+    @CheckForNull
+    public int getGaihakuNissu() {
         return gaihakuNissu;
     }
 
@@ -898,7 +928,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param gaihakuNissu 外泊日数
      */
-    public void setGaihakuNissu(Decimal gaihakuNissu) {
+    public void setGaihakuNissu(int gaihakuNissu) {
         this.gaihakuNissu = gaihakuNissu;
     }
 
@@ -907,6 +937,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 退所（院）後の状態コード
      */
+    @CheckForNull
     public RString getTaishogoJotaiCode() {
         return taishogoJotaiCode;
     }
@@ -925,6 +956,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 保険給付率
      */
+    @CheckForNull
     public HokenKyufuRitsu getHokenKyufuritsu() {
         return hokenKyufuritsu;
     }
@@ -943,6 +975,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 公費１給付率
      */
+    @CheckForNull
     public HokenKyufuRitsu getKohi1Kyufuritsu() {
         return kohi1Kyufuritsu;
     }
@@ -961,6 +994,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 公費２給付率
      */
+    @CheckForNull
     public HokenKyufuRitsu getKohi2Kyufuritsu() {
         return kohi2Kyufuritsu;
     }
@@ -979,6 +1013,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 公費３給付率
      */
+    @CheckForNull
     public HokenKyufuRitsu getKohi3Kyufuritsu() {
         return kohi3Kyufuritsu;
     }
@@ -997,7 +1032,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・保険・サービス単位数
      */
-    public Decimal getMaeHokenServiceTanisu() {
+    @CheckForNull
+    public int getMaeHokenServiceTanisu() {
         return maeHokenServiceTanisu;
     }
 
@@ -1006,7 +1042,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param maeHokenServiceTanisu 前・保険・サービス単位数
      */
-    public void setMaeHokenServiceTanisu(Decimal maeHokenServiceTanisu) {
+    public void setMaeHokenServiceTanisu(int maeHokenServiceTanisu) {
         this.maeHokenServiceTanisu = maeHokenServiceTanisu;
     }
 
@@ -1015,6 +1051,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・保険・請求額
      */
+    @CheckForNull
     public Decimal getMaeHokenSeikyugaku() {
         return maeHokenSeikyugaku;
     }
@@ -1033,7 +1070,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・保険・利用者負担額
      */
-    public Decimal getMaeHokenRiyoshaFutangaku() {
+    @CheckForNull
+    public int getMaeHokenRiyoshaFutangaku() {
         return maeHokenRiyoshaFutangaku;
     }
 
@@ -1042,7 +1080,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param maeHokenRiyoshaFutangaku 前・保険・利用者負担額
      */
-    public void setMaeHokenRiyoshaFutangaku(Decimal maeHokenRiyoshaFutangaku) {
+    public void setMaeHokenRiyoshaFutangaku(int maeHokenRiyoshaFutangaku) {
         this.maeHokenRiyoshaFutangaku = maeHokenRiyoshaFutangaku;
     }
 
@@ -1051,6 +1089,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・保険・緊急時施設療養費請求額
      */
+    @CheckForNull
     public Decimal getMaeHokenKinkyuShisetsuRyoyoSeikyugaku() {
         return maeHokenKinkyuShisetsuRyoyoSeikyugaku;
     }
@@ -1069,6 +1108,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・保険・特定診療費請求額
      */
+    @CheckForNull
     public Decimal getMaeHokenTokuteiShinryohiSeikyugaku() {
         return maeHokenTokuteiShinryohiSeikyugaku;
     }
@@ -1087,7 +1127,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・保険・特定入所者介護サービス費等請求額
      */
-    public Decimal getMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku() {
+    @CheckForNull
+    public int getMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku() {
         return maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku;
     }
 
@@ -1097,7 +1138,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      * @param maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku
      * 前・保険・特定入所者介護サービス費等請求額
      */
-    public void setMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(Decimal maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku) {
+    public void setMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(int maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku = maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku;
     }
 
@@ -1106,7 +1147,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費１・サービス単位数
      */
-    public Decimal getMaeKohi1ServiceTanisu() {
+    @CheckForNull
+    public int getMaeKohi1ServiceTanisu() {
         return maeKohi1ServiceTanisu;
     }
 
@@ -1115,7 +1157,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param maeKohi1ServiceTanisu 前・公費１・サービス単位数
      */
-    public void setMaeKohi1ServiceTanisu(Decimal maeKohi1ServiceTanisu) {
+    public void setMaeKohi1ServiceTanisu(int maeKohi1ServiceTanisu) {
         this.maeKohi1ServiceTanisu = maeKohi1ServiceTanisu;
     }
 
@@ -1124,7 +1166,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費１・請求額
      */
-    public Decimal getMaeKohi1Seikyugaku() {
+    @CheckForNull
+    public int getMaeKohi1Seikyugaku() {
         return maeKohi1Seikyugaku;
     }
 
@@ -1133,7 +1176,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param maeKohi1Seikyugaku 前・公費１・請求額
      */
-    public void setMaeKohi1Seikyugaku(Decimal maeKohi1Seikyugaku) {
+    public void setMaeKohi1Seikyugaku(int maeKohi1Seikyugaku) {
         this.maeKohi1Seikyugaku = maeKohi1Seikyugaku;
     }
 
@@ -1142,7 +1185,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費１・本人負担額
      */
-    public Decimal getMaeKohi1RiyoshaFutangaku() {
+    @CheckForNull
+    public int getMaeKohi1RiyoshaFutangaku() {
         return maeKohi1RiyoshaFutangaku;
     }
 
@@ -1151,7 +1195,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param maeKohi1RiyoshaFutangaku 前・公費１・本人負担額
      */
-    public void setMaeKohi1RiyoshaFutangaku(Decimal maeKohi1RiyoshaFutangaku) {
+    public void setMaeKohi1RiyoshaFutangaku(int maeKohi1RiyoshaFutangaku) {
         this.maeKohi1RiyoshaFutangaku = maeKohi1RiyoshaFutangaku;
     }
 
@@ -1160,7 +1204,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費１・緊急時施設療養費請求額
      */
-    public Decimal getMaeKohi1KinkyuShisetsuRyoyoSeikyugaku() {
+    @CheckForNull
+    public int getMaeKohi1KinkyuShisetsuRyoyoSeikyugaku() {
         return maeKohi1KinkyuShisetsuRyoyoSeikyugaku;
     }
 
@@ -1169,7 +1214,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param maeKohi1KinkyuShisetsuRyoyoSeikyugaku 前・公費１・緊急時施設療養費請求額
      */
-    public void setMaeKohi1KinkyuShisetsuRyoyoSeikyugaku(Decimal maeKohi1KinkyuShisetsuRyoyoSeikyugaku) {
+    public void setMaeKohi1KinkyuShisetsuRyoyoSeikyugaku(int maeKohi1KinkyuShisetsuRyoyoSeikyugaku) {
         this.maeKohi1KinkyuShisetsuRyoyoSeikyugaku = maeKohi1KinkyuShisetsuRyoyoSeikyugaku;
     }
 
@@ -1178,7 +1223,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費１・特定診療費請求額
      */
-    public Decimal getMaeKohi1TokuteiShinryohiSeikyugaku() {
+    @CheckForNull
+    public int getMaeKohi1TokuteiShinryohiSeikyugaku() {
         return maeKohi1TokuteiShinryohiSeikyugaku;
     }
 
@@ -1187,7 +1233,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param maeKohi1TokuteiShinryohiSeikyugaku 前・公費１・特定診療費請求額
      */
-    public void setMaeKohi1TokuteiShinryohiSeikyugaku(Decimal maeKohi1TokuteiShinryohiSeikyugaku) {
+    public void setMaeKohi1TokuteiShinryohiSeikyugaku(int maeKohi1TokuteiShinryohiSeikyugaku) {
         this.maeKohi1TokuteiShinryohiSeikyugaku = maeKohi1TokuteiShinryohiSeikyugaku;
     }
 
@@ -1196,7 +1242,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費１・特定入所者介護サービス費等請求額
      */
-    public Decimal getMaeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku() {
+    @CheckForNull
+    public int getMaeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku() {
         return maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku;
     }
 
@@ -1206,7 +1253,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      * @param maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku
      * 前・公費１・特定入所者介護サービス費等請求額
      */
-    public void setMaeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku(Decimal maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
+    public void setMaeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku(int maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku = maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku;
     }
 
@@ -1215,7 +1262,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費２・サービス単位数
      */
-    public Decimal getMaeKohi2ServiceTanisu() {
+    @CheckForNull
+    public int getMaeKohi2ServiceTanisu() {
         return maeKohi2ServiceTanisu;
     }
 
@@ -1224,7 +1272,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param maeKohi2ServiceTanisu 前・公費２・サービス単位数
      */
-    public void setMaeKohi2ServiceTanisu(Decimal maeKohi2ServiceTanisu) {
+    public void setMaeKohi2ServiceTanisu(int maeKohi2ServiceTanisu) {
         this.maeKohi2ServiceTanisu = maeKohi2ServiceTanisu;
     }
 
@@ -1233,7 +1281,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費２・請求額
      */
-    public Decimal getMaeKohi2Seikyugaku() {
+    @CheckForNull
+    public int getMaeKohi2Seikyugaku() {
         return maeKohi2Seikyugaku;
     }
 
@@ -1242,7 +1291,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param maeKohi2Seikyugaku 前・公費２・請求額
      */
-    public void setMaeKohi2Seikyugaku(Decimal maeKohi2Seikyugaku) {
+    public void setMaeKohi2Seikyugaku(int maeKohi2Seikyugaku) {
         this.maeKohi2Seikyugaku = maeKohi2Seikyugaku;
     }
 
@@ -1251,7 +1300,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費２・本人負担額
      */
-    public Decimal getMaeKohi2RiyoshaFutangaku() {
+    @CheckForNull
+    public int getMaeKohi2RiyoshaFutangaku() {
         return maeKohi2RiyoshaFutangaku;
     }
 
@@ -1260,7 +1310,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param maeKohi2RiyoshaFutangaku 前・公費２・本人負担額
      */
-    public void setMaeKohi2RiyoshaFutangaku(Decimal maeKohi2RiyoshaFutangaku) {
+    public void setMaeKohi2RiyoshaFutangaku(int maeKohi2RiyoshaFutangaku) {
         this.maeKohi2RiyoshaFutangaku = maeKohi2RiyoshaFutangaku;
     }
 
@@ -1269,7 +1319,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費２・緊急時施設療養費請求額
      */
-    public Decimal getMaeKohi2KinkyuShisetsuRyoyoSeikyugaku() {
+    @CheckForNull
+    public int getMaeKohi2KinkyuShisetsuRyoyoSeikyugaku() {
         return maeKohi2KinkyuShisetsuRyoyoSeikyugaku;
     }
 
@@ -1278,7 +1329,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param maeKohi2KinkyuShisetsuRyoyoSeikyugaku 前・公費２・緊急時施設療養費請求額
      */
-    public void setMaeKohi2KinkyuShisetsuRyoyoSeikyugaku(Decimal maeKohi2KinkyuShisetsuRyoyoSeikyugaku) {
+    public void setMaeKohi2KinkyuShisetsuRyoyoSeikyugaku(int maeKohi2KinkyuShisetsuRyoyoSeikyugaku) {
         this.maeKohi2KinkyuShisetsuRyoyoSeikyugaku = maeKohi2KinkyuShisetsuRyoyoSeikyugaku;
     }
 
@@ -1287,7 +1338,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費２・特定診療費請求額
      */
-    public Decimal getMaeKohi2TokuteiShinryohiSeikyugaku() {
+    @CheckForNull
+    public int getMaeKohi2TokuteiShinryohiSeikyugaku() {
         return maeKohi2TokuteiShinryohiSeikyugaku;
     }
 
@@ -1296,7 +1348,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param maeKohi2TokuteiShinryohiSeikyugaku 前・公費２・特定診療費請求額
      */
-    public void setMaeKohi2TokuteiShinryohiSeikyugaku(Decimal maeKohi2TokuteiShinryohiSeikyugaku) {
+    public void setMaeKohi2TokuteiShinryohiSeikyugaku(int maeKohi2TokuteiShinryohiSeikyugaku) {
         this.maeKohi2TokuteiShinryohiSeikyugaku = maeKohi2TokuteiShinryohiSeikyugaku;
     }
 
@@ -1305,7 +1357,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費２・特定入所者介護サービス費等請求額
      */
-    public Decimal getMaeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku() {
+    @CheckForNull
+    public int getMaeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku() {
         return maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku;
     }
 
@@ -1315,7 +1368,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      * @param maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku
      * 前・公費２・特定入所者介護サービス費等請求額
      */
-    public void setMaeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku(Decimal maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
+    public void setMaeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku(int maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku = maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku;
     }
 
@@ -1324,7 +1377,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費３・サービス単位数
      */
-    public Decimal getMaeKohi3ServiceTanisu() {
+    @CheckForNull
+    public int getMaeKohi3ServiceTanisu() {
         return maeKohi3ServiceTanisu;
     }
 
@@ -1333,7 +1387,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param maeKohi3ServiceTanisu 前・公費３・サービス単位数
      */
-    public void setMaeKohi3ServiceTanisu(Decimal maeKohi3ServiceTanisu) {
+    public void setMaeKohi3ServiceTanisu(int maeKohi3ServiceTanisu) {
         this.maeKohi3ServiceTanisu = maeKohi3ServiceTanisu;
     }
 
@@ -1342,7 +1396,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費３・請求額
      */
-    public Decimal getMaeKohi3Seikyugaku() {
+    @CheckForNull
+    public int getMaeKohi3Seikyugaku() {
         return maeKohi3Seikyugaku;
     }
 
@@ -1351,7 +1406,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param maeKohi3Seikyugaku 前・公費３・請求額
      */
-    public void setMaeKohi3Seikyugaku(Decimal maeKohi3Seikyugaku) {
+    public void setMaeKohi3Seikyugaku(int maeKohi3Seikyugaku) {
         this.maeKohi3Seikyugaku = maeKohi3Seikyugaku;
     }
 
@@ -1360,7 +1415,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費３・本人負担額
      */
-    public Decimal getMaeKohi3RiyoshaFutangaku() {
+    @CheckForNull
+    public int getMaeKohi3RiyoshaFutangaku() {
         return maeKohi3RiyoshaFutangaku;
     }
 
@@ -1369,7 +1425,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param maeKohi3RiyoshaFutangaku 前・公費３・本人負担額
      */
-    public void setMaeKohi3RiyoshaFutangaku(Decimal maeKohi3RiyoshaFutangaku) {
+    public void setMaeKohi3RiyoshaFutangaku(int maeKohi3RiyoshaFutangaku) {
         this.maeKohi3RiyoshaFutangaku = maeKohi3RiyoshaFutangaku;
     }
 
@@ -1378,7 +1434,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費３・緊急時施設療養費請求額
      */
-    public Decimal getMaeKohi3KinkyuShisetsuRyoyoSeikyugaku() {
+    @CheckForNull
+    public int getMaeKohi3KinkyuShisetsuRyoyoSeikyugaku() {
         return maeKohi3KinkyuShisetsuRyoyoSeikyugaku;
     }
 
@@ -1387,7 +1444,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param maeKohi3KinkyuShisetsuRyoyoSeikyugaku 前・公費３・緊急時施設療養費請求額
      */
-    public void setMaeKohi3KinkyuShisetsuRyoyoSeikyugaku(Decimal maeKohi3KinkyuShisetsuRyoyoSeikyugaku) {
+    public void setMaeKohi3KinkyuShisetsuRyoyoSeikyugaku(int maeKohi3KinkyuShisetsuRyoyoSeikyugaku) {
         this.maeKohi3KinkyuShisetsuRyoyoSeikyugaku = maeKohi3KinkyuShisetsuRyoyoSeikyugaku;
     }
 
@@ -1396,7 +1453,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費３・特定診療費請求額
      */
-    public Decimal getMaeKohi3TokuteiShinryohiSeikyugaku() {
+    @CheckForNull
+    public int getMaeKohi3TokuteiShinryohiSeikyugaku() {
         return maeKohi3TokuteiShinryohiSeikyugaku;
     }
 
@@ -1405,7 +1463,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param maeKohi3TokuteiShinryohiSeikyugaku 前・公費３・特定診療費請求額
      */
-    public void setMaeKohi3TokuteiShinryohiSeikyugaku(Decimal maeKohi3TokuteiShinryohiSeikyugaku) {
+    public void setMaeKohi3TokuteiShinryohiSeikyugaku(int maeKohi3TokuteiShinryohiSeikyugaku) {
         this.maeKohi3TokuteiShinryohiSeikyugaku = maeKohi3TokuteiShinryohiSeikyugaku;
     }
 
@@ -1414,7 +1472,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 前・公費３・特定入所者介護サービス費等請求額
      */
-    public Decimal getMaeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku() {
+    @CheckForNull
+    public int getMaeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku() {
         return maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku;
     }
 
@@ -1424,7 +1483,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      * @param maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku
      * 前・公費３・特定入所者介護サービス費等請求額
      */
-    public void setMaeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku(Decimal maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
+    public void setMaeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku(int maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku = maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku;
     }
 
@@ -1433,7 +1492,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・保険・サービス単位数
      */
-    public Decimal getAtoHokenServiceTanisu() {
+    @CheckForNull
+    public int getAtoHokenServiceTanisu() {
         return atoHokenServiceTanisu;
     }
 
@@ -1442,7 +1502,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param atoHokenServiceTanisu 後・保険・サービス単位数
      */
-    public void setAtoHokenServiceTanisu(Decimal atoHokenServiceTanisu) {
+    public void setAtoHokenServiceTanisu(int atoHokenServiceTanisu) {
         this.atoHokenServiceTanisu = atoHokenServiceTanisu;
     }
 
@@ -1451,6 +1511,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・保険・請求額
      */
+    @CheckForNull
     public Decimal getAtoHokenSeikyugaku() {
         return atoHokenSeikyugaku;
     }
@@ -1469,7 +1530,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・保険・利用者負担額
      */
-    public Decimal getAtoHokenRiyoshaFutangaku() {
+    @CheckForNull
+    public int getAtoHokenRiyoshaFutangaku() {
         return atoHokenRiyoshaFutangaku;
     }
 
@@ -1478,7 +1540,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param atoHokenRiyoshaFutangaku 後・保険・利用者負担額
      */
-    public void setAtoHokenRiyoshaFutangaku(Decimal atoHokenRiyoshaFutangaku) {
+    public void setAtoHokenRiyoshaFutangaku(int atoHokenRiyoshaFutangaku) {
         this.atoHokenRiyoshaFutangaku = atoHokenRiyoshaFutangaku;
     }
 
@@ -1487,6 +1549,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・緊急時施設療養費請求額
      */
+    @CheckForNull
     public Decimal getAtoHokenKinkyuShisetsuRyoyoSeikyugaku() {
         return atoHokenKinkyuShisetsuRyoyoSeikyugaku;
     }
@@ -1505,6 +1568,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・保険・特定診療費請求額
      */
+    @CheckForNull
     public Decimal getAtoHokenTokuteiShinryohiSeikyugaku() {
         return atoHokenTokuteiShinryohiSeikyugaku;
     }
@@ -1523,7 +1587,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・保険・特定入所者介護サービス費等請求額
      */
-    public Decimal getAtoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku() {
+    @CheckForNull
+    public int getAtoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku() {
         return atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku;
     }
 
@@ -1533,7 +1598,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      * @param atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku
      * 後・保険・特定入所者介護サービス費等請求額
      */
-    public void setAtoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(Decimal atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku) {
+    public void setAtoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(int atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku = atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku;
     }
 
@@ -1542,7 +1607,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費１・サービス単位数
      */
-    public Decimal getAtoKohi1ServiceTanisu() {
+    @CheckForNull
+    public int getAtoKohi1ServiceTanisu() {
         return atoKohi1ServiceTanisu;
     }
 
@@ -1551,7 +1617,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param atoKohi1ServiceTanisu 後・公費１・サービス単位数
      */
-    public void setAtoKohi1ServiceTanisu(Decimal atoKohi1ServiceTanisu) {
+    public void setAtoKohi1ServiceTanisu(int atoKohi1ServiceTanisu) {
         this.atoKohi1ServiceTanisu = atoKohi1ServiceTanisu;
     }
 
@@ -1560,7 +1626,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費１・請求額
      */
-    public Decimal getAtoKohi1Seikyugaku() {
+    @CheckForNull
+    public int getAtoKohi1Seikyugaku() {
         return atoKohi1Seikyugaku;
     }
 
@@ -1569,7 +1636,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param atoKohi1Seikyugaku 後・公費１・請求額
      */
-    public void setAtoKohi1Seikyugaku(Decimal atoKohi1Seikyugaku) {
+    public void setAtoKohi1Seikyugaku(int atoKohi1Seikyugaku) {
         this.atoKohi1Seikyugaku = atoKohi1Seikyugaku;
     }
 
@@ -1578,7 +1645,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費１・本人負担額
      */
-    public Decimal getAtoKohi1RiyoshaFutangaku() {
+    @CheckForNull
+    public int getAtoKohi1RiyoshaFutangaku() {
         return atoKohi1RiyoshaFutangaku;
     }
 
@@ -1587,7 +1655,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param atoKohi1RiyoshaFutangaku 後・公費１・本人負担額
      */
-    public void setAtoKohi1RiyoshaFutangaku(Decimal atoKohi1RiyoshaFutangaku) {
+    public void setAtoKohi1RiyoshaFutangaku(int atoKohi1RiyoshaFutangaku) {
         this.atoKohi1RiyoshaFutangaku = atoKohi1RiyoshaFutangaku;
     }
 
@@ -1596,7 +1664,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費１・緊急時施設療養費請求額
      */
-    public Decimal getAtoKohi1KinkyuShisetsuRyoyoSeikyugaku() {
+    @CheckForNull
+    public int getAtoKohi1KinkyuShisetsuRyoyoSeikyugaku() {
         return atoKohi1KinkyuShisetsuRyoyoSeikyugaku;
     }
 
@@ -1605,7 +1674,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param atoKohi1KinkyuShisetsuRyoyoSeikyugaku 後・公費１・緊急時施設療養費請求額
      */
-    public void setAtoKohi1KinkyuShisetsuRyoyoSeikyugaku(Decimal atoKohi1KinkyuShisetsuRyoyoSeikyugaku) {
+    public void setAtoKohi1KinkyuShisetsuRyoyoSeikyugaku(int atoKohi1KinkyuShisetsuRyoyoSeikyugaku) {
         this.atoKohi1KinkyuShisetsuRyoyoSeikyugaku = atoKohi1KinkyuShisetsuRyoyoSeikyugaku;
     }
 
@@ -1614,7 +1683,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費１・特定診療費請求額
      */
-    public Decimal getAtoKohi1TokuteiShinryohiSeikyugaku() {
+    @CheckForNull
+    public int getAtoKohi1TokuteiShinryohiSeikyugaku() {
         return atoKohi1TokuteiShinryohiSeikyugaku;
     }
 
@@ -1623,7 +1693,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param atoKohi1TokuteiShinryohiSeikyugaku 後・公費１・特定診療費請求額
      */
-    public void setAtoKohi1TokuteiShinryohiSeikyugaku(Decimal atoKohi1TokuteiShinryohiSeikyugaku) {
+    public void setAtoKohi1TokuteiShinryohiSeikyugaku(int atoKohi1TokuteiShinryohiSeikyugaku) {
         this.atoKohi1TokuteiShinryohiSeikyugaku = atoKohi1TokuteiShinryohiSeikyugaku;
     }
 
@@ -1632,7 +1702,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費１・特定入所者介護サービス費等請求額
      */
-    public Decimal getAtoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku() {
+    @CheckForNull
+    public int getAtoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku() {
         return atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku;
     }
 
@@ -1642,7 +1713,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      * @param atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku
      * 後・公費１・特定入所者介護サービス費等請求額
      */
-    public void setAtoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku(Decimal atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
+    public void setAtoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku(int atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku = atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku;
     }
 
@@ -1651,7 +1722,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費２・サービス単位数
      */
-    public Decimal getAtoKohi2ServiceTanisu() {
+    @CheckForNull
+    public int getAtoKohi2ServiceTanisu() {
         return atoKohi2ServiceTanisu;
     }
 
@@ -1660,7 +1732,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param atoKohi2ServiceTanisu 後・公費２・サービス単位数
      */
-    public void setAtoKohi2ServiceTanisu(Decimal atoKohi2ServiceTanisu) {
+    public void setAtoKohi2ServiceTanisu(int atoKohi2ServiceTanisu) {
         this.atoKohi2ServiceTanisu = atoKohi2ServiceTanisu;
     }
 
@@ -1669,7 +1741,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費２・請求額
      */
-    public Decimal getAtoKohi2Seikyugaku() {
+    @CheckForNull
+    public int getAtoKohi2Seikyugaku() {
         return atoKohi2Seikyugaku;
     }
 
@@ -1678,7 +1751,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param atoKohi2Seikyugaku 後・公費２・請求額
      */
-    public void setAtoKohi2Seikyugaku(Decimal atoKohi2Seikyugaku) {
+    public void setAtoKohi2Seikyugaku(int atoKohi2Seikyugaku) {
         this.atoKohi2Seikyugaku = atoKohi2Seikyugaku;
     }
 
@@ -1687,7 +1760,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費２・利用者負担額
      */
-    public Decimal getAtoKohi2RiyoshaFutangaku() {
+    @CheckForNull
+    public int getAtoKohi2RiyoshaFutangaku() {
         return atoKohi2RiyoshaFutangaku;
     }
 
@@ -1696,7 +1770,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param atoKohi2RiyoshaFutangaku 後・公費２・利用者負担額
      */
-    public void setAtoKohi2RiyoshaFutangaku(Decimal atoKohi2RiyoshaFutangaku) {
+    public void setAtoKohi2RiyoshaFutangaku(int atoKohi2RiyoshaFutangaku) {
         this.atoKohi2RiyoshaFutangaku = atoKohi2RiyoshaFutangaku;
     }
 
@@ -1705,7 +1779,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費２・緊急時施設療養費請求額
      */
-    public Decimal getAtoKohi2KinkyuShisetsuRyoyoSeikyugaku() {
+    @CheckForNull
+    public int getAtoKohi2KinkyuShisetsuRyoyoSeikyugaku() {
         return atoKohi2KinkyuShisetsuRyoyoSeikyugaku;
     }
 
@@ -1714,7 +1789,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param atoKohi2KinkyuShisetsuRyoyoSeikyugaku 後・公費２・緊急時施設療養費請求額
      */
-    public void setAtoKohi2KinkyuShisetsuRyoyoSeikyugaku(Decimal atoKohi2KinkyuShisetsuRyoyoSeikyugaku) {
+    public void setAtoKohi2KinkyuShisetsuRyoyoSeikyugaku(int atoKohi2KinkyuShisetsuRyoyoSeikyugaku) {
         this.atoKohi2KinkyuShisetsuRyoyoSeikyugaku = atoKohi2KinkyuShisetsuRyoyoSeikyugaku;
     }
 
@@ -1723,7 +1798,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費２・特定診療費請求額
      */
-    public Decimal getAtoKohi2TokuteiShinryohiSeikyugaku() {
+    @CheckForNull
+    public int getAtoKohi2TokuteiShinryohiSeikyugaku() {
         return atoKohi2TokuteiShinryohiSeikyugaku;
     }
 
@@ -1732,7 +1808,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param atoKohi2TokuteiShinryohiSeikyugaku 後・公費２・特定診療費請求額
      */
-    public void setAtoKohi2TokuteiShinryohiSeikyugaku(Decimal atoKohi2TokuteiShinryohiSeikyugaku) {
+    public void setAtoKohi2TokuteiShinryohiSeikyugaku(int atoKohi2TokuteiShinryohiSeikyugaku) {
         this.atoKohi2TokuteiShinryohiSeikyugaku = atoKohi2TokuteiShinryohiSeikyugaku;
     }
 
@@ -1741,7 +1817,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費２・特定入所者介護サービス費等請求額
      */
-    public Decimal getAtoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku() {
+    @CheckForNull
+    public int getAtoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku() {
         return atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku;
     }
 
@@ -1751,7 +1828,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      * @param atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku
      * 後・公費２・特定入所者介護サービス費等請求額
      */
-    public void setAtoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku(Decimal atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
+    public void setAtoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku(int atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku = atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku;
     }
 
@@ -1760,7 +1837,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費３・サービス単位数
      */
-    public Decimal getAtoKohi3ServiceTanisu() {
+    @CheckForNull
+    public int getAtoKohi3ServiceTanisu() {
         return atoKohi3ServiceTanisu;
     }
 
@@ -1769,7 +1847,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param atoKohi3ServiceTanisu 後・公費３・サービス単位数
      */
-    public void setAtoKohi3ServiceTanisu(Decimal atoKohi3ServiceTanisu) {
+    public void setAtoKohi3ServiceTanisu(int atoKohi3ServiceTanisu) {
         this.atoKohi3ServiceTanisu = atoKohi3ServiceTanisu;
     }
 
@@ -1778,7 +1856,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費３・請求額
      */
-    public Decimal getAtoKohi3Seikyugaku() {
+    @CheckForNull
+    public int getAtoKohi3Seikyugaku() {
         return atoKohi3Seikyugaku;
     }
 
@@ -1787,7 +1866,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param atoKohi3Seikyugaku 後・公費３・請求額
      */
-    public void setAtoKohi3Seikyugaku(Decimal atoKohi3Seikyugaku) {
+    public void setAtoKohi3Seikyugaku(int atoKohi3Seikyugaku) {
         this.atoKohi3Seikyugaku = atoKohi3Seikyugaku;
     }
 
@@ -1796,7 +1875,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費３・利用者負担額
      */
-    public Decimal getAtoKohi3RiyoshaFutangaku() {
+    @CheckForNull
+    public int getAtoKohi3RiyoshaFutangaku() {
         return atoKohi3RiyoshaFutangaku;
     }
 
@@ -1805,7 +1885,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param atoKohi3RiyoshaFutangaku 後・公費３・利用者負担額
      */
-    public void setAtoKohi3RiyoshaFutangaku(Decimal atoKohi3RiyoshaFutangaku) {
+    public void setAtoKohi3RiyoshaFutangaku(int atoKohi3RiyoshaFutangaku) {
         this.atoKohi3RiyoshaFutangaku = atoKohi3RiyoshaFutangaku;
     }
 
@@ -1814,7 +1894,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費３・緊急時施設療養費請求額
      */
-    public Decimal getAtoKohi3KinkyuShisetsuRyoyoSeikyugaku() {
+    @CheckForNull
+    public int getAtoKohi3KinkyuShisetsuRyoyoSeikyugaku() {
         return atoKohi3KinkyuShisetsuRyoyoSeikyugaku;
     }
 
@@ -1823,7 +1904,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param atoKohi3KinkyuShisetsuRyoyoSeikyugaku 後・公費３・緊急時施設療養費請求額
      */
-    public void setAtoKohi3KinkyuShisetsuRyoyoSeikyugaku(Decimal atoKohi3KinkyuShisetsuRyoyoSeikyugaku) {
+    public void setAtoKohi3KinkyuShisetsuRyoyoSeikyugaku(int atoKohi3KinkyuShisetsuRyoyoSeikyugaku) {
         this.atoKohi3KinkyuShisetsuRyoyoSeikyugaku = atoKohi3KinkyuShisetsuRyoyoSeikyugaku;
     }
 
@@ -1832,7 +1913,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費３・特定診療費請求額
      */
-    public Decimal getAtoKohi3TokuteiShinryohiSeikyugaku() {
+    @CheckForNull
+    public int getAtoKohi3TokuteiShinryohiSeikyugaku() {
         return atoKohi3TokuteiShinryohiSeikyugaku;
     }
 
@@ -1841,7 +1923,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param atoKohi3TokuteiShinryohiSeikyugaku 後・公費３・特定診療費請求額
      */
-    public void setAtoKohi3TokuteiShinryohiSeikyugaku(Decimal atoKohi3TokuteiShinryohiSeikyugaku) {
+    public void setAtoKohi3TokuteiShinryohiSeikyugaku(int atoKohi3TokuteiShinryohiSeikyugaku) {
         this.atoKohi3TokuteiShinryohiSeikyugaku = atoKohi3TokuteiShinryohiSeikyugaku;
     }
 
@@ -1850,7 +1932,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 後・公費３・特定入所者介護サービス費等請求額
      */
-    public Decimal getAtoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku() {
+    @CheckForNull
+    public int getAtoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku() {
         return atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku;
     }
 
@@ -1860,7 +1943,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      * @param atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku
      * 後・公費３・特定入所者介護サービス費等請求額
      */
-    public void setAtoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku(Decimal atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
+    public void setAtoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku(int atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku = atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku;
     }
 
@@ -1871,6 +1954,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 警告区分コード
      */
+    @CheckForNull
     public RString getKeikaiKubunCode() {
         return keikaiKubunCode;
     }
@@ -1900,7 +1984,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param shinsaYM 審査年月
      */
-    public void setShinsaYM(FlexibleYearMonth shinsaYM) {
+    public void setShinsaYM(@Nonnull FlexibleYearMonth shinsaYM) {
         this.shinsaYM = shinsaYM;
     }
 
@@ -1909,6 +1993,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 整理番号
      */
+    @CheckForNull
     public RString getSeiriNo() {
         return seiriNo;
     }
@@ -1927,6 +2012,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 送付年月
      */
+    @CheckForNull
     public FlexibleYearMonth getSofuYM() {
         return sofuYM;
     }
@@ -1945,6 +2031,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 取込年月
      */
+    @CheckForNull
     public FlexibleYearMonth getTorikomiYM() {
         return torikomiYM;
     }
@@ -1963,6 +2050,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 独自作成区分
      */
+    @CheckForNull
     public RString getDokujiSakuseiKubun() {
         return dokujiSakuseiKubun;
     }
@@ -1981,6 +2069,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 保険者保有給付実績情報削除済フラグ
      */
+    @CheckForNull
     public boolean getHokenshaHoyuKyufujissekiJohoSakujoFlag() {
         return hokenshaHoyuKyufujissekiJohoSakujoFlag;
     }
@@ -2018,7 +2107,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
         if (!Objects.equals(this.kyufuSakuseiKubunCode, other.kyufuSakuseiKubunCode)) {
             return false;
         }
-        if (!Objects.equals(this.hokenshaNo, other.hokenshaNo)) {
+        if (!Objects.equals(this.shokisaiHokenshaNo, other.shokisaiHokenshaNo)) {
             return false;
         }
         if (!Objects.equals(this.hiHokenshaNo, other.hiHokenshaNo)) {
@@ -2048,7 +2137,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
         this.inputShikibetsuNo = entity.inputShikibetsuNo;
         this.recodeShubetsuCode = entity.recodeShubetsuCode;
         this.kyufuSakuseiKubunCode = entity.kyufuSakuseiKubunCode;
-        this.hokenshaNo = entity.hokenshaNo;
+        this.shokisaiHokenshaNo = entity.shokisaiHokenshaNo;
         this.hiHokenshaNo = entity.hiHokenshaNo;
         this.serviceTeikyoYM = entity.serviceTeikyoYM;
         this.kyufuJissekiKubunCode = entity.kyufuJissekiKubunCode;
@@ -2151,7 +2240,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(kokanShikibetsuNo, inputShikibetsuNo, recodeShubetsuCode, kyufuSakuseiKubunCode, hokenshaNo, hiHokenshaNo, serviceTeikyoYM, kyufuJissekiKubunCode, jigyoshoNo, toshiNo, kohi1FutanshaNo, kohi1JukyushaNo, kohi2FutanshaNo, kohi2JukyushaNo, kohi3FutanshaNo, kohi3JukyushaNo, umareYMD, seibetsuCode, yoKaigoJotaiKubunCode, kyuSochiNyushoshaTokureiCode, ninteiYukoKaishiYMD, ninteiYukoShuryoYMD, rojinHokenShichosonNo, rojinhokenJukyushaNo, kokiHokenshaNo, kokiHiHokenshaNo, kokuhoHokenshaNo, kokuhoHiHokenshashoNo, kokuhoKojinNo, kyotakuServiceSakuseiKubunCode, kyotakuKaigoShienJigyoshoNo, kaishiYMD, chushiYMD, chushiRiyuNyushomaeJyokyoCode, nyushoYMD, taishoYMD, nyushoJitsunissu, gaihakuNissu, taishogoJotaiCode, hokenKyufuritsu, kohi1Kyufuritsu, kohi2Kyufuritsu, kohi3Kyufuritsu, maeHokenServiceTanisu, maeHokenSeikyugaku, maeHokenRiyoshaFutangaku, maeHokenKinkyuShisetsuRyoyoSeikyugaku, maeHokenTokuteiShinryohiSeikyugaku, maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku, maeKohi1ServiceTanisu, maeKohi1Seikyugaku, maeKohi1RiyoshaFutangaku, maeKohi1KinkyuShisetsuRyoyoSeikyugaku, maeKohi1TokuteiShinryohiSeikyugaku, maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku, maeKohi2ServiceTanisu, maeKohi2Seikyugaku, maeKohi2RiyoshaFutangaku, maeKohi2KinkyuShisetsuRyoyoSeikyugaku, maeKohi2TokuteiShinryohiSeikyugaku, maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku, maeKohi3ServiceTanisu, maeKohi3Seikyugaku, maeKohi3RiyoshaFutangaku, maeKohi3KinkyuShisetsuRyoyoSeikyugaku, maeKohi3TokuteiShinryohiSeikyugaku, maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku, atoHokenServiceTanisu, atoHokenSeikyugaku, atoHokenRiyoshaFutangaku, atoHokenKinkyuShisetsuRyoyoSeikyugaku, atoHokenTokuteiShinryohiSeikyugaku, atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku, atoKohi1ServiceTanisu, atoKohi1Seikyugaku, atoKohi1RiyoshaFutangaku, atoKohi1KinkyuShisetsuRyoyoSeikyugaku, atoKohi1TokuteiShinryohiSeikyugaku, atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku, atoKohi2ServiceTanisu, atoKohi2Seikyugaku, atoKohi2RiyoshaFutangaku, atoKohi2KinkyuShisetsuRyoyoSeikyugaku, atoKohi2TokuteiShinryohiSeikyugaku, atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku, atoKohi3ServiceTanisu, atoKohi3Seikyugaku, atoKohi3RiyoshaFutangaku, atoKohi3KinkyuShisetsuRyoyoSeikyugaku, atoKohi3TokuteiShinryohiSeikyugaku, atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku, keikaiKubunCode, shinsaYM, seiriNo, sofuYM, torikomiYM, dokujiSakuseiKubun, hokenshaHoyuKyufujissekiJohoSakujoFlag);
+        return super.toMd5(kokanShikibetsuNo, inputShikibetsuNo, recodeShubetsuCode, kyufuSakuseiKubunCode, shokisaiHokenshaNo, hiHokenshaNo, serviceTeikyoYM, kyufuJissekiKubunCode, jigyoshoNo, toshiNo, kohi1FutanshaNo, kohi1JukyushaNo, kohi2FutanshaNo, kohi2JukyushaNo, kohi3FutanshaNo, kohi3JukyushaNo, umareYMD, seibetsuCode, yoKaigoJotaiKubunCode, kyuSochiNyushoshaTokureiCode, ninteiYukoKaishiYMD, ninteiYukoShuryoYMD, rojinHokenShichosonNo, rojinhokenJukyushaNo, kokiHokenshaNo, kokiHiHokenshaNo, kokuhoHokenshaNo, kokuhoHiHokenshashoNo, kokuhoKojinNo, kyotakuServiceSakuseiKubunCode, kyotakuKaigoShienJigyoshoNo, kaishiYMD, chushiYMD, chushiRiyuNyushomaeJyokyoCode, nyushoYMD, taishoYMD, nyushoJitsunissu, gaihakuNissu, taishogoJotaiCode, hokenKyufuritsu, kohi1Kyufuritsu, kohi2Kyufuritsu, kohi3Kyufuritsu, maeHokenServiceTanisu, maeHokenSeikyugaku, maeHokenRiyoshaFutangaku, maeHokenKinkyuShisetsuRyoyoSeikyugaku, maeHokenTokuteiShinryohiSeikyugaku, maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku, maeKohi1ServiceTanisu, maeKohi1Seikyugaku, maeKohi1RiyoshaFutangaku, maeKohi1KinkyuShisetsuRyoyoSeikyugaku, maeKohi1TokuteiShinryohiSeikyugaku, maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku, maeKohi2ServiceTanisu, maeKohi2Seikyugaku, maeKohi2RiyoshaFutangaku, maeKohi2KinkyuShisetsuRyoyoSeikyugaku, maeKohi2TokuteiShinryohiSeikyugaku, maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku, maeKohi3ServiceTanisu, maeKohi3Seikyugaku, maeKohi3RiyoshaFutangaku, maeKohi3KinkyuShisetsuRyoyoSeikyugaku, maeKohi3TokuteiShinryohiSeikyugaku, maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku, atoHokenServiceTanisu, atoHokenSeikyugaku, atoHokenRiyoshaFutangaku, atoHokenKinkyuShisetsuRyoyoSeikyugaku, atoHokenTokuteiShinryohiSeikyugaku, atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku, atoKohi1ServiceTanisu, atoKohi1Seikyugaku, atoKohi1RiyoshaFutangaku, atoKohi1KinkyuShisetsuRyoyoSeikyugaku, atoKohi1TokuteiShinryohiSeikyugaku, atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku, atoKohi2ServiceTanisu, atoKohi2Seikyugaku, atoKohi2RiyoshaFutangaku, atoKohi2KinkyuShisetsuRyoyoSeikyugaku, atoKohi2TokuteiShinryohiSeikyugaku, atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku, atoKohi3ServiceTanisu, atoKohi3Seikyugaku, atoKohi3RiyoshaFutangaku, atoKohi3KinkyuShisetsuRyoyoSeikyugaku, atoKohi3TokuteiShinryohiSeikyugaku, atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku, keikaiKubunCode, shinsaYM, seiriNo, sofuYM, torikomiYM, dokujiSakuseiKubun, hokenshaHoyuKyufujissekiJohoSakujoFlag);
     }
 
 // </editor-fold>
