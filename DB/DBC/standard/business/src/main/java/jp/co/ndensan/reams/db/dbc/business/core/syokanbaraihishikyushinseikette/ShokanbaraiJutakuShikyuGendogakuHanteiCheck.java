@@ -5,87 +5,80 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette;
 
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払（居宅）支給限度額判定
  *
- * @author Qi
+ * @author chenaoqi
  */
 public class ShokanbaraiJutakuShikyuGendogakuHanteiCheck {
 
-    public boolean chkShokanbaraiJutakuShikyuGendogakuTaishoTani(RString 様式番号, Decimal 限度額対象単位, RString サービス種類コード) {
-        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
-        requireNonNull(限度額対象単位, UrSystemErrorMessages.値がnull.getReplacedMessage("限度額対象外単位"));
+    private static final RString DEFAULT_213 = new RString("213");
+    private static final RString DEFAULT_214 = new RString("214");
+    private static final RString DEFAULT_215 = new RString("215");
+    private static final RString DEFAULT_216 = new RString("216");
+    private static final RString DEFAULT_2173 = new RString("2173");
+    private static final RString DEFAULT_2174 = new RString("2174");
+    private static final ServiceShuruiCode DEFAULT_33 = new ServiceShuruiCode("33");
+    private static final ServiceShuruiCode DEFAULT_35 = new ServiceShuruiCode("35");
+
+    /**
+     * 対象単位の必須入力チェック
+     *
+     * @param 様式番号
+     * @param 限度額対象単位
+     * @param サービス種類コード
+     * @return flag
+     */
+    public boolean chkShokanbaraiJutakuShikyuGendogakuTaishoTani(RString 様式番号, Decimal 限度額対象単位,
+            ServiceShuruiCode サービス種類コード) {
         boolean flag = false;
-        String sub = 様式番号.toString().substring(0, 3);
-        switch (sub) {
-            case "213":
-                if (new Decimal("0").equals(限度額対象単位)) {
-                    flag = true;
-                }
-                break;
-            case "214":
-                if (!"1".equals(様式番号.toString().substring(3, 4)) && new Decimal("0").equals(限度額対象単位)) {
-                    flag = true;
-                }
-                break;
-            case "215":
-                if (!"1".equals(様式番号.toString().substring(3, 4)) && new Decimal("0").equals(限度額対象単位)) {
-                    flag = true;
-                }
-                break;
-            case "216":
-                if (!"1".equals(様式番号.toString().substring(3, 4)) && new Decimal("0").equals(限度額対象単位)) {
-                    flag = true;
-                }
-                break;
-            case "217":
-                if ("3".equals(様式番号.toString().substring(3, 4)) || "4".equals(様式番号.toString().substring(3, 4))) {
-                    if (new RString("33").equals(サービス種類コード) || new RString("35").equals(サービス種類コード)) {
-                        if (new Decimal("0").equals(限度額対象単位)) {
-                            flag = true;
-                        }
-                    }
-                }
-                break;
+        if (null == 様式番号) {
+            return flag;
         }
+        if (様式番号.startsWith(DEFAULT_213) || 様式番号.startsWith(DEFAULT_214)
+                || 様式番号.startsWith(DEFAULT_215) || 様式番号.startsWith(DEFAULT_216)) {
+            if (null == 限度額対象単位) {
+                flag = true;
+            }
+        } else if (DEFAULT_2173.equals(様式番号)) {
+            if (DEFAULT_33.equals(サービス種類コード) && null == 限度額対象単位) {
+                flag = true;
+            }
+        } else if (DEFAULT_2174.equals(様式番号)) {
+            if (DEFAULT_35.equals(サービス種類コード) && null == 限度額対象単位) {
+                flag = true;
+            }
+        }
+
         return flag;
     }
 
-    public boolean chkShokanbaraiJutakuShikyuGendogakuTaniGokei(RString 様式番号, Decimal 限度額対象外単位, Decimal 限度額対象単位, Decimal 保険分単位合計, RString サービス種類コード) {
-        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
-        requireNonNull(限度額対象外単位, UrSystemErrorMessages.値がnull.getReplacedMessage("限度額対象外単位"));
-        requireNonNull(限度額対象単位, UrSystemErrorMessages.値がnull.getReplacedMessage("限度額対象単位"));
-        requireNonNull(保険分単位合計, UrSystemErrorMessages.値がnull.getReplacedMessage("保険分単位合計"));
+    /**
+     *
+     * 保険分単位合計チェック
+     *
+     * @param 様式番号
+     * @param 限度額対象外単位
+     * @param 限度額対象単位
+     * @param 保険分単位合計
+     * @param サービス種類コード
+     * @return flag
+     */
+    public boolean chkShokanbaraiJutakuShikyuGendogakuTaniGokei(RString 様式番号, Decimal 限度額対象外単位,
+            Decimal 限度額対象単位, Decimal 保険分単位合計, ServiceShuruiCode サービス種類コード) {
         boolean flag = false;
-        String sub = 様式番号.toString().substring(0, 3);
-        switch (sub) {
-            case "213":
-                if (!保険分単位合計.equals(限度額対象単位.add(限度額対象外単位))) {
-                    flag = true;
-                }
-                break;
-            case "214":
-                if (!保険分単位合計.equals(限度額対象単位.add(限度額対象外単位))) {
-                    flag = true;
-                }
-                break;
-            case "215":
-                if (!保険分単位合計.equals(限度額対象単位.add(限度額対象外単位))) {
-                    flag = true;
-                }
-                break;
-            case "216":
-                if (!保険分単位合計.equals(限度額対象単位.add(限度額対象外単位))) {
-                    flag = true;
-                }
-                break;
+        if (null == 様式番号) {
+            return flag;
+        }
+        if (様式番号.startsWith(DEFAULT_213) || 様式番号.startsWith(DEFAULT_214)
+                || 様式番号.startsWith(DEFAULT_215) || 様式番号.startsWith(DEFAULT_216)) {
+            if (!保険分単位合計.equals(限度額対象外単位.add(限度額対象単位))) {
+                flag = true;
+            }
         }
         return flag;
     }
