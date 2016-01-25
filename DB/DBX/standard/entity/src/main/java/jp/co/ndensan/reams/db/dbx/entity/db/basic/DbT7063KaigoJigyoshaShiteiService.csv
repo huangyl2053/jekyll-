@@ -1,5 +1,5 @@
-﻿jigyoshaNo,UDD060KaigoJigyoshaNo,UDD060KaigoJigyoshaNo,,,,,事業者番号,A
-serviceShuruiCode,UDD061KaigoServiceShuruiCode,UDD061KaigoServiceShuruiCode,,,,,サービス種類コード,A
+﻿jigyoshaNo,UDD060KaigoJigyoshaNo,KaigoJigyoshaNo,,,,,事業者番号,A
+serviceShuruiCode,UDD061KaigoServiceShuruiCode,KaigoServiceShuruiCode,,,,,サービス種類コード,A
 yukoKaishiYMD,UDD015YMD,FlexibleDate,,,,,有効開始日,A
 yukoShuryoYMD,UDD015YMD,FlexibleDate,,,,,有効終了日,A
 idoYMD,UDD015YMD,FlexibleDate,,,,,異動日,A
