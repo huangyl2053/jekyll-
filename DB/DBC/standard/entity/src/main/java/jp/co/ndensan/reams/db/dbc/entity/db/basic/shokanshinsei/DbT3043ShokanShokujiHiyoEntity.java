@@ -59,6 +59,7 @@ public class DbT3043ShokanShokujiHiyoEntity extends DbTableEntityBase<DbT3043Sho
     private int tensuKingaku;
     private int shikyuKingaku;
     private int zougenTen;
+    private int sagakuKingaku;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -518,6 +519,24 @@ public class DbT3043ShokanShokujiHiyoEntity extends DbTableEntityBase<DbT3043Sho
     }
 
     /**
+     * 差額金額のgetメソッドです。
+     *
+     * @return 差額金額
+     */
+    public int getSagakuKingaku() {
+        return sagakuKingaku;
+    }
+
+    /**
+     * 差額金額のsetメソッドです。
+     *
+     * @param sagakuKingaku 差額金額
+     */
+    public void setSagakuKingaku(int sagakuKingaku) {
+        this.sagakuKingaku = sagakuKingaku;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT3043ShokanShokujiHiyoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
@@ -579,6 +598,7 @@ public class DbT3043ShokanShokujiHiyoEntity extends DbTableEntityBase<DbT3043Sho
         this.tensuKingaku = entity.tensuKingaku;
         this.shikyuKingaku = entity.shikyuKingaku;
         this.zougenTen = entity.zougenTen;
+        this.sagakuKingaku = entity.sagakuKingaku;
     }
 
     /**
@@ -588,7 +608,7 @@ public class DbT3043ShokanShokujiHiyoEntity extends DbTableEntityBase<DbT3043Sho
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNp, jigyoshaNo, yoshikiNo, meisaiNo, renban, kihonTeikyoNissu, kihonTeikyoTanka, kihonTeikyoKingaku, tokubetsuTeikyoNissu, tokubetsuTeikyoTanka, tokubetsuTeikyoKingaku, shokujiTeikyoTotalNissu, shokujiTeikyohiTotal, getsugakuHyojunFutangaku, shokujiTeikyohiSeikyugaku, nichigakuHyojunFutangaku, shikyuKubunCode, tensuKingaku, shikyuKingaku, zougenTen);
+        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNp, jigyoshaNo, yoshikiNo, meisaiNo, renban, kihonTeikyoNissu, kihonTeikyoTanka, kihonTeikyoKingaku, tokubetsuTeikyoNissu, tokubetsuTeikyoTanka, tokubetsuTeikyoKingaku, shokujiTeikyoTotalNissu, shokujiTeikyohiTotal, getsugakuHyojunFutangaku, shokujiTeikyohiSeikyugaku, nichigakuHyojunFutangaku, shikyuKubunCode, tensuKingaku, shikyuKingaku, zougenTen, sagakuKingaku);
     }
 
 // </editor-fold>

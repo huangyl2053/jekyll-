@@ -48,6 +48,8 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
     private int tanjunXsenTanisu;
     private int rehabilitationTanisu;
     private int seishinkaSemmonRyoyohouTanisu;
+    private int sochiTanisu;
+    private int shujutsuTanisu;
     private int TotalTanisu;
     private RString tekiyo1;
     private RString tekiyo2;
@@ -333,6 +335,42 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
      */
     public void setSeishinkaSemmonRyoyohouTanisu(int seishinkaSemmonRyoyohouTanisu) {
         this.seishinkaSemmonRyoyohouTanisu = seishinkaSemmonRyoyohouTanisu;
+    }
+
+    /**
+     * 措置単位数のgetメソッドです。
+     *
+     * @return 措置単位数
+     */
+    public int getSochiTanisu() {
+        return sochiTanisu;
+    }
+
+    /**
+     * 措置単位数のsetメソッドです。
+     *
+     * @param sochiTanisu 措置単位数
+     */
+    public void setSochiTanisu(int sochiTanisu) {
+        this.sochiTanisu = sochiTanisu;
+    }
+
+    /**
+     * 手術単位数のgetメソッドです。
+     *
+     * @return 手術単位数
+     */
+    public int getShujutsuTanisu() {
+        return shujutsuTanisu;
+    }
+
+    /**
+     * 手術単位数のsetメソッドです。
+     *
+     * @param shujutsuTanisu 手術単位数
+     */
+    public void setShujutsuTanisu(int shujutsuTanisu) {
+        this.shujutsuTanisu = shujutsuTanisu;
     }
 
     /**
@@ -766,6 +804,8 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
         this.tanjunXsenTanisu = entity.tanjunXsenTanisu;
         this.rehabilitationTanisu = entity.rehabilitationTanisu;
         this.seishinkaSemmonRyoyohouTanisu = entity.seishinkaSemmonRyoyohouTanisu;
+        this.sochiTanisu = entity.sochiTanisu;
+        this.shujutsuTanisu = entity.shujutsuTanisu;
         this.TotalTanisu = entity.TotalTanisu;
         this.tekiyo1 = entity.tekiyo1;
         this.tekiyo2 = entity.tekiyo2;
@@ -796,7 +836,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, jigyoshaNo, yoshikiNo, meisaiNo, renban, shobyoName, shidoKanriryoTanisu, tanjunXsenTanisu, rehabilitationTanisu, seishinkaSemmonRyoyohouTanisu, TotalTanisu, tekiyo1, tekiyo2, tekiyo3, tekiyo4, tekiyo5, tekiyo6, tekiyo7, tekiyo8, tekiyo9, tekiyo10, tekiyo11, tekiyo12, tekiyo13, tekiyo14, tekiyo15, tekiyo16, tekiyo17, tekiyo18, tekiyo19, tekiyo20);
+        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, jigyoshaNo, yoshikiNo, meisaiNo, renban, shobyoName, shidoKanriryoTanisu, tanjunXsenTanisu, rehabilitationTanisu, seishinkaSemmonRyoyohouTanisu, sochiTanisu, shujutsuTanisu, TotalTanisu, tekiyo1, tekiyo2, tekiyo3, tekiyo4, tekiyo5, tekiyo6, tekiyo7, tekiyo8, tekiyo9, tekiyo10, tekiyo11, tekiyo12, tekiyo13, tekiyo14, tekiyo15, tekiyo16, tekiyo17, tekiyo18, tekiyo19, tekiyo20);
     }
 
 // </editor-fold>

@@ -90,6 +90,14 @@ public enum DbT3041ShokanTokuteiShinryohi implements IColumnDefinition {
      */
     seishinkaSemmonRyoyohouTanisu(10, 0),
     /**
+     * 措置単位数
+     */
+    sochiTanisu(10, 0),
+    /**
+     * 手術単位数
+     */
+    shujutsuTanisu(10, 0),
+    /**
      * 合計単位数
      */
     TotalTanisu(10, 0),

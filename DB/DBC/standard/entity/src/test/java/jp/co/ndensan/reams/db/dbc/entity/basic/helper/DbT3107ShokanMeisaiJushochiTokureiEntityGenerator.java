@@ -24,8 +24,8 @@ public final class DbT3107ShokanMeisaiJushochiTokureiEntityGenerator {
     public static final RString DEFAULT_整理番号 = new RString("Data");
     public static final JigyoshaNo DEFAULT_事業者番号 = new JigyoshaNo("1");
     public static final RString DEFAULT_様式番号 = new RString("Data");
-    public static final RString DEFAULT_順次番号 = new RString("Data");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final RString DEFAULT_明細番号 = new RString("Data");
+    public static final RString DEFAULT_連番 = new RString("1");
     public static final ServiceShuruiCode DEFAULT_サービス種類コード = new ServiceShuruiCode("1");
     public static final ServiceKomokuCode DEFAULT_サービス項目コード = new ServiceKomokuCode("1");
     public static final Decimal DEFAULT_単位数 = new Decimal(0);
@@ -47,8 +47,8 @@ public final class DbT3107ShokanMeisaiJushochiTokureiEntityGenerator {
         entity.setSeiriNp(DEFAULT_整理番号);
         entity.setJigyoshaNo(DEFAULT_事業者番号);
         entity.setYoshikiNo(DEFAULT_様式番号);
-        entity.setJunjiNo(DEFAULT_順次番号);
-        entity.setRirekiNo(DEFAULT_履歴番号);
+        entity.setMeisaiNo(DEFAULT_明細番号);
+        entity.setRenban(DEFAULT_連番);
         entity.setServiceShuruiCode(DEFAULT_サービス種類コード);
         entity.setServiceKomokuCode(DEFAULT_サービス項目コード);
         entity.setTanisu(DEFAULT_単位数);

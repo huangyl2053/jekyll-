@@ -50,6 +50,33 @@ public class ServiceKeikakuHiRealtEntity {
 //    return entity200904.get担当介護支給専門員番号();
 //    }
     /**
+     * 償還払請求サービス計画200004を取得します。
+     *
+     * @return 償還払請求サービス計画200004
+     */
+    public DbT3045ShokanServicePlan200004Entity get償還払請求サービス計画200004() {
+        return entity200004;
+    }
+
+    /**
+     * 償還払請求サービス計画200604を取得します。
+     *
+     * @return 償還払請求サービス計画200604
+     */
+    public DbT3046ShokanServicePlan200604Entity get償還払請求サービス計画200604() {
+        return entity200604;
+    }
+
+    /**
+     * 償還払請求サービス計画200904を取得します。
+     *
+     * @return 償還払請求サービス計画200904
+     */
+    public DbT3047ShokanServicePlan200904Entity get償還払請求サービス計画200904() {
+        return entity200904;
+    }
+
+    /**
      * 単位数単価を取得します。
      *
      * @return 単位数単価

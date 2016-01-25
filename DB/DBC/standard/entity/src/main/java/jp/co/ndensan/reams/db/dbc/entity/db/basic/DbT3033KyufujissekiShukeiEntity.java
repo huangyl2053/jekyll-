@@ -1,21 +1,21 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import java.util.UUID;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * DbT3033KyufujissekiShukeiの項目定義クラスです
@@ -104,7 +104,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
     private Decimal saishinsaKaisu;
     private Decimal kagoKaisu;
     private FlexibleYearMonth shinsaYM;
-    private Decimal seiriNo;
+    private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
 
     /**
@@ -1237,7 +1237,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
      *
      * @return 整理番号
      */
-    public Decimal getSeiriNo() {
+    public RString getSeiriNo() {
         return seiriNo;
     }
 
@@ -1246,7 +1246,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
      *
      * @param seiriNo 整理番号
      */
-    public void setSeiriNo(Decimal seiriNo) {
+    public void setSeiriNo(RString seiriNo) {
         this.seiriNo = seiriNo;
     }
 
@@ -1272,8 +1272,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
      * このエンティティの主キーが他の{@literal DbT3033KyufujissekiShukeiEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT3033KyufujissekiShukeiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT3033KyufujissekiShukeiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3033KyufujissekiShukeiEntity other) {

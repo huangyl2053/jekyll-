@@ -80,7 +80,7 @@ public final class DbT3033KyufujissekiShukeiEntityGenerator {
     public static final Decimal DEFAULT_再審査回数 = new Decimal(1);
     public static final Decimal DEFAULT_過誤回数 = new Decimal(1);
     public static final FlexibleYearMonth DEFAULT_審査年月 = new FlexibleYearMonth("199001");
-    public static final Decimal DEFAULT_整理番号 = new Decimal(1);
+    public static final RString DEFAULT_整理番号 = new RString("1");
     public static final FlexibleYearMonth DEFAULT_取込年月 = new FlexibleYearMonth("199001");
 
     /**

@@ -11,6 +11,7 @@ import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7119ServiceCode.serv
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7119ServiceCode.serviceShuruiCode;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7119ServiceCode.tekiyoKaishiYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7120TokuteiShinryoServiceCode;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7120TokuteiShinryoServiceCode.tekiyoShuryoYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7120TokuteiShinryoServiceCodeEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -94,4 +96,33 @@ public class DbT7120TokuteiShinryoServiceCodeDac implements ISaveable<DbT7120Tok
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * キーで特定診療サービスコードを取得します。
+     *
+     * @param サービス種類コード ServiceShuruiCode
+     * @param サービス項目コード ServiceKomokuCode
+     * @param 基準年月 FlexibleYearMonth
+     * @return List<DbT7120TokuteiShinryoServiceCodeEntity>
+     */
+    @Transaction
+    public List<DbT7120TokuteiShinryoServiceCodeEntity> selectAllByKey(
+            ServiceShuruiCode サービス種類コード,
+            ServiceKomokuCode サービス項目コード,
+            FlexibleYearMonth 基準年月) {
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
+        requireNonNull(サービス項目コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス項目コード"));
+        requireNonNull(基準年月, UrSystemErrorMessages.値がnull.getReplacedMessage("基準年月"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7120TokuteiShinryoServiceCode.class).
+                where(and(
+                                eq(serviceShuruiCode, サービス種類コード),
+                                eq(serviceKomokuCode, サービス項目コード),
+                                leq(tekiyoKaishiYM, 基準年月),
+                                leq(基準年月, tekiyoShuryoYM))).
+                toList(DbT7120TokuteiShinryoServiceCodeEntity.class);
+    }
+
 }
