@@ -25,11 +25,11 @@ public class ServiceShikakuRelateEntity implements IDbAccessable {
     private RString edaNo;
     private FlexibleDate shikakuShutokuYMD;
     private FlexibleDate shikakuShutokuTodokedeYMD;
-    private RString jushochitokureiTekiyoJiyuCode;
+    private RString shikakuShutokuJiyuCode;
     private RString hihokennshaKubunCode;
     private FlexibleDate shikakuSoshitsuYMD;
     private FlexibleDate shikakuSoshitsuTodokedeYMD;
-    private RString jushochitokureiKaijoJiyuCode;
+    private RString shikakuSoshitsuJiyuCode;
     private RString jushochiTokureiFlag;
     private LasdecCode shichosonCode;
     private RString shichosonMeisho;
