@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -21,10 +21,10 @@ public enum DBE5100001StateName implements IStateEnumerations {
     事前結果登録("事前結果登録"),
     Defalt("Defalt"),
     審査会個人別状況照会("審査会個人別状況照会"),
-    データ出力（モバイル）("データ出力（モバイル）"),
+    データ出力_モバイル("データ出力_モバイル"),
     開催結果登録("開催結果登録"),
-    データ取込み（モバイル）("データ取込み（モバイル）"),
-    結果登録（OCR)("結果登録（OCR)");
+    データ取込み_モバイル("データ取込み_モバイル"),
+    結果登録_OCR("結果登録_OCR");
 
     private final RString name;
 

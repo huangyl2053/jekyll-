@@ -4,12 +4,8 @@ dbu/db/dbu/HihokenshashoHakkoJoho/onBlur_txtKofuDate
 dbu/db/dbu/HihokenshashoHakkoJoho/onChange_ddlKofuJiyu
 dbu/db/dbu/HihokenshashoHakkoTaishoGaitosha/onClick_BtnSearchHihokenshashoHakkoTaishosha
 dbu/db/dbu/HihokenshashoHakkoTaishoshaJoho/dispTaishoshaJoho
-dbu/db/dbu/IkkatsuHakkoTaishoList/onBlur_txtKofuDate
-dbu/db/dbu/IkkatsuHakkoTaishoList/onClick_BtnSearchHakkoTaisho
-dbu/db/dbu/IkkatsuHakkoTaishoList/onSelect_dgIkkatsuHakkoTaisho
 dbu/db/dbu/SearchHihokenshashoHakkoTaishosha/onClick_btnToReSearch
 dbu/db/dbu/SearchHihokenshashoHakkoTaishosha/onLoad
-dbu/db/dbu/SearchMihakkoHihokenshasho/onLoad
 dbu/db/dbu/SearchResultShoKaishuKanri/onClick_btnSearchShoKaishuKanri
 dbu/db/dbu/SearchShoKaishuKanri/onBlur_txtSearchHihokenshaNo
 dbu/db/dbu/SearchShoKaishuKanri/onLoad
