@@ -54,7 +54,7 @@ public class NenpoYoushiki1Hosei {
         RString 集計対象年 = new RString("2015");
         RString 市町村コード = new RString("201601");
         RString 事業報告年報補正表示のコード = new RString("001");
-        RString 補正フラグ = new RString("削除");
+        RString 補正フラグ = new RString("修正");
         param.set行報告年(報告年);
         param.set行集計対象年(集計対象年);
         param.set画面報告年度(報告年);
@@ -65,8 +65,8 @@ public class NenpoYoushiki1Hosei {
         param.set補正フラグ(補正フラグ);
 
         List<JigyoHokokuTokeiData> jigyoHokokuTokeiDataList = JigyoHokokuNenpoHoseiHakoManager.createInstance()
-                .getJigyoHokokuNenpoDetal(SearchJigyoHokokuNenpo
-                        .createParameterFor事業報告集計一覧データの取得(new FlexibleYear(param.get画面報告年度()),
+                .getJigyoHokokuNenpoDetal(new SearchJigyoHokokuNenpo
+                        (new FlexibleYear(param.get画面報告年度()),
                                 new FlexibleYear(param.get画面集計年度()),
                                 new LasdecCode(param.get選択した市町村コード()),
                                 param.get事業報告年報補正表示のコード(),
