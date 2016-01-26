@@ -50,17 +50,19 @@ public class GaikyoTokkiManagerTest {
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             int 主キー2 = DbT5206GaikyoTokkiEntityGenerator.DEFAULT_認定調査依頼履歴番号;
-            sut.get認定調査票_概況特記(null, 主キー2);
+            RString 主キー3 = DbT5206GaikyoTokkiEntityGenerator.DEFAULT_概況特記テキストイメージ区分;
+            sut.get認定調査票_概況特記(null, 主キー2, 主キー3);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class))).thenReturn(null);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class), any(RString.class))).thenReturn(null);
 
             ShinseishoKanriNo 主キー1 = DbT5206GaikyoTokkiEntityGenerator.DEFAULT_申請書管理番号;
             int 主キー2 = DbT5206GaikyoTokkiEntityGenerator.DEFAULT_認定調査依頼履歴番号;
-            GaikyoTokki result = sut.get認定調査票_概況特記(主キー1, 主キー2);
+            RString 主キー3 = DbT5206GaikyoTokkiEntityGenerator.DEFAULT_概況特記テキストイメージ区分;
+            GaikyoTokki result = sut.get認定調査票_概況特記(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
         }
@@ -68,10 +70,11 @@ public class GaikyoTokkiManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5206GaikyoTokkiEntity entity = DbT5206GaikyoTokkiEntityGenerator.createDbT5206GaikyoTokkiEntity();
-            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class))).thenReturn(entity);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class), any(RString.class))).thenReturn(entity);
             ShinseishoKanriNo 主キー1 = DbT5206GaikyoTokkiEntityGenerator.DEFAULT_申請書管理番号;
             int 主キー2 = DbT5206GaikyoTokkiEntityGenerator.DEFAULT_認定調査依頼履歴番号;
-            GaikyoTokki result = sut.get認定調査票_概況特記(主キー1, 主キー2);
+            RString 主キー3 = DbT5206GaikyoTokkiEntityGenerator.DEFAULT_概況特記テキストイメージ区分;
+            GaikyoTokki result = sut.get認定調査票_概況特記(主キー1, 主キー2, 主キー3);
 
             assertThat(result.get申請書管理番号().value(), is(DbT5206GaikyoTokkiEntityGenerator.DEFAULT_申請書管理番号.value()));
         }

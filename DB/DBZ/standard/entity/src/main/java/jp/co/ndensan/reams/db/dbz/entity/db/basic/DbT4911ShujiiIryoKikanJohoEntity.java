@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 /**
  * 主治医医療機関情報（子）テーブルのエンティティクラスです。
  */
-public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911ShujiiIryoKikanJohoEntity> implements IDbAccessable {
+public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911ShujiiIryoKikanJohoEntity> implements IDbAccessable, IShujiiIryoKikanJohoEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
