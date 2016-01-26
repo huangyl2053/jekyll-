@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 広域内転居結果一覧表帳票データ作成戻り結果のタイプ
  *
  * @author quxiaodong
  */
@@ -33,5 +34,6 @@ public class KoikinaiTenkyoResultEntity {
     private RString 登録異動日;
     private RString 登録届出日;
     private RString 異動情報;
+    private RString ページ数;
 
 }
