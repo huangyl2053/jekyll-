@@ -114,23 +114,23 @@ public class ShafukuKeigenGakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtServiceShurui() {
-        return this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtServiceShurui();
+    public DropDownList getDdlServiceShurui() {
+        return this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui();
     }
 
     @JsonIgnore
-    public void  setTxtServiceShurui(TextBox txtServiceShurui) {
-        this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setTxtServiceShurui(txtServiceShurui);
+    public void  setDdlServiceShurui(DropDownList ddlServiceShurui) {
+        this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setDdlServiceShurui(ddlServiceShurui);
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtKengenritsu() {
-        return this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengenritsu();
+    public DropDownList getDdlKengenritsu() {
+        return this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu();
     }
 
     @JsonIgnore
-    public void  setTxtKengenritsu(TextBoxNum txtKengenritsu) {
-        this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setTxtKengenritsu(txtKengenritsu);
+    public void  setDdlKengenritsu(DropDownList ddlKengenritsu) {
+        this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setDdlKengenritsu(ddlKengenritsu);
     }
 
     @JsonIgnore

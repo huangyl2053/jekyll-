@@ -21,10 +21,10 @@ public class panelShakaiFukushiShokaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtServiceShurui")
-    private TextBox txtServiceShurui;
-    @JsonProperty("txtKengenritsu")
-    private TextBoxNum txtKengenritsu;
+    @JsonProperty("ddlServiceShurui")
+    private DropDownList ddlServiceShurui;
+    @JsonProperty("ddlKengenritsu")
+    private DropDownList ddlKengenritsu;
     @JsonProperty("txtRiyoshaFutangakuTotal")
     private TextBoxNum txtRiyoshaFutangakuTotal;
     @JsonProperty("txtKengengaku")
@@ -43,39 +43,39 @@ public class panelShakaiFukushiShokaiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtServiceShurui
-     * @return txtServiceShurui
+     * getddlServiceShurui
+     * @return ddlServiceShurui
      */
-    @JsonProperty("txtServiceShurui")
-    public TextBox getTxtServiceShurui() {
-        return txtServiceShurui;
+    @JsonProperty("ddlServiceShurui")
+    public DropDownList getDdlServiceShurui() {
+        return ddlServiceShurui;
     }
 
     /*
-     * settxtServiceShurui
-     * @param txtServiceShurui txtServiceShurui
+     * setddlServiceShurui
+     * @param ddlServiceShurui ddlServiceShurui
      */
-    @JsonProperty("txtServiceShurui")
-    public void setTxtServiceShurui(TextBox txtServiceShurui) {
-        this.txtServiceShurui = txtServiceShurui;
+    @JsonProperty("ddlServiceShurui")
+    public void setDdlServiceShurui(DropDownList ddlServiceShurui) {
+        this.ddlServiceShurui = ddlServiceShurui;
     }
 
     /*
-     * gettxtKengenritsu
-     * @return txtKengenritsu
+     * getddlKengenritsu
+     * @return ddlKengenritsu
      */
-    @JsonProperty("txtKengenritsu")
-    public TextBoxNum getTxtKengenritsu() {
-        return txtKengenritsu;
+    @JsonProperty("ddlKengenritsu")
+    public DropDownList getDdlKengenritsu() {
+        return ddlKengenritsu;
     }
 
     /*
-     * settxtKengenritsu
-     * @param txtKengenritsu txtKengenritsu
+     * setddlKengenritsu
+     * @param ddlKengenritsu ddlKengenritsu
      */
-    @JsonProperty("txtKengenritsu")
-    public void setTxtKengenritsu(TextBoxNum txtKengenritsu) {
-        this.txtKengenritsu = txtKengenritsu;
+    @JsonProperty("ddlKengenritsu")
+    public void setDdlKengenritsu(DropDownList ddlKengenritsu) {
+        this.ddlKengenritsu = ddlKengenritsu;
     }
 
     /*

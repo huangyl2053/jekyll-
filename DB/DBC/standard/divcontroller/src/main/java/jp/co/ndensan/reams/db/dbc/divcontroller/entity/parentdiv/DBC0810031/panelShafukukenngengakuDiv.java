@@ -73,23 +73,23 @@ public class panelShafukukenngengakuDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBox getTxtServiceShurui() {
-        return this.getPanelShakaiFukushiShokai().getTxtServiceShurui();
+    public DropDownList getDdlServiceShurui() {
+        return this.getPanelShakaiFukushiShokai().getDdlServiceShurui();
     }
 
     @JsonIgnore
-    public void  setTxtServiceShurui(TextBox txtServiceShurui) {
-        this.getPanelShakaiFukushiShokai().setTxtServiceShurui(txtServiceShurui);
+    public void  setDdlServiceShurui(DropDownList ddlServiceShurui) {
+        this.getPanelShakaiFukushiShokai().setDdlServiceShurui(ddlServiceShurui);
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtKengenritsu() {
-        return this.getPanelShakaiFukushiShokai().getTxtKengenritsu();
+    public DropDownList getDdlKengenritsu() {
+        return this.getPanelShakaiFukushiShokai().getDdlKengenritsu();
     }
 
     @JsonIgnore
-    public void  setTxtKengenritsu(TextBoxNum txtKengenritsu) {
-        this.getPanelShakaiFukushiShokai().setTxtKengenritsu(txtKengenritsu);
+    public void  setDdlKengenritsu(DropDownList ddlKengenritsu) {
+        this.getPanelShakaiFukushiShokai().setDdlKengenritsu(ddlKengenritsu);
     }
 
     @JsonIgnore

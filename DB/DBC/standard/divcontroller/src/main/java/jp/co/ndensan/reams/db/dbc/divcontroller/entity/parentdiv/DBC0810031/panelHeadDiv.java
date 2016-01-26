@@ -46,18 +46,16 @@ public class panelHeadDiv extends Panel {
     private Button btnTokuteiNyushosya;
     @JsonProperty("btnGoukeiInfo")
     private Button btnGoukeiInfo;
-    @JsonProperty("btnKyufuhiMeisaiJyutoku")
-    private Button btnKyufuhiMeisaiJyutoku;
+    @JsonProperty("btnKyufuhiMeisaiJyuchi")
+    private Button btnKyufuhiMeisaiJyuchi;
     @JsonProperty("btnKinkyujiShisetsuRyoyo")
     private Button btnKinkyujiShisetsuRyoyo;
-    @JsonProperty("btnKinkyujiShoteiShikkan")
-    private Button btnKinkyujiShoteiShikkan;
     @JsonProperty("btnShokujiHiyo")
     private Button btnShokujiHiyo;
-    @JsonProperty("btnShafukukeigengaku")
-    private Button btnShafukukeigengaku;
     @JsonProperty("btnSeikyugakuShukei")
     private Button btnSeikyugakuShukei;
+    @JsonProperty("btnShafukukeigengaku")
+    private Button btnShafukukeigengaku;
     @JsonProperty("hlDown")
     private HorizontalLine hlDown;
 
@@ -284,21 +282,21 @@ public class panelHeadDiv extends Panel {
     }
 
     /*
-     * getbtnKyufuhiMeisaiJyutoku
-     * @return btnKyufuhiMeisaiJyutoku
+     * getbtnKyufuhiMeisaiJyuchi
+     * @return btnKyufuhiMeisaiJyuchi
      */
-    @JsonProperty("btnKyufuhiMeisaiJyutoku")
-    public Button getBtnKyufuhiMeisaiJyutoku() {
-        return btnKyufuhiMeisaiJyutoku;
+    @JsonProperty("btnKyufuhiMeisaiJyuchi")
+    public Button getBtnKyufuhiMeisaiJyuchi() {
+        return btnKyufuhiMeisaiJyuchi;
     }
 
     /*
-     * setbtnKyufuhiMeisaiJyutoku
-     * @param btnKyufuhiMeisaiJyutoku btnKyufuhiMeisaiJyutoku
+     * setbtnKyufuhiMeisaiJyuchi
+     * @param btnKyufuhiMeisaiJyuchi btnKyufuhiMeisaiJyuchi
      */
-    @JsonProperty("btnKyufuhiMeisaiJyutoku")
-    public void setBtnKyufuhiMeisaiJyutoku(Button btnKyufuhiMeisaiJyutoku) {
-        this.btnKyufuhiMeisaiJyutoku = btnKyufuhiMeisaiJyutoku;
+    @JsonProperty("btnKyufuhiMeisaiJyuchi")
+    public void setBtnKyufuhiMeisaiJyuchi(Button btnKyufuhiMeisaiJyuchi) {
+        this.btnKyufuhiMeisaiJyuchi = btnKyufuhiMeisaiJyuchi;
     }
 
     /*
@@ -320,24 +318,6 @@ public class panelHeadDiv extends Panel {
     }
 
     /*
-     * getbtnKinkyujiShoteiShikkan
-     * @return btnKinkyujiShoteiShikkan
-     */
-    @JsonProperty("btnKinkyujiShoteiShikkan")
-    public Button getBtnKinkyujiShoteiShikkan() {
-        return btnKinkyujiShoteiShikkan;
-    }
-
-    /*
-     * setbtnKinkyujiShoteiShikkan
-     * @param btnKinkyujiShoteiShikkan btnKinkyujiShoteiShikkan
-     */
-    @JsonProperty("btnKinkyujiShoteiShikkan")
-    public void setBtnKinkyujiShoteiShikkan(Button btnKinkyujiShoteiShikkan) {
-        this.btnKinkyujiShoteiShikkan = btnKinkyujiShoteiShikkan;
-    }
-
-    /*
      * getbtnShokujiHiyo
      * @return btnShokujiHiyo
      */
@@ -356,24 +336,6 @@ public class panelHeadDiv extends Panel {
     }
 
     /*
-     * getbtnShafukukeigengaku
-     * @return btnShafukukeigengaku
-     */
-    @JsonProperty("btnShafukukeigengaku")
-    public Button getBtnShafukukeigengaku() {
-        return btnShafukukeigengaku;
-    }
-
-    /*
-     * setbtnShafukukeigengaku
-     * @param btnShafukukeigengaku btnShafukukeigengaku
-     */
-    @JsonProperty("btnShafukukeigengaku")
-    public void setBtnShafukukeigengaku(Button btnShafukukeigengaku) {
-        this.btnShafukukeigengaku = btnShafukukeigengaku;
-    }
-
-    /*
      * getbtnSeikyugakuShukei
      * @return btnSeikyugakuShukei
      */
@@ -389,6 +351,24 @@ public class panelHeadDiv extends Panel {
     @JsonProperty("btnSeikyugakuShukei")
     public void setBtnSeikyugakuShukei(Button btnSeikyugakuShukei) {
         this.btnSeikyugakuShukei = btnSeikyugakuShukei;
+    }
+
+    /*
+     * getbtnShafukukeigengaku
+     * @return btnShafukukeigengaku
+     */
+    @JsonProperty("btnShafukukeigengaku")
+    public Button getBtnShafukukeigengaku() {
+        return btnShafukukeigengaku;
+    }
+
+    /*
+     * setbtnShafukukeigengaku
+     * @param btnShafukukeigengaku btnShafukukeigengaku
+     */
+    @JsonProperty("btnShafukukeigengaku")
+    public void setBtnShafukukeigengaku(Button btnShafukukeigengaku) {
+        this.btnShafukukeigengaku = btnShafukukeigengaku;
     }
 
     /*
