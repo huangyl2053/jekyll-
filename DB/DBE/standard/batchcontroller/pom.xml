@@ -40,5 +40,9 @@
             <artifactId>DbePersistence</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
+            <artifactId>UxxService</artifactId>
+        </dependency>
     </dependencies>
 </project>

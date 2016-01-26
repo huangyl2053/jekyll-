@@ -46,5 +46,11 @@
             <version>1.5.1</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urc</groupId>
+            <artifactId>UrcService</artifactId>
+            <version>1.5.1</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>
