@@ -54,9 +54,9 @@ public class NinteichosahyoTokkijikoBuilder {
      * @param 認定調査特記事項連番 認定調査特記事項連番
      * @return {@link NinteichosahyoTokkijikoBuilder}
      */
-    public NinteichosahyoTokkijikoBuilder set認定調査特記事項連番(RString 認定調査特記事項連番) {
+    public NinteichosahyoTokkijikoBuilder set認定調査特記事項連番(int 認定調査特記事項連番) {
         requireNonNull(認定調査特記事項連番, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査特記事項連番"));
-        entity.setNinteichosaTokkijikoRenban(認定調査特記事項連番);
+        entity.setNinteichosaTokkijikoRemban(認定調査特記事項連番);
         return this;
     }
 
@@ -93,18 +93,6 @@ public class NinteichosahyoTokkijikoBuilder {
     public NinteichosahyoTokkijikoBuilder set特記事項(RString 特記事項) {
         requireNonNull(特記事項, UrSystemErrorMessages.値がnull.getReplacedMessage("特記事項"));
         entity.setTokkiJiko(特記事項);
-        return this;
-    }
-
-    /**
-     * 特記事項イメージ共有ファイルIDを設定します。
-     *
-     * @param 特記事項イメージ共有ファイルID 特記事項イメージ共有ファイルID
-     * @return {@link NinteichosahyoTokkijikoBuilder}
-     */
-    public NinteichosahyoTokkijikoBuilder set特記事項イメージ共有ファイルID(RDateTime 特記事項イメージ共有ファイルID) {
-        requireNonNull(特記事項イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("特記事項イメージ共有ファイルID"));
-        entity.setTokkiJikoImageSharedFileId(特記事項イメージ共有ファイルID);
         return this;
     }
 

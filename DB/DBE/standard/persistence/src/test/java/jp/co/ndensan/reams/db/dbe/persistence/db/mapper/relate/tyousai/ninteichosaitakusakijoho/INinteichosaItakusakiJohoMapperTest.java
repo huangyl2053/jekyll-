@@ -137,8 +137,8 @@ public class INinteichosaItakusakiJohoMapperTest {
                 RString ninteiChosainNo) {
             DbT5913ChosainJohoEntity entity = DbT5913ChosainJohoEntityGenerator.createDbT5913ChosainJohoEntity();
             entity.setShichosonCode(shichosonCode);
-            entity.setNinteichosaItakusakiCode(ninteichosaItakusakiCode);
-            entity.setNinteiChosainNo(ninteiChosainNo);
+            entity.setNinteiChosaItakusakiCode(ninteichosaItakusakiCode);
+            entity.setNinteiChosainCode(ninteiChosainNo);
             entity.setState(EntityDataState.Added);
             調査員情報Dac.save(entity);
         }

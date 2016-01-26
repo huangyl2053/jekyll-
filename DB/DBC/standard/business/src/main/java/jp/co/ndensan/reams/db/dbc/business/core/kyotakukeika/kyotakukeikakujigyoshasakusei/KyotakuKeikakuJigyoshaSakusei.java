@@ -38,12 +38,12 @@ public class KyotakuKeikakuJigyoshaSakusei extends ModelBase<KyotakuKeikakuJigyo
      */
     public KyotakuKeikakuJigyoshaSakusei(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
-        this.entity.setHihokenshano(被保険者番号);
+        this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setTaishoYM(対象年月);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KyotakuKeikakuJigyoshaSakuseiIdentifier(
@@ -62,7 +62,7 @@ public class KyotakuKeikakuJigyoshaSakusei extends ModelBase<KyotakuKeikakuJigyo
     public KyotakuKeikakuJigyoshaSakusei(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅給付計画事業者作成"));
         this.id = new KyotakuKeikakuJigyoshaSakuseiIdentifier(
-                entity.getHihokenshano(),
+                entity.getHihokenshaNo(),
                 entity.getTaishoYM(),
                 entity.getRirekiNo());
     }
@@ -87,7 +87,7 @@ public class KyotakuKeikakuJigyoshaSakusei extends ModelBase<KyotakuKeikakuJigyo
      * @return 被保険者番号
      */
     public HihokenshaNo get被保険者番号() {
-        return entity.getHihokenshano();
+        return entity.getHihokenshaNo();
     }
 
     /**
@@ -104,7 +104,7 @@ public class KyotakuKeikakuJigyoshaSakusei extends ModelBase<KyotakuKeikakuJigyo
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 

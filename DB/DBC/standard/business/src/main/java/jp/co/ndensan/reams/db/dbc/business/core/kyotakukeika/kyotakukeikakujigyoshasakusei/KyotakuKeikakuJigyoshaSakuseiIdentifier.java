@@ -20,7 +20,7 @@ public class KyotakuKeikakuJigyoshaSakuseiIdentifier implements Serializable {
     private static final long serialVersionUID = 7120901166650768211L;
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth 対象年月;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
 
     /**
      * コンストラクタです。
@@ -31,7 +31,7 @@ public class KyotakuKeikakuJigyoshaSakuseiIdentifier implements Serializable {
      */
     public KyotakuKeikakuJigyoshaSakuseiIdentifier(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         this.被保険者番号 = 被保険者番号;
         this.対象年月 = 対象年月;
         this.履歴番号 = 履歴番号;

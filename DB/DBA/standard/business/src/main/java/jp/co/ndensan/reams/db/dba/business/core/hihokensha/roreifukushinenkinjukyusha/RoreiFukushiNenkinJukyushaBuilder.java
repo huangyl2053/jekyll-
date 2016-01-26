@@ -36,14 +36,14 @@ public class RoreiFukushiNenkinJukyushaBuilder {
     }
 
     /**
-     * 受給終了年月日を設定します。
+     * 受給廃止年月日を設定します。
      *
-     * @param 受給終了年月日 受給終了年月日
+     * @param 受給廃止年月日 受給廃止年月日
      * @return {@link RoreiFukushiNenkinJukyushaBuilder}
      */
-    public RoreiFukushiNenkinJukyushaBuilder set受給廃止年月日(FlexibleDate 受給終了年月日) {
-        requireNonNull(受給終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受給終了年月日"));
-        entity.setJukyuShuryoYMD(受給終了年月日);
+    public RoreiFukushiNenkinJukyushaBuilder set受給廃止年月日(FlexibleDate 受給廃止年月日) {
+        requireNonNull(受給廃止年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受給廃止年月日"));
+        entity.setJukyuHaishiYMD(受給廃止年月日);
         return this;
     }
 

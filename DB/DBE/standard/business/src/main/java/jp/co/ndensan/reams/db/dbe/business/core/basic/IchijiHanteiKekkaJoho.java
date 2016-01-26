@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -224,7 +224,7 @@ public class IchijiHanteiKekkaJoho
      *
      * @return 要介護認定一次判定警告コード
      */
-    public Code get要介護認定一次判定警告コード() {
+    public RString get要介護認定一次判定警告コード() {
         return entity.getIchijiHnateiKeikokuCode();
     }
 

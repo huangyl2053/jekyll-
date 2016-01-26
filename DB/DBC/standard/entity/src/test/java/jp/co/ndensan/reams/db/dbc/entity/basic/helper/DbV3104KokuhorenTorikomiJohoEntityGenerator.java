@@ -37,7 +37,7 @@ public final class DbV3104KokuhorenTorikomiJohoEntityGenerator {
         entity.setZen_shorijotaikubun(DEFAULT_前_処理状態区分);
         entity.setZenzen_shorijotaikubun(DEFAULT_前々_処理状態区分);
         entity.setTougetsushoridate(DEFAULT_処理実施日時);
-        entity.setSaiShoriKahiKubun(DEFAULT_再処理可能区分);
+        entity.setSaiShoriKanoKubun(DEFAULT_再処理可能区分);
         return entity;
     }
 }

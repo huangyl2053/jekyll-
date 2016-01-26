@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tennyushibo.Te
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tsuchishohakkojoho.TsuchishoHakkoJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tsuchishohakkojoho.TsuchishoHakkoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5122TsuchishoHakkoJohoEntity;
@@ -216,7 +216,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
             Models<ImageIdentifier, Image> image,
             Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJoho,
             Models<NinteiKeikakuJohoIdentifier, NinteiKeikakuJoho> ninteiKeikakuJoho,
-//            Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho,
+            //            Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho,
             Models<RenrakusakiJohoIdentifier, RenrakusakiJoho> renrakusakiJoho,
             Models<ShinsakaiIinJogaiJohoIdentifier, ShinsakaiIinJogaiJoho> shinsakaiIinJogaiJoho,
             Models<ShinseiRirekiJohoIdentifier, ShinseiRirekiJoho> shinseiRirekiJoho,
@@ -945,7 +945,8 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
     }
 
     /**
-     * 要介護認定申請情報配下の要素を削除対象とします。<br/> {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 要介護認定申請情報配下の要素を削除対象とします。<br/>
+     * {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      * 要介護認定申請情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link NinteiShinseiJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link NinteiShinseiJoho}
@@ -968,7 +969,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
                 image.deleted(),
                 ninteiKanryoJoho.deleted(),
                 ninteiKeikakuJoho.deleted(),
-//                ninteiKekkaJoho.deleted(),
+                //                ninteiKekkaJoho.deleted(),
                 renrakusakiJoho.deleted(),
                 shinsakaiIinJogaiJoho.deleted(),
                 shinseiRirekiJoho.deleted(),
@@ -986,7 +987,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
                 || image.hasAnyChanged()
                 || ninteiKanryoJoho.hasAnyChanged()
                 || ninteiKeikakuJoho.hasAnyChanged()
-//                || ninteiKekkaJoho.hasAnyChanged()
+                //                || ninteiKekkaJoho.hasAnyChanged()
                 || renrakusakiJoho.hasAnyChanged()
                 || shinsakaiIinJogaiJoho.hasAnyChanged()
                 || shinseiRirekiJoho.hasAnyChanged()
@@ -997,7 +998,8 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
     }
 
     /**
-     * 要介護認定申請情報のみを変更対象とします。<br/> {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 要介護認定申請情報のみを変更対象とします。<br/>
+     * {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteiShinseiJoho}
      */
@@ -1096,7 +1098,6 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
 //    public List<NinteiKekkaJoho> getNinteiKekkaJohoList() {
 //        return new ArrayList<>(ninteiKekkaJoho.values());
 //    }
-
     public RenrakusakiJoho getRenrakusakiJoho(RenrakusakiJohoIdentifier id) {
         if (renrakusakiJoho.contains(id)) {
             return renrakusakiJoho.clone().get(id);
@@ -1205,7 +1206,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
                 Models<ImageIdentifier, Image> image,
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJoho,
                 Models<NinteiKeikakuJohoIdentifier, NinteiKeikakuJoho> ninteiKeikakuJoho,
-//                Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho,
+                //                Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho,
                 Models<RenrakusakiJohoIdentifier, RenrakusakiJoho> renrakusakiJoho,
                 Models<ShinsakaiIinJogaiJohoIdentifier, ShinsakaiIinJogaiJoho> shinsakaiIinJogaiJoho,
                 Models<ShinseiRirekiJohoIdentifier, ShinseiRirekiJoho> shinseiRirekiJoho,

@@ -633,7 +633,7 @@ public class HihokenshaDaichoSakuseiManager {
         for (DbT7006RoreiFukushiNenkinJukyushaEntity entity : entityList) {
             老齢福祉No.add(new RString(String.valueOf(nocount + 1)));
             老齢福祉受給開始日.add(entity.getJukyuKaishiYMD());
-            老齢福祉受給終了日.add(entity.getJukyuShuryoYMD());
+            老齢福祉受給終了日.add(entity.getJukyuHaishiYMD());
             if ((nocount + 1) % NOCOUNT_3 == 0) {
                 roreiDivisionEntity.set老齢福祉No(老齢福祉No);
                 roreiDivisionEntity.set老齢福祉受給開始日(老齢福祉受給開始日);

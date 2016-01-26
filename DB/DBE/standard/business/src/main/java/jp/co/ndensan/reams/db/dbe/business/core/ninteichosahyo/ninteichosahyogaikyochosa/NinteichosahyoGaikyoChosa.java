@@ -236,15 +236,6 @@ public class NinteichosahyoGaikyoChosa extends ModelBase<NinteichosahyoGaikyoCho
     }
 
     /**
-     * 調査委託区分コードを返します。
-     *
-     * @return 調査委託区分コード
-     */
-    public Code get調査委託区分コード() {
-        return entity.getChosaItakuKubunCode();
-    }
-
-    /**
      * 認定調査区分コードを返します。
      *
      * @return 認定調査区分コード
@@ -290,15 +281,6 @@ public class NinteichosahyoGaikyoChosa extends ModelBase<NinteichosahyoGaikyoCho
     }
 
     /**
-     * 実施場所イメージ共有ファイルIDを返します。
-     *
-     * @return 実施場所イメージ共有ファイルID
-     */
-    public RDateTime get実施場所イメージ共有ファイルID() {
-        return entity.getJisshiBashoImageSharedFileId();
-    }
-
-    /**
      * 認定調査・サービス区分コードを返します。
      *
      * @return 認定調査_サービス区分コード
@@ -321,7 +303,7 @@ public class NinteichosahyoGaikyoChosa extends ModelBase<NinteichosahyoGaikyoCho
      *
      * @return 利用施設住所
      */
-    public AtenaJusho get利用施設住所() {
+    public RString get利用施設住所() {
         return entity.getRiyoShisetsuJusho();
     }
 
@@ -330,7 +312,7 @@ public class NinteichosahyoGaikyoChosa extends ModelBase<NinteichosahyoGaikyoCho
      *
      * @return 利用施設電話番号
      */
-    public TelNo get利用施設電話番号() {
+    public RString get利用施設電話番号() {
         return entity.getRiyoShisetsuTelNo();
     }
 
@@ -344,48 +326,12 @@ public class NinteichosahyoGaikyoChosa extends ModelBase<NinteichosahyoGaikyoCho
     }
 
     /**
-     * 利用施設名イメージ共有ファイルIDを返します。
-     *
-     * @return 利用施設名イメージ共有ファイルID
-     */
-    public RDateTime get利用施設名イメージ共有ファイルID() {
-        return entity.getRiyoShisetsuNameImageSharedFileId();
-    }
-
-    /**
-     * 利用施設住所イメージ共有ファイルIDを返します。
-     *
-     * @return 利用施設住所イメージ共有ファイルID
-     */
-    public RDateTime get利用施設住所イメージ共有ファイルID() {
-        return entity.getRiyoShisetsuJushoImageSharedFileId();
-    }
-
-    /**
-     * 利用施設電話番号イメージ共有ファイルIDを返します。
-     *
-     * @return 利用施設電話番号イメージ共有ファイルID
-     */
-    public RDateTime get利用施設電話番号イメージ共有ファイルID() {
-        return entity.getRiyoShisetsuTelNoImageSharedFileId();
-    }
-
-    /**
      * 特記を返します。
      *
      * @return 特記
      */
     public RString get特記() {
         return entity.getTokki();
-    }
-
-    /**
-     * 特記イメージ共有ファイルIDを返します。
-     *
-     * @return 特記イメージ共有ファイルID
-     */
-    public RDateTime get特記イメージ共有ファイルID() {
-        return entity.getTokkiImageSharedFileId();
     }
 
     /**
@@ -430,17 +376,14 @@ public class NinteichosahyoGaikyoChosa extends ModelBase<NinteichosahyoGaikyoCho
      * 認定調査票（概況調査）配下の要素を削除対象とします。<br/>
      * {@link DbT5202NinteichosahyoGaikyoChosaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      * 認定調査票（概況調査）配下の要素である認定調査票（概況特記）情報の{@link Models#deleteOrRemoveAll() }と
-     * 認定調査票（基本調査）情報の{@link Models#deleteOrRemoveAll() }と
-     * 認定調査票（概況調査）記入項目情報の{@link Models#deleteOrRemoveAll() }と
+     * 認定調査票（基本調査）情報の{@link Models#deleteOrRemoveAll() }と 認定調査票（概況調査）記入項目情報の{@link Models#deleteOrRemoveAll() }と
      * 認定調査票（概況調査）サービスの状況情報の{@link Models#deleteOrRemoveAll() }と
      * 認定調査票（概況調査）サービスの状況フラグ情報の{@link Models#deleteOrRemoveAll() }と
-     * 認定調査票（概況調査）施設利用情報の{@link Models#deleteOrRemoveAll() }と
-     * 認定調査票（特記情報）情報の{@link Models#deleteOrRemoveAll() }とを実行します。
+     * 認定調査票（概況調査）施設利用情報の{@link Models#deleteOrRemoveAll() }と 認定調査票（特記情報）情報の{@link Models#deleteOrRemoveAll() }とを実行します。
      * 削除処理結果となる{@link NinteichosahyoGaikyoChosa}を返します。
      *
      * @return 削除対象処理実施後の{@link NinteichosahyoGaikyoChosa}
-     * @throws IllegalStateException
-     * DbT5202NinteichosahyoGaikyoChosaEntityのデータ状態が変更の場合
+     * @throws IllegalStateException DbT5202NinteichosahyoGaikyoChosaEntityのデータ状態が変更の場合
      */
     @Override
     public NinteichosahyoGaikyoChosa deleted() {

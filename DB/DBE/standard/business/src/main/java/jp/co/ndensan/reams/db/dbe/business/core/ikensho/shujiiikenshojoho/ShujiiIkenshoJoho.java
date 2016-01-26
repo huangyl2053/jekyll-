@@ -326,7 +326,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      * @return その他受診科名
      */
     public RString getその他受診科名() {
-        return entity.getSonotaJushinKaShimei();
+        return entity.getSonotaJushinKaMei();
     }
 
     /**
@@ -343,7 +343,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return 意見書_発症年月日1
      */
-    public FlexibleDate get意見書_発症年月日1() {
+    public RString get意見書_発症年月日1() {
         return entity.getHasshoYMD1();
     }
 
@@ -361,7 +361,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return 意見書_発症年月日2
      */
-    public FlexibleDate get意見書_発症年月日2() {
+    public RString get意見書_発症年月日2() {
         return entity.getHasshoYMD2();
     }
 
@@ -379,7 +379,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return 意見書_発症年月日3
      */
-    public FlexibleDate get意見書_発症年月日3() {
+    public RString get意見書_発症年月日3() {
         return entity.getHasshoYMD3();
     }
 
@@ -417,15 +417,6 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      */
     public RString get特記事項() {
         return entity.getTokkiJiko();
-    }
-
-    /**
-     * 特記事項イメージ共有ファイルIDを返します。
-     *
-     * @return 特記事項イメージ共有ファイルID
-     */
-    public RDateTime get特記事項イメージ共有ファイルID() {
-        return entity.getTokkiJikoImageSharedFileId();
     }
 
     /**

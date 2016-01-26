@@ -141,7 +141,7 @@ public class NinteiKekkaJohoBuilder {
      */
     public NinteiKekkaJohoBuilder set一次判定結果変更理由(RString 一次判定結果変更理由) {
         requireNonNull(一次判定結果変更理由, UrSystemErrorMessages.値がnull.getReplacedMessage("一次判定結果変更理由"));
-        entity.setIchijiHnateiKekkaHenkoRiyu(一次判定結果変更理由);
+        entity.setIchijiHanteiKekkaHenkoRiyu(一次判定結果変更理由);
         return this;
     }
 

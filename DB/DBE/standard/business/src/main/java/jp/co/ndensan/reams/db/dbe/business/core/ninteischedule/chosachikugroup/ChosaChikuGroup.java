@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 調査地区グループマスタを管理するクラスです。
  */
 public class ChosaChikuGroup extends ModelBase<ChosaChikuGroupIdentifier, DbT5225ChosaChikuGroupEntity, ChosaChikuGroup> implements Serializable {
+
     private static final long serialVersionUID = -8442376890865711774L;
 
     private final DbT5225ChosaChikuGroupEntity entity;
@@ -42,7 +43,7 @@ public class ChosaChikuGroup extends ModelBase<ChosaChikuGroupIdentifier, DbT522
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         this.entity = new DbT5225ChosaChikuGroupEntity();
         this.entity.setChosaChikuGroupCode(調査地区グループコード);
-        this.entity.setChosachikucode(調査地区コード);
+        this.entity.setChosaChikuCode(調査地区コード);
         this.entity.setShichosonCode(市町村コード);
         this.id = new ChosaChikuGroupIdentifier(
                 調査地区グループコード,
@@ -61,7 +62,7 @@ public class ChosaChikuGroup extends ModelBase<ChosaChikuGroupIdentifier, DbT522
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区グループマスタ"));
         this.id = new ChosaChikuGroupIdentifier(
                 entity.getChosaChikuGroupCode(),
-                entity.getChosachikucode(),
+                entity.getChosaChikuCode(),
                 entity.getShichosonCode());
     }
 
@@ -94,7 +95,7 @@ public class ChosaChikuGroup extends ModelBase<ChosaChikuGroupIdentifier, DbT522
      * @return 調査地区コード
      */
     public Code get調査地区コード() {
-        return entity.getChosachikucode();
+        return entity.getChosaChikuCode();
     }
 
     /**
@@ -112,7 +113,7 @@ public class ChosaChikuGroup extends ModelBase<ChosaChikuGroupIdentifier, DbT522
      * @return 調査地区グループ名称
      */
     public RString get調査地区グループ名称() {
-        return entity.getChosachikugroupname();
+        return entity.getChosaChikuGroupName();
     }
 
     /**
@@ -192,6 +193,7 @@ public class ChosaChikuGroup extends ModelBase<ChosaChikuGroupIdentifier, DbT522
     }
 
     private static final class _SerializationProxy implements Serializable {
+
         private static final long serialVersionUID = -2108246538332524703L;
 
         private final DbT5225ChosaChikuGroupEntity entity;
@@ -216,7 +218,7 @@ public class ChosaChikuGroup extends ModelBase<ChosaChikuGroupIdentifier, DbT522
     public ChosaChikuGroupBuilder createBuilderForEdit() {
         return new ChosaChikuGroupBuilder(entity, id);
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;

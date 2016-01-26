@@ -71,7 +71,7 @@ public class ServiceShuruiShikyuGendoGakuBuilder {
      */
     public ServiceShuruiShikyuGendoGakuBuilder set適用開始年月(FlexibleYearMonth 適用開始年月) {
         requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
-        entity.setTekiyoKaishuYM(適用開始年月);
+        entity.setTekiyoKaishiYM(適用開始年月);
         return this;
     }
 
@@ -95,7 +95,7 @@ public class ServiceShuruiShikyuGendoGakuBuilder {
      */
     public ServiceShuruiShikyuGendoGakuBuilder set適用終了年月(FlexibleYearMonth 適用終了年月) {
         requireNonNull(適用終了年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用終了年月"));
-        entity.setTekiyoShuryuYM(適用終了年月);
+        entity.setTekiyoShuryoYM(適用終了年月);
         return this;
     }
 

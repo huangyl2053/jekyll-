@@ -374,8 +374,8 @@ public class ChosainJohoFanderTest {
     public static void insert_DbT5913ChosainJoho(LasdecCode 市町村コード, RString 認定調査委託先コード, RString 認定調査員コード) {
         DbT5913ChosainJohoEntity entity = DbT5913ChosainJohoEntityGenerator.createDbT5913ChosainJohoEntity();
         entity.setShichosonCode(市町村コード);
-        entity.setNinteichosaItakusakiCode(認定調査委託先コード);
-        entity.setNinteiChosainNo(認定調査員コード);
+        entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
+        entity.setNinteiChosainCode(認定調査員コード);
         dbT5913dac.save(entity);
     }
 

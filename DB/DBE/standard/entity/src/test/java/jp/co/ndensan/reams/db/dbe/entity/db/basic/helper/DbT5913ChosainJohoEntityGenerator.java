@@ -41,8 +41,8 @@ public final class DbT5913ChosainJohoEntityGenerator {
     public static DbT5913ChosainJohoEntity createDbT5913ChosainJohoEntity() {
         DbT5913ChosainJohoEntity entity = new DbT5913ChosainJohoEntity();
         entity.setShichosonCode(DEFAULT_市町村コード);
-        entity.setNinteichosaItakusakiCode(DEFAULT_認定調査委託先コード);
-        entity.setNinteiChosainNo(DEFAULT_認定調査員コード);
+        entity.setNinteiChosaItakusakiCode(DEFAULT_認定調査委託先コード);
+        entity.setNinteiChosainCode(DEFAULT_認定調査員コード);
         entity.setChosainShimei(DEFAULT_調査員氏名);
         entity.setChosainKanaShimei(DEFAULT_調査員氏名カナ);
         entity.setSeibetsu(DEFAULT_性別);

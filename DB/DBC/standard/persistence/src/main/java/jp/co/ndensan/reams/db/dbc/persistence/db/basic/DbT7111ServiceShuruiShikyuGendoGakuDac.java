@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7111ServiceShuruiShikyuGendoGaku;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7111ServiceShuruiShikyuGendoGaku.rirekiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7111ServiceShuruiShikyuGendoGaku.serviceShuruiCode;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7111ServiceShuruiShikyuGendoGaku.tekiyoKaishuYM;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7111ServiceShuruiShikyuGendoGaku.tekiyoKaishiYM;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7111ServiceShuruiShikyuGendoGaku.yoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
@@ -61,7 +61,7 @@ public class DbT7111ServiceShuruiShikyuGendoGakuDac implements ISaveable<DbT7111
                 where(and(
                                 eq(serviceShuruiCode, サービス種類コード),
                                 eq(yoKaigoJotaiKubun, 要介護状態区分),
-                                eq(tekiyoKaishuYM, 適用開始年月),
+                                eq(tekiyoKaishiYM, 適用開始年月),
                                 eq(rirekiNo, 履歴番号))).
                 toObject(DbT7111ServiceShuruiShikyuGendoGakuEntity.class);
     }

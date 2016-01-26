@@ -18,7 +18,7 @@ public final class DbT5205NinteichosahyoTokkijikoEntityGenerator {
     public static final ShinseishoKanriNo DEFAULT_申請書管理番号 = new ShinseishoKanriNo("1");
     public static final int DEFAULT_認定調査依頼履歴番号 = 1;
     public static final RString DEFAULT_認定調査特記事項番号 = new RString("001");
-    public static final RString DEFAULT_認定調査特記事項連番 = new RString("1");
+    public static final int DEFAULT_認定調査特記事項連番 = 1;
     public static final RString DEFAULT_特記事項テキスト_イメージ区分 = new RString("1");
     public static final Code DEFAULT_原本マスク区分 = new Code("1");
     public static final RString DEFAULT_特記事項 = new RString("特記事項");
@@ -35,11 +35,10 @@ public final class DbT5205NinteichosahyoTokkijikoEntityGenerator {
         entity.setShinseishoKanriNo(DEFAULT_申請書管理番号);
         entity.setNinteichosaRirekiNo(DEFAULT_認定調査依頼履歴番号);
         entity.setNinteichosaTokkijikoNo(DEFAULT_認定調査特記事項番号);
-        entity.setNinteichosaTokkijikoRenban(DEFAULT_認定調査特記事項連番);
+        entity.setNinteichosaTokkijikoRemban(DEFAULT_認定調査特記事項連番);
         entity.setTokkijikoTextImageKubun(DEFAULT_特記事項テキスト_イメージ区分);
         entity.setGenponMaskKubun(DEFAULT_原本マスク区分);
         entity.setTokkiJiko(DEFAULT_特記事項);
-        entity.setTokkiJikoImageSharedFileId(DEFAULT_特記事項イメージ共有ファイルID);
         return entity;
     }
 }
