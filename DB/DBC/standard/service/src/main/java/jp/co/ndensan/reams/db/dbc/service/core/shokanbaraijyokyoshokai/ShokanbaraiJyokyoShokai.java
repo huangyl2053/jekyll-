@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.Servi
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanMeisaiJushochiTokureiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200004Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200604Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuEntity;
@@ -432,6 +433,37 @@ public class ShokanbaraiJyokyoShokai {
 
         IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
         List<ShokanServicePlan200604Entity> entityList = mapper.get償還払請求サービス計画200604データ(parameter);
+        if (entityList == null || entityList.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return entityList;
+    }
+
+    /**
+     * 償還払請求サービス計画200004データ取得
+     *
+     * @param 被保険者番号
+     * @param サービス提供年月
+     * @param 整理番号
+     * @param 事業者番号
+     * @param 様式番号
+     * @param 明細番号
+     * @param 連番
+     * @return List<ShokanServicePlan200004Entity>
+     */
+    public List<ShokanServicePlan200004Entity> getServiceKeikaku200004(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号,
+            RString 連番) {
+        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
+                被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, null, null);
+
+        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
+        List<ShokanServicePlan200004Entity> entityList = mapper.get償還払請求サービス計画200004データ(parameter);
         if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();
         }
