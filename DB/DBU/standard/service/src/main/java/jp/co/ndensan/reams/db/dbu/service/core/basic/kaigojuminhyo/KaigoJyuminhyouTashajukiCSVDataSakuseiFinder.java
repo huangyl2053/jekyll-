@@ -494,6 +494,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
         jugoentity.set市町村コード(new RString(this.get地方公共団体コード().toString()));
         jugoentity.set識別ＩＤ(識別ＩＤ_AA65);
         jugoentity.setタイムスタンプ(new RString(YMDHMS.now().toString()));
+        jugoentity.set最終レコード区分(最終ﾚｺｰﾄﾞ);
         jugoentity.set連番(連番);
         jugolist.add(jugoentity);
         return jugolist;
