@@ -59,6 +59,8 @@
         FROM
         rgdb."DbT7021JigyoHokokuTokeiData" AS jigyoHokokuTokeiData
         WHERE
+        jigyoHokokuTokeiData."isDeleted" = false
+        AND
         jigyoHokokuTokeiData."hokokuM" = '00'
         <choose>
             <when test="usehokokuYSeireki">
@@ -140,6 +142,8 @@
         FROM
         rgdb."DbT7021JigyoHokokuTokeiData" AS jigyoHokokuTokeiData
         WHERE
+        jigyoHokokuTokeiData."isDeleted" = false
+        AND
         jigyoHokokuTokeiData."hokokuYSeireki" = #{hokokuYSeireki}
         AND
         jigyoHokokuTokeiData."hokokuM" = '00'
