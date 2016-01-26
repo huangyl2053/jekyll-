@@ -298,7 +298,7 @@ public final class YokaigoNinteiParamter {
                 !kensakuOption.contains(DATE_SOURCE_KEY1),
                 kensakuOption.contains(DATE_SOURCE_KEY2),
                 maximumDisplayNumber,
-                maximumDisplayNumber != 0,
+                maximumDisplayNumber != -1,
                 TorisageKubunCode.取り下げ.getコード());
     }
     
