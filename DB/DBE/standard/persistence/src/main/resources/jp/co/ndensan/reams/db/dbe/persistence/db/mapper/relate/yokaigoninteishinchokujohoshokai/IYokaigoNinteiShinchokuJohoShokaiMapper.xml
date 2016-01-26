@@ -220,7 +220,7 @@
             </if>
           </if>
           <if test="kensakuOptionKey0">
-              AND DbT5002."shinseishoKanriNo" IS NULL
+              AND DbT5102."shinseishoKanriNo" IS NULL
           </if>
           <if test="kensakuOptionKey1">
               AND DbT5121."shinseishoKanriNo" IS NULL

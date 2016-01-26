@@ -243,7 +243,8 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         }
         row.setKaigoNinteiShinsakaiKaisaiNo(nullToEmpty(joho.get介護認定審査会開催番号()));
         row.setKaigoNinteiShinsakaiGogitai(new RString(String.valueOf(joho.get合議体番号())));
-        row.setKaigoNinteiShinsakaiYokaigodo(new RString("99").equals(joho.get二次判定要介護状態区分コード()) ? RString.EMPTY : 
+        row.setKaigoNinteiShinsakaiYokaigodo((joho.get二次判定要介護状態区分コード() == null || new RString("99")
+                .equals(joho.get二次判定要介護状態区分コード())) ? RString.EMPTY : 
                 YokaigoJotaiKubun09.toValue(joho.get二次判定要介護状態区分コード()).get名称());
         row.setHihokenshaYubinNo(nullToEmpty(joho.get郵便番号()));
         row.setHihokenshaJusho(nullToEmpty(joho.get住所()));
@@ -253,7 +254,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         } else {
             row.getHihokenshaBirthDay().setValue(flexibleDateToRDate(joho.get生年月日()));
         }
-        row.setHihokenshaNenrei(new RString(String.valueOf(joho.get年齢())));
+        row.setHihokenshaNenrei(joho.get年齢() == 0 ? RString.EMPTY : new RString(String.valueOf(joho.get年齢())));
         return row;
     }
 
