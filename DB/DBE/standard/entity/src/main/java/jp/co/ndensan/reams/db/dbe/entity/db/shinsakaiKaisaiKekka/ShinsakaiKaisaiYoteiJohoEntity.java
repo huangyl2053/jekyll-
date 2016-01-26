@@ -31,5 +31,6 @@ public class ShinsakaiKaisaiYoteiJohoEntity {
     private RString 開催終了時間;
     private int 所要時間;
     private RString 開催会場;
-
+    private RString 開催番号;
+    private RString 介護認定審査会進捗状況;
 }
