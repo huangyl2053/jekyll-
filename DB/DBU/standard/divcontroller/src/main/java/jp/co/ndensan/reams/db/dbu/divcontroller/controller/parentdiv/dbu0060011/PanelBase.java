@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.jigyohokokunenpo.JigyoHokokuNenpoResult;
 import jp.co.ndensan.reams.db.dbu.business.jigyohokokunenpo.ShichosonCodeNameResult;
+import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.definition.enumeratedtype.DbuViewStateKey;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.PanelBaseDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.dgHoseitaishoYoshiki_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0060011.PanelBaseHandler;
-import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokunenpo.JigyoHokokuNenpoHoseiHakoManager;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyohokokuNenpoHoseiHyoji;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -115,28 +114,7 @@ public class PanelBase {
         }
         事業報告集計一覧データリスト = new ArrayList<>();
         事業報告集計一覧データリスト = createInstanceOfFinder().getJigyoHokokuNenpoList(new FlexibleYear(報告年度), 市町村コード, 保険者区分).records();
-        List<dgHoseitaishoYoshiki_Row> 検索一覧データ = new ArrayList<>();
-        for (JigyoHokokuNenpoResult result : 事業報告集計一覧データリスト) {
-            dgHoseitaishoYoshiki_Row row = new dgHoseitaishoYoshiki_Row();
-            TextBox textBox = new TextBox();
-            textBox.setValue(result.get市町村コード().value());
-            row.setTxtShichosonCode(textBox);
-            TextBoxDate 報告年textBoxDate = new TextBoxDate();
-            RDate 報告年rDate = new RDate(result.get報告年().getYearValue(), 1, 1);
-            報告年textBoxDate.setValue(報告年rDate);
-            row.setTxtHokokuY(報告年textBoxDate);
-            TextBoxDate 集計対象年TextBoxDate = new TextBoxDate();
-            RDate 集計対象年RDate = new RDate(result.get集計対象年().getYearValue(), 1, 1);
-            集計対象年TextBoxDate.setValue(集計対象年RDate);
-            row.setTxtShukeiY(集計対象年TextBoxDate);
-            RString 統計対象区分 = result.get統計対象区分();
-            RString 表番号 = result.get表番号().value();
-            RString 集計番号 = result.get集計番号().value();
-            RString 様式種類 = get様式種類(統計対象区分, 表番号, 集計番号);
-            row.setTxtToukeiTaishoKubun(様式種類);
-            検索一覧データ.add(row);
-        }
-        baseDiv.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().setDataSource(検索一覧データ);
+        検索一覧データの設定(baseDiv, 事業報告集計一覧データリスト);
         return ResponseData.of(baseDiv).respond();
     }
 
@@ -183,15 +161,17 @@ public class PanelBase {
 
     private void init初期状態(PanelBaseDiv baseDiv) {
         getHandler(baseDiv).set報告年度と集計年度();
+        createInstanceOfFinder().getShichosonCodeNameList();
         List<ShichosonCodeNameResult> 市町村情報リスト = createInstanceOfFinder().getShichosonCodeNameList().records();
         if (市町村情報リスト.isEmpty()) {
-            throw new jp.co.ndensan.reams.uz.uza.lang.ApplicationException(UrErrorMessages.データが存在しない.getMessage().evaluate());
+            baseDiv.getTaishokensaku().getDdlShichoson().setVisible(false);
+        } else {
+            List<KeyValueDataSource> shichosonList = new ArrayList<>();
+            for (ShichosonCodeNameResult shichosonCodeNameResult : 市町村情報リスト) {
+                shichosonList.add(setDdlShichoson(shichosonCodeNameResult));
+            }
+            getHandler(baseDiv).set市町村情報(shichosonList);
         }
-        List<KeyValueDataSource> shichosonList = new ArrayList<>();
-        for (ShichosonCodeNameResult shichosonCodeNameResult : 市町村情報リスト) {
-            shichosonList.add(setDdlShichoson(shichosonCodeNameResult));
-        }
-        getHandler(baseDiv).set市町村情報(shichosonList);
     }
 
     private KeyValueDataSource setDdlShichoson(ShichosonCodeNameResult shichosonCodeNameResult) {
@@ -200,6 +180,32 @@ public class PanelBase {
                 + shichosonCodeNameResult.get保険者区分() + "-"
                 + shichosonCodeNameResult.get保険者コード());
         return new KeyValueDataSource(市町村コード, shichosonCodeNameResult.get市町村名称());
+    }
+
+    private ResponseData<PanelBaseDiv> 検索一覧データの設定(PanelBaseDiv baseDiv, List<JigyoHokokuNenpoResult> 事業報告一覧リスト) {
+        List<dgHoseitaishoYoshiki_Row> 検索一覧データ = new ArrayList<>();
+        for (JigyoHokokuNenpoResult result : 事業報告一覧リスト) {
+            dgHoseitaishoYoshiki_Row row = new dgHoseitaishoYoshiki_Row();
+            TextBox textBox = new TextBox();
+            textBox.setValue(result.get市町村コード().value());
+            row.setTxtShichosonCode(textBox);
+            TextBoxDate 報告年textBoxDate = new TextBoxDate();
+            RDate 報告年rDate = new RDate(result.get報告年().getYearValue(), 1, 1);
+            報告年textBoxDate.setValue(報告年rDate);
+            row.setTxtHokokuY(報告年textBoxDate);
+            TextBoxDate 集計対象年TextBoxDate = new TextBoxDate();
+            RDate 集計対象年RDate = new RDate(result.get集計対象年().getYearValue(), 1, 1);
+            集計対象年TextBoxDate.setValue(集計対象年RDate);
+            row.setTxtShukeiY(集計対象年TextBoxDate);
+            RString 統計対象区分 = result.get統計対象区分();
+            RString 表番号 = result.get表番号().value();
+            RString 集計番号 = result.get集計番号().value();
+            RString 様式種類 = get様式種類(統計対象区分, 表番号, 集計番号);
+            row.setTxtToukeiTaishoKubun(様式種類);
+            検索一覧データ.add(row);
+        }
+        baseDiv.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().setDataSource(検索一覧データ);
+        return ResponseData.of(baseDiv).respond();
     }
 
     private RString get様式種類(RString 統計対象区分, RString 表番号, RString 集計番号) {

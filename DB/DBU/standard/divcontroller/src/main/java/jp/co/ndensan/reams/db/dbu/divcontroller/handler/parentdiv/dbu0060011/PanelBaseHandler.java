@@ -1,9 +1,10 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0060011;
 
 import java.util.List;
+import java.util.regex.Pattern;
+import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.PanelBaseDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.dgHoseitaishoYoshiki_Row;
-import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyohokokuNenpoHoseiHyoji;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -76,7 +77,10 @@ public class PanelBaseHandler {
      */
     public void set集計年度() {
         if (!div.getTaishokensaku().getTxtHokokuY().getValue().isEmpty()) {
-            set集計年度の設定();
+            Pattern pattern = Pattern.compile("[0-9]*");
+            if (pattern.matcher(div.getTaishokensaku().getTxtHokokuY().getValue().toString()).matches()) {
+                set集計年度の設定();
+            }
         } else {
             div.getTaishokensaku().getTxtshukeiY().setValue(FlexibleDate.EMPTY);
         }
@@ -93,7 +97,6 @@ public class PanelBaseHandler {
                         new FlexibleDate(RDate.getNowDate().getYearValue() - 2,
                                 RDate.getNowDate().getMonthValue(),
                                 RDate.getNowDate().getDayValue()));
-
             } else {
                 div.getTaishokensaku().getTxtshukeiY().setValue(
                         new FlexibleDate(RDate.getNowDate().getYearValue() - 1,
@@ -117,31 +120,21 @@ public class PanelBaseHandler {
      */
     public ResponseData<PanelBaseDiv> get遷移先画面() {
         RString 様式種類 = div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getSelectedItems().get(0).getTxtToukeiTaishoKubun();
-        RString enum事業報告年報補正表示_001 = JigyohokokuNenpoHoseiHyoji.保険者_所得段階別第１号被保険者数.get名称();
-        RString enum事業報告年報補正表示_002 = JigyohokokuNenpoHoseiHyoji.保険者_現物分_市町村特別給付.get名称();
-        RString enum事業報告年報補正表示_003 = JigyohokokuNenpoHoseiHyoji.保険者_保険料収納状況_保険給付支払状況.get名称();
-        RString enum事業報告年報補正表示_101 = JigyohokokuNenpoHoseiHyoji.構成市町村_所得段階別第１号被保険者数.get名称();
-        RString enum事業報告年報補正表示_102 = JigyohokokuNenpoHoseiHyoji.構成市町村_現物分_市町村特別給付.get名称();
-        RString enum事業報告年報補正表示_103 = JigyohokokuNenpoHoseiHyoji.構成市町村_保険料収納状況_保険給付支払状況.get名称();
-        RString enum事業報告年報補正表示_201 = JigyohokokuNenpoHoseiHyoji.旧市町村_所得段階別第１号被保険者数.get名称();
-        RString enum事業報告年報補正表示_202 = JigyohokokuNenpoHoseiHyoji.旧市町村_現物分_市町村特別給付.get名称();
-        RString enum事業報告年報補正表示_203 = JigyohokokuNenpoHoseiHyoji.旧市町村_保険料収納状況_保険給付支払状況.get名称();
-
-        if ((0 == 様式種類.compareTo(enum事業報告年報補正表示_001))
-                || (0 == 様式種類.compareTo(enum事業報告年報補正表示_101))
-                || (0 == 様式種類.compareTo(enum事業報告年報補正表示_201))) {
+        if ((0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.保険者_所得段階別第１号被保険者数.get名称()))
+                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.構成市町村_所得段階別第１号被保険者数.get名称()))
+                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.旧市町村_所得段階別第１号被保険者数.get名称()))) {
             // TODO QA:555  UIContainerを存在しない
             throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("様式１補正画面に遷移"));
         }
-        if ((0 == 様式種類.compareTo(enum事業報告年報補正表示_002))
-                || (0 == 様式種類.compareTo(enum事業報告年報補正表示_102))
-                || (0 == 様式種類.compareTo(enum事業報告年報補正表示_202))) {
+        if ((0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.保険者_現物分_市町村特別給付.get名称()))
+                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.構成市町村_現物分_市町村特別給付.get名称()))
+                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.旧市町村_現物分_市町村特別給付.get名称()))) {
             // TODO QA:555  UIContainerを存在しない
             throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("様式2の８画面に遷移"));
         }
-        if ((0 == 様式種類.compareTo(enum事業報告年報補正表示_003))
-                || (0 == 様式種類.compareTo(enum事業報告年報補正表示_103))
-                || (0 == 様式種類.compareTo(enum事業報告年報補正表示_203))) {
+        if ((0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.保険者_保険料収納状況_保険給付支払状況.get名称()))
+                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.構成市町村_保険料収納状況_保険給付支払状況.get名称()))
+                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.旧市町村_保険料収納状況_保険給付支払状況.get名称()))) {
             // TODO QA:555  UIContainerを存在しない
             throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("様式３画面に遷移"));
         }
