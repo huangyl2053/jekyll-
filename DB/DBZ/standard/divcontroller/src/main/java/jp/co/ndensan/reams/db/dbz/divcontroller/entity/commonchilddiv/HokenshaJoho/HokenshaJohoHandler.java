@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.HokenshaJoho;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho;
 
-import jp.co.ndensan.reams.db.dba.business.core.hokensha.Hokensha;
+import jp.co.ndensan.reams.db.dbz.business.core.hokensha.Hokensha;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
