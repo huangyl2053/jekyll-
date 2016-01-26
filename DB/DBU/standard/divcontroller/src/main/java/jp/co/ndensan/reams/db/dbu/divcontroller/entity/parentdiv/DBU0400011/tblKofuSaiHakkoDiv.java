@@ -4,22 +4,19 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0400011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * tblKofuSaiHakko のクラスファイル
- *
+ * tblKofuSaiHakko のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class tblKofuSaiHakkoDiv extends TablePanel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -89,15 +86,13 @@ public class tblKofuSaiHakkoDiv extends TablePanel {
 
     // </editor-fold>
 }
-
 /**
- * celNull2 のクラスファイル
- *
+ * celNull2 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celNull2AttblKofuSaiHakko extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblKofuYMDTitel")
     private Label lblKofuYMDTitel;
 
@@ -121,15 +116,13 @@ class celNull2AttblKofuSaiHakko extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celKofuYMD のクラスファイル
- *
+ * celKofuYMD のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celKofuYMDAttblKofuSaiHakko extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtKofuYMD")
     private TextBoxDate txtKofuYMD;
 

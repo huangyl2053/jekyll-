@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbu.service.core.hihokenshashoikkatsuhakko;
  * and open the template in the editor.
  */
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.hihokenshashoikkatsuhakko.HihokenshashoIkkatsuHakkoModel;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
@@ -54,6 +55,9 @@ public class HihokenshaShoBatchPrmFinder {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         LasdecCode 市町村コード = association.get地方公共団体コード();
         DbT7022ShoriDateKanriEntity entityList = datekanridac.selectBy抽出期間の取得(処理枝番, 市町村コード);
+        if (entityList == null) {
+            return SearchResult.of(Collections.<HihokenshashoIkkatsuHakkoModel>emptyList(), 0, false);
+        }
         HihokenshashoIkkatsuHakkoModel model = new HihokenshashoIkkatsuHakkoModel();
         model.setKijunTimestamp(entityList.getKijunTimestamp());
         model.setTaishoKaishiYMD(entityList.getTaishoKaishiYMD());
@@ -76,6 +80,9 @@ public class HihokenshaShoBatchPrmFinder {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         LasdecCode 市町村コード = association.get地方公共団体コード();
         DbT7022ShoriDateKanriEntity entityList = datekanridac.selectBy再発行(処理枝番, 市町村コード);
+        if (entityList == null) {
+            return SearchResult.of(Collections.<HihokenshashoIkkatsuHakkoModel>emptyList(), 0, false);
+        }
         HihokenshashoIkkatsuHakkoModel model = new HihokenshashoIkkatsuHakkoModel();
         model.setKijunTimestamp(entityList.getKijunTimestamp());
         model.setTaishoKaishiYMD(entityList.getTaishoKaishiYMD());

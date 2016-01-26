@@ -10,8 +10,11 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0400011.Hiho
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0400011.HihokenshaShoBatchPrmHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0400011.ValidationHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashoikkatsuhakko.HihokenshaShoBatchPrmFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -76,30 +79,39 @@ public class HihokenshaShoBatchPrm {
      * @return ResponseData<HihokenshaShoBatchPrmDiv>
      */
     public ResponseData<HihokenshaShoBatchPrmDiv> onClick_btnJikkou(HihokenshaShoBatchPrmDiv div) {
-        ResponseData<HihokenshaShoBatchPrmDiv> response = new ResponseData<>();
-        if ((JYUKYUMONO_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
-            if (div.getTxtKonkaiChushutsuFromYMD().getValue().isBefore(div.getTxtZenkaiShoriKijunYMD().getValue())) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
+            if ((JYUKYUMONO_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
+                if (div.getTxtKonkaiChushutsuFromYMD().getValue().isBefore(div.getTxtZenkaiShoriKijunYMD().getValue())) {
+                    ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+                    validationMessages.add(getHandlerValidation(div).開始日変更のチェック());
+                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+                }
+            }
+            if ((GAITOMONO_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
                 ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-                validationMessages.add(getHandlerValidation(div).開始日変更のチェック());
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+                if (div.getTxtKonkaiChushutsuFromYMD().getValue().isBefore(div.getTxtZenkaiShoriKijunYMD().getValue())) {
+                    validationMessages.add(getHandlerValidation(div).開始日変更のチェック());
+                }
+                if (div.getTxtKonkaiShoriKijunYMD().getValue().isBefore(div.getTxtKonkaiChushutsuToYMD().getValue())) {
+                    validationMessages.add(getHandlerValidation(div).終了日変更のチェック());
+                }
+                if (validationMessages.iterator().hasNext()) {
+                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+                }
+            }
+            if ((JNENNREI_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
+                if (div.getTxtKonkaiChushutsuFromYMD().getValue().isBefore(div.getTxtKonkaiChushutsuToYMD().getValue())) {
+                    ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+                    validationMessages.add(getHandlerValidation(div).開始日と終了日の比較チェック());
+                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+                }
             }
         }
-        if ((GAITOMONO_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
-            if (div.getTxtKonkaiShoriKijunYMD().getValue().isBefore(div.getTxtKonkaiChushutsuToYMD().getValue())) {
-                ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-                validationMessages.add(getHandlerValidation(div).終了日変更のチェック());
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-        }
-        if ((JNENNREI_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
-            if (div.getTxtKonkaiChushutsuFromYMD().getValue().isBefore(div.getTxtKonkaiChushutsuToYMD().getValue())) {
-                ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-                validationMessages.add(getHandlerValidation(div).開始日と終了日の比較チェック());
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-        }
-        response.data = div;
-        return response;
+        return ResponseData.of(div).respond();
     }
 
     private HihokenshaShoBatchPrmHandler getHandler(HihokenshaShoBatchPrmDiv div) {

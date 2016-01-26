@@ -37,64 +37,76 @@ public class HihokenshaShoBatchPrmHandler {
      * @param resultList HihokenshashoIkkatsuHakkoModel
      */
     public void onLoad(List<HihokenshashoIkkatsuHakkoModel> resultList) {
-        jyukumino(resultList);
-        gaitomono(resultList);
-        jnennrei(resultList);
+        HihokenshashoIkkatsuHakkoModel hakkoModel;
+        if (!resultList.isEmpty()) {
+            hakkoModel = resultList.get(0);
+        } else {
+            hakkoModel = new HihokenshashoIkkatsuHakkoModel();
+        }
+        jyukumino(hakkoModel);
+        gaitomono(hakkoModel);
+        jnennrei(hakkoModel);
     }
 
-    private void sentaku(List<HihokenshashoIkkatsuHakkoModel> resultList) {
-        div.getTxtZenkaiChushutsuFromYMD().setValue(new RDate(resultList.get(0).getTaishoKaishiTimestamp().getDate().wareki().toString()));
-        div.getTxtZenkaiChushutsuFromTime().setValue(resultList.get(0).getTaishoKaishiTimestamp().getRDateTime().getTime());
-        div.getTxtZenkaiChushutsuToYMD().setValue(new RDate(resultList.get(0).getTaishoShuryoTimestamp().getDate().wareki().toString()));
-        div.getTxtZenkaiChushutsuToTime().setValue(resultList.get(0).getTaishoShuryoTimestamp().getRDateTime().getTime());
-        div.getTxtZenkaiShoriKijunYMD().setValue(new RDate(resultList.get(0).getKijunTimestamp().getDate().wareki().toString()));
-        div.getTxtZenkaiShoriKijunTime().setValue(resultList.get(0).getKijunTimestamp().getRDateTime().getTime());
-        div.getTxtKonkaiChushutsuFromYMD().setValue(resultList.get(0).getKijunTimestamp().getDate());
-        div.getTxtKonkaiChushutsuFromTime().setValue(resultList.get(0).getKijunTimestamp().getRDateTime().getTime());
+    private void sentaku(HihokenshashoIkkatsuHakkoModel hakkoModel) {
+        if (hakkoModel.getTaishoKaishiTimestamp() != null) {
+            div.getTxtZenkaiChushutsuFromYMD().setValue(hakkoModel.getTaishoKaishiTimestamp().getDate());
+            div.getTxtZenkaiChushutsuFromTime().setValue(hakkoModel.getTaishoKaishiTimestamp().getRDateTime().getTime());
+        }
+        if (hakkoModel.getTaishoShuryoTimestamp() != null) {
+            div.getTxtZenkaiChushutsuToYMD().setValue(hakkoModel.getTaishoShuryoTimestamp().getDate());
+            div.getTxtZenkaiChushutsuToTime().setValue(hakkoModel.getTaishoShuryoTimestamp().getRDateTime().getTime());
+        }
+        if (hakkoModel.getKijunTimestamp() != null) {
+            div.getTxtZenkaiShoriKijunYMD().setValue(hakkoModel.getKijunTimestamp().getDate());
+            div.getTxtZenkaiShoriKijunTime().setValue(hakkoModel.getKijunTimestamp().getRDateTime().getTime());
+            div.getTxtKonkaiChushutsuFromYMD().setValue(hakkoModel.getKijunTimestamp().getDate());
+            div.getTxtKonkaiChushutsuFromTime().setValue(hakkoModel.getKijunTimestamp().getRDateTime().getTime());
+        }
     }
 
-    private void jyukumino(List<HihokenshashoIkkatsuHakkoModel> resultList) {
+    private void jyukumino(HihokenshashoIkkatsuHakkoModel hakkoModel) {
         if ((JYUKYUMONO_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
             div.getRadShutsuryokuJoken().setSelectedKey(JYUKYUMONO_RADIO_SENTAKU);
-            sentaku(resultList);
-            div.getTxtKonkaiChushutsuToYMD().setValue(new RDate(RDate.getNowDate().wareki().toString()));
+            sentaku(hakkoModel);
+            div.getTxtKonkaiChushutsuToYMD().setValue(RDate.getNowDate());
             div.getTxtKonkaiChushutsuToYMD().setDisabled(true);
             div.getTxtKonkaiChushutsuToTime().setValue(RDate.getNowTime());
             div.getTxtKonkaiChushutsuToTime().setDisabled(true);
-            div.getTxtKonkaiShoriKijunYMD().setValue(new RDate(RDate.getNowDate().toString()));
+            div.getTxtKonkaiShoriKijunYMD().setValue(RDate.getNowDate());
             div.getTxtKonkaiShoriKijunYMD().setDisabled(true);
             div.getTxtKonkaiShoriKijunTime().setValue(RDate.getNowTime());
             div.getTxtKonkaiShoriKijunTime().setDisabled(true);
         }
     }
 
-    private void gaitomono(List<HihokenshashoIkkatsuHakkoModel> resultList) {
+    private void gaitomono(HihokenshashoIkkatsuHakkoModel hakkoModel) {
         if ((GAITOMONO_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
             div.getRadShutsuryokuJoken().setSelectedKey(GAITOMONO_RADIO_SENTAKU);
-            sentaku(resultList);
-            div.getTxtKonkaiChushutsuToYMD().setValue(new RDate(RDate.getNowDate().toString()));
+            sentaku(hakkoModel);
+            div.getTxtKonkaiChushutsuToYMD().setValue(RDate.getNowDate());
             div.getTxtKonkaiChushutsuToTime().setValue(RDate.getNowTime());
-            div.getTxtKonkaiShoriKijunYMD().setValue(new RDate(RDate.getNowDate().wareki().toString()));
+            div.getTxtKonkaiShoriKijunYMD().setValue(RDate.getNowDate());
             div.getTxtKonkaiShoriKijunYMD().setDisabled(true);
             div.getTxtKonkaiShoriKijunTime().setValue(RDate.getNowTime());
             div.getTxtKonkaiShoriKijunTime().setDisabled(true);
         }
     }
 
-    private void jnennrei(List<HihokenshashoIkkatsuHakkoModel> resultList) {
+    private void jnennrei(HihokenshashoIkkatsuHakkoModel hakkoModel) {
         if ((JNENNREI_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
             div.getRadShutsuryokuJoken().setSelectedKey(JNENNREI_RADIO_SENTAKU);
-            sentaku(resultList);
+            sentaku(hakkoModel);
             if (div.getTxtZenkaiChushutsuToYMD().getValue().isBeforeOrEquals(div.getTxtKonkaiShoriKijunYMD().getValue())) {
-                div.getTxtKonkaiChushutsuToYMD().setValue(new RDate(RDate.getNowDate().wareki().toString()));
+                div.getTxtKonkaiChushutsuToYMD().setValue(RDate.getNowDate());
                 div.getTxtKonkaiChushutsuToTime().setValue(RDate.getNowTime());
             }
             //TODO QA345張紅麗　まで12/29　今回の終了日と今回の時分秒（未満）の処理確認
             if (div.getTxtKonkaiShoriKijunYMD().getValue().isBefore(div.getTxtZenkaiChushutsuToYMD().getValue())) {
-                div.getTxtKonkaiChushutsuToYMD().setValue(new RDate(resultList.get(0).getTaishoShuryoTimestamp().getDate().wareki().toString()));
-                div.getTxtKonkaiChushutsuToTime().setValue(resultList.get(0).getTaishoShuryoTimestamp().getRDateTime().getTime());
+                div.getTxtKonkaiChushutsuToYMD().setValue(hakkoModel.getTaishoShuryoTimestamp().getDate());
+                div.getTxtKonkaiChushutsuToTime().setValue(hakkoModel.getTaishoShuryoTimestamp().getRDateTime().getTime());
             }
-            div.getTxtKonkaiShoriKijunYMD().setValue(new RDate(RDate.getNowDate().wareki().toString()));
+            div.getTxtKonkaiShoriKijunYMD().setValue(RDate.getNowDate());
             div.getTxtKonkaiShoriKijunYMD().setDisabled(true);
             div.getTxtKonkaiShoriKijunTime().setValue(RDate.getNowTime());
             div.getTxtKonkaiShoriKijunTime().setDisabled(true);
@@ -107,27 +119,38 @@ public class HihokenshaShoBatchPrmHandler {
      * @param resultList HihokenshashoIkkatsuHakkoModel
      */
     public void saihakkoSelect(List<HihokenshashoIkkatsuHakkoModel> resultList) {
+        HihokenshashoIkkatsuHakkoModel hakkoModel = resultList.get(0);
         div.getRadShutsuryokuJoken().setDisabled(true);
-        div.getTxtZenkaiChushutsuFromYMD().setValue(new RDate(resultList.get(0).getTaishoKaishiTimestamp().getDate().wareki().toString()));
+        if (hakkoModel.getTaishoKaishiTimestamp() != null) {
+            div.getTxtZenkaiChushutsuFromYMD().setValue(hakkoModel.getTaishoKaishiTimestamp().getDate());
+            div.getTxtZenkaiChushutsuFromTime().setValue(hakkoModel.getTaishoKaishiTimestamp().getRDateTime().getTime());
+        }
         div.getTxtZenkaiChushutsuFromYMD().setDisabled(true);
-        div.getTxtZenkaiChushutsuFromTime().setValue(resultList.get(0).getTaishoKaishiTimestamp().getRDateTime().getTime());
         div.getTxtZenkaiChushutsuFromTime().setDisabled(true);
-        div.getTxtZenkaiChushutsuToYMD().setValue(new RDate(resultList.get(0).getTaishoShuryoTimestamp().getDate().toString()));
-        div.getTxtZenkaiChushutsuToTime().setValue(resultList.get(0).getTaishoShuryoTimestamp().getRDateTime().getTime());
+        if (hakkoModel.getTaishoShuryoTimestamp() != null) {
+            div.getTxtZenkaiChushutsuToYMD().setValue(hakkoModel.getTaishoShuryoTimestamp().getDate());
+            div.getTxtZenkaiChushutsuToTime().setValue(hakkoModel.getTaishoShuryoTimestamp().getRDateTime().getTime());
+        }
         div.getTxtZenkaiShoriKijunYMD().setDisabled(true);
-        div.getTxtZenkaiShoriKijunTime().setValue(resultList.get(0).getKijunTimestamp().getRDateTime().getTime());
+        if (hakkoModel.getKijunTimestamp() != null) {
+            div.getTxtZenkaiShoriKijunTime().setValue(hakkoModel.getKijunTimestamp().getRDateTime().getTime());
+        }
         div.getTxtZenkaiShoriKijunTime().setDisabled(true);
-        div.getTxtKonkaiChushutsuFromYMD().setValue(new RDate(resultList.get(0).getTaishoKaishiTimestamp().getDate().wareki().toString()));
+        if (hakkoModel.getTaishoKaishiTimestamp() != null) {
+            div.getTxtKonkaiChushutsuFromYMD().setValue(hakkoModel.getTaishoKaishiTimestamp().getDate());
+            div.getTxtKonkaiChushutsuFromTime().setValue(hakkoModel.getTaishoKaishiTimestamp().getRDateTime().getTime());
+        }
         div.getTxtKonkaiChushutsuFromYMD().setDisabled(true);
-        div.getTxtKonkaiChushutsuFromTime().setValue(resultList.get(0).getTaishoKaishiTimestamp().getRDateTime().getTime());
         div.getTxtKonkaiChushutsuFromTime().setDisabled(true);
-        div.getTxtKonkaiChushutsuToYMD().setValue(new RDate(resultList.get(0).getTaishoShuryoTimestamp().getDate().toString()));
+        if (hakkoModel.getTaishoShuryoTimestamp() != null) {
+            div.getTxtKonkaiChushutsuToYMD().setValue(hakkoModel.getTaishoShuryoTimestamp().getDate());
+            div.getTxtKonkaiChushutsuToTime().setValue(hakkoModel.getTaishoShuryoTimestamp().getRDateTime().getTime());
+            div.getTxtKonkaiShoriKijunYMD().setValue(hakkoModel.getKijunTimestamp().getDate());
+            div.getTxtKonkaiShoriKijunTime().setValue(hakkoModel.getKijunTimestamp().getRDateTime().getTime());
+        }
         div.getTxtKonkaiChushutsuToYMD().setDisabled(true);
-        div.getTxtKonkaiChushutsuToTime().setValue(resultList.get(0).getTaishoShuryoTimestamp().getRDateTime().getTime());
         div.getTxtKonkaiChushutsuToTime().setDisabled(true);
-        div.getTxtKonkaiShoriKijunYMD().setValue(new RDate(resultList.get(0).getKijunTimestamp().getDate().toString()));
         div.getTxtKonkaiShoriKijunYMD().setDisabled(true);
-        div.getTxtKonkaiShoriKijunTime().setValue(resultList.get(0).getKijunTimestamp().getRDateTime().getTime());
         div.getTxtKonkaiShoriKijunTime().setDisabled(true);
     }
 }
