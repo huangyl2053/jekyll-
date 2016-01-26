@@ -2,13 +2,13 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJ
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.shisetujyoho.KaigoJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.shisetujyoho.KaigoJogaiTokureiTaishoShisetsuInputGuide;
-import jp.co.ndensan.reams.db.dbz.service.core.shisetsu.ShisetsuJohoInputGuideFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.service.core.shisetsu.ShisetsuJohoInputGuideFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -226,5 +226,23 @@ public class ShisetsuJohoHandler {
             dataSourceList.add(dataSource);
         }
         return dataSourceList;
+    }
+
+    /**
+     * 入所施設コードを取得する。
+     *
+     * @return 入所施設コード
+     */
+    public RString getNyuryokuShisetsuKodo() {
+        return div.getTxtNyuryokuShisetsuKodo().getValue();
+    }
+
+    /**
+     * 入所施設名称を取得する。
+     *
+     * @return 入所施設名称
+     */
+    public RString getNyuryokuShisetsuMeisho() {
+        return div.getTxtNyuryokuShisetsuMeisho().getValue();
     }
 }
