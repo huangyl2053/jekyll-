@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.shinseirirekij
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinseirirekijoho.ShinseiRirekiJoho;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -48,5 +50,19 @@ public class ShinseiRirekiJohoManager {
             return false;
         }
         return 1 == dac.save(申請履歴情報.toEntity());
+    }
+    
+    /**
+     * 申請履歴情報を取得します。
+     * 
+     * @param 申請管理番号 申請管理番号
+     * @return 申請履歴情報
+     */
+    public ShinseiRirekiJoho get申請履歴情報ByKey(ShinseishoKanriNo 申請管理番号) {
+        DbT5121ShinseiRirekiJohoEntity entity = dac.selectByKey(申請管理番号);
+        if (entity == null) {
+            return null;
+        }
+        return new ShinseiRirekiJoho(entity);
     }
 }

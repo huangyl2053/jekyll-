@@ -12,9 +12,11 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosairaijo
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahyo.ninteichosairaijoho.NinteichosaIraiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyo.ninteichosairaijoho.NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5201NinteichosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosahyo.ninteichosairaijoho.INinteichosaIraiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyogaikyochosa.NinteichosahyoGaikyoChosaManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5201NinteichosaIraiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -57,8 +59,7 @@ public class NinteichosaIraiJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NinteichosaIraiJohoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link NinteichosaIraiJohoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link NinteichosaIraiJohoManager}のインスタンス
      */
     public static NinteichosaIraiJohoManager createInstance() {
         return InstanceProvider.create(NinteichosaIraiJohoManager.class);
@@ -68,8 +69,7 @@ public class NinteichosaIraiJohoManager {
      * 主キーに合致する認定調査依頼情報を返します。
      *
      * @param 認定調査依頼情報検索条件 認定調査依頼情報検索条件
-     * @return NinteichosaIraiJoho 【　※ツールの都合上、このカッコ部は手動で削除して下さい 認定調査依頼情報】
-     * nullが返る可能性があります。
+     * @return NinteichosaIraiJoho 【　※ツールの都合上、このカッコ部は手動で削除して下さい 認定調査依頼情報】 nullが返る可能性があります。
      */
     @Transaction
     public NinteichosaIraiJoho get認定調査依頼情報(NinteichosaIraiJohoMapperParameter 認定調査依頼情報検索条件) {
@@ -123,6 +123,25 @@ public class NinteichosaIraiJohoManager {
         認定調査依頼情報 = 認定調査依頼情報.modifiedModel();
         save認定調査票_概況調査リスト(認定調査依頼情報.getNinteichosahyoGaikyoChosaList());
         return 1 == 認定調査依頼情報Dac.save(認定調査依頼情報.toEntity());
+    }
+
+    /**
+     * 申請書管理番号で認定調査依頼情報リストを取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return 認定調査依頼情報リスト
+     */
+    public List<NinteichosaIraiJoho> get認定調査依頼情報リストBy申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
+        List<DbT5201NinteichosaIraiJohoEntity> entityList = 認定調査依頼情報Dac.selectBy申請書管理番号(申請書管理番号);
+
+        ArrayList<NinteichosaIraiJoho> 認定調査依頼情報List = new ArrayList<>();
+        for (DbT5201NinteichosaIraiJohoEntity relateEntity : entityList) {
+            NinteichosaIraiJohoEntity ninteichosaIraiJohoEntity = new NinteichosaIraiJohoEntity();
+            ninteichosaIraiJohoEntity.set認定調査依頼情報Entity(relateEntity);
+            ninteichosaIraiJohoEntity.initializeMd5ToEntities();
+            認定調査依頼情報List.add(new NinteichosaIraiJoho(ninteichosaIraiJohoEntity));
+        }
+        return 認定調査依頼情報List;
     }
 
     private void save認定調査票_概況調査リスト(List<NinteichosahyoGaikyoChosa> 認定調査票_概況調査List) {
