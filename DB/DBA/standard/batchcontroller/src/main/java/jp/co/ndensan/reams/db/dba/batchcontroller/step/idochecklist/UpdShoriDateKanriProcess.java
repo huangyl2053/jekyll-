@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -28,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class UpdShoriDateKanriProcess extends BatchProcessBase<RString> {
 
     private UpdShoriDataKanriProcessParameter param;
+    private OutputParameter<Integer> count;
     private IIdoCheckListMapper mapper;
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.idochecklist.IIdoCheckListMapper."
@@ -43,6 +45,7 @@ public class UpdShoriDateKanriProcess extends BatchProcessBase<RString> {
     @Override
     protected void initialize() {
         mapper = getMapper(IIdoCheckListMapper.class);
+        count = new OutputParameter<>();
     }
 
     @Override
@@ -74,7 +77,9 @@ public class UpdShoriDateKanriProcess extends BatchProcessBase<RString> {
                     param.getKonkaiShuryo().getYear(),
                     param.getKonkaiShuryo().getMonthOfYear(),
                     param.getKonkaiShuryo().getDayOfMonth()));
+            entity.setIsDeleted(false);
             dbT7022EntityWriter.insert(entity);
+            count.setValue(1);
         }
         if (param.getZenkaiKaishi() != null && param.getZenkaiShuryo() != null) {
             DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
@@ -88,7 +93,8 @@ public class UpdShoriDateKanriProcess extends BatchProcessBase<RString> {
                     param.getKonkaiShuryo().getYear(),
                     param.getKonkaiShuryo().getMonthOfYear(),
                     param.getKonkaiShuryo().getDayOfMonth()));
-            mapper.updDbt7022ShoriDateKanri(entity);
+            entity.setIsDeleted(false);
+            count.setValue(mapper.updDbt7022ShoriDateKanri(entity));
         }
 
     }

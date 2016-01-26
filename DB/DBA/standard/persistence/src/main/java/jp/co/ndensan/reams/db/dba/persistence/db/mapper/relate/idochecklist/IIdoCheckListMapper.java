@@ -94,10 +94,10 @@ public interface IIdoCheckListMapper {
     /**
      * 扶助種類コードリストを取得します
      *
-     * @param psmShikibetsuTaisho パラメータ
+     * @param param パラメータ
      * @return List<RString>
      */
-    UaFt200FindShikibetsuTaishoEntity getShikibetsuTaishoPsm(RString psmShikibetsuTaisho);
+    UaFt200FindShikibetsuTaishoEntity getShikibetsuTaishoPsm(IdoCheckListGetDataParameter param);
 
     /**
      * 処理日付管理マスタ更新処理
