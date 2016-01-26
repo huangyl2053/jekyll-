@@ -69,6 +69,7 @@ public class NinteiChosaIrai {
     private static final RString 提出期限_0 = new RString("0");
     private static final RString 提出期限_1 = new RString("1");
     private static final RString 提出期限_2 = new RString("2");
+    private static final RString CHKIRAI_NAME = new RString("認定調査依頼書");
 
     /**
      * 画面初期化処理です。
@@ -237,6 +238,7 @@ public class NinteiChosaIrai {
         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
             if (!RString.isNullOrEmpty(row.getNinteichosaKanryoYMD())) {
                 isSonzai = true;
+                break;
             }
         }
 
@@ -436,7 +438,7 @@ public class NinteiChosaIrai {
         // TODO  内部QA：523 Redmine：#74276(「前排他制御を行う」の排他はしらない)
         updateNinteichosaIraiJohoForPrint(div);
         List<ChosaIraishoHeadItem> chosaIraishoHeadItemList = getHandler(div).create認定調査依頼書印刷用パラメータ();
-        if (div.getChkirai().getSelectedValues().contains(new RString("認定調査依頼書"))) {
+        if (div.getChkirai().getSelectedValues().contains(CHKIRAI_NAME)) {
             return ResponseData.of(new ChosaIraishoPrintService().print(chosaIraishoHeadItemList))
                     .addMessage(UrInformationMessages.正常終了.getMessage().replace("発行処理は")).respond();
         }
@@ -466,7 +468,7 @@ public class NinteiChosaIrai {
             RString 提出期限 = div.getRadkigen().getSelectedKey();
             FlexibleDate 発行日 = new FlexibleDate(div.getTxthokkoymd().getValue().toDateString());
             FlexibleDate 共通日付 = new FlexibleDate(div.getTxtkigenymd().getValue().toDateString());
-            if (div.getChkirai().getSelectedValues().contains(new RString("認定調査依頼書"))) {
+            if (div.getChkirai().getSelectedValues().contains(CHKIRAI_NAME)) {
                 FlexibleDate 認定調査期限年月日 = ninteichosaIraiJoho.get認定調査依頼年月日();
                 RString 認定調査期限設定方法 = BusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, SubGyomuCode.DBE認定支援);
                 RString 認定調査作成期限日数 = BusinessConfig.get(ConfigNameDBE.認定調査作成期限日数, SubGyomuCode.DBE認定支援);
