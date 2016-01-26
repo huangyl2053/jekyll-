@@ -730,7 +730,7 @@ and open the template in the editor.
             WHERE
                 "logicalDeletedFlag"<![CDATA[<>]]> true
             AND "shikakuShutokuYMD" IS NOT NULL
-            AND "shikakuSoshitsuYMD" IS NULL
+            AND "shikakuSoshitsuYMD" IS NOT NULL
             AND "hihokennshaKubunCode" = '2')DbT1001
         WHERE
         rank_number = 1
@@ -864,7 +864,7 @@ and open the template in the editor.
         FROM(
         SELECT
         "hihokenshaNo",
-        substring("hakkoShoriTimestamp",6,2) AS hakkoShoriDay
+        substring("hakkoShoriTimestamp",7,2) AS hakkoShoriDay
         FROM
         rgdb."DbT7037ShoKofuKaishu"
         WHERE
@@ -872,7 +872,7 @@ and open the template in the editor.
         AND "kofuShoShurui" = '001')DbT7037
         WHERE
         DbT7037.hakkoShoriDay = (SELECT 
-        substring(DbT7022."kijunYMD",6,2)
+        substring(DbT7022."kijunYMD",7,2)
         FROM
         rgdb."DbT7022ShoriDateKanri" AS DbT7022
         WHERE
@@ -2440,4 +2440,14 @@ and open the template in the editor.
         DROP TABLE
         "TmpHihokenshasho_Ichi"
     </update>
+    
+     <!-- 一時テーブル情報を取得します -->
+    <select id="getTmpHihokenshasho_Ichi" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            "TmpHihokenshasho_Ichi"
+        WHERE
+            "shisetyuJotaiFlag" = FALSE
+    </select>
 </mapper>

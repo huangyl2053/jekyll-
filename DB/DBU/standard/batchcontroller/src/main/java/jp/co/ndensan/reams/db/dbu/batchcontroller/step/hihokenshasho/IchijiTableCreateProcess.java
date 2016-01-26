@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho;
 
 import static java.lang.Boolean.FALSE;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hihokenshasho.IkkatsuHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity;
@@ -52,7 +54,7 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
         List<IkkatsuHakkoRelateEntity> データ抽出list = データ抽出();
         if (データ抽出list.isEmpty()) {
             List<IkkatsuHakkoRelateEntity> 被保険者証一覧List = iIkkatsuHakkoMapper.getHihokenshaIchiran();
-            //TODO 段站立　QA273 被保険者証一覧表編集クラスの確認
+            //TODO 内部：QA273　Redmine：#72186 被保険者証一覧表編集クラスが未実装
         } else {
             for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : データ抽出list) {
                 ikkatsuHakkoRelateEntity.setShisetyuJotaiFlag(FALSE);
@@ -85,9 +87,9 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
     }
 
     private List<IkkatsuHakkoRelateEntity> get年齢到達予定者() {
+        List<IkkatsuHakkoRelateEntity> nenreiTotatsuYoteshalist = new ArrayList<>();
         if (processPrm.getKonkaiKijunYMD().isBefore(processPrm.getKonkaiToYMD())) {
             List<RString> list = new ArrayList<>();
-            List<IkkatsuHakkoRelateEntity> nenreiTotatsuYoteshalist = new ArrayList<>();
             ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(ShikibetsuTaishoGyomuHanteiKeyFactory.
                     createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先), true);
             List<JuminShubetsu> juminShubetsuList = new ArrayList<>();
@@ -113,52 +115,54 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
                     new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
                     mybatisPrm.getPsmAtesaki(),
                     mybatisPrm.getNenreiTotatsuYMD());
-            List<IkkatsuHakkoRelateEntity> 年齢到達予定者list = iIkkatsuHakkoMapper.getNenreiTotatsuYotesha(mybatisParam);
-            for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 年齢到達予定者list) {
+            List<IkkatsuHakkoRelateEntity> 年齢到達予定者List = iIkkatsuHakkoMapper.getNenreiTotatsuYotesha(mybatisParam);
+            for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 年齢到達予定者List) {
                 list.add(ikkatsuHakkoRelateEntity.getHihokenshaNo().value());
             }
-            for (IkkatsuHakkoRelateEntity nenreiTotatsuYotesha : 年齢到達予定者list) {
+            for (IkkatsuHakkoRelateEntity nenreiTotatsuYotesha : 年齢到達予定者List) {
                 HihokenshaNo hihokenshaNo = HihokenshanotsukibanFinder.createInstance().
                         getHihokenshanotsukiban(nenreiTotatsuYotesha.getShikibetsuCode());
                 if (list.contains(hihokenshaNo.value())) {
                     nenreiTotatsuYoteshalist.add(nenreiTotatsuYotesha);
                 }
             }
-            return nenreiTotatsuYoteshalist;
         }
-        return null;
+        return nenreiTotatsuYoteshalist;
     }
 
     private List<IkkatsuHakkoRelateEntity> get該当者全員() {
         List<RString> list = new ArrayList<>();
-        List<IkkatsuHakkoRelateEntity> 受給者台帳異動list = get受給者のみ();
-        List<IkkatsuHakkoRelateEntity> 年齢到達予定者list = get年齢到達予定者();
-        List<IkkatsuHakkoRelateEntity> hihokenshaDaichoIdolist = new ArrayList<>();
-        List<IkkatsuHakkoRelateEntity> 被保険者異動list = iIkkatsuHakkoMapper.getHihokenshaDaichoIdo(mybatisPrm);
-        for (IkkatsuHakkoRelateEntity hihokenshaDaicho : 被保険者異動list) {
-            list.add(hihokenshaDaicho.getHihokenshaNo().value());
+        List<IkkatsuHakkoRelateEntity> 受給者台帳異動List = get受給者のみ();
+        List<IkkatsuHakkoRelateEntity> 年齢到達予定者List = get年齢到達予定者();
+        List<IkkatsuHakkoRelateEntity> 被保険者異動List = iIkkatsuHakkoMapper.getHihokenshaDaichoIdo(mybatisPrm);
+        List<IkkatsuHakkoRelateEntity> 該当者全員List = new ArrayList<>();
+        該当者全員List.addAll(年齢到達予定者List);
+        for (IkkatsuHakkoRelateEntity 年齢到達予定者Entity : 年齢到達予定者List) {
+            list.add(年齢到達予定者Entity.getHihokenshaNo().value());
         }
-        for (IkkatsuHakkoRelateEntity nenreiTotatsuYotesha : 年齢到達予定者list) {
-            if (list.contains(nenreiTotatsuYotesha.getHihokenshaNo().value())) {
-                hihokenshaDaichoIdolist.add(nenreiTotatsuYotesha);
+        Map<RString, IkkatsuHakkoRelateEntity> 受給者台帳異動Map = new HashMap();
+        for (IkkatsuHakkoRelateEntity 受給者台帳異動Entity : 受給者台帳異動List) {
+            受給者台帳異動Map.put(受給者台帳異動Entity.getHihokenshaNo().value(), 受給者台帳異動Entity);
+        }
+        for (IkkatsuHakkoRelateEntity 被保険者異動Entiy : 被保険者異動List) {
+            if (!list.contains(被保険者異動Entiy.getHihokenshaNo().value())) {
+                get最新データ(受給者台帳異動Map, 被保険者異動Entiy);
             }
+            該当者全員List.addAll(受給者台帳異動Map.values());
         }
-        if (hihokenshaDaichoIdolist.isEmpty()) {
-            for (IkkatsuHakkoRelateEntity jukyoshaDaichoIdo : 受給者台帳異動list) {
-                for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 被保険者異動list) {
-                    if (jukyoshaDaichoIdo.getHihokenshaNo() == ikkatsuHakkoRelateEntity.getHihokenshaNo()
-                            && jukyoshaDaichoIdo.getInsertTimestamp().isBefore(ikkatsuHakkoRelateEntity.getInsertTimestamp())) {
-                        hihokenshaDaichoIdolist.add(ikkatsuHakkoRelateEntity);
-                    } else if (jukyoshaDaichoIdo.getHihokenshaNo() == ikkatsuHakkoRelateEntity.getHihokenshaNo()
-                            && jukyoshaDaichoIdo.getInsertTimestamp().isAfter(ikkatsuHakkoRelateEntity.getInsertTimestamp())) {
-                        hihokenshaDaichoIdolist.add(jukyoshaDaichoIdo);
-                    } else if (jukyoshaDaichoIdo.getHihokenshaNo() == ikkatsuHakkoRelateEntity.getHihokenshaNo()
-                            && jukyoshaDaichoIdo.getInsertTimestamp().isEqual(ikkatsuHakkoRelateEntity.getInsertTimestamp())) {
-                        hihokenshaDaichoIdolist.add(jukyoshaDaichoIdo);
-                    }
-                }
+        return 該当者全員List;
+    }
+
+    private void get最新データ(Map<RString, IkkatsuHakkoRelateEntity> 受給者台帳異動Map, IkkatsuHakkoRelateEntity 被保険者異動Entiy) {
+        RString hihokenshaNo = 被保険者異動Entiy.getHihokenshaNo().value();
+        if (受給者台帳異動Map.containsKey(hihokenshaNo)) {
+            IkkatsuHakkoRelateEntity entity = 受給者台帳異動Map.get(hihokenshaNo);
+            if (entity.getInsertTimestamp().isBefore(被保険者異動Entiy.getInsertTimestamp())) {
+                entity = 被保険者異動Entiy;
             }
+        } else {
+            受給者台帳異動Map.put(被保険者異動Entiy.getHihokenshaNo().value(), 被保険者異動Entiy);
         }
-        return hihokenshaDaichoIdolist;
+
     }
 }

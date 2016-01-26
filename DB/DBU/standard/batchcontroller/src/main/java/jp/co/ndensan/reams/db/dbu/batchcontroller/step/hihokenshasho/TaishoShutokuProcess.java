@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hihokenshasho.IkkatsuHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity;
@@ -42,64 +44,66 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void process() {
-        対象者チェック();
-        List<IkkatsuHakkoRelateEntity> 対象情報List = 再発行チェック();
-        if (!対象情報List.isEmpty()) {
-            for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 対象情報List) {
-                iIkkatsuHakkoMapper.deleteTmpHihoken(createPrm被保険者番号(ikkatsuHakkoRelateEntity));
+        if (iIkkatsuHakkoMapper.getTmpHihokenshasho_Ichi() > 0) {
+            対象者チェック();
+            再発行チェック();
+            for (IkkatsuHakkoRelateEntity 対象Entity : 対象List) {
+                iIkkatsuHakkoMapper.deleteTmpHihoken(createPrm被保険者番号(対象Entity));
             }
         }
     }
 
-    private List<IkkatsuHakkoRelateEntity> 再発行チェック() {
-        List<IkkatsuHakkoRelateEntity> 対象情報List = new ArrayList<>();
+    private void 再発行チェック() {
         if (対象List != null) {
             switch (processPrm.getSaihakkoFlag().toString()) {
                 case "0":
-                    対象情報List = 再発行チェックしない();
+                    再発行チェックしない();
                     break;
                 case "1":
-                    対象情報List = 再発行チェックする();
+                    再発行チェックする();
                     break;
                 default:
                     break;
             }
         }
-
-        return 対象情報List;
     }
 
-    private List<IkkatsuHakkoRelateEntity> 再発行チェックしない() {
-        List<IkkatsuHakkoRelateEntity> 対象情報List = new ArrayList<>();
+    private void 再発行チェックしない() {
         List<IkkatsuHakkoRelateEntity> 一括発行List = new ArrayList<>();
-        List<IkkatsuHakkoRelateEntity> 生年月日の値がない対象List = iIkkatsuHakkoMapper.getTaishoJoho1();
+        Map<RString, IkkatsuHakkoRelateEntity> 一括発行Map = new HashMap();
         for (IkkatsuHakkoRelateEntity entity : 対象List) {
             一括発行List.addAll(iIkkatsuHakkoMapper.getIkkatsuShoriDateKanri(createPrm被保険者番号(entity)));
         }
-        for (IkkatsuHakkoRelateEntity entity : 生年月日の値がない対象List) {
-            for (IkkatsuHakkoRelateEntity 一括発行Entity1 : 一括発行List) {
-                if (entity.getHihokenshaNo().equals(一括発行Entity1.getHihokenshaNo())
-                        && entity.getLastUpdateTimestamp().isAfter(一括発行Entity1.getHakkoShoriTimestamp().getRDateTime())) {
-                    対象情報List.add(一括発行Entity1);
-                }
+        for (IkkatsuHakkoRelateEntity 一括発行Entity : 一括発行List) {
+            一括発行Map.put(一括発行Entity.getHihokenshaNo().value(), 一括発行Entity);
+        }
+        for (IkkatsuHakkoRelateEntity 対象Entity : 対象List) {
+            RString hihokenshaNo = 対象Entity.getHihokenshaNo().value();
+            if (対象Entity.getSeinengappiYMD() == null && 一括発行Map.containsKey(hihokenshaNo)
+                    && 対象Entity.getLastUpdateTimestamp().isAfter(一括発行Map.get(hihokenshaNo).getLastUpdateTimestamp())) {
+                対象List.remove(対象Entity);
             }
         }
-        return 対象情報List;
     }
 
-    private List<IkkatsuHakkoRelateEntity> 再発行チェックする() {
-        List<IkkatsuHakkoRelateEntity> 再発行チェックする情報List = new ArrayList<>();
+    private void 再発行チェックする() {
+        List<IkkatsuHakkoRelateEntity> 再発行チェックList = new ArrayList<>();
+        Map<RString, IkkatsuHakkoRelateEntity> 再発行チェックMap = new HashMap();
         for (IkkatsuHakkoRelateEntity entity : 対象List) {
-            再発行チェックする情報List.addAll(iIkkatsuHakkoMapper.getCheckShoriDateKanri(createPrm被保険者番号(entity)));
+            再発行チェックList.addAll(iIkkatsuHakkoMapper.getCheckShoriDateKanri(createPrm被保険者番号(entity)));
         }
-        return 再発行チェックする情報List;
+        for (IkkatsuHakkoRelateEntity 再発行チェックEntity : 再発行チェックList) {
+            再発行チェックMap.put(再発行チェックEntity.getHihokenshaNo().value(), 再発行チェックEntity);
+        }
+        for (IkkatsuHakkoRelateEntity 対象Entity : 対象List) {
+            if (!再発行チェックMap.containsKey(対象Entity.getHihokenshaNo().value())) {
+                対象List.remove(対象Entity);
+            }
+        }
     }
 
     private void 対象者チェック() {
-        List<IkkatsuHakkoRelateEntity> 生年月日の値がない対象List = iIkkatsuHakkoMapper.getTaishoJoho1();
-        if (!生年月日の値がない対象List.isEmpty()) {
-            対象List.addAll(iIkkatsuHakkoMapper.getTaishoJoho1());
-        }
+        対象List.addAll(iIkkatsuHakkoMapper.getTaishoJoho1());
         List<IkkatsuHakkoRelateEntity> 生年月日あるデータList = iIkkatsuHakkoMapper.get生年月日ある();
         for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 生年月日あるデータList) {
             RString shikibetsuCode = ikkatsuHakkoRelateEntity.getShikibetsuCode().value();
@@ -120,7 +124,7 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
 
     private void check他市町村住所地特例(IkkatsuHakkoRelateEntity entity) {
         RString shikibetsuCode = entity.getShikibetsuCode().value();
-        if (get最新他市町村住所地特例1().contains(shikibetsuCode)) {
+        if (!get最新他市町村住所地特例1().contains(shikibetsuCode)) {
             check転入保留対象者(entity);
         } else if (get最新他市町村住所地特例2(entity).contains(shikibetsuCode)) {
             check転入保留対象者(entity);
@@ -129,7 +133,7 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
 
     private void check適用除外者(IkkatsuHakkoRelateEntity entity) {
         RString shikibetsuCode = entity.getShikibetsuCode().value();
-        if (get適用除外者List1().contains(shikibetsuCode)) {
+        if (!get適用除外者List1().contains(shikibetsuCode)) {
             check他市町村住所地特例(entity);
         } else if (get適用除外者List2(entity).contains(shikibetsuCode)) {
             check他市町村住所地特例(entity);
