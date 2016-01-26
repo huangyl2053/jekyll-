@@ -49,6 +49,7 @@ public class ShisetsuNyutaishoTokureiTaishoRelateDacTest extends DbzTestDacBase 
 
     private static final LasdecCode 市町村コード = new LasdecCode("202016");
     private static final ShikibetsuCode 識別コード = new ShikibetsuCode("000001234567892");
+    private static final int 履歴番号 = 0;
     private static final RString 事業者種別 = new RString("1");
     private static final RString 事業者番号 = new RString("2");
     private static final FlexibleDate 有効開始年月日 = new FlexibleDate("20140405");
@@ -144,6 +145,7 @@ public class ShisetsuNyutaishoTokureiTaishoRelateDacTest extends DbzTestDacBase 
                 ShikibetsuCode 識別コード) {
             DbT1004ShisetsuNyutaishoEntity entity = DbT1004ShisetsuNyutaishoEntityGenerator.createDbT1004ShisetsuNyutaishoEntity();
             entity.setShichosonCode(市町村コード);
+            entity.setRirekiNo(履歴番号);
             entity.setShikibetsuCode(識別コード);
             介護保険施設入退所Dac.save(entity);
         }
@@ -151,6 +153,7 @@ public class ShisetsuNyutaishoTokureiTaishoRelateDacTest extends DbzTestDacBase 
         public static void insertDbT1004(LasdecCode 市町村コード, ShikibetsuCode 識別コード, DaichoType 台帳種別, YMDHMS shoriTimestamp) {
             DbT1004ShisetsuNyutaishoEntity entity = DbT1004ShisetsuNyutaishoEntityGenerator.createDbT1004ShisetsuNyutaishoEntity();
             entity.setShichosonCode(市町村コード);
+            entity.setRirekiNo(履歴番号);
             entity.setShikibetsuCode(識別コード);
             entity.setDaichoShubetsu(台帳種別.getCode());
             介護保険施設入退所Dac.save(entity);
