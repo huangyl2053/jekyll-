@@ -78,7 +78,7 @@ public final class DbT5302ShujiiIkenshoJohoEntityGenerator {
         entity.setExistShikaJushinFlag(DEFAULT_歯科受診の有無);
         entity.setExistGankaJushinFlag(DEFAULT_眼科の有無);
         entity.setExistSonotaJushinkaFlag(DEFAULT_その他受診科の有無);
-        entity.setSonotaJushinKaShimei(DEFAULT_その他受診科名);
+        entity.setSonotaJushinKaMei(DEFAULT_その他受診科名);
         entity.setIkenshoMemo(DEFAULT_意見書メモ);
         return entity;
     }

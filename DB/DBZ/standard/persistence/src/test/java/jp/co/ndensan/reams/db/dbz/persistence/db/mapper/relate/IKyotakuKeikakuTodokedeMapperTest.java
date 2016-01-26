@@ -156,7 +156,7 @@ public class IKyotakuKeikakuTodokedeMapperTest {
                 HihokenshaNo 主キー1,
                 FlexibleYearMonth 主キー2) {
             DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.createDbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
-            entity.setHihokenshano(主キー1);
+            entity.setHihokenshaNo(主キー1);
             entity.setTaishoYM(主キー2);
             entity.setState(EntityDataState.Added);
             居宅給付計画事業者作成Dac.save(entity);

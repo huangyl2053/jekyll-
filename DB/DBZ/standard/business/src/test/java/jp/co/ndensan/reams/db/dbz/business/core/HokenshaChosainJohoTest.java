@@ -129,7 +129,7 @@ public class HokenshaChosainJohoTest extends DbdTestBase {
 
         @Test
         public void setNinteiChosainNoで設定した値を＿生成されたChosainJohoJukyuも保持する() {
-            HokenshaChosainJoho result = HokenshaChosainJoho.newBuilder().setNinteiChosainNo(new ChosainCode("12345678")).build();
+            HokenshaChosainJoho result = HokenshaChosainJoho.newBuilder().setNinteiChosainCode(new ChosainCode("12345678")).build();
             assertThat(result.get認定調査員コード().getColumnValue(), is(DbT4913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード));
         }
 

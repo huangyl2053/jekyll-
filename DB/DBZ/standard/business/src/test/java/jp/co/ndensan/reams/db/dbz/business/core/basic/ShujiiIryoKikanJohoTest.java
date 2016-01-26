@@ -157,7 +157,7 @@ public class ShujiiIryoKikanJohoTest extends DbzTestBase {
 
         @Test
         public void get代表者名は_entityが持つ代表者名を返す() {
-            assertThat(sut.get代表者名(), is(ShujiiIryoKikanJohoEntity.getDaihyoshaName()));
+            assertThat(sut.get代表者名().getColumnValue(), is(ShujiiIryoKikanJohoEntity.getDaihyoshaName()));
         }
 
         @Test

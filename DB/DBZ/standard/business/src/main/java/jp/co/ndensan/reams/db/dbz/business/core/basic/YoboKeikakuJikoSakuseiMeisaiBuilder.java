@@ -73,7 +73,7 @@ public class YoboKeikakuJikoSakuseiMeisaiBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link YoboKeikakuJikoSakuseiMeisaiBuilder}
      */
-    public YoboKeikakuJikoSakuseiMeisaiBuilder set履歴番号(Decimal 履歴番号) {
+    public YoboKeikakuJikoSakuseiMeisaiBuilder set履歴番号(Integer 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;

@@ -314,7 +314,7 @@ public class ShujiiIkenshoJoho extends
      * @return その他受診科名
      */
     public RString getその他受診科名() {
-        return entity.getSonotaJushinKaShimei();
+        return entity.getSonotaJushinKaMei();
     }
 
     /**

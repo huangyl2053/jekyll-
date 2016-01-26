@@ -27,7 +27,7 @@ public class ShisetsuNyutaishoIdentifierTest extends DbzTestBase {
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static ShikibetsuCode 識別コード;
-    private static Decimal 履歴番号;
+    private static Integer 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {

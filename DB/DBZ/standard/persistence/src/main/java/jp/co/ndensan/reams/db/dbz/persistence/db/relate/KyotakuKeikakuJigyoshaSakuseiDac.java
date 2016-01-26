@@ -50,7 +50,7 @@ public class KyotakuKeikakuJigyoshaSakuseiDac implements IModifiable<DbT3006Kyot
     @Transaction
     public Optional<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity> selectByKey(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号) {
+            Integer 履歴番号) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
@@ -89,7 +89,7 @@ public class KyotakuKeikakuJigyoshaSakuseiDac implements IModifiable<DbT3006Kyot
     @Transaction
     public Optional<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity> select直近居宅給付計画事業者作成(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号) {
+            Integer 履歴番号) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));

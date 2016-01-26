@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 /**
  * 申請届出情報（子）テーブルのエンティティクラスです。
  */
-public class DbT4120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT4120ShinseitodokedeJohoEntity> implements IDbAccessable {
+public class DbT4120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT4120ShinseitodokedeJohoEntity> implements IShinseitodokedeJohoEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName

@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -143,15 +142,6 @@ public class NinteichosahyoGaikyoChosa extends
     }
 
     /**
-     * 調査委託区分コードを返します。
-     *
-     * @return 調査委託区分コード
-     */
-    public Code get調査委託区分コード() {
-        return entity.getChosaItakuKubunCode();
-    }
-
-    /**
      * 認定調査区分コードを返します。
      *
      * @return 認定調査区分コード
@@ -197,15 +187,6 @@ public class NinteichosahyoGaikyoChosa extends
     }
 
     /**
-     * 実施場所イメージ共有ファイルIDを返します。
-     *
-     * @return 実施場所イメージ共有ファイルID
-     */
-    public RDateTime get実施場所イメージ共有ファイルID() {
-        return entity.getJisshiBashoImageSharedFileId();
-    }
-
-    /**
      * 認定調査_サービス区分コードを返します。
      *
      * @return 認定調査_サービス区分コード
@@ -229,7 +210,7 @@ public class NinteichosahyoGaikyoChosa extends
      * @return 利用施設住所
      */
     public AtenaJusho get利用施設住所() {
-        return entity.getRiyoShisetsuJusho();
+        return new AtenaJusho(entity.getRiyoShisetsuJusho());
     }
 
     /**
@@ -238,7 +219,7 @@ public class NinteichosahyoGaikyoChosa extends
      * @return 利用施設電話番号
      */
     public TelNo get利用施設電話番号() {
-        return entity.getRiyoShisetsuTelNo();
+        return new TelNo(entity.getRiyoShisetsuTelNo());
     }
 
     /**
@@ -251,48 +232,12 @@ public class NinteichosahyoGaikyoChosa extends
     }
 
     /**
-     * 利用施設名イメージ共有ファイルIDを返します。
-     *
-     * @return 利用施設名イメージ共有ファイルID
-     */
-    public RDateTime get利用施設名イメージ共有ファイルID() {
-        return entity.getRiyoShisetsuNameImageSharedFileId();
-    }
-
-    /**
-     * 利用施設住所イメージ共有ファイルIDを返します。
-     *
-     * @return 利用施設住所イメージ共有ファイルID
-     */
-    public RDateTime get利用施設住所イメージ共有ファイルID() {
-        return entity.getRiyoShisetsuJushoImageSharedFileId();
-    }
-
-    /**
-     * 利用施設電話番号イメージ共有ファイルIDを返します。
-     *
-     * @return 利用施設電話番号イメージ共有ファイルID
-     */
-    public RDateTime get利用施設電話番号イメージ共有ファイルID() {
-        return entity.getRiyoShisetsuTelNoImageSharedFileId();
-    }
-
-    /**
      * 特記を返します。
      *
      * @return 特記
      */
     public RString get特記() {
         return entity.getTokki();
-    }
-
-    /**
-     * 特記イメージ共有ファイルIDを返します。
-     *
-     * @return 特記イメージ共有ファイルID
-     */
-    public RDateTime get特記イメージ共有ファイルID() {
-        return entity.getTokkiImageSharedFileId();
     }
 
     /**

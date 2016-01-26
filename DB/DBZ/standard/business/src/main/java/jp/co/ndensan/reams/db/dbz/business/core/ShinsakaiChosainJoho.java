@@ -51,7 +51,6 @@ public class ShinsakaiChosainJoho implements Serializable, IChosainJoho {
 //    public DbT5913ChosainJohoEntity getEntity() {
 //        return entity;
 //    }
-
     /**
      * 市町村コードを返します。
      *
@@ -69,7 +68,7 @@ public class ShinsakaiChosainJoho implements Serializable, IChosainJoho {
      */
     @Override
     public ChosaItakusakiCode get認定調査委託先コード() {
-        return entity.getNinteichosaItakusakiCode();
+        return new ChosaItakusakiCode(entity.getNinteiChosaItakusakiCode());
     }
 
     /**
@@ -79,7 +78,7 @@ public class ShinsakaiChosainJoho implements Serializable, IChosainJoho {
      */
     @Override
     public ChosainCode get認定調査員コード() {
-        return entity.getNinteiChosainNo();
+        return new ChosainCode(entity.getNinteiChosainCode());
     }
 
     /**
@@ -330,20 +329,20 @@ public class ShinsakaiChosainJoho implements Serializable, IChosainJoho {
         @Override
         public Builder setNinteichosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
             Objects.requireNonNull(ninteichosaItakusakiCode);
-            this.entity.setNinteichosaItakusakiCode(ninteichosaItakusakiCode);
+            this.entity.setNinteiChosaItakusakiCode(ninteichosaItakusakiCode.getColumnValue());
             return this;
         }
 
         /**
          * ninteiChosainNoを設定します。
          *
-         * @param ninteiChosainNo 認定調査員コード
+         * @param ninteiChosainCode 認定調査員コード
          * @return builder
          */
         @Override
-        public Builder setNinteiChosainNo(ChosainCode ninteiChosainNo) {
-            Objects.requireNonNull(ninteiChosainNo);
-            this.entity.setNinteiChosainNo(ninteiChosainNo);
+        public Builder setNinteiChosainCode(ChosainCode ninteiChosainCode) {
+            Objects.requireNonNull(ninteiChosainCode);
+            this.entity.setNinteiChosainCode(ninteiChosainCode.getColumnValue());
             return this;
         }
 

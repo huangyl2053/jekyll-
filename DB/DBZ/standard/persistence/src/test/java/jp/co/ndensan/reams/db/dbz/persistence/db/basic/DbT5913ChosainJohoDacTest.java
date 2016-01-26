@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5913ChosainJohoDac;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
@@ -52,44 +51,44 @@ public class DbT5913ChosainJohoDacTest extends DbzTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new ChosaItakusakiCode(DEFAULT_認定調査委託先コード),
+                    new ChosainCode(DEFAULT_認定調査員コード));
             TestSupport.insert(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new ChosaItakusakiCode(DEFAULT_認定調査委託先コード),
+                    new ChosainCode(DEFAULT_認定調査員コード));
         }
 
         @Test(expected = NullPointerException.class)
         public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new ChosaItakusakiCode(DEFAULT_認定調査委託先コード),
+                    new ChosainCode(DEFAULT_認定調査員コード));
         }
 
         @Test(expected = NullPointerException.class)
         public void 認定調査委託先コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new ChosaItakusakiCode(DEFAULT_認定調査委託先コード),
+                    new ChosainCode(DEFAULT_認定調査員コード));
         }
 
         @Test(expected = NullPointerException.class)
         public void 認定調査員コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new ChosaItakusakiCode(DEFAULT_認定調査委託先コード),
+                    new ChosainCode(DEFAULT_認定調査員コード));
         }
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT5913ChosainJohoEntity insertedRecord = sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new ChosaItakusakiCode(DEFAULT_認定調査委託先コード),
+                    new ChosainCode(DEFAULT_認定調査員コード));
             assertThat(insertedRecord, is(notNullValue()));
         }
 
@@ -97,8 +96,8 @@ public class DbT5913ChosainJohoDacTest extends DbzTestDacBase {
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT5913ChosainJohoEntity insertedRecord = sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new ChosaItakusakiCode(DEFAULT_認定調査委託先コード),
+                    new ChosainCode(DEFAULT_認定調査員コード));
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -109,12 +108,12 @@ public class DbT5913ChosainJohoDacTest extends DbzTestDacBase {
         public void 調査員情報が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new ChosaItakusakiCode(DEFAULT_認定調査委託先コード),
+                    new ChosainCode(DEFAULT_認定調査員コード));
             TestSupport.insert(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new ChosaItakusakiCode(DEFAULT_認定調査委託先コード),
+                    new ChosainCode(DEFAULT_認定調査員コード));
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -130,13 +129,13 @@ public class DbT5913ChosainJohoDacTest extends DbzTestDacBase {
         public void 調査員情報エンティティを渡すと_insertは_調査員情報を追加する() {
             TestSupport.insert(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new ChosaItakusakiCode(DEFAULT_認定調査委託先コード),
+                    new ChosainCode(DEFAULT_認定調査員コード));
 
             assertThat(sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード), is(notNullValue()));
+                    new ChosaItakusakiCode(DEFAULT_認定調査委託先コード),
+                    new ChosainCode(DEFAULT_認定調査員コード)), is(notNullValue()));
         }
     }
 
@@ -146,16 +145,16 @@ public class DbT5913ChosainJohoDacTest extends DbzTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new ChosaItakusakiCode(DEFAULT_認定調査委託先コード),
+                    new ChosainCode(DEFAULT_認定調査員コード));
         }
 
         @Test
         public void 調査員情報エンティティを渡すと_updateは_調査員情報を更新する() {
             DbT5913ChosainJohoEntity updateRecord = sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new ChosaItakusakiCode(DEFAULT_認定調査委託先コード),
+                    new ChosainCode(DEFAULT_認定調査員コード));
             // TODO  主キー以外の項目を変更してください
             // updateRecord.set変更したい項目(75);
 
@@ -163,8 +162,8 @@ public class DbT5913ChosainJohoDacTest extends DbzTestDacBase {
 
             DbT5913ChosainJohoEntity updatedRecord = sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new ChosaItakusakiCode(DEFAULT_認定調査委託先コード),
+                    new ChosainCode(DEFAULT_認定調査員コード));
 
             // TODO  主キー以外の項目を変更してください
             // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
@@ -177,24 +176,24 @@ public class DbT5913ChosainJohoDacTest extends DbzTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new ChosaItakusakiCode(DEFAULT_認定調査委託先コード),
+                    new ChosainCode(DEFAULT_認定調査員コード));
         }
 
         @Test
         public void 調査員情報エンティティを渡すと_deleteは_調査員情報を削除する() {
             DbT5913ChosainJohoEntity deletedEntity = sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new ChosaItakusakiCode(DEFAULT_認定調査委託先コード),
+                    new ChosainCode(DEFAULT_認定調査員コード));
             deletedEntity.setState(EntityDataState.Deleted);
 
             sut.save(deletedEntity);
 
             assertThat(sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード), is(nullValue()));
+                    new ChosaItakusakiCode(DEFAULT_認定調査委託先コード),
+                    new ChosainCode(DEFAULT_認定調査員コード)), is(nullValue()));
         }
     }
 
@@ -206,8 +205,8 @@ public class DbT5913ChosainJohoDacTest extends DbzTestDacBase {
                 ChosainCode 認定調査員コード) {
             DbT5913ChosainJohoEntity entity = DbT5913ChosainJohoEntityGenerator.createDbT5913ChosainJohoEntity();
             entity.setShichosonCode(市町村コード);
-            entity.setNinteichosaItakusakiCode(認定調査委託先コード);
-            entity.setNinteiChosainNo(認定調査員コード);
+            entity.setNinteiChosaItakusakiCode(認定調査委託先コード.getColumnValue());
+            entity.setNinteiChosainCode(認定調査員コード.getColumnValue());
             sut.save(entity);
         }
     }

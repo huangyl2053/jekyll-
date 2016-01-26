@@ -140,11 +140,6 @@ public class NinteichosahyoGaikyoChosaTest extends DbzTestBase {
         }
 
         @Test
-        public void get調査委託区分コードは_entityが持つ調査委託区分コードを返す() {
-            assertThat(sut.get調査委託区分コード(), is(NinteichosahyoGaikyoChosaEntity.getChosaItakuKubunCode()));
-        }
-
-        @Test
         public void get認定調査区分コードは_entityが持つ認定調査区分コードを返す() {
             assertThat(sut.get認定調査区分コード(), is(NinteichosahyoGaikyoChosaEntity.getNinteiChosaKubunCode()));
         }
@@ -169,11 +164,6 @@ public class NinteichosahyoGaikyoChosaTest extends DbzTestBase {
             assertThat(sut.get認定調査実施場所名称(), is(NinteichosahyoGaikyoChosaEntity.getChosaJisshiBashoMeisho()));
         }
 
-        @Test
-        public void get実施場所イメージ共有ファイルIDは_entityが持つ実施場所イメージ共有ファイルIDを返す() {
-            assertThat(sut.get実施場所イメージ共有ファイルID(), is(NinteichosahyoGaikyoChosaEntity.getJisshiBashoImageSharedFileId()));
-        }
-
 //        @Test
 //        public void get認定調査_現在の状況コードは_entityが持つ認定調査_現在の状況コードを返す() {
 //            assertThat(sut.get認定調査_現在の状況コード(), is(NinteichosahyoGaikyoChosaEntity.getGenzainoJokyoCode()));
@@ -190,12 +180,12 @@ public class NinteichosahyoGaikyoChosaTest extends DbzTestBase {
 
         @Test
         public void get利用施設住所は_entityが持つ利用施設住所を返す() {
-            assertThat(sut.get利用施設住所(), is(NinteichosahyoGaikyoChosaEntity.getRiyoShisetsuJusho()));
+            assertThat(sut.get利用施設住所().getColumnValue(), is(NinteichosahyoGaikyoChosaEntity.getRiyoShisetsuJusho()));
         }
 
         @Test
         public void get利用施設電話番号は_entityが持つ利用施設電話番号を返す() {
-            assertThat(sut.get利用施設電話番号(), is(NinteichosahyoGaikyoChosaEntity.getRiyoShisetsuTelNo()));
+            assertThat(sut.get利用施設電話番号().getColumnValue(), is(NinteichosahyoGaikyoChosaEntity.getRiyoShisetsuTelNo()));
         }
 
         @Test
@@ -204,28 +194,8 @@ public class NinteichosahyoGaikyoChosaTest extends DbzTestBase {
         }
 
         @Test
-        public void get利用施設名イメージ共有ファイルIDは_entityが持つ利用施設名イメージ共有ファイルIDを返す() {
-            assertThat(sut.get利用施設名イメージ共有ファイルID(), is(NinteichosahyoGaikyoChosaEntity.getRiyoShisetsuNameImageSharedFileId()));
-        }
-
-        @Test
-        public void get利用施設住所イメージ共有ファイルIDは_entityが持つ利用施設住所イメージ共有ファイルIDを返す() {
-            assertThat(sut.get利用施設住所イメージ共有ファイルID(), is(NinteichosahyoGaikyoChosaEntity.getRiyoShisetsuJushoImageSharedFileId()));
-        }
-
-        @Test
-        public void get利用施設電話番号イメージ共有ファイルIDは_entityが持つ利用施設電話番号イメージ共有ファイルIDを返す() {
-            assertThat(sut.get利用施設電話番号イメージ共有ファイルID(), is(NinteichosahyoGaikyoChosaEntity.getRiyoShisetsuTelNoImageSharedFileId()));
-        }
-
-        @Test
         public void get特記は_entityが持つ特記を返す() {
             assertThat(sut.get特記(), is(NinteichosahyoGaikyoChosaEntity.getTokki()));
-        }
-
-        @Test
-        public void get特記イメージ共有ファイルIDは_entityが持つ特記イメージ共有ファイルIDを返す() {
-            assertThat(sut.get特記イメージ共有ファイルID(), is(NinteichosahyoGaikyoChosaEntity.getTokkiImageSharedFileId()));
         }
 
         @Test

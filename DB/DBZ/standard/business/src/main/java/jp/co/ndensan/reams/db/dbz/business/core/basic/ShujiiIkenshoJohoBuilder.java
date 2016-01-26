@@ -359,7 +359,7 @@ public class ShujiiIkenshoJohoBuilder {
      */
     public ShujiiIkenshoJohoBuilder setその他受診科名(RString その他受診科名) {
         requireNonNull(その他受診科名, UrSystemErrorMessages.値がnull.getReplacedMessage("その他受診科名"));
-        entity.setSonotaJushinKaShimei(その他受診科名);
+        entity.setSonotaJushinKaMei(その他受診科名);
         return this;
     }
 

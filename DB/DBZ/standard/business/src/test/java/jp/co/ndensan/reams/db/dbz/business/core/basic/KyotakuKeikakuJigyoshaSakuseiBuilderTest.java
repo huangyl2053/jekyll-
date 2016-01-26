@@ -28,12 +28,12 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class KyotakuKeikakuJigyoshaSakuseiBuilderTest extends DbzTestBase {
 
-    private static DbT3006KyotakuKeikakuJigyoshaSakuseiEntity KyotakuKeikakuJigyoshaSakuseiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
+    private static DbT3006KyotakuKeikakuJigyoshaSakuseiEntity kyotakuKeikakuJigyoshaSakuseiEntity;
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static HihokenshaNo 被保険者番号;
     private static FlexibleYearMonth 対象年月;
-    private static Decimal 履歴番号;
+    private static Integer 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
@@ -50,12 +50,12 @@ public class KyotakuKeikakuJigyoshaSakuseiBuilderTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            KyotakuKeikakuJigyoshaSakuseiEntity = new DbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
-            KyotakuKeikakuJigyoshaSakuseiEntity.setHihokenshano(被保険者番号);
-            KyotakuKeikakuJigyoshaSakuseiEntity.setTaishoYM(対象年月);
-            KyotakuKeikakuJigyoshaSakuseiEntity.setRirekiNo(履歴番号);
+            kyotakuKeikakuJigyoshaSakuseiEntity = new DbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
+            kyotakuKeikakuJigyoshaSakuseiEntity.setHihokenshaNo(被保険者番号);
+            kyotakuKeikakuJigyoshaSakuseiEntity.setTaishoYM(対象年月);
+            kyotakuKeikakuJigyoshaSakuseiEntity.setRirekiNo(履歴番号);
 
-            business = new KyotakuKeikakuJigyoshaSakusei(KyotakuKeikakuJigyoshaSakuseiEntity);
+            business = new KyotakuKeikakuJigyoshaSakusei(kyotakuKeikakuJigyoshaSakuseiEntity);
 
             sut = business.createBuilderForEdit();
         }

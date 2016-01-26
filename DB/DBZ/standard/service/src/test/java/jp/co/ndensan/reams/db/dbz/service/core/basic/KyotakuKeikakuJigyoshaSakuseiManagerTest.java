@@ -50,7 +50,7 @@ public class KyotakuKeikakuJigyoshaSakuseiManagerTest {
 
         HihokenshaNo 被保険者番号 = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_被保険者番号;
         FlexibleYearMonth 対象年月 = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_対象年月;
-        Decimal 履歴番号 = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_履歴番号;
+        Integer 履歴番号 = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_履歴番号;
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
@@ -71,7 +71,7 @@ public class KyotakuKeikakuJigyoshaSakuseiManagerTest {
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(Integer.class))).thenReturn(null);
 
             KyotakuKeikakuJigyoshaSakusei result = sut.get居宅給付計画事業者作成(被保険者番号, 対象年月, 履歴番号);
 
@@ -81,7 +81,7 @@ public class KyotakuKeikakuJigyoshaSakuseiManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.createDbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
-            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(Integer.class))).thenReturn(entity);
 
             KyotakuKeikakuJigyoshaSakusei result = sut.get居宅給付計画事業者作成(被保険者番号, 対象年月, 履歴番号);
 

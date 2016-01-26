@@ -28,7 +28,7 @@ public class NinteichosahyoTokkijikoIdentifierTest extends DbzTestBase {
     private static ShinseishoKanriNo 申請書管理番号;
     private static int 認定調査依頼履歴番号;
     private static RString 認定調査特記事項番号;
-    private static RString 認定調査特記事項連番;
+    private static Integer 認定調査特記事項連番;
     private static RString 特記事項テキスト_イメージ区分;
     private static Code 原本マスク区分;
 

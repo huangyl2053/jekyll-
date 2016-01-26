@@ -51,22 +51,22 @@ public class ChosainJohoManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            ChosaItakusakiCode 主キー2 = DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード;
-            ChosainCode 主キー3 = DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード;
+            ChosaItakusakiCode 主キー2 = new ChosaItakusakiCode(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード);
+            ChosainCode 主キー3 = new ChosainCode(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード);
             sut.get調査員情報(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             LasdecCode 主キー1 = DbT5913ChosainJohoEntityGenerator.DEFAULT_市町村コード;
-            ChosainCode 主キー3 = DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード;
+            ChosainCode 主キー3 = new ChosainCode(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード);
             sut.get調査員情報(主キー1, null, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
             LasdecCode 主キー1 = DbT5913ChosainJohoEntityGenerator.DEFAULT_市町村コード;
-            ChosaItakusakiCode 主キー2 = DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード;
+            ChosaItakusakiCode 主キー2 = new ChosaItakusakiCode(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード);
             sut.get調査員情報(主キー1, 主キー2, null);
         }
 
@@ -75,8 +75,8 @@ public class ChosainJohoManagerTest {
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(LasdecCode.class), any(ChosaItakusakiCode.class), any(ChosainCode.class))).thenReturn(null);
             LasdecCode 主キー1 = DbT5913ChosainJohoEntityGenerator.DEFAULT_市町村コード;
-            ChosaItakusakiCode 主キー2 = DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード;
-            ChosainCode 主キー3 = DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード;
+            ChosaItakusakiCode 主キー2 = new ChosaItakusakiCode(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード);
+            ChosainCode 主キー3 = new ChosainCode(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード);
             ChosainJoho result = sut.get調査員情報(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
@@ -87,8 +87,8 @@ public class ChosainJohoManagerTest {
             DbT5913ChosainJohoEntity entity = DbT5913ChosainJohoEntityGenerator.createDbT5913ChosainJohoEntity();
             when(dac.selectByKey(any(LasdecCode.class), any(ChosaItakusakiCode.class), any(ChosainCode.class))).thenReturn(entity);
             LasdecCode 主キー1 = DbT5913ChosainJohoEntityGenerator.DEFAULT_市町村コード;
-            ChosaItakusakiCode 主キー2 = DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード;
-            ChosainCode 主キー3 = DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード;
+            ChosaItakusakiCode 主キー2 = new ChosaItakusakiCode(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード);
+            ChosainCode 主キー3 = new ChosainCode(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード);
             ChosainJoho result = sut.get調査員情報(主キー1, 主キー2, 主キー3);
 
             assertThat(result.get市町村コード().value(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_市町村コード.value()));

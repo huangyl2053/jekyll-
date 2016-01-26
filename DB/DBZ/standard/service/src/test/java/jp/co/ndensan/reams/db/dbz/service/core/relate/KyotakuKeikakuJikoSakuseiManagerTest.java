@@ -307,7 +307,7 @@ public class KyotakuKeikakuJikoSakuseiManagerTest {
 
         private static YoboKeikakuJikoSakuseiMeisai createYoboKeikakuJikoSakuseiMeisai(HihokenshaNo 主キー1, FlexibleYearMonth 主キー2) {
             return new YoboKeikakuJikoSakuseiMeisai(
-                    主キー1, 主キー2, Decimal.ZERO, RString.EMPTY, JigyoshaNo.EMPTY, ServiceShuruiCode.EMPTY, ServiceKomokuCode.EMPTY);
+                    主キー1, 主キー2, new Integer(0), RString.EMPTY, JigyoshaNo.EMPTY, ServiceShuruiCode.EMPTY, ServiceKomokuCode.EMPTY);
         }
 
         public static KyotakuKeikakuJikoSakusei initializeKyotakuKeikakuJikoSakusei(KyotakuKeikakuJikoSakusei 居宅給付計画自己作成) {
