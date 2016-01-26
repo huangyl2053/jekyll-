@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
+ * 償還払い状況照会_特定入所者費用のハンドラクラスです。
  *
  * @author wangkanglei
  */
@@ -28,6 +29,8 @@ public class TokuteiNyushoshaHiyoHandler {
 
     private final TokuteiNyushoshaHiyoDiv div;
     private static final RString 設定不可 = new RString("0");
+    private static final RString 設定可_任意 = new RString("2");
+    private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
 
     public TokuteiNyushoshaHiyoHandler(TokuteiNyushoshaHiyoDiv div) {
         this.div = div;
@@ -72,8 +75,8 @@ public class TokuteiNyushoshaHiyoHandler {
         if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getMeisaiJushochitokureiSetteiKubun())) {
             div.getPanelHead().getBtnKyufuhiMeisaiJyutoku().setDisabled(true);
         }
-        if (new RString("2").equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
-                && new FlexibleYearMonth("201204").isBeforeOrEquals(サービス年月)) {
+        if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
+                && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
             div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setVisible(false);
         } else {
             div.getPanelHead().getBtnKinkyujiShoteiShikkan().setVisible(false);
@@ -98,8 +101,8 @@ public class TokuteiNyushoshaHiyoHandler {
             row.getDefaultDataName6().setValue(new Decimal(entity.get保険分請求額()));
             row.getDefaultDataName7().setValue(new Decimal(entity.get利用者負担額()));
             row.getDefaultDataName8().setValue(new Decimal(entity.get点数_金額()));
-            if (ShikyuFushikyuKubun.toValue(設定不可) != null) {
-                row.setDefaultDataName9(ShikyuFushikyuKubun.toValue(設定不可).get名称());
+            if (ShikyuFushikyuKubun.toValue(entity.get支給区分コード()) != null) {
+                row.setDefaultDataName9(ShikyuFushikyuKubun.toValue(entity.get支給区分コード()).get名称());
             }
             row.getDefaultDataName10().setValue(new Decimal(entity.get差額金額()));
             row.getDefaultDataName11().setValue(new Decimal(entity.get増減点()));
@@ -116,12 +119,13 @@ public class TokuteiNyushoshaHiyoHandler {
         div.getPanelTokutei().getTxtRiyoshaFutangakuTotal().setValue(new Decimal(entity.get利用者負担額合計()));
     }
 
-    public void set特定入所者費用照会パネル(FlexibleYearMonth サービス年月) {
+    public void set特定入所者費用照会パネル() {
         dgdTokuteiYichiran_Row row = div.getDgdTokuteiYichiran().getClickedItem();
         RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().subSequence(0, 2).toString());
         RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().subSequence(2, 6).toString());
         // TODOサービスコード取得
-//        List<ServiceCode> serviceCode = ServiceCodeInput.getServiceCodeList(serviceCodeShuruyi, serviceCodeKoumoku, サービス年月);
+//        List<ServiceCode> serviceCode = ServiceCodeInput.getServiceCodeList(serviceCodeShuruyi, serviceCodeKoumoku,
+//        ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
         div.getPanelMeisai().getTxtServiceCodeShuruyi().setValue(serviceCodeShuruyi);
         div.getPanelMeisai().getTxtServiceCodeKoumoku().setValue(serviceCodeKoumoku);
         // TODO

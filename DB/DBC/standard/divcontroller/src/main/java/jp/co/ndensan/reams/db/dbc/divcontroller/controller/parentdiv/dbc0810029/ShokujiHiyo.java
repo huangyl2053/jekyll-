@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810029.ShokujiHiyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810029.ShokujiHiyoHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -20,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_食事費用画面のクラスです。
@@ -28,17 +31,37 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShokujiHiyo {
 
+    private static final FlexibleYearMonth 平成１５年３月 = new FlexibleYearMonth("200303");
+    private static final FlexibleYearMonth 平成１５年４月 = new FlexibleYearMonth("200304");
+    private static final FlexibleYearMonth 平成17年９月 = new FlexibleYearMonth("200509");
+    private static final FlexibleYearMonth 平成17年10月 = new FlexibleYearMonth("200510");
+
     public ResponseData<ShokujiHiyoDiv> onLoad(ShokujiHiyoDiv div) {
         // TODO 引き継ぎデータの取得
-        ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("123456"));
-        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(new RString("200405"));
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("1");
-        RString 整理番号 = new RString("123456");
-        JigyoshaNo 事業者番号 = new JigyoshaNo("2");
-        RString 様式番号 = new RString("2345");
-        RString 申請日 = new RString("20151124");
-        RString 明細番号 = new RString("3456");
-        RString 証明書 = new RString("証明書");
+        ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
+                new HihokenshaNo("000000033"), new FlexibleYearMonth(new RString("200501")),
+                new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
+                new RString("0003"), new RString("証明書"));
+        ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
+        ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
+                ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
+        FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
+        HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
+        RString 整理番号 = parameter.getSeiriNp();
+        JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
+        RString 明細番号 = parameter.getMeisaiNo();
+        RString 証明書 = parameter.getServiceYM();
+        ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getServiceTeikyoYM());
+
+        // TODO 該当者検索画面ViewState．識別コード
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123456"));
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        // TODO 申請書検索ViewSate．様式番号
+        ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        // TODO 申請検索画面ViewState. 申請日
+        ViewStateHolder.put(ViewStateKeys.申請日, new RString("20151124"));
+
         // TODO「介護宛名情報」共有子Divの初期化
 //        div.getPanelCcd().getCcdKaigoAtenaInfo().load(識別コード);
         // TODO 「介護資格系基本情報」共有子Div の初期化
@@ -48,9 +71,10 @@ public class ShokujiHiyo {
         } else {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
-        getHandler(div).setヘッダーエリア(サービス年月, 事業者番号, 申請日, 明細番号, 証明書);
+        getHandler(div).setヘッダーエリア(サービス年月, 事業者番号,
+                ViewStateHolder.get(ViewStateKeys.申請日, RString.class), 明細番号, 証明書);
 
-        if (new FlexibleYearMonth("200304").isBeforeOrEquals(サービス年月) && サービス年月.isBeforeOrEquals(new FlexibleYearMonth("200509"))) {
+        if (平成１５年４月.isBeforeOrEquals(サービス年月) && サービス年月.isBeforeOrEquals(平成17年９月)) {
             div.getPanelShoikujiList().setVisible(true);
             div.getPanelGokeiSet().setVisible(true);
             div.getPanelDetail1().setVisible(false);
@@ -62,95 +86,44 @@ public class ShokujiHiyo {
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
-                    .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 様式番号);
+                    .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号,
+                            様式番号);
 
             getHandler(div).set食事費用一覧グリッド(shokanMeisaiList, shokanShokujiHiyoList.get(0));
         }
 
-        if (new FlexibleYearMonth("200510").isBeforeOrEquals(サービス年月)) {
+        if (平成17年10月.isBeforeOrEquals(サービス年月)) {
             div.getPanelShoikujiList().setVisible(false);
             div.getPanelGokeiSet().setVisible(true);
             div.getPanelDetail1().setVisible(false);
             div.getPanelDetail2().setVisible(false);
 
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
-                    .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 様式番号);
+                    .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号,
+                            様式番号);
             if (shokanShokujiHiyoList == null || shokanShokujiHiyoList.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             getHandler(div).set食事費用合計設定パネル(shokanShokujiHiyoList.get(0));
         }
 
-        if (サービス年月.isBeforeOrEquals(new FlexibleYearMonth("200303"))) {
+        if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
             div.getPanelShoikujiList().setVisible(false);
             div.getPanelGokeiSet().setVisible(false);
             div.getPanelDetail1().setVisible(true);
             div.getPanelDetail2().setVisible(false);
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
-                    .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 様式番号);
+                    .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号,
+                            様式番号);
             if (shokanShokujiHiyoList == null || shokanShokujiHiyoList.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             getHandler(div).set食事費用パネル１(shokanShokujiHiyoList.get(0));
         }
 
-        ShikibetsuNoKanriEntity shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance().getShikibetsubangoKanri(サービス年月, 様式番号);
+        ShikibetsuNoKanriEntity shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
+                .getShikibetsubangoKanri(サービス年月, 様式番号);
         getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity, サービス年月);
-        return createResponse(div);
-    }
-
-    public ResponseData<ShokujiHiyoDiv> onClick_btnKihonInfo(ShokujiHiyoDiv div) {
-        div.getPanelGokeiSet().setVisible(false);
-        return createResponse(div);
-    }
-
-    public ResponseData<ShokujiHiyoDiv> onClick_btnKyufuhiMeisai(ShokujiHiyoDiv div) {
-        div.getPanelGokeiSet().setVisible(false);
-        return createResponse(div);
-    }
-
-    public ResponseData<ShokujiHiyoDiv> onClick_btnTokuteiShinryohi(ShokujiHiyoDiv div) {
-        div.getPanelGokeiSet().setVisible(false);
-        return createResponse(div);
-    }
-
-    public ResponseData<ShokujiHiyoDiv> onClick_btnServiceKeikakuhi(ShokujiHiyoDiv div) {
-        div.getPanelGokeiSet().setVisible(false);
-        return createResponse(div);
-    }
-
-    public ResponseData<ShokujiHiyoDiv> onClick_btnTokuteiNyushosya(ShokujiHiyoDiv div) {
-        div.getPanelGokeiSet().setVisible(false);
-        return createResponse(div);
-    }
-
-    public ResponseData<ShokujiHiyoDiv> onClick_btnGoukeiInfo(ShokujiHiyoDiv div) {
-        div.getPanelGokeiSet().setVisible(false);
-        return createResponse(div);
-    }
-
-    public ResponseData<ShokujiHiyoDiv> onClick_btnKyufuhiMeisaiJyutoku(ShokujiHiyoDiv div) {
-        div.getPanelGokeiSet().setVisible(false);
-        return createResponse(div);
-    }
-
-    public ResponseData<ShokujiHiyoDiv> onClick_btnKinkyujiShisetsuRyoyo(ShokujiHiyoDiv div) {
-        div.getPanelGokeiSet().setVisible(false);
-        return createResponse(div);
-    }
-
-    public ResponseData<ShokujiHiyoDiv> onClick_btnKinkyujiShoteiShikkan(ShokujiHiyoDiv div) {
-        div.getPanelGokeiSet().setVisible(false);
-        return createResponse(div);
-    }
-
-    public ResponseData<ShokujiHiyoDiv> onClick_btnSeikyugakuShukei(ShokujiHiyoDiv div) {
-        div.getPanelGokeiSet().setVisible(false);
-        return createResponse(div);
-    }
-
-    public ResponseData<ShokujiHiyoDiv> onClick_btnShafukukeigengaku(ShokujiHiyoDiv div) {
-        div.getPanelGokeiSet().setVisible(false);
         return createResponse(div);
     }
 
@@ -161,10 +134,6 @@ public class ShokujiHiyo {
 
     public ResponseData<ShokujiHiyoDiv> onClick_btnCloseDown(ShokujiHiyoDiv div) {
         div.getPanelDetail2().setVisible(false);
-        return createResponse(div);
-    }
-
-    public ResponseData<ShokujiHiyoDiv> onClick_btnBack(ShokujiHiyoDiv div) {
         return createResponse(div);
     }
 

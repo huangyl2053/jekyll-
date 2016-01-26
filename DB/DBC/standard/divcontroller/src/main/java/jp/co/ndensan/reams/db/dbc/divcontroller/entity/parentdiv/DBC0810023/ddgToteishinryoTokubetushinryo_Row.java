@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jan 18 16:58:54 CST 2016 
+ * Tue Jan 26 20:20:19 CST 2016 
  */
 
 
@@ -29,6 +29,7 @@ public class ddgToteishinryoTokubetushinryo_Row extends DataRow {
     private RString sochi;
     private RString tejyutsu;
     private RString goukeyiTanyi;
+    private RString number;
 
     public ddgToteishinryoTokubetushinryo_Row() {
         super();
@@ -40,6 +41,7 @@ public class ddgToteishinryoTokubetushinryo_Row extends DataRow {
         this.sochi = RString.EMPTY;
         this.tejyutsu = RString.EMPTY;
         this.goukeyiTanyi = RString.EMPTY;
+        this.number = RString.EMPTY;
         this.setOriginalData("shobyouName", shobyouName);
         this.setOriginalData("shidouKanri", shidouKanri);
         this.setOriginalData("rihabiri", rihabiri);
@@ -48,9 +50,10 @@ public class ddgToteishinryoTokubetushinryo_Row extends DataRow {
         this.setOriginalData("sochi", sochi);
         this.setOriginalData("tejyutsu", tejyutsu);
         this.setOriginalData("goukeyiTanyi", goukeyiTanyi);
+        this.setOriginalData("number", number);
     }
 
-    public ddgToteishinryoTokubetushinryo_Row(RString shobyouName, RString shidouKanri, RString rihabiri, RString seishinka, RString xLine, RString sochi, RString tejyutsu, RString goukeyiTanyi) {
+    public ddgToteishinryoTokubetushinryo_Row(RString shobyouName, RString shidouKanri, RString rihabiri, RString seishinka, RString xLine, RString sochi, RString tejyutsu, RString goukeyiTanyi, RString number) {
         super();
         this.setOriginalData("shobyouName", shobyouName);
         this.setOriginalData("shidouKanri", shidouKanri);
@@ -60,6 +63,7 @@ public class ddgToteishinryoTokubetushinryo_Row extends DataRow {
         this.setOriginalData("sochi", sochi);
         this.setOriginalData("tejyutsu", tejyutsu);
         this.setOriginalData("goukeyiTanyi", goukeyiTanyi);
+        this.setOriginalData("number", number);
         this.shobyouName = shobyouName;
         this.shidouKanri = shidouKanri;
         this.rihabiri = rihabiri;
@@ -68,6 +72,7 @@ public class ddgToteishinryoTokubetushinryo_Row extends DataRow {
         this.sochi = sochi;
         this.tejyutsu = tejyutsu;
         this.goukeyiTanyi = goukeyiTanyi;
+        this.number = number;
     }
 
     public RString getShobyouName() {
@@ -100,6 +105,10 @@ public class ddgToteishinryoTokubetushinryo_Row extends DataRow {
 
     public RString getGoukeyiTanyi() {
         return goukeyiTanyi;
+    }
+
+    public RString getNumber() {
+        return number;
     }
 
     public void setShobyouName(RString shobyouName) {
@@ -140,6 +149,11 @@ public class ddgToteishinryoTokubetushinryo_Row extends DataRow {
     public void setGoukeyiTanyi(RString goukeyiTanyi) {
         this.setOriginalData("goukeyiTanyi", goukeyiTanyi);
         this.goukeyiTanyi = goukeyiTanyi;
+    }
+
+    public void setNumber(RString number) {
+        this.setOriginalData("number", number);
+        this.number = number;
     }
 
     // </editor-fold>
