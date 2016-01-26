@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
+ * 広域内転居結果Entity
  * @author GC xuhao
  */
 @lombok.Getter

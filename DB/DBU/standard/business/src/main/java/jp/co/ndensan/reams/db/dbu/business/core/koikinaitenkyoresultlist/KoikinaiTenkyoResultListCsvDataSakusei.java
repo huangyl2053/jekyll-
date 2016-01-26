@@ -29,35 +29,35 @@ public class KoikinaiTenkyoResultListCsvDataSakusei {
      */
     public List<KoikinaiTenkyoCSVDataEntity> getKoikinaiTenkyoResultListCsvData(
             List<KoikinaiTenkyoEntity> 広域内転居結果リスト) {
-        if (null == 広域内転居結果リスト || 0 == 広域内転居結果リスト.size()) {
-            return null;
+        List<KoikinaiTenkyoCSVDataEntity> koikinaiTenkyoCSVDataEntityList = new ArrayList<>();
+        if (広域内転居結果リスト == null || 広域内転居結果リスト.isEmpty()) {
+            return koikinaiTenkyoCSVDataEntityList;
         }
-        List<KoikinaiTenkyoCSVDataEntity> KoikinaiTenkyoCSVDataEntityList = new ArrayList<>();
-        for (int i = 0; i < 広域内転居結果リスト.size(); i++) {
+        for (KoikinaiTenkyoEntity koikinaiTenkyoEntity : 広域内転居結果リスト) {
             KoikinaiTenkyoCSVDataEntity entity = new KoikinaiTenkyoCSVDataEntity();
-            entity.set被保険者番号(広域内転居結果リスト.get(i).get被保険者番号().value());
-            entity.set氏名カナ(new RString(広域内転居結果リスト.get(i).get氏名カナ().toString()));
-            entity.set氏名(new RString(広域内転居結果リスト.get(i).get氏名().toString()));
-            entity.set旧住民コード(new RString(広域内転居結果リスト.get(i).get旧住民コード().toString()));
-            entity.set前住所(広域内転居結果リスト.get(i).get前住所());
-            entity.set転出予定日(広域内転居結果リスト.get(i).get転出予定日().wareki().eraType(EraType.KANJI_RYAKU).
+            entity.set被保険者番号(koikinaiTenkyoEntity.get被保険者番号().value());
+            entity.set氏名カナ(new RString(koikinaiTenkyoEntity.get氏名カナ().toString()));
+            entity.set氏名(new RString(koikinaiTenkyoEntity.get氏名().toString()));
+            entity.set旧住民コード(new RString(koikinaiTenkyoEntity.get旧住民コード().toString()));
+            entity.set前住所(koikinaiTenkyoEntity.get前住所());
+            entity.set転出予定日(koikinaiTenkyoEntity.get転出予定日().wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            entity.set転出確定日(広域内転居結果リスト.get(i).get転出確定日().wareki().eraType(EraType.KANJI_RYAKU).
+            entity.set転出確定日(koikinaiTenkyoEntity.get転出確定日().wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            entity.set転出確定通知日(広域内転居結果リスト.get(i).get転出確定通知日().wareki().eraType(
+            entity.set転出確定通知日(koikinaiTenkyoEntity.get転出確定通知日().wareki().eraType(
                     EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).
                     fillType(FillType.BLANK).toDateString());
-            entity.set処理日(広域内転居結果リスト.get(i).get処理日().wareki().eraType(EraType.KANJI_RYAKU).
+            entity.set処理日(koikinaiTenkyoEntity.get処理日().wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            entity.set新住民コード(new RString(広域内転居結果リスト.get(i).get新住民コード().toString()));
-            entity.set現住所(広域内転居結果リスト.get(i).get現住所());
-            entity.set登録異動日(広域内転居結果リスト.get(i).get登録異動日().wareki().eraType(EraType.KANJI_RYAKU).
+            entity.set新住民コード(new RString(koikinaiTenkyoEntity.get新住民コード().toString()));
+            entity.set現住所(koikinaiTenkyoEntity.get現住所());
+            entity.set登録異動日(koikinaiTenkyoEntity.get登録異動日().wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            entity.set登録届出日(広域内転居結果リスト.get(i).get登録届出日().wareki().eraType(EraType.KANJI_RYAKU).
+            entity.set登録届出日(koikinaiTenkyoEntity.get登録届出日().wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            entity.set異動情報(広域内転居結果リスト.get(i).get異動情報());
-            KoikinaiTenkyoCSVDataEntityList.add(entity);
+            entity.set異動情報(koikinaiTenkyoEntity.get異動情報());
+            koikinaiTenkyoCSVDataEntityList.add(entity);
         }
-        return KoikinaiTenkyoCSVDataEntityList;
+        return koikinaiTenkyoCSVDataEntityList;
     }
 }

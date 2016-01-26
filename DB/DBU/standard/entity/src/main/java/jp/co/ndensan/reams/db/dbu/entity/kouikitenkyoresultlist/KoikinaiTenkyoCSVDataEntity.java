@@ -9,7 +9,7 @@ package jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
+ * 広域内転居結果一覧表CSV用データEntity
  * @author GC xuhao
  */
 @lombok.Getter
