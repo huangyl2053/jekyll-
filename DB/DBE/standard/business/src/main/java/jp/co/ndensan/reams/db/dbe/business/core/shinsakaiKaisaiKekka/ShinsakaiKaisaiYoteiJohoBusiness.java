@@ -153,4 +153,23 @@ public class ShinsakaiKaisaiYoteiJohoBusiness {
         return entity.get開催会場();
     }
 
+    /**
+     * 開催番号を返します。
+     *
+     * @return 開催番号
+     */
+    public RString get開催番号() {
+        return entity.get開催番号();
+
+    }
+
+    /**
+     * 介護認定審査会進捗状況を返します。
+     *
+     * @return介護認定審査会進捗状況
+     */
+    private RString get介護認定審査会進捗状況() {
+        return entity.get介護認定審査会進捗状況();
+    }
+
 }
