@@ -7,4 +7,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
  */
 public interface IHokenshaJohoDiv extends ICommonChildDivBaseProperties {
 
+    public abstract void clear();
+
+    public abstract void getHokenjaNo();
+
+    public abstract void getHokenjaName();
 }

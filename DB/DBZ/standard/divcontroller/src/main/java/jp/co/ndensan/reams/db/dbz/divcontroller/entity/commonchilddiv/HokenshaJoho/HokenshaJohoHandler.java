@@ -37,4 +37,31 @@ public class HokenshaJohoHandler {
             div.getTxtHokenshaMeisho().setValue(new RString(""));
         }
     }
+
+    /**
+     * 保険者情報をクリアする。
+     *
+     */
+    public void clear() {
+        div.getTxtHokenshaNo().clearValue();
+        div.getTxtHokenshaMeisho().clearValue();
+    }
+
+    /**
+     * 保険者番号を取得する。
+     *
+     * @return 保険者番号
+     */
+    public RString getHokenjaNo() {
+        return div.getTxtHokenshaNo().getValue();
+    }
+
+    /**
+     * 保険者名を取得する。
+     *
+     * @return 保険者名
+     */
+    public RString getHokenjaName() {
+        return div.getTxtHokenshaMeisho().getValue();
+    }
 }
