@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist;
 
 import java.io.Serializable;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.IdoInfoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

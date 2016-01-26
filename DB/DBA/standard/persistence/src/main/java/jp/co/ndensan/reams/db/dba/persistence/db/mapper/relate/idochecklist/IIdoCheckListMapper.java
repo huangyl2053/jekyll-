@@ -94,10 +94,10 @@ public interface IIdoCheckListMapper {
     /**
      * 扶助種類コードリストを取得します
      *
-     * @param param パラメータ
+     * @param psmShikibetsuTaisho パラメータ
      * @return List<RString>
      */
-    UaFt200FindShikibetsuTaishoEntity getShikibetsuTaishoPsm(IdoCheckListGetDataParameter param);
+    UaFt200FindShikibetsuTaishoEntity getShikibetsuTaishoPsm(RString psmShikibetsuTaisho);
 
     /**
      * 処理日付管理マスタ更新処理
@@ -106,4 +106,11 @@ public interface IIdoCheckListMapper {
      * @return List<RString>
      */
     int updDbt7022ShoriDateKanri(DbT7022ShoriDateKanriEntity entity);
+
+    /**
+     * バッチプロセス用
+     *
+     * @return List<RString>
+     */
+    List<RString> getListForProcess();
 }

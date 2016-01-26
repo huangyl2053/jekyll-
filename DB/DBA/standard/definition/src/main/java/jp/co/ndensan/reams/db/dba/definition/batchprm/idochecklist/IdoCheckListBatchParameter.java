@@ -26,8 +26,8 @@ public class IdoCheckListBatchParameter extends BatchParameterBase {
     private static final String KEY_KONKAI_KAISHI = "konkaiKaishi";
     private static final String KEY_KONKAI_SHURYO = "konkaiShuryo";
     private static final String KEY_HIHOKENSHA_DAICHOU_FLAG = "hihokenshaDaichouFlag";
-    private static final String KEY_JUSHOCHI_TOKUREI_KANRI_FLAG = "jushochiTokureiKanriFlag";
-    private static final String KEY_TEKIYO_JOGAISHA_DAICHOU_FLAG = "tekiyoJogaishaDaichouFlag";
+    private static final String KEY_JUSHOCHI_TOKUREI_FLAG = "jushochiTokureiKanriFlag";
+    private static final String KEY_TEKIYO_JOGAISHA_FLAG = "tekiyoJogaishaDaichouFlag";
     private static final String KEY_SEIKATSUHOGO_FLAG = "seikatsuHogoFlag";
     private static final String KEY_ROREI_FUKUSHI_NENKIN_FLAG = "roreiFukushiNenkinFlag";
     private static final String KEY_SHUTURYOKU_JUN_ID = "shuturyokuJunId";
@@ -42,9 +42,9 @@ public class IdoCheckListBatchParameter extends BatchParameterBase {
     private RDateTime konkaiShuryo;
     @BatchParameter(key = KEY_HIHOKENSHA_DAICHOU_FLAG, name = "被保険者台帳フラグ")
     private boolean hihokenshaDaichouFlag;
-    @BatchParameter(key = KEY_JUSHOCHI_TOKUREI_KANRI_FLAG, name = "他住所地特例者管理フラグ")
+    @BatchParameter(key = KEY_JUSHOCHI_TOKUREI_FLAG, name = "他住所地特例者管理フラグ")
     private boolean jushochiTokureiKanriFlag;
-    @BatchParameter(key = KEY_TEKIYO_JOGAISHA_DAICHOU_FLAG, name = "適用除外者台帳フラグ")
+    @BatchParameter(key = KEY_TEKIYO_JOGAISHA_FLAG, name = "適用除外者台帳フラグ")
     private boolean tekiyoJogaishaDaichouFlag;
     @BatchParameter(key = KEY_SEIKATSUHOGO_FLAG, name = "生活保護フラグ")
     private boolean seikatsuHogoFlag;
@@ -53,6 +53,11 @@ public class IdoCheckListBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_SHUTURYOKU_JUN_ID, name = "出力順ID")
     private long shuturyokuJunId;
 
+    /**
+     * 異動チェックリスト帳票データ作成のパラメータを作成します。
+     *
+     * @return IdoCheckListGetDataProcessParameter
+     */
     public IdoCheckListGetDataProcessParameter toIdoCheckListGetDataProcessParameter() {
         return new IdoCheckListGetDataProcessParameter(
                 konkaiKaishi, konkaiShuryo, hihokenshaDaichouFlag,
@@ -60,6 +65,11 @@ public class IdoCheckListBatchParameter extends BatchParameterBase {
                 seikatsuHogoFlag, roreiFukushiNenkinFlag, shuturyokuJunId);
     }
 
+    /**
+     * 処理日付管理マスタのパラメータを作成します。
+     *
+     * @return UpdShoriDataKanriProcessParameter
+     */
     public UpdShoriDataKanriProcessParameter toUpdShoriDataKanriProcessParameter() {
         return new UpdShoriDataKanriProcessParameter(
                 zenkaiKaishi, zenkaiShuryo, konkaiKaishi, konkaiShuryo);

@@ -5,12 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.step.idochecklist;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.idochecklist.IdoCheckListBatch;
 import jp.co.ndensan.reams.db.dba.business.report.idochecklist.IdoCheckListReport;
+import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.idochecklist.IdochecklistTitle;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.IdoCheckListEntity;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.idochecklist.IdoCheckListGetDataParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.idochecklist.IdoCheckListGetDataProcessParameter;
@@ -29,6 +31,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -55,15 +58,39 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 /**
  * 異動チェックリスト帳票データ作成のプロセスクラス
  */
-public class IdoCheckListReportProcess extends BatchProcessBase<IdoInfoEntity> {
+public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
 
     private List<IdoInfoEntity> list;
     private IIdoCheckListMapper mapper;
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.idochecklist.IIdoCheckListMapper."
-            + "getHihokenshaDaichouList");
+            + "getListForProcess");
     private IdoCheckListEntity idoCheckListEntity;
     private static final ReportId REPORT_ID = new ReportId(new RString("DBA200006"));
+    private static final CodeShubetsu CODE_SHUBETSU_SOSHITSU_JIYU = new CodeShubetsu(new RString("0008"));
+    private static final CodeShubetsu CODE_SHUBETSU_IRYO_HOKEN = new CodeShubetsu(new RString("0009"));
+    private static final CodeShubetsu CODE_SHUBETSU_HOKA_TOKUREI = new CodeShubetsu(new RString("0011"));
+    private static final CodeShubetsu CODE_SHUBETSU_JOGAI = new CodeShubetsu(new RString("0012"));
+    private static final Code FUJOSHURUI_CODE_SEIKATU = new Code(new RString("01"));
+    private static final Code FUJOSHURUI_CODE_KYOUIKU = new Code(new RString("02"));
+    private static final Code FUJOSHURUI_CODE_JUUTAKU = new Code(new RString("03"));
+    private static final Code FUJOSHURUI_CODE_IRYOU = new Code(new RString("04"));
+    private static final Code FUJOSHURUI_CODE_KAIGO = new Code(new RString("05"));
+    private static final Code FUJOSHURUI_CODE_SHUSSAN = new Code(new RString("06"));
+    private static final Code FUJOSHURUI_CODE_NARIWAI = new Code(new RString("07"));
+    private static final Code FUJOSHURUI_CODE_SOUSAI = new Code(new RString("08"));
+    private static final Code FUJOSHURUI_CODE_ZANRYUU_HOUZIN = new Code(new RString("A1"));
+    private static final RString IDO_DATA_TEKIYOU_IDO = new RString("適用異動");
+    private static final RString IDO_DATA_NYUUSHO_IDO = new RString("入所異動");
+    private static final RString IDO_DATA_TAISHO_IDO = new RString("退所異動");
+    private static final RString IDO_DATA_KAIJO_IDO = new RString("解除異動");
+    private static final RString IDO_DATA_TEKIYOU_SAKUJYO = new RString("適用削除");
+    private static final RString IDO_DATA_KAIJO_KAIJO = new RString("解除解除");
+    private static final RString IDO_DATA_KAISHI_IDO = new RString("開始異動");
+    private static final RString IDO_DATA_HAISHI_IDO = new RString("廃止異動");
+    private static final int TITLE_JOHO_3 = 3;
+    private static final int TITLE_JOHO_4 = 4;
+    private static final int TITLE_JOHO_5 = 5;
     private IdoCheckListGetDataProcessParameter param;
 
     @BatchWriter
@@ -79,12 +106,12 @@ public class IdoCheckListReportProcess extends BatchProcessBase<IdoInfoEntity> {
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, param.toIdoCheckListGetDataParameter());
+        return new BatchDbReader(MYBATIS_SELECT_ID);
     }
 
     @Override
     protected void createWriter() {
-        batchWrite = batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
@@ -127,7 +154,7 @@ public class IdoCheckListReportProcess extends BatchProcessBase<IdoInfoEntity> {
             key.set住民状態(住民状態List);
             UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
             UaFt200FindShikibetsuTaishoEntity ft200Entity = mapper.getShikibetsuTaishoPsm(
-                    IdoCheckListGetDataParameter.createShikibetsuTaishoPsmParameter(uaFt200Psm));
+                    new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
             IKojin 識別対象 = ShikibetsuTaishoFactory.createKojin(ft200Entity);
             entity.set世帯コード(識別対象.get世帯コード());
             entity.set被保険者カナ氏名(識別対象.get名称().getKana());
@@ -140,10 +167,10 @@ public class IdoCheckListReportProcess extends BatchProcessBase<IdoInfoEntity> {
     }
 
     @Override
-    protected void process(IdoInfoEntity item) {
+    protected void process(RString item) {
     }
 
-    private static class DateComparator implements Comparator<ShisetsuNyutaishoEntity> {
+    private static class DateComparator implements Comparator<ShisetsuNyutaishoEntity>, Serializable {
 
         @Override
         public int compare(ShisetsuNyutaishoEntity o1, ShisetsuNyutaishoEntity o2) {
@@ -158,11 +185,11 @@ public class IdoCheckListReportProcess extends BatchProcessBase<IdoInfoEntity> {
             if (hihokenshaDaichouList.isEmpty()) {
                 IdoInfoEntity idoInfoEntity = new IdoInfoEntity();
                 idoInfoEntity.set対象情報(1);
-                idoInfoEntity.set対象情報タイトル(new RString("データ種別：被保険者台帳"));
-                idoInfoEntity.set開始タイトル(new RString("取得情報"));
-                idoInfoEntity.set終了タイトル(new RString("喪失情報"));
-                idoInfoEntity.set区分タイトル(new RString("資格"));
-                idoInfoEntity.set異動情報タイトル4(new RString("異動情報"));
+                idoInfoEntity.set対象情報タイトル(IdochecklistTitle.対象情報タイトル_被保険者.get名称());
+                idoInfoEntity.set開始タイトル(IdochecklistTitle.開始タイトル_取得.get名称());
+                idoInfoEntity.set終了タイトル(IdochecklistTitle.終了タイトル_喪失.get名称());
+                idoInfoEntity.set区分タイトル(IdochecklistTitle.区分タイトル_資格.get名称());
+                idoInfoEntity.set異動情報タイトル4(IdochecklistTitle.異動情報タイトル4_異動.get名称());
                 list.add(idoInfoEntity);
             } else {
                 list.addAll(hihokenshaDaichouList);
@@ -188,199 +215,98 @@ public class IdoCheckListReportProcess extends BatchProcessBase<IdoInfoEntity> {
 
             for (ShisetsuNyutaishoEntity entity : shisetsuNyutaishoList) {
                 IdoInfoEntity idoInfoEntity = new IdoInfoEntity();
-//                idoInfoEntity.set世帯コード(null);
-//                idoInfoEntity.set被保険者カナ氏名(null);
-//                idoInfoEntity.set被保険者氏名(null);
                 idoInfoEntity.set対象情報(2);
-//                idoInfoEntity.set改頁１(null);
-//                idoInfoEntity.set改頁２(null);
-//                idoInfoEntity.set改頁３(null);
-//                idoInfoEntity.set改頁４(null);
-//                idoInfoEntity.set改頁５(null);
-                idoInfoEntity.set対象情報タイトル(new RString("データ種別：他市町村住所地特例者台帳"));
-                idoInfoEntity.set開始タイトル(new RString("適用情報"));
-                idoInfoEntity.set終了タイトル(new RString("解除情報"));
-//                idoInfoEntity.set区分タイトル(null);
-                idoInfoEntity.set異動情報タイトル1(new RString("施設コード"));
-//                idoInfoEntity.set異動情報タイトル2(null);
-//                idoInfoEntity.set異動情報タイトル3(null);
-                idoInfoEntity.set開始年月日タイトル(new RString("入所年月日"));
-                idoInfoEntity.set終了年月日タイトル(new RString("退所年月日"));
-                idoInfoEntity.set異動情報タイトル4(new RString("異動情報"));
-//                idoInfoEntity.set異動情報タイトル5(null);
-//                idoInfoEntity.set異動情報タイトル6(null);
+                idoInfoEntity.set対象情報タイトル(IdochecklistTitle.対象情報タイトル_他市町村.get名称());
+                idoInfoEntity.set開始タイトル(IdochecklistTitle.開始タイトル_適用.get名称());
+                idoInfoEntity.set終了タイトル(IdochecklistTitle.終了タイトル_解除.get名称());
+                idoInfoEntity.set異動情報タイトル1(IdochecklistTitle.異動情報タイトル1_施設.get名称());
+                idoInfoEntity.set開始年月日タイトル(IdochecklistTitle.開始年月日タイトル_入所.get名称());
+                idoInfoEntity.set終了年月日タイトル(IdochecklistTitle.終了年月日タイトル_退所.get名称());
+                idoInfoEntity.set異動情報タイトル4(IdochecklistTitle.異動情報タイトル4_異動.get名称());
                 idoInfoEntity.set異動情報データ1(entity.get入所施設コード().value());
-//                idoInfoEntity.set被保険者番号(null);
                 idoInfoEntity.set識別コード(entity.get識別コード());
-//                idoInfoEntity.set区分_前_資格(null);
-//                idoInfoEntity.set区分_後_資格(null);
-//                idoInfoEntity.set異動情報データ2(null);
-//                idoInfoEntity.set異動情報データ3(null);
-//                idoInfoEntity.set異動情報データ5(null);
-//                idoInfoEntity.set異動情報データ6(null);
-                if (!entity.is論理削除フラグ()) {
-//                    idoInfoEntity.set取得情報_前_事由(null);
-//                    idoInfoEntity.set取得情報_前_異動年月日(null);
-//                    idoInfoEntity.set取得情報_前_届出年月日(null);
-//                    idoInfoEntity.set開始年月日データ_前(null);
-//                    idoInfoEntity.set喪失情報_前_事由(null);
-//                    idoInfoEntity.set喪失情報_前_異動年月日(null);
-//                    idoInfoEntity.set喪失情報_前_届出年月日(null);
-//                    idoInfoEntity.set終了年月日データ_前(null);
-                    UzT0007CodeEntity codeEntity = CodeMaster.getCode(
-                            SubGyomuCode.DBA介護資格,
-                            new CodeShubetsu(new RString("0008")),
-                            new Code(entity.get異動事由コード()));
-                    if (codeEntity != null) {
-                        idoInfoEntity.set取得情報_後_事由(codeEntity.getコード名称());
-                        idoInfoEntity.set取得情報_後_異動年月日(entity.get適用年月日());
-                        idoInfoEntity.set取得情報_後_届出年月日(entity.get適用届出年月日());
-                        idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
-//                        idoInfoEntity.set喪失情報_後_事由(null);
-//                        idoInfoEntity.set喪失情報_後_異動年月日(null);
-//                        idoInfoEntity.set喪失情報_後_届出年月日(null);
-//                        idoInfoEntity.set終了年月日データ_後(null);
-                        idoInfoEntity.set異動情報データ4(new RString("適用異動"));
-                    }
-
-                    if (entity.get異動事由コード() == null
-                            && entity.get入所年月日() != null
-                            && entity.get退所年月日() == null) {
-//                        idoInfoEntity.set取得情報_後_事由(null);
-//                        idoInfoEntity.set取得情報_後_異動年月日(null);
-//                        idoInfoEntity.set取得情報_後_届出年月日(null);
-                        idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
-//                        idoInfoEntity.set喪失情報_後_事由(null);
-//                        idoInfoEntity.set喪失情報_後_異動年月日(null);
-//                        idoInfoEntity.set喪失情報_後_届出年月日(null);
-//                        idoInfoEntity.set終了年月日データ_後(null);
-                        idoInfoEntity.set異動情報データ4(new RString("入所異動"));
-                    }
-
-                    if (entity.get異動事由コード() == null
-                            && entity.get入所年月日() != null
-                            && entity.get退所年月日() != null) {
-//                        idoInfoEntity.set取得情報_後_事由(null);
-//                        idoInfoEntity.set取得情報_後_異動年月日(null);
-//                        idoInfoEntity.set取得情報_後_届出年月日(null);
-                        idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
-//                        idoInfoEntity.set喪失情報_後_事由(null);
-//                        idoInfoEntity.set喪失情報_後_異動年月日(null);
-//                        idoInfoEntity.set喪失情報_後_届出年月日(null);
-                        idoInfoEntity.set終了年月日データ_後(entity.get退所年月日());
-                        idoInfoEntity.set異動情報データ4(new RString("退所異動"));
-                    }
-
-                    codeEntity = CodeMaster.getCode(
-                            SubGyomuCode.DBA介護資格,
-                            new CodeShubetsu(new RString("0011")),
-                            new Code(entity.get異動事由コード()));
-                    if (codeEntity != null) {
-//                        idoInfoEntity.set取得情報_後_事由(null);
-//                        idoInfoEntity.set取得情報_後_異動年月日(null);
-//                        idoInfoEntity.set取得情報_後_届出年月日(null);
-//                        idoInfoEntity.set開始年月日データ_後(null);
-                        idoInfoEntity.set喪失情報_後_事由(codeEntity.getコード名称());
-                        idoInfoEntity.set喪失情報_後_異動年月日(entity.get解除年月日());
-                        idoInfoEntity.set喪失情報_後_届出年月日(entity.get解除届出年月日());
-                        idoInfoEntity.set終了年月日データ_後(entity.get退所年月日());
-                        idoInfoEntity.set異動情報データ4(new RString("解除異動"));
-                    }
-                } else {
-//                    idoInfoEntity.set取得情報_後_事由(null);
-//                    idoInfoEntity.set取得情報_後_異動年月日(null);
-//                    idoInfoEntity.set取得情報_後_届出年月日(null);
-//                    idoInfoEntity.set開始年月日データ_後(null);
-//                    idoInfoEntity.set喪失情報_後_事由(null);
-//                    idoInfoEntity.set喪失情報_後_異動年月日(null);
-//                    idoInfoEntity.set喪失情報_後_届出年月日(null);
-//                    idoInfoEntity.set終了年月日データ_後(null);
-                    UzT0007CodeEntity codeEntity = CodeMaster.getCode(
-                            SubGyomuCode.DBA介護資格,
-                            new CodeShubetsu(new RString("0008")),
-                            new Code(entity.get異動事由コード()));
-                    if (codeEntity != null) {
-                        idoInfoEntity.set取得情報_前_事由(codeEntity.getコード名称());
-                        idoInfoEntity.set取得情報_前_異動年月日(entity.get適用年月日());
-                        idoInfoEntity.set取得情報_前_届出年月日(entity.get適用届出年月日());
-                        idoInfoEntity.set開始年月日データ_前(entity.get入所年月日());
-//                        idoInfoEntity.set喪失情報_前_事由(null);
-//                        idoInfoEntity.set喪失情報_前_異動年月日(null);
-//                        idoInfoEntity.set喪失情報_前_届出年月日(null);
-//                        idoInfoEntity.set終了年月日データ_前(null);
-                        idoInfoEntity.set異動情報データ4(new RString("適用削除"));
-                    }
-                    codeEntity = CodeMaster.getCode(
-                            SubGyomuCode.DBA介護資格,
-                            new CodeShubetsu(new RString("0011")),
-                            new Code(entity.get異動事由コード()));
-                    if (codeEntity != null) {
-//                        idoInfoEntity.set取得情報_前_事由(null);
-//                        idoInfoEntity.set取得情報_前_異動年月日(null);
-//                        idoInfoEntity.set取得情報_前_届出年月日(null);
-//                        idoInfoEntity.set開始年月日データ_前(null);
-                        idoInfoEntity.set喪失情報_前_事由(codeEntity.getコード名称());
-                        idoInfoEntity.set喪失情報_前_異動年月日(entity.get解除年月日());
-                        idoInfoEntity.set喪失情報_前_届出年月日(entity.get解除届出年月日());
-                        idoInfoEntity.set終了年月日データ_前(entity.get退所年月日());
-                        idoInfoEntity.set異動情報データ4(new RString("解除解除"));
-                    }
-
-                }
+                setJushochiTokurei(idoInfoEntity, entity);
                 list.add(idoInfoEntity);
             }
             if (shisetsuNyutaishoList.isEmpty()) {
                 IdoInfoEntity idoInfoEntity = new IdoInfoEntity();
-//                idoInfoEntity.set世帯コード(null);
-//                idoInfoEntity.set被保険者カナ氏名(null);
-//                idoInfoEntity.set被保険者氏名(null);
                 idoInfoEntity.set対象情報(2);
-//                idoInfoEntity.set改頁１(null);
-//                idoInfoEntity.set改頁２(null);
-//                idoInfoEntity.set改頁３(null);
-//                idoInfoEntity.set改頁４(null);
-//                idoInfoEntity.set改頁５(null);
-                idoInfoEntity.set対象情報タイトル(new RString("データ種別：他市町村住所地特例者台帳"));
-                idoInfoEntity.set開始タイトル(new RString("適用情報"));
-                idoInfoEntity.set終了タイトル(new RString("解除情報"));
-//                idoInfoEntity.set区分タイトル(null);
-                idoInfoEntity.set異動情報タイトル1(new RString("施設コード"));
-//                idoInfoEntity.set異動情報タイトル2(null);
-//                idoInfoEntity.set異動情報タイトル3(null);
-                idoInfoEntity.set開始年月日タイトル(new RString("入所年月日"));
-                idoInfoEntity.set終了年月日タイトル(new RString("退所年月日"));
-                idoInfoEntity.set異動情報タイトル4(new RString("異動情報"));
-//                idoInfoEntity.set異動情報タイトル5(null);
-//                idoInfoEntity.set異動情報タイトル6(null);
-//                idoInfoEntity.set開始年月日データ_前(null);
-//                idoInfoEntity.set終了年月日データ_前(null);
-//                idoInfoEntity.set開始年月日データ_後(null);
-//                idoInfoEntity.set終了年月日データ_後(null);
-//                idoInfoEntity.set異動情報データ1(null);
-//                idoInfoEntity.set異動情報データ2(null);
-//                idoInfoEntity.set異動情報データ3(null);
-//                idoInfoEntity.set異動情報データ4(null);
-//                idoInfoEntity.set異動情報データ5(null);
-//                idoInfoEntity.set異動情報データ6(null);
-//                idoInfoEntity.set被保険者番号(null);
-//                idoInfoEntity.set識別コード(null);
-//                idoInfoEntity.set取得情報_前_事由(null);
-//                idoInfoEntity.set取得情報_前_異動年月日(null);
-//                idoInfoEntity.set取得情報_前_届出年月日(null);
-//                idoInfoEntity.set喪失情報_前_事由(null);
-//                idoInfoEntity.set喪失情報_前_異動年月日(null);
-//                idoInfoEntity.set喪失情報_前_届出年月日(null);
-//                idoInfoEntity.set取得情報_後_事由(null);
-//                idoInfoEntity.set取得情報_後_異動年月日(null);
-//                idoInfoEntity.set取得情報_後_届出年月日(null);
-//                idoInfoEntity.set喪失情報_後_事由(null);
-//                idoInfoEntity.set喪失情報_後_異動年月日(null);
-//                idoInfoEntity.set喪失情報_後_届出年月日(null);
-//                idoInfoEntity.set区分_前_資格(null);
-//                idoInfoEntity.set区分_後_資格(null);
+                idoInfoEntity.set対象情報タイトル(IdochecklistTitle.対象情報タイトル_他市町村.get名称());
+                idoInfoEntity.set開始タイトル(IdochecklistTitle.開始タイトル_適用.get名称());
+                idoInfoEntity.set終了タイトル(IdochecklistTitle.終了タイトル_解除.get名称());
+                idoInfoEntity.set異動情報タイトル1(IdochecklistTitle.異動情報タイトル1_施設.get名称());
+                idoInfoEntity.set開始年月日タイトル(IdochecklistTitle.開始年月日タイトル_入所.get名称());
+                idoInfoEntity.set終了年月日タイトル(IdochecklistTitle.終了年月日タイトル_退所.get名称());
+                idoInfoEntity.set異動情報タイトル4(IdochecklistTitle.異動情報タイトル4_異動.get名称());
                 list.add(idoInfoEntity);
             }
         }
+    }
+
+    private void setJushochiTokurei(IdoInfoEntity idoInfoEntity, ShisetsuNyutaishoEntity entity) {
+        if (!entity.is論理削除フラグ()) {
+
+            UzT0007CodeEntity codeEntity = getCodeNameByCode(CODE_SHUBETSU_SOSHITSU_JIYU, entity.get異動事由コード());
+            if (codeEntity != null) {
+                idoInfoEntity.set取得情報_後_事由(codeEntity.getコード名称());
+                idoInfoEntity.set取得情報_後_異動年月日(entity.get適用年月日());
+                idoInfoEntity.set取得情報_後_届出年月日(entity.get適用届出年月日());
+                idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
+                idoInfoEntity.set異動情報データ4(IDO_DATA_TEKIYOU_IDO);
+            }
+
+            if (entity.get異動事由コード() == null
+                    && entity.get入所年月日() != null
+                    && entity.get退所年月日() == null) {
+                idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
+                idoInfoEntity.set異動情報データ4(IDO_DATA_NYUUSHO_IDO);
+            }
+
+            if (entity.get異動事由コード() == null
+                    && entity.get入所年月日() != null
+                    && entity.get退所年月日() != null) {
+                idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
+                idoInfoEntity.set終了年月日データ_後(entity.get退所年月日());
+                idoInfoEntity.set異動情報データ4(IDO_DATA_TAISHO_IDO);
+            }
+
+            codeEntity = getCodeNameByCode(CODE_SHUBETSU_HOKA_TOKUREI, entity.get異動事由コード());
+            if (codeEntity != null) {
+                idoInfoEntity.set喪失情報_後_事由(codeEntity.getコード名称());
+                idoInfoEntity.set喪失情報_後_異動年月日(entity.get解除年月日());
+                idoInfoEntity.set喪失情報_後_届出年月日(entity.get解除届出年月日());
+                idoInfoEntity.set終了年月日データ_後(entity.get退所年月日());
+                idoInfoEntity.set異動情報データ4(IDO_DATA_KAIJO_IDO);
+            }
+        } else {
+            UzT0007CodeEntity codeEntity = getCodeNameByCode(CODE_SHUBETSU_SOSHITSU_JIYU, entity.get異動事由コード());
+            if (codeEntity != null) {
+                idoInfoEntity.set取得情報_前_事由(codeEntity.getコード名称());
+                idoInfoEntity.set取得情報_前_異動年月日(entity.get適用年月日());
+                idoInfoEntity.set取得情報_前_届出年月日(entity.get適用届出年月日());
+                idoInfoEntity.set開始年月日データ_前(entity.get入所年月日());
+                idoInfoEntity.set異動情報データ4(IDO_DATA_TEKIYOU_SAKUJYO);
+            }
+            codeEntity = getCodeNameByCode(CODE_SHUBETSU_HOKA_TOKUREI, entity.get異動事由コード());
+            if (codeEntity != null) {
+                idoInfoEntity.set喪失情報_前_事由(codeEntity.getコード名称());
+                idoInfoEntity.set喪失情報_前_異動年月日(entity.get解除年月日());
+                idoInfoEntity.set喪失情報_前_届出年月日(entity.get解除届出年月日());
+                idoInfoEntity.set終了年月日データ_前(entity.get退所年月日());
+                idoInfoEntity.set異動情報データ4(IDO_DATA_KAIJO_KAIJO);
+            }
+
+        }
+    }
+
+    private UzT0007CodeEntity getCodeNameByCode(CodeShubetsu codeShubetsu, RString code) {
+        if (code == null || code.isEmpty()) {
+            return null;
+        }
+        return CodeMaster.getCode(
+                SubGyomuCode.DBA介護資格,
+                codeShubetsu,
+                new Code(code));
     }
 
     private void getTekiyoJogaishaDaichouList() {
@@ -401,94 +327,86 @@ public class IdoCheckListReportProcess extends BatchProcessBase<IdoInfoEntity> {
 
             for (ShisetsuNyutaishoEntity entity : shisetsuNyutaishoList) {
                 IdoInfoEntity idoInfoEntity = new IdoInfoEntity();
-                idoInfoEntity.set対象情報(3);
-                idoInfoEntity.set対象情報タイトル(new RString("データ種別：適用除外者台帳"));
-                idoInfoEntity.set開始タイトル(new RString("適用情報"));
-                idoInfoEntity.set終了タイトル(new RString("解除情報"));
-                idoInfoEntity.set異動情報タイトル1(new RString("施設コード"));
-                idoInfoEntity.set開始年月日タイトル(new RString("入所年月日"));
-                idoInfoEntity.set終了年月日タイトル(new RString("退所年月日"));
-                idoInfoEntity.set異動情報タイトル4(new RString("異動情報"));
+                idoInfoEntity.set対象情報(TITLE_JOHO_3);
+                idoInfoEntity.set対象情報タイトル(IdochecklistTitle.対象情報タイトル_適用除外者.get名称());
+                idoInfoEntity.set開始タイトル(IdochecklistTitle.開始タイトル_適用.get名称());
+                idoInfoEntity.set終了タイトル(IdochecklistTitle.終了タイトル_解除.get名称());
+                idoInfoEntity.set異動情報タイトル1(IdochecklistTitle.異動情報タイトル1_施設.get名称());
+                idoInfoEntity.set開始年月日タイトル(IdochecklistTitle.開始年月日タイトル_入所.get名称());
+                idoInfoEntity.set終了年月日タイトル(IdochecklistTitle.終了年月日タイトル_退所.get名称());
+                idoInfoEntity.set異動情報タイトル4(IdochecklistTitle.異動情報タイトル4_異動.get名称());
                 idoInfoEntity.set異動情報データ1(entity.get入所施設コード().value());
                 idoInfoEntity.set識別コード(entity.get識別コード());
-                if (!entity.is論理削除フラグ()) {
-                    UzT0007CodeEntity codeEntity = CodeMaster.getCode(
-                            SubGyomuCode.DBA介護資格,
-                            new CodeShubetsu(new RString("0009")),
-                            new Code(entity.get異動事由コード()));
-                    if (codeEntity != null) {
-                        idoInfoEntity.set取得情報_後_事由(codeEntity.getコード名称());
-                        idoInfoEntity.set取得情報_後_異動年月日(entity.get適用年月日());
-                        idoInfoEntity.set取得情報_後_届出年月日(entity.get適用届出年月日());
-                        idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
-                        idoInfoEntity.set異動情報データ4(new RString("適用異動"));
-                    }
-
-                    if (entity.get異動事由コード() == null
-                            && entity.get入所年月日() != null
-                            && entity.get退所年月日() == null) {
-                        idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
-                        idoInfoEntity.set異動情報データ4(new RString("入所異動"));
-                    }
-
-                    if (entity.get異動事由コード() == null
-                            && entity.get入所年月日() != null
-                            && entity.get退所年月日() != null) {
-                        idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
-                        idoInfoEntity.set終了年月日データ_後(entity.get退所年月日());
-                        idoInfoEntity.set異動情報データ4(new RString("退所異動"));
-                    }
-
-                    codeEntity = CodeMaster.getCode(
-                            SubGyomuCode.DBA介護資格,
-                            new CodeShubetsu(new RString("0012")),
-                            new Code(entity.get異動事由コード()));
-                    if (codeEntity != null) {
-                        idoInfoEntity.set喪失情報_後_事由(codeEntity.getコード名称());
-                        idoInfoEntity.set喪失情報_後_異動年月日(entity.get解除年月日());
-                        idoInfoEntity.set喪失情報_後_届出年月日(entity.get解除届出年月日());
-                        idoInfoEntity.set終了年月日データ_後(entity.get退所年月日());
-                        idoInfoEntity.set異動情報データ4(new RString("解除異動"));
-                    }
-                } else {
-                    UzT0007CodeEntity codeEntity = CodeMaster.getCode(
-                            SubGyomuCode.DBA介護資格,
-                            new CodeShubetsu(new RString("0009")),
-                            new Code(entity.get異動事由コード()));
-                    if (codeEntity != null) {
-                        idoInfoEntity.set取得情報_前_事由(codeEntity.getコード名称());
-                        idoInfoEntity.set取得情報_前_異動年月日(entity.get適用年月日());
-                        idoInfoEntity.set取得情報_前_届出年月日(entity.get適用届出年月日());
-                        idoInfoEntity.set開始年月日データ_前(entity.get入所年月日());
-                        idoInfoEntity.set異動情報データ4(new RString("適用削除"));
-                    }
-                    codeEntity = CodeMaster.getCode(
-                            SubGyomuCode.DBA介護資格,
-                            new CodeShubetsu(new RString("0012")),
-                            new Code(entity.get異動事由コード()));
-                    if (codeEntity != null) {
-                        idoInfoEntity.set喪失情報_前_事由(codeEntity.getコード名称());
-                        idoInfoEntity.set喪失情報_前_異動年月日(entity.get解除年月日());
-                        idoInfoEntity.set喪失情報_前_届出年月日(entity.get解除届出年月日());
-                        idoInfoEntity.set終了年月日データ_前(entity.get退所年月日());
-                        idoInfoEntity.set異動情報データ4(new RString("解除解除"));
-                    }
-
-                }
+                setTekiyoJogaishaDaichou(idoInfoEntity, entity);
                 list.add(idoInfoEntity);
             }
             if (shisetsuNyutaishoList.isEmpty()) {
                 IdoInfoEntity idoInfoEntity = new IdoInfoEntity();
-                idoInfoEntity.set対象情報(3);
-                idoInfoEntity.set対象情報タイトル(new RString("データ種別：適用除外者台帳"));
-                idoInfoEntity.set開始タイトル(new RString("適用情報"));
-                idoInfoEntity.set終了タイトル(new RString("解除情報"));
-                idoInfoEntity.set異動情報タイトル1(new RString("施設コード"));
-                idoInfoEntity.set開始年月日タイトル(new RString("入所年月日"));
-                idoInfoEntity.set終了年月日タイトル(new RString("退所年月日"));
-                idoInfoEntity.set異動情報タイトル4(new RString("異動情報"));
+                idoInfoEntity.set対象情報(TITLE_JOHO_3);
+                idoInfoEntity.set対象情報タイトル(IdochecklistTitle.対象情報タイトル_適用除外者.get名称());
+                idoInfoEntity.set開始タイトル(IdochecklistTitle.開始タイトル_適用.get名称());
+                idoInfoEntity.set終了タイトル(IdochecklistTitle.終了タイトル_解除.get名称());
+                idoInfoEntity.set異動情報タイトル1(IdochecklistTitle.異動情報タイトル1_施設.get名称());
+                idoInfoEntity.set開始年月日タイトル(IdochecklistTitle.開始年月日タイトル_入所.get名称());
+                idoInfoEntity.set終了年月日タイトル(IdochecklistTitle.終了年月日タイトル_退所.get名称());
+                idoInfoEntity.set異動情報タイトル4(IdochecklistTitle.異動情報タイトル4_異動.get名称());
                 list.add(idoInfoEntity);
             }
+        }
+    }
+
+    private void setTekiyoJogaishaDaichou(IdoInfoEntity idoInfoEntity, ShisetsuNyutaishoEntity entity) {
+        if (!entity.is論理削除フラグ()) {
+            UzT0007CodeEntity codeEntity = getCodeNameByCode(CODE_SHUBETSU_IRYO_HOKEN, entity.get異動事由コード());
+            if (codeEntity != null) {
+                idoInfoEntity.set取得情報_後_事由(codeEntity.getコード名称());
+                idoInfoEntity.set取得情報_後_異動年月日(entity.get適用年月日());
+                idoInfoEntity.set取得情報_後_届出年月日(entity.get適用届出年月日());
+                idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
+                idoInfoEntity.set異動情報データ4(IDO_DATA_TEKIYOU_IDO);
+            }
+
+            if (entity.get異動事由コード() == null
+                    && entity.get入所年月日() != null
+                    && entity.get退所年月日() == null) {
+                idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
+                idoInfoEntity.set異動情報データ4(IDO_DATA_NYUUSHO_IDO);
+            }
+
+            if (entity.get異動事由コード() == null
+                    && entity.get入所年月日() != null
+                    && entity.get退所年月日() != null) {
+                idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
+                idoInfoEntity.set終了年月日データ_後(entity.get退所年月日());
+                idoInfoEntity.set異動情報データ4(IDO_DATA_TAISHO_IDO);
+            }
+
+            codeEntity = getCodeNameByCode(CODE_SHUBETSU_JOGAI, entity.get異動事由コード());
+            if (codeEntity != null) {
+                idoInfoEntity.set喪失情報_後_事由(codeEntity.getコード名称());
+                idoInfoEntity.set喪失情報_後_異動年月日(entity.get解除年月日());
+                idoInfoEntity.set喪失情報_後_届出年月日(entity.get解除届出年月日());
+                idoInfoEntity.set終了年月日データ_後(entity.get退所年月日());
+                idoInfoEntity.set異動情報データ4(IDO_DATA_KAIJO_IDO);
+            }
+        } else {
+            UzT0007CodeEntity codeEntity = getCodeNameByCode(CODE_SHUBETSU_IRYO_HOKEN, entity.get異動事由コード());
+            if (codeEntity != null) {
+                idoInfoEntity.set取得情報_前_事由(codeEntity.getコード名称());
+                idoInfoEntity.set取得情報_前_異動年月日(entity.get適用年月日());
+                idoInfoEntity.set取得情報_前_届出年月日(entity.get適用届出年月日());
+                idoInfoEntity.set開始年月日データ_前(entity.get入所年月日());
+                idoInfoEntity.set異動情報データ4(IDO_DATA_TEKIYOU_SAKUJYO);
+            }
+            codeEntity = getCodeNameByCode(CODE_SHUBETSU_JOGAI, entity.get異動事由コード());
+            if (codeEntity != null) {
+                idoInfoEntity.set喪失情報_前_事由(codeEntity.getコード名称());
+                idoInfoEntity.set喪失情報_前_異動年月日(entity.get解除年月日());
+                idoInfoEntity.set喪失情報_前_届出年月日(entity.get解除届出年月日());
+                idoInfoEntity.set終了年月日データ_前(entity.get退所年月日());
+                idoInfoEntity.set異動情報データ4(IDO_DATA_KAIJO_KAIJO);
+            }
+
         }
     }
 
@@ -500,87 +418,105 @@ public class IdoCheckListReportProcess extends BatchProcessBase<IdoInfoEntity> {
                         RDateTime.MAX, RDateTime.MAX, RString.HALF_SPACE,
                         entity.getShikibetsuCode(), entity.getGyomuCode(), entity.getJukyuKaishiYMD()));
                 IdoInfoEntity idoInfoEntity = new IdoInfoEntity();
-                idoInfoEntity.set対象情報(4);
-                idoInfoEntity.set対象情報タイトル(new RString("データ種別：生活保護情報"));
-                idoInfoEntity.set開始タイトル(new RString("開始情報"));
-                idoInfoEntity.set終了タイトル(new RString("廃止情報"));
-                idoInfoEntity.set異動情報タイトル1(new RString("扶助種類"));
-                idoInfoEntity.set開始年月日タイトル(new RString("開始年月日"));
-                idoInfoEntity.set終了年月日タイトル(new RString("廃止年月日"));
-                idoInfoEntity.set異動情報タイトル4(new RString("異動情報"));
+                idoInfoEntity.set対象情報(TITLE_JOHO_4);
+                idoInfoEntity.set対象情報タイトル(IdochecklistTitle.対象情報タイトル_生活保護.get名称());
+                idoInfoEntity.set開始タイトル(IdochecklistTitle.開始タイトル_開始.get名称());
+                idoInfoEntity.set終了タイトル(IdochecklistTitle.終了タイトル_廃止.get名称());
+                idoInfoEntity.set異動情報タイトル1(IdochecklistTitle.異動情報タイトル1_扶助.get名称());
+                idoInfoEntity.set開始年月日タイトル(IdochecklistTitle.開始年月日タイトル_開始.get名称());
+                idoInfoEntity.set終了年月日タイトル(IdochecklistTitle.終了年月日タイトル_廃止.get名称());
+                idoInfoEntity.set異動情報タイトル4(IdochecklistTitle.異動情報タイトル4_異動.get名称());
                 if (entity.getJukyuKaishiYMD() != null && entity.getJukyuHaishiYMD() == null) {
                     idoInfoEntity.set開始年月日データ_後(entity.getJukyuKaishiYMD());
-                    idoInfoEntity.set異動情報データ4(new RString("開始異動"));
+                    idoInfoEntity.set異動情報データ4(IDO_DATA_KAISHI_IDO);
                 }
                 if (entity.getJukyuKaishiYMD() != null && entity.getJukyuHaishiYMD() != null) {
                     idoInfoEntity.set終了年月日データ_後(entity.getJukyuHaishiYMD());
-                    idoInfoEntity.set異動情報データ4(new RString("廃止異動"));
+                    idoInfoEntity.set異動情報データ4(IDO_DATA_HAISHI_IDO);
                 }
-                if (fujoShuruiCodeList.contains(new RString("01"))) {
+                if (fujoShuruiCodeList.contains(FUJOSHURUI_CODE_SEIKATU.value())) {
                     idoInfoEntity.set異動情報データ1(
-                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, new CodeShubetsu(new RString("0017")), new Code("01")).getコード略称());
+                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
+                                    URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
+                                    FUJOSHURUI_CODE_SEIKATU).getコード略称());
                 } else {
                     idoInfoEntity.set異動情報データ1(RString.FULL_SPACE.concat(RString.FULL_SPACE));
                 }
-                if (fujoShuruiCodeList.contains(new RString("02"))) {
+                if (fujoShuruiCodeList.contains(FUJOSHURUI_CODE_KYOUIKU.value())) {
                     idoInfoEntity.set異動情報データ1(RString.FULL_SPACE.concat(
-                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, new CodeShubetsu(new RString("0017")), new Code("02")).getコード略称()));
+                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
+                                    URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
+                                    FUJOSHURUI_CODE_KYOUIKU).getコード略称()));
                 } else {
                     idoInfoEntity.set異動情報データ1(RString.FULL_SPACE.concat(RString.FULL_SPACE.concat(RString.FULL_SPACE)));
                 }
-                if (fujoShuruiCodeList.contains(new RString("03"))) {
+                if (fujoShuruiCodeList.contains(FUJOSHURUI_CODE_JUUTAKU.value())) {
                     idoInfoEntity.set異動情報データ2(
-                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, new CodeShubetsu(new RString("0017")), new Code("03")).getコード略称());
+                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
+                                    URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
+                                    FUJOSHURUI_CODE_JUUTAKU).getコード略称());
                 } else {
                     idoInfoEntity.set異動情報データ2(RString.FULL_SPACE.concat(RString.FULL_SPACE));
                 }
-                if (fujoShuruiCodeList.contains(new RString("04"))) {
+                if (fujoShuruiCodeList.contains(FUJOSHURUI_CODE_IRYOU.value())) {
                     idoInfoEntity.set異動情報データ2(RString.FULL_SPACE.concat(
-                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, new CodeShubetsu(new RString("0017")), new Code("04")).getコード略称()));
+                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
+                                    URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
+                                    FUJOSHURUI_CODE_IRYOU).getコード略称()));
                 } else {
                     idoInfoEntity.set異動情報データ2(RString.FULL_SPACE.concat(RString.FULL_SPACE.concat(RString.FULL_SPACE)));
                 }
-                if (fujoShuruiCodeList.contains(new RString("05"))) {
+                if (fujoShuruiCodeList.contains(FUJOSHURUI_CODE_KAIGO.value())) {
                     idoInfoEntity.set異動情報データ3(
-                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, new CodeShubetsu(new RString("0017")), new Code("05")).getコード略称());
+                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
+                                    URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
+                                    FUJOSHURUI_CODE_KAIGO).getコード略称());
                 } else {
                     idoInfoEntity.set異動情報データ3(RString.FULL_SPACE.concat(RString.FULL_SPACE));
                 }
-                if (fujoShuruiCodeList.contains(new RString("06"))) {
+                if (fujoShuruiCodeList.contains(FUJOSHURUI_CODE_SHUSSAN.value())) {
                     idoInfoEntity.set異動情報データ3(RString.FULL_SPACE.concat(
-                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, new CodeShubetsu(new RString("0017")), new Code("06")).getコード略称()));
+                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
+                                    URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
+                                    FUJOSHURUI_CODE_SHUSSAN).getコード略称()));
                 } else {
                     idoInfoEntity.set異動情報データ3(RString.FULL_SPACE.concat(RString.FULL_SPACE.concat(RString.FULL_SPACE)));
                 }
-                if (fujoShuruiCodeList.contains(new RString("07"))) {
+                if (fujoShuruiCodeList.contains(FUJOSHURUI_CODE_NARIWAI.value())) {
                     idoInfoEntity.set異動情報データ5(
-                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, new CodeShubetsu(new RString("0017")), new Code("07")).getコード略称());
+                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
+                                    URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
+                                    FUJOSHURUI_CODE_NARIWAI).getコード略称());
                 } else {
                     idoInfoEntity.set異動情報データ5(RString.FULL_SPACE.concat(RString.FULL_SPACE));
                 }
-                if (fujoShuruiCodeList.contains(new RString("08"))) {
+                if (fujoShuruiCodeList.contains(FUJOSHURUI_CODE_SOUSAI.value())) {
                     idoInfoEntity.set異動情報データ5(RString.FULL_SPACE.concat(
-                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, new CodeShubetsu(new RString("0017")), new Code("08")).getコード略称()));
+                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
+                                    URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
+                                    FUJOSHURUI_CODE_SOUSAI).getコード略称()));
                 } else {
                     idoInfoEntity.set異動情報データ5(RString.FULL_SPACE.concat(RString.FULL_SPACE.concat(RString.FULL_SPACE)));
                 }
-                if (fujoShuruiCodeList.contains(new RString("A1"))) {
+                if (fujoShuruiCodeList.contains(FUJOSHURUI_CODE_ZANRYUU_HOUZIN.value())) {
                     idoInfoEntity.set異動情報データ6(
-                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, new CodeShubetsu(new RString("0017")), new Code("A1")).getコード略称());
+                            CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
+                                    URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
+                                    FUJOSHURUI_CODE_ZANRYUU_HOUZIN).getコード略称());
                 }
                 idoInfoEntity.set識別コード(entity.getShikibetsuCode());
                 list.add(idoInfoEntity);
             }
             if (seikatsuHogoList.isEmpty()) {
                 IdoInfoEntity idoInfoEntity = new IdoInfoEntity();
-                idoInfoEntity.set対象情報(4);
-                idoInfoEntity.set対象情報タイトル(new RString("データ種別：生活保護情報"));
-                idoInfoEntity.set開始タイトル(new RString("開始情報"));
-                idoInfoEntity.set終了タイトル(new RString("廃止情報"));
-                idoInfoEntity.set異動情報タイトル1(new RString("扶助種類"));
-                idoInfoEntity.set開始年月日タイトル(new RString("開始年月日"));
-                idoInfoEntity.set終了年月日タイトル(new RString("廃止年月日"));
-                idoInfoEntity.set異動情報タイトル4(new RString("異動情報"));
+                idoInfoEntity.set対象情報(TITLE_JOHO_4);
+                idoInfoEntity.set対象情報タイトル(IdochecklistTitle.対象情報タイトル_生活保護.get名称());
+                idoInfoEntity.set開始タイトル(IdochecklistTitle.開始タイトル_開始.get名称());
+                idoInfoEntity.set終了タイトル(IdochecklistTitle.終了タイトル_廃止.get名称());
+                idoInfoEntity.set異動情報タイトル1(IdochecklistTitle.異動情報タイトル1_扶助.get名称());
+                idoInfoEntity.set開始年月日タイトル(IdochecklistTitle.開始年月日タイトル_開始.get名称());
+                idoInfoEntity.set終了年月日タイトル(IdochecklistTitle.終了年月日タイトル_廃止.get名称());
+                idoInfoEntity.set異動情報タイトル4(IdochecklistTitle.異動情報タイトル4_異動.get名称());
                 list.add(idoInfoEntity);
             }
         }
@@ -591,13 +527,13 @@ public class IdoCheckListReportProcess extends BatchProcessBase<IdoInfoEntity> {
             List<IdoInfoEntity> roreiFukushiNenkinList = mapper.getRoreiFukushiNenkinList(param.toIdoCheckListGetDataParameter());
             if (roreiFukushiNenkinList.isEmpty()) {
                 IdoInfoEntity idoInfoEntity = new IdoInfoEntity();
-                idoInfoEntity.set対象情報(5);
-                idoInfoEntity.set対象情報タイトル(new RString("データ種別：老齢福祉年金情報"));
-                idoInfoEntity.set開始タイトル(new RString("開始情報"));
-                idoInfoEntity.set終了タイトル(new RString("終了情報"));
-                idoInfoEntity.set開始年月日タイトル(new RString("開始年月日"));
-                idoInfoEntity.set終了年月日タイトル(new RString("終了年月日"));
-                idoInfoEntity.set異動情報タイトル4(new RString("異動情報"));
+                idoInfoEntity.set対象情報(TITLE_JOHO_5);
+                idoInfoEntity.set対象情報タイトル(IdochecklistTitle.対象情報タイトル_老齢福祉.get名称());
+                idoInfoEntity.set開始タイトル(IdochecklistTitle.開始タイトル_開始.get名称());
+                idoInfoEntity.set終了タイトル(IdochecklistTitle.終了タイトル_終了.get名称());
+                idoInfoEntity.set開始年月日タイトル(IdochecklistTitle.開始年月日タイトル_開始.get名称());
+                idoInfoEntity.set終了年月日タイトル(IdochecklistTitle.終了年月日タイトル_終了.get名称());
+                idoInfoEntity.set異動情報タイトル4(IdochecklistTitle.異動情報タイトル4_異動.get名称());
                 list.add(idoInfoEntity);
             } else {
                 list.addAll(roreiFukushiNenkinList);
