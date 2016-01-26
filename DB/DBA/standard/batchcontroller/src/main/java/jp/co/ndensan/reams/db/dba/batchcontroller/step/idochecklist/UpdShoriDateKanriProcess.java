@@ -25,10 +25,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 処理日付管理マスタを更新のプロセスグラス
  */
-public class UpdShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDateKanriEntity> {
+public class UpdShoriDateKanriProcess extends BatchProcessBase<RString> {
 
     private UpdShoriDataKanriProcessParameter param;
     private IIdoCheckListMapper mapper;
+    private static final RString MYBATIS_SELECT_ID = new RString(
+            "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.idochecklist.IIdoCheckListMapper."
+            + "getListForProcess");
     @BatchWriter
     private BatchPermanentTableWriter<DbT7022ShoriDateKanriEntity> dbT7022EntityWriter;
 
@@ -44,11 +47,11 @@ public class UpdShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDateK
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(RString.EMPTY);
+        return new BatchDbReader(MYBATIS_SELECT_ID);
     }
 
     @Override
-    protected void process(DbT7022ShoriDateKanriEntity t) {
+    protected void process(RString t) {
     }
 
     @Override
@@ -85,7 +88,7 @@ public class UpdShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDateK
                     param.getKonkaiShuryo().getYear(),
                     param.getKonkaiShuryo().getMonthOfYear(),
                     param.getKonkaiShuryo().getDayOfMonth()));
-            int count = mapper.updDbt7022ShoriDateKanri(entity);
+            mapper.updDbt7022ShoriDateKanri(entity);
         }
 
     }

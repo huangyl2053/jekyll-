@@ -63,5 +63,11 @@
             <artifactId>DbcBusiness</artifactId>
             <type>test-jar</type>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxService</artifactId>
+            <version>1.2.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.IdoCheckListEnti
 import jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.IdoInfoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -35,7 +36,7 @@ public class IdoCheckListBatch {
         List<IdoInfoEntity> list = idoCheckListEntity.getIdoInfoList();
         int k = 1;
         for (IdoInfoEntity entity : list) {
-            if (entity.get識別コード() == null) {
+            if (entity.get識別コード() == null || entity.get識別コード().isEmpty()) {
                 IdoCheckListItem item = new IdoCheckListItem(
                         getNowDate(),
                         new RString(String.valueOf(k)),
@@ -66,13 +67,13 @@ public class IdoCheckListBatch {
                         entity.get世帯コード().value(),
                         entity.get被保険者カナ氏名().value(),
                         entity.get取得情報_前_事由(),
-                        entity.get取得情報_前_異動年月日().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
-                        entity.get取得情報_前_届出年月日().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
-                        entity.get開始年月日データ_前().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
+                        flexToRstr(entity.get取得情報_前_異動年月日()),
+                        flexToRstr(entity.get取得情報_前_届出年月日()),
+                        flexToRstr(entity.get開始年月日データ_前()),
                         entity.get喪失情報_前_事由(),
-                        entity.get喪失情報_前_異動年月日().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
-                        entity.get喪失情報_前_届出年月日().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
-                        entity.get終了年月日データ_前().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
+                        flexToRstr(entity.get喪失情報_前_異動年月日()),
+                        flexToRstr(entity.get喪失情報_前_届出年月日()),
+                        flexToRstr(entity.get終了年月日データ_前()),
                         entity.get区分_前_資格(),
                         entity.get異動情報データ1(),
                         entity.get異動情報データ2(),
@@ -81,13 +82,13 @@ public class IdoCheckListBatch {
                         entity.get識別コード().value(),
                         new RString("該当データがありません"),
                         entity.get取得情報_後_事由(),
-                        entity.get取得情報_後_異動年月日().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
-                        entity.get取得情報_後_届出年月日().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
-                        entity.get開始年月日データ_後().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
+                        flexToRstr(entity.get取得情報_後_異動年月日()),
+                        flexToRstr(entity.get取得情報_後_届出年月日()),
+                        flexToRstr(entity.get開始年月日データ_後()),
                         entity.get喪失情報_後_事由(),
-                        entity.get喪失情報_後_異動年月日().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
-                        entity.get喪失情報_後_届出年月日().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
-                        entity.get終了年月日データ_後().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
+                        flexToRstr(entity.get喪失情報_後_異動年月日()),
+                        flexToRstr(entity.get喪失情報_後_届出年月日()),
+                        flexToRstr(entity.get終了年月日データ_後()),
                         entity.get区分_後_資格(),
                         entity.get異動情報データ4(),
                         entity.get異動情報データ5(),
@@ -126,13 +127,13 @@ public class IdoCheckListBatch {
                         entity.get世帯コード().value(),
                         entity.get被保険者カナ氏名().value(),
                         entity.get取得情報_前_事由(),
-                        entity.get取得情報_前_異動年月日().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
-                        entity.get取得情報_前_届出年月日().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
-                        entity.get開始年月日データ_前().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
+                        flexToRstr(entity.get取得情報_前_異動年月日()),
+                        flexToRstr(entity.get取得情報_前_届出年月日()),
+                        flexToRstr(entity.get開始年月日データ_前()),
                         entity.get喪失情報_前_事由(),
-                        entity.get喪失情報_前_異動年月日().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
-                        entity.get喪失情報_前_届出年月日().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
-                        entity.get終了年月日データ_前().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
+                        flexToRstr(entity.get喪失情報_前_異動年月日()),
+                        flexToRstr(entity.get喪失情報_前_届出年月日()),
+                        flexToRstr(entity.get終了年月日データ_前()),
                         entity.get区分_前_資格(),
                         entity.get異動情報データ1(),
                         entity.get異動情報データ2(),
@@ -141,13 +142,13 @@ public class IdoCheckListBatch {
                         entity.get識別コード().value(),
                         entity.get被保険者氏名().value(),
                         entity.get取得情報_後_事由(),
-                        entity.get取得情報_後_異動年月日().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
-                        entity.get取得情報_後_届出年月日().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
-                        entity.get開始年月日データ_後().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
+                        flexToRstr(entity.get取得情報_後_異動年月日()),
+                        flexToRstr(entity.get取得情報_後_届出年月日()),
+                        flexToRstr(entity.get開始年月日データ_後()),
                         entity.get喪失情報_後_事由(),
-                        entity.get喪失情報_後_異動年月日().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
-                        entity.get喪失情報_後_届出年月日().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
-                        entity.get終了年月日データ_後().wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString(),
+                        flexToRstr(entity.get喪失情報_後_異動年月日()),
+                        flexToRstr(entity.get喪失情報_後_届出年月日()),
+                        flexToRstr(entity.get終了年月日データ_後()),
                         entity.get区分_後_資格(),
                         entity.get異動情報データ4(),
                         entity.get異動情報データ5(),
@@ -156,6 +157,7 @@ public class IdoCheckListBatch {
                         new RString(String.valueOf(list.size())));
                 retList.add(item);
             }
+            k = k + 1;
         }
         return retList;
     }
@@ -178,5 +180,12 @@ public class IdoCheckListBatch {
         rsb.append(nowTime.getSecond());
         rsb.append(new RString("秒"));
         return rsb.toRString();
+    }
+
+    private RString flexToRstr(FlexibleDate date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return date.wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
     }
 }

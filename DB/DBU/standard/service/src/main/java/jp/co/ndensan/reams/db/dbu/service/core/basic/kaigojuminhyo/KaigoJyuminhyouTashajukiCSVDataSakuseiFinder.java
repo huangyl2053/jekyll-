@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -185,7 +184,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     hachientity.set受給者区分(区分_1);
                 }
                 if (entity.get受給者更新日時() != null && entity.get更新日時() != null) {
-                    if (entity.get受給者更新日時().compareTo(entity.get更新日時()) < 0 || entity.get更新日時() == entity.get受給者更新日時()) {
+                    if (entity.get受給者更新日時().compareTo(entity.get更新日時()) <= 0) {
                         hachientity.set更新日時(entity.get更新日時());
                     } else if (entity.get更新日時().compareTo(entity.get受給者更新日時()) < 0) {
                         hachientity.set更新日時(entity.get受給者更新日時());
@@ -237,7 +236,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                         hachientity.set識別コード(new RString(entity.get受給者識別コード().toString()).
                                 substring(entity.get受給者識別コード().value().length() - 桁目_8));
                     }
-                    hachientity.set更新日時(new RString(RDate.getNowDateTime().toString()));
+                    hachientity.set更新日時(new RString(YMDHMS.now().toString()));
                 }
             }
             if ((entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty())
@@ -297,6 +296,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
         junientity.set市町村コード(new RString(this.get地方公共団体コード().toString()));
         junientity.set識別ＩＤ(識別ＩＤ_AA65);
         junientity.setタイムスタンプ(new RString(YMDHMS.now().toString()));
+        junientity.set最終レコード区分(最終ﾚｺｰﾄﾞ);
         junientity.set連番(連番);
         junilist.add(junientity);
         return junilist;
@@ -372,12 +372,12 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                 }
                 if (entity.get受給者挿入日時() != null && entity.get挿入日時() != null
                         && entity.get受給者更新日時() != null && entity.get更新日時() != null) {
-                    if (entity.get受給者挿入日時().compareTo(entity.get挿入日時()) < 0 || entity.get挿入日時() == entity.get受給者挿入日時()) {
+                    if (entity.get受給者挿入日時().compareTo(entity.get挿入日時()) <= 0) {
                         junientity.set作成日時(entity.get挿入日時());
                     } else if (entity.get挿入日時().compareTo(entity.get受給者挿入日時()) < 0) {
                         junientity.set作成日時(entity.get受給者挿入日時());
                     }
-                    if (entity.get受給者更新日時().compareTo(entity.get更新日時()) < 0 || entity.get更新日時() == entity.get受給者更新日時()) {
+                    if (entity.get受給者更新日時().compareTo(entity.get更新日時()) <= 0) {
                         junientity.set更新日時(entity.get更新日時());
                     } else if (entity.get更新日時().compareTo(entity.get受給者更新日時()) < 0) {
                         junientity.set更新日時(entity.get受給者更新日時());
@@ -431,8 +431,8 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                         junientity.set識別コード(new RString(entity.get受給者識別コード().toString()).
                                 substring(entity.get受給者識別コード().value().length() - 桁目_12));
                     }
-                    junientity.set作成日時(new RString(RDate.getNowDateTime().toString()));
-                    junientity.set更新日時(new RString(RDate.getNowDateTime().toString()));
+                    junientity.set作成日時(new RString(YMDHMS.now().toString()));
+                    junientity.set更新日時(new RString(YMDHMS.now().toString()));
                 }
             }
             if ((entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty())
@@ -494,6 +494,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
         jugoentity.set市町村コード(new RString(this.get地方公共団体コード().toString()));
         jugoentity.set識別ＩＤ(識別ＩＤ_AA65);
         jugoentity.setタイムスタンプ(new RString(YMDHMS.now().toString()));
+        jugoentity.set最終レコード区分(最終ﾚｺｰﾄﾞ);
         jugoentity.set連番(連番);
         jugolist.add(jugoentity);
         return jugolist;
@@ -570,12 +571,12 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                 }
                 if (entity.get受給者挿入日時() != null && entity.get挿入日時() != null
                         && entity.get受給者更新日時() != null && entity.get更新日時() != null) {
-                    if (entity.get受給者挿入日時().compareTo(entity.get挿入日時()) < 0 || entity.get挿入日時() == entity.get受給者挿入日時()) {
+                    if (entity.get受給者挿入日時().compareTo(entity.get挿入日時()) <= 0) {
                         jugoentity.set作成日時(entity.get挿入日時());
                     } else if (entity.get挿入日時().compareTo(entity.get受給者挿入日時()) < 0) {
                         jugoentity.set作成日時(entity.get受給者挿入日時());
                     }
-                    if (entity.get受給者更新日時().compareTo(entity.get更新日時()) < 0 || entity.get更新日時() == entity.get受給者更新日時()) {
+                    if (entity.get受給者更新日時().compareTo(entity.get更新日時()) <= 0) {
                         jugoentity.set更新日時(entity.get更新日時());
                     } else if (entity.get更新日時().compareTo(entity.get受給者更新日時()) < 0) {
                         jugoentity.set更新日時(entity.get受給者更新日時());

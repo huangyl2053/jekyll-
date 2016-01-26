@@ -24,10 +24,20 @@ public class IdoCheckListResult {
         this.entity = entity;
     }
 
+    /**
+     * 対象開始年月日を取得します。
+     *
+     * @return FlexibleDate
+     */
     public FlexibleDate get対象開始年月日() {
         return entity.getTaishoKaishiYMD();
     }
 
+    /**
+     * 対象終了年月日を取得します。
+     *
+     * @return FlexibleDate
+     */
     public FlexibleDate get対象終了年月日() {
         return entity.getTaishoShuryoYMD();
     }

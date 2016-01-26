@@ -57,6 +57,11 @@ public class IdoCheckListGetDataProcessParameter implements IBatchProcessParamet
         this.shuturyokuJunId = shuturyokuJunId;
     }
 
+    /**
+     * 異動チェックリストのパラメータをを作成します。
+     *
+     * @return IdoCheckListGetDataParameter
+     */
     public IdoCheckListGetDataParameter toIdoCheckListGetDataParameter() {
         return IdoCheckListGetDataParameter.createIdoCheckListGetDataParameter(
                 konkaiKaishi,

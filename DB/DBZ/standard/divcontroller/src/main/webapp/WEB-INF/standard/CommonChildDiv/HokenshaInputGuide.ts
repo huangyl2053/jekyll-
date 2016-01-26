@@ -1,22 +1,15 @@
-/// <reference path="HokenshaInputGuide_Design.ts" />
-
-// 共有子Divモード記述TypeScriptソースです。
-
+/// <reference path='HokenshaInputGuide_Design.ts' />
 module DBZ
 {
-    export module HokenshaInputGuide {
-
-        export class ModeController{
+    export module HokenshaInputGuide
+    {
+        export class ModeController {
             private controls: Controls;
             private fieldName: string;
 
             constructor(fieldName: string) {
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
-            }
- 
-            public priorities(): Array<string> {
-                return [];
             }
 
             public Properties() {
@@ -28,19 +21,21 @@ module DBZ
             }
         }
 
+        export module Modes {
+        }
     }
 }
 
-
-
-module DBZ {
-
-    export module HokenshaInputGuide {
-
+module DBZ
+{
+    export module HokenshaInputGuide
+    {
         export class PublicProperties {
             private controls: Controls;
+            private fieldName: string;
 
             constructor(fieldName: string) {
+                this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
             }
 
@@ -49,11 +44,7 @@ module DBZ {
 
                 return editTypes;
             }
-
         }
     }
 }
-
-
-
 

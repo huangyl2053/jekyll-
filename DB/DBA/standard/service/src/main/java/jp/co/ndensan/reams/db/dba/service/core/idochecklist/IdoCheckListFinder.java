@@ -29,6 +29,10 @@ public class IdoCheckListFinder {
     private static final RString CHECKED_KEY_KEY2 = new RString("key2");
     private static final RString CHECKED_KEY_KEY3 = new RString("key3");
     private static final RString CHECKED_KEY_KEY4 = new RString("key4");
+    private static final int TIME_HOUR_23 = 23;
+    private static final int TIME_MINUTE_59 = 59;
+    private static final int TIME_SECOND_59 = 59;
+    private static final int TIME_MILLIS_999 = 999;
 
     private final DbT7022ShoriDateKanriDac dac;
 
@@ -143,6 +147,12 @@ public class IdoCheckListFinder {
         if (formatDate == null) {
             return null;
         }
-        return RDateTime.of(formatDate.getYearValue(), formatDate.getMonthValue(), formatDate.getDayValue(), 23, 59, 59, 999);
+        return RDateTime.of(formatDate.getYearValue(),
+                formatDate.getMonthValue(),
+                formatDate.getDayValue(),
+                TIME_HOUR_23,
+                TIME_MINUTE_59,
+                TIME_SECOND_59,
+                TIME_MILLIS_999);
     }
 }

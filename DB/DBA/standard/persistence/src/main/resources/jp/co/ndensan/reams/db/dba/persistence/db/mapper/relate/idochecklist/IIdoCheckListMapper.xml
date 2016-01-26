@@ -493,8 +493,8 @@
         FROM       
             rgur."UrT0508SeikatsuHogoJukyusha"      
         WHERE       
-            #{konkaiKaishi} <![CDATA[<=]]>　"UrT0508SeikatsuHogoJukyusha"."lastUpdateTimestamp"      
-           AND "UrT0508SeikatsuHogoJukyusha"."lastUpdateTimestamp"　<![CDATA[<=]]> #{konkaiShuryo}  
+            #{konkaiKaishi} <![CDATA[<=]]> "lastUpdateTimestamp"      
+           AND "lastUpdateTimestamp" <![CDATA[<=]]> #{konkaiShuryo}  
       </select>
       <resultMap id="resultMap_UrT0508SeikatsuHogoJukyushaEntity" type="jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity" autoMapping="true">
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
@@ -511,12 +511,12 @@
         WHERE       
             "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode" = #{shikibetsuCode} 
            AND "UrT0526SeikatsuHogoFujoShurui"."gyomuCode" = #{gyomuCode}   
-           AND "UrT0526SeikatsuHogoFujoShurui"."jukyuKaishiYMD"　= #{konkaiKaishi}  
+           AND "UrT0526SeikatsuHogoFujoShurui"."jukyuKaishiYMD" = #{jukyuKaishiYMD}
         ORDER BY 
           "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode" ASC, "UrT0526SeikatsuHogoFujoShurui"."fujoShuruiCode" ASC
       </select>
       
-      <select id="getShikibetsuTaishoPsm" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.idochecklist.IdoCheckListGetDataParameter" fetchSize="500" >
+      <select id="getShikibetsuTaishoPsm" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500" >
         SELECT 
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
@@ -533,4 +533,12 @@
             "subGyomuCode" = #{subGyomuCode}
         AND "shoriName" = #{shoriName}
       </update>
+      
+      <select id="getListForProcess" resultType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="1" >
+        SELECT       
+            '被保険者台帳リスト取得'     
+        FROM       
+            rgdb."DbT5592ShinsakaiKaisaiBashoJoho"
+        LIMIT 1
+      </select>
 </mapper>

@@ -273,9 +273,9 @@ public final class YokaigoNinteiParamter {
                 !shikibetsuCode.isEmpty(),
                 shimei,
                 !shimei.isEmpty(),
-                DATE_SOURCE_KEY0.equals(hizukeHani),
                 DATE_SOURCE_KEY1.equals(hizukeHani),
                 DATE_SOURCE_KEY2.equals(hizukeHani),
+                DATE_SOURCE_KEY3.equals(hizukeHani),
                 key0判断(ninteiChosaIrai),
                 key1判断(ninteiChosaIrai),
                 key0判断(ninteiChosaJisshi),
@@ -298,7 +298,7 @@ public final class YokaigoNinteiParamter {
                 !kensakuOption.contains(DATE_SOURCE_KEY1),
                 kensakuOption.contains(DATE_SOURCE_KEY2),
                 maximumDisplayNumber,
-                maximumDisplayNumber != 0,
+                maximumDisplayNumber != -1,
                 TorisageKubunCode.取り下げ.getコード());
     }
     

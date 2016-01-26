@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.HokenshaJoho;
+package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.Hokensha;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.hokensha.Hokensha;
-import jp.co.ndensan.reams.db.dba.business.core.hokensha.KenCodeJigyoshaInputGuide;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.HokenshaInputGuide.HokenshaInputGuideDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.HokenshaInputGuide.HokenshaInputGuideHandler;
-import jp.co.ndensan.reams.db.dba.service.core.hokensha.HokenshaNyuryokuHojoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.hokensha.Hokensha;
+import jp.co.ndensan.reams.db.dbz.business.core.hokensha.KenCodeJigyoshaInputGuide;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaInputGuide.HokenshaInputGuideDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaInputGuide.HokenshaInputGuideHandler;
+import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;

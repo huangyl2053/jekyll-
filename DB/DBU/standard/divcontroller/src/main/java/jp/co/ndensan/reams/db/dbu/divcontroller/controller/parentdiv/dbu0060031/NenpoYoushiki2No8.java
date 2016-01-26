@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031.Nenp
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031.dgChiikimitchakuyobosabisujukyu_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031.dgHisetsugaigosabisujukyu_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031.dgItakuyobosabisujukyusu_Row;
-import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0060031.NenpoYoushiki2No8Handler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0060031.NenpoYoushiki2No8Handler;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokunenpo.JigyoHokokuNenpoHoseiHakoManager;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -79,15 +79,6 @@ public class NenpoYoushiki2No8 {
      * @return ResponseData<NenpoYoushiki2No8Div>
      */
     public ResponseData<NenpoYoushiki2No8Div> onLoad(NenpoYoushiki2No8Div div) {
-        ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.報告年度, new FlexibleDate("199001"));
-        ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.集計年度, new FlexibleDate("201606"));
-        ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.保険者コード, new RString("123456"));
-        ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.保険者名称, new RString("保険者名称"));
-        ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.報告年, new FlexibleYear("1990"));
-        ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.集計対象年, new FlexibleYear("2016"));
-        ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.市町村コード, new LasdecCode("123456"));
-        ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.様式種類コード, new RString("002"));
-        ViewStateHolder.put(NenpoYoushiki2No8ViewStateKeys.補正フラグ, new RString("修正"));
         報告年度 = ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.報告年度, FlexibleDate.class);
         集計年度 = ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.集計年度, FlexibleDate.class);
         保険者コード = ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.保険者コード, RString.class);

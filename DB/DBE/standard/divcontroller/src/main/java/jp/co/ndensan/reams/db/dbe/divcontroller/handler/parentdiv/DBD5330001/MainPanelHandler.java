@@ -142,7 +142,7 @@ public class MainPanelHandler {
     }
 
     /**
-     * 要介護認定結果通知（主治医）の初期処理を表示します。
+     * 二次判定期間の前後順チェック。
      *
      * @return ValidationMessageControlPairs
      */
