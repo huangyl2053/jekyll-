@@ -571,7 +571,7 @@
             rgdb."DbT3118ShikibetsuNoKanri" SHIKIBETSUNOKANRI
         WHERE
             SHIKIBETSUNOKANRI."shikibetsuNo" = #{yoshikiNo}
-            AND SHIKIBETSUNOKANRI."shikibetsuNo" <![CDATA[<=]]> #{serviceTeikyoYM}
+            AND SHIKIBETSUNOKANRI."tekiyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
             AND (SHIKIBETSUNOKANRI."tekiyoShuryoYM" IS NULL
                 OR
                 substring(SHIKIBETSUNOKANRI."tekiyoShuryoYM", 1, 6) <![CDATA[>=]]> #{serviceTeikyoYM})

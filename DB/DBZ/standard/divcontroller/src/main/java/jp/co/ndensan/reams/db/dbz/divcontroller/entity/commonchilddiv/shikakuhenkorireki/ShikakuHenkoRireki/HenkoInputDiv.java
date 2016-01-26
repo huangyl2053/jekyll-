@@ -39,8 +39,8 @@ public class HenkoInputDiv extends Panel {
     private RString henkojiShichosonCode;
     @JsonProperty("henkojiHihokenshaNo")
     private RString henkojiHihokenshaNo;
-    @JsonProperty("henkojiShoriDatetime")
-    private RString henkojiShoriDatetime;
+    @JsonProperty("henkojiShikibetsuCode")
+    private RString henkojiShikibetsuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -193,21 +193,21 @@ public class HenkoInputDiv extends Panel {
     }
 
     /*
-     * gethenkojiShoriDatetime
-     * @return henkojiShoriDatetime
+     * gethenkojiShikibetsuCode
+     * @return henkojiShikibetsuCode
      */
-    @JsonProperty("henkojiShoriDatetime")
-    public RString getHenkojiShoriDatetime() {
-        return henkojiShoriDatetime;
+    @JsonProperty("henkojiShikibetsuCode")
+    public RString getHenkojiShikibetsuCode() {
+        return henkojiShikibetsuCode;
     }
 
     /*
-     * sethenkojiShoriDatetime
-     * @param henkojiShoriDatetime henkojiShoriDatetime
+     * sethenkojiShikibetsuCode
+     * @param henkojiShikibetsuCode henkojiShikibetsuCode
      */
-    @JsonProperty("henkojiShoriDatetime")
-    public void setHenkojiShoriDatetime(RString henkojiShoriDatetime) {
-        this.henkojiShoriDatetime = henkojiShoriDatetime;
+    @JsonProperty("henkojiShikibetsuCode")
+    public void setHenkojiShikibetsuCode(RString henkojiShikibetsuCode) {
+        this.henkojiShikibetsuCode = henkojiShikibetsuCode;
     }
 
     /*
