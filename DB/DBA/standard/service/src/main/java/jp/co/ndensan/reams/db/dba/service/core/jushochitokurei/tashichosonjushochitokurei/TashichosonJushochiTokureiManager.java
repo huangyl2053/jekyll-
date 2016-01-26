@@ -240,7 +240,9 @@ public class TashichosonJushochiTokureiManager {
     /**
      * 被保険者台帳管理（資格喪失）登録処理です。
      *
-     * @param entity DbT1003TashichosonJushochiTokureiEntity
+     * @param 適用事由 KaigoTatokuTekiyoJiyu
+     * @param 適用年月日 FlexibleDate
+     * @param 適用届出年月日 FlexibleDate
      * @param 識別コード 識別コード
      */
     public void saveHihokenshaSositu(KaigoTatokuTekiyoJiyu 適用事由,
@@ -307,7 +309,9 @@ public class TashichosonJushochiTokureiManager {
     /**
      * 被保険者台帳管理（資格取得）登録処理です。
      *
-     * @param entity DbT1003TashichosonJushochiTokureiEntity
+     * @param 解除事由 KaigoTatokuKaijoJiyu
+     * @param 解除年月日 FlexibleDate
+     * @param 解除届出年月日 FlexibleDate
      * @param 識別コード 識別コード
      */
     public void saveHihokenshaShutoku(KaigoTatokuKaijoJiyu 解除事由,
