@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class NenpoYoushiki1HoseiHandler {
 
-    private static final RString 処理種別_修正 = new RString("修正");
     private static final RString 処理種別_削除 = new RString("削除");
 
     private static final Decimal NUM_2 = new Decimal("2");
@@ -394,5 +393,4 @@ public class NenpoYoushiki1HoseiHandler {
 
         return tempList;
     }
-
 }

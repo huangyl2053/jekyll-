@@ -49,21 +49,6 @@ public class NenpoYoushiki1Hosei {
     public ResponseData<NenpoYoushiki1HoseiDiv> onLoad(NenpoYoushiki1HoseiDiv div) {
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity param = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報,
                 ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
-        param = new ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity();
-        RString 報告年 = new RString("2015");
-        RString 集計対象年 = new RString("2015");
-        RString 市町村コード = new RString("201601");
-        RString 事業報告年報補正表示のコード = new RString("001");
-        RString 補正フラグ = new RString("修正");
-        param.set行報告年(報告年);
-        param.set行集計対象年(集計対象年);
-        param.set画面報告年度(報告年);
-        param.set画面集計年度(集計対象年);
-        param.set行市町村コード(市町村コード);
-        param.set選択した市町村コード(市町村コード);
-        param.set事業報告年報補正表示のコード(事業報告年報補正表示のコード);
-        param.set補正フラグ(補正フラグ);
-
         List<JigyoHokokuTokeiData> jigyoHokokuTokeiDataList = JigyoHokokuNenpoHoseiHakoManager.createInstance()
                 .getJigyoHokokuNenpoDetal(new SearchJigyoHokokuNenpo(new FlexibleYear(param.get画面報告年度()),
                                 new FlexibleYear(param.get画面集計年度()),
@@ -87,28 +72,9 @@ public class NenpoYoushiki1Hosei {
      * @return ResponseData<NenpoYoushiki1HoseiDiv>
      */
     public ResponseData<NenpoYoushiki1HoseiDiv> onClick_btnUpdate(NenpoYoushiki1HoseiDiv div) {
-        ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity param = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報,
-                ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
-        param = new ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity();
-        RString 報告年 = new RString("2015");
-        RString 集計対象年 = new RString("2015");
-        RString 市町村コード = new RString("201601");
-        RString 事業報告年報補正表示のコード = new RString("001");
-        RString 補正フラグ = new RString("削除");
-        param.set行報告年(報告年);
-        param.set行集計対象年(集計対象年);
-        param.set画面報告年度(報告年);
-        param.set画面集計年度(集計対象年);
-        param.set行市町村コード(市町村コード);
-        param.set選択した市町村コード(市町村コード);
-        param.set事業報告年報補正表示のコード(事業報告年報補正表示のコード);
-        param.set補正フラグ(補正フラグ);
-        NenpoYoushiki1HoseiHandler handler = createHandler(div);
+        ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity param = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
         if (処理種別_修正.equals(param.get補正フラグ())) {
-            List<JigyoHokokuTokeiData> 修正データの取得リスト = handler.修正データの取得();
-            if (修正データの取得リスト.isEmpty()) {
-                throw new ApplicationException(DbzErrorMessages.編集なしで更新不可.getMessage());
-            }
+            List<JigyoHokokuTokeiData> 修正データの取得リスト = 修正データのチェック(div);
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
             }
@@ -118,11 +84,7 @@ public class NenpoYoushiki1Hosei {
                 ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage());
             }
         } else if (処理種別_削除.equals(param.get補正フラグ())) {
-            JigyoHokokuNenpoHoseiHakoManager.createInstance().deleteJigyoHokokuNenpoData(new DeleteJigyoHokokuNenpo(
-                    new FlexibleYear(param.get画面報告年度()),
-                    new FlexibleYear(param.get画面集計年度()),
-                    new LasdecCode(param.get行市町村コード()),
-                    param.get事業報告年報補正表示のコード()));
+            deleteJigyoHokokuNenpoData(param);
             ResponseData.of(div).addMessage(UrInformationMessages.対象データ削除済み.getMessage());
         }
         return ResponseData.of(div).setState(DBU0060021StateName.完了状態);
@@ -150,6 +112,22 @@ public class NenpoYoushiki1Hosei {
             return ResponseData.of(div).forwardWithEventName(DBU0130011TransitionEventName.対象者検索に戻る).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void deleteJigyoHokokuNenpoData(ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity param) {
+        JigyoHokokuNenpoHoseiHakoManager.createInstance().deleteJigyoHokokuNenpoData(new DeleteJigyoHokokuNenpo(new FlexibleYear(param
+                .get画面報告年度()),
+                new FlexibleYear(param.get画面集計年度()),
+                new LasdecCode(param.get行市町村コード()),
+                param.get事業報告年報補正表示のコード()));
+    }
+
+    private List<JigyoHokokuTokeiData> 修正データのチェック(NenpoYoushiki1HoseiDiv div) {
+        List<JigyoHokokuTokeiData> 修正データの取得リスト = createHandler(div).修正データの取得();
+        if (修正データの取得リスト.isEmpty()) {
+            throw new ApplicationException(DbzErrorMessages.編集なしで更新不可.getMessage());
+        }
+        return 修正データの取得リスト;
     }
 
     private NenpoYoushiki1HoseiHandler createHandler(NenpoYoushiki1HoseiDiv div) {
