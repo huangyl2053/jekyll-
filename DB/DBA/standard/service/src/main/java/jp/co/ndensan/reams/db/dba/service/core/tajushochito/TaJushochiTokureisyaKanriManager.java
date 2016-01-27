@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.taJushochiTokureisyaKan.TaJus
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokureisyakanri.ITaJushochiTokureisyaKanriMapper;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dba.service.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaishoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuKaijoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
@@ -31,8 +33,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
@@ -55,6 +55,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class TaJushochiTokureisyaKanriManager {
 
+    private final RString 他特例居住 = new RString("05");
     private final MapperProvider mapperProvider;
     private final DbT1003TashichosonJushochiTokureiDac dbT1003Dac;
     private final DbT1004ShisetsuNyutaishoDac dbT1004Dac;
@@ -138,10 +139,10 @@ public class TaJushochiTokureisyaKanriManager {
         }
         if (!relateEntityList.isEmpty()) {
             List<TaJushochiTokureisyaKanriRelateEntity> list = new ArrayList<>();
-            for (TaJushochiTokureisyaKanriRelateEntity 適用情報 : relateEntityList) {
-                FlexibleDate 退所日 = 適用情報.getTaishoYMD();
+            for (TaJushochiTokureisyaKanriRelateEntity entity : relateEntityList) {
+                FlexibleDate 退所日 = entity.getTaishoYMD();
                 if (退所日.isEmpty()) {
-                    list.add(適用情報);
+                    list.add(entity);
                 } else {
                     Collections.sort(relateEntityList, new TaJushochiTokureisyaKanriManager.DateComparator());
                     list.add(relateEntityList.get(0));
@@ -194,10 +195,14 @@ public class TaJushochiTokureisyaKanriManager {
     /**
      * 被保険者台帳管理（資格喪失）登録処理です。
      *
-     * @param entity DbT1003TashichosonJushochiTokureiEntity
+     * @param 適用事由 適用事由
+     * @param 適用年月日 適用年月日
+     * @param 適用届出年月日 適用届出年月日
      * @param 識別コード 識別コード
      */
-    public void saveHihokenshaSositu(DbT1003TashichosonJushochiTokureiEntity entity, ShikibetsuCode 識別コード) {
+    public void saveHihokenshaSositu(KaigoTatokuTekiyoJiyu 適用事由,
+            FlexibleDate 適用年月日,
+            FlexibleDate 適用届出年月日, ShikibetsuCode 識別コード) {
 
         // TODO 資格喪失は１月納品対象外　現実点実装しない。
     }
@@ -239,9 +244,8 @@ public class TaJushochiTokureisyaKanriManager {
      */
     public boolean checkAge(ShikibetsuCode 識別コード, FlexibleDate 解除日) {
         UaFt200FindShikibetsuTaishoEntity 宛名情報 = select宛名情報PSM(識別コード);
-        IKojin 宛名情報PSM = ShikibetsuTaishoFactory.createKojin(宛名情報);
         AgeCalculator ageCalculator
-                = new AgeCalculator((IDateOfBirth) 宛名情報PSM.get生年月日(),
+                = new AgeCalculator((IDateOfBirth) 宛名情報.getSeinengappiYMD(),
                         JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日, 解除日);
         return Integer.parseInt(ageCalculator.get年齢().toString()) >= 65;
     }
@@ -249,21 +253,23 @@ public class TaJushochiTokureisyaKanriManager {
     /**
      * 被保険者台帳管理（資格取得）登録処理です。
      *
-     * @param entity DbT1003TashichosonJushochiTokureiEntity
+     * @param 解除事由 解除事由
+     * @param 解除年月日 解除年月日
+     * @param 解除届出年月日 解除届出年月日
      * @param 識別コード 識別コード
      */
-    public void saveHihokenshaShutoku(DbT1003TashichosonJushochiTokureiEntity entity, ShikibetsuCode 識別コード) {
+    public void saveHihokenshaShutoku(KaigoTatokuKaijoJiyu 解除事由,
+            FlexibleDate 解除年月日,
+            FlexibleDate 解除届出年月日, ShikibetsuCode 識別コード) {
 
         DbT1001HihokenshaDaichoEntity dbT1001entity = new DbT1001HihokenshaDaichoEntity();
-        FlexibleDate 解除年月日 = entity.getKaijoYMD();
-        FlexibleDate 解除届出年月日 = entity.getKaijoTodokedeYMD();
         UaFt200FindShikibetsuTaishoEntity 宛名情報PSM = select宛名情報PSM(識別コード);
 
         dbT1001entity.setIdoYMD(解除年月日);
-        dbT1001entity.setIdoJiyuCode(new RString("05"));
+        dbT1001entity.setIdoJiyuCode(他特例居住);
         dbT1001entity.setShichosonCode(宛名情報PSM.getGenLasdecCode());
         dbT1001entity.setShikibetsuCode(識別コード);
-        dbT1001entity.setShikakuShutokuJiyuCode(new RString("05"));
+        dbT1001entity.setShikakuShutokuJiyuCode(他特例居住);
         dbT1001entity.setShikakuShutokuYMD(解除年月日);
         dbT1001entity.setShikakuShutokuTodokedeYMD(解除届出年月日);
         dbT1001entity.setKyuShichosonCode(宛名情報PSM.getKyuLasdecCode());
