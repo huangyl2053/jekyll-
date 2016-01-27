@@ -52,7 +52,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -130,7 +129,7 @@ public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
         Association association = finder.getAssociation();
         idoCheckListEntity.set市町村コード(association.get地方公共団体コード());
         idoCheckListEntity.set市町村名(association.get市町村名());
-        // TODO 並び順と改頁を作成する
+        // TODO QA#73393未回答により(並び順と改頁を設定しない)
 
         getHihokenshaDaichouList();
         getJushochiTokureiList();
@@ -227,6 +226,7 @@ public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
                     param.toIdoCheckListGetDataParameter());
             List<ShisetsuNyutaishoEntity> shisetsuNyutaishoCode11List = mapper.getJushochiTokureiListByCode11(
                     param.toIdoCheckListGetDataParameter());
+            // TODO QA512 Redmine：#74264(「他市町村住所地特例者の異動を伴わずの場合」の取得方式が知らない、一時固定値を使用します)
             List<ShisetsuNyutaishoEntity> shisetsuNyutaishoList = mapper.getShisetsuNyutaishoList(
                     IdoCheckListGetDataParameter.createIdoCheckListGetDataParameter(
                             param.getKonkaiKaishi(), param.getKonkaiShuryo(), DaichoType.他市町村住所地特例者.getコード(),
@@ -279,16 +279,16 @@ public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
                 idoInfoEntity.set異動情報データ4(IDO_DATA_TEKIYOU_IDO);
             }
 
-            if (entity.get異動事由コード() == null
-                    && entity.get入所年月日() != null
-                    && entity.get退所年月日() == null) {
+            if (RString.isNullOrEmpty(entity.get異動事由コード())
+                    && (entity.get入所年月日() != null || !entity.get入所年月日().isEmpty())
+                    && (entity.get退所年月日() == null || entity.get退所年月日().isEmpty())) {
                 idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
                 idoInfoEntity.set異動情報データ4(IDO_DATA_NYUUSHO_IDO);
             }
 
-            if (entity.get異動事由コード() == null
-                    && entity.get入所年月日() != null
-                    && entity.get退所年月日() != null) {
+            if (RString.isNullOrEmpty(entity.get異動事由コード())
+                    && (entity.get入所年月日() != null || !entity.get入所年月日().isEmpty())
+                    && (entity.get退所年月日() != null || !entity.get退所年月日().isEmpty())) {
                 idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
                 idoInfoEntity.set終了年月日データ_後(entity.get退所年月日());
                 idoInfoEntity.set異動情報データ4(IDO_DATA_TAISHO_IDO);
@@ -390,16 +390,16 @@ public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
                 idoInfoEntity.set異動情報データ4(IDO_DATA_TEKIYOU_IDO);
             }
 
-            if (entity.get異動事由コード() == null
-                    && entity.get入所年月日() != null
-                    && entity.get退所年月日() == null) {
+            if (RString.isNullOrEmpty(entity.get異動事由コード())
+                    && (entity.get入所年月日() != null || !entity.get入所年月日().isEmpty())
+                    && (entity.get退所年月日() == null || entity.get退所年月日().isEmpty())) {
                 idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
                 idoInfoEntity.set異動情報データ4(IDO_DATA_NYUUSHO_IDO);
             }
 
-            if (entity.get異動事由コード() == null
-                    && entity.get入所年月日() != null
-                    && entity.get退所年月日() != null) {
+            if (RString.isNullOrEmpty(entity.get異動事由コード())
+                    && (entity.get入所年月日() != null || !entity.get入所年月日().isEmpty())
+                    && (entity.get退所年月日() != null || !entity.get退所年月日().isEmpty())) {
                 idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
                 idoInfoEntity.set終了年月日データ_後(entity.get退所年月日());
                 idoInfoEntity.set異動情報データ4(IDO_DATA_TAISHO_IDO);
@@ -439,7 +439,7 @@ public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
             List<UrT0508SeikatsuHogoJukyushaEntity> seikatsuHogoList = mapper.getSeikatsuHogoList(param.toIdoCheckListGetDataParameter());
             for (UrT0508SeikatsuHogoJukyushaEntity entity : seikatsuHogoList) {
                 List<RString> fujoShuruiCodeList = mapper.getFujoShuruiCodeList(IdoCheckListGetDataParameter.createIdoCheckListGetDataParameter(
-                        RDateTime.MAX, RDateTime.MAX, RString.HALF_SPACE,
+                        null, null, null,
                         entity.getShikibetsuCode(), entity.getGyomuCode(), entity.getJukyuKaishiYMD()));
                 IdoInfoEntity idoInfoEntity = new IdoInfoEntity();
                 idoInfoEntity.set対象情報(TITLE_JOHO_4);

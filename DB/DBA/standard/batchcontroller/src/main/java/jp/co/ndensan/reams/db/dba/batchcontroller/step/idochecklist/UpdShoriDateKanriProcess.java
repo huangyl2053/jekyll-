@@ -31,6 +31,9 @@ public class UpdShoriDateKanriProcess extends BatchProcessBase<RString> {
     private UpdShoriDataKanriProcessParameter param;
     private OutputParameter<Integer> count;
     private IIdoCheckListMapper mapper;
+    private static final RString SHORI_NAME_IDOCHECKLIST = new RString("異動チェックリスト");
+    private static final RString SHORI_EDABAN = new RString("0000");
+    private static final RString NENDO_NAI_RENBAN = new RString("0000");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.idochecklist.IIdoCheckListMapper."
             + "getListForProcess");
@@ -65,10 +68,10 @@ public class UpdShoriDateKanriProcess extends BatchProcessBase<RString> {
             DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
             entity.setSubGyomuCode(SubGyomuCode.DBA介護資格);
             entity.setShichosonCode(association.get地方公共団体コード());
-            entity.setShoriName(new RString("異動チェックリスト"));
-            entity.setShoriEdaban(new RString("0000"));
+            entity.setShoriName(SHORI_NAME_IDOCHECKLIST);
+            entity.setShoriEdaban(SHORI_EDABAN);
             entity.setNendo(FlexibleYear.MIN);
-            entity.setNendoNaiRenban(new RString("0000"));
+            entity.setNendoNaiRenban(NENDO_NAI_RENBAN);
             entity.setTaishoKaishiYMD(new FlexibleDate(
                     param.getKonkaiKaishi().getYear(),
                     param.getKonkaiKaishi().getMonthOfYear(),
@@ -84,7 +87,7 @@ public class UpdShoriDateKanriProcess extends BatchProcessBase<RString> {
         if (param.getZenkaiKaishi() != null && param.getZenkaiShuryo() != null) {
             DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
             entity.setSubGyomuCode(SubGyomuCode.DBA介護資格);
-            entity.setShoriName(new RString("異動チェックリスト"));
+            entity.setShoriName(SHORI_NAME_IDOCHECKLIST);
             entity.setTaishoKaishiYMD(new FlexibleDate(
                     param.getKonkaiKaishi().getYear(),
                     param.getKonkaiKaishi().getMonthOfYear(),

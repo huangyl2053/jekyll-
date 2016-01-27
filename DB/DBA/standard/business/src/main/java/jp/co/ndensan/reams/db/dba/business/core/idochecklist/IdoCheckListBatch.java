@@ -25,6 +25,9 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class IdoCheckListBatch {
 
+    private static final RString FUSEIGO_COUNT_TITLE = new RString("不整合合計数：");
+    private static final RString DATA_NAI = new RString("該当データがありません");
+
     /**
      * 被保険者台帳帳票用データを作成します。
      *
@@ -80,7 +83,7 @@ public class IdoCheckListBatch {
                         entity.get異動情報データ3(),
                         entity.get被保険者番号(),
                         entity.get識別コード().value(),
-                        new RString("該当データがありません"),
+                        DATA_NAI,
                         entity.get取得情報_後_事由(),
                         flexToRstr(entity.get取得情報_後_異動年月日()),
                         flexToRstr(entity.get取得情報_後_届出年月日()),
@@ -93,7 +96,7 @@ public class IdoCheckListBatch {
                         entity.get異動情報データ4(),
                         entity.get異動情報データ5(),
                         entity.get異動情報データ6(),
-                        new RString("不整合合計数："),
+                        FUSEIGO_COUNT_TITLE,
                         new RString(String.valueOf(list.size())));
                 retList.add(item);
             } else {
@@ -153,7 +156,7 @@ public class IdoCheckListBatch {
                         entity.get異動情報データ4(),
                         entity.get異動情報データ5(),
                         entity.get異動情報データ6(),
-                        new RString("不整合合計数："),
+                        FUSEIGO_COUNT_TITLE,
                         new RString(String.valueOf(list.size())));
                 retList.add(item);
             }

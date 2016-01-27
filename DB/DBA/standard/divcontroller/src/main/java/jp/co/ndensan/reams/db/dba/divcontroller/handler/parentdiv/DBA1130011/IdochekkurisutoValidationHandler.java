@@ -38,7 +38,8 @@ public class IdochekkurisutoValidationHandler {
     public ValidationMessageControlPairs checkKashiAfterShuryoMsg() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getTxtkonkaishuryo().getValue().isBefore(div.getTxtkonkaikaishi().getValue())) {
-            validationMessages.add(new ValidationMessageControlPair(IdocheckMessages.期間が不正_未来日付不可));
+            validationMessages.add(new ValidationMessageControlPair(
+                    IdocheckMessages.期間が不正_未来日付不可, div.getTxtkonkaikaishi()));
         }
         return validationMessages;
     }
@@ -52,7 +53,8 @@ public class IdochekkurisutoValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getTxtkonkaishuryo().getValue().isEmpty()
                 && div.getTxtkonkaikaishi().getValue().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(IdocheckMessages.開始日と終了日必須));
+            validationMessages.add(new ValidationMessageControlPair(
+                    IdocheckMessages.開始日と終了日必須, div.getTxtkonkaikaishi()));
         }
         return validationMessages;
     }
@@ -65,7 +67,8 @@ public class IdochekkurisutoValidationHandler {
     public ValidationMessageControlPairs checkRequiredChktaishodaicho() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getChktaishodaicho().getSelectedKeys().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(IdocheckMessages.対象台帳必須));
+            validationMessages.add(new ValidationMessageControlPair(
+                    IdocheckMessages.対象台帳必須, div.getChktaishodaicho()));
         }
         return validationMessages;
     }
@@ -77,7 +80,7 @@ public class IdochekkurisutoValidationHandler {
      */
     public ValidationMessageControlPairs checkRequiredChohyoShu() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        // TODO QA509
+        // TODO 内部QA：509 Redmine：#74262(画面項目がない、実装しない)
         if (div.getCcdChohyoShutsuryokujun().isDisabled()) {
 //            validationMessages.add(new ValidationMessageControlPair(IdocheckMessages.出力順必須));
         }
