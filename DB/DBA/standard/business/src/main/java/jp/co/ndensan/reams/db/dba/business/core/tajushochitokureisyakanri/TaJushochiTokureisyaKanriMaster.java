@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri;
 
-import jp.co.ndensan.reams.db.dba.entity.db.relate.TaJushochiTokureisyaKan.TaJushochiTokureisyaKanRirelateEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.taJushochiTokureisyaKan.TaJushochiTokureisyaKanriRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -22,14 +22,14 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class TaJushochiTokureisyaKanriMaster {
 
-    private final TaJushochiTokureisyaKanRirelateEntity entity;
+    private final TaJushochiTokureisyaKanriRelateEntity entity;
 
     /**
      * コンストラクタです.
      *
      * @param entity TaJushochiTokureisyaKanRirelateEntity
      */
-    public TaJushochiTokureisyaKanriMaster(TaJushochiTokureisyaKanRirelateEntity entity) {
+    public TaJushochiTokureisyaKanriMaster(TaJushochiTokureisyaKanriRelateEntity entity) {
         this.entity = entity;
     }
 
