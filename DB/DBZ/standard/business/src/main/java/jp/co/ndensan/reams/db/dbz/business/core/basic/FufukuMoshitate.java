@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -36,16 +35,18 @@ public class FufukuMoshitate extends
      * コンストラクタです。<br/>
      * 不服審査申立情報の新規作成時に使用します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+// * @param 証記載保険者番号 証記載保険者番号
+     *
      * @param 識別コード 識別コード
      * @param 原処分被保険者番号 原処分被保険者番号
      * @param 審査請求届出日 審査請求届出日
      */
-    public FufukuMoshitate(ShoKisaiHokenshaNo 証記載保険者番号,
+    public FufukuMoshitate(
+            //            ShoKisaiHokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             HihokenshaNo 原処分被保険者番号,
             FlexibleDate 審査請求届出日) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(原処分被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者番号"));
         requireNonNull(審査請求届出日, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求届出日"));
@@ -55,7 +56,7 @@ public class FufukuMoshitate extends
         this.entity.setGenshobunsHihokennshaNo(原処分被保険者番号);
         this.entity.setShinsaSeikyuTodokedeYMD(審査請求届出日);
         this.id = new FufukuMoshitateIdentifier(
-                証記載保険者番号,
+                //                証記載保険者番号,
                 識別コード,
                 原処分被保険者番号,
                 審査請求届出日
@@ -71,7 +72,7 @@ public class FufukuMoshitate extends
     public FufukuMoshitate(DbT7001FufukuMoshitateEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("不服審査申立情報"));
         this.id = new FufukuMoshitateIdentifier(
-                new ShoKisaiHokenshaNo(""),
+                //                new ShoKisaiHokenshaNo(""),
                 entity.getShikibetsuCode(),
                 entity.getGenshobunsHihokennshaNo(),
                 entity.getShinsaSeikyuTodokedeYMD());

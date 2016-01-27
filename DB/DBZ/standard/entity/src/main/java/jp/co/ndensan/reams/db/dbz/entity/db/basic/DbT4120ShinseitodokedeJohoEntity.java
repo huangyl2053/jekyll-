@@ -1,6 +1,5 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;

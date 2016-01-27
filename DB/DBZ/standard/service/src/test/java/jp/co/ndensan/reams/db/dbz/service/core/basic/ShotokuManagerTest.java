@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.Shotoku;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuKanriEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2008ShotokuDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2008ShotokuKanriDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -35,12 +35,12 @@ import static org.mockito.Mockito.when;
 @RunWith(Enclosed.class)
 public class ShotokuManagerTest {
 
-    private static DbT2008ShotokuDac dac;
+    private static DbT2008ShotokuKanriDac dac;
     private static ShotokuManager sut;
 
     @BeforeClass
     public static void test() {
-        dac = mock(DbT2008ShotokuDac.class);
+        dac = mock(DbT2008ShotokuKanriDac.class);
         sut = new ShotokuManager(dac);
     }
 

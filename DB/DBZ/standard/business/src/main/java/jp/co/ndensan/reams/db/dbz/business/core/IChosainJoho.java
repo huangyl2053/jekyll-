@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -39,14 +37,14 @@ public interface IChosainJoho {
      *
      * @return 認定調査委託先コード
      */
-    ChosaItakusakiCode get認定調査委託先コード();
+    RString get認定調査委託先コード();
 
     /**
      * 認定調査員コードを返します。
      *
      * @return 認定調査員コード
      */
-    ChosainCode get認定調査員コード();
+    RString get認定調査員コード();
 
     /**
      * 調査員氏名を返します。
@@ -174,7 +172,7 @@ public interface IChosainJoho {
          * @param ninteichosaItakusakiCode 認定調査委託先コード
          * @return builder
          */
-        public Builder setNinteichosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
+        public Builder setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {
             return this;
         }
 
@@ -184,7 +182,7 @@ public interface IChosainJoho {
          * @param ninteiChosainNo 認定調査員コード
          * @return builder
          */
-        public Builder setNinteiChosainCode(ChosainCode ninteiChosainNo) {
+        public Builder setNinteiChosainCode(RString ninteiChosainNo) {
             return this;
         }
 

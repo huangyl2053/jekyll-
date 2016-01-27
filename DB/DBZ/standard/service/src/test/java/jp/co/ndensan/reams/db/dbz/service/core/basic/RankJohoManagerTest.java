@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.service.core.basic;
+package jp.co.ndensan.reams.db.dbz.service.core.basic;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.RankJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.RankJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2011RankJohoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2011RankJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2011RankJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2011RankJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

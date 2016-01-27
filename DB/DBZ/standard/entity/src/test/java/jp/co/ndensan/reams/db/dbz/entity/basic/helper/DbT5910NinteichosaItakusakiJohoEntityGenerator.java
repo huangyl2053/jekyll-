@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
@@ -20,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class DbT5910NinteichosaItakusakiJohoEntityGenerator {
 
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("202010");
-    public static final ChosaItakusakiCode DEFAULT_認定調査委託先コード = new ChosaItakusakiCode("000001");
+    public static final RString DEFAULT_認定調査委託先コード = new RString("000001");
     public static final JigyoshaNo DEFAULT_事業者番号 = new JigyoshaNo("111111");
     public static final RString DEFAULT_事業者名称 = new RString("名称");
     public static final RString DEFAULT_事業者名称カナ = new RString("名称");
@@ -45,6 +44,7 @@ public final class DbT5910NinteichosaItakusakiJohoEntityGenerator {
     public static DbT5910NinteichosaItakusakiJohoEntity createDbT5910NinteichosaItakusakiJohoEntity() {
         DbT5910NinteichosaItakusakiJohoEntity entity = new DbT5910NinteichosaItakusakiJohoEntity();
         entity.setShichosonCode(DEFAULT_市町村コード);
+        entity.setNinteichosaItakusakiCode(DEFAULT_認定調査委託先コード);
         entity.setJigyoshaNo(DEFAULT_事業者番号);
         entity.setJigyoshaMeisho(DEFAULT_事業者名称);
         entity.setJigyoshaMeishoKana(DEFAULT_事業者名称カナ);

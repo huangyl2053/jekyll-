@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.chosainjoho.ChosainJohoManager;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5910NinteichosaItakusakiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -75,7 +74,7 @@ public class NinteichosaItakusakiJohoManager {
     @Transaction
     public NinteichosaItakusaki selectByKey(
             LasdecCode 市町村コード,
-            ChosaItakusakiCode 認定調査委託先コード) {
+            RString 認定調査委託先コード) {
         NinteichosaItakusaki ninteichosaItakusaki = new NinteichosaItakusaki();
         ninteichosaItakusaki.setEntity(認定調査委託先情報Dac.selectByKey(市町村コード, 認定調査委託先コード));
         return ninteichosaItakusaki;

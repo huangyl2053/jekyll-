@@ -52,7 +52,7 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
         this.entity.setShujiiIryokikanCode(new ShujiiIryokikanCode(主治医医療機関コード));
         this.id = new ShujiiIryoKikanJohoIdentifier(
                 市町村コード,
-                主治医医療機関コード
+                new ShujiiIryokikanCode(主治医医療機関コード)
         );
         this.shujiiJoho = Models.create(new ArrayList<ShujiiJoho>());
     }
@@ -67,7 +67,7 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
         this.entity = requireNonNull(entity.get主治医医療機関情報Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関情報"));
         this.id = new ShujiiIryoKikanJohoIdentifier(
                 entity.get主治医医療機関情報Entity().getShichosonCode(),
-                entity.get主治医医療機関情報Entity().getShujiiIryokikanCode().getColumnValue());
+                entity.get主治医医療機関情報Entity().getShujiiIryokikanCode());
 
         List<ShujiiJoho> shujiiJohoList = new ArrayList<>();
         for (DbT5912ShujiiJohoEntity shujiiJohoEntity : entity.get主治医情報Entity()) {

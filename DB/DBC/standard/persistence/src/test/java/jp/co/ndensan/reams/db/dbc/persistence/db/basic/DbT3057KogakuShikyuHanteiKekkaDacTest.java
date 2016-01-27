@@ -10,7 +10,7 @@ import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3057KogakuShikyu
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_履歴番号;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_被保険者番号;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_証記載保険者番号;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kogakushinsei.DbT3057KogakuShikyuHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;

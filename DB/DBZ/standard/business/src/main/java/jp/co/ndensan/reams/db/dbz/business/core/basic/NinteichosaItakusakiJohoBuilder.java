@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -61,9 +60,9 @@ public class NinteichosaItakusakiJohoBuilder {
      * @param 認定調査委託先コード 認定調査委託先コード
      * @return {@link NinteichosaItakusakiJohoBuilder}
      */
-    public NinteichosaItakusakiJohoBuilder set認定調査委託先コード(ChosaItakusakiCode 認定調査委託先コード) {
+    public NinteichosaItakusakiJohoBuilder set認定調査委託先コード(RString 認定調査委託先コード) {
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
-      //  entity.setNinteichosaItakusakiCode(認定調査委託先コード);
+        entity.setNinteichosaItakusakiCode(認定調査委託先コード);
         return this;
     }
 

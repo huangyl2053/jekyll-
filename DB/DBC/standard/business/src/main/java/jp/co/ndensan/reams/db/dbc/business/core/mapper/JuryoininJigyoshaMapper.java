@@ -12,11 +12,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.JuryoininJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.JuryoininJigyoshaList;
 import jp.co.ndensan.reams.db.dbc.business.core.KeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.Todokedesha;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.JutakuKaishuKeiyakuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KogakuKyufuKeiyakuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ShokanbaraiKyufuKeiyakuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.TokuteiFukushiYoguHanbaiKeiyakuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ToriatsukaiKakuyakushoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.keiyakuno.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
@@ -57,15 +52,15 @@ public final class JuryoininJigyoshaMapper {
                 create契約番号(entity.getKeiyakuJigyoshaNo()),
                 create契約期間(entity),
                 null,
-                entity.getKaishiYMD(),
-                create届出者(entity),
-                entity.getShuryoYMD(),
-                create契約事業者(entity, 法人, 口座),
-                JutakuKaishuKeiyakuKubun.toValue(entity.getIsDeleted()),
-                TokuteiFukushiYoguHanbaiKeiyakuKubun.toValue(entity.getIsDeleted()),
-                ShokanbaraiKyufuKeiyakuKubun.toValue(entity.getIsDeleted()),
-                KogakuKyufuKeiyakuKubun.toValue(entity.getIsDeleted()),
-                ToriatsukaiKakuyakushoKubun.toValue(entity.getIsDeleted())
+                //                entity.getKaishiYMD(),
+                //                create届出者(entity),
+                //                entity.getShuryoYMD(),
+                create契約事業者(entity, 法人, 口座)
+        //                JutakuKaishuKeiyakuKubun.toValue(entity.getIsDeleted()),
+        //                TokuteiFukushiYoguHanbaiKeiyakuKubun.toValue(entity.getIsDeleted()),
+        //                ShokanbaraiKyufuKeiyakuKubun.toValue(entity.getIsDeleted()),
+        //                KogakuKyufuKeiyakuKubun.toValue(entity.getIsDeleted()),
+        //                ToriatsukaiKakuyakushoKubun.toValue(entity.getIsDeleted())
         );
         return 受領委任事業者;
     }

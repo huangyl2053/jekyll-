@@ -83,7 +83,7 @@ public class RojinHokenJukyushaJohoBuilder {
      */
     public RojinHokenJukyushaJohoBuilder set老人保健市町村コード(RString 老人保健市町村コード) {
         requireNonNull(老人保健市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("老人保健市町村コード"));
-        entity.setRojinHokenShichosonCode(老人保健市町村コード.getColumnValue());
+        entity.setRojinHokenShichosonCode(老人保健市町村コード);
         return this;
     }
 

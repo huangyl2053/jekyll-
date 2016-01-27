@@ -36,11 +36,11 @@ public class DbT2008ShotokuDacTest extends DbzTestDacBase {
 
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
-    private static DbT2008ShotokuDac sut;
+    private static DbT2008ShotokuKanriDac sut;
 
     @BeforeClass
     public static void setUpClass() {
-        sut = InstanceProvider.create(DbT2008ShotokuDac.class);
+        sut = InstanceProvider.create(DbT2008ShotokuKanriDac.class);
     }
 
     public static class selectByKeyのテスト extends DbzTestDacBase {

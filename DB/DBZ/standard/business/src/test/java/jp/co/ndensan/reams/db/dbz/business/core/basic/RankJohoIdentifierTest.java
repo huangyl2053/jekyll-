@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2011RankJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2011RankJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 //import static jp.co.ndensan.reams.db.dbb.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

@@ -56,8 +56,8 @@ public class NinteichosaSchedule extends
         this.entity.setNinteiChosaYoteiKaishiTime(認定調査予定開始時間);
         this.entity.setNinteiChosaYoteiShuryoTime(認定調査予定終了時間);
         this.entity.setNinteiChosaJikanWaku(認定調査時間枠);
-//        this.entity.setNinteichosaItakusakiCode(認定調査委託先コード);
-//        this.entity.setNinteiChosainNo(認定調査員コード);
+        this.entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
+        this.entity.setNinteiChosainCode(認定調査員コード);
         this.id = new NinteichosaScheduleIdentifier(
                 認定調査予定年月日,
                 認定調査予定開始時間,

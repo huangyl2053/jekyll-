@@ -431,7 +431,7 @@ public class ChoshuHohoBuilder {
      */
     public ChoshuHohoBuilder set特別徴収停止日時(YMDHMS 特別徴収停止日時) {
         requireNonNull(特別徴収停止日時, UrSystemErrorMessages.値がnull.getReplacedMessage("特別徴収停止日時"));
-        entity.setTokuchoTeishiNichiji(特別徴収停止日時);
+        entity.setTokuchoTeishiTimestamp(特別徴収停止日時);
         return this;
     }
 

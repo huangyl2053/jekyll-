@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -281,7 +280,7 @@ public class RiyoshaFutanWariaiMeisaiManagerTest {
         private static RiyoshaFutanWariaiKonkyo createRiyoshaFutanWariaiKonkyo(FlexibleYear 主キー1, HihokenshaNo 主キー2) {
             return new RiyoshaFutanWariaiKonkyo(
                     主キー1,
-                    主キー2, Decimal.ZERO, Decimal.ONE, new HihokenshaNo("0123400001"));
+                    主キー2, 0, 0, new HihokenshaNo("0123400001"));
         }
 
         public static RiyoshaFutanWariaiMeisai initializeRiyoshaFutanWariaiMeisai(RiyoshaFutanWariaiMeisai 利用者負担割合明細) {

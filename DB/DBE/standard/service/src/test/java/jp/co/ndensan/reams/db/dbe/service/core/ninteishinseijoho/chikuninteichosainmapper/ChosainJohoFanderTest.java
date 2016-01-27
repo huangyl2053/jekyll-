@@ -9,10 +9,10 @@ import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChikuNinteiCh
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChikuNinteiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5222NinteiChosaScheduleMemoEntityGenerator;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5910NinteichosaItakusakiJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5910NinteichosaItakusakiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5913ChosainJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5910NinteichosaItakusakiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5913ChosainJohoDac;

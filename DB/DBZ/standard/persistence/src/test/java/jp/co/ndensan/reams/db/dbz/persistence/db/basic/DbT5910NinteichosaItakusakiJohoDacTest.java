@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5910NinteichosaItakusakiJohoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_市町村コード;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_認定調査委託先コード;
@@ -175,10 +174,10 @@ public class DbT5910NinteichosaItakusakiJohoDacTest extends DbzTestDacBase {
 
         public static void insert(
                 LasdecCode 市町村コード,
-                ChosaItakusakiCode 認定調査委託先コード) {
+                RString 認定調査委託先コード) {
             DbT5910NinteichosaItakusakiJohoEntity entity = DbT5910NinteichosaItakusakiJohoEntityGenerator.createDbT5910NinteichosaItakusakiJohoEntity();
             entity.setShichosonCode(市町村コード);
-//            entity.setNinteichosaItakusakiCode(認定調査委託先コード);
+            entity.setNinteichosaItakusakiCode(認定調査委託先コード);
             sut.save(entity);
         }
     }

@@ -9,12 +9,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaItakusakiJoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5910NinteichosaItakusakiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5910NinteichosaItakusakiJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -49,7 +49,7 @@ public class NinteichosaItakusakiJohoManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の市町村コードにnullを指定した場合_NullPointerExceptionが発生する() {
-            ChosaItakusakiCode 認定調査委託先コード = DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_認定調査委託先コード;
+            RString 認定調査委託先コード = DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_認定調査委託先コード;
             sut.get認定調査委託先情報(null, 認定調査委託先コード);
         }
 
@@ -62,10 +62,10 @@ public class NinteichosaItakusakiJohoManagerTest {
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(LasdecCode.class), any(ChosaItakusakiCode.class))).thenReturn(null);
+            when(dac.selectByKey(any(LasdecCode.class), any(RString.class))).thenReturn(null);
 
             LasdecCode 市町村コード = DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_市町村コード;
-            ChosaItakusakiCode 認定調査委託先コード = DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_認定調査委託先コード;
+            RString 認定調査委託先コード = DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_認定調査委託先コード;
             NinteichosaItakusakiJoho result = sut.get認定調査委託先情報(市町村コード, 認定調査委託先コード);
 
             assertThat(result, is(nullValue()));
@@ -74,10 +74,10 @@ public class NinteichosaItakusakiJohoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5910NinteichosaItakusakiJohoEntity entity = DbT5910NinteichosaItakusakiJohoEntityGenerator.createDbT5910NinteichosaItakusakiJohoEntity();
-            when(dac.selectByKey(any(LasdecCode.class), any(ChosaItakusakiCode.class))).thenReturn(entity);
+            when(dac.selectByKey(any(LasdecCode.class), any(RString.class))).thenReturn(entity);
 
             LasdecCode 市町村コード = DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_市町村コード;
-            ChosaItakusakiCode 認定調査委託先コード = DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_認定調査委託先コード;
+            RString 認定調査委託先コード = DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_認定調査委託先コード;
             NinteichosaItakusakiJoho result = sut.get認定調査委託先情報(市町村コード, 認定調査委託先コード);
 
             assertThat(result.get市町村コード().value(), is(DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_市町村コード.value()));

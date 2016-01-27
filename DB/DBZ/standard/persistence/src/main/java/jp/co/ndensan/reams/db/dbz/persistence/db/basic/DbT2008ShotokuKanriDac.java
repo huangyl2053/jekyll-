@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護所得のデータアクセスクラスです。
  */
-public class DbT2008ShotokuDac implements ISaveable<DbT2008ShotokuKanriEntity> {
+public class DbT2008ShotokuKanriDac implements ISaveable<DbT2008ShotokuKanriEntity> {
 
     @InjectSession
     private SqlSession session;

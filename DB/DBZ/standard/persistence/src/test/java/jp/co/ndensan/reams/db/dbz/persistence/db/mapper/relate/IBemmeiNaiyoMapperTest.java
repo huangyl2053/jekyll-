@@ -85,7 +85,7 @@ public class IBemmeiNaiyoMapperTest {
         // データが見つからない値を指定するように修正してください。
         @Test
         public void データが見つかない検索条件を渡すと_nullを返す() {
-            BemmeiNaiyoMapperParameter 弁明内容検索条件 = BemmeiNaiyoMapperParameter.createSelectByKeyParam(new ShoKisaiHokenshaNo("012345"), 主キー21);
+            BemmeiNaiyoMapperParameter 弁明内容検索条件 = BemmeiNaiyoMapperParameter.createSelectByKeyParam(主キー21);
             assertThat(sut.select弁明内容ByKey(弁明内容検索条件), is(nullValue()));
         }
     }
@@ -119,7 +119,7 @@ public class IBemmeiNaiyoMapperTest {
 
         @Test
         public void データが見つかない検索条件を渡すと__空のリストを返す() {
-            BemmeiNaiyoMapperParameter 弁明内容検索条件 = BemmeiNaiyoMapperParameter.createSelectListParam(new ShoKisaiHokenshaNo("999999"));
+            BemmeiNaiyoMapperParameter 弁明内容検索条件 = BemmeiNaiyoMapperParameter.createSelectByKeyParam(new ShikibetsuCode("999999"));
             assertThat(sut.select弁明内容リストBy主キー1(弁明内容検索条件).isEmpty(), is(true));
         }
     }

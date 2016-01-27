@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -67,8 +65,8 @@ public class ShinsakaiChosainJoho implements Serializable, IChosainJoho {
      * @return 認定調査委託先コード
      */
     @Override
-    public ChosaItakusakiCode get認定調査委託先コード() {
-        return new ChosaItakusakiCode(entity.getNinteiChosaItakusakiCode());
+    public RString get認定調査委託先コード() {
+        return entity.getNinteiChosaItakusakiCode();
     }
 
     /**
@@ -77,8 +75,8 @@ public class ShinsakaiChosainJoho implements Serializable, IChosainJoho {
      * @return 認定調査員コード
      */
     @Override
-    public ChosainCode get認定調査員コード() {
-        return new ChosainCode(entity.getNinteiChosainCode());
+    public RString get認定調査員コード() {
+        return entity.getNinteiChosainCode();
     }
 
     /**
@@ -327,9 +325,9 @@ public class ShinsakaiChosainJoho implements Serializable, IChosainJoho {
          * @return builder
          */
         @Override
-        public Builder setNinteichosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
+        public Builder setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {
             Objects.requireNonNull(ninteichosaItakusakiCode);
-            this.entity.setNinteiChosaItakusakiCode(ninteichosaItakusakiCode.getColumnValue());
+            this.entity.setNinteiChosaItakusakiCode(ninteichosaItakusakiCode);
             return this;
         }
 
@@ -340,9 +338,9 @@ public class ShinsakaiChosainJoho implements Serializable, IChosainJoho {
          * @return builder
          */
         @Override
-        public Builder setNinteiChosainCode(ChosainCode ninteiChosainCode) {
+        public Builder setNinteiChosainCode(RString ninteiChosainCode) {
             Objects.requireNonNull(ninteiChosainCode);
-            this.entity.setNinteiChosainCode(ninteiChosainCode.getColumnValue());
+            this.entity.setNinteiChosainCode(ninteiChosainCode);
             return this;
         }
 

@@ -11,7 +11,7 @@ import static jp.co.ndensan.reams.db.dbc.entity.db.basic.kogakushinsei.DbT3057Ko
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.kogakushinsei.DbT3057KogakuShikyuHanteiKekka.rirekiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.kogakushinsei.DbT3057KogakuShikyuHanteiKekka.serviceTeikyoYM;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.kogakushinsei.DbT3057KogakuShikyuHanteiKekka.shoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kogakushinsei.DbT3057KogakuShikyuHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;

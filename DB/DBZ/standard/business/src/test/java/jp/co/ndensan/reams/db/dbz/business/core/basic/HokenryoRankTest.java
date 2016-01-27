@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2012HokenryoRankEntity;
-import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

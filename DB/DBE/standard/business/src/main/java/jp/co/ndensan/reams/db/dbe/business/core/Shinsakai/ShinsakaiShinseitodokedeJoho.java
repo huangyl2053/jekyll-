@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai;
 
 import java.io.Serializable;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.IShinseitodokedeJoho;
@@ -291,6 +291,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @param shinseiTodokedeshaShimei 申請届出者氏名
          * @return builder
          */
+        @Override
         public Builder setShinseiTodokedeshaShimei(RString shinseiTodokedeshaShimei) {
             Objects.requireNonNull(shinseiTodokedeshaShimei);
             this.entity.setShinseiTodokedeshaShimei(shinseiTodokedeshaShimei);
@@ -303,6 +304,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @param shinseiTodokedeshaKanaShimei 申請届出者氏名カナ
          * @return builder
          */
+        @Override
         public Builder setShinseiTodokedeshaKanaShimei(RString shinseiTodokedeshaKanaShimei) {
             Objects.requireNonNull(shinseiTodokedeshaKanaShimei);
             this.entity.setShinseiTodokedeshaKanaShimei(shinseiTodokedeshaKanaShimei);
@@ -367,6 +369,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @param shinseiTodokedeshaJusho 申請届出者住所
          * @return builder
          */
+        @Override
         public Builder setShinseiTodokedeshaJusho(RString shinseiTodokedeshaJusho) {
             Objects.requireNonNull(shinseiTodokedeshaJusho);
             this.entity.setShinseiTodokedeshaJusho(shinseiTodokedeshaJusho);

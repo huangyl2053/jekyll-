@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5120ShinseitodokedeJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5120ShinseitodokedeJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.serialization._Base64Serializer;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -158,7 +158,7 @@ public class ShinsakaiShinseitodokedeJohoTest extends DbdTestBase {
 
         @Test
         public void serializeの戻り値は_デシリアライズすると_このクラスのインスタンスを生成する() {
-            sut.createBuilderForEdit().setShinseiTodokedeshaShimei(new AtenaMeisho("申請届出者氏名"));
+            sut.createBuilderForEdit().setShinseiTodokedeshaShimei(new RString("申請届出者氏名"));
             String b64 = _Base64Serializer.serialize(sut.serialize());
             ShinsakaiShinseitodokedeJoho desirialized = _Base64Serializer.deSerialize(b64, ShinsakaiShinseitodokedeJoho.class);
             assertThat(desirialized.get申請届出者氏名(), is(sut.get申請届出者氏名()));// デシリアライズが成功していることを確認できるコードを書いてください。

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7005RojinHokenJukyushaJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7005RojinHokenJukyushaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -70,7 +69,7 @@ public class RojinHokenJukyushaJohoBuilderTest extends DbzTestBase {
 
         @Test
         public void 戻り値の老人保健市町村コードは_設定した値と同じ老人保健市町村コードを返す() {
-            business = sut.set老人保健市町村コード(new LasdecCode(DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_老人保健市町村コード)).build();
+            business = sut.set老人保健市町村コード(DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_老人保健市町村コード).build();
             assertThat(business.get老人保健市町村コード().getColumnValue(), is(DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_老人保健市町村コード));
         }
 
