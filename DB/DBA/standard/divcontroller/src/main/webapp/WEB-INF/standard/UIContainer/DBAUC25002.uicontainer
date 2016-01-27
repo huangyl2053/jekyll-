@@ -14,7 +14,7 @@
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
      "toLayoutTitle": "対象者検索",
-     "toState": ""
+     "toState": "検索条件"
     },
     {
      "id": "2",
@@ -28,7 +28,7 @@
      "toLayoutSubGyomuCode": "DBA",
      "toLayoutName": "DBA2050021",
      "toLayoutTitle": "適用除外者異動の訂正",
-     "toState": "default"
+     "toState": "初期状態"
     },
     {
      "id": "3",
@@ -46,6 +46,20 @@
     },
     {
      "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2050021",
+     "layoutTitle": "適用除外者異動の訂正",
+     "eventName": "再検索する",
+     "destroy": false,
+     "condition": "検索条件へ",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "5",
      "type": "end",
      "layoutSubGyomuCode": "DBA",
      "layoutName": "DBA2050021",

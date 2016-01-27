@@ -149,7 +149,7 @@ public class KogakuShikyuHanteiKekka
      * @return 支給区分コード
      */
     public RString get支給区分コード() {
-        return entity.getShiharaiKubunCode();
+        return entity.getShikyuKubunCode();
     }
 
     /**
@@ -158,7 +158,7 @@ public class KogakuShikyuHanteiKekka
      * @return 支給金額
      */
     public Decimal get支給金額() {
-        return entity.getShiharaiKingaku();
+        return entity.getShikyuKingaku();
     }
 
     /**

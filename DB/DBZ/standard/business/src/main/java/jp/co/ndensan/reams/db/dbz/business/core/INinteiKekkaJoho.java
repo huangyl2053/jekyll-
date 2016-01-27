@@ -223,7 +223,7 @@ public interface INinteiKekkaJoho {
          * @param shinsakaiKaisaiNo 介護認定審査会開催番号
          * @return builder
          */
-        public Builder setShinsakaiKaisaiNo(int shinsakaiKaisaiNo) {
+        public Builder setShinsakaiKaisaiNo(RString shinsakaiKaisaiNo) {
             return this;
         }
 

@@ -1,4 +1,4 @@
-﻿/// <reference path="../d.ts/jquery.d.ts" />
+/// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
 
@@ -26,7 +26,7 @@ module DBZ {
                 return [
                     "台帳種別",
                     "施設種類",
-                    "入力補助",
+                    "入力補助",										
                     "表示モード"
                 ];
             }
@@ -47,11 +47,10 @@ module DBZ {
             public 表示モード() {
                 return new Modes.表示モード(this.controls);
             }
-
+			
         }
 
         export module Modes {
-
 
             export class 台帳種別 {
                 private controls: Controls;
@@ -62,13 +61,13 @@ module DBZ {
 
                 public 台帳種別表示する(): void {
 
-                    this.controls.ddlDaichoShubetsu().displayNone = false;
+                    this.controls.ddlDaichoShubetsu().visible = true;
 
                 }
 
                 public 台帳種別非表示する(): void {
 
-                    this.controls.ddlDaichoShubetsu().displayNone = true;
+                    this.controls.ddlDaichoShubetsu().visible = false;
                 }
             }
 
@@ -82,11 +81,22 @@ module DBZ {
                 }
 
                 public 施設種類を表示する(): void {
-                    this.controls.radShisetsuShurui().displayNone = false;                    
+                    
+                    this.controls.radJigyosha().displayNone = false;
+					this.controls.radOther().displayNone = false;
+					this.controls.radJyogai().displayNone = false;
                 }
 
-                public 施設種類を表示しない(): void {
-                    this.controls.radShisetsuShurui().displayNone = true;
+                public 施設種類を非表示する(): void {
+                	this.controls.radJigyosha().displayNone = true;
+					this.controls.radOther().displayNone = true;
+					this.controls.radJyogai().displayNone = true;
+                }
+				
+                public 介護保険特例者表示(): void {
+					this.controls.radJigyosha().displayNone = false;
+					this.controls.radOther().displayNone = false;
+					this.controls.radJyogai().displayNone = true;
                 }
 
            }
@@ -143,6 +153,8 @@ module DBZ {
                     this.controls.ShisetsuJoho().displayNone = true;
                 }
             }
+		
+
 
         }
     }

@@ -28,15 +28,15 @@ public class JuryoininJigyosha {
     private final KeiyakuNo 契約番号;
     private final Range<FlexibleDate> 契約期間;
     private final YMDHMS 処理日時;
-    private final FlexibleDate 届出年月日;
-    private final Todokedesha 届出者;
-    private final FlexibleDate 契約登録年月日;
+//    private final FlexibleDate 届出年月日;
+//    private final Todokedesha 届出者;
+//    private final FlexibleDate 契約登録年月日;
     private final KeiyakuJigyosha 契約事業者;
-    private final JutakuKaishuKeiyakuKubun 住宅改修契約有無;
-    private final TokuteiFukushiYoguHanbaiKeiyakuKubun 特定福祉用具販売契約有無;
-    private final ShokanbaraiKyufuKeiyakuKubun 償還払給付契約有無;
-    private final KogakuKyufuKeiyakuKubun 高額給付契約有無;
-    private final ToriatsukaiKakuyakushoKubun 取扱確約書有無;
+//    private final JutakuKaishuKeiyakuKubun 住宅改修契約有無;
+//    private final TokuteiFukushiYoguHanbaiKeiyakuKubun 特定福祉用具販売契約有無;
+//    private final ShokanbaraiKyufuKeiyakuKubun 償還払給付契約有無;
+//    private final KogakuKyufuKeiyakuKubun 高額給付契約有無;
+//    private final ToriatsukaiKakuyakushoKubun 取扱確約書有無;
 
     /**
      * コンストラクタです。
@@ -44,36 +44,38 @@ public class JuryoininJigyosha {
      * @param 契約番号 契約番号
      * @param 契約期間 契約期間
      * @param 処理日時 処理日時
-     * @param 届出年月日 届出年月日
-     * @param 届出者 届出者
-     * @param 契約登録年月日 契約登録年月日
+// * @param 届出年月日 届出年月日
+// * @param 届出者 届出者 // * @param 契約登録年月日 契約登録年月日
      * @param 契約事業者 契約事業者
-     * @param 住宅改修契約有無 住宅改修契約であるか否か
-     * @param 特定福祉用具販売契約有無 特定福祉用具販売契約であるか否か
-     * @param 償還払給付契約有無 償還払給付契約であるか否か
-     * @param 高額給付契約有無 高額給付契約であるか否か
-     * @param 取扱確約書有無 取扱確約書を持っているか否か
+// * @param 住宅改修契約有無 住宅改修契約であるか否か // * @param
+     * 特定福祉用具販売契約有無 特定福祉用具販売契約であるか否か // * @param 償還払給付契約有無 償還払給付契約であるか否か // *
+//
+     * * @param 高額給付契約有無 高額給付契約であるか否か // * @param 取扱確約書有無 取扱確約書を持っているか否か
      */
     public JuryoininJigyosha(KeiyakuNo 契約番号, Range<FlexibleDate> 契約期間, YMDHMS 処理日時,
-            FlexibleDate 届出年月日, Todokedesha 届出者, FlexibleDate 契約登録年月日, KeiyakuJigyosha 契約事業者,
-            JutakuKaishuKeiyakuKubun 住宅改修契約有無,
-            TokuteiFukushiYoguHanbaiKeiyakuKubun 特定福祉用具販売契約有無,
-            ShokanbaraiKyufuKeiyakuKubun 償還払給付契約有無,
-            KogakuKyufuKeiyakuKubun 高額給付契約有無,
-            ToriatsukaiKakuyakushoKubun 取扱確約書有無) {
+            //            FlexibleDate 届出年月日, 
+//            Todokedesha 届出者,
+            //            FlexibleDate 契約登録年月日,
+            KeiyakuJigyosha 契約事業者) {
+    //            JutakuKaishuKeiyakuKubun 住宅改修契約有無,
+    //            TokuteiFukushiYoguHanbaiKeiyakuKubun 特定福祉用具販売契約有無,
+    //            ShokanbaraiKyufuKeiyakuKubun 償還払給付契約有無,
+    //            KogakuKyufuKeiyakuKubun 高額給付契約有無,
+    //            ToriatsukaiKakuyakushoKubun 取扱確約書有無
+
 
         this.契約番号 = requireNonNull(契約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("契約番号"));
         this.契約期間 = requireNonNull(契約期間, UrSystemErrorMessages.値がnull.getReplacedMessage("契約期間"));
         this.処理日時 = requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
-        this.届出年月日 = 届出年月日;
-        this.届出者 = 届出者;
-        this.契約登録年月日 = 契約登録年月日;
+//        this.届出年月日 = 届出年月日;
+//        this.届出者 = 届出者;
+//        this.契約登録年月日 = 契約登録年月日;
         this.契約事業者 = requireNonNull(契約事業者, UrSystemErrorMessages.値がnull.getReplacedMessage("契約事業者"));
-        this.住宅改修契約有無 = 住宅改修契約有無;
-        this.特定福祉用具販売契約有無 = 特定福祉用具販売契約有無;
-        this.償還払給付契約有無 = 償還払給付契約有無;
-        this.高額給付契約有無 = 高額給付契約有無;
-        this.取扱確約書有無 = 取扱確約書有無;
+//        this.住宅改修契約有無 = 住宅改修契約有無;
+//        this.特定福祉用具販売契約有無 = 特定福祉用具販売契約有無;
+//        this.償還払給付契約有無 = 償還払給付契約有無;
+//        this.高額給付契約有無 = 高額給付契約有無;
+//        this.取扱確約書有無 = 取扱確約書有無;
     }
 
     /**
@@ -108,27 +110,27 @@ public class JuryoininJigyosha {
      *
      * @return 届出年月日
      */
-    public FlexibleDate get届出年月日() {
-        return 届出年月日;
-    }
+//    public FlexibleDate get届出年月日() {
+//        return 届出年月日;
+//    }
 
     /**
      * 届出者を返します。
      *
      * @return 届出者
      */
-    public Todokedesha get届出者() {
-        return 届出者;
-    }
+//    public Todokedesha get届出者() {
+//        return 届出者;
+//    }
 
     /**
      * 契約登録年月日を返します。
      *
      * @return 契約登録年月日
      */
-    public FlexibleDate get契約登録年月日() {
-        return 契約登録年月日;
-    }
+//    public FlexibleDate get契約登録年月日() {
+//        return 契約登録年月日;
+//    }
 
     /**
      * 契約事業者を返します。
@@ -153,88 +155,88 @@ public class JuryoininJigyosha {
      *
      * @return 住宅改修契約区分
      */
-    public JutakuKaishuKeiyakuKubun get住宅改修契約区分() {
-        return 住宅改修契約有無;
-    }
+//    public JutakuKaishuKeiyakuKubun get住宅改修契約区分() {
+//        return 住宅改修契約有無;
+//    }
 
     /**
      * 住宅改修契約か否かを返します。
      *
      * @return 住宅改修契約ならtrue、異なればfalse
      */
-    public boolean has住宅改修契約() {
-        return 住宅改修契約有無 == JutakuKaishuKeiyakuKubun.契約有り;
-    }
+//    public boolean has住宅改修契約() {
+//        return 住宅改修契約有無 == JutakuKaishuKeiyakuKubun.契約有り;
+//    }
 
     /**
      * 特定福祉用具販売契約区分を返します。
      *
      * @return 特定福祉用具販売契約有無
      */
-    public TokuteiFukushiYoguHanbaiKeiyakuKubun get特定福祉用具販売契約区分() {
-        return 特定福祉用具販売契約有無;
-    }
+//    public TokuteiFukushiYoguHanbaiKeiyakuKubun get特定福祉用具販売契約区分() {
+//        return 特定福祉用具販売契約有無;
+//    }
 
     /**
      * 特定福祉用具販売契約か否かを返します。
      *
      * @return 特定福祉用具販売契約ならtrue、異なればfalse
      */
-    public boolean has特定福祉用具販売契約() {
-        return 特定福祉用具販売契約有無 == TokuteiFukushiYoguHanbaiKeiyakuKubun.契約有り;
-    }
+//    public boolean has特定福祉用具販売契約() {
+//        return 特定福祉用具販売契約有無 == TokuteiFukushiYoguHanbaiKeiyakuKubun.契約有り;
+//    }
 
     /**
      * 償還払給付契約区分を返します。
      *
      * @return 償還払給付契約有無
      */
-    public ShokanbaraiKyufuKeiyakuKubun get償還払給付契約区分() {
-        return 償還払給付契約有無;
-    }
+//    public ShokanbaraiKyufuKeiyakuKubun get償還払給付契約区分() {
+//        return 償還払給付契約有無;
+//    }
 
     /**
      * 償還払給付契約か否かを返します。
      *
      * @return 償還払給付契約ならtrue、異なればfalse
      */
-    public boolean has償還払給付契約() {
-        return 償還払給付契約有無 == ShokanbaraiKyufuKeiyakuKubun.契約有り;
-    }
+//    public boolean has償還払給付契約() {
+//        return 償還払給付契約有無 == ShokanbaraiKyufuKeiyakuKubun.契約有り;
+//    }
 
     /**
      * 高額給付契約区分を返します。
      *
      * @return 高額給付契約有無
      */
-    public KogakuKyufuKeiyakuKubun get高額給付契約区分() {
-        return 高額給付契約有無;
-    }
+//    public KogakuKyufuKeiyakuKubun get高額給付契約区分() {
+//        return 高額給付契約有無;
+//    }
 
     /**
      * 高額給付契約か否かを返します。
      *
      * @return 高額給付契約ならtrue、異なればfalse
      */
-    public boolean has高額給付契約() {
-        return 高額給付契約有無 == KogakuKyufuKeiyakuKubun.契約有り;
-    }
+//    public boolean has高額給付契約() {
+//        return 高額給付契約有無 == KogakuKyufuKeiyakuKubun.契約有り;
+//    }
 
     /**
      * 取扱確約書区分を返します。
      *
      * @return 取扱確約書有無
      */
-    public ToriatsukaiKakuyakushoKubun get取扱確約書区分() {
-        return 取扱確約書有無;
-    }
+//    public ToriatsukaiKakuyakushoKubun get取扱確約書区分() {
+//        return 取扱確約書有無;
+//    }
 
     /**
      * 取扱確約書があるか否かを返します。
      *
      * @return 取扱確約書があればtrue、なければfalse
      */
-    public boolean has取扱確約書() {
-        return 取扱確約書有無 == ToriatsukaiKakuyakushoKubun.確約書有り;
-    }
+//    public boolean has取扱確約書() {
+//        return 取扱確約書有無 == ToriatsukaiKakuyakushoKubun.確約書有り;
+//    }
 }

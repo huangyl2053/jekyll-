@@ -23,7 +23,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaIdentifier implements Serializable
     private final FlexibleYear 対象年度;
     private final HokenshaNo 証記載保険者番号;
     private final RString 支給申請書整理番号;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
 
     /**
      * コンストラクタです。
@@ -38,7 +38,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaIdentifier implements Serializable
             FlexibleYear 対象年度,
             HokenshaNo 証記載保険者番号,
             RString 支給申請書整理番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         this.被保険者番号 = 被保険者番号;
         this.対象年度 = 対象年度;
         this.証記載保険者番号 = 証記載保険者番号;

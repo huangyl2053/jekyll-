@@ -5,6 +5,8 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -22,8 +24,8 @@ public final class DbT5221NinteichosaScheduleEntityGenerator {
     public static final RString DEFAULT_認定調査予定終了時間 = new RString("名称");
     public static final Code DEFAULT_認定調査時間枠 = new Code("01");
     public static final Code DEFAULT_調査地区コード = new Code("01");
-    public static final RString DEFAULT_認定調査委託先コード = new RString("000001");
-    public static final RString DEFAULT_認定調査員コード = new RString("000001");
+    public static final ChosaItakusakiCode DEFAULT_認定調査委託先コード = new ChosaItakusakiCode("000001");
+    public static final ChosainCode DEFAULT_認定調査員コード = new ChosainCode("000001");
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("202010");
     public static final ShinseishoKanriNo DEFAULT_申請書管理番号 = new ShinseishoKanriNo("900001");
     public static final Code DEFAULT_予約状況 = new Code("01");

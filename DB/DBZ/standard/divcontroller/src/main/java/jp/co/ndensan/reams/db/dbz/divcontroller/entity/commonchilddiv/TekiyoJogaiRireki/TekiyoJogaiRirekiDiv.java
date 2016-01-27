@@ -36,10 +36,10 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     private panelTekiyoJokaiTekiInputDiv panelTekiyoJokaiTekiInput;
     @JsonProperty("panelTekiyoJokaiKaiJyoInput")
     private panelTekiyoJokaiKaiJyoInputDiv panelTekiyoJokaiKaiJyoInput;
-    @JsonProperty("TekiyoJogaiTorokuHenkoIchiran")
-    private TekiyoJogaiTorokuHenkoIchiranDiv TekiyoJogaiTorokuHenkoIchiran;
     @JsonProperty("btnKakutei")
     private Button btnKakutei;
+    @JsonProperty("btnInputClear")
+    private Button btnInputClear;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -120,24 +120,6 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     /*
-     * getTekiyoJogaiTorokuHenkoIchiran
-     * @return TekiyoJogaiTorokuHenkoIchiran
-     */
-    @JsonProperty("TekiyoJogaiTorokuHenkoIchiran")
-    public TekiyoJogaiTorokuHenkoIchiranDiv getTekiyoJogaiTorokuHenkoIchiran() {
-        return TekiyoJogaiTorokuHenkoIchiran;
-    }
-
-    /*
-     * setTekiyoJogaiTorokuHenkoIchiran
-     * @param TekiyoJogaiTorokuHenkoIchiran TekiyoJogaiTorokuHenkoIchiran
-     */
-    @JsonProperty("TekiyoJogaiTorokuHenkoIchiran")
-    public void setTekiyoJogaiTorokuHenkoIchiran(TekiyoJogaiTorokuHenkoIchiranDiv TekiyoJogaiTorokuHenkoIchiran) {
-        this.TekiyoJogaiTorokuHenkoIchiran = TekiyoJogaiTorokuHenkoIchiran;
-    }
-
-    /*
      * getbtnKakutei
      * @return btnKakutei
      */
@@ -153,6 +135,24 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     @JsonProperty("btnKakutei")
     public void setBtnKakutei(Button btnKakutei) {
         this.btnKakutei = btnKakutei;
+    }
+
+    /*
+     * getbtnInputClear
+     * @return btnInputClear
+     */
+    @JsonProperty("btnInputClear")
+    public Button getBtnInputClear() {
+        return btnInputClear;
+    }
+
+    /*
+     * setbtnInputClear
+     * @param btnInputClear btnInputClear
+     */
+    @JsonProperty("btnInputClear")
+    public void setBtnInputClear(Button btnInputClear) {
+        this.btnInputClear = btnInputClear;
     }
 
     /*
@@ -447,6 +447,78 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
 
     public void setMode_除外施設入所適用( 除外施設入所適用 value ) {
         _CommonChildDivModeUtil.setMode( this.modes, 除外施設入所適用.class , value );
+    }
+
+    public static enum ModeShokai implements ICommonChildDivMode {
+
+        shokai("shokai");
+
+        private final String name;
+
+        private ModeShokai(final String name) {
+            this.name = name;
+        }
+
+        public static ModeShokai getEnum(String str) {
+            ModeShokai[] enumArray = ModeShokai.values();
+
+            for (ModeShokai enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public ModeShokai getMode_ModeShokai() {
+        return (ModeShokai) _CommonChildDivModeUtil.getMode( this.modes, ModeShokai.class );
+    }
+
+    public void setMode_ModeShokai( ModeShokai value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, ModeShokai.class , value );
+    }
+
+    public static enum 履歴訂正 implements ICommonChildDivMode {
+
+        teisei("teisei");
+
+        private final String name;
+
+        private 履歴訂正(final String name) {
+            this.name = name;
+        }
+
+        public static 履歴訂正 getEnum(String str) {
+            履歴訂正[] enumArray = 履歴訂正.values();
+
+            for (履歴訂正 enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public 履歴訂正 getMode_履歴訂正() {
+        return (履歴訂正) _CommonChildDivModeUtil.getMode( this.modes, 履歴訂正.class );
+    }
+
+    public void setMode_履歴訂正( 履歴訂正 value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, 履歴訂正.class , value );
     }
 
     /*

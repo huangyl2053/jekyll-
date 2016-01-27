@@ -153,12 +153,12 @@ public class KogakuShikyuHanteiKekkaTest extends DbcTestBase {
 
         @Test
         public void get支給区分コードは_entityが持つ支給区分コードを返す() {
-            assertThat(sut.get支給区分コード(), is(KogakuShikyuHanteiKekkaEntity.getShiharaiKubunCode()));
+            assertThat(sut.get支給区分コード(), is(KogakuShikyuHanteiKekkaEntity.getShikyuKubunCode()));
         }
 
         @Test
         public void get支給金額は_entityが持つ支給金額を返す() {
-            assertThat(sut.get支給金額(), is(KogakuShikyuHanteiKekkaEntity.getShiharaiKingaku()));
+            assertThat(sut.get支給金額(), is(KogakuShikyuHanteiKekkaEntity.getShikyuKingaku()));
         }
 
         @Test

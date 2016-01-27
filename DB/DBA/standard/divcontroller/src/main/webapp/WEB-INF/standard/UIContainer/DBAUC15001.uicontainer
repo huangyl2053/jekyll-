@@ -1,0 +1,144 @@
+﻿{
+ "uiContainerName": "DBAUC15001",
+ "displayWizard": false,
+ "subGyomuCode": "DBA",
+ "steps": [
+  {
+   "id": 1,
+   "name": "資格異動訂正",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0200001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1050011",
+     "toLayoutTitle": "資格異動訂正",
+     "toState": "初期状態"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1050011",
+     "layoutTitle": "資格異動訂正",
+     "eventName": "再検索",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1050011",
+     "layoutTitle": "資格異動訂正",
+     "eventName": "追加",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1050021",
+     "toLayoutTitle": "被保険者資格詳細異動",
+     "toState": "追加状態"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1050021",
+     "layoutTitle": "被保険者資格詳細異動",
+     "eventName": "資格異動の訂正を保存する",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1050011",
+     "toLayoutTitle": "資格異動訂正",
+     "toState": "初期状態"
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1050011",
+     "layoutTitle": "資格異動訂正",
+     "eventName": "修正",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1050021",
+     "toLayoutTitle": "被保険者資格詳細異動",
+     "toState": "修正状態"
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1050021",
+     "layoutTitle": "被保険者資格詳細異動",
+     "eventName": "資格異動訂正に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1050011",
+     "toLayoutTitle": "資格異動訂正",
+     "toState": "初期状態"
+    },
+    {
+     "id": "8",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1050011",
+     "layoutTitle": "資格異動訂正",
+     "eventName": "削除",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1050021",
+     "toLayoutTitle": "被保険者資格詳細異動",
+     "toState": "削除状態"
+    },
+    {
+     "id": "9",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1050011",
+     "layoutTitle": "資格異動訂正",
+     "eventName": "詳細",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1050021",
+     "toLayoutTitle": "被保険者資格詳細異動",
+     "toState": "照会状態"
+    },
+    {
+     "id": "10",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1050011",
+     "layoutTitle": "資格異動訂正",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

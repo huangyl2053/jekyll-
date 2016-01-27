@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 /**
  * 要介護認定結果情報テーブルのエンティティクラスです。
  */
-public class DbT4102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT4102NinteiKekkaJohoEntity> implements IDbAccessable {
+public class DbT4102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT4102NinteiKekkaJohoEntity> implements IDbAccessable, INinteiKekkaJohoEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4102NinteiKekkaJoho");

@@ -1,0 +1,130 @@
+﻿{
+ "uiContainerName": "DBAUC21004",
+ "displayWizard": false,
+ "subGyomuCode": "DBA",
+ "steps": [
+  {
+   "id": 1,
+   "name": "介護施設修正削除",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA2010011",
+     "toLayoutTitle": "検索条件・事業者一覧",
+     "toState": "検索条件"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2010011",
+     "layoutTitle": "検索条件・事業者一覧",
+     "eventName": "選択",
+     "destroy": false,
+     "condition": "その他特例施設",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA2010012",
+     "toLayoutTitle": "施設登録",
+     "toState": "照会状態"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2010011",
+     "layoutTitle": "検索条件・事業者一覧",
+     "eventName": "選択",
+     "destroy": false,
+     "condition": "適用除外施設",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA2010012",
+     "toLayoutTitle": "施設登録",
+     "toState": "照会状態"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2010011",
+     "layoutTitle": "検索条件・事業者一覧",
+     "eventName": "修正",
+     "destroy": false,
+     "condition": "その他特例施設",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA2010012",
+     "toLayoutTitle": "施設登録",
+     "toState": "修正状態"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2010011",
+     "layoutTitle": "検索条件・事業者一覧",
+     "eventName": "修正",
+     "destroy": false,
+     "condition": "適用除外施設",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA2010012",
+     "toLayoutTitle": "施設登録",
+     "toState": "修正状態"
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2010011",
+     "layoutTitle": "検索条件・事業者一覧",
+     "eventName": "削除",
+     "destroy": false,
+     "condition": "その他特例施設",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA2010012",
+     "toLayoutTitle": "施設登録",
+     "toState": "削除状態"
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2010011",
+     "layoutTitle": "検索条件・事業者一覧",
+     "eventName": "削除",
+     "destroy": false,
+     "condition": "適用除外施設",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA2010012",
+     "toLayoutTitle": "施設登録",
+     "toState": "削除状態"
+    },
+    {
+     "id": "8",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2010012",
+     "layoutTitle": "施設登録",
+     "eventName": "再検索",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA2010011",
+     "toLayoutTitle": "検索条件・事業者一覧",
+     "toState": "事業者一覧"
+    },
+    {
+     "id": "9",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2010011",
+     "layoutTitle": "検索条件・事業者一覧",
+     "eventName": "終了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

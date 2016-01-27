@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3015KyufuKanrihyo200604Enti
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbTKyufuInCtrlTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbTKyufukanrihyoDataTempTableEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.KyufuKanrihyoCSVDataEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.KyufuKanrihyoCSVHeaderEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.KyufuKanrihyoCSVDataEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.KyufuKanrihyoCSVHeaderEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;

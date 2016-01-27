@@ -52,8 +52,8 @@ public class RiyoshaFutanWariaiKonkyoManagerTest {
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー2 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー3 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_履歴番号;
-            Decimal 主キー4 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_枝番号;
+            int 主キー3 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_履歴番号;
+            int 主キー4 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_枝番号;
             HihokenshaNo 主キー5 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_世帯員被保険者番号;
             sut.get利用者負担割合世帯員(null, 主キー2, 主キー3, 主キー4, 主キー5);
         }
@@ -61,47 +61,47 @@ public class RiyoshaFutanWariaiKonkyoManagerTest {
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYear 主キー1 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_年度;
-            Decimal 主キー3 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_履歴番号;
-            Decimal 主キー4 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_枝番号;
+            int 主キー3 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_履歴番号;
+            int 主キー4 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_枝番号;
             HihokenshaNo 主キー5 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_世帯員被保険者番号;
             sut.get利用者負担割合世帯員(主キー1, null, 主キー3, 主キー4, 主キー5);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
-            FlexibleYear 主キー1 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_年度;
-            HihokenshaNo 主キー2 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー4 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_枝番号;
-            HihokenshaNo 主キー5 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_世帯員被保険者番号;
-            sut.get利用者負担割合世帯員(主キー1, 主キー2, null, 主キー4, 主キー5);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
-            FlexibleYear 主キー1 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_年度;
-            HihokenshaNo 主キー2 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー3 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_履歴番号;
-            HihokenshaNo 主キー5 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_世帯員被保険者番号;
-            sut.get利用者負担割合世帯員(主キー1, 主キー2, 主キー3, null, 主キー5);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
+//            FlexibleYear 主キー1 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_年度;
+//            HihokenshaNo 主キー2 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_被保険者番号;
+//            int 主キー4 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_枝番号;
+//            HihokenshaNo 主キー5 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_世帯員被保険者番号;
+//            sut.get利用者負担割合世帯員(主キー1, 主キー2, null, 主キー4, 主キー5);
+//        }
+//
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
+//            FlexibleYear 主キー1 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_年度;
+//            HihokenshaNo 主キー2 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_被保険者番号;
+//            int 主キー3 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_履歴番号;
+//            HihokenshaNo 主キー5 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_世帯員被保険者番号;
+//            sut.get利用者負担割合世帯員(主キー1, 主キー2, 主キー3, null, 主キー5);
+//        }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型5にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYear 主キー1 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_年度;
             HihokenshaNo 主キー2 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー3 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_履歴番号;
-            Decimal 主キー4 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_枝番号;
+            int 主キー3 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_履歴番号;
+            int 主キー4 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_枝番号;
             sut.get利用者負担割合世帯員(主キー1, 主キー2, 主キー3, 主キー4, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(FlexibleYear.class), any(HihokenshaNo.class), any(Decimal.class), any(Decimal.class), any(HihokenshaNo.class))).thenReturn(null);
+            when(dac.selectByKey(any(FlexibleYear.class), any(HihokenshaNo.class), any(int.class), any(int.class), any(HihokenshaNo.class))).thenReturn(null);
             FlexibleYear 主キー1 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_年度;
             HihokenshaNo 主キー2 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー3 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_履歴番号;
-            Decimal 主キー4 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_枝番号;
+            int 主キー3 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_履歴番号;
+            int 主キー4 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_枝番号;
             HihokenshaNo 主キー5 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_世帯員被保険者番号;
             RiyoshaFutanWariaiKonkyo result = sut.get利用者負担割合世帯員(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
@@ -111,11 +111,11 @@ public class RiyoshaFutanWariaiKonkyoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3115RiyoshaFutanWariaiKonkyoEntity entity = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.createDbT3115RiyoshaFutanWariaiKonkyoEntity();
-            when(dac.selectByKey(any(FlexibleYear.class), any(HihokenshaNo.class), any(Decimal.class), any(Decimal.class), any(HihokenshaNo.class))).thenReturn(entity);
+            when(dac.selectByKey(any(FlexibleYear.class), any(HihokenshaNo.class), any(int.class), any(int.class), any(HihokenshaNo.class))).thenReturn(entity);
             FlexibleYear 主キー1 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_年度;
             HihokenshaNo 主キー2 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー3 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_履歴番号;
-            Decimal 主キー4 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_枝番号;
+            int 主キー3 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_履歴番号;
+            int 主キー4 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_枝番号;
             HihokenshaNo 主キー5 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_世帯員被保険者番号;
             RiyoshaFutanWariaiKonkyo result = sut.get利用者負担割合世帯員(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
@@ -176,7 +176,7 @@ public class RiyoshaFutanWariaiKonkyoManagerTest {
             DbT3115RiyoshaFutanWariaiKonkyoEntity entity = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.createDbT3115RiyoshaFutanWariaiKonkyoEntity();
             entity.initializeMd5();
             RiyoshaFutanWariaiKonkyo 利用者負担割合世帯員 = new RiyoshaFutanWariaiKonkyo(entity);
-            利用者負担割合世帯員 = 利用者負担割合世帯員.createBuilderForEdit().set枝番号(new Decimal(100)).build();
+            利用者負担割合世帯員 = 利用者負担割合世帯員.createBuilderForEdit().set枝番号(100).build();
 
             assertThat(sut.save利用者負担割合世帯員(利用者負担割合世帯員), is(true));
         }
@@ -188,7 +188,7 @@ public class RiyoshaFutanWariaiKonkyoManagerTest {
             DbT3115RiyoshaFutanWariaiKonkyoEntity entity = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.createDbT3115RiyoshaFutanWariaiKonkyoEntity();
             entity.initializeMd5();
             RiyoshaFutanWariaiKonkyo 利用者負担割合世帯員 = new RiyoshaFutanWariaiKonkyo(entity);
-            利用者負担割合世帯員 = 利用者負担割合世帯員.createBuilderForEdit().set枝番号(new Decimal(100)).build();
+            利用者負担割合世帯員 = 利用者負担割合世帯員.createBuilderForEdit().set枝番号(100).build();
 
             assertThat(sut.save利用者負担割合世帯員(利用者負担割合世帯員), is(false));
         }

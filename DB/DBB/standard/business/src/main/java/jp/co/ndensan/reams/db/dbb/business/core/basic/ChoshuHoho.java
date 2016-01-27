@@ -373,7 +373,7 @@ public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHoh
      * @return 特別徴収停止日時
      */
     public YMDHMS get特別徴収停止日時() {
-        return entity.getTokuchoTeishiTimestamp();
+        return entity.getTokuchoTeishiNichiji();
     }
 
     /**

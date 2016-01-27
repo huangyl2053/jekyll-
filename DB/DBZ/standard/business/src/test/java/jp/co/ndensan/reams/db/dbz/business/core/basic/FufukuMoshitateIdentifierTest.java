@@ -42,7 +42,8 @@ public class FufukuMoshitateIdentifierTest extends DbzTestBase {
 
         @Test
         public void シリアライズできる() {
-            FufukuMoshitateIdentifier sut = new FufukuMoshitateIdentifier(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+//            FufukuMoshitateIdentifier sut = new FufukuMoshitateIdentifier(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            FufukuMoshitateIdentifier sut = new FufukuMoshitateIdentifier(主キー名2, 主キー名3, 主キー名4);
             assertThat(sut, is(IsSerializable.serializable()));
         }
     }

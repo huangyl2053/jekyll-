@@ -14,11 +14,13 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 
 /**
  * 調査員情報（子）テーブルのエンティティクラスです。
  */
-public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJohoEntity> implements IDbAccessable {
+public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJohoEntity> implements IDbAccessable, IChosainJohoEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4913ChosainJoho");
@@ -34,9 +36,9 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
     @PrimaryKey
     private LasdecCode shichosonCode;
     @PrimaryKey
-    private RString ninteiChosaItakusakiCode;
+    private ChosaItakusakiCode ninteiChosaItakusakiCode;
     @PrimaryKey
-    private RString ninteiChosainCode;
+    private ChosainCode ninteiChosainCode;
     private RString chosainShimei;
     private RString chosainKanaShimei;
     private RString seibetsu;
@@ -121,7 +123,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      * 
      * @return 認定調査委託先コード
      */
-    public RString getNinteiChosaItakusakiCode() {
+    public ChosaItakusakiCode getNinteiChosaItakusakiCode() {
         return ninteiChosaItakusakiCode;
     }
 
@@ -132,7 +134,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      * 
      * @param ninteiChosaItakusakiCode 認定調査委託先コード
      */
-    public void setNinteiChosaItakusakiCode(@Nonnull RString ninteiChosaItakusakiCode) {
+    public void setNinteiChosaItakusakiCode(@Nonnull ChosaItakusakiCode ninteiChosaItakusakiCode) {
         this.ninteiChosaItakusakiCode = ninteiChosaItakusakiCode;
     }
 
@@ -141,7 +143,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      * 
      * @return 認定調査員コード
      */
-    public RString getNinteiChosainCode() {
+    public ChosainCode getNinteiChosainCode() {
         return ninteiChosainCode;
     }
 
@@ -150,7 +152,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      * 
      * @param ninteiChosainCode 認定調査員コード
      */
-    public void setNinteiChosainCode(@Nonnull RString ninteiChosainCode) {
+    public void setNinteiChosainCode(@Nonnull ChosainCode ninteiChosainCode) {
         this.ninteiChosainCode = ninteiChosainCode;
     }
 

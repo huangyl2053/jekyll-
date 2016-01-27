@@ -288,7 +288,7 @@ public class ChoshuHohoTest extends DbbTestBase {
 
         @Test
         public void get特別徴収停止日時は_entityが持つ特別徴収停止日時を返す() {
-            assertThat(sut.get特別徴収停止日時(), is(ChoshuHohoEntity.getTokuchoTeishiTimestamp()));
+            assertThat(sut.get特別徴収停止日時(), is(ChoshuHohoEntity.getTokuchoTeishiNichiji()));
         }
 
         @Test

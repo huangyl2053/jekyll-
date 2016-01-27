@@ -55,8 +55,8 @@ public class RiyoshaFutanWariaiKonkyoManager {
     public RiyoshaFutanWariaiKonkyo get利用者負担割合世帯員(
             FlexibleYear 年度,
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号,
-            Decimal 枝番号,
+            int 履歴番号,
+            int 枝番号,
             HihokenshaNo 世帯員被保険者番号) {
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));

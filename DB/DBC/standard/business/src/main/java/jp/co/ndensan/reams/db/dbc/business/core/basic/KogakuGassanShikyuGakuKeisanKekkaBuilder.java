@@ -99,7 +99,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link KogakuGassanShikyuGakuKeisanKekkaBuilder}
      */
-    public KogakuGassanShikyuGakuKeisanKekkaBuilder set履歴番号(Decimal 履歴番号) {
+    public KogakuGassanShikyuGakuKeisanKekkaBuilder set履歴番号(int 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;

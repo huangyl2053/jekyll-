@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
+package jp.co.ndensan.reams.db.dbb.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2011RankJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

@@ -14,17 +14,101 @@
      "toLayoutSubGyomuCode": "DBB",
      "toLayoutName": "DBB0020001",
      "toLayoutTitle": "通知書発行後異動把握",
-     "toState": "異動把握初期表示"
+     "toState": "異動把握"
     },
     {
      "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0020001",
+     "layoutTitle": "通知書発行後異動把握",
+     "eventName": "即時更生へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB8120001",
+     "toLayoutTitle": "介護保険料即時賦課更正",
+     "toState": "即時賦課更正"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB8120001",
+     "layoutTitle": "介護保険料即時賦課更正",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0020001",
+     "toLayoutTitle": "通知書発行後異動把握",
+     "toState": "異動把握"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB8120001",
+     "layoutTitle": "介護保険料即時賦課更正",
+     "eventName": "通知書作成",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB8110001",
+     "toLayoutTitle": "各種通知書作成（個別）",
+     "toState": "通知書発行"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB8110001",
+     "layoutTitle": "各種通知書作成（個別）",
+     "eventName": "戻る",
+     "destroy": false,
+     "condition": "ViaSokujiKosei",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB8120001",
+     "toLayoutTitle": "介護保険料即時賦課更正",
+     "toState": "即時賦課更正"
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB8110001",
+     "layoutTitle": "各種通知書作成（個別）",
+     "eventName": "戻る",
+     "destroy": false,
+     "condition": "Direct",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0020001",
+     "toLayoutTitle": "通知書発行後異動把握",
+     "toState": "異動把握"
+    },
+    {
+     "id": "7",
      "type": "end",
      "layoutSubGyomuCode": "DBB",
      "layoutName": "DBB0020001",
      "layoutTitle": "通知書発行後異動把握",
-     "eventName": "完了",
+     "eventName": "終了する",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "8",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0020001",
+     "layoutTitle": "通知書発行後異動把握",
+     "eventName": "各種通知書作成へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB8110001",
+     "toLayoutTitle": "各種通知書作成（個別）",
+     "toState": "通知書発行"
     }
    ]
   }
