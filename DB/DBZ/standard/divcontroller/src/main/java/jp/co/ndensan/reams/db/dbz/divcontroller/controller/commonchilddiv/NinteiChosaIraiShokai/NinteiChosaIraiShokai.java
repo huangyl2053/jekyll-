@@ -12,7 +12,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaIraiShokai.NinteiChosaIraiShokaiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.NinteiChosaIraiShokai.NinteiChosaIraiShokaiHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteichosairaishokai.NinteiChosaIraiShokaiFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -32,6 +34,9 @@ public class NinteiChosaIraiShokai {
         RString 被保険者番号 = new RString((ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class)).toString());
         List<NinteiChosaIraiShokaiMaster> ninteiChosaList
                 = NinteiChosaIraiShokaiFinder.createInstance().getNinteiChousaJouhou(被保険者番号).records();
+        if (ninteiChosaList.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.toString());
+        }
         getHandler(div).load(ninteiChosaList);
         return ResponseData.of(div).respond();
     }
