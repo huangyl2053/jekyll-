@@ -12,12 +12,11 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.DBA1
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.jukinentotorokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1140011.JukinenTotorokuValidationHandler;
 import jp.co.ndensan.reams.db.dba.service.jukirendotorokushalist.JukiRendoTorokushaListFinder;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -26,8 +25,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class jukinentotoroku {
 
     private final JukiRendoTorokushaListFinder finder;
-    private static final SubGyomuCode サブ業務コード = new SubGyomuCode("DBA");
-    private static final ReportId 帳票ID = new ReportId("DBA200007");
+    // TODO 帳票出力順の初期化(技術点に提出しました※QA#73393)
+//    private static final SubGyomuCode サブ業務コード = new SubGyomuCode("DBA");
+//    private static final ReportId 帳票ID = new ReportId("DBA200007_JukiRendoTorokuList");
 
     /**
      * コンストラクタです。
@@ -44,6 +44,7 @@ public class jukinentotoroku {
      */
     public ResponseData<jukinentotorokuDiv> onLoad(jukinentotorokuDiv div) {
         FlexibleDate nowDate = new FlexibleDate(RDate.getNowDate().toDateString());
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"), false);
         DbT7022ShoriDateKanriBusiness business = finder.getKaishiShuryobi();
         if (business == null || (business.getTaishoKaishiYMD() == null
                 && business.getTaishoShuryoYMD() == null)) {
