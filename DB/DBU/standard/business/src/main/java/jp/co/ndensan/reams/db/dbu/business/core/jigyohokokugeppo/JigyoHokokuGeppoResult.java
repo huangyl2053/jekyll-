@@ -202,16 +202,7 @@ public class JigyoHokokuGeppoResult {
      * @return 保険者コード
      */
     public RString get保険者コード() {
-        return entity.get保険者コード();
-    }
-
-    /**
-     * 補正フラグを取得する。
-     *
-     * @return 補正フラグ
-     */
-    public RString get補正フラグ() {
-        return entity.get補正フラグ();
+        return entity.getHokenShaCode();
     }
 
     /**
@@ -220,7 +211,7 @@ public class JigyoHokokuGeppoResult {
      * @return 市町村名称
      */
     public RString get市町村名称() {
-        return entity.get市町村名称();
+        return entity.getShichosonName();
     }
 
 }
