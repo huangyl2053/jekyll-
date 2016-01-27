@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810024;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810013;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukih
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * panelCcd のクラスファイル 
+ * panelOne のクラスファイル 
  * 
  * @author 自動生成
  */
-public class panelCcdDiv extends Panel {
+public class panelOneDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     /*
      * [ private の作成 ]
@@ -24,10 +24,10 @@ public class panelCcdDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKaigoAtenaInfo")
-    private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
     @JsonProperty("ccdKaigoShikakuKihon")
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
+    @JsonProperty("ccdKaigoAtenaInfo")
+    private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,21 +36,21 @@ public class panelCcdDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdKaigoAtenaInfo
-     * @return ccdKaigoAtenaInfo
-     */
-    @JsonProperty("ccdKaigoAtenaInfo")
-    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
-        return ccdKaigoAtenaInfo;
-    }
-
-    /*
      * getccdKaigoShikakuKihon
      * @return ccdKaigoShikakuKihon
      */
     @JsonProperty("ccdKaigoShikakuKihon")
     public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
         return ccdKaigoShikakuKihon;
+    }
+
+    /*
+     * getccdKaigoAtenaInfo
+     * @return ccdKaigoAtenaInfo
+     */
+    @JsonProperty("ccdKaigoAtenaInfo")
+    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
+        return ccdKaigoAtenaInfo;
     }
 
     // </editor-fold>
