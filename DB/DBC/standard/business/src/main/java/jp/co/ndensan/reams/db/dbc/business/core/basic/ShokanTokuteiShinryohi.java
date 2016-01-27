@@ -213,6 +213,24 @@ public class ShokanTokuteiShinryohi
     }
 
     /**
+     * 措置単位数を返します。
+     *
+     * @return 措置単位数
+     */
+    public int get措置単位数() {
+        return entity.getSochiTanisu();
+    }
+
+    /**
+     * 手術単位数を返します。
+     *
+     * @return 手術単位数
+     */
+    public int get手術単位数() {
+        return entity.getShujutsuTanisu();
+    }
+
+    /**
      * 合計単位数を返します。
      *
      * @return 合計単位数

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jan 18 16:58:54 CST 2016 
+ * Tue Jan 26 20:20:19 CST 2016 
  */
 
 
@@ -26,6 +26,7 @@ public class dgdTokuteiShinryohi_Row extends DataRow {
     private RString defaultDataName3;
     private RString defaultDataName4;
     private RString defaultDataName5;
+    private RString defaultDataName6;
 
     public dgdTokuteiShinryohi_Row() {
         super();
@@ -34,25 +35,29 @@ public class dgdTokuteiShinryohi_Row extends DataRow {
         this.defaultDataName3 = RString.EMPTY;
         this.defaultDataName4 = RString.EMPTY;
         this.defaultDataName5 = RString.EMPTY;
+        this.defaultDataName6 = RString.EMPTY;
         this.setOriginalData("defaultDataName1", defaultDataName1);
         this.setOriginalData("defaultDataName2", defaultDataName2);
         this.setOriginalData("defaultDataName3", defaultDataName3);
         this.setOriginalData("defaultDataName4", defaultDataName4);
         this.setOriginalData("defaultDataName5", defaultDataName5);
+        this.setOriginalData("defaultDataName6", defaultDataName6);
     }
 
-    public dgdTokuteiShinryohi_Row(RString defaultDataName1, RString defaultDataName2, RString defaultDataName3, RString defaultDataName4, RString defaultDataName5) {
+    public dgdTokuteiShinryohi_Row(RString defaultDataName1, RString defaultDataName2, RString defaultDataName3, RString defaultDataName4, RString defaultDataName5, RString defaultDataName6) {
         super();
         this.setOriginalData("defaultDataName1", defaultDataName1);
         this.setOriginalData("defaultDataName2", defaultDataName2);
         this.setOriginalData("defaultDataName3", defaultDataName3);
         this.setOriginalData("defaultDataName4", defaultDataName4);
         this.setOriginalData("defaultDataName5", defaultDataName5);
+        this.setOriginalData("defaultDataName6", defaultDataName6);
         this.defaultDataName1 = defaultDataName1;
         this.defaultDataName2 = defaultDataName2;
         this.defaultDataName3 = defaultDataName3;
         this.defaultDataName4 = defaultDataName4;
         this.defaultDataName5 = defaultDataName5;
+        this.defaultDataName6 = defaultDataName6;
     }
 
     public RString getDefaultDataName1() {
@@ -73,6 +78,10 @@ public class dgdTokuteiShinryohi_Row extends DataRow {
 
     public RString getDefaultDataName5() {
         return defaultDataName5;
+    }
+
+    public RString getDefaultDataName6() {
+        return defaultDataName6;
     }
 
     public void setDefaultDataName1(RString defaultDataName1) {
@@ -98,6 +107,11 @@ public class dgdTokuteiShinryohi_Row extends DataRow {
     public void setDefaultDataName5(RString defaultDataName5) {
         this.setOriginalData("defaultDataName5", defaultDataName5);
         this.defaultDataName5 = defaultDataName5;
+    }
+
+    public void setDefaultDataName6(RString defaultDataName6) {
+        this.setOriginalData("defaultDataName6", defaultDataName6);
+        this.defaultDataName6 = defaultDataName6;
     }
 
     // </editor-fold>

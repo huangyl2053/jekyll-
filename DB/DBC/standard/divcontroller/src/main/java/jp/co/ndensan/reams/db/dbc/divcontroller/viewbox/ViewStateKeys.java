@@ -15,4 +15,5 @@ public enum ViewStateKeys {
     識別コード,
     様式番号,
     申請日,
+    サービス年月,
 }

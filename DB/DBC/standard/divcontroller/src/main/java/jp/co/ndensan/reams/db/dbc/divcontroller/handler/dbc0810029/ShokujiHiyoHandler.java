@@ -31,6 +31,8 @@ public class ShokujiHiyoHandler {
 
     private final ShokujiHiyoDiv div;
     private static final RString 設定不可 = new RString("0");
+    private static final RString 設定可_任意 = new RString("2");
+    private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
 
     public ShokujiHiyoHandler(ShokujiHiyoDiv div) {
         this.div = div;
@@ -75,8 +77,8 @@ public class ShokujiHiyoHandler {
         if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getMeisaiJushochitokureiSetteiKubun())) {
             div.getPanelHead().getBtnKyufuhiMeisaiJyutoku().setDisabled(true);
         }
-        if (new RString("2").equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
-                && new FlexibleYearMonth("201204").isBeforeOrEquals(サービス年月)) {
+        if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
+                && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
             div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setVisible(false);
         } else {
             div.getPanelHead().getBtnKinkyujiShoteiShikkan().setVisible(false);
@@ -107,7 +109,8 @@ public class ShokujiHiyoHandler {
         div.getPanelGokeiSet().getTxtnichigakuHyojunFutangakuGokei().setValue(entity.get標準負担額_日額());
         div.getPanelGokeiSet().getTxtgetsugakuHyojunFutangakuGokei().setValue(new Decimal(entity.get標準負担額_月額()));
         div.getPanelGokeiSet().getTxtShokujiTeikyohiTotalGokei().setValue(new Decimal(entity.get食事提供費合計()));
-        div.getPanelGokeiSet().getTxtshokujiTeikyohiSeikyugakuGokei().setValue(new Decimal(entity.get食事提供費請求額()));
+        div.getPanelGokeiSet().getTxtshokujiTeikyohiSeikyugakuGokei()
+                .setValue(new Decimal(entity.get食事提供費請求額()));
     }
 
     public void set食事費用パネル１(ShokanShokujiHiyo entity) {
@@ -124,7 +127,8 @@ public class ShokujiHiyoHandler {
         div.getPanelDetail1().getTxtshokujiTeikyohiSeikyugaku().setValue(new Decimal(entity.get食事提供費請求額()));
         div.getPanelDetail1().getTxtTensuKingaku().setValue(new Decimal(entity.get点数_金額()));
         if (ShikyuFushikyuKubun.toValue(entity.get支給区分コード()) != null) {
-            div.getPanelDetail1().getTxtShikyukubun().setValue(ShikyuFushikyuKubun.toValue(entity.get支給区分コード()).get名称());
+            div.getPanelDetail1().getTxtShikyukubun().setValue(ShikyuFushikyuKubun.toValue(entity.get支給区分コード())
+                    .get名称());
         }
         div.getPanelDetail1().getTxtShiharaiKingaku().setValue(new Decimal(entity.get支給金額()));
         div.getPanelDetail1().getTxtZougenten().setValue(new Decimal(entity.get増減点()));

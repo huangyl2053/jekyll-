@@ -9,6 +9,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810021.KihonInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810021.KihonInfoHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.KaigoJigyoshaReturnEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
@@ -20,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -32,29 +35,41 @@ public class KihonInfo {
     public ResponseData<KihonInfoDiv> onLoad(KihonInfoDiv div) {
 
         // TODO 引き継ぎデータの取得
-        ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("123456"));
-        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(new RString("200905"));
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("1");
-        RString 整理番号 = new RString("123456");
-        JigyoshaNo 事業者番号 = new JigyoshaNo("2");
-        RString 様式番号 = new RString("2345");
-        RString 申請日 = new RString("20151124");
-        RString 明細番号 = new RString("3456");
-        RString 証明書 = new RString("証明書");
+        ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
+                new HihokenshaNo("000000033"), new FlexibleYearMonth(new RString("200501")),
+                new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
+                new RString("0003"), new RString("証明書"));
+        ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
+        ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
+                ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
+        FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
+        HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
+        RString 整理番号 = parameter.getSeiriNp();
+        JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
+        RString 明細番号 = parameter.getMeisaiNo();
+        RString 証明書 = parameter.getServiceYM();
 
-        // TODO「介護宛名情報」共有子Divの初期化
+        // TODO 該当者検索画面ViewState．識別コード
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("2"));
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        // TODO 申請書検索ViewSate．様式番号
+        ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        // TODO 申請検索画面ViewState. 申請日
+        ViewStateHolder.put(ViewStateKeys.申請日, new RString("20151124"));
+
 //        div.getPanelCcd().getCcdKaigoAtenaInfo().load(識別コード);
-        // TODO 「介護資格系基本情報」共有子Div の初期化
         if (!被保険者番号.isEmpty()) {
-            // TODO load----initialize
             div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         } else {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
-        getHandler(div).setヘッダーエリア(サービス年月, 事業者番号, 申請日, 明細番号, 証明書);
+        getHandler(div).setヘッダーエリア(サービス年月, 事業者番号,
+                ViewStateHolder.get(ViewStateKeys.申請日, RString.class), 明細番号, 証明書);
 
         List<ShokanKihon> shokanKihonList = ShokanbaraiJyokyoShokai.createInstance()
                 .getShokanbarayiSeikyukihonDetail(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+        // TODO サービス提供証明書画面に遷移する
         if (shokanKihonList == null || shokanKihonList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
@@ -67,66 +82,6 @@ public class KihonInfo {
                 .getShikibetsubangoKanri(サービス年月, 様式番号);
         getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity, サービス年月);
 
-        return createResponse(div);
-    }
-
-    public ResponseData<KihonInfoDiv> onClick_btnKyufuhiMeisaiDown(KihonInfoDiv div) {
-        // TODO DBC0810022_給付費明細画面へ遷移する
-        return createResponse(div);
-    }
-
-    public ResponseData<KihonInfoDiv> onClick_btnTokuteiShinryohi(KihonInfoDiv div) {
-        // TODO DBC0810023_特定診療費画面へ遷移する
-        return createResponse(div);
-    }
-
-    public ResponseData<KihonInfoDiv> onClick_btnServiceKeikakuhi(KihonInfoDiv div) {
-        // TODO DBC0810024_サービス計画費画面へ遷移する
-        return createResponse(div);
-    }
-
-    public ResponseData<KihonInfoDiv> onClick_btnTokuteiNyushosyaHiyo(KihonInfoDiv div) {
-        // TODO DBC0810025_特定入所者費用画面へ遷移する
-        return createResponse(div);
-    }
-
-    public ResponseData<KihonInfoDiv> onClick_btnGokeiInfo(KihonInfoDiv div) {
-        // TODO DBC0810026_合計情報画面へ遷移する
-        return createResponse(div);
-    }
-
-    public ResponseData<KihonInfoDiv> onClick_btnKyufuhiMeisaiJyutoku(KihonInfoDiv div) {
-        // TODO DBC0810032_給付費明細(住所地特例)画面へ遷移する
-        return createResponse(div);
-    }
-
-    public ResponseData<KihonInfoDiv> onClick_btnKinkyujiShisetuRyoyouhi(KihonInfoDiv div) {
-        // TODO DBC0810027_緊急時施設療養費画面へ遷移する
-        return createResponse(div);
-    }
-
-    public ResponseData<KihonInfoDiv> onClick_btnKinkyujiShoteiShikkan(KihonInfoDiv div) {
-        // TODO DBC0810028_緊急時・所定疾患画面へ遷移する
-        return createResponse(div);
-    }
-
-    public ResponseData<KihonInfoDiv> onClick_btnSyokujiHiyo(KihonInfoDiv div) {
-        // TODO DBC0810029_食事費用画面へ遷移する
-        return createResponse(div);
-    }
-
-    public ResponseData<KihonInfoDiv> onClick_btnSeikyugakuShukei(KihonInfoDiv div) {
-        // TODO DBC0810030_請求額集計画面へ遷移する
-        return createResponse(div);
-    }
-
-    public ResponseData<KihonInfoDiv> onClick_btnShafukuKeigenGaku(KihonInfoDiv div) {
-        // TODO DBC0810031_社福軽減額画面へ遷移する
-        return createResponse(div);
-    }
-
-    public ResponseData<KihonInfoDiv> onClick_btnBack(KihonInfoDiv div) {
-        // TODO DBC0810014_サービス提供証明書画面へ遷移する
         return createResponse(div);
     }
 

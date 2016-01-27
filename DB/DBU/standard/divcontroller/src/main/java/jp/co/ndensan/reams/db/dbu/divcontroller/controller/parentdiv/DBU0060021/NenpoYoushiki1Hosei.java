@@ -56,8 +56,14 @@ public class NenpoYoushiki1Hosei {
                                 param.get事業報告年報補正表示のコード(),
                                 Code.EMPTY)).records();
         if (jigyoHokokuTokeiDataList.isEmpty()) {
-            // TODO「OK」をクリックすれば、検索画面に遷移する 
-            return ResponseData.of(div).forwardWithEventName(DBU0130011TransitionEventName.対象者検索に戻る).respond();
+             if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+            }
+            if (new RString(UrInformationMessages.該当データなし.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
+                // TODO QA555「OK」をクリックすれば、検索画面に遷移する 
+                return ResponseData.of(div).forwardWithEventName(DBU0130011TransitionEventName.対象者検索に戻る).respond();
+            }
         }
         Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> jigyoHokokuTokeiData = Models.create(jigyoHokokuTokeiDataList);
         ViewStateHolder.put(ViewStateKeys.開催場所情報一覧, jigyoHokokuTokeiData);
@@ -73,6 +79,20 @@ public class NenpoYoushiki1Hosei {
      */
     public ResponseData<NenpoYoushiki1HoseiDiv> onClick_btnUpdate(NenpoYoushiki1HoseiDiv div) {
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity param = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
+        param = new ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity();
+        RString 報告年 = new RString("2015");
+        RString 集計対象年 = new RString("2015");
+        RString 市町村コード = new RString("201601");
+        RString 事業報告年報補正表示のコード = new RString("001");
+        RString 補正フラグ = new RString("削除");
+        param.set行報告年(報告年);
+        param.set行集計対象年(集計対象年);
+        param.set画面報告年度(報告年);
+        param.set画面集計年度(集計対象年);
+        param.set行市町村コード(市町村コード);
+        param.set選択した市町村コード(市町村コード);
+        param.set事業報告年報補正表示のコード(事業報告年報補正表示のコード);
+        param.set補正フラグ(補正フラグ);
         if (処理種別_修正.equals(param.get補正フラグ())) {
             List<JigyoHokokuTokeiData> 修正データの取得リスト = 修正データのチェック(div);
             if (!ResponseHolder.isReRequest()) {
@@ -81,13 +101,19 @@ public class NenpoYoushiki1Hosei {
             if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
                 JigyoHokokuNenpoHoseiHakoManager.createInstance().updateJigyoHokokuNenpoData(修正データの取得リスト);
-                ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage());
+                div.getKanryoMessge().getCCKanryoMessge().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
+                        .replace("更新").evaluate()),
+                        RString.EMPTY, RString.EMPTY, true);
+                return ResponseData.of(div).setState(DBU0060021StateName.完了状態);
             }
         } else if (処理種別_削除.equals(param.get補正フラグ())) {
             deleteJigyoHokokuNenpoData(param);
-            ResponseData.of(div).addMessage(UrInformationMessages.対象データ削除済み.getMessage());
+            div.getKanryoMessge().getCCKanryoMessge().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
+                    .replace("削除").evaluate()),
+                    RString.EMPTY, RString.EMPTY, true);
+            return ResponseData.of(div).setState(DBU0060021StateName.完了状態);
         }
-        return ResponseData.of(div).setState(DBU0060021StateName.完了状態);
+        return ResponseData.of(div).respond();
     }
 
     /**

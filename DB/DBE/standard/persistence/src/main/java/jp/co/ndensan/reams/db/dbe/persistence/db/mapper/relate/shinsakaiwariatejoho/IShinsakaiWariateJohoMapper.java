@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiwariatejoho;
 
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiwariatejoho.ShinsakaiWariateJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.ShinsakaiOrderKakuteiFlagMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoRelateEntity;
 
 /**
@@ -20,4 +21,13 @@ public interface IShinsakaiWariateJohoMapper {
      * @return ShinsakaiWariateJohoRelateEntity
      */
     ShinsakaiWariateJohoRelateEntity select介護認定審査会割当情報ByKey(ShinsakaiWariateJohoMapperParameter 介護認定審査会割当情報検索条件);
+
+    /**
+     * 介護認定審査会割当情報情報をキー検索で１件取得します。
+     *
+     * @param 介護認定審査会割当情報検索条件 介護認定審査会割当情報検索条件
+     * @return ShinsakaiWariateJohoRelateEntity
+     */
+    ShinsakaiWariateJohoRelateEntity select介護認定審査会割当情報ByKey_審査順確定フラグ非一致(
+            ShinsakaiOrderKakuteiFlagMapperParameter 介護認定審査会割当情報検索条件);
 }

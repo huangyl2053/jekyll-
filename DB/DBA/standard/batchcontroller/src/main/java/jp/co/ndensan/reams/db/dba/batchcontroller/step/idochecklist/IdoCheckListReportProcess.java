@@ -42,10 +42,13 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -134,31 +137,52 @@ public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
         getTekiyoJogaishaDaichouList();
         getSeikatsuHogoList();
         getRoreiFukushiNenkinList();
+        ShikibetsuCode 識別コード = ShikibetsuCode.EMPTY;
+        SetaiCode 世帯コード = SetaiCode.EMPTY;
+        AtenaMeisho 被保険者氏名 = AtenaMeisho.EMPTY;
+        AtenaKanaMeisho 被保険者カナ氏名 = AtenaKanaMeisho.EMPTY;
+
         for (IdoInfoEntity entity : list) {
-            ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                    ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
-            key.setデータ取得区分(DataShutokuKubun.直近レコード);
-            key.set識別コード(entity.get識別コード());
-            List<JuminShubetsu> 住民種別List = new ArrayList<>();
-            住民種別List.add(JuminShubetsu.日本人);
-            住民種別List.add(JuminShubetsu.外国人);
-            住民種別List.add(JuminShubetsu.住登外個人_日本人);
-            住民種別List.add(JuminShubetsu.住登外個人_外国人);
-            key.set住民種別(住民種別List);
-            List<JuminJotai> 住民状態List = new ArrayList<>();
-            住民状態List.add(JuminJotai.住民);
-            住民状態List.add(JuminJotai.住登外);
-            住民状態List.add(JuminJotai.消除者);
-            住民状態List.add(JuminJotai.転出者);
-            住民状態List.add(JuminJotai.死亡者);
-            key.set住民状態(住民状態List);
-            UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-            UaFt200FindShikibetsuTaishoEntity ft200Entity = mapper.getShikibetsuTaishoPsm(
-                    new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
-            IKojin 識別対象 = ShikibetsuTaishoFactory.createKojin(ft200Entity);
-            entity.set世帯コード(識別対象.get世帯コード());
-            entity.set被保険者カナ氏名(識別対象.get名称().getKana());
-            entity.set被保険者氏名(識別対象.get名称().getName());
+
+            if (識別コード.compareTo(entity.get識別コード()) == 0) {
+                entity.set世帯コード(世帯コード);
+                entity.set被保険者カナ氏名(被保険者カナ氏名);
+                entity.set被保険者氏名(被保険者氏名);
+                識別コード = entity.get識別コード();
+                continue;
+            }
+            if (entity.get識別コード() != null) {
+                ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                        ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+                key.setデータ取得区分(DataShutokuKubun.直近レコード);
+                key.set識別コード(entity.get識別コード());
+                List<JuminShubetsu> 住民種別List = new ArrayList<>();
+                住民種別List.add(JuminShubetsu.日本人);
+                住民種別List.add(JuminShubetsu.外国人);
+                住民種別List.add(JuminShubetsu.住登外個人_日本人);
+                住民種別List.add(JuminShubetsu.住登外個人_外国人);
+                key.set住民種別(住民種別List);
+                List<JuminJotai> 住民状態List = new ArrayList<>();
+                住民状態List.add(JuminJotai.住民);
+                住民状態List.add(JuminJotai.住登外);
+                住民状態List.add(JuminJotai.消除者);
+                住民状態List.add(JuminJotai.転出者);
+                住民状態List.add(JuminJotai.死亡者);
+                key.set住民状態(住民状態List);
+                UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+                UaFt200FindShikibetsuTaishoEntity ft200Entity = mapper.getShikibetsuTaishoPsm(
+                        IdoCheckListGetDataParameter.createShikibetsuTaishoPsmParameter(
+                                new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()))
+                );
+                IKojin 識別対象 = ShikibetsuTaishoFactory.createKojin(ft200Entity);
+                entity.set世帯コード(識別対象.get世帯コード());
+                entity.set被保険者カナ氏名(識別対象.get名称().getKana());
+                entity.set被保険者氏名(識別対象.get名称().getName());
+                世帯コード = 識別対象.get世帯コード();
+                被保険者カナ氏名 = 識別対象.get名称().getKana();
+                被保険者氏名 = 識別対象.get名称().getName();
+                識別コード = entity.get識別コード();
+            }
         }
         idoCheckListEntity.setIdoInfoList(list);
         IdoCheckListBatch idoCheckbatch = new IdoCheckListBatch();

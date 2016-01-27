@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 構成市町村マスタのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninnteichousakekkatouroku1.INinnteiChousaKekkaTouroku1Mapper">
+    <select id="getNinnteiChousaJoho" resultType="jp.co.ndensan.reams.db.dbe.entity.ninnteichousakekkatouroku1.TempDataEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.entity.ninnteichousakekkatouroku1.TempDataEntity" fetchSize="500">
+        SELECT
+        DbT5101."koroshoIfShikibetsuCode" AS Temp_厚労省IF識別コード
+        DbT5203."" AS Temp_認定調査依頼区分コード
+        DbT5203."" AS Temp_認定調査回数
+        DbT5910."" AS Temp_認定調査委託区分コード
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        LEFT JOIN rgdb."DbT5203NinteichosahyoKihonChosa" AS DbT5203
+        ON
+        DbT5203."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
+        DbT5203."ninteichosaRirekiNo"=#{Temp_認定調査依頼履歴番号}
+        DbT5203."isDeleted"=false
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
+        ON
+        DbT7051.""=DbT5101."shoKisaiHokenshaNo"
+        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
+        ON
+        DbT5910."shichosonCode"=DbT7051."shoKisaiHokenshaNo"
+        DbT5910."ninteichosaItakusakiCode"=#{Temp_認定調査委託先コード}
+        WHERE
+        DbT5101."shinseishoKanriNo"=#{Temp_申請書管理番号}
+        DbT5101."logicalDeletedFlag"=false
+    </select>
+
+</mapper>

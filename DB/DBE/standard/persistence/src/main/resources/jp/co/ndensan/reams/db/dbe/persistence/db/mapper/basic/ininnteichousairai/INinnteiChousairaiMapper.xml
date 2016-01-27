@@ -67,7 +67,7 @@
                       ON DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = shinseishoKanriRirekiNo.shinseishoKanriRirekiNo_shinseishoNo
                   WHERE
                     DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = shinseishoKanriRirekiNo.Temp_ninteichosaIraiRirekiNo
-                    AND DbT5201NinteichosaIraiJoho."logicalDeletedFlag"
+                    AND DbT5201NinteichosaIraiJoho."logicalDeletedFlag" = false
                 ) AS ninteichosaIraiJohoZimi 
                   ON ninteichosaIraiJohoZimi.Temp_ninteichosaItakusakiCode = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode" 
               WHERE
@@ -828,7 +828,7 @@
                       AND dbT5912SenKai."shujiiCode" = dbT5101SenKai."shujiiCode" 
                       AND dbT5912SenKai."jokyoFlag" = TRUE 
                   WHERE
-                    dbT5101."shoKisaiHokenshaNo" = '' 
+                    dbT5101."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo} 
                     AND dbT5101."shoriJotaiKubun" IN ('0', '3') 
                     AND dbT5101."logicalDeletedFlag" = FALSE
                     <if test="uses支所コード">
