@@ -16,16 +16,30 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha._NinshoshaSourceBuilderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha._NinshoshaManager;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha._NinshoshaSourceBuilderCreator;
+import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
+import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
@@ -72,7 +86,9 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
             }
         }
 
-        //TODO 見出し文
+        TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
+        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchishoTeikeibunManager.get通知書定形文検索(SubGyomuCode.DBA介護資格, new ReportId("DBA100006_JushochitokureiShisetsuHenkoTsuchisho"), KamokuCode.EMPTY, 1, new FlexibleDate(RDate.getNowDate().toDateString()));
+        outEntity.set見出し(tsuchishoTeikeibunInfo.get更新用_文章());
         RString 被保険者番号 = inEntity.get被保険者番号();
         if (被保険者番号 != null && 10 <= 被保険者番号.length()) {
             outEntity.set被保険者番号１(被保険者番号.substring(0, 1));
@@ -99,7 +115,6 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
             outEntity.set施設住所(getEntity.get事業者住所());
         }
 
-        //TODO 宛名取得
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         key.set基準日(new FlexibleDate(outEntity.get退所年月日()));
@@ -128,11 +143,19 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
             }
         }
 
-        // TODO TechWikiの認証者・電子公印利用ガイド
-        INinshoshaSourceBuilderCreator builderCreator = new _NinshoshaSourceBuilderCreator();
-        INinshoshaSourceBuilder builder = builderCreator.create(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), null, null);
+        IAssociationFinder finder = AssociationFinderFactory.createInstance();
+        Association association = finder.getAssociation();
+        INinshoshaManager iNinshoshaManager = NinshoshaFinderFactory.createInstance();
+        Ninshosha ninshosha = iNinshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
+        INinshoshaSourceBuilder builder = _NinshoshaSourceBuilderFactory.createInstance(ninshosha, association, RString.EMPTY, RDate.getNowDate(), 100);
         outEntity.set電子公印(builder.buildSource().denshiKoin);
-
+        if (builder.buildSource().ninshoshaShimeiKakenai.isEmpty()) {
+            outEntity.set首長名(builder.buildSource().ninshoshaShimeiKakeru);
+        } else {
+            outEntity.set首長名(builder.buildSource().ninshoshaShimeiKakenai);
+        }
+        outEntity.set市町村名(association.get市町村名());
+        outEntity.set公印省略(builder.buildSource().koinShoryaku);
         return outEntity;
     }
 
