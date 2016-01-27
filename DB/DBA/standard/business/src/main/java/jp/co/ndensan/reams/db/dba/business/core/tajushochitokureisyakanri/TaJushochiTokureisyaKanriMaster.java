@@ -27,7 +27,7 @@ public class TaJushochiTokureisyaKanriMaster {
     /**
      * コンストラクタです.
      *
-     * @param entity TaJushochiTokureisyaKanRirelateEntity
+     * @param entity TaJushochiTokureisyaKanriRelateEntity
      */
     public TaJushochiTokureisyaKanriMaster(TaJushochiTokureisyaKanriRelateEntity entity) {
         this.entity = entity;

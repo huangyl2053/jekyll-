@@ -5,7 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokureisyakanri.ITaJushochiTokureisyaKanriMapper">
 
-    <resultMap id="result_selct他市町村住所地特例" type="jp.co.ndensan.reams.db.dba.entity.db.relate.TaJushochiTokureisyaKan.TaJushochiTokureisyaKanRirelateEntity">
+    <resultMap id="result_selct他市町村住所地特例" type="jp.co.ndensan.reams.db.dba.entity.db.relate.taJushochiTokureisyaKan.TaJushochiTokureisyaKanriRelateEntity">
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="idoYMD" column="idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="edaNo" column="edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -111,9 +111,13 @@
                   OR ((dbT1003."kaijoYMD" IS NOT NULL
                        AND ((dbT1004."taishoYMD" IS NULL AND dbT1004."nyushoYMD" <![CDATA[<]]> dbT1003."kaijoYMD") 
                              OR (dbT1004."nyushoYMD" <![CDATA[<]]> dbT1003."kaijoYMD" AND dbT1004."taishoYMD" <![CDATA[>]]> dbT1003."tekiyoYMD")))))
+        ORDER BY
+         dbT1003."idoYMD"      desc,
+         dbT1003."edaNo"       desc
+
     </select>
 
-    <resultMap id="result_get事業者名称_介護保険施設" type="jp.co.ndensan.reams.db.dba.entity.db.relate.TaJushochiTokureisyaKan.TaJushochiTokureisyaKanRirelateEntity">
+    <resultMap id="result_get事業者名称_介護保険施設" type="jp.co.ndensan.reams.db.dba.entity.db.relate.taJushochiTokureisyaKan.TaJushochiTokureisyaKanriRelateEntity">
         <result property="jigyoshaName" column="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
     <select id="get事業者名称_介護保険施設" resultMap="result_get事業者名称_介護保険施設" 
@@ -134,7 +138,7 @@
                                          )
     </select>
     
-    <resultMap id="result_get事業者名称_住所地特例対象施設" type="jp.co.ndensan.reams.db.dba.entity.db.relate.TaJushochiTokureisyaKan.TaJushochiTokureisyaKanRirelateEntity">
+    <resultMap id="result_get事業者名称_住所地特例対象施設" type="jp.co.ndensan.reams.db.dba.entity.db.relate.taJushochiTokureisyaKan.TaJushochiTokureisyaKanriRelateEntity">
         <result property="jigyoshaName" column="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
     <select id="get事業者名称_住所地特例対象施設" resultMap="result_get事業者名称_住所地特例対象施設" 
