@@ -160,8 +160,44 @@
     
     <select id="select報告年度様式種類" parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter"
             resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity" fetchSize="500">
-        SELECT *
-         FROM rgdb."DbT7021JigyoHokokuTokeiData"
+        SELECT 
+	dbT7021JigyoHokokuTokeiData."hokokuYSeireki",
+	dbT7021JigyoHokokuTokeiData."hokokuM",
+	dbT7021JigyoHokokuTokeiData."shukeiTaishoYSeireki",
+	dbT7021JigyoHokokuTokeiData."shukeiTaishoM",
+	dbT7021JigyoHokokuTokeiData."toukeiTaishoKubun",
+	dbT7021JigyoHokokuTokeiData."shichosonCode",
+	dbT7021JigyoHokokuTokeiData."hyoNo",
+	dbT7021JigyoHokokuTokeiData."shukeiNo",
+	dbT7021JigyoHokokuTokeiData."shukeiTani",
+	dbT7021JigyoHokokuTokeiData."tateNo",
+	dbT7021JigyoHokokuTokeiData."yokoNo",
+	dbT7021JigyoHokokuTokeiData."shukeiKekkaAtai",
+	dbT7021JigyoHokokuTokeiData."tateKomokuCode",
+	dbT7021JigyoHokokuTokeiData."yokoKomokuCode"
+FROM	
+	rgdb."DbT7021JigyoHokokuTokeiData" AS dbT7021JigyoHokokuTokeiData
+WHERE	
+	dbT7021JigyoHokokuTokeiData."hokokuYSeireki"=#{報告年}
+	AND dbT7021JigyoHokokuTokeiData."hokokuM"=#{報告月}
+	AND dbT7021JigyoHokokuTokeiData."shukeiTaishoYSeireki"=#{集計対象年}
+	AND dbT7021JigyoHokokuTokeiData."shukeiTaishoM"=#{集計対象月}
+	AND dbT7021JigyoHokokuTokeiData."toukeiTaishoKubun"=#{統計対象区分}
+	AND dbT7021JigyoHokokuTokeiData."shichosonCode"=#{市町村コード}
+	AND dbT7021JigyoHokokuTokeiData."hyoNo"=#{表番号}
+	AND dbT7021JigyoHokokuTokeiData."shukeiNo"=#{集計番号}	       
+ORDER BY												
+	dbT7021JigyoHokokuTokeiData."hokokuYSeireki",											
+	dbT7021JigyoHokokuTokeiData."hokokuM",										
+	dbT7021JigyoHokokuTokeiData."shukeiTaishoYSeireki",											
+	dbT7021JigyoHokokuTokeiData."shukeiTaishoM",											
+	dbT7021JigyoHokokuTokeiData."toukeiTaishoKubun"	,										
+	dbT7021JigyoHokokuTokeiData."shichosonCode",											
+	dbT7021JigyoHokokuTokeiData."hyoNo",											
+	dbT7021JigyoHokokuTokeiData."shukeiNo"	,										
+	dbT7021JigyoHokokuTokeiData."shukeiTani",											
+	dbT7021JigyoHokokuTokeiData."tateNo",											
+	dbT7021JigyoHokokuTokeiData."yokoNo"
     </select>
     <update id="update事業報告集計一覧データ" parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoSearchParameter">
         UPDATE
