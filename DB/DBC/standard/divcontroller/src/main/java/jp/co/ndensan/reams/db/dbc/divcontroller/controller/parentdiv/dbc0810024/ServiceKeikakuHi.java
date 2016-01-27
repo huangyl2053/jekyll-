@@ -86,9 +86,9 @@ public class ServiceKeikakuHi {
             }
             // TODO 这里不合理
             List<ServiceKeikakuHiRealtEntity> list = new ArrayList();
-            for (int i=0; i<entity200904List.size(); i++) {
-                list.add(new ServiceKeikakuHiRealtEntity(entity200904List.get(i), null, null));
-            }
+//            for (int i=0; i<entity200904List.size(); i++) {
+//                list.add(new ServiceKeikakuHiRealtEntity(entity200904List.get(i), null, null));
+//            }
             div.getPanelServiceKeikakuhiDown().setVisible(false);
             div.getPanelServiceKeikakuHiUp().setVisible(true);
             getHandler(div).onLoad(
@@ -109,14 +109,14 @@ public class ServiceKeikakuHi {
                     throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
                 }
                 // TODO 这里参数不明确
-                getHandler(div).onLoad(
-                        new ServiceKeikakuHiRealtEntity(null, entity200604.get(0), null),
-                        サービス年月,
-                        事業者番号,
-                        様式番号,
-                        申請日,
-                        明細番号,
-                        証明書);
+//                getHandler(div).onLoad(
+//                        new ServiceKeikakuHiRealtEntity(null, entity200604.get(0), null),
+//                        サービス年月,
+//                        事業者番号,
+//                        様式番号,
+//                        申請日,
+//                        明細番号,
+//                        証明書);
             } else {
                List<ShokanServicePlan200004Entity> entity200004
                         = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200004(
@@ -124,14 +124,14 @@ public class ServiceKeikakuHi {
                 if (entity200004 == null || entity200004.isEmpty()) {
                     throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
                 }
-                getHandler(div).onLoad20004(
-                        new ServiceKeikakuHiRealtEntity(null, null, entity200004.get(0)),
-                        サービス年月,
-                        事業者番号,
-                        様式番号,
-                        申請日,
-                        明細番号,
-                        証明書);
+//                getHandler(div).onLoad20004(
+//                        new ServiceKeikakuHiRealtEntity(null, null, entity200004.get(0)),
+//                        サービス年月,
+//                        事業者番号,
+//                        様式番号,
+//                        申請日,
+//                        明細番号,
+//                        証明書);
             }
             div.getPanelServiceKeikakuhiDown().setVisible(true);
             div.getPanelServiceKeikakuHiUp().setVisible(false);
@@ -216,7 +216,7 @@ public class ServiceKeikakuHi {
 
         List<ShokanServicePlan200904Entity> entity200904
                 = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200904(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 連番);
-        getHandler(div).onClick_SelectButton(new ServiceKeikakuHiRealtEntity(entity200904.get(0), null, null));
+//        getHandler(div).onClick_SelectButton(new ServiceKeikakuHiRealtEntityen(tity200904.get(0), null, null));
         return createResponse(div);
     }
 

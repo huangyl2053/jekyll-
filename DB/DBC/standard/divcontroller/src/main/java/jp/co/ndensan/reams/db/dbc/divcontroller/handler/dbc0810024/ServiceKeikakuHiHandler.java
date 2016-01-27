@@ -137,10 +137,10 @@ public class ServiceKeikakuHiHandler {
                 entity200904 = entity200904List.get(i);
             }
         }
-        div.getPanelServiceKeikakuHiUp().getTxtJigyoshaKubun().setValue(entity200904.get指定_基準該当事業者区分コード200904());
-        div.getPanelServiceKeikakuHiUp().getRdoShinsahouhou().setSelectedKey(entity200904.get審査方法区分コード());
-        div.getPanelServiceKeikakuHiUp().getTxtTodokedeYMD().setValue(new RDate(entity200904.get届出日200904().toString()));
-        div.getPanelServiceKeikakuHiUp().getTxtTantoKaigoshien().setValue(entity200904.get担当介護支給専門員番号());
+//        div.getPanelServiceKeikakuHiUp().getTxtJigyoshaKubun().setValue(entity200904.get指定_基準該当事業者区分コード200904());
+//        div.getPanelServiceKeikakuHiUp().getRdoShinsahouhou().setSelectedKey(entity200904.get審査方法区分コード());
+//        div.getPanelServiceKeikakuHiUp().getTxtTodokedeYMD().setValue(new RDate(entity200904.get届出日200904().toString()));
+//        div.getPanelServiceKeikakuHiUp().getTxtTantoKaigoshien().setValue(entity200904.get担当介護支給専門員番号());
         div.getPanelServiceKeikakuHiUp().getTxtTanyiTanka().setValue(entity200904.get単位数単価());
     }
 
@@ -182,8 +182,8 @@ public class ServiceKeikakuHiHandler {
 
     private void setサービス計画費パネル_詳細エリア200604(ServiceKeikakuHiRealtEntity entity200604) {
         div.getPanelServiceKeikakuhiDown().getTxtShiteiJigyoshaKubunCode().setValue(entity200604.get指定_基準該当事業者区分コード200604());
-        div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().setValue(new RDate(entity200604.get届出日200904().toString()));
-        div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setSelectedKey(entity200604.get審査方法200604());
+//        div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().setValue(new RDate(entity200604.get届出日200904().toString()));
+//        div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setSelectedKey(entity200604.get審査方法200604());
         // TODO 凌護行 画面表示される、前ゼロがあり、QA回答まち
         div.getPanelServiceKeikakuhiDown().getTxtServiceCodeDown1().setValue(entity200604.getサービスコード200604().getColumnValue().substring(0, 2));
         div.getPanelServiceKeikakuhiDown().getTxtServiceCodeDown2().setValue(entity200604.getサービスコード200604().getColumnValue().substring(3));
@@ -206,9 +206,9 @@ public class ServiceKeikakuHiHandler {
 
    private void setサービス計画費パネル_詳細エリア200004(ServiceKeikakuHiRealtEntity entity200004) {
         // TODO 凌護行 DropDownListの設定、QA回答まち
-        div.getPanelServiceKeikakuhiDown().getTxtShiteiJigyoshaKubunCode().setValue(entity200004.get指定_基準該当事業者区分コード200004());
-        div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().setValue(new RDate(entity200004.get届出日200004().toString()));
-        div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setSelectedKey(entity200004.get審査方法200004());
+//        div.getPanelServiceKeikakuhiDown().getTxtShiteiJigyoshaKubunCode().setValue(entity200004.get指定_基準該当事業者区分コード200004());
+//        div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().setValue(new RDate(entity200004.get届出日200004().toString()));
+//        div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setSelectedKey(entity200004.get審査方法200004());
         // TODO 凌護行 画面表示される、前ゼロがあり、QA回答まち
         div.getPanelServiceKeikakuhiDown().getTxtServiceCodeDown1().setValue(new RString(entity200004.getサービスコード200004().toString().substring(0, 2)));
         div.getPanelServiceKeikakuhiDown().getTxtServiceCodeDown2().setValue(new RString(entity200004.getサービスコード200004().toString().substring(3)));
