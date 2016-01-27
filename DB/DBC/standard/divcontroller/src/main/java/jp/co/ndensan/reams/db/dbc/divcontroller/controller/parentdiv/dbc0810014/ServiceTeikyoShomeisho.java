@@ -62,7 +62,7 @@ public class ServiceTeikyoShomeisho {
          List<jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ServiceTeikyoShomeisho> serviceTeikyoShomeishoList = 
                 ShokanbaraiJyokyoShokai.createInstance().getServiceTeikyoShomeishoList(被保険者番号,
                         サービス年月, 整理番号, 様式番号);
-        if (serviceTeikyoShomeishoList != null && !serviceTeikyoShomeishoList.isEmpty()) {
+        if (serviceTeikyoShomeishoList == null || serviceTeikyoShomeishoList.isEmpty()) {
              throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
          //TODO 昇順
