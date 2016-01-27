@@ -100,40 +100,50 @@ public class NenpoYoushi3Handler {
         List<JigyoHokokuTokeiData> list = new ArrayList<>();
         RString title = div.getShokuhikyojunofutannintei().getTabShokuhikyojunofutannintei().getSelectedItem().getTitle();
         if (title.equals(保険料収納状況)) {
-            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険料収納状況 = ViewStateHolder.
-                    get(NenpoYoushi3ViewStateKeys.保険料収納状況データ, Models.class);
-            List<NenpoYoushi3DetalParameter> 保険料収納状況画面データ = get保険料収納状況画面データ();
-            for (NenpoYoushi3DetalParameter parameter : 保険料収納状況画面データ) {
-                for (JigyoHokokuTokeiData data : 保険料収納状況) {
-                    JigyoHokokuTokeiDataBuilder builder = data.createBuilderForEdit();
-                    if (parameter.get縦番号().compareTo(data.get縦番号()) == 0
-                            && parameter.get横番号().compareTo(data.get横番号()) == 0
-                            && parameter.get集計結果値().compareTo(data.get集計結果値()) != 0) {
-                        builder.set集計結果値(parameter.get集計結果値());
-                        data = builder.build();
-                        list.add(data);
-                    }
-                }
-            }
-
+            list = get保険料収納状況修正データ();
         }
         if (title.equals(保険給付支払状況)) {
-            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険給付支払状況 = ViewStateHolder.
-                    get(NenpoYoushi3ViewStateKeys.保険給付支払状況データ, Models.class);
-            List<NenpoYoushi3DetalParameter> 保険給付支払状況画面データ = get保険給付支払状況画面データ();
-            for (NenpoYoushi3DetalParameter parameter : 保険給付支払状況画面データ) {
-                for (JigyoHokokuTokeiData data : 保険給付支払状況) {
-                    JigyoHokokuTokeiDataBuilder builder = data.createBuilderForEdit();
-                    if (parameter.get縦番号().compareTo(data.get縦番号()) == 0
-                            && parameter.get横番号().compareTo(data.get横番号()) == 0
-                            && parameter.get集計結果値().compareTo(data.get集計結果値()) != 0) {
-                        builder.set集計結果値(parameter.get集計結果値());
-                        data = builder.build();
-                        list.add(data);
-                    }
+            list = get保険給付支払状況修正データ();
+        }
+        return list;
+    }
+
+    private List<JigyoHokokuTokeiData> get保険料収納状況修正データ() {
+        List<JigyoHokokuTokeiData> list = new ArrayList<>();
+        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険料収納状況データ = ViewStateHolder.
+                get(NenpoYoushi3ViewStateKeys.保険料収納状況データ, Models.class);
+        List<NenpoYoushi3DetalParameter> 保険料収納状況画面データ = get保険料収納状況画面データ();
+        for (NenpoYoushi3DetalParameter parameter : 保険料収納状況画面データ) {
+            for (JigyoHokokuTokeiData data : 保険料収納状況データ) {
+                JigyoHokokuTokeiDataBuilder builder = data.createBuilderForEdit();
+                if (parameter.get縦番号().compareTo(data.get縦番号()) == 0
+                        && parameter.get横番号().compareTo(data.get横番号()) == 0
+                        && parameter.get集計結果値().compareTo(data.get集計結果値()) != 0) {
+                    builder.set集計結果値(parameter.get集計結果値());
+                    data = builder.build();
+                    list.add(data);
                 }
             }
+        }
+        return list;
+    }
 
+    private List<JigyoHokokuTokeiData> get保険給付支払状況修正データ() {
+        List<JigyoHokokuTokeiData> list = new ArrayList<>();
+        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険給付支払状況データ = ViewStateHolder.
+                get(NenpoYoushi3ViewStateKeys.保険給付支払状況データ, Models.class);
+        List<NenpoYoushi3DetalParameter> 保険給付支払状況画面データ = get保険給付支払状況画面データ();
+        for (NenpoYoushi3DetalParameter parameter : 保険給付支払状況画面データ) {
+            for (JigyoHokokuTokeiData data : 保険給付支払状況データ) {
+                JigyoHokokuTokeiDataBuilder builder = data.createBuilderForEdit();
+                if (parameter.get縦番号().compareTo(data.get縦番号()) == 0
+                        && parameter.get横番号().compareTo(data.get横番号()) == 0
+                        && parameter.get集計結果値().compareTo(data.get集計結果値()) != 0) {
+                    builder.set集計結果値(parameter.get集計結果値());
+                    data = builder.build();
+                    list.add(data);
+                }
+            }
         }
         return list;
     }
