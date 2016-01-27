@@ -5,11 +5,24 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0810028;
 
-import jp.co.ndensan.reams.db.dbc.business.TestEntity;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShoteiShikkanShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810028.KinkyujiShoteiShikanDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810028.KinkyujiShoteiShikanHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
+import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_緊急時・所定疾患画面クラスです
@@ -25,187 +38,80 @@ public class KinkyujiShoteiShikan {
      * @return response
      */
     public ResponseData<KinkyujiShoteiShikanDiv> onLoad(KinkyujiShoteiShikanDiv div) {
-        TestEntity entity = new TestEntity();
-        RString 申請書検索ViewSate_様式番号 = new RString("123");
+        // TODO 引き継ぎデータの取得
+        ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
+                new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201601")),
+                new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
+                new RString("0003"), new RString("証明書"));
+        ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
+
+        ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
+                ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
+        FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
+        HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
+        RString 整理番号 = parameter.getSeiriNp();
+        JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
+        RString 明細番号 = parameter.getMeisaiNo();
+        RString 証明書 = parameter.getServiceYM();
+
+        // TODO 該当者検索画面ViewState．識別コード
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("123456")));
+        ShikibetsuCode 識別コード = ViewStateHolder.get(
+                ViewStateKeys.識別コード, ShikibetsuCode.class);
+        // TODO 申請書検索ViewSate．様式番号
+        ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
+        RString 様式番号 = ViewStateHolder.get(
+                ViewStateKeys.様式番号, RString.class);
+        // TODO 申請検索画面ViewState. 申請日
+        ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151224"));
+        RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
+
         //介護宛名情報」共有子Divの初期化
-//        div.getPanelCcd().getCcdKaigoAtenaInfo().load(entity.get識別コード());
+//        div.getPanelCcd().getCcdKaigoAtenaInfo().load(識別コード);
         //介護資格系基本情報」共有子Div の初期化
-        if (entity.get被保険者番号() != null && !entity.get被保険者番号().isEmpty()) {
-//            div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(entity.get被保険者番号()被保険者番号);
+        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
+            // TODO load----initialize
+            div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         } else {
             div.getPanelCcd().getCcdKaigoAtenaInfo().setVisible(false);
         }
         KinkyujiShoteiShikanHandler handler = getHandler(div);
-        handler.initPanelHead(entity.getサービス年月(),
-                entity.get申請日(),
-                entity.get事業者番号(),
-                entity.get明細番号(),
-                entity.get証明書(),
-                申請書検索ViewSate_様式番号);
-        handler.initList();
+        handler.initPanelHead(サービス年月, 申請日, 事業者番号, 明細番号,
+                証明書, 様式番号);
+
         //償還払請求所定疾患施設療養費等データ取得
-//        ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
-//        List<ShokanShoteiShikkanShisetsuRyoyo> businessList = finder.getKinkyujiShisetsuRyoyoData1(
-//                entity.get被保険者番号(),
-//                entity.getサービス年月(),
-//                entity.get整理番号(),
-//                entity.get事業者番号(),
-//                entity.get様式番号(),
-//                entity.get明細番号(),
-//                null);
-//        if (businessList == null || businessList.isEmpty()) {
-//            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-//        }
-//        handler.initDgdKinkyujiShoteiList(businessList);
-//        ShikibetsuNoKanriEntity 識別番号 = finder.getShikibetsubangoKanri(entity.getサービス年月(),
-//                ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class));
-//        handler.setボタン表示制御処理(識別番号, entity.getサービス年月());
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 基本情報ボタンを押下した際に実行します。<br/>
-     * DBC0810021_基本情報画面へ遷移する
-     *
-     * @param div {@link KinkyujiShoteiShikanDiv 緊急時・所定疾患画面Div}
-     * @return 緊急時・所定疾患画面Divを持つResponseData
-     */
-    public ResponseData<KinkyujiShoteiShikanDiv> onClick_btnKihonInfo(KinkyujiShoteiShikanDiv div) {
-        // TODO DBC0810021_基本情報画面機能から提供されたら対応可能。
-        //getHandler(div).btnKihonInfo();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 特定診療費ボタンを押下した際に実行します。<br/>
-     * DBC0810023_特定診療費画面へ遷移する
-     *
-     * @param div {@link KinkyujiShoteiShikanDiv 緊急時・所定疾患画面Div}
-     * @return 緊急時・所定疾患画面Divを持つResponseData
-     */
-    public ResponseData<KinkyujiShoteiShikanDiv> onClick_btnTokuteiShinryohi(KinkyujiShoteiShikanDiv div) {
-        // TODO DBC0810023_特定診療費画面機能から提供されたら対応可能
-        //getHandler(div).btnTokuteiShinryohi();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * サービス計画費ボタンを押下した際に実行します。<br/>
-     * DBC0810024_サービス計画費画面へ遷移する
-     *
-     * @param div {@link KinkyujiShoteiShikanDiv 緊急時・所定疾患画面Div}
-     * @return 緊急時・所定疾患画面Divを持つResponseData
-     */
-    public ResponseData<KinkyujiShoteiShikanDiv> onClick_btnServiceKeikakuhi(KinkyujiShoteiShikanDiv div) {
-        // TODO DBC0810024_サービス計画費画面機能から提供されたら対応可能
-        //getHandler(div).btnServiceKeikakuhi();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 特定入所者費用ボタンを押下した際に実行します。<br/>
-     * DBC0810025_特定入所者費用画面へ遷移する
-     *
-     * @param div {@link KinkyujiShoteiShikanDiv 緊急時・所定疾患画面Div}
-     * @return 緊急時・所定疾患画面Divを持つResponseData
-     */
-    public ResponseData<KinkyujiShoteiShikanDiv> onClick_btnTokuteiNyushosya(KinkyujiShoteiShikanDiv div) {
-        // TODO DBC0810025_特定入所者費用画面機能から提供されたら対応可能。
-        //getHandler(div).btnTokuteiNyushosya();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 合計情報ボタンを押下した際に実行します。<br/>
-     * DBC0810026_合計情報画面へ遷移する
-     *
-     * @param div {@link KinkyujiShoteiShikanDiv 緊急時・所定疾患画面Div}
-     * @return 緊急時・所定疾患画面Divを持つResponseData
-     */
-    public ResponseData<KinkyujiShoteiShikanDiv> onClick_btnGoukeiInfo(KinkyujiShoteiShikanDiv div) {
-        // TODO DBC0810026_合計情報画面機能から提供されたら対応可能
-        //getHandler(div).btnGoukeiInfo();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 給付費明細(住所地特例)ボタンを押下した際に実行します。<br/>
-     * DBC0810032_給付費明細(住所地特例)画面へ遷移する
-     *
-     * @param div {@link KinkyujiShoteiShikanDiv 緊急時・所定疾患画面Div}
-     * @return 緊急時・所定疾患画面Divを持つResponseData
-     */
-    public ResponseData<KinkyujiShoteiShikanDiv> onClick_btnKyufuhiMeisaiJyuchi(KinkyujiShoteiShikanDiv div) {
-        // DBC0810032_給付費明細(住所地特例)画面へ遷移する
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 食事費用ボタンを押下した際に実行します。<br/>
-     * DBC0810029_食事費用画面へ遷移する
-     *
-     * @param div {@link KinkyujiShoteiShikanDiv 緊急時・所定疾患画面Div}
-     * @return 緊急時・所定疾患画面Divを持つResponseData
-     */
-    public ResponseData<KinkyujiShoteiShikanDiv> onClick_btnShokujiHiyo(KinkyujiShoteiShikanDiv div) {
-        // TODO DBC0810029_食事費用画面機能から提供されたら対応可能。
-        //getHandler(div).btnShokujiHiyo();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 請求額集計ボタンを押下した際に実行します。<br/>
-     * DBC0810030_請求額集計画面へ遷移する
-     *
-     * @param div {@link KinkyujiShoteiShikanDiv 緊急時・所定疾患画面Div}
-     * @return 緊急時・所定疾患画面Divを持つResponseData
-     */
-    public ResponseData<KinkyujiShoteiShikanDiv> onClick_btnSeikyugakuShukei(KinkyujiShoteiShikanDiv div) {
-        // TODO DBC0810030_請求額集計画面機能から提供されたら対応可能
-        //getHandler(div).btnSeikyugakuShukei();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 社福軽減額ボタンを押下した際に実行します。<br/>
-     * DBC0810031_社福軽減額画面へ遷移する
-     *
-     * @param div {@link KinkyujiShoteiShikanDiv 緊急時・所定疾患画面Div}
-     * @return 緊急時・所定疾患画面Divを持つResponseData
-     */
-    public ResponseData<KinkyujiShoteiShikanDiv> onClick_btnShafukukeigenGaku(KinkyujiShoteiShikanDiv div) {
-        // DBC0810031_社福軽減額画面へ遷移する
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 「サービス提供証明書へ戻る」ボタン。<br/>
-     * DBC0810014_サービス提供証明書画面へ遷移する
-     *
-     * @param div {@link KinkyujiShoteiShikanDiv 緊急時・所定疾患画面Div}
-     * @return 緊急時・所定疾患画面Divを持つResponseData
-     */
-    public ResponseData<KinkyujiShoteiShikanDiv> onClick_btnServiceTeikyoShomeisho(KinkyujiShoteiShikanDiv div) {
-        // DBC0810014_サービス提供証明書画面へ遷移する
+        ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
+        List<ShokanShoteiShikkanShisetsuRyoyo> businessList = finder.getKinkyujiShisetsuRyoyoData1(
+                被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+        if (businessList == null || businessList.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        }
+        handler.initDgdKinkyujiShoteiList(businessList);
+        ShikibetsuNoKanriEntity 識別番号 = finder.getShikibetsubangoKanri(サービス年月, 様式番号);
+        handler.setボタン表示制御処理(識別番号);
         return ResponseData.of(div).respond();
     }
 
     public ResponseData<KinkyujiShoteiShikanDiv> onClick_btnSelectButton(KinkyujiShoteiShikanDiv div) {
         div.getPanelDetail().setDisplayNone(false);
-        TestEntity entity = new TestEntity();
         RString 連番 = div.getDgdKinkyujiShoteiList().getClickedItem().getDefaultDataName8();
-//        ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
-//        List<ShokanShoteiShikkanShisetsuRyoyo> list = finder.getKinkyujiShisetsuRyoyoData1(
-//                entity.get被保険者番号(),
-//                entity.getサービス年月(),
-//                entity.get整理番号(),
-//                entity.get事業者番号(),
-//                entity.get明細番号(),
-//                申請書検索ViewSate_様式番号,
-//                連番);
-//        getHandler(div).set傷病名(list.get(0));
-//        getHandler(div).set往診通院(list.get(0));
-//        getHandler(div).set治療点数(list.get(0));
+
+        ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
+                ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
+        FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
+        HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
+        RString 整理番号 = parameter.getSeiriNp();
+        JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
+        RString 明細番号 = parameter.getMeisaiNo();
+        RString 証明書 = parameter.getServiceYM();
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+
+        ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
+        List<ShokanShoteiShikkanShisetsuRyoyo> list = finder.getKinkyujiShisetsuRyoyoData1(
+                被保険者番号, サービス年月, 整理番号, 事業者番号, 明細番号, 様式番号, 連番);
+        getHandler(div).setUp傷病名(list.get(0));
+        getHandler(div).setUp往診通院(list.get(0));
+        getHandler(div).setUp治療点数(list.get(0));
         return ResponseData.of(div).respond();
     }
 

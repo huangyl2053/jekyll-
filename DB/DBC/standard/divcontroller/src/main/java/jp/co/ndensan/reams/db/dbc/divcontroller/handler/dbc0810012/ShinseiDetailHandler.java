@@ -9,14 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810012.ShinseiDetailDiv;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- *
+ * 償還払い状況照会_申請情報照会画面のハンドラクラスです
  *
  * @author XuPeng
  */
@@ -41,10 +40,17 @@ public class ShinseiDetailHandler {
 
     public void init申請内容(List<ShokanShinsei> businessList) {
         ShokanShinsei shokanShinsei = businessList.get(0);
-        div.getTxtShinseiYMD().setValue(new RDate(shokanShinsei.get申請年月日().wareki().toDateString().toString()));
-        div.getTxtUketsukeYMD().setValue(new RDate(shokanShinsei.get受付年月日().wareki().toDateString().toString()));
-        div.getRdoShinseisyaKubun().setSelectedValue(shokanShinsei.get申請者区分());
-        div.getTxtKisaiHokensyaBango().setValue(new RString(shokanShinsei.get証記載保険者番号().toString()));
+        div.getTxtShinseiYMD().setValue(new RDate(shokanShinsei.get申請年月日()
+                .wareki().toDateString().toString()));
+        div.getTxtUketsukeYMD().setValue(new RDate(shokanShinsei.get受付年月日()
+                .wareki().toDateString().toString()));
+        if (new RString("1").equals(shokanShinsei.get申請者区分())) {
+            div.getRdoShinseisyaKubun().setSelectedValue(new RString("本人"));
+        } else if (new RString("2").equals(shokanShinsei.get申請者区分())) {
+            div.getRdoShinseisyaKubun().setSelectedValue(new RString("代理人"));
+        }
+        div.getTxtKisaiHokensyaBango().setValue(new RString(shokanShinsei
+                .get証記載保険者番号().toString()));
         if (shokanShinsei.get国保連再送付フラグ()) {
             List<RString> list = new ArrayList<>();
             list.add(new RString("key0"));
@@ -60,22 +66,4 @@ public class ShinseiDetailHandler {
         div.getTxtNumRiyoshaFutanGaku().setValue(new Decimal(shokanShinsei.get利用者負担額()));
     }
 
-    //Test
-    public void init() {
-        div.getTxtShinseiYMD().setValue(new RDate(new RDate(2016, 01, 16).wareki().toDateString().toString()));
-        div.getTxtUketsukeYMD().setValue(new RDate(new RDate(2016, 01, 16).wareki().toDateString().toString()));
-        div.getRdoShinseisyaKubun().setSelectedValue(new RString("代理人"));
-        div.getTxtKisaiHokensyaBango().setValue(new RString("12345"));
-        List<RString> list = new ArrayList<>();
-        list.add(new RString("key0"));
-        div.getChkKokuhorenSaiso().setSelectedItemsByKey(list);
-        div.getTxtShimeikana().setValue(new RString("Json"));
-        div.getTxtShimeiKanji().setValue(new RString("Json"));
-        div.getTxtTelNo().setDomain(new TelNo("123456789"));
-        div.getTxtMulShinseiRiyu().setValue(new RString("very cold"));
-        div.getTxtNumShiharaKingakuGk().setValue(new Decimal(123));
-        div.getTxtNumHokentaisyoHiyouGaku().setValue(new Decimal(134));
-        div.getTxtNumHokenKyufuGaku().setValue(new Decimal(123));
-        div.getTxtNumRiyoshaFutanGaku().setValue(new Decimal(124));
-    }
 }

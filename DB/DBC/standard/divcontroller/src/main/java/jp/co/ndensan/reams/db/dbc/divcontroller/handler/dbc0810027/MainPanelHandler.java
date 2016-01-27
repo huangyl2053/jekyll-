@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
+ * 償還払い状況照会_緊急時施設療養費画面のハンドラクラスです
  *
  * @author XuPeng
  */
@@ -44,7 +45,8 @@ public class MainPanelHandler {
             RString 様式番号) {
         div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(
                 サービス年月.wareki().toDateString()));
-        div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.wareki().toDateString().toString()));
+        div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(
+                申請日.wareki().toDateString().toString()));
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
@@ -55,49 +57,16 @@ public class MainPanelHandler {
         for (ShokanKinkyuShisetsuRyoyo result : list) {
             dgdKinkyujiShiseturyoyo_Row row = new dgdKinkyujiShiseturyoyo_Row();
             row.setDefaultDataName1(result.get緊急時傷病名１());
-            row.setDefaultDataName2(result.get緊急時治療開始年月日１().wareki().toDateString());
-            row.setDefaultDataName3(new RString(Integer.valueOf(result.get緊急時治療管理単位数()).toString()));
-            row.setDefaultDataName4(new RString(Integer.valueOf(result.get緊急時施設療養費合計単位数()).toString()));
+            row.setDefaultDataName2(result.get緊急時治療開始年月日１()
+                    .wareki().toDateString());
+            row.setDefaultDataName3(new RString(Integer.valueOf(
+                    result.get緊急時治療管理単位数()).toString()));
+            row.setDefaultDataName4(new RString(Integer.valueOf(
+                    result.get緊急時施設療養費合計単位数()).toString()));
             row.setDefaultDataName5(result.get連番());
             lists.add(row);
         }
         div.getDgdKinkyujiShiseturyoyo().setDataSource(lists);
-    }
-
-    //test
-    public void initList() {
-        List<dgdKinkyujiShiseturyoyo_Row> lists = new ArrayList<>();
-        dgdKinkyujiShiseturyoyo_Row row = new dgdKinkyujiShiseturyoyo_Row();
-        row.setDefaultDataName1(new RString("cold"));
-        row.setDefaultDataName2(new RDate(2016, 01, 20).wareki().toDateString());
-        row.setDefaultDataName3(new RString(Integer.valueOf(123).toString()));
-        row.setDefaultDataName4(new RString(Integer.valueOf(123).toString()));
-        row.setDefaultDataName5(new RString("1"));
-        lists.add(row);
-        div.getDgdKinkyujiShiseturyoyo().setDataSource(lists);
-    }
-
-    //test
-    public void set() {
-        div.getTxtKinkyuShobyoName1().setValue(new RString("cold"));
-        div.getTxtKinkyuJiryoStartYMD1().setValue(new RDate(
-                new RDate(2016, 01, 20).wareki().toDateString().toString()));
-
-        div.getTxtOshinNissu().setValue(new Decimal(123));
-        div.getTxtOshinYiryokikanName().setValue(new RString("asdf"));
-        div.getTxtTuyinNissu().setValue(new Decimal(12));
-        div.getTxtTuyinYiryokikanName().setValue(new RString("asdf"));
-        div.getTxtTikiyo().setValue(new RString("very hot"));
-
-        div.getTxtkinkyuChiryoKanriTanisu().setValue(new Decimal(12));
-        div.getTxtkinkyuChiryoKanriNissu().setValue(new Decimal(1));
-        div.getTxtkinkyuChiryoKanriSubTotal().setValue(new Decimal(12));
-        div.getTxtrehabilitationTanisu().setValue(new Decimal(12));
-        div.getTxtshujutsuTanisu().setValue(new Decimal(2));
-        div.getTxtHoshasenChiryoTanisu().setValue(new Decimal(1));
-        div.getTxtShochiTanisu().setValue(new Decimal(1));
-        div.getTxtMasuiTanisu().setValue(new Decimal(2));
-        div.getTxtKinkyuShisetsuRyoyohiTotalTanisu().setValue(new Decimal(13));
     }
 
     public void set傷病名(ShokanKinkyuShisetsuRyoyo result) {
@@ -121,42 +90,107 @@ public class MainPanelHandler {
     }
 
     private RString get摘要(ShokanKinkyuShisetsuRyoyo result) {
-        RStringBuilder tekiyou = new RStringBuilder(result.get摘要１());
-        tekiyou.append(result.get摘要２());
-        tekiyou.append(result.get摘要３());
-        tekiyou.append(result.get摘要４());
-        tekiyou.append(result.get摘要５());
-        tekiyou.append(result.get摘要６());
-        tekiyou.append(result.get摘要７());
-        tekiyou.append(result.get摘要８());
-        tekiyou.append(result.get摘要９());
-        tekiyou.append(result.get摘要１０());
-        tekiyou.append(result.get摘要１１());
-        tekiyou.append(result.get摘要１２());
-        tekiyou.append(result.get摘要１３());
-        tekiyou.append(result.get摘要１４());
-        tekiyou.append(result.get摘要１５());
-        tekiyou.append(result.get摘要１６());
-        tekiyou.append(result.get摘要１７());
-        tekiyou.append(result.get摘要１８());
-        tekiyou.append(result.get摘要１９());
-        tekiyou.append(result.get摘要２０());
+        RStringBuilder tekiyou = new RStringBuilder("");
+        if (result.get摘要１() != null && !result.get摘要１().isEmpty()) {
+            tekiyou.append(result.get摘要１());
+
+        }
+        if (result.get摘要２() != null && !result.get摘要２().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要２());
+        }
+        if (result.get摘要３() != null && !result.get摘要３().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要３());
+        }
+        if (result.get摘要４() != null && !result.get摘要４().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要４());
+        }
+        if (result.get摘要５() != null && !result.get摘要５().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要５());
+        }
+        if (result.get摘要６() != null && !result.get摘要６().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要６());
+        }
+        if (result.get摘要７() != null && !result.get摘要７().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要７());
+        }
+        if (result.get摘要８() != null && !result.get摘要８().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要８());
+        }
+        if (result.get摘要９() != null && !result.get摘要９().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要９());
+        }
+        if (result.get摘要１０() != null && !result.get摘要１０().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要１０());
+        }
+        if (result.get摘要１１() != null && !result.get摘要１１().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要１１());
+        }
+        if (result.get摘要１２() != null && !result.get摘要１２().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要１２());
+        }
+        if (result.get摘要１３() != null && !result.get摘要１３().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要１３());
+        }
+        if (result.get摘要１４() != null && !result.get摘要１４().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要１４());
+        }
+        if (result.get摘要１５() != null && !result.get摘要１５().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要１５());
+        }
+        if (result.get摘要１６() != null && !result.get摘要１６().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要１６());
+        }
+        if (result.get摘要１７() != null && !result.get摘要１７().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要１７());
+        }
+        if (result.get摘要１８() != null && !result.get摘要１８().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要１８());
+        }
+        if (result.get摘要１９() != null && !result.get摘要１９().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要１９());
+        }
+        if (result.get摘要２０() != null && !result.get摘要２０().isEmpty()) {
+            tekiyou.append("\n");
+            tekiyou.append(result.get摘要２０());
+        }
         return tekiyou.toRString();
     }
 
     public void set治療点数(ShokanKinkyuShisetsuRyoyo result) {
-        div.getTxtkinkyuChiryoKanriTanisu().setValue(new Decimal(result.get緊急時治療管理単位数()));
+        div.getTxtkinkyuChiryoKanriTanisu().setValue(new Decimal(
+                result.get緊急時治療管理単位数()));
         div.getTxtkinkyuChiryoKanriNissu().setValue(result.get緊急時治療管理日数());
-        div.getTxtkinkyuChiryoKanriSubTotal().setValue(new Decimal(result.get緊急時治療管理小計()));
-        div.getTxtrehabilitationTanisu().setValue(new Decimal(result.getリハビリテーション単位数()));
+        div.getTxtkinkyuChiryoKanriSubTotal().setValue(new Decimal(
+                result.get緊急時治療管理小計()));
+        div.getTxtrehabilitationTanisu().setValue(new Decimal(
+                result.getリハビリテーション単位数()));
         div.getTxtshujutsuTanisu().setValue(new Decimal(result.get手術単位数()));
         div.getTxtHoshasenChiryoTanisu().setValue(new Decimal(result.get放射線治療単位数()));
         div.getTxtShochiTanisu().setValue(new Decimal(result.get処置単位数()));
         div.getTxtMasuiTanisu().setValue(new Decimal(result.get麻酔単位数()));
-        div.getTxtKinkyuShisetsuRyoyohiTotalTanisu().setValue(new Decimal(result.get緊急時施設療養費合計単位数()));
+        div.getTxtKinkyuShisetsuRyoyohiTotalTanisu().setValue(new Decimal(
+                result.get緊急時施設療養費合計単位数()));
     }
 
-    public void setボタン表示制御処理(ShikibetsuNoKanriEntity 識別番号, FlexibleYearMonth サービス年月) {
+    public void setボタン表示制御処理(ShikibetsuNoKanriEntity 識別番号) {
 
         //基本情報
         if (設定不可.equals(識別番号.getEntity().getKihonSetteiKubun())) {
