@@ -319,15 +319,15 @@ public class NinteiChosaIrai {
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-            return ResponseData.of(div).respond();
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
         inertNinteichosaIraiJoho(div);
         updateNinteichosaIraiJoho(div);
         // TODO 内部QA560 Redmine：    (完了メッセージの表示方式が知らない)
 //        div.getKanryoMessage().setSuccessMessage(
 //                new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
-        return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+        return ResponseData.of(div).respond();
     }
 
     private void inertNinteichosaIraiJoho(NinteiChosaIraiDiv div) {
