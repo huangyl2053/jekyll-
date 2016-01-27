@@ -843,7 +843,7 @@
                 SELECT
                   DbT5201NinteichosaIraiJoho.* 
                 FROM 
-                  <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.noDeleted_DbT5201NinteichosaIraiJoho" /> AS DbT5201NinteichosaIraiJoho
+                  (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.noDeleted_DbT5201NinteichosaIraiJoho" />) AS DbT5201NinteichosaIraiJoho
                 WHERE
                     DbT5201NinteichosaIraiJoho."dbT5201NinteichosaIraiJoho_shinseishoKanriNo" = #{申請書管理番号}
                  AND
