@@ -39,3 +39,16 @@ dbu/db/dbu/SogoShokaiInfo/onLoad_ShisetsuNyushoInfo
 dbu/db/dbu/SogoShokaiKihon/dispTaishoshaJoho
 dbu/db/dbu/SogoShokaiSearch/onClick_btnSearch
 dbu/db/dbu/SogoShokaiSearch/onLoad
+dbu/db/dbu/HoseitaishoYoshikiIchiran/onClick_dgList_delete
+dbu/db/dbu/HoseitaishoYoshikiIchiran/onClick_dgList_modify
+dbu/db/dbu/HoseitaishoYoshikiIchiran/onload
+dbu/db/dbu/Taishokensaku/onClick_btnClear
+dbu/db/dbu/Taishokensaku/onClick_btnSearch
+dbu/db/dbu/Taishokensaku/onload
+dbu/db/dbu/hihokenshabango/onLoad
+dbu/db/dbu/JigyoHokokuGeppoMainMeisaiPanel/onLoad
+dbu/db/dbu/JigyoHokokuGeppoMainPanel/onClick_btnClear
+dbu/db/dbu/JigyoHokokuGeppoMainPanel/onClick_btnSearch
+dbu/db/dbu/JigyoHokokuGeppoMainPanel/onClick_dgList_delete
+dbu/db/dbu/JigyoHokokuGeppoMainPanel/onClick_dgList_modify
+dbu/db/dbu/JigyoHokokuGeppoMainPanel/onload
