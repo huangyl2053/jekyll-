@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIke
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -32,6 +33,8 @@ public class ShujiiIkenshoIraiShokaiDiv extends Panel implements IShujiiIkenshoI
     private DataGrid<dgIkenshoIraiIchiran_Row> dgIkenshoIraiIchiran;
     @JsonProperty("btnModoru")
     private Button btnModoru;
+    @JsonProperty("hihokenshano")
+    private RString hihokenshano;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -82,6 +85,24 @@ public class ShujiiIkenshoIraiShokaiDiv extends Panel implements IShujiiIkenshoI
     @JsonProperty("btnModoru")
     public void setBtnModoru(Button btnModoru) {
         this.btnModoru = btnModoru;
+    }
+
+    /*
+     * gethihokenshano
+     * @return hihokenshano
+     */
+    @JsonProperty("hihokenshano")
+    public RString getHihokenshano() {
+        return hihokenshano;
+    }
+
+    /*
+     * sethihokenshano
+     * @param hihokenshano hihokenshano
+     */
+    @JsonProperty("hihokenshano")
+    public void setHihokenshano(RString hihokenshano) {
+        this.hihokenshano = hihokenshano;
     }
 
     // </editor-fold>

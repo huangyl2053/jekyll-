@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  *
@@ -32,6 +33,18 @@ public class ShujiiIkenshoIraiHandler {
      */
     public ShujiiIkenshoIraiHandler(ShujiiIkenshoIraiShokaiDiv div) {
         this.div = div;
+    }
+
+    /**
+     * 主治医意見書作成依頼情報を設定します。
+     *
+     */
+    public void onLoad() {
+        HihokenshaNo hihokenshano = new HihokenshaNo(DataPassingConverter.deserialize(div.getHihokenshano(), RString.class));
+        div.getCcdKaigoShikakuKihon().initialize(hihokenshano);
+        ShujiiIkenshoIraiShokaiFinder finder = ShujiiIkenshoIraiShokaiFinder.createInstance();
+        List<ShujiiIkenshoIraiBusiness> 認定調査情報 = finder.getNinnteiChousa(hihokenshano).records();
+        init(認定調査情報);
     }
 
     /**
