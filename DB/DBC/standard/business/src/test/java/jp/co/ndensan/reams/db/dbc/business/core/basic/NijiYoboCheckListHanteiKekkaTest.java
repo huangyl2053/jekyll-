@@ -4,24 +4,22 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3103NijiYoboCheckListHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3103NijiYoboCheckListHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link NijiYoboCheckListHanteiKekka}のテストクラスです。
@@ -33,7 +31,6 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
     private static DbT3103NijiYoboCheckListHanteiKekkaEntity NijiYoboCheckListHanteiKekkaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-//    private static ShikibetsuCode 識別コード;
     private static HihokenshaNo 被保険者番号;
     private static FlexibleDate 受付年月日;
     private static int 履歴番号;
@@ -41,7 +38,6 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-//        識別コード = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.DEFAULT_識別コード;
         被保険者番号 = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.DEFAULT_被保険者番号;
         受付年月日 = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.DEFAULT_受付年月日;
         履歴番号 = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.DEFAULT_履歴番号;
@@ -54,18 +50,12 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboCheckListHanteiKekkaEntity = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.createDbT3103NijiYoboCheckListHanteiKekkaEntity();
-//            NijiYoboCheckListHanteiKekkaEntity.setShikibetsuCode(識別コード);
             NijiYoboCheckListHanteiKekkaEntity.setHihokenshaNo(被保険者番号);
             NijiYoboCheckListHanteiKekkaEntity.setUketsukeYMD(受付年月日);
             NijiYoboCheckListHanteiKekkaEntity.setRirekiNo(履歴番号);
         }
 
 //TODO 主キー名を置換してください
-//        @Test(expected = NullPointerException.class)
-//        public void 識別コードがnullである場合に_NullPointerExceptionが発生する() {
-//            sut = new NijiYoboCheckListHanteiKekka(null, 被保険者番号, 受付年月日, 履歴番号);
-//        }
-
         @Test(expected = NullPointerException.class)
         public void 被保険者番号がnullである場合に_NullPointerExceptionが発生する() {
             sut = new NijiYoboCheckListHanteiKekka(null, 受付年月日, 履歴番号);
@@ -74,14 +64,12 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
         @Test
         public void 指定したキーが保持するDbT3103NijiYoboCheckListHanteiKekkaEntityにセットされている() {
             sut = new NijiYoboCheckListHanteiKekka(被保険者番号, 受付年月日, 履歴番号);
-//            assertThat(sut.get識別コード(), is(識別コード));
             assertThat(sut.get被保険者番号(), is(被保険者番号));
         }
 
         @Test
         public void 指定したキーが保持するNijiYoboCheckListHanteiKekkaIdentifierにセットされている() {
             sut = new NijiYoboCheckListHanteiKekka(被保険者番号, 受付年月日, 履歴番号);
-//            assertThat(sut.identifier().get識別コード(), is(識別コード));
             assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
             assertThat(sut.identifier().get受付年月日(), is(受付年月日));
             assertThat(sut.identifier().get履歴番号(), is(履歴番号));
@@ -95,7 +83,6 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboCheckListHanteiKekkaEntity = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.createDbT3103NijiYoboCheckListHanteiKekkaEntity();
-//            NijiYoboCheckListHanteiKekkaEntity.setShikibetsuCode(識別コード);
             NijiYoboCheckListHanteiKekkaEntity.setHihokenshaNo(被保険者番号);
             NijiYoboCheckListHanteiKekkaEntity.setUketsukeYMD(受付年月日);
             NijiYoboCheckListHanteiKekkaEntity.setRirekiNo(履歴番号);
@@ -111,7 +98,6 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
 
             sut = new NijiYoboCheckListHanteiKekka(NijiYoboCheckListHanteiKekkaEntity);
 
-//            assertThat(sut.identifier().get識別コード(), is(識別コード));
             assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
             assertThat(sut.identifier().get受付年月日(), is(受付年月日));
             assertThat(sut.identifier().get履歴番号(), is(履歴番号));
@@ -125,18 +111,12 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboCheckListHanteiKekkaEntity = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.createDbT3103NijiYoboCheckListHanteiKekkaEntity();
-//            NijiYoboCheckListHanteiKekkaEntity.setShikibetsuCode(識別コード);
             NijiYoboCheckListHanteiKekkaEntity.setHihokenshaNo(被保険者番号);
             NijiYoboCheckListHanteiKekkaEntity.setUketsukeYMD(受付年月日);
             NijiYoboCheckListHanteiKekkaEntity.setRirekiNo(履歴番号);
 
             sut = new NijiYoboCheckListHanteiKekka(NijiYoboCheckListHanteiKekkaEntity);
         }
-
-//        @Test
-//        public void get識別コードは_entityが持つ識別コードを返す() {
-//            assertThat(sut.get識別コード(), is(NijiYoboCheckListHanteiKekkaEntity.getShikibetsuCode()));
-//        }
 
         @Test
         public void get被保険者番号は_entityが持つ被保険者番号を返す() {
@@ -236,7 +216,6 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboCheckListHanteiKekkaEntity = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.createDbT3103NijiYoboCheckListHanteiKekkaEntity();
-//            NijiYoboCheckListHanteiKekkaEntity.setShikibetsuCode(識別コード);
             NijiYoboCheckListHanteiKekkaEntity.setHihokenshaNo(被保険者番号);
             NijiYoboCheckListHanteiKekkaEntity.setUketsukeYMD(受付年月日);
             NijiYoboCheckListHanteiKekkaEntity.setRirekiNo(履歴番号);
@@ -257,7 +236,6 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboCheckListHanteiKekkaEntity = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.createDbT3103NijiYoboCheckListHanteiKekkaEntity();
-//            NijiYoboCheckListHanteiKekkaEntity.setShikibetsuCode(識別コード);
             NijiYoboCheckListHanteiKekkaEntity.setHihokenshaNo(被保険者番号);
             NijiYoboCheckListHanteiKekkaEntity.setUketsukeYMD(受付年月日);
             NijiYoboCheckListHanteiKekkaEntity.setRirekiNo(履歴番号);
@@ -279,7 +257,6 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboCheckListHanteiKekkaEntity = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.createDbT3103NijiYoboCheckListHanteiKekkaEntity();
-//            NijiYoboCheckListHanteiKekkaEntity.setShikibetsuCode(識別コード);
             NijiYoboCheckListHanteiKekkaEntity.setHihokenshaNo(被保険者番号);
             NijiYoboCheckListHanteiKekkaEntity.setUketsukeYMD(受付年月日);
             NijiYoboCheckListHanteiKekkaEntity.setRirekiNo(履歴番号);

@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -24,10 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 償還払請求明細・住所地特例を管理するクラスです。
  */
-public class ShokanMeisaiJushochiTokurei 
-extends ModelBase<ShokanMeisaiJushochiTokureiIdentifier, 
-        DbT3107ShokanMeisaiJushochiTokureiEntity, 
-        ShokanMeisaiJushochiTokurei> implements Serializable {
+public class ShokanMeisaiJushochiTokurei
+        extends ModelBase<ShokanMeisaiJushochiTokureiIdentifier, DbT3107ShokanMeisaiJushochiTokureiEntity, ShokanMeisaiJushochiTokurei> implements Serializable {
 
     private final DbT3107ShokanMeisaiJushochiTokureiEntity entity;
     private final ShokanMeisaiJushochiTokureiIdentifier id;
@@ -41,39 +38,29 @@ extends ModelBase<ShokanMeisaiJushochiTokureiIdentifier,
      * @param 整理番号 整理番号
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
-     * @param 順次番号 順次番号
-     * @param 履歴番号 履歴番号
      */
     public ShokanMeisaiJushochiTokurei(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             JigyoshaNo 事業者番号,
-            RString 様式番号,
-            RString 順次番号,
-            Decimal 履歴番号) {
+            RString 様式番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(順次番号, UrSystemErrorMessages.値がnull.getReplacedMessage("順次番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3107ShokanMeisaiJushochiTokureiEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
         this.entity.setSeiriNp(整理番号);
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
-        this.entity.setJunjiNo(順次番号);
-        this.entity.setRirekiNo(履歴番号);
         this.id = new ShokanMeisaiJushochiTokureiIdentifier(
                 被保険者番号,
                 サービス提供年月,
                 整理番号,
                 事業者番号,
-                様式番号,
-                順次番号,
-                履歴番号
+                様式番号
         );
     }
 
@@ -90,9 +77,7 @@ extends ModelBase<ShokanMeisaiJushochiTokureiIdentifier,
                 entity.getServiceTeikyoYM(),
                 entity.getSeiriNp(),
                 entity.getJigyoshaNo(),
-                entity.getYoshikiNo(),
-                entity.getJunjiNo(),
-                entity.getRirekiNo());
+                entity.getYoshikiNo());
     }
 
     /**
@@ -156,24 +141,6 @@ extends ModelBase<ShokanMeisaiJushochiTokureiIdentifier,
     }
 
     /**
-     * 順次番号を返します。
-     *
-     * @return 順次番号
-     */
-    public RString get順次番号() {
-        return entity.getJunjiNo();
-    }
-
-    /**
-     * 履歴番号を返します。
-     *
-     * @return 履歴番号
-     */
-    public Decimal get履歴番号() {
-        return entity.getRirekiNo();
-    }
-
-    /**
      * サービス種類コードを返します。
      *
      * @return サービス種類コード
@@ -196,7 +163,7 @@ extends ModelBase<ShokanMeisaiJushochiTokureiIdentifier,
      *
      * @return 単位数
      */
-    public Decimal get単位数() {
+    public int get単位数() {
         return entity.getTanisu();
     }
 
@@ -205,7 +172,7 @@ extends ModelBase<ShokanMeisaiJushochiTokureiIdentifier,
      *
      * @return 日数・回数
      */
-    public Decimal get日数_回数() {
+    public int get日数_回数() {
         return entity.getNissuKaisu();
     }
 

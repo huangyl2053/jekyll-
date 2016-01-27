@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2008ShotokuKanriDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -35,7 +34,7 @@ public class ShotokuManager {
     /**
      * テスト用コンストラクタです。
      *
-     * @param dac {@link DbT2008ShotokuKanriDac}
+     * @param dac {@link DbT2008ShotokuDac}
      */
     ShotokuManager(DbT2008ShotokuKanriDac dac) {
         this.dac = dac;

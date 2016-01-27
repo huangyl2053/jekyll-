@@ -5,19 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4102NinteiKekkaJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4102NinteiKekkaJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.serialization._Base64Serializer;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -151,7 +151,7 @@ public class HokenshaNinteiKekkaJohoTest extends DbdTestBase {
 
         @Test
         public void setShinsakaiKaisaiNoで設定した値を＿生成されたHokenshaShinseitodokedeJohoも保持する() {
-            HokenshaNinteiKekkaJoho result = HokenshaNinteiKekkaJoho.newBuilder().setShinsakaiKaisaiNo(new RString("1")).build();
+            INinteiKekkaJoho result = HokenshaNinteiKekkaJoho.newBuilder().setShinsakaiKaisaiNo(new RString("1")).build();
             assertThat(result.get介護認定審査会開催番号(), is(DbT4102NinteiKekkaJohoEntityGenerator.DEFAULT_介護認定審査会開催番号));
         }
 

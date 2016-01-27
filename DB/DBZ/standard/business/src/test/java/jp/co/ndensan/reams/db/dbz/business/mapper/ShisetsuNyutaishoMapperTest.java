@@ -62,6 +62,11 @@ public class ShisetsuNyutaishoMapperTest extends DbzTestBase {
         }
 
         @Test
+        public void get履歴番号が_Entityの履歴番号と同一になる() {
+            assertThat(sut.get履歴番号(), is(entity.getRirekiNo()));
+        }
+
+        @Test
         public void get台帳種別のコードが_Entityの台帳種別と同一になる() {
             assertThat(sut.get台帳種別().getCode(), is(entity.getDaichoShubetsu()));
         }

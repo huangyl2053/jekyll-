@@ -13,9 +13,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3101NijiYoboKihonCheckListE
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3101NijiYoboKihonCheckListDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -45,8 +43,6 @@ public class NijiYoboKihonCheckListManager {
     /**
      * 主キーに合致する二次予防基本チェックリストを返します。
      *
-// * @param 識別コード ShikibetsuCode
-     *
      * @param 被保険者番号 HihokenshaNo
      * @param 受付年月日 UketsukeYMD
      * @param 履歴番号 RirekiNo
@@ -54,17 +50,14 @@ public class NijiYoboKihonCheckListManager {
      */
     @Transaction
     public NijiYoboKihonCheckList get二次予防基本チェックリスト(
-            //            ShikibetsuCode 識別コード,
             HihokenshaNo 被保険者番号,
             FlexibleDate 受付年月日,
             int 履歴番号) {
-//        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbT3101NijiYoboKihonCheckListEntity entity = dac.selectByKey(
-                //                識別コード,
                 被保険者番号,
                 受付年月日,
                 履歴番号);

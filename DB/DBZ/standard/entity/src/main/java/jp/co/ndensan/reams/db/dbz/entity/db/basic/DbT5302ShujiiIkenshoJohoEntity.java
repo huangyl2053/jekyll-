@@ -59,18 +59,17 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
     private boolean existShikaJushinFlag;
     private boolean existGankaJushinFlag;
     private boolean existSonotaJushinkaFlag;
-    private RString sonotaJushinKaShimei;
+    private RString sonotaJushinKaMei;
     private RString shindamMei1;
-    private FlexibleDate hasshoYMD1;
+    private RString hasshoYMD1;
     private RString shindamMei2;
-    private FlexibleDate hasshoYMD2;
+    private RString hasshoYMD2;
     private RString shindamMei3;
-    private FlexibleDate hasshoYMD3;
+    private RString hasshoYMD3;
     private RString anteisei;
     private RString fuanteiJokyo;
     private RString chiryoNaiyo;
     private RString tokkiJiko;
-    private RDateTime tokkiJikoImageSharedFileId;
     private boolean nijiHanteiKekkaRenrakuFlag;
     private RString ikenshoMemo;
 
@@ -294,6 +293,7 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
      *
      * @return 意見書作成回数区分
      */
+    @CheckForNull
     public Code getIkenshoSakuseiKaisuKubun() {
         return ikenshoSakuseiKaisuKubun;
     }
@@ -305,7 +305,7 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
      *
      * @param ikenshoSakuseiKaisuKubun 意見書作成回数区分
      */
-    public void setIkenshoSakuseiKaisuKubun(@Nonnull Code ikenshoSakuseiKaisuKubun) {
+    public void setIkenshoSakuseiKaisuKubun(Code ikenshoSakuseiKaisuKubun) {
         this.ikenshoSakuseiKaisuKubun = ikenshoSakuseiKaisuKubun;
     }
 
@@ -316,6 +316,7 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
      *
      * @return 在宅／施設区分
      */
+    @CheckForNull
     public Code getZaitakuShisetsuKubun() {
         return zaitakuShisetsuKubun;
     }
@@ -327,7 +328,7 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
      *
      * @param zaitakuShisetsuKubun 在宅／施設区分
      */
-    public void setZaitakuShisetsuKubun(@Nonnull Code zaitakuShisetsuKubun) {
+    public void setZaitakuShisetsuKubun(Code zaitakuShisetsuKubun) {
         this.zaitakuShisetsuKubun = zaitakuShisetsuKubun;
     }
 
@@ -701,17 +702,17 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
      * @return その他受診科名
      */
     @CheckForNull
-    public RString getSonotaJushinKaShimei() {
-        return sonotaJushinKaShimei;
+    public RString getSonotaJushinKaMei() {
+        return sonotaJushinKaMei;
     }
 
     /**
      * その他受診科名のsetメソッドです。
      *
-     * @param sonotaJushinKaShimei その他受診科名
+     * @param sonotaJushinKaMei その他受診科名
      */
-    public void setSonotaJushinKaShimei(RString sonotaJushinKaShimei) {
-        this.sonotaJushinKaShimei = sonotaJushinKaShimei;
+    public void setSonotaJushinKaMei(RString sonotaJushinKaMei) {
+        this.sonotaJushinKaMei = sonotaJushinKaMei;
     }
 
     /**
@@ -739,7 +740,7 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
      * @return 意見書・発症年月日1
      */
     @CheckForNull
-    public FlexibleDate getHasshoYMD1() {
+    public RString getHasshoYMD1() {
         return hasshoYMD1;
     }
 
@@ -748,7 +749,7 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
      *
      * @param hasshoYMD1 意見書・発症年月日1
      */
-    public void setHasshoYMD1(FlexibleDate hasshoYMD1) {
+    public void setHasshoYMD1(RString hasshoYMD1) {
         this.hasshoYMD1 = hasshoYMD1;
     }
 
@@ -777,7 +778,7 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
      * @return 意見書・発症年月日2
      */
     @CheckForNull
-    public FlexibleDate getHasshoYMD2() {
+    public RString getHasshoYMD2() {
         return hasshoYMD2;
     }
 
@@ -786,7 +787,7 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
      *
      * @param hasshoYMD2 意見書・発症年月日2
      */
-    public void setHasshoYMD2(FlexibleDate hasshoYMD2) {
+    public void setHasshoYMD2(RString hasshoYMD2) {
         this.hasshoYMD2 = hasshoYMD2;
     }
 
@@ -815,7 +816,7 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
      * @return 意見書・発症年月日3
      */
     @CheckForNull
-    public FlexibleDate getHasshoYMD3() {
+    public RString getHasshoYMD3() {
         return hasshoYMD3;
     }
 
@@ -824,7 +825,7 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
      *
      * @param hasshoYMD3 意見書・発症年月日3
      */
-    public void setHasshoYMD3(FlexibleDate hasshoYMD3) {
+    public void setHasshoYMD3(RString hasshoYMD3) {
         this.hasshoYMD3 = hasshoYMD3;
     }
 
@@ -906,25 +907,6 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
      */
     public void setTokkiJiko(RString tokkiJiko) {
         this.tokkiJiko = tokkiJiko;
-    }
-
-    /**
-     * 特記事項イメージ共有ファイルIDのgetメソッドです。
-     *
-     * @return 特記事項イメージ共有ファイルID
-     */
-    @CheckForNull
-    public RDateTime getTokkiJikoImageSharedFileId() {
-        return tokkiJikoImageSharedFileId;
-    }
-
-    /**
-     * 特記事項イメージ共有ファイルIDのsetメソッドです。
-     *
-     * @param tokkiJikoImageSharedFileId 特記事項イメージ共有ファイルID
-     */
-    public void setTokkiJikoImageSharedFileId(RDateTime tokkiJikoImageSharedFileId) {
-        this.tokkiJikoImageSharedFileId = tokkiJikoImageSharedFileId;
     }
 
     /**
@@ -1021,7 +1003,7 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
         this.existShikaJushinFlag = entity.existShikaJushinFlag;
         this.existGankaJushinFlag = entity.existGankaJushinFlag;
         this.existSonotaJushinkaFlag = entity.existSonotaJushinkaFlag;
-        this.sonotaJushinKaShimei = entity.sonotaJushinKaShimei;
+        this.sonotaJushinKaMei = entity.sonotaJushinKaMei;
         this.shindamMei1 = entity.shindamMei1;
         this.hasshoYMD1 = entity.hasshoYMD1;
         this.shindamMei2 = entity.shindamMei2;
@@ -1032,7 +1014,6 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
         this.fuanteiJokyo = entity.fuanteiJokyo;
         this.chiryoNaiyo = entity.chiryoNaiyo;
         this.tokkiJiko = entity.tokkiJiko;
-        this.tokkiJikoImageSharedFileId = entity.tokkiJikoImageSharedFileId;
         this.nijiHanteiKekkaRenrakuFlag = entity.nijiHanteiKekkaRenrakuFlag;
         this.ikenshoMemo = entity.ikenshoMemo;
     }
@@ -1044,7 +1025,7 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, ikenshoIraiRirekiNo, koroshoIfShikibetsuCode, ikenshoIraiKubun, shujiiIryoKikanCode, shujiiCode, ikenshoJuryoYMD, ikenshoKinyuYMD, ikenshoSakuseiKaisuKubun, zaitakuShisetsuKubun, ikenshoDoiFlag, saishuShinryoYMD, existTakaJushinFlag, existNaikaJushinFlag, existSeishinkaJushinFlag, existGekaJushinFlag, existSeikeigekaJushinFlag, existNoshinkeigekaJushinFlag, existHifukaJushinFlag, existHinyokikaJushinFlag, existFujinkaJushinFlag, existJibiinkokaJushinFlag, existRehabilitationkaJushinFlag, existShikaJushinFlag, existGankaJushinFlag, existSonotaJushinkaFlag, sonotaJushinKaShimei, shindamMei1, hasshoYMD1, shindamMei2, hasshoYMD2, shindamMei3, hasshoYMD3, anteisei, fuanteiJokyo, chiryoNaiyo, tokkiJiko, tokkiJikoImageSharedFileId, nijiHanteiKekkaRenrakuFlag, ikenshoMemo);
+        return super.toMd5(shinseishoKanriNo, ikenshoIraiRirekiNo, koroshoIfShikibetsuCode, ikenshoIraiKubun, shujiiIryoKikanCode, shujiiCode, ikenshoJuryoYMD, ikenshoKinyuYMD, ikenshoSakuseiKaisuKubun, zaitakuShisetsuKubun, ikenshoDoiFlag, saishuShinryoYMD, existTakaJushinFlag, existNaikaJushinFlag, existSeishinkaJushinFlag, existGekaJushinFlag, existSeikeigekaJushinFlag, existNoshinkeigekaJushinFlag, existHifukaJushinFlag, existHinyokikaJushinFlag, existFujinkaJushinFlag, existJibiinkokaJushinFlag, existRehabilitationkaJushinFlag, existShikaJushinFlag, existGankaJushinFlag, existSonotaJushinkaFlag, sonotaJushinKaMei, shindamMei1, hasshoYMD1, shindamMei2, hasshoYMD2, shindamMei3, hasshoYMD3, anteisei, fuanteiJokyo, chiryoNaiyo, tokkiJiko, nijiHanteiKekkaRenrakuFlag, ikenshoMemo);
     }
 
 // </editor-fold>

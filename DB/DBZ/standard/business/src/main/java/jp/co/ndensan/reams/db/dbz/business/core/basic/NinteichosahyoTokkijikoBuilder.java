@@ -80,9 +80,9 @@ public class NinteichosahyoTokkijikoBuilder {
      * @param 認定調査特記事項連番 認定調査特記事項連番
      * @return {@link NinteichosahyoTokkijikoBuilder}
      */
-    public NinteichosahyoTokkijikoBuilder set認定調査特記事項連番(RString 認定調査特記事項連番) {
+    public NinteichosahyoTokkijikoBuilder set認定調査特記事項連番(Integer 認定調査特記事項連番) {
         requireNonNull(認定調査特記事項連番, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査特記事項連番"));
-        entity.setNinteichosaTokkijikoRenban(認定調査特記事項連番);
+        entity.setNinteichosaTokkijikoRemban(認定調査特記事項連番);
         return this;
     }
 

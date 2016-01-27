@@ -42,3 +42,4 @@ torokuShuryoYMD,UDD015YMD,FlexibleDate,,,,,市町村特別給付登録終了年�
 seikatsuhogoShiteiFlag,bool,boolean,,,,,生活保護法による指定の有,A
 shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
 chiikiKubun,varchar,RString,,,,,地域区分,A
+logicalDeletedFlag,bool,boolean,,,,,論理削除フラグ,A

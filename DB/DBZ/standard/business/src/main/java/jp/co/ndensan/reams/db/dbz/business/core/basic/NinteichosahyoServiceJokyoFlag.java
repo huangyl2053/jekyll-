@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -17,9 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 認定調査票_概況調査_サービスの状況フラグを管理するクラスです。
  */
-public class NinteichosahyoServiceJokyoFlag extends 
-        ParentModelBase<NinteichosahyoServiceJokyoFlagIdentifier, 
-        DbT5208NinteichosahyoServiceJokyoFlagEntity, NinteichosahyoServiceJokyoFlag> implements Serializable {
+public class NinteichosahyoServiceJokyoFlag extends
+        ParentModelBase<NinteichosahyoServiceJokyoFlagIdentifier, DbT5208NinteichosahyoServiceJokyoFlagEntity, NinteichosahyoServiceJokyoFlag> implements Serializable {
 
     private final DbT5208NinteichosahyoServiceJokyoFlagEntity entity;
     private final NinteichosahyoServiceJokyoFlagIdentifier id;
@@ -106,11 +105,11 @@ public class NinteichosahyoServiceJokyoFlag extends
     }
 
     /**
-     * サービスの状況を返します。
+     * サービスの状況フラグを返します。
      *
-     * @return サービスの状況
+     * @return サービスの状況フラグ
      */
-    public boolean getサービスの状況() {
+    public boolean getサービスの状況フラグ() {
         return entity.getServiceJokyoFlag();
     }
 

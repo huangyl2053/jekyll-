@@ -20,7 +20,6 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5503ShinsakaiWariateIinJoho");
-    private static final long serialVersionUID = -1543742811560143647L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;

@@ -111,7 +111,7 @@ public class Shotoku extends ModelBase<ShotokuIdentifier, DbT2008ShotokuKanriEnt
      *
      * @return 非課税区分（住民税減免前）
      */
-    public RString get課税区分_住民税減免前() {
+    public RString get非課税区分_住民税減免前() {
         return entity.getKazeiKubun();
     }
 
@@ -120,8 +120,8 @@ public class Shotoku extends ModelBase<ShotokuIdentifier, DbT2008ShotokuKanriEnt
      *
      * @return 非課税区分（住民税減免後）
      */
-    public RString get課税区分_住民税減免後() {
-        return entity.getKazeiKubunGemmenGo();
+    public RString get非課税区分_住民税減免後() {
+        return entity.getKazeiKubun();
     }
 
     /**
@@ -172,8 +172,7 @@ public class Shotoku extends ModelBase<ShotokuIdentifier, DbT2008ShotokuKanriEnt
     }
 
     /**
-     * 保持する介護所得を削除対象とします。<br/>
-     * {@link DbT2008ShotokuKanriEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護所得を削除対象とします。<br/> {@link DbT2008ShotokuKanriEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link Shotoku}
      */

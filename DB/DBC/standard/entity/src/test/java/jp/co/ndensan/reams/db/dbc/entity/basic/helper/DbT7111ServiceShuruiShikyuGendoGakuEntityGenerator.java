@@ -32,9 +32,9 @@ public final class DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator {
         DbT7111ServiceShuruiShikyuGendoGakuEntity entity = new DbT7111ServiceShuruiShikyuGendoGakuEntity();
         entity.setServiceShuruiCode(DEFAULT_サービス種類コード);
         entity.setYoKaigoJotaiKubun(DEFAULT_要介護状態区分);
-        entity.setTekiyoKaishuYM(DEFAULT_適用開始年月);
+        entity.setTekiyoKaishiYM(DEFAULT_適用開始年月);
         entity.setRirekiNo(DEFAULT_履歴番号);
-        entity.setTekiyoShuryuYM(DEFAULT_適用終了年月);
+        entity.setTekiyoShuryoYM(DEFAULT_適用終了年月);
         entity.setShikyuGendoTaniSu(DEFAULT_支給限度単位数);
         return entity;
     }

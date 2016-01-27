@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGen
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -40,8 +39,6 @@ public class KaigoSetaiTest extends DbzTestBase {
     private static int 世帯員管理連番;
     private static ShikibetsuCode 世帯員識別コード;
     private static RString 本人区分;
-    private static FlexibleYear 課税年度;
-    private static RString 課税非課税区分;
 
     @BeforeClass
     public static void setUpClass() {
@@ -52,8 +49,6 @@ public class KaigoSetaiTest extends DbzTestBase {
         世帯員管理連番 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員管理連番;
         世帯員識別コード = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員識別コード;
         本人区分 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_本人区分;
-        課税年度 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年度;
-        課税非課税区分 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税非課税区分;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -69,56 +64,44 @@ public class KaigoSetaiTest extends DbzTestBase {
             KaigoSetaiEntity.setSetaiInkanriRenban(世帯員管理連番);
             KaigoSetaiEntity.setSetaiInshikibetsuCode(世帯員識別コード);
             KaigoSetaiEntity.setHonninKubun(本人区分);
-            KaigoSetaiEntity.setKazeiNendo(課税年度);
-            KaigoSetaiEntity.setKazeiHikazeiKubun(課税非課税区分);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 被保険者番号がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KaigoSetai(null, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分, 課税年度, 課税非課税区分);
+            sut = new KaigoSetai(null, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分);
         }
 
         @Test(expected = NullPointerException.class)
         public void 管理識別区分がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KaigoSetai(被保険者番号, null, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分, 課税年度, 課税非課税区分);
+            sut = new KaigoSetai(被保険者番号, null, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分);
         }
 
         @Test(expected = NullPointerException.class)
         public void 世帯把握基準年月日がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KaigoSetai(被保険者番号, 管理識別区分, null, 世帯員管理連番, 世帯員識別コード, 本人区分, 課税年度, 課税非課税区分);
+            sut = new KaigoSetai(被保険者番号, 管理識別区分, null, 世帯員管理連番, 世帯員識別コード, 本人区分);
         }
 
         @Test(expected = NullPointerException.class)
         public void 世帯員識別コードがnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KaigoSetai(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, null, 本人区分, 課税年度, 課税非課税区分);
+            sut = new KaigoSetai(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, null, 本人区分);
         }
 
         @Test(expected = NullPointerException.class)
         public void 本人区分がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KaigoSetai(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, null, 課税年度, 課税非課税区分);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 課税年度がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KaigoSetai(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分, null, 課税非課税区分);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 課税非課税区分がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KaigoSetai(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分, 課税年度, null);
+            sut = new KaigoSetai(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT7014KaigoSetaiEntityにセットされている() {
-            sut = new KaigoSetai(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分, 課税年度, 課税非課税区分);
+            sut = new KaigoSetai(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分);
             assertThat(sut.get被保険者番号(), is(被保険者番号));
             assertThat(sut.get管理識別区分(), is(管理識別区分));
         }
 
         @Test
         public void 指定したキーが保持するKaigoSetaiIdentifierにセットされている() {
-            sut = new KaigoSetai(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分, 課税年度, 課税非課税区分);
+            sut = new KaigoSetai(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分);
             assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
             assertThat(sut.identifier().get管理識別区分(), is(管理識別区分));
         }
@@ -137,8 +120,6 @@ public class KaigoSetaiTest extends DbzTestBase {
             KaigoSetaiEntity.setSetaiInkanriRenban(世帯員管理連番);
             KaigoSetaiEntity.setSetaiInshikibetsuCode(世帯員識別コード);
             KaigoSetaiEntity.setHonninKubun(本人区分);
-            KaigoSetaiEntity.setKazeiNendo(課税年度);
-            KaigoSetaiEntity.setKazeiHikazeiKubun(課税非課税区分);
         }
 
         @Test(expected = NullPointerException.class)
@@ -169,8 +150,6 @@ public class KaigoSetaiTest extends DbzTestBase {
             KaigoSetaiEntity.setSetaiInkanriRenban(世帯員管理連番);
             KaigoSetaiEntity.setSetaiInshikibetsuCode(世帯員識別コード);
             KaigoSetaiEntity.setHonninKubun(本人区分);
-            KaigoSetaiEntity.setKazeiNendo(課税年度);
-            KaigoSetaiEntity.setKazeiHikazeiKubun(課税非課税区分);
 
             sut = new KaigoSetai(KaigoSetaiEntity);
         }
@@ -205,25 +184,6 @@ public class KaigoSetaiTest extends DbzTestBase {
             assertThat(sut.get本人区分(), is(KaigoSetaiEntity.getHonninKubun()));
         }
 
-        @Test
-        public void get課税年度は_entityが持つ課税年度を返す() {
-            assertThat(sut.get課税年度(), is(KaigoSetaiEntity.getKazeiNendo()));
-        }
-
-        @Test
-        public void get課税非課税区分は_entityが持つ課税非課税区分を返す() {
-            assertThat(sut.get課税非課税区分(), is(KaigoSetaiEntity.getKazeiHikazeiKubun()));
-        }
-
-        @Test
-        public void get合計所得金額は_entityが持つ合計所得金額を返す() {
-            assertThat(sut.get合計所得金額(), is(KaigoSetaiEntity.getGokeiShotokuKingaku()));
-        }
-
-        @Test
-        public void get課税年金収入額は_entityが持つ課税年金収入額を返す() {
-            assertThat(sut.get課税年金収入額(), is(KaigoSetaiEntity.getKazeiNenkinShunyugaku()));
-        }
     }
 
     public static class toEntityテスト extends DbzTestBase {
@@ -239,8 +199,6 @@ public class KaigoSetaiTest extends DbzTestBase {
             KaigoSetaiEntity.setSetaiInkanriRenban(世帯員管理連番);
             KaigoSetaiEntity.setSetaiInshikibetsuCode(世帯員識別コード);
             KaigoSetaiEntity.setHonninKubun(本人区分);
-            KaigoSetaiEntity.setKazeiNendo(課税年度);
-            KaigoSetaiEntity.setKazeiHikazeiKubun(課税非課税区分);
 
             sut = new KaigoSetai(KaigoSetaiEntity);
         }
@@ -264,8 +222,6 @@ public class KaigoSetaiTest extends DbzTestBase {
             KaigoSetaiEntity.setSetaiInkanriRenban(世帯員管理連番);
             KaigoSetaiEntity.setSetaiInshikibetsuCode(世帯員識別コード);
             KaigoSetaiEntity.setHonninKubun(本人区分);
-            KaigoSetaiEntity.setKazeiNendo(課税年度);
-            KaigoSetaiEntity.setKazeiHikazeiKubun(課税非課税区分);
 
             sut = new KaigoSetai(KaigoSetaiEntity);
         }
@@ -290,8 +246,6 @@ public class KaigoSetaiTest extends DbzTestBase {
             KaigoSetaiEntity.setSetaiInkanriRenban(世帯員管理連番);
             KaigoSetaiEntity.setSetaiInshikibetsuCode(世帯員識別コード);
             KaigoSetaiEntity.setHonninKubun(本人区分);
-            KaigoSetaiEntity.setKazeiNendo(課税年度);
-            KaigoSetaiEntity.setKazeiHikazeiKubun(課税非課税区分);
 
         }
 

@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiKekkaJohoBuilder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiKekkaJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -199,7 +201,7 @@ public class NinteiKekkaJoho extends ModelBase<NinteiKekkaJohoIdentifier, DbT510
      * @return 二次判定結果入力年月日
      */
     public FlexibleDate get二次判定結果入力年月日() {
-        return entity.getNijiHanteiKekkaInputYMD();
+        return entity.getNijiHanteiYMD();
     }
 
     /**

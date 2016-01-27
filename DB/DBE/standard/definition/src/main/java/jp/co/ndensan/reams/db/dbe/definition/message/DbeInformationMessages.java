@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.message;
 
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
  * DBEのインフォメーションメッセージ定義列挙型です。
@@ -17,8 +17,8 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
  */
 public enum DbeInformationMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    割付申請者人数が最大割付可能人数を超過(1, "割付申請者人数が最大割付可能人数を超えています。"),
+    審査会自動割付できない申請者(2, "審査会自動割付できない申請者がいます。");
 
     private final Message message;
 
@@ -29,7 +29,7 @@ public enum DbeInformationMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbeInformationMessages(int no, String message) {
-        this.message = new InformationMessage(toCode("I", no), message);
+        this.message = new InformationMessage(toCode("DBEI", no), message);
     }
 
     @Override

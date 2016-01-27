@@ -1,22 +1,20 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * 認定調査スケジュール情報テーブルのエンティティクラスです。
@@ -46,9 +44,9 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
     @PrimaryKey
     private Code chosaChikuCode;
     @PrimaryKey
-    private ChosaItakusakiCode ninteiChosaItakusakiCode;
+    private RString ninteiChosaItakusakiCode;
     @PrimaryKey
-    private ChosainCode ninteiChosainCode;
+    private RString ninteiChosainCode;
     @PrimaryKey
     private LasdecCode shichosonCode;
     private ShinseishoKanriNo shinseishoKanriNo;
@@ -205,7 +203,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @return 認定調査委託先コード
      */
-    public ChosaItakusakiCode getNinteiChosaItakusakiCode() {
+    public RString getNinteiChosaItakusakiCode() {
         return ninteiChosaItakusakiCode;
     }
 
@@ -216,7 +214,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @param ninteiChosaItakusakiCode 認定調査委託先コード
      */
-    public void setNinteiChosaItakusakiCode(@Nonnull ChosaItakusakiCode ninteiChosaItakusakiCode) {
+    public void setNinteiChosaItakusakiCode(@Nonnull RString ninteiChosaItakusakiCode) {
         this.ninteiChosaItakusakiCode = ninteiChosaItakusakiCode;
     }
 
@@ -227,7 +225,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @return 認定調査員コード
      */
-    public ChosainCode getNinteiChosainCode() {
+    public RString getNinteiChosainCode() {
         return ninteiChosainCode;
     }
 
@@ -238,7 +236,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @param ninteiChosainCode 認定調査員コード
      */
-    public void setNinteiChosainCode(@Nonnull ChosainCode ninteiChosainCode) {
+    public void setNinteiChosainCode(@Nonnull RString ninteiChosainCode) {
         this.ninteiChosainCode = ninteiChosainCode;
     }
 
@@ -487,7 +485,8 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      * このエンティティの主キーが他の{@literal DbT5221NinteichosaScheduleEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT5221NinteichosaScheduleEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5221NinteichosaScheduleEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5221NinteichosaScheduleEntity other) {

@@ -24,7 +24,7 @@ public class ShoKaishuJokyo {
      * 処理対象者の詳細情報を表示します。
      *
      * @param shoKaishuJoho 証回収詳細情報Div
-     * @param searchResultDiv　証回収状況検索結果Div
+     * @param searchResultDiv 証回収状況検索結果Div
      * @return レスポンス
      */
     public ResponseData onSelectBySelectButton_SearchResultShoKaishuJokyoList(ShoKaishuJokyoDiv shoKaishuJoho,
@@ -51,7 +51,7 @@ public class ShoKaishuJokyo {
      * 証類回収情報入力画面-「証類状況を保存する」ボタン活性非活性制御を表します。
      *
      * @param shoKaishuJoho 証回収詳細情報Div
-     * @param searchResultDiv　証回収状況検索結果Div
+     * @param searchResultDiv 証回収状況検索結果Div
      * @return ResponseData
      */
     public ResponseData<ShoKaishuJokyoDiv> setEnableControl(ShoKaishuJokyoDiv shoKaishuJoho,

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -27,7 +26,8 @@ public final class DbT5911ShujiiIryoKikanJohoEntityGenerator {
     public static final RString DEFAULT_住所 = new RString("名称");
     public static final TelNo DEFAULT_電話番号 = new TelNo("0123456789");
     public static final TelNo DEFAULT_FAX番号 = new TelNo("0123456789");
-    public static final AtenaMeisho DEFAULT_代表者名 = new AtenaMeisho("宛名名称");
+    public static final RString DEFAULT_代表者名 = new RString("宛名名称");
+    public static final RString DEFAULT_代表者名カナ = new RString("宛名名称カナ");
     public static final boolean DEFAULT_状況フラグ = false;
 
     /**
@@ -48,6 +48,7 @@ public final class DbT5911ShujiiIryoKikanJohoEntityGenerator {
         entity.setTelNo(DEFAULT_電話番号);
         entity.setFaxNo(DEFAULT_FAX番号);
         entity.setDaihyoshaName(DEFAULT_代表者名);
+        entity.setDaihyoshaNameKana(DEFAULT_代表者名カナ);
         entity.setJokyoFlag(DEFAULT_状況フラグ);
         return entity;
     }

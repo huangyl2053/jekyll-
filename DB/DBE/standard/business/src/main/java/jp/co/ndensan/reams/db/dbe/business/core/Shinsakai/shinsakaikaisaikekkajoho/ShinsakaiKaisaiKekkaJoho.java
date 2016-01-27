@@ -65,7 +65,6 @@ public class ShinsakaiKaisaiKekkaJoho extends ModelBase<ShinsakaiKaisaiKekkaJoho
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 介護認定審査会開催番号を返します。
      *

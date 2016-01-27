@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5206GaikyoTokkiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5206GaikyoTokkiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -29,11 +30,13 @@ public class GaikyoTokkiTest extends DbzTestBase {
     private static DbT5206GaikyoTokkiEntity gaikyoTokkiEntity;
     private static ShinseishoKanriNo 申請書管理番号;
     private static int 認定調査依頼履歴番号;
+    private static RString 概況特記テキストイメージ区分;
 
     @BeforeClass
     public static void setUpClass() {
         申請書管理番号 = DbT5206GaikyoTokkiEntityGenerator.DEFAULT_申請書管理番号;
         認定調査依頼履歴番号 = DbT5206GaikyoTokkiEntityGenerator.DEFAULT_認定調査依頼履歴番号;
+        概況特記テキストイメージ区分 = DbT5206GaikyoTokkiEntityGenerator.DEFAULT_概況特記テキストイメージ区分;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -47,21 +50,23 @@ public class GaikyoTokkiTest extends DbzTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 申請書管理番号がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new GaikyoTokki(null, 認定調査依頼履歴番号);
+            sut = new GaikyoTokki(null, 認定調査依頼履歴番号, 概況特記テキストイメージ区分);
         }
 
         @Test
         public void 指定したキーが保持するDbT5206GaikyoTokkiEntityにセットされている() {
-            sut = new GaikyoTokki(申請書管理番号, 認定調査依頼履歴番号);
+            sut = new GaikyoTokki(申請書管理番号, 認定調査依頼履歴番号, 概況特記テキストイメージ区分);
             assertThat(sut.get申請書管理番号(), is(申請書管理番号));
             assertThat(sut.get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
+            assertThat(sut.get概況特記テキストイメージ区分(), is(概況特記テキストイメージ区分));
         }
 
         @Test
         public void 指定したキーが保持するGaikyoTokkiIdentifierにセットされている() {
-            sut = new GaikyoTokki(申請書管理番号, 認定調査依頼履歴番号);
+            sut = new GaikyoTokki(申請書管理番号, 認定調査依頼履歴番号, 概況特記テキストイメージ区分);
             assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
             assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
+            assertThat(sut.identifier().get概況特記テキストイメージ区分(), is(概況特記テキストイメージ区分));
         }
     }
 
@@ -86,6 +91,7 @@ public class GaikyoTokkiTest extends DbzTestBase {
 
             assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
             assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
+            assertThat(sut.identifier().get概況特記テキストイメージ区分(), is(概況特記テキストイメージ区分));
         }
     }
 
@@ -111,64 +117,84 @@ public class GaikyoTokkiTest extends DbzTestBase {
         }
 
         @Test
+        public void get概況特記テキストイメージ区分は_entityが持つ概況特記テキストイメージ区分を返す() {
+            assertThat(sut.get概況特記テキストイメージ区分(), is(gaikyoTokkiEntity.getGaikyoTokkiTextImageKubun()));
+        }
+
+        @Test
+        public void get住宅改修は_entityが持つ住宅改修を返す() {
+            assertThat(sut.get住宅改修(), is(gaikyoTokkiEntity.getJutakuKaishu()));
+        }
+
+        @Test
+        public void get市町村特別給付サービス種類名は_entityが持つ市町村特別給付サービス種類名を返す() {
+            assertThat(sut.get市町村特別給付サービス種類名(), is(gaikyoTokkiEntity.getTokubetsuKyufuService()));
+        }
+
+        @Test
+        public void get介護保険給付以外の在宅サービス種類名は_entityが持つ介護保険給付以外の在宅サービス種類名を返す() {
+            assertThat(sut.get介護保険給付以外の在宅サービス種類名(), is(gaikyoTokkiEntity.getZaitakuService()));
+        }
+
+        @Test
         public void get概況特記事項_主訴は_entityが持つ概況特記事項_主訴を返す() {
             assertThat(sut.get概況特記事項_主訴(), is(gaikyoTokkiEntity.getShuso()));
         }
 
-        @Test
-        public void get概況特記_主訴_イメージ共有ファイルIDは_entityが持つ概況特記_主訴_イメージ共有ファイルIDを返す() {
-            assertThat(sut.get概況特記_主訴_イメージ共有ファイルID(), is(gaikyoTokkiEntity.getShusoImageSharedFileId()));
-        }
-
-        @Test
-        public void get概況特記_主訴_マスキングイメージ共有ファイルIDは_entityが持つ概況特記_主訴_マスキングイメージ共有ファイルIDを返す() {
-            assertThat(sut.get概況特記_主訴_マスキングイメージ共有ファイルID(), is(gaikyoTokkiEntity.getShusoMaskingImageSharedFileId()));
-        }
+//        @Test
+//        public void get概況特記_主訴_イメージ共有ファイルIDは_entityが持つ概況特記_主訴_イメージ共有ファイルIDを返す() {
+//            assertThat(sut.get概況特記_主訴_イメージ共有ファイルID(), is(gaikyoTokkiEntity.getShusoImageSharedFileId()));
+//        }
+//
+//        @Test
+//        public void get概況特記_主訴_マスキングイメージ共有ファイルIDは_entityが持つ概況特記_主訴_マスキングイメージ共有ファイルIDを返す() {
+//            assertThat(sut.get概況特記_主訴_マスキングイメージ共有ファイルID(), is(gaikyoTokkiEntity.getShusoMaskingImageSharedFileId()));
+//        }
 
         @Test
         public void get概況特記事項_家族状況は_entityが持つ概況特記事項_家族状況を返す() {
             assertThat(sut.get概況特記事項_家族状況(), is(gaikyoTokkiEntity.getKazokuJokyo()));
         }
 
-        @Test
-        public void get概況特記_家族状況_イメージ共有ファイルIDは_entityが持つ概況特記_家族状況_イメージ共有ファイルIDを返す() {
-            assertThat(sut.get概況特記_家族状況_イメージ共有ファイルID(), is(gaikyoTokkiEntity.getKazokuJokyoImageSharedFileId()));
-        }
-
-        @Test
-        public void get概況特記_家族状況_マスキングイメージ共有ファイルIDは_entityが持つ概況特記_家族状況_マスキングイメージ共有ファイルIDを返す() {
-            assertThat(sut.get概況特記_家族状況_マスキングイメージ共有ファイルID(), is(gaikyoTokkiEntity.getKazokuJokyoMaskingImageSharedFileId()));
-        }
+//        @Test
+//        public void get概況特記_家族状況_イメージ共有ファイルIDは_entityが持つ概況特記_家族状況_イメージ共有ファイルIDを返す() {
+//            assertThat(sut.get概況特記_家族状況_イメージ共有ファイルID(), is(gaikyoTokkiEntity.getKazokuJokyoImageSharedFileId()));
+//        }
+//
+//        @Test
+//        public void get概況特記_家族状況_マスキングイメージ共有ファイルIDは_entityが持つ概況特記_家族状況_マスキングイメージ共有ファイルIDを返す() {
+//            assertThat(sut.get概況特記_家族状況_マスキングイメージ共有ファイルID(), is(gaikyoTokkiEntity.getKazokuJokyoMaskingImageSharedFileId()));
+//        }
 
         @Test
         public void get概況特記事項_居住環境は_entityが持つ概況特記事項_居住環境を返す() {
             assertThat(sut.get概況特記事項_居住環境(), is(gaikyoTokkiEntity.getKyojuKankyo()));
         }
 
-        @Test
-        public void get概況特記_居住環境_イメージ共有ファイルIDは_entityが持つ概況特記_居住環境_イメージ共有ファイルIDを返す() {
-            assertThat(sut.get概況特記_居住環境_イメージ共有ファイルID(), is(gaikyoTokkiEntity.getKyojuKankyoImageSharedFileId()));
-        }
-
-        @Test
-        public void get概況特記_居住環境_マスキングイメージ共有ファイルIDは_entityが持つ概況特記_居住環境_マスキングイメージ共有ファイルIDを返す() {
-            assertThat(sut.get概況特記_居住環境_マスキングイメージ共有ファイルID(), is(gaikyoTokkiEntity.getKyojuKankyoMaskingImageSharedFileId()));
-        }
+//        @Test
+//        public void get概況特記_居住環境_イメージ共有ファイルIDは_entityが持つ概況特記_居住環境_イメージ共有ファイルIDを返す() {
+//            assertThat(sut.get概況特記_居住環境_イメージ共有ファイルID(), is(gaikyoTokkiEntity.getKyojuKankyoImageSharedFileId()));
+//        }
+//
+//        @Test
+//        public void get概況特記_居住環境_マスキングイメージ共有ファイルIDは_entityが持つ概況特記_居住環境_マスキングイメージ共有ファイルIDを返す() {
+//            assertThat(sut.get概況特記_居住環境_マスキングイメージ共有ファイルID(), is(gaikyoTokkiEntity.getKyojuKankyoMaskingImageSharedFileId()));
+//        }
 
         @Test
         public void get概況特記事項_機器_器械は_entityが持つ概況特記事項_機器_器械を返す() {
             assertThat(sut.get概況特記事項_機器_器械(), is(gaikyoTokkiEntity.getKikaiKiki()));
         }
 
-        @Test
-        public void get概況特記_機器_器械_イメージ共有ファイルIDは_entityが持つ概況特記_機器_器械_イメージ共有ファイルIDを返す() {
-            assertThat(sut.get概況特記_機器_器械_イメージ共有ファイルID(), is(gaikyoTokkiEntity.getKikaiKikiImageSharedFileId()));
-        }
-
-        @Test
-        public void get概況特記_機器_器械_マスキングイメージ共有ファイルIDは_entityが持つ概況特記_機器_器械_マスキングイメージ共有ファイルIDを返す() {
-            assertThat(sut.get概況特記_機器_器械_マスキングイメージ共有ファイルID(), is(gaikyoTokkiEntity.getKikaiKikiMaskingImageSharedFileId()));
-        }
+//        @Test
+//        public void get概況特記_機器_器械_イメージ共有ファイルIDは_entityが持つ概況特記_機器_器械_イメージ共有ファイルIDを返す() {
+//            assertThat(sut.get概況特記_機器_器械_イメージ共有ファイルID(), is(gaikyoTokkiEntity.getKikaiKikiImageSharedFileId()));
+//        }
+//
+//        @Test
+//        public void get概況特記_機器_器械_マスキングイメージ共有ファイルIDは_entityが持つ概況特記_機器_器械_マスキングイメージ共有ファイルIDを返す() {
+//            assertThat(sut.get概況特記_機器_器械_マスキングイメージ共有ファイルID(), is(gaikyoTokkiEntity.getKikaiKikiMaskingImageSharedFileId()));
+//        }
     }
 
     public static class toEntityテスト extends DbzTestBase {

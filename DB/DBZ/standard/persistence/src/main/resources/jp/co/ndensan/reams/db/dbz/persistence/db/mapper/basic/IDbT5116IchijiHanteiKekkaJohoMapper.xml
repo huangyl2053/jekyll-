@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： DbT5116IchijiHanteiKekkaJohoマスタとエンティティのマッピング用XMLです。 -->
-<!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5116IchijiHanteiKekkaJoho">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.allColumns_DbT5116IchijiHanteiKekkaJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.allColumns_DbT5116IchijiHanteiKekkaJoho" />
      FROM
-         rg."DbT5116IchijiHanteiKekkaJoho"
+         rgdb."DbT5116IchijiHanteiKekkaJoho"
      WHERE
-         rg."DbT5116IchijiHanteiKekkaJoho"."isDeleted" = FALSE
+         rgdb."DbT5116IchijiHanteiKekkaJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5116IchijiHanteiKekkaJoho">
+         "DbT5116IchijiHanteiKekkaJoho"."shinseishoKanriNo" as "dbT5116IchijiHanteiKekkaJoho_shinseishoKanriNo",
          "DbT5116IchijiHanteiKekkaJoho"."insertDantaiCd" as "dbT5116IchijiHanteiKekkaJoho_insertDantaiCd",
          "DbT5116IchijiHanteiKekkaJoho"."insertTimestamp" as "dbT5116IchijiHanteiKekkaJoho_insertTimestamp",
          "DbT5116IchijiHanteiKekkaJoho"."insertReamsLoginId" as "dbT5116IchijiHanteiKekkaJoho_insertReamsLoginId",
@@ -25,7 +25,6 @@
          "DbT5116IchijiHanteiKekkaJoho"."updateCount" as "dbT5116IchijiHanteiKekkaJoho_updateCount",
          "DbT5116IchijiHanteiKekkaJoho"."lastUpdateTimestamp" as "dbT5116IchijiHanteiKekkaJoho_lastUpdateTimestamp",
          "DbT5116IchijiHanteiKekkaJoho"."lastUpdateReamsLoginId" as "dbT5116IchijiHanteiKekkaJoho_lastUpdateReamsLoginId",
-         "DbT5116IchijiHanteiKekkaJoho"."shinseishoKanriNo" as "dbT5116IchijiHanteiKekkaJoho_shinseishoKanriNo",
          "DbT5116IchijiHanteiKekkaJoho"."kariIchijiHanteiKubun" as "dbT5116IchijiHanteiKekkaJoho_kariIchijiHanteiKubun",
          "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" as "dbT5116IchijiHanteiKekkaJoho_ichijiHanteiYMD",
          "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaCode" as "dbT5116IchijiHanteiKekkaJoho_ichijiHanteiKekkaCode",
@@ -69,7 +68,8 @@
 
 
     <!--テーブルDbT5116IchijiHanteiKekkaJohoの項目をDbT5116IchijiHanteiKekkaJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5116IchijiHanteiKekkaJohoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5116IchijiHanteiKekkaJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT5116IchijiHanteiKekkaJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="insertDantaiCd" column="dbT5116IchijiHanteiKekkaJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5116IchijiHanteiKekkaJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT5116IchijiHanteiKekkaJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -78,7 +78,6 @@
         <result property="updateCount" column="dbT5116IchijiHanteiKekkaJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT5116IchijiHanteiKekkaJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5116IchijiHanteiKekkaJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shinseishoKanriNo" column="dbT5116IchijiHanteiKekkaJoho_shinseishoKanriNo" />
         <result property="kariIchijiHanteiKubun" column="dbT5116IchijiHanteiKekkaJoho_kariIchijiHanteiKubun" />
         <result property="ichijiHanteiYMD" column="dbT5116IchijiHanteiKekkaJoho_ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ichijiHanteiKekkaCode" column="dbT5116IchijiHanteiKekkaJoho_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
@@ -100,7 +99,7 @@
         <result property="chukanHyokaKomoku5gun" column="dbT5116IchijiHanteiKekkaJoho_chukanHyokaKomoku5gun" />
         <result property="chukanHyokaKomoku6gun" column="dbT5116IchijiHanteiKekkaJoho_chukanHyokaKomoku6gun" />
         <result property="chukanHyokaKomoku7gun" column="dbT5116IchijiHanteiKekkaJoho_chukanHyokaKomoku7gun" />
-        <result property="ichijiHnateiKeikokuCode" column="dbT5116IchijiHanteiKekkaJoho_ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijiHnateiKeikokuCode" column="dbT5116IchijiHanteiKekkaJoho_ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="jotaiAnteiseiCode" column="dbT5116IchijiHanteiKekkaJoho_jotaiAnteiseiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ninchishoJiritsudoIIijoNoGaizensei" column="dbT5116IchijiHanteiKekkaJoho_ninchishoJiritsudoIIijoNoGaizensei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="suiteiKyufuKubunCode" column="dbT5116IchijiHanteiKekkaJoho_suiteiKyufuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
@@ -119,11 +118,10 @@
         <result property="chert" column="dbT5116IchijiHanteiKekkaJoho_chert" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jotaizo" column="dbT5116IchijiHanteiKekkaJoho_jotaizo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5116IchijiHanteiKekkaJohoEntity">
-    SELECT
-    <include refid="allColumns_DbT5116IchijiHanteiKekkaJoho">
-         FROM
-         rg."DbT5116IchijiHanteiKekkaJoho"
-    </include>  
-</sleect>
+    <select id="getEntity" resultMap="ResultMap_DbT5116IchijiHanteiKekkaJohoEntity">
+        SELECT
+        <include refid="allColumns_DbT5116IchijiHanteiKekkaJoho"/>
+        FROM
+        rgdb."DbT5116IchijiHanteiKekkaJoho"
+    </select>
 </mapper>

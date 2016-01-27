@@ -46,7 +46,7 @@
 
 
     <!--テーブルDbT2004Gemmenの項目をDbT2004GemmenEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT2004GemmenEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT2004GemmenEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.gemmen.DbT2004GemmenEntity" autoMapping="true">
         <id property="choteiNendo" column="dbT2004Gemmen_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="dbT2004Gemmen_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="tsuchishoNo" column="dbT2004Gemmen_tsuchishoNo" />

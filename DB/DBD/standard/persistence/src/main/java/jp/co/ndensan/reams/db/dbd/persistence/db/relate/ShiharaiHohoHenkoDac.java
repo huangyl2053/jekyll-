@@ -6,15 +6,16 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.relate;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.TorokuKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4021ShiharaiHohoHenkoDac;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.KanriKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.TorokuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4021ShiharaiHohoHenkoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -90,7 +91,7 @@ public class ShiharaiHohoHenkoDac implements IModifiable<DbT4021ShiharaiHohoHenk
         List<DbT4021ShiharaiHohoHenkoEntity> 支払方法変更List = accessor.select().
                 table(DbT4021ShiharaiHohoHenko.class).
                 where(and(
-                                eq(DbT4021ShiharaiHohoHenko.kanriKubun, new RString("ニ号差止")),
+                                eq(DbT4021ShiharaiHohoHenko.kanriKubun, KanriKubun.ニ号差止.code()),
                                 eq(DbT4021ShiharaiHohoHenko.torokuKubun, TorokuKubun.二号差止登録.code()),
                                 eq(DbT4021ShiharaiHohoHenko.isDeleted, false),
                                 eq(DbT4021ShiharaiHohoHenko.hihokenshaNo, 被保険者番号))).
@@ -114,7 +115,7 @@ public class ShiharaiHohoHenkoDac implements IModifiable<DbT4021ShiharaiHohoHenk
         List<DbT4021ShiharaiHohoHenkoEntity> 支払方法変更List = accessor.select().
                 table(DbT4021ShiharaiHohoHenko.class).
                 where(and(
-                                eq(DbT4021ShiharaiHohoHenko.kanriKubun, new RString("一号償還払い化")),
+                                eq(DbT4021ShiharaiHohoHenko.kanriKubun, KanriKubun.一号償還払い化.code()),
                                 eq(DbT4021ShiharaiHohoHenko.torokuKubun, TorokuKubun.一号償還払い化登録.code()),
                                 eq(DbT4021ShiharaiHohoHenko.isDeleted, false),
                                 eq(DbT4021ShiharaiHohoHenko.hihokenshaNo, 被保険者番号))).
@@ -138,7 +139,7 @@ public class ShiharaiHohoHenkoDac implements IModifiable<DbT4021ShiharaiHohoHenk
         List<DbT4021ShiharaiHohoHenkoEntity> 支払方法変更List = accessor.select().
                 table(DbT4021ShiharaiHohoHenko.class).
                 where(and(
-                                eq(DbT4021ShiharaiHohoHenko.kanriKubun, new RString("一号給付額減額")),
+                                eq(DbT4021ShiharaiHohoHenko.kanriKubun, KanriKubun.一号給付額減額.code()),
                                 eq(DbT4021ShiharaiHohoHenko.torokuKubun, TorokuKubun.一号給付額減額登録.code()),
                                 eq(DbT4021ShiharaiHohoHenko.isDeleted, false),
                                 eq(DbT4021ShiharaiHohoHenko.hihokenshaNo, 被保険者番号))).

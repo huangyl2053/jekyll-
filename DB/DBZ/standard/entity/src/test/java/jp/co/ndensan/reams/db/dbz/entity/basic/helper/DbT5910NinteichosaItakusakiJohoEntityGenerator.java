@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
@@ -20,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class DbT5910NinteichosaItakusakiJohoEntityGenerator {
 
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("202010");
-    public static final ChosaItakusakiCode DEFAULT_認定調査委託先コード = new ChosaItakusakiCode("000001");
+    public static final RString DEFAULT_認定調査委託先コード = new RString("000001");
     public static final JigyoshaNo DEFAULT_事業者番号 = new JigyoshaNo("111111");
     public static final RString DEFAULT_事業者名称 = new RString("名称");
     public static final RString DEFAULT_事業者名称カナ = new RString("名称");
@@ -53,7 +52,6 @@ public final class DbT5910NinteichosaItakusakiJohoEntityGenerator {
         entity.setJusho(DEFAULT_住所);
         entity.setTelNo(DEFAULT_電話番号);
         entity.setFaxNo(DEFAULT_FAX番号);
-        entity.setDaihyoshaName(DEFAULT_代表者名);
         entity.setChosaItakuKubun(DEFAULT_調査委託区分);
         entity.setWaritsukeTeiin(DEFAULT_割付定員);
         entity.setWaritsukeChiku(DEFAULT_割付地区);

@@ -57,10 +57,9 @@ public enum DbT4120ShinseitodokedeJoho implements IColumnDefinition {
      */
     shinseiTodokedeshaKanaShimei(512, 0),
     /**
-     * 申請届出者続柄コード
-     * <br/>Enum（DBD：続柄コード）
+     * 申請届出者続柄
      */
-    shinseiTodokedeshaTsuzukigaraCode(2, 0),
+    shinseiTodokedeshaTsuzukigara(10, 0),
     /**
      * 申請届出代行事業者番号
      */

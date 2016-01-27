@@ -4,14 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3049ShokanJutakuKaishuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-//import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払請求住宅改修エンティティのテスト用インスタンスを作成する補助クラスです。
@@ -23,8 +22,8 @@ public final class DbT3049ShokanJutakuKaishuEntityGenerator {
     public static final RString DEFAULT_整理番号 = new RString("Data");
     public static final JigyoshaNo DEFAULT_事業者番号 = new JigyoshaNo("1");
     public static final RString DEFAULT_様式番号 = new RString("Data");
-    public static final RString DEFAULT_順次番号 = new RString("Data");
-    public static final int DEFAULT_履歴番号 = 0;
+    public static final RString DEFAULT_連番 = new RString("Data");
+    public static final RString DEFAULT_明細番号 = new RString("Data");
     public static final ServiceCode DEFAULT_サービスコード = new ServiceCode("1");
     public static final FlexibleDate DEFAULT_住宅改修着工年月日 = new FlexibleDate("19900101");
     public static final RString DEFAULT_住宅改修事業者名 = new RString("Data");
@@ -47,8 +46,8 @@ public final class DbT3049ShokanJutakuKaishuEntityGenerator {
         entity.setSeiriNo(DEFAULT_整理番号);
         entity.setJigyoshaNo(DEFAULT_事業者番号);
         entity.setYoshikiNo(DEFAULT_様式番号);
-        entity.setJunjiNo(DEFAULT_順次番号);
-        entity.setRirekiNo(DEFAULT_履歴番号);
+        entity.setMeisaiNo(DEFAULT_明細番号);
+        entity.setRenban(DEFAULT_連番);
         entity.setServiceCode(DEFAULT_サービスコード);
         entity.setJutakuKaishuChakkoYMD(DEFAULT_住宅改修着工年月日);
         entity.setJutakuKaishuJigyoshaName(DEFAULT_住宅改修事業者名);

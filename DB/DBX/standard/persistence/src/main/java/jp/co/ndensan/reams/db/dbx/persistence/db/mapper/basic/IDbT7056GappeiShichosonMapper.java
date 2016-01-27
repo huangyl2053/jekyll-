@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
  */
 public interface IDbT7056GappeiShichosonMapper {
 
-    /** {@link DbT7056GappeiShichosonEntity}を取得します。
+    /* * {@linkDbT7056GappeiShichosonEntity}を取得します。
      *
-     * @return {@link DbT7056GappeiShichosonEntity}
+     * @return {@linkDbT7056GappeiShichosonEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7056GappeiShichosonEntity getEntity();

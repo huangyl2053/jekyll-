@@ -5,25 +5,30 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3044ShokanShokujiHiyoSagakuShikyuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.*;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_サービス提供年月;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_事業者番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_整理番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_明細番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_様式番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_被保険者番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_連番;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3044ShokanShokujiHiyoSagakuShikyuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -52,13 +57,15 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDacTest extends DbcTestDacBase 
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号
+            );
             TestSupport.insert(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -68,7 +75,10 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDacTest extends DbcTestDacBase 
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号,
+                    DEFAULT_明細番号,
+                    DEFAULT_連番
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -78,7 +88,10 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDacTest extends DbcTestDacBase 
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号,
+                    DEFAULT_明細番号,
+                    DEFAULT_連番
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -88,7 +101,10 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDacTest extends DbcTestDacBase 
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号,
+                    DEFAULT_明細番号,
+                    DEFAULT_連番
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -98,7 +114,10 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDacTest extends DbcTestDacBase 
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号,
+                    DEFAULT_明細番号,
+                    DEFAULT_連番
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -108,7 +127,10 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDacTest extends DbcTestDacBase 
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号,
+                    DEFAULT_明細番号,
+                    DEFAULT_連番
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -118,7 +140,10 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDacTest extends DbcTestDacBase 
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号,
+                    DEFAULT_明細番号,
+                    DEFAULT_連番
+            );
         }
 
         @Test
@@ -128,7 +153,10 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDacTest extends DbcTestDacBase 
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号,
+                    DEFAULT_明細番号,
+                    DEFAULT_連番
+            );
             assertThat(insertedRecord, is(notNullValue()));
         }
 
@@ -139,7 +167,10 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDacTest extends DbcTestDacBase 
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号,
+                    DEFAULT_明細番号,
+                    DEFAULT_連番
+            );
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -153,13 +184,15 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDacTest extends DbcTestDacBase 
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号
+            );
             TestSupport.insert(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号
+            );
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -178,14 +211,18 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDacTest extends DbcTestDacBase 
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号
+            );
 
             assertThat(sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号), is(notNullValue()));
+                    DEFAULT_様式番号,
+                    DEFAULT_明細番号,
+                    DEFAULT_連番
+            ), is(notNullValue()));
         }
     }
 
@@ -198,7 +235,8 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDacTest extends DbcTestDacBase 
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号
+            );
         }
 
         @Test
@@ -208,7 +246,10 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDacTest extends DbcTestDacBase 
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号,
+                    DEFAULT_明細番号,
+                    DEFAULT_連番
+            );
             updateRecord.setYoshikiNo(new RString(("100")));
 
             sut.save(updateRecord);
@@ -218,7 +259,10 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDacTest extends DbcTestDacBase 
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号,
+                    DEFAULT_明細番号,
+                    DEFAULT_連番
+            );
 
             assertThat(updateRecord.getYoshikiNo(), is(updatedRecord.getYoshikiNo()));
         }
@@ -233,7 +277,8 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDacTest extends DbcTestDacBase 
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号
+            );
         }
 
         @Test
@@ -243,7 +288,10 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDacTest extends DbcTestDacBase 
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号);
+                    DEFAULT_様式番号,
+                    DEFAULT_明細番号,
+                    DEFAULT_連番
+            );
             deletedEntity.setState(EntityDataState.Deleted);
 
             sut.save(deletedEntity);
@@ -253,7 +301,10 @@ public class DbT3044ShokanShokujiHiyoSagakuShikyuDacTest extends DbcTestDacBase 
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号), is(nullValue()));
+                    DEFAULT_様式番号,
+                    DEFAULT_明細番号,
+                    DEFAULT_連番
+            ), is(nullValue()));
         }
     }
 

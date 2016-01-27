@@ -37,7 +37,7 @@ public class KoseiShichosonShishoMaster
      * @param 支所コード 支所コード
      */
     public KoseiShichosonShishoMaster(LasdecCode 市町村コード,
-                                      ShishoCode 支所コード) {
+            ShishoCode 支所コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(支所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("支所コード"));
         this.entity = new DbT7052KoseiShichosonShishoMasterEntity();
@@ -124,8 +124,7 @@ public class KoseiShichosonShishoMaster
     }
 
     /**
-     * 保持する構成市町村支所マスタを削除対象とします。<br/>
-     * {@link DbT7052KoseiShichosonShishoMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する構成市町村支所マスタを削除対象とします。<br/> {@link DbT7052KoseiShichosonShishoMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KoseiShichosonShishoMaster}
      */
@@ -204,5 +203,4 @@ public class KoseiShichosonShishoMaster
         }
         return true;
     }
-
 }

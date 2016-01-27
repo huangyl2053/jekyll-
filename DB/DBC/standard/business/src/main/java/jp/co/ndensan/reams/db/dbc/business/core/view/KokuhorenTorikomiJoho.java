@@ -19,10 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 国保連取り込み情報を管理するクラスです。
  */
-public class KokuhorenTorikomiJoho 
-extends ParentModelBase<KokuhorenTorikomiJohoIdentifier, 
-        DbV3104KokuhorenTorikomiJohoEntity, 
-        KokuhorenTorikomiJoho> implements Serializable {
+public class KokuhorenTorikomiJoho
+        extends ParentModelBase<KokuhorenTorikomiJohoIdentifier, DbV3104KokuhorenTorikomiJohoEntity, KokuhorenTorikomiJoho> implements Serializable {
 
     private final DbV3104KokuhorenTorikomiJohoEntity entity;
     private final KokuhorenTorikomiJohoIdentifier id;
@@ -135,7 +133,7 @@ extends ParentModelBase<KokuhorenTorikomiJohoIdentifier,
      * @return 再処理可能区分
      */
     public boolean is再処理可能区分() {
-        return entity.getSaiShoriKahiKubun();
+        return entity.getSaiShoriKanoKubun();
     }
 
     /**

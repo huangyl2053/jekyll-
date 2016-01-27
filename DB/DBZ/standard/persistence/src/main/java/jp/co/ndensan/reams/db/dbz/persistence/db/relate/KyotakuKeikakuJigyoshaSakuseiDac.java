@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakusei;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakusei;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -50,7 +50,7 @@ public class KyotakuKeikakuJigyoshaSakuseiDac implements IModifiable<DbT3006Kyot
     @Transaction
     public Optional<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity> selectByKey(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号) {
+            Integer 履歴番号) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
@@ -89,7 +89,7 @@ public class KyotakuKeikakuJigyoshaSakuseiDac implements IModifiable<DbT3006Kyot
     @Transaction
     public Optional<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity> select直近居宅給付計画事業者作成(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号) {
+            Integer 履歴番号) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
@@ -100,7 +100,7 @@ public class KyotakuKeikakuJigyoshaSakuseiDac implements IModifiable<DbT3006Kyot
         List<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity> 居宅給付計画事業者作成List = accessor.select().
                 table(DbT3006KyotakuKeikakuJigyoshaSakusei.class).
                 where(and(
-                                eq(DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshano, 被保険者番号),
+                                eq(DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshaNo, 被保険者番号),
                                 eq(DbT3006KyotakuKeikakuJigyoshaSakusei.taishoYM, 対象年月),
                                 eq(DbT3006KyotakuKeikakuJigyoshaSakusei.rirekiNo, 履歴番号))).
                 order(by(DbT3006KyotakuKeikakuJigyoshaSakusei.rirekiNo, Order.DESC)).

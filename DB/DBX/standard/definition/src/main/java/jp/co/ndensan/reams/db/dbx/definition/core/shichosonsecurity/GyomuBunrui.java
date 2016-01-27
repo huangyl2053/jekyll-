@@ -44,7 +44,7 @@ public enum GyomuBunrui {
      * @return 対応する業務分類
      * @throws IllegalArgumentException 指定された名前を持つ定数を持っていない場合
      */
-    public static GyomuBunrui toValue(String コード) throws IllegalArgumentException {
+    public static GyomuBunrui toValue(RString コード) throws IllegalArgumentException {
         for (GyomuBunrui gyomuBunrui : GyomuBunrui.values()) {
             if (Objects.equals(gyomuBunrui.aCode, コード)) {
                 return gyomuBunrui;

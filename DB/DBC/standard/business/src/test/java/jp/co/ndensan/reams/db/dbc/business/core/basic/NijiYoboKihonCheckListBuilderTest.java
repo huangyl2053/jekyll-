@@ -4,13 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3101NijiYoboKihonCheckListEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3101NijiYoboKihonCheckListEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3101NijiYoboKihonCheckListEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -36,7 +35,6 @@ public class NijiYoboKihonCheckListBuilderTest extends DbcTestBase {
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-//        識別コード = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード;
         被保険者番号 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
         受付年月日 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_受付年月日;
         履歴番号 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_履歴番号;
@@ -50,7 +48,6 @@ public class NijiYoboKihonCheckListBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboKihonCheckListEntity = new DbT3101NijiYoboKihonCheckListEntity();
-//            NijiYoboKihonCheckListEntity.setShikibetsuCode(識別コード);
             NijiYoboKihonCheckListEntity.setHihokenshaNo(被保険者番号);
             NijiYoboKihonCheckListEntity.setUketsukeYMD(受付年月日);
             NijiYoboKihonCheckListEntity.setRirekiNo(履歴番号);
@@ -60,12 +57,6 @@ public class NijiYoboKihonCheckListBuilderTest extends DbcTestBase {
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
-
-//        @Test
-//        public void 戻り値の識別コードは_設定した値と同じ識別コードを返す() {
-//            business = sut.set識別コード(DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード).build();
-//            assertThat(business.get識別コード(), is(DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード));
-//        }
 
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {

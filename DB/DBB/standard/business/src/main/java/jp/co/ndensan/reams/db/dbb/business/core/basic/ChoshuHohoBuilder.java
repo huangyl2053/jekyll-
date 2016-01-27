@@ -6,13 +6,12 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.choshuhoho.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ChoshuHoho}の編集を行うビルダークラスです。
@@ -432,7 +431,7 @@ public class ChoshuHohoBuilder {
      */
     public ChoshuHohoBuilder set特別徴収停止日時(YMDHMS 特別徴収停止日時) {
         requireNonNull(特別徴収停止日時, UrSystemErrorMessages.値がnull.getReplacedMessage("特別徴収停止日時"));
-        entity.setTokuchoTeishiNichiji(特別徴収停止日時);
+        entity.setTokuchoTeishiTimestamp(特別徴収停止日時);
         return this;
     }
 

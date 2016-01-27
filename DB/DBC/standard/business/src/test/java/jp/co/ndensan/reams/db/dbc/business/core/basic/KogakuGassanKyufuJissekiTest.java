@@ -4,24 +4,23 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissekiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3075KogakuGassanKyufuJissekiEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissekiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link KogakuGassanKyufuJisseki}のテストクラスです。
@@ -37,7 +36,6 @@ public class KogakuGassanKyufuJissekiTest extends DbcTestBase {
     private static HihokenshaNo 主キー名2;
     private static RString 主キー名3;
     private static RString 主キー名4;
-//    private static Decimal 主キー名5;
 
     @BeforeClass
     public static void setUpClass() {
@@ -46,7 +44,6 @@ public class KogakuGassanKyufuJissekiTest extends DbcTestBase {
         主キー名2 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_被保険者番号;
         主キー名3 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_支給申請書整理番号;
         主キー名4 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_整理番号;
-//        主キー名5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -144,11 +141,6 @@ public class KogakuGassanKyufuJissekiTest extends DbcTestBase {
         public void get整理番号は_entityが持つ整理番号を返す() {
             assertThat(sut.get整理番号(), is(KogakuGassanKyufuJissekiEntity.getSeiriNo()));
         }
-
-//        @Test
-//        public void get履歴番号は_entityが持つ履歴番号を返す() {
-//            assertThat(sut.get履歴番号(), is(KogakuGassanKyufuJissekiEntity.getRirekiNo()));
-//        }
 
         @Test
         public void get自己負担額証明書整理番号は_entityが持つ自己負担額証明書整理番号を返す() {

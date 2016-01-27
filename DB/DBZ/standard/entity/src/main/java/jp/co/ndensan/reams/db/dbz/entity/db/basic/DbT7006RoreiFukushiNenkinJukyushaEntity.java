@@ -1,23 +1,25 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 
 /**
  * 老齢福祉年金受給者テーブルのエンティティクラスです。
  * <br/> 老齢福祉年金受給者	老齢福祉年金受給者を管理する
  */
 public class DbT7006RoreiFukushiNenkinJukyushaEntity extends DbTableEntityBase<DbT7006RoreiFukushiNenkinJukyushaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7006RoreiFukushiNenkinJukyusha");
@@ -34,7 +36,7 @@ public class DbT7006RoreiFukushiNenkinJukyushaEntity extends DbTableEntityBase<D
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
     private FlexibleDate jukyuKaishiYMD;
-    private FlexibleDate jukyuShuryoYMD;
+    private FlexibleDate jukyuHaishiYMD;
     private HihokenshaNo hihokenshaNo;
 
     /**
@@ -100,7 +102,7 @@ public class DbT7006RoreiFukushiNenkinJukyushaEntity extends DbTableEntityBase<D
      *
      * @param shikibetsuCode 識別コード
      */
-    public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
+    public void setShikibetsuCode(@Nonnull ShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
     }
 
@@ -122,30 +124,31 @@ public class DbT7006RoreiFukushiNenkinJukyushaEntity extends DbTableEntityBase<D
      *
      * @param jukyuKaishiYMD 受給開始年月日
      */
-    public void setJukyuKaishiYMD(FlexibleDate jukyuKaishiYMD) {
+    public void setJukyuKaishiYMD(@Nonnull FlexibleDate jukyuKaishiYMD) {
         this.jukyuKaishiYMD = jukyuKaishiYMD;
     }
 
     /**
-     * 受給終了年月日のgetメソッドです。
+     * 受給廃止年月日のgetメソッドです。
      * <br/>
      * <br/>受給終了年月日
      *
-     * @return 受給終了年月日
+     * @return 受給廃止年月日
      */
-    public FlexibleDate getJukyuShuryoYMD() {
-        return jukyuShuryoYMD;
+    @CheckForNull
+    public FlexibleDate getJukyuHaishiYMD() {
+        return jukyuHaishiYMD;
     }
 
     /**
-     * 受給終了年月日のsetメソッドです。
+     * 受給廃止年月日のsetメソッドです。
      * <br/>
      * <br/>受給終了年月日
      *
-     * @param jukyuShuryoYMD 受給終了年月日
+     * @param jukyuHaishiYMD 受給廃止年月日
      */
-    public void setJukyuShuryoYMD(FlexibleDate jukyuShuryoYMD) {
-        this.jukyuShuryoYMD = jukyuShuryoYMD;
+    public void setJukyuHaishiYMD(FlexibleDate jukyuHaishiYMD) {
+        this.jukyuHaishiYMD = jukyuHaishiYMD;
     }
 
     /**
@@ -155,6 +158,7 @@ public class DbT7006RoreiFukushiNenkinJukyushaEntity extends DbTableEntityBase<D
      *
      * @return 被保険者番号
      */
+    @CheckForNull
     public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
@@ -174,7 +178,7 @@ public class DbT7006RoreiFukushiNenkinJukyushaEntity extends DbTableEntityBase<D
      * このエンティティの主キーが他の{@literal DbT7006RoreiFukushiNenkinJukyushaEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7006RoreiFukushiNenkinJukyushaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -198,7 +202,7 @@ public class DbT7006RoreiFukushiNenkinJukyushaEntity extends DbTableEntityBase<D
     public void shallowCopy(DbT7006RoreiFukushiNenkinJukyushaEntity entity) {
         this.shikibetsuCode = entity.shikibetsuCode;
         this.jukyuKaishiYMD = entity.jukyuKaishiYMD;
-        this.jukyuShuryoYMD = entity.jukyuShuryoYMD;
+        this.jukyuHaishiYMD = entity.jukyuHaishiYMD;
         this.hihokenshaNo = entity.hihokenshaNo;
     }
 
@@ -209,7 +213,7 @@ public class DbT7006RoreiFukushiNenkinJukyushaEntity extends DbTableEntityBase<D
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shikibetsuCode, jukyuKaishiYMD, jukyuShuryoYMD, hihokenshaNo);
+        return super.toMd5(shikibetsuCode, jukyuKaishiYMD, jukyuHaishiYMD, hihokenshaNo);
     }
 
 // </editor-fold>

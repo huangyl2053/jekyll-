@@ -5,20 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import java.io.Serializable;
-import java.util.Objects;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.IShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import java.util.Objects;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 主治医医療機関情報のビジネスクラスです。
@@ -50,10 +48,10 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
      *
      * @return DbT5911ShujiiIryoKikanJohoEntity
      */
-//    @Override
-//    public DbT5911ShujiiIryoKikanJohoEntity getEntity() {
-//        return entity;
-//    }
+    @Override
+    public DbT5911ShujiiIryoKikanJohoEntity getEntity() {
+        return entity;
+    }
 
     /**
      * DbT5911ShujiiIryoKikanJohoEntityを設定します。
@@ -160,8 +158,18 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
      * @return 代表者名
      */
     @Override
-    public AtenaMeisho get代表者名() {
+    public RString get代表者名() {
         return entity.getDaihyoshaName();
+    }
+
+    /**
+     * 代表者名カナを返します。
+     *
+     * @return 代表者名カナ
+     */
+    @Override
+    public RString get代表者名カナ() {
+        return entity.getDaihyoshaNameKana();
     }
 
     /**
@@ -218,11 +226,6 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
      */
     public static Builder newBuilder() {
         return new Builder();
-    }
-
-    @Override
-    public IShujiiIryoKikanJohoEntity getEntity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -399,9 +402,22 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          * @return builder
          */
         @Override
-        public Builder setDaihyoshaName(AtenaMeisho daihyoshaName) {
+        public Builder setDaihyoshaName(RString daihyoshaName) {
             Objects.requireNonNull(daihyoshaName);
             this.entity.setDaihyoshaName(daihyoshaName);
+            return this;
+        }
+
+        /**
+         * daihyoshaNameKanaを設定します。
+         *
+         * @param daihyoshaNameKana 代表者名カナ
+         * @return builder
+         */
+        @Override
+        public Builder setDaihyoshaNameKana(RString daihyoshaNameKana) {
+            Objects.requireNonNull(daihyoshaNameKana);
+            this.entity.setDaihyoshaName(daihyoshaNameKana);
             return this;
         }
 

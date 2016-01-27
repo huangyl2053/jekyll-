@@ -15,10 +15,10 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.NijiYoboKihonCheckList;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.NijiYoboNiniCheckList;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.NijiYoboNiniCheckListBuilder;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.NijiYoboKihonCheckListMapperParameter;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3101NijiYoboKihonCheckListEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3101NijiYoboKihonCheckListEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3102NijiYoboNiniCheckListEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3103NijiYoboCheckListHanteiKekkaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3101NijiYoboKihonCheckListEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.NijiYoboKihonCheckListEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3101NijiYoboKihonCheckListDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.INijiYoboKihonCheckListMapper;
@@ -26,35 +26,22 @@ import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.NijiYoboCheckListHanteiKekkaManager;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.NijiYoboNiniCheckListManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static org.hamcrest.CoreMatchers.is;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
 
 /**
  * {link NijiYoboKihonCheckListManager}のテストクラスです。
@@ -115,10 +102,10 @@ public class NijiYoboKihonCheckListManagerTest {
 
             when(provider.create(any(Class.class))).thenReturn(mapper);
 
-//            ShikibetsuCode 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード;
-            HihokenshaNo 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
+            HihokenshaNo 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
+            FlexibleDate 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_受付年月日;
 
-            NijiYoboKihonCheckListMapperParameter 二次予防基本チェックリスト検索条件 = NijiYoboKihonCheckListMapperParameter.createSelectByKeyParam(主キー2);
+            NijiYoboKihonCheckListMapperParameter 二次予防基本チェックリスト検索条件 = NijiYoboKihonCheckListMapperParameter.createSelectByKeyParam(主キー1, 主キー2);
             NijiYoboKihonCheckList result = sut.get二次予防基本チェックリスト(二次予防基本チェックリスト検索条件);
 
             assertThat(result, is(nullValue()));
@@ -132,12 +119,12 @@ public class NijiYoboKihonCheckListManagerTest {
 
             when(provider.create(any(Class.class))).thenReturn(mapper);
 
-//            ShikibetsuCode 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード;
-            HihokenshaNo 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboKihonCheckListMapperParameter 二次予防基本チェックリスト検索条件 = NijiYoboKihonCheckListMapperParameter.createSelectByKeyParam(主キー2);
+            HihokenshaNo 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
+            FlexibleDate 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_受付年月日;
+            NijiYoboKihonCheckListMapperParameter 二次予防基本チェックリスト検索条件 = NijiYoboKihonCheckListMapperParameter.createSelectByKeyParam(主キー1, 主キー2);
             NijiYoboKihonCheckList result = sut.get二次予防基本チェックリスト(二次予防基本チェックリスト検索条件);
 
-            assertThat(result.get被保険者番号().value(), is(DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get受付年月日(), is(DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_受付年月日));
         }
     }
 
@@ -155,9 +142,8 @@ public class NijiYoboKihonCheckListManagerTest {
 
             when(provider.create(any(Class.class))).thenReturn(mapper);
 
-//            ShikibetsuCode 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード;
-            HihokenshaNo 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboKihonCheckListMapperParameter 二次予防基本チェックリスト検索条件 = NijiYoboKihonCheckListMapperParameter.createSelectListParam(主キー2);
+            HihokenshaNo 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
+            NijiYoboKihonCheckListMapperParameter 二次予防基本チェックリスト検索条件 = NijiYoboKihonCheckListMapperParameter.createSelectListParam(主キー1);
             List<NijiYoboKihonCheckList> result = sut.get二次予防基本チェックリストリストBy主キー1(二次予防基本チェックリスト検索条件);
 
             assertThat(result.isEmpty(), is(true));
@@ -173,13 +159,12 @@ public class NijiYoboKihonCheckListManagerTest {
 
             when(provider.create(any(Class.class))).thenReturn(mapper);
 
-//            ShikibetsuCode 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード;
-            HihokenshaNo 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboKihonCheckListMapperParameter 二次予防基本チェックリスト検索条件 = NijiYoboKihonCheckListMapperParameter.createSelectListParam(主キー2);
+            HihokenshaNo 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
+            NijiYoboKihonCheckListMapperParameter 二次予防基本チェックリスト検索条件 = NijiYoboKihonCheckListMapperParameter.createSelectListParam(主キー1);
             List<NijiYoboKihonCheckList> result = sut.get二次予防基本チェックリストリストBy主キー1(二次予防基本チェックリスト検索条件);
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get被保険者番号().value(), is(DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get受付年月日(), is(DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_受付年月日));
         }
     }
 
@@ -191,9 +176,9 @@ public class NijiYoboKihonCheckListManagerTest {
             when(dac.save(any(DbT3101NijiYoboKihonCheckListEntity.class))).thenReturn(1);
             when(二次予防任意チェックリストManager.save二次予防任意チェックリスト(any(NijiYoboNiniCheckList.class))).thenReturn(true);
             when(二次予防チェックリスト判定結果Manager.save二次予防チェックリスト判定結果(any(NijiYoboCheckListHanteiKekka.class))).thenReturn(true);
-//            ShikibetsuCode 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード;
-            HihokenshaNo 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboKihonCheckList 二次予防基本チェックリスト = TestSupport.createNijiYoboKihonCheckList(主キー2);
+            HihokenshaNo 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
+            FlexibleDate 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_受付年月日;
+            NijiYoboKihonCheckList 二次予防基本チェックリスト = TestSupport.createNijiYoboKihonCheckList(主キー1, 主キー2);
 
             assertThat(sut.save(二次予防基本チェックリスト), is(true));
         }
@@ -205,9 +190,9 @@ public class NijiYoboKihonCheckListManagerTest {
             when(dac.save(any(DbT3101NijiYoboKihonCheckListEntity.class))).thenReturn(1);
             when(二次予防任意チェックリストManager.save二次予防任意チェックリスト(any(NijiYoboNiniCheckList.class))).thenReturn(true);
             when(二次予防チェックリスト判定結果Manager.save二次予防チェックリスト判定結果(any(NijiYoboCheckListHanteiKekka.class))).thenReturn(true);
-//            ShikibetsuCode 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード;
-            HihokenshaNo 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboKihonCheckList 二次予防基本チェックリスト = TestSupport.createNijiYoboKihonCheckList(主キー2);
+            HihokenshaNo 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
+            FlexibleDate 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_受付年月日;
+            NijiYoboKihonCheckList 二次予防基本チェックリスト = TestSupport.createNijiYoboKihonCheckList(主キー1, 主キー2);
 
             assertThat(sut.save(二次予防基本チェックリスト), is(false));
         }
@@ -219,9 +204,9 @@ public class NijiYoboKihonCheckListManagerTest {
             when(二次予防任意チェックリストManager.save二次予防任意チェックリスト(any(NijiYoboNiniCheckList.class))).thenReturn(true);
             when(二次予防チェックリスト判定結果Manager.save二次予防チェックリスト判定結果(any(NijiYoboCheckListHanteiKekka.class))).thenReturn(true);
 
-//            ShikibetsuCode 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード;
-            HihokenshaNo 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboKihonCheckList 二次予防基本チェックリスト = TestSupport.createNijiYoboKihonCheckList(主キー2);
+            HihokenshaNo 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
+            FlexibleDate 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_受付年月日;
+            NijiYoboKihonCheckList 二次予防基本チェックリスト = TestSupport.createNijiYoboKihonCheckList(主キー1, 主キー2);
             二次予防基本チェックリスト = TestSupport.initializeNijiYoboKihonCheckList(二次予防基本チェックリスト);
             二次予防基本チェックリスト = TestSupport.modifiedNijiYoboKihonCheckList(二次予防基本チェックリスト);
 
@@ -236,9 +221,9 @@ public class NijiYoboKihonCheckListManagerTest {
             when(二次予防任意チェックリストManager.save二次予防任意チェックリスト(any(NijiYoboNiniCheckList.class))).thenReturn(true);
             when(二次予防チェックリスト判定結果Manager.save二次予防チェックリスト判定結果(any(NijiYoboCheckListHanteiKekka.class))).thenReturn(true);
 
-//            ShikibetsuCode 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード;
-            HihokenshaNo 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboKihonCheckList 二次予防基本チェックリスト = TestSupport.createNijiYoboKihonCheckList(主キー2);
+            HihokenshaNo 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
+            FlexibleDate 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_受付年月日;
+            NijiYoboKihonCheckList 二次予防基本チェックリスト = TestSupport.createNijiYoboKihonCheckList(主キー1, 主キー2);
             二次予防基本チェックリスト = TestSupport.initializeNijiYoboKihonCheckList(二次予防基本チェックリスト);
             二次予防基本チェックリスト = TestSupport.modifiedNijiYoboKihonCheckList(二次予防基本チェックリスト);
 
@@ -252,9 +237,9 @@ public class NijiYoboKihonCheckListManagerTest {
             when(二次予防任意チェックリストManager.save二次予防任意チェックリスト(any(NijiYoboNiniCheckList.class))).thenReturn(true);
             when(二次予防チェックリスト判定結果Manager.save二次予防チェックリスト判定結果(any(NijiYoboCheckListHanteiKekka.class))).thenReturn(true);
 
-//            ShikibetsuCode 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード;
-            HihokenshaNo 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboKihonCheckList 二次予防基本チェックリスト = TestSupport.createNijiYoboKihonCheckList(主キー2);
+            HihokenshaNo 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
+            FlexibleDate 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_受付年月日;
+            NijiYoboKihonCheckList 二次予防基本チェックリスト = TestSupport.createNijiYoboKihonCheckList(主キー1, 主キー2);
             二次予防基本チェックリスト = TestSupport.initializeNijiYoboKihonCheckList(二次予防基本チェックリスト);
             二次予防基本チェックリスト = 二次予防基本チェックリスト.deleted();
 
@@ -269,9 +254,9 @@ public class NijiYoboKihonCheckListManagerTest {
             when(二次予防任意チェックリストManager.save二次予防任意チェックリスト(any(NijiYoboNiniCheckList.class))).thenReturn(true);
             when(二次予防チェックリスト判定結果Manager.save二次予防チェックリスト判定結果(any(NijiYoboCheckListHanteiKekka.class))).thenReturn(true);
 
-//            ShikibetsuCode 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード;
-            HihokenshaNo 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboKihonCheckList 二次予防基本チェックリスト = TestSupport.createNijiYoboKihonCheckList(主キー2);
+            HihokenshaNo 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
+            FlexibleDate 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_受付年月日;
+            NijiYoboKihonCheckList 二次予防基本チェックリスト = TestSupport.createNijiYoboKihonCheckList(主キー1, 主キー2);
             二次予防基本チェックリスト = TestSupport.initializeNijiYoboKihonCheckList(二次予防基本チェックリスト);
             二次予防基本チェックリスト = 二次予防基本チェックリスト.deleted();
 
@@ -286,9 +271,9 @@ public class NijiYoboKihonCheckListManagerTest {
             when(二次予防任意チェックリストManager.save二次予防任意チェックリスト(any(NijiYoboNiniCheckList.class))).thenReturn(true);
             when(二次予防チェックリスト判定結果Manager.save二次予防チェックリスト判定結果(any(NijiYoboCheckListHanteiKekka.class))).thenReturn(true);
 
-//            ShikibetsuCode 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード;
-            HihokenshaNo 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboKihonCheckList 二次予防基本チェックリスト = TestSupport.createNijiYoboKihonCheckList(主キー2);
+            HihokenshaNo 主キー1 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_被保険者番号;
+            FlexibleDate 主キー2 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_受付年月日;
+            NijiYoboKihonCheckList 二次予防基本チェックリスト = TestSupport.createNijiYoboKihonCheckList(主キー1, 主キー2);
             二次予防基本チェックリスト = TestSupport.initializeNijiYoboKihonCheckList(二次予防基本チェックリスト);
 
             assertThat(sut.save(二次予防基本チェックリスト), is(false));
@@ -297,26 +282,24 @@ public class NijiYoboKihonCheckListManagerTest {
 
     private static class TestSupport {
 
-        public static NijiYoboKihonCheckList createNijiYoboKihonCheckList(HihokenshaNo 主キー2) {
-            NijiYoboKihonCheckList 二次予防基本チェックリスト = new NijiYoboKihonCheckList(主キー2, FlexibleDate.MAX, 0);
+        public static NijiYoboKihonCheckList createNijiYoboKihonCheckList(HihokenshaNo 主キー1, FlexibleDate 主キー2) {
+            NijiYoboKihonCheckList 二次予防基本チェックリスト = new NijiYoboKihonCheckList(主キー1, 主キー2, 0);
             return 二次予防基本チェックリスト.createBuilderForEdit()
                     // 二次予防任意チェックリスト
-                    .setNijiYoboNiniCheckList(createNijiYoboNiniCheckList(主キー2))
+                    .setNijiYoboNiniCheckList(createNijiYoboNiniCheckList(主キー1, 主キー2, 1, 1))
                     // 二次予防チェックリスト判定結果
-                    .setNijiYoboCheckListHanteiKekka(createNijiYoboCheckListHanteiKekka(主キー2))
+                    .setNijiYoboCheckListHanteiKekka(createNijiYoboCheckListHanteiKekka(主キー1, 主キー2, 1))
                     .build();
         }
 
 // 二次予防任意チェックリスト
-        private static NijiYoboNiniCheckList createNijiYoboNiniCheckList(HihokenshaNo 主キー2) {
-            return new NijiYoboNiniCheckList(
-                    主キー2, FlexibleDate.MAX, 0, 0);
+        private static NijiYoboNiniCheckList createNijiYoboNiniCheckList(HihokenshaNo 主キー1, FlexibleDate 主キー2, int 主キー3, int 主キー4) {
+            return new NijiYoboNiniCheckList(主キー1, 主キー2, 主キー3, 主キー4);
         }
 // 二次予防チェックリスト判定結果
 
-        private static NijiYoboCheckListHanteiKekka createNijiYoboCheckListHanteiKekka(HihokenshaNo 主キー2) {
-            return new NijiYoboCheckListHanteiKekka(
-                    主キー2, FlexibleDate.MAX, 0);
+        private static NijiYoboCheckListHanteiKekka createNijiYoboCheckListHanteiKekka(HihokenshaNo 主キー1, FlexibleDate 主キー2, int 主キー3) {
+            return new NijiYoboCheckListHanteiKekka(主キー1, 主キー2, 主キー3);
         }
 
         public static NijiYoboKihonCheckList initializeNijiYoboKihonCheckList(NijiYoboKihonCheckList 二次予防基本チェックリスト) {

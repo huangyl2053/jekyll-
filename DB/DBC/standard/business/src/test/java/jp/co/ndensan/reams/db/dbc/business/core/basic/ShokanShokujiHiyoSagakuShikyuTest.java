@@ -4,25 +4,24 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3044ShokanShokujiHiyoSagakuShikyuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3044ShokanShokujiHiyoSagakuShikyuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link ShokanShokujiHiyoSagakuShikyu}のテストクラスです。
@@ -39,7 +38,8 @@ public class ShokanShokujiHiyoSagakuShikyuTest extends DbcTestBase {
     private static RString 主キー名3;
     private static JigyoshaNo 主キー名4;
     private static RString 主キー名5;
-//    private static Decimal 主キー名6;
+    private static RString 主キー名6;
+    private static RString 主キー名7;
 
     @BeforeClass
     public static void setUpClass() {
@@ -49,7 +49,8 @@ public class ShokanShokujiHiyoSagakuShikyuTest extends DbcTestBase {
         主キー名3 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_整理番号;
         主キー名4 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_事業者番号;
         主キー名5 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_様式番号;
-//        主キー名6 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_履歴番号;
+        主キー名6 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_明細番号;
+        主キー名7 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_連番;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -66,24 +67,24 @@ public class ShokanShokujiHiyoSagakuShikyuTest extends DbcTestBase {
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShokanShokujiHiyoSagakuShikyu(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5);
+            sut = new ShokanShokujiHiyoSagakuShikyu(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShokanShokujiHiyoSagakuShikyu(主キー名1, null, 主キー名3, 主キー名4, 主キー名5);
+            sut = new ShokanShokujiHiyoSagakuShikyu(主キー名1, null, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
         }
 
         @Test
         public void 指定したキーが保持するDbT3044ShokanShokujiHiyoSagakuShikyuEntityにセットされている() {
-            sut = new ShokanShokujiHiyoSagakuShikyu(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5);
+            sut = new ShokanShokujiHiyoSagakuShikyu(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
             assertThat(sut.get被保険者番号(), is(主キー名1));
             assertThat(sut.getサービス提供年月(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するShokanShokujiHiyoSagakuShikyuIdentifierにセットされている() {
-            sut = new ShokanShokujiHiyoSagakuShikyu(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5);
+            sut = new ShokanShokujiHiyoSagakuShikyu(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
             assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
             assertThat(sut.identifier().getサービス提供年月(), is(主キー名2));
         }
@@ -153,10 +154,15 @@ public class ShokanShokujiHiyoSagakuShikyuTest extends DbcTestBase {
             assertThat(sut.get様式番号(), is(ShokanShokujiHiyoSagakuShikyuEntity.getYoshikiNo()));
         }
 
-//        @Test
-//        public void get履歴番号は_entityが持つ履歴番号を返す() {
-//            assertThat(sut.get履歴番号(), is(ShokanShokujiHiyoSagakuShikyuEntity.getRirekiNo()));
-//        }
+        @Test
+        public void get明細番号は_entityが持つ明細番号を返す() {
+            assertThat(sut.get明細番号(), is(ShokanShokujiHiyoSagakuShikyuEntity.getMeisaiNo()));
+        }
+
+        @Test
+        public void get連番は_entityが持つ連番を返す() {
+            assertThat(sut.get連番(), is(ShokanShokujiHiyoSagakuShikyuEntity.getRenban()));
+        }
 
         @Test
         public void get差額金額は_entityが持つ差額金額を返す() {

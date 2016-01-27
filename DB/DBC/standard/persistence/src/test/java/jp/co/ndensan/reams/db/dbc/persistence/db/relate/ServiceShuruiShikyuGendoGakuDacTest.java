@@ -247,7 +247,7 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
             DbT7111ServiceShuruiShikyuGendoGakuEntity entity = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.createDbT7111ServiceShuruiShikyuGendoGakuEntity();
             entity.setServiceShuruiCode(サービス種類コード);
             entity.setYoKaigoJotaiKubun(要介護状態区分.getCode());
-            entity.setTekiyoKaishuYM(適用開始年月);
+            entity.setTekiyoKaishiYM(適用開始年月);
             entity.setRirekiNo(処理日時);
 //            サービス種類支給限度額Dac.insert(entity);
         }

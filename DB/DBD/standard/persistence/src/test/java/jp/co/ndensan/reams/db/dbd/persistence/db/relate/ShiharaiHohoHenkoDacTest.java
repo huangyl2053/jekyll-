@@ -4,24 +4,23 @@
  */
 package jp.co.ndensan.reams.db.dbd.persistence.db.relate;
 
-import jp.co.ndensan.reams.db.dbd.persistence.db.relate.ShiharaiHohoHenkoDac;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.TorokuKubun;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntityGenerator;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4021ShiharaiHohoHenkoDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
-//import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.KanriKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.TorokuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4021ShiharaiHohoHenkoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -45,11 +44,11 @@ public class ShiharaiHohoHenkoDacTest {
     private static final int 履歴番号 = 1;
 //    private static final YMDHMS 履歴番号 = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_処理日時;
 
-    private static final RString _2号差止管理区分 = new RString("ニ号差止");
+    private static final KanriKubun _2号差止管理区分 = KanriKubun.ニ号差止;
     private static final TorokuKubun _2号差止登録区分 = TorokuKubun.二号差止登録;
-    private static final RString _1号償還払化管理区分 = new RString("一号償還払い化");
+    private static final KanriKubun _1号償還払化管理区分 = KanriKubun.一号償還払い化;
     private static final TorokuKubun _1号償還払化登録区分 = TorokuKubun.一号償還払い化登録;
-    private static final RString _1号減額管理区分 = new RString("一号給付額減額");
+    private static final KanriKubun _1号減額管理区分 = KanriKubun.一号給付額減額;
     private static final TorokuKubun _1号減額登録区分 = TorokuKubun.一号給付額減額登録;
 
     @BeforeClass
@@ -125,7 +124,7 @@ public class ShiharaiHohoHenkoDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_台帳モデルリストを返す() {
-            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, _2号差止管理区分, _2号差止登録区分, 履歴番号);
+            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, _2号差止管理区分.code(), _2号差止登録区分, 履歴番号);
             IItemList<DbT4021ShiharaiHohoHenkoEntity> modelList = sut.select2号差止履歴(被保険者番号1);
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
@@ -148,7 +147,7 @@ public class ShiharaiHohoHenkoDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_台帳モデルリストを返す() {
-            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, _1号償還払化管理区分, _1号償還払化登録区分, 履歴番号);
+            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, _1号償還払化管理区分.code(), _1号償還払化登録区分, 履歴番号);
             IItemList<DbT4021ShiharaiHohoHenkoEntity> modelList = sut.select1号償還払化履歴(被保険者番号1);
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
@@ -171,7 +170,7 @@ public class ShiharaiHohoHenkoDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_台帳モデルリストを返す() {
-            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, _1号減額管理区分, _1号減額登録区分, 履歴番号);
+            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, _1号減額管理区分.code(), _1号減額登録区分, 履歴番号);
             IItemList<DbT4021ShiharaiHohoHenkoEntity> modelList = sut.select1号減額履歴(被保険者番号1);
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。

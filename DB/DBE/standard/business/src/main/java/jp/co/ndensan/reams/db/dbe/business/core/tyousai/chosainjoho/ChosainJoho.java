@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho;
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
@@ -19,12 +18,15 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 調査員情報を管理するクラスです。
  */
 public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913ChosainJohoEntity, ChosainJoho> implements Serializable {
+
+    private static final long serialVersionUID = 1471570426779306781L;
 
     private final DbT5913ChosainJohoEntity entity;
     private final ChosainJohoIdentifier id;
@@ -45,8 +47,8 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
         requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
         this.entity = new DbT5913ChosainJohoEntity();
         this.entity.setShichosonCode(市町村コード);
-        this.entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
-        this.entity.setNinteiChosainCode(認定調査員コード);
+        this.entity.setNinteiChosaItakusakiCode(認定調査委託先コード.getColumnValue());
+        this.entity.setNinteiChosainCode(認定調査員コード.getColumnValue());
         this.id = new ChosainJohoIdentifier(
                 市町村コード,
                 認定調査委託先コード,
@@ -64,8 +66,8 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員情報"));
         this.id = new ChosainJohoIdentifier(
                 entity.getShichosonCode(),
-                entity.getNinteiChosaItakusakiCode(),
-                entity.getNinteiChosainCode());
+                new ChosaItakusakiCode(entity.getNinteiChosaItakusakiCode()),
+                new ChosainCode(entity.getNinteiChosainCode()));
     }
 
     /**
@@ -96,7 +98,7 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
      *
      * @return 認定調査委託先コード
      */
-    public ChosaItakusakiCode get認定調査委託先コード() {
+    public RString get認定調査委託先コード() {
         return entity.getNinteiChosaItakusakiCode();
     }
 
@@ -105,7 +107,7 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
      *
      * @return 認定調査員コード
      */
-    public ChosainCode get認定調査員コード() {
+    public RString get認定調査員コード() {
         return entity.getNinteiChosainCode();
     }
 
@@ -262,7 +264,6 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ChosainJoho(deletedEntity, id);
@@ -285,6 +286,7 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
 
     private static final class _SerializationProxy implements Serializable {
 
+        private static final long serialVersionUID = 1471570426779306781L;
         private final DbT5913ChosainJohoEntity entity;
         private final ChosainJohoIdentifier id;
 
@@ -311,7 +313,7 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -324,10 +326,7 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
             return false;
         }
         final ChosainJoho other = (ChosainJoho) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, other.id);
     }
 
 }

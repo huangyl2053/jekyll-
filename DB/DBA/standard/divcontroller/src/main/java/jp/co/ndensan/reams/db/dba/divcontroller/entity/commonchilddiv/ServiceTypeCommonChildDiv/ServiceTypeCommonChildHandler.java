@@ -41,7 +41,7 @@ public class ServiceTypeCommonChildHandler {
      */
     public void initialize(List<KaigoServiceShurui> list, KaigoServiceShuruiCode サービス種類コード) {
 
-        List<dgServiceType_Row> dataList = new ArrayList();
+        List<dgServiceType_Row> dataList = new ArrayList<>();
         for (KaigoServiceShurui result : list) {
             dgServiceType_Row row = new dgServiceType_Row();
             row.setTxtServiceShuruiCode(result.getサービス種類コード().getColumnValue());

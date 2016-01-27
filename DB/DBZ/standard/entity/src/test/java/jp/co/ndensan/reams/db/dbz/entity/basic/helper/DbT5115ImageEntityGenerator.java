@@ -28,8 +28,6 @@ public final class DbT5115ImageEntityGenerator {
     public static DbT5115ImageEntity createDbT5115ImageEntity() {
         DbT5115ImageEntity entity = new DbT5115ImageEntity();
         entity.setShinseishoKanriNo(DEFAULT_申請書管理番号);
-        entity.setTorikomiPageNo(DEFAULT_取込ページ番号);
-        entity.setGenponMaskKubun(DEFAULT_原本マスク分);
         entity.setImageSharedFileId(DEFAULT_イメージ共有ファイルID);
         return entity;
     }

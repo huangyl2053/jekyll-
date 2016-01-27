@@ -53,7 +53,7 @@ public class ServiceCodeCommonChildDivHandler {
      * @param list
      */
     public void initialize(List<KaigoServiceNaiyou> list) {
-        List<dgCodeIchiran_Row> dataList = new ArrayList();
+        List<dgCodeIchiran_Row> dataList = new ArrayList<>();
         for (KaigoServiceNaiyou serviceCode : list) {
             dgCodeIchiran_Row row = new dgCodeIchiran_Row();
             RStringBuilder sb = new RStringBuilder();

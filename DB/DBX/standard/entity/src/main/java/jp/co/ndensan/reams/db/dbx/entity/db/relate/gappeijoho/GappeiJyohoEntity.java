@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @lombok.Getter
 @lombok.Setter
 @lombok.AllArgsConstructor
-public class GappeiJyohoEntity implements IDbAccessable {
+public final class GappeiJyohoEntity implements IDbAccessable {
 
     private RString chiikiNo;
     private RString gappeiShurui;

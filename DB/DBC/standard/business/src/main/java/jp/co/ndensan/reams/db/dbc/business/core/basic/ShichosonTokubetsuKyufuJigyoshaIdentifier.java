@@ -19,7 +19,7 @@ public class ShichosonTokubetsuKyufuJigyoshaIdentifier implements Serializable {
 
     private final JigyoshaNo 市町村特別給付用事業者番号;
     private final ServiceCode 市町村特別給付用サービスコード;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
 
     /**
      * コンストラクタです。
@@ -30,7 +30,7 @@ public class ShichosonTokubetsuKyufuJigyoshaIdentifier implements Serializable {
      */
     public ShichosonTokubetsuKyufuJigyoshaIdentifier(JigyoshaNo 市町村特別給付用事業者番号,
             ServiceCode 市町村特別給付用サービスコード,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         this.市町村特別給付用事業者番号 = 市町村特別給付用事業者番号;
         this.市町村特別給付用サービスコード = 市町村特別給付用サービスコード;
         this.履歴番号 = 履歴番号;

@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.message;
 
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
  * DBBのインフォメーションメッセージ定義列挙型です。
@@ -17,7 +17,10 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
  */
 public enum DbbInformationMessages implements IMessageGettable {
 
-    比較対象データなし(1, "比較対象のデータがありません。");
+    比較対象データなし(1, "比較対象のデータがありません。"),
+    期間内異動なし(2, "期間内に異動はありませんでした。"),
+    確定対象賦課なし(3, "確定処理の対象となる賦課がありません。確定処理は不要です。"),
+    更正前と状態変更なし(4, "更正前の状態と変わりません。");
 
     private final Message message;
 
@@ -28,7 +31,7 @@ public enum DbbInformationMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbbInformationMessages(int no, String message) {
-        this.message = new InformationMessage(toCode("I", no), message);
+        this.message = new InformationMessage(toCode("DBBI", no), message);
     }
 
     @Override

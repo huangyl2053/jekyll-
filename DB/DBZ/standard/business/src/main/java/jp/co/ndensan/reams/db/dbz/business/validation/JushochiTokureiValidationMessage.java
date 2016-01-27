@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.validation;
 
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -22,12 +21,12 @@ public enum JushochiTokureiValidationMessage implements IValidationMessage {
      * 住所地特例適用日が、最新履歴の取得日・変更日・住所地特例解除日より前します。
      */
     //TODO n8178 欲しいエラーがDBAのため見れない（DBAE00002）。対応を相談する。
-    住所地特例適用日が_最新履歴の取得日_変更日_住所地特例解除日より前(DbzErrorMessages.不正, "住所地特例適用日"),
+    住所地特例適用日が_最新履歴の取得日_変更日_住所地特例解除日より前(UrErrorMessages.不正, "住所地特例適用日"),
     /**
      * 住所地特例解除日が、最新履歴の取得日・変更日・住所地特例適用日より前します。
      */
     //TODO n8178 欲しいエラーがDBAのため見れない（DBAE00002）。対応を相談する。
-    住所地特例解除日が_最新履歴の取得日_変更日_住所地特例適用日より前(DbzErrorMessages.不正, "住所地特例解除日"),
+    住所地特例解除日が_最新履歴の取得日_変更日_住所地特例適用日より前(UrErrorMessages.不正, "住所地特例解除日"),
     /**
      * 日付の前後関係が逆転（適用日が解除日より前）します。
      */
@@ -51,19 +50,19 @@ public enum JushochiTokureiValidationMessage implements IValidationMessage {
     /**
      * 住所地特例期間に重複があるします。
      */
-    住所地特例期間に重複がある(DbzErrorMessages.期間が重複),
+    住所地特例期間に重複がある(UrErrorMessages.期間が重複),
     /**
      * 住所地特例期間と他市町村住所地特例期間が重複する履歴があるします。
      */
-    住所地特例期間と他市町村住所地特例期間が重複する履歴がある(DbzErrorMessages.期間が重複),
+    住所地特例期間と他市町村住所地特例期間が重複する履歴がある(UrErrorMessages.期間が重複),
     /**
      * 住所地特例期間と適用除外期間が重複する履歴があるします。
      */
-    住所地特例期間と適用除外期間が重複する履歴がある(DbzErrorMessages.期間が重複),
+    住所地特例期間と適用除外期間が重複する履歴がある(UrErrorMessages.期間が重複),
     /**
      * 住所地特例期間が不正になっている（適用日が解除日の後日になっている）します。
      */
-    住所地特例期間が不正_適用日が解除日の後(DbzErrorMessages.期間が不正_追加メッセージあり２, "適用日", "解除日");
+    住所地特例期間が不正_適用日が解除日の後(UrErrorMessages.期間が不正_追加メッセージあり２, "適用日", "解除日");
 
     private final Message message;
 
