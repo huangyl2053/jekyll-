@@ -6,8 +6,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810013;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.IShiharaiHohoJyohoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.ShiharaiHohoJyohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
