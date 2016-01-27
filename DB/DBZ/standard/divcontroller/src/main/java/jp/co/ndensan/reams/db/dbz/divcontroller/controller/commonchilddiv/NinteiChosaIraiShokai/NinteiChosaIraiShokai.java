@@ -34,8 +34,8 @@ public class NinteiChosaIraiShokai {
         RString 被保険者番号 = new RString((ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class)).toString());
         List<NinteiChosaIraiShokaiMaster> ninteiChosaList
                 = NinteiChosaIraiShokaiFinder.createInstance().getNinteiChousaJouhou(被保険者番号).records();
-        if (ninteiChosaList.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.toString());
+        if (ninteiChosaList == null || ninteiChosaList.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         getHandler(div).load(ninteiChosaList);
         return ResponseData.of(div).respond();
