@@ -5,6 +5,12 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900041.Saik
 import jp.co.ndensan.reams.db.dbu.service.core.saiketukekatoroku.SaiketukekaToroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtenaSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IAtenaSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -35,6 +41,7 @@ public class SaiketukekaTorokuPanelHandler {
         初期化の編集();
         活性の恢復();
         初期画面値の保持();
+        共有子DIVの初期化();
     }
 
     /**
@@ -44,6 +51,7 @@ public class SaiketukekaTorokuPanelHandler {
 
         初期化の編集();
         削除状態の非活性();
+        共有子DIVの初期化();
     }
 
     private void 初期化の編集() {
@@ -52,13 +60,17 @@ public class SaiketukekaTorokuPanelHandler {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleDate 審査請求届出日 = ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class);
 
-//        共有子DIVの初期化(識別コード, 被保険者番号);   // TODO
         裁決結果登録明細情報の編集(識別コード, 被保険者番号, 審査請求届出日);
     }
 
-    private void 共有子DIVの初期化(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
-        div.getAtenaInfoCommonChildDiv().load(識別コード);
-        div.getKaigoShikakuKihonCommonChildDiv().initialize(被保険者番号);
+    private void 共有子DIVの初期化() {
+
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        IAtesakiGyomuHanteiKey 業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険);
+        IAtenaSearchKey 検索キー = new AtenaSearchKeyBuilder(KensakuYusenKubun.住登内優先, 業務判定キー).set識別コード(識別コード).build();
+
+        div.getAtenaInfoCommonChildDiv().onLoad(検索キー);
+        div.getKaigoShikakuKihonCommonChildDiv().onLoad(識別コード);
     }
 
     /**
