@@ -15,15 +15,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class panelServiceKeikakuhiDownDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlShiteiJigyoshaKubunCode")
-    private DropDownList ddlShiteiJigyoshaKubunCode;
+    @JsonProperty("txtShiteiJigyoshaKubunCode")
+    private TextBoxCode txtShiteiJigyoshaKubunCode;
     @JsonProperty("txtTodokedeDate")
     private TextBoxDate txtTodokedeDate;
     @JsonProperty("rdoShinsaHouhou")
@@ -32,16 +32,12 @@ public class panelServiceKeikakuhiDownDiv extends Panel {
     private TextBoxCode txtServiceCodeDown1;
     @JsonProperty("txtServiceCodeDown2")
     private TextBoxCode txtServiceCodeDown2;
-    @JsonProperty("btns")
-    private Button btns;
     @JsonProperty("txtServiceNamedown")
     private TextBox txtServiceNamedown;
     @JsonProperty("txtTanyiDown")
     private TextBoxNum txtTanyiDown;
     @JsonProperty("txtTanyisuTanka")
     private TextBoxNum txtTanyisuTanka;
-    @JsonProperty("btnkeisan")
-    private Button btnkeisan;
     @JsonProperty("txtSeikyugakuDown")
     private TextBoxNum txtSeikyugakuDown;
     @JsonProperty("txtTantoukayigoshien")
@@ -74,21 +70,21 @@ public class panelServiceKeikakuhiDownDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getddlShiteiJigyoshaKubunCode
-     * @return ddlShiteiJigyoshaKubunCode
+     * gettxtShiteiJigyoshaKubunCode
+     * @return txtShiteiJigyoshaKubunCode
      */
-    @JsonProperty("ddlShiteiJigyoshaKubunCode")
-    public DropDownList getDdlShiteiJigyoshaKubunCode() {
-        return ddlShiteiJigyoshaKubunCode;
+    @JsonProperty("txtShiteiJigyoshaKubunCode")
+    public TextBoxCode getTxtShiteiJigyoshaKubunCode() {
+        return txtShiteiJigyoshaKubunCode;
     }
 
     /*
-     * setddlShiteiJigyoshaKubunCode
-     * @param ddlShiteiJigyoshaKubunCode ddlShiteiJigyoshaKubunCode
+     * settxtShiteiJigyoshaKubunCode
+     * @param txtShiteiJigyoshaKubunCode txtShiteiJigyoshaKubunCode
      */
-    @JsonProperty("ddlShiteiJigyoshaKubunCode")
-    public void setDdlShiteiJigyoshaKubunCode(DropDownList ddlShiteiJigyoshaKubunCode) {
-        this.ddlShiteiJigyoshaKubunCode = ddlShiteiJigyoshaKubunCode;
+    @JsonProperty("txtShiteiJigyoshaKubunCode")
+    public void setTxtShiteiJigyoshaKubunCode(TextBoxCode txtShiteiJigyoshaKubunCode) {
+        this.txtShiteiJigyoshaKubunCode = txtShiteiJigyoshaKubunCode;
     }
 
     /*
@@ -164,24 +160,6 @@ public class panelServiceKeikakuhiDownDiv extends Panel {
     }
 
     /*
-     * getbtns
-     * @return btns
-     */
-    @JsonProperty("btns")
-    public Button getBtns() {
-        return btns;
-    }
-
-    /*
-     * setbtns
-     * @param btns btns
-     */
-    @JsonProperty("btns")
-    public void setBtns(Button btns) {
-        this.btns = btns;
-    }
-
-    /*
      * gettxtServiceNamedown
      * @return txtServiceNamedown
      */
@@ -233,24 +211,6 @@ public class panelServiceKeikakuhiDownDiv extends Panel {
     @JsonProperty("txtTanyisuTanka")
     public void setTxtTanyisuTanka(TextBoxNum txtTanyisuTanka) {
         this.txtTanyisuTanka = txtTanyisuTanka;
-    }
-
-    /*
-     * getbtnkeisan
-     * @return btnkeisan
-     */
-    @JsonProperty("btnkeisan")
-    public Button getBtnkeisan() {
-        return btnkeisan;
-    }
-
-    /*
-     * setbtnkeisan
-     * @param btnkeisan btnkeisan
-     */
-    @JsonProperty("btnkeisan")
-    public void setBtnkeisan(Button btnkeisan) {
-        this.btnkeisan = btnkeisan;
     }
 
     /*
