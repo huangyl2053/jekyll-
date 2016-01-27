@@ -62,17 +62,6 @@ public class NenpoYoushi3 {
      * @return ResponseData<NenpoYoushi3Div>
      */
     public ResponseData<NenpoYoushi3Div> onLoad(NenpoYoushi3Div div) {
-        ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity1 = new ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity();
-        entity1.set画面報告年度(new RString("19900101"));
-        entity1.set画面集計年度(new RString("20100202"));
-        entity1.set保険者コード(new RString("123456"));
-        entity1.set市町村名称(new RString("市町村名称"));
-        entity1.set補正フラグ(new RString("修正"));
-        entity1.set行報告年(new RString("1990"));
-        entity1.set行集計対象年(new RString("2016"));
-        entity1.set行市町村コード(new RString("123456"));
-        entity1.set事業報告年報補正表示のコード(new RString("003"));
-        ViewStateHolder.put(DbuViewStateKey.補正検索画面情報, entity1);
         if (!get保険料収納状況データ(div) || !get保険給付支払状況データ(div)) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
