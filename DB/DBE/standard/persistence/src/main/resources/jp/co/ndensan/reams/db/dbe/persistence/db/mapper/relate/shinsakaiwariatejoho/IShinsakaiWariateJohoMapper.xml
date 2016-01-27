@@ -17,23 +17,50 @@
         FROM
         (
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.allColumns_DbT5502ShinsakaiWariateJoho" />
-        FROM 
-            rgdb."DbT5502ShinsakaiWariateJoho"
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.allColumns_DbT5502ShinsakaiWariateJoho" />
+        FROM
+        rgdb."DbT5502ShinsakaiWariateJoho"
         WHERE
-            "shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+        "shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         AND "shinseishoKanriNo" = #{shinseishoKanriNo}
         ) AS DbT5502ShinsakaiWariateJoho
         LEFT JOIN
         (
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
         FROM
-            rgdb."DbT5101NinteiShinseiJoho"     
+        rgdb."DbT5101NinteiShinseiJoho"
         ) AS DbT5101NinteiShinseiJoho
         ON
         DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo" = DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo"
     </sql>
+
+    <select id="select介護認定審査会割当情報ByKey_審査順確定フラグ非一致" resultMap="resultMap_ShinsakaiWariateJohoEntity" fetchSize="500">
+        SELECT
+        DbT5502ShinsakaiWariateJoho.*,
+        DbT5101NinteiShinseiJoho.*
+        FROM
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.allColumns_DbT5502ShinsakaiWariateJoho" />
+        FROM
+        rgdb."DbT5502ShinsakaiWariateJoho"
+        WHERE
+        "shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+        AND "shinseishoKanriNo" = #{shinseishoKanriNo}
+        AND "shinsakaiOrderKakuteiFlag" != #{shinsakaiOrderKakuteiFlag}
+        ) AS DbT5502ShinsakaiWariateJoho
+        LEFT JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho"
+        ) AS DbT5101NinteiShinseiJoho
+        ON
+        DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo" = DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo"
+    </select>
+
 
     <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
     <resultMap id="resultMap_ShinsakaiWariateJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoRelateEntity" autoMapping="true">
