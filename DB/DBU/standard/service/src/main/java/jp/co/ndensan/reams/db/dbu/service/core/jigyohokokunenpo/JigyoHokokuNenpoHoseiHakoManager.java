@@ -127,7 +127,7 @@ public class JigyoHokokuNenpoHoseiHakoManager {
         } else if (合併情報区分_合併あり.equals(合併情報区分)) {
             return get市町村情報リストBy合併情報区分は合併ありの場合(市町村情報);
         }
-        return null;
+        return SearchResult.of(Collections.<ShichosonCodeNameResult>emptyList(), 0, false);
     }
 
     private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy導入形態コード以外の場合(RString 合併情報区分, KoseiShichosonJohoEntity 市町村情報, RString 導入形態コード) {
@@ -152,9 +152,9 @@ public class JigyoHokokuNenpoHoseiHakoManager {
         if (市町村識別ID_00.equals(市町村情報.getShichosonShokibetsuID())) {
             return get市町村情報リストBy合併ありと市町村識別IDは00の場合(市町村情報);
         } else {
-            //TODO エラーマッセージが存在しない。 2016/01/04
+            //TODO エラーマッセージが存在しない。QA:401 2016/01/04
 //            throw new ApplicationException(DbaErrorMessages);
-            return null;
+            return SearchResult.of(Collections.<ShichosonCodeNameResult>emptyList(), 0, false);
         }
     }
 
@@ -162,9 +162,9 @@ public class JigyoHokokuNenpoHoseiHakoManager {
         if (市町村識別ID_00.equals(市町村情報.getShichosonShokibetsuID())) {
             return get市町村情報リストBy合併なしと市町村識別IDは00の場合(市町村情報);
         } else {
-            //TODO エラーマッセージが存在しない。 2016/01/04
+            //TODO エラーマッセージが存在しない。QA:401 2016/01/04
 //            throw new ApplicationException(DbaErrorMessages.補正処理は行えません.getMessage());
-            return null;
+            return SearchResult.of(Collections.<ShichosonCodeNameResult>emptyList(), 0, false);
         }
     }
 
