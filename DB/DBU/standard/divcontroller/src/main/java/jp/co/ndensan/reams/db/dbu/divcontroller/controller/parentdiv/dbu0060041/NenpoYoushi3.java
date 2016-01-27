@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.dbu0060041
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.definition.core.nenpoyoushi3.NenpoYoushi3ViewStateKeys;
+import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
+import jp.co.ndensan.reams.db.dbu.definition.enumeratedtype.DbuViewStateKey;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.DeleteJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.SearchJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.DBU0060011TransitionEventName;
@@ -43,8 +45,6 @@ public class NenpoYoushi3 {
     private static final RString 保険給付支払状況 = new RString("4.保険給付支払状況");
     private static final RString フラグ_修正 = new RString("修正");
     private static final RString フラグ_削除 = new RString("削除");
-    private boolean FLG1 = false;
-    private boolean FLG2 = false;
     private FlexibleYear 報告年;
     private FlexibleYear 集計対象年;
     private LasdecCode 市町村コード;
@@ -62,6 +62,17 @@ public class NenpoYoushi3 {
      * @return ResponseData<NenpoYoushi3Div>
      */
     public ResponseData<NenpoYoushi3Div> onLoad(NenpoYoushi3Div div) {
+        ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity1 = new ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity();
+        entity1.set画面報告年度(new RString("19900101"));
+        entity1.set画面集計年度(new RString("20100202"));
+        entity1.set保険者コード(new RString("123456"));
+        entity1.set市町村名称(new RString("市町村名称"));
+        entity1.set補正フラグ(new RString("修正"));
+        entity1.set行報告年(new RString("1990"));
+        entity1.set行集計対象年(new RString("2016"));
+        entity1.set行市町村コード(new RString("123456"));
+        entity1.set事業報告年報補正表示のコード(new RString("003"));
+        ViewStateHolder.put(DbuViewStateKey.補正検索画面情報, entity1);
         if (!get保険料収納状況データ(div) || !get保険給付支払状況データ(div)) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
@@ -91,7 +102,13 @@ public class NenpoYoushi3 {
      * @return ResponseData<NenpoYoushi3Div>
      */
     public ResponseData<NenpoYoushi3Div> onClick_hozon(NenpoYoushi3Div div) {
-        補正フラグ = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.補正フラグ, RString.class);
+        ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity
+                = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
+        報告年 = new FlexibleYear(entity.get行報告年());
+        集計対象年 = new FlexibleYear(entity.get行集計対象年());
+        市町村コード = new LasdecCode(entity.get行市町村コード());
+        様式種類コード = entity.get事業報告年報補正表示のコード();
+        補正フラグ = entity.get補正フラグ();
         if (補正フラグ.equals(フラグ_修正)) {
             List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データ();
             if (修正データリスト == null || 修正データリスト.isEmpty()) {
@@ -109,10 +126,6 @@ public class NenpoYoushi3 {
             }
             return ResponseData.of(div).respond();
         } else if (補正フラグ.equals(フラグ_削除)) {
-            報告年 = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.報告年, FlexibleYear.class);
-            集計対象年 = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.集計対象年, FlexibleYear.class);
-            市町村コード = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.市町村コード, LasdecCode.class);
-            様式種類コード = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.様式種類コード, RString.class);
             DeleteJigyoHokokuNenpo jigyoHokokuNenpoDelete = new DeleteJigyoHokokuNenpo(報告年, 集計対象年, 市町村コード, 様式種類コード);
             JigyoHokokuNenpoHoseiHakoManager.createInstance().deleteJigyoHokokuNenpoData(jigyoHokokuNenpoDelete);
             return ResponseData.of(div).setState(DBU0060041StateName.完了状態);
@@ -126,10 +139,11 @@ public class NenpoYoushi3 {
      * @param div NenpoYoushi3Div
      * @return ResponseData<NenpoYoushi3Div>
      */
-    public ResponseData<NenpoYoushi3Div> click_modoru(NenpoYoushi3Div div) {
+    public ResponseData<NenpoYoushi3Div> onClick_modoru(NenpoYoushi3Div div) {
         List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データ();
         if (修正データリスト == null || 修正データリスト.isEmpty()) {
-            return ResponseData.of(div).forwardWithEventName(DBU0060011TransitionEventName.様式２の８に遷移).respond();
+            // TODO  事業報告（年報）補正、発行①_検索画面へ遷移
+            return ResponseData.of(div).forwardWithEventName(DBU0060011TransitionEventName.様式３に遷移).respond();
         }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
@@ -138,50 +152,52 @@ public class NenpoYoushi3 {
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            JigyoHokokuNenpoHoseiHakoManager.createInstance().updateJigyoHokokuNenpoData(修正データリスト);
-            return ResponseData.of(div).setState(DBU0060041StateName.初期状態);
+            // TODO  事業報告（年報）補正、発行①_検索画面へ遷移
+            return ResponseData.of(div).forwardWithEventName(DBU0060011TransitionEventName.様式３に遷移).respond();
         }
         return ResponseData.of(div).respond();
     }
 
     private boolean get保険料収納状況データ(NenpoYoushi3Div div) {
-        報告年 = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.報告年, FlexibleYear.class);
-        集計対象年 = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.集計対象年, FlexibleYear.class);
-        市町村コード = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.市町村コード, LasdecCode.class);
-        様式種類コード = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.様式種類コード, RString.class);
-        補正フラグ = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.補正フラグ, RString.class);
-        報告年度 = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.報告年度, FlexibleDate.class);
-        集計年度 = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.集計年度, FlexibleDate.class);
-        保険者コード = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.保険者コード, RString.class);
-        保険者名称 = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.保険者名称, RString.class);
+        ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity
+                = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
+        報告年度 = new FlexibleDate(entity.get画面報告年度());
+        集計年度 = new FlexibleDate(entity.get画面集計年度());
+        保険者コード = entity.get保険者コード();
+        保険者名称 = entity.get市町村名称();
+        報告年 = new FlexibleYear(entity.get行報告年());
+        集計対象年 = new FlexibleYear(entity.get行集計対象年());
+        市町村コード = new LasdecCode(entity.get行市町村コード());
+        様式種類コード = entity.get事業報告年報補正表示のコード();
+        補正フラグ = entity.get補正フラグ();
         SearchJigyoHokokuNenpo jigyoHokokuNenpoSearch = new SearchJigyoHokokuNenpo(報告年, 集計対象年, 市町村コード, 様式種類コード, 集計番号_0100);
         List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = JigyoHokokuNenpoHoseiHakoManager.createInstance().
                 getJigyoHokokuNenpoDetal(jigyoHokokuNenpoSearch).records();
         ViewStateHolder.put(NenpoYoushi3ViewStateKeys.保険料収納状況データ, Models.create(事業報告集計一覧データリスト));
         if (事業報告集計一覧データリスト == null || 事業報告集計一覧データリスト.isEmpty()) {
-            return FLG1;
+            return false;
         } else {
             getHandler(div).initialize(事業報告集計一覧データリスト, 補正フラグ, 報告年度, 集計年度, 保険者コード, 保険者名称);
-            FLG1 = true;
-            return FLG1;
+            return true;
         }
     }
 
     private boolean get保険給付支払状況データ(NenpoYoushi3Div div) {
-        報告年 = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.報告年, FlexibleYear.class);
-        集計対象年 = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.集計対象年, FlexibleYear.class);
-        市町村コード = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.市町村コード, LasdecCode.class);
-        様式種類コード = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.様式種類コード, RString.class);
+        ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity
+                = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
+        報告年 = new FlexibleYear(entity.get行報告年());
+        集計対象年 = new FlexibleYear(entity.get行集計対象年());
+        市町村コード = new LasdecCode(entity.get行市町村コード());
+        様式種類コード = entity.get事業報告年報補正表示のコード();
         SearchJigyoHokokuNenpo jigyoHokokuNenpoSearch = new SearchJigyoHokokuNenpo(報告年, 集計対象年, 市町村コード, 様式種類コード, 集計番号_0200);
         List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = JigyoHokokuNenpoHoseiHakoManager.createInstance().
                 getJigyoHokokuNenpoDetal(jigyoHokokuNenpoSearch).records();
         ViewStateHolder.put(NenpoYoushi3ViewStateKeys.保険給付支払状況データ, Models.create(事業報告集計一覧データリスト));
         if (事業報告集計一覧データリスト == null || 事業報告集計一覧データリスト.isEmpty()) {
-            return FLG2;
+            return false;
         } else {
             getHandler(div).set保険給付支払状況詳細データ(事業報告集計一覧データリスト);
-            FLG2 = true;
-            return FLG2;
+            return true;
         }
     }
 
