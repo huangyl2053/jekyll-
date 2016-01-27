@@ -26,6 +26,7 @@ public class IdoCheckListGetDataParameter implements IMyBatisParameter {
     private ShikibetsuCode shikibetsuCode;
     private GyomuCode gyomuCode;
     private FlexibleDate jukyuKaishiYMD;
+    private RString psmShikibetsuTaisho;
 
     /**
      * コンストラクタです。
@@ -36,6 +37,7 @@ public class IdoCheckListGetDataParameter implements IMyBatisParameter {
      * @param shikibetsuCode 識別コード
      * @param gyomuCode 業務コード
      * @param jukyuKaishiYMD 受給開始日
+     * @param psmShikibetsuTaisho 宛名識別対象
      */
     private IdoCheckListGetDataParameter(
             RDateTime konkaiKaishi,
@@ -43,13 +45,15 @@ public class IdoCheckListGetDataParameter implements IMyBatisParameter {
             RString daichoShubetsu,
             ShikibetsuCode shikibetsuCode,
             GyomuCode gyomuCode,
-            FlexibleDate jukyuKaishiYMD) {
+            FlexibleDate jukyuKaishiYMD,
+            RString psmShikibetsuTaisho) {
         this.konkaiKaishi = konkaiKaishi;
         this.konkaiShuryo = konkaiShuryo;
         this.daichoShubetsu = daichoShubetsu;
         this.shikibetsuCode = shikibetsuCode;
         this.gyomuCode = gyomuCode;
         this.jukyuKaishiYMD = jukyuKaishiYMD;
+        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
     /**
@@ -70,6 +74,19 @@ public class IdoCheckListGetDataParameter implements IMyBatisParameter {
             ShikibetsuCode shikibetsuCode,
             GyomuCode gyomuCode,
             FlexibleDate jukyuKaishiYMD) {
-        return new IdoCheckListGetDataParameter(konkaiKaishi, konkaiShuryo, daichoShubetsu, shikibetsuCode, gyomuCode, jukyuKaishiYMD);
+        return new IdoCheckListGetDataParameter(konkaiKaishi, konkaiShuryo, daichoShubetsu, shikibetsuCode, gyomuCode, jukyuKaishiYMD, RString.EMPTY);
+    }
+
+    /**
+     * 宛名識別対象検索用のパラメータを生成します。
+     *
+     * @param psmShikibetsuTaisho 宛名識別対象
+     * @return IdoCheckListGetDataParameter
+     */
+    public static IdoCheckListGetDataParameter createShikibetsuTaishoPsmParameter(
+            RString psmShikibetsuTaisho) {
+        return new IdoCheckListGetDataParameter(
+                null, null, RString.EMPTY, null, null, null,
+                psmShikibetsuTaisho);
     }
 }

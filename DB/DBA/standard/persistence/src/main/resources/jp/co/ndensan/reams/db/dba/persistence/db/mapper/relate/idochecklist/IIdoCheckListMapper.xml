@@ -516,7 +516,7 @@
           "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode" ASC, "UrT0526SeikatsuHogoFujoShurui"."fujoShuruiCode" ASC
       </select>
       
-      <select id="getShikibetsuTaishoPsm" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500" >
+      <select id="getShikibetsuTaishoPsm" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.idochecklist.IdoCheckListGetDataParameter" fetchSize="500" >
         SELECT 
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM

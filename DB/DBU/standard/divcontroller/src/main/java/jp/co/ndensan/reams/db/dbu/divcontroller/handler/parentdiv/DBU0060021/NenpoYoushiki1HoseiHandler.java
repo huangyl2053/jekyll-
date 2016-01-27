@@ -74,6 +74,7 @@ public class NenpoYoushiki1HoseiHandler {
             set詳細データエリア(data);
         }
         set活性();
+        データない場合_被保険者数_入力不可１();
         if (処理種別_削除.equals(param.get補正フラグ())) {
             set非活性();
         }
@@ -94,8 +95,7 @@ public class NenpoYoushiki1HoseiHandler {
                 if (paramData.get縦番号().compareTo(viewData.get縦番号()) == 0
                         && paramData.get横番号().compareTo(viewData.get横番号()) == 0
                         && paramData.get集計結果値().compareTo(viewData.get集計結果値()) != 0) {
-                    viewData.createBuilderForEdit().set集計結果値(paramData.get集計結果値());
-                    modifyData.add(viewData);
+                    modifyData.add(viewData.createBuilderForEdit().set集計結果値(paramData.get集計結果値()).build());
                 }
             }
         }
@@ -365,31 +365,120 @@ public class NenpoYoushiki1HoseiHandler {
         }
     }
 
+    private void データない場合_被保険者数_入力不可１() {
+        if (div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka1().getValue() == null) {
+            div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka1().setDisabled(true);
+        }
+        if (div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka2().getValue() == null) {
+            div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka2().setDisabled(true);
+        }
+        if (div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka3().getValue() == null) {
+            div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka3().setDisabled(true);
+        }
+        if (div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka4().getValue() == null) {
+            div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka4().setDisabled(true);
+        }
+        if (div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka5().getValue() == null) {
+            div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka5().setDisabled(true);
+        }
+        データない場合_被保険者数_入力不可２();
+    }
+
+    private void データない場合_被保険者数_入力不可２() {
+        if (div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka6().getValue() == null) {
+            div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka6().setDisabled(true);
+        }
+        if (div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka7().getValue() == null) {
+            div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka7().setDisabled(true);
+        }
+        if (div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka8().getValue() == null) {
+            div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka8().setDisabled(true);
+        }
+        if (div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka9().getValue() == null) {
+            div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka9().setDisabled(true);
+        }
+        if (div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka10().getValue() == null) {
+            div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka10().setDisabled(true);
+        }
+        データない場合_被保険者数_入力不可３();
+    }
+
+    private void データない場合_被保険者数_入力不可３() {
+        if (div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka11().getValue() == null) {
+            div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka11().setDisabled(true);
+        }
+        if (div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka12().getValue() == null) {
+            div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka12().setDisabled(true);
+        }
+        if (div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka13().getValue() == null) {
+            div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka13().setDisabled(true);
+        }
+        if (div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka14().getValue() == null) {
+            div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka14().setDisabled(true);
+        }
+        if (div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka15().getValue() == null) {
+            div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka15().setDisabled(true);
+        }
+        データない場合_被保険者数_入力不可４();
+    }
+
+    private void データない場合_被保険者数_入力不可４() {
+        if (div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka16().getValue() == null) {
+            div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka16().setDisabled(true);
+        }
+        if (div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuFumei().getValue() == null) {
+            div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuFumei().setDisabled(true);
+        }
+    }
+
     private List<TempJigyoHokokuNenpoDetalParameter> getTempModifyData() {
         List<TempJigyoHokokuNenpoDetalParameter> tempList = new ArrayList();
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(Decimal.ONE, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokenshasuVal().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_2, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokenshasuni().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_3, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokenshasusan().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_4, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokensu().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_5, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokenshasuyon().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_6, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokenshasuyondankai().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_7, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka1().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_8, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka2().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_9, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka3().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(Decimal.TEN, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka4().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_11, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka5().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_12, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka6().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_13, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka7().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_14, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka8().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_15, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka9().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_16, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka10().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_17, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka11().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_18, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka12().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_19, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka13().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_20, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka14().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_21, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka15().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_22, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka16().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_23, Decimal.ONE, div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuFumei().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(Decimal.ONE, Decimal.ONE,
+                div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokenshasuVal().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_2, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokenshasuni().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_3, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokenshasusan().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_4, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokensu().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_5, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokenshasuyon().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_6, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokenshasuyondankai().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_7, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka1().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_8, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka2().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_9, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka3().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(Decimal.TEN, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka4().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_11, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka5().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_12, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka6().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_13, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka7().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_14, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka8().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_15, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka9().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_16, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka10().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_17, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka11().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_18, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka12().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_19, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka13().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_20, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka14().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_21, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka15().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_22, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka16().getValue()));
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_23, Decimal.ONE, 
+                div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuFumei().getValue()));
 
         return tempList;
     }

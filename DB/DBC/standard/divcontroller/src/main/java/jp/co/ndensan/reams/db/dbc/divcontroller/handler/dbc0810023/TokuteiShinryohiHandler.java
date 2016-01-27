@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.TokuteiShinryohiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.ddgToteishinryoTokubetushinryo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.dgdTokuteiShinryohi_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7120TokuteiShinryoServiceCodeEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -41,6 +43,8 @@ public class TokuteiShinryohiHandler {
     private static final RString 設定不可 = new RString("0");
     private static final RString 単位 = new RString("単位");
     private static final RString 回まで = new RString("回まで");
+    private static final RString 設定可_任意 = new RString("2");
+    private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
 
     public TokuteiShinryohiHandler(TokuteiShinryohiDiv div) {
         this.div = div;
@@ -85,8 +89,8 @@ public class TokuteiShinryohiHandler {
         if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getMeisaiJushochitokureiSetteiKubun())) {
             div.getPanelTwo().getBtnKyufuhiMeisaiJyutoku().setDisabled(true);
         }
-        if (new RString("2").equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
-                && new FlexibleYearMonth("201204").isBeforeOrEquals(サービス年月)) {
+        if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
+                && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
             div.getPanelTwo().getBtnKinkyujiShisetsu().setVisible(false);
         } else {
             div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setVisible(false);
@@ -119,35 +123,36 @@ public class TokuteiShinryohiHandler {
             row.setRihabiri(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.getリハビリテーション単位数()), 0));
             row.setSeishinka(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get精神科専門療法単位数()), 0));
             row.setXLine(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get単純エックス線単位数()), 0));
-            // TODO　措置単位数 缺失
-            row.setSochi(new RString("9"));
-            // TODO 手術単位数 缺失
-            row.setTejyutsu(new RString("9"));
+            row.setSochi(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get措置単位数()), 0));
+            row.setTejyutsu(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get手術単位数()), 0));
             row.setGoukeyiTanyi(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get合計単位数()), 0));
             dataSource.add(row);
         }
         div.getPanelThree().getDdgToteishinryoTokubetushinryo().setDataSource(dataSource);
     }
 
-    public void set特定診療費_特別診療費パネル(List<ShokanTokuteiShinryoTokubetsuRyoyo> list, FlexibleYearMonth サービス年月) {
-
-        // TODO 様式番号
-        RString 様式番号 = new RString("2345");
+    public void set特定診療費_特別診療費パネル(List<ShokanTokuteiShinryoTokubetsuRyoyo> list,
+            FlexibleYearMonth サービス年月) {
 
         ShokanTokuteiShinryoTokubetsuRyoyo entity = list.get(0);
         DbT7120TokuteiShinryoServiceCodeEntity serviceCode = ShokanbaraiJyokyoShokai.createInstance()
-                .getTokuteiShinryoServiceCodeInfo(サービス年月, 様式番号, new ShikibetsuCode(entity.get識別番号()));
+                .getTokuteiShinryoServiceCodeInfo(
+                        サービス年月,
+                        ViewStateHolder.get(ViewStateKeys.様式番号, RString.class),
+                        new ShikibetsuCode(entity.get識別番号()));
         div.getPanelFive().getTxtShobyoMeiDown().setValue(entity.get傷病名());
         div.getPanelFive().getTxtShikibetsuCode().setValue(entity.get識別番号());
         div.getPanelFive().getTxtName().setValue(serviceCode.getServiceMeisho());
-        UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0025")), new Code(serviceCode.getSanteiTani()));
+        UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0025")),
+                new Code(serviceCode.getSanteiTani()));
         RStringBuilder builder1 = new RStringBuilder();
         builder1.append(code1.getコード名称());
-        // TODO 特定診療サービスコード．単位
+        // TODO 特定診療サービスコード．単位 QA中
         builder1.append(serviceCode.getTaniSuShikibetsu());
         builder1.append(単位);
         div.getPanelFive().getLblComment1().setText(builder1.toRString());
-        UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0026")), new Code(serviceCode.getSanteiSeiyakuKikan()));
+        UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0026")),
+                new Code(serviceCode.getSanteiSeiyakuKikan()));
         RStringBuilder builder2 = new RStringBuilder();
         builder2.append(code2.getコード名称());
         builder2.append(serviceCode.getSanteiSeiyakuKaisu());
@@ -166,10 +171,8 @@ public class TokuteiShinryohiHandler {
         div.getPanelFour().getTxtRibabiriteishon().setValue(new Decimal(entity.getリハビリテーション単位数()));
         div.getPanelFour().getTxtSeishinkaSenmon().setValue(new Decimal(entity.get精神科専門療法単位数()));
         div.getPanelFour().getTxtTanjyunXline().setValue(new Decimal(entity.get単純エックス線単位数()));
-        // TODO 措置単位数
-        div.getPanelFour().getTxtSochi().setValue(new Decimal(9));
-        // TODO 手術単位数
-        div.getPanelFour().getTxtTejyutsu().setValue(new Decimal(60));
+        div.getPanelFour().getTxtSochi().setValue(new Decimal(entity.get措置単位数()));
+        div.getPanelFour().getTxtTejyutsu().setValue(new Decimal(entity.get手術単位数()));
         div.getPanelFour().getTxtGoukei().setValue(new Decimal(entity.get合計単位数()));
         RStringBuilder builder = new RStringBuilder();
         builder.append(entity.get摘要１()).append(new RString("<br/>"));
