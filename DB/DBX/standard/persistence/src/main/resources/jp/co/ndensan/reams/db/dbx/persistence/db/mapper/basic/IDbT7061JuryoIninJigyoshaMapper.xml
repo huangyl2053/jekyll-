@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7061JuryoIninKeiyakuJigyoshaMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7061JuryoIninJigyoshaMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7061JuryoIninKeiyakuJigyosha">
      SELECT
-         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7061JuryoIninKeiyakuJigyoshaMapper.allColumns_DbT7061JuryoIninKeiyakuJigyosha" />
+         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7061JuryoIninJigyoshaMapper.allColumns_DbT7061JuryoIninKeiyakuJigyosha" />
      FROM
-         rgdb."DbT7061JuryoIninKeiyakuJigyosha"
+         rgdb."DbT7061JuryoIninJigyosha"
      WHERE
-         rgdb."DbT7061JuryoIninKeiyakuJigyosha"."isDeleted" = FALSE
+         rgdb."DbT7061JuryoIninJigyosha"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7061JuryoIninKeiyakuJigyosha">
@@ -37,7 +37,7 @@
 
 
     <!--テーブルDbT7061JuryoIninKeiyakuJigyoshaの項目をDbT7061JuryoIninKeiyakuJigyoshaEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7061JuryoIninKeiyakuJigyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyoshaEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7061JuryoIninKeiyakuJigyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntity" autoMapping="true">
         <!--<id property="jigyoshaNo" column="dbT7061JuryoIninKeiyakuJigyosha_jigyoshaNo" />-->
         <id property="keiyakuKaishiYMD" column="dbT7061JuryoIninKeiyakuJigyosha_keiyakuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <!--<id property="serviceShubetsuCode" column="dbT7061JuryoIninKeiyakuJigyosha_serviceShubetsuCode" />-->
@@ -59,7 +59,7 @@
         SELECT
         <include refid="allColumns_DbT7061JuryoIninKeiyakuJigyosha"/>
         FROM
-        rgdb."DbT7061JuryoIninKeiyakuJigyosha"
+        rgdb."DbT7061JuryoIninJigyosha"
      </select>
 
 </mapper>
