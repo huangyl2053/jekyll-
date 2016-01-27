@@ -6,7 +6,7 @@ chosaChikuCode,UDD035Code,Code,,,,,調査地区コード,A
 ninteiChosaItakusakiCode,varchar,RString,,,,,認定調査委託先コード,A
 ninteiChosainCode,varchar,RString,,,,,認定調査員コード,A
 shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
-shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,申請書管理番号,A
+shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
 yoyakuJokyo,UDD035Code,Code,,,,,予約状況,A
 yoyakuKaoFlag,bool,boolean,,,,,予約可能フラグ,A
 biko,text,RString,,,,,備考,A

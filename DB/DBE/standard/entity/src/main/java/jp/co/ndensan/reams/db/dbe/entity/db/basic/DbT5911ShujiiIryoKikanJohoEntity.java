@@ -1,19 +1,19 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.IryoKikanCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 主治医医療機関情報テーブルのエンティティクラスです。
@@ -23,7 +23,6 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5911ShujiiIryoKikanJoho");
-    private static final long serialVersionUID = -2606171009505818419L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -330,7 +329,8 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
      * このエンティティの主キーが他の{@literal DbT5911ShujiiIryoKikanJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT5911ShujiiIryoKikanJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5911ShujiiIryoKikanJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5911ShujiiIryoKikanJohoEntity other) {
@@ -348,8 +348,6 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * {@inheritDoc}
-     *
-     * @param entity
      */
     @Override
     public void shallowCopy(DbT5911ShujiiIryoKikanJohoEntity entity) {

@@ -1,17 +1,17 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 構成市町村支所マスタテーブルのエンティティクラスです。
@@ -22,7 +22,6 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7052KoseiShichosonShishoMaster");
-    private static final long serialVersionUID = -5543964898756859270L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -161,8 +160,6 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
 
     /**
      * {@inheritDoc}
-     *
-     * @param entity
      */
     @Override
     public void shallowCopy(DbT7052KoseiShichosonShishoMasterEntity entity) {

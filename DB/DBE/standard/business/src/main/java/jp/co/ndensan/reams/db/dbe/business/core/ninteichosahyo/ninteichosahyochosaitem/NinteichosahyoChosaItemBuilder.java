@@ -55,7 +55,7 @@ public class NinteichosahyoChosaItemBuilder {
      */
     public NinteichosahyoChosaItemBuilder set調査項目(RString 調査項目) {
         requireNonNull(調査項目, UrSystemErrorMessages.値がnull.getReplacedMessage("調査項目"));
-        entity.setReserchItem(調査項目);
+        entity.setResearchItem(調査項目);
         return this;
     }
 

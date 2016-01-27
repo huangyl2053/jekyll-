@@ -159,7 +159,7 @@ public class ChosaItakusakiAndChosainInputHandler {
 //        chosaInmanager = ChosainFactory.getInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
         IChosainJoho.Builder chosainJohoBuilder = setchosaInJoho();
         chosainJohoBuilder.setNinteichosaItakusakiCode(new ChosaItakusakiCode(div.getTxtChosaItakusakiCode().getValue()));
-        chosainJohoBuilder.setNinteiChosainNo(new ChosainCode(div.getTxtChosainCode().getValue()));
+        chosainJohoBuilder.setNinteiChosainCode(new ChosainCode(div.getTxtChosainCode().getValue()));
         chosainJohoBuilder.setChosainShimei(div.getTxtChosainName().getValue());
         chosainJohoBuilder.setShichosonCode(new LasdecCode(div.getHdnShichosonCode()));
         //TODO 性別 DBZ.KaigoNinteiShinseihaから取得します。

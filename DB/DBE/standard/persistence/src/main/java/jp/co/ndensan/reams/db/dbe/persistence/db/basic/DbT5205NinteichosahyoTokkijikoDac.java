@@ -11,8 +11,8 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTo
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.genponMaskKubun;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.ninteichosaTokkijikoNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.tokkijikoTextImageKubun;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.ninteichosaTokkijikoRemban;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.ninteichosaTokkijikoRenban;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -69,7 +69,7 @@ public class DbT5205NinteichosahyoTokkijikoDac implements ISaveable<DbT5205Ninte
                                 eq(shinseishoKanriNo, 申請書管理番号),
                                 eq(ninteichosaRirekiNo, 認定調査依頼履歴番号),
                                 eq(ninteichosaTokkijikoNo, 認定調査特記事項番号),
-                                eq(ninteichosaTokkijikoRenban, 認定調査特記事項連番),
+                                eq(ninteichosaTokkijikoRemban, 認定調査特記事項連番),
                                 eq(tokkijikoTextImageKubun, 特記事項テキスト_イメージ区分),
                                 eq(genponMaskKubun, 原本マスク区分))).
                 toObject(DbT5205NinteichosahyoTokkijikoEntity.class);

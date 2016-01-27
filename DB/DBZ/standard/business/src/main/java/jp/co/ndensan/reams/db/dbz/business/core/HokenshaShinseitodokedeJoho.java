@@ -105,7 +105,7 @@ public class HokenshaShinseitodokedeJoho implements IShinseitodokedeJoho {
      */
     @Override
     public RString get申請届出者続柄コード() {
-        return entity.getShinseiTodokedeshaTsuzukigaraCode();
+        return entity.getShinseiTodokedeshaTsuzukigara();
     }
 
     /**
@@ -322,7 +322,7 @@ public class HokenshaShinseitodokedeJoho implements IShinseitodokedeJoho {
         @Override
         public Builder setShinseiTodokedeshaTsuzukigaraCode(RString todokedeshaTsuzukigaraCode) {
             Objects.requireNonNull(todokedeshaTsuzukigaraCode);
-            this.entity.setShinseiTodokedeshaTsuzukigaraCode(todokedeshaTsuzukigaraCode);
+            this.entity.setShinseiTodokedeshaTsuzukigara(todokedeshaTsuzukigaraCode);
             return this;
         }
 

@@ -118,7 +118,7 @@ public class DbT5913ChosainJohoDac implements ISaveable<DbT5913ChosainJohoEntity
                 table(DbT5913ChosainJoho.class).
                 where(and(
                                 eq(DbT5913ChosainJoho.shichosonCode, 市町村コード),
-                                eq(DbT5913ChosainJoho.ninteichosaItakusakiCode, 認定調査委託先コード)))
+                                eq(DbT5913ChosainJoho.ninteiChosaItakusakiCode, 認定調査委託先コード)))
                 .getCount();
     }
 }

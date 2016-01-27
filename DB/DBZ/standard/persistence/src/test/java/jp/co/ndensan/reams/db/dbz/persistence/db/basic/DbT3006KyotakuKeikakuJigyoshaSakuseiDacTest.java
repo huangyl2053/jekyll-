@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiDac;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator;
@@ -183,7 +182,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiDacTest extends DbzTestDacBase 
 
         public static void insert(
                 FlexibleYearMonth 対象年月,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.createDbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
             entity.setTaishoYM(対象年月);
             entity.setRirekiNo(履歴番号);

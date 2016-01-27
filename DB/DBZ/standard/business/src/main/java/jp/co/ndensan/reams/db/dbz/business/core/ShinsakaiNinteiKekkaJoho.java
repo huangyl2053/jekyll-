@@ -142,7 +142,7 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
      */
     @Override
     public RString get一次判定結果変更理由() {
-        return entity.getIchijiHnateiKekkaHenkoRiyu();
+        return entity.getIchijiHanteiKekkaHenkoRiyu();
     }
 
     /**
@@ -192,7 +192,7 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
      */
     @Override
     public FlexibleDate get二次判定結果入力年月日() {
-        return entity.getNiniHanteiKekkaInputYMD();
+        return entity.getNijiHanteiKekkaInputYMD();
     }
 
     /**
@@ -426,7 +426,7 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
         @Override
         public Builder setIchijiHnateiKekkaHenkoRiyu(RString ichijiHnateiKekkaHenkoRiyu) {
             Objects.requireNonNull(ichijiHnateiKekkaHenkoRiyu);
-            this.entity.setIchijiHnateiKekkaHenkoRiyu(ichijiHnateiKekkaHenkoRiyu);
+            this.entity.setIchijiHanteiKekkaHenkoRiyu(ichijiHnateiKekkaHenkoRiyu);
             return this;
         }
 
@@ -491,7 +491,7 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
         @Override
         public Builder setNiniHanteiKekkaInputYMD(FlexibleDate niniHanteiKekkaInputYMD) {
             Objects.requireNonNull(niniHanteiKekkaInputYMD);
-            this.entity.setNiniHanteiKekkaInputYMD(niniHanteiKekkaInputYMD);
+            this.entity.setNijiHanteiKekkaInputYMD(niniHanteiKekkaInputYMD);
             return this;
         }
 

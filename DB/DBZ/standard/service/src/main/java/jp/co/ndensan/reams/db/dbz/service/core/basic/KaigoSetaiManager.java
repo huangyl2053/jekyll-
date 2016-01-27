@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7014KaigoSetaiDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -52,8 +51,6 @@ public class KaigoSetaiManager {
      * @param 世帯員管理連番 SetaiInkanriRenban
      * @param 世帯員識別コード SetaiInshikibetsuCode
      * @param 本人区分 HonninKubun
-     * @param 課税年度 KazeiNendo
-     * @param 課税非課税区分 KazeiHikazeiKubun
      * @return KaigoSetai
      */
     @Transaction
@@ -63,17 +60,13 @@ public class KaigoSetaiManager {
             FlexibleDate 世帯把握基準年月日,
             int 世帯員管理連番,
             ShikibetsuCode 世帯員識別コード,
-            RString 本人区分,
-            FlexibleYear 課税年度,
-            RString 課税非課税区分) {
+            RString 本人区分) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(管理識別区分, UrSystemErrorMessages.値がnull.getReplacedMessage("管理識別区分"));
         requireNonNull(世帯把握基準年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯把握基準年月日"));
         requireNonNull(世帯員管理連番, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯員管理連番"));
         requireNonNull(世帯員識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯員識別コード"));
         requireNonNull(本人区分, UrSystemErrorMessages.値がnull.getReplacedMessage("本人区分"));
-        requireNonNull(課税年度, UrSystemErrorMessages.値がnull.getReplacedMessage("課税年度"));
-        requireNonNull(課税非課税区分, UrSystemErrorMessages.値がnull.getReplacedMessage("課税非課税区分"));
 
         DbT7014KaigoSetaiEntity entity = dac.selectByKey(
                 被保険者番号,
@@ -81,9 +74,7 @@ public class KaigoSetaiManager {
                 世帯把握基準年月日,
                 世帯員管理連番,
                 世帯員識別コード,
-                本人区分,
-                課税年度,
-                課税非課税区分);
+                本人区分);
         if (entity == null) {
             return null;
         }

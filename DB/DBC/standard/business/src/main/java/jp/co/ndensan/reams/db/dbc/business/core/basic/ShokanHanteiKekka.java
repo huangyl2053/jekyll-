@@ -10,7 +10,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -22,10 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 償還払支給判定結果を管理するクラスです。
  */
-public class ShokanHanteiKekka 
-extends ModelBase<ShokanHanteiKekkaIdentifier,
-        DbT3036ShokanHanteiKekkaEntity, 
-        ShokanHanteiKekka> implements Serializable {
+public class ShokanHanteiKekka
+        extends ModelBase<ShokanHanteiKekkaIdentifier, DbT3036ShokanHanteiKekkaEntity, ShokanHanteiKekka> implements Serializable {
 
     private final DbT3036ShokanHanteiKekkaEntity entity;
     private final ShokanHanteiKekkaIdentifier id;
@@ -37,26 +35,21 @@ extends ModelBase<ShokanHanteiKekkaIdentifier,
      * @param 被保険者番号 被保険者番号
      * @param サービス提供年月 サービス提供年月
      * @param 整理番号 整理番号
-     * @param 履歴番号 履歴番号
      */
     public ShokanHanteiKekka(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
-            RString 整理番号,
-            Decimal 履歴番号) {
+            RString 整理番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3036ShokanHanteiKekkaEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
         this.entity.setSeiriNo(整理番号);
-        this.entity.setRirekiNo(履歴番号);
         this.id = new ShokanHanteiKekkaIdentifier(
                 被保険者番号,
                 サービス提供年月,
-                整理番号,
-                履歴番号
+                整理番号
         );
     }
 
@@ -71,8 +64,7 @@ extends ModelBase<ShokanHanteiKekkaIdentifier,
         this.id = new ShokanHanteiKekkaIdentifier(
                 entity.getHiHokenshaNo(),
                 entity.getServiceTeikyoYM(),
-                entity.getSeiriNo(),
-                entity.getRirekiNo());
+                entity.getSeiriNo());
     }
 
     /**
@@ -118,20 +110,11 @@ extends ModelBase<ShokanHanteiKekkaIdentifier,
     }
 
     /**
-     * 履歴番号を返します。
-     *
-     * @return 履歴番号
-     */
-    public Decimal get履歴番号() {
-        return entity.getRirekiNo();
-    }
-
-    /**
      * 証記載保険者番号を返します。
      *
      * @return 証記載保険者番号
      */
-    public HokenshaNo get証記載保険者番号() {
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
         return entity.getShoKisaiHokenshaNo();
     }
 

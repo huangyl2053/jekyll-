@@ -42,7 +42,7 @@ public final class DbT4120ShinseitodokedeJohoEntityGenerator {
         entity.setShinseiTodokedeDaikoKubunCode(DEFAULT_申請届出代行区分コード);
         entity.setShinseiTodokedeshaShimei(DEFAULT_申請届出者氏名);
         entity.setShinseiTodokedeshaKanaShimei(DEFAULT_申請届出者氏名カナ);
-        entity.setShinseiTodokedeshaTsuzukigaraCode(DEFAULT_申請届出者続柄コード);
+        entity.setShinseiTodokedeshaTsuzukigara(DEFAULT_申請届出者続柄コード);
         entity.setShinseiTodokedeDaikoJigyoshaNo(DEFAULT_申請届出代行事業者番号);
         entity.setJigyoshaKubun(DEFAULT_事業者区分);
         entity.setShinseiTodokedeshaYubinNo(DEFAULT_申請届出者郵便番号);

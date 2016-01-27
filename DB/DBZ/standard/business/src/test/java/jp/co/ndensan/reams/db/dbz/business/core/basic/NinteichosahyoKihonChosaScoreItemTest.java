@@ -136,7 +136,7 @@ public class NinteichosahyoKihonChosaScoreItemTest extends DbzTestBase {
 
         @Test
         public void get素点項目は_entityが持つ素点項目を返す() {
-            assertThat(sut.get素点項目(), is(NinteichosahyoKihonChosaScoreItemEntity.getReserchItem01()));
+            assertThat(sut.get素点項目(), is(NinteichosahyoKihonChosaScoreItemEntity.getResearchItem01()));
         }
     }
 

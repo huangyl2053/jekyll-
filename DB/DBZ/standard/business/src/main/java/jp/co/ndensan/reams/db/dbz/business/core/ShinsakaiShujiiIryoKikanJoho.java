@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -159,8 +158,18 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
      * @return 代表者名
      */
     @Override
-    public AtenaMeisho get代表者名() {
+    public RString get代表者名() {
         return entity.getDaihyoshaName();
+    }
+
+    /**
+     * 代表者名カナを返します。
+     *
+     * @return 代表者名カナ
+     */
+    @Override
+    public RString get代表者名カナ() {
+        return entity.getDaihyoshaNameKana();
     }
 
     /**
@@ -393,9 +402,22 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          * @return builder
          */
         @Override
-        public Builder setDaihyoshaName(AtenaMeisho daihyoshaName) {
+        public Builder setDaihyoshaName(RString daihyoshaName) {
             Objects.requireNonNull(daihyoshaName);
             this.entity.setDaihyoshaName(daihyoshaName);
+            return this;
+        }
+
+        /**
+         * daihyoshaNameKanaを設定します。
+         *
+         * @param daihyoshaNameKana 代表者名カナ
+         * @return builder
+         */
+        @Override
+        public Builder setDaihyoshaNameKana(RString daihyoshaNameKana) {
+            Objects.requireNonNull(daihyoshaNameKana);
+            this.entity.setDaihyoshaName(daihyoshaNameKana);
             return this;
         }
 

@@ -9,8 +9,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
@@ -32,7 +30,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
     private RString insertReamsLoginId;
     private UUID insertContextId;
     private boolean isDeleted = false;
-    private int updateCount = 0;
+    private final int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
@@ -44,23 +42,17 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
     private int ninteichosaIraiKaisu;
     private FlexibleDate ninteichosaJisshiYMD;
     private FlexibleDate ninteichosaJuryoYMD;
-    private Code chosaItakuKubunCode;
     private Code ninteiChosaKubunCode;
     private JigyoshaNo chosaItakusakiCode;
     private RString chosainCode;
     private Code chosaJisshiBashoCode;
     private RString chosaJisshiBashoMeisho;
-    private RDateTime jisshiBashoImageSharedFileId;
     private Code serviceKubunCode;
     private RString riyoShisetsuShimei;
-    private AtenaJusho riyoShisetsuJusho;
-    private TelNo riyoShisetsuTelNo;
+    private RString riyoShisetsuJusho;
+    private RString riyoShisetsuTelNo;
     private YubinNo riyoShisetsuYubinNo;
-    private RDateTime riyoShisetsuNameImageSharedFileId;
-    private RDateTime riyoShisetsuJushoImageSharedFileId;
-    private RDateTime riyoShisetsuTelNoImageSharedFileId;
     private RString tokki;
-    private RDateTime tokkiImageSharedFileId;
     private FlexibleDate tokkijikoUketsukeYMD;
     private FlexibleDate tokkijikoJuryoYMD;
 
@@ -252,28 +244,6 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
     }
 
     /**
-     * 調査委託区分コードのgetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：調査委託区分）
-     *
-     * @return 調査委託区分コード
-     */
-    public Code getChosaItakuKubunCode() {
-        return chosaItakuKubunCode;
-    }
-
-    /**
-     * 調査委託区分コードのsetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：調査委託区分）
-     *
-     * @param chosaItakuKubunCode 調査委託区分コード
-     */
-    public void setChosaItakuKubunCode(@Nonnull Code chosaItakuKubunCode) {
-        this.chosaItakuKubunCode = chosaItakuKubunCode;
-    }
-
-    /**
      * 認定調査区分コードのgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：調査区分）
@@ -381,25 +351,6 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
     }
 
     /**
-     * 実施場所イメージ共有ファイルIDのgetメソッドです。
-     *
-     * @return 実施場所イメージ共有ファイルID
-     */
-    @CheckForNull
-    public RDateTime getJisshiBashoImageSharedFileId() {
-        return jisshiBashoImageSharedFileId;
-    }
-
-    /**
-     * 実施場所イメージ共有ファイルIDのsetメソッドです。
-     *
-     * @param jisshiBashoImageSharedFileId 実施場所イメージ共有ファイルID
-     */
-    public void setJisshiBashoImageSharedFileId(RDateTime jisshiBashoImageSharedFileId) {
-        this.jisshiBashoImageSharedFileId = jisshiBashoImageSharedFileId;
-    }
-
-    /**
      * 認定調査・サービス区分コードのgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：現在のサービス区分コード）
@@ -446,7 +397,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      * @return 利用施設住所
      */
     @CheckForNull
-    public AtenaJusho getRiyoShisetsuJusho() {
+    public RString getRiyoShisetsuJusho() {
         return riyoShisetsuJusho;
     }
 
@@ -455,7 +406,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @param riyoShisetsuJusho 利用施設住所
      */
-    public void setRiyoShisetsuJusho(AtenaJusho riyoShisetsuJusho) {
+    public void setRiyoShisetsuJusho(RString riyoShisetsuJusho) {
         this.riyoShisetsuJusho = riyoShisetsuJusho;
     }
 
@@ -465,7 +416,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      * @return 利用施設電話番号
      */
     @CheckForNull
-    public TelNo getRiyoShisetsuTelNo() {
+    public RString getRiyoShisetsuTelNo() {
         return riyoShisetsuTelNo;
     }
 
@@ -474,7 +425,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @param riyoShisetsuTelNo 利用施設電話番号
      */
-    public void setRiyoShisetsuTelNo(TelNo riyoShisetsuTelNo) {
+    public void setRiyoShisetsuTelNo(RString riyoShisetsuTelNo) {
         this.riyoShisetsuTelNo = riyoShisetsuTelNo;
     }
 
@@ -498,67 +449,11 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
     }
 
     /**
-     * 利用施設名イメージ共有ファイルIDのgetメソッドです。
-     *
-     * @return 利用施設名イメージ共有ファイルID
-     */
-    @CheckForNull
-    public RDateTime getRiyoShisetsuNameImageSharedFileId() {
-        return riyoShisetsuNameImageSharedFileId;
-    }
-
-    /**
-     * 利用施設名イメージ共有ファイルIDのsetメソッドです。
-     *
-     * @param riyoShisetsuNameImageSharedFileId 利用施設名イメージ共有ファイルID
-     */
-    public void setRiyoShisetsuNameImageSharedFileId(RDateTime riyoShisetsuNameImageSharedFileId) {
-        this.riyoShisetsuNameImageSharedFileId = riyoShisetsuNameImageSharedFileId;
-    }
-
-    /**
-     * 利用施設住所イメージ共有ファイルIDのgetメソッドです。
-     *
-     * @return 利用施設住所イメージ共有ファイルID
-     */
-    @CheckForNull
-    public RDateTime getRiyoShisetsuJushoImageSharedFileId() {
-        return riyoShisetsuJushoImageSharedFileId;
-    }
-
-    /**
-     * 利用施設住所イメージ共有ファイルIDのsetメソッドです。
-     *
-     * @param riyoShisetsuJushoImageSharedFileId 利用施設住所イメージ共有ファイルID
-     */
-    public void setRiyoShisetsuJushoImageSharedFileId(RDateTime riyoShisetsuJushoImageSharedFileId) {
-        this.riyoShisetsuJushoImageSharedFileId = riyoShisetsuJushoImageSharedFileId;
-    }
-
-    /**
-     * 利用施設電話番号イメージ共有ファイルIDのgetメソッドです。
-     *
-     * @return 利用施設電話番号イメージ共有ファイルID
-     */
-    @CheckForNull
-    public RDateTime getRiyoShisetsuTelNoImageSharedFileId() {
-        return riyoShisetsuTelNoImageSharedFileId;
-    }
-
-    /**
-     * 利用施設電話番号イメージ共有ファイルIDのsetメソッドです。
-     *
-     * @param riyoShisetsuTelNoImageSharedFileId 利用施設電話番号イメージ共有ファイルID
-     */
-    public void setRiyoShisetsuTelNoImageSharedFileId(RDateTime riyoShisetsuTelNoImageSharedFileId) {
-        this.riyoShisetsuTelNoImageSharedFileId = riyoShisetsuTelNoImageSharedFileId;
-    }
-
-    /**
      * 特記のgetメソッドです。
      *
      * @return 特記
      */
+    @CheckForNull
     public RString getTokki() {
         return tokki;
     }
@@ -568,27 +463,8 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      *
      * @param tokki 特記
      */
-    public void setTokki(@Nonnull RString tokki) {
+    public void setTokki(RString tokki) {
         this.tokki = tokki;
-    }
-
-    /**
-     * 特記イメージ共有ファイルIDのgetメソッドです。
-     *
-     * @return 特記イメージ共有ファイルID
-     */
-    @CheckForNull
-    public RDateTime getTokkiImageSharedFileId() {
-        return tokkiImageSharedFileId;
-    }
-
-    /**
-     * 特記イメージ共有ファイルIDのsetメソッドです。
-     *
-     * @param tokkiImageSharedFileId 特記イメージ共有ファイルID
-     */
-    public void setTokkiImageSharedFileId(RDateTime tokkiImageSharedFileId) {
-        this.tokkiImageSharedFileId = tokkiImageSharedFileId;
     }
 
     /**
@@ -644,14 +520,13 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
         if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
             return false;
         }
-        if (this.ninteichosaRirekiNo != other.ninteichosaRirekiNo) {
-            return false;
-        }
-        return true;
+        return this.ninteichosaRirekiNo == other.ninteichosaRirekiNo;
     }
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT5202NinteichosahyoGaikyoChosaEntity entity) {
@@ -662,23 +537,17 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
         this.ninteichosaIraiKaisu = entity.ninteichosaIraiKaisu;
         this.ninteichosaJisshiYMD = entity.ninteichosaJisshiYMD;
         this.ninteichosaJuryoYMD = entity.ninteichosaJuryoYMD;
-        this.chosaItakuKubunCode = entity.chosaItakuKubunCode;
         this.ninteiChosaKubunCode = entity.ninteiChosaKubunCode;
         this.chosaItakusakiCode = entity.chosaItakusakiCode;
         this.chosainCode = entity.chosainCode;
         this.chosaJisshiBashoCode = entity.chosaJisshiBashoCode;
         this.chosaJisshiBashoMeisho = entity.chosaJisshiBashoMeisho;
-        this.jisshiBashoImageSharedFileId = entity.jisshiBashoImageSharedFileId;
         this.serviceKubunCode = entity.serviceKubunCode;
         this.riyoShisetsuShimei = entity.riyoShisetsuShimei;
         this.riyoShisetsuJusho = entity.riyoShisetsuJusho;
         this.riyoShisetsuTelNo = entity.riyoShisetsuTelNo;
         this.riyoShisetsuYubinNo = entity.riyoShisetsuYubinNo;
-        this.riyoShisetsuNameImageSharedFileId = entity.riyoShisetsuNameImageSharedFileId;
-        this.riyoShisetsuJushoImageSharedFileId = entity.riyoShisetsuJushoImageSharedFileId;
-        this.riyoShisetsuTelNoImageSharedFileId = entity.riyoShisetsuTelNoImageSharedFileId;
         this.tokki = entity.tokki;
-        this.tokkiImageSharedFileId = entity.tokkiImageSharedFileId;
         this.tokkijikoUketsukeYMD = entity.tokkijikoUketsukeYMD;
         this.tokkijikoJuryoYMD = entity.tokkijikoJuryoYMD;
     }
@@ -690,7 +559,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, ninteichosaRirekiNo, koroshoIfShikibetsuCode, ninteichousaIraiKubunCode, ninteichosaIraiKaisu, ninteichosaJisshiYMD, ninteichosaJuryoYMD, chosaItakuKubunCode, ninteiChosaKubunCode, chosaItakusakiCode, chosainCode, chosaJisshiBashoCode, chosaJisshiBashoMeisho, jisshiBashoImageSharedFileId, serviceKubunCode, riyoShisetsuShimei, riyoShisetsuJusho, riyoShisetsuTelNo, riyoShisetsuYubinNo, riyoShisetsuNameImageSharedFileId, riyoShisetsuJushoImageSharedFileId, riyoShisetsuTelNoImageSharedFileId, tokki, tokkiImageSharedFileId, tokkijikoUketsukeYMD, tokkijikoJuryoYMD);
+        return super.toMd5(shinseishoKanriNo, ninteichosaRirekiNo, koroshoIfShikibetsuCode, ninteichousaIraiKubunCode, ninteichosaIraiKaisu, ninteichosaJisshiYMD, ninteichosaJuryoYMD, ninteiChosaKubunCode, chosaItakusakiCode, chosainCode, chosaJisshiBashoCode, chosaJisshiBashoMeisho, serviceKubunCode, riyoShisetsuShimei, riyoShisetsuJusho, riyoShisetsuTelNo, riyoShisetsuYubinNo, tokki, tokkijikoUketsukeYMD, tokkijikoJuryoYMD);
     }
 
 // </editor-fold>

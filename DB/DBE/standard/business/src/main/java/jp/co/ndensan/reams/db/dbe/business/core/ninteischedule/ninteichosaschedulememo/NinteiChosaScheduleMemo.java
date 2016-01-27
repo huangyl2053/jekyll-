@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 認定調査スケジュールメモ情報を管理するクラスです。
  */
 public class NinteiChosaScheduleMemo extends ModelBase<NinteiChosaScheduleMemoIdentifier, DbT5222NinteiChosaScheduleMemoEntity, NinteiChosaScheduleMemo> implements Serializable {
+
     private static final long serialVersionUID = 4441122624281562268L;
 
     private final DbT5222NinteiChosaScheduleMemoEntity entity;
@@ -35,24 +36,24 @@ public class NinteiChosaScheduleMemo extends ModelBase<NinteiChosaScheduleMemoId
      * @param 連番 連番
      */
     public NinteiChosaScheduleMemo(FlexibleDate メモ年月日,
-Code 調査地区コード,
-Code メモ区分,
-int 連番) {
+            Code 調査地区コード,
+            Code メモ区分,
+            int 連番) {
         requireNonNull(メモ年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("メモ年月日"));
         requireNonNull(調査地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区コード"));
         requireNonNull(メモ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("メモ区分"));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
         this.entity = new DbT5222NinteiChosaScheduleMemoEntity();
         this.entity.setMemoYMD(メモ年月日);
-        this.entity.setChosachikucode(調査地区コード);
+        this.entity.setChosaChikuCode(調査地区コード);
         this.entity.setMemoKubun(メモ区分);
         this.entity.setRemban(連番);
         this.id = new NinteiChosaScheduleMemoIdentifier(
-        メモ年月日,
-        調査地区コード,
-        メモ区分,
-        連番
-                );
+                メモ年月日,
+                調査地区コード,
+                メモ区分,
+                連番
+        );
     }
 
     /**
@@ -65,7 +66,7 @@ int 連番) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査スケジュールメモ情報"));
         this.id = new NinteiChosaScheduleMemoIdentifier(
                 entity.getMemoYMD(),
-                entity.getChosachikucode(),
+                entity.getChosaChikuCode(),
                 entity.getMemoKubun(),
                 entity.getRemban());
     }
@@ -100,7 +101,7 @@ int 連番) {
      * @return 調査地区コード
      */
     public Code get調査地区コード() {
-        return entity.getChosachikucode();
+        return entity.getChosaChikuCode();
     }
 
     /**
@@ -209,6 +210,7 @@ int 連番) {
         }
         return new NinteiChosaScheduleMemo(deletedEntity, id);
     }
+
     /**
      * {@link NinteiChosaScheduleMemo}のシリアライズ形式を提供します。
      *
@@ -218,18 +220,19 @@ int 連番) {
         return new _SerializationProxy(entity, id);
 
     }
-    
+
     @Override
     public boolean hasChanged() {
         return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
+
         private static final long serialVersionUID = 5501732245720506682L;
         private final DbT5222NinteiChosaScheduleMemoEntity entity;
         private final NinteiChosaScheduleMemoIdentifier id;
 
-        private _SerializationProxy(DbT5222NinteiChosaScheduleMemoEntity entity,NinteiChosaScheduleMemoIdentifier id) {
+        private _SerializationProxy(DbT5222NinteiChosaScheduleMemoEntity entity, NinteiChosaScheduleMemoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

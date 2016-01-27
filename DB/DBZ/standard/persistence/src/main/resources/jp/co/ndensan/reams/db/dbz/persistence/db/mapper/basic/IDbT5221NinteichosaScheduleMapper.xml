@@ -23,7 +23,7 @@
         "DbT5221NinteichosaSchedule"."ninteiChosaJikanWaku" as "dbT5221NinteichosaSchedule_ninteiChosaJikanWaku",
         "DbT5221NinteichosaSchedule"."chosaChikuCode" as "dbT5221NinteichosaSchedule_chosaChikuCode",
         "DbT5221NinteichosaSchedule"."ninteiChosaItakusakiCode" as "dbT5221NinteichosaSchedule_ninteiChosaItakusakiCode",
-        "DbT5221NinteichosaSchedule"."ninteiChosainNo" as "dbT5221NinteichosaSchedule_ninteiChosainNo",
+        "DbT5221NinteichosaSchedule"."ninteiChosainCode" as "dbT5221NinteichosaSchedule_ninteiChosainCode",
         "DbT5221NinteichosaSchedule"."shichosonCode" as "dbT5221NinteichosaSchedule_shichosonCode",
         "DbT5221NinteichosaSchedule"."insertDantaiCd" as "dbT5221NinteichosaSchedule_insertDantaiCd",
         "DbT5221NinteichosaSchedule"."insertTimestamp" as "dbT5221NinteichosaSchedule_insertTimestamp",
@@ -55,7 +55,7 @@
         <id property="ninteiChosaJikanWaku" column="dbT5221NinteichosaSchedule_ninteiChosaJikanWaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <id property="chosaChikuCode" column="dbT5221NinteichosaSchedule_chosaChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <id property="ninteiChosaItakusakiCode" column="dbT5221NinteichosaSchedule_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="ninteiChosainNo" column="dbT5221NinteichosaSchedule_ninteiChosainNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="ninteiChosainCode" column="dbT5221NinteichosaSchedule_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="shichosonCode" column="dbT5221NinteichosaSchedule_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="insertDantaiCd" column="dbT5221NinteichosaSchedule_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5221NinteichosaSchedule_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>

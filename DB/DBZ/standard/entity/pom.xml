@@ -26,7 +26,7 @@
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxDefinition</artifactId>
         </dependency>
-        <!-- 公開系 -->
+        <!-- URD -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdEntity</artifactId>

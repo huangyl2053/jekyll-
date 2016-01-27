@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5206GaikyoTokkiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5206GaikyoTokkiEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5206GaikyoTokkiEntityGenerator.DEFAULT_申請書管理番号;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5206GaikyoTokkiEntityGenerator.DEFAULT_認定調査依頼履歴番号;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5206GaikyoTokkiEntityGenerator.DEFAULT_概況特記テキストイメージ区分;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -49,31 +50,36 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_認定調査依頼履歴番号);
+                    DEFAULT_認定調査依頼履歴番号,
+                    DEFAULT_概況特記テキストイメージ区分);
             TestSupport.insert(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_認定調査依頼履歴番号);
+                    DEFAULT_認定調査依頼履歴番号,
+                    DEFAULT_概況特記テキストイメージ区分);
         }
 
         @Test(expected = NullPointerException.class)
         public void 申請書管理番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_認定調査依頼履歴番号);
+                    DEFAULT_認定調査依頼履歴番号,
+                    DEFAULT_概況特記テキストイメージ区分);
         }
 
         @Test(expected = NullPointerException.class)
         public void 認定調査依頼履歴番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_認定調査依頼履歴番号);
+                    DEFAULT_認定調査依頼履歴番号,
+                    DEFAULT_概況特記テキストイメージ区分);
         }
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT5206GaikyoTokkiEntity insertedRecord = sut.selectByKey(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_認定調査依頼履歴番号);
+                    DEFAULT_認定調査依頼履歴番号,
+                    DEFAULT_概況特記テキストイメージ区分);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
@@ -81,7 +87,8 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT5206GaikyoTokkiEntity insertedRecord = sut.selectByKey(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_認定調査依頼履歴番号);
+                    DEFAULT_認定調査依頼履歴番号,
+                    DEFAULT_概況特記テキストイメージ区分);
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -92,10 +99,12 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
         public void 認定調査票_概況特記が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_認定調査依頼履歴番号);
+                    DEFAULT_認定調査依頼履歴番号,
+                    DEFAULT_概況特記テキストイメージ区分);
             TestSupport.insert(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_認定調査依頼履歴番号);
+                    DEFAULT_認定調査依頼履歴番号,
+                    DEFAULT_概況特記テキストイメージ区分);
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -111,11 +120,13 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
         public void 認定調査票_概況特記エンティティを渡すと_insertは_認定調査票_概況特記を追加する() {
             TestSupport.insert(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_認定調査依頼履歴番号);
+                    DEFAULT_認定調査依頼履歴番号,
+                    DEFAULT_概況特記テキストイメージ区分);
 
             assertThat(sut.selectByKey(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_認定調査依頼履歴番号), is(notNullValue()));
+                    DEFAULT_認定調査依頼履歴番号,
+                    DEFAULT_概況特記テキストイメージ区分), is(notNullValue()));
         }
     }
 
@@ -125,14 +136,16 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_認定調査依頼履歴番号);
+                    DEFAULT_認定調査依頼履歴番号,
+                    DEFAULT_概況特記テキストイメージ区分);
         }
 
         @Test
         public void 認定調査票_概況特記エンティティを渡すと_updateは_認定調査票_概況特記を更新する() {
             DbT5206GaikyoTokkiEntity updateRecord = sut.selectByKey(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_認定調査依頼履歴番号);
+                    DEFAULT_認定調査依頼履歴番号,
+                    DEFAULT_概況特記テキストイメージ区分);
             // TODO  主キー以外の項目を変更してください
             // updateRecord.set変更したい項目(75);
 
@@ -140,7 +153,8 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
 
             DbT5206GaikyoTokkiEntity updatedRecord = sut.selectByKey(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_認定調査依頼履歴番号);
+                    DEFAULT_認定調査依頼履歴番号,
+                    DEFAULT_概況特記テキストイメージ区分);
 
             // TODO  主キー以外の項目を変更してください
             // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
@@ -153,21 +167,24 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_認定調査依頼履歴番号);
+                    DEFAULT_認定調査依頼履歴番号,
+                    DEFAULT_概況特記テキストイメージ区分);
         }
 
         @Test
         public void 認定調査票_概況特記エンティティを渡すと_deleteは_認定調査票_概況特記を削除する() {
             DbT5206GaikyoTokkiEntity deletedEntity = sut.selectByKey(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_認定調査依頼履歴番号);
+                    DEFAULT_認定調査依頼履歴番号,
+                    DEFAULT_概況特記テキストイメージ区分);
             deletedEntity.setState(EntityDataState.Deleted);
 
             sut.save(deletedEntity);
 
             assertThat(sut.selectByKey(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_認定調査依頼履歴番号), is(nullValue()));
+                    DEFAULT_認定調査依頼履歴番号,
+                    DEFAULT_概況特記テキストイメージ区分), is(nullValue()));
         }
     }
 
@@ -175,10 +192,12 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
 
         public static void insert(
                 ShinseishoKanriNo 申請書管理番号,
-                int 認定調査依頼履歴番号) {
+                int 認定調査依頼履歴番号,
+                RString 概況特記テキストイメージ区分) {
             DbT5206GaikyoTokkiEntity entity = DbT5206GaikyoTokkiEntityGenerator.createDbT5206GaikyoTokkiEntity();
             entity.setShinseishoKanriNo(申請書管理番号);
             entity.setNinteichosaRirekiNo(認定調査依頼履歴番号);
+            entity.setGaikyoTokkiTextImageKubun(概況特記テキストイメージ区分);
             sut.save(entity);
         }
     }

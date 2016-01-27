@@ -40,7 +40,7 @@ public class NinteichosahyoTokkijiko extends ModelBase<NinteichosahyoTokkijikoId
     public NinteichosahyoTokkijiko(ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
             RString 認定調査特記事項番号,
-            RString 認定調査特記事項連番,
+            int 認定調査特記事項連番,
             RString 特記事項テキスト_イメージ区分,
             Code 原本マスク区分) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
@@ -53,7 +53,7 @@ public class NinteichosahyoTokkijiko extends ModelBase<NinteichosahyoTokkijikoId
         this.entity.setShinseishoKanriNo(申請書管理番号);
         this.entity.setNinteichosaRirekiNo(認定調査依頼履歴番号);
         this.entity.setNinteichosaTokkijikoNo(認定調査特記事項番号);
-        this.entity.setNinteichosaTokkijikoRenban(認定調査特記事項連番);
+        this.entity.setNinteichosaTokkijikoRemban(認定調査特記事項連番);
         this.entity.setTokkijikoTextImageKubun(特記事項テキスト_イメージ区分);
         this.entity.setGenponMaskKubun(原本マスク区分);
         this.id = new NinteichosahyoTokkijikoIdentifier(
@@ -78,7 +78,7 @@ public class NinteichosahyoTokkijiko extends ModelBase<NinteichosahyoTokkijikoId
                 entity.getShinseishoKanriNo(),
                 entity.getNinteichosaRirekiNo(),
                 entity.getNinteichosaTokkijikoNo(),
-                entity.getNinteichosaTokkijikoRenban(),
+                entity.getNinteichosaTokkijikoRemban(),
                 entity.getTokkijikoTextImageKubun(),
                 entity.getGenponMaskKubun());
     }
@@ -129,8 +129,8 @@ public class NinteichosahyoTokkijiko extends ModelBase<NinteichosahyoTokkijikoId
      *
      * @return 認定調査特記事項連番
      */
-    public RString get認定調査特記事項連番() {
-        return entity.getNinteichosaTokkijikoRenban();
+    public int get認定調査特記事項連番() {
+        return entity.getNinteichosaTokkijikoRemban();
     }
 
     /**
@@ -158,15 +158,6 @@ public class NinteichosahyoTokkijiko extends ModelBase<NinteichosahyoTokkijikoId
      */
     public RString get特記事項() {
         return entity.getTokkiJiko();
-    }
-
-    /**
-     * 特記事項イメージ共有ファイルIDを返します。
-     *
-     * @return 特記事項イメージ共有ファイルID
-     */
-    public RDateTime get特記事項イメージ共有ファイルID() {
-        return entity.getTokkiJikoImageSharedFileId();
     }
 
     /**

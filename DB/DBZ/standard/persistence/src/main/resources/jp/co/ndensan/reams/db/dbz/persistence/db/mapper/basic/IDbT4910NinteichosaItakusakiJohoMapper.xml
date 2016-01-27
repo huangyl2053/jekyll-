@@ -35,7 +35,9 @@
         "DbT4910NinteichosaItakusakiJoho"."telNo" as "dbT4910NinteichosaItakusakiJoho_telNo",
         "DbT4910NinteichosaItakusakiJoho"."faxNo" as "dbT4910NinteichosaItakusakiJoho_faxNo",
         "DbT4910NinteichosaItakusakiJoho"."daihyoshaName" as "dbT4910NinteichosaItakusakiJoho_daihyoshaName",
+        "DbT4910NinteichosaItakusakiJoho"."daihyoshaNameKana" as "dbT4910NinteichosaItakusakiJoho_daihyoshaNameKana",
         "DbT4910NinteichosaItakusakiJoho"."chosaItakuKubun" as "dbT4910NinteichosaItakusakiJoho_chosaItakuKubun",
+        "DbT4910NinteichosaItakusakiJoho"."tokuteiChosainDisplayFlag" as "dbT4910NinteichosaItakusakiJoho_tokuteiChosainDisplayFlag",
         "DbT4910NinteichosaItakusakiJoho"."waritsukeTeiin" as "dbT4910NinteichosaItakusakiJoho_waritsukeTeiin",
         "DbT4910NinteichosaItakusakiJoho"."waritsukeChiku" as "dbT4910NinteichosaItakusakiJoho_waritsukeChiku",
         "DbT4910NinteichosaItakusakiJoho"."autoWaritsukeFlag" as "dbT4910NinteichosaItakusakiJoho_autoWaritsukeFlag",
@@ -64,7 +66,9 @@
         <result property="telNo" column="dbT4910NinteichosaItakusakiJoho_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="faxNo" column="dbT4910NinteichosaItakusakiJoho_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="daihyoshaName" column="dbT4910NinteichosaItakusakiJoho_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="daihyoshaNameKana" column="dbT4910NinteichosaItakusakiJoho_daihyoshaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="chosaItakuKubun" column="dbT4910NinteichosaItakusakiJoho_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuteiChosainDisplayFlag" column="dbT4910NinteichosaItakusakiJoho_tokuteiChosainDisplayFlag" />
         <result property="waritsukeTeiin" column="dbT4910NinteichosaItakusakiJoho_waritsukeTeiin" />
         <result property="waritsukeChiku" column="dbT4910NinteichosaItakusakiJoho_waritsukeChiku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler"/>
         <result property="autoWaritsukeFlag" column="dbT4910NinteichosaItakusakiJoho_autoWaritsukeFlag" />

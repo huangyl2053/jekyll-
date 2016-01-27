@@ -4,7 +4,6 @@ import java.util.Objects;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -43,7 +42,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
     private RString jusho;
     private TelNo telNo;
     private TelNo faxNo;
-    private AtenaMeisho daihyoshaName;
+    private RString daihyoshaName;
     private RString daihyoshaNameKana;
     private boolean jokyoFlag;
 
@@ -263,7 +262,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
      *
      * @return 代表者名
      */
-    public AtenaMeisho getDaihyoshaName() {
+    public RString getDaihyoshaName() {
         return daihyoshaName;
     }
 
@@ -272,7 +271,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
      *
      * @param daihyoshaName 代表者名
      */
-    public void setDaihyoshaName(AtenaMeisho daihyoshaName) {
+    public void setDaihyoshaName(RString daihyoshaName) {
         this.daihyoshaName = daihyoshaName;
     }
 

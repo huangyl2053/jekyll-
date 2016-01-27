@@ -48,12 +48,12 @@ public class ShinsakaiChosainJohoTest extends DbdTestBase {
 
         @Test
         public void 引数に認定調査委託先コードを設定した場合_get認定調査委託先コードは_認定調査委託先コードと同じ認定調査委託先コードを返す() {
-            assertThat(sut.get認定調査委託先コード(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード));
+            assertThat(sut.get認定調査委託先コード().getColumnValue(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード));
         }
 
         @Test
         public void 引数に認定調査員コードを設定した場合_get認定調査員コードは認定調査員コードと同じ認定調査員コードを返す() {
-            assertThat(sut.get認定調査員コード(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード));
+            assertThat(sut.get認定調査員コード().getColumnValue(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード));
         }
 
         @Test
@@ -124,13 +124,13 @@ public class ShinsakaiChosainJohoTest extends DbdTestBase {
         @Test
         public void setNinteichosaItakusakiCodeで設定した値を＿生成されたChosainJohoJukyuも保持する() {
             ShinsakaiChosainJoho result = ShinsakaiChosainJoho.newBuilder().setNinteichosaItakusakiCode(new ChosaItakusakiCode("1234567890")).build();
-            assertThat(result.get認定調査委託先コード(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード));
+            assertThat(result.get認定調査委託先コード().getColumnValue(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード));
         }
 
         @Test
         public void setNinteiChosainNoで設定した値を＿生成されたChosainJohoJukyuも保持する() {
-            ShinsakaiChosainJoho result = ShinsakaiChosainJoho.newBuilder().setNinteiChosainNo(new ChosainCode("12345678")).build();
-            assertThat(result.get認定調査員コード(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード));
+            ShinsakaiChosainJoho result = ShinsakaiChosainJoho.newBuilder().setNinteiChosainCode(new ChosainCode("12345678")).build();
+            assertThat(result.get認定調査員コード().getColumnValue(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード));
         }
 
         @Test

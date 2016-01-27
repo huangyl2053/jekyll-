@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.basic.helper;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -87,7 +87,7 @@ public final class DbT5116IchijiHanteiKekkaJohoEntityGenerator {
         entity.setChukanHyokaKomoku5gun(DEFAULT_中間評価項目得点第5群);
         entity.setChukanHyokaKomoku6gun(DEFAULT_中間評価項目得点第6群);
         entity.setChukanHyokaKomoku7gun(DEFAULT_中間評価項目得点第7群);
-        entity.setIchijiHnateiKeikokuCode(DEFAULT_要介護認定一次判定警告コード);
+        entity.setIchijiHnateiKeikokuCode(DEFAULT_要介護認定一次判定警告コード.getColumnValue());
         entity.setJotaiAnteiseiCode(DEFAULT_要介護認定状態の安定性コード);
         entity.setNinchishoJiritsudoIIijoNoGaizensei(DEFAULT_認知症自立度Ⅱ以上の蓋然性);
         entity.setSuiteiKyufuKubunCode(DEFAULT_認知機能及び状態安定性から推定される給付区分コード);

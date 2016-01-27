@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -37,7 +36,7 @@ public class ShisetsuNyutaishoDacTest {
     private static ShisetsuNyutaishoDac sut;
     private static final DbT1004ShisetsuNyutaishoDac insertor = InstanceProvider.create(DbT1004ShisetsuNyutaishoDac.class);
     private static final ShikibetsuCode shikibetsuCode = new ShikibetsuCode("012345678900001");
-    private static final Decimal rirekiNo = new Decimal(0);
+    private static final int rirekiNo = 0;
 
     @BeforeClass
     public static void setUp() {
@@ -147,7 +146,7 @@ public class ShisetsuNyutaishoDacTest {
     private static class TestSupport {
 
         public static void insertDbT1004(ShikibetsuCode 識別コード,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT1004ShisetsuNyutaishoEntity entity = DbT1004ShisetsuNyutaishoEntityGenerator.createDbT1004ShisetsuNyutaishoEntity();
             entity.setShikibetsuCode(識別コード);
             entity.setRirekiNo(履歴番号);

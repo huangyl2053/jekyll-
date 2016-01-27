@@ -128,7 +128,7 @@ public class NinteichosahyoChosaItemTest extends DbzTestBase {
 
         @Test
         public void get調査項目は_entityが持つ調査項目を返す() {
-            assertThat(sut.get調査項目(), is(NinteichosahyoChosaItemEntity.getReserchItem()));
+            assertThat(sut.get調査項目(), is(NinteichosahyoChosaItemEntity.getResearchItem()));
         }
     }
 

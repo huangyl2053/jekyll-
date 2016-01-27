@@ -26,7 +26,7 @@
         "DbT2008ShotokuKanri"."kazeiShotokuGaku" as "dbT2008ShotokuKanri_kazeiShotokuGaku",
         "DbT2008ShotokuKanri"."gekihenKanwaKubun" as "dbT2008ShotokuKanri_gekihenKanwaKubun",
         "DbT2008ShotokuKanri"."yusebKubun" as "dbT2008ShotokuKanri_yusebKubun",
-        "DbT2008ShotokuKanri"."shoriYMD" as "dbT2008ShotokuKanri_shoriYMD"
+        "DbT2008ShotokuKanri"."shoriTimeStamp" as "dbT2008ShotokuKanri_shoriTimeStamp"
     </sql>
 
     <!--テーブルDbT2008ShotokuKanriの項目をDbT2008ShotokuKanriEntityの項目にマッピングします。-->
@@ -50,7 +50,7 @@
         <result property="kazeiShotokuGaku" column="dbT2008ShotokuKanri_kazeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="gekihenKanwaKubun" column="dbT2008ShotokuKanri_gekihenKanwaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yusebKubun" column="dbT2008ShotokuKanri_yusebKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shoriYMD" column="dbT2008ShotokuKanri_shoriYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="shoriTimeStamp" column="dbT2008ShotokuKanri_shoriTimeStamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
     </resultMap>
 
     <select id="getEntity"

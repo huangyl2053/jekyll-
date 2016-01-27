@@ -29,7 +29,42 @@
          "DbT4116IchijiHanteiKekkaJoho"."kariIchijiHanteiKubun" as "dbT4116IchijiHanteiKekkaJoho_kariIchijiHanteiKubun",
          "DbT4116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" as "dbT4116IchijiHanteiKekkaJoho_ichijiHanteiYMD",
          "DbT4116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaCode" as "dbT4116IchijiHanteiKekkaJoho_ichijiHanteiKekkaCode",
-         "DbT4116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaNinchishoKasanCode" as "dbT4116IchijiHanteiKekkaJoho_ichijiHanteiKekkaNinchishoKasanCode"
+         "DbT4116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaNinchishoKasanCode" as "dbT4116IchijiHanteiKekkaJoho_ichijiHanteiKekkaNinchishoKasanCode",
+         "DbT4116IchijiHanteiKekkaJoho"."kijunJikan" as "dbT4116IchijiHanteiKekkaJoho_kijunJikan",
+         "DbT4116IchijiHanteiKekkaJoho"."kijunJikanShokuji" as "dbT4116IchijiHanteiKekkaJoho_kijunJikanShokuji",
+         "DbT4116IchijiHanteiKekkaJoho"."kijunJikanHaisetsu" as "dbT4116IchijiHanteiKekkaJoho_kijunJikanHaisetsu",
+         "DbT4116IchijiHanteiKekkaJoho"."kijunJikanIdo" as "dbT4116IchijiHanteiKekkaJoho_kijunJikanIdo",
+         "DbT4116IchijiHanteiKekkaJoho"."kijunJikanSeiketsuHoji" as "dbT4116IchijiHanteiKekkaJoho_kijunJikanSeiketsuHoji",
+         "DbT4116IchijiHanteiKekkaJoho"."kijunJikanKansetsuCare" as "dbT4116IchijiHanteiKekkaJoho_kijunJikanKansetsuCare",
+         "DbT4116IchijiHanteiKekkaJoho"."kijunJikanBPSDKanren" as "dbT4116IchijiHanteiKekkaJoho_kijunJikanBPSDKanren",
+         "DbT4116IchijiHanteiKekkaJoho"."kijunJikanKinoKunren" as "dbT4116IchijiHanteiKekkaJoho_kijunJikanKinoKunren",
+         "DbT4116IchijiHanteiKekkaJoho"."kijunJikanIryoKanren" as "dbT4116IchijiHanteiKekkaJoho_kijunJikanIryoKanren",
+         "DbT4116IchijiHanteiKekkaJoho"."kijunJikanNinchishoKasan" as "dbT4116IchijiHanteiKekkaJoho_kijunJikanNinchishoKasan",
+         "DbT4116IchijiHanteiKekkaJoho"."chukanHyokaKomoku1gun" as "dbT4116IchijiHanteiKekkaJoho_chukanHyokaKomoku1gun",
+         "DbT4116IchijiHanteiKekkaJoho"."chukanHyokaKomoku2gun" as "dbT4116IchijiHanteiKekkaJoho_chukanHyokaKomoku2gun",
+         "DbT4116IchijiHanteiKekkaJoho"."chukanHyokaKomoku3gun" as "dbT4116IchijiHanteiKekkaJoho_chukanHyokaKomoku3gun",
+         "DbT4116IchijiHanteiKekkaJoho"."chukanHyokaKomoku4gun" as "dbT4116IchijiHanteiKekkaJoho_chukanHyokaKomoku4gun",
+         "DbT4116IchijiHanteiKekkaJoho"."chukanHyokaKomoku5gun" as "dbT4116IchijiHanteiKekkaJoho_chukanHyokaKomoku5gun",
+         "DbT4116IchijiHanteiKekkaJoho"."chukanHyokaKomoku6gun" as "dbT4116IchijiHanteiKekkaJoho_chukanHyokaKomoku6gun",
+         "DbT4116IchijiHanteiKekkaJoho"."chukanHyokaKomoku7gun" as "dbT4116IchijiHanteiKekkaJoho_chukanHyokaKomoku7gun",
+         "DbT4116IchijiHanteiKekkaJoho"."ichijiHnateiKeikokuCode" as "dbT4116IchijiHanteiKekkaJoho_ichijiHnateiKeikokuCode",
+         "DbT4116IchijiHanteiKekkaJoho"."jotaiAnteiseiCode" as "dbT4116IchijiHanteiKekkaJoho_jotaiAnteiseiCode",
+         "DbT4116IchijiHanteiKekkaJoho"."ninchishoJiritsudoIIijoNoGaizensei" as "dbT4116IchijiHanteiKekkaJoho_ninchishoJiritsudoIIijoNoGaizensei",
+         "DbT4116IchijiHanteiKekkaJoho"."suiteiKyufuKubunCode" as "dbT4116IchijiHanteiKekkaJoho_suiteiKyufuKubunCode",
+         "DbT4116IchijiHanteiKekkaJoho"."ninchishoKoreishaShihyoCode" as "dbT4116IchijiHanteiKekkaJoho_ninchishoKoreishaShihyoCode",
+         "DbT4116IchijiHanteiKekkaJoho"."jiritsudoKumiawase1" as "dbT4116IchijiHanteiKekkaJoho_jiritsudoKumiawase1",
+         "DbT4116IchijiHanteiKekkaJoho"."jiritsudoKumiawase2" as "dbT4116IchijiHanteiKekkaJoho_jiritsudoKumiawase2",
+         "DbT4116IchijiHanteiKekkaJoho"."jiritsudoKumiawase3" as "dbT4116IchijiHanteiKekkaJoho_jiritsudoKumiawase3",
+         "DbT4116IchijiHanteiKekkaJoho"."jiritsudoKumiawase4" as "dbT4116IchijiHanteiKekkaJoho_jiritsudoKumiawase4",
+         "DbT4116IchijiHanteiKekkaJoho"."jiritsudoKumiawase5" as "dbT4116IchijiHanteiKekkaJoho_jiritsudoKumiawase5",
+         "DbT4116IchijiHanteiKekkaJoho"."jiritsudoKumiawase6" as "dbT4116IchijiHanteiKekkaJoho_jiritsudoKumiawase6",
+         "DbT4116IchijiHanteiKekkaJoho"."jiritsudoKumiawase7" as "dbT4116IchijiHanteiKekkaJoho_jiritsudoKumiawase7",
+         "DbT4116IchijiHanteiKekkaJoho"."gaizenseiHyokaCode" as "dbT4116IchijiHanteiKekkaJoho_gaizenseiHyokaCode",
+         "DbT4116IchijiHanteiKekkaJoho"."gaizenseiHyokaPercent" as "dbT4116IchijiHanteiKekkaJoho_gaizenseiHyokaPercent",
+         "DbT4116IchijiHanteiKekkaJoho"."ichijiHanteiSofuKubun" as "dbT4116IchijiHanteiKekkaJoho_ichijiHanteiSofuKubun",
+         "DbT4116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaSofuYMD" as "dbT4116IchijiHanteiKekkaJoho_ichijiHanteiKekkaSofuYMD",
+         "DbT4116IchijiHanteiKekkaJoho"."chert" as "dbT4116IchijiHanteiKekkaJoho_chert",
+         "DbT4116IchijiHanteiKekkaJoho"."jotaizo" as "dbT4116IchijiHanteiKekkaJoho_jotaizo"
     </sql>
 
 
@@ -48,6 +83,41 @@
         <result property="ichijiHanteiYMD" column="dbT4116IchijiHanteiKekkaJoho_ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ichijiHanteiKekkaCode" column="dbT4116IchijiHanteiKekkaJoho_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ichijiHanteiKekkaNinchishoKasanCode" column="dbT4116IchijiHanteiKekkaJoho_ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kijunJikan" column="dbT4116IchijiHanteiKekkaJoho_kijunJikan" />
+        <result property="kijunJikanShokuji" column="dbT4116IchijiHanteiKekkaJoho_kijunJikanShokuji" />
+        <result property="kijunJikanHaisetsu" column="dbT4116IchijiHanteiKekkaJoho_kijunJikanHaisetsu" />
+        <result property="kijunJikanIdo" column="dbT4116IchijiHanteiKekkaJoho_kijunJikanIdo" />
+        <result property="kijunJikanSeiketsuHoji" column="dbT4116IchijiHanteiKekkaJoho_kijunJikanSeiketsuHoji" />
+        <result property="kijunJikanKansetsuCare" column="dbT4116IchijiHanteiKekkaJoho_kijunJikanKansetsuCare" />
+        <result property="kijunJikanBPSDKanren" column="dbT4116IchijiHanteiKekkaJoho_kijunJikanBPSDKanren" />
+        <result property="kijunJikanKinoKunren" column="dbT4116IchijiHanteiKekkaJoho_kijunJikanKinoKunren" />
+        <result property="kijunJikanIryoKanren" column="dbT4116IchijiHanteiKekkaJoho_kijunJikanIryoKanren" />
+        <result property="kijunJikanNinchishoKasan" column="dbT4116IchijiHanteiKekkaJoho_kijunJikanNinchishoKasan" />
+        <result property="chukanHyokaKomoku1gun" column="dbT4116IchijiHanteiKekkaJoho_chukanHyokaKomoku1gun" />
+        <result property="chukanHyokaKomoku2gun" column="dbT4116IchijiHanteiKekkaJoho_chukanHyokaKomoku2gun" />
+        <result property="chukanHyokaKomoku3gun" column="dbT4116IchijiHanteiKekkaJoho_chukanHyokaKomoku3gun" />
+        <result property="chukanHyokaKomoku4gun" column="dbT4116IchijiHanteiKekkaJoho_chukanHyokaKomoku4gun" />
+        <result property="chukanHyokaKomoku5gun" column="dbT4116IchijiHanteiKekkaJoho_chukanHyokaKomoku5gun" />
+        <result property="chukanHyokaKomoku6gun" column="dbT4116IchijiHanteiKekkaJoho_chukanHyokaKomoku6gun" />
+        <result property="chukanHyokaKomoku7gun" column="dbT4116IchijiHanteiKekkaJoho_chukanHyokaKomoku7gun" />
+        <result property="ichijiHnateiKeikokuCode" column="dbT4116IchijiHanteiKekkaJoho_ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jotaiAnteiseiCode" column="dbT4116IchijiHanteiKekkaJoho_jotaiAnteiseiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ninchishoJiritsudoIIijoNoGaizensei" column="dbT4116IchijiHanteiKekkaJoho_ninchishoJiritsudoIIijoNoGaizensei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="suiteiKyufuKubunCode" column="dbT4116IchijiHanteiKekkaJoho_suiteiKyufuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ninchishoKoreishaShihyoCode" column="dbT4116IchijiHanteiKekkaJoho_ninchishoKoreishaShihyoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="jiritsudoKumiawase1" column="dbT4116IchijiHanteiKekkaJoho_jiritsudoKumiawase1" />
+        <result property="jiritsudoKumiawase2" column="dbT4116IchijiHanteiKekkaJoho_jiritsudoKumiawase2" />
+        <result property="jiritsudoKumiawase3" column="dbT4116IchijiHanteiKekkaJoho_jiritsudoKumiawase3" />
+        <result property="jiritsudoKumiawase4" column="dbT4116IchijiHanteiKekkaJoho_jiritsudoKumiawase4" />
+        <result property="jiritsudoKumiawase5" column="dbT4116IchijiHanteiKekkaJoho_jiritsudoKumiawase5" />
+        <result property="jiritsudoKumiawase6" column="dbT4116IchijiHanteiKekkaJoho_jiritsudoKumiawase6" />
+        <result property="jiritsudoKumiawase7" column="dbT4116IchijiHanteiKekkaJoho_jiritsudoKumiawase7" />
+        <result property="gaizenseiHyokaCode" column="dbT4116IchijiHanteiKekkaJoho_gaizenseiHyokaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="gaizenseiHyokaPercent" column="dbT4116IchijiHanteiKekkaJoho_gaizenseiHyokaPercent" />
+        <result property="ichijiHanteiSofuKubun" column="dbT4116IchijiHanteiKekkaJoho_ichijiHanteiSofuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijiHanteiKekkaSofuYMD" column="dbT4116IchijiHanteiKekkaJoho_ichijiHanteiKekkaSofuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="chert" column="dbT4116IchijiHanteiKekkaJoho_chert" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jotaizo" column="dbT4116IchijiHanteiKekkaJoho_jotaizo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
         <select id="getEntity" resultMap="ResultMap_DbT4116IchijiHanteiKekkaJohoEntity">

@@ -129,7 +129,7 @@ public class RoreiFukushiNenkinJukyushaTest extends DbzTestBase {
 
         @Test
         public void get受給終了年月日は_entityが持つ受給終了年月日を返す() {
-            assertThat(sut.get受給終了年月日(), is(RoreiFukushiNenkinJukyushaEntity.getJukyuShuryoYMD()));
+            assertThat(sut.get受給終了年月日(), is(RoreiFukushiNenkinJukyushaEntity.getJukyuHaishiYMD()));
         }
 
         @Test

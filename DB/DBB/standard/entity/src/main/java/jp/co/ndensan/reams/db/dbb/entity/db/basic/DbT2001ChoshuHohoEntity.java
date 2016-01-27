@@ -1,24 +1,25 @@
 package jp.co.ndensan.reams.db.dbb.entity.db.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 介護徴収方法テーブルのエンティティクラスです。
  */
 public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2001ChoshuHoho");
 
@@ -70,7 +71,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -79,7 +80,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -88,7 +89,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -97,17 +98,16 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -116,7 +116,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 賦課年度のgetメソッドです。
-     * 
+     *
      * @return 賦課年度
      */
     public FlexibleYear getFukaNendo() {
@@ -125,7 +125,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 賦課年度のsetメソッドです。
-     * 
+     *
      * @param fukaNendo 賦課年度
      */
     public void setFukaNendo(@Nonnull FlexibleYear fukaNendo) {
@@ -134,7 +134,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -143,7 +143,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
@@ -152,7 +152,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -161,7 +161,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(@Nonnull int rirekiNo) {
@@ -170,7 +170,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法4月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法4月
      */
     @CheckForNull
@@ -180,7 +180,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法4月のsetメソッドです。
-     * 
+     *
      * @param choshuHoho4gatsu 徴収方法4月
      */
     public void setChoshuHoho4gatsu(RString choshuHoho4gatsu) {
@@ -189,7 +189,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法5月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法5月
      */
     @CheckForNull
@@ -199,7 +199,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法5月のsetメソッドです。
-     * 
+     *
      * @param choshuHoho5gatsu 徴収方法5月
      */
     public void setChoshuHoho5gatsu(RString choshuHoho5gatsu) {
@@ -208,7 +208,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法6月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法6月
      */
     @CheckForNull
@@ -218,7 +218,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法6月のsetメソッドです。
-     * 
+     *
      * @param choshuHoho6gatsu 徴収方法6月
      */
     public void setChoshuHoho6gatsu(RString choshuHoho6gatsu) {
@@ -227,7 +227,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法7月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法7月
      */
     @CheckForNull
@@ -237,7 +237,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法7月のsetメソッドです。
-     * 
+     *
      * @param choshuHoho7gatsu 徴収方法7月
      */
     public void setChoshuHoho7gatsu(RString choshuHoho7gatsu) {
@@ -246,7 +246,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法8月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法8月
      */
     @CheckForNull
@@ -256,7 +256,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法8月のsetメソッドです。
-     * 
+     *
      * @param choshuHoho8gatsu 徴収方法8月
      */
     public void setChoshuHoho8gatsu(RString choshuHoho8gatsu) {
@@ -265,7 +265,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法9月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法9月
      */
     @CheckForNull
@@ -275,7 +275,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法9月のsetメソッドです。
-     * 
+     *
      * @param choshuHoho9gatsu 徴収方法9月
      */
     public void setChoshuHoho9gatsu(RString choshuHoho9gatsu) {
@@ -284,7 +284,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法10月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法10月
      */
     @CheckForNull
@@ -294,7 +294,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法10月のsetメソッドです。
-     * 
+     *
      * @param choshuHoho10gatsu 徴収方法10月
      */
     public void setChoshuHoho10gatsu(RString choshuHoho10gatsu) {
@@ -303,7 +303,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法11月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法11月
      */
     @CheckForNull
@@ -313,7 +313,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法11月のsetメソッドです。
-     * 
+     *
      * @param choshuHoho11gatsu 徴収方法11月
      */
     public void setChoshuHoho11gatsu(RString choshuHoho11gatsu) {
@@ -322,7 +322,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法12月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法12月
      */
     @CheckForNull
@@ -332,7 +332,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法12月のsetメソッドです。
-     * 
+     *
      * @param choshuHoho12gatsu 徴収方法12月
      */
     public void setChoshuHoho12gatsu(RString choshuHoho12gatsu) {
@@ -341,7 +341,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法1月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法1月
      */
     @CheckForNull
@@ -351,7 +351,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法1月のsetメソッドです。
-     * 
+     *
      * @param choshuHoho1gatsu 徴収方法1月
      */
     public void setChoshuHoho1gatsu(RString choshuHoho1gatsu) {
@@ -360,7 +360,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法2月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法2月
      */
     @CheckForNull
@@ -370,7 +370,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法2月のsetメソッドです。
-     * 
+     *
      * @param choshuHoho2gatsu 徴収方法2月
      */
     public void setChoshuHoho2gatsu(RString choshuHoho2gatsu) {
@@ -379,7 +379,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法3月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法3月
      */
     @CheckForNull
@@ -389,7 +389,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法3月のsetメソッドです。
-     * 
+     *
      * @param choshuHoho3gatsu 徴収方法3月
      */
     public void setChoshuHoho3gatsu(RString choshuHoho3gatsu) {
@@ -398,7 +398,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法翌4月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法翌4月
      */
     @CheckForNull
@@ -408,7 +408,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法翌4月のsetメソッドです。
-     * 
+     *
      * @param choshuHohoYoku4gatsu 徴収方法翌4月
      */
     public void setChoshuHohoYoku4gatsu(RString choshuHohoYoku4gatsu) {
@@ -417,7 +417,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法翌5月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法翌5月
      */
     @CheckForNull
@@ -427,7 +427,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法翌5月のsetメソッドです。
-     * 
+     *
      * @param choshuHohoYoku5gatsu 徴収方法翌5月
      */
     public void setChoshuHohoYoku5gatsu(RString choshuHohoYoku5gatsu) {
@@ -436,7 +436,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法翌6月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法翌6月
      */
     @CheckForNull
@@ -446,7 +446,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法翌6月のsetメソッドです。
-     * 
+     *
      * @param choshuHohoYoku6gatsu 徴収方法翌6月
      */
     public void setChoshuHohoYoku6gatsu(RString choshuHohoYoku6gatsu) {
@@ -455,7 +455,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法翌7月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法翌7月
      */
     @CheckForNull
@@ -465,7 +465,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法翌7月のsetメソッドです。
-     * 
+     *
      * @param choshuHohoYoku7gatsu 徴収方法翌7月
      */
     public void setChoshuHohoYoku7gatsu(RString choshuHohoYoku7gatsu) {
@@ -474,7 +474,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法翌8月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法翌8月
      */
     @CheckForNull
@@ -484,7 +484,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法翌8月のsetメソッドです。
-     * 
+     *
      * @param choshuHohoYoku8gatsu 徴収方法翌8月
      */
     public void setChoshuHohoYoku8gatsu(RString choshuHohoYoku8gatsu) {
@@ -493,7 +493,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法翌9月のgetメソッドです。
-     * 
+     *
      * @return 徴収方法翌9月
      */
     @CheckForNull
@@ -503,7 +503,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 徴収方法翌9月のsetメソッドです。
-     * 
+     *
      * @param choshuHohoYoku9gatsu 徴収方法翌9月
      */
     public void setChoshuHohoYoku9gatsu(RString choshuHohoYoku9gatsu) {
@@ -512,7 +512,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 仮徴収・基礎年金番号のgetメソッドです。
-     * 
+     *
      * @return 仮徴収・基礎年金番号
      */
     @CheckForNull
@@ -522,7 +522,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 仮徴収・基礎年金番号のsetメソッドです。
-     * 
+     *
      * @param kariNenkinNo 仮徴収・基礎年金番号
      */
     public void setKariNenkinNo(RString kariNenkinNo) {
@@ -531,7 +531,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 仮徴収・年金コードのgetメソッドです。
-     * 
+     *
      * @return 仮徴収・年金コード
      */
     @CheckForNull
@@ -541,7 +541,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 仮徴収・年金コードのsetメソッドです。
-     * 
+     *
      * @param kariNenkinCode 仮徴収・年金コード
      */
     public void setKariNenkinCode(RString kariNenkinCode) {
@@ -550,7 +550,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 仮徴収・捕捉月のgetメソッドです。
-     * 
+     *
      * @return 仮徴収・捕捉月
      */
     @CheckForNull
@@ -560,7 +560,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 仮徴収・捕捉月のsetメソッドです。
-     * 
+     *
      * @param kariHosokuM 仮徴収・捕捉月
      */
     public void setKariHosokuM(RString kariHosokuM) {
@@ -569,7 +569,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 本徴収・基礎年金番号のgetメソッドです。
-     * 
+     *
      * @return 本徴収・基礎年金番号
      */
     @CheckForNull
@@ -579,7 +579,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 本徴収・基礎年金番号のsetメソッドです。
-     * 
+     *
      * @param honNenkinNo 本徴収・基礎年金番号
      */
     public void setHonNenkinNo(RString honNenkinNo) {
@@ -588,7 +588,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 本徴収・年金コードのgetメソッドです。
-     * 
+     *
      * @return 本徴収・年金コード
      */
     @CheckForNull
@@ -598,7 +598,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 本徴収・年金コードのsetメソッドです。
-     * 
+     *
      * @param honNenkinCode 本徴収・年金コード
      */
     public void setHonNenkinCode(RString honNenkinCode) {
@@ -607,7 +607,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 本徴収・捕捉月のgetメソッドです。
-     * 
+     *
      * @return 本徴収・捕捉月
      */
     @CheckForNull
@@ -617,7 +617,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 本徴収・捕捉月のsetメソッドです。
-     * 
+     *
      * @param honHosokuM 本徴収・捕捉月
      */
     public void setHonHosokuM(RString honHosokuM) {
@@ -626,7 +626,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 翌年度仮徴収・基礎年金番号のgetメソッドです。
-     * 
+     *
      * @return 翌年度仮徴収・基礎年金番号
      */
     @CheckForNull
@@ -636,7 +636,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 翌年度仮徴収・基礎年金番号のsetメソッドです。
-     * 
+     *
      * @param yokunendoKariNenkinNo 翌年度仮徴収・基礎年金番号
      */
     public void setYokunendoKariNenkinNo(RString yokunendoKariNenkinNo) {
@@ -645,7 +645,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 翌年度仮徴収・年金コードのgetメソッドです。
-     * 
+     *
      * @return 翌年度仮徴収・年金コード
      */
     @CheckForNull
@@ -655,7 +655,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 翌年度仮徴収・年金コードのsetメソッドです。
-     * 
+     *
      * @param yokunendoKariNenkinCode 翌年度仮徴収・年金コード
      */
     public void setYokunendoKariNenkinCode(RString yokunendoKariNenkinCode) {
@@ -664,7 +664,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 翌年度仮徴収・捕捉月のgetメソッドです。
-     * 
+     *
      * @return 翌年度仮徴収・捕捉月
      */
     @CheckForNull
@@ -674,7 +674,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 翌年度仮徴収・捕捉月のsetメソッドです。
-     * 
+     *
      * @param yokunendoKariHosokuM 翌年度仮徴収・捕捉月
      */
     public void setYokunendoKariHosokuM(RString yokunendoKariHosokuM) {
@@ -683,7 +683,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 依頼情報送付済みフラグのgetメソッドです。
-     * 
+     *
      * @return 依頼情報送付済みフラグ
      */
     @CheckForNull
@@ -693,7 +693,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 依頼情報送付済みフラグのsetメソッドです。
-     * 
+     *
      * @param iraiSohuzumiFlag 依頼情報送付済みフラグ
      */
     public void setIraiSohuzumiFlag(boolean iraiSohuzumiFlag) {
@@ -702,7 +702,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 追加依頼情報送付済みフラグのgetメソッドです。
-     * 
+     *
      * @return 追加依頼情報送付済みフラグ
      */
     @CheckForNull
@@ -712,7 +712,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 追加依頼情報送付済みフラグのsetメソッドです。
-     * 
+     *
      * @param tsuikaIraiSohuzumiFlag 追加依頼情報送付済みフラグ
      */
     public void setTsuikaIraiSohuzumiFlag(boolean tsuikaIraiSohuzumiFlag) {
@@ -721,7 +721,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 特別徴収停止日時のgetメソッドです。
-     * 
+     *
      * @return 特別徴収停止日時
      */
     @CheckForNull
@@ -731,7 +731,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 特別徴収停止日時のsetメソッドです。
-     * 
+     *
      * @param tokuchoTeishiNichiji 特別徴収停止日時
      */
     public void setTokuchoTeishiNichiji(YMDHMS tokuchoTeishiNichiji) {
@@ -740,7 +740,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 特別徴収停止事由コードのgetメソッドです。
-     * 
+     *
      * @return 特別徴収停止事由コード
      */
     @CheckForNull
@@ -750,7 +750,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * 特別徴収停止事由コードのsetメソッドです。
-     * 
+     *
      * @param tokuchoTeishiJiyuCode 特別徴収停止事由コード
      */
     public void setTokuchoTeishiJiyuCode(RString tokuchoTeishiJiyuCode) {
@@ -759,9 +759,9 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * このエンティティの主キーが他の{@literal DbT2001ChoshuHohoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT2001ChoshuHohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -824,6 +824,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -832,5 +833,4 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
     }
 
 // </editor-fold>
-
 }

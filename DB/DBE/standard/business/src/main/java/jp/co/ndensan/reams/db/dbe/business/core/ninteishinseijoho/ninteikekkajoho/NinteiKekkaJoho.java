@@ -156,7 +156,7 @@ public class NinteiKekkaJoho extends ModelBase<NinteiKekkaJohoIdentifier, DbT510
      * @return 一次判定結果変更理由
      */
     public RString get一次判定結果変更理由() {
-        return entity.getIchijiHnateiKekkaHenkoRiyu();
+        return entity.getIchijiHanteiKekkaHenkoRiyu();
     }
 
     /**

@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomo
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Value;
 
 /**
@@ -23,7 +22,7 @@ public class YoboKeikakuJikoSakuseiMeisaiIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth 対象年月;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
     private final RString 居宅サービス区分;
     private final JigyoshaNo サービス提供事業者番号;
     private final ServiceShuruiCode サービス種類コード;
@@ -42,7 +41,7 @@ public class YoboKeikakuJikoSakuseiMeisaiIdentifier implements Serializable {
      */
     public YoboKeikakuJikoSakuseiMeisaiIdentifier(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号,
+            Integer 履歴番号,
             RString 居宅サービス区分,
             JigyoshaNo サービス提供事業者番号,
             ServiceShuruiCode サービス種類コード,
@@ -79,7 +78,7 @@ public class YoboKeikakuJikoSakuseiMeisaiIdentifier implements Serializable {
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public Integer get履歴番号() {
         return 履歴番号;
     }
 

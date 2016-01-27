@@ -27,18 +27,14 @@
         "DbT4206GaikyoTokkiChild"."updateCount" as "dbT4206GaikyoTokkiChild_updateCount",
         "DbT4206GaikyoTokkiChild"."lastUpdateTimestamp" as "dbT4206GaikyoTokkiChild_lastUpdateTimestamp",
         "DbT4206GaikyoTokkiChild"."lastUpdateReamsLoginId" as "dbT4206GaikyoTokkiChild_lastUpdateReamsLoginId",
+        "DbT4206GaikyoTokkiChild"."gaikyoTokkiTextImageKubun" as "dbT4206GaikyoTokkiChild_gaikyoTokkiTextImageKubun",
+        "DbT4206GaikyoTokkiChild"."jutakuKaishu" as "dbT4206GaikyoTokkiChild_jutakuKaishu",
+        "DbT4206GaikyoTokkiChild"."tokubetsuKyufuService" as "dbT4206GaikyoTokkiChild_tokubetsuKyufuService",
+        "DbT4206GaikyoTokkiChild"."zaitakuService" as "dbT4206GaikyoTokkiChild_zaitakuService",
         "DbT4206GaikyoTokkiChild"."shuso" as "dbT4206GaikyoTokkiChild_shuso",
-        "DbT4206GaikyoTokkiChild"."shusoImageSharedFileId" as "dbT4206GaikyoTokkiChild_shusoImageSharedFileId",
-        "DbT4206GaikyoTokkiChild"."shusoMaskingImageSharedFileId" as "dbT4206GaikyoTokkiChild_shusoMaskingImageSharedFileId",
         "DbT4206GaikyoTokkiChild"."kazokuJokyo" as "dbT4206GaikyoTokkiChild_kazokuJokyo",
-        "DbT4206GaikyoTokkiChild"."kazokuJokyoImageSharedFileId" as "dbT4206GaikyoTokkiChild_kazokuJokyoImageSharedFileId",
-        "DbT4206GaikyoTokkiChild"."kazokuJokyoMaskingImageSharedFileId" as "dbT4206GaikyoTokkiChild_kazokuJokyoMaskingImageSharedFileId",
         "DbT4206GaikyoTokkiChild"."kyojuKankyo" as "dbT4206GaikyoTokkiChild_kyojuKankyo",
-        "DbT4206GaikyoTokkiChild"."kyojuKankyoImageSharedFileId" as "dbT4206GaikyoTokkiChild_kyojuKankyoImageSharedFileId",
-        "DbT4206GaikyoTokkiChild"."kyojuKankyoMaskingImageSharedFileId" as "dbT4206GaikyoTokkiChild_kyojuKankyoMaskingImageSharedFileId",
-        "DbT4206GaikyoTokkiChild"."kikaiKiki" as "dbT4206GaikyoTokkiChild_kikaiKiki",
-        "DbT4206GaikyoTokkiChild"."kikaiKikiImageSharedFileId" as "dbT4206GaikyoTokkiChild_kikaiKikiImageSharedFileId",
-        "DbT4206GaikyoTokkiChild"."kikaiKikiMaskingImageSharedFileId" as "dbT4206GaikyoTokkiChild_kikaiKikiMaskingImageSharedFileId"
+        "DbT4206GaikyoTokkiChild"."kikaiKiki" as "dbT4206GaikyoTokkiChild_kikaiKiki"
     </sql>
 
 
@@ -54,6 +50,10 @@
         <result property="updateCount" column="dbT4206GaikyoTokkiChild_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT4206GaikyoTokkiChild_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT4206GaikyoTokkiChild_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gaikyoTokkiTextImageKubun" column="dbT4206GaikyoTokkiChild_gaikyoTokkiTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jutakuKaishu" column="dbT4206GaikyoTokkiChildjutakuKaishu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokubetsuKyufuService" column="dbT4206GaikyoTokkiChild_tokubetsuKyufuService" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="zaitakuService" column="dbT4206GaikyoTokkiChild_zaitakuService" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shuso" column="dbT4206GaikyoTokkiChild_shuso" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shusoImageSharedFileId" column="dbT4206GaikyoTokkiChild_shusoImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="shusoMaskingImageSharedFileId" column="dbT4206GaikyoTokkiChild_shusoMaskingImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>

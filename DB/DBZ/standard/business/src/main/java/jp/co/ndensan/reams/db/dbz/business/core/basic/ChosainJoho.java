@@ -44,8 +44,8 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
         requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
         this.entity = new DbT5913ChosainJohoEntity();
         this.entity.setShichosonCode(市町村コード);
-        this.entity.setNinteichosaItakusakiCode(認定調査委託先コード);
-        this.entity.setNinteiChosainNo(認定調査員コード);
+        this.entity.setNinteiChosaItakusakiCode(認定調査委託先コード.getColumnValue());
+        this.entity.setNinteiChosainCode(認定調査員コード.getColumnValue());
         this.id = new ChosainJohoIdentifier(
                 市町村コード,
                 認定調査委託先コード,
@@ -63,8 +63,8 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員情報"));
         this.id = new ChosainJohoIdentifier(
                 entity.getShichosonCode(),
-                entity.getNinteichosaItakusakiCode(),
-                entity.getNinteiChosainNo());
+                new ChosaItakusakiCode(entity.getNinteiChosaItakusakiCode()),
+                new ChosainCode(entity.getNinteiChosainCode()));
     }
 
     /**
@@ -97,7 +97,7 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
      * @return 認定調査委託先コード
      */
     public ChosaItakusakiCode get認定調査委託先コード() {
-        return entity.getNinteichosaItakusakiCode();
+        return new ChosaItakusakiCode(entity.getNinteiChosaItakusakiCode());
     }
 
     /**
@@ -106,7 +106,7 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
      * @return 認定調査員コード
      */
     public ChosainCode get認定調査員コード() {
-        return entity.getNinteiChosainNo();
+        return new ChosainCode(entity.getNinteiChosainCode());
     }
 
     /**

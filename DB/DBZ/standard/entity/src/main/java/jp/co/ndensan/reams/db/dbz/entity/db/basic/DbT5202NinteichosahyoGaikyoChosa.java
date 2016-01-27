@@ -72,11 +72,6 @@ public enum DbT5202NinteichosahyoGaikyoChosa implements IColumnDefinition {
      */
     ninteichosaJuryoYMD(2147483647, 0),
     /**
-     * 調査委託区分コード
-     * <br/>Enum（DBE：調査委託区分）
-     */
-    chosaItakuKubunCode(2147483647, 0),
-    /**
      * 認定調査区分コード
      * <br/>Enum（DBE：調査区分）
      */
@@ -99,11 +94,7 @@ public enum DbT5202NinteichosahyoGaikyoChosa implements IColumnDefinition {
     /**
      * 認定調査実施場所名称
      */
-    chosaJisshiBashoMeisho(32, 0),
-    /**
-     * 実施場所イメージ共有ファイルID
-     */
-    jisshiBashoImageSharedFileId(29, 0),
+    chosaJisshiBashoMeisho(64, 0),
     /**
      * 認定調査・サービス区分コード
      * <br/>Enum（DBE：現在のサービス区分コード）
@@ -116,35 +107,19 @@ public enum DbT5202NinteichosahyoGaikyoChosa implements IColumnDefinition {
     /**
      * 利用施設住所
      */
-    riyoShisetsuJusho(2147483647, 0),
+    riyoShisetsuJusho(64, 0),
     /**
      * 利用施設電話番号
      */
-    riyoShisetsuTelNo(2147483647, 0),
+    riyoShisetsuTelNo(32, 0),
     /**
      * 利用施設郵便番号
      */
     riyoShisetsuYubinNo(2147483647, 0),
     /**
-     * 利用施設名イメージ共有ファイルID
-     */
-    riyoShisetsuNameImageSharedFileId(29, 0),
-    /**
-     * 利用施設住所イメージ共有ファイルID
-     */
-    riyoShisetsuJushoImageSharedFileId(29, 0),
-    /**
-     * 利用施設電話番号イメージ共有ファイルID
-     */
-    riyoShisetsuTelNoImageSharedFileId(29, 0),
-    /**
      * 特記
      */
     tokki(2147483647, 0),
-    /**
-     * 特記イメージ共有ファイルID
-     */
-    tokkiImageSharedFileId(29, 0),
     /**
      * 認定調査特記事項受付年月日
      */

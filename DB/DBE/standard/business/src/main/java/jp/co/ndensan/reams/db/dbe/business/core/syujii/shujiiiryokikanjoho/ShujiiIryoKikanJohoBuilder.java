@@ -165,7 +165,7 @@ public class ShujiiIryoKikanJohoBuilder {
      */
     public ShujiiIryoKikanJohoBuilder set代表者名(RString 代表者名) {
         requireNonNull(代表者名, UrSystemErrorMessages.値がnull.getReplacedMessage("代表者名"));
-        entity.setDaihyoshaName(new AtenaMeisho(代表者名));
+        entity.setDaihyoshaName(代表者名);
         return this;
     }
 

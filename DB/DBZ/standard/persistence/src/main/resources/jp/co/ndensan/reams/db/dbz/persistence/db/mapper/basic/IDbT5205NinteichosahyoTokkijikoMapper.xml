@@ -20,7 +20,7 @@
          "DbT5205NinteichosahyoTokkijiko"."shinseishoKanriNo" as "dbT5205NinteichosahyoTokkijiko_shinseishoKanriNo",
          "DbT5205NinteichosahyoTokkijiko"."ninteichosaRirekiNo" as "dbT5205NinteichosahyoTokkijiko_ninteichosaRirekiNo",
          "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo" as "dbT5205NinteichosahyoTokkijiko_ninteichosaTokkijikoNo",
-         "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoRenban" as "dbT5205NinteichosahyoTokkijiko_ninteichosaTokkijikoRenban",
+         "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoRemban" as "dbT5205NinteichosahyoTokkijiko_ninteichosaTokkijikoRemban",
          "DbT5205NinteichosahyoTokkijiko"."tokkijikoTextImageKubun" as "dbT5205NinteichosahyoTokkijiko_tokkijikoTextImageKubun",
          "DbT5205NinteichosahyoTokkijiko"."genponMaskKubun" as "dbT5205NinteichosahyoTokkijiko_genponMaskKubun",
          "DbT5205NinteichosahyoTokkijiko"."insertDantaiCd" as "dbT5205NinteichosahyoTokkijiko_insertDantaiCd",
@@ -40,7 +40,7 @@
         <id property="shinseishoKanriNo" column="dbT5205NinteichosahyoTokkijiko_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id property="ninteichosaRirekiNo" column="dbT5205NinteichosahyoTokkijiko_ninteichosaRirekiNo" />
         <id property="ninteichosaTokkijikoNo" column="dbT5205NinteichosahyoTokkijiko_ninteichosaTokkijikoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="ninteichosaTokkijikoRenban" column="dbT5205NinteichosahyoTokkijiko_ninteichosaTokkijikoRenban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="ninteichosaTokkijikoRemban" column="dbT5205NinteichosahyoTokkijiko_ninteichosaTokkijikoRemban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="tokkijikoTextImageKubun" column="dbT5205NinteichosahyoTokkijiko_tokkijikoTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="genponMaskKubun" column="dbT5205NinteichosahyoTokkijiko_genponMaskKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="insertDantaiCd" column="dbT5205NinteichosahyoTokkijiko_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

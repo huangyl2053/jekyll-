@@ -374,8 +374,8 @@ public class ChosainJohoFanderTest {
     public static void insert_DbT5913ChosainJoho(LasdecCode 市町村コード, RString 認定調査委託先コード, RString 認定調査員コード) {
         DbT5913ChosainJohoEntity entity = DbT5913ChosainJohoEntityGenerator.createDbT5913ChosainJohoEntity();
         entity.setShichosonCode(市町村コード);
-        entity.setNinteichosaItakusakiCode(認定調査委託先コード);
-        entity.setNinteiChosainNo(認定調査員コード);
+        entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
+        entity.setNinteiChosainCode(認定調査員コード);
         dbT5913dac.save(entity);
     }
 
@@ -424,7 +424,7 @@ public class ChosainJohoFanderTest {
     public static void insert_DbT5222NinteiChosaScheduleMemo(FlexibleDate メモ年月日, Code 調査地区コード, Code メモ区分, int 連番) {
         DbT5222NinteiChosaScheduleMemoEntity entity = DbT5222NinteiChosaScheduleMemoEntityGenerator.createDbT5222NinteiChosaScheduleMemoEntity();
         entity.setMemoYMD(メモ年月日);
-        entity.setChosachikucode(調査地区コード);
+        entity.setChosaChikuCode(調査地区コード);
         entity.setMemoKubun(メモ区分);
         entity.setRemban(連番);
         dbT5222dac.save(entity);

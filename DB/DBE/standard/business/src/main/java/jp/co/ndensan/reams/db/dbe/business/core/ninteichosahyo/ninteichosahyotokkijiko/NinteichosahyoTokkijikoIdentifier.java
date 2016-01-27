@@ -20,7 +20,7 @@ public class NinteichosahyoTokkijikoIdentifier implements Serializable {
     private final ShinseishoKanriNo 申請書管理番号;
     private final int 認定調査依頼履歴番号;
     private final RString 認定調査特記事項番号;
-    private final RString 認定調査特記事項連番;
+    private final int 認定調査特記事項連番;
     private final RString 特記事項テキスト_イメージ区分;
     private final Code 原本マスク区分;
 
@@ -37,7 +37,7 @@ public class NinteichosahyoTokkijikoIdentifier implements Serializable {
     public NinteichosahyoTokkijikoIdentifier(ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
             RString 認定調査特記事項番号,
-            RString 認定調査特記事項連番,
+            int 認定調査特記事項連番,
             RString 特記事項テキスト_イメージ区分,
             Code 原本マスク区分) {
         this.申請書管理番号 = 申請書管理番号;

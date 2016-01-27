@@ -333,13 +333,13 @@ public class HokenshaChosainJoho implements Serializable, IChosainJoho {
         /**
          * ninteiChosainNoを設定します。
          *
-         * @param ninteiChosainNo 認定調査員コード
+         * @param ninteiChosainCode 認定調査員コード
          * @return builder
          */
         @Override
-        public Builder setNinteiChosainNo(ChosainCode ninteiChosainNo) {
-            Objects.requireNonNull(ninteiChosainNo);
-            this.entity.setNinteiChosainCode(ninteiChosainNo.getColumnValue());
+        public Builder setNinteiChosainCode(ChosainCode ninteiChosainCode) {
+            Objects.requireNonNull(ninteiChosainCode);
+            this.entity.setNinteiChosainCode(ninteiChosainCode.getColumnValue());
             return this;
         }
 

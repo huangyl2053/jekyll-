@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.YoboKeikakuJikoSakuseiGokei;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3012YoboKeikakuJikoSakuseiGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3012YoboKeikakuJikoSakuseiGokeiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -59,7 +59,7 @@ public class YoboKeikakuJikoSakuseiGokeiManager {
     public YoboKeikakuJikoSakuseiGokei get予防給付計画自己作成合計(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号,
+            int 履歴番号,
             RString 居宅サービス区分,
             JigyoshaNo サービス提供事業者番号,
             ServiceShuruiCode サービス種類コード) {
@@ -81,7 +81,7 @@ public class YoboKeikakuJikoSakuseiGokeiManager {
 //            return null;
 //        }
 //        entity.initializeMd5();
-        return new YoboKeikakuJikoSakuseiGokei(new DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity());
+        return new YoboKeikakuJikoSakuseiGokei(new DbT3012YoboKeikakuJikoSakuseiGokeiEntity());
     }
 
     /**
@@ -97,7 +97,6 @@ public class YoboKeikakuJikoSakuseiGokeiManager {
 //            entity.initializeMd5();
 //            businessList.add(new YoboKeikakuJikoSakuseiGokei(entity));
 //        }
-
         return businessList;
     }
 

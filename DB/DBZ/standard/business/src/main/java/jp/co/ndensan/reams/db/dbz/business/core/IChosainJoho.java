@@ -26,8 +26,7 @@ public interface IChosainJoho {
      *
      * @return 調査員情報エンティティの情報
      */
-   // IChosainJohoEntity getEntity();
-
+     // IChosainJohoEntity getEntity();
     /**
      * 市町村コードを返します。
      *
@@ -185,7 +184,7 @@ public interface IChosainJoho {
          * @param ninteiChosainNo 認定調査員コード
          * @return builder
          */
-        public Builder setNinteiChosainNo(ChosainCode ninteiChosainNo) {
+        public Builder setNinteiChosainCode(ChosainCode ninteiChosainNo) {
             return this;
         }
 
