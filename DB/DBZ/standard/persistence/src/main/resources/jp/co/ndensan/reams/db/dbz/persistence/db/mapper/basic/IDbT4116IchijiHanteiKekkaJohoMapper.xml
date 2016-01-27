@@ -102,7 +102,7 @@
         <result property="chukanHyokaKomoku7gun" column="dbT4116IchijiHanteiKekkaJoho_chukanHyokaKomoku7gun" />
         <result property="ichijiHnateiKeikokuCode" column="dbT4116IchijiHanteiKekkaJoho_ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jotaiAnteiseiCode" column="dbT4116IchijiHanteiKekkaJoho_jotaiAnteiseiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="ninchishoJiritsudoIIijoNoGaizensei" column="dbT4116IchijiHanteiKekkaJoho_ typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="ninchishoJiritsudoIIijoNoGaizensei" column="dbT4116IchijiHanteiKekkaJoho_ninchishoJiritsudoIIijoNoGaizensei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="suiteiKyufuKubunCode" column="dbT4116IchijiHanteiKekkaJoho_suiteiKyufuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ninchishoKoreishaShihyoCode" column="dbT4116IchijiHanteiKekkaJoho_ninchishoKoreishaShihyoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="jiritsudoKumiawase1" column="dbT4116IchijiHanteiKekkaJoho_jiritsudoKumiawase1" />
