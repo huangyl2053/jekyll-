@@ -370,13 +370,14 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     junientity.set認定有効終了日(entity.get受給者認定有効期間終了年月日());
                     junientity.set受給認定年月日(entity.get受給者認定年月日());
                 }
-                if (entity.get受給者挿入日時() != null && entity.get挿入日時() != null
-                        && entity.get受給者更新日時() != null && entity.get更新日時() != null) {
+                if (entity.get受給者挿入日時() != null && entity.get挿入日時() != null) {
                     if (entity.get受給者挿入日時().compareTo(entity.get挿入日時()) <= 0) {
                         junientity.set作成日時(entity.get挿入日時());
                     } else if (entity.get挿入日時().compareTo(entity.get受給者挿入日時()) < 0) {
                         junientity.set作成日時(entity.get受給者挿入日時());
                     }
+                }
+                if (entity.get受給者更新日時() != null && entity.get更新日時() != null) {
                     if (entity.get受給者更新日時().compareTo(entity.get更新日時()) <= 0) {
                         junientity.set更新日時(entity.get更新日時());
                     } else if (entity.get更新日時().compareTo(entity.get受給者更新日時()) < 0) {
@@ -569,13 +570,14 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     jugoentity.set認定有効終了日(entity.get受給者認定有効期間終了年月日());
                     jugoentity.set受給認定年月日(entity.get受給者認定年月日());
                 }
-                if (entity.get受給者挿入日時() != null && entity.get挿入日時() != null
-                        && entity.get受給者更新日時() != null && entity.get更新日時() != null) {
+                if (entity.get受給者挿入日時() != null && entity.get挿入日時() != null) {
                     if (entity.get受給者挿入日時().compareTo(entity.get挿入日時()) <= 0) {
                         jugoentity.set作成日時(entity.get挿入日時());
                     } else if (entity.get挿入日時().compareTo(entity.get受給者挿入日時()) < 0) {
                         jugoentity.set作成日時(entity.get受給者挿入日時());
                     }
+                }
+                if (entity.get受給者更新日時() != null && entity.get更新日時() != null) {
                     if (entity.get受給者更新日時().compareTo(entity.get更新日時()) <= 0) {
                         jugoentity.set更新日時(entity.get更新日時());
                     } else if (entity.get更新日時().compareTo(entity.get受給者更新日時()) < 0) {
@@ -630,8 +632,8 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                         jugoentity.set識別コード(new RString(entity.get受給者識別コード().toString()).
                                 substring(entity.get受給者識別コード().value().length() - 桁目_15));
                     }
-                    jugoentity.set作成日時(YMDHMS.now().toDateString());
-                    jugoentity.set更新日時(YMDHMS.now().toDateString());
+                    jugoentity.set作成日時(new RString(YMDHMS.now().toString()));
+                    jugoentity.set更新日時(new RString(YMDHMS.now().toString()));
                 }
             }
             if ((entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty())
