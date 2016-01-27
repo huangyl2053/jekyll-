@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class panelHeadDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -46,18 +46,18 @@ public class panelHeadDiv extends Panel {
     private Button btnTokuteiNyushosha;
     @JsonProperty("btnGokeiInfo")
     private Button btnGokeiInfo;
-    @JsonProperty("lblFree")
-    private Label lblFree;
+    @JsonProperty("btnKyufuhiMeisaiJyutoku")
+    private Button btnKyufuhiMeisaiJyutoku;
     @JsonProperty("btnKinkyujiShisetsu")
     private Button btnKinkyujiShisetsu;
+    @JsonProperty("btnKinkyujiShoteiShikkan")
+    private Button btnKinkyujiShoteiShikkan;
     @JsonProperty("btnShokujiHiyo")
     private Button btnShokujiHiyo;
     @JsonProperty("btnSeikyugakuShukei")
     private Button btnSeikyugakuShukei;
     @JsonProperty("btnShafukukeigenGaku")
     private Button btnShafukukeigenGaku;
-    @JsonProperty("btnKyufuhiMeisaiJyuchi")
-    private Button btnKyufuhiMeisaiJyuchi;
     @JsonProperty("hlDown")
     private HorizontalLine hlDown;
 
@@ -284,21 +284,21 @@ public class panelHeadDiv extends Panel {
     }
 
     /*
-     * getlblFree
-     * @return lblFree
+     * getbtnKyufuhiMeisaiJyutoku
+     * @return btnKyufuhiMeisaiJyutoku
      */
-    @JsonProperty("lblFree")
-    public Label getLblFree() {
-        return lblFree;
+    @JsonProperty("btnKyufuhiMeisaiJyutoku")
+    public Button getBtnKyufuhiMeisaiJyutoku() {
+        return btnKyufuhiMeisaiJyutoku;
     }
 
     /*
-     * setlblFree
-     * @param lblFree lblFree
+     * setbtnKyufuhiMeisaiJyutoku
+     * @param btnKyufuhiMeisaiJyutoku btnKyufuhiMeisaiJyutoku
      */
-    @JsonProperty("lblFree")
-    public void setLblFree(Label lblFree) {
-        this.lblFree = lblFree;
+    @JsonProperty("btnKyufuhiMeisaiJyutoku")
+    public void setBtnKyufuhiMeisaiJyutoku(Button btnKyufuhiMeisaiJyutoku) {
+        this.btnKyufuhiMeisaiJyutoku = btnKyufuhiMeisaiJyutoku;
     }
 
     /*
@@ -317,6 +317,24 @@ public class panelHeadDiv extends Panel {
     @JsonProperty("btnKinkyujiShisetsu")
     public void setBtnKinkyujiShisetsu(Button btnKinkyujiShisetsu) {
         this.btnKinkyujiShisetsu = btnKinkyujiShisetsu;
+    }
+
+    /*
+     * getbtnKinkyujiShoteiShikkan
+     * @return btnKinkyujiShoteiShikkan
+     */
+    @JsonProperty("btnKinkyujiShoteiShikkan")
+    public Button getBtnKinkyujiShoteiShikkan() {
+        return btnKinkyujiShoteiShikkan;
+    }
+
+    /*
+     * setbtnKinkyujiShoteiShikkan
+     * @param btnKinkyujiShoteiShikkan btnKinkyujiShoteiShikkan
+     */
+    @JsonProperty("btnKinkyujiShoteiShikkan")
+    public void setBtnKinkyujiShoteiShikkan(Button btnKinkyujiShoteiShikkan) {
+        this.btnKinkyujiShoteiShikkan = btnKinkyujiShoteiShikkan;
     }
 
     /*
@@ -371,24 +389,6 @@ public class panelHeadDiv extends Panel {
     @JsonProperty("btnShafukukeigenGaku")
     public void setBtnShafukukeigenGaku(Button btnShafukukeigenGaku) {
         this.btnShafukukeigenGaku = btnShafukukeigenGaku;
-    }
-
-    /*
-     * getbtnKyufuhiMeisaiJyuchi
-     * @return btnKyufuhiMeisaiJyuchi
-     */
-    @JsonProperty("btnKyufuhiMeisaiJyuchi")
-    public Button getBtnKyufuhiMeisaiJyuchi() {
-        return btnKyufuhiMeisaiJyuchi;
-    }
-
-    /*
-     * setbtnKyufuhiMeisaiJyuchi
-     * @param btnKyufuhiMeisaiJyuchi btnKyufuhiMeisaiJyuchi
-     */
-    @JsonProperty("btnKyufuhiMeisaiJyuchi")
-    public void setBtnKyufuhiMeisaiJyuchi(Button btnKyufuhiMeisaiJyuchi) {
-        this.btnKyufuhiMeisaiJyuchi = btnKyufuhiMeisaiJyuchi;
     }
 
     /*
