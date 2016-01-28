@@ -98,18 +98,6 @@ public class NenpoYoushi3Handler {
      */
     public List<JigyoHokokuTokeiData> get修正データ() {
         List<JigyoHokokuTokeiData> list = new ArrayList<>();
-        RString title = div.getShokuhikyojunofutannintei().getTabShokuhikyojunofutannintei().getSelectedItem().getTitle();
-        if (title.equals(保険料収納状況)) {
-            list = get保険料収納状況修正データ();
-        }
-        if (title.equals(保険給付支払状況)) {
-            list = get保険給付支払状況修正データ();
-        }
-        return list;
-    }
-
-    private List<JigyoHokokuTokeiData> get保険料収納状況修正データ() {
-        List<JigyoHokokuTokeiData> list = new ArrayList<>();
         Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険料収納状況データ = ViewStateHolder.
                 get(NenpoYoushi3ViewStateKeys.保険料収納状況データ, Models.class);
         List<NenpoYoushi3DetalParameter> 保険料収納状況画面データ = get保険料収納状況画面データ();
@@ -125,11 +113,6 @@ public class NenpoYoushi3Handler {
                 }
             }
         }
-        return list;
-    }
-
-    private List<JigyoHokokuTokeiData> get保険給付支払状況修正データ() {
-        List<JigyoHokokuTokeiData> list = new ArrayList<>();
         Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険給付支払状況データ = ViewStateHolder.
                 get(NenpoYoushi3ViewStateKeys.保険給付支払状況データ, Models.class);
         List<NenpoYoushi3DetalParameter> 保険給付支払状況画面データ = get保険給付支払状況画面データ();
