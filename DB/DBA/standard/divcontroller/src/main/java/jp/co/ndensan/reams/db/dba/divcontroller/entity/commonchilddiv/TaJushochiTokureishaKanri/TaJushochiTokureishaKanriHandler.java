@@ -51,6 +51,10 @@ public class TaJushochiTokureishaKanriHandler {
     private static final RString 状態_照会 = new RString("照会");
     private static final RString 状態_変更 = new RString("変更");
     private static final RString 他特例解除 = new RString("01");
+    private static final RString 転入 = new RString("01");
+    private static final RString 除外者適用 = new RString("01");
+    private static final CodeShubetsu 介護他特適用理由 = new CodeShubetsu("0118");
+    private static final CodeShubetsu 介護他特解除理由 = new CodeShubetsu("0122");
     private final TaJushochiTokureishaKanriDiv div;
 
     /**
@@ -85,7 +89,6 @@ public class TaJushochiTokureishaKanriHandler {
             div.getTxtKaijyobi().setWrap(true);
             div.getPanShisetsuJoho().setVisible(false);
             div.getBtnKakunin().setVisible(false);
-            div.getPanSotimotoJyoho().setDisabled(true);
         } else if (状態_修正.equals(親画面状態)) {
             div.getTxtNyusyobi().setDisplayNone(true);
             div.getTxtTasyobi().setDisplayNone(true);
@@ -279,7 +282,7 @@ public class TaJushochiTokureishaKanriHandler {
             div.getDdlKaijyoJiyo().setSelectedKey(RString.EMPTY);
             set他市町村住所地特例情報入力エリア活性の設定();
         }
-
+        div.setStrate(RString.EMPTY);
         div.getDgJushochiTokureiRireki().setDataSource(rowList);
     }
 
@@ -393,9 +396,9 @@ public class TaJushochiTokureishaKanriHandler {
             row.getTaishoYMD().setValue(new RDate(nullToEmty(master.getTaishoYMD()).toString()));
             row.setNyushoShisetsuShurui(master.getNyushoShisetsuShurui());
             row.setNyushoShisetsuCode(nullTOEmpty(master.getJigyoshaName()).getColumnValue());
-            // TODO 措置保険者番号より保険者氏名を表示する。「設定不明」
+            // TODO 凌護行 措置保険者番号より保険者氏名を表示する。「設定不明」　QA回答まち、　2016/1/28
             // 措置元情報_保険者
-            row.setSochiHokenshaNo(状態_追加);
+//            row.setSochiHokenshaNo(状態_追加);
             row.setSochiHihokenshaNo(nullTOEmpty(master.getSochiHihokenshaNo().getColumnValue()));
             row.setTekiyoJiyu(master.getTekiyoJiyuCode());
             row.setKaijoJiyu(master.getKaijoJiyuCode());
@@ -433,14 +436,14 @@ public class TaJushochiTokureishaKanriHandler {
             UaFt200FindShikibetsuTaishoEntity 宛名情報
                     = TaJushochiTokureisyaKanriManager.createInstance().select宛名情報PSM(識別コード);
             if (宛名情報 != null) {
-                if (new RString("01").equals(宛名情報.getIdoJiyuCode())) {
+                if (転入.equals(宛名情報.getIdoJiyuCode())) {
                     if (宛名情報.getIdoYMD() != null) {
                         div.getTxtTekiyobi().setValue(new RDate(宛名情報.getIdoYMD().toString()));
                     }
                     if (宛名情報.getTodokedeYMD() != null) {
                         div.getTxtTekiyoTodokedebi().setValue(new RDate(宛名情報.getTodokedeYMD().toString()));
                     }
-                    div.getDdlTekiyoJiyo().setSelectedValue(new RString("01"));
+                    div.getDdlTekiyoJiyo().setSelectedValue(除外者適用);
                 }
             }
             if (kanriMaster.getKaijoYMD() == null
@@ -596,7 +599,6 @@ public class TaJushochiTokureishaKanriHandler {
     }
 
     private void clear他市町村住所地特例情報入力エリア() {
-        div.setStrate(RString.EMPTY);
         div.getTxtTekiyobi().clearValue();
         div.getTxtTekiyoTodokedebi().clearValue();
         div.getDdlTekiyoJiyo().setSelectedKey(RString.EMPTY);
@@ -646,19 +648,19 @@ public class TaJushochiTokureishaKanriHandler {
         if (適用事由コード == null || 適用事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeMeisho(new CodeShubetsu("0118"), new Code(適用事由コード));
+        return CodeMaster.getCodeMeisho(介護他特適用理由, new Code(適用事由コード));
     }
 
     private RString get解除事由(RString 解除事由コード) {
         if (解除事由コード == null || 解除事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeMeisho(new CodeShubetsu("0122"), new Code(解除事由コード));
+        return CodeMaster.getCodeMeisho(介護他特解除理由, new Code(解除事由コード));
     }
 
     private List<KeyValueDataSource> set適用事由() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        List<UzT0007CodeEntity> 適用事由Key = CodeMaster.getCode(new CodeShubetsu("0118"));
+        List<UzT0007CodeEntity> 適用事由Key = CodeMaster.getCode(介護他特適用理由);
         for (UzT0007CodeEntity key : 適用事由Key) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setValue(key.getコード().getColumnValue());
@@ -670,7 +672,7 @@ public class TaJushochiTokureishaKanriHandler {
 
     private List<KeyValueDataSource> set解除事由() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        List<UzT0007CodeEntity> 解除事由Key = CodeMaster.getCode(new CodeShubetsu("0122"));
+        List<UzT0007CodeEntity> 解除事由Key = CodeMaster.getCode(介護他特解除理由);
         for (UzT0007CodeEntity key : 解除事由Key) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setValue(key.getコード().getColumnValue());
