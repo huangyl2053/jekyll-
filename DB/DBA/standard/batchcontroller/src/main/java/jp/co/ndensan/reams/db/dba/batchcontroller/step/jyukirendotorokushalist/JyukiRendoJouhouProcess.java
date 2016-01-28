@@ -97,9 +97,9 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
     protected void process() {
         ShikibetsuCode old識別コード = new ShikibetsuCode("");
         List<JyukiRendoJouhouEntity> jyukiRendoJouhouList = new ArrayList<>();
+        processParameter.setLoginId(loginId);
         JyukiRendoTorokushaListBatchMybatisParameter mybatisParameter
                 = processParameter.toJyukiRendoTorokushaListBatchMybatisParameter();
-        processParameter.setLoginId(loginId);
         if (processParameter.isHihokenshadaichoFLG()) {
             jyukiRendoJouhouList.addAll(get被保険者台帳リスト(mybatisParameter));
         }
