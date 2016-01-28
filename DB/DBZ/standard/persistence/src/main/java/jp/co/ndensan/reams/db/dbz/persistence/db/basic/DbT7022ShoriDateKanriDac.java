@@ -86,6 +86,36 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     }
 
     /**
+     * 主キーで抽出調定日時を取得します。
+     *
+     * @param サブ業務コード subGyomuCode
+     * @param 処理名 shoriName
+     * @param 年度 nendo
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity selectByKey(
+            SubGyomuCode サブ業務コード,
+            RString 処理名,
+            FlexibleYear 年度) throws NullPointerException {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サブ業務コード"));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage("処理名"));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, サブ業務コード),
+                                eq(shoriName, 処理名),
+                                eq(nendo, 年度))).
+                order(by(DbT7022ShoriDateKanri.nendo, Order.DESC),
+                        by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
      * 処理日付管理マスタを全件返します。
      *
      * @return List<DbT7022ShoriDateKanriEntity>
