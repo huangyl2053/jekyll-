@@ -54,14 +54,13 @@ public class NenpoYoushi3Handler {
     /**
      * 画面初期化処理します。
      *
-     * @param 事業報告集計一覧データリスト 事業報告集計一覧データリスト
      * @param 補正フラグ 補正フラグ
      * @param 報告年度 報告年度
      * @param 集計年度 集計年度
      * @param 保険者コード 保険者コード
      * @param 保険者名称 保険者名称
      */
-    public void initialize(List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト, RString 補正フラグ,
+    public void initialize(RString 補正フラグ,
             FlexibleDate 報告年度, FlexibleDate 集計年度, RString 保険者コード, RString 保険者名称) {
         div.getHihokenshabango().getTxthokokuYM().setValue(報告年度);
         div.getHihokenshabango().getTxthokokuYM().setDisabled(true);
@@ -71,9 +70,6 @@ public class NenpoYoushi3Handler {
         div.getHihokenshabango().getTxtHihokenshabango().setDisabled(true);
         div.getHihokenshabango().getTxthihokenshamei().setValue(保険者名称);
         div.getHihokenshabango().getTxthihokenshamei().setDisabled(true);
-        for (JigyoHokokuTokeiData data : 事業報告集計一覧データリスト) {
-            set収納状況詳細データ(data);
-        }
         set活性();
         if (補正フラグ.equals(フラグ_削除)) {
             set非活性();
@@ -88,6 +84,17 @@ public class NenpoYoushi3Handler {
     public void set保険給付支払状況詳細データ(List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト) {
         for (JigyoHokokuTokeiData data : 事業報告集計一覧データリスト) {
             set支払状況詳細データ(data);
+        }
+    }
+
+    /**
+     * 保険料収納状況詳細データを設定します。
+     *
+     * @param 事業報告集計一覧データリスト 事業報告集計一覧データリスト
+     */
+    public void set保険料収納状況詳細データ(List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト) {
+        for (JigyoHokokuTokeiData data : 事業報告集計一覧データリスト) {
+            set収納状況詳細データ(data);
         }
     }
 
