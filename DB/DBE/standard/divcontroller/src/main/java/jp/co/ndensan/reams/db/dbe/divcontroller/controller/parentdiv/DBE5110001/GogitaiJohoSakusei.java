@@ -65,7 +65,7 @@ public class GogitaiJohoSakusei {
     private static final RString JYOTAI_NAME_DEL = new RString("削除");
     private static final RString RAD_HYOJIJOKEN_ISNOW = new RString("key0");
     private static final RString SHARED_FILE_NAME = new RString("合議体情報");
-    private static final RString OUTPUT_CSV_FILE_NAME = new RString("\\合議体情報.csv");
+    private static final RString OUTPUT_CSV_FILE_NAME = new RString("合議体情報.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegister");
     private final GogitaiJohoSakuseiFinder service;
@@ -563,7 +563,8 @@ public class GogitaiJohoSakusei {
                 GogitaiJohoSakuseiParameter.createGogitaiJohoSakuseiParameter(
                         FlexibleDate.getNowDate(), is現在有効な合議体のみ, 0, FlexibleDate.EMPTY, RString.EMPTY));
         RString path = Path.getTmpDirectoryPath();
-        try (CsvListWriter writer = new CsvListWriter.InstanceBuilder(path.concat(OUTPUT_CSV_FILE_NAME))
+
+        try (CsvListWriter writer = new CsvListWriter.InstanceBuilder(Path.combinePath(path, OUTPUT_CSV_FILE_NAME))
                 .canAppend(false)
                 .hasHeader(false)
                 .setDelimiter(CSV_WRITER_DELIMITER)
