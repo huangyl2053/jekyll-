@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.Gogi
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgGogitaiIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgHoketsuShinsainList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgShinsainList_Row;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -288,18 +289,18 @@ public class GogitaiJohoSakuseiHandler {
         for (GogitaiJohoSakuseiRsult result : resultList) {
             if (result.is補欠()) {
                 dgHoketsuShinsainList_Row hoketsuShinsainRow = new dgHoketsuShinsainList_Row();
-                hoketsuShinsainRow.setHoketsuShinsakaiIinShimei(result.get審査会委員名称().value());
+                hoketsuShinsainRow.setHoketsuShinsakaiIinShimei(nullToEmpty(result.get審査会委員名称()));
                 hoketsuShinsainRow.setHoketsuShinsakaiIinCode(result.get介護認定審査会委員コード());
                 hoketsuShinsainList.add(hoketsuShinsainRow);
                 continue;
             }
             dgShinsainList_Row shinsainRow = new dgShinsainList_Row();
-            shinsainRow.setShinsakaiIinShimei(result.get審査会委員名称().value());
+            shinsainRow.setShinsakaiIinShimei(nullToEmpty(result.get審査会委員名称()));
             shinsainRow.setShinsakaiIinCode(result.get介護認定審査会委員コード());
-            if (GogitaichoKubunCode.副合議体長.getコード().equals(result.get合議体長区分コード().value())) {
+            if (GogitaichoKubunCode.副合議体長.getコード().equals(nullToEmpty(result.get合議体長区分コード()))) {
                 shinsainRow.setFukuGogitaicho(Boolean.TRUE);
             }
-            if (GogitaichoKubunCode.合議体長.getコード().equals(result.get合議体長区分コード().value())) {
+            if (GogitaichoKubunCode.合議体長.getコード().equals(nullToEmpty(result.get合議体長区分コード()))) {
                 shinsainRow.setGogitaicho(Boolean.TRUE);
             }
             shinsainList.add(shinsainRow);
@@ -474,5 +475,19 @@ public class GogitaiJohoSakuseiHandler {
         int hour = time.getHour();
         int min = time.getMinute();
         return new RString(String.valueOf(hour)).padZeroToLeft(2).concat(new RString(String.valueOf(min)).padZeroToLeft(2));
+    }
+
+    private RString nullToEmpty(AtenaMeisho 名称) {
+        if (名称 == null || 名称.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return 名称.value();
+    }
+
+    private RString nullToEmpty(Code コード) {
+        if (コード == null || コード.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return コード.value();
     }
 }
