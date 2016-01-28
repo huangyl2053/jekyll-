@@ -253,13 +253,14 @@
                 ,dbT5913Zenkai."chosainShimei"             AS "Temp_chosainShimei"
                 ,dbT5105."ninteichosaKanryoYMD"            AS  "ninteichosaKanryoYMD"
                 ,dbT5101."shinseishoKanriNo"               AS "shinseishoKanriNo"
-                ,dbT5201."ninteichosaIraiRirekiNo"         AS "ninteichosaIraiRirekiNo"
+                ,dbT5201Waritukezumi."ninteichosaIraiRirekiNo"         AS "ninteichosaIraiRirekiNo"
               FROM
                 rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
                 INNER JOIN
                 (
                     SELECT  
                         dbT5201Nintei."shinseishoKanriNo" AS "shinseishoKanriNo"
+                        ,dbT5201Nintei."ninteichosaIraiRirekiNo" AS "ninteichosaIraiRirekiNo"
                     FROM
                         rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201Nintei
                         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS dbT5105
