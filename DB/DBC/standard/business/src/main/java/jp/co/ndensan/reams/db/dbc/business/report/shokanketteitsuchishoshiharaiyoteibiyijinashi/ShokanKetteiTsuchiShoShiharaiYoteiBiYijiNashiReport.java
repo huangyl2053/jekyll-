@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 償還払い支給（不支給）決定通知書のReportです。
+ * 償還払い支給（不支給）決定通知書(支払予定日あり）(支払予定日あり）のReportです。
  */
 public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport extends Report<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource> {
 
@@ -20,20 +20,19 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport extends Report<
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 償還払い支給（不支給）決定通知書のITEM
-     * @return 償還払い支給（不支給）決定通知書のReport
+     * @param itemList 償還払い支給（不支給）決定通知書(支払予定日あり）のITEM
+     * @return 償還払い支給（不支給）決定通知書(支払予定日あり）のReport
      */
     public static ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport createFrom(
             List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiItem> itemList) {
 
-        return new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport(
-                itemList);
+        return new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport(itemList);
     }
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 償還払い支給（不支給）決定通知書のITEM
+     * @param itemList 償還払い支給（不支給）決定通知書(支払予定日あり）のITEM
      */
     protected ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport(
             List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiItem> itemList) {

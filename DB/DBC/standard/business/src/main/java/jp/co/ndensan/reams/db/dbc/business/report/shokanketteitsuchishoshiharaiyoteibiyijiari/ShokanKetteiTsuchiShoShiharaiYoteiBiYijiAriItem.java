@@ -3,38 +3,83 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.report.jutakukaishujizenshinseishoninkekkatsuchisho;
+package jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- * 住宅改修事前申請承認結果通知書のITEMです。
+ * 償還払い支給（不支給）決定通知書(支払予定日あり）のITEMです。
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JutakukaishuJizenShinseiShoninKekkaTsuchishoItem {
+public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem {
 
     private final RString bunshoNo;
     private final RString title;
+    private final RString title2_1;
+    private final RString title2_2_1;
+    private final RString title2_2_2;
+    private final RString title2_3_1;
+    private final RString title2_3_2;
+    private final RString title2_4;
     private final RString tsuchibun1;
     private final RString hihokenshaName;
-    private final RString hihokenshaNo;
+    private final RString hihokenshaNo1;
+    private final RString hihokenshaNo2;
+    private final RString hihokenshaNo3;
+    private final RString hihokenshaNo4;
+    private final RString hihokenshaNo5;
+    private final RString hihokenshaNo6;
+    private final RString hihokenshaNo7;
+    private final RString hihokenshaNo8;
+    private final RString hihokenshaNo9;
+    private final RString hihokenshaNo10;
     private final RString uketsukeYMD;
-    private final RString shoninKbn;
-    private final RString shoninYMD;
-    private final RString fushoninRiyu;
-    private final RString kyufuShurui;
-    private final RString jigyoshaName;
-    private final RString jigyoshaYubinNo;
-    private final RString jigyoshoJusho;
-    private final RString jigyoshoTelNo;
-    private final RString riyushoSakuseisha;
-    private final RString hiyogakuGokei;
-    private final RString hokenHiyogaku;
-    private final RString riyoFutangaku;
-    private final RString hokenKyufuhigaku;
-    private final RString tsuchibun2;
+    private final RString ketteiYMD;
+    private final RString honninShiharaiGaku;
+    private final RString taishoYM;
+    private final RString kyufuShu1;
+    private final RString kyufuShu2;
+    private final RString kyufuShu3;
+    private final RString kekka;
+    private final RString shikyuGaku;
+    private final RString riyuTitle;
+    private final RString riyu1;
+    private final RString riyu2;
+    private final RString riyu3;
+    private final RString torikeshi1;
+    private final RString torikeshi2;
+    private final RString mochimono1;
+    private final RString bankName;
+    private final RString torikeshiMochimono1;
+    private final RString branchBankName;
+    private final RString mochimono2;
+    private final RString torikeshiMochimono2;
+    private final RString mochimono3;
+    private final RString shiharaiBasho;
+    private final RString torikeshiShiharaibasho;
+    private final RString shumokuTitle;
+    private final RString kouzaShu;
+    private final RString bangoTitle;
+    private final RString kouzaNo;
+    private final RString kouzaMeigi;
+    private final RString shiharaiStartYMD;
+    private final RString torikeshiShiharaikikan;
+    private final RString shiharaiEndYMD;
+    private final RString karaFugo;
+    private final RString shiharaiStartHMS;
+    private final RString shiharaiEndHMS;
+    private final RString sihaYoYmd;
+    private final RString tsuchibun２;
+    private final RString seirino;
+    private final RString tsuchino;
+    private final RString remban;
+    private final RString tsuchibunLarge;
+    private final RString tsuchibunMix1;
+    private final RString tsuchibunMix2;
+    private final RString tsuchibunMixtwo1;
+    private final RString tsuchibunMixtwo2;
     private final RString hakkoYMD;
     private final RString denshiKoin;
     private final RString ninshoshaYakushokuMei;
@@ -45,7 +90,7 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoItem {
     private final RString ninshoshaShimeiKakeru;
     private final RString koinShoryaku;
     private final RString yubinNo;
-    private final RString gyoseiku1;
+    private final RString gyoseiku2;
     private final RString jusho4;
     private final RString jushoText;
     private final RString jusho5;
@@ -64,10 +109,10 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoItem {
     private final RString shimei6;
     private final RString meishoFuyo1;
     private final RString samabunShimeiText;
-    private final RString samaBun2;
     private final RString kakkoLeft2;
     private final RString samabunShimei2;
     private final RString samabunShimeiSmall2;
+    private final RString samaBun2;
     private final RString kakkoRight2;
     private final RString kakkoLeft1;
     private final RString samabunShimei1;
@@ -81,24 +126,69 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoItem {
      *
      * @param bunshoNo 文章番号
      * @param title タイトル
-     * @param tsuchibun1 通知文
+     * @param title2_1 タイトル2_1
+     * @param title2_2_1 タイトル2_2_1
+     * @param title2_2_2 タイトル2_2_2
+     * @param title2_3_1 タイトル2_3_1
+     * @param title2_3_2 タイトル2_3_2
+     * @param title2_4 タイトル2_4
+     * @param tsuchibun1 通知文1
      * @param hihokenshaName 被保険者氏名
-     * @param hihokenshaNo 被保険者番号
-     * @param uketsukeYMD 受付日
-     * @param shoninKbn 承認区分
-     * @param shoninYMD 承認年月日
-     * @param fushoninRiyu 不承認の理由
-     * @param kyufuShurui 給付の種類
-     * @param jigyoshaName 事業者名
-     * @param jigyoshaYubinNo 事業者郵便番号
-     * @param jigyoshoJusho 事業者住所
-     * @param jigyoshoTelNo 事業者電話番号
-     * @param riyushoSakuseisha 理由書作成者
-     * @param hiyogakuGokei 費用額合計
-     * @param hokenHiyogaku 保険対象費用額
-     * @param riyoFutangaku 理由負担額
-     * @param hokenKyufuhigaku 保険給付費額
-     * @param tsuchibun2 注意文
+     * @param hihokenshaNo1 被保険者番号1
+     * @param hihokenshaNo2 被保険者番号2
+     * @param hihokenshaNo3 被保険者番号3
+     * @param hihokenshaNo4 被保険者番号4
+     * @param hihokenshaNo5 被保険者番号5
+     * @param hihokenshaNo6 被保険者番号6
+     * @param hihokenshaNo7 被保険者番号7
+     * @param hihokenshaNo8 被保険者番号8
+     * @param hihokenshaNo9 被保険者番号9
+     * @param hihokenshaNo10 被保険者番号10
+     * @param uketsukeYMD 受付年月日
+     * @param ketteiYMD 決定年月日
+     * @param honninShiharaiGaku 本人支払額
+     * @param taishoYM 対象年月
+     * @param kyufuShu1 給付の種類１
+     * @param kyufuShu2 給付の種類２
+     * @param kyufuShu3 給付の種類３
+     * @param kekka 支給結果
+     * @param shikyuGaku 支給金額
+     * @param riyuTitle 増減の理由1
+     * @param riyu1 増減の理由タイトル
+     * @param riyu2 増減の理由2
+     * @param riyu3 増減の理由3
+     * @param torikeshi1 取消1
+     * @param torikeshi2 取消2
+     * @param mochimono1 金融機関名
+     * @param bankName もちもの１
+     * @param torikeshiMochimono1 取消もちもの1
+     * @param branchBankName 支店名
+     * @param mochimono2 もちもの２
+     * @param torikeshiMochimono2 取消もちもの2
+     * @param mochimono3 もちもの３
+     * @param shiharaiBasho 支払場所
+     * @param torikeshiShiharaibasho 取消支払場所
+     * @param shumokuTitle 種別タイトル
+     * @param kouzaShu 口座種別
+     * @param bangoTitle 番号タイトル
+     * @param kouzaNo 口座番号
+     * @param kouzaMeigi 支払期間開始年月日
+     * @param shiharaiStartYMD 口座名義
+     * @param torikeshiShiharaikikan 取消支払期間
+     * @param shiharaiEndYMD 支払期間終了年月日
+     * @param karaFugo ~
+     * @param shiharaiStartHMS 支払窓口開始時間
+     * @param shiharaiEndHMS 支払窓口終了時間
+     * @param sihaYoYmd 支払予定日
+     * @param tsuchibun２ 通知文２
+     * @param seirino 整理番号
+     * @param tsuchino 通知番号
+     * @param remban 連番
+     * @param tsuchibunLarge 通知文3大
+     * @param tsuchibunMix1 通知文4（上小）
+     * @param tsuchibunMix2 通知文5（下大）
+     * @param tsuchibunMixtwo1 通知文6（上大）
+     * @param tsuchibunMixtwo2 通知文7（下小）
      * @param hakkoYMD 発行日
      * @param denshiKoin 電子公印
      * @param ninshoshaYakushokuMei 認証者役職名
@@ -109,7 +199,7 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoItem {
      * @param ninshoshaShimeiKakeru 認証者氏名掛ける
      * @param koinShoryaku 公印省略
      * @param yubinNo 郵便番号
-     * @param gyoseiku1 行政区1
+     * @param gyoseiku2 行政区2
      * @param jusho4 住所4
      * @param jushoText 住所
      * @param jusho5 住所5
@@ -128,10 +218,10 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoItem {
      * @param shimei6 氏名6
      * @param meishoFuyo1 名称付与1
      * @param samabunShimeiText 様文氏名
-     * @param samaBun2 様文2
-     * @param kakkoLeft2 左括弧2
-     * @param samabunShimei2 様文氏名2
-     * @param samabunShimeiSmall2 様文氏名小2
+     * @param kakkoLeft2 様文2
+     * @param samabunShimei2 左括弧2
+     * @param samabunShimeiSmall2 様文氏名2
+     * @param samaBun2 様文氏名小2
      * @param kakkoRight2 右括弧2
      * @param kakkoLeft1 左括弧1
      * @param samabunShimei1 様文氏名1
@@ -140,39 +230,91 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoItem {
      * @param samabunShimeiSmall1 様文氏名小1
      * @param customerBarCode カスタマーバーコード
      */
-    public JutakukaishuJizenShinseiShoninKekkaTsuchishoItem(RString bunshoNo, RString title, RString tsuchibun1,
-            RString hihokenshaName, RString hihokenshaNo, RString uketsukeYMD, RString shoninKbn, RString shoninYMD,
-            RString fushoninRiyu, RString kyufuShurui, RString jigyoshaName, RString jigyoshaYubinNo, RString jigyoshoJusho,
-            RString jigyoshoTelNo, RString riyushoSakuseisha, RString hiyogakuGokei, RString hokenHiyogaku, RString riyoFutangaku,
-            RString hokenKyufuhigaku, RString tsuchibun2, RString hakkoYMD, RString denshiKoin, RString ninshoshaYakushokuMei,
-            RString ninshoshaYakushokuMei1, RString koinMojiretsu, RString ninshoshaYakushokuMei2, RString ninshoshaShimeiKakenai,
-            RString ninshoshaShimeiKakeru, RString koinShoryaku, RString yubinNo, RString gyoseiku1, RString jusho4, RString jushoText,
-            RString jusho5, RString jusho6, RString katagakiText, RString katagaki3, RString katagakiSmall2, RString katagaki4,
-            RString katagakiSmall1, RString shimei5, RString shimeiSmall2, RString shimeiText, RString meishoFuyo2, RString shimeiSmall1,
-            RString dainoKubunMei, RString shimei6, RString meishoFuyo1, RString samabunShimeiText, RString samaBun2, RString kakkoLeft2,
-            RString samabunShimei2, RString samabunShimeiSmall2, RString kakkoRight2, RString kakkoLeft1, RString samabunShimei1,
-            RString samaBun1, RString kakkoRight1, RString samabunShimeiSmall1, RString customerBarCode) {
-
+    public ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem(RString bunshoNo, RString title, RString title2_1, RString title2_2_1,
+            RString title2_2_2, RString title2_3_1, RString title2_3_2, RString title2_4, RString tsuchibun1, RString hihokenshaName,
+            RString hihokenshaNo1, RString hihokenshaNo2, RString hihokenshaNo3, RString hihokenshaNo4, RString hihokenshaNo5,
+            RString hihokenshaNo6, RString hihokenshaNo7, RString hihokenshaNo8, RString hihokenshaNo9, RString hihokenshaNo10,
+            RString uketsukeYMD, RString ketteiYMD, RString honninShiharaiGaku, RString taishoYM, RString kyufuShu1, RString kyufuShu2,
+            RString kyufuShu3, RString kekka, RString shikyuGaku, RString riyuTitle, RString riyu1, RString riyu2, RString riyu3,
+            RString torikeshi1, RString torikeshi2, RString mochimono1, RString bankName, RString torikeshiMochimono1,
+            RString branchBankName, RString mochimono2, RString torikeshiMochimono2, RString mochimono3, RString shiharaiBasho,
+            RString torikeshiShiharaibasho, RString shumokuTitle, RString kouzaShu, RString bangoTitle, RString kouzaNo,
+            RString kouzaMeigi, RString shiharaiStartYMD, RString torikeshiShiharaikikan, RString shiharaiEndYMD, RString karaFugo,
+            RString shiharaiStartHMS, RString shiharaiEndHMS, RString sihaYoYmd, RString tsuchibun２, RString seirino, RString tsuchino,
+            RString remban, RString tsuchibunLarge, RString tsuchibunMix1, RString tsuchibunMix2, RString tsuchibunMixtwo1,
+            RString tsuchibunMixtwo2, RString hakkoYMD, RString denshiKoin, RString ninshoshaYakushokuMei, RString ninshoshaYakushokuMei1,
+            RString koinMojiretsu, RString ninshoshaYakushokuMei2, RString ninshoshaShimeiKakenai, RString ninshoshaShimeiKakeru,
+            RString koinShoryaku, RString yubinNo, RString gyoseiku2, RString jusho4, RString jushoText, RString jusho5, RString jusho6,
+            RString katagakiText, RString katagaki3, RString katagakiSmall2, RString katagaki4, RString katagakiSmall1, RString shimei5,
+            RString shimeiSmall2, RString shimeiText, RString meishoFuyo2, RString shimeiSmall1, RString dainoKubunMei, RString shimei6,
+            RString meishoFuyo1, RString samabunShimeiText, RString kakkoLeft2, RString samabunShimei2, RString samabunShimeiSmall2,
+            RString samaBun2, RString kakkoRight2, RString kakkoLeft1, RString samabunShimei1, RString samaBun1, RString kakkoRight1,
+            RString samabunShimeiSmall1, RString customerBarCode) {
         this.bunshoNo = bunshoNo;
         this.title = title;
+        this.title2_1 = title2_1;
+        this.title2_2_1 = title2_2_1;
+        this.title2_2_2 = title2_2_2;
+        this.title2_3_1 = title2_3_1;
+        this.title2_3_2 = title2_3_2;
+        this.title2_4 = title2_4;
         this.tsuchibun1 = tsuchibun1;
         this.hihokenshaName = hihokenshaName;
-        this.hihokenshaNo = hihokenshaNo;
+        this.hihokenshaNo1 = hihokenshaNo1;
+        this.hihokenshaNo2 = hihokenshaNo2;
+        this.hihokenshaNo3 = hihokenshaNo3;
+        this.hihokenshaNo4 = hihokenshaNo4;
+        this.hihokenshaNo5 = hihokenshaNo5;
+        this.hihokenshaNo6 = hihokenshaNo6;
+        this.hihokenshaNo7 = hihokenshaNo7;
+        this.hihokenshaNo8 = hihokenshaNo8;
+        this.hihokenshaNo9 = hihokenshaNo9;
+        this.hihokenshaNo10 = hihokenshaNo10;
         this.uketsukeYMD = uketsukeYMD;
-        this.shoninKbn = shoninKbn;
-        this.shoninYMD = shoninYMD;
-        this.fushoninRiyu = fushoninRiyu;
-        this.kyufuShurui = kyufuShurui;
-        this.jigyoshaName = jigyoshaName;
-        this.jigyoshaYubinNo = jigyoshaYubinNo;
-        this.jigyoshoJusho = jigyoshoJusho;
-        this.jigyoshoTelNo = jigyoshoTelNo;
-        this.riyushoSakuseisha = riyushoSakuseisha;
-        this.hiyogakuGokei = hiyogakuGokei;
-        this.hokenHiyogaku = hokenHiyogaku;
-        this.riyoFutangaku = riyoFutangaku;
-        this.hokenKyufuhigaku = hokenKyufuhigaku;
-        this.tsuchibun2 = tsuchibun2;
+        this.ketteiYMD = ketteiYMD;
+        this.honninShiharaiGaku = honninShiharaiGaku;
+        this.taishoYM = taishoYM;
+        this.kyufuShu1 = kyufuShu1;
+        this.kyufuShu2 = kyufuShu2;
+        this.kyufuShu3 = kyufuShu3;
+        this.kekka = kekka;
+        this.shikyuGaku = shikyuGaku;
+        this.riyuTitle = riyuTitle;
+        this.riyu1 = riyu1;
+        this.riyu2 = riyu2;
+        this.riyu3 = riyu3;
+        this.torikeshi1 = torikeshi1;
+        this.torikeshi2 = torikeshi2;
+        this.mochimono1 = mochimono1;
+        this.bankName = bankName;
+        this.torikeshiMochimono1 = torikeshiMochimono1;
+        this.branchBankName = branchBankName;
+        this.mochimono2 = mochimono2;
+        this.torikeshiMochimono2 = torikeshiMochimono2;
+        this.mochimono3 = mochimono3;
+        this.shiharaiBasho = shiharaiBasho;
+        this.torikeshiShiharaibasho = torikeshiShiharaibasho;
+        this.shumokuTitle = shumokuTitle;
+        this.kouzaShu = kouzaShu;
+        this.bangoTitle = bangoTitle;
+        this.kouzaNo = kouzaNo;
+        this.kouzaMeigi = kouzaMeigi;
+        this.shiharaiStartYMD = shiharaiStartYMD;
+        this.torikeshiShiharaikikan = torikeshiShiharaikikan;
+        this.shiharaiEndYMD = shiharaiEndYMD;
+        this.karaFugo = karaFugo;
+        this.shiharaiStartHMS = shiharaiStartHMS;
+        this.shiharaiEndHMS = shiharaiEndHMS;
+        this.sihaYoYmd = sihaYoYmd;
+        this.tsuchibun２ = tsuchibun２;
+        this.seirino = seirino;
+        this.tsuchino = tsuchino;
+        this.remban = remban;
+        this.tsuchibunLarge = tsuchibunLarge;
+        this.tsuchibunMix1 = tsuchibunMix1;
+        this.tsuchibunMix2 = tsuchibunMix2;
+        this.tsuchibunMixtwo1 = tsuchibunMixtwo1;
+        this.tsuchibunMixtwo2 = tsuchibunMixtwo2;
         this.hakkoYMD = hakkoYMD;
         this.denshiKoin = denshiKoin;
         this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
@@ -183,7 +325,7 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoItem {
         this.ninshoshaShimeiKakeru = ninshoshaShimeiKakeru;
         this.koinShoryaku = koinShoryaku;
         this.yubinNo = yubinNo;
-        this.gyoseiku1 = gyoseiku1;
+        this.gyoseiku2 = gyoseiku2;
         this.jusho4 = jusho4;
         this.jushoText = jushoText;
         this.jusho5 = jusho5;
@@ -202,10 +344,10 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoItem {
         this.shimei6 = shimei6;
         this.meishoFuyo1 = meishoFuyo1;
         this.samabunShimeiText = samabunShimeiText;
-        this.samaBun2 = samaBun2;
         this.kakkoLeft2 = kakkoLeft2;
         this.samabunShimei2 = samabunShimei2;
         this.samabunShimeiSmall2 = samabunShimeiSmall2;
+        this.samaBun2 = samaBun2;
         this.kakkoRight2 = kakkoRight2;
         this.kakkoLeft1 = kakkoLeft1;
         this.samabunShimei1 = samabunShimei1;

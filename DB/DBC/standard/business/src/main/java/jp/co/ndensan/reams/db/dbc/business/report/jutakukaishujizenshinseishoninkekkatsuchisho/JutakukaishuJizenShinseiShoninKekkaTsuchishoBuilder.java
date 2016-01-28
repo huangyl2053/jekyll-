@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 住宅改修事前申請承認結果通知書Builderクラスです。
  */
-class JutakukaishuJizenShinseiShoninKekkaTsuchishoBuilder implements IJutakukaishuJizenShinseiShoninKekkaTsuchishoBuilder {
+public class JutakukaishuJizenShinseiShoninKekkaTsuchishoBuilder implements IJutakukaishuJizenShinseiShoninKekkaTsuchishoBuilder {
 
     private final IJutakukaishuJizenShinseiShoninKekkaTsuchishoEditor editor;
 

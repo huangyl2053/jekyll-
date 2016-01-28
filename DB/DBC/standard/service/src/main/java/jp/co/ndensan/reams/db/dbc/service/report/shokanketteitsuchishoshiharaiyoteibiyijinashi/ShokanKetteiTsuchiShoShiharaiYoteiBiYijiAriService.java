@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbc.service.report.shokanketteitsuchishoshiharaiy
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijinashi.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiItem;
-import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijinashi.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiProperty;
-import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijinashi.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshiharaiyotei.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource;
+import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem;
+import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriProperty;
+import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshiharaiyotei.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -27,25 +27,25 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
- * 償還払い支給（不支給）決定通知書Printerです。
+ * 償還払い支給（不支給）決定通知書(支払予定日あり）Printerです。
  */
-public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiService {
+public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriService {
 
     /**
-     * 償還払い支給（不支給）決定通知書を印刷します。
+     * 償還払い支給（不支給）決定通知書(支払予定日あり）を印刷します。
      *
-     * @param itemList 償還払い支給（不支給）決定通知書_帳票クラスパラメータクラス
+     * @param itemList 償還払い支給（不支給）決定通知書(支払予定日あり）_帳票クラスパラメータクラス
      * @return {@link SourceDataCollection}
      */
-    public SourceDataCollection print(List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiItem> itemList) {
+    public SourceDataCollection print(List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> itemList) {
 
-        ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiProperty property = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiProperty();
+        ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriProperty property = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriProperty();
         try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource> assembler = createAssembler(property, reportManager)) {
+            try (ReportAssembler<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaSourceBuilderCreator builderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 builderCreator.create(GyomuCode.DB介護保険, RString.EMPTY, RDate.getNowDate(), assembler.getImageFolderPath()).buildSource();
-                for (ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport report : toReports(itemList)) {
-                    ReportSourceWriter<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource> reportWriter = new ReportSourceWriter(assembler);
+                for (ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport report : toReports(itemList)) {
+                    ReportSourceWriter<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> reportWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportWriter);
                 }
             }
@@ -53,10 +53,10 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiService {
         }
     }
 
-    private static List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport> toReports(
-            List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiItem> itemList) {
-        List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport> list = new ArrayList<>();
-        list.add(ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport.createFrom(itemList));
+    private static List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport> toReports(
+            List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> itemList) {
+        List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport> list = new ArrayList<>();
+        list.add(ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport.createFrom(itemList));
         return list;
     }
 

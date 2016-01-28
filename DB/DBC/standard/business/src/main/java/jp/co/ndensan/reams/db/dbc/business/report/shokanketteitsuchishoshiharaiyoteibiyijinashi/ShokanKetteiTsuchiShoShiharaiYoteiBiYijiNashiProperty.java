@@ -19,15 +19,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
- * 償還払い支給（不支給）決定通知書のプロパティです。
+ * 償還払い支給（不支給）決定通知書(支払予定日あり）のプロパティです。
  */
-public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiProperty extends ReportPropertyBase<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource> {
+public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiProperty
+        extends ReportPropertyBase<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource> {
 
     private static final ReportId ID = new ReportId("DBC100002");
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("title")));
 
     public ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiProperty() {
-        super(SubGyomuCode.DBE認定支援, ID);
+        super(SubGyomuCode.DBC介護給付, ID);
     }
 
     @Override
@@ -35,7 +36,6 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiProperty extends Repor
             Breakers<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource> breakers,
             BreakerCatalog<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
-
 
             PAGE_BREAK_KEYS) {
             @Override

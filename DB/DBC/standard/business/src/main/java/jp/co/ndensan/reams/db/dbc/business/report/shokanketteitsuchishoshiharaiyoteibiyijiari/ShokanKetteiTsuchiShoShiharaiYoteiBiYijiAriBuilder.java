@@ -3,34 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.report.jutakukaishujizenshinseishoninkekkatsuchisho;
+package jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.source.jutakukaishujizenshinseishoninkekka.JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshiharaiyotei.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 住宅改修事前申請承認結果通知書Builderクラスです。
+ * 償還払い支給（不支給）決定通知書(支払予定日あり）Builderクラスです。
  */
-class JutakukaishuJizenShinseiShoninKekkaTsuchishoBuilder implements IJutakukaishuJizenShinseiShoninKekkaTsuchishoBuilder {
+public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriBuilder implements IShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriBuilder {
 
-    private final IJutakukaishuJizenShinseiShoninKekkaTsuchishoEditor editor;
+    private final IShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor editor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param editor {@link IJutakukaishuJizenShinseiShoninKekkaTsuchishoEditor}
+     * @param editor {@link IShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor}
      */
-    public JutakukaishuJizenShinseiShoninKekkaTsuchishoBuilder(IJutakukaishuJizenShinseiShoninKekkaTsuchishoEditor editor) {
+    public ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriBuilder(IShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor editor) {
         this.editor = editor;
     }
 
     /**
      * 帳票ソースをビルドします。
      *
-     * @return {@link JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource}
+     * @return {@link ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource}
      */
     @Override
-    public JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource build() {
-        return ReportEditorJoiner.from(new JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource()).join(editor).buildSource();
+    public ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource build() {
+        return ReportEditorJoiner.from(new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource()).join(editor).buildSource();
     }
 }

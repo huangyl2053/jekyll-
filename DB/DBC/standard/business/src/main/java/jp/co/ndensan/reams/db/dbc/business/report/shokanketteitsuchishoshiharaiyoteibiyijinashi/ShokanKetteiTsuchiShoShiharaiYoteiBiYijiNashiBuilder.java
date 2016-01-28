@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshih
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 償還払い支給（不支給）決定通知書Builderクラスです。
+ * 償還払い支給（不支給）決定通知書(支払予定日あり）Builderクラスです。
  */
-class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiBuilder implements IShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiBuilder {
+public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiBuilder implements IShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiBuilder {
 
     private final IShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiEditor editor;
 

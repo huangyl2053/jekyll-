@@ -3,47 +3,49 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.report.jutakukaishujizenshinseishoninkekkatsuchisho;
+package jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.source.jutakukaishujizenshinseishoninkekka.JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshiharaiyotei.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 住宅改修事前申請承認結果通知書のReportです。
+ * 償還払い支給（不支給）決定通知書(支払予定日あり）のReportです。
  */
-public class JutakukaishuJizenShinseiShoninKekkaTsuchishoReport extends Report<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> {
+public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport extends Report<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> {
 
-    private final JutakukaishuJizenShinseiShoninKekkaTsuchishoItem item;
+    private final List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> itemList;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item 住宅改修事前申請承認結果通知書のITEM
-     * @return 住宅改修事前申請承認結果通知書のReport
+     * @param itemList 償還払い支給（不支給）決定通知書(支払予定日あり）のITEM
+     * @return 償還払い支給（不支給）決定通知書(支払予定日あり）のReport
      */
-    public static JutakukaishuJizenShinseiShoninKekkaTsuchishoReport createFrom(
-            JutakukaishuJizenShinseiShoninKekkaTsuchishoItem item) {
+    public static ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport createFrom(
+            List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> itemList) {
 
-        return new JutakukaishuJizenShinseiShoninKekkaTsuchishoReport(
-                item);
+        return new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport(itemList);
     }
 
     /**
      * インスタンスを生成します。
      *
-     * @param item 住宅改修事前申請承認結果通知書表のITEM
+     * @param itemList 償還払い支給（不支給）決定通知書(支払予定日あり）のITEM
      */
-    protected JutakukaishuJizenShinseiShoninKekkaTsuchishoReport(
-            JutakukaishuJizenShinseiShoninKekkaTsuchishoItem item) {
+    protected ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport(
+            List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> itemList) {
 
-        this.item = item;
+        this.itemList = itemList;
     }
 
     @Override
-    public void writeBy(ReportSourceWriter<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> reportSourceWriter) {
-        IJutakukaishuJizenShinseiShoninKekkaTsuchishoEditor editor = new JutakukaishuJizenShinseiShoninKekkaTsuchishoEditor(item);
-        IJutakukaishuJizenShinseiShoninKekkaTsuchishoBuilder builder = new JutakukaishuJizenShinseiShoninKekkaTsuchishoBuilder(editor);
-        reportSourceWriter.writeLine(builder);
+    public void writeBy(ReportSourceWriter<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> reportSourceWriter) {
+        for (ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item : itemList) {
+            IShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor editor = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor(item);
+            IShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriBuilder builder = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriBuilder(editor);
+            reportSourceWriter.writeLine(builder);
+        }
     }
 }

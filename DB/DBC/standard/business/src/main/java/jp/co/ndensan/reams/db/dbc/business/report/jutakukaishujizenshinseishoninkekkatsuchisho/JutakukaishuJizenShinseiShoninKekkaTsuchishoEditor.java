@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.jutakukaishujizenshinseis
 /**
  * 住宅改修事前申請承認結果通知書Editorです。
  */
-class JutakukaishuJizenShinseiShoninKekkaTsuchishoEditor implements IJutakukaishuJizenShinseiShoninKekkaTsuchishoEditor {
+public class JutakukaishuJizenShinseiShoninKekkaTsuchishoEditor implements IJutakukaishuJizenShinseiShoninKekkaTsuchishoEditor {
 
     private final JutakukaishuJizenShinseiShoninKekkaTsuchishoItem item;
 

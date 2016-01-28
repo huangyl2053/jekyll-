@@ -11,5 +11,5 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 住宅改修事前申請承認結果通知書エディターのインターフェースクラスです。
  */
-interface IJutakukaishuJizenShinseiShoninKekkaTsuchishoEditor extends IReportEditor<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> {
+public interface IJutakukaishuJizenShinseiShoninKekkaTsuchishoEditor extends IReportEditor<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> {
 }

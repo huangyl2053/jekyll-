@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.report.jutakukaishujizenshinseishoninkekkatsuchisho;
+package jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.jutakukaishujizenshinseishoninkekka.JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshiharaiyotei.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,29 +19,29 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
- * 住宅改修事前申請承認結果通知書のプロパティです。
+ * 償還払い支給（不支給）決定通知書(支払予定日あり）のプロパティです。
  */
-public class JutakukaishuJizenShinseiShoninKekkaTsuchishoProperty extends ReportPropertyBase<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> {
+public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriProperty
+        extends ReportPropertyBase<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> {
 
-    private static final ReportId ID = new ReportId("DBC100002");
+    private static final ReportId ID = new ReportId("DBC100003");
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("title")));
 
-    public JutakukaishuJizenShinseiShoninKekkaTsuchishoProperty() {
-        super(SubGyomuCode.DBE認定支援, ID);
+    public ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriProperty() {
+        super(SubGyomuCode.DBC介護給付, ID);
     }
 
     @Override
-    public Breakers<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> defineBreakers(
-            Breakers<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> breakers,
-            BreakerCatalog<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> catalog) {
+    public Breakers<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> defineBreakers(
+            Breakers<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> breakers,
+            BreakerCatalog<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
-
 
             PAGE_BREAK_KEYS) {
             @Override
-            public ReportLineRecord<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> occuredBreak(
-                    ReportLineRecord<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> currentRecord,
-                    ReportLineRecord<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> nextRecord,
+            public ReportLineRecord<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> occuredBreak(
+                    ReportLineRecord<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> currentRecord,
+                    ReportLineRecord<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> nextRecord,
                     ReportDynamicChart dynamicChart) {
                 if (nextRecord == ReportLineRecord.LAST_RECORD) {
                     return currentRecord;

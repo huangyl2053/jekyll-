@@ -9,7 +9,8 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshih
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 償還払い支給（不支給）決定通知書Builderのインターフェースクラスです。
+ * 償還払い支給（不支給）決定通知書(支払予定日あり）Builderのインターフェースクラスです。
  */
-interface IShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiBuilder extends IReportBuilder<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource> {
+public interface IShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiBuilder
+        extends IReportBuilder<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource> {
 }
