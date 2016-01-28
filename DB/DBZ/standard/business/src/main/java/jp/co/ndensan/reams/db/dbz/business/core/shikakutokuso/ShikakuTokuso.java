@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakutoku.shikakutokuso.ServiceShikakuRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -179,5 +180,14 @@ public class ShikakuTokuso {
      */
     public RString get旧市町村名称() {
         return entity.getKyuShichosonMeisho();
+    }
+
+    /**
+     * 旧市町村名称を取得します。
+     *
+     * @return 旧市町村名称
+     */
+    public RDateTime get処理日時() {
+        return entity.getLastUpdateTimestamp();
     }
 }

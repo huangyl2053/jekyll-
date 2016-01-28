@@ -16,14 +16,21 @@ import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GappeiJohoKubun.合併あり;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GappeiJohoKubun.合併なし;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.kyotsutokei.ConfigKeysGappeiJohoKanri;
-//import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParameter;
 import jp.co.ndensan.reams.db.dbz.service.shikakutokuso.ShikakuTokusoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
@@ -374,54 +381,67 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
 
         // 「ビジネス設計_DBAMN00000_資格得喪履歴」の「一覧データ取得」を参照する
         SearchResult<ShikakuTokuso> result = shikakuTokusoFinder.getShikakuTokuso(parmeter);
-        List<dgShikakuShutokuRireki_Row> dgShikakuShutokuRirekiList = new ArrayList();
+        List<dgShikakuShutokuRireki_Row> dgShikakuShutokuRirekiList = new ArrayList<>();
 
         // 画面設定
-        for (ShikakuTokuso ShikakuTokuso : result.records()) {
+        for (ShikakuTokuso shikakuTokuso : result.records()) {
 
             dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row();
 
             TextBoxFlexibleDate 資格取得日 = new TextBoxFlexibleDate();
-            資格取得日.setValue(ShikakuTokuso.get資格取得年月日());
+            資格取得日.setValue(shikakuTokuso.get資格取得年月日());
             row.setShutokuDate(資格取得日);
 
             TextBoxFlexibleDate 資格取得届出日 = new TextBoxFlexibleDate();
-            資格取得届出日.setValue(ShikakuTokuso.get資格取得届出年月日());
+            資格取得届出日.setValue(shikakuTokuso.get資格取得届出年月日());
             row.setShutokuTodokedeDate(資格取得届出日);
 
             try {
-//                row.setHihokenshaKubun(ShikakuKubun.toValue(ShikakuTokuso.get被保険者区分コード()).get略称());
+                row.setShutokuJiyu(ShikakuShutokuJiyu.toValue(shikakuTokuso.get取得事由コード()).getName());
+            } catch (IllegalArgumentException e) {
+                row.setShutokuJiyu(RString.EMPTY);
+            }
+            try {
+                row.setHihokenshaKubun(ShikakuKubun.toValue(shikakuTokuso.get被保険者区分コード()).get略称());
             } catch (IllegalArgumentException e) {
                 row.setHihokenshaKubun(RString.EMPTY);
             }
 
-            try {
-                row.setShutokuJiyu(ShikakuSoshitsuJiyu.toValue(ShikakuTokuso.get取得事由コード()).getName());
-            } catch (IllegalArgumentException e) {
-                row.setShutokuJiyu(RString.EMPTY);
-            }
-
             TextBoxFlexibleDate 資格喪失日 = new TextBoxFlexibleDate();
-            資格喪失日.setValue(ShikakuTokuso.get資格喪失年月日());
+            資格喪失日.setValue(shikakuTokuso.get資格喪失年月日());
             row.setSoshitsuDate(資格喪失日);
 
             TextBoxFlexibleDate 資格喪失届出日 = new TextBoxFlexibleDate();
-            資格喪失届出日.setValue(ShikakuTokuso.get資格喪失届出年月日());
+            資格喪失届出日.setValue(shikakuTokuso.get資格喪失届出年月日());
             row.setSoshitsuTodokedeDate(資格喪失届出日);
 
             try {
-                row.setJutokuKubun(JushochiTokureishaKubun.toValue(ShikakuTokuso.get住所地特例フラグ()).get名称());
+                row.setSoshitsuJiyu(ShikakuSoshitsuJiyu.toValue(shikakuTokuso.get喪失事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                row.setSoshitsuJiyu(RString.EMPTY);
+            }
+
+            try {
+                row.setJutokuKubun(JushochiTokureishaKubun.toValue(shikakuTokuso.get住所地特例フラグ()).get名称());
             } catch (IllegalArgumentException e) {
                 row.setJutokuKubun(RString.EMPTY);
             }
-            row.setShozaiHokensha(ShikakuTokuso.get市町村名称());
-            row.setSochimotoHokensha(ShikakuTokuso.get措置元保険者());
-            row.setKyuHokensha(ShikakuTokuso.get旧市町村名称());
-            row.setShikibetsuCode(ShikakuTokuso.get枝番());
+            row.setShozaiHokensha(shikakuTokuso.get市町村名称());
+            row.setSochimotoHokensha(shikakuTokuso.get措置元保険者());
+            row.setKyuHokensha(shikakuTokuso.get旧市町村名称());
+            row.setShikibetsuCode(shikakuTokuso.get枝番());
 
-            TextBoxFlexibleDate 処理日時 = new TextBoxFlexibleDate();
-            処理日時.setValue(ShikakuTokuso.get異動日());
-            row.setHenkoDate(処理日時);
+            RDateTime 処理日時 = shikakuTokuso.get処理日時();
+            RStringBuilder 処理日時表示 = new RStringBuilder();
+            処理日時表示.append(処理日時.getDate().wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString());
+            処理日時表示.append(RString.HALF_SPACE);
+            処理日時表示.append(String.format("%02d", 処理日時.getHour()));
+            処理日時表示.append(":");
+            処理日時表示.append(String.format("%02d", 処理日時.getMinute()));
+            処理日時表示.append(":");
+            処理日時表示.append(String.format("%02d", 処理日時.getSecond()));
+
+            row.setShoriDateTime(処理日時表示.toRString());
 
             dgShikakuShutokuRirekiList.add(row);
         }
