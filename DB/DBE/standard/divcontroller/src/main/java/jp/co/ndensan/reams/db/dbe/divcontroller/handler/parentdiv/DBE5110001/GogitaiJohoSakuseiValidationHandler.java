@@ -197,7 +197,7 @@ public class GogitaiJohoSakuseiValidationHandler {
                 continue;
             }
             if (row.getGogitaicho() && flag) {
-                validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.合議体委員数が最大値を超過));
+                validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.審査会の合議体長は必ず１人));
                 return validationMessages;
             }
         }
