@@ -177,7 +177,7 @@ public class HokenshaNyuryokuHojoFinderTest extends DbaTestDacBase {
         entity.setAzaChoJushoCode(字丁住所コード);
         entity.setIsDeleted(false);
         entity.setLastUpdateReamsLoginId(new RString("1"));
-        entity.setSeireiShiteiToshiKubun(new RString("1"));
+        entity.setSeireiShiteiToshiKubun(true);
         entity.setTodofukenKanaKey(new RString("1"));
         entity.setShichosonKanaKey(new RString("1"));
         entity.setShiteiToshiKuKanaKey(new RString("1"));
