@@ -43,9 +43,6 @@ public class NenpoYoushiki2No8Handler {
     private static final Decimal 横番号_6 = new Decimal("6");
     private static final Decimal 横番号_7 = new Decimal("7");
     private static final Decimal 横番号_13 = new Decimal("13");
-    private static final RString エリア_件数 = new RString("ア　件数");
-    private static final RString エリア_費用額 = new RString("イ　費用額");
-    private static final RString エリア_給付額 = new RString("ウ　給付額");
     private final NenpoYoushiki2No8Div div;
 
     /**
@@ -191,25 +188,10 @@ public class NenpoYoushiki2No8Handler {
      */
     public List<JigyoHokokuTokeiData> get修正データ() {
         List<JigyoHokokuTokeiData> list = new ArrayList<>();
-        RString title = div.getShisetsugaigosabisujukyuMeisai().getTabShisetsugaigosabisujukyu().getSelectedItem().getTitle();
-        if (title.equals(エリア_件数)) {
-            list = get件数修正データ();
-        }
-        if (title.equals(エリア_費用額)) {
-            list = get費用額修正データ();
-        }
-        if (title.equals(エリア_給付額)) {
-            list = get給付額修正データ();
-        }
-        return list;
-    }
-
-    private List<JigyoHokokuTokeiData> get件数修正データ() {
-        List<JigyoHokokuTokeiData> list = new ArrayList<>();
         Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 件数タブデータ = ViewStateHolder.
                 get(NenpoYoushiki2No8ViewStateKeys.件数データグリッド, Models.class);
-        List<DetalParameter> detalParameter = get件数データ();
-        for (DetalParameter detal : detalParameter) {
+        List<DetalParameter> 件数Parameter = get件数データ();
+        for (DetalParameter detal : 件数Parameter) {
             for (JigyoHokokuTokeiData viewdata : 件数タブデータ) {
                 JigyoHokokuTokeiDataBuilder builder = viewdata.createBuilderForEdit();
                 if (detal.get縦番号().compareTo(viewdata.get縦番号()) == 0
@@ -221,15 +203,10 @@ public class NenpoYoushiki2No8Handler {
                 }
             }
         }
-        return list;
-    }
-
-    private List<JigyoHokokuTokeiData> get費用額修正データ() {
-        List<JigyoHokokuTokeiData> list = new ArrayList<>();
         Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 費用額データ = ViewStateHolder.
                 get(NenpoYoushiki2No8ViewStateKeys.費用額データグリッド, Models.class);
-        List<DetalParameter> detalParameter = get費用額データ();
-        for (DetalParameter detal : detalParameter) {
+        List<DetalParameter> 費用額Parameter = get費用額データ();
+        for (DetalParameter detal : 費用額Parameter) {
             for (JigyoHokokuTokeiData viewdata : 費用額データ) {
                 JigyoHokokuTokeiDataBuilder builder = viewdata.createBuilderForEdit();
                 if (detal.get縦番号().compareTo(viewdata.get縦番号()) == 0
@@ -241,15 +218,10 @@ public class NenpoYoushiki2No8Handler {
                 }
             }
         }
-        return list;
-    }
-
-    private List<JigyoHokokuTokeiData> get給付額修正データ() {
-        List<JigyoHokokuTokeiData> list = new ArrayList<>();
         Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 給付額データ = ViewStateHolder.
                 get(NenpoYoushiki2No8ViewStateKeys.給付額データグリッド, Models.class);
-        List<DetalParameter> detalParameter = get給付額データ();
-        for (DetalParameter detal : detalParameter) {
+        List<DetalParameter> 給付額Parameter = get給付額データ();
+        for (DetalParameter detal : 給付額Parameter) {
             for (JigyoHokokuTokeiData viewdata : 給付額データ) {
                 JigyoHokokuTokeiDataBuilder builder = viewdata.createBuilderForEdit();
                 if (detal.get縦番号().compareTo(viewdata.get縦番号()) == 0

@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031.dgIt
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0060031.NenpoYoushiki2No8Handler;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokunenpo.JigyoHokokuNenpoHoseiHakoManager;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -92,10 +92,16 @@ public class NenpoYoushiki2No8 {
         if (!this.get件数タブ(div)
                 && !this.get費用額(div)
                 && !this.get給付額(div)) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-        } else {
-            return ResponseData.of(div).setState(DBU0060031StateName.初期状態);
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+            }
+            if (new RString(UrInformationMessages.該当データなし.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
+                // TODO  QA555「OK」をクリックすれば、検索画面に遷移する
+                return ResponseData.of(div).forwardWithEventName(DBU0060011TransitionEventName.様式２の８に遷移).respond();
+            }
         }
+        return ResponseData.of(div).setState(DBU0060031StateName.初期状態);
     }
 
     /**
@@ -138,7 +144,7 @@ public class NenpoYoushiki2No8 {
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            // TODO  事業報告（年報）補正、発行①_検索画面へ遷移
+            // TODO  QA555「OK」をクリックすれば、検索画面に遷移する
             return ResponseData.of(div).forwardWithEventName(DBU0060011TransitionEventName.様式２の８に遷移).respond();
         }
         return ResponseData.of(div).respond();
@@ -167,25 +173,25 @@ public class NenpoYoushiki2No8 {
             if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 JigyoHokokuNenpoHoseiHakoManager.createInstance().updateJigyoHokokuNenpoData(修正データリスト);
+                div.getKanryoMsg().getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
+                        .replace("修正").evaluate()),
+                        RString.EMPTY, RString.EMPTY, true);
                 return ResponseData.of(div).setState(DBU0060031StateName.完了状態);
             }
         }
         if (補正フラグ.equals(フラグ_削除)) {
-            データ削除(div);
+            報告年 = new FlexibleYear(entity.get行報告年());
+            集計対象年 = new FlexibleYear(entity.get行集計対象年());
+            市町村コード = new LasdecCode(entity.get行市町村コード());
+            様式種類コード = entity.get事業報告年報補正表示のコード();
+            DeleteJigyoHokokuNenpo jigyoHokokuNenpoDelete = new DeleteJigyoHokokuNenpo(報告年, 集計対象年, 市町村コード, 様式種類コード);
+            JigyoHokokuNenpoHoseiHakoManager.createInstance().deleteJigyoHokokuNenpoData(jigyoHokokuNenpoDelete);
+            div.getKanryoMsg().getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
+                    .replace("削除").evaluate()),
+                    RString.EMPTY, RString.EMPTY, true);
+            return ResponseData.of(div).setState(DBU0060031StateName.完了状態);
         }
         return ResponseData.of(div).respond();
-    }
-
-    private ResponseData<NenpoYoushiki2No8Div> データ削除(NenpoYoushiki2No8Div div) {
-        ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity
-                = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
-        報告年 = new FlexibleYear(entity.get行報告年());
-        集計対象年 = new FlexibleYear(entity.get行集計対象年());
-        市町村コード = new LasdecCode(entity.get行市町村コード());
-        様式種類コード = entity.get事業報告年報補正表示のコード();
-        DeleteJigyoHokokuNenpo jigyoHokokuNenpoDelete = new DeleteJigyoHokokuNenpo(報告年, 集計対象年, 市町村コード, 様式種類コード);
-        JigyoHokokuNenpoHoseiHakoManager.createInstance().deleteJigyoHokokuNenpoData(jigyoHokokuNenpoDelete);
-        return ResponseData.of(div).setState(DBU0060031StateName.完了状態);
     }
 
     private boolean get件数タブ(NenpoYoushiki2No8Div div) {
@@ -246,11 +252,7 @@ public class NenpoYoushiki2No8 {
         }
         div.getShisetsugaigosabisujukyuMeisai().getTablitakuyobosabisujukyusuInput().
                 getDgItakuyobosabisujukyusu().setDataSource(dgItakuyobosabiList);
-        if (dgItakuyobosabiList.isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
+        return !dgItakuyobosabiList.isEmpty();
     }
 
     private boolean get費用額(NenpoYoushiki2No8Div div) {
@@ -311,11 +313,7 @@ public class NenpoYoushiki2No8 {
         }
         div.getShisetsugaigosabisujukyuMeisai().getTabShisetsugaigosabisujukyu().
                 getDgChiikimitchakuyobosabisujukyu().setDataSource(dgChiikimitchList);
-        if (dgChiikimitchList.isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
+        return !dgChiikimitchList.isEmpty();
     }
 
     private boolean get給付額(NenpoYoushiki2No8Div div) {
@@ -376,11 +374,7 @@ public class NenpoYoushiki2No8 {
         }
         div.getShisetsugaigosabisujukyuMeisai().getTabHisetsugaigosabisujukyuInput().
                 getDgHisetsugaigosabisujukyu().setDataSource(dgHisetsugaigoList);
-        if (dgHisetsugaigoList.isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
+        return !dgHisetsugaigoList.isEmpty();
     }
 
     private NenpoYoushiki2No8Handler getHandler(NenpoYoushiki2No8Div div) {
