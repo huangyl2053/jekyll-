@@ -11,6 +11,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.servicekeikakuHi.ServiceKeikakuH
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810024.ServiceKeikakuHiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810024.dgdYichiran_Row;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200004Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200604Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -31,7 +34,7 @@ public class ServiceKeikakuHiHandler {
     }
 
     public void onLoad(
-            List<ServiceKeikakuHiRealtEntity> entity200904List,
+            List<ShokanServicePlan200904Entity> entity200904List,
             FlexibleYearMonth サービス年月,
             JigyoshaNo 事業者番号,
             RString 様式番号,
@@ -48,7 +51,7 @@ public class ServiceKeikakuHiHandler {
     }
 
     public void onLoad(
-            ServiceKeikakuHiRealtEntity entity200604,
+            ShokanServicePlan200604Entity entity200604,
             FlexibleYearMonth サービス年月,
             JigyoshaNo 事業者番号,
             RString 様式番号,
@@ -60,7 +63,7 @@ public class ServiceKeikakuHiHandler {
     }
 
     public void onLoad20004(
-            ServiceKeikakuHiRealtEntity entity200004,
+            ShokanServicePlan200004Entity entity200004,
             FlexibleYearMonth サービス年月,
             JigyoshaNo 事業者番号,
             RString 様式番号,
@@ -72,7 +75,7 @@ public class ServiceKeikakuHiHandler {
     }
 
     public void onClick_SelectButton(
-            ServiceKeikakuHiRealtEntity entity200904) {
+            ShokanServicePlan200904Entity entity200904) {
         setサービス計画費パネル_詳細エリア200904(entity200904);
     }
 
@@ -129,24 +132,24 @@ public class ServiceKeikakuHiHandler {
         }
     }
 
-    private void setサービス計画費_パネル_共通エリア(List<ServiceKeikakuHiRealtEntity> entity200904List) {
+    private void setサービス計画費_パネル_共通エリア(List<ShokanServicePlan200904Entity> entity200904List) {
         // TODO 凌護行 DbT3047ShokanServicePlan200904Entityとdbが不一致です QA回答まち
-        ServiceKeikakuHiRealtEntity entity200904 = entity200904List.get(0);
+        ShokanServicePlan200904Entity entity200904 = entity200904List.get(0);
         for (int i = 1; i < entity200904List.size(); i++) {
             if (new Decimal(entity200904.get連番().toString()).compareTo(new Decimal(entity200904List.get(i).get連番().toString())) > 0) {
                 entity200904 = entity200904List.get(i);
             }
         }
-//        div.getPanelServiceKeikakuHiUp().getTxtJigyoshaKubun().setValue(entity200904.get指定_基準該当事業者区分コード200904());
-//        div.getPanelServiceKeikakuHiUp().getRdoShinsahouhou().setSelectedKey(entity200904.get審査方法区分コード());
-//        div.getPanelServiceKeikakuHiUp().getTxtTodokedeYMD().setValue(new RDate(entity200904.get届出日200904().toString()));
-//        div.getPanelServiceKeikakuHiUp().getTxtTantoKaigoshien().setValue(entity200904.get担当介護支給専門員番号());
+        div.getPanelServiceKeikakuHiUp().getTxtJigyoshaKubun().setValue(entity200904.get指定_基準該当事業者区分コード200904());
+        div.getPanelServiceKeikakuHiUp().getRdoShinsahouhou().setSelectedKey(entity200904.get審査方法区分コード());
+        div.getPanelServiceKeikakuHiUp().getTxtTodokedeYMD().setValue(new RDate(entity200904.get届出日200904().toString()));
+        div.getPanelServiceKeikakuHiUp().getTxtTantoKaigoshien().setValue(entity200904.get担当介護支給専門員番号());
         div.getPanelServiceKeikakuHiUp().getTxtTanyiTanka().setValue(entity200904.get単位数単価());
     }
 
-   private void setサービス計画費パネル_データグリッドエリア(List<ServiceKeikakuHiRealtEntity> entity200904List) {
+    private void setサービス計画費パネル_データグリッドエリア(List<ShokanServicePlan200904Entity> entity200904List) {
         List<dgdYichiran_Row> dataSource = new ArrayList<>();
-        for (ServiceKeikakuHiRealtEntity entity200904 : entity200904List) {
+        for (ShokanServicePlan200904Entity entity200904 : entity200904List) {
             dgdYichiran_Row dgdYichiran_Row = new dgdYichiran_Row();
             dgdYichiran_Row.setDefaultDataName1(new RString(entity200904.getサービスコード().getColumnValue().toString()));
             dgdYichiran_Row.setDefaultDataName6(entity200904.get摘要());
@@ -160,7 +163,7 @@ public class ServiceKeikakuHiHandler {
         div.getPanelServiceKeikakuHiUp().getDgdYichiran().setDataSource(dataSource);
     }
 
-    private void setサービス計画費パネル_詳細エリア200904(ServiceKeikakuHiRealtEntity entity200904) {
+    private void setサービス計画費パネル_詳細エリア200904(ShokanServicePlan200904Entity entity200904) {
         // TODO 凌護行 画面表示される、前ゼロがあり、QA回答まち
         div.getPanelServiceKeikakuHiUp().getTxtServiceCode1().setValue(entity200904.getサービスコード().getColumnValue().substring(0, 2));
         div.getPanelServiceKeikakuHiUp().getTxtServiceCode2().setValue(entity200904.getサービスコード().getColumnValue().substring(2));
@@ -180,7 +183,7 @@ public class ServiceKeikakuHiHandler {
         div.getPanelServiceKeikakuHiUp().getTxtNote3().setValue(entity200904.get備考3());
     }
 
-    private void setサービス計画費パネル_詳細エリア200604(ServiceKeikakuHiRealtEntity entity200604) {
+    private void setサービス計画費パネル_詳細エリア200604(ShokanServicePlan200604Entity entity200604) {
         div.getPanelServiceKeikakuhiDown().getTxtShiteiJigyoshaKubunCode().setValue(entity200604.get指定_基準該当事業者区分コード200604());
 //        div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().setValue(new RDate(entity200604.get届出日200904().toString()));
 //        div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setSelectedKey(entity200604.get審査方法200604());
@@ -204,7 +207,7 @@ public class ServiceKeikakuHiHandler {
         div.getPanelServiceKeikakuhiDown().getTxtNote3down().setValue(entity200604.get備考3200604());
     }
 
-   private void setサービス計画費パネル_詳細エリア200004(ServiceKeikakuHiRealtEntity entity200004) {
+    private void setサービス計画費パネル_詳細エリア200004(ShokanServicePlan200004Entity entity200004) {
         // TODO 凌護行 DropDownListの設定、QA回答まち
 //        div.getPanelServiceKeikakuhiDown().getTxtShiteiJigyoshaKubunCode().setValue(entity200004.get指定_基準該当事業者区分コード200004());
 //        div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().setValue(new RDate(entity200004.get届出日200004().toString()));

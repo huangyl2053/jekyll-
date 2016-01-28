@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0810013;
 
 import java.util.List;
@@ -30,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class KouzaInfo {
 
     public ResponseData<KouzaInfoDiv> onLoad(KouzaInfoDiv div) {
-     // TODO 引き継ぎデータの取得
+        // TODO 引き継ぎデータの取得
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
                 new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201601")),
                 new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
@@ -52,20 +51,20 @@ public class KouzaInfo {
         // TODO「介護宛名情報」共有子Divの初期化
         //        div.getPanelOne().getCcdKaigoAtenaInfo().load(識別コード);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-//            div.getPanelOne().getCcdKaigoShikakuKihon().initialize(被保険者番号);
+            div.getPanelOne().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         } else {
             div.getPanelOne().getCcdKaigoShikakuKihon().setVisible(false);
         }
-             List<ShokanShinsei> shokanShinseiList = ShokanbaraiJyokyoShokai.createInstance()
-                     .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
-        if(shokanShinseiList.isEmpty()) {
+        List<ShokanShinsei> shokanShinseiList = ShokanbaraiJyokyoShokai.createInstance()
+                .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
+        if (shokanShinseiList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         getHandler(div).setヘッダ_エリア(サービス年月, 整理番号);
         // TODO 共有子div?用不可
 //        div.getPanelShinseiNaiyo().getCcdShiharaiHohoJyoho().load(識別コード, 被保険者番号, サービス提供年月
-//                , 整理番号, 支払方法区分コード, 支払場所, 支払期間開始年月日
-//                , 支払期間終了年月日, 支払窓口開始時間, 支払窓口終了期間, 口座ID, 受領委任契約番号);  
+//               , 整理番号, 支払方法区分コード, 支払場所, 支払期間開始年月日
+//               , 支払期間終了年月日, 支払窓口開始時間, 支払窓口終了期間, 口座ID, 受領委任契約番号);  
         return createResponse(div);
     }
 
@@ -73,7 +72,7 @@ public class KouzaInfo {
         return new KouzaInfoHandler(div);
     }
 
-       private ResponseData<KouzaInfoDiv> createResponse(KouzaInfoDiv div) {
+    private ResponseData<KouzaInfoDiv> createResponse(KouzaInfoDiv div) {
         return ResponseData.of(div).respond();
     }
 }
