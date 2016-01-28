@@ -10,11 +10,9 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0400011.Hiho
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0400011.HihokenshaShoBatchPrmHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0400011.ValidationHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashoikkatsuhakko.HihokenshaShoBatchPrmFinder;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -45,13 +43,10 @@ public class HihokenshaShoBatchPrm {
      */
     public ResponseData<HihokenshaShoBatchPrmDiv> onLoad(HihokenshaShoBatchPrmDiv div) {
         ResponseData<HihokenshaShoBatchPrmDiv> response = new ResponseData<>();
-        //TODO QA284張紅麗　まで12/29 出力条件で選択する項目の確認
-        //証表示タイプ = BusinessConfig.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_証表示タイプ);
-        //if (証表示タイプ == 2) {
+        //TODO QA295  未対応
         div.getRadShutsuryokuJoken().setSelectedKey(JYUKYUMONO_RADIO_SENTAKU);
-        //}
-        //TODO QA345張紅麗　まで12/29 処理枝番 画面で選択された入力条件の確認 1.2　抽出期間の取得値
         SearchResult<HihokenshashoIkkatsuHakkoModel> resultList = service.getChushutsuKikan(JYUKYUMONO_RADIO_SENTAKU);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnHakko"), false);
         getHandler(div).onLoad(resultList.records());
         response.data = div;
         return response;
@@ -65,7 +60,6 @@ public class HihokenshaShoBatchPrm {
      */
     public ResponseData<HihokenshaShoBatchPrmDiv> onClick_CheckBoxSelect(HihokenshaShoBatchPrmDiv div) {
         ResponseData<HihokenshaShoBatchPrmDiv> response = new ResponseData<>();
-        // TODO QA345張紅麗　まで12/29 処理枝番 画面で選択された入力条件の確認
         SearchResult<HihokenshashoIkkatsuHakkoModel> resultList = service.getAgainHakko(JYUKYUMONO_RADIO_SENTAKU);
         getHandler(div).saihakkoSelect(resultList.records());
         response.data = div;
@@ -79,36 +73,40 @@ public class HihokenshaShoBatchPrm {
      * @return ResponseData<HihokenshaShoBatchPrmDiv>
      */
     public ResponseData<HihokenshaShoBatchPrmDiv> onClick_btnJikkou(HihokenshaShoBatchPrmDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-            if ((JYUKYUMONO_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
-                if (div.getTxtKonkaiChushutsuFromYMD().getValue().isBefore(div.getTxtZenkaiShoriKijunYMD().getValue())) {
-                    ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-                    validationMessages.add(getHandlerValidation(div).開始日変更のチェック());
-                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-                }
-            }
-            if ((GAITOMONO_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「実行する」ボタンをクリックした後のチェックを処理します。
+     *
+     * @param div 介護保険被保険者証一括作成Div
+     * @return ResponseData<HihokenshaShoBatchPrmDiv>
+     */
+    public ResponseData<HihokenshaShoBatchPrmDiv> onClick_btnCheck(HihokenshaShoBatchPrmDiv div) {
+        if ((JYUKYUMONO_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
+            if (div.getTxtZenkaiShoriKijunYMD().getValue().isBefore(div.getTxtKonkaiChushutsuFromYMD().getValue())) {
                 ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-                if (div.getTxtKonkaiChushutsuFromYMD().getValue().isBefore(div.getTxtZenkaiShoriKijunYMD().getValue())) {
-                    validationMessages.add(getHandlerValidation(div).開始日変更のチェック());
-                }
-                if (div.getTxtKonkaiShoriKijunYMD().getValue().isBefore(div.getTxtKonkaiChushutsuToYMD().getValue())) {
-                    validationMessages.add(getHandlerValidation(div).終了日変更のチェック());
-                }
-                if (validationMessages.iterator().hasNext()) {
-                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-                }
+                validationMessages.add(getHandlerValidation(div).開始日変更のチェック());
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            if ((JNENNREI_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
-                if (div.getTxtKonkaiChushutsuFromYMD().getValue().isBefore(div.getTxtKonkaiChushutsuToYMD().getValue())) {
-                    ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-                    validationMessages.add(getHandlerValidation(div).開始日と終了日の比較チェック());
-                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-                }
+        }
+        if ((GAITOMONO_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            if (div.getTxtZenkaiShoriKijunYMD().getValue().isBefore(div.getTxtKonkaiChushutsuFromYMD().getValue())) {
+                validationMessages.add(getHandlerValidation(div).開始日変更のチェック());
+            }
+            if (div.getTxtKonkaiChushutsuToYMD().getValue().isBefore(div.getTxtKonkaiShoriKijunYMD().getValue())) {
+                validationMessages.add(getHandlerValidation(div).終了日変更のチェック());
+            }
+            if (validationMessages.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
+        }
+        if ((JNENNREI_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
+            if (div.getTxtKonkaiChushutsuToYMD().getValue().isBefore(div.getTxtKonkaiChushutsuFromYMD().getValue())) {
+                ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+                validationMessages.add(getHandlerValidation(div).開始日と終了日の比較チェック());
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
         }
         return ResponseData.of(div).respond();
