@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -73,6 +74,7 @@ public class IdochekkurisutoHandler {
         div.getTxtzenkaikaishi().setDisabled(true);
         div.getTxtzenkaishuryo().setDisabled(true);
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, new ReportId(REPORT_ID_DBA200006));
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"), false);
     }
 
 }
