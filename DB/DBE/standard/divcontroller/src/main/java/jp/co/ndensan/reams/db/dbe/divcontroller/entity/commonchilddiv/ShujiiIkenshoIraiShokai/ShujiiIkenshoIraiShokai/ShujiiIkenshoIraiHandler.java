@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  *
@@ -40,7 +39,7 @@ public class ShujiiIkenshoIraiHandler {
      *
      */
     public void onLoad() {
-        HihokenshaNo hihokenshano = new HihokenshaNo(DataPassingConverter.deserialize(div.getHihokenshano(), RString.class));
+        HihokenshaNo hihokenshano = new HihokenshaNo(div.getHihokenshano());
         div.getCcdKaigoShikakuKihon().initialize(hihokenshano);
         ShujiiIkenshoIraiShokaiFinder finder = ShujiiIkenshoIraiShokaiFinder.createInstance();
         List<ShujiiIkenshoIraiBusiness> 認定調査情報 = finder.getNinnteiChousa(hihokenshano).records();
