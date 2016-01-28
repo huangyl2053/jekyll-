@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.persistence.mapper.taShichosonJushochiTokureiShisetsuTaishoTsuchisho;
+package jp.co.ndensan.reams.db.dba.persistence.mapper.tashichosonjushochitokureishisetsutaishotsuchisho;
 
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.TaShichosonJushochiTokureiShisetsuTaishoTsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashichosonjushochitokureishisetsutaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoShijiDataEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity;
 
