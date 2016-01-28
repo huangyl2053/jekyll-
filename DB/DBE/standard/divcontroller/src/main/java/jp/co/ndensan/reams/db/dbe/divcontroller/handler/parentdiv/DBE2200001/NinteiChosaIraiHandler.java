@@ -135,6 +135,7 @@ public class NinteiChosaIraiHandler {
             row.setHokenshaName(nullToEmpty(市町村名称));
             dataSource.add(row);
         }
+        div.getDgChosaItakusakiIchiran().getFilterList().clear();
         div.getDgChosaItakusakiIchiran().setDataSource(dataSource);
     }
 
@@ -167,6 +168,7 @@ public class NinteiChosaIraiHandler {
             row.setHokenshaName(nullToEmpty(selectRow.getHokenshaName()));
             dataSource.add(row);
         }
+        div.getDgchosainIchiran().getFilterList().clear();
         div.getDgchosainIchiran().setDataSource(dataSource);
     }
 
@@ -200,9 +202,7 @@ public class NinteiChosaIraiHandler {
             if (business.getChikuCode() != null) {
                 row.setChiku(business.getChikuCode().value());
             }
-            if (business.getTemp_shujiiName() != null) {
-                row.setZenkaiChosaItakusaki(business.getTemp_shujiiName().value());
-            }
+            row.setZenkaiChosaItakusaki(nullToEmpty(business.getTemp_jigyoshaMeisho()));
             row.setZenkaiNinteiChosainShimei(nullToEmpty(business.getTemp_chosainShimei()));
             row.setHokensha(hokenshaName);
             if (business.getChosaKubun() != null) {
@@ -216,8 +216,11 @@ public class NinteiChosaIraiHandler {
                 row.setShujii(business.getShujiiName().value());
             }
 
-            row.setZenkaiShujiiIryoKikan(nullToEmpty(business.getTemp_jigyoshaMeisho()));
-            row.setZenkaiShujii(nullToEmpty(business.getTemp_iryoKikanMeisho()));
+            row.setZenkaiShujiiIryoKikan(nullToEmpty(business.getTemp_iryoKikanMeisho()));
+            if (business.getTemp_shujiiName() != null) {
+                row.setZenkaiShujii(business.getTemp_shujiiName().value());
+            }
+
             row.setShinseishoKanriNo(nullToEmpty(business.getShinseishoKanriNo()));
             row.setNinteichosaIraiRirekiNo(new RString(String.valueOf(business.getNinteichosaIraiRirekiNo())));
             row.setKoroshoIfShikibetsuCode(
@@ -225,6 +228,7 @@ public class NinteiChosaIraiHandler {
             setDgMiwaritsukeShinseishaIchiran_Row(row, business);
             dataSource.add(row);
         }
+        div.getDgMiwaritsukeShinseishaIchiran().getFilterList().clear();
         div.getDgMiwaritsukeShinseishaIchiran().setDataSource(dataSource);
     }
 
@@ -341,9 +345,7 @@ public class NinteiChosaIraiHandler {
             if (business.getChikuCode() != null) {
                 row.setChiku(business.getChikuCode().value());
             }
-            if (business.getTemp_shujiiName() != null) {
-                row.setZenkaiChosaItakusaki(business.getTemp_shujiiName().value());
-            }
+            row.setZenkaiChosaItakusaki(nullToEmpty(business.getTemp_jigyoshaMeisho()));
             row.setZenkaiChosain(nullToEmpty(business.getTemp_chosainShimei()));
 
             if (business.getNinteichosaIraiYMD() != null) {
@@ -362,8 +364,11 @@ public class NinteiChosaIraiHandler {
                 row.setShujii(business.getShujiiName().value());
             }
 
-            row.setZenkaiShujiIryoKikan(nullToEmpty(business.getTemp_jigyoshaMeisho()));
-            row.setZenkaiShujii(nullToEmpty(business.getTemp_iryoKikanMeisho()));
+            row.setZenkaiShujiIryoKikan(nullToEmpty(business.getTemp_iryoKikanMeisho()));
+            if (business.getTemp_shujiiName() != null) {
+                row.setZenkaiShujii(business.getTemp_shujiiName().value());
+            }
+
             TextBoxDate iraishoShutsuryokuDay = new TextBoxDate();
             if (business.getIraishoShutsuryokuYMD() != null) {
                 iraishoShutsuryokuDay.setValue(new RDate(business.getIraishoShutsuryokuYMD().toString()));
@@ -386,6 +391,7 @@ public class NinteiChosaIraiHandler {
             setDgWaritsukeZumiShinseishaIchiran_Row(row, business);
             dataSource.add(row);
         }
+        div.getDgWaritsukeZumiShinseishaIchiran().getFilterList().clear();
         div.getDgWaritsukeZumiShinseishaIchiran().setDataSource(dataSource);
         div.getTxtChosaIraiDay().setValue(RDate.getNowDate());
     }
