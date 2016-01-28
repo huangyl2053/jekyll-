@@ -8,11 +8,10 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.BemmeishaJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.BemmeishaJoho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7003BemmeishaJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7003BemmeishaJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -51,15 +50,14 @@ public class BemmeishaJohoManagerTest {
     public static class get弁明者情報 extends DbzTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
-//        @Test(expected = NullPointerException.class)
-//        public void 引数のShoKisaiHokenshaNoにnullを指定した場合_NullPointerExceptionが発生する() {
-//            ShikibetsuCode 主キー2 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_識別コード;
-//            sut.get弁明者情報(null, 主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX, Decimal.ZERO);
-//        }
+        @Test(expected = NullPointerException.class)
+        public void 引数のShoKisaiHokenshaNoにnullを指定した場合_NullPointerExceptionが発生する() {
+            ShikibetsuCode 主キー2 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_識別コード;
+            sut.get弁明者情報(主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX, Decimal.ZERO);
+        }
 
         @Test(expected = NullPointerException.class)
         public void 引数のShikibetsuCodeにnullを指定した場合_NullPointerExceptionが発生する() {
-//            ShoKisaiHokenshaNo 主キー1 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号;
             sut.get弁明者情報(null, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX, Decimal.ZERO);
         }
 
@@ -69,7 +67,6 @@ public class BemmeishaJohoManagerTest {
             when(dac.selectByKey(any(ShikibetsuCode.class),
                     any(HihokenshaNo.class), any(FlexibleDate.class), any(FlexibleDate.class), any(Decimal.class))).thenReturn(null);
 
-//            ShoKisaiHokenshaNo 主キー1 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号;
             ShikibetsuCode 主キー2 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_識別コード;
             BemmeishaJoho result = sut.get弁明者情報(主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX, Decimal.ZERO);
 
@@ -82,7 +79,6 @@ public class BemmeishaJohoManagerTest {
             when(dac.selectByKey(any(ShikibetsuCode.class),
                     any(HihokenshaNo.class), any(FlexibleDate.class), any(FlexibleDate.class), any(Decimal.class))).thenReturn(entity);
 
-//            ShoKisaiHokenshaNo 主キー1 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号;
             ShikibetsuCode 主キー2 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_識別コード;
             BemmeishaJoho result = sut.get弁明者情報(主キー2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX, Decimal.ZERO);
 

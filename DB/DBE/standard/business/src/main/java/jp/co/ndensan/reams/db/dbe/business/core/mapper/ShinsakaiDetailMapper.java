@@ -48,13 +48,13 @@ public final class ShinsakaiDetailMapper {
 //                .set審査会割当済み人数(審査会Entity.getShinsakaiWariateZumiNinzu())
 //                .set資料作成区分(審査会Entity.getShiryoSakuseiKubun()).build();
 //    }
-
-    /**
-     * 審査会情報を受け取り、その情報をマッピングして審査会情報Entityを生成して返します。
-     *
-     * @param 審査会情報 審査会情報
-     * @return 審査会情報Entity
-     */
+//
+//    /**
+//     * 審査会情報を受け取り、その情報をマッピングして審査会情報Entityを生成して返します。
+//     *
+//     * @param 審査会情報 審査会情報
+//     * @return 審査会情報Entity
+//     */
 //    public static DbT5101ShinsakaiJohoEntity to審査会情報Entity(ShinsakaiDetail 審査会情報) {
 //        if (審査会情報 == null) {
 //            return null;

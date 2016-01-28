@@ -1,22 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * イメージ情報テーブルのエンティティクラスです。
  * <br/> 認定調査票や主治医意見書以外の書類のイメージ
  */
 public class DbT4115ImageEntity extends DbTableEntityBase<DbT4115ImageEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4115Image");
@@ -31,10 +32,6 @@ public class DbT4115ImageEntity extends DbTableEntityBase<DbT4115ImageEntity> im
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private ShinseishoKanriNo shinseishoKanriNo;
-    @PrimaryKey
-    private int torikomiPageNo;
-    @PrimaryKey
-    private Code genponMaskKubun;
     private RDateTime imageSharedFileId;
 
     /**
@@ -100,44 +97,8 @@ public class DbT4115ImageEntity extends DbTableEntityBase<DbT4115ImageEntity> im
      *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
-    }
-
-    /**
-     * 取込ページ番号のgetメソッドです。
-     *
-     * @return 取込ページ番号
-     */
-    public int getTorikomiPageNo() {
-        return torikomiPageNo;
-    }
-
-    /**
-     * 取込ページ番号のsetメソッドです。
-     *
-     * @param torikomiPageNo 取込ページ番号
-     */
-    public void setTorikomiPageNo(int torikomiPageNo) {
-        this.torikomiPageNo = torikomiPageNo;
-    }
-
-    /**
-     * 原本マスク分のgetメソッドです。
-     *
-     * @return 原本マスク分
-     */
-    public Code getGenponMaskKubun() {
-        return genponMaskKubun;
-    }
-
-    /**
-     * 原本マスク分のsetメソッドです。
-     *
-     * @param genponMaskKubun 原本マスク分
-     */
-    public void setGenponMaskKubun(Code genponMaskKubun) {
-        this.genponMaskKubun = genponMaskKubun;
     }
 
     /**
@@ -145,6 +106,7 @@ public class DbT4115ImageEntity extends DbTableEntityBase<DbT4115ImageEntity> im
      *
      * @return イメージ共有ファイルID
      */
+    @CheckForNull
     public RDateTime getImageSharedFileId() {
         return imageSharedFileId;
     }
@@ -162,7 +124,8 @@ public class DbT4115ImageEntity extends DbTableEntityBase<DbT4115ImageEntity> im
      * このエンティティの主キーが他の{@literal DbT4115ImageEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT4115ImageEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT4115ImageEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT4115ImageEntity other) {
@@ -170,12 +133,6 @@ public class DbT4115ImageEntity extends DbTableEntityBase<DbT4115ImageEntity> im
             return false;
         }
         if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
-            return false;
-        }
-        if (this.torikomiPageNo != other.torikomiPageNo) {
-            return false;
-        }
-        if (!Objects.equals(this.genponMaskKubun, other.genponMaskKubun)) {
             return false;
         }
         return true;
@@ -187,8 +144,6 @@ public class DbT4115ImageEntity extends DbTableEntityBase<DbT4115ImageEntity> im
     @Override
     public void shallowCopy(DbT4115ImageEntity entity) {
         this.shinseishoKanriNo = entity.shinseishoKanriNo;
-        this.torikomiPageNo = entity.torikomiPageNo;
-        this.genponMaskKubun = entity.genponMaskKubun;
         this.imageSharedFileId = entity.imageSharedFileId;
     }
 
@@ -199,7 +154,7 @@ public class DbT4115ImageEntity extends DbTableEntityBase<DbT4115ImageEntity> im
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, torikomiPageNo, genponMaskKubun, imageSharedFileId);
+        return super.toMd5(shinseishoKanriNo, imageSharedFileId);
     }
 
 // </editor-fold>

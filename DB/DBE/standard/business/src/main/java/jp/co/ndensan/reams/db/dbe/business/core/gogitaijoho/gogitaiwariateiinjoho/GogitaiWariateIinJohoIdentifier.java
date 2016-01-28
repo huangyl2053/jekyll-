@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Value
 public class GogitaiWariateIinJohoIdentifier implements Serializable {
 
+    private static final long serialVersionUID = 8705643393504237713L;
     private final int 合議体番号;
     private final FlexibleDate 合議体有効期間開始年月日;
     private final RString 介護認定審査会委員コード;

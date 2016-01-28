@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.db.dbx.business.config.fuka.DosaKanrenConfig;
 import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.HokenshaJohoConfig;
 import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.jushohenshu.ChohyoKyotsuJushoEditConfig;
 import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.rojinhokenjoho.RokenJohoConfig;
-import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.KoseiShichosonJohoEntity;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.ValueObjects;
@@ -44,7 +45,7 @@ public class ShichosonSecurityJohoFinder {
     private static final RString 介護導入区分_未導入 = new RString("0");
     private static final RString 介護導入区分_導入済 = new RString("1");
     private static final RString DEFAULT_市町村ＩＤ有効桁数 = new RString("2");
-    private static final RString DEFAULT_市町村識別ID = new RString("00");
+    private static final ShichosonShikibetsuID DEFAULT_市町村識別ID = new ShichosonShikibetsuID("00");
     private static final int MAX_市町村識別ID = 99;
     private static final int MIN_市町村識別ID = 1;
     private static final RString 介護事務_120 = new RString("120");
@@ -95,23 +96,24 @@ public class ShichosonSecurityJohoFinder {
      * @return ShichosonJohoEntity 市町村情報Entity
      */
     public ShichosonSecurityJoho getShichosonSecurityJoho(GyomuBunrui gyomuBunrui) {
-        ShichosonSecurityJoho shichosonSecurityJoho = new ShichosonSecurityJoho();
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.EMPTY;
         List<DbT7908KaigoDonyuKeitaiEntity> kaigoDonyuKeitaiEntityList
                 = this.kaigoDonyuKeitaiDac.selectByGyomuBunrui(gyomuBunrui.code());
         if (kaigoDonyuKeitaiEntityList == null || kaigoDonyuKeitaiEntityList.isEmpty()) {
-            shichosonSecurityJoho.set介護導入区分(介護導入区分_未導入);
-            shichosonSecurityJoho.set導入形態コード(null);
-            shichosonSecurityJoho.set広域タイプ(null);
-            shichosonSecurityJoho.set支所管理有無フラグ(false);
-            shichosonSecurityJoho.set市町村ＩＤ有効桁数(null);
-            shichosonSecurityJoho.set市町村情報(null);
+            shichosonSecurityJoho= ShichosonSecurityJoho.EMPTY;
+//            shichosonSecurityJoho.set介護導入区分(介護導入区分_未導入);
+//            shichosonSecurityJoho.set導入形態コード(null);
+//            shichosonSecurityJoho.set広域タイプ(null);
+//            shichosonSecurityJoho.set支所管理有無フラグ(false);
+//            shichosonSecurityJoho.set市町村ＩＤ有効桁数(null);
+//            shichosonSecurityJoho.set市町村情報(null);
             return shichosonSecurityJoho;
         } else {
             RString 業務分類 = kaigoDonyuKeitaiEntityList.get(0).getGyomuBunrui();
             RString 導入形態コード = kaigoDonyuKeitaiEntityList.get(0).getDonyuKeitaiCode().value();
             boolean 支所管理有無フラグ = kaigoDonyuKeitaiEntityList.get(0).getShishoKanriUmuFlag();
-            shichosonSecurityJoho.set介護導入区分(介護導入区分_導入済);
-            shichosonSecurityJoho.set導入形態コード(導入形態コード);
+//            shichosonSecurityJoho.set介護導入区分(介護導入区分_導入済);
+//            shichosonSecurityJoho.set導入形態コード(導入形態コード);
             int workFlow = dispatchFlowByKaigoDonyuKeitai(業務分類, 導入形態コード);
             return workFlowStep(workFlow, 導入形態コード, 支所管理有無フラグ);
         }
@@ -127,10 +129,10 @@ public class ShichosonSecurityJohoFinder {
         }
     }
 
-    private List<KoseiShichosonJohoEntity> getKouseiShichosonJoho(RString shichosonShokibetsuID) {
+    private List<ShichosonJoho> getKouseiShichosonJoho(RString shichosonShokibetsuID) {
         List<DbT7051KoseiShichosonMasterEntity> koseiShichosonMaster
                 = koseiShichosonMasterDac.selectBy市町村識別ID(shichosonShokibetsuID);
-        List<KoseiShichosonJohoEntity> koseiShichosonJohList = new ArrayList<>();
+        List<ShichosonJoho> koseiShichosonJohList = new ArrayList<>();
         if (koseiShichosonMaster == null || koseiShichosonMaster.isEmpty()) {
             return null;
         }
@@ -143,13 +145,13 @@ public class ShichosonSecurityJohoFinder {
     }
 
     private ShichosonSecurityJoho getKanriJoho(RString 導入形態コード, boolean 支所管理有無フラグ) {
-        ShichosonSecurityJoho shichosonJoho = new ShichosonSecurityJoho();
+        ShichosonSecurityJoho shichosonJoho = ShichosonSecurityJoho.EMPTY;
 
-        shichosonJoho.set導入形態コード(導入形態コード);
-        shichosonJoho.set支所管理有無フラグ(支所管理有無フラグ);
-        shichosonJoho.set市町村ＩＤ有効桁数(DEFAULT_市町村ＩＤ有効桁数);
+//        shichosonJoho.set導入形態コード(導入形態コード);
+//        shichosonJoho.set支所管理有無フラグ(支所管理有無フラグ);
+//        shichosonJoho.set市町村ＩＤ有効桁数(DEFAULT_市町村ＩＤ有効桁数);
 
-        KoseiShichosonJohoEntity koseiShichosonJoho = new KoseiShichosonJohoEntity();
+        ShichosonJoho koseiShichosonJoho = new ShichosonJoho();
         koseiShichosonJoho.setShichosonShokibetsuID(DEFAULT_市町村識別ID);
 
         Association finder = AssociationFinderFactory.createInstance().getAssociation();
@@ -193,7 +195,7 @@ public class ShichosonSecurityJohoFinder {
         koseiShichosonJoho.setUnyoKaishiYMD(FlexibleDate.EMPTY);
         koseiShichosonJoho.setUnyoShuryoYMD(FlexibleDate.EMPTY);
         koseiShichosonJoho.setUnyoKeitaiKubun(RString.EMPTY);
-        shichosonJoho.set市町村情報(koseiShichosonJoho);
+//        shichosonJoho.set市町村情報(koseiShichosonJoho);
         return shichosonJoho;
     }
 
@@ -209,49 +211,49 @@ public class ShichosonSecurityJohoFinder {
         List<AuthorityItem> authorityItemList = getShichosonShikibetsuId(loginUser);
         if (authorityItemList != null) {
             RString shichosonShokibetsuID = authorityItemList.get(0).getItemId();
-            return getShichosonSecurityJohoNotNull(shichosonShokibetsuID, 導入形態コード, 支所管理有無フラグ);
+            return getShichosonSecurityJohoNotNull(new ShichosonShikibetsuID(shichosonShokibetsuID), 導入形態コード, 支所管理有無フラグ);
         } else {
             return null;
         }
     }
 
-    private ShichosonSecurityJoho getShichosonSecurityJohoNotNull(RString shichosonShokibetsuID, RString 導入形態コード, boolean 支所管理有無フラグ) {
-        ShichosonSecurityJoho shichosonJoho = new ShichosonSecurityJoho();
+    private ShichosonSecurityJoho getShichosonSecurityJohoNotNull(ShichosonShikibetsuID shichosonShokibetsuID, RString 導入形態コード, boolean 支所管理有無フラグ) {
+        ShichosonSecurityJoho shichosonJoho = ShichosonSecurityJoho.EMPTY;
         int 市町村識別ID = Integer.valueOf(shichosonShokibetsuID.toString()).intValue();
         if (shichosonShokibetsuID.equals(DEFAULT_市町村識別ID)) {
-            shichosonJoho.set介護導入区分(介護導入区分_導入済);
-            shichosonJoho.set導入形態コード(導入形態コード);
+//            shichosonJoho.set介護導入区分(介護導入区分_導入済);
+//            shichosonJoho.set導入形態コード(導入形態コード);
             return getKanriJoho(導入形態コード, 支所管理有無フラグ);
         } else if (MIN_市町村識別ID <= 市町村識別ID && 市町村識別ID <= MAX_市町村識別ID) {
-            KoseiShichosonJohoEntity koseiShichosonJohoEntity = getKoseiShichosonJohoEntity(市町村識別ID, shichosonShokibetsuID);
-            shichosonJoho.set介護導入区分(介護導入区分_導入済);
-            shichosonJoho.set導入形態コード(導入形態コード);
+            ShichosonJoho koseiShichosonJohoEntity = getKoseiShichosonJohoEntity(市町村識別ID, shichosonShokibetsuID.getColumnValue());
+//            shichosonJoho.set介護導入区分(介護導入区分_導入済);
+//            shichosonJoho.set導入形態コード(導入形態コード);
             shichosonJoho = getKanriJoho(導入形態コード, 支所管理有無フラグ);
-            shichosonJoho.set市町村情報(koseiShichosonJohoEntity);
+//            shichosonJoho.set市町村情報(koseiShichosonJohoEntity);
             return shichosonJoho;
         } else {
             return null;
         }
     }
 
-    private KoseiShichosonJohoEntity getKoseiShichosonJohoEntity(int 市町村識別ID, RString shichosonShokibetsuID) {
-        List<KoseiShichosonJohoEntity> koseiShichosonJohoEntityList
+    private ShichosonJoho getKoseiShichosonJohoEntity(int 市町村識別ID, RString shichosonShokibetsuID) {
+        List<ShichosonJoho> koseiShichosonJohoEntityList
                 = getKouseiShichosonJoho(shichosonShokibetsuID);
         return getKoseiShichosonJohoEntityNotNull(koseiShichosonJohoEntityList);
     }
 
-    private KoseiShichosonJohoEntity getKoseiShichosonJohoEntityNotNull(List<KoseiShichosonJohoEntity> koseiShichosonJohoEntityList) {
-        KoseiShichosonJohoEntity koseiShichosonJohoEntity = null;
+    private ShichosonJoho getKoseiShichosonJohoEntityNotNull(List<ShichosonJoho> koseiShichosonJohoEntityList) {
+        ShichosonJoho koseiShichosonJohoEntity = null;
         if (koseiShichosonJohoEntityList != null) {
             koseiShichosonJohoEntity = koseiShichosonJohoEntityList.get(0);
         }
         return koseiShichosonJohoEntity;
     }
 
-    private KoseiShichosonJohoEntity toKoseiShichosonJohoEntity(
+    private ShichosonJoho toKoseiShichosonJohoEntity(
             DbT7051KoseiShichosonMasterEntity koseiShichosonMasterEntity) {
-        KoseiShichosonJohoEntity koseiShichosonJohoEntity = new KoseiShichosonJohoEntity();
-        koseiShichosonJohoEntity.setShichosonShokibetsuID(koseiShichosonMasterEntity.getShichosonShokibetsuID());
+        ShichosonJoho koseiShichosonJohoEntity = new ShichosonJoho();
+        koseiShichosonJohoEntity.setShichosonShokibetsuID(new ShichosonShikibetsuID(koseiShichosonMasterEntity.getShichosonShokibetsuID()));
         koseiShichosonJohoEntity.setShichosonCode(koseiShichosonMasterEntity.getShichosonCode());
         koseiShichosonJohoEntity.setShoKisaiHokenshaNo(koseiShichosonMasterEntity.getShoKisaiHokenshaNo());
         koseiShichosonJohoEntity.setKokuhorenKoikiShichosonNo(koseiShichosonMasterEntity.getKokuhorenKoikiShichosonNo());
@@ -291,11 +293,11 @@ public class ShichosonSecurityJohoFinder {
 
     private int dispatchFlowByKaigoDonyuKeitai(RString 業務分類, RString 導入形態コード) {
         if ((業務分類.equals(GyomuBunrui.介護事務.code()) && 導入形態コード.equals(介護事務_120))
-            || (業務分類.equals(GyomuBunrui.介護事務.code()) && 導入形態コード.equals(介護事務_112))
-            || (業務分類.equals(GyomuBunrui.介護認定.code()) && 導入形態コード.equals(介護認定_220))) {
+                || (業務分類.equals(GyomuBunrui.介護事務.code()) && 導入形態コード.equals(介護事務_112))
+                || (業務分類.equals(GyomuBunrui.介護認定.code()) && 導入形態コード.equals(介護認定_220))) {
             return WORKFLOW_管理情報から;
         } else if ((業務分類.equals(GyomuBunrui.介護事務.code()) && 導入形態コード.equals(介護事務_111))
-                   || ((業務分類.equals(GyomuBunrui.介護認定.code()) && 導入形態コード.equals(介護認定_211)))) {
+                || ((業務分類.equals(GyomuBunrui.介護認定.code()) && 導入形態コード.equals(介護認定_211)))) {
             return WORKFLOW_市町村識別IDから;
         } else {
             return WORKFLOW_NULL;

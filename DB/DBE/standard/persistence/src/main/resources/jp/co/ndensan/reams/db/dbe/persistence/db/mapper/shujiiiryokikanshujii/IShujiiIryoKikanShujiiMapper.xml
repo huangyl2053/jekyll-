@@ -51,7 +51,7 @@
         <!--DbT7051KoseiShichosonMaster-->
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.allColumns_DbT7051KoseiShichosonMaster"/>
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.allColumns_DbT7051KoseiShichosonMaster"/>
         FROM
         rgba."DbT7051KoseiShichosonMaster"
         WHERE

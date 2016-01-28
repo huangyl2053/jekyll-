@@ -16,7 +16,8 @@ public enum DBD5130001StateName implements IStateEnumerations {
 
     NoChange(""),
     介護認定申請書発行("介護認定申請書発行"),
-    要介護認定区分変更申請書発行("要介護認定区分変更申請書発行");
+    要介護認定区分変更申請書発行("要介護認定区分変更申請書発行"),
+    完了("完了");
 
     private final RString name;
 

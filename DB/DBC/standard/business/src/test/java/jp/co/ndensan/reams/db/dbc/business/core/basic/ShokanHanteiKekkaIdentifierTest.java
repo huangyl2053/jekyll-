@@ -29,7 +29,6 @@ public class ShokanHanteiKekkaIdentifierTest extends DbcTestBase {
     private static HihokenshaNo 主キー名1;
     private static FlexibleYearMonth 主キー名2;
     private static RString 主キー名3;
-    private static Decimal 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
@@ -37,14 +36,13 @@ public class ShokanHanteiKekkaIdentifierTest extends DbcTestBase {
         主キー名1 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_被保険者番号;
         主キー名2 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_サービス提供年月;
         主キー名3 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_整理番号;
-        主キー名4 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class シリアライズテスト extends DbcTestBase {
 
         @Test
         public void シリアライズできる() {
-            ShokanHanteiKekkaIdentifier sut = new ShokanHanteiKekkaIdentifier(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            ShokanHanteiKekkaIdentifier sut = new ShokanHanteiKekkaIdentifier(主キー名1, 主キー名2, 主キー名3);
             assertThat(sut, is(serializable()));
         }
     }

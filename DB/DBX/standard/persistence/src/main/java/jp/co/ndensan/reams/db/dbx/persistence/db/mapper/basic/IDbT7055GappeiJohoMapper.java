@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7055GappeiJohoEntity;
  */
 public interface IDbT7055GappeiJohoMapper {
 
-    /** {@link DbT7055GappeiJohoEntity}を取得します。
+    /* * {@linkDbT7055GappeiJohoEntity}を取得します。
      *
-     * @return {@link DbT7055GappeiJohoEntity}
+     * @return {@linkDbT7055GappeiJohoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7055GappeiJohoEntity getEntity();

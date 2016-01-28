@@ -7,15 +7,16 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3102NijiYoboNiniCheckList;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3102NijiYoboNiniCheckList.*;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3102NijiYoboNiniCheckList.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3102NijiYoboNiniCheckList.niniShitsumonNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3102NijiYoboNiniCheckList.rirekiNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3102NijiYoboNiniCheckList.uketsukeYMD;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3102NijiYoboNiniCheckListEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -34,8 +35,6 @@ public class DbT3102NijiYoboNiniCheckListDac implements ISaveable<DbT3102NijiYob
     /**
      * 主キーで二次予防任意チェックリストを取得します。
      *
-// * @param 識別コード ShikibetsuCode
-     *
      * @param 被保険者番号 HihokenshaNo
      * @param 受付年月日 UketsukeYMD
      * @param 任意質問番号 NiniShitsumonNo
@@ -45,12 +44,10 @@ public class DbT3102NijiYoboNiniCheckListDac implements ISaveable<DbT3102NijiYob
      */
     @Transaction
     public DbT3102NijiYoboNiniCheckListEntity selectByKey(
-            //            ShikibetsuCode 識別コード,
             HihokenshaNo 被保険者番号,
             FlexibleDate 受付年月日,
             int 任意質問番号,
             int 履歴番号) throws NullPointerException {
-//        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
         requireNonNull(任意質問番号, UrSystemErrorMessages.値がnull.getReplacedMessage("任意質問番号"));
@@ -61,7 +58,6 @@ public class DbT3102NijiYoboNiniCheckListDac implements ISaveable<DbT3102NijiYob
         return accessor.select().
                 table(DbT3102NijiYoboNiniCheckList.class).
                 where(and(
-                                //                                eq(shikibetsuCode, 識別コード),
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(uketsukeYMD, 受付年月日),
                                 eq(niniShitsumonNo, 任意質問番号),

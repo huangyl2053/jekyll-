@@ -1,23 +1,24 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 認定調査票（基本調査）調査項目テーブルのエンティティクラスです。
  */
 public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5211NinteichosahyoChosaItemEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5211NinteichosahyoChosaItem");
 
@@ -40,7 +41,7 @@ public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -49,7 +50,7 @@ public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -58,7 +59,7 @@ public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -67,17 +68,16 @@ public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -88,7 +88,7 @@ public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5
      * 申請書管理番号のgetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @return 申請書管理番号
      */
     public ShinseishoKanriNo getShinseishoKanriNo() {
@@ -99,7 +99,7 @@ public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5
      * 申請書管理番号のsetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @param shinseishoKanriNo 申請書管理番号
      */
     public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
@@ -110,7 +110,7 @@ public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5
      * 要介護認定調査履歴番号のgetメソッドです。
      * <br/>
      * <br/>認定調査依頼情報
-     * 
+     *
      * @return 要介護認定調査履歴番号
      */
     public int getNinteichosaRirekiNo() {
@@ -121,7 +121,7 @@ public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5
      * 要介護認定調査履歴番号のsetメソッドです。
      * <br/>
      * <br/>認定調査依頼情報
-     * 
+     *
      * @param ninteichosaRirekiNo 要介護認定調査履歴番号
      */
     public void setNinteichosaRirekiNo(@Nonnull int ninteichosaRirekiNo) {
@@ -130,7 +130,7 @@ public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5
 
     /**
      * 連番のgetメソッドです。
-     * 
+     *
      * @return 連番
      */
     public int getRemban() {
@@ -139,7 +139,7 @@ public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5
 
     /**
      * 連番のsetメソッドです。
-     * 
+     *
      * @param remban 連番
      */
     public void setRemban(@Nonnull int remban) {
@@ -150,7 +150,7 @@ public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5
      * 厚労省IF識別コードのgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：厚労省認定ソフトのバージョン）
-     * 
+     *
      * @return 厚労省IF識別コード
      */
     public Code getKoroshoIfShikibetsuCode() {
@@ -161,7 +161,7 @@ public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5
      * 厚労省IF識別コードのsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：厚労省認定ソフトのバージョン）
-     * 
+     *
      * @param koroshoIfShikibetsuCode 厚労省IF識別コード
      */
     public void setKoroshoIfShikibetsuCode(@Nonnull Code koroshoIfShikibetsuCode) {
@@ -170,7 +170,7 @@ public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5
 
     /**
      * 調査項目のgetメソッドです。
-     * 
+     *
      * @return 調査項目
      */
     @CheckForNull
@@ -180,7 +180,7 @@ public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5
 
     /**
      * 調査項目のsetメソッドです。
-     * 
+     *
      * @param researchItem 調査項目
      */
     public void setResearchItem(RString researchItem) {
@@ -189,9 +189,9 @@ public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5
 
     /**
      * このエンティティの主キーが他の{@literal DbT5211NinteichosahyoChosaItemEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5211NinteichosahyoChosaItemEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -225,6 +225,7 @@ public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -233,5 +234,4 @@ public class DbT5211NinteichosahyoChosaItemEntity extends DbTableEntityBase<DbT5
     }
 
 // </editor-fold>
-
 }

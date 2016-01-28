@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeijoho;
 
-import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.GappeiJoho;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.GappeiJoho;
 import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
 import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.GappeiShichosonIdentifier;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7055GappeiJohoEntity;

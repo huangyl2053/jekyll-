@@ -3,7 +3,7 @@ serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
 seiriNp,varchar,RString,,,,,整理番号,A
 jigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,事業者番号,A
 yoshikiNo,varchar,RString,,,,,様式番号,A
-rirekiNo,int2,int,,,,,履歴番号,A
+meisaiNo,varchar,RString,,,,,明細番号,A
 kyuSochiNyushoshaTokureiCode,varchar,RString,,,,,旧措置入所者特例コード,A
 kyotakuServiceSakuseiKubunCode,varchar,RString,,,,,居宅サービス計画作成区分コード,A
 kyotakuserviceJigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,居宅サービス計画事業者番号,A

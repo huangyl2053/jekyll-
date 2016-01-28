@@ -6,11 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -125,7 +120,7 @@ public class HihokenshaDaichoBuilder {
      */
     public HihokenshaDaichoBuilder set資格取得事由コード(RString 資格取得事由コード) {
         requireNonNull(資格取得事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得事由コード"));
-        entity.setShikakuShutokuJiyuCode(new KaigoShikakuShutokuJiyu(資格取得事由コード));
+        entity.setShikakuShutokuJiyuCode(資格取得事由コード);
         return this;
     }
 
@@ -185,7 +180,7 @@ public class HihokenshaDaichoBuilder {
      */
     public HihokenshaDaichoBuilder set資格喪失事由コード(RString 資格喪失事由コード) {
         requireNonNull(資格喪失事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("資格喪失事由コード"));
-        entity.setShikakuSoshitsuJiyuCode(new KaigoShikakuSoshitsuJiyu(資格喪失事由コード));
+        entity.setShikakuSoshitsuJiyuCode(資格喪失事由コード);
         return this;
     }
 
@@ -221,7 +216,7 @@ public class HihokenshaDaichoBuilder {
      */
     public HihokenshaDaichoBuilder set資格変更事由コード(RString 資格変更事由コード) {
         requireNonNull(資格変更事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("資格変更事由コード"));
-        entity.setShikakuHenkoJiyuCode(new KaigoShikakuHenkoJiyu(資格変更事由コード));
+        entity.setShikakuHenkoJiyuCode(資格変更事由コード);
         return this;
     }
 
@@ -257,7 +252,7 @@ public class HihokenshaDaichoBuilder {
      */
     public HihokenshaDaichoBuilder set住所地特例適用事由コード(RString 住所地特例適用事由コード) {
         requireNonNull(住所地特例適用事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例適用事由コード"));
-        entity.setJushochitokureiTekiyoJiyuCode(new KaigoShikakuJutokuTekiyoJiyu(住所地特例適用事由コード));
+        entity.setJushochitokureiTekiyoJiyuCode(住所地特例適用事由コード);
         return this;
     }
 
@@ -293,7 +288,7 @@ public class HihokenshaDaichoBuilder {
      */
     public HihokenshaDaichoBuilder set住所地特例解除事由コード(RString 住所地特例解除事由コード) {
         requireNonNull(住所地特例解除事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例解除事由コード"));
-        entity.setJushochitokureiKaijoJiyuCode(new KaigoShikakuJutokuKaijoJiyu(住所地特例解除事由コード));
+        entity.setJushochitokureiKaijoJiyuCode(住所地特例解除事由コード);
         return this;
     }
 

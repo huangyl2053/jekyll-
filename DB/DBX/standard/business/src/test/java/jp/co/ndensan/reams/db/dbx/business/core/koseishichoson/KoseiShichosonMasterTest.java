@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dbx.business.core.koseishichoson;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.koseishichosonshisho.KoseiShichosonShishoMaster;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.koseishichosonshisho.KoseiShichosonShishoMasterIdentifier;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7052KoseiShichosonShishoMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
@@ -235,7 +235,7 @@ public class KoseiShichosonMasterTest extends DbxTestBase {
 
         @Test
         public void get合併旧市町村区分は_entityが持つ合併旧市町村区分を返す() {
-            assertThat(sut.get合併旧市町村区分(), is(KoseiShichosonMasterEntity.getGappeiKyuShichosonKubun()));
+            assertThat(sut.get合併旧市町村区分().code(), is(KoseiShichosonMasterEntity.getGappeiKyuShichosonKubun()));
         }
 
         @Test

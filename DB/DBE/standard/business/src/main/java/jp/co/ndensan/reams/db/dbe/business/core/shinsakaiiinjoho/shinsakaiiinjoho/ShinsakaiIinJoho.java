@@ -327,7 +327,7 @@ public class ShinsakaiIinJoho extends ParentModelBase<ShinsakaiIinJohoIdentifier
     /**
      * 介護認定審査会委員情報が保持する介護認定審査会委員所属機関情報をリストで返します。
      *
-     * @return 精神手帳任意項目情報リスト
+     * @return 介護認定審査会委員所属機関情報リスト
      */
     public List<KaigoNinteiShinsakaiIinShozokuKikanJoho> getKaigoNinteiShinsakaiIinShozokuKikanJohoList() {
         return new ArrayList<>(kaigoNinteiShinsakaiIinShozokuKikanJoho.values());

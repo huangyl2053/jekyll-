@@ -9,8 +9,6 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -45,8 +43,8 @@ public class NinteichosaSchedule extends
             RString 認定調査予定開始時間,
             RString 認定調査予定終了時間,
             Code 認定調査時間枠,
-            ChosaItakusakiCode 認定調査委託先コード,
-            ChosainCode 認定調査員コード) {
+            RString 認定調査委託先コード,
+            RString 認定調査員コード) {
         requireNonNull(認定調査予定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定年月日"));
         requireNonNull(認定調査予定開始時間, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定開始時間"));
         requireNonNull(認定調査予定終了時間, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定終了時間"));
@@ -76,16 +74,16 @@ public class NinteichosaSchedule extends
      *
      * @param entity DBより取得した{@link DbT5221NinteichosaScheduleEntity}
      */
-    public NinteichosaSchedule(DbT5221NinteichosaScheduleEntity entity) {
-        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査スケジュール情報"));
-        this.id = new NinteichosaScheduleIdentifier(
-                entity.getNinteiChosaYoteiYMD(),
-                entity.getNinteiChosaYoteiKaishiTime(),
-                entity.getNinteiChosaYoteiShuryoTime(),
-                entity.getNinteiChosaJikanWaku(),
-                entity.getNinteiChosaItakusakiCode(),
-                entity.getNinteiChosainCode());
-    }
+//    public NinteichosaSchedule(DbT5221NinteichosaScheduleEntity entity) {
+//        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査スケジュール情報"));
+//        this.id = new NinteichosaScheduleIdentifier(
+//                entity.getNinteiChosaYoteiYMD(),
+//                entity.getNinteiChosaYoteiKaishiTime(),
+//                entity.getNinteiChosaYoteiShuryoTime(),
+//                entity.getNinteiChosaJikanWaku(),
+//                entity.getNinteichosaItakusakiCode(),
+//                entity.getNinteiChosainNo());
+//    }
 
     /**
      * シリアライズ、ビルダー用コンストラクタです。
@@ -147,23 +145,23 @@ public class NinteichosaSchedule extends
         return entity.getChosaChikuCode();
     }
 
-    /**
-     * 認定調査委託先コードを返します。
-     *
-     * @return 認定調査委託先コード
-     */
-    public ChosaItakusakiCode get認定調査委託先コード() {
-        return entity.getNinteiChosaItakusakiCode();
-    }
-
-    /**
-     * 認定調査員コードを返します。
-     *
-     * @return 認定調査員コード
-     */
-    public ChosainCode get認定調査員コード() {
-        return entity.getNinteiChosainCode();
-    }
+//    /**
+//     * 認定調査委託先コードを返します。
+//     *
+//     * @return 認定調査委託先コード
+//     */
+//    public RString get認定調査委託先コード() {
+//        return entity.getNinteichosaItakusakiCode();
+//    }
+//
+//    /**
+//     * 認定調査員コードを返します。
+//     *
+//     * @return 認定調査員コード
+//     */
+//    public RString get認定調査員コード() {
+//        return entity.getNinteiChosainNo();
+//    }
 
     /**
      * 市町村コードを返します。

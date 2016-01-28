@@ -11,7 +11,6 @@ import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.seria
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -33,7 +32,7 @@ public class ShokanShakaiFukushiHojinKeigengakuIdentifierTest extends DbcTestBas
     private static JigyoshaNo 主キー名4;
     private static RString 主キー名5;
     private static RString 主キー名6;
-    private static Decimal 主キー名7;
+    private static RString 主キー名7;
 
     @BeforeClass
     public static void setUpClass() {
@@ -43,8 +42,8 @@ public class ShokanShakaiFukushiHojinKeigengakuIdentifierTest extends DbcTestBas
         主キー名3 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_整理番号;
         主キー名4 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_事業者番号;
         主キー名5 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_様式番号;
-        主キー名6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_順次番号;
-        主キー名7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_履歴番号;
+        主キー名6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_明細番号;
+        主キー名7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_連番;
     }
 
     public static class シリアライズテスト extends DbcTestBase {

@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariatejoh
 @lombok.Setter
 public class ShinsakaiKaisaiYoteiJohoRelateEntity implements Cloneable, Serializable {
 
-    private static final long serialVersionUID = 1286205216870878074L;
     /**
      * -- GETTER -- 介護認定審査会開催予定情報Entityを返します。
      *
@@ -43,7 +42,8 @@ public class ShinsakaiKaisaiYoteiJohoRelateEntity implements Cloneable, Serializ
     /**
      * -- GETTER -- 介護認定審査会割当委員情報EntityListを返します。
      *
-     * @return 介護認定審査会割当委員情報EntityList -- SETTER -- 介護認定審査会割当委員情報EntityListを設定します。
+     * @return 介護認定審査会割当委員情報EntityList -- SETTER --
+     * 介護認定審査会割当委員情報EntityListを設定します。
      *
      * @param 介護認定審査会割当委員情報EntityList 介護認定審査会割当委員情報EntityList
      */
@@ -52,7 +52,8 @@ public class ShinsakaiKaisaiYoteiJohoRelateEntity implements Cloneable, Serializ
     /**
      * -- GETTER -- 介護認定審査会開催結果情報EntityListを返します。
      *
-     * @return 介護認定審査会開催結果情報EntityList -- SETTER -- 介護認定審査会開催結果情報EntityListを設定します。
+     * @return 介護認定審査会開催結果情報EntityList -- SETTER --
+     * 介護認定審査会開催結果情報EntityListを設定します。
      *
      * @param 介護認定審査会開催結果情報EntityList 介護認定審査会開催結果情報EntityList
      */

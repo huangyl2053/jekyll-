@@ -7,14 +7,13 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3076KogakuJuryoininKeiyakuJigyosha;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3076KogakuJuryoininKeiyakuJigyosha.*;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3076KogakuJuryoininKeiyakuJigyosha.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3076KogakuJuryoininKeiyakuJigyosha.rirekiNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3076KogakuJuryoininKeiyakuJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -34,7 +33,6 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDac implements ISaveable<DbT30
      * 主キーで高額受領委任契約事業者を取得します。
      *
      * @param 被保険者番号 HihokenshaNo
-     * @param 受付年月日 UketsukeYMD
      * @param 履歴番号 RirekiNo
      * @return DbT3076KogakuJuryoininKeiyakuJigyoshaEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
@@ -42,10 +40,8 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDac implements ISaveable<DbT30
     @Transaction
     public DbT3076KogakuJuryoininKeiyakuJigyoshaEntity selectByKey(
             HihokenshaNo 被保険者番号,
-            FlexibleDate 受付年月日,
             int 履歴番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -54,7 +50,6 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDac implements ISaveable<DbT30
                 table(DbT3076KogakuJuryoininKeiyakuJigyosha.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                eq(uketsukeYMD, 受付年月日),
                                 eq(rirekiNo, 履歴番号))).
                 toObject(DbT3076KogakuJuryoininKeiyakuJigyoshaEntity.class);
     }

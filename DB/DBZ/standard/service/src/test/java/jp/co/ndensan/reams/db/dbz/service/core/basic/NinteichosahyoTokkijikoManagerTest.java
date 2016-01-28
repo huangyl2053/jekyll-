@@ -50,7 +50,7 @@ public class NinteichosahyoTokkijikoManagerTest {
         ShinseishoKanriNo 申請書管理番号 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_申請書管理番号;
         int 認定調査依頼履歴番号 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_認定調査依頼履歴番号;
         RString 認定調査特記事項番号 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_認定調査特記事項番号;
-        RString 認定調査特記事項連番 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_認定調査特記事項連番;
+        Integer 認定調査特記事項連番 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_認定調査特記事項連番;
         RString 特記事項テキスト_イメージ区分 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_特記事項テキスト_イメージ区分;
         Code 原本マスク区分 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_原本マスク区分;
 
@@ -83,7 +83,7 @@ public class NinteichosahyoTokkijikoManagerTest {
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class), any(RString.class), any(RString.class), any(RString.class), any(Code.class))).thenReturn(null);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class), any(RString.class), any(Integer.class), any(RString.class), any(Code.class))).thenReturn(null);
 
             ShinseishoKanriNo 申請書管理番号 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_申請書管理番号;
             int 認定調査依頼履歴番号 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_認定調査依頼履歴番号;
@@ -95,7 +95,7 @@ public class NinteichosahyoTokkijikoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5205NinteichosahyoTokkijikoEntity entity = DbT5205NinteichosahyoTokkijikoEntityGenerator.createDbT5205NinteichosahyoTokkijikoEntity();
-            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class), any(RString.class), any(RString.class), any(RString.class), any(Code.class))).thenReturn(entity);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class), any(RString.class), any(Integer.class), any(RString.class), any(Code.class))).thenReturn(entity);
 
             ShinseishoKanriNo 申請書管理番号 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_申請書管理番号;
             int 認定調査依頼履歴番号 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_認定調査依頼履歴番号;

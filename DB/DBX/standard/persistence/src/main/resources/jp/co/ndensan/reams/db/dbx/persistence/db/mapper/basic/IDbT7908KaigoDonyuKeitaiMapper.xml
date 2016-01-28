@@ -45,7 +45,7 @@
         <result property="lastUpdateReamsLoginId" column="dbT7908KaigoDonyuKeitai_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shishoKanriUmuFlag" column="dbT7908KaigoDonyuKeitai_shishoKanriUmuFlag" />
     </resultMap>
-    <select id="getEntity" resultMap="resultMap_DbT7908KaigoDonyuKeitaiEntity">
+    <select id="getEntity" resultMap="ResultMap_DbT7908KaigoDonyuKeitaiEntity">
         SELECT
         <include refid="allColumns_DbT7908KaigoDonyuKeitai"/>
         FROM

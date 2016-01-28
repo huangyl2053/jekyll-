@@ -57,7 +57,7 @@ public class NinteichosahyoTokkijikoManager {
             ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
             RString 認定調査特記事項番号,
-            RString 認定調査特記事項連番,
+            Integer 認定調査特記事項連番,
             RString 特記事項テキスト_イメージ区分,
             Code 原本マスク区分
     ) {

@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011YoboKeikakuJikoSakuseiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3007KyotakuKeikakuJikoSakuseiDac;
@@ -307,7 +307,7 @@ public class KyotakuKeikakuJikoSakuseiManagerTest {
 
         private static YoboKeikakuJikoSakuseiMeisai createYoboKeikakuJikoSakuseiMeisai(HihokenshaNo 主キー1, FlexibleYearMonth 主キー2) {
             return new YoboKeikakuJikoSakuseiMeisai(
-                    主キー1, 主キー2, Decimal.ZERO, RString.EMPTY, JigyoshaNo.EMPTY, ServiceShuruiCode.EMPTY, ServiceKomokuCode.EMPTY);
+                    主キー1, 主キー2, new Integer(0), RString.EMPTY, JigyoshaNo.EMPTY, ServiceShuruiCode.EMPTY, ServiceKomokuCode.EMPTY);
         }
 
         public static KyotakuKeikakuJikoSakusei initializeKyotakuKeikakuJikoSakusei(KyotakuKeikakuJikoSakusei 居宅給付計画自己作成) {
@@ -320,7 +320,7 @@ public class KyotakuKeikakuJikoSakuseiManagerTest {
             for (KyotakuKeikakuJikosakuseiMeisai 居宅給付計画自己作成明細 : 居宅給付計画自己作成明細リスト) {
                 KyotakuKeikakuJikosakuseiMeisaiEntityList.add(居宅給付計画自己作成明細.toEntity());
             }
-            List<DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity> YoboKeikakuJikoSakuseiMeisaiEntityList = new ArrayList<>();
+            List<DbT3011YoboKeikakuJikoSakuseiMeisaiEntity> YoboKeikakuJikoSakuseiMeisaiEntityList = new ArrayList<>();
             List<YoboKeikakuJikoSakuseiMeisai> 予防給付計画自己作成明細リスト = 居宅給付計画自己作成.getYoboKeikakuJikoSakuseiMeisaiList();
             for (YoboKeikakuJikoSakuseiMeisai 予防給付計画自己作成明細 : 予防給付計画自己作成明細リスト) {
                 YoboKeikakuJikoSakuseiMeisaiEntityList.add(予防給付計画自己作成明細.toEntity());

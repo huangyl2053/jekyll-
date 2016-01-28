@@ -63,7 +63,7 @@
 
 
     <!--テーブルDbT2001ChoshuHohoの項目をDbT2001ChoshuHohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT2001ChoshuHohoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT2001ChoshuHohoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choshuhoho.DbT2001ChoshuHohoEntity" autoMapping="true">
         <id property="fukaNendo" column="dbT2001ChoshuHoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="hihokenshaNo" column="dbT2001ChoshuHoho_hihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="rirekiNo" column="dbT2001ChoshuHoho_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>

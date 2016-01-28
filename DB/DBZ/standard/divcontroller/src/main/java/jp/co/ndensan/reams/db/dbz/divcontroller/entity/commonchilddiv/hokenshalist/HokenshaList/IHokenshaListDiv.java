@@ -1,6 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList;
 
-import jp.co.ndensan.reams.db.dbx.business.core.shichosonlist.ShichosonCodeNameResult;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /**
@@ -19,9 +19,9 @@ public interface IHokenshaListDiv extends ICommonChildDivBaseProperties {
 
     /**
      * 画面で選択されている保険者の情報を返却します。
-     * 画面で空白が選択されている場合は{@link ShichosonCodeNameResult#EMPTY}を返却します。
+     * 画面で空白が選択されている場合は{@link HokenshaSummary#EMPTY}を返却します。
      *
-     * @return 画面で指定されている保険者名の保険者の情報を持った{@link ShichosonCodeNameResult}
+     * @return 画面で指定されている保険者名の保険者の情報を持った{@link HokenshaSummary}
      */
-    ShichosonCodeNameResult getSelectedItem();
+    HokenshaSummary getSelectedItem();
 }

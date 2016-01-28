@@ -4,8 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5913ChosainJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -123,13 +121,13 @@ public class ShinsakaiChosainJohoTest extends DbdTestBase {
 
         @Test
         public void setNinteichosaItakusakiCodeで設定した値を＿生成されたChosainJohoJukyuも保持する() {
-            IChosainJoho result = ShinsakaiChosainJoho.newBuilder().setNinteichosaItakusakiCode(new ChosaItakusakiCode("1234567890")).build();
+            ShinsakaiChosainJoho result = ShinsakaiChosainJoho.newBuilder().setNinteichosaItakusakiCode(new RString("1234567890")).build();
             assertThat(result.get認定調査委託先コード(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード));
         }
 
         @Test
         public void setNinteiChosainNoで設定した値を＿生成されたChosainJohoJukyuも保持する() {
-            IChosainJoho result = ShinsakaiChosainJoho.newBuilder().setNinteiChosainNo(new ChosainCode("12345678")).build();
+            ShinsakaiChosainJoho result = ShinsakaiChosainJoho.newBuilder().setNinteiChosainCode(new RString("12345678")).build();
             assertThat(result.get認定調査員コード(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード));
         }
 

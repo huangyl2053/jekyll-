@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.service.core.basic;
 
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoManager;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5116IchijiHanteiKekkaJohoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5116IchijiHanteiKekkaJohoDac;
 import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;

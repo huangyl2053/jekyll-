@@ -56,9 +56,7 @@ public class ShokanMeisaiJushochiTokureiManagerTest {
             RString 主キー3 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払請求明細_住所地特例(null, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
+            sut.get償還払請求明細_住所地特例(null, 主キー2, 主キー3, 主キー4, 主キー5);
         }
 
         @Test(expected = NullPointerException.class)
@@ -67,9 +65,7 @@ public class ShokanMeisaiJushochiTokureiManagerTest {
             RString 主キー3 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払請求明細_住所地特例(主キー1, null, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
+            sut.get償還払請求明細_住所地特例(主キー1, null, 主キー3, 主キー4, 主キー5);
         }
 
         @Test(expected = NullPointerException.class)
@@ -78,9 +74,7 @@ public class ShokanMeisaiJushochiTokureiManagerTest {
             FlexibleYearMonth 主キー2 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_サービス提供年月;
             JigyoshaNo 主キー4 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払請求明細_住所地特例(主キー1, 主キー2, null, 主キー4, 主キー5, 主キー6, 主キー7);
+            sut.get償還払請求明細_住所地特例(主キー1, 主キー2, null, 主キー4, 主キー5);
         }
 
         @Test(expected = NullPointerException.class)
@@ -89,9 +83,7 @@ public class ShokanMeisaiJushochiTokureiManagerTest {
             FlexibleYearMonth 主キー2 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_整理番号;
             RString 主キー5 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払請求明細_住所地特例(主キー1, 主キー2, 主キー3, null, 主キー5, 主キー6, 主キー7);
+            sut.get償還払請求明細_住所地特例(主キー1, 主キー2, 主キー3, null, 主キー5);
         }
 
         @Test(expected = NullPointerException.class)
@@ -100,46 +92,20 @@ public class ShokanMeisaiJushochiTokureiManagerTest {
             FlexibleYearMonth 主キー2 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_事業者番号;
-            RString 主キー6 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払請求明細_住所地特例(主キー1, 主キー2, 主キー3, 主キー4, null, 主キー6, 主キー7);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型6にnullを指定した場合_NullPointerExceptionが発生する() {
-            HihokenshaNo 主キー1 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_被保険者番号;
-            FlexibleYearMonth 主キー2 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_サービス提供年月;
-            RString 主キー3 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_整理番号;
-            JigyoshaNo 主キー4 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_事業者番号;
-            RString 主キー5 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー7 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払請求明細_住所地特例(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, null, 主キー7);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型7にnullを指定した場合_NullPointerExceptionが発生する() {
-            HihokenshaNo 主キー1 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_被保険者番号;
-            FlexibleYearMonth 主キー2 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_サービス提供年月;
-            RString 主キー3 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_整理番号;
-            JigyoshaNo 主キー4 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_事業者番号;
-            RString 主キー5 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_順次番号;
-            sut.get償還払請求明細_住所地特例(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, null);
+            sut.get償還払請求明細_住所地特例(主キー1, 主キー2, 主キー3, 主キー4, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class), any(JigyoshaNo.class),
-                    any(RString.class), any(RString.class), any(Decimal.class))).thenReturn(null);
+                    any(RString.class))).thenReturn(null);
             HihokenshaNo 主キー1 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_履歴番号;
-            ShokanMeisaiJushochiTokurei result = sut.get償還払請求明細_住所地特例(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
+            ShokanMeisaiJushochiTokurei result = sut.get償還払請求明細_住所地特例(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
             assertThat(result, is(nullValue()));
         }
@@ -148,15 +114,13 @@ public class ShokanMeisaiJushochiTokureiManagerTest {
         public void 検索結果が存在する場合() {
             DbT3107ShokanMeisaiJushochiTokureiEntity entity = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.createDbT3107ShokanMeisaiJushochiTokureiEntity();
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class), any(JigyoshaNo.class),
-                    any(RString.class), any(RString.class), any(Decimal.class))).thenReturn(entity);
+                    any(RString.class))).thenReturn(entity);
             HihokenshaNo 主キー1 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_履歴番号;
-            ShokanMeisaiJushochiTokurei result = sut.get償還払請求明細_住所地特例(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
+            ShokanMeisaiJushochiTokurei result = sut.get償還払請求明細_住所地特例(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
             assertThat(result.get被保険者番号().value(), is(DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_被保険者番号.value()));
         }

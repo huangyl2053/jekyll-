@@ -234,7 +234,7 @@ public class DbT7111ServiceShuruiShikyuGendoGakuDacTest extends DbcTestDacBase {
             DbT7111ServiceShuruiShikyuGendoGakuEntity entity = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.createDbT7111ServiceShuruiShikyuGendoGakuEntity();
             entity.setServiceShuruiCode(サービス種類コード);
             entity.setYoKaigoJotaiKubun(要介護状態区分);
-            entity.setTekiyoKaishuYM(適用開始年月);
+            entity.setTekiyoKaishiYM(適用開始年月);
             entity.setRirekiNo(履歴番号);
             sut.save(entity);
         }

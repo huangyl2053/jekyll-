@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaionseijoho;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
@@ -189,4 +190,25 @@ public class ShinsakaiOnseiJoho extends ModelBase<ShinsakaiOnseiJohoIdentifier, 
         return new ShinsakaiOnseiJohoBuilder(entity, id);
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ShinsakaiOnseiJoho other = (ShinsakaiOnseiJoho) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 }

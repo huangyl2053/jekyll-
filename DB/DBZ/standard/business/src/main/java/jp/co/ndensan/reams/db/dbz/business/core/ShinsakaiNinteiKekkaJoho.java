@@ -42,7 +42,6 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return DbT5102NinteiKekkaJohoEntity
      */
-//    @Override
 //    public DbT5102NinteiKekkaJohoEntity getEntity() {
 //        return entity;
 //    }
@@ -400,7 +399,6 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
          * @param shinsakaiKaisaiNo 介護認定審査会開催番号
          * @return builder
          */
-        @Override
         public Builder setShinsakaiKaisaiNo(RString shinsakaiKaisaiNo) {
             this.entity.setShinsakaiKaisaiNo(shinsakaiKaisaiNo);
             return this;

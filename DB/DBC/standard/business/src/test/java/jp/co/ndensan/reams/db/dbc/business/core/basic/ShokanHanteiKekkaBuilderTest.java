@@ -39,7 +39,6 @@ public class ShokanHanteiKekkaBuilderTest extends DbcTestBase {
         主キー名1 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_被保険者番号;
         主キー名2 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_サービス提供年月;
         主キー名3 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_整理番号;
-        主キー名4 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class getterSetterTest extends DbcTestBase {
@@ -75,12 +74,6 @@ public class ShokanHanteiKekkaBuilderTest extends DbcTestBase {
         public void 戻り値の整理番号は_設定した値と同じ整理番号を返す() {
             business = sut.set整理番号(DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_整理番号).build();
             assertThat(business.get整理番号(), is(DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_整理番号));
-        }
-
-        @Test
-        public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
-            business = sut.set履歴番号(DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_履歴番号).build();
-            assertThat(business.get履歴番号(), is(DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_履歴番号));
         }
 
         @Test

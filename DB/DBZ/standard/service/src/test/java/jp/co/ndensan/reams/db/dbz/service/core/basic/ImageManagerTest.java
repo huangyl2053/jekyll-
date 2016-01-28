@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5115ImageEntityGenerato
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5115ImageDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -49,26 +50,15 @@ public class ImageManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の申請書管理番号にnullを指定した場合_NullPointerExceptionが発生する() {
-            int 取込ページ番号 = DbT5115ImageEntityGenerator.DEFAULT_取込ページ番号;
-            Code 原本マスク分 = DbT5115ImageEntityGenerator.DEFAULT_原本マスク分;
-            sut.getイメージ情報(null, 取込ページ番号, 原本マスク分);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の原本マスク分にnullを指定した場合_NullPointerExceptionが発生する() {
-            ShinseishoKanriNo 申請書管理番号 = DbT5115ImageEntityGenerator.DEFAULT_申請書管理番号;
-            int 取込ページ番号 = DbT5115ImageEntityGenerator.DEFAULT_取込ページ番号;
-            sut.getイメージ情報(申請書管理番号, 取込ページ番号, null);
+            sut.getイメージ情報(null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class), any(Code.class))).thenReturn(null);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class))).thenReturn(null);
             ShinseishoKanriNo 申請書管理番号 = DbT5115ImageEntityGenerator.DEFAULT_申請書管理番号;
-            int 取込ページ番号 = DbT5115ImageEntityGenerator.DEFAULT_取込ページ番号;
-            Code 原本マスク分 = DbT5115ImageEntityGenerator.DEFAULT_原本マスク分;
-            Image result = sut.getイメージ情報(申請書管理番号, 取込ページ番号, 原本マスク分);
+            Image result = sut.getイメージ情報(申請書管理番号);
 
             assertThat(result, is(nullValue()));
         }
@@ -76,11 +66,9 @@ public class ImageManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5115ImageEntity entity = DbT5115ImageEntityGenerator.createDbT5115ImageEntity();
-            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class), any(Code.class))).thenReturn(entity);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class))).thenReturn(entity);
             ShinseishoKanriNo 申請書管理番号 = DbT5115ImageEntityGenerator.DEFAULT_申請書管理番号;
-            int 取込ページ番号 = DbT5115ImageEntityGenerator.DEFAULT_取込ページ番号;
-            Code 原本マスク分 = DbT5115ImageEntityGenerator.DEFAULT_原本マスク分;
-            Image result = sut.getイメージ情報(申請書管理番号, 取込ページ番号, 原本マスク分);
+            Image result = sut.getイメージ情報(申請書管理番号);
 
             assertThat(result.get申請書管理番号().value(), is(DbT5115ImageEntityGenerator.DEFAULT_申請書管理番号.value()));
         }
@@ -139,7 +127,7 @@ public class ImageManagerTest {
             DbT5115ImageEntity entity = DbT5115ImageEntityGenerator.createDbT5115ImageEntity();
             entity.initializeMd5();
             Image イメージ情報 = new Image(entity);
-            イメージ情報 = イメージ情報.createBuilderForEdit().set原本マスク分(new Code("3")).build();
+            イメージ情報 = イメージ情報.createBuilderForEdit().setイメージ共有ファイルID(RDateTime.MIN).build();
 
             assertThat(sut.saveイメージ情報(イメージ情報), is(true));
         }
@@ -151,7 +139,7 @@ public class ImageManagerTest {
             DbT5115ImageEntity entity = DbT5115ImageEntityGenerator.createDbT5115ImageEntity();
             entity.initializeMd5();
             Image イメージ情報 = new Image(entity);
-            イメージ情報 = イメージ情報.createBuilderForEdit().set原本マスク分(new Code("3")).build();
+            イメージ情報 = イメージ情報.createBuilderForEdit().setイメージ共有ファイルID(RDateTime.MIN).build();
 
             assertThat(sut.saveイメージ情報(イメージ情報), is(false));
         }

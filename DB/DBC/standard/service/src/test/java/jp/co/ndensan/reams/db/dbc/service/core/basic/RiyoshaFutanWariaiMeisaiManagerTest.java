@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.RiyoshaFutanWariaiMeisai;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3114RiyoshaFutanWariaiMeisaiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
@@ -18,13 +18,13 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import org.junit.Ignore;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -63,22 +63,6 @@ public class RiyoshaFutanWariaiMeisaiManagerTest {
             int 主キー4 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_枝番号;
             sut.get利用者負担割合明細(主キー1, null, 主キー3, 主キー4);
         }
-//
-//        @Test(expected = NullPointerException.class)
-//        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
-//            FlexibleYear 主キー1 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_年度;
-//            HihokenshaNo 主キー2 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_被保険者番号;
-//            int 主キー4 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_枝番号;
-//            sut.get利用者負担割合明細(主キー1, 主キー2, null, 主キー4);
-//        }
-//
-//        @Test(expected = NullPointerException.class)
-//        public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
-//            FlexibleYear 主キー1 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_年度;
-//            HihokenshaNo 主キー2 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_被保険者番号;
-//            int 主キー3 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_履歴番号;
-//            sut.get利用者負担割合明細(主キー1, 主キー2, 主キー3, null);
-//        }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test

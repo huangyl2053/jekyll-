@@ -53,7 +53,7 @@ public class ShichosonTokubetsuKyufuJigyoshaManager {
     public ShichosonTokubetsuKyufuJigyosha get市町村特別給付サービス事業者(
             JigyoshaNo 市町村特別給付用事業者番号,
             ServiceCode 市町村特別給付用サービスコード,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(市町村特別給付用事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用事業者番号"));
         requireNonNull(市町村特別給付用サービスコード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用サービスコード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));

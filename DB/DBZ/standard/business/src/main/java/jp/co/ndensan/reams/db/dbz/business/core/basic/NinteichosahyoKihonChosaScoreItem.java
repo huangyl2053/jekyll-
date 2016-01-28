@@ -18,10 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 認定調査票（基本調査素点項目）を管理するクラスです。
  */
-public class NinteichosahyoKihonChosaScoreItem extends 
-        ParentModelBase<NinteichosahyoKihonChosaScoreItemIdentifier, 
-        DbT5212NinteichosahyoKihonChosaScoreItemEntity, 
-        NinteichosahyoKihonChosaScoreItem> implements Serializable {
+public class NinteichosahyoKihonChosaScoreItem extends
+        ParentModelBase<NinteichosahyoKihonChosaScoreItemIdentifier, DbT5212NinteichosahyoKihonChosaScoreItemEntity, NinteichosahyoKihonChosaScoreItem> implements Serializable {
 
     private final DbT5212NinteichosahyoKihonChosaScoreItemEntity entity;
     private final NinteichosahyoKihonChosaScoreItemIdentifier id;

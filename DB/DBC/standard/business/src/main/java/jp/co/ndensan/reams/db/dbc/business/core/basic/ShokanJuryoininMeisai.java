@@ -8,22 +8,20 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3037ShokanJuryoininMeisaiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払支給受領委任払明細を管理するクラスです。
  */
-public class ShokanJuryoininMeisai 
-extends ModelBase<ShokanJuryoininMeisaiIdentifier,
-        DbT3037ShokanJuryoininMeisaiEntity, 
-        ShokanJuryoininMeisai> implements Serializable {
+public class ShokanJuryoininMeisai
+        extends ModelBase<ShokanJuryoininMeisaiIdentifier, DbT3037ShokanJuryoininMeisaiEntity, ShokanJuryoininMeisai> implements Serializable {
 
     private final DbT3037ShokanJuryoininMeisaiEntity entity;
     private final ShokanJuryoininMeisaiIdentifier id;
@@ -35,27 +33,21 @@ extends ModelBase<ShokanJuryoininMeisaiIdentifier,
      * @param 被保険者番号 被保険者番号
      * @param サービス提供年月 サービス提供年月
      * @param 整理番号 整理番号
-// * @param 履歴番号 履歴番号
      */
     public ShokanJuryoininMeisai(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
-            RString 整理番号
-    //            Decimal 履歴番号
-    ) {
+            RString 整理番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3037ShokanJuryoininMeisaiEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
         this.entity.setSeiriNo(整理番号);
-//        this.entity.setRirekiNo(履歴番号);
         this.id = new ShokanJuryoininMeisaiIdentifier(
                 被保険者番号,
                 サービス提供年月,
                 整理番号
-        //                履歴番号
         );
     }
 
@@ -70,9 +62,7 @@ extends ModelBase<ShokanJuryoininMeisaiIdentifier,
         this.id = new ShokanJuryoininMeisaiIdentifier(
                 entity.getHiHokenshaNo(),
                 entity.getServiceTeikyoYM(),
-                entity.getSeiriNo()
-        //                entity.getRirekiNo()
-        );
+                entity.getSeiriNo());
     }
 
     /**
@@ -116,15 +106,6 @@ extends ModelBase<ShokanJuryoininMeisaiIdentifier,
     public RString get整理番号() {
         return entity.getSeiriNo();
     }
-
-    /**
-     * 履歴番号を返します。
-     *
-     * @return 履歴番号
-     */
-//    public Decimal get履歴番号() {
-//        return entity.getRirekiNo();
-//    }
 
     /**
      * 契約番号を返します。

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.validation;
 
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -20,7 +20,7 @@ public enum NinteiInputValidationMessage implements IValidationMessage {
     /**
      * 対象データなし を表す列挙体です。
      */
-    対象データなし(DbzErrorMessages.対象データなし);
+    対象データなし(UrErrorMessages.対象データなし);
 
     private final Message message;
 

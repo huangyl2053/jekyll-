@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -29,24 +28,12 @@ public class Image extends ParentModelBase<ImageIdentifier, DbT5115ImageEntity, 
      * イメージ情報の新規作成時に使用します。
      *
      * @param 申請書管理番号 申請書管理番号
-     * @param 取込ページ番号 取込ページ番号
-     * @param 原本マスク分 原本マスク分
      */
-    public Image(ShinseishoKanriNo 申請書管理番号,
-            int 取込ページ番号,
-            Code 原本マスク分) {
+    public Image(ShinseishoKanriNo 申請書管理番号) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        requireNonNull(取込ページ番号, UrSystemErrorMessages.値がnull.getReplacedMessage("取込ページ番号"));
-        requireNonNull(原本マスク分, UrSystemErrorMessages.値がnull.getReplacedMessage("原本マスク分"));
         this.entity = new DbT5115ImageEntity();
         this.entity.setShinseishoKanriNo(申請書管理番号);
-        this.entity.setTorikomiPageNo(取込ページ番号);
-        this.entity.setGenponMaskKubun(原本マスク分);
-        this.id = new ImageIdentifier(
-                申請書管理番号,
-                取込ページ番号,
-                原本マスク分
-        );
+        this.id = new ImageIdentifier(申請書管理番号);
     }
 
     /**
@@ -57,10 +44,7 @@ public class Image extends ParentModelBase<ImageIdentifier, DbT5115ImageEntity, 
      */
     public Image(DbT5115ImageEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("イメージ情報"));
-        this.id = new ImageIdentifier(
-                entity.getShinseishoKanriNo(),
-                entity.getTorikomiPageNo(),
-                entity.getGenponMaskKubun());
+        this.id = new ImageIdentifier(entity.getShinseishoKanriNo());
     }
 
     /**
@@ -85,24 +69,6 @@ public class Image extends ParentModelBase<ImageIdentifier, DbT5115ImageEntity, 
      */
     public ShinseishoKanriNo get申請書管理番号() {
         return entity.getShinseishoKanriNo();
-    }
-
-    /**
-     * 取込ページ番号を返します。
-     *
-     * @return 取込ページ番号
-     */
-    public int get取込ページ番号() {
-        return entity.getTorikomiPageNo();
-    }
-
-    /**
-     * 原本マスク分を返します。
-     *
-     * @return 原本マスク分
-     */
-    public Code get原本マスク分() {
-        return entity.getGenponMaskKubun();
     }
 
     /**

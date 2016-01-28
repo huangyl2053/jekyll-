@@ -52,32 +52,33 @@ public class ShichosonTokubetsuKyufuJigyoshaManagerTest {
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             ServiceCode 主キー2 = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_市町村特別給付用サービスコード;
-            Decimal 主キー3 = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_履歴番号;
             sut.get市町村特別給付サービス事業者(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             JigyoshaNo 主キー1 = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_市町村特別給付用事業者番号;
-            Decimal 主キー3 = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_履歴番号;
             sut.get市町村特別給付サービス事業者(主キー1, null, 主キー3);
         }
 
+        @Ignore //主キー3はintになったため、nullが指定できない。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
             JigyoshaNo 主キー1 = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_市町村特別給付用事業者番号;
             ServiceCode 主キー2 = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_市町村特別給付用サービスコード;
-            sut.get市町村特別給付サービス事業者(主キー1, 主キー2, null);
+            //sut.get市町村特別給付サービス事業者(主キー1, 主キー2, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(JigyoshaNo.class), any(ServiceCode.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(JigyoshaNo.class), any(ServiceCode.class), any(Integer.class))).thenReturn(null);
 
             JigyoshaNo 主キー1 = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_市町村特別給付用事業者番号;
             ServiceCode 主キー2 = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_市町村特別給付用サービスコード;
-            Decimal 主キー3 = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_履歴番号;
             ShichosonTokubetsuKyufuJigyosha result = sut.get市町村特別給付サービス事業者(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
@@ -86,11 +87,11 @@ public class ShichosonTokubetsuKyufuJigyoshaManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3065ShichosonTokubetsuKyufuJigyoshaEntity entity = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.createDbT3065ShichosonTokubetsuKyufuJigyoshaEntity();
-            when(dac.selectByKey(any(JigyoshaNo.class), any(ServiceCode.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(JigyoshaNo.class), any(ServiceCode.class), any(Integer.class))).thenReturn(entity);
 
             JigyoshaNo 主キー1 = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_市町村特別給付用事業者番号;
             ServiceCode 主キー2 = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_市町村特別給付用サービスコード;
-            Decimal 主キー3 = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_履歴番号;
             ShichosonTokubetsuKyufuJigyosha result = sut.get市町村特別給付サービス事業者(主キー1, 主キー2, 主キー3);
 
             assertThat(result.get市町村特別給付用事業者番号().value(), is(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_市町村特別給付用事業者番号.value()));

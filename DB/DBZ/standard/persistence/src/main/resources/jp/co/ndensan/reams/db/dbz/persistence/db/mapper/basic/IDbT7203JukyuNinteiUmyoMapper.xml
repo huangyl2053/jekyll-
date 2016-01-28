@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7203JukyuNinteiUmyoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7203JukyuNinteiUmyoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7203JukyuNinteiUmyo">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7203JukyuNinteiUmyoMapper.allColumns_DbT7203JukyuNinteiUmyo" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7203JukyuNinteiUmyoMapper.allColumns_DbT7203JukyuNinteiUmyo" />
      FROM
-         rg."DbT7203JukyuNinteiUmyo"
+         rgdb."DbT7203JukyuNinteiUmyo"
      WHERE
-         rg."DbT7203JukyuNinteiUmyo"."isDeleted" = FALSE
+         rgdb."DbT7203JukyuNinteiUmyo"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7203JukyuNinteiUmyo">
@@ -32,7 +32,7 @@
 
 
     <!--テーブルDbT7203JukyuNinteiUmyoの項目をDbT7203JukyuNinteiUmyoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7203JukyuNinteiUmyoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT7203JukyuNinteiUmyoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7203JukyuNinteiUmyoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7203JukyuNinteiUmyoEntity" autoMapping="true">
         <id property="shichosonCode" column="dbT7203JukyuNinteiUmyo_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7203JukyuNinteiUmyo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT7203JukyuNinteiUmyo_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
@@ -50,7 +50,7 @@
 	SELECT
 	<include refid="allColumns_DbT7203JukyuNinteiUmyo"/>
 	FROM
-	rgba."DbT7203JukyuNinteiUmyo"
+	rgdb."DbT7203JukyuNinteiUmyo"
 	</select>
 
 </mapper>

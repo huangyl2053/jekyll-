@@ -206,12 +206,21 @@ public class KaigoNinteiShinsakaiIinShozokuKikanJoho extends ModelBase<KaigoNint
 
     }
 
+    /**
+     * 保持する{@link DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity}の{@link EntityDataState#Unchanged}以外であればtrueを返す。
+     *
+     * @return
+     * 保持する{@link DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity}の{@link EntityDataState#Unchanged}以外:true
+     * それ以外:false
+     */
     @Override
     public boolean hasChanged() {
         return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
+
+        private static final long serialVersionUID = 4041339883705665377L;
 
         private final DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity entity;
         private final KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier id;

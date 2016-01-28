@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Value
 public class KoseiShichosonMasterIdentifier implements Serializable {
 
+    private static final long serialVersionUID = -4197550312744996849L;
     private final RString 市町村識別ID;
 
     /**

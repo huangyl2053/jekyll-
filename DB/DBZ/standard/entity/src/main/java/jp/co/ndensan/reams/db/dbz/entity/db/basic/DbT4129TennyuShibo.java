@@ -73,7 +73,7 @@ public enum DbT4129TennyuShibo implements IColumnDefinition {
      * 介護認定審査会開催番号
      * <br/>介護認定審査会開催予定情報
      */
-    shinsakaiKaisaiNo(5, 0),
+    shinsakaiKaisaiNo(8, 0),
     /**
      * 介護認定審査会意見
      */
@@ -81,7 +81,7 @@ public enum DbT4129TennyuShibo implements IColumnDefinition {
     /**
      * 一次判定結果変更理由
      */
-    ichijiHnateiKekkaHenkoRiyu(2147483647, 0),
+    ichijiHanteiKekkaHenkoRiyu(2147483647, 0),
     /**
      * 要介護状態像例コード
      * <br/>Enum（DBE：要介護状態像例コード）要介護１の場合の状態像
@@ -104,7 +104,7 @@ public enum DbT4129TennyuShibo implements IColumnDefinition {
     /**
      * 二次判定結果入力年月日
      */
-    niniHanteiKekkaInputYMD(2147483647, 0);
+    nijiHanteiKekkaInputYMD(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

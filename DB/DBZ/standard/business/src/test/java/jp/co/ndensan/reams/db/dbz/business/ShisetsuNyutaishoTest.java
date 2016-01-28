@@ -37,7 +37,7 @@ public class ShisetsuNyutaishoTest extends DbzTestBase {
     private static LasdecCode 市町村コード;
     private static ShikibetsuCode 個人識別コード;
     private static RDateTime 処理日時;
-    private static Decimal 履歴番号;
+    private static Integer 履歴番号;
     private static DaichoType 台帳種別;
     private static Range<FlexibleDate> 入所期間;
     private static NyushoShisetsu 入所施設;
@@ -49,7 +49,7 @@ public class ShisetsuNyutaishoTest extends DbzTestBase {
         市町村コード = mock(LasdecCode.class);
         個人識別コード = mock(ShikibetsuCode.class);
         処理日時 = mock(RDateTime.class);
-        履歴番号 = new Decimal(1);
+        履歴番号 = new Integer(1);
         台帳種別 = DaichoType.他市町村住所地特例者;
         入所期間 = create期間();
         入所施設 = mock(NyushoShisetsu.class);
@@ -78,12 +78,11 @@ public class ShisetsuNyutaishoTest extends DbzTestBase {
                     台帳種別, 入所期間, 入所施設, 入所処理年月日, 退所処理年月日);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 処理日時がnullの時_NullPointerExceptionが発生する() {
-            sut = new ShisetsuNyutaisho(市町村コード, 個人識別コード, null,
-                    台帳種別, 入所期間, 入所施設, 入所処理年月日, 退所処理年月日);
-        }
-
+//        @Test(expected = NullPointerException.class)
+//        public void 処理日時がnullの時_NullPointerExceptionが発生する() {
+//            sut = new ShisetsuNyutaisho(市町村コード, 個人識別コード, null,
+//                    台帳種別, 入所期間, 入所施設, 入所処理年月日, 退所処理年月日);
+//        }
         @Test(expected = NullPointerException.class)
         public void 台帳種別がnullの時_NullPointerExceptionが発生する() {
             sut = new ShisetsuNyutaisho(市町村コード, 個人識別コード, 履歴番号,

@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * <br/> 老齢福祉年金受給者	 老齢福祉年金受給者を管理する
  */
 public enum DbT7006RoreiFukushiNenkinJukyusha implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -51,10 +51,10 @@ public enum DbT7006RoreiFukushiNenkinJukyusha implements IColumnDefinition {
      */
     jukyuKaishiYMD(2147483647, 0),
     /**
-     * 受給終了年月日
+     * 受給廃止年月日
      * <br/>受給終了年月日
      */
-    jukyuShuryoYMD(2147483647, 0),
+    jukyuHaishiYMD(2147483647, 0),
     /**
      * 被保険者番号
      * <br/>被保険者番号
