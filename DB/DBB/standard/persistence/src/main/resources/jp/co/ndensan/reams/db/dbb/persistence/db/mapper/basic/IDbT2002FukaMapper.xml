@@ -76,7 +76,7 @@
 
 
     <!--テーブルDbT2002Fukaの項目をDbT2002FukaEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT2002FukaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT2002FukaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.fuka.DbT2002FukaEntity" autoMapping="true">
         <id property="choteiNendo" column="dbT2002Fuka_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="dbT2002Fuka_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="tsuchishoNo" column="dbT2002Fuka_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>

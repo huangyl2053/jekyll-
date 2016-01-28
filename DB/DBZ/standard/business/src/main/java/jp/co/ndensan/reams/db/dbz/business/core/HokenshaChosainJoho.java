@@ -6,16 +6,14 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJohoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 調査員情報のビジネスクラスです。
@@ -44,11 +42,10 @@ public class HokenshaChosainJoho implements Serializable, IChosainJoho {
      *
      * @return DbT4913ChosainJohoEntity
      */
-    @Override
-    public DbT4913ChosainJohoEntity getEntity() {
-        return entity;
-    }
-
+//    @Override
+//    public DbT4913ChosainJohoEntity getEntity() {
+//        return entity;
+//    }
     /**
      * 市町村コードを返します。
      *
@@ -65,7 +62,7 @@ public class HokenshaChosainJoho implements Serializable, IChosainJoho {
      * @return 認定調査委託先コード
      */
     @Override
-    public ChosaItakusakiCode get認定調査委託先コード() {
+    public RString get認定調査委託先コード() {
         return entity.getNinteiChosaItakusakiCode();
     }
 
@@ -75,7 +72,7 @@ public class HokenshaChosainJoho implements Serializable, IChosainJoho {
      * @return 認定調査員コード
      */
     @Override
-    public ChosainCode get認定調査員コード() {
+    public RString get認定調査員コード() {
         return entity.getNinteiChosainCode();
     }
 
@@ -325,7 +322,7 @@ public class HokenshaChosainJoho implements Serializable, IChosainJoho {
          * @return builder
          */
         @Override
-        public Builder setNinteichosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
+        public Builder setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {
             Objects.requireNonNull(ninteichosaItakusakiCode);
             this.entity.setNinteiChosaItakusakiCode(ninteichosaItakusakiCode);
             return this;
@@ -334,13 +331,13 @@ public class HokenshaChosainJoho implements Serializable, IChosainJoho {
         /**
          * ninteiChosainNoを設定します。
          *
-         * @param ninteiChosainNo 認定調査員コード
+         * @param ninteiChosainCode 認定調査員コード
          * @return builder
          */
         @Override
-        public Builder setNinteiChosainNo(ChosainCode ninteiChosainNo) {
-            Objects.requireNonNull(ninteiChosainNo);
-            this.entity.setNinteiChosainCode(ninteiChosainNo);
+        public Builder setNinteiChosainCode(RString ninteiChosainCode) {
+            Objects.requireNonNull(ninteiChosainCode);
+            this.entity.setNinteiChosainCode(ninteiChosainCode);
             return this;
         }
 
@@ -497,8 +494,7 @@ public class HokenshaChosainJoho implements Serializable, IChosainJoho {
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。
-     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

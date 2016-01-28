@@ -23,11 +23,11 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
-import org.junit.Ignore;
 
 /**
  * 受領委任事業者のbusinessクラスとentityクラスのマッピングを行うテストクラスです。
@@ -63,7 +63,7 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
 
         @Test
         public void get契約番号の結果が_Entityの事業者契約番号と同一になる() {
-            assertThat(sut.get契約番号(), is(契約番号));
+            assertThat(sut.get契約番号().value(), is(JuryoininJigyoshaEntity.getKeiyakuJigyoshaNo()));
         }
 
         @Test
@@ -76,76 +76,12 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
             assertThat(sut.get契約期間().getTo(), is(JuryoininJigyoshaEntity.getShuryoYMD()));
 
         }
-//
-//        @Test
-//        public void get届出年月日の結果が_Entityの届出年月日と同一になる() {
-//            assertThat(sut.get届出年月日(), is(JuryoininJigyoshaEntity.getTodokedeYMD()));
-//        }
-//
-//        @Test
-//        public void get届出者のget住所の結果が_Entityの届出者住所と同一になる() {
-//            assertThat(sut.get届出者().get住所(), is(JuryoininJigyoshaEntity.getTodokedeAddress()));
-//        }
-//
-//        @Test
-//        public void get届出者のget事業者名称の結果が_Entityの届出者事業者名称と同一になる() {
-//            assertThat(sut.get届出者().get事業者名称(), is(JuryoininJigyoshaEntity.getTodokedeJigyoshaName()));
-//        }
-//
-//        @Test
-//        public void get届出者のget代表者氏名の結果が_Entityの届出者代表者氏名と同一になる() {
-//            assertThat(sut.get届出者().get代表者氏名(), is(JuryoininJigyoshaEntity.getTodokedeDaihyoshaName()));
-//        }
-
-        @Test
-        public void get契約事業者のget事業者番号の結果が_Entityの契約事業者番号と同一になる() {
-            assertThat(sut.get契約事業者().get事業者番号().value(), is(JuryoininJigyoshaEntity.getKeiyakuJigyoshaNo()));
-        }
-
-        @Test
-        public void get契約事業者のget事業者FAX番号の結果が_Entityの事業者FAX番号と同一になる() {
-            assertThat(sut.get契約事業者().get事業者FAX番号(), is(JuryoininJigyoshaEntity.getKeiyakuJigyoshaFaxNo()));
-        }
-
-//        @Test
-//        public void get契約事業者のget営業形態の結果が_Entityの営業形態と同一になる() {
-//            assertThat(sut.get契約事業者().get営業形態().getCode(), is(JuryoininJigyoshaEntity.getEigyoKeitai()));
-//        }
 
         @Test
         public void get契約事業者のget送付先部署の結果が_Entityの送付先部署と同一になる() {
             assertThat(sut.get契約事業者().get送付先部署(), is(JuryoininJigyoshaEntity.getSofusakiBusho()));
         }
 
-//        @Test
-//        public void get契約登録年月日の結果が_Entityの契約登録年月日と同一になる() {
-//            assertThat(sut.get契約登録年月日(), is(JuryoininJigyoshaEntity.getKeiyakuTorokuYMD()));
-//        }
-//
-//        @Test
-//        public void has住宅改修契約の結果が_Entityの住宅改修契約有無と同一になる() {
-//            assertThat(sut.has住宅改修契約(), is(JuryoininJigyoshaEntity.getJutakuKaishuKeiyakuUmu()));
-//        }
-//
-//        @Test
-//        public void has特定福祉用具販売契約の結果が_Entityの特定福祉用具販売契約有無と同一になる() {
-//            assertThat(sut.has特定福祉用具販売契約(), is(JuryoininJigyoshaEntity.getTokuteiFukushiYoguHanbaiKeiyakuUmu()));
-//        }
-//
-//        @Test
-//        public void has償還払給付契約の結果が_Entityの償還払給付契約有無と同一になる() {
-//            assertThat(sut.has償還払給付契約(), is(JuryoininJigyoshaEntity.getShokanbaraiKyufuKeiyakuUmu()));
-//        }
-//
-//        @Test
-//        public void has高額給付契約の結果が_Entityの高額給付契約有無と同一になる() {
-//            assertThat(sut.has高額給付契約(), is(JuryoininJigyoshaEntity.getKogakuKyufuKeiyakuUmu()));
-//        }
-//
-//        @Test
-//        public void has取扱確約書の結果が_Entityの取扱確約書有無と同一になる() {
-//            assertThat(sut.has取扱確約書(), is(JuryoininJigyoshaEntity.getToriatsukaiKakuyakushoUmu()));
-//        }
     }
 
     public static class Test_to受領委任事業者List {
@@ -213,10 +149,10 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
             assertThat(sut, is(nullValue()));
         }
 
-//        @Test
-//        public void Entityの事業者契約番号と_受領委任事業者の契約番号が同一になる() {
-//            assertThat(sut.getJigyoshaKeiyakuNo(), is(受領委任事業者.get契約番号().value()));
-//        }
+        @Test
+        public void Entityの事業者契約番号と_受領委任事業者の契約番号が同一になる() {
+            assertThat(sut.getKeiyakuJigyoshaNo(), is(受領委任事業者.get契約番号().value()));
+        }
 
         @Test
         public void Entityの開始年月日と_受領委任事業者の契約期間の開始年月日が同一になる() {
@@ -227,75 +163,11 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
         public void Entityの終了年月日と_受領委任事業者の契約期間の終了年月日が同一になる() {
             assertThat(sut.getShuryoYMD(), is(受領委任事業者.get契約期間().getTo()));
         }
-//
-//        @Test
-//        public void Entityの届出年月日と_受領委任事業者の届出年月日が同一になる() {
-//            assertThat(sut.getTodokedeYMD(), is(受領委任事業者.get届出年月日()));
-//        }
-//
-//        @Test
-//        public void Entityの届出者住所と_届出者の住所が同一になる() {
-//            assertThat(sut.getTodokedeAddress(), is(受領委任事業者.get届出者().get住所()));
-//        }
-//
-//        @Test
-//        public void Entityの届出者事業者名称と_届出者の事業者名称が同一になる() {
-//            assertThat(sut.getTodokedeJigyoshaName(), is(受領委任事業者.get届出者().get事業者名称()));
-//        }
-//
-//        @Test
-//        public void Entityの届出者代表者氏名と_届出者の代表者氏名が同一になる() {
-//            assertThat(sut.getTodokedeDaihyoshaName(), is(受領委任事業者.get届出者().get代表者氏名()));
-//        }
-
-        @Test
-        public void Entityの事業者FAX番号と_契約事業者の事業者FAX番号が同一になる() {
-            assertThat(sut.getKeiyakuJigyoshaFaxNo(), is(受領委任事業者.get契約事業者().get事業者FAX番号()));
-        }
-
-//        @Test
-//        public void Entityの契約登録年月日と_受領委任事業者の契約登録年月日が同一になる() {
-//            assertThat(sut.getKeiyakuTorokuYMD(), is(受領委任事業者.get契約登録年月日()));
-//        }
 
         @Test
         public void Entityの送付先部署と_契約事業者の送付先部署が同一になる() {
             assertThat(sut.getSofusakiBusho(), is(受領委任事業者.get契約事業者().get送付先部署()));
         }
 
-//        @Test
-//        public void Entityの営業形態と_契約事業者の営業形態が同一になる() {
-//            assertThat(sut.getEigyoKeitai(), is(受領委任事業者.get契約事業者().get営業形態().getCode()));
-//        }
-//
-//        @Test
-//        public void Entityの住宅改修契約有無と_受領委任事業者のhas住宅改修契約が同一になる() {
-//            assertThat(sut.getJutakuKaishuKeiyakuUmu(), is(受領委任事業者.has住宅改修契約()));
-//        }
-//
-//        @Test
-//        public void Entityの特定福祉用具販売契約有無と_受領委任事業者のhas特定福祉用具販売契約が同一になる() {
-//            assertThat(sut.getTokuteiFukushiYoguHanbaiKeiyakuUmu(), is(受領委任事業者.has特定福祉用具販売契約()));
-//        }
-//
-//        @Test
-//        public void Entityの償還払給付契約有無と_受領委任事業者のhas償還払給付契約が同一になる() {
-//            assertThat(sut.getShokanbaraiKyufuKeiyakuUmu(), is(受領委任事業者.has償還払給付契約()));
-//        }
-//
-//        @Test
-//        public void Entityの高額給付契約有無と_受領委任事業者のhas高額給付契約が同一になる() {
-//            assertThat(sut.getKogakuKyufuKeiyakuUmu(), is(受領委任事業者.has高額給付契約()));
-//        }
-//
-//        @Test
-//        public void Entityの契約事業者番号と_契約事業者の事業者番号が同一になる() {
-//            assertThat(sut.getKeiyakuJigyoshaNo(), is(受領委任事業者.get契約事業者().get事業者番号()));
-//        }
-//
-//        @Test
-//        public void Entityの取扱確約書有無と_受領委任事業者のhas取扱確約書が同一になる() {
-//            assertThat(sut.getToriatsukaiKakuyakushoUmu(), is(受領委任事業者.has取扱確約書()));
-//        }
     }
 }

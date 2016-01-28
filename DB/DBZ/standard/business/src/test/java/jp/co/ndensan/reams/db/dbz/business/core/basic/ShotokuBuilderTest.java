@@ -6,13 +6,11 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.business.core.Shotoku;
 import jp.co.ndensan.reams.db.dbz.business.core.ShotokuBuilder;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuKanriEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -81,13 +79,13 @@ public class ShotokuBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の非課税区分_住民税減免前は_設定した値と同じ非課税区分_住民税減免前を返す() {
             business = sut.set非課税区分_住民税減免前(DbT2008ShotokuKanriEntityGenerator.DEFAULT_課税区分_住民税減免前).build();
-            assertThat(business.get課税区分_住民税減免前(), is(DbT2008ShotokuKanriEntityGenerator.DEFAULT_課税区分_住民税減免前));
+            assertThat(business.get非課税区分_住民税減免前(), is(DbT2008ShotokuKanriEntityGenerator.DEFAULT_課税区分_住民税減免前));
         }
 
         @Test
         public void 戻り値の非課税区分_住民税減免後は_設定した値と同じ非課税区分住民税減免後を返す() {
             business = sut.set非課税区分_住民税減免後(DbT2008ShotokuKanriEntityGenerator.DEFAULT_課税区分_住民税減免後).build();
-            assertThat(business.get課税区分_住民税減免後(), is(DbT2008ShotokuKanriEntityGenerator.DEFAULT_課税区分_住民税減免後));
+            assertThat(business.get非課税区分_住民税減免後(), is(DbT2008ShotokuKanriEntityGenerator.DEFAULT_課税区分_住民税減免後));
         }
 
         @Test

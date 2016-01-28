@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2011RankJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2011RankJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2011RankJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2011RankJohoMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2011RankJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

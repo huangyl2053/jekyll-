@@ -1,0 +1,10 @@
+﻿shinseishoKanriNo,ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
+shinseiTodokedeDaikoKubunCode,UDD035Code,Code,,,,,申請届出代行区分コード,A
+shinseiTodokedeshaShimei,varchar,RString,,,,,申請届出者氏名,A
+shinseiTodokedeshaKanaShimei,varchar,RString,,,,,申請届出者氏名カナ,A
+shinseiTodokedeshaTsuzukigara,bpchar,RString,,,,,申請届出者続柄,A
+shinseiTodokedeDaikoJigyoshaNo,JigyoshaNo,JigyoshaNo,,,,,申請届出代行事業者番号,A
+jigyoshaKubun,bpchar,RString,,,,,事業者区分,A
+shinseiTodokedeshaYubinNo,UDD003YubinNo,YubinNo,,,,,申請届出者郵便番号,A
+shinseiTodokedeshaJusho,varchar,RString,,,,,申請届出者住所,A
+shinseiTodokedeshaTelNo,UDD026TelNo,TelNo,,,,,申請届出者電話番号,A

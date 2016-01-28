@@ -1,22 +1,24 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 
 /**
  * サービス種類支給限度額テーブルのエンティティクラスです。
  */
 public class DbT7111ServiceShuruiShikyuGendoGakuEntity extends DbTableEntityBase<DbT7111ServiceShuruiShikyuGendoGakuEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7111ServiceShuruiShikyuGendoGaku");
@@ -34,10 +36,10 @@ public class DbT7111ServiceShuruiShikyuGendoGakuEntity extends DbTableEntityBase
     @PrimaryKey
     private RString yoKaigoJotaiKubun;
     @PrimaryKey
-    private FlexibleYearMonth tekiyoKaishuYM;
+    private FlexibleYearMonth tekiyoKaishiYM;
     @PrimaryKey
     private int rirekiNo;
-    private FlexibleYearMonth tekiyoShuryuYM;
+    private FlexibleYearMonth tekiyoShuryoYM;
     private Decimal shikyuGendoTaniSu;
 
     /**
@@ -99,7 +101,7 @@ public class DbT7111ServiceShuruiShikyuGendoGakuEntity extends DbTableEntityBase
      *
      * @param serviceShuruiCode サービス種類コード
      */
-    public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
+    public void setServiceShuruiCode(@Nonnull ServiceShuruiCode serviceShuruiCode) {
         this.serviceShuruiCode = serviceShuruiCode;
     }
 
@@ -117,7 +119,7 @@ public class DbT7111ServiceShuruiShikyuGendoGakuEntity extends DbTableEntityBase
      *
      * @param yoKaigoJotaiKubun 要介護状態区分
      */
-    public void setYoKaigoJotaiKubun(RString yoKaigoJotaiKubun) {
+    public void setYoKaigoJotaiKubun(@Nonnull RString yoKaigoJotaiKubun) {
         this.yoKaigoJotaiKubun = yoKaigoJotaiKubun;
     }
 
@@ -126,17 +128,17 @@ public class DbT7111ServiceShuruiShikyuGendoGakuEntity extends DbTableEntityBase
      *
      * @return 適用開始年月
      */
-    public FlexibleYearMonth getTekiyoKaishuYM() {
-        return tekiyoKaishuYM;
+    public FlexibleYearMonth getTekiyoKaishiYM() {
+        return tekiyoKaishiYM;
     }
 
     /**
      * 適用開始年月のsetメソッドです。
      *
-     * @param tekiyoKaishuYM 適用開始年月
+     * @param tekiyoKaishiYM 適用開始年月
      */
-    public void setTekiyoKaishuYM(FlexibleYearMonth tekiyoKaishuYM) {
-        this.tekiyoKaishuYM = tekiyoKaishuYM;
+    public void setTekiyoKaishiYM(@Nonnull FlexibleYearMonth tekiyoKaishiYM) {
+        this.tekiyoKaishiYM = tekiyoKaishiYM;
     }
 
     /**
@@ -153,7 +155,7 @@ public class DbT7111ServiceShuruiShikyuGendoGakuEntity extends DbTableEntityBase
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(@Nonnull int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -162,17 +164,18 @@ public class DbT7111ServiceShuruiShikyuGendoGakuEntity extends DbTableEntityBase
      *
      * @return 適用終了年月
      */
-    public FlexibleYearMonth getTekiyoShuryuYM() {
-        return tekiyoShuryuYM;
+    @CheckForNull
+    public FlexibleYearMonth getTekiyoShuryoYM() {
+        return tekiyoShuryoYM;
     }
 
     /**
      * 適用終了年月のsetメソッドです。
      *
-     * @param tekiyoShuryuYM 適用終了年月
+     * @param tekiyoShuryoYM 適用終了年月
      */
-    public void setTekiyoShuryuYM(FlexibleYearMonth tekiyoShuryuYM) {
-        this.tekiyoShuryuYM = tekiyoShuryuYM;
+    public void setTekiyoShuryoYM(FlexibleYearMonth tekiyoShuryoYM) {
+        this.tekiyoShuryoYM = tekiyoShuryoYM;
     }
 
     /**
@@ -180,6 +183,7 @@ public class DbT7111ServiceShuruiShikyuGendoGakuEntity extends DbTableEntityBase
      *
      * @return 支給限度単位数
      */
+    @CheckForNull
     public Decimal getShikyuGendoTaniSu() {
         return shikyuGendoTaniSu;
     }
@@ -197,7 +201,7 @@ public class DbT7111ServiceShuruiShikyuGendoGakuEntity extends DbTableEntityBase
      * このエンティティの主キーが他の{@literal DbT7111ServiceShuruiShikyuGendoGakuEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7111ServiceShuruiShikyuGendoGakuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -211,7 +215,7 @@ public class DbT7111ServiceShuruiShikyuGendoGakuEntity extends DbTableEntityBase
         if (!Objects.equals(this.yoKaigoJotaiKubun, other.yoKaigoJotaiKubun)) {
             return false;
         }
-        if (!Objects.equals(this.tekiyoKaishuYM, other.tekiyoKaishuYM)) {
+        if (!Objects.equals(this.tekiyoKaishiYM, other.tekiyoKaishiYM)) {
             return false;
         }
         if (this.rirekiNo != other.rirekiNo) {
@@ -227,9 +231,9 @@ public class DbT7111ServiceShuruiShikyuGendoGakuEntity extends DbTableEntityBase
     public void shallowCopy(DbT7111ServiceShuruiShikyuGendoGakuEntity entity) {
         this.serviceShuruiCode = entity.serviceShuruiCode;
         this.yoKaigoJotaiKubun = entity.yoKaigoJotaiKubun;
-        this.tekiyoKaishuYM = entity.tekiyoKaishuYM;
+        this.tekiyoKaishiYM = entity.tekiyoKaishiYM;
         this.rirekiNo = entity.rirekiNo;
-        this.tekiyoShuryuYM = entity.tekiyoShuryuYM;
+        this.tekiyoShuryoYM = entity.tekiyoShuryoYM;
         this.shikyuGendoTaniSu = entity.shikyuGendoTaniSu;
     }
 
@@ -240,7 +244,7 @@ public class DbT7111ServiceShuruiShikyuGendoGakuEntity extends DbTableEntityBase
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(serviceShuruiCode, yoKaigoJotaiKubun, tekiyoKaishuYM, rirekiNo, tekiyoShuryuYM, shikyuGendoTaniSu);
+        return super.toMd5(serviceShuruiCode, yoKaigoJotaiKubun, tekiyoKaishiYM, rirekiNo, tekiyoShuryoYM, shikyuGendoTaniSu);
     }
 
 // </editor-fold>

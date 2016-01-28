@@ -1,27 +1,29 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 受給者台帳テーブルのエンティティクラスです。
  */
 public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001JukyushaDaichoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4001JukyushaDaicho");
@@ -42,7 +44,6 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
     private RString rirekiNo;
     @PrimaryKey
     private RString edaban;
-    @PrimaryKey
     private ShinseishoKanriNo shinseishoKanriNo;
     private RString shinseiJokyoKubun;
     private RString shishoCode;
@@ -181,7 +182,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(LasdecCode shichosonCode) {
+    public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
@@ -199,7 +200,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -217,7 +218,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(RString rirekiNo) {
+    public void setRirekiNo(@Nonnull RString rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -235,7 +236,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @param edaban 枝番
      */
-    public void setEdaban(RString edaban) {
+    public void setEdaban(@Nonnull RString edaban) {
         this.edaban = edaban;
     }
 
@@ -257,7 +258,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -279,7 +280,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @param shinseiJokyoKubun 申請状況区分
      */
-    public void setShinseiJokyoKubun(RString shinseiJokyoKubun) {
+    public void setShinseiJokyoKubun(@Nonnull RString shinseiJokyoKubun) {
         this.shinseiJokyoKubun = shinseiJokyoKubun;
     }
 
@@ -297,7 +298,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @param shishoCode 支所コード
      */
-    public void setShishoCode(RString shishoCode) {
+    public void setShishoCode(@Nonnull RString shishoCode) {
         this.shishoCode = shishoCode;
     }
 
@@ -319,7 +320,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @param chokkinFlag 直近フラグ
      */
-    public void setChokkinFlag(boolean chokkinFlag) {
+    public void setChokkinFlag(@Nonnull boolean chokkinFlag) {
         this.chokkinFlag = chokkinFlag;
     }
 
@@ -330,6 +331,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 識別コード
      */
+    @CheckForNull
     public ShikibetsuCode getShikibetsuCode() {
         return shikibetsuCode;
     }
@@ -363,7 +365,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @param jukyuShinseiJiyu 受給申請事由
      */
-    public void setJukyuShinseiJiyu(Code jukyuShinseiJiyu) {
+    public void setJukyuShinseiJiyu(@Nonnull Code jukyuShinseiJiyu) {
         this.jukyuShinseiJiyu = jukyuShinseiJiyu;
     }
 
@@ -372,6 +374,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 申請理由
      */
+    @CheckForNull
     public RString getShinseiRiyu() {
         return shinseiRiyu;
     }
@@ -392,6 +395,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return （届出者）申請者関係コード
      */
+    @CheckForNull
     public Code getShinseishaKankeiCode() {
         return shinseishaKankeiCode;
     }
@@ -412,6 +416,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return （届出者）本人との関係
      */
+    @CheckForNull
     public RString getHomninKankei() {
         return homninKankei;
     }
@@ -430,6 +435,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 受給申請年月日
      */
+    @CheckForNull
     public FlexibleDate getJukyuShinseiYMD() {
         return jukyuShinseiYMD;
     }
@@ -450,6 +456,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return ２号特定疾病コード
      */
+    @CheckForNull
     public Code getNigoTokuteiShippeiCode() {
         return nigoTokuteiShippeiCode;
     }
@@ -470,6 +477,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 審査会依頼年月日
      */
+    @CheckForNull
     public FlexibleDate getShinsakaiIraiYMD() {
         return shinsakaiIraiYMD;
     }
@@ -490,6 +498,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 要介護認定状態区分コード
      */
+    @CheckForNull
     public Code getYokaigoJotaiKubunCode() {
         return yokaigoJotaiKubunCode;
     }
@@ -510,6 +519,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 認定有効期間開始年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteiYukoKikanKaishiYMD() {
         return ninteiYukoKikanKaishiYMD;
     }
@@ -528,6 +538,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 認定有効期間終了年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteiYukoKikanShuryoYMD() {
         return ninteiYukoKikanShuryoYMD;
     }
@@ -548,6 +559,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 認定年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteiYMD() {
         return ninteiYMD;
     }
@@ -570,6 +582,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return みなし要介護区分コード
      */
+    @CheckForNull
     public Code getMinashiCode() {
         return minashiCode;
     }
@@ -592,6 +605,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類01
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui01() {
         return shiteiServiceShurui01;
     }
@@ -614,6 +628,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類02
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui02() {
         return shiteiServiceShurui02;
     }
@@ -636,6 +651,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類03
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui03() {
         return shiteiServiceShurui03;
     }
@@ -658,6 +674,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類04
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui04() {
         return shiteiServiceShurui04;
     }
@@ -680,6 +697,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類05
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui05() {
         return shiteiServiceShurui05;
     }
@@ -702,6 +720,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類06
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui06() {
         return shiteiServiceShurui06;
     }
@@ -724,6 +743,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類07
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui07() {
         return shiteiServiceShurui07;
     }
@@ -746,6 +766,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類08
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui08() {
         return shiteiServiceShurui08;
     }
@@ -768,6 +789,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類09
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui09() {
         return shiteiServiceShurui09;
     }
@@ -790,6 +812,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類10
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui10() {
         return shiteiServiceShurui10;
     }
@@ -812,6 +835,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類11
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui11() {
         return shiteiServiceShurui11;
     }
@@ -834,6 +858,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類12
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui12() {
         return shiteiServiceShurui12;
     }
@@ -856,6 +881,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類13
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui13() {
         return shiteiServiceShurui13;
     }
@@ -878,6 +904,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類14
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui14() {
         return shiteiServiceShurui14;
     }
@@ -900,6 +927,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類15
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui15() {
         return shiteiServiceShurui15;
     }
@@ -922,6 +950,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類16
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui16() {
         return shiteiServiceShurui16;
     }
@@ -944,6 +973,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類17
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui17() {
         return shiteiServiceShurui17;
     }
@@ -966,6 +996,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類18
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui18() {
         return shiteiServiceShurui18;
     }
@@ -988,6 +1019,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類19
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui19() {
         return shiteiServiceShurui19;
     }
@@ -1010,6 +1042,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類20
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui20() {
         return shiteiServiceShurui20;
     }
@@ -1032,6 +1065,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類21
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui21() {
         return shiteiServiceShurui21;
     }
@@ -1054,6 +1088,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類22
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui22() {
         return shiteiServiceShurui22;
     }
@@ -1076,6 +1111,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類23
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui23() {
         return shiteiServiceShurui23;
     }
@@ -1098,6 +1134,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類24
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui24() {
         return shiteiServiceShurui24;
     }
@@ -1120,6 +1157,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類25
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui25() {
         return shiteiServiceShurui25;
     }
@@ -1142,6 +1180,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類26
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui26() {
         return shiteiServiceShurui26;
     }
@@ -1164,6 +1203,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類27
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui27() {
         return shiteiServiceShurui27;
     }
@@ -1186,6 +1226,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類28
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui28() {
         return shiteiServiceShurui28;
     }
@@ -1208,6 +1249,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類29
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui29() {
         return shiteiServiceShurui29;
     }
@@ -1230,6 +1272,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 指定サービス種類30
      */
+    @CheckForNull
     public ServiceShuruiCode getShiteiServiceShurui30() {
         return shiteiServiceShurui30;
     }
@@ -1252,6 +1295,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 喪失年月日
      */
+    @CheckForNull
     public FlexibleDate getSoshitsuYMD() {
         return soshitsuYMD;
     }
@@ -1274,6 +1318,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 直近異動年月日
      */
+    @CheckForNull
     public FlexibleDate getChokkinIdoYMD() {
         return chokkinIdoYMD;
     }
@@ -1296,6 +1341,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 直近異動事由コード
      */
+    @CheckForNull
     public Code getChokkinIdoJiyuCode() {
         return chokkinIdoJiyuCode;
     }
@@ -1318,6 +1364,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 有効無効区分
      */
+    @CheckForNull
     public Code getYukoMukoKubun() {
         return yukoMukoKubun;
     }
@@ -1340,6 +1387,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return データ区分
      */
+    @CheckForNull
     public Code getDataKubun() {
         return dataKubun;
     }
@@ -1360,6 +1408,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 同一連番
      */
+    @CheckForNull
     public RString getRemban() {
         return remban;
     }
@@ -1380,6 +1429,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 異動理由
      */
+    @CheckForNull
     public RString getIdoRiyu() {
         return idoRiyu;
     }
@@ -1402,6 +1452,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 申請書区分
      */
+    @CheckForNull
     public Code getShinseishoKubun() {
         return shinseishoKubun;
     }
@@ -1424,6 +1475,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 削除事由コード
      */
+    @CheckForNull
     public Code getSakujoJiyuCode() {
         return sakujoJiyuCode;
     }
@@ -1446,6 +1498,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 要支援者認定申請区分
      */
+    @CheckForNull
     public boolean getYoshienshaNinteiShinseiFlag() {
         return yoshienshaNinteiShinseiFlag;
     }
@@ -1466,6 +1519,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 支給限度単位数
      */
+    @CheckForNull
     public Decimal getShikyuGendoTanisu() {
         return shikyuGendoTanisu;
     }
@@ -1484,6 +1538,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 支給限度有効開始年月日
      */
+    @CheckForNull
     public FlexibleDate getShikyuGendoKaishiYMD() {
         return shikyuGendoKaishiYMD;
     }
@@ -1502,6 +1557,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 支給限度有効終了年月日
      */
+    @CheckForNull
     public FlexibleDate getShikyuGendoShuryoYMD() {
         return shikyuGendoShuryoYMD;
     }
@@ -1520,6 +1576,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 短期入所支給限度日数
      */
+    @CheckForNull
     public int getTankiSikyuGendoNissu() {
         return tankiSikyuGendoNissu;
     }
@@ -1538,6 +1595,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 短期入所支給限度開始年月日
      */
+    @CheckForNull
     public FlexibleDate getTankiShikyuGendoKaishiYMD() {
         return tankiShikyuGendoKaishiYMD;
     }
@@ -1556,6 +1614,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 短期入所支給限度終了年月日
      */
+    @CheckForNull
     public FlexibleDate getTankiShikyuGendoShuryoYMD() {
         return tankiShikyuGendoShuryoYMD;
     }
@@ -1574,6 +1633,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 当初認定有効開始年月日
      */
+    @CheckForNull
     public FlexibleDate getToshoNinteiYukoKaishiYMD() {
         return toshoNinteiYukoKaishiYMD;
     }
@@ -1592,6 +1652,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 当初認定有効終了年月日
      */
+    @CheckForNull
     public FlexibleDate getToshoNinteiYukoShuryoYMD() {
         return toshoNinteiYukoShuryoYMD;
     }
@@ -1610,6 +1671,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 受給資格証明書発行年月日１
      */
+    @CheckForNull
     public FlexibleDate getJukyuShikakuShomeishoHakkoYMD1() {
         return jukyuShikakuShomeishoHakkoYMD1;
     }
@@ -1628,6 +1690,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 受給資格証明書発行年月日２
      */
+    @CheckForNull
     public FlexibleDate getJukyuShikakuShomeishoHakkoYMD2() {
         return jukyuShikakuShomeishoHakkoYMD2;
     }
@@ -1646,6 +1709,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 診断命令書発行年月日
      */
+    @CheckForNull
     public FlexibleDate getShindanMeireishoHakkoYMD() {
         return shindanMeireishoHakkoYMD;
     }
@@ -1664,6 +1728,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return ２号申請受理通知書発行年月日
      */
+    @CheckForNull
     public FlexibleDate getNigoShinseiJuriTsuchishoHakkoYMD() {
         return nigoShinseiJuriTsuchishoHakkoYMD;
     }
@@ -1682,6 +1747,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 認定結果通知書発行年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteiKekkaTsuchishoHakkoYMD() {
         return ninteiKekkaTsuchishoHakkoYMD;
     }
@@ -1700,6 +1766,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 区分変更通知書発行年月日
      */
+    @CheckForNull
     public FlexibleDate getKubunHenkoTsuchishoHakkoYMD() {
         return kubunHenkoTsuchishoHakkoYMD;
     }
@@ -1718,6 +1785,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return サービス変更通知書発行年月日
      */
+    @CheckForNull
     public FlexibleDate getServiceHenkoTsuchishoHakkoYMD() {
         return serviceHenkoTsuchishoHakkoYMD;
     }
@@ -1736,6 +1804,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 認定却下通知書発行年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteiKyakkaTsuchishoHakkoYMD() {
         return ninteiKyakkaTsuchishoHakkoYMD;
     }
@@ -1754,6 +1823,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 認定取消通知書発行年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteiTorikeshiTsuchishoHakkoYMD() {
         return ninteiTorikeshiTsuchishoHakkoYMD;
     }
@@ -1774,6 +1844,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 資格取得前申請フラグ
      */
+    @CheckForNull
     public boolean getShikakuShutokuMaeShinseiFlag() {
         return shikakuShutokuMaeShinseiFlag;
     }
@@ -1796,6 +1867,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 旧措置者フラグ
      */
+    @CheckForNull
     public boolean getKyuSochishaFlag() {
         return kyuSochishaFlag;
     }
@@ -1818,6 +1890,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      *
      * @return 論理削除フラグ
      */
+    @CheckForNull
     public boolean getLogicalDeletedFlag() {
         return logicalDeletedFlag;
     }
@@ -1837,7 +1910,8 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * このエンティティの主キーが他の{@literal DbT4001JukyushaDaichoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT4001JukyushaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT4001JukyushaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT4001JukyushaDaichoEntity other) {
@@ -1854,9 +1928,6 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
             return false;
         }
         if (!Objects.equals(this.edaban, other.edaban)) {
-            return false;
-        }
-        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
             return false;
         }
         if (!Objects.equals(this.jukyuShinseiJiyu, other.jukyuShinseiJiyu)) {

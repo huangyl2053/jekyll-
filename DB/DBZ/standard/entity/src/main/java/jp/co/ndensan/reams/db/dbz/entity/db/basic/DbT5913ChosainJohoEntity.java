@@ -1,21 +1,19 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 調査員情報テーブルのエンティティクラスです。
@@ -37,9 +35,9 @@ public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJo
     @PrimaryKey
     private LasdecCode shichosonCode;
     @PrimaryKey
-    private ChosaItakusakiCode ninteiChosaItakusakiCode;
+    private RString ninteiChosaItakusakiCode;
     @PrimaryKey
-    private ChosainCode ninteiChosainCode;
+    private RString ninteiChosainCode;
     private RString chosainShimei;
     private RString chosainKanaShimei;
     private RString seibetsu;
@@ -123,7 +121,7 @@ public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJo
      *
      * @return 認定調査委託先コード
      */
-    public ChosaItakusakiCode getNinteiChosaItakusakiCode() {
+    public RString getNinteiChosaItakusakiCode() {
         return ninteiChosaItakusakiCode;
     }
 
@@ -134,7 +132,7 @@ public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJo
      *
      * @param ninteiChosaItakusakiCode 認定調査委託先コード
      */
-    public void setNinteiChosaItakusakiCode(@Nonnull ChosaItakusakiCode ninteiChosaItakusakiCode) {
+    public void setNinteiChosaItakusakiCode(@Nonnull RString ninteiChosaItakusakiCode) {
         this.ninteiChosaItakusakiCode = ninteiChosaItakusakiCode;
     }
 
@@ -143,7 +141,7 @@ public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJo
      *
      * @return 認定調査員コード
      */
-    public ChosainCode getNinteiChosainCode() {
+    public RString getNinteiChosainCode() {
         return ninteiChosainCode;
     }
 
@@ -152,7 +150,7 @@ public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJo
      *
      * @param ninteiChosainCode 認定調査員コード
      */
-    public void setNinteiChosainCode(@Nonnull ChosainCode ninteiChosainCode) {
+    public void setNinteiChosainCode(@Nonnull RString ninteiChosainCode) {
         this.ninteiChosainCode = ninteiChosainCode;
     }
 
@@ -401,7 +399,8 @@ public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJo
      * このエンティティの主キーが他の{@literal DbT5913ChosainJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT5913ChosainJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5913ChosainJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5913ChosainJohoEntity other) {
@@ -422,8 +421,6 @@ public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJo
 
     /**
      * {@inheritDoc}
-     *
-     * @param entity
      */
     @Override
     public void shallowCopy(DbT5913ChosainJohoEntity entity) {
@@ -454,4 +451,5 @@ public class DbT5913ChosainJohoEntity extends DbTableEntityBase<DbT5913ChosainJo
         return super.toMd5(shichosonCode, ninteiChosaItakusakiCode, ninteiChosainCode, chosainShimei, chosainKanaShimei, seibetsu, chosainShikaku, chikuCode, chosaKanoNinzuPerMonth, yubinNo, jusho, telNo, faxNo, shozokuKikanName, jokyoFlag);
     }
 
+// </editor-fold>
 }

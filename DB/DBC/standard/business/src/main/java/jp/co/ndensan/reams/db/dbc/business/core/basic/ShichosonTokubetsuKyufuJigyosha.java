@@ -24,10 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 市町村特別給付サービス事業者を管理するクラスです。
  */
-public class ShichosonTokubetsuKyufuJigyosha 
-extends ModelBase<ShichosonTokubetsuKyufuJigyoshaIdentifier, 
-        DbT3065ShichosonTokubetsuKyufuJigyoshaEntity,
-        ShichosonTokubetsuKyufuJigyosha> implements Serializable {
+public class ShichosonTokubetsuKyufuJigyosha
+        extends ModelBase<ShichosonTokubetsuKyufuJigyoshaIdentifier, DbT3065ShichosonTokubetsuKyufuJigyoshaEntity, ShichosonTokubetsuKyufuJigyosha> implements Serializable {
 
     private final DbT3065ShichosonTokubetsuKyufuJigyoshaEntity entity;
     private final ShichosonTokubetsuKyufuJigyoshaIdentifier id;
@@ -42,7 +40,7 @@ extends ModelBase<ShichosonTokubetsuKyufuJigyoshaIdentifier,
      */
     public ShichosonTokubetsuKyufuJigyosha(JigyoshaNo 市町村特別給付用事業者番号,
             ServiceCode 市町村特別給付用サービスコード,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(市町村特別給付用事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用事業者番号"));
         requireNonNull(市町村特別給付用サービスコード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用サービスコード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -61,8 +59,7 @@ extends ModelBase<ShichosonTokubetsuKyufuJigyoshaIdentifier,
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3065ShichosonTokubetsuKyufuJigyoshaEntity}より{@link ShichosonTokubetsuKyufuJigyosha}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3065ShichosonTokubetsuKyufuJigyoshaEntity}
+     * @param entity DBより取得した{@link DbT3065ShichosonTokubetsuKyufuJigyoshaEntity}
      */
     public ShichosonTokubetsuKyufuJigyosha(DbT3065ShichosonTokubetsuKyufuJigyoshaEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付サービス事業者"));
@@ -110,7 +107,7 @@ extends ModelBase<ShichosonTokubetsuKyufuJigyoshaIdentifier,
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -496,8 +493,7 @@ extends ModelBase<ShichosonTokubetsuKyufuJigyoshaIdentifier,
     /**
      * 市町村特別給付サービス事業者の識別子{@link ShichosonTokubetsuKyufuJigyoshaIdentifier}を返します。
      *
-     * @return
-     * 市町村特別給付サービス事業者の識別子{@link ShichosonTokubetsuKyufuJigyoshaIdentifier}
+     * @return 市町村特別給付サービス事業者の識別子{@link ShichosonTokubetsuKyufuJigyoshaIdentifier}
      */
     @Override
     public ShichosonTokubetsuKyufuJigyoshaIdentifier identifier() {

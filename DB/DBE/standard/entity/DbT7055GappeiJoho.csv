@@ -1,7 +1,0 @@
-﻿gappeiYMD,UDD015YMD,FlexibleDate,,,,,合併年月日,A
-chiikiNo,bpchar,RString,,,,,地域番号,A
-shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
-gappeiShurui,bpchar,RString,,,,,合併種類,A
-hokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,保険者番号,A
-kyuJohoFuyoToYMD,UDD015YMD,FlexibleDate,,,,,旧市町村情報付与終了年月日,A
-kokuhorenDataFromYMD,UDD015YMD,FlexibleDate,,,,,国保連データ連携開始年月日,A

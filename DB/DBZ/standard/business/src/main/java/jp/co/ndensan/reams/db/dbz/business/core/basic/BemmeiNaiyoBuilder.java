@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-//import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -40,17 +39,6 @@ public class BemmeiNaiyoBuilder {
 
 //TODO Key項目のsetterメソッドは削除してください。
 //TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 証記載保険者番号を設定します。
-     *
-     * @param 証記載保険者番号 証記載保険者番号
-     * @return {@link BemmeiNaiyoBuilder}
-     */
-//    public BemmeiNaiyoBuilder set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
-//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-//        entity.setShoKisaiHokenshaNo(証記載保険者番号);
-//        return this;
-//    }
 
     /**
      * 識別コードを設定します。
@@ -125,14 +113,14 @@ public class BemmeiNaiyoBuilder {
     }
 
     /**
-     * 弁明書提出日を設定します。
+     * 弁明書作成日提出日を設定します。
      *
-     * @param 弁明書提出日 弁明書提出日
+     * @param 弁明書作成日提出日 弁明書作成日提出日
      * @return {@link BemmeiNaiyoBuilder}
      */
-    public BemmeiNaiyoBuilder set弁明書提出日(FlexibleDate 弁明書提出日) {
-        requireNonNull(弁明書提出日, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明書提出日"));
-        entity.setBemmeishoTeishutsuYMD(弁明書提出日);
+    public BemmeiNaiyoBuilder set弁明書作成日提出日(FlexibleDate 弁明書作成日提出日) {
+        requireNonNull(弁明書作成日提出日, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明書作成日提出日"));
+        entity.setBemmeishoTeishutsuYMD(弁明書作成日提出日);
         return this;
     }
 

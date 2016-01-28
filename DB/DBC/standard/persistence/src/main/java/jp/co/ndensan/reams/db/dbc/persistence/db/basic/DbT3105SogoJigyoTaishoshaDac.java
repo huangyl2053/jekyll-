@@ -7,14 +7,13 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3105SogoJigyoTaishosha;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3105SogoJigyoTaishosha.*;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3105SogoJigyoTaishosha.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3105SogoJigyoTaishosha.rirekiNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -33,8 +32,6 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
     /**
      * 主キーで総合事業対象者を取得します。
      *
-// * @param 証記載保険者番号 ShoKisaiHokenshaNo
-     *
      * @param 被保険者番号 HihokenshaNo
      * @param 履歴番号 RirekiNo
      * @return DbT3105SogoJigyoTaishoshaEntity
@@ -42,10 +39,8 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
      */
     @Transaction
     public DbT3105SogoJigyoTaishoshaEntity selectByKey(
-            //            HokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
             int 履歴番号) throws NullPointerException {
-//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
@@ -54,7 +49,6 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
         return accessor.select().
                 table(DbT3105SogoJigyoTaishosha.class).
                 where(and(
-                                //                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(rirekiNo, 履歴番号))).
                 toObject(DbT3105SogoJigyoTaishoshaEntity.class);

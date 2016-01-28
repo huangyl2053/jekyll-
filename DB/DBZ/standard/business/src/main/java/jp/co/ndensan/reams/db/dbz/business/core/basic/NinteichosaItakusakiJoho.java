@@ -7,9 +7,8 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -39,12 +38,12 @@ public class NinteichosaItakusakiJoho extends
      * @param 認定調査委託先コード 認定調査委託先コード
      */
     public NinteichosaItakusakiJoho(LasdecCode 市町村コード,
-            ChosaItakusakiCode 認定調査委託先コード) {
+            RString 認定調査委託先コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
         this.entity = new DbT5910NinteichosaItakusakiJohoEntity();
         this.entity.setShichosonCode(市町村コード);
-        this.entity.setNinteichosaItakusakiCode(認定調査委託先コード);
+       // this.entity.setNinteichosaItakusakiCode(認定調査委託先コード);
         this.id = new NinteichosaItakusakiJohoIdentifier(
                 市町村コード,
                 認定調査委託先コード
@@ -93,7 +92,7 @@ public class NinteichosaItakusakiJoho extends
      *
      * @return 認定調査委託先コード
      */
-    public ChosaItakusakiCode get認定調査委託先コード() {
+    public RString get認定調査委託先コード() {
         return entity.getNinteichosaItakusakiCode();
     }
 
@@ -166,7 +165,7 @@ public class NinteichosaItakusakiJoho extends
      * @return 代表者名
      */
     public AtenaMeisho get代表者名() {
-        return entity.getDaihyoshaName();
+        return new AtenaMeisho(entity.getDaihyoshaName());
     }
 
     /**

@@ -236,7 +236,7 @@ public class ShujiiIkenshoJohoTest extends DbzTestBase {
 
         @Test
         public void getその他受診科名は_entityが持つその他受診科名を返す() {
-            assertThat(sut.getその他受診科名(), is(ShujiiIkenshoJohoEntity.getSonotaJushinKaShimei()));
+            assertThat(sut.getその他受診科名(), is(ShujiiIkenshoJohoEntity.getSonotaJushinKaMei()));
         }
 
         @Test

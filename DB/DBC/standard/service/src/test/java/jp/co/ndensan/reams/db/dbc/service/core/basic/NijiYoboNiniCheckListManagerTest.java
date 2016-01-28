@@ -9,23 +9,21 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.NijiYoboNiniCheckList;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3102NijiYoboNiniCheckListEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3102NijiYoboNiniCheckListEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3102NijiYoboNiniCheckListEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3102NijiYoboNiniCheckListDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import org.junit.Ignore;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -49,18 +47,17 @@ public class NijiYoboNiniCheckListManagerTest {
     public static class get二次予防任意チェックリスト extends DbcTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
-//        @Test(expected = NullPointerException.class)
-//        public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-//            HihokenshaNo 主キー2 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_被保険者番号;
-//            FlexibleDate 主キー3 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_受付年月日;
-//            int 主キー4 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_任意質問番号;
-//            int 主キー5 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_履歴番号;
-//            sut.get二次予防任意チェックリスト(null, 主キー2, 主キー3, 主キー4, 主キー5);
-//        }
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
+            HihokenshaNo 主キー2 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_被保険者番号;
+            FlexibleDate 主キー3 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_受付年月日;
+            int 主キー4 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_任意質問番号;
+            int 主キー5 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_履歴番号;
+            sut.get二次予防任意チェックリスト(主キー2, 主キー3, 主キー4, 主キー5);
+        }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-//            ShikibetsuCode 主キー1 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_識別コード;
             FlexibleDate 主キー3 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_受付年月日;
             int 主キー4 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_任意質問番号;
             int 主キー5 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_履歴番号;
@@ -69,36 +66,16 @@ public class NijiYoboNiniCheckListManagerTest {
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
-//            ShikibetsuCode 主キー1 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_識別コード;
             HihokenshaNo 主キー2 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_被保険者番号;
             int 主キー4 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_任意質問番号;
             int 主キー5 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_履歴番号;
             sut.get二次予防任意チェックリスト(主キー2, null, 主キー4, 主キー5);
         }
 
-//        @Test(expected = NullPointerException.class)
-//        public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
-//            ShikibetsuCode 主キー1 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_識別コード;
-//            HihokenshaNo 主キー2 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_被保険者番号;
-//            FlexibleDate 主キー3 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_受付年月日;
-//            int 主キー5 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_履歴番号;
-//            sut.get二次予防任意チェックリスト(主キー1, 主キー2, 主キー3, null, 主キー5);
-//        }
-//
-//        @Test(expected = NullPointerException.class)
-//        public void 引数の主キー型5にnullを指定した場合_NullPointerExceptionが発生する() {
-//            ShikibetsuCode 主キー1 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_識別コード;
-//            HihokenshaNo 主キー2 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_被保険者番号;
-//            FlexibleDate 主キー3 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_受付年月日;
-//            int 主キー4 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_任意質問番号;
-//            sut.get二次予防任意チェックリスト(主キー1, 主キー2, 主キー3, 主キー4, null);
-//        }
-
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleDate.class), any(int.class), any(int.class))).thenReturn(null);
-//            ShikibetsuCode 主キー1 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_識別コード;
             HihokenshaNo 主キー2 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_被保険者番号;
             FlexibleDate 主キー3 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_受付年月日;
             int 主キー4 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_任意質問番号;
@@ -112,14 +89,14 @@ public class NijiYoboNiniCheckListManagerTest {
         public void 検索結果が存在する場合() {
             DbT3102NijiYoboNiniCheckListEntity entity = DbT3102NijiYoboNiniCheckListEntityGenerator.createDbT3102NijiYoboNiniCheckListEntity();
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleDate.class), any(int.class), any(int.class))).thenReturn(entity);
-//            ShikibetsuCode 主キー1 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_識別コード;
+
             HihokenshaNo 主キー2 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_被保険者番号;
             FlexibleDate 主キー3 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_受付年月日;
             int 主キー4 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_任意質問番号;
             int 主キー5 = DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_履歴番号;
             NijiYoboNiniCheckList result = sut.get二次予防任意チェックリスト(主キー2, 主キー3, 主キー4, 主キー5);
 
-            assertThat(result.get被保険者番号().value(), is(DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get受付年月日(), is(DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_受付年月日));
         }
     }
 
@@ -143,7 +120,7 @@ public class NijiYoboNiniCheckListManagerTest {
             List<NijiYoboNiniCheckList> result = sut.get二次予防任意チェックリスト一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get被保険者番号().value(), is(DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get受付年月日(), is(DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_受付年月日));
         }
     }
 

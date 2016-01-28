@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiKekkaJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -200,7 +201,7 @@ public class NinteiKekkaJohoBuilder {
      */
     public NinteiKekkaJohoBuilder set二次判定結果入力年月日(FlexibleDate 二次判定結果入力年月日) {
         requireNonNull(二次判定結果入力年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("二次判定結果入力年月日"));
-        entity.setNijiHanteiKekkaInputYMD(二次判定結果入力年月日);
+        entity.setNijiHanteiYMD(二次判定結果入力年月日);
         return this;
     }
 

@@ -14,12 +14,19 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 /**
  * 広域構成市町村を識別するための値です。
  */
-public final class ShichosonShikibetsuID implements IValueObject<RString>, Comparable<ShichosonShikibetsuID>, IDbColumnMappable, Serializable {
+public final class ShichosonShikibetsuID implements
+        IValueObject<RString>, Comparable<ShichosonShikibetsuID>, IDbColumnMappable, Serializable {
 
+    private static final long serialVersionUID = -2703763889815383528L;
     /**
      * 空の ShichosonShikibetsuID です。
      */
     public static final ShichosonShikibetsuID EMPTY;
+    /**
+     * 広域保険者の ShichosonShikibetsuID です。
+     */
+    public static final ShichosonShikibetsuID KOIKI;
+
     /**
      * 最大長です。
      */
@@ -27,6 +34,7 @@ public final class ShichosonShikibetsuID implements IValueObject<RString>, Compa
 
     static {
         EMPTY = new ShichosonShikibetsuID(RString.EMPTY);
+        KOIKI = new ShichosonShikibetsuID("00");
         MAX_LENGTH = 2;
     }
 
@@ -94,5 +102,14 @@ public final class ShichosonShikibetsuID implements IValueObject<RString>, Compa
             return true;
         }
         return this.theValue.length() <= MAX_LENGTH;
+    }
+
+    /**
+     * 広域保険者の市町村識別IDである場合、{@code true}を返します。
+     *
+     * @return 広域保険者の市町村識別IDである場合、{@code true}
+     */
+    public boolean is広域s() {
+        return Objects.equals(this, KOIKI);
     }
 }

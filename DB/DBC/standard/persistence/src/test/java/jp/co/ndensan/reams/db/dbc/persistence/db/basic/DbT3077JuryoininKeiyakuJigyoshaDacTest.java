@@ -5,23 +5,21 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3077JuryoininKeiyakuJigyoshaEntityGenerator;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.*;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_契約事業者番号;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -46,47 +44,42 @@ public class DbT3077JuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_契約事業者番号,
-                    DEFAULT_開始年月日);
+                    DEFAULT_契約事業者番号);
             TestSupport.insert(
-                    DEFAULT_契約事業者番号,
-                    DEFAULT_開始年月日);
+                    DEFAULT_契約事業者番号);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 契約事業者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+        public void 事業者契約番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_契約事業者番号,
-                    DEFAULT_開始年月日);
+                    DEFAULT_契約事業者番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 開始年月日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_契約事業者番号,
-                    DEFAULT_開始年月日);
+                    DEFAULT_契約事業者番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 履歴番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_契約事業者番号,
-                    DEFAULT_開始年月日);
+                    DEFAULT_契約事業者番号);
         }
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT3077JuryoininKeiyakuJigyoshaEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_契約事業者番号,
-                    DEFAULT_開始年月日);
+                    DEFAULT_契約事業者番号
+            );
             assertThat(insertedRecord, is(notNullValue()));
         }
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT3077JuryoininKeiyakuJigyoshaEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_契約事業者番号,
-                    DEFAULT_開始年月日);
+                    DEFAULT_契約事業者番号
+            );
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -96,11 +89,11 @@ public class DbT3077JuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase {
         @Test
         public void 受領委任契約事業者が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    DEFAULT_契約事業者番号,
-                    DEFAULT_開始年月日);
+                    DEFAULT_契約事業者番号
+            );
             TestSupport.insert(
-                    DEFAULT_契約事業者番号,
-                    DEFAULT_開始年月日);
+                    DEFAULT_契約事業者番号
+            );
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -115,12 +108,12 @@ public class DbT3077JuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase {
         @Test
         public void 受領委任契約事業者エンティティを渡すと_insertは_受領委任契約事業者を追加する() {
             TestSupport.insert(
-                    DEFAULT_契約事業者番号,
-                    DEFAULT_開始年月日);
+                    DEFAULT_契約事業者番号
+            );
 
             assertThat(sut.selectByKey(
-                    DEFAULT_契約事業者番号,
-                    DEFAULT_開始年月日), is(notNullValue()));
+                    DEFAULT_契約事業者番号
+            ), is(notNullValue()));
         }
     }
 
@@ -129,22 +122,22 @@ public class DbT3077JuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_契約事業者番号,
-                    DEFAULT_開始年月日);
+                    DEFAULT_契約事業者番号
+            );
         }
 
         @Test
         public void 受領委任契約事業者エンティティを渡すと_updateは_受領委任契約事業者を更新する() {
             DbT3077JuryoininKeiyakuJigyoshaEntity updateRecord = sut.selectByKey(
-                    DEFAULT_契約事業者番号,
-                    DEFAULT_開始年月日);
+                    DEFAULT_契約事業者番号
+            );
             updateRecord.setSofusakiBusho(new RString("test1"));
 
             sut.save(updateRecord);
 
             DbT3077JuryoininKeiyakuJigyoshaEntity updatedRecord = sut.selectByKey(
-                    DEFAULT_契約事業者番号,
-                    DEFAULT_開始年月日);
+                    DEFAULT_契約事業者番号
+            );
 
             assertThat(updateRecord.getSofusakiBusho(), is(updatedRecord.getSofusakiBusho()));
         }
@@ -155,33 +148,31 @@ public class DbT3077JuryoininKeiyakuJigyoshaDacTest extends DbcTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_契約事業者番号,
-                    DEFAULT_開始年月日);
+                    DEFAULT_契約事業者番号
+            );
         }
 
         @Test
         public void 受領委任契約事業者エンティティを渡すと_deleteは_受領委任契約事業者を削除する() {
             DbT3077JuryoininKeiyakuJigyoshaEntity deletedEntity = sut.selectByKey(
-                    DEFAULT_契約事業者番号,
-                    DEFAULT_開始年月日);
+                    DEFAULT_契約事業者番号
+            );
             deletedEntity.setState(EntityDataState.Deleted);
 
             sut.save(deletedEntity);
 
             assertThat(sut.selectByKey(
-                    DEFAULT_契約事業者番号,
-                    DEFAULT_開始年月日), is(nullValue()));
+                    DEFAULT_契約事業者番号
+            ), is(nullValue()));
         }
     }
 
     private static class TestSupport {
 
         public static void insert(
-                RString 契約事業者番号,
-                FlexibleDate 開始年月日) {
+                RString 事業者契約番号) {
             DbT3077JuryoininKeiyakuJigyoshaEntity entity = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.createDbT3077JuryoininKeiyakuJigyoshaEntity();
-            entity.setKeiyakuJigyoshaNo(契約事業者番号);
-            entity.setKaishiYMD(開始年月日);
+            entity.setKeiyakuJigyoshaNo(事業者契約番号);
             sut.save(entity);
         }
     }

@@ -9,22 +9,19 @@ import java.io.Serializable;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3101NijiYoboKihonCheckListEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-//import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 二次予防基本チェックリストを管理するクラスです。
  */
-public class NijiYoboKihonCheckList 
-extends ModelBase<NijiYoboKihonCheckListIdentifier, 
-        DbT3101NijiYoboKihonCheckListEntity, 
-        NijiYoboKihonCheckList> implements Serializable {
+public class NijiYoboKihonCheckList
+        extends ModelBase<NijiYoboKihonCheckListIdentifier, DbT3101NijiYoboKihonCheckListEntity, NijiYoboKihonCheckList> implements Serializable {
 
     private final DbT3101NijiYoboKihonCheckListEntity entity;
     private final NijiYoboKihonCheckListIdentifier id;
@@ -33,28 +30,22 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      * コンストラクタです。<br/>
      * 二次予防基本チェックリストの新規作成時に使用します。
      *
-// * @param 識別コード 識別コード
-     *
      * @param 被保険者番号 被保険者番号
      * @param 受付年月日 受付年月日
      * @param 履歴番号 履歴番号
      */
     public NijiYoboKihonCheckList(
-            //            hikibetsuCode 識別コード,
             HihokenshaNo 被保険者番号,
             FlexibleDate 受付年月日,
             int 履歴番号) {
-//        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3101NijiYoboKihonCheckListEntity();
-//        this.entity.setShikibetsuCode(識別コード);
         this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setUketsukeYMD(受付年月日);
         this.entity.setRirekiNo(履歴番号);
         this.id = new NijiYoboKihonCheckListIdentifier(
-                //                識別コード,
                 被保険者番号,
                 受付年月日,
                 履歴番号
@@ -70,7 +61,6 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
     public NijiYoboKihonCheckList(DbT3101NijiYoboKihonCheckListEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("二次予防基本チェックリスト"));
         this.id = new NijiYoboKihonCheckListIdentifier(
-                //                entity.getShikibetsuCode(),
                 entity.getHihokenshaNo(),
                 entity.getUketsukeYMD(),
                 entity.getRirekiNo());
@@ -91,15 +81,6 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
     }
 
 //TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
-    /**
-     * 識別コードを返します。
-     *
-     * @return 識別コード
-     */
-//    public ShikibetsuCode get識別コード() {
-//        return entity.getShikibetsuCode();
-//    }
-
     /**
      * 被保険者番号を返します。
      *

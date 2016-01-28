@@ -11,13 +11,18 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMa
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMaster.shichosonShokibetsuID;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7055GappeiJoho.shichosonCode;
+import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -64,7 +69,7 @@ public class DbT7051KoseiShichosonMasterDac {
                 table(DbT7051KoseiShichosonMaster.class).
                 where(
                         and(eq(DbT7051KoseiShichosonMaster.shichosonShokibetsuID, shichosonShokibetsuID),
-                            eq(DbT7051KoseiShichosonMaster.isDeleted, false))).
+                                eq(DbT7051KoseiShichosonMaster.isDeleted, false))).
                 toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 
@@ -97,7 +102,7 @@ public class DbT7051KoseiShichosonMasterDac {
         return accessor.select().
                 table(DbT7051KoseiShichosonMaster.class).
                 where(and(eq(DbT7051KoseiShichosonMaster.gappeiKyuShichosonKubun, new RString("1")),
-                          eq(substr(DbT7051KoseiShichosonMaster.gappeiChiikiNo, 1, 1), 地域番号.substring(0, 1)))).
+                                eq(substr(DbT7051KoseiShichosonMaster.gappeiChiikiNo, 1, 1), 地域番号.substring(0, 1)))).
                 order(by(DbT7051KoseiShichosonMaster.gappeiChiikiNo, Order.DESC)).
                 toList(DbT7051KoseiShichosonMasterEntity.class);
     }
@@ -206,9 +211,9 @@ public class DbT7051KoseiShichosonMasterDac {
                 where(or(
                                 eq(shichosonCode, "00"), //TODO 定数を使う（業務内で一つに定義すること）。
                                 (and(
-                                 eq(shichosonShokibetsuID, 識別ID),
-                                 eq(gappeiKyuShichosonKubun, "0") //TODO enumを使う。
-                                 )))).
+                                        eq(shichosonShokibetsuID, 識別ID),
+                                        eq(gappeiKyuShichosonKubun, "0") //TODO enumを使う。
+                                )))).
                 toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 
@@ -224,4 +229,18 @@ public class DbT7051KoseiShichosonMasterDac {
 
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 旧市町村コード情報Listを取得する。
+     *
+     * @param 地域番号の一桁目 地域番号の一桁目
+     * @return 旧市町村コード情報List
+     */
+    @Transaction
+    public List<DbT7051KoseiShichosonMasterEntity> getKouikiKyuShichosonCodeJohoList(RString 地域番号の一桁目) {
+        requireNonNull(地域番号の一桁目, UrSystemErrorMessages.値がnull.getReplacedMessage("地域番号の一桁目"));
+        IDbT7051KoseiShichosonMasterMapper mapper = session.getMapper(IDbT7051KoseiShichosonMasterMapper.class);
+        return mapper.getKouikiKyuShichosonCodeJohoList(地域番号の一桁目);
+    }
+
 }

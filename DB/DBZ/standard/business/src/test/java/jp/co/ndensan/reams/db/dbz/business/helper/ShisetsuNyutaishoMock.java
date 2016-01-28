@@ -35,7 +35,7 @@ public class ShisetsuNyutaishoMock {
         return new ShisetsuNyutaisho(
                 new LasdecCode(new RString("123456")),
                 new ShikibetsuCode(new RString("1234567890")),
-                new Decimal(1),
+                1,
                 //                RDateTime.of(2014, 1, 10, 11, 12),
                 DaichoType.他市町村住所地特例者,
                 create期間(),

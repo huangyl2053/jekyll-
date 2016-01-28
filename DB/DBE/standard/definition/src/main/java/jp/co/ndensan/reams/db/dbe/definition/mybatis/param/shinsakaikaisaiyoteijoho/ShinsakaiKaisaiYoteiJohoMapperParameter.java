@@ -26,7 +26,7 @@ public class ShinsakaiKaisaiYoteiJohoMapperParameter {
     private ShinsakaiKaisaiYoteiJohoMapperParameter(RString shinsakaiKaisaiNo) {
 
         this.shinsakaiKaisaiNo
-                = requireNonNull(shinsakaiKaisaiNo, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員コード"));
+                = requireNonNull(shinsakaiKaisaiNo, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
     }
 
     /**

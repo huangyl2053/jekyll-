@@ -8,17 +8,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.chosaitakusaki
 import jp.co.ndensan.reams.db.dbz.business.core.HokenshaChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HokenshaNinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.IChosainJoho;
-//import jp.co.ndensan.reams.db.dbz.business.core.INinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.INinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.IShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShinsakaiChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShinsakaiNinteichosaItakusakiJoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-//import jp.co.ndensan.reams.db.dbz.business.koseishichosonmaster.IKoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-//import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-//import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -104,7 +99,7 @@ public class ChosaItakusakiAndChosainInputHandler {
 //        }
     }
 
-//    private void createZenkaiJoho(Optional<IShinseiRirekiJoho> shinseiRirekiJoho) {
+    private void createZenkaiJoho(Optional<IShinseiRirekiJoho> shinseiRirekiJoho) {
         //②－1
         //履歴申請情報から前回申請管理番号をもとに、③介護認定申請情報から申請書管理番号を比較して認定調査委託コード・認定調査委託員コード・証記載保険者番号を取得します。
         //その証記載保険者番号と④構成市町村マスタの保険者番号と比較して市町村コードを取得します。
@@ -121,14 +116,14 @@ public class ChosaItakusakiAndChosainInputHandler {
 //                = chosaInmanager.find調査員情報(koseiShichosonMaster.get().get市町村コード(), ninteiShinseiJoho.get().get認定調査委託先コード(),
 //                        ninteiShinseiJoho.get().get認定調査員コード());
 //        setZenkaiJoho(chosaItakusakiJoho, chosainJoho);
-//    }
+    }
 
-//    private void setZenkaiJoho(Optional<INinteichosaItakusakiJoho> chosaItakusakiJoho, Optional<IChosainJoho> chosainJoho) {
-//        div.getTxtChosaItakusakiCode().setValue(chosaItakusakiJoho.get().get認定調査委託先コード().value());
-//        div.getTxtChosaItakusakiName().setValue(chosaItakusakiJoho.get().get事業者名称());
-//        div.getTxtChosainCode().setValue(chosainJoho.get().get認定調査員コード().value());
-//        div.getTxtChosainName().setValue(chosainJoho.get().get調査員氏名());
-//    }
+    private void setZenkaiJoho(Optional<INinteichosaItakusakiJoho> chosaItakusakiJoho, Optional<IChosainJoho> chosainJoho) {
+       // div.getTxtChosaItakusakiCode().setValue(chosaItakusakiJoho.get().get認定調査委託先コード().value());
+        div.getTxtChosaItakusakiName().setValue(chosaItakusakiJoho.get().get事業者名称());
+        div.getTxtChosainCode().setValue(chosainJoho.get().get認定調査員コード());
+        div.getTxtChosainName().setValue(chosainJoho.get().get調査員氏名());
+    }
 
     private void createZenkaiJohoManager() {
 //        shinseiRirekiManager = ShinseiRirekiFactory.getInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
@@ -162,8 +157,8 @@ public class ChosaItakusakiAndChosainInputHandler {
         //調査員を更新します。
 //        chosaInmanager = ChosainFactory.getInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
         IChosainJoho.Builder chosainJohoBuilder = setchosaInJoho();
-        chosainJohoBuilder.setNinteichosaItakusakiCode(new ChosaItakusakiCode(div.getTxtChosaItakusakiCode().getValue()));
-        chosainJohoBuilder.setNinteiChosainNo(new ChosainCode(div.getTxtChosainCode().getValue()));
+        chosainJohoBuilder.setNinteichosaItakusakiCode(div.getTxtChosaItakusakiCode().getValue());
+        chosainJohoBuilder.setNinteiChosainCode(div.getTxtChosainCode().getValue());
         chosainJohoBuilder.setChosainShimei(div.getTxtChosainName().getValue());
         chosainJohoBuilder.setShichosonCode(new LasdecCode(div.getHdnShichosonCode()));
         //TODO 性別 DBZ.KaigoNinteiShinseihaから取得します。

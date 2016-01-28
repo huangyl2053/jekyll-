@@ -4,31 +4,31 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2008ShotokuKanriDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuKanriEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuKanriEntityGenerator.*;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuKanriEntityGenerator.DEFAULT_履歴番号;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuKanriEntityGenerator.DEFAULT_所得年度;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuKanriEntityGenerator.DEFAULT_識別コード;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * {@link DbT2008ShotokuKanriDac}のテストです。
+ * {@link DbT2008ShotokuDac}のテストです。
  */
 @Ignore
 @RunWith(Enclosed.class)
@@ -153,7 +153,7 @@ public class DbT2008ShotokuDacTest extends DbzTestDacBase {
                     DEFAULT_所得年度,
                     DEFAULT_識別コード,
                     DEFAULT_履歴番号);
-            updateRecord.setKazeiKubun(new RString("2"));
+            updateRecord.setGekihenKanwaKubun(new RString("2"));
 
             sut.save(updateRecord);
 
@@ -162,7 +162,7 @@ public class DbT2008ShotokuDacTest extends DbzTestDacBase {
                     DEFAULT_識別コード,
                     DEFAULT_履歴番号);
 
-            assertThat(updateRecord.getKazeiKubun(), is(updatedRecord.getKazeiKubun()));
+            assertThat(updateRecord.getGekihenKanwaKubun(), is(updatedRecord.getGekihenKanwaKubun()));
         }
     }
 

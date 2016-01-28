@@ -2,11 +2,8 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuSoshitsuJiyu;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -23,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  * <br/> 介護保険被保険者の資格を管理する
  */
 public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001HihokenshaDaichoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1001HihokenshaDaicho");
@@ -43,24 +40,23 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
     @PrimaryKey
     private RString edaNo;
     private RString idoJiyuCode;
-    @PrimaryKey
     private LasdecCode shichosonCode;
     private ShikibetsuCode shikibetsuCode;
-    private KaigoShikakuShutokuJiyu shikakuShutokuJiyuCode;
+    private RString shikakuShutokuJiyuCode;
     private FlexibleDate shikakuShutokuYMD;
     private FlexibleDate shikakuShutokuTodokedeYMD;
     private FlexibleDate ichigoShikakuShutokuYMD;
     private RString hihokennshaKubunCode;
-    private KaigoShikakuSoshitsuJiyu shikakuSoshitsuJiyuCode;
+    private RString shikakuSoshitsuJiyuCode;
     private FlexibleDate shikakuSoshitsuYMD;
     private FlexibleDate shikakuSoshitsuTodokedeYMD;
-    private KaigoShikakuHenkoJiyu shikakuHenkoJiyuCode;
+    private RString shikakuHenkoJiyuCode;
     private FlexibleDate shikakuHenkoYMD;
     private FlexibleDate shikakuHenkoTodokedeYMD;
-    private KaigoShikakuJutokuTekiyoJiyu jushochitokureiTekiyoJiyuCode;
+    private RString jushochitokureiTekiyoJiyuCode;
     private FlexibleDate jushochitokureiTekiyoYMD;
     private FlexibleDate jushochitokureiTekiyoTodokedeYMD;
-    private KaigoShikakuJutokuKaijoJiyu jushochitokureiKaijoJiyuCode;
+    private RString jushochitokureiKaijoJiyuCode;
     private FlexibleDate jushochitokureiKaijoYMD;
     private FlexibleDate jushochitokureiKaijoTodokedeYMD;
     private RString jushochiTokureiFlag;
@@ -106,24 +102,6 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
     }
 
     /**
-     * lastUpdateTimestampのgetメソッドです。
-     *
-     * @return lastUpdateTimestamp
-     */
-    public RDateTime getLastUpdateTimestamp() {
-        return lastUpdateTimestamp;
-    }
-
-    /**
-     * lastUpdateTimestampのsetメソッドです。
-     *
-     * @param lastUpdateTimestamp lastUpdateTimestamp
-     */
-    public void setLastUpdateTimestamp(RDateTime lastUpdateTimestamp) {
-        this.lastUpdateTimestamp = lastUpdateTimestamp;
-    }
-
-    /**
      * lastUpdateReamsLoginIdのsetメソッドです。
      *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
@@ -146,7 +124,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -164,7 +142,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param idoYMD 異動日
      */
-    public void setIdoYMD(FlexibleDate idoYMD) {
+    public void setIdoYMD(@Nonnull FlexibleDate idoYMD) {
         this.idoYMD = idoYMD;
     }
 
@@ -182,7 +160,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param edaNo 枝番
      */
-    public void setEdaNo(RString edaNo) {
+    public void setEdaNo(@Nonnull RString edaNo) {
         this.edaNo = edaNo;
     }
 
@@ -200,7 +178,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param idoJiyuCode 異動事由コード
      */
-    public void setIdoJiyuCode(RString idoJiyuCode) {
+    public void setIdoJiyuCode(@Nonnull RString idoJiyuCode) {
         this.idoJiyuCode = idoJiyuCode;
     }
 
@@ -218,7 +196,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(LasdecCode shichosonCode) {
+    public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
@@ -236,7 +214,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param shikibetsuCode 識別コード
      */
-    public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
+    public void setShikibetsuCode(@Nonnull ShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
     }
 
@@ -245,7 +223,8 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 資格取得事由コード
      */
-    public KaigoShikakuShutokuJiyu getShikakuShutokuJiyuCode() {
+    @CheckForNull
+    public RString getShikakuShutokuJiyuCode() {
         return shikakuShutokuJiyuCode;
     }
 
@@ -254,7 +233,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param shikakuShutokuJiyuCode 資格取得事由コード
      */
-    public void setShikakuShutokuJiyuCode(KaigoShikakuShutokuJiyu shikakuShutokuJiyuCode) {
+    public void setShikakuShutokuJiyuCode(RString shikakuShutokuJiyuCode) {
         this.shikakuShutokuJiyuCode = shikakuShutokuJiyuCode;
     }
 
@@ -263,6 +242,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 資格取得年月日
      */
+    @CheckForNull
     public FlexibleDate getShikakuShutokuYMD() {
         return shikakuShutokuYMD;
     }
@@ -281,6 +261,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 資格取得届出年月日
      */
+    @CheckForNull
     public FlexibleDate getShikakuShutokuTodokedeYMD() {
         return shikakuShutokuTodokedeYMD;
     }
@@ -299,6 +280,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 第1号資格取得年月日
      */
+    @CheckForNull
     public FlexibleDate getIchigoShikakuShutokuYMD() {
         return ichigoShikakuShutokuYMD;
     }
@@ -330,7 +312,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param hihokennshaKubunCode 被保険者区分コード
      */
-    public void setHihokennshaKubunCode(RString hihokennshaKubunCode) {
+    public void setHihokennshaKubunCode(@Nonnull RString hihokennshaKubunCode) {
         this.hihokennshaKubunCode = hihokennshaKubunCode;
     }
 
@@ -339,7 +321,8 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 資格喪失事由コード
      */
-    public KaigoShikakuSoshitsuJiyu getShikakuSoshitsuJiyuCode() {
+    @CheckForNull
+    public RString getShikakuSoshitsuJiyuCode() {
         return shikakuSoshitsuJiyuCode;
     }
 
@@ -348,7 +331,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param shikakuSoshitsuJiyuCode 資格喪失事由コード
      */
-    public void setShikakuSoshitsuJiyuCode(KaigoShikakuSoshitsuJiyu shikakuSoshitsuJiyuCode) {
+    public void setShikakuSoshitsuJiyuCode(RString shikakuSoshitsuJiyuCode) {
         this.shikakuSoshitsuJiyuCode = shikakuSoshitsuJiyuCode;
     }
 
@@ -357,6 +340,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 資格喪失年月日
      */
+    @CheckForNull
     public FlexibleDate getShikakuSoshitsuYMD() {
         return shikakuSoshitsuYMD;
     }
@@ -375,6 +359,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 資格喪失届出年月日
      */
+    @CheckForNull
     public FlexibleDate getShikakuSoshitsuTodokedeYMD() {
         return shikakuSoshitsuTodokedeYMD;
     }
@@ -393,7 +378,8 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 資格変更事由コード
      */
-    public KaigoShikakuHenkoJiyu getShikakuHenkoJiyuCode() {
+    @CheckForNull
+    public RString getShikakuHenkoJiyuCode() {
         return shikakuHenkoJiyuCode;
     }
 
@@ -402,7 +388,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param shikakuHenkoJiyuCode 資格変更事由コード
      */
-    public void setShikakuHenkoJiyuCode(KaigoShikakuHenkoJiyu shikakuHenkoJiyuCode) {
+    public void setShikakuHenkoJiyuCode(RString shikakuHenkoJiyuCode) {
         this.shikakuHenkoJiyuCode = shikakuHenkoJiyuCode;
     }
 
@@ -411,6 +397,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 資格変更年月日
      */
+    @CheckForNull
     public FlexibleDate getShikakuHenkoYMD() {
         return shikakuHenkoYMD;
     }
@@ -429,6 +416,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 資格変更届出年月日
      */
+    @CheckForNull
     public FlexibleDate getShikakuHenkoTodokedeYMD() {
         return shikakuHenkoTodokedeYMD;
     }
@@ -447,7 +435,8 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 住所地特例適用事由コード
      */
-    public KaigoShikakuJutokuTekiyoJiyu getJushochitokureiTekiyoJiyuCode() {
+    @CheckForNull
+    public RString getJushochitokureiTekiyoJiyuCode() {
         return jushochitokureiTekiyoJiyuCode;
     }
 
@@ -456,7 +445,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param jushochitokureiTekiyoJiyuCode 住所地特例適用事由コード
      */
-    public void setJushochitokureiTekiyoJiyuCode(KaigoShikakuJutokuTekiyoJiyu jushochitokureiTekiyoJiyuCode) {
+    public void setJushochitokureiTekiyoJiyuCode(RString jushochitokureiTekiyoJiyuCode) {
         this.jushochitokureiTekiyoJiyuCode = jushochitokureiTekiyoJiyuCode;
     }
 
@@ -465,6 +454,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 適用年月日
      */
+    @CheckForNull
     public FlexibleDate getJushochitokureiTekiyoYMD() {
         return jushochitokureiTekiyoYMD;
     }
@@ -483,6 +473,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 適用届出年月日
      */
+    @CheckForNull
     public FlexibleDate getJushochitokureiTekiyoTodokedeYMD() {
         return jushochitokureiTekiyoTodokedeYMD;
     }
@@ -501,7 +492,8 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 住所地特例解除事由コード
      */
-    public KaigoShikakuJutokuKaijoJiyu getJushochitokureiKaijoJiyuCode() {
+    @CheckForNull
+    public RString getJushochitokureiKaijoJiyuCode() {
         return jushochitokureiKaijoJiyuCode;
     }
 
@@ -510,7 +502,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param jushochitokureiKaijoJiyuCode 住所地特例解除事由コード
      */
-    public void setJushochitokureiKaijoJiyuCode(KaigoShikakuJutokuKaijoJiyu jushochitokureiKaijoJiyuCode) {
+    public void setJushochitokureiKaijoJiyuCode(RString jushochitokureiKaijoJiyuCode) {
         this.jushochitokureiKaijoJiyuCode = jushochitokureiKaijoJiyuCode;
     }
 
@@ -519,6 +511,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 解除年月日
      */
+    @CheckForNull
     public FlexibleDate getJushochitokureiKaijoYMD() {
         return jushochitokureiKaijoYMD;
     }
@@ -537,6 +530,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 解除届出年月日
      */
+    @CheckForNull
     public FlexibleDate getJushochitokureiKaijoTodokedeYMD() {
         return jushochitokureiKaijoTodokedeYMD;
     }
@@ -555,6 +549,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 住所地特例フラグ
      */
+    @CheckForNull
     public RString getJushochiTokureiFlag() {
         return jushochiTokureiFlag;
     }
@@ -573,6 +568,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 広域内住所地特例フラグ
      */
+    @CheckForNull
     public RString getKoikinaiJushochiTokureiFlag() {
         return koikinaiJushochiTokureiFlag;
     }
@@ -591,6 +587,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 広住特措置元市町村コード
      */
+    @CheckForNull
     public LasdecCode getKoikinaiTokureiSochimotoShichosonCode() {
         return koikinaiTokureiSochimotoShichosonCode;
     }
@@ -611,6 +608,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 旧市町村コード
      */
+    @CheckForNull
     public LasdecCode getKyuShichosonCode() {
         return kyuShichosonCode;
     }
@@ -631,6 +629,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return 論理削除フラグ
      */
+    @CheckForNull
     public boolean getLogicalDeletedFlag() {
         return logicalDeletedFlag;
     }
@@ -648,7 +647,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      * このエンティティの主キーが他の{@literal DbT1001HihokenshaDaichoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT1001HihokenshaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT1001HihokenshaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT1001HihokenshaDaichoEntity other) {
@@ -662,9 +661,6 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
             return false;
         }
         if (!Objects.equals(this.edaNo, other.edaNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
             return false;
         }
         return true;
@@ -716,4 +712,18 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
     }
 
 // </editor-fold>
+
+    /**
+     * @return the lastUpdateTimestamp
+     */
+    public RDateTime getLastUpdateTimestamp() {
+        return lastUpdateTimestamp;
+    }
+
+    /**
+     * @param lastUpdateTimestamp the lastUpdateTimestamp to set
+     */
+    public void setLastUpdateTimestamp(RDateTime lastUpdateTimestamp) {
+        this.lastUpdateTimestamp = lastUpdateTimestamp;
+    }
 }

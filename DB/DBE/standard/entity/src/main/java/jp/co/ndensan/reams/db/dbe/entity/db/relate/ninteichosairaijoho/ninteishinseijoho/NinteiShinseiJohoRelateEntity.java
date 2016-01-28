@@ -47,8 +47,7 @@ public class NinteiShinseiJohoRelateEntity implements Cloneable, Serializable {
     /**
      * MyBatisで取得された場合に使用して下さい。<br/>
      * MyBatisで当クラス取得時は、新規追加(Added)となるため、変更無し(Unchanged)に設定します。<br/>
-     * NinteiShinseiJohoRelateEntityが持つ{@link DbT5201NinteichosaIraiJohoEntity}と<br/>
-     * {@link DbT5101NinteiShinseiJohoEntity}のMD5値を計算し、設定します。
+     * NinteiShinseiJohoRelateEntityが持つ{@link DbT5201NinteichosaIraiJohoEntity}と<br/> {@link DbT5101NinteiShinseiJohoEntity}のMD5値を計算し、設定します。
      */
     public void initializeMd5ToEntities() {
         this.要介護認定申請情報Entity.initializeMd5();

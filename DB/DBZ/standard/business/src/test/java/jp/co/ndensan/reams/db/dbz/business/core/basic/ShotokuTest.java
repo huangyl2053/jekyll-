@@ -6,12 +6,11 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.business.core.Shotoku;
 import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuKanriEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -68,10 +67,10 @@ public class ShotokuTest extends DbzTestBase {
             sut = new Shotoku(所得年度, null, 履歴番号);
         }
 
-//        @Test(expected = NullPointerException.class)
-//        public void 履歴番号がnullである場合に_NullPointerExceptionが発生する() {
-//            sut = new Shotoku(所得年度, 識別コード, null);
-//        }
+        @Test(expected = NullPointerException.class)
+        public void 履歴番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new Shotoku(所得年度, 識別コード, 1);
+        }
 
         @Test
         public void 指定したキーが保持するDbT2008ShotokuKanriEntityにセットされている() {
@@ -149,12 +148,12 @@ public class ShotokuTest extends DbzTestBase {
 
         @Test
         public void get非課税区分_住民税減免前はentityが持つ非課税区分_住民税減免前を返す() {
-            assertThat(sut.get課税区分_住民税減免前(), is(ShotokuEntity.getKazeiKubun()));
+            assertThat(sut.get非課税区分_住民税減免前(), is(ShotokuEntity.getKazeiKubun()));
         }
 
         @Test
         public void get非課税区分_住民税減免後は_entityが持つ非課税区分_住民税減免後を返す() {
-            assertThat(sut.get課税区分_住民税減免後(), is(ShotokuEntity.getKazeiKubunGemmenGo()));
+            assertThat(sut.get非課税区分_住民税減免後(), is(ShotokuEntity.getKazeiKubunGemmenGo()));
         }
 
         @Test

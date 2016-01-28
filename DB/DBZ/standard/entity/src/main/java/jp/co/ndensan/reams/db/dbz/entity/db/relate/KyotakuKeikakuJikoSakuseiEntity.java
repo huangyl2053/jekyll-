@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbz.entity.db.relate;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011YoboKeikakuJikoSakuseiMeisaiEntity;
 
 /**
  * 居宅給付計画自己作成RelateEntityクラスです。
@@ -44,7 +44,7 @@ public class KyotakuKeikakuJikoSakuseiEntity implements Cloneable, Serializable 
      *
      * @param 予防給付計画自己作成明細EntityList 予防給付計画自己作成明細EntityList
      */
-    private List<DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity> 予防給付計画自己作成明細Entity;
+    private List<DbT3011YoboKeikakuJikoSakuseiMeisaiEntity> 予防給付計画自己作成明細Entity;
 
     /**
      * コンストラクタです。
@@ -66,7 +66,7 @@ public class KyotakuKeikakuJikoSakuseiEntity implements Cloneable, Serializable 
         for (DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity entity : this.居宅給付計画自己作成明細Entity) {
             entity.initializeMd5();
         }
-        for (DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity : this.予防給付計画自己作成明細Entity) {
+        for (DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity : this.予防給付計画自己作成明細Entity) {
             entity.initializeMd5();
         }
     }

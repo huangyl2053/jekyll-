@@ -21,7 +21,6 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7055GappeiJoho");
-    private static final long serialVersionUID = 8791282629734452216L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;

@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.entity.db.basic.helper;
 
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7062KaigoJigyoshaDaihyoshaEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class DbT7062KaigoJigyoshaDaihyoshaEntityGenerator {
 
     public static final KaigoJigyoshaNo DEFAULT_事業者番号 = new KaigoJigyoshaNo("0123400001");
-    public static final FlexibleDate DEFAULT_有効開始日 = new FlexibleDate("19900101");
+    public static final FlexibleDate DEFAULT_有効開始日 = new FlexibleDate("20141216");
     public static final AtenaMeisho DEFAULT_代表者名 = new AtenaMeisho("");
     public static final AtenaKanaMeisho DEFAULT_代表者名カナ = new AtenaKanaMeisho("");
     public static final YubinNo DEFAULT_代表者郵便番号 = new YubinNo("0010001");

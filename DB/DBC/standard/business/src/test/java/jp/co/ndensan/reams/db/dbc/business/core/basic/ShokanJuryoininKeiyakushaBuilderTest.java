@@ -4,13 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakushaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3078ShokanJuryoininKeiyakushaEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakushaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -29,17 +28,17 @@ public class ShokanJuryoininKeiyakushaBuilderTest extends DbcTestBase {
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static HihokenshaNo 主キー名1;
-//    private static ShoKisaiHokenshaNo 主キー名2;
-    private static FlexibleDate 主キー名3;
-//    private static Decimal 主キー名4;
+    private static FlexibleDate 主キー名2;
+    private static RString 主キー名3;
+    private static RString 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
         主キー名1 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_被保険者番号;
-//        主キー名2 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_証記載保険者番号;
-        主キー名3 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_受付年月日;
-//        主キー名4 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_履歴番号;
+        主キー名2 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_申請年月日;
+        主キー名3 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_契約事業者番号;
+        主キー名4 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_契約サービス種類;
     }
 
     public static class getterSetterTest extends DbcTestBase {
@@ -51,7 +50,9 @@ public class ShokanJuryoininKeiyakushaBuilderTest extends DbcTestBase {
         public void setUp() {
             ShokanJuryoininKeiyakushaEntity = new DbT3078ShokanJuryoininKeiyakushaEntity();
             ShokanJuryoininKeiyakushaEntity.setHihokenshaNo(主キー名1);
-//            ShokanJuryoininKeiyakushaEntity.setShoKisaiHokenshaNo(主キー名2);
+            ShokanJuryoininKeiyakushaEntity.setShinseiYMD(主キー名2);
+            ShokanJuryoininKeiyakushaEntity.setKeiyakuJigyoshaNo(主キー名3);
+            ShokanJuryoininKeiyakushaEntity.setKeiyakuServiceShurui(主キー名4);
 
             business = new ShokanJuryoininKeiyakusha(ShokanJuryoininKeiyakushaEntity);
 
@@ -65,23 +66,11 @@ public class ShokanJuryoininKeiyakushaBuilderTest extends DbcTestBase {
             assertThat(business.get被保険者番号(), is(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_被保険者番号));
         }
 
-//        @Test
-//        public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
-//            business = sut.set証記載保険者番号(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_証記載保険者番号).build();
-//            assertThat(business.get証記載保険者番号(), is(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_証記載保険者番号));
-//        }
-
         @Test
         public void 戻り値の受付年月日は_設定した値と同じ受付年月日を返す() {
             business = sut.set受付年月日(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_受付年月日).build();
             assertThat(business.get受付年月日(), is(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_受付年月日));
         }
-
-//        @Test
-//        public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
-//            business = sut.set履歴番号(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_履歴番号).build();
-//            assertThat(business.get履歴番号(), is(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_履歴番号));
-//        }
 
         @Test
         public void 戻り値の申請年月日は_設定した値と同じ申請年月日を返す() {

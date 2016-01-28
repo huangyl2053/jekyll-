@@ -5,10 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -28,7 +26,7 @@ public interface INinteichosaItakusakiJoho {
      *
      * @return 認定調査委託先エンティティの情報
      */
-    INinteichosaItakusakiJohoEntity getEntity();
+    //INinteichosaItakusakiJohoEntity getEntity();
 
     /**
      * 市町村コードを返します。
@@ -37,12 +35,12 @@ public interface INinteichosaItakusakiJoho {
      */
     LasdecCode get市町村コード();
 
-    /**
-     * 認定調査委託先コードを返します。
-     *
-     * @return 認定調査委託先コード
-     */
-    ChosaItakusakiCode get認定調査委託先コード();
+//    /**
+//     * 認定調査委託先コードを返します。
+//     *
+//     * @return 認定調査委託先コード
+//     */
+//    ChosaItakusakiCode get認定調査委託先コード();
 
     /**
      * 事業者番号を返します。
@@ -98,7 +96,14 @@ public interface INinteichosaItakusakiJoho {
      *
      * @return 代表者名
      */
-    AtenaMeisho get代表者名();
+    RString get代表者名();
+
+    /**
+     * 代表者名カナを返します。
+     *
+     * @return 代表者名カナ
+     */
+    RString get代表者名カナ();
 
     /**
      * 調査委託区分を返します。
@@ -106,6 +111,13 @@ public interface INinteichosaItakusakiJoho {
      * @return 調査委託区分
      */
     RString get調査委託区分();
+
+    /**
+     * 特定調査員表示フラグを返します。
+     *
+     * @return 特定調査員表示フラグ
+     */
+    Boolean get特定調査員表示フラグ();
 
     /**
      * 割付定員を返します。
@@ -271,7 +283,17 @@ public interface INinteichosaItakusakiJoho {
          * @param daihyoshaName 代表者名
          * @return builder
          */
-        public Builder setDaihyoshaName(AtenaMeisho daihyoshaName) {
+        public Builder setDaihyoshaName(RString daihyoshaName) {
+            return this;
+        }
+
+        /**
+         * daihyoshaNameKanaを設定します。
+         *
+         * @param daihyoshaNameKana 代表者名カナ
+         * @return builder
+         */
+        public Builder setDaihyoshaNameKana(RString daihyoshaNameKana) {
             return this;
         }
 
@@ -282,6 +304,16 @@ public interface INinteichosaItakusakiJoho {
          * @return builder
          */
         public Builder setChosaItakuKubun(RString chosaItakuKubun) {
+            return this;
+        }
+
+        /**
+         * tokuteiChosainDisplayFlagを設定します。
+         *
+         * @param tokuteiChosainDisplayFlag 特定調査員表示フラグ
+         * @return builder
+         */
+        public Builder setTokuteiChosainDisplayFlag(Boolean tokuteiChosainDisplayFlag) {
             return this;
         }
 

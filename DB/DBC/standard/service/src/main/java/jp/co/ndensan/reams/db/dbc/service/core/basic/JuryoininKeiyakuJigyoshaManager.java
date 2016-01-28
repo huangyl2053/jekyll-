@@ -12,9 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3077JuryoininKeiyakuJigyoshaDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -44,26 +42,16 @@ public class JuryoininKeiyakuJigyoshaManager {
     /**
      * 主キーに合致する受領委任契約事業者を返します。
      *
-     * @param 事業者契約番号 JigyoshaKeiyakuNo
-     * @param 開始年月日 KaishiYMD
-// * @param 履歴番号 RirekiNo
+     * @param 契約事業者番号 JigyoshaKeiyakuNo
      * @return JuryoininKeiyakuJigyosha
      */
     @Transaction
     public JuryoininKeiyakuJigyosha get受領委任契約事業者(
-            RString 事業者契約番号,
-            FlexibleDate 開始年月日
-    //            Decimal 履歴番号
-    ) {
-        requireNonNull(事業者契約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者契約番号"));
-        requireNonNull(開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("開始年月日"));
-//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+            RString 契約事業者番号) {
+        requireNonNull(契約事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("契約事業者番号"));
 
         DbT3077JuryoininKeiyakuJigyoshaEntity entity = dac.selectByKey(
-                事業者契約番号,
-                開始年月日
-        //                履歴番号
-        );
+                契約事業者番号);
         if (entity == null) {
             return null;
         }

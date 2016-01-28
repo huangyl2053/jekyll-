@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.FufukuMoshitate;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.FufukuMoshitate;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7001FufukuMoshitateDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -45,8 +45,7 @@ public class FufukuMoshitateManager {
     /**
      * 主キーに合致する不服審査申立情報を返します。
      *
-// * @param 証記載保険者番号 ShoKisaiHokenshaNo
-     *
+     * @param 証記載保険者番号 ShoKisaiHokenshaNo
      * @param 識別コード ShikibetsuCode
      * @param 原処分被保険者番号 GenshobunsHihokennshaNo
      * @param 審査請求届出日 ShinsaSeikyuTodokedeYMD
@@ -54,25 +53,25 @@ public class FufukuMoshitateManager {
      */
     @Transaction
     public FufukuMoshitate get不服審査申立情報(
-            //            ShoKisaiHokenshaNo 証記載保険者番号,
+            ShoKisaiHokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             HihokenshaNo 原処分被保険者番号,
             FlexibleDate 審査請求届出日) {
-//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(原処分被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者番号"));
         requireNonNull(審査請求届出日, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求届出日"));
 
-        DbT7001FufukuMoshitateEntity entity = dac.selectByKey(
-                //                証記載保険者番号,
-                識別コード,
-                原処分被保険者番号,
-                審査請求届出日);
-        if (entity == null) {
-            return null;
-        }
-        entity.initializeMd5();
-        return new FufukuMoshitate(entity);
+//        DbT7001FufukuMoshitateEntity entity = dac.selectByKey(
+//                証記載保険者番号,
+//                識別コード,
+//                原処分被保険者番号,
+//                審査請求届出日);
+//        if (entity == null) {
+//            return null;
+//        }
+//        entity.initializeMd5();
+        return new FufukuMoshitate(new DbT7001FufukuMoshitateEntity());
     }
 
     /**

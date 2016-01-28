@@ -104,30 +104,6 @@ public class ShokanMeisaiJushochiTokureiBuilder {
     }
 
     /**
-     * 順次番号を設定します。
-     *
-     * @param 順次番号 順次番号
-     * @return {@link ShokanMeisaiJushochiTokureiBuilder}
-     */
-    public ShokanMeisaiJushochiTokureiBuilder set順次番号(RString 順次番号) {
-        requireNonNull(順次番号, UrSystemErrorMessages.値がnull.getReplacedMessage("順次番号"));
-        entity.setJunjiNo(順次番号);
-        return this;
-    }
-
-    /**
-     * 履歴番号を設定します。
-     *
-     * @param 履歴番号 履歴番号
-     * @return {@link ShokanMeisaiJushochiTokureiBuilder}
-     */
-    public ShokanMeisaiJushochiTokureiBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
-        return this;
-    }
-
-    /**
      * サービス種類コードを設定します。
      *
      * @param サービス種類コード サービス種類コード
@@ -157,7 +133,7 @@ public class ShokanMeisaiJushochiTokureiBuilder {
      * @param 単位数 単位数
      * @return {@link ShokanMeisaiJushochiTokureiBuilder}
      */
-    public ShokanMeisaiJushochiTokureiBuilder set単位数(Decimal 単位数) {
+    public ShokanMeisaiJushochiTokureiBuilder set単位数(int 単位数) {
         requireNonNull(単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("単位数"));
         entity.setTanisu(単位数);
         return this;
@@ -169,7 +145,7 @@ public class ShokanMeisaiJushochiTokureiBuilder {
      * @param 日数_回数 日数_回数
      * @return {@link ShokanMeisaiJushochiTokureiBuilder}
      */
-    public ShokanMeisaiJushochiTokureiBuilder set日数_回数(Decimal 日数_回数) {
+    public ShokanMeisaiJushochiTokureiBuilder set日数_回数(int 日数_回数) {
         requireNonNull(日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("日数_回数"));
         entity.setNissuKaisu(日数_回数);
         return this;

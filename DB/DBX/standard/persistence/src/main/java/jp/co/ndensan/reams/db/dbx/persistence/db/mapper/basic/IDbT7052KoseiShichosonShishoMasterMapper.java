@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7052KoseiShichosonShishoMas
  */
 public interface IDbT7052KoseiShichosonShishoMasterMapper {
 
-    /** {@link DbT7052KoseiShichosonShishoMasterEntity}を取得します。
+    /* * {@linkDbT7052KoseiShichosonShishoMasterEntity}を取得します。
      *
-     * @return {@link DbT7052KoseiShichosonShishoMasterEntity}
+     * @return {@linkDbT7052KoseiShichosonShishoMasterEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7052KoseiShichosonShishoMasterEntity getEntity();

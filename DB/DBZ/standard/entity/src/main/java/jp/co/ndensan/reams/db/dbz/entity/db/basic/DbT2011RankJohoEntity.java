@@ -2,8 +2,6 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import javax.annotation.Nonnull;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -17,7 +15,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  */
 public class DbT2011RankJohoEntity extends DbTableEntityBase<DbT2011RankJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2011RankJoho");
 
@@ -32,12 +31,12 @@ public class DbT2011RankJohoEntity extends DbTableEntityBase<DbT2011RankJohoEnti
     @PrimaryKey
     private FlexibleYear fukaNendo;
     @PrimaryKey
-    private RankKubun rankKubun;
+    private RString rankKubun;
     private RString rankName;
 
     /**
-     * insertDantaiCdのgetメソッドです。
-     * 
+     * getInsertDantaiCd
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -45,8 +44,8 @@ public class DbT2011RankJohoEntity extends DbTableEntityBase<DbT2011RankJohoEnti
     }
 
     /**
-     * insertDantaiCdのsetメソッドです。
-     * 
+     * setInsertDantaiCd
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -54,8 +53,8 @@ public class DbT2011RankJohoEntity extends DbTableEntityBase<DbT2011RankJohoEnti
     }
 
     /**
-     * isDeletedのgetメソッドです。
-     * 
+     * getIsDeleted
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -63,18 +62,17 @@ public class DbT2011RankJohoEntity extends DbTableEntityBase<DbT2011RankJohoEnti
     }
 
     /**
-     * isDeletedのsetメソッドです。
-     * 
+     * setIsDeleted
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
-     * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     * setLastUpdateReamsLoginId
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -82,65 +80,64 @@ public class DbT2011RankJohoEntity extends DbTableEntityBase<DbT2011RankJohoEnti
     }
 
     /**
-     * 賦課年度のgetメソッドです。
-     * 
-     * @return 賦課年度
+     * getFukaNendo
+     *
+     * @return fukaNendo
      */
     public FlexibleYear getFukaNendo() {
         return fukaNendo;
     }
 
     /**
-     * 賦課年度のsetメソッドです。
-     * 
-     * @param fukaNendo 賦課年度
+     * setFukaNendo
+     *
+     * @param fukaNendo fukaNendo
      */
-    public void setFukaNendo(@Nonnull FlexibleYear fukaNendo) {
+    public void setFukaNendo(FlexibleYear fukaNendo) {
         this.fukaNendo = fukaNendo;
     }
 
     /**
-     * ランク区分のgetメソッドです。
-     * 
-     * @return ランク区分
+     * getRankKubun
+     *
+     * @return rankKubun
      */
-    public RankKubun getRankKubun() {
+    public RString getRankKubun() {
         return rankKubun;
     }
 
     /**
-     * ランク区分のsetメソッドです。
-     * 
-     * @param rankKubun ランク区分
+     * setRankKubun
+     *
+     * @param rankKubun rankKubun
      */
-    public void setRankKubun(@Nonnull RankKubun rankKubun) {
+    public void setRankKubun(RString rankKubun) {
         this.rankKubun = rankKubun;
     }
 
     /**
-     * ランク名称のgetメソッドです。
-     * 
-     * @return ランク名称
+     * getRankName
+     *
+     * @return rankName
      */
     public RString getRankName() {
         return rankName;
     }
 
     /**
-     * ランク名称のsetメソッドです。
-     * 
-     * @param rankName ランク名称
+     * setRankName
+     *
+     * @param rankName rankName
      */
-    public void setRankName(@Nonnull RString rankName) {
+    public void setRankName(RString rankName) {
         this.rankName = rankName;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT2011RankJohoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT2011RankJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2011RankJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2011RankJohoEntity other) {
@@ -168,6 +165,7 @@ public class DbT2011RankJohoEntity extends DbTableEntityBase<DbT2011RankJohoEnti
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -176,5 +174,4 @@ public class DbT2011RankJohoEntity extends DbTableEntityBase<DbT2011RankJohoEnti
     }
 
 // </editor-fold>
-
 }

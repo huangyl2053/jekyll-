@@ -13,44 +13,29 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.NijiYoboJigyoTaishosha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.NijiYoboKihonCheckList;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.NijiYoboKihonCheckListBuilder;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.NijiYoboJigyoTaishoshaMapperParameter;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3100NijiYoboJigyoTaishoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3100NijiYoboJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3101NijiYoboKihonCheckListEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3100NijiYoboJigyoTaishoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.NijiYoboJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3100NijiYoboJigyoTaishoshaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.INijiYoboJigyoTaishoshaMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static org.hamcrest.CoreMatchers.is;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
 
 /**
  * {link NijiYoboJigyoTaishoshaManager}のテストクラスです。
@@ -108,10 +93,10 @@ public class NijiYoboJigyoTaishoshaManagerTest {
 
             when(provider.create(any(Class.class))).thenReturn(mapper);
 
-//            HokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号;
-            HihokenshaNo 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
+            HihokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
+            int 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_履歴番号;
 
-            NijiYoboJigyoTaishoshaMapperParameter 二次予防事業対象者検索条件 = NijiYoboJigyoTaishoshaMapperParameter.createSelectByKeyParam(主キー2);
+            NijiYoboJigyoTaishoshaMapperParameter 二次予防事業対象者検索条件 = NijiYoboJigyoTaishoshaMapperParameter.createSelectByKeyParam(主キー1, 主キー2);
             NijiYoboJigyoTaishosha result = sut.get二次予防事業対象者(二次予防事業対象者検索条件);
 
             assertThat(result, is(nullValue()));
@@ -125,12 +110,12 @@ public class NijiYoboJigyoTaishoshaManagerTest {
 
             when(provider.create(any(Class.class))).thenReturn(mapper);
 
-//            HokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号;
-            HihokenshaNo 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboJigyoTaishoshaMapperParameter 二次予防事業対象者検索条件 = NijiYoboJigyoTaishoshaMapperParameter.createSelectByKeyParam(主キー2);
+            int 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_履歴番号;
+            HihokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
+            NijiYoboJigyoTaishoshaMapperParameter 二次予防事業対象者検索条件 = NijiYoboJigyoTaishoshaMapperParameter.createSelectByKeyParam(主キー1, 主キー2);
             NijiYoboJigyoTaishosha result = sut.get二次予防事業対象者(二次予防事業対象者検索条件);
 
-            assertThat(result.get被保険者番号(), is(DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号));
+            assertThat(result.get受付年月日(), is(DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_受付年月日));
         }
     }
 
@@ -148,9 +133,8 @@ public class NijiYoboJigyoTaishoshaManagerTest {
 
             when(provider.create(any(Class.class))).thenReturn(mapper);
 
-//            HokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号;
-            HihokenshaNo 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboJigyoTaishoshaMapperParameter 二次予防事業対象者検索条件 = NijiYoboJigyoTaishoshaMapperParameter.createSelectListParam(主キー2);
+            HihokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
+            NijiYoboJigyoTaishoshaMapperParameter 二次予防事業対象者検索条件 = NijiYoboJigyoTaishoshaMapperParameter.createSelectListParam(主キー1);
             List<NijiYoboJigyoTaishosha> result = sut.get二次予防事業対象者リストBy主キー1(二次予防事業対象者検索条件);
 
             assertThat(result.isEmpty(), is(true));
@@ -166,13 +150,12 @@ public class NijiYoboJigyoTaishoshaManagerTest {
 
             when(provider.create(any(Class.class))).thenReturn(mapper);
 
-//            HokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号;
-            HihokenshaNo 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboJigyoTaishoshaMapperParameter 二次予防事業対象者検索条件 = NijiYoboJigyoTaishoshaMapperParameter.createSelectListParam(主キー2);
+            HihokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
+            NijiYoboJigyoTaishoshaMapperParameter 二次予防事業対象者検索条件 = NijiYoboJigyoTaishoshaMapperParameter.createSelectListParam(主キー1);
             List<NijiYoboJigyoTaishosha> result = sut.get二次予防事業対象者リストBy主キー1(二次予防事業対象者検索条件);
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get被保険者番号(), is(DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号));
+            assertThat(result.get(0).get受付年月日(), is(DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_受付年月日));
         }
     }
 
@@ -183,9 +166,9 @@ public class NijiYoboJigyoTaishoshaManagerTest {
 // 二次予防事業対象者
             when(dac.save(any(DbT3100NijiYoboJigyoTaishoshaEntity.class))).thenReturn(1);
             when(二次予防基本チェックリストManager.save(any(NijiYoboKihonCheckList.class))).thenReturn(true);
-//            HokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号;
-            HihokenshaNo 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboJigyoTaishosha 二次予防事業対象者 = TestSupport.createNijiYoboJigyoTaishosha(主キー2);
+            HihokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
+            int 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_履歴番号;
+            NijiYoboJigyoTaishosha 二次予防事業対象者 = TestSupport.createNijiYoboJigyoTaishosha(主キー1, 主キー2);
 
             assertThat(sut.save(二次予防事業対象者), is(true));
         }
@@ -196,9 +179,9 @@ public class NijiYoboJigyoTaishoshaManagerTest {
 // 二次予防事業対象者
             when(dac.save(any(DbT3100NijiYoboJigyoTaishoshaEntity.class))).thenReturn(1);
             when(二次予防基本チェックリストManager.save(any(NijiYoboKihonCheckList.class))).thenReturn(true);
-//            HokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号;
-            HihokenshaNo 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboJigyoTaishosha 二次予防事業対象者 = TestSupport.createNijiYoboJigyoTaishosha(主キー2);
+            HihokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
+            int 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_履歴番号;
+            NijiYoboJigyoTaishosha 二次予防事業対象者 = TestSupport.createNijiYoboJigyoTaishosha(主キー1, 主キー2);
 
             assertThat(sut.save(二次予防事業対象者), is(false));
         }
@@ -209,9 +192,9 @@ public class NijiYoboJigyoTaishoshaManagerTest {
             when(dac.save(any(DbT3100NijiYoboJigyoTaishoshaEntity.class))).thenReturn(1);
             when(二次予防基本チェックリストManager.save(any(NijiYoboKihonCheckList.class))).thenReturn(true);
 
-//            HokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号;
-            HihokenshaNo 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboJigyoTaishosha 二次予防事業対象者 = TestSupport.createNijiYoboJigyoTaishosha(主キー2);
+            int 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_履歴番号;
+            HihokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
+            NijiYoboJigyoTaishosha 二次予防事業対象者 = TestSupport.createNijiYoboJigyoTaishosha(主キー1, 主キー2);
             二次予防事業対象者 = TestSupport.initializeNijiYoboJigyoTaishosha(二次予防事業対象者);
             二次予防事業対象者 = TestSupport.modifiedNijiYoboJigyoTaishosha(二次予防事業対象者);
 
@@ -225,9 +208,9 @@ public class NijiYoboJigyoTaishoshaManagerTest {
             when(dac.save(any(DbT3100NijiYoboJigyoTaishoshaEntity.class))).thenReturn(1);
             when(二次予防基本チェックリストManager.save(any(NijiYoboKihonCheckList.class))).thenReturn(true);
 
-//            HokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号;
-            HihokenshaNo 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboJigyoTaishosha 二次予防事業対象者 = TestSupport.createNijiYoboJigyoTaishosha(主キー2);
+            int 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_履歴番号;
+            HihokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
+            NijiYoboJigyoTaishosha 二次予防事業対象者 = TestSupport.createNijiYoboJigyoTaishosha(主キー1, 主キー2);
             二次予防事業対象者 = TestSupport.initializeNijiYoboJigyoTaishosha(二次予防事業対象者);
             二次予防事業対象者 = TestSupport.modifiedNijiYoboJigyoTaishosha(二次予防事業対象者);
 
@@ -240,9 +223,9 @@ public class NijiYoboJigyoTaishoshaManagerTest {
             when(dac.save(any(DbT3100NijiYoboJigyoTaishoshaEntity.class))).thenReturn(1);
             when(二次予防基本チェックリストManager.save(any(NijiYoboKihonCheckList.class))).thenReturn(true);
 
-//            HokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号;
-            HihokenshaNo 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboJigyoTaishosha 二次予防事業対象者 = TestSupport.createNijiYoboJigyoTaishosha(主キー2);
+            int 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_履歴番号;
+            HihokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
+            NijiYoboJigyoTaishosha 二次予防事業対象者 = TestSupport.createNijiYoboJigyoTaishosha(主キー1, 主キー2);
             二次予防事業対象者 = TestSupport.initializeNijiYoboJigyoTaishosha(二次予防事業対象者);
             二次予防事業対象者 = 二次予防事業対象者.deleted();
 
@@ -256,9 +239,9 @@ public class NijiYoboJigyoTaishoshaManagerTest {
             when(dac.save(any(DbT3100NijiYoboJigyoTaishoshaEntity.class))).thenReturn(1);
             when(二次予防基本チェックリストManager.save(any(NijiYoboKihonCheckList.class))).thenReturn(true);
 
-//            HokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号;
-            HihokenshaNo 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboJigyoTaishosha 二次予防事業対象者 = TestSupport.createNijiYoboJigyoTaishosha(主キー2);
+            int 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_履歴番号;
+            HihokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
+            NijiYoboJigyoTaishosha 二次予防事業対象者 = TestSupport.createNijiYoboJigyoTaishosha(主キー1, 主キー2);
             二次予防事業対象者 = TestSupport.initializeNijiYoboJigyoTaishosha(二次予防事業対象者);
             二次予防事業対象者 = 二次予防事業対象者.deleted();
 
@@ -272,9 +255,9 @@ public class NijiYoboJigyoTaishoshaManagerTest {
             when(dac.save(any(DbT3100NijiYoboJigyoTaishoshaEntity.class))).thenReturn(1);
             when(二次予防基本チェックリストManager.save(any(NijiYoboKihonCheckList.class))).thenReturn(true);
 
-//            HokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号;
-            HihokenshaNo 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
-            NijiYoboJigyoTaishosha 二次予防事業対象者 = TestSupport.createNijiYoboJigyoTaishosha(主キー2);
+            int 主キー2 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_履歴番号;
+            HihokenshaNo 主キー1 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
+            NijiYoboJigyoTaishosha 二次予防事業対象者 = TestSupport.createNijiYoboJigyoTaishosha(主キー1, 主キー2);
             二次予防事業対象者 = TestSupport.initializeNijiYoboJigyoTaishosha(二次予防事業対象者);
 
             assertThat(sut.save(二次予防事業対象者), is(false));
@@ -283,17 +266,17 @@ public class NijiYoboJigyoTaishoshaManagerTest {
 
     private static class TestSupport {
 
-        public static NijiYoboJigyoTaishosha createNijiYoboJigyoTaishosha(HihokenshaNo 主キー2) {
-            NijiYoboJigyoTaishosha 二次予防事業対象者 = new NijiYoboJigyoTaishosha(主キー2, 0);
+        public static NijiYoboJigyoTaishosha createNijiYoboJigyoTaishosha(HihokenshaNo 主キー1, int 主キー2) {
+            NijiYoboJigyoTaishosha 二次予防事業対象者 = new NijiYoboJigyoTaishosha(主キー1, 主キー2);
             return 二次予防事業対象者.createBuilderForEdit()
                     // 二次予防基本チェックリスト
-                    .setNijiYoboKihonCheckList(createNijiYoboKihonCheckList(主キー2))
+                    .setNijiYoboKihonCheckList(createNijiYoboKihonCheckList(主キー1, 主キー2))
                     .build();
         }
 
 // 二次予防基本チェックリスト
-        private static NijiYoboKihonCheckList createNijiYoboKihonCheckList(HihokenshaNo 主キー2) {
-            return new NijiYoboKihonCheckList(主キー2, FlexibleDate.MAX, 0);
+        private static NijiYoboKihonCheckList createNijiYoboKihonCheckList(HihokenshaNo 主キー1, int 主キー2) {
+            return new NijiYoboKihonCheckList(主キー1, FlexibleDate.MAX, 主キー2);
         }
 
         public static NijiYoboJigyoTaishosha initializeNijiYoboJigyoTaishosha(NijiYoboJigyoTaishosha 二次予防事業対象者) {

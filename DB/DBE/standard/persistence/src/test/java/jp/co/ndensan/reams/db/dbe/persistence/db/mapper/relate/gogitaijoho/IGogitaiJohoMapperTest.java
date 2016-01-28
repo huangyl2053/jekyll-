@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho;
 
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.GogitaiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5591GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5591GogitaiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5592ShinsakaiKaisaiBashoJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5593GogitaiWariateIinJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5594ShinsakaiIinJohoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaijoho.IGogitaiJohoMapper;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -87,8 +88,8 @@ public class IGogitaiJohoMapperTest {
         @Test
         public void データが見つかる検索条件を渡すと_DbT5591合議体情報Entity返す() {
             TestSupport.insertDbT5591(gogitaiNo, gogitaiYukoKikanKaishiYMD, shinsakaiKaisaiBashoCode);
-            param = GogitaiJohoMapperParameter.createSelectByKeyParam(gogitaiNo, gogitaiYukoKikanKaishiYMD, shinsakaiKaisaiBashoCode);
-            result = sut.getGogitaiJohoRelateEntity(param);
+            param = GogitaiJohoMapperParameter.createSelectByKeyParam(gogitaiNo, gogitaiYukoKikanKaishiYMD);
+            result = sut.select合議体情報ByKey(param);
             assertThat(result.get合議体情報Entity().getGogitaiNo(), is(gogitaiNo));
             assertThat(result.get合議体情報Entity().getGogitaiYukoKikanKaishiYMD(), is(gogitaiYukoKikanKaishiYMD));
             assertThat(result.get合議体情報Entity().getShinsakaiKaisaiBashoCode(), is(shinsakaiKaisaiBashoCode));
@@ -99,8 +100,8 @@ public class IGogitaiJohoMapperTest {
         @Test
         public void データが見つかない検索条件を渡すと_DbT5591合議体情報nullを返す() {
             TestSupport.insertDbT5591(gogitaiNo, gogitaiYukoKikanKaishiYMD, shinsakaiKaisaiBashoCode);
-            param = GogitaiJohoMapperParameter.createSelectByKeyParam(gogitaiNo, gogitaiYukoKikanKaishiYMD, shinsakaiKaisaiBashoCode);
-            result = sut.getGogitaiJohoRelateEntity(param);
+            param = GogitaiJohoMapperParameter.createSelectByKeyParam(gogitaiNo, gogitaiYukoKikanKaishiYMD);
+            result = sut.select合議体情報ByKey(param);
             assertThat(result, is(nullValue()));
 
         }
@@ -121,8 +122,8 @@ public class IGogitaiJohoMapperTest {
         public void データが見つかる検索条件を渡すと_DbT5592合議体割当委員情報Entity返す() {
             TestSupport.insertDbT5591(gogitaiNo, gogitaiYukoKikanKaishiYMD, shinsakaiKaisaiBashoCode);
             TestSupport.insertDbT5593(gogitaiNo, gogitaiYukoKikanKaishiYMD);
-            param = GogitaiJohoMapperParameter.createSelectByKeyParam(gogitaiNo, gogitaiYukoKikanKaishiYMD, shinsakaiKaisaiBashoCode);
-            result = sut.getGogitaiJohoRelateEntity(param);
+            param = GogitaiJohoMapperParameter.createSelectByKeyParam(gogitaiNo, gogitaiYukoKikanKaishiYMD);
+            result = sut.select合議体情報ByKey(param);
             assertThat(result.get介護認定審査会開催場所情報Entity().get(0).getShinsakaiKaisaiBashoCode(), is(shinsakaiKaisaiBashoCode));
 
         }
@@ -131,8 +132,8 @@ public class IGogitaiJohoMapperTest {
         @Test
         public void データが見つかない検索条件を渡すと_DbT5592合議体割当委員情報nullを返す() {
             TestSupport.insertDbT5591(gogitaiNo, gogitaiYukoKikanKaishiYMD, shinsakaiKaisaiBashoCode);
-            param = GogitaiJohoMapperParameter.createSelectByKeyParam(gogitaiNo, gogitaiYukoKikanKaishiYMD, shinsakaiKaisaiBashoCode);
-            result = sut.getGogitaiJohoRelateEntity(param);
+            param = GogitaiJohoMapperParameter.createSelectByKeyParam(gogitaiNo, gogitaiYukoKikanKaishiYMD);
+            result = sut.select合議体情報ByKey(param);
             assertThat(result, is(nullValue()));
 
         }
@@ -153,8 +154,8 @@ public class IGogitaiJohoMapperTest {
         public void データが見つかる検索条件を渡すと_DbT5593介護認定審査会開催場所情報Entity返す() {
             TestSupport.insertDbT5591(gogitaiNo, gogitaiYukoKikanKaishiYMD, shinsakaiKaisaiBashoCode);
             TestSupport.insertDbT5592(shinsakaiKaisaiBashoCode);
-            param = GogitaiJohoMapperParameter.createSelectByKeyParam(gogitaiNo, gogitaiYukoKikanKaishiYMD, shinsakaiKaisaiBashoCode);
-            result = sut.getGogitaiJohoRelateEntity(param);
+            param = GogitaiJohoMapperParameter.createSelectByKeyParam(gogitaiNo, gogitaiYukoKikanKaishiYMD);
+            result = sut.select合議体情報ByKey(param);
             assertThat(result.get介護認定審査会開催場所情報Entity().get(0).getShinsakaiKaisaiBashoCode(), is(shinsakaiKaisaiBashoCode));
 
         }
@@ -163,8 +164,8 @@ public class IGogitaiJohoMapperTest {
         @Test
         public void データが見つかない検索条件を渡すと_DbT5593介護認定審査会開催場所情報nullを返す() {
             TestSupport.insertDbT5591(gogitaiNo, gogitaiYukoKikanKaishiYMD, shinsakaiKaisaiBashoCode);
-            param = GogitaiJohoMapperParameter.createSelectByKeyParam(gogitaiNo, gogitaiYukoKikanKaishiYMD, shinsakaiKaisaiBashoCode);
-            result = sut.getGogitaiJohoRelateEntity(param);
+            param = GogitaiJohoMapperParameter.createSelectByKeyParam(gogitaiNo, gogitaiYukoKikanKaishiYMD);
+            result = sut.select合議体情報ByKey(param);
             assertThat(result, is(nullValue()));
 
         }
@@ -185,8 +186,8 @@ public class IGogitaiJohoMapperTest {
         public void データが見つかる検索条件を渡すと_DbT5594介護認定審査会委員情報Entity返す() {
             TestSupport.insertDbT5593(gogitaiNo, gogitaiYukoKikanKaishiYMD);
             TestSupport.insertDbT5594(shinsakaiKaisaiBashoCode);
-            param = GogitaiJohoMapperParameter.createSelectByKeyParam(gogitaiNo, gogitaiYukoKikanKaishiYMD, shinsakaiKaisaiBashoCode);
-            result = sut.getGogitaiJohoRelateEntity(param);
+            param = GogitaiJohoMapperParameter.createSelectByKeyParam(gogitaiNo, gogitaiYukoKikanKaishiYMD);
+            result = sut.select合議体情報ByKey(param);
             assertThat(result.get介護認定審査会開催場所情報Entity().get(0).getShinsakaiKaisaiBashoCode(), is(shinsakaiKaisaiBashoCode));
 
         }
@@ -195,8 +196,8 @@ public class IGogitaiJohoMapperTest {
         @Test
         public void データが見つかない検索条件を渡すと_DbT5594介護認定審査会委員情報nullを返す() {
             TestSupport.insertDbT5593(gogitaiNo, gogitaiYukoKikanKaishiYMD);
-            param = GogitaiJohoMapperParameter.createSelectByKeyParam(gogitaiNo, gogitaiYukoKikanKaishiYMD, shinsakaiKaisaiBashoCode);
-            result = sut.getGogitaiJohoRelateEntity(param);
+            param = GogitaiJohoMapperParameter.createSelectByKeyParam(gogitaiNo, gogitaiYukoKikanKaishiYMD);
+            result = sut.select合議体情報ByKey(param);
             assertThat(result, is(nullValue()));
 
         }

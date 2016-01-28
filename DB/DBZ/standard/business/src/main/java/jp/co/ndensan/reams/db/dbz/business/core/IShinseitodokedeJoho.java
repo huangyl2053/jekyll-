@@ -5,12 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.IShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.IShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -43,14 +40,14 @@ public interface IShinseitodokedeJoho {
      *
      * @return 申請届出者氏名
      */
-    AtenaMeisho get申請届出者氏名();
+    RString get申請届出者氏名();
 
     /**
      * 申請届出者氏名カナを返します。
      *
      * @return 申請届出者氏名カナ
      */
-    AtenaKanaMeisho get申請届出者氏名カナ();
+    RString get申請届出者氏名カナ();
 
     /**
      * 申請届出者続柄コードを返します。
@@ -85,7 +82,7 @@ public interface IShinseitodokedeJoho {
      *
      * @return 申請届出者住所
      */
-    AtenaJusho get申請届出者住所();
+    RString get申請届出者住所();
 
     /**
      * 申請届出者電話番号を返します。
@@ -146,7 +143,7 @@ public interface IShinseitodokedeJoho {
          * @param shinseiTodokedeshaShimei 申請届出者氏名
          * @return builder
          */
-        public Builder setShinseiTodokedeshaShimei(AtenaMeisho shinseiTodokedeshaShimei) {
+        public Builder setShinseiTodokedeshaShimei(RString shinseiTodokedeshaShimei) {
 
             return this;
         }
@@ -157,7 +154,7 @@ public interface IShinseitodokedeJoho {
          * @param shinseiTodokedeshaKanaShimei 申請届出者氏名カナ
          * @return builder
          */
-        public Builder setShinseiTodokedeshaKanaShimei(AtenaKanaMeisho shinseiTodokedeshaKanaShimei) {
+        public Builder setShinseiTodokedeshaKanaShimei(RString shinseiTodokedeshaKanaShimei) {
             return this;
         }
 
@@ -207,7 +204,7 @@ public interface IShinseitodokedeJoho {
          * @param shinseiTodokedeshaJusho 申請届出者住所
          * @return builder
          */
-        public Builder setShinseiTodokedeshaJusho(AtenaJusho shinseiTodokedeshaJusho) {
+        public Builder setShinseiTodokedeshaJusho(RString shinseiTodokedeshaJusho) {
             return this;
         }
 

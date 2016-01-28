@@ -2,7 +2,7 @@
 shinsakaiIinKaishiYMD,UDD015YMD,FlexibleDate,,,,,介護認定審査会委員開始年月日,A
 shinsakaiIinShuryoYMD,UDD015YMD,FlexibleDate,,,,,介護認定審査会委員終了年月日,A
 shinsakaiIinShimei,UDD042AtenaMeisho,AtenaMeisho,,,,,介護認定審査会委員氏名,A
-ShinsakaiIinKanaShimei,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,介護認定審査会委員氏名カナ,A
+shinsakaiIinKanaShimei,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,介護認定審査会委員氏名カナ,A
 seibetsu,bpchar,RString,,,,,性別,A
 shinsakaiIinShikakuCode,UDD035Code,Code,,,,,介護認定審査員資格コード,A
 shinsainYusoKubun,bpchar,RString,,,,,審査員郵送区分,A

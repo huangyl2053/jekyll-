@@ -7,10 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.IChosainJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -43,11 +40,11 @@ public class ShinsakaiChosainJoho implements Serializable, IChosainJoho {
         this.entity = entity;
     }
 
-    /**
-     * DbT5913ChosainJohoEntityを返します。
-     *
-     * @return DbT5913ChosainJohoEntity
-     */
+//    /**
+//     * DbT5913ChosainJohoEntityを返します。
+//     *
+//     * @return DbT5913ChosainJohoEntity
+//     */
 //    @Override
 //    public DbT5913ChosainJohoEntity getEntity() {
 //        return entity;
@@ -68,7 +65,7 @@ public class ShinsakaiChosainJoho implements Serializable, IChosainJoho {
      * @return 認定調査委託先コード
      */
     @Override
-    public ChosaItakusakiCode get認定調査委託先コード() {
+    public RString get認定調査委託先コード() {
         return entity.getNinteiChosaItakusakiCode();
     }
 
@@ -78,7 +75,7 @@ public class ShinsakaiChosainJoho implements Serializable, IChosainJoho {
      * @return 認定調査員コード
      */
     @Override
-    public ChosainCode get認定調査員コード() {
+    public RString get認定調査員コード() {
         return entity.getNinteiChosainCode();
     }
 
@@ -258,11 +255,6 @@ public class ShinsakaiChosainJoho implements Serializable, IChosainJoho {
         return new Builder();
     }
 
-    @Override
-    public IChosainJohoEntity getEntity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     /**
      * {@link ShinsakaiChosainJoho}を生成するためのビルダーです。
      */
@@ -327,26 +319,26 @@ public class ShinsakaiChosainJoho implements Serializable, IChosainJoho {
         }
 
         /**
-         * ninteiChosaItakusakiCodeを設定します。
+         * ninteichosaItakusakiCodeを設定します。
          *
-         * @param ninteiChosaItakusakiCode 認定調査委託先コード
+         * @param ninteichosaItakusakiCode 認定調査委託先コード
          * @return builder
          */
-//        @Override
-        public Builder setNinteiChosaItakusakiCode(ChosaItakusakiCode ninteiChosaItakusakiCode) {
-            Objects.requireNonNull(ninteiChosaItakusakiCode);
-            this.entity.setNinteiChosaItakusakiCode(ninteiChosaItakusakiCode);
+        @Override
+        public Builder setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {
+            Objects.requireNonNull(ninteichosaItakusakiCode);
+            this.entity.setNinteiChosaItakusakiCode(ninteichosaItakusakiCode);
             return this;
         }
 
         /**
-         * ninteiChosainCodeを設定します。
+         * ninteiChosainNoを設定します。
          *
          * @param ninteiChosainCode 認定調査員コード
          * @return builder
          */
-//        @Override
-        public Builder setNinteiChosainCode(ChosainCode ninteiChosainCode) {
+        @Override
+        public Builder setNinteiChosainCode(RString ninteiChosainCode) {
             Objects.requireNonNull(ninteiChosainCode);
             this.entity.setNinteiChosainCode(ninteiChosainCode);
             return this;
@@ -505,7 +497,8 @@ public class ShinsakaiChosainJoho implements Serializable, IChosainJoho {
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。
+     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

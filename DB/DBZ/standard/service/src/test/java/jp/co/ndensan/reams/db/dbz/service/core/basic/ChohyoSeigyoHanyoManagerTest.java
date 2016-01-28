@@ -9,12 +9,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7067ChohyoSeigyoHanyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -49,30 +50,36 @@ public class ChohyoSeigyoHanyoManagerTest {
 
         SubGyomuCode サブ業務コード = DbT7067ChohyoSeigyoHanyoEntityGenerator.DEFAULT_サブ業務コード;
         ReportId 帳票分類ID = DbT7067ChohyoSeigyoHanyoEntityGenerator.DEFAULT_帳票分類ID;
+        FlexibleYear 管理年度 = DbT7067ChohyoSeigyoHanyoEntityGenerator.DEFAULT_管理年度;
         RString 項目名 = DbT7067ChohyoSeigyoHanyoEntityGenerator.DEFAULT_項目名;
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
-        public void 引数のSubGyomuCodeにnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.get帳票制御汎用(null, 帳票分類ID, 項目名);
+        public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.get帳票制御汎用(null, 帳票分類ID, 管理年度, 項目名);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 引数のReportIdにnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.get帳票制御汎用(サブ業務コード, null, 項目名);
+        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.get帳票制御汎用(サブ業務コード, null, 管理年度, 項目名);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.get帳票制御汎用(サブ業務コード, 帳票分類ID, null);
+            sut.get帳票制御汎用(サブ業務コード, 帳票分類ID, null, 項目名);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.get帳票制御汎用(サブ業務コード, 帳票分類ID, 管理年度, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(SubGyomuCode.class), any(ReportId.class), any(RString.class))).thenReturn(null);
+            when(dac.selectByKey(any(SubGyomuCode.class), any(ReportId.class), any(FlexibleYear.class), any(RString.class))).thenReturn(null);
 
-            ChohyoSeigyoHanyo result = sut.get帳票制御汎用(サブ業務コード, 帳票分類ID, 項目名);
+            ChohyoSeigyoHanyo result = sut.get帳票制御汎用(サブ業務コード, 帳票分類ID, 管理年度, 項目名);
 
             assertThat(result, is(nullValue()));
         }
@@ -80,9 +87,9 @@ public class ChohyoSeigyoHanyoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT7067ChohyoSeigyoHanyoEntity entity = DbT7067ChohyoSeigyoHanyoEntityGenerator.createDbT7067ChohyoSeigyoHanyoEntity();
-            when(dac.selectByKey(any(SubGyomuCode.class), any(ReportId.class), any(RString.class))).thenReturn(entity);
+            when(dac.selectByKey(any(SubGyomuCode.class), any(ReportId.class), any(FlexibleYear.class), any(RString.class))).thenReturn(entity);
 
-            ChohyoSeigyoHanyo result = sut.get帳票制御汎用(サブ業務コード, 帳票分類ID, 項目名);
+            ChohyoSeigyoHanyo result = sut.get帳票制御汎用(サブ業務コード, 帳票分類ID, 管理年度, 項目名);
 
             assertThat(result.getサブ業務コード().value(), is(DbT7067ChohyoSeigyoHanyoEntityGenerator.DEFAULT_サブ業務コード.value()));
         }

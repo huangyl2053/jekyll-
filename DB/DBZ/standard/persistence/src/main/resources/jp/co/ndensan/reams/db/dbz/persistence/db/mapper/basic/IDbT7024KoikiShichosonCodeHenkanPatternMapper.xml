@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7024KoikiShichosonCodeHenkanPatternMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7024KoikiShichosonCodeHenkanPatternMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7024KoikiShichosonCodeHenkanPattern">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7024KoikiShichosonCodeHenkanPatternMapper.allColumns_DbT7024KoikiShichosonCodeHenkanPattern" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7024KoikiShichosonCodeHenkanPatternMapper.allColumns_DbT7024KoikiShichosonCodeHenkanPattern" />
      FROM
-         rg."DbT7024KoikiShichosonCodeHenkanPattern"
+         rgdb."DbT7024KoikiShichosonCodeHenkanPattern"
      WHERE
-         rg."DbT7024KoikiShichosonCodeHenkanPattern"."isDeleted" = FALSE
+         rgdb."DbT7024KoikiShichosonCodeHenkanPattern"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7024KoikiShichosonCodeHenkanPattern">
@@ -43,7 +43,7 @@
 
 
     <!--テーブルDbT7024KoikiShichosonCodeHenkanPatternの項目をDbT7024KoikiShichosonCodeHenkanPatternEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7024KoikiShichosonCodeHenkanPatternEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT7024KoikiShichosonCodeHenkanPatternEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7024KoikiShichosonCodeHenkanPatternEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7024KoikiShichosonCodeHenkanPatternEntity" autoMapping="true">
         <id property="koikiShichosonNo" column="dbT7024KoikiShichosonCodeHenkanPattern_koikiShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="shichosonCode" column="dbT7024KoikiShichosonCodeHenkanPattern_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <id property="codeKubun" column="dbT7024KoikiShichosonCodeHenkanPattern_codeKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -67,11 +67,10 @@
         <result property="koikiNinshoNoUmu" column="dbT7024KoikiShichosonCodeHenkanPattern_koikiNinshoNoUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonNoFukaKubun" column="dbT7024KoikiShichosonCodeHenkanPattern_shichosonNoFukaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT7024KoikiShichosonCodeHenkanPatternEntity">
+<select id="getEntity" resultMap="ResultMap_DbT7024KoikiShichosonCodeHenkanPatternEntity">
     SELECT
-    <include refid="allColumns_DbT7024KoikiShichosonCodeHenkanPattern">
-         FROM
-         rg."DbT7024KoikiShichosonCodeHenkanPattern"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT7024KoikiShichosonCodeHenkanPattern" />
+    FROM
+    rgdb."DbT7024KoikiShichosonCodeHenkanPattern"
+</select>
 </mapper>

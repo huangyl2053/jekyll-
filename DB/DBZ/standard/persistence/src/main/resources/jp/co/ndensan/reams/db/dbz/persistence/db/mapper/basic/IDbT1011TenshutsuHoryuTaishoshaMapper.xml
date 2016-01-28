@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT1011TenshutsuHoryuTaishoshaMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1011TenshutsuHoryuTaishoshaMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT1011TenshutsuHoryuTaishosha">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT1011TenshutsuHoryuTaishoshaMapper.allColumns_DbT1011TenshutsuHoryuTaishosha" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1011TenshutsuHoryuTaishoshaMapper.allColumns_DbT1011TenshutsuHoryuTaishosha" />
      FROM
-         rg."DbT1011TenshutsuHoryuTaishosha"
+         rgdb."DbT1011TenshutsuHoryuTaishosha"
      WHERE
-         rg."DbT1011TenshutsuHoryuTaishosha"."isDeleted" = FALSE
+         rgdb."DbT1011TenshutsuHoryuTaishosha"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT1011TenshutsuHoryuTaishosha">
@@ -60,7 +60,7 @@
 
 
     <!--テーブルDbT1011TenshutsuHoryuTaishoshaの項目をDbT1011TenshutsuHoryuTaishoshaEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT1011TenshutsuHoryuTaishoshaEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT1011TenshutsuHoryuTaishoshaEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT1011TenshutsuHoryuTaishoshaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1011TenshutsuHoryuTaishoshaEntity" autoMapping="true">
         <id property="shikibetsuCode" column="dbT1011TenshutsuHoryuTaishosha_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="rirekiNo" column="dbT1011TenshutsuHoryuTaishosha_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="insertDantaiCd" column="dbT1011TenshutsuHoryuTaishosha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -106,7 +106,7 @@
 	SELECT
 	<include refid="allColumns_DbT1011TenshutsuHoryuTaishosha"/>
 	FROM
-	rgba."DbT1011TenshutsuHoryuTaishosha"
+	rgdb."DbT1011TenshutsuHoryuTaishosha"
 	</select>
 
 </mapper>

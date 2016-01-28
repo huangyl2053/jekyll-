@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2012HokenryoRankEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link HokenryoRank}の編集を行うビルダークラスです。
@@ -68,7 +68,7 @@ public class HokenryoRankBuilder {
      * @param ランク区分 ランク区分
      * @return {@link HokenryoRankBuilder}
      */
-    public HokenryoRankBuilder setランク区分(RankKubun ランク区分) {
+    public HokenryoRankBuilder setランク区分(RString ランク区分) {
         requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));
         entity.setRankKubun(ランク区分);
         return this;

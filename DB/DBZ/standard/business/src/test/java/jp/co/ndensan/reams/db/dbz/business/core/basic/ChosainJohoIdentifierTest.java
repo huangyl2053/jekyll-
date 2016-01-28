@@ -30,8 +30,8 @@ public class ChosainJohoIdentifierTest extends DbzTestBase {
     @BeforeClass
     public static void setUpClass() {
         市町村コード = DbT5913ChosainJohoEntityGenerator.DEFAULT_市町村コード;
-        認定調査委託先コード = DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード;
-        認定調査員コード = DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード;
+        認定調査委託先コード = new ChosaItakusakiCode(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード);
+        認定調査員コード = new ChosainCode(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード);
     }
 
     public static class シリアライズテスト extends DbzTestBase {

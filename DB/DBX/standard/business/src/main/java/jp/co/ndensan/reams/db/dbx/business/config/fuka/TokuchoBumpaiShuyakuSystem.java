@@ -42,7 +42,7 @@ public enum TokuchoBumpaiShuyakuSystem {
 
     static TokuchoBumpaiShuyakuSystem toValue(RString code) {
         for (TokuchoBumpaiShuyakuSystem v : values()) {
-            if (Objects.equals(v, code)) {
+            if (Objects.equals(v.aCode, code)) {
                 return v;
             }
         }

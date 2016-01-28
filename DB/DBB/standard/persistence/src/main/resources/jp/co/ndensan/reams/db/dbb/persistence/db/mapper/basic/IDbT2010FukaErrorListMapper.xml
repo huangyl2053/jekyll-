@@ -40,7 +40,7 @@
 
 
     <!--テーブルDbT2010FukaErrorListの項目をDbT2010FukaErrorListEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT2010FukaErrorListEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT2010FukaErrorListEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.fukaerr.DbT2010FukaErrorListEntity" autoMapping="true">
         <id property="subGyomuCode" column="dbT2010FukaErrorList_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
         <id property="internalReportId" column="dbT2010FukaErrorList_internalReportId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="fukaNendo" column="dbT2010FukaErrorList_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>

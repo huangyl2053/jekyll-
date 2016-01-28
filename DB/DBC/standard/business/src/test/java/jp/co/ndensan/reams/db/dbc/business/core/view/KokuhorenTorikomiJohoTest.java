@@ -136,7 +136,7 @@ public class KokuhorenTorikomiJohoTest extends DbcTestBase {
 
         @Test
         public void get再処理可能区分は_entityが持つ再処理可能区分を返す() {
-            assertThat(sut.is再処理可能区分(), is(KokuhorenTorikomiJohoEntity.getSaiShoriKahiKubun()));
+            assertThat(sut.is再処理可能区分(), is(KokuhorenTorikomiJohoEntity.getSaiShoriKanoKubun()));
         }
     }
 

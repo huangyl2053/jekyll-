@@ -3,11 +3,11 @@ idoYMD,UDD015YMD,FlexibleDate,,,,,異動日,A
 edaNo,bpchar,RString,,,,,枝番,A
 idoJiyuCode,varchar,RString,,,,,異動事由コード,A
 shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
-tekiyoJogaiTekiyoJiyuCode,varchar,KaigoshikakuShutokuJiyuJogaiTekiyo,,,,,適用除外適用事由コード,A
+tekiyoJogaiTekiyoJiyuCode,varchar,RString,,,,,適用除外適用事由コード,A
 tekiyoYMD,UDD015YMD,FlexibleDate,,,,,適用年月日,A
 tekiyoTodokedeYMD,UDD015YMD,FlexibleDate,,,,,適用届出年月日,A
 tekiyoUketsukeYMD,UDD015YMD,FlexibleDate,,,,,適用受付年月日,A
-tekiyoJogaikaijokaijoJiyuCode,varchar,KaigoshikakuSoshitsuJiyuJogaiTekiyo,,,,,適用除外解除事由コード,A
+tekiyoJogaikaijokaijoJiyuCode,varchar,RString,,,,,適用除外解除事由コード,A
 kaijoYMD,UDD015YMD,FlexibleDate,,,,,解除年月日,A
 kaijoTodokedeYMD,UDD015YMD,FlexibleDate,,,,,解除届出年月日,A
 kaijoUketsukeYMD,UDD015YMD,FlexibleDate,,,,,解除受付年月日,A

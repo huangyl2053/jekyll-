@@ -44,7 +44,7 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
      * @param 地域番号 地域番号
      */
     public GappeiJoho(FlexibleDate 合併年月日,
-                      RString 地域番号) {
+            RString 地域番号) {
         requireNonNull(合併年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("合併年月日"));
         requireNonNull(地域番号, UrSystemErrorMessages.値がnull.getReplacedMessage("地域番号"));
         this.entity = new DbT7055GappeiJohoEntity();
@@ -191,9 +191,11 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
     }
 
     /**
-     * 保持する合併情報を削除対象とします。<br/> {@link DbT7055GappeiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 合併情報配下の要素を削除対象とします。<br/> {@link DbT7055GappeiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 合併情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link GappeiJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link GappeiJoho}
+     * @throws IllegalStateException DbT7055GappeiJohoEntityのデータ状態が変更の場合
      */
     @Override
     public GappeiJoho deleted() {
@@ -223,10 +225,11 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
     }
 
     /**
-     * getGappeiShichoson
+     * 合併情報が保持する合併市町村情報に対して、指定の識別子に該当する合併市町村情報を返します。
      *
-     * @param id GappeiShichosonIdentifier
-     * @return GappeiShichoson
+     * @param id 合併市町村情報の識別子
+     * @return 合併市町村情報
+     * @throws IllegalStateException 指定の識別子に該当する合併市町村情報がない場合
      */
     public GappeiShichoson getGappeiShichoson(GappeiShichosonIdentifier id) {
         if (gappeiShichoson.contains(id)) {
@@ -237,9 +240,9 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
     }
 
     /**
-     * getGappeiShichosonList
+     * 合併情報が保持する合併市町村情報をリストで返します。
      *
-     * @return GappeiShichosonリスト
+     * @return 合併市町村情報リスト
      */
     public List<GappeiShichoson> getGappeiShichosonList() {
         return new ArrayList<>(gappeiShichoson.values());
@@ -271,9 +274,9 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
 
     /**
      * このクラスの編集を行うBuilderを取得します。<br/>
-     * 編集後のインスタンスを取得する場合は{@link SeishinTechoNini.createBuilderForEdit#build()}を使用してください。
+     * 編集後のインスタンスを取得する場合は{@link GappeiJohoBuilder#build()}を使用してください。
      *
-     * @return Builder
+     * @return {@link GappeiJohoBuilder}
      */
     public GappeiJohoBuilder createBuilderForEdit() {
         return new GappeiJohoBuilder(entity, id, gappeiShichoson);

@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 償還払請求住宅改修テーブルの項目定義クラスです。
  */
 public enum DbT3049ShokanJutakuKaishu implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -60,14 +60,14 @@ public enum DbT3049ShokanJutakuKaishu implements IColumnDefinition {
      */
     yoshikiNo(4, 0),
     /**
-     * 順次番号
+     * 明細番号
      * <br/>複数レコード対応のため
      */
-    junjiNo(4, 0),
+    meisaiNo(4, 0),
     /**
-     * 履歴番号
+     * 連番
      */
-    rirekiNo(5, 0),
+    renban(2, 0),
     /**
      * サービスコード
      */
@@ -76,6 +76,10 @@ public enum DbT3049ShokanJutakuKaishu implements IColumnDefinition {
      * 住宅改修着工年月日
      */
     jutakuKaishuChakkoYMD(2147483647, 0),
+    /**
+     * 住宅改修内容
+     */
+    jutakuKaishuNaiyo(100, 0),
     /**
      * 住宅改修事業者名
      */
@@ -99,7 +103,15 @@ public enum DbT3049ShokanJutakuKaishu implements IColumnDefinition {
     /**
      * 差額金額
      */
-    sagakuKingaku(10, 0);
+    sagakuKingaku(10, 0),
+    /**
+     * 事前申請サービス提供年月
+     */
+    jizenServiceTeikyoYM(2147483647, 0),
+    /**
+     * 事前申請整理番号
+     */
+    jizenSeiriNo(10, 0);
 
     private final int maxLength;
     private final int scale;

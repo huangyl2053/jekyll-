@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4910NinteichosaItakusakiJohoEntity;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -28,7 +27,7 @@ public final class DbT4910NinteichosaItakusakiJohoEntityGenerator {
     public static final RString DEFAULT_住所 = new RString("名称");
     public static final TelNo DEFAULT_電話番号 = new TelNo("0123456789");
     public static final TelNo DEFAULT_FAX番号 = new TelNo("0123456789");
-    public static final AtenaMeisho DEFAULT_代表者名 = new AtenaMeisho("宛名名称");
+    public static final RString DEFAULT_代表者名 = new RString("宛名名称");
     public static final RString DEFAULT_調査委託区分 = new RString("名称");
     public static final int DEFAULT_割付定員 = 1;
     public static final ChikuCode DEFAULT_割付地区 = new ChikuCode("123456789");

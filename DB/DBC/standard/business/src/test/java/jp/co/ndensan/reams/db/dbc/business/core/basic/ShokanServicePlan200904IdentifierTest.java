@@ -9,10 +9,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -33,10 +31,8 @@ public class ShokanServicePlan200904IdentifierTest extends DbcTestBase {
     private static RString 主キー名3;
     private static JigyoshaNo 主キー名4;
     private static RString 主キー名5;
-    private static Decimal 主キー名6;
+    private static RString 主キー名6;
     private static RString 主キー名7;
-    private static RString 主キー名8;
-    private static FlexibleDate 主キー名9;
 
     @BeforeClass
     public static void setUpClass() {
@@ -46,17 +42,15 @@ public class ShokanServicePlan200904IdentifierTest extends DbcTestBase {
         主キー名3 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_整理番号;
         主キー名4 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_事業者番号;
         主キー名5 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_様式番号;
-        主キー名6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_履歴番号;
-        主キー名7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_指定_基準該当事業者区分コード;
-        主キー名8 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細行番号;
-        主キー名9 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_居宅サービス計画作成依頼届出年月日;
+        主キー名6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細番号;
+        主キー名7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_連番;
     }
 
     public static class シリアライズテスト extends DbcTestBase {
 
         @Test
         public void シリアライズできる() {
-            ShokanServicePlan200904Identifier sut = new ShokanServicePlan200904Identifier(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7, 主キー名8, 主キー名9);
+            ShokanServicePlan200904Identifier sut = new ShokanServicePlan200904Identifier(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
             assertThat(sut, is(serializable()));
         }
     }

@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -150,11 +149,6 @@ public class KagoMoshitateTest extends DbcTestBase {
         @Test
         public void get申立者区分コードは_entityが持つ申立者区分コードを返す() {
             assertThat(sut.get申立者区分コード(), is(KagoMoshitateEntity.getMoshitateshaKubunCode()));
-        }
-
-        @Test
-        public void get証記載保険者番号は_entityが持つ証記載保険者番号を返す() {
-            assertThat(sut.get証記載保険者番号(), is(KagoMoshitateEntity.getShokisaiHokenshaNo()));
         }
 
         @Test

@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 受領委任契約事業者のデータアクセスクラスです。
  */
-public class DbT7061JuryoIninJigyoshaDac {
+public class DbT7061JuryoIninJigyoshaDac implements ISaveable<DbT7061JuryoIninJigyoshaEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -81,6 +81,7 @@ public class DbT7061JuryoIninJigyoshaDac {
      * @return 登録件数
      */
     @Transaction
+    @Override
     public int save(DbT7061JuryoIninJigyoshaEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任契約事業者エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。

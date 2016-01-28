@@ -28,7 +28,7 @@ public class KaigoServiceShuruiIdentifier implements Serializable {
      * @param 提供開始年月 提供開始年月
      */
     public KaigoServiceShuruiIdentifier(KaigoServiceShuruiCode サービス種類コード,
-FlexibleYearMonth 提供開始年月) {
+            FlexibleYearMonth 提供開始年月) {
         this.サービス種類コード = サービス種類コード;
         this.提供開始年月 = 提供開始年月;
     }
