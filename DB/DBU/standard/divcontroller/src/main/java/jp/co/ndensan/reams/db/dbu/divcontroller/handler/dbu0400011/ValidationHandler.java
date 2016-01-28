@@ -37,8 +37,7 @@ public class ValidationHandler {
      */
     public ValidationMessageControlPairs 開始日変更のチェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        //TODO QA278メーセジ確認　 張紅麗　まで12/29　開始日には前回の基準日より未来の日時を入力することはできません。 DBZE00006
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.ValidateA));
+        validationMessages.add(new ValidationMessageControlPair(RRVMessages.ValidateA, div.getTxtKonkaiChushutsuFromYMD()));
         return validationMessages;
     }
 
@@ -49,8 +48,7 @@ public class ValidationHandler {
      */
     public ValidationMessageControlPairs 終了日変更のチェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        //TODO QA278メーセジ確認 張紅麗　まで12/29 終了日時には今回の基準日時より過去の日時を入力することはできません。 DBZE00008
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.ValidateB));
+        validationMessages.add(new ValidationMessageControlPair(RRVMessages.ValidateB, div.getTxtKonkaiChushutsuToYMD()));
         return validationMessages;
     }
 
@@ -61,8 +59,7 @@ public class ValidationHandler {
      */
     public ValidationMessageControlPairs 開始日と終了日の比較チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        //TODO QA278メーセジ確認 張紅麗　まで12/29 開始日には終了日時より未来の日時を入力することはできません。 DBZE00006
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.ValidateC));
+        validationMessages.add(new ValidationMessageControlPair(RRVMessages.ValidateC, div.getTxtKonkaiChushutsuFromYMD()));
         return validationMessages;
     }
 
