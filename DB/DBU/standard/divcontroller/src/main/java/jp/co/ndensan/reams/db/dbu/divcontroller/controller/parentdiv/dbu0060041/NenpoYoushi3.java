@@ -5,12 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.dbu0060041;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
+import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataIdentifier;
 import jp.co.ndensan.reams.db.dbu.definition.core.nenpoyoushi3.NenpoYoushi3ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.definition.enumeratedtype.DbuViewStateKey;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.DeleteJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.SearchJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.DBU0060011TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060041.DBU0060041StateName;
@@ -62,6 +63,17 @@ public class NenpoYoushi3 {
      * @return ResponseData<NenpoYoushi3Div>
      */
     public ResponseData<NenpoYoushi3Div> onLoad(NenpoYoushi3Div div) {
+        ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity1 = new ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity();
+        entity1.set画面報告年度(new RString("19900101"));
+        entity1.set画面集計年度(new RString("20100202"));
+        entity1.set保険者コード(new RString("123456"));
+        entity1.set市町村名称(new RString("市町村名称"));
+        entity1.set補正フラグ(new RString("修正"));
+        entity1.set行報告年(new RString("1990"));
+        entity1.set行集計対象年(new RString("2016"));
+        entity1.set行市町村コード(new RString("123456"));
+        entity1.set事業報告年報補正表示のコード(new RString("003"));
+        ViewStateHolder.put(DbuViewStateKey.補正検索画面情報, entity1);
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity
                 = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
         報告年度 = new FlexibleDate(entity.get画面報告年度());
@@ -70,7 +82,9 @@ public class NenpoYoushi3 {
         保険者名称 = entity.get市町村名称();
         補正フラグ = entity.get補正フラグ();
         getHandler(div).initialize(補正フラグ, 報告年度, 集計年度, 保険者コード, 保険者名称);
-        if (!this.get保険料収納状況データ(div) && !this.get保険給付支払状況データ(div)) {
+        boolean 収納状況FLG = this.get保険料収納状況データ(div);
+        boolean 給付支払状況FLG = this.get保険給付支払状況データ(div);
+        if (!収納状況FLG && !給付支払状況FLG) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
             }
@@ -132,12 +146,18 @@ public class NenpoYoushi3 {
             }
             return ResponseData.of(div).respond();
         } else if (補正フラグ.equals(フラグ_削除)) {
-            報告年 = new FlexibleYear(entity.get行報告年());
-            集計対象年 = new FlexibleYear(entity.get行集計対象年());
-            市町村コード = new LasdecCode(entity.get行市町村コード());
-            様式種類コード = entity.get事業報告年報補正表示のコード();
-            DeleteJigyoHokokuNenpo jigyoHokokuNenpoDelete = new DeleteJigyoHokokuNenpo(報告年, 集計対象年, 市町村コード, 様式種類コード);
-            JigyoHokokuNenpoHoseiHakoManager.createInstance().deleteJigyoHokokuNenpoData(jigyoHokokuNenpoDelete);
+            List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = new ArrayList<>();
+            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険料収納状況データ
+                    = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.保険料収納状況データ, Models.class);
+            for (JigyoHokokuTokeiData 保険料収納 : 保険料収納状況データ) {
+                事業報告集計一覧データリスト.add(保険料収納);
+            }
+            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険給付支払状況データ = ViewStateHolder.
+                    get(NenpoYoushi3ViewStateKeys.保険給付支払状況データ, Models.class);
+            for (JigyoHokokuTokeiData 保険給付支払 : 保険給付支払状況データ) {
+                事業報告集計一覧データリスト.add(保険給付支払);
+            }
+            JigyoHokokuNenpoHoseiHakoManager.createInstance().deleteJigyoHokokuNenpoData(事業報告集計一覧データリスト);
             div.getKanryoMessage().getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
                     .replace("削除").evaluate()),
                     RString.EMPTY, RString.EMPTY, true);
