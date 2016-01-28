@@ -29,7 +29,7 @@ public class ShokanServicePlan200004Entity implements Cloneable, Serializable {
      *
      * @return 届出日
      */
-    public FlexibleDate get届出日200004() {
+    public FlexibleDate get届出日() {
         return entity.getKyotakuServiceSakuseiIraiYMD();
     }
 
@@ -38,7 +38,7 @@ public class ShokanServicePlan200004Entity implements Cloneable, Serializable {
      *
      * @return 指定_基準該当事業者区分コード
      */
-    public RString get指定_基準該当事業者区分コード200004() {
+    public RString get指定_基準該当事業者区分コード() {
         return entity.getShiteiKijunGaitoJigyoshaKubunCode();
     }
 
@@ -47,7 +47,7 @@ public class ShokanServicePlan200004Entity implements Cloneable, Serializable {
      *
      * @return 審査方法
      */
-    public RString get審査方法200004() {
+    public RString get審査方法() {
         return entity.getShinsaHohoKubunCode();
     }
 
@@ -56,7 +56,7 @@ public class ShokanServicePlan200004Entity implements Cloneable, Serializable {
      *
      * @return サービスコード
      */
-    public ServiceCode getサービスコード200004() {
+    public ServiceCode getサービスコード() {
         return entity.getServiceCode();
     }
 
@@ -65,7 +65,7 @@ public class ShokanServicePlan200004Entity implements Cloneable, Serializable {
      *
      * @return 単位数
      */
-    public int get単位数200004() {
+    public int get単位数() {
         return entity.getTanisu();
     }
 
@@ -74,17 +74,8 @@ public class ShokanServicePlan200004Entity implements Cloneable, Serializable {
      *
      * @return 単位数単価
      */
-    public Decimal get単位数単価200004() {
+    public Decimal get単位数単価() {
         return entity.getTanisuTanka();
-    }
-
-    /**
-     * 請求金額を取得します。
-     *
-     * @return 請求金額
-     */
-    public int get請求金額200004() {
-        return entity.getSeikyuKingaku();
     }
 
     /**
@@ -92,8 +83,17 @@ public class ShokanServicePlan200004Entity implements Cloneable, Serializable {
      *
      * @return 審査年月
      */
-    public FlexibleYearMonth get審査年月200004() {
+    public FlexibleYearMonth get審査年月() {
         return entity.getShinsaYM();
+    }
+
+    /**
+     * 請求金額を取得します。
+     *
+     * @return 請求金額
+     */
+    public int get請求金額() {
+        return entity.getSeikyuKingaku();
     }
 
     /**
@@ -101,7 +101,7 @@ public class ShokanServicePlan200004Entity implements Cloneable, Serializable {
      *
      * @return 支給区分
      */
-    public RString get支給区分200004() {
+    public RString get支給区分() {
         return entity.getShikyuKubunCode();
     }
 
@@ -110,7 +110,7 @@ public class ShokanServicePlan200004Entity implements Cloneable, Serializable {
      *
      * @return 支払金額
      */
-    public int get支払金額200004() {
+    public int get支払金額() {
         return entity.getShikyuKingaku();
     }
 
@@ -119,7 +119,7 @@ public class ShokanServicePlan200004Entity implements Cloneable, Serializable {
      *
      * @return 増減点
      */
-    public int get増減点200004() {
+    public int get増減点() {
         return entity.getZougenTen();
     }
 
@@ -128,7 +128,7 @@ public class ShokanServicePlan200004Entity implements Cloneable, Serializable {
      *
      * @return 備考1
      */
-    public RString get備考1200004() {
+    public RString get備考1() {
         return entity.getZougenRiyu();
     }
 
@@ -137,7 +137,7 @@ public class ShokanServicePlan200004Entity implements Cloneable, Serializable {
      *
      * @return 備考2
      */
-    public RString get備考2200004() {
+    public RString get備考2() {
         return entity.getFushikyuRiyu();
     }
 
@@ -146,7 +146,7 @@ public class ShokanServicePlan200004Entity implements Cloneable, Serializable {
      *
      * @return 備考3
      */
-    public RString get備考3200004() {
+    public RString get備考3() {
         return entity.getKounyuKaishuRireki();
     }
 }

@@ -63,7 +63,7 @@ public class ServiceKeikakuHi {
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
 
-        RString 申請日 = new RString("20160128");
+        RString 申請日 = new RString("20160118");
         // TODO 这里连番不是我的参数
         RString 連番 = new RString("");
 

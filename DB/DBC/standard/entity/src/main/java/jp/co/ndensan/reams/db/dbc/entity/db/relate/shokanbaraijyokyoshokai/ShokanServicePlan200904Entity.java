@@ -47,7 +47,7 @@ public class ShokanServicePlan200904Entity implements Cloneable, Serializable {
      *
      * @return 届出日
      */
-    public FlexibleDate get届出日200904() {
+    public FlexibleDate get届出日() {
         return entity.getKyotakuServiceSakuseiIraiYMD();
     }
 
@@ -61,11 +61,29 @@ public class ShokanServicePlan200904Entity implements Cloneable, Serializable {
     }
 
     /**
+     * サービス単位数合計を取得します。
+     * 
+     * @return サービス単位数合計
+     */
+    public int getサービス単位数合計() {
+        return entity.getServiceTanisuTotal();
+    }
+
+    /**
+     * 請求金額を取得します。
+     * 
+     * @return 請求金額
+     */
+    public int get請求金額() {
+        return entity.getSeikyuKingaku();
+    }
+
+    /**
      * 指定_基準該当事業者区分コードを取得します。
      *
      * @return 指定_基準該当事業者区分コード
      */
-    public RString get指定_基準該当事業者区分コード200904() {
+    public RString get指定_基準該当事業者区分コード() {
         return entity.getShiteiKijunGaitoJigyoshaKubunCode();
     }
 
