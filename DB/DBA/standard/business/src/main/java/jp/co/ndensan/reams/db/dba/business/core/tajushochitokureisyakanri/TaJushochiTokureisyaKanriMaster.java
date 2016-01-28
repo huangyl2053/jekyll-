@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri;
 
-import jp.co.ndensan.reams.db.dba.entity.db.relate.taJushochiTokureisyaKan.TaJushochiTokureisyaKanriRelateEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TaJushochiTokureisyaKanriRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -257,16 +257,4 @@ public class TaJushochiTokureisyaKanriMaster {
     public AtenaMeisho getJigyoshaName() {
         return entity.getJigyoshaName();
     }
-
-//    public FlexibleDate get生年月日() {
-//        return 生年月日;
-//    }
-//
-//    public LasdecCode get現全国地方公共団体コード() {
-//        return 現全国地方公共団体コード;
-//    }
-//
-//    public LasdecCode get旧全国地方公共団体コード() {
-//        return 旧全国地方公共団体コード;
-//    }
 }

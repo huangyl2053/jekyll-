@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokure
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.taJushochiTokureisyaKan.TaJushochiTokureisyaKanriRelateEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TaJushochiTokureisyaKanriRelateEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**

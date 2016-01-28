@@ -14,7 +14,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMaster;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.taJushochiTokureisyaKan.TaJushochiTokureisyaKanriRelateEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TaJushochiTokureisyaKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokureisyakanri.ITaJushochiTokureisyaKanriMapper;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dba.service.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaishoManager;
@@ -56,9 +56,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class TaJushochiTokureisyaKanriManager {
 
     private final RString 他特例居住 = new RString("05");
+    private final int 年齢_65 = 65;
     private final MapperProvider mapperProvider;
     private final DbT1003TashichosonJushochiTokureiDac dbT1003Dac;
-    private final DbT1004ShisetsuNyutaishoDac dbT1004Dac;
     private final ShisetsuNyutaishoManager 介護保険施設入退所Manager;
 
     /**
@@ -67,7 +67,6 @@ public class TaJushochiTokureisyaKanriManager {
     TaJushochiTokureisyaKanriManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dbT1003Dac = InstanceProvider.create(DbT1003TashichosonJushochiTokureiDac.class);
-        this.dbT1004Dac = InstanceProvider.create(DbT1004ShisetsuNyutaishoDac.class);
         this.介護保険施設入退所Manager = new ShisetsuNyutaishoManager();
     }
 
@@ -82,7 +81,6 @@ public class TaJushochiTokureisyaKanriManager {
             ShisetsuNyutaishoManager 介護保険施設入退所Manager) {
         this.mapperProvider = mapperProvider;
         this.dbT1003Dac = dbT1003Dac;
-        this.dbT1004Dac = dbT1004Dac;
         this.介護保険施設入退所Manager = 介護保険施設入退所Manager;
 
     }
@@ -110,7 +108,7 @@ public class TaJushochiTokureisyaKanriManager {
                         shikibetsuCode, DaichoType.他市町村住所地特例者.getCode(),
                         RString.EMPTY, JigyoshaNo.EMPTY, RString.EMPTY);
         List<TaJushochiTokureisyaKanriRelateEntity> 他市町村住所地特例情報リスト = mapper.selct他市町村住所地特例(parameter);
-        List<TaJushochiTokureisyaKanriRelateEntity> relateEntityList = new ArrayList<>();
+        List<TaJushochiTokureisyaKanriRelateEntity> 適用情報リスト = new ArrayList<>();
         List<TaJushochiTokureisyaKanriMaster> syaKanriMaster = new ArrayList<>();
         for (TaJushochiTokureisyaKanriRelateEntity 他市町村住所地特例情報 : 他市町村住所地特例情報リスト) {
 
@@ -124,7 +122,7 @@ public class TaJushochiTokureisyaKanriManager {
                 if (事業者名称 != null) {
                     他市町村住所地特例情報.setJigyoshaName(事業者名称.getJigyoshaName());
                 }
-                relateEntityList.add(他市町村住所地特例情報);
+                適用情報リスト.add(他市町村住所地特例情報);
             }
             if (住所地特例対象施設.equals(他市町村住所地特例情報.getNyushoShisetsuShurui())) {
                 TaJushochiTokureisyaKanriParameter iParameter = TaJushochiTokureisyaKanriParameter.createParam_TaJushochi(
@@ -134,18 +132,18 @@ public class TaJushochiTokureisyaKanriManager {
                 if (事業者名称 != null) {
                     他市町村住所地特例情報.setJigyoshaName(事業者名称.getJigyoshaName());
                 }
-                relateEntityList.add(他市町村住所地特例情報);
+                適用情報リスト.add(他市町村住所地特例情報);
             }
         }
-        if (!relateEntityList.isEmpty()) {
+        if (!適用情報リスト.isEmpty()) {
             List<TaJushochiTokureisyaKanriRelateEntity> list = new ArrayList<>();
-            for (TaJushochiTokureisyaKanriRelateEntity entity : relateEntityList) {
+            for (TaJushochiTokureisyaKanriRelateEntity entity : 適用情報リスト) {
                 FlexibleDate 退所日 = entity.getTaishoYMD();
                 if (退所日.isEmpty()) {
                     list.add(entity);
                 } else {
-                    Collections.sort(relateEntityList, new TaJushochiTokureisyaKanriManager.DateComparator());
-                    list.add(relateEntityList.get(0));
+                    Collections.sort(適用情報リスト, new TaJushochiTokureisyaKanriManager.DateComparator());
+                    list.add(適用情報リスト.get(0));
                 }
             }
             for (TaJushochiTokureisyaKanriRelateEntity listEntity : list) {
@@ -153,7 +151,7 @@ public class TaJushochiTokureisyaKanriManager {
             }
             return SearchResult.of(syaKanriMaster, 0, false);
         } else {
-            for (TaJushochiTokureisyaKanriRelateEntity entityList : relateEntityList) {
+            for (TaJushochiTokureisyaKanriRelateEntity entityList : 適用情報リスト) {
                 syaKanriMaster.add(new TaJushochiTokureisyaKanriMaster(entityList));
             }
             return SearchResult.of(syaKanriMaster, 0, false);
@@ -179,9 +177,9 @@ public class TaJushochiTokureisyaKanriManager {
      * @return result 削除件数
      */
     public int delTaJushochiTokurei(ShikibetsuCode 識別コード, FlexibleDate 異動日, RString 枝番) {
+
         int result = 0;
-        DbT1003TashichosonJushochiTokureiEntity dbT1003entity
-                = dbT1003Dac.selectByKey(識別コード, 異動日, 枝番);
+        DbT1003TashichosonJushochiTokureiEntity dbT1003entity = dbT1003Dac.selectByKey(識別コード, 異動日, 枝番);
         if (dbT1003entity != null) {
             dbT1003entity.setLogicalDeletedFlag(true);
             dbT1003entity.setState(EntityDataState.Modified);
@@ -201,9 +199,11 @@ public class TaJushochiTokureisyaKanriManager {
      * @param 識別コード 識別コード
      */
     public void saveHihokenshaSositu(KaigoTatokuTekiyoJiyu 適用事由,
-            FlexibleDate 適用年月日,
-            FlexibleDate 適用届出年月日, ShikibetsuCode 識別コード) {
-
+            FlexibleDate 適用年月日, FlexibleDate 適用届出年月日, ShikibetsuCode 識別コード) {
+        requireNonNull(適用事由, UrSystemErrorMessages.値がnull.getReplacedMessage("適用事由"));
+        requireNonNull(適用年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用年月日"));
+        requireNonNull(適用届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用届出年月日"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         // TODO 資格喪失は１月納品対象外　現実点実装しない。
     }
 
@@ -240,14 +240,16 @@ public class TaJushochiTokureisyaKanriManager {
      *
      * @param 識別コード 識別コード
      * @param 解除日 解除日
-     * @return true、false
+     * @return 年齢有効チェック 取得した年齢>= 65の場合:true、以外の場合:false
      */
     public boolean checkAge(ShikibetsuCode 識別コード, FlexibleDate 解除日) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(解除日, UrSystemErrorMessages.値がnull.getReplacedMessage("解除日"));
         UaFt200FindShikibetsuTaishoEntity 宛名情報 = select宛名情報PSM(識別コード);
         AgeCalculator ageCalculator
                 = new AgeCalculator((IDateOfBirth) 宛名情報.getSeinengappiYMD(),
                         JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日, 解除日);
-        return Integer.parseInt(ageCalculator.get年齢().toString()) >= 65;
+        return Integer.parseInt(ageCalculator.get年齢().toString()) >= 年齢_65;
     }
 
     /**
@@ -259,12 +261,13 @@ public class TaJushochiTokureisyaKanriManager {
      * @param 識別コード 識別コード
      */
     public void saveHihokenshaShutoku(KaigoTatokuKaijoJiyu 解除事由,
-            FlexibleDate 解除年月日,
-            FlexibleDate 解除届出年月日, ShikibetsuCode 識別コード) {
-
+            FlexibleDate 解除年月日, FlexibleDate 解除届出年月日, ShikibetsuCode 識別コード) {
+        requireNonNull(解除事由, UrSystemErrorMessages.値がnull.getReplacedMessage("解除事由"));
+        requireNonNull(解除年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("解除年月日"));
+        requireNonNull(解除届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("解除届出年月日"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         DbT1001HihokenshaDaichoEntity dbT1001entity = new DbT1001HihokenshaDaichoEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名情報PSM = select宛名情報PSM(識別コード);
-
         dbT1001entity.setIdoYMD(解除年月日);
         dbT1001entity.setIdoJiyuCode(他特例居住);
         dbT1001entity.setShichosonCode(宛名情報PSM.getGenLasdecCode());
@@ -280,28 +283,28 @@ public class TaJushochiTokureisyaKanriManager {
     /**
      * 宛名情報を取得します。
      *
-     * @param shikibetsuCode　識別コード
+     * @param 識別コード 識別コード
      * @return UaFt200FindShikibetsuTaishoEntity
      */
-    public UaFt200FindShikibetsuTaishoEntity select宛名情報PSM(ShikibetsuCode shikibetsuCode) {
+    public UaFt200FindShikibetsuTaishoEntity select宛名情報PSM(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先));
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
-        key.set識別コード(shikibetsuCode);
+        key.set識別コード(識別コード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         TaJushochiTokureisyaKanriParameter parameter = TaJushochiTokureisyaKanriParameter.createParam_TaJushochi(
                 ShikibetsuCode.EMPTY, new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
                 RString.EMPTY, JigyoshaNo.EMPTY, RString.EMPTY);
         ITaJushochiTokureisyaKanriMapper daichoJohoMapper = mapperProvider.create(ITaJushochiTokureisyaKanriMapper.class);
-        UaFt200FindShikibetsuTaishoEntity 宛名情報PSM = daichoJohoMapper.select宛名情報(parameter);
-        return 宛名情報PSM;
+        return daichoJohoMapper.select宛名情報(parameter);
     }
 
     private static class DateComparator implements Comparator<TaJushochiTokureisyaKanriRelateEntity>, Serializable {
 
         @Override
-        public int compare(TaJushochiTokureisyaKanriRelateEntity o1, TaJushochiTokureisyaKanriRelateEntity o2) {
-            return o1.getNyushoYMD().compareTo(o2.getNyushoYMD());
+        public int compare(TaJushochiTokureisyaKanriRelateEntity entity1, TaJushochiTokureisyaKanriRelateEntity entity2) {
+            return entity1.getNyushoYMD().compareTo(entity2.getNyushoYMD());
         }
     }
 }
