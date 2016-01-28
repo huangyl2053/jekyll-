@@ -46,7 +46,7 @@ public class Idochekkurisuto {
      * @param div 異動チェックリストDIV
      * @return ResponseData<IdochekkurisutoDiv>
      */
-    public ResponseData<IdochekkurisutoDiv> onBefore_BatchRegister(IdochekkurisutoDiv div) {
+    public ResponseData<IdochekkurisutoDiv> onClick_btnCheck(IdochekkurisutoDiv div) {
 
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(getValidationHandler(div).checkKashiAfterShuryoMsg());
