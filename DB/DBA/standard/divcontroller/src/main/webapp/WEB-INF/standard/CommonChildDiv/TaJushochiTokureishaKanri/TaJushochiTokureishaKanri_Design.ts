@@ -94,8 +94,8 @@ module DBA {
                 return new UZA.Panel(this.convFiledName("panShisetsuJoho"));
             }
 
-            //public ccdShisetsuJoho(): DBZ.shisetsuJohoCommonChildDiv.ModeController {
-            //    return new DBZ.shisetsuJohoCommonChildDiv.ModeController(this.convFiledName("ccdShisetsuJoho"));
+            //public ccdShisetsuJoho(): DBZ.ShisetsuJohoCommonChildDiv.ModeController {
+            //    return new DBZ.ShisetsuJohoCommonChildDiv.ModeController(this.convFiledName("ccdShisetsuJoho"));
             //}
 
             public btnKakunin(): UZA.Button {
