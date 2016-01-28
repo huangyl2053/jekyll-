@@ -28,7 +28,7 @@
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE9020001",
      "toLayoutTitle": "主治医マスタ",
-     "toState": "主治医登録_医療機関登録から遷移"
+     "toState": "主治医一覧_医療機関登録から遷移"
     },
     {
      "id": "3",
