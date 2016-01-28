@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke;
 
+import static jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.CheckForNullUtil.checkNullForCode;
+import static jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.CheckForNullUtil.checkNullForFlexibleDate;
+import static jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.CheckForNullUtil.checkNullForRString;
 import jp.co.ndensan.reams.db.dbe.entity.taishouwaritsuke.TaishouWaritsukeHeadEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -18,7 +21,18 @@ public class TaishouWaritsukeHead {
     private final TaishouWaritsukeHeadEntity headEntity;
 
     public TaishouWaritsukeHead(TaishouWaritsukeHeadEntity entity) {
-        this.headEntity = entity;
+        this.headEntity = new TaishouWaritsukeHeadEntity();
+        headEntity.set審査会名称(checkNullForRString(entity.get審査会名称()));
+        headEntity.set合議体名称(checkNullForRString(entity.get合議体名称()));
+        headEntity.set予定定員(entity.get予定定員());
+        headEntity.set割付人数(entity.get割付人数());
+        headEntity.set進捗状況(checkNullForCode(entity.get進捗状況()));
+        headEntity.set介護認定審査会開催場所名称(checkNullForRString(entity.get介護認定審査会開催場所名称()));
+        headEntity.set地区コード(checkNullForCode(entity.get地区コード()));
+        headEntity.set開催予定日(checkNullForFlexibleDate(entity.get開催予定日()));
+        headEntity.set予定開始時間(checkNullForRString(entity.get予定開始時間()));
+        headEntity.set予定終了時間(checkNullForRString(entity.get予定終了時間()));
+        headEntity.set合議体精神科医存在フラグ(entity.is合議体精神科医存在フラグ());
     }
 
     /**

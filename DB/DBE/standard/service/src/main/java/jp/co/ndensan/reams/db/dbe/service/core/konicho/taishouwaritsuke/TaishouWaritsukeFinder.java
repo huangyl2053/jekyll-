@@ -15,14 +15,18 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.Coun
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.CountShinsakaiWariateIinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.KohoshaIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.TaishouIchiranMapperParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.taishouwaritsuke.KohoshaIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.taishouwaritsuke.TaishouIchiranEntity;
+import jp.co.ndensan.reams.db.dbe.entity.taishouwaritsuke.TaishouWaritsukeHeadEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5102NinteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.taishouwaritsuke.ITaishouWaritsukeMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -51,7 +55,12 @@ public class TaishouWaritsukeFinder {
      */
     public TaishouWaritsukeHead getヘッドエリア(RString kaisaiNo) {
         ITaishouWaritsukeMapper mapper = mapperProvider.create(ITaishouWaritsukeMapper.class);
-        return new TaishouWaritsukeHead(mapper.getTaishouWaritsukeHead(kaisaiNo).get(0));
+        List<TaishouWaritsukeHeadEntity> list = mapper.getTaishouWaritsukeHead(kaisaiNo);
+        if (!list.isEmpty()) {
+            return new TaishouWaritsukeHead(list.get(0));
+        } else {
+            return new TaishouWaritsukeHead(new TaishouWaritsukeHeadEntity());
+        }
     }
 
     /**
@@ -94,13 +103,25 @@ public class TaishouWaritsukeFinder {
      */
     public NinteiShinseiJoho get申請書情報by申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
         DbT5101NinteiShinseiJohoDac dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
-        return new NinteiShinseiJoho(dac.get申請書情報by申請書管理番号(申請書管理番号));
+        DbT5101NinteiShinseiJohoEntity entity = dac.get申請書情報by申請書管理番号(申請書管理番号);
+        if (entity != null) {
+            return new NinteiShinseiJoho(entity);
+        } else {
+            return new NinteiShinseiJoho(new DbT5101NinteiShinseiJohoEntity());
+        }
     }
 
     public FlexibleDate get二次判定年月日(ShinseishoKanriNo 申請書管理番号) {
-        DbT5121ShinseiRirekiJohoDac dbt5121Dac = InstanceProvider.create(DbT5121ShinseiRirekiJohoDac.class);
         DbT5102NinteiKekkaJohoDac dbt5102Dac = InstanceProvider.create(DbT5102NinteiKekkaJohoDac.class);
-        return dbt5102Dac.selectByKey(dbt5121Dac.selectByKey(申請書管理番号).getZenkaiShinseishoKanriNo()).getNijiHanteiYMD();
+        ShinseishoKanriNo zenkaiShinseishoKanriNo = get前回申請書管理番号(申請書管理番号);
+        if (zenkaiShinseishoKanriNo != null) {
+            DbT5102NinteiKekkaJohoEntity kekkaJohoEntity = dbt5102Dac.selectByKey(zenkaiShinseishoKanriNo);
+            if (kekkaJohoEntity != null) {
+                FlexibleDate 二次判定年月日 = kekkaJohoEntity.getNijiHanteiYMD();
+                return 二次判定年月日 == null ? FlexibleDate.EMPTY : 二次判定年月日;
+            }
+        }
+        return FlexibleDate.EMPTY;
     }
 
     /**
@@ -123,5 +144,14 @@ public class TaishouWaritsukeFinder {
     public boolean is審査会委員除外存在チェックOK(CountShinsakaiIinJogaiJohoMapperParameter param) {
         ITaishouWaritsukeMapper mapper = mapperProvider.create(ITaishouWaritsukeMapper.class);
         return mapper.countShinsakaiIinJogaiJoho(param) <= 0;
+    }
+
+    private ShinseishoKanriNo get前回申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
+        DbT5121ShinseiRirekiJohoDac dbt5121Dac = InstanceProvider.create(DbT5121ShinseiRirekiJohoDac.class);
+        DbT5121ShinseiRirekiJohoEntity rirekiJohoEntity = dbt5121Dac.selectByKey(申請書管理番号);
+        if (rirekiJohoEntity != null) {
+            return rirekiJohoEntity.getZenkaiShinseishoKanriNo();
+        }
+        return null;
     }
 }
