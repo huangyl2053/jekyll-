@@ -320,10 +320,10 @@ public class NinteiChosaIrai {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            inertNinteichosaIraiJoho(div);
+            updateNinteichosaIraiJoho(div);
             return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
-        inertNinteichosaIraiJoho(div);
-        updateNinteichosaIraiJoho(div);
         // TODO 内部QA560 Redmine：#74750    (完了メッセージの表示方式が知らない)
 //        div.getKanryoMessage().setSuccessMessage(
 //                new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
