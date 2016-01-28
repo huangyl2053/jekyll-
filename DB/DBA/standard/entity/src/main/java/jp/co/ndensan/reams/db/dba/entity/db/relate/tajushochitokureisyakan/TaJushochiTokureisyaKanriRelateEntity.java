@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.entity.db.relate.TaJushochiTokureisyaKan;
+package jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  *
@@ -23,22 +22,17 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TaJushochiTokureisyaKanRirelateEntity {
+public class TaJushochiTokureisyaKanriRelateEntity {
 
-    @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
-    @PrimaryKey
     private FlexibleDate idoYMD;
-    @PrimaryKey
     private RString edaNo;
     private RString idoJiyuCode;
     private LasdecCode shichosonCode;
-    // TODO KaigoTatokuTekiyoJiyuタイプ、TypeHandlerを存在しない。
     private RString tekiyoJiyuCode;
     private FlexibleDate tekiyoYMD;
     private FlexibleDate tekiyoTodokedeYMD;
     private FlexibleDate tekiyoUketsukeYMD;
-    // TODO KaigoTatokuTekiyoJiyuタイプ、TypeHandlerを存在しない。
     private RString kaijoJiyuCode;
     private FlexibleDate kaijoYMD;
     private FlexibleDate kaijoTodokedeYMD;
@@ -48,7 +42,6 @@ public class TaJushochiTokureisyaKanRirelateEntity {
     private FlexibleDate tatokuRenrakuhyoHakkoYMD;
     private FlexibleDate shisetsuTaishoTsuchiHakkoYMD;
     private FlexibleDate shisetsuHenkoTsuchiHakkoYMD;
-    @PrimaryKey
     private Decimal rirekiNo;
     private RString daichoShubetsu;
     private RString nyushoShisetsuShurui;
@@ -56,7 +49,5 @@ public class TaJushochiTokureisyaKanRirelateEntity {
     private FlexibleDate nyushoYMD;
     private FlexibleDate taishoYMD;
     private AtenaMeisho jigyoshaName;
-    private FlexibleDate 生年月日;
-    private LasdecCode 現全国地方公共団体コード;
-    private LasdecCode 旧全国地方公共団体コード;
+
 }

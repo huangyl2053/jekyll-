@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshik
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
-import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigoatenakihon.KaigoAtenaKihonBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
-import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * KaigoShikakuKihon のクラスファイル
@@ -443,31 +442,26 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     @Override
     public void onLoad(ShikibetsuCode 識別コード) {
         KaigoAtenaKihonFinder finder = KaigoAtenaKihonFinder.createInstance();
-        SearchResult<KaigoAtenaKihonBusiness> result = finder.getKaigoShikakuKihon(識別コード);
-        List<KaigoAtenaKihonBusiness> list = result.records();
-        if (list.isEmpty()) {
+        KaigoAtenaKihonBusiness result = finder.getKaigoShikakuKihon(識別コード);
+        if (result == null) {
             return;
         }
-        KaigoAtenaKihonBusiness kihonBusiness = list.get(0);
-        this.txtHihokenshaNo.setValue(kihonBusiness.get被保険者番号().getColumnValue());
-        this.txtHihokenshaNo.setReadOnly(true);
-        this.txtShutokuYmd.setValue(kihonBusiness.get資格取得年月日());
-        this.txtShutokuYmd.setReadOnly(true);
-        this.txtShutokuJiyu.setValue(ShikakuShutokuJiyu.toValue(kihonBusiness.get資格取得事由コード()).getName());
-        this.txtShutokuJiyu.setReadOnly(true);
-        this.txtSoshitsuYmd.setValue(kihonBusiness.get資格喪失年月日());
-        this.txtSoshitsuYmd.setReadOnly(true);
-        this.txtSoshitsuJiyu.setValue(ShikakuSoshitsuJiyu.toValue(kihonBusiness.get資格喪失事由コード()).getName());
-        this.txtSoshitsuJiyu.setReadOnly(true);
-        this.txtJutokuKubun.setValue(kihonBusiness.get住所地特例フラグ().equals(new RString("1")) ? new RString("住特") : RString.EMPTY);
-        this.txtJutokuKubun.setReadOnly(true);
-        RDate 認定有効期間開始年月日 = new RDate(kihonBusiness.get認定有効期間開始年月日().toString());
-        RDate 認定有効期間終了年月日 = new RDate(kihonBusiness.get認定有効期間終了年月日().toString());
-        this.txtYokaigoJotaiKubun.setValue(get要介護状態区分コード(認定有効期間終了年月日, kihonBusiness.get要介護認定状態区分コード()));
-        this.txtNinteiKaishiYmd.setValue(認定有効期間開始年月日);
-        this.txtNinteiKaishiYmd.setReadOnly(true);
-        this.txtNinteiShuryoYmd.setValue(認定有効期間終了年月日);
-        this.txtNinteiShuryoYmd.setReadOnly(true);
+        initialization(result);
+    }
+
+    /**
+     * 介護資格基本の初期化
+     *
+     * @param 被保険者番号 被保険者番号
+     */
+    @Override
+    public void onLoad(HihokenshaNo 被保険者番号) {
+        KaigoAtenaKihonFinder finder = KaigoAtenaKihonFinder.createInstance();
+        KaigoAtenaKihonBusiness result = finder.getKaigoHihokenshaNo(被保険者番号);
+        if (result == null) {
+            return;
+        }
+        initialization(result);
     }
 
     private RString get要介護状態区分コード(RDate 認定有効期間終了年月日, Code 要介護認定状態区分コード) {
@@ -484,5 +478,27 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
             return YokaigoJotaiKubun06.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
         }
         return YokaigoJotaiKubun09.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
+    }
+
+    private void initialization(KaigoAtenaKihonBusiness result) {
+        this.txtHihokenshaNo.setValue(result.get被保険者番号().getColumnValue());
+        this.txtHihokenshaNo.setReadOnly(true);
+        this.txtShutokuYmd.setValue(result.get資格取得年月日());
+        this.txtShutokuYmd.setReadOnly(true);
+        this.txtShutokuJiyu.setValue(ShikakuShutokuJiyu.toValue(result.get資格取得事由コード()).getName());
+        this.txtShutokuJiyu.setReadOnly(true);
+        this.txtSoshitsuYmd.setValue(result.get資格喪失年月日());
+        this.txtSoshitsuYmd.setReadOnly(true);
+        this.txtSoshitsuJiyu.setValue(ShikakuSoshitsuJiyu.toValue(result.get資格喪失事由コード()).getName());
+        this.txtSoshitsuJiyu.setReadOnly(true);
+        this.txtJutokuKubun.setValue(result.get住所地特例フラグ().equals(new RString("1")) ? new RString("住特") : RString.EMPTY);
+        this.txtJutokuKubun.setReadOnly(true);
+        RDate 認定有効期間開始年月日 = new RDate(result.get認定有効期間開始年月日().toString());
+        RDate 認定有効期間終了年月日 = new RDate(result.get認定有効期間終了年月日().toString());
+        this.txtYokaigoJotaiKubun.setValue(get要介護状態区分コード(認定有効期間終了年月日, result.get要介護認定状態区分コード()));
+        this.txtNinteiKaishiYmd.setValue(認定有効期間開始年月日);
+        this.txtNinteiKaishiYmd.setReadOnly(true);
+        this.txtNinteiShuryoYmd.setValue(認定有効期間終了年月日);
+        this.txtNinteiShuryoYmd.setReadOnly(true);
     }
 }

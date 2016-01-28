@@ -11,19 +11,28 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810030.SeikyuGakuShukeiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810030.dgdSeikyugakushukei_Row;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShukeiEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
+ * 償還払い状況照会_請求額集計
  *
- * @author quxiaodong
+ * @author 瞿暁東
  */
 public class SeikyuGakuShukeiHandler {
 
     private final SeikyuGakuShukeiDiv div;
     private static final RString 設定不可 = new RString("0");
+    private static final RString 設定可_任意 = new RString("2");
+    private static final FlexibleYearMonth 平成２１年４月 = new FlexibleYearMonth("200904");
+    private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
 
     public SeikyuGakuShukeiHandler(SeikyuGakuShukeiDiv div) {
         this.div = div;
@@ -35,9 +44,6 @@ public class SeikyuGakuShukeiHandler {
      * @param shkanList
      */
     public void initialize(List<ShokanShukeiEntity> shkanList) {
-        div.getPanelHead().getTxtJigyoshaBango().setValue(new RString("001"));
-        div.getPanelHead().getTxtMeisaiBango().setValue(new RString("002"));
-        div.getPanelHead().getTxtShomeisho().setValue(new RString("証明書証明書証明書証明書証明書"));
         List<dgdSeikyugakushukei_Row> rowList = new ArrayList<>();
         for (ShokanShukeiEntity shokanshukei : shkanList) {
             dgdSeikyugakushukei_Row row = new dgdSeikyugakushukei_Row();
@@ -49,12 +55,40 @@ public class SeikyuGakuShukeiHandler {
             if (ShinsaHohoKubun.toValue(shokanshukei.getEntity().getShinsaHohoKubunCode()) != null) {
                 row.setDefaultDataName5(ShinsaHohoKubun.toValue(shokanshukei.getEntity().getShinsaHohoKubunCode()).get名称());
             }
+            row.setDefaultDataName7(shokanshukei.getEntity().getRenban());
             rowList.add(row);
         }
         div.getDgdSeikyugakushukei().setDataSource(rowList);
 
     }
 
+    /**
+     * setヘッダーエリア
+     *
+     * @param サービス年月
+     * @param 事業者番号
+     * @param 申請日
+     * @param 明細番号
+     * @param 証明書
+     */
+    public void setヘッダーエリア(
+            FlexibleYearMonth サービス年月,
+            JigyoshaNo 事業者番号,
+            RString 申請日,
+            RString 明細番号,
+            RString 証明書) {
+        div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
+        div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
+        div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
+        div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
+        div.getPanelHead().getTxtShomeisho().setValue(証明書);
+    }
+
+    /**
+     *
+     * @param shkanList
+     * @param entity
+     */
     public void selectButton(List<ShokanShukeiEntity> shkanList, ShokanKihon entity) {
 
         ShokanShukeiEntity shokanshukei = shkanList.get(0);
@@ -84,55 +118,47 @@ public class SeikyuGakuShukeiHandler {
 
     }
 
-    public void setボタン表示制御処理() {
-        if (設定不可.equals(//dbt3118Entity.getKihonSetteiKubun()
-                new RString("0"))) {
+    /**
+     * 制御処理
+     *
+     * @param shikibetsuNoKanriEntity
+     * @param サービス年月
+     */
+    public void setボタン表示制御処理(ShikibetsuNoKanriEntity shikibetsuNoKanriEntity, FlexibleYearMonth サービス年月) {
+
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getMeisaiSetteiKubun())) {
             div.getPanelHead().getBtnKihonInfo().setDisabled(true);
         }
-        if (設定不可.equals(//dbt3118Entity.getMeisaiSetteiKubun()
-                new RString("0"))) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShinryoSetteiKubun())) {
             div.getPanelHead().getBtnKyufuhiMeisai().setDisabled(true);
         }
-        if (設定不可.equals(//dbt3118Entity.getTokuteiShinryoSetteiKubun()
-                new RString("0"))) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getKyotakuKeikakuSetteiKubun())) {
             div.getPanelHead().getBtnTokuteiShinryohi().setDisabled(true);
         }
-        if (設定不可.equals(//dbt3118Entity.getTokuteiShinryoSetteiKubun()
-                new RString("0"))) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getTokuteinyushoshaSetteiKubun())) {
             div.getPanelHead().getBtnServiceKeikakuhi().setDisabled(true);
         }
-        if (設定不可.equals(//dbt3118Entity.getTokuteinyushoshaSetteiKubun()
-                new RString("0"))) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getShokujiHiyosetteiKubun())) {
             div.getPanelHead().getBtnTokuteiNyushosya().setDisabled(true);
         }
-        if (設定不可.equals(//dbt3118Entity.getTokuteinyushoshaSetteiKubun()
-                new RString("0"))) {
-            div.getPanelHead().getBtnKyufuhiMeisaiJyutoku().setDisabled(true);
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getShukeiSetteiKubun())) {
+            div.getPanelHead().getBtnShokujiHiyo().setDisabled(true);
         }
-
-        if (new RString("2").equals(//dbt3118Entity.getKihonSetteiKubun()
-                new RString("0"))) {
-            // 「緊急時・所定疾患」ボタンを活性に表示、「緊急時施設療養費」ボタンを非表示
-            div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
-        } else {
-            //  「緊急時・所定疾患」ボタンを非表示
-            div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
-// 「緊急時施設療養費」ボタン
-            if (設定不可.equals( // dbt3118Entity.getKinkyuShisetsuRyoyoSetteiKubun()
-                    new RString("0"))) {
-                div.getPanelHead().getBtnShokujiHiyo().setDisabled(true);
-            }
-        }
-        if (設定不可.equals(//dbt3118Entity.getTokuteinyushoshaSetteiKubun()
-                new RString("0"))) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getShakaifukushiKeigenSetteiKubun())) {
             div.getPanelHead().getBtnSeikyugakuShukei().setDisabled(true);
         }
-
-        if (設定不可.equals(//dbt3118Entity.getTokuteinyushoshaSetteiKubun()
-                new RString("0"))) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getMeisaiJushochitokureiSetteiKubun())) {
             div.getPanelHead().getBtnShafukukeigengaku().setDisabled(true);
         }
-
+        if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
+                && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
+            div.getPanelHead().getBtnTokuteiShinryohi().setVisible(false);
+        } else {
+            div.getPanelHead().getBtnKinkyujiShoteiShikkan().setVisible(false);
+            if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getKinkyuShisetsuRyoyoSetteiKubun())) {
+                div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
+            }
+        }
     }
 
 }

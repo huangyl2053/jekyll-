@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -44,6 +45,7 @@ public class NinteiChosaIraiHandler {
     private static final RString 元号_大正 = new RString("大正");
     private static final RString 元号_昭和 = new RString("昭和");
     private static final RString HOUSI = new RString("*");
+    private static final RString ハイフン = new RString("-");
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
     private static final int INDEX_5 = 5;
@@ -75,9 +77,9 @@ public class NinteiChosaIraiHandler {
         div.getTxtChosainChiku().clearValue();
         setDisabledToChosaItakusakiAndChosainKihonJoho(true);
         if (is単一保険者()) {
-            div.getCcdHokenshaList().setDisabled(false);
-        } else {
             div.getCcdHokenshaList().setDisabled(true);
+        } else {
+            div.getCcdHokenshaList().setDisabled(false);
         }
     }
 
@@ -133,6 +135,7 @@ public class NinteiChosaIraiHandler {
             row.setHokenshaName(nullToEmpty(市町村名称));
             dataSource.add(row);
         }
+        div.getDgChosaItakusakiIchiran().getFilterList().clear();
         div.getDgChosaItakusakiIchiran().setDataSource(dataSource);
     }
 
@@ -165,6 +168,7 @@ public class NinteiChosaIraiHandler {
             row.setHokenshaName(nullToEmpty(selectRow.getHokenshaName()));
             dataSource.add(row);
         }
+        div.getDgchosainIchiran().getFilterList().clear();
         div.getDgchosainIchiran().setDataSource(dataSource);
     }
 
@@ -198,13 +202,11 @@ public class NinteiChosaIraiHandler {
             if (business.getChikuCode() != null) {
                 row.setChiku(business.getChikuCode().value());
             }
-            if (business.getTemp_shujiiName() != null) {
-                row.setZenkaiChosaItakusaki(business.getTemp_shujiiName().value());
-            }
+            row.setZenkaiChosaItakusaki(nullToEmpty(business.getTemp_jigyoshaMeisho()));
             row.setZenkaiNinteiChosainShimei(nullToEmpty(business.getTemp_chosainShimei()));
             row.setHokensha(hokenshaName);
             if (business.getChosaKubun() != null) {
-                row.setChosaKubun(ChosaKubun.toValue(business.getChosaKubun().value()).getコード());
+                row.setChosaKubun(ChosaKubun.toValue(business.getChosaKubun().value()).get名称());
             }
             if (business.getJusho() != null) {
                 row.setJusho(business.getJusho().value());
@@ -214,8 +216,11 @@ public class NinteiChosaIraiHandler {
                 row.setShujii(business.getShujiiName().value());
             }
 
-            row.setZenkaiShujiiIryoKikan(nullToEmpty(business.getTemp_jigyoshaMeisho()));
-            row.setZenkaiShujii(nullToEmpty(business.getTemp_iryoKikanMeisho()));
+            row.setZenkaiShujiiIryoKikan(nullToEmpty(business.getTemp_iryoKikanMeisho()));
+            if (business.getTemp_shujiiName() != null) {
+                row.setZenkaiShujii(business.getTemp_shujiiName().value());
+            }
+
             row.setShinseishoKanriNo(nullToEmpty(business.getShinseishoKanriNo()));
             row.setNinteichosaIraiRirekiNo(new RString(String.valueOf(business.getNinteichosaIraiRirekiNo())));
             row.setKoroshoIfShikibetsuCode(
@@ -223,6 +228,7 @@ public class NinteiChosaIraiHandler {
             setDgMiwaritsukeShinseishaIchiran_Row(row, business);
             dataSource.add(row);
         }
+        div.getDgMiwaritsukeShinseishaIchiran().getFilterList().clear();
         div.getDgMiwaritsukeShinseishaIchiran().setDataSource(dataSource);
     }
 
@@ -339,16 +345,14 @@ public class NinteiChosaIraiHandler {
             if (business.getChikuCode() != null) {
                 row.setChiku(business.getChikuCode().value());
             }
-            if (business.getTemp_shujiiName() != null) {
-                row.setZenkaiChosaItakusaki(business.getTemp_shujiiName().value());
-            }
+            row.setZenkaiChosaItakusaki(nullToEmpty(business.getTemp_jigyoshaMeisho()));
             row.setZenkaiChosain(nullToEmpty(business.getTemp_chosainShimei()));
 
             if (business.getNinteichosaIraiYMD() != null) {
                 row.setChosaIraiDay(business.getNinteichosaIraiYMD().wareki().toDateString());
             }
             if (business.getChosaKubun() != null) {
-                row.setChosaKubun(ChosaKubun.toValue(business.getChosaKubun().value()).getコード());
+                row.setChosaKubun(ChosaKubun.toValue(business.getChosaKubun().value()).get名称());
             }
 
             row.setHokensha(hokenshaName);
@@ -360,8 +364,11 @@ public class NinteiChosaIraiHandler {
                 row.setShujii(business.getShujiiName().value());
             }
 
-            row.setZenkaiShujiIryoKikan(nullToEmpty(business.getTemp_jigyoshaMeisho()));
-            row.setZenkaiShujii(nullToEmpty(business.getTemp_iryoKikanMeisho()));
+            row.setZenkaiShujiIryoKikan(nullToEmpty(business.getTemp_iryoKikanMeisho()));
+            if (business.getTemp_shujiiName() != null) {
+                row.setZenkaiShujii(business.getTemp_shujiiName().value());
+            }
+
             TextBoxDate iraishoShutsuryokuDay = new TextBoxDate();
             if (business.getIraishoShutsuryokuYMD() != null) {
                 iraishoShutsuryokuDay.setValue(new RDate(business.getIraishoShutsuryokuYMD().toString()));
@@ -384,6 +391,7 @@ public class NinteiChosaIraiHandler {
             setDgWaritsukeZumiShinseishaIchiran_Row(row, business);
             dataSource.add(row);
         }
+        div.getDgWaritsukeZumiShinseishaIchiran().getFilterList().clear();
         div.getDgWaritsukeZumiShinseishaIchiran().setDataSource(dataSource);
         div.getTxtChosaIraiDay().setValue(RDate.getNowDate());
     }
@@ -623,21 +631,18 @@ public class NinteiChosaIraiHandler {
         List<ChosaIraishoHeadItem> chosaIraishoHeadItemList = new ArrayList<>();
         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
             List<RString> 被保険者番号リスト = get被保険者番号(row.getHihokenshaNo());
-            RString 誕生日明治 = RString.EMPTY;
-            RString 誕生日大正 = RString.EMPTY;
-            RString 誕生日昭和 = RString.EMPTY;
+            RString 誕生日明治 = HOUSI;
+            RString 誕生日大正 = HOUSI;
+            RString 誕生日昭和 = HOUSI;
             RDate seinengappiYMD = new RDate(row.getSeinengappiYMD().toString());
             RString era = seinengappiYMD.wareki().eraType(EraType.KANJI).getEra();
 
             if (元号_明治.equals(era)) {
-                誕生日大正 = HOUSI;
-                誕生日昭和 = HOUSI;
+                誕生日明治 = RString.EMPTY;
             } else if (元号_大正.equals(era)) {
-                誕生日明治 = HOUSI;
-                誕生日昭和 = HOUSI;
+                誕生日大正 = RString.EMPTY;
             } else if (元号_昭和.equals(era)) {
-                誕生日大正 = HOUSI;
-                誕生日明治 = HOUSI;
+                誕生日昭和 = RString.EMPTY;
             }
             RString seibetsu = row.getSeibetsu();
             RString 性別男 = RString.EMPTY;
@@ -674,7 +679,7 @@ public class NinteiChosaIraiHandler {
                     row.getHihokenshaShimei(),
                     性別男,
                     性別女,
-                    row.getYubinNo(),
+                    editYubinNoToIchiran(row.getYubinNo()),
                     row.getJusho(),
                     row.getTelNo(),
                     row.getHomonChosasakiYubinNo(),
@@ -707,6 +712,18 @@ public class NinteiChosaIraiHandler {
             chosaIraishoHeadItemList.add(item);
         }
         return chosaIraishoHeadItemList;
+    }
+
+    private RString editYubinNoToIchiran(RString yubinNo) {
+        RStringBuilder yubinNoSb = new RStringBuilder();
+        if (INDEX_3 <= yubinNo.length()) {
+            yubinNoSb.append(yubinNo.substring(0, INDEX_3));
+            yubinNoSb.append(ハイフン);
+            yubinNoSb.append(yubinNo.substring(INDEX_3));
+        } else {
+            yubinNoSb.append(yubinNo);
+        }
+        return yubinNoSb.toRString();
     }
 
     private List<RString> get被保険者番号(RString 被保険者番号) {

@@ -54,14 +54,13 @@ public class NenpoYoushi3Handler {
     /**
      * 画面初期化処理します。
      *
-     * @param 事業報告集計一覧データリスト 事業報告集計一覧データリスト
      * @param 補正フラグ 補正フラグ
      * @param 報告年度 報告年度
      * @param 集計年度 集計年度
      * @param 保険者コード 保険者コード
      * @param 保険者名称 保険者名称
      */
-    public void initialize(List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト, RString 補正フラグ,
+    public void initialize(RString 補正フラグ,
             FlexibleDate 報告年度, FlexibleDate 集計年度, RString 保険者コード, RString 保険者名称) {
         div.getHihokenshabango().getTxthokokuYM().setValue(報告年度);
         div.getHihokenshabango().getTxthokokuYM().setDisabled(true);
@@ -71,9 +70,6 @@ public class NenpoYoushi3Handler {
         div.getHihokenshabango().getTxtHihokenshabango().setDisabled(true);
         div.getHihokenshabango().getTxthihokenshamei().setValue(保険者名称);
         div.getHihokenshabango().getTxthihokenshamei().setDisabled(true);
-        for (JigyoHokokuTokeiData data : 事業報告集計一覧データリスト) {
-            set収納状況詳細データ(data);
-        }
         set活性();
         if (補正フラグ.equals(フラグ_削除)) {
             set非活性();
@@ -92,48 +88,52 @@ public class NenpoYoushi3Handler {
     }
 
     /**
+     * 保険料収納状況詳細データを設定します。
+     *
+     * @param 事業報告集計一覧データリスト 事業報告集計一覧データリスト
+     */
+    public void set保険料収納状況詳細データ(List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト) {
+        for (JigyoHokokuTokeiData data : 事業報告集計一覧データリスト) {
+            set収納状況詳細データ(data);
+        }
+    }
+
+    /**
      * 画面の修正データを取得します。
      *
      * @return List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト
      */
     public List<JigyoHokokuTokeiData> get修正データ() {
         List<JigyoHokokuTokeiData> list = new ArrayList<>();
-        RString title = div.getShokuhikyojunofutannintei().getTabShokuhikyojunofutannintei().getSelectedItem().getTitle();
-        if (title.equals(保険料収納状況)) {
-            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険料収納状況 = ViewStateHolder.
-                    get(NenpoYoushi3ViewStateKeys.保険料収納状況データ, Models.class);
-            List<NenpoYoushi3DetalParameter> 保険料収納状況画面データ = get保険料収納状況画面データ();
-            for (NenpoYoushi3DetalParameter parameter : 保険料収納状況画面データ) {
-                for (JigyoHokokuTokeiData data : 保険料収納状況) {
-                    JigyoHokokuTokeiDataBuilder builder = data.createBuilderForEdit();
-                    if (parameter.get縦番号().compareTo(data.get縦番号()) == 0
-                            && parameter.get横番号().compareTo(data.get横番号()) == 0
-                            && parameter.get集計結果値().compareTo(data.get集計結果値()) != 0) {
-                        builder.set集計結果値(parameter.get集計結果値());
-                        data = builder.build();
-                        list.add(data);
-                    }
+        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険料収納状況データ = ViewStateHolder.
+                get(NenpoYoushi3ViewStateKeys.保険料収納状況データ, Models.class);
+        List<NenpoYoushi3DetalParameter> 保険料収納状況画面データ = get保険料収納状況画面データ();
+        for (NenpoYoushi3DetalParameter parameter : 保険料収納状況画面データ) {
+            for (JigyoHokokuTokeiData data : 保険料収納状況データ) {
+                JigyoHokokuTokeiDataBuilder builder = data.createBuilderForEdit();
+                if (parameter.get縦番号().compareTo(data.get縦番号()) == 0
+                        && parameter.get横番号().compareTo(data.get横番号()) == 0
+                        && parameter.get集計結果値().compareTo(data.get集計結果値()) != 0) {
+                    builder.set集計結果値(parameter.get集計結果値());
+                    data = builder.build();
+                    list.add(data);
                 }
             }
-
         }
-        if (title.equals(保険給付支払状況)) {
-            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険給付支払状況 = ViewStateHolder.
-                    get(NenpoYoushi3ViewStateKeys.保険給付支払状況データ, Models.class);
-            List<NenpoYoushi3DetalParameter> 保険給付支払状況画面データ = get保険給付支払状況画面データ();
-            for (NenpoYoushi3DetalParameter parameter : 保険給付支払状況画面データ) {
-                for (JigyoHokokuTokeiData data : 保険給付支払状況) {
-                    JigyoHokokuTokeiDataBuilder builder = data.createBuilderForEdit();
-                    if (parameter.get縦番号().compareTo(data.get縦番号()) == 0
-                            && parameter.get横番号().compareTo(data.get横番号()) == 0
-                            && parameter.get集計結果値().compareTo(data.get集計結果値()) != 0) {
-                        builder.set集計結果値(parameter.get集計結果値());
-                        data = builder.build();
-                        list.add(data);
-                    }
+        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険給付支払状況データ = ViewStateHolder.
+                get(NenpoYoushi3ViewStateKeys.保険給付支払状況データ, Models.class);
+        List<NenpoYoushi3DetalParameter> 保険給付支払状況画面データ = get保険給付支払状況画面データ();
+        for (NenpoYoushi3DetalParameter parameter : 保険給付支払状況画面データ) {
+            for (JigyoHokokuTokeiData data : 保険給付支払状況データ) {
+                JigyoHokokuTokeiDataBuilder builder = data.createBuilderForEdit();
+                if (parameter.get縦番号().compareTo(data.get縦番号()) == 0
+                        && parameter.get横番号().compareTo(data.get横番号()) == 0
+                        && parameter.get集計結果値().compareTo(data.get集計結果値()) != 0) {
+                    builder.set集計結果値(parameter.get集計結果値());
+                    data = builder.build();
+                    list.add(data);
                 }
             }
-
         }
         return list;
     }

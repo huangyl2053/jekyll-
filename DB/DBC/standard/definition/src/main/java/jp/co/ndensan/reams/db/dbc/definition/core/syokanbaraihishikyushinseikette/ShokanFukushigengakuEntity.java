@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShokanShakaiFukushiHojinKeigengakuEntity {
+public class ShokanFukushigengakuEntity {
 
     private final RString 連番;
     private final Decimal 軽減率;
@@ -39,7 +39,7 @@ public class ShokanShakaiFukushiHojinKeigengakuEntity {
      * @param 備考
      * @param 状態
      */
-    protected ShokanShakaiFukushiHojinKeigengakuEntity(RString 連番, Decimal 軽減率,
+    protected ShokanFukushigengakuEntity(RString 連番, Decimal 軽減率,
             ServiceShuruiCode サービス種類コード, int 受領すべき利用者負担の総額, int 軽減額,
             int 軽減後利用者負担額, RString 備考, RString 状態) {
         this.連番 = 連番;
@@ -65,10 +65,10 @@ public class ShokanShakaiFukushiHojinKeigengakuEntity {
      * @param 状態
      * @return
      */
-    public static ShokanShakaiFukushiHojinKeigengakuEntity createSelectByKeyParam(RString 連番, Decimal 軽減率,
+    public static ShokanFukushigengakuEntity createSelectByKeyParam(RString 連番, Decimal 軽減率,
             ServiceShuruiCode サービス種類コード, int 受領すべき利用者負担の総額, int 軽減額, int 軽減後利用者負担額,
             RString 備考, RString 状態) {
-        return new ShokanShakaiFukushiHojinKeigengakuEntity(連番, 軽減率, サービス種類コード,
+        return new ShokanFukushigengakuEntity(連番, 軽減率, サービス種類コード,
                 受領すべき利用者負担の総額, 軽減額, 軽減後利用者負担額, 備考, 状態);
     }
 }

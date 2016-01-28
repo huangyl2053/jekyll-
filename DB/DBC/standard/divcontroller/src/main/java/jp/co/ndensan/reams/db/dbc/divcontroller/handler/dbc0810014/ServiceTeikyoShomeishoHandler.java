@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810014;
 
 import java.util.ArrayList;
@@ -44,7 +43,7 @@ public class ServiceTeikyoShomeishoHandler {
         div.getDgdServiceTeikyoShomeisyo().setDataSource(rowList);
     }
 
-    public void setヘッダ_エリア(FlexibleYearMonth サービス年月,RString 整理番号) {
+    public void setヘッダ_エリア(FlexibleYearMonth サービス年月, RString 整理番号) {
         div.getPanelTwo().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
         div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
     }
@@ -61,7 +60,7 @@ public class ServiceTeikyoShomeishoHandler {
         RString 明細番号 = row.getData3();
         RString 証明書 = row.getData4();
         ServiceTeiKyoShomeishoParameter parameterHolder = new ServiceTeiKyoShomeishoParameter(
-                被保険者番号, サービス年月, 整理番号, 事業者番号, 事業者名, 明細番号 ,証明書);
+                被保険者番号, サービス年月, 整理番号, 事業者番号, 事業者名, 明細番号, 証明書);
         ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parameterHolder);
     }
 }

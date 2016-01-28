@@ -172,7 +172,9 @@ public class JushochiTokureiRirekiListHandler {
             kaijoDate.setValue(jutokuRirekiDiv.getTxtKaijoDate().getValue());
             TextBoxFlexibleDate kaijoTodokedeDate = new TextBoxFlexibleDate();
             kaijoTodokedeDate.setValue(jutokuRirekiDiv.getTxtKaijoTodokedeDate().getValue());
-            row.setState(new RString("修正"));
+            if (!(new RString("追加").equals(row.getState()))) {
+                row.setState(new RString("修正"));
+            }
             row.setTekiyoDate(tekiyoDate);
             row.setTekiyoTodokedeDate(tekiyoTodokedeDate);
             row.setKaijoDate(kaijoDate);

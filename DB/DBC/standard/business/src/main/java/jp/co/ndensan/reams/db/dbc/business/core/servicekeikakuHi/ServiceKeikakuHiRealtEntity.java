@@ -5,11 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.servicekeikakuHi;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200004Entity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200604Entity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200904Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3045ShokanServicePlan200004Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3046ShokanServicePlan200604Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3047ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -19,68 +18,43 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class ServiceKeikakuHiRealtEntity {
 
-    private final ShokanServicePlan200904Entity entity200904;
-    private final ShokanServicePlan200604Entity entity200604;
-    private final ShokanServicePlan200004Entity entity200004;
+    private final DbT3047ShokanServicePlan200904Entity entity200904;
+    private final DbT3046ShokanServicePlan200604Entity entity200604;
+    private final DbT3045ShokanServicePlan200004Entity entity200004;
 
     /**
      * コンストラクタです。
      *
-     * @param entity200904 ShokanServicePlan200904Entity
-     * @param entity200604 ShokanServicePlan200604Entity
-     * @param entity200004 ShokanServicePlan200004Entity
+     * @param entity200904 DbT3047ShokanServicePlan200904Entity
+     * @param entity200604 DbT3046ShokanServicePlan200604Entity
+     * @param entity200004 DbT3045ShokanServicePlan200004Entity
      */
     public ServiceKeikakuHiRealtEntity(
-            ShokanServicePlan200904Entity entity200904,
-            ShokanServicePlan200604Entity entity200604,
-            ShokanServicePlan200004Entity entity200004) {
+            DbT3047ShokanServicePlan200904Entity entity200904,
+            DbT3046ShokanServicePlan200604Entity entity200604,
+            DbT3045ShokanServicePlan200004Entity entity200004) {
         this.entity200904 = entity200904;
         this.entity200604 = entity200604;
         this.entity200004 = entity200004;
     }
-
-    /**
-     * 指定_基準該当事業者区分コードを取得します。
-     *
-     * @return 指定_基準該当事業者区分コード
-     */
-    public RString get指定_基準該当事業者区分コード200904() {
-        return entity200904.getEntity().getShiteiKijunGaitoJigyoshaKubunCode();
-    }
-    
-    /**
-     * 審査方法区分コードを取得します。
-     *
-     * @return 審査方法区分コード
-     */
-    public RString get審査方法区分コード() {
-        return entity200904.getEntity().getShinsaHohoKubunCode();
-    }
-    
-   /**
-     * 担当介護支給専門員番号を取得します。
-     *
-     * @return 担当介護支給専門員番号
-     */ 
-    public RString get担当介護支給専門員番号() {
-        return entity200904.getEntity().getTantokangoshienSemmoninNo();
-    }
-
-    /**
-     * 届出日を取得します。
-     *
-     * @return 届出日
-     */
-    public FlexibleDate get届出日200904() {
-        return entity200904.getEntity().getKyotakuServiceSakuseiIraiYMD();
-    }
-
+    // TODO 凌護行 事業者区分コードがない、QA回答まち、
+//    public XXX get事業者区分コード() {
+//        return entity200904.getXXX();
+//    }
+    // TODO 凌護行 審査方法がない、QA回答まち、
+//    public XXX get審査方法() {
+//    return entity200904.getXXX();
+//    }
+    // TODO 凌護行 担当介護支給専門員番号がない、QA回答まち、
+//    public XXX get担当介護支給専門員番号() {
+//    return entity200904.get担当介護支給専門員番号();
+//    }
     /**
      * 償還払請求サービス計画200004を取得します。
      *
      * @return 償還払請求サービス計画200004
      */
-    public ShokanServicePlan200004Entity get償還払請求サービス計画200004() {
+    public DbT3045ShokanServicePlan200004Entity get償還払請求サービス計画200004() {
         return entity200004;
     }
 
@@ -89,7 +63,7 @@ public class ServiceKeikakuHiRealtEntity {
      *
      * @return 償還払請求サービス計画200604
      */
-    public ShokanServicePlan200604Entity get償還払請求サービス計画200604() {
+    public DbT3046ShokanServicePlan200604Entity get償還払請求サービス計画200604() {
         return entity200604;
     }
 
@@ -98,7 +72,7 @@ public class ServiceKeikakuHiRealtEntity {
      *
      * @return 償還払請求サービス計画200904
      */
-    public ShokanServicePlan200904Entity get償還払請求サービス計画200904() {
+    public DbT3047ShokanServicePlan200904Entity get償還払請求サービス計画200904() {
         return entity200904;
     }
 
@@ -108,7 +82,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 単位数単価
      */
     public Decimal get単位数単価() {
-        return entity200904.getEntity().getTanisuTanka();
+        return entity200904.getTanisuTanka();
     }
 
     /**
@@ -117,25 +91,20 @@ public class ServiceKeikakuHiRealtEntity {
      * @return サービスコード
      */
     public ServiceCode getサービスコード() {
-        return entity200904.getEntity().getServiceCode();
+        return entity200904.getServiceCode();
     }
 
-    /**
-     * サービス名称を取得します。
-     *
-     * @return サービス名称
-     */
-    public RString getサービス名称200904() {
-        return entity200904.getServiceName();
-    }
-
+    // TODO 凌護行 サービス名称がない
+//    public XXX get名称() {
+//    return
+//    }
     /**
      * 単位数を取得します。
      *
      * @return 単位数
      */
     public int get単位数() {
-        return entity200904.getEntity().getTanisu();
+        return entity200904.getTanisu();
     }
 
     /**
@@ -144,7 +113,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 回数
      */
     public int get回数() {
-        return entity200904.getEntity().getKaisu();
+        return entity200904.getKaisu();
     }
 
     /**
@@ -153,7 +122,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 連番
      */
     public RString get連番() {
-        return entity200904.getEntity().getRenban();
+        return entity200904.getRenban();
     }
 
     /**
@@ -162,7 +131,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return サービス単位数
      */
     public int getサービス単位数() {
-        return entity200904.getEntity().getServiceTanisu();
+        return entity200904.getServiceTanisu();
     }
 
     /**
@@ -171,7 +140,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 摘要
      */
     public RString get摘要() {
-        return entity200904.getEntity().getTekiyo();
+        return entity200904.getTekiyo();
     }
 
     /**
@@ -180,7 +149,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 審査年月
      */
     public FlexibleYearMonth get審査年月() {
-        return entity200904.getEntity().getShinsaYM();
+        return entity200904.getShinsaYM();
     }
 
     /**
@@ -189,7 +158,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 支給区分
      */
     public RString get支給区分() {
-        return entity200904.getEntity().getShikyuKubunCode();
+        return entity200904.getShikyuKubunCode();
     }
 
     /**
@@ -198,7 +167,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 支払金額
      */
     public int get支払金額() {
-        return entity200904.getEntity().getShikyuKingaku();
+        return entity200904.getShikyuKingaku();
     }
 
     /**
@@ -207,7 +176,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 増減点
      */
     public int get増減点() {
-        return entity200904.getEntity().getZougenTen();
+        return entity200904.getZougenTen();
     }
 
     /**
@@ -216,7 +185,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 備考1
      */
     public RString get備考1() {
-        return entity200904.getEntity().getZougenRiyu();
+        return entity200904.getZougenRiyu();
     }
 
     /**
@@ -225,7 +194,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 備考2
      */
     public RString get備考2() {
-        return entity200904.getEntity().getFushikyuRiyu();
+        return entity200904.getFushikyuRiyu();
     }
 
     /**
@@ -234,7 +203,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 備考3
      */
     public RString get備考3() {
-        return entity200904.getEntity().getKounyuKaishuRireki();
+        return entity200904.getKounyuKaishuRireki();
     }
 
     /**
@@ -243,51 +212,37 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 指定_基準該当事業者区分コード
      */
     public RString get指定_基準該当事業者区分コード200604() {
-        return entity200604.getEntity().getShiteiKijunGaitoJigyoshaKubunCode();
+        return entity200604.getShiteiKijunGaitoJigyoshaKubunCode();
     }
 
-    /**
-     * 届出日を取得します。
-     *
-     * @return 届出日
-     */
-    public FlexibleDate get届出日200604() {
-        return entity200604.getEntity().getKyotakuServiceSakuseiIraiYMD();
-    }
-
-    /**
-     * 審査方法を取得します。
-     *
-     * @return 審査方法
-     */
-    public RString get審査方法200604() {
-        return entity200604.getEntity().getShinsaHohoKubunCode();
-    }
-
+    // TODO 凌護行 届出日がない、QA回答まち、
+//    public get届出日() {
+//    return entity200604.getxxx();
+//    }
+    // TODO 凌護行 審査方法がない、QA回答まち、
+//    public RString get審査方法200604() {
+//    return entity200604.getShiteiKijunGaitoJigyoshaKubunCode();
+//    }
     /**
      * サービスコードを取得します。
      *
      * @return サービスコード
      */
     public ServiceCode getサービスコード200604() {
-        return entity200604.getEntity().getServiceCode();
+        return entity200604.getServiceCode();
     }
 
-    /**
-     * サービス名称を取得します。
-     *
-     * @return サービス名称
-     */
-    public RString getサービス名称200604() {
-        return entity200604.getServiceName();
-    }
+    // TODO 凌護行 サービス名称がない
+//                public RString getサービス名称200604() {
+//    return entity200604.getXXX();
+//    }
     /**
      * 単位数を取得します。
      *
      * @return 単位数
      */
     public int get単位数200604() {
-        return entity200604.getEntity().getTanisu();
+        return entity200604.getTanisu();
     }
 
     /**
@@ -296,7 +251,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 単位数単価
      */
     public Decimal get単位数単価200604() {
-        return entity200604.getEntity().getTanisuTanka();
+        return entity200604.getTanisuTanka();
     }
 
     /**
@@ -305,7 +260,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 請求金額
      */
     public int get請求金額200604() {
-        return entity200604.getEntity().getSeikyuKingaku();
+        return entity200604.getSeikyuKingaku();
     }
 
     /**
@@ -314,7 +269,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 担当介護支援専門員番号
      */
     public RString get担当介護支援専門員番号200604() {
-        return entity200604.getEntity().getTantokangoshienSemmoninNo();
+        return entity200604.getTantokangoshienSemmoninNo();
     }
 
     /**
@@ -323,7 +278,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 摘要
      */
     public RString get摘要200604() {
-        return entity200604.getEntity().getTekiyo();
+        return entity200604.getTekiyo();
     }
 
     /**
@@ -332,7 +287,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 審査年月
      */
     public FlexibleYearMonth get審査年月200604() {
-        return entity200604.getEntity().getShinsaYM();
+        return entity200604.getShinsaYM();
     }
 
     /**
@@ -341,7 +296,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 支給区分
      */
     public RString get支給区分200604() {
-        return entity200604.getEntity().getShikyuKubunCode();
+        return entity200604.getShikyuKubunCode();
     }
 
     /**
@@ -349,9 +304,9 @@ public class ServiceKeikakuHiRealtEntity {
      *
      * @return サービス単位
      */
-//    public int getサービス単位200604() {
-//        return entity200604.getEntity().getServiceTanisu();
-//    }
+    public int getサービス単位200604() {
+        return entity200604.getTanisu();
+    }
 
     /**
      * 支払金額を取得します。
@@ -359,7 +314,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 支払金額
      */
     public int get支払金額200604() {
-        return entity200604.getEntity().getShikyuKingaku();
+        return entity200604.getShikyuKingaku();
     }
 
     /**
@@ -368,7 +323,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 増減点
      */
     public int get増減点200604() {
-        return entity200604.getEntity().getZougenTen();
+        return entity200604.getZougenTen();
     }
 
     /**
@@ -377,7 +332,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 備考1
      */
     public RString get備考1200604() {
-        return entity200604.getEntity().getZougenRiyu();
+        return entity200604.getZougenRiyu();
     }
 
     /**
@@ -386,7 +341,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 備考2
      */
     public RString get備考2200604() {
-        return entity200604.getEntity().getFushikyuRiyu();
+        return entity200604.getFushikyuRiyu();
     }
 
     /**
@@ -395,60 +350,37 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 備考3
      */
     public RString get備考3200604() {
-        return entity200604.getEntity().getKounyuKaishuRireki();
+        return entity200604.getKounyuKaishuRireki();
     }
 
-    /**
-     * 届出日
-     *
-     * @return 届出日
-     */
-    public FlexibleDate get届出日200004() {
-        return entity200004.getEntity().getKyotakuServiceSakuseiIraiYMD();
-    }
-
-    /**
-     * 指定_基準該当事業者区分コードを取得します。
-     *
-     * @return 指定_基準該当事業者区分コード
-     */
-    public RString get指定_基準該当事業者区分コード200004() {
-        return entity200004.getEntity().getShiteiKijunGaitoJigyoshaKubunCode();
-    }
- 
-     /**
-     * 審査方法
-     *
-     * @return 審査方法
-     */
-    public RString get審査方法200004() {
-        return entity200004.getEntity().getShinsaHohoKubunCode();
-    }
-
+    // TODO 凌護行 届出日がない、QA回答まち、
+//    public get届出日() {
+//    return entity200004.getxxx();
+//    }
+    // TODO 凌護行 審査方法がない、QA回答まち、
+//    public RString get審査方法200004() {
+//    return entity200004.getShiteiKijunGaitoJigyoshaKubunCode();
+//    }
     /**
      * サービスコードを取得します。
      *
      * @return サービスコード
      */
     public ServiceCode getサービスコード200004() {
-        return entity200004.getEntity().getServiceCode();
+        return entity200004.getServiceCode();
     }
 
-    /**
-     * サービス名称を取得します。
-     *
-     * @return サービス名称
-     */
-    public RString getサービス名称200004() {
-        return entity200004.getServiceName();
-    }
+    // TODO 凌護行 サービス名称がない
+//                public RString getサービス名称200004() {
+//    return entity200004.getXXX();
+//    }
     /**
      * 単位数を取得します。
      *
      * @return 単位数
      */
     public int get単位数200004() {
-        return entity200004.getEntity().getTanisu();
+        return entity200004.getTanisu();
     }
 
     /**
@@ -457,7 +389,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 単位数単価
      */
     public Decimal get単位数単価200004() {
-        return entity200004.getEntity().getTanisuTanka();
+        return entity200004.getTanisuTanka();
     }
 
     /**
@@ -466,7 +398,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 請求金額
      */
     public int get請求金額200004() {
-        return entity200004.getEntity().getSeikyuKingaku();
+        return entity200004.getSeikyuKingaku();
     }
 
     /**
@@ -475,7 +407,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 審査年月
      */
     public FlexibleYearMonth get審査年月200004() {
-        return entity200004.getEntity().getShinsaYM();
+        return entity200004.getShinsaYM();
     }
 
     /**
@@ -484,7 +416,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 支給区分
      */
     public RString get支給区分200004() {
-        return entity200004.getEntity().getShikyuKubunCode();
+        return entity200004.getShikyuKubunCode();
     }
 
     /**
@@ -493,7 +425,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 支払金額
      */
     public int get支払金額200004() {
-        return entity200004.getEntity().getShikyuKingaku();
+        return entity200004.getShikyuKingaku();
     }
 
     /**
@@ -502,7 +434,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 増減点
      */
     public int get増減点200004() {
-        return entity200004.getEntity().getZougenTen();
+        return entity200004.getZougenTen();
     }
 
     /**
@@ -511,7 +443,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 備考1
      */
     public RString get備考1200004() {
-        return entity200004.getEntity().getZougenRiyu();
+        return entity200004.getZougenRiyu();
     }
 
     /**
@@ -520,7 +452,7 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 備考2
      */
     public RString get備考2200004() {
-        return entity200004.getEntity().getFushikyuRiyu();
+        return entity200004.getFushikyuRiyu();
     }
 
     /**
@@ -529,6 +461,6 @@ public class ServiceKeikakuHiRealtEntity {
      * @return 備考3
      */
     public RString get備考3200004() {
-        return entity200004.getEntity().getKounyuKaishuRireki();
+        return entity200004.getKounyuKaishuRireki();
     }
 }

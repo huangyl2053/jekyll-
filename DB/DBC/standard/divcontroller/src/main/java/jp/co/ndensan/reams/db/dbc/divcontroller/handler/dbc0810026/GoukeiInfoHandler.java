@@ -23,6 +23,8 @@ public class GoukeiInfoHandler {
     
     private final GoukeiInfoDiv div;
     private static final RString 設定不可 = new RString("0");
+    private static final RString 設定可_任意 = new RString("2");
+    private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
     
     public GoukeiInfoHandler(GoukeiInfoDiv div) {
         this.div = div;
@@ -34,7 +36,7 @@ public class GoukeiInfoHandler {
         div.getPanelGoukeiInfo().getTxtRiyoshafutangaku().setValue(new Decimal(shokanKihonList.get(0).get利用者負担額()));
         div.getPanelGoukeiInfo().getTxtKinkyujiShisetsuRyoyo().setValue(shokanKihonList.get(0).get緊急時施設療養費請求額());
         div.getPanelGoukeiInfo().getTxtTokuteiShinryo().setValue(shokanKihonList.get(0).get特定診療費請求額());
-        div.getPanelGoukeiInfo().getTxtKinkyujiShisetsuRyoyo().setValue(
+        div.getPanelGoukeiInfo().getTxtShokujiTeikyohi().setValue(
                 new Decimal(shokanShokujiHiyoList.get(0).get食事提供費請求額()));
     }
     
@@ -72,11 +74,11 @@ public class GoukeiInfoHandler {
         if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getMeisaiJushochitokureiSetteiKubun())) {
             div.getPanelHead().getBtnKyufuhiMeisaiJyutoku().setDisabled(true);
         }
-        if (new RString("2").equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
-                && new FlexibleYearMonth("201204").isBeforeOrEquals(サービス年月)) {
+        if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
+                && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
             div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setVisible(false);
         } else {
-            div.getPanelHead().getBtnKinkyujiShoteiShikkan().setVisible(false);
+//            div.getPanelHead().getBtnKinkyujiShoteiShikkan().setVisible(false);
             if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getKinkyuShisetsuRyoyoSetteiKubun())) {
                 div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
             }

@@ -197,7 +197,7 @@ public class GogitaiJohoSakuseiValidationHandler {
                 continue;
             }
             if (row.getGogitaicho() && flag) {
-                validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.合議体委員数が最大値を超過));
+                validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.審査会の合議体長は必ず１人));
                 return validationMessages;
             }
         }
@@ -215,7 +215,7 @@ public class GogitaiJohoSakuseiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         List<dgShinsainList_Row> rowList = div.getDgShinsainList().getDataSource();
         if (div.getTxtIinTeiin().getValue().intValue() < rowList.size()) {
-            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.審査会開催最大数を超過));
+            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.超過));
             return validationMessages;
         }
 
@@ -250,8 +250,7 @@ public class GogitaiJohoSakuseiValidationHandler {
         合議体長副合議体長は一人づつ(DbeErrorMessages.合議体長副合議体長は一人づつ),
         合議体委員数が最大値を超過(DbeErrorMessages.合議体委員数が最大値を超過),
         審査会の合議体長は必ず１人(DbeErrorMessages.審査会の合議体長は必ず１人),
-        // TODO QA399
-        審査会開催最大数を超過(DbeErrorMessages.審査会開催最大数を超過),
+        超過(DbeErrorMessages.超過, "審査会委員", "審査会委員定員"),
         対象データなし_追加メッセージあり(UrErrorMessages.対象データなし_追加メッセージあり, "合議体一覧");
 
         private final Message message;

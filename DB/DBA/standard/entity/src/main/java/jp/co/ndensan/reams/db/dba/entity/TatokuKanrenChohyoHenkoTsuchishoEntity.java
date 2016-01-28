@@ -29,9 +29,7 @@ public class TatokuKanrenChohyoHenkoTsuchishoEntity {
     private RString 担当部署名;
     private RString 担当部署名敬称;
     private RString バーコード情報;
-    private RString 見出し１;
-    private RString 見出し２;
-    private RString 見出し３;
+    private RString 見出し;
     private RString 被保険者番号１;
     private RString 被保険者番号２;
     private RString 被保険者番号３;

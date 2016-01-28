@@ -79,8 +79,8 @@
         </where>
         ORDER BY 
             DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiNo",
-            DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_gogitaichoKubunCode" ASC, 
-            DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" DESC
+            DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_gogitaichoKubunCode" DESC, 
+            DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" ASC
     </sql>
 
     <resultMap id="resultMap_GogitaiJohoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaijoho.GogitaiJohoRelateEntity" autoMapping="true">

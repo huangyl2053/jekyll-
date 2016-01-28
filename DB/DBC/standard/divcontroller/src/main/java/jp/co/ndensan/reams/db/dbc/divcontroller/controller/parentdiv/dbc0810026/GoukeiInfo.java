@@ -50,20 +50,16 @@ public class GoukeiInfo {
         RString 証明書 = parameter.getServiceYM();
 
         // TODO 該当者検索画面ViewState．識別コード
-        ViewStateHolder.put(ViewStateKeys.識別コード, new RString("123456"));
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123456"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         // TODO 申請書検索ViewSate．様式番号
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         // TODO 申請検索画面ViewState. 申請日
-        ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151124"));
+        ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151125"));
         RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
-        
-        div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.toDateString()));
-        div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
-        div.getPanelHead().getTxtJigyoshaBango().setValue(new RString(事業者番号.toString()));
-        div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
-        div.getPanelHead().getTxtShomeisho().setValue(証明書);
+        // KaigoAtenaInfo  「介護宛名情報」共有子Divの初期化
+//        div.getPanelCcd().getCcdKaigoAtenaInfo().load(識別コード);
         // KaigoShikakuKihon 「介護資格系基本情報」共有子Div の初期化(这个entity中的load方法没写)
         if (!被保険者番号.isEmpty()) {
 //            div.getPanelCcd().getCcdKaigoShikakuKihon().load(LasdecCode.EMPTY, 識別コード);
@@ -71,21 +67,21 @@ public class GoukeiInfo {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
         div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
-        div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.wareki().toString()));
+        div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.wareki().toDateString().toString()));
         div.getPanelHead().getTxtJigyoshaBango().setValue(new RString(事業者番号.toString()));
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
          List<ShokanKihon> shokanKihonList = ShokanbaraiJyokyoShokai.createInstance().getShokanbarayiSeikyukihonDetail(
                  被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        if (null == shokanKihonList || 0 == shokanKihonList.size()) {
+        if (shokanKihonList == null || shokanKihonList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance().
                 getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号,   明細番号, null);
         getHandler(div).initialize(shokanKihonList, shokanShokujiHiyoList);
           
-        ShikibetsuNoKanriEntity shikibetsuNoKanriEntity = 
-                ShokanbaraiJyokyoShokai.createInstance().getShikibetsubangoKanri(サービス年月, 様式番号);
+        ShikibetsuNoKanriEntity shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
+                .getShikibetsubangoKanri(サービス年月, 様式番号);
         getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity, サービス年月);
         return ResponseData.of(div).respond();        
     }

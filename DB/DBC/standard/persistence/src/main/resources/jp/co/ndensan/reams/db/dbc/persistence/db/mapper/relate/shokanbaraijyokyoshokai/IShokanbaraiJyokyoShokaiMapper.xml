@@ -448,7 +448,7 @@
         <id column="renban"/>
         <result property="serviceShuruiRyakusho" column="serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="entity"
-                     resultMap="jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukeiEntity">
+                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.resultMap_DbT3053ShokanShukeiEntity">
         </association>
     </resultMap>
     <select id="get償還払請求集計データ"
@@ -511,7 +511,7 @@
         <id column="renban"/>
         <result property="serviceShuruiRyakusho" column="serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="entity"
-                     resultMap="jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3051ShokanShakaiFukushiHojinKeigengakuEntity">
+                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3051ShokanShakaiFukushiHojinKeigengakuMapper.resultMap_DbT3051ShokanShakaiFukushiHojinKeigengakuEntity">
         </association>
     </resultMap>
     <select id="get償還払請求社会福祉法人軽減額データ"

@@ -4,6 +4,29 @@ var DBA;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_BtnAdd = function () {
+                return "onClick_BtnAdd";
+            };
+
+            Events.onClick_Selsect = function () {
+                return "onClick_Selsect";
+            };
+
+            Events.onClick_Update = function () {
+                return "onClick_Update";
+            };
+
+            Events.onClick_Delete = function () {
+                return "onClick_Delete";
+            };
+
+            Events.onClick_onBlur = function () {
+                return "onClick_onBlur";
+            };
+
+            Events.onClick_BtnKakunin = function () {
+                return "onClick_BtnKakunin";
+            };
             return Events;
         })();
         TaJushochiTokureishaKanri.Events = Events;

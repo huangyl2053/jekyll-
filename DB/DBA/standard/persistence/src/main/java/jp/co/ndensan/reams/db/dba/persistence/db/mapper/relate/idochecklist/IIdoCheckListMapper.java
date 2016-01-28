@@ -28,7 +28,7 @@ public interface IIdoCheckListMapper {
     List<IdoInfoEntity> getHihokenshaDaichouList(IdoCheckListGetDataParameter param);
 
     /**
-     * 異動事由がコード種別：0008のコードと一致した場合、他市町村住所地特例者を取得します
+     * 異動事由がコード種別：0008のコード、他市町村住所地特例者を取得します
      *
      * @param param パラメータ
      * @return List<ShisetsuNyutaishoEntity>
@@ -36,7 +36,7 @@ public interface IIdoCheckListMapper {
     List<ShisetsuNyutaishoEntity> getJushochiTokureiListByCode08(IdoCheckListGetDataParameter param);
 
     /**
-     * 異動事由がコード種別：0011のコードと一致した場合、他市町村住所地特例者を取得します
+     * 異動事由がコード種別：0011のコード、他市町村住所地特例者を取得します
      *
      * @param param パラメータ
      * @return List<ShisetsuNyutaishoEntity>
@@ -52,7 +52,7 @@ public interface IIdoCheckListMapper {
     List<ShisetsuNyutaishoEntity> getShisetsuNyutaishoList(IdoCheckListGetDataParameter param);
 
     /**
-     * 異動事由がコード種別：0009のコードと一致した場合、適用除外者を取得します
+     * 異動事由がコード種別：0009のコード、適用除外者を取得します
      *
      * @param param パラメータ
      * @return List<ShisetsuNyutaishoEntity>
@@ -60,7 +60,7 @@ public interface IIdoCheckListMapper {
     List<ShisetsuNyutaishoEntity> getTekiyoJogaishaDaichouListByCode09(IdoCheckListGetDataParameter param);
 
     /**
-     * 異動事由がコード種別：0012のコードと一致した場合、適用除外者を取得します
+     * 異動事由がコード種別：0012のコード、適用除外者を取得します
      *
      * @param param パラメータ
      * @return List<ShisetsuNyutaishoEntity>
@@ -92,10 +92,10 @@ public interface IIdoCheckListMapper {
     List<RString> getFujoShuruiCodeList(IdoCheckListGetDataParameter param);
 
     /**
-     * 扶助種類コードリストを取得します
+     * 宛名識別対象を取得します
      *
      * @param param パラメータ
-     * @return List<RString>
+     * @return UaFt200FindShikibetsuTaishoEntity
      */
     UaFt200FindShikibetsuTaishoEntity getShikibetsuTaishoPsm(IdoCheckListGetDataParameter param);
 
@@ -103,7 +103,7 @@ public interface IIdoCheckListMapper {
      * 処理日付管理マスタ更新処理
      *
      * @param entity パラメータ
-     * @return List<RString>
+     * @return int
      */
     int updDbt7022ShoriDateKanri(DbT7022ShoriDateKanriEntity entity);
 

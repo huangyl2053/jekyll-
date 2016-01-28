@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dba.business.core.idochecklist.IdoCheckListParamet
 import jp.co.ndensan.reams.db.dba.business.core.idochecklist.IdoCheckListResult;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -68,7 +69,8 @@ public class IdoCheckListFinder {
      * @return IdoCheckListResult
      */
     public SearchResult<IdoCheckListResult> getKaisiShuryobi() {
-        DbT7022ShoriDateKanriEntity entity = dac.selectKaisiShuryobi();
+        DbT7022ShoriDateKanriEntity entity = dac.selectKaishiShuryoYMD(
+                SubGyomuCode.DBA介護資格, new RString("異動チェックリスト"));
         if (entity == null) {
             return SearchResult.of(Collections.<IdoCheckListResult>emptyList(), 0, false);
         }
@@ -137,14 +139,14 @@ public class IdoCheckListFinder {
     }
 
     private RDateTime appendZero(FlexibleDate formatDate) {
-        if (formatDate == null) {
+        if (formatDate == null || formatDate.isEmpty()) {
             return null;
         }
         return RDateTime.of(formatDate.getYearValue(), formatDate.getMonthValue(), formatDate.getDayValue(), 0, 0, 0, 0);
     }
 
     private RDateTime appendDay(FlexibleDate formatDate) {
-        if (formatDate == null) {
+        if (formatDate == null || formatDate.isEmpty()) {
             return null;
         }
         return RDateTime.of(formatDate.getYearValue(),

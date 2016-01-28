@@ -22,6 +22,7 @@
         <result property="shichosonMeisho2" column="DbT7051Kosei_shichosonMeisho2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="kyuShichosonCode" column="DbT7056Gappei_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <result property="kyuShichosonMeisho" column="DbT7056Gappei_kyuShichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="lastUpdateTimestamp" column="DbT1001Hiho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
     </resultMap>
     <select id="getShikakuJoho" resultMap="resultMap_getShikakuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParameter" fetchSize="500">
         SELECT
@@ -31,7 +32,7 @@
         DbT1001Hiho."shikakuShutokuYMD" as "DbT1001Hiho_shikakuShutokuYMD",
         DbT1001Hiho."shikakuShutokuTodokedeYMD" as "DbT1001Hiho_shikakuShutokuTodokedeYMD",
         Dbt1001Hiho."shikakuShutokuJiyuCode" as "DbT1001Hiho_jushochitokureiTekiyoJiyuCode",
-        DbT1001Hiho."hihokennshaKubunCode" as "DbT1001Hiho_ hihokennshaKubunCode",
+        DbT1001Hiho."hihokennshaKubunCode" as "DbT1001Hiho_hihokennshaKubunCode",
         DbT1001Hiho."shikakuSoshitsuYMD"  as "DbT1001Hiho_shikakuSoshitsuYMD",
         DbT1001Hiho."shikakuSoshitsuTodokedeYMD" as "DbT1001Hiho_shikakuSoshitsuTodokedeYMD",
         DbT1001Hiho."shikakuSoshitsuJiyuCode" as "DbT1001Hiho_jushochitokureiKaijoJiyuCode",
@@ -41,7 +42,8 @@
         DbT7051Kosei."shichosonCode" as "DbT7051Kosei_shichosonCode2",
         DbT7051Kosei."shichosonMeisho" as "DbT7051Kosei_shichosonMeisho2",
         DbT7056Gappei."kyuShichosonCode" as "DbT7056Gappei_kyuShichosonCode",
-        DbT7056Gappei."kyuShichosonMeisho" as "DbT7056Gappei_kyuShichosonMeisho"
+        DbT7056Gappei."kyuShichosonMeisho" as "DbT7056Gappei_kyuShichosonMeisho",
+        DbT1001Hiho."lastUpdateTimestamp" as "DbT1001Hiho_lastUpdateTimestamp"
 
         FROM
         rgdb."DbT1001HihokenshaDaicho" as DbT1001Hiho

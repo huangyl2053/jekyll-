@@ -55,13 +55,13 @@ public class ShafukuKeigenGaku {
         RString 証明書 = parameter.getServiceYM();
 
         // TODO 該当者検索画面ViewState．識別コード
-        ViewStateHolder.put(ViewStateKeys.識別コード, new RString("123456"));
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123456"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         // TODO 申請書検索ViewSate．様式番号
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         // TODO 申請検索画面ViewState. 申請日
-        ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151124"));
+        ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20161125"));
         RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
         // KaigoAtenaInfo  「介護宛名情報」共有子Divの初期化
 //        div.getPanelCcd().getCcdKaigoAtenaInfo().load(識別コード);
@@ -72,7 +72,7 @@ public class ShafukuKeigenGaku {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
         div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
-        div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.wareki().toString()));
+        div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.wareki().toDateString().toString()));
         div.getPanelHead().getTxtJigyoshaBango().setValue(new RString(事業者番号.toString()));
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
@@ -80,7 +80,7 @@ public class ShafukuKeigenGaku {
         // TODO 调用别人用的business里面的方法；
         List<ShokanShakaiFukushiHojinKeigengakuEntity> ShokanShakaiFukushiHojinKeigengakuuList 
                 = ShokanbaraiJyokyoShokai.createInstance().getSeikyuShakaifukushiHoujinKeigengaku(
-                        被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 様式番号);
+                        被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
         if (null == ShokanShakaiFukushiHojinKeigengakuuList || 0 == ShokanShakaiFukushiHojinKeigengakuuList.size()) {
                     throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -46,19 +47,22 @@ public class IdochekkurisutoHandler {
      * @param result IdoCheckListResult
      */
     public void setLoad(SearchResult<IdoCheckListResult> result) {
-        if (result.records().isEmpty()) {
-            div.getTxtkonkaikaishi().setValue(FlexibleDate.getNowDate());
-            div.getTxtkonkaishuryo().setValue(FlexibleDate.getNowDate());
-        } else if (FlexibleDate.getNowDate().isBeforeOrEquals(result.records().get(0).get対象終了年月日())) {
-            div.getTxtzenkaikaishi().setValue(result.records().get(0).get対象開始年月日());
-            div.getTxtzenkaishuryo().setValue(result.records().get(0).get対象終了年月日());
+        IdoCheckListResult idoCheckResult = result.records().get(0);
+        FlexibleDate nowDate = FlexibleDate.getNowDate();
+        if (result.records().isEmpty() || (idoCheckResult.get対象終了年月日() == null
+                && idoCheckResult.get対象終了年月日() == null)) {
+            div.getTxtkonkaikaishi().setValue(nowDate);
+            div.getTxtkonkaishuryo().setValue(nowDate);
+        } else if (nowDate.isBeforeOrEquals(idoCheckResult.get対象終了年月日())) {
+            div.getTxtzenkaikaishi().setValue(idoCheckResult.get対象開始年月日());
+            div.getTxtzenkaishuryo().setValue(idoCheckResult.get対象終了年月日());
             div.getTxtkonkaikaishi().setValue(div.getTxtzenkaishuryo().getValue());
             div.getTxtkonkaishuryo().setValue(div.getTxtzenkaishuryo().getValue());
-        } else if (result.records().get(0).get対象終了年月日().isBefore(FlexibleDate.getNowDate())) {
-            div.getTxtzenkaikaishi().setValue(result.records().get(0).get対象開始年月日());
-            div.getTxtzenkaishuryo().setValue(result.records().get(0).get対象終了年月日());
+        } else if (idoCheckResult.get対象終了年月日().isBefore(nowDate)) {
+            div.getTxtzenkaikaishi().setValue(idoCheckResult.get対象開始年月日());
+            div.getTxtzenkaishuryo().setValue(idoCheckResult.get対象終了年月日());
             div.getTxtkonkaikaishi().setValue(div.getTxtzenkaishuryo().getValue());
-            div.getTxtkonkaishuryo().setValue(FlexibleDate.getNowDate());
+            div.getTxtkonkaishuryo().setValue(nowDate);
         }
         List<RString> items = new ArrayList<>();
         items.add(CHECKED_KEY_KEY0);
@@ -70,6 +74,7 @@ public class IdochekkurisutoHandler {
         div.getTxtzenkaikaishi().setDisabled(true);
         div.getTxtzenkaishuryo().setDisabled(true);
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, new ReportId(REPORT_ID_DBA200006));
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"), false);
     }
 
 }

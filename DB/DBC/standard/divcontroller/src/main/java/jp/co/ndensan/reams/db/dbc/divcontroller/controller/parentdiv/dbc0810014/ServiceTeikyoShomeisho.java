@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0810014;
 
 import java.util.Collections;
@@ -30,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class ServiceTeikyoShomeisho {
 
     public ResponseData<ServiceTeikyoShomeishoDiv> onLoad(ServiceTeikyoShomeishoDiv div) {
-         // TODO 引き継ぎデータの取得
+        // TODO 引き継ぎデータの取得
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
                 new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201601")),
                 new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
@@ -38,15 +37,18 @@ public class ServiceTeikyoShomeisho {
         ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
+
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
         RString 整理番号 = parameter.getSeiriNp();
+
         // TODO 該当者検索画面ViewState．識別コード
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123456"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         //                = ViewStateHolder.get(DAViewStateKeys.KokuhoShikakuIdo.国保資格異動情報,
         //                        HijihatsutekiShitsugyoshaNyuryokuModel.class);
         RString 決定日 = new RString("");
+
         // TODO 申請書検索ViewSate．様式番号
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
@@ -59,15 +61,15 @@ public class ServiceTeikyoShomeisho {
             div.getPanelOne().getCcdKaigoShikakuKihon().setVisible(false);
         }
 
-         List<jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ServiceTeikyoShomeisho> serviceTeikyoShomeishoList = 
-                ShokanbaraiJyokyoShokai.createInstance().getServiceTeikyoShomeishoList(被保険者番号,
+        List<jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ServiceTeikyoShomeisho> serviceTeikyoShomeishoList
+                = ShokanbaraiJyokyoShokai.createInstance().getServiceTeikyoShomeishoList(被保険者番号,
                         サービス年月, 整理番号, 様式番号);
-        if (serviceTeikyoShomeishoList != null && !serviceTeikyoShomeishoList.isEmpty()) {
-             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        if (serviceTeikyoShomeishoList == null || serviceTeikyoShomeishoList.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
-         //TODO 昇順
-         //Collections.sort(serviceTeikyoShomeishoList, new MultiComparator<>(
-         //       JigyoshaNoComparator.ASC, JigyoshaNameKanjiComparator.ASC, MeisaiNoComparator.ASC, ServiceYMComparator.ASC));
+        //TODO 昇順
+        //Collections.sort(serviceTeikyoShomeishoList, new MultiComparator<>(
+        //       JigyoshaNoComparator.ASC, JigyoshaNameKanjiComparator.ASC, MeisaiNoComparator.ASC, ServiceYMComparator.ASC));
         //}
         getHandler(div).initialize(serviceTeikyoShomeishoList);
         // TODO viewState取得

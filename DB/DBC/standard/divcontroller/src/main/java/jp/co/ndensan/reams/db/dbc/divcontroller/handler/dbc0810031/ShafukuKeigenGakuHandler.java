@@ -82,7 +82,7 @@ public class ShafukuKeigenGakuHandler {
         }
         if (new RString("2").equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
                 && new FlexibleYearMonth("201204").isBeforeOrEquals(サービス年月)) {
-            div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setVisible(false);
+//            div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setVisible(false);
         } else {
             if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getKinkyuShisetsuRyoyoSetteiKubun())) {
                 div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisabled(true);

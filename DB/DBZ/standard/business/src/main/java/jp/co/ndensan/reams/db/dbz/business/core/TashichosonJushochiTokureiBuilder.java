@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -39,44 +38,6 @@ public class TashichosonJushochiTokureiBuilder {
         this.entity = entity.clone();
         this.id = id;
 
-    }
-
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 識別コードを設定します。
-     *
-     * @param 識別コード 識別コード
-     * @return {@link TashichosonJushochiTokureiBuilder}
-     */
-    public TashichosonJushochiTokureiBuilder set識別コード(ShikibetsuCode 識別コード) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        entity.setShikibetsuCode(識別コード);
-        return this;
-    }
-
-    /**
-     * 異動日を設定します。
-     *
-     * @param 異動日 異動日
-     * @return {@link TashichosonJushochiTokureiBuilder}
-     */
-    public TashichosonJushochiTokureiBuilder set異動日(FlexibleDate 異動日) {
-        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
-        entity.setIdoYMD(異動日);
-        return this;
-    }
-
-    /**
-     * 枝番を設定します。
-     *
-     * @param 枝番 枝番
-     * @return {@link TashichosonJushochiTokureiBuilder}
-     */
-    public TashichosonJushochiTokureiBuilder set枝番(RString 枝番) {
-        requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
-        entity.setEdaNo(枝番);
-        return this;
     }
 
     /**

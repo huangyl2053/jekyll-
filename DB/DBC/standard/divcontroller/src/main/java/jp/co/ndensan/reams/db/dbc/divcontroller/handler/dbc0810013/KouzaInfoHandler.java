@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810013;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810013.KouzaInfoDiv;
@@ -24,10 +23,11 @@ public class KouzaInfoHandler {
 
     /**
      * ヘッダ_エリア
+     *
      * @param サービス年月
-     * @param 整理番号 
+     * @param 整理番号
      */
-    public void setヘッダ_エリア(FlexibleYearMonth サービス年月,RString 整理番号) {
+    public void setヘッダ_エリア(FlexibleYearMonth サービス年月, RString 整理番号) {
         div.getPanelTwo().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
         div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
     }

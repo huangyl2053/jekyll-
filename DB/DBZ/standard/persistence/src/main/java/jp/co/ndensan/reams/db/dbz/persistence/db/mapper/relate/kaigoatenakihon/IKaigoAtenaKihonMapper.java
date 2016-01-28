@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kaigoatenakihon;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigoatenakihon.KaigoAtenaKihonEntity;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
@@ -21,4 +22,12 @@ public interface IKaigoAtenaKihonMapper {
      * @return リストKaigoAtenaKihonEntity
      */
     List<KaigoAtenaKihonEntity> selectKaigoShikakuKihonByShikibetsuCode(ShikibetsuCode shikibetsuCode);
+
+    /**
+     * 介護資格基本情報を被保険者番号検索でリスト取得します。
+     *
+     * @param hihokenshaNo 被保険者番号
+     * @return リストKaigoAtenaKihonEntity
+     */
+    List<KaigoAtenaKihonEntity> selectKaigoShikakuKihonByHihokenshaNo(HihokenshaNo hihokenshaNo);
 }

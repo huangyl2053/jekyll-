@@ -4,17 +4,14 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * NenpoYoushiki2No8 のクラスファイル
- *
+ * NenpoYoushiki2No8 のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class NenpoYoushiki2No8Div extends Panel {
@@ -25,9 +22,8 @@ public class NenpoYoushiki2No8Div extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
-//    @JsonProperty("KanryoMessage")
-//    private KanryoMessageDiv KanryoMessage;
+    @JsonProperty("KanryoMsg")
+    private KanryoMsgDiv KanryoMsg;
     @JsonProperty("hihokenshabango")
     private hihokenshabangoDiv hihokenshabango;
     @JsonProperty("ShisetsugaigosabisujukyuMeisai")
@@ -40,22 +36,22 @@ public class NenpoYoushiki2No8Div extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getKanryoMessage
-     * @return KanryoMessage
+     * getKanryoMsg
+     * @return KanryoMsg
      */
-//    @JsonProperty("KanryoMessage")
-//    public KanryoMessageDiv getKanryoMessage() {
-//        return KanryoMessage;
-//    }
+    @JsonProperty("KanryoMsg")
+    public KanryoMsgDiv getKanryoMsg() {
+        return KanryoMsg;
+    }
 
     /*
-     * setKanryoMessage
-     * @param KanryoMessage KanryoMessage
+     * setKanryoMsg
+     * @param KanryoMsg KanryoMsg
      */
-//    @JsonProperty("KanryoMessage")
-//    public void setKanryoMessage(KanryoMessageDiv KanryoMessage) {
-//        this.KanryoMessage = KanryoMessage;
-//    }
+    @JsonProperty("KanryoMsg")
+    public void setKanryoMsg(KanryoMsgDiv KanryoMsg) {
+        this.KanryoMsg = KanryoMsg;
+    }
 
     /*
      * gethihokenshabango
@@ -102,7 +98,7 @@ public class NenpoYoushiki2No8Div extends Panel {
     }
 
     @JsonIgnore
-    public void setTxthokokuYM(TextBoxFlexibleDate txthokokuYM) {
+    public void  setTxthokokuYM(TextBoxFlexibleDate txthokokuYM) {
         this.getHihokenshabango().setTxthokokuYM(txthokokuYM);
     }
 
@@ -112,7 +108,7 @@ public class NenpoYoushiki2No8Div extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtshukeiY(TextBoxFlexibleDate txtshukeiY) {
+    public void  setTxtshukeiY(TextBoxFlexibleDate txtshukeiY) {
         this.getHihokenshabango().setTxtshukeiY(txtshukeiY);
     }
 
@@ -122,7 +118,7 @@ public class NenpoYoushiki2No8Div extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtHihokenshabango(TextBoxCode txtHihokenshabango) {
+    public void  setTxtHihokenshabango(TextBoxCode txtHihokenshabango) {
         this.getHihokenshabango().setTxtHihokenshabango(txtHihokenshabango);
     }
 
@@ -132,7 +128,7 @@ public class NenpoYoushiki2No8Div extends Panel {
     }
 
     @JsonIgnore
-    public void setTxthihokenshamei(TextBox txthihokenshamei) {
+    public void  setTxthihokenshamei(TextBox txthihokenshamei) {
         this.getHihokenshabango().setTxthihokenshamei(txthihokenshamei);
     }
 

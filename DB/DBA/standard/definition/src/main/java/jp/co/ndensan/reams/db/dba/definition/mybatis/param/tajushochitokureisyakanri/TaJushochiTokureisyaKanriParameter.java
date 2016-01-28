@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TaJushochiTokureisyaKanriParameter {
+public final class TaJushochiTokureisyaKanriParameter {
 
     private final ShikibetsuCode shikibetsuCode;
     private final RString psmShikibetsuTaisho;
@@ -52,12 +52,17 @@ public class TaJushochiTokureisyaKanriParameter {
      * @param juushotiTokureitaishouShisetu 事業者種別
      * @return 他住所地特例者管理パラメータ
      */
-    public static TaJushochiTokureisyaKanriParameter createParamBy他住所地特例者管理(
+    public static TaJushochiTokureisyaKanriParameter createParam_TaJushochi(
             ShikibetsuCode shikibetsuCode,
             RString psmShikibetsuTaisho,
             RString juushotiTokureiMono,
             JigyoshaNo nyushoShisetsuCode,
             RString juushotiTokureitaishouShisetu) {
-        return new TaJushochiTokureisyaKanriParameter(shikibetsuCode, psmShikibetsuTaisho, juushotiTokureiMono, nyushoShisetsuCode, juushotiTokureitaishouShisetu);
+        return new TaJushochiTokureisyaKanriParameter(
+                shikibetsuCode,
+                psmShikibetsuTaisho,
+                juushotiTokureiMono,
+                nyushoShisetsuCode,
+                juushotiTokureitaishouShisetu);
     }
 }
