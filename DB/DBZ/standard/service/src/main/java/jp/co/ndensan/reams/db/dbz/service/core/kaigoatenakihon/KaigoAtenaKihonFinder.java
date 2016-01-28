@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.kaigoatenakihon;
 
-import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -15,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kaigoatenakihon.I
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -59,22 +57,30 @@ public class KaigoAtenaKihonFinder {
      * @return SearchResult<KaigoAtenaKihonBusiness>
      */
     @Transaction
-    public SearchResult<KaigoAtenaKihonBusiness> getKaigoShikakuKihon(ShikibetsuCode 識別コード) {
+    public KaigoAtenaKihonBusiness getKaigoShikakuKihon(ShikibetsuCode 識別コード) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         IKaigoAtenaKihonMapper mapper = mapperProvider.create(IKaigoAtenaKihonMapper.class);
         List<KaigoAtenaKihonEntity> kaigoAtenaKihonList = mapper.selectKaigoShikakuKihonByShikibetsuCode(識別コード);
         if (kaigoAtenaKihonList == null || kaigoAtenaKihonList.isEmpty()) {
             throw new RuntimeException();
         }
-        HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
-        List<KaigoAtenaKihonBusiness> 介護資格基本情報 = new ArrayList<>();
-        for (KaigoAtenaKihonEntity entity : kaigoAtenaKihonList) {
-            if (被保険者番号.equals(entity.getHihokenshaNo())) {
-                continue;
-            }
-            介護資格基本情報.add(new KaigoAtenaKihonBusiness(entity));
-            被保険者番号 = entity.getHihokenshaNo();
+        return new KaigoAtenaKihonBusiness(kaigoAtenaKihonList.get(0));
+    }
+
+    /**
+     * 介護資格系基本情報取得する。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return SearchResult<KaigoAtenaKihonBusiness>
+     */
+    @Transaction
+    public KaigoAtenaKihonBusiness getKaigoHihokenshaNo(HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        IKaigoAtenaKihonMapper mapper = mapperProvider.create(IKaigoAtenaKihonMapper.class);
+        List<KaigoAtenaKihonEntity> kaigoAtenaKihonList = mapper.selectKaigoShikakuKihonByHihokenshaNo(被保険者番号);
+        if (kaigoAtenaKihonList == null || kaigoAtenaKihonList.isEmpty()) {
+            throw new RuntimeException();
         }
-        return SearchResult.of(介護資格基本情報, 0, false);
+        return new KaigoAtenaKihonBusiness(kaigoAtenaKihonList.get(0));
     }
 }
