@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 介護認定審査会開催結果登録のヘッドエリア内容Entity
+ * 介護認定審査会開催結果登録のヘッドエリア内容Entity。
  */
 @lombok.Getter
 @lombok.Setter
@@ -33,4 +33,8 @@ public class ShinsakaiKaisaiYoteiJohoEntity {
     private RString 開催会場;
     private RString 開催番号;
     private RString 介護認定審査会進捗状況;
+    private RString 催予定場所コード;
+    private int 予定定員;
+    private int 自動割当定員;
+    private int 委員定員;
 }

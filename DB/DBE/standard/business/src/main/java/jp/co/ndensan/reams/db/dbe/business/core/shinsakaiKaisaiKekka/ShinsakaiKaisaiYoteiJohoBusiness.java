@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 介護認定審査会開催結果登録のヘッドエリア内容Business
+ * 介護認定審査会開催結果登録のヘッドエリア内容Businessです。
  */
 public class ShinsakaiKaisaiYoteiJohoBusiness {
 
@@ -166,10 +166,46 @@ public class ShinsakaiKaisaiYoteiJohoBusiness {
     /**
      * 介護認定審査会進捗状況を返します。
      *
-     * @return介護認定審査会進捗状況
+     * @return 介護認定審査会進捗状況
      */
-    private RString get介護認定審査会進捗状況() {
+    public RString get介護認定審査会進捗状況() {
         return entity.get介護認定審査会進捗状況();
+    }
+
+    /**
+     * 催予定場所コードを返します。
+     *
+     * @return 催予定場所コード
+     */
+    public RString get催予定場所コード() {
+        return entity.get催予定場所コード();
+    }
+
+    /**
+     * 予定定員を返します。
+     *
+     * @return 予定定員
+     */
+    public int get予定定員() {
+        return entity.get予定定員();
+    }
+
+    /**
+     * 自動割当定員を返します。
+     *
+     * @return 自動割当定員
+     */
+    public int get自動割当定員() {
+        return entity.get自動割当定員();
+    }
+
+    /**
+     * 委員定員を返します。
+     *
+     * @return 委員定員
+     */
+    public int get委員定員() {
+        return entity.get委員定員();
     }
 
 }
