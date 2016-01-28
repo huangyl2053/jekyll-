@@ -46,6 +46,8 @@ public class HihokenshaShoBatchPrmHandler {
         jyukumino(hakkoModel);
         gaitomono(hakkoModel);
         jnennrei(hakkoModel);
+        div.getTxtHakkoYMD().setDisabled(true);
+        div.getTxtHakkoTime().setDisabled(true);
     }
 
     private void sentaku(HihokenshashoIkkatsuHakkoModel hakkoModel) {
@@ -77,6 +79,7 @@ public class HihokenshaShoBatchPrmHandler {
             div.getTxtKonkaiShoriKijunYMD().setDisabled(true);
             div.getTxtKonkaiShoriKijunTime().setValue(RDate.getNowTime());
             div.getTxtKonkaiShoriKijunTime().setDisabled(true);
+            div.getChkTest().setDisabled(true);
         }
     }
 
@@ -97,19 +100,18 @@ public class HihokenshaShoBatchPrmHandler {
         if ((JNENNREI_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
             div.getRadShutsuryokuJoken().setSelectedKey(JNENNREI_RADIO_SENTAKU);
             sentaku(hakkoModel);
-            if (div.getTxtZenkaiChushutsuToYMD().getValue().isBeforeOrEquals(div.getTxtKonkaiShoriKijunYMD().getValue())) {
-                div.getTxtKonkaiChushutsuToYMD().setValue(RDate.getNowDate());
-                div.getTxtKonkaiChushutsuToTime().setValue(RDate.getNowTime());
-            }
-            //TODO QA345張紅麗　まで12/29　今回の終了日と今回の時分秒（未満）の処理確認
-            if (div.getTxtKonkaiShoriKijunYMD().getValue().isBefore(div.getTxtZenkaiChushutsuToYMD().getValue())) {
-                div.getTxtKonkaiChushutsuToYMD().setValue(hakkoModel.getTaishoShuryoTimestamp().getDate());
-                div.getTxtKonkaiChushutsuToTime().setValue(hakkoModel.getTaishoShuryoTimestamp().getRDateTime().getTime());
-            }
             div.getTxtKonkaiShoriKijunYMD().setValue(RDate.getNowDate());
             div.getTxtKonkaiShoriKijunYMD().setDisabled(true);
             div.getTxtKonkaiShoriKijunTime().setValue(RDate.getNowTime());
             div.getTxtKonkaiShoriKijunTime().setDisabled(true);
+            if (div.getTxtZenkaiChushutsuToYMD().getValue().isBeforeOrEquals(div.getTxtKonkaiShoriKijunYMD().getValue())) {
+                div.getTxtKonkaiChushutsuToYMD().setValue(RDate.getNowDate());
+                div.getTxtKonkaiChushutsuToTime().setValue(RDate.getNowTime());
+            }
+            if (div.getTxtKonkaiShoriKijunYMD().getValue().isBefore(div.getTxtZenkaiChushutsuToYMD().getValue())) {
+                div.getTxtKonkaiChushutsuToYMD().setValue(hakkoModel.getTaishoShuryoTimestamp().getDate());
+                div.getTxtKonkaiChushutsuToTime().setValue(hakkoModel.getTaishoShuryoTimestamp().getRDateTime().getTime());
+            }
         }
     }
 
@@ -147,6 +149,14 @@ public class HihokenshaShoBatchPrmHandler {
             div.getTxtKonkaiChushutsuToTime().setValue(hakkoModel.getTaishoShuryoTimestamp().getRDateTime().getTime());
             div.getTxtKonkaiShoriKijunYMD().setValue(hakkoModel.getKijunTimestamp().getDate());
             div.getTxtKonkaiShoriKijunTime().setValue(hakkoModel.getKijunTimestamp().getRDateTime().getTime());
+        }
+        if (div.getChkSaiHakko().isAllSelected()) {
+
+            div.getTxtHakkoYMD().setValue(div.getTxtKonkaiShoriKijunYMD().getValue());
+            div.getTxtHakkoTime().setValue(div.getTxtKonkaiShoriKijunTime().getValue());
+        } else {
+            div.getTxtHakkoYMD().clearValue();
+            div.getTxtHakkoTime().clearValue();
         }
         div.getTxtKonkaiChushutsuToYMD().setDisabled(true);
         div.getTxtKonkaiChushutsuToTime().setDisabled(true);
