@@ -663,8 +663,8 @@ public class TaJushochiTokureishaKanriHandler {
         List<UzT0007CodeEntity> 適用事由Key = CodeMaster.getCode(介護他特適用理由);
         for (UzT0007CodeEntity key : 適用事由Key) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
-            keyValue.setValue(key.getコード().getColumnValue());
-            keyValue.setKey(key.getコード名称());
+            keyValue.setKey(key.getコード().getColumnValue());
+            keyValue.setValue(key.getコード名称());
             dataSource.add(keyValue);
         }
         return dataSource;
@@ -675,8 +675,8 @@ public class TaJushochiTokureishaKanriHandler {
         List<UzT0007CodeEntity> 解除事由Key = CodeMaster.getCode(介護他特解除理由);
         for (UzT0007CodeEntity key : 解除事由Key) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
-            keyValue.setValue(key.getコード().getColumnValue());
-            keyValue.setKey(key.getコード名称());
+            keyValue.setKey(key.getコード().getColumnValue());
+            keyValue.setValue(key.getコード名称());
             dataSource.add(keyValue);
         }
         return dataSource;
