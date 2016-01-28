@@ -324,7 +324,7 @@ public class NinteiChosaIrai {
         }
         inertNinteichosaIraiJoho(div);
         updateNinteichosaIraiJoho(div);
-        // TODO 内部QA560 Redmine：    (完了メッセージの表示方式が知らない)
+        // TODO 内部QA560 Redmine：#74750    (完了メッセージの表示方式が知らない)
 //        div.getKanryoMessage().setSuccessMessage(
 //                new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
         return ResponseData.of(div).respond();

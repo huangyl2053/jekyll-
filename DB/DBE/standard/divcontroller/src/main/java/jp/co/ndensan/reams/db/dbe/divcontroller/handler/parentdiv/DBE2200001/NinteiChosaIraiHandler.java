@@ -77,9 +77,9 @@ public class NinteiChosaIraiHandler {
         div.getTxtChosainChiku().clearValue();
         setDisabledToChosaItakusakiAndChosainKihonJoho(true);
         if (is単一保険者()) {
-            div.getCcdHokenshaList().setDisabled(false);
-        } else {
             div.getCcdHokenshaList().setDisabled(true);
+        } else {
+            div.getCcdHokenshaList().setDisabled(false);
         }
     }
 
@@ -206,7 +206,7 @@ public class NinteiChosaIraiHandler {
             row.setZenkaiNinteiChosainShimei(nullToEmpty(business.getTemp_chosainShimei()));
             row.setHokensha(hokenshaName);
             if (business.getChosaKubun() != null) {
-                row.setChosaKubun(ChosaKubun.toValue(business.getChosaKubun().value()).getコード());
+                row.setChosaKubun(ChosaKubun.toValue(business.getChosaKubun().value()).get名称());
             }
             if (business.getJusho() != null) {
                 row.setJusho(business.getJusho().value());
@@ -352,7 +352,7 @@ public class NinteiChosaIraiHandler {
                 row.setChosaIraiDay(business.getNinteichosaIraiYMD().wareki().toDateString());
             }
             if (business.getChosaKubun() != null) {
-                row.setChosaKubun(ChosaKubun.toValue(business.getChosaKubun().value()).getコード());
+                row.setChosaKubun(ChosaKubun.toValue(business.getChosaKubun().value()).get名称());
             }
 
             row.setHokensha(hokenshaName);
