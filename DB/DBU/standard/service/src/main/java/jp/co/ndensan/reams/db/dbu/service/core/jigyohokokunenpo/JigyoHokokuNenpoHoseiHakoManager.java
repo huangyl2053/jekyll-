@@ -284,10 +284,19 @@ public class JigyoHokokuNenpoHoseiHakoManager {
     @Transaction
     public SearchResult<JigyoHokokuTokeiData> getJigyoHokokuNenpoDetal(SearchJigyoHokokuNenpo jigyoHokokuNenpoSearch) {
         List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = new ArrayList<>();
-        IJigyoHokokuNenpoMapper jigyoHokokuNenpoMapper = mapperProvider.create(IJigyoHokokuNenpoMapper.class);
-        List<DbT7021JigyoHokokuTokeiDataEntity> 事業報告集計一覧データEntityリスト
-                = jigyoHokokuNenpoMapper.getJigyoHokokuNenpoDetal(getJigyoHokokuNenpoParameter(jigyoHokokuNenpoSearch));
+        List<DbT7021JigyoHokokuTokeiDataEntity> 事業報告集計一覧データEntityリスト = new ArrayList<>();
+        JigyoHokokuNenpoDetalParameter parameter = getJigyoHokokuNenpoParameter(jigyoHokokuNenpoSearch);
+        if (!jigyoHokokuNenpoSearch.get集計番号().isEmpty()) {
+            事業報告集計一覧データEntityリスト = dac.selectJigyoHokokuNenpoDetal1(jigyoHokokuNenpoSearch.get報告年(),
+                    jigyoHokokuNenpoSearch.get集計対象年(), parameter.getToukeiTaishoKubun(),
+                    jigyoHokokuNenpoSearch.get市町村コード(), parameter.getHyoNo(), jigyoHokokuNenpoSearch.get集計番号());
+        } else {
+            事業報告集計一覧データEntityリスト = dac.selectJigyoHokokuNenpoDetal2(jigyoHokokuNenpoSearch.get報告年(),
+                    jigyoHokokuNenpoSearch.get集計対象年(), parameter.getToukeiTaishoKubun(),
+                    jigyoHokokuNenpoSearch.get市町村コード(), parameter.getHyoNo(), parameter.getShukeiNoList());
+        }
         for (DbT7021JigyoHokokuTokeiDataEntity entity : 事業報告集計一覧データEntityリスト) {
+            entity.initializeMd5();
             事業報告集計一覧データリスト.add(new JigyoHokokuTokeiData(entity));
         }
         if (事業報告集計一覧データリスト.isEmpty()) {

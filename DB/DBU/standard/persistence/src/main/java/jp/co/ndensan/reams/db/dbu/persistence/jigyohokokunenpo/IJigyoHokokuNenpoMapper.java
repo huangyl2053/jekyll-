@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbu.persistence.jigyohokokunenpo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.JigyoHokokuNenpoDetalParameter;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.JigyoHokokuNenpoParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 
@@ -23,13 +22,4 @@ public interface IJigyoHokokuNenpoMapper {
      * @return 事業報告集計一覧データEntityリスト
      */
     List<DbT7021JigyoHokokuTokeiDataEntity> getJigyoHokokuNenpoList(JigyoHokokuNenpoParameter parameter);
-
-    /**
-     * 事業報告年報詳細データを取得します。
-     *
-     * @param parameter 事業報告年報詳細データの取得処理のパラメター
-     * @return 事業報告集計一覧データEntityリスト
-     */
-    List<DbT7021JigyoHokokuTokeiDataEntity> getJigyoHokokuNenpoDetal(JigyoHokokuNenpoDetalParameter parameter);
-
 }
