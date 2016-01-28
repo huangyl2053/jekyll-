@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.dbu0060031
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
+import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataIdentifier;
 import jp.co.ndensan.reams.db.dbu.definition.core.nenpoyoushiki2no8.NenpoYoushiki2No8ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.definition.enumeratedtype.DbuViewStateKey;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.DeleteJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.SearchJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.DBU0060011TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031.DBU0060031StateName;
@@ -180,12 +180,23 @@ public class NenpoYoushiki2No8 {
             }
         }
         if (補正フラグ.equals(フラグ_削除)) {
-            報告年 = new FlexibleYear(entity.get行報告年());
-            集計対象年 = new FlexibleYear(entity.get行集計対象年());
-            市町村コード = new LasdecCode(entity.get行市町村コード());
-            様式種類コード = entity.get事業報告年報補正表示のコード();
-            DeleteJigyoHokokuNenpo jigyoHokokuNenpoDelete = new DeleteJigyoHokokuNenpo(報告年, 集計対象年, 市町村コード, 様式種類コード);
-            JigyoHokokuNenpoHoseiHakoManager.createInstance().deleteJigyoHokokuNenpoData(jigyoHokokuNenpoDelete);
+            List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = new ArrayList<>();
+            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 件数タブデータ
+                    = ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.件数データグリッド, Models.class);
+            for (JigyoHokokuTokeiData 件数 : 件数タブデータ) {
+                事業報告集計一覧データリスト.add(件数);
+            }
+            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 費用額データ
+                    = ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.費用額データグリッド, Models.class);
+            for (JigyoHokokuTokeiData 費用額 : 費用額データ) {
+                事業報告集計一覧データリスト.add(費用額);
+            }
+            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 給付額データ
+                    = ViewStateHolder.get(NenpoYoushiki2No8ViewStateKeys.給付額データグリッド, Models.class);
+            for (JigyoHokokuTokeiData 給付額 : 給付額データ) {
+                事業報告集計一覧データリスト.add(給付額);
+            }
+            JigyoHokokuNenpoHoseiHakoManager.createInstance().deleteJigyoHokokuNenpoData(事業報告集計一覧データリスト);
             div.getKanryoMsg().getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
                     .replace("削除").evaluate()),
                     RString.EMPTY, RString.EMPTY, true);

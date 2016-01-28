@@ -193,12 +193,10 @@ public class NenpoYoushiki2No8Handler {
         List<DetalParameter> 件数Parameter = get件数データ();
         for (DetalParameter detal : 件数Parameter) {
             for (JigyoHokokuTokeiData viewdata : 件数タブデータ) {
-                JigyoHokokuTokeiDataBuilder builder = viewdata.createBuilderForEdit();
                 if (detal.get縦番号().compareTo(viewdata.get縦番号()) == 0
                         && detal.get横番号().compareTo(viewdata.get横番号()) == 0
                         && detal.get集計結果値().compareTo(viewdata.get集計結果値()) != 0) {
-                    builder.set集計結果値(detal.get集計結果値());
-                    viewdata = builder.build();
+                    viewdata = viewdata.createBuilderForEdit().set集計結果値(detal.get集計結果値()).build();
                     list.add(viewdata);
                 }
             }
