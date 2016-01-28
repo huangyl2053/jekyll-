@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraishikyukettekyufujssek
 import jp.co.ndensan.reams.db.dbc.definition.core.nyuryokushikibetsuno.NyuryokuShikibetsuNoShokan3Keta;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.Dbt3034ShokanShinseiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanFukushigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanKinkyuShisetsuRyoyoEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanKinkyuShisetsuRyoyoParameter;
@@ -21,7 +22,6 @@ import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikett
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanMeisaiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanServicePlanEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanServicePlanParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanShakaiFukushiHojinKeigengakuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanShinseiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanShokujiHiyoEntity;
@@ -2147,9 +2147,9 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
     public void updShokanShakaiFukushiHojinKeigengaku(ShokanShakaiFukushiHojinKeigengakuParameter parameter) {
 
         int 連番 = 0;
-        List<ShokanShakaiFukushiHojinKeigengakuEntity> 社福軽減額List = parameter.get社福軽減額List();
+        List<ShokanFukushigengakuEntity> 社福軽減額List = parameter.get社福軽減額List();
         if (社福軽減額List != null && !社福軽減額List.isEmpty()) {
-            for (ShokanShakaiFukushiHojinKeigengakuEntity 社福軽減額 : 社福軽減額List) {
+            for (ShokanFukushigengakuEntity 社福軽減額 : 社福軽減額List) {
                 if (社福軽減額.get状態().equals(モード_登録)) {
                     連番 = 連番 + 1;
                     DbT3051ShokanShakaiFukushiHojinKeigengakuEntity entity

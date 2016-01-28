@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikett
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanMeisaiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanServicePlanEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanServicePlanParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanShakaiFukushiHojinKeigengakuEntity;
+import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanFukushigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanShakaiFukushiHojinKeigengakuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanShinseiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanShokujiHiyoEntity;
@@ -751,8 +751,8 @@ public class SyokanbaraihiShikyuShinseiKetteManagerTest {
         int 軽減後利用者負担額;
         RString 備考;
         RString 状態;
-        ShokanShakaiFukushiHojinKeigengakuEntity entity;
-        List<ShokanShakaiFukushiHojinKeigengakuEntity> 社福軽減額List = new ArrayList<>();
+        ShokanFukushigengakuEntity entity;
+        List<ShokanFukushigengakuEntity> 社福軽減額List = new ArrayList<>();
         for (int i = 1; i < 6; i++) {
             連番 = new RString("22");
             軽減率 = new Decimal("32");
@@ -771,7 +771,7 @@ public class SyokanbaraihiShikyuShinseiKetteManagerTest {
             if (i == 4) {
                 状態 = new RString("削除");
             }
-            entity = ShokanShakaiFukushiHojinKeigengakuEntity.createSelectByKeyParam(連番, 軽減率, サービス種類コード,
+            entity = ShokanFukushigengakuEntity.createSelectByKeyParam(連番, 軽減率, サービス種類コード,
                     受領すべき利用者負担の総額, 軽減額, 軽減後利用者負担額, 備考, 状態);
             社福軽減額List.add(entity);
         }
