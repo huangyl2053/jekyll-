@@ -1,0 +1,15 @@
+﻿subGyomuCode,UDD055SubGyomuCode,SubGyomuCode,,,,,サブ業務コード,A
+internalReportId,varchar,RString,,,,,内部帳票ID,A
+fukaNendo,UDD012YSeireki,FlexibleYear,,,,,賦課年度,A
+tsuchishoNo,DbUDD008TsuchishoNo,TsuchishoNo,,,,,通知書番号,A
+internalReportCreationDateTime,UDD019Timestamp,RDateTime,,,,,内部帳票作成日時,A
+batchId,varchar,RString,,,,,バッチID,A
+batchStartingDateTime,UDD019Timestamp,RDateTime,,,,,バッチ起動日時,A
+errorCode,UDD035Code,Code,1,1,,,エラーコード,A
+hihokenshaNo,DbUDD002HihokenshaNo,KaigoHihokenshaNo,,,,,被保険者番号,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
+shoriKubunCode,UDD035Code,Code,,,,,処理区分コード,A
+shikakuShutokuYMD,UDD015YMD,FlexibleDate,,,,,資格取得日,A
+shikakuShutokuJiyu,varchar,RString,,,,,資格取得事由,A
+shikakuSoshitsuYMD,UDD015YMD,FlexibleDate,,,,,資格喪失日,A
+shikakuSoshitsuJiyu,varchar,RString,,,,,資格喪失事由,A

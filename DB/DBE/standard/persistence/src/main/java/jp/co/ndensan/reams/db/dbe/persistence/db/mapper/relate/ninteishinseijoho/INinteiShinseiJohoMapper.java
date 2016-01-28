@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinseijoho;
 
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteishinseijoho.NinteiShinseiJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
 
 /**
  * 要介護認定申請情報のマッパーインタフェースです。

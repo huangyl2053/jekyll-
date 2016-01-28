@@ -53,24 +53,21 @@ public class ShokanHanteiKekkaManagerTest {
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYearMonth 主キー2 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_整理番号;
-            Decimal 主キー4 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払支給判定結果(null, 主キー2, 主キー3, 主キー4);
+            sut.get償還払支給判定結果(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー1 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_被保険者番号;
             RString 主キー3 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_整理番号;
-            Decimal 主キー4 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払支給判定結果(主キー1, null, 主キー3, 主キー4);
+            sut.get償還払支給判定結果(主キー1, null, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー1 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_サービス提供年月;
-            Decimal 主キー4 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払支給判定結果(主キー1, 主キー2, null, 主キー4);
+            sut.get償還払支給判定結果(主キー1, 主キー2, null);
         }
 
         @Test(expected = NullPointerException.class)
@@ -78,18 +75,17 @@ public class ShokanHanteiKekkaManagerTest {
             HihokenshaNo 主キー1 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_整理番号;
-            sut.get償還払支給判定結果(主キー1, 主キー2, 主キー3, null);
+            sut.get償還払支給判定結果(主キー1, 主キー2, 主キー3);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class))).thenReturn(null);
             HihokenshaNo 主キー1 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_整理番号;
-            Decimal 主キー4 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_履歴番号;
-            ShokanHanteiKekka result = sut.get償還払支給判定結果(主キー1, 主キー2, 主キー3, 主キー4);
+            ShokanHanteiKekka result = sut.get償還払支給判定結果(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
         }
@@ -97,12 +93,11 @@ public class ShokanHanteiKekkaManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3036ShokanHanteiKekkaEntity entity = DbT3036ShokanHanteiKekkaEntityGenerator.createDbT3036ShokanHanteiKekkaEntity();
-            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class))).thenReturn(entity);
             HihokenshaNo 主キー1 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_整理番号;
-            Decimal 主キー4 = DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_履歴番号;
-            ShokanHanteiKekka result = sut.get償還払支給判定結果(主キー1, 主キー2, 主キー3, 主キー4);
+            ShokanHanteiKekka result = sut.get償還払支給判定結果(主キー1, 主キー2, 主キー3);
 
             assertThat(result.get被保険者番号().value(), is(DbT3036ShokanHanteiKekkaEntityGenerator.DEFAULT_被保険者番号.value()));
         }

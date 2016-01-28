@@ -59,11 +59,10 @@ public class IryohokenKanyuJokyoTest extends DbzTestBase {
             sut = new IryohokenKanyuJokyo(null, 履歴番号);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new IryohokenKanyuJokyo(識別コード, null);
-        }
-
+//        @Test(expected = NullPointerException.class)
+//        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
+//            sut = new IryohokenKanyuJokyo(識別コード, null);
+//        }
         @Test
         public void 指定したキーが保持するDbT1008IryohokenKanyuJokyoEntityにセットされている() {
             sut = new IryohokenKanyuJokyo(識別コード, 履歴番号);

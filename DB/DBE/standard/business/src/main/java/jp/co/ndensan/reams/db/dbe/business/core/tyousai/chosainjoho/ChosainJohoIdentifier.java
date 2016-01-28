@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 @lombok.Value
 public class ChosainJohoIdentifier implements Serializable {
 
+    private static final long serialVersionUID = 6597672801122640695L;
+
     private final LasdecCode 市町村コード;
     private final ChosaItakusakiCode 認定調査委託先コード;
     private final ChosainCode 認定調査員コード;

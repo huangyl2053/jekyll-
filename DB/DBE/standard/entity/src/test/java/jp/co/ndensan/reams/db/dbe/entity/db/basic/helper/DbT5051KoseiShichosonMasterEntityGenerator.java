@@ -43,7 +43,7 @@ public final class DbT5051KoseiShichosonMasterEntityGenerator {
     public static final FlexibleDate DEFAULT_離脱日 = new FlexibleDate("20150402");
     public static final RString DEFAULT_合併旧市町村区分 = new RString("1");
     public static final RString DEFAULT_合併旧市町村表示有無 = new RString("1");
-    public static final RString DEFAULT_合併情報地域番号 = new RString("1");
+    public static final RString DEFAULT_合併情報地域番号 = new RString("12");
     public static final ShoKisaiHokenshaNo DEFAULT_運用保険者番号 = new ShoKisaiHokenshaNo("123456");
     public static final FlexibleDate DEFAULT_運用開始日 = new FlexibleDate("20150402");
     public static final FlexibleDate DEFAULT_運用終了日 = new FlexibleDate("20150402");

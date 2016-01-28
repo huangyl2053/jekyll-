@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5913ChosainJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5913ChosainJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -36,8 +36,8 @@ public class ChosainJohoTest extends DbzTestBase {
     @BeforeClass
     public static void setUpClass() {
         市町村コード = DbT5913ChosainJohoEntityGenerator.DEFAULT_市町村コード;
-        認定調査委託先コード = DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード;
-        認定調査員コード = DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード;
+        認定調査委託先コード = new ChosaItakusakiCode(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード);
+        認定調査員コード = new ChosainCode(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード);
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -124,12 +124,12 @@ public class ChosainJohoTest extends DbzTestBase {
 
         @Test
         public void get認定調査委託先コードは_entityが持つ認定調査委託先コードを返す() {
-            assertThat(sut.get認定調査委託先コード(), is(chosainJohoEntity.getNinteiChosaItakusakiCode()));
+            assertThat(sut.get認定調査委託先コード().getColumnValue(), is(chosainJohoEntity.getNinteiChosaItakusakiCode()));
         }
 
         @Test
         public void get認定調査員コードは_entityが持つ認定調査員コードを返す() {
-            assertThat(sut.get認定調査員コード(), is(chosainJohoEntity.getNinteiChosainCode()));
+            assertThat(sut.get認定調査員コード().getColumnValue(), is(chosainJohoEntity.getNinteiChosainCode()));
         }
 
         @Test

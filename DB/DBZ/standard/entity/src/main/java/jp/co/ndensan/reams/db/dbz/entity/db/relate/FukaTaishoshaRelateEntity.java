@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.db.relate;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearchEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.kensaku.DbV7902FukaSearchEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**

@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * <br/> 認定調査票や主治医意見書以外の書類のイメージ
  */
 public enum DbT5115Image implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -45,14 +45,6 @@ public enum DbT5115Image implements IColumnDefinition {
      * <br/>要介護認定申請情報
      */
     shinseishoKanriNo(2147483647, 0),
-    /**
-     * 取込ページ番号
-     */
-    torikomiPageNo(5, 0),
-    /**
-     * 原本マスク分
-     */
-    genponMaskKubun(2147483647, 0),
     /**
      * イメージ共有ファイルID
      */

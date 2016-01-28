@@ -197,7 +197,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaDacTest extends DbcTestDacBas
         public static void insert(
                 JigyoshaNo 市町村特別給付用事業者番号,
                 ServiceCode 市町村特別給付用サービスコード,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3065ShichosonTokubetsuKyufuJigyoshaEntity entity = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.createDbT3065ShichosonTokubetsuKyufuJigyoshaEntity();
             entity.setJigyoshaNo(市町村特別給付用事業者番号);
             entity.setServiceCode(市町村特別給付用サービスコード);

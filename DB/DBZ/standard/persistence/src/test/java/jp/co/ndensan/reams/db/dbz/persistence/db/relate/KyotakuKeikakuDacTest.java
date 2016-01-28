@@ -8,9 +8,9 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.relate.KyotakuKeikakuDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3005KyotakuKeikakuTodokedeEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3005KyotakuKeikakuTodokedeEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3005KyotakuKeikakuTodokedeEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator;
@@ -73,7 +73,7 @@ public class KyotakuKeikakuDacTest {
     private static final YMDHMS 事業者_処理日時1 = new YMDHMS(new RString("20140101102030"));
     private static final YMDHMS 事業者_処理日時2 = new YMDHMS(new RString("20141201102030"));
     private static final FlexibleDate 事業者_適用開始年月 = new FlexibleDate(new RString("20140601"));
-    private static final Decimal 事業者_履歴番号1 = new Decimal(1);
+    private static final Integer 事業者_履歴番号1 = new Integer(1);
 
     private static final HihokenshaNo 自己_被保険者番号1 = new HihokenshaNo("123451");
     private static final HihokenshaNo 自己_被保険者番号2 = new HihokenshaNo("023450");
@@ -145,9 +145,9 @@ public class KyotakuKeikakuDacTest {
         public static void insertDbT3006(
                 HihokenshaNo 被保険者番号,
                 FlexibleYearMonth 対象年月,
-                Decimal 履歴番号) {
+                Integer 履歴番号) {
             DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.createDbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
-            entity.setHihokenshano(被保険者番号);
+            entity.setHihokenshaNo(被保険者番号);
             entity.setTaishoYM(対象年月);
             entity.setRirekiNo(履歴番号);
             居宅給付計画事業者作成Dac.save(entity);

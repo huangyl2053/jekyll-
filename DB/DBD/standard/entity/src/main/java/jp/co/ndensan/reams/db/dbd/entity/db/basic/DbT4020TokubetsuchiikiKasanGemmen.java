@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 特別地域加算減免テーブルの項目定義クラスです。
  */
 public enum DbT4020TokubetsuchiikiKasanGemmen implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -39,6 +39,30 @@ public enum DbT4020TokubetsuchiikiKasanGemmen implements IColumnDefinition {
      * lastUpdateReamsLoginId
      */
     lastUpdateReamsLoginId(2147483647, 0),
+    /**
+     * shinseiYMD
+     */
+    shinseiYMD(2147483647, 0),
+    /**
+     * ketteiYMD
+     */
+    ketteiYMD(2147483647, 0),
+    /**
+     * tekiyoKaishiYMD
+     */
+    tekiyoKaishiYMD(2147483647, 0),
+    /**
+     * tekiyoShuryoYMD
+     */
+    tekiyoShuryoYMD(2147483647, 0),
+    /**
+     * ketteiKubun
+     */
+    ketteiKubun(1, 0),
+    /**
+     * hiShoninRiyu
+     */
+    hiShoninRiyu(200, 0),
     /**
      * 証記載保険者番号
      */

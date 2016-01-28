@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1004ShisetsuNyutaishoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -33,7 +32,7 @@ public class ShisetsuNyutaishoTest extends DbzTestBase {
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static ShikibetsuCode 識別コード;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
@@ -59,11 +58,10 @@ public class ShisetsuNyutaishoTest extends DbzTestBase {
             sut = new ShisetsuNyutaisho(null, 履歴番号);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShisetsuNyutaisho(識別コード, null);
-        }
-
+//        @Test(expected = NullPointerException.class)
+//        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
+//            sut = new ShisetsuNyutaisho(識別コード, null);
+//        }
         @Test
         public void 指定したキーが保持するDbT1004ShisetsuNyutaishoEntityにセットされている() {
             sut = new ShisetsuNyutaisho(識別コード, 履歴番号);

@@ -81,7 +81,6 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 申請書管理番号を返します。
      *
@@ -787,8 +786,7 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
     }
 
     /**
-     * 要介護認定申請情報のみを変更対象とします。<br/>
-     * {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 要介護認定申請情報のみを変更対象とします。<br/> {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteiShinseiJoho}
      */
@@ -802,8 +800,7 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
     }
 
     /**
-     * 保持する要介護認定申請情報を削除対象とします。<br/>
-     * {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する要介護認定申請情報を削除対象とします。<br/> {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteiShinseiJoho}
      */

@@ -19,9 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 老齢福祉年金受給者を管理するクラスです。
  */
-public class RoreiFukushiNenkinJukyusha extends 
-        ParentModelBase<RoreiFukushiNenkinJukyushaIdentifier, 
-        DbT7006RoreiFukushiNenkinJukyushaEntity, RoreiFukushiNenkinJukyusha> implements Serializable {
+public class RoreiFukushiNenkinJukyusha extends
+        ParentModelBase<RoreiFukushiNenkinJukyushaIdentifier, DbT7006RoreiFukushiNenkinJukyushaEntity, RoreiFukushiNenkinJukyusha> implements Serializable {
 
     private final DbT7006RoreiFukushiNenkinJukyushaEntity entity;
     private final RoreiFukushiNenkinJukyushaIdentifier id;
@@ -98,7 +97,7 @@ public class RoreiFukushiNenkinJukyusha extends
      * @return 受給終了年月日
      */
     public FlexibleDate get受給終了年月日() {
-        return entity.getJukyuShuryoYMD();
+        return entity.getJukyuHaishiYMD();
     }
 
     /**

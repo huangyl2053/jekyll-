@@ -3,10 +3,10 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 認定調査票（概況特記）テーブルの項目定義クラスです。
+ * DbT4206GaikyoTokkiテーブルの項目定義クラスです。
  */
 public enum DbT4206GaikyoTokki implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -40,63 +40,45 @@ public enum DbT4206GaikyoTokki implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * 申請書管理番号
-     * <br/>要介護認定申請情報
+     * shinseishoKanriNo
      */
     shinseishoKanriNo(2147483647, 0),
     /**
-     * 認定調査依頼履歴番号
-     * <br/>認定調査依頼情報
+     * ninteichosaRirekiNo
      */
     ninteichosaRirekiNo(5, 0),
     /**
-     * 概況特記事項（主訴）
+     * gaikyoTokkiTextImageKubun
+     */
+    gaikyoTokkiTextImageKubun(1, 0),
+    /**
+     * jutakuKaishu
+     */
+    jutakuKaishu(2147483647, 0),
+    /**
+     * tokubetsuKyufuService
+     */
+    tokubetsuKyufuService(2147483647, 0),
+    /**
+     * zaitakuService
+     */
+    zaitakuService(2147483647, 0),
+    /**
+     * shuso
      */
     shuso(2147483647, 0),
     /**
-     * 概況特記（主訴）イメージ共有ファイルID
-     */
-    shusoImageSharedFileId(29, 0),
-    /**
-     * 概況特記（主訴）マスキングイメージ共有ファイルID
-     */
-    shusoMaskingImageSharedFileId(29, 0),
-    /**
-     * 概況特記事項（家族状況）
+     * kazokuJokyo
      */
     kazokuJokyo(2147483647, 0),
     /**
-     * 概況特記（家族状況）イメージ共有ファイルID
-     */
-    kazokuJokyoImageSharedFileId(29, 0),
-    /**
-     * 概況特記（家族状況）マスキングイメージ共有ファイルID
-     */
-    kazokuJokyoMaskingImageSharedFileId(29, 0),
-    /**
-     * 概況特記事項（居住環境）
+     * kyojuKankyo
      */
     kyojuKankyo(2147483647, 0),
     /**
-     * 概況特記（居住環境）イメージ共有ファイルID
+     * kikaiKiki
      */
-    kyojuKankyoImageSharedFileId(29, 0),
-    /**
-     * 概況特記（居住環境）マスキングイメージ共有ファイルID
-     */
-    kyojuKankyoMaskingImageSharedFileId(29, 0),
-    /**
-     * 概況特記事項（機器・器械）
-     */
-    kikaiKiki(2147483647, 0),
-    /**
-     * 概況特記（機器・器械）イメージ共有ファイルID
-     */
-    kikaiKikiImageSharedFileId(29, 0),
-    /**
-     * 概況特記（機器・器械）マスキングイメージ共有ファイルID
-     */
-    kikaiKikiMaskingImageSharedFileId(29, 0);
+    kikaiKiki(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

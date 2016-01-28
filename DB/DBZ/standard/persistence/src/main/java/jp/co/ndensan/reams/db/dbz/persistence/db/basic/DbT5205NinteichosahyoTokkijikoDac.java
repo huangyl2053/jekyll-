@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.genponMaskKubun;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.ninteichosaRirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.ninteichosaTokkijikoNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.ninteichosaTokkijikoRenban;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.ninteichosaTokkijikoRemban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.shinseishoKanriNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.tokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
@@ -51,7 +51,7 @@ public class DbT5205NinteichosahyoTokkijikoDac implements ISaveable<DbT5205Ninte
             ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
             RString 認定調査特記事項番号,
-            RString 認定調査特記事項連番,
+            int 認定調査特記事項連番,
             RString 特記事項テキスト_イメージ区分,
             Code 原本マスク区分) throws NullPointerException {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
@@ -70,7 +70,7 @@ public class DbT5205NinteichosahyoTokkijikoDac implements ISaveable<DbT5205Ninte
                                 eq(shinseishoKanriNo, 申請書管理番号),
                                 eq(ninteichosaRirekiNo, 認定調査依頼履歴番号),
                                 eq(ninteichosaTokkijikoNo, 認定調査特記事項番号),
-                                eq(ninteichosaTokkijikoRenban, 認定調査特記事項連番),
+                                eq(ninteichosaTokkijikoRemban, 認定調査特記事項連番),
                                 eq(tokkijikoTextImageKubun, 特記事項テキスト_イメージ区分
                                 ),
                                 eq(genponMaskKubun, 原本マスク区分)

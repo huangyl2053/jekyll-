@@ -8,13 +8,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import java.util.Objects;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * 申請履歴情報（子）テーブルのエンティティクラスです。
  */
-public class DbT4121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT4121ShinseiRirekiJohoEntity> implements IDbAccessable, IShinseiRirekiJohoEntity {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+public class DbT4121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT4121ShinseiRirekiJohoEntity> implements IShinseiRirekiJohoEntity {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4121ShinseiRirekiJoho");
@@ -24,7 +25,7 @@ public class DbT4121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT4121Shi
     private RString insertReamsLoginId;
     private UUID insertContextId;
     private boolean isDeleted = false;
-    private int updateCount = 0;
+    private final int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
@@ -90,7 +91,7 @@ public class DbT4121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT4121Shi
      *
      * @param shinseishoKanriNo 申請管理番号
      */
-    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -108,7 +109,7 @@ public class DbT4121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT4121Shi
      *
      * @param zenkaiShinseishoKanriNo 前回申請管理番号
      */
-    public void setZenkaiShinseishoKanriNo(ShinseishoKanriNo zenkaiShinseishoKanriNo) {
+    public void setZenkaiShinseishoKanriNo(@Nonnull ShinseishoKanriNo zenkaiShinseishoKanriNo) {
         this.zenkaiShinseishoKanriNo = zenkaiShinseishoKanriNo;
     }
 
@@ -116,7 +117,7 @@ public class DbT4121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT4121Shi
      * このエンティティの主キーが他の{@literal DbT4121ShinseiRirekiJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4121ShinseiRirekiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -124,14 +125,13 @@ public class DbT4121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT4121Shi
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo);
     }
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT4121ShinseiRirekiJohoEntity entity) {
@@ -149,4 +149,5 @@ public class DbT4121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT4121Shi
         return super.toMd5(shinseishoKanriNo, zenkaiShinseishoKanriNo);
     }
 
+// </editor-fold>
 }

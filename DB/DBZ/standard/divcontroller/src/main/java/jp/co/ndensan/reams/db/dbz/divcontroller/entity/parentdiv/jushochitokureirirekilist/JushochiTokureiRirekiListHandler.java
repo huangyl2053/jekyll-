@@ -9,30 +9,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.Lists;
-//import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuHenkoJiyu;
-//import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
-//import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
-//import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuShutokuJiyu;
-//import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuSoshitsuJiyu;
-//import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
-//import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IPredicate;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
-//import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
-//import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-//import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-//import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-//import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-//import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
@@ -46,8 +40,8 @@ public class JushochiTokureiRirekiListHandler {
 
     private final JushochiTokureiRirekiListDiv jutokuRirekiDiv;
     private static final RString PANEL_SESSION_ACCESSOR_KEY = new RString("jushochiTokureiRireki");
-    private static final RString ACCESSOR_EDITING_KEY = new RString("jushochiTokureiRireki_Editing");
-//    private static final RString SESSION_KYU_HOKENSHA = new RString("kyuHokensha");
+    private static final RString PANEL_SESSION_ACCESSOR_EDITING_KEY = new RString("jushochiTokureiRireki_Editing");
+    private static final RString SESSION_KYU_HOKENSHA = new RString("kyuHokensha");
 
     /**
      * コンストラクタです。
@@ -116,20 +110,20 @@ public class JushochiTokureiRirekiListHandler {
      * グリッド上で選択した住所地特例異動の情報を、明細エリアに表示します。
      */
     public void showSelectedData() {
-//        dgJutoku_Row row = jutokuRirekiDiv.getDgJutoku().getClickedItem();
+        dgJutoku_Row row = jutokuRirekiDiv.getDgJutoku().getClickedItem();
 
-//        final FlexibleDate conditionDate = row.getTekiyoDate().getValue();
-//        IPredicate condition = new IPredicate<HihokenshaDaichoModel>() {
-//            @Override
-//            public boolean evaluate(HihokenshaDaichoModel targetModel) {
-//                return false;
+        final FlexibleDate conditionDate = row.getTekiyoDate().getValue();
+        IPredicate condition = new IPredicate<HihokenshaDaichoModel>() {
+            @Override
+            public boolean evaluate(HihokenshaDaichoModel targetModel) {
+                return false;
                 //return conditionDate.equals(targetModel.get適用年月日());
-//            }
-//        };
+            }
+        };
 
 //        IItemList<HihokenshaDaichoModel> jutokuList = new HihokenshaDaichoList(getEditing被保険者台帳情報()).to住所地特例List();
-//        IItemList<HihokenshaDaichoModel> jutokuList = getEditing被保険者台帳情報();
-//        IItemList<HihokenshaDaichoModel> jutokuOneSeason = jutokuList.filter(condition);
+        IItemList<HihokenshaDaichoModel> jutokuList = getEditing被保険者台帳情報();
+        IItemList<HihokenshaDaichoModel> jutokuOneSeason = jutokuList.filter(condition);
 
 //        for (HihokenshaDaichoModel model : jutokuOneSeason) {
 //            if (model.get解除年月日().isEmpty()) {
@@ -140,7 +134,7 @@ public class JushochiTokureiRirekiListHandler {
 //        }
     }
 
-//    private void setTekiyoInputMeisai(HihokenshaDaichoModel model) {
+    private void setTekiyoInputMeisai(HihokenshaDaichoModel model) {
 //        jutokuRirekiDiv.getJutokuTekiyoInput().setTekiyojiShichosonCode(model.get市町村コード().getColumnValue());
 //        jutokuRirekiDiv.getJutokuTekiyoInput().setTekiyojiHihokenshaNo(model.get被保険者番号().getColumnValue());
 //        jutokuRirekiDiv.getJutokuTekiyoInput().setTekiyojiShoriDatetime(toRStringForYMDHMS(model.get処理日時().getColumnValue()));
@@ -152,27 +146,27 @@ public class JushochiTokureiRirekiListHandler {
 //        jutokuRirekiDiv.getDdlTekiyojiKyuHokensha().setSelectedKey(model.get旧市町村コード().value());
         //TODO n8178 城間篤人 宛名データの取得方を考える（DBから？宛名情報を引数から受け取って？）。とりあえず後で。 2014年12月11日まで
         //最初に一回だけ取得できればよいか？　もしそれでよいならば、ここでの反映するのは、識別コードと市町村コードを比較して対応する値を取得するプライベートメソッドで行う。
-//        jutokuRirekiDiv.getDdlTekiyojiJuminJoho();
-//    }
+        jutokuRirekiDiv.getDdlTekiyojiJuminJoho();
+    }
 
-//    private RString toRStringForYMDHMS(YMDHMS ymdhms) {
-//        RStringBuilder builder = new RStringBuilder();
-//        int year = ymdhms.getRDateTime().getYear();
-//        int month = ymdhms.getRDateTime().getMonthOfYear();
-//        int day = ymdhms.getRDateTime().getDayOfMonth();
-//        int hour = ymdhms.getRDateTime().getHour();
-//        int minute = ymdhms.getRDateTime().getMinute();
-//        int second = ymdhms.getRDateTime().getSecond();
-//        builder.append(new RString(String.valueOf(year)).padZeroToLeft(4));
-//        builder.append(new RString(String.valueOf(month)).padZeroToLeft(2));
-//        builder.append(new RString(String.valueOf(day)).padZeroToLeft(2));
-//        builder.append(new RString(String.valueOf(hour)).padZeroToLeft(2));
-//        builder.append(new RString(String.valueOf(minute)).padZeroToLeft(2));
-//        builder.append(new RString(String.valueOf(second)).padZeroToLeft(2));
-//        return builder.toRString();
-//    }
+    private RString toRStringForYMDHMS(YMDHMS ymdhms) {
+        RStringBuilder builder = new RStringBuilder();
+        int year = ymdhms.getRDateTime().getYear();
+        int month = ymdhms.getRDateTime().getMonthOfYear();
+        int day = ymdhms.getRDateTime().getDayOfMonth();
+        int hour = ymdhms.getRDateTime().getHour();
+        int minute = ymdhms.getRDateTime().getMinute();
+        int second = ymdhms.getRDateTime().getSecond();
+        builder.append(new RString(String.valueOf(year)).padZeroToLeft(4));
+        builder.append(new RString(String.valueOf(month)).padZeroToLeft(2));
+        builder.append(new RString(String.valueOf(day)).padZeroToLeft(2));
+        builder.append(new RString(String.valueOf(hour)).padZeroToLeft(2));
+        builder.append(new RString(String.valueOf(minute)).padZeroToLeft(2));
+        builder.append(new RString(String.valueOf(second)).padZeroToLeft(2));
+        return builder.toRString();
+    }
 
-//    private void setKaijoInputMeisai(HihokenshaDaichoModel model) {
+    private void setKaijoInputMeisai(HihokenshaDaichoModel model) {
 //        jutokuRirekiDiv.getJutokuKaijoInput().setKaijojiShichosonCode(model.get市町村コード().getColumnValue());
 //        jutokuRirekiDiv.getJutokuKaijoInput().setKaijojiHihokenshaNo(model.get被保険者番号().getColumnValue());
 //        jutokuRirekiDiv.getJutokuKaijoInput().setKaijojiShoriDatetime(toRStringForYMDHMS(model.get処理日時().getColumnValue()));
@@ -184,8 +178,8 @@ public class JushochiTokureiRirekiListHandler {
 //        jutokuRirekiDiv.getDdlKaijojiKyuHokensha().setSelectedKey(model.get旧市町村コード().getColumnValue());
         //TODO n8178 城間篤人 宛名データの取得方を考える（DBから？宛名情報を引数から受け取って？）。とりあえず後で。 2014年12月11日まで
         //最初に一回だけ取得できればよいか？　もしそれでよいならば、ここでの反映するのは、識別コードと市町村コードを比較して対応する値を取得するプライベートメソッドで行う。
-//        jutokuRirekiDiv.getDdlKaijojiJuminJono();
-//    }
+        jutokuRirekiDiv.getDdlKaijojiJuminJono();
+    }
 
     /**
      * 明細エリアの情報を初期化します。
@@ -234,7 +228,7 @@ public class JushochiTokureiRirekiListHandler {
      */
     public IItemList<HihokenshaDaichoModel> getEditing被保険者台帳情報() {
         IItemList<HihokenshaDaichoModel> editing被保険者台帳List
-                = ItemList.of(PanelSessionAccessor.get(jutokuRirekiDiv, ACCESSOR_EDITING_KEY, ArrayList.class));
+                = ItemList.of(PanelSessionAccessor.get(jutokuRirekiDiv, PANEL_SESSION_ACCESSOR_EDITING_KEY, ArrayList.class));
         return editing被保険者台帳List;
     }
 
@@ -244,17 +238,16 @@ public class JushochiTokureiRirekiListHandler {
      * @return 被保険者台帳List
      */
     public IItemList<HihokenshaDaichoModel> getUpdate被保険者台帳情報() {
-//        IItemList<HihokenshaDaichoModel> baseList
-//                = ItemList.of(PanelSessionAccessor.get(jutokuRirekiDiv, PANEL_SESSION_ACCESSOR_KEY, ArrayList.class));
-//        IItemList<HihokenshaDaichoModel> editingList
-//                = ItemList.of(PanelSessionAccessor.get(jutokuRirekiDiv, ACCESSOR_EDITING_KEY, ArrayList.class));
-//        return merge(baseList, editingList);
-        return ItemList.empty();
+        IItemList<HihokenshaDaichoModel> baseList
+                = ItemList.of(PanelSessionAccessor.get(jutokuRirekiDiv, PANEL_SESSION_ACCESSOR_KEY, ArrayList.class));
+        IItemList<HihokenshaDaichoModel> editingList
+                = ItemList.of(PanelSessionAccessor.get(jutokuRirekiDiv, PANEL_SESSION_ACCESSOR_EDITING_KEY, ArrayList.class));
+        return merge(baseList, editingList);
     }
 
-//    private IItemList<HihokenshaDaichoModel> merge(IItemList<HihokenshaDaichoModel> baseList, IItemList<HihokenshaDaichoModel> editingList) {
+    private IItemList<HihokenshaDaichoModel> merge(IItemList<HihokenshaDaichoModel> baseList, IItemList<HihokenshaDaichoModel> editingList) {
 
-//        List<HihokenshaDaichoModel> mergedList = new ArrayList<>();
+        List<HihokenshaDaichoModel> mergedList = new ArrayList<>();
 
 //        for (HihokenshaDaichoModel editingModel : editingList) {
 //            IPredicate condition = new HihokenshaDaichoCondition(editingModel);
@@ -281,9 +274,9 @@ public class JushochiTokureiRirekiListHandler {
 //                    break;
 //            }
 //        }
-//        return ItemList.empty();
+        return ItemList.empty();
 //        return ItemList.of(mergedList);
-//    }
+    }
 
     /**
      * 引数から受け取った被保険者台帳Listの情報をDivに登録します。
@@ -292,7 +285,7 @@ public class JushochiTokureiRirekiListHandler {
      */
     public void set被保険者台帳情報(IItemList<HihokenshaDaichoModel> 被保険者台帳List) {
         PanelSessionAccessor.put(jutokuRirekiDiv, PANEL_SESSION_ACCESSOR_KEY, (ArrayList) 被保険者台帳List.toList());
-        PanelSessionAccessor.put(jutokuRirekiDiv, ACCESSOR_EDITING_KEY, (ArrayList) 被保険者台帳List.toList());
+        PanelSessionAccessor.put(jutokuRirekiDiv, PANEL_SESSION_ACCESSOR_EDITING_KEY, (ArrayList) 被保険者台帳List.toList());
     }
 
     /**
@@ -300,9 +293,9 @@ public class JushochiTokureiRirekiListHandler {
      *
      * @param 被保険者台帳List 被保険者台帳List
      */
-//    private void setEditing被保険者台帳情報(IItemList<HihokenshaDaichoModel> 被保険者台帳List) {
-//        PanelSessionAccessor.put(jutokuRirekiDiv, ACCESSOR_EDITING_KEY, (ArrayList) 被保険者台帳List.toList());
-//    }
+    private void setEditing被保険者台帳情報(IItemList<HihokenshaDaichoModel> 被保険者台帳List) {
+        PanelSessionAccessor.put(jutokuRirekiDiv, PANEL_SESSION_ACCESSOR_EDITING_KEY, (ArrayList) 被保険者台帳List.toList());
+    }
 
     /**
      * Divに登録されている被保険者台帳情報から、住所地特例についての情報を抽出してグリッドにマッピングします。
@@ -313,20 +306,18 @@ public class JushochiTokureiRirekiListHandler {
         IItemList<HihokenshaDaichoModel> 住所地特例List = 被保険者台帳List;
 
         List<dgJutoku_Row> dataSource = new ArrayList<>();
-//        for (HihokenshaDaichoModel model : 住所地特例List) {
-//            dataSource.add(createRow(model));
-            dataSource.add(createRow());
-//        }
+        for (HihokenshaDaichoModel model : 住所地特例List) {
+            dataSource.add(createRow(model));
+        }
         jutokuRirekiDiv.getDgJutoku().setDataSource(dataSource);
     }
 
-//    private dgJutoku_Row createRow(HihokenshaDaichoModel model) {
-    private dgJutoku_Row createRow() {
+    private dgJutoku_Row createRow(HihokenshaDaichoModel model) {
         dgJutoku_Row row = new dgJutoku_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
                 RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxDate());
 
-//        setRowState(row, model);
+        setRowState(row, model);
 //        row.setShichosonCode(model.get市町村コード().getColumnValue());
 //        row.setHihokenshaNo(model.get被保険者番号().getColumnValue());
 //        row.setShoriTimestamp(toRStringForYMDHMS(model.get処理日時().getColumnValue()));
@@ -349,7 +340,7 @@ public class JushochiTokureiRirekiListHandler {
         return row;
     }
 
-//    private void setKyuHokensya(LasdecCode lasdecCode) {
+    private void setKyuHokensya(LasdecCode lasdecCode) {
 
 //        KijunTsukiShichosonFinder finder = new KijunTsukiShichosonFinder();
 //        Optional<GappeiShichoson> gappeiInfo = finder.get基準月市町村情報(FlexibleDate.getNowDate().getYearMonth(), lasdecCode);
@@ -359,7 +350,7 @@ public class JushochiTokureiRirekiListHandler {
 //        } else {
 //            PanelSessionAccessor.put(jutokuRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.empty());
 //        }
-//    }
+    }
 
     private List<KeyValueDataSource> getKyuHokensyaKeyValueDataSource() {
 
@@ -381,13 +372,13 @@ public class JushochiTokureiRirekiListHandler {
         return new ArrayList();
     }
 
-//    private RString getKyuHokenshaName(final LasdecCode lasdecCode) {
-//
-//        switch (jutokuRirekiDiv.getMode_HokenshaJohoDisplayMode()) {
-//            case KoikiGappeiNashi:
-//            case TanitsuGappeiNashi:
-//                return RString.EMPTY;
-//        }
+    private RString getKyuHokenshaName(final LasdecCode lasdecCode) {
+
+        switch (jutokuRirekiDiv.getMode_HokenshaJohoDisplayMode()) {
+            case KoikiGappeiNashi:
+            case TanitsuGappeiNashi:
+                return RString.EMPTY;
+        }
 
 //        IItemList<IGappeiShichoson> kyuHokenshaList
 //                = PanelSessionAccessor.get(jutokuRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.class);
@@ -404,13 +395,13 @@ public class JushochiTokureiRirekiListHandler {
 //        } else {
 //            return RString.EMPTY;
 //        }
-//        return RString.EMPTY;
-//    }
+        return RString.EMPTY;
+    }
 
-//    private void setRowState(dgJutoku_Row row, HihokenshaDaichoModel model) {
-//
-//        RString stateString;
-//        RowState state;
+    private void setRowState(dgJutoku_Row row, HihokenshaDaichoModel model) {
+
+        RString stateString;
+        RowState state;
 //        switch (model.getState()) {
 //            case Added:
 //                stateString = new RString("追加");
@@ -428,7 +419,7 @@ public class JushochiTokureiRirekiListHandler {
 //                stateString = new RString("");
 //                state = RowState.Unchanged;
 //                break;
-//    }
+    }
 
 //    row.setState (stateString);
 //    row.setRowState (state);
@@ -450,7 +441,7 @@ public class JushochiTokureiRirekiListHandler {
 //        }
     }
 
-//    private void addEntryData() {
+    private void addEntryData() {
 
 //        Optional<HihokenshaDaichoModel> baseDataModel;
 //        IItemList<HihokenshaDaichoModel> sorted被保険者台帳履歴
@@ -509,9 +500,9 @@ public class JushochiTokureiRirekiListHandler {
 //                setEditing被保険者台帳情報(sorted被保険者台帳履歴.added(addTekiyoModel, addKaijoModel));
 //                break;
 //        }
-//    }
+    }
 
-//    private void modifyEntryData() {
+    private void modifyEntryData() {
 
 //        IItemList<HihokenshaDaichoModel> sorted被保険者台帳履歴
 //                = getEditing被保険者台帳情報().sorted(HihokenshaDaichoModelComparators.orderBy処理日時.desc());
@@ -535,9 +526,9 @@ public class JushochiTokureiRirekiListHandler {
 //                setEditing被保険者台帳情報(sorted被保険者台帳履歴.added(mergedTekiyoModel, mergedKaijoModel));
 //                break;
 //        }
-//    }
+    }
 
-//    private void deleteEntryData() {
+    private void deleteEntryData() {
 //        IItemList<HihokenshaDaichoModel> sorted被保険者台帳履歴
 //                = getEditing被保険者台帳情報().sorted(HihokenshaDaichoModelComparators.orderBy処理日時.desc());
 //        List<HihokenshaDaichoModel> sortedList = sorted被保険者台帳履歴.toList();
@@ -547,13 +538,13 @@ public class JushochiTokureiRirekiListHandler {
 //        deleteModel.setDeletedState(true);
 //        sortedList.set(0, deleteModel);
 //        setEditing被保険者台帳情報(ItemList.of(sortedList));
-//    }
+    }
 
     //TODO n8178 城間篤人 自身のひとつ前の履歴を探す処理だが、問題がありそう？ 生産性では適用登録のみに焦点を置くが、後日確認の必要がある。
-//    private HihokenshaDaichoModel getPreviousInputTekiyoDateBy(IItemList<HihokenshaDaichoModel> itemList) {
+    private HihokenshaDaichoModel getPreviousInputTekiyoDateBy(IItemList<HihokenshaDaichoModel> itemList) {
 
-//        List<HihokenshaDaichoModel> list = itemList.toList();
-//        FlexibleDate tekiyoDate = jutokuRirekiDiv.getTxtTekiyoDate().getValue();
+        List<HihokenshaDaichoModel> list = itemList.toList();
+        FlexibleDate tekiyoDate = jutokuRirekiDiv.getTxtTekiyoDate().getValue();
 //        RDateTime dateTime = RDateTime.of(tekiyoDate.getYearValue(), tekiyoDate.getMonthValue(), tekiyoDate.getDayValue(), 0, 0);
 //        ShoriTimestamp tekiyoDateShoriTime = ShoriTimestamp.of(dateTime);
 
@@ -562,8 +553,8 @@ public class JushochiTokureiRirekiListHandler {
 //            return model;
 //            }
 //    }
-//        return null;
-//    }
+        return null;
+    }
 
     /**
      * 明細パネルに入力されている情報をModelに変換して返します。
@@ -601,8 +592,8 @@ public class JushochiTokureiRirekiListHandler {
      * @return 明細パネルの内容が変更されていたらtrue
      */
     public boolean hasChangedInMeisai() {
-//        JushochiTokureiExecutionStatus jutokuExeStatus
-//                = JushochiTokureiExecutionStatus.toValue(jutokuRirekiDiv.getJushochiTokureiExecutionState());
+        JushochiTokureiExecutionStatus jutokuExeStatus
+                = JushochiTokureiExecutionStatus.toValue(jutokuRirekiDiv.getJushochiTokureiExecutionState());
         ViewExecutionStatus exeStatus = ViewExecutionStatus.toValue(jutokuRirekiDiv.getExecutionStatus());
 
         if (exeStatus == ViewExecutionStatus.Add) {
@@ -655,7 +646,7 @@ public class JushochiTokureiRirekiListHandler {
         return jutokuRirekiDiv.getDdlKaijojiKyuHokensha().getSelectedIndex() != 0;
     }
 
-//    private boolean equalsMeisai(HihokenshaDaichoModel targetModel) {
+    private boolean equalsMeisai(HihokenshaDaichoModel targetModel) {
 
 //        if (!targetModel.get適用年月日().equals(jutokuRirekiDiv.getTxtTekiyoDate().getValue())) {
 //            return false;
@@ -686,16 +677,15 @@ public class JushochiTokureiRirekiListHandler {
 //            return false;
 //        }
 //        return targetModel.get旧市町村コード().equals(new LasdecCode(jutokuRirekiDiv.getDdlKaijojiKyuHokensha().getSelectedKey()));
-//        return false;
-//    }
+        return false;
+    }
 
     /**
      * 共有子Divの状態を初期化します。
      *
      * @param kyuShichosonCode 旧市町村コード
      * @param exeStatus 実行ステータス。Add・Delete・Modifyのうちのいずれかを設定する。
-     * @param jutokuExeStatsu
-     * 住所地特例実行ステータス。実行ステータス（Add・Delete・Modify）とは別に、Tekiyo・Kaijo・Teisei・Shokaiのうちのいずれかを設定する。
+     * @param jutokuExeStatsu 住所地特例実行ステータス。実行ステータス（Add・Delete・Modify）とは別に、Tekiyo・Kaijo・Teisei・Shokaiのうちのいずれかを設定する。
      * @param hokenshaJohoDisplayMode 明細表示モード
      */
     public void initialize(LasdecCode kyuShichosonCode, ViewExecutionStatus exeStatus, JushochiTokureiExecutionStatus jutokuExeStatsu,
@@ -706,7 +696,7 @@ public class JushochiTokureiRirekiListHandler {
         switch (hokenshaJohoDisplayMode) {
             case TanitsuGappeiAri:
             case KoikiGappeiAri:
-//                setKyuHokensya(kyuShichosonCode);
+                setKyuHokensya(kyuShichosonCode);
                 break;
         }
 
@@ -748,8 +738,7 @@ public class JushochiTokureiRirekiListHandler {
 
         //TODO n8178 城間篤人 広域対応時に修正が必要。
         List<LasdecCode> koikiShochosonJohoList = Collections.<LasdecCode>emptyList();
-//        List<KeyValueDataSource> koikiShichosonDataSource = creaateShichosonKeyValue(koikiShochosonJohoList);
-        List<KeyValueDataSource> koikiShichosonDataSource = createShichosonKeyValue();
+        List<KeyValueDataSource> koikiShichosonDataSource = creaateShichosonKeyValue(koikiShochosonJohoList);
         jutokuRirekiDiv.getDdlTekiyojiSochimotoHokensha().setDataSource(koikiShichosonDataSource);
         jutokuRirekiDiv.getDdlKaijojiSochimotoHokensha().setDataSource(koikiShichosonDataSource);
     }
@@ -773,13 +762,12 @@ public class JushochiTokureiRirekiListHandler {
     }
 
     //TODO n8178 城間篤人 市町村情報を受け取り、市町村コードと市町村名でDDLを作成する。 2014年12月24日
-//    private List<KeyValueDataSource> creaateShichosonKeyValue(List dataSource) {
-    private List<KeyValueDataSource> createShichosonKeyValue() {
+    private List<KeyValueDataSource> creaateShichosonKeyValue(List dataSource) {
         List<KeyValueDataSource> keyValueDataSourceList = new ArrayList<>();
-//        for (Object data : dataSource) {
+        for (Object data : dataSource) {
             KeyValueDataSource keyValueDataSource = new KeyValueDataSource(null, null);
             keyValueDataSourceList.add(keyValueDataSource);
-//        }
+        }
         return keyValueDataSourceList;
     }
 
@@ -822,7 +810,7 @@ public class JushochiTokureiRirekiListHandler {
      * @return 被保険者台帳情報に変更が存在するならtrue
      */
     public boolean hasChanged() {
-//        IItemList<HihokenshaDaichoModel> daichoList = getEditing被保険者台帳情報();
+        IItemList<HihokenshaDaichoModel> daichoList = getEditing被保険者台帳情報();
 //        for (HihokenshaDaichoModel daicho : daichoList) {
 //            if (daicho.getState() == EntityDataState.Unchanged) {
 //                continue;
@@ -832,52 +820,52 @@ public class JushochiTokureiRirekiListHandler {
         return false;
     }
 
-//    private DbT1001HihokenshaDaichoEntity deepCopy(DbT1001HihokenshaDaichoEntity entity) {
-//        DbT1001HihokenshaDaichoEntity copy = new DbT1001HihokenshaDaichoEntity();
-//
-//        copy.setShichosonCode(new LasdecCode(entity.getShichosonCode().getColumnValue().toString()));
-//        copy.setHihokenshaNo(new HihokenshaNo(new RString(entity.getHihokenshaNo().getColumnValue().toString())));
+    private DbT1001HihokenshaDaichoEntity deepCopy(DbT1001HihokenshaDaichoEntity entity) {
+        DbT1001HihokenshaDaichoEntity copy = new DbT1001HihokenshaDaichoEntity();
+
+        copy.setShichosonCode(new LasdecCode(entity.getShichosonCode().getColumnValue().toString()));
+        copy.setHihokenshaNo(new HihokenshaNo(new RString(entity.getHihokenshaNo().getColumnValue().toString())));
 //        RDateTime copyDateTime = entity.getShoriTimestamp().getColumnValue().getRDateTime();
 //        copy.setShoriTimestamp(ShoriTimestamp.of(
 //                RDateTime.of(copyDateTime.getYear(), copyDateTime.getMonth(), copyDateTime.getDayOfMonth(),
 //                        copyDateTime.getHour(), copyDateTime.getMinute(), copyDateTime.getSecond())
 //        ));
-//        copy.setShikibetsuCode(new ShikibetsuCode(entity.getShikibetsuCode().getColumnValue().toString()));
-//
-//        copy.setShikakuShutokuJiyuCode(new KaigoShikakuShutokuJiyu(new Code(entity.getShikakuShutokuJiyuCode().getColumnValue().toString())));
-//        copy.setShikakuShutokuYMD(new FlexibleDate(entity.getShikakuShutokuYMD().toString()));
-//        copy.setShikakuShutokuTodokedeYMD(new FlexibleDate(entity.getShikakuShutokuTodokedeYMD().toString()));
-//
-//        copy.setIchigoShikakuShutokuYMD(new FlexibleDate(entity.getIchigoShikakuShutokuYMD().toString()));
-//        copy.setHihokennshaKubunCode(new RString(entity.getHihokennshaKubunCode().toString()));
-//
-//        copy.setShikakuSoshitsuJiyuCode(new KaigoShikakuSoshitsuJiyu(new Code(entity.getShikakuSoshitsuJiyuCode().getColumnValue().toString())));
-//        copy.setShikakuSoshitsuYMD(new FlexibleDate(entity.getShikakuSoshitsuYMD().toString()));
-//        copy.setShikakuSoshitsuTodokedeYMD(new FlexibleDate(entity.getShikakuSoshitsuTodokedeYMD().toString()));
-//
-//        copy.setJushochiTokureiFlag(new RString(entity.getJushochiTokureiFlag().toString()));
-//
-//        copy.setShikakuHenkoJiyuCode(new KaigoShikakuHenkoJiyu(new Code(entity.getShikakuHenkoJiyuCode().getColumnValue().toString())));
-//        copy.setShikakuHenkoYMD(new FlexibleDate(entity.getShikakuHenkoYMD().toString()));
-//        copy.setShikakuHenkoTodokedeYMD(new FlexibleDate(entity.getShikakuHenkoTodokedeYMD().toString()));
-//
-//        copy.setJushochitokureiTekiyoJiyuCode(new KaigoShikakuJutokuTekiyoJiyu(new Code(entity.getJushochitokureiTekiyoJiyuCode().getColumnValue().toString())));
-//        copy.setJushochitokureiTekiyoYMD(new FlexibleDate(entity.getJushochitokureiTekiyoYMD().toString()));
-//        copy.setJushochitokureiTekiyoTodokedeYMD(new FlexibleDate(entity.getJushochitokureiTekiyoTodokedeYMD().toString()));
-//
-//        copy.setJushochitokureiKaijoJiyuCode(new KaigoShikakuJutokuKaijoJiyu(new Code(entity.getJushochitokureiKaijoJiyuCode().getColumnValue().toString())));
-//        copy.setJushochitokureiKaijoYMD(new FlexibleDate(entity.getJushochitokureiKaijoYMD().toString()));
-//        copy.setJushochitokureiKaijoTodokedeYMD(new FlexibleDate(entity.getJushochitokureiKaijoTodokedeYMD().toString()));
-//
-//        copy.setKoikinaiJushochiTokureiFlag(new RString(entity.getKoikinaiJushochiTokureiFlag().toString()));
-//
-//        copy.setKoikinaiTokureiSochimotoShichosonCode(new LasdecCode(entity.getKoikinaiTokureiSochimotoShichosonCode().getColumnValue().toString()));
-//        copy.setKyuShichosonCode(new LasdecCode(entity.getKyuShichosonCode().getColumnValue().toString()));
+        copy.setShikibetsuCode(new ShikibetsuCode(entity.getShikibetsuCode().getColumnValue().toString()));
+
+        copy.setShikakuShutokuJiyuCode(entity.getShikakuShutokuJiyuCode());
+        copy.setShikakuShutokuYMD(new FlexibleDate(entity.getShikakuShutokuYMD().toString()));
+        copy.setShikakuShutokuTodokedeYMD(new FlexibleDate(entity.getShikakuShutokuTodokedeYMD().toString()));
+
+        copy.setIchigoShikakuShutokuYMD(new FlexibleDate(entity.getIchigoShikakuShutokuYMD().toString()));
+        copy.setHihokennshaKubunCode(new RString(entity.getHihokennshaKubunCode().toString()));
+
+        copy.setShikakuSoshitsuJiyuCode(entity.getShikakuSoshitsuJiyuCode());
+        copy.setShikakuSoshitsuYMD(new FlexibleDate(entity.getShikakuSoshitsuYMD().toString()));
+        copy.setShikakuSoshitsuTodokedeYMD(new FlexibleDate(entity.getShikakuSoshitsuTodokedeYMD().toString()));
+
+        copy.setJushochiTokureiFlag(new RString(entity.getJushochiTokureiFlag().toString()));
+
+        copy.setShikakuHenkoJiyuCode(entity.getShikakuHenkoJiyuCode());
+        copy.setShikakuHenkoYMD(new FlexibleDate(entity.getShikakuHenkoYMD().toString()));
+        copy.setShikakuHenkoTodokedeYMD(new FlexibleDate(entity.getShikakuHenkoTodokedeYMD().toString()));
+
+        copy.setJushochitokureiTekiyoJiyuCode(entity.getJushochitokureiTekiyoJiyuCode());
+        copy.setJushochitokureiTekiyoYMD(new FlexibleDate(entity.getJushochitokureiTekiyoYMD().toString()));
+        copy.setJushochitokureiTekiyoTodokedeYMD(new FlexibleDate(entity.getJushochitokureiTekiyoTodokedeYMD().toString()));
+
+        copy.setJushochitokureiKaijoJiyuCode(entity.getJushochitokureiKaijoJiyuCode());
+        copy.setJushochitokureiKaijoYMD(new FlexibleDate(entity.getJushochitokureiKaijoYMD().toString()));
+        copy.setJushochitokureiKaijoTodokedeYMD(new FlexibleDate(entity.getJushochitokureiKaijoTodokedeYMD().toString()));
+
+        copy.setKoikinaiJushochiTokureiFlag(new RString(entity.getKoikinaiJushochiTokureiFlag().toString()));
+
+        copy.setKoikinaiTokureiSochimotoShichosonCode(new LasdecCode(entity.getKoikinaiTokureiSochimotoShichosonCode().getColumnValue().toString()));
+        copy.setKyuShichosonCode(new LasdecCode(entity.getKyuShichosonCode().getColumnValue().toString()));
 
 //        copy.setSaikofuKubun(new RString(entity.getSaikofuKubun().toString()));
 //        copy.setSaikofuJiyuCode(new RString(entity.getSaikofuJiyuCode().toString()));
 //        copy.setChohyoKofuRirekiID(new RString(entity.getChohyoKofuRirekiID().toString()));
-//        return copy;
-//    }
+        return copy;
+    }
 
 }

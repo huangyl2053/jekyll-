@@ -1,23 +1,24 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 認定調査票（概況調査）サービスの状況（子）テーブルのエンティティクラスです。
  */
 public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityBase<DbT4207NinteichosahyoServiceJokyoChildEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4207NinteichosahyoServiceJokyoChild");
 
@@ -26,7 +27,7 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
     private RString insertReamsLoginId;
     private UUID insertContextId;
     private boolean isDeleted = false;
-    private int updateCount = 0;
+    private final int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
@@ -40,7 +41,7 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -49,7 +50,7 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -58,7 +59,7 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -67,17 +68,16 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -88,7 +88,7 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
      * 申請書管理番号のgetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @return 申請書管理番号
      */
     public ShinseishoKanriNo getShinseishoKanriNo() {
@@ -99,7 +99,7 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
      * 申請書管理番号のsetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @param shinseishoKanriNo 申請書管理番号
      */
     public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
@@ -110,7 +110,7 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
      * 認定調査依頼履歴番号のgetメソッドです。
      * <br/>
      * <br/>認定調査依頼情報
-     * 
+     *
      * @return 認定調査依頼履歴番号
      */
     public int getNinteichosaRirekiNo() {
@@ -121,7 +121,7 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
      * 認定調査依頼履歴番号のsetメソッドです。
      * <br/>
      * <br/>認定調査依頼情報
-     * 
+     *
      * @param ninteichosaRirekiNo 認定調査依頼履歴番号
      */
     public void setNinteichosaRirekiNo(@Nonnull int ninteichosaRirekiNo) {
@@ -130,7 +130,7 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
 
     /**
      * 連番のgetメソッドです。
-     * 
+     *
      * @return 連番
      */
     public int getRemban() {
@@ -139,7 +139,7 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
 
     /**
      * 連番のsetメソッドです。
-     * 
+     *
      * @param remban 連番
      */
     public void setRemban(@Nonnull int remban) {
@@ -148,7 +148,7 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
 
     /**
      * 厚労省IF識別コードのgetメソッドです。
-     * 
+     *
      * @return 厚労省IF識別コード
      */
     public Code getKoroshoIfShikibetsuCode() {
@@ -157,7 +157,7 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
 
     /**
      * 厚労省IF識別コードのsetメソッドです。
-     * 
+     *
      * @param koroshoIfShikibetsuCode 厚労省IF識別コード
      */
     public void setKoroshoIfShikibetsuCode(@Nonnull Code koroshoIfShikibetsuCode) {
@@ -166,7 +166,7 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
 
     /**
      * サービスの状況のgetメソッドです。
-     * 
+     *
      * @return サービスの状況
      */
     @CheckForNull
@@ -176,7 +176,7 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
 
     /**
      * サービスの状況のsetメソッドです。
-     * 
+     *
      * @param serviceJokyo サービスの状況
      */
     public void setServiceJokyo(int serviceJokyo) {
@@ -185,9 +185,9 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
 
     /**
      * このエンティティの主キーが他の{@literal DbT4207NinteichosahyoServiceJokyoChildEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4207NinteichosahyoServiceJokyoChildEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -201,14 +201,13 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
         if (this.ninteichosaRirekiNo != other.ninteichosaRirekiNo) {
             return false;
         }
-        if (this.remban != other.remban) {
-            return false;
-        }
-        return true;
+        return this.remban == other.remban;
     }
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT4207NinteichosahyoServiceJokyoChildEntity entity) {
@@ -221,6 +220,7 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -229,5 +229,4 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
     }
 
 // </editor-fold>
-
 }

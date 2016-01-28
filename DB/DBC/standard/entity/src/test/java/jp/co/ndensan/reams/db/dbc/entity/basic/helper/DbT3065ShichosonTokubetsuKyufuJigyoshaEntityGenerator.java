@@ -21,7 +21,7 @@ public final class DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator {
 
     public static final JigyoshaNo DEFAULT_市町村特別給付用事業者番号 = new JigyoshaNo("1");
     public static final ServiceCode DEFAULT_市町村特別給付用サービスコード = new ServiceCode("1");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 0;
     public static final RString DEFAULT_介護国保連ＩＦ異動区分 = new RString("Data");
     public static final FlexibleDate DEFAULT_介護国保連ＩＦ異動年月日 = new FlexibleDate("19900101");
     public static final RString DEFAULT_介護国保連ＩＦ訂正区分 = new RString("Data");

@@ -1,4 +1,4 @@
 ﻿shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
 jukyuKaishiYMD,UDD015YMD,FlexibleDate,,,,,受給開始年月日,A
-jukyuShuryoYMD,UDD015YMD,FlexibleDate,,,,,受給終了年月日,A
-hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+jukyuHaishiYMD,UDD015YMD,FlexibleDate,,,,,受給廃止年月日,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A

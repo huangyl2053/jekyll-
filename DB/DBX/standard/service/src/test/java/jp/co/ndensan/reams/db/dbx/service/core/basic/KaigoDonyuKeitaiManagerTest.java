@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7908KaigoDonyuKeitaiDac;
@@ -34,6 +36,9 @@ import static org.mockito.Mockito.when;
 @RunWith(Enclosed.class)
 public class KaigoDonyuKeitaiManagerTest {
 
+    private static final DonyuKeitaiCode 導入形態 = DonyuKeitaiCode.toValue(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_導入形態コード.value());
+    private static final GyomuBunrui 業務分類 = GyomuBunrui.toValue(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_業務分類);
+
     private static DbT7908KaigoDonyuKeitaiDac dac;
     private static KaigoDonyuKeitaiManager sut;
 
@@ -49,25 +54,19 @@ public class KaigoDonyuKeitaiManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数のRStringにnullを指定した場合_NullPointerExceptionが発生する() {
-            Code 主キー2 = DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_導入形態コード;
-            sut.get介護導入形態(null, 主キー2);
+            sut.get介護導入形態(null, 導入形態);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数のCodeにnullを指定した場合_NullPointerExceptionが発生する() {
-            RString 主キー1 = DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_業務分類;
-            sut.get介護導入形態(主キー1, null);
+            sut.get介護導入形態(業務分類, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(RString.class), any(Code.class))).thenReturn(null);
-
-            RString 主キー1 = DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_業務分類;
-            Code 主キー2 = DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_導入形態コード;
-            KaigoDonyuKeitai result = sut.get介護導入形態(主キー1, 主キー2);
-
+            KaigoDonyuKeitai result = sut.get介護導入形態(業務分類, 導入形態);
             assertThat(result, is(nullValue()));
         }
 
@@ -76,11 +75,9 @@ public class KaigoDonyuKeitaiManagerTest {
             DbT7908KaigoDonyuKeitaiEntity entity = DbT7908KaigoDonyuKeitaiEntityGenerator.createDbT7908KaigoDonyuKeitaiEntity();
             when(dac.selectByKey(any(RString.class), any(Code.class))).thenReturn(entity);
 
-            RString 主キー1 = DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_業務分類;
-            Code 主キー2 = DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_導入形態コード;
-            KaigoDonyuKeitai result = sut.get介護導入形態(主キー1, 主キー2);
+            KaigoDonyuKeitai result = sut.get介護導入形態(業務分類, 導入形態);
 
-            assertThat(result.get業務分類(), is(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_業務分類));
+            assertThat(result.get業務分類(), is(GyomuBunrui.toValue(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_業務分類)));
         }
     }
 
@@ -104,7 +101,7 @@ public class KaigoDonyuKeitaiManagerTest {
             List<KaigoDonyuKeitai> result = sut.get介護導入形態一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get業務分類(), is(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_業務分類));
+            assertThat(result.get(0).get業務分類(), is(GyomuBunrui.toValue(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_業務分類)));
         }
     }
 
@@ -137,7 +134,7 @@ public class KaigoDonyuKeitaiManagerTest {
             DbT7908KaigoDonyuKeitaiEntity entity = DbT7908KaigoDonyuKeitaiEntityGenerator.createDbT7908KaigoDonyuKeitaiEntity();
             entity.initializeMd5();
             KaigoDonyuKeitai 介護導入形態 = new KaigoDonyuKeitai(entity);
-            介護導入形態 = 介護導入形態.createBuilderForEdit().set支所管理有無フラグ(true).build();
+            介護導入形態 = 介護導入形態.createBuilderForEdit().set支所管理有無(true).build();
 
             assertThat(sut.save介護導入形態(介護導入形態), is(true));
         }
@@ -149,7 +146,7 @@ public class KaigoDonyuKeitaiManagerTest {
             DbT7908KaigoDonyuKeitaiEntity entity = DbT7908KaigoDonyuKeitaiEntityGenerator.createDbT7908KaigoDonyuKeitaiEntity();
             entity.initializeMd5();
             KaigoDonyuKeitai 介護導入形態 = new KaigoDonyuKeitai(entity);
-            介護導入形態 = 介護導入形態.createBuilderForEdit().set支所管理有無フラグ(true).build();
+            介護導入形態 = 介護導入形態.createBuilderForEdit().set支所管理有無(true).build();
 
             assertThat(sut.save介護導入形態(介護導入形態), is(false));
         }

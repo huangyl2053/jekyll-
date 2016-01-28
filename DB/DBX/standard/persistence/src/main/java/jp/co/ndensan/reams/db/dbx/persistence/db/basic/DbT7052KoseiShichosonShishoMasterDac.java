@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 構成市町村支所マスタのデータアクセスクラスです。
  */
-public class DbT7052KoseiShichosonShishoMasterDac {
+public class DbT7052KoseiShichosonShishoMasterDac implements ISaveable<DbT7052KoseiShichosonShishoMasterEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -75,6 +75,7 @@ public class DbT7052KoseiShichosonShishoMasterDac {
      * @return 登録件数
      */
     @Transaction
+    @Override
     public int save(DbT7052KoseiShichosonShishoMasterEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("構成市町村支所マスタエンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。

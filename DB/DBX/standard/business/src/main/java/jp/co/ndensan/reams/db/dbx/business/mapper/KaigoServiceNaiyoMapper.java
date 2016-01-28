@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.IKaigoServiceTani;
 import jp.co.ndensan.reams.db.dbx.business.core._KaigoServiceCode;
 import jp.co.ndensan.reams.db.dbx.business.core._KaigoServiceNaiyo;
 import jp.co.ndensan.reams.db.dbx.business.core._KaigoServiceTani;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;

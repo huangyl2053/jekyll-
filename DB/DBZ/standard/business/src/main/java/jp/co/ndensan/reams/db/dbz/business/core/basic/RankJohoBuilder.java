@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2011RankJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -56,7 +55,7 @@ public class RankJohoBuilder {
      * @param ランク区分 ランク区分
      * @return {@link RankJohoBuilder}
      */
-    public RankJohoBuilder setランク区分(RankKubun ランク区分) {
+    public RankJohoBuilder setランク区分(RString ランク区分) {
         requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));
         entity.setRankKubun(ランク区分);
         return this;

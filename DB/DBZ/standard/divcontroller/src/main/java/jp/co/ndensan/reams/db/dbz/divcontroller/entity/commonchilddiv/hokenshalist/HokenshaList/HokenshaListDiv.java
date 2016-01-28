@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshal
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbx.business.core.shichosonlist.ShichosonCodeNameResult;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -62,8 +62,8 @@ public class HokenshaListDiv extends Panel implements IHokenshaListDiv {
     }
 
     @Override
-    public ShichosonCodeNameResult getSelectedItem() {
-        return this.createHandler().getSelectedItemAsShichosonCodeNameResult();
+    public HokenshaSummary getSelectedItem() {
+        return this.createHandler().getSelectedItemAsHokenshaSummary();
     }
 
     private HokenshaListDivHandler createHandler() {

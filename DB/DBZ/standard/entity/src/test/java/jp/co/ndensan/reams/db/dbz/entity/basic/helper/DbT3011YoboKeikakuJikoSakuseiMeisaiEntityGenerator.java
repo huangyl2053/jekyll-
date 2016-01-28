@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011YoboKeikakuJikoSakuseiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -21,7 +21,7 @@ public final class DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator {
 
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
     public static final FlexibleYearMonth DEFAULT_対象年月 = new FlexibleYearMonth("199001");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 0;
     public static final RString DEFAULT_居宅サービス区分 = new RString("Data");
     public static final JigyoshaNo DEFAULT_サービス提供事業者番号 = new JigyoshaNo("1");
     public static final ServiceShuruiCode DEFAULT_サービス種類コード = new ServiceShuruiCode("1");
@@ -44,8 +44,8 @@ public final class DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator {
     private DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator() {
     }
 
-    public static DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity createDbT3011YoboKeikakuJikoSakuseiMeisaiEntity() {
-        DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity = new DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity();
+    public static DbT3011YoboKeikakuJikoSakuseiMeisaiEntity createDbT3011YoboKeikakuJikoSakuseiMeisaiEntity() {
+        DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity = new DbT3011YoboKeikakuJikoSakuseiMeisaiEntity();
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
         entity.setTaishoYM(DEFAULT_対象年月);
         entity.setRirekiNo(DEFAULT_履歴番号);

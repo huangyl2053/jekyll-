@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護保険施設入退所エンティティのテスト用インスタンスを作成する補助クラスです。
@@ -18,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public final class DbT1004ShisetsuNyutaishoEntityGenerator {
 
     public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("012340123400001");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 0;
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("209007");
     public static final RString DEFAULT_台帳種別 = new RString("Data");
     public static final RString DEFAULT_入所施設種類 = new RString("Data");

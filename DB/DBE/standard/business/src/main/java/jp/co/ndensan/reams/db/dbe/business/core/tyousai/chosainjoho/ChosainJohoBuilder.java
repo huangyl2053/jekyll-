@@ -104,7 +104,8 @@ public class ChosainJohoBuilder {
      * @return {@link ChosainJohoBuilder}
      */
     public ChosainJohoBuilder set調査可能人数_月(int 調査可能人数_月) {
-        requireNonNull(調査可能人数_月, UrSystemErrorMessages.値がnull.getReplacedMessage("調査可能人数_月"));
+        requireNonNull(調査可能人数_月, UrSystemErrorMessages.値がnull.getReplacedMessage("調査可能人数／月")
+        );
         entity.setChosaKanoNinzuPerMonth(調査可能人数_月);
         return this;
     }

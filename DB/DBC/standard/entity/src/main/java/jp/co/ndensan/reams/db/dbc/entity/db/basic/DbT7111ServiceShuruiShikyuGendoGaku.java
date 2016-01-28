@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * サービス種類支給限度額テーブルの項目定義クラスです。
  */
 public enum DbT7111ServiceShuruiShikyuGendoGaku implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -50,7 +50,7 @@ public enum DbT7111ServiceShuruiShikyuGendoGaku implements IColumnDefinition {
     /**
      * 適用開始年月
      */
-    tekiyoKaishuYM(2147483647, 0),
+    tekiyoKaishiYM(2147483647, 0),
     /**
      * 履歴番号
      */
@@ -58,7 +58,7 @@ public enum DbT7111ServiceShuruiShikyuGendoGaku implements IColumnDefinition {
     /**
      * 適用終了年月
      */
-    tekiyoShuryuYM(2147483647, 0),
+    tekiyoShuryoYM(2147483647, 0),
     /**
      * 支給限度単位数
      */

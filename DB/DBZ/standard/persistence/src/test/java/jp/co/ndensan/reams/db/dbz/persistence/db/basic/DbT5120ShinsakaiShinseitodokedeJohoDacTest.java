@@ -5,11 +5,11 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.Collections;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5120ShinseitodokedeJohoEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5120ShinseitodokedeJohoEntityGenerator.DEFAULT_申請書管理番号;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5102NinteiKekkaJohoEntityGenerator.DEFAULT_申請書管理番号;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5120ShinseitodokedeJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.IShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

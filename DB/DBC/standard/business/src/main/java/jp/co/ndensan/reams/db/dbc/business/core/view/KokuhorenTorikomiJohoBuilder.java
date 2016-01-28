@@ -118,7 +118,7 @@ public class KokuhorenTorikomiJohoBuilder {
      */
     public KokuhorenTorikomiJohoBuilder set再処理可能区分(boolean 再処理可能区分) {
         requireNonNull(再処理可能区分, UrSystemErrorMessages.値がnull.getReplacedMessage("再処理可能区分"));
-        entity.setSaiShoriKahiKubun(再処理可能区分);
+        entity.setSaiShoriKanoKubun(再処理可能区分);
         return this;
     }
 

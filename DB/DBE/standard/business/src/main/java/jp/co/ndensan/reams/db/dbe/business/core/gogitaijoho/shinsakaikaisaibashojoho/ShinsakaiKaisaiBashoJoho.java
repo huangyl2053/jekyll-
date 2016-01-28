@@ -9,12 +9,12 @@ import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  */
 public class ShinsakaiKaisaiBashoJoho extends ModelBase<ShinsakaiKaisaiBashoJohoIdentifier, DbT5592ShinsakaiKaisaiBashoJohoEntity, ShinsakaiKaisaiBashoJoho> implements Serializable {
 
+//TODO NetBeansの機能を使って必ずequalsとhashCodeを追加してください。
     private final DbT5592ShinsakaiKaisaiBashoJohoEntity entity;
     private final ShinsakaiKaisaiBashoJohoIdentifier id;
 
@@ -167,7 +168,6 @@ public class ShinsakaiKaisaiBashoJoho extends ModelBase<ShinsakaiKaisaiBashoJoho
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ShinsakaiKaisaiBashoJoho(deletedEntity, id);
@@ -190,6 +190,7 @@ public class ShinsakaiKaisaiBashoJoho extends ModelBase<ShinsakaiKaisaiBashoJoho
 
     private static final class _SerializationProxy implements Serializable {
 
+        private static final long serialVersionUID = -6133277873893208856L;
         private final DbT5592ShinsakaiKaisaiBashoJohoEntity entity;
         private final ShinsakaiKaisaiBashoJohoIdentifier id;
 
@@ -212,11 +213,11 @@ public class ShinsakaiKaisaiBashoJoho extends ModelBase<ShinsakaiKaisaiBashoJoho
     public ShinsakaiKaisaiBashoJohoBuilder createBuilderForEdit() {
         return new ShinsakaiKaisaiBashoJohoBuilder(entity, id);
     }
-
+    
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -234,5 +235,4 @@ public class ShinsakaiKaisaiBashoJoho extends ModelBase<ShinsakaiKaisaiBashoJoho
         }
         return true;
     }
-
 }

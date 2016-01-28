@@ -4,25 +4,24 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3049ShokanJutakuKaishuEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3049ShokanJutakuKaishuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link ShokanJutakuKaishu}のテストクラスです。
@@ -40,7 +39,7 @@ public class ShokanJutakuKaishuTest extends DbcTestBase {
     private static JigyoshaNo 主キー名4;
     private static RString 主キー名5;
     private static RString 主キー名6;
-    private static int 主キー名7;
+    private static RString 主キー名7;
 
     @BeforeClass
     public static void setUpClass() {
@@ -50,8 +49,8 @@ public class ShokanJutakuKaishuTest extends DbcTestBase {
         主キー名3 = DbT3049ShokanJutakuKaishuEntityGenerator.DEFAULT_整理番号;
         主キー名4 = DbT3049ShokanJutakuKaishuEntityGenerator.DEFAULT_事業者番号;
         主キー名5 = DbT3049ShokanJutakuKaishuEntityGenerator.DEFAULT_様式番号;
-        主キー名6 = DbT3049ShokanJutakuKaishuEntityGenerator.DEFAULT_順次番号;
-        主キー名7 = DbT3049ShokanJutakuKaishuEntityGenerator.DEFAULT_履歴番号;
+        主キー名6 = DbT3049ShokanJutakuKaishuEntityGenerator.DEFAULT_明細番号;
+        主キー名7 = DbT3049ShokanJutakuKaishuEntityGenerator.DEFAULT_連番;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -156,13 +155,13 @@ public class ShokanJutakuKaishuTest extends DbcTestBase {
         }
 
         @Test
-        public void get順次番号は_entityが持つ順次番号を返す() {
-            assertThat(sut.get順次番号(), is(ShokanJutakuKaishuEntity.getJunjiNo()));
+        public void get明細番号は_entityが持つ明細番号を返す() {
+            assertThat(sut.get明細番号(), is(ShokanJutakuKaishuEntity.getMeisaiNo()));
         }
 
         @Test
-        public void get履歴番号は_entityが持つ履歴番号を返す() {
-            assertThat(sut.get履歴番号(), is(ShokanJutakuKaishuEntity.getRirekiNo()));
+        public void get連番は_entityが持つ連番を返す() {
+            assertThat(sut.get連番(), is(ShokanJutakuKaishuEntity.getRenban()));
         }
 
         @Test

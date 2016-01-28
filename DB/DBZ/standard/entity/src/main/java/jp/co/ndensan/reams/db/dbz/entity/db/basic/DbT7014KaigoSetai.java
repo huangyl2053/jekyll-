@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT7014KaigoSetai implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -65,24 +65,7 @@ public enum DbT7014KaigoSetai implements IColumnDefinition {
      * 本人区分
      * <br/>1：本人、2：世帯構成員
      */
-    honninKubun(1, 0),
-    /**
-     * 課税年度
-     */
-    kazeiNendo(2147483647, 0),
-    /**
-     * 課税非課税区分
-     * <br/>1:課税　2:非課税　3:未申告　4:所得調査中
-     */
-    kazeiHikazeiKubun(1, 0),
-    /**
-     * 合計所得金額
-     */
-    gokeiShotokuKingaku(15, 0),
-    /**
-     * 課税年金収入額
-     */
-    kazeiNenkinShunyugaku(15, 0);
+    honninKubun(1, 0);
 
     private final int maxLength;
     private final int scale;

@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 償還払請求食事費用テーブルの項目定義クラスです。
  */
 public enum DbT3043ShokanShokujiHiyo implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -60,9 +60,13 @@ public enum DbT3043ShokanShokujiHiyo implements IColumnDefinition {
      */
     yoshikiNo(4, 0),
     /**
-     * 履歴番号
+     * 明細番号
      */
-    rirekiNo(5, 0),
+    meisaiNo(4, 0),
+    /**
+     * 連番
+     */
+    renban(2, 0),
     /**
      * 基本提供日数
      */
@@ -126,7 +130,11 @@ public enum DbT3043ShokanShokujiHiyo implements IColumnDefinition {
      * 増減点
      * <br/>支給・不支給決定情報
      */
-    zougenTen(10, 0);
+    zougenTen(10, 0),
+    /**
+     * 差額金額
+     */
+    sagakuKingaku(10, 0);
 
     private final int maxLength;
     private final int scale;

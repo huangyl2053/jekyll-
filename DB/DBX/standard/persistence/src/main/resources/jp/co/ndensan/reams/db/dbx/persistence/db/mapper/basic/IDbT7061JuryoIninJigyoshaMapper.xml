@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 概要： DbT7061JuryoIninJigyoshaマスタとエンティティのマッピング用XMLです。 -->
+<!-- 概要： DbT7061JuryoIninKeiyakuJigyoshaマスタとエンティティのマッピング用XMLです。 -->
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7061JuryoIninJigyoshaMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
-    <sql id="noDeleted_DbT7061JuryoIninJigyosha">
+    <sql id="noDeleted_DbT7061JuryoIninKeiyakuJigyosha">
      SELECT
-         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7061JuryoIninJigyoshaMapper.allColumns_DbT7061JuryoIninJigyosha" />
+         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7061JuryoIninJigyoshaMapper.allColumns_DbT7061JuryoIninKeiyakuJigyosha" />
      FROM
          rgdb."DbT7061JuryoIninJigyosha"
      WHERE
          rgdb."DbT7061JuryoIninJigyosha"."isDeleted" = FALSE
     </sql>
 
-    <sql id="allColumns_DbT7061JuryoIninJigyosha">
-         "DbT7061JuryoIninJigyosha"."jigyoshaNo" as "dbT7061JuryoIninKeiyakuJigyosha_jigyoshaNo",
-         "DbT7061JuryoIninJigyosha"."keiyakuKaishiYMD" as "dbT7061JuryoIninKeiyakuJigyosha_keiyakuKaishiYMD",
-         "DbT7061JuryoIninJigyosha"."serviceShubetsuCode" as "dbT7061JuryoIninKeiyakuJigyosha_serviceShubetsuCode",
-         "DbT7061JuryoIninJigyosha"."insertDantaiCd" as "dbT7061JuryoIninKeiyakuJigyosha_insertDantaiCd",
-         "DbT7061JuryoIninJigyosha"."insertTimestamp" as "dbT7061JuryoIninKeiyakuJigyosha_insertTimestamp",
-         "DbT7061JuryoIninJigyosha"."insertReamsLoginId" as "dbT7061JuryoIninKeiyakuJigyosha_insertReamsLoginId",
-         "DbT7061JuryoIninJigyosha"."insertContextId" as "dbT7061JuryoIninKeiyakuJigyosha_insertContextId",
-         "DbT7061JuryoIninJigyosha"."isDeleted" as "dbT7061JuryoIninKeiyakuJigyosha_isDeleted",
-         "DbT7061JuryoIninJigyosha"."updateCount" as "dbT7061JuryoIninKeiyakuJigyosha_updateCount",
-         "DbT7061JuryoIninJigyosha"."lastUpdateTimestamp" as "dbT7061JuryoIninKeiyakuJigyosha_lastUpdateTimestamp",
-         "DbT7061JuryoIninJigyosha"."lastUpdateReamsLoginId" as "dbT7061JuryoIninKeiyakuJigyosha_lastUpdateReamsLoginId",
-         "DbT7061JuryoIninJigyosha"."keiyakuShuryoYMD" as "dbT7061JuryoIninKeiyakuJigyosha_keiyakuShuryoYMD",
-         "DbT7061JuryoIninJigyosha"."jigyoshaYubinNo" as "dbT7061JuryoIninKeiyakuJigyosha_jigyoshaYubinNo",
-         "DbT7061JuryoIninJigyosha"."jigyoshaJusho" as "dbT7061JuryoIninKeiyakuJigyosha_jigyoshaJusho",
-         "DbT7061JuryoIninJigyosha"."jigyoshaTelNo" as "dbT7061JuryoIninKeiyakuJigyosha_jigyoshaTelNo",
-         "DbT7061JuryoIninJigyosha"."jigyoshaFaxNo" as "dbT7061JuryoIninKeiyakuJigyosha_jigyoshaFaxNo"
+    <sql id="allColumns_DbT7061JuryoIninKeiyakuJigyosha">
+         "DbT7061JuryoIninKeiyakuJigyosha"."jigyoshaNo" as "dbT7061JuryoIninKeiyakuJigyosha_jigyoshaNo",
+         "DbT7061JuryoIninKeiyakuJigyosha"."keiyakuKaishiYMD" as "dbT7061JuryoIninKeiyakuJigyosha_keiyakuKaishiYMD",
+         "DbT7061JuryoIninKeiyakuJigyosha"."serviceShubetsuCode" as "dbT7061JuryoIninKeiyakuJigyosha_serviceShubetsuCode",
+         "DbT7061JuryoIninKeiyakuJigyosha"."insertDantaiCd" as "dbT7061JuryoIninKeiyakuJigyosha_insertDantaiCd",
+         "DbT7061JuryoIninKeiyakuJigyosha"."insertTimestamp" as "dbT7061JuryoIninKeiyakuJigyosha_insertTimestamp",
+         "DbT7061JuryoIninKeiyakuJigyosha"."insertReamsLoginId" as "dbT7061JuryoIninKeiyakuJigyosha_insertReamsLoginId",
+         "DbT7061JuryoIninKeiyakuJigyosha"."insertContextId" as "dbT7061JuryoIninKeiyakuJigyosha_insertContextId",
+         "DbT7061JuryoIninKeiyakuJigyosha"."isDeleted" as "dbT7061JuryoIninKeiyakuJigyosha_isDeleted",
+         "DbT7061JuryoIninKeiyakuJigyosha"."updateCount" as "dbT7061JuryoIninKeiyakuJigyosha_updateCount",
+         "DbT7061JuryoIninKeiyakuJigyosha"."lastUpdateTimestamp" as "dbT7061JuryoIninKeiyakuJigyosha_lastUpdateTimestamp",
+         "DbT7061JuryoIninKeiyakuJigyosha"."lastUpdateReamsLoginId" as "dbT7061JuryoIninKeiyakuJigyosha_lastUpdateReamsLoginId",
+         "DbT7061JuryoIninKeiyakuJigyosha"."keiyakuShuryoYMD" as "dbT7061JuryoIninKeiyakuJigyosha_keiyakuShuryoYMD",
+         "DbT7061JuryoIninKeiyakuJigyosha"."jigyoshaYubinNo" as "dbT7061JuryoIninKeiyakuJigyosha_jigyoshaYubinNo",
+         "DbT7061JuryoIninKeiyakuJigyosha"."jigyoshaJusho" as "dbT7061JuryoIninKeiyakuJigyosha_jigyoshaJusho",
+         "DbT7061JuryoIninKeiyakuJigyosha"."jigyoshaTelNo" as "dbT7061JuryoIninKeiyakuJigyosha_jigyoshaTelNo",
+         "DbT7061JuryoIninKeiyakuJigyosha"."jigyoshaFaxNo" as "dbT7061JuryoIninKeiyakuJigyosha_jigyoshaFaxNo"
     </sql>
 
 
-    <!--テーブルDbT7061JuryoIninJigyoshaの項目をDbT7061JuryoIninJigyoshaEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7061JuryoIninJigyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntity" autoMapping="true">
-        <id property="jigyoshaNo" column="dbT7061JuryoIninKeiyakuJigyosha_jigyoshaNo" />
+    <!--テーブルDbT7061JuryoIninKeiyakuJigyoshaの項目をDbT7061JuryoIninKeiyakuJigyoshaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7061JuryoIninKeiyakuJigyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntity" autoMapping="true">
+        <!--<id property="jigyoshaNo" column="dbT7061JuryoIninKeiyakuJigyosha_jigyoshaNo" />-->
         <id property="keiyakuKaishiYMD" column="dbT7061JuryoIninKeiyakuJigyosha_keiyakuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <id property="serviceShubetsuCode" column="dbT7061JuryoIninKeiyakuJigyosha_serviceShubetsuCode" />
+        <!--<id property="serviceShubetsuCode" column="dbT7061JuryoIninKeiyakuJigyosha_serviceShubetsuCode" />-->
         <result property="insertDantaiCd" column="dbT7061JuryoIninKeiyakuJigyosha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT7061JuryoIninKeiyakuJigyosha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT7061JuryoIninKeiyakuJigyosha_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -55,9 +55,9 @@
         <result property="jigyoshaTelNo" column="dbT7061JuryoIninKeiyakuJigyosha_jigyoshaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="jigyoshaFaxNo" column="dbT7061JuryoIninKeiyakuJigyosha_jigyoshaFaxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
     </resultMap>
-     <select id="getEntity" resultMap="resultMap_DbT7061JuryoIninJigyoshaEntity">
+     <select id="getEntity" resultMap="ResultMap_DbT7061JuryoIninKeiyakuJigyoshaEntity">
         SELECT
-        <include refid="allColumns_DbT7061JuryoIninJigyosha"/>
+        <include refid="allColumns_DbT7061JuryoIninKeiyakuJigyosha"/>
         FROM
         rgdb."DbT7061JuryoIninJigyosha"
      </select>

@@ -1,0 +1,4 @@
+﻿fukaNendo,UDD012YSeireki,FlexibleYear,,,,,賦課年度,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+rankKubun,varchar,RString,,,,,ランク区分,A
+sokyuNendo,UDD012YSeireki,FlexibleYear,,,,,遡及年度,A

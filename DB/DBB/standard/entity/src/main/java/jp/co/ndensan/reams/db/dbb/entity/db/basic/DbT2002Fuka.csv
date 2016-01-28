@@ -29,7 +29,7 @@ hokenryoDankai2,varchar,RString,,,,,保険料算定段階2,A
 nengakuHokenryo2,numeric,Decimal,,,,,算定年額保険料2,A
 tsukiwariStartYM2,UDD014YM,FlexibleYearMonth,,,,,月割開始年月2,A
 tsukiwariEndYM2,UDD014YM,FlexibleYearMonth,,,,,月割終了年月2,A
-choteiTimestamp,UDD019Timestamp,RDateTime,,,,,調定日時,A
+choteiNichiji,UDD018YMDHMS,YMDHMS,,,,,調定日時,A
 choteiJiyu1,varchar,RString,,,,,調定事由1,A
 choteiJiyu2,varchar,RString,,,,,調定事由2,A
 choteiJiyu3,varchar,RString,,,,,調定事由3,A
@@ -40,8 +40,10 @@ gemmenGaku,numeric,Decimal,,,,,減免額,A
 kakuteiHokenryo,numeric,Decimal,,,,,確定介護保険料（年額）,A
 hokenryoDankaiKarisanntei,varchar,RString,,,,,保険料段階（仮算定時）,A
 choshuHohoRirekiNo,int2,int,,,,,徴収方法履歴番号,A
-idoKijunTimestamp,UDD019Timestamp,RDateTime,,,,,異動基準日時,A
+idoKijunNichiji,UDD018YMDHMS,YMDHMS,,,,,異動基準日時,A
 kozaKubun,varchar,RString,,,,,口座区分,A
 kyokaisoKubun,varchar,RString,,,,,境界層区分,A
 shokkenKubun,varchar,RString,,,,,職権区分,A
 fukaShichosonCode,UDD023LasdecCode,LasdecCode,,,,,賦課市町村コード,A
+tkSaishutsuKampuGaku,numeric,Decimal,,,,,特徴歳出還付額,A
+fuSaishutsuKampuGaku,numeric,Decimal,,,,,普徴歳出還付額,A

@@ -21,7 +21,6 @@ public class DbT5592ShinsakaiKaisaiBashoJohoEntity extends DbTableEntityBase<DbT
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5592ShinsakaiKaisaiBashoJoho");
-    private static final long serialVersionUID = 2602857198572562064L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;

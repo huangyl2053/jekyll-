@@ -12,35 +12,33 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.business.core.tyousai.koseishichosonmaster.KoseiShichosonMaster;
-import jp.co.ndensan.reams.db.dbe.business.core.tyousai.koseishichosonmaster.KoseiShichosonMasterIdentifier;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査委託先情報を管理するクラスです。
  */
-public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusakiJohoIdentifier, DbT5910NinteichosaItakusakiJohoEntity, NinteichosaItakusakiJoho> implements Serializable {
+public class NinteichosaItakusakiJoho extends ModelBase<NinteichosaItakusakiJohoIdentifier, DbT5910NinteichosaItakusakiJohoEntity, NinteichosaItakusakiJoho> implements Serializable {
+
+    private static final long serialVersionUID = 5013160557608226847L;
 
     private final DbT5910NinteichosaItakusakiJohoEntity entity;
     private final NinteichosaItakusakiJohoIdentifier id;
+
     private final Models<ChosainJohoIdentifier, ChosainJoho> chosainJoho;
-    private final Models<KoseiShichosonMasterIdentifier, KoseiShichosonMaster> koseiShichosonMaster;
 
     /**
      * コンストラクタです。<br/>
@@ -50,7 +48,7 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
      * @param 認定調査委託先コード 認定調査委託先コード
      */
     public NinteichosaItakusakiJoho(LasdecCode 市町村コード,
-            ChosaItakusakiCode 認定調査委託先コード) {
+            RString 認定調査委託先コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
         this.entity = new DbT5910NinteichosaItakusakiJohoEntity();
@@ -58,15 +56,14 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
         this.entity.setNinteichosaItakusakiCode(認定調査委託先コード);
         this.id = new NinteichosaItakusakiJohoIdentifier(
                 市町村コード,
-                認定調査委託先コード
+                new ChosaItakusakiCode(認定調査委託先コード)
         );
         this.chosainJoho = Models.create(new ArrayList<ChosainJoho>());
-        this.koseiShichosonMaster = Models.create(new ArrayList<KoseiShichosonMaster>());
     }
 
     /**
      * コンストラクタです。<br/>
-     * DBより取得した{@link DbT5910NinteichosaItakusakiJohoEntity}より{@link NinteichosaItakusakiJoho}を生成します。
+     * DBより取得した{@link DbT5913ChosainJohoEntity}より{@link NinteichosaItakusakiJoho}を生成します。
      *
      * @param entity DBより取得した{@link DbT5910NinteichosaItakusakiJohoEntity}
      */
@@ -74,18 +71,13 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
         this.entity = requireNonNull(entity.get認定調査委託先情報Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先情報"));
         this.id = new NinteichosaItakusakiJohoIdentifier(
                 entity.get認定調査委託先情報Entity().getShichosonCode(),
-                entity.get認定調査委託先情報Entity().getNinteichosaItakusakiCode());
+                new ChosaItakusakiCode(entity.get認定調査委託先情報Entity().getNinteichosaItakusakiCode()));
         List<ChosainJoho> chosainJohoList = new ArrayList<>();
-        for (DbT5913ChosainJohoEntity chosainJohoEntity : entity.get調査員情報Entity()) {
-            chosainJohoList.add(new ChosainJoho(chosainJohoEntity));
+        for (DbT5913ChosainJohoEntity niniEntity : entity.get調査員情報Entity()) {
+            chosainJohoList.add(new ChosainJoho(niniEntity));
         }
         this.chosainJoho = Models.create(chosainJohoList);
 
-        List<KoseiShichosonMaster> koseiShichosonMasterList = new ArrayList<>();
-        for (DbT5051KoseiShichosonMasterEntity koseiShichosonMasterEntity : entity.get構成市町村マスタEntity()) {
-            koseiShichosonMasterList.add(new KoseiShichosonMaster(koseiShichosonMasterEntity));
-        }
-        this.koseiShichosonMaster = Models.create(koseiShichosonMasterList);
     }
 
     /**
@@ -97,15 +89,13 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
     NinteichosaItakusakiJoho(
             DbT5910NinteichosaItakusakiJohoEntity entity,
             NinteichosaItakusakiJohoIdentifier id,
-            Models<ChosainJohoIdentifier, ChosainJoho> chosainJoho,
-            Models<KoseiShichosonMasterIdentifier, KoseiShichosonMaster> koseiShichosonMaster
-    ) {
+            Models<ChosainJohoIdentifier, ChosainJoho> chosainJoho) {
         this.entity = entity;
         this.id = id;
         this.chosainJoho = chosainJoho;
-        this.koseiShichosonMaster = koseiShichosonMaster;
     }
 
+//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 市町村コードを返します。
      *
@@ -120,7 +110,7 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
      *
      * @return 認定調査委託先コード
      */
-    public ChosaItakusakiCode get認定調査委託先コード() {
+    public RString get認定調査委託先コード() {
         return entity.getNinteichosaItakusakiCode();
     }
 
@@ -143,11 +133,11 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
     }
 
     /**
-     * 事業者名称カナを返します。
+     * 事業者名称を返します。
      *
-     * @return 事業者名称カナ
+     * @return 事業者名称
      */
-    public RString get事業者名称カナ() {
+    public RString get事業者カナ名称() {
         return entity.getJigyoshaMeishoKana();
     }
 
@@ -188,20 +178,20 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
     }
 
     /**
-     * 代表者名を返します。
+     * 代表者氏名を返します。
      *
-     * @return 代表者名
+     * @return 代表者氏名
      */
-    public AtenaMeisho get代表者名() {
+    public RString get代表者氏名() {
         return entity.getDaihyoshaName();
     }
 
     /**
-     * 代表者名カナを返します。
+     * 代表者カナ氏名を返します。
      *
-     * @return 代表者名カナ
+     * @return 代表者カナ氏名
      */
-    public RString get代表者名カナ() {
+    public RString get代表者カナ氏名() {
         return entity.getDaihyoshaNameKana();
     }
 
@@ -219,7 +209,7 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
      *
      * @return 特定調査員表示フラグ
      */
-    public boolean get特定調査員表示フラグ() {
+    public Boolean get特定調査員表示フラグ() {
         return entity.getTokuteiChosainDisplayFlag();
     }
 
@@ -228,7 +218,7 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
      *
      * @return 割付定員
      */
-    public int get割付定員() {
+    public Integer get割付定員() {
         return entity.getWaritsukeTeiin();
     }
 
@@ -289,8 +279,7 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
     }
 
     /**
-     * 認定調査委託先情報配下の要素を削除対象とします。<br/>
-     * {@link DbT5910NinteichosaItakusakiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 認定調査委託先情報配下の要素を削除対象とします。<br/> {@link DbT5910NinteichosaItakusakiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      * 認定調査委託先情報配下の要素である調査員情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link NinteichosaItakusakiJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link NinteichosaItakusakiJoho}
@@ -302,34 +291,29 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
         if (!deletedEntity.getState().equals(EntityDataState.Added)) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new NinteichosaItakusakiJoho(
-                deletedEntity, id, chosainJoho.deleted(), koseiShichosonMaster.deleted());
+                deletedEntity, id, chosainJoho.deleted());
     }
 
     @Override
     public boolean hasChanged() {
-
-        return hasChangedEntity() || chosainJoho.hasAnyChanged() || koseiShichosonMaster.hasAnyChanged();
-
+        return hasChangedEntity() || chosainJoho.hasAnyChanged();
     }
 
     /**
-     * 認定調査委託先情報のみを変更対象とします。<br/>
-     * {@link DbT5910NinteichosaItakusakiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査委託先情報のみを変更対象とします。<br/> {@link DbT5910NinteichosaItakusakiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosaItakusakiJoho}
      */
-    @Override
     public NinteichosaItakusakiJoho modifiedModel() {
         DbT5910NinteichosaItakusakiJohoEntity modifiedEntity = entity.clone();
         if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
             modifiedEntity.setState(EntityDataState.Modified);
         }
         return new NinteichosaItakusakiJoho(
-                modifiedEntity, id, chosainJoho, koseiShichosonMaster);
+                modifiedEntity, id, chosainJoho);
     }
 
     /**
@@ -339,11 +323,10 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
      * @return 調査員情報
      * @throws IllegalStateException 指定の識別子に該当する調査員情報がない場合
      */
-    public ChosainJoho getSeishinTechoNini(ChosainJohoIdentifier id) {
+    public ChosainJoho getChosainJoho(ChosainJohoIdentifier id) {
         if (chosainJoho.contains(id)) {
             return chosainJoho.clone().get(id);
         }
-        //TODO メッセージの検討
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
@@ -358,59 +341,32 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
     }
 
     /**
-     * 認定調査委託先情報が保持する構成市町村マスタに対して、指定の識別子に該当する構成市町村マスタを返します。
-     *
-     * @param id 構成市町村マスタの識別子
-     * @return 構成市町村マスタ
-     * @throws IllegalStateException 指定の識別子に該当する構成市町村マスタがない場合
-     */
-    public KoseiShichosonMaster getKoseiShichosonMaster(KoseiShichosonMasterIdentifier id) {
-        if (koseiShichosonMaster.contains(id)) {
-            return koseiShichosonMaster.clone().get(id);
-        }
-        //TODO メッセージの検討
-        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
-    }
-
-    /**
-     * 認定調査委託先情報が保持する構成市町村マスタをリストで返します。
-     *
-     * @return 構成市町村マスタリスト
-     */
-    public List<KoseiShichosonMaster> getKoseiShichosonMasterList() {
-        return new ArrayList<>(koseiShichosonMaster.values());
-    }
-
-    /**
      * {@link NinteichosaItakusakiJoho}のシリアライズ形式を提供します。
      *
      * @return {@link NinteichosaItakusakiJoho}のシリアライズ形式
      */
     protected Object writeReplace() {
-        return new _SerializationProxy(entity, id, chosainJoho, koseiShichosonMaster);
+        return new _SerializationProxy(entity, id, chosainJoho);
     }
 
     private static final class _SerializationProxy implements Serializable {
 
+        private static final long serialVersionUID = -710031961519711799L;
         private final DbT5910NinteichosaItakusakiJohoEntity entity;
         private final NinteichosaItakusakiJohoIdentifier id;
         private final Models<ChosainJohoIdentifier, ChosainJoho> chosainJoho;
-        private final Models<KoseiShichosonMasterIdentifier, KoseiShichosonMaster> koseiShichosonMaster;
 
         private _SerializationProxy(
                 DbT5910NinteichosaItakusakiJohoEntity entity,
                 NinteichosaItakusakiJohoIdentifier id,
-                Models<ChosainJohoIdentifier, ChosainJoho> chosainJoho,
-                Models<KoseiShichosonMasterIdentifier, KoseiShichosonMaster> koseiShichosonMaster
-        ) {
+                Models<ChosainJohoIdentifier, ChosainJoho> chosainJoho) {
             this.entity = entity;
             this.id = id;
             this.chosainJoho = chosainJoho;
-            this.koseiShichosonMaster = koseiShichosonMaster;
         }
 
         private Object readResolve() {
-            return new NinteichosaItakusakiJoho(this.entity, this.id, this.chosainJoho, this.koseiShichosonMaster);
+            return new NinteichosaItakusakiJoho(this.entity, this.id, this.chosainJoho);
         }
     }
 
@@ -421,13 +377,13 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
      * @return {@link NinteichosaItakusakiJohoBuilder}
      */
     public NinteichosaItakusakiJohoBuilder createBuilderForEdit() {
-        return new NinteichosaItakusakiJohoBuilder(entity, id, chosainJoho, koseiShichosonMaster);
+        return new NinteichosaItakusakiJohoBuilder(entity, id, chosainJoho);
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 31 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -440,10 +396,6 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
             return false;
         }
         final NinteichosaItakusakiJoho other = (NinteichosaItakusakiJoho) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, other.id);
     }
-
 }

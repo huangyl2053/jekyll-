@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.KyuShichosonCodeJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.KyuShichosonJohoEntities;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7055GappeiJohoDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7056GappeiShichosonDac;
@@ -56,21 +56,24 @@ public class KyuShichosonCodeFinder {
      *
      * @param 市町村コード 市町村コード
      * @param 導入形態 導入形態
-     * @return KyuShichosonCodeJohoRelateEntityクラス
+     * @return KyuShichosonJohoEntitiesクラス
      */
-    public KyuShichosonCodeJohoRelateEntity getKyuShichosonCodeJoho(LasdecCode 市町村コード, DonyuKeitaiCode 導入形態) {
-        KyuShichosonCodeJohoRelateEntity entity = new KyuShichosonCodeJohoRelateEntity();
+    public KyuShichosonJohoEntities getKyuShichosonCodeJoho(LasdecCode 市町村コード, DonyuKeitaiCode 導入形態) {
+        KyuShichosonJohoEntities entity = KyuShichosonJohoEntities.empty();
 
-        if (導入形態.is単一()) {
+        if (DonyuKeitaiCode.事務単一.equals(導入形態)
+                || DonyuKeitaiCode.事務構成市町村.equals(導入形態)
+                || DonyuKeitaiCode.認定単一.equals(導入形態)) {
             entity = get単一市町村KyuShichosonCodeJoho(市町村コード, entity);
 
-        } else if (導入形態.is広域()) {
+        } else if (DonyuKeitaiCode.事務広域.equals(導入形態)
+                || DonyuKeitaiCode.認定広域.equals(導入形態)) {
             entity = get広域構成市町村KyuShichosonCodeJoho(市町村コード, entity);
         }
         return entity;
     }
 
-    private KyuShichosonCodeJohoRelateEntity get単一市町村KyuShichosonCodeJoho(LasdecCode 市町村コード, KyuShichosonCodeJohoRelateEntity entity) {
+    private KyuShichosonJohoEntities get単一市町村KyuShichosonCodeJoho(LasdecCode 市町村コード, KyuShichosonJohoEntities entity) {
         //　1.1　介護共通の業務コンフィグから、取得した合併情報管理_合併情報区分＝1:合併ありの場合
         if (this.hasGappei) {
             // 1.1.1　最新の地域番号の取得
@@ -112,8 +115,8 @@ public class KyuShichosonCodeFinder {
     }
 
     private void set単一市町村By合併情報List(List<DbT7055GappeiJohoEntity> dbT7055GappeiJohoEntitys,
-                                    List<DbT7056GappeiShichosonEntity> dbT7056GappeiShichosonEntitys,
-                                    KyuShichosonCodeJohoRelateEntity entity) {
+            List<DbT7056GappeiShichosonEntity> dbT7056GappeiShichosonEntitys,
+            KyuShichosonJohoEntities entity) {
         // 1.1.6.１.1　上記1.1.4で取得された旧市町村コード情報Listを繰り返す。
         for (DbT7055GappeiJohoEntity gappeiJohoEntity : dbT7055GappeiJohoEntitys) {
             for (DbT7056GappeiShichosonEntity gappeiShichosonEntity : dbT7056GappeiShichosonEntitys) {
@@ -124,7 +127,7 @@ public class KyuShichosonCodeFinder {
         }
     }
 
-    private KyuShichosonCodeJohoRelateEntity get広域構成市町村KyuShichosonCodeJoho(LasdecCode 市町村コード, KyuShichosonCodeJohoRelateEntity entity) {
+    private KyuShichosonJohoEntities get広域構成市町村KyuShichosonCodeJoho(LasdecCode 市町村コード, KyuShichosonJohoEntities entity) {
         // 2.1　介護共通の業務コンフィグから、取得した合併情報管理_合併情報区分＝1:合併ありの場合
         if (this.hasGappei) {
             // 2.1.1　最新の地域番号の取得
@@ -174,7 +177,7 @@ public class KyuShichosonCodeFinder {
     private void set広域構成市町村By合併情報List(
             List<DbT7055GappeiJohoEntity> dbT7055GappeiJohoEntitys,
             List<DbT7051KoseiShichosonMasterEntity> dbT7051KoseiShichosonEntitys,
-            KyuShichosonCodeJohoRelateEntity entity) {
+            KyuShichosonJohoEntities entity) {
         // 2.1.6.１.1　上記2.1.4で取得された旧市町村コード情報Listを繰り返す。
         for (DbT7055GappeiJohoEntity gappeiJohoEntity : dbT7055GappeiJohoEntitys) {
             for (DbT7051KoseiShichosonMasterEntity koseiShichosonMasterEntity : dbT7051KoseiShichosonEntitys) {
@@ -192,10 +195,10 @@ public class KyuShichosonCodeFinder {
     /**
      * 旧市町村コード情報有無設定ラクタです。
      *
-     * @param KyuShichosonCodeJohoRelateEntityクラス
+     * @param KyuShichosonJohoEntitiesクラス
      * @param umuFlag 合併市町村有無フラグ
      */
-    private void setGappeiShichoUmuJoho(KyuShichosonCodeJohoRelateEntity entity, boolean umuFlag) {
+    private void setGappeiShichoUmuJoho(KyuShichosonJohoEntities entity, boolean umuFlag) {
         if (umuFlag) {
             // 合併市町村有無フラグをTRUEで設定する。
             entity.setGappeiShichoUmuFlag(true);

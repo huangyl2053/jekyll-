@@ -35,8 +35,6 @@ public class KaigoSetaiBuilderTest extends DbzTestBase {
     private static int 世帯員管理連番;
     private static ShikibetsuCode 世帯員識別コード;
     private static RString 本人区分;
-    private static FlexibleYear 課税年度;
-    private static RString 課税非課税区分;
 
     @BeforeClass
     public static void setUpClass() {
@@ -47,8 +45,6 @@ public class KaigoSetaiBuilderTest extends DbzTestBase {
         世帯員管理連番 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員管理連番;
         世帯員識別コード = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員識別コード;
         本人区分 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_本人区分;
-        課税年度 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年度;
-        課税非課税区分 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税非課税区分;
     }
 
     public static class getterSetterTest extends DbzTestBase {
@@ -65,8 +61,6 @@ public class KaigoSetaiBuilderTest extends DbzTestBase {
             KaigoSetaiEntity.setSetaiInkanriRenban(世帯員管理連番);
             KaigoSetaiEntity.setSetaiInshikibetsuCode(世帯員識別コード);
             KaigoSetaiEntity.setHonninKubun(本人区分);
-            KaigoSetaiEntity.setKazeiNendo(課税年度);
-            KaigoSetaiEntity.setKazeiHikazeiKubun(課税非課税区分);
 
             business = new KaigoSetai(KaigoSetaiEntity);
 
@@ -108,30 +102,6 @@ public class KaigoSetaiBuilderTest extends DbzTestBase {
         public void 戻り値の本人区分は_設定した値と同じ本人区分を返す() {
             business = sut.set本人区分(DbT7014KaigoSetaiEntityGenerator.DEFAULT_本人区分).build();
             assertThat(business.get本人区分(), is(DbT7014KaigoSetaiEntityGenerator.DEFAULT_本人区分));
-        }
-
-        @Test
-        public void 戻り値の課税年度は_設定した値と同じ課税年度を返す() {
-            business = sut.set課税年度(DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年度).build();
-            assertThat(business.get課税年度(), is(DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年度));
-        }
-
-        @Test
-        public void 戻り値の課税非課税区分は_設定した値と同じ課税非課税区分を返す() {
-            business = sut.set課税非課税区分(DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税非課税区分).build();
-            assertThat(business.get課税非課税区分(), is(DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税非課税区分));
-        }
-
-        @Test
-        public void 戻り値の合計所得金額は_設定した値と同じ合計所得金額を返す() {
-            business = sut.set合計所得金額(DbT7014KaigoSetaiEntityGenerator.DEFAULT_合計所得金額).build();
-            assertThat(business.get合計所得金額(), is(DbT7014KaigoSetaiEntityGenerator.DEFAULT_合計所得金額));
-        }
-
-        @Test
-        public void 戻り値の課税年金収入額は_設定した値と同じ課税年金収入額を返す() {
-            business = sut.set課税年金収入額(DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年金収入額).build();
-            assertThat(business.get課税年金収入額(), is(DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年金収入額));
         }
 
     }

@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3012YoboKeikakuJikoSakuseiGokeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
@@ -33,7 +33,7 @@ public class YoboKeikakuJikoSakuseiGokeiIdentifierTest extends DbcTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static HihokenshaNo 主キー名1;
     private static FlexibleYearMonth 主キー名2;
-    private static Decimal 主キー名3;
+    private static int 主キー名3;
     private static RString 主キー名4;
     private static JigyoshaNo 主キー名5;
     private static ServiceShuruiCode 主キー名6;
@@ -41,8 +41,8 @@ public class YoboKeikakuJikoSakuseiGokeiIdentifierTest extends DbcTestBase {
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号;
-        主キー名2 = DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月;
+        主キー名1 = DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号;
+        主キー名2 = DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月;
     }
 
     public static class シリアライズテスト extends DbcTestBase {

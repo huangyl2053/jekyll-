@@ -4,16 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.IKyotakuKeikakuJikoSakuseiMapper;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.KyotakuKeikakuJikoSakuseiMapperParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.KyotakuKeikakuJikoSakuseiMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3007KyotakuKeikakuJikoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011YoboKeikakuJikoSakuseiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3007KyotakuKeikakuJikoSakuseiDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiDac;
@@ -168,11 +167,11 @@ public class IKyotakuKeikakuJikoSakuseiMapperTest {
         public static void insertDbT3011(
                 HihokenshaNo 主キー1,
                 FlexibleYearMonth 主キー2) {
-            DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity = DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator.createDbT3011YoboKeikakuJikoSakuseiMeisaiEntity();
+            DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity = DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator.createDbT3011YoboKeikakuJikoSakuseiMeisaiEntity();
             entity.setHihokenshaNo(主キー1);
             entity.setTaishoYM(主キー2);
             entity.setState(EntityDataState.Added);
-            予防給付計画自己作成明細Dac.save(entity);
+//            予防給付計画自己作成明細Dac.save(entity);
         }
     }
 

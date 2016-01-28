@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nyutaishoshakanri.INyutaishoshaKanriMapper">
+
+<!--介護保険施設情報件数を取得します-->
+    <select id="getHihokenshaDaichoCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
+        SELECT  
+        COUNT(*)
+        FROM      rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004,
+                  rgdb."DbT1001HihokenshaDaicho" AS DbT1001
+        WHERE    DbT1004."nyushoYMD" = #{入所年月日} 
+        AND      DbT1004."taishoYMD" =  #{退所年月日}
+        AND      DbT1004."nyushoShisetsuShurui" = #{入所施設種類}
+        AND      DbT1004."shikibetsuCode" = DbT1001."shikibetsuCode"
+        AND 
+        NOT (
+        (DbT1004."nyushoYMD" <![CDATA[<]]> DbT1001."jushochitokureiTekiyoYMD"
+        AND DbT1004."taishoYMD" <![CDATA[<=]]> DbT1001."jushochitokureiTekiyoYMD")
+        OR
+        (DbT1004."nyushoYMD" <![CDATA[>= ]]> DbT1001."jushochitokureiKaijoYMD"
+        AND DbT1004."taishoYMD" <![CDATA[> ]]> DbT1001."jushochitokureiKaijoYMD")
+             )
+        AND      DbT1004."isDeleted" <![CDATA[<> ]]>  TRUE
+        AND      DbT1001."isDeleted" <![CDATA[<> ]]>  TRUE
+    </select>
+    
+    <!--適用除外施設情報件数を取得します-->
+    <select id="getTekiyoJogaishaCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
+        SELECT  
+        COUNT(*)
+        FROM      rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004,
+                  rgdb."DbT1002TekiyoJogaisha" AS DbT1002
+        WHERE    DbT1004."nyushoYMD" = #{入所年月日} 
+        AND      DbT1004."taishoYMD" =  #{退所年月日}
+        AND      DbT1004."nyushoShisetsuShurui" = #{入所施設種類}
+        AND      DbT1004."shikibetsuCode" = DbT1002."shikibetsuCode"
+        AND 
+        NOT (
+        (DbT1004."nyushoYMD" <![CDATA[<]]> DbT1002."tekiyoYMD"
+        AND DbT1004."taishoYMD" <![CDATA[<=]]> DbT1002."tekiyoYMD")
+        OR
+        (DbT1004."nyushoYMD" <![CDATA[>= ]]> DbT1002."kaijoYMD"
+        AND DbT1004."taishoYMD" <![CDATA[> ]]> DbT1002."kaijoYMD")
+             )
+        AND      DbT1004."isDeleted" <![CDATA[<> ]]> TRUE
+        AND      DbT1002."isDeleted" <![CDATA[<> ]]> TRUE
+    </select>
+      
+    <!--住所地特例対象施設情報件数を取得します-->
+    <select id="getTashichosonJushochiTokureiCount" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultType="int">
+        SELECT  
+        COUNT(*)
+        FROM      rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004,
+                  rgdb."DbT1003TashichosonJushochiTokurei" AS DbT1003
+        WHERE    DbT1004."nyushoYMD" = #{入所年月日} 
+        AND      DbT1004."taishoYMD" =  #{退所年月日}
+        AND      DbT1004."nyushoShisetsuShurui" = #{入所施設種類}
+        AND      DbT1004."shikibetsuCode" = DbT1003."shikibetsuCode"
+        AND 
+        NOT (
+        (DbT1004."nyushoYMD" <![CDATA[<]]> DbT1003."tekiyoYMD"
+        AND DbT1004."taishoYMD" <![CDATA[<=]]> DbT1003."tekiyoYMD")
+        OR
+        (DbT1004."nyushoYMD" <![CDATA[>= ]]> DbT1003."kaijoYMD"
+        AND DbT1004."taishoYMD" <![CDATA[> ]]> DbT1003."kaijoYMD")
+             )
+        AND      DbT1004."isDeleted" <![CDATA[<> ]]>  TRUE
+        AND      DbT1003."isDeleted" <![CDATA[<> ]]>  TRUE
+    </select>
+
+</mapper>

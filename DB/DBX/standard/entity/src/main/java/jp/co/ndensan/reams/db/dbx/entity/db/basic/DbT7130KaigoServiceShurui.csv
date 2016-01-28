@@ -4,3 +4,15 @@ teikyoshuryoYM,UDD014YM,FlexibleYearMonth,,,,,提供終了年月,A
 serviceShuruiMeisho,varchar,RString,,,,,サービス種類名称,A
 serviceShuruiRyakusho,varchar,RString,,,,,サービス種類略称,A
 serviceBunrruicode,UDD035Code,Code,,,,,サービス分類コード,A
+serviceShuruiNaibuCd,DbUDD005ServiceShuruiCode,ServiceShuruiCode,,,,,サービス種類内部コード,A
+gendogakuKubun,bpchar,RString,,,,,限度額区分,A
+yusenJuni,varchar,RString,,,,,優先順位,A
+kyotakuServiceKubun,bpchar,RString,,,,,居宅サービス区分,A
+shiteiServiceKubun,bpchar,RString,,,,,指定サービス区分,A
+kijunGaitoServiceKubun,bpchar,RString,,,,,基準該当サービス区分,A
+minashiKubun,varchar,RString,,,,,みなし区分,A
+gamenHyojiKubun,varchar,RString,,,,,画面表示区分,A
+shien1InKahiKubun,varchar,RString,,,,,要支援１入力可否区分,A
+shien2InKahiKubun,varchar,RString,,,,,要支援２入力可否区分,A
+nijiyoboInKahiKubun,varchar,RString,,,,,二次予防入力可否区分,A
+serviceShoBunrui,varchar,RString,,,,,サービス小分類,A

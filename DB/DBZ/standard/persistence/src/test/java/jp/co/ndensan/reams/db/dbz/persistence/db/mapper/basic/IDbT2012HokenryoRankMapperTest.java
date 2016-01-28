@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2012HokenryoRankEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2012HokenryoRankDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2012HokenryoRankMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2012HokenryoRankDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

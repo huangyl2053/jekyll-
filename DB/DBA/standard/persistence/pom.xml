@@ -43,5 +43,10 @@
             <artifactId>DbzEntity</artifactId>
             <type>test-jar</type>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxEntity</artifactId>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

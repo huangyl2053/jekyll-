@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbx.definition.mybatisprm.koseishichoson;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -20,6 +19,8 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class KoseiShichosonMasterMapperParameterTest extends DbxTestBase {
 
+    private static final RString shichonCode = new RString("302302");
+
     public static class createSelectByKeyParamテスト extends DbxTestBase {
 
         @Test(expected = NullPointerException.class)
@@ -29,9 +30,9 @@ public class KoseiShichosonMasterMapperParameterTest extends DbxTestBase {
 
         @Test
         public void 引数にNull以外を指定すると_パラメータが生成できる() {
-            RString 識別ID = new RString("02");
-            KoseiShichosonMasterMapperParameter sut = KoseiShichosonMasterMapperParameter.createSelectByKeyParam(識別ID);
-            assertThat(sut.getShichosonShikibetsuId(), is(new ShichosonShikibetsuID(識別ID)));
+            KoseiShichosonMasterMapperParameter sut = KoseiShichosonMasterMapperParameter.createSelectByKeyParam(shichonCode);
+            assertThat(sut.isusesshichonCode(), is(true));
         }
     }
+
 }

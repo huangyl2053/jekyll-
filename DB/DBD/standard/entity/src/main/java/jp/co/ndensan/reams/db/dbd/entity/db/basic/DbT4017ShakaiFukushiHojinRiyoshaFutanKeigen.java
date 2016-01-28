@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 社会福祉法人等利用者負担軽減テーブルの項目定義クラスです。
  */
 public enum DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -40,6 +40,30 @@ public enum DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen implements IColumnDefini
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
+     * shinseiYMD
+     */
+    shinseiYMD(2147483647, 0),
+    /**
+     * ketteiYMD
+     */
+    ketteiYMD(2147483647, 0),
+    /**
+     * tekiyoKaishiYMD
+     */
+    tekiyoKaishiYMD(2147483647, 0),
+    /**
+     * tekiyoShuryoYMD
+     */
+    tekiyoShuryoYMD(2147483647, 0),
+    /**
+     * ketteiKubun
+     */
+    ketteiKubun(1, 0),
+    /**
+     * hiShoninRiyu
+     */
+    hiShoninRiyu(200, 0),
+    /**
      * 証記載保険者番号
      */
     shoKisaiHokenshaNo(2147483647, 0),
@@ -57,19 +81,19 @@ public enum DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen implements IColumnDefini
     shinseiJiyu(200, 0),
     /**
      * 生活保護受給有無
-     * <br/>1：適用対象者
+     * <br/>1：適用対象者
      * <br/>0：適用外
      */
     seihoJukyuUmu(1, 0),
     /**
      * 老齢福祉年金受給有無
-     * <br/>1：適用対象者
+     * <br/>1：適用対象者
      * <br/>0：適用外
      */
     roreiFukushiNenkinJukyuUmu(1, 0),
     /**
      * 生保扶助見直し特例有無
-     * <br/>1：適用対象者
+     * <br/>1：適用対象者
      * <br/>0：適用外
      */
     seihoFujoMinaoshiTokureiUmu(1, 0),
@@ -83,19 +107,19 @@ public enum DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen implements IColumnDefini
     keigenritsu_Bumbo(4, 0),
     /**
      * 居宅サービス限定
-     * <br/>1：該当
+     * <br/>1：該当
      * <br/>0：非該当
      */
     kyotakuServiceGentei(1, 0),
     /**
      * 居住費・食費のみ
-     * <br/>1：該当
+     * <br/>1：該当
      * <br/>0：非該当
      */
     kyojuhiShokuhiNomi(1, 0),
     /**
      * 旧措置者ユニット型個室のみ
-     * <br/>1：該当
+     * <br/>1：該当
      * <br/>0：非該当
      */
     kyusochishaUnitTypeKoshitsuNomi(1, 0),
@@ -105,10 +129,10 @@ public enum DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen implements IColumnDefini
     kakuninNo(8, 0),
     /**
      * 減免区分
-     * <br/>非課税・老年受給
-     * <br/>生保に準ずる
-     * <br/>その他
-     * <br/>生計困難
+     * <br/>非課税・老年受給
+     * <br/>生保に準ずる
+     * <br/>その他
+     * <br/>生計困難
      * <br/>激変緩和
      */
     gemmenKubun(2, 0);

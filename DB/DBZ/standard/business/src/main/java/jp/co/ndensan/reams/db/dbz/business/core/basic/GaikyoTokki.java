@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5206GaikyoTokkiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -30,17 +29,22 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
      *
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @param 概況特記テキストイメージ区分 概況特記テキストイメージ区分
      */
     public GaikyoTokki(ShinseishoKanriNo 申請書管理番号,
-            int 認定調査依頼履歴番号) {
+            int 認定調査依頼履歴番号,
+            RString 概況特記テキストイメージ区分) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+        requireNonNull(概況特記テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記テキストイメージ区分"));
         this.entity = new DbT5206GaikyoTokkiEntity();
         this.entity.setShinseishoKanriNo(申請書管理番号);
         this.entity.setNinteichosaRirekiNo(認定調査依頼履歴番号);
+        this.entity.setGaikyoTokkiTextImageKubun(概況特記テキストイメージ区分);
         this.id = new GaikyoTokkiIdentifier(
                 申請書管理番号,
-                認定調査依頼履歴番号
+                認定調査依頼履歴番号,
+                概況特記テキストイメージ区分
         );
     }
 
@@ -54,7 +58,8 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査票_概況特記"));
         this.id = new GaikyoTokkiIdentifier(
                 entity.getShinseishoKanriNo(),
-                entity.getNinteichosaRirekiNo());
+                entity.getNinteichosaRirekiNo(),
+                entity.getGaikyoTokkiTextImageKubun());
     }
 
     /**
@@ -91,6 +96,42 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
     }
 
     /**
+     * 概況特記テキストイメージ区分を返します。
+     *
+     * @return 概況特記テキストイメージ区分
+     */
+    public RString get概況特記テキストイメージ区分() {
+        return entity.getGaikyoTokkiTextImageKubun();
+    }
+
+    /**
+     * 住宅改修(回収箇所)を返します。
+     *
+     * @return 住宅改修(回収箇所)
+     */
+    public RString get住宅改修() {
+        return entity.getJutakuKaishu();
+    }
+
+    /**
+     * 市町村特別給付サービス種類名を返します。
+     *
+     * @return 市町村特別給付サービス種類名
+     */
+    public RString get市町村特別給付サービス種類名() {
+        return entity.getTokubetsuKyufuService();
+    }
+
+    /**
+     * 介護保険給付以外の在宅サービス種類名を返します。
+     *
+     * @return 介護保険給付以外の在宅サービス種類名
+     */
+    public RString get介護保険給付以外の在宅サービス種類名() {
+        return entity.getZaitakuService();
+    }
+
+    /**
      * 概況特記事項_主訴を返します。
      *
      * @return 概況特記事項_主訴
@@ -104,18 +145,18 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
      *
      * @return 概況特記_主訴_イメージ共有ファイルID
      */
-    public RDateTime get概況特記_主訴_イメージ共有ファイルID() {
-        return entity.getShusoImageSharedFileId();
-    }
+//    public RDateTime get概況特記_主訴_イメージ共有ファイルID() {
+//        return entity.getShusoImageSharedFileId();
+//    }
 
     /**
      * 概況特記_主訴_マスキングイメージ共有ファイルIDを返します。
      *
      * @return 概況特記_主訴_マスキングイメージ共有ファイルID
      */
-    public RDateTime get概況特記_主訴_マスキングイメージ共有ファイルID() {
-        return entity.getShusoMaskingImageSharedFileId();
-    }
+//    public RDateTime get概況特記_主訴_マスキングイメージ共有ファイルID() {
+//        return entity.getShusoMaskingImageSharedFileId();
+//    }
 
     /**
      * 概況特記事項_家族状況を返します。
@@ -131,18 +172,18 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
      *
      * @return 概況特記_家族状況_イメージ共有ファイルID
      */
-    public RDateTime get概況特記_家族状況_イメージ共有ファイルID() {
-        return entity.getKazokuJokyoImageSharedFileId();
-    }
+//    public RDateTime get概況特記_家族状況_イメージ共有ファイルID() {
+//        return entity.getKazokuJokyoImageSharedFileId();
+//    }
 
     /**
      * 概況特記_家族状況_マスキングイメージ共有ファイルIDを返します。
      *
      * @return 概況特記_家族状況_マスキングイメージ共有ファイルID
      */
-    public RDateTime get概況特記_家族状況_マスキングイメージ共有ファイルID() {
-        return entity.getKazokuJokyoMaskingImageSharedFileId();
-    }
+//    public RDateTime get概況特記_家族状況_マスキングイメージ共有ファイルID() {
+//        return entity.getKazokuJokyoMaskingImageSharedFileId();
+//    }
 
     /**
      * 概況特記事項_居住環境を返します。
@@ -158,18 +199,18 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
      *
      * @return 概況特記_居住環境_イメージ共有ファイルID
      */
-    public RDateTime get概況特記_居住環境_イメージ共有ファイルID() {
-        return entity.getKyojuKankyoImageSharedFileId();
-    }
+//    public RDateTime get概況特記_居住環境_イメージ共有ファイルID() {
+//        return entity.getKyojuKankyoImageSharedFileId();
+//    }
 
     /**
      * 概況特記_居住環境_マスキングイメージ共有ファイルIDを返します。
      *
      * @return 概況特記_居住環境_マスキングイメージ共有ファイルID
      */
-    public RDateTime get概況特記_居住環境_マスキングイメージ共有ファイルID() {
-        return entity.getKyojuKankyoMaskingImageSharedFileId();
-    }
+//    public RDateTime get概況特記_居住環境_マスキングイメージ共有ファイルID() {
+//        return entity.getKyojuKankyoMaskingImageSharedFileId();
+//    }
 
     /**
      * 概況特記事項_機器_器械を返します。
@@ -185,18 +226,18 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
      *
      * @return 概況特記_機器_器械_イメージ共有ファイルID
      */
-    public RDateTime get概況特記_機器_器械_イメージ共有ファイルID() {
-        return entity.getKikaiKikiImageSharedFileId();
-    }
+//    public RDateTime get概況特記_機器_器械_イメージ共有ファイルID() {
+//        return entity.getKikaiKikiImageSharedFileId();
+//    }
 
     /**
      * 概況特記_機器_器械_マスキングイメージ共有ファイルIDを返します。
      *
      * @return 概況特記_機器_器械_マスキングイメージ共有ファイルID
      */
-    public RDateTime get概況特記_機器_器械_マスキングイメージ共有ファイルID() {
-        return entity.getKikaiKikiMaskingImageSharedFileId();
-    }
+//    public RDateTime get概況特記_機器_器械_マスキングイメージ共有ファイルID() {
+//        return entity.getKikaiKikiMaskingImageSharedFileId();
+//    }
 
     /**
      * {@link DbT5206GaikyoTokkiEntity}のクローンを返します。

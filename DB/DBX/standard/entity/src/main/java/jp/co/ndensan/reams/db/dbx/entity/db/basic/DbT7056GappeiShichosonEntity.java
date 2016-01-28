@@ -24,7 +24,6 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7056GappeiShichoson");
-    private static final long serialVersionUID = 5066494311793636088L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;

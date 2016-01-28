@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaikaisaiyoteij
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJohoIdentifier;
@@ -283,7 +284,8 @@ public class ShinsakaiKaisaiYoteiJoho extends ParentModelBase<ShinsakaiKaisaiYot
      * 削除処理結果となる{@link ShinsakaiKaisaiYoteiJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link ShinsakaiKaisaiYoteiJoho}
-     * @throws IllegalStateException DbT5501ShinsakaiKaisaiYoteiJohoEntityのデータ状態が変更の場合
+     * @throws IllegalStateException
+     * DbT5501ShinsakaiKaisaiYoteiJohoEntityのデータ状態が変更の場合
      */
     @Override
     public ShinsakaiKaisaiYoteiJoho deleted() {
@@ -432,5 +434,25 @@ public class ShinsakaiKaisaiYoteiJoho extends ParentModelBase<ShinsakaiKaisaiYot
         return new ShinsakaiKaisaiYoteiJohoBuilder(entity, id, shinsakaiWariateJoho, shinsakaiWariateIinJoho, shinsakaiOnseiJoho, shinsakaiKaisaiKekkaJoho);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ShinsakaiKaisaiYoteiJoho other = (ShinsakaiKaisaiYoteiJoho) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 }

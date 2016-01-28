@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -49,7 +49,7 @@ public class KyotakuKeikakuJigyoshaSakuseiBuilder {
      */
     public KyotakuKeikakuJigyoshaSakuseiBuilder set被保険者番号(HihokenshaNo 被保険者番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        entity.setHihokenshano(被保険者番号);
+        entity.setHihokenshaNo(被保険者番号);
         return this;
     }
 
@@ -71,7 +71,7 @@ public class KyotakuKeikakuJigyoshaSakuseiBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link KyotakuKeikakuJigyoshaSakuseiBuilder}
      */
-    public KyotakuKeikakuJigyoshaSakuseiBuilder set履歴番号(Decimal 履歴番号) {
+    public KyotakuKeikakuJigyoshaSakuseiBuilder set履歴番号(Integer 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;

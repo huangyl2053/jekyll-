@@ -4,13 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3059KagoMoshitateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3059KagoMoshitateEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3059KagoMoshitateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -93,12 +92,6 @@ public class KagoMoshitateBuilderTest extends DbcTestBase {
         public void 戻り値の申立者区分コードは_設定した値と同じ申立者区分コードを返す() {
             business = sut.set申立者区分コード(DbT3059KagoMoshitateEntityGenerator.DEFAULT_申立者区分コード).build();
             assertThat(business.get申立者区分コード(), is(DbT3059KagoMoshitateEntityGenerator.DEFAULT_申立者区分コード));
-        }
-
-        @Test
-        public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
-            business = sut.set証記載保険者番号(DbT3059KagoMoshitateEntityGenerator.DEFAULT_証記載保険者番号).build();
-            assertThat(business.get証記載保険者番号(), is(DbT3059KagoMoshitateEntityGenerator.DEFAULT_証記載保険者番号));
         }
 
         @Test

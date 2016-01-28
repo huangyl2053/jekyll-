@@ -95,7 +95,7 @@ public class ShotokuBuilder {
      */
     public ShotokuBuilder set非課税区分_住民税減免後(RString 非課税区分_住民税減免後) {
         requireNonNull(非課税区分_住民税減免後, UrSystemErrorMessages.値がnull.getReplacedMessage("非課税区分（住民税減免後）"));
-        entity.setKazeiKubunGemmenGo(非課税区分_住民税減免後);
+        entity.setKazeiKubun(非課税区分_住民税減免後);
         return this;
     }
 

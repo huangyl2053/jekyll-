@@ -134,7 +134,7 @@ public class ServiceShuruiShikyuGendoGakuTest extends DbcTestBase {
 
         @Test
         public void get適用開始年月は_entityが持つ適用開始年月を返す() {
-            assertThat(sut.get適用開始年月(), is(ServiceShuruiShikyuGendoGakuEntity.getTekiyoKaishuYM()));
+            assertThat(sut.get適用開始年月(), is(ServiceShuruiShikyuGendoGakuEntity.getTekiyoKaishiYM()));
         }
 
         @Test
@@ -144,7 +144,7 @@ public class ServiceShuruiShikyuGendoGakuTest extends DbcTestBase {
 
         @Test
         public void get適用終了年月は_entityが持つ適用終了年月を返す() {
-            assertThat(sut.get適用終了年月(), is(ServiceShuruiShikyuGendoGakuEntity.getTekiyoShuryuYM()));
+            assertThat(sut.get適用終了年月(), is(ServiceShuruiShikyuGendoGakuEntity.getTekiyoShuryoYM()));
         }
 
         @Test

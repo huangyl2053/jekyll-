@@ -4,15 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4913ChosainJohoDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4913ChosainJohoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4913ChosainJohoEntityGenerator.DEFAULT_市町村コード;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -202,8 +199,8 @@ public class DbT4913ChosainJohoDacTest extends DbzTestDacBase {
 
         public static void insert(
                 LasdecCode 市町村コード,
-                ChosaItakusakiCode 認定調査委託先コード,
-                ChosainCode 認定調査員コード) {
+                RString 認定調査委託先コード,
+                RString 認定調査員コード) {
             DbT4913ChosainJohoEntity entity = DbT4913ChosainJohoEntityGenerator.createDbT4913ChosainJohoEntity();
             entity.setShichosonCode(市町村コード);
             entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
