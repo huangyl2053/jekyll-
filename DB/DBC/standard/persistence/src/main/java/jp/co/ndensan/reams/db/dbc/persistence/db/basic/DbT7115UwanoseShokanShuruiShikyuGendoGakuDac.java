@@ -8,6 +8,8 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyosha.rirekiNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7115UwanoseShokanShuruiShikyuGendoGaku;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7115UwanoseShokanShuruiShikyuGendoGaku.shikyuGendoTaniSu;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7115UwanoseShokanShuruiShikyuGendoGaku.tekiyoShuryoYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7119ServiceCode.serviceShuruiCode;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7119ServiceCode.tekiyoKaishiYM;
@@ -16,9 +18,13 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -87,5 +93,32 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements ISaveable<D
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 上乗せ償還払い給付種類支給限度額からデータを抽出する。
+     *
+     * @param サービス種類コード ServiceShuruiCode
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return Decimal
+     */
+    @Transaction
+    public Decimal select支給限度単位数(ServiceShuruiCode サービス種類コード, FlexibleYearMonth サービス提供年月) {
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(shikyuGendoTaniSu).
+                table(DbT7115UwanoseShokanShuruiShikyuGendoGaku.class).
+                where(and(
+                                eq(serviceShuruiCode, サービス種類コード),
+                                leq(tekiyoKaishiYM, サービス提供年月),
+                                leq(サービス提供年月, tekiyoShuryoYM))).
+                order(
+                        by(tekiyoKaishiYM, Order.DESC),
+                        by(rirekiNo, Order.DESC)).
+                limit(1).
+                toObject(Decimal.class);
     }
 }
