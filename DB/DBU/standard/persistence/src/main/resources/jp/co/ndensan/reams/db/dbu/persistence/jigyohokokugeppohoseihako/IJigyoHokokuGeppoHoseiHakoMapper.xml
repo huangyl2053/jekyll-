@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.jigyohokokugeppohoseihako.IJigyoHokokuGeppoHoseiHakoMapper">
-    <select id="select事業報告集計一覧データ" parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoSearchParameter"
+    <select id="select事業報告集計一覧データ" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity"
             resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity" fetchSize="500">
         	SELECT
 		dbT7021JigyoHokokuTokeiData."hokokuYSeireki",
@@ -140,7 +140,7 @@
 			NULL
 	
                 END
-                AS "5464"
+                AS "yoshicode"
 		
               
 	FROM	rgdb."DbT7021JigyoHokokuTokeiData" AS dbT7021JigyoHokokuTokeiData
