@@ -16,7 +16,7 @@ import lombok.NonNull;
  *
  * 被保険者証発行一覧表帳票作成します。
  */
-public class HihokenshashoHakkoIchiranHyoReport extends Report<HihokenshashoHakkoIchiranhyoReportSource> {
+public final class HihokenshashoHakkoIchiranHyoReport extends Report<HihokenshashoHakkoIchiranhyoReportSource> {
     
     private final List<HihokenshashoHakkoIchiranHyoItem> items;
     
