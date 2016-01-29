@@ -148,6 +148,11 @@ public class TaishouWaritsuke {
      * @return ResponseData<TaishouWaritsukeDiv>
      */
     public ResponseData<TaishouWaritsukeDiv> onClick_BtnRegister(TaishouWaritsukeDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        対象者一覧データ空チェック(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         TaishouWaritsukeHandler handler = getHandler(div);
         handler.介護認定審査会割付情報更新();
         handler.対象者一覧検索();
