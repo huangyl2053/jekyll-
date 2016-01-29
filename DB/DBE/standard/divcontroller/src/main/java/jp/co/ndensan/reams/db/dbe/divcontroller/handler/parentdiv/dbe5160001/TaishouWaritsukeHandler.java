@@ -235,7 +235,12 @@ public class TaishouWaritsukeHandler {
             div.getTxtGogitaiNumber().setValue(waritsukeHead.get合議体名称());
             div.getTxtYoteiTeiin().setValue(new Decimal(waritsukeHead.get予定定員()));
             div.getTxtWaritsukeNinzu().setValue(new Decimal(waritsukeHead.get割付人数()));
-            RString 進捗状況 = ShinsakaiShinchokuJokyo.toValue(waritsukeHead.get進捗状況().getColumnValue()).get名称();
+            RString 進捗状況;
+            try {
+                進捗状況 = ShinsakaiShinchokuJokyo.toValue(waritsukeHead.get進捗状況().getColumnValue()).get名称();
+            } catch (IllegalArgumentException e) {
+                進捗状況 = RString.EMPTY;
+            }
             div.getTxtStatus().setValue(進捗状況);
             div.getTxtShinsakaiKaijo().setValue(waritsukeHead.get介護認定審査会開催場所名称());
             div.getTxtShinsakaiChiku().setValue(waritsukeHead.get地区コード().getColumnValue());
@@ -261,28 +266,67 @@ public class TaishouWaritsukeHandler {
         TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
         for (Taishouichiran taishouichiran : ichiranList) {
             RString no = new RString(Integer.toString(taishouichiran.get介護認定審査会審査順()));
-            RString 優先 = taishouichiran.get介護認定審査会優先振分区分コード().getColumnValue().equals(new RString("1"))
-                    ? ShinsakaiYusenWaritsukeKubunCode.toValue(taishouichiran.get介護認定審査会優先振分区分コード().getColumnValue()).get名称()
-                    : RString.EMPTY;
-            RString 性別 = Seibetsu.toValue(taishouichiran.get性別().getColumnValue()).get名称();
-            RString 被保区分 = HihokenshaKubunCode.toValue(taishouichiran.get被保険者区分コード()).get名称();
-            RString 申請区分_申請時 = NinteiShinseiShinseijiKubunCode.toValue(taishouichiran.get認定申請区分_申請時コード().getColumnValue()).get名称();
+            RString 優先;
+            try {
+                優先 = taishouichiran.get介護認定審査会優先振分区分コード().getColumnValue().equals(new RString("1"))
+                        ? ShinsakaiYusenWaritsukeKubunCode.toValue(taishouichiran.get介護認定審査会優先振分区分コード().getColumnValue()).get名称()
+                        : RString.EMPTY;
+            } catch (IllegalArgumentException e) {
+                優先 = RString.EMPTY;
+            }
+
+            RString 性別;
+            try {
+                性別 = Seibetsu.toValue(taishouichiran.get性別().getColumnValue()).get名称();
+            } catch (IllegalArgumentException e) {
+                性別 = RString.EMPTY;
+            }
+            RString 被保区分;
+            try {
+                被保区分 = HihokenshaKubunCode.toValue(taishouichiran.get被保険者区分コード()).get名称();
+            } catch (IllegalArgumentException e) {
+                被保区分 = RString.EMPTY;
+            }
+            RString 申請区分_申請時;
+            try {
+                申請区分_申請時 = NinteiShinseiShinseijiKubunCode.toValue(taishouichiran.get認定申請区分_申請時コード().getColumnValue()).get名称();
+            } catch (IllegalArgumentException e) {
+                申請区分_申請時 = RString.EMPTY;
+            }
             TextBoxFlexibleDate 認定申請日 = new TextBoxFlexibleDate();
             認定申請日.setValue(taishouichiran.get認定申請年月日());
             TextBoxFlexibleDate 前回有効期間開始日 = new TextBoxFlexibleDate();
             前回有効期間開始日.setValue(taishouichiran.get前回認定有効期間_開始());
             TextBoxFlexibleDate 前回有効期間終了日 = new TextBoxFlexibleDate();
             前回有効期間終了日.setValue(taishouichiran.get前回認定有効期間_終了());
-            RString 調査票_寝たきり度
-                    = ShogaiNichijoSeikatsuJiritsudoCode.toValue(taishouichiran.get調査票_障害高齢者の日常生活自立度コード().getColumnValue()).get名称();
-            RString 調査票_認知度
-                    = NinchishoNichijoSeikatsuJiritsudoCode.toValue(
-                            taishouichiran.get調査票_認知症高齢者の日常生活自立度コード().getColumnValue()).get名称();
-            RString 意見書_寝たきり度
-                    = ShogaiNichijoSeikatsuJiritsudoCode.toValue(taishouichiran.get意見書_障害高齢者の日常生活自立度コード().getColumnValue()).get名称();
-            RString 意見書_認知度
-                    = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
-                            taishouichiran.get意見書_認知症高齢者の日常生活自立度コード().getColumnValue()).get名称();
+            RString 調査票_寝たきり度;
+            try {
+                調査票_寝たきり度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+                        taishouichiran.get調査票_障害高齢者の日常生活自立度コード().getColumnValue()).get名称();
+            } catch (IllegalArgumentException e) {
+                調査票_寝たきり度 = RString.EMPTY;
+            }
+            RString 調査票_認知度;
+            try {
+                調査票_認知度 = NinchishoNichijoSeikatsuJiritsudoCode.toValue(
+                        taishouichiran.get調査票_認知症高齢者の日常生活自立度コード().getColumnValue()).get名称();
+            } catch (IllegalArgumentException e) {
+                調査票_認知度 = RString.EMPTY;
+            }
+            RString 意見書_寝たきり度;
+            try {
+                意見書_寝たきり度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+                        taishouichiran.get意見書_障害高齢者の日常生活自立度コード().getColumnValue()).get名称();
+            } catch (IllegalArgumentException e) {
+                意見書_寝たきり度 = RString.EMPTY;
+            }
+            RString 意見書_認知度;
+            try {
+                意見書_認知度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+                        taishouichiran.get意見書_認知症高齢者の日常生活自立度コード().getColumnValue()).get名称();
+            } catch (IllegalArgumentException e) {
+                意見書_認知度 = RString.EMPTY;
+            }
             RString 再調査 = new RString(Integer.toString(taishouichiran.get再調査依頼回数()));
             dgTaishoshaIchiran_Row row = new dgTaishoshaIchiran_Row(
                     対象者一覧状態フラグ,
@@ -325,28 +369,67 @@ public class TaishouWaritsukeHandler {
         List<dgWaritsukeKohoshaIchiran_Row> rows = new ArrayList<>();
         TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
         for (KohoshaIchiran kohoshaIchiran : ichiranList) {
-            RString 優先 = kohoshaIchiran.get介護認定審査会優先振分区分コード().getColumnValue().equals(new RString("1"))
-                    ? ShinsakaiYusenWaritsukeKubunCode.toValue(kohoshaIchiran.get介護認定審査会優先振分区分コード().getColumnValue()).get名称()
-                    : RString.EMPTY;
-            RString 性別 = Seibetsu.toValue(kohoshaIchiran.get性別().getColumnValue()).get名称();
-            RString 被保区分 = HihokenshaKubunCode.toValue(kohoshaIchiran.get被保険者区分コード()).get名称();
-            RString 申請区分_申請時 = NinteiShinseiShinseijiKubunCode.toValue(kohoshaIchiran.get認定申請区分_申請時コード().getColumnValue()).get名称();
+            RString 優先;
+            try {
+                優先 = kohoshaIchiran.get介護認定審査会優先振分区分コード().getColumnValue().equals(new RString("1"))
+                        ? ShinsakaiYusenWaritsukeKubunCode.toValue(kohoshaIchiran.get介護認定審査会優先振分区分コード().getColumnValue()).get名称()
+                        : RString.EMPTY;
+            } catch (IllegalArgumentException e) {
+                優先 = RString.EMPTY;
+            }
+            RString 性別;
+            try {
+                性別 = Seibetsu.toValue(kohoshaIchiran.get性別().getColumnValue()).get名称();
+            } catch (IllegalArgumentException e) {
+                性別 = RString.EMPTY;
+            }
+            RString 被保区分;
+            try {
+                被保区分 = HihokenshaKubunCode.toValue(kohoshaIchiran.get被保険者区分コード()).get名称();
+            } catch (IllegalArgumentException e) {
+                被保区分 = RString.EMPTY;
+            }
+            RString 申請区分_申請時;
+            try {
+                申請区分_申請時 = NinteiShinseiShinseijiKubunCode.toValue(kohoshaIchiran.get認定申請区分_申請時コード().getColumnValue()).get名称();
+            } catch (IllegalArgumentException e) {
+                申請区分_申請時 = RString.EMPTY;
+            }
             TextBoxFlexibleDate 認定申請日 = new TextBoxFlexibleDate();
             認定申請日.setValue(kohoshaIchiran.get認定申請年月日());
             TextBoxFlexibleDate 前回有効期間開始日 = new TextBoxFlexibleDate();
             前回有効期間開始日.setValue(kohoshaIchiran.get前回認定有効期間_開始());
             TextBoxFlexibleDate 前回有効期間終了日 = new TextBoxFlexibleDate();
             前回有効期間終了日.setValue(kohoshaIchiran.get前回認定有効期間_終了());
-            RString 調査票_寝たきり度
-                    = ShogaiNichijoSeikatsuJiritsudoCode.toValue(kohoshaIchiran.get調査票_障害高齢者の日常生活自立度コード().getColumnValue()).get名称();
-            RString 調査票_認知度
-                    = NinchishoNichijoSeikatsuJiritsudoCode.toValue(
-                            kohoshaIchiran.get調査票_認知症高齢者の日常生活自立度コード().getColumnValue()).get名称();
-            RString 意見書_寝たきり度
-                    = ShogaiNichijoSeikatsuJiritsudoCode.toValue(kohoshaIchiran.get意見書_障害高齢者の日常生活自立度コード().getColumnValue()).get名称();
-            RString 意見書_認知度
-                    = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
-                            kohoshaIchiran.get意見書_認知症高齢者の日常生活自立度コード().getColumnValue()).get名称();
+            RString 調査票_寝たきり度;
+            try {
+                調査票_寝たきり度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+                        kohoshaIchiran.get調査票_障害高齢者の日常生活自立度コード().getColumnValue()).get名称();
+            } catch (IllegalArgumentException e) {
+                調査票_寝たきり度 = RString.EMPTY;
+            }
+            RString 調査票_認知度;
+            try {
+                調査票_認知度 = NinchishoNichijoSeikatsuJiritsudoCode.toValue(
+                        kohoshaIchiran.get調査票_認知症高齢者の日常生活自立度コード().getColumnValue()).get名称();
+            } catch (IllegalArgumentException e) {
+                調査票_認知度 = RString.EMPTY;
+            }
+            RString 意見書_寝たきり度;
+            try {
+                意見書_寝たきり度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+                        kohoshaIchiran.get意見書_障害高齢者の日常生活自立度コード().getColumnValue()).get名称();
+            } catch (IllegalArgumentException e) {
+                意見書_寝たきり度 = RString.EMPTY;
+            }
+
+            RString 意見書_認知度;
+            try {
+                意見書_認知度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+                        kohoshaIchiran.get意見書_認知症高齢者の日常生活自立度コード().getColumnValue()).get名称();
+            } catch (IllegalArgumentException e) {
+                意見書_認知度 = RString.EMPTY;
+            }
             RString 再調査 = new RString(Integer.toString(kohoshaIchiran.get再調査依頼回数()));
             dgWaritsukeKohoshaIchiran_Row row = new dgWaritsukeKohoshaIchiran_Row(
                     候補者一覧状態フラグ,

@@ -222,7 +222,7 @@ public class TaishouWaritsuke {
         messages.add(ValidateChain.validateStart(div).ifNot(TaishouWaritsukeDivSpec.対象者一覧データ空チェック)
                 .thenAdd(対象データなし).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                対象データなし, div.getDgWaritsukeKohoshaIchiran()).build().check(messages));
+                対象データなし, div.getDgTaishoshaIchiran()).build().check(messages));
         return pairs;
     }
 
