@@ -148,6 +148,22 @@ public interface IIkkatsuHakkoMapper {
     int deleteTmpHihoken(IkkatsuHakkoMybatisParameter 検索条件);
 
     /**
+     * 受給区分1更新します。
+     *
+     * @param 検索条件 検索条件
+     * @return 更新件数
+     */
+    int updateJukyuKubun1(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
+     * 受給区分2更新します。
+     *
+     * @param 検索条件 検索条件
+     * @return 更新件数
+     */
+    int updateJukyuKubun2(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
      * 被保険者台帳の情報を取得します。
      *
      * @return {@link IkkatsuHakkoRelateEntity}
@@ -332,7 +348,7 @@ public interface IIkkatsuHakkoMapper {
     /**
      * 一時テーブルを取得します。
      *
-     * @return 件数
+     * @return List<IkkatsuHakkoRelateEntity>
      */
-    int getTmpHihokenshasho_Ichi();
+    List<IkkatsuHakkoRelateEntity> getTmpHihokenshasho_Ichi();
 }

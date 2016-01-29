@@ -89,7 +89,6 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
     private List<IkkatsuHakkoRelateEntity> get年齢到達予定者() {
         List<IkkatsuHakkoRelateEntity> nenreiTotatsuYoteshalist = new ArrayList<>();
         if (processPrm.getKonkaiKijunYMD().isBefore(processPrm.getKonkaiToYMD())) {
-            List<RString> list = new ArrayList<>();
             ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(ShikibetsuTaishoGyomuHanteiKeyFactory.
                     createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先), true);
             List<JuminShubetsu> juminShubetsuList = new ArrayList<>();
@@ -107,24 +106,21 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
                     mybatisPrm.getKonkaiToYMDHMS(),
                     mybatisPrm.getKonkaikijunYMD(),
                     mybatisPrm.getKonkaikijunYMDHMS(),
+                    mybatisPrm.getKofuYMD(),
                     mybatisPrm.getShinseishoKanriNo(),
                     mybatisPrm.getKonkaikijunYMD().plusDay(1).minusYear(NENREI_VALUE).plusDay(1),
-                    mybatisPrm.getKonkaikijunYMD().minusYear(NENREI_VALUE).plusDay(1),
+                    mybatisPrm.getKonkaiToYMD().minusYear(NENREI_VALUE).plusDay(1),
                     mybatisPrm.getHihokenshaNo(),
                     mybatisPrm.getShikibetsuCode(),
                     new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
                     mybatisPrm.getPsmAtesaki(),
                     mybatisPrm.getNenreiTotatsuYMD());
             List<IkkatsuHakkoRelateEntity> 年齢到達予定者List = iIkkatsuHakkoMapper.getNenreiTotatsuYotesha(mybatisParam);
-            for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 年齢到達予定者List) {
-                list.add(ikkatsuHakkoRelateEntity.getHihokenshaNo().value());
-            }
             for (IkkatsuHakkoRelateEntity nenreiTotatsuYotesha : 年齢到達予定者List) {
                 HihokenshaNo hihokenshaNo = HihokenshanotsukibanFinder.createInstance().
                         getHihokenshanotsukiban(nenreiTotatsuYotesha.getShikibetsuCode());
-                if (list.contains(hihokenshaNo.value())) {
-                    nenreiTotatsuYoteshalist.add(nenreiTotatsuYotesha);
-                }
+                nenreiTotatsuYotesha.setHihokenshaNo(hihokenshaNo);
+                nenreiTotatsuYoteshalist.add(nenreiTotatsuYotesha);
             }
         }
         return nenreiTotatsuYoteshalist;
@@ -142,14 +138,17 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
         }
         Map<RString, IkkatsuHakkoRelateEntity> 受給者台帳異動Map = new HashMap();
         for (IkkatsuHakkoRelateEntity 受給者台帳異動Entity : 受給者台帳異動List) {
-            受給者台帳異動Map.put(受給者台帳異動Entity.getHihokenshaNo().value(), 受給者台帳異動Entity);
+            if (!list.contains(受給者台帳異動Entity.getHihokenshaNo().value())) {
+                受給者台帳異動Map.put(受給者台帳異動Entity.getHihokenshaNo().value(), 受給者台帳異動Entity);
+            }
         }
         for (IkkatsuHakkoRelateEntity 被保険者異動Entiy : 被保険者異動List) {
             if (!list.contains(被保険者異動Entiy.getHihokenshaNo().value())) {
                 get最新データ(受給者台帳異動Map, 被保険者異動Entiy);
             }
-            該当者全員List.addAll(受給者台帳異動Map.values());
         }
+        該当者全員List.addAll(受給者台帳異動Map.values());
+
         return 該当者全員List;
     }
 

@@ -33,10 +33,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 public class IkkatsuHakkoRelateEntity implements IDbAccessable {
 
     private HihokenshaNo hihokenshaNo;
-    private ShikibetsuCode shikibetsuCode;
     private LasdecCode shichosonCode;
-    private RDateTime lastUpdateTimestamp;
+    private ShikibetsuCode shikibetsuCode;
     private RDateTime insertTimestamp;
+    private RDateTime lastUpdateTimestamp;
     private FlexibleDate idoYMD;
     private RString edaNo;
     private RString idoJiyuCode;
@@ -62,7 +62,6 @@ public class IkkatsuHakkoRelateEntity implements IDbAccessable {
     private LasdecCode sochimotoShichosonCode;
     private LasdecCode kyuShichosonCode;
     private boolean logicalDeletedFlag;
-    private YMDHMS hakkoShoriTimestamp;
     private RString daichoShubetsu;
     private RString nyushoShisetsuShurui;
     private JigyoshaNo nyushoShisetsuCode;
@@ -71,7 +70,8 @@ public class IkkatsuHakkoRelateEntity implements IDbAccessable {
     private FlexibleDate taishoShoriYMD;
     private FlexibleDate taishoYMD;
     private RString roomKigoNo;
-    private int rirekiNo;
+    private YMDHMS hakkoShoriTimestamp;
+    private RString rirekiNo;
     private ShinseishoKanriNo shinseishoKanriNo;
     private RString shinseiJokyoKubun;
     private RString shishoCode;
@@ -152,7 +152,7 @@ public class IkkatsuHakkoRelateEntity implements IDbAccessable {
     private FlexibleDate nijiHanteiNinteiYukoKaishiYMD;
     private FlexibleDate nijiHanteiNinteiYukoShuryoYMD;
     private FlexibleDate shinsakaiShiryoSakuseiYMD;
-    private int shinsakaiKaisaiNo;
+    private RString shinsakaiKaisaiNo;
     private RString shinsakaiIken;
     private RString ichijiHanteiKekkaHenkoRiyu;
     private Code yokaigoJotaizoReiCode;
@@ -191,7 +191,7 @@ public class IkkatsuHakkoRelateEntity implements IDbAccessable {
     private RString shuryoShinsei_RiyuCode;
     private FlexibleDate shuryoShinsei_ShinsaKetteiYMD;
     private RString shuryoShinsei_ShinsaKekkaKubun;
-    private Code mukoKubun;
+    private boolean mukoKubun;
     private FlexibleYearMonth taishoYM;
     private RString todokedeKubun;
     private FlexibleDate todokedeYMD;
@@ -202,7 +202,7 @@ public class IkkatsuHakkoRelateEntity implements IDbAccessable {
     private TelNo todokedeshaTelNo;
     private RString todokedeshaKankeiKubun;
     private RString zanteiKubun;
-    private RString keikakuJigyoshaNo;
+    private JigyoshaNo keikakuJigyoshaNo;
     private JigyoshaNo itakusakiJigyoshaNo;
     private AtenaMeisho meisho;
     private FlexibleDate seinengappiYMD;
@@ -211,4 +211,12 @@ public class IkkatsuHakkoRelateEntity implements IDbAccessable {
     private AtenaBanchi banchi;
     private Katagaki katagaki;
     private boolean shisetyuJotaiFlag;
+    private RString juminShubetsuCode;
+    private RString juminJotaiCode;
+    private RString gyoseikuName;
+    private AtenaKanaMeisho kanaMeisho;
+    private YubinNo yubinNo;
+    private RString seibetsuCode;
+    private RString jukyuKubun;
+
 }

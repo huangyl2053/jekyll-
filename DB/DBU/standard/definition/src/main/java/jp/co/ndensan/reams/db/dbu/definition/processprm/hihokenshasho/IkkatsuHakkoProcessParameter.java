@@ -119,6 +119,7 @@ public class IkkatsuHakkoProcessParameter implements IBatchProcessParameter {
                 getKonkaiYMDHMS(konkaiToYMD, konkaiToHMS),
                 konkaiKijunYMD,
                 getKonkaiYMDHMS(konkaiKijunYMD, konkaiKijunHMS),
+                kofuYMD,
                 shinseishoKanriNo,
                 seinengappiToYMD,
                 seinengappiFromYMD,
