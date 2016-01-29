@@ -56,8 +56,20 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlShinsainShikakuCode"));
             };
 
+            Controls.prototype.ccdHokensha = function () {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokensha"));
+            };
+
+            Controls.prototype.txtMaxKensu = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtMaxKensu"));
+            };
+
             Controls.prototype.btnKensakku = function () {
                 return new UZA.Button(this.convFiledName("btnKensakku"));
+            };
+
+            Controls.prototype.btnClear = function () {
+                return new UZA.Button(this.convFiledName("btnClear"));
             };
 
             Controls.prototype.ShosaiJoken = function () {
