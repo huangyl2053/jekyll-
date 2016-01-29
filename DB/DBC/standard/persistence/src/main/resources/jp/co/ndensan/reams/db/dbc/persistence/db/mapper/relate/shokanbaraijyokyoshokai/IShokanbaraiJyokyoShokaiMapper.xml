@@ -299,7 +299,7 @@
                 AND SHOKANSERVICEPLAN200904."renban" = #{renban}
             </if>
         ORDER BY
-            SHOKANSERVICEPLAN200904."renban"
+            SHOKANSERVICEPLAN200904."renban" DESC
     </select>
     
      <resultMap id="resultMap_ShokanServicePlan200604Entity"
@@ -366,7 +366,7 @@
                 AND SHOKANSERVICEPLAN200604."renban" = #{renban}
             </if>
         ORDER BY
-            SHOKANSERVICEPLAN200604."renban"
+            SHOKANSERVICEPLAN200604."renban" DESC
     </select>
 
     <resultMap id="resultMap_ShokanServicePlan200004Entity"
@@ -433,7 +433,7 @@
                 AND SHOKANSERVICEPLAN200004."renban" = #{renban}
             </if>
         ORDER BY
-            SHOKANSERVICEPLAN200004."renban"
+            SHOKANSERVICEPLAN200004."renban" DESC
     </select>  
       
     <resultMap id="resultMap_ShokanShukeiEntity"

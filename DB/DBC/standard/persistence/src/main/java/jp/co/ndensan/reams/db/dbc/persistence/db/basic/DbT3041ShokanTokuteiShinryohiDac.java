@@ -143,6 +143,7 @@ public class DbT3041ShokanTokuteiShinryohiDac implements ISaveable<DbT3041Shokan
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号))).
+                order(by(DbT3041ShokanTokuteiShinryohi.renban, Order.DESC)).
                 toList(DbT3041ShokanTokuteiShinryohiEntity.class);
     }
 
