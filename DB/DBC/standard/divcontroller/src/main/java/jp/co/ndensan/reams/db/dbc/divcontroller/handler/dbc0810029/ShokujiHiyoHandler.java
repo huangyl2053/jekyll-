@@ -79,6 +79,7 @@ public class ShokujiHiyoHandler {
         }
         if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
+            div.getPanelHead().getBtnKinkyujiShoteiShikkan().setDisplayNone(false);
             div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setVisible(false);
         } else {
             div.getPanelHead().getBtnKinkyujiShoteiShikkan().setVisible(false);

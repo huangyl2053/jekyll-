@@ -81,13 +81,13 @@ public class ShokujiHiyo {
             div.getPanelDetail2().setVisible(true);
 
             List<ShokanMeisai> shokanMeisaiList = ShokanbaraiJyokyoShokai.createInstance()
-                    .getShokujiHiyoDataList(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 様式番号);
+                    .getShokujiHiyoDataList(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
             if (shokanMeisaiList == null || shokanMeisaiList.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
                     .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号,
-                            様式番号);
+                            null);
 
             getHandler(div).set食事費用一覧グリッド(shokanMeisaiList, shokanShokujiHiyoList.get(0));
         }
@@ -100,7 +100,7 @@ public class ShokujiHiyo {
 
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
                     .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号,
-                            様式番号);
+                            null);
             if (shokanShokujiHiyoList == null || shokanShokujiHiyoList.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
@@ -114,7 +114,7 @@ public class ShokujiHiyo {
             div.getPanelDetail2().setVisible(false);
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
                     .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号,
-                            様式番号);
+                            null);
             if (shokanShokujiHiyoList == null || shokanShokujiHiyoList.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }

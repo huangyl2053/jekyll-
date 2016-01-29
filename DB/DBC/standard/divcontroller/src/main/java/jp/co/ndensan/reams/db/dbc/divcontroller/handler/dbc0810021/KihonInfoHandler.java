@@ -71,6 +71,7 @@ public class KihonInfoHandler {
         }
         if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
+            div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setDisplayNone(false);
             div.getPanelTwo().getBtnKinkyujiShisetuRyoyouhi().setVisible(false);
         } else {
             div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setVisible(false);

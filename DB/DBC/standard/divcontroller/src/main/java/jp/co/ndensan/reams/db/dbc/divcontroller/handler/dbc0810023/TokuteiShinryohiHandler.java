@@ -45,6 +45,7 @@ public class TokuteiShinryohiHandler {
     private static final RString 回まで = new RString("回まで");
     private static final RString 設定可_任意 = new RString("2");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
+    private static final RString 改行 = new RString("\n");
 
     public TokuteiShinryohiHandler(TokuteiShinryohiDiv div) {
         this.div = div;
@@ -91,6 +92,7 @@ public class TokuteiShinryohiHandler {
         }
         if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
+            div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setDisplayNone(false);
             div.getPanelTwo().getBtnKinkyujiShisetsu().setVisible(false);
         } else {
             div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setVisible(false);
@@ -147,8 +149,7 @@ public class TokuteiShinryohiHandler {
                 new Code(serviceCode.getSanteiTani()));
         RStringBuilder builder1 = new RStringBuilder();
         builder1.append(code1.getコード名称());
-        // TODO 特定診療サービスコード．単位 QA中
-        builder1.append(serviceCode.getTaniSuShikibetsu());
+        builder1.append(serviceCode.getTaniSu());
         builder1.append(単位);
         div.getPanelFive().getLblComment1().setText(builder1.toRString());
         UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0026")),
@@ -175,25 +176,25 @@ public class TokuteiShinryohiHandler {
         div.getPanelFour().getTxtTejyutsu().setValue(new Decimal(entity.get手術単位数()));
         div.getPanelFour().getTxtGoukei().setValue(new Decimal(entity.get合計単位数()));
         RStringBuilder builder = new RStringBuilder();
-        builder.append(entity.get摘要１()).append(new RString("<br/>"));
-        builder.append(entity.get摘要２()).append(new RString("<br/>"));
-        builder.append(entity.get摘要３()).append(new RString("<br/>"));
-        builder.append(entity.get摘要４()).append(new RString("<br/>"));
-        builder.append(entity.get摘要５()).append(new RString("<br/>"));
-        builder.append(entity.get摘要６()).append(new RString("<br/>"));
-        builder.append(entity.get摘要７()).append(new RString("<br/>"));
-        builder.append(entity.get摘要８()).append(new RString("<br/>"));
-        builder.append(entity.get摘要９()).append(new RString("<br/>"));
-        builder.append(entity.get摘要１０()).append(new RString("<br/>"));
-        builder.append(entity.get摘要１１()).append(new RString("<br/>"));
-        builder.append(entity.get摘要１２()).append(new RString("<br/>"));
-        builder.append(entity.get摘要１３()).append(new RString("<br/>"));
-        builder.append(entity.get摘要１４()).append(new RString("<br/>"));
-        builder.append(entity.get摘要１５()).append(new RString("<br/>"));
-        builder.append(entity.get摘要１６()).append(new RString("<br/>"));
-        builder.append(entity.get摘要１７()).append(new RString("<br/>"));
-        builder.append(entity.get摘要１８()).append(new RString("<br/>"));
-        builder.append(entity.get摘要１９()).append(new RString("<br/>"));
+        builder.append(entity.get摘要１()).append(改行);
+        builder.append(entity.get摘要２()).append(改行);
+        builder.append(entity.get摘要３()).append(改行);
+        builder.append(entity.get摘要４()).append(改行);
+        builder.append(entity.get摘要５()).append(改行);
+        builder.append(entity.get摘要６()).append(改行);
+        builder.append(entity.get摘要７()).append(改行);
+        builder.append(entity.get摘要８()).append(改行);
+        builder.append(entity.get摘要９()).append(改行);
+        builder.append(entity.get摘要１０()).append(改行);
+        builder.append(entity.get摘要１１()).append(改行);
+        builder.append(entity.get摘要１２()).append(改行);
+        builder.append(entity.get摘要１３()).append(改行);
+        builder.append(entity.get摘要１４()).append(改行);
+        builder.append(entity.get摘要１５()).append(改行);
+        builder.append(entity.get摘要１６()).append(改行);
+        builder.append(entity.get摘要１７()).append(改行);
+        builder.append(entity.get摘要１８()).append(改行);
+        builder.append(entity.get摘要１９()).append(改行);
         builder.append(entity.get摘要２０());
         div.getPanelFour().getTxtMutiTekiyo().setValue(builder.toRString());
     }
