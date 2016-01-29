@@ -180,6 +180,10 @@ public class JushochiTokureiRirekiListHandler {
             row.setKaijoDate(kaijoDate);
             row.setKaijoTodokedeDate(kaijoTodokedeDate);
             row.setShoriDate(shoriDate);
+            row.setKaijoJiyuKey(jutokuRirekiDiv.getDdlKaijoJiyu().getSelectedKey());
+            row.setKaijoJiyu(jutokuRirekiDiv.getDdlKaijoJiyu().getSelectedValue());
+            row.setTekiyoJiyuKey(jutokuRirekiDiv.getDdlTekiyoJiyu().getSelectedKey());
+            row.setTekiyoJiyu(jutokuRirekiDiv.getDdlTekiyoJiyu().getSelectedValue());
             jutokuRirekiDiv.getDgJutoku().getDataSource().set(jutokuRirekiDiv.getDgJutoku().getClickedRowId(), row);
         } else if (ViewExecutionStatus.Delete.getValue().equals(status)) {
             dgJutoku_Row row = jutokuRirekiDiv.getDgJutoku().getClickedItem();
@@ -287,14 +291,20 @@ public class JushochiTokureiRirekiListHandler {
      * <li>住所地特例グリッドに読み込み不可を設定</li>
      * <li>適用情報入力パネルと解除情報入力パネルが活性に変更</li>
      * </ul>
+     *
+     * @param btnType
      */
-    public void setupToBeforeInput() {
+    public void setupToBeforeInput(RString btnType) {
         jutokuRirekiDiv.getBtnAdd().setDisabled(true);
         jutokuRirekiDiv.getDgJutoku().setReadOnly(true);
         jutokuRirekiDiv.getJutokuTekiyoInput().setDisplayNone(false);
         jutokuRirekiDiv.getJutokuTekiyoInput().setDisabled(false);
         jutokuRirekiDiv.getJutokuKaijoInput().setDisplayNone(false);
         jutokuRirekiDiv.getJutokuKaijoInput().setDisabled(false);
+        if (new RString("delete").equals(btnType)) {
+            jutokuRirekiDiv.getJutokuTekiyoInput().setDisabled(true);
+            jutokuRirekiDiv.getJutokuKaijoInput().setDisabled(true);
+        }
     }
 
     /**

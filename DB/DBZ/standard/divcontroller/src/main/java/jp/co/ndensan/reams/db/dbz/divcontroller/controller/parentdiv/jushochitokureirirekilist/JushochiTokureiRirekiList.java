@@ -31,7 +31,7 @@ public class JushochiTokureiRirekiList {
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onClick_btnAdd(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
 
-        jutokuRirekiDiv.setupToBeforeInput();
+        jutokuRirekiDiv.setupToBeforeInput(new RString("add"));
         jutokuRirekiDiv.clearInputData();
         jutokuRirekiDiv.setMeisaiInputMode();
         jutokuRirekiDiv.setExecutionStatus(ViewExecutionStatus.Add);
@@ -59,7 +59,7 @@ public class JushochiTokureiRirekiList {
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onSelectByModifyButton_dgJutoku(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
-        handler.setupToBeforeInput();
+        handler.setupToBeforeInput(new RString("modify"));
         handler.showSelectedData();
         handler.setMeisaiInputMode();
         handler.setExecutionStatus(ViewExecutionStatus.Modify);
@@ -75,7 +75,7 @@ public class JushochiTokureiRirekiList {
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onSelectByDeleteButton_dgJutoku(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
-        handler.setupToBeforeInput();
+        handler.setupToBeforeInput(new RString("delete"));
         handler.showSelectedData();
         handler.setMeisaiInputMode();
         handler.setExecutionStatus(ViewExecutionStatus.Delete);
