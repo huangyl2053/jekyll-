@@ -100,7 +100,7 @@ public class TaishouWaritsukeHandler {
      */
     public void 候補者一覧検索() {
         TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
-        boolean is一次判定後 = BusinessConfig.get(DbeConfigKey.マスキングチェックタイミング, SubGyomuCode.DBE認定支援).equals(一次判定後);
+        boolean is一次判定後 = 一次判定後.equals(BusinessConfig.get(DbeConfigKey.マスキングチェックタイミング, SubGyomuCode.DBE認定支援));
         KohoshaIchiranMapperParameter parameter = KohoshaIchiranMapperParameter.createKohoshaIchiranMapperParameter(
                 div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), is一次判定後);
         List<KohoshaIchiran> ichiranList = finder.get候補者一覧(parameter);
@@ -230,20 +230,22 @@ public class TaishouWaritsukeHandler {
     private void ヘッドエリア検索() {
         TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
         TaishouWaritsukeHead waritsukeHead = finder.getヘッドエリア(div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo());
-        div.getTxtShinsakaiName().setValue(waritsukeHead.get審査会名称());
-        div.getTxtGogitaiNumber().setValue(waritsukeHead.get合議体名称());
-        div.getTxtYoteiTeiin().setValue(new Decimal(waritsukeHead.get予定定員()));
-        div.getTxtWaritsukeNinzu().setValue(new Decimal(waritsukeHead.get割付人数()));
-        RString 進捗状況 = ShinsakaiShinchokuJokyo.toValue(waritsukeHead.get進捗状況().getColumnValue()).get名称();
-        div.getTxtStatus().setValue(進捗状況);
-        div.getTxtShinsakaiKaijo().setValue(waritsukeHead.get介護認定審査会開催場所名称());
-        div.getTxtShinsakaiChiku().setValue(waritsukeHead.get地区コード().getColumnValue());
-        div.getTxtShinsakauChikuName().setValue(
-                CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, new CodeShubetsu("5001"), waritsukeHead.get地区コード()));
-        div.getTxtKaisaiDate().setValue(waritsukeHead.get開催予定日());
-        div.getTxtYoteiKaishiTime().setValue(new RTime(waritsukeHead.get予定開始時間()));
-        div.getTxtYoteiShuryoTime().setValue(new RTime(waritsukeHead.get予定終了時間()));
-        set審査会種類_精神科医所属(waritsukeHead.is合議体精神科医存在フラグ());
+        if (waritsukeHead != null) {
+            div.getTxtShinsakaiName().setValue(waritsukeHead.get審査会名称());
+            div.getTxtGogitaiNumber().setValue(waritsukeHead.get合議体名称());
+            div.getTxtYoteiTeiin().setValue(new Decimal(waritsukeHead.get予定定員()));
+            div.getTxtWaritsukeNinzu().setValue(new Decimal(waritsukeHead.get割付人数()));
+            RString 進捗状況 = ShinsakaiShinchokuJokyo.toValue(waritsukeHead.get進捗状況().getColumnValue()).get名称();
+            div.getTxtStatus().setValue(進捗状況);
+            div.getTxtShinsakaiKaijo().setValue(waritsukeHead.get介護認定審査会開催場所名称());
+            div.getTxtShinsakaiChiku().setValue(waritsukeHead.get地区コード().getColumnValue());
+            div.getTxtShinsakauChikuName().setValue(
+                    CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, new CodeShubetsu("5001"), waritsukeHead.get地区コード()));
+            div.getTxtKaisaiDate().setValue(waritsukeHead.get開催予定日());
+            div.getTxtYoteiKaishiTime().setValue(new RTime(waritsukeHead.get予定開始時間()));
+            div.getTxtYoteiShuryoTime().setValue(new RTime(waritsukeHead.get予定終了時間()));
+            set審査会種類_精神科医所属(waritsukeHead.is合議体精神科医存在フラグ());
+        }
     }
 
     private void set審査会種類_精神科医所属(boolean 合議体精神科医存在フラグ) {
