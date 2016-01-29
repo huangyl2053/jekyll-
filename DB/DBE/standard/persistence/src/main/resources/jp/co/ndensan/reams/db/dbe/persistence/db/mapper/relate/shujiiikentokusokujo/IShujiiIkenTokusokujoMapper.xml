@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 主治医意見書のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikentokusokujo.IShujiiIkenTokusokujoMapper">
+     <select id="select督促状件数" resultType="int"
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiikentokusokujo.ShujiiIkenTokusokujoParameter" 
+             fetchSize="500">
+          SELECT
+            COUNT(0) AS count
+          FROM
+            rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
+          INNER JOIN 
+            rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
+            ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
+          INNER JOIN 
+            (
+            SELECT
+                  dbT5301."shinseishoKanriNo" AS shinseishoKanriNo,
+                  MAX(dbT5301."ikenshoIraiRirekiNo") AS temp_RirekiNo
+            FROM 
+                rgdb."DbT5301ShujiiIkenshoIraiJoho" AS dbT5301
+            WHERE dbT5301."logicalDeletedFlag"=FALSE
+            GROUP BY dbT5301."shinseishoKanriNo"
+            ) AS rirekiNoShujiiIkensho
+                ON rirekiNoShujiiIkensho.shinseishoKanriNo = dbT5101."shinseishoKanriNo"
+            INNER JOIN 
+                rgdb."DbT5301ShujiiIkenshoIraiJoho" AS dbT5301Shujii
+                ON dbT5301Shujii."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
+                AND dbT5301Shujii."ikenshoIraiRirekiNo" = rirekiNoShujiiIkensho.temp_RirekiNo
+                AND dbT5301Shujii."ikenshoSakuseiKigenYMD" <![CDATA[<]]> #{基準日}
+            <if test="uses印刷済対象者">
+                AND dbT5301Shujii."ikenshoSakuseiTokusokuYMD"=''
+            </if>
+            INNER JOIN 
+                rgdb."DbT5105NinteiKanryoJoho" AS dbT5105
+                ON dbT5105."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
+                AND dbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+                AND dbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+                AND dbT5105."ikenshoTorokuKanryoYMD" IS NULL
+                AND dbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
+                AND dbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+            WHERE 
+                dbT5101."shoriJotaiKubun" <![CDATA[<>]]> '2'
+                AND dbT5101."shoriJotaiKubun" <![CDATA[<>]]> '1'
+            <if test="uses保険者コード">
+                AND dbT5101."shoKisaiHokenshaNo" = #{保険者コード}
+            </if>
+            <if test="uses主治医医療機関コード">
+                AND dbT5101."shujiiIryokikanCode" = #{主治医医療機関コード}
+            </if>
+            <if test="uses主治医コード">
+                AND dbT5101."shujiiCode" = #{主治医コード}
+            </if>
+    </select>
+    <select id="select督促状対象者件数" resultType="int"
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiikentokusokujo.ShujiiIkenTokusokujoParameter" 
+             fetchSize="500">
+          SELECT
+            COUNT(0) AS count
+          FROM
+            rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
+          INNER JOIN 
+            rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
+                ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
+            INNER JOIN 
+            (
+            SELECT
+                  dbT5301."shinseishoKanriNo" AS shinseishoKanriNo,
+                  MAX(dbT5301."ikenshoIraiRirekiNo") AS temp_RirekiNo
+            FROM 
+                rgdb."DbT5301ShujiiIkenshoIraiJoho" AS dbT5301
+            WHERE dbT5301."logicalDeletedFlag"=FALSE
+            GROUP BY dbT5301."shinseishoKanriNo"
+            ) AS rirekiNoShujiiIkensho
+                ON rirekiNoShujiiIkensho.shinseishoKanriNo = dbT5101."shinseishoKanriNo"
+            INNER JOIN 
+                rgdb."DbT5301ShujiiIkenshoIraiJoho" AS dbT5301Shujii
+                ON dbT5301Shujii."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
+                AND dbT5301Shujii."ikenshoIraiRirekiNo" = rirekiNoShujiiIkensho.temp_RirekiNo
+            <if test="uses印刷期間">
+                AND dbT5301Shujii."ikenshoSakuseiTokusokuYMD" BETWEEN #{印刷期間開始日} AND #{印刷期間終了日}
+            </if>
+            <if test="uses印刷期間From">
+                AND dbT5301Shujii."ikenshoSakuseiTokusokuYMD" <![CDATA[>=]]> #{印刷期間開始日} 
+            </if>
+            <if test="uses印刷期間To">
+                AND dbT5301Shujii."ikenshoSakuseiTokusokuYMD" <![CDATA[<=]]> #{印刷期間終了日}
+            </if>
+            INNER JOIN 
+                rgdb."DbT5105NinteiKanryoJoho" AS dbT5105
+                ON dbT5105."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
+                AND dbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+                AND dbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+                AND dbT5105."ikenshoTorokuKanryoYMD" IS NULL
+                AND dbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
+                AND dbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+            WHERE 
+                dbT5101."shoriJotaiKubun" <![CDATA[<>]]> '2'
+                AND dbT5101."shoriJotaiKubun" <![CDATA[<>]]> '1'
+            <if test="uses保険者コード">
+                AND dbT5101."shoKisaiHokenshaNo" = #{保険者コード}
+            </if>
+            <if test="uses主治医医療機関コード">
+                AND dbT5101."shujiiIryokikanCode" = #{主治医医療機関コード}
+            </if>
+            <if test="uses主治医コード">
+                AND dbT5101."shujiiCode" = #{主治医コード}
+            </if>
+    </select>
+</mapper>
