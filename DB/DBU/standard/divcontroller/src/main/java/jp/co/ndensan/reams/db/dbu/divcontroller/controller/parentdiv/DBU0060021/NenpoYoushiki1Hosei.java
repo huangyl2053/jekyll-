@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHouk
 import jp.co.ndensan.reams.db.dbu.definition.enumeratedtype.DbuViewStateKey;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.SearchJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060021.DBU0060021StateName;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060021.DBU0060021TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060021.NenpoYoushiki1HoseiDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0130011.DBU0130011TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0060021.NenpoYoushiki1HoseiHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokunenpo.JigyoHokokuNenpoHoseiHakoManager;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
@@ -61,8 +61,7 @@ public class NenpoYoushiki1Hosei {
             }
             if (new RString(UrInformationMessages.該当データなし.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-                // TODO QA555「OK」をクリックすれば、検索画面に遷移する
-                return ResponseData.of(div).forwardWithEventName(DBU0130011TransitionEventName.対象者検索に戻る).respond();
+                return ResponseData.of(div).forwardWithEventName(DBU0060021TransitionEventName.検索に戻る).respond();
             }
         }
         Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> jigyoHokokuTokeiData = Models.create(jigyoHokokuTokeiDataList);
@@ -112,16 +111,14 @@ public class NenpoYoushiki1Hosei {
         NenpoYoushiki1HoseiHandler handler = createHandler(div);
         List<JigyoHokokuTokeiData> 修正データの取得リスト = handler.修正データの取得();
         if (修正データの取得リスト.isEmpty()) {
-            // TODO  事業報告（年報）補正、発行①_検索画面へ遷移
-            return ResponseData.of(div).forwardWithEventName(DBU0130011TransitionEventName.対象者検索に戻る).respond();
+            return ResponseData.of(div).forwardWithEventName(DBU0060021TransitionEventName.検索に戻る).respond();
         }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-            // TODO  事業報告（年報）補正、発行①_検索画面へ遷移
-            return ResponseData.of(div).forwardWithEventName(DBU0130011TransitionEventName.対象者検索に戻る).respond();
+            return ResponseData.of(div).forwardWithEventName(DBU0060021TransitionEventName.検索に戻る).respond();
         }
         return ResponseData.of(div).respond();
     }
