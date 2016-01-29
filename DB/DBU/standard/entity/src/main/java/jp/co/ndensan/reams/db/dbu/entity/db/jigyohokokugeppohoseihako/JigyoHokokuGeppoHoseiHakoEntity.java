@@ -7,7 +7,7 @@
 package jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako;
 
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,9 +19,9 @@ import lombok.Setter;
 @Setter
 public class JigyoHokokuGeppoHoseiHakoEntity {
     private DbT7021JigyoHokokuTokeiDataEntity entity;
-    private Decimal yoshiCode;
+    private RString yoshiCode;
 
-    public JigyoHokokuGeppoHoseiHakoEntity(DbT7021JigyoHokokuTokeiDataEntity entity, Decimal yoshiCode) {
+    public JigyoHokokuGeppoHoseiHakoEntity(DbT7021JigyoHokokuTokeiDataEntity entity, RString yoshiCode) {
         this.entity = entity;
         this.yoshiCode = yoshiCode;
     }

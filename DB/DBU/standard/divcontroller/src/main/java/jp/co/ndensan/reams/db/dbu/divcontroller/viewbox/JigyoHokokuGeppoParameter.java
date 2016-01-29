@@ -18,7 +18,7 @@ import lombok.Getter;
  *
  */
 @Getter
-public class JigyoHokokuGeppoHoseiHako implements Serializable {
+public class JigyoHokokuGeppoParameter implements Serializable {
 
     private final FlexibleYear hokokuYSeireki;
     private final RString hokokuM;
@@ -35,7 +35,7 @@ public class JigyoHokokuGeppoHoseiHako implements Serializable {
     private final RString hokenShaCode;
     
 
-    public JigyoHokokuGeppoHoseiHako(FlexibleYear hokokuYSeireki, RString hokokuM, FlexibleYear shukeiTaishoYSeireki,
+    public JigyoHokokuGeppoParameter(FlexibleYear hokokuYSeireki, RString hokokuM, FlexibleYear shukeiTaishoYSeireki,
             RString shukeiTaishoM, RString toukeiTaishoKubun, LasdecCode shichosonCode, Code hyoNo, Code shukeiNo,
             TextBoxFlexibleDate txtHokokuYM, TextBoxFlexibleDate txtShukeiTaishoYM, RString shichosonName, RString hokenShaCode, RString hdnYoshikiCode) {
         this.hokokuYSeireki = hokokuYSeireki;
