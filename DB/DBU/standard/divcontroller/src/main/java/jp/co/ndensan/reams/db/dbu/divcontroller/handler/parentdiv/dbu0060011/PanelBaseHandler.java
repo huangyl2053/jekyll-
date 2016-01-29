@@ -6,9 +6,6 @@ import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHouk
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.PanelBaseDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.dgHoseitaishoYoshiki_Row;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyohokokuNenpoHoseiHyoji;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -110,35 +107,6 @@ public class PanelBaseHandler {
                             RDate.getNowDate().getMonthValue(),
                             RDate.getNowDate().getDayValue()));
         }
-    }
-
-    /**
-     * 遷移先画面を取得します。
-     *
-     * @return 遷移先画面
-     *
-     */
-    public ResponseData<PanelBaseDiv> get遷移先画面() {
-        RString 様式種類 = div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getSelectedItems().get(0).getTxtToukeiTaishoKubun();
-        if ((0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.保険者_所得段階別第１号被保険者数.get名称()))
-                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.構成市町村_所得段階別第１号被保険者数.get名称()))
-                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.旧市町村_所得段階別第１号被保険者数.get名称()))) {
-            // TODO QA:555  UIContainerを存在しない
-            throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("様式１補正画面に遷移"));
-        }
-        if ((0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.保険者_現物分_市町村特別給付.get名称()))
-                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.構成市町村_現物分_市町村特別給付.get名称()))
-                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.旧市町村_現物分_市町村特別給付.get名称()))) {
-            // TODO QA:555  UIContainerを存在しない
-            throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("様式2の８画面に遷移"));
-        }
-        if ((0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.保険者_保険料収納状況_保険給付支払状況.get名称()))
-                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.構成市町村_保険料収納状況_保険給付支払状況.get名称()))
-                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.旧市町村_保険料収納状況_保険給付支払状況.get名称()))) {
-            // TODO QA:555  UIContainerを存在しない
-            throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("様式３画面に遷移"));
-        }
-        return ResponseData.of(div).respond();
     }
 
     /**
