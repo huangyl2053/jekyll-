@@ -6,9 +6,10 @@
 package jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijinashi;
 
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshiharaiyotei.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 償還払い支給（不支給）決定通知書(支払予定日あり）のEditorです。
+ * 償還払い支給（不支給）決定通知書のEditorです。
  */
 public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiEditor implements IShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiEditor {
 
@@ -76,12 +77,15 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiEditor implements ISho
         source.shumokuTitle = item.getShumokuTitle();
         source.kouzaShu = item.getKouzaShu();
         source.bangoTitle = item.getBangoTitle();
+        // TODO QA600 口座払の場合「**************」で表示
         source.kouzaNo = item.getKouzaNo();
         source.shiharaiStartYMD = item.getShiharaiStartYMD();
         source.kouzaMeigi = item.getKouzaMeigi();
         source.torikeshiShiharaikikan = item.getTorikeshiShiharaikikan();
         source.shiharaiEndYMD = item.getShiharaiEndYMD();
-        source.karaFugo = item.getKaraFugo();
+        if (!RString.isNullOrEmpty(item.getShiharaiStartHMS()) && !RString.isNullOrEmpty(item.getShiharaiEndHMS())) {
+            source.karaFugo = item.getKaraFugo();
+        }
         source.shiharaiStartHMS = item.getShiharaiStartHMS();
         source.shiharaiEndHMS = item.getShiharaiEndHMS();
         source.tsuchibun2 = item.getTsuchibun2();

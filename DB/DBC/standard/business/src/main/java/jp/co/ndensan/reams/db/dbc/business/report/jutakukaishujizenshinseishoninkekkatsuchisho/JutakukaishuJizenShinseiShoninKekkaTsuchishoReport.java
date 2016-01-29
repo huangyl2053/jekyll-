@@ -25,8 +25,7 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoReport extends Report<J
     public static JutakukaishuJizenShinseiShoninKekkaTsuchishoReport createFrom(
             JutakukaishuJizenShinseiShoninKekkaTsuchishoItem item) {
 
-        return new JutakukaishuJizenShinseiShoninKekkaTsuchishoReport(
-                item);
+        return new JutakukaishuJizenShinseiShoninKekkaTsuchishoReport(item);
     }
 
     /**

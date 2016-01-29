@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.jutakukaishujizenshinseishoninkekkatsuchisho;
 
+import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jutakukaishujizenshinseishoninkekka.JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource;
 
 /**
@@ -36,7 +37,7 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoEditor implements IJuta
         source.hihokenshaName = item.getHihokenshaName();
         source.hihokenshaNo = item.getHihokenshaNo();
         source.uketsukeYMD = item.getUketsukeYMD();
-        source.shoninKbn = item.getShoninKbn();
+        source.shoninKbn = ShoninKubun.toValue(item.getShoninKbn()).get名称();
         source.shoninYMD = item.getShoninYMD();
         source.fushoninRiyu = item.getFushoninRiyu();
         source.kyufuShurui = item.getKyufuShurui();

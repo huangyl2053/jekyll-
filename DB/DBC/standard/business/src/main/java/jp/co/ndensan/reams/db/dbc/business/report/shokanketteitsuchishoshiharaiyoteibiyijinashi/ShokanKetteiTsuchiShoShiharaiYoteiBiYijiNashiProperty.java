@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharai
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshiharaiyotei.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -19,12 +20,12 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
- * 償還払い支給（不支給）決定通知書(支払予定日あり）のプロパティです。
+ * 償還払い支給（不支給）決定通知書のプロパティです。
  */
 public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiProperty
         extends ReportPropertyBase<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource> {
 
-    private static final ReportId ID = new ReportId("DBC100002");
+    private static final ReportId ID = ReportIdDBC.DBC100002.getReportId();
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("title")));
 
     public ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiProperty() {

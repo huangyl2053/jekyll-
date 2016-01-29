@@ -20,7 +20,7 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport extends Report<Sh
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 償還払い支給（不支給）決定通知書(支払予定日あり）のITEM
+     * @param itemList 償還払い支給（不支給）決定通知書(支払予定日あり）のITEMリスト
      * @return 償還払い支給（不支給）決定通知書(支払予定日あり）のReport
      */
     public static ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport createFrom(
@@ -32,7 +32,7 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport extends Report<Sh
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 償還払い支給（不支給）決定通知書(支払予定日あり）のITEM
+     * @param itemList 償還払い支給（不支給）決定通知書(支払予定日あり）のITEMリスト
      */
     protected ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport(
             List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> itemList) {

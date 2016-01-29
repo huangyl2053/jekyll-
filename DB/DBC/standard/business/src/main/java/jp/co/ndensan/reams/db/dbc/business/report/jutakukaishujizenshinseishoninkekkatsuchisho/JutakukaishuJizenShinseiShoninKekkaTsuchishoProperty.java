@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.jutakukaishujizenshinseishoni
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jutakukaishujizenshinseishoninkekka.JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -21,9 +22,10 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 /**
  * 住宅改修事前申請承認結果通知書のプロパティです。
  */
-public class JutakukaishuJizenShinseiShoninKekkaTsuchishoProperty extends ReportPropertyBase<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> {
+public class JutakukaishuJizenShinseiShoninKekkaTsuchishoProperty
+        extends ReportPropertyBase<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> {
 
-    private static final ReportId ID = new ReportId("DBC100001");
+    private static final ReportId ID = ReportIdDBC.DBC100001.getReportId();
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("title")));
 
     public JutakukaishuJizenShinseiShoninKekkaTsuchishoProperty() {

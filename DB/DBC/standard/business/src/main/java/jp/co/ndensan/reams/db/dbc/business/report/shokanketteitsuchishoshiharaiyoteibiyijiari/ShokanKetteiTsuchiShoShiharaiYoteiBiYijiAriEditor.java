@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari;
 
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshiharaiyotei.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払い支給（不支給）決定通知書(支払予定日あり）Editorです。
@@ -80,9 +81,12 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor implements IShoka
         source.kouzaNo = item.getKouzaNo();
         source.kouzaMeigi = item.getKouzaMeigi();
         source.shiharaiStartYMD = item.getShiharaiStartYMD();
+        // TODO QA600 口座払の場合「**************」で表示
         source.torikeshiShiharaikikan = item.getTorikeshiShiharaikikan();
         source.shiharaiEndYMD = item.getShiharaiEndYMD();
-        source.karaFugo = item.getKaraFugo();
+        if (!RString.isNullOrEmpty(item.getShiharaiStartHMS()) && !RString.isNullOrEmpty(item.getShiharaiEndHMS())) {
+            source.karaFugo = item.getKaraFugo();
+        }
         source.shiharaiStartHMS = item.getShiharaiStartHMS();
         source.shiharaiEndHMS = item.getShiharaiEndHMS();
         source.sihaYoYmd = item.getSihaYoYmd();

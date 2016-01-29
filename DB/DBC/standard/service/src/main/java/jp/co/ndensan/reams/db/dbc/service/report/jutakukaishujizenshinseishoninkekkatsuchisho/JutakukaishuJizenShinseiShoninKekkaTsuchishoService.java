@@ -40,21 +40,22 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoService {
         JutakukaishuJizenShinseiShoninKekkaTsuchishoProperty property = new JutakukaishuJizenShinseiShoninKekkaTsuchishoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> assembler = createAssembler(property, reportManager)) {
-                INinshoshaSourceBuilderCreator builderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                builderCreator.create(GyomuCode.DB介護保険, RString.EMPTY, RDate.getNowDate(), assembler.getImageFolderPath()).buildSource();
-                ReportSourceWriter<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
+                ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
+                        RDate.getNowDate(), assembler.getImageFolderPath());
+                ReportSourceWriter<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> reportSourceWriter
+                        = new ReportSourceWriter(assembler);
                 JutakukaishuJizenShinseiShoninKekkaTsuchishoReport.createFrom(item).writeBy(reportSourceWriter);
             }
             return reportManager.publish();
         }
     }
 
-    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T>
-            createAssembler(IReportProperty<T> property, ReportManager manager) {
-
+    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
+            IReportProperty<T> property, ReportManager manager) {
         ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
-        for (BreakAggregator<? super T, ?> breaks : property.breakers()) {
-            builder.addBreak(breaks);
+        for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
+            builder.addBreak(breaker);
         }
         builder.isHojinNo(property.containsHojinNo());
         builder.isKojinNo(property.containsKojinNo());
