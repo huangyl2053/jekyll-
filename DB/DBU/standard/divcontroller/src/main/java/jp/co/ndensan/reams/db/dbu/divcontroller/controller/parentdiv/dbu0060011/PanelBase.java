@@ -6,6 +6,7 @@ import jp.co.ndensan.reams.db.dbu.business.jigyohokokunenpo.JigyoHokokuNenpoResu
 import jp.co.ndensan.reams.db.dbu.business.jigyohokokunenpo.ShichosonCodeNameResult;
 import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.definition.enumeratedtype.DbuViewStateKey;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.DBU0060011TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.PanelBaseDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.dgHoseitaishoYoshiki_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0060011.PanelBaseHandler;
@@ -142,8 +143,7 @@ public class PanelBase {
     public ResponseData<PanelBaseDiv> onSelectByModifyButton_dgHoseitaishoYoshiki(PanelBaseDiv baseDiv) {
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity = getHandler(baseDiv).saveEntityToViewState(処理種別_修正);
         ViewStateHolder.put(DbuViewStateKey.補正検索画面情報, entity);
-        getHandler(baseDiv).get遷移先画面();
-        return ResponseData.of(baseDiv).respond();
+        return get遷移先画面(baseDiv);
     }
 
     /**
@@ -155,13 +155,37 @@ public class PanelBase {
     public ResponseData<PanelBaseDiv> onSelectByDeleteButton_dgHoseitaishoYoshiki(PanelBaseDiv baseDiv) {
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity = getHandler(baseDiv).saveEntityToViewState(処理種別_削除);
         ViewStateHolder.put(DbuViewStateKey.補正検索画面情報, entity);
-        getHandler(baseDiv).get遷移先画面();
+        return get遷移先画面(baseDiv);
+    }
+
+    /**
+     * 遷移先画面を取得します。
+     *
+     * @param baseDiv 事業報告（年報）補正、発行_検索Div
+     * @return 遷移先画面
+     */
+    private ResponseData<PanelBaseDiv> get遷移先画面(PanelBaseDiv baseDiv) {
+        RString 様式種類 = baseDiv.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getSelectedItems().get(0).getTxtToukeiTaishoKubun();
+        if ((0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.保険者_所得段階別第１号被保険者数.get名称()))
+                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.構成市町村_所得段階別第１号被保険者数.get名称()))
+                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.旧市町村_所得段階別第１号被保険者数.get名称()))) {
+            return ResponseData.of(baseDiv).forwardWithEventName(DBU0060011TransitionEventName.様式１に遷移).respond();
+        }
+        if ((0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.保険者_現物分_市町村特別給付.get名称()))
+                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.構成市町村_現物分_市町村特別給付.get名称()))
+                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.旧市町村_現物分_市町村特別給付.get名称()))) {
+            return ResponseData.of(baseDiv).forwardWithEventName(DBU0060011TransitionEventName.様式２の８に遷移).respond();
+        }
+        if ((0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.保険者_保険料収納状況_保険給付支払状況.get名称()))
+                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.構成市町村_保険料収納状況_保険給付支払状況.get名称()))
+                || (0 == 様式種類.compareTo(JigyohokokuNenpoHoseiHyoji.旧市町村_保険料収納状況_保険給付支払状況.get名称()))) {
+            return ResponseData.of(baseDiv).forwardWithEventName(DBU0060011TransitionEventName.様式３に遷移).respond();
+        }
         return ResponseData.of(baseDiv).respond();
     }
 
     private void init初期状態(PanelBaseDiv baseDiv) {
         getHandler(baseDiv).set報告年度と集計年度();
-        createInstanceOfFinder().getShichosonCodeNameList();
         List<ShichosonCodeNameResult> 市町村情報リスト = createInstanceOfFinder().getShichosonCodeNameList().records();
         if (市町村情報リスト.isEmpty()) {
             baseDiv.getTaishokensaku().getDdlShichoson().setVisible(false);
@@ -172,6 +196,9 @@ public class PanelBase {
             }
             getHandler(baseDiv).set市町村情報(shichosonList);
         }
+
+        事業報告集計一覧データリスト = new ArrayList<>();
+        検索一覧データの設定(baseDiv, 事業報告集計一覧データリスト);
     }
 
     private KeyValueDataSource setDdlShichoson(ShichosonCodeNameResult shichosonCodeNameResult) {
