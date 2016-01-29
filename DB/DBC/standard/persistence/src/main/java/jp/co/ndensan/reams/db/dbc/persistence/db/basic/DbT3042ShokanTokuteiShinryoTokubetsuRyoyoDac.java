@@ -172,6 +172,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoDac implements ISaveable<D
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号))).
+                order(by(DbT3042ShokanTokuteiShinryoTokubetsuRyoyo.renban, Order.DESC)).
                 toList(DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity.class);
     }
 

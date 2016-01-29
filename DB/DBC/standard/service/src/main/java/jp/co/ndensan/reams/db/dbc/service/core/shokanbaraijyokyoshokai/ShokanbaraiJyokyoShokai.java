@@ -66,7 +66,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 償還払い状況照会のクラス
  *
- * @author PANHE
+ * @author 潘鶴
  */
 public class ShokanbaraiJyokyoShokai {
 
@@ -212,7 +212,7 @@ public class ShokanbaraiJyokyoShokai {
      * @param 明細番号
      * @return List<ShokanKihon>
      */
-    public List<ShokanKihon> getShokanbarayiSeikyukihonDetail(
+    public ShokanKihon getShokanbarayiSeikyukihonDetail(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
@@ -222,11 +222,9 @@ public class ShokanbaraiJyokyoShokai {
 
         DbT3038ShokanKihonEntity entity = dbT3038Dac.selectByKey(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         if (entity == null) {
-            return new ArrayList<>();
+            return null;
         }
-        List<ShokanKihon> shokanKihon = new ArrayList<>();
-        shokanKihon.add(new ShokanKihon(entity));
-        return shokanKihon;
+        return new ShokanKihon(entity);
     }
 
     /**
@@ -564,7 +562,7 @@ public class ShokanbaraiJyokyoShokai {
      * @param 連番
      * @return List<ShokanShoteiShikkanShisetsuRyoyo>
      */
-    public List<ShokanShoteiShikkanShisetsuRyoyo> getKinkyujiShisetsuRyoyoData1(
+    public List<ShokanShoteiShikkanShisetsuRyoyo> getShoteiShikanShisetsuRyoyohiEtcData(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
@@ -665,7 +663,7 @@ public class ShokanbaraiJyokyoShokai {
                 shokanMeisai.add(new ShokanMeisai(entity));
             }
         } else {
-            DbT3039ShokanMeisaiEntity entity = dbT3039Dac.selectByKey(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, 連番);
+            DbT3039ShokanMeisaiEntity entity = dbT3039Dac.selectByKeyOrder(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, 連番);
             if (entity == null) {
                 return new ArrayList<>();
             }
