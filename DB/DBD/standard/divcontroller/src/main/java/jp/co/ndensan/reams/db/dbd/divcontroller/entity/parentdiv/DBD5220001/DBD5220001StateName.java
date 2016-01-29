@@ -16,7 +16,8 @@ public enum DBD5220001StateName implements IStateEnumerations {
 
     NoChange(""),
     検索("検索"),
-    通知書("通知書");
+    通知書("通知書"),
+    完了("完了");
 
     private final RString name;
 
