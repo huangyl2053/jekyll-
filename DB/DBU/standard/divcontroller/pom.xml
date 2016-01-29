@@ -28,6 +28,10 @@
             <artifactId>DbuPersistence</artifactId>
         </dependency>
         <!-- DBA -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dba</groupId>
+            <artifactId>DbaService</artifactId>
+        </dependency>
         <!-- DBB -->
         <!-- DBC -->
         <!-- DBD -->
