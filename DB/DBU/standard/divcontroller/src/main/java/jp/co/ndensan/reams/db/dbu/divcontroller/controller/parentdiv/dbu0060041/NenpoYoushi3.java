@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbu.definition.core.nenpoyoushi3.NenpoYoushi3ViewS
 import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.definition.enumeratedtype.DbuViewStateKey;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.SearchJigyoHokokuNenpo;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.DBU0060011TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060041.DBU0060041StateName;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060041.DBU0060041TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060041.NenpoYoushi3Div;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0060041.NenpoYoushi3Handler;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokunenpo.JigyoHokokuNenpoHoseiHakoManager;
@@ -79,8 +79,7 @@ public class NenpoYoushi3 {
             }
             if (new RString(UrInformationMessages.該当データなし.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-                // TODO  QA555「OK」をクリックすれば、検索画面に遷移する
-                return ResponseData.of(div).forwardWithEventName(DBU0060011TransitionEventName.様式３に遷移).respond();
+                return ResponseData.of(div).forwardWithEventName(DBU0060041TransitionEventName.検索に戻る).respond();
             }
         }
         return ResponseData.of(div).respond();
@@ -165,8 +164,7 @@ public class NenpoYoushi3 {
     public ResponseData<NenpoYoushi3Div> onClick_modoru(NenpoYoushi3Div div) {
         List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データ();
         if (修正データリスト == null || 修正データリスト.isEmpty()) {
-            // TODO  QA555「OK」をクリックすれば、検索画面に遷移する
-            return ResponseData.of(div).forwardWithEventName(DBU0060011TransitionEventName.様式３に遷移).respond();
+            return ResponseData.of(div).forwardWithEventName(DBU0060041TransitionEventName.検索に戻る).respond();
         }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
@@ -175,8 +173,7 @@ public class NenpoYoushi3 {
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            // TODO  QA555「OK」をクリックすれば、検索画面に遷移する
-            return ResponseData.of(div).forwardWithEventName(DBU0060011TransitionEventName.様式３に遷移).respond();
+            return ResponseData.of(div).forwardWithEventName(DBU0060041TransitionEventName.検索に戻る).respond();
         }
         return ResponseData.of(div).respond();
     }
