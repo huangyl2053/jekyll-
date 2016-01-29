@@ -518,9 +518,9 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
         setMode_BtnDisplayMode(displayMode);
     }
 
-    public void setupToBeforeInput() {
+    public void setupToBeforeInput(RString btnType) {
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
-        handler.setupToBeforeInput();
+        handler.setupToBeforeInput(btnType);
 
     }
 
