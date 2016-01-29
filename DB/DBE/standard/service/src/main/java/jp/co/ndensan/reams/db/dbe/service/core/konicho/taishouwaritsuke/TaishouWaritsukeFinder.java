@@ -59,7 +59,7 @@ public class TaishouWaritsukeFinder {
         if (!list.isEmpty()) {
             return new TaishouWaritsukeHead(list.get(0));
         } else {
-            return new TaishouWaritsukeHead(new TaishouWaritsukeHeadEntity());
+            return null;
         }
     }
 
