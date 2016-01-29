@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0810021;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810021.KihonInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810021.KihonInfoHandler;
@@ -68,10 +67,10 @@ public class KihonInfo {
         getHandler(div).setヘッダーエリア(サービス年月, 事業者番号,
                 ViewStateHolder.get(ViewStateKeys.申請日, RString.class), 明細番号, 証明書);
 
-        List<ShokanKihon> shokanKihonList = ShokanbaraiJyokyoShokai.createInstance()
+        ShokanKihon shokanKihon = ShokanbaraiJyokyoShokai.createInstance()
                 .getShokanbarayiSeikyukihonDetail(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         // TODO サービス提供証明書画面に遷移する
-        if (shokanKihonList == null || shokanKihonList.isEmpty()) {
+        if (shokanKihon == null) {
             return ResponseData.of(div).addMessage(UrErrorMessages.該当データなし.getMessage()).respond();
         }
         if (new RString(UrErrorMessages.該当データなし.getMessage().getCode()).equals(
@@ -81,7 +80,7 @@ public class KihonInfo {
 
         KaigoJigyoshaReturnEntity kaigoJigyoshaEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getKaigoJigyoshaInfo(サービス年月, 事業者番号);
-        getHandler(div).set基本内容エリア(shokanKihonList, kaigoJigyoshaEntity, サービス年月);
+        getHandler(div).set基本内容エリア(shokanKihon, kaigoJigyoshaEntity, サービス年月);
 
         ShikibetsuNoKanriEntity shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShikibetsubangoKanri(サービス年月, 様式番号);

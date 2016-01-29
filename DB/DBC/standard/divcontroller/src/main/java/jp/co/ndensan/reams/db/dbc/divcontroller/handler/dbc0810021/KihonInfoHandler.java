@@ -94,75 +94,73 @@ public class KihonInfoHandler {
         div.getPanelTwo().getTxtShomeisho().setValue(証明書);
     }
 
-    public void set基本内容エリア(List<ShokanKihon> shokanKihonEntity, KaigoJigyoshaReturnEntity kaigoJigyoshaEntity,
+    public void set基本内容エリア(ShokanKihon shokanKihon, KaigoJigyoshaReturnEntity kaigoJigyoshaEntity,
             FlexibleYearMonth サービス年月) {
 
-        for (ShokanKihon shokanKihon : shokanKihonEntity) {
-            UzT0007CodeEntity code = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                    new CodeShubetsu(new RString("0001")), new Code(shokanKihon.get居宅サービス計画作成区分コード()));
-            div.getPanelKihon().getPanelKyotaku().getTxtKeikakuSakuseiKubun().setValue(code.getコード名称());
-            if (有.equals(shokanKihon.get旧措置入所者特例コード())) {
-                List<RString> sources = new ArrayList<>();
-                sources.add(new RString("key0"));
-                div.getPanelKihon().getPanelKyotaku().getChkKyusochi().setSelectedItemsByKey(sources);
-            }
-
-            if (!自己作成.equals(shokanKihon.get居宅サービス計画作成区分コード())) {
-                div.getPanelKihon().getPanelKyotaku().getTxtJigyosha().setValue(shokanKihon.get事業者番号().value());
-                div.getPanelKihon().getPanelKyotaku().getTxtJigyoshaName().setValue(kaigoJigyoshaEntity.getEntity()
-                        .getJigyoshaName().value());
-            }
-            div.getPanelKihon().getPanelKyotaku().getTxtHokenKyufuritsu().setValue(shokanKihon.get保険給付率().value());
-            div.getPanelKihon().getPanelServiceKikan().getTxtServiceKikan()
-                    .setFromValue(new RDate(shokanKihon.get開始年月日().toString()));
-            div.getPanelKihon().getPanelServiceKikan().getTxtServiceKikan()
-                    .setToValue(new RDate(shokanKihon.get中止年月日().toString()));
-
-            List<RString> list = new ArrayList<>();
-            list.add(new RString("2171"));
-            list.add(new RString("2172"));
-            list.add(new RString("2173"));
-            list.add(new RString("2174"));
-            list.add(new RString("2181"));
-            list.add(new RString("2182"));
-            list.add(new RString("2183"));
-            list.add(new RString("2191"));
-            list.add(new RString("2192"));
-            list.add(new RString("2193"));
-            list.add(new RString("2194"));
-            list.add(new RString("2195"));
-            list.add(new RString("21A1"));
-            list.add(new RString("21A2"));
-            list.add(new RString("21A3"));
-            RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-            if (平成２１年４月.isBeforeOrEquals(サービス年月) && list.contains(様式番号)) {
-                div.getPanelKihon().getPanelServiceKikan().getTxtCyushiRiyu().setVisible(false);
-            } else {
-                UzT0007CodeEntity code4 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                        new CodeShubetsu(new RString("0009")), new Code(shokanKihon.get中止理由_入所_院前の状況コード()));
-                div.getPanelKihon().getPanelServiceKikan().getTxtCyushiRiyu().setValue(code4.getコード名称());
-            }
-            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().setValue(new RDate(
-                    shokanKihon.get入所_院年月日().toString()));
-            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoJitsuNissu().setValue(
-                    shokanKihon.get入所_院実日数());
-            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoYMD().setValue(new RDate(
-                    shokanKihon.get退所_院年月日().toString()));
-            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtGaigakuNissu().setValue(shokanKihon.get外泊日数());
-            if (サービス年月.isBefore(平成２１年４月)
-                    || (平成２１年４月.isBeforeOrEquals(サービス年月)
-                    && !list.contains(様式番号))) {
-                div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoMaeState().setVisible(false);
-            } else {
-                UzT0007CodeEntity code3 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                        new CodeShubetsu(new RString("0048")), new Code(shokanKihon.get中止理由_入所_院前の状況コード()));
-                div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoMaeState()
-                        .setValue(code3.getコード名称());
-            }
-            UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                    new CodeShubetsu(new RString("0010")), new Code(shokanKihon.get退所_院後の状態コード()));
-            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoMaeState()
-                    .setValue(code2.getコード名称());
+        UzT0007CodeEntity code = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
+                new CodeShubetsu(new RString("0001")), new Code(shokanKihon.get居宅サービス計画作成区分コード()));
+        div.getPanelKihon().getPanelKyotaku().getTxtKeikakuSakuseiKubun().setValue(code.getコード名称());
+        if (有.equals(shokanKihon.get旧措置入所者特例コード())) {
+            List<RString> sources = new ArrayList<>();
+            sources.add(new RString("key0"));
+            div.getPanelKihon().getPanelKyotaku().getChkKyusochi().setSelectedItemsByKey(sources);
         }
+
+        if (!自己作成.equals(shokanKihon.get居宅サービス計画作成区分コード())) {
+            div.getPanelKihon().getPanelKyotaku().getTxtJigyosha().setValue(shokanKihon.get事業者番号().value());
+            div.getPanelKihon().getPanelKyotaku().getTxtJigyoshaName().setValue(kaigoJigyoshaEntity.getEntity()
+                    .getJigyoshaName().value());
+        }
+        div.getPanelKihon().getPanelKyotaku().getTxtHokenKyufuritsu().setValue(shokanKihon.get保険給付率().value());
+        div.getPanelKihon().getPanelServiceKikan().getTxtServiceKikan()
+                .setFromValue(new RDate(shokanKihon.get開始年月日().toString()));
+        div.getPanelKihon().getPanelServiceKikan().getTxtServiceKikan()
+                .setToValue(new RDate(shokanKihon.get中止年月日().toString()));
+
+        List<RString> list = new ArrayList<>();
+        list.add(new RString("2171"));
+        list.add(new RString("2172"));
+        list.add(new RString("2173"));
+        list.add(new RString("2174"));
+        list.add(new RString("2181"));
+        list.add(new RString("2182"));
+        list.add(new RString("2183"));
+        list.add(new RString("2191"));
+        list.add(new RString("2192"));
+        list.add(new RString("2193"));
+        list.add(new RString("2194"));
+        list.add(new RString("2195"));
+        list.add(new RString("21A1"));
+        list.add(new RString("21A2"));
+        list.add(new RString("21A3"));
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        if (平成２１年４月.isBeforeOrEquals(サービス年月) && list.contains(様式番号)) {
+            div.getPanelKihon().getPanelServiceKikan().getTxtCyushiRiyu().setVisible(false);
+        } else {
+            UzT0007CodeEntity code4 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
+                    new CodeShubetsu(new RString("0009")), new Code(shokanKihon.get中止理由_入所_院前の状況コード()));
+            div.getPanelKihon().getPanelServiceKikan().getTxtCyushiRiyu().setValue(code4.getコード名称());
+        }
+        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().setValue(new RDate(
+                shokanKihon.get入所_院年月日().toString()));
+        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoJitsuNissu().setValue(
+                shokanKihon.get入所_院実日数());
+        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoYMD().setValue(new RDate(
+                shokanKihon.get退所_院年月日().toString()));
+        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtGaigakuNissu().setValue(shokanKihon.get外泊日数());
+        if (サービス年月.isBefore(平成２１年４月)
+                || (平成２１年４月.isBeforeOrEquals(サービス年月)
+                && !list.contains(様式番号))) {
+            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoMaeState().setVisible(false);
+        } else {
+            UzT0007CodeEntity code3 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
+                    new CodeShubetsu(new RString("0048")), new Code(shokanKihon.get中止理由_入所_院前の状況コード()));
+            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoMaeState()
+                    .setValue(code3.getコード名称());
+        }
+        UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
+                new CodeShubetsu(new RString("0010")), new Code(shokanKihon.get退所_院後の状態コード()));
+        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoMaeState()
+                .setValue(code2.getコード名称());
     }
 }
