@@ -92,7 +92,6 @@ public class GaikyoTokkiNyuroku {
     public ResponseData<GaikyoTokkiNyurokuDiv> onClick_btnUpdate(GaikyoTokkiNyurokuDiv div) {
 
         // TODO 未入力の判断 QA 74885
-
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
@@ -230,14 +229,15 @@ public class GaikyoTokkiNyuroku {
 
         GaikyoTokkiManager manager = new GaikyoTokkiManager();
         GaikyoTokki 認定調査票_概況特記 = manager.get認定調査票_概況特記(getHandler(div).getTemp_申請書管理番号(), getHandler(div).getTemp_認定調査履歴番号());
+        if (認定調査票_概況特記 == null) {
+            認定調査票_概況特記 = new GaikyoTokki(getHandler(div).getTemp_申請書管理番号(), getHandler(div).getTemp_認定調査履歴番号());
+        }
         GaikyoTokkiBuilder builder = 認定調査票_概況特記.createBuilderForEdit();
-
         // TODO QA 74645 住宅改修
         builder.set概況特記事項_主訴(div.getTxtChosaTaishoShuso().getValue());
         builder.set概況特記事項_家族状況(div.getTxtChosaTishoKazokuJokyo().getValue());
         builder.set概況特記事項_居住環境(div.getTxtChosaTaishoKyojuKankyo().getValue());
         builder.set概況特記事項_機器_器械(div.getTxtNichijoShiyoKikiUmu().getValue());
-
         manager.save認定調査票_概況特記(builder.build());
     }
 

@@ -7,9 +7,11 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyu
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ServiceShuruiCodeParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShibaraiKekkaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShokanShikyuShinseiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.ShichosonEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.SokanbaraiShiharaiKekka;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
@@ -42,4 +44,12 @@ public interface IFukushiyoguKonyuhiShikyuGendogakuMapper {
      * @return List<ShichosonEntity>
      */
     List<ShichosonEntity> select措置元市町村データ(ServiceShuruiCodeParameter parameter);
+
+    /**
+     * 今までの支払結果情報取得
+     *
+     * @param parameter {@link ShibaraiKekkaParameter}
+     * @return SokanbaraiShiharaiKekka
+     */
+    SokanbaraiShiharaiKekka select支払結果情報(ShibaraiKekkaParameter parameter);
 }

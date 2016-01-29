@@ -12,12 +12,13 @@ import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoD
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoSearchParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity;
 /**
  *
  * @author sunhui
  */
 public interface IJigyoHokokuGeppoHoseiHakoMapper {  
-   List<DbT7021JigyoHokokuTokeiDataEntity> select事業報告集計一覧データ(JigyoHokokuGeppoSearchParameter jigyoHokokuGeppoParameter);
+   List<JigyoHokokuGeppoHoseiHakoEntity> select事業報告集計一覧データ(JigyoHokokuGeppoSearchParameter jigyoHokokuGeppoParameter);
    List<DbT7021JigyoHokokuTokeiDataEntity> select報告年度様式種類(JigyoHokokuGeppoDetalSearchParameter jigyoHokokuGeppoDetalParameter);
    int update事業報告集計一覧データ(JigyoHokokuGeppoDataUpdateParameter jigyoHokokuGeppoDataParameter);
    int delete事業報告年報(JigyoHokokuGeppoDataDeleteParameter jigyoHokokuGeppoDataParameter);

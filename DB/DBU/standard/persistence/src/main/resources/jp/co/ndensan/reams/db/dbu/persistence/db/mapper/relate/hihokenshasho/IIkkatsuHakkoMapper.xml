@@ -10,14 +10,14 @@ and open the template in the editor.
 
     <!--IkkatsuHakkoRelateEntityのマッピング用XMLです -->
     <resultMap id="resultMap_getIkkatsuHakkoRelateEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity" autoMapping="true">
-        <result property="lastUpdateTimestamp" column="lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="lastUpdateReamsLoginId" column="lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="insertTimestamp" column="insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateTimestamp" column="lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="idoYMD" column="idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="edaNo" column="edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="idoJiyuCode" column="idoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="shikakuShutokuJiyuCode" column="shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shikakuShutokuYMD" column="shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shikakuShutokuTodokedeYMD" column="shikakuShutokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -40,8 +40,6 @@ and open the template in the editor.
         <result property="sochimotoShichosonCode" column="koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="kyuShichosonCode" column="kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="logicalDeletedFlag" column="logicalDeletedFlag"/>
-        <result property="hakkoShoriTimestamp" column="hakkoShoriTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
-        <result property="rirekiNo" column="rirekiNo"/>
         <result property="daichoShubetsu" column="daichoShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="nyushoShisetsuShurui" column="nyushoShisetsuShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="nyushoShisetsuCode" column="nyushoShisetsuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
@@ -50,7 +48,8 @@ and open the template in the editor.
         <result property="taishoShoriYMD" column="taishoShoriYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="taishoYMD" column="taishoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="roomKigoNo" column="roomKigoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="edaban" column="edaban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hakkoShoriTimestamp" column="hakkoShoriTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="rirekiNo" column="rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="shinseiJokyoKubun" column="shinseiJokyoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shishoCode" column="shishoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -131,22 +130,20 @@ and open the template in the editor.
         <result property="nijiHanteiNinteiYukoKaishiYMD" column="nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="nijiHanteiNinteiYukoShuryoYMD" column="nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shinsakaiShiryoSakuseiYMD" column="shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="shinsakaiKaisaiNo" column="shinsakaiKaisaiNo"/>
+        <result property="shinsakaiKaisaiNo" column="shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinsakaiIken" column="shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="ichijiHnateiKekkaHenkoRiyu" column="ichijiHnateiKekkaHenkoRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijiHanteiKekkaHenkoRiyu" column="ichijiHanteiKekkaHenkoRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yokaigoJotaizoReiCode" column="yokaigoJotaizoReiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ninteishinsakaiIkenShurui" column="ninteishinsakaiIkenShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinsakaiMemo" column="shinsakaiMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="nijiHanteiKekkaInputHoho" column="nijiHanteiKekkaInputHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="niniHanteiKekkaInputYMD" column="niniHanteiKekkaInputYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nijiHanteiKekkaInputYMD" column="nijiHanteiKekkaInputYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <result property="kanriKubun" column="kanriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="torokuKubun" column="torokuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tekiyoKaishiYMD" column="tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="tekiyoShuryoYMD" column="tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shuryoKubun" column="shuryoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="ichijiHanteiKekkaHenkoRiyu" column="ichijiHanteiKekkaHenkoRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="nijiHanteiKekkaInputYMD" column="nijiHanteiKekkaInputYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="yokoku_TorokuYMD" column="yokoku_TorokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="sashitome_IraiJuriYMD" column="sashitome_IraiJuriYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="yokoku_TsuchiHakkoYMD" column="yokoku_TsuchiHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -172,7 +169,7 @@ and open the template in the editor.
         <result property="shuryoShinsei_RiyuCode" column="shuryoShinsei_RiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shuryoShinsei_ShinsaKetteiYMD" column="shuryoShinsei_ShinsaKetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shuryoShinsei_ShinsaKekkaKubun" column="shuryoShinsei_ShinsaKekkaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="mukoKubun" column="mukoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="mukoKubun" column="mukoKubun"/>
         <result property="taishoYM" column="taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="todokedeKubun" column="todokedeKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="todokedeYMD" column="todokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -183,16 +180,22 @@ and open the template in the editor.
         <result property="todokedeshaTelNo" column="todokedeshaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="todokedeshaKankeiKubun" column="todokedeshaKankeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="zanteiKubun" column="zanteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="sakuseiKubunCode" column="sakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="keikakuJigyoshaNo" column="keikakuJigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="itakusakiJigyoshaNo" column="itakusakiJigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="meisho" column="meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="seinengappiYMD" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="kannaiKangaiKubun" column="kannaiKangaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
         <result property="banchi" column="banchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaBanchiTypeHandler"/>
         <result property="katagaki" column="katagaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KatagakiTypeHandler"/>
-        <result property="seinengappiYMD" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shisetyuJotaiFlag" column="shisetyuJotaiFlag"/>
+        <result property="juminShubetsuCode" column="juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="juminJotaiCode" column="juminJotaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gyoseikuName" column="gyoseikuName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kanaMeisho" column="kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="seibetsuCode" column="seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jukyuKubun" column="jukyuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
     <!--被保険者台帳の異動者情報取得-->
@@ -252,41 +255,44 @@ and open the template in the editor.
     <!--年齢到達予定者情報の取得-->
     <select id="getNenreiTotatsuYotesha" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
-        DbT1001Hiho."shikibetsuCode",
-        DbT1001Hiho."hihokenshaNo",
-        DbT1001Hiho."shichosonCode",
-        DbT1001Hiho."seinengappiYMD"
-        FROM
-        (SELECT               
-        DbT1001."shikibetsuCode",
-        DbT1001."hihokenshaNo",
+        PSM."shikibetsuCode",
         PSM."genLasdecCode" AS "shichosonCode",
-        PSM."seinengappiYMD",
-        row_number() over(partition by DbT1001."hihokenshaNo" order by DbT1001."idoYMD" desc,DbT1001."edaNo" desc) as rank_number
-        FROM               
+        PSM."seinengappiYMD"
+        FROM 
         rgua.${psmShikibetsuTaisho} AS PSM
-        INNER JOIN
-        rgdb."DbT1001HihokenshaDaicho" AS DbT1001
-        ON
-        DbT1001."shikibetsuCode"<![CDATA[<>]]> PSM."shikibetsuCode"
-        AND DbT1001."shikakuShutokuYMD" IS NOT NULL
-        AND DbT1001."shikakuSoshitsuYMD" IS NULL
-        AND DbT1001."hihokennshaKubunCode" = '2'        
         WHERE               
         PSM."seinengappiYMD" <![CDATA[<=]]> #{seinengappiFromYMD}
-        AND PSM."seinengappiYMD" <![CDATA[>=]]> #{seinengappiToYMD})DbT1001Hiho
-        INNER JOIN
-        rgdb."DbT1009ShikakuShutokuJogaisha" AS DbT1009
-        ON
-        DbT1009."shikibetsuCode" <![CDATA[<>]]> DbT1001Hiho."shikibetsuCode"
+        AND PSM."seinengappiYMD" <![CDATA[>=]]> #{seinengappiToYMD}
+        AND  NOT EXISTS ( 
+           SELECT
+            DbT1001."shikibetsuCode"
+        FROM(
+            SELECT
+                "shikibetsuCode",
+                row_number() over(partition by "hihokenshaNo" order by "idoYMD" desc,"edaNo" desc) as rank_number
+            FROM
+                rgdb."DbT1001HihokenshaDaicho" 
+            WHERE
+                "logicalDeletedFlag"<![CDATA[<>]]> true
+            AND "shikakuShutokuYMD" IS NOT NULL
+            AND "shikakuSoshitsuYMD" IS NULL
+            AND "hihokennshaKubunCode" = '2'
+            AND "shikibetsuCode" = PSM."shikibetsuCode")DbT1001
         WHERE
-        rank_number = 1
+        rank_number = 1)
+        AND NOT EXISTS (
+            SELECT
+              DbT1009."shikibetsuCode" 
+            FROM
+              rgdb."DbT1009ShikakuShutokuJogaisha" AS DbT1009 
+            WHERE
+              PSM."shikibetsuCode" = DbT1009."shikibetsuCode") 
     </select>
       
     <!-- 一時テーブルの作成 -->
     <insert id="createTmpHihokenshasho_Ichi">
         CREATE TEMP TABLE "TmpHihokenshasho_Ichi"
-        ("hihokenshaNo"rgdb."DbUDD002HihokenshaNo",
+        ("hihokenshaNo"character(10),
         "shichosonCode"rshare."UDD023LasdecCode",
         "shikibetsuCode"rshare."UDD001ShikibetsuCode",
         "insertTimestamp"timestamp,
@@ -464,7 +470,14 @@ and open the template in the editor.
         "jusho"rshare."UDD046AtenaJusho",
         "banchi"rshare."UDD047AtenaBanchi",
         "katagaki"rshare."UDD010Katagaki",
-        "shisetyuJotaiFlag"boolean)
+        "shisetyuJotaiFlag"boolean,
+        "juminShubetsuCode"text,
+        "juminJotaiCode"text,
+        "gyoseikuName"text,
+        "kanaMeisho"rshare."UDD043AtenaKanaMeisho",
+        "yubinNo"rshare."UDD003YubinNo",
+        "seibetsuCode"text,
+        "jukyuKubun"text)
     </insert>
 
     <!-- データを一時テーブルに登録します。 -->
@@ -673,35 +686,35 @@ and open the template in the editor.
     <select id="getTaishoJoho1" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
         Tmp."hihokenshaNo",
-        Tmp."shikibetsuCode"
+        Tmp."shikibetsuCode",
+        Tmp."lastUpdateTimestamp"
         FROM
         "TmpHihokenshasho_Ichi" AS Tmp
-        INNER JOIN 
-        (SELECT
-        DbT1001."hihokenshaNo",
-        DbT1001."shikibetsuCode"
-        FROM(
-        SELECT
-        "hihokenshaNo",
-        "shikibetsuCode",
-        row_number() over(partition by "hihokenshaNo" order by "idoYMD" desc,"edaNo" desc) as rank_number
-        FROM
-        rgdb."DbT1001HihokenshaDaicho" 
-        WHERE
-        "logicalDeletedFlag"<![CDATA[<>]]> true
-        AND "shikakuShutokuYMD" IS NOT NULL
-        AND "shikakuSoshitsuYMD" IS NULL)DbT1001
-        WHERE
-        rank_number = 1)DbT1001Hiho
-        ON 
-        Tmp."hihokenshaNo" = DbT1001Hiho."hihokenshaNo"
-        INNER JOIN 
-        rgdb."DbT1010TennyushutsuHoryuTaishosha" AS DbT1010
-        ON    
-        DbT1010."shikibetsuCode" <![CDATA[<>]]> DbT1001Hiho."shikibetsuCode"
         WHERE
         Tmp."shisetyuJotaiFlag" <![CDATA[<>]]> true
         AND Tmp."seinengappiYMD" IS NULL
+        AND EXISTS (SELECT
+            DbT1001."shikibetsuCode"
+        FROM(
+            SELECT
+                "shikibetsuCode",
+                row_number() over(partition by "hihokenshaNo" order by "idoYMD" desc,"edaNo" desc) as rank_number
+            FROM
+                rgdb."DbT1001HihokenshaDaicho" 
+            WHERE
+                "logicalDeletedFlag"<![CDATA[<>]]> true
+            AND "shikakuShutokuYMD" IS NOT NULL
+            AND "shikakuSoshitsuYMD" IS NULL
+            AND "hihokenshaNo" = Tmp."hihokenshaNo")DbT1001
+        WHERE
+        rank_number = 1)
+        AND NOT EXISTS (
+        SELECT
+        "shikibetsuCode"
+        FROM
+        rgdb."DbT1010TennyushutsuHoryuTaishosha"
+        WHERE
+        "shikibetsuCode" = Tmp."shikibetsuCode")
     </select>
     
     <!--一時テーブルから生年月日の値があるデータを取得します-->
@@ -887,8 +900,42 @@ and open the template in the editor.
         FROM 
         "TmpHihokenshasho_Ichi" AS Tmp
         WHERE 
-        Tmp."hihokenshaNo" <![CDATA[<>]]> #{hihokenshaNo}
+        Tmp."hihokenshaNo" = #{hihokenshaNo}
     </delete>
+    
+    <!--受給区分1更新します。-->
+    <update id="updateJukyuKubun1" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" >
+        UPDATE 
+        "TmpHihokenshasho_Ichi"
+        SET
+        "jukyuKubun" = '1'
+        WHERE
+        "hihokenshaNo" IN (
+        SELECT DISTINCT 
+        DbT4001."hihokenshaNo"
+        FROM
+        rgdb."DbT4001JukyushaDaicho" AS DbT4001
+        WHERE
+        DbT4001."ninteiYukoKikanShuryoYMD" <![CDATA[<=]]> #{kofuYMD}
+        AND DbT4001."logicalDeletedFlag"<![CDATA[<>]]> true)
+    </update>
+    
+    <!--受給区分2更新します。-->
+    <update id="updateJukyuKubun2" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" >
+        UPDATE 
+        "TmpHihokenshasho_Ichi"
+        SET
+        "jukyuKubun" = '2'
+        WHERE
+        "hihokenshaNo" NOT IN (
+        SELECT DISTINCT 
+        DbT4001."hihokenshaNo"
+        FROM
+        rgdb."DbT4001JukyushaDaicho" AS DbT4001
+        WHERE
+        DbT4001."ninteiYukoKikanShuryoYMD" <![CDATA[<=]]> #{kofuYMD}
+        AND DbT4001."logicalDeletedFlag"<![CDATA[<>]]> true)
+    </update>
     
     <!--被保険者台帳の情報を取得します。-->
     <select id="getHihokenshaDaicho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
@@ -1742,8 +1789,7 @@ and open the template in the editor.
         DbT3005Joho."todokedeshaKankeiKubun",
         DbT3005Joho."zanteiKubun",
         DbT3006Joho."tekiyoKaishiYMD",
-        DbT3006Joho."itakusakiJigyoshaNo",
-        DbT3006Joho."jigyoshaHenkoJiyu"
+        DbT3006Joho."itakusakiJigyoshaNo"
         FROM       
         (SELECT
         DbT3005Kyotaku."hihokenshaNo",
@@ -1802,15 +1848,13 @@ and open the template in the editor.
         DbT3006."taishoYM",
         DbT3006."rirekiNo",
         DbT3006."tekiyoKaishiYMD",
-        DbT3006."itakusakiJigyoshaNo",
-        DbT3006."jigyoshaHenkoJiyu"
+        DbT3006."itakusakiJigyoshaNo"
         FROM(SELECT
         hihokenshaNo,
         "taishoYM",
         "rirekiNo",
         "tekiyoKaishiYMD",
         "itakusakiJigyoshaNo",
-        "jigyoshaHenkoJiyu",
         row_number() over(partition by hihokenshaNo order by "taishoYM" desc,"rirekiNo" desc) as rank_number
         FROM
         rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei")DbT3006
@@ -1934,8 +1978,7 @@ and open the template in the editor.
         "todokedeshaKankeiKubun" = #{todokedeshaKankeiKubun},
         "zanteiKubun" = #{zanteiKubun},
         "tekiyoKaishiYMD" = #{tekiyoKaishiYMD},
-        "itakusakiJigyoshaNo" = #{itakusakiJigyoshaNo},
-        "jigyoshaHenkoJiyu" = #{jigyoshaHenkoJiyu}
+        "itakusakiJigyoshaNo" = #{itakusakiJigyoshaNo}
         WHERE
         "hihokenshaNo" = #{hihokenshaNo}
     </update>
@@ -1944,14 +1987,21 @@ and open the template in the editor.
     <select id="getHonninJoho" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT 
         Tmp."hihokenshaNo",
+        PSM."shikibetsuCode",
         PSM."meisho",
-        PSM."seinengappiYMD"
+        PSM."seinengappiYMD",
+        PSM."juminShubetsuCode",
+        PSM."juminJotaiCode",
+        PSM."gyoseikuName",
+        PSM."kanaMeisho",
+        PSM."yubinNo",
+        PSM."seibetsuCode"
         FROM
         "TmpHihokenshasho_Ichi" AS Tmp
         INNER JOIN  
         rgua.${psmShikibetsuTaisho} AS PSM
         ON
-        PSM."shikibetsuCode" = Tmp."shichosonCode"
+        PSM."shikibetsuCode" = Tmp."shikibetsuCode"
     </select>  
       
     <!--本人情報を一時テーブルに更新します。-->
@@ -1959,8 +2009,15 @@ and open the template in the editor.
         UPDATE 
         "TmpHihokenshasho_Ichi"
         SET
+        "shikibetsuCode" = #{shikibetsuCode},
         "meisho" = #{meisho},
-        "seinengappiYMD" = #{seinengappiYMD}
+        "seinengappiYMD" = #{seinengappiYMD},
+        "juminShubetsuCode" = #{juminShubetsuCode},
+        "juminJotaiCode" = #{juminJotaiCode},
+        "gyoseikuName" = #{gyoseikuName},
+        "kanaMeisho" = #{kanaMeisho},
+        "yubinNo" = #{yubinNo},
+        "seibetsuCode" = #{seibetsuCode}
         WHERE 
         "hihokenshaNo" = #{hihokenshaNo}
     </update>
@@ -2442,12 +2499,12 @@ and open the template in the editor.
     </update>
     
      <!-- 一時テーブル情報を取得します -->
-    <select id="getTmpHihokenshasho_Ichi" resultType="int">
+    <select id="getTmpHihokenshasho_Ichi" resultMap="resultMap_getIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
-            COUNT(*)
+            "hihokenshaNo",
+            "shikibetsuCode"
         FROM
             "TmpHihokenshasho_Ichi"
-        WHERE
-            "shisetyuJotaiFlag" = FALSE
     </select>
+
 </mapper>

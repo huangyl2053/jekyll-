@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.Dbt3034ShokanShinseiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanFukushigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanKinkyuShisetsuRyoyoEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanKinkyuShisetsuRyoyoParameter;
@@ -17,7 +18,6 @@ import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikett
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanMeisaiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanServicePlanEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanServicePlanParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanFukushigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanShakaiFukushiHojinKeigengakuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanShinseiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanShokujiHiyoEntity;
@@ -1148,4 +1148,38 @@ public class SyokanbaraihiShikyuShinseiKetteManagerTest {
                         明細番号, 連番, 画面モード, 識別コード, 決定情報一覧List);
         sut.updKetteJoho(parameter);
     }
+
+    @Test
+    public void pdShokanServicePlanTest_1() {
+        HihokenshaNo 被保険者番号 = new HihokenshaNo("000000003");
+        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth("201001");
+        RString 整理番号 = new RString("0000000003");
+        JigyoshaNo 事業者番号 = new JigyoshaNo("1111");
+        RString 様式番号 = new RString("0000000003");
+        RString 明細番号 = new RString("111111112");
+        sut.updShokanServicePlan(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+    }
+
+    @Test
+    public void pdShokanServicePlanTest_2() {
+        HihokenshaNo 被保険者番号 = new HihokenshaNo("000000003");
+        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth("200501");
+        RString 整理番号 = new RString("0000000003");
+        JigyoshaNo 事業者番号 = new JigyoshaNo("1111");
+        RString 様式番号 = new RString("0000000003");
+        RString 明細番号 = new RString("111111112");
+        sut.updShokanServicePlan(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+    }
+
+    @Test
+    public void pdShokanServicePlanTest_3() {
+        HihokenshaNo 被保険者番号 = new HihokenshaNo("000000003");
+        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth("200701");
+        RString 整理番号 = new RString("0000000003");
+        JigyoshaNo 事業者番号 = new JigyoshaNo("1111");
+        RString 様式番号 = new RString("0000000003");
+        RString 明細番号 = new RString("111111112");
+        sut.updShokanServicePlan(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+    }
+
 }

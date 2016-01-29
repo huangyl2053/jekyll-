@@ -4121,4 +4121,31 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                 = 特定診療サービスコードDac.selectAllByKey(特定診療のサービス種類コード, 識別コード2, 基準年月);
         return entityList;
     }
+
+    /**
+     * サービス計画費情報件数取得
+     *
+     * @param 被保険者番号
+     * @param サービス提供年月
+     * @param 整理番号
+     * @param 事業者番号
+     * @param 様式番号
+     * @param 明細番号
+     * @return データ件数
+     */
+    public int updShokanServicePlan(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号) {
+        if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス提供年月)) {
+            return 償還払請求サービス計画200904Dac.selectサービス計画費情報件数(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+        }
+        if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
+            return 償還払請求サービス計画200004Dac.selectサービス計画費情報件数(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+        } else {
+            return 償還払請求サービス計画200604Dac.selectサービス計画費情報件数(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+        }
+    }
 }

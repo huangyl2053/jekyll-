@@ -172,4 +172,43 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号))).getCount();
     }
+
+    /**
+     * サービス計画費情報件数を返却する
+     *
+     * @param 被保険者番号
+     * @param サービス提供年月
+     * @param 整理番号
+     * @param 事業者番号
+     * @param 様式番号
+     * @param 明細番号
+     * @return サービス計画費情報件数
+     * @throws NullPointerException
+     */
+    public int selectサービス計画費情報件数(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3047ShokanServicePlan200904.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNp, 整理番号),
+                                eq(jigyoshaNo, 事業者番号),
+                                eq(yoshikiNo, 様式番号),
+                                eq(meisaiNo, 明細番号))).getCount();
+    }
 }

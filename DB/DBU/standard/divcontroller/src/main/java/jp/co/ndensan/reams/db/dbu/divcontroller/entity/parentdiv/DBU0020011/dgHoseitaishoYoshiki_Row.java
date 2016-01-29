@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jan 26 15:47:01 CST 2016 
+ * Fri Jan 29 10:29:38 CST 2016 
  */
 
 

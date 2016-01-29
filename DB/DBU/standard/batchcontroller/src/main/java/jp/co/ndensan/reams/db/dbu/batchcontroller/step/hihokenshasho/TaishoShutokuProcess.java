@@ -29,26 +29,38 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
     private IkkatsuHakkoProcessParameter processPrm;
     private IkkatsuHakkoMybatisParameter mybatisPrm;
     private IIkkatsuHakkoMapper iIkkatsuHakkoMapper;
+    private List<IkkatsuHakkoRelateEntity> 一時表List;
     private List<IkkatsuHakkoRelateEntity> 対象List;
+    private List<IkkatsuHakkoRelateEntity> check対象List;
+    private List<IkkatsuHakkoRelateEntity> 対象外List;
 
     @Override
     protected void beforeExecute() {
         mybatisPrm = processPrm.toIkkatsuHakkoMybatisParameter();
         iIkkatsuHakkoMapper = getMapper(IIkkatsuHakkoMapper.class);
+        一時表List = iIkkatsuHakkoMapper.getTmpHihokenshasho_Ichi();
+        対象List = new ArrayList<>();
+        check対象List = new ArrayList<>();
+        対象外List = new ArrayList<>();
     }
 
     @Override
     protected void afterExecute() {
-
+        iIkkatsuHakkoMapper.updateJukyuKubun1(mybatisPrm);
+        iIkkatsuHakkoMapper.updateJukyuKubun2(mybatisPrm);
     }
 
     @Override
     protected void process() {
-        if (iIkkatsuHakkoMapper.getTmpHihokenshasho_Ichi() > 0) {
-            対象者チェック();
-            再発行チェック();
-            for (IkkatsuHakkoRelateEntity 対象Entity : 対象List) {
-                iIkkatsuHakkoMapper.deleteTmpHihoken(createPrm被保険者番号(対象Entity));
+        対象者チェック();
+        再発行チェック();
+        List<RString> list = new ArrayList<>();
+        for (IkkatsuHakkoRelateEntity 対象Entity : 対象List) {
+            list.add(対象Entity.getHihokenshaNo().value());
+        }
+        for (IkkatsuHakkoRelateEntity 一時表Entity : 一時表List) {
+            if (!list.contains(一時表Entity.getHihokenshaNo().value())) {
+                iIkkatsuHakkoMapper.deleteTmpHihoken(createPrm被保険者番号(一時表Entity));
             }
         }
     }
@@ -80,10 +92,11 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
         for (IkkatsuHakkoRelateEntity 対象Entity : 対象List) {
             RString hihokenshaNo = 対象Entity.getHihokenshaNo().value();
             if (対象Entity.getSeinengappiYMD() == null && 一括発行Map.containsKey(hihokenshaNo)
-                    && 対象Entity.getLastUpdateTimestamp().isAfter(一括発行Map.get(hihokenshaNo).getLastUpdateTimestamp())) {
-                対象List.remove(対象Entity);
+                    && 対象Entity.getLastUpdateTimestamp().isAfter(一括発行Map.get(hihokenshaNo).getHakkoShoriTimestamp().getRDateTime())) {
+                対象外List.add(対象Entity);
             }
         }
+        対象List.removeAll(対象外List);
     }
 
     private void 再発行チェックする() {
@@ -97,47 +110,66 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
         }
         for (IkkatsuHakkoRelateEntity 対象Entity : 対象List) {
             if (!再発行チェックMap.containsKey(対象Entity.getHihokenshaNo().value())) {
-                対象List.remove(対象Entity);
+                対象外List.add(対象Entity);
             }
         }
+        対象List.removeAll(対象外List);
     }
 
     private void 対象者チェック() {
-        対象List.addAll(iIkkatsuHakkoMapper.getTaishoJoho1());
+        List<IkkatsuHakkoRelateEntity> 対象者チェック1 = iIkkatsuHakkoMapper.getTaishoJoho1();
+        対象List.addAll(対象者チェック1);
         List<IkkatsuHakkoRelateEntity> 生年月日あるデータList = iIkkatsuHakkoMapper.get生年月日ある();
+        List<RString> 被保険者List1 = get被保険者List1();
+        List<RString> 被保険者List2 = get被保険者List2();
         for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 生年月日あるデータList) {
             RString shikibetsuCode = ikkatsuHakkoRelateEntity.getShikibetsuCode().value();
-            if (get被保険者List1().contains(shikibetsuCode)) {
-                check適用除外者(ikkatsuHakkoRelateEntity);
-            } else if (get被保険者List2().contains(shikibetsuCode)) {
-                check適用除外者(ikkatsuHakkoRelateEntity);
+            if (被保険者List1.contains(shikibetsuCode)) {
+                check対象List.add(ikkatsuHakkoRelateEntity);
+            } else if (!被保険者List2.contains(shikibetsuCode)) {
+                check対象List.add(ikkatsuHakkoRelateEntity);
             }
         }
+        check適用除外者(check対象List);
     }
 
-    private void check転入保留対象者(IkkatsuHakkoRelateEntity entity) {
-        RString shikibetsuCode = entity.getShikibetsuCode().value();
-        if (!get転入保留対象者().contains(shikibetsuCode)) {
-            対象List.add(entity);
+    private void check転入保留対象者(List<IkkatsuHakkoRelateEntity> entityList) {
+        for (IkkatsuHakkoRelateEntity entity : entityList) {
+            RString shikibetsuCode = entity.getShikibetsuCode().value();
+            if (get転入保留対象者().contains(shikibetsuCode)) {
+                対象外List.add(entity);
+            }
         }
+        対象List.removeAll(対象外List);
+        対象外List.clear();
     }
 
-    private void check他市町村住所地特例(IkkatsuHakkoRelateEntity entity) {
-        RString shikibetsuCode = entity.getShikibetsuCode().value();
-        if (!get最新他市町村住所地特例1().contains(shikibetsuCode)) {
-            check転入保留対象者(entity);
-        } else if (get最新他市町村住所地特例2(entity).contains(shikibetsuCode)) {
-            check転入保留対象者(entity);
+    private void check他市町村住所地特例(List<IkkatsuHakkoRelateEntity> entityList) {
+        for (IkkatsuHakkoRelateEntity entity : entityList) {
+            RString shikibetsuCode = entity.getShikibetsuCode().value();
+            if (get最新他市町村住所地特例1().contains(shikibetsuCode)) {
+                対象外List.add(entity);
+            } else if (!get最新他市町村住所地特例2(entity).contains(shikibetsuCode)) {
+                対象外List.add(entity);
+            }
         }
+        check対象List.removeAll(対象外List);
+        対象外List.clear();
+        check転入保留対象者(check対象List);
     }
 
-    private void check適用除外者(IkkatsuHakkoRelateEntity entity) {
-        RString shikibetsuCode = entity.getShikibetsuCode().value();
-        if (!get適用除外者List1().contains(shikibetsuCode)) {
-            check他市町村住所地特例(entity);
-        } else if (get適用除外者List2(entity).contains(shikibetsuCode)) {
-            check他市町村住所地特例(entity);
+    private void check適用除外者(List<IkkatsuHakkoRelateEntity> entityList) {
+        for (IkkatsuHakkoRelateEntity entity : entityList) {
+            RString shikibetsuCode = entity.getShikibetsuCode().value();
+            if (get適用除外者List1().contains(shikibetsuCode)) {
+                対象外List.add(entity);
+            } else if (!get適用除外者List2(entity).contains(shikibetsuCode)) {
+                対象外List.add(entity);
+            }
         }
+        check対象List.removeAll(対象外List);
+        対象外List.clear();
+        check他市町村住所地特例(check対象List);
     }
 
     private List<RString> get転入保留対象者() {
@@ -212,6 +244,7 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
                 mybatisPrm.getKonkaiToYMDHMS(),
                 mybatisPrm.getKonkaikijunYMD(),
                 mybatisPrm.getKonkaikijunYMDHMS(),
+                mybatisPrm.getKofuYMD(),
                 mybatisPrm.getShinseishoKanriNo(),
                 mybatisPrm.getSeinengappiToYMD(),
                 mybatisPrm.getSeinengappiFromYMD(),
@@ -230,6 +263,7 @@ public class TaishoShutokuProcess extends SimpleBatchProcessBase {
                 mybatisPrm.getKonkaiToYMDHMS(),
                 mybatisPrm.getKonkaikijunYMD(),
                 mybatisPrm.getKonkaikijunYMDHMS(),
+                mybatisPrm.getKofuYMD(),
                 mybatisPrm.getShinseishoKanriNo(),
                 mybatisPrm.getSeinengappiToYMD(),
                 mybatisPrm.getSeinengappiFromYMD(),

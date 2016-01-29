@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho;
 
-import static java.lang.Boolean.FALSE;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hihokenshasho.IkkatsuHakkoProcessParameter;
@@ -19,12 +18,11 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
-/**
+/*
  * 被保険者証一括発行_バッチフ処理クラスです
  */
 public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
@@ -36,8 +34,6 @@ public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
     private static final RString KOFURIYU_VALUE2 = new RString("要介護認定");
     private static final RString SHINYOSHIKISUMIKUBUN_CODE = new RString("01");
     private static final RString SHOYOSHIKIKUBUN_CODE = new RString("02");
-    private static final boolean TANPYOHAKKOUMUFLAG = FALSE;
-    private static final boolean LOGICALDELETEDFLAG = FALSE;
     private IkkatsuHakkoProcessParameter processPrm;
     private IkkatsuHakkoMybatisParameter mybatisPrm;
     private IIkkatsuHakkoMapper iIkkatsuHakkoMapper;
@@ -84,17 +80,14 @@ public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
         dbT7037Entity.setShichosonCode(entity.getShichosonCode());
         dbT7037Entity.setShikibetsuCode(entity.getShikibetsuCode());
         dbT7037Entity.setKofuYMD(processPrm.getKofuYMD());
-        dbT7037Entity.setYukoKigenYMD(FlexibleDate.EMPTY);
         dbT7037Entity.setKofuJiyu(kofuJiyu);
         dbT7037Entity.setKofuRiyu(kofuRiyu);
-        dbT7037Entity.setKaishuYMD(FlexibleDate.EMPTY);
         dbT7037Entity.setKaishuJiyu(RString.EMPTY);
-        dbT7037Entity.setKaishuRiyu(RString.EMPTY);
-        dbT7037Entity.setTanpyoHakkoUmuFlag(TANPYOHAKKOUMUFLAG);
+        dbT7037Entity.setTanpyoHakkoUmuFlag(false);
         dbT7037Entity.setHakkoShoriTimestamp(YMDHMS.now());
         dbT7037Entity.setShinYoshikiSumiKubunCode(SHINYOSHIKISUMIKUBUN_CODE);
         dbT7037Entity.setShoYoshikiKubunCode(SHOYOSHIKIKUBUN_CODE);
-        dbT7037Entity.setLogicalDeletedFlag(LOGICALDELETEDFLAG);
+        dbT7037Entity.setLogicalDeletedFlag(false);
         return dbT7037Entity;
     }
 
@@ -107,8 +100,13 @@ public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
             case "3":
                 UzT0007CodeEntity codeMastEntity = CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"),
                         new Code(entity.getIdoJiyuCode()));
-                kofuJiyu = codeMastEntity.getコード().value();
-                kofuRiyu = codeMastEntity.getコード名称();
+                if (codeMastEntity != null) {
+                    kofuJiyu = codeMastEntity.getコード().value();
+                    kofuRiyu = codeMastEntity.getコード名称();
+                } else {
+                    kofuJiyu = RString.EMPTY;
+                    kofuRiyu = RString.EMPTY;
+                }
                 break;
             case "4":
                 kofuJiyu = KOFUJIYU_CODE1;
@@ -126,6 +124,7 @@ public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
                 mybatisPrm.getKonkaiToYMDHMS(),
                 mybatisPrm.getKonkaikijunYMD(),
                 mybatisPrm.getKonkaikijunYMDHMS(),
+                mybatisPrm.getKofuYMD(),
                 mybatisPrm.getShinseishoKanriNo(),
                 mybatisPrm.getSeinengappiToYMD(),
                 mybatisPrm.getSeinengappiFromYMD(),
@@ -139,7 +138,7 @@ public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
         if (rirekiNoEntity == null) {
             rirekiNo = 1;
         } else {
-            rirekiNo = rirekiNoEntity.getRirekiNo() + 1;
+            rirekiNo = Integer.parseInt(rirekiNoEntity.getRirekiNo().toString()) + 1;
         }
 
         return rirekiNo;

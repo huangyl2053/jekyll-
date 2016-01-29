@@ -21,16 +21,13 @@ import lombok.Getter;
 @Getter
 public final class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
 
-    public static IkkatsuHakkoMybatisParameter createSelectByKeyParam(RString chushutsuFlag, RString shutsuryokuFlag, RString shutsuryokujunId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     private final RString shutsuryokuJokenCode;
     private final RDateTime konkaiFromYMDHMS;
     private final FlexibleDate konkaiToYMD;
     private final RDateTime konkaiToYMDHMS;
     private final FlexibleDate konkaikijunYMD;
     private final RDateTime konkaikijunYMDHMS;
+    private final FlexibleDate kofuYMD;
     private final ShinseishoKanriNo shinseishoKanriNo;
     private final FlexibleDate seinengappiToYMD;
     private final FlexibleDate seinengappiFromYMD;
@@ -49,6 +46,7 @@ public final class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
      * @param 今回の終了日時 今回の終了日時
      * @param 今回の基準日 今回の基準日
      * @param 今回の基準日時 今回の基準日時
+     * @param 交付日 交付日
      * @param 申請書管理番号 申請書管理番号
      * @param 生年月日抽出開始日 生年月日抽出開始日
      * @param 生年月日抽出終了日 生年月日抽出終了日
@@ -65,6 +63,7 @@ public final class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
             RDateTime 今回の終了日時,
             FlexibleDate 今回の基準日,
             RDateTime 今回の基準日時,
+            FlexibleDate 交付日,
             ShinseishoKanriNo 申請書管理番号,
             FlexibleDate 生年月日抽出開始日,
             FlexibleDate 生年月日抽出終了日,
@@ -79,6 +78,7 @@ public final class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
         this.konkaiToYMDHMS = 今回の終了日時;
         this.konkaikijunYMD = 今回の基準日;
         this.konkaikijunYMDHMS = 今回の基準日時;
+        this.kofuYMD = 交付日;
         this.shinseishoKanriNo = 申請書管理番号;
         this.seinengappiToYMD = 生年月日抽出開始日;
         this.seinengappiFromYMD = 生年月日抽出終了日;
@@ -98,6 +98,7 @@ public final class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
      * @param 今回の終了日時 今回の終了日時
      * @param 今回の基準日 今回の基準日
      * @param 今回の基準日時 今回の基準日時
+     * @param 交付日 交付日
      * @param 申請書管理番号 申請書管理番号
      * @param 生年月日抽出開始日 生年月日抽出開始日
      * @param 生年月日抽出終了日 生年月日抽出終了日
@@ -115,6 +116,7 @@ public final class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
             RDateTime 今回の終了日時,
             FlexibleDate 今回の基準日,
             RDateTime 今回の基準日時,
+            FlexibleDate 交付日,
             ShinseishoKanriNo 申請書管理番号,
             FlexibleDate 生年月日抽出開始日,
             FlexibleDate 生年月日抽出終了日,
@@ -129,6 +131,7 @@ public final class IkkatsuHakkoMybatisParameter implements IMyBatisParameter {
                 今回の終了日時,
                 今回の基準日,
                 今回の基準日時,
+                交付日,
                 申請書管理番号,
                 生年月日抽出開始日,
                 生年月日抽出終了日,

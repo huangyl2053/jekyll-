@@ -17,12 +17,18 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiG
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.DainoRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.HojinDaihyoshaRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -33,11 +39,13 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
     private IkkatsuHakkoProcessParameter processPrm;
     private IkkatsuHakkoMybatisParameter mybatisPrm;
     private IIkkatsuHakkoMapper iIkkatsuHakkoMapper;
+    private List<IkkatsuHakkoRelateEntity> 一時表List;
 
     @Override
     protected void beforeExecute() {
         mybatisPrm = processPrm.toIkkatsuHakkoMybatisParameter();
         iIkkatsuHakkoMapper = getMapper(IIkkatsuHakkoMapper.class);
+        一時表List = iIkkatsuHakkoMapper.getTmpHihokenshasho_Ichi();
     }
 
     @Override
@@ -46,7 +54,7 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void process() {
-        if (iIkkatsuHakkoMapper.getTmpHihokenshasho_Ichi() > 0) {
+        if (!一時表List.isEmpty()) {
             被保台帳を一時テーブルに更新();
             介護保険施設を一時テーブルに更新();
             受給者台帳を一時テーブルに更新();
@@ -89,6 +97,7 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
                     mybatisPrm.getKonkaiToYMDHMS(),
                     mybatisPrm.getKonkaikijunYMD(),
                     mybatisPrm.getKonkaikijunYMDHMS(),
+                    mybatisPrm.getKofuYMD(),
                     jukyushaDaichoEntity.getShinseishoKanriNo(),
                     mybatisPrm.getSeinengappiToYMD(),
                     mybatisPrm.getSeinengappiFromYMD(),
@@ -114,8 +123,7 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
     private void 居宅給付計画を一時テーブルに更新() {
         List<IkkatsuHakkoRelateEntity> 事業者作成List = iIkkatsuHakkoMapper.getKyotakuKeikakuJigyoshaSakusei();
         List<IkkatsuHakkoRelateEntity> 自己作成List = iIkkatsuHakkoMapper.getKyotakuKeikakuJikoSakusei();
-
-        if (事業者作成List.get(0).getKeikakuJigyoshaNo() != null) {
+        if (!事業者作成List.isEmpty() && 事業者作成List.get(0).getKeikakuJigyoshaNo() != null) {
             for (IkkatsuHakkoRelateEntity jigyoshaSakuseiEntity : 事業者作成List) {
                 iIkkatsuHakkoMapper.updateTmp_Kyotaku(jigyoshaSakuseiEntity);
             }
@@ -129,6 +137,18 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
     private void 本人情報を一時テーブルに更新() {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(ShikibetsuTaishoGyomuHanteiKeyFactory.
                 createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        List<JuminShubetsu> juminShubetsu = new ArrayList<>();
+        List<JuminJotai> juminJotai = new ArrayList<>();
+        juminShubetsu.add(JuminShubetsu.日本人);
+        juminShubetsu.add(JuminShubetsu.外国人);
+        juminShubetsu.add(JuminShubetsu.住登外個人_外国人);
+        juminShubetsu.add(JuminShubetsu.住登外個人_日本人);
+        juminJotai.add(JuminJotai.住民);
+        juminJotai.add(JuminJotai.住登外);
+        juminJotai.add(JuminJotai.消除者);
+        juminJotai.add(JuminJotai.転出者);
+        key.set住民種別(juminShubetsu);
+        key.set住民状態(juminJotai);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         IkkatsuHakkoMybatisParameter mybatisParam = IkkatsuHakkoMybatisParameter.createSelectByKeyParam(mybatisPrm.getShutsuryokuJokenCode(),
                 mybatisPrm.getKonkaiFromYMDHMS(),
@@ -136,6 +156,7 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
                 mybatisPrm.getKonkaiToYMDHMS(),
                 mybatisPrm.getKonkaikijunYMD(),
                 mybatisPrm.getKonkaikijunYMDHMS(),
+                mybatisPrm.getKofuYMD(),
                 mybatisPrm.getShinseishoKanriNo(),
                 mybatisPrm.getSeinengappiToYMD(),
                 mybatisPrm.getSeinengappiFromYMD(),
@@ -154,7 +175,11 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
     private void 送付先情報を一時テーブルに更新() {
         IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBU介護統計報告);
         AtesakiPSMSearchKeyBuilder builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
+        builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
+        builder.set代納人利用区分(DainoRiyoKubun.利用しない);
         builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
+        builder.set法人代表者利用区分(HojinDaihyoshaRiyoKubun.利用しない);
+        builder.set基準日(FlexibleDate.getNowDate());
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(builder.build());
         IkkatsuHakkoMybatisParameter mybatisParam = IkkatsuHakkoMybatisParameter.createSelectByKeyParam(mybatisPrm.getShutsuryokuJokenCode(),
                 mybatisPrm.getKonkaiFromYMDHMS(),
@@ -162,6 +187,7 @@ public class IchijiTableUpdateProcess extends SimpleBatchProcessBase {
                 mybatisPrm.getKonkaiToYMDHMS(),
                 mybatisPrm.getKonkaikijunYMD(),
                 mybatisPrm.getKonkaikijunYMDHMS(),
+                mybatisPrm.getKofuYMD(),
                 mybatisPrm.getShinseishoKanriNo(),
                 mybatisPrm.getSeinengappiToYMD(),
                 mybatisPrm.getSeinengappiFromYMD(),

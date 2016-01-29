@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoD
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoSearchParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity;
+import jp.co.ndensan.reams.db.dbu.business.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoResult;
 import jp.co.ndensan.reams.db.dbu.persistence.jigyohokokugeppohoseihako.IJigyoHokokuGeppoHoseiHakoMapper;
 import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.gappeijohokanri.GappeiJohoKanriConfig;
 import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.gappeijohokanri.GappeiJohoKubun;
@@ -187,14 +189,13 @@ public class JigyoHokokuGeppoHoseiHako {
      * @return 事業報告集計一覧データ
      */
     @Transaction
-    public List<JigyoHokokuNenpoResult> getJigyoHokokuGeppoList(JigyoHokokuGeppoSearchParameter jigyoHokokuGeppoParameter) {
-        List<JigyoHokokuNenpoResult> businessList = new ArrayList<>();
-        List<DbT7021JigyoHokokuTokeiDataEntity> 事業報告集計一覧データ = new ArrayList<DbT7021JigyoHokokuTokeiDataEntity>();
+    public List<JigyoHokokuGeppoHoseiHakoResult> getJigyoHokokuGeppoList(JigyoHokokuGeppoSearchParameter jigyoHokokuGeppoParameter) {
+        List<JigyoHokokuGeppoHoseiHakoResult> businessList = new ArrayList<>();
+        List<JigyoHokokuGeppoHoseiHakoEntity> 事業報告集計一覧データ = new ArrayList<JigyoHokokuGeppoHoseiHakoEntity>();
         IJigyoHokokuGeppoHoseiHakoMapper HoseiHakoMapper = mapperProvider.create(IJigyoHokokuGeppoHoseiHakoMapper.class);
         事業報告集計一覧データ = HoseiHakoMapper.select事業報告集計一覧データ(jigyoHokokuGeppoParameter);
-        for (DbT7021JigyoHokokuTokeiDataEntity entity : 事業報告集計一覧データ) {
-            entity.initializeMd5();
-            businessList.add(new JigyoHokokuNenpoResult(entity));
+        for (JigyoHokokuGeppoHoseiHakoEntity entity : 事業報告集計一覧データ) {
+            businessList.add(new JigyoHokokuGeppoHoseiHakoResult(entity));
         }
         return businessList;
 
