@@ -7,9 +7,11 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyu
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ServiceShuruiCodeParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShibaraiKekkaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShokanShikyuShinseiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.ShichosonEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.SokanbaraiShiharaiKekka;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -31,7 +33,7 @@ public class IFukushiyoguKonyuhiShikyuGendogakuMapperTest extends DbcTestDacBase
 
     @Before
     public void setUp() {
-//        sqlSession.getConfiguration().addMapper(IFukushiyoguKonyuhiShikyuGendogakuMapper.class);
+        sqlSession.getConfiguration().addMapper(IFukushiyoguKonyuhiShikyuGendogakuMapper.class);
         mapper = sqlSession.getMapper(IFukushiyoguKonyuhiShikyuGendogakuMapper.class);
     }
 
@@ -57,5 +59,13 @@ public class IFukushiyoguKonyuhiShikyuGendogakuMapperTest extends DbcTestDacBase
                 HihokenshaNo.EMPTY, FlexibleYearMonth.MAX);
         List<ShichosonEntity> resultList = mapper.select措置元市町村データ(parameter);
         assertThat(resultList.size(), is(0));
+    }
+
+    @Test
+    public void TEST_select支払結果情報_データ無し() {
+        ShibaraiKekkaParameter parameter = ShibaraiKekkaParameter.createParameter(
+                HihokenshaNo.EMPTY, RString.EMPTY, RString.EMPTY);
+        SokanbaraiShiharaiKekka result = mapper.select支払結果情報(parameter);
+        assertThat(result, is(nullValue()));
     }
 }

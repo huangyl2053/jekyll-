@@ -14,12 +14,12 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.definition.core.nyuryokushikibetsuno.NyuryokuShikibetsuNoShokan3Keta;
+import jp.co.ndensan.reams.db.dbc.definition.core.shikibetsunokubon.ShikibetsuNoKubon;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinnsanaiyo.ShinsaNaiyoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ServiceShuruiCodeParameter;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShikyuShiseiJohokensakuKey;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShibaraiKekkaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShokanShikyuShinseiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihiEntity;
@@ -37,17 +37,21 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7112ShokanShuruiShikyu
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7115UwanoseShokanShuruiShikyuGendoGakuDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyuhishikyushisei.IFukushiyoguKonyuhiShikyuGendogakuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbc.service.core.shokanfukushiyoguhanbaihi.FukushiyoguKonyuhiShikyuGendogakuManager;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -75,6 +79,7 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
     private final DbT3118ShikibetsuNoKanriDac 識別番号管理Dac;
     private final DbT3053ShokanShukeiDac 償還払請求集計Dac;
     private final ShichosonSecurityJohoFinder 基準月市町村情報Finder;
+    private final FukushiyoguKonyuhiShikyuGendogakuManager 福祉用具購入費支給決定給付実績編集Mgr;
 
     private static final RString 状態_登録 = new RString("登録");
     private static final RString 状態_修正 = new RString("修正");
@@ -97,6 +102,8 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
         this.識別番号管理Dac = InstanceProvider.create(DbT3118ShikibetsuNoKanriDac.class);
         this.償還払請求集計Dac = InstanceProvider.create(DbT3053ShokanShukeiDac.class);
         this.基準月市町村情報Finder = InstanceProvider.create(ShichosonSecurityJohoFinder.class);
+        this.福祉用具購入費支給決定給付実績編集Mgr
+                = InstanceProvider.create(FukushiyoguKonyuhiShikyuGendogakuManager.class);
     }
 
     /**
@@ -130,6 +137,7 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
             DbT3036ShokanHanteiKekkaDac 償還払支給判定結果Dac,
             DbT3118ShikibetsuNoKanriDac 識別番号管理Dac,
             DbT3053ShokanShukeiDac 償還払請求集計Dac,
+            FukushiyoguKonyuhiShikyuGendogakuManager 福祉用具購入費支給決定給付実績編集Mgr,
             ShichosonSecurityJohoFinder 基準月市町村情報Finder
     ) {
         this.mapperProvider = mapperProvider;
@@ -140,6 +148,7 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
         this.償還払支給申請Dac = 償還払支給申請Dac;
         this.償還払支給判定結果Dac = 償還払支給判定結果Dac;
         this.識別番号管理Dac = 識別番号管理Dac;
+        this.福祉用具購入費支給決定給付実績編集Mgr = 福祉用具購入費支給決定給付実績編集Mgr;
         this.基準月市町村情報Finder = 基準月市町村情報Finder;
         this.償還払請求集計Dac = 償還払請求集計Dac;
     }
@@ -168,18 +177,29 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
     /**
      * 償還払請求基本のキーより、該当する償還払い請求基本情報を取得する。
      *
-     * @param 検索キー {@link ShikyuShiseiJohokensakuKey}
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
      * @return ShokanKihon 償還払請求基本Entity
      */
     @Transaction
-    public ShokanKihon getShokanSeikyuKihon(ShikyuShiseiJohokensakuKey 検索キー) {
+    public ShokanKihon getShokanSeikyuKihon(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号) {
         DbT3038ShokanKihonEntity entity = this.償還払請求基本Dac.selectByKey(
-                検索キー.get被保険者番号(),
-                検索キー.getサービス提供年月(),
-                検索キー.get整理番号(),
-                検索キー.get事業者番号(),
-                検索キー.get様式番号(),
-                検索キー.get明細番号());
+                被保険者番号,
+                サービス提供年月,
+                整理番号,
+                事業者番号,
+                様式番号,
+                明細番号);
         if (null == entity) {
             return null;
         }
@@ -190,24 +210,30 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
     /**
      * 償還払請求基本のキーより、該当する償還払い請求福祉用具販売費情報を取得する。
      *
-     * @param 被保険者番号 HihokenshaNo
-     * @param サービス提供年月 FlexibleYearMonth
-     * @param 整理番号 RString
-     * @param 事業者番号 JigyoshaNo
-     * @param 様式番号 RString
-     * @param 履歴番号 Decimal
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
      * @return List<ShokanFukushiYoguHanbaihi>
      */
     @Transaction
-    List<ShokanFukushiYoguHanbaihi> getShokanFukushiYoguHanbaihi(ShikyuShiseiJohokensakuKey 検索キー) {
+    List<ShokanFukushiYoguHanbaihi> getShokanFukushiYoguHanbaihi(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号) {
         List<DbT3048ShokanFukushiYoguHanbaihiEntity> entityList
                 = this.償還払請求福祉用具販売費Dac.select償還払請求福祉用具販売費リスト(
-                        検索キー.get被保険者番号(),
-                        検索キー.getサービス提供年月(),
-                        検索キー.get整理番号(),
-                        検索キー.get事業者番号(),
-                        検索キー.get様式番号(),
-                        検索キー.get明細番号());
+                        被保険者番号,
+                        サービス提供年月,
+                        整理番号,
+                        事業者番号,
+                        様式番号,
+                        明細番号);
         List<ShokanFukushiYoguHanbaihi> resultList = new ArrayList<>();
         if (null == entityList || entityList.isEmpty()) {
             return resultList;
@@ -224,15 +250,26 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
     /**
      * 償還払請求基本のキーより、該当する償還払い支給申請を取得する。
      *
-     * @param 検索キー {@link ShikyuShiseiJohokensakuKey}
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
      * @return ShokanShinsei 償還払支給申請Entity
      */
     @Transaction
-    public ShokanShinsei getShokanShinsei(ShikyuShiseiJohokensakuKey 検索キー) {
+    public ShokanShinsei getShokanShinsei(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号) {
         DbT3034ShokanShinseiEntity entity = this.償還払支給申請Dac.selectByKey(
-                検索キー.get被保険者番号(),
-                検索キー.getサービス提供年月(),
-                検索キー.get整理番号());
+                被保険者番号,
+                サービス提供年月,
+                整理番号);
         if (null == entity) {
             return null;
         }
@@ -243,17 +280,23 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
     /**
      * 償還払請求基本のキーより、該当する償還払判定結果を取得する。
      *
-     * @param 検索キー {@link ShikyuShiseiJohokensakuKey}
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
      * @return ShokanHanteiKekka 償還払支給判定結果Entity
      */
     @Transaction
-    public ShokanHanteiKekka getShokanHanteiKekka(ShikyuShiseiJohokensakuKey 検索キー) {
-        requireNonNull(検索キー,
-                UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請情報検索キー"));
+    public ShokanHanteiKekka getShokanHanteiKekka(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号) {
         DbT3036ShokanHanteiKekkaEntity entity = this.償還払支給判定結果Dac.selectByKey(
-                検索キー.get被保険者番号(),
-                検索キー.getサービス提供年月(),
-                検索キー.get整理番号());
+                被保険者番号,
+                サービス提供年月,
+                整理番号);
         if (null == entity) {
             return null;
         }
@@ -265,52 +308,117 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
     /**
      * 償還払請求基本のキーより、該当する償還払請求集計を取得する。
      *
-     * @param 検索キー {@link ShikyuShiseiJohokensakuKey}
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
      * @return ShokanHanteiKekka 償還払支給判定結果Entity
      */
     @Transaction
-    public ShokanHanteiKekka getShokanShukei(ShikyuShiseiJohokensakuKey 検索キー) {
-        DbT3036ShokanHanteiKekkaEntity entity = 償還払支給判定結果Dac.selectByKey(
-                検索キー.get被保険者番号(),
-                検索キー.getサービス提供年月(),
-                検索キー.get整理番号());
+    public ShokanShukei getShokanShukei(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号) {
+        DbT3053ShokanShukeiEntity entity = 償還払請求集計Dac.selectByKey(
+                被保険者番号,
+                サービス提供年月,
+                整理番号,
+                事業者番号,
+                様式番号,
+                明細番号,
+                null);
 
         if (entity == null) {
             return null;
         }
 
         entity.initializeMd5();
-        return new ShokanHanteiKekka(entity);
+        return new ShokanShukei(entity);
     }
 
-// TODO 出力不明、対応待ち
     /**
      * 償還払請求基本のキーより、同じ年度のすべて支払結果を合計して取得する。
      *
-     * @param 検索キー {@link ShikyuShiseiJohokensakuKey}
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
      * @return SokanbaraiShiharaiKekka 償還払支払結果Entity
      */
     @Transaction
-    public SokanbaraiShiharaiKekka getShokanShiharaiKekkaAll(ShikyuShiseiJohokensakuKey 検索キー) {
-        requireNonNull(検索キー.get被保険者番号(),
+    public SokanbaraiShiharaiKekka getShokanShiharaiKekkaAll(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号) {
+        requireNonNull(被保険者番号,
                 UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        if (null == 検索キー.get被保険者番号()) {
-            // TODO BusinessExceptionとは？
-//            throw new BusinessException();
+        requireNonNull(サービス提供年月,
+                UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        IFukushiyoguKonyuhiShikyuGendogakuMapper mapper
+                = mapperProvider.create(IFukushiyoguKonyuhiShikyuGendogakuMapper.class);
+        ShibaraiKekkaParameter parameter = ShibaraiKekkaParameter.createParameter(
+                被保険者番号,
+                サービス提供年月.getYear().toDateString(),
+                NyuryokuShikibetsuNoShokan3Keta.福祉用具販売費.getコード());
+        SokanbaraiShiharaiKekka result = mapper.select支払結果情報(parameter);
+        if (null == result) {
+            result = new SokanbaraiShiharaiKekka();
+            result.set保険対象費用額(Decimal.ZERO);
+            result.set保険給付額(0);
+            result.set利用者負担額(0);
+            result.set費用額合計(Decimal.ZERO);
         }
-        return null;
+        return result;
     }
-// TODO 出力不明、対応待ち
 
     /**
      * 償還払請求基本のキーより、支払結果情報を抽出される。
      *
-     * @param 検索キー {@link ShikyuShiseiJohokensakuKey}
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
      * @return SokanbaraiShiharaiKekka 償還払支払結果Entity
      */
     @Transaction
-    public SokanbaraiShiharaiKekka getShokanShiharaiKekka(ShikyuShiseiJohokensakuKey 検索キー) {
-        return null;
+    public SokanbaraiShiharaiKekka getShokanShiharaiKekka(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号) {
+        DbT3034ShokanShinseiEntity entity = 償還払支給申請Dac.selectByKey(
+                被保険者番号,
+                サービス提供年月,
+                整理番号);
+        SokanbaraiShiharaiKekka result = new SokanbaraiShiharaiKekka();
+        if (null == entity) {
+            result.set保険対象費用額(Decimal.ZERO);
+            result.set保険給付額(0);
+            result.set利用者負担額(0);
+            result.set費用額合計(Decimal.ZERO);
+            return result;
+        }
+        entity.initializeMd5();
+        ShokanShinsei 償還払支給申請 = new ShokanShinsei(entity);
+        result.set保険対象費用額(償還払支給申請.get保険対象費用額());
+        result.set保険給付額(償還払支給申請.get保険給付額());
+        result.set利用者負担額(償還払支給申請.get利用者負担額());
+        result.set費用額合計(償還払支給申請.get支払金額合計());
+        return result;
     }
 
     /**
@@ -370,6 +478,7 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
         int 最大枝番;
         DbT3038ShokanKihonEntity DbT3038Entity = 償還払請求基本.toEntity();
         DbT3038Entity.setState(EntityDataState.Modified);
+        List<DbT3048ShokanFukushiYoguHanbaihiEntity> DbT3048EntityList = new ArrayList<>();
         償還払請求基本Dac.save(DbT3038Entity);
         if (状態_登録.equals(状態)) {
             RString MAX連番 = 償還払請求福祉用具販売費Dac.getMAX連番(償還払請求基本.get被保険者番号(),
@@ -388,6 +497,7 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
                         = 償還払請求福祉用具販売費.createBuilderForEdit().set順次番号(
                                 new RString(String.valueOf(最大枝番 + 登録数))).build().toEntity();
                 DbT3048Entity.setState(EntityDataState.Added);
+                DbT3048EntityList.add(DbT3048Entity);
                 償還払請求福祉用具販売費Dac.save(DbT3048Entity);
                 登録数++;
             }
@@ -395,12 +505,14 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
             for (ShokanFukushiYoguHanbaihi 償還払請求福祉用具販売費 : 償還払請求福祉用具販売費リスト) {
                 DbT3048ShokanFukushiYoguHanbaihiEntity DbT3048Entity = 償還払請求福祉用具販売費.toEntity();
                 DbT3048Entity.setState(EntityDataState.Modified);
+                DbT3048EntityList.add(DbT3048Entity);
                 償還払請求福祉用具販売費Dac.save(DbT3048Entity);
             }
         } else if (状態_削除.equals(状態)) {
             for (ShokanFukushiYoguHanbaihi 償還払請求福祉用具販売費 : 償還払請求福祉用具販売費リスト) {
                 DbT3048ShokanFukushiYoguHanbaihiEntity DbT3048Entity = 償還払請求福祉用具販売費.toEntity();
                 DbT3048Entity.setState(EntityDataState.Deleted);
+                DbT3048EntityList.add(DbT3048Entity);
                 償還払請求福祉用具販売費Dac.save(DbT3048Entity);
             }
         }
@@ -426,7 +538,16 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
         DbT3053Entity.setState(EntityDataState.Modified);
         償還払請求集計Dac.save(DbT3053Entity);
         if (null != 償還払支給判定結果) {
-            // TODO  ビジネス設計_DBCMN51001_福祉用具購入費支給決定給付実績編集の給付実績処理を参照 待ち
+            // TODO
+//            福祉用具購入費支給決定給付実績編集Mgr.dealKyufujisseki(
+//                    画面モード,
+//                    ShikibetsuCode.EMPTY,
+//                    償還払請求基本Entity.toEntity(),
+//                    DbT3048EntityList,
+//                    償還払支給申請entity.toEntity(),
+//                    償還払支給判定結果entity.toEntity(),
+//                    償還払請求集計entity.toEntity(),
+//                    修正前支給区分);
         }
     }
 
@@ -560,10 +681,32 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
         DbT3053Entity.setState(EntityDataState.Modified);
         償還払請求集計Dac.save(DbT3053Entity);
         if (null != 償還払支給判定結果) {
-            // TODO  ビジネス設計_DBCMN51001_福祉用具購入費支給決定給付実績編集の給付実績処理を参照 待ち
+            // TODO
+//            福祉用具購入費支給決定給付実績編集Mgr.dealKyufujisseki(
+//                    画面モード,
+//                    ShikibetsuCode.EMPTY,
+//                    償還払請求基本Entity.toEntity(),
+//                    DbT3048EntityList,
+//                    償還払支給申請entity.toEntity(),
+//                    償還払支給判定結果entity.toEntity(),
+//                    償還払請求集計entity.toEntity(),
+//                    修正前支給区分);
         }
     }
 
+    /**
+     * 決定情報の登録更新処理を行う。
+     *
+     * @param 償還払請求基本 償還払請求基本
+     * @param 償還払請求福祉用具販売費リスト 償還払請求福祉用具販売費リスト
+     * @param 償還払支給申請 償還払支給申請
+     * @param 償還払支給判定結果 償還払支給判定結果
+     * @param 償還払集計 償還払集計
+     * @param 決定日 決定日
+     * @param 差額金額登録フラグ 差額金額登録フラグ
+     * @param 識別コード 識別コード
+     * @param 画面モード 画面モード
+     */
     @Transaction
     public void updKetteJoho(
             ShokanKihon 償還払請求基本,
@@ -573,9 +716,11 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
             ShokanShukei 償還払集計,
             FlexibleDate 決定日,
             boolean 差額金額登録フラグ,
-            RString 状態) {
+            ShikibetsuCode 識別コード,
+            RString 画面モード) {
         RString 整理番号 = Saiban.get(SubGyomuCode.DBC介護給付,
                 SaibanHanyokeyName.償還整理番号.getコード()).nextString();
+        RString 修正前支給区分 = RString.EMPTY;
         if (null != 決定日 && !決定日.isEmpty()) {
             int データ件数 = 償還払支給判定結果Dac.getCountByKey(
                     償還払支給判定結果.get被保険者番号(),
@@ -590,10 +735,12 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
                         set整理番号(整理番号).build().toEntity();
                 DbT3036Entity.setState(EntityDataState.Added);
                 償還払支給判定結果Dac.save(DbT3036Entity);
+                修正前支給区分 = 支給区分_不支給;
             } else {
                 DbT3036ShokanHanteiKekkaEntity DbT3036Entity = 償還払支給判定結果.toEntity();
                 DbT3036Entity.setState(EntityDataState.Modified);
                 償還払支給判定結果Dac.save(DbT3036Entity);
+                修正前支給区分 = 支給区分_支給;
             }
             DbT3053ShokanShukeiEntity DbT3053Entity = 償還払集計.toEntity();
             DbT3053Entity.setState(EntityDataState.Modified);
@@ -608,6 +755,55 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
             }
         }
         if (null != 決定日 && !決定日.isEmpty()) {
+            ShokanKihon 償還払請求基本Entity = getShokanSeikyuKihon(
+                    償還払請求基本.get被保険者番号(),
+                    償還払請求基本.getサービス提供年月(),
+                    償還払請求基本.get整理番号(),
+                    償還払請求基本.get事業者番号(),
+                    償還払請求基本.get様式番号(),
+                    new RString("0001"));
+            List<ShokanFukushiYoguHanbaihi> 償還払請求福祉用具販売費リスト2 = getShokanFukushiYoguHanbaihi(
+                    償還払請求基本.get被保険者番号(),
+                    償還払請求基本.getサービス提供年月(),
+                    償還払請求基本.get整理番号(),
+                    償還払請求基本.get事業者番号(),
+                    償還払請求基本.get様式番号(),
+                    new RString("0001"));
+            ShokanShinsei 償還払支給申請entity = getShokanShinsei(
+                    償還払請求基本.get被保険者番号(),
+                    償還払請求基本.getサービス提供年月(),
+                    償還払請求基本.get整理番号(),
+                    償還払請求基本.get事業者番号(),
+                    償還払請求基本.get様式番号(),
+                    new RString("0001"));
+            ShokanHanteiKekka 償還払支給判定結果entity = getShokanHanteiKekka(
+                    償還払請求基本.get被保険者番号(),
+                    償還払請求基本.getサービス提供年月(),
+                    償還払請求基本.get整理番号());
+            ShokanShukei 償還払請求集計entity = getShokanShukei(
+                    償還払請求基本.get被保険者番号(),
+                    償還払請求基本.getサービス提供年月(),
+                    償還払請求基本.get整理番号(),
+                    償還払請求基本.get事業者番号(),
+                    償還払請求基本.get様式番号(),
+                    new RString("0001"));
+            List<DbT3048ShokanFukushiYoguHanbaihiEntity> DbT3048EntityList = new ArrayList<>();
+            for (ShokanFukushiYoguHanbaihi entity : 償還払請求福祉用具販売費リスト2) {
+                DbT3048EntityList.add(entity.toEntity());
+            }
+            if (null != 償還払支給判定結果entity
+                    && null != 償還払支給判定結果entity.get支給_不支給決定区分()
+                    && !償還払支給判定結果entity.get支給_不支給決定区分().isEmpty()) {
+                福祉用具購入費支給決定給付実績編集Mgr.dealKyufujisseki(
+                        画面モード,
+                        識別コード,
+                        償還払請求基本Entity.toEntity(),
+                        DbT3048EntityList,
+                        償還払支給申請entity.toEntity(),
+                        償還払支給判定結果entity.toEntity(),
+                        償還払請求集計entity.toEntity(),
+                        修正前支給区分);
+            }
         }
     }
 
@@ -650,7 +846,7 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
     public ServiceShuruiCode getServiceShuruiCode(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月)
             throws NullPointerException {
         ServiceShuruiCode サービス種類 = new ServiceShuruiCode("");
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, DbzErrorMessages.入力値が不正.getMessage().toString());
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         IFukushiyoguKonyuhiShikyuGendogakuMapper mapper
                 = mapperProvider.create(IFukushiyoguKonyuhiShikyuGendogakuMapper.class);
@@ -719,10 +915,13 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
      */
     @Transaction
     public RString getYoshikiName(RString 識別番号, FlexibleYearMonth サービス年月) {
-        DbT3118ShikibetsuNoKanriEntity entity = this.識別番号管理Dac.select識別番号管理(識別番号, サービス年月);
-        if (null == entity) {
+        RString 略称 = this.識別番号管理Dac.select略称(
+                識別番号,
+                サービス年月,
+                ShikibetsuNoKubon.入力識別番号.getコード());
+        if (null == 略称) {
             return RString.EMPTY;
         }
-        return entity.getRyakusho();
+        return 略称;
     }
 }

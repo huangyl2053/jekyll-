@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -14,10 +15,10 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SokanbaraiShiharaiKekka {
+public class SokanbaraiShiharaiKekka implements Cloneable, Serializable {
 
     private Decimal 費用額合計;
     private Decimal 保険対象費用額;
-    private Decimal 保険給付額;
-    private Decimal 利用者負担額;
+    private int 保険給付額;
+    private int 利用者負担額;
 }

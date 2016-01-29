@@ -4,6 +4,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.hyoujiJun;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.ryakusho;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.shikibetsuNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.shikibetsuNoKubon;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.tekiyoKaishiYM;
@@ -163,4 +164,31 @@ public class DbT3118ShikibetsuNoKanriDac {
                         )).order(by(hyoujiJun, Order.ASC)).toList(DbT3118ShikibetsuNoKanriEntity.class);
     }
 
+    /**
+     * 略称を取得する。
+     *
+     * @param 識別番号 識別番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 識別番号区分 識別番号区分
+     * @return RString 略称
+     * @throws NullPointerException
+     */
+    @Transaction
+    public RString select略称(RString 識別番号, FlexibleYearMonth サービス提供年月, RString 識別番号区分)
+            throws NullPointerException {
+
+        requireNonNull(識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("識別番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(ryakusho).
+                table(DbT3118ShikibetsuNoKanri.class).
+                where(and(
+                                eq(shikibetsuNo, 識別番号),
+                                leq(tekiyoKaishiYM, サービス提供年月),
+                                leq(サービス提供年月, tekiyoShuryoYM),
+                                eq(shikibetsuNoKubon, 識別番号区分))).
+                toObject(RString.class);
+    }
 }

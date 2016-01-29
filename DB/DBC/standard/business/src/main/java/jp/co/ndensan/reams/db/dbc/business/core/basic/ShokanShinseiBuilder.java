@@ -342,6 +342,18 @@ public class ShokanShinseiBuilder {
     }
 
     /**
+     * 保険対象費用額を設定します。
+     *
+     * @param 保険対象費用額 保険対象費用額
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set保険対象費用額(Decimal 保険対象費用額) {
+        requireNonNull(保険対象費用額, UrSystemErrorMessages.値がnull.getReplacedMessage("保険対象費用額"));
+        entity.setHokenTaishoHiyogaku(保険対象費用額);
+        return this;
+    }
+
+    /**
      * {@link ShokanShinsei}のインスタンスを生成します。
      *
      * @return {@link ShokanShinsei}のインスタンス
