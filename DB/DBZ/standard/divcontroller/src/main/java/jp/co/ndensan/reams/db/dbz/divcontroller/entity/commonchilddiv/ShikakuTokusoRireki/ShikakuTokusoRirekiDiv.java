@@ -24,13 +24,9 @@ import jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParamete
 import jp.co.ndensan.reams.db.dbz.service.shikakutokuso.ShikakuTokusoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
@@ -433,7 +429,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
 
             RDateTime 処理日時 = shikakuTokuso.get処理日時();
             RStringBuilder 処理日時表示 = new RStringBuilder();
-            処理日時表示.append(処理日時.getDate().wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString());
+            処理日時表示.append(処理日時.getDate().wareki().toDateString());
             処理日時表示.append(RString.HALF_SPACE);
             処理日時表示.append(String.format("%02d", 処理日時.getHour()));
             処理日時表示.append(":");
