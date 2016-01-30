@@ -31,7 +31,11 @@ public enum ConfigNameDBE {
     /**
      * 合議体最大委員数
      */
-    合議体最大委員数("合議体最大委員数");
+    合議体最大委員数("合議体最大委員数"),
+    /**
+     * 主治医意見書督促期限日数
+     */
+    主治医意見書督促期限日数("主治医意見書督促期限日数");
     private final RString fullName;
 
     private ConfigNameDBE(String fullname) {
