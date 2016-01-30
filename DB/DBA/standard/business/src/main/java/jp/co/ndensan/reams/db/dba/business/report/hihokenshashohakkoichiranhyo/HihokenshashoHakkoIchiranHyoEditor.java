@@ -25,7 +25,7 @@ public class HihokenshashoHakkoIchiranHyoEditor implements IHihokenshashoHakkoIc
     }
 
     /**
-     * 要介護認定業務進捗状況一覧表editです。
+     * 被保険者証発行一覧表editです。
      * @param source 被保険者証発行一覧表Source
      * @return 要介護認定業務進捗状況一覧表
      */

@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  *
  * 被保険者証発行一覧表Builderクラスです
  */
-public class HihokenshashoHakkoIchiranHyoBuilderImpl implements IHihokenshashoHakkoIchiranHyoBuilder {
+public final class HihokenshashoHakkoIchiranHyoBuilderImpl implements IHihokenshashoHakkoIchiranHyoBuilder {
     
-    private IHihokenshashoHakkoIchiranHyoEditor joho;
+    private final IHihokenshashoHakkoIchiranHyoEditor joho;
     
     /**
      * コンストラクタです。
