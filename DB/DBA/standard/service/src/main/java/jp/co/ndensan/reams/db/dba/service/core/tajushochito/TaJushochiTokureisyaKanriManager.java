@@ -139,11 +139,13 @@ public class TaJushochiTokureisyaKanriManager {
             List<TaJushochiTokureisyaKanriRelateEntity> list = new ArrayList<>();
             for (TaJushochiTokureisyaKanriRelateEntity entity : 適用情報リスト) {
                 FlexibleDate 退所日 = entity.getTaishoYMD();
-                if (退所日.isEmpty()) {
-                    list.add(entity);
+                if (退所日 == null || 退所日.isEmpty()) {
+                    list.add(適用情報リスト.get(0));
+                    break;
                 } else {
                     Collections.sort(適用情報リスト, new TaJushochiTokureisyaKanriManager.DateComparator());
                     list.add(適用情報リスト.get(0));
+                    break;
                 }
             }
             for (TaJushochiTokureisyaKanriRelateEntity listEntity : list) {

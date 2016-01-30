@@ -385,15 +385,40 @@ public class TaJushochiTokureishaKanriHandler {
             row.setShikibetsuCode(master.getShikibetsuCode().getColumnValue());
             row.setIdoYMD(new RString(master.getIdoYMD().toString()));
             row.setEdaNo(nullTOEmpty(master.getEdaNo()));
-            row.getTekiyoYMD().setValue(new RDate(nullToEmty(master.getTekiyoYMD()).toString()));
-            row.getTekiyoTodokedeYMD().setValue(new RDate(nullToEmty(master.getTekiyoTodokedeYMD()).toString()));
+
+            if (master.getTekiyoYMD() != null && !master.getTekiyoYMD().isEmpty()) {
+                row.getTekiyoYMD().setValue(new RDate(master.getTekiyoYMD().toString()));
+            } else {
+                row.getTekiyoYMD().clearValue();
+            }
+            if (master.getTekiyoYMD() != null && !master.getTekiyoYMD().isEmpty()) {
+                row.getTekiyoYMD().setValue(new RDate(master.getTekiyoYMD().toString()));
+            } else {
+                row.getTekiyoTodokedeYMD().clearValue();
+            }
             row.setTekiyoJiyuCode(get適用事由(master.getTekiyoJiyuCode()));
-            row.getKaijoYMD().setValue(new RDate(nullToEmty(master.getKaijoYMD()).toString()));
-            row.getKaijoTodokedeYMD().setValue(new RDate(nullToEmty(master.getKaijoTodokedeYMD()).toString()));
+            if (master.getKaijoYMD() != null && !master.getKaijoYMD().isEmpty()) {
+                row.getKaijoYMD().setValue(new RDate(master.getKaijoYMD().toString()));
+            } else {
+                row.getKaijoYMD().clearValue();
+            }
+            if (master.getKaijoTodokedeYMD() != null && !master.getKaijoTodokedeYMD().isEmpty()) {
+                row.getKaijoTodokedeYMD().setValue(new RDate(master.getKaijoTodokedeYMD().toString()));
+            } else {
+                row.getKaijoTodokedeYMD().clearValue();
+            }
             row.setKaijoJiyuCode(get解除事由(master.getKaijoJiyuCode()));
             row.setRirekiNo(new RString(nullTOZero(master.getRirekiNo()).toString()));
-            row.getNyushoYMD().setValue(new RDate(nullToEmty(master.getNyushoYMD()).toString()));
-            row.getTaishoYMD().setValue(new RDate(nullToEmty(master.getTaishoYMD()).toString()));
+            if (master.getNyushoYMD() != null && !master.getNyushoYMD().isEmpty()) {
+                row.getNyushoYMD().setValue(new RDate(master.getNyushoYMD().toString()));
+            } else {
+                row.getNyushoYMD().clearValue();
+            }
+            if (master.getTaishoYMD() != null && !master.getTaishoYMD().isEmpty()) {
+                row.getTaishoYMD().setValue(new RDate(master.getTaishoYMD().toString()));
+            } else {
+                row.getTaishoYMD().clearValue();
+            }
             row.setNyushoShisetsuShurui(master.getNyushoShisetsuShurui());
             row.setNyushoShisetsuCode(nullTOEmpty(master.getJigyoshaName()).getColumnValue());
             // TODO 凌護行 措置保険者番号より保険者氏名を表示する。「設定不明」　QA回答まち、　2016/1/28
@@ -630,13 +655,12 @@ public class TaJushochiTokureishaKanriHandler {
         return 項目;
     }
 
-    private FlexibleDate nullToEmty(FlexibleDate 項目) {
-        if (項目 == null || 項目.isEmpty()) {
-            return FlexibleDate.EMPTY;
-        }
-        return 項目;
-    }
-
+//    private FlexibleDate nullToEmty(FlexibleDate 項目) {
+//        if (項目 == null || 項目.isEmpty()) {
+//            return FlexibleDate.EMPTY;
+//        }
+//        return 項目;
+//    }
     private Decimal nullTOZero(Decimal 項目) {
         if (項目 == null) {
             return Decimal.ZERO;
