@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiy
 import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshiharaiyotei.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -46,7 +47,7 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriService {
                 INinshoshaSourceBuilderCreator builderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder builder = builderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
                         RDate.getNowDate(), assembler.getImageFolderPath());
-                for (ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport report : toReports(itemList, builder.buildSource().denshiKoin)) {
+                for (ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport report : toReports(itemList, builder.buildSource())) {
                     ReportSourceWriter<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> reportWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportWriter);
                 }
@@ -56,11 +57,11 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriService {
     }
 
     private List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport> toReports(
-            List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> itemList, RString denshikoin) {
+            List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> itemList, NinshoshaSource ninshoshaSource) {
         List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport> list = new ArrayList<>();
         List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> newItemList = new ArrayList<>();
         for (ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item : itemList) {
-            newItemList.add(setShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport(item, denshikoin));
+            newItemList.add(setShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport(item, ninshoshaSource));
         }
         list.add(ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport.createFrom(newItemList));
         return list;
@@ -79,7 +80,8 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriService {
     }
 
     private ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem
-            setShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport(ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item, RString denshikoin) {
+            setShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport(ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item,
+                    NinshoshaSource ninshoshaSource) {
 
         return new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem(
                 item.getBunshoNo(),
@@ -148,14 +150,14 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriService {
                 item.getTsuchibunMixtwo1(),
                 item.getTsuchibunMixtwo2(),
                 item.getHakkoYMD(),
-                denshikoin,
-                item.getNinshoshaYakushokuMei(),
-                item.getNinshoshaYakushokuMei1(),
-                item.getKoinMojiretsu(),
-                item.getNinshoshaYakushokuMei2(),
-                item.getNinshoshaShimeiKakenai(),
-                item.getNinshoshaShimeiKakeru(),
-                item.getKoinShoryaku(),
+                ninshoshaSource.denshiKoin,
+                ninshoshaSource.ninshoshaYakushokuMei,
+                ninshoshaSource.ninshoshaYakushokuMei1,
+                ninshoshaSource.koinMojiretsu,
+                ninshoshaSource.ninshoshaYakushokuMei2,
+                ninshoshaSource.ninshoshaShimeiKakenai,
+                ninshoshaSource.ninshoshaShimeiKakeru,
+                ninshoshaSource.koinShoryaku,
                 item.getYubinNo(),
                 item.getGyoseiku2(),
                 item.getJusho4(),

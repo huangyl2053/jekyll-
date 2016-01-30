@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.jutakukaishujizenshinseishonin
 import jp.co.ndensan.reams.db.dbc.business.report.jutakukaishujizenshinseishoninkekkatsuchisho.JutakukaishuJizenShinseiShoninKekkaTsuchishoReport;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jutakukaishujizenshinseishoninkekka.JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -44,7 +45,7 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoService {
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
                         RDate.getNowDate(), assembler.getImageFolderPath());
-                item = setJutakukaishuJizenShinseiShoninKekkaTsuchishoItem(item, ninshoshaSourceBuilder.buildSource().denshiKoin);
+                item = setJutakukaishuJizenShinseiShoninKekkaTsuchishoItem(item, ninshoshaSourceBuilder.buildSource());
                 ReportSourceWriter<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 JutakukaishuJizenShinseiShoninKekkaTsuchishoReport.createFrom(item).writeBy(reportSourceWriter);
@@ -65,7 +66,8 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoService {
     }
 
     private static JutakukaishuJizenShinseiShoninKekkaTsuchishoItem
-            setJutakukaishuJizenShinseiShoninKekkaTsuchishoItem(JutakukaishuJizenShinseiShoninKekkaTsuchishoItem item, RString denshikoin) {
+            setJutakukaishuJizenShinseiShoninKekkaTsuchishoItem(JutakukaishuJizenShinseiShoninKekkaTsuchishoItem item,
+                    NinshoshaSource ninshoshaSource) {
 
         return new JutakukaishuJizenShinseiShoninKekkaTsuchishoItem(
                 item.getBunshoNo(),
@@ -89,14 +91,14 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoService {
                 item.getHokenKyufuhigaku(),
                 item.getTsuchibun2(),
                 item.getHakkoYMD(),
-                denshikoin,
-                item.getNinshoshaYakushokuMei(),
-                item.getNinshoshaYakushokuMei1(),
-                item.getKoinMojiretsu(),
-                item.getNinshoshaYakushokuMei2(),
-                item.getNinshoshaShimeiKakenai(),
-                item.getNinshoshaShimeiKakeru(),
-                item.getKoinShoryaku(),
+                ninshoshaSource.denshiKoin,
+                ninshoshaSource.ninshoshaYakushokuMei,
+                ninshoshaSource.ninshoshaYakushokuMei1,
+                ninshoshaSource.koinMojiretsu,
+                ninshoshaSource.ninshoshaYakushokuMei2,
+                ninshoshaSource.ninshoshaShimeiKakenai,
+                ninshoshaSource.ninshoshaShimeiKakeru,
+                ninshoshaSource.koinShoryaku,
                 item.getYubinNo(),
                 item.getGyoseiku1(),
                 item.getJusho4(),
