@@ -69,7 +69,7 @@ public enum TaishouWaritsukeDivSpec implements IPredicate<TaishouWaritsukeDiv> {
                  */
                 @Override
                 public boolean apply(TaishouWaritsukeDiv div) {
-                    return !div.getDgWaritsukeKohoshaIchiran().getSelectedItems().isEmpty();
+                    return !div.getDgTaishoshaIchiran().getSelectedItems().isEmpty();
                 }
             },
     割付人数チェック {

@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class TaishouWaritsuke {
 
-    private static final RString 審査会順番を振りなおす = new RString("btnDetermineToShinsakaiOrder");
+    private static final RString 審査会順番を振りなおす = new RString("BtnResetShinsaOrder");
 
     /**
      * コントロールdivが「生成」された際の処理です。(オンロード)<br/>

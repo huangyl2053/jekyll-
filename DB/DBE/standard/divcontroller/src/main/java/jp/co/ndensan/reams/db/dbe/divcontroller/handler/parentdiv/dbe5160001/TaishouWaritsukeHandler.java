@@ -57,7 +57,11 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 public class TaishouWaritsukeHandler {
 
     private final TaishouWaritsukeDiv div;
-    private static final RString 審査会順番を振りなおす = new RString("btnDetermineToShinsakaiOrder");
+    private static final RString 審査会順番を振りなおす = new RString("btnResetShinsaOrder");
+    private static final RString 審査会順番を確定する = new RString("btnDetermineToShinsakaiOrder");
+    private static final RString 登録する = new RString("btnRegister");
+    private static final RString 一覧に戻る = new RString("btnBackToIchiran");
+    private static final RString 審査会割付を完了する = new RString("btnComplete");
     private static final RString 対象者一覧状態フラグ = new RString("1");
     private static final RString 候補者一覧状態フラグ = new RString("2");
     private static final RString 審査順確定フラグ_確定 = new RString("1");
@@ -82,6 +86,18 @@ public class TaishouWaritsukeHandler {
         ヘッドエリア検索();
         対象者一覧検索();
         候補者一覧検索();
+        RString 進捗状況 = div.getTxtStatus().getValue();
+        if (進捗状況.equals(ShinsakaiShinchokuJokyo.中止.get名称()) || 進捗状況.equals(ShinsakaiShinchokuJokyo.完了.get名称())) {
+            div.getBtnJidoWaritsuke().setDisabled(true);
+            div.getBtnWaritsuke().setDisabled(true);
+            div.getBtnWaritsukeKaijo().setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(登録する, true);
+        }
+        if (進捗状況.equals(ShinsakaiShinchokuJokyo.未開催.get名称())) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, true);
+        }
     }
 
     /**
@@ -112,15 +128,17 @@ public class TaishouWaritsukeHandler {
      */
     public void 簡易割付処理() {
         List<dgWaritsukeKohoshaIchiran_Row> rows = div.getDgWaritsukeKohoshaIchiran().getDataSource();
-        for (dgWaritsukeKohoshaIchiran_Row row : rows) {
-            if (div.getTxtWaritsukeNinzu().getValue().intValue() < div.getTxtYoteiTeiin().getValue().intValue()) {
-                if (!isオブザーバーチェックOK(row)) {
-                    continue;
-                }
-                候補者移転処理(row);
-                div.getTxtWaritsukeNinzu().setValue(div.getTxtWaritsukeNinzu().getValue().add(1));
-                if (div.getTxtWaritsukeNinzu().getValue().equals(div.getTxtYoteiTeiin().getValue())) {
-                    break;
+        if (rows != null) {
+            for (dgWaritsukeKohoshaIchiran_Row row : rows) {
+                if (div.getTxtWaritsukeNinzu().getValue().intValue() < div.getTxtYoteiTeiin().getValue().intValue()) {
+                    if (!isオブザーバーチェックOK(row)) {
+                        continue;
+                    }
+                    候補者移転処理(row);
+                    div.getTxtWaritsukeNinzu().setValue(div.getTxtWaritsukeNinzu().getValue().add(1));
+                    if (div.getTxtWaritsukeNinzu().getValue().equals(div.getTxtYoteiTeiin().getValue())) {
+                        break;
+                    }
                 }
             }
         }
