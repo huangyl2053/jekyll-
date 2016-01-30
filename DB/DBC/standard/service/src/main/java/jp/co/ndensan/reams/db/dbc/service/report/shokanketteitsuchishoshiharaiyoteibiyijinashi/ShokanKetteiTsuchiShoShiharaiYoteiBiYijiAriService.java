@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiy
 import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshiharaiyotei.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -43,8 +44,9 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriService {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaSourceBuilderCreator builderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                builderCreator.create(GyomuCode.DB介護保険, RString.EMPTY, RDate.getNowDate(), assembler.getImageFolderPath()).buildSource();
-                for (ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport report : toReports(itemList)) {
+                INinshoshaSourceBuilder builder = builderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
+                        RDate.getNowDate(), assembler.getImageFolderPath());
+                for (ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport report : toReports(itemList, builder.buildSource().denshiKoin)) {
                     ReportSourceWriter<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> reportWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportWriter);
                 }
@@ -53,10 +55,14 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriService {
         }
     }
 
-    private static List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport> toReports(
-            List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> itemList) {
+    private List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport> toReports(
+            List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> itemList, RString denshikoin) {
         List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport> list = new ArrayList<>();
-        list.add(ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport.createFrom(itemList));
+        List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> newItemList = new ArrayList<>();
+        for (ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item : itemList) {
+            newItemList.add(setShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport(item, denshikoin));
+        }
+        list.add(ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport.createFrom(newItemList));
         return list;
     }
 
@@ -70,5 +76,116 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriService {
         builder.isHojinNo(property.containsHojinNo());
         builder.isKojinNo(property.containsKojinNo());
         return builder.<T>create();
+    }
+
+    private ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem
+            setShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport(ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item, RString denshikoin) {
+
+        return new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem(
+                item.getBunshoNo(),
+                item.getTitle(),
+                item.getTitle2_1(),
+                item.getTitle2_2_1(),
+                item.getTitle2_2_2(),
+                item.getTitle2_3_1(),
+                item.getTitle2_3_2(),
+                item.getTitle2_4(),
+                item.getTsuchibun1(),
+                item.getHihokenshaName(),
+                item.getHihokenshaNo1(),
+                item.getHihokenshaNo2(),
+                item.getHihokenshaNo3(),
+                item.getHihokenshaNo4(),
+                item.getHihokenshaNo5(),
+                item.getHihokenshaNo6(),
+                item.getHihokenshaNo7(),
+                item.getHihokenshaNo8(),
+                item.getHihokenshaNo9(),
+                item.getHihokenshaNo10(),
+                item.getUketsukeYMD(),
+                item.getKetteiYMD(),
+                item.getHonninShiharaiGaku(),
+                item.getTaishoYM(),
+                item.getKyufuShu1(),
+                item.getKyufuShu2(),
+                item.getKyufuShu3(),
+                item.getKekka(),
+                item.getShikyuGaku(),
+                item.getRiyuTitle(),
+                item.getRiyu1(),
+                item.getRiyu2(),
+                item.getRiyu3(),
+                item.getTorikeshi1(),
+                item.getTorikeshi2(),
+                item.getMochimono1(),
+                item.getBankName(),
+                item.getTorikeshiMochimono1(),
+                item.getBranchBankName(),
+                item.getMochimono2(),
+                item.getTorikeshiMochimono2(),
+                item.getMochimono3(),
+                item.getShiharaiBasho(),
+                item.getTorikeshiShiharaibasho(),
+                item.getShumokuTitle(),
+                item.getKouzaShu(),
+                item.getBangoTitle(),
+                item.getKouzaNo(),
+                item.getKouzaMeigi(),
+                item.getShiharaiStartYMD(),
+                item.getTorikeshiShiharaikikan(),
+                item.getShiharaiEndYMD(),
+                item.getKaraFugo(),
+                item.getShiharaiStartHMS(),
+                item.getShiharaiEndHMS(),
+                item.getSihaYoYmd(),
+                item.getTsuchibun２(),
+                item.getSeirino(),
+                item.getTsuchino(),
+                item.getRemban(),
+                item.getTsuchibunLarge(),
+                item.getTsuchibunMix1(),
+                item.getTsuchibunMix2(),
+                item.getTsuchibunMixtwo1(),
+                item.getTsuchibunMixtwo2(),
+                item.getHakkoYMD(),
+                denshikoin,
+                item.getNinshoshaYakushokuMei(),
+                item.getNinshoshaYakushokuMei1(),
+                item.getKoinMojiretsu(),
+                item.getNinshoshaYakushokuMei2(),
+                item.getNinshoshaShimeiKakenai(),
+                item.getNinshoshaShimeiKakeru(),
+                item.getKoinShoryaku(),
+                item.getYubinNo(),
+                item.getGyoseiku2(),
+                item.getJusho4(),
+                item.getJushoText(),
+                item.getJusho5(),
+                item.getJusho6(),
+                item.getKatagakiText(),
+                item.getKatagaki3(),
+                item.getKatagakiSmall2(),
+                item.getKatagaki4(),
+                item.getKatagakiSmall1(),
+                item.getShimei5(),
+                item.getShimeiSmall2(),
+                item.getShimeiText(),
+                item.getMeishoFuyo2(),
+                item.getShimeiSmall1(),
+                item.getDainoKubunMei(),
+                item.getShimei6(),
+                item.getMeishoFuyo1(),
+                item.getSamabunShimeiText(),
+                item.getKakkoLeft2(),
+                item.getSamabunShimei2(),
+                item.getSamabunShimeiSmall2(),
+                item.getSamaBun2(),
+                item.getKakkoRight2(),
+                item.getKakkoLeft1(),
+                item.getSamabunShimei1(),
+                item.getSamaBun1(),
+                item.getKakkoRight1(),
+                item.getSamabunShimeiSmall1(),
+                item.getCustomerBarCode());
     }
 }

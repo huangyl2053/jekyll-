@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.jutakukaishujizenshinseishonin
 import jp.co.ndensan.reams.db.dbc.business.report.jutakukaishujizenshinseishoninkekkatsuchisho.JutakukaishuJizenShinseiShoninKekkaTsuchishoProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.jutakukaishujizenshinseishoninkekkatsuchisho.JutakukaishuJizenShinseiShoninKekkaTsuchishoReport;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jutakukaishujizenshinseishoninkekka.JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -41,8 +42,9 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoService {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
+                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
                         RDate.getNowDate(), assembler.getImageFolderPath());
+                item = setJutakukaishuJizenShinseiShoninKekkaTsuchishoItem(item, ninshoshaSourceBuilder.buildSource().denshiKoin);
                 ReportSourceWriter<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 JutakukaishuJizenShinseiShoninKekkaTsuchishoReport.createFrom(item).writeBy(reportSourceWriter);
@@ -60,5 +62,71 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoService {
         builder.isHojinNo(property.containsHojinNo());
         builder.isKojinNo(property.containsKojinNo());
         return builder.<T>create();
+    }
+
+    private static JutakukaishuJizenShinseiShoninKekkaTsuchishoItem
+            setJutakukaishuJizenShinseiShoninKekkaTsuchishoItem(JutakukaishuJizenShinseiShoninKekkaTsuchishoItem item, RString denshikoin) {
+
+        return new JutakukaishuJizenShinseiShoninKekkaTsuchishoItem(
+                item.getBunshoNo(),
+                item.getTitle(),
+                item.getTsuchibun1(),
+                item.getHihokenshaName(),
+                item.getHihokenshaNo(),
+                item.getUketsukeYMD(),
+                item.getShoninKbn(),
+                item.getShoninYMD(),
+                item.getFushoninRiyu(),
+                item.getKyufuShurui(),
+                item.getJigyoshaName(),
+                item.getJigyoshaYubinNo(),
+                item.getJigyoshoJusho(),
+                item.getJigyoshoTelNo(),
+                item.getRiyushoSakuseisha(),
+                item.getHiyogakuGokei(),
+                item.getHokenHiyogaku(),
+                item.getRiyoFutangaku(),
+                item.getHokenKyufuhigaku(),
+                item.getTsuchibun2(),
+                item.getHakkoYMD(),
+                denshikoin,
+                item.getNinshoshaYakushokuMei(),
+                item.getNinshoshaYakushokuMei1(),
+                item.getKoinMojiretsu(),
+                item.getNinshoshaYakushokuMei2(),
+                item.getNinshoshaShimeiKakenai(),
+                item.getNinshoshaShimeiKakeru(),
+                item.getKoinShoryaku(),
+                item.getYubinNo(),
+                item.getGyoseiku1(),
+                item.getJusho4(),
+                item.getJushoText(),
+                item.getJusho5(),
+                item.getJusho6(),
+                item.getKatagakiText(),
+                item.getKatagaki3(),
+                item.getKatagakiSmall2(),
+                item.getKatagaki4(),
+                item.getKatagakiSmall1(),
+                item.getShimei5(),
+                item.getShimeiSmall2(),
+                item.getShimeiText(),
+                item.getMeishoFuyo2(),
+                item.getShimeiSmall1(),
+                item.getDainoKubunMei(),
+                item.getShimei6(),
+                item.getMeishoFuyo1(),
+                item.getSamabunShimeiText(),
+                item.getSamaBun2(),
+                item.getKakkoLeft2(),
+                item.getSamabunShimei2(),
+                item.getSamabunShimeiSmall2(),
+                item.getKakkoRight2(),
+                item.getKakkoLeft1(),
+                item.getSamabunShimei1(),
+                item.getSamaBun1(),
+                item.getKakkoRight1(),
+                item.getSamabunShimeiSmall1(),
+                item.getCustomerBarCode());
     }
 }
