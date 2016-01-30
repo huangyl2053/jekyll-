@@ -8,9 +8,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2330001;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shujiiikentokusokujohakko.ShujiiIkenTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2330001.ShujiiIkenTokusokujoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikentokusokujo.ShujiiIkenTokusokujoFinder;
+import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 主治医意見書督促状発行のHandlerクラスです。
@@ -60,8 +63,7 @@ public class ShujiiIkenTokusokujoHakkoHandler {
 
     private void initializtion() {
         div.getHakkoJoken().getTxtKijunDay().setValue(FlexibleDate.getNowDate());
-//        RString 主治医意見書督促期限日数 = BusinessConfig.get(ConfigNameDBE.主治医意見書督促期限日数, SubGyomuCode.DBE認定支援);
-        RString 主治医意見書督促期限日数 = new RString("1");
+        RString 主治医意見書督促期限日数 = BusinessConfig.get(ConfigNameDBE.主治医意見書督促期限日数, SubGyomuCode.DBE認定支援);
         if (Decimal.canConvert(主治医意見書督促期限日数)) {
             div.getShujiiIkenshoTokusokujo().getTxtOverChosaIraiDay().setValue(new Decimal(主治医意見書督促期限日数.toString()));
         }
@@ -89,12 +91,13 @@ public class ShujiiIkenTokusokujoHakkoHandler {
     }
 
     /**
-     * 画面側からtempDataを取得
+     * 画面側からtempDataを取得。
      *
      * @return tempData
      */
     public ShujiiIkenTokusokujoHakkoTempData getTempData() {
         ShujiiIkenTokusokujoHakkoTempData tempData = new ShujiiIkenTokusokujoHakkoTempData();
+        //TODO 保険者取得
 //        tempData.setTemp_保険者コード(div.getCcdHokensha().getSelectedItem().get保険者区分().getコード());
 //        tempData.setTemp_保険者名称(div.getCcdHokensha().getSelectedItem().get保険者区分().get名称());
         tempData.setTemp_主治医医療機関コード(div.getShujiiIkenshoTokusokujo().getCCDIryokikanShujii().getIryoKikanCode());

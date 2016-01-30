@@ -6,41 +6,46 @@
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shujiiikentokusokujohakko.ShujiiIkenTokusokujoHakkoTempData;
+import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 主治医意見書督促状発行のバッチパラメータクラスです。
  *
  */
-@SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class Dbe233001FlowParameter {
+@Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class Dbe233001FlowParameter extends BatchParameterBase {
 
-    private final RString temp_保険者コード;
-    private final RString temp_保険者名称;
-    private final RString temp_主治医医療機関コード;
-    private final RString temp_主治医コード;
-    private final FlexibleDate temp_基準日;
-    private final Decimal temp_主治医意見書督促期限日数;
-    private final RString temp_主治医意見書督促状;
-    private final RString temp_主治医意見書督促対象者一覧表;
-    private final RString temp_CSV出力;
-    private final RString temp_印刷済対象者;
-    private final RString temp_発行履歴;
-    private final int temp_督促方法;
-    private final RString temp_督促メモ;
-    private final FlexibleDate temp_督促日;
-    private final RDate temp_印刷期間開始日;
-    private final RDate temp_印刷期間終了日;
-    private final RString temp_出力順;
-    private final RString temp_集計;
-    private final RString temp_改頁;
-    private final RString temp_印刷書類区分;
-    private final RString temp_最大履歴番号;
+    private static final long serialVersionUID = -2185426630741470910L;
+
+    private RString temp_保険者コード;
+    private RString temp_保険者名称;
+    private RString temp_主治医医療機関コード;
+    private RString temp_主治医コード;
+    private FlexibleDate temp_基準日;
+    private Decimal temp_主治医意見書督促期限日数;
+    private RString temp_主治医意見書督促状;
+    private RString temp_主治医意見書督促対象者一覧表;
+    private RString temp_CSV出力;
+    private RString temp_印刷済対象者;
+    private RString temp_発行履歴;
+    private int temp_督促方法;
+    private RString temp_督促メモ;
+    private FlexibleDate temp_督促日;
+    private RDate temp_印刷期間開始日;
+    private RDate temp_印刷期間終了日;
+    private RString temp_出力順;
+    private RString temp_集計;
+    private RString temp_改頁;
+    private RString temp_印刷書類区分;
+    private RString temp_最大履歴番号;
 
     private Dbe233001FlowParameter(RString temp_保険者コード, RString temp_保険者名称, RString temp_主治医医療機関コード,
             RString temp_主治医コード, FlexibleDate temp_基準日, Decimal temp_主治医意見書督促期限日数, RString temp_主治医意見書督促状,
