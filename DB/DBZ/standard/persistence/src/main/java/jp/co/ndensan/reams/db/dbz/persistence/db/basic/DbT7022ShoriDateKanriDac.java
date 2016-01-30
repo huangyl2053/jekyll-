@@ -32,6 +32,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -340,6 +341,74 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(subGyomuCode, "DBB"),
                                 eq(nendo, 年度),
                                 eq(shoriName, "特徴平準化計算_6月分"))).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタ.基準日時を取得します。
+     *
+     * @param 賦課年度 FlexibleYear
+     * @param 処理名 RString
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity selectKaijun(FlexibleYear 賦課年度, RString 処理名) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, "DBB"),
+                                eq(nendo, 賦課年度),
+                                eq(shoriName, 処理名))).
+                order(by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタ.基準日時を取得します。
+     *
+     * @param 賦課年度 FlexibleYear
+     * @param 処理名 RString
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity selectKaijun_更新(FlexibleYear 賦課年度, RString 処理名) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, "DBB"),
+                                eq(nendo, 賦課年度),
+                                eq(shoriName, 処理名),
+                                eq(nendoNaiRenban, "0001"))).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタ.基準日時を取得します。
+     *
+     * @param 賦課年度 FlexibleYear
+     * @param 処理名 RString
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity selectKaijun_処理(FlexibleYear 賦課年度, RString 処理名) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(nendoNaiRenban)).
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, "DBB"),
+                                eq(nendo, 賦課年度),
+                                eq(shoriName, 処理名))).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
 }

@@ -37,8 +37,8 @@
     <!--テーブルDbT2013HokenryoDankaiの項目をDbT2013HokenryoDankaiEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT2013HokenryoDankaiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank.DbT2013HokenryoDankaiEntity" autoMapping="true">
         <id property="fukaNendo" column="dbT2013HokenryoDankai_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="dankaiIndex" column="dbT2013HokenryoDankai_dankaiIndex" />
-        <id property="rankuKubun" column="dbT2013HokenryoDankai_rankuKubun" />
+        <!--<id property="dankaiIndex" column="dbT2013HokenryoDankai_dankaiIndex" />-->
+<!--        <id property="rankuKubun" column="dbT2013HokenryoDankai_rankuKubun" />-->
         <result property="insertDantaiCd" column="dbT2013HokenryoDankai_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT2013HokenryoDankai_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT2013HokenryoDankai_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -58,5 +58,15 @@
         FROM
         rgdb."DbT2013HokenryoDankai"
     </select>
-
+    
+    <select id="getHokenryoDankai" resultMap="ResultMap_DbT2013HokenryoDankaiEntity">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper.allColumns_DbT2013HokenryoDankai" />
+        FROM
+        rgdb."DbT2013HokenryoDankai"
+       WHERE
+           "DbT2013HokenryoDankai"."fukaNendo" = (SELECT 
+        MAX("DbT2013HokenryoDankai"."fukaNendo") FROM  rgdb."DbT2013HokenryoDankai"
+        )
+    </select>
 </mapper>
