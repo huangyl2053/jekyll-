@@ -63,12 +63,21 @@ public class PanelBase {
                 = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
         if ((null != entity) && (!baseDiv.getTaishokensaku().getDdlShichoson().getDataSource().isEmpty())) {
             baseDiv.getTaishokensaku().getDdlShichoson().setSelectedKey(entity.get選択した市町村コード());
-            baseDiv.getTaishokensaku().getTxtHokokuY().setValue(new FlexibleDate(Integer.parseInt(entity.get画面報告年度().toString()),
-                    RDate.getNowDate().getMonthValue(),
-                    RDate.getNowDate().getDayValue()));
-            baseDiv.getTaishokensaku().getTxtshukeiY().setValue(new FlexibleDate(Integer.parseInt(entity.get画面集計年度().toString()),
-                    RDate.getNowDate().getMonthValue(),
-                    RDate.getNowDate().getDayValue()));
+
+            if (entity.get画面報告年度().isEmpty()) {
+                baseDiv.getTaishokensaku().getTxtHokokuY().setValue(FlexibleDate.EMPTY);
+            } else {
+                baseDiv.getTaishokensaku().getTxtHokokuY().setValue(new FlexibleDate(Integer.parseInt(entity.get画面報告年度().toString()),
+                        RDate.getNowDate().getMonthValue(),
+                        RDate.getNowDate().getDayValue()));
+            }
+            if (entity.get画面集計年度().isEmpty()) {
+                baseDiv.getTaishokensaku().getTxtshukeiY().setValue(FlexibleDate.EMPTY);
+            } else {
+                baseDiv.getTaishokensaku().getTxtshukeiY().setValue(new FlexibleDate(Integer.parseInt(entity.get画面集計年度().toString()),
+                        RDate.getNowDate().getMonthValue(),
+                        RDate.getNowDate().getDayValue()));
+            }
             ViewStateHolder.clear();
         }
         return ResponseData.of(baseDiv).respond();
