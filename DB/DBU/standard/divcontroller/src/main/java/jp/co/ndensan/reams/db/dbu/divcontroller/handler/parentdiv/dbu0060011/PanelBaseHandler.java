@@ -130,7 +130,7 @@ public class PanelBaseHandler {
         if (div.getTaishokensaku().getDdlShichoson().getSelectedKey().isEmpty()) {
             entity.set保険者コード(RString.EMPTY);
         } else {
-            entity.set保険者コード(div.getTaishokensaku().getDdlShichoson().getSelectedKey().split("-").get(2));
+            entity.set保険者コード(div.getTaishokensaku().getDdlShichoson().getSelectedKey().substring(7));
         }
         entity.set選択した市町村コード(div.getTaishokensaku().getDdlShichoson().getSelectedKey());
         return entity;

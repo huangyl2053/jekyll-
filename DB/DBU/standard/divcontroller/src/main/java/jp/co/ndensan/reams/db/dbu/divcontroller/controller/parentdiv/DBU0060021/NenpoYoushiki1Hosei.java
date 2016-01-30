@@ -52,7 +52,7 @@ public class NenpoYoushiki1Hosei {
         List<JigyoHokokuTokeiData> jigyoHokokuTokeiDataList = JigyoHokokuNenpoHoseiHakoManager.createInstance()
                 .getJigyoHokokuNenpoDetal(new SearchJigyoHokokuNenpo(new FlexibleYear(param.get画面報告年度()),
                                 new FlexibleYear(param.get画面集計年度()),
-                                new LasdecCode(param.get選択した市町村コード()),
+                                new LasdecCode(param.get選択した市町村コード().substring(0, 6)),
                                 param.get事業報告年報補正表示のコード(),
                                 Code.EMPTY)).records();
         if (jigyoHokokuTokeiDataList.isEmpty()) {

@@ -108,9 +108,8 @@ public class PanelBase {
         RString key = baseDiv.getTaishokensaku().getDdlShichoson().getSelectedKey();
         baseDiv.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getDataSource().clear();
         if (!key.isEmpty()) {
-            List<RString> 市町村コードAnd保険者区分And保険者コード = key.split("-");
-            市町村 = 市町村コードAnd保険者区分And保険者コード.get(0);
-            保険者区分 = 市町村コードAnd保険者区分And保険者コード.get(1);
+            市町村 = key.substring(0, 6);
+            保険者区分 = key.substring(6, 7);
         }
         if (baseDiv.getTaishokensaku().getTxtHokokuY().getValue() == null) {
             報告年度 = RString.EMPTY;
@@ -212,9 +211,9 @@ public class PanelBase {
 
     private KeyValueDataSource setDdlShichoson(ShichosonCodeNameResult shichosonCodeNameResult) {
         RString 市町村コード = new RString(
-                shichosonCodeNameResult.get市町村コード().toString() + "-"
-                + shichosonCodeNameResult.get保険者区分() + "-"
-                + shichosonCodeNameResult.get保険者コード());
+                shichosonCodeNameResult.get市町村コード().toString()
+                + shichosonCodeNameResult.get保険者区分()
+                + shichosonCodeNameResult.get保険者コード().value());
         return new KeyValueDataSource(市町村コード, shichosonCodeNameResult.get市町村名称());
     }
 
