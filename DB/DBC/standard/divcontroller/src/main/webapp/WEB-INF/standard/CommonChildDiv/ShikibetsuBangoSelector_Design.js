@@ -4,6 +4,13 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnSearch = function () {
+                return "onClick_btnSearch";
+            };
+
+            Events.CloseCancel = function () {
+                return "CloseCancel";
+            };
             return Events;
         })();
         ShikibetsuBangoSelector.Events = Events;

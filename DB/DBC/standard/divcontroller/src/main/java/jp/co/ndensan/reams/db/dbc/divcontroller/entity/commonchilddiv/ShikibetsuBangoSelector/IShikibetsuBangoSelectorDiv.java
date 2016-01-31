@@ -9,6 +9,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
  */
 public interface IShikibetsuBangoSelectorDiv extends ICommonChildDivBaseProperties {
 
-    public void onLoad(RString 様式番号, FlexibleYearMonth サービス提供年月, RString 特定診療識別コード);
+    public void initialize(RString 様式番号, FlexibleYearMonth サービス提供年月, RString 特定診療識別コード);
 
 }

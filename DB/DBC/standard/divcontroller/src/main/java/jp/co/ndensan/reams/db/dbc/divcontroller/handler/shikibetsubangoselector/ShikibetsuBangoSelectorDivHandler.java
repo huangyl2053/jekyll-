@@ -54,7 +54,8 @@ public class ShikibetsuBangoSelectorDivHandler {
         }
 
         if (サービス提供年月 != null && !サービス提供年月.isEmpty()) {
-            div.getTxtKinjunYM().setValue(new RDate(サービス提供年月.toString()));
+            //TODOサービス提供年月.wareki().toDateString()
+            div.getTxtKinjunYM().setValue(new RDate(2015, 5));
         }
 
         if (特定診療識別コード != null && !特定診療識別コード.isEmpty() && 特定診療識別コード.length() == 2) {
@@ -64,17 +65,30 @@ public class ShikibetsuBangoSelectorDivHandler {
             div.getTxtShiyoCode().setValue(new RString(shiyoCode.toString()));
         }
 
-        getShikibetsuBangoJoho();
-    }
-
-    public void getShikibetsuBangoJoho() {
-        //TODO 「ビジネス設計_DBCMN53001_償還払い費支給申請決定.xlsx」の識別番号一覧データ取得を呼出
+        //TODOグリッドのダミー値を設定する
         List<dgDetail_Row> rowList = new ArrayList<>();
         dgDetail_Row row = new dgDetail_Row();
         row.setTxtShikibetsuCode(new RString("0001"));
-//        row.setTxtShikibetsuCode(serviesSyuruiCode);
         row.setTxtShikibetsuKomoku(new RString("テスト"));
+        dgDetail_Row row2 = new dgDetail_Row();
+        row2.setTxtShikibetsuCode(new RString("0009"));
+        row2.setTxtShikibetsuKomoku(new RString("テストテスト"));
         rowList.add(row);
+        rowList.add(row2);
+        div.getDgDetail().setDataSource(rowList);
+    }
+
+    public void getShikibetsuBangoJoho() {
+        //TODOビジネスは作成待ち
+        List<dgDetail_Row> rowList = new ArrayList<>();
+        dgDetail_Row row1 = new dgDetail_Row();
+        row1.setTxtShikibetsuCode(new RString("0001"));
+        row1.setTxtShikibetsuKomoku(new RString("テスト"));
+        dgDetail_Row row2 = new dgDetail_Row();
+        row2.setTxtShikibetsuCode(new RString("0002"));
+        row2.setTxtShikibetsuKomoku(new RString("テスト二"));
+        rowList.add(row1);
+        rowList.add(row2);
         div.getDgDetail().setDataSource(rowList);
     }
 

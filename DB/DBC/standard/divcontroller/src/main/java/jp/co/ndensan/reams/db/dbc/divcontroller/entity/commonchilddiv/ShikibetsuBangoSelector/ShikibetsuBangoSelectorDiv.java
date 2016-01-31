@@ -4,15 +4,16 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Shikibets
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.shikibetsubangoselector.ShikibetsuBangoSelectorDivHandler;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxShikibetsuCode;
@@ -23,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxShikibetsuCode;
  * @author 自動生成
  */
 public class ShikibetsuBangoSelectorDiv extends Panel implements IShikibetsuBangoSelectorDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     /*
      * [ private の作成 ]
@@ -162,12 +162,8 @@ public class ShikibetsuBangoSelectorDiv extends Panel implements IShikibetsuBang
     //--------------- この行より下にコードを追加してください -------------------
     @JsonIgnore
     @Override
-    public void onLoad(RString 様式番号, FlexibleYearMonth サービス提供年月, RString 特定診療識別コード) {
+    public void initialize(RString 様式番号, FlexibleYearMonth サービス提供年月, RString 特定診療識別コード) {
         ShikibetsuBangoSelectorDivHandler.of(this).initialize(様式番号, サービス提供年月, 特定診療識別コード);
     }
 
-    @JsonIgnore
-    public void getShikibetsuBangoJoho() {
-        ShikibetsuBangoSelectorDivHandler.of(this).getShikibetsuBangoJoho();
-    }
 }
