@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri;
 
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -27,7 +25,7 @@ public final class NenkinHokenshaHanteiParameter {
     private NenkinHokenshaHanteiParameter(
             RString choshuGimushaCode) {
 
-        this.choshuGimushaCode = requireNonNull(choshuGimushaCode, UrSystemErrorMessages.値がnull.getReplacedMessage("特別徴収義務者コード"));
+        this.choshuGimushaCode = choshuGimushaCode;
     }
 
     /**
