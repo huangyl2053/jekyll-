@@ -42,8 +42,19 @@ public class TaishouWaritsuke {
      * @return レスポンスデータ
      */
     public ResponseData<TaishouWaritsukeDiv> onLoad(TaishouWaritsukeDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    public ResponseData<TaishouWaritsukeDiv> onClick_BtnWaritsukeShudo(TaishouWaritsukeDiv div) {
         getHandler(div).initializtion();
         return ResponseData.of(div).setState(DBE5160001StateName.審査会割付);
+    }
+
+    public ResponseData<TaishouWaritsukeDiv> onStateTransition(TaishouWaritsukeDiv div) {
+        if (ResponseHolder.getState().equals(DBE5160001StateName.審査会割付.getName())) {
+            getHandler(div).setCommonButtonDisabled();
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
