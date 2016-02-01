@@ -1,0 +1,132 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;ninteishinseishakihoninfo&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;NinteiShinseishaKihonInfo&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;100px&quot;,&quot;minHeight&quot;:&quot;200px&quot;,&quot;widthPercent&quot;:&quot;80&quot;,&quot;heightPercent&quot;:&quot;80&quot;}" data-is-composite-control="true" data-control-name="DBZ.NinteiShinseishaKihonInfo"><div class="StateChangable UzPanel JSControl FloatLeft marginTop-Default marginBottom-Default marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel Width-G1 UzCompositeChild" id="NinteiShinseishaKihonInfo" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;NinteiShinseishaKihonInfo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;NinteiShinseishaKihonInfo&quot;,&quot;title&quot;:&quot;&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;NinteiShinseishaKihonInfo&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="NinteiShinseishaKihonInfo_panel_header_area" style="display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content ui-droppable ui-sortable panelPaddingDelete" id="NinteiShinseishaKihonInfo_panel_body_area"><div class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl FloatLeft controlMargin-M marginLeft-XS UzCompositeChild" id="txtHokenshaNo" style="width: 153px; height: 20px; margin-right: 0px; position: relative;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtHokenshaNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtHokenshaNo_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;保険者&quot;,&quot;labelLWidth&quot;:&quot;100px&quot;,&quot;maxLength&quot;:&quot;6&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHokenshaNo_labelL" style="width: 100px;"><span>保険者</span></span><input tabindex="-1" class="UzTextBox CoreElement Width-XS ime-mode-Off text-align-right readonlyColor" id="txtHokenshaNo_core" type="text" placeholder=""></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginRight-XS controlMargin-M UzCompositeChild" id="txtHokenshaName" style="width: 249px; height: 20px; margin-left: 0px; position: relative;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtHokenshaName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;M&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtHokenshaName_core&quot;,&quot;readOnly&quot;:true,&quot;maxLength&quot;:&quot;40&quot;,&quot;suggest&quot;:[]}"><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana readonlyColor Width-M" id="txtHokenshaName_core" type="text" placeholder=""></div><div class="WithLabel TextBoxOuterDiv UzTextBoxCode JSControl FloatLeft controlMargin-M UzCompositeChild" id="txtHihokenshaNo" style="width: 189px; height: 20px; margin-right: 0px; margin-left: 0px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtHihokenshaNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;S&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtHihokenshaNo_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;被保番号&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHihokenshaNo_labelL" style="width: 70px;"><span>被保番号</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Off readonlyColor Width-S" id="txtHihokenshaNo_core" type="text" placeholder=""></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtHihokenshaKubun" style="width: 189px; height: 20px; position: relative;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtHihokenshaKubun&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;txtHihokenshaKubun_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;被保区分&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHihokenshaKubun_labelL" style="width: 70px;"><span>被保区分</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana Width-S readonlyColor" id="txtHihokenshaKubun_core" type="text" placeholder=""></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS controlMargin-M ClearFloat UzCompositeChild" id="txtHihokenshaName" style="width: 350px; height: 20px; margin-right: 0px; display: block; position: relative;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtHihokenshaName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;M&quot;,&quot;wrap&quot;:true,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtHihokenshaName_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;被保険者氏名&quot;,&quot;labelLWidth&quot;:&quot;100px&quot;,&quot;maxLength&quot;:&quot;40&quot;,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHihokenshaName_labelL" style="width: 100px;"><span>被保険者氏名</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana Width-M readonlyColor" id="txtHihokenshaName_core" type="text" placeholder=""></div><div title="" class="WithLabel TextBoxOuterDiv JSControl FloatLeft controlMargin-M marginRight-XS UzCompositeChild" id="txtHihokenshaKana" style="width: 249px; height: 20px; margin-left: 0px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtHihokenshaKana&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;M&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtHihokenshaKana_core&quot;,&quot;readOnly&quot;:true,&quot;labelLWidth&quot;:&quot;80px&quot;,&quot;maxLength&quot;:&quot;60&quot;,&quot;suggest&quot;:[]}"><input class="UzTextBox CoreElement readonlyColor text-align-left ime-mode-Hiragana Width-M ui-autocomplete-input" id="txtHihokenshaKana_core" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtSeibetsu" style="width: 118px; height: 20px; position: relative;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtSeibetsu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;selectControlID&quot;:&quot;txtSeibetsu_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;性別&quot;,&quot;labelLWidth&quot;:&quot;65px&quot;,&quot;maxLength&quot;:&quot;2&quot;,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeibetsu_labelL" style="width: 65px;"><span>性別</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana Width-XS readonlyColor" id="txtSeibetsu_core" type="text" placeholder=""></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS controlMargin-M UzCompositeChild" id="txtSeinenYmd" style="width: 199px; height: 20px; margin-right: 0px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtSeinenYmd&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;S&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtSeinenYmd_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;生年月日&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeinenYmd_labelL" style="width: 80px;"><span>生年月日</span></span><input tabindex="-1" class="UzTextBox CoreElement Width-S readonlyColor AsIfDisabled" id="txtSeinenYmd_core" type="text" readonly="readonly" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2" data-wareki-hirekijyou=""></div><div class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl FloatLeft marginRight-XS controlMargin-M UzCompositeChild" id="txtNenrei" style="width: 105px; height: 20px; margin-left: 0px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtNenrei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtNenrei_core&quot;,&quot;readOnly&quot;:true,&quot;labelRText&quot;:&quot;歳&quot;,&quot;labelRWidth&quot;:&quot;XS&quot;,&quot;maxLength&quot;:&quot;3&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><input tabindex="-1" class="UzTextBox CoreElement Width-XS ime-mode-Off text-align-right readonlyColor" id="txtNenrei_core" type="text" placeholder=""><span class="word-wrap-break-word Label-R text-align-left Width-XS" id="txtNenrei_labelR"><span>歳</span></span></div><div class="WithLabel TextBoxOuterDiv UzTextBoxYubinNo JSControl FloatLeft marginLeft-XS controlMargin-M ClearFloat UzCompositeChild" id="txtYubibNo" style="width: 219px; height: 20px; margin-right: 0px;" data-control-type="TextBoxYubinNo" data-obj="{&quot;fieldName&quot;:&quot;txtYubibNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxYubinNo&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtYubibNo_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;住所&quot;,&quot;labelLWidth&quot;:&quot;100px&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="txtYubibNo_labelL" style="width: 100px;"><span>住所</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Off Width-S readonlyColor" id="txtYubibNo_core" type="text" placeholder=""></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginRight-XS controlMargin-M UzCompositeChild" id="txtjusho" style="width: 511px; height: 20px; margin-left: 0px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtjusho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;L&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtjusho_core&quot;,&quot;readOnly&quot;:true,&quot;maxLength&quot;:&quot;60&quot;,&quot;suggest&quot;:[]}"><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana Width-L readonlyColor" id="txtjusho_core" type="text" placeholder=""></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtTelNo" style="width: 199px; height: 20px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtTelNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;txtTelNo_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;電話番号&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;,&quot;maxLength&quot;:&quot;15&quot;,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="txtTelNo_labelL" style="width: 80px;"><span>電話番号</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana Width-S readonlyColor" id="txtTelNo_core" type="text" placeholder=""></div></div></div>        <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['NINTEISHINSEISHAKIHONINFO'] = {};
+DBZ['NINTEISHINSEISHAKIHONINFO'].NinteiShinseishaKihonInfoRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_NinteiShinseishaKihonInfo').getProperty();parameter0.txtHokenshaNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHokenshaNo').getProperty();parameter0.txtHokenshaName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHokenshaName').getProperty();parameter0.txtHihokenshaNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHihokenshaNo').getProperty();parameter0.txtHihokenshaKubun = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHihokenshaKubun').getProperty();parameter0.txtHihokenshaName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHihokenshaName').getProperty();parameter0.txtHihokenshaKana = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHihokenshaKana').getProperty();parameter0.txtSeibetsu = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeibetsu').getProperty();parameter0.txtSeinenYmd = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeinenYmd').getProperty();parameter0.txtNenrei = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtNenrei').getProperty();parameter0.txtYubibNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtYubibNo').getProperty();parameter0.txtjusho = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtjusho').getProperty();parameter0.txtTelNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtTelNo').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (NinteiShinseishaKihonInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        NinteiShinseishaKihonInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "NinteiShinseishaKihonInfo";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.NinteiShinseishaKihonInfo.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.NinteiShinseishaKihonInfo.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.NinteiShinseishaKihonInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtHokenshaNo = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHokenshaNo"));
+            };
+
+            Controls.prototype.txtHokenshaName = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokenshaName"));
+            };
+
+            Controls.prototype.txtHihokenshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtHihokenshaNo"));
+            };
+
+            Controls.prototype.txtHihokenshaKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtHihokenshaKubun"));
+            };
+
+            Controls.prototype.txtHihokenshaName = function () {
+                return new UZA.TextBox(this.convFiledName("txtHihokenshaName"));
+            };
+
+            Controls.prototype.txtHihokenshaKana = function () {
+                return new UZA.TextBox(this.convFiledName("txtHihokenshaKana"));
+            };
+
+            Controls.prototype.txtSeibetsu = function () {
+                return new UZA.TextBox(this.convFiledName("txtSeibetsu"));
+            };
+
+            Controls.prototype.txtSeinenYmd = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSeinenYmd"));
+            };
+
+            Controls.prototype.txtNenrei = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtNenrei"));
+            };
+
+            Controls.prototype.txtYubibNo = function () {
+                return new UZA.TextBoxYubinNo(this.convFiledName("txtYubibNo"));
+            };
+
+            Controls.prototype.txtjusho = function () {
+                return new UZA.TextBox(this.convFiledName("txtjusho"));
+            };
+
+            Controls.prototype.txtTelNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtTelNo"));
+            };
+            return Controls;
+        })();
+        NinteiShinseishaKihonInfo.Controls = Controls;
+    })(DBZ.NinteiShinseishaKihonInfo || (DBZ.NinteiShinseishaKihonInfo = {}));
+    var NinteiShinseishaKihonInfo = DBZ.NinteiShinseishaKihonInfo;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (NinteiShinseishaKihonInfo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new NinteiShinseishaKihonInfo.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new NinteiShinseishaKihonInfo.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        NinteiShinseishaKihonInfo.ModeController = ModeController;
+    })(DBZ.NinteiShinseishaKihonInfo || (DBZ.NinteiShinseishaKihonInfo = {}));
+    var NinteiShinseishaKihonInfo = DBZ.NinteiShinseishaKihonInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (NinteiShinseishaKihonInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new NinteiShinseishaKihonInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        NinteiShinseishaKihonInfo.PublicProperties = PublicProperties;
+    })(DBZ.NinteiShinseishaKihonInfo || (DBZ.NinteiShinseishaKihonInfo = {}));
+    var NinteiShinseishaKihonInfo = DBZ.NinteiShinseishaKihonInfo;
+})(DBZ || (DBZ = {}));
+</script></div>
