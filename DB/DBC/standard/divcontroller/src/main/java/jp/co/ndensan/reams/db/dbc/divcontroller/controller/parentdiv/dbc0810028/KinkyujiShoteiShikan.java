@@ -63,7 +63,7 @@ public class KinkyujiShoteiShikan {
         RString 様式番号 = ViewStateHolder.get(
                 ViewStateKeys.様式番号, RString.class);
         // TODO 申請検索画面ViewState. 申請日
-        ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151224"));
+        ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151214"));
         RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
 
         //介護宛名情報」共有子Divの初期化
@@ -81,7 +81,7 @@ public class KinkyujiShoteiShikan {
 
         //償還払請求所定疾患施設療養費等データ取得
         ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
-        List<ShokanShoteiShikkanShisetsuRyoyo> businessList = finder.getKinkyujiShisetsuRyoyoData1(
+        List<ShokanShoteiShikkanShisetsuRyoyo> businessList = finder.getShoteiShikanShisetsuRyoyohiEtcData(
                 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
         if (businessList == null || businessList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
@@ -107,7 +107,7 @@ public class KinkyujiShoteiShikan {
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
 
         ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
-        List<ShokanShoteiShikkanShisetsuRyoyo> list = finder.getKinkyujiShisetsuRyoyoData1(
+        List<ShokanShoteiShikkanShisetsuRyoyo> list = finder.getShoteiShikanShisetsuRyoyohiEtcData(
                 被保険者番号, サービス年月, 整理番号, 事業者番号, 明細番号, 様式番号, 連番);
         getHandler(div).setUp傷病名(list.get(0));
         getHandler(div).setUp往診通院(list.get(0));
