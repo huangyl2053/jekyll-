@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0810027
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810027.MainPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810027.MainPanelHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810027.KinkyujiShisetuRyoyohiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810027.KinkyujiShisetuRyoyohiHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  *
  * @author XuPeng
  */
-public class MainPanel {
+public class KinkyujiShisetuRyoyohi {
 
     /**
      * 償還払い状況照会_緊急時施設療養費画面初期化する
@@ -37,7 +37,7 @@ public class MainPanel {
      * @param div 緊急時施設療養費画面Div
      * @return response
      */
-    public ResponseData<MainPanelDiv> onLoad(MainPanelDiv div) {
+    public ResponseData<KinkyujiShisetuRyoyohiDiv> onLoad(KinkyujiShisetuRyoyohiDiv div) {
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
                 new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201601")),
                 new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
@@ -62,7 +62,7 @@ public class MainPanel {
         RString 様式番号 = ViewStateHolder.get(
                 ViewStateKeys.様式番号, RString.class);
         // TODO 申請検索画面ViewState. 申請日
-        ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151224"));
+        ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151223"));
         RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
 
         //介護宛名情報」共有子Divの初期化
@@ -75,7 +75,7 @@ public class MainPanel {
             div.getPanelCcd().getCcdKaigoAtenaInfo().setVisible(false);
         }
 
-        MainPanelHandler handler = getHandler(div);
+        KinkyujiShisetuRyoyohiHandler handler = getHandler(div);
         handler.initPanelHead(サービス年月, 申請日, 事業者番号, 明細番号,
                 証明書, 様式番号);
         //償還払請求緊急時施設療養データ取得
@@ -92,7 +92,7 @@ public class MainPanel {
         return ResponseData.of(div).respond();
     }
 
-    public ResponseData<MainPanelDiv> onClick_btnSelectButton(MainPanelDiv div) {
+    public ResponseData<KinkyujiShisetuRyoyohiDiv> onClick_btnSelectButton(KinkyujiShisetuRyoyohiDiv div) {
         div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(false);
         RString 連番 = div.getDgdKinkyujiShiseturyoyo().getClickedItem().getDefaultDataName5();
 
@@ -116,12 +116,12 @@ public class MainPanel {
         return ResponseData.of(div).respond();
     }
 
-    public ResponseData<MainPanelDiv> onClick_btnClose(MainPanelDiv div) {
+    public ResponseData<KinkyujiShisetuRyoyohiDiv> onClick_btnClose(KinkyujiShisetuRyoyohiDiv div) {
         div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(true);
         return ResponseData.of(div).respond();
     }
 
-    private MainPanelHandler getHandler(MainPanelDiv div) {
-        return MainPanelHandler.of(div);
+    private KinkyujiShisetuRyoyohiHandler getHandler(KinkyujiShisetuRyoyohiDiv div) {
+        return KinkyujiShisetuRyoyohiHandler.of(div);
     }
 }

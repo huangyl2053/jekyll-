@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810027;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810027.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810027.KinkyujiShisetuRyoyohiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810027.dgdKinkyujiShiseturyoyo_Row;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -24,17 +24,18 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @author XuPeng
  */
-public class MainPanelHandler {
+public class KinkyujiShisetuRyoyohiHandler {
 
-    private final MainPanelDiv div;
+    private final KinkyujiShisetuRyoyohiDiv div;
     private static final RString 設定不可 = new RString("0");
+    private static final RString 改行 = new RString("\n");
 
-    private MainPanelHandler(MainPanelDiv div) {
+    private KinkyujiShisetuRyoyohiHandler(KinkyujiShisetuRyoyohiDiv div) {
         this.div = div;
     }
 
-    public static MainPanelHandler of(MainPanelDiv div) {
-        return new MainPanelHandler(div);
+    public static KinkyujiShisetuRyoyohiHandler of(KinkyujiShisetuRyoyohiDiv div) {
+        return new KinkyujiShisetuRyoyohiHandler(div);
     }
 
     public void initPanelHead(FlexibleYearMonth サービス年月,
@@ -57,12 +58,10 @@ public class MainPanelHandler {
         for (ShokanKinkyuShisetsuRyoyo result : list) {
             dgdKinkyujiShiseturyoyo_Row row = new dgdKinkyujiShiseturyoyo_Row();
             row.setDefaultDataName1(result.get緊急時傷病名１());
-            row.setDefaultDataName2(result.get緊急時治療開始年月日１()
-                    .wareki().toDateString());
-            row.setDefaultDataName3(new RString(Integer.valueOf(
-                    result.get緊急時治療管理単位数()).toString()));
-            row.setDefaultDataName4(new RString(Integer.valueOf(
-                    result.get緊急時施設療養費合計単位数()).toString()));
+            row.getDefaultDataName2().setValue(new RDate(result.get緊急時治療開始年月日１()
+                    .wareki().toDateString().toString()));
+            row.getDefaultDataName3().setValue(new Decimal(result.get緊急時治療管理単位数()));
+            row.getDefaultDataName4().setValue(new Decimal(result.get緊急時施設療養費合計単位数()));
             row.setDefaultDataName5(result.get連番());
             lists.add(row);
         }
@@ -96,79 +95,79 @@ public class MainPanelHandler {
 
         }
         if (result.get摘要２() != null && !result.get摘要２().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要２());
         }
         if (result.get摘要３() != null && !result.get摘要３().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要３());
         }
         if (result.get摘要４() != null && !result.get摘要４().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要４());
         }
         if (result.get摘要５() != null && !result.get摘要５().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要５());
         }
         if (result.get摘要６() != null && !result.get摘要６().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要６());
         }
         if (result.get摘要７() != null && !result.get摘要７().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要７());
         }
         if (result.get摘要８() != null && !result.get摘要８().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要８());
         }
         if (result.get摘要９() != null && !result.get摘要９().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要９());
         }
         if (result.get摘要１０() != null && !result.get摘要１０().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１０());
         }
         if (result.get摘要１１() != null && !result.get摘要１１().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１１());
         }
         if (result.get摘要１２() != null && !result.get摘要１２().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１２());
         }
         if (result.get摘要１３() != null && !result.get摘要１３().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１３());
         }
         if (result.get摘要１４() != null && !result.get摘要１４().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１４());
         }
         if (result.get摘要１５() != null && !result.get摘要１５().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１５());
         }
         if (result.get摘要１６() != null && !result.get摘要１６().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１６());
         }
         if (result.get摘要１７() != null && !result.get摘要１７().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１７());
         }
         if (result.get摘要１８() != null && !result.get摘要１８().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１８());
         }
         if (result.get摘要１９() != null && !result.get摘要１９().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１９());
         }
         if (result.get摘要２０() != null && !result.get摘要２０().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要２０());
         }
         return tekiyou.toRString();

@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * MainPanel のクラスファイル 
+ * KinkyujiShisetuRyoyohi のクラスファイル 
  * 
  * @author 自動生成
  */
-public class MainPanelDiv extends Panel {
+public class KinkyujiShisetuRyoyohiDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     /*
      * [ private の作成 ]
