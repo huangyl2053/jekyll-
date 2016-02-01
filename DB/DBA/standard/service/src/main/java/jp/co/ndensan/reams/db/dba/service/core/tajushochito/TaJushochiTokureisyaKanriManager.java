@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1003TashichosonJushoch
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
-import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
@@ -130,7 +130,7 @@ public class TaJushochiTokureisyaKanriManager {
                         JigyosyaType.住所地特例対象施設.getコード());
                 TaJushochiTokureisyaKanriRelateEntity 事業者名称 = mapper.get事業者名称_住所地特例対象施設(iParameter);
                 if (事業者名称 != null) {
-                    他市町村住所地特例情報.setJigyoshaName(事業者名称.getJigyoshaName());
+                    他市町村住所地特例情報.setJigyoshaName(事業者名称.getJigyoshaMeisho());
                 }
                 適用情報リスト.add(他市町村住所地特例情報);
             }
@@ -248,10 +248,17 @@ public class TaJushochiTokureisyaKanriManager {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(解除日, UrSystemErrorMessages.値がnull.getReplacedMessage("解除日"));
         UaFt200FindShikibetsuTaishoEntity 宛名情報 = select宛名情報PSM(識別コード);
+        FlexibleDate 生年月日 = FlexibleDate.EMPTY;
+        if (宛名情報 != null) {
+            生年月日 = 宛名情報.getSeinengappiYMD();
+        }
         AgeCalculator ageCalculator
-                = new AgeCalculator((IDateOfBirth) 宛名情報.getSeinengappiYMD(),
+                = new AgeCalculator(DateOfBirthFactory.createInstance(生年月日),
                         JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日, 解除日);
-        return Integer.parseInt(ageCalculator.get年齢().toString()) >= 年齢_65;
+        if (ageCalculator.get年齢() != null && !ageCalculator.get年齢().isEmpty()) {
+            return Integer.parseInt(ageCalculator.get年齢().toString()) >= 年齢_65;
+        }
+        return false;
     }
 
     /**
@@ -278,7 +285,8 @@ public class TaJushochiTokureisyaKanriManager {
         dbT1001entity.setShikakuShutokuYMD(解除年月日);
         dbT1001entity.setShikakuShutokuTodokedeYMD(解除届出年月日);
         dbT1001entity.setKyuShichosonCode(宛名情報PSM.getKyuLasdecCode());
-        HihokenshaShikakuShutokuManager.createInstance().saveHihokenshaShutoku(dbT1001entity, (IDateOfBirth) 宛名情報PSM.getSeinengappiYMD());
+        HihokenshaShikakuShutokuManager.createInstance().saveHihokenshaShutoku(
+                dbT1001entity, DateOfBirthFactory.createInstance(宛名情報PSM.getSeinengappiYMD()));
 
     }
 
