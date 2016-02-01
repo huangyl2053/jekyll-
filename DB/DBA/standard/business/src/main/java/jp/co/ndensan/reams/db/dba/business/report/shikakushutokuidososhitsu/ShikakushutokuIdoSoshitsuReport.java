@@ -25,11 +25,11 @@ public final class ShikakushutokuIdoSoshitsuReport extends Report<Shikakushutoku
     
     /**
      * インスタンスを生成します。
-     * @param items 一覧表証発行者Entityリスト
+     * @param item 一覧表証発行者Entityリスト
      * @return HihokenshashoHakkoIchiranHyoReport
      */
-    public static ShikakushutokuIdoSoshitsuReport createReport(@NonNull ShikakushutokuIdoSoshitsuItem items) {
-        return new ShikakushutokuIdoSoshitsuReport(items);
+    public static ShikakushutokuIdoSoshitsuReport createReport(@NonNull ShikakushutokuIdoSoshitsuItem item) {
+        return new ShikakushutokuIdoSoshitsuReport(item);
     }
 
     @Override

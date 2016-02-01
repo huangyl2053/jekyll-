@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dba.business.report.shikakushutokuidososhitsu;
 
 import jp.co.ndensan.reams.db.dba.definition.reportId.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.report.shikakushutokuidososhitsu.ShikakushutokuIdoSoshitsuReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -18,12 +17,11 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  */
 public class ShikakushutokuIdoSoshitsuProerty extends ReportPropertyBase<ShikakushutokuIdoSoshitsuReportSource> {
     
-    private static final ReportId ID = ReportIdDBA.DBA800001.getReportId();
     
     /**
      * コンストラクタです。
      */
     public ShikakushutokuIdoSoshitsuProerty() {
-        super(SubGyomuCode.DBA介護資格, ID);
+        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA800001.getReportId());
     }
 }

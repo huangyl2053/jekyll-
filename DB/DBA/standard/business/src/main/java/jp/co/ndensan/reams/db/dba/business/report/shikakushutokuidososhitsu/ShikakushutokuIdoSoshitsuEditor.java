@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 被保険者証発行一覧表Editorです。
  */
-public class ShikakushutokuIdoSoshitsuEditor implements IShikakushutokuIdoSoshitsuEditor {
+    public class ShikakushutokuIdoSoshitsuEditor implements IShikakushutokuIdoSoshitsuEditor {
     
     private final ShikakushutokuIdoSoshitsuItem joho;
     
@@ -46,6 +46,7 @@ public class ShikakushutokuIdoSoshitsuEditor implements IShikakushutokuIdoSoshit
         source.seibetsu1 = joho.getSeibetsu1();
         source.setainushiName = joho.getSetainushiName();
         source.zokugara1 = joho.getZokugara1();
+        // TODO 内部：635　（連番の設定を不明です。）
         source.remban = new RString("0001");
         return source;
     }

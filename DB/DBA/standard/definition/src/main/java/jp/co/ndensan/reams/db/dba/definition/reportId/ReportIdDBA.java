@@ -31,9 +31,9 @@ public enum ReportIdDBA {
      */
     DBA100001(new ReportId("DBA100001"), new RString("介護保険被保険者証（B4版）")),
     /**
-     * 被保険者証発行一覧表の帳票ＩＤです。
+     * 介護保険資格取得・異動・喪失届の帳票ＩＤです。
      */
-    DBA800001(new ReportId("DBA800001"), new RString("介護保険資格取得・異動・喪失届")),
+    DBA800001(new ReportId("DBA800001_ShikakushutokuIdoSoshitsuTodoke"), new RString("介護保険資格取得・異動・喪失届")),
     /**
      * 介護保険被保険者証の帳票ＩＤです。
      */
