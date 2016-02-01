@@ -20,7 +20,6 @@ public class BemmeisyoItem {
      * インスタンスを生成します。
      *
      * @param headItem 弁明書
-     * @param bodyItem 弁明書
      */
     public BemmeisyoItem(
             BemmeisyoHeadItem headItem) {

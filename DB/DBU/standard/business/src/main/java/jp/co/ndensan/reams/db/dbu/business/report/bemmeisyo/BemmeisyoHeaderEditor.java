@@ -37,7 +37,7 @@ class BemmeisyoHeaderEditor implements BemmeisyoEditor {
     private BemmeisyoReportSource editHeader(BemmeisyoReportSource source) {
 
         source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
-        // TODO 袁献輝 QA608rseファイルにninshoshaShimeiを存在しない　2016/02/26。
+        // TODO 袁献輝　QA597、resファイルに認証者氏名がありません　2016/02/20。
 //        source.ninshoshaShimei = item.getNinshoshaShimei();
         source.denshiKoin = item.getDenshiKoin();
         source.koinShoryaku = item.getKoinShoryaku();

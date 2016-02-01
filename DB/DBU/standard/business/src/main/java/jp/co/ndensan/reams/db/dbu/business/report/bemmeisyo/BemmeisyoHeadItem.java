@@ -18,7 +18,7 @@ import lombok.Getter;
 public class BemmeisyoHeadItem {
 
     private final RString ninshoshaYakushokuMei;
-    // TODO rseファイルにninshoshaShimeiを存在しない。
+    // TODO 袁献輝　QA597、resファイルに認証者氏名がありません　2016/02/20。
 //    private final RString ninshoshaShimei;
     private final RString denshiKoin;
     private final RString koinShoryaku;

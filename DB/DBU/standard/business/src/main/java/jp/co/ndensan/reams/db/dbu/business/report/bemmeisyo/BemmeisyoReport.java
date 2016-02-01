@@ -20,7 +20,6 @@ public class BemmeisyoReport extends Report<BemmeisyoReportSource> {
      * インスタンスを生成します。
      *
      * @param headItem 弁明書ヘッダのITEM
-     * @param itemList 弁明書ボディのITEMリスト
      * @return 弁明書のReport
      */
     public static BemmeisyoReport createFrom(
@@ -34,7 +33,6 @@ public class BemmeisyoReport extends Report<BemmeisyoReportSource> {
      * インスタンスを生成します。
      *
      * @param headItem 弁明書ヘッダのITEM
-     * @param itemList 弁明書のITEMリスト
      */
     protected BemmeisyoReport(
             BemmeisyoHeadItem headItem) {

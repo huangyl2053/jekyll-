@@ -18,7 +18,6 @@ public class BemmeisyoReportJoho {
      * コンストラクタを作成します。
      *
      * @param headItem 弁明書ヘッダ
-     * @param bodyItemList 弁明書ボディリスト
      */
     public BemmeisyoReportJoho(
             BemmeisyoHeadItem headItem) {
