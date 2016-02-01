@@ -60,6 +60,14 @@ var DBZ;
                 return new UZA.ButtonDialog(this.convFiledName("btnKojinMemo"));
             };
 
+            Controls.prototype.txtSetaiCode = function () {
+                return new UZA.TextBoxSetaiCode(this.convFiledName("txtSetaiCode"));
+            };
+
+            Controls.prototype.btnSetaiMemo = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnSetaiMemo"));
+            };
+
             Controls.prototype.txtKojinNo = function () {
                 return new UZA.TextBox(this.convFiledName("txtKojinNo"));
             };
@@ -82,14 +90,6 @@ var DBZ;
 
             Controls.prototype.txtGyoseiku = function () {
                 return new UZA.TextBox(this.convFiledName("txtGyoseiku"));
-            };
-
-            Controls.prototype.txtSetaiCode = function () {
-                return new UZA.TextBoxSetaiCode(this.convFiledName("txtSetaiCode"));
-            };
-
-            Controls.prototype.btnSetaiMemo = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnSetaiMemo"));
             };
             return Controls;
         })();
