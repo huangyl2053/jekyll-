@@ -11,6 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.report.shikakushutokuidososhitsu.ShikakushutokuIdoSoshitsuItem;
 import jp.co.ndensan.reams.db.dba.business.report.shikakushutokuidososhitsu.ShikakushutokuIdoSoshitsuProerty;
 import jp.co.ndensan.reams.db.dba.business.report.shikakushutokuidososhitsu.ShikakushutokuIdoSoshitsuReport;
+import jp.co.ndensan.reams.db.dba.entity.report.shikakushutokuidososhitsu.HihokenshaKihonEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.shikakushutokuidososhitsu.ShikakushutokuIdoSoshitsuReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;

@@ -7,6 +7,7 @@
 package jp.co.ndensan.reams.db.dba.business.report.shikakushutokuidososhitsu;
 
 import jp.co.ndensan.reams.db.dba.entity.report.shikakushutokuidososhitsu.ShikakushutokuIdoSoshitsuReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -45,6 +46,7 @@ public class ShikakushutokuIdoSoshitsuEditor implements IShikakushutokuIdoSoshit
         source.seibetsu1 = joho.getSeibetsu1();
         source.setainushiName = joho.getSetainushiName();
         source.zokugara1 = joho.getZokugara1();
+        source.remban = new RString("0001");
         return source;
     }
     
