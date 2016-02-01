@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.business.report.kyokaisokanrimasterlist;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.definition.reportId.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -23,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  */
 public class KyokaisoKanriMasterListProperty extends ReportPropertyBase<KyokaisoKanriMasterListReportSource> {
 
-    private static final ReportId ID = new ReportId("DBA200005");
+    private static final ReportId ID = ReportIdDBA.DBA200005.getReportId();
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("listUpper_1")));
 
     /**
