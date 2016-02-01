@@ -78,20 +78,24 @@ public class KoikinaiTenkyoResultListCsvDataSakuseiTest extends DbuTestBase {
           
           
          List<KoikinaiTenkyoCSVDataEntity> result = sut.getKoikinaiTenkyoResultListCsvData(KoikinaiTenkyoEntityList);
-//         System.out.print(result);
          for(int i = 0;i <2; i++) {
              System.out.println(result.get(i).get登録届出日());
          }
         assertThat(result.get(0).get氏名カナ(), is(new RString("カナ")));
     }
-
-          
-//        JigyoHokokuTokeiDataEntity = new DbT7021JigyoHokokuTokeiDataEntity();
-//        JigyoHokokuTokeiDataEntity.setHokokuYSeireki(主キー名1);
-//        JigyoHokokuTokeiDataEntity.setHokokuM(主キー名2);
-//
-//        business = new JigyoHokokuTokeiData(JigyoHokokuTokeiDataEntity);
-//
-//        sut = business.createBuilderForEdit();
     
+    @Test
+    public void getKoikinaiTenkyoResultListCsvData1() {
+        List<KoikinaiTenkyoEntity> KoikinaiTenkyoEntityList = null;
+        List<KoikinaiTenkyoCSVDataEntity> result = sut.getKoikinaiTenkyoResultListCsvData(KoikinaiTenkyoEntityList);
+        assertThat(result.size(), is(0));
+    }
+    
+    @Test
+    public void getKoikinaiTenkyoResultListCsvData2() {
+        List<KoikinaiTenkyoEntity> KoikinaiTenkyoEntityList = new ArrayList();
+        List<KoikinaiTenkyoCSVDataEntity> result = sut.getKoikinaiTenkyoResultListCsvData(KoikinaiTenkyoEntityList);
+        assertThat(result.size(), is(0));
+    }
+
 }

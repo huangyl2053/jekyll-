@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払い状況照会_合計情報のハンドラクラスです。
- * @author GC xuhao
+ * @author 徐浩
  */
 public class GoukeiInfoHandler {
     
@@ -30,12 +30,11 @@ public class GoukeiInfoHandler {
         this.div = div;
     }
     
-    public void initialize(List<ShokanKihon> shokanKihonList,  List<ShokanShokujiHiyo> shokanShokujiHiyoList) {
-        div.getPanelGoukeiInfo().getTxtServiceTanyi().setValue(new Decimal(shokanKihonList.get(0).getサービス単位数()));
-        div.getPanelGoukeiInfo().getTxtHokenSeikyugaku().setValue(shokanKihonList.get(0).get保険請求額());
-        div.getPanelGoukeiInfo().getTxtRiyoshafutangaku().setValue(new Decimal(shokanKihonList.get(0).get利用者負担額()));
-        div.getPanelGoukeiInfo().getTxtKinkyujiShisetsuRyoyo().setValue(shokanKihonList.get(0).get緊急時施設療養費請求額());
-        div.getPanelGoukeiInfo().getTxtTokuteiShinryo().setValue(shokanKihonList.get(0).get特定診療費請求額());
+    public void initialize(ShokanKihon shokanKihon,  List<ShokanShokujiHiyo> shokanShokujiHiyoList) {
+        div.getPanelGoukeiInfo().getTxtHokenSeikyugaku().setValue(shokanKihon.get保険請求額());
+        div.getPanelGoukeiInfo().getTxtRiyoshafutangaku().setValue(new Decimal(shokanKihon.get利用者負担額()));
+        div.getPanelGoukeiInfo().getTxtKinkyujiShisetsuRyoyo().setValue(shokanKihon.get緊急時施設療養費請求額());
+        div.getPanelGoukeiInfo().getTxtTokuteiShinryo().setValue(shokanKihon.get特定診療費請求額());
         div.getPanelGoukeiInfo().getTxtShokujiTeikyohi().setValue(
                 new Decimal(shokanShokujiHiyoList.get(0).get食事提供費請求額()));
     }
@@ -45,7 +44,8 @@ public class GoukeiInfoHandler {
      * @param shikibetsuNoKanriEntity
      * @param サービス年月 
      */
-       public void setボタン表示制御処理(ShikibetsuNoKanriEntity shikibetsuNoKanriEntity, FlexibleYearMonth サービス年月) {
+       public void setボタン表示制御処理(
+               ShikibetsuNoKanriEntity shikibetsuNoKanriEntity, FlexibleYearMonth サービス年月) {
 
         if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getKihonSetteiKubun())) {
             div.getPanelHead().getBtnKihonInfo().setDisabled(true);
@@ -72,13 +72,14 @@ public class GoukeiInfoHandler {
             div.getPanelHead().getBtnShafukukeigengaku().setDisabled(true);
         }
         if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getMeisaiJushochitokureiSetteiKubun())) {
-            div.getPanelHead().getBtnKyufuhiMeisaiJyutoku().setDisabled(true);
+            div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setDisabled(true);
         }
         if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
-            div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setVisible(false);
+            div.getPanelHead().getBtnKinkyujiShoteiShokan().setVisible(true);
+            div.getPanelHead().getBtnKinkyujiShoteiShokan().setDisplayNone(false);
         } else {
-//            div.getPanelHead().getBtnKinkyujiShoteiShikkan().setVisible(false);
+            div.getPanelHead().getBtnKinkyujiShoteiShokan().setVisible(false);
             if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getKinkyuShisetsuRyoyoSetteiKubun())) {
                 div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
             }

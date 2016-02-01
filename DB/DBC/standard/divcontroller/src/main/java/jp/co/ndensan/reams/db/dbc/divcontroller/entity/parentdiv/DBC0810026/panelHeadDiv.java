@@ -46,12 +46,12 @@ public class panelHeadDiv extends Panel {
     private Button btnTokuteiNyushosya;
     @JsonProperty("btnGoukeiInfo")
     private Button btnGoukeiInfo;
-    @JsonProperty("btnKyufuhiMeisaiJyutoku")
-    private Button btnKyufuhiMeisaiJyutoku;
+    @JsonProperty("btnKyufuhiMeisaiJyuchi")
+    private Button btnKyufuhiMeisaiJyuchi;
     @JsonProperty("btnKinkyujiShisetsuRyoyo")
     private Button btnKinkyujiShisetsuRyoyo;
-    @JsonProperty("btnKinkyujiShoteiShikkan")
-    private Button btnKinkyujiShoteiShikkan;
+    @JsonProperty("btnKinkyujiShoteiShokan")
+    private Button btnKinkyujiShoteiShokan;
     @JsonProperty("btnShokujiHiyo")
     private Button btnShokujiHiyo;
     @JsonProperty("btnSeikyugakuShukei")
@@ -284,21 +284,21 @@ public class panelHeadDiv extends Panel {
     }
 
     /*
-     * getbtnKyufuhiMeisaiJyutoku
-     * @return btnKyufuhiMeisaiJyutoku
+     * getbtnKyufuhiMeisaiJyuchi
+     * @return btnKyufuhiMeisaiJyuchi
      */
-    @JsonProperty("btnKyufuhiMeisaiJyutoku")
-    public Button getBtnKyufuhiMeisaiJyutoku() {
-        return btnKyufuhiMeisaiJyutoku;
+    @JsonProperty("btnKyufuhiMeisaiJyuchi")
+    public Button getBtnKyufuhiMeisaiJyuchi() {
+        return btnKyufuhiMeisaiJyuchi;
     }
 
     /*
-     * setbtnKyufuhiMeisaiJyutoku
-     * @param btnKyufuhiMeisaiJyutoku btnKyufuhiMeisaiJyutoku
+     * setbtnKyufuhiMeisaiJyuchi
+     * @param btnKyufuhiMeisaiJyuchi btnKyufuhiMeisaiJyuchi
      */
-    @JsonProperty("btnKyufuhiMeisaiJyutoku")
-    public void setBtnKyufuhiMeisaiJyutoku(Button btnKyufuhiMeisaiJyutoku) {
-        this.btnKyufuhiMeisaiJyutoku = btnKyufuhiMeisaiJyutoku;
+    @JsonProperty("btnKyufuhiMeisaiJyuchi")
+    public void setBtnKyufuhiMeisaiJyuchi(Button btnKyufuhiMeisaiJyuchi) {
+        this.btnKyufuhiMeisaiJyuchi = btnKyufuhiMeisaiJyuchi;
     }
 
     /*
@@ -320,21 +320,21 @@ public class panelHeadDiv extends Panel {
     }
 
     /*
-     * getbtnKinkyujiShoteiShikkan
-     * @return btnKinkyujiShoteiShikkan
+     * getbtnKinkyujiShoteiShokan
+     * @return btnKinkyujiShoteiShokan
      */
-    @JsonProperty("btnKinkyujiShoteiShikkan")
-    public Button getBtnKinkyujiShoteiShikkan() {
-        return btnKinkyujiShoteiShikkan;
+    @JsonProperty("btnKinkyujiShoteiShokan")
+    public Button getBtnKinkyujiShoteiShokan() {
+        return btnKinkyujiShoteiShokan;
     }
 
     /*
-     * setbtnKinkyujiShoteiShikkan
-     * @param btnKinkyujiShoteiShikkan btnKinkyujiShoteiShikkan
+     * setbtnKinkyujiShoteiShokan
+     * @param btnKinkyujiShoteiShokan btnKinkyujiShoteiShokan
      */
-    @JsonProperty("btnKinkyujiShoteiShikkan")
-    public void setBtnKinkyujiShoteiShikkan(Button btnKinkyujiShoteiShikkan) {
-        this.btnKinkyujiShoteiShikkan = btnKinkyujiShoteiShikkan;
+    @JsonProperty("btnKinkyujiShoteiShokan")
+    public void setBtnKinkyujiShoteiShokan(Button btnKinkyujiShoteiShokan) {
+        this.btnKinkyujiShoteiShokan = btnKinkyujiShoteiShokan;
     }
 
     /*

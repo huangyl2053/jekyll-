@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  *
  * 償還払い状況照会_社福軽減額画面クラスです。
- * @author GC xuhao
+ * @author 徐浩
  */
 public class ShafukuKeigenGaku {
 
@@ -61,7 +61,7 @@ public class ShafukuKeigenGaku {
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         // TODO 申請検索画面ViewState. 申請日
-        ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20161125"));
+        ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20161126"));
         RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
         // KaigoAtenaInfo  「介護宛名情報」共有子Divの初期化
 //        div.getPanelCcd().getCcdKaigoAtenaInfo().load(識別コード);
@@ -76,7 +76,7 @@ public class ShafukuKeigenGaku {
         div.getPanelHead().getTxtJigyoshaBango().setValue(new RString(事業者番号.toString()));
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
-        div.getPanelShakaiFukushiShokai().setVisible(false);
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(false);
         // TODO 调用别人用的business里面的方法；
         List<ShokanShakaiFukushiHojinKeigengakuEntity> ShokanShakaiFukushiHojinKeigengakuuList 
                 = ShokanbaraiJyokyoShokai.createInstance().getSeikyuShakaifukushiHoujinKeigengaku(
@@ -85,152 +85,66 @@ public class ShafukuKeigenGaku {
                     throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         getHandler(div).initialize(ShokanShakaiFukushiHojinKeigengakuuList);
+        div.getPanelHead().getBtnGoukeiInfo().setDisabled(false);
+        div.getPanelHead().getBtnShafukukeigengaku().setDisabled(true);
         ShikibetsuNoKanriEntity shikibetsuNoKanriEntity = 
                 ShokanbaraiJyokyoShokai.createInstance().getShikibetsubangoKanri(サービス年月, 様式番号);
         getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity, サービス年月);
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 基本情報ボタンを押下した際に実行します。<br/>
-     * DBC0810021_基本情報画面へ遷移する
-     *
-     * @param div {@link ShafukuKeigenGakuDiv 社福軽減額画面Div}
-     * @return 社福軽減額画面Divを持つResponseData
-     */
     public ResponseData<ShafukuKeigenGakuDiv> onClick_btnKihonInfo(ShafukuKeigenGakuDiv div) {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 給付費明細ボタンを押下した際に実行します。<br/>
-     * @param div
-     * @return 
-     */
     public ResponseData<ShafukuKeigenGakuDiv> onClick_btnKyufuhiMeisai(ShafukuKeigenGakuDiv div) {
         return ResponseData.of(div).respond();
     }
     
-    /**
-     * 特定診療費ボタンを押下した際に実行します。<br/>
-     * DBC0810023_特定診療費画面へ遷移する
-     *
-     * @param div {@link ShafukuKeigenGakuDiv 社福軽減額画面Div}
-     * @return 社福軽減額画面Divを持つResponseData
-     */
     public ResponseData<ShafukuKeigenGakuDiv> onClick_btnTokuteiShinryohi(ShafukuKeigenGakuDiv div) {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * サービス計画費ボタンを押下した際に実行します。<br/>
-     * DBC0810024_サービス計画費画面へ遷移する
-     *
-     * @param div {@link ShafukuKeigenGakuDiv 社福軽減額画面Div}
-     * @return 社福軽減額画面Divを持つResponseData
-     */
     public ResponseData<ShafukuKeigenGakuDiv> onClick_btnServiceKeikakuhi(ShafukuKeigenGakuDiv div) {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 特定入所者費用ボタンを押下した際に実行します。<br/>
-     * DBC0810025_特定入所者費用画面へ遷移する
-     *
-     * @param div {@link ShafukuKeigenGakuDiv 社福軽減額画面Div}
-     * @return 社福軽減額画面Divを持つResponseData
-     */
     public ResponseData<ShafukuKeigenGakuDiv> onClick_btnTokuteiNyushosya(ShafukuKeigenGakuDiv div) {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 合計情報ボタンを押下した際に実行します。<br/>
-     * DBC0810026_合計情報画面へ遷移する
-     *
-     * @param div {@link ShafukuKeigenGakuDiv 社福軽減額画面Div}
-     * @return 社福軽減額画面Divを持つResponseData
-     */
     public ResponseData<ShafukuKeigenGakuDiv> onClick_btnGoukeiInfo(ShafukuKeigenGakuDiv div) {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 給付費明細(住所地特例)ボタンを押下した際に実行します。<br/>
-     * DBC0810032_給付費明細(住所地特例)画面へ遷移する
-     *
-     * @param div {@link ShafukuKeigenGakuDiv 社福軽減額画面Div}
-     * @return 社福軽減額画面Divを持つResponseData
-     */
     public ResponseData<ShafukuKeigenGakuDiv> onClick_btnKyufuhiMeisaiJyuchi(ShafukuKeigenGakuDiv div) {
         return ResponseData.of(div).respond();
     }
     
-    /**
-     * 緊急時施設療養費ボタンを押下した際に実行します。<br/>
-     * DBC0810027_緊急時施設療養費画面へ遷移する
-     *
-     * @param div {@link ShafukuKeigenGakuDiv 社福軽減額画面Div}
-     * @return 社福軽減額画面Divを持つResponseData
-     */
     public ResponseData<ShafukuKeigenGakuDiv> onClick_btnKinkyujiShisetsuRyoyo(ShafukuKeigenGakuDiv div) {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 緊急時・所定疾患ボタンを押下した際に実行します。<br/>
-     * DBC0810027_緊急時施設療養費画面へ遷移する
-     *
-     * @param div {@link ShafukuKeigenGakuDiv 社福軽減額画面Div}
-     * @return 社福軽減額画面Divを持つResponseData
-     */
     public ResponseData<ShafukuKeigenGakuDiv> onClick_btnKinkyujiShoteiShikkan(ShafukuKeigenGakuDiv div) {
         return ResponseData.of(div).respond();
     }
-    /**
-     * 食事費用ボタンを押下した際に実行します。<br/>
-     * DBC0810029_食事費用画面へ遷移する
-     *
-     * @param div {@link ShafukuKeigenGakuDiv 社福軽減額画面Div}
-     * @return 社福軽減額画面Divを持つResponseData
-     */
+    
     public ResponseData<ShafukuKeigenGakuDiv> onClick_btnShokujiHiyo(ShafukuKeigenGakuDiv div) {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 請求額集計ボタンを押下した際に実行します。<br/>
-     * DBC0810030_請求額集計画面へ遷移する
-     *
-     * @param div {@link ShafukuKeigenGakuDiv 社福軽減額画面Div}
-     * @return 社福軽減額画面Divを持つResponseData
-     */
     public ResponseData<ShafukuKeigenGakuDiv> onClick_btnSeikyugakuShukei(ShafukuKeigenGakuDiv div) {
         return ResponseData.of(div).respond();
     }
 
 
-    /**
-     * 閉じるボタンを押下した際に実行します。<br/>
-     * 社福軽減額照会パネルを閉じる
-     *
-     * @param div {@link ShafukuKeigenGakuDiv 社福軽減額画面Div}
-     * @return 社福軽減額画面Divを持つResponseData
-     */
     public ResponseData<ShafukuKeigenGakuDiv> onClick_btnClose(ShafukuKeigenGakuDiv div) {
-        div.getPanelShakaiFukushiShokai().setVisible(false);
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(false);
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 選択ボタンを押下した際に実行します。<br/>
-     * 社福軽減額一覧グリッドを選択じる
-     *
-     * @param div {@link ShafukuKeigenGakuDiv 社福軽減額画面Div}
-     * @return 社福軽減額画面Divを持つResponseData
-     */
     public ResponseData<ShafukuKeigenGakuDiv> onClick_selectButton(ShafukuKeigenGakuDiv div) {
-        div.getPanelShakaiFukushiShokai().setVisible(true);
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(true);
         getHandler(div).selectButton();
         return ResponseData.of(div).respond();
     }

@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_合計情報のクラスです。
- * @author GC xuhao
+ * @author 徐浩
  */
 public class GoukeiInfo {
     
@@ -56,7 +56,7 @@ public class GoukeiInfo {
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         // TODO 申請検索画面ViewState. 申請日
-        ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151125"));
+        ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151112"));
         RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
         // KaigoAtenaInfo  「介護宛名情報」共有子Divの初期化
 //        div.getPanelCcd().getCcdKaigoAtenaInfo().load(識別コード);
@@ -71,14 +71,14 @@ public class GoukeiInfo {
         div.getPanelHead().getTxtJigyoshaBango().setValue(new RString(事業者番号.toString()));
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
-         List<ShokanKihon> shokanKihonList = ShokanbaraiJyokyoShokai.createInstance().getShokanbarayiSeikyukihonDetail(
+        ShokanKihon shokanKihon = ShokanbaraiJyokyoShokai.createInstance().getShokanbarayiSeikyukihonDetail(
                  被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        if (shokanKihonList == null || shokanKihonList.isEmpty()) {
+        if (shokanKihon == null) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance().
                 getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号,   明細番号, null);
-        getHandler(div).initialize(shokanKihonList, shokanShokujiHiyoList);
+        getHandler(div).initialize(shokanKihon, shokanShokujiHiyoList);
           
         ShikibetsuNoKanriEntity shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShikibetsubangoKanri(サービス年月, 様式番号);
@@ -86,110 +86,50 @@ public class GoukeiInfo {
         return ResponseData.of(div).respond();        
     }
     
-     /**
-     * 基本情報ボタンを押下した際に実行します。
-     * @param div 
-     * @return  
-     */
     public ResponseData<GoukeiInfoDiv> onClick_btnKihonInfo(GoukeiInfoDiv div) {
         return ResponseData.of(div).respond();
     }
     
-     /**
-     * 給付費明細ボタンを押下した際に実行します。
-     * @param div 
-     * @return  
-     */
     public ResponseData<GoukeiInfoDiv> onClick_btnKyufuhiMeisai(GoukeiInfoDiv div) {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 特定診療費ボタンを押下した際に実行します。
-     * @param div 
-     * @return 
-     */
     public ResponseData<GoukeiInfoDiv> onClick_btnTokuteiShinryohi(GoukeiInfoDiv div) {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * サービス計画費ボタンを押下した際に実行します。
-     * @param div
-     * @return 
-     */
     public ResponseData<GoukeiInfoDiv> onClick_btnServiceKeikakuhi(GoukeiInfoDiv div) {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 特定入所者費用ボタンを押下した際に実行します。
-     * @param div 
-     * @return
-     */
     public ResponseData<GoukeiInfoDiv> onClick_btnTokuteiNyushosya(GoukeiInfoDiv div) {
         return ResponseData.of(div).respond();
     }
     
-    /**
-     * 給付費明細(住所地特例)ボタンを押下した際に実行します。
-     * @param div 
-     * @return 
-     */
     public ResponseData<GoukeiInfoDiv> onClick_btnKyufuhiMeisaiJyuchi(GoukeiInfoDiv div) {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 緊急時施設療養費ボタンを押下した際に実行します。
-     * @param div
-     * @return
-     */
     public ResponseData<GoukeiInfoDiv> onClick_btnKinkyujiShisetsuRyoyo(GoukeiInfoDiv div) {
         return ResponseData.of(div).respond();
     }
     
-    /**
-     * 緊急時・所定疾患ボタンを押下した際に実行します。
-     * @param div
-     * @return
-     */
     public ResponseData<GoukeiInfoDiv> onClick_btnKinkyujiShoteiShikkan(GoukeiInfoDiv div) {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 食事費用ボタンを押下した際に実行します。
-     * @param div
-     * @return
-     */
     public ResponseData<GoukeiInfoDiv> onClick_btnShokujiHiyo(GoukeiInfoDiv div) {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 請求額集計ボタンを押下した際に実行します。
-     * @param div 
-     * @return
-     */
     public ResponseData<GoukeiInfoDiv> onClick_btnSeikyugakuShukei(GoukeiInfoDiv div) {
         return ResponseData.of(div).respond();
     }
     
-    /**
-     * 社福軽減額ボタンを押下した際に実行します。
-     * @param div 
-     * @return
-     */
     public ResponseData<GoukeiInfoDiv> onClick_btnShafukukeigengaku(GoukeiInfoDiv div) {
         return ResponseData.of(div).respond();
     }
     
-    /**
-     * サービス提供証明書へ戻るボタンを押下した際に実行します。
-     * @param div 
-     * @return
-     */
     public ResponseData<GoukeiInfoDiv> onClick_btnBack(GoukeiInfoDiv div) {
         return ResponseData.of(div).respond();
     }

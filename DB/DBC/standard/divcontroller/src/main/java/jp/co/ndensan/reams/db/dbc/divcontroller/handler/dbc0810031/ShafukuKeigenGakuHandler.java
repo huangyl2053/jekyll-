@@ -14,11 +14,12 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.Shoka
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 償還払い状況照会_社福軽減額ハンドラクラスです。
  * {@link ShafukuKeigenGakuDiv}のHandlerクラスです。
- * @author GC xuhao
+ * @author 徐ひ
  */
 public class ShafukuKeigenGakuHandler {
 
@@ -29,10 +30,6 @@ public class ShafukuKeigenGakuHandler {
         this.div = div;
     }
 
-    /**
-     * 画面初期化処理します。
-     * @param ShokanShakaiFukushiHojinKeigengakuuList
-     */
     public void initialize(List<ShokanShakaiFukushiHojinKeigengakuEntity> ShokanShakaiFukushiHojinKeigengakuuList   ) {
         List<dgdShafukukeigenngaku_Row> rowList = new ArrayList<>();
         for (ShokanShakaiFukushiHojinKeigengakuEntity entity : ShokanShakaiFukushiHojinKeigengakuuList) {
@@ -45,15 +42,10 @@ public class ShafukuKeigenGakuHandler {
             row.setDefaultDataName6(entity.getEntity().getBiko());
             rowList.add(row);
         }
-        div.getDgdShafukukeigenngaku().setDataSource(rowList);
+        div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().setDataSource(rowList);
 
     }
 
-    /**
-     * ボタン表示制御を処理します。
-     * @param shikibetsuNoKanriEntity
-     * @param サービス年月 
-     */
     public void setボタン表示制御処理(ShikibetsuNoKanriEntity shikibetsuNoKanriEntity, FlexibleYearMonth サービス年月) {
 
         if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getKihonSetteiKubun())) {
@@ -82,6 +74,8 @@ public class ShafukuKeigenGakuHandler {
         }
         if (new RString("2").equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
                 && new FlexibleYearMonth("201204").isBeforeOrEquals(サービス年月)) {
+            div.getPanelHead().getBtnKinkyujiShoteishikkan().setVisible(true);
+            div.getPanelHead().getBtnKinkyujiShoteishikkan().setDisplayNone(false);
 //            div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setVisible(false);
         } else {
             if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getKinkyuShisetsuRyoyoSetteiKubun())) {
@@ -90,16 +84,18 @@ public class ShafukuKeigenGakuHandler {
         }
     }
     
-    /**
-     * 選択ボタンを押下した際に実行します。
-     */
     public void selectButton() { 
         dgdShafukukeigenngaku_Row row = div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getClickedItem();
-        div.getDdlServiceShurui().setSelectedValue(row.getDefaultDataName1());
-        div.getDdlKengenritsu().setSelectedValue(row.getDefaultDataName2());
-        div.getTxtRiyoshaFutangakuTotal().setValue(new Decimal(row.getDefaultDataName3().toString()));
-        div.getTxtKengengaku().setValue(new Decimal(row.getDefaultDataName4().toString()));
-        div.getTxtKeigengoRiyoshaFutangaku().setValue(new Decimal(row.getDefaultDataName5().toString()));
-        div.getTxtBikou().setValue(row.getDefaultDataName6());
+        List<KeyValueDataSource> サービス種類 = new ArrayList<>();
+        サービス種類.add(new KeyValueDataSource(row.getDefaultDataName1(), row.getDefaultDataName1()));
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui().setDataSource(サービス種類);
+        List<KeyValueDataSource> 軽減率 = new ArrayList<>();
+        軽減率.add(new KeyValueDataSource(row.getDefaultDataName2(), row.getDefaultDataName2()));
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu().setDataSource(軽減率);
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal();
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal().setValue(row.getDefaultDataName3().getValue());
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().setValue(row.getDefaultDataName4().getValue());
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKeigengoRiyoshaFutangaku().setValue(row.getDefaultDataName5().getValue());
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtBikou().setValue(row.getDefaultDataName6());
     }
 }
