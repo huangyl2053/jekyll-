@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  *
- * 被保険者証発行一覧表Builderクラスです
+ * 介護保険被保険者証（B4版）Builderクラスです
  */
 public final class HihokenshashoB4BuilderImpl implements IHihokenshashoB4Builder {
     

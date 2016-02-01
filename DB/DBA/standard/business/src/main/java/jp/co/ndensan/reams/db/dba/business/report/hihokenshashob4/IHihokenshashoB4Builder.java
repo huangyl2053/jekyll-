@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  *
- * 被保険者証発行一覧表Builderのインターフェースクラスです。
+ * 介護保険被保険者証（B4版）Builderのインターフェースクラスです。
  */
 public interface IHihokenshashoB4Builder extends IReportBuilder<HihokenshashoB4ReportSource> {
 }

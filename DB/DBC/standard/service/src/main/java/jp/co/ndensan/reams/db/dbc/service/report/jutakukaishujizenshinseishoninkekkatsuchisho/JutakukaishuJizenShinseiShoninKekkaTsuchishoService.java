@@ -90,7 +90,7 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoService {
                 item.getRiyoFutangaku(),
                 item.getHokenKyufuhigaku(),
                 item.getTsuchibun2(),
-                item.getHakkoYMD(),
+                ninshoshaSource.hakkoYMD,
                 ninshoshaSource.denshiKoin,
                 ninshoshaSource.ninshoshaYakushokuMei,
                 ninshoshaSource.ninshoshaYakushokuMei1,

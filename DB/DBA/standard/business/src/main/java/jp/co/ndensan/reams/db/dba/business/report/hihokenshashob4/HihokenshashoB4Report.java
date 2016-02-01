@@ -14,13 +14,13 @@ import lombok.NonNull;
 
 /**
  *
- * 被保険者証発行一覧表帳票作成します。
+ * 介護保険被保険者証（B4版）帳票作成します。
  */
 public final class HihokenshashoB4Report extends Report<HihokenshashoB4ReportSource> {
     
-    private final List<HihokenshashoB4Item> items;
+    private final List<HihokenshashoB4BodyItem> items;
     
-    private HihokenshashoB4Report(List<HihokenshashoB4Item> items) {
+    private HihokenshashoB4Report(List<HihokenshashoB4BodyItem> items) {
         this.items = items;
     }
     
@@ -29,13 +29,13 @@ public final class HihokenshashoB4Report extends Report<HihokenshashoB4ReportSou
      * @param items 一覧表証発行者Entityリスト
      * @return HihokenshashoHakkoIchiranHyoReport
      */
-    public static HihokenshashoB4Report createReport(@NonNull List<HihokenshashoB4Item> items) {
+    public static HihokenshashoB4Report createReport(@NonNull List<HihokenshashoB4BodyItem> items) {
         return new HihokenshashoB4Report(items);
     }
 
     @Override
     protected void writeBy(ReportSourceWriter<HihokenshashoB4ReportSource> writer) {
-        for (HihokenshashoB4Item item : items) {
+        for (HihokenshashoB4BodyItem item : items) {
             IHihokenshashoB4Editor joho = new HihokenshashoB4Editor(item);
             IHihokenshashoB4Builder builder = new HihokenshashoB4BuilderImpl(joho);
             writer.writeLine(builder);

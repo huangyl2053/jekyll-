@@ -149,7 +149,7 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriService {
                 item.getTsuchibunMix2(),
                 item.getTsuchibunMixtwo1(),
                 item.getTsuchibunMixtwo2(),
-                item.getHakkoYMD(),
+                ninshoshaSource.hakkoYMD,
                 ninshoshaSource.denshiKoin,
                 ninshoshaSource.ninshoshaYakushokuMei,
                 ninshoshaSource.ninshoshaYakushokuMei1,
