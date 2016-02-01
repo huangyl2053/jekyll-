@@ -55,19 +55,32 @@ public class GaikyoTokkiNyurokuHandler {
         GaikyoTokki gaikyoTokki = manager.get認定調査票_概況特記(temp_申請書管理番号, temp_認定調査履歴番号);
         // DbT5206GaikyoTokki
         if (gaikyoTokki != null) {
-            div.getTxtJutakuKaishu().setValue(RString.EMPTY);  // 在宅改修  TODO テーブルにこの項目がない
+            div.getTxtJutakuKaishu().setValue(RString.EMPTY);  // 住宅改修  TODO テーブルにこの項目がない
             div.getTxtChosaTaishoShuso().setValue(gaikyoTokki.get概況特記事項_主訴());  // 概況特記事項（主訴）
             div.getTxtChosaTishoKazokuJokyo().setValue(gaikyoTokki.get概況特記事項_家族状況()); // 概況特記事項（家族状況）
             div.getTxtChosaTaishoKyojuKankyo().setValue(gaikyoTokki.get概況特記事項_居住環境_());  // 概況特記事項（居住環境） 
             div.getTxtNichijoShiyoKikiUmu().setValue(gaikyoTokki.get概況特記事項_機器_器械());  // 概況特記事項（機器・器械）
+            
+            初期画面値の保持(RString.EMPTY, gaikyoTokki.get概況特記事項_主訴(), gaikyoTokki.get概況特記事項_家族状況(),
+                    gaikyoTokki.get概況特記事項_居住環境_(), gaikyoTokki.get概況特記事項_機器_器械());
         } else {
             div.getTxtJutakuKaishu().setValue(RString.EMPTY);
             div.getTxtChosaTaishoShuso().setValue(RString.EMPTY);
             div.getTxtChosaTishoKazokuJokyo().setValue(RString.EMPTY);
             div.getTxtChosaTaishoKyojuKankyo().setValue(RString.EMPTY);
             div.getTxtNichijoShiyoKikiUmu().setValue(RString.EMPTY);
+            
+            初期画面値の保持(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         }
 
+    }
+
+    private void 初期画面値の保持(RString 住宅改修, RString 主訴, RString 家族状況, RString 居住環境, RString 機器器械) {
+        ViewStateHolder.put(Dbe2210002Keys.修正前の住宅改修, 住宅改修);
+        ViewStateHolder.put(Dbe2210002Keys.修正前の主訴, 主訴);
+        ViewStateHolder.put(Dbe2210002Keys.修正前の家族状況, 家族状況);
+        ViewStateHolder.put(Dbe2210002Keys.修正前の居住環境, 居住環境);
+        ViewStateHolder.put(Dbe2210002Keys.修正前の機器器械, 機器器械);
     }
 
     /**
@@ -107,12 +120,12 @@ public class GaikyoTokkiNyurokuHandler {
     /**
      * 入力内容を取り消します。
      */
-    public void clearData() {
-        div.getTxtJutakuKaishu().clearValue();
-        div.getTxtChosaTaishoShuso().clearValue(); // 概況特記事項（主訴）
-        div.getTxtChosaTishoKazokuJokyo().clearValue(); // 概況特記事項（家族状況）
-        div.getTxtChosaTaishoKyojuKankyo().clearValue();  // 概況特記事項（居住環境） 
-        div.getTxtNichijoShiyoKikiUmu().clearValue();  // 概況特記事項（機器・器械）
+    public void resetData() {
+        div.getTxtJutakuKaishu().setValue(ViewStateHolder.get(Dbe2210002Keys.修正前の住宅改修, RString.class));
+        div.getTxtChosaTaishoShuso().setValue(ViewStateHolder.get(Dbe2210002Keys.修正前の主訴, RString.class)); // 概況特記事項（主訴）
+        div.getTxtChosaTishoKazokuJokyo().setValue(ViewStateHolder.get(Dbe2210002Keys.修正前の家族状況, RString.class)); // 概況特記事項（家族状況）
+        div.getTxtChosaTaishoKyojuKankyo().setValue(ViewStateHolder.get(Dbe2210002Keys.修正前の居住環境, RString.class));  // 概況特記事項（居住環境） 
+        div.getTxtNichijoShiyoKikiUmu().setValue(ViewStateHolder.get(Dbe2210002Keys.修正前の機器器械, RString.class));  // 概況特記事項（機器・器械）
     }
 
     /**
@@ -131,6 +144,34 @@ public class GaikyoTokkiNyurokuHandler {
      */
     public int getTemp_認定調査履歴番号() {
         return ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+    }
+
+    /**
+     * Dbe2210002Keys
+     */
+    public enum Dbe2210002Keys {
+
+        /**
+         * 修正前の住宅改修
+         */
+        修正前の住宅改修,
+        /**
+         * 修正前の主訴
+         */
+        修正前の主訴,
+        /**
+         * 修正前の家族状況
+         */
+        修正前の家族状況,
+        /**
+         * 修正前の居住環境
+         */
+        修正前の居住環境,
+        /**
+         * 修正前の機器器械
+         */
+        修正前の機器器械
+
     }
 
 }
