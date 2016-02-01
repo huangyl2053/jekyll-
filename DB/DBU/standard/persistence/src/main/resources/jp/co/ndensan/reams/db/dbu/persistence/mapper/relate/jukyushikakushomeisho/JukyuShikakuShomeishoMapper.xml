@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.mapper.relate.jukyushikakushomeisho.JukyuShikakuShomeishoMapper">
+    <select id="get申請状況情報" 
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity" 
+            parameterType="RString">
+        SELECT "shinseiJokyoKubun",
+               "shinseishoKanriNo",
+               "ninteiYMD"
+        FROM  rgdb."DbT4001JukyushaDaicho"
+        WHERE "hihokenshaNo" = #{被保番号}
+        AND   "logicalDeletedFlag" <![CDATA[<>]]> true
+        ORDER BY "rirekiNo","edaban" DESC  LIMIT 1
+    </select>
+    <select  id="get被保険者台帳管理情報" 
+             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity"
+             parameterType="RString">
+        SELECT "hihokenshaNo",
+               "idoYMD",
+               "edaNo",
+               "shichosonCode",
+               "koikinaiTokureiSochimotoShichosonCode" AS 措置元市町村コード
+        FROM  rgdb."DbT1001HihokenshaDaicho"
+        WHERE  "hihokenshaNo" = #{被保番号}
+        AND    "logicalDeletedFlag" <![CDATA[<>]]> true
+        ORDER BY "idoYMD","edaNo" DESC  LIMIT 1
+    </select>
+    <select id="get宛名識別対象PSM" 
+            resultType="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jukyushikakushomeisho.JukyuShikakuShomeishoMyBatisParameter">
+       SELECT A.*
+        FROM   
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper. tableName_PsmParamClassShikibetsuTaisho" />  AS A         
+    </select>
+</mapper>

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.edaban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.jukyuShinseiJiyu;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
@@ -20,8 +21,11 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -98,5 +102,27 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 被保険者番号をキーにして、受給者台帳．被保険者番号情報ある場合は、最新の履歴番号で、かつ、最大の枝番である情報を取得する。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT4001JukyushaDaichoEntity 受給者台帳のデータ
+     * @throws NullPointerException
+     */
+    @Transaction
+    public DbT4001JukyushaDaichoEntity select受給者台帳(HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                not(eq(logicalDeletedFlag, true)))).
+                order(by(rirekiNo, Order.DESC)).limit(1).
+                toObject(DbT4001JukyushaDaichoEntity.class);
     }
 }
