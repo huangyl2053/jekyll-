@@ -8,13 +8,13 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaicho;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaicho.edaban;
+import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaicho.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaicho.jukyuShinseiJiyu;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaicho.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaicho.shichosonCode;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4025ShiharaiHohoHenkoGengaku.rirekiNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.hihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -22,7 +22,9 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -119,9 +121,8 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 table(DbT4001JukyushaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                not(eq(logicalDeletedFlag, true))
-                        )
-                ).
+                                not(eq(logicalDeletedFlag, true)))).
+                order(by(rirekiNo, Order.DESC)).limit(1).
                 toObject(DbT4001JukyushaDaichoEntity.class);
     }
 

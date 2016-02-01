@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.service.core.syokanbaraishikyukettekyufujssekihensyu;
 
 import java.util.List;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.servicekeikakuHi.ServiceKeikakuHiRealtEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraishikyukettekyufujssekihensyu.KyufujissekiEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikibetsunokubon.ShikibetsuNoKubon;
@@ -47,18 +46,18 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3032KyufujissekiShotei
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3033KyufujissekiShukeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3106KyufujissekiMeisaiJushochiTokureiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3118ShikibetsuNoKanriDac;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -116,8 +115,9 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link SyokanbaraiShikyuKetteKyufuJssekiHensyuManager}のインスタンスを返します。
      *
-     * @return FukushiyoguKonyuhiShikyuGendogakuManager
+     * @return {@link InstanceProvider#create}にて生成した{@link SyokanbaraiShikyuKetteKyufuJssekiHensyuManager}のインスタンス
      */
     public static SyokanbaraiShikyuKetteKyufuJssekiHensyuManager createInstance() {
 
@@ -183,53 +183,32 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
      * @param 修正前支給区分
      */
     public void dealKyufujisseki(RString 画面モード, ShikibetsuCode 識別コード, KyufujissekiEntity entity,
-            RString 修正前支給区分) {
-
-        requireNonNull(画面モード, UrSystemErrorMessages.値がnull.getReplacedMessage("画面モード"));
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績編集用"));
-        requireNonNull(entity.get償還払請求基本(),
-                UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求基本"));
-        requireNonNull(entity.get償還払支給申請(),
-                UrSystemErrorMessages.値がnull.getReplacedMessage("償還払支給申請"));
-        requireNonNull(entity.get償還払支給判定結果(),
-                UrSystemErrorMessages.値がnull.getReplacedMessage("償還払支給判定結果"));
+            RString 修正前支給区分) throws ApplicationException {
 
         RString 給付実績情報作成区分コード;
         if (モード_登録.equals(画面モード)
-                && entity.get支給区分().equals(ShikyuFushikyuKubun.支給.getコード())) {
+                && ShikyuFushikyuKubun.支給.getコード().equals(entity.get支給区分())) {
             給付実績情報作成区分コード = new RString("1");
             給付実績追加(識別コード, 給付実績情報作成区分コード, entity);
-        }
-        if (モード_修正.equals(画面モード) || モード_差額登録.equals(画面モード)) {
-            if (修正前支給区分.equals(ShikyuFushikyuKubun.不支給.getコード())
-                    && entity.get支給区分().equals(ShikyuFushikyuKubun.不支給.getコード())) {
-            }
-            if (修正前支給区分.equals(ShikyuFushikyuKubun.不支給.getコード())
-                    && entity.get支給区分().equals(ShikyuFushikyuKubun.支給.getコード())) {
+        } else if (モード_修正.equals(画面モード) || モード_差額登録.equals(画面モード)) {
+            if (ShikyuFushikyuKubun.不支給.getコード().equals(修正前支給区分)
+                    && ShikyuFushikyuKubun.支給.getコード().equals(entity.get支給区分())) {
                 給付実績情報作成区分コード = new RString("1");
                 給付実績追加(識別コード, 給付実績情報作成区分コード, entity);
-            }
-            if (修正前支給区分.equals(ShikyuFushikyuKubun.支給.getコード())
-                    && entity.get支給区分().equals(ShikyuFushikyuKubun.支給.getコード())) {
+            } else if (ShikyuFushikyuKubun.支給.getコード().equals(修正前支給区分)
+                    && ShikyuFushikyuKubun.支給.getコード().equals(entity.get支給区分())) {
                 給付実績情報作成区分コード = new RString("2");
                 給付実績追加(識別コード, 給付実績情報作成区分コード, entity);
-            }
-            if (修正前支給区分.equals(ShikyuFushikyuKubun.支給.getコード())
-                    && entity.get支給区分().equals(ShikyuFushikyuKubun.不支給.getコード())) {
+            } else if (ShikyuFushikyuKubun.支給.getコード().equals(修正前支給区分)
+                    && ShikyuFushikyuKubun.不支給.getコード().equals(entity.get支給区分())) {
                 給付実績情報作成区分コード = new RString("3");
                 給付実績追加(識別コード, 給付実績情報作成区分コード, entity);
             }
-        }
-        if (モード_削除.equals(画面モード)) {
-            if (entity.get支給区分().equals(ShikyuFushikyuKubun.不支給.getコード())) {
-            }
-            if (entity.get支給区分().equals(ShikyuFushikyuKubun.支給.getコード())) {
-                給付実績情報作成区分コード = new RString("3");
-                給付実績追加(識別コード, 給付実績情報作成区分コード, entity);
-            }
-        }
-        if (モード_審査.equals(画面モード)) {
+        } else if (モード_削除.equals(画面モード)
+                && ShikyuFushikyuKubun.支給.getコード().equals(entity.get支給区分())) {
+            給付実績情報作成区分コード = new RString("3");
+            給付実績追加(識別コード, 給付実績情報作成区分コード, entity);
+        } else if (モード_審査.equals(画面モード)) {
             給付実績情報作成区分コード = new RString("1");
             給付実績追加(識別コード, 給付実績情報作成区分コード, entity);
         }
@@ -243,15 +222,12 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
      * @param entity
      */
     private void 給付実績追加(ShikibetsuCode 識別コード, RString 給付実績情報作成区分コード,
-            KyufujissekiEntity entity) {
-
-        requireNonNull(給付実績情報作成区分コード,
-                UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績情報作成区分コード"));
+            KyufujissekiEntity entity) throws ApplicationException {
 
         RString 通し番号 = Saiban.get(SubGyomuCode.DBC介護給付,
                 SaibanHanyokeyName.実績管理番号.getコード()).nextString();
         if (通し番号 == null) {
-            throw new IllegalArgumentException(UrErrorMessages.存在しない
+            throw new ApplicationException(UrErrorMessages.存在しない
                     .getMessage().replace("最新番号").evaluate());
         }
 
@@ -262,7 +238,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
 
         DbT4001JukyushaDaichoEntity dbT4001entity = 受給者台帳Dac.select認定有効期間(entity.get被保険者番号());
         if (dbT4001entity == null) {
-            throw new IllegalArgumentException(UrErrorMessages.存在しない
+            throw new ApplicationException(UrErrorMessages.存在しない
                     .getMessage().replace("認定有効期間").evaluate());
         }
 
@@ -271,7 +247,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
         DbT3118ShikibetsuNoKanriEntity dbT3118entity
                 = 識別番号管理Dac.select交換情報識別番号(識別番号区分, 適用年月);
         if (dbT3118entity == null) {
-            throw new IllegalArgumentException(UrErrorMessages.存在しない
+            throw new ApplicationException(UrErrorMessages.存在しない
                     .getMessage().replace("交換情報識別番号").evaluate());
         }
 
@@ -677,8 +653,8 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth("198801");
         DbT3025KyufujissekiKyotakuServiceEntity dbT3025entity = new DbT3025KyufujissekiKyotakuServiceEntity();
         List<ServiceKeikakuHiRealtEntity> 給付実績居宅サービス計画費List = entity.get償還払請求サービス計画List();
-        if (!給付実績居宅サービス計画費List.isEmpty()) {
-            if (サービス提供年月.isBefore(new FlexibleYearMonth("200604"))) {
+        if (給付実績居宅サービス計画費List != null && !給付実績居宅サービス計画費List.isEmpty()) {
+            if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
                 for (ServiceKeikakuHiRealtEntity 給付実績居宅サービス計画費 : 給付実績居宅サービス計画費List) {
                     if (給付実績居宅サービス計画費.get償還払請求サービス計画200004() != null) {
                         連番 = 連番 + 1;
@@ -718,8 +694,8 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                     }
                 }
             }
-            if (サービス提供年月.isBefore(new FlexibleYearMonth("200904"))
-                    && new FlexibleYearMonth("200603").isBefore(サービス提供年月)) {
+            if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200903"))
+                    && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
                 for (ServiceKeikakuHiRealtEntity 給付実績居宅サービス計画費 : 給付実績居宅サービス計画費List) {
                     if (給付実績居宅サービス計画費.get償還払請求サービス計画200604() != null) {
                         連番 = 連番 + 1;
@@ -763,7 +739,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                     }
                 }
             }
-            if (new FlexibleYearMonth("200903").isBefore(サービス提供年月)) {
+            if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス提供年月)) {
                 for (ServiceKeikakuHiRealtEntity 給付実績居宅サービス計画費 : 給付実績居宅サービス計画費List) {
                     if (給付実績居宅サービス計画費.get償還払請求サービス計画200904() != null) {
                         連番 = 連番 + 1;
@@ -837,7 +813,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 = new DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity();
         List<DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> 償還払請求特定入所者介護サービス費用List
                 = entity.get償還払請求特定入所者介護サービス費用List();
-        if (!償還払請求特定入所者介護サービス費用List.isEmpty()) {
+        if (償還払請求特定入所者介護サービス費用List != null && !償還払請求特定入所者介護サービス費用List.isEmpty()) {
             for (DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity 償還払請求特定入所者介護サービス費用
                     : 償還払請求特定入所者介護サービス費用List) {
                 連番 = 連番 + 1;
@@ -901,7 +877,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 = new DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity();
         List<DbT3051ShokanShakaiFukushiHojinKeigengakuEntity> 償還払請求社会福祉法人軽減額List
                 = entity.get償還払請求社会福祉法人軽減額List();
-        if (!償還払請求社会福祉法人軽減額List.isEmpty()) {
+        if (償還払請求社会福祉法人軽減額List != null && !償還払請求社会福祉法人軽減額List.isEmpty()) {
             for (DbT3051ShokanShakaiFukushiHojinKeigengakuEntity 償還払請求社会福祉法人軽減額
                     : 償還払請求社会福祉法人軽減額List) {
                 dbT3030entity.setKokanJohoShikibetsuNo(交換情報識別番号);
@@ -949,7 +925,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 = new DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity();
         List<DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity> 償還払請求所定疾患施設療養費等List
                 = entity.get償還払請求所定疾患施設療養費等List();
-        if (!償還払請求所定疾患施設療養費等List.isEmpty()) {
+        if (償還払請求所定疾患施設療養費等List != null && !償還払請求所定疾患施設療養費等List.isEmpty()) {
             for (DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity 償還払請求所定疾患施設療養費等
                     : 償還払請求所定疾患施設療養費等List) {
                 連番 = 連番 + 1;
@@ -1054,7 +1030,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     private void save給付実績集計(KokanShikibetsuNo 交換情報識別番号, RString 通し番号, KyufujissekiEntity entity) {
         DbT3033KyufujissekiShukeiEntity dbT3033entity = new DbT3033KyufujissekiShukeiEntity();
         List<DbT3053ShokanShukeiEntity> 償還払請求集計List = entity.get償還払請求集計List();
-        if (!償還払請求集計List.isEmpty()) {
+        if (償還払請求集計List != null && !償還払請求集計List.isEmpty()) {
             for (DbT3053ShokanShukeiEntity 償還払請求集計 : 償還払請求集計List) {
                 dbT3033entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3033entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(entity.get入力識別番号()));
