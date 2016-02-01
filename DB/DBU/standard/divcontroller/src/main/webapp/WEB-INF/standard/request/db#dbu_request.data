@@ -4,6 +4,7 @@ dbu/db/dbu/HihokenshashoHakkoJoho/onBlur_txtKofuDate
 dbu/db/dbu/HihokenshashoHakkoJoho/onChange_ddlKofuJiyu
 dbu/db/dbu/HihokenshashoHakkoTaishoGaitosha/onClick_BtnSearchHihokenshashoHakkoTaishosha
 dbu/db/dbu/HihokenshashoHakkoTaishoshaJoho/dispTaishoshaJoho
+dbu/db/dbu/KobetsuJikoRenkeiInfoSakusei/onLoad
 dbu/db/dbu/SearchHihokenshashoHakkoTaishosha/onClick_btnToReSearch
 dbu/db/dbu/SearchHihokenshashoHakkoTaishosha/onLoad
 dbu/db/dbu/SearchResultShoKaishuKanri/onClick_btnSearchShoKaishuKanri
@@ -13,6 +14,9 @@ dbu/db/dbu/ShoKaishuJokyo/onSelectBySelectButton_SearchResultShoKaishuJokyoList
 dbu/db/dbu/ShoKaishuJokyo/setEnableControl
 dbu/db/dbu/ShoKaishuKanriKanryoMessage/onLoad
 dbu/db/dbu/ShoKaishuKanriTaishoshaJoho/onSelectBySelectButton_SearchResultShoKaishuJokyoList
+dbu/db/dbu/SinsaSeikyusyoPanel/onClick_BtnSenTaKu
+dbu/db/dbu/SinsaSeikyusyoPanel/onClick_btnTuika
+dbu/db/dbu/SinsaSeikyusyoPanel/onLoad
 dbu/db/dbu/SogoShokaiInfo/onClick_btnFukaInfo
 dbu/db/dbu/SogoShokaiInfo/onClick_btnJukyuInfo
 dbu/db/dbu/SogoShokaiInfo/onClick_btnJuminInfo
