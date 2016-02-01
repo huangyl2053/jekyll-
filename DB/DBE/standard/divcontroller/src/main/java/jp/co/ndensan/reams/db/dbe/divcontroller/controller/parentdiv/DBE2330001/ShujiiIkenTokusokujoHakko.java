@@ -53,15 +53,15 @@ public class ShujiiIkenTokusokujoHakko {
      * @return ResponseData<ShujiiIkenTokusokujoHakkoDiv>
      */
     public ResponseData<ShujiiIkenTokusokujoHakkoDiv> beforeHakkou(ShujiiIkenTokusokujoHakkoDiv div) {
-        if (div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getChkInsatsuChohyo().getSelectedKeys().isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.未指定.getMessage().replace("主治医意見書督促状対象者一覧の印刷書類を"));
-        }
         RDate 開始日 = div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getFromValue() == null
                 ? RDate.MIN : div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getFromValue();
         RDate 終了日 = div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getToValue() == null
                 ? RDate.MIN : div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getToValue();
         if (終了日.isBefore(開始日)) {
             throw new ApplicationException(UrErrorMessages.終了日が開始日以前.getMessage());
+        }
+        if (div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getChkInsatsuChohyo().getSelectedKeys().isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.未指定.getMessage().replace("主治医意見書督促状対象者一覧の印刷書類を"));
         }
         int 該当データ件数 = getHandler(div).該当データ件数取得(getHandler(div).getTempData());
         if (該当データ件数 == 0) {
