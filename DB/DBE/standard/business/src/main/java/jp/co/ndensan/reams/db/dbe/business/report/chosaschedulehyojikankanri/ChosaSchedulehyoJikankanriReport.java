@@ -56,9 +56,10 @@ public class ChosaSchedulehyoJikankanriReport extends Report<ChosaSchedulehyoJik
      */
     @Override
     public void writeBy(ReportSourceWriter<ChosaSchedulehyoJikankanriReportSource> reportSourceWriter) {
-        for (ChosaSchedulehyoJikankanriBodyItem bodyItem : bodyItemList) {
+        for (int i = 0; i < bodyItemList.size(); i++) {
             IChosaSchedulehyoJikankanriEditor headerEditor = new ChosaSchedulehyoJikankanriHeaderEditor(headItem);
-            IChosaSchedulehyoJikankanriEditor bodyEditor = new ChosaSchedulehyoJikankanriBodyEditor(bodyItem);
+            bodyItemList.get(i).setNo(i + 1);
+            IChosaSchedulehyoJikankanriEditor bodyEditor = new ChosaSchedulehyoJikankanriBodyEditor(bodyItemList.get(i));
             IChosaSchedulehyoJikankanriBuilder builder = new ChosaSchedulehyoJikankanriBuilderImpl(headerEditor, bodyEditor);
             reportSourceWriter.writeLine(builder);
         }

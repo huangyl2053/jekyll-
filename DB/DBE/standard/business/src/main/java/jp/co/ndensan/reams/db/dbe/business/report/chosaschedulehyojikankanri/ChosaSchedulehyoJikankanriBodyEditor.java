@@ -68,7 +68,7 @@ class ChosaSchedulehyoJikankanriBodyEditor implements IChosaSchedulehyoJikankanr
     }
 
     private ChosaSchedulehyoJikankanriReportSource editBody(ChosaSchedulehyoJikankanriReportSource source) {
-        source.listChosaSukejuru2_1 = item.getNo();
+        source.listChosaSukejuru2_1 = new RString(item.getNo() + "");
         source.listChosaSukejuru2_2 = item.getTyousayinnNo();
         source.listChosaSukejuru2_3 = item.getTyousayinnName();
         source.listChosaSukejuru2_4 = item.getHihokennsyaNo();
