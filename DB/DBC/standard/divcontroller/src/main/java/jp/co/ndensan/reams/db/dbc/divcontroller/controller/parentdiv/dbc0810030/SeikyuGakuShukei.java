@@ -87,6 +87,7 @@ public class SeikyuGakuShukei {
         if (entityList == null || entityList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
+        div.getPanelSeikyuShokai().setVisible(false);
         getHandler(div).initialize(entityList);
         ShikibetsuNoKanriEntity shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShikibetsubangoKanri(サービス年月, 様式番号);
@@ -123,12 +124,17 @@ public class SeikyuGakuShukei {
         if (entityList == null || entityList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
-        List<ShokanKihon> list = ShokanbaraiJyokyoShokai.createInstance().
+        ShokanKihon list = ShokanbaraiJyokyoShokai.createInstance().
                 getShokanbarayiSeikyukihonDetail(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        getHandler(div).selectButton(entityList, list.get(0));
+        getHandler(div).selectButton(entityList, list);
 
         return createResponse(div);
 
+    }
+
+    public ResponseData<SeikyuGakuShukeiDiv> onClick_btnCloseUp(SeikyuGakuShukeiDiv div) {
+        div.getPanelSeikyuShokai().setVisible(false);
+        return createResponse(div);
     }
 
     private SeikyuGakuShukeiHandler getHandler(SeikyuGakuShukeiDiv div) {
