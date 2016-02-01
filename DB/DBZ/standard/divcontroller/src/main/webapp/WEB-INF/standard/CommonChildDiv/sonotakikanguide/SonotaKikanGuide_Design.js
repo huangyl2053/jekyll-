@@ -83,6 +83,10 @@ var DBZ;
             Controls.prototype.btnback = function () {
                 return new UZA.Button(this.convFiledName("btnback"));
             };
+
+            Controls.prototype.btnResearch = function () {
+                return new UZA.Button(this.convFiledName("btnResearch"));
+            };
             return Controls;
         })();
         SonotaKikanGuide.Controls = Controls;

@@ -3,15 +3,13 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.sonotakik
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jan 29 20:45:27 CST 2016 
+ * Mon Feb 01 16:31:05 CST 2016 
  */
 
 
 
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 
 
 /**
@@ -21,13 +19,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
  */
 
 public class dgSonotaKikanIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
 
     private RString sonotakikancode;
     private RString sonotakikanname;
     private RString defaultDataName2;
     private RString defaultDataName3;
-    private DropDownList defaultDataName4;
+    private RString defaultDataName4;
 
     public dgSonotaKikanIchiran_Row() {
         super();
@@ -35,7 +33,7 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
         this.sonotakikanname = RString.EMPTY;
         this.defaultDataName2 = RString.EMPTY;
         this.defaultDataName3 = RString.EMPTY;
-        this.defaultDataName4 = new DropDownList();
+        this.defaultDataName4 = RString.EMPTY;
         this.setOriginalData("sonotakikancode", sonotakikancode);
         this.setOriginalData("sonotakikanname", sonotakikanname);
         this.setOriginalData("defaultDataName2", defaultDataName2);
@@ -43,7 +41,7 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
         this.setOriginalData("defaultDataName4", defaultDataName4);
     }
 
-    public dgSonotaKikanIchiran_Row(RString sonotakikancode, RString sonotakikanname, RString defaultDataName2, RString defaultDataName3, DropDownList defaultDataName4) {
+    public dgSonotaKikanIchiran_Row(RString sonotakikancode, RString sonotakikanname, RString defaultDataName2, RString defaultDataName3, RString defaultDataName4) {
         super();
         this.setOriginalData("sonotakikancode", sonotakikancode);
         this.setOriginalData("sonotakikanname", sonotakikanname);
@@ -55,20 +53,6 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
         this.defaultDataName2 = defaultDataName2;
         this.defaultDataName3 = defaultDataName3;
         this.defaultDataName4 = defaultDataName4;
-    }
-
-    public dgSonotaKikanIchiran_Row(DataGridSetting gridSetting) {
-        super();
-        this.sonotakikancode = RString.EMPTY;
-        this.sonotakikanname = RString.EMPTY;
-        this.defaultDataName2 = RString.EMPTY;
-        this.defaultDataName3 = RString.EMPTY;
-        this.defaultDataName4 = DropDownList.createInstance(gridSetting.getColumn("defaultDataName4").getCellDetails());
-        this.setOriginalData("sonotakikancode", sonotakikancode);
-        this.setOriginalData("sonotakikanname", sonotakikanname);
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.setOriginalData("defaultDataName4", defaultDataName4);
     }
 
     public RString getSonotakikancode() {
@@ -87,7 +71,7 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
         return defaultDataName3;
     }
 
-    public DropDownList getDefaultDataName4() {
+    public RString getDefaultDataName4() {
         return defaultDataName4;
     }
 
@@ -111,7 +95,7 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
         this.defaultDataName3 = defaultDataName3;
     }
 
-    public void setDefaultDataName4(DropDownList defaultDataName4) {
+    public void setDefaultDataName4(RString defaultDataName4) {
         this.setOriginalData("defaultDataName4", defaultDataName4);
         this.defaultDataName4 = defaultDataName4;
     }

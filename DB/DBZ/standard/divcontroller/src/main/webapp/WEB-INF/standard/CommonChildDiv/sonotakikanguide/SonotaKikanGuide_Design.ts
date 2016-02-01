@@ -90,6 +90,10 @@ module DBZ {
                 return new UZA.Button(this.convFiledName("btnback"));
             }
 
+            public btnResearch(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnResearch"));
+            }
+
         }
 
      }
