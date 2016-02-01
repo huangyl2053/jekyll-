@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dba.definition.reportId;
 
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -14,7 +13,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 帳票ＩＤの列挙型です。
  */
 public enum ReportIdDBA {
-    
+
+    /**
+     * 境界層管理マスタリストの帳票ID。
+     */
+    DBA200005(new ReportId("DBA200005"), new RString("境界層管理マスタリスト")),
+    /**
+     * 広域内住所地特例者一覧表の帳票ID。
+     */
+    DBA200013(new ReportId("DBA200013"), new RString("広域内住所地特例者一覧表")),
     /**
      * 被保険者証発行一覧表の帳票ＩＤです。
      */
@@ -27,17 +34,18 @@ public enum ReportIdDBA {
      * 被保険者証発行一覧表の帳票ＩＤです。
      */
     DBA800001(new ReportId("DBA800001"), new RString("介護保険資格取得・異動・喪失届"));
-    
+
     private final ReportId reportId;
     private final RString reportName;
-    
+
     private ReportIdDBA(ReportId reportId, RString reportName) {
         this.reportId = reportId;
         this.reportName = reportName;
     }
-    
+
     /**
      * 帳票ＩＤの取得します。
+     *
      * @return 帳票ＩＤ
      */
     public ReportId getReportId() {
@@ -46,10 +54,11 @@ public enum ReportIdDBA {
 
     /**
      * 帳票Nameの取得します。
+     *
      * @return 帳票Name
      */
     public RString getReportName() {
         return reportName;
     }
-    
+
 }
