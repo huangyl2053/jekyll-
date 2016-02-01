@@ -13,7 +13,7 @@ import lombok.NonNull;
 
 /**
  *
- * 被保険者証発行一覧表帳票作成します。
+ * 介護保険資格取得・異動・喪失届帳票作成します。
  */
 public final class ShikakushutokuIdoSoshitsuReport extends Report<ShikakushutokuIdoSoshitsuReportSource> {
     
@@ -25,15 +25,19 @@ public final class ShikakushutokuIdoSoshitsuReport extends Report<Shikakushutoku
     
     /**
      * インスタンスを生成します。
-     * @param item 一覧表証発行者Entityリスト
+     * @param item 介護保険資格取得・異動・喪失届Entityリスト
      * @return HihokenshashoHakkoIchiranHyoReport
      */
     public static ShikakushutokuIdoSoshitsuReport createReport(@NonNull ShikakushutokuIdoSoshitsuItem item) {
         return new ShikakushutokuIdoSoshitsuReport(item);
     }
 
+    /**
+     * 介護保険資格取得・異動・喪失届writeByします。
+     * @param writer 介護保険資格取得・異動・喪失届作成_帳票クラスパラメータ
+     */
     @Override
-    protected void writeBy(ReportSourceWriter<ShikakushutokuIdoSoshitsuReportSource> writer) {
+    public void writeBy(ReportSourceWriter<ShikakushutokuIdoSoshitsuReportSource> writer) {
         IShikakushutokuIdoSoshitsuEditor joho = new ShikakushutokuIdoSoshitsuEditor(item);
         IShikakushutokuIdoSoshitsuBuilder builder = new ShikakushutokuIdoSoshitsuBuilderImpl(joho);
         writer.writeLine(builder);

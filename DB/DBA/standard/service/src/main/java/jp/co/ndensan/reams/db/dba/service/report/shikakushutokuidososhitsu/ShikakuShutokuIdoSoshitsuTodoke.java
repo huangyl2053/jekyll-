@@ -16,15 +16,27 @@ import jp.co.ndensan.reams.db.dba.entity.report.shikakushutokuidososhitsu.Shikak
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
+import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
+import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.report.Printer;
+import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.Report;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
+import jp.co.ndensan.reams.uz.uza.report.ReportManager;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
@@ -42,10 +54,22 @@ public class ShikakuShutokuIdoSoshitsuTodoke {
     public SourceDataCollection createKaigoHokenJukyushikakuShomeishoKofuShinseishoChohyo(
             ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
         ShikakushutokuIdoSoshitsuProerty proerty = new ShikakushutokuIdoSoshitsuProerty();
-        return new Printer<ShikakushutokuIdoSoshitsuReportSource>().spool(proerty, toReports(get被保険者基本情報(識別コード, 被保険者番号)));
+        try (ReportManager reportManager = new ReportManager()) {
+            try (ReportAssembler<ShikakushutokuIdoSoshitsuReportSource> assembler = createAssembler(proerty, reportManager)) {
+                INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
+                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
+                        RDate.getNowDate(), assembler.getImageFolderPath());
+                for (ShikakushutokuIdoSoshitsuReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
+                        ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
+                    ReportSourceWriter<ShikakushutokuIdoSoshitsuReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                        report.writeBy(reportSourceWriter);
+                }
+            }
+            return reportManager.publish();
+        }
     }
     
-    private static List<ShikakushutokuIdoSoshitsuReport> toReports(HihokenshaKihonEntity entity) {
+    private static List<ShikakushutokuIdoSoshitsuReport> toReports(HihokenshaKihonEntity entity, RString ninshoshaYakushokuMei) {
         List<ShikakushutokuIdoSoshitsuReport> list = new ArrayList<>();
         // TODO 内部QA: 626 (認証者の取得のメッソードがありません)
         RString 生年月日 = RString.EMPTY;
@@ -56,7 +80,7 @@ public class ShikakuShutokuIdoSoshitsuTodoke {
                 || JuminShubetsu.住登外個人_外国人.getCode().equals(entity.get住民種別コード())) {
             生年月日 = set生年月日(entity);
         }
-        ShikakushutokuIdoSoshitsuItem item = new ShikakushutokuIdoSoshitsuItem(new RString("認証者"),
+        ShikakushutokuIdoSoshitsuItem item = new ShikakushutokuIdoSoshitsuItem(ninshoshaYakushokuMei,
                 生年月日,
                 entity.get住所(),
                 // TODO 内部QA: 626 (被保険者基本情報Entity（HihokenshaKihonEntity）に方書がありません)
@@ -101,6 +125,17 @@ public class ShikakuShutokuIdoSoshitsuTodoke {
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
         return 生年月日;
+    }
+    
+     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
+            IReportProperty<T> property, ReportManager manager) {
+        ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
+        for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
+            builder.addBreak(breaker);
+        }
+        builder.isHojinNo(property.containsHojinNo());
+        builder.isKojinNo(property.containsKojinNo());
+        return builder.<T>create();
     }
     
     
