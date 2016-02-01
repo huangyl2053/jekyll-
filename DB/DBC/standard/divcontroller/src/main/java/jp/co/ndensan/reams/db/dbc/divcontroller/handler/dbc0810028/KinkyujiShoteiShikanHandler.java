@@ -28,6 +28,7 @@ public class KinkyujiShoteiShikanHandler {
 
     private final KinkyujiShoteiShikanDiv div;
     private static final RString 設定不可 = new RString("0");
+    private static final RString 改行 = new RString("\n");
 
     private KinkyujiShoteiShikanHandler(KinkyujiShoteiShikanDiv div) {
         this.div = div;
@@ -111,79 +112,79 @@ public class KinkyujiShoteiShikanHandler {
 
         }
         if (result.get摘要２() != null && !result.get摘要２().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要２());
         }
         if (result.get摘要３() != null && !result.get摘要３().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要３());
         }
         if (result.get摘要４() != null && !result.get摘要４().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要４());
         }
         if (result.get摘要５() != null && !result.get摘要５().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要５());
         }
         if (result.get摘要６() != null && !result.get摘要６().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要６());
         }
         if (result.get摘要７() != null && !result.get摘要７().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要７());
         }
         if (result.get摘要８() != null && !result.get摘要８().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要８());
         }
         if (result.get摘要９() != null && !result.get摘要９().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要９());
         }
         if (result.get摘要１０() != null && !result.get摘要１０().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１０());
         }
         if (result.get摘要１１() != null && !result.get摘要１１().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１１());
         }
         if (result.get摘要１２() != null && !result.get摘要１２().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１２());
         }
         if (result.get摘要１３() != null && !result.get摘要１３().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１３());
         }
         if (result.get摘要１４() != null && !result.get摘要１４().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１４());
         }
         if (result.get摘要１５() != null && !result.get摘要１５().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１５());
         }
         if (result.get摘要１６() != null && !result.get摘要１６().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１６());
         }
         if (result.get摘要１７() != null && !result.get摘要１７().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１７());
         }
         if (result.get摘要１８() != null && !result.get摘要１８().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１８());
         }
         if (result.get摘要１９() != null && !result.get摘要１９().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要１９());
         }
         if (result.get摘要２０() != null && !result.get摘要２０().isEmpty()) {
-            tekiyou.append("\n");
+            tekiyou.append(改行);
             tekiyou.append(result.get摘要２０());
         }
         return tekiyou.toRString();
