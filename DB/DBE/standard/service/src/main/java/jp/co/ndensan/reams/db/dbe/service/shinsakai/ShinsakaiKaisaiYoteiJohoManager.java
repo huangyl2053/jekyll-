@@ -47,7 +47,7 @@ public class ShinsakaiKaisaiYoteiJohoManager {
     /**
      * テスト用コンストラクタです。
      *
-     * @param dac {@link mapperProvider}
+     * @param mapperProvider {@link mapperProvider}
      */
     ShinsakaiKaisaiYoteiJohoManager(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
@@ -94,7 +94,7 @@ public class ShinsakaiKaisaiYoteiJohoManager {
      * @param 合議体番号 合議体番号
      * @return 介護認定審査会開催予定情報Entity
      */
-    public ShinsakaiKaisaiYoteiJohoBusiness get合議体情報(RString 設定日, RString 開始時間, RString 終了時間, int 合議体番号) {
+    public ShinsakaiKaisaiYoteiJohoBusiness save開催予定情報(RString 設定日, RString 開始時間, RString 終了時間, int 合議体番号) {
         ShinsakaiKaisaiYoteiJohoEntity shinsakaiYotei = new ShinsakaiKaisaiYoteiJohoEntity();
         IShinsakaiKaisaiYoteiJohoMapper mapper = mapperProvider.create(IShinsakaiKaisaiYoteiJohoMapper.class);
         GogitaiJohoShinsaRelateEntity entity = mapper.get合議体情報(合議体番号);

@@ -42,7 +42,7 @@ public class GogitaiManager {
     /**
      * テスト用コンストラクタです。
      *
-     * @param dac {@link mapperProvider}
+     * @param mapperProvider {@link mapperProvider}
      */
     GogitaiManager(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;

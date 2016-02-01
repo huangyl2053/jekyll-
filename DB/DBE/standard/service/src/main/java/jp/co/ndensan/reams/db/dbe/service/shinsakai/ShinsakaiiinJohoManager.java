@@ -41,7 +41,7 @@ public class ShinsakaiiinJohoManager {
     /**
      * テスト用コンストラクタです。
      *
-     * @param dac {@link mapperProvider}
+     * @param mapperProvider {@link mapperProvider}
      */
     ShinsakaiiinJohoManager(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
