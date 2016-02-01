@@ -16,7 +16,7 @@ public enum ReportIdDBE {
     /**
      * 主治医意見書作成依頼書の帳票ＩＤです。
      */
-    DBE230001(new ReportId("DBE230001"), new RString("主治医意見書作成依頼書"));
+    DBE230001(new ReportId("DBE230001_ShujiiIkenshoSakuseiIraisho"), new RString("主治医意見書作成依頼書"));
 
     private final ReportId reportId;
     private final RString reportName;
