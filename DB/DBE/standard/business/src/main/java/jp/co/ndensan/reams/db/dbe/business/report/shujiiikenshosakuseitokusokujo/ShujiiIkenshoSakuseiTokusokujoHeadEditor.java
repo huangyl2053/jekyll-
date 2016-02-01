@@ -122,7 +122,7 @@ public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements ShujiiIkenshoSa
         source.remban = headitem.getRemban();
         source.seibetsuMan = headitem.getSeyibenMan();
         source.seibetsuWoman = headitem.getSeyibenWoman();
-        source.tsuchibun2 = builder.toRString();
+        source.tsuchibun2 = headitem.getTsuchibun2();
         source.remban = headitem.getRemban();
         source.seibetsuMan = headitem.getSeyibenMan();
         source.seibetsuWoman = headitem.getSeyibenWoman();
