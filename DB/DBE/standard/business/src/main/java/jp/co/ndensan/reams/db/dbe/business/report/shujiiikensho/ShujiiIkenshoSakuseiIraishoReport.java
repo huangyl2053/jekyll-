@@ -51,6 +51,7 @@ public class ShujiiIkenshoSakuseiIraishoReport extends Report<ShujiiIkenshoSakus
     }
 
     /**
+     * 主治医意見書作成依頼書を出力します。
      *
      * @param reportSourceWriter 主治医意見書作成依頼書Sourceクラス
      */

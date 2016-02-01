@@ -25,9 +25,10 @@ public class ShujiiIkenshoSakuseiIraishoEditor implements IShujiiIkenshoSakuseiI
     }
 
     /**
+     * 主治医意見書作成依頼書編集処理です。
      *
-     * @param source 要介護認定調査依頼書Sourceクラス
-     * @return ChosaIraishoReportSource 要介護認定調査依頼書Sourceクラス
+     * @param source 主治医意見書作成依頼書Sourceクラス
+     * @return ShujiiIkenshoSakuseiIraishoReportSource 主治医意見書作成依頼書Sourceクラス
      */
     @Override
     public ShujiiIkenshoSakuseiIraishoReportSource edit(ShujiiIkenshoSakuseiIraishoReportSource source) {
