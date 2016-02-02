@@ -3,7 +3,32 @@
 <!-- 概要： 合議体情報のマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chikuninteichosain.ChosainJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chikuninteichosain.IChosainJohoMapper">
+    
+    <select id="get通常件数" 
+             resultType="int" 
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
+        SELECT
+            COUNT(0)
+        FROM
+            rgdb."DbT5222NinteiChosaScheduleMemo" AS NinteiChosaScheduleMemo
+        WHERE
+            NinteiChosaScheduleMemo."memoYMD" = #{設定日}
+            AND NinteiChosaScheduleMemo.chosaChikuCode = #{chosaChikuCode}
+            AND NinteiChosaScheduleMemo."memoPriority" = '1'
+    </select>
+    <select id="get重要件数" 
+             resultType="int" 
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
+        SELECT
+            COUNT(0)
+        FROM
+            rgdb."DbT5222NinteiChosaScheduleMemo" AS NinteiChosaScheduleMemo
+        WHERE
+            NinteiChosaScheduleMemo."memoYMD" = #{設定日}
+            AND NinteiChosaScheduleMemo.chosaChikuCode = #{chosaChikuCode}
+            AND NinteiChosaScheduleMemo."memoPriority" = '1'
+    </select>
     
      <resultMap id="resultMap_ChikuNinteiChosainRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChosainJohoRelateEntity" autoMapping="true">
         <result property="ninteiChosainCode"                   column="chikuNinteiChosain_ninteiChosainCode"                   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -14,32 +39,7 @@
         <result property="ninteiChosaJikanWaku"                column="ninteichosaSchedule_ninteiChosaJikanWaku"               typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
     </resultMap>
     
-    <resultMap id="resultMap_ChikuNinteiKoseiShichosonRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChikuNinteiKoseiShichosonRelateEntity" autoMapping="true">
-        <result property="shichosonCode"                       column="chikuNinteiChosain_shichosonCode"                       typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
-        <result property="shichosonMeisho"                     column="koseiShichosonMaster_shichosonMeisho"                   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-    </resultMap>
-    
-    <resultMap id="resultMap_ChikuNinteiNinteichosaRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChikuNinteiNinteichosaRelateEntity" autoMapping="true">
-        <result property="ninteiChosaItakusakiCode"            column="chikuNinteiChosain_ninteiChosaItakusakiCode"            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="jigyoshaMeisho"                      column="koseiShichosonMaster_jigyoshaMeisho"                    typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-    </resultMap>
-    
-    <resultMap id="resultMap_NinteichosaScheduleEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity" autoMapping="true">
-        <result property="shinseishoKanriNo"                   column="ninteichosaSchedule_shinseishoKanriNo"                  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
-    </resultMap>
-    
-<!--    <select id="getChikuNinteiChosainRelateEntity1" 
-             resultMap="resultMap_ChikuNinteiChosainRelateEntity" 
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
-        SELECT
-        
-        FROM
-            rgdb."DbT5222NinteiChosaScheduleMemo" AS NinteiChosaScheduleMemo
-        LEFT JOIN rgdb."DbT5225ChosaChikuGroup" AS ChosaChikuGroup 
-                ON ChosaChikuGroup.chosachikugroupname = NinteiChosaScheduleMemo
-        WHERE
-    </select>-->
-   <select id="getChikuNinteiChosainRelateEntity1" 
+   <select id="getChikuNinteiChosainRelateEntity" 
              resultMap="resultMap_ChikuNinteiChosainRelateEntity" 
              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
         SELECT
@@ -56,12 +56,12 @@
                 AND ChosainJoho."ninteichosaItakusakiCode" = ChikuNinteiChosain."ninteiChosaItakusakiCode"
                 AND ChosainJoho."ninteiChosainNo" = ChikuNinteiChosain."ninteiChosainCode"
         LEFT JOIN rgdb."DbT5221NinteichosaSchedule" AS NinteichosaSchedule
-                ON NinteichosaSchedule."ninteiChosaYoteiYMD" = #{ninteiChosaYoteiYMD}
+                ON NinteichosaSchedule."ninteiChosaYoteiYMD" = #{設定日}
                 AND NinteichosaSchedule."ninteiChosaItakusakiCode" = ChikuNinteiChosain."ninteiChosaItakusakiCode"
                 AND NinteichosaSchedule."ninteiChosainCode" = ChikuNinteiChosain."ninteiChosainCode"
                 AND NinteichosaSchedule."shichosonCode" = ChikuNinteiChosain."shichosonCode"
-        <if test="Temp_調査員状況02">
-                AND NinteichosaSchedule."yoyakuKaoFlag" = '0'
+        <if test="is空き">
+                AND NinteichosaSchedule."yoyakuKaoFlag" = 'true'
                 AND NinteichosaSchedule."yoyakuJokyo" = '0'
 	</if>
         WHERE ChikuNinteiChosain."chosaChikuCode" = #{chosaChikuCode}
@@ -69,7 +69,7 @@
                 AND ChikuNinteiChosain."shichosonCode" = #{shichosonCode}
     </select>
     
-   <!--  <select id="getChikuNinteiChosainRelateEntity2" 
+   <select id="getChikuNinteiChosainRelateEntityKensaku" 
             resultMap="resultMap_ChikuNinteiChosainRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
        SELECT
@@ -86,19 +86,25 @@
                AND ChosainJoho."ninteichosaItakusakiCode" = ChikuNinteiChosain."ninteiChosaItakusakiCode"
                AND ChosainJoho."ninteiChosainNo" = ChikuNinteiChosain."ninteiChosainCode"
        LEFT JOIN rgdb."DbT5221NinteichosaSchedule" AS NinteichosaSchedule
-               ON NinteichosaSchedule."ninteiChosaYoteiYMD" = #{ninteiChosaYoteiYMD}
+               ON NinteichosaSchedule."ninteiChosaYoteiYMD" = #{設定日}
                AND NinteichosaSchedule."ninteiChosaItakusakiCode" = ChikuNinteiChosain."ninteiChosaItakusakiCode"
                AND NinteichosaSchedule."ninteiChosainCode" = ChikuNinteiChosain."ninteiChosainCode"
                AND NinteichosaSchedule."shichosonCode" = ChikuNinteiChosain."shichosonCode"
-       <if test="jokyoFlag">
-               AND NinteichosaSchedule."yoyakuKaoFlag" = '0'
+       <if test="is空き">
+               AND NinteichosaSchedule."yoyakuKaoFlag" = 'true'
                AND NinteichosaSchedule."yoyakuJokyo" = '0'
        </if>
        WHERE ChikuNinteiChosain."chosaChikuCode" = #{chosaChikuCode}
                AND ChikuNinteiChosain."ninteiChosaItakusakiCode" = #{ninteiChosaItakusakiCode}
                AND ChikuNinteiChosain."shichosonCode" = #{shichosonCode}
        ORDER BY NinteichosaSchedule."ninteiChosainCode"
-    </select>-->
+    </select>
+    
+    <resultMap id="resultMap_ChikuNinteiKoseiShichosonRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChikuNinteiKoseiShichosonRelateEntity" autoMapping="true">
+        <result property="shichosonCode"                       column="chikuNinteiChosain_shichosonCode"                       typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="shichosonMeisho"                     column="koseiShichosonMaster_shichosonMeisho"                   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    
     <select id="getChikuNinteiKoseiShichosonRelateRelateEntity" 
              resultMap="resultMap_ChikuNinteiKoseiShichosonRelateEntity" 
              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
@@ -111,6 +117,11 @@
                 ON KoseiShichosonMaster."shichosonCode" = ChikuNinteiChosain."shichosonCode"
         WHERE ChikuNinteiChosain."chosaChikuCode" = #{chosaChikuCode}
     </select>
+    
+    <resultMap id="resultMap_ChikuNinteiNinteichosaRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChikuNinteiNinteichosaRelateEntity" autoMapping="true">
+        <result property="ninteiChosaItakusakiCode"            column="chikuNinteiChosain_ninteiChosaItakusakiCode"            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jigyoshaMeisho"                      column="koseiShichosonMaster_jigyoshaMeisho"                    typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
     
     <select id="getChikuNinteiNinteichosaRelateEntity" 
              resultMap="resultMap_ChikuNinteiNinteichosaRelateEntity" 
@@ -126,6 +137,10 @@
                 AND ChikuNinteiChosain."shichosonCode" = #{shichosonCode}
     </select>
     
+    <resultMap id="resultMap_NinteichosaScheduleEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity" autoMapping="true">
+        <result property="shinseishoKanriNo"                   column="ninteichosaSchedule_shinseishoKanriNo"                  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
+    </resultMap>
+    
     <select id="getNinteichosaScheduleEntity" 
              resultMap="resultMap_NinteichosaScheduleEntity" 
              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
@@ -137,7 +152,7 @@
                 AND NinteichosaSchedule."shichosonCode" = #{shichosonCode}
                 AND NinteichosaSchedule."ninteiChosaItakusakiCode" = #{ninteiChosaItakusakiCode}
                 AND NinteichosaSchedule."ninteiChosainCode" = #{ninteiChosainCode}
-                AND NinteichosaSchedule."ninteiChosaYoteiYMD" = #{ninteiChosaYoteiYMD}
+                AND NinteichosaSchedule."ninteiChosaYoteiYMD" = #{設定日}
                 AND NinteichosaSchedule."ninteiChosaYoteiKaishiTime" = #{ninteiChosaYoteiKaishiTime}
                 AND NinteichosaSchedule."ninteiChosaYoteiShuryoTime" = #{ninteiChosaYoteiShuryoTime}
                 AND NinteichosaSchedule."ninteiChosaJikanWaku" = #{ninteiChosaJikanWaku}
