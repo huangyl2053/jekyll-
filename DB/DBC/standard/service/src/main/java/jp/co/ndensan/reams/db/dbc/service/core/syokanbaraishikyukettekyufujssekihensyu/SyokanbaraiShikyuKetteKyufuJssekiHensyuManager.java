@@ -52,9 +52,13 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikib
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -231,8 +235,11 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                     .getMessage().replace("最新番号").evaluate());
         }
 
+        IShikibetsuTaishoGyomuHanteiKey gyomuKey = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(
+                GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
+        ShikibetsuTaishoSearchKeyBuilder builder = new ShikibetsuTaishoSearchKeyBuilder(gyomuKey);
         List<IKojin> Kojin
-                = ShikibetsuTaishoService.getKojinFinder().get個人s((IShikibetsuTaishoSearchKey) 識別コード);
+                = ShikibetsuTaishoService.getKojinFinder().get個人s(builder.set識別コード(識別コード).build());
         FlexibleDate 生年月日YND = (FlexibleDate) Kojin.get(0).get生年月日();
         RString 性別コード = Kojin.get(0).get性別().getCode();
 
