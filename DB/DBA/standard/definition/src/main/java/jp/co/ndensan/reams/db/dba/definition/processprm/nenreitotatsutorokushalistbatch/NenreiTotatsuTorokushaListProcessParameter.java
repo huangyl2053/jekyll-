@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.processprm.nenreitotatsutorokushalistbatch;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsutorokushalistbatch.NenreiTotatsuTorokushaListMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +27,11 @@ public class NenreiTotatsuTorokushaListProcessParameter implements IBatchProcess
     private RString konkaishuryoYMDHMS;
     private RString shuturyokujunID;
     private RString psmShikibetsuTaisho;
+    private Code shutokuJiyu_Hihokensha;
+    private List<Code> soshitsuJiyu_Hihokensha;
+    private Code henkoJiyu_Hihokensha;
+    private List<Code> jutokuTekiyo;
+    private List<Code> jutokuKaijo;
 
     /**
      * コンストラクタ。
@@ -52,6 +59,11 @@ public class NenreiTotatsuTorokushaListProcessParameter implements IBatchProcess
         return new NenreiTotatsuTorokushaListMybatisParameter(
                 konkaikaishiYMDHMS,
                 konkaishuryoYMDHMS,
-                psmShikibetsuTaisho);
+                psmShikibetsuTaisho,
+                shutokuJiyu_Hihokensha,
+                soshitsuJiyu_Hihokensha,
+                henkoJiyu_Hihokensha,
+                jutokuTekiyo,
+                jutokuKaijo);
     }
 }

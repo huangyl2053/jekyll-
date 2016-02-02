@@ -53,21 +53,6 @@
     <result property="区分_前_資格" column="kubun_zen_shikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     <result property="区分_後_資格" column="kubun_go_shikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    <sql id="shubetsuCode_0007">
-        ('02')
-    </sql>
-    <sql id="shubetsuCode_0010">
-        ('51','52','53','55','57','58','68','99')
-    </sql>
-    <sql id="shubetsuCode_0013">
-        ('31')
-    </sql>
-    <sql id="shubetsuCode_0014">
-        ('05')
-    </sql>
-    <sql id="shubetsuCode_0015">
-        ('71','72')
-    </sql>
     <select id="getHiHokenshaDaichoList" resultMap="resultMap_getHiHokenshaDaichoList" 
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsutorokushalistbatch.NenreiTotatsuTorokushaListMybatisParameter" 
             fetchSize="500">
@@ -105,13 +90,14 @@
             ,dbT1001."hihokenshaNo" AS "hihokenshaNo"
             ,dbT1001."shikibetsuCode" AS "shikibetsuCode"
             ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
-                  THEN CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0007" />
+                  THEN CASE WHEN dbT1001."idoJiyuCode" IN (#{shutokuJiyu_Hihokensha})
                             THEN dbT1001."shikakuShutokuJiyuCode"
                        ELSE
-                           CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0013" />
+                           CASE WHEN dbT1001."idoJiyuCode" IN (#{henkoJiyu_Hihokensha})
                                 THEN dbT1001."shikakuHenkoJiyuCode"
                            ELSE
-                               CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0014" />
+                               CASE WHEN dbT1001."idoJiyuCode" IN
+                           <foreach collection="jutokuTekiyo" item="code" open="(" separator="," close=")"> #{code} </foreach>
                                     THEN dbT1001."jushochitokureiTekiyoJiyuCode"
                                ELSE NULL
                                END
@@ -121,13 +107,14 @@
                 NULL
             END AS "shutokujyohou_zen_jiyu"
             ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
-                  THEN CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0007" />
+                  THEN CASE WHEN dbT1001."idoJiyuCode" IN (#{shutokuJiyu_Hihokensha})
                             THEN dbT1001."shikakuShutokuYMD"
                        ELSE
-                           CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0013" />
+                           CASE WHEN dbT1001."idoJiyuCode" IN (#{henkoJiyu_Hihokensha})
                                 THEN dbT1001."shikakuHenkoYMD"
                            ELSE
-                               CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0014" />
+                               CASE WHEN dbT1001."idoJiyuCode" IN
+                           <foreach collection="jutokuTekiyo" item="code" open="(" separator="," close=")"> #{code} </foreach>
                                     THEN dbT1001."jushochitokureiTekiyoYMD"
                                ELSE NULL
                                END
@@ -137,13 +124,14 @@
                 NULL
             END AS "shutokujyohou_zen_idoYMD"
             ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
-                  THEN CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0007" />
+                  THEN CASE WHEN dbT1001."idoJiyuCode" IN (#{shutokuJiyu_Hihokensha})
                             THEN dbT1001."shikakuShutokuTodokedeYMD"
                        ELSE
-                           CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0013" />
+                           CASE WHEN dbT1001."idoJiyuCode" IN (#{henkoJiyu_Hihokensha})
                                 THEN dbT1001."shikakuHenkoTodokedeYMD"
                            ELSE
-                               CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0014" />
+                               CASE WHEN dbT1001."idoJiyuCode" IN
+                           <foreach collection="jutokuTekiyo" item="code" open="(" separator="," close=")"> #{code} </foreach>
                                     THEN dbT1001."jushochitokureiTekiyoTodokedeYMD"
                                ELSE NULL
                                END
@@ -153,19 +141,22 @@
                 NULL
             END AS "shutokujyohou_zen_todokedeYMD"
             ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
-                  THEN CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0007" />
+                  THEN CASE WHEN dbT1001."idoJiyuCode" IN (#{shutokuJiyu_Hihokensha})
                            THEN '取得削除'
                        ELSE
-                           CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0010" />
+                           CASE WHEN dbT1001."idoJiyuCode" IN
+                       <foreach collection="soshitsuJiyu_Hihokensha" item="code" open="(" separator="," close=")"> #{code} </foreach>
                                 THEN '喪失削除'
                            ELSE
-                               CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0013" />
+                               CASE WHEN dbT1001."idoJiyuCode" IN (#{henkoJiyu_Hihokensha})
                                     THEN '変更削除'
                                ELSE
-                                   CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0014" />
+                                   CASE WHEN dbT1001."idoJiyuCode" IN
+                               <foreach collection="jutokuTekiyo" item="code" open="(" separator="," close=")"> #{code} </foreach>
                                         THEN '住特適用削除'
                                    ELSE
-                                       CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0015" />
+                                       CASE WHEN dbT1001."idoJiyuCode" IN
+                               <foreach collection="jutokuKaijo" item="code" open="(" separator="," close=")"> #{code} </foreach>
                                             THEN '住特解除削除'
                                        ELSE NULL
                                        END
@@ -174,19 +165,22 @@
                            END
                        END
             ELSE
-                CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0007" />
+                CASE WHEN dbT1001."idoJiyuCode" IN (#{shutokuJiyu_Hihokensha})
                      THEN '取得異動'
                 ELSE
-                    CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0010" />
+                    CASE WHEN dbT1001."idoJiyuCode" IN
+                <foreach collection="soshitsuJiyu_Hihokensha" item="code" open="(" separator="," close=")"> #{code} </foreach>
                          THEN '喪失異動'
                     ELSE
-                        CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0013" />
+                        CASE WHEN dbT1001."idoJiyuCode" IN (#{henkoJiyu_Hihokensha})
                              THEN '変更異動'
                         ELSE
-                            CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0014" />
+                            CASE WHEN dbT1001."idoJiyuCode" IN
+                        <foreach collection="jutokuTekiyo" item="code" open="(" separator="," close=")"> #{code} </foreach>
                                  THEN '住特適用異動'
                             ELSE
-                                CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0015" />
+                                CASE WHEN dbT1001."idoJiyuCode" IN
+                        <foreach collection="jutokuKaijo" item="code" open="(" separator="," close=")"> #{code} </foreach>
                                      THEN '住特解除異動'
                                 ELSE NULL
                                 END
@@ -196,76 +190,89 @@
                 END
             END AS "idojyohoudata_4"
             ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
-                      AND dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0010" />
+                      AND dbT1001."idoJiyuCode" IN
+            <foreach collection="soshitsuJiyu_Hihokensha" item="code" open="(" separator="," close=")"> #{code} </foreach>
                   THEN dbT1001."shikakuSoshitsuJiyuCode"
             ELSE
                 NULL
             END AS "soshitsujyohou_zen_jiyu"
             ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
-                      AND dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0010" />
+                      AND dbT1001."idoJiyuCode" IN
+            <foreach collection="soshitsuJiyu_Hihokensha" item="code" open="(" separator="," close=")"> #{code} </foreach>
                   THEN dbT1001."shikakuSoshitsuYMD"
             ELSE
                 NULL
             END AS "soshitsujyohou_zen_idoYMD"
             ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
-                      AND dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0010" />
+                      AND dbT1001."idoJiyuCode" IN
+            <foreach collection="soshitsuJiyu_Hihokensha" item="code" open="(" separator="," close=")"> #{code} </foreach>
                   THEN dbT1001."shikakuSoshitsuTodokedeYMD"
             ELSE
                 NULL
             END AS "soshitsujyohou_zen_todokedeYMD"
             ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
-                  THEN CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0015" />
+                  THEN CASE WHEN dbT1001."idoJiyuCode" IN
+            <foreach collection="jutokuKaijo" item="code" open="(" separator="," close=")"> #{code} </foreach>
                             THEN dbT1001."jushochitokureiKaijoJiyuCode"
                        ELSE NULL
                        END
             ELSE
-                CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0010" />
+                CASE WHEN dbT1001."idoJiyuCode" IN
+                <foreach collection="soshitsuJiyu_Hihokensha" item="code" open="(" separator="," close=")"> #{code} </foreach>
                      THEN dbT1001."shikakuSoshitsuJiyuCode"
                 ELSE
-                    CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0015" />
+                    CASE WHEN dbT1001."idoJiyuCode" IN
+                <foreach collection="jutokuKaijo" item="code" open="(" separator="," close=")"> #{code} </foreach>
                          THEN dbT1001."jushochitokureiKaijoJiyuCode"
                     ELSE NULL
                     END
                END
             END AS "soshitsujyohou_go_jiyu"
             ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
-                  THEN CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0015" />
+                  THEN CASE WHEN dbT1001."idoJiyuCode" IN
+            <foreach collection="jutokuKaijo" item="code" open="(" separator="," close=")"> #{code} </foreach>
                             THEN dbT1001."jushochitokureiKaijoYMD"
                        ELSE NULL
                        END
             ELSE
-                CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0010" />
+                CASE WHEN dbT1001."idoJiyuCode" IN
+                <foreach collection="soshitsuJiyu_Hihokensha" item="code" open="(" separator="," close=")"> #{code} </foreach>
                      THEN dbT1001."shikakuSoshitsuYMD"
                 ELSE
-                    CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0015" />
+                    CASE WHEN dbT1001."idoJiyuCode" IN
+                <foreach collection="jutokuKaijo" item="code" open="(" separator="," close=")"> #{code} </foreach>
                          THEN dbT1001."jushochitokureiKaijoYMD"
                     ELSE NULL
                     END
                 END
             END AS "soshitsujyohou_go_idoYMD"
             ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
-                  THEN CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0015" />
+                  THEN CASE WHEN dbT1001."idoJiyuCode" IN
+            <foreach collection="jutokuKaijo" item="code" open="(" separator="," close=")"> #{code} </foreach>
                             THEN dbT1001."jushochitokureiKaijoTodokedeYMD"
                        ELSE NULL
                        END
             ELSE
-                CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0010" />
+                CASE WHEN dbT1001."idoJiyuCode" IN
+                <foreach collection="soshitsuJiyu_Hihokensha" item="code" open="(" separator="," close=")"> #{code} </foreach>
                      THEN dbT1001."shikakuSoshitsuTodokedeYMD"
                 ELSE 
-                    CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0015" />
+                    CASE WHEN dbT1001."idoJiyuCode" IN
+                <foreach collection="jutokuKaijo" item="code" open="(" separator="," close=")"> #{code} </foreach>
                          THEN dbT1001."jushochitokureiKaijoTodokedeYMD"
                     ELSE NULL
                     END
                 END
             END AS "soshitsujyohou_go_todokedeYMD"
             ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
-                  THEN CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0007" />
+                  THEN CASE WHEN dbT1001."idoJiyuCode" IN (#{shutokuJiyu_Hihokensha})
                             THEN dbT1001."shikakuShutokuJiyuCode"
                        ELSE
-                           CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0013" />
+                           CASE WHEN dbT1001."idoJiyuCode" IN (#{henkoJiyu_Hihokensha})
                                 THEN dbT1001."shikakuHenkoJiyuCode"
                            ELSE
-                               CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0014" />
+                               CASE WHEN dbT1001."idoJiyuCode" IN
+                               <foreach collection="jutokuTekiyo" item="code" open="(" separator="," close=")"> #{code} </foreach>
                                     THEN dbT1001."jushochitokureiTekiyoJiyuCode"
                                ELSE NULL
                                END
@@ -275,13 +282,14 @@
                 NULL
             END AS "shutokujyohou_go_jiyu"
             ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
-                  THEN CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0007" />
+                  THEN CASE WHEN dbT1001."idoJiyuCode" IN (#{shutokuJiyu_Hihokensha})
                             THEN dbT1001."shikakuShutokuYMD"
                        ELSE
-                           CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0013" />
+                           CASE WHEN dbT1001."idoJiyuCode" IN (#{henkoJiyu_Hihokensha})
                                 THEN dbT1001."shikakuHenkoYMD"
                            ELSE
-                               CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0014" />
+                               CASE WHEN dbT1001."idoJiyuCode" IN
+                               <foreach collection="jutokuTekiyo" item="code" open="(" separator="," close=")"> #{code} </foreach>
                                     THEN dbT1001."jushochitokureiTekiyoYMD"
                                ELSE NULL
                                END
@@ -291,13 +299,14 @@
                 NULL
             END AS "shutokujyohou_go_idoYMD"
             ,CASE WHEN dbT1001."logicalDeletedFlag" = FALSE
-                  THEN CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0007" />
+                  THEN CASE WHEN dbT1001."idoJiyuCode" IN (#{shutokuJiyu_Hihokensha})
                             THEN dbT1001."shikakuShutokuTodokedeYMD"
                        ELSE
-                           CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0013" />
+                           CASE WHEN dbT1001."idoJiyuCode" IN (#{henkoJiyu_Hihokensha})
                                 THEN dbT1001."shikakuHenkoTodokedeYMD"
                            ELSE
-                               CASE WHEN dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0014" />
+                               CASE WHEN dbT1001."idoJiyuCode" IN
+                               <foreach collection="jutokuTekiyo" item="code" open="(" separator="," close=")"> #{code} </foreach>
                                     THEN dbT1001."jushochitokureiTekiyoTodokedeYMD"
                                ELSE NULL
                                END
@@ -324,11 +333,14 @@
             AND dbT1001."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
             AND dbT1001."insertReamsLoginId" = 'anonymous'
             AND (
-                   dbT1001."idoJiyuCode" = '02'
-                OR dbT1001."idoJiyuCode" = '31'
-                OR dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0010" />
-                OR dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0014" />
-                OR dbT1001."idoJiyuCode" IN <include refid="shubetsuCode_0015" />
+                   dbT1001."idoJiyuCode" IN (#{shutokuJiyu_Hihokensha})
+                OR dbT1001."idoJiyuCode" IN (#{henkoJiyu_Hihokensha})
+                OR dbT1001."idoJiyuCode" IN
+                <foreach collection="soshitsuJiyu_Hihokensha" item="code" open="(" separator="," close=")"> #{code} </foreach>
+                OR dbT1001."idoJiyuCode" IN
+                <foreach collection="jutokuTekiyo" item="code" open="(" separator="," close=")"> #{code} </foreach>
+                OR dbT1001."idoJiyuCode" IN
+                <foreach collection="jutokuKaijo" item="code" open="(" separator="," close=")"> #{code} </foreach>
                 )                                                                        
     </select>
 
