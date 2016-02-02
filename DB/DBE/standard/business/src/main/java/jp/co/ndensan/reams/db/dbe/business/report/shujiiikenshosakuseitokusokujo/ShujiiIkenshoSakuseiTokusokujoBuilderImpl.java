@@ -12,16 +12,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  * 主治医意見書提出督促状Builderのインターフェースクラスです。
  *
  */
-class ShujiiIkenshoSakuseiTokusokujoBuilderImpl implements ShujiiIkenshoSakuseiTokusokujoBuilder {
+class ShujiiIkenshoSakuseiTokusokujoBuilderImpl implements IShujiiIkenshoSakuseiTokusokujoBuilder {
 
-    ShujiiIkenshoSakuseiTokusokujoEditor editor;
+    IShujiiIkenshoSakuseiTokusokujoEditor editor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param editor {@link ShujiiIkenshoSakuseiTokusokujoEditor}
+     * @param editor {@link IShujiiIkenshoSakuseiTokusokujoEditor}
      */
-    public ShujiiIkenshoSakuseiTokusokujoBuilderImpl(ShujiiIkenshoSakuseiTokusokujoEditor editor) {
+    public ShujiiIkenshoSakuseiTokusokujoBuilderImpl(IShujiiIkenshoSakuseiTokusokujoEditor editor) {
         this.editor = editor;
     }
 

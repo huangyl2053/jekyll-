@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  * 主治医意見書提出督促状のEditorです。
  *
  */
-public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements ShujiiIkenshoSakuseiTokusokujoEditor {
+public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoSakuseiTokusokujoEditor {
 
     private final ShujiiIkenshoSakuseiTokusokujoItem headitem;
 
