@@ -19,7 +19,7 @@ public final class HihokenshashoB4BuilderImpl implements IHihokenshashoB4Builder
     
     /**
      * コンストラクタです。
-     * @param joho 被保険者証発行一覧表ヘッダエディターのインターフェース
+     * @param joho 介護保険被保険者証（B4版）のヘッダエディターのインターフェース
      */
     public HihokenshashoB4BuilderImpl(IHihokenshashoB4Editor joho) {
         this.joho = joho;

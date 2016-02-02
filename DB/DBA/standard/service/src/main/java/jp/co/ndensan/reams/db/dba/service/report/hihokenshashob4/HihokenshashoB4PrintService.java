@@ -270,5 +270,4 @@ public class HihokenshashoB4PrintService {
             item.setItakuGyosha32(itemTwo.getItakuGyosha3());
             return item;
     }
-    
 }

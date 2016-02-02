@@ -118,37 +118,19 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         source.umareMeiji1 = joho.getUmareMeiji();
         source.umareTaisho1 = joho.getUmareTaisho();
         source.umareShowa1 = joho.getUmareShowa();
-        source.umareMm1 = joho.getUmareYy().isEmpty() ? RString.EMPTY : new RDate(joho.getUmareYy().toString()).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).getMonth();
-        source.umareDd1 = joho.getUmareYy().isEmpty() ? RString.EMPTY : new RDate(joho.getUmareYy().toString()).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).getDay();
-        source.umareYy1 = joho.getUmareYy().isEmpty() ? RString.EMPTY : new RDate(joho.getUmareYy().toString()).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).getYear();
-        source.umareYyyy1 = joho.getUmareYy().isEmpty() ? RString.EMPTY : new RDate(joho.getUmareYy().toString()).seireki().getYear();
-        source.umareMmS1 = joho.getUmareYy().isEmpty() ? RString.EMPTY : new RDate(joho.getUmareYy().toString()).seireki().getMonth();
-        source.umareDdS1 = joho.getUmareYy().isEmpty() ? RString.EMPTY : new RDate(joho.getUmareYy().toString()).seireki().getDay();
+        source.umareMm1 = get年月日の月_和暦(joho.getUmareYy());
+        source.umareDd1 = get年月日の日_和暦(joho.getUmareYy());
+        source.umareYy1 = get年月日の年_和暦(joho.getUmareYy());
+        source.umareYyyy1 = get年月日の年_西歴(joho.getUmareYy());
+        source.umareMmS1 = get年月日の月_西歴(joho.getUmareYy());
+        source.umareDdS1 = get年月日の日_西歴(joho.getUmareYy());
         source.saikofu11 = joho.getSaikofu1();
         source.saikofu21 = joho.getSaikofu2();
         source.shisetsuname11 = joho.getShisetsuname1();
-        source.kofuymdGengo1 = joho.getKofuymdGengo().isEmpty() ? RString.EMPTY : new RDate(joho
-                .getUmareYy().toString()).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).getEra();
-        source.kofuymdYy1 = joho.getKofuymdGengo().isEmpty() ? RString.EMPTY : new RDate(joho
-                .getUmareYy().toString()).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).getYear();
-        source.kofuymdMm1 = joho.getKofuymdGengo().isEmpty() ? RString.EMPTY : new RDate(joho
-                .getUmareYy().toString()).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).getMonth();
-        source.kofuymdDd1 = joho.getKofuymdGengo().isEmpty() ? RString.EMPTY : new RDate(joho
-                .getUmareYy().toString()).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).getDay();
+        source.kofuymdGengo1 = get年月日の年号(joho.getKofuymdGengo());
+        source.kofuymdYy1 = get年月日の年_和暦(joho.getKofuymdGengo());
+        source.kofuymdMm1 = get年月日の月_和暦(joho.getKofuymdGengo());
+        source.kofuymdDd1 = get年月日の日_和暦(joho.getKofuymdGengo());
         source.nyushochk11 = joho.getNyushochk1();
         source.nyuinchk11 = joho.getNyuinchk1();
         source.nyushoymd11 = joho.getNyushoymd1();
@@ -250,37 +232,19 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         source.umareMeiji2 = joho.getUmareMeiji2();
         source.umareTaisho2 = joho.getUmareTaisho2();
         source.umareShowa2 = joho.getUmareShowa2();
-        source.umareMm2 = joho.getUmareYy2().isEmpty() ? RString.EMPTY : new RDate(joho
-                .getUmareYy2().toString()).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).getMonth();
-        source.umareDd2 = joho.getUmareYy2().isEmpty() ? RString.EMPTY : new RDate(joho
-                .getUmareYy2().toString()).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).getDay();
-        source.umareMmS2 = joho.getUmareYy2().isEmpty() ? RString.EMPTY : new RDate(joho
-                .getUmareYy2().toString()).seireki().getMonth();
-        source.umareDdS2 = joho.getUmareYy2().isEmpty() ? RString.EMPTY : new RDate(joho
-                .getUmareYy2().toString()).seireki().getDay();
-        source.umareYy2 = joho.getUmareYy2().isEmpty() ? RString.EMPTY : new RDate(joho
-                .getUmareYy2().toString()).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).getYear();
-        source.umareYyyy2 = joho.getUmareYy2().isEmpty() ? RString.EMPTY : new RDate(joho.getUmareYy().toString()).seireki().getYear();
+        source.umareMm2 = get年月日の月_和暦(joho.getUmareYy2());
+        source.umareDd2 = get年月日の日_和暦(joho.getUmareYy2());
+        source.umareMmS2 = get年月日の月_西歴(joho.getUmareYy2());
+        source.umareDdS2 = get年月日の日_西歴(joho.getUmareYy2());
+        source.umareYy2 = get年月日の年_和暦(joho.getUmareYy2());
+        source.umareYyyy2 = get年月日の年_西歴(joho.getUmareYy2());
         source.saikofu12 = joho.getSaikofu12();
         source.saikofu22 = joho.getSaikofu22();
         source.shisetsuname12 = joho.getShisetsuname12();
-        source.kofuymdYy2 = joho.getKofuymdGengo2().isEmpty() ? RString.EMPTY : new RDate(joho
-                .getKofuymdGengo2().toString()).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).getYear();
-        source.kofuymdMm2 = joho.getKofuymdGengo2().isEmpty() ? RString.EMPTY : new RDate(joho
-                .getKofuymdGengo2().toString()).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).getMonth();
-        source.kofuymdDd2 = joho.getKofuymdGengo2().isEmpty() ? RString.EMPTY : new RDate(joho
-                .getKofuymdGengo2().toString()).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).getDay();
-        source.kofuymdGengo2 = joho.getKofuymdGengo2().isEmpty() ? RString.EMPTY : new RDate(joho
-                .getKofuymdGengo2().toString()).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).getEra();
+        source.kofuymdYy2 = get年月日の年_和暦(joho.getKofuymdGengo2());
+        source.kofuymdMm2 = get年月日の月_和暦(joho.getKofuymdGengo2());
+        source.kofuymdDd2 = get年月日の日_和暦(joho.getKofuymdGengo2());
+        source.kofuymdGengo2 = get年月日の年号(joho.getKofuymdGengo2());
         source.nyushochk12 = joho.getNyushochk12();
         source.nyuinchk12 = joho.getNyuinchk12();
         source.nyushoymd12 = joho.getNyushoymd12();
@@ -326,5 +290,64 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         source.kosekiSeibetsu22 = joho.getKosekiSeibetsu22();
         return source;
     }
+    
+    private RString get年月日の年_和暦(RString date) {
+        if (date == null || date.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return new RDate(date.toString()).wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).getYear();
+    }
+    
+    private RString get年月日の月_和暦(RString date) {
+        if (date == null || date.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return new RDate(date.toString()).wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).getMonth();
+    }
+    
+    private RString get年月日の日_和暦(RString date) {
+        if (date == null || date.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return new RDate(date.toString()).wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).getDay();
+    }
+    
+    private RString get年月日の年号(RString date) {
+        if (date == null || date.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return new RDate(date.toString()).wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).getEra();
+    }
+    
+    private RString get年月日の年_西歴(RString date) {
+        if (date == null || date.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return new RDate(date.toString()).seireki().getYear();
+    }
+    
+    private RString get年月日の月_西歴(RString date) {
+        if (date == null || date.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return new RDate(date.toString()).seireki().getMonth();
+    }
+    
+    private RString get年月日の日_西歴(RString date) {
+        if (date == null || date.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return new RDate(date.toString()).seireki().getDay();
+    }
+    
+    
     
 }

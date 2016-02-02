@@ -26,7 +26,7 @@ public final class HihokenshashoB4Report extends Report<HihokenshashoB4ReportSou
     
     /**
      * インスタンスを生成します。
-     * @param items 一覧表証発行者Entityリスト
+     * @param items 介護保険被保険者証（B4版）のEntityリスト
      * @return HihokenshashoHakkoIchiranHyoReport
      */
     public static HihokenshashoB4Report createReport(@NonNull List<HihokenshashoB4BodyItem> items) {
