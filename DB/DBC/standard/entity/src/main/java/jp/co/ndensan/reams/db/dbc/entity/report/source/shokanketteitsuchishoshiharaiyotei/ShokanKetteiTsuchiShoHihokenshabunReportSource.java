@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 償還払支給（不支給）決定通知書（受領委任払い・被保険者用）のReportSourceです。
+ */
 public class ShokanKetteiTsuchiShoHihokenshabunReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 住宅改修事前申請承認結果通知書のReportSourceです。
+ */
 public class JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
