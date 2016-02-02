@@ -76,6 +76,16 @@ public class ShinsakaiScheduleHakko {
     }
 
     /**
+     * 開催予定に戻るボタンを押下した際に実行します。
+     *
+     * @param div 介護認定審査会開催予定登録3div
+     * @return ResponseData<ShinsakaiScheduleHakkoDiv>
+     */
+    public ResponseData<ShinsakaiScheduleHakkoDiv> onClick_btnBackToKaisaiYotei(ShinsakaiScheduleHakkoDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 介護認定審査会スケジュール表バッチを実行します。
      *
      * @param div 護認定審査会開催予定登録3div
