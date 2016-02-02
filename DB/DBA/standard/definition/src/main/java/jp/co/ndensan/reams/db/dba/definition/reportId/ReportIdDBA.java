@@ -39,7 +39,7 @@ public enum ReportIdDBA {
      */
     DBA100002(new ReportId("DBA100002"), new RString("介護保険被保険者証")),
     /**
-     * 広域内住所地特例者一覧表の帳票ID。
+     * 広域内転居結果一覧表の帳票ID。
      */
     DBA200011(new ReportId("DBA200011_KoikinaiTenkyoKekkaIchiranhyo"), new RString("広域内転居結果一覧表")),
     /**
