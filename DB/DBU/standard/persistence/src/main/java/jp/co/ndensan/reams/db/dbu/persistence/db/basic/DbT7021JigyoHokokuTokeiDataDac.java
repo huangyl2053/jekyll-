@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.distinct;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -190,12 +189,23 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
                     eq(hyoNo, new RString("09")),
                     in(shukeiNo, shukeiNoList),
                     eq(shichosonCode, 市町村コード));
+        } else if (!年度.isEmpty() && (保険者区分 == null || 保険者区分.getコード().isEmpty()) && 市町村コード.isEmpty()) {
+            iTrueFalseCriteria = and(
+                    eq(hokokuYSeireki, 年度),
+                    eq(hokokuM, new RString("00")),
+                    eq(hyoNo, new RString("09")),
+                    in(shukeiNo, shukeiNoList));
+        } else if (年度.isEmpty() && (保険者区分 == null || 保険者区分.getコード().isEmpty()) && 市町村コード.isEmpty()) {
+            iTrueFalseCriteria = and(
+                    eq(hokokuM, new RString("00")),
+                    eq(hyoNo, new RString("09")),
+                    in(shukeiNo, shukeiNoList));
         }
 
-        return accessor.selectSpecific(distinct(hokokuYSeireki), distinct(shukeiTaishoYSeireki), distinct(toukeiTaishoKubun),
-                distinct(shichosonCode), distinct(hyoNo), distinct(shukeiNo)).
+        return accessor.selectSpecific(hokokuYSeireki, shukeiTaishoYSeireki, toukeiTaishoKubun, shichosonCode, hyoNo, shukeiNo).
                 table(DbT7021JigyoHokokuTokeiData.class).
                 where(iTrueFalseCriteria).
+                groupBy(hokokuYSeireki, shukeiTaishoYSeireki, toukeiTaishoKubun, shichosonCode, hyoNo, shukeiNo).
                 order(by(DbT7021JigyoHokokuTokeiData.shichosonCode, Order.ASC),
                         by(DbT7021JigyoHokokuTokeiData.hokokuYSeireki, Order.ASC),
                         by(DbT7021JigyoHokokuTokeiData.toukeiTaishoKubun, Order.ASC),
