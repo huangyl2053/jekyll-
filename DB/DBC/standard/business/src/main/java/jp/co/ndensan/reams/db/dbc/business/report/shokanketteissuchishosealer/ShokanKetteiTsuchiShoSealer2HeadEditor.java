@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.report.ｓhokanｋetteiｓsuchiｓhoｓealer;
+package jp.co.ndensan.reams.db.dbc.business.report.shokanketteissuchishosealer;
 
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealer2ReportSource;
 
@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoseal
  * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）のEditorです。
  *
  */
-public class ShokanKetteiTsuchiShoSealer2HeadEditor implements ShokanKetteiTsuchiShoSealer2Editor {
+public class ShokanKetteiTsuchiShoSealer2HeadEditor implements IShokanKetteiTsuchiShoSealer2Editor {
 
     private final ShokanKetteiTsuchiShoSealer2Item item;
 

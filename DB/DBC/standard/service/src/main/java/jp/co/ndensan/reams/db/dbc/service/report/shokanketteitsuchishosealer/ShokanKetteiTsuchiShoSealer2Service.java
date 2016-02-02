@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.report.shokanketteitsuchishosealer;
 
-import jp.co.ndensan.reams.db.dbc.business.report.ｓhokanｋetteiｓsuchiｓhoｓealer.ShokanKetteiTsuchiShoSealer2Item;
-import jp.co.ndensan.reams.db.dbc.business.report.ｓhokanｋetteiｓsuchiｓhoｓealer.ShokanKetteiTsuchiShoSealer2Property;
-import jp.co.ndensan.reams.db.dbc.business.report.ｓhokanｋetteiｓsuchiｓhoｓealer.ShokanKetteiTsuchiShoSealer2Report;
+import jp.co.ndensan.reams.db.dbc.business.report.shokanketteissuchishosealer.ShokanKetteiTsuchiShoSealer2Item;
+import jp.co.ndensan.reams.db.dbc.business.report.shokanketteissuchishosealer.ShokanKetteiTsuchiShoSealer2Property;
+import jp.co.ndensan.reams.db.dbc.business.report.shokanketteissuchishosealer.ShokanKetteiTsuchiShoSealer2Report;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealer2ReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
