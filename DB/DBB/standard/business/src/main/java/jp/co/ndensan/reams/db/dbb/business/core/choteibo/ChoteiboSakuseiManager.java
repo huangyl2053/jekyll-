@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.service.core.choteibo;
+package jp.co.ndensan.reams.db.dbb.business.core.choteibo;
 
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.choteibo.ChoteiboBatchParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -24,9 +24,9 @@ public class ChoteiboSakuseiManager {
      * @param 開始時分秒
      * @param 終了年月日
      * @param 終了時分秒
-     * @return
+     * @return {@link ChoteiboBatchParameter}
      */
-    public static ChoteiboBatchParameter getChoteiboParameter(FlexibleYear 処理年度,
+    public ChoteiboBatchParameter getChoteiboParameter(FlexibleYear 処理年度,
             RDate 開始年月日,
             RTime 開始時分秒,
             RDate 終了年月日,
