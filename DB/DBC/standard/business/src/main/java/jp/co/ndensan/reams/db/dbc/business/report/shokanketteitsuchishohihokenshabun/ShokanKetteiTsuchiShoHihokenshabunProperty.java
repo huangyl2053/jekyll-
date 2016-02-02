@@ -16,6 +16,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 public class ShokanKetteiTsuchiShoHihokenshabunProperty
         extends ReportPropertyBase<ShokanKetteiTsuchiShoHihokenshabunReportSource> {
 
+    /**
+     * コンストラクタです。
+     */
     public ShokanKetteiTsuchiShoHihokenshabunProperty() {
         super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100005.getReportId());
     }

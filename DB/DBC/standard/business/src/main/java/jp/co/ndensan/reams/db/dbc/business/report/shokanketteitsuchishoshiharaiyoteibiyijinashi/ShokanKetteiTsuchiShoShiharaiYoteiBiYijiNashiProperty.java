@@ -16,6 +16,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiProperty
         extends ReportPropertyBase<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource> {
 
+    /**
+     * コンストラクタです。
+     */
     public ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiProperty() {
         super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002.getReportId());
     }
