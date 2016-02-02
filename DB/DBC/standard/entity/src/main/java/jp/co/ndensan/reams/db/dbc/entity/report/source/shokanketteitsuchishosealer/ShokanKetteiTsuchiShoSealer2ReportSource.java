@@ -9,6 +9,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）のReportSourceです。
+ *
+ */
 public class ShokanKetteiTsuchiShoSealer2ReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
