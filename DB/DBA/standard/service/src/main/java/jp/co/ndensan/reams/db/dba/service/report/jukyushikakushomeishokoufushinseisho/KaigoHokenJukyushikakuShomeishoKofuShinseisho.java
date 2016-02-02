@@ -9,8 +9,8 @@ package jp.co.ndensan.reams.db.dba.service.report.jukyushikakushomeishokoufushin
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeishokoufushinseisho.JukyuShikakuShomeishokoufuShinseishoItem;
+import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeishokoufushinseisho.JukyuShikakuShomeishokoufuShinseishoProerty;
 import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeishokoufushinseisho.JukyuShikakuShomeishokoufuShinseishoReport;
-import jp.co.ndensan.reams.db.dba.business.report.shikakushutokuidososhitsu.JukyuShikakuShomeishokoufuShinseishoProerty;
 import jp.co.ndensan.reams.db.dba.entity.report.jukyushikakushomeishokoufushinseisho.JukyuShikakuShomeishokoufuShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.entity.report.shikakushutokuidososhitsu.HihokenshaKihonEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.shikakushutokuidososhitsu.ShikakushutokuIdoSoshitsuReportSource;

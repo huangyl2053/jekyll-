@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package jp.co.ndensan.reams.db.dba.business.report.shikakushutokuidososhitsu;
+package jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeishokoufushinseisho;
 
 import jp.co.ndensan.reams.db.dba.definition.reportId.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.report.shikakushutokuidososhitsu.ShikakushutokuIdoSoshitsuReportSource;
