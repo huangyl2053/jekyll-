@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
- * @author ycb
+ * @author yangchenbing
  */
 public class JutakuKaishuJyusyoChofukuHanntei {
 
@@ -52,9 +52,10 @@ public class JutakuKaishuJyusyoChofukuHanntei {
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(改修住宅住所, UrSystemErrorMessages.値がnull.getReplacedMessage("改修住宅住所"));
         IJutakuKaishuIJyusyoChofukuHannteiMapper mapper = mapperProvider.create(IJutakuKaishuIJyusyoChofukuHannteiMapper.class);
-        JutakuKaishuJyusyoChofukuHannteiMapperParameter parameter = JutakuKaishuJyusyoChofukuHannteiMapperParameter.createSelectByKeyParam(被保険者番号, サービス提供年月);
+        JutakuKaishuJyusyoChofukuHannteiMapperParameter parameter = JutakuKaishuJyusyoChofukuHannteiMapperParameter
+                .createSelectByKeyParam(被保険者番号, サービス提供年月);
         List<JutakuKaishuJyusyoChofukuHannteiEntity> entityList = mapper.selectKaishuJyusyoChofukuToroku(parameter);
-        if (entityList == null || entityList.isEmpty()) {
+        if (null == entityList || entityList.isEmpty()) {
             return false;
         }
         for (JutakuKaishuJyusyoChofukuHannteiEntity entity : entityList) {

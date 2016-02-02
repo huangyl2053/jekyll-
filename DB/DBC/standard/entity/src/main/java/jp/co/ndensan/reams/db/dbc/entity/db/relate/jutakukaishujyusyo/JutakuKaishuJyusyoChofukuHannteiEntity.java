@@ -11,7 +11,7 @@ import lombok.Setter;
 
 /**
  *
- * @author ycb
+ * @author yangchenbing
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

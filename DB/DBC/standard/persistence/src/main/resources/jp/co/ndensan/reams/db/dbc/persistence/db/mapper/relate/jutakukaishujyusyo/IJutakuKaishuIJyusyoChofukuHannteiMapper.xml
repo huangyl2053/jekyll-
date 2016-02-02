@@ -4,42 +4,44 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishujyusyo.IJutakuKaishuIJyusyoChofukuHannteiMapper">
+    
     <resultMap id="JutakuKaishuJyusyoChofukuHannteiEntity"  type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujyusyo.JutakuKaishuJyusyoChofukuHannteiEntity" autoMapping="true">
-   <result property="jutakuJushoHenko" column="jutakuJushoHenko"/> 
-   <result  property="jutakuKaishuJutakuAddress" column="jutakuKaishuJutakuAddress" />    
+         <result property="jutakuJushoHenko" column="jutakuJushoHenko"/> 
+          <result  property="jutakuKaishuJutakuAddress" column="jutakuKaishuJutakuAddress" />    
     </resultMap>
+    
     <select id="selectKaishuJyusyoChofukuToroku" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.JutakuKaishuJyusyoChofukuHannteiMapperParameter" 
-    resultMap="JutakuKaishuJyusyoChofukuHannteiEntity"  fetchSize="500" >
- SELECT																
-	shokanShinsei."jutakuJushoHenko"	 AS	"jutakuJushoHenko" ,									
-	T1."jutakuKaishuJutakuAddress"		AS	"jutakuKaishuJutakuAddress"								
-FROM	
-      rgdb."DbT3034ShokanShinsei" AS 	shokanShinsei															
-INNER JOIN 																
-	( SELECT															
-		shokanJutakuKaishu."hiHokenshaNo"	AS	"hiHokenshaNo"	,							
-		shokanJutakuKaishu."serviceTeikyoYM"	AS	"serviceTeikyoYM",							
-		shokanJutakuKaishu."seiriNo"		AS	"seiriNo",							
-		shokanJutakuKaishu."jutakuKaishuJutakuAddress"	AS  "jutakuKaishuJutakuAddress"						
-	FROM	rgdb."DbT3049ShokanJutakuKaishu" AS shokanJutakuKaishu															
-	WHERE															
-		shokanJutakuKaishu."hiHokenshaNo"=#{hiHokenshaNo}  AND				
-		shokanJutakuKaishu."serviceTeikyoYM"&lt;#{serviceTeikyoYM}  AND				
-		SUBSTRING(shokanJutakuKaishu."yoshikiNo" , 1, 3)='21D'	
-     GROUP BY														
-		shokanJutakuKaishu."hiHokenshaNo",														
-		shokanJutakuKaishu."serviceTeikyoYM",														
-		shokanJutakuKaishu."seiriNo",
-		shokanJutakuKaishu."jutakuKaishuJutakuAddress"													
-	)AS T1 ON 
-      T1."hiHokenshaNo"	  =	shokanShinsei."hiHokenshaNo" and								
-       T1."serviceTeikyoYM" = shokanShinsei."serviceTeikyoYM"	and									
-      T1."seiriNo"		=	shokanShinsei."seiriNo"									
-WHERE																
-	shokanShinsei."hiHokenshaNo"=#{hiHokenshaNo} AND					
-	shokanShinsei."serviceTeikyoYM"&lt;#{serviceTeikyoYM}							
-ORDER BY																
-	shokanShinsei."serviceTeikyoYM"  DESC														
+     resultMap="JutakuKaishuJyusyoChofukuHannteiEntity"  fetchSize="500" >
+          SELECT																
+	     shokanShinsei."jutakuJushoHenko"	 AS	"jutakuJushoHenko" ,									
+	     T1."jutakuKaishuJutakuAddress"		AS	"jutakuKaishuJutakuAddress"								
+          FROM	
+             rgdb."DbT3034ShokanShinsei" AS 	shokanShinsei															
+          INNER JOIN 																
+	  ( SELECT															
+		 shokanJutakuKaishu."hiHokenshaNo"	AS	"hiHokenshaNo"	,							
+		 shokanJutakuKaishu."serviceTeikyoYM"	AS	"serviceTeikyoYM",							
+		 shokanJutakuKaishu."seiriNo"		AS	"seiriNo",							
+		 shokanJutakuKaishu."jutakuKaishuJutakuAddress"	AS  "jutakuKaishuJutakuAddress"						
+	   FROM	 rgdb."DbT3049ShokanJutakuKaishu" AS shokanJutakuKaishu															
+	   WHERE															
+		 shokanJutakuKaishu."hiHokenshaNo"=#{hiHokenshaNo}  AND				
+		 shokanJutakuKaishu."serviceTeikyoYM"<![CDATA[<]]>#{serviceTeikyoYM}  AND				
+		 SUBSTRING(shokanJutakuKaishu."yoshikiNo" , 1, 3)='21D'	
+           GROUP BY														
+		 shokanJutakuKaishu."hiHokenshaNo",														
+		 shokanJutakuKaishu."serviceTeikyoYM",														
+		 shokanJutakuKaishu."seiriNo",
+		 shokanJutakuKaishu."jutakuKaishuJutakuAddress"													
+	   )AS T1 ON 
+           T1."hiHokenshaNo"	  =	shokanShinsei."hiHokenshaNo" and								
+           T1."serviceTeikyoYM" = shokanShinsei."serviceTeikyoYM"	and									
+           T1."seiriNo"		=	shokanShinsei."seiriNo"									
+           WHERE																
+	   shokanShinsei."hiHokenshaNo"=#{hiHokenshaNo} AND					
+	   shokanShinsei."serviceTeikyoYM"<![CDATA[<]]>#{serviceTeikyoYM}							
+           ORDER BY																
+	   shokanShinsei."serviceTeikyoYM"  DESC														
 
     </select>
 </mapper>

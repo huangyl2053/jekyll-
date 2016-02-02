@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujyusyo.JutakuKais
 
 /**
  *
- * @author ycb
+ * @author yangchenbing
  */
 public interface IJutakuKaishuIJyusyoChofukuHannteiMapper {
 
