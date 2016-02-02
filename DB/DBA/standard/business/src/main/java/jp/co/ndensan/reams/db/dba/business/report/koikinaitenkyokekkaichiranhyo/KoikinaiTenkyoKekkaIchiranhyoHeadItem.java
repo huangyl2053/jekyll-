@@ -17,7 +17,6 @@ import lombok.Getter;
 public class KoikinaiTenkyoKekkaIchiranhyoHeadItem {
 
     private final RString 印刷日時;
-    private final RString ページ数;
     private final RString 市町村コード;
     private final RString 市町村名;
 
@@ -25,19 +24,15 @@ public class KoikinaiTenkyoKekkaIchiranhyoHeadItem {
      * インスタンスを生成します。
      *
      * @param 印刷日時 印刷日時
-     * @param ページ数 ページ数
      * @param 市町村コード 市町村コード
      * @param 市町村名 市町村名
      *
      */
     public KoikinaiTenkyoKekkaIchiranhyoHeadItem(
             RString 印刷日時,
-            RString ページ数,
             RString 市町村コード,
             RString 市町村名) {
-
         this.印刷日時 = 印刷日時;
-        this.ページ数 = ページ数;
         this.市町村コード = 市町村コード;
         this.市町村名 = 市町村名;
     }
