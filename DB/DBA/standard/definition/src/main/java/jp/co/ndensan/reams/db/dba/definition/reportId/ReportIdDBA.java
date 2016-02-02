@@ -47,9 +47,13 @@ public enum ReportIdDBA {
      */
     DBA100003(new ReportId("DBA100003"), new RString("介護保険資格者証")),
     /**
+     * 介護保険資格者証の帳票ＩＤです。
+     */
+    DBA100004(new ReportId("DBA100004_JukyuShikakuShomeisho"), new RString("介護保険資格者証")),
+    /**
      * 介護保険受給資格証明書交付申請書の帳票ＩＤです。
      */
-    DBD800011(new ReportId("DBD800011_JukyuShikakuShomeishokoufuShinseisho"), new RString("介護保険受給資格証明書交付申請書"));;
+    DBD800011(new ReportId("DBD800011_JukyuShikakuShomeishokoufuShinseisho"), new RString("介護保険受給資格証明書交付申請書"));
 
     private final ReportId reportId;
     private final RString reportName;
