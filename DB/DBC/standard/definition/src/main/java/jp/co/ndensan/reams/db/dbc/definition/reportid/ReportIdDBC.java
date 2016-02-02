@@ -16,19 +16,19 @@ public enum ReportIdDBC {
     /**
      * 住宅改修事前申請承認結果通知書の帳票ＩＤです。
      */
-    DBC100001(new ReportId("DBC100001"), new RString("住宅改修事前申請承認結果通知書")),
+    DBC100001(new ReportId("DBC100001_JutakukaishuJizenShinseiShoninKekkaTsuchisho"), new RString("住宅改修事前申請承認結果通知書")),
     /**
      * 償還払い支給（不支給）決定通知書の帳票ＩＤです。
      */
-    DBC100002(new ReportId("DBC100002"), new RString("償還払い支給（不支給）決定通知書")),
+    DBC100002(new ReportId("DBC100002_ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashi"), new RString("償還払い支給（不支給）決定通知書")),
     /**
      * 償還払い支給（不支給）決定通知書(支払予定日あり）の帳票ＩＤです。
      */
-    DBC100003(new ReportId("DBC100003"), new RString("償還払い支給（不支給）決定通知書(支払予定日あり）")),
+    DBC100003(new ReportId("DBC100003_ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAri"), new RString("償還払い支給（不支給）決定通知書(支払予定日あり）")),
     /**
      * 償還払支給（不支給）決定通知書（受領委任払い・被保険者用）の帳票ＩＤです。
      */
-    DBC100005(new ReportId("DBC100005"), new RString("償還払支給（不支給）決定通知書（受領委任払い・被保険者用）")),
+    DBC100005(new ReportId("DBC100005_ShokanKetteiTsuchiShoHihokenshabun"), new RString("償還払支給（不支給）決定通知書（受領委任払い・被保険者用）")),
     /**
      * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）の帳票ＩＤです。
      */
