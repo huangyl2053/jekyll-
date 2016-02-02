@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanfukushiyoguhanbaihi.ShokanShinseiEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyuhishikyuikkatushinsa.IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanfukushiyoguhanbaihi.ShokanFukushiYoguHanbaihiParameter;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanfukushiyoguhanbaihi.IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import org.junit.Before;
@@ -36,6 +37,7 @@ public class IFukushiyoguKonyuhiShikyuIkkatuShinsaMapperTest extends DbcTestDacB
         FlexibleDate 支給申請日To = new FlexibleDate("20160830");
         未審査申請取得検索条件.put("支給申請日From", 支給申請日From);
         未審査申請取得検索条件.put("支給申請日To", 支給申請日To);
-        List<ShokanShinseiEntity> shokanShinseiEntity = mapper.select未審査申請(未審査申請取得検索条件);
+        List<ShokanShinseiEntity> shokanShinseiEntity = mapper.select未審査申請(ShokanFukushiYoguHanbaihiParameter.
+                createSelectByKeyParam(支給申請日From, 支給申請日To));
     }
 }

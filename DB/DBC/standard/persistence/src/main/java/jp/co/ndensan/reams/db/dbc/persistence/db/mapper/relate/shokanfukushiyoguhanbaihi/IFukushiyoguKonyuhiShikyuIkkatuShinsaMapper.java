@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyuhishikyuikkatushinsa;
+package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanfukushiyoguhanbaihi;
 
 import java.util.List;
-import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.business.core.shokanfukushiyoguhanbaihi.ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanfukushiyoguhanbaihi.ShokanFukushiYoguHanbaihiParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfukushiyoguhanbaihi.ShokanShinseiEntity;
 
 /**
  * 未審査申請一覧取得 のマッパーインタフェースです。
@@ -22,5 +22,5 @@ public interface IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper {
      * @param 未審査申請取得検索条件 未審査申請取得検索条件
      * @return DbT3038ShokanKihonEntity 償還払請求基本Entity
      */
-    List<ShokanShinseiEntity> select未審査申請(Map<String, Object> 未審査申請取得検索条件);
+    List<ShokanShinseiEntity> select未審査申請(ShokanFukushiYoguHanbaihiParameter 未審査申請取得検索条件);
 }

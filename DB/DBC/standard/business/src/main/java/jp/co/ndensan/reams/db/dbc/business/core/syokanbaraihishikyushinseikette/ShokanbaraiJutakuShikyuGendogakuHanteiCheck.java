@@ -41,7 +41,7 @@ public class ShokanbaraiJutakuShikyuGendogakuHanteiCheck {
         }
         if (様式番号.startsWith(DEFAULT_213) || 様式番号.startsWith(DEFAULT_214)
                 || 様式番号.startsWith(DEFAULT_215) || 様式番号.startsWith(DEFAULT_216)) {
-            if (null == 限度額対象単位) {
+            if (!様式番号.endsWith("1") && null == 限度額対象単位) {
                 flag = true;
             }
         } else if (DEFAULT_2173.equals(様式番号)) {

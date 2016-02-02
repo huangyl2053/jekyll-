@@ -6,7 +6,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 償還払請求福祉用具販売費テーブルの項目定義クラスです。
  */
 public enum DbT3048ShokanFukushiYoguHanbaihi implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     /**
      * insertDantaiCd
      */
@@ -60,14 +61,14 @@ public enum DbT3048ShokanFukushiYoguHanbaihi implements IColumnDefinition {
      */
     yoshikiNo(4, 0),
     /**
-     * 順次番号
+     * 明細番号
      * <br/>複数レコード対応のため
      */
-    junjiNo(4, 0),
+    meisaiNo(4, 0),
     /**
-     * 履歴番号
+     * 連番
      */
-    rirekiNo(5, 0),
+    renban(2, 0),
     /**
      * サービスコード
      */
@@ -119,7 +120,7 @@ public enum DbT3048ShokanFukushiYoguHanbaihi implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -128,7 +129,7 @@ public enum DbT3048ShokanFukushiYoguHanbaihi implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

@@ -6,12 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import lombok.Value;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import lombok.Value;
 
 /**
  * 償還払請求福祉用具販売費の識別子です。
@@ -25,7 +24,7 @@ public class ShokanFukushiYoguHanbaihiIdentifier implements Serializable {
     private final JigyoshaNo 事業者番号;
     private final RString 様式番号;
     private final RString 順次番号;
-    private final Decimal 履歴番号;
+    private final RString 履歴番号;
 
     /**
      * コンストラクタです。
@@ -44,7 +43,7 @@ public class ShokanFukushiYoguHanbaihiIdentifier implements Serializable {
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 順次番号,
-            Decimal 履歴番号) {
+            RString 履歴番号) {
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;
         this.整理番号 = 整理番号;
