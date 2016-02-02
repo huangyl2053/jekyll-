@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinwaritsuke.IShinsakaiIinWaritsukeMapper">
+    
+    <!--ShinsakaiKaisaiYoteiJohoRelateEntityの項目にマッピングします。-->
+    <resultMap id="resultMap_getShinsakaiKaisaiYoteiJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinwaritsuke.ShinsakaiKaisaiYoteiJohoRelateEntity" autoMapping="true">
+    <result property="gogitaiMei" column="gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="shinsakaiKaishiYoteiTime" column="shinsakaiKaishiYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="gogitaiSeishinkaSonzaiFlag" column="gogitaiSeishinkaSonzaiFlag" />
+    <result property="gogitaiDummyFlag" column="gogitaiDummyFlag" />
+    <result property="shinsakaiKaisaiYoteiYMD" column="shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="shinsakaiShuryoYoteiTime" column="shinsakaiShuryoYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="shinsakaiKaisaiBashoName" column="shinsakaiKaisaiBashoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="shinsakaiYoteiTeiin" column="shinsakaiYoteiTeiin" />
+    </resultMap>
+    <select id="get審査会開催予定情報By開催番号" resultMap="resultMap_getShinsakaiKaisaiYoteiJoho" 
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT
+            dbT5591."gogitaiMei" AS "gogitaiMei"
+            ,dbT5501."shinsakaiKaishiYoteiTime" AS "shinsakaiKaishiYoteiTime"
+            ,dbT5591."gogitaiSeishinkaSonzaiFlag" AS "gogitaiSeishinkaSonzaiFlag"
+            ,dbT5591."gogitaiDummyFlag" AS "gogitaiDummyFlag"
+            ,dbT5501."shinsakaiKaisaiYoteiYMD" AS "shinsakaiKaisaiYoteiYMD"
+            ,dbT5592."shinsakaiKaisaiBashoName" AS "shinsakaiKaisaiBashoName"
+            ,dbT5501."shinsakaiShuryoYoteiTime" AS "shinsakaiShuryoYoteiTime"
+            ,dbT5501."shinsakaiYoteiTeiin" AS "shinsakaiYoteiTeiin"
+        FROM
+            rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" dbT5501
+        INNER JOIN rgdb."DbT5591GogitaiJoho" dbT5591 
+              ON dbT5591."gogitaiNo" = dbT5501."gogitaiNo"
+        INNER JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" dbT5592 
+              ON dbT5592."shinsakaiKaisaiBashoCode" = dbT5501."shinsakaiKaisaiYoteiBashoCode"
+        WHERE
+            dbT5501."shinsakaiKaisaiNo" = #{kaisaiNo}
+    </select>
+    <!--ShinsakaiiinJohoRelateEntityの項目にマッピングします。-->
+    <resultMap id="resultMap_getShinsakaiiinJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinwaritsuke.ShinsakaiiinJohoRelateEntity" autoMapping="true">
+    <result property="shinsakaiIinCode" column="shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="shinsakaiIinShimei" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="shozokukikan" column="shozokukikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="seibetsu" column="seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="shinsakaiIinShikakuCode" column="shinsakaiIinShikakuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="gogitaichoKubunCode" column="gogitaichoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="shukketukubun" column="shukketukubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="haishiFlag" column="haishiFlag" />
+    <result property="shinsakaiIinKaishiYMD" column="shinsakaiIinKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="shinsakaiIinShuryoYMD" column="shinsakaiIinShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="substituteFlag" column="substituteFlag" />
+    </resultMap>
+    <select id="get審査会委員情報By開催番号" resultMap="resultMap_getShinsakaiiinJoho" 
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT
+            dbT5594."shinsakaiIinCode" AS "shinsakaiIinCode"
+            ,dbT5594."shinsakaiIinShimei" AS "shinsakaiIinShimei"
+            ,CASE WHEN  dbT5595."shujiiIryokikanCode" IS NOT NULL THEN
+                    dbT5911."iryoKikanMeisho"
+                WHEN  dbT5595."ninteichosaItakusakiCode" IS NOT NULL THEN
+                     <!--TODO 内部QA:568 Redmine：  (認定調査委託先名の取得方式が知らない、一時固定値を使用します)--> 
+                     <!--dbT5910.認定調査委託先名-->
+                    '工籐新一'
+                ELSE
+                    dbT5914."kikanMeisho"
+            END AS "shozokukikan"
+            ,dbT5594."seibetsu" AS "seibetsu"
+            ,dbT5594."shinsakaiIinShikakuCode" AS "shinsakaiIinShikakuCode"
+            ,dbT5593."gogitaichoKubunCode" AS "gogitaichoKubunCode"
+            ,'1' AS "shukketukubun"
+            ,dbT5594."haishiFlag" AS "haishiFlag"
+            ,dbT5594."shinsakaiIinKaishiYMD" AS "shinsakaiIinKaishiYMD"
+            ,dbT5594."shinsakaiIinShuryoYMD" AS "shinsakaiIinShuryoYMD"
+            ,CASE WHEN  dbT5503."shinsakaiKaisaiNo" IS NOT NULL THEN
+                 <!--TODO 内部QA:583 Redmine：  (補欠の取得方式が知らない、一時固定値を使用します)--> 
+                 <!--0(通常)-->
+                true
+            ELSE
+                dbT5593."substituteFlag"
+            END AS "substituteFlag"
+        FROM
+            rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" dbT5501
+                LEFT JOIN  rgdb."DbT5503ShinsakaiWariateIinJoho" dbT5503
+                    ON dbT5503."shinsakaiKaisaiNo" = dbT5501."shinsakaiKaisaiNo"
+                INNER JOIN  rgdb."DbT5591GogitaiJoho" dbT5591
+                    ON dbT5591."gogitaiNo" = dbT5501."gogitaiNo"
+                INNER JOIN  rgdb."DbT5593GogitaiWariateIinJoho" dbT5593
+                    ON dbT5591."gogitaiNo" = dbT5593."gogitaiNo"
+                INNER JOIN  rgdb."DbT5594ShinsakaiIinJoho" dbT5594
+                    ON dbT5594."shinsakaiIinCode" = dbT5593."shinsakaiIinCode"
+                INNER JOIN  rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" dbT5595
+                    ON dbT5595."shinsakaiIinCode" = dbT5594."shinsakaiIinCode"
+                    AND  dbT5595."remban" = 1
+                LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" dbT5910
+                    ON dbT5595."ninteichosaItakusakiCode" = dbT5910."ninteichosaItakusakiCode"
+                         <!--TODO 内部QA:583 Redmine：  (市町村コードの取得方式が知らない、一時固定値を使用します)--> 
+                        <!--AND dbT5910."shichosonCode" = UserInfo.市町村コード-->
+                        AND dbT5910."shichosonCode" = '8801'
+                LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" dbT5911
+                    ON dbT5595."shujiiIryokikanCode" = dbT5911."shujiiIryokikanCode"
+                         <!--TODO 内部QA:583 Redmine：  (市町村コードの取得方式が知らない、一時固定値を使用します)--> 
+                        <!--AND dbT5911."shichosonCode" = UserInfo.市町村コード-->
+                        AND dbT5911."shichosonCode" = '8801'
+                LEFT JOIN rgdb."DbT5914SonotaKikanJoho" dbT5914
+                    ON dbT5595."sonotaKikanCode" = dbT5914."sonotaKikanCode"
+                        AND dbT5595."shoKisaiHokenshaNo" = dbT5914."shoKisaiHokenshaNo"
+        WHERE
+            dbT5501."shinsakaiKaisaiNo" = #{kaisaiNo}
+            AND dbT5594."shinsakaiIinCode" NOT IN (
+                                                SELECT
+                                                    dbT5503."shinsakaiIinCode"
+                                                FROM rgdb."DbT5503ShinsakaiWariateIinJoho" dbT5503
+                                                 <!--TODO 内部QA:568 Redmine：  (入力パラメーター:開催年月日必要がありますか)--> 
+                                                WHERE <!--dbT5503."shinsakaiKaisaiYMD" = 引数.開催年月日-->
+                                                    <!--AND dbT5503."shinsakaiKaisaiNo" <> #{kaisaiNo}-->
+                                                    dbT5503."shinsakaiKaisaiNo" <![CDATA[<>]]> #{kaisaiNo}
+                                                )
+    </select>
+    <select id="get審査会委員情報By開催年月日" resultMap="resultMap_getShinsakaiiinJoho" 
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT
+            dbT5594."shinsakaiIinCode" AS "shinsakaiIinCode"
+            ,dbT5594."shinsakaiIinShimei" AS "shinsakaiIinShimei"
+            ,CASE WHEN  dbT5595."shujiiIryokikanCode" IS NOT NULL THEN
+                    dbT5911."iryoKikanMeisho"
+                WHEN  dbT5595."ninteichosaItakusakiCode" IS NOT NULL THEN
+                     <!--TODO 内部QA:568 Redmine：  (認定調査委託先名の取得方式が知らない、一時固定値を使用します)--> 
+                     <!--dbT5910.認定調査委託先名-->
+                    '工籐新一'
+                ELSE
+                    dbT5914."kikanMeisho"
+            END AS "shozokukikan"
+            ,dbT5594."seibetsu" AS "seibetsu"
+            ,dbT5594."shinsakaiIinShikakuCode" AS "shinsakaiIinShikakuCode"
+             <!--TODO 内部QA:583 Redmine：  (合議体長区分コードの取得方式が知らない、一時固定値を使用します)--> 
+             <!--,合議体割当委員情報.合議体長区分コード AS "gogitaichoKubunCode"--> 
+            ,'1' AS "gogitaichoKubunCode"
+            ,'1' AS "shukketukubun"
+            ,dbT5594."haishiFlag" AS "haishiFlag"
+            ,dbT5594."shinsakaiIinKaishiYMD" AS "shinsakaiIinKaishiYMD"
+            ,dbT5594."shinsakaiIinShuryoYMD" AS "shinsakaiIinShuryoYMD"
+             <!--TODO 内部QA:583 Redmine：  (補欠の取得方式が知らない、一時固定値を使用します)--> 
+             <!--,議体情報.補欠 AS "substituteFlag"--> 
+            ,true AS "substituteFlag"
+        FROM rgdb."DbT5594ShinsakaiIinJoho" dbT5594
+                INNER JOIN  rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" dbT5595
+                    ON dbT5595."shinsakaiIinCode" = dbT5594."shinsakaiIinCode"
+                    AND  dbT5595."remban" = 1
+                LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" dbT5910
+                    ON dbT5595."ninteichosaItakusakiCode" = dbT5910."ninteichosaItakusakiCode"
+                         <!--TODO 内部QA:583 Redmine：  (市町村コードの取得方式が知らない、一時固定値を使用します)--> 
+                        <!--AND dbT5910."shichosonCode" = UserInfo.市町村コード-->
+                        AND dbT5910."shichosonCode" = '8801'
+                LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" dbT5911
+                    ON dbT5595."shujiiIryokikanCode" = dbT5911."shujiiIryokikanCode"
+                         <!--TODO 内部QA:583 Redmine：  (市町村コードの取得方式が知らない、一時固定値を使用します)--> 
+                        <!--AND dbT5911."shichosonCode" = UserInfo.市町村コード-->
+                        AND dbT5911."shichosonCode" = '8801'
+                LEFT JOIN rgdb."DbT5914SonotaKikanJoho" dbT5914
+                    ON dbT5595."sonotaKikanCode" = dbT5914."sonotaKikanCode"
+                        AND dbT5595."shoKisaiHokenshaNo" = dbT5914."shoKisaiHokenshaNo"
+        WHERE
+            dbT5594."shinsakaiIinCode" NOT IN (
+                                                SELECT
+                                                    dbT5503."shinsakaiIinCode"
+                                                FROM rgdb."DbT5503ShinsakaiWariateIinJoho" dbT5503
+                                                WHERE dbT5503."shinsakaiKaisaiYMD" = #{kaisaiYMD}
+                                                )
+    </select>
+</mapper>
