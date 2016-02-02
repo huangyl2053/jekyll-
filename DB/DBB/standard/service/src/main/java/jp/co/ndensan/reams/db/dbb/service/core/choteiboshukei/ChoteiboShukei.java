@@ -6,18 +6,19 @@
 package jp.co.ndensan.reams.db.dbb.service.core.choteiboshukei;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.DanKai;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.DankaiChoteigakuShokei;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.DankaiGokeigo;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.DankaiShokei;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.Gokei;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.Gokeigo;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.Kibetsu;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.KibetsuGokeigo;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.KibetsuShokei;
+import java.util.Set;
+import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.DanKai;
+import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.DankaiChoteigakuShokei;
+import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.DankaiGokeigo;
+import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.DankaiShokei;
+import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.Gokei;
+import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.Gokeigo;
+import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.Kibetsu;
+import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.KibetsuGokeigo;
+import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.KibetsuShokei;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -37,7 +38,7 @@ public class ChoteiboShukei {
      */
     public static List<KibetsuShokei> kibetsuChoteigakuShokei(List<Kibetsu> kiBetsuList) {
         if (kiBetsuList == null || kiBetsuList.isEmpty()) {
-            throw new NullPointerException(UrSystemErrorMessages.値がnull.getReplacedMessage("期別リスト"));
+            return new ArrayList<>();
         }
         Decimal 特別徴収第1期の調定額 = Decimal.ZERO;
         Decimal 特別徴収第2期の調定額 = Decimal.ZERO;
@@ -141,12 +142,12 @@ public class ChoteiboShukei {
 
         List<KibetsuShokei> kibetsuShokeiList = new ArrayList<>();
         KibetsuShokei 特別徴収 = KibetsuShokei.createParam(調定年度, 賦課年度,
-                new RString("1"), 特別徴収第1期の調定額, 特別徴収第2期の調定額, 特別徴収第3期の調定額,
-                特別徴収第4期の調定額, 特別徴収第5期の調定額, 特別徴収第6期の調定額, Decimal.ZERO, Decimal.ZERO,
-                Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO
+                ChoshuHohoKibetsu.特別徴収.code(), 特別徴収第1期の調定額, 特別徴収第2期の調定額, 特別徴収第3期の調定額,
+                特別徴収第4期の調定額, 特別徴収第5期の調定額, 特別徴収第6期の調定額, null, null,
+                null, null, null, null, null, null
         );
         kibetsuShokeiList.add(特別徴収);
-        KibetsuShokei 普通徴収 = KibetsuShokei.createParam(調定年度, 賦課年度, new RString("2"), 第1期の調定額,
+        KibetsuShokei 普通徴収 = KibetsuShokei.createParam(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(), 第1期の調定額,
                 第2期の調定額, 第3期の調定額, 第4期の調定額, 第5期の調定額, 第6期の調定額, 第7期の調定額, 第8期の調定額,
                 第9期の調定額, 第10期の調定額, 第11期の調定額, 第12期の調定額, 第13期の調定額, 第14期の調定額);
         kibetsuShokeiList.add(普通徴収);
@@ -160,10 +161,65 @@ public class ChoteiboShukei {
      * @return DankaiChoteigakuShokeiList 段階調定額小計リスト
      */
     public static List<DankaiChoteigakuShokei> dankaiChoteigakuShokei(List<DanKai> danKaiList) {
-        for (DanKai dankai : danKaiList) {
-            // TODO QA中　QA番号86
+        List<DankaiChoteigakuShokei> resultList = new ArrayList<>();
+        if (null == danKaiList || danKaiList.isEmpty()) {
+            return resultList;
         }
-        return null;
+        List<RString> 段階元リスト = new ArrayList<>();
+        for (DanKai dankai : danKaiList) {
+            段階元リスト.add(dankai.getDankai());
+        }
+        Set<RString> 重複排除セット = new HashSet<>(段階元リスト);
+        List<RString> 重複排除リスト = new ArrayList<>(重複排除セット);
+        for (RString 段階 : 重複排除リスト) {
+            Decimal 特別徴収当月末の調定額集計 = Decimal.ZERO;
+            Decimal 特別徴収前月末の調定額集計 = Decimal.ZERO;
+            Decimal 普通徴収当月末の調定額集計 = Decimal.ZERO;
+            Decimal 普通徴収前月末の調定額集計 = Decimal.ZERO;
+            FlexibleYear 調定年度 = FlexibleYear.EMPTY;
+            FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
+            for (DanKai dankai : danKaiList) {
+                if (ChoshuHohoKibetsu.特別徴収.code().equals(dankai.getChoshuHouhou())) {
+                    if ((1 == dankai.getDogetsuFlag().intValue()) && 段階.equals(dankai.getDankai())) {
+                        調定年度 = dankai.getChoteiNendo();
+                        賦課年度 = dankai.getFukaNendo();
+                        特別徴収当月末の調定額集計 = 特別徴収当月末の調定額集計.add(dankai.getDogetsusueChoteigaku());
+                    } else if ((0 == dankai.getDogetsuFlag().intValue()) && 段階.equals(dankai.getDankai())) {
+                        調定年度 = dankai.getChoteiNendo();
+                        賦課年度 = dankai.getFukaNendo();
+                        特別徴収前月末の調定額集計 = 特別徴収前月末の調定額集計.add(dankai.getDogetsusueChoteigaku());
+                    }
+                } else if (ChoshuHohoKibetsu.普通徴収.code().equals(dankai.getChoshuHouhou())) {
+                    if ((1 == dankai.getDogetsuFlag().intValue()) && 段階.equals(dankai.getDankai())) {
+                        調定年度 = dankai.getChoteiNendo();
+                        賦課年度 = dankai.getFukaNendo();
+                        普通徴収当月末の調定額集計 = 普通徴収当月末の調定額集計.add(dankai.getDogetsusueChoteigaku());
+                    } else if ((0 == dankai.getDogetsuFlag().intValue()) && 段階.equals(dankai.getDankai())) {
+                        調定年度 = dankai.getChoteiNendo();
+                        賦課年度 = dankai.getFukaNendo();
+                        普通徴収前月末の調定額集計 = 普通徴収前月末の調定額集計.add(dankai.getDogetsusueChoteigaku());
+                    }
+                }
+            }
+            if (!Decimal.ZERO.equals(特別徴収当月末の調定額集計)) {
+                resultList.add(DankaiChoteigakuShokei.createParam(調定年度,
+                        賦課年度, 段階, ChoshuHohoKibetsu.特別徴収.code(), 1, null, 特別徴収当月末の調定額集計));
+            }
+            if (!Decimal.ZERO.equals(特別徴収前月末の調定額集計)) {
+                resultList.add(DankaiChoteigakuShokei.createParam(調定年度,
+                        賦課年度, 段階, ChoshuHohoKibetsu.特別徴収.code(), 0, 特別徴収前月末の調定額集計, null));
+            }
+            if (!Decimal.ZERO.equals(普通徴収当月末の調定額集計)) {
+                resultList.add(DankaiChoteigakuShokei.createParam(調定年度,
+                        賦課年度, 段階, ChoshuHohoKibetsu.普通徴収.code(), 1, null, 普通徴収当月末の調定額集計));
+            }
+            if (!Decimal.ZERO.equals(普通徴収前月末の調定額集計)) {
+                resultList.add(DankaiChoteigakuShokei.createParam(調定年度,
+                        賦課年度, 段階, ChoshuHohoKibetsu.普通徴収.code(), 0, 普通徴収前月末の調定額集計, null));
+            }
+        }
+
+        return resultList;
     }
 
     /**
@@ -174,7 +230,7 @@ public class ChoteiboShukei {
      */
     public static List<Gokeigo> choteiboDataGokei(List<Gokei> gokeiList) {
         if (gokeiList == null || gokeiList.isEmpty()) {
-            throw new NullPointerException(UrSystemErrorMessages.値がnull.getReplacedMessage("合計リスト"));
+            return new ArrayList<>();
         }
         List<Gokeigo> gokeigoList = new ArrayList<>();
         for (Gokei gokei : gokeiList) {
@@ -183,9 +239,6 @@ public class ChoteiboShukei {
             Decimal 普通徴収調合計 = Decimal.ZERO;
             FlexibleYear 調定年度 = FlexibleYear.EMPTY;
             FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
-            if (期別小計リスト == null || 期別小計リスト.isEmpty()) {
-                throw new NullPointerException(UrSystemErrorMessages.値がnull.getReplacedMessage("期別小計リスト"));
-            }
             for (KibetsuShokei 期別小計 : 期別小計リスト) {
                 if (ChoshuHohoKibetsu.特別徴収.code().equals(期別小計.getChoshuHouhou())) {
                     調定年度 = 期別小計.getChoteiNendo();
@@ -207,11 +260,11 @@ public class ChoteiboShukei {
                             .add(期別小計.getDai14kiChoteiIdGakuCount());
                 }
             }
-            KibetsuGokeigo 特別期別合計後 = KibetsuGokeigo.createParam(調定年度, 賦課年度, new RString("1"),
+            KibetsuGokeigo 特別期別合計後 = KibetsuGokeigo.createParam(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.code(),
                     特別徴収調合計, Decimal.ZERO, Decimal.ZERO);
-            KibetsuGokeigo 普通期別合計後 = KibetsuGokeigo.createParam(調定年度, 賦課年度, new RString("2"),
+            KibetsuGokeigo 普通期別合計後 = KibetsuGokeigo.createParam(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(),
                     Decimal.ZERO, 普通徴収調合計, Decimal.ZERO);
-            KibetsuGokeigo 期別調定額総計 = KibetsuGokeigo.createParam(調定年度, 賦課年度, new RString(""),
+            KibetsuGokeigo 期別調定額総計 = KibetsuGokeigo.createParam(調定年度, 賦課年度, null,
                     Decimal.ZERO, Decimal.ZERO, 特別徴収調合計.add(普通徴収調合計));
             List<KibetsuGokeigo> kibetsuGokeigoList = new ArrayList<>();
             kibetsuGokeigoList.add(特別期別合計後);
@@ -219,9 +272,6 @@ public class ChoteiboShukei {
             kibetsuGokeigoList.add(期別調定額総計);
 
             List<DankaiShokei> 段階小計リスト = gokei.getDankaiShokeiList();
-            if (段階小計リスト == null || 段階小計リスト.isEmpty()) {
-                throw new NullPointerException(UrSystemErrorMessages.値がnull.getReplacedMessage("段階小計リスト"));
-            }
             Decimal 特別徴収当月末の全部件数の合計 = Decimal.ZERO;
             Decimal 特別徴収当月末の全部調定額の合計 = Decimal.ZERO;
             Decimal 特別徴収前月末の全部件数の合計 = Decimal.ZERO;
@@ -235,14 +285,14 @@ public class ChoteiboShukei {
             Decimal 全て段階の内併徴者数の合計 = Decimal.ZERO;
             for (DankaiShokei 段階小計 : 段階小計リスト) {
                 if (ChoshuHohoKibetsu.特別徴収.code().equals(段階小計.getChoshuHouhou())) {
-                    if (段階小計.getDogetsuFlag() == 1) {
+                    if (段階小計.getDogetsuFlag().intValue() == 1) {
                         特別徴収当月末の全部件数の合計 = 特別徴収当月末の全部件数の合計.add(段階小計.getDogetsusueKensu());
                         特別徴収当月末の全部調定額の合計 = 特別徴収当月末の全部調定額の合計.add(
                                 段階小計.getDogetsusueChoteigakuCount());
                         全て段階の特徴者数の合計 = 全て段階の特徴者数の合計.add(段階小計.getTokuchosyaKensu());
                         全て段階の普徴者数の合計 = 全て段階の普徴者数の合計.add(段階小計.getFuchosyaKensu());
                         全て段階の内併徴者数の合計 = 全て段階の内併徴者数の合計.add(段階小計.getNaiheisyaKensu());
-                    } else if (段階小計.getDogetsuFlag() == 0) {
+                    } else if (段階小計.getDogetsuFlag().intValue() == 0) {
                         特別徴収前月末の全部件数の合計 = 特別徴収前月末の全部件数の合計.add(段階小計.getZengetsusueKensu());
                         特別徴収前月末の全部調定額の合計 = 特別徴収前月末の全部調定額の合計.add(
                                 段階小計.getZengetsusueChoteigakuCount());
@@ -251,13 +301,13 @@ public class ChoteiboShukei {
                         全て段階の内併徴者数の合計 = 全て段階の内併徴者数の合計.add(段階小計.getNaiheisyaKensu());
                     }
                 } else if (ChoshuHohoKibetsu.普通徴収.code().equals(段階小計.getChoshuHouhou())) {
-                    if (段階小計.getDogetsuFlag() == 1) {
+                    if (段階小計.getDogetsuFlag().intValue() == 1) {
                         普通徴収当月末の全部件数の合計 = 普通徴収当月末の全部件数の合計.add(段階小計.getDogetsusueKensu());
                         普通徴収当月末の全部調定額の合計 = 普通徴収当月末の全部調定額の合計.add(段階小計.getDogetsusueChoteigakuCount());
                         全て段階の特徴者数の合計 = 全て段階の特徴者数の合計.add(段階小計.getTokuchosyaKensu());
                         全て段階の普徴者数の合計 = 全て段階の普徴者数の合計.add(段階小計.getFuchosyaKensu());
                         全て段階の内併徴者数の合計 = 全て段階の内併徴者数の合計.add(段階小計.getNaiheisyaKensu());
-                    } else if (段階小計.getDogetsuFlag() == 0) {
+                    } else if (段階小計.getDogetsuFlag().intValue() == 0) {
                         普通徴収前月末の全部件数の合計 = 普通徴収前月末の全部件数の合計.add(段階小計.getZengetsusueKensu());
                         普通徴収前月末の全部調定額の合計 = 普通徴収前月末の全部調定額の合計.add(段階小計.getZengetsusueChoteigakuCount());
                         全て段階の特徴者数の合計 = 全て段階の特徴者数の合計.add(段階小計.getTokuchosyaKensu());
@@ -266,26 +316,16 @@ public class ChoteiboShukei {
                     }
                 }
             }
-            DankaiGokeigo 特別徴収当月末段階合計後 = DankaiGokeigo.createParam(調定年度, 賦課年度, new RString("1"),
-                    1, Decimal.ZERO, Decimal.ZERO, 特別徴収当月末の全部件数の合計, 特別徴収当月末の全部調定額の合計,
-                    Decimal.ZERO, Decimal.ZERO, Decimal.ZERO
-            );
-            DankaiGokeigo 特別徴収前月末段階合計後 = DankaiGokeigo.createParam(調定年度, 賦課年度, new RString("1"),
-                    0, 特別徴収前月末の全部件数の合計, 特別徴収前月末の全部調定額の合計, Decimal.ZERO, Decimal.ZERO,
-                    Decimal.ZERO, Decimal.ZERO, Decimal.ZERO
-            );
-            DankaiGokeigo 普通徴収当月末段階合計後 = DankaiGokeigo.createParam(調定年度, 賦課年度, new RString("2"),
-                    1, Decimal.ZERO, Decimal.ZERO, 普通徴収当月末の全部件数の合計, 普通徴収当月末の全部調定額の合計,
-                    Decimal.ZERO, Decimal.ZERO, Decimal.ZERO
-            );
-            DankaiGokeigo 普通徴収前月末段階合計後 = DankaiGokeigo.createParam(調定年度, 賦課年度, new RString("2"),
-                    0, 普通徴収前月末の全部件数の合計, 普通徴収前月末の全部調定額の合計, Decimal.ZERO, Decimal.ZERO,
-                    Decimal.ZERO, Decimal.ZERO, Decimal.ZERO
-            );
-            DankaiGokeigo 所得段階別の特徴普徴者数の合計 = DankaiGokeigo.createParam(調定年度, 賦課年度, new RString(""),
-                    0, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, 全て段階の特徴者数の合計,
-                    全て段階の普徴者数の合計, 全て段階の内併徴者数の合計
-            );
+            DankaiGokeigo 特別徴収当月末段階合計後 = DankaiGokeigo.createParam(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.code(),
+                    1, null, null, 特別徴収当月末の全部件数の合計, 特別徴収当月末の全部調定額の合計, null, null, null);
+            DankaiGokeigo 特別徴収前月末段階合計後 = DankaiGokeigo.createParam(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.code(),
+                    0, 特別徴収前月末の全部件数の合計, 特別徴収前月末の全部調定額の合計, null, null, null, null, null);
+            DankaiGokeigo 普通徴収当月末段階合計後 = DankaiGokeigo.createParam(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(),
+                    1, null, null, 普通徴収当月末の全部件数の合計, 普通徴収当月末の全部調定額の合計, null, null, null);
+            DankaiGokeigo 普通徴収前月末段階合計後 = DankaiGokeigo.createParam(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(),
+                    0, 普通徴収前月末の全部件数の合計, 普通徴収前月末の全部調定額の合計, null, null, null, null, null);
+            DankaiGokeigo 所得段階別の特徴普徴者数の合計 = DankaiGokeigo.createParam(調定年度, 賦課年度, null, null, null,
+                    null, null, null, 全て段階の特徴者数の合計, 全て段階の普徴者数の合計, 全て段階の内併徴者数の合計);
             List<DankaiGokeigo> dankaiGokeigoList = new ArrayList<>();
             dankaiGokeigoList.add(特別徴収当月末段階合計後);
             dankaiGokeigoList.add(特別徴収前月末段階合計後);

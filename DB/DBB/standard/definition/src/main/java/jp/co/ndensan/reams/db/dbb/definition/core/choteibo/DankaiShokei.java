@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka;
+package jp.co.ndensan.reams.db.dbb.definition.core.choteibo;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -22,7 +22,7 @@ public class DankaiShokei {
     private final FlexibleYear fukaNendo;
     private final RString choshuHouhou;
     private final RString dankai;
-    private final int dogetsuFlag;
+    private final Integer dogetsuFlag;
     private final Decimal zengetsusueKensu;
     private final Decimal zengetsusueChoteigakuCount;
     private final Decimal fueKensu;
@@ -61,7 +61,7 @@ public class DankaiShokei {
             FlexibleYear 賦課年度,
             RString 徴収方法,
             RString 段階,
-            int 当月フラグ,
+            Integer 当月フラグ,
             Decimal 該当する段階の前月末の件数,
             Decimal 該当する段階の前月末の調定額の小計,
             Decimal 該当する段階の増の件数,
@@ -118,7 +118,7 @@ public class DankaiShokei {
             FlexibleYear 賦課年度,
             RString 徴収方法,
             RString 段階,
-            int 当月フラグ,
+            Integer 当月フラグ,
             Decimal 該当する段階の前月末の件数,
             Decimal 該当する段階の前月末の調定額の小計,
             Decimal 該当する段階の増の件数,

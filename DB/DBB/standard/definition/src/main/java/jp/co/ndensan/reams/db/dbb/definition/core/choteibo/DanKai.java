@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka;
+package jp.co.ndensan.reams.db.dbb.definition.core.choteibo;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
@@ -27,7 +27,7 @@ public class DanKai {
     private final RString dankai;
     private final RString choshuHouhou;
     private final Decimal choteiId;
-    private final int dogetsuFlag;
+    private final Integer dogetsuFlag;
     private final Decimal zengetsusueChoteigaku;
     private final Decimal fueChoteigaku;
     private final Decimal genChoteigaku;
@@ -60,7 +60,7 @@ public class DanKai {
             RString 段階,
             RString 徴収方法,
             Decimal 調定ID,
-            int 当月フラグ,
+            Integer 当月フラグ,
             Decimal 該当する段階の前月末の調定額,
             Decimal 該当する段階の増の調定額,
             Decimal 該当する段階の減の調定額,
@@ -108,7 +108,7 @@ public class DanKai {
             RString 段階,
             RString 徴収方法,
             Decimal 調定ID,
-            int 当月フラグ,
+            Integer 当月フラグ,
             Decimal 該当する段階の前月末の調定額,
             Decimal 該当する段階の増の調定額,
             Decimal 該当する段階の減の調定額,
