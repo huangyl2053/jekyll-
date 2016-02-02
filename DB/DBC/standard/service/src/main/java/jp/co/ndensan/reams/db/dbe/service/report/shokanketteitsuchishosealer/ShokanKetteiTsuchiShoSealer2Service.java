@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.service.report.shokanketteitsuchishosealer;
 import jp.co.ndensan.reams.db.dbe.business.report.ｓhokanｋetteiｓsuchiｓhoｓealer.ShokanKetteiTsuchiShoSealer2Item;
 import jp.co.ndensan.reams.db.dbe.business.report.ｓhokanｋetteiｓsuchiｓhoｓealer.ShokanKetteiTsuchiShoSealer2Property;
 import jp.co.ndensan.reams.db.dbe.business.report.ｓhokanｋetteiｓsuchiｓhoｓealer.ShokanKetteiTsuchiShoSealer2Report;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanKetteiTsuchiShoSealer2ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealer2ReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

@@ -1,5 +1,5 @@
 // TODO: 業務に合わせてパスを変更してください
-package jp.co.ndensan.reams.db.dbe.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran;
+package jp.co.ndensan.reams.db.dbe.entity.report.source.shokanketteitsuchishosealer;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;

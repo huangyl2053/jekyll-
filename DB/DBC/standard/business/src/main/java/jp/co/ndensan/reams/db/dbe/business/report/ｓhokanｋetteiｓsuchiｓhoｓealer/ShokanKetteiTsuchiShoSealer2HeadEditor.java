@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ｓhokanｋetteiｓsuchiｓhoｓealer;
 
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanKetteiTsuchiShoSealer2ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealer2ReportSource;
 
 /**
  * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）のEditorです。
