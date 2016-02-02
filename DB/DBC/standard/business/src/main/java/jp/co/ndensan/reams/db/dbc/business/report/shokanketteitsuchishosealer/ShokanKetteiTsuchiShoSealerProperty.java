@@ -16,6 +16,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 public class ShokanKetteiTsuchiShoSealerProperty extends ReportPropertyBase<ShokanKetteiTsuchiShoSealerReportSource> {
 
     public ShokanKetteiTsuchiShoSealerProperty() {
-        super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004_ShokanKetteiTsuchiShoSealer.getReportId());
+        super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId());
     }
 }

@@ -32,7 +32,7 @@ public enum ReportIdDBC {
     /**
      * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）の帳票ＩＤです。
      */
-    DBC100004_ShokanKetteiTsuchiShoSealer(
+    DBC100004(
             new ReportId("DBC100004_ShokanKetteiTsuchiShoSealer"), new RString("償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）")),
     /**
      * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）の帳票ＩＤです。
