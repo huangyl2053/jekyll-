@@ -6,12 +6,12 @@
 package jp.co.ndensan.reams.db.dbe.business.report.ninteichosatokusokutaishoshaichiranhyo;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosatokusokutaishoshaichiranhyo.NinteiChosaTokusokuTaishoshaIchiranhyoReportSource;
-import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
+import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 主治医意見書督促対象者一覧表Builderのインターフェースクラスです。
+ * 主治医意見書督促対象者一覧表ヘッダエディターのインターフェースクラスです
  *
  */
-interface NinteiChosaTokusokuTaishoshaIchiranhyoBuilder extends IReportBuilder<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> {
+public interface INinteiChosaTokusokuTaishoshaIchiranhyoEditor extends IReportEditor<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> {
 
 }

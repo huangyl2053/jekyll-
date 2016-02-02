@@ -31,7 +31,6 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoItem {
     private final RString name;
     private final RString kikanTel;
     private final RString 出力順;
-    private final RString 集計;
     private final RString 改頁;
 
     /**
@@ -50,7 +49,6 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoItem {
      * @param name 氏名
      * @param kikanTel 事業者電話番号
      * @param 出力順 出力順
-     * @param 集計 集計
      * @param 改頁 改頁
      */
     public NinteiChosaTokusokuTaishoshaIchiranhyoItem(RString cityCode, RString cityName, RString listUpper1_1, RString listUpper1_2, RString listUpper2_1, RString listUpper2_2, RDate listShinseiYMD_1, RDate listTokusokujoHakkoYMD_1, RString listNo_1, RString kikanName, RString kikanJusho, RString name, RString kikanTel, RString 出力順, RString 集計, RString 改頁) {
@@ -68,7 +66,6 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoItem {
         this.name = name;
         this.kikanTel = kikanTel;
         this.出力順 = 出力順;
-        this.集計 = 集計;
         this.改頁 = 改頁;
     }
 

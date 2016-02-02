@@ -26,12 +26,12 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoService {
      * @param item 主治医意見書督促対象者一覧表作成_帳票クラスパラメータクラス
      * @return {@link SourceDataCollection}
      */
-    public SourceDataCollection print(NinteiChosaTokusokuTaishoshaIchiranhyoItem item) {
+    public SourceDataCollection print(List<NinteiChosaTokusokuTaishoshaIchiranhyoItem> item) {
         NinteiChosaTokusokuTaishoshaIchiranhyoProperty property = new NinteiChosaTokusokuTaishoshaIchiranhyoProperty();
         return new Printer<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource>().spool(property, toReports(item));
     }
 
-    private static List<NinteiChosaTokusokuTaishoshaIchiranhyoReport> toReports(NinteiChosaTokusokuTaishoshaIchiranhyoItem item) {
+    private static List<NinteiChosaTokusokuTaishoshaIchiranhyoReport> toReports(List<NinteiChosaTokusokuTaishoshaIchiranhyoItem> item) {
         List<NinteiChosaTokusokuTaishoshaIchiranhyoReport> list = new ArrayList<>();
         list.add(NinteiChosaTokusokuTaishoshaIchiranhyoReport.createFrom(item));
         return list;

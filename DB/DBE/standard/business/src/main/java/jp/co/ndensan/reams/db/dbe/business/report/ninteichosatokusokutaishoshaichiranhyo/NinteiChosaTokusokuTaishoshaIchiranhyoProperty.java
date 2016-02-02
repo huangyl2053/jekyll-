@@ -8,9 +8,8 @@ package jp.co.ndensan.reams.db.dbe.business.report.ninteichosatokusokutaishoshai
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.ItakusakiChosainIchiranReportId;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosatokusokutaishoshaichiranhyo.NinteiChosaTokusokuTaishoshaIchiranhyoReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -25,14 +24,13 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoProperty extends ReportPropertyBase<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> {
 
-    private static final ReportId ID = new ReportId(ItakusakiChosainIchiranReportId.REPORTID_DBE233002.getCode());
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("title")));
 
     /**
      * インスタンスを生成します。
      */
     public NinteiChosaTokusokuTaishoshaIchiranhyoProperty() {
-        super(SubGyomuCode.DBE認定支援, ID);
+        super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE223002.getReportId());
     }
 
     @Override
@@ -41,6 +39,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoProperty extends ReportProper
             BreakerCatalog<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> catalog) {
 
         return breakers.add(catalog.new SimplePageBreaker(
+
 
             PAGE_BREAK_KEYS){
          @Override

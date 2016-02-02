@@ -12,16 +12,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  * 主治医意見書督促対象者一覧表Builderのインターフェースクラスです。
  *
  */
-class NinteiChosaTokusokuTaishoshaIchiranhyoBuliderImpl implements NinteiChosaTokusokuTaishoshaIchiranhyoBuilder {
+class NinteiChosaTokusokuTaishoshaIchiranhyoBulider implements INinteiChosaTokusokuTaishoshaIchiranhyoBuilder {
 
-    NinteiChosaTokusokuTaishoshaIchiranhyoEditor editor;
+    INinteiChosaTokusokuTaishoshaIchiranhyoEditor editor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param editor {@link NinteiChosaTokusokuTaishoshaIchiranhyoEditor}
+     * @param editor {@link INinteiChosaTokusokuTaishoshaIchiranhyoEditor}
      */
-    public NinteiChosaTokusokuTaishoshaIchiranhyoBuliderImpl(NinteiChosaTokusokuTaishoshaIchiranhyoEditor editor) {
+    public NinteiChosaTokusokuTaishoshaIchiranhyoBulider(INinteiChosaTokusokuTaishoshaIchiranhyoEditor editor) {
         this.editor = editor;
     }
 
