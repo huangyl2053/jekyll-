@@ -300,7 +300,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      *
      * @param parameter
      */
-    public void updDbT3034ShokanShinsei(ShokanShinseiParameter parameter) {
+    public int updDbT3034ShokanShinsei(ShokanShinseiParameter parameter) {
 
         DbT3034ShokanShinseiEntity entity = new DbT3034ShokanShinseiEntity();
         entity.setHiHokenshaNo(parameter.get被保険者番号());
@@ -327,7 +327,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         entity.setKozaID(parameter.get口座ID());
         entity.setJuryoininKeiyakuNo(parameter.get受領委任契約番号());
         entity.setState(EntityDataState.Modified);
-        償還払支給申請Dac.save(entity);
+        return 償還払支給申請Dac.save(entity);
     }
 
     /**
