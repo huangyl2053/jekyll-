@@ -26,8 +26,8 @@ public class pnlShinseiDiv extends Panel {
     private TextBoxDate txtShinseiYMD;
     @JsonProperty("txtUketsukeYMD")
     private TextBoxDate txtUketsukeYMD;
-    @JsonProperty("rdoShinseisyaKubun")
-    private RadioButton rdoShinseisyaKubun;
+    @JsonProperty("radShinseisyaKubun")
+    private RadioButton radShinseisyaKubun;
     @JsonProperty("txtKisaiHokensyaBango")
     private TextBoxCode txtKisaiHokensyaBango;
     @JsonProperty("chkKokuhorenSaiso")
@@ -92,21 +92,21 @@ public class pnlShinseiDiv extends Panel {
     }
 
     /*
-     * getrdoShinseisyaKubun
-     * @return rdoShinseisyaKubun
+     * getradShinseisyaKubun
+     * @return radShinseisyaKubun
      */
-    @JsonProperty("rdoShinseisyaKubun")
-    public RadioButton getRdoShinseisyaKubun() {
-        return rdoShinseisyaKubun;
+    @JsonProperty("radShinseisyaKubun")
+    public RadioButton getRadShinseisyaKubun() {
+        return radShinseisyaKubun;
     }
 
     /*
-     * setrdoShinseisyaKubun
-     * @param rdoShinseisyaKubun rdoShinseisyaKubun
+     * setradShinseisyaKubun
+     * @param radShinseisyaKubun radShinseisyaKubun
      */
-    @JsonProperty("rdoShinseisyaKubun")
-    public void setRdoShinseisyaKubun(RadioButton rdoShinseisyaKubun) {
-        this.rdoShinseisyaKubun = rdoShinseisyaKubun;
+    @JsonProperty("radShinseisyaKubun")
+    public void setRadShinseisyaKubun(RadioButton radShinseisyaKubun) {
+        this.radShinseisyaKubun = radShinseisyaKubun;
     }
 
     /*

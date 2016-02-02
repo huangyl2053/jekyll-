@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810012.Shin
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -33,37 +34,36 @@ public class ShinseiDetailHandler {
     }
 
     public void initPanelHead(FlexibleYearMonth サービス年月, RString 整理番号) {
-        //TODO画面パラメータ対応フォーマットに適しない QA中
-//        div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki().toString()));
+        div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
         div.getPanelHead().getTxtSeiribango().setValue(整理番号);
     }
 
     public void init申請内容(List<ShokanShinsei> businessList) {
         ShokanShinsei shokanShinsei = businessList.get(0);
-        div.getTxtShinseiYMD().setValue(new RDate(shokanShinsei.get申請年月日()
+        div.getPnlShinsei().getTxtShinseiYMD().setValue(new RDate(shokanShinsei.get申請年月日()
                 .wareki().toDateString().toString()));
-        div.getTxtUketsukeYMD().setValue(new RDate(shokanShinsei.get受付年月日()
+        div.getPnlShinsei().getTxtUketsukeYMD().setValue(new RDate(shokanShinsei.get受付年月日()
                 .wareki().toDateString().toString()));
         if (new RString("1").equals(shokanShinsei.get申請者区分())) {
-            div.getRdoShinseisyaKubun().setSelectedValue(new RString("本人"));
+            div.getPnlShinsei().getRadShinseisyaKubun().setSelectedValue(new RString("本人"));
         } else if (new RString("2").equals(shokanShinsei.get申請者区分())) {
-            div.getRdoShinseisyaKubun().setSelectedValue(new RString("代理人"));
+            div.getPnlShinsei().getRadShinseisyaKubun().setSelectedValue(new RString("代理人"));
         }
-        div.getTxtKisaiHokensyaBango().setValue(new RString(shokanShinsei
+        div.getPnlShinsei().getTxtKisaiHokensyaBango().setValue(new RString(shokanShinsei
                 .get証記載保険者番号().toString()));
         if (shokanShinsei.get国保連再送付フラグ()) {
             List<RString> list = new ArrayList<>();
             list.add(new RString("key0"));
-            div.getChkKokuhorenSaiso().setSelectedItemsByKey(list);
+            div.getPnlShinsei().getChkKokuhorenSaiso().setSelectedItemsByKey(list);
         }
-        div.getTxtShimeikana().setValue(shokanShinsei.get申請者氏名カナ());
-        div.getTxtShimeiKanji().setValue(shokanShinsei.get申請者氏名());
-        div.getTxtTelNo().setDomain(shokanShinsei.get申請者電話番号());
-        div.getTxtMulShinseiRiyu().setValue(shokanShinsei.get申請理由());
-        div.getTxtNumShiharaKingakuGk().setValue(shokanShinsei.get支払金額合計());
-        div.getTxtNumHokentaisyoHiyouGaku().setValue(shokanShinsei.get保険対象費用額());
-        div.getTxtNumHokenKyufuGaku().setValue(new Decimal(shokanShinsei.get保険給付額()));
-        div.getTxtNumRiyoshaFutanGaku().setValue(new Decimal(shokanShinsei.get利用者負担額()));
+        div.getPnlShinsei().getTxtShimeikana().setValue(shokanShinsei.get申請者氏名カナ());
+        div.getPnlShinsei().getTxtShimeiKanji().setValue(shokanShinsei.get申請者氏名());
+        div.getPnlShinsei().getTxtTelNo().setDomain(shokanShinsei.get申請者電話番号());
+        div.getPnlShinsei().getTxtMulShinseiRiyu().setValue(shokanShinsei.get申請理由());
+        div.getPnlShinsei().getTxtNumShiharaKingakuGk().setValue(shokanShinsei.get支払金額合計());
+        div.getPnlShinsei().getTxtNumHokentaisyoHiyouGaku().setValue(shokanShinsei.get保険対象費用額());
+        div.getPnlShinsei().getTxtNumHokenKyufuGaku().setValue(new Decimal(shokanShinsei.get保険給付額()));
+        div.getPnlShinsei().getTxtNumRiyoshaFutanGaku().setValue(new Decimal(shokanShinsei.get利用者負担額()));
     }
 
 }
