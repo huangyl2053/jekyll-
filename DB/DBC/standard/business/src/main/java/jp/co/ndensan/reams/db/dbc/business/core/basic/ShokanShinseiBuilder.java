@@ -193,7 +193,7 @@ public class ShokanShinseiBuilder {
      */
     public ShokanShinseiBuilder set保険給付額(int 保険給付額) {
         requireNonNull(保険給付額, UrSystemErrorMessages.値がnull.getReplacedMessage("保険給付額"));
-        entity.setHokenKyufuritsu(保険給付額);
+        entity.setHokenKyufugaku(保険給付額);
         return this;
     }
 
