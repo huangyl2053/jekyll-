@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.entity.db.basic.kijuntsu;
+package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;

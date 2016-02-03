@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator.DEFAULT_サービス種類コード;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator.DEFAULT_サービス項目コード;
@@ -230,8 +230,8 @@ public class DbT7131KaigoServiceNaiyouDacTest extends DbxTestDacBase {
                 FlexibleYearMonth 提供開始年月,
                 Decimal 履歴番号) {
             DbT7131KaigoServiceNaiyouEntity entity = DbT7131KaigoServiceNaiyouEntityGenerator.createDbT7131KaigoServiceNaiyouEntity();
-            entity.setServiceShuruiCode(サービス種類コード);
-            entity.setServiceKoumokuCode(サービス項目コード);
+            entity.setServiceShuruiCd(サービス種類コード);
+            entity.setServiceKoumokuCd(サービス項目コード);
             entity.setTeikyoKaishiYM(提供開始年月);
             entity.setRirekiNo(履歴番号);
             sut.save(entity);

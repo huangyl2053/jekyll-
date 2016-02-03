@@ -1,7 +1,10 @@
-package jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -9,35 +12,16 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
- * 合併市町村テーブルのエンティティクラスです。
+ *
+ * 単一合併市町村情報の取得のEntity
+ *
  */
-public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056GappeiShichosonEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+public class GappeiShichosonEntity implements IDbAccessable {
 
-    @TableName
-    public static final RString TABLE_NAME = new RString("DbT7056GappeiShichoson");
-
-    private RString insertDantaiCd;
-    private RDateTime insertTimestamp;
-    private RString insertReamsLoginId;
-    private UUID insertContextId;
-    private boolean isDeleted = false;
-    private int updateCount = 0;
-    private RDateTime lastUpdateTimestamp;
-    private RString lastUpdateReamsLoginId;
-    @PrimaryKey
-    private FlexibleDate gappeiYMD;
-    @PrimaryKey
-    private RString chiikiNo;
-    @PrimaryKey
     private LasdecCode kyuShichosonCode;
     private FlexibleDate unyoKaishiYMD;
     private FlexibleDate unyoShuryoYMD;
@@ -50,87 +34,13 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
     private RString rojinhokenShichosonNo;
     private RString rokenJukyushaNoTaikei;
     private RString hyojiUmu;
-
-    /**
-     * insertDantaiCdのgetメソッドです。
-     *
-     * @return insertDantaiCd
-     */
-    public RString getInsertDantaiCd() {
-        return insertDantaiCd;
-    }
-
-    /**
-     * insertDantaiCdのsetメソッドです。
-     *
-     * @param insertDantaiCd insertDantaiCd
-     */
-    public void setInsertDantaiCd(RString insertDantaiCd) {
-        this.insertDantaiCd = insertDantaiCd;
-    }
-
-    /**
-     * isDeletedのgetメソッドです。
-     *
-     * @return isDeleted
-     */
-    public boolean getIsDeleted() {
-        return isDeleted;
-    }
-
-    /**
-     * isDeletedのsetメソッドです。
-     *
-     * @param isDeleted isDeleted
-     */
-    public void setIsDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
-    /**
-     * lastUpdateReamsLoginIdのsetメソッドです。
-     *
-     * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
-     */
-    public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
-        this.lastUpdateReamsLoginId = lastUpdateReamsLoginId;
-    }
-
-    /**
-     * 合併年月日のgetメソッドです。
-     *
-     * @return 合併年月日
-     */
-    public FlexibleDate getGappeiYMD() {
-        return gappeiYMD;
-    }
-
-    /**
-     * 合併年月日のsetメソッドです。
-     *
-     * @param gappeiYMD 合併年月日
-     */
-    public void setGappeiYMD(@Nonnull FlexibleDate gappeiYMD) {
-        this.gappeiYMD = gappeiYMD;
-    }
-
-    /**
-     * 地域番号のgetメソッドです。
-     *
-     * @return 地域番号
-     */
-    public RString getChiikiNo() {
-        return chiikiNo;
-    }
-
-    /**
-     * 地域番号のsetメソッドです。
-     *
-     * @param chiikiNo 地域番号
-     */
-    public void setChiikiNo(@Nonnull RString chiikiNo) {
-        this.chiikiNo = chiikiNo;
-    }
+    private FlexibleDate gappeiYMD;
+    private RString chiikiNo;
+    private LasdecCode shichosonCode;
+    private RString gappeiShurui;
+    private HokenshaNo hokenshaNo;
+    private FlexibleDate kyuJohoFuyoToYMD;
+    private FlexibleDate kokuhorenDataFromYMD;
 
     /**
      * 旧市町村コードのgetメソッドです。
@@ -368,59 +278,137 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
     }
 
     /**
-     * このエンティティの主キーが他の{@literal DbT7056GappeiShichosonEntity}と等しいか判定します。
+     * 合併年月日のgetメソッドです。
      *
-     * @param other 比較するエンティティ
-     * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT7056GappeiShichosonEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 合併年月日
      */
-    @Override
-    public boolean equalsPrimaryKeys(DbT7056GappeiShichosonEntity other) {
-        if (other == null) {
-            return false;
-        }
-        if (!Objects.equals(this.gappeiYMD, other.gappeiYMD)) {
-            return false;
-        }
-        if (!Objects.equals(this.chiikiNo, other.chiikiNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.kyuShichosonCode, other.kyuShichosonCode)) {
-            return false;
-        }
-        return true;
+    public FlexibleDate getGappeiYMD() {
+        return gappeiYMD;
     }
 
     /**
-     * {@inheritDoc}
+     * 合併年月日のsetメソッドです。
+     *
+     * @param gappeiYMD 合併年月日
      */
-    @Override
-    public void shallowCopy(DbT7056GappeiShichosonEntity entity) {
-        this.gappeiYMD = entity.gappeiYMD;
-        this.chiikiNo = entity.chiikiNo;
-        this.kyuShichosonCode = entity.kyuShichosonCode;
-        this.unyoKaishiYMD = entity.unyoKaishiYMD;
-        this.unyoShuryoYMD = entity.unyoShuryoYMD;
-        this.kyuHokenshaNo = entity.kyuHokenshaNo;
-        this.kyuShichosonMeisho = entity.kyuShichosonMeisho;
-        this.todofukenMeisho = entity.todofukenMeisho;
-        this.gunMeisho = entity.gunMeisho;
-        this.yubinNo = entity.yubinNo;
-        this.telNo = entity.telNo;
-        this.rojinhokenShichosonNo = entity.rojinhokenShichosonNo;
-        this.rokenJukyushaNoTaikei = entity.rokenJukyushaNoTaikei;
-        this.hyojiUmu = entity.hyojiUmu;
+    public void setGappeiYMD(@Nonnull FlexibleDate gappeiYMD) {
+        this.gappeiYMD = gappeiYMD;
     }
 
     /**
-     * {@inheritDoc}
+     * 地域番号のgetメソッドです。
      *
-     * @return {@inheritDoc}
+     * @return 地域番号
      */
-    @Override
-    public RString getMd5() {
-        return super.toMd5(gappeiYMD, chiikiNo, kyuShichosonCode, unyoKaishiYMD, unyoShuryoYMD, kyuHokenshaNo, kyuShichosonMeisho, todofukenMeisho, gunMeisho, yubinNo, telNo, rojinhokenShichosonNo, rokenJukyushaNoTaikei, hyojiUmu);
+    public RString getChiikiNo() {
+        return chiikiNo;
     }
 
-// </editor-fold>
+    /**
+     * 地域番号のsetメソッドです。
+     *
+     * @param chiikiNo 地域番号
+     */
+    public void setChiikiNo(@Nonnull RString chiikiNo) {
+        this.chiikiNo = chiikiNo;
+    }
+
+    /**
+     * 市町村コードのgetメソッドです。
+     *
+     * @return 市町村コード
+     */
+    public LasdecCode getShichosonCode() {
+        return shichosonCode;
+    }
+
+    /**
+     * 市町村コードのsetメソッドです。
+     *
+     * @param shichosonCode 市町村コード
+     */
+    public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
+        this.shichosonCode = shichosonCode;
+    }
+
+    /**
+     * 合併種類のgetメソッドです。
+     * <br/>
+     * <br/>1:対等合併 2:吸収合併
+     *
+     * @return 合併種類
+     */
+    public RString getGappeiShurui() {
+        return gappeiShurui;
+    }
+
+    /**
+     * 合併種類のsetメソッドです。
+     * <br/>
+     * <br/>1:対等合併 2:吸収合併
+     *
+     * @param gappeiShurui 合併種類
+     */
+    public void setGappeiShurui(@Nonnull RString gappeiShurui) {
+        this.gappeiShurui = gappeiShurui;
+    }
+
+    /**
+     * 保険者番号のgetメソッドです。
+     *
+     * @return 保険者番号
+     */
+    public HokenshaNo getHokenshaNo() {
+        return hokenshaNo;
+    }
+
+    /**
+     * 保険者番号のsetメソッドです。
+     *
+     * @param hokenshaNo 保険者番号
+     */
+    public void setHokenshaNo(@Nonnull HokenshaNo hokenshaNo) {
+        this.hokenshaNo = hokenshaNo;
+    }
+
+    /**
+     * 旧市町村情報付与終了年月日のgetメソッドです。
+     * <br/>
+     * <br/>旧市町村情報を合併日以降、いつまで管理するかを設定
+     *
+     * @return 旧市町村情報付与終了年月日
+     */
+    public FlexibleDate getKyuJohoFuyoToYMD() {
+        return kyuJohoFuyoToYMD;
+    }
+
+    /**
+     * 旧市町村情報付与終了年月日のsetメソッドです。
+     * <br/>
+     * <br/>旧市町村情報を合併日以降、いつまで管理するかを設定
+     *
+     * @param kyuJohoFuyoToYMD 旧市町村情報付与終了年月日
+     */
+    public void setKyuJohoFuyoToYMD(@Nonnull FlexibleDate kyuJohoFuyoToYMD) {
+        this.kyuJohoFuyoToYMD = kyuJohoFuyoToYMD;
+    }
+
+    /**
+     * 国保連データ連携開始年月日のgetメソッドです。
+     *
+     * @return 国保連データ連携開始年月日
+     */
+    public FlexibleDate getKokuhorenDataFromYMD() {
+        return kokuhorenDataFromYMD;
+    }
+
+    /**
+     * 国保連データ連携開始年月日のsetメソッドです。
+     *
+     * @param kokuhorenDataFromYMD 国保連データ連携開始年月日
+     */
+    public void setKokuhorenDataFromYMD(@Nonnull FlexibleDate kokuhorenDataFromYMD) {
+        this.kokuhorenDataFromYMD = kokuhorenDataFromYMD;
+    }
+
 }

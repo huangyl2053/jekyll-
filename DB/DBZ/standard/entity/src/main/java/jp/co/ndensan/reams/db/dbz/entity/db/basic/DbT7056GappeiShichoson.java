@@ -1,12 +1,11 @@
-package jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha;
+package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 介護事業者代表者テーブルの項目定義クラスです。
- * <br/> 介護サービス事業者の代表者を管理します。
+ * 合併市町村テーブルの項目定義クラスです。
  */
-public enum DbT7062KaigoJigyoshaDaihyosha implements IColumnDefinition {
+public enum DbT7056GappeiShichoson implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     /**
@@ -42,70 +41,68 @@ public enum DbT7062KaigoJigyoshaDaihyosha implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * 事業者番号
+     * 合併年月日
      */
-    jigyoshaNo(2147483647, 0),
+    gappeiYMD(2147483647, 0),
     /**
-     * 有効開始日
+     * 地域番号
      */
-    yukoKaishiYMD(2147483647, 0),
+    chiikiNo(2, 0),
     /**
-     * 代表者名
+     * 旧市町村コード
      */
-    daihyoshaShimei(2147483647, 0),
+    kyuShichosonCode(2147483647, 0),
     /**
-     * 代表者名カナ
+     * 運用開始年月日
      */
-    daihyoshaKanaShimei(2147483647, 0),
+    unyoKaishiYMD(2147483647, 0),
     /**
-     * 代表者郵便番号
+     * 運用終了年月日
      */
-    daihyoshaYubinNo(2147483647, 0),
+    unyoShuryoYMD(2147483647, 0),
     /**
-     * 代表者住所
+     * 旧保険者番号
      */
-    daihyoshaJusho(2147483647, 0),
+    kyuHokenshaNo(2147483647, 0),
     /**
-     * 代表者住所カナ
+     * 旧市町村名称
      */
-    daihyoshaKanaJusho(100, 0),
+    kyuShichosonMeisho(10, 0),
     /**
-     * 代表者役職名
+     * 都道府県名称
      */
-    daihyoshaYakushokuMei(40, 0),
+    todofukenMeisho(4, 0),
     /**
-     * 開設者名称
+     * 郡名称
      */
-    kaisetsushaShimei(2147483647, 0),
+    gunMeisho(8, 0),
     /**
-     * 開設者名称カナ
+     * 郵便番号
      */
-    kaisetsushaKanaShimei(2147483647, 0),
+    yubinNo(2147483647, 0),
     /**
-     * 開設者郵便番号
+     * 電話番号
      */
-    kaisetsushaYubinNo(2147483647, 0),
+    telNo(2147483647, 0),
     /**
-     * 開設者住所
+     * 老人保健市町村番号
      */
-    kaisetsushaJusho(2147483647, 0),
+    rojinhokenShichosonNo(8, 0),
     /**
-     * 開設者住所カナ
+     * 老人保健受給者番号体系
+     * <br/>1:住民コード 2:医療給付サブシステム 3:市町村独自
      */
-    kaisetsushaKanaJusho(100, 0),
+    rokenJukyushaNoTaikei(1, 0),
     /**
-     * 開設者電話番号
+     * 表示有無
+     * <br/>1:表示対象とする 0:表示対象としない
      */
-    kaisetsushaTelNo(2147483647, 0),
-    /**
-     * 開設者ＦＡＸ番号
-     */
-    kaisetsushaFaxNo(2147483647, 0);
+    hyojiUmu(1, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT7062KaigoJigyoshaDaihyosha(int maxLength, int scale) {
+    private DbT7056GappeiShichoson(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

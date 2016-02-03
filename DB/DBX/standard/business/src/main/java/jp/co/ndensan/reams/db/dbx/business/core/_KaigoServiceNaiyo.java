@@ -5,9 +5,8 @@
 package jp.co.ndensan.reams.db.dbx.business.core;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuSanteiTani;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuShikibetsu;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -69,7 +68,7 @@ public class _KaigoServiceNaiyo implements IKaigoServiceNaiyo {
         this.履歴番号 = 0;
         this.サービス名称 = RString.EMPTY;
         this.サービス略称 = RString.EMPTY;
-        this.介護サービス単位 = new _KaigoServiceTani(0, new TanisuShikibetsu(RString.EMPTY), new TanisuSanteiTani(RString.EMPTY));
+        this.介護サービス単位 = new _KaigoServiceTani(0, new Code(RString.EMPTY), 0);
     }
 
     @Override

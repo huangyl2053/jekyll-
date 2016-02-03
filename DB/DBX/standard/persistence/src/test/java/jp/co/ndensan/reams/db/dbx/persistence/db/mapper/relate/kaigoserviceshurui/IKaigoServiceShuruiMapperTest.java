@@ -5,9 +5,9 @@
 package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.kaigoserviceshurui;
 
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui.KaigoServiceShuruiMapperParameter;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShuruiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigoserviceshurui.KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
@@ -116,8 +116,8 @@ public class IKaigoServiceShuruiMapperTest {
             TestSupport.insertDBT7131(serviceShuruiCd, serviceKoumokuCode, teikyoKaishiYM, rirekiNo);
             param = KaigoServiceShuruiMapperParameter.createSelectByKeyParam(serviceShuruiCd, teikyoKaishiYM);
             result = sut.getKaigoServiceEntity(param);
-            assertThat(result.get介護サービス内容Entity().get(0).getServiceShuruiCode(), is(serviceShuruiCd));
-            assertThat(result.get介護サービス内容Entity().get(0).getServiceKoumokuCode(), is(serviceKoumokuCode));
+            assertThat(result.get介護サービス内容Entity().get(0).getServiceShuruiCd(), is(serviceShuruiCd));
+            assertThat(result.get介護サービス内容Entity().get(0).getServiceKoumokuCd(), is(serviceKoumokuCode));
             assertThat(result.get介護サービス内容Entity().get(0).getTeikyoKaishiYM(), is(teikyoKaishiYM));
             assertThat(result.get介護サービス内容Entity().get(0).getRirekiNo(), is(rirekiNo));
         }
@@ -139,8 +139,8 @@ public class IKaigoServiceShuruiMapperTest {
 
         public static void insertDBT7131(KaigoServiceShuruiCode serviceShuruiCode, RString serviceKoumokuCode, FlexibleYearMonth teikyoKaishiYM, Decimal rirekiNo) {
             DbT7131KaigoServiceNaiyouEntity entity = DbT7131KaigoServiceNaiyouEntityGenerator.createDbT7131KaigoServiceNaiyouEntity();
-            entity.setServiceShuruiCode(serviceShuruiCode);
-            entity.setServiceKoumokuCode(serviceKoumokuCode);
+            entity.setServiceShuruiCd(serviceShuruiCode);
+            entity.setServiceKoumokuCd(serviceKoumokuCode);
             entity.setTeikyoKaishiYM(teikyoKaishiYM);
             entity.setRirekiNo(rirekiNo);
             介護サービス内容Dac.save(entity);

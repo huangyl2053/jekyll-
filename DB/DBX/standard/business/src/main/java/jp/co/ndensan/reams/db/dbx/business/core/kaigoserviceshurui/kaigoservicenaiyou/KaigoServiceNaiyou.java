@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservice
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
@@ -44,8 +44,8 @@ public class KaigoServiceNaiyou extends ModelBase<KaigoServiceNaiyouIdentifier, 
         requireNonNull(提供開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("提供開始年月"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT7131KaigoServiceNaiyouEntity();
-        this.entity.setServiceShuruiCode(サービス種類コード);
-        this.entity.setServiceKoumokuCode(サービス項目コード);
+        this.entity.setServiceShuruiCd(サービス種類コード);
+        this.entity.setServiceKoumokuCd(サービス項目コード);
         this.entity.setTeikyoKaishiYM(提供開始年月);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KaigoServiceNaiyouIdentifier(
@@ -65,8 +65,8 @@ public class KaigoServiceNaiyou extends ModelBase<KaigoServiceNaiyouIdentifier, 
     public KaigoServiceNaiyou(DbT7131KaigoServiceNaiyouEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護サービス内容"));
         this.id = new KaigoServiceNaiyouIdentifier(
-                entity.getServiceShuruiCode(),
-                entity.getServiceKoumokuCode(),
+                entity.getServiceShuruiCd(),
+                entity.getServiceKoumokuCd(),
                 entity.getTeikyoKaishiYM(),
                 entity.getRirekiNo());
     }
@@ -91,7 +91,7 @@ public class KaigoServiceNaiyou extends ModelBase<KaigoServiceNaiyouIdentifier, 
      * @return サービス種類コード
      */
     public KaigoServiceShuruiCode getサービス種類コード() {
-        return entity.getServiceShuruiCode();
+        return entity.getServiceShuruiCd();
     }
 
     /**
@@ -100,7 +100,7 @@ public class KaigoServiceNaiyou extends ModelBase<KaigoServiceNaiyouIdentifier, 
      * @return サービス項目コード
      */
     public RString getサービス項目コード() {
-        return entity.getServiceKoumokuCode();
+        return entity.getServiceKoumokuCd();
     }
 
     /**
