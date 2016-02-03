@@ -6,20 +6,12 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0510011;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.KyokaisoGaitoshaPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.dghokenryoNofu_Row;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -104,109 +96,109 @@ public class KyokaisoGaitoshaPanelValidationHandler {
 //                return エラーコード;
 //            }
 //        }
-
-        List<dghokenryoNofu_Row> 境界層保険料段階情報 = div.getDghokenryoNofu().getDataSource();
-        Collections.sort(境界層保険料段階情報, new KyokaisoGaitoshaPanelValidationHandler.KyokaisoHokenryoDateComparator());
-
-        for (dghokenryoNofu_Row nofu_Row : 境界層保険料段階情報) {
-            int 終了日未設定件数 = 0;
-            if (状態_削除.equals(nofu_Row.getDefaultDataName0())) {
-                continue;
-            }
-            if (nofu_Row.getDefaultDataName2().isEmpty()) {
-                終了日未設定件数 = 1 + 終了日未設定件数;
-                if (終了日未設定件数 > 2) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
-                }
-            }
-        }
-        for (int i = 0; i < 境界層保険料段階情報.size() - 1; i++) {
-            if (状態_削除.equals(境界層保険料段階情報.get(i).getDefaultDataName0())) {
-                continue;
-            }
-            if (境界層保険料段階情報.get(i).getDefaultDataName2() == null
-                    || 境界層保険料段階情報.get(i).getDefaultDataName2().isEmpty()) {
-                validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
-            }
-            if (!new RYearMonth(new RDate(境界層保険料段階情報.get(i).getDefaultDataName2().toString()).getYearMonth().toDateString())
-                    .isBefore(new RYearMonth(new RDate(境界層保険料段階情報.get(i + 1).getDefaultDataName1().toString()).getYearMonth().toDateString()))) {
-                validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
-            }
-        }
-        RString 給付額減額記載解除 = div.getRadKyufukakuGengakuKisaiKaijyo().getSelectedKey();
-        RString 標準負担額 = div.getRadHyojunFutanGaku().getSelectedKey();
-        RString 居住費等負担額減額 = div.getRadKyojuhiFutanGakuGengaku().getSelectedKey();
-        RString 食費負担額減額 = div.getRadShokuhiFutangakuGengaku().getSelectedKey();
-        RString 高額ｻｰﾋﾞｽ費上限額減額 = div.getRadGogakuServiceJokengaku().getSelectedKey();
-        RString 保険料納付減額 = div.getRadHokenryoNofuGengaku().getSelectedKey();
-        if (非該当フラグ.equals(給付額減額記載解除)
-                && 非該当フラグ.equals(標準負担額)
-                && 非該当フラグ.equals(居住費等負担額減額)
-                && 非該当フラグ.equals(食費負担額減額)
-                && 非該当フラグ.equals(高額ｻｰﾋﾞｽ費上限額減額)
-                && 非該当フラグ.equals(保険料納付減額)) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.境界層措置決定情報チェック));
-        }
-
-        if (該当フラグ.equals(標準負担額)
-                && !開始日.isBeforeOrEquals(new RDate(該当日.toString()))) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.標準負担額該当の開始日チェック));
-        }
-
-        if (該当フラグ.equals(居住費等負担額減額)
-                && 開始日.isBefore(new RDate(該当日.toString()))) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.居住費等負担額減額該当の開始日チェック));
-        }
-        if (該当フラグ.equals(居住費等負担額減額)
-                && div.getDdlKyoshituShurui().getSelectedValue().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.居住費軽減後居室種類チェック));
-        }
-        if (該当フラグ.equals(食費負担額減額)
-                && 開始日.isBefore(new RDate(該当日.toString()))) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.食費負担額減額該当の開始日チェック));
-        }
-        // TODO 凌護行 仕様記述「読替後高額介護世帯上限額該当の開始日チェック」です、認識：「高額ｻｰﾋﾞｽ費上限額減額該当の開始日チェック」、 QA回答まち、　2016/1/18
-        if (該当フラグ.equals(高額ｻｰﾋﾞｽ費上限額減額)
-                && 開始日.isBefore(new RDate(該当日.toString()))) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.読替後高額介護世帯上限額該当の開始日チェック));
-        }
-// TODO 凌護行 仕様記述「読替後高額介護世帯上限額該当の開始日チェック」です、認識：「高額ｻｰﾋﾞｽ費上限額減額該当の開始日チェック」、 QA回答まち、　2016/1/18
-        if (該当フラグ.equals(標準負担額) && 該当フラグ.equals(居住費等負担額減額) && 該当フラグ.equals(食費負担額減額)
-                && 該当フラグ.equals(高額ｻｰﾋﾞｽ費上限額減額)
-                && 開始日.isBefore(new RDate(該当日.toString()))) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.組合せチェック));
-        }
-        List<dghokenryoNofu_Row> nofu_RowList = div.getDghokenryoNofu().getDataSource();
-        if (保険料納付減.equals(保険料納付減額) && nofu_RowList.isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.保険料納付減額存在チェック));
-        }
+//
+//        List<dghokenryoNofu_Row> 境界層保険料段階情報 = div.getDghokenryoNofu().getDataSource();
+//        Collections.sort(境界層保険料段階情報, new KyokaisoGaitoshaPanelValidationHandler.KyokaisoHokenryoDateComparator());
+//
+//        for (dghokenryoNofu_Row nofu_Row : 境界層保険料段階情報) {
+//            int 終了日未設定件数 = 0;
+//            if (状態_削除.equals(nofu_Row.getDefaultDataName0())) {
+//                continue;
+//            }
+//            if (nofu_Row.getDefaultDataName2().isEmpty()) {
+//                終了日未設定件数 = 1 + 終了日未設定件数;
+//                if (終了日未設定件数 > 2) {
+//                    validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
+//                }
+//            }
+//        }
+//        for (int i = 0; i < 境界層保険料段階情報.size() - 1; i++) {
+//            if (状態_削除.equals(境界層保険料段階情報.get(i).getDefaultDataName0())) {
+//                continue;
+//            }
+//            if (境界層保険料段階情報.get(i).getDefaultDataName2() == null
+//                    || 境界層保険料段階情報.get(i).getDefaultDataName2().isEmpty()) {
+//                validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
+//            }
+//            if (!new RYearMonth(new RDate(境界層保険料段階情報.get(i).getDefaultDataName2().toString()).getYearMonth().toDateString())
+//                    .isBefore(new RYearMonth(new RDate(境界層保険料段階情報.get(i + 1).getDefaultDataName1().toString()).getYearMonth().toDateString()))) {
+//                validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
+//            }
+//        }
+//        RString 給付額減額記載解除 = div.getRadKyufukakuGengakuKisaiKaijyo().getSelectedKey();
+//        RString 標準負担額 = div.getRadHyojunFutanGaku().getSelectedKey();
+//        RString 居住費等負担額減額 = div.getRadKyojuhiFutanGakuGengaku().getSelectedKey();
+//        RString 食費負担額減額 = div.getRadShokuhiFutangakuGengaku().getSelectedKey();
+//        RString 高額ｻｰﾋﾞｽ費上限額減額 = div.getRadGogakuServiceJokengaku().getSelectedKey();
+//        RString 保険料納付減額 = div.getRadHokenryoNofuGengaku().getSelectedKey();
+//        if (非該当フラグ.equals(給付額減額記載解除)
+//                && 非該当フラグ.equals(標準負担額)
+//                && 非該当フラグ.equals(居住費等負担額減額)
+//                && 非該当フラグ.equals(食費負担額減額)
+//                && 非該当フラグ.equals(高額ｻｰﾋﾞｽ費上限額減額)
+//                && 非該当フラグ.equals(保険料納付減額)) {
+//            validPairs.add(new ValidationMessageControlPair(RRVMessages.境界層措置決定情報チェック));
+//        }
+//
+//        if (該当フラグ.equals(標準負担額)
+//                && !開始日.isBeforeOrEquals(new RDate(該当日.toString()))) {
+//            validPairs.add(new ValidationMessageControlPair(RRVMessages.標準負担額該当の開始日チェック));
+//        }
+//
+//        if (該当フラグ.equals(居住費等負担額減額)
+//                && 開始日.isBefore(new RDate(該当日.toString()))) {
+//            validPairs.add(new ValidationMessageControlPair(RRVMessages.居住費等負担額減額該当の開始日チェック));
+//        }
+//        if (該当フラグ.equals(居住費等負担額減額)
+//                && div.getDdlKyoshituShurui().getSelectedValue().isEmpty()) {
+//            validPairs.add(new ValidationMessageControlPair(RRVMessages.居住費軽減後居室種類チェック));
+//        }
+//        if (該当フラグ.equals(食費負担額減額)
+//                && 開始日.isBefore(new RDate(該当日.toString()))) {
+//            validPairs.add(new ValidationMessageControlPair(RRVMessages.食費負担額減額該当の開始日チェック));
+//        }
+//        // TODO 凌護行 仕様記述「読替後高額介護世帯上限額該当の開始日チェック」です、認識：「高額ｻｰﾋﾞｽ費上限額減額該当の開始日チェック」、 QA回答まち、　2016/1/18
+//        if (該当フラグ.equals(高額ｻｰﾋﾞｽ費上限額減額)
+//                && 開始日.isBefore(new RDate(該当日.toString()))) {
+//            validPairs.add(new ValidationMessageControlPair(RRVMessages.読替後高額介護世帯上限額該当の開始日チェック));
+//        }
+//// TODO 凌護行 仕様記述「読替後高額介護世帯上限額該当の開始日チェック」です、認識：「高額ｻｰﾋﾞｽ費上限額減額該当の開始日チェック」、 QA回答まち、　2016/1/18
+//        if (該当フラグ.equals(標準負担額) && 該当フラグ.equals(居住費等負担額減額) && 該当フラグ.equals(食費負担額減額)
+//                && 該当フラグ.equals(高額ｻｰﾋﾞｽ費上限額減額)
+//                && 開始日.isBefore(new RDate(該当日.toString()))) {
+//            validPairs.add(new ValidationMessageControlPair(RRVMessages.組合せチェック));
+//        }
+//        List<dghokenryoNofu_Row> nofu_RowList = div.getDghokenryoNofu().getDataSource();
+//        if (保険料納付減.equals(保険料納付減額) && nofu_RowList.isEmpty()) {
+//            validPairs.add(new ValidationMessageControlPair(RRVMessages.保険料納付減額存在チェック));
+//        }
         return validPairs;
     }
-
-    private static enum RRVMessages implements IValidationMessage {
-
-        // TODO 凌護行 ソースにエラーコードが無し、QA745回答まち、2016/1/18
-        境界層措置決定情報チェック(DbaErrorMessages.QA745),
-        期間が重複チェック(UrErrorMessages.期間が重複),
-        標準負担額該当の開始日チェック(DbaErrorMessages.QA745),
-        居住費等負担額減額該当の開始日チェック(DbaErrorMessages.QA745),
-        居住費軽減後居室種類チェック(DbaErrorMessages.QA745),
-        食費負担額減額該当の開始日チェック(DbaErrorMessages.QA745),
-        読替後高額介護世帯上限額該当の開始日チェック(DbaErrorMessages.QA745),
-        組合せチェック(DbaErrorMessages.QA745),
-        保険料納付減額存在チェック(DbaErrorMessages.QA745);
-
-        private final Message message;
-
-        private RRVMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
-    }
+//
+//    private static enum RRVMessages implements IValidationMessage {
+//
+//        // TODO 凌護行 ソースにエラーコードが無し、QA745回答まち、2016/1/18
+//        境界層措置決定情報チェック(DbaErrorMessages.QA745),
+//        期間が重複チェック(UrErrorMessages.期間が重複),
+//        標準負担額該当の開始日チェック(DbaErrorMessages.QA745),
+//        居住費等負担額減額該当の開始日チェック(DbaErrorMessages.QA745),
+//        居住費軽減後居室種類チェック(DbaErrorMessages.QA745),
+//        食費負担額減額該当の開始日チェック(DbaErrorMessages.QA745),
+//        読替後高額介護世帯上限額該当の開始日チェック(DbaErrorMessages.QA745),
+//        組合せチェック(DbaErrorMessages.QA745),
+//        保険料納付減額存在チェック(DbaErrorMessages.QA745);
+//
+//        private final Message message;
+//
+//        private RRVMessages(IMessageGettable message, String... replacements) {
+//            this.message = message.getMessage().replace(replacements);
+//        }
+//
+//        @Override
+//        public Message getMessage() {
+//            return message;
+//        }
+//    }
 
     //        TODO 凌護行 「保存する」ボタンを押下するとき、チェック実施のデータを更新前データ、処理誤り、QA回答まち、　2016/1/18
 //    private static class DateComparator implements Comparator<dghokenryoNofu_Row>, Serializable {
