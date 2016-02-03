@@ -50,8 +50,8 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         source.seigenEd11 = joho.getSeigenEd1();
         source.seigenLong21 = joho.getSeigenLong2();
         source.ninteiymd1 = joho.getNinteiymd();
-        // TODO
-        source.yukokigen21 = joho.getYukokigen();
+        // TODO 内部QA：623　（有効期限2がありません。）
+        // source.yukokigen21 = joho.getYukokigen2();
         source.yukokigen1 = joho.getYukokigen();
         source.seigen31 = joho.getSeigen3();
         source.seigenSt21 = joho.getSeigenSt2();
@@ -164,9 +164,9 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         source.seigenLong22 = joho.getSeigenLong22();
         source.seigenEd12 = joho.getSeigenEd12();
         source.ninteiymd2 = joho.getNinteiymd2();
-        // TODO
-        source.yukokigen22 = joho.getYukokigen2();
-        source.yukokigen2 = joho.getYukokigen2();
+        // TODO 内部QA：623　（有効期限2がありません。）
+        // source.yukokigen22 = joho.getYukokigen2();
+        source.yukokigen2 = joho.getYukokigen();
         source.seigen32 = joho.getSeigen32();
         source.seigenLong32 = joho.getSeigenLong32();
         source.seigenSt22 = joho.getSeigenSt22();

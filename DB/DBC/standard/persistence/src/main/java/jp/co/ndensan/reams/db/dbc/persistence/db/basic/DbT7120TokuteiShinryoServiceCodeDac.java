@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -122,6 +124,7 @@ public class DbT7120TokuteiShinryoServiceCodeDac implements ISaveable<DbT7120Tok
                                 eq(serviceKomokuCode, サービス項目コード),
                                 leq(tekiyoKaishiYM, 基準年月),
                                 leq(基準年月, tekiyoShuryoYM))).
+                order(by(serviceKomokuCode, Order.ASC)).
                 toList(DbT7120TokuteiShinryoServiceCodeEntity.class);
     }
 

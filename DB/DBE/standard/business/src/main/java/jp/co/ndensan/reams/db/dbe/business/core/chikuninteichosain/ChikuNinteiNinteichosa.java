@@ -18,6 +18,12 @@ public class ChikuNinteiNinteichosa implements Serializable {
 
     private final ChikuNinteiNinteichosaRelateEntity entity;
 
+    /**
+     * コンストラクタです。<br/>
+     * DBより取得した{@link ChikuNinteiNinteichosaRelateEntity}より{@link ChikuNinteiNinteichosa}を生成します。
+     *
+     * @param entity DBより取得した{@link ChikuNinteiNinteichosaRelateEntity}
+     */
     public ChikuNinteiNinteichosa(ChikuNinteiNinteichosaRelateEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("対象地区"));
     }

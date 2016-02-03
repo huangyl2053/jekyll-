@@ -217,7 +217,7 @@ public class DbT3039ShokanMeisaiDac implements ISaveable<DbT3039ShokanMeisaiEnti
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号),
-                                not(eq(serviceShuruiCode, 50)))).getCount();
+                                not(eq(serviceShuruiCode, new RString("50"))))).getCount();
     }
 
 }

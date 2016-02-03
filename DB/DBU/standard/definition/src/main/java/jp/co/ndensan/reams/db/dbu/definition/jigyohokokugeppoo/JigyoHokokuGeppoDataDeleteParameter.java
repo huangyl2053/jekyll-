@@ -10,11 +10,15 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author sunhui
  */
+@Getter
+@Setter
 public class JigyoHokokuGeppoDataDeleteParameter {
     private final FlexibleYear 報告年;
     private final RString 報告月;

@@ -318,4 +318,30 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
                         by(DbT7021JigyoHokokuTokeiData.yokoNo, Order.ASC)).
                 toList(DbT7021JigyoHokokuTokeiDataEntity.class);
     }
+    public List<DbT7021JigyoHokokuTokeiDataEntity> select報告年度様式種類(FlexibleYear 報告年, RString 報告月, FlexibleYear 集計対象年, RString 集計対象月, RString 統計対象区分, LasdecCode 市町村コード, Code 表番号, Code 集計番号){
+         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7021JigyoHokokuTokeiData.class).
+                where(and(
+                                eq(hokokuYSeireki, 報告年),
+                                eq(shukeiTaishoYSeireki, 集計対象年),
+                                eq(shukeiTaishoM,集計対象月),                              
+                                eq(toukeiTaishoKubun, 統計対象区分),
+                                eq(shichosonCode, 市町村コード),
+                                eq(hyoNo, 表番号),
+                                eq(shukeiNo, 集計番号)
+                        )).
+                order(by(DbT7021JigyoHokokuTokeiData.hokokuYSeireki, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.hokokuM, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.shukeiTaishoYSeireki, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.shukeiTaishoM, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.toukeiTaishoKubun, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.shichosonCode, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.hyoNo, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.shukeiNo, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.shukeiTani, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.tateNo, Order.ASC),
+                        by(DbT7021JigyoHokokuTokeiData.yokoNo, Order.ASC)).
+                toList(DbT7021JigyoHokokuTokeiDataEntity.class);
+    }
 }

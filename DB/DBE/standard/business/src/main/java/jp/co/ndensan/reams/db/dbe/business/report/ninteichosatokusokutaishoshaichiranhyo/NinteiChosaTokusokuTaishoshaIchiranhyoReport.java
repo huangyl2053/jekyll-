@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ninteichosatokusokutaishoshaichiranhyo;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosatokusokutaishoshaichiranhyo.NinteiChosaTokusokuTaishoshaIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -15,31 +16,36 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoReport extends Report<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> {
 
-    private final NinteiChosaTokusokuTaishoshaIchiranhyoItem item;
+    private final List<NinteiChosaTokusokuTaishoshaIchiranhyoItem> itemList;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item 主治医意見書督促対象者一覧表のITEM
+     * @param itemList 主治医意見書督促対象者一覧表のITEM
      * @return 主治医意見書督促対象者一覧表のReport
      */
-    public static NinteiChosaTokusokuTaishoshaIchiranhyoReport createFrom(NinteiChosaTokusokuTaishoshaIchiranhyoItem item) {
-        return new NinteiChosaTokusokuTaishoshaIchiranhyoReport(item);
+    public static NinteiChosaTokusokuTaishoshaIchiranhyoReport createFrom(
+            List<NinteiChosaTokusokuTaishoshaIchiranhyoItem> itemList) {
+        return new NinteiChosaTokusokuTaishoshaIchiranhyoReport(itemList);
     }
 
     /**
      * インスタンスを生成します。
      *
-     * @param item 主治医意見書督促対象者一覧表のITEM
+     * @param itemList 主治医意見書督促対象者一覧表のITEM
      */
-    protected NinteiChosaTokusokuTaishoshaIchiranhyoReport(NinteiChosaTokusokuTaishoshaIchiranhyoItem item) {
-        this.item = item;
+    protected NinteiChosaTokusokuTaishoshaIchiranhyoReport(
+            List<NinteiChosaTokusokuTaishoshaIchiranhyoItem> itemList) {
+
+        this.itemList = itemList;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> reportSourceWriter) {
-        NinteiChosaTokusokuTaishoshaIchiranhyoHeadEditor editor = new NinteiChosaTokusokuTaishoshaIchiranhyoHeadEditor(item);
-        NinteiChosaTokusokuTaishoshaIchiranhyoBuliderImpl builder = new NinteiChosaTokusokuTaishoshaIchiranhyoBuliderImpl(editor);
-        reportSourceWriter.writeLine(builder);
+        for (NinteiChosaTokusokuTaishoshaIchiranhyoItem item : itemList) {
+            INinteiChosaTokusokuTaishoshaIchiranhyoEditor editor = new NinteiChosaTokusokuTaishoshaIchiranhyoEditor(item);
+            INinteiChosaTokusokuTaishoshaIchiranhyoBuilder builder = new NinteiChosaTokusokuTaishoshaIchiranhyoBulider(editor);
+            reportSourceWriter.writeLine(builder);
+        }
     }
 }

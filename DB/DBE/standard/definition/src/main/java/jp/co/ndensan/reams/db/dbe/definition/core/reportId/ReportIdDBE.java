@@ -16,7 +16,12 @@ public enum ReportIdDBE {
     /**
      * 主治医意見書作成依頼書の帳票ＩＤです。
      */
-    DBE230001(new ReportId("DBE230001_ShujiiIkenshoSakuseiIraisho"), new RString("主治医意見書作成依頼書"));
+    DBE230001(new ReportId("DBE230001_ShujiiIkenshoSakuseiIraisho"), new RString("主治医意見書作成依頼書")),
+    /**
+     * 主治医意見書作成依頼書の帳票ＩＤです。
+     */
+    DBE223002(
+            new ReportId("DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo"), new RString("主治医意見書督促対象者一覧表"));
 
     private final ReportId reportId;
     private final RString reportName;

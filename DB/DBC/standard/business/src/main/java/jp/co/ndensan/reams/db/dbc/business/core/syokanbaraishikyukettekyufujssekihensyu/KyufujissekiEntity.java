@@ -393,7 +393,7 @@ public class KyufujissekiEntity {
      * @return 前・保険・請求額
      */
     public int get前保険請求額() {
-        return DbT3034ShokanShinsei.getHokenKyufuritsu();
+        return DbT3034ShokanShinsei.getHokenKyufugaku();
     }
 
     /**
@@ -420,7 +420,7 @@ public class KyufujissekiEntity {
      * @return 後・保険・請求額
      */
     public int get後保険請求額() {
-        return DbT3034ShokanShinsei.getHokenKyufuritsu();
+        return DbT3034ShokanShinsei.getHokenKyufugaku();
     }
 
     /**

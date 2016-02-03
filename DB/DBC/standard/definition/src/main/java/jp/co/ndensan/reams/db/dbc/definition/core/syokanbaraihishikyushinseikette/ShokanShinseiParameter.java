@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseiket
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,7 +22,8 @@ public class ShokanShinseiParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth 提供購入年月;
-    private final RString 取得された整理番号;
+    private final RString 整理番号;
+    private final TelNo 電話番号;
     private final HokenshaNo 証記載保険者番号;
     private final FlexibleDate 受付年月日;
     private final FlexibleDate 申請日;
@@ -32,9 +34,9 @@ public class ShokanShinseiParameter {
     private final Decimal 支払金額合計;
     private final int 保険給付額;
     private final int 利用者給付額;
-    private final RString DBC介護給付;
-    private final RString DBC介護給付コンフィグ;
-    private final boolean FALSE;
+    private final RString 支給申請審査区分;
+    private final RString 審査方法区分;
+    private final boolean 国保連再送付フラグ;
     private final RString 選択された支払方法コード;
     private final RString 支払場所;
     private final FlexibleDate 支払期間開始年月日;
@@ -49,7 +51,7 @@ public class ShokanShinseiParameter {
      *
      * @param 被保険者番号
      * @param 提供購入年月
-     * @param 取得された整理番号
+     * @param 電話番号
      * @param 証記載保険者番号
      * @param 受付年月日
      * @param 申請日
@@ -60,9 +62,9 @@ public class ShokanShinseiParameter {
      * @param 支払金額合計
      * @param 保険給付額
      * @param 利用者給付額
-     * @param DBC介護給付
-     * @param DBC介護給付コンフィグ
-     * @param FALSE
+     * @param 支給申請審査区分
+     * @param 審査方法区分
+     * @param 国保連再送付フラグ
      * @param 選択された支払方法コード
      * @param 支払場所
      * @param 支払期間開始年月日
@@ -74,7 +76,8 @@ public class ShokanShinseiParameter {
      */
     private ShokanShinseiParameter(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 提供購入年月,
-            RString 取得された整理番号,
+            RString 整理番号,
+            TelNo 電話番号,
             HokenshaNo 証記載保険者番号,
             FlexibleDate 受付年月日,
             FlexibleDate 申請日,
@@ -85,9 +88,9 @@ public class ShokanShinseiParameter {
             Decimal 支払金額合計,
             int 保険給付額,
             int 利用者給付額,
-            RString DBC介護給付,
-            RString DBC介護給付コンフィグ,
-            boolean FALSE,
+            RString 支給申請審査区分,
+            RString 審査方法区分,
+            boolean 国保連再送付フラグ,
             RString 選択された支払方法コード,
             RString 支払場所,
             FlexibleDate 支払期間開始年月日,
@@ -98,7 +101,8 @@ public class ShokanShinseiParameter {
             RString 受領委任契約番号) {
         this.被保険者番号 = 被保険者番号;
         this.提供購入年月 = 提供購入年月;
-        this.取得された整理番号 = 取得された整理番号;
+        this.整理番号 = 整理番号;
+        this.電話番号 = 電話番号;
         this.証記載保険者番号 = 証記載保険者番号;
         this.受付年月日 = 受付年月日;
         this.申請日 = 申請日;
@@ -109,9 +113,9 @@ public class ShokanShinseiParameter {
         this.支払金額合計 = 支払金額合計;
         this.保険給付額 = 保険給付額;
         this.利用者給付額 = 利用者給付額;
-        this.DBC介護給付 = DBC介護給付;
-        this.DBC介護給付コンフィグ = DBC介護給付コンフィグ;
-        this.FALSE = FALSE;
+        this.支給申請審査区分 = 支給申請審査区分;
+        this.審査方法区分 = 審査方法区分;
+        this.国保連再送付フラグ = 国保連再送付フラグ;
         this.選択された支払方法コード = 選択された支払方法コード;
         this.支払場所 = 支払場所;
         this.支払期間開始年月日 = 支払期間開始年月日;
@@ -127,7 +131,8 @@ public class ShokanShinseiParameter {
      *
      * @param 被保険者番号
      * @param 提供購入年月
-     * @param 取得された整理番号
+     * @param 整理番号
+     * @param 電話番号
      * @param 証記載保険者番号
      * @param 受付年月日
      * @param 申請日
@@ -138,9 +143,9 @@ public class ShokanShinseiParameter {
      * @param 支払金額合計
      * @param 保険給付額
      * @param 利用者給付額
-     * @param DBC介護給付
-     * @param DBC介護給付コンフィグ
-     * @param FALSE
+     * @param 支給申請審査区分
+     * @param 審査方法区分
+     * @param 国保連再送付フラグ
      * @param 選択された支払方法コード
      * @param 支払場所
      * @param 支払期間開始年月日
@@ -153,7 +158,8 @@ public class ShokanShinseiParameter {
      */
     public static ShokanShinseiParameter createSelectByKeyParam(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 提供購入年月,
-            RString 取得された整理番号,
+            RString 整理番号,
+            TelNo 電話番号,
             HokenshaNo 証記載保険者番号,
             FlexibleDate 受付年月日,
             FlexibleDate 申請日,
@@ -164,9 +170,9 @@ public class ShokanShinseiParameter {
             Decimal 支払金額合計,
             int 保険給付額,
             int 利用者給付額,
-            RString DBC介護給付,
-            RString DBC介護給付コンフィグ,
-            boolean FALSE,
+            RString 支給申請審査区分,
+            RString 審査方法区分,
+            boolean 国保連再送付フラグ,
             RString 選択された支払方法コード,
             RString 支払場所,
             FlexibleDate 支払期間開始年月日,
@@ -175,10 +181,10 @@ public class ShokanShinseiParameter {
             RString 支払窓口終了時間,
             long 口座ID,
             RString 受領委任契約番号) {
-        return new ShokanShinseiParameter(被保険者番号, 提供購入年月, 取得された整理番号, 証記載保険者番号,
+        return new ShokanShinseiParameter(被保険者番号, 提供購入年月, 整理番号, 電話番号, 証記載保険者番号,
                 受付年月日, 申請日, 申請理由, 申請者区分, 氏名, 氏名カナ, 支払金額合計, 保険給付額, 利用者給付額,
-                DBC介護給付, DBC介護給付コンフィグ, FALSE, 選択された支払方法コード, 支払場所, 支払期間開始年月日,
-                支払期間終了年月日, 支払窓口開始時間, 支払窓口終了時間, 口座ID, 受領委任契約番号);
+                支給申請審査区分, 審査方法区分, 国保連再送付フラグ, 選択された支払方法コード, 支払場所,
+                支払期間開始年月日, 支払期間終了年月日, 支払窓口開始時間, 支払窓口終了時間, 口座ID, 受領委任契約番号);
     }
 
 }
