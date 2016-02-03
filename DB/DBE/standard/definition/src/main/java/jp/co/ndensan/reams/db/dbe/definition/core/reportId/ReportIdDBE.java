@@ -21,7 +21,15 @@ public enum ReportIdDBE {
      * 主治医意見書作成依頼書の帳票ＩＤです。
      */
     DBE223002(
-            new ReportId("DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo"), new RString("主治医意見書督促対象者一覧表"));
+            new ReportId("DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo"), new RString("主治医意見書督促対象者一覧表")),
+    /**
+     * 要介護認定調査票（基本調査）（枠有 カラー印刷片面用）の帳票ＩＤです。
+     */
+    DBE221002(new ReportId("DBE221002_ChosahyoKihonchosaKatamen"), new RString("要介護認定調査票（基本調査）")),
+    /**
+     * 要介護認定調査票（基本調査）（枠有 カラー印刷両面用）の帳票ＩＤです。
+     */
+    DBE221003(new ReportId("DBE221003_ChosahyoKihonchosaRyomen"), new RString("要介護認定調査票（基本調査）"));
 
     private final ReportId reportId;
     private final RString reportName;
