@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dba.definition.core.tokuteifutangendogakushinseish
 import jp.co.ndensan.reams.db.dba.definition.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseishoMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tokuteifutangendogakushinseisho.HihokenshaKihonEntity;
 import jp.co.ndensan.reams.db.dba.persistence.mapper.tokuteifutangendogakushinseisho.ITokuteifutanGendogakuShinseishoMapper;
-import jp.co.ndensan.reams.db.dba.service.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -57,9 +56,9 @@ public class TokuteifutanGendogakuShinseisho {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link ShikakuShutokuJogaishaKanriManager}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link TokuteifutanGendogakuShinseisho}のインスタンスを返します。
      *
-     * @return KijuntsukiShichosonjohoFinder
+     * @return TokuteifutanGendogakuShinseisho
      */
     public static TokuteifutanGendogakuShinseisho createInstance() {
         return InstanceProvider.create(TokuteifutanGendogakuShinseisho.class);
@@ -149,10 +148,10 @@ public class TokuteifutanGendogakuShinseisho {
             } else {
                 koikiShichosonJohoParameter = dbt1001Entity.getKoikinaiTokureiSochimotoShichosonCode();
             }
-            SearchResult<ShichosonCodeYoriShichoson> Shichoson = koikiShichosonJohoFinder.shichosonCodeYoriShichosonJoho(
+            SearchResult<ShichosonCodeYoriShichoson> shichoson = koikiShichosonJohoFinder.shichosonCodeYoriShichosonJoho(
                     koikiShichosonJohoParameter);
             // TODO  内部QA：644  Redmine： (検索結果は復数件の可能性があります。)
-            証記載保険者番号 = new HokenshaNo(Shichoson.records().get(0).get運用保険者番号().value());
+            証記載保険者番号 = new HokenshaNo(shichoson.records().get(0).get運用保険者番号().value());
             // TODO  内部QA：644  Redmine： (スケジュールに「ビジネス設計_DBUMN00000_市町村情報取得_単一」がありません。)
         } else {
             証記載保険者番号 = new HokenshaNo("111");
