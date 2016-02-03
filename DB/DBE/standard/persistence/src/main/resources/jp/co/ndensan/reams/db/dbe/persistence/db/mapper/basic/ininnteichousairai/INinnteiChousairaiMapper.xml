@@ -13,6 +13,7 @@
         <result property="telNo" column="Temp_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="shichosonCode" column="Temp_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="kikanKubun" column="Temp_kikanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="waritsukesumiKensu" column="Temp_waritsukeCount"/>
     </resultMap>
     <select id="selectNinnteiChousaItaku" resultMap="result_NinnteiChousairaiEntity" 
@@ -25,6 +26,7 @@
                 , DbT5910NinteichosaItakusakiJoho."jusho" AS Temp_jusho
                 , DbT5910NinteichosaItakusakiJoho."telNo" AS Temp_telNo
                 , DbT5910NinteichosaItakusakiJoho."shichosonCode" AS Temp_shichosonCode
+                , DbT7051KoseiShichosonMaster."shichosonMeisho" AS shichosonMeisho
                 , DbT5910NinteichosaItakusakiJoho."kikanKubun" AS Temp_kikanKubun
                 , SUM( 
                   COALESCE(ninteichosaIraiJohoZimi.waritsukeCount, 0)
@@ -70,7 +72,10 @@
                     AND DbT5201NinteichosaIraiJoho."logicalDeletedFlag" = FALSE
                 ) AS ninteichosaIraiJohoZimi 
                   ON ninteichosaIraiJohoZimi.Temp_ninteichosaItakusakiCode = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode" 
-              WHERE
+                INNER JOIN
+                rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShichosonMaster
+                ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
+                WHERE
                 DbT5910NinteichosaItakusakiJoho."shichosonCode" IN ( 
                   SELECT
                     dbT7051."shichosonCode" AS shichosonCode
@@ -81,14 +86,15 @@
                 ) 
                 AND DbT5910NinteichosaItakusakiJoho."jokyoFlag" = TRUE 
               GROUP BY
-                DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
+                  DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
                 , DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho"
                 , DbT5910NinteichosaItakusakiJoho."waritsukeChiku"
                 , DbT5910NinteichosaItakusakiJoho."waritsukeTeiin"
                 , DbT5910NinteichosaItakusakiJoho."jusho"
-                ,DbT5910NinteichosaItakusakiJoho."shichosonCode"
+                , DbT5910NinteichosaItakusakiJoho."shichosonCode"
                 , DbT5910NinteichosaItakusakiJoho."telNo"
                 , DbT5910NinteichosaItakusakiJoho."kikanKubun"
+                , DbT7051KoseiShichosonMaster."shichosonMeisho"
     </select>
     <resultMap id="result_ChousaIn" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.NinnteiChousairaiEntity">
         <result property="ninteiChosainNo" column="Temp_ninteiChosainNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

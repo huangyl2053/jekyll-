@@ -163,6 +163,15 @@ public class NinnteiChousairaiBusiness {
     }
 
     /**
+     * 市町村名称を返します。
+     *
+     * @return 市町村名称
+     */
+    public RString getShichosonMeisho() {
+        return entity.getShichosonMeisho();
+    }
+
+    /**
      * 調査可能人数／月を返します。
      *
      * @return 調査可能人数／月

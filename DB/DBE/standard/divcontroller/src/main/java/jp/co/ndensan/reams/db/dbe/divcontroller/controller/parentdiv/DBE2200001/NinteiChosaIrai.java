@@ -116,13 +116,15 @@ public class NinteiChosaIrai {
         ChosaItakusakiCode chosaItakusakiCode = new ChosaItakusakiCode(row.getChosaItakusakiCode().getValue());
         ViewStateHolder.put(ViewStateKeys.認定調査委託先コード, row.getChosaItakusakiCode().getValue());
         ViewStateHolder.put(ViewStateKeys.認定調査委託先の割付定員, row.getWaritsukeTeiin().getValue());
+        ViewStateHolder.put(ViewStateKeys.保険者名称, row.getHokenshaName());
         RString 支所コード = ViewStateHolder.get(ViewStateKeys.支所コード, RString.class);
         ShoKisaiHokenshaNo 保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
         NinnteiChousairaiParameter parameter = NinnteiChousairaiParameter.createParamfor調査員情報(
                 保険者番号, 支所コード, chosaItakusakiCode);
         List<NinnteiChousairaiBusiness> 調査員情報一覧 = NinnteiChousairaiFinder.createInstance().getChousaIn(parameter).records();
         getHandler(div).set調査員情報一覧(調査員情報一覧, row);
-
+        setData(div, null);
+        getHandler(div).init印刷条件DIV();
         return ResponseData.of(div).respond();
     }
 
@@ -139,23 +141,30 @@ public class NinteiChosaIrai {
 
         ChosainCode chosainCode = new ChosainCode(row.getChosainCode().getValue());
         ViewStateHolder.put(ViewStateKeys.調査員コード, row.getChosainCode().getValue());
+
+        setData(div, chosainCode);
+        getHandler(div).init印刷条件DIV();
+        return ResponseData.of(div).respond();
+    }
+
+    private void setData(NinteiChosaIraiDiv div, ChosainCode chosainCode) {
         ChosaItakusakiCode chosaItakusakiCode = new ChosaItakusakiCode(ViewStateHolder.get(ViewStateKeys.認定調査委託先コード, RString.class));
-        RString 支所コード = ViewStateHolder.get(ViewStateKeys.支所コード, RString.class);
-        ShoKisaiHokenshaNo 保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
-
+        RString shishoCode = ViewStateHolder.get(ViewStateKeys.支所コード, RString.class);
+        ShoKisaiHokenshaNo shoKisaiHokenshaNo = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
+        RString hokenshaName = ViewStateHolder.get(ViewStateKeys.保険者名称, RString.class);
         NinnteiChousairaiParameter parameter = NinnteiChousairaiParameter.createParamfor割付済み申請者一覧(
-                保険者番号, 支所コード, chosaItakusakiCode, chosainCode);
+                shoKisaiHokenshaNo, shishoCode, chosaItakusakiCode, chosainCode);
         List<WaritsukeBusiness> 割付済み申請者一覧 = NinnteiChousairaiFinder.createInstance().getWaritsuke(parameter).records();
-        getHandler(div).set割付済み申請者一覧(割付済み申請者一覧, row.getHokenshaName());
-        parameter = NinnteiChousairaiParameter.createParam調査委託先Or未割付申請者(保険者番号, 支所コード);
+        getHandler(div).set割付済み申請者一覧(割付済み申請者一覧, hokenshaName);
+        parameter = NinnteiChousairaiParameter.createParam調査委託先Or未割付申請者(shoKisaiHokenshaNo, shishoCode);
         List<WaritsukeBusiness> 未割付申請者一覧 = NinnteiChousairaiFinder.createInstance().getShiteWaritsuke(parameter).records();
-        getHandler(div).set未割付申請者一覧(未割付申請者一覧, row.getHokenshaName());
+        getHandler(div).set未割付申請者一覧(未割付申請者一覧, hokenshaName);
 
-        parameter = NinnteiChousairaiParameter.createParam調査委託先Or未割付申請者(保険者番号, 支所コード);
+        parameter = NinnteiChousairaiParameter.createParam調査委託先Or未割付申請者(shoKisaiHokenshaNo, shishoCode);
         List<WaritsukeBusiness> 未割付再依頼一覧 = NinnteiChousairaiFinder.createInstance().getShiteWaritsukeSai(parameter).records();
-        getHandler(div).set未割付申請者一覧(未割付再依頼一覧, row.getHokenshaName());
+        getHandler(div).set未割付申請者一覧(未割付再依頼一覧, hokenshaName);
 
-        parameter = NinnteiChousairaiParameter.createParamfor割付済み申請者一覧(保険者番号, 支所コード, chosaItakusakiCode, chosainCode);
+        parameter = NinnteiChousairaiParameter.createParamfor割付済み申請者一覧(shoKisaiHokenshaNo, shishoCode, chosaItakusakiCode, chosainCode);
         List<NinteichosaIraiJohoRelateBusiness> 割付済み一覧 = NinnteiChousairaiFinder.createInstance().getNinteichosaIraiJohoList(parameter).records();
         List<NinteiKanryoJoho> ninteiKanryoJohoList = new ArrayList<>();
         List<NinteichosaIraiJoho> ninteichosaIraiJohoList = new ArrayList<>();
@@ -165,8 +174,6 @@ public class NinteiChosaIrai {
         }
         ViewStateHolder.put(ViewStateKeys.検索結果_認定調査依頼情報, Models.create(ninteichosaIraiJohoList));
         ViewStateHolder.put(ViewStateKeys.検索結果_要介護認定完了情報, Models.create(ninteiKanryoJohoList));
-        getHandler(div).init印刷条件DIV();
-        return ResponseData.of(div).respond();
     }
 
     /**
@@ -310,7 +317,7 @@ public class NinteiChosaIrai {
      * @return ResponseData<NinteiChosaIraiDiv>
      */
     public ResponseData<NinteiChosaIraiDiv> onClick_btnHozon(NinteiChosaIraiDiv div) {
-        if (!getHandler(div).isUpdateForHozon()) {
+        if (!ResponseHolder.isReRequest() && !getHandler(div).isUpdateForHozon()) {
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         }
         if (!ResponseHolder.isReRequest()) {
@@ -322,6 +329,8 @@ public class NinteiChosaIrai {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             inertNinteichosaIraiJoho(div);
             updateNinteichosaIraiJoho(div);
+            RString 調査員コード = ViewStateHolder.get(ViewStateKeys.調査員コード, RString.class);
+            setData(div, new ChosainCode(調査員コード));
             return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
         // TODO 内部QA560 Redmine：#74750    (完了メッセージの表示方式が知らない)

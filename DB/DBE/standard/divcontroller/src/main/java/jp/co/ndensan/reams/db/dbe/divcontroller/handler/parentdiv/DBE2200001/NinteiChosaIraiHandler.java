@@ -130,9 +130,14 @@ public class NinteiChosaIraiHandler {
             row.setChosaItakusakiJusho(nullToEmpty(business.getJusho()));
             row.setChosaItakusakiTelNo(business.getTelNo() == null ? RString.EMPTY : business.getTelNo().value());
             row.setChosaItakusakiKubun(nullToEmpty(business.getKikanKubun()));
-            // TODO　内部QA：523 Redmine：#74276（市町村コードと市町村名称の取得方式は不確定です）
-            row.setHokenshaCode(nullToEmpty(市町村コード));
-            row.setHokenshaName(nullToEmpty(市町村名称));
+            if (is単一保険者()) {
+                row.setHokenshaCode(nullToEmpty(市町村コード));
+                row.setHokenshaName(nullToEmpty(市町村名称));
+            } else {
+                row.setHokenshaCode(business.getShichosonCode() == null ? RString.EMPTY : business.getShichosonCode().value());
+                row.setHokenshaName(nullToEmpty(business.getShichosonMeisho()));
+            }
+
             dataSource.add(row);
         }
         div.getDgChosaItakusakiIchiran().getFilterList().clear();
@@ -204,7 +209,7 @@ public class NinteiChosaIraiHandler {
             }
             row.setZenkaiChosaItakusaki(nullToEmpty(business.getTemp_jigyoshaMeisho()));
             row.setZenkaiNinteiChosainShimei(nullToEmpty(business.getTemp_chosainShimei()));
-            row.setHokensha(hokenshaName);
+            row.setHokensha(nullToEmpty(hokenshaName));
             if (business.getChosaKubun() != null) {
                 row.setChosaKubun(ChosaKubun.toValue(business.getChosaKubun().value()).get名称());
             }
@@ -355,7 +360,7 @@ public class NinteiChosaIraiHandler {
                 row.setChosaKubun(ChosaKubun.toValue(business.getChosaKubun().value()).get名称());
             }
 
-            row.setHokensha(hokenshaName);
+            row.setHokensha(nullToEmpty(hokenshaName));
             if (business.getJusho() != null) {
                 row.setJusho(business.getJusho().value());
             }

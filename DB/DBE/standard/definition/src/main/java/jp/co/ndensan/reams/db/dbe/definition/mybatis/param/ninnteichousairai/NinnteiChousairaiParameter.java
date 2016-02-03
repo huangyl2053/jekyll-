@@ -95,7 +95,7 @@ public final class NinnteiChousairaiParameter {
         if (shishoCode == null || shishoCode.isEmpty()) {
             uses支所コード = false;
         }
-        if (ninteiChosainCode == null) {
+        if (ninteiChosainCode == null || ninteiChosainCode.value() == null) {
             uses調査員コード = false;
         }
         return new NinnteiChousairaiParameter(shoKisaiHokenshaNo, shishoCode, ninteichosaItakusakiCode, ninteiChosainCode, uses支所コード, uses調査員コード);
