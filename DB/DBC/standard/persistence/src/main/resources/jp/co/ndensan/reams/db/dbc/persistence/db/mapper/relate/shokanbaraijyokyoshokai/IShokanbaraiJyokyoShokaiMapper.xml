@@ -87,9 +87,9 @@
             AND BASIC."yoshikiNo" = #{yoshikiNo}
         ORDER BY
             BASIC."jigyoshaNo" ASC
-            ,KAIGOB."jigyoshaName"
-            ,BASIC."meisaiNo"
-            ,SHIKIBETSUB."ryakusho"   
+            ,KAIGOB."jigyoshaName" ASC
+            ,BASIC."meisaiNo" ASC
+            ,SHIKIBETSUB."ryakusho" ASC
     </select>
     
     <resultMap id="resultMap_ShokanMeisaiEntity"
