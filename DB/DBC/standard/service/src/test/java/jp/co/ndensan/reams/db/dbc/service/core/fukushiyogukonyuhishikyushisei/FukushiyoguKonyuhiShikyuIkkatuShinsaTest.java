@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.service.core.shokanfukushiyoguhanbaihi;
+package jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.ShokanShinseiEntityGenerator;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfukushiyoguhanbaihi.ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -21,16 +21,16 @@ import static org.mockito.Mockito.mock;
  *
  * @author chenaoqi
  */
-public class FukushiyoguKonyuhiShikyuIkkatuShinsaManagerTest extends DbcTestBase {
+public class FukushiyoguKonyuhiShikyuIkkatuShinsaTest extends DbcTestBase {
 
-    private FukushiyoguKonyuhiShikyuIkkatuShinsaManager sut;
+    private FukushiyoguKonyuhiShikyuIkkatuShinsa sut;
     private FlexibleDate 決定日;
     private List<ShokanShinseiEntity> 支給申請一括審査List;
 
     @Before
     public void setUp() {
 
-        sut = mock(FukushiyoguKonyuhiShikyuIkkatuShinsaManager.class);
+        sut = mock(FukushiyoguKonyuhiShikyuIkkatuShinsa.class);
 
     }
 

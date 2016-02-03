@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.service.core.shokanfukushiyoguhanbaihi;
+package jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,18 +15,17 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyushinseishinsa.ShikyushinseiShinsaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinnsanaiyo.ShinsaNaiyoKubun;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanfukushiyoguhanbaihi.ShokanFukushiYoguHanbaihiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShokanFukushiYoguHanbaihiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukeiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfukushiyoguhanbaihi.ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3034ShokanShinseiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3036ShokanHanteiKekkaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3053ShokanShukeiDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanfukushiyoguhanbaihi.IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyuhishikyushisei.IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuGendogaku;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -38,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @author chenaoqi
  */
-public class FukushiyoguKonyuhiShikyuIkkatuShinsaManager {
+public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
 
     private final MapperProvider mapperProvider;
     private final DbT3034ShokanShinseiDac 償還払支給申請Dac;
@@ -51,7 +50,7 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsaManager {
     /**
      * コンストラクタです。
      */
-    FukushiyoguKonyuhiShikyuIkkatuShinsaManager() {
+    FukushiyoguKonyuhiShikyuIkkatuShinsa() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         償還払支給申請Dac = InstanceProvider.create(DbT3034ShokanShinseiDac.class);
         償還払支給判定結果Dac = InstanceProvider.create(DbT3036ShokanHanteiKekkaDac.class);
@@ -65,7 +64,7 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsaManager {
      *
      * @param mapperProvider
      */
-    FukushiyoguKonyuhiShikyuIkkatuShinsaManager(MapperProvider mapperProvider,
+    FukushiyoguKonyuhiShikyuIkkatuShinsa(MapperProvider mapperProvider,
             DbT3034ShokanShinseiDac 償還払支給申請Dac,
             DbT3036ShokanHanteiKekkaDac 償還払支給判定結果Dac,
             DbT3053ShokanShukeiDac 償還払集計Dac,
@@ -83,10 +82,10 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsaManager {
     /**
      * {@link InstanceProvider#create}により生成されたインタフェースを返します。
      *
-     * @return {@link InstanceProvider#create}により生成された{@link FukushiyoguKonyuhiShikyuIkkatuShinsaManager}
+     * @return {@link InstanceProvider#create}により生成された{@link FukushiyoguKonyuhiShikyuIkkatuShinsa}
      */
-    public static FukushiyoguKonyuhiShikyuIkkatuShinsaManager createInstance() {
-        return InstanceProvider.create(FukushiyoguKonyuhiShikyuIkkatuShinsaManager.class);
+    public static FukushiyoguKonyuhiShikyuIkkatuShinsa createInstance() {
+        return InstanceProvider.create(FukushiyoguKonyuhiShikyuIkkatuShinsa.class);
     }
 
     /**

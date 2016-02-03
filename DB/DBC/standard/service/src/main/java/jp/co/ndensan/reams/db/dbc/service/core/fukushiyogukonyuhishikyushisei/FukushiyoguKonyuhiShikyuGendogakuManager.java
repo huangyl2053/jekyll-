@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.service.core.shokanfukushiyoguhanbaihi;
+package jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
@@ -258,7 +258,7 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
         DbT3017entity.setMaeHokenSeikyugaku(new Decimal(shokanShinseiEntity.getHokenKyufugaku()));
         DbT3017entity.setMaeHokenRiyoshaFutangaku(new Decimal(shokanShinseiEntity.getRiyoshaFutangaku()));
         DbT3017entity.setAtoHokenRiyoshaFutangaku(new Decimal(shokanShinseiEntity.getHokenKyufugaku()));
-        DbT3017entity.setAtoHokenRiyoshaFutangaku(new Decimal(shokanShinseiEntity.getHokenKyufugaku()));
+        DbT3017entity.setAtoHokenRiyoshaFutangaku(new Decimal(shokanShinseiEntity.getRiyoshaFutangaku()));
         DbT3017entity.setShinsaYM(shokanHanteiKekkaEntity.getKetteiYMD().getYearMonth());
         DbT3017entity.setSeiriNo(shokanKihonEntity.getSeiriNp());
         DbT3017entity.setSofuYM(shokanHanteiKekkaEntity.getKetteiYMD().getYearMonth());

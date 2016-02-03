@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei;
+package jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -20,9 +20,9 @@ import static org.mockito.Mockito.mock;
  *
  * @author chenaoqi
  */
-public class FukushiyoguKonyuhiShikyuGendogakuTest {
+public class FukushiyoguKonyuhiShikyuGendogakuValidateTest {
 
-    private FukushiyoguKonyuhiShikyuGendogaku sut;
+    private FukushiyoguKonyuhiShikyuGendogakuValidate sut;
     HihokenshaNo 被保険者番号;
     FlexibleYearMonth サービス提供年月;
     RString 整理番号;
@@ -33,7 +33,7 @@ public class FukushiyoguKonyuhiShikyuGendogakuTest {
 
     @Before
     public void setUp() {
-        sut = mock(FukushiyoguKonyuhiShikyuGendogaku.class);
+        sut = mock(FukushiyoguKonyuhiShikyuGendogakuValidate.class);
         被保険者番号 = new HihokenshaNo("");
         サービス提供年月 = new FlexibleYearMonth("");
         整理番号 = new RString("");
@@ -44,56 +44,56 @@ public class FukushiyoguKonyuhiShikyuGendogakuTest {
     }
 
     @Test
-    public void 被保険者番号がnullの場合_falseを返す() {
+    public void chkKonyuhiShikyuGendogaku_被保険者番号がnullの場合_falseを返す() {
         boolean flag = sut.chkKonyuhiShikyuGendogaku(null, サービス提供年月, 整理番号,
                 事業者番号, 様式番号, 明細番号, 今回の保険対象費用額);
         assertThat(flag, is(false));
     }
 
     @Test
-    public void サービス提供年月がnullの場合_falseを返す() {
+    public void chkKonyuhiShikyuGendogaku_サービス提供年月がnullの場合_falseを返す() {
         boolean flag = sut.chkKonyuhiShikyuGendogaku(被保険者番号, null, 整理番号,
                 事業者番号, 様式番号, 明細番号, 今回の保険対象費用額);
         assertThat(flag, is(false));
     }
 
     @Test
-    public void 事業者番号がnullの場合_falseを返す() {
+    public void chkKonyuhiShikyuGendogaku_事業者番号がnullの場合_falseを返す() {
         boolean flag = sut.chkKonyuhiShikyuGendogaku(被保険者番号, サービス提供年月, 整理番号,
                 null, 様式番号, 明細番号, 今回の保険対象費用額);
         assertThat(flag, is(false));
     }
 
     @Test
-    public void 様式番号がnullの場合_falseを返す() {
+    public void chkKonyuhiShikyuGendogaku_様式番号がnullの場合_falseを返す() {
         boolean flag = sut.chkKonyuhiShikyuGendogaku(被保険者番号, サービス提供年月, 整理番号,
                 事業者番号, null, 明細番号, 今回の保険対象費用額);
         assertThat(flag, is(false));
     }
 
     @Test
-    public void 明細番号がnullの場合_falseを返す() {
+    public void chkKonyuhiShikyuGendogaku_明細番号がnullの場合_falseを返す() {
         boolean flag = sut.chkKonyuhiShikyuGendogaku(被保険者番号, サービス提供年月, 整理番号,
                 事業者番号, 様式番号, null, 今回の保険対象費用額);
         assertThat(flag, is(false));
     }
 
     @Test
-    public void 今回の保険対象費用額がnullの場合_falseを返す() {
+    public void chkKonyuhiShikyuGendogaku_今回の保険対象費用額がnullの場合_falseを返す() {
         boolean flag = sut.chkKonyuhiShikyuGendogaku(被保険者番号, サービス提供年月, 整理番号,
                 事業者番号, 様式番号, 明細番号, null);
         assertThat(flag, is(false));
     }
 
     @Test
-    public void 整理番号がnullの場合_falseを返す() {
+    public void chkKonyuhiShikyuGendogaku_整理番号がnullの場合_falseを返す() {
         boolean flag = sut.chkKonyuhiShikyuGendogaku(被保険者番号, サービス提供年月, null,
                 事業者番号, 様式番号, 明細番号, 今回の保険対象費用額);
         assertThat(flag, is(false));
     }
 
     @Test
-    public void 整理番号がnullないの場合_falseを返す() {
+    public void chkKonyuhiShikyuGendogaku_整理番号がnullないの場合_falseを返す() {
         boolean flag = sut.chkKonyuhiShikyuGendogaku(被保険者番号, サービス提供年月, 整理番号,
                 事業者番号, 様式番号, 明細番号, 今回の保険対象費用額);
         assertThat(flag, is(false));

@@ -2,11 +2,11 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--  -->
 
-<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanfukushiyoguhanbaihi.IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyuhishikyushisei.IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper">
                     
     <select id="select未審査申請"
             resultMap="resultMap_ShokanShinseiEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanfukushiyoguhanbaihi.ShokanFukushiYoguHanbaihiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShokanFukushiYoguHanbaihiParameter" fetchSize="500">
         SELECT
         ShokanKihon."hiHokenshaNo",
         ShokanKihon."serviceTeikyoYM",
@@ -48,7 +48,7 @@
     </select>
         
     <resultMap id="resultMap_ShokanShinseiEntity" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfukushiyoguhanbaihi.ShokanShinseiEntity">
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.ShokanShinseiEntity">
         <id property="hiHokenshaNo" column="hiHokenshaNo" 
             typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="serviceTeikyoYM" column="serviceTeikyoYM"
