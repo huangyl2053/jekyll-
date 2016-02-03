@@ -87,6 +87,10 @@ var DBA;
             Controls.prototype.btnKakunin = function () {
                 return new UZA.Button(this.convFiledName("btnKakunin"));
             };
+
+            Controls.prototype.btnTorikeshi = function () {
+                return new UZA.Button(this.convFiledName("btnTorikeshi"));
+            };
             return Controls;
         })();
         TaJushochiTokureishaKanri.Controls = Controls;

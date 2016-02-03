@@ -102,6 +102,10 @@ module DBA {
                 return new UZA.Button(this.convFiledName("btnKakunin"));
             }
 
+            public btnTorikeshi(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnTorikeshi"));
+            }
+
         }
 
      }
