@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoProperty extends ReportPropertyBase<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> {
 
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("title")));
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("改頁")));
 
     /**
      * インスタンスを生成します。
@@ -39,6 +39,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoProperty extends ReportProper
             BreakerCatalog<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> catalog) {
 
         return breakers.add(catalog.new SimplePageBreaker(
+
 
 
             PAGE_BREAK_KEYS){

@@ -51,7 +51,10 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoItem {
      * @param 出力順 出力順
      * @param 改頁 改頁
      */
-    public NinteiChosaTokusokuTaishoshaIchiranhyoItem(RString cityCode, RString cityName, RString listUpper1_1, RString listUpper1_2, RString listUpper2_1, RString listUpper2_2, RDate listShinseiYMD_1, RDate listTokusokujoHakkoYMD_1, RString listNo_1, RString kikanName, RString kikanJusho, RString name, RString kikanTel, RString 出力順, RString 集計, RString 改頁) {
+    public NinteiChosaTokusokuTaishoshaIchiranhyoItem(RString cityCode, RString cityName, RString listUpper1_1,
+            RString listUpper1_2, RString listUpper2_1, RString listUpper2_2, RDate listShinseiYMD_1,
+            RDate listTokusokujoHakkoYMD_1, RString listNo_1, RString kikanName, RString kikanJusho, RString name,
+            RString kikanTel, RString 出力順, RString 改頁) {
         this.cityCode = cityCode;
         this.cityName = cityName;
         this.listUpper1_1 = listUpper1_1;
