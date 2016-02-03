@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.ninteichosaschedule;
+package jp.co.ndensan.reams.db.dbe.business.core.ininteichosaschebusiness;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaschedule.INinteichosaScheduleRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
