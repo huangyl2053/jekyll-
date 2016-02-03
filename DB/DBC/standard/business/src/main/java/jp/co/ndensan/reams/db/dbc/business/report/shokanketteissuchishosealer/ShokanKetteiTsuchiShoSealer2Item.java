@@ -245,11 +245,36 @@ public class ShokanKetteiTsuchiShoSealer2Item {
      * @param 円4 円4
      * @param title タイトル
      * @param torikeshiShiharaibasho 取消支払場所
-     * @param gyoseiku2 行政区2
      * @param hihokenshaNo21 被保険者番号
+     * @param gyoseiku2 行政区2
      *
      */
-    public ShokanKetteiTsuchiShoSealer2Item(RString bunshoNo, RString hihokenshaName, RString hihokenshaNo1, RString hihokenshaNo2, RString hihokenshaNo3, RString hihokenshaNo4, RString hihokenshaNo5, RString hihokenshaNo6, RString hihokenshaNo7, RString hihokenshaNo8, RString hihokenshaNo9, RString hihokenshaNo10, RString uketsukeYMD, RString ketteiYMD, RString shiharaiGaku, RString taishoYM, RString kyufuShurui1, RString kyufuShurui2, RString kyufuShurui3, RString kekka, RString shikyuGaku, RString riyu1, RString riyu2, RString riyu3, RString shiharaiBasho, RString bankName, RString branchBankName, RString kouzaShu, RString kouzaNo, RString kouzaMeigi, RString 支払予定日, RString 整理番号, RString 決定通知書番号, RString shiharaiStartYMD, RString shiharaiEndYMD, RString shiharaiStartHMS, RString shiharaiEndHMS, RString karaFugo, RString tsuban, RString shumokuTitle, RString bangoTitle, RString hakkoYMD, RString denshiKoin, RString ninshoshaYakushokuMei, RString ninshoshaYakushokuMei1, RString koinMojiretsu, RString ninshoshaYakushokuMei2, RString ninshoshaShimeiKakenai, RString ninshoshaShimeiKakeru, RString koinShoryaku, RString yubinNo, RString jusho4, RString jushoText, RString jusho5, RString jusho6, RString katagakiText, RString katagaki3, RString katagakiSmall2, RString katagaki4, RString katagakiSmall1, RString shimei5, RString shimeiSmall2, RString shimeiText, RString meishoFuyo2, RString shimeiSmall1, RString dainoKubunMei, RString shimei6, RString meishoFuyo1, RString samabunShimeiText, RString kakkoLeft2, RString samabunShimei2, RString samabunShimeiSmall2, RString samaBun2, RString kakkoRight2, RString kakkoLeft1, RString samabunShimei1, RString samaBun1, RString kakkoRight1, RString samabunShimeiSmall1, RString customerBarCode, RString title2_1, RString title2_2_1, RString title2_2_2, RString title2_3_1, RString title2_3_2, RString title2_4, RString torikeshi1, RString torikeshi2, RString mochimono1, RString torikeshiMochimono1, RString mochimono2, RString torikeshiMochimono2, RString mochimono3, RString ShoHokenshaNo, RString ServiceYM, RString Tsuban2, RString torikeshiShiharaikikan, RString riyuTitle, RString 増減の理由, RString タイトル1, RString タイトル2, RString 当ページ, RString ページ総数, RString 被保険者氏名２, RString 通知文, RString 情報文, RString 円1, RString 円2, RString 円3, RString 円4, RString title, RString torikeshiShiharaibasho, RString hihokenshaNo21, RString gyoseiku2) {
+    public ShokanKetteiTsuchiShoSealer2Item(RString bunshoNo, RString hihokenshaName, RString hihokenshaNo1,
+            RString hihokenshaNo2, RString hihokenshaNo3, RString hihokenshaNo4, RString hihokenshaNo5,
+            RString hihokenshaNo6, RString hihokenshaNo7, RString hihokenshaNo8, RString hihokenshaNo9,
+            RString hihokenshaNo10, RString uketsukeYMD, RString ketteiYMD, RString shiharaiGaku,
+            RString taishoYM, RString kyufuShurui1, RString kyufuShurui2, RString kyufuShurui3,
+            RString kekka, RString shikyuGaku, RString riyu1, RString riyu2, RString riyu3,
+            RString shiharaiBasho, RString bankName, RString branchBankName, RString kouzaShu,
+            RString kouzaNo, RString kouzaMeigi, RString 支払予定日, RString 整理番号, RString 決定通知書番号,
+            RString shiharaiStartYMD, RString shiharaiEndYMD, RString shiharaiStartHMS, RString shiharaiEndHMS,
+            RString karaFugo, RString tsuban, RString shumokuTitle, RString bangoTitle, RString hakkoYMD,
+            RString denshiKoin, RString ninshoshaYakushokuMei, RString ninshoshaYakushokuMei1, RString koinMojiretsu,
+            RString ninshoshaYakushokuMei2, RString ninshoshaShimeiKakenai, RString ninshoshaShimeiKakeru,
+            RString koinShoryaku, RString yubinNo, RString jusho4, RString jushoText, RString jusho5,
+            RString jusho6, RString katagakiText, RString katagaki3, RString katagakiSmall2, RString katagaki4,
+            RString katagakiSmall1, RString shimei5, RString shimeiSmall2, RString shimeiText, RString meishoFuyo2,
+            RString shimeiSmall1, RString dainoKubunMei, RString shimei6, RString meishoFuyo1,
+            RString samabunShimeiText, RString kakkoLeft2, RString samabunShimei2, RString samabunShimeiSmall2,
+            RString samaBun2, RString kakkoRight2, RString kakkoLeft1, RString samabunShimei1, RString samaBun1,
+            RString kakkoRight1, RString samabunShimeiSmall1, RString customerBarCode, RString title2_1,
+            RString title2_2_1, RString title2_2_2, RString title2_3_1, RString title2_3_2, RString title2_4,
+            RString torikeshi1, RString torikeshi2, RString mochimono1, RString torikeshiMochimono1,
+            RString mochimono2, RString torikeshiMochimono2, RString mochimono3, RString ShoHokenshaNo,
+            RString ServiceYM, RString Tsuban2, RString torikeshiShiharaikikan, RString riyuTitle, RString 増減の理由,
+            RString タイトル1, RString タイトル2, RString 当ページ, RString ページ総数, RString 被保険者氏名２,
+            RString 通知文, RString 情報文, RString 円1, RString 円2, RString 円3, RString 円4, RString title,
+            RString torikeshiShiharaibasho, RString hihokenshaNo21, RString gyoseiku2) {
         this.bunshoNo = bunshoNo;
         this.hihokenshaName = hihokenshaName;
         this.hihokenshaNo1 = hihokenshaNo1;
@@ -360,7 +385,6 @@ public class ShokanKetteiTsuchiShoSealer2Item {
         this.円2 = 円2;
         this.円3 = 円3;
         this.円4 = 円4;
-
         this.title = title;
         this.torikeshiShiharaibasho = torikeshiShiharaibasho;
         this.hihokenshaNo21 = hihokenshaNo21;

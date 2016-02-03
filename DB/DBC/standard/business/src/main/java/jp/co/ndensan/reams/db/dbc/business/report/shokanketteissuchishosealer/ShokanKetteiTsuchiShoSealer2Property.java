@@ -14,12 +14,13 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）のプロパティです。
  *
  */
-public class ShokanKetteiTsuchiShoSealer2Property extends ReportPropertyBase<ShokanKetteiTsuchiShoSealer2ReportSource> {
+public class ShokanKetteiTsuchiShoSealer2Property
+        extends ReportPropertyBase<ShokanKetteiTsuchiShoSealer2ReportSource> {
 
     /**
      * インスタンスを生成します。
      */
     public ShokanKetteiTsuchiShoSealer2Property() {
-        super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100006_ShokanKetteiTsuchiShoSealer2.getReportId());
+        super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100006.getReportId());
     }
 }
