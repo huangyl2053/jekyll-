@@ -125,31 +125,37 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
             給付実績追加(識別コード, shokanKihonEntity, businessList,
                     shokanShinseiEntity, shokanHanteiKekkaEntity,
                     shokanShukeiEntity, 給付実績情報作成区分コード);
+            return;
         }
         if (モード_修正.equals(画面モード) || モード_差額登録.equals(画面モード)) {
+            requireNonNull(修正前支給区分, UrSystemErrorMessages.値がnull.getReplacedMessage("修正前支給区分"));
             if (修正前支給区分.equals(ShikyuFushikyuKubun.不支給.getコード())
                     && ShikyuFushikyuKubun.不支給.getコード().equals(shokanHanteiKekkaEntity.getShikyuHushikyuKetteiKubun())) {
+                return;
             }
-            if (修正前支給区分.equals(ShikyuFushikyuKubun.不支給.getコード())
+            if (ShikyuFushikyuKubun.不支給.getコード().equals(修正前支給区分)
                     && ShikyuFushikyuKubun.支給.getコード().equals(shokanHanteiKekkaEntity.getShikyuHushikyuKetteiKubun())) {
                 給付実績情報作成区分コード = new RString("1");
                 給付実績追加(識別コード, shokanKihonEntity, businessList,
                         shokanShinseiEntity, shokanHanteiKekkaEntity,
                         shokanShukeiEntity, 給付実績情報作成区分コード);
+                return;
             }
-            if (修正前支給区分.equals(ShikyuFushikyuKubun.支給.getコード())
+            if (ShikyuFushikyuKubun.支給.getコード().equals(修正前支給区分)
                     && ShikyuFushikyuKubun.支給.getコード().equals(shokanHanteiKekkaEntity.getShikyuHushikyuKetteiKubun())) {
                 給付実績情報作成区分コード = new RString("2");
                 給付実績追加(識別コード, shokanKihonEntity, businessList,
                         shokanShinseiEntity, shokanHanteiKekkaEntity,
                         shokanShukeiEntity, 給付実績情報作成区分コード);
+                return;
             }
-            if (修正前支給区分.equals(ShikyuFushikyuKubun.支給.getコード())
+            if (ShikyuFushikyuKubun.支給.getコード().equals(修正前支給区分)
                     && ShikyuFushikyuKubun.不支給.getコード().equals(shokanHanteiKekkaEntity.getShikyuHushikyuKetteiKubun())) {
                 給付実績情報作成区分コード = new RString("3");
                 給付実績追加(識別コード, shokanKihonEntity, businessList,
                         shokanShinseiEntity, shokanHanteiKekkaEntity,
                         shokanShukeiEntity, 給付実績情報作成区分コード);
+                return;
             }
         }
         if (モード_削除.equals(画面モード)) {
@@ -160,6 +166,7 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
                 給付実績追加(識別コード, shokanKihonEntity, businessList,
                         shokanShinseiEntity, shokanHanteiKekkaEntity,
                         shokanShukeiEntity, 給付実績情報作成区分コード);
+                return;
             }
         }
         if (モード_審査.equals(画面モード)) {
@@ -191,15 +198,15 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
             RString 給付実績情報作成区分コード) {
         requireNonNull(給付実績情報作成区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績情報作成区分コード"));
         RString 通し番号 = new RString("00");
-        // TODO
+        // TODO 疎通のため、ダミー値を設定する。
 //        RString 通し番号 = Saiban.get(SubGyomuCode.DBC介護給付,
 //                SaibanHanyokeyName.実績管理番号.getコード()).nextString();
-        if (通し番号 == null) {
+        if (null == 通し番号) {
             throw new IllegalArgumentException(UrErrorMessages.存在しない
                     .getMessage().replace("最新番号").evaluate());
         }
 
-        //TODO
+        //TODO 疎通のため、ダミー値を設定する。
         //List<IKojin> Kojin = ShikibetsuTaishoService.getKojinFinder().get個人s((IShikibetsuTaishoSearchKey) 識別コード);
         // FlexibleDate 生年月日YMD = (FlexibleDate) Kojin.get(0).get生年月日();
         //RString 性別コード = Kojin.get(0).get性別().getCode();
