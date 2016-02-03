@@ -48,7 +48,7 @@ public class BemmeisyoPrintService {
                         RDate.getNowDate(), assembler.getImageFolderPath());
                 BemmeisyoHeadItem headItem = new BemmeisyoHeadItem(
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei,
-                        // TODO
+                        // TODO 袁献輝　QA597、resファイルに認証者氏名がありません　2016/02/20。
                         //                        ninshoshaSourceBuilder.buildSource().ninshoshaShimei,
                         ninshoshaSourceBuilder.buildSource().denshiKoin,
                         ninshoshaSourceBuilder.buildSource().koinShoryaku,

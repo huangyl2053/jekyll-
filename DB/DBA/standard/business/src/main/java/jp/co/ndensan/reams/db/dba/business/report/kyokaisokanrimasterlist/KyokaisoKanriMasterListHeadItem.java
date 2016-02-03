@@ -17,7 +17,7 @@ import lombok.Getter;
 public class KyokaisoKanriMasterListHeadItem {
 
     private final RString printTimeStamp;
-    // TODO rseファイルにpageCountを存在しない。
+    // TODO 袁献輝 QA608、rseファイルにpageCountを存在しない　2016/02/20。
 //    private final RString pageCount;
     private final RString shichosonCode;
     private final RString shichosonName;
@@ -36,7 +36,6 @@ public class KyokaisoKanriMasterListHeadItem {
      * インスタンスを生成します。
      *
      * @param printTimeStamp 印刷日時
-     * @param pageCount ページ数
      * @param shichosonCode 市町村コード
      * @param shichosonName 市町村名
      * @param shutsuryokujun1 並び順１
@@ -52,8 +51,6 @@ public class KyokaisoKanriMasterListHeadItem {
      */
     public KyokaisoKanriMasterListHeadItem(
             RString printTimeStamp,
-            // TODO rseファイルにpageCountを存在しない。
-            //            RString pageCount,
             RString shichosonCode,
             RString shichosonName,
             RString shutsuryokujun1,
@@ -68,8 +65,6 @@ public class KyokaisoKanriMasterListHeadItem {
             RString kaipage5) {
 
         this.printTimeStamp = printTimeStamp;
-        // TODO rseファイルにpageCountを存在しない。
-//        this.pageCount = pageCount;
         this.shichosonCode = shichosonCode;
         this.shichosonName = shichosonName;
         this.shutsuryokujun1 = shutsuryokujun1;

@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.processprm.jyukirendotorokushalistbatch;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +30,15 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
     private boolean tekiyojogaishadaichoFLG;
     private RString shuturyokujunID;
     private RString loginId;
+    private List<Code> shutokuJiyu_Hihokensha;
+    private List<Code> tekiyoJiyu_TaTokureisha;
+    private List<Code> tekiyoJiyu_Jogaisha;
+    private List<Code> soshitsuJiyu_Hihokensha;
+    private List<Code> kaijoJiyu_TaTokureisha;
+    private List<Code> kaijoJiyu_Jogaisha;
+    private List<Code> henkoJiyu_Hihokensha;
+    private List<Code> jutokuTekiyo;
+    private List<Code> jutokuKaijo;
 
     /**
      * コンストラクタ。
@@ -61,6 +72,18 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
     }
 
     public JyukiRendoTorokushaListBatchMybatisParameter toJyukiRendoTorokushaListBatchMybatisParameter() {
-        return new JyukiRendoTorokushaListBatchMybatisParameter(konkaikaishiYMDHMS, konkaishuryoYMDHMS, loginId);
+        return new JyukiRendoTorokushaListBatchMybatisParameter(
+                konkaikaishiYMDHMS,
+                konkaishuryoYMDHMS,
+                loginId,
+                shutokuJiyu_Hihokensha,
+                tekiyoJiyu_TaTokureisha,
+                tekiyoJiyu_Jogaisha,
+                soshitsuJiyu_Hihokensha,
+                kaijoJiyu_TaTokureisha,
+                kaijoJiyu_Jogaisha,
+                henkoJiyu_Hihokensha,
+                jutokuTekiyo,
+                jutokuKaijo);
     }
 }

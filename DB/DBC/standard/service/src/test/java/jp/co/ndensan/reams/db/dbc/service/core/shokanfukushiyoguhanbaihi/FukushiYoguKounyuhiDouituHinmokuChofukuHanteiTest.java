@@ -19,6 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * 福祉用具購入費同一品目重複判定のTest
  *
  * @author chenaoqi
  */
@@ -51,14 +52,14 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHanteiTest extends DbcTestBa
 
     @Test
     public void chkHinmokuCodePerShinsei_品目コードが重複の場合_trueを返す() {
-        RString 品目コード = new RString("Data");
+        RString 品目コード = new RString("1");
         boolean flag = sut.chkHinmokuCodePerShinsei(品目コード, list);
         assertThat(flag, is(true));
     }
 
     @Test
-    public void chkHinmokuCodePerShinsei_品目コードが重複ないの場合_falseを返す() {
-        RString 品目コード = new RString("1");
+    public void chkHinmokuCodePerShinsei_品目コードが重複じゃないの場合_falseを返す() {
+        RString 品目コード = new RString("Data");
         boolean flag = sut.chkHinmokuCodePerShinsei(品目コード, list);
         assertThat(flag, is(false));
     }
@@ -67,7 +68,7 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHanteiTest extends DbcTestBa
     public void chkHinmokuCodePerYear_被保険者番号がnullの場合_falseを返す() {
         FlexibleYearMonth サービス提供年月 = DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_サービス提供年月;
         RString 整理番号 = DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_整理番号;
-        boolean flag = sut.chkHinmokuCodePerYear(null, サービス提供年月, 整理番号, list);
+        boolean flag = sut.chkHinmokuCodePerYear(null, サービス提供年月, list, 整理番号);
         assertThat(flag, is(false));
     }
 
@@ -75,7 +76,7 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHanteiTest extends DbcTestBa
     public void chkHinmokuCodePerYear_サービス提供年月がnullの場合_falseを返す() {
         HihokenshaNo 被保険者番号 = DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_被保険者番号;
         RString 整理番号 = DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_整理番号;
-        boolean flag = sut.chkHinmokuCodePerYear(被保険者番号, null, 整理番号, list);
+        boolean flag = sut.chkHinmokuCodePerYear(被保険者番号, null, list, 整理番号);
         assertThat(flag, is(false));
     }
 
@@ -84,15 +85,7 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHanteiTest extends DbcTestBa
         HihokenshaNo 被保険者番号 = DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_被保険者番号;
         FlexibleYearMonth サービス提供年月 = DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_サービス提供年月;
         RString 整理番号 = DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_整理番号;
-        boolean flag = sut.chkHinmokuCodePerYear(被保険者番号, サービス提供年月, 整理番号, null);
-        assertThat(flag, is(false));
-    }
-
-    @Test
-    public void chkHinmokuCodePerYear_整理番号がnullないの場合_falseを返す() {
-        HihokenshaNo 被保険者番号 = DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_被保険者番号;
-        FlexibleYearMonth サービス提供年月 = DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_サービス提供年月;
-        boolean flag = sut.chkHinmokuCodePerYear(被保険者番号, サービス提供年月, null, list);
+        boolean flag = sut.chkHinmokuCodePerYear(被保険者番号, サービス提供年月, null, 整理番号);
         assertThat(flag, is(false));
     }
 
@@ -100,8 +93,16 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHanteiTest extends DbcTestBa
     public void chkHinmokuCodePerYear_整理番号がnullの場合_falseを返す() {
         HihokenshaNo 被保険者番号 = DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_被保険者番号;
         FlexibleYearMonth サービス提供年月 = DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_サービス提供年月;
+        boolean flag = sut.chkHinmokuCodePerYear(被保険者番号, サービス提供年月, list, null);
+        assertThat(flag, is(false));
+    }
+
+    @Test
+    public void chkHinmokuCodePerYear_整理番号がnullじゃないの場合_falseを返す() {
+        HihokenshaNo 被保険者番号 = DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_被保険者番号;
+        FlexibleYearMonth サービス提供年月 = DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_サービス提供年月;
         RString 整理番号 = DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_整理番号;
-        boolean flag = sut.chkHinmokuCodePerYear(被保険者番号, サービス提供年月, 整理番号, list);
+        boolean flag = sut.chkHinmokuCodePerYear(被保険者番号, サービス提供年月, list, 整理番号);
         assertThat(flag, is(false));
     }
 }

@@ -15,6 +15,7 @@ import lombok.Getter;
 public class KoikinaiJushochitokureishaIchiranhyoItem {
 
     private final KoikinaiJushochitokureishaIchiranhyoHeadItem headItem;
+    private final KoikinaiJushochitokureishaIchiranhyoBodyItem bodyItem;
 
     /**
      * インスタンスを生成します。
@@ -23,7 +24,9 @@ public class KoikinaiJushochitokureishaIchiranhyoItem {
      * @param bodyItem 広域内住所地特例者一覧表
      */
     public KoikinaiJushochitokureishaIchiranhyoItem(
-            KoikinaiJushochitokureishaIchiranhyoHeadItem headItem) {
+            KoikinaiJushochitokureishaIchiranhyoHeadItem headItem,
+            KoikinaiJushochitokureishaIchiranhyoBodyItem bodyItem) {
         this.headItem = headItem;
+        this.bodyItem = bodyItem;
     }
 }

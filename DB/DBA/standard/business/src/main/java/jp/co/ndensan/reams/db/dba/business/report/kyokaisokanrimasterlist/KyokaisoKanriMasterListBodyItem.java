@@ -6,12 +6,7 @@
 package jp.co.ndensan.reams.db.dba.business.report.kyokaisokanrimasterlist;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 
 /**
@@ -21,24 +16,24 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KyokaisoKanriMasterListBodyItem {
 
-    private final List<HihokenshaNo> listUpper_1;
+    private final List<RString> listUpper_1;
     private final List<RString> listUpper_2;
     private final List<RString> listUpper_3;
     private final List<RString> listUpper_4;
     private final List<RString> listUpper_5;
-    private final List<FlexibleDate> listUpper_6;
-    private final List<FlexibleDate> listUpper_7;
+    private final List<RString> listUpper_6;
+    private final List<RString> listUpper_7;
     private final List<RString> listUpper_8;
     private final List<RString> listUpper_9;
-    private final List<ShikibetsuCode> listLower_1;
+    private final List<RString> listLower_1;
     private final List<RString> listLower_2;
-    private final List<SetaiCode> listLower_3;
-    private final List<FlexibleDate> listLower_4;
-    private final List<FlexibleDate> listLower_5;
-    private final List<Decimal> listLower_6;
-    private final List<Decimal> listLower_7;
-    private final List<Decimal> listLower_8;
-    private final List<Decimal> listLower_9;
+    private final List<RString> listLower_3;
+    private final List<RString> listLower_4;
+    private final List<RString> listLower_5;
+    private final List<RString> listLower_6;
+    private final List<RString> listLower_7;
+    private final List<RString> listLower_8;
+    private final List<RString> listLower_9;
     private final List<RString> listLower_10;
 
     /**
@@ -65,24 +60,24 @@ public class KyokaisoKanriMasterListBodyItem {
      * @param listLower_10 納付額低減後所得段階
      */
     public KyokaisoKanriMasterListBodyItem(
-            List<HihokenshaNo> listUpper_1,
+            List<RString> listUpper_1,
             List<RString> listUpper_2,
             List<RString> listUpper_3,
             List<RString> listUpper_4,
             List<RString> listUpper_5,
-            List<FlexibleDate> listUpper_6,
-            List<FlexibleDate> listUpper_7,
+            List<RString> listUpper_6,
+            List<RString> listUpper_7,
             List<RString> listUpper_8,
             List<RString> listUpper_9,
-            List<ShikibetsuCode> listLower_1,
+            List<RString> listLower_1,
             List<RString> listLower_2,
-            List<SetaiCode> listLower_3,
-            List<FlexibleDate> listLower_4,
-            List<FlexibleDate> listLower_5,
-            List<Decimal> listLower_6,
-            List<Decimal> listLower_7,
-            List<Decimal> listLower_8,
-            List<Decimal> listLower_9,
+            List<RString> listLower_3,
+            List<RString> listLower_4,
+            List<RString> listLower_5,
+            List<RString> listLower_6,
+            List<RString> listLower_7,
+            List<RString> listLower_8,
+            List<RString> listLower_9,
             List<RString> listLower_10) {
 
         this.listUpper_1 = listUpper_1;

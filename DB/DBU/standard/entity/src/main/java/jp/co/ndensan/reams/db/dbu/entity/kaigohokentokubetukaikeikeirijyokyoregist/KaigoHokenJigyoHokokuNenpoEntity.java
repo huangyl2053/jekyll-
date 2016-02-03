@@ -31,9 +31,6 @@ public class KaigoHokenJigyoHokokuNenpoEntity {
     private Code 表番号;
     private Code 集計番号;
     private Code 集計単位;
-    private Decimal 縦番号;
-    private Decimal 横番号;
-    private Decimal 集計結果値;
     private RString 集計項目名称;
     private Code 縦項目コード;
     private Code 横項目コード;

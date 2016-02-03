@@ -39,14 +39,6 @@ public class BemmeisyoProperty extends ReportPropertyBase<BemmeisyoReportSource>
             BreakerCatalog<BemmeisyoReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
 
-
-
-
-
-
-
-
-
             PAGE_BREAK_KEYS) {
             @Override
             public ReportLineRecord<BemmeisyoReportSource> occuredBreak(

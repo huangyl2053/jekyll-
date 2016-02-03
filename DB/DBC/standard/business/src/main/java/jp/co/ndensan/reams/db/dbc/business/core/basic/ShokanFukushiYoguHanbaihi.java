@@ -8,25 +8,22 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求福祉用具販売費を管理するクラスです。
  */
-public class ShokanFukushiYoguHanbaihi 
-extends ModelBase<ShokanFukushiYoguHanbaihiIdentifier, 
-        DbT3048ShokanFukushiYoguHanbaihiEntity, 
-        ShokanFukushiYoguHanbaihi> implements Serializable {
+public class ShokanFukushiYoguHanbaihi
+        extends ModelBase<ShokanFukushiYoguHanbaihiIdentifier, DbT3048ShokanFukushiYoguHanbaihiEntity, ShokanFukushiYoguHanbaihi> implements Serializable {
 
     private final DbT3048ShokanFukushiYoguHanbaihiEntity entity;
     private final ShokanFukushiYoguHanbaihiIdentifier id;
@@ -49,7 +46,7 @@ extends ModelBase<ShokanFukushiYoguHanbaihiIdentifier,
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 順次番号,
-            Decimal 履歴番号) {
+            RString 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
@@ -63,8 +60,8 @@ extends ModelBase<ShokanFukushiYoguHanbaihiIdentifier,
         this.entity.setSeiriNo(整理番号);
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
-        this.entity.setJunjiNo(順次番号);
-        this.entity.setRirekiNo(履歴番号);
+        this.entity.setMeisaiNo(順次番号);
+        this.entity.setRenban(履歴番号);
         this.id = new ShokanFukushiYoguHanbaihiIdentifier(
                 被保険者番号,
                 サービス提供年月,
@@ -90,8 +87,8 @@ extends ModelBase<ShokanFukushiYoguHanbaihiIdentifier,
                 entity.getSeiriNo(),
                 entity.getJigyoshaNo(),
                 entity.getYoshikiNo(),
-                entity.getJunjiNo(),
-                entity.getRirekiNo());
+                entity.getMeisaiNo(),
+                entity.getRenban());
     }
 
     /**
@@ -160,7 +157,8 @@ extends ModelBase<ShokanFukushiYoguHanbaihiIdentifier,
      * @return 順次番号
      */
     public RString get順次番号() {
-        return entity.getJunjiNo();
+        return entity.getMeisaiNo();
+
     }
 
     /**
@@ -168,8 +166,8 @@ extends ModelBase<ShokanFukushiYoguHanbaihiIdentifier,
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
-        return entity.getRirekiNo();
+    public RString get履歴番号() {
+        return entity.getRenban();
     }
 
     /**

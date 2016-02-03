@@ -7,16 +7,18 @@ package jp.co.ndensan.reams.db.dbe.business.report.chosaschedulehyojikankanri;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * 認定調査スケジュール表(時間管理)ボディのITEMです。
  */
 @Getter
+@Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ChosaSchedulehyoJikankanriBodyItem {
 
-    private final RString no;
+    private int no;
     private final RString tyousayinnNo;
     private final RString tyousayinnName;
     private final RString hihokennsyaNo;
@@ -30,7 +32,6 @@ public class ChosaSchedulehyoJikankanriBodyItem {
     /**
      * インスタンスを生成します。
      *
-     * @param no No
      * @param tyousayinnNo 調査員コード
      * @param tyousayinnName 調査員名
      * @param hihokennsyaNo 被保険者番号
@@ -42,7 +43,6 @@ public class ChosaSchedulehyoJikankanriBodyItem {
      * @param yoyakuJokyo 予約状況
      */
     public ChosaSchedulehyoJikankanriBodyItem(
-            RString no,
             RString tyousayinnNo,
             RString tyousayinnName,
             RString hihokennsyaNo,
@@ -53,7 +53,6 @@ public class ChosaSchedulehyoJikankanriBodyItem {
             RString ninteiChosaYoteiShuryoTime,
             RString yoyakuJokyo) {
 
-        this.no = no;
         this.tyousayinnNo = tyousayinnNo;
         this.tyousayinnName = tyousayinnName;
         this.hihokennsyaNo = hihokennsyaNo;

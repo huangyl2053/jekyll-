@@ -21,6 +21,12 @@ public class ChikuNinteiChosain implements Serializable {
 
     private final ChosainJohoRelateEntity entity;
 
+    /**
+     * コンストラクタです。<br/>
+     * DBより取得した{@link ChosainJohoRelateEntity}より{@link ChikuNinteiChosain}を生成します。
+     *
+     * @param entity DBより取得した{@link ChosainJohoRelateEntity}
+     */
     public ChikuNinteiChosain(ChosainJohoRelateEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査スケジュール詳細情報"));
     }

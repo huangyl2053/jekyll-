@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoD
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoSearchParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbuTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -36,16 +37,16 @@ public class IJigyoHokokuGeppoHoseiHakoMapperTest extends DbuTestDacBase {
     
     @Before
     public void setUp() {
-//        sqlSession.getConfiguration().addMapper(IJigyoHokokuGeppoHoseiHakoMapper.class);
+       sqlSession.getConfiguration().addMapper(IJigyoHokokuGeppoHoseiHakoMapper.class);
         mapper = sqlSession.getMapper(IJigyoHokokuGeppoHoseiHakoMapper.class);
     }
     
     @Test
     public void select事業報告集計一覧データ_null(){
         JigyoHokokuGeppoSearchParameter parameter = JigyoHokokuGeppoSearchParameter.createParameterForJigyoHokokuGeppo(FlexibleYear.MAX, RString.EMPTY, FlexibleYear.MAX, RString.EMPTY, LasdecCode.EMPTY);
-        List<DbT7021JigyoHokokuTokeiDataEntity> list = mapper.select事業報告集計一覧データ(parameter);
+        List<JigyoHokokuGeppoHoseiHakoEntity> list = mapper.select事業報告集計一覧データ(parameter);
         assertThat(list.size(), is(3));
-        assertThat(list.get(0).getHokokuM(), is(new RString("123")));
+        assertThat(list.get(0).getYoshiCode().toString(), is("123"));
     }
      @Test
     public void select報告年度様式種類_null(){
@@ -58,7 +59,7 @@ public class IJigyoHokokuGeppoHoseiHakoMapperTest extends DbuTestDacBase {
     
     @Test 
     public void update事業報告集計一覧データ_null(){
-        JigyoHokokuGeppoDataUpdateParameter parameter=JigyoHokokuGeppoDataUpdateParameter.createParameterForJigyoHokokuGeppoData(Code.EMPTY, Decimal.ONE, FlexibleYear.MAX, RString.EMPTY, FlexibleYear.MAX, RString.EMPTY, RString.EMPTY, LasdecCode.EMPTY, Code.EMPTY, Code.EMPTY, Decimal.ONE, Decimal.ONE);
+        JigyoHokokuGeppoDataUpdateParameter parameter=JigyoHokokuGeppoDataUpdateParameter.createParameterForJigyoHokokuGeppoData(Code.EMPTY, Decimal.ZERO, FlexibleYear.MAX, RString.EMPTY, FlexibleYear.MAX, RString.EMPTY, RString.EMPTY, LasdecCode.EMPTY, Code.EMPTY, Code.EMPTY, Decimal.ONE, Decimal.ONE, RString.EMPTY, RString.EMPTY);
         int i=mapper.update事業報告集計一覧データ(parameter);
         assertThat(i,is(1));
         

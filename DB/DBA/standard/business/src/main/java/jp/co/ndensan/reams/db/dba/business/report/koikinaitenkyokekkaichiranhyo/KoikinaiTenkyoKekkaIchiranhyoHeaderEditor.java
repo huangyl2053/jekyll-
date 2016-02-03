@@ -31,7 +31,6 @@ class KoikinaiTenkyoKekkaIchiranhyoHeaderEditor implements IKoikinaiTenkyoKekkaI
     private KoikinaiTenkyoKekkaIchiranhyoReportSource editHeader(KoikinaiTenkyoKekkaIchiranhyoReportSource source) {
 
         source.printTimeStamp = item.get印刷日時();
-//        source.pageCount = item.getページ数();
         source.shichosonCode = item.get市町村コード();
         source.shichosonName = item.get市町村名();
         return source;

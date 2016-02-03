@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.business.report.koikinaijushochitokureishaich
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.definition.reportId.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -23,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  */
 public class KoikinaiJushochitokureishaIchiranhyoProperty extends ReportPropertyBase<KoikinaiJushochitokureishaIchiranhyoReportSource> {
 
-    private static final ReportId ID = new ReportId("DBA200013");
+    private static final ReportId ID = ReportIdDBA.DBA200013.getReportId();
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("listUpper_1")));
 
     /**

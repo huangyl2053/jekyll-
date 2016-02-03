@@ -87,7 +87,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     }
 
     /**
-     * 主キーで抽出調定日時を取得します。
+     * 抽出調定日時を取得します。
      *
      * @param サブ業務コード subGyomuCode
      * @param 処理名 shoriName
@@ -96,7 +96,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT7022ShoriDateKanriEntity selectByKey(
+    public DbT7022ShoriDateKanriEntity selectChoteiNiji(
             SubGyomuCode サブ業務コード,
             RString 処理名,
             FlexibleYear 年度) throws NullPointerException {

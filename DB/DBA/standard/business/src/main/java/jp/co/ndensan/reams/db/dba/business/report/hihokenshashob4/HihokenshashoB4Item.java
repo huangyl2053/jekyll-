@@ -11,7 +11,7 @@ import lombok.Getter;
 
 /**
  *
- * 一覧表証発行者Entityリストです。
+ * 介護保険被保険者証（B4版）Entityリストです。
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

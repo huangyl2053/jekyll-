@@ -60,7 +60,6 @@ public class ShinseiDetail {
 //        div.getPanelUp().getCcdKaigoAtenaInfo().load(識別コード);
         //介護資格系基本情報」共有子Div の初期化
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            // TODO load----initialize
             div.getPanelUp().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         } else {
             div.getPanelUp().getCcdKaigoAtenaInfo().setVisible(false);

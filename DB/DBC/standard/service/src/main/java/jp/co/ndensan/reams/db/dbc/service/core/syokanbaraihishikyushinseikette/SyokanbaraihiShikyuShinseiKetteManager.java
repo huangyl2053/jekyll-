@@ -7,11 +7,9 @@ package jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette;
 
 import java.util.ArrayList;
 import java.util.List;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraishikyukettekyufujssekihensyu.KyufujissekiEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.nyuryokushikibetsuno.NyuryokuShikibetsuNoShokan3Keta;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.Dbt3034ShokanShinseiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanFukushigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanKinkyuShisetsuRyoyoEntity;
@@ -80,7 +78,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomo
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -144,8 +142,9 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link SyokanbaraihiShikyuShinseiKetteManager}のインスタンスを返します。
      *
-     * @return FukushiyoguKonyuhiShikyuGendogakuManager
+     * @return {@link InstanceProvider#create}にて生成した{@link SyokanbaraihiShikyuShinseiKetteManager}のインスタンス
      */
     public static SyokanbaraihiShikyuShinseiKetteManager createInstance() {
 
@@ -268,13 +267,14 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @return 整理番号
      */
     public RString insDbT3034ShokanShinsei(ShokanShinseiParameter parameter) {
+
         RString 整理番号
                 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.実績管理番号.getコード()).nextString();
 
         DbT3034ShokanShinseiEntity entity = new DbT3034ShokanShinseiEntity();
         entity.setHiHokenshaNo(parameter.get被保険者番号());
         entity.setServiceTeikyoYM(parameter.get提供購入年月());
-        entity.setSeiriNo(parameter.get取得された整理番号());
+        entity.setSeiriNo(整理番号);
         entity.setShoKisaiHokenshaNo(parameter.get証記載保険者番号());
         entity.setUketsukeYMD(parameter.get受付年月日());
         entity.setShinseiYMD(parameter.get申請日());
@@ -282,13 +282,15 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         entity.setShinseishaKubun(parameter.get申請者区分());
         entity.setShinseishaNameKanji(parameter.get氏名());
         entity.setShinseishaNameKana(parameter.get氏名カナ());
+        entity.setShinseishaTelNo(parameter.get電話番号());
         entity.setShiharaiKingakuTotal(parameter.get支払金額合計());
         entity.setHokenTaishoHiyogaku(parameter.get支払金額合計());
         entity.setHokenKyufuritsu(parameter.get保険給付額());
         entity.setRiyoshaFutangaku(parameter.get利用者給付額());
-        entity.setShikyuShinseiShinsaKubun(parameter.getDBC介護給付());
-        entity.setShinsaHohoKubun(parameter.getDBC介護給付コンフィグ());
-        entity.setKokuhorenSaisofuFlag(parameter.isFALSE());
+        entity.setShikyuShinseiShinsaKubun(parameter.get支給申請審査区分());
+        entity.setShinsaHohoKubun(parameter.get審査方法区分());
+        entity.setKokuhorenSaisofuFlag(parameter.is国保連再送付フラグ());
+        entity.setState(EntityDataState.Added);
         償還払支給申請Dac.save(entity);
         return 整理番号;
     }
@@ -298,13 +300,12 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      *
      * @param parameter
      */
-    public void updDbT3034ShokanShinsei(ShokanShinseiParameter parameter) {
-        requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage("Parameter"));
-        DbT3034ShokanShinseiEntity entity = new DbT3034ShokanShinseiEntity();
+    public int updDbT3034ShokanShinsei(ShokanShinseiParameter parameter) {
 
+        DbT3034ShokanShinseiEntity entity = new DbT3034ShokanShinseiEntity();
         entity.setHiHokenshaNo(parameter.get被保険者番号());
         entity.setServiceTeikyoYM(parameter.get提供購入年月());
-        entity.setSeiriNo(parameter.get取得された整理番号());
+        entity.setSeiriNo(parameter.get整理番号());
         entity.setShoKisaiHokenshaNo(parameter.get証記載保険者番号());
         entity.setUketsukeYMD(parameter.get受付年月日());
         entity.setShinseiYMD(parameter.get申請日());
@@ -312,11 +313,11 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         entity.setShinseishaKubun(parameter.get申請者区分());
         entity.setShinseishaNameKanji(parameter.get氏名());
         entity.setShinseishaNameKana(parameter.get氏名カナ());
+        entity.setShinseishaTelNo(parameter.get電話番号());
         entity.setShiharaiKingakuTotal(parameter.get支払金額合計());
         entity.setHokenTaishoHiyogaku(parameter.get支払金額合計());
+        entity.setHokenKyufuritsu(parameter.get保険給付額());
         entity.setRiyoshaFutangaku(parameter.get利用者給付額());
-        entity.setShikyuShinseiShinsaKubun(parameter.getDBC介護給付());
-        entity.setShinsaHohoKubun(parameter.getDBC介護給付コンフィグ());
         entity.setShiharaiHohoKubunCode(parameter.get選択された支払方法コード());
         entity.setShiharaiBasho(parameter.get支払場所());
         entity.setShiharaiKaishiYMD(parameter.get支払期間開始年月日());
@@ -325,151 +326,155 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         entity.setShiharaiShuryoTime(parameter.get支払窓口終了時間());
         entity.setKozaID(parameter.get口座ID());
         entity.setJuryoininKeiyakuNo(parameter.get受領委任契約番号());
-        償還払支給申請Dac.save(entity);
+        entity.setState(EntityDataState.Modified);
+        return 償還払支給申請Dac.save(entity);
     }
 
     /**
      * 支給申請削除
      *
-     * @param parameter
+     * @param 被保険者番号
+     * @param サービス提供年月
+     * @param 整理番号
+     * @param 識別コード
      */
-    public void delDbT3034ShokanShinsei(Dbt3034ShokanShinseiParameter parameter) {
+    public void delDbT3034ShokanShinsei(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            ShikibetsuCode 識別コード) {
         boolean 給付実績処理フラグ;
         KyufujissekiEntity Kyufuentity = null;
-        DbT3036ShokanHanteiKekkaEntity entity = 償還払支給判定結果Dac.selectByKey(parameter.get被保険者番号(),
-                parameter.getサービス提供年月(), parameter.get整理番号());
+        DbT3036ShokanHanteiKekkaEntity entity = 償還払支給判定結果Dac.selectByKey(被保険者番号,
+                サービス提供年月, 整理番号);
         if (entity == null) {
             給付実績処理フラグ = false;
         } else {
-            Kyufuentity = getKyufujisseki(parameter.get被保険者番号(),
-                    parameter.getサービス提供年月(), parameter.get整理番号());
-            entity.setHiHokenshaNo(parameter.get被保険者番号());
-            entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-            entity.setSeiriNo(parameter.get整理番号());
+            Kyufuentity = getKyufujisseki(被保険者番号, サービス提供年月, 整理番号);
+            entity.setHiHokenshaNo(被保険者番号);
+            entity.setServiceTeikyoYM(サービス提供年月);
+            entity.setSeiriNo(整理番号);
             entity.setState(EntityDataState.Deleted);
             償還払支給判定結果Dac.save(entity);
             給付実績処理フラグ = true;
         }
         DbT3038ShokanKihonEntity DbT3038entity = new DbT3038ShokanKihonEntity();
-        DbT3038entity.setHiHokenshaNo(parameter.get被保険者番号());
-        DbT3038entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-        DbT3038entity.setSeiriNp(parameter.get整理番号());
+        DbT3038entity.setHiHokenshaNo(被保険者番号);
+        DbT3038entity.setServiceTeikyoYM(サービス提供年月);
+        DbT3038entity.setSeiriNp(整理番号);
         DbT3038entity.setState(EntityDataState.Deleted);
         償還払請求基本Dac.save(DbT3038entity);
 
         DbT3107ShokanMeisaiJushochiTokureiEntity DbT3107entity = new DbT3107ShokanMeisaiJushochiTokureiEntity();
-        DbT3107entity.setHiHokenshaNo(parameter.get被保険者番号());
-        DbT3107entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-        DbT3107entity.setSeiriNp(parameter.get整理番号());
+        DbT3107entity.setHiHokenshaNo(被保険者番号);
+        DbT3107entity.setServiceTeikyoYM(サービス提供年月);
+        DbT3107entity.setSeiriNp(整理番号);
         DbT3107entity.setState(EntityDataState.Deleted);
         住所地特例Dac.save(DbT3107entity);
 
         DbT3039ShokanMeisaiEntity DbT3039entity = new DbT3039ShokanMeisaiEntity();
-        DbT3039entity.setHiHokenshaNo(parameter.get被保険者番号());
-        DbT3039entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-        DbT3039entity.setSeiriNp(parameter.get整理番号());
+        DbT3039entity.setHiHokenshaNo(被保険者番号);
+        DbT3039entity.setServiceTeikyoYM(サービス提供年月);
+        DbT3039entity.setSeiriNp(整理番号);
         DbT3039entity.setState(EntityDataState.Deleted);
         償還払請求明細Dac.save(DbT3039entity);
 
-        if (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth("200303"))) {
+        if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200303"))) {
             DbT3041ShokanTokuteiShinryohiEntity DbT3041entity = new DbT3041ShokanTokuteiShinryohiEntity();
-            DbT3041entity.setHiHokenshaNo(parameter.get被保険者番号());
-            DbT3041entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-            DbT3041entity.setSeiriNo(parameter.get整理番号());
+            DbT3041entity.setHiHokenshaNo(被保険者番号);
+            DbT3041entity.setServiceTeikyoYM(サービス提供年月);
+            DbT3041entity.setSeiriNo(整理番号);
             DbT3041entity.setState(EntityDataState.Deleted);
             償還払請求特定診療費Dac.save(DbT3041entity);
         } else {
             DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity DbT3042entity
                     = new DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity();
-            DbT3042entity.setHiHokenshaNo(parameter.get被保険者番号());
-            DbT3042entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-            DbT3042entity.setSeiriNo(parameter.get整理番号());
+            DbT3042entity.setHiHokenshaNo(被保険者番号);
+            DbT3042entity.setServiceTeikyoYM(サービス提供年月);
+            DbT3042entity.setSeiriNo(整理番号);
             DbT3042entity.setState(EntityDataState.Deleted);
             特別療養費Dac.save(DbT3042entity);
         }
 
-        if (new FlexibleYearMonth("200904").isBeforeOrEquals(parameter.getサービス提供年月())) {
+        if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス提供年月)) {
             DbT3047ShokanServicePlan200904Entity DbT3047entity = new DbT3047ShokanServicePlan200904Entity();
-            DbT3047entity.setHiHokenshaNo(parameter.get被保険者番号());
-            DbT3047entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-            DbT3047entity.setSeiriNp(parameter.get整理番号());
+            DbT3047entity.setHiHokenshaNo(被保険者番号);
+            DbT3047entity.setServiceTeikyoYM(サービス提供年月);
+            DbT3047entity.setSeiriNp(整理番号);
             DbT3047entity.setState(EntityDataState.Deleted);
             償還払請求サービス計画200904Dac.save(DbT3047entity);
-        }
-        if (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth("200903"))
-                && new FlexibleYearMonth("200604").isBeforeOrEquals(parameter.getサービス提供年月())) {
+        } else if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200903"))
+                && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
             DbT3046ShokanServicePlan200604Entity DbT3046entity = new DbT3046ShokanServicePlan200604Entity();
-            DbT3046entity.setHiHokenshaNo(parameter.get被保険者番号());
-            DbT3046entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-            DbT3046entity.setSeiriNp(parameter.get整理番号());
+            DbT3046entity.setHiHokenshaNo(被保険者番号);
+            DbT3046entity.setServiceTeikyoYM(サービス提供年月);
+            DbT3046entity.setSeiriNp(整理番号);
             DbT3046entity.setState(EntityDataState.Deleted);
             償還払請求サービス計画200604Dac.save(DbT3046entity);
-        }
-        if (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
+        } else if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
             DbT3045ShokanServicePlan200004Entity DbT3045entity = new DbT3045ShokanServicePlan200004Entity();
-            DbT3045entity.setHiHokenshaNo(parameter.get被保険者番号());
-            DbT3045entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-            DbT3045entity.setSeiriNp(parameter.get整理番号());
+            DbT3045entity.setHiHokenshaNo(被保険者番号);
+            DbT3045entity.setServiceTeikyoYM(サービス提供年月);
+            DbT3045entity.setSeiriNp(整理番号);
             DbT3045entity.setState(EntityDataState.Deleted);
             償還払請求サービス計画200004Dac.save(DbT3045entity);
         }
 
         DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity DbT3050entity
                 = new DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity();
-        DbT3050entity.setHiHokenshaNo(parameter.get被保険者番号());
-        DbT3050entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-        DbT3050entity.setSeiriNo(parameter.get整理番号());
+        DbT3050entity.setHiHokenshaNo(被保険者番号);
+        DbT3050entity.setServiceTeikyoYM(サービス提供年月);
+        DbT3050entity.setSeiriNo(整理番号);
         DbT3050entity.setState(EntityDataState.Deleted);
         償還払請求特定入所者介護サービス費用Dac.save(DbT3050entity);
 
         DbT3051ShokanShakaiFukushiHojinKeigengakuEntity DbT3051ntity
                 = new DbT3051ShokanShakaiFukushiHojinKeigengakuEntity();
-        DbT3051ntity.setHiHokenshaNo(parameter.get被保険者番号());
-        DbT3051ntity.setServiceTeikyoYM(parameter.getサービス提供年月());
-        DbT3051ntity.setSeiriNo(parameter.get整理番号());
+        DbT3051ntity.setHiHokenshaNo(被保険者番号);
+        DbT3051ntity.setServiceTeikyoYM(サービス提供年月);
+        DbT3051ntity.setSeiriNo(整理番号);
         DbT3051ntity.setState(EntityDataState.Deleted);
         償還払請求社会福祉法人軽減額Dac.save(DbT3051ntity);
 
         DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity DbT3052ntity
                 = new DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity();
-        DbT3052ntity.setHiHokenshaNo(parameter.get被保険者番号());
-        DbT3052ntity.setServiceTeikyoYM(parameter.getサービス提供年月());
-        DbT3052ntity.setSeiriNo(parameter.get整理番号());
+        DbT3052ntity.setHiHokenshaNo(被保険者番号);
+        DbT3052ntity.setServiceTeikyoYM(サービス提供年月);
+        DbT3052ntity.setSeiriNo(整理番号);
         DbT3052ntity.setState(EntityDataState.Deleted);
         償還払請求所定疾患施設療養費等Dac.save(DbT3052ntity);
 
         DbT3040ShokanKinkyuShisetsuRyoyoEntity DbT3040ntity = new DbT3040ShokanKinkyuShisetsuRyoyoEntity();
-        DbT3040ntity.setHiHokenshaNo(parameter.get被保険者番号());
-        DbT3040ntity.setServiceTeikyoYM(parameter.getサービス提供年月());
-        DbT3040ntity.setSeiriNo(parameter.get整理番号());
+        DbT3040ntity.setHiHokenshaNo(被保険者番号);
+        DbT3040ntity.setServiceTeikyoYM(サービス提供年月);
+        DbT3040ntity.setSeiriNo(整理番号);
         DbT3040ntity.setState(EntityDataState.Deleted);
         償還払請求緊急時施設療養Dac.save(DbT3040ntity);
 
         DbT3053ShokanShukeiEntity DbT3053entity = new DbT3053ShokanShukeiEntity();
-        DbT3053entity.setHiHokenshaNo(parameter.get被保険者番号());
-        DbT3053entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-        DbT3053entity.setSeiriNo(parameter.get整理番号());
+        DbT3053entity.setHiHokenshaNo(被保険者番号);
+        DbT3053entity.setServiceTeikyoYM(サービス提供年月);
+        DbT3053entity.setSeiriNo(整理番号);
         DbT3053entity.setState(EntityDataState.Deleted);
         償還払請求集計Dac.save(DbT3053entity);
 
         DbT3043ShokanShokujiHiyoEntity DbT3043ntity = new DbT3043ShokanShokujiHiyoEntity();
-        DbT3043ntity.setHiHokenshaNo(parameter.get被保険者番号());
-        DbT3043ntity.setServiceTeikyoYM(parameter.getサービス提供年月());
-        DbT3043ntity.setSeiriNp(parameter.get整理番号());
+        DbT3043ntity.setHiHokenshaNo(被保険者番号);
+        DbT3043ntity.setServiceTeikyoYM(サービス提供年月);
+        DbT3043ntity.setSeiriNp(整理番号);
         DbT3043ntity.setState(EntityDataState.Deleted);
         償還払請求食事費用Dac.save(DbT3043ntity);
 
         DbT3034ShokanShinseiEntity DbT3034ntity = new DbT3034ShokanShinseiEntity();
-        DbT3034ntity.setHiHokenshaNo(parameter.get被保険者番号());
-        DbT3034ntity.setServiceTeikyoYM(parameter.getサービス提供年月());
-        DbT3034ntity.setSeiriNo(parameter.get整理番号());
+        DbT3034ntity.setHiHokenshaNo(被保険者番号);
+        DbT3034ntity.setServiceTeikyoYM(サービス提供年月);
+        DbT3034ntity.setSeiriNo(整理番号);
         DbT3034ntity.setState(EntityDataState.Deleted);
         償還払支給申請Dac.save(DbT3034ntity);
 
         if (給付実績処理フラグ) {
             SyokanbaraiShikyuKetteKyufuJssekiHensyuManager manager
                     = SyokanbaraiShikyuKetteKyufuJssekiHensyuManager.createInstance();
-            manager.dealKyufujisseki(new RString("削除"), parameter.get識別コード(), Kyufuentity, null);
+            manager.dealKyufujisseki(new RString("削除"), 識別コード, Kyufuentity, null);
         }
     }
 
@@ -480,6 +485,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @return List<DbT3118ShikibetsuNoKanri>
      */
     public List<DbT3118ShikibetsuNoKanriEntity> getShikibetsuNoKanri(FlexibleYearMonth サービス提供年月) {
+
         RString 福祉用具販売費 = NyuryokuShikibetsuNoShokan3Keta.福祉用具販売費.getコード();
         RString 住宅改修費 = NyuryokuShikibetsuNoShokan3Keta.住宅改修費.getコード();
         List<DbT3118ShikibetsuNoKanriEntity> entityList
@@ -688,7 +694,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
     }
 
     /**
-     * 。
+     * 食事費用情報件数取得します。
      *
      * @param 被保険者番号
      * @param サービス提供年月
@@ -750,7 +756,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         dbT3039entity.setState(EntityDataState.Deleted);
         償還払請求明細Dac.save(dbT3039entity);
 
-        if (サービス提供年月.isBefore(new FlexibleYearMonth("200303"))) {
+        if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200303"))) {
             DbT3041ShokanTokuteiShinryohiEntity dbT3041entity = new DbT3041ShokanTokuteiShinryohiEntity();
             dbT3041entity.setHiHokenshaNo(被保険者番号);
             dbT3041entity.setServiceTeikyoYM(サービス提供年月);
@@ -773,7 +779,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
             特別療養費Dac.save(dbT3042entity);
         }
 
-        if (new FlexibleYearMonth("200903").isBefore(サービス提供年月)) {
+        if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス提供年月)) {
             DbT3047ShokanServicePlan200904Entity dbT3047entity = new DbT3047ShokanServicePlan200904Entity();
             dbT3047entity.setHiHokenshaNo(被保険者番号);
             dbT3047entity.setServiceTeikyoYM(サービス提供年月);
@@ -783,9 +789,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
             dbT3047entity.setMeisaiNo(明細番号);
             dbT3047entity.setState(EntityDataState.Deleted);
             償還払請求サービス計画200904Dac.save(dbT3047entity);
-        }
-        if (サービス提供年月.isBefore(new FlexibleYearMonth("200904"))
-                && new FlexibleYearMonth("200603").isBefore(サービス提供年月)) {
+        } else if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200903"))
+                && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
             DbT3046ShokanServicePlan200604Entity dbT3046entity = new DbT3046ShokanServicePlan200604Entity();
             dbT3046entity.setHiHokenshaNo(被保険者番号);
             dbT3046entity.setServiceTeikyoYM(サービス提供年月);
@@ -795,8 +800,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
             dbT3046entity.setMeisaiNo(明細番号);
             dbT3046entity.setState(EntityDataState.Deleted);
             償還払請求サービス計画200604Dac.save(dbT3046entity);
-        }
-        if (サービス提供年月.isBefore(new FlexibleYearMonth("200604"))) {
+        } else if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
             DbT3045ShokanServicePlan200004Entity dbT3045entity = new DbT3045ShokanServicePlan200004Entity();
             dbT3045entity.setHiHokenshaNo(被保険者番号);
             dbT3045entity.setServiceTeikyoYM(サービス提供年月);
@@ -937,47 +941,10 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      */
     public void updShokanMeisaiJushochiTokurei(ShokanMeisaiJushochiTokureiParameter parameter) {
 
-        int 連番 = 0;
         List<ShokanMeisaiJushochiTokureiEntity> 給付費明細住特List = parameter.get給付費明細住特List();
         if (給付費明細住特List != null && !給付費明細住特List.isEmpty()) {
             for (ShokanMeisaiJushochiTokureiEntity 給付費明細住特 : 給付費明細住特List) {
-                if (給付費明細住特.get状態().equals(モード_登録)) {
-                    連番 = 連番 + 1;
-                    DbT3107ShokanMeisaiJushochiTokureiEntity entity = new DbT3107ShokanMeisaiJushochiTokureiEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNp(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(new RString("0001"));
-                    entity.setRenban(new RString(String.valueOf(連番)));
-                    if (給付費明細住特.getサービスコード() != null && !給付費明細住特.getサービスコード().isEmpty()) {
-                        if (給付費明細住特.getサービスコード().length() <= 2) {
-                            entity.setServiceShuruiCode(new ServiceShuruiCode(給付費明細住特.getサービスコード()));
-                        }
-                        if (給付費明細住特.getサービスコード().length() > 2
-                                && 給付費明細住特.getサービスコード().length() <= 6) {
-                            entity.setServiceShuruiCode(
-                                    new ServiceShuruiCode(給付費明細住特.getサービスコード().substring(0, 2)));
-                            entity.setServiceKomokuCode(new ServiceKomokuCode(給付費明細住特.getサービスコード()
-                                    .substring(2, (給付費明細住特.getサービスコード().length()))));
-                        }
-                        if (給付費明細住特.getサービスコード().length() > 6) {
-                            entity.setServiceShuruiCode(
-                                    new ServiceShuruiCode(給付費明細住特.getサービスコード().substring(0, 2)));
-                            entity.setServiceKomokuCode(
-                                    new ServiceKomokuCode(給付費明細住特.getサービスコード().substring(2, 6)));
-                        }
-                    }
-                    entity.setTanisu(給付費明細住特.get単位());
-                    entity.setNissuKaisu(給付費明細住特.get回数日数());
-                    entity.setServiceTanisu(給付費明細住特.getサービス単位());
-                    entity.setShisetsuShozaiHokenshaNo(給付費明細住特.get施設所在保険者番号());
-                    entity.setTekiyo(給付費明細住特.get摘要());
-                    entity.setState(EntityDataState.Added);
-                    住所地特例Dac.save(entity);
-                }
-                if (給付費明細住特.get状態().equals(モード_修正)) {
+                if (モード_登録.equals(給付費明細住特.get状態())) {
                     DbT3107ShokanMeisaiJushochiTokureiEntity entity = new DbT3107ShokanMeisaiJushochiTokureiEntity();
                     entity.setHiHokenshaNo(parameter.get被保険者番号());
                     entity.setServiceTeikyoYM(parameter.get提供購入年月());
@@ -986,24 +953,26 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     entity.setYoshikiNo(parameter.get証明書コード());
                     entity.setMeisaiNo(parameter.get明細番号());
                     entity.setRenban(給付費明細住特.get連番());
-                    if (給付費明細住特.getサービスコード() != null && !給付費明細住特.getサービスコード().isEmpty()) {
-                        if (給付費明細住特.getサービスコード().length() <= 2) {
-                            entity.setServiceShuruiCode(new ServiceShuruiCode(給付費明細住特.getサービスコード()));
-                        }
-                        if (給付費明細住特.getサービスコード().length() > 2
-                                && 給付費明細住特.getサービスコード().length() <= 6) {
-                            entity.setServiceShuruiCode(
-                                    new ServiceShuruiCode(給付費明細住特.getサービスコード().substring(0, 2)));
-                            entity.setServiceKomokuCode(new ServiceKomokuCode(給付費明細住特.getサービスコード()
-                                    .substring(2, (給付費明細住特.getサービスコード().length()))));
-                        }
-                        if (給付費明細住特.getサービスコード().length() > 6) {
-                            entity.setServiceShuruiCode(
-                                    new ServiceShuruiCode(給付費明細住特.getサービスコード().substring(0, 2)));
-                            entity.setServiceKomokuCode(
-                                    new ServiceKomokuCode(給付費明細住特.getサービスコード().substring(2, 6)));
-                        }
-                    }
+                    entity.setServiceShuruiCode(給付費明細住特.getサービス種類コード());
+                    entity.setServiceKomokuCode(給付費明細住特.getサービス項目コード());
+                    entity.setTanisu(給付費明細住特.get単位());
+                    entity.setNissuKaisu(給付費明細住特.get回数日数());
+                    entity.setServiceTanisu(給付費明細住特.getサービス単位());
+                    entity.setShisetsuShozaiHokenshaNo(給付費明細住特.get施設所在保険者番号());
+                    entity.setTekiyo(給付費明細住特.get摘要());
+                    entity.setState(EntityDataState.Added);
+                    住所地特例Dac.save(entity);
+                } else if (モード_修正.equals(給付費明細住特.get状態())) {
+                    DbT3107ShokanMeisaiJushochiTokureiEntity entity = new DbT3107ShokanMeisaiJushochiTokureiEntity();
+                    entity.setHiHokenshaNo(parameter.get被保険者番号());
+                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
+                    entity.setSeiriNp(parameter.get整理番号());
+                    entity.setJigyoshaNo(parameter.get事業者番号());
+                    entity.setYoshikiNo(parameter.get証明書コード());
+                    entity.setMeisaiNo(parameter.get明細番号());
+                    entity.setRenban(給付費明細住特.get連番());
+                    entity.setServiceShuruiCode(給付費明細住特.getサービス種類コード());
+                    entity.setServiceKomokuCode(給付費明細住特.getサービス項目コード());
                     entity.setTanisu(給付費明細住特.get単位());
                     entity.setNissuKaisu(給付費明細住特.get回数日数());
                     entity.setServiceTanisu(給付費明細住特.getサービス単位());
@@ -1011,8 +980,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     entity.setTekiyo(給付費明細住特.get摘要());
                     entity.setState(EntityDataState.Modified);
                     住所地特例Dac.save(entity);
-                }
-                if (給付費明細住特.get状態().equals(モード_削除)) {
+                } else if (モード_削除.equals(給付費明細住特.get状態())) {
                     DbT3107ShokanMeisaiJushochiTokureiEntity entity = new DbT3107ShokanMeisaiJushochiTokureiEntity();
                     entity.setHiHokenshaNo(parameter.get被保険者番号());
                     entity.setServiceTeikyoYM(parameter.get提供購入年月());
@@ -1035,46 +1003,10 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      */
     public void updShokanMeisai(ShokanMeisaiParameter parameter) {
 
-        int 連番 = 0;
         List<ShokanMeisaiEntity> 給付費明細List = parameter.get給付費明細List();
         if (給付費明細List != null && !給付費明細List.isEmpty()) {
             for (ShokanMeisaiEntity 給付費明細 : 給付費明細List) {
-                if (給付費明細.get状態().equals(モード_登録)) {
-                    連番 = 連番 + 1;
-                    DbT3039ShokanMeisaiEntity entity = new DbT3039ShokanMeisaiEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNp(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(new RString(String.valueOf(連番)));
-                    if (給付費明細.getサービスコード() != null && !給付費明細.getサービスコード().isEmpty()) {
-                        if (給付費明細.getサービスコード().length() <= 2) {
-                            entity.setServiceShuruiCode(new ServiceShuruiCode(給付費明細.getサービスコード()));
-                        }
-                        if (給付費明細.getサービスコード().length() > 2
-                                && 給付費明細.getサービスコード().length() <= 6) {
-                            entity.setServiceShuruiCode(new ServiceShuruiCode(給付費明細.getサービスコード()
-                                    .substring(0, 2)));
-                            entity.setServiceKomokuCode(new ServiceKomokuCode(給付費明細.getサービスコード()
-                                    .substring(2, (給付費明細.getサービスコード().length()))));
-                        }
-                        if (給付費明細.getサービスコード().length() > 6) {
-                            entity.setServiceShuruiCode(
-                                    new ServiceShuruiCode(給付費明細.getサービスコード().substring(0, 2)));
-                            entity.setServiceKomokuCode(
-                                    new ServiceKomokuCode(給付費明細.getサービスコード().substring(2, 6)));
-                        }
-                    }
-                    entity.setTanisu(給付費明細.get単位());
-                    entity.setNissuKaisu(給付費明細.get回数日数());
-                    entity.setServiceTanisu(給付費明細.getサービス単位());
-                    entity.setTekiyo(給付費明細.get摘要());
-                    entity.setState(EntityDataState.Added);
-                    償還払請求明細Dac.save(entity);
-                }
-                if (給付費明細.get状態().equals(モード_修正)) {
+                if (モード_登録.equals(給付費明細.get状態())) {
                     DbT3039ShokanMeisaiEntity entity = new DbT3039ShokanMeisaiEntity();
                     entity.setHiHokenshaNo(parameter.get被保険者番号());
                     entity.setServiceTeikyoYM(parameter.get提供購入年月());
@@ -1083,32 +1015,32 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     entity.setYoshikiNo(parameter.get証明書コード());
                     entity.setMeisaiNo(parameter.get明細番号());
                     entity.setRenban(給付費明細.get連番());
-                    if (給付費明細.getサービスコード() != null && !給付費明細.getサービスコード().isEmpty()) {
-                        if (給付費明細.getサービスコード().length() <= 2) {
-                            entity.setServiceShuruiCode(new ServiceShuruiCode(給付費明細.getサービスコード()));
-                        }
-                        if (給付費明細.getサービスコード().length() > 2
-                                && 給付費明細.getサービスコード().length() <= 6) {
-                            entity.setServiceShuruiCode(new ServiceShuruiCode(給付費明細.getサービスコード()
-                                    .substring(0, 2)));
-                            entity.setServiceKomokuCode(new ServiceKomokuCode(給付費明細.getサービスコード()
-                                    .substring(2, (給付費明細.getサービスコード().length()))));
-                        }
-                        if (給付費明細.getサービスコード().length() > 6) {
-                            entity.setServiceShuruiCode(
-                                    new ServiceShuruiCode(給付費明細.getサービスコード().substring(0, 2)));
-                            entity.setServiceKomokuCode(
-                                    new ServiceKomokuCode(給付費明細.getサービスコード().substring(2, 6)));
-                        }
-                    }
+                    entity.setServiceShuruiCode(給付費明細.getサービス種類コード());
+                    entity.setServiceKomokuCode(給付費明細.getサービス項目コード());
+                    entity.setTanisu(給付費明細.get単位());
+                    entity.setNissuKaisu(給付費明細.get回数日数());
+                    entity.setServiceTanisu(給付費明細.getサービス単位());
+                    entity.setTekiyo(給付費明細.get摘要());
+                    entity.setState(EntityDataState.Added);
+                    償還払請求明細Dac.save(entity);
+                } else if (モード_修正.equals(給付費明細.get状態())) {
+                    DbT3039ShokanMeisaiEntity entity = new DbT3039ShokanMeisaiEntity();
+                    entity.setHiHokenshaNo(parameter.get被保険者番号());
+                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
+                    entity.setSeiriNp(parameter.get整理番号());
+                    entity.setJigyoshaNo(parameter.get事業者番号());
+                    entity.setYoshikiNo(parameter.get証明書コード());
+                    entity.setMeisaiNo(parameter.get明細番号());
+                    entity.setRenban(給付費明細.get連番());
+                    entity.setServiceShuruiCode(給付費明細.getサービス種類コード());
+                    entity.setServiceKomokuCode(給付費明細.getサービス項目コード());
                     entity.setTanisu(給付費明細.get単位());
                     entity.setNissuKaisu(給付費明細.get回数日数());
                     entity.setServiceTanisu(給付費明細.getサービス単位());
                     entity.setTekiyo(給付費明細.get摘要());
                     entity.setState(EntityDataState.Modified);
                     償還払請求明細Dac.save(entity);
-                }
-                if (給付費明細.get状態().equals(モード_削除)) {
+                } else if (モード_削除.equals(給付費明細.get状態())) {
                     DbT3039ShokanMeisaiEntity entity = new DbT3039ShokanMeisaiEntity();
                     entity.setHiHokenshaNo(parameter.get被保険者番号());
                     entity.setServiceTeikyoYM(parameter.get提供購入年月());
@@ -1133,684 +1065,159 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
 
         int 合計金額 = 0;
         List<ShokanTokuteiShinryohiEntity> 特定診療費List = parameter.get特定診療費List();
-        if (特定診療費List != null && !特定診療費List.isEmpty()
-                && parameter.get提供購入年月().isBeforeOrEquals(new FlexibleYearMonth("200303"))) {
-            合計金額 = 0;
-            int 連番 = 0;
-            for (ShokanTokuteiShinryohiEntity 特定診療費 : 特定診療費List) {
-                if (特定診療費.get状態().equals(モード_登録)) {
-                    連番 = 連番 + 1;
-                    合計金額 = 合計金額 + 特定診療費.get合計();
-                    DbT3041ShokanTokuteiShinryohiEntity entity = new DbT3041ShokanTokuteiShinryohiEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(new RString(String.valueOf(連番)));
-                    entity.setShobyoName(特定診療費.get傷病名());
-                    entity.setShidoKanriryoTanisu(特定診療費.get指導管理());
-                    entity.setTanjunXsenTanisu(特定診療費.getエックス線());
-                    entity.setRehabilitationTanisu(特定診療費.getリハビリ());
-                    entity.setSeishinkaSemmonRyoyohouTanisu(特定診療費.get精神科());
-                    entity.setSochiTanisu(特定診療費.getその他1());
-                    entity.setShujutsuTanisu(特定診療費.getその他2());
-                    entity.setTotalTanisu(特定診療費.get合計());
-                    RString 摘要 = 特定診療費.get摘要();
-                    int length = 特定診療費.get摘要().length();
-                    if (length != 0) {
-                        if (length <= 32) {
-                            entity.setTekiyo1(摘要);
-                        }
-                        if (length > 32 && length <= 64) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, length));
-                        }
-                        if (length > 64 && length <= 96) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, length));
-                        }
-                        if (length > 96 && length <= 128) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, length));
-                        }
-                        if (length > 128 && length <= 160) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, length));
-                        }
-                        if (length > 160 && length <= 192) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, length));
-                        }
-                        if (length > 192 && length <= 224) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, length));
-                        }
-                        if (length > 224 && length <= 256) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, length));
-                        }
-                        if (length > 256 && length <= 288) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, length));
-                        }
-                        if (length > 288 && length <= 320) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, length));
-                        }
-                        if (length > 320 && length <= 352) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, length));
-                        }
-                        if (length > 352 && length <= 384) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, length));
-                        }
-                        if (length > 384 && length <= 416) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, length));
-                        }
-                        if (length > 416 && length <= 448) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, length));
-                        }
-                        if (length > 448 && length <= 480) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, length));
-                        }
-                        if (length > 480 && length <= 512) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, length));
-                        }
-                        if (length > 512 && length <= 544) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, length));
-                        }
-                        if (length > 544 && length <= 576) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, length));
-                        }
-                        if (length > 576 && length <= 608) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, length));
-                        }
-                        if (length > 608 && length <= 640) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, 608));
-                            entity.setTekiyo20(摘要.substring(608, length));
-                        }
-                        if (length > 640) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, 608));
-                            entity.setTekiyo20(摘要.substring(608, 640));
-                        }
-                    }
-                    entity.setState(EntityDataState.Added);
-                    償還払請求特定診療費Dac.save(entity);
-                }
-                if (特定診療費.get状態().equals(モード_修正)) {
-                    合計金額 = 合計金額 + 特定診療費.get合計();
-                    DbT3041ShokanTokuteiShinryohiEntity entity = new DbT3041ShokanTokuteiShinryohiEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(特定診療費.get連番());
-                    entity.setShobyoName(特定診療費.get傷病名());
-                    entity.setShidoKanriryoTanisu(特定診療費.get指導管理());
-                    entity.setTanjunXsenTanisu(特定診療費.getエックス線());
-                    entity.setRehabilitationTanisu(特定診療費.getリハビリ());
-                    entity.setSeishinkaSemmonRyoyohouTanisu(特定診療費.get精神科());
-                    entity.setSochiTanisu(特定診療費.getその他1());
-                    entity.setShujutsuTanisu(特定診療費.getその他2());
-                    entity.setTotalTanisu(特定診療費.get合計());
-                    RString 摘要 = 特定診療費.get摘要();
-                    int length = 特定診療費.get摘要().length();
-                    if (length != 0) {
-                        if (length <= 32) {
-                            entity.setTekiyo1(摘要);
-                        }
-                        if (length > 32 && length <= 64) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, length));
-                        }
-                        if (length > 64 && length <= 96) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, length));
-                        }
-                        if (length > 96 && length <= 128) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, length));
-                        }
-                        if (length > 128 && length <= 160) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, length));
-                        }
-                        if (length > 160 && length <= 192) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, length));
-                        }
-                        if (length > 192 && length <= 224) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, length));
-                        }
-                        if (length > 224 && length <= 256) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, length));
-                        }
-                        if (length > 256 && length <= 288) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, length));
-                        }
-                        if (length > 288 && length <= 320) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, length));
-                        }
-                        if (length > 320 && length <= 352) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, length));
-                        }
-                        if (length > 352 && length <= 384) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, length));
-                        }
-                        if (length > 384 && length <= 416) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, length));
-                        }
-                        if (length > 416 && length <= 448) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, length));
-                        }
-                        if (length > 448 && length <= 480) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, length));
-                        }
-                        if (length > 480 && length <= 512) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, length));
-                        }
-                        if (length > 512 && length <= 544) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, length));
-                        }
-                        if (length > 544 && length <= 576) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, length));
-                        }
-                        if (length > 576 && length <= 608) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, length));
-                        }
-                        if (length > 608 && length <= 640) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, 608));
-                            entity.setTekiyo20(摘要.substring(608, length));
-                        }
-                        if (length > 640) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, 608));
-                            entity.setTekiyo20(摘要.substring(608, 640));
-                        }
-                    }
-                    entity.setState(EntityDataState.Modified);
-                    償還払請求特定診療費Dac.save(entity);
-                }
-                if (特定診療費.get状態().equals(モード_削除)) {
-                    DbT3041ShokanTokuteiShinryohiEntity entity = new DbT3041ShokanTokuteiShinryohiEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(特定診療費.get連番());
-                    entity.setState(EntityDataState.Deleted);
-                    償還払請求特定診療費Dac.save(entity);
-                }
-            }
-        }
-        if (特定診療費List != null && !特定診療費List.isEmpty()
-                && new FlexibleYearMonth("200304").isBeforeOrEquals(parameter.get提供購入年月())) {
-            合計金額 = 0;
-            int 連番 = 0;
-            for (ShokanTokuteiShinryohiEntity 特定診療費 : 特定診療費List) {
-                if (特定診療費.get状態().equals(モード_登録)) {
-                    連番 = 連番 + 1;
-                    合計金額 = 合計金額 + 特定診療費.get合計();
-                    DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity
-                            = new DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(new RString(String.valueOf(連番)));
-                    entity.setShobyoName(特定診療費.get傷病名());
-                    entity.setShikibetsuNo(特定診療費.get識別コード());
-                    entity.setTanisu(特定診療費.get単位());
-                    entity.setKaisu(特定診療費.get回数日数());
-                    entity.setServiceTanisu(特定診療費.getサービス単位());
-                    entity.setTotalTanisu(特定診療費.get合計());
-                    entity.setTekiyo(特定診療費.get摘要());
-                    entity.setState(EntityDataState.Added);
-                    特別療養費Dac.save(entity);
-                }
-                if (特定診療費.get状態().equals(モード_修正)) {
-                    合計金額 = 合計金額 + 特定診療費.get合計();
-                    DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity
-                            = new DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(特定診療費.get連番());
-                    entity.setShobyoName(特定診療費.get傷病名());
-                    entity.setShikibetsuNo(特定診療費.get識別コード());
-                    entity.setTanisu(特定診療費.get単位());
-                    entity.setKaisu(特定診療費.get回数日数());
-                    entity.setServiceTanisu(特定診療費.getサービス単位());
-                    entity.setTotalTanisu(特定診療費.get合計());
-                    entity.setTekiyo(特定診療費.get摘要());
-                    entity.setState(EntityDataState.Modified);
-                    特別療養費Dac.save(entity);
-                }
-                if (特定診療費.get状態().equals(モード_削除)) {
-                    DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity
-                            = new DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(特定診療費.get連番());
-                    entity.setState(EntityDataState.Deleted);
-                    特別療養費Dac.save(entity);
-                }
-            }
-        }
         if (特定診療費List != null && !特定診療費List.isEmpty()) {
+            if (parameter.get提供購入年月().isBeforeOrEquals(new FlexibleYearMonth("200303"))) {
+                for (ShokanTokuteiShinryohiEntity 特定診療費 : 特定診療費List) {
+                    if (モード_登録.equals(特定診療費.get状態())) {
+                        合計金額 = 合計金額 + 特定診療費.get合計();
+                        DbT3041ShokanTokuteiShinryohiEntity entity = new DbT3041ShokanTokuteiShinryohiEntity();
+                        entity.setHiHokenshaNo(parameter.get被保険者番号());
+                        entity.setServiceTeikyoYM(parameter.get提供購入年月());
+                        entity.setSeiriNo(parameter.get整理番号());
+                        entity.setJigyoshaNo(parameter.get事業者番号());
+                        entity.setYoshikiNo(parameter.get証明書コード());
+                        entity.setMeisaiNo(parameter.get明細番号());
+                        entity.setRenban(特定診療費.get連番());
+                        entity.setShobyoName(特定診療費.get傷病名());
+                        entity.setShidoKanriryoTanisu(特定診療費.get指導管理());
+                        entity.setTanjunXsenTanisu(特定診療費.getエックス線());
+                        entity.setRehabilitationTanisu(特定診療費.getリハビリ());
+                        entity.setSeishinkaSemmonRyoyohouTanisu(特定診療費.get精神科());
+                        entity.setSochiTanisu(特定診療費.getその他1());
+                        entity.setShujutsuTanisu(特定診療費.getその他2());
+                        entity.setTotalTanisu(特定診療費.get合計());
+                        entity.setTekiyo1(特定診療費.get摘要1());
+                        entity.setTekiyo2(特定診療費.get摘要2());
+                        entity.setTekiyo3(特定診療費.get摘要3());
+                        entity.setTekiyo4(特定診療費.get摘要4());
+                        entity.setTekiyo5(特定診療費.get摘要5());
+                        entity.setTekiyo6(特定診療費.get摘要6());
+                        entity.setTekiyo7(特定診療費.get摘要7());
+                        entity.setTekiyo8(特定診療費.get摘要8());
+                        entity.setTekiyo9(特定診療費.get摘要9());
+                        entity.setTekiyo10(特定診療費.get摘要10());
+                        entity.setTekiyo11(特定診療費.get摘要11());
+                        entity.setTekiyo12(特定診療費.get摘要12());
+                        entity.setTekiyo13(特定診療費.get摘要13());
+                        entity.setTekiyo14(特定診療費.get摘要14());
+                        entity.setTekiyo15(特定診療費.get摘要15());
+                        entity.setTekiyo16(特定診療費.get摘要16());
+                        entity.setTekiyo17(特定診療費.get摘要17());
+                        entity.setTekiyo18(特定診療費.get摘要18());
+                        entity.setTekiyo19(特定診療費.get摘要19());
+                        entity.setTekiyo20(特定診療費.get摘要20());
+                        entity.setState(EntityDataState.Added);
+                        償還払請求特定診療費Dac.save(entity);
+                    } else if (モード_修正.equals(特定診療費.get状態())) {
+                        合計金額 = 合計金額 + 特定診療費.get合計();
+                        DbT3041ShokanTokuteiShinryohiEntity entity = new DbT3041ShokanTokuteiShinryohiEntity();
+                        entity.setHiHokenshaNo(parameter.get被保険者番号());
+                        entity.setServiceTeikyoYM(parameter.get提供購入年月());
+                        entity.setSeiriNo(parameter.get整理番号());
+                        entity.setJigyoshaNo(parameter.get事業者番号());
+                        entity.setYoshikiNo(parameter.get証明書コード());
+                        entity.setMeisaiNo(parameter.get明細番号());
+                        entity.setRenban(特定診療費.get連番());
+                        entity.setShobyoName(特定診療費.get傷病名());
+                        entity.setShidoKanriryoTanisu(特定診療費.get指導管理());
+                        entity.setTanjunXsenTanisu(特定診療費.getエックス線());
+                        entity.setRehabilitationTanisu(特定診療費.getリハビリ());
+                        entity.setSeishinkaSemmonRyoyohouTanisu(特定診療費.get精神科());
+                        entity.setSochiTanisu(特定診療費.getその他1());
+                        entity.setShujutsuTanisu(特定診療費.getその他2());
+                        entity.setTotalTanisu(特定診療費.get合計());
+                        entity.setTekiyo1(特定診療費.get摘要1());
+                        entity.setTekiyo2(特定診療費.get摘要2());
+                        entity.setTekiyo3(特定診療費.get摘要3());
+                        entity.setTekiyo4(特定診療費.get摘要4());
+                        entity.setTekiyo5(特定診療費.get摘要5());
+                        entity.setTekiyo6(特定診療費.get摘要6());
+                        entity.setTekiyo7(特定診療費.get摘要7());
+                        entity.setTekiyo8(特定診療費.get摘要8());
+                        entity.setTekiyo9(特定診療費.get摘要9());
+                        entity.setTekiyo10(特定診療費.get摘要10());
+                        entity.setTekiyo11(特定診療費.get摘要11());
+                        entity.setTekiyo12(特定診療費.get摘要12());
+                        entity.setTekiyo13(特定診療費.get摘要13());
+                        entity.setTekiyo14(特定診療費.get摘要14());
+                        entity.setTekiyo15(特定診療費.get摘要15());
+                        entity.setTekiyo16(特定診療費.get摘要16());
+                        entity.setTekiyo17(特定診療費.get摘要17());
+                        entity.setTekiyo18(特定診療費.get摘要18());
+                        entity.setTekiyo19(特定診療費.get摘要19());
+                        entity.setTekiyo20(特定診療費.get摘要20());
+                        entity.setState(EntityDataState.Modified);
+                        償還払請求特定診療費Dac.save(entity);
+                    } else if (モード_削除.equals(特定診療費.get状態())) {
+                        DbT3041ShokanTokuteiShinryohiEntity entity = new DbT3041ShokanTokuteiShinryohiEntity();
+                        entity.setHiHokenshaNo(parameter.get被保険者番号());
+                        entity.setServiceTeikyoYM(parameter.get提供購入年月());
+                        entity.setSeiriNo(parameter.get整理番号());
+                        entity.setJigyoshaNo(parameter.get事業者番号());
+                        entity.setYoshikiNo(parameter.get証明書コード());
+                        entity.setMeisaiNo(parameter.get明細番号());
+                        entity.setRenban(特定診療費.get連番());
+                        entity.setState(EntityDataState.Deleted);
+                        償還払請求特定診療費Dac.save(entity);
+                    }
+                }
+            } else {
+                for (ShokanTokuteiShinryohiEntity 特定診療費 : 特定診療費List) {
+                    if (モード_登録.equals(特定診療費.get状態())) {
+                        合計金額 = 合計金額 + 特定診療費.get合計();
+                        DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity
+                                = new DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity();
+                        entity.setHiHokenshaNo(parameter.get被保険者番号());
+                        entity.setServiceTeikyoYM(parameter.get提供購入年月());
+                        entity.setSeiriNo(parameter.get整理番号());
+                        entity.setJigyoshaNo(parameter.get事業者番号());
+                        entity.setYoshikiNo(parameter.get証明書コード());
+                        entity.setMeisaiNo(parameter.get明細番号());
+                        entity.setRenban(特定診療費.get連番());
+                        entity.setShobyoName(特定診療費.get傷病名());
+                        entity.setShikibetsuNo(特定診療費.get識別コード());
+                        entity.setTanisu(特定診療費.get単位());
+                        entity.setKaisu(特定診療費.get回数日数());
+                        entity.setServiceTanisu(特定診療費.getサービス単位());
+                        entity.setTotalTanisu(特定診療費.get合計());
+                        entity.setTekiyo(特定診療費.get摘要());
+                        entity.setState(EntityDataState.Added);
+                        特別療養費Dac.save(entity);
+                    } else if (モード_修正.equals(特定診療費.get状態())) {
+                        合計金額 = 合計金額 + 特定診療費.get合計();
+                        DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity
+                                = new DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity();
+                        entity.setHiHokenshaNo(parameter.get被保険者番号());
+                        entity.setServiceTeikyoYM(parameter.get提供購入年月());
+                        entity.setSeiriNo(parameter.get整理番号());
+                        entity.setJigyoshaNo(parameter.get事業者番号());
+                        entity.setYoshikiNo(parameter.get証明書コード());
+                        entity.setMeisaiNo(parameter.get明細番号());
+                        entity.setRenban(特定診療費.get連番());
+                        entity.setShobyoName(特定診療費.get傷病名());
+                        entity.setShikibetsuNo(特定診療費.get識別コード());
+                        entity.setTanisu(特定診療費.get単位());
+                        entity.setKaisu(特定診療費.get回数日数());
+                        entity.setServiceTanisu(特定診療費.getサービス単位());
+                        entity.setTotalTanisu(特定診療費.get合計());
+                        entity.setTekiyo(特定診療費.get摘要());
+                        entity.setState(EntityDataState.Modified);
+                        特別療養費Dac.save(entity);
+                    } else if (モード_削除.equals(特定診療費.get状態())) {
+                        DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity
+                                = new DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity();
+                        entity.setHiHokenshaNo(parameter.get被保険者番号());
+                        entity.setServiceTeikyoYM(parameter.get提供購入年月());
+                        entity.setSeiriNo(parameter.get整理番号());
+                        entity.setJigyoshaNo(parameter.get事業者番号());
+                        entity.setYoshikiNo(parameter.get証明書コード());
+                        entity.setMeisaiNo(parameter.get明細番号());
+                        entity.setRenban(特定診療費.get連番());
+                        entity.setState(EntityDataState.Deleted);
+                        特別療養費Dac.save(entity);
+                    }
+                }
+            }
             DbT3038ShokanKihonEntity dbT3038entity = new DbT3038ShokanKihonEntity();
             dbT3038entity.setHiHokenshaNo(parameter.get被保険者番号());
             dbT3038entity.setServiceTeikyoYM(parameter.get提供購入年月());
@@ -1836,12 +1243,10 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         List<ShokanServicePlanEntity> サービルList = parameter.getサービルList();
         if (new FlexibleYearMonth("200904").isBeforeOrEquals(parameter.getサービス提供年月())) {
             if (サービルList != null && !サービルList.isEmpty()) {
-                int 連番 = 0;
-                for (ShokanServicePlanEntity サービル : サービルList) {
-                    if (parameter.get明細番号() == null || parameter.get明細番号().isEmpty()) {
-                        明細番号 = new RString("0001");
-                        if (!サービル.get状態().equals(モード_削除)) {
-                            連番 = 連番 + 1;
+                if (parameter.get明細番号() == null || parameter.get明細番号().isEmpty()) {
+                    明細番号 = new RString("0001");
+                    for (ShokanServicePlanEntity サービル : サービルList) {
+                        if (!モード_削除.equals(サービル.get状態())) {
                             DbT3047ShokanServicePlan200904Entity entity = new DbT3047ShokanServicePlan200904Entity();
                             entity.setHiHokenshaNo(parameter.get被保険者番号());
                             entity.setServiceTeikyoYM(parameter.getサービス提供年月());
@@ -1849,7 +1254,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             entity.setJigyoshaNo(parameter.get事業者番号());
                             entity.setYoshikiNo(parameter.get証明書コード());
                             entity.setMeisaiNo(明細番号);
-                            entity.setRenban(new RString(String.valueOf(連番)));
+                            entity.setRenban(サービル.get連番());
                             entity.setShiteiKijunGaitoJigyoshaKubunCode(サービル.get事業者区分コード());
                             entity.setKyotakuServiceSakuseiIraiYMD(サービル.get届出日());
                             entity.setServiceCode(サービル.getサービスコード());
@@ -1864,18 +1269,19 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             entity.setState(EntityDataState.Added);
                             償還払請求サービス計画200904Dac.save(entity);
                         }
-                    } else {
-                        明細番号 = parameter.get明細番号();
-                        if (サービル.get状態().equals(モード_登録)) {
-                            連番 = 連番 + 1;
+                    }
+                } else {
+                    明細番号 = parameter.get明細番号();
+                    for (ShokanServicePlanEntity サービル : サービルList) {
+                        if (モード_登録.equals(サービル.get状態())) {
                             DbT3047ShokanServicePlan200904Entity entity = new DbT3047ShokanServicePlan200904Entity();
                             entity.setHiHokenshaNo(parameter.get被保険者番号());
                             entity.setServiceTeikyoYM(parameter.getサービス提供年月());
                             entity.setSeiriNp(parameter.get整理番号());
                             entity.setJigyoshaNo(parameter.get事業者番号());
                             entity.setYoshikiNo(parameter.get証明書コード());
-                            entity.setMeisaiNo(明細番号);
-                            entity.setRenban(new RString(String.valueOf(連番)));
+                            entity.setMeisaiNo(parameter.get明細番号());
+                            entity.setRenban(サービル.get連番());
                             entity.setShiteiKijunGaitoJigyoshaKubunCode(サービル.get事業者区分コード());
                             entity.setKyotakuServiceSakuseiIraiYMD(サービル.get届出日());
                             entity.setServiceCode(サービル.getサービスコード());
@@ -1889,15 +1295,14 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             entity.setShinsaHohoKubunCode(サービル.get審査方法コード());
                             entity.setState(EntityDataState.Added);
                             償還払請求サービス計画200904Dac.save(entity);
-                        }
-                        if (サービル.get状態().equals(モード_修正)) {
+                        } else if (モード_修正.equals(サービル.get状態())) {
                             DbT3047ShokanServicePlan200904Entity entity = new DbT3047ShokanServicePlan200904Entity();
                             entity.setHiHokenshaNo(parameter.get被保険者番号());
                             entity.setServiceTeikyoYM(parameter.getサービス提供年月());
                             entity.setSeiriNp(parameter.get整理番号());
                             entity.setJigyoshaNo(parameter.get事業者番号());
                             entity.setYoshikiNo(parameter.get証明書コード());
-                            entity.setMeisaiNo(明細番号);
+                            entity.setMeisaiNo(parameter.get明細番号());
                             entity.setRenban(サービル.get連番());
                             entity.setShiteiKijunGaitoJigyoshaKubunCode(サービル.get事業者区分コード());
                             entity.setKyotakuServiceSakuseiIraiYMD(サービル.get届出日());
@@ -1912,8 +1317,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             entity.setShinsaHohoKubunCode(サービル.get審査方法コード());
                             entity.setState(EntityDataState.Modified);
                             償還払請求サービス計画200904Dac.save(entity);
-                        }
-                        if (サービル.get状態().equals(モード_削除)) {
+                        } else if (モード_削除.equals(サービル.get状態())) {
                             DbT3047ShokanServicePlan200904Entity entity = new DbT3047ShokanServicePlan200904Entity();
                             entity.setHiHokenshaNo(parameter.get被保険者番号());
                             entity.setServiceTeikyoYM(parameter.getサービス提供年月());
@@ -1928,8 +1332,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     }
                 }
             }
-        }
-        if (new FlexibleYearMonth("200604").isBeforeOrEquals(parameter.getサービス提供年月())
+        } else if (new FlexibleYearMonth("200604").isBeforeOrEquals(parameter.getサービス提供年月())
                 && (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth("200903")))) {
             if (parameter.get明細番号() == null || parameter.get明細番号().isEmpty()) {
                 明細番号 = new RString("0001");
@@ -1940,7 +1343,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                 entity.setJigyoshaNo(parameter.get事業者番号());
                 entity.setYoshikiNo(parameter.get証明書コード());
                 entity.setMeisaiNo(明細番号);
-                entity.setRenban(new RString("1"));
+                entity.setRenban(parameter.get連番());
                 entity.setShiteiKijunGaitoJigyoshaKubunCode(parameter.get事業者区分コード());
                 entity.setKyotakuServiceSakuseiIraiYMD(parameter.get届出日());
                 entity.setServiceCode(parameter.getサービスコード());
@@ -1974,8 +1377,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                 entity.setState(EntityDataState.Modified);
                 償還払請求サービス計画200604Dac.save(entity);
             }
-        }
-        if (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
+        } else if (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
             if (parameter.get明細番号() == null || parameter.get明細番号().isEmpty()) {
                 明細番号 = new RString("0001");
                 DbT3045ShokanServicePlan200004Entity entity = new DbT3045ShokanServicePlan200004Entity();
@@ -1985,7 +1387,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                 entity.setJigyoshaNo(parameter.get事業者番号());
                 entity.setYoshikiNo(parameter.get証明書コード());
                 entity.setMeisaiNo(明細番号);
-                entity.setRenban(new RString("1"));
+                entity.setRenban(parameter.get連番());
                 entity.setShiteiKijunGaitoJigyoshaKubunCode(parameter.get事業者区分コード());
                 entity.setKyotakuServiceSakuseiIraiYMD(parameter.get届出日());
                 entity.setServiceCode(parameter.getサービスコード());
@@ -2027,12 +1429,11 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      */
     public void updShokanTokuteiNyushoshaKaigoServiceHiyo(
             ShokanTokuteiNyushoshaKaigoServiceHiyoParameter parameter) {
-        int 連番 = 0;
+
         List<ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> 特定入所者費用List = parameter.get特定入所者費用List();
         if (特定入所者費用List != null && !特定入所者費用List.isEmpty()) {
             for (ShokanTokuteiNyushoshaKaigoServiceHiyoEntity 特定入所者費用 : 特定入所者費用List) {
-                if (特定入所者費用.get状態().equals(モード_登録)) {
-                    連番 = 連番 + 1;
+                if (モード_登録.equals(特定入所者費用.get状態())) {
                     DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity
                             = new DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity();
                     entity.setHiHokenshaNo(parameter.get被保険者番号());
@@ -2041,25 +1442,9 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     entity.setJigyoshaNo(parameter.get事業者番号());
                     entity.setYoshikiNo(parameter.get証明書コード());
                     entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(new RString(String.valueOf(連番)));
-                    if (特定入所者費用.getサービスコード() != null && !特定入所者費用.getサービスコード().isEmpty()) {
-                        if (特定入所者費用.getサービスコード().length() <= 2) {
-                            entity.setServiceShuruiCode(new ServiceShuruiCode(特定入所者費用.getサービスコード()));
-                        }
-                        if (特定入所者費用.getサービスコード().length() > 2
-                                && 特定入所者費用.getサービスコード().length() <= 6) {
-                            entity.setServiceShuruiCode(new ServiceShuruiCode(特定入所者費用.getサービスコード()
-                                    .substring(0, 2)));
-                            entity.setServiceKomokuCode(new ServiceKomokuCode(特定入所者費用.getサービスコード()
-                                    .substring(2, (特定入所者費用.getサービスコード().length()))));
-                        }
-                        if (特定入所者費用.getサービスコード().length() > 6) {
-                            entity.setServiceShuruiCode(
-                                    new ServiceShuruiCode(特定入所者費用.getサービスコード().substring(0, 2)));
-                            entity.setServiceKomokuCode(
-                                    new ServiceKomokuCode(特定入所者費用.getサービスコード().substring(2, 6)));
-                        }
-                    }
+                    entity.setRenban(特定入所者費用.get連番());
+                    entity.setServiceShuruiCode(特定入所者費用.getサービス種類コード());
+                    entity.setServiceKomokuCode(特定入所者費用.getサービス項目コード());
                     entity.setHiyoTanka(特定入所者費用.get標準単価());
                     entity.setFutanGendogaku(特定入所者費用.get負担限度額());
                     entity.setNissu(特定入所者費用.get日数());
@@ -2071,8 +1456,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     entity.setRiyoshaFutangakuTotal(parameter.get合計利用者負担額());
                     entity.setState(EntityDataState.Added);
                     償還払請求特定入所者介護サービス費用Dac.save(entity);
-                }
-                if (特定入所者費用.get状態().equals(モード_修正)) {
+                } else if (モード_修正.equals(特定入所者費用.get状態())) {
                     DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity
                             = new DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity();
                     entity.setHiHokenshaNo(parameter.get被保険者番号());
@@ -2082,24 +1466,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     entity.setYoshikiNo(parameter.get証明書コード());
                     entity.setMeisaiNo(parameter.get明細番号());
                     entity.setRenban(特定入所者費用.get連番());
-                    if (特定入所者費用.getサービスコード() != null && !特定入所者費用.getサービスコード().isEmpty()) {
-                        if (特定入所者費用.getサービスコード().length() <= 2) {
-                            entity.setServiceShuruiCode(new ServiceShuruiCode(特定入所者費用.getサービスコード()));
-                        }
-                        if (特定入所者費用.getサービスコード().length() > 2
-                                && 特定入所者費用.getサービスコード().length() <= 6) {
-                            entity.setServiceShuruiCode(new ServiceShuruiCode(特定入所者費用.getサービスコード()
-                                    .substring(0, 2)));
-                            entity.setServiceKomokuCode(new ServiceKomokuCode(特定入所者費用.getサービスコード()
-                                    .substring(2, (特定入所者費用.getサービスコード().length()))));
-                        }
-                        if (特定入所者費用.getサービスコード().length() > 6) {
-                            entity.setServiceShuruiCode(
-                                    new ServiceShuruiCode(特定入所者費用.getサービスコード().substring(0, 2)));
-                            entity.setServiceKomokuCode(
-                                    new ServiceKomokuCode(特定入所者費用.getサービスコード().substring(2, 6)));
-                        }
-                    }
+                    entity.setServiceShuruiCode(特定入所者費用.getサービス種類コード());
+                    entity.setServiceKomokuCode(特定入所者費用.getサービス項目コード());
                     entity.setHiyoTanka(特定入所者費用.get標準単価());
                     entity.setFutanGendogaku(特定入所者費用.get負担限度額());
                     entity.setNissu(特定入所者費用.get日数());
@@ -2111,8 +1479,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     entity.setRiyoshaFutangakuTotal(parameter.get合計利用者負担額());
                     entity.setState(EntityDataState.Modified);
                     償還払請求特定入所者介護サービス費用Dac.save(entity);
-                }
-                if (特定入所者費用.get状態().equals(モード_削除)) {
+                } else if (モード_削除.equals(特定入所者費用.get状態())) {
                     DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity
                             = new DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity();
                     entity.setHiHokenshaNo(parameter.get被保険者番号());
@@ -2146,12 +1513,10 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      */
     public void updShokanShakaiFukushiHojinKeigengaku(ShokanShakaiFukushiHojinKeigengakuParameter parameter) {
 
-        int 連番 = 0;
         List<ShokanFukushigengakuEntity> 社福軽減額List = parameter.get社福軽減額List();
         if (社福軽減額List != null && !社福軽減額List.isEmpty()) {
             for (ShokanFukushigengakuEntity 社福軽減額 : 社福軽減額List) {
-                if (社福軽減額.get状態().equals(モード_登録)) {
-                    連番 = 連番 + 1;
+                if (モード_登録.equals(社福軽減額.get状態())) {
                     DbT3051ShokanShakaiFukushiHojinKeigengakuEntity entity
                             = new DbT3051ShokanShakaiFukushiHojinKeigengakuEntity();
                     entity.setHiHokenshaNo(parameter.get被保険者番号());
@@ -2160,7 +1525,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     entity.setJigyoshaNo(parameter.get事業者番号());
                     entity.setYoshikiNo(parameter.get証明書コード());
                     entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(new RString(String.valueOf(連番)));
+                    entity.setRenban(社福軽減額.get連番());
                     entity.setKeigenritsu(社福軽減額.get軽減率());
                     entity.setServiceShuruiCode(社福軽減額.getサービス種類コード());
                     entity.setRiyoshaFutangakuTotal(社福軽減額.get受領すべき利用者負担の総額());
@@ -2169,8 +1534,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     entity.setBiko(社福軽減額.get備考());
                     entity.setState(EntityDataState.Added);
                     償還払請求社会福祉法人軽減額Dac.save(entity);
-                }
-                if (社福軽減額.get状態().equals(モード_修正)) {
+                } else if (モード_修正.equals(社福軽減額.get状態())) {
                     DbT3051ShokanShakaiFukushiHojinKeigengakuEntity entity
                             = new DbT3051ShokanShakaiFukushiHojinKeigengakuEntity();
                     entity.setHiHokenshaNo(parameter.get被保険者番号());
@@ -2188,8 +1552,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     entity.setBiko(社福軽減額.get備考());
                     entity.setState(EntityDataState.Modified);
                     償還払請求社会福祉法人軽減額Dac.save(entity);
-                }
-                if (社福軽減額.get状態().equals(モード_削除)) {
+                } else if (モード_削除.equals(社福軽減額.get状態())) {
                     DbT3051ShokanShakaiFukushiHojinKeigengakuEntity entity
                             = new DbT3051ShokanShakaiFukushiHojinKeigengakuEntity();
                     entity.setHiHokenshaNo(parameter.get被保険者番号());
@@ -2213,330 +1576,10 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      */
     public void updShokanShoteiShikkanShisetsuRyoyo(ShokanShoteiShikkanShisetsuRyoyoParameter parameter) {
         int 金額合計 = 0;
-        int 連番 = 0;
         List<ShokanShoteiShikkanShisetsuRyoyoEntity> 緊急時所定疾患List = parameter.get緊急時所定疾患List();
         if (緊急時所定疾患List != null && !緊急時所定疾患List.isEmpty()) {
             for (ShokanShoteiShikkanShisetsuRyoyoEntity 緊急時所定疾患 : 緊急時所定疾患List) {
-                if (緊急時所定疾患.get状態().equals(モード_登録)) {
-                    金額合計 = 金額合計 + 緊急時所定疾患.get緊急時施設療養費合計単位数()
-                            + 緊急時所定疾患.get所定疾患施設療養費小計();
-                    連番 = 連番 + 1;
-                    DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity entity
-                            = new DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(new RString("0001"));
-                    entity.setRenban(new RString(String.valueOf(連番)));
-                    entity.setKinkyuShobyoName1(緊急時所定疾患.get緊急時傷病名1());
-                    entity.setKinkyuShobyoName2(緊急時所定疾患.get緊急時傷病名2());
-                    entity.setKinkyuShobyoName3(緊急時所定疾患.get緊急時傷病名3());
-                    entity.setKinkyuChiryoKaishiYMD1(緊急時所定疾患.get緊急時治療開始年月日1());
-                    entity.setKinkyuChiryoKaishiYMD2(緊急時所定疾患.get緊急時治療開始年月日2());
-                    entity.setKinkyuChiryoKaishiYMD3(緊急時所定疾患.get緊急時治療開始年月日3());
-                    entity.setOshinNissu(緊急時所定疾患.get往診日数());
-                    entity.setOshinIryoKikanName(緊急時所定疾患.get往診医療機関名());
-                    entity.setTsuinNissu(緊急時所定疾患.get通院日数());
-                    entity.setTsuinKikanName(緊急時所定疾患.get通院医療機関名());
-                    entity.setKinkyuChiryoKanriTanisu(緊急時所定疾患.get緊急時治療管理単位数());
-                    entity.setKinkyuChiryoKanriNissu(緊急時所定疾患.get緊急時治療管理日数());
-                    entity.setKinkyuChiryoKanriSubTotal(緊急時所定疾患.get緊急時治療管理小計());
-                    entity.setRehabilitationTanisu(緊急時所定疾患.getリハビリテーション単位数());
-                    entity.setShochiTanisu(緊急時所定疾患.get処置単位数());
-                    entity.setShujutsuTanisu(緊急時所定疾患.get手術単位数());
-                    entity.setMasuiTanisu(緊急時所定疾患.get麻酔単位数());
-                    entity.setHoshasenChiryoTanisu(緊急時所定疾患.get放射線治療単位数());
-                    RString 摘要 = 緊急時所定疾患.get摘要();
-                    int length = 緊急時所定疾患.get摘要().length();
-                    if (length != 0) {
-                        if (length <= 32) {
-                            entity.setTekiyo1(摘要);
-                        }
-                        if (length > 32 && length <= 64) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, length));
-                        }
-                        if (length > 64 && length <= 96) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, length));
-                        }
-                        if (length > 96 && length <= 128) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, length));
-                        }
-                        if (length > 128 && length <= 160) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, length));
-                        }
-                        if (length > 160 && length <= 192) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, length));
-                        }
-                        if (length > 192 && length <= 224) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, length));
-                        }
-                        if (length > 224 && length <= 256) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, length));
-                        }
-                        if (length > 256 && length <= 288) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, length));
-                        }
-                        if (length > 288 && length <= 320) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, length));
-                        }
-                        if (length > 320 && length <= 352) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, length));
-                        }
-                        if (length > 352 && length <= 384) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, length));
-                        }
-                        if (length > 384 && length <= 416) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, length));
-                        }
-                        if (length > 416 && length <= 448) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, length));
-                        }
-                        if (length > 448 && length <= 480) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, length));
-                        }
-                        if (length > 480 && length <= 512) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, length));
-                        }
-                        if (length > 512 && length <= 544) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, length));
-                        }
-                        if (length > 544 && length <= 576) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, length));
-                        }
-                        if (length > 576 && length <= 608) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, length));
-                        }
-                        if (length > 608 && length <= 640) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, 608));
-                            entity.setTekiyo20(摘要.substring(608, length));
-                        }
-                        if (length > 640) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, 608));
-                            entity.setTekiyo20(摘要.substring(608, 640));
-                        }
-                    }
-                    entity.setKinkyuShisetsuRyoyohiTotalTanisu(緊急時所定疾患.get緊急時施設療養費合計単位数());
-                    entity.setShoteiShikkanShobyoName1(緊急時所定疾患.get所定疾患施設療養費傷病名1());
-                    entity.setShoteiShikkanShobyoName2(緊急時所定疾患.get所定疾患施設療養費傷病名2());
-                    entity.setShoteiShikkanShobyoName3(緊急時所定疾患.get所定疾患施設療養費傷病名3());
-                    entity.setShoteiShikkanShobyoKaishiYMD1(緊急時所定疾患.get所定疾患施設療養費開始年月日1());
-                    entity.setShoteiShikkanShobyoKaishiYMD2(緊急時所定疾患.get所定疾患施設療養費開始年月日2());
-                    entity.setShoteiShikkanShobyoKaishiYMD3(緊急時所定疾患.get所定疾患施設療養費開始年月日3());
-                    entity.setShoteiShikkanNissu(緊急時所定疾患.get所定疾患施設療養費日数());
-                    entity.setShoteiShikkanSubTotal(緊急時所定疾患.get所定疾患施設療養費小計());
-                    entity.setState(EntityDataState.Added);
-                    償還払請求所定疾患施設療養費等Dac.save(entity);
-                }
-                if (緊急時所定疾患.get状態().equals(モード_修正)) {
+                if (モード_登録.equals(緊急時所定疾患.get状態())) {
                     金額合計 = 金額合計 + 緊急時所定疾患.get緊急時施設療養費合計単位数()
                             + 緊急時所定疾患.get所定疾患施設療養費小計();
                     DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity entity
@@ -2566,282 +1609,87 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     entity.setShujutsuTanisu(緊急時所定疾患.get手術単位数());
                     entity.setMasuiTanisu(緊急時所定疾患.get麻酔単位数());
                     entity.setHoshasenChiryoTanisu(緊急時所定疾患.get放射線治療単位数());
-                    RString 摘要 = 緊急時所定疾患.get摘要();
-                    int length = 緊急時所定疾患.get摘要().length();
-                    if (length != 0) {
-                        if (length <= 32) {
-                            entity.setTekiyo1(摘要);
-                        }
-                        if (length > 32 && length <= 64) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, length));
-                        }
-                        if (length > 64 && length <= 96) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, length));
-                        }
-                        if (length > 96 && length <= 128) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, length));
-                        }
-                        if (length > 128 && length <= 160) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, length));
-                        }
-                        if (length > 160 && length <= 192) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, length));
-                        }
-                        if (length > 192 && length <= 224) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, length));
-                        }
-                        if (length > 224 && length <= 256) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, length));
-                        }
-                        if (length > 256 && length <= 288) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, length));
-                        }
-                        if (length > 288 && length <= 320) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, length));
-                        }
-                        if (length > 320 && length <= 352) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, length));
-                        }
-                        if (length > 352 && length <= 384) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, length));
-                        }
-                        if (length > 384 && length <= 416) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, length));
-                        }
-                        if (length > 416 && length <= 448) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, length));
-                        }
-                        if (length > 448 && length <= 480) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, length));
-                        }
-                        if (length > 480 && length <= 512) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, length));
-                        }
-                        if (length > 512 && length <= 544) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, length));
-                        }
-                        if (length > 544 && length <= 576) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, length));
-                        }
-                        if (length > 576 && length <= 608) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, length));
-                        }
-                        if (length > 608 && length <= 640) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, 608));
-                            entity.setTekiyo20(摘要.substring(608, length));
-                        }
-                        if (length > 640) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, 608));
-                            entity.setTekiyo20(摘要.substring(608, 640));
-                        }
-                    }
+                    entity.setTekiyo1(緊急時所定疾患.get摘要1());
+                    entity.setTekiyo2(緊急時所定疾患.get摘要2());
+                    entity.setTekiyo3(緊急時所定疾患.get摘要3());
+                    entity.setTekiyo4(緊急時所定疾患.get摘要4());
+                    entity.setTekiyo5(緊急時所定疾患.get摘要5());
+                    entity.setTekiyo6(緊急時所定疾患.get摘要6());
+                    entity.setTekiyo7(緊急時所定疾患.get摘要7());
+                    entity.setTekiyo8(緊急時所定疾患.get摘要8());
+                    entity.setTekiyo9(緊急時所定疾患.get摘要9());
+                    entity.setTekiyo10(緊急時所定疾患.get摘要10());
+                    entity.setTekiyo11(緊急時所定疾患.get摘要11());
+                    entity.setTekiyo12(緊急時所定疾患.get摘要12());
+                    entity.setTekiyo13(緊急時所定疾患.get摘要13());
+                    entity.setTekiyo14(緊急時所定疾患.get摘要14());
+                    entity.setTekiyo15(緊急時所定疾患.get摘要15());
+                    entity.setTekiyo16(緊急時所定疾患.get摘要16());
+                    entity.setTekiyo17(緊急時所定疾患.get摘要17());
+                    entity.setTekiyo18(緊急時所定疾患.get摘要18());
+                    entity.setTekiyo19(緊急時所定疾患.get摘要19());
+                    entity.setTekiyo20(緊急時所定疾患.get摘要20());
+                    entity.setKinkyuShisetsuRyoyohiTotalTanisu(緊急時所定疾患.get緊急時施設療養費合計単位数());
+                    entity.setShoteiShikkanShobyoName1(緊急時所定疾患.get所定疾患施設療養費傷病名1());
+                    entity.setShoteiShikkanShobyoName2(緊急時所定疾患.get所定疾患施設療養費傷病名2());
+                    entity.setShoteiShikkanShobyoName3(緊急時所定疾患.get所定疾患施設療養費傷病名3());
+                    entity.setShoteiShikkanShobyoKaishiYMD1(緊急時所定疾患.get所定疾患施設療養費開始年月日1());
+                    entity.setShoteiShikkanShobyoKaishiYMD2(緊急時所定疾患.get所定疾患施設療養費開始年月日2());
+                    entity.setShoteiShikkanShobyoKaishiYMD3(緊急時所定疾患.get所定疾患施設療養費開始年月日3());
+                    entity.setShoteiShikkanNissu(緊急時所定疾患.get所定疾患施設療養費日数());
+                    entity.setShoteiShikkanSubTotal(緊急時所定疾患.get所定疾患施設療養費小計());
+                    entity.setState(EntityDataState.Added);
+                    償還払請求所定疾患施設療養費等Dac.save(entity);
+                } else if (モード_修正.equals(緊急時所定疾患.get状態())) {
+                    金額合計 = 金額合計 + 緊急時所定疾患.get緊急時施設療養費合計単位数()
+                            + 緊急時所定疾患.get所定疾患施設療養費小計();
+                    DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity entity
+                            = new DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity();
+                    entity.setHiHokenshaNo(parameter.get被保険者番号());
+                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
+                    entity.setSeiriNo(parameter.get整理番号());
+                    entity.setJigyoshaNo(parameter.get事業者番号());
+                    entity.setYoshikiNo(parameter.get証明書コード());
+                    entity.setMeisaiNo(parameter.get明細番号());
+                    entity.setRenban(緊急時所定疾患.get連番());
+                    entity.setKinkyuShobyoName1(緊急時所定疾患.get緊急時傷病名1());
+                    entity.setKinkyuShobyoName2(緊急時所定疾患.get緊急時傷病名2());
+                    entity.setKinkyuShobyoName3(緊急時所定疾患.get緊急時傷病名3());
+                    entity.setKinkyuChiryoKaishiYMD1(緊急時所定疾患.get緊急時治療開始年月日1());
+                    entity.setKinkyuChiryoKaishiYMD2(緊急時所定疾患.get緊急時治療開始年月日2());
+                    entity.setKinkyuChiryoKaishiYMD3(緊急時所定疾患.get緊急時治療開始年月日3());
+                    entity.setOshinNissu(緊急時所定疾患.get往診日数());
+                    entity.setOshinIryoKikanName(緊急時所定疾患.get往診医療機関名());
+                    entity.setTsuinNissu(緊急時所定疾患.get通院日数());
+                    entity.setTsuinKikanName(緊急時所定疾患.get通院医療機関名());
+                    entity.setKinkyuChiryoKanriTanisu(緊急時所定疾患.get緊急時治療管理単位数());
+                    entity.setKinkyuChiryoKanriNissu(緊急時所定疾患.get緊急時治療管理日数());
+                    entity.setKinkyuChiryoKanriSubTotal(緊急時所定疾患.get緊急時治療管理小計());
+                    entity.setRehabilitationTanisu(緊急時所定疾患.getリハビリテーション単位数());
+                    entity.setShochiTanisu(緊急時所定疾患.get処置単位数());
+                    entity.setShujutsuTanisu(緊急時所定疾患.get手術単位数());
+                    entity.setMasuiTanisu(緊急時所定疾患.get麻酔単位数());
+                    entity.setHoshasenChiryoTanisu(緊急時所定疾患.get放射線治療単位数());
+                    entity.setTekiyo1(緊急時所定疾患.get摘要1());
+                    entity.setTekiyo2(緊急時所定疾患.get摘要2());
+                    entity.setTekiyo3(緊急時所定疾患.get摘要3());
+                    entity.setTekiyo4(緊急時所定疾患.get摘要4());
+                    entity.setTekiyo5(緊急時所定疾患.get摘要5());
+                    entity.setTekiyo6(緊急時所定疾患.get摘要6());
+                    entity.setTekiyo7(緊急時所定疾患.get摘要7());
+                    entity.setTekiyo8(緊急時所定疾患.get摘要8());
+                    entity.setTekiyo9(緊急時所定疾患.get摘要9());
+                    entity.setTekiyo10(緊急時所定疾患.get摘要10());
+                    entity.setTekiyo11(緊急時所定疾患.get摘要11());
+                    entity.setTekiyo12(緊急時所定疾患.get摘要12());
+                    entity.setTekiyo13(緊急時所定疾患.get摘要13());
+                    entity.setTekiyo14(緊急時所定疾患.get摘要14());
+                    entity.setTekiyo15(緊急時所定疾患.get摘要15());
+                    entity.setTekiyo16(緊急時所定疾患.get摘要16());
+                    entity.setTekiyo17(緊急時所定疾患.get摘要17());
+                    entity.setTekiyo18(緊急時所定疾患.get摘要18());
+                    entity.setTekiyo19(緊急時所定疾患.get摘要19());
+                    entity.setTekiyo20(緊急時所定疾患.get摘要20());
                     entity.setKinkyuShisetsuRyoyohiTotalTanisu(緊急時所定疾患.get緊急時施設療養費合計単位数());
                     entity.setShoteiShikkanShobyoName1(緊急時所定疾患.get所定疾患施設療養費傷病名1());
                     entity.setShoteiShikkanShobyoName2(緊急時所定疾患.get所定疾患施設療養費傷病名2());
@@ -2853,8 +1701,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     entity.setShoteiShikkanSubTotal(緊急時所定疾患.get所定疾患施設療養費小計());
                     entity.setState(EntityDataState.Modified);
                     償還払請求所定疾患施設療養費等Dac.save(entity);
-                }
-                if (緊急時所定疾患.get状態().equals(モード_削除)) {
+                } else if (モード_削除.equals(緊急時所定疾患.get状態())) {
                     DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity entity
                             = new DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity();
                     entity.setHiHokenshaNo(parameter.get被保険者番号());
@@ -2887,321 +1734,12 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param parameter
      */
     public void updShokanKinkyuShisetsuRyoyo(ShokanKinkyuShisetsuRyoyoParameter parameter) {
+
         int 金額合計 = 0;
-        int 連番 = 0;
         List<ShokanKinkyuShisetsuRyoyoEntity> 緊急時施設療養費List = parameter.get緊急時施設療養費List();
         if (緊急時施設療養費List != null && !緊急時施設療養費List.isEmpty()) {
             for (ShokanKinkyuShisetsuRyoyoEntity 緊急時施設療養費 : 緊急時施設療養費List) {
-                if (緊急時施設療養費.get状態().equals(モード_登録)) {
-                    金額合計 = 金額合計 + 緊急時施設療養費.get緊急時施設療養費合計単位数();
-                    連番 = 連番 + 1;
-                    DbT3040ShokanKinkyuShisetsuRyoyoEntity entity = new DbT3040ShokanKinkyuShisetsuRyoyoEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(new RString("0001"));
-                    entity.setRenban(new RString(String.valueOf(連番)));
-                    entity.setKinkyuShobyoName1(緊急時施設療養費.get緊急時傷病名1());
-                    entity.setKinkyuShobyoName2(緊急時施設療養費.get緊急時傷病名2());
-                    entity.setKinkyuShobyoName3(緊急時施設療養費.get緊急時傷病名3());
-                    entity.setKinkyuChiryoKaishiYMD1(緊急時施設療養費.get緊急時治療開始年月日1());
-                    entity.setKinkyuChiryoKaishiYMD2(緊急時施設療養費.get緊急時治療開始年月日2());
-                    entity.setKinkyuChiryoKaishiYMD3(緊急時施設療養費.get緊急時治療開始年月日3());
-                    entity.setOshinNissu(緊急時施設療養費.get往診日数());
-                    entity.setOshinIryoKikanName(緊急時施設療養費.get往診医療機関名());
-                    entity.setTsuinNissu(緊急時施設療養費.get通院日数());
-                    entity.setTsuinKikanName(緊急時施設療養費.get通院医療機関名());
-                    entity.setKinkyuChiryoKanriTanisu(緊急時施設療養費.get緊急時治療管理単位数());
-                    entity.setKinkyuChiryoKanriNissu(緊急時施設療養費.get緊急時治療管理日数());
-                    entity.setKinkyuChiryoKanriSubTotal(緊急時施設療養費.get緊急時治療管理小計());
-                    entity.setRehabilitationTanisu(緊急時施設療養費.getリハビリテーション単位数());
-                    entity.setShochiTanisu(緊急時施設療養費.get処置単位数());
-                    entity.setShujutsuTanisu(緊急時施設療養費.get手術単位数());
-                    entity.setMasuiTanisu(緊急時施設療養費.get麻酔単位数());
-                    entity.setHoshasenChiryoTanisu(緊急時施設療養費.get放射線治療単位数());
-                    RString 摘要 = 緊急時施設療養費.get摘要();
-                    int length = 緊急時施設療養費.get摘要().length();
-                    if (length != 0) {
-                        if (length <= 32) {
-                            entity.setTekiyo1(摘要);
-                        }
-                        if (length > 32 && length <= 64) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, length));
-                        }
-                        if (length > 64 && length <= 96) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, length));
-                        }
-                        if (length > 96 && length <= 128) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, length));
-                        }
-                        if (length > 128 && length <= 160) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, length));
-                        }
-                        if (length > 160 && length <= 192) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, length));
-                        }
-                        if (length > 192 && length <= 224) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, length));
-                        }
-                        if (length > 224 && length <= 256) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, length));
-                        }
-                        if (length > 256 && length <= 288) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, length));
-                        }
-                        if (length > 288 && length <= 320) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, length));
-                        }
-                        if (length > 320 && length <= 352) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, length));
-                        }
-                        if (length > 352 && length <= 384) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, length));
-                        }
-                        if (length > 384 && length <= 416) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, length));
-                        }
-                        if (length > 416 && length <= 448) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, length));
-                        }
-                        if (length > 448 && length <= 480) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, length));
-                        }
-                        if (length > 480 && length <= 512) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, length));
-                        }
-                        if (length > 512 && length <= 544) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, length));
-                        }
-                        if (length > 544 && length <= 576) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, length));
-                        }
-                        if (length > 576 && length <= 608) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, length));
-                        }
-                        if (length > 608 && length <= 640) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, 608));
-                            entity.setTekiyo20(摘要.substring(608, length));
-                        }
-                        if (length > 640) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, 608));
-                            entity.setTekiyo20(摘要.substring(608, 640));
-                        }
-                    }
-                    entity.setKinkyuShisetsuRyoyohiTotalTanisu(緊急時施設療養費.get緊急時施設療養費合計単位数());
-                    entity.setState(EntityDataState.Added);
-                    償還払請求緊急時施設療養Dac.save(entity);
-                }
-                if (緊急時施設療養費.get状態().equals(モード_修正)) {
+                if (モード_登録.equals(緊急時施設療養費.get状態())) {
                     金額合計 = 金額合計 + 緊急時施設療養費.get緊急時施設療養費合計単位数();
                     DbT3040ShokanKinkyuShisetsuRyoyoEntity entity = new DbT3040ShokanKinkyuShisetsuRyoyoEntity();
                     entity.setHiHokenshaNo(parameter.get被保険者番号());
@@ -3229,287 +1767,81 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     entity.setShujutsuTanisu(緊急時施設療養費.get手術単位数());
                     entity.setMasuiTanisu(緊急時施設療養費.get麻酔単位数());
                     entity.setHoshasenChiryoTanisu(緊急時施設療養費.get放射線治療単位数());
-                    RString 摘要 = 緊急時施設療養費.get摘要();
-                    int length = 緊急時施設療養費.get摘要().length();
-                    if (length != 0) {
-                        if (length <= 32) {
-                            entity.setTekiyo1(摘要);
-                        }
-                        if (length > 32 && length <= 64) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, length));
-                        }
-                        if (length > 64 && length <= 96) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, length));
-                        }
-                        if (length > 96 && length <= 128) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, length));
-                        }
-                        if (length > 128 && length <= 160) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, length));
-                        }
-                        if (length > 160 && length <= 192) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, length));
-                        }
-                        if (length > 192 && length <= 224) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, length));
-                        }
-                        if (length > 224 && length <= 256) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, length));
-                        }
-                        if (length > 256 && length <= 288) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, length));
-                        }
-                        if (length > 288 && length <= 320) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, length));
-                        }
-                        if (length > 320 && length <= 352) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, length));
-                        }
-                        if (length > 352 && length <= 384) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, length));
-                        }
-                        if (length > 384 && length <= 416) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, length));
-                        }
-                        if (length > 416 && length <= 448) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, length));
-                        }
-                        if (length > 448 && length <= 480) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, length));
-                        }
-                        if (length > 480 && length <= 512) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, length));
-                        }
-                        if (length > 512 && length <= 544) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, length));
-                        }
-                        if (length > 544 && length <= 576) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, length));
-                        }
-                        if (length > 576 && length <= 608) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, length));
-                        }
-                        if (length > 608 && length <= 640) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, 608));
-                            entity.setTekiyo20(摘要.substring(608, length));
-                        }
-                        if (length > 640) {
-                            entity.setTekiyo1(摘要.substring(0, 32));
-                            entity.setTekiyo2(摘要.substring(32, 64));
-                            entity.setTekiyo3(摘要.substring(64, 96));
-                            entity.setTekiyo4(摘要.substring(96, 128));
-                            entity.setTekiyo5(摘要.substring(128, 160));
-                            entity.setTekiyo6(摘要.substring(160, 192));
-                            entity.setTekiyo7(摘要.substring(192, 224));
-                            entity.setTekiyo8(摘要.substring(224, 256));
-                            entity.setTekiyo9(摘要.substring(256, 288));
-                            entity.setTekiyo10(摘要.substring(288, 320));
-                            entity.setTekiyo11(摘要.substring(320, 352));
-                            entity.setTekiyo12(摘要.substring(352, 384));
-                            entity.setTekiyo13(摘要.substring(384, 416));
-                            entity.setTekiyo14(摘要.substring(416, 448));
-                            entity.setTekiyo15(摘要.substring(448, 480));
-                            entity.setTekiyo16(摘要.substring(480, 512));
-                            entity.setTekiyo17(摘要.substring(512, 544));
-                            entity.setTekiyo18(摘要.substring(544, 576));
-                            entity.setTekiyo19(摘要.substring(576, 608));
-                            entity.setTekiyo20(摘要.substring(608, 640));
-                        }
-                    }
+                    entity.setTekiyo1(緊急時施設療養費.get摘要1());
+                    entity.setTekiyo2(緊急時施設療養費.get摘要2());
+                    entity.setTekiyo3(緊急時施設療養費.get摘要3());
+                    entity.setTekiyo4(緊急時施設療養費.get摘要4());
+                    entity.setTekiyo5(緊急時施設療養費.get摘要5());
+                    entity.setTekiyo6(緊急時施設療養費.get摘要6());
+                    entity.setTekiyo7(緊急時施設療養費.get摘要7());
+                    entity.setTekiyo8(緊急時施設療養費.get摘要8());
+                    entity.setTekiyo9(緊急時施設療養費.get摘要9());
+                    entity.setTekiyo10(緊急時施設療養費.get摘要10());
+                    entity.setTekiyo11(緊急時施設療養費.get摘要11());
+                    entity.setTekiyo12(緊急時施設療養費.get摘要12());
+                    entity.setTekiyo13(緊急時施設療養費.get摘要13());
+                    entity.setTekiyo14(緊急時施設療養費.get摘要14());
+                    entity.setTekiyo15(緊急時施設療養費.get摘要15());
+                    entity.setTekiyo16(緊急時施設療養費.get摘要16());
+                    entity.setTekiyo17(緊急時施設療養費.get摘要17());
+                    entity.setTekiyo18(緊急時施設療養費.get摘要18());
+                    entity.setTekiyo19(緊急時施設療養費.get摘要19());
+                    entity.setTekiyo20(緊急時施設療養費.get摘要20());
+                    entity.setKinkyuShisetsuRyoyohiTotalTanisu(緊急時施設療養費.get緊急時施設療養費合計単位数());
+                    entity.setState(EntityDataState.Added);
+                    償還払請求緊急時施設療養Dac.save(entity);
+                } else if (モード_修正.equals(緊急時施設療養費.get状態())) {
+                    金額合計 = 金額合計 + 緊急時施設療養費.get緊急時施設療養費合計単位数();
+                    DbT3040ShokanKinkyuShisetsuRyoyoEntity entity = new DbT3040ShokanKinkyuShisetsuRyoyoEntity();
+                    entity.setHiHokenshaNo(parameter.get被保険者番号());
+                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
+                    entity.setSeiriNo(parameter.get整理番号());
+                    entity.setJigyoshaNo(parameter.get事業者番号());
+                    entity.setYoshikiNo(parameter.get証明書コード());
+                    entity.setMeisaiNo(parameter.get明細番号());
+                    entity.setRenban(緊急時施設療養費.get連番());
+                    entity.setKinkyuShobyoName1(緊急時施設療養費.get緊急時傷病名1());
+                    entity.setKinkyuShobyoName2(緊急時施設療養費.get緊急時傷病名2());
+                    entity.setKinkyuShobyoName3(緊急時施設療養費.get緊急時傷病名3());
+                    entity.setKinkyuChiryoKaishiYMD1(緊急時施設療養費.get緊急時治療開始年月日1());
+                    entity.setKinkyuChiryoKaishiYMD2(緊急時施設療養費.get緊急時治療開始年月日2());
+                    entity.setKinkyuChiryoKaishiYMD3(緊急時施設療養費.get緊急時治療開始年月日3());
+                    entity.setOshinNissu(緊急時施設療養費.get往診日数());
+                    entity.setOshinIryoKikanName(緊急時施設療養費.get往診医療機関名());
+                    entity.setTsuinNissu(緊急時施設療養費.get通院日数());
+                    entity.setTsuinKikanName(緊急時施設療養費.get通院医療機関名());
+                    entity.setKinkyuChiryoKanriTanisu(緊急時施設療養費.get緊急時治療管理単位数());
+                    entity.setKinkyuChiryoKanriNissu(緊急時施設療養費.get緊急時治療管理日数());
+                    entity.setKinkyuChiryoKanriSubTotal(緊急時施設療養費.get緊急時治療管理小計());
+                    entity.setRehabilitationTanisu(緊急時施設療養費.getリハビリテーション単位数());
+                    entity.setShochiTanisu(緊急時施設療養費.get処置単位数());
+                    entity.setShujutsuTanisu(緊急時施設療養費.get手術単位数());
+                    entity.setMasuiTanisu(緊急時施設療養費.get麻酔単位数());
+                    entity.setHoshasenChiryoTanisu(緊急時施設療養費.get放射線治療単位数());
+                    entity.setTekiyo1(緊急時施設療養費.get摘要1());
+                    entity.setTekiyo2(緊急時施設療養費.get摘要2());
+                    entity.setTekiyo3(緊急時施設療養費.get摘要3());
+                    entity.setTekiyo4(緊急時施設療養費.get摘要4());
+                    entity.setTekiyo5(緊急時施設療養費.get摘要5());
+                    entity.setTekiyo6(緊急時施設療養費.get摘要6());
+                    entity.setTekiyo7(緊急時施設療養費.get摘要7());
+                    entity.setTekiyo8(緊急時施設療養費.get摘要8());
+                    entity.setTekiyo9(緊急時施設療養費.get摘要9());
+                    entity.setTekiyo10(緊急時施設療養費.get摘要10());
+                    entity.setTekiyo11(緊急時施設療養費.get摘要11());
+                    entity.setTekiyo12(緊急時施設療養費.get摘要12());
+                    entity.setTekiyo13(緊急時施設療養費.get摘要13());
+                    entity.setTekiyo14(緊急時施設療養費.get摘要14());
+                    entity.setTekiyo15(緊急時施設療養費.get摘要15());
+                    entity.setTekiyo16(緊急時施設療養費.get摘要16());
+                    entity.setTekiyo17(緊急時施設療養費.get摘要17());
+                    entity.setTekiyo18(緊急時施設療養費.get摘要18());
+                    entity.setTekiyo19(緊急時施設療養費.get摘要19());
+                    entity.setTekiyo20(緊急時施設療養費.get摘要20());
                     entity.setKinkyuShisetsuRyoyohiTotalTanisu(緊急時施設療養費.get緊急時施設療養費合計単位数());
                     entity.setState(EntityDataState.Modified);
                     償還払請求緊急時施設療養Dac.save(entity);
-                }
-                if (緊急時施設療養費.get状態().equals(モード_削除)) {
+                } else if (モード_削除.equals(緊急時施設療養費.get状態())) {
                     DbT3040ShokanKinkyuShisetsuRyoyoEntity entity = new DbT3040ShokanKinkyuShisetsuRyoyoEntity();
                     entity.setHiHokenshaNo(parameter.get被保険者番号());
                     entity.setServiceTeikyoYM(parameter.get提供購入年月());
@@ -3544,14 +1876,12 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
 
         int 請求額合計 = 0;
         int 利用者負担額合計 = 0;
-        int 連番 = 0;
         List<ShokanShukeiEntity> 請求集計List = parameter.get請求集計List();
         if (請求集計List != null && !請求集計List.isEmpty()) {
             for (ShokanShukeiEntity 請求集計 : 請求集計List) {
-                if (請求集計.get状態().equals(モード_登録)) {
+                if (モード_登録.equals(請求集計.get状態())) {
                     請求額合計 = 請求額合計 + Integer.parseInt(請求集計.get請求額().toString());
                     利用者負担額合計 = 利用者負担額合計 + 請求集計.get利用者負担();
-                    連番 = 連番 + 1;
                     DbT3053ShokanShukeiEntity entity = new DbT3053ShokanShukeiEntity();
                     entity.setHiHokenshaNo(parameter.get被保険者番号());
                     entity.setServiceTeikyoYM(parameter.get提供購入年月());
@@ -3559,7 +1889,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     entity.setJigyoshaNo(parameter.get事業者番号());
                     entity.setYoshikiNo(parameter.get証明書コード());
                     entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(new RString(String.valueOf(連番)));
+                    entity.setRenban(請求集計.get連番());
                     entity.setServiceShuruiCode(請求集計.getサービス種類());
                     entity.setServiceJitsunissu(請求集計.getサービス実日数());
                     entity.setPlanTanisu(請求集計.get計画単位数());
@@ -3577,8 +1907,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     entity.setShinsaHohoKubunCode(請求集計.get審査方法区分コード());
                     entity.setState(EntityDataState.Added);
                     償還払請求集計Dac.save(entity);
-                }
-                if (請求集計.get状態().equals(モード_修正)) {
+                } else if (モード_修正.equals(請求集計.get状態())) {
                     請求額合計 = 請求額合計 + Integer.parseInt(請求集計.get請求額().toString());
                     利用者負担額合計 = 利用者負担額合計 + 請求集計.get利用者負担();
                     DbT3053ShokanShukeiEntity entity = new DbT3053ShokanShukeiEntity();
@@ -3606,8 +1935,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     entity.setShinsaHohoKubunCode(請求集計.get審査方法区分コード());
                     entity.setState(EntityDataState.Modified);
                     償還払請求集計Dac.save(entity);
-                }
-                if (請求集計.get状態().equals(モード_削除)) {
+                } else if (モード_削除.equals(請求集計.get状態())) {
                     DbT3053ShokanShukeiEntity entity = new DbT3053ShokanShukeiEntity();
                     entity.setHiHokenshaNo(parameter.get被保険者番号());
                     entity.setServiceTeikyoYM(parameter.get提供購入年月());
@@ -3654,7 +1982,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                 dbT3043entity.setJigyoshaNo(parameter.get事業者番号());
                 dbT3043entity.setYoshikiNo(parameter.get証明書コード());
                 dbT3043entity.setMeisaiNo(parameter.get明細番号());
-                dbT3043entity.setRenban(new RString("1"));
+                dbT3043entity.setRenban(parameter.get連番());
                 dbT3043entity.setKihonTeikyoNissu(parameter.get基本提供日数());
                 dbT3043entity.setKihonTeikyoTanka(parameter.get基本提供単価());
                 dbT3043entity.setKihonTeikyoKingaku(parameter.get基本提供金額());
@@ -3668,7 +1996,6 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                 dbT3043entity.setNichigakuHyojunFutangaku(parameter.get標準負担日額());
                 dbT3043entity.setState(EntityDataState.Added);
                 償還払請求食事費用Dac.save(dbT3043entity);
-
             } else {
                 DbT3043ShokanShokujiHiyoEntity dbT3043entity = new DbT3043ShokanShokujiHiyoEntity();
                 dbT3043entity.setHiHokenshaNo(parameter.get被保険者番号());
@@ -3676,8 +2003,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                 dbT3043entity.setSeiriNp(parameter.get整理番号());
                 dbT3043entity.setJigyoshaNo(parameter.get事業者番号());
                 dbT3043entity.setYoshikiNo(parameter.get証明書コード());
-                dbT3043entity.setMeisaiNo(new RString("0001"));
-                dbT3043entity.setRenban(new RString("1"));
+                dbT3043entity.setMeisaiNo(parameter.get明細番号());
+                dbT3043entity.setRenban(parameter.get連番());
                 dbT3043entity.setKihonTeikyoNissu(parameter.get基本提供日数());
                 dbT3043entity.setKihonTeikyoTanka(parameter.get基本提供単価());
                 dbT3043entity.setKihonTeikyoKingaku(parameter.get基本提供金額());
@@ -3694,83 +2021,42 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
             }
         } else {
             if (parameter.get提供購入年月().isBeforeOrEquals(new FlexibleYearMonth("200509"))) {
-                int 連番 = 0;
                 List<ShokanShokujiHiyoEntity> 食事費用List = parameter.get食事費用List();
                 if (食事費用List != null && !食事費用List.isEmpty()) {
                     for (ShokanShokujiHiyoEntity 食事費用 : 食事費用List) {
-                        if (食事費用.get状態().equals(モード_登録)) {
-                            連番 = 連番 + 1;
+                        if (モード_登録.equals(食事費用.get状態())) {
                             DbT3039ShokanMeisaiEntity dbT3039entity = new DbT3039ShokanMeisaiEntity();
                             dbT3039entity.setHiHokenshaNo(parameter.get被保険者番号());
                             dbT3039entity.setServiceTeikyoYM(parameter.get提供購入年月());
                             dbT3039entity.setSeiriNp(parameter.get整理番号());
                             dbT3039entity.setJigyoshaNo(parameter.get事業者番号());
                             dbT3039entity.setYoshikiNo(parameter.get証明書コード());
-                            dbT3039entity.setMeisaiNo(new RString("0001"));
-                            dbT3039entity.setRenban(new RString(String.valueOf(連番)));
-                            if (食事費用.getサービスコード() != null && !食事費用.getサービスコード().isEmpty()) {
-                                if (食事費用.getサービスコード().length() <= 2) {
-                                    dbT3039entity.setServiceShuruiCode(
-                                            new ServiceShuruiCode(食事費用.getサービスコード()));
-                                }
-                                if (食事費用.getサービスコード().length() > 2
-                                        && 食事費用.getサービスコード().length() <= 6) {
-                                    dbT3039entity.setServiceShuruiCode(
-                                            new ServiceShuruiCode(食事費用.getサービスコード().substring(0, 2)));
-                                    dbT3039entity.setServiceKomokuCode(
-                                            new ServiceKomokuCode(食事費用.getサービスコード()
-                                                    .substring(2, (食事費用.getサービスコード().length()))));
-                                }
-                                if (食事費用.getサービスコード().length() > 6) {
-                                    dbT3039entity.setServiceShuruiCode(
-                                            new ServiceShuruiCode(食事費用.getサービスコード().substring(0, 2)));
-                                    dbT3039entity.setServiceKomokuCode(
-                                            new ServiceKomokuCode(食事費用.getサービスコード().substring(2, 6)));
-                                }
-                            }
+                            dbT3039entity.setMeisaiNo(parameter.get明細番号());
+                            dbT3039entity.setRenban(食事費用.get連番());
+                            dbT3039entity.setServiceShuruiCode(食事費用.getサービス種類コード());
+                            dbT3039entity.setServiceKomokuCode(食事費用.getサービス項目コード());
                             dbT3039entity.setTanisu(食事費用.get単位());
                             dbT3039entity.setNissuKaisu(食事費用.get回数日数());
                             dbT3039entity.setServiceTanisu(食事費用.get金額());
                             dbT3039entity.setState(EntityDataState.Added);
                             償還払請求明細Dac.save(dbT3039entity);
-                        }
-                        if (食事費用.get状態().equals(モード_修正)) {
+                        } else if (モード_修正.equals(食事費用.get状態())) {
                             DbT3039ShokanMeisaiEntity dbT3039entity = new DbT3039ShokanMeisaiEntity();
                             dbT3039entity.setHiHokenshaNo(parameter.get被保険者番号());
                             dbT3039entity.setServiceTeikyoYM(parameter.get提供購入年月());
-
                             dbT3039entity.setSeiriNp(parameter.get整理番号());
                             dbT3039entity.setJigyoshaNo(parameter.get事業者番号());
                             dbT3039entity.setYoshikiNo(parameter.get証明書コード());
-                            dbT3039entity.setMeisaiNo(new RString("0001"));
+                            dbT3039entity.setMeisaiNo(parameter.get明細番号());
                             dbT3039entity.setRenban(食事費用.get連番());
-                            if (食事費用.getサービスコード() != null && !食事費用.getサービスコード().isEmpty()) {
-                                if (食事費用.getサービスコード().length() <= 2) {
-                                    dbT3039entity.setServiceShuruiCode(
-                                            new ServiceShuruiCode(食事費用.getサービスコード()));
-                                }
-                                if (食事費用.getサービスコード().length() > 2
-                                        && 食事費用.getサービスコード().length() <= 6) {
-                                    dbT3039entity.setServiceShuruiCode(
-                                            new ServiceShuruiCode(食事費用.getサービスコード().substring(0, 2)));
-                                    dbT3039entity.setServiceKomokuCode(
-                                            new ServiceKomokuCode(食事費用.getサービスコード()
-                                                    .substring(2, (食事費用.getサービスコード().length()))));
-                                }
-                                if (食事費用.getサービスコード().length() > 6) {
-                                    dbT3039entity.setServiceShuruiCode(
-                                            new ServiceShuruiCode(食事費用.getサービスコード().substring(0, 2)));
-                                    dbT3039entity.setServiceKomokuCode(
-                                            new ServiceKomokuCode(食事費用.getサービスコード().substring(2, 6)));
-                                }
-                            }
+                            dbT3039entity.setServiceShuruiCode(食事費用.getサービス種類コード());
+                            dbT3039entity.setServiceKomokuCode(食事費用.getサービス項目コード());
                             dbT3039entity.setTanisu(食事費用.get単位());
                             dbT3039entity.setNissuKaisu(食事費用.get回数日数());
                             dbT3039entity.setServiceTanisu(食事費用.get金額());
                             dbT3039entity.setState(EntityDataState.Modified);
                             償還払請求明細Dac.save(dbT3039entity);
-                        }
-                        if (食事費用.get状態().equals(モード_削除)) {
+                        } else if (モード_削除.equals(食事費用.get状態())) {
                             DbT3039ShokanMeisaiEntity dbT3039entity = new DbT3039ShokanMeisaiEntity();
                             dbT3039entity.setHiHokenshaNo(parameter.get被保険者番号());
                             dbT3039entity.setServiceTeikyoYM(parameter.get提供購入年月());
@@ -3793,7 +2079,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                 dbT3043entity.setJigyoshaNo(parameter.get事業者番号());
                 dbT3043entity.setYoshikiNo(parameter.get証明書コード());
                 dbT3043entity.setMeisaiNo(parameter.get明細番号());
-                dbT3043entity.setRenban(new RString("1"));
+                dbT3043entity.setRenban(parameter.get連番());
                 dbT3043entity.setShokujiTeikyoTotalNissu(parameter.get食事提供延べ日数());
                 dbT3043entity.setShokujiTeikyohiTotal(parameter.get食事提供費合計());
                 dbT3043entity.setGetsugakuHyojunFutangaku(parameter.get標準負担月額());
@@ -3828,6 +2114,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param parameter
      */
     public void updKetteJoho(SyokanbaraihiShikyuShinseiKetteParameter parameter) {
+
         RString 修正前支給区分 = null;
         List<SyokanbaraihiShikyuShinseiKetteEntity> 決定情報一覧List = parameter.get決定情報一覧List();
         if (parameter.get決定年月日() != null && parameter.get決定年月日().isEmpty()) {
@@ -3893,8 +2180,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             dbT3047entity.setKounyuKaishuRireki(parameter.get不支給理由等2());
                             dbT3047entity.setState(EntityDataState.Modified);
                             償還払請求サービス計画200904Dac.save(dbT3047entity);
-                        }
-                        if (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth("200903"))
+                        } else if (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth("200903"))
                                 && new FlexibleYearMonth("200604").isBeforeOrEquals(parameter.getサービス提供年月())) {
                             DbT3046ShokanServicePlan200604Entity dbT3046entity
                                     = new DbT3046ShokanServicePlan200604Entity();
@@ -3909,8 +2195,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             dbT3046entity.setKounyuKaishuRireki(parameter.get不支給理由等2());
                             dbT3046entity.setState(EntityDataState.Modified);
                             償還払請求サービス計画200604Dac.save(dbT3046entity);
-                        }
-                        if (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
+                        } else if (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
                             DbT3045ShokanServicePlan200004Entity dbT3045entity
                                     = new DbT3045ShokanServicePlan200004Entity();
                             dbT3045entity.setHiHokenshaNo(parameter.get被保険者番号());
@@ -4034,7 +2319,6 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     = SyokanbaraiShikyuKetteKyufuJssekiHensyuManager.createInstance();
             manager.dealKyufujisseki(parameter.get画面モード(), parameter.get識別コード(), entity, 修正前支給区分);
         }
-
     }
 
     /**
@@ -4123,6 +2407,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
     }
 
     /**
+     *
      * サービス計画費情報件数取得
      *
      * @param 被保険者番号
@@ -4140,12 +2425,14 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
             RString 様式番号,
             RString 明細番号) {
         if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス提供年月)) {
-            return 償還払請求サービス計画200904Dac.selectサービス計画費情報件数(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+            return 償還払請求サービス計画200904Dac.selectサービス計画費情報件数(被保険者番号, サービス提供年月,
+                    整理番号, 事業者番号, 様式番号, 明細番号);
         }
         if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
-            return 償還払請求サービス計画200004Dac.selectサービス計画費情報件数(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        } else {
-            return 償還払請求サービス計画200604Dac.selectサービス計画費情報件数(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+            return 償還払請求サービス計画200004Dac.selectサービス計画費情報件数(被保険者番号, サービス提供年月,
+                    整理番号, 事業者番号, 様式番号, 明細番号);
         }
+        return 償還払請求サービス計画200604Dac.selectサービス計画費情報件数(被保険者番号, サービス提供年月,
+                整理番号, 事業者番号, 様式番号, 明細番号);
     }
 }

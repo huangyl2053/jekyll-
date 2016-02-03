@@ -107,9 +107,13 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
      * @param shokanShukeiEntity
      * @param 修正前支給区分
      */
-    public void dealKyufujisseki(RString 画面モード, ShikibetsuCode 識別コード, DbT3038ShokanKihonEntity shokanKihonEntity, List<DbT3048ShokanFukushiYoguHanbaihiEntity> businessList,
-            DbT3034ShokanShinseiEntity shokanShinseiEntity, DbT3036ShokanHanteiKekkaEntity shokanHanteiKekkaEntity,
-            DbT3053ShokanShukeiEntity shokanShukeiEntity, RString 修正前支給区分) {
+    public void dealKyufujisseki(RString 画面モード, ShikibetsuCode 識別コード,
+            DbT3038ShokanKihonEntity shokanKihonEntity,
+            List<DbT3048ShokanFukushiYoguHanbaihiEntity> businessList,
+            DbT3034ShokanShinseiEntity shokanShinseiEntity,
+            DbT3036ShokanHanteiKekkaEntity shokanHanteiKekkaEntity,
+            DbT3053ShokanShukeiEntity shokanShukeiEntity,
+            RString 修正前支給区分) {
 
         requireNonNull(画面モード, UrSystemErrorMessages.値がnull.getReplacedMessage("画面モード"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
@@ -184,11 +188,16 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
      * @param shokanShukeiEntity
      * @param 給付実績情報作成区分コード
      */
-    private void 給付実績追加(ShikibetsuCode 識別コード, DbT3038ShokanKihonEntity shokanKihonEntity, List<DbT3048ShokanFukushiYoguHanbaihiEntity> businessList,
-            DbT3034ShokanShinseiEntity shokanShinseiEntity, DbT3036ShokanHanteiKekkaEntity shokanHanteiKekkaEntity,
-            DbT3053ShokanShukeiEntity shokanShukeiEntity, RString 給付実績情報作成区分コード) {
+    private void 給付実績追加(ShikibetsuCode 識別コード,
+            DbT3038ShokanKihonEntity shokanKihonEntity,
+            List<DbT3048ShokanFukushiYoguHanbaihiEntity> businessList,
+            DbT3034ShokanShinseiEntity shokanShinseiEntity,
+            DbT3036ShokanHanteiKekkaEntity shokanHanteiKekkaEntity,
+            DbT3053ShokanShukeiEntity shokanShukeiEntity,
+            RString 給付実績情報作成区分コード) {
         requireNonNull(給付実績情報作成区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績情報作成区分コード"));
-        RString 通し番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.実績管理番号.getコード()).nextString();
+        RString 通し番号 = Saiban.get(SubGyomuCode.DBC介護給付,
+                SaibanHanyokeyName.実績管理番号.getコード()).nextString();
         if (通し番号 == null) {
             throw new IllegalArgumentException(UrErrorMessages.存在しない
                     .getMessage().replace("最新番号").evaluate());
@@ -222,8 +231,12 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
      * @param shokanShinseiEntity
      * @param shokanHanteiKekkaEntity
      */
-    public void save給付実績基本(RString 給付実績情報作成区分コード, RString 通し番号, FlexibleDate 生年月日YMD, RString 性別コード,
-            DbT4001JukyushaDaichoEntity DbT4001entity, DbT3038ShokanKihonEntity shokanKihonEntity, DbT3034ShokanShinseiEntity shokanShinseiEntity, DbT3036ShokanHanteiKekkaEntity shokanHanteiKekkaEntity) {
+    public void save給付実績基本(RString 給付実績情報作成区分コード, RString 通し番号,
+            FlexibleDate 生年月日YMD, RString 性別コード,
+            DbT4001JukyushaDaichoEntity DbT4001entity,
+            DbT3038ShokanKihonEntity shokanKihonEntity,
+            DbT3034ShokanShinseiEntity shokanShinseiEntity,
+            DbT3036ShokanHanteiKekkaEntity shokanHanteiKekkaEntity) {
         DbT3017KyufujissekiKihonEntity DbT3017entity = new DbT3017KyufujissekiKihonEntity();
 
         DbT3017entity.setKokanShikibetsuNo(get交換情報識別番号(shokanKihonEntity.getServiceTeikyoYM()));
@@ -263,7 +276,11 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
      * @param shokanShukeiEntity
      * @param shokanHanteiKekkaEntity
      */
-    public void save給付実績福祉用具販売費(RString 通し番号, List<DbT3048ShokanFukushiYoguHanbaihiEntity> businessList, DbT3034ShokanShinseiEntity shokanShinseiEntity, DbT3053ShokanShukeiEntity shokanShukeiEntity, DbT3036ShokanHanteiKekkaEntity shokanHanteiKekkaEntity) {
+    public void save給付実績福祉用具販売費(RString 通し番号,
+            List<DbT3048ShokanFukushiYoguHanbaihiEntity> businessList,
+            DbT3034ShokanShinseiEntity shokanShinseiEntity,
+            DbT3053ShokanShukeiEntity shokanShukeiEntity,
+            DbT3036ShokanHanteiKekkaEntity shokanHanteiKekkaEntity) {
 
         DbT3026KyufujissekiFukushiYoguHanbaihiEntity DbT3026entity = new DbT3026KyufujissekiFukushiYoguHanbaihiEntity();
         int 連番 = 0;
@@ -280,8 +297,6 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
             DbT3026entity.setMeisaiNo(new RString(String.valueOf(連番)));
             RString サービス種類コード = new RString(shokanShukeiEntity.getServiceShuruiCode().toString() + "0000");
             DbT3026entity.setServiceCode(new ServiceCode(サービス種類コード));
-            RString dsd = new RString("dsd");
-            DbT3026entity.setServiceCode(new ServiceCode(dsd.toString()));
             DbT3026entity.setFukushiyoguHanbaiYMD(shokanFukushiYoguHanbaihiEntity.getFukushiYoguHanbaiYMD());
             DbT3026entity.setFukushiyoguShohinName(shokanFukushiYoguHanbaihiEntity.getFukushiYoguShohinName());
             DbT3026entity.setFukushiyoguSyumokuCode(shokanFukushiYoguHanbaihiEntity.getFukushiYoguShumokuCode());
@@ -307,7 +322,11 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
      * @param shokanHanteiKekkaEntity
      * @param shokanShukeiEntity
      */
-    private void save給付実績集計(RString 通し番号, DbT3038ShokanKihonEntity shokanKihonEntity, DbT3034ShokanShinseiEntity shokanShinseiEntity, DbT3036ShokanHanteiKekkaEntity shokanHanteiKekkaEntity, DbT3053ShokanShukeiEntity shokanShukeiEntity) {
+    private void save給付実績集計(RString 通し番号,
+            DbT3038ShokanKihonEntity shokanKihonEntity,
+            DbT3034ShokanShinseiEntity shokanShinseiEntity,
+            DbT3036ShokanHanteiKekkaEntity shokanHanteiKekkaEntity,
+            DbT3053ShokanShukeiEntity shokanShukeiEntity) {
 
         DbT3033KyufujissekiShukeiEntity DbT3033entity = new DbT3033KyufujissekiShukeiEntity();
         DbT3033entity.setKokanJohoShikibetsuNo(get交換情報識別番号(shokanKihonEntity.getServiceTeikyoYM()));

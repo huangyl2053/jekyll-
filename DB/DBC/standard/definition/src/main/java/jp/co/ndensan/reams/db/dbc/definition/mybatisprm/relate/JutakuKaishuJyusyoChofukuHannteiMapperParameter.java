@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
  *
- * @author ycb
+ * @author yangchenbing
  */
 @lombok.Getter
 public class JutakuKaishuJyusyoChofukuHannteiMapperParameter {

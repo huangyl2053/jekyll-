@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.core.kanri.INonyuTsuchiShoSeigyoJohoLoaderMapper">
+    <select id="get仮算定納入通知書制御情報" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.KariSanteiNonyuTsuchiShoSeigyoJohoParameter">
+        SELECT A."komokuName",
+               A."komokuValue"
+        FROM rgdb."DbT7067ChohyoSeigyoHanyo" A
+        WHERE A."subGyomuCode" = #{サブ業務コード}
+              AND A."chohyoBunruiID" = 'DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo'
+              AND (A."kanriNendo" = #{調定年度} OR A."kanriNendo" = '0000')
+              AND A."komokuName" IN('差額令書発行指示',
+                                    '当初出力_中期開始期',
+                                    '当初出力_後期開始期',
+                                    '当初出力_出力方法',
+                                    '期毎納入通知書タイプ',
+                                    '銀振納入通知書タイプ',
+                                    'その他納入通知書タイプ',
+                                    'コンビニ明細書表示',
+                                    'ブック口座振替依頼表示',
+                                    'コンビニバーコード表示',
+                                    'コンビニ_ブック口座用納付書表示',
+                                    'コンビニ納付書発行日表示',
+                                    'コンビニ納付書取扱期限表示',
+                                    'コンビニ期毎出力',
+                                    '算定の基礎1',
+                                    '算定の基礎2',
+                                    '算定の基礎3')
+        UNION 
+              SELECT A."komokuName",
+                     A."komokuValue"
+              FROM rgdb."DbT7067ChohyoSeigyoHanyo" A
+              WHERE A."subGyomuCode" = #{サブ業務コード}
+                    AND A."chohyoBunruiID" = 'DBB100045_HokenryoNonyuTsuchishoDaihyo'
+                    AND (A."kanriNendo" = #{調定年度} OR A."kanriNendo" = '0000')
+                    AND A."komokuName" IN('出力部数',
+                                          '領収証書納付額欄',
+                                          '納付書納付額欄',
+                                          '領収証書領収印欄',
+                                          '納付書領収印欄',
+                                          '口座振替のOCR出力方法',
+                                          '領収書領収日付印欄',
+                                          '納付書領収日付欄',
+                                          '納期限出力方法',
+                                          '領収書日付印欄の期',
+                                          '納付書市町村名表示',
+                                          '納付書市町村名',
+                                          '速報取込区分',
+                                          '納付額算出方法',
+                                          '単票発行_出力方式',
+                                          '単票発行_出力形式')
+    </select>
+    <select id="get本算定納入通知書制御情報" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.KariSanteiNonyuTsuchiShoSeigyoJohoParameter">
+       SELECT A."komokuName",
+              A."komokuValue"
+       FROM rgdb."DbT7067ChohyoSeigyoHanyo" A
+       WHERE A."subGyomuCode" = #{サブ業務コード}
+             AND A."chohyoBunruiID" = 'DBB100045_HokenryoNonyuTsuchishoDaihyo'
+             AND (A."kanriNendo" = #{調定年度} OR A."kanriNendo" = '0000')
+             AND A."komokuName" IN('差額令書発行指示',
+                                   '当初出力_中期開始期',
+                                   '当初出力_後期開始期',
+                                   '当初出力_出力方法',
+                                   '期毎納入通知書タイプ',
+                                   '銀振納入通知書タイプ',
+                                   'その他納入通知書タイプ',
+                                   'コンビニ明細書表示',
+                                   'ブック口座振替依頼表示',
+                                   'コンビニバーコード表示',
+                                   'コンビニ_ブック口座用納付書表示',
+                                   'コンビニ納付書発行日表示',
+                                   'コンビニ納付書取扱期限表示',
+                                   'コンビニ期毎出力',
+                                   '過年度文言1',
+                                   '過年度文言2',
+                                   '出力部数',
+                                   '領収証書納付額欄',
+                                   '納付書納付額欄',
+                                   '領収証書領収印欄',
+                                   '納付書領収印欄',
+                                   '口座振替のOCR出力方法',
+                                   '領収書領収日付印欄',
+                                   '納付書領収日付欄',
+                                   '納期限出力方法',
+                                   '領収書日付印欄の期',
+                                   '納付書市町村名表示',
+                                   '納付書市町村名',
+                                   '速報取込区分',
+                                   '納付額算出方法',
+                                   '単票発行_出力方式',
+                                   '単票発行_出力形式')
+    </select>
+</mapper>

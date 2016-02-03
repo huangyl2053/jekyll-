@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -41,13 +43,15 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 年齢到達登録者リストを作成します。
  */
 public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotatsushaJouhouEntity> {
 
-    private static final ReportId ID = new ReportId("DBA200008");
+    private static final ReportId ID = new ReportId("DBA200008_NenreitotatsuKakuninList");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dba.persistence.mapper.nenreitotatsutorokusha."
             + "INenreiTotatsuTorokushaMapper.getHiHokenshaDaichoList");
@@ -61,6 +65,11 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
     private static final FlexibleYear 年度 = new FlexibleYear("0000");
     private static final RString 年度内連番 = new RString("0000");
     private static final int 日付桁数 = 8;
+    private static final RString CODESHUBETSU_喪失事由被保険者 = new RString("0010");
+    private static final RString CODESHUBETSU_住特適用 = new RString("0014");
+    private static final RString CODESHUBETSU_住特解除 = new RString("0015");
+    private static final Code CODE_取得事由被保険者 = new Code("02");
+    private static final Code CODE_変更事由被保険者 = new Code("31");
     private INenreiTotatsuTorokushaMapper iNenreiTotatsuTorokushaMapper;
     private NenreiTotatsuTorokushaListProcessParameter processParameter;
     private List<NenreitotatsuKakuninListItem> item;
@@ -82,6 +91,29 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
 
     @Override
     protected IBatchReader createReader() {
+        List<Code> 喪失事由被保険者Codes = new ArrayList<>();
+        List<Code> 住特適用Codes = new ArrayList<>();
+        List<Code> 住特解除Codes = new ArrayList<>();
+        List<UzT0007CodeEntity> 喪失事由被保険者List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                new CodeShubetsu(CODESHUBETSU_喪失事由被保険者.toString()));
+        List<UzT0007CodeEntity> 住特適用LIst = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                new CodeShubetsu(CODESHUBETSU_住特適用.toString()));
+        List<UzT0007CodeEntity> 住特解除List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                new CodeShubetsu(CODESHUBETSU_住特解除.toString()));
+        for (UzT0007CodeEntity uzT0007CodeEntity : 喪失事由被保険者List) {
+            喪失事由被保険者Codes.add(uzT0007CodeEntity.getコード());
+        }
+        for (UzT0007CodeEntity uzT0007CodeEntity : 住特適用LIst) {
+            住特適用Codes.add(uzT0007CodeEntity.getコード());
+        }
+        for (UzT0007CodeEntity uzT0007CodeEntity : 住特解除List) {
+            住特解除Codes.add(uzT0007CodeEntity.getコード());
+        }
+        processParameter.setShutokuJiyu_Hihokensha(CODE_取得事由被保険者);
+        processParameter.setSoshitsuJiyu_Hihokensha(喪失事由被保険者Codes);
+        processParameter.setHenkoJiyu_Hihokensha(CODE_変更事由被保険者);
+        processParameter.setJutokuTekiyo(住特適用Codes);
+        processParameter.setJutokuKaijo(住特解除Codes);
         return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toNenreiTotatsushaTorokuListMybatisParameter());
     }
 

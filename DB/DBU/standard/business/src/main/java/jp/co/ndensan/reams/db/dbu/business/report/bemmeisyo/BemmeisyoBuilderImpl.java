@@ -19,7 +19,6 @@ class BemmeisyoBuilderImpl implements BemmeisyoBuilder {
      * インスタンスを生成します。
      *
      * @param headerEditor {@link BemmeisyoEditor}
-     * @param bodyEditor {@link BemmeisyoEditor}
      */
     public BemmeisyoBuilderImpl(BemmeisyoEditor headerEditor) {
         this.headerEditor = headerEditor;

@@ -7,11 +7,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe2210002;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.gaikyotokki.GaikyoTokki;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.gaikyotokki.GaikyoTokkiBuilder;
+import jp.co.ndensan.reams.db.dbe.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210002.DBE2210002TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210002.GaikyoTokkiNyurokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe2210002.GaikyoTokkiNyurokuHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.gaikyotokki.GaikyoTokkiManager;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
@@ -20,12 +21,12 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 概況特記登録のクラス。
@@ -42,8 +43,17 @@ public class GaikyoTokkiNyuroku {
      * @return レスポンスデータ
      */
     public ResponseData<GaikyoTokkiNyurokuDiv> onLoad(GaikyoTokkiNyurokuDiv div) {
+
         getHandler(div).initialize();
+        前排他処理();
         return ResponseData.of(div).respond();
+    }
+    
+    private void 前排他処理() {
+        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        LockingKey 排他キー = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo"))
+                .concat(temp_申請書管理番号.getColumnValue()));
+        RealInitialLocker.lock(排他キー);
     }
 
     /**
@@ -91,7 +101,6 @@ public class GaikyoTokkiNyuroku {
      */
     public ResponseData<GaikyoTokkiNyurokuDiv> onClick_btnUpdate(GaikyoTokkiNyurokuDiv div) {
 
-        // TODO 未入力の判断 QA 74885
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
@@ -99,17 +108,9 @@ public class GaikyoTokkiNyuroku {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-            LockingKey 排他キー = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo"))
-                    .concat(getHandler(div).getTemp_申請書管理番号().getColumnValue()));
-            boolean getLock = RealInitialLocker.tryGetLock(排他キー);
-            if (getLock) {
-                調査結果保存(div);
-                RealInitialLocker.release(排他キー);
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(保存.toString())).respond();
-            } else {
-                throw new ApplicationException(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage());
-            }
+            
+            調査結果保存(div);
+            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(保存.toString())).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -153,7 +154,7 @@ public class GaikyoTokkiNyuroku {
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).clearData();
+            getHandler(div).resetData();
         }
         return ResponseData.of(div).respond();
     }

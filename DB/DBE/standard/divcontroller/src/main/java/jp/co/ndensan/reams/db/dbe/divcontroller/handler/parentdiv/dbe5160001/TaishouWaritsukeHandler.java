@@ -60,7 +60,6 @@ public class TaishouWaritsukeHandler {
     private static final RString 審査会順番を振りなおす = new RString("btnResetShinsaOrder");
     private static final RString 審査会順番を確定する = new RString("btnDetermineToShinsakaiOrder");
     private static final RString 登録する = new RString("btnRegister");
-    private static final RString 一覧に戻る = new RString("btnBackToIchiran");
     private static final RString 審査会割付を完了する = new RString("btnComplete");
     private static final RString 対象者一覧状態フラグ = new RString("1");
     private static final RString 候補者一覧状態フラグ = new RString("2");
@@ -82,12 +81,16 @@ public class TaishouWaritsukeHandler {
      * 画面初期化表示、画面項目に設定されている値をクリアする。
      */
     public void initializtion() {
-        div.getShinsakaiTaishoshaWaritsuke().setKaigoNinteiShinsakaiKaisaiNo(RString.EMPTY);//TODO 介護認定審査会一覧画面選択された介護認定審査会番号
+        div.getShinsakaiTaishoshaWaritsuke().setKaigoNinteiShinsakaiKaisaiNo(new RString("123456"));//TODO 介護認定審査会一覧画面選択された介護認定審査会番号
         ヘッドエリア検索();
         対象者一覧検索();
         候補者一覧検索();
+
+    }
+
+    public void setCommonButtonDisabled() {
         RString 進捗状況 = div.getTxtStatus().getValue();
-        if (進捗状況.equals(ShinsakaiShinchokuJokyo.中止.get名称()) || 進捗状況.equals(ShinsakaiShinchokuJokyo.完了.get名称())) {
+        if (ShinsakaiShinchokuJokyo.中止.get名称().equals(進捗状況) || ShinsakaiShinchokuJokyo.完了.get名称().equals(進捗状況) || 進捗状況.isEmpty()) {
             div.getBtnJidoWaritsuke().setDisabled(true);
             div.getBtnWaritsuke().setDisabled(true);
             div.getBtnWaritsukeKaijo().setDisabled(true);

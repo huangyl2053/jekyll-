@@ -17,7 +17,7 @@ class KyokaisoKanriMasterListBodyEditor implements KyokaisoKanriMasterListEditor
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link KyokaisoKanriMasterListItem}
+     * @param tempItem {@link KyokaisoKanriMasterListBodyTempItem}
      */
     protected KyokaisoKanriMasterListBodyEditor(KyokaisoKanriMasterListBodyTempItem tempItem) {
         this.tempItem = tempItem;

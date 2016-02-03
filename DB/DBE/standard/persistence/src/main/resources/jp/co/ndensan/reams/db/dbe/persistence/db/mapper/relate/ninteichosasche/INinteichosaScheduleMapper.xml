@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- 概要： 認定調査スケジュール登録1のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosasche.INinteichosaScheduleMapper">
+    <resultMap id="resultMap_getNinteiEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichousasukejuru.NinteiChousaSukejuruRelateEntity" autoMapping="true">
+     <result property="認定調査予定年月日" column="ninteiChosaYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+     <result property="全午前件数" column="全午前件数"/>
+     <result property="全午後件数" column="全午後件数"/> 
+     <result property="午前の仮予約件数" column="午前の仮予約件数"/> 
+     <result property="午後の仮予約件数" column="午後の仮予約件数"/> 
+     <result property="午前の確定件数" column="午前の確定件数"/> 
+     <result property="午後の確定件数" column="午後の確定件数"/> 
+     <result property="メモ年月日" column="memoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+     <result property="通常メモ件数" column="通常メモ件数"/> 
+     <result property="重要メモ件数" column="重要メモ件数"/> 
+    </resultMap>
+        <select id="getNinteiChousaSukeList" resultMap="resultMap_getNinteiEntity" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichousasukejuru.NinteiChousaSukejuruParameter" fetchSize="500">
+        SELECT * FROM
+        (SELECT
+        T1."ninteiChosaYoteiYMD" AS "ninteiChosaYoteiYMD"
+        , SUM(to_number(T1."午前",'9999')) AS 全午前件数
+        , SUM(to_number(T1."午後",'9999')) AS 全午後件数
+        , SUM(to_number(T1."午前の仮予約",'9999')) AS 午前の仮予約件数
+        , SUM(to_number(T1."午後の仮予約",'9999')) AS 午後の仮予約件数
+        , SUM(to_number(T1."午前の確定",'9999')) AS 午前の確定件数
+        , SUM(to_number(T1."午後の確定",'9999')) AS 午後の確定件数
+        FROM
+         (SELECT
+          "DbT5221NinteichosaSchedule"."ninteiChosaYoteiYMD",
+         CASE  WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiShuryoTime" <![CDATA[<=]]> '12:00'
+        THEN
+        '1'
+        ELSE                
+         '0'      END     AS "午前",
+         CASE  WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiKaishiTime" <![CDATA[>=]]> '12:00'
+        THEN
+        '1'
+        ELSE                
+         '0'      END     AS "午後",
+         CASE  WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiShuryoTime" <![CDATA[<=]]> '12:00'
+         AND "DbT5221NinteichosaSchedule"."yoyakuJokyo"='1'
+        THEN
+        '1'
+        ELSE                
+         '0'      END     AS "午前の仮予約",
+         CASE  WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiKaishiTime" <![CDATA[>=]]> '12:00'
+         AND "DbT5221NinteichosaSchedule"."yoyakuJokyo"='1'
+        THEN
+        '1'
+        ELSE                
+         '0'      END     AS "午後の仮予約",
+         CASE  WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiShuryoTime" <![CDATA[<=]]> '12:00'
+         AND "DbT5221NinteichosaSchedule"."yoyakuJokyo"='2'
+        THEN
+        '1'
+        ELSE                
+         '0'      END     AS "午前の確定",
+         CASE WHEN "DbT5221NinteichosaSchedule"."ninteiChosaYoteiKaishiTime" <![CDATA[>=]]> '12:00'
+         AND "DbT5221NinteichosaSchedule"."yoyakuJokyo"='2'
+        THEN
+        '1'
+        ELSE                
+         '0' END AS "午後の確定"
+         FROM
+         rgdb."DbT5221NinteichosaSchedule"              
+      WHERE
+      "DbT5221NinteichosaSchedule"."yoyakuKaoFlag" = TRUE
+         AND substring("DbT5221NinteichosaSchedule"."ninteiChosaYoteiYMD",1,6) = substring(#{ninteiChosaYotei} ,1,6)
+         AND "DbT5221NinteichosaSchedule"."chosaChikuCode" = #{chosaChikuCode}) AS T1
+         GROUP BY
+         T1."ninteiChosaYoteiYMD"
+         ORDER BY
+         T1."ninteiChosaYoteiYMD") AS A1 LEFT JOIN
+        (SELECT
+     T2."memoYMD" AS "memoYMD" ,
+        SUM(to_number(T2.通常メモ,'9999')) AS "通常メモ件数",
+        SUM(to_number(T2.重要メモ,'9999')) AS "重要メモ件数"
+     FROM(SELECT
+        "DbT5222NinteiChosaScheduleMemo"."memoYMD",
+         CASE WHEN "DbT5222NinteiChosaScheduleMemo"."memoPriority" = '1'
+        THEN
+        '1'
+        ELSE               
+         '0' END AS "通常メモ",
+         CASE WHEN "DbT5222NinteiChosaScheduleMemo"."memoPriority" = '2'
+        THEN
+        '1'
+        ELSE                
+         '0' END AS "重要メモ"
+     FROM
+         rgdb."DbT5222NinteiChosaScheduleMemo"            
+      WHERE
+      "DbT5222NinteiChosaScheduleMemo"."memoYMD" BETWEEN #{tukihajimeDAY} AND #{getumatuDAY}) AS T2
+         GROUP BY
+         T2."memoYMD"
+         ORDER BY
+         T2."memoYMD") AS A2
+        ON substring(A1."ninteiChosaYoteiYMD",1,6) = substring(A2."memoYMD",1,6) 
+</select>
+</mapper>

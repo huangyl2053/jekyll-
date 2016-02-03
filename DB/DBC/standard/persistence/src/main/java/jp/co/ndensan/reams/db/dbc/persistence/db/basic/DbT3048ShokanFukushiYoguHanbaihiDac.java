@@ -9,9 +9,9 @@ import static java.util.Objects.requireNonNull;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3038ShokanKihon.meisaiNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi.hiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi.hinmokuCode;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi.jigyoshaNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi.junjiNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi.rirekiNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi.renban;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi.seiriNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi.serviceTeikyoYM;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi.yoshikiNo;
@@ -23,11 +23,13 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.like;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -48,8 +50,8 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
      * @param 整理番号 SeiriNo
      * @param 事業者番号 JigyoshaNo
      * @param 様式番号 YoshikiNo
-     * @param 順次番号 JunjiNo
-     * @param 履歴番号 RirekiNo
+     * @param 順次番号 meisaiNo
+     * @param 履歴番号 renban
      * @return DbT3048ShokanFukushiYoguHanbaihiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -61,7 +63,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 順次番号,
-            Decimal 履歴番号) throws NullPointerException {
+            RString 履歴番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
@@ -80,8 +82,8 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
                                 eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
-                                eq(junjiNo, 順次番号),
-                                eq(rirekiNo, 履歴番号))).
+                                eq(meisaiNo, 順次番号),
+                                eq(renban, 履歴番号))).
                 toObject(DbT3048ShokanFukushiYoguHanbaihiEntity.class);
     }
 
@@ -168,7 +170,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
         requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.selectSpecific(max(junjiNo)).
+        return accessor.selectSpecific(max(meisaiNo)).
                 table(DbT3048ShokanFukushiYoguHanbaihi.class).
                 where(and(eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
@@ -177,5 +179,43 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号))).
                 toObject(RString.class);
+    }
+
+    /**
+     * select品目コード
+     *
+     * @param 被保険者番号
+     * @param サービス提供年月
+     * @param arrList
+     * @param 整理番号
+     * @return List<DbT3048ShokanFukushiYoguHanbaihiEntity>
+     */
+    @Transaction
+    public List<DbT3048ShokanFukushiYoguHanbaihiEntity> select品目コード(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
+            List<RString> arrList, RString 整理番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(arrList, UrSystemErrorMessages.値がnull.getReplacedMessage("arrList"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        if (null == 整理番号) {
+            return accessor.select().
+                    table(DbT3048ShokanFukushiYoguHanbaihi.class).
+                    where(and(
+                                    eq(hiHokenshaNo, 被保険者番号),
+                                    like(serviceTeikyoYM, サービス提供年月.getYear().toString()),
+                                    in(hinmokuCode, arrList)
+                            )).
+                    toList(DbT3048ShokanFukushiYoguHanbaihiEntity.class);
+        } else {
+            return accessor.select().
+                    table(DbT3048ShokanFukushiYoguHanbaihi.class).
+                    where(and(
+                                    eq(hiHokenshaNo, 被保険者番号),
+                                    like(serviceTeikyoYM, サービス提供年月.getYear().toString()),
+                                    not(eq(seiriNo, 整理番号)),
+                                    in(hinmokuCode, arrList)
+                            )).
+                    toList(DbT3048ShokanFukushiYoguHanbaihiEntity.class);
+        }
     }
 }
