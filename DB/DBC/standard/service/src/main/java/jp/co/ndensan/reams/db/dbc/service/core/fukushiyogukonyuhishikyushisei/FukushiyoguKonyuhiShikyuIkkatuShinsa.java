@@ -101,7 +101,7 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
                 = mapperProvider.create(IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper.class);
         List<ShokanShinseiEntity> resultList = mapper.select未審査申請(ShokanFukushiYoguHanbaihiParameter
                 .createSelectByKeyParam(支給申請日From, 支給申請日To));
-        if (null == resultList || resultList.isEmpty()) {
+        if (resultList == null || resultList.isEmpty()) {
             resultList = new ArrayList<>();
         }
         return resultList;
