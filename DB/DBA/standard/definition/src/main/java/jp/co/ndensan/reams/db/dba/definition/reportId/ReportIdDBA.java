@@ -59,6 +59,10 @@ public enum ReportIdDBA {
      */
     DBC800001(new ReportId("DBC800001_JuryoIninharaiToriatsukaiJigyoshaTorokuShinseisho"), new RString("介護保険受給資格証明書交付申請書")),
     /**
+     * 支払方法変更（償還払い化）終了申請書の帳票ID。
+     */
+    DBD800009(new ReportId("DBD800009_ShiharaiHenkoShokanbaraikaShoryoShinseisho"), new RString("支払方法変更（償還払い化）終了申請書")),
+    /**
      * 介護保険住所地特例適用・変更・終了届の帳票ＩＤです。
      */
     DBA800002(new ReportId("DBA800002_JyushochiTokureiTekiyoHenkoShuryoTodoke"), new RString("介護保険受給資格証明書交付申請書"));
