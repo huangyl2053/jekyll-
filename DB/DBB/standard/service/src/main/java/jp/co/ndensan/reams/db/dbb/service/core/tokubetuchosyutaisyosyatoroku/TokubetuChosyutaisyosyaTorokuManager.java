@@ -135,25 +135,22 @@ public class TokubetuChosyutaisyosyaTorokuManager {
         if (処理日付管理マスタデータResultLst.isEmpty()) {
             return 空白;
         } else {
-            for (ShoriDateKanri 処理日付管理マスタデータResult : 処理日付管理マスタデータResultLst) {
-                if (!is年度内連番処理済み(連番_0001, 処理日付管理マスタデータResult)) {
-                    return 空白;
-                } else if (!is年度内連番処理済み(連番_0002, 処理日付管理マスタデータResult)) {
-                    return 連番_0002;
-                } else if (!is年度内連番処理済み(連番_0003, 処理日付管理マスタデータResult)) {
-                    return 連番_0003;
-                } else if (!is年度内連番処理済み(連番_0004, 処理日付管理マスタデータResult)) {
-                    return 連番_0004;
-                } else if (!is年度内連番処理済み(連番_0005, 処理日付管理マスタデータResult)) {
-                    return 連番_0005;
-                } else {
-                    return 連番_0006;
-                }
+            if (!is年度内連番処理済み(連番_0001, 処理日付管理マスタデータResultLst)) {
+                return 空白;
+            } else if (!is年度内連番処理済み(連番_0002, 処理日付管理マスタデータResultLst)) {
+                return 連番_0001;
+            } else if (!is年度内連番処理済み(連番_0003, 処理日付管理マスタデータResultLst)) {
+                return 連番_0002;
+            } else if (!is年度内連番処理済み(連番_0004, 処理日付管理マスタデータResultLst)) {
+                return 連番_0003;
+            } else if (!is年度内連番処理済み(連番_0005, 処理日付管理マスタデータResultLst)) {
+                return 連番_0004;
+            } else if (!is年度内連番処理済み(連番_0006, 処理日付管理マスタデータResultLst)) {
+                return 連番_0005;
+            } else {
+                return 連番_0006;
             }
-            return 空白;
-
         }
-
     }
 
     /**
@@ -163,9 +160,16 @@ public class TokubetuChosyutaisyosyaTorokuManager {
      * @param 処理日付管理マスタデータResult 処理日付管理マスタデータ
      * @return 年度内連番処理済み有無
      */
-    private Boolean is年度内連番処理済み(RString 年度内連番, ShoriDateKanri 処理日付管理マスタデータResult) {
-        RString 処理日付管理_年度内連番 = 処理日付管理マスタデータResult.get年度内連番();
-        return 年度内連番.equals(処理日付管理_年度内連番) && !(null == 処理日付管理_年度内連番 || 処理日付管理_年度内連番.isEmpty());
+    private Boolean is年度内連番処理済み(RString 年度内連番, List<ShoriDateKanri> 処理日付管理マスタデータResultLst) {
+        for (ShoriDateKanri 処理日付管理マスタデータResult : 処理日付管理マスタデータResultLst) {
+            RString 処理日付管理_年度内連番 = 処理日付管理マスタデータResult.get年度内連番();
+            FlexibleDate 基準年月日 = 処理日付管理マスタデータResult.get基準年月日();
+            if (年度内連番.equals(処理日付管理_年度内連番) && !(null == 基準年月日) && !基準年月日.isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+
     }
 
     /**
@@ -335,7 +339,7 @@ public class TokubetuChosyutaisyosyaTorokuManager {
             }
         }
         if (TokuchoHosokuMonth.特徴8月捕捉.equals(捕捉月)) {
-            RString result = BusinessConfig.get(ConfigNameDBU.特別徴収_特徴開始月_８月捕捉, SubGyomuCode.DBB介護賦課);
+            RString result = BusinessConfig.get(ConfigNameDBU.特別徴収_特徴開始月_8月捕捉, SubGyomuCode.DBB介護賦課);
             if (new RString("02").equals(result)) {
                 return TokuchoStartMonth.特徴2月開始;
             }
@@ -363,9 +367,10 @@ public class TokubetuChosyutaisyosyaTorokuManager {
      * @return 資格喪失フラグ	true: 資格喪失している　false:　資格喪失してない	*
      */
     public boolean getHihokenshaFlag(HihokenshaNo 被保険者番号) {
+        List<HihokenshaDaicho> 被保険者台帳情報データResult = getInsuredRegisterInformation(被保険者番号).records();
         HihokenshaDaicho 被保険者台帳情報データ
-                = null == getInsuredRegisterInformation(被保険者番号).records()
-                ? null : getInsuredRegisterInformation(被保険者番号).records().get(0);
+                = 被保険者台帳情報データResult.isEmpty()
+                ? null : 被保険者台帳情報データResult.get(0);
         return null == 被保険者台帳情報データ;
 
     }
@@ -382,8 +387,12 @@ public class TokubetuChosyutaisyosyaTorokuManager {
         sqlparams.set被保険者番号(被保険者番号);
         DbT1001HihokenshaDaichoEntity 被保険者台帳情報データEntity = mapper.getHihokenshaFlag(sqlparams);
         List<HihokenshaDaicho> 被保険者台帳情報データリスト = new ArrayList<>();
-        被保険者台帳情報データリスト.add(new HihokenshaDaicho(被保険者台帳情報データEntity));
-        return SearchResult.of(被保険者台帳情報データリスト, 0, false);
+        if (null == 被保険者台帳情報データEntity) {
+            return SearchResult.of(Collections.<HihokenshaDaicho>emptyList(), 0, false);
+        } else {
+            被保険者台帳情報データリスト.add(new HihokenshaDaicho(被保険者台帳情報データEntity));
+            return SearchResult.of(被保険者台帳情報データリスト, 0, false);
+        }
     }
 
     /**
