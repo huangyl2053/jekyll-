@@ -44,11 +44,11 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHantei {
     public boolean chkHinmokuCodePerShinsei(RString 品目コード,
             List<DbT3048ShokanFukushiYoguHanbaihiEntity> list) {
         boolean flag = false;
-        if (null == list || list.isEmpty() || null == 品目コード) {
+        if (list == null || list.isEmpty() || 品目コード == null || 品目コード.isEmpty()) {
             return flag;
         }
         for (DbT3048ShokanFukushiYoguHanbaihiEntity entity : list) {
-            if (entity.getHinmokuCode().equals(品目コード) && !entity.getIsDeleted()) {
+            if (品目コード.equals(entity.getHinmokuCode()) && !entity.getIsDeleted()) {
                 flag = true;
                 break;
             }
@@ -71,7 +71,7 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHantei {
             List<DbT3048ShokanFukushiYoguHanbaihiEntity> list, RString 整理番号) {
         boolean flag = false;
 
-        if (null == list || list.isEmpty() || null == 被保険者番号 || null == サービス提供年月) {
+        if (list == null || list.isEmpty() || 被保険者番号 == null || サービス提供年月 == null) {
             return flag;
         }
         Set<RString> sets = new HashSet<>();
