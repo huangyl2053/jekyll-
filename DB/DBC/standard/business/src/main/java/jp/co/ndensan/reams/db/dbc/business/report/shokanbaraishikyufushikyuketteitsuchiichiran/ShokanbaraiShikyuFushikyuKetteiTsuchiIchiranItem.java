@@ -86,7 +86,14 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem {
      * @param keteiKubun 支給（不支給）決定区分
      * @param shiharaiHoho 支払方法
      */
-    public ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem(RString printTimeStamp, RString hokenshaNo, RString hokenshaName, RString shutsuryokujun1, RString shutsuryokujun2, RString shutsuryokujun3, RString shutsuryokujun4, RString shutsuryokujun5, RString kaipage1, RString kaipage2, RString kaipage3, RString kaipage4, RString kaipage5, RString renban, RString seiriNo, RString keteiTsuchiNo, RString hihokenshaNo, RString hihokenshaName, RString jusho, RString yubinBango, RString teikyo, RString yoKaigodo, RString ninteiKaishibi, RString ninteiShuryobi, RString uketsukeYMD, RString keteiYMD, RString honjinShiharaigaku, RString shikyugaku, RString yoshikigotoKingaku, RString tuika, RString shurui, RString keteiKubun, RString shiharaiHoho) {
+    public ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem(RString printTimeStamp,
+            RString hokenshaNo, RString hokenshaName, RString shutsuryokujun1, RString shutsuryokujun2,
+            RString shutsuryokujun3, RString shutsuryokujun4, RString shutsuryokujun5, RString kaipage1,
+            RString kaipage2, RString kaipage3, RString kaipage4, RString kaipage5, RString renban, RString seiriNo,
+            RString keteiTsuchiNo, RString hihokenshaNo, RString hihokenshaName, RString jusho, RString yubinBango,
+            RString teikyo, RString yoKaigodo, RString ninteiKaishibi, RString ninteiShuryobi, RString uketsukeYMD,
+            RString keteiYMD, RString honjinShiharaigaku, RString shikyugaku, RString yoshikigotoKingaku, RString tuika,
+            RString shurui, RString keteiKubun, RString shiharaiHoho) {
         this.printTimeStamp = printTimeStamp;
         this.hokenshaNo = hokenshaNo;
         this.hokenshaName = hokenshaName;
