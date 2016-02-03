@@ -47,127 +47,128 @@ public class TaJushochiTokureishaKanriValidationHandler {
                 && !div.getDgJushochiTokureiRireki().getDataSource().isEmpty()) {
             最新の適用情報 = div.getDgJushochiTokureiRireki().getDataSource().get(0);
         }
-
-        if (状態_修正.equals(親画面状態)) {
-            if (div.getTxtTekiyobi().getValue() == null) {
-                validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日, div.getTxtTekiyobi()));
-            } else {
-                if (最新の適用情報.getTekiyoYMD() != null) {
-                    if (!div.getTxtTekiyobi().getValue().isBeforeOrEquals(最新の適用情報.getTekiyoYMD().getValue())) {
-                        validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日と最新の適用情報の整合性チェック, div.getTxtTekiyobi()));
-                    }
-                }
-            }
-            if (div.getTxtKaijyobi().getValue() == null) {
-                validPairs.add(new ValidationMessageControlPair(RRVMessages.解除日, div.getTxtKaijyobi()));
-            } else {
-                if (div.getDdlKaijyoJiyo().getSelectedKey() == null
-                        || div.getDdlKaijyoJiyo().getSelectedKey().isEmpty()) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.解除事由, div.getDdlKaijyoJiyo()));
-                }
-            }
-            if (div.getDdlTekiyoJiyo().getSelectedKey() == null
-                    || div.getDdlTekiyoJiyo().getSelectedKey().isEmpty()) {
-                validPairs.add(new ValidationMessageControlPair(RRVMessages.適用事由, div.getDdlTekiyoJiyo()));
-            }
-
-            if (div.getTxtTekiyobi().getValue() != null
-                    && div.getTxtTekiyoTodokedebi().getValue() != null) {
-                if (div.getTxtTekiyobi().getValue().isBefore(div.getTxtTekiyoTodokedebi().getValue())) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日と適用届出日の整合性チェック, div.getTxtTekiyobi(), div.getTxtTekiyoTodokedebi()));
-                }
-            }
-            if (div.getTxtKaijyobi().getValue() != null && div.getTxtKaijyoTodokedebi().getValue() != null) {
-                if (div.getTxtKaijyobi().getValue().isBefore(div.getTxtKaijyoTodokedebi().getValue())) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.解除日と解除届出日の整合性チェック, div.getTxtKaijyobi(), div.getTxtKaijyoTodokedebi()));
-                }
-            }
-            if (div.getTxtKaijyobi().getValue() != null && div.getTxtTekiyobi().getValue() != null) {
-                if (div.getTxtKaijyobi().getValue().isBefore(div.getTxtTekiyobi().getValue())) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日と解除日の整合性チェック, div.getTxtKaijyobi(), div.getTxtTekiyobi()));
-                }
-            }
-
-            if (div.getDgJushochiTokureiRireki().getDataSource() != null
-                    && !div.getDgJushochiTokureiRireki().getDataSource().isEmpty()) {
-                for (dgJushochiTokureiRireki_Row row : div.getDgJushochiTokureiRireki().getDataSource()) {
-                    if (div.getSelectData().equals(new RString(String.valueOf(row.getId())))
-                            || 状態_削除.equals(row.getJyoTai())) {
-                        continue;
-                    }
-                    if (row.getKaijoYMD().getValue() == null) {
-                        if (div.getTxtKaijyobi().getValue() == null) {
-                            validPairs.add(new ValidationMessageControlPair(RRVMessages.解除日, div.getTxtKaijyobi()));
-                        } else {
-                            if (!div.getTxtKaijyobi().getValue().isBeforeOrEquals(row.getTekiyoYMD().getValue())) {
-                                validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
-                            }
+        if (!状態_削除.equals(div.getStrate())) {
+            if (状態_修正.equals(親画面状態)) {
+                if (div.getTxtTekiyobi().getValue() == null) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日, div.getTxtTekiyobi()));
+                } else {
+                    if (最新の適用情報.getTekiyoYMD() != null) {
+                        if (!div.getTxtTekiyobi().getValue().isBeforeOrEquals(最新の適用情報.getTekiyoYMD().getValue())) {
+                            validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日と最新の適用情報の整合性チェック, div.getTxtTekiyobi()));
                         }
-                    } else {
-                        if (div.getTxtKaijyobi().getValue() == null && div.getTxtTekiyobi().getValue() != null) {
-                            if (div.getTxtTekiyobi().getValue().isBefore(row.getKaijoYMD().getValue())) {
-                                validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
+                    }
+                }
+                if (div.getTxtKaijyobi().getValue() == null) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.解除日, div.getTxtKaijyobi()));
+                } else {
+                    if (div.getDdlKaijyoJiyo().getSelectedKey() == null
+                            || div.getDdlKaijyoJiyo().getSelectedKey().isEmpty()) {
+                        validPairs.add(new ValidationMessageControlPair(RRVMessages.解除事由, div.getDdlKaijyoJiyo()));
+                    }
+                }
+                if (div.getDdlTekiyoJiyo().getSelectedKey() == null
+                        || div.getDdlTekiyoJiyo().getSelectedKey().isEmpty()) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.適用事由, div.getDdlTekiyoJiyo()));
+                }
+
+                if (div.getTxtTekiyobi().getValue() != null
+                        && div.getTxtTekiyoTodokedebi().getValue() != null) {
+                    if (div.getTxtTekiyobi().getValue().isBefore(div.getTxtTekiyoTodokedebi().getValue())) {
+                        validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日と適用届出日の整合性チェック, div.getTxtTekiyobi(), div.getTxtTekiyoTodokedebi()));
+                    }
+                }
+                if (div.getTxtKaijyobi().getValue() != null && div.getTxtKaijyoTodokedebi().getValue() != null) {
+                    if (div.getTxtKaijyobi().getValue().isBefore(div.getTxtKaijyoTodokedebi().getValue())) {
+                        validPairs.add(new ValidationMessageControlPair(RRVMessages.解除日と解除届出日の整合性チェック, div.getTxtKaijyobi(), div.getTxtKaijyoTodokedebi()));
+                    }
+                }
+                if (div.getTxtKaijyobi().getValue() != null && div.getTxtTekiyobi().getValue() != null) {
+                    if (div.getTxtKaijyobi().getValue().isBefore(div.getTxtTekiyobi().getValue())) {
+                        validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日と解除日の整合性チェック, div.getTxtKaijyobi(), div.getTxtTekiyobi()));
+                    }
+                }
+
+                if (div.getDgJushochiTokureiRireki().getDataSource() != null
+                        && !div.getDgJushochiTokureiRireki().getDataSource().isEmpty()) {
+                    for (dgJushochiTokureiRireki_Row row : div.getDgJushochiTokureiRireki().getDataSource()) {
+                        if (div.getSelectData().equals(new RString(String.valueOf(row.getId())))
+                                || 状態_削除.equals(row.getJyoTai())) {
+                            continue;
+                        }
+                        if (row.getKaijoYMD().getValue() == null) {
+                            if (div.getTxtKaijyobi().getValue() == null) {
+                                validPairs.add(new ValidationMessageControlPair(RRVMessages.解除日, div.getTxtKaijyobi()));
+                            } else {
+                                if (!div.getTxtKaijyobi().getValue().isBefore(row.getTekiyoYMD().getValue())) {
+                                    validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
+                                }
                             }
                         } else {
-                            if (div.getTxtTekiyobi().getValue() != null && div.getTxtKaijyobi().getValue() != null) {
-                                if ((div.getTxtTekiyobi().getValue().isBefore(row.getTekiyoYMD().getValue())
-                                        && div.getTxtKaijyobi().getValue().isBeforeOrEquals(row.getTekiyoYMD().getValue()))
-                                        || (row.getKaijoYMD().getValue().isBeforeOrEquals(div.getTxtTekiyobi().getValue())
-                                        && row.getKaijoYMD().getValue().isBefore(div.getTxtKaijyobi().getValue()))) {
+                            if (div.getTxtKaijyobi().getValue() == null && div.getTxtTekiyobi().getValue() != null) {
+                                if (div.getTxtTekiyobi().getValue().isBefore(row.getKaijoYMD().getValue())) {
                                     validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
+                                }
+                            } else {
+                                if (div.getTxtTekiyobi().getValue() != null && div.getTxtKaijyobi().getValue() != null) {
+                                    if ((div.getTxtTekiyobi().getValue().isBefore(row.getTekiyoYMD().getValue())
+                                            && div.getTxtKaijyobi().getValue().isBeforeOrEquals(row.getTekiyoYMD().getValue()))
+                                            || (row.getKaijoYMD().getValue().isBeforeOrEquals(div.getTxtTekiyobi().getValue())
+                                            && row.getKaijoYMD().getValue().isBefore(div.getTxtKaijyobi().getValue()))) {
+                                        validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-        }
-        if (状態_適用.equals(親画面状態)) {
-            if (div.getTxtTekiyobi().getValue() == null) {
-                validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日, div.getTxtTekiyobi()));
-            } else {
-                if (最新の適用情報.getTekiyoYMD() != null) {
-                    if (div.getTxtTekiyobi().getValue().isBefore(最新の適用情報.getTekiyoYMD().getValue())) {
-                        validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
+            if (状態_適用.equals(親画面状態)) {
+                if (div.getTxtTekiyobi().getValue() == null) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日, div.getTxtTekiyobi()));
+                } else {
+                    if (最新の適用情報.getTekiyoYMD() != null) {
+                        if (div.getTxtTekiyobi().getValue().isBefore(最新の適用情報.getTekiyoYMD().getValue())) {
+                            validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
+                        }
                     }
                 }
-            }
-            if (div.getDdlTekiyoJiyo().getSelectedKey() == null
-                    || div.getDdlTekiyoJiyo().getSelectedKey().isEmpty()) {
-                validPairs.add(new ValidationMessageControlPair(RRVMessages.適用事由, div.getDdlTekiyoJiyo()));
-            }
-            if (div.getTxtTekiyobi().getValue().isBefore(div.getTxtTekiyoTodokedebi().getValue())) {
-                validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日と適用届出日の整合性チェック, div.getTxtTekiyobi(), div.getTxtTekiyoTodokedebi()));
-            }
-            if (div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null
-                    && !div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isEmpty()
-                    && div.getTxtNyusyobi().getValue() == null) {
-                validPairs.add(new ValidationMessageControlPair(RRVMessages.入所日の必須チェック, div.getTxtNyusyobi()));
-            }
+                if (div.getDdlTekiyoJiyo().getSelectedKey() == null
+                        || div.getDdlTekiyoJiyo().getSelectedKey().isEmpty()) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.適用事由, div.getDdlTekiyoJiyo()));
+                }
+                if (div.getTxtTekiyobi().getValue().isBefore(div.getTxtTekiyoTodokedebi().getValue())) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日と適用届出日の整合性チェック, div.getTxtTekiyobi(), div.getTxtTekiyoTodokedebi()));
+                }
+                if (div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null
+                        && !div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isEmpty()
+                        && div.getTxtNyusyobi().getValue() == null) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.入所日の必須チェック, div.getTxtNyusyobi()));
+                }
 
-            if ((div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo() == null
-                    || div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isEmpty())
-                    && div.getTxtNyusyobi().getValue() != null) {
-                validPairs.add(new ValidationMessageControlPair(RRVMessages.入所施設の必須チェック));
-            }
-        }
-        if (状態_解除.equals(親画面状態)) {
-            if (div.getTxtKaijyobi().getValue() == null) {
-                validPairs.add(new ValidationMessageControlPair(RRVMessages.解除日, div.getTxtKaijyobi()));
-            } else {
-                if (div.getDdlKaijyoJiyo().getSelectedKey() == null
-                        || div.getDdlKaijyoJiyo().getSelectedKey().isEmpty()) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.解除事由));
+                if ((div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo() == null
+                        || div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isEmpty())
+                        && div.getTxtNyusyobi().getValue() != null) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.入所施設の必須チェック));
                 }
-                if (最新の適用情報.getKaijoYMD() != null) {
-                    if (div.getTxtKaijyobi().getValue().isBefore(最新の適用情報.getKaijoYMD().getValue())) {
-                        validPairs.add(new ValidationMessageControlPair(RRVMessages.入力値が不正, div.getTxtKaijyobi()));
+            }
+            if (状態_解除.equals(親画面状態)) {
+                if (div.getTxtKaijyobi().getValue() == null) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.解除日, div.getTxtKaijyobi()));
+                } else {
+                    if (div.getDdlKaijyoJiyo().getSelectedKey() == null
+                            || div.getDdlKaijyoJiyo().getSelectedKey().isEmpty()) {
+                        validPairs.add(new ValidationMessageControlPair(RRVMessages.解除事由));
+                    }
+                    if (最新の適用情報.getKaijoYMD() != null) {
+                        if (div.getTxtKaijyobi().getValue().isBefore(最新の適用情報.getKaijoYMD().getValue())) {
+                            validPairs.add(new ValidationMessageControlPair(RRVMessages.入力値が不正, div.getTxtKaijyobi()));
+                        }
                     }
                 }
-            }
-            if (div.getTxtKaijyobi().getValue() != null && div.getTxtKaijyoTodokedebi().getValue() != null) {
-                if (div.getTxtKaijyobi().getValue().isBefore(div.getTxtKaijyoTodokedebi().getValue())) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.解除日と解除届出日の整合性チェック));
+                if (div.getTxtKaijyobi().getValue() != null && div.getTxtKaijyoTodokedebi().getValue() != null) {
+                    if (div.getTxtKaijyobi().getValue().isBefore(div.getTxtKaijyoTodokedebi().getValue())) {
+                        validPairs.add(new ValidationMessageControlPair(RRVMessages.解除日と解除届出日の整合性チェック));
+                    }
                 }
             }
         }
