@@ -8,11 +8,12 @@ package jp.co.ndensan.reams.db.dba.service.report.jyushochitokureitekiyohenko;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
 import jp.co.ndensan.reams.db.dba.business.report.jyushochitokureitekiyohenko.JyushochiTokureiTekiyoHenkoItem;
 import jp.co.ndensan.reams.db.dba.business.report.jyushochitokureitekiyohenko.JyushochiTokureiTekiyoHenkoProerty;
 import jp.co.ndensan.reams.db.dba.business.report.jyushochitokureitekiyohenko.JyushochiTokureiTekiyoHenkoReport;
 import jp.co.ndensan.reams.db.dba.entity.report.jyushochitokureitekiyohenko.JyushochiTokureiTekiyoHenkoReportSource;
-import jp.co.ndensan.reams.db.dba.entity.report.shikakushutokuidososhitsu.HihokenshaKihonEntity;
+import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
@@ -38,12 +39,15 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  *
  * 介護保険住所地特例適用・変更・終了届のPrintクラスです。
  */
 public class JushochiTokureiTekiyoHenkoShuryoTodoke {
+    
+    private static final RString 生年月日不詳区分 = new RString("FALSE");
     
     /**
      * 介護保険住所地特例適用・変更・終了届をPrintします。
@@ -69,7 +73,7 @@ public class JushochiTokureiTekiyoHenkoShuryoTodoke {
         }
     }
     
-    private static List<JyushochiTokureiTekiyoHenkoReport> toReports(HihokenshaKihonEntity entity, RString ninshoshaYakushokuMei) {
+    private static List<JyushochiTokureiTekiyoHenkoReport> toReports(HihokenshaKihonBusiness entity, RString ninshoshaYakushokuMei) {
         List<JyushochiTokureiTekiyoHenkoReport> list = new ArrayList<>();
         RString 生年月日 = RString.EMPTY;
         if (JuminShubetsu.日本人.getCode().equals(entity.get住民種別コード())
@@ -81,7 +85,7 @@ public class JushochiTokureiTekiyoHenkoShuryoTodoke {
         }
         JyushochiTokureiTekiyoHenkoItem item = new JyushochiTokureiTekiyoHenkoItem(
                 ninshoshaYakushokuMei,
-                entity.get被保険者番号(),
+                entity.get被保険者番号().isEmpty() ? RString.EMPTY : entity.get被保険者番号().getColumnValue(),
                 entity.getフリガナ(),
                 entity.get被保険者氏名(),
                 生年月日,
@@ -90,7 +94,7 @@ public class JushochiTokureiTekiyoHenkoShuryoTodoke {
         return list;
     }
     
-    private static RString set生年月日_日本人(HihokenshaKihonEntity entity) {
+    private static RString set生年月日_日本人(HihokenshaKihonBusiness entity) {
         if (entity.get生年月日() != null && entity.get生年月日().isEmpty()) {
             return entity.get生年月日()
                     .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
@@ -99,7 +103,7 @@ public class JushochiTokureiTekiyoHenkoShuryoTodoke {
         return RString.EMPTY;
     }
     
-    private static RString set生年月日(HihokenshaKihonEntity entity) {
+    private static RString set生年月日(HihokenshaKihonBusiness entity) {
         RString 外国人表示制御_生年月日表示方法 = BusinessConfig
                 .get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
         RString 生年月日 = RString.EMPTY;
@@ -112,9 +116,9 @@ public class JushochiTokureiTekiyoHenkoShuryoTodoke {
         return 生年月日;
     }
     
-    private static RString set生年月日_和暦表示(HihokenshaKihonEntity entity) {
+    private static RString set生年月日_和暦表示(HihokenshaKihonBusiness entity) {
             RString 生年月日 = RString.EMPTY;
-            if (!entity.is生年月日不詳区分()) {
+            if (entity.get生年月日不詳区分().equals(生年月日不詳区分)) {
                 生年月日 = (entity.get生年月日() == null || entity.get生年月日().isEmpty()) ? RString.EMPTY : entity.get生年月日()
                         .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -134,10 +138,10 @@ public class JushochiTokureiTekiyoHenkoShuryoTodoke {
     }
     
     
-    private HihokenshaKihonEntity get被保険者基本情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
-        HihokenshaKihonEntity entity = new HihokenshaKihonEntity();
-        
-        return entity;
+    private HihokenshaKihonBusiness get被保険者基本情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+        TokuteifutanGendogakuShinseisho shinjoho = InstanceProvider.create(TokuteifutanGendogakuShinseisho.class);
+        HihokenshaKihonBusiness list = shinjoho.getHihokenshaKihonJoho(被保険者番号, 識別コード);
+        return list;
     }
     
     
