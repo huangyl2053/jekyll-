@@ -285,7 +285,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         entity.setShinseishaTelNo(parameter.get電話番号());
         entity.setShiharaiKingakuTotal(parameter.get支払金額合計());
         entity.setHokenTaishoHiyogaku(parameter.get支払金額合計());
-        entity.setHokenKyufuritsu(parameter.get保険給付額());
+        entity.setHokenKyufugaku(parameter.get保険給付額());
         entity.setRiyoshaFutangaku(parameter.get利用者給付額());
         entity.setShikyuShinseiShinsaKubun(parameter.get支給申請審査区分());
         entity.setShinsaHohoKubun(parameter.get審査方法区分());
@@ -299,6 +299,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * 支給申請更新
      *
      * @param parameter
+     * @return
      */
     public int updDbT3034ShokanShinsei(ShokanShinseiParameter parameter) {
 
@@ -316,7 +317,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         entity.setShinseishaTelNo(parameter.get電話番号());
         entity.setShiharaiKingakuTotal(parameter.get支払金額合計());
         entity.setHokenTaishoHiyogaku(parameter.get支払金額合計());
-        entity.setHokenKyufuritsu(parameter.get保険給付額());
+        entity.setHokenKyufugaku(parameter.get保険給付額());
         entity.setRiyoshaFutangaku(parameter.get利用者給付額());
         entity.setShiharaiHohoKubunCode(parameter.get選択された支払方法コード());
         entity.setShiharaiBasho(parameter.get支払場所());

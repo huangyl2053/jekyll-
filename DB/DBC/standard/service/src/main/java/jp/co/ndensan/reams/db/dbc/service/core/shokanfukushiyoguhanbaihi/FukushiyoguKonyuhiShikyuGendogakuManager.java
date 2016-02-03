@@ -254,11 +254,11 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
         DbT3017entity.setNinteiYukoKaishiYMD(DbT4001entity.getNinteiYukoKikanKaishiYMD());
         DbT3017entity.setNinteiYukoShuryoYMD(DbT4001entity.getNinteiYukoKikanShuryoYMD());
         //TODO 償還払支給申請表中无字段給付率
-        DbT3017entity.setHokenKyufuritsu(new HokenKyufuRitsu(new Decimal(shokanShinseiEntity.getHokenKyufuritsu())));
-        DbT3017entity.setMaeHokenSeikyugaku(new Decimal(shokanShinseiEntity.getHokenKyufuritsu()));
+        DbT3017entity.setHokenKyufuritsu(new HokenKyufuRitsu(new Decimal(shokanShinseiEntity.getHokenKyufugaku())));
+        DbT3017entity.setMaeHokenSeikyugaku(new Decimal(shokanShinseiEntity.getHokenKyufugaku()));
         DbT3017entity.setMaeHokenRiyoshaFutangaku(new Decimal(shokanShinseiEntity.getRiyoshaFutangaku()));
-        DbT3017entity.setAtoHokenRiyoshaFutangaku(new Decimal(shokanShinseiEntity.getHokenKyufuritsu()));
-        DbT3017entity.setAtoHokenRiyoshaFutangaku(new Decimal(shokanShinseiEntity.getHokenKyufuritsu()));
+        DbT3017entity.setAtoHokenRiyoshaFutangaku(new Decimal(shokanShinseiEntity.getHokenKyufugaku()));
+        DbT3017entity.setAtoHokenRiyoshaFutangaku(new Decimal(shokanShinseiEntity.getHokenKyufugaku()));
         DbT3017entity.setShinsaYM(shokanHanteiKekkaEntity.getKetteiYMD().getYearMonth());
         DbT3017entity.setSeiriNo(shokanKihonEntity.getSeiriNp());
         DbT3017entity.setSofuYM(shokanHanteiKekkaEntity.getKetteiYMD().getYearMonth());

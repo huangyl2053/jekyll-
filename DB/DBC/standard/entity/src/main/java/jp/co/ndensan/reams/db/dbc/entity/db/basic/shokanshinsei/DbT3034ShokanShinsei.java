@@ -122,6 +122,10 @@ public enum DbT3034ShokanShinsei implements IColumnDefinition {
      */
     hokenTaishoHiyogaku(9, 0),
     /**
+     * 保険給付額
+     */
+    hokenKyufugaku(10, 0),
+    /**
      * 利用者負担額
      */
     riyoshaFutangaku(10, 0),
