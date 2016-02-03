@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -25,11 +24,10 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranProperty
         extends ReportPropertyBase<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource> {
 
-    private static final ReportId ID = ReportIdDBC.DBC200023.getReportId();
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("title")));
 
     public ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranProperty() {
-        super(SubGyomuCode.DBC介護給付, ID);
+        super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200023.getReportId());
     }
 
     @Override
@@ -37,8 +35,6 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranProperty
             Breakers<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource> breakers,
             BreakerCatalog<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
-
-
 
             PAGE_BREAK_KEYS) {
             @Override
