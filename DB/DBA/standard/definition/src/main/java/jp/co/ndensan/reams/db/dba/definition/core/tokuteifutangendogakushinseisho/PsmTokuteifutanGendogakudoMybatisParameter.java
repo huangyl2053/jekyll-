@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch;
+package jp.co.ndensan.reams.db.dba.definition.core.tokuteifutangendogakushinseisho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
 
 /**
  * 宛名識別対象取得パラメータクラス。
  */
-public class PsmShikibetsuTaishoMybatisParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+@Getter
+public class PsmTokuteifutanGendogakudoMybatisParameter {
 
     private final RString psmShikibetsuTaisho;
 
@@ -19,7 +22,7 @@ public class PsmShikibetsuTaishoMybatisParameter {
      *
      * @param psmShikibetsuTaisho 宛名識別対象
      */
-    public PsmShikibetsuTaishoMybatisParameter(RString psmShikibetsuTaisho) {
+    public PsmTokuteifutanGendogakudoMybatisParameter(RString psmShikibetsuTaisho) {
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 }

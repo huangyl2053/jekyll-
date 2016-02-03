@@ -17,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuteifutanGendogakuShinseishoMybatisParameter {
+public final class TokuteifutanGendogakuShinseishoMybatisParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final ShikibetsuCode 識別コード;
