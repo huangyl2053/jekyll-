@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 認定調査スケジュール登録3用XMLです。 -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.ninteichosaschedule.INinteichosaSchedule">
+    <resultMap id="resultMap_INinteichosaScheduleRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaschedule.INinteichosaScheduleRelateEntity" autoMapping="true">
+	<result property="shichosonMeisho" column="DbT7051_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="hihokenshaNo" column="dbT5912ShujiiJoho_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaName" column="dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaKana" column="dbT7051KoseiShichosonMaster_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="seibetsu" column="DbT5101_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="seinengappiYMD" column="DbT5101_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiChosaYoteiYMD" column="DbT5221_ninteiChosaYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="yoyakuJokyo" column="DbT5221_yoyakuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiShinseiYMD" column="DbT5101_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiShinseiShinseijiKubunCode" column="DbT5101_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="taishoshaMemo" column="DbT5221_taishoshaMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="shinseishoKanriNo" column="DbT5101_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shoKisaiHokenshaNo" column="DbT7051_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+   </resultMap>
+    
+    <select id="selectNinteichosaScheduleList"
+            resultMap="resultMap_INinteichosaScheduleRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteichosaScheduleMybatisParameter" fetchSize="500">
+        SELECT
+                DbT7051."shichosonMeisho" as "DbT7051_shichosonMeisho",
+                DbT5101."hihokenshaNo" as "DbT5101_hihokenshaNo",
+                DbT5101."hihokenshaName" as "DbT5101_hihokenshaName",
+                DbT5101."hihokenshaKana" as "DbT5101_hihokenshaKana" ,
+                DbT5101.seibetsu as "DbT5101_seibetsu",
+                DbT5101."seinengappiYMD" as "DbT5101_seinengappiYMD",
+                DbT5221."ninteiChosaYoteiYMD" as "DbT5221_ninteiChosaYoteiYMD",
+                DbT5221."yoyakuJokyo" as "DbT5221_yoyakuJokyo",
+                DbT5101."ninteiShinseiYMD" as "DbT5101_ninteiShinseiYMD",
+                DbT5101."ninteiShinseiShinseijiKubunCode" as "DbT5101_ninteiShinseiShinseijiKubunCode",
+                DbT5221."taishoshaMemo" as "DbT5221_taishoshaMemo",
+                DbT5101."shinseishoKanriNo" as "DbT5101_shinseishoKanriNo"
+                FROM
+                    rgdb."DbT5101NinteiShinseiJoho" as  DbT5101
+                INNER JOIN
+                    rgdb."DbT7051KoseiShichosonMaster" as DbT7051
+                  ON 
+                    DbT5101."shoKisaiHokenshaNo" = DbT7051."shoKisaiHokenshaNo"
+                INNER JOIN
+                     rgdb."DbT5221NinteichosaSchedule" as  DbT5221
+                  ON
+                    DbT5101."shinseishoKanriNo" = DbT5221."shinseishoKanriNo"
+                 AND
+                    DbT5101."ninteiChosaItakusakiCode" = DbT5221."ninteiChosaItakusakiCode"
+                 AND
+                    DbT5101."ninteiChosainCode" =  DbT5221."ninteiChosainCode"
+                INNER JOIN
+                    rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
+                   ON
+                    DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+                 AND
+                    DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+                 AND
+                    DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
+                 AND
+                    DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
+                 AND
+                    DbT5105."centerSoshinYMD" IS NOT NULL
+               WHERE
+                   DbT5101."logicalDeletedFlag" = FALSE
+                 AND
+                   DbT5101."shoriJotaiKubun" IN ('01','04') 
+                 AND
+                   DbT5221."yoyakuKaoFlag" = TRUE
+        
+                  <if test="仮予約分フラグ">
+                      AND DbT5221."yoyakuJokyo"= '1'  
+                   </if>
+                   <if test="確定分フラグ">
+                      AND DbT5221."yoyakuJokyo" = '2' 
+                   </if>
+                   <if test="保険者フラグ" >
+                        AND  DbT5101."shoKisaiHokenshaNo" =#{証記載保険者番号} 
+                   </if>    
+                   <if test="被保険者番号フラグ">
+                      AND DbT5101."hihokenshaNo"  LIKE #{被保険者番号}||'%'                       
+                   </if>
+                   <if test="識別コードフラグ">
+                      AND  DbT5101."shikibetsuCode" = #{識別コード}
+                   </if>
+                   <if test="入力氏名フラグ" >
+                       AND DbT5101."hihokenshaName"  LIKE #{入力氏名} || '%' 
+                   </if>
+                   <if test="カナ氏名フラグ">
+                      AND DbT5101."hihokenshaKana"  LIKE #{カナ氏名} || '%' 
+                   </if>
+                   <if test="生年月日フラグ">
+                     AND DbT5101."seinengappiYMD" =#{生年月日} 
+                   </if>
+                   <if test="認定申請日Fromフラグ" >
+                       AND DbT5101."ninteiShinseiYMD" <![CDATA[>=]]> #{認定申請日From}
+                   </if>
+                   <if test="認定申請日Toフラグ">
+                       AND DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{認定申請日To} 
+                   </if>
+                   <if test="メモフラグ">
+                       AND DbT5221."taishoshaMemo" LIKE #{メモ} || '%' 
+                   </if>
+                   <if test="認定調査委託先フラグ">
+                       AND DbT5101."ninteiChosaItakusakiCode" = #{認定調査委託先}
+                   </if> 
+                   <if test="認定調査員フラグ">
+                       AND DbT5101."ninteiChosainCode" =#{認定調査員}                       
+                   </if>
+                   <if test="認定調査日Fromフラグ">
+                       AND DbT5221."ninteiChosaYoteiYMD" <![CDATA[>=]]> #{認定調査日From}
+                   </if>
+                   <if test="認定調査日Toフラグ">
+                       AND DbT5221."ninteiChosaYoteiYMD" <![CDATA[<=]]> #{認定調査日To}
+                   </if>
+                   <if test="対象地区フラグ">
+                       AND DbT5221."chosaChikuCode" = #{対象地区}
+                   </if> 
+              ORDER BY
+                  DbT7051."shichosonMeisho",
+                  DbT5101."hihokenshaNo",
+                  DbT5221."ninteiChosaYoteiYMD",
+                  DbT5221."yoyakuJokyo",
+                  DbT5101."ninteiShinseiYMD",
+                  DbT5101."ninteiShinseiShinseijiKubunCode",
+                  DbT5221."taishoshaMemo"
+                  <if test="usesSaidaiHyojiKensu">
+                      LIMIT #{saidaiHyojiKensu}
+                 </if>           
+    </select>
+     <select id="selectKoseiShichosonMasterList"
+            resultMap="resultMap_INinteichosaScheduleRelateEntity" 
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter" fetchSize="500">
+            SELECT
+                DbT7051."shichosonMeisho" as "DbT7051_shichosonMeisho",
+                DbT5101."hihokenshaNo" as "DbT5101_hihokenshaNo",
+                DbT5101."hihokenshaName" as "DbT5101_hihokenshaName",
+                DbT5101."hihokenshaKana" as "DbT5101_hihokenshaKana" ,
+                DbT5101.seibetsu as "DbT5101_seibetsu",
+                DbT5101."seinengappiYMD" as "DbT5101_seinengappiYMD",
+                DbT5221."ninteiChosaYoteiYMD" as "DbT5221_ninteiChosaYoteiYMD",
+                DbT5221."yoyakuJokyo" as "DbT5221_yoyakuJokyo",
+                DbT5101."ninteiShinseiYMD" as "DbT5101_ninteiShinseiYMD",
+                DbT5101."ninteiShinseiShinseijiKubunCode" as "DbT5101_ninteiShinseiShinseijiKubunCode",
+                DbT5221."taishoshaMemo" as "DbT5221_taishoshaMemo",
+                DbT5101."shinseishoKanriNo" as "DbT5101_shinseishoKanriNo"
+                FROM
+                   rgdb."DbT5101NinteiShinseiJoho" as  DbT5101
+                INNER JOIN
+                    rgdb."DbT7051KoseiShichosonMaster" as DbT7051
+                  ON
+                    DbT5101."shoKisaiHokenshaNo" = DbT7051."shoKisaiHokenshaNo"
+                INNER JOIN 
+                       (  SELECT 
+		DbT5201NinteichosaIraiJoho.*
+		FROM
+		  rgdb."DbT5201NinteichosaIraiJoho" as DbT5201NinteichosaIraiJoho 
+                 INNER JOIN 
+		 (SELECT
+		      "shinseishoKanriNo"
+		      ,MAX("ninteichosaIraiRirekiNo") AS "ninteichosaIraiRirekiNo"
+		      FROM
+			rgdb."DbT5201NinteichosaIraiJoho" 
+	              group by "shinseishoKanriNo"
+		    ) AS DbT5201_Temp
+		    ON DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = DbT5201_Temp."shinseishoKanriNo"
+		    AND DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = DbT5201_Temp."ninteichosaIraiRirekiNo"
+		 ) AS DbT5201 
+                  ON
+                    DbT5101."shinseishoKanriNo" = DbT5201."shinseishoKanriNo"
+                  AND
+                     DbT5101."ninteiChosaItakusakiCode" = DbT5201."ninteichosaItakusakiCode"
+                  AND
+                    DbT5101."ninteiChosainCode" = DbT5201."ninteiChosainCode"      
+                  AND 
+                     DbT5201."logicalDeletedFlag" = FALSE
+                INNER JOIN 
+                    rgdb."DbT5105NinteiKanryoJoho" as DbT5105
+                  ON
+                    DbT5101."shinseishoKanriNo" =  DbT5105."shinseishoKanriNo"
+                  AND
+                    DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+                  AND
+                    DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL  
+                  AND
+                    DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
+                  AND
+                    DbT5105."centerSoshinYMD" IS NOT NULL
+               LEFT JOIN
+                    rgdb."DbT5221NinteichosaSchedule" AS DbT5221
+                  ON
+                     DbT5101."shinseishoKanriNo" = DbT5221."shinseishoKanriNo"
+                  AND
+                     DbT5101."ninteiChosaItakusakiCode" = DbT5221."ninteiChosaItakusakiCode"
+                  AND
+                     DbT5101."ninteiChosainCode" = DbT5221."ninteiChosainCode"
+                WHERE     
+                    DbT5101."logicalDeletedFlag" = FALSE
+                  AND
+                    DbT5101."shoriJotaiKubun"  IN ('01','04')
+                  AND
+                    DbT5221."yoyakuKaoFlag" = TRUE
+                    <if test="保険者フラグ">
+                      AND
+                        DbT5101."shoKisaiHokenshaNo" = #{証記載保険者番号}    
+                   </if>
+                   <if test="被保険者番号フラグ">
+                      AND
+                        DbT5101."hihokenshaNo" LIKE #{被保険者番号} ||'%' 
+                   </if> 
+                   <if test="識別コードフラグ">
+                      AND DbT5101."shikibetsuCode" = #{識別コード}    
+                   </if>
+                   <if test="入力氏名フラグ">
+                     AND
+                       DbT5101."hihokenshaName"  LIKE #{入力氏名} || '%' 
+                   </if>
+                   <if test="カナ氏名フラグ" >
+                     AND 
+                       DbT5101."hihokenshaKana"  LIKE #{カナ氏名} || '%' 
+                   </if>
+                   <if test="生年月日フラグ">
+                      AND
+                         DbT5101."seinengappiYMD" =#{生年月日}
+                   </if>
+                   <if test="認定申請日Fromフラグ">
+                       AND
+                         DbT5101."ninteiShinseiYMD" <![CDATA[>=]]> #{認定申請日From}
+                   </if>
+                   <if test="認定申請日Toフラグ">
+                       AND 
+                         DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{認定申請日To} 
+                   </if>
+                   <if test="メモフラグ">
+                      AND 
+                        DbT5221."taishoshaMemo" LIKE #{メモ} || '%'  
+                   </if>
+                   <if test="対象地区フラグ">
+                      AND 
+                         DbT5221."chosaChikuCode" = #{対象地区}
+                   </if>        
+               ORDER BY
+                  DbT7051."shichosonMeisho",
+                  DbT5101."hihokenshaNo",
+                  DbT5221."ninteiChosaYoteiYMD",
+                  DbT5221."yoyakuJokyo",
+                  DbT5101."ninteiShinseiYMD",
+                  DbT5101."ninteiShinseiShinseijiKubunCode",
+                  DbT5221."taishoshaMemo"               
+                  <if test="usesSaidaiHyojiKensu">
+                      LIMIT #{saidaiHyojiKensu}
+                 </if>      
+         </select>
+     <select id="selectNinteiShinseiJohoList"
+            resultMap="resultMap_INinteichosaScheduleRelateEntity" 
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter" fetchSize="500">
+         SELECT
+             DbT7051."shichosonMeisho" as "DbT7051_shichosonMeisho",
+             DbT5101."hihokenshaNo" as "DbT5101_hihokenshaNo",
+             DbT5101."hihokenshaName" as "DbT5101_hihokenshaName",
+             DbT5101."hihokenshaKana" as "DbT5101_hihokenshaKana" ,
+             DbT5101.seibetsu as "DbT5101_seibetsu",
+             DbT5101."seinengappiYMD" as "DbT5101_seinengappiYMD",
+             DbT5221."ninteiChosaYoteiYMD" as "DbT5221_ninteiChosaYoteiYMD",
+             DbT5221."yoyakuJokyo" as "DbT5221_yoyakuJokyo",
+             DbT5101."ninteiShinseiYMD" as "DbT5101_ninteiShinseiYMD",
+             DbT5101."ninteiShinseiShinseijiKubunCode" as "DbT5101_ninteiShinseiShinseijiKubunCode",
+             DbT5221."taishoshaMemo" as "DbT5221_taishoshaMemo",
+             DbT5101."shinseishoKanriNo" as "DbT5101_shinseishoKanriNo"
+           FROM    
+              rgdb."DbT5101NinteiShinseiJoho" as  DbT5101
+           INNER JOIN
+              rgdb."DbT7051KoseiShichosonMaster" as DbT7051
+             ON
+               DbT5101."shoKisaiHokenshaNo" = DbT7051."shoKisaiHokenshaNo" 
+           INNER JOIN
+             rgdb."DbT5221NinteichosaSchedule" AS DbT5221 
+            ON
+              DbT5101."shinseishoKanriNo" = DbT5221."shinseishoKanriNo"
+            AND
+              DbT5101."ninteiChosaItakusakiCode"  = DbT5221."ninteiChosaItakusakiCode"
+            AND
+              DbT5101."ninteiChosainCode" = DbT5221."ninteiChosainCode"
+           INNER JOIN
+               (  SELECT 
+		DbT5201NinteichosaIraiJoho.*
+		FROM
+		  rgdb."DbT5201NinteichosaIraiJoho" as DbT5201NinteichosaIraiJoho 
+                 INNER JOIN 
+		 (SELECT
+		      "shinseishoKanriNo"
+		      ,MAX("ninteichosaIraiRirekiNo") AS "ninteichosaIraiRirekiNo"
+		      FROM
+			rgdb."DbT5201NinteichosaIraiJoho" 
+	              group by "shinseishoKanriNo"
+		    ) AS DbT5201_Temp
+		    ON DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = DbT5201_Temp."shinseishoKanriNo"
+		    AND DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = DbT5201_Temp."ninteichosaIraiRirekiNo"
+		 ) AS DbT5201 
+            ON
+              DbT5101."shinseishoKanriNo" = DbT5201."shinseishoKanriNo"
+            AND
+              DbT5101."ninteiChosaItakusakiCode" = DbT5201."ninteichosaItakusakiCode"
+            AND
+              DbT5101."ninteiChosainCode" = DbT5201."ninteiChosainCode"
+            AND 
+               DbT5201."logicalDeletedFlag" = FALSE
+           INNER JOIN
+               rgdb."DbT5105NinteiKanryoJoho" as DbT5105   
+            ON
+              DbT5101."shinseishoKanriNo" =  DbT5105."shinseishoKanriNo"
+            AND
+              DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
+            AND    
+              DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
+            AND
+              DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
+            AND  
+              DbT5105."centerSoshinYMD" IS NOT NULL
+          WHERE
+             DbT5101."logicalDeletedFlag" = FALSE
+            AND 
+              DbT5101."shoriJotaiKubun"  IN ('01','04')
+            AND  
+              DbT5221."yoyakuKaoFlag" = TRUE
+              <if test="保険者フラグ">
+                 AND
+                   DbT5101."shoKisaiHokenshaNo" = #{証記載保険者番号}        
+              </if>
+              <if test= "被保険者番号フラグ">
+                 AND
+                  DbT5101."hihokenshaNo" LIKE #{被保険者番号} || '%' 
+               </if> 
+               <if test="識別コードフラグ">
+                 AND
+                  DbT5101."shikibetsuCode" = #{識別コード}    
+                </if>
+                <if test="入力氏名フラグ">
+                  AND
+                  DbT5101."hihokenshaName"  LIKE #{入力氏名} || '%' 
+                </if>
+                <if test="カナ氏名フラグ" >
+                  AND 
+                     DbT5101."hihokenshaKana"  LIKE #{カナ氏名} || '%' 
+                </if>
+                <if test="生年月日フラグ">
+                   AND
+                     DbT5101."seinengappiYMD" =#{生年月日}
+                 </if>
+                 <if test="認定申請日Fromフラグ">
+                   AND
+                    DbT5101."ninteiShinseiYMD" <![CDATA[>=]]> #{認定申請日From}
+                 </if>
+                 <if test="認定申請日Toフラグ">
+                   AND 
+                     DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{認定申請日To} 
+                 </if>
+                 <if test="メモフラグ">
+                   AND 
+                     DbT5221."taishoshaMemo" LIKE #{メモ} || '%'  
+                 </if>
+                 <if test="対象地区フラグ">
+                   AND 
+                     DbT5221."chosaChikuCode" = #{対象地区} 
+                 </if>
+              ORDER BY
+                  DbT7051."shichosonMeisho",
+                  DbT5101."hihokenshaNo",
+                  DbT5221."ninteiChosaYoteiYMD",
+                  DbT5221."yoyakuJokyo",
+                  DbT5101."ninteiShinseiYMD",
+                  DbT5101."ninteiShinseiShinseijiKubunCode"
+                  DbT5221."taishoshaMemo"
+                 <if test="usesSaidaiHyojiKensu">
+                     LIMIT #{saidaiHyojiKensu}
+                 </if>   
+     </select><!--
+-->     <select id="selectNinteichosaIraiJohoList"
+            resultMap="resultMap_INinteichosaScheduleRelateEntity" 
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter" fetchSize="500">
+            SELECT
+                DbT7051."shichosonMeisho" as "DbT7051_shichosonMeisho",
+                DbT5101."hihokenshaNo" as "DbT5101_hihokenshaNo",
+                DbT5101."hihokenshaName" as "DbT5101_hihokenshaName",
+                DbT5101."hihokenshaKana" as "DbT5101_hihokenshaKana" ,
+                DbT5101.seibetsu as "DbT5101_seibetsu",
+                DbT5101."seinengappiYMD" as "DbT5101_seinengappiYMD",
+                DbT5221."ninteiChosaYoteiYMD" as "DbT5221_ninteiChosaYoteiYMD",
+                DbT5221."yoyakuJokyo" as "DbT5221_yoyakuJokyo",
+                DbT5101."ninteiShinseiYMD" as "DbT5101_ninteiShinseiYMD",
+                DbT5101."ninteiShinseiShinseijiKubunCode" as "DbT5101_ninteiShinseiShinseijiKubunCode",
+                DbT5221."taishoshaMemo" as "DbT5221_taishoshaMemo",
+                DbT5101."shinseishoKanriNo" as "DbT5101_shinseishoKanriNo"
+              FROM
+                 rgdb."DbT5101NinteiShinseiJoho" as  DbT5101
+              INNER JOIN
+                 rgdb."DbT7051KoseiShichosonMaster" as DbT7051
+               ON
+                 DbT5101."shoKisaiHokenshaNo" = DbT7051."shoKisaiHokenshaNo"
+              INNER JOIN
+                 rgdb."DbT5221NinteichosaSchedule" AS DbT5221
+               ON
+                DbT5101."shinseishoKanriNo" = DbT5221."shinseishoKanriNo"
+               AND
+                DbT5101."ninteiChosaItakusakiCode" = DbT5221."ninteiChosaItakusakiCode"
+               AND
+                DbT5101."ninteiChosainCode" = DbT5221."ninteiChosainCode"
+              INNER JOIN
+                 rgdb."DbT5105NinteiKanryoJoho" as DbT5105
+               ON
+                DbT5101."shinseishoKanriNo" =  DbT5105."shinseishoKanriNo"
+               AND
+                DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+               AND 
+                DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
+               AND
+                DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
+               AND
+                DbT5105."centerSoshinYMD" IS NOT NULL 
+             WHERE
+                 DbT5101."logicalDeletedFlag" = FALSE
+               AND 
+                 DbT5101."shoriJotaiKubun"  IN ('01','04')
+               AND  
+                 DbT5221."yoyakuKaoFlag" = TRUE
+               AND  
+                 DbT5101."minashiNigoEtcTaishoFlag" =TRUE
+                <if test="保険者フラグ">
+                  AND
+                    DbT5101."shoKisaiHokenshaNo" = #{証記載保険者番号}      
+                </if>
+                <if test= "被保険者番号フラグ">
+                  AND
+                    DbT5101."hihokenshaNo" LIKE #{被保険者番号} || '%' 
+                </if> 
+                <if test="識別コードフラグ">
+                  AND
+                    DbT5101."shikibetsuCode" = #{識別コード}    
+                </if>
+                <if test="入力氏名フラグ">
+                  AND
+                    DbT5101."hihokenshaName"  LIKE #{入力氏名} || '%' 
+                </if>
+                <if test="カナ氏名フラグ" >
+                  AND 
+                     DbT5101."hihokenshaKana"  LIKE #{カナ氏名} || '%' 
+                </if>
+                <if test="生年月日フラグ">
+                   AND
+                     DbT5101."seinengappiYMD" =#{生年月日}
+                 </if>
+                 <if test="認定申請日Fromフラグ">
+                   AND
+                     DbT5101."ninteiShinseiYMD" <![CDATA[>=]]> #{認定申請日From}
+                 </if>
+                 <if test="認定申請日Toフラグ">
+                   AND 
+                     DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{認定申請日To} 
+                 </if>
+                 <if test="メモフラグ">
+                   AND 
+                     DbT5221."taishoshaMemo" LIKE #{メモ} || '%'  
+                 </if>
+                 <if test="対象地区フラグ">
+                   AND 
+                     DbT5221."chosaChikuCode" = #{対象地区} 
+                 </if>
+              ORDER BY
+                  DbT7051."shichosonMeisho",
+                  DbT5101."hihokenshaNo",
+                  DbT5221."ninteiChosaYoteiYMD",
+                  DbT5221."yoyakuJokyo",
+                  DbT5101."ninteiShinseiYMD",
+                  DbT5101."ninteiShinseiShinseijiKubunCode",
+                  DbT5221."taishoshaMemo"
+                 <if test="usesSaidaiHyojiKensu">
+                     LIMIT #{saidaiHyojiKensu}
+                 </if>     
+     </select>
+     <select id="select保険者ドロップダウンリスト"
+            resultMap="resultMap_INinteichosaScheduleRelateEntity" 
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter" fetchSize="500">
+            SELECT
+                DbT7051."shoKisaiHokenshaNo" as "DbT7051_shoKisaiHokenshaNo"
+              FROM
+                rgdb."DbT7051KoseiShichosonMaster" as DbT7051, rgdb."DbT5224ChikuShichoson" as DbT5224
+              WHERE
+                DbT5224."shichosonCode" = DbT7051."shichosonCode" 
+               AND
+                DbT5224."chosaChikuCode" = #{対象地区}
+     </select>    
+</mapper>
