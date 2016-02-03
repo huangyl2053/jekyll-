@@ -1,6 +1,0 @@
-﻿kaigoShienSenmoninNo,varchar,RString,,,,,介護支援専門員番号,A
-kaigoShienSenmoninMei,UDD042AtenaMeisho,AtenaMeisho,,,,,介護支援専門員名,A
-kaigoShienSenmoninMeiKana,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,介護支援専門員名カナ,A
-shozokuJigyoshaNo,UDD060KaigoJigyoshaNo,UDD060KaigoJigyoshaNo,,,,,所属事業者番号,A
-yukoKaishiDate,UDD015YMD,FlexibleDate,,,,,有効開始年月日,A
-yukoShuryoDate,UDD015YMD,FlexibleDate,,,,,有効終了年月日,A
