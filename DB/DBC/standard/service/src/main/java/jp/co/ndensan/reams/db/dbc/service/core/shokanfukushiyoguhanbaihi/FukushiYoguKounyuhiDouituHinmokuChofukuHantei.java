@@ -44,7 +44,7 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHantei {
     public boolean chkHinmokuCodePerShinsei(RString 品目コード,
             List<DbT3048ShokanFukushiYoguHanbaihiEntity> list) {
         boolean flag = false;
-        if (null == list || list.isEmpty()) {
+        if (null == list || list.isEmpty() || null == 品目コード) {
             return flag;
         }
         for (DbT3048ShokanFukushiYoguHanbaihiEntity entity : list) {

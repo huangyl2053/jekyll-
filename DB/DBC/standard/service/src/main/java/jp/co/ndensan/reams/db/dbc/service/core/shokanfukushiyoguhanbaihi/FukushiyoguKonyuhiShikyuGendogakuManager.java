@@ -25,19 +25,13 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuR
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
-import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -196,15 +190,21 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
             DbT3053ShokanShukeiEntity shokanShukeiEntity,
             RString 給付実績情報作成区分コード) {
         requireNonNull(給付実績情報作成区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績情報作成区分コード"));
-        RString 通し番号 = Saiban.get(SubGyomuCode.DBC介護給付,
-                SaibanHanyokeyName.実績管理番号.getコード()).nextString();
+        RString 通し番号 = new RString("00");
+        // TODO
+//        RString 通し番号 = Saiban.get(SubGyomuCode.DBC介護給付,
+//                SaibanHanyokeyName.実績管理番号.getコード()).nextString();
         if (通し番号 == null) {
             throw new IllegalArgumentException(UrErrorMessages.存在しない
                     .getMessage().replace("最新番号").evaluate());
         }
-        List<IKojin> Kojin = ShikibetsuTaishoService.getKojinFinder().get個人s((IShikibetsuTaishoSearchKey) 識別コード);
-        FlexibleDate 生年月日YMD = (FlexibleDate) Kojin.get(0).get生年月日();
-        RString 性別コード = Kojin.get(0).get性別().getCode();
+
+        //TODO
+        //List<IKojin> Kojin = ShikibetsuTaishoService.getKojinFinder().get個人s((IShikibetsuTaishoSearchKey) 識別コード);
+        // FlexibleDate 生年月日YMD = (FlexibleDate) Kojin.get(0).get生年月日();
+        //RString 性別コード = Kojin.get(0).get性別().getCode();
+        FlexibleDate 生年月日YMD = new FlexibleDate("19920610");
+        RString 性別コード = new RString("1");
 
         DbT4001JukyushaDaichoEntity DbT4001entity = 受給者台帳Dac.select認定有効期間(shokanShinseiEntity.getHiHokenshaNo());
         if (DbT4001entity == null) {

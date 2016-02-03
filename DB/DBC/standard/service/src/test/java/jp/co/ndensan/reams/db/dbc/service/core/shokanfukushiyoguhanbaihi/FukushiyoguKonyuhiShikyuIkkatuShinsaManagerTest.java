@@ -5,10 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.shokanfukushiyoguhanbaihi;
 
+import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.shokanfukushiyoguhanbaihi.ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.ShokanShinseiEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfukushiyoguhanbaihi.ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.mock;
@@ -21,15 +24,28 @@ import static org.mockito.Mockito.mock;
 public class FukushiyoguKonyuhiShikyuIkkatuShinsaManagerTest extends DbcTestBase {
 
     private FukushiyoguKonyuhiShikyuIkkatuShinsaManager sut;
+    private FlexibleDate 決定日;
+    private List<ShokanShinseiEntity> 支給申請一括審査List;
 
     @Before
     public void setUp() {
 
         sut = mock(FukushiyoguKonyuhiShikyuIkkatuShinsaManager.class);
+
     }
 
     @Test
     public void getMiShinsaShinseiListTest() {
-        List<ShokanShinseiEntity> miShinsaShinseiList = sut.getMiShinsaShinseiList(new FlexibleDate("20150101"), new FlexibleDate("20160101"));
+        List<ShokanShinseiEntity> miShinsaShinseiList = sut.getMiShinsaShinseiList(new RDate("20150101"), new RDate("20160101"));
     }
+
+    @Test
+    public void updShikyuShinseiTest() {
+        ShokanShinseiEntity entity = ShokanShinseiEntityGenerator.createShokanShinseiEntity();
+        支給申請一括審査List = new ArrayList<>();
+        支給申請一括審査List.add(entity);
+        決定日 = ShokanShinseiEntityGenerator.DEFAULT_決定日;
+        sut.updShikyuShinsei(決定日, 支給申請一括審査List);
+    }
+
 }

@@ -18,16 +18,14 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShi
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukeiEntity;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.mock;
 
 /**
+ * 福祉用具購入費支給決定給付実績編集のTest
  *
  * @author chenaoqi
  */
@@ -46,7 +44,6 @@ public class FukushiyoguKonyuhiShikyuGendogakuManagerTest {
     private static final RString モード_差額登録 = new RString("差額登録");
     private static final RString モード_削除 = new RString("削除");
     private static final RString モード_審査 = new RString("審査");
-    private static final RString 通し番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.実績管理番号.getコード()).nextString();
     private FukushiyoguKonyuhiShikyuGendogakuManager sut;
 
     @Before
