@@ -100,7 +100,8 @@ public class JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager {
         Code konnkaiYokaigoJotaiKubunCode = getYaokaigoJyotaiKubun(被保険者番号, サービス提供年月);
         if (konnkaiYokaigoJotaiKubunCode == null) {
             return false;
-        } else if (!konnkaiYokaigoJotaiKubunCode.toString().startsWith(要支援.toString(), 0) && !konnkaiYokaigoJotaiKubunCode.toString().startsWith(要介護.toString(), 0)) {
+        } else if (!konnkaiYokaigoJotaiKubunCode.value().startsWith(要支援, 0) 
+                && !konnkaiYokaigoJotaiKubunCode.value().startsWith(要介護, 0)) {
             return false;
         }
         DbT3034ShokanShinseiEntity entity = getサービス提供年月(被保険者番号, サービス提供年月);
@@ -110,24 +111,30 @@ public class JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager {
         Code shokaiYokaigoJotaiKubunCode = getYaokaigoJyotaiKubun(被保険者番号, entity.getServiceTeikyoYM());
         if (shokaiYokaigoJotaiKubunCode == null) {
             return false;
-        } else if (!shokaiYokaigoJotaiKubunCode.toString().startsWith(要支援.toString(), 0) && !shokaiYokaigoJotaiKubunCode.toString().startsWith(要介護.toString(), 0)) {
+        } else if (!shokaiYokaigoJotaiKubunCode.value().startsWith(要支援, 0) 
+                && !shokaiYokaigoJotaiKubunCode.value().startsWith(要介護, 0)) {
             return false;
         }
-        if (shokaiYokaigoJotaiKubunCode.equals(YokaigoJotaiKubun06.経過的要介護.getコード()) && (konnkaiYokaigoJotaiKubunCode.equals(YokaigoJotaiKubun06.要介護3.getコード())
-                || konnkaiYokaigoJotaiKubunCode.toString().equals(YokaigoJotaiKubun06.要介護4.getコード())
-                || konnkaiYokaigoJotaiKubunCode.toString().equals(YokaigoJotaiKubun06.要介護5.getコード()))) {
+        if (shokaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.経過的要介護.getコード()) 
+                && (konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護3.getコード())
+                || konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護4.getコード())
+                || konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護5.getコード()))) {
             return true;
-        } else if (shokaiYokaigoJotaiKubunCode.equals(YokaigoJotaiKubun06.要支援1.getコード()) && (konnkaiYokaigoJotaiKubunCode.equals(YokaigoJotaiKubun06.要介護3.getコード())
-                || konnkaiYokaigoJotaiKubunCode.equals(YokaigoJotaiKubun06.要介護4.getコード())
-                || konnkaiYokaigoJotaiKubunCode.equals(YokaigoJotaiKubun06.要介護3.getコード()))) {
+        } else if (shokaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要支援1.getコード()) 
+                && (konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護3.getコード())
+                || konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護4.getコード())
+                || konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護3.getコード()))) {
             return true;
-        } else if (shokaiYokaigoJotaiKubunCode.equals(YokaigoJotaiKubun06.要支援2.getコード()) && (konnkaiYokaigoJotaiKubunCode.equals(YokaigoJotaiKubun06.要介護4.getコード())
-                || konnkaiYokaigoJotaiKubunCode.equals(YokaigoJotaiKubun06.要介護5.getコード()))) {
+        } else if (shokaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要支援2.getコード()) 
+                && (konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護4.getコード())
+                || konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護5.getコード()))) {
             return true;
-        } else if (shokaiYokaigoJotaiKubunCode.equals(YokaigoJotaiKubun06.要介護1.getコード()) && (konnkaiYokaigoJotaiKubunCode.equals(YokaigoJotaiKubun06.要介護4.getコード())
-                || konnkaiYokaigoJotaiKubunCode.equals(YokaigoJotaiKubun06.要介護5.getコード()))) {
+        } else if (shokaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護1.getコード()) 
+                && (konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護4.getコード())
+                || konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護5.getコード()))) {
             return true;
-        } else if (shokaiYokaigoJotaiKubunCode.equals(YokaigoJotaiKubun06.要介護2.getコード()) && konnkaiYokaigoJotaiKubunCode.equals(YokaigoJotaiKubun06.要介護5.getコード())) {
+        } else if (shokaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護2.getコード()) 
+                && konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護5.getコード())) {
             return true;
         }
         return false;

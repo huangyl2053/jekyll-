@@ -22,6 +22,7 @@
             AND "JukyushaDaicho"."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> #{サービス提供年月}
         ORDER BY "JukyushaDaicho"."rirekiNo" DESC,
         "JukyushaDaicho"."edaban" DESC
+        LIMIT 1
     </sql>
         
     <sql id="selectShokanShinsei">
