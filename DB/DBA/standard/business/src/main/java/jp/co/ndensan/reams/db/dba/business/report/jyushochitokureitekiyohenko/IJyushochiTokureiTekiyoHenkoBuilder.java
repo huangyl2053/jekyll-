@@ -4,14 +4,14 @@
  * and open the template in the editor.
  */
 
-package jp.co.ndensan.reams.db.dba.business.report.shikakushutokuidososhitsu;
+package jp.co.ndensan.reams.db.dba.business.report.jyushochitokureitekiyohenko;
 
-import jp.co.ndensan.reams.db.dba.entity.report.shikakushutokuidososhitsu.ShikakushutokuIdoSoshitsuReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.jyushochitokureitekiyohenko.JyushochiTokureiTekiyoHenkoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  *
- * 介護保険資格取得・異動・喪失届Builderのインターフェースクラスです。
+ * 介護保険住所地特例適用・変更・終了届Builderのインターフェースクラスです。
  */
-public interface IShikakushutokuIdoSoshitsuBuilder extends IReportBuilder<ShikakushutokuIdoSoshitsuReportSource> {
+public interface IJyushochiTokureiTekiyoHenkoBuilder extends IReportBuilder<JyushochiTokureiTekiyoHenkoReportSource> {
 }

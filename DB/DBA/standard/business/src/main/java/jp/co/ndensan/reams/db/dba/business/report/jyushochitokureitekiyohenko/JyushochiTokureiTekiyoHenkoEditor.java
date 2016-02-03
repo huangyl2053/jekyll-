@@ -4,24 +4,24 @@
  * and open the template in the editor.
  */
 
-package jp.co.ndensan.reams.db.dba.business.report.shikakushutokuidososhitsu;
+package jp.co.ndensan.reams.db.dba.business.report.jyushochitokureitekiyohenko;
 
-import jp.co.ndensan.reams.db.dba.entity.report.shikakushutokuidososhitsu.ShikakushutokuIdoSoshitsuReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.jyushochitokureitekiyohenko.JyushochiTokureiTekiyoHenkoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 被保険者証発行一覧表Editorです。
+ * 介護保険住所地特例適用・変更・終了届のEditorです。
  */
-    public class ShikakushutokuIdoSoshitsuEditor implements IShikakushutokuIdoSoshitsuEditor {
+    public class JyushochiTokureiTekiyoHenkoEditor implements IJyushochiTokureiTekiyoHenkoEditor {
     
-    private final ShikakushutokuIdoSoshitsuItem joho;
+    private final JyushochiTokureiTekiyoHenkoItem joho;
     
     /**
      * コンストラクタです。
      * @param joho 一覧表証発行者Entityリストです
      */
-    public ShikakushutokuIdoSoshitsuEditor(ShikakushutokuIdoSoshitsuItem joho) {
+    public JyushochiTokureiTekiyoHenkoEditor(JyushochiTokureiTekiyoHenkoItem joho) {
         this.joho = joho;
     }
 
@@ -31,22 +31,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
      * @return 要介護認定業務進捗状況一覧表
      */
     @Override
-    public ShikakushutokuIdoSoshitsuReportSource edit(ShikakushutokuIdoSoshitsuReportSource source) {
+    public JyushochiTokureiTekiyoHenkoReportSource edit(JyushochiTokureiTekiyoHenkoReportSource source) {
         return editBody(source);
     }
     
-    private ShikakushutokuIdoSoshitsuReportSource editBody(ShikakushutokuIdoSoshitsuReportSource source) {
+    private JyushochiTokureiTekiyoHenkoReportSource editBody(JyushochiTokureiTekiyoHenkoReportSource source) {
         source.ninshoshaYakushokuMei = joho.getNinshoshaYakushokuMei();
-        source.birthYMD1 = joho.getBirthYMD1();
-        source.hihokenshaJusho = joho.getHihokenJusho();
-        source.hihokenKatakaki = joho.getHihokenKatakaki();
-        source.hihokenshaName1 = joho.getHihokenshaName1();
-        source.hihokenshaNameKana1 = joho.getHihokenshaNameKana1();
-        source.hihokenshaNo1 = joho.getHihokenshaNo1();
-        source.seibetsu1 = joho.getSeibetsu1();
-        source.setainushiName = joho.getSetainushiName();
-        source.zokugara1 = joho.getZokugara1();
-        // TODO 内部：635　（連番の設定を不明です。）
+        source.hihokenshaNo = joho.getHihokenshaNo();
+        source.hihokenshaNameKana = joho.getHihokenshaNameKana();
+        source.hihokenshaName = joho.getHihokenshaName();
+        source.birthYMD = joho.getBirthYMD();
+        // TODO 内部QA：643 (性別の設定不明です)
+        source.seibetsu = joho.getSeibetsu();
+        // TODO 内部QA：635 (連番の設定不明です)
         source.remban = new RString("0001");
         return source;
     }

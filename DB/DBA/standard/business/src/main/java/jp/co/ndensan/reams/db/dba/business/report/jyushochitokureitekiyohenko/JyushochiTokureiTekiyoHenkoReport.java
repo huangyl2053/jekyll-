@@ -4,42 +4,42 @@
  * and open the template in the editor.
  */
 
-package jp.co.ndensan.reams.db.dba.business.report.shikakushutokuidososhitsu;
+package jp.co.ndensan.reams.db.dba.business.report.jyushochitokureitekiyohenko;
 
-import jp.co.ndensan.reams.db.dba.entity.report.shikakushutokuidososhitsu.ShikakushutokuIdoSoshitsuReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.jyushochitokureitekiyohenko.JyushochiTokureiTekiyoHenkoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
  *
- * 介護保険資格取得・異動・喪失届帳票作成します。
+ * 介護保険住所地特例適用・変更・終了届の帳票を作成します。
  */
-public final class ShikakushutokuIdoSoshitsuReport extends Report<ShikakushutokuIdoSoshitsuReportSource> {
+public final class JyushochiTokureiTekiyoHenkoReport extends Report<JyushochiTokureiTekiyoHenkoReportSource> {
     
-    private final ShikakushutokuIdoSoshitsuItem item;
+    private final JyushochiTokureiTekiyoHenkoItem item;
     
-    private ShikakushutokuIdoSoshitsuReport(ShikakushutokuIdoSoshitsuItem item) {
+    private JyushochiTokureiTekiyoHenkoReport(JyushochiTokureiTekiyoHenkoItem item) {
         this.item = item;
     }
     
     /**
      * インスタンスを生成します。
-     * @param item 介護保険資格取得・異動・喪失届Entityリスト
+     * @param item 介護保険住所地特例適用・変更・終了届のEntity
      * @return HihokenshashoHakkoIchiranHyoReport
      */
-    public static ShikakushutokuIdoSoshitsuReport createReport(@NonNull ShikakushutokuIdoSoshitsuItem item) {
-        return new ShikakushutokuIdoSoshitsuReport(item);
+    public static JyushochiTokureiTekiyoHenkoReport createReport(@NonNull JyushochiTokureiTekiyoHenkoItem item) {
+        return new JyushochiTokureiTekiyoHenkoReport(item);
     }
 
     /**
-     * 介護保険資格取得・異動・喪失届writeByします。
-     * @param writer 介護保険資格取得・異動・喪失届作成_帳票クラスパラメータ
+     * 介護保険住所地特例適用・変更・終了届のwriteBy処理です。
+     * @param writer 介護保険住所地特例適用・変更・終了届作成_帳票クラスパラメータ
      */
     @Override
-    public void writeBy(ReportSourceWriter<ShikakushutokuIdoSoshitsuReportSource> writer) {
-        IShikakushutokuIdoSoshitsuEditor joho = new ShikakushutokuIdoSoshitsuEditor(item);
-        IShikakushutokuIdoSoshitsuBuilder builder = new ShikakushutokuIdoSoshitsuBuilderImpl(joho);
+    public void writeBy(ReportSourceWriter<JyushochiTokureiTekiyoHenkoReportSource> writer) {
+        IJyushochiTokureiTekiyoHenkoEditor joho = new JyushochiTokureiTekiyoHenkoEditor(item);
+        IJyushochiTokureiTekiyoHenkoBuilder builder = new JyushochiTokureiTekiyoHenkoBuilderImpl(joho);
         writer.writeLine(builder);
     }
 }
