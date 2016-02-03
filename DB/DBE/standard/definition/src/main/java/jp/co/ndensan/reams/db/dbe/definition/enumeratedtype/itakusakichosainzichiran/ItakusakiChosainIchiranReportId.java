@@ -45,7 +45,11 @@ public enum ItakusakiChosainIchiranReportId {
     /**
      * 主治医意見書督促対象者一覧表の帳票ID。
      */
-    REPORTID_DBE233002("DBE233002");
+    REPORTID_DBE233002("DBE233002"),
+    /**
+     * 介護認定審査会スケジュール表かがみの帳票ID。
+     */
+    REPORTID_DBE514002("DBE514002_Shinsaschedulekagami");
 
     private final RString code;
 
