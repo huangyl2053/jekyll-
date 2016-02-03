@@ -60,12 +60,13 @@ public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
         source.umareMm = item.getUmareMm();
         source.umareDd = item.getUmareDd();
         source.seibetsu = item.getSeibetsu();
-        source.kofuymdGengo = item.getKofuymd();
-        source.kofuymdYy = item.getKofuymd().isEmpty() ? RString.EMPTY : new RDate(item.getKofuymd().toString())
+        RString kofuymd = item.getKofuymd();
+        source.kofuymdGengo = kofuymd;
+        source.kofuymdYy = kofuymd.isEmpty() ? RString.EMPTY : new RDate(kofuymd.toString())
                 .seireki().getYear();
-        source.kofuymdMm = item.getKofuymd().isEmpty() ? RString.EMPTY : new RDate(item.getKofuymd().toString())
+        source.kofuymdMm = kofuymd.isEmpty() ? RString.EMPTY : new RDate(kofuymd.toString())
                 .seireki().getMonth();
-        source.kofuymdDd = item.getKofuymd().isEmpty() ? RString.EMPTY : new RDate(item.getKofuymd().toString())
+        source.kofuymdDd = kofuymd.isEmpty() ? RString.EMPTY : new RDate(kofuymd.toString())
                 .seireki().getDay();
         source.saikofu1 = item.getSaikofu1();
         source.hokenshano1 = item.getHokenshano1();
