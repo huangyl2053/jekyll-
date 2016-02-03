@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
- * 介護認定審査会割当委員情報の更新クラス。
+ * 介護認定審査会割当委員情報更新のコントローラです。
  */
 public class ShinsakaiIinWaritsuke {
 
@@ -136,10 +136,10 @@ public class ShinsakaiIinWaritsuke {
      */
     public ResponseData<ShinsakaiIinWaritsukeDiv> onClick_HozonnBtn(ShinsakaiIinWaritsukeDiv div) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForHozonnBtn();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
-            }
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         // TODO 内部QA:495 Redmine: #74658 (前排他制御の実施がわからない、実装なし。)

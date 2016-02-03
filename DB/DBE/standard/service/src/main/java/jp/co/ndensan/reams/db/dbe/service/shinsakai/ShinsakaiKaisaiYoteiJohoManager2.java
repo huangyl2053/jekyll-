@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 審査会開催予定情報の取得処理。
+ * 審査会開催予定情報の取得処理です。
  */
 public class ShinsakaiKaisaiYoteiJohoManager2 {
 
@@ -51,7 +51,7 @@ public class ShinsakaiKaisaiYoteiJohoManager2 {
     }
 
     /**
-     * 開催番号によって、審査会開催予定情報を取得する。
+     * 開催番号によって、審査会開催予定情報を取得します。
      *
      * @param kaisaiNo 開催番号
      * @return SearchResult<ShinsakaiKaisaiYoteiJoho>

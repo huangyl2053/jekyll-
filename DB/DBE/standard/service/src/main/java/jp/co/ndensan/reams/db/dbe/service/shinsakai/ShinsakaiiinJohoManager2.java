@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 介護認定審査会委員の取得処理。
+ * 介護認定審査会委員の取得処理です。
  */
 public class ShinsakaiiinJohoManager2 {
 
@@ -41,6 +41,7 @@ public class ShinsakaiiinJohoManager2 {
     /**
      * 単体テスト用のコンストラクタです。
      *
+     * @param dac 介護認定審査会割当委員情報のDac
      * @param mapperProvider {@link MapperProvider}
      */
     ShinsakaiiinJohoManager2(
@@ -60,7 +61,7 @@ public class ShinsakaiiinJohoManager2 {
     }
 
     /**
-     * 開催番号によって、介護認定審査会委員情報を取得する。
+     * 開催番号によって、介護認定審査会委員情報を取得します。
      *
      * @param kaisaiNo 開催番号
      * @return SearchResult<ShinsakaiiinJoho>
