@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -92,4 +94,18 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiDac implements ISaveable<DbT30
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+    
+   public DbT3035ShokanJutakuKaishuJizenShinseiEntity get償還払支給住宅改修事前申請情報(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,RString 整理番号){
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+       return accessor.select().
+                table(DbT3035ShokanJutakuKaishuJizenShinsei.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号))).
+                order(
+                        by(serviceTeikyoYM, Order.DESC)).
+                limit(1).
+                toObject(DbT3035ShokanJutakuKaishuJizenShinseiEntity.class);
+   }
 }
