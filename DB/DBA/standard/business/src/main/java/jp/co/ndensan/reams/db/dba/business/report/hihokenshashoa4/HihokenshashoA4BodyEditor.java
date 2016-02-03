@@ -19,18 +19,16 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
 
+    private static final RString HOUSI = new RString("*");
     private final HihokenshashoA4BodyItem item;
-    private final int no;
 
     /**
      * インスタンスを生成します。
      *
      * @param item 介護保険被保険者証リスト情報
-     * @param no NO
      */
-    public HihokenshashoA4BodyEditor(HihokenshashoA4BodyItem item, int no) {
+    public HihokenshashoA4BodyEditor(HihokenshashoA4BodyItem item) {
         this.item = item;
-        this.no = no + 1;
     }
 
     /**
@@ -57,7 +55,7 @@ public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
         source.umareG = item.getUmareG();
         source.umareYyyy = item.getUmareYyyy().isEmpty() ? RString.EMPTY : new RDate(item.getUmareYyyy().toString()).wareki().
                 eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK).getEra();
+                .fillType(FillType.BLANK).getEra();
         source.umareYy = item.getUmareYyyy().isEmpty() ? RString.EMPTY : new RDate(item.getUmareYyyy().toString()).seireki().getYear();
         source.umareMm = item.getUmareMm();
         source.umareDd = item.getUmareDd();
@@ -127,16 +125,16 @@ public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
         source.gyosha1 = item.getGyosha1();
         source.todokeYmd1 = item.getTodokeYmd1();
         source.gyosha2 = item.getGyosha2();
-        source.gyosha2Asa = new RString("*");
+        source.gyosha2Asa = HOUSI;
         source.gyosha2Massho = item.getGyosha2();
         source.todokeYmd2 = item.getTodokeYmd2();
-        source.todokeYmd2Asa = new RString("*");
+        source.todokeYmd2Asa = HOUSI;
         source.todokeYmd2Massho = item.getTodokeYmd2();
         source.gyosha3 = item.getGyosha3();
-        source.gyosha3Asa = new RString("*");
+        source.gyosha3Asa = HOUSI;
         source.gyosha3Massho = item.getGyosha3();
         source.todokeYmd3 = item.getTodokeYmd3();
-        source.todokeYmd3Asa = new RString("*");
+        source.todokeYmd3Asa = HOUSI;
         source.todokeYmd3Massho = item.getTodokeYmd3();
         source.shisetsuSyu1 = item.getShisetsuSyu1();
         source.shisetsuname1 = item.getShisetsuname1();
@@ -161,10 +159,10 @@ public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
         source.kosekiSeibetsu12 = item.getKosekiSeibetsu12();
         source.itakuGyosha1 = item.getItakuGyosha1();
         source.itakuGyosha2 = item.getItakuGyosha2();
-        source.itakuGyosha2Asa = new RString("*");
+        source.itakuGyosha2Asa = HOUSI;
         source.itakuGyosha2Massho = item.getItakuGyosha2();
         source.itakuGyosha3 = item.getItakuGyosha3();
-        source.itakuGyosha3Asa = new RString("*");
+        source.itakuGyosha3Asa = HOUSI;
         source.itakuGyosha3Massho = item.getItakuGyosha3();
         return source;
     }

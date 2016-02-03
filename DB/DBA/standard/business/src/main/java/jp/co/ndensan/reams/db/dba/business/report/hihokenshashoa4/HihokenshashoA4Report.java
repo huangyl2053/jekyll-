@@ -18,7 +18,7 @@ import lombok.NonNull;
  */
 public final class HihokenshashoA4Report extends Report<HihokenshashoA4ReportSource> {
     
-    private final List<HihokenshashoA4BodyItem> bodyItemList;
+    private final List<HihokenshashoA4BodyItem> bodyItem;
     
     /**
      * インスタンスを生成します。
@@ -29,15 +29,15 @@ public final class HihokenshashoA4Report extends Report<HihokenshashoA4ReportSou
         return new HihokenshashoA4Report(bodyItemList);
     }
     
-    private HihokenshashoA4Report(List<HihokenshashoA4BodyItem> bodyItemList) {
-        this.bodyItemList = bodyItemList;
+    private HihokenshashoA4Report(List<HihokenshashoA4BodyItem> bodyItem) {
+        this.bodyItem = bodyItem;
     }
 
     @Override
     protected void writeBy(ReportSourceWriter<HihokenshashoA4ReportSource> writer) {
-        for (int i = 0; i < bodyItemList.size(); i++) {
-            IHihokenshashoA4Editor bodyEditor = new HihokenshashoA4BodyEditor(bodyItemList.get(i), i);
-            IHihokenshashoA4Builder builder = new HihokenshashoA4BuilderItem(bodyEditor);
+        for (HihokenshashoA4BodyItem item : bodyItem) {
+            IHihokenshashoA4Editor bodyEditor = new HihokenshashoA4BodyEditor(item);
+            IHihokenshashoA4Builder builder = new HihokenshashoA4BuilderImpl(bodyEditor);
             writer.writeLine(builder);
         }
     }
