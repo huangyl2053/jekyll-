@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblJikanwaku2Div extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -139,154 +139,274 @@ public class tblJikanwaku2Div extends TablePanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getcelTab2R4C1
+     * @return celTab2R4C1
+     */
     @JsonProperty("celTab2R4C1")
     private celTab2R4C1AttblJikanwaku2 getCelTab2R4C1() {
         return celTab2R4C1;
     }
 
+    /*
+     * setcelTab2R4C1
+     * @param celTab2R4C1 celTab2R4C1
+     */
     @JsonProperty("celTab2R4C1")
     private void setCelTab2R4C1(celTab2R4C1AttblJikanwaku2 celTab2R4C1) {
-        this.celTab2R4C1=celTab2R4C1;
+        this.celTab2R4C1 = celTab2R4C1;
     }
 
+    /*
+     * getcelTab2R4C2
+     * @return celTab2R4C2
+     */
     @JsonProperty("celTab2R4C2")
     private celTab2R4C2AttblJikanwaku2 getCelTab2R4C2() {
         return celTab2R4C2;
     }
 
+    /*
+     * setcelTab2R4C2
+     * @param celTab2R4C2 celTab2R4C2
+     */
     @JsonProperty("celTab2R4C2")
     private void setCelTab2R4C2(celTab2R4C2AttblJikanwaku2 celTab2R4C2) {
-        this.celTab2R4C2=celTab2R4C2;
+        this.celTab2R4C2 = celTab2R4C2;
     }
 
+    /*
+     * getcelTab2R4C3
+     * @return celTab2R4C3
+     */
     @JsonProperty("celTab2R4C3")
     private celTab2R4C3AttblJikanwaku2 getCelTab2R4C3() {
         return celTab2R4C3;
     }
 
+    /*
+     * setcelTab2R4C3
+     * @param celTab2R4C3 celTab2R4C3
+     */
     @JsonProperty("celTab2R4C3")
     private void setCelTab2R4C3(celTab2R4C3AttblJikanwaku2 celTab2R4C3) {
-        this.celTab2R4C3=celTab2R4C3;
+        this.celTab2R4C3 = celTab2R4C3;
     }
 
+    /*
+     * getcelTab2R4C4
+     * @return celTab2R4C4
+     */
     @JsonProperty("celTab2R4C4")
     private celTab2R4C4AttblJikanwaku2 getCelTab2R4C4() {
         return celTab2R4C4;
     }
 
+    /*
+     * setcelTab2R4C4
+     * @param celTab2R4C4 celTab2R4C4
+     */
     @JsonProperty("celTab2R4C4")
     private void setCelTab2R4C4(celTab2R4C4AttblJikanwaku2 celTab2R4C4) {
-        this.celTab2R4C4=celTab2R4C4;
+        this.celTab2R4C4 = celTab2R4C4;
     }
 
+    /*
+     * getcelTab2R4C5
+     * @return celTab2R4C5
+     */
     @JsonProperty("celTab2R4C5")
     private celTab2R4C5AttblJikanwaku2 getCelTab2R4C5() {
         return celTab2R4C5;
     }
 
+    /*
+     * setcelTab2R4C5
+     * @param celTab2R4C5 celTab2R4C5
+     */
     @JsonProperty("celTab2R4C5")
     private void setCelTab2R4C5(celTab2R4C5AttblJikanwaku2 celTab2R4C5) {
-        this.celTab2R4C5=celTab2R4C5;
+        this.celTab2R4C5 = celTab2R4C5;
     }
 
+    /*
+     * getcelTab2R5C1
+     * @return celTab2R5C1
+     */
     @JsonProperty("celTab2R5C1")
     private celTab2R5C1AttblJikanwaku2 getCelTab2R5C1() {
         return celTab2R5C1;
     }
 
+    /*
+     * setcelTab2R5C1
+     * @param celTab2R5C1 celTab2R5C1
+     */
     @JsonProperty("celTab2R5C1")
     private void setCelTab2R5C1(celTab2R5C1AttblJikanwaku2 celTab2R5C1) {
-        this.celTab2R5C1=celTab2R5C1;
+        this.celTab2R5C1 = celTab2R5C1;
     }
 
+    /*
+     * getcelTab2R5C2
+     * @return celTab2R5C2
+     */
     @JsonProperty("celTab2R5C2")
     private celTab2R5C2AttblJikanwaku2 getCelTab2R5C2() {
         return celTab2R5C2;
     }
 
+    /*
+     * setcelTab2R5C2
+     * @param celTab2R5C2 celTab2R5C2
+     */
     @JsonProperty("celTab2R5C2")
     private void setCelTab2R5C2(celTab2R5C2AttblJikanwaku2 celTab2R5C2) {
-        this.celTab2R5C2=celTab2R5C2;
+        this.celTab2R5C2 = celTab2R5C2;
     }
 
+    /*
+     * getcelTab2R5C3
+     * @return celTab2R5C3
+     */
     @JsonProperty("celTab2R5C3")
     private celTab2R5C3AttblJikanwaku2 getCelTab2R5C3() {
         return celTab2R5C3;
     }
 
+    /*
+     * setcelTab2R5C3
+     * @param celTab2R5C3 celTab2R5C3
+     */
     @JsonProperty("celTab2R5C3")
     private void setCelTab2R5C3(celTab2R5C3AttblJikanwaku2 celTab2R5C3) {
-        this.celTab2R5C3=celTab2R5C3;
+        this.celTab2R5C3 = celTab2R5C3;
     }
 
+    /*
+     * getcelTab2R5C4
+     * @return celTab2R5C4
+     */
     @JsonProperty("celTab2R5C4")
     private celTab2R5C4AttblJikanwaku2 getCelTab2R5C4() {
         return celTab2R5C4;
     }
 
+    /*
+     * setcelTab2R5C4
+     * @param celTab2R5C4 celTab2R5C4
+     */
     @JsonProperty("celTab2R5C4")
     private void setCelTab2R5C4(celTab2R5C4AttblJikanwaku2 celTab2R5C4) {
-        this.celTab2R5C4=celTab2R5C4;
+        this.celTab2R5C4 = celTab2R5C4;
     }
 
+    /*
+     * getcelTab2R5C5
+     * @return celTab2R5C5
+     */
     @JsonProperty("celTab2R5C5")
     private celTab2R5C5AttblJikanwaku2 getCelTab2R5C5() {
         return celTab2R5C5;
     }
 
+    /*
+     * setcelTab2R5C5
+     * @param celTab2R5C5 celTab2R5C5
+     */
     @JsonProperty("celTab2R5C5")
     private void setCelTab2R5C5(celTab2R5C5AttblJikanwaku2 celTab2R5C5) {
-        this.celTab2R5C5=celTab2R5C5;
+        this.celTab2R5C5 = celTab2R5C5;
     }
 
+    /*
+     * getcelTab2R6C1
+     * @return celTab2R6C1
+     */
     @JsonProperty("celTab2R6C1")
     private celTab2R6C1AttblJikanwaku2 getCelTab2R6C1() {
         return celTab2R6C1;
     }
 
+    /*
+     * setcelTab2R6C1
+     * @param celTab2R6C1 celTab2R6C1
+     */
     @JsonProperty("celTab2R6C1")
     private void setCelTab2R6C1(celTab2R6C1AttblJikanwaku2 celTab2R6C1) {
-        this.celTab2R6C1=celTab2R6C1;
+        this.celTab2R6C1 = celTab2R6C1;
     }
 
+    /*
+     * getcelTab2R6C2
+     * @return celTab2R6C2
+     */
     @JsonProperty("celTab2R6C2")
     private celTab2R6C2AttblJikanwaku2 getCelTab2R6C2() {
         return celTab2R6C2;
     }
 
+    /*
+     * setcelTab2R6C2
+     * @param celTab2R6C2 celTab2R6C2
+     */
     @JsonProperty("celTab2R6C2")
     private void setCelTab2R6C2(celTab2R6C2AttblJikanwaku2 celTab2R6C2) {
-        this.celTab2R6C2=celTab2R6C2;
+        this.celTab2R6C2 = celTab2R6C2;
     }
 
+    /*
+     * getcelTab2R6C3
+     * @return celTab2R6C3
+     */
     @JsonProperty("celTab2R6C3")
     private celTab2R6C3AttblJikanwaku2 getCelTab2R6C3() {
         return celTab2R6C3;
     }
 
+    /*
+     * setcelTab2R6C3
+     * @param celTab2R6C3 celTab2R6C3
+     */
     @JsonProperty("celTab2R6C3")
     private void setCelTab2R6C3(celTab2R6C3AttblJikanwaku2 celTab2R6C3) {
-        this.celTab2R6C3=celTab2R6C3;
+        this.celTab2R6C3 = celTab2R6C3;
     }
 
+    /*
+     * getcelTab2R6C4
+     * @return celTab2R6C4
+     */
     @JsonProperty("celTab2R6C4")
     private celTab2R6C4AttblJikanwaku2 getCelTab2R6C4() {
         return celTab2R6C4;
     }
 
+    /*
+     * setcelTab2R6C4
+     * @param celTab2R6C4 celTab2R6C4
+     */
     @JsonProperty("celTab2R6C4")
     private void setCelTab2R6C4(celTab2R6C4AttblJikanwaku2 celTab2R6C4) {
-        this.celTab2R6C4=celTab2R6C4;
+        this.celTab2R6C4 = celTab2R6C4;
     }
 
+    /*
+     * getcelTab2R6C5
+     * @return celTab2R6C5
+     */
     @JsonProperty("celTab2R6C5")
     private celTab2R6C5AttblJikanwaku2 getCelTab2R6C5() {
         return celTab2R6C5;
     }
 
+    /*
+     * setcelTab2R6C5
+     * @param celTab2R6C5 celTab2R6C5
+     */
     @JsonProperty("celTab2R6C5")
     private void setCelTab2R6C5(celTab2R6C5AttblJikanwaku2 celTab2R6C5) {
-        this.celTab2R6C5=celTab2R6C5;
+        this.celTab2R6C5 = celTab2R6C5;
     }
 
     // </editor-fold>
@@ -297,18 +417,26 @@ public class tblJikanwaku2Div extends TablePanel {
  * @author 自動生成
  */
 class celTab2R4C1AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("chkJikanwaku6")
     private CheckBoxList chkJikanwaku6;
 
+    /*
+     * getchkJikanwaku6
+     * @return chkJikanwaku6
+     */
     @JsonProperty("chkJikanwaku6")
     public CheckBoxList getChkJikanwaku6() {
         return chkJikanwaku6;
     }
 
+    /*
+     * setchkJikanwaku6
+     * @param chkJikanwaku6 chkJikanwaku6
+     */
     @JsonProperty("chkJikanwaku6")
     public void setChkJikanwaku6(CheckBoxList chkJikanwaku6) {
-        this.chkJikanwaku6=chkJikanwaku6;
+        this.chkJikanwaku6 = chkJikanwaku6;
     }
 
     // </editor-fold>
@@ -319,18 +447,26 @@ class celTab2R4C1AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R4C2AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("chkJikanwaku7")
     private CheckBoxList chkJikanwaku7;
 
+    /*
+     * getchkJikanwaku7
+     * @return chkJikanwaku7
+     */
     @JsonProperty("chkJikanwaku7")
     public CheckBoxList getChkJikanwaku7() {
         return chkJikanwaku7;
     }
 
+    /*
+     * setchkJikanwaku7
+     * @param chkJikanwaku7 chkJikanwaku7
+     */
     @JsonProperty("chkJikanwaku7")
     public void setChkJikanwaku7(CheckBoxList chkJikanwaku7) {
-        this.chkJikanwaku7=chkJikanwaku7;
+        this.chkJikanwaku7 = chkJikanwaku7;
     }
 
     // </editor-fold>
@@ -341,18 +477,26 @@ class celTab2R4C2AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R4C3AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("chkJikanwaku8")
     private CheckBoxList chkJikanwaku8;
 
+    /*
+     * getchkJikanwaku8
+     * @return chkJikanwaku8
+     */
     @JsonProperty("chkJikanwaku8")
     public CheckBoxList getChkJikanwaku8() {
         return chkJikanwaku8;
     }
 
+    /*
+     * setchkJikanwaku8
+     * @param chkJikanwaku8 chkJikanwaku8
+     */
     @JsonProperty("chkJikanwaku8")
     public void setChkJikanwaku8(CheckBoxList chkJikanwaku8) {
-        this.chkJikanwaku8=chkJikanwaku8;
+        this.chkJikanwaku8 = chkJikanwaku8;
     }
 
     // </editor-fold>
@@ -363,18 +507,26 @@ class celTab2R4C3AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R4C4AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("chkJikanwaku9")
     private CheckBoxList chkJikanwaku9;
 
+    /*
+     * getchkJikanwaku9
+     * @return chkJikanwaku9
+     */
     @JsonProperty("chkJikanwaku9")
     public CheckBoxList getChkJikanwaku9() {
         return chkJikanwaku9;
     }
 
+    /*
+     * setchkJikanwaku9
+     * @param chkJikanwaku9 chkJikanwaku9
+     */
     @JsonProperty("chkJikanwaku9")
     public void setChkJikanwaku9(CheckBoxList chkJikanwaku9) {
-        this.chkJikanwaku9=chkJikanwaku9;
+        this.chkJikanwaku9 = chkJikanwaku9;
     }
 
     // </editor-fold>
@@ -385,18 +537,26 @@ class celTab2R4C4AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R4C5AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("chkJikanwaku10")
     private CheckBoxList chkJikanwaku10;
 
+    /*
+     * getchkJikanwaku10
+     * @return chkJikanwaku10
+     */
     @JsonProperty("chkJikanwaku10")
     public CheckBoxList getChkJikanwaku10() {
         return chkJikanwaku10;
     }
 
+    /*
+     * setchkJikanwaku10
+     * @param chkJikanwaku10 chkJikanwaku10
+     */
     @JsonProperty("chkJikanwaku10")
     public void setChkJikanwaku10(CheckBoxList chkJikanwaku10) {
-        this.chkJikanwaku10=chkJikanwaku10;
+        this.chkJikanwaku10 = chkJikanwaku10;
     }
 
     // </editor-fold>
@@ -407,18 +567,26 @@ class celTab2R4C5AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R5C1AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtStartTime6")
     private TextBoxTime txtStartTime6;
 
+    /*
+     * gettxtStartTime6
+     * @return txtStartTime6
+     */
     @JsonProperty("txtStartTime6")
     public TextBoxTime getTxtStartTime6() {
         return txtStartTime6;
     }
 
+    /*
+     * settxtStartTime6
+     * @param txtStartTime6 txtStartTime6
+     */
     @JsonProperty("txtStartTime6")
     public void setTxtStartTime6(TextBoxTime txtStartTime6) {
-        this.txtStartTime6=txtStartTime6;
+        this.txtStartTime6 = txtStartTime6;
     }
 
     // </editor-fold>
@@ -429,18 +597,26 @@ class celTab2R5C1AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R5C2AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtStartTime7")
     private TextBoxTime txtStartTime7;
 
+    /*
+     * gettxtStartTime7
+     * @return txtStartTime7
+     */
     @JsonProperty("txtStartTime7")
     public TextBoxTime getTxtStartTime7() {
         return txtStartTime7;
     }
 
+    /*
+     * settxtStartTime7
+     * @param txtStartTime7 txtStartTime7
+     */
     @JsonProperty("txtStartTime7")
     public void setTxtStartTime7(TextBoxTime txtStartTime7) {
-        this.txtStartTime7=txtStartTime7;
+        this.txtStartTime7 = txtStartTime7;
     }
 
     // </editor-fold>
@@ -451,18 +627,26 @@ class celTab2R5C2AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R5C3AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtStartTime8")
     private TextBoxTime txtStartTime8;
 
+    /*
+     * gettxtStartTime8
+     * @return txtStartTime8
+     */
     @JsonProperty("txtStartTime8")
     public TextBoxTime getTxtStartTime8() {
         return txtStartTime8;
     }
 
+    /*
+     * settxtStartTime8
+     * @param txtStartTime8 txtStartTime8
+     */
     @JsonProperty("txtStartTime8")
     public void setTxtStartTime8(TextBoxTime txtStartTime8) {
-        this.txtStartTime8=txtStartTime8;
+        this.txtStartTime8 = txtStartTime8;
     }
 
     // </editor-fold>
@@ -473,18 +657,26 @@ class celTab2R5C3AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R5C4AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtStartTime9")
     private TextBoxTime txtStartTime9;
 
+    /*
+     * gettxtStartTime9
+     * @return txtStartTime9
+     */
     @JsonProperty("txtStartTime9")
     public TextBoxTime getTxtStartTime9() {
         return txtStartTime9;
     }
 
+    /*
+     * settxtStartTime9
+     * @param txtStartTime9 txtStartTime9
+     */
     @JsonProperty("txtStartTime9")
     public void setTxtStartTime9(TextBoxTime txtStartTime9) {
-        this.txtStartTime9=txtStartTime9;
+        this.txtStartTime9 = txtStartTime9;
     }
 
     // </editor-fold>
@@ -495,18 +687,26 @@ class celTab2R5C4AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R5C5AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtStartTime10")
     private TextBoxTime txtStartTime10;
 
+    /*
+     * gettxtStartTime10
+     * @return txtStartTime10
+     */
     @JsonProperty("txtStartTime10")
     public TextBoxTime getTxtStartTime10() {
         return txtStartTime10;
     }
 
+    /*
+     * settxtStartTime10
+     * @param txtStartTime10 txtStartTime10
+     */
     @JsonProperty("txtStartTime10")
     public void setTxtStartTime10(TextBoxTime txtStartTime10) {
-        this.txtStartTime10=txtStartTime10;
+        this.txtStartTime10 = txtStartTime10;
     }
 
     // </editor-fold>
@@ -517,18 +717,26 @@ class celTab2R5C5AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R6C1AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtEndTime6")
     private TextBoxTime txtEndTime6;
 
+    /*
+     * gettxtEndTime6
+     * @return txtEndTime6
+     */
     @JsonProperty("txtEndTime6")
     public TextBoxTime getTxtEndTime6() {
         return txtEndTime6;
     }
 
+    /*
+     * settxtEndTime6
+     * @param txtEndTime6 txtEndTime6
+     */
     @JsonProperty("txtEndTime6")
     public void setTxtEndTime6(TextBoxTime txtEndTime6) {
-        this.txtEndTime6=txtEndTime6;
+        this.txtEndTime6 = txtEndTime6;
     }
 
     // </editor-fold>
@@ -539,18 +747,26 @@ class celTab2R6C1AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R6C2AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtEndTime7")
     private TextBoxTime txtEndTime7;
 
+    /*
+     * gettxtEndTime7
+     * @return txtEndTime7
+     */
     @JsonProperty("txtEndTime7")
     public TextBoxTime getTxtEndTime7() {
         return txtEndTime7;
     }
 
+    /*
+     * settxtEndTime7
+     * @param txtEndTime7 txtEndTime7
+     */
     @JsonProperty("txtEndTime7")
     public void setTxtEndTime7(TextBoxTime txtEndTime7) {
-        this.txtEndTime7=txtEndTime7;
+        this.txtEndTime7 = txtEndTime7;
     }
 
     // </editor-fold>
@@ -561,18 +777,26 @@ class celTab2R6C2AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R6C3AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtEndTime8")
     private TextBoxTime txtEndTime8;
 
+    /*
+     * gettxtEndTime8
+     * @return txtEndTime8
+     */
     @JsonProperty("txtEndTime8")
     public TextBoxTime getTxtEndTime8() {
         return txtEndTime8;
     }
 
+    /*
+     * settxtEndTime8
+     * @param txtEndTime8 txtEndTime8
+     */
     @JsonProperty("txtEndTime8")
     public void setTxtEndTime8(TextBoxTime txtEndTime8) {
-        this.txtEndTime8=txtEndTime8;
+        this.txtEndTime8 = txtEndTime8;
     }
 
     // </editor-fold>
@@ -583,18 +807,26 @@ class celTab2R6C3AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R6C4AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtEndTime9")
     private TextBoxTime txtEndTime9;
 
+    /*
+     * gettxtEndTime9
+     * @return txtEndTime9
+     */
     @JsonProperty("txtEndTime9")
     public TextBoxTime getTxtEndTime9() {
         return txtEndTime9;
     }
 
+    /*
+     * settxtEndTime9
+     * @param txtEndTime9 txtEndTime9
+     */
     @JsonProperty("txtEndTime9")
     public void setTxtEndTime9(TextBoxTime txtEndTime9) {
-        this.txtEndTime9=txtEndTime9;
+        this.txtEndTime9 = txtEndTime9;
     }
 
     // </editor-fold>
@@ -605,18 +837,26 @@ class celTab2R6C4AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R6C5AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtEndTime10")
     private TextBoxTime txtEndTime10;
 
+    /*
+     * gettxtEndTime10
+     * @return txtEndTime10
+     */
     @JsonProperty("txtEndTime10")
     public TextBoxTime getTxtEndTime10() {
         return txtEndTime10;
     }
 
+    /*
+     * settxtEndTime10
+     * @param txtEndTime10 txtEndTime10
+     */
     @JsonProperty("txtEndTime10")
     public void setTxtEndTime10(TextBoxTime txtEndTime10) {
-        this.txtEndTime10=txtEndTime10;
+        this.txtEndTime10 = txtEndTime10;
     }
 
     // </editor-fold>

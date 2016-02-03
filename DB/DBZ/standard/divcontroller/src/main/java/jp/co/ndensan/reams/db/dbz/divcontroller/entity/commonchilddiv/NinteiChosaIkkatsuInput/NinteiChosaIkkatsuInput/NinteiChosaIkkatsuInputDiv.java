@@ -4,11 +4,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiCho
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaIkkatsuInput.NinteiChosaIkkatsuInput.INinteiChosaIkkatsuInputDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaIkkatsuInput.NinteiChosaIkkatsuInput.INinteiChosaIkkatsuInputDiv;
 
 /**
  * NinteiChosaIkkatsuInput のクラスファイル 
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiChosaIkkatsuInputDiv extends Panel implements INinteiChosaIkkatsuInputDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -44,74 +44,130 @@ public class NinteiChosaIkkatsuInputDiv extends Panel implements INinteiChosaIkk
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettblJikanwaku1
+     * @return tblJikanwaku1
+     */
     @JsonProperty("tblJikanwaku1")
     public tblJikanwaku1Div getTblJikanwaku1() {
         return tblJikanwaku1;
     }
 
+    /*
+     * settblJikanwaku1
+     * @param tblJikanwaku1 tblJikanwaku1
+     */
     @JsonProperty("tblJikanwaku1")
     public void setTblJikanwaku1(tblJikanwaku1Div tblJikanwaku1) {
-        this.tblJikanwaku1=tblJikanwaku1;
+        this.tblJikanwaku1 = tblJikanwaku1;
     }
 
+    /*
+     * getlin1
+     * @return lin1
+     */
     @JsonProperty("lin1")
     public HorizontalLine getLin1() {
         return lin1;
     }
 
+    /*
+     * setlin1
+     * @param lin1 lin1
+     */
     @JsonProperty("lin1")
     public void setLin1(HorizontalLine lin1) {
-        this.lin1=lin1;
+        this.lin1 = lin1;
     }
 
+    /*
+     * gettblJikanwaku2
+     * @return tblJikanwaku2
+     */
     @JsonProperty("tblJikanwaku2")
     public tblJikanwaku2Div getTblJikanwaku2() {
         return tblJikanwaku2;
     }
 
+    /*
+     * settblJikanwaku2
+     * @param tblJikanwaku2 tblJikanwaku2
+     */
     @JsonProperty("tblJikanwaku2")
     public void setTblJikanwaku2(tblJikanwaku2Div tblJikanwaku2) {
-        this.tblJikanwaku2=tblJikanwaku2;
+        this.tblJikanwaku2 = tblJikanwaku2;
     }
 
+    /*
+     * getchkDay
+     * @return chkDay
+     */
     @JsonProperty("chkDay")
     public CheckBoxList getChkDay() {
         return chkDay;
     }
 
+    /*
+     * setchkDay
+     * @param chkDay chkDay
+     */
     @JsonProperty("chkDay")
     public void setChkDay(CheckBoxList chkDay) {
-        this.chkDay=chkDay;
+        this.chkDay = chkDay;
     }
 
+    /*
+     * getchkUpdate
+     * @return chkUpdate
+     */
     @JsonProperty("chkUpdate")
     public CheckBoxList getChkUpdate() {
         return chkUpdate;
     }
 
+    /*
+     * setchkUpdate
+     * @param chkUpdate chkUpdate
+     */
     @JsonProperty("chkUpdate")
     public void setChkUpdate(CheckBoxList chkUpdate) {
-        this.chkUpdate=chkUpdate;
+        this.chkUpdate = chkUpdate;
     }
 
+    /*
+     * getbtnBack
+     * @return btnBack
+     */
     @JsonProperty("btnBack")
     public Button getBtnBack() {
         return btnBack;
     }
 
+    /*
+     * setbtnBack
+     * @param btnBack btnBack
+     */
     @JsonProperty("btnBack")
     public void setBtnBack(Button btnBack) {
-        this.btnBack=btnBack;
+        this.btnBack = btnBack;
     }
 
+    /*
+     * getbtnUpdate
+     * @return btnUpdate
+     */
     @JsonProperty("btnUpdate")
     public Button getBtnUpdate() {
         return btnUpdate;
     }
 
+    /*
+     * setbtnUpdate
+     * @param btnUpdate btnUpdate
+     */
     @JsonProperty("btnUpdate")
     public void setBtnUpdate(Button btnUpdate) {
-        this.btnUpdate=btnUpdate;
+        this.btnUpdate = btnUpdate;
     }
 
     /*
