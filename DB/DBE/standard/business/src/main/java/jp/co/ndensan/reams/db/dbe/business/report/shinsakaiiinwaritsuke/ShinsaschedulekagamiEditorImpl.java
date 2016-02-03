@@ -19,7 +19,7 @@ public class ShinsaschedulekagamiEditorImpl implements IShinsaschedulekagamiEdit
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link NinteiChosaTokusokuTaishoshaIchiranhyoItem}
+     * @param item {@link ShinsaschedulekagamiItem}
      * @param remban 連番
      */
     protected ShinsaschedulekagamiEditorImpl(ShinsaschedulekagamiItem item, int remban) {
