@@ -66,11 +66,12 @@ public class SaiketukekaTorokuPanelHandler {
     private void 共有子DIVの初期化() {
 
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         IAtesakiGyomuHanteiKey 業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険);
         IAtenaSearchKey 検索キー = new AtenaSearchKeyBuilder(KensakuYusenKubun.住登内優先, 業務判定キー).set識別コード(識別コード).build();
 
         div.getAtenaInfoCommonChildDiv().onLoad(検索キー);
-        div.getKaigoShikakuKihonCommonChildDiv().onLoad(識別コード);
+        div.getKaigoShikakuKihonCommonChildDiv().onLoad(被保険者番号);
     }
 
     /**

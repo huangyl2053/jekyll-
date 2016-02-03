@@ -129,9 +129,10 @@ public class SaiketukekaTorokuPanel {
 
         if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
 
-            if (div.getSaiketukekaMeisaiPanel().getTxtDateBenmeisyoSakuseibi().getValue() == null) {
-                ValidationMessageControlPairs validPairs = getValidationHandler().validateFor弁明書作成日の必須入力();
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            getValidationHandler().validateFor弁明書作成日の必須入力(pairs, div);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
             boolean 変更あり = getValidationHandler().修正_変更有無チェック(createHandlerOf(div).get修正後の値());
             if (変更あり) {
@@ -154,8 +155,8 @@ public class SaiketukekaTorokuPanel {
             }
             if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                div.getKaryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(
-                        new RString(UrInformationMessages.処理完了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
+                div.getKaryoMessage().getCcdKaigoKanryoMessage().setMessage(
+                        new RString(UrInformationMessages.処理完了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY, true);
                 return ResponseData.of(div).setState(DBU0900041StateName.完了状態);
             }
         }
@@ -180,8 +181,8 @@ public class SaiketukekaTorokuPanel {
         }
         if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            div.getKaryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(
-                    new RString(UrInformationMessages.処理完了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
+            div.getKaryoMessage().getCcdKaigoKanryoMessage().setMessage(
+                    new RString(UrInformationMessages.処理完了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBU0900041StateName.完了状態);
         }
         return ResponseData.of(div).respond();
