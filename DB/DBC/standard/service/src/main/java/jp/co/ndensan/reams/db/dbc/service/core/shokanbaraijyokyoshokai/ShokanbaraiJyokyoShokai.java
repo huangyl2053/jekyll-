@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai;
 
 import java.util.ArrayList;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
@@ -57,6 +58,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -190,6 +192,12 @@ public class ShokanbaraiJyokyoShokai {
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             RString 様式番号) {
+
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+
         ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
                 被保険者番号, サービス提供年月, 整理番号, 様式番号, null, null, null, null, null);
 
@@ -249,6 +257,14 @@ public class ShokanbaraiJyokyoShokai {
             RString 明細番号,
             RString 連番,
             ServiceShuruiCode サービス種類コード) {
+
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+
         ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
                 被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, サービス種類コード, null);
 
@@ -270,7 +286,6 @@ public class ShokanbaraiJyokyoShokai {
      * @param 様式番号
      * @param 明細番号
      * @param 連番
-     * @param サービス種類コード
      * @return List<ShokanMeisaiJushochiTokureiEntity>
      */
     public List<ShokanMeisaiJushochiTokureiEntity> getShokanbarayiSeikyuMeisayiJyutokuList(
@@ -280,10 +295,17 @@ public class ShokanbaraiJyokyoShokai {
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号,
-            RString 連番,
-            ServiceShuruiCode サービス種類コード) {
+            RString 連番) {
+
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+
         ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
-                被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, サービス種類コード, null);
+                被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, null, null);
 
         IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
         List<ShokanMeisaiJushochiTokureiEntity> entityList = mapper.get償還払請求明細住特一覧(parameter);
@@ -395,6 +417,14 @@ public class ShokanbaraiJyokyoShokai {
             RString 様式番号,
             RString 明細番号,
             RString 連番) {
+
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+
         ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
                 被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, null, null);
 
@@ -426,6 +456,14 @@ public class ShokanbaraiJyokyoShokai {
             RString 様式番号,
             RString 明細番号,
             RString 連番) {
+
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+
         ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
                 被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, null, null);
 
@@ -457,6 +495,14 @@ public class ShokanbaraiJyokyoShokai {
             RString 様式番号,
             RString 明細番号,
             RString 連番) {
+
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+
         ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
                 被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, null, null);
 
@@ -693,6 +739,14 @@ public class ShokanbaraiJyokyoShokai {
             RString 様式番号,
             RString 明細番号,
             RString 連番) {
+
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+
         ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
                 被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, null, null);
 
@@ -724,6 +778,14 @@ public class ShokanbaraiJyokyoShokai {
             RString 様式番号,
             RString 明細番号,
             RString 連番) {
+
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+
         ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
                 被保険者番号, サービス提供年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, null, null);
 
@@ -745,6 +807,10 @@ public class ShokanbaraiJyokyoShokai {
     public ShikibetsuNoKanriEntity getShikibetsubangoKanri(
             FlexibleYearMonth サービス提供年月,
             RString 様式番号) {
+
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+
         ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
                 null, サービス提供年月, null, 様式番号, null, null, null, null, null);
 
@@ -768,6 +834,10 @@ public class ShokanbaraiJyokyoShokai {
     public KaigoJigyoshaReturnEntity getKaigoJigyoshaInfo(
             FlexibleYearMonth サービス提供年月,
             JigyoshaNo 事業者番号) {
+
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+
         ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
                 null, サービス提供年月, null, null, 事業者番号, null, null, null, null);
 
@@ -796,6 +866,10 @@ public class ShokanbaraiJyokyoShokai {
             RString 様式番号,
             ShikibetsuCode 識別コード) {
 
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
         ServiceShuruiCode serviceShuruiCode = null;
 
         if (new RString("2165").equals(様式番号)
@@ -805,7 +879,7 @@ public class ShokanbaraiJyokyoShokai {
         } else if (new RString("2155").equals(様式番号)
                 || new RString("2156").equals(様式番号)
                 || new RString("219x").equals(様式番号)) {
-            serviceShuruiCode = new ServiceShuruiCode("60");
+            serviceShuruiCode = new ServiceShuruiCode("70");
         }
 
         ServiceKomokuCode serviceKomokuCode = new ServiceKomokuCode(new RString("00") + 識別コード.toString());

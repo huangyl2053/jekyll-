@@ -76,6 +76,7 @@
                 ) AS SHIKIBETSUA
              WHERE
                 SHIKIBETSUNOKANRI."shikibetsuNo" = SHIKIBETSUA."shikibetsuNo"
+                AND SHIKIBETSUNOKANRI."tekiyoKaishiYM" = SHIKIBETSUA."tekiyoKaishiYM"
             ) AS SHIKIBETSUB
         ON BASIC."yoshikiNo" = SHIKIBETSUB."shikibetsuNo"
         
