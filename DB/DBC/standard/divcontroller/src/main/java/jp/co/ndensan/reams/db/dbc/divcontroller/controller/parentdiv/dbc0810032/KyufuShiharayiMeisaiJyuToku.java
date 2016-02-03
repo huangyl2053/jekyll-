@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.Shoka
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -25,8 +24,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
+ * 実装単体.償還払い状況照会_給付費明細（住特）
  *
- * @author quxiaodong
+ * @author 瞿暁東
  */
 public class KyufuShiharayiMeisaiJyuToku {
 
@@ -54,7 +54,7 @@ public class KyufuShiharayiMeisaiJyuToku {
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         // TODO 申請検索画面ViewState. 申請日
         ViewStateHolder.put(ViewStateKeys.申請日, new RString("20151124"));
-        ServiceShuruiCode サービス種類コード = new ServiceShuruiCode("222222");
+        RString 連番 = new RString("22222");
 
         // div.getPanelOne().getCcdKaigoAtenaInfo().load(識別コード);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
@@ -67,81 +67,29 @@ public class KyufuShiharayiMeisaiJyuToku {
         getHandler(div).setヘッダーエリア(サービス年月, 事業者番号,
                 ViewStateHolder.get(ViewStateKeys.申請日, RString.class), 明細番号, 証明書);
         List<ShokanMeisaiJushochiTokureiEntity> entityList = ShokanbaraiJyokyoShokai.createInstance().
-                getShokanbarayiSeikyuMeisayiJyutokuList(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 明細番号, サービス種類コード);
+                getShokanbarayiSeikyuMeisayiJyutokuList(
+                        被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 連番);
         if (entityList == null || entityList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
+        div.getPanelFour().setVisible(false);
         getHandler(div).initialize(entityList);
         ShikibetsuNoKanriEntity shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShikibetsubangoKanri(サービス年月, 様式番号);
         getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity, サービス年月);
-        div.getPanelFour().setVisible(false);
+
         return createResponse(div);
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiJyuTokuDiv> onClick_btnKihonInfo(KyufuShiharayiMeisaiJyuTokuDiv div) {
-        // DBC0810021_基本情報画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiJyuTokuDiv> onClick_btnKyufuMeisai(KyufuShiharayiMeisaiJyuTokuDiv div) {
-        // DBC0810032_給付費明細(住所地特例)画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiJyuTokuDiv> onClick_btnTokuteiShinryouhi(KyufuShiharayiMeisaiJyuTokuDiv div) {
-        // DBC0810023_特定診療費画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiJyuTokuDiv> onClick_btnServiceKeikakuhi(KyufuShiharayiMeisaiJyuTokuDiv div) {
-        // DBC0810024_サービス計画費画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiJyuTokuDiv> onClick_btnTokuteiNyushosya(KyufuShiharayiMeisaiJyuTokuDiv div) {
-        // DBC0810025_特定入所者費用画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiJyuTokuDiv> onClick_btnGoukeiInfo(KyufuShiharayiMeisaiJyuTokuDiv div) {
-        // DBC0810026_合計情報画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiJyuTokuDiv> onClick_btnKinkyushisetuRyoyouhi(KyufuShiharayiMeisaiJyuTokuDiv div) {
-        // DBC0810027_緊急時施設療養費画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiJyuTokuDiv> onClick_btnShokujihiyo(KyufuShiharayiMeisaiJyuTokuDiv div) {
-        // DBC0810029_食事費用画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiJyuTokuDiv> onClick_btnSeikyugakuShukei(KyufuShiharayiMeisaiJyuTokuDiv div) {
-        // DBC0810030_請求額集計画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiJyuTokuDiv> onClick_btnShafukukeigenGaku(KyufuShiharayiMeisaiJyuTokuDiv div) {
-        // DBC0810031_社福軽減額画面へ遷移する
-        return createResponse(div);
-
     }
 
     public ResponseData<KyufuShiharayiMeisaiJyuTokuDiv> onClick_selectButton(KyufuShiharayiMeisaiJyuTokuDiv div) {
         getHandler(div).set給付費明細();
         div.getPanelFour().setVisible(true);
+        return createResponse(div);
+
+    }
+
+    public ResponseData<KyufuShiharayiMeisaiJyuTokuDiv> onClick_btnCloseUp(KyufuShiharayiMeisaiJyuTokuDiv div) {
+        div.getPanelFour().setVisible(false);
         return createResponse(div);
 
     }
