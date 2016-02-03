@@ -84,9 +84,9 @@ public class JigyoHokokuGeppoHoseiHako {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("合併情報区分"));
         }
         List<ShichosonCodeNameResult> 出力市町村情報 = new ArrayList<>();
-        if (導入形態コード.value().equals(DonyukeitaiCode.事務広域.getCode())
-                || 導入形態コード.value().equals(DonyukeitaiCode.認定広域.getCode())) {
-            if (合併情報区分.equals(合併情報区分_合併なし)) {//3.1
+        if (DonyukeitaiCode.事務広域.getCode().equals(導入形態コード.value())
+                || DonyukeitaiCode.認定広域.getCode().equals(導入形態コード.getKey())) {
+            if (合併情報区分_合併なし.equals(合併情報区分)) {//3.1
                 if (市町村識別ID_00.equals(市町村情報.get市町村識別ID())) {
                     出力市町村情報.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(), 市町村情報.get市町村名称(),
                             市町村情報.get証記載保険者番号(), TokeiTaishoKubun.保険者分.getコード()));
@@ -129,7 +129,7 @@ public class JigyoHokokuGeppoHoseiHako {
                 }
             }
         } else {
-            if (合併情報区分.equals(合併情報区分_合併なし)) {
+            if (合併情報区分_合併なし.equals(合併情報区分)) {
                 出力市町村情報.add(new ShichosonCodeNameResult(市町村セキュリティ情報.get市町村情報().get市町村コード(), 市町村セキュリティ情報.get市町村情報().get市町村名称(), 市町村セキュリティ情報.get市町村情報().get証記載保険者番号(), TokeiTaishoKubun.保険者分.getコード()));
                 return SearchResult.of(出力市町村情報, 0, false);
             } else {
