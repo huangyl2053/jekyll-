@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.dac._ReportDACUtility;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -339,4 +340,15 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
+    
+   public DbT1001HihokenshaDaichoEntity get被保険者台帳情報(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月){
+       DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(idoYMD, サービス提供年月),
+                                eq(logicalDeletedFlag, false))).order(by(DbT1001HihokenshaDaicho.idoYMD,Order.DESC),by(DbT1001HihokenshaDaicho.edaNo,Order.DESC)).limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+   }
 }

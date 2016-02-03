@@ -58,7 +58,7 @@ public class DbT3034ShokanShinseiEntity extends DbTableEntityBase<DbT3034ShokanS
     private RString riyushoSakuseiJigyoshaNo;
     private Decimal shiharaiKingakuTotal;
     private Decimal hokenTaishoHiyogaku;
-    private int hokenKyufuritsu;
+    private int hokenKyufugaku;
     private int riyoshaFutangaku;
     private RString shikyuShinseiShinsaKubun;
     private RString shinsaHohoKubun;
@@ -515,17 +515,17 @@ public class DbT3034ShokanShinseiEntity extends DbTableEntityBase<DbT3034ShokanS
      * @return 保険給付額
      */
     @CheckForNull
-    public int getHokenKyufuritsu() {
-        return hokenKyufuritsu;
+    public int getHokenKyufugaku() {
+        return hokenKyufugaku;
     }
 
     /**
      * 保険給付額のsetメソッドです。
      *
-     * @param hokenKyufuritsu 保険給付額
+     * @param hokenKyufugaku 保険給付額
      */
-    public void setHokenKyufuritsu(int hokenKyufuritsu) {
-        this.hokenKyufuritsu = hokenKyufuritsu;
+    public void setHokenKyufugaku(int hokenKyufugaku) {
+        this.hokenKyufugaku = hokenKyufugaku;
     }
 
     /**
@@ -1082,7 +1082,7 @@ public class DbT3034ShokanShinseiEntity extends DbTableEntityBase<DbT3034ShokanS
         this.riyushoSakuseiJigyoshaNo = entity.riyushoSakuseiJigyoshaNo;
         this.shiharaiKingakuTotal = entity.shiharaiKingakuTotal;
         this.hokenTaishoHiyogaku = entity.hokenTaishoHiyogaku;
-        this.hokenKyufuritsu = entity.hokenKyufuritsu;
+        this.hokenKyufugaku = entity.hokenKyufugaku;
         this.riyoshaFutangaku = entity.riyoshaFutangaku;
         this.shikyuShinseiShinsaKubun = entity.shikyuShinseiShinsaKubun;
         this.shinsaHohoKubun = entity.shinsaHohoKubun;
@@ -1117,7 +1117,7 @@ public class DbT3034ShokanShinseiEntity extends DbTableEntityBase<DbT3034ShokanS
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, shoKisaiHokenshaNo, uketsukeYMD, shinseiYMD, shinseiRiyu, shinseishaKubun, shinseishaNameKanji, shinseishaNameKana, shinseishaYubinNo, shinseishaAddress, shinseishaTelNo, shinseiJigyoshaNo, riyushoSakuseiYMD, riyushoSakuseishaName, riyushoSakuseishaKanaName, riyushoSakuseiJigyoshaNo, shiharaiKingakuTotal, hokenTaishoHiyogaku, hokenKyufuritsu, riyoshaFutangaku, shikyuShinseiShinsaKubun, shinsaHohoKubun, sofuKubun, sofuYM, kokuhorenSaisofuFlag, shiharaiHohoKubunCode, shiharaiBasho, shiharaiKaishiYMD, shiharaiShuryoYMD, shiharaiKaishiTime, shiharaiShuryoTime, kozaID, juryoininKeiyakuNo, jutakuShoyusha, hihokenshaKankei, yokaigo3DankaiHenko, jutakuJushoHenko, shinsaYMD, shinsaKekka, jizenServiceTeikyoYM, jizenSeiriNo, kaishuShinseiKubun, kaishuShinseiTorikeshijiyuCode, ryoshuYMD);
+        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, shoKisaiHokenshaNo, uketsukeYMD, shinseiYMD, shinseiRiyu, shinseishaKubun, shinseishaNameKanji, shinseishaNameKana, shinseishaYubinNo, shinseishaAddress, shinseishaTelNo, shinseiJigyoshaNo, riyushoSakuseiYMD, riyushoSakuseishaName, riyushoSakuseishaKanaName, riyushoSakuseiJigyoshaNo, shiharaiKingakuTotal, hokenTaishoHiyogaku, hokenKyufugaku, riyoshaFutangaku, shikyuShinseiShinsaKubun, shinsaHohoKubun, sofuKubun, sofuYM, kokuhorenSaisofuFlag, shiharaiHohoKubunCode, shiharaiBasho, shiharaiKaishiYMD, shiharaiShuryoYMD, shiharaiKaishiTime, shiharaiShuryoTime, kozaID, juryoininKeiyakuNo, jutakuShoyusha, hihokenshaKankei, yokaigo3DankaiHenko, jutakuJushoHenko, shinsaYMD, shinsaKekka, jizenServiceTeikyoYM, jizenSeiriNo, kaishuShinseiKubun, kaishuShinseiTorikeshijiyuCode, ryoshuYMD);
     }
 
 // </editor-fold>

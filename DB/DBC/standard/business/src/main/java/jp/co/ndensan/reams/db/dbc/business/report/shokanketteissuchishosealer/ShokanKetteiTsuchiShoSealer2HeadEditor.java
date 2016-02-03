@@ -57,7 +57,7 @@ public class ShokanKetteiTsuchiShoSealer2HeadEditor implements IShokanKetteiTsuc
         source.kyufuShurui2 = item.getKyufuShurui2();
         source.kyufuShurui3 = item.getKyufuShurui3();
         source.kekka = item.getKekka();
-        source.shikyuGaku = item.getRiyu1();
+        source.shikyuGaku = item.getShikyuGaku();
         source.riyu1 = item.getRiyu1();
         source.riyuTitle = item.getRiyuTitle();
         source.riyu2 = item.getRiyu2();
@@ -87,7 +87,7 @@ public class ShokanKetteiTsuchiShoSealer2HeadEditor implements IShokanKetteiTsuc
         source.shiharaiEndYMD = item.getShiharaiEndYMD();
         source.shiharaiStartHMS = item.getShiharaiStartHMS();
         source.karaFugo = item.getKaraFugo();
-        source.shiharaiEndHMS = item.getShiharaiStartHMS();
+        source.shiharaiEndHMS = item.getShiharaiEndHMS();
         source.hakkoYMD = item.getHakkoYMD();
         source.denshiKoin = item.getDenshiKoin();
         source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();

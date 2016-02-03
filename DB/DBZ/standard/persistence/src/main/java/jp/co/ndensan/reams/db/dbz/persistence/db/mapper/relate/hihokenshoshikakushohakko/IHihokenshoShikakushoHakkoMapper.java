@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshoshikakushohakko;
+package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokenshoshikakushohakko;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.hihokenshoshikakushohakko.KaigoHokenShisetsuNyutaishoEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.hihokenshoshikakushohakko.KyotakuKeikakuTodokedeEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.hihokenshoshikakushohakko.ShiharaiHohoHenkoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.KaigoHokenShisetsuNyutaishoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.KyotakuKeikakuTodokedeEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.ShiharaiHohoHenkoEntity;
 
 /**
  * 被保険者証資格証発行情報取得。

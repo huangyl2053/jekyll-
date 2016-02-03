@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -131,4 +132,31 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
                 order(by(DbT3049ShokanJutakuKaishu.seiriNo, Order.ASC)).
                 toList(DbT3049ShokanJutakuKaishuEntity.class);
     }
+    
+   public String get様式番号(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月, RString 整理番号, RString 様式番号){
+       DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().table(DbT3049ShokanJutakuKaishu.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号),
+                                eq(substr(yoshikiNo,1,3), 様式番号))).
+                order(by(DbT3049ShokanJutakuKaishu.seiriNo, Order.ASC)).
+                toObject(String.class);
+   }
+   
+   public String get今回住宅改修の住宅住所(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月, RString 整理番号, RString 様式番号){
+       DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().table(DbT3049ShokanJutakuKaishu.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号),
+                                eq(substr(yoshikiNo,1,3), 様式番号))).
+                order(by(DbT3049ShokanJutakuKaishu.meisaiNo, Order.DESC),by(DbT3049ShokanJutakuKaishu.renban,Order.DESC)).limit(1).
+                toObject(String.class);
+   }
+      
 }
