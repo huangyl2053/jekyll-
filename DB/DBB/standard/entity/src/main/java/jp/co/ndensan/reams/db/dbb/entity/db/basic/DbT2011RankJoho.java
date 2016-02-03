@@ -1,11 +1,11 @@
-package jp.co.ndensan.reams.db.dbb.entity.db.basic.choshuyuyo;
+package jp.co.ndensan.reams.db.dbb.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 介護期別徴収猶予テーブルの項目定義クラスです。
+ * ランク情報テーブルの項目定義クラスです。
  */
-public enum DbT2007KibetsuChoshuYuyo implements IColumnDefinition {
+public enum DbT2011RankJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
     /**
      * insertDantaiCd
@@ -40,42 +40,22 @@ public enum DbT2007KibetsuChoshuYuyo implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * 調定年度
-     */
-    choteiNendo(2147483647, 0),
-    /**
      * 賦課年度
      */
     fukaNendo(2147483647, 0),
     /**
-     * 通知書番号
+     * ランク区分
      */
-    tsuchishoNo(2147483647, 0),
+    rankKubun(2, 0),
     /**
-     * 履歴番号
+     * ランク名称
      */
-    rirekiNo(5, 0),
-    /**
-     * 徴収方法
-     */
-    choshuHoho(1, 0),
-    /**
-     * 期
-     */
-    ki(10, 0),
-    /**
-     * 徴収猶予開始日
-     */
-    yuyoStartYMD(2147483647, 0),
-    /**
-     * 徴収猶予終了日
-     */
-    yuyoEndYMD(2147483647, 0);
+    rankName(20, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT2007KibetsuChoshuYuyo(int maxLength, int scale) {
+    private DbT2011RankJoho(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

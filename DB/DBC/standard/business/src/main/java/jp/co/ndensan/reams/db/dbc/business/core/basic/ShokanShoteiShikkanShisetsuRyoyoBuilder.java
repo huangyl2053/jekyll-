@@ -6,14 +6,13 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanShoteiShikkanShisetsuRyoyo}の編集を行うビルダークラスです。
@@ -102,26 +101,26 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
     }
 
     /**
-     * 順次番号を設定します。
+     * 明細番号を設定します。
      *
-     * @param 順次番号 順次番号
+     * @param 明細番号 明細番号
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
-    public ShokanShoteiShikkanShisetsuRyoyoBuilder set順次番号(RString 順次番号) {
-        requireNonNull(順次番号, UrSystemErrorMessages.値がnull.getReplacedMessage("順次番号"));
-        entity.setJunjiNo(順次番号);
+    public ShokanShoteiShikkanShisetsuRyoyoBuilder set明細番号(RString 明細番号) {
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        entity.setMeisaiNo(明細番号);
         return this;
     }
 
     /**
-     * 履歴番号を設定します。
+     * 連番を設定します。
      *
-     * @param 履歴番号 履歴番号
+     * @param 連番 連番
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
-    public ShokanShoteiShikkanShisetsuRyoyoBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
+    public ShokanShoteiShikkanShisetsuRyoyoBuilder set連番(RString 連番) {
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+        entity.setRenban(連番);
         return this;
     }
 
@@ -203,7 +202,7 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @param 往診日数 往診日数
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
-    public ShokanShoteiShikkanShisetsuRyoyoBuilder set往診日数(Decimal 往診日数) {
+    public ShokanShoteiShikkanShisetsuRyoyoBuilder set往診日数(int 往診日数) {
         requireNonNull(往診日数, UrSystemErrorMessages.値がnull.getReplacedMessage("往診日数"));
         entity.setOshinNissu(往診日数);
         return this;
@@ -227,7 +226,7 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @param 通院日数 通院日数
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
-    public ShokanShoteiShikkanShisetsuRyoyoBuilder set通院日数(Decimal 通院日数) {
+    public ShokanShoteiShikkanShisetsuRyoyoBuilder set通院日数(int 通院日数) {
         requireNonNull(通院日数, UrSystemErrorMessages.値がnull.getReplacedMessage("通院日数"));
         entity.setTsuinNissu(通院日数);
         return this;
@@ -263,7 +262,7 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @param 緊急時治療管理日数 緊急時治療管理日数
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
-    public ShokanShoteiShikkanShisetsuRyoyoBuilder set緊急時治療管理日数(Decimal 緊急時治療管理日数) {
+    public ShokanShoteiShikkanShisetsuRyoyoBuilder set緊急時治療管理日数(int 緊急時治療管理日数) {
         requireNonNull(緊急時治療管理日数, UrSystemErrorMessages.値がnull.getReplacedMessage("緊急時治療管理日数"));
         entity.setKinkyuChiryoKanriNissu(緊急時治療管理日数);
         return this;
@@ -683,7 +682,7 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @param 所定疾患施設療養費日数 所定疾患施設療養費日数
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
-    public ShokanShoteiShikkanShisetsuRyoyoBuilder set所定疾患施設療養費日数(Decimal 所定疾患施設療養費日数) {
+    public ShokanShoteiShikkanShisetsuRyoyoBuilder set所定疾患施設療養費日数(int 所定疾患施設療養費日数) {
         requireNonNull(所定疾患施設療養費日数, UrSystemErrorMessages.値がnull.getReplacedMessage("所定疾患施設療養費日数"));
         entity.setShoteiShikkanNissu(所定疾患施設療養費日数);
         return this;

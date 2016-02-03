@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.fuka.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2002FukaEntityGenerator;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2002FukaEntityGenerator.DEFAULT_調定年度;
@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -89,14 +88,14 @@ public class DbT2002FukaDacTest extends DbbTestDacBase {
                     DEFAULT_履歴番号);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 履歴番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
-            sut.selectByKey(
-                    DEFAULT_調定年度,
-                    DEFAULT_賦課年度,
-                    DEFAULT_通知書番号,
-                    null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 履歴番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+//            sut.selectByKey(
+//                    DEFAULT_調定年度,
+//                    DEFAULT_賦課年度,
+//                    DEFAULT_通知書番号,
+//                    null);
+//        }
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
@@ -228,7 +227,7 @@ public class DbT2002FukaDacTest extends DbbTestDacBase {
                 FlexibleYear 調定年度,
                 FlexibleYear 賦課年度,
                 TsuchishoNo 通知書番号,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT2002FukaEntity entity = DbT2002FukaEntityGenerator.createDbT2002FukaEntity();
             entity.setChoteiNendo(調定年度);
             entity.setFukaNendo(賦課年度);

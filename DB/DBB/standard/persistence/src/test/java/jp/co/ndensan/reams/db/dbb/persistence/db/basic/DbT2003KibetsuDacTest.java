@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.fuka.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2003KibetsuEntityGenerator;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2003KibetsuEntityGenerator.DEFAULT_履歴番号;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法;
@@ -101,16 +101,16 @@ public class DbT2003KibetsuDacTest extends DbbTestDacBase {
                     DEFAULT_期);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 履歴番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
-            sut.selectByKey(
-                    DEFAULT_調定年度,
-                    DEFAULT_賦課年度,
-                    DEFAULT_通知書番号,
-                    null,
-                    DEFAULT_徴収方法,
-                    DEFAULT_期);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 履歴番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+//            sut.selectByKey(
+//                    DEFAULT_調定年度,
+//                    DEFAULT_賦課年度,
+//                    DEFAULT_通知書番号,
+//                    null,
+//                    DEFAULT_徴収方法,
+//                    DEFAULT_期);
+//        }
 
         @Test(expected = NullPointerException.class)
         public void 徴収方法がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
@@ -277,7 +277,7 @@ public class DbT2003KibetsuDacTest extends DbbTestDacBase {
                 FlexibleYear 調定年度,
                 FlexibleYear 賦課年度,
                 TsuchishoNo 通知書番号,
-                Decimal 履歴番号,
+                int 履歴番号,
                 RString 徴収方法,
                 int 期) {
             DbT2003KibetsuEntity entity = DbT2003KibetsuEntityGenerator.createDbT2003KibetsuEntity();

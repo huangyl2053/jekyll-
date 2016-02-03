@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3047ShokanServicePlan200904Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3047ShokanServicePlan200904EntityGenerator;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3047ShokanServicePlan200904EntityGenerator.*;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -365,9 +365,9 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
             entity.setSeiriNp(整理番号);
             entity.setJigyoshaNo(事業者番号);
             entity.setYoshikiNo(様式番号);
-            entity.setMeisaiNo(明細番号);
+//            entity.setMeisaiNo(明細番号);
             entity.setShiteiKijunGaitoJigyoshaKubunCode(指定_基準該当事業者区分コード);
-            entity.setRenban(連番);
+//            entity.setRenban(連番);
             entity.setKyotakuServiceSakuseiIraiYMD(居宅サービス計画作成依頼届出年月日);
             sut.save(entity);
         }

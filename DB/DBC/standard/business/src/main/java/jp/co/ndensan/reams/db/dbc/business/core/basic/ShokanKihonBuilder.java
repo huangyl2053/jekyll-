@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3038ShokanKihonEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
@@ -103,14 +103,14 @@ public class ShokanKihonBuilder {
     }
 
     /**
-     * 履歴番号を設定します。
+     * 明細番号を設定します。
      *
-     * @param 履歴番号 履歴番号
+     * @param 明細番号 明細番号
      * @return {@link ShokanKihonBuilder}
      */
-    public ShokanKihonBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
+    public ShokanKihonBuilder set明細番号(RString 明細番号) {
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        entity.setMeisaiNo(明細番号);
         return this;
     }
 
@@ -216,7 +216,7 @@ public class ShokanKihonBuilder {
      * @param 入所_院実日数 入所_院実日数
      * @return {@link ShokanKihonBuilder}
      */
-    public ShokanKihonBuilder set入所_院実日数(Decimal 入所_院実日数) {
+    public ShokanKihonBuilder set入所_院実日数(int 入所_院実日数) {
         requireNonNull(入所_院実日数, UrSystemErrorMessages.値がnull.getReplacedMessage("入所_院実日数"));
         entity.setNyushoJitsuNissu(入所_院実日数);
         return this;
@@ -228,7 +228,7 @@ public class ShokanKihonBuilder {
      * @param 外泊日数 外泊日数
      * @return {@link ShokanKihonBuilder}
      */
-    public ShokanKihonBuilder set外泊日数(Decimal 外泊日数) {
+    public ShokanKihonBuilder set外泊日数(int 外泊日数) {
         requireNonNull(外泊日数, UrSystemErrorMessages.値がnull.getReplacedMessage("外泊日数"));
         entity.setGaihakuNissu(外泊日数);
         return this;

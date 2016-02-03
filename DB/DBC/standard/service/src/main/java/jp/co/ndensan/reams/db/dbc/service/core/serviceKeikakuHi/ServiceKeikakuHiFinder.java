@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbc.service.core.serviceKeikakuHi;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.servicekeikakuHi.ServiceKeikakuHiRealtEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3045ShokanServicePlan200004Entity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3046ShokanServicePlan200604Entity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3047ShokanServicePlan200904Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3047ShokanServicePlan200904Dac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -65,14 +65,14 @@ public class ServiceKeikakuHiFinder {
                 = new DbT3047ShokanServicePlan200904Entity();
         DbT3047ShokanServicePlan200904Entity entity2009042
                 = new DbT3047ShokanServicePlan200904Entity();
-        entity2009042.setRenban(new RString("13"));
+//        entity2009042.setRenban(new RString("13"));
         entity2009042.setHiHokenshaNo(new HihokenshaNo("1"));
         entity2009042.setServiceTeikyoYM(new FlexibleYearMonth(new RString("200904")));
         entity2009042.setSeiriNp(new RString("12"));
         entity2009042.setJigyoshaNo(new JigyoshaNo("1"));
         entity2009042.setYoshikiNo(new RString("34"));
         entity2009042.setShiteiKijunGaitoJigyoshaKubunCode(new RString("654"));
-        entity2009042.setMeisaiNo(new RString("56"));
+//        entity2009042.setMeisaiNo(new RString("56"));
         entity2009042.setKyotakuServiceSakuseiIraiYMD(new FlexibleDate(new RString("20000101")));
         entity2009042.setServiceCode(new ServiceCode(new RString("21")));
         entity2009042.setTanisu(413);
@@ -134,14 +134,14 @@ public class ServiceKeikakuHiFinder {
             RString 連番) {
         DbT3047ShokanServicePlan200904Entity entity200904
                 = new DbT3047ShokanServicePlan200904Entity();
-        entity200904.setRenban(new RString("13"));
+//        entity200904.setRenban(new RString("13"));
         entity200904.setHiHokenshaNo(new HihokenshaNo("1"));
         entity200904.setServiceTeikyoYM(new FlexibleYearMonth(new RString("200904")));
         entity200904.setSeiriNp(new RString("12"));
         entity200904.setJigyoshaNo(new JigyoshaNo("1"));
         entity200904.setYoshikiNo(new RString("34"));
         entity200904.setShiteiKijunGaitoJigyoshaKubunCode(new RString("654"));
-        entity200904.setMeisaiNo(new RString("56"));
+//        entity200904.setMeisaiNo(new RString("56"));
         entity200904.setKyotakuServiceSakuseiIraiYMD(new FlexibleDate(new RString("20000101")));
         entity200904.setServiceCode(new ServiceCode(new RString("21")));
         entity200904.setTanisu(413);

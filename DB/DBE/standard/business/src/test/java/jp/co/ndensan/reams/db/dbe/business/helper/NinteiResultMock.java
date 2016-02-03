@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteiYukoKikanTsu
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaikaisaino.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbx.business.core.IKaigoServiceShurui;
 import jp.co.ndensan.reams.db.dbx.business.core._KaigoServiceShurui;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceBunruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -120,7 +119,7 @@ public class NinteiResultMock {
     private static IKaigoServiceShurui createKaigoServiceShurui() {
         return spy(new _KaigoServiceShurui(
                 new KaigoServiceShuruiCode("01"), new Range<>(FlexibleYearMonth.MIN, FlexibleYearMonth.MAX), new RString("サービス種類名称"),
-                new RString("サービス種類名称略称"), new KaigoServiceBunruiCode(new RString("サービス分類"))));
+                new RString("サービス種類名称略称"), new Code("サービス分類")));
     }
 
     private static NinteiYukoKikan createNinteiYukoKikan() {

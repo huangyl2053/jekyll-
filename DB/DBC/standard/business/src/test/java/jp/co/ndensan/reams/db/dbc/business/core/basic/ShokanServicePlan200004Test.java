@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3045ShokanServicePlan200004Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004Entity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3045ShokanServicePlan200004EntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -154,10 +154,10 @@ public class ShokanServicePlan200004Test extends DbcTestBase {
             assertThat(sut.get様式番号(), is(ShokanServicePlan200004Entity.getYoshikiNo()));
         }
 
-        @Test
-        public void get明細番号は_entityが持つ明細番号を返す() {
-            assertThat(sut.get明細番号(), is(ShokanServicePlan200004Entity.getMeisaiNo()));
-        }
+//        @Test
+//        public void get明細番号は_entityが持つ明細番号を返す() {
+//            assertThat(sut.get明細番号(), is(ShokanServicePlan200004Entity.getMeisaiNo()));
+//        }
 
         @Test
         public void get指定_基準該当事業者区分コードは_entityが持つ指定_基準該当事業者区分コードを返す() {

@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3047ShokanServicePlan200904Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
@@ -61,8 +61,9 @@ public final class DbT3047ShokanServicePlan200904EntityGenerator {
         entity.setJigyoshaNo(DEFAULT_事業者番号);
         entity.setYoshikiNo(DEFAULT_様式番号);
         entity.setShiteiKijunGaitoJigyoshaKubunCode(DEFAULT_指定_基準該当事業者区分コード);
-        entity.setMeisaiNo(DEFAULT_明細番号);
-        entity.setRenban(DEFAULT_連番);
+        //Entity最新化の際に直すこと
+//        entity.setMeisaiNo(DEFAULT_明細番号);
+//        entity.setRenban(DEFAULT_連番);
         entity.setKyotakuServiceSakuseiIraiYMD(DEFAULT_居宅サービス計画作成依頼届出年月日);
         entity.setServiceCode(DEFAULT_サービスコード);
         entity.setTanisu(DEFAULT_単位数);

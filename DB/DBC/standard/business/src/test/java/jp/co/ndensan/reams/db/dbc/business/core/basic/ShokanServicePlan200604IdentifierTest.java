@@ -50,7 +50,8 @@ public class ShokanServicePlan200604IdentifierTest extends DbcTestBase {
 
         @Test
         public void シリアライズできる() {
-            ShokanServicePlan200604Identifier sut = new ShokanServicePlan200604Identifier(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
+//            ShokanServicePlan200604Identifier sut = new ShokanServicePlan200604Identifier(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
+            ShokanServicePlan200604Identifier sut = new ShokanServicePlan200604Identifier(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5);
             assertThat(sut, is(serializable()));
         }
     }

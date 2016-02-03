@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.db.basic.helper;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.fuka.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -18,7 +18,7 @@ public final class DbT2003KibetsuEntityGenerator {
     public static final FlexibleYear DEFAULT_調定年度 = new FlexibleYear("2014");
     public static final FlexibleYear DEFAULT_賦課年度 = new FlexibleYear("2014");
     public static final TsuchishoNo DEFAULT_通知書番号 = new TsuchishoNo("1234567890123456");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(1);
+    public static final int DEFAULT_履歴番号 = 1;
     public static final RString DEFAULT_徴収方法 = new RString("1");
     public static final int DEFAULT_期 = 1;
     public static final Decimal DEFAULT_調定ID = new Decimal(1);

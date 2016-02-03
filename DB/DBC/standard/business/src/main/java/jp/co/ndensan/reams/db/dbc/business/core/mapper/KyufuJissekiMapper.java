@@ -39,13 +39,13 @@ import jp.co.ndensan.reams.db.dbc.business.core.ServiceTeikyoYMListOfServiceShur
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KyufuJissekiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KyufuSakuseiKubun;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3017KyufujissekiKihonEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3018KyufujissekiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3025KyufujissekiKyotakuServiceEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3026KyufujissekiFukushiYoguHanbaihiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3027KyufujissekiJutakuKaishuhiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3018KyufujissekiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3025KyufujissekiKyotakuServiceEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3026KyufujissekiFukushiYoguHanbaihiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3027KyufujissekiJutakuKaishuhiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
@@ -60,6 +60,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績エンティティを給付実績情報に変換するMapperクラスです。
@@ -180,7 +181,7 @@ public final class KyufuJissekiMapper {
                 new ServiceTeikyoYM(entity.getServiceTeikyoYM()),
                 KyufuJissekiKubun.toValue(entity.getKyufuJissekiKubunCode()),
                 entity.getSeiriNo(),
-                entity.getHokenshaNo().value(),
+                entity.getShokisaiHokenshaNo().value(),
                 new InputShikibetsuNo(new Code(entity.getInputShikibetsuNo().getColumnValue()), RString.EMPTY, RString.EMPTY),
                 entity.getJigyoshoNo().value(),
                 KyufuSakuseiKubun.toValue(entity.getKyufuSakuseiKubunCode()),
@@ -227,8 +228,8 @@ public final class KyufuJissekiMapper {
         return new KyufuJissekiKihonNyutaisho(
                 entity.getNyushoYMD(),
                 entity.getTaishoYMD(),
-                entity.getNyushoJitsunissu().intValue(),
-                entity.getGaihakuNissu().intValue(),
+                entity.getNyushoJitsunissu(),
+                entity.getGaihakuNissu(),
                 entity.getChushiRiyuNyushomaeJyokyoCode(),
                 entity.getTaishogoJotaiCode());
     }
@@ -255,68 +256,68 @@ public final class KyufuJissekiMapper {
         List<KyufuJissekiKihonGokei> list = new ArrayList<>();
         list.add(new KyufuJissekiKihonGokei(
                 保険, 前,
-                entity.getMaeHokenServiceTanisu(),
+                new Decimal(entity.getMaeHokenServiceTanisu()),
                 entity.getMaeHokenSeikyugaku(),
-                entity.getMaeHokenRiyoshaFutangaku(),
+                new Decimal(entity.getMaeHokenRiyoshaFutangaku()),
                 entity.getMaeHokenKinkyuShisetsuRyoyoSeikyugaku(),
                 entity.getMaeHokenTokuteiShinryohiSeikyugaku(),
-                entity.getMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku()));
+                new Decimal(entity.getMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku())));
         list.add(new KyufuJissekiKihonGokei(
                 RString.EMPTY, 後,
-                entity.getAtoHokenServiceTanisu(),
+                new Decimal(entity.getAtoHokenServiceTanisu()),
                 entity.getAtoHokenSeikyugaku(),
-                entity.getAtoHokenRiyoshaFutangaku(),
+                new Decimal(entity.getAtoHokenRiyoshaFutangaku()),
                 entity.getAtoHokenKinkyuShisetsuRyoyoSeikyugaku(),
                 entity.getAtoHokenTokuteiShinryohiSeikyugaku(),
-                entity.getAtoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku()));
+                new Decimal(entity.getAtoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku())));
         list.add(new KyufuJissekiKihonGokei(
                 公費1, 前,
-                entity.getMaeKohi1ServiceTanisu(),
-                entity.getMaeKohi1Seikyugaku(),
-                entity.getMaeKohi1RiyoshaFutangaku(),
-                entity.getMaeKohi1KinkyuShisetsuRyoyoSeikyugaku(),
-                entity.getMaeKohi1TokuteiShinryohiSeikyugaku(),
-                entity.getMaeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku()));
+                new Decimal(entity.getMaeKohi1ServiceTanisu()),
+                new Decimal(entity.getMaeKohi1Seikyugaku()),
+                new Decimal(entity.getMaeKohi1RiyoshaFutangaku()),
+                new Decimal(entity.getMaeKohi1KinkyuShisetsuRyoyoSeikyugaku()),
+                new Decimal(entity.getMaeKohi1TokuteiShinryohiSeikyugaku()),
+                new Decimal(entity.getMaeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku())));
         list.add(new KyufuJissekiKihonGokei(
                 RString.EMPTY, 後,
-                entity.getAtoKohi1ServiceTanisu(),
-                entity.getAtoKohi1Seikyugaku(),
-                entity.getAtoKohi1RiyoshaFutangaku(),
-                entity.getAtoKohi1KinkyuShisetsuRyoyoSeikyugaku(),
-                entity.getAtoKohi1TokuteiShinryohiSeikyugaku(),
-                entity.getAtoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku()));
+                new Decimal(entity.getAtoKohi1ServiceTanisu()),
+                new Decimal(entity.getAtoKohi1Seikyugaku()),
+                new Decimal(entity.getAtoKohi1RiyoshaFutangaku()),
+                new Decimal(entity.getAtoKohi1KinkyuShisetsuRyoyoSeikyugaku()),
+                new Decimal(entity.getAtoKohi1TokuteiShinryohiSeikyugaku()),
+                new Decimal(entity.getAtoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku())));
         list.add(new KyufuJissekiKihonGokei(
                 公費2, 前,
-                entity.getMaeKohi2ServiceTanisu(),
-                entity.getMaeKohi2Seikyugaku(),
-                entity.getMaeKohi2RiyoshaFutangaku(),
-                entity.getMaeKohi2KinkyuShisetsuRyoyoSeikyugaku(),
-                entity.getMaeKohi2TokuteiShinryohiSeikyugaku(),
-                entity.getMaeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku()));
+                new Decimal(entity.getMaeKohi2ServiceTanisu()),
+                new Decimal(entity.getMaeKohi2Seikyugaku()),
+                new Decimal(entity.getMaeKohi2RiyoshaFutangaku()),
+                new Decimal(entity.getMaeKohi2KinkyuShisetsuRyoyoSeikyugaku()),
+                new Decimal(entity.getMaeKohi2TokuteiShinryohiSeikyugaku()),
+                new Decimal(entity.getMaeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku())));
         list.add(new KyufuJissekiKihonGokei(
                 RString.EMPTY, 後,
-                entity.getAtoKohi2ServiceTanisu(),
-                entity.getAtoKohi2Seikyugaku(),
-                entity.getAtoKohi2RiyoshaFutangaku(),
-                entity.getAtoKohi2KinkyuShisetsuRyoyoSeikyugaku(),
-                entity.getAtoKohi2TokuteiShinryohiSeikyugaku(),
-                entity.getAtoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku()));
+                new Decimal(entity.getAtoKohi2ServiceTanisu()),
+                new Decimal(entity.getAtoKohi2Seikyugaku()),
+                new Decimal(entity.getAtoKohi2RiyoshaFutangaku()),
+                new Decimal(entity.getAtoKohi2KinkyuShisetsuRyoyoSeikyugaku()),
+                new Decimal(entity.getAtoKohi2TokuteiShinryohiSeikyugaku()),
+                new Decimal(entity.getAtoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku())));
         list.add(new KyufuJissekiKihonGokei(
                 公費3, 前,
-                entity.getMaeKohi3ServiceTanisu(),
-                entity.getMaeKohi3Seikyugaku(),
-                entity.getMaeKohi3RiyoshaFutangaku(),
-                entity.getMaeKohi3KinkyuShisetsuRyoyoSeikyugaku(),
-                entity.getMaeKohi3TokuteiShinryohiSeikyugaku(),
-                entity.getMaeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku()));
+                new Decimal(entity.getMaeKohi3ServiceTanisu()),
+                new Decimal(entity.getMaeKohi3Seikyugaku()),
+                new Decimal(entity.getMaeKohi3RiyoshaFutangaku()),
+                new Decimal(entity.getMaeKohi3KinkyuShisetsuRyoyoSeikyugaku()),
+                new Decimal(entity.getMaeKohi3TokuteiShinryohiSeikyugaku()),
+                new Decimal(entity.getMaeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku())));
         list.add(new KyufuJissekiKihonGokei(
                 RString.EMPTY, 後,
-                entity.getAtoKohi3ServiceTanisu(),
-                entity.getAtoKohi3Seikyugaku(),
-                entity.getAtoKohi3RiyoshaFutangaku(),
-                entity.getAtoKohi3KinkyuShisetsuRyoyoSeikyugaku(),
-                entity.getAtoKohi3TokuteiShinryohiSeikyugaku(),
-                entity.getAtoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku()));
+                new Decimal(entity.getAtoKohi3ServiceTanisu()),
+                new Decimal(entity.getAtoKohi3Seikyugaku()),
+                new Decimal(entity.getAtoKohi3RiyoshaFutangaku()),
+                new Decimal(entity.getAtoKohi3KinkyuShisetsuRyoyoSeikyugaku()),
+                new Decimal(entity.getAtoKohi3TokuteiShinryohiSeikyugaku()),
+                new Decimal(entity.getAtoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku())));
 
         return new KyufuJissekiKihonGokeiCollection(list);
     }

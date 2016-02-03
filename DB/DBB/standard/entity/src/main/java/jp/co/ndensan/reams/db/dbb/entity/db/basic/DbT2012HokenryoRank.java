@@ -1,11 +1,11 @@
-package jp.co.ndensan.reams.db.dbb.entity.db.basic.rentainofugimusha;
+package jp.co.ndensan.reams.db.dbb.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 連帯納付義務者テーブルの項目定義クラスです。
+ * 保険料ランクテーブルの項目定義クラスです。
  */
-public enum DbT2009RentaiGimusha implements IColumnDefinition {
+public enum DbT2012HokenryoRank implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
     /**
      * insertDantaiCd
@@ -40,31 +40,26 @@ public enum DbT2009RentaiGimusha implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * 被保険者番号
+     * 賦課年度
      */
-    hihokenshaNo(2147483647, 0),
+    fukaNendo(2147483647, 0),
     /**
-     * 履歴番号
+     * 市町村コード
      */
-    rirekiNo(5, 0),
+    shichosonCode(2147483647, 0),
     /**
-     * 識別コード
-     * <br/>連帯納付義務者の識別コード
+     * ランク区分
      */
-    shikibetuCode(2147483647, 0),
+    rankKubun(2, 0),
     /**
-     * 開始年月日
+     * 遡及年度
      */
-    startYMD(2147483647, 0),
-    /**
-     * 終了年月日
-     */
-    endYMD(2147483647, 0);
+    sokyuNendo(2147483647, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT2009RentaiGimusha(int maxLength, int scale) {
+    private DbT2012HokenryoRank(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3046ShokanServicePlan200604Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604Entity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3046ShokanServicePlan200604EntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -95,11 +95,11 @@ public class ShokanServicePlan200604BuilderTest extends DbcTestBase {
             assertThat(business.get様式番号(), is(DbT3046ShokanServicePlan200604EntityGenerator.DEFAULT_様式番号));
         }
 
-        @Test
-        public void 戻り値の明細番号は_設定した値と同じ明細番号を返す() {
-            business = sut.set明細番号(DbT3046ShokanServicePlan200604EntityGenerator.DEFAULT_明細番号).build();
-            assertThat(business.get明細番号(), is(DbT3046ShokanServicePlan200604EntityGenerator.DEFAULT_明細番号));
-        }
+//        @Test
+//        public void 戻り値の明細番号は_設定した値と同じ明細番号を返す() {
+//            business = sut.set明細番号(DbT3046ShokanServicePlan200604EntityGenerator.DEFAULT_明細番号).build();
+//            assertThat(business.get明細番号(), is(DbT3046ShokanServicePlan200604EntityGenerator.DEFAULT_明細番号));
+//        }
 
         @Test
         public void 戻り値の指定_基準該当事業者区分コードは_設定した値と同じ指定_基準該当事業者区分コードを返す() {

@@ -1,9 +1,8 @@
-package jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank;
+package jp.co.ndensan.reams.db.dbb.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -13,13 +12,13 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
- * 保険料ランクテーブルのエンティティクラスです。
+ * ランク情報テーブルのエンティティクラスです。
  */
-public class DbT2012HokenryoRankEntity extends DbTableEntityBase<DbT2012HokenryoRankEntity> implements IDbAccessable {
+public class DbT2011RankJohoEntity extends DbTableEntityBase<DbT2011RankJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
-    public static final RString TABLE_NAME = new RString("DbT2012HokenryoRank");
+    public static final RString TABLE_NAME = new RString("DbT2011RankJoho");
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -32,9 +31,8 @@ public class DbT2012HokenryoRankEntity extends DbTableEntityBase<DbT2012Hokenryo
     @PrimaryKey
     private FlexibleYear fukaNendo;
     @PrimaryKey
-    private LasdecCode shichosonCode;
     private RankKubun rankKubun;
-    private FlexibleYear sokyuNendo;
+    private RString rankName;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -100,24 +98,6 @@ public class DbT2012HokenryoRankEntity extends DbTableEntityBase<DbT2012Hokenryo
     }
 
     /**
-     * 市町村コードのgetメソッドです。
-     *
-     * @return 市町村コード
-     */
-    public LasdecCode getShichosonCode() {
-        return shichosonCode;
-    }
-
-    /**
-     * 市町村コードのsetメソッドです。
-     *
-     * @param shichosonCode 市町村コード
-     */
-    public void setShichosonCode(LasdecCode shichosonCode) {
-        this.shichosonCode = shichosonCode;
-    }
-
-    /**
      * ランク区分のgetメソッドです。
      *
      * @return ランク区分
@@ -136,38 +116,38 @@ public class DbT2012HokenryoRankEntity extends DbTableEntityBase<DbT2012Hokenryo
     }
 
     /**
-     * 遡及年度のgetメソッドです。
+     * ランク名称のgetメソッドです。
      *
-     * @return 遡及年度
+     * @return ランク名称
      */
-    public FlexibleYear getSokyuNendo() {
-        return sokyuNendo;
+    public RString getRankName() {
+        return rankName;
     }
 
     /**
-     * 遡及年度のsetメソッドです。
+     * ランク名称のsetメソッドです。
      *
-     * @param sokyuNendo 遡及年度
+     * @param rankName ランク名称
      */
-    public void setSokyuNendo(FlexibleYear sokyuNendo) {
-        this.sokyuNendo = sokyuNendo;
+    public void setRankName(RString rankName) {
+        this.rankName = rankName;
     }
 
     /**
-     * このエンティティの主キーが他の{@literal DbT2012HokenryoRankEntity}と等しいか判定します。
+     * このエンティティの主キーが他の{@literal DbT2011RankJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2012HokenryoRankEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2011RankJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
-    public boolean equalsPrimaryKeys(DbT2012HokenryoRankEntity other) {
+    public boolean equalsPrimaryKeys(DbT2011RankJohoEntity other) {
         if (other == null) {
             return false;
         }
         if (!Objects.equals(this.fukaNendo, other.fukaNendo)) {
             return false;
         }
-        if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
+        if (!Objects.equals(this.rankKubun, other.rankKubun)) {
             return false;
         }
         return true;
@@ -177,11 +157,10 @@ public class DbT2012HokenryoRankEntity extends DbTableEntityBase<DbT2012Hokenryo
      * {@inheritDoc}
      */
     @Override
-    public void shallowCopy(DbT2012HokenryoRankEntity entity) {
+    public void shallowCopy(DbT2011RankJohoEntity entity) {
         this.fukaNendo = entity.fukaNendo;
-        this.shichosonCode = entity.shichosonCode;
         this.rankKubun = entity.rankKubun;
-        this.sokyuNendo = entity.sokyuNendo;
+        this.rankName = entity.rankName;
     }
 
     /**
@@ -191,7 +170,7 @@ public class DbT2012HokenryoRankEntity extends DbTableEntityBase<DbT2012Hokenryo
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(fukaNendo, shichosonCode, rankKubun, sokyuNendo);
+        return super.toMd5(fukaNendo, rankKubun, rankName);
     }
 
 // </editor-fold>

@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3047ShokanServicePlan200904;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3047ShokanServicePlan200904.*;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3047ShokanServicePlan200904Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904.*;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -70,9 +70,10 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
                                 eq(serviceTeikyoYM, サービス提供年月),
                                 eq(seiriNp, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
-                                eq(yoshikiNo, 様式番号),
-                                eq(meisaiNo, 明細番号),
-                                eq(renban, 連番))).
+                                eq(yoshikiNo, 様式番号)
+                        //                                eq(meisaiNo, 明細番号),
+                        //                                eq(renban, 連番)
+                        )).
                 toObject(DbT3047ShokanServicePlan200904Entity.class);
     }
 
