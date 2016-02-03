@@ -3,19 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.core.hihokenshashoShikakushoHakko;
+package jp.co.ndensan.reams.db.dbz.service.core.hihokenshashoShikakushoHakko;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter;
-import static jp.co.ndensan.reams.db.dba.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter.createParam;
-import jp.co.ndensan.reams.db.dba.entity.db.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.hihokenshoshikakushohakko.KaigoHokenShisetsuNyutaishoEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.hihokenshoshikakushohakko.KyotakuKeikakuTodokedeEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.hihokenshoshikakushohakko.ShiharaiHohoHenkoEntity;
-import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshoshikakushohakko.IHihokenshoShikakushoHakkoMapper;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyoshaEntity;
@@ -28,6 +19,8 @@ import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoikiShichosonJoho
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysShiharaiHohoHenko;
+import jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter;
+import static jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter.createParam;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.edaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.hihokenshaNo;
@@ -45,7 +38,13 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3007KyotakuKeikakuJikoSakusei;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3007KyotakuKeikakuJikoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.KaigoHokenShisetsuNyutaishoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.KyotakuKeikakuTodokedeEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.ShiharaiHohoHenkoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokenshoshikakushohakko.IHihokenshoShikakushoHakkoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -75,6 +74,132 @@ public class HihokenshashoShikakushoHakkoFinder {
     private static final RString MENUID_DBUMN12002 = new RString("DBUMN12002");
     private static final RString JIBUNSAKUSEI = new RString("自己作成");
     private final MapperProvider mapperProvider;
+
+    /**
+     * 支払方法変更管理区分を表す列挙型です。
+     *
+     * @author LDNS
+     */
+    public enum ShiharaiHenkoKanriKubun {
+
+        /**
+         * コード:1 名称:２号差止 略称:定義なし
+         */
+        _２号差止("1", "２号差止"),
+        /**
+         * コード:2 名称:１号償還払い化 略称:定義なし
+         */
+        _１号償還払い化("2", "１号償還払い化"),
+        /**
+         * コード:3 名称:１号給付額減額 略称:定義なし
+         */
+        _１号給付額減額("3", "１号給付額減額");
+
+        private final RString code;
+        private final RString fullName;
+
+        private ShiharaiHenkoKanriKubun(String code, String fullname) {
+            this.code = new RString(code);
+            this.fullName = new RString(fullname);
+        }
+
+        /**
+         * 支払方法変更管理区分のコードを返します。
+         *
+         * @return 支払方法変更管理区分のコード
+         */
+        public RString getコード() {
+            return code;
+        }
+
+        /**
+         * 支払方法変更管理区分の名称を返します。
+         *
+         * @return 支払方法変更管理区分の名称
+         */
+        public RString get名称() {
+            return fullName;
+        }
+
+        /**
+         * 支払方法変更管理区分のコードと一致する内容を探します。
+         *
+         * @param code 支払方法変更管理区分のコード
+         * @return {@code code} に対応する支払方法変更管理区分
+         */
+        public static ShiharaiHenkoKanriKubun toValue(RString code) {
+
+            for (ShiharaiHenkoKanriKubun shiharaiHenkoKanriKubun : ShiharaiHenkoKanriKubun.values()) {
+                if (shiharaiHenkoKanriKubun.code.equals(code)) {
+                    return shiharaiHenkoKanriKubun;
+                }
+            }
+            throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("支払方法変更管理区分"));
+        }
+    }
+
+    /**
+     * 有効無効区分を表す列挙型です。
+     *
+     * @author LDNS
+     */
+    public enum YukoMukoKubun {
+
+        /**
+         * コード:0 名称:初期値（申請中の場合） 略称:定義なし
+         */
+        初期値_申請中の場合("0", "初期値（申請中の場合）"),
+        /**
+         * コード:1 名称:有効 略称:定義なし
+         */
+        有効("1", "有効"),
+        /**
+         * コード:2 名称:無効 略称:定義なし
+         */
+        無効("2", "無効");
+
+        private final RString code;
+        private final RString fullName;
+
+        private YukoMukoKubun(String code, String fullname) {
+            this.code = new RString(code);
+            this.fullName = new RString(fullname);
+        }
+
+        /**
+         * 有効無効区分のコードを返します。
+         *
+         * @return 有効無効区分のコード
+         */
+        public RString getコード() {
+            return code;
+        }
+
+        /**
+         * 有効無効区分の名称を返します。
+         *
+         * @return 有効無効区分の名称
+         */
+        public RString get名称() {
+            return fullName;
+        }
+
+        /**
+         * 有効無効区分のコードと一致する内容を探します。
+         *
+         * @param code 有効無効区分のコード
+         * @return {@code code} に対応する有効無効区分
+         */
+        public static YukoMukoKubun toValue(RString code) {
+
+            for (YukoMukoKubun yukoMukoKubun : YukoMukoKubun.values()) {
+                if (yukoMukoKubun.code.equals(code)) {
+                    return yukoMukoKubun;
+                }
+            }
+            throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("有効無効区分"));
+        }
+    }
 
     /**
      * コンストラクタです。

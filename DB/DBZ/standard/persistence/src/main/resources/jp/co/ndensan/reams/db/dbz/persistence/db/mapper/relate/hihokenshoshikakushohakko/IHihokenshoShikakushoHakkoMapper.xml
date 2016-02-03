@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshoshikakushohakko.IHihokenshoShikakushoHakkoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokenshoshikakushohakko.IHihokenshoShikakushoHakkoMapper">
 
-    <resultMap id="被保険者証資格証発行情報取得ResultMap" type="jp.co.ndensan.reams.db.dba.entity.db.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoEntity" autoMapping="true">
+    <resultMap id="被保険者証資格証発行情報取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoEntity" autoMapping="true">
         <id property="申請書管理番号" column="TB1_shinseishoKanriNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <id property="要介護認定状態区分コード" column="TB1_yokaigoJotaiKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <id property="受給申請年月日" column="TB1_jukyuShinseiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
@@ -16,15 +16,15 @@
 
     </resultMap>
 
-    <resultMap id="限度額データ取得ResultMap" type="jp.co.ndensan.reams.db.dba.entity.db.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoEntity" autoMapping="true">
+    <resultMap id="限度額データ取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoEntity" autoMapping="true">
         <id property="支給限度単位数" column="A_shikyuGendoTaniSu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <id property="ServiceTypeListEntity.サービス種類コード" column="A_serviceShuruiCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <id property="ServiceTypeListEntity.サービス種類名称" column="B_serviceShuruiMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <association property="ServiceTypeListEntity"
-                     resultMap="jp.co.ndensan.reams.db.dbu.entity.db.hihokenshoshikakushohakko.ServiceTypeListEntity"/>
+                     resultMap="jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.ServiceTypeListEntity"/>
     </resultMap>
 
-    <resultMap id="支払方法変更の情報取得ResultMap" type="jp.co.ndensan.reams.db.dba.entity.db.hihokenshoshikakushohakko.ShiharaiHohoHenkoEntity" autoMapping="true">
+    <resultMap id="支払方法変更の情報取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.ShiharaiHohoHenkoEntity" autoMapping="true">
         <id property="証記載保険者番号" column="ShiharaiHohoHenko_shoKisaiHokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <id property="被保険者番号" column="ShiharaiHohoHenko_hihokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <id property="管理区分" column="ShiharaiHohoHenko_kanriKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -34,7 +34,7 @@
         <id property="適用終了年月日" column="ShiharaiHohoHenko_tekiyoShuryoYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
     </resultMap>
 
-    <resultMap id="居宅給付計画届出情報取得ResultMap" type="jp.co.ndensan.reams.db.dba.entity.db.hihokenshoshikakushohakko.KyotakuKeikakuTodokedeEntity" autoMapping="true">
+    <resultMap id="居宅給付計画届出情報取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.KyotakuKeikakuTodokedeEntity" autoMapping="true">
         <id property="被保険者番号" column="KyotakuKeikakuTodokede_hihokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <id property="対象年月" column="KyotakuKeikakuTodokede_taishoYM"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
         <id property="履歴番号" column="KyotakuKeikakuTodokede_rirekiNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -42,7 +42,7 @@
         <id property="計画事業者番号" column="KyotakuKeikakuTodokede_keikakuJigyoshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
-    <resultMap id="介護保険施設入退所の情報取得ResultMap" type="jp.co.ndensan.reams.db.dba.entity.db.hihokenshoshikakushohakko.KaigoHokenShisetsuNyutaishoEntity" autoMapping="true">
+    <resultMap id="介護保険施設入退所の情報取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.KaigoHokenShisetsuNyutaishoEntity" autoMapping="true">
         <id property="識別コード" column="ShisetsuNyutaisho_shikibetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <id property="入所施設種類" column="ShisetsuNyutaisho_nyushoShisetsuShurui"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <id property="入所施設コード" column="ShisetsuNyutaisho_nyushoShisetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -50,7 +50,7 @@
         <id property="退所年月日" column="ShisetsuNyutaisho_taishoYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
     </resultMap>
 
-    <select id="被保険者証資格証発行情報取得" parameterType="jp.co.ndensan.reams.db.dba.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter"
+    <select id="被保険者証資格証発行情報取得" parameterType="jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter"
             resultMap="被保険者証資格証発行情報取得ResultMap" fetchSize="500">
         SELECT
         TB1."shinseishoKanriNo" AS TB1_shinseishoKanriNo,
@@ -95,7 +95,7 @@
         TB1."shinseishoKanriNo" = C."shinseishoKanriNo"
 
     </select>
-    <select id="限度額データ取得" parameterType="jp.co.ndensan.reams.db.dba.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter"
+    <select id="限度額データ取得" parameterType="jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter"
             resultMap="限度額データ取得ResultMap" fetchSize="500">
         SELECT
         A."serviceShuruiCode" AS A_serviceShuruiCode,
