@@ -20,8 +20,8 @@ public class ShokanKetteiTsuchiShoSealer2Report extends Report<ShokanKetteiTsuch
     /**
      * インスタンスを生成します。
      *
-     * @param item 主治医意見書督促対象者一覧表のITEM
-     * @return 主治医意見書督促対象者一覧表のReport
+     * @param item 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）のITEM
+     * @return 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）のReport
      */
     public static ShokanKetteiTsuchiShoSealer2Report createFrom(ShokanKetteiTsuchiShoSealer2Item item) {
         return new ShokanKetteiTsuchiShoSealer2Report(item);
@@ -30,7 +30,7 @@ public class ShokanKetteiTsuchiShoSealer2Report extends Report<ShokanKetteiTsuch
     /**
      * インスタンスを生成します。
      *
-     * @param item 主治医意見書督促対象者一覧表のITEM
+     * @param item 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）のITEM
      */
     protected ShokanKetteiTsuchiShoSealer2Report(ShokanKetteiTsuchiShoSealer2Item item) {
         this.item = item;
@@ -38,8 +38,8 @@ public class ShokanKetteiTsuchiShoSealer2Report extends Report<ShokanKetteiTsuch
 
     @Override
     public void writeBy(ReportSourceWriter<ShokanKetteiTsuchiShoSealer2ReportSource> reportSourceWriter) {
-        ShokanKetteiTsuchiShoSealer2HeadEditor editor = new ShokanKetteiTsuchiShoSealer2HeadEditor(item);
-        ShokanKetteiTsuchiShoSealer2BuliderImpl builder = new ShokanKetteiTsuchiShoSealer2BuliderImpl(editor);
+        IShokanKetteiTsuchiShoSealer2Editor editor = new ShokanKetteiTsuchiShoSealer2HeadEditor(item);
+        IShokanKetteiTsuchiShoSealer2Builder builder = new ShokanKetteiTsuchiShoSealer2BuliderImpl(editor);
         reportSourceWriter.writeLine(builder);
     }
 }
