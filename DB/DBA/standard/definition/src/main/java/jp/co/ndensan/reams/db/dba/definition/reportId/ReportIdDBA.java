@@ -55,9 +55,13 @@ public enum ReportIdDBA {
      */
     DBD800011(new ReportId("DBD800011_JukyuShikakuShomeishokoufuShinseisho"), new RString("介護保険受給資格証明書交付申請書")),
     /**
-     * 介護保険受給資格証明書交付申請書の帳票ＩＤです。
+     * 介護保険受領委任払い取扱事業者登録申請書の帳票ＩＤです。
      */
-    DBC800001(new ReportId("DBC800001_JuryoIninharaiToriatsukaiJigyoshaTorokuShinseisho"), new RString("介護保険受給資格証明書交付申請書"));
+    DBC800001(new ReportId("DBC800001_JuryoIninharaiToriatsukaiJigyoshaTorokuShinseisho"), new RString("介護保険受給資格証明書交付申請書")),
+    /**
+     * 介護保険住所地特例適用・変更・終了届の帳票ＩＤです。
+     */
+    DBA800002(new ReportId("DBA800002_JyushochiTokureiTekiyoHenkoShuryoTodoke"), new RString("介護保険受給資格証明書交付申請書"));
 
     private final ReportId reportId;
     private final RString reportName;
