@@ -132,7 +132,19 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
      * @param birthYMDdayiseyi 誕生日大正
      * @param birthYMDsyowa 誕生日昭和
      */
-    public ShujiiIkenshoSakuseiTokusokujoItem(RString bunshoNo, RString denshikoin, RDate hakkoYMD, RString shomeiHakkoYMD, RString shichosonMei, RString shuchoMei, RString koinShoryaku, RString tsuchibun1, RString tsuchibun2, RString hihokenshaNo1, RString hihokenshaNo2, RString hihokenshaNo3, RString hihokenshaNo4, RString hihokenshaNo5, RString hihokenshaNo6, RString hihokenshaNo7, RString hihokenshaNo8, RString hihokenshaNo9, RString hihokenshaNo10, RString hokenshaNo1, RString hokenshaNo2, RString hokenshaNo3, RString hokenshaNo4, RString hokenshaNo5, RString hokenshaNo6, RString shinseiKubun, RString hihokenshaNameKana, RString hihokennsyaName, RDate shinseiYMD, RString yubinNo, RString jusho, RDate birthYMD, RString tsuchibun3, RString tsuchibun4, RString tsuchibun5, RString tsuchibun6, RString tsuchibun7, RString tsuchibun8, RString tsuchibun9, RString tsuchibun10, RString tsuchibun11, RString tsuchibun12, RString tsuchibun13, RString tsuchibun14, RString tsuchibun15, RString tsuchibun16, RString tsuchibun17, RString tsuchibun18, RString tsuchibun19, RString remban, RString seyibenMan, RString seyibenWoman, RString birthYMDseyiji, RString birthYMDdayiseyi, RString birthYMDsyowa) {
+    public ShujiiIkenshoSakuseiTokusokujoItem(RString bunshoNo, RString denshikoin, RDate hakkoYMD,
+            RString shomeiHakkoYMD, RString shichosonMei, RString shuchoMei, RString koinShoryaku, RString tsuchibun1,
+            RString tsuchibun2, RString hihokenshaNo1, RString hihokenshaNo2, RString hihokenshaNo3,
+            RString hihokenshaNo4, RString hihokenshaNo5, RString hihokenshaNo6, RString hihokenshaNo7,
+            RString hihokenshaNo8, RString hihokenshaNo9, RString hihokenshaNo10, RString hokenshaNo1,
+            RString hokenshaNo2, RString hokenshaNo3, RString hokenshaNo4, RString hokenshaNo5, RString hokenshaNo6,
+            RString shinseiKubun, RString hihokenshaNameKana, RString hihokennsyaName, RDate shinseiYMD,
+            RString yubinNo, RString jusho, RDate birthYMD, RString tsuchibun3, RString tsuchibun4, RString tsuchibun5,
+            RString tsuchibun6, RString tsuchibun7, RString tsuchibun8, RString tsuchibun9, RString tsuchibun10,
+            RString tsuchibun11, RString tsuchibun12, RString tsuchibun13, RString tsuchibun14, RString tsuchibun15,
+            RString tsuchibun16, RString tsuchibun17, RString tsuchibun18, RString tsuchibun19, RString remban,
+            RString seyibenMan, RString seyibenWoman, RString birthYMDseyiji, RString birthYMDdayiseyi,
+            RString birthYMDsyowa) {
         this.bunshoNo = bunshoNo;
         this.denshikoin = denshikoin;
         this.hakkoYMD = hakkoYMD;

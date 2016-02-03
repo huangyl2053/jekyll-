@@ -72,12 +72,12 @@ public class ShujiiIkenshoSakuseiTokusokujoService {
 
         return new ShujiiIkenshoSakuseiTokusokujoItem(
                 item.getBunshoNo(),
-                item.getDenshikoin(),
-                item.getHakkoYMD(),
+                ninshoshaSource.denshiKoin,
+                new RDate(ninshoshaSource.hakkoYMD.toString()),
+                ninshoshaSource.koinShoryaku,
                 item.getShomeiHakkoYMD(),
                 item.getShichosonMei(),
                 item.getShuchoMei(),
-                item.getKoinShoryaku(),
                 item.getTsuchibun1(),
                 item.getTsuchibun2(),
                 item.getHihokenshaNo1(),

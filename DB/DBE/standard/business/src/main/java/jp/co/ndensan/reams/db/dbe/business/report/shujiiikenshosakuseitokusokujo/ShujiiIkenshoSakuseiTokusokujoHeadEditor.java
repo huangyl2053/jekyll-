@@ -49,7 +49,6 @@ public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoS
         source.ninshoshaShimeiKakenai = headitem.getShuchoMei();
         source.koinShoryaku = headitem.getKoinShoryaku();
         source.tsuchibun1 = headitem.getTsuchibun1();
-
         source.hihokenshaNo1 = headitem.getHihokenshaNo1();
         source.hihokenshaNo2 = headitem.getHihokenshaNo2();
         source.hihokenshaNo3 = headitem.getHihokenshaNo3();
@@ -118,11 +117,10 @@ public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoS
         builder.append(headitem.getTsuchibun18());
         builder.append(改行);
         builder.append(headitem.getTsuchibun19());
-        builder.append(改行);
+        source.tsuchibun2 = builder.toRString();
         source.remban = headitem.getRemban();
         source.seibetsuMan = headitem.getSeyibenMan();
         source.seibetsuWoman = headitem.getSeyibenWoman();
-        source.tsuchibun2 = headitem.getTsuchibun2();
         source.remban = headitem.getRemban();
         source.seibetsuMan = headitem.getSeyibenMan();
         source.seibetsuWoman = headitem.getSeyibenWoman();
