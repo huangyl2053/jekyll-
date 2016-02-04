@@ -163,6 +163,8 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
     private NonyuTsuchiShoSeigyoJoho set納入通知書制御情報(
             List<DbT7067ChohyoSeigyoHanyoEntity> chohyoSeigyoHanyoEntityLst) {
         NonyuTsuchiShoSeigyoJoho 納入通知書制御情報 = new NonyuTsuchiShoSeigyoJoho();
+        納入通知書制御情報.setExists中期開始期(false);
+        納入通知書制御情報.setExists後期開始期(false);
         for (DbT7067ChohyoSeigyoHanyoEntity dbT7067ChohyoSeigyoHanyoEntity : chohyoSeigyoHanyoEntityLst) {
             RString 項目名 = dbT7067ChohyoSeigyoHanyoEntity.getKomokuName();
             RString 設定値 = dbT7067ChohyoSeigyoHanyoEntity.getKomokuValue();
