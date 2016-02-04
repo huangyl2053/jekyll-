@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -21,8 +22,10 @@ public class NinteichosaScheduleIdentifier implements Serializable {
     private final RString 認定調査予定開始時間;
     private final RString 認定調査予定終了時間;
     private final Code 認定調査時間枠;
+    private final Code 調査地区コード;
     private final RString 認定調査委託先コード;
     private final RString 認定調査員コード;
+    private final LasdecCode 市町村コード;
 
     /**
      * コンストラクタです。
@@ -31,20 +34,26 @@ public class NinteichosaScheduleIdentifier implements Serializable {
      * @param 認定調査予定開始時間 認定調査予定開始時間
      * @param 認定調査予定終了時間 認定調査予定終了時間
      * @param 認定調査時間枠 認定調査時間枠
+     * @param 調査地区コード 調査地区コード
      * @param 認定調査委託先コード 認定調査委託先コード
      * @param 認定調査員コード 認定調査員コード
+     * @param 市町村コード 市町村コード
      */
     public NinteichosaScheduleIdentifier(FlexibleDate 認定調査予定年月日,
             RString 認定調査予定開始時間,
             RString 認定調査予定終了時間,
             Code 認定調査時間枠,
+            Code 調査地区コード,
             RString 認定調査委託先コード,
-            RString 認定調査員コード) {
+            RString 認定調査員コード,
+            LasdecCode 市町村コード) {
         this.認定調査予定年月日 = 認定調査予定年月日;
         this.認定調査予定開始時間 = 認定調査予定開始時間;
         this.認定調査予定終了時間 = 認定調査予定終了時間;
         this.認定調査時間枠 = 認定調査時間枠;
+        this.調査地区コード = 調査地区コード;
         this.認定調査委託先コード = 認定調査委託先コード;
         this.認定調査員コード = 認定調査員コード;
+        this.市町村コード = 市町村コード;
     }
 }

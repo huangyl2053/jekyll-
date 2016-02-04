@@ -36,35 +36,45 @@ public class NinteichosaSchedule extends
      * @param 認定調査予定開始時間 認定調査予定開始時間
      * @param 認定調査予定終了時間 認定調査予定終了時間
      * @param 認定調査時間枠 認定調査時間枠
+     * @param 調査地区コード 調査地区コード
      * @param 認定調査委託先コード 認定調査委託先コード
      * @param 認定調査員コード 認定調査員コード
+     * @param 市町村コード 市町村コード
      */
     public NinteichosaSchedule(FlexibleDate 認定調査予定年月日,
             RString 認定調査予定開始時間,
             RString 認定調査予定終了時間,
             Code 認定調査時間枠,
+            Code 調査地区コード,
             RString 認定調査委託先コード,
-            RString 認定調査員コード) {
+            RString 認定調査員コード,
+            LasdecCode 市町村コード) {
         requireNonNull(認定調査予定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定年月日"));
         requireNonNull(認定調査予定開始時間, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定開始時間"));
         requireNonNull(認定調査予定終了時間, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定終了時間"));
         requireNonNull(認定調査時間枠, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査時間枠"));
+        requireNonNull(調査地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区コード"));
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
         requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         this.entity = new DbT5221NinteichosaScheduleEntity();
         this.entity.setNinteiChosaYoteiYMD(認定調査予定年月日);
         this.entity.setNinteiChosaYoteiKaishiTime(認定調査予定開始時間);
         this.entity.setNinteiChosaYoteiShuryoTime(認定調査予定終了時間);
         this.entity.setNinteiChosaJikanWaku(認定調査時間枠);
-//        this.entity.setNinteichosaItakusakiCode(認定調査委託先コード);
-//        this.entity.setNinteiChosainNo(認定調査員コード);
+        this.entity.setChosaChikuCode(調査地区コード);
+        this.entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
+        this.entity.setNinteiChosainCode(認定調査員コード);
+        this.entity.setShichosonCode(市町村コード);
         this.id = new NinteichosaScheduleIdentifier(
                 認定調査予定年月日,
                 認定調査予定開始時間,
                 認定調査予定終了時間,
                 認定調査時間枠,
+                調査地区コード,
                 認定調査委託先コード,
-                認定調査員コード
+                認定調査員コード,
+                市町村コード
         );
     }
 
@@ -74,16 +84,18 @@ public class NinteichosaSchedule extends
      *
      * @param entity DBより取得した{@link DbT5221NinteichosaScheduleEntity}
      */
-//    public NinteichosaSchedule(DbT5221NinteichosaScheduleEntity entity) {
-//        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査スケジュール情報"));
-//        this.id = new NinteichosaScheduleIdentifier(
-//                entity.getNinteiChosaYoteiYMD(),
-//                entity.getNinteiChosaYoteiKaishiTime(),
-//                entity.getNinteiChosaYoteiShuryoTime(),
-//                entity.getNinteiChosaJikanWaku(),
-//                entity.getNinteichosaItakusakiCode(),
-//                entity.getNinteiChosainNo());
-//    }
+    public NinteichosaSchedule(DbT5221NinteichosaScheduleEntity entity) {
+        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査スケジュール情報"));
+        this.id = new NinteichosaScheduleIdentifier(
+                entity.getNinteiChosaYoteiYMD(),
+                entity.getNinteiChosaYoteiKaishiTime(),
+                entity.getNinteiChosaYoteiShuryoTime(),
+                entity.getNinteiChosaJikanWaku(),
+                entity.getChosaChikuCode(),
+                entity.getNinteiChosaItakusakiCode(),
+                entity.getNinteiChosainCode(),
+                entity.getShichosonCode());
+    }
 
     /**
      * シリアライズ、ビルダー用コンストラクタです。
@@ -145,23 +157,23 @@ public class NinteichosaSchedule extends
         return entity.getChosaChikuCode();
     }
 
-//    /**
-//     * 認定調査委託先コードを返します。
-//     *
-//     * @return 認定調査委託先コード
-//     */
-//    public RString get認定調査委託先コード() {
-//        return entity.getNinteichosaItakusakiCode();
-//    }
-//
-//    /**
-//     * 認定調査員コードを返します。
-//     *
-//     * @return 認定調査員コード
-//     */
-//    public RString get認定調査員コード() {
-//        return entity.getNinteiChosainNo();
-//    }
+    /**
+     * 認定調査委託先コードを返します。
+     *
+     * @return 認定調査委託先コード
+     */
+    public RString get認定調査委託先コード() {
+        return entity.getNinteiChosaItakusakiCode();
+    }
+
+    /**
+     * 認定調査員コードを返します。
+     *
+     * @return 認定調査員コード
+     */
+    public RString get認定調査員コード() {
+        return entity.getNinteiChosainCode();
+    }
 
     /**
      * 市町村コードを返します。
@@ -292,8 +304,7 @@ public class NinteichosaSchedule extends
     }
 
     /**
-     * 認定調査スケジュール情報のみを変更対象とします。<br/>
-     * {@link DbT5221NinteichosaScheduleEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査スケジュール情報のみを変更対象とします。<br/> {@link DbT5221NinteichosaScheduleEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosaSchedule}
      */
@@ -308,8 +319,7 @@ public class NinteichosaSchedule extends
     }
 
     /**
-     * 保持する認定調査スケジュール情報を削除対象とします。<br/>
-     * {@link DbT5221NinteichosaScheduleEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する認定調査スケジュール情報を削除対象とします。<br/> {@link DbT5221NinteichosaScheduleEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteichosaSchedule}
      */

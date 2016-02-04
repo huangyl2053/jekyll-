@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  *
  * 介護保険被保険者証Builderクラスです。
  */
-public class HihokenshashoA4BuilderItem implements IHihokenshashoA4Builder {
+public class HihokenshashoA4BuilderImpl implements IHihokenshashoA4Builder {
     
     private final IHihokenshashoA4Editor bodyEditor;
     
@@ -22,7 +22,7 @@ public class HihokenshashoA4BuilderItem implements IHihokenshashoA4Builder {
      * @param headEditor {@link IHihokenshashoA4Editor}
      * @param bodyEditor {@link IHihokenshashoA4Editor}
      */
-    HihokenshashoA4BuilderItem(IHihokenshashoA4Editor bodyEditor) {
+    HihokenshashoA4BuilderImpl(IHihokenshashoA4Editor bodyEditor) {
         this.bodyEditor = bodyEditor;
     }
 

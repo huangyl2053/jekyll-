@@ -197,12 +197,12 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(arrList, UrSystemErrorMessages.値がnull.getReplacedMessage("arrList"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        if (null == 整理番号) {
+        if (整理番号 == null || 整理番号.isEmpty()) {
             return accessor.select().
                     table(DbT3048ShokanFukushiYoguHanbaihi.class).
                     where(and(
                                     eq(hiHokenshaNo, 被保険者番号),
-                                    like(serviceTeikyoYM, サービス提供年月.getYear().toString()),
+                                    like(serviceTeikyoYM, サービス提供年月.getYear().toString() + "%"),
                                     in(hinmokuCode, arrList)
                             )).
                     toList(DbT3048ShokanFukushiYoguHanbaihiEntity.class);
@@ -211,7 +211,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
                     table(DbT3048ShokanFukushiYoguHanbaihi.class).
                     where(and(
                                     eq(hiHokenshaNo, 被保険者番号),
-                                    like(serviceTeikyoYM, サービス提供年月.getYear().toString()),
+                                    like(serviceTeikyoYM, サービス提供年月.getYear().toString() + "%"),
                                     not(eq(seiriNo, 整理番号)),
                                     in(hinmokuCode, arrList)
                             )).
