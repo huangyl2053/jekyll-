@@ -177,10 +177,7 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
                 // 償還払支給申請情報を取得
                 ShokanShinsei 償還払支給申請情報entity = sut.getShokanShinsei(shokanShinseiEntity.getHiHokenshaNo(),
                         shokanShinseiEntity.getServiceTeikyoYM(),
-                        shokanShinseiEntity.getSeiriNp(),
-                        shokanShinseiEntity.getJigyoshaNo(),
-                        shokanShinseiEntity.getYoshikiNo(),
-                        shokanShinseiEntity.getMeisaiNo());
+                        shokanShinseiEntity.getSeiriNp());
                 // 償還払支給判定結果を取得
                 ShokanHanteiKekka 償還払支給判定結果entity = sut.getShokanHanteiKekka(shokanShinseiEntity.getHiHokenshaNo(),
                         shokanShinseiEntity.getServiceTeikyoYM(),

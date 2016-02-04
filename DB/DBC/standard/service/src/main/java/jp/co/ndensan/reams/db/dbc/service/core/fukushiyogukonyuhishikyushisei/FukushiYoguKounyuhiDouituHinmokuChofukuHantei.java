@@ -26,11 +26,11 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHantei {
 
     private final DbT3048ShokanFukushiYoguHanbaihiDac 償還払請求福祉用具販売費Dac;
 
-    FukushiYoguKounyuhiDouituHinmokuChofukuHantei() {
+    public FukushiYoguKounyuhiDouituHinmokuChofukuHantei() {
         this.償還払請求福祉用具販売費Dac = InstanceProvider.create(DbT3048ShokanFukushiYoguHanbaihiDac.class);
     }
 
-    FukushiYoguKounyuhiDouituHinmokuChofukuHantei(DbT3048ShokanFukushiYoguHanbaihiDac 償還払請求福祉用具販売費Dac) {
+    public FukushiYoguKounyuhiDouituHinmokuChofukuHantei(DbT3048ShokanFukushiYoguHanbaihiDac 償還払請求福祉用具販売費Dac) {
         this.償還払請求福祉用具販売費Dac = 償還払請求福祉用具販売費Dac;
     }
 
