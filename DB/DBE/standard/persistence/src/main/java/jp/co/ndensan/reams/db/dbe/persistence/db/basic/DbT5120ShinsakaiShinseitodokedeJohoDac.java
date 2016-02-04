@@ -2,14 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJoho;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJoho;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.IShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;

@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai;
 
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5120ShinseitodokedeJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbe.entity.basic.helper.DbT5120ShinseitodokedeJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.serialization._Base64Serializer;
