@@ -74,22 +74,25 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHantei {
         }
         Set<RString> sets = new HashSet<>();
         for (DbT3048ShokanFukushiYoguHanbaihiEntity entity : list) {
-            if (!EntityDataState.Deleted.equals(entity.getState())) {
-                if (sets.contains(entity.getHinmokuCode())) {
-                    flag = true;
-                    break;
-                } else {
-                    sets.add(entity.getHinmokuCode());
-                }
+            if (EntityDataState.Deleted.equals(entity.getState())) {
+                continue;
+            }
+            if (sets.contains(entity.getHinmokuCode())) {
+                flag = true;
+                break;
+            } else {
+                sets.add(entity.getHinmokuCode());
             }
         }
-        List<RString> arrList = new ArrayList<>(sets);
-        List<DbT3048ShokanFukushiYoguHanbaihiEntity> resultList = new ArrayList<>();
-        if (!flag) {
-            resultList = 償還払請求福祉用具販売費Dac.select品目コード(被保険者番号, サービス提供年月, arrList, 整理番号);
-        }
-        if (resultList.size() > 0) {
-            flag = true;
+        if (!sets.isEmpty()) {
+            List<RString> arrList = new ArrayList<>(sets);
+            List<DbT3048ShokanFukushiYoguHanbaihiEntity> resultList = new ArrayList<>();
+            if (!flag) {
+                resultList = 償還払請求福祉用具販売費Dac.select品目コード(被保険者番号, サービス提供年月, arrList, 整理番号);
+            }
+            if (resultList.size() > 0) {
+                flag = true;
+            }
         }
         return flag;
     }
