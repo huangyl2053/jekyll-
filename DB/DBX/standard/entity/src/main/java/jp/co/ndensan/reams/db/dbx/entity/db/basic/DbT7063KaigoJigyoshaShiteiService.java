@@ -157,30 +157,6 @@ public enum DbT7063KaigoJigyoshaShiteiService implements IColumnDefinition {
      */
     kozaJohoJunkyoKubun(1, 0),
     /**
-     * 銀行コード
-     */
-    ginkoCode(2147483647, 0),
-    /**
-     * 支店コード
-     */
-    shitenCode(2147483647, 0),
-    /**
-     * 口座種別
-     */
-    kozaShubetsu(2147483647, 0),
-    /**
-     * 口座番号
-     */
-    kozaNo(2147483647, 0),
-    /**
-     * 口座名義人
-     */
-    kozaMeiginin(2147483647, 0),
-    /**
-     * 口座名義人カナ
-     */
-    kozaMeigininKana(2147483647, 0),
-    /**
      * 社会福祉法人軽減事業実施の有無
      */
     shakaiFukushihoujinKeigenjigyouJisshi_umu(2147483647, 0),
