@@ -54,7 +54,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  *
- * 介護保険資格取得・異動・喪失届Printクラスです。
+ * 介護保険受給資格証明書交付申請書Printクラスです。
  */
 public class KaigoHokenJukyushikakuShomeishoKofuShinseisho {
 
