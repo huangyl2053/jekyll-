@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class SonotaShojoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,44 +36,76 @@ public class SonotaShojoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getchkSonotaShojo
+     * @return chkSonotaShojo
+     */
     @JsonProperty("chkSonotaShojo")
     public CheckBoxList getChkSonotaShojo() {
         return chkSonotaShojo;
     }
 
+    /*
+     * setchkSonotaShojo
+     * @param chkSonotaShojo chkSonotaShojo
+     */
     @JsonProperty("chkSonotaShojo")
     public void setChkSonotaShojo(CheckBoxList chkSonotaShojo) {
-        this.chkSonotaShojo=chkSonotaShojo;
+        this.chkSonotaShojo = chkSonotaShojo;
     }
 
+    /*
+     * gettxtShojomei
+     * @return txtShojomei
+     */
     @JsonProperty("txtShojomei")
     public TextBox getTxtShojomei() {
         return txtShojomei;
     }
 
+    /*
+     * settxtShojomei
+     * @param txtShojomei txtShojomei
+     */
     @JsonProperty("txtShojomei")
     public void setTxtShojomei(TextBox txtShojomei) {
-        this.txtShojomei=txtShojomei;
+        this.txtShojomei = txtShojomei;
     }
 
+    /*
+     * getchkSenmonJushin
+     * @return chkSenmonJushin
+     */
     @JsonProperty("chkSenmonJushin")
     public CheckBoxList getChkSenmonJushin() {
         return chkSenmonJushin;
     }
 
+    /*
+     * setchkSenmonJushin
+     * @param chkSenmonJushin chkSenmonJushin
+     */
     @JsonProperty("chkSenmonJushin")
     public void setChkSenmonJushin(CheckBoxList chkSenmonJushin) {
-        this.chkSenmonJushin=chkSenmonJushin;
+        this.chkSenmonJushin = chkSenmonJushin;
     }
 
+    /*
+     * gettxtShosaiTokkiJiko
+     * @return txtShosaiTokkiJiko
+     */
     @JsonProperty("txtShosaiTokkiJiko")
     public TextBox getTxtShosaiTokkiJiko() {
         return txtShosaiTokkiJiko;
     }
 
+    /*
+     * settxtShosaiTokkiJiko
+     * @param txtShosaiTokkiJiko txtShosaiTokkiJiko
+     */
     @JsonProperty("txtShosaiTokkiJiko")
     public void setTxtShosaiTokkiJiko(TextBox txtShosaiTokkiJiko) {
-        this.txtShosaiTokkiJiko=txtShosaiTokkiJiko;
+        this.txtShosaiTokkiJiko = txtShosaiTokkiJiko;
     }
 
     // </editor-fold>

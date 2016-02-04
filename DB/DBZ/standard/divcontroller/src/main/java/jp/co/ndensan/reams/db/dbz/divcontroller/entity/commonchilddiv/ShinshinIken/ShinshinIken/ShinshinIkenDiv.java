@@ -4,11 +4,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinshinI
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinshinIken.ShinshinIken.IShinshinIkenDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinshinIken.ShinshinIken.IShinshinIkenDiv;
 
 /**
  * ShinshinIken のクラスファイル 
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -44,74 +44,130 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getNichijoJiritsudo
+     * @return NichijoJiritsudo
+     */
     @JsonProperty("NichijoJiritsudo")
     public NichijoJiritsudoDiv getNichijoJiritsudo() {
         return NichijoJiritsudo;
     }
 
+    /*
+     * setNichijoJiritsudo
+     * @param NichijoJiritsudo NichijoJiritsudo
+     */
     @JsonProperty("NichijoJiritsudo")
     public void setNichijoJiritsudo(NichijoJiritsudoDiv NichijoJiritsudo) {
-        this.NichijoJiritsudo=NichijoJiritsudo;
+        this.NichijoJiritsudo = NichijoJiritsudo;
     }
 
+    /*
+     * getNinchishoChukakuShojo
+     * @return NinchishoChukakuShojo
+     */
     @JsonProperty("NinchishoChukakuShojo")
     public NinchishoChukakuShojoDiv getNinchishoChukakuShojo() {
         return NinchishoChukakuShojo;
     }
 
+    /*
+     * setNinchishoChukakuShojo
+     * @param NinchishoChukakuShojo NinchishoChukakuShojo
+     */
     @JsonProperty("NinchishoChukakuShojo")
     public void setNinchishoChukakuShojo(NinchishoChukakuShojoDiv NinchishoChukakuShojo) {
-        this.NinchishoChukakuShojo=NinchishoChukakuShojo;
+        this.NinchishoChukakuShojo = NinchishoChukakuShojo;
     }
 
+    /*
+     * getNinchishoShuhenShojo
+     * @return NinchishoShuhenShojo
+     */
     @JsonProperty("NinchishoShuhenShojo")
     public NinchishoShuhenShojoDiv getNinchishoShuhenShojo() {
         return NinchishoShuhenShojo;
     }
 
+    /*
+     * setNinchishoShuhenShojo
+     * @param NinchishoShuhenShojo NinchishoShuhenShojo
+     */
     @JsonProperty("NinchishoShuhenShojo")
     public void setNinchishoShuhenShojo(NinchishoShuhenShojoDiv NinchishoShuhenShojo) {
-        this.NinchishoShuhenShojo=NinchishoShuhenShojo;
+        this.NinchishoShuhenShojo = NinchishoShuhenShojo;
     }
 
+    /*
+     * getSonotaShojo
+     * @return SonotaShojo
+     */
     @JsonProperty("SonotaShojo")
     public SonotaShojoDiv getSonotaShojo() {
         return SonotaShojo;
     }
 
+    /*
+     * setSonotaShojo
+     * @param SonotaShojo SonotaShojo
+     */
     @JsonProperty("SonotaShojo")
     public void setSonotaShojo(SonotaShojoDiv SonotaShojo) {
-        this.SonotaShojo=SonotaShojo;
+        this.SonotaShojo = SonotaShojo;
     }
 
+    /*
+     * getKaradaJotai
+     * @return KaradaJotai
+     */
     @JsonProperty("KaradaJotai")
     public KaradaJotaiDiv getKaradaJotai() {
         return KaradaJotai;
     }
 
+    /*
+     * setKaradaJotai
+     * @param KaradaJotai KaradaJotai
+     */
     @JsonProperty("KaradaJotai")
     public void setKaradaJotai(KaradaJotaiDiv KaradaJotai) {
-        this.KaradaJotai=KaradaJotai;
+        this.KaradaJotai = KaradaJotai;
     }
 
+    /*
+     * getbtnKakutei
+     * @return btnKakutei
+     */
     @JsonProperty("btnKakutei")
     public Button getBtnKakutei() {
         return btnKakutei;
     }
 
+    /*
+     * setbtnKakutei
+     * @param btnKakutei btnKakutei
+     */
     @JsonProperty("btnKakutei")
     public void setBtnKakutei(Button btnKakutei) {
-        this.btnKakutei=btnKakutei;
+        this.btnKakutei = btnKakutei;
     }
 
+    /*
+     * getbtnCancel
+     * @return btnCancel
+     */
     @JsonProperty("btnCancel")
     public Button getBtnCancel() {
         return btnCancel;
     }
 
+    /*
+     * setbtnCancel
+     * @param btnCancel btnCancel
+     */
     @JsonProperty("btnCancel")
     public void setBtnCancel(Button btnCancel) {
-        this.btnCancel=btnCancel;
+        this.btnCancel = btnCancel;
     }
 
     /*
@@ -165,16 +221,6 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     @JsonIgnore
     public void  setRadIshiDentatsuNoryoku(RadioButton radIshiDentatsuNoryoku) {
         this.getNinchishoChukakuShojo().setRadIshiDentatsuNoryoku(radIshiDentatsuNoryoku);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadShokujiKoi() {
-        return this.getNinchishoChukakuShojo().getRadShokujiKoi();
-    }
-
-    @JsonIgnore
-    public void  setRadShokujiKoi(RadioButton radShokujiKoi) {
-        this.getNinchishoChukakuShojo().setRadShokujiKoi(radShokujiKoi);
     }
 
     @JsonIgnore
