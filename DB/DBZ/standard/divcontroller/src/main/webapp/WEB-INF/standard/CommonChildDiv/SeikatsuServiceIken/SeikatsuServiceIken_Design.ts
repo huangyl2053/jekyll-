@@ -97,8 +97,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("IgakutekiKanriHitsuyosei"));
             }
 
-            public chkIgakutekiKanriHitsuyosei(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkIgakutekiKanriHitsuyosei"));
+            public chkIgakutekiKanri(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkIgakutekiKanri"));
             }
 
             public chkSonotaIryoService(): UZA.CheckBoxList {
@@ -107,6 +107,14 @@ module DBZ {
 
             public txtShonotaIryoServiceShosai(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtShonotaIryoServiceShosai"));
+            }
+
+            public chkIgakutekiKanriHitsuyoSei(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkIgakutekiKanriHitsuyoSei"));
+            }
+
+            public chkSonotaIryoServiceHitsuyoSei(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkSonotaIryoServiceHitsuyoSei"));
             }
 
             public IgakutekiKantenRyuiten(): UZA.Panel {
