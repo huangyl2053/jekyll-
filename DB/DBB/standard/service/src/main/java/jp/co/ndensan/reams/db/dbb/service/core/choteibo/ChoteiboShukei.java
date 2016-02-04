@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.service.core.choteiboshukei;
+package jp.co.ndensan.reams.db.dbb.service.core.choteibo;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 調定簿集計(編集バッチ)用のクラス。
  *
- * @author yebangqiang
  */
 public class ChoteiboShukei {
 
@@ -68,22 +67,22 @@ public class ChoteiboShukei {
                 賦課年度 = kibetsu.getFukaNendo();
                 switch (kibetsu.getKi()) {
                     case 1:
-                        特別徴収第1期の調定額 = 特別徴収第1期の調定額.add(kibetsu.getDai1kiChoteiIdGaku());
+                        特別徴収第1期の調定額 = 特別徴収第1期の調定額.add(kibetsu.getDai1kiChoteiGaku());
                         break;
                     case 2:
-                        特別徴収第2期の調定額 = 特別徴収第2期の調定額.add(kibetsu.getDai2kiChoteiIdGaku());
+                        特別徴収第2期の調定額 = 特別徴収第2期の調定額.add(kibetsu.getDai2kiChoteiGaku());
                         break;
                     case 3:
-                        特別徴収第3期の調定額 = 特別徴収第3期の調定額.add(kibetsu.getDai3kiChoteiIdGaku());
+                        特別徴収第3期の調定額 = 特別徴収第3期の調定額.add(kibetsu.getDai3kiChoteiGaku());
                         break;
                     case 4:
-                        特別徴収第4期の調定額 = 特別徴収第4期の調定額.add(kibetsu.getDai4kiChoteiIdGaku());
+                        特別徴収第4期の調定額 = 特別徴収第4期の調定額.add(kibetsu.getDai4kiChoteiGaku());
                         break;
                     case 5:
-                        特別徴収第5期の調定額 = 特別徴収第5期の調定額.add(kibetsu.getDai5kiChoteiIdGaku());
+                        特別徴収第5期の調定額 = 特別徴収第5期の調定額.add(kibetsu.getDai5kiChoteiGaku());
                         break;
                     case 6:
-                        特別徴収第6期の調定額 = 特別徴収第6期の調定額.add(kibetsu.getDai6kiChoteiIdGaku());
+                        特別徴収第6期の調定額 = 特別徴収第6期の調定額.add(kibetsu.getDai6kiChoteiGaku());
                         break;
                     default:
                         break;
@@ -93,46 +92,46 @@ public class ChoteiboShukei {
                 賦課年度 = kibetsu.getFukaNendo();
                 switch (kibetsu.getKi()) {
                     case 1:
-                        第1期の調定額 = 第1期の調定額.add(kibetsu.getDai1kiChoteiIdGaku());
+                        第1期の調定額 = 第1期の調定額.add(kibetsu.getDai1kiChoteiGaku());
                         break;
                     case 2:
-                        第2期の調定額 = 第2期の調定額.add(kibetsu.getDai2kiChoteiIdGaku());
+                        第2期の調定額 = 第2期の調定額.add(kibetsu.getDai2kiChoteiGaku());
                         break;
                     case 3:
-                        第3期の調定額 = 第3期の調定額.add(kibetsu.getDai3kiChoteiIdGaku());
+                        第3期の調定額 = 第3期の調定額.add(kibetsu.getDai3kiChoteiGaku());
                         break;
                     case 4:
-                        第4期の調定額 = 第4期の調定額.add(kibetsu.getDai4kiChoteiIdGaku());
+                        第4期の調定額 = 第4期の調定額.add(kibetsu.getDai4kiChoteiGaku());
                         break;
                     case 5:
-                        第5期の調定額 = 第5期の調定額.add(kibetsu.getDai5kiChoteiIdGaku());
+                        第5期の調定額 = 第5期の調定額.add(kibetsu.getDai5kiChoteiGaku());
                         break;
                     case 6:
-                        第6期の調定額 = 第6期の調定額.add(kibetsu.getDai6kiChoteiIdGaku());
+                        第6期の調定額 = 第6期の調定額.add(kibetsu.getDai6kiChoteiGaku());
                         break;
                     case 7:
-                        第7期の調定額 = 第7期の調定額.add(kibetsu.getDai7kiChoteiIdGaku());
+                        第7期の調定額 = 第7期の調定額.add(kibetsu.getDai7kiChoteiGaku());
                         break;
                     case 8:
-                        第8期の調定額 = 第8期の調定額.add(kibetsu.getDai8kiChoteiIdGaku());
+                        第8期の調定額 = 第8期の調定額.add(kibetsu.getDai8kiChoteiGaku());
                         break;
                     case 9:
-                        第9期の調定額 = 第9期の調定額.add(kibetsu.getDai9kiChoteiIdGaku());
+                        第9期の調定額 = 第9期の調定額.add(kibetsu.getDai9kiChoteiGaku());
                         break;
                     case 10:
-                        第10期の調定額 = 第10期の調定額.add(kibetsu.getDai10kiChoteiIdGaku());
+                        第10期の調定額 = 第10期の調定額.add(kibetsu.getDai10kiChoteiGaku());
                         break;
                     case 11:
-                        第11期の調定額 = 第11期の調定額.add(kibetsu.getDai11kiChoteiIdGaku());
+                        第11期の調定額 = 第11期の調定額.add(kibetsu.getDai11kiChoteiGaku());
                         break;
                     case 12:
-                        第12期の調定額 = 第12期の調定額.add(kibetsu.getDai12kiChoteiIdGaku());
+                        第12期の調定額 = 第12期の調定額.add(kibetsu.getDai12kiChoteiGaku());
                         break;
                     case 13:
-                        第13期の調定額 = 第13期の調定額.add(kibetsu.getDai13kiChoteiIdGaku());
+                        第13期の調定額 = 第13期の調定額.add(kibetsu.getDai13kiChoteiGaku());
                         break;
                     case 14:
-                        第14期の調定額 = 第14期の調定額.add(kibetsu.getDai14kiChoteiIdGaku());
+                        第14期の調定額 = 第14期の調定額.add(kibetsu.getDai14kiChoteiGaku());
                         break;
                     default:
                         break;
@@ -243,21 +242,21 @@ public class ChoteiboShukei {
                 if (ChoshuHohoKibetsu.特別徴収.code().equals(期別小計.getChoshuHouhou())) {
                     調定年度 = 期別小計.getChoteiNendo();
                     賦課年度 = 期別小計.getFukaNendo();
-                    特別徴収調合計 = 特別徴収調合計.add(期別小計.getDai1kiChoteiIdGakuCount()).add(
-                            期別小計.getDai2kiChoteiIdGakuCount()).add(期別小計.getDai3kiChoteiIdGakuCount())
-                            .add(期別小計.getDai4kiChoteiIdGakuCount()).add(期別小計.getDai5kiChoteiIdGakuCount())
-                            .add(期別小計.getDai6kiChoteiIdGakuCount());
+                    特別徴収調合計 = 特別徴収調合計.add(期別小計.getDai1kiChoteiGakuCount()).add(
+                            期別小計.getDai2kiChoteiGakuCount()).add(期別小計.getDai3kiChoteiGakuCount())
+                            .add(期別小計.getDai4kiChoteiGakuCount()).add(期別小計.getDai5kiChoteiGakuCount())
+                            .add(期別小計.getDai6kiChoteiGakuCount());
                 } else if (ChoshuHohoKibetsu.普通徴収.code().equals(期別小計.getChoshuHouhou())) {
                     調定年度 = 期別小計.getChoteiNendo();
                     賦課年度 = 期別小計.getFukaNendo();
-                    普通徴収調合計 = 普通徴収調合計.add(期別小計.getDai1kiChoteiIdGakuCount()).add(
-                            期別小計.getDai2kiChoteiIdGakuCount()).add(期別小計.getDai3kiChoteiIdGakuCount())
-                            .add(期別小計.getDai4kiChoteiIdGakuCount()).add(期別小計.getDai5kiChoteiIdGakuCount())
-                            .add(期別小計.getDai6kiChoteiIdGakuCount()).add(期別小計.getDai7kiChoteiIdGakuCount())
-                            .add(期別小計.getDai8kiChoteiIdGakuCount()).add(期別小計.getDai9kiChoteiIdGakuCount())
-                            .add(期別小計.getDai10kiChoteiIdGakuCount()).add(期別小計.getDai11kiChoteiIdGakuCount())
-                            .add(期別小計.getDai12kiChoteiIdGakuCount()).add(期別小計.getDai13kiChoteiIdGakuCount())
-                            .add(期別小計.getDai14kiChoteiIdGakuCount());
+                    普通徴収調合計 = 普通徴収調合計.add(期別小計.getDai1kiChoteiGakuCount()).add(
+                            期別小計.getDai2kiChoteiGakuCount()).add(期別小計.getDai3kiChoteiGakuCount())
+                            .add(期別小計.getDai4kiChoteiGakuCount()).add(期別小計.getDai5kiChoteiGakuCount())
+                            .add(期別小計.getDai6kiChoteiGakuCount()).add(期別小計.getDai7kiChoteiGakuCount())
+                            .add(期別小計.getDai8kiChoteiGakuCount()).add(期別小計.getDai9kiChoteiGakuCount())
+                            .add(期別小計.getDai10kiChoteiGakuCount()).add(期別小計.getDai11kiChoteiGakuCount())
+                            .add(期別小計.getDai12kiChoteiGakuCount()).add(期別小計.getDai13kiChoteiGakuCount())
+                            .add(期別小計.getDai14kiChoteiGakuCount());
                 }
             }
             KibetsuGokeigo 特別期別合計後 = KibetsuGokeigo.createParam(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.code(),

@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.core.choteibo;
 
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -44,12 +42,12 @@ public class KibetsuGokeigo {
             Decimal 普通徴収の調定額の合計,
             Decimal 特徴と普徴の合計) {
 
-        this.choteiNendo = requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        this.fukaNendo = requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
-        this.choshuHouhou = requireNonNull(徴収方法, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法"));
-        this.tobetsuChoteiGakuCount = requireNonNull(特別徴収の調定額の合計, UrSystemErrorMessages.値がnull.getReplacedMessage("特別徴収の調定額の合計"));
-        this.futsuChoteiGakuCount = requireNonNull(普通徴収の調定額の合計, UrSystemErrorMessages.値がnull.getReplacedMessage("普通徴収の調定額の合計"));
-        this.tobetsuTofutsuChoteiGakuCount = requireNonNull(特徴と普徴の合計, UrSystemErrorMessages.値がnull.getReplacedMessage("特徴と普徴の合計"));
+        this.choteiNendo = 調定年度;
+        this.fukaNendo = 賦課年度;
+        this.choshuHouhou = 徴収方法;
+        this.tobetsuChoteiGakuCount = 特別徴収の調定額の合計;
+        this.futsuChoteiGakuCount = 普通徴収の調定額の合計;
+        this.tobetsuTofutsuChoteiGakuCount = 特徴と普徴の合計;
     }
 
     /**

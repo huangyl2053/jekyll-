@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.core.choteibo;
 
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -59,17 +57,17 @@ public class DankaiGokeigo {
             Decimal 普徴者数の合計,
             Decimal 内併徴者数の合計) {
 
-        this.choteiNendo = requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        this.fukaNendo = requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
-        this.choshuHouhou = requireNonNull(徴収方法, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法"));
-        this.dogetsuFlag = requireNonNull(当月フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("当月フラグ"));
-        this.zengetsusueKensuCount = requireNonNull(前月末の全部件数の合計, UrSystemErrorMessages.値がnull.getReplacedMessage("前月末の全部件数の合計"));
-        this.zengetsusueChoteigakuCount = requireNonNull(前月末の全部調定額の合計, UrSystemErrorMessages.値がnull.getReplacedMessage("前月末の全部調定額の合計"));
-        this.dogetsusueKensuCount = requireNonNull(当月末の全部件数の合計, UrSystemErrorMessages.値がnull.getReplacedMessage("当月末の全部件数の合計"));
-        this.dogetsusueChoteigakuCount = requireNonNull(当月末の全部調定額の合計, UrSystemErrorMessages.値がnull.getReplacedMessage("当月末の全部調定額の合計"));
-        this.tokuchosyaKensuCount = requireNonNull(特徴者数の合計, UrSystemErrorMessages.値がnull.getReplacedMessage("特徴者数の合計"));
-        this.fuchosyaKensuCount = requireNonNull(普徴者数の合計, UrSystemErrorMessages.値がnull.getReplacedMessage("普徴者数の合計"));
-        this.naiheisyaKensuCount = requireNonNull(内併徴者数の合計, UrSystemErrorMessages.値がnull.getReplacedMessage("内併徴者数の合計"));
+        this.choteiNendo = 調定年度;
+        this.fukaNendo = 賦課年度;
+        this.choshuHouhou = 徴収方法;
+        this.dogetsuFlag = 当月フラグ;
+        this.zengetsusueKensuCount = 前月末の全部件数の合計;
+        this.zengetsusueChoteigakuCount = 前月末の全部調定額の合計;
+        this.dogetsusueKensuCount = 当月末の全部件数の合計;
+        this.dogetsusueChoteigakuCount = 当月末の全部調定額の合計;
+        this.tokuchosyaKensuCount = 特徴者数の合計;
+        this.fuchosyaKensuCount = 普徴者数の合計;
+        this.naiheisyaKensuCount = 内併徴者数の合計;
     }
 
     /**

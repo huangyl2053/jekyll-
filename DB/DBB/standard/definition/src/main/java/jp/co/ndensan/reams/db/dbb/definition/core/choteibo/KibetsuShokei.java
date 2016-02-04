@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.core.choteibo;
 
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -21,20 +19,20 @@ public class KibetsuShokei {
     private final FlexibleYear choteiNendo;
     private final FlexibleYear fukaNendo;
     private final RString choshuHouhou;
-    private final Decimal dai1kiChoteiIdGakuCount;
-    private final Decimal dai2kiChoteiIdGakuCount;
-    private final Decimal dai3kiChoteiIdGakuCount;
-    private final Decimal dai4kiChoteiIdGakuCount;
-    private final Decimal dai5kiChoteiIdGakuCount;
-    private final Decimal dai6kiChoteiIdGakuCount;
-    private final Decimal dai7kiChoteiIdGakuCount;
-    private final Decimal dai8kiChoteiIdGakuCount;
-    private final Decimal dai9kiChoteiIdGakuCount;
-    private final Decimal dai10kiChoteiIdGakuCount;
-    private final Decimal dai11kiChoteiIdGakuCount;
-    private final Decimal dai12kiChoteiIdGakuCount;
-    private final Decimal dai13kiChoteiIdGakuCount;
-    private final Decimal dai14kiChoteiIdGakuCount;
+    private final Decimal dai1kiChoteiGakuCount;
+    private final Decimal dai2kiChoteiGakuCount;
+    private final Decimal dai3kiChoteiGakuCount;
+    private final Decimal dai4kiChoteiGakuCount;
+    private final Decimal dai5kiChoteiGakuCount;
+    private final Decimal dai6kiChoteiGakuCount;
+    private final Decimal dai7kiChoteiGakuCount;
+    private final Decimal dai8kiChoteiGakuCount;
+    private final Decimal dai9kiChoteiGakuCount;
+    private final Decimal dai10kiChoteiGakuCount;
+    private final Decimal dai11kiChoteiGakuCount;
+    private final Decimal dai12kiChoteiGakuCount;
+    private final Decimal dai13kiChoteiGakuCount;
+    private final Decimal dai14kiChoteiGakuCount;
 
     /**
      * コンストラクタです。
@@ -77,23 +75,23 @@ public class KibetsuShokei {
             Decimal 第13期の調定額の小計,
             Decimal 第14期の調定額の小計) {
 
-        this.choteiNendo = requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        this.fukaNendo = requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
-        this.choshuHouhou = requireNonNull(徴収方法, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法"));
-        this.dai1kiChoteiIdGakuCount = requireNonNull(第1期の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("第1期の調定額の小計"));
-        this.dai2kiChoteiIdGakuCount = requireNonNull(第2期の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("第2期の調定額の小計"));
-        this.dai3kiChoteiIdGakuCount = requireNonNull(第3期の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("第3期の調定額の小計"));
-        this.dai4kiChoteiIdGakuCount = requireNonNull(第4期の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("第4期の調定額の小計"));
-        this.dai5kiChoteiIdGakuCount = requireNonNull(第5期の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("第5期の調定額の小計"));
-        this.dai6kiChoteiIdGakuCount = requireNonNull(第6期の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("第6期の調定額の小計"));
-        this.dai7kiChoteiIdGakuCount = requireNonNull(第7期の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("第7期の調定額の小計"));
-        this.dai8kiChoteiIdGakuCount = requireNonNull(第8期の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("第8期の調定額の小計"));
-        this.dai9kiChoteiIdGakuCount = requireNonNull(第9期の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("第9期の調定額の小計"));
-        this.dai10kiChoteiIdGakuCount = requireNonNull(第10期の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("第10期の調定額の小計"));
-        this.dai11kiChoteiIdGakuCount = requireNonNull(第11期の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("第11期の調定額の小計"));
-        this.dai12kiChoteiIdGakuCount = requireNonNull(第12期の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("第12期の調定額の小計"));
-        this.dai13kiChoteiIdGakuCount = requireNonNull(第13期の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("第13期の調定額の小計"));
-        this.dai14kiChoteiIdGakuCount = requireNonNull(第14期の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("第14期の調定額の小計"));
+        this.choteiNendo = 調定年度;
+        this.fukaNendo = 賦課年度;
+        this.choshuHouhou = 徴収方法;
+        this.dai1kiChoteiGakuCount = 第1期の調定額の小計;
+        this.dai2kiChoteiGakuCount = 第2期の調定額の小計;
+        this.dai3kiChoteiGakuCount = 第3期の調定額の小計;
+        this.dai4kiChoteiGakuCount = 第4期の調定額の小計;
+        this.dai5kiChoteiGakuCount = 第5期の調定額の小計;
+        this.dai6kiChoteiGakuCount = 第6期の調定額の小計;
+        this.dai7kiChoteiGakuCount = 第7期の調定額の小計;
+        this.dai8kiChoteiGakuCount = 第8期の調定額の小計;
+        this.dai9kiChoteiGakuCount = 第9期の調定額の小計;
+        this.dai10kiChoteiGakuCount = 第10期の調定額の小計;
+        this.dai11kiChoteiGakuCount = 第11期の調定額の小計;
+        this.dai12kiChoteiGakuCount = 第12期の調定額の小計;
+        this.dai13kiChoteiGakuCount = 第13期の調定額の小計;
+        this.dai14kiChoteiGakuCount = 第14期の調定額の小計;
     }
 
     /**

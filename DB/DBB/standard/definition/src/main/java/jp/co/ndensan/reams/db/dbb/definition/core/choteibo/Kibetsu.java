@@ -5,10 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.core.choteibo;
 
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -28,20 +26,20 @@ public class Kibetsu {
     private final RString choshuHouhou;
     private final int ki;
     private final Decimal choteiId;
-    private final Decimal dai1kiChoteiIdGaku;
-    private final Decimal dai2kiChoteiIdGaku;
-    private final Decimal dai3kiChoteiIdGaku;
-    private final Decimal dai4kiChoteiIdGaku;
-    private final Decimal dai5kiChoteiIdGaku;
-    private final Decimal dai6kiChoteiIdGaku;
-    private final Decimal dai7kiChoteiIdGaku;
-    private final Decimal dai8kiChoteiIdGaku;
-    private final Decimal dai9kiChoteiIdGaku;
-    private final Decimal dai10kiChoteiIdGaku;
-    private final Decimal dai11kiChoteiIdGaku;
-    private final Decimal dai12kiChoteiIdGaku;
-    private final Decimal dai13kiChoteiIdGaku;
-    private final Decimal dai14kiChoteiIdGaku;
+    private final Decimal dai1kiChoteiGaku;
+    private final Decimal dai2kiChoteiGaku;
+    private final Decimal dai3kiChoteiGaku;
+    private final Decimal dai4kiChoteiGaku;
+    private final Decimal dai5kiChoteiGaku;
+    private final Decimal dai6kiChoteiGaku;
+    private final Decimal dai7kiChoteiGaku;
+    private final Decimal dai8kiChoteiGaku;
+    private final Decimal dai9kiChoteiGaku;
+    private final Decimal dai10kiChoteiGaku;
+    private final Decimal dai11kiChoteiGaku;
+    private final Decimal dai12kiChoteiGaku;
+    private final Decimal dai13kiChoteiGaku;
+    private final Decimal dai14kiChoteiGaku;
 
     /**
      * コンストラクタです。
@@ -94,28 +92,28 @@ public class Kibetsu {
             Decimal 第13期の調定額,
             Decimal 第14期の調定額) {
 
-        this.choteiNendo = requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        this.fukaNendo = requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
-        this.tsuchishoNo = requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
-        this.rirekiNo = requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        this.hihokenshaNo = requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        this.choshuHouhou = requireNonNull(徴収方法, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法"));
-        this.ki = requireNonNull(期, UrSystemErrorMessages.値がnull.getReplacedMessage("期"));
-        this.choteiId = requireNonNull(調定ID, UrSystemErrorMessages.値がnull.getReplacedMessage("調定ID"));
-        this.dai1kiChoteiIdGaku = requireNonNull(第1期の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("第1期の調定額"));
-        this.dai2kiChoteiIdGaku = requireNonNull(第2期の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("第2期の調定額"));
-        this.dai3kiChoteiIdGaku = requireNonNull(第3期の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("第3期の調定額"));
-        this.dai4kiChoteiIdGaku = requireNonNull(第4期の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("第4期の調定額"));
-        this.dai5kiChoteiIdGaku = requireNonNull(第5期の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("第5期の調定額"));
-        this.dai6kiChoteiIdGaku = requireNonNull(第6期の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("第6期の調定額"));
-        this.dai7kiChoteiIdGaku = requireNonNull(第7期の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("第7期の調定額"));
-        this.dai8kiChoteiIdGaku = requireNonNull(第8期の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("第8期の調定額"));
-        this.dai9kiChoteiIdGaku = requireNonNull(第9期の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("第9期の調定額"));
-        this.dai10kiChoteiIdGaku = requireNonNull(第10期の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("第10期の調定額"));
-        this.dai11kiChoteiIdGaku = requireNonNull(第11期の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("第11期の調定額"));
-        this.dai12kiChoteiIdGaku = requireNonNull(第12期の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("第12期の調定額"));
-        this.dai13kiChoteiIdGaku = requireNonNull(第13期の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("第13期の調定額"));
-        this.dai14kiChoteiIdGaku = requireNonNull(第14期の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("第14期の調定額"));
+        this.choteiNendo = 調定年度;
+        this.fukaNendo = 賦課年度;
+        this.tsuchishoNo = 通知書番号;
+        this.rirekiNo = 履歴番号;
+        this.hihokenshaNo = 被保険者番号;
+        this.choshuHouhou = 徴収方法;
+        this.ki = 期;
+        this.choteiId = 調定ID;
+        this.dai1kiChoteiGaku = 第1期の調定額;
+        this.dai2kiChoteiGaku = 第2期の調定額;
+        this.dai3kiChoteiGaku = 第3期の調定額;
+        this.dai4kiChoteiGaku = 第4期の調定額;
+        this.dai5kiChoteiGaku = 第5期の調定額;
+        this.dai6kiChoteiGaku = 第6期の調定額;
+        this.dai7kiChoteiGaku = 第7期の調定額;
+        this.dai8kiChoteiGaku = 第8期の調定額;
+        this.dai9kiChoteiGaku = 第9期の調定額;
+        this.dai10kiChoteiGaku = 第10期の調定額;
+        this.dai11kiChoteiGaku = 第11期の調定額;
+        this.dai12kiChoteiGaku = 第12期の調定額;
+        this.dai13kiChoteiGaku = 第13期の調定額;
+        this.dai14kiChoteiGaku = 第14期の調定額;
     }
 
     /**

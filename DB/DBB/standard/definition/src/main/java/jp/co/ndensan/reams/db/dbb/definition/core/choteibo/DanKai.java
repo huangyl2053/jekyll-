@@ -5,9 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.core.choteibo;
 
-import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -23,7 +22,7 @@ public class DanKai {
     private final FlexibleYear fukaNendo;
     private final TsuchishoNo tsuchishoNo;
     private final Decimal rirekiNo;
-    private final RString hihokenshaNo;
+    private final HihokenshaNo hihokenshaNo;
     private final RString dankai;
     private final RString choshuHouhou;
     private final Decimal choteiId;
@@ -56,7 +55,7 @@ public class DanKai {
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
             Decimal 履歴番号,
-            RString 被保険者番号,
+            HihokenshaNo 被保険者番号,
             RString 段階,
             RString 徴収方法,
             Decimal 調定ID,
@@ -66,19 +65,19 @@ public class DanKai {
             Decimal 該当する段階の減の調定額,
             Decimal 該当する段階の当月末の調定額) {
 
-        this.choteiNendo = requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        this.fukaNendo = requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
-        this.tsuchishoNo = requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
-        this.rirekiNo = requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        this.hihokenshaNo = requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        this.dankai = requireNonNull(段階, UrSystemErrorMessages.値がnull.getReplacedMessage("段階"));
-        this.choshuHouhou = requireNonNull(徴収方法, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法"));
-        this.choteiId = requireNonNull(調定ID, UrSystemErrorMessages.値がnull.getReplacedMessage("調定ID"));
-        this.dogetsuFlag = requireNonNull(当月フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("当月フラグ"));
-        this.zengetsusueChoteigaku = requireNonNull(該当する段階の前月末の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("該当する段階の前月末の調定額"));
-        this.fueChoteigaku = requireNonNull(該当する段階の増の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("該当する段階の増の調定額"));
-        this.genChoteigaku = requireNonNull(該当する段階の減の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("該当する段階の減の調定額"));
-        this.dogetsusueChoteigaku = requireNonNull(該当する段階の当月末の調定額, UrSystemErrorMessages.値がnull.getReplacedMessage("該当する段階の当月末の調定額"));
+        this.choteiNendo = 調定年度;
+        this.fukaNendo = 賦課年度;
+        this.tsuchishoNo = 通知書番号;
+        this.rirekiNo = 履歴番号;
+        this.hihokenshaNo = 被保険者番号;
+        this.dankai = 段階;
+        this.choshuHouhou = 徴収方法;
+        this.choteiId = 調定ID;
+        this.dogetsuFlag = 当月フラグ;
+        this.zengetsusueChoteigaku = 該当する段階の前月末の調定額;
+        this.fueChoteigaku = 該当する段階の増の調定額;
+        this.genChoteigaku = 該当する段階の減の調定額;
+        this.dogetsusueChoteigaku = 該当する段階の当月末の調定額;
     }
 
     /**
@@ -104,7 +103,7 @@ public class DanKai {
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
             Decimal 履歴番号,
-            RString 被保険者番号,
+            HihokenshaNo 被保険者番号,
             RString 段階,
             RString 徴収方法,
             Decimal 調定ID,

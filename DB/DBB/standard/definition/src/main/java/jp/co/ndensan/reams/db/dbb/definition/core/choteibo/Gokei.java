@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.definition.core.choteibo;
 
 import java.util.List;
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
  * 合計用パラメータクラスです。
@@ -30,8 +28,8 @@ public class Gokei {
             List<KibetsuShokei> 期別調定額小計リスト,
             List<DankaiShokei> 段階小計リスト) {
 
-        this.kibetsuShokeiList = requireNonNull(期別調定額小計リスト, UrSystemErrorMessages.値がnull.getReplacedMessage("期別調定額小計リスト"));
-        this.dankaiShokeiList = requireNonNull(段階小計リスト, UrSystemErrorMessages.値がnull.getReplacedMessage("段階小計リスト"));
+        this.kibetsuShokeiList = 期別調定額小計リスト;
+        this.dankaiShokeiList = 段階小計リスト;
     }
 
     /**

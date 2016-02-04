@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.core.choteibo;
 
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -22,7 +20,7 @@ public class DankaiChoteigakuShokei {
     private final FlexibleYear fukaNendo;
     private final RString choshuHouhou;
     private final RString dankai;
-    private final int dogetsuFlag;
+    private final Integer dogetsuFlag;
     private final Decimal zengetsusueChoteigakuCount;
     private final Decimal dogetsusueChoteigakuCount;
 
@@ -43,17 +41,17 @@ public class DankaiChoteigakuShokei {
             FlexibleYear 賦課年度,
             RString 段階,
             RString 徴収方法,
-            int 当月フラグ,
+            Integer 当月フラグ,
             Decimal 該当する段階の前月末の調定額の小計,
             Decimal 該当する段階の当月末の調定額の小計) {
 
-        this.choteiNendo = requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        this.fukaNendo = requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
-        this.dankai = requireNonNull(段階, UrSystemErrorMessages.値がnull.getReplacedMessage("段階"));
-        this.choshuHouhou = requireNonNull(徴収方法, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法"));
-        this.dogetsuFlag = requireNonNull(当月フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("当月フラグ"));
-        this.zengetsusueChoteigakuCount = requireNonNull(該当する段階の前月末の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("該当する段階の前月末の調定額の小計"));
-        this.dogetsusueChoteigakuCount = requireNonNull(該当する段階の当月末の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("該当する段階の当月末の調定額の小計"));
+        this.choteiNendo = 調定年度;
+        this.fukaNendo = 賦課年度;
+        this.dankai = 段階;
+        this.choshuHouhou = 徴収方法;
+        this.dogetsuFlag = 当月フラグ;
+        this.zengetsusueChoteigakuCount = 該当する段階の前月末の調定額の小計;
+        this.dogetsusueChoteigakuCount = 該当する段階の当月末の調定額の小計;
     }
 
     /**
@@ -73,7 +71,7 @@ public class DankaiChoteigakuShokei {
             FlexibleYear 賦課年度,
             RString 段階,
             RString 徴収方法,
-            int 当月フラグ,
+            Integer 当月フラグ,
             Decimal 該当する段階の前月末の調定額の小計,
             Decimal 該当する段階の当月末の調定額の小計
     ) {

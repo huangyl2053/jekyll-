@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.core.choteibo;
 
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -74,22 +72,22 @@ public class DankaiShokei {
             Decimal 該当する段階の普徴者数の件数,
             Decimal 該当する段階の内併徴者数の件数) {
 
-        this.choteiNendo = requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        this.fukaNendo = requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
-        this.choshuHouhou = requireNonNull(徴収方法, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法"));
-        this.dankai = requireNonNull(段階, UrSystemErrorMessages.値がnull.getReplacedMessage("段階"));
-        this.dogetsuFlag = requireNonNull(当月フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("当月フラグ"));
-        this.zengetsusueKensu = requireNonNull(該当する段階の前月末の件数, UrSystemErrorMessages.値がnull.getReplacedMessage("該当する段階の前月末の件数"));
-        this.zengetsusueChoteigakuCount = requireNonNull(該当する段階の前月末の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("該当する段階の前月末の調定額の小計"));
-        this.fueKensu = requireNonNull(該当する段階の増の件数, UrSystemErrorMessages.値がnull.getReplacedMessage("該当する段階の増の件数"));
-        this.fueChoteigakuCount = requireNonNull(該当する段階の増の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("該当する段階の増の調定額の小計"));
-        this.genKensu = requireNonNull(該当する段階の減の件数, UrSystemErrorMessages.値がnull.getReplacedMessage("該当する段階の減の件数"));
-        this.genChoteigakuCount = requireNonNull(該当する段階の減の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("該当する段階の減の調定額の小計"));
-        this.dogetsusueKensu = requireNonNull(該当する段階の当月末の件数, UrSystemErrorMessages.値がnull.getReplacedMessage("該当する段階の当月末の件数"));
-        this.dogetsusueChoteigakuCount = requireNonNull(該当する段階の当月末の調定額の小計, UrSystemErrorMessages.値がnull.getReplacedMessage("該当する段階の当月末の調定額の小計"));
-        this.tokuchosyaKensu = requireNonNull(該当する段階の特徴者数の件数, UrSystemErrorMessages.値がnull.getReplacedMessage("該当する段階の特徴者数の件数"));
-        this.fuchosyaKensu = requireNonNull(該当する段階の普徴者数の件数, UrSystemErrorMessages.値がnull.getReplacedMessage("該当する段階の普徴者数の件数"));
-        this.naiheisyaKensu = requireNonNull(該当する段階の内併徴者数の件数, UrSystemErrorMessages.値がnull.getReplacedMessage("該当する段階の内併徴者数の件数"));
+        this.choteiNendo = 調定年度;
+        this.fukaNendo = 賦課年度;
+        this.choshuHouhou = 徴収方法;
+        this.dankai = 段階;
+        this.dogetsuFlag = 当月フラグ;
+        this.zengetsusueKensu = 該当する段階の前月末の件数;
+        this.zengetsusueChoteigakuCount = 該当する段階の前月末の調定額の小計;
+        this.fueKensu = 該当する段階の増の件数;
+        this.fueChoteigakuCount = 該当する段階の増の調定額の小計;
+        this.genKensu = 該当する段階の減の件数;
+        this.genChoteigakuCount = 該当する段階の減の調定額の小計;
+        this.dogetsusueKensu = 該当する段階の当月末の件数;
+        this.dogetsusueChoteigakuCount = 該当する段階の当月末の調定額の小計;
+        this.tokuchosyaKensu = 該当する段階の特徴者数の件数;
+        this.fuchosyaKensu = 該当する段階の普徴者数の件数;
+        this.naiheisyaKensu = 該当する段階の内併徴者数の件数;
     }
 
     /**
