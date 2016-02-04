@@ -38,7 +38,6 @@ public class DbT4209NinteichosahyoKinyuItemChildEntity extends DbTableEntityBase
     private int remban;
     private Code koroshoIfShikibetsuCode;
     private RString serviceJokyoKinyu;
-    private RDateTime serviceJokyoImageSharedFileId;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -193,29 +192,6 @@ public class DbT4209NinteichosahyoKinyuItemChildEntity extends DbTableEntityBase
     }
 
     /**
-     * サービスの状況イメージ共有ファイルIDのgetメソッドです。
-     * <br/>
-     * <br/>市町村特別給付
-     *
-     * @return サービスの状況イメージ共有ファイルID
-     */
-    @CheckForNull
-    public RDateTime getServiceJokyoImageSharedFileId() {
-        return serviceJokyoImageSharedFileId;
-    }
-
-    /**
-     * サービスの状況イメージ共有ファイルIDのsetメソッドです。
-     * <br/>
-     * <br/>市町村特別給付
-     *
-     * @param serviceJokyoImageSharedFileId サービスの状況イメージ共有ファイルID
-     */
-    public void setServiceJokyoImageSharedFileId(RDateTime serviceJokyoImageSharedFileId) {
-        this.serviceJokyoImageSharedFileId = serviceJokyoImageSharedFileId;
-    }
-
-    /**
      * このエンティティの主キーが他の{@literal DbT4209NinteichosahyoKinyuItemChildEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
@@ -249,7 +225,6 @@ public class DbT4209NinteichosahyoKinyuItemChildEntity extends DbTableEntityBase
         this.remban = entity.remban;
         this.koroshoIfShikibetsuCode = entity.koroshoIfShikibetsuCode;
         this.serviceJokyoKinyu = entity.serviceJokyoKinyu;
-        this.serviceJokyoImageSharedFileId = entity.serviceJokyoImageSharedFileId;
     }
 
     /**
@@ -259,7 +234,7 @@ public class DbT4209NinteichosahyoKinyuItemChildEntity extends DbTableEntityBase
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, ninteichosaRirekiNo, remban, koroshoIfShikibetsuCode, serviceJokyoKinyu, serviceJokyoImageSharedFileId);
+        return super.toMd5(shinseishoKanriNo, ninteichosaRirekiNo, remban, koroshoIfShikibetsuCode, serviceJokyoKinyu);
     }
 
 // </editor-fold>

@@ -6,6 +6,7 @@ shujiiIryoKikanCode,varchar,RString,,,,,主治医医療機関コード,A
 shujiiCode,varchar,RString,,,,,主治医コード,A
 ikenshoJuryoYMD,UDD015YMD,FlexibleDate,,,,,主治医意見書受領年月日,A
 ikenshoKinyuYMD,UDD015YMD,FlexibleDate,,,,,主治医意見書記入年月日,A
+ikenshoReadYMD,UDD015YMD,FlexibleDate,,,,,主治医意見書読取年月日,A
 ikenshoSakuseiKaisuKubun,UDD035Code,Code,,,,,意見書作成回数区分,A
 zaitakuShisetsuKubun,UDD035Code,Code,,,,,在宅／施設区分,A
 ikenshoDoiFlag,bool,boolean,,,,,意見書同意フラグ,A

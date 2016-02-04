@@ -18,4 +18,8 @@ teikeibunMojiSizeShiyoKubun,varchar,RString,,,,,定型文文字サイズ使用�
 kozaMaskShiyoKubun,varchar,RString,,,,,口座マスク使用区分,A
 kozaMeigininKanaYusenShiyoKubun,varchar,RString,,,,,口座名義人カナ優先使用区分,A
 daikoPrintShiyoKubun,varchar,RString,,,,,代行プリント使用区分,A
+denshiKoinInjiUmuShiyoKubun,varchar,RString,,,,,電子行公印印字有無使用区分,A
+shuchoMeiInjiIchiShiyoKubun,varchar,RString,,,,,首長名印字位置使用区分,A
+koinShoryakuInjiUmuShiyoKubun,varchar,RString,,,,,公印書略印字有無使用区分,A
+koinMojiretsuInjiUmuShiyoKubun,varchar,RString,,,,,公印文字列印字有無使用区分,A
 chikuhyojiShiyoKubun,varchar,RString,,,,,地区表示使用区分,A

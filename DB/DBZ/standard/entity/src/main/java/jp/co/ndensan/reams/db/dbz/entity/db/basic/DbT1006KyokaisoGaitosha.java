@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT1006KyokaisoGaitosha implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -48,6 +48,10 @@ public enum DbT1006KyokaisoGaitosha implements IColumnDefinition {
      * 履歴番号
      */
     rirekiNo(5, 0),
+    /**
+     * リンク番号
+     */
+    linkNo(5, 0),
     /**
      * 適用開始年月日
      */
@@ -103,7 +107,11 @@ public enum DbT1006KyokaisoGaitosha implements IColumnDefinition {
     /**
      * 保険料納付減額フラグ
      */
-    hokenryoNofuGengakuFlag(1, 0);
+    hokenryoNofuGengakuFlag(1, 0),
+    /**
+     * 論理削除フラグ
+     */
+    logicalDeletedFlag(1, 0);
 
     private final int maxLength;
     private final int scale;
