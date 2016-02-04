@@ -35,7 +35,6 @@ public class NinteiChosaHoshuTankaIdentifierTest extends DbeTestBase {
 //TODO 主キー値を適切な値に置換してください
         調査区分 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_調査区分;
         訪問種別 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_訪問種別;
-        意見書入手パターン = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_意見書入手パターン;
         開始年月 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_開始年月;
         終了年月 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_終了年月;
     }
@@ -45,7 +44,7 @@ public class NinteiChosaHoshuTankaIdentifierTest extends DbeTestBase {
         @Test
         public void シリアライズできる() {
             NinteiChosaHoshuTankaIdentifier sut
-                    = new NinteiChosaHoshuTankaIdentifier(調査区分, 訪問種別, 意見書入手パターン, 開始年月, 終了年月);
+                    = new NinteiChosaHoshuTankaIdentifier(調査区分, 訪問種別, 開始年月, 終了年月);
             assertThat(sut, is(serializable()));
         }
     }
