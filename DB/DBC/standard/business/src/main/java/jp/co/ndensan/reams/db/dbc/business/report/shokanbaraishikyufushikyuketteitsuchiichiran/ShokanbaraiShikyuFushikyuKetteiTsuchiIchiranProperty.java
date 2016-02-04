@@ -24,7 +24,13 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranProperty
         extends ReportPropertyBase<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource> {
 
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("title")));
+    private static final List<RString> PAGE_BREAK_KEYS
+            = Collections.unmodifiableList(Arrays.asList(
+                            new RString("kaipage1"),
+                            new RString("kaipage2"),
+                            new RString("kaipage3"),
+                            new RString("kaipage4"),
+                            new RString("kaipage5")));
 
     public ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranProperty() {
         super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200023.getReportId());
@@ -35,6 +41,8 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranProperty
             Breakers<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource> breakers,
             BreakerCatalog<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
+
 
             PAGE_BREAK_KEYS) {
             @Override
