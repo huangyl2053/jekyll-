@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SeikatsuSe
  * @author 自動生成
  */
 public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIkenDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -351,16 +351,6 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     @JsonIgnore
     public void  setTxtShonotaIryoServiceShosai(TextBox txtShonotaIryoServiceShosai) {
         this.getIgakutekiKanriHitsuyosei().setTxtShonotaIryoServiceShosai(txtShonotaIryoServiceShosai);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkIgakutekiKanriHitsuyoSei() {
-        return this.getIgakutekiKanriHitsuyosei().getChkIgakutekiKanriHitsuyoSei();
-    }
-
-    @JsonIgnore
-    public void  setChkIgakutekiKanriHitsuyoSei(CheckBoxList chkIgakutekiKanriHitsuyoSei) {
-        this.getIgakutekiKanriHitsuyosei().setChkIgakutekiKanriHitsuyoSei(chkIgakutekiKanriHitsuyoSei);
     }
 
     @JsonIgnore

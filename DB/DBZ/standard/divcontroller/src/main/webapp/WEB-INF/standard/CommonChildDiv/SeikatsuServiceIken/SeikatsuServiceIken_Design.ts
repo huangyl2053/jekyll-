@@ -109,10 +109,6 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtShonotaIryoServiceShosai"));
             }
 
-            public chkIgakutekiKanriHitsuyoSei(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkIgakutekiKanriHitsuyoSei"));
-            }
-
             public chkSonotaIryoServiceHitsuyoSei(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkSonotaIryoServiceHitsuyoSei"));
             }

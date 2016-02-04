@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IgakutekiKanriHitsuyoseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,8 +27,6 @@ public class IgakutekiKanriHitsuyoseiDiv extends Panel {
     private CheckBoxList chkSonotaIryoService;
     @JsonProperty("txtShonotaIryoServiceShosai")
     private TextBox txtShonotaIryoServiceShosai;
-    @JsonProperty("chkIgakutekiKanriHitsuyoSei")
-    private CheckBoxList chkIgakutekiKanriHitsuyoSei;
     @JsonProperty("chkSonotaIryoServiceHitsuyoSei")
     private CheckBoxList chkSonotaIryoServiceHitsuyoSei;
 
@@ -90,24 +88,6 @@ public class IgakutekiKanriHitsuyoseiDiv extends Panel {
     @JsonProperty("txtShonotaIryoServiceShosai")
     public void setTxtShonotaIryoServiceShosai(TextBox txtShonotaIryoServiceShosai) {
         this.txtShonotaIryoServiceShosai = txtShonotaIryoServiceShosai;
-    }
-
-    /*
-     * getchkIgakutekiKanriHitsuyoSei
-     * @return chkIgakutekiKanriHitsuyoSei
-     */
-    @JsonProperty("chkIgakutekiKanriHitsuyoSei")
-    public CheckBoxList getChkIgakutekiKanriHitsuyoSei() {
-        return chkIgakutekiKanriHitsuyoSei;
-    }
-
-    /*
-     * setchkIgakutekiKanriHitsuyoSei
-     * @param chkIgakutekiKanriHitsuyoSei chkIgakutekiKanriHitsuyoSei
-     */
-    @JsonProperty("chkIgakutekiKanriHitsuyoSei")
-    public void setChkIgakutekiKanriHitsuyoSei(CheckBoxList chkIgakutekiKanriHitsuyoSei) {
-        this.chkIgakutekiKanriHitsuyoSei = chkIgakutekiKanriHitsuyoSei;
     }
 
     /*

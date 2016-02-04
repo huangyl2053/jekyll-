@@ -104,10 +104,6 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtShonotaIryoServiceShosai"));
             };
 
-            Controls.prototype.chkIgakutekiKanriHitsuyoSei = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkIgakutekiKanriHitsuyoSei"));
-            };
-
             Controls.prototype.chkSonotaIryoServiceHitsuyoSei = function () {
                 return new UZA.CheckBoxList(this.convFiledName("chkSonotaIryoServiceHitsuyoSei"));
             };
