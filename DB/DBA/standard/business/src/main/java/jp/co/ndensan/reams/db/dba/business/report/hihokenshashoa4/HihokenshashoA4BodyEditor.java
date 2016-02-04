@@ -53,21 +53,23 @@ public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
         source.hihokana = item.getHihokana();
         source.hihoname = item.getHihoname();
         source.umareG = item.getUmareG();
-        source.umareYyyy = item.getUmareYyyy().isEmpty() ? RString.EMPTY : new RDate(item.getUmareYyyy().toString()).wareki().
-                eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).getEra();
-        source.umareYy = item.getUmareYyyy().isEmpty() ? RString.EMPTY : new RDate(item.getUmareYyyy().toString()).seireki().getYear();
+        RString umareYyyy = item.getUmareYyyy();
+        if (!umareYyyy.isEmpty()) {
+            source.umareYyyy = new RDate(umareYyyy.toString()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).getEra();
+            source.umareYy = new RDate(umareYyyy.toString()).seireki().getYear();
+        }
+
         source.umareMm = item.getUmareMm();
         source.umareDd = item.getUmareDd();
         source.seibetsu = item.getSeibetsu();
         RString kofuymd = item.getKofuymd();
         source.kofuymdGengo = kofuymd;
-        source.kofuymdYy = kofuymd.isEmpty() ? RString.EMPTY : new RDate(kofuymd.toString())
-                .seireki().getYear();
-        source.kofuymdMm = kofuymd.isEmpty() ? RString.EMPTY : new RDate(kofuymd.toString())
-                .seireki().getMonth();
-        source.kofuymdDd = kofuymd.isEmpty() ? RString.EMPTY : new RDate(kofuymd.toString())
-                .seireki().getDay();
+        if (!kofuymd.isEmpty()) {
+            source.kofuymdYy = new RDate(kofuymd.toString()).seireki().getYear();
+            source.kofuymdMm = new RDate(kofuymd.toString()).seireki().getMonth();
+            source.kofuymdDd = new RDate(kofuymd.toString()).seireki().getDay();
+        }
         source.saikofu1 = item.getSaikofu1();
         source.hokenshano1 = item.getHokenshano1();
         source.hokenshano2 = item.getHokenshano2();

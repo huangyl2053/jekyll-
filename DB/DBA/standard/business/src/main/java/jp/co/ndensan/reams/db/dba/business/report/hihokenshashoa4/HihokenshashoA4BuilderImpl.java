@@ -19,7 +19,6 @@ public class HihokenshashoA4BuilderImpl implements IHihokenshashoA4Builder {
     
     /**
      * インスタンスを生成します。
-     * @param headEditor {@link IHihokenshashoA4Editor}
      * @param bodyEditor {@link IHihokenshashoA4Editor}
      */
     HihokenshashoA4BuilderImpl(IHihokenshashoA4Editor bodyEditor) {

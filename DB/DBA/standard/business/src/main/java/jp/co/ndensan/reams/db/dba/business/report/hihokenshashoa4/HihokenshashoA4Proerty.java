@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dba.business.report.hihokenshashoa4;
 
 import java.util.Arrays;
@@ -11,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.reportId.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashoa4.HihokenshashoA4ReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -21,21 +19,20 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
- * 
+ *
  * {@link HihokenshashoA4ReportSource}のプロパティです。
  */
 public class HihokenshashoA4Proerty extends ReportPropertyBase<HihokenshashoA4ReportSource> {
-    
-    private static final ReportId ID = ReportIdDBA.DBA100002.getReportId();
-     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("hihokenshanno")));
-    
+
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("hihokenshanno")));
+
     /**
      * コンストラクタです。
      */
     public HihokenshashoA4Proerty() {
-        super(SubGyomuCode.DBA介護資格, ID);
+        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100002.getReportId());
     }
-    
+
     @Override
     public Breakers<HihokenshashoA4ReportSource> defineBreakers(
             Breakers<HihokenshashoA4ReportSource> breakers,
