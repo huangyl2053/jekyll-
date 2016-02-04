@@ -142,13 +142,7 @@ public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShoku
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号),
                                 eq(renban, 連番)))
-                .order(by(DbT3043ShokanShokujiHiyo.serviceTeikyoYM, Order.DESC),
-                        by(DbT3043ShokanShokujiHiyo.hiHokenshaNo, Order.DESC),
-                        by(DbT3043ShokanShokujiHiyo.seiriNp, Order.DESC),
-                        by(DbT3043ShokanShokujiHiyo.jigyoshaNo, Order.DESC),
-                        by(DbT3043ShokanShokujiHiyo.yoshikiNo, Order.DESC),
-                        by(DbT3043ShokanShokujiHiyo.meisaiNo, Order.DESC),
-                        by(DbT3043ShokanShokujiHiyo.renban, Order.DESC)).
+                .order(by(DbT3043ShokanShokujiHiyo.renban, Order.DESC)).
                 toObject(DbT3043ShokanShokujiHiyoEntity.class);
     }
 
@@ -178,13 +172,7 @@ public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShoku
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号)))
-                .order(by(DbT3043ShokanShokujiHiyo.serviceTeikyoYM, Order.DESC),
-                        by(DbT3043ShokanShokujiHiyo.hiHokenshaNo, Order.DESC),
-                        by(DbT3043ShokanShokujiHiyo.seiriNp, Order.DESC),
-                        by(DbT3043ShokanShokujiHiyo.jigyoshaNo, Order.DESC),
-                        by(DbT3043ShokanShokujiHiyo.yoshikiNo, Order.DESC),
-                        by(DbT3043ShokanShokujiHiyo.meisaiNo, Order.DESC),
-                        by(DbT3043ShokanShokujiHiyo.renban, Order.DESC)).
+                .order(by(DbT3043ShokanShokujiHiyo.renban, Order.DESC)).
                 toList(DbT3043ShokanShokujiHiyoEntity.class);
     }
 
