@@ -26,13 +26,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
- * ビジネス設計_DBBBZ33003_特徴仮算定賦課確定。
+ * 特徴仮算定賦課確定のクラスです
  */
 public class TokuchoKarisanteiFukaKakuteiManager {
 
     private final DbT7022ShoriDateKanriDac 介護賦課Dac;
     private static final RString 最大年度内連番 = new RString("0001");
-    private static final RString 処理済み連番 = new RString("0001");
     private final MapperProvider mapperProvider;
 
     /**
@@ -48,6 +47,7 @@ public class TokuchoKarisanteiFukaKakuteiManager {
      * 単体テスト用のコンストラクタです。
      *
      * @param DbT7022ShoriDateKanriDac 介護賦課Dac
+     * @param MapperProvider mapperProvider
      */
     TokuchoKarisanteiFukaKakuteiManager(DbT7022ShoriDateKanriDac 介護賦課Dac, MapperProvider mapperProvider) {
         this.介護賦課Dac = 介護賦課Dac;
@@ -55,9 +55,9 @@ public class TokuchoKarisanteiFukaKakuteiManager {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link SikakuKanrenIdoFinder}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link TokuchoKarisanteiFukaKakuteiManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link SikakuKanrenIdoFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TokuchoKarisanteiFukaKakuteiManager}のインスタンス
      */
     public static TokuchoKarisanteiFukaKakuteiManager createInstance() {
         return InstanceProvider.create(TokuchoKarisanteiFukaKakuteiManager.class);
@@ -71,23 +71,24 @@ public class TokuchoKarisanteiFukaKakuteiManager {
      * @return 基準日時
      */
     @Transaction
-    public TokuchoKarisanteiFukaKakuteiEntity selectKaijun(FlexibleYear 賦課年度, RString 処理名) {
+    public FlexibleDate getKijunDateTime(FlexibleYear 賦課年度, RString 処理名) {
         DbT7022ShoriDateKanriEntity 基準日時 = 介護賦課Dac.selectKaijun(賦課年度, 処理名);
-        if (基準日時 == null || 基準日時.getKijunYMD().isEmpty()) {
+        if (基準日時 != null) {
+            return (基準日時.getKijunYMD());
+        } else {
             return null;
         }
-        return new TokuchoKarisanteiFukaKakuteiEntity(基準日時);
     }
 
     /**
-     * 処理日付管理マスタ.基準日時を取得します。
+     * 処理日付管理テーブルを登録する。.基準日時を更新する。。
      *
      * @param 賦課年度 FlexibleYear
      * @param 処理名 処理名
      * @return 基準日時
      */
     @Transaction
-    public TokuchoKarisanteiFukaKakuteiEntity selectKaijun_更新(FlexibleYear 賦課年度, RString 処理名) {
+    public TokuchoKarisanteiFukaKakuteiEntity updateKijunDateTime(FlexibleYear 賦課年度, RString 処理名) {
         DbT7022ShoriDateKanriEntity 基準日時 = 介護賦課Dac.selectKaijun_更新(賦課年度, 処理名);
         if (処理名.equals(ShoriName.特徴仮算定賦課確定.get名称())
                 || 処理名.equals(ShoriName.普徴仮算定賦課確定.get名称()) || 処理名.equals(ShoriName.本算定賦課確定.get名称())) {
@@ -96,7 +97,7 @@ public class TokuchoKarisanteiFukaKakuteiManager {
             介護賦課Dac.save(基準日時);
             return new TokuchoKarisanteiFukaKakuteiEntity(基準日時);
         }
-
+        updateKijunDateTime_登録(賦課年度, 処理名);
         return new TokuchoKarisanteiFukaKakuteiEntity(基準日時);
     }
 
@@ -108,10 +109,10 @@ public class TokuchoKarisanteiFukaKakuteiManager {
      * @return 基準日時
      */
     @Transaction
-    public TokuchoKarisanteiFukaKakuteiEntity selectKaijun_処理(FlexibleYear 賦課年度, RString 処理名) {
+    private TokuchoKarisanteiFukaKakuteiEntity updateKijunDateTime_登録(FlexibleYear 賦課年度, RString 処理名) {
         DbT7022ShoriDateKanriEntity 更新_処理 = 介護賦課Dac.selectKaijun_処理(賦課年度, 処理名);
-        if (処理名.equals(ShoriName.仮算定異動賦課確定.get名称()) || 処理名.equals(ShoriName.異動賦課確定.get名称())) {
-            if (更新_処理.getNendoNaiRenban() == null || 更新_処理.getNendoNaiRenban().isEmpty()) {
+        if (更新_処理.getNendoNaiRenban() == null) {
+            if (処理名.equals(ShoriName.仮算定異動賦課確定.get名称()) || 処理名.equals(ShoriName.異動賦課確定.get名称())) {
                 更新_処理.setNendoNaiRenban(最大年度内連番);
             } else {
                 更新_処理.setNendoNaiRenban(
@@ -122,10 +123,9 @@ public class TokuchoKarisanteiFukaKakuteiManager {
             更新_処理.setShichosonCode(association.get地方公共団体コード());
             更新_処理.setShoriName(処理名);
             更新_処理.setNendo(賦課年度);
-            更新_処理.setShoriEdaban(new RString("0001"));
+            更新_処理.setShoriEdaban(最大年度内連番);
             更新_処理.setKijunYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
             更新_処理.setKijunTimestamp(new YMDHMS(RDate.getNowDateTime()));
-
         }
         return new TokuchoKarisanteiFukaKakuteiEntity(更新_処理);
     }
@@ -137,6 +137,7 @@ public class TokuchoKarisanteiFukaKakuteiManager {
      * @return 基準日時
      */
     @Transaction
+    // TODO  内部QA：540 (賦課処理状況を更新)
     public boolean updateFukaShoriJyokyo(TokuchoKarisanteiFukaKakutei params) {
         ItokuchokarisanteiMapper ItokuchokarisanteiMapper = mapperProvider.create(ItokuchokarisanteiMapper.class);
         return ItokuchokarisanteiMapper.updShoKofuKaishuJoho(params);
