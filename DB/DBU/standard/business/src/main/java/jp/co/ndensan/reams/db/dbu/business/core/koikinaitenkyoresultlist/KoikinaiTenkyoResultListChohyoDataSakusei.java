@@ -13,10 +13,10 @@ import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoRe
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 広域内転居結果一覧表帳票データ作成
@@ -36,10 +36,11 @@ public class KoikinaiTenkyoResultListChohyoDataSakusei {
         List<KoikinaiTenkyoResultEntity> lists = new ArrayList<>();
         if (entity.getEntity() == null || entity.getEntity().isEmpty()) {
             KoikinaiTenkyoResultEntity koikiEntity = new KoikinaiTenkyoResultEntity();
-            koikiEntity.set印刷日時(new RString(RDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toString()));
+            koikiEntity.set印刷日時(RDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RDate.getNowTime().
+                            toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
             koikiEntity.setページ数(new RString(Integer.valueOf(1).toString()));
-            koikiEntity.set市町村コード(new RString(entity.get市町村コード().toString()));
+            koikiEntity.set市町村コード(entity.get市町村コード().value());
             koikiEntity.set市町村名(entity.get市町村名());
 
             lists.add(koikiEntity);
@@ -49,14 +50,17 @@ public class KoikinaiTenkyoResultListChohyoDataSakusei {
             for (KoikinaiTenkyoEntity kokiten : entity.getEntity()) {
 
                 KoikinaiTenkyoResultEntity koikiEntity = new KoikinaiTenkyoResultEntity();
-                koikiEntity.set印刷日時(new RString(FlexibleDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toString()));
+//                koikiEntity.set印刷日時(RDate.getNowDate().wareki().eraType(EraType.KANJI).
+//                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+                koikiEntity.set印刷日時(RDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RDate.getNowTime().
+                                toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
                 //TODO ページ数具体怎么获取不明确
                 koikiEntity.set市町村コード(new RString(entity.get市町村コード().toString()));
                 koikiEntity.set市町村名(entity.get市町村名());
-                koikiEntity.set被保険者番号(new RString((kokiten.get被保険者番号().toString())));
-                koikiEntity.set氏名カナ(new RString(kokiten.get氏名カナ().toString()));
-                koikiEntity.set旧住民コード(new RString(kokiten.get旧住民コード().toString()));
+                koikiEntity.set被保険者番号(kokiten.get被保険者番号().value());
+                koikiEntity.set氏名カナ(kokiten.get氏名カナ().value());
+                koikiEntity.set旧住民コード(kokiten.get旧住民コード().value());
                 koikiEntity.set前住所(kokiten.get前住所());
                 koikiEntity.set転出予定日(kokiten.get転出予定日().wareki().eraType(EraType.KANJI_RYAKU).
                         firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
