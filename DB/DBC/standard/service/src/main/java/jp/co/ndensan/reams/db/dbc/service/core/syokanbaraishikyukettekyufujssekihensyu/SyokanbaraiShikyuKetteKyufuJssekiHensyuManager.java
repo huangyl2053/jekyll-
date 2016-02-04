@@ -486,6 +486,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3019entity.setAtoHoshasenChiryoTensu(償還払請求緊急時施設療養.getHoshasenChiryoTanisu());
                 dbT3019entity.setShinsaYM(entity.get審査年月().getYearMonth());
                 dbT3019entity.setSeiriNo(償還払請求緊急時施設療養.getSeiriNo());
+                dbT3019entity.setSaishinsaKaisu(Decimal.ZERO);
                 dbT3019entity.setState(EntityDataState.Added);
                 給付実績緊急時施設療養Dac.save(dbT3019entity);
             }
