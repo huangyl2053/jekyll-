@@ -170,8 +170,8 @@
         <id column="seiriNp"/>
         <id column="jigyoshaNo"/>
         <id column="yoshikiNo"/>
-        <id column="junjiNo"/>
-        <id column="rirekiNo"/>
+        <id column="meisaiNo"/>
+        <id column="renban"/>
         <result property="serviceName" column="serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hokenshaName" column="hokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association  property="entity"
@@ -221,7 +221,7 @@
                 rgur."UrT0507Hokenja" HOKENJA
              ON
                 SHOKANMEISAIJUSHOCHITOKUREI."shisetsuShozaiHokenshaNo" = HOKENJA."hokenjaNo"
-                AND HOKENJA."hokenjaShubetsu" = '0013'
+                AND HOKENJA."hokenjaShubetsu" = '08'
         WHERE
             SHOKANMEISAIJUSHOCHITOKUREI."serviceTeikyoYM" = #{serviceTeikyoYM}
             AND SHOKANMEISAIJUSHOCHITOKUREI."hiHokenshaNo" = #{hiHokenshaNo}
@@ -610,9 +610,9 @@
         </if>
             TOKUTEISHINRYOSERVICECODE."serviceKomokuCode" = #{serviceKomokuCode}
             AND TOKUTEISHINRYOSERVICECODE."tekiyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
-            AND (TOKUTEISHINRYOSERVICECODE."tekiyoKaishiYM" IS NULL
+            AND (TOKUTEISHINRYOSERVICECODE."tekiyoShuryoYM" IS NULL
                 OR
-                TOKUTEISHINRYOSERVICECODE."tekiyoKaishiYM" <![CDATA[>=]]> #{serviceTeikyoYM})
+                TOKUTEISHINRYOSERVICECODE."tekiyoShuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
         ORDER BY
             TOKUTEISHINRYOSERVICECODE."tekiyoKaishiYM" DESC
     </select>
