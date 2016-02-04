@@ -48,8 +48,7 @@ public class JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager}のインスタンス
      */
     public static JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager createInstance() {
         return InstanceProvider.create(JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager.class);
@@ -100,7 +99,7 @@ public class JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager {
         Code konnkaiYokaigoJotaiKubunCode = getYaokaigoJyotaiKubun(被保険者番号, サービス提供年月);
         if (konnkaiYokaigoJotaiKubunCode == null) {
             return false;
-        } else if (!konnkaiYokaigoJotaiKubunCode.value().startsWith(要支援, 0) 
+        } else if (!konnkaiYokaigoJotaiKubunCode.value().startsWith(要支援, 0)
                 && !konnkaiYokaigoJotaiKubunCode.value().startsWith(要介護, 0)) {
             return false;
         }
@@ -111,29 +110,29 @@ public class JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager {
         Code shokaiYokaigoJotaiKubunCode = getYaokaigoJyotaiKubun(被保険者番号, entity.getServiceTeikyoYM());
         if (shokaiYokaigoJotaiKubunCode == null) {
             return false;
-        } else if (!shokaiYokaigoJotaiKubunCode.value().startsWith(要支援, 0) 
+        } else if (!shokaiYokaigoJotaiKubunCode.value().startsWith(要支援, 0)
                 && !shokaiYokaigoJotaiKubunCode.value().startsWith(要介護, 0)) {
             return false;
         }
-        if (shokaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.経過的要介護.getコード()) 
+        if (shokaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.経過的要介護.getコード())
                 && (konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護3.getコード())
                 || konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護4.getコード())
                 || konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護5.getコード()))) {
             return true;
-        } else if (shokaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要支援1.getコード()) 
+        } else if (shokaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要支援1.getコード())
                 && (konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護3.getコード())
                 || konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護4.getコード())
-                || konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護3.getコード()))) {
+                || konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護5.getコード()))) {
             return true;
-        } else if (shokaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要支援2.getコード()) 
+        } else if (shokaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要支援2.getコード())
                 && (konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護4.getコード())
                 || konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護5.getコード()))) {
             return true;
-        } else if (shokaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護1.getコード()) 
+        } else if (shokaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護1.getコード())
                 && (konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護4.getコード())
                 || konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護5.getコード()))) {
             return true;
-        } else if (shokaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護2.getコード()) 
+        } else if (shokaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護2.getコード())
                 && konnkaiYokaigoJotaiKubunCode.value().equals(YokaigoJotaiKubun06.要介護5.getコード())) {
             return true;
         }
