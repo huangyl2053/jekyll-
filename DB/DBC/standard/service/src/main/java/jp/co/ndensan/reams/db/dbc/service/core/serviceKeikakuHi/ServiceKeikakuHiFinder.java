@@ -68,7 +68,7 @@ public class ServiceKeikakuHiFinder {
         entity2009042.setRenban(new RString("13"));
         entity2009042.setHiHokenshaNo(new HihokenshaNo("1"));
         entity2009042.setServiceTeikyoYM(new FlexibleYearMonth(new RString("200904")));
-        entity2009042.setSeiriNp(new RString("12"));
+        entity2009042.setSeiriNo(new RString("12"));
         entity2009042.setJigyoshaNo(new JigyoshaNo("1"));
         entity2009042.setYoshikiNo(new RString("34"));
         entity2009042.setShiteiKijunGaitoJigyoshaKubunCode(new RString("654"));
@@ -137,7 +137,7 @@ public class ServiceKeikakuHiFinder {
         entity200904.setRenban(new RString("13"));
         entity200904.setHiHokenshaNo(new HihokenshaNo("1"));
         entity200904.setServiceTeikyoYM(new FlexibleYearMonth(new RString("200904")));
-        entity200904.setSeiriNp(new RString("12"));
+        entity200904.setSeiriNo(new RString("12"));
         entity200904.setJigyoshaNo(new JigyoshaNo("1"));
         entity200904.setYoshikiNo(new RString("34"));
         entity200904.setShiteiKijunGaitoJigyoshaKubunCode(new RString("654"));

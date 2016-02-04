@@ -13,8 +13,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.JigyoshaNoListOfServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiDetailKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiJutakuKaishuhi;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiJutakuKaishuhiCollection;
-import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiYoguHanbaihi;
-import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiYoguHanbaihiCollection;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiKihonGokei;
@@ -35,10 +33,13 @@ import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiShukeiCollection;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiTokuteiNyushohi;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiTokuteiNyushohiCollection;
+import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiYoguHanbaihi;
+import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiYoguHanbaihiCollection;
 import jp.co.ndensan.reams.db.dbc.business.core.ServiceTeikyoYMListOfServiceShurui;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KyufuJissekiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KyufuSakuseiKubun;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3018KyufujissekiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3025KyufujissekiKyotakuServiceEntity;
@@ -46,7 +47,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3026Kyufujisse
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3027KyufujissekiJutakuKaishuhiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
@@ -180,7 +180,7 @@ public final class KyufuJissekiMapper {
                 new ServiceTeikyoYM(entity.getServiceTeikyoYM()),
                 KyufuJissekiKubun.toValue(entity.getKyufuJissekiKubunCode()),
                 entity.getSeiriNo(),
-                entity.getHokenshaNo().value(),
+                entity.getShokisaiHokenshaNo().value(),
                 new InputShikibetsuNo(new Code(entity.getInputShikibetsuNo().getColumnValue()), RString.EMPTY, RString.EMPTY),
                 entity.getJigyoshoNo().value(),
                 KyufuSakuseiKubun.toValue(entity.getKyufuSakuseiKubunCode()),
@@ -340,8 +340,8 @@ public final class KyufuJissekiMapper {
                     前,
                     entity.getTanisu(),
                     entity.getNissuKaisu().intValue(),
-                    entity.getKohi1TaishoNissuKaisu().intValue(), 
-                    entity.getKohi2TaishoNissuKaisu().intValue(), 
+                    entity.getKohi1TaishoNissuKaisu().intValue(),
+                    entity.getKohi2TaishoNissuKaisu().intValue(),
                     entity.getKohi3TaishoNissuKaisu().intValue(),
                     entity.getServiceTanisu(),
                     entity.getKohi1TaishoServiceTanisu(), entity.getKohi2TaishoServiceTanisu(),

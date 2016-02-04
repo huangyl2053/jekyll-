@@ -400,7 +400,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
             DbT3047ShokanServicePlan200904Entity DbT3047entity = new DbT3047ShokanServicePlan200904Entity();
             DbT3047entity.setHiHokenshaNo(被保険者番号);
             DbT3047entity.setServiceTeikyoYM(サービス提供年月);
-            DbT3047entity.setSeiriNp(整理番号);
+            DbT3047entity.setSeiriNo(整理番号);
             DbT3047entity.setState(EntityDataState.Deleted);
             償還払請求サービス計画200904Dac.save(DbT3047entity);
         } else if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200903"))
@@ -784,7 +784,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
             DbT3047ShokanServicePlan200904Entity dbT3047entity = new DbT3047ShokanServicePlan200904Entity();
             dbT3047entity.setHiHokenshaNo(被保険者番号);
             dbT3047entity.setServiceTeikyoYM(サービス提供年月);
-            dbT3047entity.setSeiriNp(整理番号);
+            dbT3047entity.setSeiriNo(整理番号);
             dbT3047entity.setJigyoshaNo(事業者番号);
             dbT3047entity.setYoshikiNo(様式番号);
             dbT3047entity.setMeisaiNo(明細番号);
@@ -1251,7 +1251,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             DbT3047ShokanServicePlan200904Entity entity = new DbT3047ShokanServicePlan200904Entity();
                             entity.setHiHokenshaNo(parameter.get被保険者番号());
                             entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-                            entity.setSeiriNp(parameter.get整理番号());
+                            entity.setSeiriNo(parameter.get整理番号());
                             entity.setJigyoshaNo(parameter.get事業者番号());
                             entity.setYoshikiNo(parameter.get証明書コード());
                             entity.setMeisaiNo(明細番号);
@@ -1278,7 +1278,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             DbT3047ShokanServicePlan200904Entity entity = new DbT3047ShokanServicePlan200904Entity();
                             entity.setHiHokenshaNo(parameter.get被保険者番号());
                             entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-                            entity.setSeiriNp(parameter.get整理番号());
+                            entity.setSeiriNo(parameter.get整理番号());
                             entity.setJigyoshaNo(parameter.get事業者番号());
                             entity.setYoshikiNo(parameter.get証明書コード());
                             entity.setMeisaiNo(parameter.get明細番号());
@@ -1300,7 +1300,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             DbT3047ShokanServicePlan200904Entity entity = new DbT3047ShokanServicePlan200904Entity();
                             entity.setHiHokenshaNo(parameter.get被保険者番号());
                             entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-                            entity.setSeiriNp(parameter.get整理番号());
+                            entity.setSeiriNo(parameter.get整理番号());
                             entity.setJigyoshaNo(parameter.get事業者番号());
                             entity.setYoshikiNo(parameter.get証明書コード());
                             entity.setMeisaiNo(parameter.get明細番号());
@@ -1322,7 +1322,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             DbT3047ShokanServicePlan200904Entity entity = new DbT3047ShokanServicePlan200904Entity();
                             entity.setHiHokenshaNo(parameter.get被保険者番号());
                             entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-                            entity.setSeiriNp(parameter.get整理番号());
+                            entity.setSeiriNo(parameter.get整理番号());
                             entity.setJigyoshaNo(parameter.get事業者番号());
                             entity.setYoshikiNo(parameter.get証明書コード());
                             entity.setMeisaiNo(明細番号);
@@ -2172,7 +2172,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                                     = new DbT3047ShokanServicePlan200904Entity();
                             dbT3047entity.setHiHokenshaNo(parameter.get被保険者番号());
                             dbT3047entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-                            dbT3047entity.setSeiriNp(parameter.get整理番号());
+                            dbT3047entity.setSeiriNo(parameter.get整理番号());
                             dbT3047entity.setShikyuKubunCode(parameter.get支給区分());
                             dbT3047entity.setZougenTen(parameter.get増減単位());
                             dbT3047entity.setSagakuKingaku(決定情報一覧.get差額金額());
@@ -2271,7 +2271,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             case 6:
                                 dbT3047entity.setHiHokenshaNo(parameter.get被保険者番号());
                                 dbT3047entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-                                dbT3047entity.setSeiriNp(parameter.get整理番号());
+                                dbT3047entity.setSeiriNo(parameter.get整理番号());
                                 dbT3047entity.setJigyoshaNo(決定情報一覧.get事業者番号());
                                 dbT3047entity.setYoshikiNo(決定情報一覧.get証明書コード());
                                 dbT3047entity.setMeisaiNo(決定情報一覧.get明細番号());

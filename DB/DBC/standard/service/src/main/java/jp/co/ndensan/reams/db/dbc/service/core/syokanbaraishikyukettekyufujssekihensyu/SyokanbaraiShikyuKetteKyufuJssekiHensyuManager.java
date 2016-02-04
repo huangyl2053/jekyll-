@@ -697,7 +697,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                                 給付実績居宅サービス計画費.get償還払請求サービス計画200004().getSeikyuKingaku()));
                         dbT3025entity.setShinsaYM(entity.get審査年月().getYearMonth());
                         dbT3025entity.setSeiriNo(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200004().getSeiriNp());
+                                get償還払請求サービス計画200004().getSeiriNo());
                         給付実績居宅サービス計画費Dac.save(dbT3025entity);
                     }
                 }
@@ -742,7 +742,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                                 get償還払請求サービス計画200604().getSeikyuKingaku()));
                         dbT3025entity.setShinsaYM(entity.get審査年月().getYearMonth());
                         dbT3025entity.setSeiriNo(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200604().getSeiriNp());
+                                get償還払請求サービス計画200604().getSeiriNo());
                         給付実績居宅サービス計画費Dac.save(dbT3025entity);
                     }
                 }
@@ -798,7 +798,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                                 get償還払請求サービス計画200904().getSeikyuKingaku()));
                         dbT3025entity.setShinsaYM(entity.get審査年月().getYearMonth());
                         dbT3025entity.setSeiriNo(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getSeiriNp());
+                                get償還払請求サービス計画200904().getSeiriNo());
                         給付実績居宅サービス計画費Dac.save(dbT3025entity);
                     }
                 }

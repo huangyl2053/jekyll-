@@ -8,28 +8,26 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3017KyufujissekiKihonEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 給付実績基本を管理するクラスです。
  */
-public class KyufujissekiKihon 
-extends ModelBase<KyufujissekiKihonIdentifier, 
-        DbT3017KyufujissekiKihonEntity, 
-        KyufujissekiKihon> implements Serializable {
+public class KyufujissekiKihon
+        extends ModelBase<KyufujissekiKihonIdentifier, DbT3017KyufujissekiKihonEntity, KyufujissekiKihon> implements Serializable {
 
     private final DbT3017KyufujissekiKihonEntity entity;
     private final KyufujissekiKihonIdentifier id;
@@ -74,7 +72,7 @@ extends ModelBase<KyufujissekiKihonIdentifier,
         this.entity.setInputShikibetsuNo(入力識別番号);
         this.entity.setRecodeShubetsuCode(レコード種別コード);
         this.entity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
-        this.entity.setHokenshaNo(証記載保険者番号);
+        this.entity.setShokisaiHokenshaNo(証記載保険者番号);
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
         this.entity.setKyufuJissekiKubunCode(給付実績区分コード);
@@ -107,7 +105,7 @@ extends ModelBase<KyufujissekiKihonIdentifier,
                 entity.getInputShikibetsuNo(),
                 entity.getRecodeShubetsuCode(),
                 entity.getKyufuSakuseiKubunCode(),
-                entity.getHokenshaNo(),
+                entity.getShokisaiHokenshaNo(),
                 entity.getHiHokenshaNo(),
                 entity.getServiceTeikyoYM(),
                 entity.getKyufuJissekiKubunCode(),
@@ -172,7 +170,7 @@ extends ModelBase<KyufujissekiKihonIdentifier,
      * @return 証記載保険者番号
      */
     public HokenshaNo get証記載保険者番号() {
-        return entity.getHokenshaNo();
+        return entity.getShokisaiHokenshaNo();
     }
 
     /**
