@@ -40,6 +40,7 @@
             "ShokanShinsei"."hiHokenshaNo" = #{被保険者番号}
             AND "ShokanShinsei"."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
         ORDER BY "serviceTeikyoYM" ASC
+        LIMIT(1)
     </sql> 
     
     <sql id="selectShokanJutakuKaishu">

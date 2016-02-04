@@ -139,9 +139,9 @@ public class TokuteiShinryohiHandler {
         ShokanTokuteiShinryoTokubetsuRyoyo entity = list.get(0);
         DbT7120TokuteiShinryoServiceCodeEntity serviceCode = ShokanbaraiJyokyoShokai.createInstance()
                 .getTokuteiShinryoServiceCodeInfo(
+                        new ShikibetsuCode(entity.get識別番号()),
                         サービス年月,
-                        ViewStateHolder.get(ViewStateKeys.様式番号, RString.class),
-                        new ShikibetsuCode(entity.get識別番号()));
+                        ViewStateHolder.get(ViewStateKeys.様式番号, RString.class));
         div.getPanelFive().getTxtShobyoMeiDown().setValue(entity.get傷病名());
         div.getPanelFive().getTxtShikibetsuCode().setValue(entity.get識別番号());
         div.getPanelFive().getTxtName().setValue(serviceCode.getServiceMeisho());
