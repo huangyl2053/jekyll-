@@ -89,7 +89,11 @@ public enum ReportIdDBA {
     /**
      * 軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書2の帳票ＩＤです。
      */
-    DBC800021(new ReportId("DBC800021_KeidoshaFukushiYoguTaiyoKakuninShinseisho2"), new RString("軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書2"));
+    DBC800021(new ReportId("DBC800021_KeidoshaFukushiYoguTaiyoKakuninShinseisho2"), new RString("軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書2")),
+    /**
+     * 介護保険料徴収猶予申請書の帳票ＩＤです。
+     */
+    DBB800002(new ReportId("DBB800002_HokenryoGenmenChoshuYoyuShinseisho"), new RString("介護保険料徴収猶予申請書"));
 
     private final ReportId reportId;
     private final RString reportName;
