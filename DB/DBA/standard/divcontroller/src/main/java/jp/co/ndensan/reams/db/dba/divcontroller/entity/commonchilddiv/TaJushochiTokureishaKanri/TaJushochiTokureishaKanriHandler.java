@@ -124,6 +124,7 @@ public class TaJushochiTokureishaKanriHandler {
             div.getDdlKaijyoJiyo().setDataSource(set解除事由());
         } else if (状態_変更.equals(親画面状態)) {
             div.getTajushochiTokureiInput().setVisible(false);
+            div.getDgJushochiTokureiRireki().getGridSetting().getColumn("jyoTai").setVisible(true);
         }
     }
 

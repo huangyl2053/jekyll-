@@ -53,7 +53,7 @@ public class TaJushochiTokureishaKanriValidationHandler {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日, div.getTxtTekiyobi()));
                 } else {
                     if (最新の適用情報.getTekiyoYMD() != null) {
-                        if (!div.getTxtTekiyobi().getValue().isBeforeOrEquals(最新の適用情報.getTekiyoYMD().getValue())) {
+                        if (!div.getTxtTekiyobi().getValue().isBefore(最新の適用情報.getTekiyoYMD().getValue())) {
                             validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日と最新の適用情報の整合性チェック, div.getTxtTekiyobi()));
                         }
                     }
