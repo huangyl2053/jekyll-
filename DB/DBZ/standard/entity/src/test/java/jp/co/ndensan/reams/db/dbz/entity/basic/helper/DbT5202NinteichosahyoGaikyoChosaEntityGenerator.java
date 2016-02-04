@@ -22,6 +22,7 @@ public final class DbT5202NinteichosahyoGaikyoChosaEntityGenerator {
 
     public static final ShinseishoKanriNo DEFAULT_申請書管理番号 = new ShinseishoKanriNo("900001");
     public static final int DEFAULT_認定調査依頼履歴番号 = 1;
+    public static final RString DEFAULT_概況調査テキストイメージ区分 = new RString("区分1");
     public static final Code DEFAULT_厚労省IF識別コード = new Code("01");
     public static final Code DEFAULT_認定調査依頼区分コード = new Code("01");
     public static final int DEFAULT_認定調査回数 = 1;
@@ -58,6 +59,7 @@ public final class DbT5202NinteichosahyoGaikyoChosaEntityGenerator {
         DbT5202NinteichosahyoGaikyoChosaEntity entity = new DbT5202NinteichosahyoGaikyoChosaEntity();
         entity.setShinseishoKanriNo(DEFAULT_申請書管理番号);
         entity.setNinteichosaRirekiNo(DEFAULT_認定調査依頼履歴番号);
+        entity.setGaikyoChosaTextImageKubun(DEFAULT_概況調査テキストイメージ区分);
         entity.setKoroshoIfShikibetsuCode(DEFAULT_厚労省IF識別コード);
         entity.setNinteichousaIraiKubunCode(DEFAULT_認定調査依頼区分コード);
         entity.setNinteichosaIraiKaisu(DEFAULT_認定調査回数);

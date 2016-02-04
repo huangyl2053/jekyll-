@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1007KyokaisoHokenryoDankaiE
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyokaisoHokenryoDankai}の編集を行うビルダークラスです。
@@ -57,9 +56,19 @@ public class KyokaisoHokenryoDankaiBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link KyokaisoHokenryoDankaiBuilder}
      */
-    public KyokaisoHokenryoDankaiBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+    public KyokaisoHokenryoDankaiBuilder set履歴番号(int 履歴番号) {
         entity.setRirekiNo(履歴番号);
+        return this;
+    }
+
+    /**
+     * リンク番号を設定します。
+     *
+     * @param リンク番号 リンク番号
+     * @return {@link KyokaisoHokenryoDankaiBuilder}
+     */
+    public KyokaisoHokenryoDankaiBuilder setリンク番号(int リンク番号) {
+        entity.setLinkNo(リンク番号);
         return this;
     }
 

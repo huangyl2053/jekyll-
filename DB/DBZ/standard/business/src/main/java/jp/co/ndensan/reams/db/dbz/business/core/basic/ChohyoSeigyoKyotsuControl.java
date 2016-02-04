@@ -246,6 +246,42 @@ public class ChohyoSeigyoKyotsuControl extends
     }
 
     /**
+     * 電子行公印印字有無使用区分を返します。
+     *
+     * @return 電子行公印印字有無使用区分
+     */
+    public RString get電子行公印印字有無使用区分() {
+        return entity.getDenshiKoinInjiUmuShiyoKubun();
+    }
+
+    /**
+     * 首長名印字位置使用区分を返します。
+     *
+     * @return 首長名印字位置使用区分
+     */
+    public RString get首長名印字位置使用区分() {
+        return entity.getShuchoMeiInjiIchiShiyoKubun();
+    }
+
+    /**
+     * 公印書略印字有無使用区分を返します。
+     *
+     * @return 公印書略印字有無使用区分
+     */
+    public RString get公印書略印字有無使用区分() {
+        return entity.getKoinShoryakuInjiUmuShiyoKubun();
+    }
+
+    /**
+     * 公印文字列印字有無使用区分を返します。
+     *
+     * @return 公印文字列印字有無使用区分
+     */
+    public RString get公印文字列印字有無使用区分() {
+        return entity.getKoinMojiretsuInjiUmuShiyoKubun();
+    }
+
+    /**
      * 地区表示使用区分を返します。
      *
      * @return 地区表示使用区分

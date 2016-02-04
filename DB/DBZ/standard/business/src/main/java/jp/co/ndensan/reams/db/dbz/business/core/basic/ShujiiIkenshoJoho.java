@@ -147,6 +147,15 @@ public class ShujiiIkenshoJoho extends
     }
 
     /**
+     * 主治医意見書読取年月日を返します。
+     *
+     * @return 主治医意見書読取年月日
+     */
+    public FlexibleDate get主治医意見書読取年月日() {
+        return entity.getIkenshoReadYMD();
+    }
+
+    /**
      * 意見書作成回数区分を返します。
      *
      * @return 意見書作成回数区分

@@ -41,7 +41,7 @@ public class DbT1007KyokaisoHokenryoDankaiDac implements ISaveable<DbT1007Kyokai
     @Transaction
     public DbT1007KyokaisoHokenryoDankaiEntity selectByKey(
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号,
+            int 履歴番号,
             FlexibleYearMonth 適用開始年月) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));

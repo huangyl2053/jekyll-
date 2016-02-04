@@ -51,21 +51,14 @@ public class KyokaisoHokenryoDankaiManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            Decimal 主キー2 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー2 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_履歴番号;
             FlexibleYearMonth 主キー3 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_適用開始年月;
             sut.get境界層保険料段階(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            HihokenshaNo 主キー1 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_被保険者番号;
-            FlexibleYearMonth 主キー3 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_適用開始年月;
-            sut.get境界層保険料段階(主キー1, null, 主キー3);
-        }
-
-        @Test(expected = NullPointerException.class)
         public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
-            Decimal 主キー2 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー2 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_履歴番号;
             HihokenshaNo 主キー1 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_被保険者番号;
             sut.get境界層保険料段階(主キー1, 主キー2, null);
         }
@@ -73,10 +66,10 @@ public class KyokaisoHokenryoDankaiManagerTest {
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(HihokenshaNo.class), any(Decimal.class), any(FlexibleYearMonth.class))).thenReturn(null);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(int.class), any(FlexibleYearMonth.class))).thenReturn(null);
 
             HihokenshaNo 主キー1 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー2 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー2 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_履歴番号;
             FlexibleYearMonth 主キー3 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_適用開始年月;
             KyokaisoHokenryoDankai result = sut.get境界層保険料段階(主キー1, 主キー2, 主キー3);
             assertThat(result, is(nullValue()));
@@ -85,10 +78,10 @@ public class KyokaisoHokenryoDankaiManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT1007KyokaisoHokenryoDankaiEntity entity = DbT1007KyokaisoHokenryoDankaiEntityGenerator.createDbT1007KyokaisoHokenryoDankaiEntity();
-            when(dac.selectByKey(any(HihokenshaNo.class), any(Decimal.class), any(FlexibleYearMonth.class))).thenReturn(entity);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(int.class), any(FlexibleYearMonth.class))).thenReturn(entity);
 
             HihokenshaNo 主キー1 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー2 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー2 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_履歴番号;
             FlexibleYearMonth 主キー3 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_適用開始年月;
             KyokaisoHokenryoDankai result = sut.get境界層保険料段階(主キー1, 主キー2, 主キー3);
 

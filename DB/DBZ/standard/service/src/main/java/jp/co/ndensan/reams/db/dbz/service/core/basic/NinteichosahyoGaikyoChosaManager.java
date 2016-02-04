@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoChosaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5202NinteichosahyoGaikyoChosaDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -44,19 +45,22 @@ public class NinteichosahyoGaikyoChosaManager {
      *
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @param 概況調査テキストイメージ区分 概況調査テキストイメージ区分
      * @return NinteichosahyoGaikyoChosa
      */
     @Transaction
     public NinteichosahyoGaikyoChosa get認定調査票_概況調査_子(
             ShinseishoKanriNo 申請書管理番号,
-            int 認定調査依頼履歴番号
+            int 認定調査依頼履歴番号,
+            RString 概況調査テキストイメージ区分
     ) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+        requireNonNull(概況調査テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("概況調査テキストイメージ区分"));
 
         DbT5202NinteichosahyoGaikyoChosaEntity entity = dac.selectByKey(
                 申請書管理番号,
-                認定調査依頼履歴番号);
+                認定調査依頼履歴番号,
+                概況調査テキストイメージ区分);
         if (entity == null) {
             return null;
         }

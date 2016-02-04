@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1013KyokaisoSochiShinseiEnt
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -173,7 +172,7 @@ public class DbT1013KyokaisoSochiShinseiDacTest extends DbzTestDacBase {
 
         public static void insert(
                 HihokenshaNo 被保険者番号,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT1013KyokaisoSochiShinseiEntity entity = DbT1013KyokaisoSochiShinseiEntityGenerator.createDbT1013KyokaisoSochiShinseiEntity();
             entity.setHihokenshaNo(被保険者番号);
             entity.setRirekiNo(履歴番号);

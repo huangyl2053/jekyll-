@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoCho
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5202NinteichosahyoGaikyoChosaEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5202NinteichosahyoGaikyoChosaDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -49,17 +50,19 @@ public class NinteichosahyoGaikyoChosaManagerTest {
         @Test(expected = NullPointerException.class)
         public void 引数の申請書管理番号にnullを指定した場合_NullPointerExceptionが発生する() {
             int 認定調査依頼履歴番号 = DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_認定調査依頼履歴番号;
-            sut.get認定調査票_概況調査_子(null, 認定調査依頼履歴番号);
+            RString 概況調査テキストイメージ区分 = DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_概況調査テキストイメージ区分;
+            sut.get認定調査票_概況調査_子(null, 認定調査依頼履歴番号, 概況調査テキストイメージ区分);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class))).thenReturn(null);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class), any(RString.class))).thenReturn(null);
 
             ShinseishoKanriNo 申請書管理番号 = DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_申請書管理番号;
             int 認定調査依頼履歴番号 = DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_認定調査依頼履歴番号;
-            NinteichosahyoGaikyoChosa result = sut.get認定調査票_概況調査_子(申請書管理番号, 認定調査依頼履歴番号);
+            RString 概況調査テキストイメージ区分 = DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_概況調査テキストイメージ区分;
+            NinteichosahyoGaikyoChosa result = sut.get認定調査票_概況調査_子(申請書管理番号, 認定調査依頼履歴番号, 概況調査テキストイメージ区分);
 
             assertThat(result, is(nullValue()));
         }
@@ -67,11 +70,12 @@ public class NinteichosahyoGaikyoChosaManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5202NinteichosahyoGaikyoChosaEntity entity = DbT5202NinteichosahyoGaikyoChosaEntityGenerator.createDbT5202NinteichosahyoGaikyoChosaEntity();
-            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class))).thenReturn(entity);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class), any(RString.class))).thenReturn(entity);
 
             ShinseishoKanriNo 申請書管理番号 = DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_申請書管理番号;
             int 認定調査依頼履歴番号 = DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_認定調査依頼履歴番号;
-            NinteichosahyoGaikyoChosa result = sut.get認定調査票_概況調査_子(申請書管理番号, 認定調査依頼履歴番号);
+            RString 概況調査テキストイメージ区分 = DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_概況調査テキストイメージ区分;
+            NinteichosahyoGaikyoChosa result = sut.get認定調査票_概況調査_子(申請書管理番号, 認定調査依頼履歴番号, 概況調査テキストイメージ区分);
 
             assertThat(result.get申請書管理番号().value(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_申請書管理番号.value()));
         }
