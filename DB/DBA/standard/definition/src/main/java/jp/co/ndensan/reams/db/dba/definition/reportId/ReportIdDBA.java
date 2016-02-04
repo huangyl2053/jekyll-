@@ -69,8 +69,24 @@ public enum ReportIdDBA {
     /**
      * 介護保険住所地特例適用・変更・終了届の帳票ＩＤです。
      */
-    DBA800003(new ReportId("DBA800003_HihokenshashoSaikoufuShinseisho"), new RString("介護保険被保険者証等再交付申請書"));
-    
+    DBA800003(new ReportId("DBA800003_HihokenshashoSaikoufuShinseisho"), new RString("介護保険被保険者証等再交付申請書")),
+    /**
+     * 介護保険給付費貸付金償還期限延長申請書の帳票ＩＤです。
+     */
+    DBC800011(new ReportId("DBC800011_JutakuKaishuhiJizenShinseishoJuryoIninHarai"), new RString("介護保険居宅介護（予防）住宅改修費事前（受領委任払）申請書")),
+    /**
+     * 軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書の帳票ＩＤです。
+     */
+    DBC800014(new ReportId("DBC800014_KeidoshaFukushiYoguTaiyoKakuninShinseisho"), new RString("軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書")),
+    /**
+     * 介護保険給付費貸付金償還期限延長申請書の帳票ＩＤです。
+     */
+    DBC800019(new ReportId("DBC800019_KyufuKashitsukekinShokanKigenEnchoShinseisho"), new RString("介護保険給付費貸付金償還期限延長申請書")),
+    /**
+     * 軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書2の帳票ＩＤです。
+     */
+    DBC800021(new ReportId("DBC800021_KeidoshaFukushiYoguTaiyoKakuninShinseisho2"), new RString("軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書2"));
+
     private final ReportId reportId;
     private final RString reportName;
 
