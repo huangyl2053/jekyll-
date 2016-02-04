@@ -141,7 +141,7 @@ public class ShokanServicePlan200004Test extends DbcTestBase {
 
         @Test
         public void get整理番号は_entityが持つ整理番号を返す() {
-            assertThat(sut.get整理番号(), is(ShokanServicePlan200004Entity.getSeiriNp()));
+            assertThat(sut.get整理番号(), is(ShokanServicePlan200004Entity.getSeiriNo()));
         }
 
         @Test
@@ -154,10 +154,10 @@ public class ShokanServicePlan200004Test extends DbcTestBase {
             assertThat(sut.get様式番号(), is(ShokanServicePlan200004Entity.getYoshikiNo()));
         }
 
-//        @Test
-//        public void get明細番号は_entityが持つ明細番号を返す() {
-//            assertThat(sut.get明細番号(), is(ShokanServicePlan200004Entity.getMeisaiNo()));
-//        }
+        @Test
+        public void get明細番号は_entityが持つ明細番号を返す() {
+            assertThat(sut.get明細番号(), is(ShokanServicePlan200004Entity.getMeisaiNo()));
+        }
 
         @Test
         public void get指定_基準該当事業者区分コードは_entityが持つ指定_基準該当事業者区分コードを返す() {

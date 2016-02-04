@@ -95,11 +95,11 @@ public class ShokanServicePlan200904BuilderTest extends DbcTestBase {
             assertThat(business.get様式番号(), is(DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_様式番号));
         }
 
-//        @Test
-//        public void 戻り値の明細番号は_設定した値と同じ履歴番号を返す() {
-//            business = sut.set明細番号(DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細番号).build();
-//            assertThat(business.get明細番号(), is(DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細番号));
-//        }
+        @Test
+        public void 戻り値の明細番号は_設定した値と同じ履歴番号を返す() {
+            business = sut.set明細番号(DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細番号).build();
+            assertThat(business.get明細番号(), is(DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細番号));
+        }
 
         @Test
         public void 戻り値の指定_基準該当事業者区分コードは_設定した値と同じ指定_基準該当事業者区分コードを返す() {
@@ -107,11 +107,11 @@ public class ShokanServicePlan200904BuilderTest extends DbcTestBase {
             assertThat(business.get指定_基準該当事業者区分コード(), is(DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_指定_基準該当事業者区分コード));
         }
 
-//        @Test
-//        public void 戻り値の連番は_設定した値と同じ連番を返す() {
-//            business = sut.set連番(DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_連番).build();
-//            assertThat(business.get連番(), is(DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_連番));
-//        }
+        @Test
+        public void 戻り値の連番は_設定した値と同じ連番を返す() {
+            business = sut.set連番(DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_連番).build();
+            assertThat(business.get連番(), is(DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_連番));
+        }
 
         @Test
         public void 戻り値の居宅サービス計画作成依頼届出年月日は_設定した値と同じ居宅サービス計画作成依頼届出年月日を返す() {

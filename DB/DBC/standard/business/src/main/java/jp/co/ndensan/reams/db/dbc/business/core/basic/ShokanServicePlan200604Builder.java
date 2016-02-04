@@ -73,7 +73,7 @@ public class ShokanServicePlan200604Builder {
      */
     public ShokanServicePlan200604Builder set整理番号(RString 整理番号) {
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        entity.setSeiriNp(整理番号);
+        entity.setSeiriNo(整理番号);
         return this;
     }
 
@@ -107,11 +107,11 @@ public class ShokanServicePlan200604Builder {
      * @param 明細番号 明細番号
      * @return {@link ShokanServicePlan200604Builder}
      */
-//    public ShokanServicePlan200604Builder set明細番号(RString 明細番号) {
-//        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
-//        entity.setMeisaiNo(明細番号);
-//        return this;
-//    }
+    public ShokanServicePlan200604Builder set明細番号(RString 明細番号) {
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        entity.setMeisaiNo(明細番号);
+        return this;
+    }
 
     /**
      * 連番を設定します。
@@ -119,11 +119,11 @@ public class ShokanServicePlan200604Builder {
      * @param 連番 連番
      * @return {@link ShokanServicePlan200604Builder}
      */
-//    public ShokanServicePlan200604Builder set連番(RString 連番) {
-//        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
-//        entity.setRenban(連番);
-//        return this;
-//    }
+    public ShokanServicePlan200604Builder set連番(RString 連番) {
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+        entity.setRenban(連番);
+        return this;
+    }
 
     /**
      * 指定_基準該当事業者区分コードを設定します。

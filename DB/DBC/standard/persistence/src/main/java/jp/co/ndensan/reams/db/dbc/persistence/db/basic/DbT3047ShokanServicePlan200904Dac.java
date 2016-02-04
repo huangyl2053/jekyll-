@@ -36,7 +36,7 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
      *
      * @param 被保険者番号 HiHokenshaNo
      * @param サービス提供年月 ServiceTeikyoYM
-     * @param 整理番号 SeiriNp
+     * @param 整理番号 SeiriNo
      * @param 事業者番号 JigyoshaNo
      * @param 様式番号 YoshikiNo
      * @param 明細番号 MeisaiNo
@@ -68,7 +68,7 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNp, 整理番号),
+                                eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号)
                         //                                eq(meisaiNo, 明細番号),

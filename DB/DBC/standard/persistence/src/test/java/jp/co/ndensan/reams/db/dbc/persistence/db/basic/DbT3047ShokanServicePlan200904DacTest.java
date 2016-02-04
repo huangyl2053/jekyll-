@@ -362,12 +362,12 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
             DbT3047ShokanServicePlan200904Entity entity = DbT3047ShokanServicePlan200904EntityGenerator.createDbT3047ShokanServicePlan200904Entity();
             entity.setHiHokenshaNo(被保険者番号);
             entity.setServiceTeikyoYM(サービス提供年月);
-            entity.setSeiriNp(整理番号);
+            entity.setSeiriNo(整理番号);
             entity.setJigyoshaNo(事業者番号);
             entity.setYoshikiNo(様式番号);
-//            entity.setMeisaiNo(明細番号);
+            entity.setMeisaiNo(明細番号);
             entity.setShiteiKijunGaitoJigyoshaKubunCode(指定_基準該当事業者区分コード);
-//            entity.setRenban(連番);
+            entity.setRenban(連番);
             entity.setKyotakuServiceSakuseiIraiYMD(居宅サービス計画作成依頼届出年月日);
             sut.save(entity);
         }

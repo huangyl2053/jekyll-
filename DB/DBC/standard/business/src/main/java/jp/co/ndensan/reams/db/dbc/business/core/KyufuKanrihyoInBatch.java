@@ -186,7 +186,7 @@ public class KyufuKanrihyoInBatch {
             result.setServiceShuruiCode(new ServiceShuruiCode(input.getServiceShuruiCode()));
         }
         result.setKyufuKeikakuTanisuNissu(checkInteger(input.getKyufuKeikakuTanisuNissu()));
-        result.setKyufuKeikakuNissu(new Decimal(checkInteger(input.getZentsukiMadeKyufuKeikakuNissu())));
+        result.setKyufuKeikakuNissu(checkInteger(input.getZentsukiMadeKyufuKeikakuNissu()));
         result.setShiteiServiceSubTotal(checkInteger(input.getShiteiServiceShokei()));
         result.setKijyunGaitoServiceSubTotal(checkInteger(input.getKijunGaitoServiceShokei()));
         result.setKyufuKeikakuTotalTanisuNissu(checkInteger(input.getKyufuKeikakuGokeiTanisuNissu()));

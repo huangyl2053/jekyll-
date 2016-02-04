@@ -57,19 +57,19 @@ public class ShokanServicePlan200604
         this.entity = new DbT3046ShokanServicePlan200604Entity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
-        this.entity.setSeiriNp(整理番号);
+        this.entity.setSeiriNo(整理番号);
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
-//        this.entity.setMeisaiNo(明細番号);
-//        this.entity.setRenban(連番);
+        this.entity.setMeisaiNo(明細番号);
+        this.entity.setRenban(連番);
         this.id = new ShokanServicePlan200604Identifier(
                 被保険者番号,
                 サービス提供年月,
                 整理番号,
                 事業者番号,
-                様式番号
-        //                明細番号,
-        //                連番
+                様式番号,
+                明細番号,
+                連番
         );
     }
 
@@ -84,11 +84,11 @@ public class ShokanServicePlan200604
         this.id = new ShokanServicePlan200604Identifier(
                 entity.getHiHokenshaNo(),
                 entity.getServiceTeikyoYM(),
-                entity.getSeiriNp(),
+                entity.getSeiriNo(),
                 entity.getJigyoshaNo(),
-                entity.getYoshikiNo()
-        //                entity.getMeisaiNo(),
-        //                entity.getRenban()
+                entity.getYoshikiNo(),
+                entity.getMeisaiNo(),
+                entity.getRenban()
         );
     }
 
@@ -131,7 +131,7 @@ public class ShokanServicePlan200604
      * @return 整理番号
      */
     public RString get整理番号() {
-        return entity.getSeiriNp();
+        return entity.getSeiriNo();
     }
 
     /**
@@ -152,23 +152,23 @@ public class ShokanServicePlan200604
         return entity.getYoshikiNo();
     }
 
-//    /**
-//     * 明細番号を返します。
-//     *
-//     * @return 明細番号
-//     */
-//    public RString get明細番号() {
-//        return entity.getMeisaiNo();
-//    }
-//
-//    /**
-//     * 連番を返します。
-//     *
-//     * @return 連番
-//     */
-//    public RString get連番() {
-//        return entity.getRenban();
-//    }
+    /**
+     * 明細番号を返します。
+     *
+     * @return 明細番号
+     */
+    public RString get明細番号() {
+        return entity.getMeisaiNo();
+    }
+
+    /**
+     * 連番を返します。
+     *
+     * @return 連番
+     */
+    public RString get連番() {
+        return entity.getRenban();
+    }
 
     /**
      * 指定_基準該当事業者区分コードを返します。

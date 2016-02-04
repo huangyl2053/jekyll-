@@ -65,14 +65,14 @@ public class ServiceKeikakuHiFinder {
                 = new DbT3047ShokanServicePlan200904Entity();
         DbT3047ShokanServicePlan200904Entity entity2009042
                 = new DbT3047ShokanServicePlan200904Entity();
-//        entity2009042.setRenban(new RString("13"));
+        entity2009042.setRenban(new RString("13"));
         entity2009042.setHiHokenshaNo(new HihokenshaNo("1"));
         entity2009042.setServiceTeikyoYM(new FlexibleYearMonth(new RString("200904")));
-        entity2009042.setSeiriNp(new RString("12"));
+        entity2009042.setSeiriNo(new RString("12"));
         entity2009042.setJigyoshaNo(new JigyoshaNo("1"));
         entity2009042.setYoshikiNo(new RString("34"));
         entity2009042.setShiteiKijunGaitoJigyoshaKubunCode(new RString("654"));
-//        entity2009042.setMeisaiNo(new RString("56"));
+        entity2009042.setMeisaiNo(new RString("56"));
         entity2009042.setKyotakuServiceSakuseiIraiYMD(new FlexibleDate(new RString("20000101")));
         entity2009042.setServiceCode(new ServiceCode(new RString("21")));
         entity2009042.setTanisu(413);
@@ -134,14 +134,14 @@ public class ServiceKeikakuHiFinder {
             RString 連番) {
         DbT3047ShokanServicePlan200904Entity entity200904
                 = new DbT3047ShokanServicePlan200904Entity();
-//        entity200904.setRenban(new RString("13"));
+        entity200904.setRenban(new RString("13"));
         entity200904.setHiHokenshaNo(new HihokenshaNo("1"));
         entity200904.setServiceTeikyoYM(new FlexibleYearMonth(new RString("200904")));
-        entity200904.setSeiriNp(new RString("12"));
+        entity200904.setSeiriNo(new RString("12"));
         entity200904.setJigyoshaNo(new JigyoshaNo("1"));
         entity200904.setYoshikiNo(new RString("34"));
         entity200904.setShiteiKijunGaitoJigyoshaKubunCode(new RString("654"));
-//        entity200904.setMeisaiNo(new RString("56"));
+        entity200904.setMeisaiNo(new RString("56"));
         entity200904.setKyotakuServiceSakuseiIraiYMD(new FlexibleDate(new RString("20000101")));
         entity200904.setServiceCode(new ServiceCode(new RString("21")));
         entity200904.setTanisu(413);

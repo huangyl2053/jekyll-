@@ -94,9 +94,9 @@ public class ServiceKeikakuHiRealtEntity {
      *
      * @return 連番
      */
-//    public RString get連番() {
-//        return entity200904.getRenban();
-//    }
+    public RString get連番() {
+        return entity200904.getRenban();
+    }
 
     /**
      * サービス単位数を取得します。

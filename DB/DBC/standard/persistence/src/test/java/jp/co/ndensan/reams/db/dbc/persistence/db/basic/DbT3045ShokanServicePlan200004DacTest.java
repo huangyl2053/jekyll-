@@ -93,10 +93,10 @@ public class DbT3045ShokanServicePlan200004DacTest extends DbcTestDacBase {
         @Test
         public void 償還払請求サービス計画200004エンティティを渡すと_updateは_償還払請求サービス計画200004を更新する() {
             DbT3045ShokanServicePlan200004Entity updateRecord = sut.selectByKey();
-            updateRecord.setSeiriNp(new RString("test"));
+            updateRecord.setSeiriNo(new RString("test"));
             sut.save(updateRecord);
             DbT3045ShokanServicePlan200004Entity updatedRecord = sut.selectByKey();
-            assertThat(updateRecord.getSeiriNp(), is(updatedRecord.getSeiriNp()));
+            assertThat(updateRecord.getSeiriNo(), is(updatedRecord.getSeiriNo()));
         }
     }
 

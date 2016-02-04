@@ -57,13 +57,12 @@ public final class DbT3047ShokanServicePlan200904EntityGenerator {
         DbT3047ShokanServicePlan200904Entity entity = new DbT3047ShokanServicePlan200904Entity();
         entity.setHiHokenshaNo(DEFAULT_被保険者番号);
         entity.setServiceTeikyoYM(DEFAULT_サービス提供年月);
-        entity.setSeiriNp(DEFAULT_整理番号);
+        entity.setSeiriNo(DEFAULT_整理番号);
         entity.setJigyoshaNo(DEFAULT_事業者番号);
         entity.setYoshikiNo(DEFAULT_様式番号);
         entity.setShiteiKijunGaitoJigyoshaKubunCode(DEFAULT_指定_基準該当事業者区分コード);
-        //Entity最新化の際に直すこと
-//        entity.setMeisaiNo(DEFAULT_明細番号);
-//        entity.setRenban(DEFAULT_連番);
+        entity.setMeisaiNo(DEFAULT_明細番号);
+        entity.setRenban(DEFAULT_連番);
         entity.setKyotakuServiceSakuseiIraiYMD(DEFAULT_居宅サービス計画作成依頼届出年月日);
         entity.setServiceCode(DEFAULT_サービスコード);
         entity.setTanisu(DEFAULT_単位数);

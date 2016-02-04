@@ -67,28 +67,24 @@ public class ShokanServicePlan200904Test extends DbcTestBase {
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-//            sut = new ShokanServicePlan200904(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
-            sut = new ShokanServicePlan200904(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5);
+            sut = new ShokanServicePlan200904(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-//            sut = new ShokanServicePlan200904(主キー名1, null, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
-            sut = new ShokanServicePlan200904(主キー名1, null, 主キー名3, 主キー名4, 主キー名5);
+            sut = new ShokanServicePlan200904(主キー名1, null, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
         }
 
         @Test
         public void 指定したキーが保持するDbT3047ShokanServicePlan200904Entityにセットされている() {
-//            sut = new ShokanServicePlan200904(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
-            sut = new ShokanServicePlan200904(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5);
+            sut = new ShokanServicePlan200904(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
             assertThat(sut.get被保険者番号(), is(主キー名1));
             assertThat(sut.getサービス提供年月(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するShokanServicePlan200904Identifierにセットされている() {
-//            sut = new ShokanServicePlan200904(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
-            sut = new ShokanServicePlan200904(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5);
+            sut = new ShokanServicePlan200904(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
             assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
             assertThat(sut.identifier().getサービス提供年月(), is(主キー名2));
         }
@@ -145,7 +141,7 @@ public class ShokanServicePlan200904Test extends DbcTestBase {
 
         @Test
         public void get整理番号は_entityが持つ整理番号を返す() {
-            assertThat(sut.get整理番号(), is(ShokanServicePlan200904Entity.getSeiriNp()));
+            assertThat(sut.get整理番号(), is(ShokanServicePlan200904Entity.getSeiriNo()));
         }
 
         @Test
@@ -158,20 +154,20 @@ public class ShokanServicePlan200904Test extends DbcTestBase {
             assertThat(sut.get様式番号(), is(ShokanServicePlan200904Entity.getYoshikiNo()));
         }
 
-//        @Test
-//        public void get明細番号は_entityが持つ明細番号を返す() {
-//            assertThat(sut.get明細番号(), is(ShokanServicePlan200904Entity.getMeisaiNo()));
-//        }
+        @Test
+        public void get明細番号は_entityが持つ明細番号を返す() {
+            assertThat(sut.get明細番号(), is(ShokanServicePlan200904Entity.getMeisaiNo()));
+        }
 
         @Test
         public void get指定_基準該当事業者区分コードは_entityが持つ指定_基準該当事業者区分コードを返す() {
             assertThat(sut.get指定_基準該当事業者区分コード(), is(ShokanServicePlan200904Entity.getShiteiKijunGaitoJigyoshaKubunCode()));
         }
 
-//        @Test
-//        public void get連番は_entityが持つ連番を返す() {
-//            assertThat(sut.get連番(), is(ShokanServicePlan200904Entity.getRenban()));
-//        }
+        @Test
+        public void get連番は_entityが持つ連番を返す() {
+            assertThat(sut.get連番(), is(ShokanServicePlan200904Entity.getRenban()));
+        }
 
         @Test
         public void get居宅サービス計画作成依頼届出年月日は_entityが持つ居宅サービス計画作成依頼届出年月日を返す() {

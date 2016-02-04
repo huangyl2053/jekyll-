@@ -47,7 +47,7 @@ public class ShokanServicePlan200904Manager {
      *
      * @param 被保険者番号 HiHokenshaNo
      * @param サービス提供年月 ServiceTeikyoYM
-     * @param 整理番号 SeiriNp
+     * @param 整理番号 SeiriNo
      * @param 事業者番号 JigyoshaNo
      * @param 様式番号 YoshikiNo
      * @param 明細番号 MeisaiNo
