@@ -49,7 +49,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -115,7 +114,6 @@ public class NinteiChosaIrai {
         getHandler(div).setDisabledToChosaItakusakiAndChosainKihonJoho(true);
         ChosaItakusakiCode chosaItakusakiCode = new ChosaItakusakiCode(row.getChosaItakusakiCode().getValue());
         ViewStateHolder.put(ViewStateKeys.認定調査委託先コード, row.getChosaItakusakiCode().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査委託先の割付定員, row.getWaritsukeTeiin().getValue());
         ViewStateHolder.put(ViewStateKeys.保険者名称, row.getHokenshaName());
         RString 支所コード = ViewStateHolder.get(ViewStateKeys.支所コード, RString.class);
         ShoKisaiHokenshaNo 保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
@@ -137,7 +135,6 @@ public class NinteiChosaIrai {
     public ResponseData<NinteiChosaIraiDiv> onSelect_dgchosainIchiran(NinteiChosaIraiDiv div) {
         dgchosainIchiran_Row row = div.getChosainIchiran().getDgchosainIchiran().getActiveRow();
         getHandler(div).set委託先基本情報(row);
-        ViewStateHolder.put(ViewStateKeys.調査員の当月調査可能人数, row.getChosaKanoNinzuPerMonth());
 
         ChosainCode chosainCode = new ChosainCode(row.getChosainCode().getValue());
         ViewStateHolder.put(ViewStateKeys.調査員コード, row.getChosainCode().getValue());
@@ -212,22 +209,34 @@ public class NinteiChosaIrai {
         int 既存割付済み人数 = getHandler(div).get既存割付済み人数();
         RString 調査員コード = ViewStateHolder.get(ViewStateKeys.調査員コード, RString.class);
         RString 認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査委託先コード, RString.class);
-        int waritsukeTeiin = ViewStateHolder.get(ViewStateKeys.認定調査委託先の割付定員, Decimal.class).intValue();
-        int chosaKanoNinzuPerMonth = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.調査員の当月調査可能人数, RString.class).toString());
         int count = 割付人数 + 既存割付済み人数;
-        if (!RString.isNullOrEmpty(認定調査委託先コード)
-                && RString.isNullOrEmpty(調査員コード)
-                && waritsukeTeiin < count) {
-            isWaritsuke = true;
-        }
 
-        if (!RString.isNullOrEmpty(認定調査委託先コード)
-                && !RString.isNullOrEmpty(調査員コード)
-                && chosaKanoNinzuPerMonth < count) {
-            isWaritsuke = true;
+        for (dgMiwaritsukeShinseishaIchiran_Row row : selectedItems) {
+            int waritsukeTeiin = nullToZero(row.getWaritsukeTeiin());
+            int chosaKanoNinzuPerMonth = nullToZero(row.getChosaKanoNinzuPerMonth());
+
+            if (!RString.isNullOrEmpty(認定調査委託先コード)
+                    && RString.isNullOrEmpty(調査員コード)
+                    && waritsukeTeiin < count) {
+                isWaritsuke = true;
+            }
+
+            if (!RString.isNullOrEmpty(認定調査委託先コード)
+                    && !RString.isNullOrEmpty(調査員コード)
+                    && chosaKanoNinzuPerMonth < count) {
+                isWaritsuke = true;
+            }
         }
 
         return isWaritsuke;
+    }
+
+    private int nullToZero(RString obj) {
+
+        if (obj != null && !obj.isEmpty()) {
+            return Integer.parseInt(obj.toString());
+        }
+        return 0;
     }
 
     /**
