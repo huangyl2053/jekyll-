@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoBunruiKanriManager;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -20,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  */
 public class KyokaisouKanriMasterListPanel {
+
+    private static final RString 境界層対象抽出範囲 = new RString("1");
 
     /**
      * onLoadの処理を行います。
@@ -104,7 +107,7 @@ public class KyokaisouKanriMasterListPanel {
 
     private boolean validate(KyokaisouKanriMasterListPanelDiv div, ValidationMessageControlPairs pairs) {
         boolean チェック結果 = false;
-        if (div.getKyokaisoKariParam().getRadHaniRadio().getSelectedIndex() == 0
+        if ((境界層対象抽出範囲).equals(div.getKyokaisoKariParam().getRadHani().getSelectedKey())
                 && div.getKyokaisoKariParam().getTxtHaniChushutsu().getFromValue() == null
                 && div.getKyokaisoKariParam().getTxtHaniChushutsu().getToValue() == null) {
             チェック結果 = true;

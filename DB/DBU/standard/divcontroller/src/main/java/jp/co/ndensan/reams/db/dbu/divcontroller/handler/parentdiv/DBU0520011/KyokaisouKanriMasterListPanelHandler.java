@@ -33,6 +33,10 @@ public class KyokaisouKanriMasterListPanelHandler {
     private static final RString KY4 = new RString("3");
     private static final RString KY5 = new RString("4");
     private static final RString KY6 = new RString("5");
+    private static final RString 基準日_key0 = new RString("0");
+    private static final RString 範囲_key0 = new RString("1");
+    private static final RString 指定無し_key0 = new RString("2");
+    private static final RString 境界層対象抽出範囲 = new RString("1");
 
     /**
      * コンストラクタ。
@@ -51,8 +55,7 @@ public class KyokaisouKanriMasterListPanelHandler {
     public void initialize(ChohyoBunruiKanri chohyoBunruiKanri) {
         //TODO 出力顺ID获取已提技术点待解决。
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, chohyoBunruiKanri.get帳票分類ID());
-        div.getKyokaisoKariParam().getRadKijunbi().setSelectedIndex(0);
-        div.getKyokaisoKariParam().getRadHaniRadio().setSelectedIndex(0);
+        div.getKyokaisoKariParam().getRadKijunbi().setSelectedKey(KY1);
         div.getKyokaisoKariParam().getTxtKijumbi().setDisabled(false);
         div.getKyokaisoKariParam().getTxtKijumbi().setValue(RDate.getNowDate());
         div.getKyokaisoKariParam().getRadHaniRadio().setDisabled(true);
@@ -168,7 +171,7 @@ public class KyokaisouKanriMasterListPanelHandler {
      */
     private void バッチパラメータ_基準日(KyokaisoKanriMasterListBatchParameter batchPara) {
 
-        if (div.getKyokaisoKariParam().getRadKijunbi().getSelectedIndex() == 0) {
+        if (div.getKyokaisoKariParam().getRadKijunbi().getSelectedKey().equals(基準日_key0)) {
             batchPara.setDate_FROM(new FlexibleDate(div.getKyokaisoKariParam().getTxtKijumbi().getValue().toDateString()));
             batchPara.setDate_TO(null);
             batchPara.setMode(取得モード_基準日);
@@ -181,7 +184,7 @@ public class KyokaisouKanriMasterListPanelHandler {
      * @return batchPara 境界層管理マスタリストバッチパラメータ
      */
     private void バッチパラメータ_範囲(KyokaisoKanriMasterListBatchParameter batchPara) {
-        if (div.getKyokaisoKariParam().getRadHaniRadio().getSelectedIndex() == 0) {
+        if (div.getKyokaisoKariParam().getRadHaniRadio().getSelectedKey().equals(範囲_key0)) {
             batchPara.setMode(取得モード_範囲);
             batchPara.setDate_FROM(new FlexibleDate(div.getKyokaisoKariParam().getTxtHaniChushutsu().getFromValue().toDateString()));
             batchPara.setDate_TO(new FlexibleDate(div.getKyokaisoKariParam().getTxtHaniChushutsu().getToValue().toDateString()));
@@ -194,7 +197,7 @@ public class KyokaisouKanriMasterListPanelHandler {
      * @return batchPara 境界層管理マスタリストバッチパラメータ
      */
     private void バッチパラメータ_指定無し(KyokaisoKanriMasterListBatchParameter batchPara) {
-        if (div.getKyokaisoKariParam().getRadShiteiNashi().getSelectedIndex() == 0) {
+        if (div.getKyokaisoKariParam().getRadShiteiNashi().getSelectedKey().equals(指定無し_key0)) {
             batchPara.setMode(取得モード_指定無し);
         }
     }
@@ -205,7 +208,7 @@ public class KyokaisouKanriMasterListPanelHandler {
      * @return batchPara 境界層管理マスタリストバッチパラメータ
      */
     private void バッチパラメータ_境界層対象抽出範囲(KyokaisoKanriMasterListBatchParameter batchPara) {
-        if (div.getRadHani().getSelectedIndex() == 0) {
+        if (div.getKyokaisoKariParam().getRadHani().getSelectedKey().equals(境界層対象抽出範囲)) {
 
             if (div.getKyokaisoKariParam().getRadHaniRadio().getSelectedIndex() == 0) {
 
