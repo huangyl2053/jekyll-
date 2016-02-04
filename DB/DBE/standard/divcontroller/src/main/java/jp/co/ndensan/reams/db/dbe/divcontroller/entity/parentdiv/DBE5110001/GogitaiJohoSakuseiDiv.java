@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -31,10 +32,10 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     private GogitaiShosaiDiv GogitaiShosai;
     @JsonProperty("UploadFileToroku")
     private UploadFileTorokuDiv UploadFileToroku;
-    @JsonProperty("hiddenFileName")
-    private RString hiddenFileName;
     @JsonProperty("hiddenFileId")
     private RString hiddenFileId;
+    @JsonProperty("hiddenFileName")
+    private RString hiddenFileName;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -115,24 +116,6 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     }
 
     /*
-     * gethiddenFileName
-     * @return hiddenFileName
-     */
-    @JsonProperty("hiddenFileName")
-    public RString getHiddenFileName() {
-        return hiddenFileName;
-    }
-
-    /*
-     * sethiddenFileName
-     * @param hiddenFileName hiddenFileName
-     */
-    @JsonProperty("hiddenFileName")
-    public void setHiddenFileName(RString hiddenFileName) {
-        this.hiddenFileName = hiddenFileName;
-    }
-
-    /*
      * gethiddenFileId
      * @return hiddenFileId
      */
@@ -148,6 +131,24 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     @JsonProperty("hiddenFileId")
     public void setHiddenFileId(RString hiddenFileId) {
         this.hiddenFileId = hiddenFileId;
+    }
+
+    /*
+     * gethiddenFileName
+     * @return hiddenFileName
+     */
+    @JsonProperty("hiddenFileName")
+    public RString getHiddenFileName() {
+        return hiddenFileName;
+    }
+
+    /*
+     * sethiddenFileName
+     * @param hiddenFileName hiddenFileName
+     */
+    @JsonProperty("hiddenFileName")
+    public void setHiddenFileName(RString hiddenFileName) {
+        this.hiddenFileName = hiddenFileName;
     }
 
     /*
@@ -434,23 +435,23 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public UploadPanel getUplUploadPanel() {
-        return this.getUploadFileToroku().getUplUploadPanel();
+    public UploadFileTorokuBatchDiv getUploadFileTorokuBatch() {
+        return this.getUploadFileToroku().getUploadFileTorokuBatch();
     }
 
     @JsonIgnore
-    public void  setUplUploadPanel(UploadPanel uplUploadPanel) {
-        this.getUploadFileToroku().setUplUploadPanel(uplUploadPanel);
+    public void  setUploadFileTorokuBatch(UploadFileTorokuBatchDiv UploadFileTorokuBatch) {
+        this.getUploadFileToroku().setUploadFileTorokuBatch(UploadFileTorokuBatch);
     }
 
     @JsonIgnore
-    public Button getBtnIkkatsuToroku() {
-        return this.getUploadFileToroku().getBtnIkkatsuToroku();
+    public Button getBtnRegistUploadFile() {
+        return this.getUploadFileToroku().getBtnRegistUploadFile();
     }
 
     @JsonIgnore
-    public void  setBtnIkkatsuToroku(Button btnIkkatsuToroku) {
-        this.getUploadFileToroku().setBtnIkkatsuToroku(btnIkkatsuToroku);
+    public void  setBtnRegistUploadFile(Button btnRegistUploadFile) {
+        this.getUploadFileToroku().setBtnRegistUploadFile(btnRegistUploadFile);
     }
 
     // </editor-fold>

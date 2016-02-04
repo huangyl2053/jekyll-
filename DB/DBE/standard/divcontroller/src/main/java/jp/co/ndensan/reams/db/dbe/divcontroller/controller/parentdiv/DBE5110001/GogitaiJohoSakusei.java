@@ -64,7 +64,7 @@ public class GogitaiJohoSakusei {
     private static final RString JYOTAI_NAME_UPD = new RString("修正");
     private static final RString JYOTAI_NAME_DEL = new RString("削除");
     private static final RString RAD_HYOJIJOKEN_ISNOW = new RString("key0");
-    private static final RString SHARED_FILE_NAME = new RString("合議体情報");
+    private static final RString SHARED_FILE_NAME = new RString("合議体情報作成一括登録ファイル");
     private static final RString OUTPUT_CSV_FILE_NAME = new RString("合議体情報.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegister");
@@ -390,9 +390,14 @@ public class GogitaiJohoSakusei {
      * @return ResponseData<GogitaiJohoSakuseiDiv>
      */
     @SuppressWarnings("checkstyle:illegaltoken")
-    public ResponseData<GogitaiJohoSakuseiDiv> onClick_btnIkkatsuToroku(GogitaiJohoSakuseiDiv div, FileData[] files) {
-        for (FileData file : files) {
-            copyFile(file, div);
+    public ResponseData<GogitaiJohoSakuseiDiv> onClick_btnRegistUploadFile(GogitaiJohoSakuseiDiv div, FileData[] files) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            for (FileData file : files) {
+                copyFile(file, div);
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -416,7 +421,6 @@ public class GogitaiJohoSakusei {
      * @return ResponseData<GogitaiJohoSakuseiDiv>
      */
     public ResponseData<GogitaiJohoSakuseiDiv> btnShow(GogitaiJohoSakuseiDiv div) {
-        // TODO QA419待ち
         CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, false);
         return ResponseData.of(div).respond();
     }
