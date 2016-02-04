@@ -29,8 +29,7 @@
         "DbT4303ShujiiIkenshoKinyuItemChild"."lastUpdateReamsLoginId" as "dbT4303ShujiiIkenshoKinyuItemChild_lastUpdateReamsLoginId",
         "DbT4303ShujiiIkenshoKinyuItemChild"."remban" as "dbT4303ShujiiIkenshoKinyuItemChild_remban",
         "DbT4303ShujiiIkenshoKinyuItemChild"."koroshoIfShikibetsuCode" as "dbT4303ShujiiIkenshoKinyuItemChild_koroshoIfShikibetsuCode",
-        "DbT4303ShujiiIkenshoKinyuItemChild"."kinyuItem" as "dbT4303ShujiiIkenshoKinyuItemChild_kinyuItem",
-        "DbT4303ShujiiIkenshoKinyuItemChild"."kinyuItemImageSharedFileId" as "dbT4303ShujiiIkenshoKinyuItemChild_kinyuItemImageSharedFileId"
+        "DbT4303ShujiiIkenshoKinyuItemChild"."kinyuItem" as "dbT4303ShujiiIkenshoKinyuItemChild_kinyuItem"
     </sql>
 
 
@@ -49,7 +48,6 @@
         <result property="remban" column="dbT4303ShujiiIkenshoKinyuItemChild_remban" />
         <result property="koroshoIfShikibetsuCode" column="dbT4303ShujiiIkenshoKinyuItemChild_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="kinyuItem" column="dbT4303ShujiiIkenshoKinyuItemChild_kinyuItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kinyuItemImageSharedFileId" column="dbT4303ShujiiIkenshoKinyuItemChild_kinyuItemImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
     </resultMap>
     <select id="getEntity" resultMap="ResultMap_DbT4303ShujiiIkenshoKinyuItemChildEntity">
         SELECT

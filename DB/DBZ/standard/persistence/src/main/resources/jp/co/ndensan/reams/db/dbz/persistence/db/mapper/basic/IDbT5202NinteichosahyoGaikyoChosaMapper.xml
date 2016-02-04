@@ -19,6 +19,7 @@
     <sql id="allColumns_DbT5202NinteichosahyoGaikyoChosa">
         "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo" as "dbT5202NinteichosahyoGaikyoChosa_shinseishoKanriNo",
         "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo" as "dbT5202NinteichosahyoGaikyoChosa_ninteichosaRirekiNo",
+        "DbT5202NinteichosahyoGaikyoChosa"."gaikyoChosaTextImageKubun" as "dbT5202NinteichosahyoGaikyoChosa_gaikyoChosaTextImageKubun",
         "DbT5202NinteichosahyoGaikyoChosa"."insertDantaiCd" as "dbT5202NinteichosahyoGaikyoChosa_insertDantaiCd",
         "DbT5202NinteichosahyoGaikyoChosa"."insertTimestamp" as "dbT5202NinteichosahyoGaikyoChosa_insertTimestamp",
         "DbT5202NinteichosahyoGaikyoChosa"."insertReamsLoginId" as "dbT5202NinteichosahyoGaikyoChosa_insertReamsLoginId",
@@ -52,6 +53,7 @@
     <resultMap id="ResultMap_DbT5202NinteichosahyoGaikyoChosaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoChosaEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT5202NinteichosahyoGaikyoChosa_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id property="ninteichosaRirekiNo" column="dbT5202NinteichosahyoGaikyoChosa_ninteichosaRirekiNo" />
+        <id property="gaikyoChosaTextImageKubun" column="dbT5202NinteichosahyoGaikyoChosa_gaikyoChosaTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertDantaiCd" column="dbT5202NinteichosahyoGaikyoChosa_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5202NinteichosahyoGaikyoChosa_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT5202NinteichosahyoGaikyoChosa_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
