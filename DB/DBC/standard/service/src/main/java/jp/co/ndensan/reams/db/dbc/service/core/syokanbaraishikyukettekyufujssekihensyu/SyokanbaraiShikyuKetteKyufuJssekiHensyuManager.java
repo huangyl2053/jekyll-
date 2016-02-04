@@ -297,7 +297,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
         dbT3017entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(entity.get入力識別番号()));
         dbT3017entity.setRecodeShubetsuCode(new RString("01"));
         dbT3017entity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
-        dbT3017entity.setHokenshaNo(entity.get証記載保険者番号());
+        dbT3017entity.setShokisaiHokenshaNo(entity.get証記載保険者番号());
         dbT3017entity.setHiHokenshaNo(entity.get請求基本被保険者番号());
         dbT3017entity.setServiceTeikyoYM(entity.get請求基本サービス提供年月());
         dbT3017entity.setKyufuJissekiKubunCode(new RString("2"));

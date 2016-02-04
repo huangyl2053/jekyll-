@@ -1,22 +1,22 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import java.util.UUID;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * DbT3017KyufujissekiKihonの項目定義クラスです
@@ -45,7 +45,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
     @PrimaryKey
     private RString kyufuSakuseiKubunCode;
     @PrimaryKey
-    private HokenshaNo hokenshaNo;
+    private HokenshaNo shokisaiHokenshaNo;
     @PrimaryKey
     private HihokenshaNo hiHokenshaNo;
     @PrimaryKey
@@ -271,17 +271,17 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 証記載保険者番号
      */
-    public HokenshaNo getHokenshaNo() {
-        return hokenshaNo;
+    public HokenshaNo getShokisaiHokenshaNo() {
+        return shokisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
      *
-     * @param hokenshaNo 証記載保険者番号
+     * @param shokisaiHokenshaNo 証記載保険者番号
      */
-    public void setHokenshaNo(HokenshaNo hokenshaNo) {
-        this.hokenshaNo = hokenshaNo;
+    public void setShokisaiHokenshaNo(HokenshaNo shokisaiHokenshaNo) {
+        this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
     /**
@@ -1094,8 +1094,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
     /**
      * 前・保険・特定入所者介護サービス費等請求額のsetメソッドです。
      *
-     * @param maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku
-     * 前・保険・特定入所者介護サービス費等請求額
+     * @param maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku 前・保険・特定入所者介護サービス費等請求額
      */
     public void setMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(Decimal maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku = maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku;
@@ -1203,8 +1202,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
     /**
      * 前・公費１・特定入所者介護サービス費等請求額のsetメソッドです。
      *
-     * @param maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku
-     * 前・公費１・特定入所者介護サービス費等請求額
+     * @param maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku 前・公費１・特定入所者介護サービス費等請求額
      */
     public void setMaeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku(Decimal maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku = maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku;
@@ -1312,8 +1310,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
     /**
      * 前・公費２・特定入所者介護サービス費等請求額のsetメソッドです。
      *
-     * @param maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku
-     * 前・公費２・特定入所者介護サービス費等請求額
+     * @param maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku 前・公費２・特定入所者介護サービス費等請求額
      */
     public void setMaeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku(Decimal maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku = maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku;
@@ -1421,8 +1418,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
     /**
      * 前・公費３・特定入所者介護サービス費等請求額のsetメソッドです。
      *
-     * @param maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku
-     * 前・公費３・特定入所者介護サービス費等請求額
+     * @param maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku 前・公費３・特定入所者介護サービス費等請求額
      */
     public void setMaeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku(Decimal maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku = maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku;
@@ -1530,8 +1526,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
     /**
      * 後・保険・特定入所者介護サービス費等請求額のsetメソッドです。
      *
-     * @param atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku
-     * 後・保険・特定入所者介護サービス費等請求額
+     * @param atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku 後・保険・特定入所者介護サービス費等請求額
      */
     public void setAtoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(Decimal atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku = atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku;
@@ -1639,8 +1634,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
     /**
      * 後・公費１・特定入所者介護サービス費等請求額のsetメソッドです。
      *
-     * @param atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku
-     * 後・公費１・特定入所者介護サービス費等請求額
+     * @param atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku 後・公費１・特定入所者介護サービス費等請求額
      */
     public void setAtoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku(Decimal atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku = atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku;
@@ -1748,8 +1742,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
     /**
      * 後・公費２・特定入所者介護サービス費等請求額のsetメソッドです。
      *
-     * @param atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku
-     * 後・公費２・特定入所者介護サービス費等請求額
+     * @param atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku 後・公費２・特定入所者介護サービス費等請求額
      */
     public void setAtoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku(Decimal atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku = atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku;
@@ -1857,8 +1850,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
     /**
      * 後・公費３・特定入所者介護サービス費等請求額のsetメソッドです。
      *
-     * @param atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku
-     * 後・公費３・特定入所者介護サービス費等請求額
+     * @param atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku 後・公費３・特定入所者介護サービス費等請求額
      */
     public void setAtoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku(Decimal atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku = atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku;
@@ -1998,8 +1990,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      * このエンティティの主キーが他の{@literal DbT3017KyufujissekiKihonEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT3017KyufujissekiKihonEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT3017KyufujissekiKihonEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3017KyufujissekiKihonEntity other) {
@@ -2018,7 +2009,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
         if (!Objects.equals(this.kyufuSakuseiKubunCode, other.kyufuSakuseiKubunCode)) {
             return false;
         }
-        if (!Objects.equals(this.hokenshaNo, other.hokenshaNo)) {
+        if (!Objects.equals(this.shokisaiHokenshaNo, other.shokisaiHokenshaNo)) {
             return false;
         }
         if (!Objects.equals(this.hiHokenshaNo, other.hiHokenshaNo)) {
@@ -2048,7 +2039,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
         this.inputShikibetsuNo = entity.inputShikibetsuNo;
         this.recodeShubetsuCode = entity.recodeShubetsuCode;
         this.kyufuSakuseiKubunCode = entity.kyufuSakuseiKubunCode;
-        this.hokenshaNo = entity.hokenshaNo;
+        this.shokisaiHokenshaNo = entity.shokisaiHokenshaNo;
         this.hiHokenshaNo = entity.hiHokenshaNo;
         this.serviceTeikyoYM = entity.serviceTeikyoYM;
         this.kyufuJissekiKubunCode = entity.kyufuJissekiKubunCode;
@@ -2151,7 +2142,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(kokanShikibetsuNo, inputShikibetsuNo, recodeShubetsuCode, kyufuSakuseiKubunCode, hokenshaNo, hiHokenshaNo, serviceTeikyoYM, kyufuJissekiKubunCode, jigyoshoNo, toshiNo, kohi1FutanshaNo, kohi1JukyushaNo, kohi2FutanshaNo, kohi2JukyushaNo, kohi3FutanshaNo, kohi3JukyushaNo, umareYMD, seibetsuCode, yoKaigoJotaiKubunCode, kyuSochiNyushoshaTokureiCode, ninteiYukoKaishiYMD, ninteiYukoShuryoYMD, rojinHokenShichosonNo, rojinhokenJukyushaNo, kokiHokenshaNo, kokiHiHokenshaNo, kokuhoHokenshaNo, kokuhoHiHokenshashoNo, kokuhoKojinNo, kyotakuServiceSakuseiKubunCode, kyotakuKaigoShienJigyoshoNo, kaishiYMD, chushiYMD, chushiRiyuNyushomaeJyokyoCode, nyushoYMD, taishoYMD, nyushoJitsunissu, gaihakuNissu, taishogoJotaiCode, hokenKyufuritsu, kohi1Kyufuritsu, kohi2Kyufuritsu, kohi3Kyufuritsu, maeHokenServiceTanisu, maeHokenSeikyugaku, maeHokenRiyoshaFutangaku, maeHokenKinkyuShisetsuRyoyoSeikyugaku, maeHokenTokuteiShinryohiSeikyugaku, maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku, maeKohi1ServiceTanisu, maeKohi1Seikyugaku, maeKohi1RiyoshaFutangaku, maeKohi1KinkyuShisetsuRyoyoSeikyugaku, maeKohi1TokuteiShinryohiSeikyugaku, maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku, maeKohi2ServiceTanisu, maeKohi2Seikyugaku, maeKohi2RiyoshaFutangaku, maeKohi2KinkyuShisetsuRyoyoSeikyugaku, maeKohi2TokuteiShinryohiSeikyugaku, maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku, maeKohi3ServiceTanisu, maeKohi3Seikyugaku, maeKohi3RiyoshaFutangaku, maeKohi3KinkyuShisetsuRyoyoSeikyugaku, maeKohi3TokuteiShinryohiSeikyugaku, maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku, atoHokenServiceTanisu, atoHokenSeikyugaku, atoHokenRiyoshaFutangaku, atoHokenKinkyuShisetsuRyoyoSeikyugaku, atoHokenTokuteiShinryohiSeikyugaku, atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku, atoKohi1ServiceTanisu, atoKohi1Seikyugaku, atoKohi1RiyoshaFutangaku, atoKohi1KinkyuShisetsuRyoyoSeikyugaku, atoKohi1TokuteiShinryohiSeikyugaku, atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku, atoKohi2ServiceTanisu, atoKohi2Seikyugaku, atoKohi2RiyoshaFutangaku, atoKohi2KinkyuShisetsuRyoyoSeikyugaku, atoKohi2TokuteiShinryohiSeikyugaku, atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku, atoKohi3ServiceTanisu, atoKohi3Seikyugaku, atoKohi3RiyoshaFutangaku, atoKohi3KinkyuShisetsuRyoyoSeikyugaku, atoKohi3TokuteiShinryohiSeikyugaku, atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku, keikaiKubunCode, shinsaYM, seiriNo, sofuYM, torikomiYM, dokujiSakuseiKubun, hokenshaHoyuKyufujissekiJohoSakujoFlag);
+        return super.toMd5(kokanShikibetsuNo, inputShikibetsuNo, recodeShubetsuCode, kyufuSakuseiKubunCode, shokisaiHokenshaNo, hiHokenshaNo, serviceTeikyoYM, kyufuJissekiKubunCode, jigyoshoNo, toshiNo, kohi1FutanshaNo, kohi1JukyushaNo, kohi2FutanshaNo, kohi2JukyushaNo, kohi3FutanshaNo, kohi3JukyushaNo, umareYMD, seibetsuCode, yoKaigoJotaiKubunCode, kyuSochiNyushoshaTokureiCode, ninteiYukoKaishiYMD, ninteiYukoShuryoYMD, rojinHokenShichosonNo, rojinhokenJukyushaNo, kokiHokenshaNo, kokiHiHokenshaNo, kokuhoHokenshaNo, kokuhoHiHokenshashoNo, kokuhoKojinNo, kyotakuServiceSakuseiKubunCode, kyotakuKaigoShienJigyoshoNo, kaishiYMD, chushiYMD, chushiRiyuNyushomaeJyokyoCode, nyushoYMD, taishoYMD, nyushoJitsunissu, gaihakuNissu, taishogoJotaiCode, hokenKyufuritsu, kohi1Kyufuritsu, kohi2Kyufuritsu, kohi3Kyufuritsu, maeHokenServiceTanisu, maeHokenSeikyugaku, maeHokenRiyoshaFutangaku, maeHokenKinkyuShisetsuRyoyoSeikyugaku, maeHokenTokuteiShinryohiSeikyugaku, maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku, maeKohi1ServiceTanisu, maeKohi1Seikyugaku, maeKohi1RiyoshaFutangaku, maeKohi1KinkyuShisetsuRyoyoSeikyugaku, maeKohi1TokuteiShinryohiSeikyugaku, maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku, maeKohi2ServiceTanisu, maeKohi2Seikyugaku, maeKohi2RiyoshaFutangaku, maeKohi2KinkyuShisetsuRyoyoSeikyugaku, maeKohi2TokuteiShinryohiSeikyugaku, maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku, maeKohi3ServiceTanisu, maeKohi3Seikyugaku, maeKohi3RiyoshaFutangaku, maeKohi3KinkyuShisetsuRyoyoSeikyugaku, maeKohi3TokuteiShinryohiSeikyugaku, maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku, atoHokenServiceTanisu, atoHokenSeikyugaku, atoHokenRiyoshaFutangaku, atoHokenKinkyuShisetsuRyoyoSeikyugaku, atoHokenTokuteiShinryohiSeikyugaku, atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku, atoKohi1ServiceTanisu, atoKohi1Seikyugaku, atoKohi1RiyoshaFutangaku, atoKohi1KinkyuShisetsuRyoyoSeikyugaku, atoKohi1TokuteiShinryohiSeikyugaku, atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku, atoKohi2ServiceTanisu, atoKohi2Seikyugaku, atoKohi2RiyoshaFutangaku, atoKohi2KinkyuShisetsuRyoyoSeikyugaku, atoKohi2TokuteiShinryohiSeikyugaku, atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku, atoKohi3ServiceTanisu, atoKohi3Seikyugaku, atoKohi3RiyoshaFutangaku, atoKohi3KinkyuShisetsuRyoyoSeikyugaku, atoKohi3TokuteiShinryohiSeikyugaku, atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku, keikaiKubunCode, shinsaYM, seiriNo, sofuYM, torikomiYM, dokujiSakuseiKubun, hokenshaHoyuKyufujissekiJohoSakujoFlag);
     }
 
 // </editor-fold>
