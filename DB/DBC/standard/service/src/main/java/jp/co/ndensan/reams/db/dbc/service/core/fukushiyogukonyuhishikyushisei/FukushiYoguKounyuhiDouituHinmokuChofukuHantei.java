@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3048ShokanFukushiYoguH
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 福祉用具購入費同一品目重複判定
@@ -48,12 +48,11 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHantei {
             return flag;
         }
         for (DbT3048ShokanFukushiYoguHanbaihiEntity entity : list) {
-            if (品目コード.equals(entity.getHinmokuCode()) && !entity.getIsDeleted()) {
+            if (品目コード.equals(entity.getHinmokuCode()) && !EntityDataState.Deleted.equals(entity.getState())) {
                 flag = true;
                 break;
             }
         }
-
         return flag;
     }
 
@@ -66,7 +65,6 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHantei {
      * @param list
      * @return flag
      */
-    @Transaction
     public boolean chkHinmokuCodePerYear(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
             List<DbT3048ShokanFukushiYoguHanbaihiEntity> list, RString 整理番号) {
         boolean flag = false;
@@ -75,9 +73,8 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHantei {
             return flag;
         }
         Set<RString> sets = new HashSet<>();
-
         for (DbT3048ShokanFukushiYoguHanbaihiEntity entity : list) {
-            if (!entity.getIsDeleted()) {
+            if (!EntityDataState.Deleted.equals(entity.getState())) {
                 if (sets.contains(entity.getHinmokuCode())) {
                     flag = true;
                     break;
