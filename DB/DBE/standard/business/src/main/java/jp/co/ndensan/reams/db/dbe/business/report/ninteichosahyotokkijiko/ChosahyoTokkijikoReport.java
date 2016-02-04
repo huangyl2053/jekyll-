@@ -20,8 +20,8 @@ public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSourc
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 介護認定審査会スケジュール表かがみのItem
-     * @return 介護認定審査会スケジュール表かがみのReport
+     * @param itemList 要介護認定調査票（特記事項）のItem
+     * @return 要介護認定調査票（特記事項）のReport
      */
     public static ChosahyoTokkijikoReport createFrom(List<ChosahyoTokkijikoItem> itemList) {
         return new ChosahyoTokkijikoReport(itemList);
@@ -30,7 +30,7 @@ public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSourc
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 介護認定審査会スケジュール表かがみのItem
+     * @param itemList 要介護認定調査票（特記事項）のItem
      */
     protected ChosahyoTokkijikoReport(List<ChosahyoTokkijikoItem> itemList) {
         this.itemList = itemList;
@@ -39,8 +39,8 @@ public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSourc
     @Override
     public void writeBy(ReportSourceWriter<ChosahyoTokkijikoReportSource> reportSourceWriter) {
         for (ChosahyoTokkijikoItem item : itemList) {
-            ChosahyoTokkijikoEditorImpl editor = new ChosahyoTokkijikoEditorImpl(item);
-            ChosahyoTokkijikoBuilderImpl builder = new ChosahyoTokkijikoBuilderImpl(editor);
+            IChosahyoTokkijikoEditor editor = new ChosahyoTokkijikoEditorImpl(item);
+            IChosahyoTokkijikoBuilder builder = new ChosahyoTokkijikoBuilderImpl(editor);
             reportSourceWriter.writeLine(builder);
         }
     }

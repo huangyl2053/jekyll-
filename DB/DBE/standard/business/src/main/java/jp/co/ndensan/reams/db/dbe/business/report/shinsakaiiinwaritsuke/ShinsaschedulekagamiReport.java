@@ -42,8 +42,8 @@ public class ShinsaschedulekagamiReport extends Report<ShinsaschedulekagamiRepor
         for (ShinsaschedulekagamiItem item : itemList) {
             // TODO 内部QA：660 Redmine# (連番の設定がわかりません、"'1'から..."を設定する)
             index = index + 1;
-            ShinsaschedulekagamiEditorImpl editor = new ShinsaschedulekagamiEditorImpl(item, index);
-            ShinsaschedulekagamiBuilderImpl builder = new ShinsaschedulekagamiBuilderImpl(editor);
+            IShinsaschedulekagamiEditor editor = new ShinsaschedulekagamiEditorImpl(item, index);
+            IShinsaschedulekagamiBuilder builder = new ShinsaschedulekagamiBuilderImpl(editor);
             reportSourceWriter.writeLine(builder);
         }
     }
