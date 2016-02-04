@@ -18,7 +18,8 @@ public enum DBE0100001StateName implements IStateEnumerations {
     Default("default"),
     申請検索("申請検索"),
     個人照会("個人照会"),
-    情報提供("情報提供");
+    情報提供("情報提供"),
+    完了("完了");
 
     private final RString name;
 
