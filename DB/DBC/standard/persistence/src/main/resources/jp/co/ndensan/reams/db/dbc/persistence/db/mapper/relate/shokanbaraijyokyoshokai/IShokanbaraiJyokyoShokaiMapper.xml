@@ -354,8 +354,8 @@
                     AND KAIGOSERVICENAIYOU."serviceKoumokuCd" = KAIGOSERVICENAIYOUA."serviceKoumokuCd"
                 ) AS KAIGOSERVICENAIYOUB
             ON
-                SHOKANSERVICEPLAN200604."serviceCode" = KAIGOSERVICENAIYOUB."serviceShuruiCd"
-                AND SHOKANSERVICEPLAN200604."serviceCode" = KAIGOSERVICENAIYOUB."serviceKoumokuCd"
+                substring(SHOKANSERVICEPLAN200604."serviceCode", 1, 2) = KAIGOSERVICENAIYOUB."serviceShuruiCd"
+                AND substring(SHOKANSERVICEPLAN200604."serviceCode", length(SHOKANSERVICEPLAN200604."serviceCode") - 3) = KAIGOSERVICENAIYOUB."serviceKoumokuCd"
         WHERE
             SHOKANSERVICEPLAN200604."serviceTeikyoYM" = #{serviceTeikyoYM}
             AND SHOKANSERVICEPLAN200604."hiHokenshaNo" = #{hiHokenshaNo}
@@ -421,8 +421,8 @@
                     AND KAIGOSERVICENAIYOU."serviceKoumokuCd" = KAIGOSERVICENAIYOUA."serviceKoumokuCd"
                 ) AS KAIGOSERVICENAIYOUB
             ON
-                SHOKANSERVICEPLAN200004."serviceCode" = KAIGOSERVICENAIYOUB."serviceShuruiCd"
-                AND SHOKANSERVICEPLAN200004."serviceCode" = KAIGOSERVICENAIYOUB."serviceKoumokuCd"
+                substring(SHOKANSERVICEPLAN200004."serviceCode", 1, 2) = KAIGOSERVICENAIYOUB."serviceShuruiCd"
+                AND substring(SHOKANSERVICEPLAN200004."serviceCode", length(SHOKANSERVICEPLAN200004."serviceCode") - 3) = KAIGOSERVICENAIYOUB."serviceKoumokuCd"
         WHERE
             SHOKANSERVICEPLAN200004."serviceTeikyoYM" = #{serviceTeikyoYM}
             AND SHOKANSERVICEPLAN200004."hiHokenshaNo" = #{hiHokenshaNo}
