@@ -272,7 +272,7 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
                 if (RSTRING_1.equals(設定値)) {
                     領収書領収日付印欄設定値 = RyoshuHizukeRan.期で出力する;
                 } else if (RSTRING_2.equals(設定値)) {
-                    領収書領収日付印欄設定値 = RyoshuHizukeRan.期で出力する;
+                    領収書領収日付印欄設定値 = RyoshuHizukeRan.月で出力する;
                 } else {
                     領収書領収日付印欄設定値 = RyoshuHizukeRan.何も表示しない;
                 }
@@ -283,7 +283,7 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
                 if (RSTRING_1.equals(設定値)) {
                     納付書領収日付欄設定値 = RyoshuHizukeRan.期で出力する;
                 } else if (RSTRING_2.equals(設定値)) {
-                    納付書領収日付欄設定値 = RyoshuHizukeRan.期で出力する;
+                    納付書領収日付欄設定値 = RyoshuHizukeRan.月で出力する;
                 } else {
                     納付書領収日付欄設定値 = RyoshuHizukeRan.何も表示しない;
                 }
