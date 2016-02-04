@@ -15,9 +15,9 @@ public enum KoikinaiJushochitokureishaKubun {
      */
     広域内住所地特例者("1", "広域内住所地特例者"),
     /**
-     * コード:2 名称:通常資格者 略称:定義なし
+     * コード:0 名称:通常資格者 略称:定義なし
      */
-    通常資格者("2", "通常資格者");
+    通常資格者("0", "通常資格者");
 
     private final RString code;
     private final RString fullName;
