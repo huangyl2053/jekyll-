@@ -17,7 +17,7 @@ import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GappeiJo
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GappeiJohoKubun.合併なし;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.kyotsutokei.ConfigKeysGappeiJohoKanri;
-import jp.co.ndensan.reams.db.dbz.definition.core.jyushochitokureisha.KoikinaiJushochitokureishaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.jyushochitokureisha.JushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParameter;
@@ -418,7 +418,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             }
 
             try {
-                row.setJutokuKubun(KoikinaiJushochitokureishaKubun.toValue(shikakuTokuso.get住所地特例フラグ()).get名称());
+                row.setJutokuKubun(JushochitokureishaKubun.toValue(shikakuTokuso.get住所地特例フラグ()).get名称());
             } catch (IllegalArgumentException e) {
                 row.setJutokuKubun(RString.EMPTY);
             }
