@@ -1,5 +1,11 @@
-﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
-hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+﻿shinseiYMD,UDD015YMD,FlexibleDate,,,,,shinseiYMD,A
+ketteiYMD,UDD015YMD,FlexibleDate,,,,,ketteiYMD,A
+tekiyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,tekiyoKaishiYMD,A
+tekiyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,tekiyoShuryoYMD,A
+ketteiKubun,varchar,RString,,,,,ketteiKubun,A
+hiShoninRiyu,varchar,RString,,,,,hiShoninRiyu,A
+shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 rirekiNo,int2,int,,,,,履歴番号,A
 kyuSochishaUmu,bool,boolean,,,,,旧措置者有無,A
 shinseiJiyu,varchar,RString,,,,,申請事由,A
