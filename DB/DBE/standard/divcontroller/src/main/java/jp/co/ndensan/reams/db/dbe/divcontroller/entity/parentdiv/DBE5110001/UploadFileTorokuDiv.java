@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -23,10 +24,12 @@ public class UploadFileTorokuDiv extends Panel {
      */
     @JsonProperty("lblUploadFile")
     private Label lblUploadFile;
-    @JsonProperty("uplUploadPanel")
-    private UploadPanel uplUploadPanel;
-    @JsonProperty("btnIkkatsuToroku")
-    private Button btnIkkatsuToroku;
+    @JsonProperty("UploadFileTorokuBatch")
+    private UploadFileTorokuBatchDiv UploadFileTorokuBatch;
+    @JsonProperty("btnRegistUploadFile")
+    private Button btnRegistUploadFile;
+    @JsonProperty("uploadedFileID")
+    private RString uploadedFileID;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -53,39 +56,57 @@ public class UploadFileTorokuDiv extends Panel {
     }
 
     /*
-     * getuplUploadPanel
-     * @return uplUploadPanel
+     * getUploadFileTorokuBatch
+     * @return UploadFileTorokuBatch
      */
-    @JsonProperty("uplUploadPanel")
-    public UploadPanel getUplUploadPanel() {
-        return uplUploadPanel;
+    @JsonProperty("UploadFileTorokuBatch")
+    public UploadFileTorokuBatchDiv getUploadFileTorokuBatch() {
+        return UploadFileTorokuBatch;
     }
 
     /*
-     * setuplUploadPanel
-     * @param uplUploadPanel uplUploadPanel
+     * setUploadFileTorokuBatch
+     * @param UploadFileTorokuBatch UploadFileTorokuBatch
      */
-    @JsonProperty("uplUploadPanel")
-    public void setUplUploadPanel(UploadPanel uplUploadPanel) {
-        this.uplUploadPanel = uplUploadPanel;
+    @JsonProperty("UploadFileTorokuBatch")
+    public void setUploadFileTorokuBatch(UploadFileTorokuBatchDiv UploadFileTorokuBatch) {
+        this.UploadFileTorokuBatch = UploadFileTorokuBatch;
     }
 
     /*
-     * getbtnIkkatsuToroku
-     * @return btnIkkatsuToroku
+     * getbtnRegistUploadFile
+     * @return btnRegistUploadFile
      */
-    @JsonProperty("btnIkkatsuToroku")
-    public Button getBtnIkkatsuToroku() {
-        return btnIkkatsuToroku;
+    @JsonProperty("btnRegistUploadFile")
+    public Button getBtnRegistUploadFile() {
+        return btnRegistUploadFile;
     }
 
     /*
-     * setbtnIkkatsuToroku
-     * @param btnIkkatsuToroku btnIkkatsuToroku
+     * setbtnRegistUploadFile
+     * @param btnRegistUploadFile btnRegistUploadFile
      */
-    @JsonProperty("btnIkkatsuToroku")
-    public void setBtnIkkatsuToroku(Button btnIkkatsuToroku) {
-        this.btnIkkatsuToroku = btnIkkatsuToroku;
+    @JsonProperty("btnRegistUploadFile")
+    public void setBtnRegistUploadFile(Button btnRegistUploadFile) {
+        this.btnRegistUploadFile = btnRegistUploadFile;
+    }
+
+    /*
+     * getuploadedFileID
+     * @return uploadedFileID
+     */
+    @JsonProperty("uploadedFileID")
+    public RString getUploadedFileID() {
+        return uploadedFileID;
+    }
+
+    /*
+     * setuploadedFileID
+     * @param uploadedFileID uploadedFileID
+     */
+    @JsonProperty("uploadedFileID")
+    public void setUploadedFileID(RString uploadedFileID) {
+        this.uploadedFileID = uploadedFileID;
     }
 
     // </editor-fold>

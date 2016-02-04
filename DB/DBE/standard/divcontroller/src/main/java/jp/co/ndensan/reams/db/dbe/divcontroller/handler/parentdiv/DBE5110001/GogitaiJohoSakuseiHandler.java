@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 合議体情報作成の抽象Handlerクラスです。
@@ -347,7 +348,7 @@ public class GogitaiJohoSakuseiHandler {
         div.getRadDummyFlag().setDisabled(flag);
         div.getDgShinsainList().setDisabled(flag);
         div.getDgHoketsuShinsainList().setDisabled(flag);
-        div.getBtnIkkatsuToroku().setDisabled(flag);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBatchRegister"), true);
         div.getBtnShinsainSelect().setDisabled(flag);
         div.getBtnSubShinsainSelect().setDisabled(flag);
         div.getBtnback().setDisabled(flag);
