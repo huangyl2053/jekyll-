@@ -35,7 +35,7 @@ public final class HihokenshashoSaikoufuShinseishoReport extends Report<Hihokens
     @Override
     public void writeBy(ReportSourceWriter<HihokenshashoSaikoufuShinseishoReportSource> writer) {
         IHihokenshashoSaikoufuShinseishoEditor bodyEditor = new HihokenshashoSaikoufuShinseishoBodyEditor(bodyItem);
-        IHihokenshashoSaikoufuShinseishoBuilder builder = new HihokenshashoSaikoufuShinseishoBuilderItem(bodyEditor);
+        IHihokenshashoSaikoufuShinseishoBuilder builder = new HihokenshashoSaikoufuShinseishoBuilderImpl(bodyEditor);
         writer.writeLine(builder);
     }
 }

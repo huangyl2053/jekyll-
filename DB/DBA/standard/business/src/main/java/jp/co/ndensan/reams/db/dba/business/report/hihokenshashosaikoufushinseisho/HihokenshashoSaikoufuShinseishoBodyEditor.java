@@ -18,17 +18,17 @@ public class HihokenshashoSaikoufuShinseishoBodyEditor implements IHihokenshasho
     /**
      * インスタンスを生成します。
      *
-     * @param item 受給資格証明書情報
+     * @param item 介護保険被保険者証等再交付申請書情報
      */
     public HihokenshashoSaikoufuShinseishoBodyEditor(HihokenshashoSaikoufuShinseishoBodyItem item) {
         this.item = item;
     }
 
     /**
-     * 受給資格証明書ボディEditorです。
+     * 介護保険被保険者証等再交付申請書ボディEditorです。
      *
-     * @param source 受給資格証明書Source
-     * @return 受給資格証明書Source
+     * @param source 介護保険被保険者証等再交付申請書Source
+     * @return 介護保険被保険者証等再交付申請書Source
      */
     @Override
     public HihokenshashoSaikoufuShinseishoReportSource edit(HihokenshashoSaikoufuShinseishoReportSource source) {
