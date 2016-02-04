@@ -190,36 +190,6 @@ public class IDbT7063KaigoJigyoshaShiteiServiceMapperTest {
         }
 
         @Test
-        public void 正しくGinkoCodeされている() {
-            assertThat(sut.getEntity().getGinkoCode(), is(entity.getGinkoCode()));
-        }
-
-        @Test
-        public void 正しくShitenCodeされている() {
-            assertThat(sut.getEntity().getShitenCode(), is(entity.getShitenCode()));
-        }
-
-        @Test
-        public void 正しくKozaShubetsuされている() {
-            assertThat(sut.getEntity().getKozaShubetsu(), is(entity.getKozaShubetsu()));
-        }
-
-        @Test
-        public void 正しくKozaNoされている() {
-            assertThat(sut.getEntity().getKozaNo(), is(entity.getKozaNo()));
-        }
-
-        @Test
-        public void 正しくKozaMeigininされている() {
-            assertThat(sut.getEntity().getKozaMeiginin(), is(entity.getKozaMeiginin()));
-        }
-
-        @Test
-        public void 正しくKozaMeigininKanaされている() {
-            assertThat(sut.getEntity().getKozaMeigininKana(), is(entity.getKozaMeigininKana()));
-        }
-
-        @Test
         public void 正しくShakaiFukushihoujinKeigenjigyouJisshi_umuされている() {
             assertThat(sut.getEntity().getShakaiFukushihoujinKeigenjigyouJisshi_umu(), is(entity.getShakaiFukushihoujinKeigenjigyouJisshi_umu()));
         }
