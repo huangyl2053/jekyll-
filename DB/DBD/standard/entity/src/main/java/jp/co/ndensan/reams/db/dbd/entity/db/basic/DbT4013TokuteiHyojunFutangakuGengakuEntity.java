@@ -12,12 +12,15 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 特定標準負担額減額テーブルのエンティティクラスです。
  */
 public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBase<DbT4013TokuteiHyojunFutangakuGengakuEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4013TokuteiHyojunFutangakuGengaku");
 
@@ -54,7 +57,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -63,7 +66,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -72,7 +75,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -81,17 +84,16 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -100,7 +102,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * shinseiYMDのgetメソッドです。
-     * 
+     *
      * @return shinseiYMD
      */
     @CheckForNull
@@ -110,7 +112,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * shinseiYMDのsetメソッドです。
-     * 
+     *
      * @param shinseiYMD shinseiYMD
      */
     public void setShinseiYMD(FlexibleDate shinseiYMD) {
@@ -119,7 +121,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * ketteiYMDのgetメソッドです。
-     * 
+     *
      * @return ketteiYMD
      */
     @CheckForNull
@@ -129,7 +131,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * ketteiYMDのsetメソッドです。
-     * 
+     *
      * @param ketteiYMD ketteiYMD
      */
     public void setKetteiYMD(FlexibleDate ketteiYMD) {
@@ -138,7 +140,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * tekiyoKaishiYMDのgetメソッドです。
-     * 
+     *
      * @return tekiyoKaishiYMD
      */
     @CheckForNull
@@ -148,7 +150,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * tekiyoKaishiYMDのsetメソッドです。
-     * 
+     *
      * @param tekiyoKaishiYMD tekiyoKaishiYMD
      */
     public void setTekiyoKaishiYMD(FlexibleDate tekiyoKaishiYMD) {
@@ -157,7 +159,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * tekiyoShuryoYMDのgetメソッドです。
-     * 
+     *
      * @return tekiyoShuryoYMD
      */
     @CheckForNull
@@ -167,7 +169,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * tekiyoShuryoYMDのsetメソッドです。
-     * 
+     *
      * @param tekiyoShuryoYMD tekiyoShuryoYMD
      */
     public void setTekiyoShuryoYMD(FlexibleDate tekiyoShuryoYMD) {
@@ -176,7 +178,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * ketteiKubunのgetメソッドです。
-     * 
+     *
      * @return ketteiKubun
      */
     @CheckForNull
@@ -186,7 +188,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * ketteiKubunのsetメソッドです。
-     * 
+     *
      * @param ketteiKubun ketteiKubun
      */
     public void setKetteiKubun(RString ketteiKubun) {
@@ -195,7 +197,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * hiShoninRiyuのgetメソッドです。
-     * 
+     *
      * @return hiShoninRiyu
      */
     @CheckForNull
@@ -205,7 +207,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * hiShoninRiyuのsetメソッドです。
-     * 
+     *
      * @param hiShoninRiyu hiShoninRiyu
      */
     public void setHiShoninRiyu(RString hiShoninRiyu) {
@@ -214,7 +216,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
     public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
@@ -223,7 +225,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
     public void setShoKisaiHokenshaNo(@Nonnull ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
@@ -232,7 +234,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -241,7 +243,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
@@ -250,7 +252,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -259,7 +261,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(@Nonnull int rirekiNo) {
@@ -268,7 +270,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * 申請事由のgetメソッドです。
-     * 
+     *
      * @return 申請事由
      */
     @CheckForNull
@@ -278,7 +280,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * 申請事由のsetメソッドです。
-     * 
+     *
      * @param shinseiJiyu 申請事由
      */
     public void setShinseiJiyu(RString shinseiJiyu) {
@@ -292,7 +294,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
      * <br/>・第二段階
      * <br/>・第三段階
      * <br/>・課税層第三段階
-     * 
+     *
      * @return 利用者負担段階
      */
     @CheckForNull
@@ -307,7 +309,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
      * <br/>・第二段階
      * <br/>・第三段階
      * <br/>・課税層第三段階
-     * 
+     *
      * @param riyoshaFutanDankai 利用者負担段階
      */
     public void setRiyoshaFutanDankai(RString riyoshaFutanDankai) {
@@ -317,9 +319,9 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
     /**
      * 標準負担区分のgetメソッドです。
      * <br/>
-     * <br/>1:標準負担 
+     * <br/>1:標準負担
      * <br/>2:特定標準負担
-     * 
+     *
      * @return 標準負担区分
      */
     @CheckForNull
@@ -330,9 +332,9 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
     /**
      * 標準負担区分のsetメソッドです。
      * <br/>
-     * <br/>1:標準負担 
+     * <br/>1:標準負担
      * <br/>2:特定標準負担
-     * 
+     *
      * @param hyojunFutanKubun 標準負担区分
      */
     public void setHyojunFutanKubun(RString hyojunFutanKubun) {
@@ -347,7 +349,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
      * <br/>3：従来型個室
      * <br/>4：多床室
      * <br/>5：従来型個室（老健）
-     * 
+     *
      * @return 居室種別
      */
     @CheckForNull
@@ -363,7 +365,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
      * <br/>3：従来型個室
      * <br/>4：多床室
      * <br/>5：従来型個室（老健）
-     * 
+     *
      * @param kyoshitsuShubetsu 居室種別
      */
     public void setKyoshitsuShubetsu(RString kyoshitsuShubetsu) {
@@ -372,7 +374,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * 食費負担限度額のgetメソッドです。
-     * 
+     *
      * @return 食費負担限度額
      */
     @CheckForNull
@@ -382,7 +384,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * 食費負担限度額のsetメソッドです。
-     * 
+     *
      * @param shokuhiFutanGendogaku 食費負担限度額
      */
     public void setShokuhiFutanGendogaku(Decimal shokuhiFutanGendogaku) {
@@ -391,7 +393,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * ユニット型個室のgetメソッドです。
-     * 
+     *
      * @return ユニット型個室
      */
     @CheckForNull
@@ -401,7 +403,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * ユニット型個室のsetメソッドです。
-     * 
+     *
      * @param unitTypeKoshitsu ユニット型個室
      */
     public void setUnitTypeKoshitsu(Decimal unitTypeKoshitsu) {
@@ -410,7 +412,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * ユニット型準個室のgetメソッドです。
-     * 
+     *
      * @return ユニット型準個室
      */
     @CheckForNull
@@ -420,7 +422,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * ユニット型準個室のsetメソッドです。
-     * 
+     *
      * @param unitTypeJunKoshitsu ユニット型準個室
      */
     public void setUnitTypeJunKoshitsu(Decimal unitTypeJunKoshitsu) {
@@ -429,7 +431,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * 従来型個室（特養等）のgetメソッドです。
-     * 
+     *
      * @return 従来型個室（特養等）
      */
     @CheckForNull
@@ -439,7 +441,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * 従来型個室（特養等）のsetメソッドです。
-     * 
+     *
      * @param juraiTypeKoshitsu_Tokuyo 従来型個室（特養等）
      */
     public void setJuraiTypeKoshitsu_Tokuyo(Decimal juraiTypeKoshitsu_Tokuyo) {
@@ -448,7 +450,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * 従来型個室（老健・療養等）のgetメソッドです。
-     * 
+     *
      * @return 従来型個室（老健・療養等）
      */
     @CheckForNull
@@ -458,7 +460,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * 従来型個室（老健・療養等）のsetメソッドです。
-     * 
+     *
      * @param juraiTypeKoshitsu_Roken_Ryoyo 従来型個室（老健・療養等）
      */
     public void setJuraiTypeKoshitsu_Roken_Ryoyo(Decimal juraiTypeKoshitsu_Roken_Ryoyo) {
@@ -467,7 +469,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * 多床室のgetメソッドです。
-     * 
+     *
      * @return 多床室
      */
     @CheckForNull
@@ -477,7 +479,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * 多床室のsetメソッドです。
-     * 
+     *
      * @param tashoshitsu 多床室
      */
     public void setTashoshitsu(Decimal tashoshitsu) {
@@ -486,9 +488,9 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * このエンティティの主キーが他の{@literal DbT4013TokuteiHyojunFutangakuGengakuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4013TokuteiHyojunFutangakuGengakuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -536,6 +538,7 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -544,5 +547,4 @@ public class DbT4013TokuteiHyojunFutangakuGengakuEntity extends DbTableEntityBas
     }
 
 // </editor-fold>
-
 }
