@@ -112,6 +112,7 @@ public class TaJushochiTokureishaKanriHandler {
             div.getCcdShisetsuJoho().initialize();
             set他市町村住所地特例情報入力エリア(適用情報.records().get(0), 親画面状態);
             div.getDdlTekiyoJiyo().setDataSource(set適用事由());
+            div.getDgJushochiTokureiRireki().getGridSetting().getColumns().get(0).setVisible(false);
         } else if (状態_解除.equals(親画面状態)) {
             div.getTxtNyusyobi().setDisplayNone(true);
             div.getTxtTekiyobi().setDisplayNone(true);
@@ -122,9 +123,10 @@ public class TaJushochiTokureishaKanriHandler {
             div.getBtnKakunin().setVisible(true);
             set他市町村住所地特例情報入力エリア(適用情報.records().get(0), 親画面状態);
             div.getDdlKaijyoJiyo().setDataSource(set解除事由());
+            div.getDgJushochiTokureiRireki().getGridSetting().getColumns().get(0).setVisible(false);
         } else if (状態_変更.equals(親画面状態)) {
             div.getTajushochiTokureiInput().setVisible(false);
-            div.getDgJushochiTokureiRireki().getGridSetting().getColumn("jyoTai").setVisible(true);
+            div.getDgJushochiTokureiRireki().getGridSetting().getColumns().get(0).setVisible(false);
         }
     }
 
