@@ -8,14 +8,13 @@ package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei;
 import static jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode.values;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.strings.IRStringConvertable;
 
 /**
  * 申請届出代行区分の列挙型クラスです。
  *
- * @author n8223　朴義一
+ * @author LDNS
  */
-public enum ShinseiTodokedeDaikoKubunCode implements IRStringConvertable {
+public enum ShinseiTodokedeDaikoKubunCode {
 
     /**
      * 本人 <br/>
@@ -62,8 +61,7 @@ public enum ShinseiTodokedeDaikoKubunCode implements IRStringConvertable {
      *
      * @param code コード
      * @return 指定のコードに対応するShinseiTodokedeDaikoKubunCode
-     * @throws IllegalArgumentException
-     * 指定のコードに対応するShinseiTodokedeDaikoKubunCodeがないとき
+     * @throws IllegalArgumentException 指定のコードに対応するShinseiTodokedeDaikoKubunCodeがないとき
      */
     public static ShinseiTodokedeDaikoKubunCode toValue(RString code) throws IllegalArgumentException {
         for (ShinseiTodokedeDaikoKubunCode target : values()) {
@@ -73,10 +71,5 @@ public enum ShinseiTodokedeDaikoKubunCode implements IRStringConvertable {
         }
         throw new IllegalArgumentException(UrErrorMessages.存在しない
                 .getMessage().replace("コードに対応する申請届出代行区分").evaluate());
-    }
-
-    @Override
-    public RString toRString() {
-        return new RString(this.toString());
     }
 }
