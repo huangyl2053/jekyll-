@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dba.service.report.shikakushutokuidososhitsu;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
 import jp.co.ndensan.reams.db.dba.business.report.shikakushutokuidososhitsu.ShikakushutokuIdoSoshitsuItem;
 import jp.co.ndensan.reams.db.dba.business.report.shikakushutokuidososhitsu.ShikakushutokuIdoSoshitsuProerty;
 import jp.co.ndensan.reams.db.dba.business.report.shikakushutokuidososhitsu.ShikakushutokuIdoSoshitsuReport;
-import jp.co.ndensan.reams.db.dba.entity.report.shikakushutokuidososhitsu.HihokenshaKihonEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.shikakushutokuidososhitsu.ShikakushutokuIdoSoshitsuReportSource;
+import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
@@ -38,15 +38,17 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  *
  * 介護保険資格取得・異動・喪失届Printクラスです。
  */
 public class ShikakuShutokuIdoSoshitsuTodoke {
-    
+
     /**
      * 介護保険資格取得・異動・喪失届Printします。
+     *
      * @param 識別コード 識別コード
      * @param 被保険者番号 被保険者番号
      * @return 介護保険資格取得・異動・喪失届作成_帳票
@@ -62,14 +64,14 @@ public class ShikakuShutokuIdoSoshitsuTodoke {
                 for (ShikakushutokuIdoSoshitsuReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
                     ReportSourceWriter<ShikakushutokuIdoSoshitsuReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                        report.writeBy(reportSourceWriter);
+                    report.writeBy(reportSourceWriter);
                 }
             }
             return reportManager.publish();
         }
     }
-    
-    private static List<ShikakushutokuIdoSoshitsuReport> toReports(HihokenshaKihonEntity entity, RString ninshoshaYakushokuMei) {
+
+    private static List<ShikakushutokuIdoSoshitsuReport> toReports(HihokenshaKihonBusiness entity, RString ninshoshaYakushokuMei) {
         List<ShikakushutokuIdoSoshitsuReport> list = new ArrayList<>();
         // TODO 内部QA: 626 (認証者の取得のメッソードがありません)
         RString 生年月日 = RString.EMPTY;
@@ -87,15 +89,15 @@ public class ShikakuShutokuIdoSoshitsuTodoke {
                 RString.EMPTY,
                 entity.get被保険者氏名(),
                 entity.getフリガナ(),
-                entity.get被保険者番号(),
+                entity.get被保険者番号().value(),
                 entity.get性別(),
                 entity.get世帯主氏名(),
                 entity.get続柄());
         list.add(ShikakushutokuIdoSoshitsuReport.createReport(item));
         return list;
     }
-    
-    private static RString set生年月日_日本人(HihokenshaKihonEntity entity) {
+
+    private static RString set生年月日_日本人(HihokenshaKihonBusiness entity) {
         if (entity.get生年月日() != null && entity.get生年月日().isEmpty()) {
             return entity.get生年月日()
                     .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
@@ -103,8 +105,8 @@ public class ShikakuShutokuIdoSoshitsuTodoke {
         }
         return RString.EMPTY;
     }
-    
-    private static RString set生年月日(HihokenshaKihonEntity entity) {
+
+    private static RString set生年月日(HihokenshaKihonBusiness entity) {
         RString 外国人表示制御_生年月日表示方法 = BusinessConfig
                 .get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
         RString 生年月日 = RString.EMPTY;
@@ -116,18 +118,19 @@ public class ShikakuShutokuIdoSoshitsuTodoke {
         }
         return 生年月日;
     }
-    
-    private static RString set生年月日_和暦表示(HihokenshaKihonEntity entity) {
-            RString 生年月日 = RString.EMPTY;
-            if (!entity.is生年月日不詳区分()) {
-                生年月日 = (entity.get生年月日() == null || entity.get生年月日().isEmpty()) ? RString.EMPTY : entity.get生年月日()
-                        .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            }
+
+    private static RString set生年月日_和暦表示(HihokenshaKihonBusiness entity) {
+        RString 生年月日 = RString.EMPTY;
+        RString rstFalse = new RString("false");
+        if (rstFalse.equals(entity.get生年月日不詳区分())) {
+            生年月日 = (entity.get生年月日() == null || entity.get生年月日().isEmpty()) ? RString.EMPTY : entity.get生年月日()
+                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
         return 生年月日;
     }
-    
-     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
+
+    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
             IReportProperty<T> property, ReportManager manager) {
         ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
         for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
@@ -137,13 +140,9 @@ public class ShikakuShutokuIdoSoshitsuTodoke {
         builder.isKojinNo(property.containsKojinNo());
         return builder.<T>create();
     }
-    
-    
-    private HihokenshaKihonEntity get被保険者基本情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
-        HihokenshaKihonEntity entity = new HihokenshaKihonEntity();
-        
-        return entity;
+
+    private HihokenshaKihonBusiness get被保険者基本情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+        TokuteifutanGendogakuShinseisho shinjoho = InstanceProvider.create(TokuteifutanGendogakuShinseisho.class);
+        return shinjoho.getHihokenshaKihonJoho(被保険者番号, 識別コード);
     }
-    
-    
 }
