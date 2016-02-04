@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -42,14 +41,14 @@ public class RenrakusakiJohoBuilder {
     }
 
     /**
-     * 連絡先区分を設定します。
+     * 連絡先区分番号を設定します。
      *
-     * @param 連絡先区分 連絡先区分
+     * @param 連絡先区分番号 連絡先区分番号
      * @return {@link RenrakusakiJohoBuilder}
      */
-    public RenrakusakiJohoBuilder set連絡先区分(Code 連絡先区分) {
-        requireNonNull(連絡先区分, UrSystemErrorMessages.値がnull.getReplacedMessage("連絡先区分"));
-        entity.setRenrakusakiKubun(連絡先区分);
+    public RenrakusakiJohoBuilder set連絡先区分番号(RString 連絡先区分番号) {
+        requireNonNull(連絡先区分番号, UrSystemErrorMessages.値がnull.getReplacedMessage("連絡先区分番号"));
+        entity.setRenrakusakiKubunNo(連絡先区分番号);
         return this;
     }
 

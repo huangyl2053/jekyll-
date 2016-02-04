@@ -63,18 +63,6 @@ public class NinteiChosaHoshuTankaBuilder {
     }
 
     /**
-     * 意見書入手パターンを設定します。
-     *
-     * @param 意見書入手パターン 意見書入手パターン
-     * @return {@link NinteiChosaHoshuTankaBuilder}
-     */
-    public NinteiChosaHoshuTankaBuilder set意見書入手パターン(Code 意見書入手パターン) {
-        requireNonNull(意見書入手パターン, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書入手パターン"));
-        entity.setIkenshoNyushuPatern(意見書入手パターン);
-        return this;
-    }
-
-    /**
      * 開始年月を設定します。
      *
      * @param 開始年月 開始年月

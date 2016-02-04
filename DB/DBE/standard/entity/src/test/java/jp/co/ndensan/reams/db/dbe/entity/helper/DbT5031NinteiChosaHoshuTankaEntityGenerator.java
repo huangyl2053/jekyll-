@@ -16,7 +16,6 @@ public final class DbT5031NinteiChosaHoshuTankaEntityGenerator {
 
     public static final Code DEFAULT_調査区分 = new Code("01");
     public static final Code DEFAULT_訪問種別 = new Code("01");
-    public static final Code DEFAULT_意見書入手パターン = new Code("01");
     public static final FlexibleYearMonth DEFAULT_開始年月 = new FlexibleYearMonth("201508");
     public static final FlexibleYearMonth DEFAULT_終了年月 = new FlexibleYearMonth("201508");
     public static final Decimal DEFAULT_単価 = new Decimal(1);
@@ -31,7 +30,6 @@ public final class DbT5031NinteiChosaHoshuTankaEntityGenerator {
         DbT5031NinteiChosaHoshuTankaEntity entity = new DbT5031NinteiChosaHoshuTankaEntity();
         entity.setChosaKubun(DEFAULT_調査区分);
         entity.setHomonShubetsu(DEFAULT_訪問種別);
-        entity.setIkenshoNyushuPatern(DEFAULT_意見書入手パターン);
         entity.setKaishiYM(DEFAULT_開始年月);
         entity.setShuryoYM(DEFAULT_終了年月);
         entity.setTanka(DEFAULT_単価);
