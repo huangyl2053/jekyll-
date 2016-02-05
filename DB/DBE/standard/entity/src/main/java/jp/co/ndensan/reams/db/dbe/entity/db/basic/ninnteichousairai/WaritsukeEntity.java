@@ -62,4 +62,5 @@ public class WaritsukeEntity {
     private FlexibleDate ninteichosaKanryoYMD;
     private RString shinseishoKanriNo;
     private int ninteichosaIraiRirekiNo;
+    private RString ninteiChosainCode;
 }

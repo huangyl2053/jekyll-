@@ -262,6 +262,7 @@ public class NinteiChosaIraiHandler {
         }
         row.setZenYokaigoKubunCode(business.getZenYokaigoKubunCode() == null ? RString.EMPTY : business.getZenYokaigoKubunCode().value());
         row.setAge(new RString(String.valueOf(business.getAge())));
+        row.setNinteiChosainCode(nullToEmpty(business.getNinteiChosainCode()));
     }
 
     /**
@@ -315,6 +316,7 @@ public class NinteiChosaIraiHandler {
         row.setZenkaiNinteiYMD(waritsukeZumiShinseishaIchiranRow.getZenkaiNinteiYMD());
         row.setZenYokaigoKubunCode(waritsukeZumiShinseishaIchiranRow.getZenYokaigoKubunCode());
         row.setAge(waritsukeZumiShinseishaIchiranRow.getAge());
+        row.setNinteiChosainCode(waritsukeZumiShinseishaIchiranRow.getNinteiChosainCode());
         div.getDgMiwaritsukeShinseishaIchiran().getDataSource().add(row);
     }
 
@@ -426,6 +428,7 @@ public class NinteiChosaIraiHandler {
         }
         row.setZenYokaigoKubunCode(business.getZenYokaigoKubunCode() == null ? RString.EMPTY : business.getZenYokaigoKubunCode().value());
         row.setAge(new RString(String.valueOf(business.getAge())));
+        row.setNinteiChosainCode(nullToEmpty(business.getNinteiChosainCode()));
     }
 
     /**
@@ -478,6 +481,7 @@ public class NinteiChosaIraiHandler {
         row.setZenkaiNinteiYMD(miwaritsukeShinseishaIchiranRow.getZenkaiNinteiYMD());
         row.setZenYokaigoKubunCode(miwaritsukeShinseishaIchiranRow.getZenYokaigoKubunCode());
         row.setAge(miwaritsukeShinseishaIchiranRow.getAge());
+        row.setNinteiChosainCode(miwaritsukeShinseishaIchiranRow.getNinteiChosainCode());
         div.getDgWaritsukeZumiShinseishaIchiran().getDataSource().add(row);
     }
 

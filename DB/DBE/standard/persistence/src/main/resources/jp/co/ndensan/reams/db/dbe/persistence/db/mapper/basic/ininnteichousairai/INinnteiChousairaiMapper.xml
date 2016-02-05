@@ -219,6 +219,7 @@
         <result property="temp_chosainShimei" column="Temp_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteichosaKanryoYMD" column="ninteichosaKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiChosainCode" column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo"/>
     </resultMap>
     <select id="getWaritsuke" resultMap="result_WaritsukeEntity" 
@@ -260,6 +261,7 @@
                 ,dbT5105."ninteichosaKanryoYMD"            AS  "ninteichosaKanryoYMD"
                 ,dbT5101."shinseishoKanriNo"               AS "shinseishoKanriNo"
                 ,dbT5201Waritukezumi."ninteichosaIraiRirekiNo"         AS "ninteichosaIraiRirekiNo"
+                ,dbT5101."ninteiChosainCode" AS "ninteiChosainCode"
               FROM
                 rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
                 INNER JOIN
@@ -296,8 +298,11 @@
                     ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
                 LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbT5913
                     ON dbT5913."shichosonCode" = dbT7051."shichosonCode"
+                    AND dbT5913."ninteichosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
+                    AND dbT5913."ninteiChosainNo" = dbT5101."ninteiChosainCode"
                 LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910
                     ON dbT5910."shichosonCode" = dbT7051."shichosonCode"
+                    AND dbT5910."ninteichosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
                 LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911
                     ON
                         dbT5911."shichosonCode" IN ( 
@@ -467,8 +472,11 @@
                             ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
                         LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbT5913
                             ON dbT5913."shichosonCode" = dbT7051."shichosonCode"
+                            AND dbT5913."ninteichosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
+                            AND dbT5913."ninteiChosainNo" = dbT5101."ninteiChosainCode"
                         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910
                             ON dbT5910."shichosonCode" = dbT7051."shichosonCode"
+                            AND dbT5910."ninteichosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
                         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911
                             ON
                                 dbT5911."shichosonCode" IN ( 
@@ -595,6 +603,7 @@
         <result property="temp_jigyoshaMeisho" column="jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="temp_chosainShimei" column="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiChosainCode" column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
     </resultMap>
      <select id="getShiteWaritsuke" resultMap="result_ShiteWaritsukeEntity" 
@@ -617,11 +626,13 @@
                 , dbT5913SenKai."chosainShimei" AS chosainShimei
                 , dbT5101."shinseishoKanriNo"               AS "shinseishoKanriNo"
                 , DbT5201Nintei."ninteichosaIraiRirekiNo"         AS "ninteichosaIraiRirekiNo"
+                , dbT5101."ninteiChosainCode" AS "ninteiChosainCode"
               FROM
                 rgdb."DbT5101NinteiShinseiJoho" AS dbT5101 
                 INNER JOIN ( 
                   SELECT
                     dbT5101Nintei."shinseishoKanriNo" AS shinseishoKanriNo 
+                   ,dbT5201Nintei."shinseishoKanriNo" AS shinseishoKanriNoNull
                   FROM
                     rgdb."DbT5101NinteiShinseiJoho" AS dbT5101Nintei 
                     LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201Nintei 
@@ -700,7 +711,7 @@
                 <if test="uses支所コード">
                     AND dbT5101."shishoCode" = #{shishoCode}
                 </if>
-                AND DbT5201Nintei."shinseishoKanriNo" = NULL 
+                AND dbT5101ShiTe.shinseishoKanriNoNull IS NULL 
               ORDER BY
                 dbT5101."chosaKubun"
          </select>
@@ -723,6 +734,7 @@
             <result property="temp_chosainShimei" column="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
             <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
             <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
+            <result property="ninteiChosainCode" column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         </resultMap>
          <select id="getShiteWaritsukeSai" resultMap="result_ShiteWaritsukeSaiEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
@@ -736,6 +748,7 @@
                     , dbT5101."chikuCode" AS "chikuCode"
                     , dbT5101."chosaKubun" AS "chosaKubun"
                     , dbT5101."jusho" AS "jusho" 
+                    , dbT5101."ninteiChosainCode" AS "ninteiChosainCode"
                     , dbT5911Shujii."iryoKikanMeisho" AS iryoKikanMeisho
                     , dbT5912Shujii."shujiiName" AS shujiiName
                     , dbT5911SenKai."iryoKikanMeisho" AS Temp_iryoKikanMeisho

@@ -114,6 +114,7 @@ public class NinteiChosaIrai {
         getHandler(div).setDisabledToChosaItakusakiAndChosainKihonJoho(true);
         ChosaItakusakiCode chosaItakusakiCode = new ChosaItakusakiCode(row.getChosaItakusakiCode().getValue());
         ViewStateHolder.put(ViewStateKeys.認定調査委託先コード, row.getChosaItakusakiCode().getValue());
+
         ViewStateHolder.put(ViewStateKeys.保険者名称, row.getHokenshaName());
         RString 支所コード = ViewStateHolder.get(ViewStateKeys.支所コード, RString.class);
         ShoKisaiHokenshaNo 保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
@@ -358,7 +359,7 @@ public class NinteiChosaIrai {
             if (MIWARITSUKE.equals(row.getJotai())) {
                 ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
                 int 認定調査依頼履歴番号 = 1;
-                RString 調査員コード = ViewStateHolder.get(ViewStateKeys.調査員コード, RString.class);
+                RString 調査員コード = row.getNinteiChosainCode();
                 RString 認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査委託先コード, RString.class);
 
                 FlexibleDate 認定申請日 = new FlexibleDate(row.getNinteiShinseiDay().getValue().toDateString());

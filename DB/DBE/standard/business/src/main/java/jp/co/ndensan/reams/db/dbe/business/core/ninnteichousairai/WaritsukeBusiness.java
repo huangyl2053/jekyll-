@@ -355,4 +355,13 @@ public class WaritsukeBusiness {
     public int getNinteichosaIraiRirekiNo() {
         return entity.getNinteichosaIraiRirekiNo();
     }
+
+    /**
+     * 調査員コードを返します。
+     *
+     * @return 調査員コード
+     */
+    public RString getNinteiChosainCode() {
+        return entity.getNinteiChosainCode();
+    }
 }
