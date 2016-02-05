@@ -14,14 +14,10 @@
             rgdb."DbT1001HihokenshaDaicho"
         WHERE 
             "logicalDeletedFlag" = FALSE
-        <if test="is被保険者番号_FLG == true and is識別コード_FLG == true" >
-            AND  "hihokenshaNo" = #{被保険者番号}
-            AND  "shikibetsuCode" = #{識別コード}
-        </if>
-        <if test="is被保険者番号_FLG == true and is識別コード_FLG == false" >
+        <if test="is被保険者番号_FLG" >
             AND  "hihokenshaNo" = #{被保険者番号}
         </if>
-        <if test="is被保険者番号_FLG == false and is識別コード_FLG == true" >
+        <if test="is識別コード_FLG" >
             AND  "shikibetsuCode" = #{識別コード}
         </if>
         ORDER BY "idoYMD" DESC, "edaNo" DESC limit 1
