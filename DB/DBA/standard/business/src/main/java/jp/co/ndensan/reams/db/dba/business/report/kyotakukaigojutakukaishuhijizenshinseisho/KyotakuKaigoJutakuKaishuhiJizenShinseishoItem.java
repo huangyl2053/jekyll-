@@ -32,18 +32,18 @@ public class KyotakuKaigoJutakuKaishuhiJizenShinseishoItem {
     /**
      * コンストラクタです。
      *
-     * @param hihokenshaNameKana RString
-     * @param hokenshaNo RString
-     * @param hihokenshaName RString
-     * @param hihokenshaNo RString
-     * @param birthYMD RString
-     * @param yubinNo RString
-     * @param telNo RString
-     * @param hihokenJusho RString
-     * @param shiseiBun RString
-     * @param douiBun RString
-     * @param remban RString
-     * @param ninshoshaYakushokuMei RString
+     * @param hihokenshaNameKana 氏名フリガナ
+     * @param hokenshaNo 保険者番号
+     * @param hihokenshaName 氏名
+     * @param hihokenshaNo 介護保険被保険者番号
+     * @param birthYMD 生年月日
+     * @param yubinNo 郵便番号
+     * @param telNo 電話番号
+     * @param hihokenJusho 住所
+     * @param shiseiBun 申請文
+     * @param douiBun 委任文
+     * @param remban 連番
+     * @param ninshoshaYakushokuMei 認証者役職名
      */
     public KyotakuKaigoJutakuKaishuhiJizenShinseishoItem(RString hihokenshaNameKana,
             RString hokenshaNo,
