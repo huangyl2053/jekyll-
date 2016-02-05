@@ -30,11 +30,12 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.ToshoShutsuryo
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.KariSanteiNonyuTsuchiShoSeigyoJohoParameter;
 import jp.co.ndensan.reams.db.dbb.persistence.core.kanri.INonyuTsuchiShoSeigyoJohoLoaderMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -44,7 +45,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
 
     private final MapperProvider mapperProvider;
-    private FlexibleYear 調定年度 = null;
+    private FlexibleYear 調定年度;
     private final RString RSTRING_1 = new RString("1");
     private final RString RSTRING_0 = new RString("0");
     private final RString RSTRING_2 = new RString("2");
@@ -97,20 +98,16 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
     }
 
     /**
-     * コンストラクタです。
-     */
-    NonyuTsuchiShoSeigyoJohoLoaderFinder(FlexibleYear 調定年度) {
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.調定年度 = 調定年度;
-    }
-
-    /**
-     * テスト用コンストラクタです。
+     * {@link InstanceProvider#create}にて生成した{@link NonyuTsuchiShoSeigyoJohoLoader}のインスタンスを返します。
      *
-     * @param mapperProvider {@link MapperProvider}
+     * @param 調定年度 調定年度
+     * @return {@link InstanceProvider#create}にて生成した{@link NonyuTsuchiShoSeigyoJohoLoader}のインスタンス
      */
-    NonyuTsuchiShoSeigyoJohoLoaderFinder(MapperProvider mapperProvider) {
-        this.mapperProvider = mapperProvider;
+    public static NonyuTsuchiShoSeigyoJohoLoaderFinder createInstance(FlexibleYear 調定年度) {
+        NonyuTsuchiShoSeigyoJohoLoaderFinder nonyuTsuchiShoSeigyoJohoLoader
+                = InstanceProvider.create(NonyuTsuchiShoSeigyoJohoLoaderFinder.class);
+        nonyuTsuchiShoSeigyoJohoLoader.調定年度 = 調定年度;
+        return nonyuTsuchiShoSeigyoJohoLoader;
     }
 
     /**
@@ -119,7 +116,11 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
      * @return {@link InstanceProvider#create}にて生成した{@link NonyuTsuchiShoSeigyoJohoLoader}のインスタンス
      */
     public static NonyuTsuchiShoSeigyoJohoLoaderFinder createInstance() {
-        return InstanceProvider.create(NonyuTsuchiShoSeigyoJohoLoaderFinder.class);
+        NonyuTsuchiShoSeigyoJohoLoaderFinder nonyuTsuchiShoSeigyoJohoLoader
+                = InstanceProvider.create(NonyuTsuchiShoSeigyoJohoLoaderFinder.class);
+        nonyuTsuchiShoSeigyoJohoLoader.調定年度
+                = new FlexibleYear(BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課));
+        return nonyuTsuchiShoSeigyoJohoLoader;
     }
 
     /**
@@ -129,9 +130,6 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
      */
     public KariSanteiNonyuTsuchiShoSeigyoJoho get仮算定納入通知書制御情報() {
         INonyuTsuchiShoSeigyoJohoLoaderMapper mapper = mapperProvider.create(INonyuTsuchiShoSeigyoJohoLoaderMapper.class);
-        if (null == 調定年度) {
-            調定年度 = new FlexibleYear(RDate.getNowDate().getYear().toString());
-        }
         KariSanteiNonyuTsuchiShoSeigyoJohoParameter 納入通知書制御情報取得パラメータ
                 = KariSanteiNonyuTsuchiShoSeigyoJohoParameter.createParam(SubGyomuCode.DBB介護賦課, 調定年度);
         List<DbT7067ChohyoSeigyoHanyoEntity> chohyoSeigyoHanyoEntityLst = mapper.get仮算定納入通知書制御情報(納入通知書制御情報取得パラメータ);
@@ -386,9 +384,6 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
      */
     public HonSanteiNonyuTsuchiShoSeigyoJoho get本算定納入通知書制御情報() {
         INonyuTsuchiShoSeigyoJohoLoaderMapper mapper = mapperProvider.create(INonyuTsuchiShoSeigyoJohoLoaderMapper.class);
-        if (null == 調定年度) {
-            調定年度 = new FlexibleYear(RDate.getNowDate().getYear().toString());
-        }
         KariSanteiNonyuTsuchiShoSeigyoJohoParameter 納入通知書制御情報取得パラメータ
                 = KariSanteiNonyuTsuchiShoSeigyoJohoParameter.createParam(SubGyomuCode.DBB介護賦課, 調定年度);
         List<DbT7067ChohyoSeigyoHanyoEntity> ChohyoSeigyoHanyoLst = mapper.get本算定納入通知書制御情報(納入通知書制御情報取得パラメータ);
