@@ -68,10 +68,10 @@ public class IkenshoSakuseiIraiIchiranhyoHeadEditor implements IkenshoSakuseiIra
         source.listIchiranhyo_8 = Seibetsu.toValue(item.getSeibetsu()).get名称();
         RDate iken = new RDate(item.getIkenshoSakuseiKigenYMD().toString());
         source.listIchiranhyo_9 = iken.wareki().toDateString();
-        source.toiawasesaki = item.getToiawasesaki(); //TODO QA670
+        source.toiawasesaki = item.getToiawasesaki();
         source.denshiKoin = item.getDenshiKoin();
         source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
-        source.shuchoMei = item.getShuchoMei(); //TODO QA670
+        source.shuchoMei = item.getShuchoMei();
         source.shichosonMei = item.getShichosonMei();
         source.koinShoryaku = item.getKoinShoryaku();
         return source;
