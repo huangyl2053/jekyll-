@@ -45,12 +45,7 @@ public class FukushiyoguKonyuhiShikyuGendogakuValidate {
             return flag;
         }
         Decimal 支給限度額 = sut.getShikyuGendogaku(被保険者番号, サービス提供年月);
-        SokanbaraiShiharaiKekka entity = sut.getShokanShiharaiKekkaAll(被保険者番号,
-                サービス提供年月,
-                整理番号,
-                事業者番号,
-                様式番号,
-                明細番号);
+        SokanbaraiShiharaiKekka entity = sut.getShokanShiharaiKekkaAll(被保険者番号, サービス提供年月);
         Decimal 今までの保険者対象費用額 = entity.get保険対象費用額();
         Decimal 前回までの保険対象費用額 = 今までの保険者対象費用額;
         if (整理番号 != null && !整理番号.isEmpty()) {

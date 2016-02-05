@@ -126,6 +126,18 @@ public class ShokanFukushiYoguHanbaihiBuilder {
     }
 
     /**
+     * 連番を設定します。
+     *
+     * @param 連番 連番
+     * @return {@link ShokanFukushiYoguHanbaihiBuilder}
+     */
+    public ShokanFukushiYoguHanbaihiBuilder set連番(RString 連番) {
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+        entity.setRenban(連番);
+        return this;
+    }
+
+    /**
      * サービスコードを設定します。
      *
      * @param サービスコード サービスコード

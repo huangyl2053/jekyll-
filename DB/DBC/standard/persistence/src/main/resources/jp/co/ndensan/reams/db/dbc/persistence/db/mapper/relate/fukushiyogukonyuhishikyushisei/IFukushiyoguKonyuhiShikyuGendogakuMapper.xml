@@ -91,7 +91,7 @@
         AND
         JukyushaDaicho."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> #{サービス提供年月}
         AND
-        JukyushaDaicho."logicalDeletedFlag" <![CDATA[>=]]> true
+        JukyushaDaicho."logicalDeletedFlag" <![CDATA[<>]]> true
         ORDER BY
         JukyushaDaicho."ninteiYukoKikanKaishiYMD" DESC
         LIMIT 1
@@ -116,9 +116,9 @@
         AND
         HihokenshaDaicho."idoYMD" <![CDATA[<=]]> #{サービス提供年月}
         AND
-        HihokenshaDaicho."logicalDeletedFlag" <![CDATA[>=]]> true
+        HihokenshaDaicho."logicalDeletedFlag" <![CDATA[<>]]> true
         AND
-        KoseiShichosonMaster."isDeleted" <![CDATA[>=]]> true
+        KoseiShichosonMaster."isDeleted" <![CDATA[<>]]> true
         ORDER BY
         HihokenshaDaicho."idoYMD" DESC
     </select>
