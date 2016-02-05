@@ -61,12 +61,44 @@ module DBZ {
                 return new UZA.TextBoxDate(this.convFiledName("txtShindanYMD3"));
             }
 
-            public btnShuyoShippeiGuide(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnShuyoShippeiGuide"));
+            public geninShikkanPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("geninShikkanPanel"));
             }
 
-            public txtShuyoShippeiCode(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtShuyoShippeiCode"));
+            public btnAdd(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnAdd"));
+            }
+
+            public dgGenyin(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgGenyin"));
+            }
+
+            public geninShikkanShosai(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("geninShikkanShosai"));
+            }
+
+            public txtGeninShikkanCode(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtGeninShikkanCode"));
+            }
+
+            public btnToSearch(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnToSearch"));
+            }
+
+            public txtMeisho(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtMeisho"));
+            }
+
+            public radIsShutaruGeninShikkan(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radIsShutaruGeninShikkan"));
+            }
+
+            public btnNo(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnNo"));
+            }
+
+            public btnOK(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnOK"));
             }
 
             public ShojoAnteisei(): UZA.Panel {
@@ -89,8 +121,8 @@ module DBZ {
                 return new UZA.Label(this.convFiledName("lblChiryoNaiyo"));
             }
 
-            public imgChiryoNaiyo(): UZA.StaticImage {
-                return new UZA.StaticImage(this.convFiledName("imgChiryoNaiyo"));
+            public txtNaiyo(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtNaiyo"));
             }
 
             public btnKakutei(): UZA.Button {
