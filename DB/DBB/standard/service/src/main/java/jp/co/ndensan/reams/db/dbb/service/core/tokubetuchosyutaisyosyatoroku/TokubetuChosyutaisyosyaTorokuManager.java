@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -385,6 +386,7 @@ public class TokubetuChosyutaisyosyaTorokuManager {
     public SearchResult<HihokenshaDaicho> getInsuredRegisterInformation(HihokenshaNo 被保険者番号) {
         ITokubetuChosyutaisyosyaTorokuMapper mapper = mapperProvider.create(ITokubetuChosyutaisyosyaTorokuMapper.class);
         sqlparams.set被保険者番号(被保険者番号);
+        sqlparams.set資格区分(ShikakuKubun._１号.getコード());
         DbT1001HihokenshaDaichoEntity 被保険者台帳情報データEntity = mapper.getHihokenshaFlag(sqlparams);
         List<HihokenshaDaicho> 被保険者台帳情報データリスト = new ArrayList<>();
         if (null == 被保険者台帳情報データEntity) {

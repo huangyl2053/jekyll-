@@ -24,7 +24,6 @@ public class TokubetuChosyutaisyosyaTorokusqlparamEntity {
     FlexibleYear 賦課年度;
     HihokenshaNo 被保険者番号;
     ShoriName 処理名;
-    //ShikakuKubun TODO DBA介護資格.Enum.資格区分.１号被保険者
     RString 資格区分;
     RDate システム日付 = RDate.getNowDate();
     SubGyomuCode サブ業務コード = SubGyomuCode.DBB介護賦課;
