@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -46,7 +47,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class ShiharaiHenkoShokanbaraikaShoryoShinseisho {
 
-    private static final RString FALSE = new RString("false");
+    private static final RString 生年月日区分 = new RString("1");
 
     /**
      * 支払方法変更（償還払い化）終了申請書帳票作成します。
@@ -78,10 +79,10 @@ public class ShiharaiHenkoShokanbaraikaShoryoShinseisho {
         RString 生年月日 = RString.EMPTY;
         if (JuminShubetsu.日本人.getCode().equals(business.get住民種別コード())
                 || JuminShubetsu.住登外個人_日本人.getCode().equals(business.get住民種別コード())) {
-            set生年月日_日本人(business);
+            set生年月日_日本人(business.get生年月日());
         } else if (JuminShubetsu.外国人.getCode().equals(business.get住民種別コード())
                 || JuminShubetsu.住登外個人_外国人.getCode().equals(business.get住民種別コード())) {
-            生年月日 = set生年月日(business);
+            生年月日 = set生年月日(business.get生年月日(), business.get生年月日不詳区分());
         }
         //TODO 通知文の取得 QA:648
         //TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
@@ -94,7 +95,7 @@ public class ShiharaiHenkoShokanbaraikaShoryoShinseisho {
                 生年月日,
                 // TODO QA：643 (「IKojin.get性別.getshortJapaneseを使って名称を取得する」不明)
                 Gender.toValue(business.get性別()).getName().getShortJapanese(),
-                business.get郵便番号(),
+                set郵便番号(business.get郵便番号()),
                 business.get住所(),
                 business.get電話番号(),
                 new RString("通知文"));
@@ -102,36 +103,38 @@ public class ShiharaiHenkoShokanbaraikaShoryoShinseisho {
         return list;
     }
 
-    private static RString set生年月日_日本人(HihokenshaKihonBusiness business) {
-        if (business.get生年月日() != null && business.get生年月日().isEmpty()) {
-            return business.get生年月日()
+    private static RString set生年月日_日本人(FlexibleDate 生年月日) {
+        if (生年月日 != null && 生年月日.isEmpty()) {
+            return 生年月日
                     .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         return RString.EMPTY;
     }
 
-    private static RString set生年月日(HihokenshaKihonBusiness business) {
+    private static RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
         RString 外国人表示制御_生年月日表示方法 = BusinessConfig
                 .get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
-        RString 生年月日 = RString.EMPTY;
-        if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
-            生年月日 = (business.get生年月日() == null || business.get生年月日().isEmpty()) ? RString.EMPTY : business.get生年月日()
+        if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
+            return (生年月日 == null || 生年月日.isEmpty()) ? RString.EMPTY : 生年月日
                     .seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        } else if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
-            生年月日 = set生年月日_和暦表示(business);
+        } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
+            return set生年月日_和暦表示(生年月日, 生年月日不詳区分);
         }
-        return 生年月日;
+        return RString.EMPTY;
     }
 
-    private static RString set生年月日_和暦表示(HihokenshaKihonBusiness business) {
-        RString 生年月日 = RString.EMPTY;
-        if (FALSE.equals(business.get生年月日不詳区分())) {
-            生年月日 = (business.get生年月日() == null || business.get生年月日().isEmpty()) ? RString.EMPTY : business.get生年月日()
+    private static RString set生年月日_和暦表示(FlexibleDate 生年月日, RString 生年月日不詳区分) {
+        if (生年月日区分.equals(生年月日不詳区分)) {
+            return (生年月日 == null || 生年月日.isEmpty()) ? RString.EMPTY : 生年月日
                     .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
-        return 生年月日;
+        return RString.EMPTY;
+    }
+
+    private static RString set郵便番号(RString 郵便番号) {
+        return new RString(郵便番号.substring(0, 3) + "-" + 郵便番号.substring(3));
     }
 
     private HihokenshaKihonBusiness get被保険者基本情報(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
