@@ -173,7 +173,7 @@
         <id column="meisaiNo"/>
         <id column="renban"/>
         <result property="serviceName" column="serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="hokenshaName" column="hokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenshaName" column="hokenjaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association  property="entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3107ShokanMeisaiJushochiTokureiMapper.resultMap_DbT3107ShokanMeisaiJushochiTokureiEntity">
         </association>
