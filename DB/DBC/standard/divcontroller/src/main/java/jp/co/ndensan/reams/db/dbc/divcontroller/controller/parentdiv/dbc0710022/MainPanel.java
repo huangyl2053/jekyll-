@@ -5,15 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0710022;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.DBC0710022TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0710022.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
-import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujyusyo.JutakukaishuSikyuShinsei;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -26,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -53,14 +48,14 @@ public class MainPanel {
         RDate サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, RDate.class);
         // div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().load(識別コード);
         //div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().initialize(HihokenshaNo.EMPTY);
-        JutakukaishuSikyuShinsei fu = JutakukaishuSikyuShinsei.createInstance();
-        List<DbT3118ShikibetsuNoKanriEntity> 様式名称 = fu.getYoshikiName(サービス年月);
-        List<KeyValueDataSource> sources = new ArrayList<>();
-        for (DbT3118ShikibetsuNoKanriEntity db : 様式名称) {
-            sources.add(new KeyValueDataSource(db.getShikibetsuNo(), db.getRyakusho()));
-        }
-        div.getDdlSyomeisyo().setDataSource(sources);
-        div.getDdlSyomeisyo().setSelectedKey(様式名称.get(1).getShikibetsuNo());//ViewStateHolder.get(ViewStateKeys.証明書, RDate.class)
+//        JutakukaishuSikyuShinsei fu = JutakukaishuSikyuShinsei.createInstance();
+//        List<DbT3118ShikibetsuNoKanriEntity> 様式名称 = fu.getYoshikiName(サービス年月);
+//        List<KeyValueDataSource> sources = new ArrayList<>();
+//        for (DbT3118ShikibetsuNoKanriEntity db : 様式名称) {
+//            sources.add(new KeyValueDataSource(db.getShikibetsuNo(), db.getRyakusho()));
+//        }
+//        div.getDdlSyomeisyo().setDataSource(sources);
+//        div.getDdlSyomeisyo().setSelectedKey(様式名称.get(1).getShikibetsuNo());//ViewStateHolder.get(ViewStateKeys.証明書, RDate.class)
         div.getJutakuKaishuShinseiInfoPanel().getCommHeadPanel().getTxtKyufuritsu().setValue(new Decimal(3));
         div.getJutakuKaishuShinseiInfoPanel().getCommHeadPanel().getTxtSeiriNo().setValue(new RString("44"));
         div.getJutakuKaishuShinseiInfoPanel().getCommHeadPanel().getTxtTeikyoYM().setValue(new RDate("199506"));
