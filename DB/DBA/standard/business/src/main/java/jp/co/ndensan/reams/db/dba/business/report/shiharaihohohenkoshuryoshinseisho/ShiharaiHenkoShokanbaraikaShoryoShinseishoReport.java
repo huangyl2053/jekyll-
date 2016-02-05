@@ -14,29 +14,29 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShiharaiHenkoShokanbaraikaShoryoShinseishoReport extends Report<ShiharaiHenkoShokanbaraikaShoryoShinseishoReportSource> {
 
-    private final ShiharaiHenkoShokanbaraikaShoryoShinseishoHeadItem headItem;
+    private final ShiharaiHenkoShokanbaraikaShoryoShinseishoItem item;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headItem 支払方法変更（償還払い化）終了申請書ヘッダのITEM
+     * @param item 支払方法変更（償還払い化）終了申請書ヘッダのITEM
      * @return 支払方法変更（償還払い化）終了申請書のReport
      */
-    public static ShiharaiHenkoShokanbaraikaShoryoShinseishoReport createFrom(
-            ShiharaiHenkoShokanbaraikaShoryoShinseishoHeadItem headItem) {
+    public static ShiharaiHenkoShokanbaraikaShoryoShinseishoReport createReport(
+            ShiharaiHenkoShokanbaraikaShoryoShinseishoItem item) {
 
         return new ShiharaiHenkoShokanbaraikaShoryoShinseishoReport(
-                headItem);
+                item);
     }
 
     /**
      * インスタンスを生成します。
      *
-     * @param headItem 支払方法変更（償還払い化）終了申請書ヘッダのITEM
+     * @param item 支払方法変更（償還払い化）終了申請書ヘッダのITEM
      */
     protected ShiharaiHenkoShokanbaraikaShoryoShinseishoReport(
-            ShiharaiHenkoShokanbaraikaShoryoShinseishoHeadItem headItem) {
-        this.headItem = headItem;
+            ShiharaiHenkoShokanbaraikaShoryoShinseishoItem item) {
+        this.item = item;
     }
 
     /**
@@ -45,8 +45,10 @@ public class ShiharaiHenkoShokanbaraikaShoryoShinseishoReport extends Report<Shi
      */
     @Override
     public void writeBy(ReportSourceWriter<ShiharaiHenkoShokanbaraikaShoryoShinseishoReportSource> reportSourceWriter) {
-        ShiharaiHenkoShokanbaraikaShoryoShinseishoHeaderEditor headerEditor = new ShiharaiHenkoShokanbaraikaShoryoShinseishoHeaderEditor(headItem);
-        IShiharaiHenkoShokanbaraikaShoryoShinseishoBuilder builder = new ShiharaiHenkoShokanbaraikaShoryoShinseishoBuilderImpl(headerEditor);
+        ShiharaiHenkoShokanbaraikaShoryoShinseishoEditorImpl editor
+                = new ShiharaiHenkoShokanbaraikaShoryoShinseishoEditorImpl(item);
+        IShiharaiHenkoShokanbaraikaShoryoShinseishoBuilder builder
+                = new ShiharaiHenkoShokanbaraikaShoryoShinseishoBuilderImpl(editor);
         reportSourceWriter.writeLine(builder);
     }
 }

@@ -13,16 +13,19 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 class ShiharaiHenkoShokanbaraikaShoryoShinseishoBuilderImpl implements IShiharaiHenkoShokanbaraikaShoryoShinseishoBuilder {
 
-    private final IShiharaiHenkoShokanbaraikaShoryoShinseishoEditor headerEditor;
+    private final IShiharaiHenkoShokanbaraikaShoryoShinseishoEditor editor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headerEditor {@link IShiharaiHenkoShokanbaraikaShoryoShinseishoEditor}
-     * @param bodyEditor {@link IShiharaiHenkoShokanbaraikaShoryoShinseishoEditor}
+     * @param headerEditor
+     * {@link IShiharaiHenkoShokanbaraikaShoryoShinseishoEditor}
+     * @param bodyEditor
+     * {@link IShiharaiHenkoShokanbaraikaShoryoShinseishoEditor}
      */
-    public ShiharaiHenkoShokanbaraikaShoryoShinseishoBuilderImpl(IShiharaiHenkoShokanbaraikaShoryoShinseishoEditor headerEditor) {
-        this.headerEditor = headerEditor;
+    public ShiharaiHenkoShokanbaraikaShoryoShinseishoBuilderImpl(
+            IShiharaiHenkoShokanbaraikaShoryoShinseishoEditor editor) {
+        this.editor = editor;
     }
 
     /**
@@ -32,6 +35,7 @@ class ShiharaiHenkoShokanbaraikaShoryoShinseishoBuilderImpl implements IShiharai
      */
     @Override
     public ShiharaiHenkoShokanbaraikaShoryoShinseishoReportSource build() {
-        return ReportEditorJoiner.from(new ShiharaiHenkoShokanbaraikaShoryoShinseishoReportSource()).join(headerEditor).buildSource();
+        return ReportEditorJoiner.from(
+                new ShiharaiHenkoShokanbaraikaShoryoShinseishoReportSource()).join(editor).buildSource();
     }
 }
