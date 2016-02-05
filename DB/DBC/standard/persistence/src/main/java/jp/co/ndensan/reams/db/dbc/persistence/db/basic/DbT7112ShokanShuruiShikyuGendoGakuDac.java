@@ -6,13 +6,13 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyosha.rirekiNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGaku;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGaku.rirekiNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGaku.serviceShuruiCode;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGaku.shikyuGendoTaniSu;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGaku.tekiyoKaishiYM;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGaku.tekiyoShuryoYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGakuEntity;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7119ServiceCode.serviceShuruiCode;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7119ServiceCode.tekiyoKaishiYM;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -21,11 +21,11 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -102,9 +102,9 @@ public class DbT7112ShokanShuruiShikyuGendoGakuDac implements ISaveable<DbT7112S
      *
      * @param サービス種類コード ServiceShuruiCode
      * @param サービス提供年月 FlexibleYearMonth
-     * @return Decimal
+     * @return DbT7112ShokanShuruiShikyuGendoGakuEntity
      */
-    public Decimal select支給限度単位数(ServiceShuruiCode サービス種類コード, FlexibleYearMonth サービス提供年月) {
+    public DbT7112ShokanShuruiShikyuGendoGakuEntity select支給限度単位数(ServiceShuruiCode サービス種類コード, FlexibleYearMonth サービス提供年月) {
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
 
@@ -120,9 +120,9 @@ public class DbT7112ShokanShuruiShikyuGendoGakuDac implements ISaveable<DbT7112S
                         by(tekiyoKaishiYM, Order.DESC),
                         by(rirekiNo, Order.DESC)).
                 limit(1).
-                toObject(Decimal.class);
+                toObject(DbT7112ShokanShuruiShikyuGendoGakuEntity.class);
     }
-    
+
     public Decimal get償還払い給付種類支給限度額(ServiceShuruiCode サービス種類コード, FlexibleYearMonth サービス提供年月) {
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
@@ -131,11 +131,10 @@ public class DbT7112ShokanShuruiShikyuGendoGakuDac implements ISaveable<DbT7112S
         return accessor.select().
                 table(DbT7112ShokanShuruiShikyuGendoGaku.class).
                 where(and(
-                                eq(serviceShuruiCode, サービス種類コード)
-                        ,or(and(leq(tekiyoShuryoYM, null),
-                                leq(tekiyoKaishiYM, サービス提供年月)),and(leq(substr(tekiyoKaishiYM,0,6), サービス提供年月),
-                                leq(サービス提供年月, tekiyoShuryoYM)))
-                )).
+                                eq(serviceShuruiCode, サービス種類コード), or(and(leq(tekiyoShuryoYM, null),
+                                                leq(tekiyoKaishiYM, サービス提供年月)), and(leq(substr(tekiyoKaishiYM, 0, 6), サービス提供年月),
+                                                leq(サービス提供年月, tekiyoShuryoYM)))
+                        )).
                 order(
                         by(tekiyoKaishiYM, Order.DESC),
                         by(rirekiNo, Order.DESC)).

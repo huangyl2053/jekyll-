@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class ShinsakaiScheduleHakko {
 
     private static final RString 介護認定審査会スケジュール表鑑 = new RString("key0");
+    private static final RString JIKO_BTTON = new RString("btnHakko");
+    private static final RString JIKOJIN_BTTON = new RString("btnHakkoJin");
 
     /**
      * 画面初期化処理です。
@@ -35,8 +37,8 @@ public class ShinsakaiScheduleHakko {
         div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys().clear();
         div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().clearFromValue();
         div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().clearToValue();
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnHakko"), false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnHakkoJin"), false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(JIKO_BTTON, false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(JIKOJIN_BTTON, false);
         return ResponseData.of(div).respond();
     }
 
@@ -47,9 +49,8 @@ public class ShinsakaiScheduleHakko {
      * @return ResponseData<ShinsakaiScheduleHakkoDiv>
      */
     public ResponseData<ShinsakaiScheduleHakkoDiv> onClick_btnCheckBoxJin(ShinsakaiScheduleHakkoDiv div) {
-        if (!div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys().isEmpty()
-                && 介護認定審査会スケジュール表鑑.equals(
-                        div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys().get(0))) {
+        List<RString> selectKey = div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys();
+        if (!selectKey.isEmpty() && 介護認定審査会スケジュール表鑑.equals(selectKey.get(0))) {
             ShinsakaiiinJohoManager shinsakaiiinJohoManager = InstanceProvider.create(ShinsakaiiinJohoManager.class);
             SearchResult<ShinsakaiIinJohoGoitaiBusiness> shoriDateKanri = shinsakaiiinJohoManager.search審査会委員情報();
             setDgShinsakaiScheduleKagami(shoriDateKanri, div);

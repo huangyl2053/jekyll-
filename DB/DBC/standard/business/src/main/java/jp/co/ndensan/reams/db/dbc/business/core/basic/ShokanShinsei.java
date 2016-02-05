@@ -208,7 +208,7 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
      * @return 保険給付額
      */
     public int get保険給付額() {
-        return entity.getRiyoshaFutangaku();
+        return entity.getHokenKyufugaku();
     }
 
     /**

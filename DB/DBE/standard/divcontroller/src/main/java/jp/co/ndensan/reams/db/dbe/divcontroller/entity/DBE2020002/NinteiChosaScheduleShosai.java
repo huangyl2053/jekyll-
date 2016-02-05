@@ -37,6 +37,17 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
  */
 public class NinteiChosaScheduleShosai {
 
+    public static final Code 選択された時間枠_1 = new Code("1");
+    public static final Code 選択された時間枠_2 = new Code("2");
+    public static final Code 選択された時間枠_3 = new Code("3");
+    public static final Code 選択された時間枠_4 = new Code("4");
+    public static final Code 選択された時間枠_5 = new Code("5");
+    public static final Code 選択された時間枠_6 = new Code("6");
+    public static final Code 選択された時間枠_7 = new Code("7");
+    public static final Code 選択された時間枠_8 = new Code("8");
+    public static final Code 選択された時間枠_9 = new Code("9");
+    public static final Code 選択された時間枠_10 = new Code("10");
+    private static final RString モード_1 = new RString("1");
     public static FlexibleDate 設定日;
     public static Code 地区コード;
     public static LasdecCode 保険者;
@@ -198,8 +209,12 @@ public class NinteiChosaScheduleShosai {
      * @return ResponseData<NinteiChosaScheduleShosaiDiv>
      */
     public ResponseData<NinteiChosaScheduleShosaiDiv> onSelect_BtnModoru(NinteiChosaScheduleShosaiDiv div) {
-        //TODO 実装メーソド待ち
-        return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.メモ入力).respond();
+        画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class);
+        if (モード_1.equals(画面ステート)) {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール一覧に戻る).respond();
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.未定モード_該当者一覧に戻る).respond();
+        }
     }
 
     /**
@@ -213,9 +228,13 @@ public class NinteiChosaScheduleShosai {
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
         RString 認定調査員コード = row.getNinteiChosainCode();
         RString 認定調査予定時間 = row.getChosaTimeFrame1();
-        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, new Code("1"));
-        //TODO 実装メーソド待ち
-        return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール一覧に戻る).respond();
+        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, 選択された時間枠_1);
+        画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class);
+        if (モード_1.equals(画面ステート)) {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール入力).respond();
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.未定モード_スケジュール入力).respond();
+        }
     }
 
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo2(NinteiChosaScheduleShosaiDiv div) {
@@ -223,8 +242,13 @@ public class NinteiChosaScheduleShosai {
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
         RString 認定調査員コード = row.getNinteiChosainCode();
         RString 認定調査予定時間 = row.getChosaTimeFrame2();
-        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, new Code("2"));
-        return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール一覧に戻る).respond();
+        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, 選択された時間枠_2);
+        画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class);
+        if (モード_1.equals(画面ステート)) {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール入力).respond();
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.未定モード_スケジュール入力).respond();
+        }
     }
 
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo3(NinteiChosaScheduleShosaiDiv div) {
@@ -232,8 +256,13 @@ public class NinteiChosaScheduleShosai {
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
         RString 認定調査員コード = row.getNinteiChosainCode();
         RString 認定調査予定時間 = row.getChosaTimeFrame3();
-        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, new Code("3"));
-        return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール入力).respond();
+        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, 選択された時間枠_3);
+        画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class);
+        if (モード_1.equals(画面ステート)) {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール入力).respond();
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.未定モード_スケジュール入力).respond();
+        }
     }
 
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo4(NinteiChosaScheduleShosaiDiv div) {
@@ -241,8 +270,13 @@ public class NinteiChosaScheduleShosai {
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
         RString 認定調査員コード = row.getNinteiChosainCode();
         RString 認定調査予定時間 = row.getChosaTimeFrame4();
-        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, new Code("4"));
-        return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール一覧に戻る).respond();
+        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, 選択された時間枠_4);
+        画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class);
+        if (モード_1.equals(画面ステート)) {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール入力).respond();
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.未定モード_スケジュール入力).respond();
+        }
     }
 
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo5(NinteiChosaScheduleShosaiDiv div) {
@@ -250,8 +284,13 @@ public class NinteiChosaScheduleShosai {
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
         RString 認定調査員コード = row.getNinteiChosainCode();
         RString 認定調査予定時間 = row.getChosaTimeFrame5();
-        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, new Code("5"));
-        return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール一覧に戻る).respond();
+        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, 選択された時間枠_5);
+        画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class);
+        if (モード_1.equals(画面ステート)) {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール入力).respond();
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.未定モード_スケジュール入力).respond();
+        }
     }
 
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo6(NinteiChosaScheduleShosaiDiv div) {
@@ -259,8 +298,13 @@ public class NinteiChosaScheduleShosai {
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
         RString 認定調査員コード = row.getNinteiChosainCode();
         RString 認定調査予定時間 = row.getChosaTimeFrame6();
-        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, new Code("6"));
-        return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール一覧に戻る).respond();
+        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, 選択された時間枠_6);
+        画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class);
+        if (モード_1.equals(画面ステート)) {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール入力).respond();
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.未定モード_スケジュール入力).respond();
+        }
     }
 
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo7(NinteiChosaScheduleShosaiDiv div) {
@@ -268,8 +312,13 @@ public class NinteiChosaScheduleShosai {
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
         RString 認定調査員コード = row.getNinteiChosainCode();
         RString 認定調査予定時間 = row.getChosaTimeFrame7();
-        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, new Code("7"));
-        return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール一覧に戻る).respond();
+        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, 選択された時間枠_7);
+        画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class);
+        if (モード_1.equals(画面ステート)) {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール入力).respond();
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.未定モード_スケジュール入力).respond();
+        }
     }
 
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo8(NinteiChosaScheduleShosaiDiv div) {
@@ -277,8 +326,13 @@ public class NinteiChosaScheduleShosai {
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
         RString 認定調査員コード = row.getNinteiChosainCode();
         RString 認定調査予定時間 = row.getChosaTimeFrame8();
-        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, new Code("8"));
-        return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール一覧に戻る).respond();
+        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, 選択された時間枠_8);
+        画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class);
+        if (モード_1.equals(画面ステート)) {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール入力).respond();
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.未定モード_スケジュール入力).respond();
+        }
     }
 
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo9(NinteiChosaScheduleShosaiDiv div) {
@@ -286,8 +340,13 @@ public class NinteiChosaScheduleShosai {
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
         RString 認定調査員コード = row.getNinteiChosainCode();
         RString 認定調査予定時間 = row.getChosaTimeFrame9();
-        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, new Code("9"));
-        return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール一覧に戻る).respond();
+        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, 選択された時間枠_9);
+        画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class);
+        if (モード_1.equals(画面ステート)) {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール入力).respond();
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.未定モード_スケジュール入力).respond();
+        }
     }
 
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo10(NinteiChosaScheduleShosaiDiv div) {
@@ -295,8 +354,13 @@ public class NinteiChosaScheduleShosai {
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
         RString 認定調査員コード = row.getNinteiChosainCode();
         RString 認定調査予定時間 = row.getChosaTimeFrame10();
-        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, new Code("10"));
-        return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール一覧に戻る).respond();
+        onClick_selectHansyou(div, 認定調査予定時間, 認定調査員コード, 選択された時間枠_10);
+        画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class);
+        if (モード_1.equals(画面ステート)) {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール入力).respond();
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.未定モード_スケジュール入力).respond();
+        }
     }
 
     private static void onClick_selectHansyou(NinteiChosaScheduleShosaiDiv div, RString 認定調査予定時間, RString 認定調査員コード, Code 選択された時間枠) {
@@ -326,6 +390,13 @@ public class NinteiChosaScheduleShosai {
         } else {
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号2, 申請書管理番号.get申請書管理番号());
         }
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, 地区コード);
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, 設定日);
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, 保険者);
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, div.getRadChosainJokyo().getSelectedKey());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, 認定調査委託先コード);
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_時間枠, 選択された時間枠);
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, 認定調査員コード);
     }
 
     private NinteiChosaScheduleShosaiHander getHandler(NinteiChosaScheduleShosaiDiv div) {

@@ -91,9 +91,50 @@ public enum ReportIdDBA {
      */
     DBC800021(new ReportId("DBC800021_KeidoshaFukushiYoguTaiyoKakuninShinseisho2"), new RString("軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書2")),
     /**
+     * 介護保険居宅介護（予防）住宅改修費事前（受領委任払）申請書の帳票ＩＤです。
+     */
+    DBC800012(new ReportId("DBC800012_JutakuKaishuhiShikyuShinseishoJuryoIninHarai"),
+            new RString("介護保険居宅介護（予防）住宅改修費支給（受領委任払）申請書")),
+    /**
+     * 介護保険居宅介護（予防）福祉用具購入費支給（受領委任払）申請書の帳票ＩＤです。
+     */
+    DBC800013(new ReportId("DBC800013_FukushiYoguKonyuhiShinseishoJuryoIninHarai"),
+            new RString("介護保険居宅介護（予防）福祉用具購入費支給（受領委任払）申請書")),
+    /**
+     * 介護保険高額介護（予防）サービス費支給（受領委任払）申請書の帳票ＩＤです。
+     */
+    DBC800015(new ReportId("DBC800015_KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyo"),
+            new RString("介護保険高額介護（予防）サービス費支給（受領委任払）申請書")),
+    /**
+     * 高額医療合算介護（介護予防）サービス費支給兼自己負担額証明書交付申請書の帳票ＩＤです。
+     */
+    DBC800016(new ReportId("DBC800016_KogakuGassanKaigoServicehiShikyuKofuShinseisho"),
+            new RString("高額医療合算介護（介護予防）サービス費支給兼自己負担額証明書交付申請書")),
+    /**
+     * 要介護認定区分変更申請書の帳票ＩＤです。
+     */
+    DBD501002(new ReportId("DBD501002_yokaigoNinteikbnHenkoShinseisho"),
+            new RString("要介護認定区分変更申請書")),
+    /**
      * 介護保険料徴収猶予申請書の帳票ＩＤです。
      */
-    DBB800002(new ReportId("DBB800002_HokenryoGenmenChoshuYoyuShinseisho"), new RString("介護保険料徴収猶予申請書"));
+    DBB800002(new ReportId("DBB800002_HokenryoGenmenChoshuYoyuShinseisho"), new RString("介護保険料徴収猶予申請書")),
+    /**
+     * 介護保険償還払支給申請書の帳票ＩＤです。
+     */
+    DBC800009(new ReportId("DBC800009_ShokanharaiShikyuShinseisho"), new RString("介護保険償還払支給申請書")),
+    /**
+     * 介護保険料納付額証明書交付申請書の帳票ＩＤです。
+     */
+    DBB800003(new ReportId("DBB800003_NofugakuShomeishoKofuShinseish"), new RString("介護保険料納付額証明書交付申請書")),
+    /**
+     * 給付額減額免除申請書
+     */
+    DBD800008(new ReportId("DBD800008_KyufugengakuMenjyoShinseisho"), new RString("給付額減額免除申請書")),
+    /**
+     * 居宅（介護予防）サービス計画作成依頼（変更）届出書
+     */
+    DBC800004(new ReportId("DBC800004_ItakuServiceKeikaluSakuseiIraiTodokedesho"), new RString("居宅（介護予防）サービス計画作成依頼（変更）届出書"));
 
     private final ReportId reportId;
     private final RString reportName;

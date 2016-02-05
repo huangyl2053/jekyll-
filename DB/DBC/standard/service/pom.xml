@@ -28,11 +28,27 @@
             <artifactId>DbcPersistence</artifactId>
         </dependency>
 		<!-- DBD -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+            <artifactId>DbdEntity</artifactId>
+        </dependency>
          <dependency>
             <groupId>jp.co.ndensan.reams.db.dbd</groupId>
             <artifactId>DbdPersistence</artifactId>
          </dependency>
 		<!-- DBX -->
+         <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxBusiness</artifactId>
+         </dependency>
+         <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxPersistence</artifactId>
+         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxService</artifactId>
+        </dependency>
 		<!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>

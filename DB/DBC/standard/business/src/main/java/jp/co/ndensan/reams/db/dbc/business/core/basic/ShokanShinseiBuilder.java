@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShi
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -350,6 +352,78 @@ public class ShokanShinseiBuilder {
     public ShokanShinseiBuilder set保険対象費用額(Decimal 保険対象費用額) {
         requireNonNull(保険対象費用額, UrSystemErrorMessages.値がnull.getReplacedMessage("保険対象費用額"));
         entity.setHokenTaishoHiyogaku(保険対象費用額);
+        return this;
+    }
+
+    /**
+     * 申請者郵便番号を設定します。
+     *
+     * @param 申請者郵便番号 申請者郵便番号
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set申請者郵便番号(YubinNo 申請者郵便番号) {
+        requireNonNull(申請者郵便番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者郵便番号"));
+        entity.setShinseishaYubinNo(申請者郵便番号);
+        return this;
+    }
+
+    /**
+     * 申請者電話番号を設定します。
+     *
+     * @param 申請者電話番号 申請者電話番号
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set申請者電話番号(TelNo 申請者電話番号) {
+        requireNonNull(申請者電話番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者電話番号"));
+        entity.setShinseishaTelNo(申請者電話番号);
+        return this;
+    }
+
+    /**
+     * 申請者事業者コードを設定します。
+     *
+     * @param 申請者事業者コード 申請者事業者コード
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set申請者事業者コード(RString 申請者事業者コード) {
+        requireNonNull(申請者事業者コード, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者事業者コード"));
+        entity.setShinseiJigyoshaNo(申請者事業者コード);
+        return this;
+    }
+
+    /**
+     * 国保連再送付フラグを設定します。
+     *
+     * @param 国保連再送付フラグ 国保連再送付フラグ
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set国保連再送付フラグ(boolean 国保連再送付フラグ) {
+        requireNonNull(国保連再送付フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("国保連再送付フラグ"));
+        entity.setKokuhorenSaisofuFlag(国保連再送付フラグ);
+        return this;
+    }
+
+    /**
+     * 支払窓口終了時間を設定します。
+     *
+     * @param 支払窓口終了時間 支払窓口終了時間
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set支払窓口終了時間(RString 支払窓口終了時間) {
+        requireNonNull(支払窓口終了時間, UrSystemErrorMessages.値がnull.getReplacedMessage("支払窓口終了時間"));
+        entity.setShiharaiShuryoTime(支払窓口終了時間);
+        return this;
+    }
+
+    /**
+     * 領収年月日を設定します。
+     *
+     * @param 領収年月日 領収年月日
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set領収年月日(FlexibleDate 領収年月日) {
+        requireNonNull(領収年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("領収年月日"));
+        entity.setRyoshuYMD(領収年月日);
         return this;
     }
 

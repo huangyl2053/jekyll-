@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
@@ -90,11 +91,12 @@ public class ShikakuShutokuIdoSoshitsuTodoke {
                 entity.get被保険者氏名(),
                 entity.getフリガナ(),
                 entity.get被保険者番号().value(),
-                entity.get性別(),
+                Gender.toValue(entity.get性別()).getName().getShortJapanese(),
                 entity.get世帯主氏名(),
                 entity.get続柄());
         list.add(ShikakushutokuIdoSoshitsuReport.createReport(item));
         return list;
+
     }
 
     private static RString set生年月日_日本人(HihokenshaKihonBusiness entity) {
