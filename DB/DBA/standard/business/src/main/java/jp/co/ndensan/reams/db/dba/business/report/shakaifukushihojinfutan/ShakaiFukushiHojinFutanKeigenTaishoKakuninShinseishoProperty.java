@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.business.report.shakaifukushihojinfutan;
 
-import jp.co.ndensan.reams.db.dba.definition.reportId.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.report.shakaifukushihojinfutan.ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -17,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoProperty extends
         ReportPropertyBase<ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReportSource> {
 
-    private static final ReportId ID = ReportIdDBA.DBD800006.getReportId();
+    private static final ReportId ID = null;//ReportIdDBA.DBD800006.getReportId();
 
     /**
      * インスタンスを生成します。
