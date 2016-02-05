@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dba.definition.core.tokuteifutangendogakushinseish
 import jp.co.ndensan.reams.db.dba.definition.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseishoMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tokuteifutangendogakushinseisho.HihokenshaKihonEntity;
 import jp.co.ndensan.reams.db.dba.persistence.mapper.tokuteifutangendogakushinseisho.ITokuteifutanGendogakuShinseishoMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -37,8 +38,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class TokuteifutanGendogakuShinseisho {
 
-    private static final RString 広域市町村_111 = new RString("111");
-    private static final RString 広域市町村_211 = new RString("211");
     private final MapperProvider mapperProvider;
 
     /**
@@ -120,33 +119,46 @@ public class TokuteifutanGendogakuShinseisho {
     private HihokenshaKihonBusiness ge被保険者基本情報(UaFt200FindShikibetsuTaishoEntity uaft200Entity,
             HokenshaNo 証記載保険者番号, RString 保険者名称, DbT1001HihokenshaDaichoEntity dbt1001Entity) {
         HihokenshaKihonEntity hihokenshaKihonEntity = new HihokenshaKihonEntity();
-        hihokenshaKihonEntity.setフリガナ(uaft200Entity.getKanaMeisho() == null ? null : uaft200Entity.getKanaMeisho().value());
-        hihokenshaKihonEntity.set被保険者氏名(uaft200Entity.getMeisho() == null ? null : uaft200Entity.getMeisho().value());
+        if (uaft200Entity.getKanaMeisho() != null) {
+            hihokenshaKihonEntity.setフリガナ(uaft200Entity.getKanaMeisho().value());
+        }
+        if (uaft200Entity.getMeisho() != null) {
+            hihokenshaKihonEntity.set被保険者氏名(uaft200Entity.getMeisho().value());
+        }
+
         hihokenshaKihonEntity.set保険者番号(証記載保険者番号);
         hihokenshaKihonEntity.set保険者名称(保険者名称);
         hihokenshaKihonEntity.set被保険者番号(dbt1001Entity.getHihokenshaNo());
         hihokenshaKihonEntity.set生年月日(uaft200Entity.getSeinengappiYMD());
         hihokenshaKihonEntity.set性別(uaft200Entity.getSeibetsuCode());
         hihokenshaKihonEntity.set続柄(uaft200Entity.getTsuzukigara());
-        hihokenshaKihonEntity.set郵便番号(uaft200Entity.getYubinNo() == null ? null : uaft200Entity.getYubinNo().value());
+        if (uaft200Entity.getYubinNo() != null) {
+            hihokenshaKihonEntity.set郵便番号(uaft200Entity.getYubinNo().value());
+        }
         // TODO 内部QA：644  Redmine： (宛名情報に「連絡先」がありません。)
-        hihokenshaKihonEntity.set電話番号(uaft200Entity.getRenrakusaki1() == null ? null : uaft200Entity.getRenrakusaki1().value());
-        hihokenshaKihonEntity.set住所(uaft200Entity.getJusho() == null ? null : uaft200Entity.getJusho().value());
-        hihokenshaKihonEntity.set世帯主氏名(uaft200Entity.getSetainushiMei() == null ? null : uaft200Entity.getSetainushiMei().value());
+        if (uaft200Entity.getRenrakusaki1() != null) {
+            hihokenshaKihonEntity.set電話番号(uaft200Entity.getRenrakusaki1().value());
+        }
+        if (uaft200Entity.getJusho() != null) {
+            hihokenshaKihonEntity.set住所(uaft200Entity.getJusho().value());
+        }
+        if (uaft200Entity.getSetainushiMei() != null) {
+            hihokenshaKihonEntity.set世帯主氏名(uaft200Entity.getSetainushiMei().value());
+        }
         hihokenshaKihonEntity.set生年月日不詳区分(uaft200Entity.getSeinengappiFushoKubun());
         return new HihokenshaKihonBusiness(hihokenshaKihonEntity);
     }
 
     private HokenshaNo get証記載保険者番号(RString 導入形態コード, DbT1001HihokenshaDaichoEntity dbt1001Entity) {
         HokenshaNo 証記載保険者番号;
-        if (広域市町村_111.equals(導入形態コード) || 広域市町村_211.equals(導入形態コード)) {
+        if (DonyukeitaiCode.事務広域.getCode().equals(導入形態コード) || DonyukeitaiCode.認定広域.getCode().equals(導入形態コード)) {
             KoikiShichosonJohoFinder koikiShichosonJohoFinder = InstanceProvider.create(KoikiShichosonJohoFinder.class);
             LasdecCode koikiShichosonJohoParameter;
-            if (dbt1001Entity.getKoikinaiTokureiSochimotoShichosonCode() == null
-                    || dbt1001Entity.getKoikinaiTokureiSochimotoShichosonCode().isEmpty()) {
+            LasdecCode koikinaiTokureiSochimotoShichosonCode = dbt1001Entity.getKoikinaiTokureiSochimotoShichosonCode();
+            if (koikinaiTokureiSochimotoShichosonCode == null || koikinaiTokureiSochimotoShichosonCode.isEmpty()) {
                 koikiShichosonJohoParameter = dbt1001Entity.getShichosonCode();
             } else {
-                koikiShichosonJohoParameter = dbt1001Entity.getKoikinaiTokureiSochimotoShichosonCode();
+                koikiShichosonJohoParameter = koikinaiTokureiSochimotoShichosonCode;
             }
             SearchResult<ShichosonCodeYoriShichoson> shichoson = koikiShichosonJohoFinder.shichosonCodeYoriShichosonJoho(
                     koikiShichosonJohoParameter);

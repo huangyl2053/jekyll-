@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140003;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140003.ShinsakaiScheduleHakkoDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -57,9 +58,8 @@ public class ShinsakaiScheduleHakkoValidationHandler {
      */
     public ValidationMessageControlPairs 印刷対象介護認定審査会委員選択チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (!div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys().isEmpty()
-                && 介護認定審査会スケジュール表鑑.equals(
-                        div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys().get(0))
+        List<RString> selectKey = div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys();
+        if (!selectKey.isEmpty() && 介護認定審査会スケジュール表鑑.equals(selectKey.get(0))
                 && div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule().getSelectedKeys().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(new ShinsakaiScheduleHakkocheckMessages(
                     UrErrorMessages.選択されていない, NIIN.toString()), div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule()));

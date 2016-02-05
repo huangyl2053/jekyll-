@@ -4,7 +4,6 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinjoho.IShinsakaiiinJohoGogitaiMapper">
-    <!-- TODO  内部QA：602 Redmine：       (介護認定審査会割当委員情報．介護認定審査会委員コードが知らない、一時固定値を使用します) -->
     <select id="search審査会委員情報"
             resultMap="resultMap_ShinsakaiIinJoho" fetchSize="500">
         SELECT 
