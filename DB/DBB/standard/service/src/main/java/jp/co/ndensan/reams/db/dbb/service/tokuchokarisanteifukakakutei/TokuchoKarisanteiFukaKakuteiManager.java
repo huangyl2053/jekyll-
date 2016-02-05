@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.service.tokuchokarisanteifukakakutei;
 
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiEntity;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakutei;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.tokuchokarisanteifukakakutei.ItokuchokarisanteiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -81,7 +81,7 @@ public class TokuchoKarisanteiFukaKakuteiManager {
     }
 
     /**
-     * 処理日付管理テーブルを登録する。.基準日時を更新する。。
+     * 処理日付管理マスタ.基準日時を更新します。
      *
      * @param 賦課年度 FlexibleYear
      * @param 処理名 処理名
@@ -89,30 +89,23 @@ public class TokuchoKarisanteiFukaKakuteiManager {
      */
     @Transaction
     public TokuchoKarisanteiFukaKakuteiEntity updateKijunDateTime(FlexibleYear 賦課年度, RString 処理名) {
-        DbT7022ShoriDateKanriEntity 基準日時 = 介護賦課Dac.selectKaijun_更新(賦課年度, 処理名);
         if (処理名.equals(ShoriName.特徴仮算定賦課確定.get名称())
                 || 処理名.equals(ShoriName.普徴仮算定賦課確定.get名称()) || 処理名.equals(ShoriName.本算定賦課確定.get名称())) {
+            DbT7022ShoriDateKanriEntity 基準日時 = 介護賦課Dac.selectKaijun_検索(賦課年度, 処理名);
             基準日時.setKijunYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
             基準日時.setState(EntityDataState.Modified);
             介護賦課Dac.save(基準日時);
             return new TokuchoKarisanteiFukaKakuteiEntity(基準日時);
         }
         updateKijunDateTime_登録(賦課年度, 処理名);
-        return new TokuchoKarisanteiFukaKakuteiEntity(基準日時);
+        return null;
     }
 
-    /**
-     * 処理日付管理マスタ.基準日時を取得します。
-     *
-     * @param 賦課年度 FlexibleYear
-     * @param 処理名 処理名
-     * @return 基準日時
-     */
     @Transaction
     private TokuchoKarisanteiFukaKakuteiEntity updateKijunDateTime_登録(FlexibleYear 賦課年度, RString 処理名) {
-        DbT7022ShoriDateKanriEntity 更新_処理 = 介護賦課Dac.selectKaijun_処理(賦課年度, 処理名);
-        if (更新_処理.getNendoNaiRenban() == null) {
-            if (処理名.equals(ShoriName.仮算定異動賦課確定.get名称()) || 処理名.equals(ShoriName.異動賦課確定.get名称())) {
+        if (処理名.equals(ShoriName.仮算定異動賦課確定.get名称()) || 処理名.equals(ShoriName.異動賦課確定.get名称())) {
+            DbT7022ShoriDateKanriEntity 更新_処理 = 介護賦課Dac.selectKaijun_処理(賦課年度, 処理名);
+            if (DbT7022ShoriDateKanriEntity == null) {
                 更新_処理.setNendoNaiRenban(最大年度内連番);
             } else {
                 更新_処理.setNendoNaiRenban(
@@ -126,19 +119,20 @@ public class TokuchoKarisanteiFukaKakuteiManager {
             更新_処理.setShoriEdaban(最大年度内連番);
             更新_処理.setKijunYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
             更新_処理.setKijunTimestamp(new YMDHMS(RDate.getNowDateTime()));
+            return new TokuchoKarisanteiFukaKakuteiEntity(更新_処理);
         }
-        return new TokuchoKarisanteiFukaKakuteiEntity(更新_処理);
+        return null;
     }
 
     /**
-     * 賦課処理状況更新.基準日時を取得します。
+     * 調定共通（介護継承）.賦課処理状況を更新します。
      *
      * @param params　TokuchoKarisanteiFukaKakutei
      * @return 基準日時
      */
     @Transaction
     // TODO  内部QA：540 (賦課処理状況を更新)
-    public boolean updateFukaShoriJyokyo(TokuchoKarisanteiFukaKakutei params) {
+    public boolean updateFukaShoriJyokyo(TokuchoKarisanteiFukaKakuteiMapperParameter params) {
         ItokuchokarisanteiMapper ItokuchokarisanteiMapper = mapperProvider.create(ItokuchokarisanteiMapper.class);
         return ItokuchokarisanteiMapper.updShoKofuKaishuJoho(params);
     }

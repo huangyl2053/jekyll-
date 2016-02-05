@@ -14,12 +14,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuchoKarisanteiFukaKakutei {
+public class TokuchoKarisanteiFukaKakuteiMapperParameter {
 
     private final RDateTime choteiTimestamp;
     private final FlexibleYear fukaNendo;
 
-    private TokuchoKarisanteiFukaKakutei(RDateTime choteiTimestamp, FlexibleYear fukaNendo) {
+    private TokuchoKarisanteiFukaKakuteiMapperParameter(RDateTime choteiTimestamp, FlexibleYear fukaNendo) {
         this.choteiTimestamp = choteiTimestamp;
         this.fukaNendo = fukaNendo;
     }
@@ -31,9 +31,9 @@ public class TokuchoKarisanteiFukaKakutei {
      * @param fukaNendo　FlexibleYear
      * @return 特徴仮算定賦課確定するためのMyBatis用パラメータ
      */
-    public static TokuchoKarisanteiFukaKakutei createParam(RDateTime choteiTimestamp, FlexibleYear fukaNendo) {
+    public static TokuchoKarisanteiFukaKakuteiMapperParameter createParam(RDateTime choteiTimestamp, FlexibleYear fukaNendo) {
 
-        return new TokuchoKarisanteiFukaKakutei(choteiTimestamp, fukaNendo);
+        return new TokuchoKarisanteiFukaKakuteiMapperParameter(choteiTimestamp, fukaNendo);
 
     }
 

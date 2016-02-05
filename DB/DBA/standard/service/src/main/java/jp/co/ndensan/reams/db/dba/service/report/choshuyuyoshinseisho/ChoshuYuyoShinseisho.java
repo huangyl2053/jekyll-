@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.report.jyushochitokureitekiyohenko;
+package jp.co.ndensan.reams.db.dba.service.report.choshuyuyoshinseisho;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,10 +117,10 @@ public class ChoshuYuyoShinseisho {
         RString 外国人表示制御_生年月日表示方法 = BusinessConfig
                 .get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
         RString 生年月日 = RString.EMPTY;
-        if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
+        if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             生年月日 = (business.get生年月日() == null || business.get生年月日().isEmpty()) ? RString.EMPTY : business.get生年月日()
                     .seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        } else if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
+        } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             生年月日 = set生年月日_和暦表示(business);
         }
         return 生年月日;

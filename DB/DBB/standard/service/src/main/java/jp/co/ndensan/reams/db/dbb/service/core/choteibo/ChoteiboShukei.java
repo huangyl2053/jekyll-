@@ -186,7 +186,7 @@ public class ChoteiboShukei {
                     } else if ((0 == dankai.getDogetsuFlag().intValue()) && 段階.equals(dankai.getDankai())) {
                         調定年度 = dankai.getChoteiNendo();
                         賦課年度 = dankai.getFukaNendo();
-                        特別徴収前月末の調定額集計 = 特別徴収前月末の調定額集計.add(dankai.getDogetsusueChoteigaku());
+                        特別徴収前月末の調定額集計 = 特別徴収前月末の調定額集計.add(dankai.getZengetsusueChoteigaku());
                     }
                 } else if (ChoshuHohoKibetsu.普通徴収.code().equals(dankai.getChoshuHouhou())) {
                     if ((1 == dankai.getDogetsuFlag().intValue()) && 段階.equals(dankai.getDankai())) {
@@ -196,7 +196,7 @@ public class ChoteiboShukei {
                     } else if ((0 == dankai.getDogetsuFlag().intValue()) && 段階.equals(dankai.getDankai())) {
                         調定年度 = dankai.getChoteiNendo();
                         賦課年度 = dankai.getFukaNendo();
-                        普通徴収前月末の調定額集計 = 普通徴収前月末の調定額集計.add(dankai.getDogetsusueChoteigaku());
+                        普通徴収前月末の調定額集計 = 普通徴収前月末の調定額集計.add(dankai.getZengetsusueChoteigaku());
                     }
                 }
             }
