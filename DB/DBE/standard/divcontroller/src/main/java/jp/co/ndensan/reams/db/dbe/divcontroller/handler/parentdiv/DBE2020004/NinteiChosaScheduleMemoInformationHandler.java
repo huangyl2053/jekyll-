@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020004;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.importance.Importance;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.NinteiChosaScheduleMemoInformationDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.dgListOfCommonMemo_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.dgListOfJichikuMemo_Row;
@@ -31,10 +32,6 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 public class NinteiChosaScheduleMemoInformationHandler {
 
     private final NinteiChosaScheduleMemoInformationDiv div;
-    private static final RString 重要 = new RString("重要");
-    private static final RString 通常 = new RString("通常");
-    private static final RString 重要_コード = new RString("1");
-    private static final RString 通常_コード = new RString("2");
     private static final RString 共通 = new RString("1");
     private static final RString 地区のみ = new RString("2");
     private static final RString 共通メモ = new RString("共通メモ一覧");
@@ -84,7 +81,7 @@ public class NinteiChosaScheduleMemoInformationHandler {
                 dgListOfCommonMemo_Row dgListOfCommonMemo_Row = new dgListOfCommonMemo_Row();
                 dgListOfCommonMemo_Row.setNo(new RString(String.valueOf(共通_NO)));
                 dgListOfCommonMemo_Row.setCreator(ninteiChosaScheduleMemo.get作成者());
-                dgListOfCommonMemo_Row.setImportance(重要);
+                dgListOfCommonMemo_Row.setImportance(Importance.重要.get名称());
                 dgListOfCommonMemo_Row.setMemono(new RString(String.valueOf(ninteiChosaScheduleMemo.get連番())));
                 dgListOfCommonMemo_Row.setMemo(ninteiChosaScheduleMemo.getメモ内容());
                 dgListOfCommonMemo_Row.setMemokubun(ninteiChosaScheduleMemo.getメモ区分().value());
@@ -95,7 +92,7 @@ public class NinteiChosaScheduleMemoInformationHandler {
                 dgListOfJichikuMemo_Row dgListOfJichikuMemo_Row = new dgListOfJichikuMemo_Row();
                 dgListOfJichikuMemo_Row.setNo(new RString(String.valueOf(地区のみ_NO)));
                 dgListOfJichikuMemo_Row.setCreator(ninteiChosaScheduleMemo.get作成者());
-                dgListOfJichikuMemo_Row.setImportance(重要);
+                dgListOfJichikuMemo_Row.setImportance(Importance.重要.get名称());
                 dgListOfJichikuMemo_Row.setMemono(new RString(String.valueOf(ninteiChosaScheduleMemo.get連番())));
                 dgListOfJichikuMemo_Row.setMemo(ninteiChosaScheduleMemo.getメモ内容());
                 dgListOfJichikuMemo_Row.setMemokubun(ninteiChosaScheduleMemo.getメモ区分().value());
@@ -240,13 +237,13 @@ public class NinteiChosaScheduleMemoInformationHandler {
         NinteiChosaScheduleMemoBuilder builder = modelsNinteiChosaScheduleMemo.createBuilderForEdit();
         builder.setメモ指定調査地区コード(new Code(dg_Row.getChikucode()));
         builder.set作成者(dg_Row.getCreator());
-        if (通常.equals(dg_Row.getImportance())) {
+        if (Importance.重要.get名称().equals(dg_Row.getImportance())) {
 
-            builder.setメモ重要度(new Code(重要_コード));
+            builder.setメモ重要度(new Code(Importance.重要.getコード()));
         }
-        if (重要.equals(dg_Row.getImportance())) {
+        if (Importance.通常.get名称().equals(dg_Row.getImportance())) {
 
-            builder.setメモ重要度(new Code(通常_コード));
+            builder.setメモ重要度(new Code(Importance.通常.getコード()));
         }
         builder.setメモ内容(dg_Row.getMemo());
         return builder.build();
@@ -267,13 +264,13 @@ public class NinteiChosaScheduleMemoInformationHandler {
         NinteiChosaScheduleMemoBuilder builder = modelsNinteiChosaScheduleMemo.createBuilderForEdit();
         builder.setメモ指定調査地区コード(new Code(dg_Row.getChikucode()));
         builder.set作成者(dg_Row.getCreator());
-        if (通常.equals(dg_Row.getImportance())) {
+        if (Importance.重要.get名称().equals(dg_Row.getImportance())) {
 
-            builder.setメモ重要度(new Code(重要_コード));
+            builder.setメモ重要度(new Code(Importance.重要.getコード()));
         }
-        if (重要.equals(dg_Row.getImportance())) {
+        if (Importance.通常.get名称().equals(dg_Row.getImportance())) {
 
-            builder.setメモ重要度(new Code(通常_コード));
+            builder.setメモ重要度(new Code(Importance.通常.getコード()));
         }
         builder.setメモ内容(dg_Row.getMemo());
         return builder.build();
@@ -361,7 +358,7 @@ public class NinteiChosaScheduleMemoInformationHandler {
         div.getDdlShiteiChosaChiku().setSelectedKey(地区コード.value());
         div.getMaintenanceForMemo().getTxtCreator().setValue(dgListOfCommonMemo_Row.getCreator());
         div.getMaintenanceForMemo().getTxtMemo().setValue(dgListOfCommonMemo_Row.getMemo());
-        div.getDdlMemoImportance().setSelectedValue(重要);
+        div.getDdlMemoImportance().setSelectedValue(Importance.重要.get名称());
     }
 
     private void 自地区の場合にメンテナンスの設定(dgListOfJichikuMemo_Row dgListOfJichikuMemo_Row) {
@@ -372,7 +369,7 @@ public class NinteiChosaScheduleMemoInformationHandler {
         div.getDdlShiteiChosaChiku().setSelectedKey(地区コード.value());
         div.getMaintenanceForMemo().getTxtCreator().setValue(dgListOfJichikuMemo_Row.getCreator());
         div.getMaintenanceForMemo().getTxtMemo().setValue(dgListOfJichikuMemo_Row.getMemo());
-        div.getDdlMemoImportance().setSelectedValue(重要);
+        div.getDdlMemoImportance().setSelectedValue(Importance.重要.get名称());
     }
 
     private List<KeyValueDataSource> 調査地区ドロップダウンリスト() {

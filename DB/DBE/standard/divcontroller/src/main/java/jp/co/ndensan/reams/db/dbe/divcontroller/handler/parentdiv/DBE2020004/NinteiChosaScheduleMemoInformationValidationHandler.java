@@ -42,7 +42,7 @@ public class NinteiChosaScheduleMemoInformationValidationHandler {
 
         if (div.getMaintenanceForMemo().getDdlMemoType().getSelectedKey().isEmpty()) {
 
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.メモの種類));
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.メモの種類, div.getMaintenanceForMemo().getDdlMemoType()));
         }
         return validPairs;
     }
@@ -56,21 +56,18 @@ public class NinteiChosaScheduleMemoInformationValidationHandler {
     public ValidationMessageControlPairs 一覧データの編集状態チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
 
-        boolean validPairsFlag = false;
+        boolean validPairsFlag = true;
         for (dgListOfCommonMemo_Row dg_Row : div.getDgListOfCommonMemo().getDataSource()) {
-            if (dg_Row.getJotai().isEmpty()) {
-
-                validPairsFlag = true;
-                break;
+            if (!dg_Row.getJotai().isEmpty()) {
+                validPairsFlag = false;
             }
         }
         for (dgListOfJichikuMemo_Row dg_Row : div.getDgListOfJichikuMemo().getDataSource()) {
-            if (dg_Row.getJotai().isEmpty()) {
-                validPairsFlag = true;
-                break;
+            if (!dg_Row.getJotai().isEmpty()) {
+                validPairsFlag = false;
             }
         }
-        if ((div.getメモ一覧共通().isEmpty() && div.getメモ一覧自地区().isEmpty()) || validPairsFlag) {
+        if (validPairsFlag) {
 
             validPairs.add(new ValidationMessageControlPair(RRVMessages.編集状態チェック));
         }

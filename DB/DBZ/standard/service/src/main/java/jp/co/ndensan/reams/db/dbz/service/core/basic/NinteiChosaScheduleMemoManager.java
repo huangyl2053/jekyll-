@@ -159,13 +159,13 @@ public class NinteiChosaScheduleMemoManager {
         requireNonNull(地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("地区コード"));
 
         List<NinteiChosaScheduleMemo> ninteiChosaScheduleMemoList = new ArrayList<>();
-        List<DbT5222NinteiChosaScheduleMemoEntity> dbT5222NinteiChosaScheduleMemoEntity = dac.get認定調査スケジュールメモ情報(
+        List<DbT5222NinteiChosaScheduleMemoEntity> chosaScheduleMemoEntity = dac.get認定調査スケジュールメモ情報(
                 メモ年月日,
                 地区コード);
-        if (dbT5222NinteiChosaScheduleMemoEntity.isEmpty()) {
+        if (chosaScheduleMemoEntity.isEmpty()) {
             return SearchResult.of(Collections.<NinteiChosaScheduleMemo>emptyList(), 0, false);
         }
-        for (DbT5222NinteiChosaScheduleMemoEntity entity : dbT5222NinteiChosaScheduleMemoEntity) {
+        for (DbT5222NinteiChosaScheduleMemoEntity entity : chosaScheduleMemoEntity) {
             entity.initializeMd5();
             ninteiChosaScheduleMemoList.add(new NinteiChosaScheduleMemo(entity));
         }

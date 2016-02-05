@@ -147,7 +147,7 @@ public class DbT5222NinteiChosaScheduleMemoDac implements ISaveable<DbT5222Ninte
      * @param makeShuruiCondition 検索条件
      * @return 通常件数／重要件数
      */
-    public int getCount(ITrueFalseCriteria makeShuruiCondition) throws NullPointerException {
+    public int getCount(ITrueFalseCriteria makeShuruiCondition) {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
