@@ -220,7 +220,7 @@ and open the template in the editor.
         "serviceTeikyoYM"  ASC	
     </select>  			
     <select id="get住宅改修費支払結果"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinseiEntity" fetchSize="500">	
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.shiharaikekka.ShiharaiKekkaEntity" fetchSize="500">	
         SELECT
         SUM("T1"."shiharaiKingakuTotal") AS "shiharaiKingakuTotal",
         SUM("T1"."hokenTaishoHiyogaku") AS "hokenTaishoHiyogaku",

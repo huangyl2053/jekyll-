@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.entity.db.shiharaikekka;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -13,7 +12,11 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @author sunhui
  */
+@lombok.Getter
+@lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShiharaiKekkaEntity {
+
     public Decimal 費用額合計;
     public Decimal 保険対象費用額;
     public Decimal 保険給付額;
