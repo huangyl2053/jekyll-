@@ -47,6 +47,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class ChoshuYuyoShinseisho {
 
     private static final RString 生年月日不詳区分 = new RString("FALSE");
+    private static final RString ハイフン = new RString("-");
+    private static final int ハイフンINDEX = 3;
 
     /**
      * 介護保険料徴収猶予申請書を印刷します。
@@ -97,7 +99,8 @@ public class ChoshuYuyoShinseisho {
                 business.get保険者番号().value(),
                 生年月日,
                 business.get性別(),
-                business.get郵便番号(),
+                business.get郵便番号().isEmpty() || business.get郵便番号() == null
+                ? RString.EMPTY : business.get郵便番号().insert(ハイフンINDEX, ハイフン.toString()),
                 business.get住所(),
                 business.get電話番号());
         list.add(HokenryoGenmenChoshuYoyuShinseishoReport.createFrom(item));
