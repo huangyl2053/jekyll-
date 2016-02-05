@@ -24,7 +24,7 @@ public interface IDbT5301ShujiiIkenshoIraiJohoMapper {
     int update主治医意見書依頼情報BY申請書管理番号(ShujiiUpdateMybatisParameter 主治医意見書依頼情報);
 
     /**
-     * バッチプロセス用
+     * バッチプロセス用。
      *
      * @return List<RString>
      */
