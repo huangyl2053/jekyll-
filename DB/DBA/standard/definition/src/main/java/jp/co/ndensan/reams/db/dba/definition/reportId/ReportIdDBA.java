@@ -118,7 +118,23 @@ public enum ReportIdDBA {
     /**
      * 介護保険料徴収猶予申請書の帳票ＩＤです。
      */
-    DBB800002(new ReportId("DBB800002_HokenryoGenmenChoshuYoyuShinseisho"), new RString("介護保険料徴収猶予申請書"));
+    DBB800002(new ReportId("DBB800002_HokenryoGenmenChoshuYoyuShinseisho"), new RString("介護保険料徴収猶予申請書")),
+    /**
+     * 介護保険償還払支給申請書の帳票ＩＤです。
+     */
+    DBC800009(new ReportId("DBC800009_ShokanharaiShikyuShinseisho"), new RString("介護保険償還払支給申請書")),
+    /**
+     * 介護保険料納付額証明書交付申請書の帳票ＩＤです。
+     */
+    DBB800003(new ReportId("DBB800003_NofugakuShomeishoKofuShinseish"), new RString("介護保険料納付額証明書交付申請書")),
+    /**
+     * 給付額減額免除申請書
+     */
+    DBD800008(new ReportId("DBD800008_KyufugengakuMenjyoShinseisho"), new RString("給付額減額免除申請書")),
+    /**
+     * 居宅（介護予防）サービス計画作成依頼（変更）届出書
+     */
+    DBC800004(new ReportId("DBC800004_ItakuServiceKeikaluSakuseiIraiTodokedesho"), new RString("居宅（介護予防）サービス計画作成依頼（変更）届出書"));
 
     private final ReportId reportId;
     private final RString reportName;
