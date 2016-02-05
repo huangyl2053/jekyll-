@@ -78,8 +78,9 @@ public class ShujiiIkenTokusokujoHakko {
      * @return ResponseData<ShujiiIkenTokusokujoHakkoDiv>
      */
     public ResponseData<Dbe233001FlowParameter> hakkou(ShujiiIkenTokusokujoHakkoDiv div) {
+        Dbe233001FlowParameter parameter = new Dbe233001FlowParameter();
         ShujiiIkenTokusokujoHakkoTempData tempData = getHandler(div).getTempData();
-        Dbe233001FlowParameter parameter = Dbe233001FlowParameter.toDBE223001Parameter(tempData);
+        parameter.toDBE233001Parameter(tempData);
         return ResponseData.of(parameter).respond();
     }
 }
