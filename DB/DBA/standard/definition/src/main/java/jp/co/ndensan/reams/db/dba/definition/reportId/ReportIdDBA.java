@@ -144,6 +144,10 @@ public enum ReportIdDBA {
      */
     DBB800001(new ReportId("DBB800001_HokenryoGenmenChoshuYoyuShinseisho"), new RString("介護保険料減免申請書")),
     /**
+     * 社会福祉法人等利用者負担軽減対象確認申請書。
+     */
+    DBD800006(new ReportId("DBD800006_ShakaifukushihojinRiyoshaFutangakuKeigentaishoShinseisho"), new RString("社会福祉法人等利用者負担軽減対象確認申請書")),
+    /**
      * 介護保険償還払受領委任払申請書の帳票ＩＤです。
      */
     DBC800010(new ReportId("DBC800010_ShokanharaiJuryoIninShinseisho"), new RString("介護保険償還払受領委任払申請書"));
