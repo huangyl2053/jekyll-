@@ -62,6 +62,7 @@ public class MainPanelHandler {
         div.getTxtMaxRow().setValue(new RString(BusinessConfig.
                 get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
         set保険者DDL();
+        //TDTO 内部QA666(認定調査員と認定調査委託先取得方法がありません)
     }
 
     /**
