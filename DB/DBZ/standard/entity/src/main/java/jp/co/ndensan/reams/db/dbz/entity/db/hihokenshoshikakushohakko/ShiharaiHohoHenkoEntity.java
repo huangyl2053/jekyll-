@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  *
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShiharaiHohoHenkoEntity {
+public class ShiharaiHohoHenkoEntity implements IDbAccessable {
 
     private RString 証記載保険者番号;
     private RString 被保険者番号;

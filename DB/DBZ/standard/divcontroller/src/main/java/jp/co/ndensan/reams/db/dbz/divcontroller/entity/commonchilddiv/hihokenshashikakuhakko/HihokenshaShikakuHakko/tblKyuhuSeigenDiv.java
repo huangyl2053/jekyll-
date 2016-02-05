@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblKyuhuSeigenDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -242,7 +242,7 @@ public class tblKyuhuSeigenDiv extends TablePanel {
  * @author 自動生成
  */
 class celKyufuSeigenNaiyoTitleAttblKyuhuSeigen extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblKyufuSeigenNaiyo")
     private Label lblKyufuSeigenNaiyo;
 
@@ -272,7 +272,7 @@ class celKyufuSeigenNaiyoTitleAttblKyuhuSeigen extends TableCell {
  * @author 自動生成
  */
 class celKyufuSeigenKikanTitleAttblKyuhuSeigen extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblKyufuSeigenKikan")
     private Label lblKyufuSeigenKikan;
 
@@ -302,7 +302,7 @@ class celKyufuSeigenKikanTitleAttblKyuhuSeigen extends TableCell {
  * @author 自動生成
  */
 class celKyufuSeigenNaiyo1AttblKyuhuSeigen extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtKyufuSeigenNaiyo1")
     private TextBox txtKyufuSeigenNaiyo1;
 
@@ -332,7 +332,7 @@ class celKyufuSeigenNaiyo1AttblKyuhuSeigen extends TableCell {
  * @author 自動生成
  */
 class celKyufuSeigenKikan1AttblKyuhuSeigen extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtKyufuSeigenKikan1")
     private TextBoxDateRange txtKyufuSeigenKikan1;
 
@@ -362,7 +362,7 @@ class celKyufuSeigenKikan1AttblKyuhuSeigen extends TableCell {
  * @author 自動生成
  */
 class celKyufuSeigenNaiyo2AttblKyuhuSeigen extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtKyufuSeigenNaiyo2")
     private TextBox txtKyufuSeigenNaiyo2;
 
@@ -392,7 +392,7 @@ class celKyufuSeigenNaiyo2AttblKyuhuSeigen extends TableCell {
  * @author 自動生成
  */
 class celKyufuSeigenKikan2AttblKyuhuSeigen extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtKyufuSeigenKikan2")
     private TextBoxDateRange txtKyufuSeigenKikan2;
 
@@ -422,7 +422,7 @@ class celKyufuSeigenKikan2AttblKyuhuSeigen extends TableCell {
  * @author 自動生成
  */
 class celKyufuSeigenNaiyo3AttblKyuhuSeigen extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtKyufuSeigenNaiyo3")
     private TextBox txtKyufuSeigenNaiyo3;
 
@@ -452,7 +452,7 @@ class celKyufuSeigenNaiyo3AttblKyuhuSeigen extends TableCell {
  * @author 自動生成
  */
 class celKyufuSeigenKikan3AttblKyuhuSeigen extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtKyufuSeigenKikan3")
     private TextBoxDateRange txtKyufuSeigenKikan3;
 
