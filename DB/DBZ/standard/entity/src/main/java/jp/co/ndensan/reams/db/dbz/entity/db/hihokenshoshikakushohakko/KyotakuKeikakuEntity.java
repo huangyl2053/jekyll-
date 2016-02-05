@@ -7,13 +7,15 @@ package jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * 支援事業者の情報Entity
  */
 @lombok.Getter
 @lombok.Setter
-public class KyotakuKeikakuEntity {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public class KyotakuKeikakuEntity implements IDbAccessable {
 
     private RString 事業者;
     private FlexibleDate 届出年月日;

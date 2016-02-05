@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * サービス一覧Entity
@@ -13,8 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ServiceTypeListEntity {
+public class ServiceTypeListEntity implements IDbAccessable {
 
-    private RString サービス種類コード;
+    private Decimal 限度額;
+    private ServiceShuruiCode サービス種類コード;
     private RString サービス種類名称;
 }

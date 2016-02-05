@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  *
@@ -18,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyotakuKeikakuTodokedeEntity {
+public class KyotakuKeikakuTodokedeEntity implements IDbAccessable {
 
     private HihokenshaNo 被保険者番号;
     private FlexibleYearMonth 対象年月;
