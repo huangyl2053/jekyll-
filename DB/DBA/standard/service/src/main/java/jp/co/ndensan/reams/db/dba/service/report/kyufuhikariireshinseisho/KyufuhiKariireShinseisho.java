@@ -3,21 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.report.shoukanbaraijuryoininbaraishinseishochohyo;
+package jp.co.ndensan.reams.db.dba.service.report.kyufuhikariireshinseisho;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
-import jp.co.ndensan.reams.db.dba.business.report.shoukanbaraijuryoininbaraishinseishochohyo.ShokanharaiJuryoIninShinseishoItem;
-import jp.co.ndensan.reams.db.dba.business.report.shoukanbaraijuryoininbaraishinseishochohyo.ShokanharaiJuryoIninShinseishoProerty;
-import jp.co.ndensan.reams.db.dba.business.report.shoukanbaraijuryoininbaraishinseishochohyo.ShokanharaiJuryoIninShinseishoReport;
-import jp.co.ndensan.reams.db.dba.entity.report.shoukanbaraijuryoininbaraishinseishochohyo.ShokanharaiJuryoIninShinseishoReportSource;
+import jp.co.ndensan.reams.db.dba.business.report.kyufuhikariireshinseisho.KyufuhiKariireiShinseishoItem;
+import jp.co.ndensan.reams.db.dba.business.report.kyufuhikariireshinseisho.KyufuhiKariireiShinseishoProerty;
+import jp.co.ndensan.reams.db.dba.business.report.kyufuhikariireshinseisho.KyufuhiKariireiShinseishoReport;
+import jp.co.ndensan.reams.db.dba.entity.report.kyufuhikariireshinseisho.KyufuhiKariireiShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
@@ -43,26 +44,26 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 介護保険償還払受領委任払申請書のPrintクラスです。
+ * 介護保険給付費借入申請書のPrintクラスです。
  */
-public class ShoukanbaraiJuryoIninbaraiShinseishoChohyo {
+public class KyufuhiKariireShinseisho {
 
     private static final RString 生年月日不詳区分_FALG = new RString("0");
     private static final RString ハイフン = new RString("-");
     private static final int ハイフンINDEX = 3;
 
     /**
-     * 介護保険償還払受領委任払申請書を印刷します。
+     * 介護保険給付費借入申請書を印刷します。
      *
      * @param 識別コード 識別コード
      * @param 被保険者番号 被保険者番号
      * @return {@link SourceDataCollection}
      */
-    public SourceDataCollection getShoukanbaraiJuryoIninbaraiShinseishoChohyo(
+    public SourceDataCollection getKyufuhiKariireShinseishoChohyo(
             ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
-        ShokanharaiJuryoIninShinseishoProerty property = new ShokanharaiJuryoIninShinseishoProerty();
+        KyufuhiKariireiShinseishoProerty property = new KyufuhiKariireiShinseishoProerty();
         try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<ShokanharaiJuryoIninShinseishoReportSource> assembler
+            try (ReportAssembler<KyufuhiKariireiShinseishoReportSource> assembler
                     = createAssembler(property, reportManager)) {
                 INinshoshaSourceBuilderCreator builderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder builder = builderCreator.create(
@@ -70,9 +71,9 @@ public class ShoukanbaraiJuryoIninbaraiShinseishoChohyo {
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                         null,
                         null);
-                for (ShokanharaiJuryoIninShinseishoReport report
+                for (KyufuhiKariireiShinseishoReport report
                         : toReports(get被保険者基本情報(識別コード, 被保険者番号), builder.buildSource())) {
-                    ReportSourceWriter<ShokanharaiJuryoIninShinseishoReportSource> reportWriter
+                    ReportSourceWriter<KyufuhiKariireiShinseishoReportSource> reportWriter
                             = new ReportSourceWriter(assembler);
                     report.writeBy(reportWriter);
                 }
@@ -81,9 +82,9 @@ public class ShoukanbaraiJuryoIninbaraiShinseishoChohyo {
         }
     }
 
-    private static List<ShokanharaiJuryoIninShinseishoReport> toReports(
+    private static List<KyufuhiKariireiShinseishoReport> toReports(
             HihokenshaKihonBusiness business, NinshoshaSource ninshoshaSource) {
-        List<ShokanharaiJuryoIninShinseishoReport> list = new ArrayList<>();
+        List<KyufuhiKariireiShinseishoReport> list = new ArrayList<>();
         RString birthYMD = RString.EMPTY;
         RString 住民種別コード = business.get住民種別コード();
         FlexibleDate 生年月日 = business.get生年月日();
@@ -102,25 +103,20 @@ public class ShoukanbaraiJuryoIninbaraiShinseishoChohyo {
         } else {
             郵便番号 = RString.EMPTY;
         }
-        ShokanharaiJuryoIninShinseishoItem item = new ShokanharaiJuryoIninShinseishoItem(
+        KyufuhiKariireiShinseishoItem item = new KyufuhiKariireiShinseishoItem(
                 ninshoshaSource.ninshoshaYakushokuMei,
                 birthYMD,
-                // TODO 内部QA：689 (介護保険保険者名称を設定する必要がありません。)
-                // TODO 内部QA：648 (文言の取得不明です)
-                new RString("注意文"),
+                business.get被保険者番号().isEmpty() ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
                 business.get住所(),
                 business.get被保険者氏名(),
                 business.getフリガナ(),
-                business.get被保険者番号().isEmpty() ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
-                business.get保険者番号().value(),
-                new RString(String.valueOf(1)),
-                // TODO 内部QA：643 (性別の設定不明です)
-                business.get性別(),
-                // TODO 内部QA：648 (文言の取得不明です)
-                new RString("申請文"),
                 business.get電話番号(),
-                郵便番号);
-        list.add(ShokanharaiJuryoIninShinseishoReport.createFrom(item));
+                郵便番号,
+                Gender.toValue(business.get性別()).getCommonName(),
+                // TODO 内部QA：648 (文言の取得不明です)
+                new RString("依頼文"),
+                new RString("注意文"));
+        list.add(KyufuhiKariireiShinseishoReport.createFrom(item));
         return list;
     }
 
@@ -143,8 +139,9 @@ public class ShoukanbaraiJuryoIninbaraiShinseishoChohyo {
         if (生年月日不詳区分_FALG.equals(生年月日不詳区分)) {
             return 生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        } else {
+            return new RString(生年月日.toString());
         }
-        return RString.EMPTY;
     }
 
     private static RString set郵便番号(RString 郵便番号) {
