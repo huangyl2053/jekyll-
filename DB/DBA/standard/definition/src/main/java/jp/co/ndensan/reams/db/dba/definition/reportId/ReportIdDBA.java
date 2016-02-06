@@ -126,7 +126,7 @@ public enum ReportIdDBA {
     /**
      * 介護保険料納付額証明書交付申請書の帳票ＩＤです。
      */
-    DBB800003(new ReportId("DBB800003_NofugakuShomeishoKofuShinseish"), new RString("介護保険料納付額証明書交付申請書")),
+    DBB800003(new ReportId("DBB800003_NofugakuShomeishoKofuShinseisho"), new RString("介護保険料納付額証明書交付申請書")),
     /**
      * 給付額減額免除申請書
      */
