@@ -97,7 +97,7 @@ public class KyotakuKaigoJutakuKaishuhiJizenShinseisho {
             }
         }
         RString 郵便番号 = entity.get郵便番号();
-        if (郵便番号 != null && 郵便番号.isEmpty()) {
+        if (郵便番号 != null && !郵便番号.isEmpty()) {
             郵便番号 = set郵便番号(entity.get郵便番号());
         } else {
             郵便番号 = RString.EMPTY;
