@@ -149,7 +149,7 @@ public class ShoukanbaraiJuryoIninbaraiShinseishoChohyo {
 
     private static RString set郵便番号(RString 郵便番号) {
         if (ハイフンINDEX <= 郵便番号.length()) {
-            郵便番号.insert(ハイフンINDEX, ハイフン.toString());
+            郵便番号 = 郵便番号.insert(ハイフンINDEX, ハイフン.toString());
         }
         return 郵便番号;
     }
