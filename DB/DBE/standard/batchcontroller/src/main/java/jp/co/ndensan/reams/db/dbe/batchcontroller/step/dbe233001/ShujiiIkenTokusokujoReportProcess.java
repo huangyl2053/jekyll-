@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 主治医意見書督促状発行_バッチフ処理クラスです
+ * 主治医意見書督促状発行_バッチフ処理クラスです。
  */
 public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIkenTokusokujoRelateEntity> {
 
