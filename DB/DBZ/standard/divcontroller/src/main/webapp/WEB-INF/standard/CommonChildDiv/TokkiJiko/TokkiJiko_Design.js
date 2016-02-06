@@ -44,10 +44,6 @@ var DBZ;
                 return new UZA.Button(this.convFiledName("btnKakutei"));
             };
 
-            Controls.prototype.btnMasking = function () {
-                return new UZA.Button(this.convFiledName("btnMasking"));
-            };
-
             Controls.prototype.btnCancel = function () {
                 return new UZA.Button(this.convFiledName("btnCancel"));
             };

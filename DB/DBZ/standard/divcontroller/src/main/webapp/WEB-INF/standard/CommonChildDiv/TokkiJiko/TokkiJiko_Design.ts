@@ -49,10 +49,6 @@ module DBZ {
                 return new UZA.Button(this.convFiledName("btnKakutei"));
             }
 
-            public btnMasking(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnMasking"));
-            }
-
             public btnCancel(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnCancel"));
             }
