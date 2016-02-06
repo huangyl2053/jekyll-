@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -18,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KaigoHokenShisetsuNyutaishoEntity implements IDbAccessable {
 
-    private RString 識別コード;
+    private ShikibetsuCode 識別コード;
     private RString 入所施設種類;
     private RString 入所施設コード;
     private FlexibleDate 入所年月日;

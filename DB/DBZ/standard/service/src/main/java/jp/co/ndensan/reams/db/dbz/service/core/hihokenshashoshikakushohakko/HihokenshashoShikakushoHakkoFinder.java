@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.service.core.hihokenshashoShikakushoHakko;
+package jp.co.ndensan.reams.db.dbz.service.core.hihokenshashoshikakushohakko;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3007KyotakuK
 import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.KaigoHokenShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.KyotakuKeikakuTodokedeEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.ServiceTypeListEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokenshoshikakushohakko.IHihokenshoShikakushoHakkoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
@@ -60,10 +61,11 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
+ * 共有子Div「被保険者証・資格証」の状態を変更するクラスです
  *
- * @author huangh
  */
 public class HihokenshashoShikakushoHakkoFinder {
 
@@ -231,44 +233,44 @@ public class HihokenshashoShikakushoHakkoFinder {
      * @param メニューID メニューID
      * @return 被保険者証資格証発行情報取得Entity
      */
+    @Transaction
     public HihokenshoShikakushoHakkoEntity 被保険者証資格証発行情報取得(HihokenshaNo 被保険者番号, RString メニューID) {
 
         // SQL発行
         IHihokenshoShikakushoHakkoMapper hihokenshoShikakushoHakkoMapper = this.mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class);
-        //IShikakuTokusoMapper shikakuTokusoMapper = this.mapperProvider.create(IShikakuTokusoMapper.class);
         HihokenshoShikakushoHakkoMapperParameter SQL発行Parameter
                 = createParam(被保険者番号,
                         メニューID,
-                        RString.EMPTY,
-                        Boolean.TRUE,
+                        YukoMukoKubun.有効.getコード(),
+                        Boolean.FALSE,
                         RString.EMPTY,
                         FlexibleDate.EMPTY,
                         FlexibleDate.EMPTY,
                         RString.EMPTY,
                         FlexibleDate.EMPTY,
                         FlexibleDate.EMPTY);
+        HihokenshoShikakushoHakkoEntity entity = new HihokenshoShikakushoHakkoEntity();
+        entity = hihokenshoShikakushoHakkoMapper.被保険者証資格証発行情報取得(SQL発行Parameter);
 
-//        HihokenshoShikakushoHakkoEntity entity = hihokenshoShikakushoHakkoMapper.被保険者証資格証発行情報取得(SQL発行Parameter);
-//        // 保険者情報取得
-//        this.保険者情報取得(entity, 被保険者番号);
-//
-//        // 指定サービス種類の取得
-//        this.指定サービス種類の取得(entity, 被保険者番号);
-//
-//        // 限度額データ取得
-//        this.限度額データ取得(entity);
-//
-//        // 給付制限データ取得
-//        this.給付制限データ取得(entity, メニューID);
-//
-//        // 支援事業者データ取得
-//        this.支援事業者データ取得(entity);
-//
-//        // 施設入退所データ取得
-//        this.施設入退所データ取得(entity);
-//
-//        return entity;
-        return null;
+        // 保険者情報取得
+        this.保険者情報取得(entity, 被保険者番号);
+
+        // 指定サービス種類の取得
+        this.指定サービス種類の取得(entity, 被保険者番号);
+
+        // 限度額データ取得
+        this.限度額データ取得(entity);
+
+        // 給付制限データ取得
+        this.給付制限データ取得(entity, メニューID);
+
+        // 支援事業者データ取得
+        this.支援事業者データ取得(entity);
+
+        // 施設入退所データ取得
+        this.施設入退所データ取得(entity);
+
+        return entity;
     }
 
     /**
@@ -280,14 +282,15 @@ public class HihokenshashoShikakushoHakkoFinder {
     private void 保険者情報取得(HihokenshoShikakushoHakkoEntity entity, HihokenshaNo 被保険者番号) {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        DbT1001HihokenshaDaichoEntity hokenshajohoEntity = accessor.select().
+        DbT1001HihokenshaDaichoEntity hokenshajohoEntity = new DbT1001HihokenshaDaichoEntity();
+        hokenshajohoEntity = accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(logicalDeletedFlag, false))).order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).limit(1).toObject(DbT1001HihokenshaDaichoEntity.class);
 
         // 「ビジネス設計_DBUMN00000_市町村情報取得_広域」の「市町村コードによる市町村情報」を呼び出し
-        // TODO上記取得できる場合、広住特措置元市町村コードがNULLではない場合
+        //上記取得できる場合、広住特措置元市町村コードがNULLではない場合
         if (hokenshajohoEntity != null) {
             KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
             RString 保険者名称 = RString.EMPTY;
@@ -313,64 +316,68 @@ public class HihokenshashoShikakushoHakkoFinder {
      * @param HihokenshoShikakushoHakkoEntity HihokenshoShikakushoHakkoEntity
      * @param 被保険者番号 被保険者番号
      */
+    @Transaction
     private void 指定サービス種類の取得(HihokenshoShikakushoHakkoEntity entity, HihokenshaNo 被保険者番号) {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        DbT4001JukyushaDaichoEntity jukyushaDaichoEntity = accessor.select().
+        DbT4001JukyushaDaichoEntity jukyushaDaichoEntity = new DbT4001JukyushaDaichoEntity();
+        jukyushaDaichoEntity = accessor.select().
                 table(DbT4001JukyushaDaicho.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(yukoMukoKubun, YukoMukoKubun.有効),
-                                eq(logicalDeletedFlag, false))).order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).toObject(DbT4001JukyushaDaichoEntity.class);
+                                eq(DbT4001JukyushaDaicho.hihokenshaNo, 被保険者番号),
+                                eq(yukoMukoKubun, YukoMukoKubun.有効.getコード()),
+                                eq(DbT4001JukyushaDaicho.logicalDeletedFlag, false))).order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).toObject(DbT4001JukyushaDaichoEntity.class);
 
         List<RString> サービス種類list = new ArrayList<>();
 
-        サービス種類list.set(0, jukyushaDaichoEntity.getShiteiServiceShurui01().value());
-        サービス種類list.set(1, jukyushaDaichoEntity.getShiteiServiceShurui02().value());
-        サービス種類list.set(2, jukyushaDaichoEntity.getShiteiServiceShurui03().value());
-        サービス種類list.set(3, jukyushaDaichoEntity.getShiteiServiceShurui04().value());
-        サービス種類list.set(4, jukyushaDaichoEntity.getShiteiServiceShurui05().value());
-        サービス種類list.set(5, jukyushaDaichoEntity.getShiteiServiceShurui06().value());
-        サービス種類list.set(6, jukyushaDaichoEntity.getShiteiServiceShurui07().value());
-        サービス種類list.set(7, jukyushaDaichoEntity.getShiteiServiceShurui08().value());
-        サービス種類list.set(8, jukyushaDaichoEntity.getShiteiServiceShurui09().value());
-        サービス種類list.set(9, jukyushaDaichoEntity.getShiteiServiceShurui10().value());
-        サービス種類list.set(10, jukyushaDaichoEntity.getShiteiServiceShurui11().value());
-        サービス種類list.set(11, jukyushaDaichoEntity.getShiteiServiceShurui12().value());
-        サービス種類list.set(12, jukyushaDaichoEntity.getShiteiServiceShurui13().value());
-        サービス種類list.set(13, jukyushaDaichoEntity.getShiteiServiceShurui14().value());
-        サービス種類list.set(14, jukyushaDaichoEntity.getShiteiServiceShurui15().value());
-        サービス種類list.set(15, jukyushaDaichoEntity.getShiteiServiceShurui16().value());
-        サービス種類list.set(16, jukyushaDaichoEntity.getShiteiServiceShurui17().value());
-        サービス種類list.set(17, jukyushaDaichoEntity.getShiteiServiceShurui18().value());
-        サービス種類list.set(18, jukyushaDaichoEntity.getShiteiServiceShurui19().value());
-        サービス種類list.set(19, jukyushaDaichoEntity.getShiteiServiceShurui20().value());
-        サービス種類list.set(20, jukyushaDaichoEntity.getShiteiServiceShurui21().value());
-        サービス種類list.set(21, jukyushaDaichoEntity.getShiteiServiceShurui22().value());
-        サービス種類list.set(22, jukyushaDaichoEntity.getShiteiServiceShurui23().value());
-        サービス種類list.set(23, jukyushaDaichoEntity.getShiteiServiceShurui24().value());
-        サービス種類list.set(24, jukyushaDaichoEntity.getShiteiServiceShurui25().value());
-        サービス種類list.set(25, jukyushaDaichoEntity.getShiteiServiceShurui26().value());
-        サービス種類list.set(26, jukyushaDaichoEntity.getShiteiServiceShurui27().value());
-        サービス種類list.set(27, jukyushaDaichoEntity.getShiteiServiceShurui28().value());
-        サービス種類list.set(28, jukyushaDaichoEntity.getShiteiServiceShurui29().value());
-        サービス種類list.set(29, jukyushaDaichoEntity.getShiteiServiceShurui30().value());
+        サービス種類list.add(0, jukyushaDaichoEntity.getShiteiServiceShurui01().value());
+        サービス種類list.add(1, jukyushaDaichoEntity.getShiteiServiceShurui02().value());
+        サービス種類list.add(2, jukyushaDaichoEntity.getShiteiServiceShurui03().value());
+        サービス種類list.add(3, jukyushaDaichoEntity.getShiteiServiceShurui04().value());
+        サービス種類list.add(4, jukyushaDaichoEntity.getShiteiServiceShurui05().value());
+        サービス種類list.add(5, jukyushaDaichoEntity.getShiteiServiceShurui06().value());
+        サービス種類list.add(6, jukyushaDaichoEntity.getShiteiServiceShurui07().value());
+        サービス種類list.add(7, jukyushaDaichoEntity.getShiteiServiceShurui08().value());
+        サービス種類list.add(8, jukyushaDaichoEntity.getShiteiServiceShurui09().value());
+        サービス種類list.add(9, jukyushaDaichoEntity.getShiteiServiceShurui10().value());
+        サービス種類list.add(10, jukyushaDaichoEntity.getShiteiServiceShurui11().value());
+        サービス種類list.add(11, jukyushaDaichoEntity.getShiteiServiceShurui12().value());
+        サービス種類list.add(12, jukyushaDaichoEntity.getShiteiServiceShurui13().value());
+        サービス種類list.add(13, jukyushaDaichoEntity.getShiteiServiceShurui14().value());
+        サービス種類list.add(14, jukyushaDaichoEntity.getShiteiServiceShurui15().value());
+        サービス種類list.add(15, jukyushaDaichoEntity.getShiteiServiceShurui16().value());
+        サービス種類list.add(16, jukyushaDaichoEntity.getShiteiServiceShurui17().value());
+        サービス種類list.add(17, jukyushaDaichoEntity.getShiteiServiceShurui18().value());
+        サービス種類list.add(18, jukyushaDaichoEntity.getShiteiServiceShurui19().value());
+        サービス種類list.add(19, jukyushaDaichoEntity.getShiteiServiceShurui20().value());
+        サービス種類list.add(20, jukyushaDaichoEntity.getShiteiServiceShurui21().value());
+        サービス種類list.add(21, jukyushaDaichoEntity.getShiteiServiceShurui22().value());
+        サービス種類list.add(22, jukyushaDaichoEntity.getShiteiServiceShurui23().value());
+        サービス種類list.add(23, jukyushaDaichoEntity.getShiteiServiceShurui24().value());
+        サービス種類list.add(24, jukyushaDaichoEntity.getShiteiServiceShurui25().value());
+        サービス種類list.add(25, jukyushaDaichoEntity.getShiteiServiceShurui26().value());
+        サービス種類list.add(26, jukyushaDaichoEntity.getShiteiServiceShurui27().value());
+        サービス種類list.add(27, jukyushaDaichoEntity.getShiteiServiceShurui28().value());
+        サービス種類list.add(28, jukyushaDaichoEntity.getShiteiServiceShurui29().value());
+        サービス種類list.add(29, jukyushaDaichoEntity.getShiteiServiceShurui30().value());
 
-        entity.setServiceTypeListEntityList(null);
-
-        RString 介護認定審査会意見_名称 = entity.get介護認定審査会意見();
-        RString 介護認定審査会意見_略称 = entity.get介護認定審査会意見();
+        RString 介護認定審査会意見_名称 = (entity.get介護認定審査会意見() == null ? RString.EMPTY : entity.get介護認定審査会意見()).concat(RString.FULL_SPACE);
+        RString 介護認定審査会意見_略称 = (entity.get介護認定審査会意見() == null ? RString.EMPTY : entity.get介護認定審査会意見()).concat(RString.FULL_SPACE);
         for (int i = 0; i < サービス種類list.size(); i++) {
 
             if (サービス種類list.get(i) != null) {
-                DbT7130KaigoServiceShuruiEntity kaigoServiceShuruiEntity = accessor.select().
+                DbT7130KaigoServiceShuruiEntity kaigoServiceShuruiEntity = new DbT7130KaigoServiceShuruiEntity();
+                kaigoServiceShuruiEntity = accessor.select().
                         table(DbT7130KaigoServiceShurui.class).
                         where(and(eq(serviceShuruiCd, サービス種類list.get(i)),
                                         leq(teikyoKaishiYM, RDate.getNowDate()),
                                         or(leq(RDate.getNowDate(), teikyoshuryoYM), isNULL(teikyoshuryoYM)))).toObject(DbT7130KaigoServiceShuruiEntity.class);
 
-                介護認定審査会意見_名称 = 介護認定審査会意見_名称.concat(RString.FULL_SPACE).concat(kaigoServiceShuruiEntity.getServiceShuruiMeisho());
-                介護認定審査会意見_略称 = 介護認定審査会意見_略称.concat(RString.FULL_SPACE).concat(kaigoServiceShuruiEntity.getServiceShuruiRyakusho());
+                if (kaigoServiceShuruiEntity == null) {
+                    continue;
+                }
+                介護認定審査会意見_名称 = 介護認定審査会意見_名称.concat(new RString("、")).concat(kaigoServiceShuruiEntity.getServiceShuruiMeisho() == null ? RString.EMPTY : kaigoServiceShuruiEntity.getServiceShuruiMeisho());
+                介護認定審査会意見_略称 = 介護認定審査会意見_略称.concat(new RString("、")).concat(kaigoServiceShuruiEntity.getServiceShuruiRyakusho() == null ? RString.EMPTY : kaigoServiceShuruiEntity.getServiceShuruiRyakusho());
 
             } else {
                 break;
@@ -395,6 +402,7 @@ public class HihokenshashoShikakushoHakkoFinder {
      *
      * @param HihokenshoShikakushoHakkoEntity HihokenshoShikakushoHakkoEntity
      */
+    @Transaction
     private void 限度額データ取得(HihokenshoShikakushoHakkoEntity entity) {
 
         IHihokenshoShikakushoHakkoMapper hihokenshoShikakushoHakkoMapper = mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class);
@@ -410,10 +418,11 @@ public class HihokenshashoShikakushoHakkoFinder {
                         RString.EMPTY,
                         entity.get認定有効期間開始年月日(),
                         entity.get認定有効期間終了年月日());
-//        List<ServiceTypeListEntity> 限度額取得EntityList = hihokenshoShikakushoHakkoMapper
-//                .限度額データ取得(限度額データ取得Parameter);
+        List<ServiceTypeListEntity> 限度額取得EntityList = new ArrayList<>();
+        限度額取得EntityList = hihokenshoShikakushoHakkoMapper
+                .限度額データ取得(限度額データ取得Parameter);
 
-//        entity.setServiceTypeListEntityList(限度額取得EntityList);
+        entity.setServiceTypeListEntityList(限度額取得EntityList);
     }
 
     /**
@@ -423,16 +432,21 @@ public class HihokenshashoShikakushoHakkoFinder {
      * @param メニューID メニューID
      *
      */
+    @Transaction
     private void 給付制限データ取得(HihokenshoShikakushoHakkoEntity entity, RString メニューID) {
 
         IHihokenshoShikakushoHakkoMapper hihokenshoShikakushoHakkoMapper = mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class);
         List<ShiharaiHohoHenkoEntity> shiharaiHohoHenkoList = new ArrayList<>();
-//        List<ShiharaiHohoHenkoEntity> shiharaiHohoHenkoList = hihokenshoShikakushoHakkoMapper.支払方法変更の情報取得();
+        shiharaiHohoHenkoList = hihokenshoShikakushoHakkoMapper.支払方法変更の情報取得();
+
+        if (shiharaiHohoHenkoList.isEmpty()) {
+            return;
+        }
 
         for (int i = 0; i < shiharaiHohoHenkoList.size(); i++) {
 
             if (MENUID_DBUMN12001.equals(メニューID)) {
-                if (ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())) {
+                if (ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分().code())) {
 
                     if (i == 0) {
                         entity.set給付制限内容１(BusinessConfig.get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, SubGyomuCode.DBD介護受給));
@@ -449,7 +463,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                         entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
                     }
 
-                } else if (ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())) {
+                } else if (ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分().code())) {
                     if (i == 0) {
                         entity.set給付制限内容１(BusinessConfig.get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
                         entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
@@ -464,7 +478,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                         entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
                         entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
                     }
-                } else if (ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())) {
+                } else if (ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分().code())) {
                     if (i == 0) {
                         entity.set給付制限内容１(BusinessConfig.get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, SubGyomuCode.DBD介護受給));
                         entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
@@ -481,7 +495,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                     }
                 }
             } else if (MENUID_DBUMN12002.equals(メニューID)) {
-                if (ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())) {
+                if (ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分().code())) {
 
                     if (i == 0) {
                         entity.set給付制限内容１(BusinessConfig.get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, SubGyomuCode.DBD介護受給));
@@ -498,7 +512,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                         entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
                     }
 
-                } else if (ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())) {
+                } else if (ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分().code())) {
                     if (i == 0) {
                         entity.set給付制限内容１(BusinessConfig.get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
                         entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
@@ -513,7 +527,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                         entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
                         entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
                     }
-                } else if (ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())) {
+                } else if (ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分().code())) {
                     if (i == 0) {
                         entity.set給付制限内容１(BusinessConfig.get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, SubGyomuCode.DBD介護受給));
                         entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
@@ -538,27 +552,34 @@ public class HihokenshashoShikakushoHakkoFinder {
      *
      * @param HihokenshoShikakushoHakkoEntity HihokenshoShikakushoHakkoEntity
      */
+    @Transaction
     private void 支援事業者データ取得(HihokenshoShikakushoHakkoEntity entity) {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         IHihokenshoShikakushoHakkoMapper hihokenshoShikakushoHakkoMapper = mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class);
 
         List<KyotakuKeikakuTodokedeEntity> kyotakuKeikakuTodokedeList = new ArrayList<>();
-//        List<KyotakuKeikakuTodokedeEntity> kyotakuKeikakuTodokedeList = hihokenshoShikakushoHakkoMapper.居宅給付計画届出情報取得();
+        kyotakuKeikakuTodokedeList = hihokenshoShikakushoHakkoMapper.居宅給付計画届出情報取得();
+
+        if (kyotakuKeikakuTodokedeList.isEmpty()) {
+            return;
+        }
         int dbT3006Count = accessor.select().table(DbT3006KyotakuKeikakuJigyoshaSakusei.class).getCount();
         int dbT3007Count = accessor.select().table(DbT3007KyotakuKeikakuJikoSakusei.class).getCount();
 
         for (int i = 0; i < kyotakuKeikakuTodokedeList.size(); i++) {
             if (i == 0) {
                 if (dbT3006Count > 0) {
-                    DbT3006KyotakuKeikakuJigyoshaSakuseiEntity dbT3006KyotakuKeikakuJigyoshaSakusei = accessor.select().
+                    DbT3006KyotakuKeikakuJigyoshaSakuseiEntity dbT3006KyotakuKeikakuJigyoshaSakusei = new DbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
+                    dbT3006KyotakuKeikakuJigyoshaSakusei = accessor.select().
                             table(DbT3006KyotakuKeikakuJigyoshaSakusei.class).
                             where(and(
                                             eq(DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshano, kyotakuKeikakuTodokedeList.get(i).get被保険者番号()),
                                             eq(DbT3006KyotakuKeikakuJigyoshaSakusei.taishoYM, kyotakuKeikakuTodokedeList.get(i).get対象年月()),
                                             eq(DbT3006KyotakuKeikakuJigyoshaSakusei.rirekiNo, kyotakuKeikakuTodokedeList.get(i).get履歴番号()))).toObject(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity.class);
 
-                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = accessor.select().table(DbT7060KaigoJigyosha.class).where(
+                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = new DbT7060KaigoJigyoshaEntity();
+                    dbT7060KaigoJigyosha = accessor.select().table(DbT7060KaigoJigyosha.class).where(
                             eq(DbT7060KaigoJigyosha.jigyoshaNo, dbT3006KyotakuKeikakuJigyoshaSakusei.getKeikakuJigyoshaNo())).
                             order(by(DbT7060KaigoJigyosha.yukoKaishiYMD, Order.DESC)).limit(1).toObject(DbT7060KaigoJigyoshaEntity.class);
 
@@ -567,7 +588,8 @@ public class HihokenshashoShikakushoHakkoFinder {
                     entity.set適用開始年月日１(dbT3006KyotakuKeikakuJigyoshaSakusei.getTekiyoKaishiYMD());
                 } else if (dbT3007Count > 0) {
 
-                    DbT3007KyotakuKeikakuJikoSakuseiEntity dbT3007KyotakuKeikakuJigyoshaSakusei = accessor.select().
+                    DbT3007KyotakuKeikakuJikoSakuseiEntity dbT3007KyotakuKeikakuJigyoshaSakusei = new DbT3007KyotakuKeikakuJikoSakuseiEntity();
+                    dbT3007KyotakuKeikakuJigyoshaSakusei = accessor.select().
                             table(DbT3007KyotakuKeikakuJikoSakusei.class).
                             where(and(
                                             eq(DbT3007KyotakuKeikakuJikoSakusei.hihokenshaNo, kyotakuKeikakuTodokedeList.get(i).get被保険者番号()),
@@ -582,14 +604,16 @@ public class HihokenshashoShikakushoHakkoFinder {
             } else if (i == 1) {
 
                 if (dbT3006Count > 0) {
-                    DbT3006KyotakuKeikakuJigyoshaSakuseiEntity dbT3006KyotakuKeikakuJigyoshaSakusei = accessor.select().
+                    DbT3006KyotakuKeikakuJigyoshaSakuseiEntity dbT3006KyotakuKeikakuJigyoshaSakusei = new DbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
+                    dbT3006KyotakuKeikakuJigyoshaSakusei = accessor.select().
                             table(DbT3006KyotakuKeikakuJigyoshaSakusei.class).
                             where(and(
                                             eq(DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshano, kyotakuKeikakuTodokedeList.get(i).get被保険者番号()),
                                             eq(DbT3006KyotakuKeikakuJigyoshaSakusei.taishoYM, kyotakuKeikakuTodokedeList.get(i).get対象年月()),
                                             eq(DbT3006KyotakuKeikakuJigyoshaSakusei.rirekiNo, kyotakuKeikakuTodokedeList.get(i).get履歴番号()))).toObject(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity.class);
 
-                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = accessor.select().table(DbT7060KaigoJigyosha.class).where(
+                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = new DbT7060KaigoJigyoshaEntity();
+                    dbT7060KaigoJigyosha = accessor.select().table(DbT7060KaigoJigyosha.class).where(
                             eq(DbT7060KaigoJigyosha.jigyoshaNo, dbT3006KyotakuKeikakuJigyoshaSakusei.getKeikakuJigyoshaNo())).
                             order(by(DbT7060KaigoJigyosha.yukoKaishiYMD, Order.DESC)).limit(1).toObject(DbT7060KaigoJigyoshaEntity.class);
 
@@ -598,7 +622,8 @@ public class HihokenshashoShikakushoHakkoFinder {
                     entity.set適用開始年月日２(dbT3006KyotakuKeikakuJigyoshaSakusei.getTekiyoKaishiYMD());
                 } else if (dbT3007Count > 0) {
 
-                    DbT3007KyotakuKeikakuJikoSakuseiEntity dbT3007KyotakuKeikakuJigyoshaSakusei = accessor.select().
+                    DbT3007KyotakuKeikakuJikoSakuseiEntity dbT3007KyotakuKeikakuJigyoshaSakusei = new DbT3007KyotakuKeikakuJikoSakuseiEntity();
+                    dbT3007KyotakuKeikakuJigyoshaSakusei = accessor.select().
                             table(DbT3007KyotakuKeikakuJikoSakusei.class).
                             where(and(
                                             eq(DbT3007KyotakuKeikakuJikoSakusei.hihokenshaNo, kyotakuKeikakuTodokedeList.get(i).get被保険者番号()),
@@ -612,14 +637,16 @@ public class HihokenshashoShikakushoHakkoFinder {
             } else if (i == 2) {
 
                 if (dbT3006Count > 0) {
-                    DbT3006KyotakuKeikakuJigyoshaSakuseiEntity dbT3006KyotakuKeikakuJigyoshaSakusei = accessor.select().
+                    DbT3006KyotakuKeikakuJigyoshaSakuseiEntity dbT3006KyotakuKeikakuJigyoshaSakusei = new DbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
+                    dbT3006KyotakuKeikakuJigyoshaSakusei = accessor.select().
                             table(DbT3006KyotakuKeikakuJigyoshaSakusei.class).
                             where(and(
                                             eq(DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshano, kyotakuKeikakuTodokedeList.get(i).get被保険者番号()),
                                             eq(DbT3006KyotakuKeikakuJigyoshaSakusei.taishoYM, kyotakuKeikakuTodokedeList.get(i).get対象年月()),
                                             eq(DbT3006KyotakuKeikakuJigyoshaSakusei.rirekiNo, kyotakuKeikakuTodokedeList.get(i).get履歴番号()))).toObject(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity.class);
 
-                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = accessor.select().table(DbT7060KaigoJigyosha.class).where(
+                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = new DbT7060KaigoJigyoshaEntity();
+                    dbT7060KaigoJigyosha = accessor.select().table(DbT7060KaigoJigyosha.class).where(
                             eq(DbT7060KaigoJigyosha.jigyoshaNo, dbT3006KyotakuKeikakuJigyoshaSakusei.getKeikakuJigyoshaNo())).
                             order(by(DbT7060KaigoJigyosha.yukoKaishiYMD, Order.DESC)).limit(1).toObject(DbT7060KaigoJigyoshaEntity.class);
 
@@ -628,7 +655,8 @@ public class HihokenshashoShikakushoHakkoFinder {
                     entity.set適用開始年月日３(dbT3006KyotakuKeikakuJigyoshaSakusei.getTekiyoKaishiYMD());
                 } else if (dbT3007Count > 0) {
 
-                    DbT3007KyotakuKeikakuJikoSakuseiEntity dbT3007KyotakuKeikakuJigyoshaSakusei = accessor.select().
+                    DbT3007KyotakuKeikakuJikoSakuseiEntity dbT3007KyotakuKeikakuJigyoshaSakusei = new DbT3007KyotakuKeikakuJikoSakuseiEntity();
+                    dbT3007KyotakuKeikakuJigyoshaSakusei = accessor.select().
                             table(DbT3007KyotakuKeikakuJikoSakusei.class).
                             where(and(
                                             eq(DbT3007KyotakuKeikakuJikoSakusei.hihokenshaNo, kyotakuKeikakuTodokedeList.get(i).get被保険者番号()),
@@ -648,25 +676,32 @@ public class HihokenshashoShikakushoHakkoFinder {
      *
      * @param HihokenshoShikakushoHakkoEntity HihokenshoShikakushoHakkoEntity
      */
+    @Transaction
     private void 施設入退所データ取得(HihokenshoShikakushoHakkoEntity entity) {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         IHihokenshoShikakushoHakkoMapper hihokenshoShikakushoHakkoMapper = mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class);
 
         List<KaigoHokenShisetsuNyutaishoEntity> kaigoHokenShisetsuNyutaishoList = new ArrayList<>();
-        //List<KaigoHokenShisetsuNyutaishoEntity> kaigoHokenShisetsuNyutaishoList = hihokenshoShikakushoHakkoMapper.介護保険施設入退所の情報取得();
+        kaigoHokenShisetsuNyutaishoList = hihokenshoShikakushoHakkoMapper.介護保険施設入退所の情報取得();
+
+        if (kaigoHokenShisetsuNyutaishoList.isEmpty()) {
+            return;
+        }
 
         for (int i = 0; i < kaigoHokenShisetsuNyutaishoList.size(); i++) {
 
             if (i == 0) {
                 if (ShisetsuType.介護保険施設.getCode().equals(kaigoHokenShisetsuNyutaishoList.get(i).get入所施設種類())) {
-                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = accessor.select().table(DbT7060KaigoJigyosha.class).where(
+                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = new DbT7060KaigoJigyoshaEntity();
+                    dbT7060KaigoJigyosha = accessor.select().table(DbT7060KaigoJigyosha.class).where(
                             eq(DbT7060KaigoJigyosha.jigyoshaNo, kaigoHokenShisetsuNyutaishoList.get(i).get入所施設コード())).
                             order(by(DbT7060KaigoJigyosha.yukoKaishiYMD, Order.DESC)).limit(1).toObject(DbT7060KaigoJigyoshaEntity.class);
 
                     entity.set入所施設１(dbT7060KaigoJigyosha.getJigyoshaName().value());
                 } else if (ShisetsuType.住所地特例対象施設.getCode().equals(kaigoHokenShisetsuNyutaishoList.get(i).get入所施設種類())) {
-                    DbT1005KaigoJogaiTokureiTaishoShisetsuEntity dbT1005KaigoJogaiTokureiTaishoShisetsu = accessor.select().table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).where(
+                    DbT1005KaigoJogaiTokureiTaishoShisetsuEntity dbT1005KaigoJogaiTokureiTaishoShisetsu = new DbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
+                    dbT1005KaigoJogaiTokureiTaishoShisetsu = accessor.select().table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).where(
                             eq(DbT1005KaigoJogaiTokureiTaishoShisetsu.jigyoshaNo, kaigoHokenShisetsuNyutaishoList.get(i).get入所施設コード())).
                             order(by(DbT1005KaigoJogaiTokureiTaishoShisetsu.yukoKaishiYMD, Order.DESC)).limit(1).toObject(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
 
@@ -677,13 +712,15 @@ public class HihokenshashoShikakushoHakkoFinder {
                 entity.set退所年月日１(kaigoHokenShisetsuNyutaishoList.get(i).get退所年月日());
             } else if (i == 1) {
                 if (ShisetsuType.介護保険施設.getCode().equals(kaigoHokenShisetsuNyutaishoList.get(i).get入所施設種類())) {
-                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = accessor.select().table(DbT7060KaigoJigyosha.class).where(
+                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = new DbT7060KaigoJigyoshaEntity();
+                    dbT7060KaigoJigyosha = accessor.select().table(DbT7060KaigoJigyosha.class).where(
                             eq(DbT7060KaigoJigyosha.jigyoshaNo, kaigoHokenShisetsuNyutaishoList.get(i).get入所施設コード())).
                             order(by(DbT7060KaigoJigyosha.yukoKaishiYMD, Order.DESC)).limit(1).toObject(DbT7060KaigoJigyoshaEntity.class);
 
                     entity.set入所施設２(dbT7060KaigoJigyosha.getJigyoshaName().value());
                 } else if (ShisetsuType.住所地特例対象施設.getCode().equals(kaigoHokenShisetsuNyutaishoList.get(i).get入所施設種類())) {
-                    DbT1005KaigoJogaiTokureiTaishoShisetsuEntity dbT1005KaigoJogaiTokureiTaishoShisetsu = accessor.select().table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).where(
+                    DbT1005KaigoJogaiTokureiTaishoShisetsuEntity dbT1005KaigoJogaiTokureiTaishoShisetsu = new DbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
+                    dbT1005KaigoJogaiTokureiTaishoShisetsu = accessor.select().table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).where(
                             eq(DbT1005KaigoJogaiTokureiTaishoShisetsu.jigyoshaNo, kaigoHokenShisetsuNyutaishoList.get(i).get入所施設コード())).
                             order(by(DbT1005KaigoJogaiTokureiTaishoShisetsu.yukoKaishiYMD, Order.DESC)).limit(1).toObject(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
 
