@@ -10,12 +10,14 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import java.util.Objects;
+import javax.annotation.Nonnull;
 
 /**
  * 地区市町村テーブルのエンティティクラスです。
  */
 public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuShichosonEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5224ChikuShichoson");
 
@@ -36,7 +38,7 @@ public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuS
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -45,7 +47,7 @@ public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuS
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -54,7 +56,7 @@ public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuS
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -63,17 +65,16 @@ public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuS
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -84,7 +85,7 @@ public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuS
      * 調査地区コードのgetメソッドです。
      * <br/>
      * <br/>Code（DBE：5002）
-     * 
+     *
      * @return 調査地区コード
      */
     public Code getChosaChikuCode() {
@@ -95,16 +96,16 @@ public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuS
      * 調査地区コードのsetメソッドです。
      * <br/>
      * <br/>Code（DBE：5002）
-     * 
+     *
      * @param chosaChikuCode 調査地区コード
      */
-    public void setChosaChikuCode(Code chosaChikuCode) {
+    public void setChosaChikuCode(@Nonnull Code chosaChikuCode) {
         this.chosaChikuCode = chosaChikuCode;
     }
 
     /**
      * 市町村コードのgetメソッドです。
-     * 
+     *
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
@@ -113,16 +114,16 @@ public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuS
 
     /**
      * 市町村コードのsetメソッドです。
-     * 
+     *
      * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(LasdecCode shichosonCode) {
+    public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
     /**
      * 優先番号のgetメソッドです。
-     * 
+     *
      * @return 優先番号
      */
     public int getYusenNo() {
@@ -131,10 +132,10 @@ public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuS
 
     /**
      * 優先番号のsetメソッドです。
-     * 
+     *
      * @param yusenNo 優先番号
      */
-    public void setYusenNo(int yusenNo) {
+    public void setYusenNo(@Nonnull int yusenNo) {
         this.yusenNo = yusenNo;
     }
 
@@ -142,7 +143,7 @@ public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuS
      * 自地区フラグのgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：自地区フラグ）
-     * 
+     *
      * @return 自地区フラグ
      */
     public boolean getJiChikuFlag() {
@@ -153,18 +154,18 @@ public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuS
      * 自地区フラグのsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：自地区フラグ）
-     * 
+     *
      * @param jiChikuFlag 自地区フラグ
      */
-    public void setJiChikuFlag(boolean jiChikuFlag) {
+    public void setJiChikuFlag(@Nonnull boolean jiChikuFlag) {
         this.jiChikuFlag = jiChikuFlag;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT5224ChikuShichosonEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5224ChikuShichosonEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -194,6 +195,7 @@ public class DbT5224ChikuShichosonEntity extends DbTableEntityBase<DbT5224ChikuS
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

@@ -52,7 +52,7 @@ public class DbT3017KyufujissekiKihonEntityMock {
         entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo("0001"));
         entity.setRecodeShubetsuCode(new RString("02"));
         entity.setKyufuSakuseiKubunCode(new RString("1"));
-        entity.setHokenshaNo(new HokenshaNo(new RString("00000003")));
+        entity.setShokisaiHokenshaNo(new HokenshaNo(new RString("00000003")));
         entity.setHiHokenshaNo(new HihokenshaNo(new RString("0000000004")));
         entity.setServiceTeikyoYM(new FlexibleYearMonth("201401"));
         entity.setKyufuJissekiKubunCode(new RString("2"));
@@ -89,8 +89,8 @@ public class DbT3017KyufujissekiKihonEntityMock {
 
         entity.setNyushoYMD(new FlexibleDate("20140101"));
         entity.setTaishoYMD(new FlexibleDate("20140202"));
-        entity.setNyushoJitsunissu(new Decimal(10));
-        entity.setGaihakuNissu(new Decimal(30));
+        entity.setNyushoJitsunissu(10);
+        entity.setGaihakuNissu(30);
         entity.setTaishogoJotaiCode(new RString("3"));
 
         entity.setHokenKyufuritsu(new HokenKyufuRitsu(new Decimal(90)));
@@ -105,12 +105,12 @@ public class DbT3017KyufujissekiKihonEntityMock {
         entity.setKohi3FutanshaNo(new RString("00000003"));
         entity.setKohi3JukyushaNo(new RString("1000003"));
 
-        entity.setMaeHokenServiceTanisu(new Decimal(100));
+        entity.setMaeHokenServiceTanisu(100);
         entity.setMaeHokenSeikyugaku(new Decimal(200));
-        entity.setMaeHokenRiyoshaFutangaku(new Decimal(300));
+        entity.setMaeHokenRiyoshaFutangaku(300);
         entity.setMaeHokenKinkyuShisetsuRyoyoSeikyugaku(new Decimal(400));
         entity.setMaeHokenTokuteiShinryohiSeikyugaku(new Decimal(500));
-        entity.setMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(new Decimal(600));
+        entity.setMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(600);
 
         return entity;
     }

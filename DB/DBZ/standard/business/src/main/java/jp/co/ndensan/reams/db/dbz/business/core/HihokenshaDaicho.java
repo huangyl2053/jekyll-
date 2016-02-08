@@ -141,7 +141,7 @@ public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1
      * @return 資格取得事由コード
      */
     public RString get資格取得事由コード() {
-        return entity.getShikakuShutokuJiyuCode().getColumnValue().getColumnValue();
+        return entity.getShikakuShutokuJiyuCode();
     }
 
     /**
@@ -186,7 +186,7 @@ public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1
      * @return 資格喪失事由コード
      */
     public RString get資格喪失事由コード() {
-        return entity.getShikakuSoshitsuJiyuCode().getMeisho();
+        return entity.getShikakuSoshitsuJiyuCode();
     }
 
     /**
@@ -213,7 +213,7 @@ public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1
      * @return 資格変更事由コード
      */
     public RString get資格変更事由コード() {
-        return entity.getShikakuHenkoJiyuCode().getMeisho();
+        return entity.getShikakuHenkoJiyuCode();
     }
 
     /**
@@ -240,7 +240,7 @@ public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1
      * @return 住所地特例適用事由コード
      */
     public RString get住所地特例適用事由コード() {
-        return entity.getJushochitokureiTekiyoJiyuCode().getMeisho();
+        return entity.getJushochitokureiTekiyoJiyuCode();
     }
 
     /**
@@ -267,7 +267,7 @@ public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1
      * @return 住所地特例解除事由コード
      */
     public RString get住所地特例解除事由コード() {
-        return entity.getJushochitokureiKaijoJiyuCode().getMeisho();
+        return entity.getJushochitokureiKaijoJiyuCode();
     }
 
     /**
@@ -354,8 +354,7 @@ public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1
     }
 
     /**
-     * 保持する被保険者台帳管理を削除対象とします。<br/>
-     * {@link DbT1001HihokenshaDaichoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する被保険者台帳管理を削除対象とします。<br/> {@link DbT1001HihokenshaDaichoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link HihokenshaDaicho}
      */

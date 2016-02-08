@@ -1,21 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * 要介護認定意見書イメージ情報テーブルのエンティティクラスです。
  */
 public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305IkenshoImageJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5305IkenshoImageJoho");
@@ -104,7 +106,7 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
      *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -126,7 +128,7 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
      *
      * @param iraiRirekiNo 主治医意見書作成依頼履歴番号
      */
-    public void setIraiRirekiNo(int iraiRirekiNo) {
+    public void setIraiRirekiNo(@Nonnull int iraiRirekiNo) {
         this.iraiRirekiNo = iraiRirekiNo;
     }
 
@@ -144,7 +146,7 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
      *
      * @param ChoyoID 帳票ID
      */
-    public void setChoyoID(Code ChoyoID) {
+    public void setChoyoID(@Nonnull Code ChoyoID) {
         this.ChoyoID = ChoyoID;
     }
 
@@ -166,7 +168,7 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
      *
      * @param maskDataKubun マスキングデータ区分
      */
-    public void setMaskDataKubun(RString maskDataKubun) {
+    public void setMaskDataKubun(@Nonnull RString maskDataKubun) {
         this.maskDataKubun = maskDataKubun;
     }
 
@@ -184,7 +186,7 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
      *
      * @param torikomiPageNo 取込みページ番号
      */
-    public void setTorikomiPageNo(int torikomiPageNo) {
+    public void setTorikomiPageNo(@Nonnull int torikomiPageNo) {
         this.torikomiPageNo = torikomiPageNo;
     }
 
@@ -206,7 +208,7 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
      *
      * @param ninteiShinseiNen 認定申請年
      */
-    public void setNinteiShinseiNen(int ninteiShinseiNen) {
+    public void setNinteiShinseiNen(@Nonnull int ninteiShinseiNen) {
         this.ninteiShinseiNen = ninteiShinseiNen;
     }
 
@@ -215,6 +217,7 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
      *
      * @return 共有ファイルID
      */
+    @CheckForNull
     public RDateTime getSharedFileId() {
         return sharedFileId;
     }
@@ -232,7 +235,8 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
      * このエンティティの主キーが他の{@literal DbT5305IkenshoImageJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT5305IkenshoImageJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5305IkenshoImageJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5305IkenshoImageJohoEntity other) {

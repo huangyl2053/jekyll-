@@ -4,6 +4,9 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_BtnGetBunshoNo = function () {
+                return "onClick_BtnGetBunshoNo";
+            };
             return Events;
         })();
         BunshoBangoInput.Events = Events;
@@ -28,8 +31,8 @@ var DBZ;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.txtBunshoShurui = function () {
-                return new UZA.TextBox(this.convFiledName("txtBunshoShurui"));
+            Controls.prototype.txtBunshoKigo = function () {
+                return new UZA.TextBox(this.convFiledName("txtBunshoKigo"));
             };
 
             Controls.prototype.txtBunshoHeader = function () {
@@ -45,7 +48,7 @@ var DBZ;
             };
 
             Controls.prototype.btnGetBunshoNo = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnGetBunshoNo"));
+                return new UZA.Button(this.convFiledName("btnGetBunshoNo"));
             };
             return Controls;
         })();

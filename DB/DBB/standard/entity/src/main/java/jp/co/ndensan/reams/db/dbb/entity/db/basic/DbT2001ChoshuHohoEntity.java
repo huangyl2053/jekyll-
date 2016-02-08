@@ -1,23 +1,24 @@
 package jp.co.ndensan.reams.db.dbb.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 
 /**
  * 介護徴収方法テーブルのエンティティクラスです。
  */
 public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2001ChoshuHoho");
@@ -35,7 +36,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     private RString choshuHoho4gatsu;
     private RString choshuHoho5gatsu;
     private RString choshuHoho6gatsu;
@@ -65,7 +66,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
     private RString yokunendoKariHosokuM;
     private boolean iraiSohuzumiFlag;
     private boolean tsuikaIraiSohuzumiFlag;
-    private YMDHMS tokuchoTeishiTimestamp;
+    private YMDHMS tokuchoTeishiNichiji;
     private RString tokuchoTeishiJiyuCode;
 
     /**
@@ -127,7 +128,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @param fukaNendo 賦課年度
      */
-    public void setFukaNendo(FlexibleYear fukaNendo) {
+    public void setFukaNendo(@Nonnull FlexibleYear fukaNendo) {
         this.fukaNendo = fukaNendo;
     }
 
@@ -145,7 +146,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -154,7 +155,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
@@ -163,7 +164,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(@Nonnull int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -172,6 +173,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法4月
      */
+    @CheckForNull
     public RString getChoshuHoho4gatsu() {
         return choshuHoho4gatsu;
     }
@@ -190,6 +192,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法5月
      */
+    @CheckForNull
     public RString getChoshuHoho5gatsu() {
         return choshuHoho5gatsu;
     }
@@ -208,6 +211,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法6月
      */
+    @CheckForNull
     public RString getChoshuHoho6gatsu() {
         return choshuHoho6gatsu;
     }
@@ -226,6 +230,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法7月
      */
+    @CheckForNull
     public RString getChoshuHoho7gatsu() {
         return choshuHoho7gatsu;
     }
@@ -244,6 +249,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法8月
      */
+    @CheckForNull
     public RString getChoshuHoho8gatsu() {
         return choshuHoho8gatsu;
     }
@@ -262,6 +268,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法9月
      */
+    @CheckForNull
     public RString getChoshuHoho9gatsu() {
         return choshuHoho9gatsu;
     }
@@ -280,6 +287,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法10月
      */
+    @CheckForNull
     public RString getChoshuHoho10gatsu() {
         return choshuHoho10gatsu;
     }
@@ -298,6 +306,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法11月
      */
+    @CheckForNull
     public RString getChoshuHoho11gatsu() {
         return choshuHoho11gatsu;
     }
@@ -316,6 +325,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法12月
      */
+    @CheckForNull
     public RString getChoshuHoho12gatsu() {
         return choshuHoho12gatsu;
     }
@@ -334,6 +344,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法1月
      */
+    @CheckForNull
     public RString getChoshuHoho1gatsu() {
         return choshuHoho1gatsu;
     }
@@ -352,6 +363,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法2月
      */
+    @CheckForNull
     public RString getChoshuHoho2gatsu() {
         return choshuHoho2gatsu;
     }
@@ -370,6 +382,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法3月
      */
+    @CheckForNull
     public RString getChoshuHoho3gatsu() {
         return choshuHoho3gatsu;
     }
@@ -388,6 +401,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法翌4月
      */
+    @CheckForNull
     public RString getChoshuHohoYoku4gatsu() {
         return choshuHohoYoku4gatsu;
     }
@@ -406,6 +420,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法翌5月
      */
+    @CheckForNull
     public RString getChoshuHohoYoku5gatsu() {
         return choshuHohoYoku5gatsu;
     }
@@ -424,6 +439,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法翌6月
      */
+    @CheckForNull
     public RString getChoshuHohoYoku6gatsu() {
         return choshuHohoYoku6gatsu;
     }
@@ -442,6 +458,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法翌7月
      */
+    @CheckForNull
     public RString getChoshuHohoYoku7gatsu() {
         return choshuHohoYoku7gatsu;
     }
@@ -460,6 +477,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法翌8月
      */
+    @CheckForNull
     public RString getChoshuHohoYoku8gatsu() {
         return choshuHohoYoku8gatsu;
     }
@@ -478,6 +496,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 徴収方法翌9月
      */
+    @CheckForNull
     public RString getChoshuHohoYoku9gatsu() {
         return choshuHohoYoku9gatsu;
     }
@@ -496,6 +515,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 仮徴収・基礎年金番号
      */
+    @CheckForNull
     public RString getKariNenkinNo() {
         return kariNenkinNo;
     }
@@ -514,6 +534,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 仮徴収・年金コード
      */
+    @CheckForNull
     public RString getKariNenkinCode() {
         return kariNenkinCode;
     }
@@ -532,6 +553,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 仮徴収・捕捉月
      */
+    @CheckForNull
     public RString getKariHosokuM() {
         return kariHosokuM;
     }
@@ -550,6 +572,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 本徴収・基礎年金番号
      */
+    @CheckForNull
     public RString getHonNenkinNo() {
         return honNenkinNo;
     }
@@ -568,6 +591,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 本徴収・年金コード
      */
+    @CheckForNull
     public RString getHonNenkinCode() {
         return honNenkinCode;
     }
@@ -586,6 +610,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 本徴収・捕捉月
      */
+    @CheckForNull
     public RString getHonHosokuM() {
         return honHosokuM;
     }
@@ -604,6 +629,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 翌年度仮徴収・基礎年金番号
      */
+    @CheckForNull
     public RString getYokunendoKariNenkinNo() {
         return yokunendoKariNenkinNo;
     }
@@ -622,6 +648,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 翌年度仮徴収・年金コード
      */
+    @CheckForNull
     public RString getYokunendoKariNenkinCode() {
         return yokunendoKariNenkinCode;
     }
@@ -640,6 +667,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 翌年度仮徴収・捕捉月
      */
+    @CheckForNull
     public RString getYokunendoKariHosokuM() {
         return yokunendoKariHosokuM;
     }
@@ -658,6 +686,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 依頼情報送付済みフラグ
      */
+    @CheckForNull
     public boolean getIraiSohuzumiFlag() {
         return iraiSohuzumiFlag;
     }
@@ -676,6 +705,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 追加依頼情報送付済みフラグ
      */
+    @CheckForNull
     public boolean getTsuikaIraiSohuzumiFlag() {
         return tsuikaIraiSohuzumiFlag;
     }
@@ -694,17 +724,18 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 特別徴収停止日時
      */
-    public YMDHMS getTokuchoTeishiTimestamp() {
-        return tokuchoTeishiTimestamp;
+    @CheckForNull
+    public YMDHMS getTokuchoTeishiNichiji() {
+        return tokuchoTeishiNichiji;
     }
 
     /**
      * 特別徴収停止日時のsetメソッドです。
      *
-     * @param tokuchoTeishiTimestamp 特別徴収停止日時
+     * @param tokuchoTeishiNichiji 特別徴収停止日時
      */
-    public void setTokuchoTeishiTimestamp(YMDHMS tokuchoTeishiTimestamp) {
-        this.tokuchoTeishiTimestamp = tokuchoTeishiTimestamp;
+    public void setTokuchoTeishiNichiji(YMDHMS tokuchoTeishiNichiji) {
+        this.tokuchoTeishiNichiji = tokuchoTeishiNichiji;
     }
 
     /**
@@ -712,6 +743,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return 特別徴収停止事由コード
      */
+    @CheckForNull
     public RString getTokuchoTeishiJiyuCode() {
         return tokuchoTeishiJiyuCode;
     }
@@ -729,7 +761,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      * このエンティティの主キーが他の{@literal DbT2001ChoshuHohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT2001ChoshuHohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -786,7 +818,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
         this.yokunendoKariHosokuM = entity.yokunendoKariHosokuM;
         this.iraiSohuzumiFlag = entity.iraiSohuzumiFlag;
         this.tsuikaIraiSohuzumiFlag = entity.tsuikaIraiSohuzumiFlag;
-        this.tokuchoTeishiTimestamp = entity.tokuchoTeishiTimestamp;
+        this.tokuchoTeishiNichiji = entity.tokuchoTeishiNichiji;
         this.tokuchoTeishiJiyuCode = entity.tokuchoTeishiJiyuCode;
     }
 
@@ -797,7 +829,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(fukaNendo, hihokenshaNo, rirekiNo, choshuHoho4gatsu, choshuHoho5gatsu, choshuHoho6gatsu, choshuHoho7gatsu, choshuHoho8gatsu, choshuHoho9gatsu, choshuHoho10gatsu, choshuHoho11gatsu, choshuHoho12gatsu, choshuHoho1gatsu, choshuHoho2gatsu, choshuHoho3gatsu, choshuHohoYoku4gatsu, choshuHohoYoku5gatsu, choshuHohoYoku6gatsu, choshuHohoYoku7gatsu, choshuHohoYoku8gatsu, choshuHohoYoku9gatsu, kariNenkinNo, kariNenkinCode, kariHosokuM, honNenkinNo, honNenkinCode, honHosokuM, yokunendoKariNenkinNo, yokunendoKariNenkinCode, yokunendoKariHosokuM, iraiSohuzumiFlag, tsuikaIraiSohuzumiFlag, tokuchoTeishiTimestamp, tokuchoTeishiJiyuCode);
+        return super.toMd5(fukaNendo, hihokenshaNo, rirekiNo, choshuHoho4gatsu, choshuHoho5gatsu, choshuHoho6gatsu, choshuHoho7gatsu, choshuHoho8gatsu, choshuHoho9gatsu, choshuHoho10gatsu, choshuHoho11gatsu, choshuHoho12gatsu, choshuHoho1gatsu, choshuHoho2gatsu, choshuHoho3gatsu, choshuHohoYoku4gatsu, choshuHohoYoku5gatsu, choshuHohoYoku6gatsu, choshuHohoYoku7gatsu, choshuHohoYoku8gatsu, choshuHohoYoku9gatsu, kariNenkinNo, kariNenkinCode, kariHosokuM, honNenkinNo, honNenkinCode, honHosokuM, yokunendoKariNenkinNo, yokunendoKariNenkinCode, yokunendoKariHosokuM, iraiSohuzumiFlag, tsuikaIraiSohuzumiFlag, tokuchoTeishiNichiji, tokuchoTeishiJiyuCode);
     }
 
 // </editor-fold>

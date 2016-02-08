@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5209NinteichosahyoKinyuItemEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -96,18 +95,6 @@ public class NinteichosahyoKinyuItemBuilder {
     public NinteichosahyoKinyuItemBuilder setサービスの状況記入(RString サービスの状況記入) {
         requireNonNull(サービスの状況記入, UrSystemErrorMessages.値がnull.getReplacedMessage("サービスの状況記入"));
         entity.setServiceJokyoKinyu(サービスの状況記入);
-        return this;
-    }
-
-    /**
-     * サービスの状況イメージ共有ファイルIDを設定します。
-     *
-     * @param サービスの状況イメージ共有ファイルID サービスの状況イメージ共有ファイルID
-     * @return {@link NinteichosahyoKinyuItemBuilder}
-     */
-    public NinteichosahyoKinyuItemBuilder setサービスの状況イメージ共有ファイルID(RDateTime サービスの状況イメージ共有ファイルID) {
-        requireNonNull(サービスの状況イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("サービスの状況イメージ共有ファイルID"));
-        entity.setServiceJokyoImageSharedFileId(サービスの状況イメージ共有ファイルID);
         return this;
     }
 

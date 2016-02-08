@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3012YoboKeikakuJikoSakuseiGokeiEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -22,12 +22,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 予防給付計画自己作成合計を管理するクラスです。
  */
-public class YoboKeikakuJikoSakuseiGokei 
-extends ModelBase<YoboKeikakuJikoSakuseiGokeiIdentifier, 
-        DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity, 
-        YoboKeikakuJikoSakuseiGokei> implements Serializable {
+public class YoboKeikakuJikoSakuseiGokei
+        extends ModelBase<YoboKeikakuJikoSakuseiGokeiIdentifier, DbT3012YoboKeikakuJikoSakuseiGokeiEntity, YoboKeikakuJikoSakuseiGokei> implements Serializable {
 
-    private final DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity;
+    private final DbT3012YoboKeikakuJikoSakuseiGokeiEntity entity;
     private final YoboKeikakuJikoSakuseiGokeiIdentifier id;
 
     /**
@@ -43,7 +41,7 @@ extends ModelBase<YoboKeikakuJikoSakuseiGokeiIdentifier,
      */
     public YoboKeikakuJikoSakuseiGokei(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号,
+            int 履歴番号,
             RString 居宅サービス区分,
             JigyoshaNo サービス提供事業者番号,
             ServiceShuruiCode サービス種類コード) {
@@ -53,7 +51,7 @@ extends ModelBase<YoboKeikakuJikoSakuseiGokeiIdentifier,
         requireNonNull(居宅サービス区分, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅サービス区分"));
         requireNonNull(サービス提供事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供事業者番号"));
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
-        this.entity = new DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity();
+        this.entity = new DbT3012YoboKeikakuJikoSakuseiGokeiEntity();
         this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setTaishoYM(対象年月);
         this.entity.setRirekiNo(履歴番号);
@@ -76,7 +74,7 @@ extends ModelBase<YoboKeikakuJikoSakuseiGokeiIdentifier,
      *
      * @param entity DBより取得した{@link DbT3012YoboKeikakuJikoSakuseiGokeiEntity}
      */
-    public YoboKeikakuJikoSakuseiGokei(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity) {
+    public YoboKeikakuJikoSakuseiGokei(DbT3012YoboKeikakuJikoSakuseiGokeiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("予防給付計画自己作成合計"));
         this.id = new YoboKeikakuJikoSakuseiGokeiIdentifier(
                 entity.getHihokenshaNo(),
@@ -94,7 +92,7 @@ extends ModelBase<YoboKeikakuJikoSakuseiGokeiIdentifier,
      * @param id {@link YoboKeikakuJikoSakuseiGokeiIdentifier}
      */
     YoboKeikakuJikoSakuseiGokei(
-            DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity,
+            DbT3012YoboKeikakuJikoSakuseiGokeiEntity entity,
             YoboKeikakuJikoSakuseiGokeiIdentifier id
     ) {
         this.entity = entity;
@@ -125,7 +123,7 @@ extends ModelBase<YoboKeikakuJikoSakuseiGokeiIdentifier,
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -171,7 +169,7 @@ extends ModelBase<YoboKeikakuJikoSakuseiGokeiIdentifier,
      * @return {@link DbT3012YoboKeikakuJikoSakuseiGokeiEntity}のクローン
      */
     @Override
-    public DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity toEntity() {
+    public DbT3012YoboKeikakuJikoSakuseiGokeiEntity toEntity() {
         return this.entity.clone();
     }
 
@@ -193,7 +191,7 @@ extends ModelBase<YoboKeikakuJikoSakuseiGokeiIdentifier,
      */
     @Override
     public YoboKeikakuJikoSakuseiGokei deleted() {
-        DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity deletedEntity = this.toEntity();
+        DbT3012YoboKeikakuJikoSakuseiGokeiEntity deletedEntity = this.toEntity();
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
@@ -222,10 +220,10 @@ extends ModelBase<YoboKeikakuJikoSakuseiGokeiIdentifier,
 
         private static final long serialVersionUID = 1L;
 
-        private final DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity;
+        private final DbT3012YoboKeikakuJikoSakuseiGokeiEntity entity;
         private final YoboKeikakuJikoSakuseiGokeiIdentifier id;
 
-        private _SerializationProxy(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity, YoboKeikakuJikoSakuseiGokeiIdentifier id) {
+        private _SerializationProxy(DbT3012YoboKeikakuJikoSakuseiGokeiEntity entity, YoboKeikakuJikoSakuseiGokeiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

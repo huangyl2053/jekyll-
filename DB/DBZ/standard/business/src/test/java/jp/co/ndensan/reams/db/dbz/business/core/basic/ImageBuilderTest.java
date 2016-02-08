@@ -23,19 +23,10 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class ImageBuilderTest extends DbzTestBase {
 
-    private static DbT5115ImageEntity ImageEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
-//TODO 主キー型と変数名を置換してください
-//TODO 主キーの数が足りない場合、追加してください。
-    private static ShinseishoKanriNo 申請書管理番号;
-    private static int 取込ページ番号;
-    private static Code 原本マスク分;
+    private static DbT5115ImageEntity imageEntity;
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
-        申請書管理番号 = DbT5115ImageEntityGenerator.DEFAULT_申請書管理番号;
-        取込ページ番号 = DbT5115ImageEntityGenerator.DEFAULT_取込ページ番号;
-        原本マスク分 = DbT5115ImageEntityGenerator.DEFAULT_原本マスク分;
     }
 
     public static class getterSetterTest extends DbzTestBase {
@@ -45,30 +36,11 @@ public class ImageBuilderTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            ImageEntity = new DbT5115ImageEntity();
+            imageEntity = new DbT5115ImageEntity();
 
-            business = new Image(ImageEntity);
+            business = new Image(imageEntity);
 
             sut = business.createBuilderForEdit();
-        }
-//TODO Key項目のテストメソッドは削除して下さい。
-
-        @Test
-        public void 戻り値の申請書管理番号は_設定した値と同じ申請書管理番号を返す() {
-            business = sut.set申請書管理番号(DbT5115ImageEntityGenerator.DEFAULT_申請書管理番号).build();
-            assertThat(business.get申請書管理番号(), is(DbT5115ImageEntityGenerator.DEFAULT_申請書管理番号));
-        }
-
-        @Test
-        public void 戻り値の取込ページ番号は_設定した値と同じ取込ページ番号を返す() {
-            business = sut.set取込ページ番号(DbT5115ImageEntityGenerator.DEFAULT_取込ページ番号).build();
-            assertThat(business.get取込ページ番号(), is(DbT5115ImageEntityGenerator.DEFAULT_取込ページ番号));
-        }
-
-        @Test
-        public void 戻り値の原本マスク分は_設定した値と同じ原本マスク分を返す() {
-            business = sut.set原本マスク分(DbT5115ImageEntityGenerator.DEFAULT_原本マスク分).build();
-            assertThat(business.get原本マスク分(), is(DbT5115ImageEntityGenerator.DEFAULT_原本マスク分));
         }
 
         @Test

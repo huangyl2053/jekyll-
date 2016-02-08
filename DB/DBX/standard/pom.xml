@@ -65,10 +65,22 @@
                 <version>${project.version}</version>
                 <exclusions>
                     <exclusion>
-                        <groupId>jp.co.ndensan.reams.db.dbx</groupId>					
+                        <groupId>jp.co.ndensan.reams.db.dbx</groupId>
                         <artifactId>DbxPersistence</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.powermock</groupId>
+                <artifactId>powermock-module-junit4</artifactId>
+                <version>1.6.1</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.powermock</groupId>
+                <artifactId>powermock-api-mockito</artifactId>
+                <version>1.6.1</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

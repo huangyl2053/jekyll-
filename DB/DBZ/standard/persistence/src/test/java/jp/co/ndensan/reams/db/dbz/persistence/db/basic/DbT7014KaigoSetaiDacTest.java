@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-//import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7014KaigoSetaiDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7014KaigoSetaiDac;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7014KaigoSetaiEntity;
@@ -15,8 +15,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEn
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator.DEFAULT_本人区分;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator.DEFAULT_管理識別区分;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator.DEFAULT_被保険者番号;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年度;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税非課税区分;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -63,9 +61,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
             TestSupport.insert(
                     DEFAULT_被保険者番号,
                     DEFAULT_管理識別区分,
@@ -73,9 +68,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
         }
 
         @Test(expected = NullPointerException.class)
@@ -87,9 +79,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
         }
 
         @Test(expected = NullPointerException.class)
@@ -101,9 +90,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
         }
 
         @Test(expected = NullPointerException.class)
@@ -115,9 +101,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
         }
 
         @Test(expected = NullPointerException.class)
@@ -129,9 +112,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
         }
 
         @Test(expected = NullPointerException.class)
@@ -143,9 +123,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
         }
 
         @Test(expected = NullPointerException.class)
@@ -157,9 +134,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
         }
 
         @Test(expected = NullPointerException.class)
@@ -171,9 +145,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
         }
 
         @Test(expected = NullPointerException.class)
@@ -185,9 +156,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
         }
 
         @Test
@@ -199,9 +167,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
@@ -214,9 +179,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -232,9 +194,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
             TestSupport.insert(
                     DEFAULT_被保険者番号,
                     DEFAULT_管理識別区分,
@@ -242,9 +201,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -265,9 +221,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
 
             assertThat(sut.selectByKey(
                     DEFAULT_被保険者番号,
@@ -275,10 +228,7 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯把握基準年月日,
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
-                    DEFAULT_本人区分) //                    DEFAULT_本人区分,
-                    //                    DEFAULT_課税年度,
-                    //                    DEFAULT_課税非課税区分);
-                    , is(notNullValue()));
+                    DEFAULT_本人区分), is(notNullValue()));
         }
     }
 
@@ -293,9 +243,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
         }
 
         @Test
@@ -307,9 +254,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
             // TODO  主キー以外の項目を変更してください
             // updateRecord.set変更したい項目(75);
 
@@ -322,9 +266,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
 
             // TODO  主キー以外の項目を変更してください
             // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
@@ -342,9 +283,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
         }
 
         @Test
@@ -356,9 +294,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
                     DEFAULT_本人区分);
-//                    DEFAULT_本人区分,
-//                    DEFAULT_課税年度,
-//                    DEFAULT_課税非課税区分);
             deletedEntity.setState(EntityDataState.Deleted);
 
             sut.save(deletedEntity);
@@ -369,10 +304,7 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                     DEFAULT_世帯把握基準年月日,
                     DEFAULT_世帯員管理連番,
                     DEFAULT_世帯員識別コード,
-                    DEFAULT_本人区分) //                    DEFAULT_本人区分,
-                    //                    DEFAULT_課税年度,
-                    //                    DEFAULT_課税非課税区分)
-                    , is(nullValue()));
+                    DEFAULT_本人区分), is(nullValue()));
         }
     }
 
@@ -385,9 +317,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
                 int 世帯員管理連番,
                 ShikibetsuCode 世帯員識別コード,
                 RString 本人区分) {
-//                RString 本人区分,
-//                FlexibleYear 課税年度,
-//                RString 課税非課税区分) {
             DbT7014KaigoSetaiEntity entity = DbT7014KaigoSetaiEntityGenerator.createDbT7014KaigoSetaiEntity();
             entity.setHihokenshaNo(被保険者番号);
             entity.setKanriShikibetsuKubun(管理識別区分);
@@ -395,8 +324,6 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
             entity.setSetaiInkanriRenban(世帯員管理連番);
             entity.setSetaiInshikibetsuCode(世帯員識別コード);
             entity.setHonninKubun(本人区分);
-//            entity.setKazeiNendo(課税年度);
-//            entity.setKazeiHikazeiKubun(課税非課税区分);
             sut.save(entity);
         }
     }

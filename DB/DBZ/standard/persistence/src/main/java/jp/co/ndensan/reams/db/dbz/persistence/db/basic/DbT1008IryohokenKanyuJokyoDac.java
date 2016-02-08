@@ -14,7 +14,11 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
+import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -31,8 +35,8 @@ public class DbT1008IryohokenKanyuJokyoDac implements ISaveable<DbT1008Iryohoken
     /**
      * 主キーで介護保険医療保険加入状況を取得します。
      *
-     * @param 識別コード ShikibetsuCode
-     * @param 履歴番号 RirekiNo
+     * @param 識別コード 識別コード
+     * @param 履歴番号 履歴番号
      * @return DbT1008IryohokenKanyuJokyoEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -56,7 +60,7 @@ public class DbT1008IryohokenKanyuJokyoDac implements ISaveable<DbT1008Iryohoken
     /**
      * 介護保険医療保険加入状況を全件返します。
      *
-     * @return List<DbT1008IryohokenKanyuJokyoEntity>
+     * @return DbT1008IryohokenKanyuJokyoEntityの{@code list}
      */
     @Transaction
     public List<DbT1008IryohokenKanyuJokyoEntity> selectAll() {
@@ -78,7 +82,43 @@ public class DbT1008IryohokenKanyuJokyoDac implements ISaveable<DbT1008Iryohoken
     public int save(DbT1008IryohokenKanyuJokyoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護保険医療保険加入状況エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 識別コードで介護保険医療保険加入状況を取得します。
+     *
+     * @param 識別コード 識別コード
+     * @return DbT1008IryohokenKanyuJokyoEntity 介護保険医療保険加入状況情報
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1008IryohokenKanyuJokyoEntity selectByShikibetsuCode(
+            ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1008IryohokenKanyuJokyo.class).
+                where(eq(shikibetsuCode, 識別コード)).order(by(DbT1008IryohokenKanyuJokyo.iryoHokenKanyuYMD, Order.DESC))
+                .limit(1).toObject(DbT1008IryohokenKanyuJokyoEntity.class);
+    }
+
+    /**
+     * 介護保険医療保険加入状況を返します。
+     *
+     * @param 識別コード 識別コード
+     * @return List<DbT1008IryohokenKanyuJokyoEntity>
+     */
+    public List<DbT1008IryohokenKanyuJokyoEntity> selectByCode(ShikibetsuCode 識別コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1008IryohokenKanyuJokyo.class).where(eq(shikibetsuCode, 識別コード))
+                .order(new OrderBy(iryoHokenKanyuYMD, Order.DESC, NullsOrder.LAST)).
+                toList(DbT1008IryohokenKanyuJokyoEntity.class);
+    }
+
 }

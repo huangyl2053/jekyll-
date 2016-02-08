@@ -4,10 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuSanteiTani;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuShikibetsu;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -26,14 +24,14 @@ public class _KaigoServiceTaniTest extends DbxTestBase {
 
     private static _KaigoServiceTani sut;
     private static int 単位数;
-    private static TanisuSanteiTani 単位数算定単位;
-    private static TanisuShikibetsu 単位数識別;
+    private static int 単位数算定単位;
+    private static Code 単位数識別;
 
     @BeforeClass
     public static void setUpClass() {
         単位数 = 3;
-        単位数算定単位 = new TanisuSanteiTani(new RString("3000"));
-        単位数識別 = new TanisuShikibetsu(new RString("66"));
+        単位数算定単位 = 3000;
+        単位数識別 = new Code("66");
     }
 
     public static class コンストラクタ extends DbxTestBase {
@@ -58,12 +56,12 @@ public class _KaigoServiceTaniTest extends DbxTestBase {
 
         @Test
         public void LDNS_単位数識別が66の場合_get単位数識別は_66を返す() {
-            assertThat(sut.get単位数識別(), is(new TanisuShikibetsu(new RString("66"))));
+            assertThat(sut.get単位数識別(), is(new Code("66")));
         }
 
         @Test
         public void LDNS_単位数算定単位が3000の場合_get単位数算定単位は_3000を返す() {
-            assertThat(sut.get単位数算定単位(), is(new TanisuSanteiTani(new RString("3000"))));
+            assertThat(sut.get単位数算定単位(), is(3000));
         }
     }
 }

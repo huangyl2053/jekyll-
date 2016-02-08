@@ -1,19 +1,18 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
+import java.util.Objects;
+import java.util.UUID;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 
 /**
  * 主治医医療機関情報テーブルのエンティティクラスです。
@@ -43,7 +42,8 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
     private RString jusho;
     private TelNo telNo;
     private TelNo faxNo;
-    private AtenaMeisho daihyoshaName;
+    private RString daihyoshaName;
+    private RString daihyoshaNameKana;
     private boolean jokyoFlag;
 
     /**
@@ -262,7 +262,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
      *
      * @return 代表者名
      */
-    public AtenaMeisho getDaihyoshaName() {
+    public RString getDaihyoshaName() {
         return daihyoshaName;
     }
 
@@ -271,8 +271,26 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
      *
      * @param daihyoshaName 代表者名
      */
-    public void setDaihyoshaName(AtenaMeisho daihyoshaName) {
+    public void setDaihyoshaName(RString daihyoshaName) {
         this.daihyoshaName = daihyoshaName;
+    }
+
+    /**
+     * 代表者名カナのgetメソッドです。
+     *
+     * @return 代表者名カナ
+     */
+    public RString getDaihyoshaNameKana() {
+        return daihyoshaNameKana;
+    }
+
+    /**
+     * 代表者名カナのsetメソッドです。
+     *
+     * @param daihyoshaNameKana 代表者名カナ
+     */
+    public void setDaihyoshaNameKana(RString daihyoshaNameKana) {
+        this.daihyoshaNameKana = daihyoshaNameKana;
     }
 
     /**
@@ -297,8 +315,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
      * このエンティティの主キーが他の{@literal DbT5911ShujiiIryoKikanJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT5911ShujiiIryoKikanJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT5911ShujiiIryoKikanJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5911ShujiiIryoKikanJohoEntity other) {

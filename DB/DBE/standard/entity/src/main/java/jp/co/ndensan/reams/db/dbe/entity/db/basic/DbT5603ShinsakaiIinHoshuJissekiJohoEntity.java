@@ -37,7 +37,7 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
     private FlexibleDate shinsakaiKaisaiYMD;
     @PrimaryKey
     private int remban;
-    private int shinsakaiKaisaiNo;
+    private RString shinsakaiKaisaiNo;
     private int shinsakaiHoshuZeiritsu;
     private int shinsakaiHoshu;
     private int shinsakaiSonotaHoshu;
@@ -182,7 +182,7 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
      * @return 介護認定審査会開催番号
      */
     @CheckForNull
-    public int getShinsakaiKaisaiNo() {
+    public RString getShinsakaiKaisaiNo() {
         return shinsakaiKaisaiNo;
     }
 
@@ -193,7 +193,7 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
      * 
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      */
-    public void setShinsakaiKaisaiNo(int shinsakaiKaisaiNo) {
+    public void setShinsakaiKaisaiNo(RString shinsakaiKaisaiNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
     }
 
@@ -430,6 +430,7 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
     }
 
 // </editor-fold>
+
 
 
 }

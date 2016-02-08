@@ -7,12 +7,12 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitai;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitai.*;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitai.donyuKeitaiCode;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitai.gyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -81,5 +81,20 @@ public class DbT7908KaigoDonyuKeitaiDac implements ISaveable<DbT7908KaigoDonyuKe
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 業務分類で介護導入形態を取得します。
+     *
+     * @param gyomuBunrui 業務分類
+     * @return DbT7908KaigoDonyuKeitaiEntity 介護導入形態Entity
+     */
+    @Transaction
+    public List<DbT7908KaigoDonyuKeitaiEntity> selectByGyomuBunrui(RString gyomuBunrui) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7908KaigoDonyuKeitai.class).where(eq(DbT7908KaigoDonyuKeitai.gyomuBunrui, gyomuBunrui)).
+                toList(DbT7908KaigoDonyuKeitaiEntity.class);
     }
 }

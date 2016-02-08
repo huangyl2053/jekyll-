@@ -8,7 +8,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbT7063KaigoJigyoshaShiteiService implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
     /**
      * insertDantaiCd
      */
@@ -157,30 +156,6 @@ public enum DbT7063KaigoJigyoshaShiteiService implements IColumnDefinition {
      * 口座情報準拠区分
      */
     kozaJohoJunkyoKubun(1, 0),
-    /**
-     * 銀行コード
-     */
-    ginkoCode(2147483647, 0),
-    /**
-     * 支店コード
-     */
-    shitenCode(2147483647, 0),
-    /**
-     * 口座種別
-     */
-    kozaShubetsu(2147483647, 0),
-    /**
-     * 口座番号
-     */
-    kozaNo(2147483647, 0),
-    /**
-     * 口座名義人
-     */
-    kozaMeiginin(2147483647, 0),
-    /**
-     * 口座名義人カナ
-     */
-    kozaMeigininKana(2147483647, 0),
     /**
      * 社会福祉法人軽減事業実施の有無
      */
@@ -668,7 +643,7 @@ public enum DbT7063KaigoJigyoshaShiteiService implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -677,7 +652,7 @@ public enum DbT7063KaigoJigyoshaShiteiService implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

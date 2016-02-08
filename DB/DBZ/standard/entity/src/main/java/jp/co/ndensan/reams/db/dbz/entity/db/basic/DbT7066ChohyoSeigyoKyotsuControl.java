@@ -4,11 +4,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
  * 帳票制御共通コントロールテーブルの項目定義クラスです。
- * <br/> 帳票制御共通項目について、使用状況を管理します。
+ * <br/> 帳票制御共通項目について、使用状況を管理します。
      * <br/>共通の帳票制御メンテナンス画面への表示にも使用します。
  */
 public enum DbT7066ChohyoSeigyoKyotsuControl implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -55,9 +55,9 @@ public enum DbT7066ChohyoSeigyoKyotsuControl implements IColumnDefinition {
     kyotsuGamenShiyoUmu(1, 0),
     /**
      * 文書番号使用区分
-     * <br/>UR文書番号管理の使用状況を管理　
-     * <br/>0：使用しない　
-     * <br/>1：画面表示不可（使用はする）　
+     * <br/>UR文書番号管理の使用状況を管理　
+     * <br/>0：使用しない　
+     * <br/>1：画面表示不可（使用はする）　
      * <br/>2：画面表示可
      */
     bunshoNoShiyoKubun(1, 0),
@@ -78,10 +78,10 @@ public enum DbT7066ChohyoSeigyoKyotsuControl implements IColumnDefinition {
     chohyoShuturyokujunShiyoKubun(1, 0),
     /**
      * 帳票出力順表示方法
-     * <br/>UR帳票出力順を使用する場合のモード
-     * <br/>1：ALL（すべてを表示）
-     * <br/>2：SORT_ONLY（出力順のみ表示）
-     * <br/>3：SHUKEI_NONE（出力順、改頁を表示）
+     * <br/>UR帳票出力順を使用する場合のモード
+     * <br/>1：ALL（すべてを表示）
+     * <br/>2：SORT_ONLY（出力順のみ表示）
+     * <br/>3：SHUKEI_NONE（出力順、改頁を表示）
      * <br/>4：KAIPEJIJOKEN_NONE（出力順、集計を表示）
      */
     chohyoShuturyokujunHyojiHohho(1, 0),
@@ -92,10 +92,10 @@ public enum DbT7066ChohyoSeigyoKyotsuControl implements IColumnDefinition {
     kaigoToiawasesakiShiyoKubun(1, 0),
     /**
      * 住所編集使用区分
-     * <br/>住所編集都道府県名表示有無　
-     * <br/>住所編集郡名表示有無　
-     * <br/>住所編集市町村名表示有無　
-     * <br/>住所編集町域編集方法　
+     * <br/>住所編集都道府県名表示有無　
+     * <br/>住所編集郡名表示有無　
+     * <br/>住所編集市町村名表示有無　
+     * <br/>住所編集町域編集方法　
      * <br/>住所編集方書表示有無
      */
     jushoHenshuShiyoKubun(1, 0),
@@ -104,8 +104,12 @@ public enum DbT7066ChohyoSeigyoKyotsuControl implements IColumnDefinition {
      */
     setainushiHyojiShiyoKubun(1, 0),
     /**
+     * 代納人表示使用区分
+     */
+    dainoninHyojiShiyoKubun(1, 0),
+    /**
      * カスタマバーコード使用区分
-     * <br/>カスタマバーコード使用有無、
+     * <br/>カスタマバーコード使用有無、
      * <br/>カスタマバーコード変換エラー編集方法
      */
     customerBarCodeShiyoKubun(1, 0),
@@ -138,10 +142,24 @@ public enum DbT7066ChohyoSeigyoKyotsuControl implements IColumnDefinition {
      */
     daikoPrintShiyoKubun(1, 0),
     /**
+     * 電子行公印印字有無使用区分
+     */
+    denshiKoinInjiUmuShiyoKubun(1, 0),
+    /**
+     * 首長名印字位置使用区分
+     */
+    shuchoMeiInjiIchiShiyoKubun(1, 0),
+    /**
+     * 公印書略印字有無使用区分
+     */
+    koinShoryakuInjiUmuShiyoKubun(1, 0),
+    /**
+     * 公印文字列印字有無使用区分
+     */
+    koinMojiretsuInjiUmuShiyoKubun(1, 0),
+    /**
      * 地区表示使用区分
-     * <br/>地区表示１　
-     * <br/>地区表示２　
-     * <br/>地区表示３
+     * <br/>地区表示１、地区表示２、地区表示３
      */
     chikuhyojiShiyoKubun(1, 0);
 

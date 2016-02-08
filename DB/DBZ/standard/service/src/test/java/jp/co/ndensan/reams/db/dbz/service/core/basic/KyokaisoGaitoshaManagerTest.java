@@ -50,23 +50,17 @@ public class KyokaisoGaitoshaManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            Decimal 主キー2 = DbT1006KyokaisoGaitoshaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー2 = DbT1006KyokaisoGaitoshaEntityGenerator.DEFAULT_履歴番号;
             sut.get境界層該当者(null, 主キー2);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            HihokenshaNo 主キー1 = DbT1006KyokaisoGaitoshaEntityGenerator.DEFAULT_被保険者番号;
-            sut.get境界層該当者(主キー1, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(HihokenshaNo.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(int.class))).thenReturn(null);
 
             HihokenshaNo 主キー1 = DbT1006KyokaisoGaitoshaEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー2 = DbT1006KyokaisoGaitoshaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー2 = DbT1006KyokaisoGaitoshaEntityGenerator.DEFAULT_履歴番号;
             KyokaisoGaitosha result = sut.get境界層該当者(主キー1, 主キー2);
 
             assertThat(result, is(nullValue()));
@@ -75,10 +69,10 @@ public class KyokaisoGaitoshaManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT1006KyokaisoGaitoshaEntity entity = DbT1006KyokaisoGaitoshaEntityGenerator.createDbT1006KyokaisoGaitoshaEntity();
-            when(dac.selectByKey(any(HihokenshaNo.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(int.class))).thenReturn(entity);
 
             HihokenshaNo 主キー1 = DbT1006KyokaisoGaitoshaEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー2 = DbT1006KyokaisoGaitoshaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー2 = DbT1006KyokaisoGaitoshaEntityGenerator.DEFAULT_履歴番号;
             KyokaisoGaitosha result = sut.get境界層該当者(主キー1, 主キー2);
 
             assertThat(result.get被保険者番号().value(), is(DbT1006KyokaisoGaitoshaEntityGenerator.DEFAULT_被保険者番号.value()));

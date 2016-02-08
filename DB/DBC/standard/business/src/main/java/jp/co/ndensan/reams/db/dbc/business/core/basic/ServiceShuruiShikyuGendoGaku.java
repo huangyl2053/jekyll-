@@ -20,10 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * サービス種類支給限度額を管理するクラスです。
  */
-public class ServiceShuruiShikyuGendoGaku 
-extends ModelBase<ServiceShuruiShikyuGendoGakuIdentifier, 
-        DbT7111ServiceShuruiShikyuGendoGakuEntity, 
-        ServiceShuruiShikyuGendoGaku> implements Serializable {
+public class ServiceShuruiShikyuGendoGaku
+        extends ModelBase<ServiceShuruiShikyuGendoGakuIdentifier, DbT7111ServiceShuruiShikyuGendoGakuEntity, ServiceShuruiShikyuGendoGaku> implements Serializable {
 
     private final DbT7111ServiceShuruiShikyuGendoGakuEntity entity;
     private final ServiceShuruiShikyuGendoGakuIdentifier id;
@@ -48,7 +46,7 @@ extends ModelBase<ServiceShuruiShikyuGendoGakuIdentifier,
         this.entity = new DbT7111ServiceShuruiShikyuGendoGakuEntity();
         this.entity.setServiceShuruiCode(サービス種類コード);
         this.entity.setYoKaigoJotaiKubun(要介護状態区分);
-        this.entity.setTekiyoKaishuYM(適用開始年月);
+        this.entity.setTekiyoKaishiYM(適用開始年月);
         this.entity.setRirekiNo(履歴番号);
         this.id = new ServiceShuruiShikyuGendoGakuIdentifier(
                 サービス種類コード,
@@ -69,7 +67,7 @@ extends ModelBase<ServiceShuruiShikyuGendoGakuIdentifier,
         this.id = new ServiceShuruiShikyuGendoGakuIdentifier(
                 entity.getServiceShuruiCode(),
                 entity.getYoKaigoJotaiKubun(),
-                entity.getTekiyoKaishuYM(),
+                entity.getTekiyoKaishiYM(),
                 entity.getRirekiNo());
     }
 
@@ -112,7 +110,7 @@ extends ModelBase<ServiceShuruiShikyuGendoGakuIdentifier,
      * @return 適用開始年月
      */
     public FlexibleYearMonth get適用開始年月() {
-        return entity.getTekiyoKaishuYM();
+        return entity.getTekiyoKaishiYM();
     }
 
     /**
@@ -130,7 +128,7 @@ extends ModelBase<ServiceShuruiShikyuGendoGakuIdentifier,
      * @return 適用終了年月
      */
     public FlexibleYearMonth get適用終了年月() {
-        return entity.getTekiyoShuryuYM();
+        return entity.getTekiyoShuryoYM();
     }
 
     /**

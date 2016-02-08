@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
@@ -56,8 +55,9 @@ public class ShokanShokujiHiyoManagerTest {
             RString 主キー3 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー6 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払請求食事費用(null, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
+            RString 主キー6 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_連番;
+            sut.get償還払請求食事費用(null, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
         }
 
         @Test(expected = NullPointerException.class)
@@ -66,8 +66,9 @@ public class ShokanShokujiHiyoManagerTest {
             RString 主キー3 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー6 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払請求食事費用(主キー1, null, 主キー3, 主キー4, 主キー5, 主キー6);
+            RString 主キー6 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_連番;
+            sut.get償還払請求食事費用(主キー1, null, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
         }
 
         @Test(expected = NullPointerException.class)
@@ -76,8 +77,9 @@ public class ShokanShokujiHiyoManagerTest {
             FlexibleYearMonth 主キー2 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_サービス提供年月;
             JigyoshaNo 主キー4 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー6 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払請求食事費用(主キー1, 主キー2, null, 主キー4, 主キー5, 主キー6);
+            RString 主キー6 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_連番;
+            sut.get償還払請求食事費用(主キー1, 主キー2, null, 主キー4, 主キー5, 主キー6, 主キー7);
         }
 
         @Test(expected = NullPointerException.class)
@@ -86,8 +88,9 @@ public class ShokanShokujiHiyoManagerTest {
             FlexibleYearMonth 主キー2 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_整理番号;
             RString 主キー5 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー6 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払請求食事費用(主キー1, 主キー2, 主キー3, null, 主キー5, 主キー6);
+            RString 主キー6 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_連番;
+            sut.get償還払請求食事費用(主キー1, 主キー2, 主キー3, null, 主キー5, 主キー6, 主キー7);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +99,9 @@ public class ShokanShokujiHiyoManagerTest {
             FlexibleYearMonth 主キー2 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_事業者番号;
-            Decimal 主キー6 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_履歴番号;
-            sut.get償還払請求食事費用(主キー1, 主キー2, 主キー3, 主キー4, null, 主キー6);
+            RString 主キー6 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_連番;
+            sut.get償還払請求食事費用(主キー1, 主キー2, 主キー3, 主キー4, null, 主キー6, 主キー7);
         }
 
         @Test(expected = NullPointerException.class)
@@ -107,21 +111,23 @@ public class ShokanShokujiHiyoManagerTest {
             RString 主キー3 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_様式番号;
-            sut.get償還払請求食事費用(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, null);
+            RString 主キー7 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_連番;
+            sut.get償還払請求食事費用(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, null, 主キー7);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class),
-                    any(JigyoshaNo.class), any(RString.class), any(Decimal.class))).thenReturn(null);
+                    any(JigyoshaNo.class), any(RString.class), any(RString.class), any(RString.class))).thenReturn(null);
             HihokenshaNo 主キー1 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー6 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_履歴番号;
-            ShokanShokujiHiyo result = sut.get償還払請求食事費用(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
+            RString 主キー6 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_連番;
+            ShokanShokujiHiyo result = sut.get償還払請求食事費用(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
 
             assertThat(result, is(nullValue()));
         }
@@ -130,14 +136,15 @@ public class ShokanShokujiHiyoManagerTest {
         public void 検索結果が存在する場合() {
             DbT3043ShokanShokujiHiyoEntity entity = DbT3043ShokanShokujiHiyoEntityGenerator.createDbT3043ShokanShokujiHiyoEntity();
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class),
-                    any(JigyoshaNo.class), any(RString.class), any(Decimal.class))).thenReturn(entity);
+                    any(JigyoshaNo.class), any(RString.class), any(RString.class), any(RString.class))).thenReturn(entity);
             HihokenshaNo 主キー1 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー6 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_履歴番号;
-            ShokanShokujiHiyo result = sut.get償還払請求食事費用(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
+            RString 主キー6 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_連番;
+            ShokanShokujiHiyo result = sut.get償還払請求食事費用(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
 
             assertThat(result.get被保険者番号().value(), is(DbT3043ShokanShokujiHiyoEntityGenerator.DEFAULT_被保険者番号.value()));
         }

@@ -33,7 +33,7 @@ public class SearchResultShoKaishuKanri {
      * 検索ボタンをクリックした際に実行されます。<br/>
      * 検索条件に該当する証回収情報をグリッドに表示します。
      *
-     * @param searchResultDiv　証回収状況検索結果Div
+     * @param searchResultDiv 証回収状況検索結果Div
      * @param searchDiv 証回収状況検索Div
      * @return レスポンス
      */

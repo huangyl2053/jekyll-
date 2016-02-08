@@ -43,7 +43,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaDac implements ISaveable<DbT3
     public DbT3065ShichosonTokubetsuKyufuJigyoshaEntity selectByKey(
             JigyoshaNo 市町村特別給付用事業者番号,
             ServiceCode 市町村特別給付用サービスコード,
-            Decimal 履歴番号) throws NullPointerException {
+            int 履歴番号) throws NullPointerException {
         requireNonNull(市町村特別給付用事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用事業者番号"));
         requireNonNull(市町村特別給付用サービスコード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用サービスコード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));

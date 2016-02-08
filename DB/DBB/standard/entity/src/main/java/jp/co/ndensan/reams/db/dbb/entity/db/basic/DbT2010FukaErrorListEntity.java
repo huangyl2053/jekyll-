@@ -1,28 +1,29 @@
 package jp.co.ndensan.reams.db.dbb.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 
 /**
  * DbT2010FukaErrorListの項目定義クラスです
  *
  */
 public class DbT2010FukaErrorListEntity extends DbTableEntityBase<DbT2010FukaErrorListEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2010FukaErrorList");
@@ -39,17 +40,21 @@ public class DbT2010FukaErrorListEntity extends DbTableEntityBase<DbT2010FukaErr
     private SubGyomuCode subGyomuCode;
     @PrimaryKey
     private RString internalReportId;
-    private RDateTime internalReportCreationDateTime;
-    private RString batchId;
-    private RDateTime batchStartingDateTime;
-    private Code shoriKubunCode;
     @PrimaryKey
     private FlexibleYear fukaNendo;
     @PrimaryKey
     private TsuchishoNo tsuchishoNo;
+    private RDateTime internalReportCreationDateTime;
+    private RString batchId;
+    private RDateTime batchStartingDateTime;
     private Code errorCode;
     private HihokenshaNo hihokenshaNo;
     private ShikibetsuCode shikibetsuCode;
+    private Code shoriKubunCode;
+    private FlexibleDate shikakuShutokuYMD;
+    private RString shikakuShutokuJiyu;
+    private FlexibleDate shikakuSoshitsuYMD;
+    private RString shikakuSoshitsuJiyu;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -110,7 +115,7 @@ public class DbT2010FukaErrorListEntity extends DbTableEntityBase<DbT2010FukaErr
      *
      * @param subGyomuCode サブ業務コード
      */
-    public void setSubGyomuCode(SubGyomuCode subGyomuCode) {
+    public void setSubGyomuCode(@Nonnull SubGyomuCode subGyomuCode) {
         this.subGyomuCode = subGyomuCode;
     }
 
@@ -128,8 +133,44 @@ public class DbT2010FukaErrorListEntity extends DbTableEntityBase<DbT2010FukaErr
      *
      * @param internalReportId 内部帳票ID
      */
-    public void setInternalReportId(RString internalReportId) {
+    public void setInternalReportId(@Nonnull RString internalReportId) {
         this.internalReportId = internalReportId;
+    }
+
+    /**
+     * 賦課年度のgetメソッドです。
+     *
+     * @return 賦課年度
+     */
+    public FlexibleYear getFukaNendo() {
+        return fukaNendo;
+    }
+
+    /**
+     * 賦課年度のsetメソッドです。
+     *
+     * @param fukaNendo 賦課年度
+     */
+    public void setFukaNendo(@Nonnull FlexibleYear fukaNendo) {
+        this.fukaNendo = fukaNendo;
+    }
+
+    /**
+     * 通知書番号のgetメソッドです。
+     *
+     * @return 通知書番号
+     */
+    public TsuchishoNo getTsuchishoNo() {
+        return tsuchishoNo;
+    }
+
+    /**
+     * 通知書番号のsetメソッドです。
+     *
+     * @param tsuchishoNo 通知書番号
+     */
+    public void setTsuchishoNo(@Nonnull TsuchishoNo tsuchishoNo) {
+        this.tsuchishoNo = tsuchishoNo;
     }
 
     /**
@@ -137,6 +178,7 @@ public class DbT2010FukaErrorListEntity extends DbTableEntityBase<DbT2010FukaErr
      *
      * @return 内部帳票作成日時
      */
+    @CheckForNull
     public RDateTime getInternalReportCreationDateTime() {
         return internalReportCreationDateTime;
     }
@@ -155,6 +197,7 @@ public class DbT2010FukaErrorListEntity extends DbTableEntityBase<DbT2010FukaErr
      *
      * @return バッチID
      */
+    @CheckForNull
     public RString getBatchId() {
         return batchId;
     }
@@ -173,6 +216,7 @@ public class DbT2010FukaErrorListEntity extends DbTableEntityBase<DbT2010FukaErr
      *
      * @return バッチ起動日時
      */
+    @CheckForNull
     public RDateTime getBatchStartingDateTime() {
         return batchStartingDateTime;
     }
@@ -187,64 +231,11 @@ public class DbT2010FukaErrorListEntity extends DbTableEntityBase<DbT2010FukaErr
     }
 
     /**
-     * 処理区分コードのgetメソッドです。
-     *
-     * @return 処理区分コード
-     */
-    public Code getShoriKubunCode() {
-        return shoriKubunCode;
-    }
-
-    /**
-     * 処理区分コードのsetメソッドです。
-     *
-     * @param shoriKubunCode 処理区分コード
-     */
-    public void setShoriKubunCode(Code shoriKubunCode) {
-        this.shoriKubunCode = shoriKubunCode;
-    }
-
-    /**
-     * 賦課年度のgetメソッドです。
-     *
-     * @return 賦課年度
-     */
-    public FlexibleYear getFukaNendo() {
-        return fukaNendo;
-    }
-
-    /**
-     * 賦課年度のsetメソッドです。
-     *
-     * @param fukaNendo 賦課年度
-     */
-    public void setFukaNendo(FlexibleYear fukaNendo) {
-        this.fukaNendo = fukaNendo;
-    }
-
-    /**
-     * 通知書番号のgetメソッドです。
-     *
-     * @return 通知書番号
-     */
-    public TsuchishoNo getTsuchishoNo() {
-        return tsuchishoNo;
-    }
-
-    /**
-     * 通知書番号のsetメソッドです。
-     *
-     * @param tsuchishoNo 通知書番号
-     */
-    public void setTsuchishoNo(TsuchishoNo tsuchishoNo) {
-        this.tsuchishoNo = tsuchishoNo;
-    }
-
-    /**
      * エラーコードのgetメソッドです。
      *
      * @return エラーコード
      */
+    @CheckForNull
     public Code getErrorCode() {
         return errorCode;
     }
@@ -259,28 +250,11 @@ public class DbT2010FukaErrorListEntity extends DbTableEntityBase<DbT2010FukaErr
     }
 
     /**
-     * エラーコードの名称のgetメソッドです。
-     *
-     * @return エラーコードの名称
-     */
-    public RString getErrorCodeMeisho() {
-        return CodeMaster.getCodeMeisho(CodeShubetsu.EMPTY, errorCode);
-    }
-
-    /**
-     * エラーコードの略称のgetメソッドです。
-     *
-     * @return エラーコードの略称
-     */
-    public RString getErrorCodeRyakusho() {
-        return CodeMaster.getCodeRyakusho(CodeShubetsu.EMPTY, errorCode);
-    }
-
-    /**
      * 被保険者番号のgetメソッドです。
      *
      * @return 被保険者番号
      */
+    @CheckForNull
     public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
@@ -299,6 +273,7 @@ public class DbT2010FukaErrorListEntity extends DbTableEntityBase<DbT2010FukaErr
      *
      * @return 識別コード
      */
+    @CheckForNull
     public ShikibetsuCode getShikibetsuCode() {
         return shikibetsuCode;
     }
@@ -313,10 +288,106 @@ public class DbT2010FukaErrorListEntity extends DbTableEntityBase<DbT2010FukaErr
     }
 
     /**
+     * 処理区分コードのgetメソッドです。
+     *
+     * @return 処理区分コード
+     */
+    @CheckForNull
+    public Code getShoriKubunCode() {
+        return shoriKubunCode;
+    }
+
+    /**
+     * 処理区分コードのsetメソッドです。
+     *
+     * @param shoriKubunCode 処理区分コード
+     */
+    public void setShoriKubunCode(Code shoriKubunCode) {
+        this.shoriKubunCode = shoriKubunCode;
+    }
+
+    /**
+     * 資格取得日のgetメソッドです。
+     *
+     * @return 資格取得日
+     */
+    @CheckForNull
+    public FlexibleDate getShikakuShutokuYMD() {
+        return shikakuShutokuYMD;
+    }
+
+    /**
+     * 資格取得日のsetメソッドです。
+     *
+     * @param shikakuShutokuYMD 資格取得日
+     */
+    public void setShikakuShutokuYMD(FlexibleDate shikakuShutokuYMD) {
+        this.shikakuShutokuYMD = shikakuShutokuYMD;
+    }
+
+    /**
+     * 資格取得事由のgetメソッドです。
+     *
+     * @return 資格取得事由
+     */
+    @CheckForNull
+    public RString getShikakuShutokuJiyu() {
+        return shikakuShutokuJiyu;
+    }
+
+    /**
+     * 資格取得事由のsetメソッドです。
+     *
+     * @param shikakuShutokuJiyu 資格取得事由
+     */
+    public void setShikakuShutokuJiyu(RString shikakuShutokuJiyu) {
+        this.shikakuShutokuJiyu = shikakuShutokuJiyu;
+    }
+
+    /**
+     * 資格喪失日のgetメソッドです。
+     *
+     * @return 資格喪失日
+     */
+    @CheckForNull
+    public FlexibleDate getShikakuSoshitsuYMD() {
+        return shikakuSoshitsuYMD;
+    }
+
+    /**
+     * 資格喪失日のsetメソッドです。
+     *
+     * @param shikakuSoshitsuYMD 資格喪失日
+     */
+    public void setShikakuSoshitsuYMD(FlexibleDate shikakuSoshitsuYMD) {
+        this.shikakuSoshitsuYMD = shikakuSoshitsuYMD;
+    }
+
+    /**
+     * 資格喪失事由のgetメソッドです。
+     *
+     * @return 資格喪失事由
+     */
+    @CheckForNull
+    public RString getShikakuSoshitsuJiyu() {
+        return shikakuSoshitsuJiyu;
+    }
+
+    /**
+     * 資格喪失事由のsetメソッドです。
+     *
+     * @param shikakuSoshitsuJiyu 資格喪失事由
+     */
+    public void setShikakuSoshitsuJiyu(RString shikakuSoshitsuJiyu) {
+        this.shikakuSoshitsuJiyu = shikakuSoshitsuJiyu;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT2010FukaErrorListEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2010FukaErrorListEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT2010FukaErrorListEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2010FukaErrorListEntity other) {
@@ -345,15 +416,19 @@ public class DbT2010FukaErrorListEntity extends DbTableEntityBase<DbT2010FukaErr
     public void shallowCopy(DbT2010FukaErrorListEntity entity) {
         this.subGyomuCode = entity.subGyomuCode;
         this.internalReportId = entity.internalReportId;
+        this.fukaNendo = entity.fukaNendo;
+        this.tsuchishoNo = entity.tsuchishoNo;
         this.internalReportCreationDateTime = entity.internalReportCreationDateTime;
         this.batchId = entity.batchId;
         this.batchStartingDateTime = entity.batchStartingDateTime;
-        this.shoriKubunCode = entity.shoriKubunCode;
-        this.fukaNendo = entity.fukaNendo;
-        this.tsuchishoNo = entity.tsuchishoNo;
         this.errorCode = entity.errorCode;
         this.hihokenshaNo = entity.hihokenshaNo;
         this.shikibetsuCode = entity.shikibetsuCode;
+        this.shoriKubunCode = entity.shoriKubunCode;
+        this.shikakuShutokuYMD = entity.shikakuShutokuYMD;
+        this.shikakuShutokuJiyu = entity.shikakuShutokuJiyu;
+        this.shikakuSoshitsuYMD = entity.shikakuSoshitsuYMD;
+        this.shikakuSoshitsuJiyu = entity.shikakuSoshitsuJiyu;
     }
 
     /**
@@ -363,7 +438,7 @@ public class DbT2010FukaErrorListEntity extends DbTableEntityBase<DbT2010FukaErr
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(subGyomuCode, internalReportId, internalReportCreationDateTime, batchId, batchStartingDateTime, shoriKubunCode, fukaNendo, tsuchishoNo, errorCode, hihokenshaNo, shikibetsuCode);
+        return super.toMd5(subGyomuCode, internalReportId, fukaNendo, tsuchishoNo, internalReportCreationDateTime, batchId, batchStartingDateTime, errorCode, hihokenshaNo, shikibetsuCode, shoriKubunCode, shikakuShutokuYMD, shikakuShutokuJiyu, shikakuSoshitsuYMD, shikakuSoshitsuJiyu);
     }
 
 // </editor-fold>

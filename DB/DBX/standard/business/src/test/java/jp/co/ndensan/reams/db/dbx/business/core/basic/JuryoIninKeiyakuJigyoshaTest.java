@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.ServiceShubetsuCode;
@@ -30,7 +30,7 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class JuryoIninKeiyakuJigyoshaTest extends DbxTestBase {
 
-    private static DbT7061JuryoIninKeiyakuJigyoshaEntity JuryoIninKeiyakuJigyoshaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
+    private static DbT7061JuryoIninJigyoshaEntity JuryoIninKeiyakuJigyoshaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static KaigoJigyoshaNo 主キー名1;
@@ -40,8 +40,8 @@ public class JuryoIninKeiyakuJigyoshaTest extends DbxTestBase {
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator.DEFAULT_受領委任契約事業者番号;
-        主キー名2 = DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator.DEFAULT_受領委任契約開始日;
+        主キー名1 = DbT7061JuryoIninJigyoshaEntityGenerator.DEFAULT_受領委任契約事業者番号;
+        主キー名2 = DbT7061JuryoIninJigyoshaEntityGenerator.DEFAULT_受領委任契約開始日;
     }
 
     public static class 主キーコンストラクタテスト extends DbxTestBase {
@@ -50,7 +50,7 @@ public class JuryoIninKeiyakuJigyoshaTest extends DbxTestBase {
 
         @Before
         public void setUp() {
-            JuryoIninKeiyakuJigyoshaEntity = DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator.createDbT7061JuryoIninKeiyakuJigyoshaEntity();
+            JuryoIninKeiyakuJigyoshaEntity = DbT7061JuryoIninJigyoshaEntityGenerator.createDbT7061JuryoIninJigyoshaEntity();
             JuryoIninKeiyakuJigyoshaEntity.setJigyoshaNo(主キー名1);
             JuryoIninKeiyakuJigyoshaEntity.setKeiyakuKaishiYMD(主キー名2);
         }
@@ -67,7 +67,7 @@ public class JuryoIninKeiyakuJigyoshaTest extends DbxTestBase {
         }
 
         @Test
-        public void 指定したキーが保持するDbT7061JuryoIninKeiyakuJigyoshaEntityにセットされている() {
+        public void 指定したキーが保持するDbT7061JuryoIninJigyoshaEntityにセットされている() {
             sut = new JuryoIninKeiyakuJigyosha(主キー名1, 主キー名2, RString.EMPTY);
             assertThat(sut.get受領委任契約事業者番号(), is(主キー名1));
             assertThat(sut.get受領委任契約開始日(), is(主キー名2));
@@ -87,7 +87,7 @@ public class JuryoIninKeiyakuJigyoshaTest extends DbxTestBase {
 
         @Before
         public void setUp() {
-            JuryoIninKeiyakuJigyoshaEntity = DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator.createDbT7061JuryoIninKeiyakuJigyoshaEntity();
+            JuryoIninKeiyakuJigyoshaEntity = DbT7061JuryoIninJigyoshaEntityGenerator.createDbT7061JuryoIninJigyoshaEntity();
             JuryoIninKeiyakuJigyoshaEntity.setJigyoshaNo(主キー名1);
             JuryoIninKeiyakuJigyoshaEntity.setKeiyakuKaishiYMD(主キー名2);
         }
@@ -98,7 +98,7 @@ public class JuryoIninKeiyakuJigyoshaTest extends DbxTestBase {
         }
 
         @Test
-        public void 指定したDbT7061JuryoIninKeiyakuJigyoshaEntityのキー情報を識別子が持つ() {
+        public void 指定したDbT7061JuryoIninJigyoshaEntityのキー情報を識別子が持つ() {
 
             sut = new JuryoIninKeiyakuJigyosha(JuryoIninKeiyakuJigyoshaEntity);
             JuryoIninKeiyakuJigyoshaEntity.setJigyoshaNo(主キー名1);
@@ -112,7 +112,7 @@ public class JuryoIninKeiyakuJigyoshaTest extends DbxTestBase {
 
         @Before
         public void setUp() {
-            JuryoIninKeiyakuJigyoshaEntity = DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator.createDbT7061JuryoIninKeiyakuJigyoshaEntity();
+            JuryoIninKeiyakuJigyoshaEntity = DbT7061JuryoIninJigyoshaEntityGenerator.createDbT7061JuryoIninJigyoshaEntity();
             JuryoIninKeiyakuJigyoshaEntity.setJigyoshaNo(主キー名1);
             JuryoIninKeiyakuJigyoshaEntity.setKeiyakuKaishiYMD(主キー名2);
 
@@ -136,7 +136,7 @@ public class JuryoIninKeiyakuJigyoshaTest extends DbxTestBase {
 
         @Test
         public void get契約サービス種別は_entityが持つ契約サービス種別を返す() {
-            assertThat(sut.get契約サービス種別(), is(JuryoIninKeiyakuJigyoshaEntity.getServiceShubetsuCode().getColumnValue()));
+            assertThat(sut.get契約サービス種別(), is(JuryoIninKeiyakuJigyoshaEntity.getServiceShubetsuCode()));
         }
 
         @Test
@@ -166,7 +166,7 @@ public class JuryoIninKeiyakuJigyoshaTest extends DbxTestBase {
 
         @Before
         public void setUp() {
-            JuryoIninKeiyakuJigyoshaEntity = DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator.createDbT7061JuryoIninKeiyakuJigyoshaEntity();
+            JuryoIninKeiyakuJigyoshaEntity = DbT7061JuryoIninJigyoshaEntityGenerator.createDbT7061JuryoIninJigyoshaEntity();
             JuryoIninKeiyakuJigyoshaEntity.setJigyoshaNo(主キー名1);
             JuryoIninKeiyakuJigyoshaEntity.setKeiyakuKaishiYMD(主キー名2);
 
@@ -185,7 +185,7 @@ public class JuryoIninKeiyakuJigyoshaTest extends DbxTestBase {
 
         @Before
         public void setUp() {
-            JuryoIninKeiyakuJigyoshaEntity = DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator.createDbT7061JuryoIninKeiyakuJigyoshaEntity();
+            JuryoIninKeiyakuJigyoshaEntity = DbT7061JuryoIninJigyoshaEntityGenerator.createDbT7061JuryoIninJigyoshaEntity();
             JuryoIninKeiyakuJigyoshaEntity.setJigyoshaNo(主キー名1);
             JuryoIninKeiyakuJigyoshaEntity.setKeiyakuKaishiYMD(主キー名2);
 
@@ -205,35 +205,35 @@ public class JuryoIninKeiyakuJigyoshaTest extends DbxTestBase {
 
         @Before
         public void setUp() {
-            JuryoIninKeiyakuJigyoshaEntity = DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator.createDbT7061JuryoIninKeiyakuJigyoshaEntity();
+            JuryoIninKeiyakuJigyoshaEntity = DbT7061JuryoIninJigyoshaEntityGenerator.createDbT7061JuryoIninJigyoshaEntity();
             JuryoIninKeiyakuJigyoshaEntity.setJigyoshaNo(主キー名1);
             JuryoIninKeiyakuJigyoshaEntity.setKeiyakuKaishiYMD(主キー名2);
 
         }
 
         @Test
-        public void JuryoIninKeiyakuJigyoshaが保持するDbT7061JuryoIninKeiyakuJigyoshaEntityのEntityDataStateがUnchangedである場合_deletedメソッド_によりJuryoIninKeiyakuJigyoshaが保持するDbT7061JuryoIninKeiyakuJigyoshaEntityのEntityDataStateがDeletedに指定されたJuryoIninKeiyakuJigyoshaが返る() {
+        public void JuryoIninKeiyakuJigyoshaが保持するDbT7061JuryoIninJigyoshaEntityのEntityDataStateがUnchangedである場合_deletedメソッド_によりJuryoIninKeiyakuJigyoshaが保持するDbT7061JuryoIninJigyoshaEntityのEntityDataStateがDeletedに指定されたJuryoIninKeiyakuJigyoshaが返る() {
             sut = TestSupport.setStateJuryoIninKeiyakuJigyosha(EntityDataState.Unchanged);
             result = sut.deleted();
             assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
         }
 
         @Test
-        public void JuryoIninKeiyakuJigyoshaが保持するDbT7061JuryoIninKeiyakuJigyoshaEntityのEntityDataStateがModifiedである場合_deletedメソッド_によりJuryoIninKeiyakuJigyoshaが保持するDbT7061JuryoIninKeiyakuJigyoshaEntityのEntityDataStateがDeletedに指定されたJuryoIninKeiyakuJigyoshaが返る() {
+        public void JuryoIninKeiyakuJigyoshaが保持するDbT7061JuryoIninJigyoshaEntityのEntityDataStateがModifiedである場合_deletedメソッド_によりJuryoIninKeiyakuJigyoshaが保持するDbT7061JuryoIninJigyoshaEntityのEntityDataStateがDeletedに指定されたJuryoIninKeiyakuJigyoshaが返る() {
             sut = TestSupport.setStateJuryoIninKeiyakuJigyosha(EntityDataState.Modified);
             result = sut.deleted();
             assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
         }
 
         @Test
-        public void JuryoIninKeiyakuJigyoshaが保持するDbT7061JuryoIninKeiyakuJigyoshaEntityのEntityDataStateがDeletedである場合_deletedメソッド_によりJuryoIninKeiyakuJigyoshaが保持するDbT7061JuryoIninKeiyakuJigyoshaEntityのEntityDataStateがDeletedに指定されたJuryoIninKeiyakuJigyoshaが返る() {
+        public void JuryoIninKeiyakuJigyoshaが保持するDbT7061JuryoIninJigyoshaEntityのEntityDataStateがDeletedである場合_deletedメソッド_によりJuryoIninKeiyakuJigyoshaが保持するDbT7061JuryoIninJigyoshaEntityのEntityDataStateがDeletedに指定されたJuryoIninKeiyakuJigyoshaが返る() {
             sut = TestSupport.setStateJuryoIninKeiyakuJigyosha(EntityDataState.Deleted);
             result = sut.deleted();
             assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
         }
 
         @Test(expected = IllegalStateException.class)
-        public void JuryoIninKeiyakuJigyoshaが保持するDbT7061JuryoIninKeiyakuJigyoshaEntityのEntityDataStateがAddedである場合_deletedメソッド_により_IllegalStateExceptionが発火する() {
+        public void JuryoIninKeiyakuJigyoshaが保持するDbT7061JuryoIninJigyoshaEntityのEntityDataStateがAddedである場合_deletedメソッド_により_IllegalStateExceptionが発火する() {
             sut = TestSupport.setStateJuryoIninKeiyakuJigyosha(EntityDataState.Added);
             result = sut.deleted();
         }

@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomo
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanMeisai}の編集を行うビルダークラスです。
@@ -103,26 +102,26 @@ public class ShokanMeisaiBuilder {
     }
 
     /**
-     * 順次番号を設定します。
+     * 明細番号を設定します。
      *
-     * @param 順次番号 順次番号
+     * @param 明細番号 明細番号
      * @return {@link ShokanMeisaiBuilder}
      */
-    public ShokanMeisaiBuilder set順次番号(RString 順次番号) {
-        requireNonNull(順次番号, UrSystemErrorMessages.値がnull.getReplacedMessage("順次番号"));
-        entity.setJunjiNo(順次番号);
+    public ShokanMeisaiBuilder set明細番号(RString 明細番号) {
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        entity.setMeisaiNo(明細番号);
         return this;
     }
 
     /**
-     * 履歴番号を設定します。
+     * 連番を設定します。
      *
-     * @param 履歴番号 履歴番号
+     * @param 連番 連番
      * @return {@link ShokanMeisaiBuilder}
      */
-    public ShokanMeisaiBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
+    public ShokanMeisaiBuilder set連番(RString 連番) {
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+        entity.setRenban(連番);
         return this;
     }
 
@@ -156,7 +155,7 @@ public class ShokanMeisaiBuilder {
      * @param 単位数 単位数
      * @return {@link ShokanMeisaiBuilder}
      */
-    public ShokanMeisaiBuilder set単位数(Decimal 単位数) {
+    public ShokanMeisaiBuilder set単位数(int 単位数) {
         requireNonNull(単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("単位数"));
         entity.setTanisu(単位数);
         return this;
@@ -168,7 +167,7 @@ public class ShokanMeisaiBuilder {
      * @param 日数_回数 日数_回数
      * @return {@link ShokanMeisaiBuilder}
      */
-    public ShokanMeisaiBuilder set日数_回数(Decimal 日数_回数) {
+    public ShokanMeisaiBuilder set日数_回数(int 日数_回数) {
         requireNonNull(日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("日数_回数"));
         entity.setNissuKaisu(日数_回数);
         return this;

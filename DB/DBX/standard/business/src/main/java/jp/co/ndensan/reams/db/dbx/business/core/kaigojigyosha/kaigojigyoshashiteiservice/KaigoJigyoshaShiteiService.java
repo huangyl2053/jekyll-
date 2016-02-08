@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
@@ -26,9 +27,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護事業者指定サービスを管理するクラスです。
  */
-public class KaigoJigyoshaShiteiService extends ModelBase<KaigoJigyoshaShiteiServiceIdentifier, DbT7063KaigoJigyoshaShiteiServiceEntity, KaigoJigyoshaShiteiService> implements Serializable {
-
-    private static final long serialVersionUID = -5548892720507546159L;
+public class KaigoJigyoshaShiteiService
+        extends ModelBase<KaigoJigyoshaShiteiServiceIdentifier, DbT7063KaigoJigyoshaShiteiServiceEntity, KaigoJigyoshaShiteiService>
+        implements Serializable {
 
     private final DbT7063KaigoJigyoshaShiteiServiceEntity entity;
     private final KaigoJigyoshaShiteiServiceIdentifier id;
@@ -42,8 +43,8 @@ public class KaigoJigyoshaShiteiService extends ModelBase<KaigoJigyoshaShiteiSer
      * @param 有効開始日 有効開始日
      */
     public KaigoJigyoshaShiteiService(KaigoJigyoshaNo 事業者番号,
-            KaigoServiceShuruiCode サービス種類コード,
-            FlexibleDate 有効開始日) {
+                                      KaigoServiceShuruiCode サービス種類コード,
+                                      FlexibleDate 有効開始日) {
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         requireNonNull(有効開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始日"));
@@ -1439,6 +1440,21 @@ public class KaigoJigyoshaShiteiService extends ModelBase<KaigoJigyoshaShiteiSer
     }
 
     /**
+     * 介護事業者指定サービスのみを変更対象とします。<br/>
+     * {@link DbT7063KaigoJigyoshaShiteiServiceEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link KaigoJigyoshaShiteiService}
+     */
+    public KaigoJigyoshaShiteiService modifiedModel() {
+        DbT7063KaigoJigyoshaShiteiServiceEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new KaigoJigyoshaShiteiService(
+                modifiedEntity, id);
+    }
+
+    /**
      * 保持する介護事業者指定サービスを削除対象とします。<br/>
      * {@link DbT7063KaigoJigyoshaShiteiServiceEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -1468,7 +1484,7 @@ public class KaigoJigyoshaShiteiService extends ModelBase<KaigoJigyoshaShiteiSer
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -1498,5 +1514,25 @@ public class KaigoJigyoshaShiteiService extends ModelBase<KaigoJigyoshaShiteiSer
         return new KaigoJigyoshaShiteiServiceBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final KaigoJigyoshaShiteiService other = (KaigoJigyoshaShiteiService) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 }

@@ -6,6 +6,7 @@ shujiiIryoKikanCode,varchar,RString,,,,,主治医医療機関コード,A
 shujiiCode,varchar,RString,,,,,主治医コード,A
 ikenshoJuryoYMD,UDD015YMD,FlexibleDate,,,,,主治医意見書受領年月日,A
 ikenshoKinyuYMD,UDD015YMD,FlexibleDate,,,,,主治医意見書記入年月日,A
+ikenshoReadYMD,UDD015YMD,FlexibleDate,,,,,主治医意見書読取年月日,A
 ikenshoSakuseiKaisuKubun,UDD035Code,Code,,,,,意見書作成回数区分,A
 zaitakuShisetsuKubun,UDD035Code,Code,,,,,在宅／施設区分,A
 ikenshoDoiFlag,bool,boolean,,,,,意見書同意フラグ,A
@@ -24,17 +25,16 @@ existRehabilitationkaJushinFlag,bool,boolean,,,,,リハビリテーション科�
 existShikaJushinFlag,bool,boolean,,,,,歯科受診の有無,A
 existGankaJushinFlag,bool,boolean,,,,,眼科の有無,A
 existSonotaJushinkaFlag,bool,boolean,,,,,その他受診科の有無,A
-sonotaJushinKaShimei,varchar,RString,,,,,その他受診科名,A
+sonotaJushinKaMei,varchar,RString,,,,,その他受診科名,A
 shindamMei1,varchar,RString,,,,,意見書・診断名1,A
-hasshoYMD1,UDD015YMD,FlexibleDate,,,,,意見書・発症年月日1,A
+hasshoYMD1,varchar,RString,,,,,意見書・発症年月日1,A
 shindamMei2,varchar,RString,,,,,意見書・診断名2,A
-hasshoYMD2,UDD015YMD,FlexibleDate,,,,,意見書・発症年月日2,A
+hasshoYMD2,varchar,RString,,,,,意見書・発症年月日2,A
 shindamMei3,varchar,RString,,,,,意見書・診断名3,A
-hasshoYMD3,UDD015YMD,FlexibleDate,,,,,意見書・発症年月日3,A
+hasshoYMD3,varchar,RString,,,,,意見書・発症年月日3,A
 anteisei,bpchar,RString,,,,,意見書・症状としての安定性,A
 fuanteiJokyo,text,RString,,,,,意見書・症状としての安定性　不安定状況,A
 chiryoNaiyo,text,RString,,,,,治療内容,A
 tokkiJiko,text,RString,,,,,特記事項,A
-tokkiJikoImageSharedFileId,timestamp,RDateTime,,,,,特記事項イメージ共有ファイルID,A
 nijiHanteiKekkaRenrakuFlag,bool,boolean,,,,,認定審査会後の二次判定結果の連絡確認フラグ,A
 ikenshoMemo,text,RString,,,,,意見書メモ,A

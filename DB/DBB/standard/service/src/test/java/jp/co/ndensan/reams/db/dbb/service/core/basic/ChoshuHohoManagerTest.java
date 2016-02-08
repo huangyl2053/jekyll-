@@ -9,23 +9,22 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -52,32 +51,25 @@ public class ChoshuHohoManagerTest {
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー2 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー3 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_履歴番号;
             sut.get介護徴収方法(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYear 主キー1 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_賦課年度;
-            Decimal 主キー3 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_履歴番号;
             sut.get介護徴収方法(主キー1, null, 主キー3);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
-            FlexibleYear 主キー1 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_賦課年度;
-            HihokenshaNo 主キー2 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_被保険者番号;
-            sut.get介護徴収方法(主キー1, 主キー2, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(FlexibleYear.class), any(HihokenshaNo.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(FlexibleYear.class), any(HihokenshaNo.class), any(int.class))).thenReturn(null);
 
             FlexibleYear 主キー1 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_賦課年度;
             HihokenshaNo 主キー2 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー3 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_履歴番号;
             ChoshuHoho result = sut.get介護徴収方法(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
@@ -86,11 +78,11 @@ public class ChoshuHohoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT2001ChoshuHohoEntity entity = DbT2001ChoshuHohoEntityGenerator.createDbT2001ChoshuHohoEntity();
-            when(dac.selectByKey(any(FlexibleYear.class), any(HihokenshaNo.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(FlexibleYear.class), any(HihokenshaNo.class), any(int.class))).thenReturn(entity);
 
             FlexibleYear 主キー1 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_賦課年度;
             HihokenshaNo 主キー2 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー3 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_履歴番号;
             ChoshuHoho result = sut.get介護徴収方法(主キー1, 主キー2, 主キー3);
 
             assertThat(result.get賦課年度().toDateString(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_賦課年度.toDateString()));

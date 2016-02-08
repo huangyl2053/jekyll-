@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 償還払請求特定診療費テーブルの項目定義クラスです。
  */
 public enum DbT3041ShokanTokuteiShinryohi implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -60,14 +60,14 @@ public enum DbT3041ShokanTokuteiShinryohi implements IColumnDefinition {
      */
     yoshikiNo(4, 0),
     /**
-     * 順次番号
+     * 明細番号
      * <br/>複数レコード対応のため
      */
-    junjiNo(4, 0),
+    meisaiNo(4, 0),
     /**
-     * 履歴番号
+     * 連番
      */
-    rirekiNo(5, 0),
+    renban(2, 0),
     /**
      * 傷病名
      */
@@ -88,6 +88,16 @@ public enum DbT3041ShokanTokuteiShinryohi implements IColumnDefinition {
      * 精神科専門療法単位数
      */
     seishinkaSemmonRyoyohouTanisu(10, 0),
+    /**
+     * 措置単位数
+     * <br/>画面では「その他１」で表示
+     */
+    sochiTanisu(10, 0),
+    /**
+     * 手術単位数
+     * <br/>画面では「その他２」で表示
+     */
+    shujutsuTanisu(10, 0),
     /**
      * 合計単位数
      */

@@ -5,25 +5,29 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3069KogakuGassanShinseishoKanyurekiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator.*;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator.DEFAULT_保険者番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator.DEFAULT_加入歴番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator.DEFAULT_対象年度;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator.DEFAULT_履歴番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator.DEFAULT_整理番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator.DEFAULT_被保険者番号;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3069KogakuGassanShinseishoKanyurekiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -285,7 +289,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiDacTest extends DbcTestDacBas
                 HokenshaNo 保険者番号,
                 RString 整理番号,
                 RString 加入歴番号,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3069KogakuGassanShinseishoKanyurekiEntity entity = DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator.createDbT3069KogakuGassanShinseishoKanyurekiEntity();
             entity.setHihokenshaNo(被保険者番号);
             entity.setTaishoNendo(対象年度);

@@ -206,7 +206,7 @@ public class IDbT2002FukaMapperTest extends DbbTestDacBase {
 
         @Test
         public void 正しく調定日時されている() {
-            assertThat(sut.getEntity().getChoteiTimestamp(), is(entity.getChoteiTimestamp()));
+            assertThat(sut.getEntity().getChoteiNichiji(), is(entity.getChoteiNichiji()));
         }
 
         @Test
@@ -261,7 +261,7 @@ public class IDbT2002FukaMapperTest extends DbbTestDacBase {
 
         @Test
         public void 正しく異動基準日時されている() {
-            assertThat(sut.getEntity().getIdoKijunTimestamp(), is(entity.getIdoKijunTimestamp()));
+            assertThat(sut.getEntity().getIdoKijunNichiji(), is(entity.getIdoKijunNichiji()));
         }
 
         @Test

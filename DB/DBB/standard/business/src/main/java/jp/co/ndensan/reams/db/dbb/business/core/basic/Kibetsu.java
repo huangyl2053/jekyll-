@@ -39,7 +39,7 @@ public class Kibetsu extends ModelBase<KibetsuIdentifier, DbT2003KibetsuEntity, 
     public Kibetsu(FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
-            Decimal 履歴番号,
+            int 履歴番号,
             RString 徴収方法,
             int 期) {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
@@ -129,7 +129,7 @@ public class Kibetsu extends ModelBase<KibetsuIdentifier, DbT2003KibetsuEntity, 
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 

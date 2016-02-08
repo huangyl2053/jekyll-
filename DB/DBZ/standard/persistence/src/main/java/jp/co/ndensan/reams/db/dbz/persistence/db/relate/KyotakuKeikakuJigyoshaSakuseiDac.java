@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3006KyotakuKeikakuJigy
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -50,7 +49,7 @@ public class KyotakuKeikakuJigyoshaSakuseiDac implements IModifiable<DbT3006Kyot
     @Transaction
     public Optional<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity> selectByKey(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号) {
+            Integer 履歴番号) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
@@ -89,7 +88,7 @@ public class KyotakuKeikakuJigyoshaSakuseiDac implements IModifiable<DbT3006Kyot
     @Transaction
     public Optional<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity> select直近居宅給付計画事業者作成(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号) {
+            Integer 履歴番号) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
@@ -100,7 +99,7 @@ public class KyotakuKeikakuJigyoshaSakuseiDac implements IModifiable<DbT3006Kyot
         List<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity> 居宅給付計画事業者作成List = accessor.select().
                 table(DbT3006KyotakuKeikakuJigyoshaSakusei.class).
                 where(and(
-                                eq(DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshano, 被保険者番号),
+                                eq(DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshaNo, 被保険者番号),
                                 eq(DbT3006KyotakuKeikakuJigyoshaSakusei.taishoYM, 対象年月),
                                 eq(DbT3006KyotakuKeikakuJigyoshaSakusei.rirekiNo, 履歴番号))).
                 order(by(DbT3006KyotakuKeikakuJigyoshaSakusei.rirekiNo, Order.DESC)).

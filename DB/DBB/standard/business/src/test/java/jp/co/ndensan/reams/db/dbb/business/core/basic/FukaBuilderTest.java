@@ -4,16 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GaitoHigaitoKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.KazeiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.ChoteiJiyu;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
-import jp.co.ndensan.reams.ur.urz.definition.core.code.FujoShuruiCodeValue;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
@@ -57,7 +51,33 @@ public class FukaBuilderTest extends DbbTestBase {
             FukaEntity.setFukaNendo(賦課年度);
 
             business = new Fuka(FukaEntity);
+
             sut = business.createBuilderForEdit();
+        }
+//TODO Key項目のテストメソッドは削除して下さい。
+
+        @Test
+        public void 戻り値の調定年度は_設定した値と同じ調定年度を返す() {
+            business = sut.set調定年度(DbT2002FukaEntityGenerator.DEFAULT_調定年度).build();
+            assertThat(business.get調定年度(), is(DbT2002FukaEntityGenerator.DEFAULT_調定年度));
+        }
+
+        @Test
+        public void 戻り値の賦課年度は_設定した値と同じ賦課年度を返す() {
+            business = sut.set賦課年度(DbT2002FukaEntityGenerator.DEFAULT_賦課年度).build();
+            assertThat(business.get賦課年度(), is(DbT2002FukaEntityGenerator.DEFAULT_賦課年度));
+        }
+
+        @Test
+        public void 戻り値の通知書番号は_設定した値と同じ通知書番号を返す() {
+            business = sut.set通知書番号(DbT2002FukaEntityGenerator.DEFAULT_通知書番号).build();
+            assertThat(business.get通知書番号(), is(DbT2002FukaEntityGenerator.DEFAULT_通知書番号));
+        }
+
+        @Test
+        public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
+            business = sut.set履歴番号(DbT2002FukaEntityGenerator.DEFAULT_履歴番号).build();
+            assertThat(business.get履歴番号(), is(DbT2002FukaEntityGenerator.DEFAULT_履歴番号));
         }
 
         @Test
@@ -92,8 +112,8 @@ public class FukaBuilderTest extends DbbTestBase {
 
         @Test
         public void 戻り値の資格取得事由は_設定した値と同じ資格取得事由を返す() {
-            business = sut.set資格取得事由(new KaigoShikakuShutokuJiyu(DbT2002FukaEntityGenerator.DEFAULT_資格取得事由)).build();
-            assertThat(business.get資格取得事由().value().value(), is(DbT2002FukaEntityGenerator.DEFAULT_資格取得事由));
+            business = sut.set資格取得事由(DbT2002FukaEntityGenerator.DEFAULT_資格取得事由).build();
+            assertThat(business.get資格取得事由(), is(DbT2002FukaEntityGenerator.DEFAULT_資格取得事由));
         }
 
         @Test
@@ -104,14 +124,14 @@ public class FukaBuilderTest extends DbbTestBase {
 
         @Test
         public void 戻り値の資格喪失事由は_設定した値と同じ資格喪失事由を返す() {
-            business = sut.set資格喪失事由(new KaigoShikakuSoshitsuJiyu(DbT2002FukaEntityGenerator.DEFAULT_資格喪失事由)).build();
-            assertThat(business.get資格喪失事由().value().value(), is(DbT2002FukaEntityGenerator.DEFAULT_資格喪失事由));
+            business = sut.set資格喪失事由(DbT2002FukaEntityGenerator.DEFAULT_資格喪失事由).build();
+            assertThat(business.get資格喪失事由(), is(DbT2002FukaEntityGenerator.DEFAULT_資格喪失事由));
         }
 
         @Test
         public void 戻り値の生活保護扶助種類は_設定した値と同じ生活保護扶助種類を返す() {
-            business = sut.set生活保護扶助種類(new FujoShuruiCodeValue(DbT2002FukaEntityGenerator.DEFAULT_生活保護扶助種類)).build();
-            assertThat(business.get生活保護扶助種類().value().value(), is(DbT2002FukaEntityGenerator.DEFAULT_生活保護扶助種類));
+            business = sut.set生活保護扶助種類(DbT2002FukaEntityGenerator.DEFAULT_生活保護扶助種類).build();
+            assertThat(business.get生活保護扶助種類(), is(DbT2002FukaEntityGenerator.DEFAULT_生活保護扶助種類));
         }
 
         @Test
@@ -146,14 +166,14 @@ public class FukaBuilderTest extends DbbTestBase {
 
         @Test
         public void 戻り値の課税区分は_設定した値と同じ課税区分を返す() {
-            business = sut.set課税区分(KazeiKubun.toValue(DbT2002FukaEntityGenerator.DEFAULT_課税区分)).build();
-            assertThat(business.get課税区分().code(), is(DbT2002FukaEntityGenerator.DEFAULT_課税区分));
+            business = sut.set課税区分(DbT2002FukaEntityGenerator.DEFAULT_課税区分).build();
+            assertThat(business.get課税区分(), is(DbT2002FukaEntityGenerator.DEFAULT_課税区分));
         }
 
         @Test
         public void 戻り値の世帯課税区分は_設定した値と同じ世帯課税区分を返す() {
-            business = sut.set世帯課税区分(KazeiKubun.toValue(DbT2002FukaEntityGenerator.DEFAULT_世帯課税区分)).build();
-            assertThat(business.get世帯課税区分().code(), is(DbT2002FukaEntityGenerator.DEFAULT_世帯課税区分));
+            business = sut.set世帯課税区分(DbT2002FukaEntityGenerator.DEFAULT_世帯課税区分).build();
+            assertThat(business.get世帯課税区分(), is(DbT2002FukaEntityGenerator.DEFAULT_世帯課税区分));
         }
 
         @Test
@@ -230,26 +250,26 @@ public class FukaBuilderTest extends DbbTestBase {
 
         @Test
         public void 戻り値の調定事由1は_設定した値と同じ調定事由1を返す() {
-            business = sut.set調定事由1(new ChoteiJiyu(DbT2002FukaEntityGenerator.DEFAULT_調定事由1)).build();
-            assertThat(business.get調定事由1().value().value(), is(DbT2002FukaEntityGenerator.DEFAULT_調定事由1));
+            business = sut.set調定事由1(DbT2002FukaEntityGenerator.DEFAULT_調定事由1).build();
+            assertThat(business.get調定事由1(), is(DbT2002FukaEntityGenerator.DEFAULT_調定事由1));
         }
 
         @Test
         public void 戻り値の調定事由2は_設定した値と同じ調定事由2を返す() {
-            business = sut.set調定事由2(new ChoteiJiyu(DbT2002FukaEntityGenerator.DEFAULT_調定事由2)).build();
-            assertThat(business.get調定事由2().value().value(), is(DbT2002FukaEntityGenerator.DEFAULT_調定事由2));
+            business = sut.set調定事由2(DbT2002FukaEntityGenerator.DEFAULT_調定事由2).build();
+            assertThat(business.get調定事由2(), is(DbT2002FukaEntityGenerator.DEFAULT_調定事由2));
         }
 
         @Test
         public void 戻り値の調定事由3は_設定した値と同じ調定事由3を返す() {
-            business = sut.set調定事由3(new ChoteiJiyu(DbT2002FukaEntityGenerator.DEFAULT_調定事由3)).build();
-            assertThat(business.get調定事由3().value().value(), is(DbT2002FukaEntityGenerator.DEFAULT_調定事由3));
+            business = sut.set調定事由3(DbT2002FukaEntityGenerator.DEFAULT_調定事由3).build();
+            assertThat(business.get調定事由3(), is(DbT2002FukaEntityGenerator.DEFAULT_調定事由3));
         }
 
         @Test
         public void 戻り値の調定事由4は_設定した値と同じ調定事由4を返す() {
-            business = sut.set調定事由4(new ChoteiJiyu(DbT2002FukaEntityGenerator.DEFAULT_調定事由4)).build();
-            assertThat(business.get調定事由4().value().value(), is(DbT2002FukaEntityGenerator.DEFAULT_調定事由4));
+            business = sut.set調定事由4(DbT2002FukaEntityGenerator.DEFAULT_調定事由4).build();
+            assertThat(business.get調定事由4(), is(DbT2002FukaEntityGenerator.DEFAULT_調定事由4));
         }
 
         @Test
@@ -302,8 +322,8 @@ public class FukaBuilderTest extends DbbTestBase {
 
         @Test
         public void 戻り値の境界層区分は_設定した値と同じ境界層区分を返す() {
-            business = sut.set境界層区分(GaitoHigaitoKubun.toValue(DbT2002FukaEntityGenerator.DEFAULT_境界層区分)).build();
-            assertThat(business.get境界層区分().getCode(), is(DbT2002FukaEntityGenerator.DEFAULT_境界層区分));
+            business = sut.set境界層区分(DbT2002FukaEntityGenerator.DEFAULT_境界層区分).build();
+            assertThat(business.get境界層区分(), is(DbT2002FukaEntityGenerator.DEFAULT_境界層区分));
         }
 
         @Test

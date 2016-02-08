@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.relate;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.relate.KyotakuKeikakuJigyoshaSakuseiDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
@@ -39,7 +38,7 @@ public class KyotakuKeikakuJigyoshaSakuseiDacTest {
     private static final HihokenshaNo 被保険者番号2 = new HihokenshaNo("987654");
     private static final FlexibleYearMonth 対象年月1 = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_対象年月;
     private static final FlexibleYearMonth 対象年月2 = new FlexibleDate("20141201").getYearMonth();
-    private static final Decimal 履歴番号1 = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_履歴番号;
+    private static final Integer 履歴番号1 = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_履歴番号;
     private static final Decimal 履歴番号2 = new Decimal(2);
 
     @BeforeClass
@@ -74,7 +73,7 @@ public class KyotakuKeikakuJigyoshaSakuseiDacTest {
         // TODO 個別のMapperのテストクラスで項目単位の転記処理を確認しているため、全項目について確認する必要はありません。
         @Test
         public void データが見つかる検索条件を渡すと_居宅給付計画事業者作成モデル返す() {
-            assertThat(sut.selectByKey(被保険者番号1, 対象年月1, 履歴番号1).get().getHihokenshano(), is(被保険者番号1));
+            assertThat(sut.selectByKey(被保険者番号1, 対象年月1, 履歴番号1).get().getHihokenshaNo(), is(被保険者番号1));
         }
 
         // データが見つからない値を指定するように修正してください。
@@ -92,7 +91,7 @@ public class KyotakuKeikakuJigyoshaSakuseiDacTest {
             IItemList<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity> modelList = sut.selectAll();
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(modelList.toList().get(0).getHihokenshano(), is(被保険者番号1));
+            assertThat(modelList.toList().get(0).getHihokenshaNo(), is(被保険者番号1));
         }
 
         @Test
@@ -125,7 +124,7 @@ public class KyotakuKeikakuJigyoshaSakuseiDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_居宅給付計画事業者作成モデル返す() {
-            assertThat(sut.select直近居宅給付計画事業者作成(被保険者番号1, 対象年月1, 履歴番号1).get().getHihokenshano(), is(被保険者番号1));
+            assertThat(sut.select直近居宅給付計画事業者作成(被保険者番号1, 対象年月1, 履歴番号1).get().getHihokenshaNo(), is(被保険者番号1));
         }
 
         // データが見つからない値を指定するように修正してください。
@@ -213,9 +212,9 @@ public class KyotakuKeikakuJigyoshaSakuseiDacTest {
 
         public static void insertDbT3006(HihokenshaNo 被保険者番号,
                 FlexibleYearMonth 対象年月,
-                Decimal 履歴番号) {
+                Integer 履歴番号) {
             DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.createDbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
-            entity.setHihokenshano(被保険者番号);
+            entity.setHihokenshaNo(被保険者番号);
             entity.setTaishoYM(対象年月);
             entity.setRirekiNo(履歴番号);
             居宅給付計画事業者作成Dac.save(entity);

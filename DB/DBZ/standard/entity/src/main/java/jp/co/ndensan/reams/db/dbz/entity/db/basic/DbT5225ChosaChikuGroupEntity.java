@@ -1,22 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 調査地区グループマスタテーブルのエンティティクラスです。
  */
 public class DbT5225ChosaChikuGroupEntity extends DbTableEntityBase<DbT5225ChosaChikuGroupEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5225ChosaChikuGroup");
 
@@ -31,15 +32,15 @@ public class DbT5225ChosaChikuGroupEntity extends DbTableEntityBase<DbT5225Chosa
     @PrimaryKey
     private Code chosaChikuGroupCode;
     @PrimaryKey
-    private Code chosaChikuCode;
+    private Code chosachikucode;
     @PrimaryKey
     private LasdecCode shichosonCode;
-    private RString chosaChikuGroupName;
+    private RString chosachikugroupname;
     private int yusenNo;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -48,7 +49,7 @@ public class DbT5225ChosaChikuGroupEntity extends DbTableEntityBase<DbT5225Chosa
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -57,7 +58,7 @@ public class DbT5225ChosaChikuGroupEntity extends DbTableEntityBase<DbT5225Chosa
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -66,16 +67,17 @@ public class DbT5225ChosaChikuGroupEntity extends DbTableEntityBase<DbT5225Chosa
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -86,7 +88,7 @@ public class DbT5225ChosaChikuGroupEntity extends DbTableEntityBase<DbT5225Chosa
      * 調査地区グループコードのgetメソッドです。
      * <br/>
      * <br/>Code（DBE：5004）
-     *
+     * 
      * @return 調査地区グループコード
      */
     public Code getChosaChikuGroupCode() {
@@ -97,10 +99,10 @@ public class DbT5225ChosaChikuGroupEntity extends DbTableEntityBase<DbT5225Chosa
      * 調査地区グループコードのsetメソッドです。
      * <br/>
      * <br/>Code（DBE：5004）
-     *
+     * 
      * @param chosaChikuGroupCode 調査地区グループコード
      */
-    public void setChosaChikuGroupCode(Code chosaChikuGroupCode) {
+    public void setChosaChikuGroupCode(@Nonnull Code chosaChikuGroupCode) {
         this.chosaChikuGroupCode = chosaChikuGroupCode;
     }
 
@@ -108,27 +110,27 @@ public class DbT5225ChosaChikuGroupEntity extends DbTableEntityBase<DbT5225Chosa
      * 調査地区コードのgetメソッドです。
      * <br/>
      * <br/>Code（DBE：5002）
-     *
+     * 
      * @return 調査地区コード
      */
-    public Code getChosaChikuCode() {
-        return chosaChikuCode;
+    public Code getChosachikucode() {
+        return chosachikucode;
     }
 
     /**
      * 調査地区コードのsetメソッドです。
      * <br/>
      * <br/>Code（DBE：5002）
-     *
-     * @param chosaChikuCode 調査地区コード
+     * 
+     * @param chosachikucode 調査地区コード
      */
-    public void setChosaChikuCode(Code chosaChikuCode) {
-        this.chosaChikuCode = chosaChikuCode;
+    public void setChosachikucode(@Nonnull Code chosachikucode) {
+        this.chosachikucode = chosachikucode;
     }
 
     /**
      * 市町村コードのgetメソッドです。
-     *
+     * 
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
@@ -137,34 +139,34 @@ public class DbT5225ChosaChikuGroupEntity extends DbTableEntityBase<DbT5225Chosa
 
     /**
      * 市町村コードのsetメソッドです。
-     *
+     * 
      * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(LasdecCode shichosonCode) {
+    public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
     /**
      * 調査地区グループ名称のgetメソッドです。
-     *
+     * 
      * @return 調査地区グループ名称
      */
-    public RString getChosaChikuGroupName() {
-        return chosaChikuGroupName;
+    public RString getChosachikugroupname() {
+        return chosachikugroupname;
     }
 
     /**
      * 調査地区グループ名称のsetメソッドです。
-     *
-     * @param chosaChikuGroupName 調査地区グループ名称
+     * 
+     * @param chosachikugroupname 調査地区グループ名称
      */
-    public void setChosaChikuGroupName(RString chosaChikuGroupName) {
-        this.chosaChikuGroupName = chosaChikuGroupName;
+    public void setChosachikugroupname(@Nonnull RString chosachikugroupname) {
+        this.chosachikugroupname = chosachikugroupname;
     }
 
     /**
      * 優先番号のgetメソッドです。
-     *
+     * 
      * @return 優先番号
      */
     public int getYusenNo() {
@@ -173,18 +175,19 @@ public class DbT5225ChosaChikuGroupEntity extends DbTableEntityBase<DbT5225Chosa
 
     /**
      * 優先番号のsetメソッドです。
-     *
+     * 
      * @param yusenNo 優先番号
      */
-    public void setYusenNo(int yusenNo) {
+    public void setYusenNo(@Nonnull int yusenNo) {
         this.yusenNo = yusenNo;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT5225ChosaChikuGroupEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT5225ChosaChikuGroupEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5225ChosaChikuGroupEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5225ChosaChikuGroupEntity other) {
@@ -194,7 +197,7 @@ public class DbT5225ChosaChikuGroupEntity extends DbTableEntityBase<DbT5225Chosa
         if (!Objects.equals(this.chosaChikuGroupCode, other.chosaChikuGroupCode)) {
             return false;
         }
-        if (!Objects.equals(this.chosaChikuCode, other.chosaChikuCode)) {
+        if (!Objects.equals(this.chosachikucode, other.chosachikucode)) {
             return false;
         }
         if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
@@ -209,21 +212,21 @@ public class DbT5225ChosaChikuGroupEntity extends DbTableEntityBase<DbT5225Chosa
     @Override
     public void shallowCopy(DbT5225ChosaChikuGroupEntity entity) {
         this.chosaChikuGroupCode = entity.chosaChikuGroupCode;
-        this.chosaChikuCode = entity.chosaChikuCode;
+        this.chosachikucode = entity.chosachikucode;
         this.shichosonCode = entity.shichosonCode;
-        this.chosaChikuGroupName = entity.chosaChikuGroupName;
+        this.chosachikugroupname = entity.chosachikugroupname;
         this.yusenNo = entity.yusenNo;
     }
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(chosaChikuGroupCode, chosaChikuCode, shichosonCode, chosaChikuGroupName, yusenNo);
+        return super.toMd5(chosaChikuGroupCode, chosachikucode, shichosonCode, chosachikugroupname, yusenNo);
     }
 
 // </editor-fold>
+
 }

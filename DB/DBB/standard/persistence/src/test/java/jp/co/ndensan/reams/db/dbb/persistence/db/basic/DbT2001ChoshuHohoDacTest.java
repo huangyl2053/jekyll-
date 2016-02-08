@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -23,6 +22,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -31,6 +31,7 @@ import org.junit.runner.RunWith;
  * {@link DbT2001ChoshuHohoDac}のテストです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class DbT2001ChoshuHohoDacTest extends DbbTestDacBase {
 
     private static final RString キー_02 = new RString("02");
@@ -197,7 +198,7 @@ public class DbT2001ChoshuHohoDacTest extends DbbTestDacBase {
         public static void insert(
                 FlexibleYear 賦課年度,
                 HihokenshaNo 被保険者番号,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT2001ChoshuHohoEntity entity = DbT2001ChoshuHohoEntityGenerator.createDbT2001ChoshuHohoEntity();
             entity.setFukaNendo(賦課年度);
             entity.setHihokenshaNo(被保険者番号);

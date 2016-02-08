@@ -164,7 +164,7 @@ public class HihokenshaDaichoTest extends DbzTestBase {
 
         @Test
         public void get資格取得事由コードは_entityが持つ資格取得事由コードを返す() {
-            assertThat(sut.get資格取得事由コード(), is(HihokenshaDaichoEntity.getShikakuShutokuJiyuCode().getColumnValue().getColumnValue()));
+            assertThat(sut.get資格取得事由コード(), is(HihokenshaDaichoEntity.getShikakuShutokuJiyuCode()));
         }
 
         @Test
@@ -189,7 +189,7 @@ public class HihokenshaDaichoTest extends DbzTestBase {
 
         @Test
         public void get資格喪失事由コードは_entityが持つ資格喪失事由コードを返す() {
-            assertThat(sut.get資格喪失事由コード(), is(HihokenshaDaichoEntity.getShikakuSoshitsuJiyuCode().getColumnValue().getColumnValue()));
+            assertThat(sut.get資格喪失事由コード(), is(HihokenshaDaichoEntity.getShikakuSoshitsuJiyuCode()));
         }
 
         @Test
@@ -204,7 +204,7 @@ public class HihokenshaDaichoTest extends DbzTestBase {
 
         @Test
         public void get資格変更事由コードは_entityが持つ資格変更事由コードを返す() {
-            assertThat(sut.get資格変更事由コード(), is(HihokenshaDaichoEntity.getShikakuHenkoJiyuCode().getColumnValue().getColumnValue()));
+            assertThat(sut.get資格変更事由コード(), is(HihokenshaDaichoEntity.getShikakuHenkoJiyuCode()));
         }
 
         @Test
@@ -219,7 +219,7 @@ public class HihokenshaDaichoTest extends DbzTestBase {
 
         @Test
         public void get住所地特例適用事由コードは_entityが持つ住所地特例適用事由コードを返す() {
-            assertThat(sut.get住所地特例適用事由コード(), is(HihokenshaDaichoEntity.getJushochitokureiTekiyoJiyuCode().getColumnValue().getColumnValue()));
+            assertThat(sut.get住所地特例適用事由コード(), is(HihokenshaDaichoEntity.getJushochitokureiTekiyoJiyuCode()));
         }
 
         @Test
@@ -234,7 +234,7 @@ public class HihokenshaDaichoTest extends DbzTestBase {
 
         @Test
         public void get住所地特例解除事由コードは_entityが持つ住所地特例解除事由コードを返す() {
-            assertThat(sut.get住所地特例解除事由コード(), is(HihokenshaDaichoEntity.getJushochitokureiKaijoJiyuCode().getColumnValue().getColumnValue()));
+            assertThat(sut.get住所地特例解除事由コード(), is(HihokenshaDaichoEntity.getJushochitokureiKaijoJiyuCode()));
         }
 
         @Test

@@ -6,11 +6,11 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaicho;
-import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaicho.edaban;
-import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaicho.jukyuShinseiJiyu;
-import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaicho.shichosonCode;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.edaban;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.jukyuShinseiJiyu;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.shichosonCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4025ShiharaiHohoHenkoGengaku.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4025ShiharaiHohoHenkoGengaku.rirekiNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;

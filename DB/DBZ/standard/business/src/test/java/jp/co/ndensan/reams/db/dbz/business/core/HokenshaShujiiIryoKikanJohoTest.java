@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Shuj
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4911ShujiiIryoKikanJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -89,7 +88,12 @@ public class HokenshaShujiiIryoKikanJohoTest extends DbdTestBase {
 
         @Test
         public void 戻り値の代表者名は_設定した値と同じ代表者名を返す() {
-            assertThat(sut.get代表者名(), is(new AtenaMeisho("代表者名")));
+            assertThat(sut.get代表者名(), is(new RString("代表者名")));
+        }
+
+        @Test
+        public void 戻り値の代表者名カナは_設定した値と同じ代表者名カナを返す() {
+            assertThat(sut.get代表者名カナ(), is(new RString("代表者名カナ")));
         }
 
         @Test
@@ -202,8 +206,14 @@ public class HokenshaShujiiIryoKikanJohoTest extends DbdTestBase {
 
         @Test
         public void setDaihyoshaNameで設定した値を_生成されたShujiiIryoKikanJohoJukyuも保持する() {
-            HokenshaShujiiIryoKikanJoho result = HokenshaShujiiIryoKikanJoho.newBuilder().setDaihyoshaName(new AtenaMeisho("代表者名")).build();
+            HokenshaShujiiIryoKikanJoho result = HokenshaShujiiIryoKikanJoho.newBuilder().setDaihyoshaName(new RString("代表者名")).build();
             assertThat(result.get代表者名(), is(DbT4911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_代表者名));
+        }
+
+        @Test
+        public void setDaihyoshaNameKanaで設定した値を_生成されたShujiiIryoKikanJohoJukyuも保持する() {
+            HokenshaShujiiIryoKikanJoho result = HokenshaShujiiIryoKikanJoho.newBuilder().setDaihyoshaNameKana(new RString("代表者名カナ")).build();
+            assertThat(result.get代表者名カナ(), is(DbT4911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_代表者名カナ));
         }
 
         @Test

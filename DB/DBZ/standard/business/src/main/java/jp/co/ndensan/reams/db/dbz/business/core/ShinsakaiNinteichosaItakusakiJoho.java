@@ -6,17 +6,16 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 認定調査委託先情報のビジネスクラスです。
@@ -40,14 +39,14 @@ public class ShinsakaiNinteichosaItakusakiJoho implements Serializable, INinteic
         this.entity = entity;
     }
 
-    /**
-     * DbT5910NinteichosaItakusakiJohoEntityを返します。
-     *
-     * @return DbT5910NinteichosaItakusakiJohoEntity
-     */
-    public DbT5910NinteichosaItakusakiJohoEntity getEntity() {
-        return entity;
-    }
+//    /**
+//     * DbT5910NinteichosaItakusakiJohoEntityを返します。
+//     *
+//     * @return DbT5910NinteichosaItakusakiJohoEntity
+//     */
+//    public DbT5910NinteichosaItakusakiJohoEntity getEntity() {
+//        return entity;
+//    }
 
     /**
      * 市町村コードを返します。
@@ -59,15 +58,15 @@ public class ShinsakaiNinteichosaItakusakiJoho implements Serializable, INinteic
         return entity.getShichosonCode();
     }
 
-    /**
-     * 認定調査委託先コードを返します。
-     *
-     * @return 認定調査委託先コード
-     */
-    @Override
-    public ChosaItakusakiCode get認定調査委託先コード() {
-        return entity.getNinteichosaItakusakiCode();
-    }
+//    /**
+//     * 認定調査委託先コードを返します。
+//     *
+//     * @return 認定調査委託先コード
+//     */
+//    @Override
+//    public ChosaItakusakiCode get認定調査委託先コード() {
+//        return entity.getNinteichosaItakusakiCode();
+//    }
 
     /**
      * 事業者番号を返します。
@@ -145,8 +144,18 @@ public class ShinsakaiNinteichosaItakusakiJoho implements Serializable, INinteic
      * @return 代表者名
      */
     @Override
-    public AtenaMeisho get代表者名() {
+    public RString get代表者名() {
         return entity.getDaihyoshaName();
+    }
+
+    /**
+     * 代表者名カナを返します。
+     *
+     * @return 代表者名カナ
+     */
+    @Override
+    public RString get代表者名カナ() {
+        return entity.getDaihyoshaNameKana();
     }
 
     /**
@@ -157,6 +166,16 @@ public class ShinsakaiNinteichosaItakusakiJoho implements Serializable, INinteic
     @Override
     public RString get調査委託区分() {
         return entity.getChosaItakuKubun();
+    }
+
+    /**
+     * 特定調査員表示フラグを返します。
+     *
+     * @return 特定調査員表示フラグ
+     */
+    @Override
+    public Boolean get特定調査員表示フラグ() {
+        return entity.getTokuteiChosainDisplayFlag();
     }
 
     /**
@@ -347,7 +366,7 @@ public class ShinsakaiNinteichosaItakusakiJoho implements Serializable, INinteic
         @Override
         public Builder setNinteichosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
             Objects.requireNonNull(ninteichosaItakusakiCode);
-            this.entity.setNinteichosaItakusakiCode(ninteichosaItakusakiCode);
+           // this.entity.setNinteichosaItakusakiCode(ninteichosaItakusakiCode);
             return this;
         }
 
@@ -449,9 +468,22 @@ public class ShinsakaiNinteichosaItakusakiJoho implements Serializable, INinteic
          * @return builder
          */
         @Override
-        public Builder setDaihyoshaName(AtenaMeisho daihyoshaName) {
+        public Builder setDaihyoshaName(RString daihyoshaName) {
             Objects.requireNonNull(daihyoshaName);
             this.entity.setDaihyoshaName(daihyoshaName);
+            return this;
+        }
+
+        /**
+         * daihyoshaNameKanaを設定します。
+         *
+         * @param daihyoshaNameKana 代表者名カナ
+         * @return builder
+         */
+        @Override
+        public Builder setDaihyoshaNameKana(RString daihyoshaNameKana) {
+            Objects.requireNonNull(daihyoshaNameKana);
+            this.entity.setDaihyoshaNameKana(daihyoshaNameKana);
             return this;
         }
 
@@ -465,6 +497,19 @@ public class ShinsakaiNinteichosaItakusakiJoho implements Serializable, INinteic
         public Builder setChosaItakuKubun(RString chosaItakuKubun) {
             Objects.requireNonNull(chosaItakuKubun);
             this.entity.setChosaItakuKubun(chosaItakuKubun);
+            return this;
+        }
+
+        /**
+         * TokuteiChosainDisplayFlagを設定します。
+         *
+         * @param TokuteiChosainDisplayFlag 特定調査員表示フラグ
+         * @return builder
+         */
+        @Override
+        public Builder setTokuteiChosainDisplayFlag(Boolean TokuteiChosainDisplayFlag) {
+            Objects.requireNonNull(TokuteiChosainDisplayFlag);
+            this.entity.setTokuteiChosainDisplayFlag(TokuteiChosainDisplayFlag);
             return this;
         }
 

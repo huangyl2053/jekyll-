@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5913ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -104,7 +104,8 @@ public class ChosainJohoBuilder {
      * @return {@link ChosainJohoBuilder}
      */
     public ChosainJohoBuilder set調査可能人数_月(int 調査可能人数_月) {
-        requireNonNull(調査可能人数_月, UrSystemErrorMessages.値がnull.getReplacedMessage("調査可能人数_月"));
+        requireNonNull(調査可能人数_月, UrSystemErrorMessages.値がnull.getReplacedMessage("調査可能人数／月")
+        );
         entity.setChosaKanoNinzuPerMonth(調査可能人数_月);
         return this;
     }

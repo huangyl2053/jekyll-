@@ -17,34 +17,35 @@ public final class FufukuMoshitateMapperParameter {
 
 // TODO 主キー型、主キー名を適切に置換してください。
 // TODO 主キーの数が足りない場合、処理を追加してください。
-    private final ShoKisaiHokenshaNo 主キー1;
+//    private final ShoKisaiHokenshaNo 主キー1;
     private final ShikibetsuCode 主キー2;
 //    private HihokenshaNo 主キー3;
 //    private FlexibleDate 主キー4;
 
-    private final boolean uses主キー1;
+//    private final boolean uses主キー1;
     private final boolean uses主キー2;
 
 // TODO 用途に応じてアクセス修飾子を修正してください。
     /**
      * コンストラクタです。
      *
-     * @param 主キー1 主キー1
+// * @param 主キー1 主キー1
+     *
      * @param 主キー2 主キー2
      * @param uses主キー1 uses主キー1
      * @param uses主キー2 uses主キー2
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     private FufukuMoshitateMapperParameter(
-            @lombok.NonNull ShoKisaiHokenshaNo 主キー1,
+            //            @lombok.NonNull ShoKisaiHokenshaNo 主キー1,
             @lombok.NonNull ShikibetsuCode 主キー2,
-            boolean uses主キー1,
+            //            boolean uses主キー1,
             boolean uses主キー2) {
 
-        this.主キー1 = 主キー1;
+//        this.主キー1 = 主キー1;
         this.主キー2 = 主キー2;
 
-        this.uses主キー1 = uses主キー1;
+//        this.uses主キー1 = uses主キー1;
         this.uses主キー2 = uses主キー2;
     }
 
@@ -52,25 +53,26 @@ public final class FufukuMoshitateMapperParameter {
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param 主キー1 主キー1
+// * @param 主キー1 主キー1
+     *
      * @param 主キー2 主キー2
      * @return 身体手帳検索パラメータ
      */
     public static FufukuMoshitateMapperParameter createSelectByKeyParam(
-            ShoKisaiHokenshaNo 主キー1,
+            //            ShoKisaiHokenshaNo 主キー1,
             ShikibetsuCode 主キー2) {
-        return new FufukuMoshitateMapperParameter(主キー1, 主キー2, true, true);
+        return new FufukuMoshitateMapperParameter(主キー2, true);
     }
 
     /**
      * 一覧検索用のパラメータを生成します。
      *
-     * @param 主キー1 主キー1
+     * @param 主キー2 主キー2
      * @return 身体手帳検索パラメータ
      */
     public static FufukuMoshitateMapperParameter createSelectListParam(
-            ShoKisaiHokenshaNo 主キー1) {
-        return new FufukuMoshitateMapperParameter(主キー1, ShikibetsuCode.EMPTY, true, false);
+            ShikibetsuCode 主キー2) {
+        return new FufukuMoshitateMapperParameter(主キー2, false);
     }
 
     /**
@@ -78,9 +80,9 @@ public final class FufukuMoshitateMapperParameter {
      *
      * @return 主キー1
      */
-    public ShoKisaiHokenshaNo get主キー1() {
-        return 主キー1;
-    }
+//    public ShoKisaiHokenshaNo get主キー1() {
+//        return 主キー1;
+//    }
 
     /**
      * get主キー2を取得します。
@@ -114,9 +116,9 @@ public final class FufukuMoshitateMapperParameter {
      *
      * @return uses主キー1
      */
-    public boolean isUses主キー1() {
-        return uses主キー1;
-    }
+//    public boolean isUses主キー1() {
+//        return uses主キー1;
+//    }
 
     /**
      * isUses主キー2を取得します。

@@ -136,7 +136,7 @@ public class IKaigoServiceShuruiMapperTest {
                 KaigoServiceShuruiCode 主キー1,
                 FlexibleYearMonth 主キー2) {
             DbT7131KaigoServiceNaiyouEntity entity = DbT7131KaigoServiceNaiyouEntityGenerator.createDbT7131KaigoServiceNaiyouEntity();
-            entity.setServiceShuruiCode(主キー1);
+            entity.setServiceShuruiCd(主キー1);
             entity.setTeikyoKaishiYM(主キー2);
             entity.setState(EntityDataState.Added);
             介護サービス内容Dac.save(entity);

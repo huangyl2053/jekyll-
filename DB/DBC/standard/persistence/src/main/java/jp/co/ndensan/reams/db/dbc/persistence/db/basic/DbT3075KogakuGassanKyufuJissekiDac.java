@@ -7,15 +7,17 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJisseki;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJisseki.*;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJisseki.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJisseki.kokanJohoShikibetsuNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJisseki.seiriNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJisseki.shikyuShinseiSeiriNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissekiEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -38,7 +40,6 @@ public class DbT3075KogakuGassanKyufuJissekiDac implements ISaveable<DbT3075Koga
      * @param 被保険者番号 HihokenshaNo
      * @param 支給申請書整理番号 ShikyuShinseiSeiriNo
      * @param 整理番号 SeiriNo
-     * @param 履歴番号 RirekiNo
      * @return DbT3075KogakuGassanKyufuJissekiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -47,13 +48,11 @@ public class DbT3075KogakuGassanKyufuJissekiDac implements ISaveable<DbT3075Koga
             KokanShikibetsuNo 交換情報識別番号,
             HihokenshaNo 被保険者番号,
             RString 支給申請書整理番号,
-            RString 整理番号,
-            Decimal 履歴番号) throws NullPointerException {
+            RString 整理番号) throws NullPointerException {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -63,8 +62,7 @@ public class DbT3075KogakuGassanKyufuJissekiDac implements ISaveable<DbT3075Koga
                                 eq(kokanJohoShikibetsuNo, 交換情報識別番号),
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(shikyuShinseiSeiriNo, 支給申請書整理番号),
-                                eq(seiriNo, 整理番号),
-                                eq(rirekiNo, 履歴番号))).
+                                eq(seiriNo, 整理番号))).
                 toObject(DbT3075KogakuGassanKyufuJissekiEntity.class);
     }
 

@@ -1,23 +1,25 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 
 /**
  * DbT1006KyokaisoGaitoshaの項目定義クラスです
  *
  */
 public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006KyokaisoGaitoshaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1006KyokaisoGaitosha");
@@ -33,7 +35,9 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
+    @PrimaryKey
+    private int linkNo;
     private FlexibleDate tekiyoKaishiYMD;
     private FlexibleDate tekiyoShuryoYMD;
     private FlexibleDate kyokaisoSochiKetteiYMD;
@@ -48,6 +52,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
     private RString kogakuServicehiJogengakuGengakuGaitoFlag;
     private Decimal kogakuServicehiJogengakuGengakugoJogengaku;
     private RString hokenryoNofuGengakuFlag;
+    private boolean logicalDeletedFlag;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -108,7 +113,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -117,7 +122,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
@@ -126,8 +131,26 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(@Nonnull int rirekiNo) {
         this.rirekiNo = rirekiNo;
+    }
+
+    /**
+     * リンク番号のgetメソッドです。
+     *
+     * @return リンク番号
+     */
+    public int getLinkNo() {
+        return linkNo;
+    }
+
+    /**
+     * リンク番号のsetメソッドです。
+     *
+     * @param linkNo リンク番号
+     */
+    public void setLinkNo(@Nonnull int linkNo) {
+        this.linkNo = linkNo;
     }
 
     /**
@@ -144,7 +167,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @param tekiyoKaishiYMD 適用開始年月日
      */
-    public void setTekiyoKaishiYMD(FlexibleDate tekiyoKaishiYMD) {
+    public void setTekiyoKaishiYMD(@Nonnull FlexibleDate tekiyoKaishiYMD) {
         this.tekiyoKaishiYMD = tekiyoKaishiYMD;
     }
 
@@ -153,6 +176,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @return 適用終了年月日
      */
+    @CheckForNull
     public FlexibleDate getTekiyoShuryoYMD() {
         return tekiyoShuryoYMD;
     }
@@ -180,7 +204,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @param kyokaisoSochiKetteiYMD 境界層措置決定年月日
      */
-    public void setKyokaisoSochiKetteiYMD(FlexibleDate kyokaisoSochiKetteiYMD) {
+    public void setKyokaisoSochiKetteiYMD(@Nonnull FlexibleDate kyokaisoSochiKetteiYMD) {
         this.kyokaisoSochiKetteiYMD = kyokaisoSochiKetteiYMD;
     }
 
@@ -198,7 +222,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @param kyuufugakuGengakuKisaiKiajoFlag 給付額減額記載解除フラグ
      */
-    public void setKyuufugakuGengakuKisaiKiajoFlag(RString kyuufugakuGengakuKisaiKiajoFlag) {
+    public void setKyuufugakuGengakuKisaiKiajoFlag(@Nonnull RString kyuufugakuGengakuKisaiKiajoFlag) {
         this.kyuufugakuGengakuKisaiKiajoFlag = kyuufugakuGengakuKisaiKiajoFlag;
     }
 
@@ -207,6 +231,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @return 標準負担額額該当フラグ
      */
+    @CheckForNull
     public RString getHyojunFutanGengakuGaitoFlag() {
         return hyojunFutanGengakuGaitoFlag;
     }
@@ -225,6 +250,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @return 標準負担軽減後負担額
      */
+    @CheckForNull
     public Decimal getHyojunFutanKeigengoFutangaku() {
         return hyojunFutanKeigengoFutangaku;
     }
@@ -252,7 +278,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @param kyojuhinadoFutangakugengakuGaitoFlag 居住費等負担額減額該当フラグ
      */
-    public void setKyojuhinadoFutangakugengakuGaitoFlag(RString kyojuhinadoFutangakugengakuGaitoFlag) {
+    public void setKyojuhinadoFutangakugengakuGaitoFlag(@Nonnull RString kyojuhinadoFutangakugengakuGaitoFlag) {
         this.kyojuhinadoFutangakugengakuGaitoFlag = kyojuhinadoFutangakugengakuGaitoFlag;
     }
 
@@ -261,6 +287,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @return 居住費軽減後居室種類コード
      */
+    @CheckForNull
     public RString getKyojuhiKeigengoKyoshitsuShuruiCode() {
         return kyojuhiKeigengoKyoshitsuShuruiCode;
     }
@@ -279,6 +306,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @return 居住費軽減後負担額
      */
+    @CheckForNull
     public Decimal getKyojuhiKeigengoHutangaku() {
         return kyojuhiKeigengoHutangaku;
     }
@@ -306,7 +334,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @param shokuhiKeigengoHutangakuGaitoFlag 食費負担額減額該当フラグ
      */
-    public void setShokuhiKeigengoHutangakuGaitoFlag(RString shokuhiKeigengoHutangakuGaitoFlag) {
+    public void setShokuhiKeigengoHutangakuGaitoFlag(@Nonnull RString shokuhiKeigengoHutangakuGaitoFlag) {
         this.shokuhiKeigengoHutangakuGaitoFlag = shokuhiKeigengoHutangakuGaitoFlag;
     }
 
@@ -315,6 +343,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @return 食費軽減後負担額
      */
+    @CheckForNull
     public Decimal getShokuhiKeigengoHutangaku() {
         return shokuhiKeigengoHutangaku;
     }
@@ -342,7 +371,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @param kogakuServicehiJogengakuGengakuGaitoFlag 高額ｻｰﾋﾞｽ費上限額減額該当フラグ
      */
-    public void setKogakuServicehiJogengakuGengakuGaitoFlag(RString kogakuServicehiJogengakuGengakuGaitoFlag) {
+    public void setKogakuServicehiJogengakuGengakuGaitoFlag(@Nonnull RString kogakuServicehiJogengakuGengakuGaitoFlag) {
         this.kogakuServicehiJogengakuGengakuGaitoFlag = kogakuServicehiJogengakuGengakuGaitoFlag;
     }
 
@@ -351,6 +380,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @return 高額ｻｰﾋﾞｽ費減額後上限額
      */
+    @CheckForNull
     public Decimal getKogakuServicehiJogengakuGengakugoJogengaku() {
         return kogakuServicehiJogengakuGengakugoJogengaku;
     }
@@ -378,15 +408,34 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @param hokenryoNofuGengakuFlag 保険料納付減額フラグ
      */
-    public void setHokenryoNofuGengakuFlag(RString hokenryoNofuGengakuFlag) {
+    public void setHokenryoNofuGengakuFlag(@Nonnull RString hokenryoNofuGengakuFlag) {
         this.hokenryoNofuGengakuFlag = hokenryoNofuGengakuFlag;
+    }
+
+    /**
+     * 論理削除フラグのgetメソッドです。
+     *
+     * @return 論理削除フラグ
+     */
+    @CheckForNull
+    public boolean getLogicalDeletedFlag() {
+        return logicalDeletedFlag;
+    }
+
+    /**
+     * 論理削除フラグのsetメソッドです。
+     *
+     * @param logicalDeletedFlag 論理削除フラグ
+     */
+    public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
+        this.logicalDeletedFlag = logicalDeletedFlag;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT1006KyokaisoGaitoshaEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT1006KyokaisoGaitoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -400,6 +449,9 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
         if (this.rirekiNo != other.rirekiNo) {
             return false;
         }
+        if (this.linkNo != other.linkNo) {
+            return false;
+        }
         return true;
     }
 
@@ -410,6 +462,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
     public void shallowCopy(DbT1006KyokaisoGaitoshaEntity entity) {
         this.hihokenshaNo = entity.hihokenshaNo;
         this.rirekiNo = entity.rirekiNo;
+        this.linkNo = entity.linkNo;
         this.tekiyoKaishiYMD = entity.tekiyoKaishiYMD;
         this.tekiyoShuryoYMD = entity.tekiyoShuryoYMD;
         this.kyokaisoSochiKetteiYMD = entity.kyokaisoSochiKetteiYMD;
@@ -424,6 +477,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
         this.kogakuServicehiJogengakuGengakuGaitoFlag = entity.kogakuServicehiJogengakuGengakuGaitoFlag;
         this.kogakuServicehiJogengakuGengakugoJogengaku = entity.kogakuServicehiJogengakuGengakugoJogengaku;
         this.hokenryoNofuGengakuFlag = entity.hokenryoNofuGengakuFlag;
+        this.logicalDeletedFlag = entity.logicalDeletedFlag;
     }
 
     /**
@@ -433,7 +487,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hihokenshaNo, rirekiNo, tekiyoKaishiYMD, tekiyoShuryoYMD, kyokaisoSochiKetteiYMD, kyuufugakuGengakuKisaiKiajoFlag, hyojunFutanGengakuGaitoFlag, hyojunFutanKeigengoFutangaku, kyojuhinadoFutangakugengakuGaitoFlag, kyojuhiKeigengoKyoshitsuShuruiCode, kyojuhiKeigengoHutangaku, shokuhiKeigengoHutangakuGaitoFlag, shokuhiKeigengoHutangaku, kogakuServicehiJogengakuGengakuGaitoFlag, kogakuServicehiJogengakuGengakugoJogengaku, hokenryoNofuGengakuFlag);
+        return super.toMd5(hihokenshaNo, rirekiNo, linkNo, tekiyoKaishiYMD, tekiyoShuryoYMD, kyokaisoSochiKetteiYMD, kyuufugakuGengakuKisaiKiajoFlag, hyojunFutanGengakuGaitoFlag, hyojunFutanKeigengoFutangaku, kyojuhinadoFutangakugengakuGaitoFlag, kyojuhiKeigengoKyoshitsuShuruiCode, kyojuhiKeigengoHutangaku, shokuhiKeigengoHutangakuGaitoFlag, shokuhiKeigengoHutangaku, kogakuServicehiJogengakuGengakuGaitoFlag, kogakuServicehiJogengakuGengakugoJogengaku, hokenryoNofuGengakuFlag, logicalDeletedFlag);
     }
 
 // </editor-fold>

@@ -8,11 +8,13 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoChosa;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoChosa.gaikyoChosaTextImageKubun;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoChosa.ninteichosaRirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoChosa.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoChosaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -33,15 +35,18 @@ public class DbT5202NinteichosahyoGaikyoChosaDac implements ISaveable<DbT5202Nin
      *
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @param 概況調査テキストイメージ区分 概況調査テキストイメージ区分
      * @return DbT5202NinteichosahyoGaikyoChosaEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT5202NinteichosahyoGaikyoChosaEntity selectByKey(
             ShinseishoKanriNo 申請書管理番号,
-            int 認定調査依頼履歴番号) throws NullPointerException {
+            int 認定調査依頼履歴番号,
+            RString 概況調査テキストイメージ区分) throws NullPointerException {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+        requireNonNull(概況調査テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("概況調査テキストイメージ区分"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -49,7 +54,8 @@ public class DbT5202NinteichosahyoGaikyoChosaDac implements ISaveable<DbT5202Nin
                 table(DbT5202NinteichosahyoGaikyoChosa.class).
                 where(and(
                                 eq(shinseishoKanriNo, 申請書管理番号),
-                                eq(ninteichosaRirekiNo, 認定調査依頼履歴番号))).
+                                eq(ninteichosaRirekiNo, 認定調査依頼履歴番号),
+                                eq(gaikyoChosaTextImageKubun, 概況調査テキストイメージ区分))).
                 toObject(DbT5202NinteichosahyoGaikyoChosaEntity.class);
     }
 

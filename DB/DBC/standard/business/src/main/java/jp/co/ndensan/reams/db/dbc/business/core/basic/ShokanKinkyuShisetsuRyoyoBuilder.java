@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanKinkyuShisetsuRyoyo}の編集を行うビルダークラスです。
@@ -102,26 +101,26 @@ public class ShokanKinkyuShisetsuRyoyoBuilder {
     }
 
     /**
-     * 順次番号を設定します。
+     * 明細番号を設定します。
      *
-     * @param 順次番号 順次番号
+     * @param 明細番号 明細番号
      * @return {@link ShokanKinkyuShisetsuRyoyoBuilder}
      */
-    public ShokanKinkyuShisetsuRyoyoBuilder set順次番号(RString 順次番号) {
-        requireNonNull(順次番号, UrSystemErrorMessages.値がnull.getReplacedMessage("順次番号"));
-        entity.setJunjiNo(順次番号);
+    public ShokanKinkyuShisetsuRyoyoBuilder set明細番号(RString 明細番号) {
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        entity.setMeisaiNo(明細番号);
         return this;
     }
 
     /**
-     * 履歴番号を設定します。
+     * 連番を設定します。
      *
-     * @param 履歴番号 履歴番号
+     * @param 連番 連番
      * @return {@link ShokanKinkyuShisetsuRyoyoBuilder}
      */
-    public ShokanKinkyuShisetsuRyoyoBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
+    public ShokanKinkyuShisetsuRyoyoBuilder set連番(RString 連番) {
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+        entity.setRenban(連番);
         return this;
     }
 
@@ -203,7 +202,7 @@ public class ShokanKinkyuShisetsuRyoyoBuilder {
      * @param 往診日数 往診日数
      * @return {@link ShokanKinkyuShisetsuRyoyoBuilder}
      */
-    public ShokanKinkyuShisetsuRyoyoBuilder set往診日数(Decimal 往診日数) {
+    public ShokanKinkyuShisetsuRyoyoBuilder set往診日数(int 往診日数) {
         requireNonNull(往診日数, UrSystemErrorMessages.値がnull.getReplacedMessage("往診日数"));
         entity.setOshinNissu(往診日数);
         return this;
@@ -227,7 +226,7 @@ public class ShokanKinkyuShisetsuRyoyoBuilder {
      * @param 通院日数 通院日数
      * @return {@link ShokanKinkyuShisetsuRyoyoBuilder}
      */
-    public ShokanKinkyuShisetsuRyoyoBuilder set通院日数(Decimal 通院日数) {
+    public ShokanKinkyuShisetsuRyoyoBuilder set通院日数(int 通院日数) {
         requireNonNull(通院日数, UrSystemErrorMessages.値がnull.getReplacedMessage("通院日数"));
         entity.setTsuinNissu(通院日数);
         return this;
@@ -263,7 +262,7 @@ public class ShokanKinkyuShisetsuRyoyoBuilder {
      * @param 緊急時治療管理日数 緊急時治療管理日数
      * @return {@link ShokanKinkyuShisetsuRyoyoBuilder}
      */
-    public ShokanKinkyuShisetsuRyoyoBuilder set緊急時治療管理日数(Decimal 緊急時治療管理日数) {
+    public ShokanKinkyuShisetsuRyoyoBuilder set緊急時治療管理日数(int 緊急時治療管理日数) {
         requireNonNull(緊急時治療管理日数, UrSystemErrorMessages.値がnull.getReplacedMessage("緊急時治療管理日数"));
         entity.setKinkyuChiryoKanriNissu(緊急時治療管理日数);
         return this;

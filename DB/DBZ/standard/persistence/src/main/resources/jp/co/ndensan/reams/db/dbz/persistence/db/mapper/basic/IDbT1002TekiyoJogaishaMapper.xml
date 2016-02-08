@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT1002TekiyoJogaishaMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1002TekiyoJogaishaMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT1002TekiyoJogaisha">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT1002TekiyoJogaishaMapper.allColumns_DbT1002TekiyoJogaisha" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1002TekiyoJogaishaMapper.allColumns_DbT1002TekiyoJogaisha" />
      FROM
-         rg."DbT1002TekiyoJogaisha"
+         rgdb."DbT1002TekiyoJogaisha"
      WHERE
-         rg."DbT1002TekiyoJogaisha"."isDeleted" = FALSE
+         rgdb."DbT1002TekiyoJogaisha"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT1002TekiyoJogaisha">
@@ -46,7 +46,7 @@
 
 
     <!--テーブルDbT1002TekiyoJogaishaの項目をDbT1002TekiyoJogaishaEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT1002TekiyoJogaishaEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT1002TekiyoJogaishaEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT1002TekiyoJogaishaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity" autoMapping="true">
         <id property="shikibetsuCode" column="dbT1002TekiyoJogaisha_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="idoYMD" column="dbT1002TekiyoJogaisha_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <id property="edaNo" column="dbT1002TekiyoJogaisha_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -60,11 +60,11 @@
         <result property="lastUpdateTimestamp" column="dbT1002TekiyoJogaisha_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT1002TekiyoJogaisha_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="idoJiyuCode" column="dbT1002TekiyoJogaisha_idoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="tekiyoJogaiTekiyoJiyuCode" column="dbT1002TekiyoJogaisha_tekiyoJogaiTekiyoJiyuCode" />
+        <!--<result property="tekiyoJogaiTekiyoJiyuCode" column="dbT1002TekiyoJogaisha_tekiyoJogaiTekiyoJiyuCode" />-->
         <result property="tekiyoYMD" column="dbT1002TekiyoJogaisha_tekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="tekiyoTodokedeYMD" column="dbT1002TekiyoJogaisha_tekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="tekiyoUketsukeYMD" column="dbT1002TekiyoJogaisha_tekiyoUketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="tekiyoJogaikaijokaijoJiyuCode" column="dbT1002TekiyoJogaisha_tekiyoJogaikaijokaijoJiyuCode" />
+        <!--<result property="tekiyoJogaikaijokaijoJiyuCode" column="dbT1002TekiyoJogaisha_tekiyoJogaikaijokaijoJiyuCode" />-->
         <result property="kaijoYMD" column="dbT1002TekiyoJogaisha_kaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="kaijoTodokedeYMD" column="dbT1002TekiyoJogaisha_kaijoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="kaijoUketsukeYMD" column="dbT1002TekiyoJogaisha_kaijoUketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -78,6 +78,6 @@
 	SELECT
 	<include refid="allColumns_DbT1002TekiyoJogaisha"/>
 	FROM
-	rgba."DbT1002TekiyoJogaisha"
+	rgdb."DbT1002TekiyoJogaisha"
 	</select>
 </mapper>

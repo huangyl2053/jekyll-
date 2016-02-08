@@ -6,11 +6,10 @@ package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 共同処理用受給者異動高額送付エンティティのテスト用インスタンスを作成する補助クラスです。
@@ -20,9 +19,9 @@ public final class DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntityGenerator {
     public static final FlexibleDate DEFAULT_異動年月日 = new FlexibleDate("19900101");
     public static final RString DEFAULT_異動区分コード = new RString("Data");
     public static final RString DEFAULT_受給者異動事由 = new RString("Data");
-    public static final HokenshaNo DEFAULT_証記載保険者番号 = new HokenshaNo("1");
+    public static final ShoKisaiHokenshaNo DEFAULT_証記載保険者番号 = new ShoKisaiHokenshaNo("1");
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 1;
     public static final HihokenshaNo DEFAULT_世帯集約番号 = new HihokenshaNo("1");
     public static final RString DEFAULT_世帯所得区分コード = new RString("Data");
     public static final RString DEFAULT_所得区分コード = new RString("Data");

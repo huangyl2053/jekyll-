@@ -8,66 +8,57 @@
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7060KaigoJigyosha">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.allColumns_DbT7060KaigoJigyosha" />
-     FROM
-         rgdb."DbT7060KaigoJigyosha"
-     WHERE
-         rgdb."DbT7060KaigoJigyosha"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.allColumns_DbT7060KaigoJigyosha" />
+        FROM
+        rgdb."DbT7060KaigoJigyosha"
+        WHERE
+        rgdb."DbT7060KaigoJigyosha"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7060KaigoJigyosha">
-         "DbT7060KaigoJigyosha"."jigyoshaNo" as "dbT7060KaigoJigyosha_jigyoshaNo",
-         "DbT7060KaigoJigyosha"."yukoKaishiYMD" as "dbT7060KaigoJigyosha_yukoKaishiYMD",
-         "DbT7060KaigoJigyosha"."insertDantaiCd" as "dbT7060KaigoJigyosha_insertDantaiCd",
-         "DbT7060KaigoJigyosha"."insertTimestamp" as "dbT7060KaigoJigyosha_insertTimestamp",
-         "DbT7060KaigoJigyosha"."insertReamsLoginId" as "dbT7060KaigoJigyosha_insertReamsLoginId",
-         "DbT7060KaigoJigyosha"."insertContextId" as "dbT7060KaigoJigyosha_insertContextId",
-         "DbT7060KaigoJigyosha"."isDeleted" as "dbT7060KaigoJigyosha_isDeleted",
-         "DbT7060KaigoJigyosha"."updateCount" as "dbT7060KaigoJigyosha_updateCount",
-         "DbT7060KaigoJigyosha"."lastUpdateTimestamp" as "dbT7060KaigoJigyosha_lastUpdateTimestamp",
-         "DbT7060KaigoJigyosha"."lastUpdateReamsLoginId" as "dbT7060KaigoJigyosha_lastUpdateReamsLoginId",
-         "DbT7060KaigoJigyosha"."yukoShuryoYMD" as "dbT7060KaigoJigyosha_yukoShuryoYMD",
-         "DbT7060KaigoJigyosha"."idoYMD" as "dbT7060KaigoJigyosha_idoYMD",
-         "DbT7060KaigoJigyosha"."idoJiyuCode" as "dbT7060KaigoJigyosha_idoJiyuCode",
-         "DbT7060KaigoJigyosha"."jigyoKaishiYMD" as "dbT7060KaigoJigyosha_jigyoKaishiYMD",
-         "DbT7060KaigoJigyosha"."jigyoKyushiYMD" as "dbT7060KaigoJigyosha_jigyoKyushiYMD",
-         "DbT7060KaigoJigyosha"."jigyoSaikaiYMD" as "dbT7060KaigoJigyosha_jigyoSaikaiYMD",
-         "DbT7060KaigoJigyosha"."jigyoHaishiYMD" as "dbT7060KaigoJigyosha_jigyoHaishiYMD",
-         "DbT7060KaigoJigyosha"."jigyoshaName" as "dbT7060KaigoJigyosha_jigyoshaName",
-         "DbT7060KaigoJigyosha"."jigyoshaNameKana" as "dbT7060KaigoJigyosha_jigyoshaNameKana",
-         "DbT7060KaigoJigyosha"."yubinNo" as "dbT7060KaigoJigyosha_yubinNo",
-         "DbT7060KaigoJigyosha"."jigyoshaAddress" as "dbT7060KaigoJigyosha_jigyoshaAddress",
-         "DbT7060KaigoJigyosha"."jigyoshaKanaAddress" as "dbT7060KaigoJigyosha_jigyoshaKanaAddress",
-         "DbT7060KaigoJigyosha"."telNo" as "dbT7060KaigoJigyosha_telNo",
-         "DbT7060KaigoJigyosha"."faxNo" as "dbT7060KaigoJigyosha_faxNo",
-         "DbT7060KaigoJigyosha"."atesakiBusho" as "dbT7060KaigoJigyosha_atesakiBusho",
-         "DbT7060KaigoJigyosha"."atesakininName" as "dbT7060KaigoJigyosha_atesakininName",
-         "DbT7060KaigoJigyosha"."atesakininNamekana" as "dbT7060KaigoJigyosha_atesakininNamekana",
-         "DbT7060KaigoJigyosha"."shiteiKijungaitoJigyoshaKubun" as "dbT7060KaigoJigyosha_shiteiKijungaitoJigyoshaKubun",
-         "DbT7060KaigoJigyosha"."shozaiShichoson" as "dbT7060KaigoJigyosha_shozaiShichoson",
-         "DbT7060KaigoJigyosha"."serviceJisshiChiiki" as "dbT7060KaigoJigyosha_serviceJisshiChiiki",
-         "DbT7060KaigoJigyosha"."hojinShubetsu" as "dbT7060KaigoJigyosha_hojinShubetsu",
-         "DbT7060KaigoJigyosha"."bedSu" as "dbT7060KaigoJigyosha_bedSu",
-         "DbT7060KaigoJigyosha"."shozokuNinzu" as "dbT7060KaigoJigyosha_shozokuNinzu",
-         "DbT7060KaigoJigyosha"."riyoshaSu" as "dbT7060KaigoJigyosha_riyoshaSu",
-         "DbT7060KaigoJigyosha"."biko" as "dbT7060KaigoJigyosha_biko"
+        <!--"DbT7060KaigoJigyosha"."jigyoshaNo" as "dbT7060KaigoJigyosha_jigyoshaNo",-->
+        "DbT7060KaigoJigyosha"."yukoKaishiYMD" as "dbT7060KaigoJigyosha_yukoKaishiYMD",
+        "DbT7060KaigoJigyosha"."insertDantaiCd" as "dbT7060KaigoJigyosha_insertDantaiCd",
+        "DbT7060KaigoJigyosha"."insertTimestamp" as "dbT7060KaigoJigyosha_insertTimestamp",
+        "DbT7060KaigoJigyosha"."insertReamsLoginId" as "dbT7060KaigoJigyosha_insertReamsLoginId",
+        "DbT7060KaigoJigyosha"."insertContextId" as "dbT7060KaigoJigyosha_insertContextId",
+        "DbT7060KaigoJigyosha"."isDeleted" as "dbT7060KaigoJigyosha_isDeleted",
+        "DbT7060KaigoJigyosha"."updateCount" as "dbT7060KaigoJigyosha_updateCount",
+        "DbT7060KaigoJigyosha"."lastUpdateTimestamp" as "dbT7060KaigoJigyosha_lastUpdateTimestamp",
+        "DbT7060KaigoJigyosha"."lastUpdateReamsLoginId" as "dbT7060KaigoJigyosha_lastUpdateReamsLoginId",
+        "DbT7060KaigoJigyosha"."yukoShuryoYMD" as "dbT7060KaigoJigyosha_yukoShuryoYMD",
+        "DbT7060KaigoJigyosha"."idoYMD" as "dbT7060KaigoJigyosha_idoYMD",
+        "DbT7060KaigoJigyosha"."idoJiyuCode" as "dbT7060KaigoJigyosha_idoJiyuCode",
+        "DbT7060KaigoJigyosha"."jigyoKaishiYMD" as "dbT7060KaigoJigyosha_jigyoKaishiYMD",
+        "DbT7060KaigoJigyosha"."jigyoKyushiYMD" as "dbT7060KaigoJigyosha_jigyoKyushiYMD",
+        "DbT7060KaigoJigyosha"."jigyoSaikaiYMD" as "dbT7060KaigoJigyosha_jigyoSaikaiYMD",
+        "DbT7060KaigoJigyosha"."jigyoHaishiYMD" as "dbT7060KaigoJigyosha_jigyoHaishiYMD",
+        "DbT7060KaigoJigyosha"."jigyoshaName" as "dbT7060KaigoJigyosha_jigyoshaName",
+        "DbT7060KaigoJigyosha"."jigyoshaNameKana" as "dbT7060KaigoJigyosha_jigyoshaNameKana",
+        "DbT7060KaigoJigyosha"."yubinNo" as "dbT7060KaigoJigyosha_yubinNo",
+        "DbT7060KaigoJigyosha"."jigyoshaAddress" as "dbT7060KaigoJigyosha_jigyoshaAddress",
+        "DbT7060KaigoJigyosha"."jigyoshaKanaAddress" as "dbT7060KaigoJigyosha_jigyoshaKanaAddress",
+        "DbT7060KaigoJigyosha"."telNo" as "dbT7060KaigoJigyosha_telNo",
+        "DbT7060KaigoJigyosha"."faxNo" as "dbT7060KaigoJigyosha_faxNo",
+        "DbT7060KaigoJigyosha"."atesakiBusho" as "dbT7060KaigoJigyosha_atesakiBusho",
+        "DbT7060KaigoJigyosha"."atesakininName" as "dbT7060KaigoJigyosha_atesakininName",
+        "DbT7060KaigoJigyosha"."atesakininNamekana" as "dbT7060KaigoJigyosha_atesakininNamekana",
+        "DbT7060KaigoJigyosha"."shiteiKijungaitoJigyoshaKubun" as "dbT7060KaigoJigyosha_shiteiKijungaitoJigyoshaKubun",
+        "DbT7060KaigoJigyosha"."shozaiShichoson" as "dbT7060KaigoJigyosha_shozaiShichoson",
+        "DbT7060KaigoJigyosha"."serviceJisshiChiiki" as "dbT7060KaigoJigyosha_serviceJisshiChiiki",
+        "DbT7060KaigoJigyosha"."hojinShubetsu" as "dbT7060KaigoJigyosha_hojinShubetsu",
+        "DbT7060KaigoJigyosha"."bedSu" as "dbT7060KaigoJigyosha_bedSu",
+        "DbT7060KaigoJigyosha"."shozokuNinzu" as "dbT7060KaigoJigyosha_shozokuNinzu",
+        "DbT7060KaigoJigyosha"."riyoshaSu" as "dbT7060KaigoJigyosha_riyoshaSu",
+        "DbT7060KaigoJigyosha"."biko" as "dbT7060KaigoJigyosha_biko"
     </sql>
 
 
     <!--テーブルDbT7060KaigoJigyoshaの項目をDbT7060KaigoJigyoshaEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT7060KaigoJigyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity" autoMapping="true">
-        <id property="jigyoshaNo" column="dbT7060KaigoJigyosha_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <!--<id property="jigyoshaNo" column="dbT7060KaigoJigyosha_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KaigoJigyoshaNoTypeHandler"/>-->
         <id property="yukoKaishiYMD" column="dbT7060KaigoJigyosha_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <association property="kaigoJigyoshaEntity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.resultMap_DbT7060KaigoJigyoshaEntity"/>
-        <collection  property="KaigoJigyoshaDaihyoshaEntity"
-            resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7062KaigoJigyoshaDaihyoshaMapper.resultMap_DbT7062KaigoJigyoshaDaihyoshaEntity"
-            ofType="jp.co.ndensan.reams.db.dbx.entity.basic.DbT7062KaigoJigyoshaDaihyoshaEntity"/>
-        
-        <collection property="KaigoJigyoshaShiteiServiceEntity"
-            resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7063KaigoJigyoshaShiteiServiceMapper.resultMap_DbT7063KaigoJigyoshaShiteiServiceEntity"
-            ofType="jp.co.ndensan.reams.db.dbx.entity.basic.DbT7063KaigoJigyoshaShiteiServiceEntity"/>
-        
         <result property="insertDantaiCd" column="dbT7060KaigoJigyosha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT7060KaigoJigyosha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT7060KaigoJigyosha_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -97,16 +88,16 @@
         <result property="shozaiShichoson" column="dbT7060KaigoJigyosha_shozaiShichoson" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceJisshiChiiki" column="dbT7060KaigoJigyosha_serviceJisshiChiiki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hojinShubetsu" column="dbT7060KaigoJigyosha_hojinShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="bedSu" column="dbT7060KaigoJigyosha_bedSu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="shozokuNinzu" column="dbT7060KaigoJigyosha_shozokuNinzu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="riyoshaSu" column="dbT7060KaigoJigyosha_riyoshaSu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="bedSu" column="dbT7060KaigoJigyosha_bedSu" />
+        <result property="shozokuNinzu" column="dbT7060KaigoJigyosha_shozokuNinzu" />
+        <result property="riyoshaSu" column="dbT7060KaigoJigyosha_riyoshaSu" />
         <result property="biko" column="dbT7060KaigoJigyosha_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-        <select id="getEntity" resultMap="ResultMap_DbT7060KaigoJigyoshaEntity">
+    <select id="getEntity" resultMap="ResultMap_DbT7060KaigoJigyoshaEntity">
         SELECT
         <include refid="allColumns_DbT7060KaigoJigyosha"/>
         FROM
         rgdb."DbT7060KaigoJigyosha"
-     </select>
+    </select>
 
 </mapper>

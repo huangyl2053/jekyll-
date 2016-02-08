@@ -8,16 +8,14 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3059KagoMoshitateEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -40,7 +38,7 @@ public class KagoMoshitate extends ModelBase<KagoMoshitateIdentifier, DbT3059Kag
     public KagoMoshitate(JigyoshaNo 事業所番号,
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業所番号"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
@@ -120,7 +118,7 @@ public class KagoMoshitate extends ModelBase<KagoMoshitateIdentifier, DbT3059Kag
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -140,15 +138,6 @@ public class KagoMoshitate extends ModelBase<KagoMoshitateIdentifier, DbT3059Kag
      */
     public RString get申立者区分コード() {
         return entity.getMoshitateshaKubunCode();
-    }
-
-    /**
-     * 証記載保険者番号を返します。
-     *
-     * @return 証記載保険者番号
-     */
-    public HokenshaNo get証記載保険者番号() {
-        return entity.getShokisaiHokenshaNo();
     }
 
     /**
@@ -217,8 +206,7 @@ public class KagoMoshitate extends ModelBase<KagoMoshitateIdentifier, DbT3059Kag
     }
 
     /**
-     * 保持する過誤申立を削除対象とします。<br/>
-     * {@link DbT3059KagoMoshitateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する過誤申立を削除対象とします。<br/> {@link DbT3059KagoMoshitateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KagoMoshitate}
      */

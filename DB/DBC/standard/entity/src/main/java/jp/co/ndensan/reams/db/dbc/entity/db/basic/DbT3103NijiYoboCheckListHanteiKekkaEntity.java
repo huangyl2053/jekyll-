@@ -1,24 +1,24 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 二次予防チェックリスト判定結果テーブルのエンティティクラスです。
  */
 public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase<DbT3103NijiYoboCheckListHanteiKekkaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3103NijiYoboCheckListHanteiKekka");
 
@@ -31,13 +31,11 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private ShikibetsuCode shikibetsuCode;
-    @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private FlexibleDate uketsukeYMD;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     private Decimal tensu_SeikatsuKinoZenpan;
     private Decimal tensu_UndokiKino;
     private Decimal tensu_Eiyo;
@@ -45,18 +43,18 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
     private Decimal tensu_Tojikomori;
     private Decimal tensu_NinchiNoryoku;
     private Decimal tensu_Utsu;
-    private Decimal shien_SeikatsuKinoZenpan;
-    private Decimal shien_UndokiKino;
-    private Decimal shien_Eiyo;
-    private Decimal shien_Koku;
-    private Decimal shien_Tojikomori;
-    private Decimal shien_NinchiNoryoku;
-    private Decimal shien_Utsu;
+    private int shien_SeikatsuKinoZenpan;
+    private int shien_UndokiKino;
+    private int shien_Eiyo;
+    private int shien_Koku;
+    private int shien_Tojikomori;
+    private int shien_NinchiNoryoku;
+    private int shien_Utsu;
     private RString nijiYobo_ShukantekiKenkouKan;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -65,7 +63,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -74,7 +72,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -83,16 +81,17 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -100,26 +99,8 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
     }
 
     /**
-     * 識別コードのgetメソッドです。
-     *
-     * @return 識別コード
-     */
-    public ShikibetsuCode getShikibetsuCode() {
-        return shikibetsuCode;
-    }
-
-    /**
-     * 識別コードのsetメソッドです。
-     *
-     * @param shikibetsuCode 識別コード
-     */
-    public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
-        this.shikibetsuCode = shikibetsuCode;
-    }
-
-    /**
      * 被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -128,16 +109,16 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
 
     /**
      * 被保険者番号のsetメソッドです。
-     *
+     * 
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 受付年月日のgetメソッドです。
-     *
+     * 
      * @return 受付年月日
      */
     public FlexibleDate getUketsukeYMD() {
@@ -146,43 +127,44 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
 
     /**
      * 受付年月日のsetメソッドです。
-     *
+     * 
      * @param uketsukeYMD 受付年月日
      */
-    public void setUketsukeYMD(FlexibleDate uketsukeYMD) {
+    public void setUketsukeYMD(@Nonnull FlexibleDate uketsukeYMD) {
         this.uketsukeYMD = uketsukeYMD;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     *
+     * 
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     *
+     * 
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(@Nonnull int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * 点数・生活機能全般のgetメソッドです。
-     *
+     * 
      * @return 点数・生活機能全般
      */
+    @CheckForNull
     public Decimal getTensu_SeikatsuKinoZenpan() {
         return tensu_SeikatsuKinoZenpan;
     }
 
     /**
      * 点数・生活機能全般のsetメソッドです。
-     *
+     * 
      * @param tensu_SeikatsuKinoZenpan 点数・生活機能全般
      */
     public void setTensu_SeikatsuKinoZenpan(Decimal tensu_SeikatsuKinoZenpan) {
@@ -191,16 +173,17 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
 
     /**
      * 点数・運動器機能のgetメソッドです。
-     *
+     * 
      * @return 点数・運動器機能
      */
+    @CheckForNull
     public Decimal getTensu_UndokiKino() {
         return tensu_UndokiKino;
     }
 
     /**
      * 点数・運動器機能のsetメソッドです。
-     *
+     * 
      * @param tensu_UndokiKino 点数・運動器機能
      */
     public void setTensu_UndokiKino(Decimal tensu_UndokiKino) {
@@ -209,16 +192,17 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
 
     /**
      * 点数・栄養のgetメソッドです。
-     *
+     * 
      * @return 点数・栄養
      */
+    @CheckForNull
     public Decimal getTensu_Eiyo() {
         return tensu_Eiyo;
     }
 
     /**
      * 点数・栄養のsetメソッドです。
-     *
+     * 
      * @param tensu_Eiyo 点数・栄養
      */
     public void setTensu_Eiyo(Decimal tensu_Eiyo) {
@@ -227,16 +211,17 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
 
     /**
      * 点数・口腔のgetメソッドです。
-     *
+     * 
      * @return 点数・口腔
      */
+    @CheckForNull
     public Decimal getTensu_Koku() {
         return tensu_Koku;
     }
 
     /**
      * 点数・口腔のsetメソッドです。
-     *
+     * 
      * @param tensu_Koku 点数・口腔
      */
     public void setTensu_Koku(Decimal tensu_Koku) {
@@ -245,16 +230,17 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
 
     /**
      * 点数・閉じこもりのgetメソッドです。
-     *
+     * 
      * @return 点数・閉じこもり
      */
+    @CheckForNull
     public Decimal getTensu_Tojikomori() {
         return tensu_Tojikomori;
     }
 
     /**
      * 点数・閉じこもりのsetメソッドです。
-     *
+     * 
      * @param tensu_Tojikomori 点数・閉じこもり
      */
     public void setTensu_Tojikomori(Decimal tensu_Tojikomori) {
@@ -263,16 +249,17 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
 
     /**
      * 点数・認知能力のgetメソッドです。
-     *
+     * 
      * @return 点数・認知能力
      */
+    @CheckForNull
     public Decimal getTensu_NinchiNoryoku() {
         return tensu_NinchiNoryoku;
     }
 
     /**
      * 点数・認知能力のsetメソッドです。
-     *
+     * 
      * @param tensu_NinchiNoryoku 点数・認知能力
      */
     public void setTensu_NinchiNoryoku(Decimal tensu_NinchiNoryoku) {
@@ -281,16 +268,17 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
 
     /**
      * 点数・うつのgetメソッドです。
-     *
+     * 
      * @return 点数・うつ
      */
+    @CheckForNull
     public Decimal getTensu_Utsu() {
         return tensu_Utsu;
     }
 
     /**
      * 点数・うつのsetメソッドです。
-     *
+     * 
      * @param tensu_Utsu 点数・うつ
      */
     public void setTensu_Utsu(Decimal tensu_Utsu) {
@@ -299,142 +287,150 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
 
     /**
      * 支援必要性・生活機能全般のgetメソッドです。
-     *
+     * 
      * @return 支援必要性・生活機能全般
      */
-    public Decimal getShien_SeikatsuKinoZenpan() {
+    @CheckForNull
+    public int getShien_SeikatsuKinoZenpan() {
         return shien_SeikatsuKinoZenpan;
     }
 
     /**
      * 支援必要性・生活機能全般のsetメソッドです。
-     *
+     * 
      * @param shien_SeikatsuKinoZenpan 支援必要性・生活機能全般
      */
-    public void setShien_SeikatsuKinoZenpan(Decimal shien_SeikatsuKinoZenpan) {
+    public void setShien_SeikatsuKinoZenpan(int shien_SeikatsuKinoZenpan) {
         this.shien_SeikatsuKinoZenpan = shien_SeikatsuKinoZenpan;
     }
 
     /**
      * 支援必要性・運動器機能のgetメソッドです。
-     *
+     * 
      * @return 支援必要性・運動器機能
      */
-    public Decimal getShien_UndokiKino() {
+    @CheckForNull
+    public int getShien_UndokiKino() {
         return shien_UndokiKino;
     }
 
     /**
      * 支援必要性・運動器機能のsetメソッドです。
-     *
+     * 
      * @param shien_UndokiKino 支援必要性・運動器機能
      */
-    public void setShien_UndokiKino(Decimal shien_UndokiKino) {
+    public void setShien_UndokiKino(int shien_UndokiKino) {
         this.shien_UndokiKino = shien_UndokiKino;
     }
 
     /**
      * 支援必要性・栄養のgetメソッドです。
-     *
+     * 
      * @return 支援必要性・栄養
      */
-    public Decimal getShien_Eiyo() {
+    @CheckForNull
+    public int getShien_Eiyo() {
         return shien_Eiyo;
     }
 
     /**
      * 支援必要性・栄養のsetメソッドです。
-     *
+     * 
      * @param shien_Eiyo 支援必要性・栄養
      */
-    public void setShien_Eiyo(Decimal shien_Eiyo) {
+    public void setShien_Eiyo(int shien_Eiyo) {
         this.shien_Eiyo = shien_Eiyo;
     }
 
     /**
      * 支援必要性・口腔のgetメソッドです。
-     *
+     * 
      * @return 支援必要性・口腔
      */
-    public Decimal getShien_Koku() {
+    @CheckForNull
+    public int getShien_Koku() {
         return shien_Koku;
     }
 
     /**
      * 支援必要性・口腔のsetメソッドです。
-     *
+     * 
      * @param shien_Koku 支援必要性・口腔
      */
-    public void setShien_Koku(Decimal shien_Koku) {
+    public void setShien_Koku(int shien_Koku) {
         this.shien_Koku = shien_Koku;
     }
 
     /**
      * 支援必要性・閉じこもりのgetメソッドです。
-     *
+     * 
      * @return 支援必要性・閉じこもり
      */
-    public Decimal getShien_Tojikomori() {
+    @CheckForNull
+    public int getShien_Tojikomori() {
         return shien_Tojikomori;
     }
 
     /**
      * 支援必要性・閉じこもりのsetメソッドです。
-     *
+     * 
      * @param shien_Tojikomori 支援必要性・閉じこもり
      */
-    public void setShien_Tojikomori(Decimal shien_Tojikomori) {
+    public void setShien_Tojikomori(int shien_Tojikomori) {
         this.shien_Tojikomori = shien_Tojikomori;
     }
 
     /**
      * 支援必要性・認知能力のgetメソッドです。
-     *
+     * 
      * @return 支援必要性・認知能力
      */
-    public Decimal getShien_NinchiNoryoku() {
+    @CheckForNull
+    public int getShien_NinchiNoryoku() {
         return shien_NinchiNoryoku;
     }
 
     /**
      * 支援必要性・認知能力のsetメソッドです。
-     *
+     * 
      * @param shien_NinchiNoryoku 支援必要性・認知能力
      */
-    public void setShien_NinchiNoryoku(Decimal shien_NinchiNoryoku) {
+    public void setShien_NinchiNoryoku(int shien_NinchiNoryoku) {
         this.shien_NinchiNoryoku = shien_NinchiNoryoku;
     }
 
     /**
      * 支援必要性・うつのgetメソッドです。
-     *
+     * 
      * @return 支援必要性・うつ
      */
-    public Decimal getShien_Utsu() {
+    @CheckForNull
+    public int getShien_Utsu() {
         return shien_Utsu;
     }
 
     /**
      * 支援必要性・うつのsetメソッドです。
-     *
+     * 
      * @param shien_Utsu 支援必要性・うつ
      */
-    public void setShien_Utsu(Decimal shien_Utsu) {
+    public void setShien_Utsu(int shien_Utsu) {
         this.shien_Utsu = shien_Utsu;
     }
 
     /**
      * 二次予防・主観的健康感のgetメソッドです。
-     *
+     * 
      * @return 二次予防・主観的健康感
      */
+    @CheckForNull
     public RString getNijiYobo_ShukantekiKenkouKan() {
         return nijiYobo_ShukantekiKenkouKan;
     }
 
     /**
      * 二次予防・主観的健康感のsetメソッドです。
-     *
+     * 
      * @param nijiYobo_ShukantekiKenkouKan 二次予防・主観的健康感
      */
     public void setNijiYobo_ShukantekiKenkouKan(RString nijiYobo_ShukantekiKenkouKan) {
@@ -443,17 +439,14 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
 
     /**
      * このエンティティの主キーが他の{@literal DbT3103NijiYoboCheckListHanteiKekkaEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3103NijiYoboCheckListHanteiKekkaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3103NijiYoboCheckListHanteiKekkaEntity other) {
         if (other == null) {
-            return false;
-        }
-        if (!Objects.equals(this.shikibetsuCode, other.shikibetsuCode)) {
             return false;
         }
         if (!Objects.equals(this.hihokenshaNo, other.hihokenshaNo)) {
@@ -473,7 +466,6 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
      */
     @Override
     public void shallowCopy(DbT3103NijiYoboCheckListHanteiKekkaEntity entity) {
-        this.shikibetsuCode = entity.shikibetsuCode;
         this.hihokenshaNo = entity.hihokenshaNo;
         this.uketsukeYMD = entity.uketsukeYMD;
         this.rirekiNo = entity.rirekiNo;
@@ -496,13 +488,13 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shikibetsuCode, hihokenshaNo, uketsukeYMD, rirekiNo, tensu_SeikatsuKinoZenpan, tensu_UndokiKino, tensu_Eiyo, tensu_Koku, tensu_Tojikomori, tensu_NinchiNoryoku, tensu_Utsu, shien_SeikatsuKinoZenpan, shien_UndokiKino, shien_Eiyo, shien_Koku, shien_Tojikomori, shien_NinchiNoryoku, shien_Utsu, nijiYobo_ShukantekiKenkouKan);
+        return super.toMd5(hihokenshaNo, uketsukeYMD, rirekiNo, tensu_SeikatsuKinoZenpan, tensu_UndokiKino, tensu_Eiyo, tensu_Koku, tensu_Tojikomori, tensu_NinchiNoryoku, tensu_Utsu, shien_SeikatsuKinoZenpan, shien_UndokiKino, shien_Eiyo, shien_Koku, shien_Tojikomori, shien_NinchiNoryoku, shien_Utsu, nijiYobo_ShukantekiKenkouKan);
     }
 
 // </editor-fold>
+
 }

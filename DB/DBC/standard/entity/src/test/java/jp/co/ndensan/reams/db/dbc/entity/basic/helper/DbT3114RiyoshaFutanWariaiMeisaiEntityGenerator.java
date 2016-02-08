@@ -19,14 +19,14 @@ public final class DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator {
 
     public static final FlexibleYear DEFAULT_年度 = new FlexibleYear("1990");
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
-    public static final Decimal DEFAULT_枝番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 1;
+    public static final int DEFAULT_枝番号 = 1;
     public static final RString DEFAULT_資格区分 = new RString("Data");
     public static final RString DEFAULT_負担割合区分 = new RString("Data");
     public static final FlexibleDate DEFAULT_有効開始日 = new FlexibleDate("19900101");
     public static final FlexibleDate DEFAULT_有効終了日 = new FlexibleDate("19900101");
     public static final Decimal DEFAULT_本人合計所得金額 = new Decimal(0);
-    public static final Decimal DEFAULT_世帯１号被保険者数 = new Decimal(0);
+    public static final int DEFAULT_世帯１号被保険者数 = 1;
     public static final Decimal DEFAULT_年金収入合計 = new Decimal(0);
     public static final Decimal DEFAULT_その他の合計所得金額合計 = new Decimal(0);
     public static final RString DEFAULT_更正理由 = new RString("Data");
@@ -49,7 +49,7 @@ public final class DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator {
         entity.setYukoKaishiYMD(DEFAULT_有効開始日);
         entity.setYukoShuryoYMD(DEFAULT_有効終了日);
         entity.setHonninGoukeiShotokuGaku(DEFAULT_本人合計所得金額);
-        entity.setSetaiIchigouHihoknehsaSu(DEFAULT_世帯１号被保険者数);
+        entity.setSetaiIchigouHihokenshaSu(DEFAULT_世帯１号被保険者数);
         entity.setNenkinShunyuGoukei(DEFAULT_年金収入合計);
         entity.setSonotanoGoukeiShotokuKingakuGoukei(DEFAULT_その他の合計所得金額合計);
         entity.setKoseiRiyu(DEFAULT_更正理由);

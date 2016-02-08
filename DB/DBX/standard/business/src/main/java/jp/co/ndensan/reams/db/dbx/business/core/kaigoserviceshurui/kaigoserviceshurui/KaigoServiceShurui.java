@@ -12,12 +12,12 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouIdentifier;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceBunruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigoserviceshurui.KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -42,16 +42,16 @@ public class KaigoServiceShurui extends ParentModelBase<KaigoServiceShuruiIdenti
      * @param 提供開始年月 提供開始年月
      */
     public KaigoServiceShurui(KaigoServiceShuruiCode サービス種類コード,
-FlexibleYearMonth 提供開始年月) {
+            FlexibleYearMonth 提供開始年月) {
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         requireNonNull(提供開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("提供開始年月"));
         this.entity = new DbT7130KaigoServiceShuruiEntity();
         this.entity.setServiceShuruiCd(サービス種類コード);
         this.entity.setTeikyoKaishiYM(提供開始年月);
         this.id = new KaigoServiceShuruiIdentifier(
-        サービス種類コード,
-        提供開始年月
-                );
+                サービス種類コード,
+                提供開始年月
+        );
         this.kaigoServiceNaiyou = Models.create(new ArrayList<KaigoServiceNaiyou>());
     }
 
@@ -61,7 +61,6 @@ FlexibleYearMonth 提供開始年月) {
      *
      * @param entity DBより取得した{@link DbT7130KaigoServiceShuruiEntity}
      */
-
     public KaigoServiceShurui(KaigoServiceShuruiEntity entity) {
         this.entity = requireNonNull(entity.get介護サービス種類Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("介護サービス種類"));
         this.id = new KaigoServiceShuruiIdentifier(
@@ -73,7 +72,6 @@ FlexibleYearMonth 提供開始年月) {
         }
         this.kaigoServiceNaiyou = Models.create(kaigoServiceNaiyouList);
     }
-
 
     /**
      * シリアライズ、ビルダー用コンストラクタです。
@@ -142,7 +140,7 @@ FlexibleYearMonth 提供開始年月) {
      *
      * @return サービス分類コード
      */
-    public KaigoServiceBunruiCode getサービス分類コード() {
+    public Code getサービス分類コード() {
         return entity.getServiceBunrruicode();
     }
 
@@ -274,7 +272,6 @@ FlexibleYearMonth 提供開始年月) {
     public KaigoServiceShuruiBuilder createBuilderForEdit() {
         return new KaigoServiceShuruiBuilder(entity, id, kaigoServiceNaiyou);
     }
-    // </editor-fold>
 
     @Override
     public int hashCode() {

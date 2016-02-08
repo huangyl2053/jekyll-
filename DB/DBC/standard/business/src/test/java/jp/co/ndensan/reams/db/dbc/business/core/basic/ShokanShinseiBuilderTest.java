@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -31,7 +30,7 @@ public class ShokanShinseiBuilderTest extends DbcTestBase {
     private static HihokenshaNo 主キー名1;
     private static FlexibleYearMonth 主キー名2;
     private static RString 主キー名3;
-    private static Decimal 主キー名4;
+//    private static int 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
@@ -39,7 +38,7 @@ public class ShokanShinseiBuilderTest extends DbcTestBase {
         主キー名1 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_被保険者番号;
         主キー名2 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_サービス提供年月;
         主キー名3 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_整理番号;
-        主キー名4 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号;
+//        主キー名4 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class getterSetterTest extends DbcTestBase {
@@ -77,11 +76,11 @@ public class ShokanShinseiBuilderTest extends DbcTestBase {
             assertThat(business.get整理番号(), is(DbT3034ShokanShinseiEntityGenerator.DEFAULT_整理番号));
         }
 
-        @Test
-        public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
-            business = sut.set履歴番号(DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号).build();
-            assertThat(business.get履歴番号(), is(DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号));
-        }
+//        @Test
+//        public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
+//            business = sut.set履歴番号(DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号).build();
+//            assertThat(business.get履歴番号(), is(DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号));
+//        }
 
         @Test
         public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
@@ -203,11 +202,11 @@ public class ShokanShinseiBuilderTest extends DbcTestBase {
             assertThat(business.get支払期間終了年月日(), is(DbT3034ShokanShinseiEntityGenerator.DEFAULT_支払期間終了年月日));
         }
 
-        @Test
-        public void 戻り値の閉庁内容は_設定した値と同じ閉庁内容を返す() {
-            business = sut.set閉庁内容(DbT3034ShokanShinseiEntityGenerator.DEFAULT_閉庁内容).build();
-            assertThat(business.get閉庁内容(), is(DbT3034ShokanShinseiEntityGenerator.DEFAULT_閉庁内容));
-        }
+//        @Test
+//        public void 戻り値の閉庁内容は_設定した値と同じ閉庁内容を返す() {
+//            business = sut.set閉庁内容(DbT3034ShokanShinseiEntityGenerator.DEFAULT_閉庁内容).build();
+//            assertThat(business.get閉庁内容(), is(DbT3034ShokanShinseiEntityGenerator.DEFAULT_閉庁内容));
+//        }
 
         @Test
         public void 戻り値の支払窓口開始時間は_設定した値と同じ支払窓口開始時間を返す() {

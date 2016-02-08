@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 高額介護サービス費支給判定結果テーブルの項目定義クラスです。
  */
 public enum DbT3057KogakuShikyuHanteiKekka implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -67,11 +67,11 @@ public enum DbT3057KogakuShikyuHanteiKekka implements IColumnDefinition {
      * 支給区分コード
      * <br/>1:支給,2:不支給
      */
-    shiharaiKubunCode(1, 0),
+    shikyuKubunCode(1, 0),
     /**
      * 支給金額
      */
-    shiharaiKingaku(6, 0),
+    shikyuKingaku(6, 0),
     /**
      * 不支給理由
      */

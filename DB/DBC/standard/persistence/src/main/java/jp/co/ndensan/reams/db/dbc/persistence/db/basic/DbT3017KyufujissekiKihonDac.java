@@ -82,7 +82,7 @@ public class DbT3017KyufujissekiKihonDac implements ISaveable<DbT3017Kyufujissek
                                 eq(inputShikibetsuNo, 入力識別番号),
                                 eq(recodeShubetsuCode, レコード種別コード),
                                 eq(kyufuSakuseiKubunCode, 給付実績情報作成区分コード),
-                                eq(hokenshaNo, 証記載保険者番号),
+                                eq(shokisaiHokenshaNo, 証記載保険者番号),
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
                                 eq(kyufuJissekiKubunCode, 給付実績区分コード),

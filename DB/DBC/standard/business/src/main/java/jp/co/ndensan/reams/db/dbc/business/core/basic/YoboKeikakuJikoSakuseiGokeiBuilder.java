@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3012YoboKeikakuJikoSakuseiGokeiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class YoboKeikakuJikoSakuseiGokeiBuilder {
 
-    private final DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity;
+    private final DbT3012YoboKeikakuJikoSakuseiGokeiEntity entity;
     private final YoboKeikakuJikoSakuseiGokeiIdentifier id;
 
     /**
@@ -31,7 +31,7 @@ public class YoboKeikakuJikoSakuseiGokeiBuilder {
      *
      */
     YoboKeikakuJikoSakuseiGokeiBuilder(
-            DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity,
+            DbT3012YoboKeikakuJikoSakuseiGokeiEntity entity,
             YoboKeikakuJikoSakuseiGokeiIdentifier id
     ) {
         this.entity = entity.clone();
@@ -71,7 +71,7 @@ public class YoboKeikakuJikoSakuseiGokeiBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link YoboKeikakuJikoSakuseiGokeiBuilder}
      */
-    public YoboKeikakuJikoSakuseiGokeiBuilder set履歴番号(Decimal 履歴番号) {
+    public YoboKeikakuJikoSakuseiGokeiBuilder set履歴番号(int 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;

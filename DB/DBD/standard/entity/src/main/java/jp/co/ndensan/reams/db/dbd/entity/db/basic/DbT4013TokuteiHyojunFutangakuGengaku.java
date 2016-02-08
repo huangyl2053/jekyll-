@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 特定標準負担額減額テーブルの項目定義クラスです。
  */
 public enum DbT4013TokuteiHyojunFutangakuGengaku implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -39,6 +39,30 @@ public enum DbT4013TokuteiHyojunFutangakuGengaku implements IColumnDefinition {
      * lastUpdateReamsLoginId
      */
     lastUpdateReamsLoginId(2147483647, 0),
+    /**
+     * shinseiYMD
+     */
+    shinseiYMD(2147483647, 0),
+    /**
+     * ketteiYMD
+     */
+    ketteiYMD(2147483647, 0),
+    /**
+     * tekiyoKaishiYMD
+     */
+    tekiyoKaishiYMD(2147483647, 0),
+    /**
+     * tekiyoShuryoYMD
+     */
+    tekiyoShuryoYMD(2147483647, 0),
+    /**
+     * ketteiKubun
+     */
+    ketteiKubun(1, 0),
+    /**
+     * hiShoninRiyu
+     */
+    hiShoninRiyu(200, 0),
     /**
      * 証記載保険者番号
      */
@@ -101,63 +125,7 @@ public enum DbT4013TokuteiHyojunFutangakuGengaku implements IColumnDefinition {
     /**
      * 多床室
      */
-    tashoshitsu(5, 0),
-    /**
-     * 配偶者有無フラグ
-     */
-    haigushaUmuFlag(1, 0),
-    /**
-     * 配偶者氏名
-     */
-    haigushaShimei(2147483647, 0),
-    /**
-     * 配偶者氏名カナ
-     */
-    haigushaShimeiKana(2147483647, 0),
-    /**
-     * 配偶者生年月日
-     */
-    haigushaSeinenGappiYMD(2147483647, 0),
-    /**
-     * 配偶者住所
-     */
-    haigushaJusho(2147483647, 0),
-    /**
-     * 配偶者連絡先
-     */
-    haigushaRenrakusaki(15, 0),
-    /**
-     * 配偶者住所２
-     * <br/>1月1日時点の住所
-     */
-    haigushaJusho2(2147483647, 0),
-    /**
-     * 配偶者課税区分
-     * <br/>1:課税、2:非課税
-     */
-    haigushaKazeiKubun(1, 0),
-    /**
-     * 配偶者識別コード
-     */
-    haigushaShikibetsuCd(2147483647, 0),
-    /**
-     * 預貯金申告区分
-     * <br/>預貯金、有価証券等の金額の合計が1000万円（夫婦は2000万円）
-     * <br/>1:以下、0:より大きい
-     */
-    yochokinShinkokuKubun(1, 0),
-    /**
-     * 預貯金額
-     */
-    yochokinGaku(10, 0),
-    /**
-     * 有価証券評価概算額
-     */
-    yukashoukenGaisangaku(10, 0),
-    /**
-     * その他金額
-     */
-    sonotaKingaku(10, 0);
+    tashoshitsu(5, 0);
 
     private final int maxLength;
     private final int scale;

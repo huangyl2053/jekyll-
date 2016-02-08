@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -22,10 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 共同処理用受給者異動償還送付を管理するクラスです。
  */
-public class KyodoShoriyoJukyushaIdoShokanSofu 
-extends ModelBase<KyodoShoriyoJukyushaIdoShokanSofuIdentifier,
-        DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity, 
-        KyodoShoriyoJukyushaIdoShokanSofu> implements Serializable {
+public class KyodoShoriyoJukyushaIdoShokanSofu
+        extends ModelBase<KyodoShoriyoJukyushaIdoShokanSofuIdentifier, DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity, KyodoShoriyoJukyushaIdoShokanSofu> implements Serializable {
 
     private final DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity entity;
     private final KyodoShoriyoJukyushaIdoShokanSofuIdentifier id;
@@ -44,9 +42,9 @@ extends ModelBase<KyodoShoriyoJukyushaIdoShokanSofuIdentifier,
     public KyodoShoriyoJukyushaIdoShokanSofu(FlexibleDate 異動年月日,
             RString 異動区分コード,
             RString 受給者異動事由,
-            HokenshaNo 証記載保険者番号,
+            ShoKisaiHokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
         requireNonNull(異動区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("異動区分コード"));
         requireNonNull(受給者異動事由, UrSystemErrorMessages.値がnull.getReplacedMessage("受給者異動事由"));
@@ -74,8 +72,7 @@ extends ModelBase<KyodoShoriyoJukyushaIdoShokanSofuIdentifier,
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity}より{@link KyodoShoriyoJukyushaIdoShokanSofu}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity}
+     * @param entity DBより取得した{@link DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity}
      */
     public KyodoShoriyoJukyushaIdoShokanSofu(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("共同処理用受給者異動償還送付"));
@@ -135,7 +132,7 @@ extends ModelBase<KyodoShoriyoJukyushaIdoShokanSofuIdentifier,
      *
      * @return 証記載保険者番号
      */
-    public HokenshaNo get証記載保険者番号() {
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
         return entity.getShoKisaiHokenshaNo();
     }
 
@@ -153,7 +150,7 @@ extends ModelBase<KyodoShoriyoJukyushaIdoShokanSofuIdentifier,
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -224,8 +221,7 @@ extends ModelBase<KyodoShoriyoJukyushaIdoShokanSofuIdentifier,
     /**
      * 共同処理用受給者異動償還送付の識別子{@link KyodoShoriyoJukyushaIdoShokanSofuIdentifier}を返します。
      *
-     * @return
-     * 共同処理用受給者異動償還送付の識別子{@link KyodoShoriyoJukyushaIdoShokanSofuIdentifier}
+     * @return 共同処理用受給者異動償還送付の識別子{@link KyodoShoriyoJukyushaIdoShokanSofuIdentifier}
      */
     @Override
     public KyodoShoriyoJukyushaIdoShokanSofuIdentifier identifier() {

@@ -31,21 +31,24 @@ public class KyokaisoHokenryoDankai extends ModelBase<KyokaisoHokenryoDankaiIden
      *
      * @param 被保険者番号 被保険者番号
      * @param 履歴番号 履歴番号
+     * @param リンク番号 リンク番号
      * @param 適用開始年月 適用開始年月
      */
     public KyokaisoHokenryoDankai(HihokenshaNo 被保険者番号,
-            Decimal 履歴番号,
+            int 履歴番号,
+            int リンク番号,
             FlexibleYearMonth 適用開始年月) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
         this.entity = new DbT1007KyokaisoHokenryoDankaiEntity();
         this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setRirekiNo(履歴番号);
+        this.entity.setLinkNo(リンク番号);
         this.entity.setTekiyoKaishiYM(適用開始年月);
         this.id = new KyokaisoHokenryoDankaiIdentifier(
                 被保険者番号,
                 履歴番号,
+                リンク番号,
                 適用開始年月
         );
     }
@@ -61,6 +64,7 @@ public class KyokaisoHokenryoDankai extends ModelBase<KyokaisoHokenryoDankaiIden
         this.id = new KyokaisoHokenryoDankaiIdentifier(
                 entity.getHihokenshaNo(),
                 entity.getRirekiNo(),
+                entity.getLinkNo(),
                 entity.getTekiyoKaishiYM()
         );
     }
@@ -94,8 +98,17 @@ public class KyokaisoHokenryoDankai extends ModelBase<KyokaisoHokenryoDankaiIden
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
+    }
+
+    /**
+     * リンク番号を返します。
+     *
+     * @return リンク番号
+     */
+    public int getリンク番号() {
+        return entity.getLinkNo();
     }
 
     /**

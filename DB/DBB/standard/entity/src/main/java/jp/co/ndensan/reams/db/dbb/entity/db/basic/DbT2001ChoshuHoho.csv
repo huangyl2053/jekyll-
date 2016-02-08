@@ -30,5 +30,5 @@ yokunendoKariNenkinCode,varchar,RString,,,,,翌年度仮徴収・年金コード
 yokunendoKariHosokuM,varchar,RString,,,,,翌年度仮徴収・捕捉月,A
 iraiSohuzumiFlag,bool,boolean,,,,,依頼情報送付済みフラグ,A
 tsuikaIraiSohuzumiFlag,bool,boolean,,,,,追加依頼情報送付済みフラグ,A
-tokuchoTeishiTimestamp,UDD018YMDHMS,YMDHMS,,,,,特別徴収停止日時,A
+tokuchoTeishiNichiji,UDD018YMDHMS,YMDHMS,,,,,特別徴収停止日時,A
 tokuchoTeishiJiyuCode,varchar,RString,,,,,特別徴収停止事由コード,A

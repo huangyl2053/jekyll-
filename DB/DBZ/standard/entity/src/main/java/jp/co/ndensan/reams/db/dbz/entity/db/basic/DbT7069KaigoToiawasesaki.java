@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 介護問合せ先テーブルの項目定義クラスです。
  */
 public enum DbT7069KaigoToiawasesaki implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -45,6 +45,7 @@ public enum DbT7069KaigoToiawasesaki implements IColumnDefinition {
     subGyomuCode(2147483647, 0),
     /**
      * 帳票分類ID
+     * <br/>共通としての管理時は「000000000」
      */
     chohyoBunruiID(2147483647, 0),
     /**

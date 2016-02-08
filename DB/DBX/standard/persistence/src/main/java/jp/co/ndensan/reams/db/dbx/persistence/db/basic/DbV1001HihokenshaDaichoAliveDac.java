@@ -6,12 +6,13 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.*;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.edaNo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.idoYMD;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 被保険者台帳管理Aliveのデータアクセスクラスです。
  */
-public class DbV1001HihokenshaDaichoAliveDac implements ISaveable<DbV1001HihokenshaDaichoEntity> {
+public class DbV1001HihokenshaDaichoAliveDac {
 
     @InjectSession
     private SqlSession session;
@@ -80,7 +81,6 @@ public class DbV1001HihokenshaDaichoAliveDac implements ISaveable<DbV1001Hihoken
      * @return 登録件数
      */
     @Transaction
-    @Override
     public int save(DbV1001HihokenshaDaichoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳管理Aliveエンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。

@@ -7,20 +7,16 @@ package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GaitoHigaitoKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.KazeiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.ChoteiJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.core.code.FujoShuruiCodeValue;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -48,7 +44,56 @@ public class FukaBuilder {
 
     }
 
+//TODO Key項目のsetterメソッドは削除してください。
 //TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
+    /**
+     * 調定年度を設定します。
+     *
+     * @param 調定年度 調定年度
+     * @return {@link FukaBuilder}
+     */
+    public FukaBuilder set調定年度(FlexibleYear 調定年度) {
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
+        entity.setChoteiNendo(調定年度);
+        return this;
+    }
+
+    /**
+     * 賦課年度を設定します。
+     *
+     * @param 賦課年度 賦課年度
+     * @return {@link FukaBuilder}
+     */
+    public FukaBuilder set賦課年度(FlexibleYear 賦課年度) {
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        entity.setFukaNendo(賦課年度);
+        return this;
+    }
+
+    /**
+     * 通知書番号を設定します。
+     *
+     * @param 通知書番号 通知書番号
+     * @return {@link FukaBuilder}
+     */
+    public FukaBuilder set通知書番号(TsuchishoNo 通知書番号) {
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+        entity.setTsuchishoNo(通知書番号);
+        return this;
+    }
+
+    /**
+     * 履歴番号を設定します。
+     *
+     * @param 履歴番号 履歴番号
+     * @return {@link FukaBuilder}
+     */
+    public FukaBuilder set履歴番号(int 履歴番号) {
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        entity.setRirekiNo(履歴番号);
+        return this;
+    }
+
     /**
      * 被保険者番号を設定します。
      *
@@ -91,7 +136,7 @@ public class FukaBuilder {
      * @param 世帯員数 世帯員数
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set世帯員数(Decimal 世帯員数) {
+    public FukaBuilder set世帯員数(int 世帯員数) {
         requireNonNull(世帯員数, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯員数"));
         entity.setSetaiInsu(世帯員数);
         return this;
@@ -115,9 +160,9 @@ public class FukaBuilder {
      * @param 資格取得事由 資格取得事由
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set資格取得事由(KaigoShikakuShutokuJiyu 資格取得事由) {
+    public FukaBuilder set資格取得事由(RString 資格取得事由) {
         requireNonNull(資格取得事由, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得事由"));
-        entity.setShikakuShutokuJiyu(資格取得事由.value().value());
+        entity.setShikakuShutokuJiyu(資格取得事由);
         return this;
     }
 
@@ -139,9 +184,9 @@ public class FukaBuilder {
      * @param 資格喪失事由 資格喪失事由
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set資格喪失事由(KaigoShikakuSoshitsuJiyu 資格喪失事由) {
+    public FukaBuilder set資格喪失事由(RString 資格喪失事由) {
         requireNonNull(資格喪失事由, UrSystemErrorMessages.値がnull.getReplacedMessage("資格喪失事由"));
-        entity.setShikakuSoshitsuJiyu(資格喪失事由.value().value());
+        entity.setShikakuSoshitsuJiyu(資格喪失事由);
         return this;
     }
 
@@ -151,9 +196,9 @@ public class FukaBuilder {
      * @param 生活保護扶助種類 生活保護扶助種類
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set生活保護扶助種類(FujoShuruiCodeValue 生活保護扶助種類) {
+    public FukaBuilder set生活保護扶助種類(RString 生活保護扶助種類) {
         requireNonNull(生活保護扶助種類, UrSystemErrorMessages.値がnull.getReplacedMessage("生活保護扶助種類"));
-        entity.setSeihofujoShurui(生活保護扶助種類.value().value());
+        entity.setSeihofujoShurui(生活保護扶助種類);
         return this;
     }
 
@@ -223,9 +268,9 @@ public class FukaBuilder {
      * @param 課税区分 課税区分
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set課税区分(KazeiKubun 課税区分) {
+    public FukaBuilder set課税区分(RString 課税区分) {
         requireNonNull(課税区分, UrSystemErrorMessages.値がnull.getReplacedMessage("課税区分"));
-        entity.setKazeiKubun(課税区分.code());
+        entity.setKazeiKubun(課税区分);
         return this;
     }
 
@@ -235,9 +280,9 @@ public class FukaBuilder {
      * @param 世帯課税区分 世帯課税区分
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set世帯課税区分(KazeiKubun 世帯課税区分) {
+    public FukaBuilder set世帯課税区分(RString 世帯課税区分) {
         requireNonNull(世帯課税区分, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯課税区分"));
-        entity.setSetaikazeiKubun(世帯課税区分.code());
+        entity.setSetaikazeiKubun(世帯課税区分);
         return this;
     }
 
@@ -379,9 +424,9 @@ public class FukaBuilder {
      * @param 調定日時 調定日時
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set調定日時(RDateTime 調定日時) {
+    public FukaBuilder set調定日時(YMDHMS 調定日時) {
         requireNonNull(調定日時, UrSystemErrorMessages.値がnull.getReplacedMessage("調定日時"));
-        entity.setChoteiTimestamp(調定日時);
+        entity.setChoteiNichiji(調定日時);
         return this;
     }
 
@@ -391,9 +436,9 @@ public class FukaBuilder {
      * @param 調定事由1 調定事由1
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set調定事由1(ChoteiJiyu 調定事由1) {
+    public FukaBuilder set調定事由1(RString 調定事由1) {
         requireNonNull(調定事由1, UrSystemErrorMessages.値がnull.getReplacedMessage("調定事由1"));
-        entity.setChoteiJiyu1(調定事由1.value().value());
+        entity.setChoteiJiyu1(調定事由1);
         return this;
     }
 
@@ -403,9 +448,9 @@ public class FukaBuilder {
      * @param 調定事由2 調定事由2
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set調定事由2(ChoteiJiyu 調定事由2) {
+    public FukaBuilder set調定事由2(RString 調定事由2) {
         requireNonNull(調定事由2, UrSystemErrorMessages.値がnull.getReplacedMessage("調定事由2"));
-        entity.setChoteiJiyu2(調定事由2.value().value());
+        entity.setChoteiJiyu2(調定事由2);
         return this;
     }
 
@@ -415,9 +460,9 @@ public class FukaBuilder {
      * @param 調定事由3 調定事由3
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set調定事由3(ChoteiJiyu 調定事由3) {
+    public FukaBuilder set調定事由3(RString 調定事由3) {
         requireNonNull(調定事由3, UrSystemErrorMessages.値がnull.getReplacedMessage("調定事由3"));
-        entity.setChoteiJiyu3(調定事由3.value().value());
+        entity.setChoteiJiyu3(調定事由3);
         return this;
     }
 
@@ -427,9 +472,9 @@ public class FukaBuilder {
      * @param 調定事由4 調定事由4
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set調定事由4(ChoteiJiyu 調定事由4) {
+    public FukaBuilder set調定事由4(RString 調定事由4) {
         requireNonNull(調定事由4, UrSystemErrorMessages.値がnull.getReplacedMessage("調定事由4"));
-        entity.setChoteiJiyu4(調定事由4.value().value());
+        entity.setChoteiJiyu4(調定事由4);
         return this;
     }
 
@@ -499,7 +544,7 @@ public class FukaBuilder {
      * @param 徴収方法履歴番号 徴収方法履歴番号
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set徴収方法履歴番号(Decimal 徴収方法履歴番号) {
+    public FukaBuilder set徴収方法履歴番号(int 徴収方法履歴番号) {
         requireNonNull(徴収方法履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法履歴番号"));
         entity.setChoshuHohoRirekiNo(徴収方法履歴番号);
         return this;
@@ -511,9 +556,9 @@ public class FukaBuilder {
      * @param 異動基準日時 異動基準日時
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set異動基準日時(RDateTime 異動基準日時) {
+    public FukaBuilder set異動基準日時(YMDHMS 異動基準日時) {
         requireNonNull(異動基準日時, UrSystemErrorMessages.値がnull.getReplacedMessage("異動基準日時"));
-        entity.setIdoKijunTimestamp(異動基準日時);
+        entity.setIdoKijunNichiji(異動基準日時);
         return this;
     }
 
@@ -535,9 +580,9 @@ public class FukaBuilder {
      * @param 境界層区分 境界層区分
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set境界層区分(GaitoHigaitoKubun 境界層区分) {
+    public FukaBuilder set境界層区分(RString 境界層区分) {
         requireNonNull(境界層区分, UrSystemErrorMessages.値がnull.getReplacedMessage("境界層区分"));
-        entity.setKyokaisoKubun(境界層区分.getCode());
+        entity.setKyokaisoKubun(境界層区分);
         return this;
     }
 

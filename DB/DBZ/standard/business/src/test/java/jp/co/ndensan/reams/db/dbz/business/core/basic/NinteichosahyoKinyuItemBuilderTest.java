@@ -82,11 +82,5 @@ public class NinteichosahyoKinyuItemBuilderTest extends DbzTestBase {
             assertThat(business.getサービスの状況記入(), is(DbT5209NinteichosahyoKinyuItemEntityGenerator.DEFAULT_サービスの状況記入));
         }
 
-        @Test
-        public void 戻り値のサービスの状況イメージ共有ファイルIDは_設定した値と同じサービスの状況イメージ共有ファイルIDを返す() {
-            business = sut.setサービスの状況イメージ共有ファイルID(DbT5209NinteichosahyoKinyuItemEntityGenerator.DEFAULT_サービスの状況イメージ共有ファイルID).build();
-            assertThat(business.getサービスの状況イメージ共有ファイルID(), is(DbT5209NinteichosahyoKinyuItemEntityGenerator.DEFAULT_サービスの状況イメージ共有ファイルID));
-        }
-
     }
 }

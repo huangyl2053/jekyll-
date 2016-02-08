@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
-import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName.医療保険入力;
-import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName.施設入退所入力;
-import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName.被保履歴入力;
-import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName.資格取得情報登録;
+//import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName.医療保険入力;
+//import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName.施設入退所入力;
+//import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName.被保履歴入力;
+//import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName.資格取得情報登録;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuSearchDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.dgRohukuNenkinRireki_Row;
@@ -732,140 +732,140 @@ public class ShikakuShutokuJoho {
 //        return row;
 //    }
 
-    /**
-     * 被保履歴タブで追加ボタン押下時の処理。
-     *
-     * @param div 資格取得情報div
-     * @return ResponseData
-     */
-    public ResponseData<ShikakuShutokuJohoDiv> onClickAddHihoRireki(ShikakuShutokuJohoDiv div) {
-        return toHihoRirekiNyuryoku(div);
-    }
+//    /**
+//     * 被保履歴タブで追加ボタン押下時の処理。
+//     *
+//     * @param div 資格取得情報div
+//     * @return ResponseData
+//     */
+//    public ResponseData<ShikakuShutokuJohoDiv> onClickAddHihoRireki(ShikakuShutokuJohoDiv div) {
+//        return toHihoRirekiNyuryoku(div);
+//    }
+//
+//    /**
+//     * 被保履歴タブでDataGrid選択時の処理。
+//     *
+//     * @param div 資格取得情報div
+//     * @return ResponseData
+//     */
+//    public ResponseData<ShikakuShutokuJohoDiv> onSelectHihoRireki(ShikakuShutokuJohoDiv div) {
+//        return toHihoRirekiNyuryoku(div);
+//    }
+//
+//    /**
+//     * 被保履歴タブで確定ボタン押下時の処理。
+//     *
+//     * @param div 資格取得情報div
+//     * @return ResponseData
+//     */
+//    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnHihoRirekiKakutei(ShikakuShutokuJohoDiv div) {
+//        return toShikakuShutokuJohoToroku(div);
+//    }
+//
+//    /**
+//     * 被保履歴タブで取消ボタン押下時の処理。
+//     *
+//     * @param div 資格取得情報div
+//     * @return ResponseData
+//     */
+//    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnHihoRirekiTorikeshi(ShikakuShutokuJohoDiv div) {
+//        return toShikakuShutokuJohoToroku(div);
+//    }
+//
+//    /**
+//     * 医療保険タブで追加ボタン押下時の処理。
+//     *
+//     * @param div 資格取得情報div
+//     * @return ResponseData
+//     */
+//    public ResponseData<ShikakuShutokuJohoDiv> onClickAddIryoHokenRireki(ShikakuShutokuJohoDiv div) {
+//        return toIryoHokenNyuryoku(div);
+//    }
+//
+//    /**
+//     * 医療保険タブでDataGrid選択時の処理。
+//     *
+//     * @param div 資格取得情報div
+//     * @return ResponseData
+//     */
+//    public ResponseData<ShikakuShutokuJohoDiv> onSelectIryoHokenRireki(ShikakuShutokuJohoDiv div) {
+//        return toIryoHokenNyuryoku(div);
+//    }
+//
+//    /**
+//     * 医療保険タブで確定ボタン押下時の処理。
+//     *
+//     * @param div 資格取得情報div
+//     * @return ResponseData
+//     */
+//    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnIryoHokenKakutei(ShikakuShutokuJohoDiv div) {
+//        return toShikakuShutokuJohoToroku(div);
+//    }
+//
+//    /**
+//     * 医療保険タブで取消ボタン押下時の処理。
+//     *
+//     * @param div 資格取得情報div
+//     * @return ResponseData
+//     */
+//    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnIryoHokenTorikeshi(ShikakuShutokuJohoDiv div) {
+//        return toShikakuShutokuJohoToroku(div);
+//    }
+//
+//    /**
+//     * 施設入退所タブで追加ボタン押下時の処理。
+//     *
+//     * @param div 資格取得情報div
+//     * @return ResponseData
+//     */
+//    public ResponseData<ShikakuShutokuJohoDiv> onClickAddShisetsuNyutaisho(ShikakuShutokuJohoDiv div) {
+//        return toShisetsuNyutaisho(div);
+//    }
+//
+//    /**
+//     * 施設入退所タブでDataGrid選択時の処理。
+//     *
+//     * @param div 資格取得情報div
+//     * @return ResponseData
+//     */
+//    public ResponseData<ShikakuShutokuJohoDiv> onSelectShisetsuNyutaisho(ShikakuShutokuJohoDiv div) {
+//        return toShisetsuNyutaisho(div);
+//    }
+//
+//    /**
+//     * 施設入退所タブで確定ボタン押下時の処理。
+//     *
+//     * @param div 資格取得情報div
+//     * @return ResponseData
+//     */
+//    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnShisetsuNyutaishoKakutei(ShikakuShutokuJohoDiv div) {
+//        return toShikakuShutokuJohoToroku(div);
+//    }
+//
+//    /**
+//     * 施設入退所タブで取消ボタン押下時の処理。
+//     *
+//     * @param div 資格取得情報div
+//     * @return ResponseData
+//     */
+//    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnShisetsuNyutaishoTorikeshi(ShikakuShutokuJohoDiv div) {
+//        return toShikakuShutokuJohoToroku(div);
+//    }
 
-    /**
-     * 被保履歴タブでDataGrid選択時の処理。
-     *
-     * @param div 資格取得情報div
-     * @return ResponseData
-     */
-    public ResponseData<ShikakuShutokuJohoDiv> onSelectHihoRireki(ShikakuShutokuJohoDiv div) {
-        return toHihoRirekiNyuryoku(div);
-    }
-
-    /**
-     * 被保履歴タブで確定ボタン押下時の処理。
-     *
-     * @param div 資格取得情報div
-     * @return ResponseData
-     */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnHihoRirekiKakutei(ShikakuShutokuJohoDiv div) {
-        return toShikakuShutokuJohoToroku(div);
-    }
-
-    /**
-     * 被保履歴タブで取消ボタン押下時の処理。
-     *
-     * @param div 資格取得情報div
-     * @return ResponseData
-     */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnHihoRirekiTorikeshi(ShikakuShutokuJohoDiv div) {
-        return toShikakuShutokuJohoToroku(div);
-    }
-
-    /**
-     * 医療保険タブで追加ボタン押下時の処理。
-     *
-     * @param div 資格取得情報div
-     * @return ResponseData
-     */
-    public ResponseData<ShikakuShutokuJohoDiv> onClickAddIryoHokenRireki(ShikakuShutokuJohoDiv div) {
-        return toIryoHokenNyuryoku(div);
-    }
-
-    /**
-     * 医療保険タブでDataGrid選択時の処理。
-     *
-     * @param div 資格取得情報div
-     * @return ResponseData
-     */
-    public ResponseData<ShikakuShutokuJohoDiv> onSelectIryoHokenRireki(ShikakuShutokuJohoDiv div) {
-        return toIryoHokenNyuryoku(div);
-    }
-
-    /**
-     * 医療保険タブで確定ボタン押下時の処理。
-     *
-     * @param div 資格取得情報div
-     * @return ResponseData
-     */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnIryoHokenKakutei(ShikakuShutokuJohoDiv div) {
-        return toShikakuShutokuJohoToroku(div);
-    }
-
-    /**
-     * 医療保険タブで取消ボタン押下時の処理。
-     *
-     * @param div 資格取得情報div
-     * @return ResponseData
-     */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnIryoHokenTorikeshi(ShikakuShutokuJohoDiv div) {
-        return toShikakuShutokuJohoToroku(div);
-    }
-
-    /**
-     * 施設入退所タブで追加ボタン押下時の処理。
-     *
-     * @param div 資格取得情報div
-     * @return ResponseData
-     */
-    public ResponseData<ShikakuShutokuJohoDiv> onClickAddShisetsuNyutaisho(ShikakuShutokuJohoDiv div) {
-        return toShisetsuNyutaisho(div);
-    }
-
-    /**
-     * 施設入退所タブでDataGrid選択時の処理。
-     *
-     * @param div 資格取得情報div
-     * @return ResponseData
-     */
-    public ResponseData<ShikakuShutokuJohoDiv> onSelectShisetsuNyutaisho(ShikakuShutokuJohoDiv div) {
-        return toShisetsuNyutaisho(div);
-    }
-
-    /**
-     * 施設入退所タブで確定ボタン押下時の処理。
-     *
-     * @param div 資格取得情報div
-     * @return ResponseData
-     */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnShisetsuNyutaishoKakutei(ShikakuShutokuJohoDiv div) {
-        return toShikakuShutokuJohoToroku(div);
-    }
-
-    /**
-     * 施設入退所タブで取消ボタン押下時の処理。
-     *
-     * @param div 資格取得情報div
-     * @return ResponseData
-     */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnShisetsuNyutaishoTorikeshi(ShikakuShutokuJohoDiv div) {
-        return toShikakuShutokuJohoToroku(div);
-    }
-
-    private ResponseData<ShikakuShutokuJohoDiv> toHihoRirekiNyuryoku(ShikakuShutokuJohoDiv div) {
-        return ResponseData.of(div).setState(被保履歴入力);
-    }
-
-    private ResponseData<ShikakuShutokuJohoDiv> toIryoHokenNyuryoku(ShikakuShutokuJohoDiv div) {
-        return ResponseData.of(div).setState(医療保険入力);
-    }
-
-    private ResponseData<ShikakuShutokuJohoDiv> toShisetsuNyutaisho(ShikakuShutokuJohoDiv div) {
-        return ResponseData.of(div).setState(施設入退所入力);
-    }
-
-    public ResponseData<ShikakuShutokuJohoDiv> toShikakuShutokuJohoToroku(ShikakuShutokuJohoDiv div) {
-        return ResponseData.of(div).setState(資格取得情報登録);
-    }
+//    private ResponseData<ShikakuShutokuJohoDiv> toHihoRirekiNyuryoku(ShikakuShutokuJohoDiv div) {
+//        return ResponseData.of(div).setState(被保履歴入力);
+//    }
+//
+//    private ResponseData<ShikakuShutokuJohoDiv> toIryoHokenNyuryoku(ShikakuShutokuJohoDiv div) {
+//        return ResponseData.of(div).setState(医療保険入力);
+//    }
+//
+//    private ResponseData<ShikakuShutokuJohoDiv> toShisetsuNyutaisho(ShikakuShutokuJohoDiv div) {
+//        return ResponseData.of(div).setState(施設入退所入力);
+//    }
+//
+//    public ResponseData<ShikakuShutokuJohoDiv> toShikakuShutokuJohoToroku(ShikakuShutokuJohoDiv div) {
+//        return ResponseData.of(div).setState(資格取得情報登録);
+//    }
 
 }

@@ -29,7 +29,8 @@ public class KyokaisoHokenryoDankaiIdentifierTest extends DbzTestBase {
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static HihokenshaNo 被保険者番号;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
+    private static int リンク番号;
     private static FlexibleYearMonth 適用開始年月日;
 
     @BeforeClass
@@ -37,6 +38,7 @@ public class KyokaisoHokenryoDankaiIdentifierTest extends DbzTestBase {
 //TODO 主キー値を適切な値に置換してください
         被保険者番号 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_被保険者番号;
         履歴番号 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_履歴番号;
+        リンク番号 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_リンク番号;
         適用開始年月日 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_適用開始年月;
     }
 
@@ -44,7 +46,7 @@ public class KyokaisoHokenryoDankaiIdentifierTest extends DbzTestBase {
 
         @Test
         public void シリアライズできる() {
-            KyokaisoHokenryoDankaiIdentifier sut = new KyokaisoHokenryoDankaiIdentifier(被保険者番号, 履歴番号, 適用開始年月日);
+            KyokaisoHokenryoDankaiIdentifier sut = new KyokaisoHokenryoDankaiIdentifier(被保険者番号, 履歴番号, リンク番号, 適用開始年月日);
             assertThat(sut, is(IsSerializable.serializable()));
         }
     }

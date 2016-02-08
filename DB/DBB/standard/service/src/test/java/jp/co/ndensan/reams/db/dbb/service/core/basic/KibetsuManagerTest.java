@@ -53,7 +53,7 @@ public class KibetsuManagerTest {
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYear 主キー2 = DbT2003KibetsuEntityGenerator.DEFAULT_賦課年度;
             TsuchishoNo 主キー3 = DbT2003KibetsuEntityGenerator.DEFAULT_通知書番号;
-            Decimal 主キー4 = DbT2003KibetsuEntityGenerator.DEFAULT_履歴番号;
+            int 主キー4 = DbT2003KibetsuEntityGenerator.DEFAULT_履歴番号;
             RString 主キー5 = DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法;
             int 主キー6 = DbT2003KibetsuEntityGenerator.DEFAULT_期;
             sut.get介護期別(null, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
@@ -63,7 +63,7 @@ public class KibetsuManagerTest {
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYear 主キー1 = DbT2003KibetsuEntityGenerator.DEFAULT_調定年度;
             TsuchishoNo 主キー3 = DbT2003KibetsuEntityGenerator.DEFAULT_通知書番号;
-            Decimal 主キー4 = DbT2003KibetsuEntityGenerator.DEFAULT_履歴番号;
+            int 主キー4 = DbT2003KibetsuEntityGenerator.DEFAULT_履歴番号;
             RString 主キー5 = DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法;
             int 主キー6 = DbT2003KibetsuEntityGenerator.DEFAULT_期;
             sut.get介護期別(主キー1, null, 主キー3, 主キー4, 主キー5, 主キー6);
@@ -73,28 +73,28 @@ public class KibetsuManagerTest {
         public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYear 主キー1 = DbT2003KibetsuEntityGenerator.DEFAULT_調定年度;
             FlexibleYear 主キー2 = DbT2003KibetsuEntityGenerator.DEFAULT_賦課年度;
-            Decimal 主キー4 = DbT2003KibetsuEntityGenerator.DEFAULT_履歴番号;
+            int 主キー4 = DbT2003KibetsuEntityGenerator.DEFAULT_履歴番号;
             RString 主キー5 = DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法;
             int 主キー6 = DbT2003KibetsuEntityGenerator.DEFAULT_期;
             sut.get介護期別(主キー1, 主キー2, null, 主キー4, 主キー5, 主キー6);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
-            FlexibleYear 主キー1 = DbT2003KibetsuEntityGenerator.DEFAULT_調定年度;
-            FlexibleYear 主キー2 = DbT2003KibetsuEntityGenerator.DEFAULT_賦課年度;
-            TsuchishoNo 主キー3 = DbT2003KibetsuEntityGenerator.DEFAULT_通知書番号;
-            RString 主キー5 = DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法;
-            int 主キー6 = DbT2003KibetsuEntityGenerator.DEFAULT_期;
-            sut.get介護期別(主キー1, 主キー2, 主キー3, null, 主キー5, 主キー6);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
+//            FlexibleYear 主キー1 = DbT2003KibetsuEntityGenerator.DEFAULT_調定年度;
+//            FlexibleYear 主キー2 = DbT2003KibetsuEntityGenerator.DEFAULT_賦課年度;
+//            TsuchishoNo 主キー3 = DbT2003KibetsuEntityGenerator.DEFAULT_通知書番号;
+//            RString 主キー5 = DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法;
+//            int 主キー6 = DbT2003KibetsuEntityGenerator.DEFAULT_期;
+//            sut.get介護期別(主キー1, 主キー2, 主キー3, null, 主キー5, 主キー6);
+//        }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型5にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYear 主キー1 = DbT2003KibetsuEntityGenerator.DEFAULT_調定年度;
             FlexibleYear 主キー2 = DbT2003KibetsuEntityGenerator.DEFAULT_賦課年度;
             TsuchishoNo 主キー3 = DbT2003KibetsuEntityGenerator.DEFAULT_通知書番号;
-            Decimal 主キー4 = DbT2003KibetsuEntityGenerator.DEFAULT_履歴番号;
+            int 主キー4 = DbT2003KibetsuEntityGenerator.DEFAULT_履歴番号;
             int 主キー6 = DbT2003KibetsuEntityGenerator.DEFAULT_期;
             sut.get介護期別(主キー1, 主キー2, 主キー3, 主キー4, null, 主キー6);
         }
@@ -103,12 +103,12 @@ public class KibetsuManagerTest {
         @Test
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(FlexibleYear.class), any(FlexibleYear.class), any(TsuchishoNo.class),
-                    any(Decimal.class), any(RString.class), any(int.class))).thenReturn(null);
+                    any(int.class), any(RString.class), any(int.class))).thenReturn(null);
 
             FlexibleYear 主キー1 = DbT2003KibetsuEntityGenerator.DEFAULT_調定年度;
             FlexibleYear 主キー2 = DbT2003KibetsuEntityGenerator.DEFAULT_賦課年度;
             TsuchishoNo 主キー3 = DbT2003KibetsuEntityGenerator.DEFAULT_通知書番号;
-            Decimal 主キー4 = DbT2003KibetsuEntityGenerator.DEFAULT_履歴番号;
+            int 主キー4 = DbT2003KibetsuEntityGenerator.DEFAULT_履歴番号;
             RString 主キー5 = DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法;
             int 主キー6 = DbT2003KibetsuEntityGenerator.DEFAULT_期;
             Kibetsu result = sut.get介護期別(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
@@ -120,12 +120,12 @@ public class KibetsuManagerTest {
         public void 検索結果が存在する場合() {
             DbT2003KibetsuEntity entity = DbT2003KibetsuEntityGenerator.createDbT2003KibetsuEntity();
             when(dac.selectByKey(any(FlexibleYear.class), any(FlexibleYear.class), any(TsuchishoNo.class),
-                    any(Decimal.class), any(RString.class), any(int.class))).thenReturn(entity);
+                    any(int.class), any(RString.class), any(int.class))).thenReturn(entity);
 
             FlexibleYear 主キー1 = DbT2003KibetsuEntityGenerator.DEFAULT_調定年度;
             FlexibleYear 主キー2 = DbT2003KibetsuEntityGenerator.DEFAULT_賦課年度;
             TsuchishoNo 主キー3 = DbT2003KibetsuEntityGenerator.DEFAULT_通知書番号;
-            Decimal 主キー4 = DbT2003KibetsuEntityGenerator.DEFAULT_履歴番号;
+            int 主キー4 = DbT2003KibetsuEntityGenerator.DEFAULT_履歴番号;
             RString 主キー5 = DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法;
             int 主キー6 = DbT2003KibetsuEntityGenerator.DEFAULT_期;
             Kibetsu result = sut.get介護期別(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);

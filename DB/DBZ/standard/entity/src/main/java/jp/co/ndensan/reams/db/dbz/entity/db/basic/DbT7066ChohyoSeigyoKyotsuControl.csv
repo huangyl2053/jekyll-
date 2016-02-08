@@ -9,6 +9,7 @@ chohyoShuturyokujunHyojiHohho,varchar,RString,,,,,帳票出力順表示方法,A
 kaigoToiawasesakiShiyoKubun,varchar,RString,,,,,介護問合せ先使用区分,A
 jushoHenshuShiyoKubun,varchar,RString,,,,,住所編集使用区分,A
 setainushiHyojiShiyoKubun,varchar,RString,,,,,世帯主表示使用区分,A
+dainoninHyojiShiyoKubun,varchar,RString,,,,,代納人表示使用区分,A
 customerBarCodeShiyoKubun,varchar,RString,,,,,カスタマバーコード使用区分,A
 gaibuChohyoMojigireSeigyoShiyoKubun,varchar,RString,,,,,外部帳票文字切れ制御使用区分,A
 naibuChohyoMojigireSeigyoShiyoKubun,varchar,RString,,,,,内部帳票文字切れ制御使用区分,A
@@ -17,4 +18,8 @@ teikeibunMojiSizeShiyoKubun,varchar,RString,,,,,定型文文字サイズ使用�
 kozaMaskShiyoKubun,varchar,RString,,,,,口座マスク使用区分,A
 kozaMeigininKanaYusenShiyoKubun,varchar,RString,,,,,口座名義人カナ優先使用区分,A
 daikoPrintShiyoKubun,varchar,RString,,,,,代行プリント使用区分,A
+denshiKoinInjiUmuShiyoKubun,varchar,RString,,,,,電子行公印印字有無使用区分,A
+shuchoMeiInjiIchiShiyoKubun,varchar,RString,,,,,首長名印字位置使用区分,A
+koinShoryakuInjiUmuShiyoKubun,varchar,RString,,,,,公印書略印字有無使用区分,A
+koinMojiretsuInjiUmuShiyoKubun,varchar,RString,,,,,公印文字列印字有無使用区分,A
 chikuhyojiShiyoKubun,varchar,RString,,,,,地区表示使用区分,A

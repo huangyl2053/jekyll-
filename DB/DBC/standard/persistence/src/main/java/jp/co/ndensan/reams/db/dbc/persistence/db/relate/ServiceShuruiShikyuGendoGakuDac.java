@@ -104,7 +104,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
                 table(DbT7111ServiceShuruiShikyuGendoGaku.class).
                 where(and(
                                 eq(DbT7111ServiceShuruiShikyuGendoGaku.yoKaigoJotaiKubun, 要介護状態区分.getCode()),
-                                leq(DbT7111ServiceShuruiShikyuGendoGaku.tekiyoKaishuYM, 基準日.getYearMonth()))).
+                                leq(DbT7111ServiceShuruiShikyuGendoGaku.tekiyoKaishiYM, 基準日.getYearMonth()))).
                 order(by(DbT7111ServiceShuruiShikyuGendoGaku.rirekiNo, Order.DESC)).
                 toList(DbT7111ServiceShuruiShikyuGendoGakuEntity.class);
 

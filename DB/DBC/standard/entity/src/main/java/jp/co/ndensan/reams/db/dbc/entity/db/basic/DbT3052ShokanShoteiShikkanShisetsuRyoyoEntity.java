@@ -7,18 +7,19 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 
 /**
  * 償還払請求所定疾患施設療養費等テーブルのエンティティクラスです。
  */
 public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntityBase<DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3052ShokanShoteiShikkanShisetsuRyoyo");
@@ -42,21 +43,21 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
     @PrimaryKey
     private RString yoshikiNo;
     @PrimaryKey
-    private RString junjiNo;
+    private RString meisaiNo;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private RString renban;
     private RString kinkyuShobyoName1;
     private RString kinkyuShobyoName2;
     private RString kinkyuShobyoName3;
     private FlexibleDate kinkyuChiryoKaishiYMD1;
     private FlexibleDate kinkyuChiryoKaishiYMD2;
     private FlexibleDate kinkyuChiryoKaishiYMD3;
-    private Decimal oshinNissu;
+    private int oshinNissu;
     private RString oshinIryoKikanName;
-    private Decimal tsuinNissu;
+    private int tsuinNissu;
     private RString tsuinKikanName;
     private int kinkyuChiryoKanriTanisu;
-    private Decimal kinkyuChiryoKanriNissu;
+    private int kinkyuChiryoKanriNissu;
     private int kinkyuChiryoKanriSubTotal;
     private int rehabilitationTanisu;
     private int shochiTanisu;
@@ -91,7 +92,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
     private FlexibleDate shoteiShikkanShobyoKaishiYMD2;
     private FlexibleDate shoteiShikkanShobyoKaishiYMD3;
     private int shoteiShikkanTanisu;
-    private Decimal shoteiShikkanNissu;
+    private int shoteiShikkanNissu;
     private int shoteiShikkanSubTotal;
 
     /**
@@ -153,7 +154,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
@@ -171,7 +172,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @param serviceTeikyoYM サービス提供年月
      */
-    public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
+    public void setServiceTeikyoYM(@Nonnull FlexibleYearMonth serviceTeikyoYM) {
         this.serviceTeikyoYM = serviceTeikyoYM;
     }
 
@@ -189,7 +190,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @param seiriNo 整理番号
      */
-    public void setSeiriNo(RString seiriNo) {
+    public void setSeiriNo(@Nonnull RString seiriNo) {
         this.seiriNo = seiriNo;
     }
 
@@ -207,7 +208,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @param jigyoshaNo 事業者番号
      */
-    public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(@Nonnull JigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
@@ -225,48 +226,48 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @param yoshikiNo 様式番号
      */
-    public void setYoshikiNo(RString yoshikiNo) {
+    public void setYoshikiNo(@Nonnull RString yoshikiNo) {
         this.yoshikiNo = yoshikiNo;
     }
 
     /**
-     * 順次番号のgetメソッドです。
+     * 明細番号のgetメソッドです。
      * <br/>
      * <br/>複数レコード対応のため
      *
-     * @return 順次番号
+     * @return 明細番号
      */
-    public RString getJunjiNo() {
-        return junjiNo;
+    public RString getMeisaiNo() {
+        return meisaiNo;
     }
 
     /**
-     * 順次番号のsetメソッドです。
+     * 明細番号のsetメソッドです。
      * <br/>
      * <br/>複数レコード対応のため
      *
-     * @param junjiNo 順次番号
+     * @param meisaiNo 明細番号
      */
-    public void setJunjiNo(RString junjiNo) {
-        this.junjiNo = junjiNo;
+    public void setMeisaiNo(@Nonnull RString meisaiNo) {
+        this.meisaiNo = meisaiNo;
     }
 
     /**
-     * 履歴番号のgetメソッドです。
+     * 連番のgetメソッドです。
      *
-     * @return 履歴番号
+     * @return 連番
      */
-    public Decimal getRirekiNo() {
-        return rirekiNo;
+    public RString getRenban() {
+        return renban;
     }
 
     /**
-     * 履歴番号のsetメソッドです。
+     * 連番のsetメソッドです。
      *
-     * @param rirekiNo 履歴番号
+     * @param renban 連番
      */
-    public void setRirekiNo(Decimal rirekiNo) {
-        this.rirekiNo = rirekiNo;
+    public void setRenban(@Nonnull RString renban) {
+        this.renban = renban;
     }
 
     /**
@@ -274,6 +275,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 緊急時傷病名１
      */
+    @CheckForNull
     public RString getKinkyuShobyoName1() {
         return kinkyuShobyoName1;
     }
@@ -292,6 +294,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 緊急時傷病名２
      */
+    @CheckForNull
     public RString getKinkyuShobyoName2() {
         return kinkyuShobyoName2;
     }
@@ -310,6 +313,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 緊急時傷病名３
      */
+    @CheckForNull
     public RString getKinkyuShobyoName3() {
         return kinkyuShobyoName3;
     }
@@ -328,6 +332,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 緊急時治療開始年月日１
      */
+    @CheckForNull
     public FlexibleDate getKinkyuChiryoKaishiYMD1() {
         return kinkyuChiryoKaishiYMD1;
     }
@@ -346,6 +351,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 緊急時治療開始年月日２
      */
+    @CheckForNull
     public FlexibleDate getKinkyuChiryoKaishiYMD2() {
         return kinkyuChiryoKaishiYMD2;
     }
@@ -364,6 +370,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 緊急時治療開始年月日３
      */
+    @CheckForNull
     public FlexibleDate getKinkyuChiryoKaishiYMD3() {
         return kinkyuChiryoKaishiYMD3;
     }
@@ -382,7 +389,8 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 往診日数
      */
-    public Decimal getOshinNissu() {
+    @CheckForNull
+    public int getOshinNissu() {
         return oshinNissu;
     }
 
@@ -391,7 +399,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @param oshinNissu 往診日数
      */
-    public void setOshinNissu(Decimal oshinNissu) {
+    public void setOshinNissu(int oshinNissu) {
         this.oshinNissu = oshinNissu;
     }
 
@@ -400,6 +408,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 往診医療機関名
      */
+    @CheckForNull
     public RString getOshinIryoKikanName() {
         return oshinIryoKikanName;
     }
@@ -418,7 +427,8 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 通院日数
      */
-    public Decimal getTsuinNissu() {
+    @CheckForNull
+    public int getTsuinNissu() {
         return tsuinNissu;
     }
 
@@ -427,7 +437,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @param tsuinNissu 通院日数
      */
-    public void setTsuinNissu(Decimal tsuinNissu) {
+    public void setTsuinNissu(int tsuinNissu) {
         this.tsuinNissu = tsuinNissu;
     }
 
@@ -436,6 +446,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 通院医療機関名
      */
+    @CheckForNull
     public RString getTsuinKikanName() {
         return tsuinKikanName;
     }
@@ -454,6 +465,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 緊急時治療管理単位数
      */
+    @CheckForNull
     public int getKinkyuChiryoKanriTanisu() {
         return kinkyuChiryoKanriTanisu;
     }
@@ -472,7 +484,8 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 緊急時治療管理日数
      */
-    public Decimal getKinkyuChiryoKanriNissu() {
+    @CheckForNull
+    public int getKinkyuChiryoKanriNissu() {
         return kinkyuChiryoKanriNissu;
     }
 
@@ -481,7 +494,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @param kinkyuChiryoKanriNissu 緊急時治療管理日数
      */
-    public void setKinkyuChiryoKanriNissu(Decimal kinkyuChiryoKanriNissu) {
+    public void setKinkyuChiryoKanriNissu(int kinkyuChiryoKanriNissu) {
         this.kinkyuChiryoKanriNissu = kinkyuChiryoKanriNissu;
     }
 
@@ -490,6 +503,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 緊急時治療管理小計
      */
+    @CheckForNull
     public int getKinkyuChiryoKanriSubTotal() {
         return kinkyuChiryoKanriSubTotal;
     }
@@ -508,6 +522,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return リハビリテーション単位数
      */
+    @CheckForNull
     public int getRehabilitationTanisu() {
         return rehabilitationTanisu;
     }
@@ -526,6 +541,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 処置単位数
      */
+    @CheckForNull
     public int getShochiTanisu() {
         return shochiTanisu;
     }
@@ -544,6 +560,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 手術単位数
      */
+    @CheckForNull
     public int getShujutsuTanisu() {
         return shujutsuTanisu;
     }
@@ -562,6 +579,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 麻酔単位数
      */
+    @CheckForNull
     public int getMasuiTanisu() {
         return masuiTanisu;
     }
@@ -580,6 +598,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 放射線治療単位数
      */
+    @CheckForNull
     public int getHoshasenChiryoTanisu() {
         return hoshasenChiryoTanisu;
     }
@@ -598,6 +617,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要１
      */
+    @CheckForNull
     public RString getTekiyo1() {
         return tekiyo1;
     }
@@ -616,6 +636,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要２
      */
+    @CheckForNull
     public RString getTekiyo2() {
         return tekiyo2;
     }
@@ -634,6 +655,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要３
      */
+    @CheckForNull
     public RString getTekiyo3() {
         return tekiyo3;
     }
@@ -652,6 +674,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要４
      */
+    @CheckForNull
     public RString getTekiyo4() {
         return tekiyo4;
     }
@@ -670,6 +693,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要５
      */
+    @CheckForNull
     public RString getTekiyo5() {
         return tekiyo5;
     }
@@ -688,6 +712,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要６
      */
+    @CheckForNull
     public RString getTekiyo6() {
         return tekiyo6;
     }
@@ -706,6 +731,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要７
      */
+    @CheckForNull
     public RString getTekiyo7() {
         return tekiyo7;
     }
@@ -724,6 +750,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要８
      */
+    @CheckForNull
     public RString getTekiyo8() {
         return tekiyo8;
     }
@@ -742,6 +769,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要９
      */
+    @CheckForNull
     public RString getTekiyo9() {
         return tekiyo9;
     }
@@ -760,6 +788,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要１０
      */
+    @CheckForNull
     public RString getTekiyo10() {
         return tekiyo10;
     }
@@ -778,6 +807,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要１１
      */
+    @CheckForNull
     public RString getTekiyo11() {
         return tekiyo11;
     }
@@ -796,6 +826,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要１２
      */
+    @CheckForNull
     public RString getTekiyo12() {
         return tekiyo12;
     }
@@ -814,6 +845,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要１３
      */
+    @CheckForNull
     public RString getTekiyo13() {
         return tekiyo13;
     }
@@ -832,6 +864,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要１４
      */
+    @CheckForNull
     public RString getTekiyo14() {
         return tekiyo14;
     }
@@ -850,6 +883,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要１５
      */
+    @CheckForNull
     public RString getTekiyo15() {
         return tekiyo15;
     }
@@ -868,6 +902,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要１６
      */
+    @CheckForNull
     public RString getTekiyo16() {
         return tekiyo16;
     }
@@ -886,6 +921,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要１７
      */
+    @CheckForNull
     public RString getTekiyo17() {
         return tekiyo17;
     }
@@ -904,6 +940,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要１８
      */
+    @CheckForNull
     public RString getTekiyo18() {
         return tekiyo18;
     }
@@ -922,6 +959,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要１９
      */
+    @CheckForNull
     public RString getTekiyo19() {
         return tekiyo19;
     }
@@ -940,6 +978,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 摘要２０
      */
+    @CheckForNull
     public RString getTekiyo20() {
         return tekiyo20;
     }
@@ -958,6 +997,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 緊急時施設療養費合計単位数
      */
+    @CheckForNull
     public int getKinkyuShisetsuRyoyohiTotalTanisu() {
         return kinkyuShisetsuRyoyohiTotalTanisu;
     }
@@ -976,6 +1016,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 所定疾患施設療養費傷病名１
      */
+    @CheckForNull
     public RString getShoteiShikkanShobyoName1() {
         return shoteiShikkanShobyoName1;
     }
@@ -994,6 +1035,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 所定疾患施設療養費傷病名２
      */
+    @CheckForNull
     public RString getShoteiShikkanShobyoName2() {
         return shoteiShikkanShobyoName2;
     }
@@ -1012,6 +1054,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 所定疾患施設療養費傷病名３
      */
+    @CheckForNull
     public RString getShoteiShikkanShobyoName3() {
         return shoteiShikkanShobyoName3;
     }
@@ -1030,6 +1073,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 所定疾患施設療養費開始年月日１
      */
+    @CheckForNull
     public FlexibleDate getShoteiShikkanShobyoKaishiYMD1() {
         return shoteiShikkanShobyoKaishiYMD1;
     }
@@ -1048,6 +1092,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 所定疾患施設療養費開始年月日２
      */
+    @CheckForNull
     public FlexibleDate getShoteiShikkanShobyoKaishiYMD2() {
         return shoteiShikkanShobyoKaishiYMD2;
     }
@@ -1066,6 +1111,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 所定疾患施設療養費開始年月日３
      */
+    @CheckForNull
     public FlexibleDate getShoteiShikkanShobyoKaishiYMD3() {
         return shoteiShikkanShobyoKaishiYMD3;
     }
@@ -1084,6 +1130,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 所定疾患施設療養費単位数
      */
+    @CheckForNull
     public int getShoteiShikkanTanisu() {
         return shoteiShikkanTanisu;
     }
@@ -1102,7 +1149,8 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 所定疾患施設療養費日数
      */
-    public Decimal getShoteiShikkanNissu() {
+    @CheckForNull
+    public int getShoteiShikkanNissu() {
         return shoteiShikkanNissu;
     }
 
@@ -1111,7 +1159,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @param shoteiShikkanNissu 所定疾患施設療養費日数
      */
-    public void setShoteiShikkanNissu(Decimal shoteiShikkanNissu) {
+    public void setShoteiShikkanNissu(int shoteiShikkanNissu) {
         this.shoteiShikkanNissu = shoteiShikkanNissu;
     }
 
@@ -1120,6 +1168,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      *
      * @return 所定疾患施設療養費小計
      */
+    @CheckForNull
     public int getShoteiShikkanSubTotal() {
         return shoteiShikkanSubTotal;
     }
@@ -1160,10 +1209,10 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
         if (!Objects.equals(this.yoshikiNo, other.yoshikiNo)) {
             return false;
         }
-        if (!Objects.equals(this.junjiNo, other.junjiNo)) {
+        if (!Objects.equals(this.meisaiNo, other.meisaiNo)) {
             return false;
         }
-        if (this.rirekiNo != other.rirekiNo) {
+        if (!Objects.equals(this.renban, other.renban)) {
             return false;
         }
         return true;
@@ -1179,8 +1228,8 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
         this.seiriNo = entity.seiriNo;
         this.jigyoshaNo = entity.jigyoshaNo;
         this.yoshikiNo = entity.yoshikiNo;
-        this.junjiNo = entity.junjiNo;
-        this.rirekiNo = entity.rirekiNo;
+        this.meisaiNo = entity.meisaiNo;
+        this.renban = entity.renban;
         this.kinkyuShobyoName1 = entity.kinkyuShobyoName1;
         this.kinkyuShobyoName2 = entity.kinkyuShobyoName2;
         this.kinkyuShobyoName3 = entity.kinkyuShobyoName3;
@@ -1238,7 +1287,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity extends DbTableEntity
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, jigyoshaNo, yoshikiNo, junjiNo, rirekiNo, kinkyuShobyoName1, kinkyuShobyoName2, kinkyuShobyoName3, kinkyuChiryoKaishiYMD1, kinkyuChiryoKaishiYMD2, kinkyuChiryoKaishiYMD3, oshinNissu, oshinIryoKikanName, tsuinNissu, tsuinKikanName, kinkyuChiryoKanriTanisu, kinkyuChiryoKanriNissu, kinkyuChiryoKanriSubTotal, rehabilitationTanisu, shochiTanisu, shujutsuTanisu, masuiTanisu, hoshasenChiryoTanisu, tekiyo1, tekiyo2, tekiyo3, tekiyo4, tekiyo5, tekiyo6, tekiyo7, tekiyo8, tekiyo9, tekiyo10, tekiyo11, tekiyo12, tekiyo13, tekiyo14, tekiyo15, tekiyo16, tekiyo17, tekiyo18, tekiyo19, tekiyo20, kinkyuShisetsuRyoyohiTotalTanisu, shoteiShikkanShobyoName1, shoteiShikkanShobyoName2, shoteiShikkanShobyoName3, shoteiShikkanShobyoKaishiYMD1, shoteiShikkanShobyoKaishiYMD2, shoteiShikkanShobyoKaishiYMD3, shoteiShikkanTanisu, shoteiShikkanNissu, shoteiShikkanSubTotal);
+        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, jigyoshaNo, yoshikiNo, meisaiNo, renban, kinkyuShobyoName1, kinkyuShobyoName2, kinkyuShobyoName3, kinkyuChiryoKaishiYMD1, kinkyuChiryoKaishiYMD2, kinkyuChiryoKaishiYMD3, oshinNissu, oshinIryoKikanName, tsuinNissu, tsuinKikanName, kinkyuChiryoKanriTanisu, kinkyuChiryoKanriNissu, kinkyuChiryoKanriSubTotal, rehabilitationTanisu, shochiTanisu, shujutsuTanisu, masuiTanisu, hoshasenChiryoTanisu, tekiyo1, tekiyo2, tekiyo3, tekiyo4, tekiyo5, tekiyo6, tekiyo7, tekiyo8, tekiyo9, tekiyo10, tekiyo11, tekiyo12, tekiyo13, tekiyo14, tekiyo15, tekiyo16, tekiyo17, tekiyo18, tekiyo19, tekiyo20, kinkyuShisetsuRyoyohiTotalTanisu, shoteiShikkanShobyoName1, shoteiShikkanShobyoName2, shoteiShikkanShobyoName3, shoteiShikkanShobyoKaishiYMD1, shoteiShikkanShobyoKaishiYMD2, shoteiShikkanShobyoKaishiYMD3, shoteiShikkanTanisu, shoteiShikkanNissu, shoteiShikkanSubTotal);
     }
 
 // </editor-fold>

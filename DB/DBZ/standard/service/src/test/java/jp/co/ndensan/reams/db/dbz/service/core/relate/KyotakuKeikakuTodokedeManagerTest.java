@@ -298,7 +298,7 @@ public class KyotakuKeikakuTodokedeManagerTest {
             return new KyotakuKeikakuJigyoshaSakusei(
                     主キー1,
                     主キー2,
-                    new Decimal(0));
+                    new Integer(0));
         }
 // 居宅給付計画自己作成
 

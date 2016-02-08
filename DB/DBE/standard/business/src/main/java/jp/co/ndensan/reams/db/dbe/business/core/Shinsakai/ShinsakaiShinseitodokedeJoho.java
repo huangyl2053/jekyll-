@@ -8,13 +8,10 @@ package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai;
 import java.io.Serializable;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.IShinseitodokedeJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.IShinseitodokedeJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.IShinseitodokedeJohoEntity;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -78,7 +75,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      * @return 申請届出者氏名
      */
     @Override
-    public AtenaMeisho get申請届出者氏名() {
+    public RString get申請届出者氏名() {
         return entity.getShinseiTodokedeshaShimei();
     }
 
@@ -88,7 +85,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      * @return 申請届出者氏名カナ
      */
     @Override
-    public AtenaKanaMeisho get申請届出者氏名カナ() {
+    public RString get申請届出者氏名カナ() {
         return entity.getShinseiTodokedeshaKanaShimei();
     }
 
@@ -99,7 +96,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      */
     @Override
     public RString get申請届出者続柄コード() {
-        return entity.getShinseiTodokedeshaTsuzukigaraCode();
+        return entity.getShinseiTodokedeshaTsuzukigara();
     }
 
     /**
@@ -138,7 +135,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      * @return 申請届出者住所
      */
     @Override
-    public AtenaJusho get申請届出者住所() {
+    public RString get申請届出者住所() {
         return entity.getShinseiTodokedeshaJusho();
     }
 
@@ -295,7 +292,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @return builder
          */
         @Override
-        public Builder setShinseiTodokedeshaShimei(AtenaMeisho shinseiTodokedeshaShimei) {
+        public Builder setShinseiTodokedeshaShimei(RString shinseiTodokedeshaShimei) {
             Objects.requireNonNull(shinseiTodokedeshaShimei);
             this.entity.setShinseiTodokedeshaShimei(shinseiTodokedeshaShimei);
             return this;
@@ -308,7 +305,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @return builder
          */
         @Override
-        public Builder setShinseiTodokedeshaKanaShimei(AtenaKanaMeisho shinseiTodokedeshaKanaShimei) {
+        public Builder setShinseiTodokedeshaKanaShimei(RString shinseiTodokedeshaKanaShimei) {
             Objects.requireNonNull(shinseiTodokedeshaKanaShimei);
             this.entity.setShinseiTodokedeshaKanaShimei(shinseiTodokedeshaKanaShimei);
             return this;
@@ -323,7 +320,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
         @Override
         public Builder setShinseiTodokedeshaTsuzukigaraCode(RString todokedeshaTsuzukigaraCode) {
             Objects.requireNonNull(todokedeshaTsuzukigaraCode);
-            this.entity.setShinseiTodokedeshaTsuzukigaraCode(todokedeshaTsuzukigaraCode);
+            this.entity.setShinseiTodokedeshaTsuzukigara(todokedeshaTsuzukigaraCode);
             return this;
         }
 
@@ -373,7 +370,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @return builder
          */
         @Override
-        public Builder setShinseiTodokedeshaJusho(AtenaJusho shinseiTodokedeshaJusho) {
+        public Builder setShinseiTodokedeshaJusho(RString shinseiTodokedeshaJusho) {
             Objects.requireNonNull(shinseiTodokedeshaJusho);
             this.entity.setShinseiTodokedeshaJusho(shinseiTodokedeshaJusho);
             return this;
@@ -404,7 +401,8 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。
+     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

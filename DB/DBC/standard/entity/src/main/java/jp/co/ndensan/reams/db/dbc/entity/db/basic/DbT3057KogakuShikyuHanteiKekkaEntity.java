@@ -7,18 +7,20 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 
 /**
  * 高額介護サービス費支給判定結果テーブルのエンティティクラスです。
  */
 public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3057KogakuShikyuHanteiKekkaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3057KogakuShikyuHanteiKekka");
@@ -38,11 +40,11 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
     @PrimaryKey
     private HokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     private FlexibleDate ketteiYMD;
     private Decimal honninShiharaiGaku;
-    private RString shiharaiKubunCode;
-    private Decimal shiharaiKingaku;
+    private RString shikyuKubunCode;
+    private Decimal shikyuKingaku;
     private RString fushikyuRiyu;
     private RString shinsaHohoKubun;
     private FlexibleYearMonth hanteiKekkaSofuYM;
@@ -111,7 +113,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -129,7 +131,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      *
      * @param serviceTeikyoYM サービス提供年月
      */
-    public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
+    public void setServiceTeikyoYM(@Nonnull FlexibleYearMonth serviceTeikyoYM) {
         this.serviceTeikyoYM = serviceTeikyoYM;
     }
 
@@ -147,7 +149,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(HokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(@Nonnull HokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
@@ -156,7 +158,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      *
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
@@ -165,7 +167,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(@Nonnull int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -183,7 +185,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      *
      * @param ketteiYMD 決定年月日
      */
-    public void setKetteiYMD(FlexibleDate ketteiYMD) {
+    public void setKetteiYMD(@Nonnull FlexibleDate ketteiYMD) {
         this.ketteiYMD = ketteiYMD;
     }
 
@@ -201,7 +203,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      *
      * @param honninShiharaiGaku 本人支払額
      */
-    public void setHonninShiharaiGaku(Decimal honninShiharaiGaku) {
+    public void setHonninShiharaiGaku(@Nonnull Decimal honninShiharaiGaku) {
         this.honninShiharaiGaku = honninShiharaiGaku;
     }
 
@@ -212,8 +214,8 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      *
      * @return 支給区分コード
      */
-    public RString getShiharaiKubunCode() {
-        return shiharaiKubunCode;
+    public RString getShikyuKubunCode() {
+        return shikyuKubunCode;
     }
 
     /**
@@ -221,10 +223,10 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      * <br/>
      * <br/>1:支給,2:不支給
      *
-     * @param shiharaiKubunCode 支給区分コード
+     * @param shikyuKubunCode 支給区分コード
      */
-    public void setShiharaiKubunCode(RString shiharaiKubunCode) {
-        this.shiharaiKubunCode = shiharaiKubunCode;
+    public void setShikyuKubunCode(@Nonnull RString shikyuKubunCode) {
+        this.shikyuKubunCode = shikyuKubunCode;
     }
 
     /**
@@ -232,17 +234,17 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      *
      * @return 支給金額
      */
-    public Decimal getShiharaiKingaku() {
-        return shiharaiKingaku;
+    public Decimal getShikyuKingaku() {
+        return shikyuKingaku;
     }
 
     /**
      * 支給金額のsetメソッドです。
      *
-     * @param shiharaiKingaku 支給金額
+     * @param shikyuKingaku 支給金額
      */
-    public void setShiharaiKingaku(Decimal shiharaiKingaku) {
-        this.shiharaiKingaku = shiharaiKingaku;
+    public void setShikyuKingaku(@Nonnull Decimal shikyuKingaku) {
+        this.shikyuKingaku = shikyuKingaku;
     }
 
     /**
@@ -250,6 +252,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      *
      * @return 不支給理由
      */
+    @CheckForNull
     public RString getFushikyuRiyu() {
         return fushikyuRiyu;
     }
@@ -268,6 +271,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      *
      * @return 審査方法区分
      */
+    @CheckForNull
     public RString getShinsaHohoKubun() {
         return shinsaHohoKubun;
     }
@@ -286,6 +290,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      *
      * @return 判定結果送付年月
      */
+    @CheckForNull
     public FlexibleYearMonth getHanteiKekkaSofuYM() {
         return hanteiKekkaSofuYM;
     }
@@ -306,6 +311,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      *
      * @return 再送付フラグ
      */
+    @CheckForNull
     public boolean getSaiSofuFlag() {
         return saiSofuFlag;
     }
@@ -328,6 +334,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      *
      * @return 判定結果送付不要フラグ
      */
+    @CheckForNull
     public boolean getHanteiKekkaSofuFuyoFlag() {
         return hanteiKekkaSofuFuyoFlag;
     }
@@ -350,6 +357,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      *
      * @return 審査結果反映区分
      */
+    @CheckForNull
     public RString getShinsaKekkaHaneiKubun() {
         return shinsaKekkaHaneiKubun;
     }
@@ -370,6 +378,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      *
      * @return 決定通知書作成年月日
      */
+    @CheckForNull
     public FlexibleDate getKetteiTsuchishoSakuseiYMD() {
         return ketteiTsuchishoSakuseiYMD;
     }
@@ -388,6 +397,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      *
      * @return 振込明細書作成年月日
      */
+    @CheckForNull
     public FlexibleDate getFurikomiMeisaishoSakuseiYMD() {
         return furikomiMeisaishoSakuseiYMD;
     }
@@ -439,8 +449,8 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
         this.rirekiNo = entity.rirekiNo;
         this.ketteiYMD = entity.ketteiYMD;
         this.honninShiharaiGaku = entity.honninShiharaiGaku;
-        this.shiharaiKubunCode = entity.shiharaiKubunCode;
-        this.shiharaiKingaku = entity.shiharaiKingaku;
+        this.shikyuKubunCode = entity.shikyuKubunCode;
+        this.shikyuKingaku = entity.shikyuKingaku;
         this.fushikyuRiyu = entity.fushikyuRiyu;
         this.shinsaHohoKubun = entity.shinsaHohoKubun;
         this.hanteiKekkaSofuYM = entity.hanteiKekkaSofuYM;
@@ -458,7 +468,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hihokenshaNo, serviceTeikyoYM, shoKisaiHokenshaNo, rirekiNo, ketteiYMD, honninShiharaiGaku, shiharaiKubunCode, shiharaiKingaku, fushikyuRiyu, shinsaHohoKubun, hanteiKekkaSofuYM, saiSofuFlag, hanteiKekkaSofuFuyoFlag, shinsaKekkaHaneiKubun, ketteiTsuchishoSakuseiYMD, furikomiMeisaishoSakuseiYMD);
+        return super.toMd5(hihokenshaNo, serviceTeikyoYM, shoKisaiHokenshaNo, rirekiNo, ketteiYMD, honninShiharaiGaku, shikyuKubunCode, shikyuKingaku, fushikyuRiyu, shinsaHohoKubun, hanteiKekkaSofuYM, saiSofuFlag, hanteiKekkaSofuFuyoFlag, shinsaKekkaHaneiKubun, ketteiTsuchishoSakuseiYMD, furikomiMeisaishoSakuseiYMD);
     }
 
 // </editor-fold>

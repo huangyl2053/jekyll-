@@ -315,9 +315,9 @@ public class KaigoServiceShuruiTest extends DbxTestBase {
 
             List<DbT7131KaigoServiceNaiyouEntity> niniEntityList = new ArrayList<>();
             techoNiniEntity_1 = DbT7131KaigoServiceNaiyouEntityGenerator.createDbT7131KaigoServiceNaiyouEntity();
-            techoNiniEntity_1.setServiceShuruiCode(kaigoServiceShuruiEntity.getServiceShuruiCd());
+            techoNiniEntity_1.setServiceShuruiCd(kaigoServiceShuruiEntity.getServiceShuruiCd());
             techoNiniEntity_1.setTeikyoKaishiYM(kaigoServiceShuruiEntity.getTeikyoKaishiYM());
-            techoNiniEntity_1.setServiceKoumokuCode(new RString("001"));
+            techoNiniEntity_1.setServiceKoumokuCd(new RString("001"));
             techoNiniEntity_1.setRirekiNo(Decimal.ONE);
 
             techoNiniEntity_1.setServiceName(new RString("値１"));
@@ -341,14 +341,14 @@ public class KaigoServiceShuruiTest extends DbxTestBase {
 
             List<DbT7131KaigoServiceNaiyouEntity> niniEntityList = new ArrayList<>();
             techoNiniEntity_1 = DbT7131KaigoServiceNaiyouEntityGenerator.createDbT7131KaigoServiceNaiyouEntity();
-            techoNiniEntity_1.setServiceShuruiCode(kaigoServiceShuruiEntity.getServiceShuruiCd());
-            techoNiniEntity_1.setServiceKoumokuCode(サービス項目コード_1);
+            techoNiniEntity_1.setServiceShuruiCd(kaigoServiceShuruiEntity.getServiceShuruiCd());
+            techoNiniEntity_1.setServiceKoumokuCd(サービス項目コード_1);
             techoNiniEntity_1.setTeikyoKaishiYM(kaigoServiceShuruiEntity.getTeikyoKaishiYM());
             techoNiniEntity_1.setRirekiNo(Decimal.ONE);
             techoNiniEntity_2 = techoNiniEntity_1.clone();
-            techoNiniEntity_2.setServiceKoumokuCode(サービス項目コード_2);
+            techoNiniEntity_2.setServiceKoumokuCd(サービス項目コード_2);
             techoNiniEntity_3 = techoNiniEntity_1.clone();
-            techoNiniEntity_3.setServiceKoumokuCode(サービス項目コード_3);
+            techoNiniEntity_3.setServiceKoumokuCd(サービス項目コード_3);
             niniEntityList.add(techoNiniEntity_1);
             niniEntityList.add(techoNiniEntity_2);
             niniEntityList.add(techoNiniEntity_3);

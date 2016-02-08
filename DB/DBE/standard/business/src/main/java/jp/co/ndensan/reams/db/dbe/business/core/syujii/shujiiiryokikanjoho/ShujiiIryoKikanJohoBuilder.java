@@ -6,15 +6,15 @@
 package jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiiiryokikanjoho;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.syujii.koseishichosonmaster.KoseiShichosonMaster;
-import jp.co.ndensan.reams.db.dbe.business.core.syujii.koseishichosonmaster.KoseiShichosonMasterIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.IryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
+import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -27,7 +27,6 @@ public class ShujiiIryoKikanJohoBuilder {
 
     private final DbT5911ShujiiIryoKikanJohoEntity entity;
     private final ShujiiIryoKikanJohoIdentifier id;
-    private final Models<KoseiShichosonMasterIdentifier, KoseiShichosonMaster> koseiShichosonMaster;
     private final Models<ShujiiJohoIdentifier, ShujiiJoho> shujiiJoho;
 
     /**
@@ -42,12 +41,10 @@ public class ShujiiIryoKikanJohoBuilder {
     ShujiiIryoKikanJohoBuilder(
             DbT5911ShujiiIryoKikanJohoEntity entity,
             ShujiiIryoKikanJohoIdentifier id,
-            Models<KoseiShichosonMasterIdentifier, KoseiShichosonMaster> koseiShichosonMaster,
             Models<ShujiiJohoIdentifier, ShujiiJoho> shujiiJoho
     ) {
         this.entity = entity.clone();
         this.id = id;
-        this.koseiShichosonMaster = koseiShichosonMaster.clone();
         this.shujiiJoho = shujiiJoho.clone();
 
     }
@@ -72,7 +69,7 @@ public class ShujiiIryoKikanJohoBuilder {
      */
     public ShujiiIryoKikanJohoBuilder set主治医医療機関コード(RString 主治医医療機関コード) {
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
-        entity.setShujiiIryokikanCode(主治医医療機関コード);
+        entity.setShujiiIryokikanCode(new ShujiiIryokikanCode(主治医医療機関コード));
         return this;
     }
 
@@ -197,28 +194,6 @@ public class ShujiiIryoKikanJohoBuilder {
     }
 
     /**
-     * 構成市町村マスタのキー情報について判定します。<br>
-     * 主治医医療機関情報に関連できる構成市町村マスタである場合、下記の処理に遷移します。<br>
-     * キーが一致する場合は構成市町村マスタリストに構成市町村マスタ{@link KoseiShichosonMaster}をセットします。<br>
-     * キーが一致しない場合、新たに追加します。<br>
-     *
-     * @param 構成市町村マスタ {@link KoseiShichosonMaster}
-     * @return {@link KoseiShichosonMasterBuilder}
-     * @throws IllegalStateException キーが一致しない場合
-     */
-    public ShujiiIryoKikanJohoBuilder setKoseiShichosonMaster(KoseiShichosonMaster 構成市町村マスタ) {
-        if (hasSameIdentifier(構成市町村マスタ.identifier())) {
-            koseiShichosonMaster.add(構成市町村マスタ);
-            return this;
-        }
-        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
-    }
-
-    private boolean hasSameIdentifier(KoseiShichosonMasterIdentifier 構成市町村マスタ識別子) {
-        return true;
-    }
-
-    /**
      * 主治医情報のキー情報について判定します。<br>
      * 主治医医療機関情報に関連できる主治医情報である場合、下記の処理に遷移します。<br>
      * キーが一致する場合は主治医情報リストに主治医情報{@link ShujiiJoho}をセットします。<br>
@@ -238,7 +213,7 @@ public class ShujiiIryoKikanJohoBuilder {
 
     private boolean hasSameIdentifier(ShujiiJohoIdentifier 主治医情報識別子) {
         return (id.get市町村コード().equals(主治医情報識別子.get市町村コード())
-                && id.get主治医医療機関コード() == 主治医情報識別子.get主治医医療機関コード());
+                && id.get主治医医療機関コード().equals(主治医情報識別子.get主治医医療機関コード()));
     }
 
     /**
@@ -247,7 +222,7 @@ public class ShujiiIryoKikanJohoBuilder {
      * @return {@link ShujiiIryoKikanJoho}のインスタンス
      */
     public ShujiiIryoKikanJoho build() {
-        return new ShujiiIryoKikanJoho(entity, id, koseiShichosonMaster, shujiiJoho);
+        return new ShujiiIryoKikanJoho(entity, id, shujiiJoho);
     }
 
 }

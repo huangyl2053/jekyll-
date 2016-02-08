@@ -1,25 +1,24 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import java.util.Objects;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 
 /**
  * DbT7014KaigoSetaiの項目定義クラスです
  *
  */
 public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetaiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7014KaigoSetai");
@@ -102,7 +101,7 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
      *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -124,7 +123,7 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
      *
      * @param kanriShikibetsuKubun 管理識別区分
      */
-    public void setKanriShikibetsuKubun(RString kanriShikibetsuKubun) {
+    public void setKanriShikibetsuKubun(@Nonnull RString kanriShikibetsuKubun) {
         this.kanriShikibetsuKubun = kanriShikibetsuKubun;
     }
 
@@ -142,7 +141,7 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
      *
      * @param setaiHaakuKijunYMD 世帯把握基準年月日
      */
-    public void setSetaiHaakuKijunYMD(FlexibleDate setaiHaakuKijunYMD) {
+    public void setSetaiHaakuKijunYMD(@Nonnull FlexibleDate setaiHaakuKijunYMD) {
         this.setaiHaakuKijunYMD = setaiHaakuKijunYMD;
     }
 
@@ -160,7 +159,7 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
      *
      * @param setaiInkanriRenban 世帯員管理連番
      */
-    public void setSetaiInkanriRenban(int setaiInkanriRenban) {
+    public void setSetaiInkanriRenban(@Nonnull int setaiInkanriRenban) {
         this.setaiInkanriRenban = setaiInkanriRenban;
     }
 
@@ -178,7 +177,7 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
      *
      * @param setaiInshikibetsuCode 世帯員識別コード
      */
-    public void setSetaiInshikibetsuCode(ShikibetsuCode setaiInshikibetsuCode) {
+    public void setSetaiInshikibetsuCode(@Nonnull ShikibetsuCode setaiInshikibetsuCode) {
         this.setaiInshikibetsuCode = setaiInshikibetsuCode;
     }
 
@@ -200,7 +199,7 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
      *
      * @param honninKubun 本人区分
      */
-    public void setHonninKubun(RString honninKubun) {
+    public void setHonninKubun(@Nonnull RString honninKubun) {
         this.honninKubun = honninKubun;
     }
 
@@ -208,7 +207,7 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
      * このエンティティの主キーが他の{@literal DbT7014KaigoSetaiEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7014KaigoSetaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override

@@ -4,21 +4,21 @@
  */
 package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
-import java.util.Collection;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyosha;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyosha.*;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -85,7 +85,29 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
-    public Collection<DbT7060KaigoJigyoshaEntity> select特定の事業者番号の事業者List(List<RString> 事業者番号s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * 入所施設名称の取得。
+     *
+     * @param 事業者番号 KaigoJigyoshaNo
+     * @param システム日付 FlexibleDate
+     * @return List<DbT7060KaigoJigyoshaEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT7060KaigoJigyoshaEntity> select介護事業者(
+            KaigoJigyoshaNo 事業者番号,
+            FlexibleDate システム日付) throws NullPointerException {
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(システム日付, UrSystemErrorMessages.値がnull.getReplacedMessage("システム日付"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7060KaigoJigyosha.class).
+                where(and(
+                                eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号),
+                                leq(DbT7060KaigoJigyosha.yukoKaishiYMD, システム日付),
+                                or(leq(システム日付, DbT7060KaigoJigyosha.yukoShuryoYMD), isNULL(DbT7060KaigoJigyosha.yukoShuryoYMD)))).
+                toList(DbT7060KaigoJigyoshaEntity.class);
     }
 }

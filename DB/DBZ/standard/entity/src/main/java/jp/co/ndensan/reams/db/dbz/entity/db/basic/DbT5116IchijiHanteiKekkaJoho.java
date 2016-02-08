@@ -55,12 +55,12 @@ public enum DbT5116IchijiHanteiKekkaJoho implements IColumnDefinition {
     ichijiHanteiYMD(2147483647, 0),
     /**
      * 要介護認定一次判定結果コード
-     * <br/>Enum（DBD：要介護認定一次判定結果コード09）
+     * <br/>Enum（DBD：要介護認定一次判定結果コードxx）
      */
     ichijiHanteiKekkaCode(2147483647, 0),
     /**
      * 要介護認定一次判定結果コード（認知症加算）
-     * <br/>Enum（DBD：要介護認定一次判定結果コード09（認知症加算））要介護認定一次判定結果コード（重み）
+     * <br/>Enum（DBD：要介護認定一次判定結果コードxx）
      */
     ichijiHanteiKekkaNinchishoKasanCode(2147483647, 0),
     /**

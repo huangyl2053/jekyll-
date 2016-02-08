@@ -1,7 +1,0 @@
-﻿shinsakaiKaisaiNo,int2,int,,,,,介護認定審査会開催番号,A
-shinsakaiIinCode,varchar,RString,,,,,介護認定審査会委員コード,A
-shinsainKubunCode,UDD035Code,Code,SubGyomuCode.DBE認定支援,DbeShubetsuKey.認定調査員区分,,,認定審査員区分コード,A
-gogitaichoKubunCode,UDD035Code,Code,SubGyomuCode.DBE認定支援,DbeShubetsuKey.合議体長区分,,,合議体長区分コード,A
-shinsakaiIinShinsaKaishiTime,varchar,RString,,,,,介護認定審査会委員審査開始時間,A
-shinsakaiIinshinsaShuryoTime,varchar,RString,,,,,介護認定審査会委員審査終了時間,A
-shinsakaiIinShukketsuKubun,bpchar,RString,,,,,介護認定審査会委員出欠区分,A

@@ -9,40 +9,48 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihy
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7062KaigoJigyoshaDaihyoshaDac;
-import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
+import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
+import jp.co.ndensan.reams.db.dbx.testhelper.helper.CSVDataUtilForUseSession;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
+import org.junit.After;
 import static org.junit.Assert.assertThat;
+import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * {link KaigoJigyoshaDaihyoshaManager}のテストクラスです。
  */
-@Ignore
 @RunWith(Enclosed.class)
-public class KaigoJigyoshaDaihyoshaManagerTest {
+public class KaigoJigyoshaDaihyoshaManagerTest extends DbxTestDacBase {
 
     private static DbT7062KaigoJigyoshaDaihyoshaDac dac;
     private static KaigoJigyoshaDaihyoshaManager sut;
+    public static final KaigoJigyoshaNo DEFAULT_事業者番号 = new KaigoJigyoshaNo("0123400001");
+    public static final FlexibleDate DEFAULT_有効開始日 = new FlexibleDate("19900101");
 
     @BeforeClass
     public static void test() {
-        dac = mock(DbT7062KaigoJigyoshaDaihyoshaDac.class);
+        dac = InstanceProvider.create(DbT7062KaigoJigyoshaDaihyoshaDac.class);
         sut = new KaigoJigyoshaDaihyoshaManager(dac);
     }
 
-    public static class save介護事業者代表者 extends DbxTestBase {
+    public static class save介護事業者代表者 extends DbxTestDacBase {
+
+        @Before
+        public void setUp() {
+            TestSupport.clearTable();
+        }
 
         @Test
         public void insertに成功するとtrueが返る() {
-            when(dac.save(any(DbT7062KaigoJigyoshaDaihyoshaEntity.class))).thenReturn(1);
 
             DbT7062KaigoJigyoshaDaihyoshaEntity entity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
             KaigoJigyoshaDaihyosha 介護事業者代表者 = new KaigoJigyoshaDaihyosha(entity);
@@ -50,70 +58,84 @@ public class KaigoJigyoshaDaihyoshaManagerTest {
             assertThat(sut.save介護事業者代表者(介護事業者代表者), is(true));
         }
 
-        @Test
-        public void insertに失敗するとfalseが返る() {
-            when(dac.save(any(DbT7062KaigoJigyoshaDaihyoshaEntity.class))).thenReturn(0);
-
-            DbT7062KaigoJigyoshaDaihyoshaEntity entity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
-            KaigoJigyoshaDaihyosha 介護事業者代表者 = new KaigoJigyoshaDaihyosha(entity);
-
-            assertThat(sut.save介護事業者代表者(介護事業者代表者), is(false));
-        }
-
+//        @Test
+//        public void insertに失敗するとfalseが返る() {
+//            when(dac.save(any(DbT7062KaigoJigyoshaDaihyoshaEntity.class))).thenReturn(0);
+//
+//            DbT7062KaigoJigyoshaDaihyoshaEntity entity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
+//            KaigoJigyoshaDaihyosha 介護事業者代表者 = new KaigoJigyoshaDaihyosha(entity);
+//
+//            assertThat(sut.save介護事業者代表者(介護事業者代表者), is(false));
+//        }
         @Test
         public void updateに成功するとtrueが返る() {
-            when(dac.save(any(DbT7062KaigoJigyoshaDaihyoshaEntity.class))).thenReturn(1);
 
             DbT7062KaigoJigyoshaDaihyoshaEntity entity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
-            entity.initializeMd5();
             KaigoJigyoshaDaihyosha 介護事業者代表者 = new KaigoJigyoshaDaihyosha(entity);
-            介護事業者代表者 = 介護事業者代表者.createBuilderForEdit().set代表者住所カナ(new RString("任意項目1を変更")).build();
+            sut.save介護事業者代表者(介護事業者代表者);
 
-            assertThat(sut.save介護事業者代表者(介護事業者代表者), is(true));
+            DbT7062KaigoJigyoshaDaihyoshaEntity entity7062 = dac.selectByKey(DEFAULT_事業者番号, DEFAULT_有効開始日);
+            KaigoJigyoshaDaihyosha kaigoJigyoshaDaihyosha = new KaigoJigyoshaDaihyosha(entity7062);
+
+            kaigoJigyoshaDaihyosha = kaigoJigyoshaDaihyosha.createBuilderForEdit().set代表者住所カナ(new RString("任意項目1を変更")).build();
+
+            assertThat(sut.save介護事業者代表者(kaigoJigyoshaDaihyosha), is(true));
         }
 
-        @Test
-        public void updateに失敗するとfalseが返る() {
-            when(dac.save(any(DbT7062KaigoJigyoshaDaihyoshaEntity.class))).thenReturn(0);
-
-            DbT7062KaigoJigyoshaDaihyoshaEntity entity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
-            entity.initializeMd5();
-            KaigoJigyoshaDaihyosha 介護事業者代表者 = new KaigoJigyoshaDaihyosha(entity);
-            介護事業者代表者 = 介護事業者代表者.createBuilderForEdit().set代表者住所カナ(new RString("任意項目1を変更")).build();
-
-            assertThat(sut.save介護事業者代表者(介護事業者代表者), is(false));
-        }
-
+//        @Test
+//        public void updateに失敗するとfalseが返る() {
+//            when(dac.save(any(DbT7062KaigoJigyoshaDaihyoshaEntity.class))).thenReturn(0);
+//
+//            DbT7062KaigoJigyoshaDaihyoshaEntity entity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
+//            entity.initializeMd5();
+//            KaigoJigyoshaDaihyosha 介護事業者代表者 = new KaigoJigyoshaDaihyosha(entity);
+//            介護事業者代表者 = 介護事業者代表者.createBuilderForEdit().set代表者住所カナ(new RString("任意項目1を変更")).build();
+//
+//            assertThat(sut.save介護事業者代表者(介護事業者代表者), is(false));
+//        }
         @Test
         public void deleteに成功するとtrueが返る() {
-            when(dac.save(any(DbT7062KaigoJigyoshaDaihyoshaEntity.class))).thenReturn(1);
-
             DbT7062KaigoJigyoshaDaihyoshaEntity entity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
-            entity.initializeMd5();
             KaigoJigyoshaDaihyosha 介護事業者代表者 = new KaigoJigyoshaDaihyosha(entity);
-            介護事業者代表者 = 介護事業者代表者.deleted();
+            sut.save介護事業者代表者(介護事業者代表者);
+            DbT7062KaigoJigyoshaDaihyoshaEntity entity7062 = dac.selectByKey(DEFAULT_事業者番号, DEFAULT_有効開始日);
+            entity7062.setState(EntityDataState.Deleted);
+            KaigoJigyoshaDaihyosha kaigoJigyoshaDaihyosha = new KaigoJigyoshaDaihyosha(entity7062);
+            kaigoJigyoshaDaihyosha = kaigoJigyoshaDaihyosha.deleted();
 
-            assertThat(sut.save介護事業者代表者(介護事業者代表者), is(true));
+            assertThat(sut.save介護事業者代表者(kaigoJigyoshaDaihyosha), is(true));
         }
 
-        @Test
-        public void deleteに失敗するとfalseが返る() {
-            when(dac.save(any(DbT7062KaigoJigyoshaDaihyoshaEntity.class))).thenReturn(0);
-
-            DbT7062KaigoJigyoshaDaihyoshaEntity entity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
-            entity.initializeMd5();
-            KaigoJigyoshaDaihyosha 介護事業者代表者 = new KaigoJigyoshaDaihyosha(entity);
-            介護事業者代表者 = 介護事業者代表者.deleted();
-
-            assertThat(sut.save介護事業者代表者(介護事業者代表者), is(false));
+//        @Test
+//        public void deleteに失敗するとfalseが返る() {
+//            when(dac.save(any(DbT7062KaigoJigyoshaDaihyoshaEntity.class))).thenReturn(0);
+//
+//            DbT7062KaigoJigyoshaDaihyoshaEntity entity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
+//            entity.initializeMd5();
+//            KaigoJigyoshaDaihyosha 介護事業者代表者 = new KaigoJigyoshaDaihyosha(entity);
+//            介護事業者代表者 = 介護事業者代表者.deleted();
+//
+//            assertThat(sut.save介護事業者代表者(介護事業者代表者), is(false));
+//        }
+//
+//        public void 何も変更せずにsaveを呼び出すとfalseが返る() {
+//            DbT7062KaigoJigyoshaDaihyoshaEntity entity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
+//            entity.initializeMd5();
+//            KaigoJigyoshaDaihyosha 介護事業者代表者 = new KaigoJigyoshaDaihyosha(entity);
+//
+//            assertThat(sut.save介護事業者代表者(介護事業者代表者), is(false));
+//        }
+        @After
+        public void after() {
+            rollback();
         }
+    }
 
-        public void 何も変更せずにsaveを呼び出すとfalseが返る() {
-            DbT7062KaigoJigyoshaDaihyoshaEntity entity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
-            entity.initializeMd5();
-            KaigoJigyoshaDaihyosha 介護事業者代表者 = new KaigoJigyoshaDaihyosha(entity);
+    private static class TestSupport {
 
-            assertThat(sut.save介護事業者代表者(介護事業者代表者), is(false));
+        public static void clearTable() {
+            CSVDataUtilForUseSession csvDataUtil = new CSVDataUtilForUseSession();
+            csvDataUtil.clearTable(sqlSession, DbT7062KaigoJigyoshaDaihyoshaEntity.TABLE_NAME.toString());
         }
     }
 }

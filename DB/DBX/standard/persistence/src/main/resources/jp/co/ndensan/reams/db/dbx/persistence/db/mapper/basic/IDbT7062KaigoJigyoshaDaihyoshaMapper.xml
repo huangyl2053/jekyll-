@@ -8,44 +8,44 @@
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7062KaigoJigyoshaDaihyosha">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7062KaigoJigyoshaDaihyoshaMapper.allColumns_DbT7062KaigoJigyoshaDaihyosha" />
-     FROM
-         rgdb."DbT7062KaigoJigyoshaDaihyosha"
-     WHERE
-         rgdb."DbT7062KaigoJigyoshaDaihyosha"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7062KaigoJigyoshaDaihyoshaMapper.allColumns_DbT7062KaigoJigyoshaDaihyosha" />
+        FROM
+        rgdb."DbT7062KaigoJigyoshaDaihyosha"
+        WHERE
+        rgdb."DbT7062KaigoJigyoshaDaihyosha"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7062KaigoJigyoshaDaihyosha">
-         "DbT7062KaigoJigyoshaDaihyosha"."jigyoshaNo" as "dbT7062KaigoJigyoshaDaihyosha_jigyoshaNo",
-         "DbT7062KaigoJigyoshaDaihyosha"."yukoKaishiYMD" as "dbT7062KaigoJigyoshaDaihyosha_yukoKaishiYMD",
-         "DbT7062KaigoJigyoshaDaihyosha"."insertDantaiCd" as "dbT7062KaigoJigyoshaDaihyosha_insertDantaiCd",
-         "DbT7062KaigoJigyoshaDaihyosha"."insertTimestamp" as "dbT7062KaigoJigyoshaDaihyosha_insertTimestamp",
-         "DbT7062KaigoJigyoshaDaihyosha"."insertReamsLoginId" as "dbT7062KaigoJigyoshaDaihyosha_insertReamsLoginId",
-         "DbT7062KaigoJigyoshaDaihyosha"."insertContextId" as "dbT7062KaigoJigyoshaDaihyosha_insertContextId",
-         "DbT7062KaigoJigyoshaDaihyosha"."isDeleted" as "dbT7062KaigoJigyoshaDaihyosha_isDeleted",
-         "DbT7062KaigoJigyoshaDaihyosha"."updateCount" as "dbT7062KaigoJigyoshaDaihyosha_updateCount",
-         "DbT7062KaigoJigyoshaDaihyosha"."lastUpdateTimestamp" as "dbT7062KaigoJigyoshaDaihyosha_lastUpdateTimestamp",
-         "DbT7062KaigoJigyoshaDaihyosha"."lastUpdateReamsLoginId" as "dbT7062KaigoJigyoshaDaihyosha_lastUpdateReamsLoginId",
-         "DbT7062KaigoJigyoshaDaihyosha"."daihyoshaShimei" as "dbT7062KaigoJigyoshaDaihyosha_daihyoshaShimei",
-         "DbT7062KaigoJigyoshaDaihyosha"."daihyoshaKanaShimei" as "dbT7062KaigoJigyoshaDaihyosha_daihyoshaKanaShimei",
-         "DbT7062KaigoJigyoshaDaihyosha"."daihyoshaYubinNo" as "dbT7062KaigoJigyoshaDaihyosha_daihyoshaYubinNo",
-         "DbT7062KaigoJigyoshaDaihyosha"."daihyoshaJusho" as "dbT7062KaigoJigyoshaDaihyosha_daihyoshaJusho",
-         "DbT7062KaigoJigyoshaDaihyosha"."daihyoshaKanaJusho" as "dbT7062KaigoJigyoshaDaihyosha_daihyoshaKanaJusho",
-         "DbT7062KaigoJigyoshaDaihyosha"."daihyoshaYakushokuMei" as "dbT7062KaigoJigyoshaDaihyosha_daihyoshaYakushokuMei",
-         "DbT7062KaigoJigyoshaDaihyosha"."kaisetsushaShimei" as "dbT7062KaigoJigyoshaDaihyosha_kaisetsushaShimei",
-         "DbT7062KaigoJigyoshaDaihyosha"."kaisetsushaKanaShimei" as "dbT7062KaigoJigyoshaDaihyosha_kaisetsushaKanaShimei",
-         "DbT7062KaigoJigyoshaDaihyosha"."kaisetsushaYubinNo" as "dbT7062KaigoJigyoshaDaihyosha_kaisetsushaYubinNo",
-         "DbT7062KaigoJigyoshaDaihyosha"."kaisetsushaJusho" as "dbT7062KaigoJigyoshaDaihyosha_kaisetsushaJusho",
-         "DbT7062KaigoJigyoshaDaihyosha"."kaisetsushaKanaJusho" as "dbT7062KaigoJigyoshaDaihyosha_kaisetsushaKanaJusho",
-         "DbT7062KaigoJigyoshaDaihyosha"."kaisetsushaTelNo" as "dbT7062KaigoJigyoshaDaihyosha_kaisetsushaTelNo",
-         "DbT7062KaigoJigyoshaDaihyosha"."kaisetsushaFaxNo" as "dbT7062KaigoJigyoshaDaihyosha_kaisetsushaFaxNo"
+        <!--"DbT7062KaigoJigyoshaDaihyosha"."jigyoshaNo" as "dbT7062KaigoJigyoshaDaihyosha_jigyoshaNo",-->
+        "DbT7062KaigoJigyoshaDaihyosha"."yukoKaishiYMD" as "dbT7062KaigoJigyoshaDaihyosha_yukoKaishiYMD",
+        "DbT7062KaigoJigyoshaDaihyosha"."insertDantaiCd" as "dbT7062KaigoJigyoshaDaihyosha_insertDantaiCd",
+        "DbT7062KaigoJigyoshaDaihyosha"."insertTimestamp" as "dbT7062KaigoJigyoshaDaihyosha_insertTimestamp",
+        "DbT7062KaigoJigyoshaDaihyosha"."insertReamsLoginId" as "dbT7062KaigoJigyoshaDaihyosha_insertReamsLoginId",
+        "DbT7062KaigoJigyoshaDaihyosha"."insertContextId" as "dbT7062KaigoJigyoshaDaihyosha_insertContextId",
+        "DbT7062KaigoJigyoshaDaihyosha"."isDeleted" as "dbT7062KaigoJigyoshaDaihyosha_isDeleted",
+        "DbT7062KaigoJigyoshaDaihyosha"."updateCount" as "dbT7062KaigoJigyoshaDaihyosha_updateCount",
+        "DbT7062KaigoJigyoshaDaihyosha"."lastUpdateTimestamp" as "dbT7062KaigoJigyoshaDaihyosha_lastUpdateTimestamp",
+        "DbT7062KaigoJigyoshaDaihyosha"."lastUpdateReamsLoginId" as "dbT7062KaigoJigyoshaDaihyosha_lastUpdateReamsLoginId",
+        "DbT7062KaigoJigyoshaDaihyosha"."daihyoshaShimei" as "dbT7062KaigoJigyoshaDaihyosha_daihyoshaShimei",
+        "DbT7062KaigoJigyoshaDaihyosha"."daihyoshaKanaShimei" as "dbT7062KaigoJigyoshaDaihyosha_daihyoshaKanaShimei",
+        "DbT7062KaigoJigyoshaDaihyosha"."daihyoshaYubinNo" as "dbT7062KaigoJigyoshaDaihyosha_daihyoshaYubinNo",
+        "DbT7062KaigoJigyoshaDaihyosha"."daihyoshaJusho" as "dbT7062KaigoJigyoshaDaihyosha_daihyoshaJusho",
+        "DbT7062KaigoJigyoshaDaihyosha"."daihyoshaKanaJusho" as "dbT7062KaigoJigyoshaDaihyosha_daihyoshaKanaJusho",
+        "DbT7062KaigoJigyoshaDaihyosha"."daihyoshaYakushokuMei" as "dbT7062KaigoJigyoshaDaihyosha_daihyoshaYakushokuMei",
+        "DbT7062KaigoJigyoshaDaihyosha"."kaisetsushaShimei" as "dbT7062KaigoJigyoshaDaihyosha_kaisetsushaShimei",
+        "DbT7062KaigoJigyoshaDaihyosha"."kaisetsushaKanaShimei" as "dbT7062KaigoJigyoshaDaihyosha_kaisetsushaKanaShimei",
+        "DbT7062KaigoJigyoshaDaihyosha"."kaisetsushaYubinNo" as "dbT7062KaigoJigyoshaDaihyosha_kaisetsushaYubinNo",
+        "DbT7062KaigoJigyoshaDaihyosha"."kaisetsushaJusho" as "dbT7062KaigoJigyoshaDaihyosha_kaisetsushaJusho",
+        "DbT7062KaigoJigyoshaDaihyosha"."kaisetsushaKanaJusho" as "dbT7062KaigoJigyoshaDaihyosha_kaisetsushaKanaJusho",
+        "DbT7062KaigoJigyoshaDaihyosha"."kaisetsushaTelNo" as "dbT7062KaigoJigyoshaDaihyosha_kaisetsushaTelNo",
+        "DbT7062KaigoJigyoshaDaihyosha"."kaisetsushaFaxNo" as "dbT7062KaigoJigyoshaDaihyosha_kaisetsushaFaxNo"
     </sql>
 
 
     <!--テーブルDbT7062KaigoJigyoshaDaihyoshaの項目をDbT7062KaigoJigyoshaDaihyoshaEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT7062KaigoJigyoshaDaihyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity" autoMapping="true">
-        <id property="jigyoshaNo" column="dbT7062KaigoJigyoshaDaihyosha_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <!--<id property="jigyoshaNo" column="dbT7062KaigoJigyoshaDaihyosha_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KaigoJigyoshaNoTypeHandler"/>-->
         <id property="yukoKaishiYMD" column="dbT7062KaigoJigyoshaDaihyosha_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7062KaigoJigyoshaDaihyosha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT7062KaigoJigyoshaDaihyosha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
@@ -69,12 +69,12 @@
         <result property="kaisetsushaTelNo" column="dbT7062KaigoJigyoshaDaihyosha_kaisetsushaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="kaisetsushaFaxNo" column="dbT7062KaigoJigyoshaDaihyosha_kaisetsushaFaxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="resultMap_DbT7062KaigoJigyoshaDaihyoshaEntity">
+    <select id="getEntity" resultMap="ResultMap_DbT7062KaigoJigyoshaDaihyoshaEntity">
         SELECT
         <include refid="allColumns_DbT7062KaigoJigyoshaDaihyosha"/>
         FROM
         rgdb."DbT7062KaigoJigyoshaDaihyosha"
-     </select>
+    </select>
  
 
 </mapper>

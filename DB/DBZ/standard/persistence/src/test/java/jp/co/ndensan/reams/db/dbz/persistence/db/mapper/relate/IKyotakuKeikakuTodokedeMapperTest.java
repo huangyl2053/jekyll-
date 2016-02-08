@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -156,7 +155,7 @@ public class IKyotakuKeikakuTodokedeMapperTest {
                 HihokenshaNo 主キー1,
                 FlexibleYearMonth 主キー2) {
             DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.createDbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
-            entity.setHihokenshano(主キー1);
+            entity.setHihokenshaNo(主キー1);
             entity.setTaishoYM(主キー2);
             entity.setState(EntityDataState.Added);
             居宅給付計画事業者作成Dac.save(entity);

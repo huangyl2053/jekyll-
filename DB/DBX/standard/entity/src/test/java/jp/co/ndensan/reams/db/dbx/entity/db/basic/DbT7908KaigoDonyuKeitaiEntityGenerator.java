@@ -4,7 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -13,8 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class DbT7908KaigoDonyuKeitaiEntityGenerator {
 
-    public static final RString DEFAULT_業務分類 = new RString("Data");
-    public static final Code DEFAULT_導入形態コード = new Code("1");
+    public static final RString DEFAULT_業務分類 = GyomuBunrui.介護事務.code();
+    public static final Code DEFAULT_導入形態コード = new Code(DonyuKeitaiCode.事務単一.getCode());
     public static final boolean DEFAULT_支所管理有無フラグ = false;
 
     /**

@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付管理票200604エンティティのテスト用インスタンスを作成する補助クラスです。
@@ -40,7 +39,7 @@ public final class DbT3015KyufuKanrihyo200604EntityGenerator {
     public static final RString DEFAULT_指定_基準該当_地域密着型サービス識別コード = new RString("Data");
     public static final ServiceShuruiCode DEFAULT_サービス種類コード = new ServiceShuruiCode("1");
     public static final int DEFAULT_給付計画単位数_日数 = 1;
-    public static final Decimal DEFAULT_限度額管理期間における前月までの給付計画日数 = new Decimal(0);
+    public static final int DEFAULT_限度額管理期間における前月までの給付計画日数 = 0;
     public static final int DEFAULT_指定サービス分小計 = 1;
     public static final int DEFAULT_基準該当サービス分小計 = 1;
     public static final int DEFAULT_給付計画合計単位数_日数 = 1;

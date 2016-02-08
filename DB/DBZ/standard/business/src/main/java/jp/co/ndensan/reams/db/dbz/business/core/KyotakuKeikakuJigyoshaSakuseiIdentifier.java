@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Value;
 
 /**
@@ -19,7 +18,7 @@ public class KyotakuKeikakuJigyoshaSakuseiIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth 対象年月;
-    private final Decimal 履歴番号;
+    private final Integer 履歴番号;
 
     /**
      * コンストラクタです。
@@ -30,7 +29,7 @@ public class KyotakuKeikakuJigyoshaSakuseiIdentifier implements Serializable {
      */
     public KyotakuKeikakuJigyoshaSakuseiIdentifier(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号) {
+            Integer 履歴番号) {
         this.被保険者番号 = 被保険者番号;
         this.対象年月 = 対象年月;
         this.履歴番号 = 履歴番号;
@@ -59,7 +58,7 @@ public class KyotakuKeikakuJigyoshaSakuseiIdentifier implements Serializable {
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public Integer get履歴番号() {
         return 履歴番号;
     }
 }

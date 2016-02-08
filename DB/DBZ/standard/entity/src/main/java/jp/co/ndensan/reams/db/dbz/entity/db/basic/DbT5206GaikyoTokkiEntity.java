@@ -1,20 +1,22 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * 認定調査票（概況特記）テーブルのエンティティクラスです。
  */
 public class DbT5206GaikyoTokkiEntity extends DbTableEntityBase<DbT5206GaikyoTokkiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5206GaikyoTokki");
@@ -31,18 +33,15 @@ public class DbT5206GaikyoTokkiEntity extends DbTableEntityBase<DbT5206GaikyoTok
     private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
     private int ninteichosaRirekiNo;
+    @PrimaryKey
+    private RString gaikyoTokkiTextImageKubun;
+    private RString jutakuKaishu;
+    private RString tokubetsuKyufuService;
+    private RString zaitakuService;
     private RString shuso;
-    private RDateTime shusoImageSharedFileId;
-    private RDateTime shusoMaskingImageSharedFileId;
     private RString kazokuJokyo;
-    private RDateTime kazokuJokyoImageSharedFileId;
-    private RDateTime kazokuJokyoMaskingImageSharedFileId;
     private RString kyojuKankyo;
-    private RDateTime kyojuKankyoImageSharedFileId;
-    private RDateTime kyojuKankyoMaskingImageSharedFileId;
     private RString kikaiKiki;
-    private RDateTime kikaiKikiImageSharedFileId;
-    private RDateTime kikaiKikiMaskingImageSharedFileId;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -107,7 +106,7 @@ public class DbT5206GaikyoTokkiEntity extends DbTableEntityBase<DbT5206GaikyoTok
      *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -129,231 +128,167 @@ public class DbT5206GaikyoTokkiEntity extends DbTableEntityBase<DbT5206GaikyoTok
      *
      * @param ninteichosaRirekiNo 認定調査依頼履歴番号
      */
-    public void setNinteichosaRirekiNo(int ninteichosaRirekiNo) {
+    public void setNinteichosaRirekiNo(@Nonnull int ninteichosaRirekiNo) {
         this.ninteichosaRirekiNo = ninteichosaRirekiNo;
     }
 
     /**
-     * 概況特記事項（主訴）のgetメソッドです。
+     * gaikyoTokkiTextImageKubunのgetメソッドです。
      *
-     * @return 概況特記事項（主訴）
+     * @return gaikyoTokkiTextImageKubun
      */
+    public RString getGaikyoTokkiTextImageKubun() {
+        return gaikyoTokkiTextImageKubun;
+    }
+
+    /**
+     * gaikyoTokkiTextImageKubunのsetメソッドです。
+     *
+     * @param gaikyoTokkiTextImageKubun gaikyoTokkiTextImageKubun
+     */
+    public void setGaikyoTokkiTextImageKubun(@Nonnull RString gaikyoTokkiTextImageKubun) {
+        this.gaikyoTokkiTextImageKubun = gaikyoTokkiTextImageKubun;
+    }
+
+    /**
+     * jutakuKaishuのgetメソッドです。
+     *
+     * @return jutakuKaishu
+     */
+    @CheckForNull
+    public RString getJutakuKaishu() {
+        return jutakuKaishu;
+    }
+
+    /**
+     * jutakuKaishuのsetメソッドです。
+     *
+     * @param jutakuKaishu jutakuKaishu
+     */
+    public void setJutakuKaishu(RString jutakuKaishu) {
+        this.jutakuKaishu = jutakuKaishu;
+    }
+
+    /**
+     * tokubetsuKyufuServiceのgetメソッドです。
+     *
+     * @return tokubetsuKyufuService
+     */
+    @CheckForNull
+    public RString getTokubetsuKyufuService() {
+        return tokubetsuKyufuService;
+    }
+
+    /**
+     * tokubetsuKyufuServiceのsetメソッドです。
+     *
+     * @param tokubetsuKyufuService tokubetsuKyufuService
+     */
+    public void setTokubetsuKyufuService(RString tokubetsuKyufuService) {
+        this.tokubetsuKyufuService = tokubetsuKyufuService;
+    }
+
+    /**
+     * zaitakuServiceのgetメソッドです。
+     *
+     * @return zaitakuService
+     */
+    @CheckForNull
+    public RString getZaitakuService() {
+        return zaitakuService;
+    }
+
+    /**
+     * zaitakuServiceのsetメソッドです。
+     *
+     * @param zaitakuService zaitakuService
+     */
+    public void setZaitakuService(RString zaitakuService) {
+        this.zaitakuService = zaitakuService;
+    }
+
+    /**
+     * shusoのgetメソッドです。
+     *
+     * @return shuso
+     */
+    @CheckForNull
     public RString getShuso() {
         return shuso;
     }
 
     /**
-     * 概況特記事項（主訴）のsetメソッドです。
+     * shusoのsetメソッドです。
      *
-     * @param shuso 概況特記事項（主訴）
+     * @param shuso shuso
      */
     public void setShuso(RString shuso) {
         this.shuso = shuso;
     }
 
     /**
-     * 概況特記（主訴）イメージ共有ファイルIDのgetメソッドです。
+     * kazokuJokyoのgetメソッドです。
      *
-     * @return 概況特記（主訴）イメージ共有ファイルID
+     * @return kazokuJokyo
      */
-    public RDateTime getShusoImageSharedFileId() {
-        return shusoImageSharedFileId;
-    }
-
-    /**
-     * 概況特記（主訴）イメージ共有ファイルIDのsetメソッドです。
-     *
-     * @param shusoImageSharedFileId 概況特記（主訴）イメージ共有ファイルID
-     */
-    public void setShusoImageSharedFileId(RDateTime shusoImageSharedFileId) {
-        this.shusoImageSharedFileId = shusoImageSharedFileId;
-    }
-
-    /**
-     * 概況特記（主訴）マスキングイメージ共有ファイルIDのgetメソッドです。
-     *
-     * @return 概況特記（主訴）マスキングイメージ共有ファイルID
-     */
-    public RDateTime getShusoMaskingImageSharedFileId() {
-        return shusoMaskingImageSharedFileId;
-    }
-
-    /**
-     * 概況特記（主訴）マスキングイメージ共有ファイルIDのsetメソッドです。
-     *
-     * @param shusoMaskingImageSharedFileId 概況特記（主訴）マスキングイメージ共有ファイルID
-     */
-    public void setShusoMaskingImageSharedFileId(RDateTime shusoMaskingImageSharedFileId) {
-        this.shusoMaskingImageSharedFileId = shusoMaskingImageSharedFileId;
-    }
-
-    /**
-     * 概況特記事項（家族状況）のgetメソッドです。
-     *
-     * @return 概況特記事項（家族状況）
-     */
+    @CheckForNull
     public RString getKazokuJokyo() {
         return kazokuJokyo;
     }
 
     /**
-     * 概況特記事項（家族状況）のsetメソッドです。
+     * kazokuJokyoのsetメソッドです。
      *
-     * @param kazokuJokyo 概況特記事項（家族状況）
+     * @param kazokuJokyo kazokuJokyo
      */
     public void setKazokuJokyo(RString kazokuJokyo) {
         this.kazokuJokyo = kazokuJokyo;
     }
 
     /**
-     * 概況特記（家族状況）イメージ共有ファイルIDのgetメソッドです。
+     * kyojuKankyoのgetメソッドです。
      *
-     * @return 概況特記（家族状況）イメージ共有ファイルID
+     * @return kyojuKankyo
      */
-    public RDateTime getKazokuJokyoImageSharedFileId() {
-        return kazokuJokyoImageSharedFileId;
-    }
-
-    /**
-     * 概況特記（家族状況）イメージ共有ファイルIDのsetメソッドです。
-     *
-     * @param kazokuJokyoImageSharedFileId 概況特記（家族状況）イメージ共有ファイルID
-     */
-    public void setKazokuJokyoImageSharedFileId(RDateTime kazokuJokyoImageSharedFileId) {
-        this.kazokuJokyoImageSharedFileId = kazokuJokyoImageSharedFileId;
-    }
-
-    /**
-     * 概況特記（家族状況）マスキングイメージ共有ファイルIDのgetメソッドです。
-     *
-     * @return 概況特記（家族状況）マスキングイメージ共有ファイルID
-     */
-    public RDateTime getKazokuJokyoMaskingImageSharedFileId() {
-        return kazokuJokyoMaskingImageSharedFileId;
-    }
-
-    /**
-     * 概況特記（家族状況）マスキングイメージ共有ファイルIDのsetメソッドです。
-     *
-     * @param kazokuJokyoMaskingImageSharedFileId 概況特記（家族状況）マスキングイメージ共有ファイルID
-     */
-    public void setKazokuJokyoMaskingImageSharedFileId(RDateTime kazokuJokyoMaskingImageSharedFileId) {
-        this.kazokuJokyoMaskingImageSharedFileId = kazokuJokyoMaskingImageSharedFileId;
-    }
-
-    /**
-     * 概況特記事項（居住環境）のgetメソッドです。
-     *
-     * @return 概況特記事項（居住環境）
-     */
+    @CheckForNull
     public RString getKyojuKankyo() {
         return kyojuKankyo;
     }
 
     /**
-     * 概況特記事項（居住環境）のsetメソッドです。
+     * kyojuKankyoのsetメソッドです。
      *
-     * @param kyojuKankyo 概況特記事項（居住環境）
+     * @param kyojuKankyo kyojuKankyo
      */
     public void setKyojuKankyo(RString kyojuKankyo) {
         this.kyojuKankyo = kyojuKankyo;
     }
 
     /**
-     * 概況特記（居住環境）イメージ共有ファイルIDのgetメソッドです。
+     * kikaiKikiのgetメソッドです。
      *
-     * @return 概況特記（居住環境）イメージ共有ファイルID
+     * @return kikaiKiki
      */
-    public RDateTime getKyojuKankyoImageSharedFileId() {
-        return kyojuKankyoImageSharedFileId;
-    }
-
-    /**
-     * 概況特記（居住環境）イメージ共有ファイルIDのsetメソッドです。
-     *
-     * @param kyojuKankyoImageSharedFileId 概況特記（居住環境）イメージ共有ファイルID
-     */
-    public void setKyojuKankyoImageSharedFileId(RDateTime kyojuKankyoImageSharedFileId) {
-        this.kyojuKankyoImageSharedFileId = kyojuKankyoImageSharedFileId;
-    }
-
-    /**
-     * 概況特記（居住環境）マスキングイメージ共有ファイルIDのgetメソッドです。
-     *
-     * @return 概況特記（居住環境）マスキングイメージ共有ファイルID
-     */
-    public RDateTime getKyojuKankyoMaskingImageSharedFileId() {
-        return kyojuKankyoMaskingImageSharedFileId;
-    }
-
-    /**
-     * 概況特記（居住環境）マスキングイメージ共有ファイルIDのsetメソッドです。
-     *
-     * @param kyojuKankyoMaskingImageSharedFileId 概況特記（居住環境）マスキングイメージ共有ファイルID
-     */
-    public void setKyojuKankyoMaskingImageSharedFileId(RDateTime kyojuKankyoMaskingImageSharedFileId) {
-        this.kyojuKankyoMaskingImageSharedFileId = kyojuKankyoMaskingImageSharedFileId;
-    }
-
-    /**
-     * 概況特記事項（機器・器械）のgetメソッドです。
-     *
-     * @return 概況特記事項（機器・器械）
-     */
+    @CheckForNull
     public RString getKikaiKiki() {
         return kikaiKiki;
     }
 
     /**
-     * 概況特記事項（機器・器械）のsetメソッドです。
+     * kikaiKikiのsetメソッドです。
      *
-     * @param kikaiKiki 概況特記事項（機器・器械）
+     * @param kikaiKiki kikaiKiki
      */
     public void setKikaiKiki(RString kikaiKiki) {
         this.kikaiKiki = kikaiKiki;
     }
 
     /**
-     * 概況特記（機器・器械）イメージ共有ファイルIDのgetメソッドです。
-     *
-     * @return 概況特記（機器・器械）イメージ共有ファイルID
-     */
-    public RDateTime getKikaiKikiImageSharedFileId() {
-        return kikaiKikiImageSharedFileId;
-    }
-
-    /**
-     * 概況特記（機器・器械）イメージ共有ファイルIDのsetメソッドです。
-     *
-     * @param kikaiKikiImageSharedFileId 概況特記（機器・器械）イメージ共有ファイルID
-     */
-    public void setKikaiKikiImageSharedFileId(RDateTime kikaiKikiImageSharedFileId) {
-        this.kikaiKikiImageSharedFileId = kikaiKikiImageSharedFileId;
-    }
-
-    /**
-     * 概況特記（機器・器械）マスキングイメージ共有ファイルIDのgetメソッドです。
-     *
-     * @return 概況特記（機器・器械）マスキングイメージ共有ファイルID
-     */
-    public RDateTime getKikaiKikiMaskingImageSharedFileId() {
-        return kikaiKikiMaskingImageSharedFileId;
-    }
-
-    /**
-     * 概況特記（機器・器械）マスキングイメージ共有ファイルIDのsetメソッドです。
-     *
-     * @param kikaiKikiMaskingImageSharedFileId 概況特記（機器・器械）マスキングイメージ共有ファイルID
-     */
-    public void setKikaiKikiMaskingImageSharedFileId(RDateTime kikaiKikiMaskingImageSharedFileId) {
-        this.kikaiKikiMaskingImageSharedFileId = kikaiKikiMaskingImageSharedFileId;
-    }
-
-    /**
      * このエンティティの主キーが他の{@literal DbT5206GaikyoTokkiEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT5206GaikyoTokkiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5206GaikyoTokkiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5206GaikyoTokkiEntity other) {
@@ -366,6 +301,9 @@ public class DbT5206GaikyoTokkiEntity extends DbTableEntityBase<DbT5206GaikyoTok
         if (this.ninteichosaRirekiNo != other.ninteichosaRirekiNo) {
             return false;
         }
+        if (!Objects.equals(this.gaikyoTokkiTextImageKubun, other.gaikyoTokkiTextImageKubun)) {
+            return false;
+        }
         return true;
     }
 
@@ -376,18 +314,14 @@ public class DbT5206GaikyoTokkiEntity extends DbTableEntityBase<DbT5206GaikyoTok
     public void shallowCopy(DbT5206GaikyoTokkiEntity entity) {
         this.shinseishoKanriNo = entity.shinseishoKanriNo;
         this.ninteichosaRirekiNo = entity.ninteichosaRirekiNo;
+        this.gaikyoTokkiTextImageKubun = entity.gaikyoTokkiTextImageKubun;
+        this.jutakuKaishu = entity.jutakuKaishu;
+        this.tokubetsuKyufuService = entity.tokubetsuKyufuService;
+        this.zaitakuService = entity.zaitakuService;
         this.shuso = entity.shuso;
-        this.shusoImageSharedFileId = entity.shusoImageSharedFileId;
-        this.shusoMaskingImageSharedFileId = entity.shusoMaskingImageSharedFileId;
         this.kazokuJokyo = entity.kazokuJokyo;
-        this.kazokuJokyoImageSharedFileId = entity.kazokuJokyoImageSharedFileId;
-        this.kazokuJokyoMaskingImageSharedFileId = entity.kazokuJokyoMaskingImageSharedFileId;
         this.kyojuKankyo = entity.kyojuKankyo;
-        this.kyojuKankyoImageSharedFileId = entity.kyojuKankyoImageSharedFileId;
-        this.kyojuKankyoMaskingImageSharedFileId = entity.kyojuKankyoMaskingImageSharedFileId;
         this.kikaiKiki = entity.kikaiKiki;
-        this.kikaiKikiImageSharedFileId = entity.kikaiKikiImageSharedFileId;
-        this.kikaiKikiMaskingImageSharedFileId = entity.kikaiKikiMaskingImageSharedFileId;
     }
 
     /**
@@ -397,7 +331,7 @@ public class DbT5206GaikyoTokkiEntity extends DbTableEntityBase<DbT5206GaikyoTok
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, ninteichosaRirekiNo, shuso, shusoImageSharedFileId, shusoMaskingImageSharedFileId, kazokuJokyo, kazokuJokyoImageSharedFileId, kazokuJokyoMaskingImageSharedFileId, kyojuKankyo, kyojuKankyoImageSharedFileId, kyojuKankyoMaskingImageSharedFileId, kikaiKiki, kikaiKikiImageSharedFileId, kikaiKikiMaskingImageSharedFileId);
+        return super.toMd5(shinseishoKanriNo, ninteichosaRirekiNo, gaikyoTokkiTextImageKubun, jutakuKaishu, tokubetsuKyufuService, zaitakuService, shuso, kazokuJokyo, kyojuKankyo, kikaiKiki);
     }
 
 // </editor-fold>

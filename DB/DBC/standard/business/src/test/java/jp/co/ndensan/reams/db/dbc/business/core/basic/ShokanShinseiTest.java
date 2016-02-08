@@ -44,7 +44,7 @@ public class ShokanShinseiTest extends DbcTestBase {
         主キー名1 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_被保険者番号;
         主キー名2 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_サービス提供年月;
         主キー名3 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_整理番号;
-        主キー名4 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号;
+//        主キー名4 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -61,24 +61,28 @@ public class ShokanShinseiTest extends DbcTestBase {
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShokanShinsei(null, 主キー名2, 主キー名3, 主キー名4);
+//            sut = new ShokanShinsei(null, 主キー名2, 主キー名3, 主キー名4);
+            sut = new ShokanShinsei(null, 主キー名2, 主キー名3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShokanShinsei(主キー名1, null, 主キー名3, 主キー名4);
+//            sut = new ShokanShinsei(主キー名1, null, 主キー名3, 主キー名4);
+            sut = new ShokanShinsei(主キー名1, null, 主キー名3);
         }
 
         @Test
         public void 指定したキーが保持するDbT3034ShokanShinseiEntityにセットされている() {
-            sut = new ShokanShinsei(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+//            sut = new ShokanShinsei(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            sut = new ShokanShinsei(主キー名1, 主キー名2, 主キー名3);
             assertThat(sut.get被保険者番号(), is(主キー名1));
             assertThat(sut.getサービス提供年月(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するShokanShinseiIdentifierにセットされている() {
-            sut = new ShokanShinsei(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+//            sut = new ShokanShinsei(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            sut = new ShokanShinsei(主キー名1, 主キー名2, 主キー名3);
             assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
             assertThat(sut.identifier().getサービス提供年月(), is(主キー名2));
         }
@@ -138,10 +142,10 @@ public class ShokanShinseiTest extends DbcTestBase {
             assertThat(sut.get整理番号(), is(ShokanShinseiEntity.getSeiriNo()));
         }
 
-        @Test
-        public void get履歴番号は_entityが持つ履歴番号を返す() {
-            assertThat(sut.get履歴番号(), is(ShokanShinseiEntity.getRirekiNo()));
-        }
+//        @Test
+//        public void get履歴番号は_entityが持つ履歴番号を返す() {
+//            assertThat(sut.get履歴番号(), is(ShokanShinseiEntity.getRirekiNo()));
+//        }
 
         @Test
         public void get証記載保険者番号は_entityが持つ証記載保険者番号を返す() {
@@ -190,7 +194,7 @@ public class ShokanShinseiTest extends DbcTestBase {
 
         @Test
         public void get申請事業者コードは_entityが持つ申請事業者コードを返す() {
-            assertThat(sut.get申請事業者コード(), is(ShokanShinseiEntity.getShinseiJigyoshaCode()));
+            assertThat(sut.get申請事業者コード(), is(ShokanShinseiEntity.getShinseiJigyoshaNo()));
         }
 
         @Test
@@ -200,7 +204,7 @@ public class ShokanShinseiTest extends DbcTestBase {
 
         @Test
         public void get保険給付額は_entityが持つ保険給付額を返す() {
-            assertThat(sut.get保険給付額(), is(ShokanShinseiEntity.getHokenKyufuritsu()));
+            assertThat(sut.get保険給付額(), is(ShokanShinseiEntity.getHokenKyufugaku()));
         }
 
         @Test
@@ -243,10 +247,10 @@ public class ShokanShinseiTest extends DbcTestBase {
             assertThat(sut.get支払期間終了年月日(), is(ShokanShinseiEntity.getShiharaiShuryoYMD()));
         }
 
-        @Test
-        public void get閉庁内容は_entityが持つ閉庁内容を返す() {
-            assertThat(sut.get閉庁内容(), is(ShokanShinseiEntity.getHeichoNaiyo()));
-        }
+//        @Test
+//        public void get閉庁内容は_entityが持つ閉庁内容を返す() {
+//            assertThat(sut.get閉庁内容(), is(ShokanShinseiEntity.getHeichoNaiyo()));
+//        }
 
         @Test
         public void get支払窓口開始時間は_entityが持つ支払窓口開始時間を返す() {

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7014KaigoSetaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -14,7 +15,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -35,8 +35,6 @@ public class KaigoSetai extends ParentModelBase<KaigoSetaiIdentifier, DbT7014Kai
      * @param 世帯員管理連番 世帯員管理連番
      * @param 世帯員識別コード 世帯員識別コード
      * @param 本人区分 本人区分
-     * @param 課税年度 課税年度
-     * @param 課税非課税区分 課税非課税区分
      */
     public KaigoSetai(HihokenshaNo 被保険者番号,
             RString 管理識別区分,
@@ -224,7 +222,7 @@ public class KaigoSetai extends ParentModelBase<KaigoSetaiIdentifier, DbT7014Kai
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT7014KaigoSetaiEntity entity;
         private final KaigoSetaiIdentifier id;
 

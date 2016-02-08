@@ -6,14 +6,13 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiService.serviceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.rirekiNo;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.serviceKoumokuCode;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.serviceShuruiCode;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.serviceKoumokuCd;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.teikyoKaishiYM;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -22,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護サービス内容のデータアクセスクラスです。
  */
-public class DbT7131KaigoServiceNaiyouDac implements ISaveable<DbT7131KaigoServiceNaiyouEntity> {
+public class DbT7131KaigoServiceNaiyouDac {
 
     @InjectSession
     private SqlSession session;
@@ -60,10 +60,10 @@ public class DbT7131KaigoServiceNaiyouDac implements ISaveable<DbT7131KaigoServi
         return accessor.select().
                 table(DbT7131KaigoServiceNaiyou.class).
                 where(and(
-                eq(serviceShuruiCode, サービス種類コード),
-                eq(serviceKoumokuCode, サービス項目コード),
-                eq(teikyoKaishiYM, 提供開始年月),
-                eq(rirekiNo, 履歴番号))).
+                                eq(serviceShuruiCode, サービス種類コード),
+                                eq(serviceKoumokuCd, サービス項目コード),
+                                eq(teikyoKaishiYM, 提供開始年月),
+                                eq(rirekiNo, 履歴番号))).
                 toObject(DbT7131KaigoServiceNaiyouEntity.class);
     }
 
@@ -88,11 +88,34 @@ public class DbT7131KaigoServiceNaiyouDac implements ISaveable<DbT7131KaigoServi
      * @return 登録件数
      */
     @Transaction
-    @Override
     public int save(DbT7131KaigoServiceNaiyouEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護サービス内容エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * サービスコードのフォーカスアウトです。
+     *
+     * @param サービス種類コード サービス種類コード
+     * @param サービス項目コード サービス項目コード
+     * @param 提供開始年月 提供開始年月
+     * @return DbT7131KaigoServiceNaiyouEntity
+     * @throws NullPointerException NullPointerException
+     */
+    public List<DbT7131KaigoServiceNaiyouEntity> getサービス内容(KaigoServiceShuruiCode サービス種類コード,
+            RString サービス項目コード, FlexibleYearMonth 提供開始年月) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7131KaigoServiceNaiyou.class).
+                where(and(eq(DbT7131KaigoServiceNaiyou.serviceShuruiCd, サービス種類コード),
+                                eq(DbT7131KaigoServiceNaiyou.serviceKoumokuCd, サービス項目コード),
+                                leq(DbT7131KaigoServiceNaiyou.teikyoKaishiYM, 提供開始年月),
+                                leq(提供開始年月, DbT7131KaigoServiceNaiyou.teikyoShuryoYM))).
+                toList(DbT7131KaigoServiceNaiyouEntity.class);
+
+    }
+
 }

@@ -5,6 +5,7 @@ dbd/db/dbd/HomonkaigoRiyoshaFutangakuGengaku/onLoad
 dbd/db/dbd/HomonkaigoRiyoshaFutangakuGengaku/onSelect_dgHomonkaigoRiyoshaFutangakuGengakuList
 dbd/db/dbd/HyojunFutangakuGengaku/onLoad
 dbd/db/dbd/HyojunFutangakuGengaku/onSelect_dgHyojunFutangakuGengakuList
+dbd/db/dbd/IkenshoShujiiIchiran/onLoad
 dbd/db/dbd/JukyushaShokai/onClick_btnToReturnNinteiRireki
 dbd/db/dbd/JukyushaShokai/onLoad
 dbd/db/dbd/JukyushaShokai/onStart
@@ -12,6 +13,7 @@ dbd/db/dbd/JukyushaShokai/onStart_Detail
 dbd/db/dbd/JukyushaShokaiTargetSearch/onClick_btnToDecide
 dbd/db/dbd/JukyushaShokaiTargetSearch/onClick_btnToSearch
 dbd/db/dbd/JukyushaShokaiTargetSearch/onLoad
+dbd/db/dbd/KojinJokyoShokaiDiv/onLoad
 dbd/db/dbd/RiyoshaFutangakuGemmen/onLoad
 dbd/db/dbd/RiyoshaFutangakuGemmen/onSelect_dgRiyoshaFutangakuGemmenList
 dbd/db/dbd/ShakaiFukushiHojinKeigen/onLoad

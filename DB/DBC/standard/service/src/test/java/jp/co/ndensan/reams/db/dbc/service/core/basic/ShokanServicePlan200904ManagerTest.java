@@ -15,10 +15,8 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3047ShokanServicePlan2
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
@@ -57,11 +55,9 @@ public class ShokanServicePlan200904ManagerTest {
             RString 主キー3 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_履歴番号;
-            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_指定_基準該当事業者区分コード;
-            RString 主キー8 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細行番号;
-            FlexibleDate 主キー9 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_居宅サービス計画作成依頼届出年月日;
-            sut.get償還払請求サービス計画200904(null, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9);
+            RString 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_連番;
+            sut.get償還払請求サービス計画200904(null, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
         }
 
         @Test(expected = NullPointerException.class)
@@ -70,11 +66,9 @@ public class ShokanServicePlan200904ManagerTest {
             RString 主キー3 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_履歴番号;
-            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_指定_基準該当事業者区分コード;
-            RString 主キー8 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細行番号;
-            FlexibleDate 主キー9 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_居宅サービス計画作成依頼届出年月日;
-            sut.get償還払請求サービス計画200904(主キー1, null, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9);
+            RString 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_連番;
+            sut.get償還払請求サービス計画200904(主キー1, null, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
         }
 
         @Test(expected = NullPointerException.class)
@@ -83,11 +77,9 @@ public class ShokanServicePlan200904ManagerTest {
             FlexibleYearMonth 主キー2 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_サービス提供年月;
             JigyoshaNo 主キー4 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_履歴番号;
-            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_指定_基準該当事業者区分コード;
-            RString 主キー8 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細行番号;
-            FlexibleDate 主キー9 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_居宅サービス計画作成依頼届出年月日;
-            sut.get償還払請求サービス計画200904(主キー1, 主キー2, null, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9);
+            RString 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_連番;
+            sut.get償還払請求サービス計画200904(主キー1, 主キー2, null, 主キー4, 主キー5, 主キー6, 主キー7);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,11 +88,9 @@ public class ShokanServicePlan200904ManagerTest {
             FlexibleYearMonth 主キー2 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_整理番号;
             RString 主キー5 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_履歴番号;
-            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_指定_基準該当事業者区分コード;
-            RString 主キー8 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細行番号;
-            FlexibleDate 主キー9 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_居宅サービス計画作成依頼届出年月日;
-            sut.get償還払請求サービス計画200904(主キー1, 主キー2, 主キー3, null, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9);
+            RString 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_連番;
+            sut.get償還払請求サービス計画200904(主キー1, 主キー2, 主キー3, null, 主キー5, 主キー6, 主キー7);
         }
 
         @Test(expected = NullPointerException.class)
@@ -109,11 +99,9 @@ public class ShokanServicePlan200904ManagerTest {
             FlexibleYearMonth 主キー2 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_事業者番号;
-            Decimal 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_履歴番号;
-            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_指定_基準該当事業者区分コード;
-            RString 主キー8 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細行番号;
-            FlexibleDate 主キー9 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_居宅サービス計画作成依頼届出年月日;
-            sut.get償還払請求サービス計画200904(主キー1, 主キー2, 主キー3, 主キー4, null, 主キー6, 主キー7, 主キー8, 主キー9);
+            RString 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_連番;
+            sut.get償還払請求サービス計画200904(主キー1, 主キー2, 主キー3, 主キー4, null, 主キー6, 主キー7);
         }
 
         @Test(expected = NullPointerException.class)
@@ -123,10 +111,8 @@ public class ShokanServicePlan200904ManagerTest {
             RString 主キー3 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_様式番号;
-            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_指定_基準該当事業者区分コード;
-            RString 主キー8 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細行番号;
-            FlexibleDate 主キー9 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_居宅サービス計画作成依頼届出年月日;
-            sut.get償還払請求サービス計画200904(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, null, 主キー7, 主キー8, 主キー9);
+            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_連番;
+            sut.get償還払請求サービス計画200904(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, null, 主キー7);
         }
 
         @Test(expected = NullPointerException.class)
@@ -136,54 +122,24 @@ public class ShokanServicePlan200904ManagerTest {
             RString 主キー3 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_履歴番号;
-            RString 主キー8 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細行番号;
-            FlexibleDate 主キー9 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_居宅サービス計画作成依頼届出年月日;
-            sut.get償還払請求サービス計画200904(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, null, 主キー8, 主キー9);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型8にnullを指定した場合_NullPointerExceptionが発生する() {
-            HihokenshaNo 主キー1 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_被保険者番号;
-            FlexibleYearMonth 主キー2 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_サービス提供年月;
-            RString 主キー3 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_整理番号;
-            JigyoshaNo 主キー4 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_事業者番号;
-            RString 主キー5 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_履歴番号;
-            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_指定_基準該当事業者区分コード;
-            FlexibleDate 主キー9 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_居宅サービス計画作成依頼届出年月日;
-            sut.get償還払請求サービス計画200904(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, null, 主キー9);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型9にnullを指定した場合_NullPointerExceptionが発生する() {
-            HihokenshaNo 主キー1 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_被保険者番号;
-            FlexibleYearMonth 主キー2 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_サービス提供年月;
-            RString 主キー3 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_整理番号;
-            JigyoshaNo 主キー4 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_事業者番号;
-            RString 主キー5 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_履歴番号;
-            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_指定_基準該当事業者区分コード;
-            RString 主キー8 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細行番号;
-            sut.get償還払請求サービス計画200904(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, null);
+            RString 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細番号;
+            sut.get償還払請求サービス計画200904(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class),
-                    any(JigyoshaNo.class), any(RString.class), any(Decimal.class),
-                    any(RString.class), any(RString.class), any(FlexibleDate.class))).thenReturn(null);
+                    any(JigyoshaNo.class), any(RString.class),
+                    any(RString.class), any(RString.class))).thenReturn(null);
             HihokenshaNo 主キー1 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_履歴番号;
-            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_指定_基準該当事業者区分コード;
-            RString 主キー8 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細行番号;
-            FlexibleDate 主キー9 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_居宅サービス計画作成依頼届出年月日;
-            ShokanServicePlan200904 result = sut.get償還払請求サービス計画200904(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9);
+            RString 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_連番;
+            ShokanServicePlan200904 result = sut.get償還払請求サービス計画200904(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
 
             assertThat(result, is(nullValue()));
         }
@@ -192,18 +148,16 @@ public class ShokanServicePlan200904ManagerTest {
         public void 検索結果が存在する場合() {
             DbT3047ShokanServicePlan200904Entity entity = DbT3047ShokanServicePlan200904EntityGenerator.createDbT3047ShokanServicePlan200904Entity();
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class),
-                    any(JigyoshaNo.class), any(RString.class), any(Decimal.class),
-                    any(RString.class), any(RString.class), any(FlexibleDate.class))).thenReturn(entity);
+                    any(JigyoshaNo.class), any(RString.class),
+                    any(RString.class), any(RString.class))).thenReturn(entity);
             HihokenshaNo 主キー1 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_履歴番号;
-            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_指定_基準該当事業者区分コード;
-            RString 主キー8 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細行番号;
-            FlexibleDate 主キー9 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_居宅サービス計画作成依頼届出年月日;
-            ShokanServicePlan200904 result = sut.get償還払請求サービス計画200904(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9);
+            RString 主キー6 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_連番;
+            ShokanServicePlan200904 result = sut.get償還払請求サービス計画200904(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
 
             assertThat(result.get被保険者番号().value(), is(DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_被保険者番号.value()));
         }

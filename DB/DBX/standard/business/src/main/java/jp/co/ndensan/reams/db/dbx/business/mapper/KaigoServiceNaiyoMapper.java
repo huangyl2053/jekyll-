@@ -45,11 +45,11 @@ public final class KaigoServiceNaiyoMapper {
     public static IKaigoServiceNaiyo to介護サービス内容(DbT7131KaigoServiceNaiyouEntity kaigoServiceNaiyoEntity) {
         Objects.requireNonNull(kaigoServiceNaiyoEntity, UrSystemErrorMessages.値がnull.getReplacedMessage("kaigoServiceNaiyoEntity"));
         IKaigoServiceCode 介護サービスコード = new _KaigoServiceCode(
-                kaigoServiceNaiyoEntity.getServiceShuruiCode(), kaigoServiceNaiyoEntity.getServiceKoumokuCode());
+                kaigoServiceNaiyoEntity.getServiceShuruiCd(), kaigoServiceNaiyoEntity.getServiceKoumokuCd());
         IKaigoServiceTani サービス単位 = new _KaigoServiceTani(
                 kaigoServiceNaiyoEntity.getTaniSu(),
                 kaigoServiceNaiyoEntity.getTanisuShikibetsuCode(),
-                kaigoServiceNaiyoEntity.getTanisuSanteiTani());
+                kaigoServiceNaiyoEntity.getTaniSu());
         IKaigoServiceNaiyo kaigoServicenaiyo = new _KaigoServiceNaiyo(介護サービスコード,
                 new Range<>(kaigoServiceNaiyoEntity.getTeikyoKaishiYM(),
                         kaigoServiceNaiyoEntity.getTeikyoShuryoYM()),
@@ -71,8 +71,8 @@ public final class KaigoServiceNaiyoMapper {
         requireNonNull(kaigoServiceNaiyo, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("kaigoServiceNaiyo", "KaigoServiceNaiyoEntity"));
 
         DbT7131KaigoServiceNaiyouEntity entity = new DbT7131KaigoServiceNaiyouEntity();
-        entity.setServiceShuruiCode(kaigoServiceNaiyo.getサービスコード().getサービス種類コード());
-        entity.setServiceKoumokuCode(kaigoServiceNaiyo.getサービスコード().getサービス項目コード());
+        entity.setServiceShuruiCd(kaigoServiceNaiyo.getサービスコード().getサービス種類コード());
+        entity.setServiceKoumokuCd(kaigoServiceNaiyo.getサービスコード().getサービス項目コード());
         entity.setTeikyoKaishiYM(kaigoServiceNaiyo.get適用年月().getFrom());
         entity.setTeikyoShuryoYM(kaigoServiceNaiyo.get適用年月().getTo());
         entity.setRirekiNo(new Decimal(kaigoServiceNaiyo.get履歴番号()));
@@ -80,7 +80,7 @@ public final class KaigoServiceNaiyoMapper {
         entity.setServiceNameRyaku(kaigoServiceNaiyo.getサービス略称());
         entity.setTaniSu(kaigoServiceNaiyo.get介護サービス単位().get単位数());
         entity.setTanisuShikibetsuCode(kaigoServiceNaiyo.get介護サービス単位().get単位数識別());
-        entity.setTanisuSanteiTani(kaigoServiceNaiyo.get介護サービス単位().get単位数算定単位());
+        entity.setTaniSu(kaigoServiceNaiyo.get介護サービス単位().get単位数算定単位());
         return entity;
     }
 

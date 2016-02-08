@@ -4,9 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbx.entity.db.basic.helper;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceIdoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuSanteiTani;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuShikibetsu;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
@@ -27,9 +24,9 @@ public final class DbT7131KaigoServiceNaiyouEntityGenerator {
     public static final RString DEFAULT_サービス名称 = new RString("あいうえおかきくけこ");
     public static final RString DEFAULT_サービス略称 = new RString("あうおかこ");
     public static final int DEFAULT_単位数 = 1;
-    public static final TanisuShikibetsu DEFAULT_単位数識別 = new TanisuShikibetsu(new Code("001"));
-    public static final TanisuSanteiTani DEFAULT_単位数算定単位 = new TanisuSanteiTani(new Code("001"));
-    public static final KaigoServiceIdoJiyu DEFAULT_異動事由 = new KaigoServiceIdoJiyu(new Code("001"));
+    public static final Code DEFAULT_単位数識別 = new Code("001");
+    public static final int DEFAULT_単位数算定単位 = 1;
+    public static final Code DEFAULT_異動事由 = new Code("001");
     public static final RString DEFAULT_限度額対象外フラグ = new RString("1");
     public static final RString DEFAULT_外部サービス利用型区分 = new RString("1");
     public static final RString DEFAULT_特別地域加算フラグ = new RString("1");
@@ -54,8 +51,8 @@ public final class DbT7131KaigoServiceNaiyouEntityGenerator {
 
     public static DbT7131KaigoServiceNaiyouEntity createDbT7131KaigoServiceNaiyouEntity() {
         DbT7131KaigoServiceNaiyouEntity entity = new DbT7131KaigoServiceNaiyouEntity();
-        entity.setServiceShuruiCode(DEFAULT_サービス種類コード);
-        entity.setServiceKoumokuCode(DEFAULT_サービス項目コード);
+        entity.setServiceShuruiCd(DEFAULT_サービス種類コード);
+        entity.setServiceKoumokuCd(DEFAULT_サービス項目コード);
         entity.setTeikyoKaishiYM(DEFAULT_提供開始年月);
         entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setTeikyoShuryoYM(DEFAULT_提供終了年月);
@@ -63,7 +60,7 @@ public final class DbT7131KaigoServiceNaiyouEntityGenerator {
         entity.setServiceNameRyaku(DEFAULT_サービス略称);
         entity.setTaniSu(DEFAULT_単位数);
         entity.setTanisuShikibetsuCode(DEFAULT_単位数識別);
-        entity.setTanisuSanteiTani(DEFAULT_単位数算定単位);
+        entity.setTaniSu(DEFAULT_単位数算定単位);
         entity.setIdouJiyuCode(DEFAULT_異動事由);
 //        entity.setGendogakuTaishogaiFlag(DEFAULT_限度額対象外フラグ);
 //        entity.setGaibuServiceRiyoKataKubun(DEFAULT_外部サービス利用型区分);

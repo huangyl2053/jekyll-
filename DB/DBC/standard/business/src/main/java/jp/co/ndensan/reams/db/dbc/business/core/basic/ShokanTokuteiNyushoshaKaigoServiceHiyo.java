@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomo
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -40,39 +39,39 @@ extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier,
      * @param 整理番号 整理番号
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
-     * @param 順次番号 順次番号
-     * @param 履歴番号 履歴番号
+     * @param 明細番号 明細番号
+     * @param 連番 連番
      */
     public ShokanTokuteiNyushoshaKaigoServiceHiyo(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             JigyoshaNo 事業者番号,
             RString 様式番号,
-            RString 順次番号,
-            Decimal 履歴番号) {
+            RString 明細番号,
+            RString 連番) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(順次番号, UrSystemErrorMessages.値がnull.getReplacedMessage("順次番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
         this.entity = new DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
         this.entity.setSeiriNo(整理番号);
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
-        this.entity.setJunjiNo(順次番号);
-        this.entity.setRirekiNo(履歴番号);
+        this.entity.setMeisaiNo(明細番号);
+        this.entity.setRenban(連番);
         this.id = new ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier(
                 被保険者番号,
                 サービス提供年月,
                 整理番号,
                 事業者番号,
                 様式番号,
-                順次番号,
-                履歴番号
+                明細番号,
+                連番
         );
     }
 
@@ -91,8 +90,8 @@ extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier,
                 entity.getSeiriNo(),
                 entity.getJigyoshaNo(),
                 entity.getYoshikiNo(),
-                entity.getJunjiNo(),
-                entity.getRirekiNo());
+                entity.getMeisaiNo(),
+                entity.getRenban());
     }
 
     /**
@@ -156,21 +155,21 @@ extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier,
     }
 
     /**
-     * 順次番号を返します。
+     * 明細番号を返します。
      *
-     * @return 順次番号
+     * @return 明細番号
      */
-    public RString get順次番号() {
-        return entity.getJunjiNo();
+    public RString get明細番号() {
+        return entity.getMeisaiNo();
     }
 
     /**
-     * 履歴番号を返します。
+     * 連番を返します。
      *
-     * @return 履歴番号
+     * @return 連番
      */
-    public Decimal get履歴番号() {
-        return entity.getRirekiNo();
+    public RString get連番() {
+        return entity.getRenban();
     }
 
     /**
@@ -196,7 +195,7 @@ extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier,
      *
      * @return 費用単価
      */
-    public Decimal get費用単価() {
+    public int get費用単価() {
         return entity.getHiyoTanka();
     }
 
@@ -205,7 +204,7 @@ extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier,
      *
      * @return 負担限度額
      */
-    public Decimal get負担限度額() {
+    public int get負担限度額() {
         return entity.getFutanGendogaku();
     }
 
@@ -214,7 +213,7 @@ extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier,
      *
      * @return 日数
      */
-    public Decimal get日数() {
+    public int get日数() {
         return entity.getNissu();
     }
 

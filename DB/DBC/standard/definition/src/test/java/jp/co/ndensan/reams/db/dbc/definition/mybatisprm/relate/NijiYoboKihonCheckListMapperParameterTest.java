@@ -5,14 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate;
 
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.NijiYoboKihonCheckListMapperParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -25,9 +22,9 @@ public class NijiYoboKihonCheckListMapperParameterTest extends DbcTestBase {
 
 // TODO 主キー型、主キー名を適切に置換してください。
 // TODO 主キーの数が足りない場合、処理を追加してください。
-    private static final ShikibetsuCode 主キー1 = new ShikibetsuCode("000010000100001");
-    private static final HihokenshaNo 主キー2 = new HihokenshaNo("0123400001");
-    private static FlexibleDate 主キー3;
+    private static final HihokenshaNo 主キー1 = new HihokenshaNo("000010000100001");
+    private static final FlexibleDate 主キー2 = new FlexibleDate("20150102");
+    private static int 主キー3;
 
 // テストクラス名は適切に変更してください
     public static class createSelectByKeyParamテスト extends DbcTestBase {
@@ -48,8 +45,8 @@ public class NijiYoboKihonCheckListMapperParameterTest extends DbcTestBase {
 
             assertThat(sut.get主キー1().value(), is(主キー1.value()));
             assertThat(sut.get主キー2(), is(主キー2));
-//            assertThat(sut.uses主キー1(), is(true));
-//            assertThat(sut.uses主キー2(), is(true));
+            assertThat(sut.isUses主キー1(), is(true));
+            assertThat(sut.isUses主キー2(), is(true));
         }
     }
 
@@ -67,8 +64,8 @@ public class NijiYoboKihonCheckListMapperParameterTest extends DbcTestBase {
             NijiYoboKihonCheckListMapperParameter sut = NijiYoboKihonCheckListMapperParameter.createSelectListParam(主キー1);
 
             assertThat(sut.get主キー1().value(), is(主キー1.value()));
-//            assertThat(sut.uses主キー1(), is(true));
-//            assertThat(sut.uses主キー2(), is(false));
+            assertThat(sut.isUses主キー1(), is(true));
+            assertThat(sut.isUses主キー2(), is(true));
         }
     }
 

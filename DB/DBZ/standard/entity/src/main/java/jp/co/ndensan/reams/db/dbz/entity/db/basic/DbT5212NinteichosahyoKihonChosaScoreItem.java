@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 認定調査票（基本調査素点項目）テーブルの項目定義クラスです。
  */
 public enum DbT5212NinteichosahyoKihonChosaScoreItem implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -61,7 +61,7 @@ public enum DbT5212NinteichosahyoKihonChosaScoreItem implements IColumnDefinitio
     /**
      * 素点項目
      */
-    reserchItem01(5, 0);
+    researchItem01(5, 0);
 
     private final int maxLength;
     private final int scale;

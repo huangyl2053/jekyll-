@@ -2,7 +2,6 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -32,7 +31,7 @@ public class DbT2011RankJohoEntity extends DbTableEntityBase<DbT2011RankJohoEnti
     @PrimaryKey
     private FlexibleYear fukaNendo;
     @PrimaryKey
-    private RankKubun rankKubun;
+    private RString rankKubun;
     private RString rankName;
 
     /**
@@ -103,7 +102,7 @@ public class DbT2011RankJohoEntity extends DbTableEntityBase<DbT2011RankJohoEnti
      *
      * @return rankKubun
      */
-    public RankKubun getRankKubun() {
+    public RString getRankKubun() {
         return rankKubun;
     }
 
@@ -112,7 +111,7 @@ public class DbT2011RankJohoEntity extends DbTableEntityBase<DbT2011RankJohoEnti
      *
      * @param rankKubun rankKubun
      */
-    public void setRankKubun(RankKubun rankKubun) {
+    public void setRankKubun(RString rankKubun) {
         this.rankKubun = rankKubun;
     }
 

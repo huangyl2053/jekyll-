@@ -7,8 +7,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 
@@ -16,7 +19,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
  * 特定負担限度額認定テーブルのエンティティクラスです。
  */
 public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<DbT4015TokuteiFutanGendogakuNinteiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4015TokuteiFutanGendogakuNintei");
@@ -29,6 +32,12 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
+    private FlexibleDate shinseiYMD;
+    private FlexibleDate ketteiYMD;
+    private FlexibleDate tekiyoKaishiYMD;
+    private FlexibleDate tekiyoShuryoYMD;
+    private RString ketteiKubun;
+    private RString hiShoninRiyu;
     @PrimaryKey
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
@@ -95,6 +104,120 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
     }
 
     /**
+     * shinseiYMDのgetメソッドです。
+     *
+     * @return shinseiYMD
+     */
+    @CheckForNull
+    public FlexibleDate getShinseiYMD() {
+        return shinseiYMD;
+    }
+
+    /**
+     * shinseiYMDのsetメソッドです。
+     *
+     * @param shinseiYMD shinseiYMD
+     */
+    public void setShinseiYMD(FlexibleDate shinseiYMD) {
+        this.shinseiYMD = shinseiYMD;
+    }
+
+    /**
+     * ketteiYMDのgetメソッドです。
+     *
+     * @return ketteiYMD
+     */
+    @CheckForNull
+    public FlexibleDate getKetteiYMD() {
+        return ketteiYMD;
+    }
+
+    /**
+     * ketteiYMDのsetメソッドです。
+     *
+     * @param ketteiYMD ketteiYMD
+     */
+    public void setKetteiYMD(FlexibleDate ketteiYMD) {
+        this.ketteiYMD = ketteiYMD;
+    }
+
+    /**
+     * tekiyoKaishiYMDのgetメソッドです。
+     *
+     * @return tekiyoKaishiYMD
+     */
+    @CheckForNull
+    public FlexibleDate getTekiyoKaishiYMD() {
+        return tekiyoKaishiYMD;
+    }
+
+    /**
+     * tekiyoKaishiYMDのsetメソッドです。
+     *
+     * @param tekiyoKaishiYMD tekiyoKaishiYMD
+     */
+    public void setTekiyoKaishiYMD(FlexibleDate tekiyoKaishiYMD) {
+        this.tekiyoKaishiYMD = tekiyoKaishiYMD;
+    }
+
+    /**
+     * tekiyoShuryoYMDのgetメソッドです。
+     *
+     * @return tekiyoShuryoYMD
+     */
+    @CheckForNull
+    public FlexibleDate getTekiyoShuryoYMD() {
+        return tekiyoShuryoYMD;
+    }
+
+    /**
+     * tekiyoShuryoYMDのsetメソッドです。
+     *
+     * @param tekiyoShuryoYMD tekiyoShuryoYMD
+     */
+    public void setTekiyoShuryoYMD(FlexibleDate tekiyoShuryoYMD) {
+        this.tekiyoShuryoYMD = tekiyoShuryoYMD;
+    }
+
+    /**
+     * ketteiKubunのgetメソッドです。
+     *
+     * @return ketteiKubun
+     */
+    @CheckForNull
+    public RString getKetteiKubun() {
+        return ketteiKubun;
+    }
+
+    /**
+     * ketteiKubunのsetメソッドです。
+     *
+     * @param ketteiKubun ketteiKubun
+     */
+    public void setKetteiKubun(RString ketteiKubun) {
+        this.ketteiKubun = ketteiKubun;
+    }
+
+    /**
+     * hiShoninRiyuのgetメソッドです。
+     *
+     * @return hiShoninRiyu
+     */
+    @CheckForNull
+    public RString getHiShoninRiyu() {
+        return hiShoninRiyu;
+    }
+
+    /**
+     * hiShoninRiyuのsetメソッドです。
+     *
+     * @param hiShoninRiyu hiShoninRiyu
+     */
+    public void setHiShoninRiyu(RString hiShoninRiyu) {
+        this.hiShoninRiyu = hiShoninRiyu;
+    }
+
+    /**
      * 証記載保険者番号のgetメソッドです。
      *
      * @return 証記載保険者番号
@@ -108,7 +231,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(@Nonnull ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
@@ -126,7 +249,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -144,7 +267,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(@Nonnull int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -159,6 +282,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      *
      * @return 旧措置者区分
      */
+    @CheckForNull
     public RString getKyuSochishaKubun() {
         return kyuSochishaKubun;
     }
@@ -183,8 +307,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      * <br/>
      * <br/>世帯非課税８０万以下
      *
-     * <br/>世帯非課税８０万超
-     *
+     * <br/>世帯非課税８０万超　     *
      * <br/>生保、
      *
      * <br/>世帯非課税
@@ -197,6 +320,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      *
      * @return 申請理由区分
      */
+    @CheckForNull
     public RString getShinseiRiyuKubun() {
         return shinseiRiyuKubun;
     }
@@ -206,8 +330,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      * <br/>
      * <br/>世帯非課税８０万以下
      *
-     * <br/>世帯非課税８０万超
-     *
+     * <br/>世帯非課税８０万超　     *
      * <br/>生保、
      *
      * <br/>世帯非課税
@@ -237,6 +360,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      *
      * @return 利用者負担段階
      */
+    @CheckForNull
     public RString getRiyoshaFutanDankai() {
         return riyoshaFutanDankai;
     }
@@ -267,6 +391,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      *
      * @return 特例減額措置区分
      */
+    @CheckForNull
     public boolean getTokureiGengakuSochiKubun() {
         return tokureiGengakuSochiKubun;
     }
@@ -293,6 +418,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      *
      * @return 境界層該当者区分
      */
+    @CheckForNull
     public boolean getKyokaisoGaitoshaKubun() {
         return kyokaisoGaitoshaKubun;
     }
@@ -319,6 +445,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      *
      * @return 激変緩和措置対象者区分
      */
+    @CheckForNull
     public boolean getGekihenkanwaSochiTaishoshaKubun() {
         return gekihenkanwaSochiTaishoshaKubun;
     }
@@ -351,6 +478,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      *
      * @return 居室種別
      */
+    @CheckForNull
     public RString getKyoshitsuShubetsu() {
         return kyoshitsuShubetsu;
     }
@@ -379,6 +507,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      *
      * @return 食費負担限度額
      */
+    @CheckForNull
     public Decimal getShokuhiFutanGendogaku() {
         return shokuhiFutanGendogaku;
     }
@@ -397,6 +526,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      *
      * @return ユニット型個室
      */
+    @CheckForNull
     public Decimal getUnitTypeKoshitsu() {
         return unitTypeKoshitsu;
     }
@@ -415,6 +545,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      *
      * @return ユニット型準個室
      */
+    @CheckForNull
     public Decimal getUnitTypeJunKoshitsu() {
         return unitTypeJunKoshitsu;
     }
@@ -433,6 +564,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      *
      * @return 従来型個室（特養等）
      */
+    @CheckForNull
     public Decimal getJuraiTypeKoshitsuTokuyo() {
         return juraiTypeKoshitsuTokuyo;
     }
@@ -451,6 +583,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      *
      * @return 従来型個室（老健・療養等）
      */
+    @CheckForNull
     public Decimal getJuraiTypeKoshitsuRoken_Ryoyo() {
         return juraiTypeKoshitsuRoken_Ryoyo;
     }
@@ -469,6 +602,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      *
      * @return 多床室
      */
+    @CheckForNull
     public Decimal getTashoshitsu() {
         return tashoshitsu;
     }
@@ -486,7 +620,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      * このエンティティの主キーが他の{@literal DbT4015TokuteiFutanGendogakuNinteiEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4015TokuteiFutanGendogakuNinteiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -511,6 +645,12 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      */
     @Override
     public void shallowCopy(DbT4015TokuteiFutanGendogakuNinteiEntity entity) {
+        this.shinseiYMD = entity.shinseiYMD;
+        this.ketteiYMD = entity.ketteiYMD;
+        this.tekiyoKaishiYMD = entity.tekiyoKaishiYMD;
+        this.tekiyoShuryoYMD = entity.tekiyoShuryoYMD;
+        this.ketteiKubun = entity.ketteiKubun;
+        this.hiShoninRiyu = entity.hiShoninRiyu;
         this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
         this.hihokenshaNo = entity.hihokenshaNo;
         this.rirekiNo = entity.rirekiNo;
@@ -536,7 +676,7 @@ public class DbT4015TokuteiFutanGendogakuNinteiEntity extends DbTableEntityBase<
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shoKisaiHokenshaNo, hihokenshaNo, rirekiNo, kyuSochishaKubun, shinseiRiyuKubun, riyoshaFutanDankai, tokureiGengakuSochiKubun, kyokaisoGaitoshaKubun, gekihenkanwaSochiTaishoshaKubun, kyoshitsuShubetsu, shokuhiFutanGendogaku, unitTypeKoshitsu, unitTypeJunKoshitsu, juraiTypeKoshitsuTokuyo, juraiTypeKoshitsuRoken_Ryoyo, tashoshitsu);
+        return super.toMd5(shinseiYMD, ketteiYMD, tekiyoKaishiYMD, tekiyoShuryoYMD, ketteiKubun, hiShoninRiyu, shoKisaiHokenshaNo, hihokenshaNo, rirekiNo, kyuSochishaKubun, shinseiRiyuKubun, riyoshaFutanDankai, tokureiGengakuSochiKubun, kyokaisoGaitoshaKubun, gekihenkanwaSochiTaishoshaKubun, kyoshitsuShubetsu, shokuhiFutanGendogaku, unitTypeKoshitsu, unitTypeJunKoshitsu, juraiTypeKoshitsuTokuyo, juraiTypeKoshitsuRoken_Ryoyo, tashoshitsu);
     }
 
 // </editor-fold>

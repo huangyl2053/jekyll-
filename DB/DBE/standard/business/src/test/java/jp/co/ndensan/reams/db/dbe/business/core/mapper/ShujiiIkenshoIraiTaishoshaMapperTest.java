@@ -4,13 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.core.mapper.ShujiiIkenshoIraiTaishoshaMapper;
 import jp.co.ndensan.reams.db.dbe.business.core.KaigoDoctor.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.core.KaigoIryoKikan.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho.ShujiiIkenshoIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiShinsei;
-import jp.co.ndensan.reams.db.dbe.business.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.business.helper.YokaigoNinteiShinseiTestHelper;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -72,7 +70,6 @@ public class ShujiiIkenshoIraiTaishoshaMapperTest extends DbeTestBase {
 
         @Before
         public void setUp() {
-            認定進捗情報 = NinteiShinchokuJohoMock.create認定進捗情報();
             認定申請情報 = YokaigoNinteiShinseiTestHelper.create認定申請情報();
             個人 = mock(IKojin.class);
             氏名 = new RString("あああ");

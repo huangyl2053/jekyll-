@@ -34,16 +34,13 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tennyushibo.Te
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tennyushibo.TennyuShiboIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tsuchishohakkojoho.TsuchishoHakkoJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tsuchishohakkojoho.TsuchishoHakkoJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5115ImageEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5122TsuchishoHakkoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5129TennyuShiboEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5129TennyuShiboEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5510IchiGojiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5590ShinsakaiIinJogaiJohoEntity;
@@ -52,6 +49,13 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -80,7 +84,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
     private final Models<ImageIdentifier, Image> image;
     private final Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJoho;
     private final Models<NinteiKeikakuJohoIdentifier, NinteiKeikakuJoho> ninteiKeikakuJoho;
-    private final Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho;
+//    private final Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho;
     private final Models<RenrakusakiJohoIdentifier, RenrakusakiJoho> renrakusakiJoho;
     private final Models<ShinsakaiIinJogaiJohoIdentifier, ShinsakaiIinJogaiJoho> shinsakaiIinJogaiJoho;
     private final Models<ShinseiRirekiJohoIdentifier, ShinseiRirekiJoho> shinseiRirekiJoho;
@@ -106,7 +110,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
         this.image = Models.create(new ArrayList<Image>());
         this.ninteiKanryoJoho = Models.create(new ArrayList<NinteiKanryoJoho>());
         this.ninteiKeikakuJoho = Models.create(new ArrayList<NinteiKeikakuJoho>());
-        this.ninteiKekkaJoho = Models.create(new ArrayList<NinteiKekkaJoho>());
+//        this.ninteiKekkaJoho = Models.create(new ArrayList<NinteiKekkaJoho>());
         this.renrakusakiJoho = Models.create(new ArrayList<RenrakusakiJoho>());
         this.shinsakaiIinJogaiJoho = Models.create(new ArrayList<ShinsakaiIinJogaiJoho>());
         this.shinseiRirekiJoho = Models.create(new ArrayList<ShinseiRirekiJoho>());
@@ -159,7 +163,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
         for (DbT5102NinteiKekkaJohoEntity ninteiKekkaJohoEntity : entity.get要介護認定結果情報Entity()) {
             ninteiKekkaJohoList.add(new NinteiKekkaJoho(ninteiKekkaJohoEntity));
         }
-        this.ninteiKekkaJoho = Models.create(ninteiKekkaJohoList);
+//        this.ninteiKekkaJoho = Models.create(ninteiKekkaJohoList);
 
         List<RenrakusakiJoho> renrakusakiJohoList = new ArrayList<>();
         for (DbT5150RenrakusakiJohoEntity renrakusakiJohoEntity : entity.get介護連絡先情報Entity()) {
@@ -212,7 +216,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
             Models<ImageIdentifier, Image> image,
             Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJoho,
             Models<NinteiKeikakuJohoIdentifier, NinteiKeikakuJoho> ninteiKeikakuJoho,
-            Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho,
+            //            Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho,
             Models<RenrakusakiJohoIdentifier, RenrakusakiJoho> renrakusakiJoho,
             Models<ShinsakaiIinJogaiJohoIdentifier, ShinsakaiIinJogaiJoho> shinsakaiIinJogaiJoho,
             Models<ShinseiRirekiJohoIdentifier, ShinseiRirekiJoho> shinseiRirekiJoho,
@@ -227,7 +231,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
         this.image = image;
         this.ninteiKanryoJoho = ninteiKanryoJoho;
         this.ninteiKeikakuJoho = ninteiKeikakuJoho;
-        this.ninteiKekkaJoho = ninteiKekkaJoho;
+//        this.ninteiKekkaJoho = ninteiKekkaJoho;
         this.renrakusakiJoho = renrakusakiJoho;
         this.shinsakaiIinJogaiJoho = shinsakaiIinJogaiJoho;
         this.shinseiRirekiJoho = shinseiRirekiJoho;
@@ -592,7 +596,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 認定調査委託先コード
      */
-    public RString get認定調査委託先コード() {
+    public ChosaItakusakiCode get認定調査委託先コード() {
         return entity.getNinteiChosaItakusakiCode();
     }
 
@@ -601,7 +605,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 認定調査員コード
      */
-    public RString get認定調査員コード() {
+    public ChosainCode get認定調査員コード() {
         return entity.getNinteiChosainCode();
     }
 
@@ -619,7 +623,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 主治医医療機関コード
      */
-    public RString get主治医医療機関コード() {
+    public ShujiiIryokikanCode get主治医医療機関コード() {
         return entity.getShujiiIryokikanCode();
     }
 
@@ -628,7 +632,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 主治医コード
      */
-    public RString get主治医コード() {
+    public ShujiiCode get主治医コード() {
         return entity.getShujiiCode();
     }
 
@@ -965,7 +969,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
                 image.deleted(),
                 ninteiKanryoJoho.deleted(),
                 ninteiKeikakuJoho.deleted(),
-                ninteiKekkaJoho.deleted(),
+                //                ninteiKekkaJoho.deleted(),
                 renrakusakiJoho.deleted(),
                 shinsakaiIinJogaiJoho.deleted(),
                 shinseiRirekiJoho.deleted(),
@@ -983,7 +987,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
                 || image.hasAnyChanged()
                 || ninteiKanryoJoho.hasAnyChanged()
                 || ninteiKeikakuJoho.hasAnyChanged()
-                || ninteiKekkaJoho.hasAnyChanged()
+                //                || ninteiKekkaJoho.hasAnyChanged()
                 || renrakusakiJoho.hasAnyChanged()
                 || shinsakaiIinJogaiJoho.hasAnyChanged()
                 || shinseiRirekiJoho.hasAnyChanged()
@@ -1005,8 +1009,9 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
         if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
             modifiedEntity.setState(EntityDataState.Modified);
         }
-        return new NinteiShinseiJoho(
-                modifiedEntity, id, ichiGojiHanteiKekkaJoho, ichijiHanteiKekkaJoho, image, ninteiKanryoJoho, ninteiKeikakuJoho, ninteiKekkaJoho, renrakusakiJoho, shinsakaiIinJogaiJoho, shinseiRirekiJoho, shinseitodokedeJoho, tennyuShibo, tsuchishoHakkoJoho);
+//        return new NinteiShinseiJoho(
+//                modifiedEntity, id, ichiGojiHanteiKekkaJoho, ichijiHanteiKekkaJoho, image, ninteiKanryoJoho, ninteiKeikakuJoho, null, renrakusakiJoho, shinsakaiIinJogaiJoho, shinseiRirekiJoho, shinseitodokedeJoho, tennyuShibo, tsuchishoHakkoJoho);
+        return null;
     }
 
     /**
@@ -1083,17 +1088,16 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
     }
 
     public NinteiKekkaJoho getNinteiKekkaJoho(NinteiKekkaJohoIdentifier id) {
-        if (ninteiKekkaJoho.contains(id)) {
-            return ninteiKekkaJoho.clone().get(id);
-        }
+//        if (ninteiKekkaJoho.contains(id)) {
+//            return ninteiKekkaJoho.clone().get(id);
+//        }
         //TODO メッセージの検討
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
-    public List<NinteiKekkaJoho> getNinteiKekkaJohoList() {
-        return new ArrayList<>(ninteiKekkaJoho.values());
-    }
-
+//    public List<NinteiKekkaJoho> getNinteiKekkaJohoList() {
+//        return new ArrayList<>(ninteiKekkaJoho.values());
+//    }
     public RenrakusakiJoho getRenrakusakiJoho(RenrakusakiJohoIdentifier id) {
         if (renrakusakiJoho.contains(id)) {
             return renrakusakiJoho.clone().get(id);
@@ -1172,7 +1176,8 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      * @return {@link NinteiShinseiJoho}のシリアライズ形式
      */
     protected Object writeReplace() {
-        return new _SerializationProxy(entity, id, ichiGojiHanteiKekkaJoho, ichijiHanteiKekkaJoho, image, ninteiKanryoJoho, ninteiKeikakuJoho, ninteiKekkaJoho, renrakusakiJoho, shinsakaiIinJogaiJoho, shinseiRirekiJoho, shinseitodokedeJoho, tennyuShibo, tsuchishoHakkoJoho);
+        return null;
+//        return new _SerializationProxy(entity, id, ichiGojiHanteiKekkaJoho, ichijiHanteiKekkaJoho, image, ninteiKanryoJoho, ninteiKeikakuJoho, null, renrakusakiJoho, shinsakaiIinJogaiJoho, shinseiRirekiJoho, shinseitodokedeJoho, tennyuShibo, tsuchishoHakkoJoho);
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -1185,7 +1190,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
         private final Models<ImageIdentifier, Image> image;
         private final Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJoho;
         private final Models<NinteiKeikakuJohoIdentifier, NinteiKeikakuJoho> ninteiKeikakuJoho;
-        private final Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho;
+//        private final Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho;
         private final Models<RenrakusakiJohoIdentifier, RenrakusakiJoho> renrakusakiJoho;
         private final Models<ShinsakaiIinJogaiJohoIdentifier, ShinsakaiIinJogaiJoho> shinsakaiIinJogaiJoho;
         private final Models<ShinseiRirekiJohoIdentifier, ShinseiRirekiJoho> shinseiRirekiJoho;
@@ -1201,7 +1206,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
                 Models<ImageIdentifier, Image> image,
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJoho,
                 Models<NinteiKeikakuJohoIdentifier, NinteiKeikakuJoho> ninteiKeikakuJoho,
-                Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho,
+                //                Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho,
                 Models<RenrakusakiJohoIdentifier, RenrakusakiJoho> renrakusakiJoho,
                 Models<ShinsakaiIinJogaiJohoIdentifier, ShinsakaiIinJogaiJoho> shinsakaiIinJogaiJoho,
                 Models<ShinseiRirekiJohoIdentifier, ShinseiRirekiJoho> shinseiRirekiJoho,
@@ -1216,7 +1221,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
             this.image = image;
             this.ninteiKanryoJoho = ninteiKanryoJoho;
             this.ninteiKeikakuJoho = ninteiKeikakuJoho;
-            this.ninteiKekkaJoho = ninteiKekkaJoho;
+//            this.ninteiKekkaJoho = ninteiKekkaJoho;
             this.renrakusakiJoho = renrakusakiJoho;
             this.shinsakaiIinJogaiJoho = shinsakaiIinJogaiJoho;
             this.shinseiRirekiJoho = shinseiRirekiJoho;
@@ -1226,7 +1231,8 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
         }
 
         private Object readResolve() {
-            return new NinteiShinseiJoho(this.entity, this.id, this.ichiGojiHanteiKekkaJoho, this.ichijiHanteiKekkaJoho, this.image, this.ninteiKanryoJoho, this.ninteiKeikakuJoho, this.ninteiKekkaJoho, this.renrakusakiJoho, this.shinsakaiIinJogaiJoho, this.shinseiRirekiJoho, this.shinseitodokedeJoho, this.tennyuShibo, this.tsuchishoHakkoJoho);
+            return null;
+//            return new NinteiShinseiJoho(this.entity, this.id, this.ichiGojiHanteiKekkaJoho, this.ichijiHanteiKekkaJoho, this.image, this.ninteiKanryoJoho, this.ninteiKeikakuJoho, null, this.renrakusakiJoho, this.shinsakaiIinJogaiJoho, this.shinseiRirekiJoho, this.shinseitodokedeJoho, this.tennyuShibo, this.tsuchishoHakkoJoho);
         }
     }
 
@@ -1237,7 +1243,8 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      * @return {@link NinteiShinseiJohoBuilder}
      */
     public NinteiShinseiJohoBuilder createBuilderForEdit() {
-        return new NinteiShinseiJohoBuilder(entity, id, ichiGojiHanteiKekkaJoho, ichijiHanteiKekkaJoho, image, ninteiKanryoJoho, ninteiKeikakuJoho, ninteiKekkaJoho, renrakusakiJoho, shinsakaiIinJogaiJoho, shinseiRirekiJoho, shinseitodokedeJoho, tennyuShibo, tsuchishoHakkoJoho);
+        return null;
+//        return new NinteiShinseiJohoBuilder(entity, id, ichiGojiHanteiKekkaJoho, ichijiHanteiKekkaJoho, image, ninteiKanryoJoho, ninteiKeikakuJoho, null, renrakusakiJoho, shinsakaiIinJogaiJoho, shinseiRirekiJoho, shinseitodokedeJoho, tennyuShibo, tsuchishoHakkoJoho);
     }
 
     @Override

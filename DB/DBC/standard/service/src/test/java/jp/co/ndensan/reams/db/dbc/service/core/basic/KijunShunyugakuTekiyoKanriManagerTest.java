@@ -9,24 +9,23 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KijunShunyugakuTekiyoKanri;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3116KijunShunyugakuTekiyoKanriEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3116KijunShunyugakuTekiyoKanriDac;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import org.junit.Ignore;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -53,43 +52,35 @@ public class KijunShunyugakuTekiyoKanriManagerTest {
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYear 主キー2 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_年度;
-            Decimal 主キー3 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_履歴番号;
-            HokenshaNo 主キー4 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_被保険者番号;
+            int 主キー3 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_履歴番号;
+            HihokenshaNo 主キー4 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_被保険者番号;
             sut.get基準収入額適用管理(null, 主キー2, 主キー3, 主キー4);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             SetaiCode 主キー1 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_世帯コード;
-            Decimal 主キー3 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_履歴番号;
-            HokenshaNo 主キー4 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_被保険者番号;
+            int 主キー3 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_履歴番号;
+            HihokenshaNo 主キー4 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_被保険者番号;
             sut.get基準収入額適用管理(主キー1, null, 主キー3, 主キー4);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
-            SetaiCode 主キー1 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_世帯コード;
-            FlexibleYear 主キー2 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_年度;
-            HokenshaNo 主キー4 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_被保険者番号;
-            sut.get基準収入額適用管理(主キー1, 主キー2, null, 主キー4);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
             SetaiCode 主キー1 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_世帯コード;
             FlexibleYear 主キー2 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_年度;
-            Decimal 主キー3 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_履歴番号;
             sut.get基準収入額適用管理(主キー1, 主キー2, 主キー3, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(SetaiCode.class), any(FlexibleYear.class), any(Decimal.class), any(HokenshaNo.class))).thenReturn(null);
+            when(dac.selectByKey(any(SetaiCode.class), any(FlexibleYear.class), any(int.class), any(HihokenshaNo.class))).thenReturn(null);
             SetaiCode 主キー1 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_世帯コード;
             FlexibleYear 主キー2 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_年度;
-            Decimal 主キー3 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_履歴番号;
-            HokenshaNo 主キー4 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_被保険者番号;
+            int 主キー3 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_履歴番号;
+            HihokenshaNo 主キー4 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_被保険者番号;
             KijunShunyugakuTekiyoKanri result = sut.get基準収入額適用管理(主キー1, 主キー2, 主キー3, 主キー4);
 
             assertThat(result, is(nullValue()));
@@ -98,11 +89,11 @@ public class KijunShunyugakuTekiyoKanriManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3116KijunShunyugakuTekiyoKanriEntity entity = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.createDbT3116KijunShunyugakuTekiyoKanriEntity();
-            when(dac.selectByKey(any(SetaiCode.class), any(FlexibleYear.class), any(Decimal.class), any(HokenshaNo.class))).thenReturn(entity);
+            when(dac.selectByKey(any(SetaiCode.class), any(FlexibleYear.class), any(int.class), any(HihokenshaNo.class))).thenReturn(entity);
             SetaiCode 主キー1 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_世帯コード;
             FlexibleYear 主キー2 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_年度;
-            Decimal 主キー3 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_履歴番号;
-            HokenshaNo 主キー4 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_被保険者番号;
+            int 主キー3 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_履歴番号;
+            HihokenshaNo 主キー4 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_被保険者番号;
             KijunShunyugakuTekiyoKanri result = sut.get基準収入額適用管理(主キー1, 主キー2, 主キー3, 主キー4);
 
             assertThat(result.get世帯コード().value(), is(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_世帯コード.value()));

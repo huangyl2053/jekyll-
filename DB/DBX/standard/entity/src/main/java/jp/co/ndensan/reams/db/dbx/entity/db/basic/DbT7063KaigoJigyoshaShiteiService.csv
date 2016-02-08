@@ -1,5 +1,5 @@
-﻿jigyoshaNo,UDD060KaigoJigyoshaNo,UDD060KaigoJigyoshaNo,,,,,事業者番号,A
-serviceShuruiCode,UDD061KaigoServiceShuruiCode,UDD061KaigoServiceShuruiCode,,,,,サービス種類コード,A
+﻿jigyoshaNo,UDD060KaigoJigyoshaNo,KaigoJigyoshaNo,,,,,事業者番号,A
+serviceShuruiCode,UDD061KaigoServiceShuruiCode,KaigoServiceShuruiCode,,,,,サービス種類コード,A
 yukoKaishiYMD,UDD015YMD,FlexibleDate,,,,,有効開始日,A
 yukoShuryoYMD,UDD015YMD,FlexibleDate,,,,,有効終了日,A
 idoYMD,UDD015YMD,FlexibleDate,,,,,異動日,A
@@ -27,12 +27,6 @@ kanrishaYubinNo,UDD003YubinNo,YubinNo,,,,,管理者住所郵便番号,A
 kanrishaAddress,UDD046AtenaJusho,AtenaJusho,,,,,管理者住所,A
 kanrishaAddressKana,varchar,RString,,,,,管理者住所カナ,A
 kozaJohoJunkyoKubun,bpchar,RString,,,,,口座情報準拠区分,A
-ginkoCode,UDD030KinyuKikanCode,KinyuKikanCode,,,,,銀行コード,A
-shitenCode,UDD031KinyuKikanShitenCode,KinyuKikanShitenCode,,,,,支店コード,A
-kozaShubetsu,UDD035Code,Code,,,,,口座種別,A
-kozaNo,varchar,RString,,,,,口座番号,A
-kozaMeiginin,UDD042AtenaMeisho,AtenaMeisho,,,,,口座名義人,A
-kozaMeigininKana,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,口座名義人カナ,A
 shakaiFukushihoujinKeigenjigyouJisshi_umu,UDD035Code,Code,,,,,社会福祉法人軽減事業実施の有無,A
 seikatsuhogohouShitei_umu,UDD035Code,Code,,,,,生活保護法による指定の有無,A
 shisetsunadoKubun,UDD035Code,Code,,,,,施設等の区分,A

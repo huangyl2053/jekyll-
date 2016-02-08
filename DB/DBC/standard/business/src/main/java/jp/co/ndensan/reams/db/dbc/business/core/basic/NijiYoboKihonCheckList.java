@@ -9,22 +9,19 @@ import java.io.Serializable;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3101NijiYoboKihonCheckListEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 二次予防基本チェックリストを管理するクラスです。
  */
-public class NijiYoboKihonCheckList 
-extends ModelBase<NijiYoboKihonCheckListIdentifier, 
-        DbT3101NijiYoboKihonCheckListEntity, 
-        NijiYoboKihonCheckList> implements Serializable {
+public class NijiYoboKihonCheckList
+        extends ModelBase<NijiYoboKihonCheckListIdentifier, DbT3101NijiYoboKihonCheckListEntity, NijiYoboKihonCheckList> implements Serializable {
 
     private final DbT3101NijiYoboKihonCheckListEntity entity;
     private final NijiYoboKihonCheckListIdentifier id;
@@ -33,26 +30,22 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      * コンストラクタです。<br/>
      * 二次予防基本チェックリストの新規作成時に使用します。
      *
-     * @param 識別コード 識別コード
      * @param 被保険者番号 被保険者番号
      * @param 受付年月日 受付年月日
      * @param 履歴番号 履歴番号
      */
-    public NijiYoboKihonCheckList(ShikibetsuCode 識別コード,
+    public NijiYoboKihonCheckList(
             HihokenshaNo 被保険者番号,
             FlexibleDate 受付年月日,
-            Decimal 履歴番号) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+            int 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3101NijiYoboKihonCheckListEntity();
-        this.entity.setShikibetsuCode(識別コード);
         this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setUketsukeYMD(受付年月日);
         this.entity.setRirekiNo(履歴番号);
         this.id = new NijiYoboKihonCheckListIdentifier(
-                識別コード,
                 被保険者番号,
                 受付年月日,
                 履歴番号
@@ -68,7 +61,6 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
     public NijiYoboKihonCheckList(DbT3101NijiYoboKihonCheckListEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("二次予防基本チェックリスト"));
         this.id = new NijiYoboKihonCheckListIdentifier(
-                entity.getShikibetsuCode(),
                 entity.getHihokenshaNo(),
                 entity.getUketsukeYMD(),
                 entity.getRirekiNo());
@@ -89,15 +81,6 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
     }
 
 //TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
-    /**
-     * 識別コードを返します。
-     *
-     * @return 識別コード
-     */
-    public ShikibetsuCode get識別コード() {
-        return entity.getShikibetsuCode();
-    }
-
     /**
      * 被保険者番号を返します。
      *
@@ -121,7 +104,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -139,7 +122,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項１
      */
-    public Decimal get質問事項１() {
+    public int get質問事項１() {
         return entity.getShitsumonJiko01();
     }
 
@@ -148,7 +131,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項２
      */
-    public Decimal get質問事項２() {
+    public int get質問事項２() {
         return entity.getShitsumonJiko02();
     }
 
@@ -157,7 +140,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項３
      */
-    public Decimal get質問事項３() {
+    public int get質問事項３() {
         return entity.getShitsumonJiko03();
     }
 
@@ -166,7 +149,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項４
      */
-    public Decimal get質問事項４() {
+    public int get質問事項４() {
         return entity.getShitsumonJiko04();
     }
 
@@ -175,7 +158,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項５
      */
-    public Decimal get質問事項５() {
+    public int get質問事項５() {
         return entity.getShitsumonJiko05();
     }
 
@@ -184,7 +167,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項６
      */
-    public Decimal get質問事項６() {
+    public int get質問事項６() {
         return entity.getShitsumonJiko06();
     }
 
@@ -193,7 +176,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項７
      */
-    public Decimal get質問事項７() {
+    public int get質問事項７() {
         return entity.getShitsumonJiko07();
     }
 
@@ -202,7 +185,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項８
      */
-    public Decimal get質問事項８() {
+    public int get質問事項８() {
         return entity.getShitsumonJiko08();
     }
 
@@ -211,7 +194,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項９
      */
-    public Decimal get質問事項９() {
+    public int get質問事項９() {
         return entity.getShitsumonJiko09();
     }
 
@@ -220,7 +203,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項１０
      */
-    public Decimal get質問事項１０() {
+    public int get質問事項１０() {
         return entity.getShitsumonJiko10();
     }
 
@@ -229,7 +212,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項１１
      */
-    public Decimal get質問事項１１() {
+    public int get質問事項１１() {
         return entity.getShitsumonJiko11();
     }
 
@@ -256,7 +239,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項１３
      */
-    public Decimal get質問事項１３() {
+    public int get質問事項１３() {
         return entity.getShitsumonJiko13();
     }
 
@@ -265,7 +248,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項１４
      */
-    public Decimal get質問事項１４() {
+    public int get質問事項１４() {
         return entity.getShitsumonJiko14();
     }
 
@@ -274,7 +257,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項１５
      */
-    public Decimal get質問事項１５() {
+    public int get質問事項１５() {
         return entity.getShitsumonJiko15();
     }
 
@@ -283,7 +266,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項１６
      */
-    public Decimal get質問事項１６() {
+    public int get質問事項１６() {
         return entity.getShitsumonJiko16();
     }
 
@@ -292,7 +275,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項１７
      */
-    public Decimal get質問事項１７() {
+    public int get質問事項１７() {
         return entity.getShitsumonJiko17();
     }
 
@@ -301,7 +284,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項１８
      */
-    public Decimal get質問事項１８() {
+    public int get質問事項１８() {
         return entity.getShitsumonJiko18();
     }
 
@@ -310,7 +293,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項１９
      */
-    public Decimal get質問事項１９() {
+    public int get質問事項１９() {
         return entity.getShitsumonJiko19();
     }
 
@@ -319,7 +302,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項２０
      */
-    public Decimal get質問事項２０() {
+    public int get質問事項２０() {
         return entity.getShitsumonJiko20();
     }
 
@@ -328,7 +311,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項２１
      */
-    public Decimal get質問事項２１() {
+    public int get質問事項２１() {
         return entity.getShitsumonJiko21();
     }
 
@@ -337,7 +320,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項２２
      */
-    public Decimal get質問事項２２() {
+    public int get質問事項２２() {
         return entity.getShitsumonJiko22();
     }
 
@@ -346,7 +329,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項２３
      */
-    public Decimal get質問事項２３() {
+    public int get質問事項２３() {
         return entity.getShitsumonJiko23();
     }
 
@@ -355,7 +338,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項２４
      */
-    public Decimal get質問事項２４() {
+    public int get質問事項２４() {
         return entity.getShitsumonJiko24();
     }
 
@@ -364,7 +347,7 @@ extends ModelBase<NijiYoboKihonCheckListIdentifier,
      *
      * @return 質問事項２５
      */
-    public Decimal get質問事項２５() {
+    public int get質問事項２５() {
         return entity.getShitsumonJiko25();
     }
 

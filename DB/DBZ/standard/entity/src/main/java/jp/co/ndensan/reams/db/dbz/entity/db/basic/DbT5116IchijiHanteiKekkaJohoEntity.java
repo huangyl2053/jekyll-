@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -9,6 +10,7 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -27,9 +29,10 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
     private RString insertReamsLoginId;
     private UUID insertContextId;
     private boolean isDeleted = false;
-    private int updateCount = 0;
+    private final int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
+    @PrimaryKey
     private ShinseishoKanriNo shinseishoKanriNo;
     private boolean kariIchijiHanteiKubun;
     private FlexibleDate ichijiHanteiYMD;
@@ -181,7 +184,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
     /**
      * 要介護認定一次判定結果コードのgetメソッドです。
      * <br/>
-     * <br/>Enum（DBD：要介護認定一次判定結果コード09）
+     * <br/>Enum（DBD：要介護認定一次判定結果コードxx）
      *
      * @return 要介護認定一次判定結果コード
      */
@@ -192,7 +195,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
     /**
      * 要介護認定一次判定結果コードのsetメソッドです。
      * <br/>
-     * <br/>Enum（DBD：要介護認定一次判定結果コード09）
+     * <br/>Enum（DBD：要介護認定一次判定結果コードxx）
      *
      * @param ichijiHanteiKekkaCode 要介護認定一次判定結果コード
      */
@@ -203,7 +206,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
     /**
      * 要介護認定一次判定結果コード（認知症加算）のgetメソッドです。
      * <br/>
-     * <br/>Enum（DBD：要介護認定一次判定結果コード09（認知症加算））要介護認定一次判定結果コード（重み）
+     * <br/>Enum（DBD：要介護認定一次判定結果コードxx）
      *
      * @return 要介護認定一次判定結果コード（認知症加算）
      */
@@ -214,7 +217,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
     /**
      * 要介護認定一次判定結果コード（認知症加算）のsetメソッドです。
      * <br/>
-     * <br/>Enum（DBD：要介護認定一次判定結果コード09（認知症加算））要介護認定一次判定結果コード（重み）
+     * <br/>Enum（DBD：要介護認定一次判定結果コードxx）
      *
      * @param ichijiHanteiKekkaNinchishoKasanCode 要介護認定一次判定結果コード（認知症加算）
      */
@@ -919,11 +922,13 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
         if (other == null) {
             return false;
         }
-        return true;
+        return Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo);
     }
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT5116IchijiHanteiKekkaJohoEntity entity) {

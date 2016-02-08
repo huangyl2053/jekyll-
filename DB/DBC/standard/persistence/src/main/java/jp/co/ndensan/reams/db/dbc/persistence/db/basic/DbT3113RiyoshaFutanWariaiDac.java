@@ -7,14 +7,15 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3113RiyoshaFutanWariai;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3113RiyoshaFutanWariai.*;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3113RiyoshaFutanWariai.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3113RiyoshaFutanWariai.nendo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3113RiyoshaFutanWariai.rirekiNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -43,7 +44,7 @@ public class DbT3113RiyoshaFutanWariaiDac implements ISaveable<DbT3113RiyoshaFut
     public DbT3113RiyoshaFutanWariaiEntity selectByKey(
             FlexibleYear 年度,
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号) throws NullPointerException {
+            int 履歴番号) throws NullPointerException {
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));

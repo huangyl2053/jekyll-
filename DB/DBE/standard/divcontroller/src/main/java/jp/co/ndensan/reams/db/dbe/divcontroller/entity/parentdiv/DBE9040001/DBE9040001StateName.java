@@ -15,7 +15,13 @@ public enum DBE9040001StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    Default("default");
+    検索("検索"),
+    一覧("一覧"),
+    詳細("詳細"),
+    完了("完了"),
+    一覧_認定調査委託先マスタから遷移("一覧_認定調査委託先マスタから遷移"),
+    詳細_認定調査委託先マスタから遷移("詳細_認定調査委託先マスタから遷移"),
+    完了_認定調査委託先マスタから遷移("完了_認定調査委託先マスタから遷移");
 
     private final RString name;
 

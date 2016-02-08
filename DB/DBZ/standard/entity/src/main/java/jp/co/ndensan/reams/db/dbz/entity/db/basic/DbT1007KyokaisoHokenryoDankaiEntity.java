@@ -1,23 +1,24 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 
 /**
  * DbT1007KyokaisoHokenryoDankaiの項目定義クラスです
  *
  */
 public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT1007KyokaisoHokenryoDankaiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1007KyokaisoHokenryoDankai");
@@ -33,11 +34,14 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
+    @PrimaryKey
+    private int linkNo;
     @PrimaryKey
     private FlexibleYearMonth tekiyoKaishiYM;
     private FlexibleYearMonth tekiyoShuryoYM;
     private RString gengakuGoHokenryoDankai;
+    private boolean logicalDeletedFlag;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -98,7 +102,7 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
      *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -107,7 +111,7 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
      *
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
@@ -116,8 +120,26 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(@Nonnull int rirekiNo) {
         this.rirekiNo = rirekiNo;
+    }
+
+    /**
+     * リンク番号のgetメソッドです。
+     *
+     * @return リンク番号
+     */
+    public int getLinkNo() {
+        return linkNo;
+    }
+
+    /**
+     * リンク番号のsetメソッドです。
+     *
+     * @param linkNo リンク番号
+     */
+    public void setLinkNo(@Nonnull int linkNo) {
+        this.linkNo = linkNo;
     }
 
     /**
@@ -134,7 +156,7 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
      *
      * @param tekiyoKaishiYM 適用開始年月
      */
-    public void setTekiyoKaishiYM(FlexibleYearMonth tekiyoKaishiYM) {
+    public void setTekiyoKaishiYM(@Nonnull FlexibleYearMonth tekiyoKaishiYM) {
         this.tekiyoKaishiYM = tekiyoKaishiYM;
     }
 
@@ -152,7 +174,7 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
      *
      * @param tekiyoShuryoYM 適用終了年月
      */
-    public void setTekiyoShuryoYM(FlexibleYearMonth tekiyoShuryoYM) {
+    public void setTekiyoShuryoYM(@Nonnull FlexibleYearMonth tekiyoShuryoYM) {
         this.tekiyoShuryoYM = tekiyoShuryoYM;
     }
 
@@ -170,15 +192,34 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
      *
      * @param gengakuGoHokenryoDankai 保険料納付減額後保険料段階
      */
-    public void setGengakuGoHokenryoDankai(RString gengakuGoHokenryoDankai) {
+    public void setGengakuGoHokenryoDankai(@Nonnull RString gengakuGoHokenryoDankai) {
         this.gengakuGoHokenryoDankai = gengakuGoHokenryoDankai;
+    }
+
+    /**
+     * 論理削除フラグのgetメソッドです。
+     *
+     * @return 論理削除フラグ
+     */
+    @CheckForNull
+    public boolean getLogicalDeletedFlag() {
+        return logicalDeletedFlag;
+    }
+
+    /**
+     * 論理削除フラグのsetメソッドです。
+     *
+     * @param logicalDeletedFlag 論理削除フラグ
+     */
+    public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
+        this.logicalDeletedFlag = logicalDeletedFlag;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT1007KyokaisoHokenryoDankaiEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT1007KyokaisoHokenryoDankaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -190,6 +231,9 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
             return false;
         }
         if (this.rirekiNo != other.rirekiNo) {
+            return false;
+        }
+        if (this.linkNo != other.linkNo) {
             return false;
         }
         if (!Objects.equals(this.tekiyoKaishiYM, other.tekiyoKaishiYM)) {
@@ -205,9 +249,11 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
     public void shallowCopy(DbT1007KyokaisoHokenryoDankaiEntity entity) {
         this.hihokenshaNo = entity.hihokenshaNo;
         this.rirekiNo = entity.rirekiNo;
+        this.linkNo = entity.linkNo;
         this.tekiyoKaishiYM = entity.tekiyoKaishiYM;
         this.tekiyoShuryoYM = entity.tekiyoShuryoYM;
         this.gengakuGoHokenryoDankai = entity.gengakuGoHokenryoDankai;
+        this.logicalDeletedFlag = entity.logicalDeletedFlag;
     }
 
     /**
@@ -217,7 +263,7 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hihokenshaNo, rirekiNo, tekiyoKaishiYM, tekiyoShuryoYM, gengakuGoHokenryoDankai);
+        return super.toMd5(hihokenshaNo, rirekiNo, linkNo, tekiyoKaishiYM, tekiyoShuryoYM, gengakuGoHokenryoDankai, logicalDeletedFlag);
     }
 
 // </editor-fold>

@@ -4,14 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity;
+import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7002BemmeiNaiyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -36,7 +32,7 @@ public class BemmeiNaiyoTest extends DbzTestBase {
     private static DbT7002BemmeiNaiyoEntity BemmeiNaiyoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static ShoKisaiHokenshaNo 主キー名1;
+//    private static ShoKisaiHokenshaNo 主キー名1;
     private static ShikibetsuCode 主キー名2;
     private static HihokenshaNo 主キー名3;
     private static FlexibleDate 主キー名4;
@@ -45,7 +41,7 @@ public class BemmeiNaiyoTest extends DbzTestBase {
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_証記載保険者番号;
+//        主キー名1 = DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_証記載保険者番号;
         主キー名2 = DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_識別コード;
     }
 
@@ -56,32 +52,30 @@ public class BemmeiNaiyoTest extends DbzTestBase {
         @Before
         public void setUp() {
             BemmeiNaiyoEntity = DbT7002BemmeiNaiyoEntityGenerator.createDbT7002BemmeiNaiyoEntity();
-            BemmeiNaiyoEntity.setShoKisaiHokenshaNo(主キー名1);
+//            BemmeiNaiyoEntity.setShoKisaiHokenshaNo(主キー名1);
             BemmeiNaiyoEntity.setShikibetsuCode(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new BemmeiNaiyo(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5);
+            sut = new BemmeiNaiyo( 主キー名2, 主キー名3, 主キー名4, 主キー名5);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new BemmeiNaiyo(主キー名1, null, 主キー名3, 主キー名4, 主キー名5);
+            sut = new BemmeiNaiyo( null, 主キー名3, 主キー名4, 主キー名5);
         }
 
         @Test
         public void 指定したキーが保持するDbT7002BemmeiNaiyoEntityにセットされている() {
-            sut = new BemmeiNaiyo(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5);
-            assertThat(sut.get証記載保険者番号(), is(主キー名1));
+            sut = new BemmeiNaiyo( 主キー名2, 主キー名3, 主キー名4, 主キー名5);
             assertThat(sut.get識別コード(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するBemmeiNaiyoIdentifierにセットされている() {
-            sut = new BemmeiNaiyo(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5);
-            assertThat(sut.identifier().get証記載保険者番号(), is(主キー名1));
+            sut = new BemmeiNaiyo( 主キー名2, 主キー名3, 主キー名4, 主キー名5);
             assertThat(sut.identifier().get識別コード(), is(主キー名2));
         }
     }
@@ -93,7 +87,7 @@ public class BemmeiNaiyoTest extends DbzTestBase {
         @Before
         public void setUp() {
             BemmeiNaiyoEntity = DbT7002BemmeiNaiyoEntityGenerator.createDbT7002BemmeiNaiyoEntity();
-            BemmeiNaiyoEntity.setShoKisaiHokenshaNo(主キー名1);
+//            BemmeiNaiyoEntity.setShoKisaiHokenshaNo(主キー名1);
             BemmeiNaiyoEntity.setShikibetsuCode(主キー名2);
         }
 
@@ -107,7 +101,7 @@ public class BemmeiNaiyoTest extends DbzTestBase {
 
             sut = new BemmeiNaiyo(BemmeiNaiyoEntity);
 
-            assertThat(sut.identifier().get証記載保険者番号(), is(主キー名1));
+//            assertThat(sut.identifier().get証記載保険者番号(), is(主キー名1));
             assertThat(sut.identifier().get識別コード(), is(主キー名2));
         }
     }
@@ -119,16 +113,16 @@ public class BemmeiNaiyoTest extends DbzTestBase {
         @Before
         public void setUp() {
             BemmeiNaiyoEntity = DbT7002BemmeiNaiyoEntityGenerator.createDbT7002BemmeiNaiyoEntity();
-            BemmeiNaiyoEntity.setShoKisaiHokenshaNo(主キー名1);
+//            BemmeiNaiyoEntity.setShoKisaiHokenshaNo(主キー名1);
             BemmeiNaiyoEntity.setShikibetsuCode(主キー名2);
 
             sut = new BemmeiNaiyo(BemmeiNaiyoEntity);
         }
 
-        @Test
-        public void get証記載保険者番号は_entityが持つ証記載保険者番号を返す() {
-            assertThat(sut.get証記載保険者番号(), is(BemmeiNaiyoEntity.getShoKisaiHokenshaNo()));
-        }
+//        @Test
+//        public void get証記載保険者番号は_entityが持つ証記載保険者番号を返す() {
+//            assertThat(sut.get証記載保険者番号(), is(BemmeiNaiyoEntity.getShoKisaiHokenshaNo()));
+//        }
 
         @Test
         public void get識別コードは_entityが持つ識別コードを返す() {
@@ -162,7 +156,7 @@ public class BemmeiNaiyoTest extends DbzTestBase {
 
         @Test
         public void get弁明書作成日提出日は_entityが持つ弁明書作成日提出日を返す() {
-            assertThat(sut.get弁明書作成日提出日(), is(BemmeiNaiyoEntity.getBemmeishoSakuseiTeishutsuYMD()));
+            assertThat(sut.get弁明書作成日提出日(), is(BemmeiNaiyoEntity.getBemmeishoTeishutsuYMD()));
         }
     }
 
@@ -173,7 +167,7 @@ public class BemmeiNaiyoTest extends DbzTestBase {
         @Before
         public void setUp() {
             BemmeiNaiyoEntity = DbT7002BemmeiNaiyoEntityGenerator.createDbT7002BemmeiNaiyoEntity();
-            BemmeiNaiyoEntity.setShoKisaiHokenshaNo(主キー名1);
+//            BemmeiNaiyoEntity.setShoKisaiHokenshaNo(主キー名1);
             BemmeiNaiyoEntity.setShikibetsuCode(主キー名2);
 
             sut = new BemmeiNaiyo(BemmeiNaiyoEntity);
@@ -192,7 +186,7 @@ public class BemmeiNaiyoTest extends DbzTestBase {
         @Before
         public void setUp() {
             BemmeiNaiyoEntity = DbT7002BemmeiNaiyoEntityGenerator.createDbT7002BemmeiNaiyoEntity();
-            BemmeiNaiyoEntity.setShoKisaiHokenshaNo(主キー名1);
+//            BemmeiNaiyoEntity.setShoKisaiHokenshaNo(主キー名1);
             BemmeiNaiyoEntity.setShikibetsuCode(主キー名2);
 
             sut = new BemmeiNaiyo(BemmeiNaiyoEntity);
@@ -212,7 +206,7 @@ public class BemmeiNaiyoTest extends DbzTestBase {
         @Before
         public void setUp() {
             BemmeiNaiyoEntity = DbT7002BemmeiNaiyoEntityGenerator.createDbT7002BemmeiNaiyoEntity();
-            BemmeiNaiyoEntity.setShoKisaiHokenshaNo(主キー名1);
+//            BemmeiNaiyoEntity.setShoKisaiHokenshaNo(主キー名1);
             BemmeiNaiyoEntity.setShikibetsuCode(主キー名2);
         }
 

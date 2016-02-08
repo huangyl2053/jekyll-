@@ -36,6 +36,14 @@
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxDefinition</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxPersistence</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxBusiness</artifactId>
+        </dependency>
         <!-- 公開系 -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
@@ -48,6 +56,10 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzService</artifactId>
         </dependency>
         <!-- テスト -->
         <dependency>

@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5913ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5913ChosainJohoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5913ChosainJohoEntityGenerator.DEFAULT_市町村コード;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード;
@@ -201,8 +201,8 @@ public class DbT5913ChosainJohoDacTest extends DbeTestDacBase {
                 RString 認定調査員コード) {
             DbT5913ChosainJohoEntity entity = DbT5913ChosainJohoEntityGenerator.createDbT5913ChosainJohoEntity();
             entity.setShichosonCode(市町村コード);
-            entity.setNinteichosaItakusakiCode(認定調査委託先コード);
-            entity.setNinteiChosainNo(認定調査員コード);
+            entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
+            entity.setNinteiChosainCode(認定調査員コード);
             sut.save(entity);
         }
     }

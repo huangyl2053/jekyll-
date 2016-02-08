@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5115ImageEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -27,19 +26,12 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class ImageTest extends DbzTestBase {
 
-    private static DbT5115ImageEntity ImageEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
-//TODO 主キー型と変数名を置換してください
-//TODO 主キーの数が足りない場合、追加してください。
+    private static DbT5115ImageEntity imageEntity;
     private static ShinseishoKanriNo 申請書管理番号;
-    private static int 取込ページ番号;
-    private static Code 原本マスク分;
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
         申請書管理番号 = DbT5115ImageEntityGenerator.DEFAULT_申請書管理番号;
-        取込ページ番号 = DbT5115ImageEntityGenerator.DEFAULT_取込ページ番号;
-        原本マスク分 = DbT5115ImageEntityGenerator.DEFAULT_原本マスク分;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -48,32 +40,24 @@ public class ImageTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ImageEntity = DbT5115ImageEntityGenerator.createDbT5115ImageEntity();
+            imageEntity = DbT5115ImageEntityGenerator.createDbT5115ImageEntity();
         }
 
-//TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 申請書管理番号がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new Image(null, 取込ページ番号, 原本マスク分);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 原本マスク分がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new Image(申請書管理番号, 取込ページ番号, null);
+            sut = new Image((ShinseishoKanriNo) null);
         }
 
         @Test
         public void 指定したキーが保持するDbT5115ImageEntityにセットされている() {
-            sut = new Image(申請書管理番号, 取込ページ番号, 原本マスク分);
+            sut = new Image(申請書管理番号);
             assertThat(sut.get申請書管理番号(), is(申請書管理番号));
-            assertThat(sut.get原本マスク分(), is(原本マスク分));
         }
 
         @Test
         public void 指定したキーが保持するImageIdentifierにセットされている() {
-            sut = new Image(申請書管理番号, 取込ページ番号, 原本マスク分);
+            sut = new Image(申請書管理番号);
             assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
-            assertThat(sut.identifier().get原本マスク分(), is(原本マスク分));
         }
     }
 
@@ -83,21 +67,20 @@ public class ImageTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ImageEntity = DbT5115ImageEntityGenerator.createDbT5115ImageEntity();
+            imageEntity = DbT5115ImageEntityGenerator.createDbT5115ImageEntity();
         }
 
         @Test(expected = NullPointerException.class)
         public void 指定したEntityがnullである場合_NullPointerExceptionとなる() {
-            sut = new Image(null);
+            sut = new Image((ShinseishoKanriNo) null);
         }
 
         @Test
         public void 指定したDbT5115ImageEntityのキー情報を識別子が持つ() {
 
-            sut = new Image(ImageEntity);
+            sut = new Image(imageEntity);
 
             assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
-            assertThat(sut.identifier().get原本マスク分(), is(原本マスク分));
         }
     }
 
@@ -107,29 +90,19 @@ public class ImageTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ImageEntity = DbT5115ImageEntityGenerator.createDbT5115ImageEntity();
+            imageEntity = DbT5115ImageEntityGenerator.createDbT5115ImageEntity();
 
-            sut = new Image(ImageEntity);
+            sut = new Image(imageEntity);
         }
 
         @Test
         public void get申請書管理番号は_entityが持つ申請書管理番号を返す() {
-            assertThat(sut.get申請書管理番号(), is(ImageEntity.getShinseishoKanriNo()));
-        }
-
-        @Test
-        public void get取込ページ番号は_entityが持つ取込ページ番号を返す() {
-            assertThat(sut.get取込ページ番号(), is(ImageEntity.getTorikomiPageNo()));
-        }
-
-        @Test
-        public void get原本マスク分は_entityが持つ原本マスク分を返す() {
-            assertThat(sut.get原本マスク分(), is(ImageEntity.getGenponMaskKubun()));
+            assertThat(sut.get申請書管理番号(), is(imageEntity.getShinseishoKanriNo()));
         }
 
         @Test
         public void getイメージ共有ファイルIDは_entityが持つイメージ共有ファイルIDを返す() {
-            assertThat(sut.getイメージ共有ファイルID(), is(ImageEntity.getImageSharedFileId()));
+            assertThat(sut.getイメージ共有ファイルID(), is(imageEntity.getImageSharedFileId()));
         }
     }
 
@@ -139,14 +112,14 @@ public class ImageTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ImageEntity = DbT5115ImageEntityGenerator.createDbT5115ImageEntity();
+            imageEntity = DbT5115ImageEntityGenerator.createDbT5115ImageEntity();
 
-            sut = new Image(ImageEntity);
+            sut = new Image(imageEntity);
         }
 
         @Test
         public void toEntityはコンストラクタで設定したentityと異なるインスタンスを返す() {
-            assertThat(sut.toEntity(), not(ImageEntity));
+            assertThat(sut.toEntity(), not(imageEntity));
         }
     }
 
@@ -156,9 +129,9 @@ public class ImageTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ImageEntity = DbT5115ImageEntityGenerator.createDbT5115ImageEntity();
+            imageEntity = DbT5115ImageEntityGenerator.createDbT5115ImageEntity();
 
-            sut = new Image(ImageEntity);
+            sut = new Image(imageEntity);
         }
 
         @Test
@@ -174,7 +147,7 @@ public class ImageTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ImageEntity = DbT5115ImageEntityGenerator.createDbT5115ImageEntity();
+            imageEntity = DbT5115ImageEntityGenerator.createDbT5115ImageEntity();
 
         }
 
@@ -209,8 +182,8 @@ public class ImageTest extends DbzTestBase {
     private static class TestSupport {
 
         public static Image setStateImage(EntityDataState parentState) {
-            ImageEntity.setState(parentState);
-            return new Image(ImageEntity);
+            imageEntity.setState(parentState);
+            return new Image(imageEntity);
         }
     }
 }

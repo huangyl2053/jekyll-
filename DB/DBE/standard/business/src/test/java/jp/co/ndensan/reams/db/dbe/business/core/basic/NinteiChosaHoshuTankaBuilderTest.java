@@ -28,7 +28,6 @@ public class NinteiChosaHoshuTankaBuilderTest extends DbeTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static Code 調査区分;
     private static Code 訪問種別;
-    private static Code 意見書入手パターン;
     private static FlexibleYearMonth 開始年月;
     private static FlexibleYearMonth 終了年月;
 
@@ -37,7 +36,6 @@ public class NinteiChosaHoshuTankaBuilderTest extends DbeTestBase {
 //TODO 主キー値を適切な値に置換してください
         調査区分 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_調査区分;
         訪問種別 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_訪問種別;
-        意見書入手パターン = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_意見書入手パターン;
         開始年月 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_開始年月;
         終了年月 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_終了年月;
     }
@@ -67,12 +65,6 @@ public class NinteiChosaHoshuTankaBuilderTest extends DbeTestBase {
         public void 戻り値の訪問種別は_設定した値と同じ訪問種別を返す() {
             business = sut.set訪問種別(DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_訪問種別).build();
             assertThat(business.get訪問種別(), is(DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_訪問種別));
-        }
-
-        @Test
-        public void 戻り値の意見書入手パターンは_設定した値と同じ意見書入手パターンを返す() {
-            business = sut.set意見書入手パターン(DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_意見書入手パターン).build();
-            assertThat(business.get意見書入手パターン(), is(DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_意見書入手パターン));
         }
 
         @Test

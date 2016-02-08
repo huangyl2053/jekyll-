@@ -4,8 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.choshuyuyo;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.ChoshuYuyoMapperParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choshuyuyo.ChoshuYuyoMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.ChoshuYuyoEntity;
 
 /**
@@ -20,8 +19,4 @@ public interface IChoshuYuyoMapper {
      * @return ChoshuYuyoEntity
      */
     ChoshuYuyoEntity getChoshuyuyoEntity(ChoshuYuyoMapperParameter 介護賦課徴収猶予検索条件);
-
-    public ChoshuYuyoEntity select介護賦課徴収猶予ByKey(ChoshuYuyoMapperParameter 介護賦課徴収猶予検索条件);
-
-    public List<ChoshuYuyoEntity> select介護賦課徴収猶予リストBy主キー1(ChoshuYuyoMapperParameter 介護賦課徴収猶予検索条件);
 }

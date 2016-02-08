@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT1013KyokaisoSochiShinsei implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -48,6 +48,10 @@ public enum DbT1013KyokaisoSochiShinsei implements IColumnDefinition {
      * 履歴番号
      */
     rirekiNo(5, 0),
+    /**
+     * リンク番号
+     */
+    linkNo(5, 0),
     /**
      * 申請年月日
      */
@@ -113,7 +117,11 @@ public enum DbT1013KyokaisoSochiShinsei implements IColumnDefinition {
      * 措置該当・非該当区分
      * <br/>1:該当、2:非該当
      */
-    sochiGaito_HigaitoKubun(1, 0);
+    sochiGaito_HigaitoKubun(1, 0),
+    /**
+     * 論理削除フラグ
+     */
+    logicalDeletedFlag(1, 0);
 
     private final int maxLength;
     private final int scale;

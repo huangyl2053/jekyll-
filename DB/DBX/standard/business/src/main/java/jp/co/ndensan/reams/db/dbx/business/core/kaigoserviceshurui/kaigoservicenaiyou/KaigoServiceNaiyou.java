@@ -36,24 +36,24 @@ public class KaigoServiceNaiyou extends ModelBase<KaigoServiceNaiyouIdentifier, 
      * @param 履歴番号 履歴番号
      */
     public KaigoServiceNaiyou(KaigoServiceShuruiCode サービス種類コード,
-RString サービス項目コード,
-FlexibleYearMonth 提供開始年月,
-Decimal 履歴番号) {
+            RString サービス項目コード,
+            FlexibleYearMonth 提供開始年月,
+            Decimal 履歴番号) {
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         requireNonNull(サービス項目コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス項目コード"));
         requireNonNull(提供開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("提供開始年月"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT7131KaigoServiceNaiyouEntity();
-        this.entity.setServiceShuruiCode(サービス種類コード);
-        this.entity.setServiceKoumokuCode(サービス項目コード);
+        this.entity.setServiceShuruiCd(サービス種類コード);
+        this.entity.setServiceKoumokuCd(サービス項目コード);
         this.entity.setTeikyoKaishiYM(提供開始年月);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KaigoServiceNaiyouIdentifier(
-        サービス種類コード,
-        サービス項目コード,
-        提供開始年月,
-        履歴番号
-                );
+                サービス種類コード,
+                サービス項目コード,
+                提供開始年月,
+                履歴番号
+        );
     }
 
     /**
@@ -65,8 +65,8 @@ Decimal 履歴番号) {
     public KaigoServiceNaiyou(DbT7131KaigoServiceNaiyouEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護サービス内容"));
         this.id = new KaigoServiceNaiyouIdentifier(
-                entity.getServiceShuruiCode(),
-                entity.getServiceKoumokuCode(),
+                entity.getServiceShuruiCd(),
+                entity.getServiceKoumokuCd(),
                 entity.getTeikyoKaishiYM(),
                 entity.getRirekiNo());
     }
@@ -85,14 +85,13 @@ Decimal 履歴番号) {
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * サービス種類コードを返します。
      *
      * @return サービス種類コード
      */
     public KaigoServiceShuruiCode getサービス種類コード() {
-        return entity.getServiceShuruiCode();
+        return entity.getServiceShuruiCd();
     }
 
     /**
@@ -101,7 +100,7 @@ Decimal 履歴番号) {
      * @return サービス項目コード
      */
     public RString getサービス項目コード() {
-        return entity.getServiceKoumokuCode();
+        return entity.getServiceKoumokuCd();
     }
 
     /**
@@ -319,7 +318,6 @@ Decimal 履歴番号) {
 //    public RString get総合事業サービス区分() {
 //        return entity.getSogoJigyoServiceKubun();
 //    }
-
     /**
      * {@link DbT7131KaigoServiceNaiyouEntity}のクローンを返します。
      *
@@ -372,6 +370,7 @@ Decimal 履歴番号) {
         }
         return new KaigoServiceNaiyou(deletedEntity, id);
     }
+
     /**
      * {@link KaigoServiceNaiyou}のシリアライズ形式を提供します。
      *
@@ -388,12 +387,13 @@ Decimal 履歴番号) {
     }
 
     private static final class _SerializationProxy implements Serializable {
+
         private static final long serialVersionUID = 2702026391207130486L;
 
         private final DbT7131KaigoServiceNaiyouEntity entity;
         private final KaigoServiceNaiyouIdentifier id;
 
-        private _SerializationProxy(DbT7131KaigoServiceNaiyouEntity entity,KaigoServiceNaiyouIdentifier id) {
+        private _SerializationProxy(DbT7131KaigoServiceNaiyouEntity entity, KaigoServiceNaiyouIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

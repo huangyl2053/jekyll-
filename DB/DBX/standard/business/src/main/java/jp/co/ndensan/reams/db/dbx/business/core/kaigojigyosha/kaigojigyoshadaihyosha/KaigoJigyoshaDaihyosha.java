@@ -25,9 +25,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護事業者代表者を管理するクラスです。
  */
-public class KaigoJigyoshaDaihyosha extends ModelBase<KaigoJigyoshaDaihyoshaIdentifier, DbT7062KaigoJigyoshaDaihyoshaEntity, KaigoJigyoshaDaihyosha> implements Serializable {
-
-    private static final long serialVersionUID = 3928754943480377769L;
+public class KaigoJigyoshaDaihyosha
+        extends ModelBase<KaigoJigyoshaDaihyoshaIdentifier, DbT7062KaigoJigyoshaDaihyoshaEntity, KaigoJigyoshaDaihyosha>
+        implements Serializable {
 
     private final DbT7062KaigoJigyoshaDaihyoshaEntity entity;
     private final KaigoJigyoshaDaihyoshaIdentifier id;
@@ -40,7 +40,7 @@ public class KaigoJigyoshaDaihyosha extends ModelBase<KaigoJigyoshaDaihyoshaIden
      * @param 有効開始日 有効開始日
      */
     public KaigoJigyoshaDaihyosha(KaigoJigyoshaNo 事業者番号,
-            FlexibleDate 有効開始日) {
+                                  FlexibleDate 有効開始日) {
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(有効開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始日"));
         this.entity = new DbT7062KaigoJigyoshaDaihyoshaEntity();
@@ -235,6 +235,21 @@ public class KaigoJigyoshaDaihyosha extends ModelBase<KaigoJigyoshaDaihyoshaIden
     }
 
     /**
+     * 介護事業者代表者のみを変更対象とします。<br/>
+     * {@link DbT7062KaigoJigyoshaDaihyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link KaigoJigyoshaDaihyosha}
+     */
+    public KaigoJigyoshaDaihyosha modifiedModel() {
+        DbT7062KaigoJigyoshaDaihyoshaEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new KaigoJigyoshaDaihyosha(
+                modifiedEntity, id);
+    }
+
+    /**
      * 保持する介護事業者代表者を削除対象とします。<br/>
      * {@link DbT7062KaigoJigyoshaDaihyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -264,7 +279,7 @@ public class KaigoJigyoshaDaihyosha extends ModelBase<KaigoJigyoshaDaihyoshaIden
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

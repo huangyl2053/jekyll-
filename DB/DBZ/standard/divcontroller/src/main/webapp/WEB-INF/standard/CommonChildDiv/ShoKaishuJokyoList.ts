@@ -14,7 +14,9 @@ module DBZ
             public priorities(): Array {
                 return [
                     "グリッド表示モード",
-                    "一覧パネル高さ"
+                    "一覧パネル高さ" ,
+					"明細表示モード"
+					
                 ];
             }
 
@@ -32,6 +34,9 @@ module DBZ
 
             public 一覧パネル高さ() {
                 return new Modes.一覧パネル高さ(this.controls);
+            }
+			  public 明細表示モード() {
+                return new Modes.明細表示モード(this.controls);
             }
         }
 
@@ -53,6 +58,8 @@ module DBZ
                     this.controls.dgShoKaishuJokyo().gridSetting = gridSetting;
 
                     this.controls.dgShoKaishuJokyo()._control.afterPropertiesSet();
+					this.controls.ShoKaishuJokyoShosai().readOnly = true;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = false;
                 }
 
                 public toroku(): void {
@@ -111,6 +118,29 @@ module DBZ
 
                 public サイズ500(): void {
                     this.controls.dgShoKaishuJokyo().height = "500";
+                }
+
+            }
+			       export class 明細表示モード {
+                private controls: Controls;
+
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                public 照会(): void {
+                    this.controls.ShoKaishuJokyoShosai().readOnly = true;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = false;
+                }
+
+                public 入力(): void {
+                    this.controls.ShoKaishuJokyoShosai().readOnly = false;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = false;
+                }
+
+                public 非表示(): void {
+                    this.controls.ShoKaishuJokyoShosai().readOnly = true;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = true;
                 }
 
             }

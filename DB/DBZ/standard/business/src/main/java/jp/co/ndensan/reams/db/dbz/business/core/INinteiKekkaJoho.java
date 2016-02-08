@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -73,7 +73,7 @@ public interface INinteiKekkaJoho {
      *
      * @return 介護認定審査会開催番号
      */
-    Integer get介護認定審査会開催番号();
+    RString get介護認定審査会開催番号();
 
     /**
      * 介護認定審査会意見を返します。
@@ -223,7 +223,7 @@ public interface INinteiKekkaJoho {
          * @param shinsakaiKaisaiNo 介護認定審査会開催番号
          * @return builder
          */
-        public Builder setShinsakaiKaisaiNo(int shinsakaiKaisaiNo) {
+        public Builder setShinsakaiKaisaiNo(RString shinsakaiKaisaiNo) {
             return this;
         }
 

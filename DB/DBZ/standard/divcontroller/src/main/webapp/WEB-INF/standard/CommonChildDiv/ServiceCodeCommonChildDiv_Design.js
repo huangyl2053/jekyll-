@@ -32,6 +32,10 @@ var DBZ;
                 return new UZA.TextBoxCode(this.convFiledName("txtServiceCode"));
             };
 
+            Controls.prototype.txtKomokuCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtKomokuCode"));
+            };
+
             Controls.prototype.txtKijunYM = function () {
                 return new UZA.TextBoxDate(this.convFiledName("txtKijunYM"));
             };

@@ -15,7 +15,7 @@ public final class DbT5208NinteichosahyoServiceJokyoFlagEntityGenerator {
     public static final ShinseishoKanriNo DEFAULT_申請書管理番号 = new ShinseishoKanriNo("000001");
     public static final int DEFAULT_認定調査依頼履歴番号 = 1;
     public static final int DEFAULT_連番 = 1;
-    public static final int DEFAULT_サービスの状況 = 1;
+    public static final boolean DEFAULT_サービスの状況フラグ = false;
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -28,7 +28,7 @@ public final class DbT5208NinteichosahyoServiceJokyoFlagEntityGenerator {
         entity.setShinseishoKanriNo(DEFAULT_申請書管理番号);
         entity.setNinteichosaRirekiNo(DEFAULT_認定調査依頼履歴番号);
         entity.setRemban(DEFAULT_連番);
-        entity.setServiceJokyo(DEFAULT_サービスの状況);
+        entity.setServiceJokyoFlag(DEFAULT_サービスの状況フラグ);
         return entity;
     }
 }

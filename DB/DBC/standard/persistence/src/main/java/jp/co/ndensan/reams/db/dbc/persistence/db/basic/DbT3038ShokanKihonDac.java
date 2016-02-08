@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -51,13 +50,13 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
             RString 整理番号,
             JigyoshaNo 事業者番号,
             RString 様式番号,
-            Decimal 履歴番号) throws NullPointerException {
+            RString 明細番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -69,7 +68,7 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
                                 eq(seiriNp, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
-                                eq(rirekiNo, 履歴番号))).
+                                eq(meisaiNo, 明細番号))).
                 toObject(DbT3038ShokanKihonEntity.class);
     }
 

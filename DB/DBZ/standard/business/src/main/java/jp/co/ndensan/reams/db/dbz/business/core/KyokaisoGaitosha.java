@@ -31,17 +31,20 @@ public class KyokaisoGaitosha extends ModelBase<KyokaisoGaitoshaIdentifier, DbT1
      *
      * @param 被保険者番号 被保険者番号
      * @param 履歴番号 履歴番号
+     * @param リンク番号 リンク番号
      */
     public KyokaisoGaitosha(HihokenshaNo 被保険者番号,
-            Decimal 履歴番号) {
+            int 履歴番号,
+            int リンク番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT1006KyokaisoGaitoshaEntity();
         this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setRirekiNo(履歴番号);
+        this.entity.setLinkNo(リンク番号);
         this.id = new KyokaisoGaitoshaIdentifier(
                 被保険者番号,
-                履歴番号
+                履歴番号,
+                リンク番号
         );
     }
 
@@ -55,7 +58,8 @@ public class KyokaisoGaitosha extends ModelBase<KyokaisoGaitoshaIdentifier, DbT1
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("境界層該当者"));
         this.id = new KyokaisoGaitoshaIdentifier(
                 entity.getHihokenshaNo(),
-                entity.getRirekiNo());
+                entity.getRirekiNo(),
+                entity.getLinkNo());
     }
 
     /**
@@ -87,8 +91,17 @@ public class KyokaisoGaitosha extends ModelBase<KyokaisoGaitoshaIdentifier, DbT1
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
+    }
+
+    /**
+     * リンク番号を返します。
+     *
+     * @return リンク番号
+     */
+    public int getリンク番号() {
+        return entity.getLinkNo();
     }
 
     /**

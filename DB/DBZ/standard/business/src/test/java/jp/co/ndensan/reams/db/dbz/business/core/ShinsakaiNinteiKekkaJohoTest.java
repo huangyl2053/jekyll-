@@ -5,9 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.business.core.ShinsakaiNinteiKekkaJoho;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5102NinteiKekkaJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5102NinteiKekkaJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -152,7 +151,7 @@ public class ShinsakaiNinteiKekkaJohoTest extends DbdTestBase {
 
         @Test
         public void setShinsakaiKaisaiNoで設定した値を＿生成されたHokenshaShinseitodokedeJohoも保持する() {
-            ShinsakaiNinteiKekkaJoho result = ShinsakaiNinteiKekkaJoho.newBuilder().setShinsakaiKaisaiNo(1).build();
+            INinteiKekkaJoho result = ShinsakaiNinteiKekkaJoho.newBuilder().setShinsakaiKaisaiNo(new RString("1")).build();
             assertThat(result.get介護認定審査会開催番号(), is(DbT5102NinteiKekkaJohoEntityGenerator.DEFAULT_介護認定審査会開催番号));
         }
 

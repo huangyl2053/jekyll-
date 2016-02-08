@@ -6,16 +6,15 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJoho;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJoho.ninteiChosainNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJoho.ninteichosaItakusakiCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJoho.ninteiChosaItakusakiCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJoho.ninteiChosainCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJoho.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -43,8 +42,8 @@ public class DbT4913ChosainJohoDac implements ISaveable<DbT4913ChosainJohoEntity
     @Transaction
     public DbT4913ChosainJohoEntity selectByKey(
             LasdecCode 市町村コード,
-            ChosaItakusakiCode 認定調査委託先コード,
-            ChosainCode 認定調査員コード) throws NullPointerException {
+            RString 認定調査委託先コード,
+            RString 認定調査員コード) throws NullPointerException {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
         requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
@@ -55,8 +54,8 @@ public class DbT4913ChosainJohoDac implements ISaveable<DbT4913ChosainJohoEntity
                 table(DbT4913ChosainJoho.class).
                 where(and(
                                 eq(shichosonCode, 市町村コード),
-                                eq(ninteichosaItakusakiCode, 認定調査委託先コード),
-                                eq(ninteiChosainNo, 認定調査員コード))).
+                                eq(ninteiChosaItakusakiCode, 認定調査委託先コード),
+                                eq(ninteiChosainCode, 認定調査員コード))).
                 toObject(DbT4913ChosainJohoEntity.class);
     }
 

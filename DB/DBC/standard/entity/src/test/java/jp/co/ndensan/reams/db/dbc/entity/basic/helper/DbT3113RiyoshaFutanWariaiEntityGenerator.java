@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 利用者負担割合エンティティのテスト用インスタンスを作成する補助クラスです。
@@ -19,7 +18,7 @@ public final class DbT3113RiyoshaFutanWariaiEntityGenerator {
 
     public static final FlexibleYear DEFAULT_年度 = new FlexibleYear("1990");
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 1;
     public static final boolean DEFAULT_発行不要フラグ = false;
     public static final boolean DEFAULT_職権変更フラグ = false;
     public static final FlexibleDate DEFAULT_判定日 = new FlexibleDate("19900101");

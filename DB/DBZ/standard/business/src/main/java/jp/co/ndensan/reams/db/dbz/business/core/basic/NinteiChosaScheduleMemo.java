@@ -19,9 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 認定調査スケジュールメモ情報を管理するクラスです。
  */
-public class NinteiChosaScheduleMemo extends 
-        ParentModelBase<NinteiChosaScheduleMemoIdentifier, 
-        DbT5222NinteiChosaScheduleMemoEntity, NinteiChosaScheduleMemo> implements Serializable {
+public class NinteiChosaScheduleMemo extends
+        ParentModelBase<NinteiChosaScheduleMemoIdentifier, DbT5222NinteiChosaScheduleMemoEntity, NinteiChosaScheduleMemo> implements Serializable {
 
     private final DbT5222NinteiChosaScheduleMemoEntity entity;
     private final NinteiChosaScheduleMemoIdentifier id;

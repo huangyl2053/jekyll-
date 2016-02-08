@@ -51,8 +51,6 @@ public class KaigoSetaiManager {
      * @param 世帯員管理連番 SetaiInkanriRenban
      * @param 世帯員識別コード SetaiInshikibetsuCode
      * @param 本人区分 HonninKubun
-     * @param 課税年度 KazeiNendo
-     * @param 課税非課税区分 KazeiHikazeiKubun
      * @return KaigoSetai
      */
     @Transaction

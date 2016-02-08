@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Value;
 
 /**
@@ -19,8 +18,8 @@ public class RiyoshaFutanWariaiMeisaiIdentifier implements Serializable {
 
     private final FlexibleYear 年度;
     private final HihokenshaNo 被保険者番号;
-    private final Decimal 履歴番号;
-    private final Decimal 枝番号;
+    private final int 履歴番号;
+    private final int 枝番号;
 
     /**
      * コンストラクタです。
@@ -32,8 +31,8 @@ public class RiyoshaFutanWariaiMeisaiIdentifier implements Serializable {
      */
     public RiyoshaFutanWariaiMeisaiIdentifier(FlexibleYear 年度,
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号,
-            Decimal 枝番号) {
+            int 履歴番号,
+            int 枝番号) {
         this.年度 = 年度;
         this.被保険者番号 = 被保険者番号;
         this.履歴番号 = 履歴番号;

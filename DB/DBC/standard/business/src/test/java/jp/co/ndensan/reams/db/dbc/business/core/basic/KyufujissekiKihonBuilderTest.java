@@ -72,7 +72,7 @@ public class KyufujissekiKihonBuilderTest extends DbcTestBase {
             KyufujissekiKihonEntity.setInputShikibetsuNo(入力識別番号);
             KyufujissekiKihonEntity.setRecodeShubetsuCode(レコード種別コード);
             KyufujissekiKihonEntity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
-            KyufujissekiKihonEntity.setHokenshaNo(証記載保険者番号);
+            KyufujissekiKihonEntity.setShokisaiHokenshaNo(証記載保険者番号);
             KyufujissekiKihonEntity.setHiHokenshaNo(被保険者番号);
             KyufujissekiKihonEntity.setServiceTeikyoYM(サービス提供年月);
             KyufujissekiKihonEntity.setKyufuJissekiKubunCode(給付実績区分コード);

@@ -18,7 +18,6 @@
     <sql id="allColumns_DbT5031NinteiChosaHoshuTanka">
          "DbT5031NinteiChosaHoshuTanka"."chosaKubun" as "dbT5031NinteiChosaHoshuTanka_chosaKubun",
          "DbT5031NinteiChosaHoshuTanka"."homonShubetsu" as "dbT5031NinteiChosaHoshuTanka_homonShubetsu",
-         "DbT5031NinteiChosaHoshuTanka"."ikenshoNyushuPatern" as "dbT5031NinteiChosaHoshuTanka_ikenshoNyushuPatern",
          "DbT5031NinteiChosaHoshuTanka"."kaishiYM" as "dbT5031NinteiChosaHoshuTanka_kaishiYM",
          "DbT5031NinteiChosaHoshuTanka"."shuryoYM" as "dbT5031NinteiChosaHoshuTanka_shuryoYM",
          "DbT5031NinteiChosaHoshuTanka"."insertDantaiCd" as "dbT5031NinteiChosaHoshuTanka_insertDantaiCd",
@@ -37,7 +36,6 @@
     <resultMap id="ResultMap_DbT5031NinteiChosaHoshuTankaEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5031NinteiChosaHoshuTankaEntity" autoMapping="true">
         <id property="chosaKubun" column="dbT5031NinteiChosaHoshuTanka_chosaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <id property="homonShubetsu" column="dbT5031NinteiChosaHoshuTanka_homonShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <id property="ikenshoNyushuPatern" column="dbT5031NinteiChosaHoshuTanka_ikenshoNyushuPatern" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <id property="kaishiYM" column="dbT5031NinteiChosaHoshuTanka_kaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="shuryoYM" column="dbT5031NinteiChosaHoshuTanka_shuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="insertDantaiCd" column="dbT5031NinteiChosaHoshuTanka_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

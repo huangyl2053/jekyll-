@@ -10,7 +10,6 @@ import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.seria
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -29,7 +28,6 @@ public class ShokanJutakuKaishuJizenShinseiIdentifierTest extends DbcTestBase {
     private static HihokenshaNo 主キー名1;
     private static FlexibleYearMonth 主キー名2;
     private static RString 主キー名3;
-    private static Decimal 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
@@ -37,14 +35,13 @@ public class ShokanJutakuKaishuJizenShinseiIdentifierTest extends DbcTestBase {
         主キー名1 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_被保険者番号;
         主キー名2 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_サービス提供年月;
         主キー名3 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_整理番号;
-        主キー名4 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class シリアライズテスト extends DbcTestBase {
 
         @Test
         public void シリアライズできる() {
-            ShokanJutakuKaishuJizenShinseiIdentifier sut = new ShokanJutakuKaishuJizenShinseiIdentifier(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            ShokanJutakuKaishuJizenShinseiIdentifier sut = new ShokanJutakuKaishuJizenShinseiIdentifier(主キー名1, 主キー名2, 主キー名3);
             assertThat(sut, is(serializable()));
         }
     }

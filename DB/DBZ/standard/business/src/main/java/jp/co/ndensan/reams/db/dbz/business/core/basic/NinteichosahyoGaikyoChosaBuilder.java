@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -63,8 +62,19 @@ public class NinteichosahyoGaikyoChosaBuilder {
      * @return {@link NinteichosahyoGaikyoChosaBuilder}
      */
     public NinteichosahyoGaikyoChosaBuilder set認定調査依頼履歴番号(int 認定調査依頼履歴番号) {
-        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
         entity.setNinteichosaRirekiNo(認定調査依頼履歴番号);
+        return this;
+    }
+
+    /**
+     * 概況調査テキストイメージ区分を設定します。
+     *
+     * @param 概況調査テキストイメージ区分 概況調査テキストイメージ区分
+     * @return {@link NinteichosahyoGaikyoChosaBuilder}
+     */
+    public NinteichosahyoGaikyoChosaBuilder set概況調査テキストイメージ区分(RString 概況調査テキストイメージ区分) {
+        requireNonNull(概況調査テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("概況調査テキストイメージ区分"));
+        entity.setGaikyoChosaTextImageKubun(概況調査テキストイメージ区分);
         return this;
     }
 
@@ -129,18 +139,6 @@ public class NinteichosahyoGaikyoChosaBuilder {
     }
 
     /**
-     * 調査委託区分コードを設定します。
-     *
-     * @param 調査委託区分コード 調査委託区分コード
-     * @return {@link NinteichosahyoGaikyoChosaBuilder}
-     */
-    public NinteichosahyoGaikyoChosaBuilder set調査委託区分コード(Code 調査委託区分コード) {
-        requireNonNull(調査委託区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査委託区分コード"));
-        entity.setChosaItakuKubunCode(調査委託区分コード);
-        return this;
-    }
-
-    /**
      * 認定調査区分コードを設定します。
      *
      * @param 認定調査区分コード 認定調査区分コード
@@ -201,30 +199,6 @@ public class NinteichosahyoGaikyoChosaBuilder {
     }
 
     /**
-     * 実施場所イメージ共有ファイルIDを設定します。
-     *
-     * @param 実施場所イメージ共有ファイルID 実施場所イメージ共有ファイルID
-     * @return {@link NinteichosahyoGaikyoChosaBuilder}
-     */
-    public NinteichosahyoGaikyoChosaBuilder set実施場所イメージ共有ファイルID(RDateTime 実施場所イメージ共有ファイルID) {
-        requireNonNull(実施場所イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("実施場所イメージ共有ファイルID"));
-        entity.setJisshiBashoImageSharedFileId(実施場所イメージ共有ファイルID);
-        return this;
-    }
-
-    /**
-     * 認定調査_現在の状況コードを設定します。
-     *
-     * @param 認定調査_現在の状況コード 認定調査_現在の状況コード
-     * @return {@link NinteichosahyoGaikyoChosaBuilder}
-     */
-    public NinteichosahyoGaikyoChosaBuilder set認定調査_現在の状況コード(Code 認定調査_現在の状況コード) {
-        requireNonNull(認定調査_現在の状況コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査_現在の状況コード"));
-        entity.setGenzainoJokyoCode(認定調査_現在の状況コード);
-        return this;
-    }
-
-    /**
      * 認定調査_サービス区分コードを設定します。
      *
      * @param 認定調査_サービス区分コード 認定調査_サービス区分コード
@@ -256,7 +230,7 @@ public class NinteichosahyoGaikyoChosaBuilder {
      */
     public NinteichosahyoGaikyoChosaBuilder set利用施設住所(AtenaJusho 利用施設住所) {
         requireNonNull(利用施設住所, UrSystemErrorMessages.値がnull.getReplacedMessage("利用施設住所"));
-        entity.setRiyoShisetsuJusho(利用施設住所);
+        entity.setRiyoShisetsuJusho(利用施設住所.getColumnValue());
         return this;
     }
 
@@ -268,7 +242,7 @@ public class NinteichosahyoGaikyoChosaBuilder {
      */
     public NinteichosahyoGaikyoChosaBuilder set利用施設電話番号(TelNo 利用施設電話番号) {
         requireNonNull(利用施設電話番号, UrSystemErrorMessages.値がnull.getReplacedMessage("利用施設電話番号"));
-        entity.setRiyoShisetsuTelNo(利用施設電話番号);
+        entity.setRiyoShisetsuTelNo(利用施設電話番号.getColumnValue());
         return this;
     }
 
@@ -285,42 +259,6 @@ public class NinteichosahyoGaikyoChosaBuilder {
     }
 
     /**
-     * 利用施設名イメージ共有ファイルIDを設定します。
-     *
-     * @param 利用施設名イメージ共有ファイルID 利用施設名イメージ共有ファイルID
-     * @return {@link NinteichosahyoGaikyoChosaBuilder}
-     */
-    public NinteichosahyoGaikyoChosaBuilder set利用施設名イメージ共有ファイルID(RDateTime 利用施設名イメージ共有ファイルID) {
-        requireNonNull(利用施設名イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("利用施設名イメージ共有ファイルID"));
-        entity.setRiyoShisetsuNameImageSharedFileId(利用施設名イメージ共有ファイルID);
-        return this;
-    }
-
-    /**
-     * 利用施設住所イメージ共有ファイルIDを設定します。
-     *
-     * @param 利用施設住所イメージ共有ファイルID 利用施設住所イメージ共有ファイルID
-     * @return {@link NinteichosahyoGaikyoChosaBuilder}
-     */
-    public NinteichosahyoGaikyoChosaBuilder set利用施設住所イメージ共有ファイルID(RDateTime 利用施設住所イメージ共有ファイルID) {
-        requireNonNull(利用施設住所イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("利用施設住所イメージ共有ファイルID"));
-        entity.setRiyoShisetsuJushoImageSharedFileId(利用施設住所イメージ共有ファイルID);
-        return this;
-    }
-
-    /**
-     * 利用施設電話番号イメージ共有ファイルIDを設定します。
-     *
-     * @param 利用施設電話番号イメージ共有ファイルID 利用施設電話番号イメージ共有ファイルID
-     * @return {@link NinteichosahyoGaikyoChosaBuilder}
-     */
-    public NinteichosahyoGaikyoChosaBuilder set利用施設電話番号イメージ共有ファイルID(RDateTime 利用施設電話番号イメージ共有ファイルID) {
-        requireNonNull(利用施設電話番号イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("利用施設電話番号イメージ共有ファイルID"));
-        entity.setRiyoShisetsuTelNoImageSharedFileId(利用施設電話番号イメージ共有ファイルID);
-        return this;
-    }
-
-    /**
      * 特記を設定します。
      *
      * @param 特記 特記
@@ -329,18 +267,6 @@ public class NinteichosahyoGaikyoChosaBuilder {
     public NinteichosahyoGaikyoChosaBuilder set特記(RString 特記) {
         requireNonNull(特記, UrSystemErrorMessages.値がnull.getReplacedMessage("特記"));
         entity.setTokki(特記);
-        return this;
-    }
-
-    /**
-     * 特記イメージ共有ファイルIDを設定します。
-     *
-     * @param 特記イメージ共有ファイルID 特記イメージ共有ファイルID
-     * @return {@link NinteichosahyoGaikyoChosaBuilder}
-     */
-    public NinteichosahyoGaikyoChosaBuilder set特記イメージ共有ファイルID(RDateTime 特記イメージ共有ファイルID) {
-        requireNonNull(特記イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("特記イメージ共有ファイルID"));
-        entity.setTokkiImageSharedFileId(特記イメージ共有ファイルID);
         return this;
     }
 

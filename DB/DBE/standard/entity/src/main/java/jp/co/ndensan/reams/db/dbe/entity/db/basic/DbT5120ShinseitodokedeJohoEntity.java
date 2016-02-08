@@ -8,12 +8,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
@@ -22,7 +21,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
  * <br/> 申請届出情報を一元管理する
  */
 public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120ShinseitodokedeJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5120ShinseitodokedeJoho");
@@ -32,19 +31,19 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
     private RString insertReamsLoginId;
     private UUID insertContextId;
     private boolean isDeleted = false;
-    private int updateCount = 0;
+    private final int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private ShinseishoKanriNo shinseishoKanriNo;
     private Code shinseiTodokedeDaikoKubunCode;
-    private AtenaMeisho shinseiTodokedeshaShimei;
-    private AtenaKanaMeisho shinseiTodokedeshaKanaShimei;
-    private RString shinseiTodokedeshaTsuzukigaraCode;
+    private RString shinseiTodokedeshaShimei;
+    private RString shinseiTodokedeshaKanaShimei;
+    private RString shinseiTodokedeshaTsuzukigara;
     private JigyoshaNo shinseiTodokedeDaikoJigyoshaNo;
     private RString jigyoshaKubun;
     private YubinNo shinseiTodokedeshaYubinNo;
-    private AtenaJusho shinseiTodokedeshaJusho;
+    private RString shinseiTodokedeshaJusho;
     private TelNo shinseiTodokedeshaTelNo;
 
     /**
@@ -94,6 +93,8 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
 
     /**
      * 申請書管理番号のgetメソッドです。
+     * <br/>
+     * <br/>要介護認定申請情報
      *
      * @return 申請書管理番号
      */
@@ -103,10 +104,12 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
 
     /**
      * 申請書管理番号のsetメソッドです。
+     * <br/>
+     * <br/>要介護認定申請情報
      *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -128,7 +131,7 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
      *
      * @param shinseiTodokedeDaikoKubunCode 申請届出代行区分コード
      */
-    public void setShinseiTodokedeDaikoKubunCode(Code shinseiTodokedeDaikoKubunCode) {
+    public void setShinseiTodokedeDaikoKubunCode(@Nonnull Code shinseiTodokedeDaikoKubunCode) {
         this.shinseiTodokedeDaikoKubunCode = shinseiTodokedeDaikoKubunCode;
     }
 
@@ -137,7 +140,8 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
      *
      * @return 申請届出者氏名
      */
-    public AtenaMeisho getShinseiTodokedeshaShimei() {
+    @CheckForNull
+    public RString getShinseiTodokedeshaShimei() {
         return shinseiTodokedeshaShimei;
     }
 
@@ -146,7 +150,7 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
      *
      * @param shinseiTodokedeshaShimei 申請届出者氏名
      */
-    public void setShinseiTodokedeshaShimei(AtenaMeisho shinseiTodokedeshaShimei) {
+    public void setShinseiTodokedeshaShimei(RString shinseiTodokedeshaShimei) {
         this.shinseiTodokedeshaShimei = shinseiTodokedeshaShimei;
     }
 
@@ -155,7 +159,8 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
      *
      * @return 申請届出者氏名カナ
      */
-    public AtenaKanaMeisho getShinseiTodokedeshaKanaShimei() {
+    @CheckForNull
+    public RString getShinseiTodokedeshaKanaShimei() {
         return shinseiTodokedeshaKanaShimei;
     }
 
@@ -164,30 +169,27 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
      *
      * @param shinseiTodokedeshaKanaShimei 申請届出者氏名カナ
      */
-    public void setShinseiTodokedeshaKanaShimei(AtenaKanaMeisho shinseiTodokedeshaKanaShimei) {
+    public void setShinseiTodokedeshaKanaShimei(RString shinseiTodokedeshaKanaShimei) {
         this.shinseiTodokedeshaKanaShimei = shinseiTodokedeshaKanaShimei;
     }
 
     /**
-     * 申請届出者続柄コードのgetメソッドです。
-     * <br/>
-     * <br/>コード
+     * 申請届出者続柄のgetメソッドです。
      *
-     * @return 申請届出者続柄コード
+     * @return 申請届出者続柄
      */
-    public RString getShinseiTodokedeshaTsuzukigaraCode() {
-        return shinseiTodokedeshaTsuzukigaraCode;
+    @CheckForNull
+    public RString getShinseiTodokedeshaTsuzukigara() {
+        return shinseiTodokedeshaTsuzukigara;
     }
 
     /**
-     * 申請届出者続柄コードのsetメソッドです。
-     * <br/>
-     * <br/>コード
+     * 申請届出者続柄のsetメソッドです。
      *
-     * @param shinseiTodokedeshaTsuzukigaraCode 申請届出者続柄コード
+     * @param shinseiTodokedeshaTsuzukigara 申請届出者続柄
      */
-    public void setShinseiTodokedeshaTsuzukigaraCode(RString shinseiTodokedeshaTsuzukigaraCode) {
-        this.shinseiTodokedeshaTsuzukigaraCode = shinseiTodokedeshaTsuzukigaraCode;
+    public void setShinseiTodokedeshaTsuzukigara(RString shinseiTodokedeshaTsuzukigara) {
+        this.shinseiTodokedeshaTsuzukigara = shinseiTodokedeshaTsuzukigara;
     }
 
     /**
@@ -195,6 +197,7 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
      *
      * @return 申請届出代行事業者番号
      */
+    @CheckForNull
     public JigyoshaNo getShinseiTodokedeDaikoJigyoshaNo() {
         return shinseiTodokedeDaikoJigyoshaNo;
     }
@@ -215,6 +218,7 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
      *
      * @return 事業者区分
      */
+    @CheckForNull
     public RString getJigyoshaKubun() {
         return jigyoshaKubun;
     }
@@ -235,6 +239,7 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
      *
      * @return 申請届出者郵便番号
      */
+    @CheckForNull
     public YubinNo getShinseiTodokedeshaYubinNo() {
         return shinseiTodokedeshaYubinNo;
     }
@@ -253,7 +258,8 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
      *
      * @return 申請届出者住所
      */
-    public AtenaJusho getShinseiTodokedeshaJusho() {
+    @CheckForNull
+    public RString getShinseiTodokedeshaJusho() {
         return shinseiTodokedeshaJusho;
     }
 
@@ -262,7 +268,7 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
      *
      * @param shinseiTodokedeshaJusho 申請届出者住所
      */
-    public void setShinseiTodokedeshaJusho(AtenaJusho shinseiTodokedeshaJusho) {
+    public void setShinseiTodokedeshaJusho(RString shinseiTodokedeshaJusho) {
         this.shinseiTodokedeshaJusho = shinseiTodokedeshaJusho;
     }
 
@@ -271,6 +277,7 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
      *
      * @return 申請届出者電話番号
      */
+    @CheckForNull
     public TelNo getShinseiTodokedeshaTelNo() {
         return shinseiTodokedeshaTelNo;
     }
@@ -296,14 +303,13 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo);
     }
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT5120ShinseitodokedeJohoEntity entity) {
@@ -311,7 +317,7 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
         this.shinseiTodokedeDaikoKubunCode = entity.shinseiTodokedeDaikoKubunCode;
         this.shinseiTodokedeshaShimei = entity.shinseiTodokedeshaShimei;
         this.shinseiTodokedeshaKanaShimei = entity.shinseiTodokedeshaKanaShimei;
-        this.shinseiTodokedeshaTsuzukigaraCode = entity.shinseiTodokedeshaTsuzukigaraCode;
+        this.shinseiTodokedeshaTsuzukigara = entity.shinseiTodokedeshaTsuzukigara;
         this.shinseiTodokedeDaikoJigyoshaNo = entity.shinseiTodokedeDaikoJigyoshaNo;
         this.jigyoshaKubun = entity.jigyoshaKubun;
         this.shinseiTodokedeshaYubinNo = entity.shinseiTodokedeshaYubinNo;
@@ -326,7 +332,7 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, shinseiTodokedeDaikoKubunCode, shinseiTodokedeshaShimei, shinseiTodokedeshaKanaShimei, shinseiTodokedeshaTsuzukigaraCode, shinseiTodokedeDaikoJigyoshaNo, jigyoshaKubun, shinseiTodokedeshaYubinNo, shinseiTodokedeshaJusho, shinseiTodokedeshaTelNo);
+        return super.toMd5(shinseishoKanriNo, shinseiTodokedeDaikoKubunCode, shinseiTodokedeshaShimei, shinseiTodokedeshaKanaShimei, shinseiTodokedeshaTsuzukigara, shinseiTodokedeDaikoJigyoshaNo, jigyoshaKubun, shinseiTodokedeshaYubinNo, shinseiTodokedeshaJusho, shinseiTodokedeshaTelNo);
     }
 
 // </editor-fold>

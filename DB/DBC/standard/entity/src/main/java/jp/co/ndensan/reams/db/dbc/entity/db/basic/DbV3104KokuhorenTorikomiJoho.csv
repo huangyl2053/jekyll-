@@ -4,4 +4,4 @@ shoriJotaiKubun,bpchar,RString,,,,,shoriJotaiKubun,A
 zen_shorijotaikubun,bpchar,RString,,,,,zen_shorijotaikubun,A
 zenzen_shorijotaikubun,bpchar,RString,,,,,zenzen_shorijotaikubun,A
 tougetsushoridate,UDD018YMDHMS,YMDHMS,,,,,tougetsushoridate,A
-saiShoriKahiKubun,bool,boolean,,,,,saiShoriKahiKubun,A
+saiShoriKanoKubun,bool,boolean,,,,,saiShoriKanoKubun,A

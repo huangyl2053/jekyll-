@@ -32,8 +32,8 @@ public class ChosainJohoBuilderTest extends DbzTestBase {
     @BeforeClass
     public static void setUpClass() {
         市町村コード = DbT5913ChosainJohoEntityGenerator.DEFAULT_市町村コード;
-        認定調査委託先コード = DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード;
-        認定調査員コード = DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード;
+        認定調査委託先コード = new ChosaItakusakiCode(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード);
+        認定調査員コード = new ChosainCode(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード);
     }
 
     public static class getterSetterTest extends DbzTestBase {
@@ -58,14 +58,14 @@ public class ChosainJohoBuilderTest extends DbzTestBase {
 
         @Test
         public void 戻り値の認定調査委託先コードは_設定した値と同じ認定調査委託先コードを返す() {
-            business = sut.set認定調査委託先コード(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード).build();
-            assertThat(business.get認定調査委託先コード(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード));
+            business = sut.set認定調査委託先コード(new ChosaItakusakiCode(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード)).build();
+            assertThat(business.get認定調査委託先コード().getColumnValue(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード));
         }
 
         @Test
         public void 戻り値の認定調査員コードは_設定した値と同じ認定調査員コードを返す() {
-            business = sut.set認定調査員コード(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード).build();
-            assertThat(business.get認定調査員コード(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード));
+            business = sut.set認定調査員コード(new ChosainCode(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード)).build();
+            assertThat(business.get認定調査員コード().getColumnValue(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード));
         }
 
         @Test

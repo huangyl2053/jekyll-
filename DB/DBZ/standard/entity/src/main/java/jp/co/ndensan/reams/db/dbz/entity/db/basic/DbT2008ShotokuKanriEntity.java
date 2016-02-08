@@ -12,13 +12,15 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 介護所得管理テーブルのエンティティクラスです。
  * <br/> 住民税課税対象者以外の所得情報を管理します。
  */
 public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuKanriEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2008ShotokuKanri");
 
@@ -35,7 +37,7 @@ public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuK
     @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     private RString kazeiKubun;
     private RString kazeiKubunGemmenGo;
     private Decimal gokeiShotokuGaku;
@@ -43,8 +45,8 @@ public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuK
     private Decimal nenkiniShotokuGaku;
     private Decimal kazeiShotokuGaku;
     private RString gekihenKanwaKubun;
-    private RString yusebKubun;
-    private YMDHMS shoriYMD;
+    private RString yusenKubun;
+    private YMDHMS shoriTimeStamp;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -106,7 +108,7 @@ public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuK
      * 
      * @param shotokuNendo 所得年度
      */
-    public void setShotokuNendo(FlexibleYear shotokuNendo) {
+    public void setShotokuNendo(@Nonnull FlexibleYear shotokuNendo) {
         this.shotokuNendo = shotokuNendo;
     }
 
@@ -124,7 +126,7 @@ public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuK
      * 
      * @param shikibetsuCode 識別コード
      */
-    public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
+    public void setShikibetsuCode(@Nonnull ShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
     }
 
@@ -133,7 +135,7 @@ public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuK
      * 
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
@@ -142,14 +144,14 @@ public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuK
      * 
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(@Nonnull int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * 課税区分（住民税減免前）のgetメソッドです。
      * <br/>
-     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消　
+     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消　
      * <br/>※保険料賦課の際に参照する
      * 
      * @return 課税区分（住民税減免前）
@@ -161,19 +163,19 @@ public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuK
     /**
      * 課税区分（住民税減免前）のsetメソッドです。
      * <br/>
-     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消　
+     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消　
      * <br/>※保険料賦課の際に参照する
      * 
      * @param kazeiKubun 課税区分（住民税減免前）
      */
-    public void setKazeiKubun(RString kazeiKubun) {
+    public void setKazeiKubun(@Nonnull RString kazeiKubun) {
         this.kazeiKubun = kazeiKubun;
     }
 
     /**
      * 課税区分（住民税減免後）のgetメソッドです。
      * <br/>
-     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消　
+     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消　
      * <br/>※給付（高額等）で参照する
      * 
      * @return 課税区分（住民税減免後）
@@ -185,12 +187,12 @@ public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuK
     /**
      * 課税区分（住民税減免後）のsetメソッドです。
      * <br/>
-     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消　
+     * <br/>1：課税　2：非課税　3：未申告　4：調査中　5：課税取消　
      * <br/>※給付（高額等）で参照する
      * 
      * @param kazeiKubunGemmenGo 課税区分（住民税減免後）
      */
-    public void setKazeiKubunGemmenGo(RString kazeiKubunGemmenGo) {
+    public void setKazeiKubunGemmenGo(@Nonnull RString kazeiKubunGemmenGo) {
         this.kazeiKubunGemmenGo = kazeiKubunGemmenGo;
     }
 
@@ -199,6 +201,7 @@ public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuK
      * 
      * @return 合計所得金額
      */
+    @CheckForNull
     public Decimal getGokeiShotokuGaku() {
         return gokeiShotokuGaku;
     }
@@ -217,6 +220,7 @@ public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuK
      * 
      * @return 公的年金収入額
      */
+    @CheckForNull
     public Decimal getNenkiniShunyuGaku() {
         return nenkiniShunyuGaku;
     }
@@ -235,6 +239,7 @@ public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuK
      * 
      * @return 公的年金所得額
      */
+    @CheckForNull
     public Decimal getNenkiniShotokuGaku() {
         return nenkiniShotokuGaku;
     }
@@ -253,6 +258,7 @@ public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuK
      * 
      * @return 課税所得額
      */
+    @CheckForNull
     public Decimal getKazeiShotokuGaku() {
         return kazeiShotokuGaku;
     }
@@ -271,6 +277,7 @@ public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuK
      * 
      * @return 激変緩和措置区分
      */
+    @CheckForNull
     public RString getGekihenKanwaKubun() {
         return gekihenKanwaKubun;
     }
@@ -289,35 +296,36 @@ public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuK
      * 
      * @return 優先区分
      */
-    public RString getYusebKubun() {
-        return yusebKubun;
+    @CheckForNull
+    public RString getYusenKubun() {
+        return yusenKubun;
     }
 
     /**
      * 優先区分のsetメソッドです。
      * 
-     * @param yusebKubun 優先区分
+     * @param yusenKubun 優先区分
      */
-    public void setYusebKubun(RString yusebKubun) {
-        this.yusebKubun = yusebKubun;
+    public void setYusenKubun(RString yusenKubun) {
+        this.yusenKubun = yusenKubun;
     }
 
     /**
-     * 処理日のgetメソッドです。
+     * 処理日時のgetメソッドです。
      * 
-     * @return 処理日
+     * @return 処理日時
      */
-    public YMDHMS getShoriYMD() {
-        return shoriYMD;
+    public YMDHMS getShoriTimeStamp() {
+        return shoriTimeStamp;
     }
 
     /**
-     * 処理日のsetメソッドです。
+     * 処理日時のsetメソッドです。
      * 
-     * @param shoriYMD 処理日
+     * @param shoriTimeStamp 処理日時
      */
-    public void setShoriYMD(YMDHMS shoriYMD) {
-        this.shoriYMD = shoriYMD;
+    public void setShoriTimeStamp(@Nonnull YMDHMS shoriTimeStamp) {
+        this.shoriTimeStamp = shoriTimeStamp;
     }
 
     /**
@@ -338,7 +346,7 @@ public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuK
         if (!Objects.equals(this.shikibetsuCode, other.shikibetsuCode)) {
             return false;
         }
-        if (!Objects.equals(this.rirekiNo, other.rirekiNo)) {
+        if (this.rirekiNo != other.rirekiNo) {
             return false;
         }
         return true;
@@ -359,8 +367,8 @@ public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuK
         this.nenkiniShotokuGaku = entity.nenkiniShotokuGaku;
         this.kazeiShotokuGaku = entity.kazeiShotokuGaku;
         this.gekihenKanwaKubun = entity.gekihenKanwaKubun;
-        this.yusebKubun = entity.yusebKubun;
-        this.shoriYMD = entity.shoriYMD;
+        this.yusenKubun = entity.yusenKubun;
+        this.shoriTimeStamp = entity.shoriTimeStamp;
     }
 
     /**
@@ -369,7 +377,7 @@ public class DbT2008ShotokuKanriEntity extends DbTableEntityBase<DbT2008ShotokuK
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shotokuNendo, shikibetsuCode, rirekiNo, kazeiKubun, kazeiKubunGemmenGo, gokeiShotokuGaku, nenkiniShunyuGaku, nenkiniShotokuGaku, kazeiShotokuGaku, gekihenKanwaKubun, yusebKubun, shoriYMD);
+        return super.toMd5(shotokuNendo, shikibetsuCode, rirekiNo, kazeiKubun, kazeiKubunGemmenGo, gokeiShotokuGaku, nenkiniShunyuGaku, nenkiniShotokuGaku, kazeiShotokuGaku, gekihenKanwaKubun, yusenKubun, shoriTimeStamp);
     }
 
 // </editor-fold>

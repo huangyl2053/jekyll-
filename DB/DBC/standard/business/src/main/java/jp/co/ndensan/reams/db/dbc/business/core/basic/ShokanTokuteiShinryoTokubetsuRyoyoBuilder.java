@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanTokuteiShinryoTokubetsuRyoyo}の編集を行うビルダークラスです。
@@ -101,26 +100,26 @@ public class ShokanTokuteiShinryoTokubetsuRyoyoBuilder {
     }
 
     /**
-     * 順次番号を設定します。
+     * 明細番号を設定します。
      *
-     * @param 順次番号 順次番号
+     * @param 明細番号 明細番号
      * @return {@link ShokanTokuteiShinryoTokubetsuRyoyoBuilder}
      */
-    public ShokanTokuteiShinryoTokubetsuRyoyoBuilder set順次番号(RString 順次番号) {
-        requireNonNull(順次番号, UrSystemErrorMessages.値がnull.getReplacedMessage("順次番号"));
-        entity.setJunjiNo(順次番号);
+    public ShokanTokuteiShinryoTokubetsuRyoyoBuilder set明細番号(RString 明細番号) {
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        entity.setMeisaiNo(明細番号);
         return this;
     }
 
     /**
-     * 履歴番号を設定します。
+     * 連番を設定します。
      *
-     * @param 履歴番号 履歴番号
+     * @param 連番 連番
      * @return {@link ShokanTokuteiShinryoTokubetsuRyoyoBuilder}
      */
-    public ShokanTokuteiShinryoTokubetsuRyoyoBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
+    public ShokanTokuteiShinryoTokubetsuRyoyoBuilder set連番(RString 連番) {
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+        entity.setRenban(連番);
         return this;
     }
 
@@ -154,7 +153,7 @@ public class ShokanTokuteiShinryoTokubetsuRyoyoBuilder {
      * @param 単位数 単位数
      * @return {@link ShokanTokuteiShinryoTokubetsuRyoyoBuilder}
      */
-    public ShokanTokuteiShinryoTokubetsuRyoyoBuilder set単位数(Decimal 単位数) {
+    public ShokanTokuteiShinryoTokubetsuRyoyoBuilder set単位数(int 単位数) {
         requireNonNull(単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("単位数"));
         entity.setTanisu(単位数);
         return this;
@@ -166,7 +165,7 @@ public class ShokanTokuteiShinryoTokubetsuRyoyoBuilder {
      * @param 回数 回数
      * @return {@link ShokanTokuteiShinryoTokubetsuRyoyoBuilder}
      */
-    public ShokanTokuteiShinryoTokubetsuRyoyoBuilder set回数(Decimal 回数) {
+    public ShokanTokuteiShinryoTokubetsuRyoyoBuilder set回数(int 回数) {
         requireNonNull(回数, UrSystemErrorMessages.値がnull.getReplacedMessage("回数"));
         entity.setKaisu(回数);
         return this;

@@ -6,15 +6,16 @@ package jp.co.ndensan.reams.db.dbz.service.core.koseishichosonmaster.koseishicho
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
-import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonshishomaster.KoseiShichosonShishoMaster;
-import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.KoseiShichosonMasterMapperParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.koseishichosonmaster.IKoseiShichosonMasterMapper;
-import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.koseishichosonshisho.KoseiShichosonShishoMaster;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.koseishichoson.KoseiShichosonMasterMapperParameter;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.koseishichoson.IKoseiShichosonMasterMapper;
+import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.koseishichosonmaster.koseishichosonshishomaster.KoseiShichosonShishoMasterManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -23,6 +24,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class KoseiShichosonMasterManager {
 
+    private static final RString 市町村識別コード = new RString("00");
+    private static final RString 合併旧市町村区分 = new RString("0");
+    private static final RString SHICHOSONSHOKIBETSUID = new RString("00");
     private final MapperProvider mapperProvider;
     private final DbT7051KoseiShichosonMasterDac 構成市町村マスタDac;
     private final KoseiShichosonShishoMasterManager 構成市町村支所マスタManager;
@@ -66,7 +70,7 @@ public class KoseiShichosonMasterManager {
      * 主キーに合致する構成市町村マスタを返します。
      *
      * @param 構成市町村マスタ検索条件 構成市町村マスタ検索条件
-     * @return KoseiShichosonMaster nullが返る可能性があります。
+     * @return KoseiShichosonMaster
      */
     @Transaction
     public KoseiShichosonMaster get構成市町村マスタ(KoseiShichosonMasterMapperParameter 構成市町村マスタ検索条件) {

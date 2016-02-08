@@ -1,0 +1,120 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.Comparators;
+import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
+
+/**
+ * HokenshaListDivを扱います。
+ * 関連するデータの取得やパネル内のデータ保持等を担当します。
+ */
+class HokenshaListDivHandler {
+
+    private final HokenshaListDiv div;
+
+    protected HokenshaListDivHandler(HokenshaListDiv div) {
+        this.div = div;
+    }
+
+    /**
+     * 保険者のリストを取得して、取得結果が持つ市町村名をddlHokenshaListへ市町村コードの昇順で設定します。
+     * また、共有子Div内に、取得した保険者のリストを保持します。
+     */
+    void loadAndHoldHokenshaList() {
+        List<HokenshaSummary> hokenshaList = HokenshaListLoader.createInstance()
+                .getShichosonCodeNameList(GyomuBunrui.介護事務)
+                .getAll();
+
+        Collections.sort(hokenshaList, new Comparator<HokenshaSummary>() {
+            @Override
+            public int compare(HokenshaSummary o1, HokenshaSummary o2) {
+                return Objects.compare(o1.get市町村コード(), o2.get市町村コード(),
+                                       Comparators.<LasdecCode>naturalOrder());
+            }
+        });
+
+        List<KeyValueDataSource> list = new ArrayList<>();
+        if (1 < hokenshaList.size()) {
+            list.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+        }
+
+        Map<RString, HokenshaSummary> map = new HashMap<>();
+        for (HokenshaSummary s : hokenshaList) {
+            RString key = s.get市町村コード().value();
+            list.add(new KeyValueDataSource(key, create表示名(s)));
+            map.put(key, s);
+        }
+
+        div.getDdlHokenshaList().setDataSource(list);
+        ShichosonListHolder.putTo(div, map);
+    }
+
+    private RString create表示名(HokenshaSummary s) {
+        return new RStringBuilder()
+                .append(s.get証記載保険者番号().value())
+                .append(RString.HALF_SPACE)
+                .append(s.get市町村名称())
+                .toRString();
+    }
+
+    /**
+     * ddlHokenshaListで選択されている市町村名に該当する保険者の情報を{@link HokenshaSummary}の形で返却します。
+     *
+     * @return 選択中の保険者の情報を持つ{@link HokenshaSummary}. 選択中の物が無い場合、{@link HokenshaSummary#EMPTY}
+     * @throws {@link #loadAndHoldHokenshaList()} により、共有子Divの保険者情報が設定されていない場合
+     */
+    HokenshaSummary getSelectedItemAsHokenshaSummary() {
+        if (!ShichosonListHolder.hasShichosonList(div)) {
+            throw new IllegalStateException("divに対して保険者情報が初期化されていません。そのため、指定の情報は取得できません。");
+        }
+        Map<RString, HokenshaSummary> map = ShichosonListHolder.getFrom(div);
+        RString selectedKey = this.div.getDdlHokenshaList().getSelectedKey();
+        if (map.containsKey(selectedKey)) {
+            return map.get(selectedKey);
+        } else {
+            return HokenshaSummary.EMPTY;
+        }
+    }
+
+    private static class ShichosonListHolder {
+
+        private static final RString KEY;
+
+        static {
+            KEY = new RString("市町村リスト");
+        }
+
+        private static Map<RString, HokenshaSummary> getFrom(HokenshaListDiv div) {
+            return Collections.unmodifiableMap(PanelSessionAccessor.get(div, KEY, Map.class));
+        }
+
+        private static void putTo(HokenshaListDiv div, Map<RString, HokenshaSummary> map) {
+            PanelSessionAccessor.put(div, KEY, new HashMap<>(map));
+        }
+
+        private static boolean hasShichosonList(HokenshaListDiv div) {
+            return PanelSessionAccessor.containsKey(div, KEY);
+        }
+
+        private ShichosonListHolder() {
+        }
+    }
+}

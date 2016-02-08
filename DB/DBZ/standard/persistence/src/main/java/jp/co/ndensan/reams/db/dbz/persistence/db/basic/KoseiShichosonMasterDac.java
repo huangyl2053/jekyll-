@@ -6,8 +6,12 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMaster;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMaster.kanyuYMD;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMaster.shichosonCode;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMaster.shichosonShokibetsuID;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMaster.shoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
@@ -16,12 +20,11 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
-import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.*;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 構成市町村マスタのデータアクセスクラスです。 <br/>

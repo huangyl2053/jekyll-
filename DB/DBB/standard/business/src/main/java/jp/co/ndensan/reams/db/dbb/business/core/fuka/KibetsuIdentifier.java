@@ -9,7 +9,6 @@ import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護期別の識別子です。
@@ -17,12 +16,13 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value
 public class KibetsuIdentifier implements Serializable {
+
     private static final long serialVersionUID = 4381442664508426243L;
 
     private final FlexibleYear 調定年度;
     private final FlexibleYear 賦課年度;
     private final TsuchishoNo 通知書番号;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
     private final RString 徴収方法;
     private final int 期;
 
@@ -37,11 +37,11 @@ public class KibetsuIdentifier implements Serializable {
      * @param 期 期
      */
     public KibetsuIdentifier(FlexibleYear 調定年度,
-FlexibleYear 賦課年度,
-TsuchishoNo 通知書番号,
-Decimal 履歴番号,
-RString 徴収方法,
-int 期) {
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号,
+            int 履歴番号,
+            RString 徴収方法,
+            int 期) {
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
         this.通知書番号 = 通知書番号;

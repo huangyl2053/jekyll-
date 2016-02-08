@@ -57,9 +57,6 @@ public class KaigoSetaiManagerTest {
             int 主キー4 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員管理連番;
             ShikibetsuCode 主キー5 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員識別コード;
             RString 主キー6 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_本人区分;
-            FlexibleYear 主キー7 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年度;
-            RString 主キー8 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税非課税区分;
-//            sut.get介護世帯(null, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8);
             sut.get介護世帯(null, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
         }
 
@@ -70,9 +67,6 @@ public class KaigoSetaiManagerTest {
             int 主キー4 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員管理連番;
             ShikibetsuCode 主キー5 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員識別コード;
             RString 主キー6 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_本人区分;
-            FlexibleYear 主キー7 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年度;
-            RString 主キー8 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税非課税区分;
-//            sut.get介護世帯(主キー1, null, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8);
             sut.get介護世帯(主キー1, null, 主キー3, 主キー4, 主キー5, 主キー6);
         }
 
@@ -83,9 +77,6 @@ public class KaigoSetaiManagerTest {
             int 主キー4 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員管理連番;
             ShikibetsuCode 主キー5 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員識別コード;
             RString 主キー6 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_本人区分;
-            FlexibleYear 主キー7 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年度;
-            RString 主キー8 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税非課税区分;
-//            sut.get介護世帯(主キー1, 主キー2, null, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8);
             sut.get介護世帯(主キー1, 主キー2, null, 主キー4, 主キー5, 主キー6);
         }
 
@@ -96,9 +87,6 @@ public class KaigoSetaiManagerTest {
             FlexibleDate 主キー3 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯把握基準年月日;
             int 主キー4 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員管理連番;
             RString 主キー6 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_本人区分;
-            FlexibleYear 主キー7 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年度;
-            RString 主キー8 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税非課税区分;
-//            sut.get介護世帯(主キー1, 主キー2, 主キー3, 主キー4, null, 主キー6, 主キー7, 主キー8);
             sut.get介護世帯(主キー1, 主キー2, 主キー3, 主キー4, null, 主キー6);
         }
 
@@ -109,50 +97,20 @@ public class KaigoSetaiManagerTest {
             FlexibleDate 主キー3 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯把握基準年月日;
             int 主キー4 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員管理連番;
             ShikibetsuCode 主キー5 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員識別コード;
-            FlexibleYear 主キー7 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年度;
-            RString 主キー8 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税非課税区分;
-//            sut.get介護世帯(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, null, 主キー7, 主キー8);
             sut.get介護世帯(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, null);
         }
 
-//        @Test(expected = NullPointerException.class)
-//        public void 引数の主キー型7にnullを指定した場合_NullPointerExceptionが発生する() {
-//            HihokenshaNo 主キー1 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_被保険者番号;
-//            RString 主キー2 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_管理識別区分;
-//            FlexibleDate 主キー3 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯把握基準年月日;
-//            int 主キー4 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員管理連番;
-//            ShikibetsuCode 主キー5 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員識別コード;
-//            RString 主キー6 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_本人区分;
-//            RString 主キー8 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税非課税区分;
-//            sut.get介護世帯(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, null, 主キー8);
-//        }
-//
-//        @Test(expected = NullPointerException.class)
-//        public void 引数の主キー型8にnullを指定した場合_NullPointerExceptionが発生する() {
-//            HihokenshaNo 主キー1 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_被保険者番号;
-//            RString 主キー2 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_管理識別区分;
-//            FlexibleDate 主キー3 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯把握基準年月日;
-//            int 主キー4 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員管理連番;
-//            ShikibetsuCode 主キー5 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員識別コード;
-//            RString 主キー6 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_本人区分;
-//            FlexibleYear 主キー7 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年度;
-//            sut.get介護世帯(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, null);
-//        }
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(HihokenshaNo.class), any(RString.class), any(FlexibleDate.class), any(int.class),
                     any(ShikibetsuCode.class), any(RString.class))).thenReturn(null);
-//                    any(ShikibetsuCode.class), any(RString.class), any(FlexibleYear.class), any(RString.class))).thenReturn(null);
             HihokenshaNo 主キー1 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_被保険者番号;
             RString 主キー2 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_管理識別区分;
             FlexibleDate 主キー3 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯把握基準年月日;
             int 主キー4 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員管理連番;
             ShikibetsuCode 主キー5 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員識別コード;
             RString 主キー6 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_本人区分;
-            FlexibleYear 主キー7 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年度;
-            RString 主キー8 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税非課税区分;
-//            KaigoSetai result = sut.get介護世帯(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8);
             KaigoSetai result = sut.get介護世帯(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
             assertThat(result, is(nullValue()));
@@ -163,16 +121,12 @@ public class KaigoSetaiManagerTest {
             DbT7014KaigoSetaiEntity entity = DbT7014KaigoSetaiEntityGenerator.createDbT7014KaigoSetaiEntity();
             when(dac.selectByKey(any(HihokenshaNo.class), any(RString.class), any(FlexibleDate.class), any(int.class),
                     any(ShikibetsuCode.class), any(RString.class))).thenReturn(entity);
-//                    any(ShikibetsuCode.class), any(RString.class), any(FlexibleYear.class), any(RString.class))).thenReturn(entity);
             HihokenshaNo 主キー1 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_被保険者番号;
             RString 主キー2 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_管理識別区分;
             FlexibleDate 主キー3 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯把握基準年月日;
             int 主キー4 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員管理連番;
             ShikibetsuCode 主キー5 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員識別コード;
             RString 主キー6 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_本人区分;
-            FlexibleYear 主キー7 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年度;
-            RString 主キー8 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税非課税区分;
-//            KaigoSetai result = sut.get介護世帯(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8);
             KaigoSetai result = sut.get介護世帯(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
             assertThat(result.get被保険者番号().value(), is(DbT7014KaigoSetaiEntityGenerator.DEFAULT_被保険者番号.value()));

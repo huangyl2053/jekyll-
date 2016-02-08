@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbx.entity.db.basic.helper;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceBunruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
@@ -21,7 +20,7 @@ public final class DbT7130KaigoServiceShuruiEntityGenerator {
     public static final FlexibleYearMonth DEFAULT_提供終了年月 = new FlexibleYearMonth("201401");
     public static final RString DEFAULT_サービス種類名称 = new RString("あいうえお");
     public static final RString DEFAULT_サービス種類略称 = new RString("あうお");
-    public static final KaigoServiceBunruiCode DEFAULT_サービス分類コード = new KaigoServiceBunruiCode(new Code("001"));
+    public static final Code DEFAULT_サービス分類コード = new Code("001");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

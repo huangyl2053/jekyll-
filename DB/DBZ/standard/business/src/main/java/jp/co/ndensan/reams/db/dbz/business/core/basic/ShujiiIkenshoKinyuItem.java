@@ -20,9 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 要介護認定主治医意見書記入項目を管理するクラスです。
  */
-public class ShujiiIkenshoKinyuItem extends 
-        ParentModelBase<ShujiiIkenshoKinyuItemIdentifier, 
-        DbT5303ShujiiIkenshoKinyuItemEntity, ShujiiIkenshoKinyuItem> implements Serializable {
+public class ShujiiIkenshoKinyuItem extends
+        ParentModelBase<ShujiiIkenshoKinyuItemIdentifier, DbT5303ShujiiIkenshoKinyuItemEntity, ShujiiIkenshoKinyuItem> implements Serializable {
 
     private final DbT5303ShujiiIkenshoKinyuItemEntity entity;
     private final ShujiiIkenshoKinyuItemIdentifier id;
@@ -118,15 +117,6 @@ public class ShujiiIkenshoKinyuItem extends
      */
     public RString get記入項目() {
         return entity.getKinyuItem();
-    }
-
-    /**
-     * 記入項目イメージ共有ファイルIDを返します。
-     *
-     * @return 記入項目イメージ共有ファイルID
-     */
-    public RDateTime get記入項目イメージ共有ファイルID() {
-        return entity.getKinyuItemImageSharedFileId();
     }
 
     /**

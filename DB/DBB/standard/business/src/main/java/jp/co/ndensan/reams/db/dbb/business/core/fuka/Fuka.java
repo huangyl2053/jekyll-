@@ -22,10 +22,10 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -49,9 +49,9 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      * @param 履歴番号 履歴番号
      */
     public Fuka(FlexibleYear 調定年度,
-FlexibleYear 賦課年度,
-TsuchishoNo 通知書番号,
-Decimal 履歴番号) {
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号,
+            int 履歴番号) {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
@@ -62,11 +62,11 @@ Decimal 履歴番号) {
         this.entity.setTsuchishoNo(通知書番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new FukaIdentifier(
-        調定年度,
-        賦課年度,
-        通知書番号,
-        履歴番号
-                );
+                調定年度,
+                賦課年度,
+                通知書番号,
+                履歴番号
+        );
         this.kibetsu = Models.create(new ArrayList<Kibetsu>());
     }
 
@@ -89,7 +89,6 @@ Decimal 履歴番号) {
         }
         this.kibetsu = Models.create(kibetsuiList);
     }
-
 
     /**
      * シリアライズ、ビルダー用コンストラクタです。
@@ -139,7 +138,7 @@ Decimal 履歴番号) {
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -175,7 +174,7 @@ Decimal 履歴番号) {
      *
      * @return 世帯員数
      */
-    public Decimal get世帯員数() {
+    public int get世帯員数() {
         return entity.getSetaiInsu();
     }
 
@@ -391,8 +390,8 @@ Decimal 履歴番号) {
      *
      * @return 調定日時
      */
-    public RDateTime get調定日時() {
-        return entity.getChoteiTimestamp();
+    public YMDHMS get調定日時() {
+        return entity.getChoteiNichiji();
     }
 
     /**
@@ -481,7 +480,7 @@ Decimal 履歴番号) {
      *
      * @return 徴収方法履歴番号
      */
-    public Decimal get徴収方法履歴番号() {
+    public int get徴収方法履歴番号() {
         return entity.getChoshuHohoRirekiNo();
     }
 
@@ -490,8 +489,8 @@ Decimal 履歴番号) {
      *
      * @return 異動基準日時
      */
-    public RDateTime get異動基準日時() {
-        return entity.getIdoKijunTimestamp();
+    public YMDHMS get異動基準日時() {
+        return entity.getIdoKijunNichiji();
     }
 
     /**
@@ -547,7 +546,6 @@ Decimal 履歴番号) {
 //    public Decimal get普徴歳出還付額() {
 //        return entity.getFuSaishutsuKampuGaku();
 //    }
-
     /**
      * {@link DbT2002FukaEntity}のクローンを返します。
      *
@@ -647,6 +645,7 @@ Decimal 履歴番号) {
 
     private static final class _SerializationProxy implements Serializable {
 
+        private static final long serialVersionUID = 3115036041548252859L;
         private final DbT2002FukaEntity entity;
         private final FukaIdentifier id;
         private final Models<KibetsuIdentifier, Kibetsu> kibetsu;
@@ -664,6 +663,7 @@ Decimal 履歴番号) {
         private Object readResolve() {
             return new Fuka(this.entity, this.id, this.kibetsu);
         }
+
     }
 
     /**
@@ -697,5 +697,4 @@ Decimal 履歴番号) {
         }
         return true;
     }
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

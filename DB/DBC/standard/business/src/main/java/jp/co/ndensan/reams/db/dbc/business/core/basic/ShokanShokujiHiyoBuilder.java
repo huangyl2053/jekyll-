@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanShokujiHiyo}の編集を行うビルダークラスです。
@@ -101,14 +100,26 @@ public class ShokanShokujiHiyoBuilder {
     }
 
     /**
-     * 履歴番号を設定します。
+     * 明細番号を設定します。
      *
-     * @param 履歴番号 履歴番号
+     * @param 明細番号 明細番号
      * @return {@link ShokanShokujiHiyoBuilder}
      */
-    public ShokanShokujiHiyoBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
+    public ShokanShokujiHiyoBuilder set明細番号(RString 明細番号) {
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        entity.setMeisaiNo(明細番号);
+        return this;
+    }
+
+    /**
+     * 連番を設定します。
+     *
+     * @param 連番 連番
+     * @return {@link ShokanShokujiHiyoBuilder}
+     */
+    public ShokanShokujiHiyoBuilder set連番(RString 連番) {
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+        entity.setRenban(連番);
         return this;
     }
 
@@ -118,7 +129,7 @@ public class ShokanShokujiHiyoBuilder {
      * @param 基本提供日数 基本提供日数
      * @return {@link ShokanShokujiHiyoBuilder}
      */
-    public ShokanShokujiHiyoBuilder set基本提供日数(Decimal 基本提供日数) {
+    public ShokanShokujiHiyoBuilder set基本提供日数(int 基本提供日数) {
         requireNonNull(基本提供日数, UrSystemErrorMessages.値がnull.getReplacedMessage("基本提供日数"));
         entity.setKihonTeikyoNissu(基本提供日数);
         return this;
@@ -130,7 +141,7 @@ public class ShokanShokujiHiyoBuilder {
      * @param 基本提供単価 基本提供単価
      * @return {@link ShokanShokujiHiyoBuilder}
      */
-    public ShokanShokujiHiyoBuilder set基本提供単価(Decimal 基本提供単価) {
+    public ShokanShokujiHiyoBuilder set基本提供単価(int 基本提供単価) {
         requireNonNull(基本提供単価, UrSystemErrorMessages.値がnull.getReplacedMessage("基本提供単価"));
         entity.setKihonTeikyoTanka(基本提供単価);
         return this;
@@ -154,7 +165,7 @@ public class ShokanShokujiHiyoBuilder {
      * @param 特別提供日数 特別提供日数
      * @return {@link ShokanShokujiHiyoBuilder}
      */
-    public ShokanShokujiHiyoBuilder set特別提供日数(Decimal 特別提供日数) {
+    public ShokanShokujiHiyoBuilder set特別提供日数(int 特別提供日数) {
         requireNonNull(特別提供日数, UrSystemErrorMessages.値がnull.getReplacedMessage("特別提供日数"));
         entity.setTokubetsuTeikyoNissu(特別提供日数);
         return this;
@@ -166,7 +177,7 @@ public class ShokanShokujiHiyoBuilder {
      * @param 特別提供単価 特別提供単価
      * @return {@link ShokanShokujiHiyoBuilder}
      */
-    public ShokanShokujiHiyoBuilder set特別提供単価(Decimal 特別提供単価) {
+    public ShokanShokujiHiyoBuilder set特別提供単価(int 特別提供単価) {
         requireNonNull(特別提供単価, UrSystemErrorMessages.値がnull.getReplacedMessage("特別提供単価"));
         entity.setTokubetsuTeikyoTanka(特別提供単価);
         return this;
@@ -190,7 +201,7 @@ public class ShokanShokujiHiyoBuilder {
      * @param 食事提供延べ日数 食事提供延べ日数
      * @return {@link ShokanShokujiHiyoBuilder}
      */
-    public ShokanShokujiHiyoBuilder set食事提供延べ日数(Decimal 食事提供延べ日数) {
+    public ShokanShokujiHiyoBuilder set食事提供延べ日数(int 食事提供延べ日数) {
         requireNonNull(食事提供延べ日数, UrSystemErrorMessages.値がnull.getReplacedMessage("食事提供延べ日数"));
         entity.setShokujiTeikyoTotalNissu(食事提供延べ日数);
         return this;
@@ -238,7 +249,7 @@ public class ShokanShokujiHiyoBuilder {
      * @param 標準負担額_日額 標準負担額_日額
      * @return {@link ShokanShokujiHiyoBuilder}
      */
-    public ShokanShokujiHiyoBuilder set標準負担額_日額(Decimal 標準負担額_日額) {
+    public ShokanShokujiHiyoBuilder set標準負担額_日額(int 標準負担額_日額) {
         requireNonNull(標準負担額_日額, UrSystemErrorMessages.値がnull.getReplacedMessage("標準負担額_日額"));
         entity.setNichigakuHyojunFutangaku(標準負担額_日額);
         return this;

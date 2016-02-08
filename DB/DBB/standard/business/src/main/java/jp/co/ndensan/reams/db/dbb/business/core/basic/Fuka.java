@@ -23,10 +23,10 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -51,7 +51,7 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
     public Fuka(FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
@@ -131,7 +131,7 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -167,7 +167,7 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      *
      * @return 世帯員数
      */
-    public Decimal get世帯員数() {
+    public int get世帯員数() {
         return entity.getSetaiInsu();
     }
 
@@ -386,8 +386,8 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      *
      * @return 調定日時
      */
-    public RDateTime get調定日時() {
-        return entity.getChoteiTimestamp();
+    public YMDHMS get調定日時() {
+        return entity.getChoteiNichiji();
     }
 
     /**
@@ -480,7 +480,7 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      *
      * @return 徴収方法履歴番号
      */
-    public Decimal get徴収方法履歴番号() {
+    public int get徴収方法履歴番号() {
         return entity.getChoshuHohoRirekiNo();
     }
 
@@ -489,8 +489,8 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      *
      * @return 異動基準日時
      */
-    public RDateTime get異動基準日時() {
-        return entity.getIdoKijunTimestamp();
+    public YMDHMS get異動基準日時() {
+        return entity.getIdoKijunNichiji();
     }
 
     /**

@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払請求社会福祉法人軽減額の識別子です。
@@ -25,8 +24,8 @@ public class ShokanShakaiFukushiHojinKeigengakuIdentifier implements Serializabl
     private final RString 整理番号;
     private final JigyoshaNo 事業者番号;
     private final RString 様式番号;
-    private final RString 順次番号;
-    private final Decimal 履歴番号;
+    private final RString 明細番号;
+    private final RString 連番;
 
     /**
      * コンストラクタです。
@@ -36,22 +35,22 @@ public class ShokanShakaiFukushiHojinKeigengakuIdentifier implements Serializabl
      * @param 整理番号 整理番号
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
-     * @param 順次番号 順次番号
-     * @param 履歴番号 履歴番号
+     * @param 明細番号 明細番号
+     * @param 連番 連番
      */
     public ShokanShakaiFukushiHojinKeigengakuIdentifier(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             JigyoshaNo 事業者番号,
             RString 様式番号,
-            RString 順次番号,
-            Decimal 履歴番号) {
+            RString 明細番号,
+            RString 連番) {
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;
         this.整理番号 = 整理番号;
         this.事業者番号 = 事業者番号;
         this.様式番号 = 様式番号;
-        this.順次番号 = 順次番号;
-        this.履歴番号 = 履歴番号;
+        this.明細番号 = 明細番号;
+        this.連番 = 連番;
     }
 }
