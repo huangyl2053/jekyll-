@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X;
 
-import jp.co.ndensan.reams.ur.urz.business.report.IReportBuilder;
+import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 被保険者証を、印字可能な状態にできることを示すインターフェースです。

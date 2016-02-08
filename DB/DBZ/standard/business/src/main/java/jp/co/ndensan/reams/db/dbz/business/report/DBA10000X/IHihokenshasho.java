@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X;
 
-import jp.co.ndensan.reams.ur.urz.entity.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 
 /**
  * 被保険者証の帳票ソースであることを示すインターフェースです。
