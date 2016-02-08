@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1007KyokaisoHokenryoDankaiDac;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1007KyokaisoHokenryoDankaiEntity;
@@ -13,7 +12,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1007KyokaisoHoke
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -197,7 +195,7 @@ public class DbT1007KyokaisoHokenryoDankaiDacTest extends DbzTestDacBase {
 
         public static void insert(
                 HihokenshaNo 被保険者番号,
-                Decimal 履歴番号,
+                int 履歴番号,
                 FlexibleYearMonth 適用開始年月) {
             DbT1007KyokaisoHokenryoDankaiEntity entity = DbT1007KyokaisoHokenryoDankaiEntityGenerator.createDbT1007KyokaisoHokenryoDankaiEntity();
             entity.setHihokenshaNo(被保険者番号);

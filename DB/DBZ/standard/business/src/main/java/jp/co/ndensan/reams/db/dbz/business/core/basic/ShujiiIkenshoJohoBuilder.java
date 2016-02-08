@@ -136,6 +136,18 @@ public class ShujiiIkenshoJohoBuilder {
     }
 
     /**
+     * 主治医意見書読取年月日を設定します。
+     *
+     * @param 主治医意見書読取年月日 主治医意見書読取年月日
+     * @return {@link ShujiiIkenshoJohoBuilder}
+     */
+    public ShujiiIkenshoJohoBuilder set主治医意見書読取年月日(FlexibleDate 主治医意見書読取年月日) {
+        requireNonNull(主治医意見書読取年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医意見書読取年月日"));
+        entity.setIkenshoReadYMD(主治医意見書読取年月日);
+        return this;
+    }
+
+    /**
      * 意見書作成回数区分を設定します。
      *
      * @param 意見書作成回数区分 意見書作成回数区分

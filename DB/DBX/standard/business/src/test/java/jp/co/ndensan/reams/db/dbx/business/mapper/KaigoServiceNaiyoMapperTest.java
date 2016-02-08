@@ -12,9 +12,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.IKaigoServiceCode;
 import jp.co.ndensan.reams.db.dbx.business.core.IKaigoServiceNaiyo;
 import jp.co.ndensan.reams.db.dbx.business.core.IKaigoServiceTani;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuSanteiTani;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuShikibetsu;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
@@ -83,8 +81,8 @@ public class KaigoServiceNaiyoMapperTest extends DbxTestBase {
             IKaigoServiceTani iKaigoServiceTani = mock(IKaigoServiceTani.class);
             when(kaigoServiceNaiyo.get介護サービス単位()).thenReturn(iKaigoServiceTani);
             when(iKaigoServiceTani.get単位数()).thenReturn(1);
-            when(iKaigoServiceTani.get単位数算定単位()).thenReturn(new TanisuSanteiTani(new Code(new RString("23"))));
-            when(iKaigoServiceTani.get単位数識別()).thenReturn(new TanisuShikibetsu(new Code(new RString("23"))));
+            when(iKaigoServiceTani.get単位数算定単位()).thenReturn(23);
+            when(iKaigoServiceTani.get単位数識別()).thenReturn(new Code("23"));
             assertThat(KaigoServiceNaiyoMapper.to介護サービス内容Entity(kaigoServiceNaiyo).getTaniSu(), is(1));
         }
 
@@ -112,10 +110,10 @@ public class KaigoServiceNaiyoMapperTest extends DbxTestBase {
 
     private static DbT7131KaigoServiceNaiyouEntity createEntity() {
         entity = new DbT7131KaigoServiceNaiyouEntity();
-        entity.setServiceShuruiCode(new KaigoServiceShuruiCode(new RString("21")));
-        entity.setServiceKoumokuCode(new RString("serviceCode"));
+        entity.setServiceShuruiCd(new KaigoServiceShuruiCode(new RString("21")));
+        entity.setServiceKoumokuCd(new RString("serviceCode"));
         entity.setTaniSu(1);
-        entity.setTanisuShikibetsuCode(new TanisuShikibetsu(new RString("202")));
+        entity.setTanisuShikibetsuCode(new Code("202"));
         entity.setTeikyoKaishiYM(FlexibleYearMonth.MIN);
         entity.setTeikyoShuryoYM(FlexibleYearMonth.MAX);
         entity.setRirekiNo(Decimal.ONE);

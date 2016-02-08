@@ -6,10 +6,8 @@ package jp.co.ndensan.reams.db.dbx.business.core;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceBunruiCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuSanteiTani;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuShikibetsu;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -44,10 +42,10 @@ public class _KaigoServiceTest extends DbxTestBase {
 
         kaigoServiceShurui = new _KaigoServiceShurui(new KaigoServiceShuruiCode(new RString("01")),
                 new Range<>(new FlexibleYearMonth("201304"), new FlexibleYearMonth("201305")),
-                new RString("種類名称"), new RString("種類名称略称"), new KaigoServiceBunruiCode(new RString("001")));
-        介護サービス単位1 = new _KaigoServiceTani(3, new TanisuShikibetsu(new RString("001")), new TanisuSanteiTani(new RString("3000")));
-        介護サービス単位2 = new _KaigoServiceTani(3, new TanisuShikibetsu(new RString("002")), new TanisuSanteiTani(new RString("4000")));
-        介護サービス単位3 = new _KaigoServiceTani(3, new TanisuShikibetsu(new RString("003")), new TanisuSanteiTani(new RString("5000")));
+                new RString("種類名称"), new RString("種類名称略称"), new Code("001"));
+        介護サービス単位1 = new _KaigoServiceTani(3, new Code("001"), 3000);
+        介護サービス単位2 = new _KaigoServiceTani(3, new Code("002"), 4000);
+        介護サービス単位3 = new _KaigoServiceTani(3, new Code("003"), 5000);
         KaigoServiceNaiyo1 = new _KaigoServiceNaiyo(
                 new _KaigoServiceCode(new KaigoServiceShuruiCode(new RString("01")), new RString("2345")),
                 new Range<>(new FlexibleYearMonth("201304"), new FlexibleYearMonth("201305")),

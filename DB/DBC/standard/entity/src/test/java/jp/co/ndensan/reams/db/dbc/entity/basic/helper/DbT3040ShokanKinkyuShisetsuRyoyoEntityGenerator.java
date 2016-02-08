@@ -4,13 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3040ShokanKinkyuShisetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3040ShokanKinkyuShisetsuRyoyoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払請求緊急時施設療養エンティティのテスト用インスタンスを作成する補助クラスです。
@@ -22,20 +21,20 @@ public final class DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator {
     public static final RString DEFAULT_整理番号 = new RString("Data");
     public static final JigyoshaNo DEFAULT_事業者番号 = new JigyoshaNo("1");
     public static final RString DEFAULT_様式番号 = new RString("Data");
-    public static final RString DEFAULT_順次番号 = new RString("Data");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final RString DEFAULT_明細番号 = new RString("Data");
+    public static final RString DEFAULT_連番 = new RString("0");
     public static final RString DEFAULT_緊急時傷病名１ = new RString("Data");
     public static final RString DEFAULT_緊急時傷病名２ = new RString("Data");
     public static final RString DEFAULT_緊急時傷病名３ = new RString("Data");
     public static final FlexibleDate DEFAULT_緊急時治療開始年月日１ = new FlexibleDate("19900101");
     public static final FlexibleDate DEFAULT_緊急時治療開始年月日２ = new FlexibleDate("19900101");
     public static final FlexibleDate DEFAULT_緊急時治療開始年月日３ = new FlexibleDate("19900101");
-    public static final Decimal DEFAULT_往診日数 = new Decimal(0);
+    public static final int DEFAULT_往診日数 = 0;
     public static final RString DEFAULT_往診医療機関名 = new RString("Data");
-    public static final Decimal DEFAULT_通院日数 = new Decimal(0);
+    public static final int DEFAULT_通院日数 = 0;
     public static final RString DEFAULT_通院医療機関名 = new RString("Data");
     public static final int DEFAULT_緊急時治療管理単位数 = 1;
-    public static final Decimal DEFAULT_緊急時治療管理日数 = new Decimal(0);
+    public static final int DEFAULT_緊急時治療管理日数 = 0;
     public static final int DEFAULT_緊急時治療管理小計 = 1;
     public static final int DEFAULT_リハビリテーション単位数 = 1;
     public static final int DEFAULT_処置単位数 = 1;
@@ -77,8 +76,8 @@ public final class DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator {
         entity.setSeiriNo(DEFAULT_整理番号);
         entity.setJigyoshaNo(DEFAULT_事業者番号);
         entity.setYoshikiNo(DEFAULT_様式番号);
-        entity.setJunjiNo(DEFAULT_順次番号);
-        entity.setRirekiNo(DEFAULT_履歴番号);
+        entity.setMeisaiNo(DEFAULT_明細番号);
+        entity.setRenban(DEFAULT_連番);
         entity.setKinkyuShobyoName1(DEFAULT_緊急時傷病名１);
         entity.setKinkyuShobyoName2(DEFAULT_緊急時傷病名２);
         entity.setKinkyuShobyoName3(DEFAULT_緊急時傷病名３);

@@ -12,12 +12,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.SanteiState;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 賦課根拠・期割Divのコントローラです。
@@ -73,10 +72,10 @@ public class FukakonkyoAndKiwari {
         Fuka model = new Fuka(FlexibleYear.EMPTY,
                 FlexibleYear.EMPTY,
                 TsuchishoNo.EMPTY,
-                Decimal.ZERO);
+                0);
         FukaShokaiKey key = new FukaShokaiKey(FlexibleYear.EMPTY, FlexibleYear.EMPTY, TsuchishoNo.EMPTY,
-                Decimal.ZERO, HihokenshaNo.EMPTY, FlexibleDate.MAX,
-                RString.EMPTY, RDateTime.MAX, SanteiState.仮算定,
+                0, HihokenshaNo.EMPTY, FlexibleDate.MAX,
+                RString.EMPTY, YMDHMS.now(), SanteiState.仮算定,
                 true, true, AtenaMeisho.EMPTY);
 //        Fuka model = fukaFinder.find賦課直近(
 //                new ChoteiNendo(fukaTaishoshaKey.get調定年度()),
@@ -102,10 +101,10 @@ public class FukakonkyoAndKiwari {
         Fuka model = new Fuka(FlexibleYear.EMPTY,
                 FlexibleYear.EMPTY,
                 TsuchishoNo.EMPTY,
-                Decimal.ZERO);
+                0);
         FukaShokaiKey key = new FukaShokaiKey(FlexibleYear.EMPTY, FlexibleYear.EMPTY, TsuchishoNo.EMPTY,
-                Decimal.ZERO, HihokenshaNo.EMPTY, FlexibleDate.MAX,
-                RString.EMPTY, RDateTime.MAX, SanteiState.仮算定,
+                0, HihokenshaNo.EMPTY, FlexibleDate.MAX,
+                RString.EMPTY, YMDHMS.now(), SanteiState.仮算定,
                 true, true, AtenaMeisho.EMPTY);
 //        Fuka model = FukaShokaiController.getFukaModelByFukaShokaiKey();
 //

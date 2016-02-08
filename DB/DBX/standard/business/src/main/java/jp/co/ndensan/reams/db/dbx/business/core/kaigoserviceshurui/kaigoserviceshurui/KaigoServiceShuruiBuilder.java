@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservice
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouIdentifier;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceBunruiCode;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShuruiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -88,7 +88,7 @@ public class KaigoServiceShuruiBuilder {
      * @param サービス分類コード サービス分類コード
      * @return {@link KaigoServiceShuruiBuilder}
      */
-    public KaigoServiceShuruiBuilder setサービス分類コード(KaigoServiceBunruiCode サービス分類コード) {
+    public KaigoServiceShuruiBuilder setサービス分類コード(Code サービス分類コード) {
         requireNonNull(サービス分類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス分類コード"));
         entity.setServiceBunrruicode(サービス分類コード);
         return this;

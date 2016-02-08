@@ -18,6 +18,10 @@ teikeibunMojiSize,varchar,RString,,,,,定型文文字サイズ,A
 kozaMaskUmu,bool,boolean,,,,,口座マスク有無,A
 kozaMeigininKanaYusenKubun,varchar,RString,,,,,口座名義人カナ優先区分,A
 daikoPrintUmu,bool,boolean,,,,,代行プリント有無,A
+denshiKoinInjiUmu,bool,boolean,,,,,電子公印印字有無,A
+shuchoMeiInjiIchi,varchar,RString,,,,,首長名印字位置,A
+koinShoryakuInjiUmu,bool,boolean,,,,,公印省略印字有無,A
+koinMojiretsuInjiUmu,bool,boolean,,,,,公印文字列印字有無,A
 chikuHyoji1,varchar,RString,,,,,地区表示1,A
 chikuHyoji2,varchar,RString,,,,,地区表示2,A
 chikuHyoji3,varchar,RString,,,,,地区表示3,A

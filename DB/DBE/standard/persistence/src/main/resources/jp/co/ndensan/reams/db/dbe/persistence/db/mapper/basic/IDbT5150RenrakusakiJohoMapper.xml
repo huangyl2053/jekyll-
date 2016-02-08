@@ -26,7 +26,7 @@
          "DbT5150RenrakusakiJoho"."updateCount" as "dbT5150RenrakusakiJoho_updateCount",
          "DbT5150RenrakusakiJoho"."lastUpdateTimestamp" as "dbT5150RenrakusakiJoho_lastUpdateTimestamp",
          "DbT5150RenrakusakiJoho"."lastUpdateReamsLoginId" as "dbT5150RenrakusakiJoho_lastUpdateReamsLoginId",
-         "DbT5150RenrakusakiJoho"."renrakusakiKubun" as "dbT5150RenrakusakiJoho_renrakusakiKubun",
+         "DbT5150RenrakusakiJoho"."renrakusakiKubunNo" as "dbT5150RenrakusakiJoho_renrakusakiKubunNo",
          "DbT5150RenrakusakiJoho"."shishoCode" as "dbT5150RenrakusakiJoho_shishoCode",
          "DbT5150RenrakusakiJoho"."renrakusakiShimei" as "dbT5150RenrakusakiJoho_renrakusakiShimei",
          "DbT5150RenrakusakiJoho"."renrakusakiKanaSimei" as "dbT5150RenrakusakiJoho_renrakusakiKanaSimei",
@@ -51,7 +51,7 @@
         <result property="updateCount" column="dbT5150RenrakusakiJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT5150RenrakusakiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5150RenrakusakiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="renrakusakiKubun" column="dbT5150RenrakusakiJoho_renrakusakiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="renrakusakiKubunNo" column="dbT5150RenrakusakiJoho_renrakusakiKubunNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="shishoCode" column="dbT5150RenrakusakiJoho_shishoCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShishoCodeTypeHandler"/>
         <result property="renrakusakiShimei" column="dbT5150RenrakusakiJoho_renrakusakiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="renrakusakiKanaSimei" column="dbT5150RenrakusakiJoho_renrakusakiKanaSimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>

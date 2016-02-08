@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3043ShokanShokujiHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3043ShokanShokujiHiyoEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払請求食事費用を管理するクラスです。
@@ -38,34 +37,39 @@ extends ModelBase<ShokanShokujiHiyoIdentifier,
      * @param 整理番号 整理番号
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
-     * @param 履歴番号 履歴番号
+     * @param 明細番号 明細番号
+     * @param 連番 連番
      */
     public ShokanShokujiHiyo(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             JigyoshaNo 事業者番号,
             RString 様式番号,
-            Decimal 履歴番号) {
+            RString 明細番号,
+            RString 連番) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
         this.entity = new DbT3043ShokanShokujiHiyoEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
         this.entity.setSeiriNp(整理番号);
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
-        this.entity.setRirekiNo(履歴番号);
+        this.entity.setMeisaiNo(明細番号);
+        this.entity.setRenban(連番);
         this.id = new ShokanShokujiHiyoIdentifier(
                 被保険者番号,
                 サービス提供年月,
                 整理番号,
                 事業者番号,
                 様式番号,
-                履歴番号
+                明細番号,
+                連番
         );
     }
 
@@ -83,7 +87,8 @@ extends ModelBase<ShokanShokujiHiyoIdentifier,
                 entity.getSeiriNp(),
                 entity.getJigyoshaNo(),
                 entity.getYoshikiNo(),
-                entity.getRirekiNo());
+                entity.getMeisaiNo(),
+                entity.getRenban());
     }
 
     /**
@@ -147,20 +152,30 @@ extends ModelBase<ShokanShokujiHiyoIdentifier,
     }
 
     /**
-     * 履歴番号を返します。
+     * 明細番号を返します。
      *
-     * @return 履歴番号
+     * @return 明細番号
      */
-    public Decimal get履歴番号() {
-        return entity.getRirekiNo();
+    public RString get明細番号() {
+        return entity.getMeisaiNo();
     }
+
+    /**
+     * 連番を返します。
+     *
+     * @return 連番
+     */
+    public RString get連番() {
+        return entity.getRenban();
+    }
+
 
     /**
      * 基本提供日数を返します。
      *
      * @return 基本提供日数
      */
-    public Decimal get基本提供日数() {
+    public int get基本提供日数() {
         return entity.getKihonTeikyoNissu();
     }
 
@@ -169,7 +184,7 @@ extends ModelBase<ShokanShokujiHiyoIdentifier,
      *
      * @return 基本提供単価
      */
-    public Decimal get基本提供単価() {
+    public int get基本提供単価() {
         return entity.getKihonTeikyoTanka();
     }
 
@@ -187,7 +202,7 @@ extends ModelBase<ShokanShokujiHiyoIdentifier,
      *
      * @return 特別提供日数
      */
-    public Decimal get特別提供日数() {
+    public int get特別提供日数() {
         return entity.getTokubetsuTeikyoNissu();
     }
 
@@ -196,7 +211,7 @@ extends ModelBase<ShokanShokujiHiyoIdentifier,
      *
      * @return 特別提供単価
      */
-    public Decimal get特別提供単価() {
+    public int get特別提供単価() {
         return entity.getTokubetsuTeikyoTanka();
     }
 
@@ -214,7 +229,7 @@ extends ModelBase<ShokanShokujiHiyoIdentifier,
      *
      * @return 食事提供延べ日数
      */
-    public Decimal get食事提供延べ日数() {
+    public int get食事提供延べ日数() {
         return entity.getShokujiTeikyoTotalNissu();
     }
 
@@ -250,7 +265,7 @@ extends ModelBase<ShokanShokujiHiyoIdentifier,
      *
      * @return 標準負担額_日額
      */
-    public Decimal get標準負担額_日額() {
+    public int get標準負担額_日額() {
         return entity.getNichigakuHyojunFutangaku();
     }
 

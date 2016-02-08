@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3040ShokanKinkyuShisetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3040ShokanKinkyuShisetsuRyoyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -12,7 +12,6 @@ import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.seria
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -40,7 +39,7 @@ public class ShokanKinkyuShisetsuRyoyoTest extends DbcTestBase {
     private static JigyoshaNo 主キー名4;
     private static RString 主キー名5;
     private static RString 主キー名6;
-    private static Decimal 主キー名7;
+    private static RString 主キー名7;
 
     @BeforeClass
     public static void setUpClass() {
@@ -50,8 +49,8 @@ public class ShokanKinkyuShisetsuRyoyoTest extends DbcTestBase {
         主キー名3 = DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_整理番号;
         主キー名4 = DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_事業者番号;
         主キー名5 = DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_様式番号;
-        主キー名6 = DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_順次番号;
-        主キー名7 = DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_履歴番号;
+        主キー名6 = DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_明細番号;
+        主キー名7 = DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_連番;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -156,13 +155,13 @@ public class ShokanKinkyuShisetsuRyoyoTest extends DbcTestBase {
         }
 
         @Test
-        public void get順次番号は_entityが持つ順次番号を返す() {
-            assertThat(sut.get順次番号(), is(ShokanKinkyuShisetsuRyoyoEntity.getJunjiNo()));
+        public void get明細番号は_entityが持つ明細番号を返す() {
+            assertThat(sut.get明細番号(), is(ShokanKinkyuShisetsuRyoyoEntity.getMeisaiNo()));
         }
 
         @Test
-        public void get履歴番号は_entityが持つ履歴番号を返す() {
-            assertThat(sut.get履歴番号(), is(ShokanKinkyuShisetsuRyoyoEntity.getRirekiNo()));
+        public void get連番は_entityが持つ連番を返す() {
+            assertThat(sut.get連番(), is(ShokanKinkyuShisetsuRyoyoEntity.getRenban()));
         }
 
         @Test

@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.IKaigoServiceShurui;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceBunruiCode;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShuruiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -71,7 +71,7 @@ public class KaigoServiceShuruiMapperTest extends DbxTestBase {
             when(kaigoServiceShurui.get提供年月()).thenReturn(new Range(FlexibleYearMonth.MIN, FlexibleYearMonth.MAX));
             when(kaigoServiceShurui.getサービス種類名称()).thenReturn(new RString("種類名称"));
             when(kaigoServiceShurui.getサービス種類名称略称()).thenReturn(new RString("種類名称略称"));
-            when(kaigoServiceShurui.getサービス分類()).thenReturn(new KaigoServiceBunruiCode(new RString("001")));
+            when(kaigoServiceShurui.getサービス分類()).thenReturn(new Code("001"));
             assertThat(KaigoServiceShuruiMapper.to介護サービス種類Entity(kaigoServiceShurui).getServiceShuruiMeisho(), is(new RString("種類名称")));
         }
 
@@ -104,7 +104,7 @@ public class KaigoServiceShuruiMapperTest extends DbxTestBase {
         entity.setTeikyoshuryoYM(FlexibleYearMonth.MAX);
         entity.setServiceShuruiMeisho(new RString("種類名称"));
         entity.setServiceShuruiRyakusho(new RString("種類名称略称"));
-        entity.setServiceBunrruicode(new KaigoServiceBunruiCode(new RString("001")));
+        entity.setServiceBunrruicode(new Code("001"));
         return entity;
     }
 }

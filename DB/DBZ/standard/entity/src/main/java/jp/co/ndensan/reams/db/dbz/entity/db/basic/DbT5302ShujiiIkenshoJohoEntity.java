@@ -41,6 +41,7 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
     private RString shujiiCode;
     private FlexibleDate ikenshoJuryoYMD;
     private FlexibleDate ikenshoKinyuYMD;
+    private FlexibleDate ikenshoReadYMD;
     private Code ikenshoSakuseiKaisuKubun;
     private Code zaitakuShisetsuKubun;
     private boolean ikenshoDoiFlag;
@@ -284,6 +285,29 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
      */
     public void setIkenshoKinyuYMD(@Nonnull FlexibleDate ikenshoKinyuYMD) {
         this.ikenshoKinyuYMD = ikenshoKinyuYMD;
+    }
+
+    /**
+     * 主治医意見書読取年月日のgetメソッドです。
+     * <br/>
+     * <br/>意見書読取日（処理）
+     *
+     * @return 主治医意見書読取年月日
+     */
+    @CheckForNull
+    public FlexibleDate getIkenshoReadYMD() {
+        return ikenshoReadYMD;
+    }
+
+    /**
+     * 主治医意見書読取年月日のsetメソッドです。
+     * <br/>
+     * <br/>意見書読取日（処理）
+     *
+     * @param ikenshoReadYMD 主治医意見書読取年月日
+     */
+    public void setIkenshoReadYMD(FlexibleDate ikenshoReadYMD) {
+        this.ikenshoReadYMD = ikenshoReadYMD;
     }
 
     /**
@@ -985,6 +1009,7 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
         this.shujiiCode = entity.shujiiCode;
         this.ikenshoJuryoYMD = entity.ikenshoJuryoYMD;
         this.ikenshoKinyuYMD = entity.ikenshoKinyuYMD;
+        this.ikenshoReadYMD = entity.ikenshoReadYMD;
         this.ikenshoSakuseiKaisuKubun = entity.ikenshoSakuseiKaisuKubun;
         this.zaitakuShisetsuKubun = entity.zaitakuShisetsuKubun;
         this.ikenshoDoiFlag = entity.ikenshoDoiFlag;
@@ -1025,7 +1050,7 @@ public class DbT5302ShujiiIkenshoJohoEntity extends DbTableEntityBase<DbT5302Shu
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, ikenshoIraiRirekiNo, koroshoIfShikibetsuCode, ikenshoIraiKubun, shujiiIryoKikanCode, shujiiCode, ikenshoJuryoYMD, ikenshoKinyuYMD, ikenshoSakuseiKaisuKubun, zaitakuShisetsuKubun, ikenshoDoiFlag, saishuShinryoYMD, existTakaJushinFlag, existNaikaJushinFlag, existSeishinkaJushinFlag, existGekaJushinFlag, existSeikeigekaJushinFlag, existNoshinkeigekaJushinFlag, existHifukaJushinFlag, existHinyokikaJushinFlag, existFujinkaJushinFlag, existJibiinkokaJushinFlag, existRehabilitationkaJushinFlag, existShikaJushinFlag, existGankaJushinFlag, existSonotaJushinkaFlag, sonotaJushinKaMei, shindamMei1, hasshoYMD1, shindamMei2, hasshoYMD2, shindamMei3, hasshoYMD3, anteisei, fuanteiJokyo, chiryoNaiyo, tokkiJiko, nijiHanteiKekkaRenrakuFlag, ikenshoMemo);
+        return super.toMd5(shinseishoKanriNo, ikenshoIraiRirekiNo, koroshoIfShikibetsuCode, ikenshoIraiKubun, shujiiIryoKikanCode, shujiiCode, ikenshoJuryoYMD, ikenshoKinyuYMD, ikenshoReadYMD, ikenshoSakuseiKaisuKubun, zaitakuShisetsuKubun, ikenshoDoiFlag, saishuShinryoYMD, existTakaJushinFlag, existNaikaJushinFlag, existSeishinkaJushinFlag, existGekaJushinFlag, existSeikeigekaJushinFlag, existNoshinkeigekaJushinFlag, existHifukaJushinFlag, existHinyokikaJushinFlag, existFujinkaJushinFlag, existJibiinkokaJushinFlag, existRehabilitationkaJushinFlag, existShikaJushinFlag, existGankaJushinFlag, existSonotaJushinkaFlag, sonotaJushinKaMei, shindamMei1, hasshoYMD1, shindamMei2, hasshoYMD2, shindamMei3, hasshoYMD3, anteisei, fuanteiJokyo, chiryoNaiyo, tokkiJiko, nijiHanteiKekkaRenrakuFlag, ikenshoMemo);
     }
 
 // </editor-fold>

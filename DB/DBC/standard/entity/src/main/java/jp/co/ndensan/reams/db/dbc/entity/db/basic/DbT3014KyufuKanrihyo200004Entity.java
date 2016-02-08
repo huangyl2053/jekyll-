@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -20,8 +22,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
  * 給付管理票200004テーブルのエンティティクラスです。
  */
 public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014KyufuKanrihyo200004Entity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3014KyufuKanrihyo200004");
 
@@ -38,19 +39,16 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
-    private HokenshaNo shokisaiHokenshaNo;
-    @PrimaryKey
-    private JigyoshaNo kyotakushienJigyoshoNo;
-    @PrimaryKey
-    private RString kyufuKanrihyoSakuseiKubunCode;
-    @PrimaryKey
-    private FlexibleDate kyufuKanrihyoSakuseiYMD;
+    private HihokenshaNo hiHokenshaNo;
     @PrimaryKey
     private RString kyufuKanrihyoShubetsuKubunCode;
     @PrimaryKey
     private RString kyufuKanrihyoMeisaiLineNo;
+    private HokenshaNo shokisaiHokenshaNo;
+    private JigyoshaNo kyotakushienJigyoshoNo;
+    private RString kyufuKanrihyoSakuseiKubunCode;
+    private FlexibleDate kyufuKanrihyoSakuseiYMD;
     private HokenshaNo hokenshaNo;
-    private HihokenshaNo hiHokenshaNo;
     private FlexibleDate hiHokenshaUmareYMD;
     private RString seibetsuCode;
     private RString yoKaigoJotaiKubunCode;
@@ -71,7 +69,7 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -80,7 +78,7 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -89,7 +87,7 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -98,16 +96,17 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -116,7 +115,7 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * 審査年月のgetメソッドです。
-     *
+     * 
      * @return 審査年月
      */
     public FlexibleYearMonth getShinsaYM() {
@@ -125,16 +124,16 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * 審査年月のsetメソッドです。
-     *
+     * 
      * @param shinsaYM 審査年月
      */
-    public void setShinsaYM(FlexibleYearMonth shinsaYM) {
+    public void setShinsaYM(@Nonnull FlexibleYearMonth shinsaYM) {
         this.shinsaYM = shinsaYM;
     }
 
     /**
      * サービス提供年月のgetメソッドです。
-     *
+     * 
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -143,21 +142,77 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * サービス提供年月のsetメソッドです。
-     *
+     * 
      * @param serviceTeikyoYM サービス提供年月
      */
-    public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
+    public void setServiceTeikyoYM(@Nonnull FlexibleYearMonth serviceTeikyoYM) {
         this.serviceTeikyoYM = serviceTeikyoYM;
+    }
+
+    /**
+     * 被保険者番号のgetメソッドです。
+     * 
+     * @return 被保険者番号
+     */
+    public HihokenshaNo getHiHokenshaNo() {
+        return hiHokenshaNo;
+    }
+
+    /**
+     * 被保険者番号のsetメソッドです。
+     * 
+     * @param hiHokenshaNo 被保険者番号
+     */
+    public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
+        this.hiHokenshaNo = hiHokenshaNo;
+    }
+
+    /**
+     * 給付管理票種別区分コードのgetメソッドです。
+     * 
+     * @return 給付管理票種別区分コード
+     */
+    public RString getKyufuKanrihyoShubetsuKubunCode() {
+        return kyufuKanrihyoShubetsuKubunCode;
+    }
+
+    /**
+     * 給付管理票種別区分コードのsetメソッドです。
+     * 
+     * @param kyufuKanrihyoShubetsuKubunCode 給付管理票種別区分コード
+     */
+    public void setKyufuKanrihyoShubetsuKubunCode(@Nonnull RString kyufuKanrihyoShubetsuKubunCode) {
+        this.kyufuKanrihyoShubetsuKubunCode = kyufuKanrihyoShubetsuKubunCode;
+    }
+
+    /**
+     * 給付管理票明細行番号のgetメソッドです。
+     * 
+     * @return 給付管理票明細行番号
+     */
+    public RString getKyufuKanrihyoMeisaiLineNo() {
+        return kyufuKanrihyoMeisaiLineNo;
+    }
+
+    /**
+     * 給付管理票明細行番号のsetメソッドです。
+     * 
+     * @param kyufuKanrihyoMeisaiLineNo 給付管理票明細行番号
+     */
+    public void setKyufuKanrihyoMeisaiLineNo(@Nonnull RString kyufuKanrihyoMeisaiLineNo) {
+        this.kyufuKanrihyoMeisaiLineNo = kyufuKanrihyoMeisaiLineNo;
     }
 
     /**
      * 証記載保険者番号のgetメソッドです。
      * <br/>
      * <br/>当該被保険者の証記載保険者番号を設定。
+
      * <br/>国保連IF上にはないため、広域の場合は被保険者台帳ﾏｽﾀより市町村ｺｰﾄﾞを判定し保険者番号を求め設定する。
-     *
+     * 
      * @return 証記載保険者番号
      */
+    @CheckForNull
     public HokenshaNo getShokisaiHokenshaNo() {
         return shokisaiHokenshaNo;
     }
@@ -166,8 +221,9 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
      * 証記載保険者番号のsetメソッドです。
      * <br/>
      * <br/>当該被保険者の証記載保険者番号を設定。
+
      * <br/>国保連IF上にはないため、広域の場合は被保険者台帳ﾏｽﾀより市町村ｺｰﾄﾞを判定し保険者番号を求め設定する。
-     *
+     * 
      * @param shokisaiHokenshaNo 証記載保険者番号
      */
     public void setShokisaiHokenshaNo(HokenshaNo shokisaiHokenshaNo) {
@@ -178,9 +234,10 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
      * 居宅支援事業所番号のgetメソッドです。
      * <br/>
      * <br/>事業所作成の場合必須
-     *
+     * 
      * @return 居宅支援事業所番号
      */
+    @CheckForNull
     public JigyoshaNo getKyotakushienJigyoshoNo() {
         return kyotakushienJigyoshoNo;
     }
@@ -189,7 +246,7 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
      * 居宅支援事業所番号のsetメソッドです。
      * <br/>
      * <br/>事業所作成の場合必須
-     *
+     * 
      * @param kyotakushienJigyoshoNo 居宅支援事業所番号
      */
     public void setKyotakushienJigyoshoNo(JigyoshaNo kyotakushienJigyoshoNo) {
@@ -198,16 +255,17 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * 給付管理票情報作成区分コードのgetメソッドです。
-     *
+     * 
      * @return 給付管理票情報作成区分コード
      */
+    @CheckForNull
     public RString getKyufuKanrihyoSakuseiKubunCode() {
         return kyufuKanrihyoSakuseiKubunCode;
     }
 
     /**
      * 給付管理票情報作成区分コードのsetメソッドです。
-     *
+     * 
      * @param kyufuKanrihyoSakuseiKubunCode 給付管理票情報作成区分コード
      */
     public void setKyufuKanrihyoSakuseiKubunCode(RString kyufuKanrihyoSakuseiKubunCode) {
@@ -216,16 +274,17 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * 給付管理票作成年月日のgetメソッドです。
-     *
+     * 
      * @return 給付管理票作成年月日
      */
+    @CheckForNull
     public FlexibleDate getKyufuKanrihyoSakuseiYMD() {
         return kyufuKanrihyoSakuseiYMD;
     }
 
     /**
      * 給付管理票作成年月日のsetメソッドです。
-     *
+     * 
      * @param kyufuKanrihyoSakuseiYMD 給付管理票作成年月日
      */
     public void setKyufuKanrihyoSakuseiYMD(FlexibleDate kyufuKanrihyoSakuseiYMD) {
@@ -233,53 +292,18 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
     }
 
     /**
-     * 給付管理票種別区分コードのgetメソッドです。
-     *
-     * @return 給付管理票種別区分コード
-     */
-    public RString getKyufuKanrihyoShubetsuKubunCode() {
-        return kyufuKanrihyoShubetsuKubunCode;
-    }
-
-    /**
-     * 給付管理票種別区分コードのsetメソッドです。
-     *
-     * @param kyufuKanrihyoShubetsuKubunCode 給付管理票種別区分コード
-     */
-    public void setKyufuKanrihyoShubetsuKubunCode(RString kyufuKanrihyoShubetsuKubunCode) {
-        this.kyufuKanrihyoShubetsuKubunCode = kyufuKanrihyoShubetsuKubunCode;
-    }
-
-    /**
-     * 給付管理票明細行番号のgetメソッドです。
-     *
-     * @return 給付管理票明細行番号
-     */
-    public RString getKyufuKanrihyoMeisaiLineNo() {
-        return kyufuKanrihyoMeisaiLineNo;
-    }
-
-    /**
-     * 給付管理票明細行番号のsetメソッドです。
-     *
-     * @param kyufuKanrihyoMeisaiLineNo 給付管理票明細行番号
-     */
-    public void setKyufuKanrihyoMeisaiLineNo(RString kyufuKanrihyoMeisaiLineNo) {
-        this.kyufuKanrihyoMeisaiLineNo = kyufuKanrihyoMeisaiLineNo;
-    }
-
-    /**
      * 保険者番号のgetメソッドです。
-     *
+     * 
      * @return 保険者番号
      */
+    @CheckForNull
     public HokenshaNo getHokenshaNo() {
         return hokenshaNo;
     }
 
     /**
      * 保険者番号のsetメソッドです。
-     *
+     * 
      * @param hokenshaNo 保険者番号
      */
     public void setHokenshaNo(HokenshaNo hokenshaNo) {
@@ -287,35 +311,18 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
     }
 
     /**
-     * 被保険者番号のgetメソッドです。
-     *
-     * @return 被保険者番号
-     */
-    public HihokenshaNo getHiHokenshaNo() {
-        return hiHokenshaNo;
-    }
-
-    /**
-     * 被保険者番号のsetメソッドです。
-     *
-     * @param hiHokenshaNo 被保険者番号
-     */
-    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
-        this.hiHokenshaNo = hiHokenshaNo;
-    }
-
-    /**
      * 被保険者生年月日のgetメソッドです。
-     *
+     * 
      * @return 被保険者生年月日
      */
+    @CheckForNull
     public FlexibleDate getHiHokenshaUmareYMD() {
         return hiHokenshaUmareYMD;
     }
 
     /**
      * 被保険者生年月日のsetメソッドです。
-     *
+     * 
      * @param hiHokenshaUmareYMD 被保険者生年月日
      */
     public void setHiHokenshaUmareYMD(FlexibleDate hiHokenshaUmareYMD) {
@@ -324,16 +331,17 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * 性別コードのgetメソッドです。
-     *
+     * 
      * @return 性別コード
      */
+    @CheckForNull
     public RString getSeibetsuCode() {
         return seibetsuCode;
     }
 
     /**
      * 性別コードのsetメソッドです。
-     *
+     * 
      * @param seibetsuCode 性別コード
      */
     public void setSeibetsuCode(RString seibetsuCode) {
@@ -342,16 +350,17 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * 要介護状態区分コードのgetメソッドです。
-     *
+     * 
      * @return 要介護状態区分コード
      */
+    @CheckForNull
     public RString getYoKaigoJotaiKubunCode() {
         return yoKaigoJotaiKubunCode;
     }
 
     /**
      * 要介護状態区分コードのsetメソッドです。
-     *
+     * 
      * @param yoKaigoJotaiKubunCode 要介護状態区分コード
      */
     public void setYoKaigoJotaiKubunCode(RString yoKaigoJotaiKubunCode) {
@@ -360,16 +369,17 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * 限度額適用期間(開始)のgetメソッドです。
-     *
+     * 
      * @return 限度額適用期間(開始)
      */
+    @CheckForNull
     public FlexibleYearMonth getGendogakuTekiyoKaishiYM() {
         return gendogakuTekiyoKaishiYM;
     }
 
     /**
      * 限度額適用期間(開始)のsetメソッドです。
-     *
+     * 
      * @param gendogakuTekiyoKaishiYM 限度額適用期間(開始)
      */
     public void setGendogakuTekiyoKaishiYM(FlexibleYearMonth gendogakuTekiyoKaishiYM) {
@@ -378,16 +388,17 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * 限度額適用期間(終了)のgetメソッドです。
-     *
+     * 
      * @return 限度額適用期間(終了)
      */
+    @CheckForNull
     public FlexibleYearMonth getGendogakuTekiyoShuryoYM() {
         return gendogakuTekiyoShuryoYM;
     }
 
     /**
      * 限度額適用期間(終了)のsetメソッドです。
-     *
+     * 
      * @param gendogakuTekiyoShuryoYM 限度額適用期間(終了)
      */
     public void setGendogakuTekiyoShuryoYM(FlexibleYearMonth gendogakuTekiyoShuryoYM) {
@@ -396,16 +407,17 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * 居宅・介護予防支給限度額のgetメソッドです。
-     *
+     * 
      * @return 居宅・介護予防支給限度額
      */
+    @CheckForNull
     public Decimal getKyotakuKaigoYoboShikyuGendogaku() {
         return kyotakuKaigoYoboShikyuGendogaku;
     }
 
     /**
      * 居宅・介護予防支給限度額のsetメソッドです。
-     *
+     * 
      * @param kyotakuKaigoYoboShikyuGendogaku 居宅・介護予防支給限度額
      */
     public void setKyotakuKaigoYoboShikyuGendogaku(Decimal kyotakuKaigoYoboShikyuGendogaku) {
@@ -414,16 +426,17 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * 居宅サービス計画作成区分コードのgetメソッドです。
-     *
+     * 
      * @return 居宅サービス計画作成区分コード
      */
+    @CheckForNull
     public RString getKyotakuServicePlanSakuseiKubunCode() {
         return kyotakuServicePlanSakuseiKubunCode;
     }
 
     /**
      * 居宅サービス計画作成区分コードのsetメソッドです。
-     *
+     * 
      * @param kyotakuServicePlanSakuseiKubunCode 居宅サービス計画作成区分コード
      */
     public void setKyotakuServicePlanSakuseiKubunCode(RString kyotakuServicePlanSakuseiKubunCode) {
@@ -432,16 +445,17 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * サービス事業所番号のgetメソッドです。
-     *
+     * 
      * @return サービス事業所番号
      */
+    @CheckForNull
     public JigyoshaNo getServiceJigyoshoNo() {
         return serviceJigyoshoNo;
     }
 
     /**
      * サービス事業所番号のsetメソッドです。
-     *
+     * 
      * @param serviceJigyoshoNo サービス事業所番号
      */
     public void setServiceJigyoshoNo(JigyoshaNo serviceJigyoshoNo) {
@@ -450,18 +464,18 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * 指定/基準該当/地域密着型サービス識別コードのgetメソッドです。
-     *
+     * 
      * @return 指定/基準該当/地域密着型サービス識別コード
      */
+    @CheckForNull
     public RString getShiteiKijungaitoChiikimitchakuServiceShikibetsuCode() {
         return shiteiKijungaitoChiikimitchakuServiceShikibetsuCode;
     }
 
     /**
      * 指定/基準該当/地域密着型サービス識別コードのsetメソッドです。
-     *
-     * @param shiteiKijungaitoChiikimitchakuServiceShikibetsuCode
-     * 指定/基準該当/地域密着型サービス識別コード
+     * 
+     * @param shiteiKijungaitoChiikimitchakuServiceShikibetsuCode 指定/基準該当/地域密着型サービス識別コード
      */
     public void setShiteiKijungaitoChiikimitchakuServiceShikibetsuCode(RString shiteiKijungaitoChiikimitchakuServiceShikibetsuCode) {
         this.shiteiKijungaitoChiikimitchakuServiceShikibetsuCode = shiteiKijungaitoChiikimitchakuServiceShikibetsuCode;
@@ -469,16 +483,17 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * サービス種類コードのgetメソッドです。
-     *
+     * 
      * @return サービス種類コード
      */
+    @CheckForNull
     public ServiceShuruiCode getServiceShuruiCode() {
         return serviceShuruiCode;
     }
 
     /**
      * サービス種類コードのsetメソッドです。
-     *
+     * 
      * @param serviceShuruiCode サービス種類コード
      */
     public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
@@ -487,16 +502,17 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * 給付計画単位数／日数のgetメソッドです。
-     *
+     * 
      * @return 給付計画単位数／日数
      */
+    @CheckForNull
     public Decimal getKyufuKeikakuTanisuNissu() {
         return kyufuKeikakuTanisuNissu;
     }
 
     /**
      * 給付計画単位数／日数のsetメソッドです。
-     *
+     * 
      * @param kyufuKeikakuTanisuNissu 給付計画単位数／日数
      */
     public void setKyufuKeikakuTanisuNissu(Decimal kyufuKeikakuTanisuNissu) {
@@ -507,9 +523,10 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
      * 限度額管理期間における前月までの給付計画日数のgetメソッドです。
      * <br/>
      * <br/>短期入所サービス給付管理票の場合、必須
-     *
+     * 
      * @return 限度額管理期間における前月までの給付計画日数
      */
+    @CheckForNull
     public Decimal getKyufuKeikakuNissu() {
         return kyufuKeikakuNissu;
     }
@@ -518,7 +535,7 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
      * 限度額管理期間における前月までの給付計画日数のsetメソッドです。
      * <br/>
      * <br/>短期入所サービス給付管理票の場合、必須
-     *
+     * 
      * @param kyufuKeikakuNissu 限度額管理期間における前月までの給付計画日数
      */
     public void setKyufuKeikakuNissu(Decimal kyufuKeikakuNissu) {
@@ -527,16 +544,17 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * 指定サービス分小計のgetメソッドです。
-     *
+     * 
      * @return 指定サービス分小計
      */
+    @CheckForNull
     public Decimal getShiteiServiceSubTotal() {
         return shiteiServiceSubTotal;
     }
 
     /**
      * 指定サービス分小計のsetメソッドです。
-     *
+     * 
      * @param shiteiServiceSubTotal 指定サービス分小計
      */
     public void setShiteiServiceSubTotal(Decimal shiteiServiceSubTotal) {
@@ -545,16 +563,17 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * 基準該当サービス分小計のgetメソッドです。
-     *
+     * 
      * @return 基準該当サービス分小計
      */
+    @CheckForNull
     public Decimal getKijyunGaitoServiceSubTotal() {
         return kijyunGaitoServiceSubTotal;
     }
 
     /**
      * 基準該当サービス分小計のsetメソッドです。
-     *
+     * 
      * @param kijyunGaitoServiceSubTotal 基準該当サービス分小計
      */
     public void setKijyunGaitoServiceSubTotal(Decimal kijyunGaitoServiceSubTotal) {
@@ -563,16 +582,17 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * 給付計画合計単位数/日数のgetメソッドです。
-     *
+     * 
      * @return 給付計画合計単位数/日数
      */
+    @CheckForNull
     public Decimal getKyufuKeikakuTotalTanisuNissu() {
         return kyufuKeikakuTotalTanisuNissu;
     }
 
     /**
      * 給付計画合計単位数/日数のsetメソッドです。
-     *
+     * 
      * @param kyufuKeikakuTotalTanisuNissu 給付計画合計単位数/日数
      */
     public void setKyufuKeikakuTotalTanisuNissu(Decimal kyufuKeikakuTotalTanisuNissu) {
@@ -581,16 +601,17 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * 当初登録年月日のgetメソッドです。
-     *
+     * 
      * @return 当初登録年月日
      */
+    @CheckForNull
     public FlexibleDate getToshoTorokuYMD() {
         return toshoTorokuYMD;
     }
 
     /**
      * 当初登録年月日のsetメソッドです。
-     *
+     * 
      * @param toshoTorokuYMD 当初登録年月日
      */
     public void setToshoTorokuYMD(FlexibleDate toshoTorokuYMD) {
@@ -599,16 +620,17 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * 取込年月のgetメソッドです。
-     *
+     * 
      * @return 取込年月
      */
+    @CheckForNull
     public FlexibleYearMonth getTorikomiYM() {
         return torikomiYM;
     }
 
     /**
      * 取込年月のsetメソッドです。
-     *
+     * 
      * @param torikomiYM 取込年月
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -617,9 +639,9 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * このエンティティの主キーが他の{@literal DbT3014KyufuKanrihyo200004Entity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3014KyufuKanrihyo200004Entity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -633,16 +655,7 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
         if (!Objects.equals(this.serviceTeikyoYM, other.serviceTeikyoYM)) {
             return false;
         }
-        if (!Objects.equals(this.shokisaiHokenshaNo, other.shokisaiHokenshaNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.kyotakushienJigyoshoNo, other.kyotakushienJigyoshoNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.kyufuKanrihyoSakuseiKubunCode, other.kyufuKanrihyoSakuseiKubunCode)) {
-            return false;
-        }
-        if (!Objects.equals(this.kyufuKanrihyoSakuseiYMD, other.kyufuKanrihyoSakuseiYMD)) {
+        if (!Objects.equals(this.hiHokenshaNo, other.hiHokenshaNo)) {
             return false;
         }
         if (!Objects.equals(this.kyufuKanrihyoShubetsuKubunCode, other.kyufuKanrihyoShubetsuKubunCode)) {
@@ -661,14 +674,14 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
     public void shallowCopy(DbT3014KyufuKanrihyo200004Entity entity) {
         this.shinsaYM = entity.shinsaYM;
         this.serviceTeikyoYM = entity.serviceTeikyoYM;
+        this.hiHokenshaNo = entity.hiHokenshaNo;
+        this.kyufuKanrihyoShubetsuKubunCode = entity.kyufuKanrihyoShubetsuKubunCode;
+        this.kyufuKanrihyoMeisaiLineNo = entity.kyufuKanrihyoMeisaiLineNo;
         this.shokisaiHokenshaNo = entity.shokisaiHokenshaNo;
         this.kyotakushienJigyoshoNo = entity.kyotakushienJigyoshoNo;
         this.kyufuKanrihyoSakuseiKubunCode = entity.kyufuKanrihyoSakuseiKubunCode;
         this.kyufuKanrihyoSakuseiYMD = entity.kyufuKanrihyoSakuseiYMD;
-        this.kyufuKanrihyoShubetsuKubunCode = entity.kyufuKanrihyoShubetsuKubunCode;
-        this.kyufuKanrihyoMeisaiLineNo = entity.kyufuKanrihyoMeisaiLineNo;
         this.hokenshaNo = entity.hokenshaNo;
-        this.hiHokenshaNo = entity.hiHokenshaNo;
         this.hiHokenshaUmareYMD = entity.hiHokenshaUmareYMD;
         this.seibetsuCode = entity.seibetsuCode;
         this.yoKaigoJotaiKubunCode = entity.yoKaigoJotaiKubunCode;
@@ -690,13 +703,14 @@ public class DbT3014KyufuKanrihyo200004Entity extends DbTableEntityBase<DbT3014K
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinsaYM, serviceTeikyoYM, shokisaiHokenshaNo, kyotakushienJigyoshoNo, kyufuKanrihyoSakuseiKubunCode, kyufuKanrihyoSakuseiYMD, kyufuKanrihyoShubetsuKubunCode, kyufuKanrihyoMeisaiLineNo, hokenshaNo, hiHokenshaNo, hiHokenshaUmareYMD, seibetsuCode, yoKaigoJotaiKubunCode, gendogakuTekiyoKaishiYM, gendogakuTekiyoShuryoYM, kyotakuKaigoYoboShikyuGendogaku, kyotakuServicePlanSakuseiKubunCode, serviceJigyoshoNo, shiteiKijungaitoChiikimitchakuServiceShikibetsuCode, serviceShuruiCode, kyufuKeikakuTanisuNissu, kyufuKeikakuNissu, shiteiServiceSubTotal, kijyunGaitoServiceSubTotal, kyufuKeikakuTotalTanisuNissu, toshoTorokuYMD, torikomiYM);
+        return super.toMd5(shinsaYM, serviceTeikyoYM, hiHokenshaNo, kyufuKanrihyoShubetsuKubunCode, kyufuKanrihyoMeisaiLineNo, shokisaiHokenshaNo, kyotakushienJigyoshoNo, kyufuKanrihyoSakuseiKubunCode, kyufuKanrihyoSakuseiYMD, hokenshaNo, hiHokenshaUmareYMD, seibetsuCode, yoKaigoJotaiKubunCode, gendogakuTekiyoKaishiYM, gendogakuTekiyoShuryoYM, kyotakuKaigoYoboShikyuGendogaku, kyotakuServicePlanSakuseiKubunCode, serviceJigyoshoNo, shiteiKijungaitoChiikimitchakuServiceShikibetsuCode, serviceShuruiCode, kyufuKeikakuTanisuNissu, kyufuKeikakuNissu, shiteiServiceSubTotal, kijyunGaitoServiceSubTotal, kyufuKeikakuTotalTanisuNissu, toshoTorokuYMD, torikomiYM);
     }
 
 // </editor-fold>
+
+
 }

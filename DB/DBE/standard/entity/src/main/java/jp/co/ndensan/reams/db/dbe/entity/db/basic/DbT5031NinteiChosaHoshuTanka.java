@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT5031NinteiChosaHoshuTanka implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -48,10 +48,6 @@ public enum DbT5031NinteiChosaHoshuTanka implements IColumnDefinition {
      * 訪問種別
      */
     homonShubetsu(2147483647, 0),
-    /**
-     * 意見書入手パターン
-     */
-    ikenshoNyushuPatern(2147483647, 0),
     /**
      * 開始年月
      */

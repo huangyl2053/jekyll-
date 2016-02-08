@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyufuKanrihyo200604}の編集を行うビルダークラスです。
@@ -301,7 +300,7 @@ public class KyufuKanrihyo200604Builder {
      * @param 限度額管理期間における前月までの給付計画日数 限度額管理期間における前月までの給付計画日数
      * @return {@link KyufuKanrihyo200604Builder}
      */
-    public KyufuKanrihyo200604Builder set限度額管理期間における前月までの給付計画日数(Decimal 限度額管理期間における前月までの給付計画日数) {
+    public KyufuKanrihyo200604Builder set限度額管理期間における前月までの給付計画日数(int 限度額管理期間における前月までの給付計画日数) {
         requireNonNull(限度額管理期間における前月までの給付計画日数, UrSystemErrorMessages.値がnull.getReplacedMessage("限度額管理期間における前月までの給付計画日数"));
         entity.setKyufuKeikakuNissu(限度額管理期間における前月までの給付計画日数);
         return this;

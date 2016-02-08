@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
 
 /**
  * 帳票制御共通コントロールテーブルのエンティティクラスです。
- * <br/> 帳票制御共通項目について、使用状況を管理します。
+ * <br/> 帳票制御共通項目について、使用状況を管理します。
      * <br/>共通の帳票制御メンテナンス画面への表示にも使用します。
  */
 public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<DbT7066ChohyoSeigyoKyotsuControlEntity> implements IDbAccessable {
@@ -53,6 +53,10 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
     private RString kozaMaskShiyoKubun;
     private RString kozaMeigininKanaYusenShiyoKubun;
     private RString daikoPrintShiyoKubun;
+    private RString denshiKoinInjiUmuShiyoKubun;
+    private RString shuchoMeiInjiIchiShiyoKubun;
+    private RString koinShoryakuInjiUmuShiyoKubun;
+    private RString koinMojiretsuInjiUmuShiyoKubun;
     private RString chikuhyojiShiyoKubun;
 
     /**
@@ -535,11 +539,85 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
     }
 
     /**
+     * 電子行公印印字有無使用区分のgetメソッドです。
+     * 
+     * @return 電子行公印印字有無使用区分
+     */
+    @CheckForNull
+    public RString getDenshiKoinInjiUmuShiyoKubun() {
+        return denshiKoinInjiUmuShiyoKubun;
+    }
+
+    /**
+     * 電子行公印印字有無使用区分のsetメソッドです。
+     * 
+     * @param denshiKoinInjiUmuShiyoKubun 電子行公印印字有無使用区分
+     */
+    public void setDenshiKoinInjiUmuShiyoKubun(RString denshiKoinInjiUmuShiyoKubun) {
+        this.denshiKoinInjiUmuShiyoKubun = denshiKoinInjiUmuShiyoKubun;
+    }
+
+    /**
+     * 首長名印字位置使用区分のgetメソッドです。
+     * 
+     * @return 首長名印字位置使用区分
+     */
+    @CheckForNull
+    public RString getShuchoMeiInjiIchiShiyoKubun() {
+        return shuchoMeiInjiIchiShiyoKubun;
+    }
+
+    /**
+     * 首長名印字位置使用区分のsetメソッドです。
+     * 
+     * @param shuchoMeiInjiIchiShiyoKubun 首長名印字位置使用区分
+     */
+    public void setShuchoMeiInjiIchiShiyoKubun(RString shuchoMeiInjiIchiShiyoKubun) {
+        this.shuchoMeiInjiIchiShiyoKubun = shuchoMeiInjiIchiShiyoKubun;
+    }
+
+    /**
+     * 公印書略印字有無使用区分のgetメソッドです。
+     * 
+     * @return 公印書略印字有無使用区分
+     */
+    @CheckForNull
+    public RString getKoinShoryakuInjiUmuShiyoKubun() {
+        return koinShoryakuInjiUmuShiyoKubun;
+    }
+
+    /**
+     * 公印書略印字有無使用区分のsetメソッドです。
+     * 
+     * @param koinShoryakuInjiUmuShiyoKubun 公印書略印字有無使用区分
+     */
+    public void setKoinShoryakuInjiUmuShiyoKubun(RString koinShoryakuInjiUmuShiyoKubun) {
+        this.koinShoryakuInjiUmuShiyoKubun = koinShoryakuInjiUmuShiyoKubun;
+    }
+
+    /**
+     * 公印文字列印字有無使用区分のgetメソッドです。
+     * 
+     * @return 公印文字列印字有無使用区分
+     */
+    @CheckForNull
+    public RString getKoinMojiretsuInjiUmuShiyoKubun() {
+        return koinMojiretsuInjiUmuShiyoKubun;
+    }
+
+    /**
+     * 公印文字列印字有無使用区分のsetメソッドです。
+     * 
+     * @param koinMojiretsuInjiUmuShiyoKubun 公印文字列印字有無使用区分
+     */
+    public void setKoinMojiretsuInjiUmuShiyoKubun(RString koinMojiretsuInjiUmuShiyoKubun) {
+        this.koinMojiretsuInjiUmuShiyoKubun = koinMojiretsuInjiUmuShiyoKubun;
+    }
+
+    /**
      * 地区表示使用区分のgetメソッドです。
      * <br/>
-     * <br/>地区表示１　
-     * <br/>地区表示２　
-     * <br/>地区表示３
+     * <br/>地区表示１、地区表示２、地区表示３
      * 
      * @return 地区表示使用区分
      */
@@ -551,9 +629,7 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
     /**
      * 地区表示使用区分のsetメソッドです。
      * <br/>
-     * <br/>地区表示１　
-     * <br/>地区表示２　
-     * <br/>地区表示３
+     * <br/>地区表示１、地区表示２、地区表示３
      * 
      * @param chikuhyojiShiyoKubun 地区表示使用区分
      */
@@ -607,6 +683,10 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
         this.kozaMaskShiyoKubun = entity.kozaMaskShiyoKubun;
         this.kozaMeigininKanaYusenShiyoKubun = entity.kozaMeigininKanaYusenShiyoKubun;
         this.daikoPrintShiyoKubun = entity.daikoPrintShiyoKubun;
+        this.denshiKoinInjiUmuShiyoKubun = entity.denshiKoinInjiUmuShiyoKubun;
+        this.shuchoMeiInjiIchiShiyoKubun = entity.shuchoMeiInjiIchiShiyoKubun;
+        this.koinShoryakuInjiUmuShiyoKubun = entity.koinShoryakuInjiUmuShiyoKubun;
+        this.koinMojiretsuInjiUmuShiyoKubun = entity.koinMojiretsuInjiUmuShiyoKubun;
         this.chikuhyojiShiyoKubun = entity.chikuhyojiShiyoKubun;
     }
 
@@ -616,9 +696,8 @@ public class DbT7066ChohyoSeigyoKyotsuControlEntity extends DbTableEntityBase<Db
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(subGyomuCode, chohyoBunruiID, kyotsuGamenShiyoUmu, bunshoNoShiyoKubun, tsuchishoTeikeibunShiyoKubun, ninshoshaShiyoKubun, chohyoShuturyokujunShiyoKubun, chohyoShuturyokujunHyojiHohho, kaigoToiawasesakiShiyoKubun, jushoHenshuShiyoKubun, setainushiHyojiShiyoKubun, dainoninHyojiShiyoKubun, customerBarCodeShiyoKubun, gaibuChohyoMojigireSeigyoShiyoKubun, naibuChohyoMojigireSeigyoShiyoKubun, mojigireBunriSeigyoShiyoKubun, teikeibunMojiSizeShiyoKubun, kozaMaskShiyoKubun, kozaMeigininKanaYusenShiyoKubun, daikoPrintShiyoKubun, chikuhyojiShiyoKubun);
+        return super.toMd5(subGyomuCode, chohyoBunruiID, kyotsuGamenShiyoUmu, bunshoNoShiyoKubun, tsuchishoTeikeibunShiyoKubun, ninshoshaShiyoKubun, chohyoShuturyokujunShiyoKubun, chohyoShuturyokujunHyojiHohho, kaigoToiawasesakiShiyoKubun, jushoHenshuShiyoKubun, setainushiHyojiShiyoKubun, dainoninHyojiShiyoKubun, customerBarCodeShiyoKubun, gaibuChohyoMojigireSeigyoShiyoKubun, naibuChohyoMojigireSeigyoShiyoKubun, mojigireBunriSeigyoShiyoKubun, teikeibunMojiSizeShiyoKubun, kozaMaskShiyoKubun, kozaMeigininKanaYusenShiyoKubun, daikoPrintShiyoKubun, denshiKoinInjiUmuShiyoKubun, shuchoMeiInjiIchiShiyoKubun, koinShoryakuInjiUmuShiyoKubun, koinMojiretsuInjiUmuShiyoKubun, chikuhyojiShiyoKubun);
     }
 
 // </editor-fold>
-
 }

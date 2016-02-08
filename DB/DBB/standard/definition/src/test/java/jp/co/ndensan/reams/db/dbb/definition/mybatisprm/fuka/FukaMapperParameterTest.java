@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
@@ -24,7 +23,7 @@ public class FukaMapperParameterTest extends DbbTestBase {
     private static final FlexibleYear choteiNendo = new FlexibleYear("2015");
     private static final FlexibleYear fukaNendo = new FlexibleYear("2015");
     private static final TsuchishoNo tsuchishoNo = new TsuchishoNo("1");
-    private static final Decimal rirekiNo = Decimal.TEN;
+    private static final int rirekiNo = 10;
 
     /**
      * createParamテストメソッドです。
@@ -46,10 +45,10 @@ public class FukaMapperParameterTest extends DbbTestBase {
             FukaMapperParameter sut = FukaMapperParameter.createParam(choteiNendo, fukaNendo, null, rirekiNo);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 履歴番号にNullを指定すると_NullPointerExceptionが発生する() {
-            FukaMapperParameter sut = FukaMapperParameter.createParam(choteiNendo, fukaNendo, tsuchishoNo, null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 履歴番号にNullを指定すると_NullPointerExceptionが発生する() {
+//            FukaMapperParameter sut = FukaMapperParameter.createParam(choteiNendo, fukaNendo, tsuchishoNo, null);
+//        }
 
         @Test
         public void 引数にNull以外を指定すると_パラメータが生成できる() {

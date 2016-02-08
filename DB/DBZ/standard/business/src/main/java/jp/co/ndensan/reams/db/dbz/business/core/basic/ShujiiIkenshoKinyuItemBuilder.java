@@ -100,18 +100,6 @@ public class ShujiiIkenshoKinyuItemBuilder {
     }
 
     /**
-     * 記入項目イメージ共有ファイルIDを設定します。
-     *
-     * @param 記入項目イメージ共有ファイルID 記入項目イメージ共有ファイルID
-     * @return {@link ShujiiIkenshoKinyuItemBuilder}
-     */
-    public ShujiiIkenshoKinyuItemBuilder set記入項目イメージ共有ファイルID(RDateTime 記入項目イメージ共有ファイルID) {
-        requireNonNull(記入項目イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("記入項目イメージ共有ファイルID"));
-        entity.setKinyuItemImageSharedFileId(記入項目イメージ共有ファイルID);
-        return this;
-    }
-
-    /**
      * {@link ShujiiIkenshoKinyuItem}のインスタンスを生成します。
      *
      * @return {@link ShujiiIkenshoKinyuItem}のインスタンス

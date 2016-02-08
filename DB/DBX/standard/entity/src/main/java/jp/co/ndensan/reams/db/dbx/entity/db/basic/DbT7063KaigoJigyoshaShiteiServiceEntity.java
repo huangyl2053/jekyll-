@@ -16,8 +16,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
-import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -71,12 +69,6 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     private AtenaJusho kanrishaAddress;
     private RString kanrishaAddressKana;
     private RString kozaJohoJunkyoKubun;
-    private KinyuKikanCode ginkoCode;
-    private KinyuKikanShitenCode shitenCode;
-    private Code kozaShubetsu;
-    private RString kozaNo;
-    private AtenaMeisho kozaMeiginin;
-    private AtenaKanaMeisho kozaMeigininKana;
     private Code shakaiFukushihoujinKeigenjigyouJisshi_umu;
     private Code seikatsuhogohouShitei_umu;
     private Code shisetsunadoKubun;
@@ -786,120 +778,6 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
      */
     public void setKozaJohoJunkyoKubun(RString kozaJohoJunkyoKubun) {
         this.kozaJohoJunkyoKubun = kozaJohoJunkyoKubun;
-    }
-
-    /**
-     * 銀行コードのgetメソッドです。
-     * 
-     * @return 銀行コード
-     */
-    @CheckForNull
-    public KinyuKikanCode getGinkoCode() {
-        return ginkoCode;
-    }
-
-    /**
-     * 銀行コードのsetメソッドです。
-     * 
-     * @param ginkoCode 銀行コード
-     */
-    public void setGinkoCode(KinyuKikanCode ginkoCode) {
-        this.ginkoCode = ginkoCode;
-    }
-
-    /**
-     * 支店コードのgetメソッドです。
-     * 
-     * @return 支店コード
-     */
-    @CheckForNull
-    public KinyuKikanShitenCode getShitenCode() {
-        return shitenCode;
-    }
-
-    /**
-     * 支店コードのsetメソッドです。
-     * 
-     * @param shitenCode 支店コード
-     */
-    public void setShitenCode(KinyuKikanShitenCode shitenCode) {
-        this.shitenCode = shitenCode;
-    }
-
-    /**
-     * 口座種別のgetメソッドです。
-     * 
-     * @return 口座種別
-     */
-    @CheckForNull
-    public Code getKozaShubetsu() {
-        return kozaShubetsu;
-    }
-
-    /**
-     * 口座種別のsetメソッドです。
-     * 
-     * @param kozaShubetsu 口座種別
-     */
-    public void setKozaShubetsu(Code kozaShubetsu) {
-        this.kozaShubetsu = kozaShubetsu;
-    }
-
-    /**
-     * 口座番号のgetメソッドです。
-     * 
-     * @return 口座番号
-     */
-    @CheckForNull
-    public RString getKozaNo() {
-        return kozaNo;
-    }
-
-    /**
-     * 口座番号のsetメソッドです。
-     * 
-     * @param kozaNo 口座番号
-     */
-    public void setKozaNo(RString kozaNo) {
-        this.kozaNo = kozaNo;
-    }
-
-    /**
-     * 口座名義人のgetメソッドです。
-     * 
-     * @return 口座名義人
-     */
-    @CheckForNull
-    public AtenaMeisho getKozaMeiginin() {
-        return kozaMeiginin;
-    }
-
-    /**
-     * 口座名義人のsetメソッドです。
-     * 
-     * @param kozaMeiginin 口座名義人
-     */
-    public void setKozaMeiginin(AtenaMeisho kozaMeiginin) {
-        this.kozaMeiginin = kozaMeiginin;
-    }
-
-    /**
-     * 口座名義人カナのgetメソッドです。
-     * 
-     * @return 口座名義人カナ
-     */
-    @CheckForNull
-    public AtenaKanaMeisho getKozaMeigininKana() {
-        return kozaMeigininKana;
-    }
-
-    /**
-     * 口座名義人カナのsetメソッドです。
-     * 
-     * @param kozaMeigininKana 口座名義人カナ
-     */
-    public void setKozaMeigininKana(AtenaKanaMeisho kozaMeigininKana) {
-        this.kozaMeigininKana = kozaMeigininKana;
     }
 
     /**
@@ -3221,12 +3099,6 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
         this.kanrishaAddress = entity.kanrishaAddress;
         this.kanrishaAddressKana = entity.kanrishaAddressKana;
         this.kozaJohoJunkyoKubun = entity.kozaJohoJunkyoKubun;
-        this.ginkoCode = entity.ginkoCode;
-        this.shitenCode = entity.shitenCode;
-        this.kozaShubetsu = entity.kozaShubetsu;
-        this.kozaNo = entity.kozaNo;
-        this.kozaMeiginin = entity.kozaMeiginin;
-        this.kozaMeigininKana = entity.kozaMeigininKana;
         this.shakaiFukushihoujinKeigenjigyouJisshi_umu = entity.shakaiFukushihoujinKeigenjigyouJisshi_umu;
         this.seikatsuhogohouShitei_umu = entity.seikatsuhogohouShitei_umu;
         this.shisetsunadoKubun = entity.shisetsunadoKubun;
@@ -3354,9 +3226,10 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(jigyoshaNo, serviceShuruiCode, yukoKaishiYMD, yukoShuryoYMD, idoYMD, idoJiyu, shiteiNo, kihonJohoJunkyoKubun, jigyoKaishiYMD, jigyoKyushiYMD, jigyoSaikaiYMD, jigyoHaishiYMD, jigyoshaName, jigyoshaNameKana, jigyoshaYubinNo, jigyoshaAddress, jigyoshaAddressKana, jigyoshaTelNo, jigyoshaFaxNo, torokuHokenshaNo, juryoininUmu, torokuKaishiYMD, torokuShuryoYMD, kanrishaName, kanrishaNameKana, kanrishaYubinNo, kanrishaAddress, kanrishaAddressKana, kozaJohoJunkyoKubun, ginkoCode, shitenCode, kozaShubetsu, kozaNo, kozaMeiginin, kozaMeigininKana, shakaiFukushihoujinKeigenjigyouJisshi_umu, seikatsuhogohouShitei_umu, shisetsunadoKubun, jininHaichiKubun, tokubetsuChiikiKasan_umu, kinkyujiHomonkaigoKasan_umu, tokubetsuKanriTaisei, kinoKunrenShidoTaisei_umu, shokujiTeikyoTaisei_umu, nyuyokuKaijoTaisei_umu, tokubetsuNyuyokuKaijoTaisei_umu, joukinsenjuIshiHaichi_umu, ishiHaichiKijun, seisinkaIshiTeikitekiRyouyousidou_umu, yakanKinmuJokenKijun, ninchishouSenmontou_umu, shokujiTeikyoJokyo, sougeiTaisei, rehaTeikyoTaisei_SogoRehaShisetsu_umu, rehaTeikyoTaisei_RigakuRyohoII_umu, rehaTeikyoTaisei_RigakuRyohoIII_umu, rehaTeikyoTaisei_SagyoRyohoII_umu, rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu, rehaTeikyoTaisei_Sonota_umu, rehabilitationKasanJokyo, ryoyoKankyoKijun, ishiKetuinGenzanJokyo_umu, kangoShokuinKetsuinGenzanJokyo_umu, rigakuRyouhousiKetsuinGenzanJokyo_umu, sagyouRyouhousiKetsuinGenzanJokyo_umu, kaigoShokuinKetsuinGenzanJokyo_umu, kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu, kaigoJujishaKetsuinGenzanJokyo_umu, kansenTaisakuSidoKanri_umu, jushoHifuKaiyouShidoKanri_umu, yakuzaiKaniriShido_umu, shogaishaSeikatsuShienTaisei_umu, chiikiKubunCode, jikanEnchoServiceTaisei, kobetsuRehabilitationTeikyoTaisei, kyojuhiTaisaku, yakanCare_umu, rehabilitationKinoKyoka_umu, kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu, kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1, kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu, kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu, kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu, kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu, gengoChokakushiKetsuinGenzanJokyo_umu, eiyouKanriHyoka, tokuteijigyoushoKasan_HomonKaigo_umu, jakunenseiNinchishoCareTaisei_umu, undokiKinoKojoTaisei_umu, eiyoManagement_KaizenTaisei_umu, kokuKinoKojoTaisei_umu, jigyoshoHyokaKasan_Moshide_umu, jigyoshoHyokaKasan_Kettei_umu, kinkyuUkeireTaisei_umu, yakanKangoTaisei_umu, tokuteijigyoshoKasan_Kyotakukaigoshien_umu, kaigoShienSemmoninSenjuJokinshaNinsu, kaigoSienSemmoninSenjuHijokinshaNinsu, kaigoSienSemmoninKemmuJokinshaNinsu, kaigoSienSemmoninKemmuHijokinshaNinsu, homonkaigoServiceTeikyoSekininshaNinsu, homonkaigoSenjuJokinshaNinsu, homonkaigoSenjuHijokinshaNinsu, homonkaigoKemmuJokinshaNinsu, homonkaigoKemmuHijokinshaNinsu, homonkaigoJokinKanzangoNinsu, riyoTeiinNinsu, shiteiYukoKaishiYMD, shiteiYukoShuryoYMD, shiteiKoshinShinseichuKubun, koryokuTeishiKaishiYMD, koryokuTeishiShuryoYMD, daikiboJigyoshaGaito_umu, junUnitCareTaisei_umu, judokaTaioTaisei_umu, iryoRenkeiTaisei_umu, unitCareTaisei_umu, zaitaku_nyushoSogoRiyoTaisei_umu, terminalCareTaisei_umu, shintaiKosokuHaishiTorikumi_umu, shokiboKyotenShugoTaisei_umu, ninchishoCareKasan_umu, kobetsuKinoKunrenTaisei_umu, kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu, kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2, kobetsuRehaTeikyoTaisei_SagyoRyoho_umu, kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu, kobetsuRehaTeikyoTaisei_Sonota_umu, setsubiKijun, ryoyoTaiseiIjiTokubetsuKasan, kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu, sankyuHelperTaisei, chuSankanChiikiShokiboJigyoshoKasan_chiiki, chuSankanChiikiShokiboJigyoushoKasan_kibo, serviceTeikyoTaiseiKyokaKasan, ninchishoTankiShuchuRehabilitationKasan, jakunenseiNinchishoRiyoushaUkeeireKasan, kangoTaiseiKasan, yakinShokuinHaichiKasan, ryoyoShokuKasan, nichijoSeikatsuKeizokuShienKasan, ninchishoSemmonCareKasan, twentyFourHoursTsuhoTaioKasan, kangoShokuinHaichiKasan, yakanCareKasan, shudanCommunicationRyoho_umu, serviceTeikyoTaiseiKyokaKasan_Karadokogata, nitchuShintaikaigoTaise_20funmiman_umu, serviceTeikyoSekininshaTaisei_umu, doitsuTatemonoKyojuRiyoshaGenzan_umu, kinkyuTankiNyushoTaiseiKakuhoKasan, zaitakuFukki_ZaitakuRyoyoShienKinoKasan, seikatuKinoKojoGroupKatsudoKasan, kaigoShokuinShoguKaizenKasan);
+        return super.toMd5(jigyoshaNo, serviceShuruiCode, yukoKaishiYMD, yukoShuryoYMD, idoYMD, idoJiyu, shiteiNo, kihonJohoJunkyoKubun, jigyoKaishiYMD, jigyoKyushiYMD, jigyoSaikaiYMD, jigyoHaishiYMD, jigyoshaName, jigyoshaNameKana, jigyoshaYubinNo, jigyoshaAddress, jigyoshaAddressKana, jigyoshaTelNo, jigyoshaFaxNo, torokuHokenshaNo, juryoininUmu, torokuKaishiYMD, torokuShuryoYMD, kanrishaName, kanrishaNameKana, kanrishaYubinNo, kanrishaAddress, kanrishaAddressKana, kozaJohoJunkyoKubun, shakaiFukushihoujinKeigenjigyouJisshi_umu, seikatsuhogohouShitei_umu, shisetsunadoKubun, jininHaichiKubun, tokubetsuChiikiKasan_umu, kinkyujiHomonkaigoKasan_umu, tokubetsuKanriTaisei, kinoKunrenShidoTaisei_umu, shokujiTeikyoTaisei_umu, nyuyokuKaijoTaisei_umu, tokubetsuNyuyokuKaijoTaisei_umu, joukinsenjuIshiHaichi_umu, ishiHaichiKijun, seisinkaIshiTeikitekiRyouyousidou_umu, yakanKinmuJokenKijun, ninchishouSenmontou_umu, shokujiTeikyoJokyo, sougeiTaisei, rehaTeikyoTaisei_SogoRehaShisetsu_umu, rehaTeikyoTaisei_RigakuRyohoII_umu, rehaTeikyoTaisei_RigakuRyohoIII_umu, rehaTeikyoTaisei_SagyoRyohoII_umu, rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu, rehaTeikyoTaisei_Sonota_umu, rehabilitationKasanJokyo, ryoyoKankyoKijun, ishiKetuinGenzanJokyo_umu, kangoShokuinKetsuinGenzanJokyo_umu, rigakuRyouhousiKetsuinGenzanJokyo_umu, sagyouRyouhousiKetsuinGenzanJokyo_umu, kaigoShokuinKetsuinGenzanJokyo_umu, kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu, kaigoJujishaKetsuinGenzanJokyo_umu, kansenTaisakuSidoKanri_umu, jushoHifuKaiyouShidoKanri_umu, yakuzaiKaniriShido_umu, shogaishaSeikatsuShienTaisei_umu, chiikiKubunCode, jikanEnchoServiceTaisei, kobetsuRehabilitationTeikyoTaisei, kyojuhiTaisaku, yakanCare_umu, rehabilitationKinoKyoka_umu, kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu, kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1, kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu, kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu, kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu, kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu, gengoChokakushiKetsuinGenzanJokyo_umu, eiyouKanriHyoka, tokuteijigyoushoKasan_HomonKaigo_umu, jakunenseiNinchishoCareTaisei_umu, undokiKinoKojoTaisei_umu, eiyoManagement_KaizenTaisei_umu, kokuKinoKojoTaisei_umu, jigyoshoHyokaKasan_Moshide_umu, jigyoshoHyokaKasan_Kettei_umu, kinkyuUkeireTaisei_umu, yakanKangoTaisei_umu, tokuteijigyoshoKasan_Kyotakukaigoshien_umu, kaigoShienSemmoninSenjuJokinshaNinsu, kaigoSienSemmoninSenjuHijokinshaNinsu, kaigoSienSemmoninKemmuJokinshaNinsu, kaigoSienSemmoninKemmuHijokinshaNinsu, homonkaigoServiceTeikyoSekininshaNinsu, homonkaigoSenjuJokinshaNinsu, homonkaigoSenjuHijokinshaNinsu, homonkaigoKemmuJokinshaNinsu, homonkaigoKemmuHijokinshaNinsu, homonkaigoJokinKanzangoNinsu, riyoTeiinNinsu, shiteiYukoKaishiYMD, shiteiYukoShuryoYMD, shiteiKoshinShinseichuKubun, koryokuTeishiKaishiYMD, koryokuTeishiShuryoYMD, daikiboJigyoshaGaito_umu, junUnitCareTaisei_umu, judokaTaioTaisei_umu, iryoRenkeiTaisei_umu, unitCareTaisei_umu, zaitaku_nyushoSogoRiyoTaisei_umu, terminalCareTaisei_umu, shintaiKosokuHaishiTorikumi_umu, shokiboKyotenShugoTaisei_umu, ninchishoCareKasan_umu, kobetsuKinoKunrenTaisei_umu, kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu, kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2, kobetsuRehaTeikyoTaisei_SagyoRyoho_umu, kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu, kobetsuRehaTeikyoTaisei_Sonota_umu, setsubiKijun, ryoyoTaiseiIjiTokubetsuKasan, kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu, sankyuHelperTaisei, chuSankanChiikiShokiboJigyoshoKasan_chiiki, chuSankanChiikiShokiboJigyoushoKasan_kibo, serviceTeikyoTaiseiKyokaKasan, ninchishoTankiShuchuRehabilitationKasan, jakunenseiNinchishoRiyoushaUkeeireKasan, kangoTaiseiKasan, yakinShokuinHaichiKasan, ryoyoShokuKasan, nichijoSeikatsuKeizokuShienKasan, ninchishoSemmonCareKasan, twentyFourHoursTsuhoTaioKasan, kangoShokuinHaichiKasan, yakanCareKasan, shudanCommunicationRyoho_umu, serviceTeikyoTaiseiKyokaKasan_Karadokogata, nitchuShintaikaigoTaise_20funmiman_umu, serviceTeikyoSekininshaTaisei_umu, doitsuTatemonoKyojuRiyoshaGenzan_umu, kinkyuTankiNyushoTaiseiKakuhoKasan, zaitakuFukki_ZaitakuRyoyoShienKinoKasan, seikatuKinoKojoGroupKatsudoKasan, kaigoShokuinShoguKaizenKasan);
     }
 
 // </editor-fold>
+
 
 }

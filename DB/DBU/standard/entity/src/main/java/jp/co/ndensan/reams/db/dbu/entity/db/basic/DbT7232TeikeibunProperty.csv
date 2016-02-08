@@ -1,4 +1,0 @@
-﻿teikeibunZokuseiID,numeric,Decimal,,,,,定型文属性ID,A
-teikeibunZokuseiCode,bpchar,RString,,,,,定型文属性コード,A
-teikeibunZokuseiName,bpchar,RString,,,,,属性名称,A
-teikeibunCode,bpchar,RString,,,,,定型文コード,A

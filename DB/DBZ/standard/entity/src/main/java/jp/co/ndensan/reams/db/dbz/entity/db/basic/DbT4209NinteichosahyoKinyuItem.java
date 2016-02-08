@@ -62,12 +62,7 @@ public enum DbT4209NinteichosahyoKinyuItem implements IColumnDefinition {
      * サービスの状況記入
      * <br/>市町村特別給付
      */
-    serviceJokyoKinyu(2147483647, 0),
-    /**
-     * サービスの状況イメージ共有ファイルID
-     * <br/>市町村特別給付
-     */
-    serviceJokyoImageSharedFileId(29, 0);
+    serviceJokyoKinyu(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

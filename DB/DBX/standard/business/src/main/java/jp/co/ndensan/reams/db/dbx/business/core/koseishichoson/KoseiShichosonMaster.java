@@ -279,6 +279,24 @@ public class KoseiShichosonMaster
     }
 
     /**
+     * 所得引出方法を返します。
+     *
+     * @return 所得引出方法
+     */
+    public RString get所得引出方法() {
+        return entity.getShotokuHikidashiHoho();
+    }
+
+    /**
+     * 納付額データ連携方法を返します。
+     *
+     * @return 納付額データ連携方法
+     */
+    public RString get納付額データ連携方法() {
+        return entity.getNofugakuDataRenkeiHoho();
+    }
+
+    /**
      * 特徴分配集約を返します。
      *
      * @return 特徴分配集約
@@ -398,7 +416,8 @@ public class KoseiShichosonMaster
     }
 
     /**
-     * 構成市町村マスタのみを変更対象とします。<br/> {@link DbT7051KoseiShichosonMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 構成市町村マスタのみを変更対象とします。<br/>
+     * {@link DbT7051KoseiShichosonMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KoseiShichosonMaster}
      */
@@ -413,7 +432,8 @@ public class KoseiShichosonMaster
     }
 
     /**
-     * 保持する構成市町村マスタを削除対象とします。<br/> {@link DbT7051KoseiShichosonMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する構成市町村マスタを削除対象とします。<br/>
+     * {@link DbT7051KoseiShichosonMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KoseiShichosonMaster}
      */

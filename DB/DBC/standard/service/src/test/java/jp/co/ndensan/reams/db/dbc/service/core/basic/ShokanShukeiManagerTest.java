@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3053ShokanShukeiEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3053ShokanShukeiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
@@ -56,8 +55,8 @@ public class ShokanShukeiManagerTest {
             RString 主キー3 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー6 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_連番;
             sut.get償還払請求集計(null, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
         }
 
@@ -67,8 +66,8 @@ public class ShokanShukeiManagerTest {
             RString 主キー3 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー6 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_連番;
             sut.get償還払請求集計(主キー1, null, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
         }
 
@@ -78,8 +77,8 @@ public class ShokanShukeiManagerTest {
             FlexibleYearMonth 主キー2 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_サービス提供年月;
             JigyoshaNo 主キー4 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー6 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_連番;
             sut.get償還払請求集計(主キー1, 主キー2, null, 主キー4, 主キー5, 主キー6, 主キー7);
         }
 
@@ -89,8 +88,8 @@ public class ShokanShukeiManagerTest {
             FlexibleYearMonth 主キー2 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_整理番号;
             RString 主キー5 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー6 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_連番;
             sut.get償還払請求集計(主キー1, 主キー2, 主キー3, null, 主キー5, 主キー6, 主キー7);
         }
 
@@ -100,8 +99,8 @@ public class ShokanShukeiManagerTest {
             FlexibleYearMonth 主キー2 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_事業者番号;
-            RString 主キー6 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー6 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_連番;
             sut.get償還払請求集計(主キー1, 主キー2, 主キー3, 主キー4, null, 主キー6, 主キー7);
         }
 
@@ -112,7 +111,7 @@ public class ShokanShukeiManagerTest {
             RString 主キー3 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー7 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー7 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_連番;
             sut.get償還払請求集計(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, null, 主キー7);
         }
 
@@ -123,7 +122,7 @@ public class ShokanShukeiManagerTest {
             RString 主キー3 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_順次番号;
+            RString 主キー6 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_明細番号;
             sut.get償還払請求集計(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, null);
         }
 
@@ -131,14 +130,14 @@ public class ShokanShukeiManagerTest {
         @Test
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class), any(JigyoshaNo.class),
-                    any(RString.class), any(RString.class), any(Decimal.class))).thenReturn(null);
+                    any(RString.class), any(RString.class), any(RString.class))).thenReturn(null);
             HihokenshaNo 主キー1 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー6 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_連番;
             ShokanShukei result = sut.get償還払請求集計(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
 
             assertThat(result, is(nullValue()));
@@ -148,14 +147,14 @@ public class ShokanShukeiManagerTest {
         public void 検索結果が存在する場合() {
             DbT3053ShokanShukeiEntity entity = DbT3053ShokanShukeiEntityGenerator.createDbT3053ShokanShukeiEntity();
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class), any(JigyoshaNo.class),
-                    any(RString.class), any(RString.class), any(Decimal.class))).thenReturn(entity);
+                    any(RString.class), any(RString.class), any(RString.class))).thenReturn(entity);
             HihokenshaNo 主キー1 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー6 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_連番;
             ShokanShukei result = sut.get償還払請求集計(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
 
             assertThat(result.get被保険者番号().value(), is(DbT3053ShokanShukeiEntityGenerator.DEFAULT_被保険者番号.value()));

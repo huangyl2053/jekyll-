@@ -30,7 +30,7 @@
     </sql>
 
     <!--テーブルDbT2008ShotokuKanriの項目をDbT2008ShotokuKanriEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT2008ShotokuKanriEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.shotoku.DbT2008ShotokuKanriEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT2008ShotokuKanriEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity" autoMapping="true">
         <id property="shotokuNendo" column="dbT2008ShotokuKanri_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="shikibetsuCode" column="dbT2008ShotokuKanri_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="rirekiNo" column="dbT2008ShotokuKanri_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>

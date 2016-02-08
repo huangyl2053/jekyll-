@@ -6,12 +6,12 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyou;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyou.rirekiNo;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyou.serviceKoumokuCode;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyou.serviceShuruiCode;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyou.teikyoKaishiYM;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiService.serviceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.rirekiNo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.serviceKoumokuCd;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.teikyoKaishiYM;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -61,7 +61,7 @@ public class DbT7131KaigoServiceNaiyouDac {
                 table(DbT7131KaigoServiceNaiyou.class).
                 where(and(
                                 eq(serviceShuruiCode, サービス種類コード),
-                                eq(serviceKoumokuCode, サービス項目コード),
+                                eq(serviceKoumokuCd, サービス項目コード),
                                 eq(teikyoKaishiYM, 提供開始年月),
                                 eq(rirekiNo, 履歴番号))).
                 toObject(DbT7131KaigoServiceNaiyouEntity.class);
@@ -110,8 +110,8 @@ public class DbT7131KaigoServiceNaiyouDac {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT7131KaigoServiceNaiyou.class).
-                where(and(eq(DbT7131KaigoServiceNaiyou.serviceShuruiCode, サービス種類コード),
-                                eq(DbT7131KaigoServiceNaiyou.serviceKoumokuCode, サービス項目コード),
+                where(and(eq(DbT7131KaigoServiceNaiyou.serviceShuruiCd, サービス種類コード),
+                                eq(DbT7131KaigoServiceNaiyou.serviceKoumokuCd, サービス項目コード),
                                 leq(DbT7131KaigoServiceNaiyou.teikyoKaishiYM, 提供開始年月),
                                 leq(提供開始年月, DbT7131KaigoServiceNaiyou.teikyoShuryoYM))).
                 toList(DbT7131KaigoServiceNaiyouEntity.class);

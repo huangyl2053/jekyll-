@@ -40,92 +40,87 @@ public enum DbT4202NinteichosahyoGaikyoChosa implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * 申請書管理番号
-     * <br/>要介護認定申請情報
+     * shinseishoKanriNo
      */
     shinseishoKanriNo(2147483647, 0),
     /**
-     * 認定調査依頼履歴番号
-     * <br/>認定調査依頼情報
+     * ninteichosaRirekiNo
      */
     ninteichosaRirekiNo(5, 0),
     /**
-     * 厚労省IF識別コード
-     * <br/>Enum（DBE：厚労省認定ソフトのバージョン）パーティショニングのCheck項目
+     * gaikyoChosaTextImageKubun
+     */
+    gaikyoChosaTextImageKubun(1, 0),
+    /**
+     * koroshoIfShikibetsuCode
      */
     koroshoIfShikibetsuCode(2147483647, 0),
     /**
-     * 認定調査依頼区分コード
-     * <br/>Enum（DBE：認定調査依頼区分コード）
+     * ninteichousaIraiKubunCode
      */
     ninteichousaIraiKubunCode(2147483647, 0),
     /**
-     * 認定調査回数
+     * ninteichosaIraiKaisu
      */
     ninteichosaIraiKaisu(5, 0),
     /**
-     * 認定調査実施年月日
+     * ninteichosaJisshiYMD
      */
     ninteichosaJisshiYMD(2147483647, 0),
     /**
-     * 認定調査受領年月日
+     * ninteichosaJuryoYMD
      */
     ninteichosaJuryoYMD(2147483647, 0),
     /**
-     * 認定調査区分コード
-     * <br/>Enum（DBE：調査区分）
+     * ninteiChosaKubunCode
      */
     ninteiChosaKubunCode(2147483647, 0),
     /**
-     * 認定調査委託先コード
-     * <br/>認定調査委託先情報
+     * chosaItakusakiCode
      */
     chosaItakusakiCode(2147483647, 0),
     /**
-     * 認定調査員コード
-     * <br/>認定調査員情報
+     * chosainCode
      */
     chosainCode(8, 0),
     /**
-     * 認定調査実施場所コード
-     * <br/>Enum（DBE：調査実施場所コード）
+     * chosaJisshiBashoCode
      */
     chosaJisshiBashoCode(2147483647, 0),
     /**
-     * 認定調査実施場所名称
+     * chosaJisshiBashoMeisho
      */
     chosaJisshiBashoMeisho(64, 0),
     /**
-     * 認定調査・サービス区分コード
-     * <br/>Enum（DBE：現在のサービス区分コード）
+     * serviceKubunCode
      */
     serviceKubunCode(2147483647, 0),
     /**
-     * 利用施設名
+     * riyoShisetsuShimei
      */
     riyoShisetsuShimei(80, 0),
     /**
-     * 利用施設住所
+     * riyoShisetsuJusho
      */
     riyoShisetsuJusho(64, 0),
     /**
-     * 利用施設電話番号
+     * riyoShisetsuTelNo
      */
     riyoShisetsuTelNo(32, 0),
     /**
-     * 利用施設郵便番号
+     * riyoShisetsuYubinNo
      */
     riyoShisetsuYubinNo(2147483647, 0),
     /**
-     * 特記
+     * tokki
      */
     tokki(2147483647, 0),
     /**
-     * 認定調査特記事項受付年月日
+     * tokkijikoUketsukeYMD
      */
     tokkijikoUketsukeYMD(2147483647, 0),
     /**
-     * 認定調査特記事項受領年月日
+     * tokkijikoJuryoYMD
      */
     tokkijikoJuryoYMD(2147483647, 0);
 

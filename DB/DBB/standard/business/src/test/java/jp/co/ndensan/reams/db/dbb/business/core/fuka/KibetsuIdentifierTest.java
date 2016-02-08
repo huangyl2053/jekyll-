@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static jp.co.ndensan.reams.uz.uza.testhelper.ByteArraySerializations.canBeCopiedBySerialization;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -27,7 +26,7 @@ public class KibetsuIdentifierTest extends DbbTestBase {
     private static FlexibleYear 調定年度;
     private static FlexibleYear 賦課年度;
     private static TsuchishoNo 通知書番号;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
     private static RString 徴収方法;
     private static int 期;
 

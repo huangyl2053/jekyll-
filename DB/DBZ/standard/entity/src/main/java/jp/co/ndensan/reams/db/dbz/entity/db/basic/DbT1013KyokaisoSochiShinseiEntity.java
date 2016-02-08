@@ -1,23 +1,25 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 
 /**
  * DbT1013KyokaisoSochiShinseiの項目定義クラスです
  *
  */
 public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013KyokaisoSochiShinseiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1013KyokaisoSochiShinsei");
@@ -33,7 +35,9 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
+    @PrimaryKey
+    private int linkNo;
     private FlexibleDate shinseiYMD;
     private FlexibleDate uketsukeYMD;
     private RString shinsei_HaishiKubun;
@@ -50,6 +54,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
     private Decimal gengakuJikofutanGetsugakuGokeigaku;
     private FlexibleDate kyukaisoSochiKetteiYMD;
     private RString sochiGaito_HigaitoKubun;
+    private boolean logicalDeletedFlag;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -110,7 +115,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -119,7 +124,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
@@ -128,8 +133,26 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(@Nonnull int rirekiNo) {
         this.rirekiNo = rirekiNo;
+    }
+
+    /**
+     * リンク番号のgetメソッドです。
+     *
+     * @return リンク番号
+     */
+    public int getLinkNo() {
+        return linkNo;
+    }
+
+    /**
+     * リンク番号のsetメソッドです。
+     *
+     * @param linkNo リンク番号
+     */
+    public void setLinkNo(@Nonnull int linkNo) {
+        this.linkNo = linkNo;
     }
 
     /**
@@ -146,7 +169,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @param shinseiYMD 申請年月日
      */
-    public void setShinseiYMD(FlexibleDate shinseiYMD) {
+    public void setShinseiYMD(@Nonnull FlexibleDate shinseiYMD) {
         this.shinseiYMD = shinseiYMD;
     }
 
@@ -164,7 +187,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @param uketsukeYMD 受付年月日
      */
-    public void setUketsukeYMD(FlexibleDate uketsukeYMD) {
+    public void setUketsukeYMD(@Nonnull FlexibleDate uketsukeYMD) {
         this.uketsukeYMD = uketsukeYMD;
     }
 
@@ -175,6 +198,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @return 申請・廃止区分
      */
+    @CheckForNull
     public RString getShinsei_HaishiKubun() {
         return shinsei_HaishiKubun;
     }
@@ -195,6 +219,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @return 申請・廃止年月日
      */
+    @CheckForNull
     public FlexibleDate getShinsei_HaishiYMD() {
         return shinsei_HaishiYMD;
     }
@@ -213,6 +238,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @return 保護不要根拠減額金額
      */
+    @CheckForNull
     public Decimal getHogoHuyoKonkyoGengakuKingaku() {
         return hogoHuyoKonkyoGengakuKingaku;
     }
@@ -231,6 +257,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @return 境界層証明書交付年月日
      */
+    @CheckForNull
     public FlexibleDate getKyokaisoShomeishoKofuYMD() {
         return kyokaisoShomeishoKofuYMD;
     }
@@ -249,6 +276,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @return 給付額減額取消・減額自己負担月額
      */
+    @CheckForNull
     public Decimal getKyufuGengakuTorikeshi_GengakuJikofutanGetsugaku() {
         return kyufuGengakuTorikeshi_GengakuJikofutanGetsugaku;
     }
@@ -267,6 +295,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @return 居住費軽減・減額自己負担月額
      */
+    @CheckForNull
     public Decimal getKyojuhiKeigen_GengakuJikofutanGetsugaku() {
         return kyojuhiKeigen_GengakuJikofutanGetsugaku;
     }
@@ -285,6 +314,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @return 居住費軽減・負担限度額段階コード
      */
+    @CheckForNull
     public RString getKyojuhiKeigen_FutangendogakuDankaiCode() {
         return kyojuhiKeigen_FutangendogakuDankaiCode;
     }
@@ -303,6 +333,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @return 食費軽減・減額自己負担月額
      */
+    @CheckForNull
     public Decimal getShokuhiKeigen_GengakuJikofutanGetsugaku() {
         return shokuhiKeigen_GengakuJikofutanGetsugaku;
     }
@@ -321,6 +352,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @return 食費軽減・負担限度額段階コード
      */
+    @CheckForNull
     public RString getShokuhiKeigen_FutangendogakuDankaiCode() {
         return shokuhiKeigen_FutangendogakuDankaiCode;
     }
@@ -339,6 +371,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @return 利用者負担世帯合算額・減額自己負担月額
      */
+    @CheckForNull
     public Decimal getRiyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku() {
         return riyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku;
     }
@@ -358,6 +391,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @return 保険料減額・減額自己負担月額
      */
+    @CheckForNull
     public Decimal getHokenryoGengaku_GengakuJikofutanGetsugaku() {
         return hokenryoGengaku_GengakuJikofutanGetsugaku;
     }
@@ -376,6 +410,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @return 減額自己負担月額合計額
      */
+    @CheckForNull
     public Decimal getGengakuJikofutanGetsugakuGokeigaku() {
         return gengakuJikofutanGetsugakuGokeigaku;
     }
@@ -394,6 +429,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @return 境界層措置決定年月日
      */
+    @CheckForNull
     public FlexibleDate getKyukaisoSochiKetteiYMD() {
         return kyukaisoSochiKetteiYMD;
     }
@@ -414,6 +450,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @return 措置該当・非該当区分
      */
+    @CheckForNull
     public RString getSochiGaito_HigaitoKubun() {
         return sochiGaito_HigaitoKubun;
     }
@@ -430,10 +467,29 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
     }
 
     /**
+     * 論理削除フラグのgetメソッドです。
+     *
+     * @return 論理削除フラグ
+     */
+    @CheckForNull
+    public boolean getLogicalDeletedFlag() {
+        return logicalDeletedFlag;
+    }
+
+    /**
+     * 論理削除フラグのsetメソッドです。
+     *
+     * @param logicalDeletedFlag 論理削除フラグ
+     */
+    public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
+        this.logicalDeletedFlag = logicalDeletedFlag;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT1013KyokaisoSochiShinseiEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT1013KyokaisoSochiShinseiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -447,6 +503,9 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
         if (this.rirekiNo != other.rirekiNo) {
             return false;
         }
+        if (this.linkNo != other.linkNo) {
+            return false;
+        }
         return true;
     }
 
@@ -457,6 +516,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
     public void shallowCopy(DbT1013KyokaisoSochiShinseiEntity entity) {
         this.hihokenshaNo = entity.hihokenshaNo;
         this.rirekiNo = entity.rirekiNo;
+        this.linkNo = entity.linkNo;
         this.shinseiYMD = entity.shinseiYMD;
         this.uketsukeYMD = entity.uketsukeYMD;
         this.shinsei_HaishiKubun = entity.shinsei_HaishiKubun;
@@ -473,6 +533,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
         this.gengakuJikofutanGetsugakuGokeigaku = entity.gengakuJikofutanGetsugakuGokeigaku;
         this.kyukaisoSochiKetteiYMD = entity.kyukaisoSochiKetteiYMD;
         this.sochiGaito_HigaitoKubun = entity.sochiGaito_HigaitoKubun;
+        this.logicalDeletedFlag = entity.logicalDeletedFlag;
     }
 
     /**
@@ -482,7 +543,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hihokenshaNo, rirekiNo, shinseiYMD, uketsukeYMD, shinsei_HaishiKubun, shinsei_HaishiYMD, hogoHuyoKonkyoGengakuKingaku, kyokaisoShomeishoKofuYMD, kyufuGengakuTorikeshi_GengakuJikofutanGetsugaku, kyojuhiKeigen_GengakuJikofutanGetsugaku, kyojuhiKeigen_FutangendogakuDankaiCode, shokuhiKeigen_GengakuJikofutanGetsugaku, shokuhiKeigen_FutangendogakuDankaiCode, riyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku, hokenryoGengaku_GengakuJikofutanGetsugaku, gengakuJikofutanGetsugakuGokeigaku, kyukaisoSochiKetteiYMD, sochiGaito_HigaitoKubun);
+        return super.toMd5(hihokenshaNo, rirekiNo, linkNo, shinseiYMD, uketsukeYMD, shinsei_HaishiKubun, shinsei_HaishiYMD, hogoHuyoKonkyoGengakuKingaku, kyokaisoShomeishoKofuYMD, kyufuGengakuTorikeshi_GengakuJikofutanGetsugaku, kyojuhiKeigen_GengakuJikofutanGetsugaku, kyojuhiKeigen_FutangendogakuDankaiCode, shokuhiKeigen_GengakuJikofutanGetsugaku, shokuhiKeigen_FutangendogakuDankaiCode, riyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku, hokenryoGengaku_GengakuJikofutanGetsugaku, gengakuJikofutanGetsugakuGokeigaku, kyukaisoSochiKetteiYMD, sochiGaito_HigaitoKubun, logicalDeletedFlag);
     }
 
 // </editor-fold>

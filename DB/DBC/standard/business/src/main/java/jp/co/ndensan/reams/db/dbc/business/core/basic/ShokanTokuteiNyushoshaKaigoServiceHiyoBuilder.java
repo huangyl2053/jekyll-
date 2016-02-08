@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomo
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanTokuteiNyushoshaKaigoServiceHiyo}の編集を行うビルダークラスです。
@@ -103,26 +102,26 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder {
     }
 
     /**
-     * 順次番号を設定します。
+     * 明細番号を設定します。
      *
-     * @param 順次番号 順次番号
+     * @param 明細番号 明細番号
      * @return {@link ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder}
      */
-    public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set順次番号(RString 順次番号) {
-        requireNonNull(順次番号, UrSystemErrorMessages.値がnull.getReplacedMessage("順次番号"));
-        entity.setJunjiNo(順次番号);
+    public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set明細番号(RString 明細番号) {
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        entity.setMeisaiNo(明細番号);
         return this;
     }
 
     /**
-     * 履歴番号を設定します。
+     * 連番を設定します。
      *
-     * @param 履歴番号 履歴番号
+     * @param 連番 連番
      * @return {@link ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder}
      */
-    public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
+    public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set連番(RString 連番) {
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+        entity.setRenban(連番);
         return this;
     }
 
@@ -156,7 +155,7 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder {
      * @param 費用単価 費用単価
      * @return {@link ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder}
      */
-    public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set費用単価(Decimal 費用単価) {
+    public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set費用単価(int 費用単価) {
         requireNonNull(費用単価, UrSystemErrorMessages.値がnull.getReplacedMessage("費用単価"));
         entity.setHiyoTanka(費用単価);
         return this;
@@ -168,7 +167,7 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder {
      * @param 負担限度額 負担限度額
      * @return {@link ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder}
      */
-    public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set負担限度額(Decimal 負担限度額) {
+    public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set負担限度額(int 負担限度額) {
         requireNonNull(負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("負担限度額"));
         entity.setFutanGendogaku(負担限度額);
         return this;
@@ -180,7 +179,7 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder {
      * @param 日数 日数
      * @return {@link ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder}
      */
-    public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set日数(Decimal 日数) {
+    public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set日数(int 日数) {
         requireNonNull(日数, UrSystemErrorMessages.値がnull.getReplacedMessage("日数"));
         entity.setNissu(日数);
         return this;

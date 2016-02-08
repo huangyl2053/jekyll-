@@ -113,7 +113,7 @@ public class ChosaChikuGroupTest extends DbzTestBase {
 
         @Test
         public void get調査地区コードは_entityが持つ調査地区コードを返す() {
-            assertThat(sut.get調査地区コード(), is(chosaChikuGroupEntity.getChosaChikuCode()));
+            assertThat(sut.get調査地区コード(), is(chosaChikuGroupEntity.getChosachikucode()));
         }
 
         @Test
@@ -123,7 +123,7 @@ public class ChosaChikuGroupTest extends DbzTestBase {
 
         @Test
         public void get調査地区グループ名称は_entityが持つ調査地区グループ名称を返す() {
-            assertThat(sut.get調査地区グループ名称(), is(chosaChikuGroupEntity.getChosaChikuGroupName()));
+            assertThat(sut.get調査地区グループ名称(), is(chosaChikuGroupEntity.getChosachikugroupname()));
         }
 
         @Test

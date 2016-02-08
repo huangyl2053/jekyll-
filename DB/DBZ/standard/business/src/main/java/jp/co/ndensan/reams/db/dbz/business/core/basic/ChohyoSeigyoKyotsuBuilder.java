@@ -267,6 +267,54 @@ public class ChohyoSeigyoKyotsuBuilder {
     }
 
     /**
+     * 電子公印印字有無を設定します。
+     *
+     * @param 電子公印印字有無 電子公印印字有無
+     * @return {@link ChohyoSeigyoKyotsuBuilder}
+     */
+    public ChohyoSeigyoKyotsuBuilder set電子公印印字有無(boolean 電子公印印字有無) {
+        requireNonNull(電子公印印字有無, UrSystemErrorMessages.値がnull.getReplacedMessage("電子公印印字有無"));
+        entity.setDenshiKoinInjiUmu(電子公印印字有無);
+        return this;
+    }
+
+    /**
+     * 首長名印字位置を設定します。
+     *
+     * @param 首長名印字位置 首長名印字位置
+     * @return {@link ChohyoSeigyoKyotsuBuilder}
+     */
+    public ChohyoSeigyoKyotsuBuilder set首長名印字位置(RString 首長名印字位置) {
+        requireNonNull(首長名印字位置, UrSystemErrorMessages.値がnull.getReplacedMessage("首長名印字位置"));
+        entity.setShuchoMeiInjiIchi(首長名印字位置);
+        return this;
+    }
+
+    /**
+     * 公印省略印字有無を設定します。
+     *
+     * @param 公印省略印字有無 公印省略印字有無
+     * @return {@link ChohyoSeigyoKyotsuBuilder}
+     */
+    public ChohyoSeigyoKyotsuBuilder set公印省略印字有無(boolean 公印省略印字有無) {
+        requireNonNull(公印省略印字有無, UrSystemErrorMessages.値がnull.getReplacedMessage("公印省略印字有無"));
+        entity.setKoinShoryakuInjiUmu(公印省略印字有無);
+        return this;
+    }
+
+    /**
+     * 公印文字列印字有無を設定します。
+     *
+     * @param 公印文字列印字有無 公印文字列印字有無
+     * @return {@link ChohyoSeigyoKyotsuBuilder}
+     */
+    public ChohyoSeigyoKyotsuBuilder set公印文字列印字有無(boolean 公印文字列印字有無) {
+        requireNonNull(公印文字列印字有無, UrSystemErrorMessages.値がnull.getReplacedMessage("公印文字列印字有無"));
+        entity.setKoinMojiretsuInjiUmu(公印文字列印字有無);
+        return this;
+    }
+
+    /**
      * 地区表示1を設定します。
      *
      * @param 地区表示1 地区表示1

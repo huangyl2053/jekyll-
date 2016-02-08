@@ -33,6 +33,7 @@
         "DbT4302ShujiiIkenshoJohoChild"."shujiiCode" as "dbT4302ShujiiIkenshoJohoChild_shujiiCode",
         "DbT4302ShujiiIkenshoJohoChild"."ikenshoJuryoYMD" as "dbT4302ShujiiIkenshoJohoChild_ikenshoJuryoYMD",
         "DbT4302ShujiiIkenshoJohoChild"."ikenshoKinyuYMD" as "dbT4302ShujiiIkenshoJohoChild_ikenshoKinyuYMD",
+        "DbT4302ShujiiIkenshoJohoChild"."ikenshoReadYMD" as "dbT4302ShujiiIkenshoJohoChild_ikenshoReadYMD",
         "DbT4302ShujiiIkenshoJohoChild"."ikenshoSakuseiKaisuKubun" as "dbT4302ShujiiIkenshoJohoChild_ikenshoSakuseiKaisuKubun",
         "DbT4302ShujiiIkenshoJohoChild"."zaitakuShisetsuKubun" as "dbT4302ShujiiIkenshoJohoChild_zaitakuShisetsuKubun",
         "DbT4302ShujiiIkenshoJohoChild"."ikenshoDoiFlag" as "dbT4302ShujiiIkenshoJohoChild_ikenshoDoiFlag",
@@ -74,6 +75,7 @@
         <result property="shujiiCode" column="dbT4302ShujiiIkenshoJohoChild_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ikenshoJuryoYMD" column="dbT4302ShujiiIkenshoJohoChild_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ikenshoKinyuYMD" column="dbT4302ShujiiIkenshoJohoChild_ikenshoKinyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ikenshoReadYMD" column="dbT4302ShujiiIkenshoJohoChild_ikenshoReadYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ikenshoSakuseiKaisuKubun" column="dbT4302ShujiiIkenshoJohoChild_ikenshoSakuseiKaisuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="zaitakuShisetsuKubun" column="dbT4302ShujiiIkenshoJohoChild_zaitakuShisetsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ikenshoDoiFlag" column="dbT4302ShujiiIkenshoJohoChild_ikenshoDoiFlag" />

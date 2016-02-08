@@ -128,13 +128,30 @@ public enum DbT7065ChohyoSeigyoKyotsu implements IColumnDefinition {
     kozaMaskUmu(1, 0),
     /**
      * 口座名義人カナ優先区分
-     * <br/>0:表示しない　1:表示する
+     * <br/>1：漢字氏名 2：カナ氏名
      */
     kozaMeigininKanaYusenKubun(1, 0),
     /**
      * 代行プリント有無
      */
     daikoPrintUmu(1, 0),
+    /**
+     * 電子公印印字有無
+     */
+    denshiKoinInjiUmu(1, 0),
+    /**
+     * 首長名印字位置
+     * <br/>0:公印にかけない　1:公印にかける
+     */
+    shuchoMeiInjiIchi(1, 0),
+    /**
+     * 公印省略印字有無
+     */
+    koinShoryakuInjiUmu(1, 0),
+    /**
+     * 公印文字列印字有無
+     */
+    koinMojiretsuInjiUmu(1, 0),
     /**
      * 地区表示1
      * <br/>0:なし　

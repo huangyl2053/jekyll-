@@ -36,17 +36,21 @@ public class NinteichosahyoGaikyoChosa extends
      *
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @param 概況調査テキストイメージ区分 概況調査テキストイメージ区分
      */
     public NinteichosahyoGaikyoChosa(ShinseishoKanriNo 申請書管理番号,
-            int 認定調査依頼履歴番号) {
+            int 認定調査依頼履歴番号,
+            RString 概況調査テキストイメージ区分) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+        requireNonNull(概況調査テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("概況調査テキストイメージ区分"));
         this.entity = new DbT5202NinteichosahyoGaikyoChosaEntity();
         this.entity.setShinseishoKanriNo(申請書管理番号);
         this.entity.setNinteichosaRirekiNo(認定調査依頼履歴番号);
+        this.entity.setGaikyoChosaTextImageKubun(概況調査テキストイメージ区分);
         this.id = new NinteichosahyoGaikyoChosaIdentifier(
                 申請書管理番号,
-                認定調査依頼履歴番号
+                認定調査依頼履歴番号,
+                概況調査テキストイメージ区分
         );
     }
 
@@ -60,7 +64,8 @@ public class NinteichosahyoGaikyoChosa extends
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査票（概況調査）（子）"));
         this.id = new NinteichosahyoGaikyoChosaIdentifier(
                 entity.getShinseishoKanriNo(),
-                entity.getNinteichosaRirekiNo());
+                entity.getNinteichosaRirekiNo(),
+                entity.getGaikyoChosaTextImageKubun());
     }
 
     /**
@@ -94,6 +99,15 @@ public class NinteichosahyoGaikyoChosa extends
      */
     public int get認定調査依頼履歴番号() {
         return entity.getNinteichosaRirekiNo();
+    }
+
+    /**
+     * 概況調査テキストイメージ区分を返します。
+     *
+     * @return 概況調査テキストイメージ区分
+     */
+    public RString get概況調査テキストイメージ区分() {
+        return entity.getGaikyoChosaTextImageKubun();
     }
 
     /**

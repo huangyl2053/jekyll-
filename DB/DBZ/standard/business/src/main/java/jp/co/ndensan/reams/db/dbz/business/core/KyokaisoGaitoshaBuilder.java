@@ -57,9 +57,19 @@ public class KyokaisoGaitoshaBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link KyokaisoGaitoshaBuilder}
      */
-    public KyokaisoGaitoshaBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+    public KyokaisoGaitoshaBuilder set履歴番号(int 履歴番号) {
         entity.setRirekiNo(履歴番号);
+        return this;
+    }
+
+    /**
+     * リンク番号を設定します。
+     *
+     * @param リンク番号 リンク番号
+     * @return {@link KyokaisoGaitoshaBuilder}
+     */
+    public KyokaisoGaitoshaBuilder setリンク番号(int リンク番号) {
+        entity.setLinkNo(リンク番号);
         return this;
     }
 

@@ -5,9 +5,8 @@
 package jp.co.ndensan.reams.db.dbx.business.core;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuSanteiTani;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuShikibetsu;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * 介護サービス単位のクラスです。
@@ -23,8 +22,8 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 public class _KaigoServiceTani implements IKaigoServiceTani {
 
     private final int 単位数;
-    private final TanisuShikibetsu 単位数識別;
-    private final TanisuSanteiTani 単位数算定単位;
+    private final Code 単位数識別;
+    private final int 単位数算定単位;
 
     /**
      * インスタンスを生成します。
@@ -33,7 +32,7 @@ public class _KaigoServiceTani implements IKaigoServiceTani {
      * @param 単位数識別 単位数識別
      * @param 単位数算定単位 単位数算定単位
      */
-    public _KaigoServiceTani(int 単位数, TanisuShikibetsu 単位数識別, TanisuSanteiTani 単位数算定単位) {
+    public _KaigoServiceTani(int 単位数, Code 単位数識別, int 単位数算定単位) {
 
         this.単位数 = 単位数;
         this.単位数識別 = requireNonNull(単位数識別, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("単位数識別", "介護サービス内容"));
@@ -46,12 +45,12 @@ public class _KaigoServiceTani implements IKaigoServiceTani {
     }
 
     @Override
-    public TanisuShikibetsu get単位数識別() {
+    public Code get単位数識別() {
         return 単位数識別;
     }
 
     @Override
-    public TanisuSanteiTani get単位数算定単位() {
+    public int get単位数算定単位() {
         return 単位数算定単位;
     }
 }

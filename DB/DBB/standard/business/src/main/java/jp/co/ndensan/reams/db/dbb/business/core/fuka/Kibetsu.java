@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.fuka;
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.fuka.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -40,7 +40,7 @@ public class Kibetsu extends ModelBase<KibetsuIdentifier, DbT2003KibetsuEntity, 
     public Kibetsu(FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
-            Decimal 履歴番号,
+            int 履歴番号,
             RString 徴収方法,
             int 期) {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
@@ -129,7 +129,7 @@ public class Kibetsu extends ModelBase<KibetsuIdentifier, DbT2003KibetsuEntity, 
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 

@@ -26,20 +26,22 @@ public class KyokaisoSochiShinseiIdentifierTest extends DbzTestBase {
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static HihokenshaNo 被保険者番号;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
+    private static int リンク番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
         被保険者番号 = DbT1013KyokaisoSochiShinseiEntityGenerator.DEFAULT_被保険者番号;
         履歴番号 = DbT1013KyokaisoSochiShinseiEntityGenerator.DEFAULT_履歴番号;
+        リンク番号 = DbT1013KyokaisoSochiShinseiEntityGenerator.DEFAULT_リンク番号;
     }
 
     public static class シリアライズテスト extends DbzTestBase {
 
         @Test
         public void シリアライズできる() {
-            KyokaisoSochiShinseiIdentifier sut = new KyokaisoSochiShinseiIdentifier(被保険者番号, 履歴番号);
+            KyokaisoSochiShinseiIdentifier sut = new KyokaisoSochiShinseiIdentifier(被保険者番号, 履歴番号, リンク番号);
             assertThat(sut, is(IsSerializable.serializable()));
         }
     }

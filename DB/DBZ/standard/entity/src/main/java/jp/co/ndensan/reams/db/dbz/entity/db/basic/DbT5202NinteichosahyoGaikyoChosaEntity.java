@@ -30,13 +30,15 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
     private RString insertReamsLoginId;
     private UUID insertContextId;
     private boolean isDeleted = false;
-    private final int updateCount = 0;
+    private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
     private int ninteichosaRirekiNo;
+    @PrimaryKey
+    private RString gaikyoChosaTextImageKubun;
     private Code koroshoIfShikibetsuCode;
     private Code ninteichousaIraiKubunCode;
     private int ninteichosaIraiKaisu;
@@ -146,195 +148,189 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
     }
 
     /**
-     * 厚労省IF識別コードのgetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：厚労省認定ソフトのバージョン）パーティショニングのCheck項目
+     * gaikyoChosaTextImageKubunのgetメソッドです。
      *
-     * @return 厚労省IF識別コード
+     * @return gaikyoChosaTextImageKubun
+     */
+    public RString getGaikyoChosaTextImageKubun() {
+        return gaikyoChosaTextImageKubun;
+    }
+
+    /**
+     * gaikyoChosaTextImageKubunのsetメソッドです。
+     *
+     * @param gaikyoChosaTextImageKubun gaikyoChosaTextImageKubun
+     */
+    public void setGaikyoChosaTextImageKubun(@Nonnull RString gaikyoChosaTextImageKubun) {
+        this.gaikyoChosaTextImageKubun = gaikyoChosaTextImageKubun;
+    }
+
+    /**
+     * koroshoIfShikibetsuCodeのgetメソッドです。
+     *
+     * @return koroshoIfShikibetsuCode
      */
     public Code getKoroshoIfShikibetsuCode() {
         return koroshoIfShikibetsuCode;
     }
 
     /**
-     * 厚労省IF識別コードのsetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：厚労省認定ソフトのバージョン）パーティショニングのCheck項目
+     * koroshoIfShikibetsuCodeのsetメソッドです。
      *
-     * @param koroshoIfShikibetsuCode 厚労省IF識別コード
+     * @param koroshoIfShikibetsuCode koroshoIfShikibetsuCode
      */
     public void setKoroshoIfShikibetsuCode(@Nonnull Code koroshoIfShikibetsuCode) {
         this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
     }
 
     /**
-     * 認定調査依頼区分コードのgetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：認定調査依頼区分コード）
+     * ninteichousaIraiKubunCodeのgetメソッドです。
      *
-     * @return 認定調査依頼区分コード
+     * @return ninteichousaIraiKubunCode
      */
     public Code getNinteichousaIraiKubunCode() {
         return ninteichousaIraiKubunCode;
     }
 
     /**
-     * 認定調査依頼区分コードのsetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：認定調査依頼区分コード）
+     * ninteichousaIraiKubunCodeのsetメソッドです。
      *
-     * @param ninteichousaIraiKubunCode 認定調査依頼区分コード
+     * @param ninteichousaIraiKubunCode ninteichousaIraiKubunCode
      */
     public void setNinteichousaIraiKubunCode(@Nonnull Code ninteichousaIraiKubunCode) {
         this.ninteichousaIraiKubunCode = ninteichousaIraiKubunCode;
     }
 
     /**
-     * 認定調査回数のgetメソッドです。
+     * ninteichosaIraiKaisuのgetメソッドです。
      *
-     * @return 認定調査回数
+     * @return ninteichosaIraiKaisu
      */
     public int getNinteichosaIraiKaisu() {
         return ninteichosaIraiKaisu;
     }
 
     /**
-     * 認定調査回数のsetメソッドです。
+     * ninteichosaIraiKaisuのsetメソッドです。
      *
-     * @param ninteichosaIraiKaisu 認定調査回数
+     * @param ninteichosaIraiKaisu ninteichosaIraiKaisu
      */
     public void setNinteichosaIraiKaisu(@Nonnull int ninteichosaIraiKaisu) {
         this.ninteichosaIraiKaisu = ninteichosaIraiKaisu;
     }
 
     /**
-     * 認定調査実施年月日のgetメソッドです。
+     * ninteichosaJisshiYMDのgetメソッドです。
      *
-     * @return 認定調査実施年月日
+     * @return ninteichosaJisshiYMD
      */
     public FlexibleDate getNinteichosaJisshiYMD() {
         return ninteichosaJisshiYMD;
     }
 
     /**
-     * 認定調査実施年月日のsetメソッドです。
+     * ninteichosaJisshiYMDのsetメソッドです。
      *
-     * @param ninteichosaJisshiYMD 認定調査実施年月日
+     * @param ninteichosaJisshiYMD ninteichosaJisshiYMD
      */
     public void setNinteichosaJisshiYMD(@Nonnull FlexibleDate ninteichosaJisshiYMD) {
         this.ninteichosaJisshiYMD = ninteichosaJisshiYMD;
     }
 
     /**
-     * 認定調査受領年月日のgetメソッドです。
+     * ninteichosaJuryoYMDのgetメソッドです。
      *
-     * @return 認定調査受領年月日
+     * @return ninteichosaJuryoYMD
      */
     public FlexibleDate getNinteichosaJuryoYMD() {
         return ninteichosaJuryoYMD;
     }
 
     /**
-     * 認定調査受領年月日のsetメソッドです。
+     * ninteichosaJuryoYMDのsetメソッドです。
      *
-     * @param ninteichosaJuryoYMD 認定調査受領年月日
+     * @param ninteichosaJuryoYMD ninteichosaJuryoYMD
      */
     public void setNinteichosaJuryoYMD(@Nonnull FlexibleDate ninteichosaJuryoYMD) {
         this.ninteichosaJuryoYMD = ninteichosaJuryoYMD;
     }
 
     /**
-     * 認定調査区分コードのgetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：調査区分）
+     * ninteiChosaKubunCodeのgetメソッドです。
      *
-     * @return 認定調査区分コード
+     * @return ninteiChosaKubunCode
      */
     public Code getNinteiChosaKubunCode() {
         return ninteiChosaKubunCode;
     }
 
     /**
-     * 認定調査区分コードのsetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：調査区分）
+     * ninteiChosaKubunCodeのsetメソッドです。
      *
-     * @param ninteiChosaKubunCode 認定調査区分コード
+     * @param ninteiChosaKubunCode ninteiChosaKubunCode
      */
     public void setNinteiChosaKubunCode(@Nonnull Code ninteiChosaKubunCode) {
         this.ninteiChosaKubunCode = ninteiChosaKubunCode;
     }
 
     /**
-     * 認定調査委託先コードのgetメソッドです。
-     * <br/>
-     * <br/>認定調査委託先情報
+     * chosaItakusakiCodeのgetメソッドです。
      *
-     * @return 認定調査委託先コード
+     * @return chosaItakusakiCode
      */
     public JigyoshaNo getChosaItakusakiCode() {
         return chosaItakusakiCode;
     }
 
     /**
-     * 認定調査委託先コードのsetメソッドです。
-     * <br/>
-     * <br/>認定調査委託先情報
+     * chosaItakusakiCodeのsetメソッドです。
      *
-     * @param chosaItakusakiCode 認定調査委託先コード
+     * @param chosaItakusakiCode chosaItakusakiCode
      */
     public void setChosaItakusakiCode(@Nonnull JigyoshaNo chosaItakusakiCode) {
         this.chosaItakusakiCode = chosaItakusakiCode;
     }
 
     /**
-     * 認定調査員コードのgetメソッドです。
-     * <br/>
-     * <br/>認定調査員情報
+     * chosainCodeのgetメソッドです。
      *
-     * @return 認定調査員コード
+     * @return chosainCode
      */
     public RString getChosainCode() {
         return chosainCode;
     }
 
     /**
-     * 認定調査員コードのsetメソッドです。
-     * <br/>
-     * <br/>認定調査員情報
+     * chosainCodeのsetメソッドです。
      *
-     * @param chosainCode 認定調査員コード
+     * @param chosainCode chosainCode
      */
     public void setChosainCode(@Nonnull RString chosainCode) {
         this.chosainCode = chosainCode;
     }
 
     /**
-     * 認定調査実施場所コードのgetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：調査実施場所コード）
+     * chosaJisshiBashoCodeのgetメソッドです。
      *
-     * @return 認定調査実施場所コード
+     * @return chosaJisshiBashoCode
      */
     public Code getChosaJisshiBashoCode() {
         return chosaJisshiBashoCode;
     }
 
     /**
-     * 認定調査実施場所コードのsetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：調査実施場所コード）
+     * chosaJisshiBashoCodeのsetメソッドです。
      *
-     * @param chosaJisshiBashoCode 認定調査実施場所コード
+     * @param chosaJisshiBashoCode chosaJisshiBashoCode
      */
     public void setChosaJisshiBashoCode(@Nonnull Code chosaJisshiBashoCode) {
         this.chosaJisshiBashoCode = chosaJisshiBashoCode;
     }
 
     /**
-     * 認定調査実施場所名称のgetメソッドです。
+     * chosaJisshiBashoMeishoのgetメソッドです。
      *
-     * @return 認定調査実施場所名称
+     * @return chosaJisshiBashoMeisho
      */
     @CheckForNull
     public RString getChosaJisshiBashoMeisho() {
@@ -342,40 +338,36 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
     }
 
     /**
-     * 認定調査実施場所名称のsetメソッドです。
+     * chosaJisshiBashoMeishoのsetメソッドです。
      *
-     * @param chosaJisshiBashoMeisho 認定調査実施場所名称
+     * @param chosaJisshiBashoMeisho chosaJisshiBashoMeisho
      */
     public void setChosaJisshiBashoMeisho(RString chosaJisshiBashoMeisho) {
         this.chosaJisshiBashoMeisho = chosaJisshiBashoMeisho;
     }
 
     /**
-     * 認定調査・サービス区分コードのgetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：現在のサービス区分コード）
+     * serviceKubunCodeのgetメソッドです。
      *
-     * @return 認定調査・サービス区分コード
+     * @return serviceKubunCode
      */
     public Code getServiceKubunCode() {
         return serviceKubunCode;
     }
 
     /**
-     * 認定調査・サービス区分コードのsetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：現在のサービス区分コード）
+     * serviceKubunCodeのsetメソッドです。
      *
-     * @param serviceKubunCode 認定調査・サービス区分コード
+     * @param serviceKubunCode serviceKubunCode
      */
     public void setServiceKubunCode(@Nonnull Code serviceKubunCode) {
         this.serviceKubunCode = serviceKubunCode;
     }
 
     /**
-     * 利用施設名のgetメソッドです。
+     * riyoShisetsuShimeiのgetメソッドです。
      *
-     * @return 利用施設名
+     * @return riyoShisetsuShimei
      */
     @CheckForNull
     public RString getRiyoShisetsuShimei() {
@@ -383,18 +375,18 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
     }
 
     /**
-     * 利用施設名のsetメソッドです。
+     * riyoShisetsuShimeiのsetメソッドです。
      *
-     * @param riyoShisetsuShimei 利用施設名
+     * @param riyoShisetsuShimei riyoShisetsuShimei
      */
     public void setRiyoShisetsuShimei(RString riyoShisetsuShimei) {
         this.riyoShisetsuShimei = riyoShisetsuShimei;
     }
 
     /**
-     * 利用施設住所のgetメソッドです。
+     * riyoShisetsuJushoのgetメソッドです。
      *
-     * @return 利用施設住所
+     * @return riyoShisetsuJusho
      */
     @CheckForNull
     public RString getRiyoShisetsuJusho() {
@@ -402,18 +394,18 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
     }
 
     /**
-     * 利用施設住所のsetメソッドです。
+     * riyoShisetsuJushoのsetメソッドです。
      *
-     * @param riyoShisetsuJusho 利用施設住所
+     * @param riyoShisetsuJusho riyoShisetsuJusho
      */
     public void setRiyoShisetsuJusho(RString riyoShisetsuJusho) {
         this.riyoShisetsuJusho = riyoShisetsuJusho;
     }
 
     /**
-     * 利用施設電話番号のgetメソッドです。
+     * riyoShisetsuTelNoのgetメソッドです。
      *
-     * @return 利用施設電話番号
+     * @return riyoShisetsuTelNo
      */
     @CheckForNull
     public RString getRiyoShisetsuTelNo() {
@@ -421,18 +413,18 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
     }
 
     /**
-     * 利用施設電話番号のsetメソッドです。
+     * riyoShisetsuTelNoのsetメソッドです。
      *
-     * @param riyoShisetsuTelNo 利用施設電話番号
+     * @param riyoShisetsuTelNo riyoShisetsuTelNo
      */
     public void setRiyoShisetsuTelNo(RString riyoShisetsuTelNo) {
         this.riyoShisetsuTelNo = riyoShisetsuTelNo;
     }
 
     /**
-     * 利用施設郵便番号のgetメソッドです。
+     * riyoShisetsuYubinNoのgetメソッドです。
      *
-     * @return 利用施設郵便番号
+     * @return riyoShisetsuYubinNo
      */
     @CheckForNull
     public YubinNo getRiyoShisetsuYubinNo() {
@@ -440,18 +432,18 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
     }
 
     /**
-     * 利用施設郵便番号のsetメソッドです。
+     * riyoShisetsuYubinNoのsetメソッドです。
      *
-     * @param riyoShisetsuYubinNo 利用施設郵便番号
+     * @param riyoShisetsuYubinNo riyoShisetsuYubinNo
      */
     public void setRiyoShisetsuYubinNo(YubinNo riyoShisetsuYubinNo) {
         this.riyoShisetsuYubinNo = riyoShisetsuYubinNo;
     }
 
     /**
-     * 特記のgetメソッドです。
+     * tokkiのgetメソッドです。
      *
-     * @return 特記
+     * @return tokki
      */
     @CheckForNull
     public RString getTokki() {
@@ -459,18 +451,18 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
     }
 
     /**
-     * 特記のsetメソッドです。
+     * tokkiのsetメソッドです。
      *
-     * @param tokki 特記
+     * @param tokki tokki
      */
     public void setTokki(RString tokki) {
         this.tokki = tokki;
     }
 
     /**
-     * 認定調査特記事項受付年月日のgetメソッドです。
+     * tokkijikoUketsukeYMDのgetメソッドです。
      *
-     * @return 認定調査特記事項受付年月日
+     * @return tokkijikoUketsukeYMD
      */
     @CheckForNull
     public FlexibleDate getTokkijikoUketsukeYMD() {
@@ -478,18 +470,18 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
     }
 
     /**
-     * 認定調査特記事項受付年月日のsetメソッドです。
+     * tokkijikoUketsukeYMDのsetメソッドです。
      *
-     * @param tokkijikoUketsukeYMD 認定調査特記事項受付年月日
+     * @param tokkijikoUketsukeYMD tokkijikoUketsukeYMD
      */
     public void setTokkijikoUketsukeYMD(FlexibleDate tokkijikoUketsukeYMD) {
         this.tokkijikoUketsukeYMD = tokkijikoUketsukeYMD;
     }
 
     /**
-     * 認定調査特記事項受領年月日のgetメソッドです。
+     * tokkijikoJuryoYMDのgetメソッドです。
      *
-     * @return 認定調査特記事項受領年月日
+     * @return tokkijikoJuryoYMD
      */
     @CheckForNull
     public FlexibleDate getTokkijikoJuryoYMD() {
@@ -497,9 +489,9 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
     }
 
     /**
-     * 認定調査特記事項受領年月日のsetメソッドです。
+     * tokkijikoJuryoYMDのsetメソッドです。
      *
-     * @param tokkijikoJuryoYMD 認定調査特記事項受領年月日
+     * @param tokkijikoJuryoYMD tokkijikoJuryoYMD
      */
     public void setTokkijikoJuryoYMD(FlexibleDate tokkijikoJuryoYMD) {
         this.tokkijikoJuryoYMD = tokkijikoJuryoYMD;
@@ -520,18 +512,23 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
         if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
             return false;
         }
-        return this.ninteichosaRirekiNo == other.ninteichosaRirekiNo;
+        if (this.ninteichosaRirekiNo != other.ninteichosaRirekiNo) {
+            return false;
+        }
+        if (!Objects.equals(this.gaikyoChosaTextImageKubun, other.gaikyoChosaTextImageKubun)) {
+            return false;
+        }
+        return true;
     }
 
     /**
      * {@inheritDoc}
-     *
-     * @param entity
      */
     @Override
     public void shallowCopy(DbT5202NinteichosahyoGaikyoChosaEntity entity) {
         this.shinseishoKanriNo = entity.shinseishoKanriNo;
         this.ninteichosaRirekiNo = entity.ninteichosaRirekiNo;
+        this.gaikyoChosaTextImageKubun = entity.gaikyoChosaTextImageKubun;
         this.koroshoIfShikibetsuCode = entity.koroshoIfShikibetsuCode;
         this.ninteichousaIraiKubunCode = entity.ninteichousaIraiKubunCode;
         this.ninteichosaIraiKaisu = entity.ninteichosaIraiKaisu;
@@ -559,7 +556,7 @@ public class DbT5202NinteichosahyoGaikyoChosaEntity extends DbTableEntityBase<Db
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, ninteichosaRirekiNo, koroshoIfShikibetsuCode, ninteichousaIraiKubunCode, ninteichosaIraiKaisu, ninteichosaJisshiYMD, ninteichosaJuryoYMD, ninteiChosaKubunCode, chosaItakusakiCode, chosainCode, chosaJisshiBashoCode, chosaJisshiBashoMeisho, serviceKubunCode, riyoShisetsuShimei, riyoShisetsuJusho, riyoShisetsuTelNo, riyoShisetsuYubinNo, tokki, tokkijikoUketsukeYMD, tokkijikoJuryoYMD);
+        return super.toMd5(shinseishoKanriNo, ninteichosaRirekiNo, gaikyoChosaTextImageKubun, koroshoIfShikibetsuCode, ninteichousaIraiKubunCode, ninteichosaIraiKaisu, ninteichosaJisshiYMD, ninteichosaJuryoYMD, ninteiChosaKubunCode, chosaItakusakiCode, chosainCode, chosaJisshiBashoCode, chosaJisshiBashoMeisho, serviceKubunCode, riyoShisetsuShimei, riyoShisetsuJusho, riyoShisetsuTelNo, riyoShisetsuYubinNo, tokki, tokkijikoUketsukeYMD, tokkijikoJuryoYMD);
     }
 
 // </editor-fold>
