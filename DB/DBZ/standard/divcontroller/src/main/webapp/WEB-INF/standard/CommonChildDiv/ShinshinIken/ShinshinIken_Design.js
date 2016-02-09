@@ -56,10 +56,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radIshiDentatsuNoryoku"));
             };
 
-            Controls.prototype.radShokujiKoi = function () {
-                return new UZA.RadioButton(this.convFiledName("radShokujiKoi"));
-            };
-
             Controls.prototype.NinchishoShuhenShojo = function () {
                 return new UZA.Panel(this.convFiledName("NinchishoShuhenShojo"));
             };

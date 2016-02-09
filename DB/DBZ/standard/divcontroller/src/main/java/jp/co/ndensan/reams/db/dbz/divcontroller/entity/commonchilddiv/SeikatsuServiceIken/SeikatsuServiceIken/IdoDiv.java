@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IdoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,34 +34,58 @@ public class IdoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getradOkugaiHokou
+     * @return radOkugaiHokou
+     */
     @JsonProperty("radOkugaiHokou")
     public RadioButton getRadOkugaiHokou() {
         return radOkugaiHokou;
     }
 
+    /*
+     * setradOkugaiHokou
+     * @param radOkugaiHokou radOkugaiHokou
+     */
     @JsonProperty("radOkugaiHokou")
     public void setRadOkugaiHokou(RadioButton radOkugaiHokou) {
-        this.radOkugaiHokou=radOkugaiHokou;
+        this.radOkugaiHokou = radOkugaiHokou;
     }
 
+    /*
+     * getradKurumaisuShiyo
+     * @return radKurumaisuShiyo
+     */
     @JsonProperty("radKurumaisuShiyo")
     public RadioButton getRadKurumaisuShiyo() {
         return radKurumaisuShiyo;
     }
 
+    /*
+     * setradKurumaisuShiyo
+     * @param radKurumaisuShiyo radKurumaisuShiyo
+     */
     @JsonProperty("radKurumaisuShiyo")
     public void setRadKurumaisuShiyo(RadioButton radKurumaisuShiyo) {
-        this.radKurumaisuShiyo=radKurumaisuShiyo;
+        this.radKurumaisuShiyo = radKurumaisuShiyo;
     }
 
+    /*
+     * getchkHokohojoShiyo
+     * @return chkHokohojoShiyo
+     */
     @JsonProperty("chkHokohojoShiyo")
     public CheckBoxList getChkHokohojoShiyo() {
         return chkHokohojoShiyo;
     }
 
+    /*
+     * setchkHokohojoShiyo
+     * @param chkHokohojoShiyo chkHokohojoShiyo
+     */
     @JsonProperty("chkHokohojoShiyo")
     public void setChkHokohojoShiyo(CheckBoxList chkHokohojoShiyo) {
-        this.chkHokohojoShiyo=chkHokohojoShiyo;
+        this.chkHokohojoShiyo = chkHokohojoShiyo;
     }
 
     // </editor-fold>

@@ -37,16 +37,16 @@ module DBZ {
                 return new UZA.Label(this.convFiledName("lblTokki"));
             }
 
+            public txtTokki(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTokki"));
+            }
+
             public imgTokkiJiko(): UZA.StaticImage {
                 return new UZA.StaticImage(this.convFiledName("imgTokkiJiko"));
             }
 
             public btnKakutei(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnKakutei"));
-            }
-
-            public btnMasking(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnMasking"));
             }
 
             public btnCancel(): UZA.Button {

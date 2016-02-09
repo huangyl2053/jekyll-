@@ -33,30 +33,6 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public NarabekaeJoken(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("NarabekaeJoken"));
-            }
-
-            public ddlFirstPriority(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlFirstPriority"));
-            }
-
-            public ddlSecondPriority(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlSecondPriority"));
-            }
-
-            public ddlThirdPriority(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlThirdPriority"));
-            }
-
-            public btnNarabekae(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnNarabekae"));
-            }
-
-            public NinteiTaskIchiran(): UZA.PanelBatchParameter {
-                return new UZA.PanelBatchParameter(this.convFiledName("NinteiTaskIchiran"));
-            }
-
             public txtCompleteCount(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtCompleteCount"));
             }
@@ -65,20 +41,8 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtTotalCount"));
             }
 
-            public txtNarabekae(): UZA.Button {
-                return new UZA.Button(this.convFiledName("txtNarabekae"));
-            }
-
             public dgNinteiTaskList(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgNinteiTaskList"));
-            }
-
-            public btnCSVShutsuryoku(): UZA.ButtonBatchRegister {
-                return new UZA.ButtonBatchRegister(this.convFiledName("btnCSVShutsuryoku"));
-            }
-
-            public btnIchiranhyoShutsuryoku(): UZA.ButtonBatchRegister {
-                return new UZA.ButtonBatchRegister(this.convFiledName("btnIchiranhyoShutsuryoku"));
             }
 
         }

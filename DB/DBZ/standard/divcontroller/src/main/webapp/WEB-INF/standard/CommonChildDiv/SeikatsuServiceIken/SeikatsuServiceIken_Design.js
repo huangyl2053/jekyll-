@@ -92,8 +92,8 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("IgakutekiKanriHitsuyosei"));
             };
 
-            Controls.prototype.chkIgakutekiKanriHitsuyosei = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkIgakutekiKanriHitsuyosei"));
+            Controls.prototype.chkIgakutekiKanri = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkIgakutekiKanri"));
             };
 
             Controls.prototype.chkSonotaIryoService = function () {
@@ -102,6 +102,10 @@ var DBZ;
 
             Controls.prototype.txtShonotaIryoServiceShosai = function () {
                 return new UZA.TextBox(this.convFiledName("txtShonotaIryoServiceShosai"));
+            };
+
+            Controls.prototype.chkSonotaIryoServiceHitsuyoSei = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkSonotaIryoServiceHitsuyoSei"));
             };
 
             Controls.prototype.IgakutekiKantenRyuiten = function () {

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShojoAnteiseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,24 +32,40 @@ public class ShojoAnteiseiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getradShojoAnteisei
+     * @return radShojoAnteisei
+     */
     @JsonProperty("radShojoAnteisei")
     public RadioButton getRadShojoAnteisei() {
         return radShojoAnteisei;
     }
 
+    /*
+     * setradShojoAnteisei
+     * @param radShojoAnteisei radShojoAnteisei
+     */
     @JsonProperty("radShojoAnteisei")
     public void setRadShojoAnteisei(RadioButton radShojoAnteisei) {
-        this.radShojoAnteisei=radShojoAnteisei;
+        this.radShojoAnteisei = radShojoAnteisei;
     }
 
+    /*
+     * gettxtFuanteiShosaiJokyo
+     * @return txtFuanteiShosaiJokyo
+     */
     @JsonProperty("txtFuanteiShosaiJokyo")
     public TextBox getTxtFuanteiShosaiJokyo() {
         return txtFuanteiShosaiJokyo;
     }
 
+    /*
+     * settxtFuanteiShosaiJokyo
+     * @param txtFuanteiShosaiJokyo txtFuanteiShosaiJokyo
+     */
     @JsonProperty("txtFuanteiShosaiJokyo")
     public void setTxtFuanteiShosaiJokyo(TextBox txtFuanteiShosaiJokyo) {
-        this.txtFuanteiShosaiJokyo=txtFuanteiShosaiJokyo;
+        this.txtFuanteiShosaiJokyo = txtFuanteiShosaiJokyo;
     }
 
     // </editor-fold>

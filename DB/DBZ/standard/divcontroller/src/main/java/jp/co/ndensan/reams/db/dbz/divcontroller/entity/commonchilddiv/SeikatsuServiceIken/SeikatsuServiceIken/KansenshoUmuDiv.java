@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KansenshoUmuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,34 +34,58 @@ public class KansenshoUmuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getradKansenshoUmu
+     * @return radKansenshoUmu
+     */
     @JsonProperty("radKansenshoUmu")
     public RadioButton getRadKansenshoUmu() {
         return radKansenshoUmu;
     }
 
+    /*
+     * setradKansenshoUmu
+     * @param radKansenshoUmu radKansenshoUmu
+     */
     @JsonProperty("radKansenshoUmu")
     public void setRadKansenshoUmu(RadioButton radKansenshoUmu) {
-        this.radKansenshoUmu=radKansenshoUmu;
+        this.radKansenshoUmu = radKansenshoUmu;
     }
 
+    /*
+     * getspSpace1
+     * @return spSpace1
+     */
     @JsonProperty("spSpace1")
     public Space getSpSpace1() {
         return spSpace1;
     }
 
+    /*
+     * setspSpace1
+     * @param spSpace1 spSpace1
+     */
     @JsonProperty("spSpace1")
     public void setSpSpace1(Space spSpace1) {
-        this.spSpace1=spSpace1;
+        this.spSpace1 = spSpace1;
     }
 
+    /*
+     * gettxtKansenshoShosai
+     * @return txtKansenshoShosai
+     */
     @JsonProperty("txtKansenshoShosai")
     public TextBox getTxtKansenshoShosai() {
         return txtKansenshoShosai;
     }
 
+    /*
+     * settxtKansenshoShosai
+     * @param txtKansenshoShosai txtKansenshoShosai
+     */
     @JsonProperty("txtKansenshoShosai")
     public void setTxtKansenshoShosai(TextBox txtKansenshoShosai) {
-        this.txtKansenshoShosai=txtKansenshoShosai;
+        this.txtKansenshoShosai = txtKansenshoShosai;
     }
 
     // </editor-fold>

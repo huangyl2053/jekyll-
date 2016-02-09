@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HasseiJotaiTaishoHoshinDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,44 +36,76 @@ public class HasseiJotaiTaishoHoshinDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getchkHasseiShojo
+     * @return chkHasseiShojo
+     */
     @JsonProperty("chkHasseiShojo")
     public CheckBoxList getChkHasseiShojo() {
         return chkHasseiShojo;
     }
 
+    /*
+     * setchkHasseiShojo
+     * @param chkHasseiShojo chkHasseiShojo
+     */
     @JsonProperty("chkHasseiShojo")
     public void setChkHasseiShojo(CheckBoxList chkHasseiShojo) {
-        this.chkHasseiShojo=chkHasseiShojo;
+        this.chkHasseiShojo = chkHasseiShojo;
     }
 
+    /*
+     * getchkJotaiSonota
+     * @return chkJotaiSonota
+     */
     @JsonProperty("chkJotaiSonota")
     public CheckBoxList getChkJotaiSonota() {
         return chkJotaiSonota;
     }
 
+    /*
+     * setchkJotaiSonota
+     * @param chkJotaiSonota chkJotaiSonota
+     */
     @JsonProperty("chkJotaiSonota")
     public void setChkJotaiSonota(CheckBoxList chkJotaiSonota) {
-        this.chkJotaiSonota=chkJotaiSonota;
+        this.chkJotaiSonota = chkJotaiSonota;
     }
 
+    /*
+     * gettxtSonotaJotaiShosai
+     * @return txtSonotaJotaiShosai
+     */
     @JsonProperty("txtSonotaJotaiShosai")
     public TextBox getTxtSonotaJotaiShosai() {
         return txtSonotaJotaiShosai;
     }
 
+    /*
+     * settxtSonotaJotaiShosai
+     * @param txtSonotaJotaiShosai txtSonotaJotaiShosai
+     */
     @JsonProperty("txtSonotaJotaiShosai")
     public void setTxtSonotaJotaiShosai(TextBox txtSonotaJotaiShosai) {
-        this.txtSonotaJotaiShosai=txtSonotaJotaiShosai;
+        this.txtSonotaJotaiShosai = txtSonotaJotaiShosai;
     }
 
+    /*
+     * gettxtTaishoHoushin
+     * @return txtTaishoHoushin
+     */
     @JsonProperty("txtTaishoHoushin")
     public TextBox getTxtTaishoHoushin() {
         return txtTaishoHoushin;
     }
 
+    /*
+     * settxtTaishoHoushin
+     * @param txtTaishoHoushin txtTaishoHoushin
+     */
     @JsonProperty("txtTaishoHoushin")
     public void setTxtTaishoHoushin(TextBox txtTaishoHoushin) {
-        this.txtTaishoHoushin=txtTaishoHoushin;
+        this.txtTaishoHoushin = txtTaishoHoushin;
     }
 
     // </editor-fold>

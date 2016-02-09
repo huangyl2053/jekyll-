@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class EiyoShokuseikatsuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,34 +34,58 @@ public class EiyoShokuseikatsuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getradShokujiKoi
+     * @return radShokujiKoi
+     */
     @JsonProperty("radShokujiKoi")
     public RadioButton getRadShokujiKoi() {
         return radShokujiKoi;
     }
 
+    /*
+     * setradShokujiKoi
+     * @param radShokujiKoi radShokujiKoi
+     */
     @JsonProperty("radShokujiKoi")
     public void setRadShokujiKoi(RadioButton radShokujiKoi) {
-        this.radShokujiKoi=radShokujiKoi;
+        this.radShokujiKoi = radShokujiKoi;
     }
 
+    /*
+     * getradGenzaiEiyoJotai
+     * @return radGenzaiEiyoJotai
+     */
     @JsonProperty("radGenzaiEiyoJotai")
     public RadioButton getRadGenzaiEiyoJotai() {
         return radGenzaiEiyoJotai;
     }
 
+    /*
+     * setradGenzaiEiyoJotai
+     * @param radGenzaiEiyoJotai radGenzaiEiyoJotai
+     */
     @JsonProperty("radGenzaiEiyoJotai")
     public void setRadGenzaiEiyoJotai(RadioButton radGenzaiEiyoJotai) {
-        this.radGenzaiEiyoJotai=radGenzaiEiyoJotai;
+        this.radGenzaiEiyoJotai = radGenzaiEiyoJotai;
     }
 
+    /*
+     * gettxtEiyoShokuseikatsuRyuiten
+     * @return txtEiyoShokuseikatsuRyuiten
+     */
     @JsonProperty("txtEiyoShokuseikatsuRyuiten")
     public TextBox getTxtEiyoShokuseikatsuRyuiten() {
         return txtEiyoShokuseikatsuRyuiten;
     }
 
+    /*
+     * settxtEiyoShokuseikatsuRyuiten
+     * @param txtEiyoShokuseikatsuRyuiten txtEiyoShokuseikatsuRyuiten
+     */
     @JsonProperty("txtEiyoShokuseikatsuRyuiten")
     public void setTxtEiyoShokuseikatsuRyuiten(TextBox txtEiyoShokuseikatsuRyuiten) {
-        this.txtEiyoShokuseikatsuRyuiten=txtEiyoShokuseikatsuRyuiten;
+        this.txtEiyoShokuseikatsuRyuiten = txtEiyoShokuseikatsuRyuiten;
     }
 
     // </editor-fold>

@@ -61,10 +61,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radIshiDentatsuNoryoku"));
             }
 
-            public radShokujiKoi(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radShokujiKoi"));
-            }
-
             public NinchishoShuhenShojo(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("NinchishoShuhenShojo"));
             }
