@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -87,7 +86,7 @@ public class FukaMiscManager {
     public Optional<Fuka> find賦課(FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
 
         return Optional.ofNullable(new Fuka(dac.select賦課ByKey(調定年度, 賦課年度, 通知書番号, 履歴番号).get()));
     }

@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -47,8 +46,8 @@ public class FukaDacTest {
     private static final TsuchishoNo 通知書番号1 = DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
     private static final TsuchishoNo 通知書番号2 = new TsuchishoNo("3");
 //    private static final RDateTime 履歴番号 = DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
-    private static final Decimal 履歴番号 = DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
-    private static final Decimal 履歴番号2 = DbT2002FukaEntityGenerator.DEFAULT_履歴番号.add(new Decimal(1));
+    private static final int 履歴番号 = DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
+    private static final int 履歴番号2 = DbT2002FukaEntityGenerator.DEFAULT_履歴番号 + 1;
 //    private static final RDateTime 履歴番号2 = RDateTime.of(2013, 9, 01, 10, 20, 30, 123);
     private static final HihokenshaNo 被保険者番号1 = DbT2002FukaEntityGenerator.DEFAULT_被保険者番号;
     private static final HihokenshaNo 被保険者番号2 = new HihokenshaNo("0000000003");
@@ -89,10 +88,10 @@ public class FukaDacTest {
                 sut.select賦課ByKey(調定年度1, 賦課年度1, null, 履歴番号);
             }
 
-            @Test(expected = NullPointerException.class)
-            public void 引数の処理日時にnullを指定した場合_NullPointerExceptionが発生する() {
-                sut.select賦課ByKey(調定年度1, 賦課年度1, 通知書番号1, null);
-            }
+//            @Test(expected = NullPointerException.class)
+//            public void 引数の処理日時にnullを指定した場合_NullPointerExceptionが発生する() {
+//                sut.select賦課ByKey(調定年度1, 賦課年度1, 通知書番号1, null);
+//            }
 
             @Test
             public void データが見つかる検索条件を渡すと_賦課モデル返す() {
@@ -115,8 +114,8 @@ public class FukaDacTest {
             private static final FlexibleYear 調定年度_2002 = new FlexibleYear("2002");
             private static final TsuchishoNo 通知書番号_1 = new TsuchishoNo("1");
             private static final TsuchishoNo 通知書番号_2 = new TsuchishoNo("2");
-            private static final Decimal 履歴番号1 = new Decimal(1);
-            private static final Decimal 履歴番号2 = new Decimal(2);
+            private static final int 履歴番号1 = 1;
+            private static final int 履歴番号2 = 2;
 //            private static final RDateTime 履歴番号1 = RDateTime.of(2001, 1, 1, 1, 1, 1, 1);
 //            private static final RDateTime 履歴番号2 = RDateTime.of(2002, 2, 2, 2, 2, 2, 2);
 
@@ -173,13 +172,13 @@ public class FukaDacTest {
                         DEFAULT_履歴番号);
             }
 
-            @Test(expected = NullPointerException.class)
-            public void 処理日時がnullの場合_selectRecentlyは_NullPointerExceptionをスローする() {
-                sut.select賦課Recently(
-                        DEFAULT_賦課年度,
-                        DEFAULT_通知書番号,
-                        null);
-            }
+//            @Test(expected = NullPointerException.class)
+//            public void 処理日時がnullの場合_selectRecentlyは_NullPointerExceptionをスローする() {
+//                sut.select賦課Recently(
+//                        DEFAULT_賦課年度,
+//                        DEFAULT_通知書番号,
+//                        null);
+//            }
 
             public static class 引数に該当する情報がある時_selectRecentlyは_直近のモデルを１件返す extends DbzTestDacBase {
 
@@ -384,7 +383,7 @@ public class FukaDacTest {
                 sut.insert(model);
 
                 model.initializeMd5();
-                model.setSetaiInsu(new Decimal(5));
+                model.setSetaiInsu(5);
 
                 assertThat(sut.update(model), is(1));
             }
@@ -409,7 +408,7 @@ public class FukaDacTest {
 
         private static class TestSupport {
 
-            public static void insertDbT2002(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, Decimal 履歴番号, HihokenshaNo 被保険者番号) {
+            public static void insertDbT2002(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, int 履歴番号, HihokenshaNo 被保険者番号) {
                 DbT2002FukaEntity entity = DbT2002FukaEntityGenerator.createDbT2002FukaEntity();
                 entity.setChoteiNendo(調定年度);
                 entity.setFukaNendo(賦課年度);

@@ -12,7 +12,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KibetsuBuilder;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.FukaMapperParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
@@ -22,11 +22,9 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.KibetsuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.ChoteiJiyu;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -96,8 +94,10 @@ public class FukaRelateManagerTest {
 
             FlexibleYear 主キー1 = DbT2002FukaEntityGenerator.DEFAULT_調定年度;
             FlexibleYear 主キー2 = DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
+            TsuchishoNo 主キー3 = DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
+            int 主キー4 = DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
 
-            FukaMapperParameter 介護賦課検索条件 = FukaMapperParameter.createSelectByKeyParam(主キー1, 主キー2);
+            FukaMapperParameter 介護賦課検索条件 = FukaMapperParameter.createParam(主キー1, 主キー2, 主キー3, 主キー4);
             Fuka result = sut.get介護賦課(介護賦課検索条件);
 
             assertThat(result, is(nullValue()));
@@ -113,7 +113,9 @@ public class FukaRelateManagerTest {
 
             FlexibleYear 主キー1 = DbT2002FukaEntityGenerator.DEFAULT_調定年度;
             FlexibleYear 主キー2 = DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
-            FukaMapperParameter 介護賦課検索条件 = FukaMapperParameter.createSelectByKeyParam(主キー1, 主キー2);
+            TsuchishoNo 主キー3 = DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
+            int 主キー4 = DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
+            FukaMapperParameter 介護賦課検索条件 = FukaMapperParameter.createParam(主キー1, 主キー2, 主キー3, 主キー4);
             Fuka result = sut.get介護賦課(介護賦課検索条件);
 
             assertThat(result.get調定年度(), is(DbT2002FukaEntityGenerator.DEFAULT_調定年度));
@@ -135,7 +137,10 @@ public class FukaRelateManagerTest {
             when(provider.create(any(Class.class))).thenReturn(mapper);
 
             FlexibleYear 主キー1 = DbT2002FukaEntityGenerator.DEFAULT_調定年度;
-            FukaMapperParameter 介護賦課検索条件 = FukaMapperParameter.createSelectListParam(主キー1);
+            FlexibleYear 主キー2 = DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
+            TsuchishoNo 主キー3 = DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
+            int 主キー4 = DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
+            FukaMapperParameter 介護賦課検索条件 = FukaMapperParameter.createParam(主キー1, 主キー2, 主キー3, 主キー4);
             List<Fuka> result = sut.get介護賦課リストBy主キー1(介護賦課検索条件);
 
             assertThat(result.isEmpty(), is(true));
@@ -152,7 +157,10 @@ public class FukaRelateManagerTest {
             when(provider.create(any(Class.class))).thenReturn(mapper);
 
             FlexibleYear 主キー1 = DbT2002FukaEntityGenerator.DEFAULT_調定年度;
-            FukaMapperParameter 介護賦課検索条件 = FukaMapperParameter.createSelectListParam(主キー1);
+            FlexibleYear 主キー2 = DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
+            TsuchishoNo 主キー3 = DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
+            int 主キー4 = DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
+            FukaMapperParameter 介護賦課検索条件 = FukaMapperParameter.createParam(主キー1, 主キー2, 主キー3, 主キー4);
             List<Fuka> result = sut.get介護賦課リストBy主キー1(介護賦課検索条件);
 
             assertThat(result.size(), is(1));
@@ -268,7 +276,7 @@ public class FukaRelateManagerTest {
     private static class TestSupport {
 
         public static Fuka createFuka(FlexibleYear 主キー1, FlexibleYear 主キー2) {
-            Fuka 介護賦課 = new Fuka(主キー1, 主キー2, TsuchishoNo.EMPTY, Decimal.ZERO);
+            Fuka 介護賦課 = new Fuka(主キー1, 主キー2, TsuchishoNo.EMPTY, 0);
             return 介護賦課.createBuilderForEdit()
                     // 介護期別
                     .setKibetsu(createKibetsu(主キー1, 主キー2))
@@ -277,7 +285,7 @@ public class FukaRelateManagerTest {
 
 // 介護期別
         private static Kibetsu createKibetsu(FlexibleYear 主キー1, FlexibleYear 主キー2) {
-            return new Kibetsu(主キー2, 主キー2, TsuchishoNo.EMPTY, Decimal.ZERO, RString.EMPTY, 1);
+            return new Kibetsu(主キー2, 主キー2, TsuchishoNo.EMPTY, 0, RString.EMPTY, 1);
         }
 
         public static Fuka initializeFuka(Fuka 介護賦課) {
@@ -307,7 +315,7 @@ public class FukaRelateManagerTest {
             Kibetsu Kibetsu = KibetsuBuilder.set徴収方法(new RString("任意項目1を変更")).build();
 // TODO 下記のXXX部は本メソッドの引数名に変更してください。
             介護賦課 = 介護賦課.createBuilderForEdit()
-                    .set調定事由1(new ChoteiJiyu(new RString("01"))) // TODO 任意項目の値を変更してください。
+                    .set調定事由1(new RString("01")) // TODO 任意項目の値を変更してください。
                     // 介護期別
                     .setKibetsu(Kibetsu)
                     .build();

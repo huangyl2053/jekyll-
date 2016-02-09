@@ -12,7 +12,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuYuyo;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KibetsuChoshuYuyo;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KibetsuChoshuYuyoBuilder;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.ChoshuYuyoMapperParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choshuyuyo.ChoshuYuyoMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyoEntity;
@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -95,8 +94,10 @@ public class ChoshuYuyoRelateManagerTest {
 
             FlexibleYear 主キー1 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度;
             FlexibleYear 主キー2 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_賦課年度;
+            TsuchishoNo 主キー3 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_通知書番号;
+            int 主キー4 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_履歴番号;
 
-            ChoshuYuyoMapperParameter 介護賦課徴収猶予検索条件 = ChoshuYuyoMapperParameter.createSelectByKeyParam(主キー1, 主キー2);
+            ChoshuYuyoMapperParameter 介護賦課徴収猶予検索条件 = ChoshuYuyoMapperParameter.createParam(主キー1, 主キー2, 主キー3, 主キー4);
             ChoshuYuyo result = sut.get介護賦課徴収猶予(介護賦課徴収猶予検索条件);
 
             assertThat(result, is(nullValue()));
@@ -112,7 +113,9 @@ public class ChoshuYuyoRelateManagerTest {
 
             FlexibleYear 主キー1 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度;
             FlexibleYear 主キー2 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_賦課年度;
-            ChoshuYuyoMapperParameter 介護賦課徴収猶予検索条件 = ChoshuYuyoMapperParameter.createSelectByKeyParam(主キー1, 主キー2);
+            TsuchishoNo 主キー3 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_通知書番号;
+            int 主キー4 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_履歴番号;
+            ChoshuYuyoMapperParameter 介護賦課徴収猶予検索条件 = ChoshuYuyoMapperParameter.createParam(主キー1, 主キー2, 主キー3, 主キー4);
             ChoshuYuyo result = sut.get介護賦課徴収猶予(介護賦課徴収猶予検索条件);
 
             assertThat(result.get調定年度(), is(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度));
@@ -134,7 +137,10 @@ public class ChoshuYuyoRelateManagerTest {
             when(provider.create(any(Class.class))).thenReturn(mapper);
 
             FlexibleYear 主キー1 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度;
-            ChoshuYuyoMapperParameter 介護賦課徴収猶予検索条件 = ChoshuYuyoMapperParameter.createSelectListParam(主キー1);
+            FlexibleYear 主キー2 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_賦課年度;
+            TsuchishoNo 主キー3 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_通知書番号;
+            int 主キー4 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_履歴番号;
+            ChoshuYuyoMapperParameter 介護賦課徴収猶予検索条件 = ChoshuYuyoMapperParameter.createParam(主キー1, 主キー2, 主キー3, 主キー4);
             List<ChoshuYuyo> result = sut.get介護賦課徴収猶予リストBy主キー1(介護賦課徴収猶予検索条件);
 
             assertThat(result.isEmpty(), is(true));
@@ -151,7 +157,10 @@ public class ChoshuYuyoRelateManagerTest {
             when(provider.create(any(Class.class))).thenReturn(mapper);
 
             FlexibleYear 主キー1 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度;
-            ChoshuYuyoMapperParameter 介護賦課徴収猶予検索条件 = ChoshuYuyoMapperParameter.createSelectListParam(主キー1);
+            FlexibleYear 主キー2 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_賦課年度;
+            TsuchishoNo 主キー3 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_通知書番号;
+            int 主キー4 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_履歴番号;
+            ChoshuYuyoMapperParameter 介護賦課徴収猶予検索条件 = ChoshuYuyoMapperParameter.createParam(主キー1, 主キー2, 主キー3, 主キー4);
             List<ChoshuYuyo> result = sut.get介護賦課徴収猶予リストBy主キー1(介護賦課徴収猶予検索条件);
 
             assertThat(result.size(), is(1));
@@ -267,7 +276,7 @@ public class ChoshuYuyoRelateManagerTest {
     private static class TestSupport {
 
         public static ChoshuYuyo createChoshuYuyo(FlexibleYear 主キー1, FlexibleYear 主キー2) {
-            ChoshuYuyo 介護賦課徴収猶予 = new ChoshuYuyo(主キー1, 主キー2, TsuchishoNo.EMPTY, Decimal.ZERO);
+            ChoshuYuyo 介護賦課徴収猶予 = new ChoshuYuyo(主キー1, 主キー2, TsuchishoNo.EMPTY, 0);
             return 介護賦課徴収猶予.createBuilderForEdit()
                     // 介護期別徴収猶予
                     .setKibetsuChoshuYuyo(createKibetsuChoshuYuyo(主キー1, 主キー2))
@@ -276,7 +285,7 @@ public class ChoshuYuyoRelateManagerTest {
 
 // 介護期別徴収猶予
         private static KibetsuChoshuYuyo createKibetsuChoshuYuyo(FlexibleYear 主キー1, FlexibleYear 主キー2) {
-            return new KibetsuChoshuYuyo(主キー2, 主キー2, TsuchishoNo.EMPTY, Decimal.ZERO, RString.EMPTY, 1);
+            return new KibetsuChoshuYuyo(主キー2, 主キー2, TsuchishoNo.EMPTY, 0, RString.EMPTY, 1);
         }
 
         public static ChoshuYuyo initializeChoshuYuyo(ChoshuYuyo 介護賦課徴収猶予) {

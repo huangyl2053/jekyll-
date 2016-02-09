@@ -46,11 +46,20 @@ public enum FukaComparators implements Comparator<Fuka> {
      * 履歴番号でソートする機能を持ちます。
      */
     orderBy履歴番号 {
-                @Override
-                public int compare(Fuka model1, Fuka model2) {
-                    return model1.get履歴番号().compareTo(model2.get履歴番号());
-                }
-            };
+        @Override
+        public int compare(Fuka model1, Fuka model2) {
+            int ret = 0;
+            if (model1.get履歴番号() < model2.get履歴番号()) {
+                ret = -1;
+            } else if (model1.get履歴番号() == model2.get履歴番号()) {
+                ret = 0;
+            } else {
+                ret = 1;
+            }
+
+            return ret;
+         }
+    };
 
     /**
      * 昇順でソートする{@link Comparator}を返します。

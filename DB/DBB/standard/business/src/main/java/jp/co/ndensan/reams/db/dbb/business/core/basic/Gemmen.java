@@ -10,10 +10,9 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoGemmenShurui;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoGemmenTorikeshiShurui;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -183,9 +182,8 @@ public class Gemmen extends ModelBase<GemmenIdentifier, DbT2004GemmenEntity, Gem
      *
      * @return 減免種類
      */
-    public HokenryoGemmenShurui get減免種類() {
-        //TODO 以下は暫定対応。将来的には、entityのgetterの戻り値から対応する。
-        return new HokenryoGemmenShurui(entity.getGemmenJiyuCode());
+    public Code get減免種類コード() {
+        return entity.getGemmenJiyuCode();
     }
 
     /**
@@ -202,9 +200,8 @@ public class Gemmen extends ModelBase<GemmenIdentifier, DbT2004GemmenEntity, Gem
      *
      * @return 減免取消種類
      */
-    public HokenryoGemmenTorikeshiShurui get減免取消種類() {
-        //TODO 以下は暫定対応。将来的には、entityのgetterの戻り値から対応する。
-        return new HokenryoGemmenTorikeshiShurui(entity.getGemmenTorikeshiJiyuCode());
+    public Code get減免取消種類コード() {
+        return entity.getGemmenTorikeshiJiyuCode();
     }
 
     /**

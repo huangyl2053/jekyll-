@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -42,7 +41,7 @@ public class ChoshuYuyoRelateDacTest {
     private static final FlexibleYear 賦課年度1 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_賦課年度;
     private static final TsuchishoNo 通知書番号1 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_通知書番号;
 //    private static final RDateTime 履歴番号 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_処理日時;
-    private static final Decimal 履歴番号 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_履歴番号;
+    private static final int 履歴番号 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_履歴番号;
     private static final GemmenChoshuYuyoStateKubun 状態区分1
             = GemmenChoshuYuyoStateKubun.toValue(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_徴収猶予状態区分);
 
@@ -75,10 +74,10 @@ public class ChoshuYuyoRelateDacTest {
             sut.select徴収猶予RelateByKeyAndState(調定年度1, 賦課年度1, null, 履歴番号, 状態区分1);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の処理日時にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select徴収猶予RelateByKeyAndState(調定年度1, 賦課年度1, 通知書番号1, null, 状態区分1);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の処理日時にnullを指定した場合_NullPointerExceptionが発生する() {
+//            sut.select徴収猶予RelateByKeyAndState(調定年度1, 賦課年度1, 通知書番号1, null, 状態区分1);
+//        }
 
         @Test(expected = NullPointerException.class)
         public void 引数の状態区分にnullを指定した場合_NullPointerExceptionが発生する() {
@@ -185,7 +184,7 @@ public class ChoshuYuyoRelateDacTest {
 
         public static void insertDbT2006(
                 FlexibleYear 調定年度, FlexibleYear 賦課年度,
-                TsuchishoNo 通知書番号, Decimal 履歴番号, GemmenChoshuYuyoStateKubun 状態区分1) {
+                TsuchishoNo 通知書番号, int 履歴番号, GemmenChoshuYuyoStateKubun 状態区分1) {
 
             DbT2006ChoshuYuyoEntity entity = DbT2006ChoshuYuyoEntityGenerator.createDbT2006ChoshuYuyoEntity();
             entity.setChoteiNendo(調定年度);
@@ -199,7 +198,7 @@ public class ChoshuYuyoRelateDacTest {
 
         public static void insertDbT2007(
                 FlexibleYear 調定年度, FlexibleYear 賦課年度,
-                TsuchishoNo 通知書番号, Decimal 履歴番号) {
+                TsuchishoNo 通知書番号, int 履歴番号) {
             DbT2007KibetsuChoshuYuyoEntity entity = DbT2007KibetsuChoshuYuyoEntityGenerator.createDbT2007KibetsuChoshuYuyoEntity();
             entity.setChoteiNendo(調定年度);
             entity.setFukaNendo(賦課年度);

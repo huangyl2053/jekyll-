@@ -98,7 +98,7 @@ public class GemmenBuilderTest extends DbbTestBase {
         @Test
         public void 戻り値の減免種類は_設定した値と同じ減免種類コードを返す() {
             business = sut.set減免種類(new HokenryoGemmenShurui(DbT2004GemmenEntityGenerator.DEFAULT_減免種類コード)).build();
-            assertThat(business.get減免種類().value(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免種類コード));
+            assertThat(business.get減免種類コード(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免種類コード));
         }
 
         @Test
@@ -110,7 +110,7 @@ public class GemmenBuilderTest extends DbbTestBase {
         @Test
         public void 戻り値の減免取消種類コードは_設定した値と同じ減免取消種類コードを返す() {
             business = sut.set減免取消種類(new HokenryoGemmenTorikeshiShurui(DbT2004GemmenEntityGenerator.DEFAULT_減免取消種類コード)).build();
-            assertThat(business.get減免取消種類().value(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免取消種類コード));
+            assertThat(business.get減免取消種類コード(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免取消種類コード));
         }
 
         @Test

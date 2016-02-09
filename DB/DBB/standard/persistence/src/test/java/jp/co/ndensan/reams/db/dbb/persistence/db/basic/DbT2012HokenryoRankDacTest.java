@@ -5,11 +5,10 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
-import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2012HokenryoRankEntityGenerator.DEFAULT_市町村コード;
-import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2012HokenryoRankEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2012HokenryoRankEntityGenerator.DEFAULT_市町村コード;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2012HokenryoRankEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -131,7 +130,7 @@ public class DbT2012HokenryoRankDacTest extends DbbTestDacBase {
             DbT2012HokenryoRankEntity updateRecord = sut.selectByKey(
                     DEFAULT_賦課年度,
                     DEFAULT_市町村コード);
-            updateRecord.setRankKubun(new RankKubun(new RString("3")));
+            updateRecord.setRankKubun(new RString("3"));
 
             sut.save(updateRecord);
 

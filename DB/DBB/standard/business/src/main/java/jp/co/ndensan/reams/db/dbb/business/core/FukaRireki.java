@@ -52,7 +52,7 @@ public class FukaRireki implements Iterable<Fuka> {
         for (Fuka model : 賦課履歴明細) {
             RString key = createKey(model);
             Fuka value = map.get(key);
-            if (value == null || value.get履歴番号().compareTo(model.get履歴番号()) < 0) {
+            if (value == null || value.get履歴番号() < model.get履歴番号()) {
                 map.put(key, model);
             }
         }

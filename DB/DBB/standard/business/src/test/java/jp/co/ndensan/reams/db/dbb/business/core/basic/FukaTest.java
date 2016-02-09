@@ -165,7 +165,7 @@ public class FukaTest extends DbbTestBase {
 
         @Test
         public void get資格取得事由は_entityが持つ資格取得事由を返す() {
-            assertThat(sut.get資格取得事由(), is(FukaEntity.getShikakuShutokuJiyu()));
+            assertThat(sut.get資格取得事由().toRString(), is(FukaEntity.getShikakuShutokuJiyu()));
         }
 
         @Test
@@ -175,12 +175,12 @@ public class FukaTest extends DbbTestBase {
 
         @Test
         public void get資格喪失事由は_entityが持つ資格喪失事由を返す() {
-            assertThat(sut.get資格喪失事由(), is(FukaEntity.getShikakuSoshitsuJiyu()));
+            assertThat(sut.get資格喪失事由().toRString(), is(FukaEntity.getShikakuSoshitsuJiyu()));
         }
 
         @Test
         public void get生活保護扶助種類は_entityが持つ生活保護扶助種類を返す() {
-            assertThat(sut.get生活保護扶助種類(), is(FukaEntity.getSeihofujoShurui()));
+            assertThat(sut.get生活保護扶助種類().toRString(), is(FukaEntity.getSeihofujoShurui()));
         }
 
         @Test
@@ -210,12 +210,12 @@ public class FukaTest extends DbbTestBase {
 
         @Test
         public void get課税区分は_entityが持つ課税区分を返す() {
-            assertThat(sut.get課税区分(), is(FukaEntity.getKazeiKubun()));
+            assertThat(sut.get課税区分().toRString(), is(FukaEntity.getKazeiKubun()));
         }
 
         @Test
         public void get世帯課税区分は_entityが持つ世帯課税区分を返す() {
-            assertThat(sut.get世帯課税区分(), is(FukaEntity.getSetaikazeiKubun()));
+            assertThat(sut.get世帯課税区分().toRString(), is(FukaEntity.getSetaikazeiKubun()));
         }
 
         @Test
@@ -280,22 +280,22 @@ public class FukaTest extends DbbTestBase {
 
         @Test
         public void get調定事由1は_entityが持つ調定事由1を返す() {
-            assertThat(sut.get調定事由1(), is(FukaEntity.getChoteiJiyu1()));
+            assertThat(sut.get調定事由1().toRString(), is(FukaEntity.getChoteiJiyu1()));
         }
 
         @Test
         public void get調定事由2は_entityが持つ調定事由2を返す() {
-            assertThat(sut.get調定事由2(), is(FukaEntity.getChoteiJiyu2()));
+            assertThat(sut.get調定事由2().toRString(), is(FukaEntity.getChoteiJiyu2()));
         }
 
         @Test
         public void get調定事由3は_entityが持つ調定事由3を返す() {
-            assertThat(sut.get調定事由3(), is(FukaEntity.getChoteiJiyu3()));
+            assertThat(sut.get調定事由3().toRString(), is(FukaEntity.getChoteiJiyu3()));
         }
 
         @Test
         public void get調定事由4は_entityが持つ調定事由4を返す() {
-            assertThat(sut.get調定事由4(), is(FukaEntity.getChoteiJiyu4()));
+            assertThat(sut.get調定事由4().toRString(), is(FukaEntity.getChoteiJiyu4()));
         }
 
         @Test
@@ -343,7 +343,7 @@ public class FukaTest extends DbbTestBase {
 
         @Test
         public void get境界層区分は_entityが持つ境界層区分を返す() {
-            assertThat(sut.get境界層区分(), is(FukaEntity.getKyokaisoKubun()));
+            assertThat(sut.get境界層区分().toRString(), is(FukaEntity.getKyokaisoKubun()));
         }
 
         @Test

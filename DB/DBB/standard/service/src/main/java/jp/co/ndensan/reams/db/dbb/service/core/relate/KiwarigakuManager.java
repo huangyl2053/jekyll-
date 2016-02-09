@@ -62,7 +62,7 @@ public class KiwarigakuManager {
      * @param 履歴番号 履歴番号
      * @return 期割額
      */
-    public Optional<Kiwarigaku> load期割額(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, Decimal 履歴番号) {
+    public Optional<Kiwarigaku> load期割額(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, int 履歴番号) {
         List<KiwarigakuMeisai> 期割額List = new ArrayList<>();
         for (KibetsuChoteiKyotsuEntity 期別調定共通 : dac.select介護期別調定共通一覧(調定年度, 賦課年度, 通知書番号, 履歴番号)) {
 

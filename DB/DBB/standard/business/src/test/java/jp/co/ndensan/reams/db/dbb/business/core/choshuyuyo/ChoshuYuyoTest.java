@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static jp.co.ndensan.reams.uz.uza.testhelper.ByteArraySerializations.canBeCopiedBySerialization;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -38,7 +37,7 @@ public class ChoshuYuyoTest extends DbbTestBase {
     private static FlexibleYear 調定年度;
     private static FlexibleYear 賦課年度;
     private static TsuchishoNo 通知書番号;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
     private static RString 徴収方法;
     private static int 期;
 
@@ -80,10 +79,10 @@ public class ChoshuYuyoTest extends DbbTestBase {
             sut = new ChoshuYuyo(調定年度, 調定年度, null, 履歴番号);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 主キー名4がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ChoshuYuyo(調定年度, 調定年度, 通知書番号, null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 主キー名4がnullである場合に_NullPointerExceptionが発生する() {
+//            sut = new ChoshuYuyo(調定年度, 調定年度, 通知書番号, null);
+//        }
 
         @Test
         public void 指定したキーが保持するDbT2006ChoshuYuyoEntityにセットされている() {

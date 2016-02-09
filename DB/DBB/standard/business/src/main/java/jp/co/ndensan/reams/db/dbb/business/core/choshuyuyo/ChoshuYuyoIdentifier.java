@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護賦課徴収猶予の識別子です。
@@ -22,7 +21,7 @@ public class ChoshuYuyoIdentifier implements Serializable {
     private final FlexibleYear 調定年度;
     private final FlexibleYear 賦課年度;
     private final TsuchishoNo 通知書番号;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
 
     /**
      * コンストラクタです。
@@ -35,7 +34,7 @@ public class ChoshuYuyoIdentifier implements Serializable {
     public ChoshuYuyoIdentifier(FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
         this.通知書番号 = 通知書番号;

@@ -8,19 +8,10 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.edaNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.hihokenshaNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.idoYMD;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.jushochitokureiKaijoJiyuCode;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.jushochitokureiKaijoYMD;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.jushochitokureiTekiyoJiyuCode;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.jushochitokureiTekiyoYMD;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.lastUpdateTimestamp;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.logicalDeletedFlag;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shikakuShutokuYMD;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shikibetsuCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.*;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -34,6 +25,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -288,5 +280,142 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                                 eq(shikakuShutokuYMD, 取得日),
                                 eq(logicalDeletedFlag, false))).
                 toList(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 市町村コードと被保険者番号を指定し、該当する被保険者台帳情報を取得します。 <br/>
+     * 取得した結果は、異動日によりDescされた状態で取得され、listの先頭が最も最新の異動履歴になります。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 被保険者番号 被保険者番号
+     * @return
+     * @throws NullPointerException
+     */
+    public List<DbT1001HihokenshaDaichoEntity> selectByHihokenshaNoAndShichosonCode(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(
+                        and(
+                                eq(shichosonCode, 市町村コード),
+                                eq(hihokenshaNo, 被保険者番号)
+                        )
+                ).
+                order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST)).
+                toList(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 市町村コードと識別コードを指定し、該当する被保険者台帳情報のなかから最新の1件を取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 識別コード 識別コード
+     * @return 該当する被保険者台帳情報から最新1件
+     */
+    public DbT1001HihokenshaDaichoEntity selectForNewestHihokenshaDaichoData(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(
+                        and(
+                                eq(shichosonCode, 市町村コード),
+                                eq(shikibetsuCode, 識別コード)
+                        )
+                ).
+                order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST)).
+                limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 基準年月日と被保険者番号を指定し、該当する被保険者台帳情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 基準年月日 基準年月日
+     * @return 該当する被保険者台帳情報
+     */
+    public DbT1001HihokenshaDaichoEntity selectByHihokenshaNoAndKijunDate(HihokenshaNo 被保険者番号, FlexibleDate 基準年月日) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(基準年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準年月日"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        List<DbT1001HihokenshaDaichoEntity> entityList = accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(isDeleted, false),
+                                leq(shikakuShutokuYMD, 基準年月日)
+                        )).
+                order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(edaNo, Order.DESC, NullsOrder.LAST)).
+                toList(DbT1001HihokenshaDaichoEntity.class);
+        for (DbT1001HihokenshaDaichoEntity entity : entityList) {
+            if (!entity.getShikakuSoshitsuYMD().isEmpty() && 基準年月日.isBefore(entity.getShikakuSoshitsuYMD())) {
+                return entity;
+            } else if (!entity.getShikakuShutokuYMD().isEmpty() && entity.getShikakuShutokuYMD().isBeforeOrEquals(基準年月日)) {
+                return entity;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 基準年月日と識別コードを指定し、該当する被保険者台帳情報を取得します。
+     *
+     * @param 識別コード 識別コード
+     * @param 基準年月日 基準年月日
+     * @return 該当する被保険者台帳情報
+     */
+    public DbT1001HihokenshaDaichoEntity selectByShikibetsuCodeAndKijunDate(ShikibetsuCode 識別コード, FlexibleDate 基準年月日) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(基準年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準年月日"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        List<DbT1001HihokenshaDaichoEntity> entityList = accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(shikibetsuCode, 識別コード),
+                                eq(isDeleted, false),
+                                leq(shikakuShutokuYMD, 基準年月日))).
+                order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(edaNo, Order.DESC, NullsOrder.LAST)).
+                toList(DbT1001HihokenshaDaichoEntity.class);
+        for (DbT1001HihokenshaDaichoEntity entity : entityList) {
+            if (!entity.getShikakuSoshitsuYMD().isEmpty() && 基準年月日.isBefore(entity.getShikakuSoshitsuYMD())) {
+                return entity;
+            } else if (!entity.getShikakuShutokuYMD().isEmpty() && entity.getShikakuShutokuYMD().isBeforeOrEquals(基準年月日)) {
+                return entity;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 識別コードを指定し、該当する被保険者台帳情報のなかから最新の1件を取得します。
+     *
+     * @param 識別コード 識別コード
+     * @return 該当する被保険者台帳情報から最新1件
+     */
+    public DbT1001HihokenshaDaichoEntity selectByShikibetsuCode(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(shikibetsuCode, 識別コード),
+                                eq(isDeleted, false))).
+                order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(edaNo, Order.DESC, NullsOrder.LAST)).
+                limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
     }
 }

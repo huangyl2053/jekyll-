@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.UrT0705ChoteiKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -42,7 +41,7 @@ public class KibetsuChoteiKyotsuDacTest {
     private static final FlexibleYear 調定年度 = DbT2003KibetsuEntityGenerator.DEFAULT_調定年度;
     private static final FlexibleYear 賦課年度 = DbT2003KibetsuEntityGenerator.DEFAULT_賦課年度;
     private static final TsuchishoNo 通知書番号 = DbT2003KibetsuEntityGenerator.DEFAULT_通知書番号;
-    private static final Decimal 履歴番号 = DbT2003KibetsuEntityGenerator.DEFAULT_履歴番号;
+    private static final int 履歴番号 = DbT2003KibetsuEntityGenerator.DEFAULT_履歴番号;
     private static final RString 徴収方法 = DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法;
     private static final int 期 = DbT2003KibetsuEntityGenerator.DEFAULT_期;
     private static final Long 調定ID = UrT0705ChoteiKyotsuEntityGenerator.DEFAULT_調定ID;
@@ -79,10 +78,10 @@ public class KibetsuChoteiKyotsuDacTest {
             sut.select介護期別調定共通ByKey(調定年度, 賦課年度, null, 履歴番号, 徴収方法, 期);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の処理日時にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select介護期別調定共通ByKey(調定年度, 賦課年度, 通知書番号, null, 徴収方法, 期);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の処理日時にnullを指定した場合_NullPointerExceptionが発生する() {
+//            sut.select介護期別調定共通ByKey(調定年度, 賦課年度, 通知書番号, null, 徴収方法, 期);
+//        }
 
         @Test(expected = NullPointerException.class)
         public void 引数の徴収方法にnullを指定した場合_NullPointerExceptionが発生する() {
@@ -125,10 +124,10 @@ public class KibetsuChoteiKyotsuDacTest {
             sut.select介護期別調定共通一覧(調定年度, 賦課年度, null, 履歴番号);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の処理日時にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select介護期別調定共通一覧(調定年度, 賦課年度, 通知書番号, null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の処理日時にnullを指定した場合_NullPointerExceptionが発生する() {
+//            sut.select介護期別調定共通一覧(調定年度, 賦課年度, 通知書番号, null);
+//        }
 
         @Test
         public void データが見つかる検索条件を渡すと_介護期別調定共通リストを返す() {
@@ -200,7 +199,7 @@ public class KibetsuChoteiKyotsuDacTest {
                 FlexibleYear 調定年度,
                 FlexibleYear 賦課年度,
                 TsuchishoNo 通知書番号,
-                Decimal 履歴番号,
+                int 履歴番号,
                 RString 徴収方法,
                 int 期) {
             DbT2003KibetsuEntity entity = DbT2003KibetsuEntityGenerator.createDbT2003KibetsuEntity();

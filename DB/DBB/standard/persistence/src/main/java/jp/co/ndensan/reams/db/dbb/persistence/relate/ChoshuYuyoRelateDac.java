@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -55,7 +54,7 @@ public class ChoshuYuyoRelateDac implements IModifiable<DbT2006ChoshuYuyoEntity>
      */
     @Transaction
     public Optional<DbT2006ChoshuYuyoEntity> select徴収猶予RelateByKeyAndState(FlexibleYear 調定年度, FlexibleYear 賦課年度,
-            TsuchishoNo 通知書番号, Decimal 履歴番号, GemmenChoshuYuyoStateKubun 状態区分) {
+            TsuchishoNo 通知書番号, int 履歴番号, GemmenChoshuYuyoStateKubun 状態区分) {
 
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
@@ -68,7 +67,7 @@ public class ChoshuYuyoRelateDac implements IModifiable<DbT2006ChoshuYuyoEntity>
 
     @Transaction
     private Optional<DbT2006ChoshuYuyoEntity> select徴収猶予ByKeyAndState(FlexibleYear 調定年度, FlexibleYear 賦課年度,
-            TsuchishoNo 通知書番号, Decimal 履歴番号, GemmenChoshuYuyoStateKubun 状態区分) {
+            TsuchishoNo 通知書番号, int 履歴番号, GemmenChoshuYuyoStateKubun 状態区分) {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
