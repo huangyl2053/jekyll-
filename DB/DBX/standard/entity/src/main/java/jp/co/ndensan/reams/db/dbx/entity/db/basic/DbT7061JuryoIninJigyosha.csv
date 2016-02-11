@@ -1,4 +1,4 @@
-﻿jigyoshaNo,UDD060KaigoJigyoshaNo,KaigoJigyoshaNo,,,,,受領委任契約事業者番号,A
+﻿jigyoshaNo,DbUDD004JigyoshaNo,KaigoJigyoshaNo,,,,,受領委任契約事業者番号,A
 keiyakuKaishiYMD,UDD015YMD,FlexibleDate,,,,,受領委任契約開始日,A
 keiyakuShuryoYMD,UDD015YMD,FlexibleDate,,,,,受領委任契約終了日,A
 serviceShubetsuCode,varchar,RString,,,,,契約サービス種別,A

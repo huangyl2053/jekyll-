@@ -1,4 +1,4 @@
-﻿serviceShuruiCd,UDD061KaigoServiceShuruiCode,KaigoServiceShuruiCode,,,,,サービス種類コード,A
+﻿serviceShuruiCd,DbUDD005ServiceShuruiCode,ServiceShuruiCode,,,,,サービス種類コード,A
 teikyoKaishiYM,UDD014YM,FlexibleYearMonth,,,,,提供開始年月,A
 teikyoshuryoYM,UDD014YM,FlexibleYearMonth,,,,,提供終了年月,A
 serviceShuruiMeisho,varchar,RString,,,,,サービス種類名称,A
