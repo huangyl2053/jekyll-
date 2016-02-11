@@ -55,7 +55,7 @@
         <result property="updateCount" column="dbT5603ShinsakaiIinHoshuJissekiJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT5603ShinsakaiIinHoshuJissekiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5603ShinsakaiIinHoshuJissekiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shinsakaiKaisaiNo" column="dbT5603ShinsakaiIinHoshuJissekiJoho_shinsakaiKaisaiNo" />
+        <result property="shinsakaiKaisaiNo" column="dbT5603ShinsakaiIinHoshuJissekiJoho_shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinsakaiHoshuZeiritsu" column="dbT5603ShinsakaiIinHoshuJissekiJoho_shinsakaiHoshuZeiritsu" />
         <result property="shinsakaiHoshu" column="dbT5603ShinsakaiIinHoshuJissekiJoho_shinsakaiHoshu" />
         <result property="shinsakaiSonotaHoshu" column="dbT5603ShinsakaiIinHoshuJissekiJoho_shinsakaiSonotaHoshu" />
