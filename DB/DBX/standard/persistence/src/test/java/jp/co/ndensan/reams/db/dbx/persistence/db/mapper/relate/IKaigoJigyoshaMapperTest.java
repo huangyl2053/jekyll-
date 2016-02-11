@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7062KaigoJigyoshaDaihyoshaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7063KaigoJigyoshaShiteiServiceDac;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -44,8 +44,8 @@ public class IKaigoJigyoshaMapperTest {
     private static DbT7063KaigoJigyoshaShiteiServiceDac 介護事業者指定サービスDac;
     // TODO 主キー型と変数名と主キー値を適切な値に置換してください
     // TODO 主キーの数が足りない場合、追加してください。
-    private static final KaigoJigyoshaNo 主キー11 = DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_事業者番号;
-    private static final KaigoJigyoshaNo 主キー12 = new KaigoJigyoshaNo("0123400001");
+    private static final JigyoshaNo 主キー11 = DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_事業者番号;
+    private static final JigyoshaNo 主キー12 = new JigyoshaNo("0123400001");
     private static final FlexibleDate 主キー21 = DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_有効開始日;
     private static final FlexibleDate 主キー22 = new FlexibleDate("001");
 
@@ -89,7 +89,7 @@ public class IKaigoJigyoshaMapperTest {
         // データが見つからない値を指定するように修正してください。
         @Test
         public void データが見つかない検索条件を渡すと_nullを返す() {
-            KaigoJigyoshaMapperParameter 介護事業者検索条件 = KaigoJigyoshaMapperParameter.createSelectByKeyParam(new KaigoJigyoshaNo("0123400001"), 主キー21);
+            KaigoJigyoshaMapperParameter 介護事業者検索条件 = KaigoJigyoshaMapperParameter.createSelectByKeyParam(new JigyoshaNo("0123400001"), 主キー21);
             assertThat(sut.select介護事業者ByKey(介護事業者検索条件), is(nullValue()));
         }
     }
@@ -128,7 +128,7 @@ public class IKaigoJigyoshaMapperTest {
 
         @Test
         public void データが見つかない検索条件を渡すと__空のリストを返す() {
-            KaigoJigyoshaMapperParameter 介護事業者検索条件 = KaigoJigyoshaMapperParameter.createSelectListParam(new KaigoJigyoshaNo("0123400001"));
+            KaigoJigyoshaMapperParameter 介護事業者検索条件 = KaigoJigyoshaMapperParameter.createSelectListParam(new JigyoshaNo("0123400001"));
             assertThat(sut.select介護事業者リストBy主キー1(介護事業者検索条件).isEmpty(), is(true));
         }
     }
@@ -138,7 +138,7 @@ public class IKaigoJigyoshaMapperTest {
     private static class TestSupport {
 
         public static void insertDbT7060(
-                KaigoJigyoshaNo 主キー1,
+                JigyoshaNo 主キー1,
                 FlexibleDate 主キー2) {
             DbT7060KaigoJigyoshaEntity entity = DbT7060KaigoJigyoshaEntityGenerator.createDbT7060KaigoJigyoshaEntity();
             entity.setJigyoshaNo(主キー1);
@@ -148,7 +148,7 @@ public class IKaigoJigyoshaMapperTest {
         }
 
         public static void insertDbT7062(
-                KaigoJigyoshaNo 主キー1,
+                JigyoshaNo 主キー1,
                 FlexibleDate 主キー2) {
             DbT7062KaigoJigyoshaDaihyoshaEntity entity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
             entity.setJigyoshaNo(主キー1);
@@ -158,7 +158,7 @@ public class IKaigoJigyoshaMapperTest {
         }
 
         public static void insertDbT7063(
-                KaigoJigyoshaNo 主キー1,
+                JigyoshaNo 主キー1,
                 FlexibleDate 主キー2) {
             DbT7063KaigoJigyoshaShiteiServiceEntity entity = DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.createDbT7063KaigoJigyoshaShiteiServiceEntity();
             entity.setJigyoshaNo(主キー1);

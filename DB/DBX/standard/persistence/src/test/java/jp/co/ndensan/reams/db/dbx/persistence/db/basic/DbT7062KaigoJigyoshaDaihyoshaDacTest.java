@@ -11,7 +11,7 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7062KaigoJigy
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_有効開始日;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -33,9 +33,9 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class DbT7062KaigoJigyoshaDaihyoshaDacTest extends DbxTestDacBase {
 
-    private static final KaigoJigyoshaNo キー_01 = new KaigoJigyoshaNo("00001");
-    private static final KaigoJigyoshaNo キー_02 = new KaigoJigyoshaNo("00002");
-    private static final KaigoJigyoshaNo キー_03 = new KaigoJigyoshaNo("00003");
+    private static final JigyoshaNo キー_01 = new JigyoshaNo("00001");
+    private static final JigyoshaNo キー_02 = new JigyoshaNo("00002");
+    private static final JigyoshaNo キー_03 = new JigyoshaNo("00003");
     private static DbT7062KaigoJigyoshaDaihyoshaDac sut;
 
     @BeforeClass
@@ -172,7 +172,7 @@ public class DbT7062KaigoJigyoshaDaihyoshaDacTest extends DbxTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                KaigoJigyoshaNo 事業者番号,
+                JigyoshaNo 事業者番号,
                 FlexibleDate 有効開始日) {
             DbT7062KaigoJigyoshaDaihyoshaEntity entity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
             entity.setJigyoshaNo(事業者番号);

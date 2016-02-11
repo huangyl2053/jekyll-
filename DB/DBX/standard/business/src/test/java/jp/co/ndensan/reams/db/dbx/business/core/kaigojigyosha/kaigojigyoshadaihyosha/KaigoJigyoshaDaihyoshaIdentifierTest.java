@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaih
 
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static jp.co.ndensan.reams.uz.uza.testhelper.ByteArraySerializations.canBeCopiedBySerialization;
 import static org.hamcrest.CoreMatchers.is;
@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class KaigoJigyoshaDaihyoshaIdentifierTest extends DbxTestBase {
 
-    private static KaigoJigyoshaNo 事業者番号;
+    private static JigyoshaNo 事業者番号;
     private static FlexibleDate 有効開始日;
 
     @BeforeClass

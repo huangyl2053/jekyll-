@@ -11,7 +11,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -35,7 +35,7 @@ public class KaigoServiceNaiyou extends ModelBase<KaigoServiceNaiyouIdentifier, 
      * @param 提供開始年月 提供開始年月
      * @param 履歴番号 履歴番号
      */
-    public KaigoServiceNaiyou(KaigoServiceShuruiCode サービス種類コード,
+    public KaigoServiceNaiyou(ServiceShuruiCode サービス種類コード,
             RString サービス項目コード,
             FlexibleYearMonth 提供開始年月,
             Decimal 履歴番号) {
@@ -90,7 +90,7 @@ public class KaigoServiceNaiyou extends ModelBase<KaigoServiceNaiyouIdentifier, 
      *
      * @return サービス種類コード
      */
-    public KaigoServiceShuruiCode getサービス種類コード() {
+    public ServiceShuruiCode getサービス種類コード() {
         return entity.getServiceShuruiCd();
     }
 

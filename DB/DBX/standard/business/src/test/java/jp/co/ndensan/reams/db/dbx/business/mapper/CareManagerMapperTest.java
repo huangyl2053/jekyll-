@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7064CareManegerEntity;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -67,7 +67,7 @@ public class CareManagerMapperTest extends DbxTestBase {
             result.setKaigoShienSenmoninNo(介護支援専門員番号);
             result.setKaigoShienSenmoninMei(new AtenaMeisho("氏名"));
             result.setKaigoShienSenmoninMeiKana(new AtenaKanaMeisho("ｼﾒｲｶﾅ"));
-            result.setShozokuJigyoshaNo(new KaigoJigyoshaNo("9999999999"));
+            result.setShozokuJigyoshaNo(new JigyoshaNo("9999999999"));
             result.setYukoKaishiDate(new FlexibleDate("20120101"));
             result.setYukoShuryoDate(new FlexibleDate("20120103"));
             return result;

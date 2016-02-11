@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.relate.KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7131KaigoServiceNaiyouDac;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -40,8 +40,8 @@ public class IKaigoServiceShuruiMapperTest {
     private static DbT7131KaigoServiceNaiyouDac 介護サービス内容Dac;
     // TODO 主キー型と変数名と主キー値を適切な値に置換してください
     // TODO 主キーの数が足りない場合、追加してください。
-    private static final KaigoServiceShuruiCode 主キー11 = DbT7130KaigoServiceShuruiEntityGenerator.DEFAULT_サービス種類コード;
-    private static final KaigoServiceShuruiCode 主キー12 = new KaigoServiceShuruiCode("01");
+    private static final ServiceShuruiCode 主キー11 = DbT7130KaigoServiceShuruiEntityGenerator.DEFAULT_サービス種類コード;
+    private static final ServiceShuruiCode 主キー12 = new ServiceShuruiCode("01");
     private static final FlexibleYearMonth 主キー21 = DbT7130KaigoServiceShuruiEntityGenerator.DEFAULT_提供開始年月;
     private static final FlexibleYearMonth 主キー22 = new FlexibleYearMonth("201509");
 
@@ -79,7 +79,7 @@ public class IKaigoServiceShuruiMapperTest {
         // データが見つからない値を指定するように修正してください。
         @Test
         public void データが見つかない検索条件を渡すと_nullを返す() {
-            KaigoServiceShuruiMapperParameter 介護サービス種類検索条件 = KaigoServiceShuruiMapperParameter.createSelectByKeyParam(new KaigoServiceShuruiCode("01"), 主キー21);
+            KaigoServiceShuruiMapperParameter 介護サービス種類検索条件 = KaigoServiceShuruiMapperParameter.createSelectByKeyParam(new ServiceShuruiCode("01"), 主キー21);
             assertThat(sut.select介護サービス種類ByKey(介護サービス種類検索条件), is(nullValue()));
         }
     }
@@ -113,7 +113,7 @@ public class IKaigoServiceShuruiMapperTest {
 
         @Test
         public void データが見つかない検索条件を渡すと__空のリストを返す() {
-            KaigoServiceShuruiMapperParameter 介護サービス種類検索条件 = KaigoServiceShuruiMapperParameter.createSelectListParam(new KaigoServiceShuruiCode("01"));
+            KaigoServiceShuruiMapperParameter 介護サービス種類検索条件 = KaigoServiceShuruiMapperParameter.createSelectListParam(new ServiceShuruiCode("01"));
             assertThat(sut.select介護サービス種類リストBy主キー1(介護サービス種類検索条件).isEmpty(), is(true));
         }
     }
@@ -123,7 +123,7 @@ public class IKaigoServiceShuruiMapperTest {
     private static class TestSupport {
 
         public static void insertDbT7130(
-                KaigoServiceShuruiCode 主キー1,
+                ServiceShuruiCode 主キー1,
                 FlexibleYearMonth 主キー2) {
             DbT7130KaigoServiceShuruiEntity entity = DbT7130KaigoServiceShuruiEntityGenerator.createDbT7130KaigoServiceShuruiEntity();
             entity.setServiceShuruiCd(主キー1);
@@ -133,7 +133,7 @@ public class IKaigoServiceShuruiMapperTest {
         }
 
         public static void insertDbT7131(
-                KaigoServiceShuruiCode 主キー1,
+                ServiceShuruiCode 主キー1,
                 FlexibleYearMonth 主キー2) {
             DbT7131KaigoServiceNaiyouEntity entity = DbT7131KaigoServiceNaiyouEntityGenerator.createDbT7131KaigoServiceNaiyouEntity();
             entity.setServiceShuruiCd(主キー1);

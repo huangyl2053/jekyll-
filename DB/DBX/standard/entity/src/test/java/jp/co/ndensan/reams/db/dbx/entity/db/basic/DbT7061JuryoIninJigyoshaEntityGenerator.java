@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class DbT7061JuryoIninJigyoshaEntityGenerator {
 
-    public static final KaigoJigyoshaNo DEFAULT_受領委任契約事業者番号 = new KaigoJigyoshaNo("0001");
+    public static final JigyoshaNo DEFAULT_受領委任契約事業者番号 = new JigyoshaNo("0001");
     public static final FlexibleDate DEFAULT_受領委任契約開始日 = new FlexibleDate("19900101");
     public static final FlexibleDate DEFAULT_受領委任契約終了日 = new FlexibleDate("19900101");
     public static final RString DEFAULT_契約サービス種別 = new RString("Data");

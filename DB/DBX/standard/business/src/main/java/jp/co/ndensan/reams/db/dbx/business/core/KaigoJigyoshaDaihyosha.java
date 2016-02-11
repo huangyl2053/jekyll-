@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -52,7 +52,7 @@ public class KaigoJigyoshaDaihyosha {
      *
      * @return 事業者番号
      */
-    public KaigoJigyoshaNo get事業者番号() {
+    public JigyoshaNo get事業者番号() {
         return entity.getJigyoshaNo();
     }
 
@@ -244,7 +244,7 @@ public class KaigoJigyoshaDaihyosha {
          * @param jigyoshaNo 事業者番号
          * @return builder
          */
-        public Builder setJigyoshaNo(KaigoJigyoshaNo jigyoshaNo) {
+        public Builder setJigyoshaNo(JigyoshaNo jigyoshaNo) {
             Objects.requireNonNull(jigyoshaNo);
             this.entity.setJigyoshaNo(jigyoshaNo);
             return this;

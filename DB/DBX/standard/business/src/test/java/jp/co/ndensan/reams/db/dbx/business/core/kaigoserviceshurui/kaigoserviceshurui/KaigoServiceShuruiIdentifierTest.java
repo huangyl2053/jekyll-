@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservice
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiIdentifier;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7130KaigoServiceShuruiEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import static jp.co.ndensan.reams.uz.uza.testhelper.ByteArraySerializations.canBeCopiedBySerialization;
 import static org.hamcrest.CoreMatchers.is;
@@ -23,7 +23,7 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class KaigoServiceShuruiIdentifierTest extends DbxTestBase {
 
-    private static KaigoServiceShuruiCode サービス種類コード;
+    private static ServiceShuruiCode サービス種類コード;
     private static FlexibleYearMonth 提供開始年月;
 
     @BeforeClass
