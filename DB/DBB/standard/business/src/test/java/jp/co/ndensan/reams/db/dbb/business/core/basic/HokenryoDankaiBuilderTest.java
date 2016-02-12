@@ -28,7 +28,7 @@ public class HokenryoDankaiBuilderTest extends DbbTestBase {
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static FlexibleYear 賦課年度;
-    private static DankaiIndex 段階index;
+    private static RString 段階index;
     private static RString ランク区分;
 
     @BeforeClass
