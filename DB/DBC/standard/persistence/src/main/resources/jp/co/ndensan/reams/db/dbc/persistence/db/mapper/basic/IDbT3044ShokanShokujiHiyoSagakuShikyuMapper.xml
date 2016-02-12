@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3044ShokanShokujiHiyoSagakuShikyuマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3044ShokanShokujiHiyoSagakuShikyuMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3044ShokanShokujiHiyoSagakuShikyu">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3044ShokanShokujiHiyoSagakuShikyuMapper.allColumns_DbT3044ShokanShokujiHiyoSagakuShikyu" />
+     FROM
+         rgdb."DbT3044ShokanShokujiHiyoSagakuShikyu"
+     WHERE
+         rgdb."DbT3044ShokanShokujiHiyoSagakuShikyu"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3044ShokanShokujiHiyoSagakuShikyu">
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."hiHokenshaNo" as "dbT3044ShokanShokujiHiyoSagakuShikyu_hiHokenshaNo",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."serviceTeikyoYM" as "dbT3044ShokanShokujiHiyoSagakuShikyu_serviceTeikyoYM",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."seiriNp" as "dbT3044ShokanShokujiHiyoSagakuShikyu_seiriNp",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."jigyoshaNo" as "dbT3044ShokanShokujiHiyoSagakuShikyu_jigyoshaNo",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."yoshikiNo" as "dbT3044ShokanShokujiHiyoSagakuShikyu_yoshikiNo",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."meisaiNo" as "dbT3044ShokanShokujiHiyoSagakuShikyu_meisaiNo",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."renban" as "dbT3044ShokanShokujiHiyoSagakuShikyu_renban",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."insertDantaiCd" as "dbT3044ShokanShokujiHiyoSagakuShikyu_insertDantaiCd",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."insertTimestamp" as "dbT3044ShokanShokujiHiyoSagakuShikyu_insertTimestamp",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."insertReamsLoginId" as "dbT3044ShokanShokujiHiyoSagakuShikyu_insertReamsLoginId",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."insertContextId" as "dbT3044ShokanShokujiHiyoSagakuShikyu_insertContextId",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."isDeleted" as "dbT3044ShokanShokujiHiyoSagakuShikyu_isDeleted",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."updateCount" as "dbT3044ShokanShokujiHiyoSagakuShikyu_updateCount",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."lastUpdateTimestamp" as "dbT3044ShokanShokujiHiyoSagakuShikyu_lastUpdateTimestamp",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."lastUpdateReamsLoginId" as "dbT3044ShokanShokujiHiyoSagakuShikyu_lastUpdateReamsLoginId",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."sagakuKingaku" as "dbT3044ShokanShokujiHiyoSagakuShikyu_sagakuKingaku",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."shikyuKubunCode" as "dbT3044ShokanShokujiHiyoSagakuShikyu_shikyuKubunCode",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."tensuKingaku" as "dbT3044ShokanShokujiHiyoSagakuShikyu_tensuKingaku",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."shikyuKingaku" as "dbT3044ShokanShokujiHiyoSagakuShikyu_shikyuKingaku",
+         "DbT3044ShokanShokujiHiyoSagakuShikyu"."shikyuFushikyuRiyu" as "dbT3044ShokanShokujiHiyoSagakuShikyu_shikyuFushikyuRiyu"
+    </sql>
+
+
+    <!--テーブルDbT3044ShokanShokujiHiyoSagakuShikyuの項目をDbT3044ShokanShokujiHiyoSagakuShikyuEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3044ShokanShokujiHiyoSagakuShikyuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3044ShokanShokujiHiyoSagakuShikyuEntity" autoMapping="true">
+        <id property="hiHokenshaNo" column="dbT3044ShokanShokujiHiyoSagakuShikyu_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="serviceTeikyoYM" column="dbT3044ShokanShokujiHiyoSagakuShikyu_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="seiriNp" column="dbT3044ShokanShokujiHiyoSagakuShikyu_seiriNp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="jigyoshaNo" column="dbT3044ShokanShokujiHiyoSagakuShikyu_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <id property="yoshikiNo" column="dbT3044ShokanShokujiHiyoSagakuShikyu_yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="meisaiNo" column="dbT3044ShokanShokujiHiyoSagakuShikyu_meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="renban" column="dbT3044ShokanShokujiHiyoSagakuShikyu_renban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3044ShokanShokujiHiyoSagakuShikyu_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3044ShokanShokujiHiyoSagakuShikyu_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3044ShokanShokujiHiyoSagakuShikyu_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3044ShokanShokujiHiyoSagakuShikyu_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3044ShokanShokujiHiyoSagakuShikyu_isDeleted" />
+        <result property="updateCount" column="dbT3044ShokanShokujiHiyoSagakuShikyu_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3044ShokanShokujiHiyoSagakuShikyu_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3044ShokanShokujiHiyoSagakuShikyu_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sagakuKingaku" column="dbT3044ShokanShokujiHiyoSagakuShikyu_sagakuKingaku" />
+        <result property="shikyuKubunCode" column="dbT3044ShokanShokujiHiyoSagakuShikyu_shikyuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tensuKingaku" column="dbT3044ShokanShokujiHiyoSagakuShikyu_tensuKingaku" />
+        <result property="shikyuKingaku" column="dbT3044ShokanShokujiHiyoSagakuShikyu_shikyuKingaku" />
+        <result property="shikyuFushikyuRiyu" column="dbT3044ShokanShokujiHiyoSagakuShikyu_shikyuFushikyuRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>

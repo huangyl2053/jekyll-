@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3113RiyoshaFutanWariaiマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3113RiyoshaFutanWariaiMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3113RiyoshaFutanWariai">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3113RiyoshaFutanWariaiMapper.allColumns_DbT3113RiyoshaFutanWariai" />
+     FROM
+         rgdb."DbT3113RiyoshaFutanWariai"
+     WHERE
+         rgdb."DbT3113RiyoshaFutanWariai"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3113RiyoshaFutanWariai">
+         "DbT3113RiyoshaFutanWariai"."nendo" as "dbT3113RiyoshaFutanWariai_nendo",
+         "DbT3113RiyoshaFutanWariai"."hihokenshaNo" as "dbT3113RiyoshaFutanWariai_hihokenshaNo",
+         "DbT3113RiyoshaFutanWariai"."rirekiNo" as "dbT3113RiyoshaFutanWariai_rirekiNo",
+         "DbT3113RiyoshaFutanWariai"."insertDantaiCd" as "dbT3113RiyoshaFutanWariai_insertDantaiCd",
+         "DbT3113RiyoshaFutanWariai"."insertTimestamp" as "dbT3113RiyoshaFutanWariai_insertTimestamp",
+         "DbT3113RiyoshaFutanWariai"."insertReamsLoginId" as "dbT3113RiyoshaFutanWariai_insertReamsLoginId",
+         "DbT3113RiyoshaFutanWariai"."insertContextId" as "dbT3113RiyoshaFutanWariai_insertContextId",
+         "DbT3113RiyoshaFutanWariai"."isDeleted" as "dbT3113RiyoshaFutanWariai_isDeleted",
+         "DbT3113RiyoshaFutanWariai"."updateCount" as "dbT3113RiyoshaFutanWariai_updateCount",
+         "DbT3113RiyoshaFutanWariai"."lastUpdateTimestamp" as "dbT3113RiyoshaFutanWariai_lastUpdateTimestamp",
+         "DbT3113RiyoshaFutanWariai"."lastUpdateReamsLoginId" as "dbT3113RiyoshaFutanWariai_lastUpdateReamsLoginId",
+         "DbT3113RiyoshaFutanWariai"."hakoFuyoFlag" as "dbT3113RiyoshaFutanWariai_hakoFuyoFlag",
+         "DbT3113RiyoshaFutanWariai"."shokenFlag" as "dbT3113RiyoshaFutanWariai_shokenFlag",
+         "DbT3113RiyoshaFutanWariai"."hanteiYMD" as "dbT3113RiyoshaFutanWariai_hanteiYMD",
+         "DbT3113RiyoshaFutanWariai"."hanteiKubun" as "dbT3113RiyoshaFutanWariai_hanteiKubun",
+         "DbT3113RiyoshaFutanWariai"."koseiJiyu" as "dbT3113RiyoshaFutanWariai_koseiJiyu",
+         "DbT3113RiyoshaFutanWariai"."hakoKubun" as "dbT3113RiyoshaFutanWariai_hakoKubun",
+         "DbT3113RiyoshaFutanWariai"."hakoYMD" as "dbT3113RiyoshaFutanWariai_hakoYMD",
+         "DbT3113RiyoshaFutanWariai"."kofuYMD" as "dbT3113RiyoshaFutanWariai_kofuYMD",
+         "DbT3113RiyoshaFutanWariai"."logicalDeletedFlag" as "dbT3113RiyoshaFutanWariai_logicalDeletedFlag"
+    </sql>
+
+
+    <!--テーブルDbT3113RiyoshaFutanWariaiの項目をDbT3113RiyoshaFutanWariaiEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3113RiyoshaFutanWariaiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity" autoMapping="true">
+        <id property="nendo" column="dbT3113RiyoshaFutanWariai_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="hihokenshaNo" column="dbT3113RiyoshaFutanWariai_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="rirekiNo" column="dbT3113RiyoshaFutanWariai_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT3113RiyoshaFutanWariai_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3113RiyoshaFutanWariai_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3113RiyoshaFutanWariai_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3113RiyoshaFutanWariai_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3113RiyoshaFutanWariai_isDeleted" />
+        <result property="updateCount" column="dbT3113RiyoshaFutanWariai_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3113RiyoshaFutanWariai_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3113RiyoshaFutanWariai_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hakoFuyoFlag" column="dbT3113RiyoshaFutanWariai_hakoFuyoFlag" />
+        <result property="shokenFlag" column="dbT3113RiyoshaFutanWariai_shokenFlag" />
+        <result property="hanteiYMD" column="dbT3113RiyoshaFutanWariai_hanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hanteiKubun" column="dbT3113RiyoshaFutanWariai_hanteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koseiJiyu" column="dbT3113RiyoshaFutanWariai_koseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="hakoKubun" column="dbT3113RiyoshaFutanWariai_hakoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hakoYMD" column="dbT3113RiyoshaFutanWariai_hakoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kofuYMD" column="dbT3113RiyoshaFutanWariai_kofuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="logicalDeletedFlag" column="dbT3113RiyoshaFutanWariai_logicalDeletedFlag" />
+    </resultMap>
+
+</mapper>

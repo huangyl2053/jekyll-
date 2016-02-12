@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomo
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 居宅給付計画自己作成明細の識別子です。
@@ -24,7 +23,7 @@ public class KyotakuKeikakuJikosakuseiMeisaiIdentifier implements Serializable {
     private static final long serialVersionUID = -6255878851045373643L;
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth 対象年月;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
     private final RString 居宅サービス区分;
     private final JigyoshaNo サービス提供事業者番号;
     private final ServiceShuruiCode サービス種類コード;
@@ -43,7 +42,7 @@ public class KyotakuKeikakuJikosakuseiMeisaiIdentifier implements Serializable {
      */
     public KyotakuKeikakuJikosakuseiMeisaiIdentifier(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号,
+            int 履歴番号,
             RString 居宅サービス区分,
             JigyoshaNo サービス提供事業者番号,
             ServiceShuruiCode サービス種類コード,

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7112ShokanShuruiShikyuGendoGakuマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT7112ShokanShuruiShikyuGendoGakuMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7112ShokanShuruiShikyuGendoGaku">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT7112ShokanShuruiShikyuGendoGakuMapper.allColumns_DbT7112ShokanShuruiShikyuGendoGaku" />
+     FROM
+         rgdb."DbT7112ShokanShuruiShikyuGendoGaku"
+     WHERE
+         rgdb."DbT7112ShokanShuruiShikyuGendoGaku"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7112ShokanShuruiShikyuGendoGaku">
+         "DbT7112ShokanShuruiShikyuGendoGaku"."serviceShuruiCode" as "dbT7112ShokanShuruiShikyuGendoGaku_serviceShuruiCode",
+         "DbT7112ShokanShuruiShikyuGendoGaku"."tekiyoKaishiYM" as "dbT7112ShokanShuruiShikyuGendoGaku_tekiyoKaishiYM",
+         "DbT7112ShokanShuruiShikyuGendoGaku"."rirekiNo" as "dbT7112ShokanShuruiShikyuGendoGaku_rirekiNo",
+         "DbT7112ShokanShuruiShikyuGendoGaku"."insertDantaiCd" as "dbT7112ShokanShuruiShikyuGendoGaku_insertDantaiCd",
+         "DbT7112ShokanShuruiShikyuGendoGaku"."insertTimestamp" as "dbT7112ShokanShuruiShikyuGendoGaku_insertTimestamp",
+         "DbT7112ShokanShuruiShikyuGendoGaku"."insertReamsLoginId" as "dbT7112ShokanShuruiShikyuGendoGaku_insertReamsLoginId",
+         "DbT7112ShokanShuruiShikyuGendoGaku"."insertContextId" as "dbT7112ShokanShuruiShikyuGendoGaku_insertContextId",
+         "DbT7112ShokanShuruiShikyuGendoGaku"."isDeleted" as "dbT7112ShokanShuruiShikyuGendoGaku_isDeleted",
+         "DbT7112ShokanShuruiShikyuGendoGaku"."updateCount" as "dbT7112ShokanShuruiShikyuGendoGaku_updateCount",
+         "DbT7112ShokanShuruiShikyuGendoGaku"."lastUpdateTimestamp" as "dbT7112ShokanShuruiShikyuGendoGaku_lastUpdateTimestamp",
+         "DbT7112ShokanShuruiShikyuGendoGaku"."lastUpdateReamsLoginId" as "dbT7112ShokanShuruiShikyuGendoGaku_lastUpdateReamsLoginId",
+         "DbT7112ShokanShuruiShikyuGendoGaku"."tekiyoShuryoYM" as "dbT7112ShokanShuruiShikyuGendoGaku_tekiyoShuryoYM",
+         "DbT7112ShokanShuruiShikyuGendoGaku"."shikyuGendoTaniSu" as "dbT7112ShokanShuruiShikyuGendoGaku_shikyuGendoTaniSu"
+    </sql>
+
+
+    <!--テーブルDbT7112ShokanShuruiShikyuGendoGakuの項目をDbT7112ShokanShuruiShikyuGendoGakuEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7112ShokanShuruiShikyuGendoGakuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGakuEntity" autoMapping="true">
+        <id property="serviceShuruiCode" column="dbT7112ShokanShuruiShikyuGendoGaku_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <id property="tekiyoKaishiYM" column="dbT7112ShokanShuruiShikyuGendoGaku_tekiyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="rirekiNo" column="dbT7112ShokanShuruiShikyuGendoGaku_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT7112ShokanShuruiShikyuGendoGaku_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7112ShokanShuruiShikyuGendoGaku_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7112ShokanShuruiShikyuGendoGaku_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7112ShokanShuruiShikyuGendoGaku_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7112ShokanShuruiShikyuGendoGaku_isDeleted" />
+        <result property="updateCount" column="dbT7112ShokanShuruiShikyuGendoGaku_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7112ShokanShuruiShikyuGendoGaku_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7112ShokanShuruiShikyuGendoGaku_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tekiyoShuryoYM" column="dbT7112ShokanShuruiShikyuGendoGaku_tekiyoShuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="shikyuGendoTaniSu" column="dbT7112ShokanShuruiShikyuGendoGaku_shikyuGendoTaniSu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+
+</mapper>

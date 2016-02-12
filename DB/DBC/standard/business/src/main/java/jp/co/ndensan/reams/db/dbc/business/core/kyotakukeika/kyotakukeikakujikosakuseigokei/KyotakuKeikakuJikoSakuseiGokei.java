@@ -43,7 +43,7 @@ public class KyotakuKeikakuJikoSakuseiGokei
      */
     public KyotakuKeikakuJikoSakuseiGokei(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号,
+            int 履歴番号,
             RString 居宅サービス区分,
             JigyoshaNo サービス提供事業者番号,
             ServiceShuruiCode サービス種類コード) {
@@ -124,7 +124,7 @@ public class KyotakuKeikakuJikoSakuseiGokei
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
