@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4024ShiharaiHohoHenkoSashitomeマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4024ShiharaiHohoHenkoSashitomeMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4024ShiharaiHohoHenkoSashitome">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4024ShiharaiHohoHenkoSashitomeMapper.allColumns_DbT4024ShiharaiHohoHenkoSashitome" />
+     FROM
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"
+     WHERE
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4024ShiharaiHohoHenkoSashitome">
+         "DbT4024ShiharaiHohoHenkoSashitome"."shoKisaiHokenshaNo" as "dbT4024ShiharaiHohoHenkoSashitome_shoKisaiHokenshaNo",
+         "DbT4024ShiharaiHohoHenkoSashitome"."hihokenshaNo" as "dbT4024ShiharaiHohoHenkoSashitome_hihokenshaNo",
+         "DbT4024ShiharaiHohoHenkoSashitome"."kanriKubun" as "dbT4024ShiharaiHohoHenkoSashitome_kanriKubun",
+         "DbT4024ShiharaiHohoHenkoSashitome"."rirekiNo" as "dbT4024ShiharaiHohoHenkoSashitome_rirekiNo",
+         "DbT4024ShiharaiHohoHenkoSashitome"."johoBunruiKubun" as "dbT4024ShiharaiHohoHenkoSashitome_johoBunruiKubun",
+         "DbT4024ShiharaiHohoHenkoSashitome"."renNo" as "dbT4024ShiharaiHohoHenkoSashitome_renNo",
+         "DbT4024ShiharaiHohoHenkoSashitome"."insertDantaiCd" as "dbT4024ShiharaiHohoHenkoSashitome_insertDantaiCd",
+         "DbT4024ShiharaiHohoHenkoSashitome"."insertTimestamp" as "dbT4024ShiharaiHohoHenkoSashitome_insertTimestamp",
+         "DbT4024ShiharaiHohoHenkoSashitome"."insertReamsLoginId" as "dbT4024ShiharaiHohoHenkoSashitome_insertReamsLoginId",
+         "DbT4024ShiharaiHohoHenkoSashitome"."insertContextId" as "dbT4024ShiharaiHohoHenkoSashitome_insertContextId",
+         "DbT4024ShiharaiHohoHenkoSashitome"."isDeleted" as "dbT4024ShiharaiHohoHenkoSashitome_isDeleted",
+         "DbT4024ShiharaiHohoHenkoSashitome"."updateCount" as "dbT4024ShiharaiHohoHenkoSashitome_updateCount",
+         "DbT4024ShiharaiHohoHenkoSashitome"."lastUpdateTimestamp" as "dbT4024ShiharaiHohoHenkoSashitome_lastUpdateTimestamp",
+         "DbT4024ShiharaiHohoHenkoSashitome"."lastUpdateReamsLoginId" as "dbT4024ShiharaiHohoHenkoSashitome_lastUpdateReamsLoginId",
+         "DbT4024ShiharaiHohoHenkoSashitome"."sashitomeKojoJotaiKubun" as "dbT4024ShiharaiHohoHenkoSashitome_sashitomeKojoJotaiKubun",
+         "DbT4024ShiharaiHohoHenkoSashitome"."sashitome_KetteiYMD" as "dbT4024ShiharaiHohoHenkoSashitome_sashitome_KetteiYMD",
+         "DbT4024ShiharaiHohoHenkoSashitome"."sashitome_TsuchiHakkoYMD" as "dbT4024ShiharaiHohoHenkoSashitome_sashitome_TsuchiHakkoYMD",
+         "DbT4024ShiharaiHohoHenkoSashitome"."sashitome_TsuchiSaiHakkoFlag" as "dbT4024ShiharaiHohoHenkoSashitome_sashitome_TsuchiSaiHakkoFlag",
+         "DbT4024ShiharaiHohoHenkoSashitome"."sashitomeKojoNo" as "dbT4024ShiharaiHohoHenkoSashitome_sashitomeKojoNo",
+         "DbT4024ShiharaiHohoHenkoSashitome"."sashitome_NofuYMD" as "dbT4024ShiharaiHohoHenkoSashitome_sashitome_NofuYMD",
+         "DbT4024ShiharaiHohoHenkoSashitome"."sashitome_KaijoYMD" as "dbT4024ShiharaiHohoHenkoSashitome_sashitome_KaijoYMD",
+         "DbT4024ShiharaiHohoHenkoSashitome"."sashitome_ServiceTeikyoYM" as "dbT4024ShiharaiHohoHenkoSashitome_sashitome_ServiceTeikyoYM",
+         "DbT4024ShiharaiHohoHenkoSashitome"."sashitome_ShokanSeiriNo" as "dbT4024ShiharaiHohoHenkoSashitome_sashitome_ShokanSeiriNo",
+         "DbT4024ShiharaiHohoHenkoSashitome"."kojo_KetteiYMD" as "dbT4024ShiharaiHohoHenkoSashitome_kojo_KetteiYMD",
+         "DbT4024ShiharaiHohoHenkoSashitome"."kojo_TsuchiHakkoYMD" as "dbT4024ShiharaiHohoHenkoSashitome_kojo_TsuchiHakkoYMD",
+         "DbT4024ShiharaiHohoHenkoSashitome"."kojo_TsuchiSaiHakkoFlag" as "dbT4024ShiharaiHohoHenkoSashitome_kojo_TsuchiSaiHakkoFlag",
+         "DbT4024ShiharaiHohoHenkoSashitome"."kojo_ShoTeishutsuYMD" as "dbT4024ShiharaiHohoHenkoSashitome_kojo_ShoTeishutsuYMD",
+         "DbT4024ShiharaiHohoHenkoSashitome"."logicalDeletedFlag" as "dbT4024ShiharaiHohoHenkoSashitome_logicalDeletedFlag"
+    </sql>
+
+
+    <!--テーブルDbT4024ShiharaiHohoHenkoSashitomeの項目をDbT4024ShiharaiHohoHenkoSashitomeEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4024ShiharaiHohoHenkoSashitomeEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitomeEntity" autoMapping="true">
+        <id property="shoKisaiHokenshaNo" column="dbT4024ShiharaiHohoHenkoSashitome_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="hihokenshaNo" column="dbT4024ShiharaiHohoHenkoSashitome_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="kanriKubun" column="dbT4024ShiharaiHohoHenkoSashitome_kanriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="rirekiNo" column="dbT4024ShiharaiHohoHenkoSashitome_rirekiNo" />
+        <id property="johoBunruiKubun" column="dbT4024ShiharaiHohoHenkoSashitome_johoBunruiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="renNo" column="dbT4024ShiharaiHohoHenkoSashitome_renNo" />
+        <result property="insertDantaiCd" column="dbT4024ShiharaiHohoHenkoSashitome_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4024ShiharaiHohoHenkoSashitome_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4024ShiharaiHohoHenkoSashitome_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4024ShiharaiHohoHenkoSashitome_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4024ShiharaiHohoHenkoSashitome_isDeleted" />
+        <result property="updateCount" column="dbT4024ShiharaiHohoHenkoSashitome_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4024ShiharaiHohoHenkoSashitome_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4024ShiharaiHohoHenkoSashitome_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sashitomeKojoJotaiKubun" column="dbT4024ShiharaiHohoHenkoSashitome_sashitomeKojoJotaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sashitome_KetteiYMD" column="dbT4024ShiharaiHohoHenkoSashitome_sashitome_KetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="sashitome_TsuchiHakkoYMD" column="dbT4024ShiharaiHohoHenkoSashitome_sashitome_TsuchiHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="sashitome_TsuchiSaiHakkoFlag" column="dbT4024ShiharaiHohoHenkoSashitome_sashitome_TsuchiSaiHakkoFlag" />
+        <result property="sashitomeKojoNo" column="dbT4024ShiharaiHohoHenkoSashitome_sashitomeKojoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sashitome_NofuYMD" column="dbT4024ShiharaiHohoHenkoSashitome_sashitome_NofuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="sashitome_KaijoYMD" column="dbT4024ShiharaiHohoHenkoSashitome_sashitome_KaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="sashitome_ServiceTeikyoYM" column="dbT4024ShiharaiHohoHenkoSashitome_sashitome_ServiceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="sashitome_ShokanSeiriNo" column="dbT4024ShiharaiHohoHenkoSashitome_sashitome_ShokanSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kojo_KetteiYMD" column="dbT4024ShiharaiHohoHenkoSashitome_kojo_KetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kojo_TsuchiHakkoYMD" column="dbT4024ShiharaiHohoHenkoSashitome_kojo_TsuchiHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kojo_TsuchiSaiHakkoFlag" column="dbT4024ShiharaiHohoHenkoSashitome_kojo_TsuchiSaiHakkoFlag" />
+        <result property="kojo_ShoTeishutsuYMD" column="dbT4024ShiharaiHohoHenkoSashitome_kojo_ShoTeishutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="logicalDeletedFlag" column="dbT4024ShiharaiHohoHenkoSashitome_logicalDeletedFlag" />
+    </resultMap>
+
+</mapper>
