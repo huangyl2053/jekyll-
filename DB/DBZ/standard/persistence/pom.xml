@@ -28,6 +28,10 @@
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxDefinition</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxTestHelper</artifactId>
+        </dependency>
         <!-- テスト -->
         <dependency>
             <groupId>${project.groupId}</groupId>

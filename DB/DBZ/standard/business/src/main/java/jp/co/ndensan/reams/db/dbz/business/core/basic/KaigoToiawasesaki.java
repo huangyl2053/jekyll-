@@ -21,9 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護問合せ先を管理するクラスです。
  */
-public class KaigoToiawasesaki extends 
-        ParentModelBase<KaigoToiawasesakiIdentifier, 
-        DbT7069KaigoToiawasesakiEntity, KaigoToiawasesaki> implements Serializable {
+public class KaigoToiawasesaki extends
+        ParentModelBase<KaigoToiawasesakiIdentifier, DbT7069KaigoToiawasesakiEntity, KaigoToiawasesaki> implements Serializable {
 
     private final DbT7069KaigoToiawasesakiEntity entity;
     private final KaigoToiawasesakiIdentifier id;
@@ -223,7 +222,7 @@ public class KaigoToiawasesaki extends
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return !toEntity().getState().equals(EntityDataState.Unchanged);
     }
 
     private static final class _SerializationProxy implements Serializable {
