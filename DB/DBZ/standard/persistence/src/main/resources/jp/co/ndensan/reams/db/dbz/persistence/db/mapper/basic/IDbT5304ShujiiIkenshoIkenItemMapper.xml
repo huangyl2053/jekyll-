@@ -19,6 +19,7 @@
     <sql id="allColumns_DbT5304ShujiiIkenshoIkenItem">
          "DbT5304ShujiiIkenshoIkenItem"."shinseishoKanriNo" as "dbT5304ShujiiIkenshoIkenItem_shinseishoKanriNo",
          "DbT5304ShujiiIkenshoIkenItem"."ikenshoIraiRirekiNo" as "dbT5304ShujiiIkenshoIkenItem_ikenshoIraiRirekiNo",
+         "DbT5304ShujiiIkenshoIkenItem"."remban" as "dbT5304ShujiiIkenshoIkenItem_remban",
          "DbT5304ShujiiIkenshoIkenItem"."insertDantaiCd" as "dbT5304ShujiiIkenshoIkenItem_insertDantaiCd",
          "DbT5304ShujiiIkenshoIkenItem"."insertTimestamp" as "dbT5304ShujiiIkenshoIkenItem_insertTimestamp",
          "DbT5304ShujiiIkenshoIkenItem"."insertReamsLoginId" as "dbT5304ShujiiIkenshoIkenItem_insertReamsLoginId",
@@ -27,7 +28,6 @@
          "DbT5304ShujiiIkenshoIkenItem"."updateCount" as "dbT5304ShujiiIkenshoIkenItem_updateCount",
          "DbT5304ShujiiIkenshoIkenItem"."lastUpdateTimestamp" as "dbT5304ShujiiIkenshoIkenItem_lastUpdateTimestamp",
          "DbT5304ShujiiIkenshoIkenItem"."lastUpdateReamsLoginId" as "dbT5304ShujiiIkenshoIkenItem_lastUpdateReamsLoginId",
-         "DbT5304ShujiiIkenshoIkenItem"."remban" as "dbT5304ShujiiIkenshoIkenItem_remban",
          "DbT5304ShujiiIkenshoIkenItem"."koroshoIfShikibetsuCode" as "dbT5304ShujiiIkenshoIkenItem_koroshoIfShikibetsuCode",
          "DbT5304ShujiiIkenshoIkenItem"."ikenItem" as "dbT5304ShujiiIkenshoIkenItem_ikenItem"
     </sql>
@@ -37,6 +37,7 @@
     <resultMap id="ResultMap_DbT5304ShujiiIkenshoIkenItemEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT5304ShujiiIkenshoIkenItem_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id property="ikenshoIraiRirekiNo" column="dbT5304ShujiiIkenshoIkenItem_ikenshoIraiRirekiNo" />
+        <id property="remban" column="dbT5304ShujiiIkenshoIkenItem_remban" />
         <result property="insertDantaiCd" column="dbT5304ShujiiIkenshoIkenItem_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5304ShujiiIkenshoIkenItem_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT5304ShujiiIkenshoIkenItem_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -45,10 +46,10 @@
         <result property="updateCount" column="dbT5304ShujiiIkenshoIkenItem_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT5304ShujiiIkenshoIkenItem_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5304ShujiiIkenshoIkenItem_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="remban" column="dbT5304ShujiiIkenshoIkenItem_remban" />
         <result property="koroshoIfShikibetsuCode" column="dbT5304ShujiiIkenshoIkenItem_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ikenItem" column="dbT5304ShujiiIkenshoIkenItem_ikenItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
+
 <select id="getEntity" resultMap="ResultMap_DbT5304ShujiiIkenshoIkenItemEntity">
     SELECT
     <include refid="allColumns_DbT5304ShujiiIkenshoIkenItem" />

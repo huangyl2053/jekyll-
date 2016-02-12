@@ -43,7 +43,7 @@
         "DbT1013KyokaisoSochiShinsei"."hokenryoGengaku_GengakuJikofutanGetsugaku" as "dbT1013KyokaisoSochiShinsei_hokenryoGengaku_GengakuJikofutanGetsugaku",
         "DbT1013KyokaisoSochiShinsei"."gengakuJikofutanGetsugakuGokeigaku" as "dbT1013KyokaisoSochiShinsei_gengakuJikofutanGetsugakuGokeigaku",
         "DbT1013KyokaisoSochiShinsei"."kyukaisoSochiKetteiYMD" as "dbT1013KyokaisoSochiShinsei_kyukaisoSochiKetteiYMD",
-        "DbT1013KyokaisoSochiShinsei"."sochiGaito_HigaitoKubun" as "dbT1013KyokaisoSochiShinsei_sochiGaito_HigaitoKubun"
+        "DbT1013KyokaisoSochiShinsei"."sochiGaito_HigaitoKubun" as "dbT1013KyokaisoSochiShinsei_sochiGaito_HigaitoKubun",
         "DbT1013KyokaisoSochiShinsei"."logicalDeletedFlag" as "dbT1013KyokaisoSochiShinsei_logicalDeletedFlag"
     </sql>
 

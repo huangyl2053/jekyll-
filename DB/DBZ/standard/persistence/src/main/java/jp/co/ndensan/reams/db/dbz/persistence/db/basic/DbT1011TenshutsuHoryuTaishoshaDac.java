@@ -39,7 +39,7 @@ public class DbT1011TenshutsuHoryuTaishoshaDac implements ISaveable<DbT1011Tensh
     @Transaction
     public DbT1011TenshutsuHoryuTaishoshaEntity selectByKey(
             ShikibetsuCode 識別コード,
-            Decimal 履歴番号) throws NullPointerException {
+            int 履歴番号) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 

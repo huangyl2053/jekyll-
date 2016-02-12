@@ -11,9 +11,9 @@
      SELECT
          <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2012HokenryoRankMapper.allColumns_DbT2012HokenryoRank" />
      FROM
-         rg."DbT2012HokenryoRank"
+         rgdb."DbT2012HokenryoRank"
      WHERE
-         rg."DbT2012HokenryoRank"."isDeleted" = FALSE
+         rgdb."DbT2012HokenryoRank"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT2012HokenryoRank">

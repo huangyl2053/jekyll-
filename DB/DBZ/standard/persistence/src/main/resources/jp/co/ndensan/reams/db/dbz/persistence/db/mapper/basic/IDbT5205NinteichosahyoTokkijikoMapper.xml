@@ -31,7 +31,7 @@
          "DbT5205NinteichosahyoTokkijiko"."updateCount" as "dbT5205NinteichosahyoTokkijiko_updateCount",
          "DbT5205NinteichosahyoTokkijiko"."lastUpdateTimestamp" as "dbT5205NinteichosahyoTokkijiko_lastUpdateTimestamp",
          "DbT5205NinteichosahyoTokkijiko"."lastUpdateReamsLoginId" as "dbT5205NinteichosahyoTokkijiko_lastUpdateReamsLoginId",
-         "DbT5205NinteichosahyoTokkijiko"."tokkiJiko" as "dbT5205NinteichosahyoTokkijiko_tokkiJiko",
+         "DbT5205NinteichosahyoTokkijiko"."tokkiJiko" as "dbT5205NinteichosahyoTokkijiko_tokkiJiko"
     </sql>
 
 
@@ -40,7 +40,7 @@
         <id property="shinseishoKanriNo" column="dbT5205NinteichosahyoTokkijiko_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id property="ninteichosaRirekiNo" column="dbT5205NinteichosahyoTokkijiko_ninteichosaRirekiNo" />
         <id property="ninteichosaTokkijikoNo" column="dbT5205NinteichosahyoTokkijiko_ninteichosaTokkijikoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="ninteichosaTokkijikoRemban" column="dbT5205NinteichosahyoTokkijiko_ninteichosaTokkijikoRemban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="ninteichosaTokkijikoRemban" column="dbT5205NinteichosahyoTokkijiko_ninteichosaTokkijikoRemban" />
         <id property="tokkijikoTextImageKubun" column="dbT5205NinteichosahyoTokkijiko_tokkijikoTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="genponMaskKubun" column="dbT5205NinteichosahyoTokkijiko_genponMaskKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="insertDantaiCd" column="dbT5205NinteichosahyoTokkijiko_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -53,6 +53,7 @@
         <result property="lastUpdateReamsLoginId" column="dbT5205NinteichosahyoTokkijiko_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tokkiJiko" column="dbT5205NinteichosahyoTokkijiko_tokkiJiko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
+
 <select id="getEntity" resultMap="ResultMap_DbT5205NinteichosahyoTokkijikoEntity">
     SELECT
     <include refid="allColumns_DbT5205NinteichosahyoTokkijiko" />

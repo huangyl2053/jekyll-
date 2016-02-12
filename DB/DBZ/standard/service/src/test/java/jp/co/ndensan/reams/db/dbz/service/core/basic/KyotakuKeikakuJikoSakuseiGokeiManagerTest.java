@@ -54,7 +54,7 @@ public class KyotakuKeikakuJikoSakuseiGokeiManagerTest {
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYearMonth 主キー2 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月;
-            Decimal 主キー3 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号;
             RString 主キー4 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_居宅サービス区分;
             JigyoshaNo 主キー5 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス提供事業者番号;
             ServiceShuruiCode 主キー6 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス種類コード;
@@ -65,28 +65,28 @@ public class KyotakuKeikakuJikoSakuseiGokeiManagerTest {
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー1 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月;
-            Decimal 主キー3 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号;
             RString 主キー4 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_居宅サービス区分;
             JigyoshaNo 主キー5 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス提供事業者番号;
             ServiceShuruiCode 主キー6 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス種類コード;
             sut.get居宅給付計画自己作成合計(主キー1, null, 主キー3, 主キー4, 主キー5, 主キー6);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
-            HihokenshaNo 主キー1 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号;
-            FlexibleYearMonth 主キー2 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月;
-            RString 主キー4 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_居宅サービス区分;
-            JigyoshaNo 主キー5 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス提供事業者番号;
-            ServiceShuruiCode 主キー6 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス種類コード;
-            sut.get居宅給付計画自己作成合計(主キー1, 主キー2, null, 主キー4, 主キー5, 主キー6);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
+//            HihokenshaNo 主キー1 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号;
+//            FlexibleYearMonth 主キー2 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月;
+//            RString 主キー4 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_居宅サービス区分;
+//            JigyoshaNo 主キー5 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス提供事業者番号;
+//            ServiceShuruiCode 主キー6 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス種類コード;
+//            sut.get居宅給付計画自己作成合計(主キー1, 主キー2, null, 主キー4, 主キー5, 主キー6);
+//        }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー1 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月;
-            Decimal 主キー3 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号;
             JigyoshaNo 主キー5 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス提供事業者番号;
             ServiceShuruiCode 主キー6 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス種類コード;
             sut.get居宅給付計画自己作成合計(主キー1, 主キー2, 主キー3, null, 主キー5, 主キー6);
@@ -96,7 +96,7 @@ public class KyotakuKeikakuJikoSakuseiGokeiManagerTest {
         public void 引数の主キー型5にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー1 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月;
-            Decimal 主キー3 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号;
             RString 主キー4 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_居宅サービス区分;
             ServiceShuruiCode 主キー6 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス種類コード;
             sut.get居宅給付計画自己作成合計(主キー1, 主キー2, 主キー3, 主キー4, null, 主キー6);
@@ -106,7 +106,7 @@ public class KyotakuKeikakuJikoSakuseiGokeiManagerTest {
         public void 引数の主キー型6にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー1 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月;
-            Decimal 主キー3 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号;
             RString 主キー4 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_居宅サービス区分;
             JigyoshaNo 主キー5 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス提供事業者番号;
             sut.get居宅給付計画自己作成合計(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, null);
@@ -115,12 +115,12 @@ public class KyotakuKeikakuJikoSakuseiGokeiManagerTest {
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(Decimal.class),
+            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(int.class),
                     any(RString.class), any(JigyoshaNo.class), any(ServiceShuruiCode.class))).thenReturn(null);
 
             HihokenshaNo 主キー1 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月;
-            Decimal 主キー3 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号;
             RString 主キー4 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_居宅サービス区分;
             JigyoshaNo 主キー5 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス提供事業者番号;
             ServiceShuruiCode 主キー6 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス種類コード;
@@ -132,12 +132,12 @@ public class KyotakuKeikakuJikoSakuseiGokeiManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity entity = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3009KyotakuKeikakuJikoSakuseiGokeiEntity();
-            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(Decimal.class),
+            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(int.class),
                     any(RString.class), any(JigyoshaNo.class), any(ServiceShuruiCode.class))).thenReturn(entity);
 
             HihokenshaNo 主キー1 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月;
-            Decimal 主キー3 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号;
+            int 主キー3 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号;
             RString 主キー4 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_居宅サービス区分;
             JigyoshaNo 主キー5 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス提供事業者番号;
             ServiceShuruiCode 主キー6 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス種類コード;
@@ -200,7 +200,7 @@ public class KyotakuKeikakuJikoSakuseiGokeiManagerTest {
             DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity entity = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3009KyotakuKeikakuJikoSakuseiGokeiEntity();
             entity.initializeMd5();
             KyotakuKeikakuJikoSakuseiGokei 居宅給付計画自己作成合計 = new KyotakuKeikakuJikoSakuseiGokei(entity);
-            居宅給付計画自己作成合計 = 居宅給付計画自己作成合計.createBuilderForEdit().set履歴番号(new Decimal(3)).build();
+            居宅給付計画自己作成合計 = 居宅給付計画自己作成合計.createBuilderForEdit().set履歴番号(3).build();
 
             assertThat(sut.save居宅給付計画自己作成合計(居宅給付計画自己作成合計), is(true));
         }
@@ -212,7 +212,7 @@ public class KyotakuKeikakuJikoSakuseiGokeiManagerTest {
             DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity entity = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3009KyotakuKeikakuJikoSakuseiGokeiEntity();
             entity.initializeMd5();
             KyotakuKeikakuJikoSakuseiGokei 居宅給付計画自己作成合計 = new KyotakuKeikakuJikoSakuseiGokei(entity);
-            居宅給付計画自己作成合計 = 居宅給付計画自己作成合計.createBuilderForEdit().set履歴番号(new Decimal(3)).build();
+            居宅給付計画自己作成合計 = 居宅給付計画自己作成合計.createBuilderForEdit().set履歴番号(3).build();
 
             assertThat(sut.save居宅給付計画自己作成合計(居宅給付計画自己作成合計), is(false));
         }

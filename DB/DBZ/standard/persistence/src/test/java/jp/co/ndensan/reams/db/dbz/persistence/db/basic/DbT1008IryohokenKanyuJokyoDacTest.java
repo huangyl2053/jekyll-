@@ -172,7 +172,7 @@ public class DbT1008IryohokenKanyuJokyoDacTest extends DbzTestDacBase {
 
         public static void insert(
                 ShikibetsuCode 識別コード,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT1008IryohokenKanyuJokyoEntity entity = DbT1008IryohokenKanyuJokyoEntityGenerator.createDbT1008IryohokenKanyuJokyoEntity();
             entity.setShikibetsuCode(識別コード);
             entity.setRirekiNo(履歴番号);

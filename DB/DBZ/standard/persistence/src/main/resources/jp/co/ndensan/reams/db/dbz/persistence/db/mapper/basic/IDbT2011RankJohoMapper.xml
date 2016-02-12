@@ -11,9 +11,9 @@
      SELECT
          <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2011RankJohoMapper.allColumns_DbT2011RankJoho" />
      FROM
-         rg."DbT2011RankJoho"
+         rgdb."DbT2011RankJoho"
      WHERE
-         rg."DbT2011RankJoho"."isDeleted" = FALSE
+         rgdb."DbT2011RankJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT2011RankJoho">

@@ -19,7 +19,7 @@ public final class DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator {
 
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
     public static final FlexibleYearMonth DEFAULT_対象年月 = new FlexibleYearMonth("199001");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 0;
     public static final RString DEFAULT_居宅サービス区分 = new RString("Data");
     public static final JigyoshaNo DEFAULT_サービス提供事業者番号 = new JigyoshaNo("1");
     public static final ServiceShuruiCode DEFAULT_サービス種類コード = new ServiceShuruiCode("1");

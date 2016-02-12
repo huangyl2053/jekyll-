@@ -50,7 +50,7 @@ public class IryohokenKanyuJokyoManager {
     @Transaction
     public IryohokenKanyuJokyo get介護保険医療保険加入状況(
             ShikibetsuCode 識別コード,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 

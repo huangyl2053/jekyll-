@@ -49,7 +49,7 @@ public class IKyotakuKeikakuJikoSakuseiMapperTest {
     private static final HihokenshaNo 主キー12 = new HihokenshaNo("9999999999");
     private static final FlexibleYearMonth 主キー21 = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_対象年月;
     private static final FlexibleYearMonth 主キー22 = new FlexibleYearMonth("201501");
-    private static final Decimal 主キー31 = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_履歴番号;
+    private static final int 主キー31 = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_履歴番号;
     private static final Decimal 主キー32 = new Decimal(2341);
 
     private HihokenshaNo hihokenshaNo;

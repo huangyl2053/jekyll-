@@ -33,7 +33,7 @@ public class KyotakuKeikakuJikoSakuseiGokeiIdentifierTest extends DbzTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static HihokenshaNo 被保険者番号;
     private static FlexibleYearMonth 対象年月;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
     private static RString 居宅サービス区分;
     private static JigyoshaNo 事業者番号;
     private static ServiceShuruiCode サービス種類コード;

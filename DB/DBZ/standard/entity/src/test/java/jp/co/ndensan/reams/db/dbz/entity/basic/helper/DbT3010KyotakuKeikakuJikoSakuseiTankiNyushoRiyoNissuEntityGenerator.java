@@ -16,7 +16,7 @@ public final class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntityGen
 
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
     public static final FlexibleYearMonth DEFAULT_対象年月 = new FlexibleYearMonth("199001");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 0;
     public static final Decimal DEFAULT_前回迄利用日数 = new Decimal(0);
     public static final Decimal DEFAULT_今回計画利用日数 = new Decimal(0);
 
