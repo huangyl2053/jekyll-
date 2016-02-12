@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.DankaiIndex;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -52,8 +53,8 @@ public class HokenryoDankaiManager {
     @Transaction
     public HokenryoDankai get保険料段階(
             FlexibleYear 賦課年度,
-            DankaiIndex 段階インデックス,
-            RankKubun ランク区分) {
+            RString 段階インデックス,
+            RString ランク区分) {
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(段階インデックス, UrSystemErrorMessages.値がnull.getReplacedMessage("段階インデックス"));
         requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));

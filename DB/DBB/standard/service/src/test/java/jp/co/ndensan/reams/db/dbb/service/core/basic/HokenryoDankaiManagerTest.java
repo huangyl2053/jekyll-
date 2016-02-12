@@ -51,33 +51,33 @@ public class HokenryoDankaiManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            DankaiIndex 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
-            RankKubun 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
+            RString 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
+            RString 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
             sut.get保険料段階(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYear 主キー1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度;
-            RankKubun 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
+            RString 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
             sut.get保険料段階(主キー1, null, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYear 主キー1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度;
-            DankaiIndex 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
+            RString 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
             sut.get保険料段階(主キー1, 主キー2, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(FlexibleYear.class), any(DankaiIndex.class), any(RankKubun.class))).thenReturn(null);
+            when(dac.selectByKey(any(FlexibleYear.class), any(RString.class), any(RString.class))).thenReturn(null);
 
             FlexibleYear 主キー1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度;
-            DankaiIndex 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
-            RankKubun 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
+            RString 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
+            RString 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
             HokenryoDankai result = sut.get保険料段階(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
@@ -86,10 +86,10 @@ public class HokenryoDankaiManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT2013HokenryoDankaiEntity entity = DbT2013HokenryoDankaiEntityGenerator.createDbT2013HokenryoDankaiEntity();
-            when(dac.selectByKey(any(FlexibleYear.class), any(DankaiIndex.class), any(RankKubun.class))).thenReturn(entity);
+            when(dac.selectByKey(any(FlexibleYear.class), any(RString.class), any(RString.class))).thenReturn(entity);
             FlexibleYear 主キー1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度;
-            DankaiIndex 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
-            RankKubun 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
+            RString 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
+            RString 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
             HokenryoDankai result = sut.get保険料段階(主キー1, 主キー2, 主キー3);
 
             assertThat(result.get賦課年度().toDateString(), is(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度.toDateString()));
@@ -149,7 +149,7 @@ public class HokenryoDankaiManagerTest {
             DbT2013HokenryoDankaiEntity entity = DbT2013HokenryoDankaiEntityGenerator.createDbT2013HokenryoDankaiEntity();
             entity.initializeMd5();
             HokenryoDankai 保険料段階 = new HokenryoDankai(entity);
-            保険料段階 = 保険料段階.createBuilderForEdit().setランク区分(new RankKubun(new RString("3"))).build();
+            保険料段階 = 保険料段階.createBuilderForEdit().setランク区分(new RString("3")).build();
 
             assertThat(sut.save保険料段階(保険料段階), is(true));
         }
@@ -161,7 +161,7 @@ public class HokenryoDankaiManagerTest {
             DbT2013HokenryoDankaiEntity entity = DbT2013HokenryoDankaiEntityGenerator.createDbT2013HokenryoDankaiEntity();
             entity.initializeMd5();
             HokenryoDankai 保険料段階 = new HokenryoDankai(entity);
-            保険料段階 = 保険料段階.createBuilderForEdit().setランク区分(new RankKubun(new RString("3"))).build();
+            保険料段階 = 保険料段階.createBuilderForEdit().setランク区分(new RString("3")).build();
 
             assertThat(sut.save保険料段階(保険料段階), is(false));
         }
