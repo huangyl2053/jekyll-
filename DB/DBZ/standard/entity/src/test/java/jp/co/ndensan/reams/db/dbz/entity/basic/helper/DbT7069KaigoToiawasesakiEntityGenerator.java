@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class DbT7069KaigoToiawasesakiEntityGenerator {
 
-    public static final SubGyomuCode DEFAULT_サブ業務コード = new SubGyomuCode("000001");
+    public static final SubGyomuCode DEFAULT_サブ業務コード = new SubGyomuCode("DBA");
     public static final ReportId DEFAULT_帳票分類ID = new ReportId("000001");
     public static final YubinNo DEFAULT_郵便番号 = new YubinNo("1234567");
     public static final RString DEFAULT_所在地 = new RString("01");
