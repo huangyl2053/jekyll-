@@ -134,7 +134,7 @@ public class TashichosonJushochiTokurei extends
      * @return 他市町村住所地特例適用事由コード
      */
     public RString get他市町村住所地特例適用事由コード() {
-        return entity.getTekiyoJiyuCode().getColumnValue().getColumnValue();
+        return entity.getTekiyoJiyuCode();
     }
 
     /**
@@ -170,7 +170,7 @@ public class TashichosonJushochiTokurei extends
      * @return 他市町村住所地特例解除事由コード
      */
     public RString get他市町村住所地特例解除事由コード() {
-        return entity.getKaijoJiyuCode().getColumnValue().getColumnValue();
+        return entity.getKaijoJiyuCode();
     }
 
     /**

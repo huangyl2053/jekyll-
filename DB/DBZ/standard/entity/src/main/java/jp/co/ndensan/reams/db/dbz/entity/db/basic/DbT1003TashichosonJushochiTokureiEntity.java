@@ -42,11 +42,11 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
     private RString edaNo;
     private RString idoJiyuCode;
     private LasdecCode shichosonCode;
-    private KaigoTatokuTekiyoJiyu tekiyoJiyuCode;
+    private RString tekiyoJiyuCode;
     private FlexibleDate tekiyoYMD;
     private FlexibleDate tekiyoTodokedeYMD;
     private FlexibleDate tekiyoUketsukeYMD;
-    private KaigoTatokuKaijoJiyu kaijoJiyuCode;
+    private RString kaijoJiyuCode;
     private FlexibleDate kaijoYMD;
     private FlexibleDate kaijoTodokedeYMD;
     private FlexibleDate kaijoUketsukeYMD;
@@ -197,7 +197,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
      *
      * @return 他市町村住所地特例適用事由コード
      */
-    public KaigoTatokuTekiyoJiyu getTekiyoJiyuCode() {
+    public RString getTekiyoJiyuCode() {
         return tekiyoJiyuCode;
     }
 
@@ -206,7 +206,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
      *
      * @param tekiyoJiyuCode 他市町村住所地特例適用事由コード
      */
-    public void setTekiyoJiyuCode(KaigoTatokuTekiyoJiyu tekiyoJiyuCode) {
+    public void setTekiyoJiyuCode(RString tekiyoJiyuCode) {
         this.tekiyoJiyuCode = tekiyoJiyuCode;
     }
 
@@ -269,7 +269,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
      *
      * @return 他市町村住所地特例解除事由コード
      */
-    public KaigoTatokuKaijoJiyu getKaijoJiyuCode() {
+    public RString getKaijoJiyuCode() {
         return kaijoJiyuCode;
     }
 
@@ -278,7 +278,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
      *
      * @param kaijoJiyuCode 他市町村住所地特例解除事由コード
      */
-    public void setKaijoJiyuCode(KaigoTatokuKaijoJiyu kaijoJiyuCode) {
+    public void setKaijoJiyuCode(RString kaijoJiyuCode) {
         this.kaijoJiyuCode = kaijoJiyuCode;
     }
 

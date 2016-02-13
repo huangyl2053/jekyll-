@@ -34,7 +34,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
     @PrimaryKey
     private LasdecCode shichosonCode;
     @PrimaryKey
-    private ShujiiIryokikanCode shujiiIryokikanCode;
+    private RString shujiiIryokikanCode;
     private IryoKikanCode iryokikanCode;
     private RString iryoKikanMeisho;
     private RString iryoKikanMeishoKana;
@@ -114,7 +114,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
      *
      * @return 主治医医療機関コード
      */
-    public ShujiiIryokikanCode getShujiiIryokikanCode() {
+    public RString getShujiiIryokikanCode() {
         return shujiiIryokikanCode;
     }
 
@@ -123,7 +123,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
      *
      * @param shujiiIryokikanCode 主治医医療機関コード
      */
-    public void setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
+    public void setShujiiIryokikanCode(RString shujiiIryokikanCode) {
         this.shujiiIryokikanCode = shujiiIryokikanCode;
     }
 

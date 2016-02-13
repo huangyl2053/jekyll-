@@ -49,7 +49,7 @@
     <resultMap id="ResultMap_DbT3011YoboKeikakuJikoSakuseiMeisaiEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011YoboKeikakuJikoSakuseiMeisaiEntity" autoMapping="true">
         <id property="hihokenshaNo" column="dbT3011YoboKeikakuJikoSakuseiMeisai_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="taishoYM" column="dbT3011YoboKeikakuJikoSakuseiMeisai_taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="rirekiNo" column="dbT3011YoboKeikakuJikoSakuseiMeisai_rirekiNo" />
+        <id property="rirekiNo" column="dbT3011YoboKeikakuJikoSakuseiMeisai_rirekiNo"/>
         <id property="kyotakuServiceKubun" column="dbT3011YoboKeikakuJikoSakuseiMeisai_kyotakuServiceKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="serviceTeikyoJigyoshaNo" column="dbT3011YoboKeikakuJikoSakuseiMeisai_serviceTeikyoJigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <id property="serviceShuruiCode" column="dbT3011YoboKeikakuJikoSakuseiMeisai_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>

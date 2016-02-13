@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class DbT5912ShujiiJohoEntityGenerator {
 
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("202010");
-    public static final ShujiiIryokikanCode DEFAULT_主治医医療機関コード = new ShujiiIryokikanCode("000001");
-    public static final ShujiiCode DEFAULT_主治医コード = new ShujiiCode("000001");
+    public static final RString DEFAULT_主治医医療機関コード = new RString("000001");
+    public static final RString DEFAULT_主治医コード = new RString("000001");
     public static final AtenaMeisho DEFAULT_主治医氏名 = new AtenaMeisho("宛名名称");
     public static final AtenaKanaMeisho DEFAULT_主治医カナ = new AtenaKanaMeisho("ﾃｽﾄｻﾝ");
     public static final YubinNo DEFAULT_郵便番号 = new YubinNo("1234567");

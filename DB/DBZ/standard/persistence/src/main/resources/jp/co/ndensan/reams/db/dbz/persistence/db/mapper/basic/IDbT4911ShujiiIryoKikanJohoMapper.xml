@@ -43,7 +43,7 @@
     <!--テーブルDbT4911ShujiiIryoKikanJohoの項目をDbT4911ShujiiIryoKikanJohoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT4911ShujiiIryoKikanJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4911ShujiiIryoKikanJohoEntity" autoMapping="true">
         <id property="shichosonCode" column="dbT4911ShujiiIryoKikanJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <id property="shujiiIryokikanCode" column="dbT4911ShujiiIryoKikanJoho_shujiiIryokikanCode" />
+        <id property="shujiiIryokikanCode" column="dbT4911ShujiiIryoKikanJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertDantaiCd" column="dbT4911ShujiiIryoKikanJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4911ShujiiIryoKikanJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT4911ShujiiIryoKikanJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

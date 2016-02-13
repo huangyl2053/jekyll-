@@ -69,7 +69,7 @@ public class ShujiiIryoKikanJohoBuilder {
      */
     public ShujiiIryoKikanJohoBuilder set主治医医療機関コード(RString 主治医医療機関コード) {
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
-        entity.setShujiiIryokikanCode(new ShujiiIryokikanCode(主治医医療機関コード));
+        entity.setShujiiIryokikanCode(主治医医療機関コード);
         return this;
     }
 
