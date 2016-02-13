@@ -1,0 +1,60 @@
+﻿{
+ "uiContainerName": "DBCUC03100",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "受領委任契約申請",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0310011",
+     "toLayoutTitle": "受領委任契約申請登録・修正",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0310011",
+     "layoutTitle": "受領委任契約申請登録・修正",
+     "eventName": "契約者選択",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0310012",
+     "toLayoutTitle": "受領委任契約申請登録・追加",
+     "toState": "default"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0310012",
+     "layoutTitle": "受領委任契約申請登録・追加",
+     "eventName": "検索に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0310011",
+     "toLayoutTitle": "受領委任契約申請登録・修正",
+     "toState": "default"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0310012",
+     "layoutTitle": "受領委任契約申請登録・追加",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
